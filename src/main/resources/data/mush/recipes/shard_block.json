@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "xxx",
+    "xxx",
+    "xxx"
+  ],
+  "key": {
+    "x": {
+      "item": "mush:mush_shard"
+    }
+  },
+  "result": {
+    "item": "mush:shard_block",
+    "count": 1
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "variants": {
+    "": { "model": "mush:block/shard_block" }
+  }
+}
