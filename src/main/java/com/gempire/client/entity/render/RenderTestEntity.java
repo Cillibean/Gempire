@@ -15,7 +15,7 @@ import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.util.ResourceLocation;
 import org.apache.logging.log4j.core.config.plugins.util.ResolverUtil;
 
-public class RenderTestEntity extends LivingRenderer<TestEntity, ModelTest<TestEntity>> {
+public class RenderTestEntity extends MobRenderer<TestEntity, ModelTest<TestEntity>> {
 
     public RenderTestEntity(EntityRendererManager renderManagerIn) {
         super(renderManagerIn, new ModelTest<>(), .25f);

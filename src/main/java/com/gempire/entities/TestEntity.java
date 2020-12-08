@@ -17,9 +17,9 @@ import net.minecraft.world.server.ServerWorld;
 
 import javax.annotation.Nullable;
 
-public class TestEntity extends LivingEntity {
+public class TestEntity extends AnimalEntity {
 
-    public TestEntity(EntityType<? extends LivingEntity> type, World world) {
+    public TestEntity(EntityType<? extends AnimalEntity> type, World world) {
         super(type, world);
     }
 
@@ -29,23 +29,9 @@ public class TestEntity extends LivingEntity {
                 .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.25D);
     }
 
+    @Nullable
     @Override
-    public Iterable<ItemStack> getArmorInventoryList() {
-        return null;
-    }
-
-    @Override
-    public ItemStack getItemStackFromSlot(EquipmentSlotType slotIn) {
-        return null;
-    }
-
-    @Override
-    public void setItemStackToSlot(EquipmentSlotType slotIn, ItemStack stack) {
-
-    }
-
-    @Override
-    public HandSide getPrimaryHand() {
+    public AgeableEntity func_241840_a(ServerWorld p_241840_1_, AgeableEntity p_241840_2_) {
         return null;
     }
 }
