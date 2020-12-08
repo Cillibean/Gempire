@@ -6,9 +6,10 @@ public class RegistryHandler {
 
     public static void init() {
         // attach DeferredRegister to the event bus
-        MushItems.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
-        MushBlocks.BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
-        MushTE.TILE_ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
+        ModItems.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        ModBlocks.BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        ModTE.TILE_ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
+        ModEntities.ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
     }
 
 }

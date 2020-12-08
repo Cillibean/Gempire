@@ -9,7 +9,7 @@ import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
-public class MushItems {
+public class ModItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Gempire.MODID);
     /*public static final RegistryObject<Item> MUSH_SHARD = ITEMS.register("mush_shard", () ->
             new TestItem(new Item.Properties().group(ItemGroup.MATERIALS))
