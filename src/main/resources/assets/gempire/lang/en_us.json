@@ -1,4 +1,10 @@
 {
   "item.vibe.mush_shard": "Mushard",
-  "block.vibe.mycelium_brick_block": "Mycelium Brick Block"
+  "block.vibe.mycelium_brick_block": "Mycelium Brick Block",
+  "item.gempire.pink_essence": "Pink Essence",
+  "item.gempire.blue_essence": "Blue Essence",
+  "item.gempire.yellow_essence": "Yellow Essence",
+  "item.gempire.white_essence": "White Essence",
+  "item.gempire.sapphire_gem": "Sapphire Gem",
+  "item.gempire.ruby_gem": "Ruby Gem"
 }

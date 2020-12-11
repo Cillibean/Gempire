@@ -1,6 +1,7 @@
 package com.gempire.init;
 
 import com.gempire.Gempire;
+import com.gempire.items.TestItem;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Food;
 import net.minecraft.item.Item;
@@ -11,7 +12,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Gempire.MODID);
-    /*public static final RegistryObject<Item> MUSH_SHARD = ITEMS.register("mush_shard", () ->
+    /*
+    public static final RegistryObject<Item> MUSH_SHARD = ITEMS.register("mush_shard", () ->
             new TestItem(new Item.Properties().group(ItemGroup.MATERIALS))
     );
     public static final RegistryObject<Item> SHARD_BLOCK_ITEM = ITEMS.register("shard_block", () ->
@@ -52,5 +54,19 @@ public class ModItems {
                     MushBlocks.MYCELIUM_BRICK_BLOCK_3.get(),
                     new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)
             )
-    );*/
+    );
+    */
+
+    public static final RegistryObject<Item> PINK_ESSENCE = ITEMS.register("pink_essence", () ->
+            new Item(new Item.Properties().group(ItemGroup.MATERIALS)));
+    public static final RegistryObject<Item> BLUE_ESSENCE = ITEMS.register("blue_essence", () ->
+            new Item(new Item.Properties().group(ItemGroup.MATERIALS)));
+    public static final RegistryObject<Item> YELLOW_ESSENCE = ITEMS.register("yellow_essence", () ->
+            new Item(new Item.Properties().group(ItemGroup.MATERIALS)));
+    public static final RegistryObject<Item> WHITE_ESSENCE = ITEMS.register("white_essence", () ->
+            new Item(new Item.Properties().group(ItemGroup.MATERIALS)));
+    public static final RegistryObject<Item> SAPPHIRE_GEM = ITEMS.register("sapphire_gem", () ->
+            new Item(new Item.Properties().group(ItemGroup.MATERIALS)));
+    public static final RegistryObject<Item> RUBY_GEM = ITEMS.register("ruby_gem", () ->
+            new Item(new Item.Properties().group(ItemGroup.MATERIALS)));
 }
