@@ -69,4 +69,6 @@ public class ModItems {
             new Item(new Item.Properties().group(ItemGroup.MATERIALS)));
     public static final RegistryObject<Item> RUBY_GEM = ITEMS.register("ruby_gem", () ->
             new Item(new Item.Properties().group(ItemGroup.MATERIALS)));
+    public static final RegistryObject<Item> PEBBLE_GEM = ITEMS.register("pebble_gem", () ->
+            new Item(new Item.Properties().group(ItemGroup.MATERIALS)));
 }
