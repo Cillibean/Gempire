@@ -7,5 +7,7 @@
   "item.gempire.white_essence": "White Essence",
   "item.gempire.sapphire_gem": "Sapphire Gem",
   "item.gempire.ruby_gem": "Ruby Gem",
-  "item.gempire.pebble_gem": "Pebble Gem"
+  "item.gempire.pebble_gem": "Pebble Gem",
+
+  "entity.gempire.pebble": "Pebble"
 }

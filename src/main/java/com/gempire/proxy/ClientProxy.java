@@ -2,6 +2,7 @@ package com.gempire.proxy;
 
 import com.gempire.Gempire;
 import com.gempire.client.entity.model.ModelTest;
+import com.gempire.client.entity.render.RenderPebble;
 import com.gempire.client.entity.render.RenderTestEntity;
 import com.gempire.entities.TestEntity;
 import com.gempire.init.ModEntities;
@@ -18,6 +19,7 @@ public class ClientProxy {
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent event) {
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.TEST.get(), RenderTestEntity::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.PEBBLE.get(), RenderPebble::new);
     }
 
     /*@SubscribeEvent

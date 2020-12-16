@@ -1,6 +1,7 @@
 package com.gempire;
 
 import com.gempire.entities.TestEntity;
+import com.gempire.entities.gems.EntityPebble;
 import com.gempire.init.ModEntities;
 import com.gempire.init.RegistryHandler;
 import net.minecraft.block.Block;
@@ -50,6 +51,9 @@ public class Gempire
     {
         DeferredWorkQueue.runLater(() -> {
             GlobalEntityTypeAttributes.put(ModEntities.TEST.get(), TestEntity.setCustomAttributes().create());
+        });
+        DeferredWorkQueue.runLater(() -> {
+            GlobalEntityTypeAttributes.put(ModEntities.PEBBLE.get(), EntityPebble.setCustomAttributes().create());
         });
     }
 

@@ -2,6 +2,8 @@ package com.gempire.init;
 
 import com.gempire.Gempire;
 import com.gempire.entities.TestEntity;
+import com.gempire.entities.gems.EntityGem;
+import com.gempire.entities.gems.EntityPebble;
 import net.minecraft.client.tutorial.Tutorial;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
@@ -18,4 +20,9 @@ public class ModEntities {
             () -> EntityType.Builder.create(TestEntity::new, EntityClassification.CREATURE)
                     .size(1.0f, 1.0f) // Hitbox Size
                     .build(new ResourceLocation(Gempire.MODID, "test").toString()));
+    //Pebble
+    public static final RegistryObject<EntityType<EntityPebble>> PEBBLE = ENTITIES.register("pebble",
+            () -> EntityType.Builder.create(EntityPebble::new, EntityClassification.CREATURE)
+                    .size(.4f, .4f) // Hitbox Size
+                    .build(new ResourceLocation(Gempire.MODID, "pebble").toString()));
 }

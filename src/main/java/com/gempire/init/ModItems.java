@@ -1,6 +1,7 @@
 package com.gempire.init;
 
 import com.gempire.Gempire;
+import com.gempire.items.ItemGem;
 import com.gempire.items.TestItem;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Food;
@@ -70,5 +71,5 @@ public class ModItems {
     public static final RegistryObject<Item> RUBY_GEM = ITEMS.register("ruby_gem", () ->
             new Item(new Item.Properties().group(ItemGroup.MATERIALS)));
     public static final RegistryObject<Item> PEBBLE_GEM = ITEMS.register("pebble_gem", () ->
-            new Item(new Item.Properties().group(ItemGroup.MATERIALS)));
+            new ItemGem(new Item.Properties().group(ItemGroup.MATERIALS).maxStackSize(1).isImmuneToFire()));
 }
