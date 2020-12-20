@@ -4,6 +4,7 @@ import com.gempire.init.ModItems;
 import com.gempire.items.ItemGem;
 import net.minecraft.client.particle.ParticleManager;
 import net.minecraft.entity.*;
+import net.minecraft.entity.ai.goal.LookRandomlyGoal;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.Item;
@@ -17,10 +18,10 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 
-public class EntityGem extends MobEntity {
+public class EntityGem extends CreatureEntity {
     public Item droppedGemstone;
 
-    public EntityGem(EntityType<? extends MobEntity> type, World worldIn) {
+    public EntityGem(EntityType<? extends CreatureEntity> type, World worldIn) {
         super(type, worldIn);
     }
 
@@ -33,5 +34,15 @@ public class EntityGem extends MobEntity {
             this.world.addEntity(item);
         }
         super.onDeath(source);
+    }
+
+    @Override
+    protected void registerGoals() {
+        super.registerGoals();
+    }
+
+    @Override
+    public boolean canDespawn(double xix){
+        return false;
     }
 }
