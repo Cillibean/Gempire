@@ -4,7 +4,9 @@ import com.gempire.Gempire;
 import com.gempire.entities.gems.EntityGem;
 import com.gempire.entities.gems.EntityPebble;
 import com.gempire.init.ModEntities;
+import com.gempire.init.ModItems;
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -18,6 +20,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.server.ServerLifecycleHooks;
 
 import javax.annotation.Nonnull;
@@ -45,24 +48,19 @@ public class ItemGem extends Item {
 
     public boolean formGem(World world, PlayerEntity player, BlockPos pos, ItemStack stack) {
         if (!world.isRemote) {
-            EntityGem gem = ModEntities.PEBBLE.get().create(world);
-            String namee = this.getName().getString().replaceAll("item", "").replaceAll("gem", "").replaceAll("_", "");
+            RegistryObject<EntityType<EntityPebble>> gemm = ModEntities.PEBBLE;
+            EntityGem gem = gemm.get().create(world);
+            String namee = this.getName().getString().replaceAll("(?i)item", "").replaceAll("(?i)gem", "").replaceAll("_", "").replaceAll(" ", "");
             try {
-                Class<EntityGem> geml = (Class<EntityGem>) Gempire.class.getClassLoader().loadClass("com/gempire/entities/gems/Entity" + namee.substring(0, 1).toUpperCase() + namee.substring(1));
-                gem = (EntityGem) geml.getConstructors()[0].newInstance(world);
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            } catch (InstantiationException e) {
-                e.printStackTrace();
-            } catch (InvocationTargetException e) {
+                gemm = (RegistryObject<EntityType<EntityPebble>>) ModEntities.class.getField(namee.toUpperCase()).get(null);
+                gem = gemm.get().create(world);
+            } catch(Exception e){
                 e.printStackTrace();
             }
             try {
                 gem.read(stack.getTag());
-            } catch (Exception e) {
-                gem.read(new CompoundNBT());
+            } catch (Exception e){
+                e.printStackTrace();
             }
             gem.setPosition(pos.getX() + 0.5, pos.getY() + 1.0, pos.getZ() + 0.5);
             gem.setHealth(gem.getMaxHealth());

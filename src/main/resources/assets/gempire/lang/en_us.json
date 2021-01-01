@@ -9,5 +9,11 @@
   "item.gempire.ruby_gem": "Ruby Gem",
   "item.gempire.pebble_gem": "Pebble Gem",
 
-  "entity.gempire.pebble": "Pebble"
+  "entity.gempire.pebble": "Pebble",
+
+  "messages.gempire.entity.claimed": "This Gem now belongs to you!",
+  "messages.gempire.entity.follow": "This Gem will now follow you.",
+  "messages.gempire.entity.wander": "This Gem will now wander around.",
+  "messages.gempire.entity.stay": "This Gem will now stay put.",
+  "messages.gempire.entity.birthday": "Happy Birthday Taaf!."
 }

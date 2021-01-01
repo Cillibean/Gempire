@@ -12,7 +12,7 @@ import net.minecraft.util.math.MathHelper;
  * ModelStarterGem - Cilli
  * Created using Tabula 7.1.0
  */
-public class ModelPebble<T extends EntityPebble> extends EntityModel<T> {
+public class ModelPebble<T extends EntityPebble> extends ModelGem<T> {
     public ModelRenderer HeadMain;
     public ModelRenderer HeadSide;
     public ModelRenderer Body;
@@ -112,13 +112,14 @@ public class ModelPebble<T extends EntityPebble> extends EntityModel<T> {
         //this.BackGem.render(matrixStack, buffer, packedLight, packedOverlay);
         //this.LeftLegGem.render(matrixStack, buffer, packedLight, packedOverlay);
         //this.RightLegGem.render(matrixStack, buffer, packedLight, packedOverlay);
-        this.HeadMain.render(matrixStack, buffer, packedLight, packedOverlay);
+        //int skin = (EntityPebble)T.getSkinColor();
+        this.HeadMain.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
         //this.HeadSide.render(matrixStack, buffer, packedLight, packedOverlay);
-        this.Body.render(matrixStack, buffer, packedLight, packedOverlay);
-        this.LeftArm.render(matrixStack, buffer, packedLight, packedOverlay);
-        this.RightArm.render(matrixStack, buffer, packedLight, packedOverlay);
-        this.LeftLeg.render(matrixStack, buffer, packedLight, packedOverlay);
-        this.RightLeg.render(matrixStack, buffer, packedLight, packedOverlay);
+        this.Body.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
+        this.LeftArm.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
+        this.RightArm.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
+        this.LeftLeg.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
+        this.RightLeg.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
     }
 
     @Override
