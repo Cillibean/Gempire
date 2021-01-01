@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "gempire:items/topaz_gem_1"
+  }
+}
