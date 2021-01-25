@@ -1,30 +1,20 @@
 package com.gempire.items;
 
-import com.gempire.Gempire;
-import com.gempire.entities.gems.EntityGem;
+import com.gempire.entities.bases.EntityGem;
 import com.gempire.entities.gems.EntityPebble;
 import com.gempire.init.ModEntities;
-import com.gempire.init.ModItems;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUseContext;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.DimensionType;
-import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.RegistryObject;
-import net.minecraftforge.fml.server.ServerLifecycleHooks;
 
 import javax.annotation.Nonnull;
-import java.lang.reflect.InvocationTargetException;
 
 public class ItemGem extends Item {
 
@@ -61,6 +51,16 @@ public class ItemGem extends Item {
                 gem.read(stack.getTag());
             } catch (Exception e){
                 e.printStackTrace();
+            }
+            if(gem.getSkinColor() == 0){
+                gem.setSkinColor(gem.generateSkinColor());
+            }
+            else{
+                try {
+                    gem.setSkinColor(stack.getTag().getInt("skinColor"));
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
             }
             gem.setPosition(pos.getX() + 0.5, pos.getY() + 1.0, pos.getZ() + 0.5);
             gem.setHealth(gem.getMaxHealth());

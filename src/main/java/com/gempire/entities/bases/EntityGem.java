@@ -1,7 +1,8 @@
-package com.gempire.entities.gems;
+package com.gempire.entities.bases;
 
 import com.gempire.init.ModItems;
 import com.gempire.items.ItemGem;
+import com.gempire.util.GemPlacements;
 import net.minecraft.entity.*;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -11,6 +12,8 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.particles.BasicParticleType;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.Hand;
@@ -21,12 +24,15 @@ import net.minecraft.world.IServerWorld;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.UUID;
 
 public abstract class EntityGem extends CreatureEntity {
     public static DataParameter<Optional<UUID>> OWNER_ID = EntityDataManager.<Optional<UUID>>createKey(EntityGem.class, DataSerializers.OPTIONAL_UNIQUE_ID);
     public static final DataParameter<Integer> SKIN_COLOR = EntityDataManager.<Integer>createKey(EntityGem.class, DataSerializers.VARINT);
+    public static final DataParameter<Integer> SKIN_VARIANT = EntityDataManager.<Integer>createKey(EntityGem.class, DataSerializers.VARINT);
+    public static final DataParameter<Integer> GEM_PLACEMENT = EntityDataManager.<Integer>createKey(EntityGem.class, DataSerializers.VARINT);
 
     //public Item droppedGemstone;
 
@@ -37,12 +43,16 @@ public abstract class EntityGem extends CreatureEntity {
         super(type, worldIn);
         this.dataManager.register(EntityGem.OWNER_ID, Optional.ofNullable(UUID.randomUUID()));
         this.dataManager.register(EntityGem.SKIN_COLOR, 0);
+        this.dataManager.register(EntityGem.SKIN_VARIANT, 0);
+        this.dataManager.register(EntityGem.GEM_PLACEMENT, 0);
     }
 
     @Nullable
     @Override
     public ILivingEntityData onInitialSpawn(IServerWorld worldIn, DifficultyInstance difficultyIn, SpawnReason reason, @Nullable ILivingEntityData spawnDataIn, @Nullable CompoundNBT dataTag) {
         this.setSkinColor(this.generateSkinColor());
+        this.setSkinVariant(this.getSkinVariant());
+        this.setGemPlacement(this.generateGemPlacement());
         return super.onInitialSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
     }
 
@@ -53,13 +63,17 @@ public abstract class EntityGem extends CreatureEntity {
         compound.putUniqueId("ownerID", this.getOwnerID());
         compound.putInt("movementType", this.getMovementType());
         compound.putInt("skinColor", this.getSkinColor());
+        compound.putInt("skinVariant", this.getSkinVariant());
+        compound.putInt("gemPlacement", this.getGemPlacement());
     }
 
     @Override
     public void read(CompoundNBT compound) {
         super.read(compound);
         //this.setOwned(compound.getBoolean("isOwned"), compound.getUniqueId("ownerID"));
-        this.setOwnerID(compound.getUniqueId("ownerID"));
+        if(compound.contains("ownerID")) {
+            this.setOwnerID(compound.getUniqueId("ownerID"));
+        }
         this.setMovementType(compound.getInt("movementType"));
         if(compound.contains("skinColor")) {
             if (compound.getInt("skinColor") == 0) {
@@ -70,6 +84,8 @@ public abstract class EntityGem extends CreatureEntity {
         }else{
             this.setSkinColor(this.generateSkinColor());
         }
+        this.setSkinVariant(compound.getInt("skinVariant"));
+        this.setGemPlacement(compound.getInt("gemPlacement"));
     }
 
     @Override
@@ -88,6 +104,7 @@ public abstract class EntityGem extends CreatureEntity {
             }
             else {
                 if(this.isOwner(player)){
+                    player.sendMessage(new StringTextComponent(this.getGemPlacement() +""), this.getUniqueID());
                     this.cycleMovementAI(player);
                 }
             }
@@ -123,6 +140,8 @@ public abstract class EntityGem extends CreatureEntity {
     public void onDeath(DamageSource source){
         //When the Gem dies.
         if(!this.world.isRemote){
+            BasicParticleType particle = ParticleTypes.EXPLOSION;
+            world.addOptionalParticle(particle, this.getPosX(), this.getPosY(), this.getPosZ(), 0, 0, 0);
             ItemStack stack = new ItemStack(this.getGemItem());
             ((ItemGem) stack.getItem()).setData(this, stack);
             ItemEntity item = new ItemEntity(this.world, this.getPosX(), this.getPosY(), this.getPosZ(), stack);
@@ -210,4 +229,28 @@ public abstract class EntityGem extends CreatureEntity {
     }
 
     public abstract int generateSkinColor();
+
+    public abstract int generateSkinVariant();
+
+    public int getSkinVariant(){
+        return this.dataManager.get(EntityGem.SKIN_VARIANT);
+    }
+
+    public void setSkinVariant(int value){
+        this.dataManager.set(EntityGem.SKIN_VARIANT, value);
+    }
+
+    public int getGemPlacement(){
+        return this.dataManager.get(EntityGem.GEM_PLACEMENT);
+    }
+
+    public void setGemPlacement(int value){
+        this.dataManager.set(EntityGem.GEM_PLACEMENT, value);
+    }
+
+    public abstract GemPlacements[] getPlacements();
+
+    public int generateGemPlacement(){
+        return this.getPlacements()[this.rand.nextInt(this.getPlacements().length)].id;
+    }
 }

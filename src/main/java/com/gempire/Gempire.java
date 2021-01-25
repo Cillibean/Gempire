@@ -1,7 +1,9 @@
 package com.gempire;
 
 import com.gempire.entities.TestEntity;
+import com.gempire.entities.gems.EntityMica;
 import com.gempire.entities.gems.EntityPebble;
+import com.gempire.entities.gems.EntityShale;
 import com.gempire.init.ModEntities;
 import com.gempire.init.RegistryHandler;
 import net.minecraft.block.Block;
@@ -55,6 +57,12 @@ public class Gempire
         DeferredWorkQueue.runLater(() -> {
             GlobalEntityTypeAttributes.put(ModEntities.PEBBLE.get(), EntityPebble.setCustomAttributes().create());
         });
+        DeferredWorkQueue.runLater(() -> {
+            GlobalEntityTypeAttributes.put(ModEntities.MICA.get(), EntityMica.setCustomAttributes().create());
+        });
+        DeferredWorkQueue.runLater(() -> {
+            GlobalEntityTypeAttributes.put(ModEntities.SHALE.get(), EntityShale.setCustomAttributes().create());
+        });
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {
@@ -92,4 +100,7 @@ public class Gempire
             LOGGER.info("HELLO from Register Block");
         }
     }
+
+    //TODO: Make Mica and Shale
+    //TODO: Make render layers more efficient and generalized
 }

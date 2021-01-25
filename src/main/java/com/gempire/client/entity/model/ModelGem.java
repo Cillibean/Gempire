@@ -1,7 +1,6 @@
 package com.gempire.client.entity.model;
 
-import com.gempire.entities.gems.EntityGem;
-import com.gempire.entities.gems.EntityPebble;
+import com.gempire.entities.bases.EntityGem;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import net.minecraft.client.renderer.entity.model.EntityModel;

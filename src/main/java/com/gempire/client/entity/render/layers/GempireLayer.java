@@ -1,7 +1,7 @@
 package com.gempire.client.entity.render.layers;
 
 import com.gempire.client.entity.model.ModelGem;
-import com.gempire.entities.gems.EntityGem;
+import com.gempire.entities.bases.EntityGem;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.entity.IEntityRenderer;

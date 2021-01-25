@@ -113,6 +113,8 @@
   "item.gempire.pearl_gem_13": "Light Gray Pearl Gem",
   "item.gempire.pearl_gem_14": "White Pearl Gem",
 
+  "item.gempire.shale_gem": "Shale Gem",
+
   "item.gempire.spinel_gem": "Red Spinel Gem",
   "item.gempire.spinel_gem_0": "Orange Spinel Gem",
   "item.gempire.spinel_gem_1": "Yellow Spinel Gem",
@@ -189,6 +191,7 @@
   "item.gempire.lapis_lazuli_gem": "Lapis Lazuli Gem",
   "item.gempire.larimar_gem": "Larimar Gem",
   "item.gempire.morganite_gem": "Morganite Gem",
+  "item.gempire.mica_gem": "Mica Gem",
   "item.gempire.nephrite_gem": "Nephrite Gem",
   "item.gempire.obsidian_gem": "Obsidian Gem",
   "item.gempire.pebble_gem": "Pebble Gem",
@@ -205,6 +208,8 @@
   "item.gempire.topaz_gem_2": "White Topaz Gem",
 
   "entity.gempire.pebble": "Pebble",
+  "entity.gempire.mica": "Mica",
+  "entity.gempire.shale": "Shale",
 
   "messages.gempire.entity.claimed": "This Gem now belongs to you!",
   "messages.gempire.entity.follow": "This Gem will now follow you.",

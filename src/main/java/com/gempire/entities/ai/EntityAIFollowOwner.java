@@ -1,15 +1,10 @@
 package com.gempire.entities.ai;
 
-import com.gempire.entities.gems.EntityGem;
-import net.minecraft.entity.CreatureEntity;
+import com.gempire.entities.bases.EntityGem;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
-import net.minecraft.entity.ai.goal.MoveToBlockGoal;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.pathfinding.PathNodeType;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.IWorldReader;
 
 import java.util.List;
 

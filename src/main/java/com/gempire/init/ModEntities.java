@@ -2,9 +2,9 @@ package com.gempire.init;
 
 import com.gempire.Gempire;
 import com.gempire.entities.TestEntity;
-import com.gempire.entities.gems.EntityGem;
+import com.gempire.entities.gems.EntityMica;
 import com.gempire.entities.gems.EntityPebble;
-import net.minecraft.client.tutorial.Tutorial;
+import com.gempire.entities.gems.EntityShale;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.ResourceLocation;
@@ -25,4 +25,14 @@ public class ModEntities {
             () -> EntityType.Builder.create(EntityPebble::new, EntityClassification.CREATURE)
                     .size(.4f, .4f) // Hitbox Size
                     .build(new ResourceLocation(Gempire.MODID, "pebble").toString()));
+
+    public static final RegistryObject<EntityType<EntityMica>> MICA = ENTITIES.register("mica",
+            () -> EntityType.Builder.create(EntityMica::new, EntityClassification.CREATURE)
+                    .size(.4f, .4f) // Hitbox Size
+                    .build(new ResourceLocation(Gempire.MODID, "mica").toString()));
+
+    public static final RegistryObject<EntityType<EntityShale>> SHALE = ENTITIES.register("shale",
+            () -> EntityType.Builder.create(EntityShale::new, EntityClassification.CREATURE)
+                    .size(.4f, .4f) // Hitbox Size
+                    .build(new ResourceLocation(Gempire.MODID, "shale").toString()));
 }

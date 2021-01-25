@@ -1,7 +1,6 @@
 package com.gempire.entities.ai;
 
-import com.gempire.entities.gems.EntityGem;
-import net.minecraft.entity.CreatureEntity;
+import com.gempire.entities.bases.EntityGem;
 import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
 
 public class EntityAIWander extends WaterAvoidingRandomWalkingGoal {
