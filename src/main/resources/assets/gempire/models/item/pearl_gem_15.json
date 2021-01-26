@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "gempire:items/pearl_gem"
+    "layer0": "gempire:items/pearl_gem_15"
   }
 }
