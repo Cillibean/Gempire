@@ -70,20 +70,10 @@ public abstract class EntityGem extends CreatureEntity {
     @Override
     public void read(CompoundNBT compound) {
         super.read(compound);
-        //this.setOwned(compound.getBoolean("isOwned"), compound.getUniqueId("ownerID"));
-        if(compound.contains("ownerID")) {
-            this.setOwnerID(compound.getUniqueId("ownerID"));
-        }
+        this.setIsOwned(compound.getBoolean("isOwned"));
+        this.setOwnerID(compound.getUniqueId("ownerID"));
         this.setMovementType(compound.getInt("movementType"));
-        if(compound.contains("skinColor")) {
-            if (compound.getInt("skinColor") == 0) {
-                this.setSkinColor(this.generateSkinColor());
-            } else {
-                this.setSkinColor(compound.getInt("skinColor"));
-            }
-        }else{
-            this.setSkinColor(this.generateSkinColor());
-        }
+        this.setSkinColor(compound.getInt("skinColor"));
         this.setSkinVariant(compound.getInt("skinVariant"));
         this.setGemPlacement(compound.getInt("gemPlacement"));
     }
@@ -93,20 +83,17 @@ public abstract class EntityGem extends CreatureEntity {
         if(player.world.isRemote){
             return super.applyPlayerInteraction(player, vec, hand);
         }
-        if(hand == Hand.MAIN_HAND && player.getHeldItemMainhand() == ItemStack.EMPTY){
-            if(!player.isSneaking()){
-                if(!this.getOwned()) {
-                    this.setOwned(true, player.getUniqueID());
-                    this.setMovementType(2);
-                    player.sendMessage(new TranslationTextComponent("messages.gempire.entity.claimed"), this.getUniqueID());
-                    return super.applyPlayerInteraction(player, vec, hand);
-                }
-            }
-            else {
-                if(this.isOwner(player)){
-                    player.sendMessage(new StringTextComponent(this.getGemPlacement() +""), this.getUniqueID());
+        if(hand == Hand.MAIN_HAND && player.getHeldItemMainhand() == ItemStack.EMPTY) {
+            if (this.isOwner(player)) {
+                if (player.isSneaking()) {
+                    player.sendMessage(new StringTextComponent(this.getGemPlacement() + ""), this.getUniqueID());
                     this.cycleMovementAI(player);
                 }
+            } else {
+                this.setOwned(true, player.getUniqueID());
+                this.setMovementType(2);
+                player.sendMessage(new TranslationTextComponent("messages.gempire.entity.claimed"), this.getUniqueID());
+                return super.applyPlayerInteraction(player, vec, hand);
             }
         }
         return super.applyPlayerInteraction(player, vec, hand);
@@ -141,7 +128,7 @@ public abstract class EntityGem extends CreatureEntity {
         //When the Gem dies.
         if(!this.world.isRemote){
             BasicParticleType particle = ParticleTypes.EXPLOSION;
-            world.addOptionalParticle(particle, this.getPosX(), this.getPosY(), this.getPosZ(), 0, 0, 0);
+            this.world.addOptionalParticle(particle, this.getPosX(), this.getPosY(), this.getPosZ(), 0, 0, 0);
             ItemStack stack = new ItemStack(this.getGemItem());
             ((ItemGem) stack.getItem()).setData(this, stack);
             ItemEntity item = new ItemEntity(this.world, this.getPosX(), this.getPosY(), this.getPosZ(), stack);
@@ -242,6 +229,10 @@ public abstract class EntityGem extends CreatureEntity {
 
     public int getGemPlacement(){
         return this.dataManager.get(EntityGem.GEM_PLACEMENT);
+    }
+
+    public GemPlacements getGemPlacementE(){
+        return GemPlacements.getPlacement(this.getGemPlacement());
     }
 
     public void setGemPlacement(int value){

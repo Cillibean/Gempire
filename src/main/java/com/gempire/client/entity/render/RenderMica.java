@@ -4,6 +4,7 @@ import com.gempire.Gempire;
 import com.gempire.client.entity.model.ModelMica;
 import com.gempire.client.entity.model.ModelPebble;
 import com.gempire.client.entity.render.layers.SkinLayer;
+import com.gempire.client.entity.render.layers.StarterGemPlacementLayer;
 import com.gempire.entities.gems.EntityMica;
 import com.gempire.entities.gems.EntityPebble;
 import com.mojang.blaze3d.matrix.MatrixStack;
@@ -16,6 +17,7 @@ public class RenderMica extends MobRenderer<EntityMica, ModelMica<EntityMica>> {
     public RenderMica(EntityRendererManager renderManagerIn) {
         super(renderManagerIn, new ModelMica<>(), .25f);
         this.addLayer(new SkinLayer(this));
+        this.addLayer(new StarterGemPlacementLayer(this));
     }
 
     @Override

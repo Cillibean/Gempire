@@ -3,6 +3,7 @@ package com.gempire.client.entity.render;
 import com.gempire.Gempire;
 import com.gempire.client.entity.model.ModelPebble;
 import com.gempire.client.entity.render.layers.SkinLayer;
+import com.gempire.client.entity.render.layers.StarterGemPlacementLayer;
 import com.gempire.entities.gems.EntityPebble;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
@@ -14,6 +15,7 @@ public class RenderPebble extends MobRenderer<EntityPebble, ModelPebble<EntityPe
     public RenderPebble(EntityRendererManager renderManagerIn) {
         super(renderManagerIn, new ModelPebble<>(), .25f);
         this.addLayer(new SkinLayer(this));
+        this.addLayer(new StarterGemPlacementLayer(this));
     }
 
     @Override

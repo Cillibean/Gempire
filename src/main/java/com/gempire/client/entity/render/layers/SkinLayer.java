@@ -2,12 +2,15 @@ package com.gempire.client.entity.render.layers;
 
 import com.gempire.Gempire;
 import com.gempire.client.entity.model.ModelGem;
+import com.gempire.client.entity.model.ModelStarterGem;
 import com.gempire.entities.bases.EntityGem;
+import com.gempire.entities.bases.EntityStarterGem;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.IEntityRenderer;
+import net.minecraft.client.renderer.entity.model.EntityModel;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
@@ -32,5 +35,9 @@ public class SkinLayer<E extends EntityGem, M extends ModelGem<E>> extends Gempi
         IVertexBuilder builder = bufferIn.getBuffer(RenderType.getEntityCutoutNoCull(new ResourceLocation(Gempire.MODID+":textures/entity/" + this.getName(gem).toLowerCase() + "/skin_0.png")));
         this.getEntityModel().setRotationAngles(gem, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
         this.getEntityModel().render(matrixStackIn, builder, packedLightIn, OverlayTexture.NO_OVERLAY, r, g, b, 1.0F);
+        /*if(gem instanceof EntityStarterGem){
+            ModelStarterGem model = ((ModelStarterGem)this.getEntityModel());
+            model.
+        }*/
     }
 }

@@ -1,6 +1,9 @@
 package com.gempire.client.entity.model;
 
+import com.gempire.entities.bases.EntityGem;
 import com.gempire.entities.bases.EntityStarterGem;
+import com.gempire.entities.gems.EntityPebble;
+import com.gempire.util.GemPlacements;
 import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
@@ -167,47 +170,20 @@ public class ModelStarterGem<T extends EntityStarterGem> extends ModelGem<T> {
     public ModelStarterGem() {
         this.textureWidth = 32;
         this.textureHeight = 32;
-        /*this.LeftEyeGem = new ModelRenderer(this, 0, 22);
-        this.LeftEyeGem.setRotationPoint(-1.25F, 16.0F, -0.5F);
-        this.LeftEyeGem.addBox(0.0F, 0.0F, 0.0F, 1, 1, 1, 0.0F);
-        this.RightEyeGem1 = new ModelRenderer(this, 4, 22);
-        this.RightEyeGem1.setRotationPoint(0.25F, 16.0F, -0.5F);
-        this.RightEyeGem1.addBox(0.0F, 0.0F, 0.0F, 1, 1, 1, 0.0F);
-        this.RightEyeGem2 = new ModelRenderer(this, 8, 22);
-        this.RightEyeGem2.setRotationPoint(1.5F, 15.25F, -0.3F);
-        this.RightEyeGem2.addBox(0.0F, 0.0F, 0.0F, 1, 1, 1, 0.0F);
-        this.BackHeadGem = new ModelRenderer(this, 12, 22);
-        this.BackHeadGem.setRotationPoint(-0.5F, 16.0F, 2.5F);
-        this.BackHeadGem.addBox(0.0F, 0.0F, 0.0F, 1, 1, 1, 0.0F);
-        this.ChestGem = new ModelRenderer(this, 16, 22);
-        this.ChestGem.setRotationPoint(-0.5F, 19.0F, 0.0F);
-        this.ChestGem.addBox(0.0F, 0.0F, 0.0F, 1, 1, 1, 0.0F);
-        this.BackGem = new ModelRenderer(this, 20, 22);
-        this.BackGem.setRotationPoint(-0.5F, 19.0F, 2.0F);
-        this.BackGem.addBox(0.0F, 0.0F, 0.0F, 1, 1, 1, 0.0F);
-        this.LeftHandGem = new ModelRenderer(this, 24, 22);
-        this.LeftHandGem.setRotationPoint(-3.7F, 20.2F, 0.3F);
-        this.LeftHandGem.addBox(0.0F, 0.0F, 0.0F, 1, 1, 1, 0.0F);
-        this.RightHandGem = new ModelRenderer(this, 28, 22);
-        this.RightHandGem.setRotationPoint(2.8F, 20.2F, 0.3F);
-        this.RightHandGem.addBox(0.0F, 0.0F, 0.0F, 1, 1, 1, 0.0F);
-        this.LeftLegGem = new ModelRenderer(this, 0, 24);
-        this.LeftLegGem.setRotationPoint(-2.2F, 23.0F, 0.3F);
-        this.LeftLegGem.addBox(0.0F, 0.0F, 0.0F, 1, 1, 1, 0.0F);
-        this.RightLegGem = new ModelRenderer(this, 4, 24);
-        this.RightLegGem.setRotationPoint(1.2F, 23.0F, 0.3F);
-        this.RightLegGem.addBox(0.0F, 0.0F, 0.0F, 1, 1, 1, 0.0F);
-        this.Dress = new ModelRenderer(this, 0, 16);
-        this.Dress.setRotationPoint(-2.5F, 21.0F, 0.0F);
-        this.Dress.addBox(0.0F, 0.0F, 0.0F, 5, 3, 3, 0.0F);*/
+        this.LeftEyeGem = new ModelRenderer(this, 0, 22);
+        this.RightEyeGem1 = new ModelRenderer(this, 0, 22);
+        this.RightEyeGem2 = new ModelRenderer(this, 0, 22);
+        this.BackHeadGem = new ModelRenderer(this, 0, 22);
+        this.ChestGem = new ModelRenderer(this, 0, 22);
+        this.BackGem = new ModelRenderer(this, 0, 22);
+        this.LeftHandGem = new ModelRenderer(this, 0, 22);
+        this.RightHandGem = new ModelRenderer(this, 0, 22);
+        this.LeftLegGem = new ModelRenderer(this, 0, 22);
+        this.RightLegGem = new ModelRenderer(this, 0, 22);
 
         this.HeadMain = new ModelRenderer(this, 0, 0);
         this.HeadMain.setRotationPoint(0.0F, 15.0F, 0.0F);
         this.HeadMain.addBox(-2.0F, 0, -1.5F, 4, 3, 3, 0.0F);
-
-        /*this.HeadSide = new ModelRenderer(this, 14, 0);
-        this.HeadSide.setRotationPoint(0.0F, 14.5F, 0.0F);
-        this.HeadSide.addBox(0.5F, 0.0F, 0.2F, 3, 3, 3, 0.0F);*/
 
         this.Body = new ModelRenderer(this, 0, 6);
         this.Body.setRotationPoint(0.0F, 18.0F, 0.0F);
@@ -229,7 +205,43 @@ public class ModelStarterGem<T extends EntityStarterGem> extends ModelGem<T> {
         this.RightLeg.setRotationPoint(0.0F, 21.0F, 0.0F);
         this.RightLeg.addBox(0.0F, 0, -1.0F, 2, 3, 2, 0.0F);
 
+        this.HeadMain.addChild(this.LeftEyeGem);
+        this.LeftEyeGem.setRotationPoint(0, 0, 0);
+        this.LeftEyeGem.addBox(-1.25F, 16.0F, -2, 1, 1, 1, 0.0F);
+        this.HeadMain.addChild(this.RightEyeGem1);
+        this.RightEyeGem1.setRotationPoint(0,0,0);
+        this.RightEyeGem1.addBox(0.25F, 16.0F, -2, 1, 1, 1, 0.0F);
+        this.RightEyeGem2.setRotationPoint(0,0,0);
+        this.RightEyeGem2.addBox(1.5F, 15.25F, -2, 1, 1, 1, 0.0F);
+        this.HeadMain.addChild(this.BackHeadGem);
+        this.BackHeadGem.setRotationPoint(0,0,0);
+        this.BackHeadGem.addBox(-0.5F, 16.0F, 1f, 1, 1, 1, 0.0F);
+        this.Body.addChild(this.ChestGem);
+        this.ChestGem.setRotationPoint(0,0,0);
+        this.ChestGem.addBox(-0.5F, 19.0F, -1.5F, 1, 1, 1, 0.0F);
+        this.Body.addChild(this.BackGem);
+        this.BackGem.setRotationPoint(0,0,0);
+        this.BackGem.addBox(-0.5F, 19.0F, .5f, 1, 1, 1, 0.0F);
+        this.LeftArm.addChild(this.LeftHandGem);
+        this.LeftHandGem.setRotationPoint(0,0,0);
+        this.LeftHandGem.addBox(-3.7F, 20.2F, -1.5F, 1, 1, 1, 0.0F);
+        this.RightArm.addChild(this.RightHandGem);
+        this.RightHandGem.setRotationPoint(0,0,0);
+        this.RightHandGem.addBox(2.8F, 20.2F, -1.5F, 1, 1, 1, 0.0F);
+        this.LeftLeg.addChild(this.LeftLegGem);
+        this.LeftLegGem.setRotationPoint(0,0,0);
+        this.LeftLegGem.addBox(-2.2F, 23.0F, -1.5F, 1, 1, 1, 0.0F);
+        this.RightLeg.addChild(this.RightLegGem);
+        this.RightLegGem.setRotationPoint(0,0,0);
+        this.RightLegGem.addBox(1.2F, 23.0F, -1.5F, 1, 1, 1, 0.0F);
+
         //this.HeadMain.addChild(this.HeadSide);
+        /*this.HeadSide = new ModelRenderer(this, 14, 0);
+        this.HeadSide.setRotationPoint(0.0F, 14.5F, 0.0F);
+        this.HeadSide.addBox(0.5F, 0.0F, 0.2F, 3, 3, 3, 0.0F)
+        this.Dress = new ModelRenderer(this, 0, 16);
+        this.Dress.setRotationPoint(-2.5F, 21.0F, 0.0F);
+        this.Dress.addBox(0.0F, 0.0F, 0.0F, 5, 3, 3, 0.0F);;*/
     }
 
     @Override
@@ -245,8 +257,8 @@ public class ModelStarterGem<T extends EntityStarterGem> extends ModelGem<T> {
         //this.LeftLegGem.render(matrixStack, buffer, packedLight, packedOverlay);
         //this.RightLegGem.render(matrixStack, buffer, packedLight, packedOverlay);
         //int skin = (EntityPebble)T.getSkinColor();
-        this.HeadMain.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
         //this.HeadSide.render(matrixStack, buffer, packedLight, packedOverlay);
+        this.HeadMain.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
         this.Body.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
         this.LeftArm.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
         this.RightArm.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
@@ -256,11 +268,16 @@ public class ModelStarterGem<T extends EntityStarterGem> extends ModelGem<T> {
 
     @Override
     public void setRotationAngles(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        this.HeadMain.rotateAngleX = headPitch * ((float)Math.PI / 180F);
-        this.HeadMain.rotateAngleY = netHeadYaw * ((float)Math.PI / 180F);
-        this.LeftArm.rotateAngleX = MathHelper.cos(limbSwing * 0.5F + (float)Math.PI) * 1.5F * limbSwingAmount;
-        this.RightArm.rotateAngleX = MathHelper.cos(limbSwing * 0.5F) * 1.5F * limbSwingAmount;
-        this.LeftLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.5F) * 1.5F * limbSwingAmount;
-        this.RightLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.5F + (float)Math.PI) * 1.5F * limbSwingAmount;
+        this.setRotateAngle(this.HeadMain, headPitch * ((float)Math.PI / 180F), netHeadYaw * ((float)Math.PI / 180F), 0);
+        this.setRotateAngle(this.LeftArm, MathHelper.cos(limbSwing * 0.5F + (float)Math.PI) * 1.5F * limbSwingAmount, 0, 0);
+        this.setRotateAngle(this.RightArm, MathHelper.cos(limbSwing * 0.5F) * 1.5F * limbSwingAmount, 0, 0);
+        this.setRotateAngle(this.LeftLeg, MathHelper.cos(limbSwing * 0.5F) * 1.5F * limbSwingAmount, 0, 0);
+        this.setRotateAngle(this.RightLeg, MathHelper.cos(limbSwing * 0.5F + (float)Math.PI) * 1.5F * limbSwingAmount, 0, 0);
+    }
+
+    public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
+        modelRenderer.rotateAngleX = x;
+        modelRenderer.rotateAngleY = y;
+        modelRenderer.rotateAngleZ = z;
     }
 }

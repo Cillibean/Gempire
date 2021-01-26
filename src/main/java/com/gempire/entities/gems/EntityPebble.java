@@ -36,7 +36,7 @@ public class EntityPebble extends EntityStarterGem {
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
         return MobEntity.func_233666_p_()
                 .createMutableAttribute(Attributes.MAX_HEALTH, 10.0D)
-                .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.2D);
+                .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.3D);
     }
 
     @Override
@@ -76,7 +76,7 @@ public class EntityPebble extends EntityStarterGem {
     @Override
     public GemPlacements[] getPlacements() {
         GemPlacements[] placement = new GemPlacements[]{
-            GemPlacements.BACK_OF_HEAD, GemPlacements.LEFT_EYE, GemPlacements.RIGHT_EYE, GemPlacements.RIGHT_EYE_DEFORMED, GemPlacements.BACK, GemPlacements.CHEST,
+            GemPlacements.BACK_OF_HEAD, GemPlacements.LEFT_EYE, GemPlacements.RIGHT_EYE, GemPlacements.BACK, GemPlacements.CHEST,
                 GemPlacements.LEFT_KNEE, GemPlacements.RIGHT_KNEE, GemPlacements.LEFT_HAND, GemPlacements.RIGHT_HAND
         };
         return placement;

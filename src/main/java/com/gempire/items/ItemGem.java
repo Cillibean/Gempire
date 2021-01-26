@@ -4,6 +4,7 @@ import com.gempire.entities.bases.EntityGem;
 import com.gempire.entities.gems.EntityPebble;
 import com.gempire.init.ModEntities;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -11,6 +12,7 @@ import net.minecraft.item.ItemUseContext;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.DimensionType;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.RegistryObject;
 
@@ -50,17 +52,7 @@ public class ItemGem extends Item {
             try {
                 gem.read(stack.getTag());
             } catch (Exception e){
-                e.printStackTrace();
-            }
-            if(gem.getSkinColor() == 0){
-                gem.setSkinColor(gem.generateSkinColor());
-            }
-            else{
-                try {
-                    gem.setSkinColor(stack.getTag().getInt("skinColor"));
-                } catch (Exception e){
-                    e.printStackTrace();
-                }
+                gem.onInitialSpawn(world.getServer().func_241755_D_(), world.getDifficultyForLocation(player.getPosition()), SpawnReason.TRIGGERED, null, null);
             }
             gem.setPosition(pos.getX() + 0.5, pos.getY() + 1.0, pos.getZ() + 0.5);
             gem.setHealth(gem.getMaxHealth());
