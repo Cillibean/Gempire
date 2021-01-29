@@ -1,10 +1,8 @@
 package com.gempire.client.entity.model;
 
-import com.gempire.entities.TestEntity;
-import com.gempire.entities.gems.EntityPebble;
+import com.gempire.entities.gems.starter.EntityPebble;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
-import net.minecraft.client.renderer.entity.model.EntityModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.util.math.MathHelper;
 

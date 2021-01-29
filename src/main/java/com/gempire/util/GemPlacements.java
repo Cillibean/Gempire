@@ -23,7 +23,14 @@ public enum GemPlacements {
     RIGHT_KNEE(19),
     BACK_OF_HEAD(20),
     LEFT_EYE_DEFORMED(21),
-    RIGHT_EYE_DEFORMED(22);
+    RIGHT_EYE_DEFORMED(22),
+    TOP_OF_HEAD(23),
+    LEFT_ANKLE(24),
+    RIGHT_ANKLE(25),
+    LEFT_PALM(26),
+    RIGHT_PALM(27),
+    LEFT_THIGH(28),
+    RIGHT_THIGH(29);
     public int id;
     private static GemPlacements[] vals = GemPlacements.values();
     GemPlacements(int id) {

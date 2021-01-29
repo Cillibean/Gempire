@@ -1,8 +1,7 @@
-package com.gempire.entities.gems;
+package com.gempire.entities.gems.starter;
 
 import com.gempire.entities.ai.EntityAIFollowOwner;
 import com.gempire.entities.ai.EntityAIWander;
-import com.gempire.entities.bases.EntityGem;
 import com.gempire.entities.bases.EntityStarterGem;
 import com.gempire.util.Color;
 import com.gempire.util.GemPlacements;
@@ -15,11 +14,9 @@ import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.passive.CatEntity;
 import net.minecraft.entity.passive.OcelotEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Items;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;

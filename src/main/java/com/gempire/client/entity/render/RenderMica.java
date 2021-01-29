@@ -2,11 +2,9 @@ package com.gempire.client.entity.render;
 
 import com.gempire.Gempire;
 import com.gempire.client.entity.model.ModelMica;
-import com.gempire.client.entity.model.ModelPebble;
 import com.gempire.client.entity.render.layers.SkinLayer;
 import com.gempire.client.entity.render.layers.StarterGemPlacementLayer;
-import com.gempire.entities.gems.EntityMica;
-import com.gempire.entities.gems.EntityPebble;
+import com.gempire.entities.gems.starter.EntityMica;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;

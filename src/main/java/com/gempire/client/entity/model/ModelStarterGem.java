@@ -1,15 +1,10 @@
 package com.gempire.client.entity.model;
 
-import com.gempire.entities.bases.EntityGem;
 import com.gempire.entities.bases.EntityStarterGem;
-import com.gempire.entities.gems.EntityPebble;
-import com.gempire.util.GemPlacements;
 import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
-import net.minecraft.client.renderer.entity.model.EntityModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
-import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -273,6 +268,11 @@ public class ModelStarterGem<T extends EntityStarterGem> extends ModelGem<T> {
         this.setRotateAngle(this.RightArm, MathHelper.cos(limbSwing * 0.5F) * 1.5F * limbSwingAmount, 0, 0);
         this.setRotateAngle(this.LeftLeg, MathHelper.cos(limbSwing * 0.5F) * 1.5F * limbSwingAmount, 0, 0);
         this.setRotateAngle(this.RightLeg, MathHelper.cos(limbSwing * 0.5F + (float)Math.PI) * 1.5F * limbSwingAmount, 0, 0);
+    }
+
+    @Override
+    public Iterable<ModelRenderer> getParts(){
+        return ImmutableList.of(this.HeadMain, this.Body, this.LeftLeg, this.RightLeg, this.LeftArm, this.RightArm);
     }
 
     public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {

@@ -68,7 +68,7 @@ public class ModItems {
             new Item(new Item.Properties().group(ItemGroup.MATERIALS)));
 
     public static final RegistryObject<Item> RUBY_GEM = ITEMS.register("ruby_gem", () ->
-            new Item(new Item.Properties().group(ItemGroup.MATERIALS).maxStackSize(1).isImmuneToFire()));
+            new ItemGem(new Item.Properties().group(ItemGroup.MATERIALS).maxStackSize(1).isImmuneToFire()));
     public static final RegistryObject<Item> ORANGE_SAPPHIRE_GEM = ITEMS.register("sapphire_gem_0", () ->
             new Item(new Item.Properties().group(ItemGroup.MATERIALS).maxStackSize(1).isImmuneToFire()));
     public static final RegistryObject<Item> YELLOW_SAPPHIRE_GEM = ITEMS.register("sapphire_gem_1", () ->

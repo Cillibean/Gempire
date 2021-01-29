@@ -4,6 +4,8 @@ import com.gempire.init.ModItems;
 import com.gempire.items.ItemGem;
 import com.gempire.util.GemPlacements;
 import net.minecraft.entity.*;
+import net.minecraft.entity.ai.attributes.AttributeModifierMap;
+import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -31,10 +33,13 @@ import java.util.UUID;
 public abstract class EntityGem extends CreatureEntity {
     public static DataParameter<Optional<UUID>> OWNER_ID = EntityDataManager.<Optional<UUID>>createKey(EntityGem.class, DataSerializers.OPTIONAL_UNIQUE_ID);
     public static final DataParameter<Integer> SKIN_COLOR = EntityDataManager.<Integer>createKey(EntityGem.class, DataSerializers.VARINT);
+    public static final DataParameter<Integer> HAIR_COLOR = EntityDataManager.<Integer>createKey(EntityGem.class, DataSerializers.VARINT);
     public static final DataParameter<Integer> SKIN_VARIANT = EntityDataManager.<Integer>createKey(EntityGem.class, DataSerializers.VARINT);
+    public static final DataParameter<Integer> HAIR_VARIANT = EntityDataManager.<Integer>createKey(EntityGem.class, DataSerializers.VARINT);
     public static final DataParameter<Integer> GEM_PLACEMENT = EntityDataManager.<Integer>createKey(EntityGem.class, DataSerializers.VARINT);
-
-    //public Item droppedGemstone;
+    public static final DataParameter<Integer> GEM_COLOR = EntityDataManager.<Integer>createKey(EntityGem.class, DataSerializers.VARINT);
+    public static final DataParameter<Integer> OUTFIT_COLOR = EntityDataManager.<Integer>createKey(EntityGem.class, DataSerializers.VARINT);
+    public static final DataParameter<Integer> INSIGNIA_COLOR = EntityDataManager.<Integer>createKey(EntityGem.class, DataSerializers.VARINT);
 
     public boolean isOwned = false;
     public int movementType = 1;
@@ -43,16 +48,26 @@ public abstract class EntityGem extends CreatureEntity {
         super(type, worldIn);
         this.dataManager.register(EntityGem.OWNER_ID, Optional.ofNullable(UUID.randomUUID()));
         this.dataManager.register(EntityGem.SKIN_COLOR, 0);
+        this.dataManager.register(EntityGem.HAIR_COLOR, 0);
         this.dataManager.register(EntityGem.SKIN_VARIANT, 0);
+        this.dataManager.register(EntityGem.HAIR_VARIANT, 0);
         this.dataManager.register(EntityGem.GEM_PLACEMENT, 0);
+        this.dataManager.register(EntityGem.GEM_COLOR, 0);
+        this.dataManager.register(EntityGem.OUTFIT_COLOR, 0);
+        this.dataManager.register(EntityGem.INSIGNIA_COLOR, 0);
     }
 
     @Nullable
     @Override
     public ILivingEntityData onInitialSpawn(IServerWorld worldIn, DifficultyInstance difficultyIn, SpawnReason reason, @Nullable ILivingEntityData spawnDataIn, @Nullable CompoundNBT dataTag) {
         this.setSkinColor(this.generateSkinColor());
-        this.setSkinVariant(this.getSkinVariant());
+        this.setHairColor(this.generateHairColor());
+        this.setSkinVariant(this.generateSkinVariant());
+        this.setHairVariant(this.generateHairVariant());
         this.setGemPlacement(this.generateGemPlacement());
+        this.setGemColor(this.generateGemColor());
+        this.setOutfitColor(this.generateOutfitColor());
+        this.setInsigniaColor(this.generateInsigniaColor());
         return super.onInitialSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
     }
 
@@ -63,8 +78,13 @@ public abstract class EntityGem extends CreatureEntity {
         compound.putUniqueId("ownerID", this.getOwnerID());
         compound.putInt("movementType", this.getMovementType());
         compound.putInt("skinColor", this.getSkinColor());
+        compound.putInt("hairColor", this.getHairColor());
         compound.putInt("skinVariant", this.getSkinVariant());
+        compound.putInt("hairVariant", this.getHairVariant());
         compound.putInt("gemPlacement", this.getGemPlacement());
+        compound.putInt("gemColor", this.getGemColor());
+        compound.putInt("outfitColor", this.getOutfitColor());
+        compound.putInt("insigniaColor", this.getInsigniaColor());
     }
 
     @Override
@@ -74,8 +94,13 @@ public abstract class EntityGem extends CreatureEntity {
         this.setOwnerID(compound.getUniqueId("ownerID"));
         this.setMovementType(compound.getInt("movementType"));
         this.setSkinColor(compound.getInt("skinColor"));
+        this.setHairColor(compound.getInt("hairColor"));
         this.setSkinVariant(compound.getInt("skinVariant"));
+        this.setHairVariant(compound.getInt("hairVariant"));
         this.setGemPlacement(compound.getInt("gemPlacement"));
+        this.setGemColor(compound.getInt("gemColor"));
+        this.setOutfitColor(compound.getInt("outfitColor"));
+        this.setInsigniaColor(compound.getInt("insigniaColor"));
     }
 
     @Override
@@ -244,4 +269,59 @@ public abstract class EntityGem extends CreatureEntity {
     public int generateGemPlacement(){
         return this.getPlacements()[this.rand.nextInt(this.getPlacements().length)].id;
     }
+
+    public int getHairColor(){
+        return this.dataManager.get(EntityGem.HAIR_COLOR);
+    }
+
+    public void setHairColor(int value){
+        this.dataManager.set(EntityGem.HAIR_COLOR, value);
+    }
+
+    public abstract int generateHairColor();
+
+
+    public int getHairVariant(){
+        return this.dataManager.get(EntityGem.HAIR_VARIANT);
+    }
+
+    public void setHairVariant(int value){
+        this.dataManager.set(EntityGem.HAIR_VARIANT, value);
+    }
+
+    public abstract int generateHairVariant();
+
+    public int getGemColor(){
+        return this.dataManager.get(EntityGem.GEM_COLOR);
+    }
+
+    public void setGemColor(int value){
+        this.dataManager.set(EntityGem.GEM_COLOR, value);
+    }
+
+    public abstract int generateGemColor();
+
+    public int getOutfitColor(){
+        return this.dataManager.get(EntityGem.OUTFIT_COLOR);
+    }
+
+    public void setOutfitColor(int value){
+        this.dataManager.set(EntityGem.OUTFIT_COLOR, value);
+    }
+
+    public int generateOutfitColor(){
+        return 0x555F65;
+    }
+
+    public abstract int getOutfitVariant();
+
+    public int getInsigniaColor(){
+        return this.dataManager.get(EntityGem.INSIGNIA_COLOR);
+    }
+
+    public void setInsigniaColor(int value){
+        this.dataManager.set(EntityGem.INSIGNIA_COLOR, value);
+    }
+
+    public abstract int generateInsigniaColor();
 }

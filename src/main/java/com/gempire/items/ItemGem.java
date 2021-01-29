@@ -1,7 +1,7 @@
 package com.gempire.items;
 
 import com.gempire.entities.bases.EntityGem;
-import com.gempire.entities.gems.EntityPebble;
+import com.gempire.entities.gems.starter.EntityPebble;
 import com.gempire.init.ModEntities;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
@@ -12,7 +12,6 @@ import net.minecraft.item.ItemUseContext;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.DimensionType;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.RegistryObject;
 

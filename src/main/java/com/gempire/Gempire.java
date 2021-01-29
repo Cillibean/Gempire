@@ -1,13 +1,13 @@
 package com.gempire;
 
 import com.gempire.entities.TestEntity;
-import com.gempire.entities.gems.EntityMica;
-import com.gempire.entities.gems.EntityPebble;
-import com.gempire.entities.gems.EntityShale;
+import com.gempire.entities.gems.EntityRuby;
+import com.gempire.entities.gems.starter.EntityMica;
+import com.gempire.entities.gems.starter.EntityPebble;
+import com.gempire.entities.gems.starter.EntityShale;
 import com.gempire.init.ModEntities;
 import com.gempire.init.RegistryHandler;
 import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
 import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
@@ -62,6 +62,9 @@ public class Gempire
         });
         DeferredWorkQueue.runLater(() -> {
             GlobalEntityTypeAttributes.put(ModEntities.SHALE.get(), EntityShale.setCustomAttributes().create());
+        });
+        DeferredWorkQueue.runLater(() -> {
+            GlobalEntityTypeAttributes.put(ModEntities.RUBY.get(), EntityRuby.setCustomAttributes().create());
         });
     }
 

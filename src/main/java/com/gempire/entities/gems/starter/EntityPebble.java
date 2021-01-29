@@ -1,4 +1,4 @@
-package com.gempire.entities.gems;
+package com.gempire.entities.gems.starter;
 
 import com.gempire.entities.ai.EntityAIFollowOwner;
 import com.gempire.entities.ai.EntityAIWander;
@@ -21,11 +21,11 @@ import net.minecraft.world.World;
 
 import java.util.ArrayList;
 
-public class EntityShale extends EntityStarterGem {
-    public static final int SKIN_COLOR_START = 0x63666E;
-    public static final int SKIN_COLOR_END = 0x7E82AF;
+public class EntityPebble extends EntityStarterGem {
+    public static final int SKIN_COLOR_START = 0x808080;
+    public static final int SKIN_COLOR_END = 0x575757;
 
-    public EntityShale(EntityType<? extends CreatureEntity> type, World worldIn) {
+    public EntityPebble(EntityType<? extends CreatureEntity> type, World worldIn) {
         super(type, worldIn);
     }
 
@@ -59,8 +59,8 @@ public class EntityShale extends EntityStarterGem {
     @Override
     public int generateSkinColor(){
         ArrayList<Integer> skins = new ArrayList<>();
-        skins.add(EntityShale.SKIN_COLOR_START);
-        skins.add(EntityShale.SKIN_COLOR_END);
+        skins.add(EntityPebble.SKIN_COLOR_START);
+        skins.add(EntityPebble.SKIN_COLOR_END);
         return Color.lerpHex(skins);
     }
 
@@ -72,7 +72,7 @@ public class EntityShale extends EntityStarterGem {
     @Override
     public GemPlacements[] getPlacements() {
         GemPlacements[] placement = new GemPlacements[]{
-                GemPlacements.BACK_OF_HEAD, GemPlacements.LEFT_EYE, GemPlacements.RIGHT_EYE, GemPlacements.BACK, GemPlacements.CHEST,
+            GemPlacements.BACK_OF_HEAD, GemPlacements.LEFT_EYE, GemPlacements.RIGHT_EYE, GemPlacements.BACK, GemPlacements.CHEST,
                 GemPlacements.LEFT_KNEE, GemPlacements.RIGHT_KNEE, GemPlacements.LEFT_HAND, GemPlacements.RIGHT_HAND
         };
         return placement;

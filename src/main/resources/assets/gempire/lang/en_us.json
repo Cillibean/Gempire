@@ -179,6 +179,7 @@
 
   "entity.gempire.pebble": "Pebble",
   "entity.gempire.mica": "Mica",
+  "entity.gempire.ruby": "Ruby",
   "entity.gempire.shale": "Shale",
 
   "messages.gempire.entity.claimed": "This Gem now belongs to you!",

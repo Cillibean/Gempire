@@ -2,10 +2,7 @@ package com.gempire.proxy;
 
 import com.gempire.Gempire;
 import com.gempire.client.entity.model.ModelTest;
-import com.gempire.client.entity.render.RenderMica;
-import com.gempire.client.entity.render.RenderPebble;
-import com.gempire.client.entity.render.RenderShale;
-import com.gempire.client.entity.render.RenderTestEntity;
+import com.gempire.client.entity.render.*;
 import com.gempire.entities.TestEntity;
 import com.gempire.init.ModEntities;
 import net.minecraft.entity.EntityType;
@@ -26,6 +23,7 @@ public class ClientProxy {
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.PEBBLE.get(), RenderPebble::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.MICA.get(), RenderMica::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.SHALE.get(), RenderShale::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.RUBY.get(), RenderRuby::new);
     }
 
     /*@SubscribeEvent

@@ -4,7 +4,7 @@ import com.gempire.Gempire;
 import com.gempire.client.entity.model.ModelPebble;
 import com.gempire.client.entity.render.layers.SkinLayer;
 import com.gempire.client.entity.render.layers.StarterGemPlacementLayer;
-import com.gempire.entities.gems.EntityPebble;
+import com.gempire.entities.gems.starter.EntityPebble;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;
