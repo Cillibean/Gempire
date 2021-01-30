@@ -15,6 +15,8 @@ import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.passive.CatEntity;
 import net.minecraft.entity.passive.OcelotEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;
@@ -24,9 +26,11 @@ public class EntityRuby extends EntityGem {
     public static final int SKIN_COLOR_END = 0xB81428;
     public static final int HAIR_COLOR_START = 0x1C090B;
     public static final int HAIR_COLOR_END = 0x250C10;
+    public static AxisAlignedBB BB = new AxisAlignedBB(new BlockPos(.7f, 1.5f, .5f));
 
     public EntityRuby(EntityType<? extends CreatureEntity> type, World worldIn) {
         super(type, worldIn);
+        this.setBoundingBox(EntityRuby.BB);
     }
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {

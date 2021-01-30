@@ -1,5 +1,7 @@
 package com.gempire.entities.bases;
 
+import com.gempire.entities.gems.starter.EntityPebble;
+import com.gempire.init.ModEntities;
 import com.gempire.init.ModItems;
 import com.gempire.items.ItemGem;
 import com.gempire.util.GemPlacements;
@@ -24,6 +26,7 @@ import net.minecraft.util.text.*;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IServerWorld;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.RegistryObject;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -111,7 +114,6 @@ public abstract class EntityGem extends CreatureEntity {
         if(hand == Hand.MAIN_HAND && player.getHeldItemMainhand() == ItemStack.EMPTY) {
             if (this.isOwner(player)) {
                 if (player.isSneaking()) {
-                    player.sendMessage(new StringTextComponent(this.getGemPlacement() + ""), this.getUniqueID());
                     this.cycleMovementAI(player);
                 }
             } else {
@@ -164,9 +166,11 @@ public abstract class EntityGem extends CreatureEntity {
     }
 
     public Item getGemItem() {
-        ItemGem gem = (ItemGem)ModItems.PEBBLE_GEM.get();
+        RegistryObject<Item> gemm = ModItems.PEBBLE_GEM;
+        ItemGem gem = null;
         try {
-            gem = (ItemGem) ModItems.class.getField((this.getName().getString().replaceAll(".+?Entity", "") + "_gem").toUpperCase()).get(null);
+            gemm = (RegistryObject<Item>) ModItems.class.getField((this.getName().getString().toLowerCase() + "_gem").toUpperCase()).get(null);
+            gem = (ItemGem) gemm.get();
         } catch(Exception e){
             e.printStackTrace();
         }
