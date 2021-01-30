@@ -39,6 +39,6 @@ public class ModEntities {
 
     public static final RegistryObject<EntityType<EntityRuby>> RUBY = ENTITIES.register("ruby",
             () -> EntityType.Builder.create(EntityRuby::new, EntityClassification.CREATURE)
-                    .size(.4f, .4f) // Hitbox Size
+                    .size(.75f, 1.5f) // Hitbox Size
                     .build(new ResourceLocation(Gempire.MODID, "ruby").toString()));
 }

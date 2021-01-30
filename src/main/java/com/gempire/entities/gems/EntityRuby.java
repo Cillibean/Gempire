@@ -32,17 +32,15 @@ public class EntityRuby extends EntityGem {
     public static final int HAIR_COLOR_MID = 0x210004;
     public static final int HAIR_COLOR_MID2 = 0x480A1B;
     public static final int HAIR_COLOR_END = 0x600C27;
-    public static AxisAlignedBB BB = new AxisAlignedBB(new BlockPos(.7f, 1.5f, .5f));
 
     public EntityRuby(EntityType<? extends CreatureEntity> type, World worldIn) {
         super(type, worldIn);
-        this.setBoundingBox(EntityRuby.BB);
     }
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
         return MobEntity.func_233666_p_()
                 .createMutableAttribute(Attributes.MAX_HEALTH, 10.0D)
-                .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.3D);
+                .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.33D);
     }
 
     @Override
