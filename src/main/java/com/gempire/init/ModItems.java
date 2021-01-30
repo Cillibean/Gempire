@@ -67,7 +67,7 @@ public class ModItems {
     public static final RegistryObject<Item> WHITE_ESSENCE = ITEMS.register("white_essence", () ->
             new Item(new Item.Properties().group(ItemGroup.MATERIALS)));
 
-    public static final RegistryObject<Item> RUBY_GEM = ITEMS.register("ruby_gem", () ->
+    public static final RegistryObject<Item> RUBY_GEM = ITEMS.register("ruby_gem_0", () ->
             new ItemGem(new Item.Properties().group(ItemGroup.MATERIALS).maxStackSize(1).isImmuneToFire()));
     public static final RegistryObject<Item> ORANGE_SAPPHIRE_GEM = ITEMS.register("sapphire_gem_0", () ->
             new Item(new Item.Properties().group(ItemGroup.MATERIALS).maxStackSize(1).isImmuneToFire()));
@@ -375,6 +375,10 @@ public class ModItems {
             new ItemGem(new Item.Properties().group(ItemGroup.MATERIALS).maxStackSize(1).isImmuneToFire()));
     public static final RegistryObject<Item> SHALE_GEM = ITEMS.register("shale_gem", () ->
             new ItemGem(new Item.Properties().group(ItemGroup.MATERIALS).maxStackSize(1).isImmuneToFire()));
+    public static final RegistryObject<Item> BLUE_RUBY_GEM = ITEMS.register("ruby_gem_1", () ->
+            new Item(new Item.Properties().group(ItemGroup.MATERIALS).maxStackSize(1).isImmuneToFire()));
+    public static final RegistryObject<Item> RED_SAPPHIRE_GEM = ITEMS.register("sapphire_gem_15", () ->
+            new Item(new Item.Properties().group(ItemGroup.MATERIALS).maxStackSize(1).isImmuneToFire()));
 
     public static final RegistryObject<Item> ORANGE_SPODUMENE_GEM = ITEMS.register("spodumene_gem_0", () ->
             new Item(new Item.Properties().group(ItemGroup.MATERIALS).maxStackSize(1).isImmuneToFire()));

@@ -22,10 +22,16 @@ import net.minecraft.world.World;
 import java.util.ArrayList;
 
 public class EntityRuby extends EntityGem {
-    public static final int SKIN_COLOR_START = 0xFF3346;
-    public static final int SKIN_COLOR_END = 0xB81428;
-    public static final int HAIR_COLOR_START = 0x1C090B;
-    public static final int HAIR_COLOR_END = 0x250C10;
+    public static final int SKIN_COLOR_START = 0xF4705C;
+    public static final int SKIN_COLOR_MID = 0xED454A;
+    public static final int SKIN_COLOR_MID2 = 0xD9234C;
+    public static final int SKIN_COLOR_MID3 = 0x9E0333;
+    public static final int SKIN_COLOR_END = 0x4F1434;
+
+    public static final int HAIR_COLOR_START = 0x140001;
+    public static final int HAIR_COLOR_MID = 0x210004;
+    public static final int HAIR_COLOR_MID2 = 0x480A1B;
+    public static final int HAIR_COLOR_END = 0x600C27;
     public static AxisAlignedBB BB = new AxisAlignedBB(new BlockPos(.7f, 1.5f, .5f));
 
     public EntityRuby(EntityType<? extends CreatureEntity> type, World worldIn) {
@@ -35,7 +41,7 @@ public class EntityRuby extends EntityGem {
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
         return MobEntity.func_233666_p_()
-                .createMutableAttribute(Attributes.MAX_HEALTH, 50.0D)
+                .createMutableAttribute(Attributes.MAX_HEALTH, 10.0D)
                 .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.3D);
     }
 
@@ -54,6 +60,9 @@ public class EntityRuby extends EntityGem {
     public int generateSkinColor(){
         ArrayList<Integer> skins = new ArrayList<>();
         skins.add(EntityRuby.SKIN_COLOR_START);
+        skins.add(EntityRuby.SKIN_COLOR_MID);
+        skins.add(EntityRuby.SKIN_COLOR_MID2);
+        skins.add(EntityRuby.SKIN_COLOR_MID3);
         skins.add(EntityRuby.SKIN_COLOR_END);
         return Color.lerpHex(skins);
     }
@@ -77,6 +86,8 @@ public class EntityRuby extends EntityGem {
     public int generateHairColor() {
         ArrayList<Integer> skins = new ArrayList<>();
         skins.add(EntityRuby.HAIR_COLOR_START);
+        skins.add(EntityRuby.HAIR_COLOR_MID);
+        skins.add(EntityRuby.HAIR_COLOR_MID2);
         skins.add(EntityRuby.HAIR_COLOR_END);
         return Color.lerpHex(skins);
     }

@@ -7,7 +7,7 @@
   "item.gempire.blue_essence": "Blue Essence",
   "item.gempire.white_essence": "White Essence",
 
-  "item.gempire.ruby_gem": "Ruby Gem",
+  "item.gempire.ruby_gem_0": "Ruby Gem",
   "item.gempire.sapphire_gem_0": "Padparadscha Gem",
   "item.gempire.sapphire_gem_1": "Yellow Sapphire Gem",
   "item.gempire.sapphire_gem_2": "Lime Sapphire Gem",
@@ -165,6 +165,8 @@
   "item.gempire.pyrope_gem": "Pyrope Gem",
   "item.gempire.rutile_gem": "Rutile Gem",
   "item.gempire.shale_gem": "Shale Gem",
+  "item.gempire.ruby_gem_1": "Blue Ruby Gem",
+  "item.gempire.sapphire_gem_15": "Red Sapphire Gem",
 
   "item.gempire.spodumene_gem_0": "Spodumene Gem",
   "item.gempire.spodumene_gem_1": "Triphane Gem",
