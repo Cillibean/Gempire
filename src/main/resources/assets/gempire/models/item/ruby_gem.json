@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "gempire:items/ruby_gem_0"
+    "layer0": "gempire:items/ruby_gem"
   }
 }

@@ -19,7 +19,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 @OnlyIn(Dist.CLIENT)
 public class StarterGemPlacementLayer<E extends EntityStarterGem, M extends ModelStarterGem<E>> extends GempireLayer<EntityStarterGem, ModelStarterGem<EntityStarterGem>> {
     private IEntityRenderer<EntityStarterGem, ModelStarterGem<EntityStarterGem>> gemRenderer;
-    //TODO Temp
 
     public StarterGemPlacementLayer(IEntityRenderer<EntityStarterGem, ModelStarterGem<EntityStarterGem>> entityRendererIn) {
         super(entityRendererIn);

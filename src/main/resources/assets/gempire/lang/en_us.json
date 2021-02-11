@@ -7,7 +7,7 @@
   "item.gempire.blue_essence": "Blue Essence",
   "item.gempire.white_essence": "White Essence",
 
-  "item.gempire.ruby_gem_0": "Ruby Gem",
+  "item.gempire.ruby_gem": "Ruby Gem",
   "item.gempire.sapphire_gem_0": "Padparadscha Gem",
   "item.gempire.sapphire_gem_1": "Yellow Sapphire Gem",
   "item.gempire.sapphire_gem_2": "Lime Sapphire Gem",
@@ -188,5 +188,7 @@
   "messages.gempire.entity.follow": "This Gem will now follow you.",
   "messages.gempire.entity.wander": "This Gem will now wander around.",
   "messages.gempire.entity.stay": "This Gem will now stay put.",
-  "messages.gempire.entity.birthday": "Happy Birthday Taaf!"
+  "messages.gempire.entity.birthday": "Happy Birthday Taaf!",
+
+  "itemGroup.gemstones" : "Gemstones"
 }

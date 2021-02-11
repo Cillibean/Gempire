@@ -3,6 +3,7 @@ package com.gempire.entities.gems.starter;
 import com.gempire.entities.ai.EntityAIFollowOwner;
 import com.gempire.entities.ai.EntityAIWander;
 import com.gempire.entities.bases.EntityStarterGem;
+import com.gempire.util.Abilities;
 import com.gempire.util.Color;
 import com.gempire.util.GemPlacements;
 import net.minecraft.entity.CreatureEntity;
@@ -76,5 +77,10 @@ public class EntityShale extends EntityStarterGem {
                 GemPlacements.LEFT_KNEE, GemPlacements.RIGHT_KNEE, GemPlacements.LEFT_HAND, GemPlacements.RIGHT_HAND
         };
         return placement;
+    }
+
+    @Override
+    public Abilities[] possibleAbilities() {
+        return new Abilities[0];
     }
 }

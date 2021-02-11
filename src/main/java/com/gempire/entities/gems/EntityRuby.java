@@ -4,21 +4,27 @@ import com.gempire.entities.ai.EntityAIFollowOwner;
 import com.gempire.entities.ai.EntityAIWander;
 import com.gempire.entities.bases.EntityGem;
 import com.gempire.entities.gems.starter.EntityMica;
+import com.gempire.util.Abilities;
 import com.gempire.util.Color;
 import com.gempire.util.GemPlacements;
-import net.minecraft.entity.CreatureEntity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.monster.CaveSpiderEntity;
+import net.minecraft.entity.monster.CreeperEntity;
+import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.CatEntity;
 import net.minecraft.entity.passive.OcelotEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.IServerWorld;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 
 public class EntityRuby extends EntityGem {
@@ -39,19 +45,24 @@ public class EntityRuby extends EntityGem {
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
         return MobEntity.func_233666_p_()
-                .createMutableAttribute(Attributes.MAX_HEALTH, 10.0D)
-                .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.33D);
+                .createMutableAttribute(Attributes.MAX_HEALTH, 50.0D)
+                .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.33D)
+                .createMutableAttribute(Attributes.ATTACK_DAMAGE, 5.0D);
     }
 
     @Override
     protected void registerGoals() {
         super.registerGoals();
-        this.goalSelector.addGoal(0, new SwimGoal(this));
-        this.goalSelector.addGoal(1, new PanicGoal(this, 1.1D));
-        this.goalSelector.addGoal(7, new LookAtGoal(this, PlayerEntity.class, 6.0F));
+        this.goalSelector.addGoal(9, new SwimGoal(this));
+        this.goalSelector.addGoal(6, new PanicGoal(this, 1.1D));
+        this.goalSelector.addGoal(7, new LookAtGoal(this, PlayerEntity.class, 4.0F));
         this.goalSelector.addGoal(8, new LookRandomlyGoal(this));
-        this.goalSelector.addGoal(8, new EntityAIWander(this, 1.0D));
-        this.goalSelector.addGoal(8, new EntityAIFollowOwner(this, 1.0D));
+        this.goalSelector.addGoal(7, new EntityAIWander(this, 1.0D));
+        this.goalSelector.addGoal(7, new EntityAIFollowOwner(this, 1.0D));
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, MobEntity.class, 1, false, false, (p_234199_0_) -> {
+            return p_234199_0_ instanceof IMob;
+        }));
+        this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.1D, false));
     }
 
     @Override
@@ -108,5 +119,34 @@ public class EntityRuby extends EntityGem {
     @Override
     public int generateInsigniaColor() {
         return 0xFFCE2E;
+    }
+
+    @Override
+    public int generateAbilitySlots(){
+        //TODO: Temporary
+        return 2;
+    }
+
+    public Abilities[] possibleAbilities(){
+        return new Abilities[]{
+                Abilities.KNOCKBACK, Abilities.NO_ABILITY
+        };
+    }
+    public Abilities[] definiteAbilities(){
+        return new Abilities[]{
+                Abilities.PYROKINESIS
+        };
+    }
+
+    public int generateSkinColorVariant() {
+        return 0;
+    }
+
+    public boolean canChangeUniformColorByDefault() {
+        return false;
+    }
+
+    public boolean canChangeInsigniaColorByDefault(){
+        return true;
     }
 }

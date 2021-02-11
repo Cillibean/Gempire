@@ -26,16 +26,20 @@ public class ItemGem extends Item {
     @Nonnull
     @Override
     public ActionResultType onItemUse(ItemUseContext context) {
+        boolean spawned = false;
         if(!context.getWorld().isRemote){
             if (context.getWorld().isBlockModifiable(context.getPlayer(), context.getPos()) && context.getPlayer().canPlayerEdit(context.getPos(), context.getFace(), context.getItem())) {
-                boolean spawned = this.formGem(context.getWorld(), context.getPlayer(), context.getPos(), context.getItem());
-                if (!context.getPlayer().isCreative() && spawned) {
-                    context.getItem().shrink(1);
-                }
+                spawned = this.formGem(context.getWorld(), context.getPlayer(), context.getPos(), context.getItem());
             }
+        }
+        //Problem with the claiming of gems ??
+        if (!context.getPlayer().isCreative() && spawned) {
+            context.getItem().shrink(1);
         }
         return super.onItemUse(context);
     }
+
+    //TODO: A lot needs fixing here
 
     public boolean formGem(World world, PlayerEntity player, BlockPos pos, ItemStack stack) {
         if (!world.isRemote) {

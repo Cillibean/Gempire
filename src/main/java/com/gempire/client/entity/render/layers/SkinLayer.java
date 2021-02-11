@@ -19,7 +19,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 @OnlyIn(Dist.CLIENT)
 public class SkinLayer<E extends EntityGem, M extends ModelGem<E>> extends GempireLayer<EntityGem, ModelGem<EntityGem>> {
     private IEntityRenderer<EntityGem, ModelGem<EntityGem>> gemRenderer;
-    //TODO Temp
 
     public SkinLayer(IEntityRenderer<EntityGem, ModelGem<EntityGem>> entityRendererIn) {
         super(entityRendererIn);

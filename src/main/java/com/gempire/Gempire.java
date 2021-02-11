@@ -76,7 +76,7 @@ public class Gempire
     private void enqueueIMC(final InterModEnqueueEvent event)
     {
         // some example code to dispatch IMC to another mod
-        InterModComms.sendTo("examplemod", "helloworld", () -> { LOGGER.info("Hello world from the MDK"); return "Hello world";});
+        InterModComms.sendTo("gempire", "helloworld", () -> { LOGGER.info("Hello world from the MDK"); return "Hello world";});
     }
 
     private void processIMC(final InterModProcessEvent event)
@@ -103,7 +103,4 @@ public class Gempire
             LOGGER.info("HELLO from Register Block");
         }
     }
-
-    //TODO: Make Mica and Shale
-    //TODO: Make render layers more efficient and generalized
 }
