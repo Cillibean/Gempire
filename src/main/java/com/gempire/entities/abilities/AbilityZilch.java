@@ -15,4 +15,9 @@ public class AbilityZilch extends Ability{
     public void Fight(Entity entityIn, double damage) {
 
     }
+
+    @Override
+    public void EmotionalOutburst() {
+
+    }
 }

@@ -30,7 +30,9 @@ public enum GemPlacements {
     LEFT_PALM(26),
     RIGHT_PALM(27),
     LEFT_THIGH(28),
-    RIGHT_THIGH(29);
+    RIGHT_THIGH(29),
+    LEFT_ARM(30),
+    RIGHT_ARM(31);
     public int id;
     private static GemPlacements[] vals = GemPlacements.values();
     GemPlacements(int id) {

@@ -24,6 +24,7 @@ public class ClientProxy {
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.MICA.get(), RenderMica::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.SHALE.get(), RenderShale::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.RUBY.get(), RenderRuby::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.SAPPHIRE.get(), RenderSapphire::new);
     }
 
     /*@SubscribeEvent

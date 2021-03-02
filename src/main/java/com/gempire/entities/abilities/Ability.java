@@ -21,12 +21,16 @@ public abstract class Ability {
 
     public abstract void Fight(Entity entityIn, double damage);
 
+    public abstract void EmotionalOutburst();
+
     public static Ability GetAbilityFromAbilities(EntityGem wielder, Abilities ability){
         switch (ability){
             case KNOCKBACK:
                 return new AbilityKnockback(wielder);
             case PYROKINESIS:
                 return new AbilityPyrokinesis(wielder);
+            case PARALYSIS:
+                return new AbilityParalysis(wielder);
             default:
                 return new AbilityZilch(wielder);
         }

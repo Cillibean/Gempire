@@ -39,6 +39,9 @@ import java.util.UUID;
 public abstract class EntityGem extends CreatureEntity {
     public static DataParameter<Optional<UUID>> OWNER_ID = EntityDataManager.<Optional<UUID>>createKey(EntityGem.class, DataSerializers.OPTIONAL_UNIQUE_ID);
     public static final DataParameter<Boolean> OWNED = EntityDataManager.<Boolean>createKey(EntityGem.class, DataSerializers.BOOLEAN);
+    public static final DataParameter<Boolean> PRIMARY = EntityDataManager.<Boolean>createKey(EntityGem.class, DataSerializers.BOOLEAN);
+    public static final DataParameter<Boolean> DEFECTIVE = EntityDataManager.<Boolean>createKey(EntityGem.class, DataSerializers.BOOLEAN);
+    public static final DataParameter<Boolean> EMOTIONAL = EntityDataManager.<Boolean>createKey(EntityGem.class, DataSerializers.BOOLEAN);
     public static final DataParameter<Integer> SKIN_COLOR = EntityDataManager.<Integer>createKey(EntityGem.class, DataSerializers.VARINT);
     public static final DataParameter<Integer> HAIR_COLOR = EntityDataManager.<Integer>createKey(EntityGem.class, DataSerializers.VARINT);
     public static final DataParameter<Integer> SKIN_VARIANT = EntityDataManager.<Integer>createKey(EntityGem.class, DataSerializers.VARINT);
@@ -52,12 +55,16 @@ public abstract class EntityGem extends CreatureEntity {
     public static final DataParameter<String> ABILITIES = EntityDataManager.<String>createKey(EntityGem.class, DataSerializers.STRING);
     public static ArrayList<Ability> ABILITY_POWERS = new ArrayList<>();
 
-    public int movementType = 1;
+    public byte movementType = 1;
+    public byte emotionMeter = 0;
 
     public EntityGem(EntityType<? extends CreatureEntity> type, World worldIn) {
         super(type, worldIn);
         this.dataManager.register(EntityGem.OWNER_ID, Optional.ofNullable(UUID.randomUUID()));
         this.dataManager.register(EntityGem.OWNED, false);
+        this.dataManager.register(EntityGem.PRIMARY, false);
+        this.dataManager.register(EntityGem.DEFECTIVE, false);
+        this.dataManager.register(EntityGem.EMOTIONAL, false);
         this.dataManager.register(EntityGem.SKIN_COLOR, 0);
         this.dataManager.register(EntityGem.HAIR_COLOR, 0);
         this.dataManager.register(EntityGem.SKIN_VARIANT, 0);
@@ -85,6 +92,7 @@ public abstract class EntityGem extends CreatureEntity {
         this.setInsigniaColor(this.generateInsigniaColor());
         this.setAbilitySlots(this.generateAbilitySlots());
         this.setAbilites(this.generateAbilities());
+        this.setEmotional(this.generateIsEmotional());
         this.setAbilityPowers(this.findAbilities(this.getAbilites()));
         return super.onInitialSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
     }
@@ -93,9 +101,10 @@ public abstract class EntityGem extends CreatureEntity {
     public void writeAdditional(CompoundNBT compound) {
         super.writeAdditional(compound);
         compound.putString("abilities", this.getAbilites());
+        compound.putBoolean("emotional", this.isEmotional());
         compound.putBoolean("isOwned", this.getOwned());
         compound.putUniqueId("ownerID", this.getOwnerID());
-        compound.putInt("movementType", this.getMovementType());
+        compound.putByte("movementType", this.getMovementType());
         compound.putInt("skinColor", this.getSkinColor());
         compound.putInt("hairColor", this.getHairColor());
         compound.putInt("skinVariant", this.getSkinVariant());
@@ -106,15 +115,17 @@ public abstract class EntityGem extends CreatureEntity {
         compound.putInt("outfitColor", this.getOutfitColor());
         compound.putInt("insigniaColor", this.getInsigniaColor());
         compound.putInt("abilitySlots", this.getAbilitySlots());
+        compound.putByte("emotionMeter", this.emotionMeter);
     }
 
     @Override
     public void read(CompoundNBT compound) {
         super.read(compound);
         this.setAbilites(compound.getString("abilities"));
+        this.setEmotional(compound.getBoolean("emotional"));
         this.setIsOwned(compound.getBoolean("isOwned"));
-        this.setOwnerID(compound.getUniqueId("ownerID"));
-        this.setMovementType(compound.getInt("movementType"));
+        if(compound.contains("ownerID")) this.setOwnerID(compound.getUniqueId("ownerID"));
+        this.setMovementType(compound.getByte("movementType"));
         this.setSkinColor(compound.getInt("skinColor"));
         this.setHairColor(compound.getInt("hairColor"));
         this.setSkinVariant(compound.getInt("skinVariant"));
@@ -125,6 +136,8 @@ public abstract class EntityGem extends CreatureEntity {
         this.setOutfitColor(compound.getInt("outfitColor"));
         this.setInsigniaColor(compound.getInt("insigniaColor"));
         this.setAbilitySlots(compound.getInt("abilitySlots"));
+        this.emotionMeter = compound.getByte("emotionMeter");
+        this.setMovementType(compound.getByte("movementType"));
         this.setAbilityPowers(this.findAbilities(compound.getString("abilities")));
     }
 
@@ -135,18 +148,17 @@ public abstract class EntityGem extends CreatureEntity {
         }
         //This part of the code checks if the player has a blank hand
         if(hand == Hand.MAIN_HAND && player.getHeldItemMainhand() == ItemStack.EMPTY) {
-            //player.sendMessage(new StringTextComponent(this.getOwned() + ""), this.getUniqueID());
+            player.sendMessage(new StringTextComponent(this.getAbilites()), this.getUniqueID());
             //Test to see if player is the owner
             if (this.isOwner(player)) {
-                player.sendMessage(new StringTextComponent(this.getAbilites()), this.getUniqueID());
                 if (player.isSneaking()) {
                     this.cycleMovementAI(player);
                 }
             } else {
                 //Test to see if the gem has an owner
                 if(!this.getOwned()) {
-                    this.setOwned(true, player.getUniqueID());
-                    this.setMovementType(2);
+                    this.setOwned(true, PlayerEntity.getUUID(player.getGameProfile()));
+                    this.setMovementType((byte) 2);
                     player.sendMessage(new TranslationTextComponent("messages.gempire.entity.claimed"), this.getUniqueID());
                     return super.applyPlayerInteraction(player, vec, hand);
                 }
@@ -155,6 +167,12 @@ public abstract class EntityGem extends CreatureEntity {
         return super.applyPlayerInteraction(player, vec, hand);
     }
 
+    /*
+    0 is stay still
+    1 is wander
+    2 is follow
+    3 is stay
+     */
     public void cycleMovementAI(PlayerEntity player){
         //Cycles through the various movement types.
         this.navigator.clearPath();
@@ -173,10 +191,29 @@ public abstract class EntityGem extends CreatureEntity {
             }
         }
         else if(this.getMovementType() == 2){
-            this.setMovementType(0);
+            this.setMovementType((byte) 0);
             player.sendMessage(new TranslationTextComponent("messages.gempire.entity.stay"), this.getUniqueID());
             return;
         }
+    }
+
+    @Override
+    public boolean attackEntityFrom(DamageSource source, float amount){
+        if(this.world.isRemote){
+            return super.attackEntityFrom(source, amount);
+        }
+        if(this.isEmotional() && !source.isExplosion() && !source.isFireDamage()) {
+            if(this.emotionMeter < 10 + this.rand.nextInt(9)){
+                this.emotionMeter++;
+            }
+            else {
+                for(Ability power : this.getAbilityPowers()){
+                    power.EmotionalOutburst();
+                }
+                this.emotionMeter = 0;
+            }
+        }
+        return super.attackEntityFrom(source, amount);
     }
 
     @Override
@@ -184,13 +221,6 @@ public abstract class EntityGem extends CreatureEntity {
         if(entityIn.world.isRemote){
             return super.attackEntityAsMob(entityIn);
         }
-        /*String abilities = this.getAbilites();
-        if(abilities.contains("1")){
-            entityIn.setFire(5);
-        }
-        if(abilities.contains("0")) {
-            ((MobEntity) entityIn).applyKnockback(1.5f, 1, 1);
-        }*/
         for(Ability power : this.getAbilityPowers()){
             power.Fight(entityIn, this.getAttributeValue(Attributes.ATTACK_DAMAGE));
         }
@@ -282,12 +312,12 @@ public abstract class EntityGem extends CreatureEntity {
         return false;
     }
 
-    public int getMovementType(){
+    public byte getMovementType(){
         //Gets the movement type variable.
         return this.movementType;
     }
 
-    public void setMovementType(int value){
+    public void setMovementType(byte value){
         //Sets the movement type variable.
         this.movementType = value;
     }
@@ -345,7 +375,6 @@ public abstract class EntityGem extends CreatureEntity {
 
     public abstract int generateHairColor();
 
-
     public int getHairVariant(){
         return this.dataManager.get(EntityGem.HAIR_VARIANT);
     }
@@ -398,7 +427,15 @@ public abstract class EntityGem extends CreatureEntity {
         this.dataManager.set(EntityGem.ABILITY_SLOTS, value);
     }
 
-    public abstract int generateAbilitySlots();
+    public int generateAbilitySlots(){
+        if(this.isPrimary()){
+            return 6;
+        }
+        else if(this.isDefective()){
+            return 1;
+        }
+        return 3;
+    }
 
     public String getAbilites(){
         return this.dataManager.get(EntityGem.ABILITIES);
@@ -463,6 +500,32 @@ public abstract class EntityGem extends CreatureEntity {
     }
 
     public abstract int generateSkinColorVariant();
+
+    public boolean isEmotional(){
+        return this.dataManager.get(EntityGem.EMOTIONAL);
+    }
+
+    public void setEmotional(boolean value){
+        this.dataManager.set(EntityGem.EMOTIONAL, value);
+    }
+
+    public abstract boolean generateIsEmotional();
+
+    public boolean isPrimary(){
+        return this.dataManager.get(EntityGem.PRIMARY);
+    }
+
+    public void setPrimary(boolean value){
+        this.dataManager.set(EntityGem.PRIMARY, value);
+    }
+
+    public boolean isDefective(){
+        return this.dataManager.get(EntityGem.DEFECTIVE);
+    }
+
+    public void setDefective(boolean value){
+        this.dataManager.set(EntityGem.DEFECTIVE, value);
+    }
 
     public abstract boolean canChangeUniformColorByDefault();
 

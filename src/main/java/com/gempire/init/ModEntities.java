@@ -3,6 +3,7 @@ package com.gempire.init;
 import com.gempire.Gempire;
 import com.gempire.entities.TestEntity;
 import com.gempire.entities.gems.EntityRuby;
+import com.gempire.entities.gems.EntitySapphire;
 import com.gempire.entities.gems.starter.EntityMica;
 import com.gempire.entities.gems.starter.EntityPebble;
 import com.gempire.entities.gems.starter.EntityShale;
@@ -41,4 +42,9 @@ public class ModEntities {
             () -> EntityType.Builder.create(EntityRuby::new, EntityClassification.CREATURE)
                     .size(.75f, 1.5f) // Hitbox Size
                     .build(new ResourceLocation(Gempire.MODID, "ruby").toString()));
+
+    public static final RegistryObject<EntityType<EntitySapphire>> SAPPHIRE = ENTITIES.register("sapphire",
+            () -> EntityType.Builder.create(EntitySapphire::new, EntityClassification.CREATURE)
+                    .size(.75f, 1.5f) // Hitbox Size
+                    .build(new ResourceLocation(Gempire.MODID, "sapphire").toString()));
 }

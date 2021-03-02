@@ -1,7 +1,9 @@
 package com.gempire;
 
 import com.gempire.entities.TestEntity;
+import com.gempire.entities.bases.EntityStarterGem;
 import com.gempire.entities.gems.EntityRuby;
+import com.gempire.entities.gems.EntitySapphire;
 import com.gempire.entities.gems.starter.EntityMica;
 import com.gempire.entities.gems.starter.EntityPebble;
 import com.gempire.entities.gems.starter.EntityShale;
@@ -65,6 +67,9 @@ public class Gempire
         });
         DeferredWorkQueue.runLater(() -> {
             GlobalEntityTypeAttributes.put(ModEntities.RUBY.get(), EntityRuby.setCustomAttributes().create());
+        });
+        DeferredWorkQueue.runLater(() -> {
+            GlobalEntityTypeAttributes.put(ModEntities.SAPPHIRE.get(), EntitySapphire.setCustomAttributes().create());
         });
     }
 

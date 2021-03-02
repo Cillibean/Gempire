@@ -3,7 +3,8 @@ package com.gempire.util;
 public enum Abilities {
     NO_ABILITY(0, 10),
     KNOCKBACK(1, 7),
-    PYROKINESIS(2, 3);
+    PYROKINESIS(2, 3),
+    PARALYSIS(3, 2);
     public int id;
     public int weight;
     private static Abilities[] vals = Abilities.values();

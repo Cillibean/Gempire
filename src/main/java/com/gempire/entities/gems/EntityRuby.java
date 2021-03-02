@@ -46,7 +46,7 @@ public class EntityRuby extends EntityGem {
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
         return MobEntity.func_233666_p_()
                 .createMutableAttribute(Attributes.MAX_HEALTH, 50.0D)
-                .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.33D)
+                .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.4D)
                 .createMutableAttribute(Attributes.ATTACK_DAMAGE, 5.0D);
     }
 
@@ -124,12 +124,12 @@ public class EntityRuby extends EntityGem {
     @Override
     public int generateAbilitySlots(){
         //TODO: Temporary
-        return 2;
+        return 3;
     }
 
     public Abilities[] possibleAbilities(){
         return new Abilities[]{
-                Abilities.KNOCKBACK, Abilities.NO_ABILITY
+                Abilities.KNOCKBACK, Abilities.PARALYSIS, Abilities.NO_ABILITY
         };
     }
     public Abilities[] definiteAbilities(){
@@ -142,11 +142,21 @@ public class EntityRuby extends EntityGem {
         return 0;
     }
 
+    @Override
+    public boolean generateIsEmotional() {
+        return true;
+    }
+
     public boolean canChangeUniformColorByDefault() {
         return false;
     }
 
     public boolean canChangeInsigniaColorByDefault(){
+        return true;
+    }
+
+    @Override
+    public boolean isImmuneToFire(){
         return true;
     }
 }

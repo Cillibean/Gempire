@@ -10,8 +10,11 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUseContext;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.ActionResultType;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.Direction;
+import net.minecraft.util.Hand;
+import net.minecraft.util.math.*;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.RegistryObject;
 
@@ -26,17 +29,37 @@ public class ItemGem extends Item {
     @Nonnull
     @Override
     public ActionResultType onItemUse(ItemUseContext context) {
+        return ActionResultType.PASS;
+    }
+
+    @Override
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
         boolean spawned = false;
-        if(!context.getWorld().isRemote){
-            if (context.getWorld().isBlockModifiable(context.getPlayer(), context.getPos()) && context.getPlayer().canPlayerEdit(context.getPos(), context.getFace(), context.getItem())) {
-                spawned = this.formGem(context.getWorld(), context.getPlayer(), context.getPos(), context.getItem());
+        if(!worldIn.isRemote) {
+            ItemStack itemstack = playerIn.getHeldItem(handIn);
+            RayTraceResult raytraceresult = this.rayTrace(worldIn, playerIn, RayTraceContext.FluidMode.NONE);
+            if (raytraceresult.getType() == RayTraceResult.Type.MISS) {
+                return super.onItemRightClick(worldIn, playerIn, handIn);
+            } else {
+                if (raytraceresult.getType() == RayTraceResult.Type.BLOCK) {
+                    BlockRayTraceResult blockraytraceresult = (BlockRayTraceResult) raytraceresult;
+                    BlockPos blockpos = blockraytraceresult.getPos();
+                    Direction direction = blockraytraceresult.getFace();
+                    if (!worldIn.isBlockModifiable(playerIn, blockpos) || !playerIn.canPlayerEdit(blockpos.offset(direction), direction, itemstack)) {
+                        return super.onItemRightClick(worldIn, playerIn, handIn);
+                    }
+
+                    if (worldIn.isBlockModifiable(playerIn, blockpos) && playerIn.canPlayerEdit(blockpos, blockraytraceresult.getFace(), itemstack)) {
+                        spawned = this.formGem(worldIn, playerIn, blockpos, itemstack);
+                    }
+                }
+                //Problem with the claiming of gems ??
+                if (!playerIn.isCreative() && spawned) {
+                    playerIn.getHeldItemMainhand().shrink(1);
+                }
             }
         }
-        //Problem with the claiming of gems ??
-        if (!context.getPlayer().isCreative() && spawned) {
-            context.getItem().shrink(1);
-        }
-        return super.onItemUse(context);
+        return super.onItemRightClick(worldIn, playerIn, handIn);
     }
 
     //TODO: A lot needs fixing here
@@ -45,10 +68,11 @@ public class ItemGem extends Item {
         if (!world.isRemote) {
             RegistryObject<EntityType<EntityPebble>> gemm = ModEntities.PEBBLE;
             EntityGem gem = gemm.get().create(world);
-            String namee = this.getName().getString().replaceAll("(?i)item", "").replaceAll("(?i)gem", "").replaceAll("_", "").replaceAll(" ", "");
+            String namee = this.getRegistryName().toString().replaceAll("(?i)item", "").replaceAll("gempire", "").replaceAll("(?i)gem", "").replaceAll("_", "").replaceAll(":", "").replaceAll(" ", "");
             try {
                 gemm = (RegistryObject<EntityType<EntityPebble>>) ModEntities.class.getField(namee.toUpperCase()).get(null);
                 gem = gemm.get().create(world);
+                gem.setUniqueId(MathHelper.getRandomUUID(world.rand));
             } catch(Exception e){
                 e.printStackTrace();
             }
@@ -56,6 +80,7 @@ public class ItemGem extends Item {
                 gem.read(stack.getTag());
             } catch (Exception e){
                 gem.onInitialSpawn(world.getServer().func_241755_D_(), world.getDifficultyForLocation(player.getPosition()), SpawnReason.TRIGGERED, null, null);
+                gem.setOwned(true, PlayerEntity.getUUID(player.getGameProfile()));
             }
             gem.setPosition(pos.getX() + 0.5, pos.getY() + 1.0, pos.getZ() + 0.5);
             gem.setHealth(gem.getMaxHealth());

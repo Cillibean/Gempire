@@ -44,10 +44,20 @@ public abstract class EntityStarterGem extends EntityGem {
         return 1;
     }
 
+    public boolean generateIsEmotional(){
+        return false;
+    }
+
     //TODO : FIX THIS PIECE OF HELL ON EARTH
     @Override
-    public String generateAbilities(@Nullable Abilities... getgo){
+    public String generateAbilities(){
         return "0";
+    }
+
+    public Abilities[] definiteAbilities(){
+        return new Abilities[]{
+                Abilities.NO_ABILITY
+        };
     }
 
     public boolean canChangeInsigniaColorByDefault(){

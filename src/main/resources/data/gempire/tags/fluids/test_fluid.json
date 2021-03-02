@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "gempire:test_fluid",
+    "gempire:test_fluid_flowing"
+  ]
+}

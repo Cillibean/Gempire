@@ -2,6 +2,8 @@
   "item.vibe.mush_shard": "Mushard",
   "block.vibe.mycelium_brick_block": "Mycelium Brick Block",
 
+  "block.gempire.test_fluid": "Test Fluid",
+
   "item.gempire.pink_essence": "Pink Essence",
   "item.gempire.yellow_essence": "Yellow Essence",
   "item.gempire.blue_essence": "Blue Essence",
@@ -14,7 +16,7 @@
   "item.gempire.sapphire_gem_3": "Green Sapphire Gem",
   "item.gempire.sapphire_gem_4": "Cyan Sapphire Gem",
   "item.gempire.sapphire_gem_5": "Cornflower Sapphire Gem",
-  "item.gempire.sapphire_gem_6": "Sapphire Gem",
+  "item.gempire.sapphire_gem": "Sapphire Gem",
   "item.gempire.sapphire_gem_7": "Winza Sapphire Gem",
   "item.gempire.sapphire_gem_8": "Magenta Sapphire Gem",
   "item.gempire.sapphire_gem_9": "Pink Sapphire Gem",
@@ -183,6 +185,7 @@
   "entity.gempire.mica": "Mica",
   "entity.gempire.ruby": "Ruby",
   "entity.gempire.shale": "Shale",
+  "entity.gempire.sapphire": "Sapphire",
 
   "messages.gempire.entity.claimed": "This Gem now belongs to you!",
   "messages.gempire.entity.follow": "This Gem will now follow you.",
@@ -190,5 +193,7 @@
   "messages.gempire.entity.stay": "This Gem will now stay put.",
   "messages.gempire.entity.birthday": "Happy Birthday Taaf!",
 
-  "itemGroup.gemstones" : "Gemstones"
+  "itemGroup.gemstones" : "Gemstones",
+
+  "fluid.gempire.test_fluid": "Test Fluid"
 }
