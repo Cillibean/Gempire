@@ -530,4 +530,8 @@ public abstract class EntityGem extends CreatureEntity {
     public abstract boolean canChangeUniformColorByDefault();
 
     public abstract boolean canChangeInsigniaColorByDefault();
+
+    public String getGemName(){
+        return this.getType().getRegistryName().toString().replaceAll("(?i)item", "").replaceAll("gempire", "").replaceAll("(?i)gem", "").replaceAll("_", "").replaceAll(":", "").replaceAll(" ", "");
+    }
 }

@@ -14,7 +14,7 @@ public class GempireLayer<E extends EntityGem, M extends ModelGem<E>> extends La
     }
 
     public String getName(EntityGem gem){
-        return gem.getName().getString();
+        return gem.getGemName();
     }
 
     @Override

@@ -48,14 +48,14 @@ public class ModelSapphire<T extends EntityGem> extends ModelGem<T> {
         this.leg1.setTextureOffset(32, 24).
                 addBox(0.0F, 0.0F, 0.0F, 3.0F, 6.0F, 3.0F, -0.2F, 0.0F, -0.2F);
         this.hair = new ModelRenderer(this, 0, 0);
-        this.hair.setRotationPoint(-3.8F, 1.0F, -4.0F);
-        this.hair.addBox(0.0F, 0.0F, 0.0F, 8.0F, 8.0F, 8.0F, 0.5F, 0.5F, 0.5F);
+        this.hair.
+                addBox(0.0F, 0.0F, 0.0F, 8.0F, 8.0F, 8.0F, 0.5F, 0.5F, 0.5F);
         this.arm2 = new ModelRenderer(this, 0, 0);
-        this.arm2.setRotationPoint(4.0F, 9.2F, -1.0F);
+        //this.arm2.setRotationPoint(4.0F, 9.2F, -1.0F);
         this.arm2.setTextureOffset(50, 14).
                 addBox(0.0F, 0.0F, 0.0F, 2.0F, 8.0F, 2.0F, 0.0F, 0.0F, 0.0F);
         this.head = new ModelRenderer(this, 0, 0);
-        this.head.setRotationPoint(-3.8F, 1.0F, -4.0F);
+        this.head.setRotationPoint(0, 1.0F, 0);
         this.head.setTextureOffset(0, 16).
                 addBox(0.0F, 0.0F, 0.0F, 8.0F, 8.0F, 8.0F, 0.0F, 0.0F, 0.0F);
         this.body = new ModelRenderer(this, 0, 0);
@@ -63,23 +63,26 @@ public class ModelSapphire<T extends EntityGem> extends ModelGem<T> {
         this.body.setTextureOffset(34, 0).
                 addBox(0.0F, 0.0F, 0.0F, 8.0F, 9.0F, 5.0F, 0.0F, 0.0F, 0.0F);
         this.arm1 = new ModelRenderer(this, 0, 0);
-        this.arm1.setRotationPoint(-5.5F, 9.0F, -1.0F);
+        //this.arm1.setRotationPoint(-5.5F, 9.0F, -1.0F);
         this.arm1.setTextureOffset(34, 14).
                 addBox(0.0F, 0.0F, 0.0F, 2.0F, 8.0F, 2.0F, 0.0F, 0.0F, 0.0F);
         this.dress = new ModelRenderer(this, 0, 0);
-        this.dress.setRotationPoint(-1.0F, 6.0F, -1.0F);
+        this.dress.setRotationPoint(0, 6.0F, 0);
         this.dress.setTextureOffset(13, 33).
-                addBox(0.0F, 0.0F, 0.0F, 10.0F, 9.0F, 8.0F, 0.3F, 0.0F, 0.5F);
+                addBox(0, 0, 0, 10.0F, 9.0F, 8.0F, 0.3F, 0.0F, 0.5F);
+        this.head.addChild(this.hair);
+        this.puff2.addChild(this.arm2);
+        this.puff1.addChild(this.arm1);
     }
 
     @Override
     public void render(MatrixStack matrixStackIn, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
         this.head.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
-        this.hair.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
+        //this.hair.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
         this.body.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
         this.puff1.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
-        this.arm1.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
-        this.arm2.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
+        //this.arm1.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
+        //this.arm2.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
         this.puff2.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
         this.dress.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
         this.leg1.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
@@ -89,8 +92,8 @@ public class ModelSapphire<T extends EntityGem> extends ModelGem<T> {
     @Override
     public void setRotationAngles(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
         this.setRotateAngle(this.head, headPitch * 0.9f * ((float)Math.PI / 180F), netHeadYaw * ((float)Math.PI / 180F), 0);
-        this.setRotateAngle(this.arm1, MathHelper.cos(limbSwing * 0.5F + (float)Math.PI) * 1.5F * limbSwingAmount * 0.8f, 0, 0);
-        this.setRotateAngle(this.arm2, MathHelper.cos(limbSwing * 0.5F) * 1.5F * limbSwingAmount * 0.8f, 0, 0);
+        this.setRotateAngle(this.puff2, MathHelper.cos(limbSwing * 0.5F + (float)Math.PI) * 1.5F * limbSwingAmount * 0.8f, 0, 0);
+        this.setRotateAngle(this.puff1, MathHelper.cos(limbSwing * 0.5F) * 1.5F * limbSwingAmount * 0.8f, 0, 0);
         this.setRotateAngle(this.leg2, MathHelper.cos(limbSwing * 0.5F) * 1.5F * limbSwingAmount * 0.8f, 0, 0);
         this.setRotateAngle(this.leg1, MathHelper.cos(limbSwing * 0.5F + (float)Math.PI) * 1.5F * limbSwingAmount * 0.8f, 0, 0);
     }
