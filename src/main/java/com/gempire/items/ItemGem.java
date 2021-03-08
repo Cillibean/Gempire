@@ -68,6 +68,7 @@ public class ItemGem extends Item {
         if (!world.isRemote) {
             RegistryObject<EntityType<EntityPebble>> gemm = ModEntities.PEBBLE;
             EntityGem gem = gemm.get().create(world);
+            System.out.println(this.getRegistryName().toString());
             String namee = this.getRegistryName().toString().replaceAll("(?i)item", "").replaceAll("gempire", "").replaceAll("(?i)gem", "").replaceAll("_", "").replaceAll(":", "").replaceAll(" ", "");
             try {
                 gemm = (RegistryObject<EntityType<EntityPebble>>) ModEntities.class.getField(namee.toUpperCase()).get(null);

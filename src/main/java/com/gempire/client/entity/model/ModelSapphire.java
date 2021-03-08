@@ -49,15 +49,15 @@ public class ModelSapphire<T extends EntityGem> extends ModelGem<T> {
                 addBox(0.0F, 0.0F, 0.0F, 3.0F, 6.0F, 3.0F, -0.2F, 0.0F, -0.2F);
         this.hair = new ModelRenderer(this, 0, 0);
         this.hair.
-                addBox(0.0F, 0.0F, 0.0F, 8.0F, 8.0F, 8.0F, 0.5F, 0.5F, 0.5F);
+                addBox(-3.8f, 0, -4f, 8.0F, 8.0F, 8.0F, 0.5F, 0.5F, 0.5F);
         this.arm2 = new ModelRenderer(this, 0, 0);
         //this.arm2.setRotationPoint(4.0F, 9.2F, -1.0F);
         this.arm2.setTextureOffset(50, 14).
-                addBox(0.0F, 0.0F, 0.0F, 2.0F, 8.0F, 2.0F, 0.0F, 0.0F, 0.0F);
+                addBox(.5f, .5F, .5F, 2.0F, 8.0F, 2.0F, 0.0F, 0.0F, 0.0F);
         this.head = new ModelRenderer(this, 0, 0);
         this.head.setRotationPoint(0, 1.0F, 0);
         this.head.setTextureOffset(0, 16).
-                addBox(0.0F, 0.0F, 0.0F, 8.0F, 8.0F, 8.0F, 0.0F, 0.0F, 0.0F);
+                addBox(-3.8F, 0.0F, -4F, 8.0F, 8.0F, 8.0F, 0.0F, 0.0F, 0.0F);
         this.body = new ModelRenderer(this, 0, 0);
         this.body.setRotationPoint(-3.8F, 9.0F, -2.5F);
         this.body.setTextureOffset(34, 0).
@@ -65,11 +65,11 @@ public class ModelSapphire<T extends EntityGem> extends ModelGem<T> {
         this.arm1 = new ModelRenderer(this, 0, 0);
         //this.arm1.setRotationPoint(-5.5F, 9.0F, -1.0F);
         this.arm1.setTextureOffset(34, 14).
-                addBox(0.0F, 0.0F, 0.0F, 2.0F, 8.0F, 2.0F, 0.0F, 0.0F, 0.0F);
+                addBox(.5f, .5F, .5F, 2.0F, 8.0F, 2.0F, 0.0F, 0.0F, 0.0F);
         this.dress = new ModelRenderer(this, 0, 0);
-        this.dress.setRotationPoint(0, 6.0F, 0);
+        this.dress.setRotationPoint(0, 0, 0);
         this.dress.setTextureOffset(13, 33).
-                addBox(0, 0, 0, 10.0F, 9.0F, 8.0F, 0.3F, 0.0F, 0.5F);
+                addBox(-4.75f, 14.5f, -4f, 10.0F, 9.0F, 8.0F, 0F, 0.0F, 0);
         this.head.addChild(this.hair);
         this.puff2.addChild(this.arm2);
         this.puff1.addChild(this.arm1);

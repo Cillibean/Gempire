@@ -19,7 +19,7 @@ import net.minecraft.world.World;
 import java.util.ArrayList;
 
 public class EntitySapphire extends EntityGem {
-    public static final int SKIN_COLOR_START = 0x6990ED;
+    public static final int SKIN_COLOR_START = 0x88C6E8;
     public static final int SKIN_COLOR_END = 0x2D5AC4;
 
     public static final int HAIR_COLOR_START = 0xA1DDFF;
@@ -142,6 +142,10 @@ public class EntitySapphire extends EntityGem {
 
     @Override
     public boolean isImmuneToFire(){
+        return false;
+    }
+
+    public boolean hasSkinColorVariant(){
         return true;
     }
 }

@@ -501,6 +501,8 @@ public abstract class EntityGem extends CreatureEntity {
 
     public abstract int generateSkinColorVariant();
 
+    public abstract boolean hasSkinColorVariant();
+
     public boolean isEmotional(){
         return this.dataManager.get(EntityGem.EMOTIONAL);
     }

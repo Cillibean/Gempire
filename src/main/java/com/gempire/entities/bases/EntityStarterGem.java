@@ -73,4 +73,8 @@ public abstract class EntityStarterGem extends EntityGem {
     public boolean canChangeUniformColorByDefault() {
         return true;
     }
+
+    public boolean hasSkinColorVariant(){
+        return false;
+    }
 }

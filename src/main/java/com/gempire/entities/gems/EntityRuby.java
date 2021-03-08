@@ -159,4 +159,8 @@ public class EntityRuby extends EntityGem {
     public boolean isImmuneToFire(){
         return true;
     }
+
+    public boolean hasSkinColorVariant(){
+        return false;
+    }
 }
