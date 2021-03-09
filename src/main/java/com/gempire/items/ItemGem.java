@@ -17,6 +17,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.*;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.RegistryObject;
+import org.apache.commons.lang3.ArrayUtils;
 
 import javax.annotation.Nonnull;
 
@@ -64,12 +65,35 @@ public class ItemGem extends Item {
 
     //TODO: A lot needs fixing here
 
+    //(?i) means case sensitive
     public boolean formGem(World world, PlayerEntity player, BlockPos pos, ItemStack stack) {
         if (!world.isRemote) {
             RegistryObject<EntityType<EntityPebble>> gemm = ModEntities.PEBBLE;
+            String skinColorVariant = "";
             EntityGem gem = gemm.get().create(world);
             System.out.println(this.getRegistryName().toString());
-            String namee = this.getRegistryName().toString().replaceAll("(?i)item", "").replaceAll("gempire", "").replaceAll("(?i)gem", "").replaceAll("_", "").replaceAll(":", "").replaceAll(" ", "");
+            String namee = this.getRegistryName().toString().replaceAll("gempire", "").replaceAll("gem", "").replaceAll(":", "").replaceAll(" ", "");
+
+            //This whole section here checks for variations in color so it can spawn the correct type of gem
+
+            String[] ainmneacha = namee.split("_");
+            boolean nullFlag = false;
+            int idx = 0;
+            for (int i = 0; i < ainmneacha.length; i++) {
+                if (ainmneacha[i].isEmpty()) {
+                    nullFlag = true;
+                    idx = i;
+                }
+            }
+            if(nullFlag) ainmneacha = ArrayUtils.remove(ainmneacha, idx);
+            namee = ainmneacha[0];
+            if(ainmneacha.length > 1) skinColorVariant = ainmneacha[1];
+            for (String s : ainmneacha) {
+                System.out.println(s);
+            }
+
+            //End of check and set
+
             try {
                 gemm = (RegistryObject<EntityType<EntityPebble>>) ModEntities.class.getField(namee.toUpperCase()).get(null);
                 gem = gemm.get().create(world);
@@ -80,6 +104,10 @@ public class ItemGem extends Item {
             try {
                 gem.read(stack.getTag());
             } catch (Exception e){
+                if(ainmneacha.length > 1) {
+                    gem.setSkinVariantOnInitialSpawn = false;
+                    gem.initalSkinVariant = Integer.valueOf(skinColorVariant);
+                }
                 gem.onInitialSpawn(world.getServer().func_241755_D_(), world.getDifficultyForLocation(player.getPosition()), SpawnReason.TRIGGERED, null, null);
                 gem.setOwned(true, PlayerEntity.getUUID(player.getGameProfile()));
             }

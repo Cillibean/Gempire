@@ -6,6 +6,7 @@ import com.gempire.init.ModEntities;
 import com.gempire.init.ModItems;
 import com.gempire.items.ItemGem;
 import com.gempire.util.Abilities;
+import com.gempire.util.Color;
 import com.gempire.util.GemPlacements;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
@@ -57,6 +58,8 @@ public abstract class EntityGem extends CreatureEntity {
 
     public byte movementType = 1;
     public byte emotionMeter = 0;
+    public int initalSkinVariant = 0;
+    public boolean setSkinVariantOnInitialSpawn = true;
 
     public EntityGem(EntityType<? extends CreatureEntity> type, World worldIn) {
         super(type, worldIn);
@@ -84,7 +87,9 @@ public abstract class EntityGem extends CreatureEntity {
         this.setSkinColor(this.generateSkinColor());
         this.setHairColor(this.generateHairColor());
         this.setSkinVariant(this.generateSkinVariant());
-        this.setSkinColorVariant(this.generateSkinColorVariant());
+        if(this.setSkinVariantOnInitialSpawn) {
+            this.setSkinColorVariant(this.generateSkinColorVariant());
+        } else this.setSkinColorVariant(this.initalSkinVariant);
         this.setHairVariant(this.generateHairVariant());
         this.setGemPlacement(this.generateGemPlacement());
         this.setGemColor(this.generateGemColor());
@@ -148,7 +153,8 @@ public abstract class EntityGem extends CreatureEntity {
         }
         //This part of the code checks if the player has a blank hand
         if(hand == Hand.MAIN_HAND && player.getHeldItemMainhand() == ItemStack.EMPTY) {
-            player.sendMessage(new StringTextComponent(this.getAbilites()), this.getUniqueID());
+            //player.sendMessage(new StringTextComponent(this.getAbilites()), this.getUniqueID());
+            //player.sendMessage(new StringTextComponent(this.initalSkinVariant + ""), this.getUniqueID());
             //Test to see if player is the owner
             if (this.isOwner(player)) {
                 if (player.isSneaking()) {
@@ -259,8 +265,9 @@ public abstract class EntityGem extends CreatureEntity {
         RegistryObject<Item> gemm = ModItems.PEBBLE_GEM;
         //TODO: Make this code more efficient for variations
         ItemGem gem = null;
+        String name = this.hasSkinColorVariant() ? Color.getColorName(this.getSkinColorVariant()) + "_" + this.getGemName().toLowerCase() + "_gem" : this.getGemName().toLowerCase() + "_gem";
         try {
-            gemm = (RegistryObject<Item>) ModItems.class.getField((this.getName().getString().toLowerCase() + "_gem").toUpperCase()).get(null);
+            gemm = (RegistryObject<Item>) ModItems.class.getField(name.toUpperCase()).get(null);
             gem = (ItemGem) gemm.get();
         } catch(Exception e){
             e.printStackTrace();
