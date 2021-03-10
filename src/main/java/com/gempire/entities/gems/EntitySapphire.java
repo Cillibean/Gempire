@@ -19,11 +19,96 @@ import net.minecraft.world.World;
 import java.util.ArrayList;
 
 public class EntitySapphire extends EntityGem {
-    public static final int SKIN_COLOR_START = 0x88C6E8;
-    public static final int SKIN_COLOR_END = 0x2D5AC4;
+    public static final int WHITE_SKIN_COLOR_START = 0xFFFFFF;
+    public static final int WHITE_SKIN_COLOR_END = 0xE4E6E9;
+    public static final int ORANGE_SKIN_COLOR_START = 0xFFE8B4;
+    public static final int ORANGE_SKIN_COLOR_MID = 0xF08872;
+    public static final int ORANGE_SKIN_COLOR_END = 0xC4414B;
+    public static final int MAGENTA_SKIN_COLOR_START = 0xFAABFC;
+    public static final int MAGENTA_SKIN_COLOR_MID = 0xDB50B5;
+    public static final int MAGENTA_SKIN_COLOR_END = 0x790568;
+    public static final int LIGHT_BLUE_SKIN_COLOR_START = 0xCBD9FC;
+    public static final int LIGHT_BLUE_SKIN_COLOR_MID = 0x6B84D8;
+    public static final int LIGHT_BLUE_SKIN_COLOR_END = 0x2F4496;
+    public static final int YELLOW_SKIN_COLOR_START = 0xFCFFB4;
+    public static final int YELLOW_SKIN_COLOR_MID = 0xFFF273;
+    public static final int YELLOW_SKIN_COLOR_END = 0xDEB644;
+    public static final int LIME_SKIN_COLOR_START = 0xD2ED67;
+    public static final int LIME_SKIN_COLOR_MID = 0x86BD1D;
+    public static final int LIME_SKIN_COLOR_END = 0x2B8200;
+    public static final int PINK_SKIN_COLOR_START = 0xFFD9DE;
+    public static final int PINK_SKIN_COLOR_MID = 0xFFABD5;
+    public static final int PINK_SKIN_COLOR_END = 0xF35AB2;
+    public static final int GRAY_SKIN_COLOR_START = 0x888A8C;
+    public static final int GRAY_SKIN_COLOR_MID = 0x5D5F61;
+    public static final int GRAY_SKIN_COLOR_END = 0x393B3D;
+    public static final int LIGHT_GRAY_SKIN_COLOR_START = 0xE4E6E9;
+    public static final int LIGHT_GRAY_SKIN_COLOR_MID = 0xB7BABD;
+    public static final int LIGHT_GRAY_SKIN_COLOR_END = 0x888A8C;
+    public static final int CYAN_SKIN_COLOR_START = 0xADFFFF;
+    public static final int CYAN_SKIN_COLOR_MID = 0x49DDFC;
+    public static final int CYAN_SKIN_COLOR_END = 0x2B9EEB;
+    public static final int PURPLE_SKIN_COLOR_START = 0xFFA5FB;
+    public static final int PURPLE_SKIN_COLOR_MID = 0xC147EB;
+    public static final int PURPLE_SKIN_COLOR_END = 0x752FCF;
+    public static final int BLUE_SKIN_COLOR_START = 0x7F9CFF;
+    public static final int BLUE_SKIN_COLOR_MID = 0x4C56D4;
+    public static final int BLUE_SKIN_COLOR_END = 0x272982;
+    public static final int BROWN_SKIN_COLOR_START = 0xD1A26E;
+    public static final int BROWN_SKIN_COLOR_MID = 0x7A533B;
+    public static final int BROWN_SKIN_COLOR_END = 0x38201B;
+    public static final int GREEN_SKIN_COLOR_START = 0x84E767;
+    public static final int GREEN_SKIN_COLOR_MID = 0x117D37;
+    public static final int GREEN_SKIN_COLOR_END = 0x00362A;
+    public static final int BLACK_SKIN_COLOR_START = 0x393B3D;
+    public static final int BLACK_SKIN_COLOR_MID = 0x212226;
+    public static final int BLACK_SKIN_COLOR_END = 0x0D0D12;
 
-    public static final int HAIR_COLOR_START = 0xA1DDFF;
-    public static final int HAIR_COLOR_END = 0x88C6E8;
+    public static final int WHITE_HAIR_COLOR_START = 0xC7C9CC;
+    public static final int WHITE_HAIR_COLOR_END = 0xA2A4A6;
+    public static final int ORANGE_HAIR_COLOR_START = 0xFCD9CC;
+    public static final int ORANGE_HAIR_COLOR_MID = 0xF0A773;
+    public static final int ORANGE_HAIR_COLOR_MID2 = 0xF26262;
+    public static final int ORANGE_HAIR_COLOR_END = 0xC23551;
+    public static final int MAGENTA_HAIR_COLOR_START = 0xF9C7FF;
+    public static final int MAGENTA_HAIR_COLOR_MID = 0xB2339E;
+    public static final int MAGENTA_HAIR_COLOR_END = 0x51144F;
+    public static final int LIGHT_BLUE_HAIR_COLOR_START = 0xEAEAFF;
+    public static final int LIGHT_BLUE_HAIR_COLOR_MID = 0xB0D1FF;
+    public static final int LIGHT_BLUE_HAIR_COLOR_END = 0x556CC0;
+    public static final int YELLOW_HAIR_COLOR_START = 0xFFFFD5;
+    public static final int YELLOW_HAIR_COLOR_MID = 0xEDD852;
+    public static final int YELLOW_HAIR_COLOR_END = 0xB48127;
+    public static final int LIME_HAIR_COLOR_START = 0xEEFF82;
+    public static final int LIME_HAIR_COLOR_MID = 0x88C42B;
+    public static final int LIME_HAIR_COLOR_END = 0x106B00;
+    public static final int PINK_HAIR_COLOR_START = 0xFFA9BE;
+    public static final int PINK_HAIR_COLOR_MID = 0xED64A8;
+    public static final int PINK_HAIR_COLOR_END = 0xA125A3;
+    public static final int GRAY_HAIR_COLOR_START = 0x48494A;
+    public static final int GRAY_HAIR_COLOR_MID = 0x313233;
+    public static final int GRAY_HAIR_COLOR_END = 0x232426;
+    public static final int LIGHT_GRAY_HAIR_COLOR_START = 0x969799;
+    public static final int LIGHT_GRAY_HAIR_COLOR_MID = 0x636566;
+    public static final int LIGHT_GRAY_HAIR_COLOR_END = 0x48494A;
+    public static final int CYAN_HAIR_COLOR_START = 0xDBFEFF;
+    public static final int CYAN_HAIR_COLOR_MID = 0x3CB5ED;
+    public static final int CYAN_HAIR_COLOR_END = 0x0777BF;
+    public static final int PURPLE_HAIR_COLOR_START = 0xF8B7FF;
+    public static final int PURPLE_HAIR_COLOR_MID = 0xA633EB;
+    public static final int PURPLE_HAIR_COLOR_END = 0x4A139D;
+    public static final int BLUE_HAIR_COLOR_START = 0xB4DCFE;
+    public static final int BLUE_HAIR_COLOR_MID = 0x496AF3;
+    public static final int BLUE_HAIR_COLOR_END = 0x1928A5;
+    public static final int BROWN_HAIR_COLOR_START = 0xF9DFBE;
+    public static final int BROWN_HAIR_COLOR_MID = 0x5C3018;
+    public static final int BROWN_HAIR_COLOR_END = 0x260F0A;
+    public static final int GREEN_HAIR_COLOR_START = 0xD2F38F;
+    public static final int GREEN_HAIR_COLOR_MID = 0x236750;
+    public static final int GREEN_HAIR_COLOR_END = 0x032636;
+    public static final int BLACK_HAIR_COLOR_START = 0x17171C;
+    public static final int BLACK_HAIR_COLOR_MID = 0x0A0A0D;
+    public static final int BLACK_HAIR_COLOR_END = 0x050508;
 
     public EntitySapphire(EntityType<? extends CreatureEntity> type, World worldIn) {
         super(type, worldIn);
@@ -50,8 +135,89 @@ public class EntitySapphire extends EntityGem {
     @Override
     public int generateSkinColor(){
         ArrayList<Integer> skins = new ArrayList<>();
-        skins.add(EntitySapphire.SKIN_COLOR_START);
-        skins.add(EntitySapphire.SKIN_COLOR_END);
+        switch (this.getSkinColorVariant()){
+            case 0:
+                skins.add(EntitySapphire.WHITE_SKIN_COLOR_START);
+                skins.add(EntitySapphire.WHITE_SKIN_COLOR_END);
+                break;
+            case 1:
+                skins.add(EntitySapphire.ORANGE_SKIN_COLOR_START);
+                skins.add(EntitySapphire.ORANGE_SKIN_COLOR_MID);
+                skins.add(EntitySapphire.ORANGE_SKIN_COLOR_END);
+                break;
+            case 2:
+                skins.add(EntitySapphire.MAGENTA_SKIN_COLOR_START);
+                skins.add(EntitySapphire.MAGENTA_SKIN_COLOR_MID);
+                skins.add(EntitySapphire.MAGENTA_SKIN_COLOR_END);
+                break;
+            case 3:
+                skins.add(EntitySapphire.LIGHT_BLUE_SKIN_COLOR_START);
+                skins.add(EntitySapphire.LIGHT_BLUE_SKIN_COLOR_MID);
+                skins.add(EntitySapphire.LIGHT_BLUE_SKIN_COLOR_END);
+                break;
+            case 4:
+                skins.add(EntitySapphire.YELLOW_SKIN_COLOR_START);
+                skins.add(EntitySapphire.YELLOW_SKIN_COLOR_MID);
+                skins.add(EntitySapphire.YELLOW_SKIN_COLOR_END);
+                break;
+            case 5:
+                skins.add(EntitySapphire.LIME_SKIN_COLOR_START);
+                skins.add(EntitySapphire.LIME_SKIN_COLOR_MID);
+                skins.add(EntitySapphire.LIME_SKIN_COLOR_END);
+                break;
+            case 6:
+                skins.add(EntitySapphire.PINK_SKIN_COLOR_START);
+                skins.add(EntitySapphire.PINK_SKIN_COLOR_MID);
+                skins.add(EntitySapphire.PINK_SKIN_COLOR_END);
+                break;
+            case 7:
+                skins.add(EntitySapphire.GRAY_SKIN_COLOR_START);
+                skins.add(EntitySapphire.GRAY_SKIN_COLOR_MID);
+                skins.add(EntitySapphire.GRAY_SKIN_COLOR_END);
+                break;
+            case 8:
+                skins.add(EntitySapphire.LIGHT_GRAY_SKIN_COLOR_START);
+                skins.add(EntitySapphire.LIGHT_GRAY_SKIN_COLOR_MID);
+                skins.add(EntitySapphire.LIGHT_GRAY_SKIN_COLOR_END);
+                break;
+            case 9:
+                skins.add(EntitySapphire.CYAN_SKIN_COLOR_START);
+                skins.add(EntitySapphire.CYAN_SKIN_COLOR_MID);
+                skins.add(EntitySapphire.CYAN_SKIN_COLOR_END);
+                break;
+            case 10:
+                skins.add(EntitySapphire.PURPLE_SKIN_COLOR_START);
+                skins.add(EntitySapphire.PURPLE_SKIN_COLOR_MID);
+                skins.add(EntitySapphire.PURPLE_SKIN_COLOR_END);
+                break;
+            case 11:
+                skins.add(EntitySapphire.BLUE_SKIN_COLOR_START);
+                skins.add(EntitySapphire.BLUE_SKIN_COLOR_MID);
+                skins.add(EntitySapphire.BLUE_SKIN_COLOR_END);
+                break;
+            case 12:
+                skins.add(EntitySapphire.BROWN_SKIN_COLOR_START);
+                skins.add(EntitySapphire.BROWN_SKIN_COLOR_MID);
+                skins.add(EntitySapphire.BROWN_SKIN_COLOR_END);
+                break;
+            case 13:
+                skins.add(EntitySapphire.GREEN_SKIN_COLOR_START);
+                skins.add(EntitySapphire.GREEN_SKIN_COLOR_MID);
+                skins.add(EntitySapphire.GREEN_SKIN_COLOR_END);
+                break;
+            case 14:
+                skins.add(EntityRuby.SKIN_COLOR_START);
+                skins.add(EntityRuby.SKIN_COLOR_MID);
+                skins.add(EntityRuby.SKIN_COLOR_MID2);
+                skins.add(EntityRuby.SKIN_COLOR_MID3);
+                skins.add(EntityRuby.SKIN_COLOR_END);
+                break;
+            case 15:
+                skins.add(EntitySapphire.BLACK_SKIN_COLOR_START);
+                skins.add(EntitySapphire.BLACK_SKIN_COLOR_MID);
+                skins.add(EntitySapphire.BLACK_SKIN_COLOR_END);
+                break;
+        }
         return Color.lerpHex(skins);
     }
 
@@ -73,8 +239,89 @@ public class EntitySapphire extends EntityGem {
     @Override
     public int generateHairColor() {
         ArrayList<Integer> skins = new ArrayList<>();
-        skins.add(EntitySapphire.HAIR_COLOR_START);
-        skins.add(EntitySapphire.HAIR_COLOR_END);
+        switch (this.getHairColor()){
+            case 0:
+                skins.add(EntitySapphire.WHITE_HAIR_COLOR_START);
+                skins.add(EntitySapphire.WHITE_HAIR_COLOR_END);
+                break;
+            case 1:
+                skins.add(EntitySapphire.ORANGE_HAIR_COLOR_START);
+                skins.add(EntitySapphire.ORANGE_HAIR_COLOR_MID);
+                skins.add(EntitySapphire.ORANGE_HAIR_COLOR_MID2);
+                skins.add(EntitySapphire.ORANGE_HAIR_COLOR_END);
+                break;
+            case 2:
+                skins.add(EntitySapphire.MAGENTA_HAIR_COLOR_START);
+                skins.add(EntitySapphire.MAGENTA_HAIR_COLOR_MID);
+                skins.add(EntitySapphire.MAGENTA_HAIR_COLOR_END);
+                break;
+            case 3:
+                skins.add(EntitySapphire.LIGHT_BLUE_HAIR_COLOR_START);
+                skins.add(EntitySapphire.LIGHT_BLUE_HAIR_COLOR_MID);
+                skins.add(EntitySapphire.LIGHT_BLUE_HAIR_COLOR_END);
+                break;
+            case 4:
+                skins.add(EntitySapphire.YELLOW_HAIR_COLOR_START);
+                skins.add(EntitySapphire.YELLOW_HAIR_COLOR_MID);
+                skins.add(EntitySapphire.YELLOW_HAIR_COLOR_END);
+                break;
+            case 5:
+                skins.add(EntitySapphire.LIME_HAIR_COLOR_START);
+                skins.add(EntitySapphire.LIME_HAIR_COLOR_MID);
+                skins.add(EntitySapphire.LIME_HAIR_COLOR_END);
+                break;
+            case 6:
+                skins.add(EntitySapphire.PINK_HAIR_COLOR_START);
+                skins.add(EntitySapphire.PINK_HAIR_COLOR_MID);
+                skins.add(EntitySapphire.PINK_HAIR_COLOR_END);
+                break;
+            case 7:
+                skins.add(EntitySapphire.GRAY_HAIR_COLOR_START);
+                skins.add(EntitySapphire.GRAY_HAIR_COLOR_MID);
+                skins.add(EntitySapphire.GRAY_HAIR_COLOR_END);
+                break;
+            case 8:
+                skins.add(EntitySapphire.LIGHT_GRAY_HAIR_COLOR_START);
+                skins.add(EntitySapphire.LIGHT_GRAY_HAIR_COLOR_MID);
+                skins.add(EntitySapphire.LIGHT_GRAY_HAIR_COLOR_END);
+                break;
+            case 9:
+                skins.add(EntitySapphire.CYAN_HAIR_COLOR_START);
+                skins.add(EntitySapphire.CYAN_HAIR_COLOR_MID);
+                skins.add(EntitySapphire.CYAN_HAIR_COLOR_END);
+                break;
+            case 10:
+                skins.add(EntitySapphire.PURPLE_HAIR_COLOR_START);
+                skins.add(EntitySapphire.PURPLE_HAIR_COLOR_MID);
+                skins.add(EntitySapphire.PURPLE_HAIR_COLOR_END);
+                break;
+            case 11:
+                skins.add(EntitySapphire.BLUE_HAIR_COLOR_START);
+                skins.add(EntitySapphire.BLUE_HAIR_COLOR_MID);
+                skins.add(EntitySapphire.BLUE_HAIR_COLOR_END);
+                break;
+            case 12:
+                skins.add(EntitySapphire.BROWN_HAIR_COLOR_START);
+                skins.add(EntitySapphire.BROWN_HAIR_COLOR_MID);
+                skins.add(EntitySapphire.BROWN_HAIR_COLOR_END);
+                break;
+            case 13:
+                skins.add(EntitySapphire.GREEN_HAIR_COLOR_START);
+                skins.add(EntitySapphire.GREEN_HAIR_COLOR_MID);
+                skins.add(EntitySapphire.GREEN_HAIR_COLOR_END);
+                break;
+            case 14:
+                skins.add(EntityRuby.HAIR_COLOR_START);
+                skins.add(EntityRuby.HAIR_COLOR_MID);
+                skins.add(EntityRuby.HAIR_COLOR_MID2);
+                skins.add(EntityRuby.HAIR_COLOR_END);
+                break;
+            case 15:
+                skins.add(EntitySapphire.BLACK_HAIR_COLOR_START);
+                skins.add(EntitySapphire.BLACK_HAIR_COLOR_MID);
+                skins.add(EntitySapphire.BLACK_HAIR_COLOR_END);
+                break;
+        }
         return Color.lerpHex(skins);
     }
 
