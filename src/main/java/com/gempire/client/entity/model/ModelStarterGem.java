@@ -1,6 +1,7 @@
 package com.gempire.client.entity.model;
 
 import com.gempire.entities.bases.EntityStarterGem;
+import com.gempire.util.GemPlacements;
 import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
@@ -200,35 +201,48 @@ public class ModelStarterGem<T extends EntityStarterGem> extends ModelGem<T> {
         this.RightLeg.setRotationPoint(0.0F, 21.0F, 0.0F);
         this.RightLeg.addBox(0.0F, 0, -1.0F, 2, 3, 2, 0.0F);
 
+        /*switch (placement){
+            case BACK_OF_HEAD:
+                this.BackHeadGem.addBox(-0.5F, 16.0F, 1f, 1, 1, 1, 0.0F);
+                break;
+            case LEFT_EYE:
+                this.LeftEyeGem.addBox(-0.5F, 16.0F, 1f, 1, 1, 1, 0.0F);
+                break;
+            case RIGHT_EYE:
+                this.RightEyeGem1.addBox(-0.5F, 16.0F, 1f, 1, 1, 1, 0.0F);
+                break;
+            case BACK:
+                this.BackGem.addBox(-0.5F, 16.0F, 1f, 1, 1, 1, 0.0F);
+                break;
+            case CHEST:
+                this.ChestGem.addBox(-0.5F, 16.0F, 1f, 1, 1, 1, 0.0F);
+                break;
+            case LEFT_HAND:
+                this.LeftHandGem.addBox(-0.5F, 16.0F, 1f, 1, 1, 1, 0.0F);
+                break;
+            case RIGHT_HAND:
+                this.RightHandGem.addBox(-0.5F, 16.0F, 1f, 1, 1, 1, 0.0F);
+                break;
+            case LEFT_KNEE:
+                this.LeftLegGem.addBox(-0.5F, 16.0F, 1f, 1, 1, 1, 0.0F);
+                break;
+            case RIGHT_KNEE:
+                this.RightLegGem.addBox(-0.5F, 16.0F, 1f, 1, 1, 1, 0.0F);
+                break;
+            default:
+                this.BackHeadGem.addBox(-0.5F, 16.0F, 1f, 1, 1, 1, 0.0F);
+                break;
+        }*/
+
         this.HeadMain.addChild(this.LeftEyeGem);
-        this.LeftEyeGem.setRotationPoint(0, 0, 0);
-        this.LeftEyeGem.addBox(-1.25F, 16.0F, -2, 1, 1, 1, 0.0F);
         this.HeadMain.addChild(this.RightEyeGem1);
-        this.RightEyeGem1.setRotationPoint(0,0,0);
-        this.RightEyeGem1.addBox(0.25F, 16.0F, -2, 1, 1, 1, 0.0F);
-        this.RightEyeGem2.setRotationPoint(0,0,0);
-        this.RightEyeGem2.addBox(1.5F, 15.25F, -2, 1, 1, 1, 0.0F);
         this.HeadMain.addChild(this.BackHeadGem);
-        this.BackHeadGem.setRotationPoint(0,0,0);
-        this.BackHeadGem.addBox(-0.5F, 16.0F, 1f, 1, 1, 1, 0.0F);
         this.Body.addChild(this.ChestGem);
-        this.ChestGem.setRotationPoint(0,0,0);
-        this.ChestGem.addBox(-0.5F, 19.0F, -1.5F, 1, 1, 1, 0.0F);
         this.Body.addChild(this.BackGem);
-        this.BackGem.setRotationPoint(0,0,0);
-        this.BackGem.addBox(-0.5F, 19.0F, .5f, 1, 1, 1, 0.0F);
         this.LeftArm.addChild(this.LeftHandGem);
-        this.LeftHandGem.setRotationPoint(0,0,0);
-        this.LeftHandGem.addBox(-3.7F, 20.2F, -1.5F, 1, 1, 1, 0.0F);
         this.RightArm.addChild(this.RightHandGem);
-        this.RightHandGem.setRotationPoint(0,0,0);
-        this.RightHandGem.addBox(2.8F, 20.2F, -1.5F, 1, 1, 1, 0.0F);
         this.LeftLeg.addChild(this.LeftLegGem);
-        this.LeftLegGem.setRotationPoint(0,0,0);
-        this.LeftLegGem.addBox(-2.2F, 23.0F, -1.5F, 1, 1, 1, 0.0F);
         this.RightLeg.addChild(this.RightLegGem);
-        this.RightLegGem.setRotationPoint(0,0,0);
-        this.RightLegGem.addBox(1.2F, 23.0F, -1.5F, 1, 1, 1, 0.0F);
 
         //this.HeadMain.addChild(this.HeadSide);
         /*this.HeadSide = new ModelRenderer(this, 14, 0);
@@ -241,18 +255,6 @@ public class ModelStarterGem<T extends EntityStarterGem> extends ModelGem<T> {
 
     @Override
     public void render(MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha){
-        //this.LeftEyeGem.render(matrixStack, buffer, packedLight, packedOverlay);
-        //this.RightEyeGem1.render(matrixStack, buffer, packedLight, packedOverlay);
-        //this.RightEyeGem2.render(matrixStack, buffer, packedLight, packedOverlay);
-        //this.BackHeadGem.render(matrixStack, buffer, packedLight, packedOverlay);
-        //this.LeftHandGem.render(matrixStack, buffer, packedLight, packedOverlay);
-        //this.RightHandGem.render(matrixStack, buffer, packedLight, packedOverlay);
-        //this.ChestGem.render(matrixStack, buffer, packedLight, packedOverlay);
-        //this.BackGem.render(matrixStack, buffer, packedLight, packedOverlay);
-        //this.LeftLegGem.render(matrixStack, buffer, packedLight, packedOverlay);
-        //this.RightLegGem.render(matrixStack, buffer, packedLight, packedOverlay);
-        //int skin = (EntityPebble)T.getSkinColor();
-        //this.HeadSide.render(matrixStack, buffer, packedLight, packedOverlay);
         this.HeadMain.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
         this.Body.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
         this.LeftArm.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);

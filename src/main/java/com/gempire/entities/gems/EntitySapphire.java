@@ -481,7 +481,7 @@ public class EntitySapphire extends EntityGem {
 
     @Override
     public boolean generateIsEmotional() {
-        return true;
+        return false;
     }
 
     public boolean canChangeUniformColorByDefault() {
