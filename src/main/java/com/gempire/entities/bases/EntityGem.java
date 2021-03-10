@@ -1,6 +1,7 @@
 package com.gempire.entities.bases;
 
 import com.gempire.entities.abilities.Ability;
+import com.gempire.entities.abilities.AbilityZilch;
 import com.gempire.entities.gems.starter.EntityPebble;
 import com.gempire.init.ModEntities;
 import com.gempire.init.ModItems;
@@ -251,12 +252,19 @@ public abstract class EntityGem extends CreatureEntity {
     public ArrayList<Ability> findAbilities(String getab){
         ArrayList<Abilities> abilities = new ArrayList<>();
         ArrayList<Ability> powers = new ArrayList<>();
-        String[] powerViolenceList = getab.split(",");
-        for(int i = 0; i < powerViolenceList.length; i++){
-            abilities.add(Abilities.getAbility(Integer.valueOf(powerViolenceList[i])));
+        if(!getab.isEmpty()) {
+            String[] powerViolenceList = getab.split(",");
+            for (int i = 0; i < powerViolenceList.length; i++) {
+                abilities.add(Abilities.getAbility(Integer.valueOf(powerViolenceList[i])));
+            }
+            for (Abilities ability : abilities) {
+                powers.add(Ability.GetAbilityFromAbilities(this, ability));
+            }
         }
-        for (Abilities ability : abilities) {
-            powers.add(Ability.GetAbilityFromAbilities(this, ability));
+        else{
+            ArrayList<Ability> nulab = new ArrayList<>();
+            nulab.add(new AbilityZilch(this));
+            return nulab;
         }
         return powers;
     }
@@ -454,6 +462,9 @@ public abstract class EntityGem extends CreatureEntity {
 
     public String generateAbilities(){
         int remainingSlots = this.getAbilitySlots();
+        if(remainingSlots == 0){
+            return "0";
+        }
         boolean complete = false;
         String abilityList = "";
         Abilities[] abilities = this.possibleAbilities();
