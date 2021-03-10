@@ -205,17 +205,17 @@ public class EntitySapphire extends EntityGem {
                 skins.add(EntitySapphire.GREEN_SKIN_COLOR_MID);
                 skins.add(EntitySapphire.GREEN_SKIN_COLOR_END);
                 break;
-            case 14:
+            case 15:
+                skins.add(EntitySapphire.BLACK_SKIN_COLOR_START);
+                skins.add(EntitySapphire.BLACK_SKIN_COLOR_MID);
+                skins.add(EntitySapphire.BLACK_SKIN_COLOR_END);
+                break;
+            default:
                 skins.add(EntityRuby.SKIN_COLOR_START);
                 skins.add(EntityRuby.SKIN_COLOR_MID);
                 skins.add(EntityRuby.SKIN_COLOR_MID2);
                 skins.add(EntityRuby.SKIN_COLOR_MID3);
                 skins.add(EntityRuby.SKIN_COLOR_END);
-                break;
-            case 15:
-                skins.add(EntitySapphire.BLACK_SKIN_COLOR_START);
-                skins.add(EntitySapphire.BLACK_SKIN_COLOR_MID);
-                skins.add(EntitySapphire.BLACK_SKIN_COLOR_END);
                 break;
         }
         return Color.lerpHex(skins);
@@ -239,7 +239,7 @@ public class EntitySapphire extends EntityGem {
     @Override
     public int generateHairColor() {
         ArrayList<Integer> skins = new ArrayList<>();
-        switch (this.getHairColor()){
+        switch (this.getSkinColorVariant()){
             case 0:
                 skins.add(EntitySapphire.WHITE_HAIR_COLOR_START);
                 skins.add(EntitySapphire.WHITE_HAIR_COLOR_END);
@@ -332,7 +332,42 @@ public class EntitySapphire extends EntityGem {
 
     @Override
     public int generateGemColor() {
-        return 0x2572FC;
+        switch (this.getSkinColorVariant()) {
+            case 0:
+                return EntitySapphire.WHITE_HAIR_COLOR_END;
+            case 1:
+                return EntitySapphire.ORANGE_HAIR_COLOR_END;
+            case 2:
+                return EntitySapphire.MAGENTA_HAIR_COLOR_END;
+            case 3:
+                return EntitySapphire.LIGHT_BLUE_HAIR_COLOR_END;
+            case 4:
+                return EntitySapphire.YELLOW_HAIR_COLOR_END;
+            case 5:
+                return EntitySapphire.LIME_HAIR_COLOR_END;
+            case 6:
+                return EntitySapphire.PINK_HAIR_COLOR_END;
+            case 7:
+                return EntitySapphire.GRAY_HAIR_COLOR_END;
+            case 8:
+                return EntitySapphire.LIGHT_GRAY_HAIR_COLOR_END;
+            case 9:
+                return EntitySapphire.CYAN_HAIR_COLOR_END;
+            case 10:
+                return EntitySapphire.PURPLE_HAIR_COLOR_END;
+            case 11:
+                return EntitySapphire.BLUE_HAIR_COLOR_END;
+            case 12:
+                return EntitySapphire.BROWN_HAIR_COLOR_END;
+            case 13:
+                return EntitySapphire.GREEN_HAIR_COLOR_END;
+            case 14:
+                return EntityRuby.HAIR_COLOR_END;
+            case 15:
+                return EntitySapphire.BLACK_HAIR_COLOR_END;
+            default:
+                return EntitySapphire.WHITE_HAIR_COLOR_END;
+        }
     }
 
     @Override
@@ -342,12 +377,82 @@ public class EntitySapphire extends EntityGem {
 
     @Override
     public int getOutfitColor() {
-        return 0x88C6E8;
+        switch (this.getSkinColorVariant()) {
+            case 0:
+                return EntitySapphire.WHITE_SKIN_COLOR_START;
+            case 1:
+                return EntitySapphire.ORANGE_SKIN_COLOR_START;
+            case 2:
+                return EntitySapphire.MAGENTA_SKIN_COLOR_START;
+            case 3:
+                return EntitySapphire.LIGHT_BLUE_SKIN_COLOR_START;
+            case 4:
+                return EntitySapphire.YELLOW_SKIN_COLOR_START;
+            case 5:
+                return EntitySapphire.LIME_SKIN_COLOR_START;
+            case 6:
+                return EntitySapphire.PINK_SKIN_COLOR_START;
+            case 7:
+                return EntitySapphire.GRAY_SKIN_COLOR_START;
+            case 8:
+                return EntitySapphire.LIGHT_GRAY_SKIN_COLOR_START;
+            case 9:
+                return EntitySapphire.CYAN_SKIN_COLOR_START;
+            case 10:
+                return EntitySapphire.PURPLE_SKIN_COLOR_START;
+            case 11:
+                return EntitySapphire.BLUE_SKIN_COLOR_START;
+            case 12:
+                return EntitySapphire.BROWN_SKIN_COLOR_START;
+            case 13:
+                return EntitySapphire.GREEN_SKIN_COLOR_START;
+            case 14:
+                return EntityRuby.HAIR_COLOR_START;
+            case 15:
+                return EntitySapphire.BLACK_SKIN_COLOR_START;
+            default:
+                return EntitySapphire.WHITE_SKIN_COLOR_START;
+        }
     }
 
     @Override
     public int generateInsigniaColor() {
-        return 0x4296EC;
+        switch (this.getSkinColorVariant()) {
+            case 0:
+                return EntitySapphire.WHITE_HAIR_COLOR_START;
+            case 1:
+                return EntitySapphire.ORANGE_HAIR_COLOR_START;
+            case 2:
+                return EntitySapphire.MAGENTA_HAIR_COLOR_START;
+            case 3:
+                return EntitySapphire.LIGHT_BLUE_HAIR_COLOR_START;
+            case 4:
+                return EntitySapphire.YELLOW_HAIR_COLOR_START;
+            case 5:
+                return EntitySapphire.LIME_HAIR_COLOR_START;
+            case 6:
+                return EntitySapphire.PINK_HAIR_COLOR_START;
+            case 7:
+                return EntitySapphire.GRAY_HAIR_COLOR_START;
+            case 8:
+                return EntitySapphire.LIGHT_GRAY_HAIR_COLOR_START;
+            case 9:
+                return EntitySapphire.CYAN_HAIR_COLOR_START;
+            case 10:
+                return EntitySapphire.PURPLE_HAIR_COLOR_START;
+            case 11:
+                return EntitySapphire.BLUE_HAIR_COLOR_START;
+            case 12:
+                return EntitySapphire.BROWN_HAIR_COLOR_START;
+            case 13:
+                return EntitySapphire.GREEN_HAIR_COLOR_START;
+            case 14:
+                return EntityRuby.HAIR_COLOR_START;
+            case 15:
+                return EntitySapphire.BLACK_HAIR_COLOR_START;
+            default:
+                return EntitySapphire.WHITE_HAIR_COLOR_START;
+        }
     }
 
     @Override
@@ -371,7 +476,7 @@ public class EntitySapphire extends EntityGem {
     }
 
     public int generateSkinColorVariant() {
-        return 0;
+        return this.initalSkinVariant;
     }
 
     @Override

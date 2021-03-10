@@ -20,16 +20,16 @@ public class RenderSapphire extends MobRenderer<EntitySapphire, ModelSapphire<En
         this.addLayer(new OutfitLayer(this));
         this.addLayer(new InsigniaLayer(this));
         this.addLayer(new GemPlacementLayer(this));
+        this.addLayer(new FaceLayer(this));
+    }
+
+    @Override
+    public ResourceLocation getEntityTexture(EntitySapphire entity) {
+        return new ResourceLocation(Gempire.MODID+":textures/entity/sapphire/texture.png");
     }
 
     @Override
     protected void preRenderCallback(EntitySapphire entitylivingbaseIn, MatrixStack matrixStackIn, float partialTickTime) {
         super.preRenderCallback(entitylivingbaseIn, matrixStackIn, partialTickTime);
-    }
-
-    @Override
-    public ResourceLocation getEntityTexture(EntitySapphire entity) {
-        //Temp
-        return new ResourceLocation(Gempire.MODID+":textures/entity/sapphire/sapphire.png");
     }
 }

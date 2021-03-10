@@ -84,14 +84,14 @@ public abstract class EntityGem extends CreatureEntity {
     @Nullable
     @Override
     public ILivingEntityData onInitialSpawn(IServerWorld worldIn, DifficultyInstance difficultyIn, SpawnReason reason, @Nullable ILivingEntityData spawnDataIn, @Nullable CompoundNBT dataTag) {
-        this.setSkinColor(this.generateSkinColor());
-        this.setHairColor(this.generateHairColor());
         this.setSkinVariant(this.generateSkinVariant());
         if(this.setSkinVariantOnInitialSpawn) {
             this.setSkinColorVariant(this.generateSkinColorVariant());
         } else this.setSkinColorVariant(this.initalSkinVariant);
         this.setHairVariant(this.generateHairVariant());
         this.setGemPlacement(this.generateGemPlacement());
+        this.setSkinColor(this.generateSkinColor());
+        this.setHairColor(this.generateHairColor());
         this.setGemColor(this.generateGemColor());
         this.setOutfitColor(this.generateOutfitColor());
         this.setInsigniaColor(this.generateInsigniaColor());
