@@ -1,11 +1,16 @@
 package com.gempire.entities.gems;
 
+import com.gempire.Gempire;
 import com.gempire.entities.ai.EntityAIFollowOwner;
 import com.gempire.entities.ai.EntityAIWander;
 import com.gempire.entities.bases.EntityGem;
 import com.gempire.util.Abilities;
 import com.gempire.util.Color;
 import com.gempire.util.GemPlacements;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.texture.DynamicTexture;
+import net.minecraft.client.renderer.texture.Texture;
+import net.minecraft.client.renderer.texture.TextureUtil;
 import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
@@ -14,8 +19,16 @@ import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.resources.IResourceManager;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import org.apache.commons.io.IOUtils;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class EntitySapphire extends EntityGem {
@@ -135,88 +148,21 @@ public class EntitySapphire extends EntityGem {
     @Override
     public int generateSkinColor(){
         ArrayList<Integer> skins = new ArrayList<>();
-        switch (this.getSkinColorVariant()){
-            case 0:
-                skins.add(EntitySapphire.WHITE_SKIN_COLOR_START);
-                skins.add(EntitySapphire.WHITE_SKIN_COLOR_END);
-                break;
-            case 1:
-                skins.add(EntitySapphire.ORANGE_SKIN_COLOR_START);
-                skins.add(EntitySapphire.ORANGE_SKIN_COLOR_MID);
-                skins.add(EntitySapphire.ORANGE_SKIN_COLOR_END);
-                break;
-            case 2:
-                skins.add(EntitySapphire.MAGENTA_SKIN_COLOR_START);
-                skins.add(EntitySapphire.MAGENTA_SKIN_COLOR_MID);
-                skins.add(EntitySapphire.MAGENTA_SKIN_COLOR_END);
-                break;
-            case 3:
-                skins.add(EntitySapphire.LIGHT_BLUE_SKIN_COLOR_START);
-                skins.add(EntitySapphire.LIGHT_BLUE_SKIN_COLOR_MID);
-                skins.add(EntitySapphire.LIGHT_BLUE_SKIN_COLOR_END);
-                break;
-            case 4:
-                skins.add(EntitySapphire.YELLOW_SKIN_COLOR_START);
-                skins.add(EntitySapphire.YELLOW_SKIN_COLOR_MID);
-                skins.add(EntitySapphire.YELLOW_SKIN_COLOR_END);
-                break;
-            case 5:
-                skins.add(EntitySapphire.LIME_SKIN_COLOR_START);
-                skins.add(EntitySapphire.LIME_SKIN_COLOR_MID);
-                skins.add(EntitySapphire.LIME_SKIN_COLOR_END);
-                break;
-            case 6:
-                skins.add(EntitySapphire.PINK_SKIN_COLOR_START);
-                skins.add(EntitySapphire.PINK_SKIN_COLOR_MID);
-                skins.add(EntitySapphire.PINK_SKIN_COLOR_END);
-                break;
-            case 7:
-                skins.add(EntitySapphire.GRAY_SKIN_COLOR_START);
-                skins.add(EntitySapphire.GRAY_SKIN_COLOR_MID);
-                skins.add(EntitySapphire.GRAY_SKIN_COLOR_END);
-                break;
-            case 8:
-                skins.add(EntitySapphire.LIGHT_GRAY_SKIN_COLOR_START);
-                skins.add(EntitySapphire.LIGHT_GRAY_SKIN_COLOR_MID);
-                skins.add(EntitySapphire.LIGHT_GRAY_SKIN_COLOR_END);
-                break;
-            case 9:
-                skins.add(EntitySapphire.CYAN_SKIN_COLOR_START);
-                skins.add(EntitySapphire.CYAN_SKIN_COLOR_MID);
-                skins.add(EntitySapphire.CYAN_SKIN_COLOR_END);
-                break;
-            case 10:
-                skins.add(EntitySapphire.PURPLE_SKIN_COLOR_START);
-                skins.add(EntitySapphire.PURPLE_SKIN_COLOR_MID);
-                skins.add(EntitySapphire.PURPLE_SKIN_COLOR_END);
-                break;
-            case 11:
-                skins.add(EntitySapphire.BLUE_SKIN_COLOR_START);
-                skins.add(EntitySapphire.BLUE_SKIN_COLOR_MID);
-                skins.add(EntitySapphire.BLUE_SKIN_COLOR_END);
-                break;
-            case 12:
-                skins.add(EntitySapphire.BROWN_SKIN_COLOR_START);
-                skins.add(EntitySapphire.BROWN_SKIN_COLOR_MID);
-                skins.add(EntitySapphire.BROWN_SKIN_COLOR_END);
-                break;
-            case 13:
-                skins.add(EntitySapphire.GREEN_SKIN_COLOR_START);
-                skins.add(EntitySapphire.GREEN_SKIN_COLOR_MID);
-                skins.add(EntitySapphire.GREEN_SKIN_COLOR_END);
-                break;
-            case 15:
-                skins.add(EntitySapphire.BLACK_SKIN_COLOR_START);
-                skins.add(EntitySapphire.BLACK_SKIN_COLOR_MID);
-                skins.add(EntitySapphire.BLACK_SKIN_COLOR_END);
-                break;
-            default:
-                skins.add(EntityRuby.SKIN_COLOR_START);
-                skins.add(EntityRuby.SKIN_COLOR_MID);
-                skins.add(EntityRuby.SKIN_COLOR_MID2);
-                skins.add(EntityRuby.SKIN_COLOR_MID3);
-                skins.add(EntityRuby.SKIN_COLOR_END);
-                break;
+        ResourceLocation paletteTexture = new ResourceLocation(Gempire.MODID + ":textures/entity/" + this.getGemName().toLowerCase() + "/skin_palette.png");
+        BufferedImage palette = null;
+        try{
+            palette = ImageIO.read(Minecraft.getInstance().getResourceManager().getResource(paletteTexture).getInputStream());
+            System.out.println("Palette Read!");
+            for (int x = 0; x < palette.getWidth(); x++) {
+                int color = palette.getRGB(x, this.getSkinColorVariant());
+                if((color>>24) == 0x00){
+                    continue;
+                }
+                skins.add(color);
+            }
+        }
+        catch (IOException e){
+            e.printStackTrace();
         }
         return Color.lerpHex(skins);
     }
@@ -239,88 +185,21 @@ public class EntitySapphire extends EntityGem {
     @Override
     public int generateHairColor() {
         ArrayList<Integer> skins = new ArrayList<>();
-        switch (this.getSkinColorVariant()){
-            case 0:
-                skins.add(EntitySapphire.WHITE_HAIR_COLOR_START);
-                skins.add(EntitySapphire.WHITE_HAIR_COLOR_END);
-                break;
-            case 1:
-                skins.add(EntitySapphire.ORANGE_HAIR_COLOR_START);
-                skins.add(EntitySapphire.ORANGE_HAIR_COLOR_MID);
-                skins.add(EntitySapphire.ORANGE_HAIR_COLOR_MID2);
-                skins.add(EntitySapphire.ORANGE_HAIR_COLOR_END);
-                break;
-            case 2:
-                skins.add(EntitySapphire.MAGENTA_HAIR_COLOR_START);
-                skins.add(EntitySapphire.MAGENTA_HAIR_COLOR_MID);
-                skins.add(EntitySapphire.MAGENTA_HAIR_COLOR_END);
-                break;
-            case 3:
-                skins.add(EntitySapphire.LIGHT_BLUE_HAIR_COLOR_START);
-                skins.add(EntitySapphire.LIGHT_BLUE_HAIR_COLOR_MID);
-                skins.add(EntitySapphire.LIGHT_BLUE_HAIR_COLOR_END);
-                break;
-            case 4:
-                skins.add(EntitySapphire.YELLOW_HAIR_COLOR_START);
-                skins.add(EntitySapphire.YELLOW_HAIR_COLOR_MID);
-                skins.add(EntitySapphire.YELLOW_HAIR_COLOR_END);
-                break;
-            case 5:
-                skins.add(EntitySapphire.LIME_HAIR_COLOR_START);
-                skins.add(EntitySapphire.LIME_HAIR_COLOR_MID);
-                skins.add(EntitySapphire.LIME_HAIR_COLOR_END);
-                break;
-            case 6:
-                skins.add(EntitySapphire.PINK_HAIR_COLOR_START);
-                skins.add(EntitySapphire.PINK_HAIR_COLOR_MID);
-                skins.add(EntitySapphire.PINK_HAIR_COLOR_END);
-                break;
-            case 7:
-                skins.add(EntitySapphire.GRAY_HAIR_COLOR_START);
-                skins.add(EntitySapphire.GRAY_HAIR_COLOR_MID);
-                skins.add(EntitySapphire.GRAY_HAIR_COLOR_END);
-                break;
-            case 8:
-                skins.add(EntitySapphire.LIGHT_GRAY_HAIR_COLOR_START);
-                skins.add(EntitySapphire.LIGHT_GRAY_HAIR_COLOR_MID);
-                skins.add(EntitySapphire.LIGHT_GRAY_HAIR_COLOR_END);
-                break;
-            case 9:
-                skins.add(EntitySapphire.CYAN_HAIR_COLOR_START);
-                skins.add(EntitySapphire.CYAN_HAIR_COLOR_MID);
-                skins.add(EntitySapphire.CYAN_HAIR_COLOR_END);
-                break;
-            case 10:
-                skins.add(EntitySapphire.PURPLE_HAIR_COLOR_START);
-                skins.add(EntitySapphire.PURPLE_HAIR_COLOR_MID);
-                skins.add(EntitySapphire.PURPLE_HAIR_COLOR_END);
-                break;
-            case 11:
-                skins.add(EntitySapphire.BLUE_HAIR_COLOR_START);
-                skins.add(EntitySapphire.BLUE_HAIR_COLOR_MID);
-                skins.add(EntitySapphire.BLUE_HAIR_COLOR_END);
-                break;
-            case 12:
-                skins.add(EntitySapphire.BROWN_HAIR_COLOR_START);
-                skins.add(EntitySapphire.BROWN_HAIR_COLOR_MID);
-                skins.add(EntitySapphire.BROWN_HAIR_COLOR_END);
-                break;
-            case 13:
-                skins.add(EntitySapphire.GREEN_HAIR_COLOR_START);
-                skins.add(EntitySapphire.GREEN_HAIR_COLOR_MID);
-                skins.add(EntitySapphire.GREEN_HAIR_COLOR_END);
-                break;
-            case 14:
-                skins.add(EntityRuby.HAIR_COLOR_START);
-                skins.add(EntityRuby.HAIR_COLOR_MID);
-                skins.add(EntityRuby.HAIR_COLOR_MID2);
-                skins.add(EntityRuby.HAIR_COLOR_END);
-                break;
-            case 15:
-                skins.add(EntitySapphire.BLACK_HAIR_COLOR_START);
-                skins.add(EntitySapphire.BLACK_HAIR_COLOR_MID);
-                skins.add(EntitySapphire.BLACK_HAIR_COLOR_END);
-                break;
+        ResourceLocation paletteTexture = new ResourceLocation(Gempire.MODID + ":textures/entity/" + this.getGemName().toLowerCase() + "/hair_palette.png");
+        BufferedImage palette = null;
+        try{
+            palette = ImageIO.read(Minecraft.getInstance().getResourceManager().getResource(paletteTexture).getInputStream());
+            System.out.println("Palette Read!");
+            for (int x = 0; x < palette.getWidth(); x++) {
+                int color = palette.getRGB(x, this.getSkinColorVariant());
+                if((color>>24) == 0x00){
+                    continue;
+                }
+                skins.add(color);
+            }
+        }
+        catch (IOException e){
+            e.printStackTrace();
         }
         return Color.lerpHex(skins);
     }
