@@ -327,7 +327,7 @@ public class EntitySapphire extends EntityGem {
 
     @Override
     public int generateHairVariant() {
-        return 0;
+        return this.rand.nextInt(5);
     }
 
     @Override
@@ -370,9 +370,12 @@ public class EntitySapphire extends EntityGem {
         }
     }
 
-    @Override
-    public int getOutfitVariant() {
-        return 0;
+    public int generateOutfitVariant() {
+        return this.rand.nextInt(6);
+    }
+
+    public int generateInsigniaVariant() {
+        return this.getOutfitVariant();
     }
 
     @Override
@@ -489,7 +492,7 @@ public class EntitySapphire extends EntityGem {
     }
 
     public boolean canChangeInsigniaColorByDefault(){
-        return true;
+        return false;
     }
 
     @Override

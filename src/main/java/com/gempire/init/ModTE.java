@@ -1,7 +1,9 @@
 package com.gempire.init;
 
 import com.gempire.Gempire;
+import com.gempire.tileentities.GemSeedTE;
 import net.minecraft.tileentity.TileEntityType;
+import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -16,4 +18,6 @@ public class ModTE {
                     MushBlocks.MYCELIUM_BRICK_BLOCK_1.get(),
                     MushBlocks.MYCELIUM_BRICK_BLOCK_2.get(),
                     MushBlocks.MYCELIUM_BRICK_BLOCK_3.get()).build(null));*/
+    public static final RegistryObject<TileEntityType<GemSeedTE>> GEM_SEED_TE = TILE_ENTITIES.register(
+            "gem_seed_te", () -> TileEntityType.Builder.create(GemSeedTE::new, ModBlocks.GEM_SEED_BLOCK.get()).build(null));
 }

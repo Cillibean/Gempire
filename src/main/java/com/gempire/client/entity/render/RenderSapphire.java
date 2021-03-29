@@ -25,7 +25,7 @@ public class RenderSapphire extends MobRenderer<EntitySapphire, ModelSapphire<En
 
     @Override
     public ResourceLocation getEntityTexture(EntitySapphire entity) {
-        return new ResourceLocation(Gempire.MODID+":textures/entity/sapphire/texture.png");
+        return new ResourceLocation(Gempire.MODID+":textures/entity/sapphire/blank.png");
     }
 
     @Override

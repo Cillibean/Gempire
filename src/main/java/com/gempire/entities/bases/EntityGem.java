@@ -40,7 +40,7 @@ import java.util.UUID;
 
 public abstract class EntityGem extends CreatureEntity {
     public static DataParameter<Optional<UUID>> OWNER_ID = EntityDataManager.<Optional<UUID>>createKey(EntityGem.class, DataSerializers.OPTIONAL_UNIQUE_ID);
-    public static final DataParameter<Boolean> OWNED = EntityDataManager.<Boolean>createKey(EntityGem.class, DataSerializers.BOOLEAN);
+    public static DataParameter<Boolean> OWNED = EntityDataManager.<Boolean>createKey(EntityGem.class, DataSerializers.BOOLEAN);
     public static final DataParameter<Boolean> PRIMARY = EntityDataManager.<Boolean>createKey(EntityGem.class, DataSerializers.BOOLEAN);
     public static final DataParameter<Boolean> DEFECTIVE = EntityDataManager.<Boolean>createKey(EntityGem.class, DataSerializers.BOOLEAN);
     public static final DataParameter<Boolean> EMOTIONAL = EntityDataManager.<Boolean>createKey(EntityGem.class, DataSerializers.BOOLEAN);
@@ -52,7 +52,9 @@ public abstract class EntityGem extends CreatureEntity {
     public static final DataParameter<Integer> GEM_PLACEMENT = EntityDataManager.<Integer>createKey(EntityGem.class, DataSerializers.VARINT);
     public static final DataParameter<Integer> GEM_COLOR = EntityDataManager.<Integer>createKey(EntityGem.class, DataSerializers.VARINT);
     public static final DataParameter<Integer> OUTFIT_COLOR = EntityDataManager.<Integer>createKey(EntityGem.class, DataSerializers.VARINT);
+    public static final DataParameter<Integer> OUTFIT_VARIANT = EntityDataManager.<Integer>createKey(EntityGem.class, DataSerializers.VARINT);
     public static final DataParameter<Integer> INSIGNIA_COLOR = EntityDataManager.<Integer>createKey(EntityGem.class, DataSerializers.VARINT);
+    public static final DataParameter<Integer> INSIGNIA_VARIANT = EntityDataManager.<Integer>createKey(EntityGem.class, DataSerializers.VARINT);
     public static final DataParameter<Integer> ABILITY_SLOTS = EntityDataManager.<Integer>createKey(EntityGem.class, DataSerializers.VARINT);
     public static final DataParameter<String> ABILITIES = EntityDataManager.<String>createKey(EntityGem.class, DataSerializers.STRING);
     public static ArrayList<Ability> ABILITY_POWERS = new ArrayList<>();
@@ -77,7 +79,9 @@ public abstract class EntityGem extends CreatureEntity {
         this.dataManager.register(EntityGem.GEM_PLACEMENT, 0);
         this.dataManager.register(EntityGem.GEM_COLOR, 0);
         this.dataManager.register(EntityGem.OUTFIT_COLOR, 0);
+        this.dataManager.register(EntityGem.OUTFIT_VARIANT, 0);
         this.dataManager.register(EntityGem.INSIGNIA_COLOR, 0);
+        this.dataManager.register(EntityGem.INSIGNIA_VARIANT, 0);
         this.dataManager.register(EntityGem.ABILITY_SLOTS, 1);
         this.dataManager.register(EntityGem.ABILITIES, "-1");
     }
@@ -94,7 +98,9 @@ public abstract class EntityGem extends CreatureEntity {
         this.setSkinColor(this.generateSkinColor());
         this.setHairColor(this.generateHairColor());
         this.setGemColor(this.generateGemColor());
+        this.setOutfitVariant(this.generateOutfitVariant());
         this.setOutfitColor(this.generateOutfitColor());
+        this.setInsigniaVariant(this.generateInsigniaVariant());
         this.setInsigniaColor(this.generateInsigniaColor());
         this.setAbilitySlots(this.generateAbilitySlots());
         this.setAbilites(this.generateAbilities());
@@ -119,7 +125,9 @@ public abstract class EntityGem extends CreatureEntity {
         compound.putInt("gemPlacement", this.getGemPlacement());
         compound.putInt("gemColor", this.getGemColor());
         compound.putInt("outfitColor", this.getOutfitColor());
+        compound.putInt("outfitVariant", this.getOutfitVariant());
         compound.putInt("insigniaColor", this.getInsigniaColor());
+        compound.putInt("insigniaVariant", this.getInsigniaVariant());
         compound.putInt("abilitySlots", this.getAbilitySlots());
         compound.putByte("emotionMeter", this.emotionMeter);
     }
@@ -140,7 +148,9 @@ public abstract class EntityGem extends CreatureEntity {
         this.setGemPlacement(compound.getInt("gemPlacement"));
         this.setGemColor(compound.getInt("gemColor"));
         this.setOutfitColor(compound.getInt("outfitColor"));
+        this.setOutfitVariant(compound.getInt("outfitVariant"));
         this.setInsigniaColor(compound.getInt("insigniaColor"));
+        this.setInsigniaVariant(compound.getInt("insigniaVariant"));
         this.setAbilitySlots(compound.getInt("abilitySlots"));
         this.emotionMeter = compound.getByte("emotionMeter");
         this.setMovementType(compound.getByte("movementType"));
@@ -154,8 +164,8 @@ public abstract class EntityGem extends CreatureEntity {
         }
         //This part of the code checks if the player has a blank hand
         if(hand == Hand.MAIN_HAND && player.getHeldItemMainhand() == ItemStack.EMPTY) {
-            //player.sendMessage(new StringTextComponent(this.getAbilites()), this.getUniqueID());
-            //player.sendMessage(new StringTextComponent(this.initalSkinVariant + ""), this.getUniqueID());
+            player.sendMessage(new StringTextComponent("Abilities: " + this.getAbilites()), this.getUniqueID());
+            player.sendMessage(new StringTextComponent("Skin Color Variant: " + this.initalSkinVariant), this.getUniqueID());
             //Test to see if player is the owner
             if (this.isOwner(player)) {
                 if (player.isSneaking()) {
@@ -422,7 +432,25 @@ public abstract class EntityGem extends CreatureEntity {
         return 0x555F65;
     }
 
-    public abstract int getOutfitVariant();
+    public abstract int generateOutfitVariant();
+
+    public void setOutfitVariant(int value){
+        this.dataManager.set(EntityGem.OUTFIT_VARIANT, value);
+    }
+
+    public int getOutfitVariant(){
+        return this.dataManager.get(EntityGem.OUTFIT_VARIANT);
+    }
+
+    public abstract int generateInsigniaVariant();
+
+    public void setInsigniaVariant(int value){
+        this.dataManager.set(EntityGem.INSIGNIA_VARIANT, value);
+    }
+
+    public int getInsigniaVariant(){
+        return this.dataManager.get(EntityGem.INSIGNIA_VARIANT);
+    }
 
     public int getInsigniaColor(){
         return this.dataManager.get(EntityGem.INSIGNIA_COLOR);

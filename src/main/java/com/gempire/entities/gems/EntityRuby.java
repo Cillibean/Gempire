@@ -53,7 +53,7 @@ public class EntityRuby extends EntityGem {
     @Override
     protected void registerGoals() {
         super.registerGoals();
-        this.goalSelector.addGoal(9, new SwimGoal(this));
+        this.goalSelector.addGoal(7, new SwimGoal(this));
         this.goalSelector.addGoal(6, new PanicGoal(this, 1.1D));
         this.goalSelector.addGoal(7, new LookAtGoal(this, PlayerEntity.class, 4.0F));
         this.goalSelector.addGoal(8, new LookRandomlyGoal(this));
@@ -162,5 +162,13 @@ public class EntityRuby extends EntityGem {
 
     public boolean hasSkinColorVariant(){
         return false;
+    }
+
+    public int generateOutfitVariant(){
+        return 0;
+    }
+
+    public int generateInsigniaVariant(){
+        return 0;
     }
 }

@@ -28,7 +28,7 @@ public class InsigniaLayer<E extends EntityGem, M extends ModelGem<E>> extends G
         float r = ((hair & 16711680) >> 16) / 255f;
         float g = ((hair & 65280) >> 8) / 255f;
         float b = ((hair & 255) >> 0) / 255f;
-        IVertexBuilder builder = bufferIn.getBuffer(RenderType.getEntityCutoutNoCull(new ResourceLocation(Gempire.MODID+":textures/entity/" + this.getName(gem).toLowerCase() + "/insignia.png")));
+        IVertexBuilder builder = bufferIn.getBuffer(RenderType.getEntityCutoutNoCull(new ResourceLocation(Gempire.MODID+":textures/entity/" + this.getName(gem).toLowerCase() + "/insignia_" + gem.getInsigniaVariant() + ".png")));
         this.getEntityModel().setRotationAngles(gem, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
         this.getEntityModel().render(matrixStackIn, builder, packedLightIn, OverlayTexture.NO_OVERLAY, r, g, b, 1.0F);
         /*if(gem instanceof EntityStarterGem){

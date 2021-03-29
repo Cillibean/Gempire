@@ -56,6 +56,13 @@ public class ModItems {
     );
     */
 
+    public static final RegistryObject<Item> GEM_SEED_BLOCK_ITEM = ITEMS.register("gem_seed_block", () ->
+            new BlockItem(
+                    ModBlocks.GEM_SEED_BLOCK.get(),
+                    new Item.Properties().group(ItemGroup.MISC)
+            )
+    );
+
     /*public static final RegistryObject<Item> TEST_FLUID_BUCKET = ITEMS.register("test_fluid_bucket", () ->
             new BucketItem(ModFluids.TEST_FLUID, new Item.Properties().group(ItemGroup.MISC)));*/
 

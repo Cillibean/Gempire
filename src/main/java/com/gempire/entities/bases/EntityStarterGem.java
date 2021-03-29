@@ -77,4 +77,11 @@ public abstract class EntityStarterGem extends EntityGem {
     public boolean hasSkinColorVariant(){
         return false;
     }
+
+    public int generateOutfitVariant(){
+        return 0;
+    }
+    public int generateInsigniaVariant(){
+        return 0;
+    }
 }

@@ -15,6 +15,7 @@ import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.*;
+import net.minecraft.world.IServerWorld;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.RegistryObject;
 import org.apache.commons.lang3.ArrayUtils;
@@ -72,6 +73,7 @@ public class ItemGem extends Item {
             String skinColorVariant = "";
             EntityGem gem = gemm.get().create(world);
             System.out.println(this.getRegistryName().toString());
+            //sapphire__x
             String namee = this.getRegistryName().toString().replaceAll("gempire", "").replaceAll("gem", "").replaceAll(":", "").replaceAll(" ", "");
 
             //This whole section here checks for variations in color so it can spawn the correct type of gem
@@ -108,7 +110,7 @@ public class ItemGem extends Item {
                     gem.setSkinVariantOnInitialSpawn = false;
                     gem.initalSkinVariant = Integer.valueOf(skinColorVariant);
                 }
-                gem.onInitialSpawn(world.getServer().func_241755_D_(), world.getDifficultyForLocation(player.getPosition()), SpawnReason.TRIGGERED, null, null);
+                gem.onInitialSpawn((IServerWorld) world, world.getDifficultyForLocation(player.getPosition()), SpawnReason.TRIGGERED, null, null);
                 gem.setOwned(true, PlayerEntity.getUUID(player.getGameProfile()));
             }
             gem.setPosition(pos.getX() + 0.5, pos.getY() + 1.0, pos.getZ() + 0.5);
