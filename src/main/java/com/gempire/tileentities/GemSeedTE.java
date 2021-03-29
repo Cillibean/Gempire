@@ -26,6 +26,7 @@ public class GemSeedTE extends TileEntity implements ITickableTileEntity {
     Random random;
     boolean spawned = false;
 
+    //haha
     public GemSeedTE() {
         super(ModTE.GEM_SEED_TE.get());
         random = new Random();
