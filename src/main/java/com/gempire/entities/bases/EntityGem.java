@@ -1,5 +1,6 @@
 package com.gempire.entities.bases;
 
+import com.gempire.Gempire;
 import com.gempire.entities.abilities.Ability;
 import com.gempire.entities.abilities.AbilityZilch;
 import com.gempire.entities.gems.starter.EntityPebble;
@@ -9,11 +10,13 @@ import com.gempire.items.ItemGem;
 import com.gempire.util.Abilities;
 import com.gempire.util.Color;
 import com.gempire.util.GemPlacements;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.DyeItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
@@ -25,6 +28,7 @@ import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.Hand;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.text.*;
 import net.minecraft.world.DifficultyInstance;
@@ -34,6 +38,9 @@ import net.minecraftforge.fml.RegistryObject;
 import org.apache.commons.lang3.ArrayUtils;
 
 import javax.annotation.Nullable;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.UUID;
@@ -51,9 +58,9 @@ public abstract class EntityGem extends CreatureEntity {
     public static final DataParameter<Integer> HAIR_VARIANT = EntityDataManager.<Integer>createKey(EntityGem.class, DataSerializers.VARINT);
     public static final DataParameter<Integer> GEM_PLACEMENT = EntityDataManager.<Integer>createKey(EntityGem.class, DataSerializers.VARINT);
     public static final DataParameter<Integer> GEM_COLOR = EntityDataManager.<Integer>createKey(EntityGem.class, DataSerializers.VARINT);
-    public static final DataParameter<Integer> OUTFIT_COLOR = EntityDataManager.<Integer>createKey(EntityGem.class, DataSerializers.VARINT);
+    public static DataParameter<Integer> OUTFIT_COLOR = EntityDataManager.<Integer>createKey(EntityGem.class, DataSerializers.VARINT);
     public static final DataParameter<Integer> OUTFIT_VARIANT = EntityDataManager.<Integer>createKey(EntityGem.class, DataSerializers.VARINT);
-    public static final DataParameter<Integer> INSIGNIA_COLOR = EntityDataManager.<Integer>createKey(EntityGem.class, DataSerializers.VARINT);
+    public static DataParameter<Integer> INSIGNIA_COLOR = EntityDataManager.<Integer>createKey(EntityGem.class, DataSerializers.VARINT);
     public static final DataParameter<Integer> INSIGNIA_VARIANT = EntityDataManager.<Integer>createKey(EntityGem.class, DataSerializers.VARINT);
     public static final DataParameter<Integer> ABILITY_SLOTS = EntityDataManager.<Integer>createKey(EntityGem.class, DataSerializers.VARINT);
     public static final DataParameter<String> ABILITIES = EntityDataManager.<String>createKey(EntityGem.class, DataSerializers.STRING);
@@ -117,10 +124,10 @@ public abstract class EntityGem extends CreatureEntity {
         compound.putBoolean("isOwned", this.getOwned());
         compound.putUniqueId("ownerID", this.getOwnerID());
         compound.putByte("movementType", this.getMovementType());
+        compound.putInt("skinColorVariant", this.getSkinColorVariant());
         compound.putInt("skinColor", this.getSkinColor());
         compound.putInt("hairColor", this.getHairColor());
         compound.putInt("skinVariant", this.getSkinVariant());
-        compound.putInt("skinColorVariant", this.getSkinColorVariant());
         compound.putInt("hairVariant", this.getHairVariant());
         compound.putInt("gemPlacement", this.getGemPlacement());
         compound.putInt("gemColor", this.getGemColor());
@@ -140,10 +147,10 @@ public abstract class EntityGem extends CreatureEntity {
         this.setIsOwned(compound.getBoolean("isOwned"));
         if(compound.contains("ownerID")) this.setOwnerID(compound.getUniqueId("ownerID"));
         this.setMovementType(compound.getByte("movementType"));
+        this.setSkinColorVariant(compound.getInt("skinColorVariant"));
         this.setSkinColor(compound.getInt("skinColor"));
         this.setHairColor(compound.getInt("hairColor"));
         this.setSkinVariant(compound.getInt("skinVariant"));
-        this.setSkinColorVariant(compound.getInt("skinColorVariant"));
         this.setHairVariant(compound.getInt("hairVariant"));
         this.setGemPlacement(compound.getInt("gemPlacement"));
         this.setGemColor(compound.getInt("gemColor"));
@@ -163,21 +170,34 @@ public abstract class EntityGem extends CreatureEntity {
             return super.applyPlayerInteraction(player, vec, hand);
         }
         //This part of the code checks if the player has a blank hand
-        if(hand == Hand.MAIN_HAND && player.getHeldItemMainhand() == ItemStack.EMPTY) {
-            player.sendMessage(new StringTextComponent("Abilities: " + this.getAbilites()), this.getUniqueID());
-            player.sendMessage(new StringTextComponent("Skin Color Variant: " + this.initalSkinVariant), this.getUniqueID());
-            //Test to see if player is the owner
-            if (this.isOwner(player)) {
-                if (player.isSneaking()) {
-                    this.cycleMovementAI(player);
+        if(hand == Hand.MAIN_HAND) {
+            if(player.getHeldItemMainhand() == ItemStack.EMPTY) {
+                if (this.isOwner(player)) {
+                    if (player.isSneaking()) {
+                        this.cycleMovementAI(player);
+                    }
                 }
-            } else {
-                //Test to see if the gem has an owner
-                if(!this.getOwned()) {
-                    this.setOwned(true, PlayerEntity.getUUID(player.getGameProfile()));
-                    this.setMovementType((byte) 2);
-                    player.sendMessage(new TranslationTextComponent("messages.gempire.entity.claimed"), this.getUniqueID());
-                    return super.applyPlayerInteraction(player, vec, hand);
+                else {
+                    //Test to see if the gem has an owner
+                    if (!this.getOwned()) {
+                        this.setOwned(true, PlayerEntity.getUUID(player.getGameProfile()));
+                        this.setMovementType((byte) 2);
+                        player.sendMessage(new TranslationTextComponent("messages.gempire.entity.claimed"), this.getUniqueID());
+                        return super.applyPlayerInteraction(player, vec, hand);
+                    }
+                }
+            }
+            else {
+                if (player.getHeldItemMainhand().getItem() instanceof DyeItem) {
+                    DyeItem dye = (DyeItem) player.getHeldItemMainhand().getItem();
+                    System.out.println("Yeah it's dye");
+                    if (player.isSneaking()) {
+                        this.setInsigniaColor(dye.getDyeColor().getId());
+                        System.out.println(dye.getDyeColor().getId());
+                    } else {
+                        this.setOutfitColor(dye.getDyeColor().getId());
+                        System.out.println(dye.getDyeColor().getId());
+                    }
                 }
             }
         }
@@ -360,7 +380,27 @@ public abstract class EntityGem extends CreatureEntity {
         this.dataManager.set(EntityGem.SKIN_COLOR, value);
     }
 
-    public abstract int generateSkinColor();
+    public int generateSkinColor(){
+        ArrayList<Integer> skins = new ArrayList<>();
+        ResourceLocation paletteTexture = new ResourceLocation(Gempire.MODID + ":textures/entity/" + this.getGemName().toLowerCase() + "/skin_palette.png");
+        BufferedImage palette = null;
+        try{
+            palette = ImageIO.read(Minecraft.getInstance().getResourceManager().getResource(paletteTexture).getInputStream());
+            System.out.println("Palette Read!");
+            for (int x = 0; x < palette.getWidth(); x++) {
+                int color = palette.getRGB(x, this.getSkinColorVariant());
+                if((color>>24) == 0x00){
+                    continue;
+                }
+                skins.add(color);
+            }
+        }
+        catch (IOException e){
+            e.printStackTrace();
+            skins.add(0x00000);
+        }
+        return Color.lerpHex(skins);
+    }
 
     public abstract int generateSkinVariant();
 
@@ -398,7 +438,27 @@ public abstract class EntityGem extends CreatureEntity {
         this.dataManager.set(EntityGem.HAIR_COLOR, value);
     }
 
-    public abstract int generateHairColor();
+    public int generateHairColor(){
+        ArrayList<Integer> skins = new ArrayList<>();
+        ResourceLocation paletteTexture = new ResourceLocation(Gempire.MODID + ":textures/entity/" + this.getGemName().toLowerCase() + "/hair_palette.png");
+        BufferedImage palette = null;
+        try{
+            palette = ImageIO.read(Minecraft.getInstance().getResourceManager().getResource(paletteTexture).getInputStream());
+            System.out.println("Palette Read!");
+            for (int x = 0; x < palette.getWidth(); x++) {
+                int color = palette.getRGB(x, this.getSkinColorVariant());
+                if((color>>24) == 0x00){
+                    continue;
+                }
+                skins.add(color);
+            }
+        }
+        catch (IOException e){
+            e.printStackTrace();
+            skins.add(0x00000);
+        }
+        return Color.lerpHex(skins);
+    }
 
     public int getHairVariant(){
         return this.dataManager.get(EntityGem.HAIR_VARIANT);
@@ -418,7 +478,20 @@ public abstract class EntityGem extends CreatureEntity {
         this.dataManager.set(EntityGem.GEM_COLOR, value);
     }
 
-    public abstract int generateGemColor();
+    public int generateGemColor(){
+        ResourceLocation paletteTexture = new ResourceLocation(Gempire.MODID + ":textures/entity/" + this.getGemName().toLowerCase() + "/gem_palette.png");
+        BufferedImage palette = null;
+        int color = 0;
+        try{
+            palette = ImageIO.read(Minecraft.getInstance().getResourceManager().getResource(paletteTexture).getInputStream());
+            color = palette.getRGB(0, this.getSkinColorVariant());
+        }
+        catch (IOException e){
+            e.printStackTrace();
+            color = 0x00000;
+        }
+        return color;
+    }
 
     public int getOutfitColor(){
         return this.dataManager.get(EntityGem.OUTFIT_COLOR);
@@ -429,7 +502,7 @@ public abstract class EntityGem extends CreatureEntity {
     }
 
     public int generateOutfitColor(){
-        return 0x555F65;
+        return this.getSkinColorVariant();
     }
 
     public abstract int generateOutfitVariant();
@@ -460,7 +533,9 @@ public abstract class EntityGem extends CreatureEntity {
         this.dataManager.set(EntityGem.INSIGNIA_COLOR, value);
     }
 
-    public abstract int generateInsigniaColor();
+    public int generateInsigniaColor(){
+        return this.getSkinColorVariant();
+    }
 
     public int getAbilitySlots(){
         return this.dataManager.get(EntityGem.ABILITY_SLOTS);

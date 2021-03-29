@@ -16,6 +16,7 @@ import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.Explosion;
 import net.minecraftforge.fml.RegistryObject;
 
 import java.util.Random;

@@ -56,7 +56,7 @@ public class Color {
             case 7:
                 return "gray";
             case 8:
-                return "light_grey";
+                return "light_gray";
             case 9:
                 return "cyan";
             case 10:

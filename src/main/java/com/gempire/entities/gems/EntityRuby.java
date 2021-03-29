@@ -66,17 +66,6 @@ public class EntityRuby extends EntityGem {
     }
 
     @Override
-    public int generateSkinColor(){
-        ArrayList<Integer> skins = new ArrayList<>();
-        skins.add(EntityRuby.SKIN_COLOR_START);
-        skins.add(EntityRuby.SKIN_COLOR_MID);
-        skins.add(EntityRuby.SKIN_COLOR_MID2);
-        skins.add(EntityRuby.SKIN_COLOR_MID3);
-        skins.add(EntityRuby.SKIN_COLOR_END);
-        return Color.lerpHex(skins);
-    }
-
-    @Override
     public int generateSkinVariant() {
         return 0;
     }
@@ -92,23 +81,8 @@ public class EntityRuby extends EntityGem {
     }
 
     @Override
-    public int generateHairColor() {
-        ArrayList<Integer> skins = new ArrayList<>();
-        skins.add(EntityRuby.HAIR_COLOR_START);
-        skins.add(EntityRuby.HAIR_COLOR_MID);
-        skins.add(EntityRuby.HAIR_COLOR_MID2);
-        skins.add(EntityRuby.HAIR_COLOR_END);
-        return Color.lerpHex(skins);
-    }
-
-    @Override
     public int generateHairVariant() {
         return this.rand.nextInt(3);
-    }
-
-    @Override
-    public int generateGemColor() {
-        return 0xAA0019;
     }
 
     @Override
@@ -118,7 +92,12 @@ public class EntityRuby extends EntityGem {
 
     @Override
     public int generateInsigniaColor() {
-        return 0xFFCE2E;
+        return 4;
+    }
+
+    @Override
+    public int generateOutfitColor() {
+        return 8;
     }
 
     @Override
@@ -148,7 +127,7 @@ public class EntityRuby extends EntityGem {
     }
 
     public boolean canChangeUniformColorByDefault() {
-        return false;
+        return true;
     }
 
     public boolean canChangeInsigniaColorByDefault(){
