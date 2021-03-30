@@ -33,8 +33,8 @@ public class GemSeedBlock extends Block {
     @Override
     public void onExplosionDestroy(World worldIn, BlockPos pos, Explosion explosionIn) {
         super.onExplosionDestroy(worldIn, pos, explosionIn);
-        GemFormation form = new GemFormation();
-        form.SpawnGem(worldIn, pos);
+        GemFormation form = new GemFormation(worldIn, pos, new BlockPos(5, 5, 5));
+        form.SpawnGem();
         worldIn.destroyBlock(pos, false);
     }
 

@@ -84,4 +84,7 @@ public abstract class EntityStarterGem extends EntityGem {
     public int generateInsigniaVariant(){
         return 0;
     }
+    public float formingTemperature(){
+        return 1;
+    }
 }

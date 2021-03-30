@@ -28,16 +28,6 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 
 public class EntityRuby extends EntityGem {
-    public static final int SKIN_COLOR_START = 0xF4705C;
-    public static final int SKIN_COLOR_MID = 0xED454A;
-    public static final int SKIN_COLOR_MID2 = 0xD9234C;
-    public static final int SKIN_COLOR_MID3 = 0x9E0333;
-    public static final int SKIN_COLOR_END = 0x4F1434;
-
-    public static final int HAIR_COLOR_START = 0x140001;
-    public static final int HAIR_COLOR_MID = 0x210004;
-    public static final int HAIR_COLOR_MID2 = 0x480A1B;
-    public static final int HAIR_COLOR_END = 0x600C27;
 
     public EntityRuby(EntityType<? extends CreatureEntity> type, World worldIn) {
         super(type, worldIn);

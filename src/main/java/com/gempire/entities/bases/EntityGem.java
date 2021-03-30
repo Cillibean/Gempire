@@ -3,16 +3,16 @@ package com.gempire.entities.bases;
 import com.gempire.Gempire;
 import com.gempire.entities.abilities.Ability;
 import com.gempire.entities.abilities.AbilityZilch;
-import com.gempire.entities.gems.starter.EntityPebble;
-import com.gempire.init.ModEntities;
 import com.gempire.init.ModItems;
 import com.gempire.items.ItemGem;
+import com.gempire.systems.injection.Crux;
 import com.gempire.util.Abilities;
 import com.gempire.util.Color;
+import com.gempire.util.CruxType;
 import com.gempire.util.GemPlacements;
+import net.minecraft.block.Blocks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.*;
-import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -65,6 +65,7 @@ public abstract class EntityGem extends CreatureEntity {
     public static final DataParameter<Integer> ABILITY_SLOTS = EntityDataManager.<Integer>createKey(EntityGem.class, DataSerializers.VARINT);
     public static final DataParameter<String> ABILITIES = EntityDataManager.<String>createKey(EntityGem.class, DataSerializers.STRING);
     public static ArrayList<Ability> ABILITY_POWERS = new ArrayList<>();
+    public static ArrayList<Crux> CRUXES = new ArrayList<>();
 
     public byte movementType = 1;
     public byte emotionMeter = 0;
