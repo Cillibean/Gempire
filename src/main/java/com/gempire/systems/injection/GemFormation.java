@@ -24,7 +24,7 @@ public class GemFormation {
     public void SpawnGem(World world, BlockPos pos){
         RegistryObject<EntityType<EntityPebble>> gemm = ModEntities.PEBBLE;
         EntityGem gem = gemm.get().create(world);
-        String gemtoform = this.possibleGems[world.rand.nextInt(this.possibleGems.length)];
+        String gemtoform = this.gemToForm(world, pos);
         int variant = 0;
         if(gemtoform == "sapphire"){
             variant = world.rand.nextInt(16);
@@ -54,5 +54,23 @@ public class GemFormation {
         gem.setPosition(pos.getX(), pos.getY(), pos.getZ());
         gem.setHealth(gem.getMaxHealth());
         world.addEntity(gem);
+    }
+
+    public String gemToForm(World world, BlockPos pos){
+        float temp = world.getBiome(pos).getTemperature(pos);
+        String gem;
+        if(temp >= 1.5f){
+            gem = "ruby";
+        }
+        else if(temp <= .5f){
+            gem = "sapphire";
+        }
+        else{
+            gem = this.possibleGems[world.rand.nextInt(this.possibleGems.length)];
+            while(gem == "ruby" || gem == "sapphire"){
+                gem = this.possibleGems[world.rand.nextInt(this.possibleGems.length)];
+            }
+        }
+        return gem;
     }
 }
