@@ -3,9 +3,12 @@ package com.gempire.entities.gems.starter;
 import com.gempire.entities.ai.EntityAIFollowOwner;
 import com.gempire.entities.ai.EntityAIWander;
 import com.gempire.entities.bases.EntityStarterGem;
+import com.gempire.systems.injection.Crux;
 import com.gempire.util.Abilities;
 import com.gempire.util.Color;
+import com.gempire.util.CruxType;
 import com.gempire.util.GemPlacements;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
@@ -23,6 +26,7 @@ import net.minecraft.world.World;
 import java.util.ArrayList;
 
 public class EntityPebble extends EntityStarterGem {
+    public static ArrayList<Crux> PEBBLE_CRUXES = new ArrayList<>();
     public static final int SKIN_COLOR_START = 0x808080;
     public static final int SKIN_COLOR_END = 0x575757;
 
@@ -82,5 +86,16 @@ public class EntityPebble extends EntityStarterGem {
     @Override
     public Abilities[] possibleAbilities() {
         return new Abilities[0];
+    }
+
+    public static ArrayList<Crux> generateCruxes() {
+        ArrayList<Crux> gemCruxes = new ArrayList<>();
+        float gemTemperature = 1.5f;
+        gemCruxes.add(new Crux(Blocks.STONE.getDefaultState(), 2, CruxType.INORGANIC));
+        return gemCruxes;
+    }
+
+    public static void setCruxes(){
+        EntityPebble.PEBBLE_CRUXES = EntityPebble.generateCruxes();
     }
 }

@@ -9,6 +9,7 @@ import com.gempire.entities.gems.starter.EntityMica;
 import com.gempire.entities.gems.starter.EntityPebble;
 import com.gempire.entities.gems.starter.EntityShale;
 import com.gempire.systems.injection.Crux;
+import com.gempire.systems.injection.GemFormation;
 import com.gempire.util.CruxType;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -58,28 +59,18 @@ public class ModEntities {
                     .build(new ResourceLocation(Gempire.MODID, "sapphire").toString()));
 
     public static void registerCruxes(){
-        ArrayList<Crux> defaultCruxes = new ArrayList<>();
-        defaultCruxes.add(new Crux(Blocks.STONE, 8, CruxType.MINERAL));
-        ArrayList<Crux> rubyCruxes = new ArrayList<>();
-        float rubyTemperature = 1.5f;
-        rubyCruxes.add(new Crux(Blocks.MAGMA_BLOCK, 5, CruxType.INORGANIC, rubyTemperature));
-        rubyCruxes.add(new Crux(Blocks.IRON_ORE, 3, CruxType.MINERAL));
-        rubyCruxes.add(new Crux(Blocks.NETHERRACK, 1, CruxType.INORGANIC, rubyTemperature));
-        rubyCruxes.add(new Crux(Blocks.NETHERITE_BLOCK, 10, CruxType.INORGANIC, rubyTemperature));
-        rubyCruxes.add(new Crux(Blocks.NETHER_GOLD_ORE, 4, CruxType.MINERAL, rubyTemperature));
-        rubyCruxes.add(new Crux(Blocks.ANCIENT_DEBRIS, 7, CruxType.MINERAL, rubyTemperature));
-        EntityRuby.CRUXES.addAll(defaultCruxes);
-        EntityRuby.CRUXES.addAll(rubyCruxes);
-        ModEntities.CRUXTOGEM.put("ruby", EntityRuby.CRUXES);
-        ArrayList<Crux> sapphireCruxes = new ArrayList<>();
-        float sapphireTemperature = .5f;
-        sapphireCruxes.add(new Crux(Blocks.ICE, 5, CruxType.INORGANIC, sapphireTemperature));
-        sapphireCruxes.add(new Crux(Blocks.PACKED_ICE, 5, CruxType.INORGANIC, sapphireTemperature));
-        sapphireCruxes.add(new Crux(Blocks.SNOW_BLOCK, 5, CruxType.INORGANIC, sapphireTemperature));
-        sapphireCruxes.add(new Crux(Blocks.IRON_ORE, 3, CruxType.MINERAL, sapphireTemperature));
-        sapphireCruxes.add(new Crux(Blocks.DIAMOND_BLOCK, 10, CruxType.INORGANIC, sapphireTemperature));
-        EntitySapphire.CRUXES.addAll(defaultCruxes);
-        EntitySapphire.CRUXES.addAll(sapphireCruxes);
-        ModEntities.CRUXTOGEM.put("sapphire", EntitySapphire.CRUXES);
+        EntityRuby.setCruxes();
+        EntitySapphire.setCruxes();
+        EntityPebble.setCruxes();
+        EntityMica.setCruxes();
+        EntityShale.setCruxes();
+        ModEntities.CRUXTOGEM.put("ruby", EntityRuby.RUBY_CRUXES);
+        ModEntities.CRUXTOGEM.put("sapphire", EntitySapphire.SAPPHIRE_CRUXES);
+        ModEntities.CRUXTOGEM.put("pebble", EntityPebble.PEBBLE_CRUXES);
+        ModEntities.CRUXTOGEM.put("mica", EntityMica.MICA_CRUXES);
+        ModEntities.CRUXTOGEM.put("shale", EntityShale.SHALE_CRUXES);
+        for(String name : GemFormation.POSSIBLE_GEMS){
+            System.out.println("GEM DEBUG - Number of cruxes " + name + " has: " + ModEntities.CRUXTOGEM.get(name).size());
+        }
     }
 }

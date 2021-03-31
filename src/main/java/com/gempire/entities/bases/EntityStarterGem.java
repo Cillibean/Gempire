@@ -1,6 +1,9 @@
 package com.gempire.entities.bases;
 
+import com.gempire.systems.injection.Crux;
 import com.gempire.util.Abilities;
+import com.gempire.util.CruxType;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
@@ -9,6 +12,7 @@ import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 
 public abstract class EntityStarterGem extends EntityGem {
 

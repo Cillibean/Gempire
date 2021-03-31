@@ -7,6 +7,8 @@ import com.gempire.entities.gems.starter.EntityPebble;
 import com.gempire.init.ModEntities;
 import net.minecraft.block.AirBlock;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.nbt.CompoundNBT;
@@ -15,11 +17,13 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IServerWorld;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.RegistryObject;
+import org.objectweb.asm.tree.ModuleExportNode;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
+import java.util.zip.CRC32;
 
 public class GemFormation {
     public World world;
@@ -70,8 +74,81 @@ public class GemFormation {
         this.world.addEntity(gem);
     }
 
+    public static ArrayList<Block> getBlocksInVolume(World domhain, BlockPos position, BlockPos volume){
+        ArrayList<Block> blocksInVolume = new ArrayList<>();
+        for(int z = -1; z < 2; z++){
+            for(int y = -1; y < 2; y++){
+                for(int x = -1; x < 2; x++){
+                    Block block = domhain.getBlockState(position.add(new BlockPos(x, y, z))).getBlock();
+                    if(block.getBlock() instanceof AirBlock){
+                        continue;
+                    }
+                    else{
+                        blocksInVolume.add(block);
+                    }
+                }
+            }
+        }
+        return blocksInVolume;
+    }
+
     public String EvaluateCruxes(){
-        float biomeTemperature = this.world.getBiome(this.pos).getTemperature(this.pos);
+        //INPUT: List of gems and their cruxes as well as crux temperatures and depth preferences, list of blocks to check
+        HashMap<String, ArrayList<Crux>> GEM_CRUXES = ModEntities.CRUXTOGEM;
+        ArrayList<Block> BLOCKS_TO_CHECK = GemFormation.getBlocksInVolume(this.world, this.pos, this.volumeToCheck);
+        String[] GEMS = GemFormation.POSSIBLE_GEMS;
+        float BLOCK_TEMPERATURE = this.world.getBiome(this.pos).getTemperature(this.pos);
+
+        //Create an object to store the gems and their weights once the cruxes have been evaluated
+        HashMap<String, Float> WEIGHTS_OF_GEMS = new HashMap<>();
+
+        //Create an object to store the total weight
+        float totalWeight = 0;
+
+        //Loop through every gem
+        for(String gem : GEMS){
+            float gemWeight = 0;
+            //GEM_CRUXES.get(gem) is an ArrayList of Cruxes
+            if(GEM_CRUXES.get(gem) != null) for (Crux crux : GEM_CRUXES.get(gem)){
+                //Do some math to multiply the gem weight by the inverse of the difference in biome temperature to preferred temperature
+                float temperatureDifference = crux.temperature - BLOCK_TEMPERATURE == 0 ? 1 : Math.abs(crux.temperature - BLOCK_TEMPERATURE) * 10;
+                float temperatureWeight = temperatureDifference <= 1 ? 1/temperatureDifference : 0;
+                for(Block block : BLOCKS_TO_CHECK){
+                    //Then for every crux, calculate the total weight of crux that matches every block in the volume for every gem
+                    //Example: if there are three stone in the volume, the total weight will be 3 stone times however many gems there are that have stone as a crux, and so forth
+                    if(block != crux.block) {
+                        System.out.println("Block is NOT a crux for " + gem);
+                        continue;
+                    }
+                    else{
+                        totalWeight += crux.weight;
+                        gemWeight += crux.weight;
+                    }
+                }
+            }
+            //Once the total weight has been obtained, store the individual weights of every gem in a hashmap.
+            WEIGHTS_OF_GEMS.put(gem, gemWeight);
+            //DEBUG FEATURES
+            System.out.println(gem + " weight: " + gemWeight);
+        }
+        //DEBUG FEATURES
+        System.out.println("Total Weight: " + totalWeight);
+        //Finally, do a weighted chance selection using the total weight and the individual weights.
+        String returnGem = "";
+        for(String gem : GemFormation.POSSIBLE_GEMS){
+            double r = Math.random() * totalWeight;
+            r -= WEIGHTS_OF_GEMS.get(gem);
+            returnGem = gem;
+            //DEBUG FEATURES
+            System.out.println("R for " + gem + " equals: " + r);
+            if(r<=0) break;
+        }
+        //OUTPUT: A gem
+        return returnGem;
+
+
+
+        /*float biomeTemperature = this.world.getBiome(this.pos).getTemperature(this.pos);
         ArrayList<Block> blocksInVolume = new ArrayList<>();
         for(int z = 0; z < this.volumeToCheck.getZ(); z++){
             for(int y = 0; y < this.volumeToCheck.getY(); y++){
@@ -113,6 +190,6 @@ public class GemFormation {
             returnGem = gem;
             if(r<=0) break;
         }
-        return returnGem;
+        return returnGem;*/
     }
 }

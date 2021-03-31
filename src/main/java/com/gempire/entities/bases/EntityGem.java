@@ -65,7 +65,6 @@ public abstract class EntityGem extends CreatureEntity {
     public static final DataParameter<Integer> ABILITY_SLOTS = EntityDataManager.<Integer>createKey(EntityGem.class, DataSerializers.VARINT);
     public static final DataParameter<String> ABILITIES = EntityDataManager.<String>createKey(EntityGem.class, DataSerializers.STRING);
     public static ArrayList<Ability> ABILITY_POWERS = new ArrayList<>();
-    public static ArrayList<Crux> CRUXES = new ArrayList<>();
 
     public byte movementType = 1;
     public byte emotionMeter = 0;

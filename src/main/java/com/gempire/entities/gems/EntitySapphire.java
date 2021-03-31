@@ -4,9 +4,12 @@ import com.gempire.Gempire;
 import com.gempire.entities.ai.EntityAIFollowOwner;
 import com.gempire.entities.ai.EntityAIWander;
 import com.gempire.entities.bases.EntityGem;
+import com.gempire.systems.injection.Crux;
 import com.gempire.util.Abilities;
 import com.gempire.util.Color;
+import com.gempire.util.CruxType;
 import com.gempire.util.GemPlacements;
+import net.minecraft.block.Blocks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.client.renderer.texture.Texture;
@@ -32,6 +35,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class EntitySapphire extends EntityGem {
+    public static ArrayList<Crux> SAPPHIRE_CRUXES = new ArrayList<>();
 
     public EntitySapphire(EntityType<? extends CreatureEntity> type, World worldIn) {
         super(type, worldIn);
@@ -193,5 +197,21 @@ public class EntitySapphire extends EntityGem {
 
     public boolean hasSkinColorVariant(){
         return true;
+    }
+
+    public static ArrayList<Crux> generateCruxes() {
+        ArrayList<Crux> gemCruxes = new ArrayList<>();
+        float gemTemperature = .5f;
+        gemCruxes.add(new Crux(Blocks.STONE.getDefaultState(), 2, CruxType.INORGANIC));
+        gemCruxes.add(new Crux(Blocks.ICE.getDefaultState(), 5, CruxType.INORGANIC, gemTemperature));
+        gemCruxes.add(new Crux(Blocks.PACKED_ICE.getDefaultState(), 5, CruxType.INORGANIC, gemTemperature));
+        gemCruxes.add(new Crux(Blocks.SNOW_BLOCK.getDefaultState(), 5, CruxType.INORGANIC, gemTemperature));
+        gemCruxes.add(new Crux(Blocks.IRON_ORE.getDefaultState(), 3, CruxType.MINERAL, gemTemperature));
+        gemCruxes.add(new Crux(Blocks.DIAMOND_BLOCK.getDefaultState(), 10, CruxType.INORGANIC, gemTemperature));
+        return gemCruxes;
+    }
+
+    public static void setCruxes(){
+        EntitySapphire.SAPPHIRE_CRUXES = EntitySapphire.generateCruxes();
     }
 }

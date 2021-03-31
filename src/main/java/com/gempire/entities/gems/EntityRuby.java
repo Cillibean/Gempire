@@ -4,9 +4,12 @@ import com.gempire.entities.ai.EntityAIFollowOwner;
 import com.gempire.entities.ai.EntityAIWander;
 import com.gempire.entities.bases.EntityGem;
 import com.gempire.entities.gems.starter.EntityMica;
+import com.gempire.systems.injection.Crux;
 import com.gempire.util.Abilities;
 import com.gempire.util.Color;
+import com.gempire.util.CruxType;
 import com.gempire.util.GemPlacements;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
@@ -28,6 +31,7 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 
 public class EntityRuby extends EntityGem {
+    public static ArrayList<Crux> RUBY_CRUXES = new ArrayList<>();
 
     public EntityRuby(EntityType<? extends CreatureEntity> type, World worldIn) {
         super(type, worldIn);
@@ -139,5 +143,22 @@ public class EntityRuby extends EntityGem {
 
     public int generateInsigniaVariant(){
         return 0;
+    }
+
+    public static ArrayList<Crux> generateCruxes() {
+        ArrayList<Crux> gemCruxes = new ArrayList<>();
+        float gemTemperature = 1.5f;
+        gemCruxes.add(new Crux(Blocks.STONE.getDefaultState(), 2, CruxType.INORGANIC));
+        gemCruxes.add(new Crux(Blocks.MAGMA_BLOCK.getDefaultState(), 5, CruxType.INORGANIC, gemTemperature));
+        gemCruxes.add(new Crux(Blocks.IRON_ORE.getDefaultState(), 3, CruxType.MINERAL));
+        gemCruxes.add(new Crux(Blocks.NETHERRACK.getDefaultState(), 1, CruxType.INORGANIC, gemTemperature));
+        gemCruxes.add(new Crux(Blocks.NETHERITE_BLOCK.getDefaultState(), 10, CruxType.INORGANIC, gemTemperature));
+        gemCruxes.add(new Crux(Blocks.NETHER_GOLD_ORE.getDefaultState(), 4, CruxType.MINERAL, gemTemperature));
+        gemCruxes.add(new Crux(Blocks.ANCIENT_DEBRIS.getDefaultState(), 7, CruxType.MINERAL, gemTemperature));
+        return gemCruxes;
+    }
+
+    public static void setCruxes(){
+        EntityRuby.RUBY_CRUXES = EntityRuby.generateCruxes();
     }
 }
