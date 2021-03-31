@@ -111,18 +111,16 @@ public class GemFormation {
             //GEM_CRUXES.get(gem) is an ArrayList of Cruxes
             if(GEM_CRUXES.get(gem) != null) for (Crux crux : GEM_CRUXES.get(gem)){
                 //Do some math to multiply the gem weight by the inverse of the difference in biome temperature to preferred temperature
-                float temperatureDifference = crux.temperature - BLOCK_TEMPERATURE == 0 ? 1 : Math.abs(crux.temperature - BLOCK_TEMPERATURE) * 10;
-                float temperatureWeight = temperatureDifference <= 1 ? 1/temperatureDifference : 0;
+                float temperatureDifference = crux.temperature - BLOCK_TEMPERATURE == 0 ? 1 : Math.abs(crux.temperature - BLOCK_TEMPERATURE);
                 for(Block block : BLOCKS_TO_CHECK){
                     //Then for every crux, calculate the total weight of crux that matches every block in the volume for every gem
                     //Example: if there are three stone in the volume, the total weight will be 3 stone times however many gems there are that have stone as a crux, and so forth
                     if(block != crux.block) {
-                        System.out.println("Block is NOT a crux for " + gem);
                         continue;
                     }
                     else{
                         totalWeight += crux.weight;
-                        gemWeight += crux.weight;
+                        gemWeight += crux.weight * (1 - temperatureDifference);
                     }
                 }
             }
@@ -135,12 +133,25 @@ public class GemFormation {
         System.out.println("Total Weight: " + totalWeight);
         //Finally, do a weighted chance selection using the total weight and the individual weights.
         String returnGem = "";
+        double lowestR = 100000000;
+        String lowestRGem = "";
         for(String gem : GemFormation.POSSIBLE_GEMS){
             double r = Math.random() * totalWeight;
             r -= WEIGHTS_OF_GEMS.get(gem);
+            if(WEIGHTS_OF_GEMS.get(gem) < 12){
+                r = 1000000;
+            }
+            if(r < lowestR){
+                lowestR = r;
+                lowestRGem = gem;
+            }
             returnGem = gem;
             //DEBUG FEATURES
             System.out.println("R for " + gem + " equals: " + r);
+            if(r > 0 && gem == GemFormation.POSSIBLE_GEMS[GemFormation.POSSIBLE_GEMS.length - 1]){
+                returnGem = lowestRGem;
+                break;
+            }
             if(r<=0) break;
         }
         //OUTPUT: A gem

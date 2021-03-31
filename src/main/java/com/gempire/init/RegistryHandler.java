@@ -1,6 +1,7 @@
 package com.gempire.init;
 
 import com.gempire.Gempire;
+import com.gempire.fluids.NewFluidTest;
 import com.gempire.items.ItemGem;
 import com.gempire.util.GemPlacements;
 import net.minecraft.item.ItemGroup;
@@ -16,7 +17,8 @@ public class RegistryHandler {
         //ModFluids.FLUIDS.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModTE.TILE_ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModEntities.ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
-        System.out.println(ModEntities.ENTITIES + "uwurawr");
+        //TODO: TEST
+        NewFluidTest fluidtest = new NewFluidTest();
     }
 
 }

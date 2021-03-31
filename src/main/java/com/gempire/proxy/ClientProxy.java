@@ -19,7 +19,7 @@ public class ClientProxy {
 
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent event) {
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.TEST.get(), RenderTestEntity::new);
+        //RenderingRegistry.registerEntityRenderingHandler(ModEntities.TEST.get(), RenderTestEntity::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.PEBBLE.get(), RenderPebble::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.MICA.get(), RenderMica::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.SHALE.get(), RenderShale::new);
