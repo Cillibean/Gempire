@@ -18,7 +18,7 @@ public class RegistryHandler {
         ModTE.TILE_ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModEntities.ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
         //TODO: TEST
-        NewFluidTest fluidtest = new NewFluidTest();
+        //NewFluidTest fluidtest = new NewFluidTest();
     }
 
 }
