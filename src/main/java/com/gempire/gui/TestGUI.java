@@ -2,18 +2,22 @@ package com.gempire.gui;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
+import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.util.text.ITextComponent;
 
-public class TestGUI extends ContainerScreen {
+import javax.annotation.Nullable;
 
-    public TestGUI(Container screenContainer, PlayerInventory inv, ITextComponent titleIn) {
-        super(screenContainer, inv, titleIn);
+public class TestGUI extends Container {
+
+    protected TestGUI(@Nullable ContainerType<?> type, int id) {
+        super(type, id);
     }
 
     @Override
-    protected void drawGuiContainerBackgroundLayer(MatrixStack matrixStack, float partialTicks, int x, int y) {
-
+    public boolean canInteractWith(PlayerEntity playerIn) {
+        return false;
     }
 }

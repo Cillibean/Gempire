@@ -195,6 +195,12 @@
   "messages.gempire.entity.birthday": "Happy Birthday Taaf!",
 
   "itemGroup.gemstones" : "Gemstones",
+  "itemGroup.items" : "Items",
+  "itemGroup.blocks" : "Blocks",
 
-  "fluid.gempire.test_fluid": "Test Fluid"
+  "fluid.gempire.test_fluid": "Test Fluid",
+  "fluid.gempire.pink_essence": "Pink Essence",
+  "fluid.gempire.blue_essence": "Blue Essence",
+  "fluid.gempire.yellow_essence": "Yellow Essence",
+  "fluid.gempire.white_essence": "White Essence"
 }

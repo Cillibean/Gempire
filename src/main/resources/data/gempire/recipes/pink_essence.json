@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " g ",
+    " D ",
+    "dbd"
+  ],
+  "key": {
+    "g": {
+      "item": "minecraft:ghast_tear"
+    },
+    "D": {
+      "item": "minecraft:diamond"
+    },
+    "d": {
+      "item": "minecraft:pink_dye"
+    },
+    "b": {
+      "item": "minecraft:bucket"
+    }
+  },
+  "result": {
+    "item": "gempire:pink_essence",
+    "count": 1
+  }
+}

@@ -11,69 +11,22 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Gempire.MODID);
-    /*
-    public static final RegistryObject<Item> MUSH_SHARD = ITEMS.register("mush_shard", () ->
-            new TestItem(new Item.Properties().group(ModItemGroup.GEMSTONES))
-    );
-    public static final RegistryObject<Item> SHARD_BLOCK_ITEM = ITEMS.register("shard_block", () ->
-            new BlockItem(
-                    MushBlocks.SHARD_BLOCK.get(),
-                    new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)
-            )
-    );
-    public static final RegistryObject<Item> HYPHAE = ITEMS.register("hyphae", () ->
-            new TestItem(new Item.Properties().group(ModItemGroup.GEMSTONES))
-    );
-    public static final RegistryObject<Item> MYCELIUM_BRICK = ITEMS.register("mycelium_brick", () ->
-            new TestItem(new Item.Properties().group(ModItemGroup.GEMSTONES))
-    );
-    public static final RegistryObject<Item> MOLDY_BREAD = ITEMS.register("moldy_bread", () ->
-            new Food.Builder(new Item.Properties().group(ModItemGroup.GEMSTONES))
-    );
-    public static final RegistryObject<Item> MYCELIUM_BRICK_BLOCK_ITEM = ITEMS.register("mycelium_brick_block", () ->
-            new BlockItem(
-                    MushBlocks.MYCELIUM_BRICK_BLOCK.get(),
-                    new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)
-            )
-    );
-    public static final RegistryObject<Item> MYCELIUM_BRICK_BLOCK_1_ITEM = ITEMS.register("mycelium_brick_block_1", () ->
-            new BlockItem(
-                    MushBlocks.MYCELIUM_BRICK_BLOCK_1.get(),
-                    new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)
-            )
-    );
-    public static final RegistryObject<Item> MYCELIUM_BRICK_BLOCK_2_ITEM = ITEMS.register("mycelium_brick_block_2", () ->
-            new BlockItem(
-                    MushBlocks.MYCELIUM_BRICK_BLOCK_2.get(),
-                    new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)
-            )
-    );
-    public static final RegistryObject<Item> MYCELIUM_BRICK_BLOCK_3_ITEM = ITEMS.register("mycelium_brick_block_3", () ->
-            new BlockItem(
-                    MushBlocks.MYCELIUM_BRICK_BLOCK_3.get(),
-                    new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)
-            )
-    );
-    */
 
     public static final RegistryObject<Item> GEM_SEED_BLOCK_ITEM = ITEMS.register("gem_seed_block", () ->
             new BlockItem(
                     ModBlocks.GEM_SEED_BLOCK.get(),
-                    new Item.Properties().group(ItemGroup.MISC)
+                    new Item.Properties().group(ModItemGroup.BLOCKS)
             )
     );
 
-    /*public static final RegistryObject<Item> TEST_FLUID_BUCKET = ITEMS.register("test_fluid_bucket", () ->
-            new BucketItem(ModFluids.TEST_FLUID, new Item.Properties().group(ItemGroup.MISC)));*/
-
     public static final RegistryObject<Item> PINK_ESSENCE = ITEMS.register("pink_essence", () ->
-            new Item(new Item.Properties().group(ItemGroup.MATERIALS)));
+            new BucketItem(ModFluids.PINK_ESSENCE, new Item.Properties().containerItem(Items.BUCKET).maxStackSize(1).group(ModItemGroup.ITEMS)));
     public static final RegistryObject<Item> BLUE_ESSENCE = ITEMS.register("blue_essence", () ->
-            new Item(new Item.Properties().group(ItemGroup.MATERIALS)));
+            new BucketItem(ModFluids.BLUE_ESSENCE, new Item.Properties().containerItem(Items.BUCKET).maxStackSize(1).group(ModItemGroup.ITEMS)));
     public static final RegistryObject<Item> YELLOW_ESSENCE = ITEMS.register("yellow_essence", () ->
-            new Item(new Item.Properties().group(ItemGroup.MATERIALS)));
+            new BucketItem(ModFluids.YELLOW_ESSENCE, new Item.Properties().containerItem(Items.BUCKET).maxStackSize(1).group(ModItemGroup.ITEMS)));
     public static final RegistryObject<Item> WHITE_ESSENCE = ITEMS.register("white_essence", () ->
-            new Item(new Item.Properties().group(ItemGroup.MATERIALS)));
+            new BucketItem(ModFluids.WHITE_ESSENCE, new Item.Properties().containerItem(Items.BUCKET).maxStackSize(1).group(ModItemGroup.ITEMS)));
 
     public static final RegistryObject<Item> WHITE_SAPPHIRE_GEM = ITEMS.register("sapphire_gem_0", () ->
             new ItemGem(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));

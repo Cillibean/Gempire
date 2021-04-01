@@ -14,11 +14,9 @@ public class RegistryHandler {
         // attach DeferredRegister to the event bus
         ModBlocks.BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModItems.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
-        //ModFluids.FLUIDS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        ModFluids.FLUIDS.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModTE.TILE_ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModEntities.ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
-        //TODO: TEST
-        //NewFluidTest fluidtest = new NewFluidTest();
     }
 
 }

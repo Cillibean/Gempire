@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "gempire:pink_essence",
+    "gempire:pink_essence_flowing",
+    "gempire:blue_essence",
+    "gempire:blue_essence_flowing",
+    "gempire:yellow_essence",
+    "gempire:yellow_essence_flowing",
+    "gempire:white_essence",
+    "gempire:white_essence_flowing"
+  ]
+}

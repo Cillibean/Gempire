@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "dcd",
+    "cec",
+    "dcd"
+  ],
+  "key": {
+    "c": {
+      "item": "minecraft:cobblestone"
+    },
+    "e": {
+      "item": "gempire:white_essence"
+    },
+    "d": {
+      "item": "minecraft:dirt"
+    }
+  },
+  "result": {
+    "item": "gempire:gem_seed_block",
+    "count": 1
+  }
+}
