@@ -1,16 +1,18 @@
 package com.gempire;
 
+import com.gempire.client.screen.TankScreen;
 import com.gempire.entities.TestEntity;
-import com.gempire.entities.bases.EntityStarterGem;
 import com.gempire.entities.gems.EntityRuby;
 import com.gempire.entities.gems.EntitySapphire;
 import com.gempire.entities.gems.starter.EntityMica;
 import com.gempire.entities.gems.starter.EntityPebble;
 import com.gempire.entities.gems.starter.EntityShale;
+import com.gempire.init.ModContainers;
 import com.gempire.init.ModEntities;
 import com.gempire.init.RegistryHandler;
-import com.gempire.systems.injection.Crux;
+import com.gempire.proxy.ClientProxy;
 import net.minecraft.block.Block;
+import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
@@ -36,6 +38,8 @@ public class Gempire
     public static final String MODID = "gempire";
     // Directly reference a log4j logger.
     private static final Logger LOGGER = LogManager.getLogger();
+
+    public static final ClientProxy clientProxy = new ClientProxy();
 
     public Gempire() {
         // Register the setup method for modloading
@@ -77,7 +81,8 @@ public class Gempire
 
     private void doClientStuff(final FMLClientSetupEvent event) {
         // do something that can only be done on the client
-        LOGGER.info("Got game settings {}", event.getMinecraftSupplier().get().gameSettings);
+        //ScreenManager.registerFactory(ModContainers.TEST_CONTAINER.get(), TestContainerScreen::new);
+        ScreenManager.registerFactory(ModContainers.TANK_CONTAINER.get(), TankScreen::new);
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event)

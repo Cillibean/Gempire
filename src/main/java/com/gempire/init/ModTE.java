@@ -2,12 +2,11 @@ package com.gempire.init;
 
 import com.gempire.Gempire;
 import com.gempire.tileentities.GemSeedTE;
+import com.gempire.tileentities.TankTE;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-
-import java.util.function.Supplier;
 
 public class ModTE {
     public static final DeferredRegister<TileEntityType<?>> TILE_ENTITIES = DeferredRegister.create(ForgeRegistries.TILE_ENTITIES, Gempire.MODID);
@@ -20,4 +19,10 @@ public class ModTE {
                     MushBlocks.MYCELIUM_BRICK_BLOCK_3.get()).build(null));*/
     public static final RegistryObject<TileEntityType<GemSeedTE>> GEM_SEED_TE = TILE_ENTITIES.register(
             "gem_seed_te", () -> TileEntityType.Builder.create(GemSeedTE::new, ModBlocks.GEM_SEED_BLOCK.get()).build(null));
+
+    /*public static final RegistryObject<TileEntityType<TestContainerTE>> TEST_CONTAINER_TE = TILE_ENTITIES.register(
+            "test_container_te", () -> TileEntityType.Builder.create(TestContainerTE::new, ModBlocks.TEST_CONTAINER_BLOCK.get()).build(null));*/
+
+    public static final RegistryObject<TileEntityType<TankTE>> TANK_TE = TILE_ENTITIES.register(
+            "tank_te", () -> TileEntityType.Builder.create(TankTE::new, ModBlocks.TANK_BLOCK.get()).build(null));
 }

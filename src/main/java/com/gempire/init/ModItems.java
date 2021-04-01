@@ -4,10 +4,13 @@ import com.gempire.Gempire;
 import com.gempire.items.ItemGem;
 import com.gempire.items.TestItem;
 import com.gempire.util.ModItemGroup;
+import net.minecraft.inventory.container.Container;
 import net.minecraft.item.*;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+
+import java.awt.*;
 
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Gempire.MODID);
@@ -18,6 +21,19 @@ public class ModItems {
                     new Item.Properties().group(ModItemGroup.BLOCKS)
             )
     );
+    public static final RegistryObject<Item> TANK_BLOCK_ITEM = ITEMS.register("tank_block", () ->
+            new BlockItem(
+                    ModBlocks.TANK_BLOCK.get(),
+                    new Item.Properties().group(ModItemGroup.BLOCKS)
+            )
+    );
+
+    /*public static final RegistryObject<Item> TEST_CONTAINER_BLOCK_ITEM = ITEMS.register("test_container_block", () ->
+            new BlockItem(
+                    ModBlocks.TEST_CONTAINER_BLOCK.get(),
+                    new Item.Properties().group(ModItemGroup.BLOCKS)
+            )
+    );*/
 
     public static final RegistryObject<Item> PINK_ESSENCE = ITEMS.register("pink_essence", () ->
             new BucketItem(ModFluids.PINK_ESSENCE, new Item.Properties().containerItem(Items.BUCKET).maxStackSize(1).group(ModItemGroup.ITEMS)));
