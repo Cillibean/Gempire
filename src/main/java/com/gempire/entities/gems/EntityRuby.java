@@ -148,7 +148,7 @@ public class EntityRuby extends EntityGem {
     public static ArrayList<Crux> generateCruxes() {
         ArrayList<Crux> gemCruxes = new ArrayList<>();
         float gemTemperature = 1.5f;
-        gemCruxes.add(new Crux(Blocks.STONE.getDefaultState(), 2, CruxType.INORGANIC));
+        gemCruxes.add(new Crux(Blocks.STONE.getDefaultState(), 2, CruxType.INORGANIC, gemTemperature));
         gemCruxes.add(new Crux(Blocks.MAGMA_BLOCK.getDefaultState(), 5, CruxType.INORGANIC, gemTemperature));
         gemCruxes.add(new Crux(Blocks.IRON_ORE.getDefaultState(), 3, CruxType.MINERAL));
         gemCruxes.add(new Crux(Blocks.NETHERRACK.getDefaultState(), 1, CruxType.INORGANIC, gemTemperature));

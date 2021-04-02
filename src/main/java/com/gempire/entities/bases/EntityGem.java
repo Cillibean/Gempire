@@ -188,15 +188,17 @@ public abstract class EntityGem extends CreatureEntity {
                 }
             }
             else {
-                if (player.getHeldItemMainhand().getItem() instanceof DyeItem) {
-                    DyeItem dye = (DyeItem) player.getHeldItemMainhand().getItem();
-                    System.out.println("Yeah it's dye");
-                    if (player.isSneaking()) {
-                        this.setInsigniaColor(dye.getDyeColor().getId());
-                        System.out.println(dye.getDyeColor().getId());
-                    } else {
-                        this.setOutfitColor(dye.getDyeColor().getId());
-                        System.out.println(dye.getDyeColor().getId());
+                if(this.isOwner(player)) {
+                    if (player.getHeldItemMainhand().getItem() instanceof DyeItem) {
+                        DyeItem dye = (DyeItem) player.getHeldItemMainhand().getItem();
+                        System.out.println("Yeah it's dye");
+                        if (player.isSneaking()) {
+                            this.setInsigniaColor(dye.getDyeColor().getId());
+                            System.out.println(dye.getDyeColor().getId());
+                        } else {
+                            this.setOutfitColor(dye.getDyeColor().getId());
+                            System.out.println(dye.getDyeColor().getId());
+                        }
                     }
                 }
             }

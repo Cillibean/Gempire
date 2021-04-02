@@ -1,5 +1,6 @@
 package com.gempire.container;
 
+import com.gempire.gui.BucketHandlerSlot;
 import com.gempire.init.ModBlocks;
 import com.gempire.init.ModContainers;
 import com.gempire.tileentities.TankTE;
@@ -8,12 +9,18 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.Slot;
+import net.minecraft.item.BucketItem;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IWorldPosCallable;
+import net.minecraft.util.text.StringTextComponent;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.capability.IFluidHandler;
 
 import java.util.Objects;
+import java.util.UUID;
 
 public class TankContainer extends Container {
     public static final int HOTBAR_SLOT_COUNT = 9;
@@ -39,7 +46,7 @@ public class TankContainer extends Container {
         this.canInteract = IWorldPosCallable.of(this.tank.getWorld(), this.tank.getPos());
 
         //TILE ENTITY
-        this.addSlot(new Slot((IInventory)this.tank, 0, 80, 35));
+        this.addSlot(new Slot((IInventory)this.tank, TankTE.BUCKET_INPUT_SLOT_INDEX, 152, 61));
 
         //PLAYER INVENTORY
         for(int row = 0; row < 3; row++){
@@ -81,15 +88,19 @@ public class TankContainer extends Container {
             ItemStack slotStack = slot.getStack();
             stack = slotStack.copy();
             if(index < TankTE.NUMBER_OF_SLOTS && !this.mergeItemStack(slotStack, TankTE.NUMBER_OF_SLOTS, this.inventorySlots.size(), true)){
+                playerIn.sendMessage(new StringTextComponent("First one"), UUID.randomUUID());
                 return ItemStack.EMPTY;
             }
             if(!this.mergeItemStack(slotStack, 0, TankTE.NUMBER_OF_SLOTS, false)){
+                playerIn.sendMessage(new StringTextComponent("Second one"), UUID.randomUUID());
                 return ItemStack.EMPTY;
             }
             if(slotStack.isEmpty()){
+                playerIn.sendMessage(new StringTextComponent("Third One"), UUID.randomUUID());
                 slot.putStack(ItemStack.EMPTY);
             }
             else{
+                playerIn.sendMessage(new StringTextComponent("Last one"), UUID.randomUUID());
                 slot.onSlotChanged();
             }
         }

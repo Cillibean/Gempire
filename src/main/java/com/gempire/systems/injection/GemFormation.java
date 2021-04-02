@@ -76,9 +76,12 @@ public class GemFormation {
 
     public static ArrayList<Block> getBlocksInVolume(World domhain, BlockPos position, BlockPos volume){
         ArrayList<Block> blocksInVolume = new ArrayList<>();
-        for(int z = -1; z < 2; z++){
-            for(int y = -1; y < 2; y++){
-                for(int x = -1; x < 2; x++){
+        float xo = GemFormation.getHalfMiddleOffsetRight(volume.getX());
+        float yo = GemFormation.getHalfMiddleOffsetRight(volume.getY());
+        float zo = GemFormation.getHalfMiddleOffsetRight(volume.getZ());
+        for(int z = GemFormation.getHalfMiddleOffsetLeft(volume.getZ()); z < xo; z++){
+            for(int y = GemFormation.getHalfMiddleOffsetLeft(volume.getY()); y < yo; y++){
+                for(int x = GemFormation.getHalfMiddleOffsetLeft(volume.getX()); x < zo; x++){
                     Block block = domhain.getBlockState(position.add(new BlockPos(x, y, z))).getBlock();
                     if(block.getBlock() instanceof AirBlock){
                         continue;
@@ -90,6 +93,14 @@ public class GemFormation {
             }
         }
         return blocksInVolume;
+    }
+
+    public static int getHalfMiddleOffsetLeft(float value){
+        return -(int)Math.floor(value / 2);
+    }
+
+    public static int getHalfMiddleOffsetRight(float value){
+        return (int)Math.ceil(value / 2);
     }
 
     public String EvaluateCruxes(){
