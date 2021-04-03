@@ -15,6 +15,56 @@ import java.awt.*;
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Gempire.MODID);
 
+    public static final RegistryObject<Item> DRAINED_BLUE_SOIL = ITEMS.register("drained_blue_soil", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_BLUE_SOIL.get(),
+                    new Item.Properties().group(ModItemGroup.BLOCKS)
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_BLUE_STONE = ITEMS.register("drained_blue_stone", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_BLUE_STONE.get(),
+                    new Item.Properties().group(ModItemGroup.BLOCKS)
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_BLUE_STONE_2 = ITEMS.register("drained_blue_stone_2", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_BLUE_STONE_2.get(),
+                    new Item.Properties().group(ModItemGroup.BLOCKS)
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_BANDED_BLUE_STONE = ITEMS.register("drained_blue_stone_bands", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_BANDED_BLUE_STONE.get(),
+                    new Item.Properties().group(ModItemGroup.BLOCKS)
+            )
+    );
+
+    public static final RegistryObject<Item> DRAINED_GREY_SOIL = ITEMS.register("drained_grey_soil", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_GREY_SOIL.get(),
+                    new Item.Properties().group(ModItemGroup.BLOCKS)
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_GREY_STONE = ITEMS.register("drained_grey_stone", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_GREY_STONE.get(),
+                    new Item.Properties().group(ModItemGroup.BLOCKS)
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_GREY_STONE_2 = ITEMS.register("drained_grey_stone_2", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_GREY_STONE_2.get(),
+                    new Item.Properties().group(ModItemGroup.BLOCKS)
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_BANDED_GREY_STONE = ITEMS.register("drained_grey_stone_bands", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_BANDED_GREY_STONE.get(),
+                    new Item.Properties().group(ModItemGroup.BLOCKS)
+            )
+    );
+
     public static final RegistryObject<Item> DRAINED_PURPLE_SOIL = ITEMS.register("drained_purple_soil", () ->
             new BlockItem(
                     ModBlocks.DRAINED_PURPLE_SOIL.get(),
@@ -36,6 +86,56 @@ public class ModItems {
     public static final RegistryObject<Item> DRAINED_BANDED_PURPLE_STONE = ITEMS.register("drained_purple_stone_bands", () ->
             new BlockItem(
                     ModBlocks.DRAINED_BANDED_PURPLE_STONE.get(),
+                    new Item.Properties().group(ModItemGroup.BLOCKS)
+            )
+    );
+
+    public static final RegistryObject<Item> DRAINED_RED_SAND = ITEMS.register("drained_red_soil", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_RED_SAND.get(),
+                    new Item.Properties().group(ModItemGroup.BLOCKS)
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_RED_STONE = ITEMS.register("drained_red_stone", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_RED_STONE.get(),
+                    new Item.Properties().group(ModItemGroup.BLOCKS)
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_RED_STONE_2 = ITEMS.register("drained_red_stone_2", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_RED_STONE_2.get(),
+                    new Item.Properties().group(ModItemGroup.BLOCKS)
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_BANDED_RED_STONE = ITEMS.register("drained_red_stone_bands", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_BANDED_RED_STONE.get(),
+                    new Item.Properties().group(ModItemGroup.BLOCKS)
+            )
+    );
+
+    public static final RegistryObject<Item> DRAINED_SAND = ITEMS.register("drained_soil", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_SAND.get(),
+                    new Item.Properties().group(ModItemGroup.BLOCKS)
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_YELLOW_STONE = ITEMS.register("drained_yellow_stone", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_YELLOW_STONE.get(),
+                    new Item.Properties().group(ModItemGroup.BLOCKS)
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_YELLOW_STONE_2 = ITEMS.register("drained_yellow_stone_2", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_YELLOW_STONE_2.get(),
+                    new Item.Properties().group(ModItemGroup.BLOCKS)
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_BANDED_YELLOW_STONE = ITEMS.register("drained_yellow_stone_bands", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_BANDED_YELLOW_STONE.get(),
                     new Item.Properties().group(ModItemGroup.BLOCKS)
             )
     );

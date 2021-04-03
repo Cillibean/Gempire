@@ -41,6 +41,86 @@ public class ModBlocks {
             )
     );
 
+    public static final RegistryObject<Block> DRAINED_BLUE_SOIL = BLOCKS.register("drained_blue_soil", () ->
+            new DrainedBlock(Block.Properties
+                    .create(Material.EARTH)
+                    .hardnessAndResistance(10f, 10f)
+                    .sound(SoundType.GROUND)
+                    .harvestLevel(1)
+                    .harvestTool(ToolType.SHOVEL)
+            )
+    );
+
+    public static final RegistryObject<Block> DRAINED_BLUE_STONE = BLOCKS.register("drained_blue_stone", () ->
+            new DrainedBlock(Block.Properties
+                    .create(Material.IRON)
+                    .hardnessAndResistance(10f, 10f)
+                    .sound(SoundType.STONE)
+                    .harvestLevel(1)
+                    .harvestTool(ToolType.PICKAXE)
+            )
+    );
+
+    public static final RegistryObject<Block> DRAINED_BLUE_STONE_2 = BLOCKS.register("drained_blue_stone_2", () ->
+            new DrainedBlock(Block.Properties
+                    .create(Material.IRON)
+                    .hardnessAndResistance(10f, 10f)
+                    .sound(SoundType.STONE)
+                    .harvestLevel(1)
+                    .harvestTool(ToolType.PICKAXE)
+            )
+    );
+
+    public static final RegistryObject<Block> DRAINED_BANDED_BLUE_STONE = BLOCKS.register("drained_blue_stone_bands", () ->
+            new DrainedBlock(Block.Properties
+                    .create(Material.IRON)
+                    .hardnessAndResistance(10f, 10f)
+                    .sound(SoundType.STONE)
+                    .harvestLevel(1)
+                    .harvestTool(ToolType.PICKAXE)
+            )
+    );
+
+    public static final RegistryObject<Block> DRAINED_GREY_SOIL = BLOCKS.register("drained_grey_soil", () ->
+            new DrainedBlock(Block.Properties
+                    .create(Material.EARTH)
+                    .hardnessAndResistance(10f, 10f)
+                    .sound(SoundType.GROUND)
+                    .harvestLevel(1)
+                    .harvestTool(ToolType.SHOVEL)
+            )
+    );
+
+    public static final RegistryObject<Block> DRAINED_GREY_STONE = BLOCKS.register("drained_grey_stone", () ->
+            new DrainedBlock(Block.Properties
+                    .create(Material.IRON)
+                    .hardnessAndResistance(10f, 10f)
+                    .sound(SoundType.STONE)
+                    .harvestLevel(1)
+                    .harvestTool(ToolType.PICKAXE)
+            )
+    );
+
+    public static final RegistryObject<Block> DRAINED_GREY_STONE_2 = BLOCKS.register("drained_grey_stone_2", () ->
+            new DrainedBlock(Block.Properties
+                    .create(Material.IRON)
+                    .hardnessAndResistance(10f, 10f)
+                    .sound(SoundType.STONE)
+                    .harvestLevel(1)
+                    .harvestTool(ToolType.PICKAXE)
+            )
+    );
+
+    public static final RegistryObject<Block> DRAINED_BANDED_GREY_STONE = BLOCKS.register("drained_grey_stone_bands", () ->
+            new DrainedBlock(Block.Properties
+                    .create(Material.IRON)
+                    .hardnessAndResistance(10f, 10f)
+                    .sound(SoundType.STONE)
+                    .harvestLevel(1)
+                    .harvestTool(ToolType.PICKAXE)
+            )
+    );
+
     public static final RegistryObject<Block> DRAINED_PURPLE_SOIL = BLOCKS.register("drained_purple_soil", () ->
             new DrainedBlock(Block.Properties
                     .create(Material.EARTH)
@@ -72,6 +152,86 @@ public class ModBlocks {
     );
 
     public static final RegistryObject<Block> DRAINED_BANDED_PURPLE_STONE = BLOCKS.register("drained_purple_stone_bands", () ->
+            new DrainedBlock(Block.Properties
+                    .create(Material.IRON)
+                    .hardnessAndResistance(10f, 10f)
+                    .sound(SoundType.STONE)
+                    .harvestLevel(1)
+                    .harvestTool(ToolType.PICKAXE)
+            )
+    );
+
+    public static final RegistryObject<Block> DRAINED_RED_SAND = BLOCKS.register("drained_red_sand", () ->
+            new DrainedBlock(Block.Properties
+                    .create(Material.SAND)
+                    .hardnessAndResistance(10f, 10f)
+                    .sound(SoundType.SAND)
+                    .harvestLevel(1)
+                    .harvestTool(ToolType.SHOVEL)
+            )
+    );
+
+    public static final RegistryObject<Block> DRAINED_RED_STONE = BLOCKS.register("drained_red_stone", () ->
+            new DrainedBlock(Block.Properties
+                    .create(Material.IRON)
+                    .hardnessAndResistance(10f, 10f)
+                    .sound(SoundType.STONE)
+                    .harvestLevel(1)
+                    .harvestTool(ToolType.PICKAXE)
+            )
+    );
+
+    public static final RegistryObject<Block> DRAINED_RED_STONE_2 = BLOCKS.register("drained_red_stone_2", () ->
+            new DrainedBlock(Block.Properties
+                    .create(Material.IRON)
+                    .hardnessAndResistance(10f, 10f)
+                    .sound(SoundType.STONE)
+                    .harvestLevel(1)
+                    .harvestTool(ToolType.PICKAXE)
+            )
+    );
+
+    public static final RegistryObject<Block> DRAINED_BANDED_RED_STONE = BLOCKS.register("drained_red_stone_bands", () ->
+            new DrainedBlock(Block.Properties
+                    .create(Material.IRON)
+                    .hardnessAndResistance(10f, 10f)
+                    .sound(SoundType.STONE)
+                    .harvestLevel(1)
+                    .harvestTool(ToolType.PICKAXE)
+            )
+    );
+
+    public static final RegistryObject<Block> DRAINED_SAND = BLOCKS.register("drained_sand", () ->
+            new DrainedBlock(Block.Properties
+                    .create(Material.SAND)
+                    .hardnessAndResistance(10f, 10f)
+                    .sound(SoundType.SAND)
+                    .harvestLevel(1)
+                    .harvestTool(ToolType.SHOVEL)
+            )
+    );
+
+    public static final RegistryObject<Block> DRAINED_YELLOW_STONE = BLOCKS.register("drained_red_stone", () ->
+            new DrainedBlock(Block.Properties
+                    .create(Material.IRON)
+                    .hardnessAndResistance(10f, 10f)
+                    .sound(SoundType.STONE)
+                    .harvestLevel(1)
+                    .harvestTool(ToolType.PICKAXE)
+            )
+    );
+
+    public static final RegistryObject<Block> DRAINED_YELLOW_STONE_2 = BLOCKS.register("drained_yellow_stone_2", () ->
+            new DrainedBlock(Block.Properties
+                    .create(Material.IRON)
+                    .hardnessAndResistance(10f, 10f)
+                    .sound(SoundType.STONE)
+                    .harvestLevel(1)
+                    .harvestTool(ToolType.PICKAXE)
+            )
+    );
+
+    public static final RegistryObject<Block> DRAINED_BANDED_YELLOW_STONE = BLOCKS.register("drained_yellow_stone_bands", () ->
             new DrainedBlock(Block.Properties
                     .create(Material.IRON)
                     .hardnessAndResistance(10f, 10f)
