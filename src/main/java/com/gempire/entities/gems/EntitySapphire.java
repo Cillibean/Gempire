@@ -201,13 +201,14 @@ public class EntitySapphire extends EntityGem {
 
     public static ArrayList<Crux> generateCruxes() {
         ArrayList<Crux> gemCruxes = new ArrayList<>();
-        float gemTemperature = .5f;
-        gemCruxes.add(new Crux(Blocks.STONE.getDefaultState(), 2, CruxType.INORGANIC, gemTemperature));
-        gemCruxes.add(new Crux(Blocks.ICE.getDefaultState(), 5, CruxType.INORGANIC, gemTemperature));
-        gemCruxes.add(new Crux(Blocks.PACKED_ICE.getDefaultState(), 5, CruxType.INORGANIC, gemTemperature));
-        gemCruxes.add(new Crux(Blocks.SNOW_BLOCK.getDefaultState(), 5, CruxType.INORGANIC, gemTemperature));
-        gemCruxes.add(new Crux(Blocks.IRON_ORE.getDefaultState(), 3, CruxType.MINERAL, gemTemperature));
-        gemCruxes.add(new Crux(Blocks.DIAMOND_BLOCK.getDefaultState(), 10, CruxType.INORGANIC, gemTemperature));
+        float gemTemperatureMin = 0f;
+        float gemTemperatureMax = .7f;
+        gemCruxes.add(new Crux(Blocks.STONE.getDefaultState(), 2, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
+        gemCruxes.add(new Crux(Blocks.ICE.getDefaultState(), 5, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
+        gemCruxes.add(new Crux(Blocks.PACKED_ICE.getDefaultState(), 5, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
+        gemCruxes.add(new Crux(Blocks.SNOW_BLOCK.getDefaultState(), 5, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
+        gemCruxes.add(new Crux(Blocks.IRON_ORE.getDefaultState(), 3, CruxType.MINERAL, gemTemperatureMin, gemTemperatureMax));
+        gemCruxes.add(new Crux(Blocks.DIAMOND_BLOCK.getDefaultState(), 10, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
         return gemCruxes;
     }
 

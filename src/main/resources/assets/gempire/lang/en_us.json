@@ -3,6 +3,11 @@
   "block.vibe.mycelium_brick_block": "Mycelium Brick Block",
 
   "block.gempire.test_fluid": "Test Fluid",
+  "block.gempire.drained_purple_soil": "Drained Purple Soil",
+  "block.gempire.drained_purple_stone": "Drained Purple Stone",
+  "block.gempire.drained_purple_stone_2": "Drained Purple Stone",
+  "block.gempire.drained_purple_stone_bands": "Drained Banded Purple Stone",
+
   "block.gempire.gem_seed_block": "Gem Seed",
   "block.gempire.tank_block": "Fluid Tank",
   "block.gempire.pink_essence": "Pink Essence",

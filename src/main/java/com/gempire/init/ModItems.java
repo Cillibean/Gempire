@@ -15,6 +15,31 @@ import java.awt.*;
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Gempire.MODID);
 
+    public static final RegistryObject<Item> DRAINED_PURPLE_SOIL = ITEMS.register("drained_purple_soil", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_PURPLE_SOIL.get(),
+                    new Item.Properties().group(ModItemGroup.BLOCKS)
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_PURPLE_STONE = ITEMS.register("drained_purple_stone", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_PURPLE_STONE.get(),
+                    new Item.Properties().group(ModItemGroup.BLOCKS)
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_PURPLE_STONE_2 = ITEMS.register("drained_purple_stone_2", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_PURPLE_STONE_2.get(),
+                    new Item.Properties().group(ModItemGroup.BLOCKS)
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_BANDED_PURPLE_STONE = ITEMS.register("drained_purple_stone_bands", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_BANDED_PURPLE_STONE.get(),
+                    new Item.Properties().group(ModItemGroup.BLOCKS)
+            )
+    );
+
     public static final RegistryObject<Item> GEM_SEED_BLOCK_ITEM = ITEMS.register("gem_seed_block", () ->
             new BlockItem(
                     ModBlocks.GEM_SEED_BLOCK.get(),

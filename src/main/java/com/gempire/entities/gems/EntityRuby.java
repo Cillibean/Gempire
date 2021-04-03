@@ -147,14 +147,15 @@ public class EntityRuby extends EntityGem {
 
     public static ArrayList<Crux> generateCruxes() {
         ArrayList<Crux> gemCruxes = new ArrayList<>();
-        float gemTemperature = 1.5f;
-        gemCruxes.add(new Crux(Blocks.STONE.getDefaultState(), 2, CruxType.INORGANIC, gemTemperature));
-        gemCruxes.add(new Crux(Blocks.MAGMA_BLOCK.getDefaultState(), 5, CruxType.INORGANIC, gemTemperature));
-        gemCruxes.add(new Crux(Blocks.IRON_ORE.getDefaultState(), 3, CruxType.MINERAL));
-        gemCruxes.add(new Crux(Blocks.NETHERRACK.getDefaultState(), 1, CruxType.INORGANIC, gemTemperature));
-        gemCruxes.add(new Crux(Blocks.NETHERITE_BLOCK.getDefaultState(), 10, CruxType.INORGANIC, gemTemperature));
-        gemCruxes.add(new Crux(Blocks.NETHER_GOLD_ORE.getDefaultState(), 4, CruxType.MINERAL, gemTemperature));
-        gemCruxes.add(new Crux(Blocks.ANCIENT_DEBRIS.getDefaultState(), 7, CruxType.MINERAL, gemTemperature));
+        float gemTemperatureMin = 1.2f;
+        float gemTemperatureMax = 2f;
+        gemCruxes.add(new Crux(Blocks.STONE.getDefaultState(), 2, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
+        gemCruxes.add(new Crux(Blocks.MAGMA_BLOCK.getDefaultState(), 5, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
+        gemCruxes.add(new Crux(Blocks.IRON_ORE.getDefaultState(), 3, CruxType.MINERAL, gemTemperatureMin, gemTemperatureMax));
+        gemCruxes.add(new Crux(Blocks.NETHERRACK.getDefaultState(), 1, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
+        gemCruxes.add(new Crux(Blocks.NETHERITE_BLOCK.getDefaultState(), 10, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
+        gemCruxes.add(new Crux(Blocks.NETHER_GOLD_ORE.getDefaultState(), 4, CruxType.MINERAL, gemTemperatureMin, gemTemperatureMax));
+        gemCruxes.add(new Crux(Blocks.ANCIENT_DEBRIS.getDefaultState(), 7, CruxType.MINERAL, gemTemperatureMin, gemTemperatureMax));
         return gemCruxes;
     }
 

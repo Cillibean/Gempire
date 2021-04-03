@@ -1,6 +1,7 @@
 package com.gempire.init;
 
 import com.gempire.Gempire;
+import com.gempire.blocks.DrainedBlock;
 import com.gempire.blocks.GemSeedBlock;
 import com.gempire.blocks.TankBlock;
 import net.minecraft.block.Block;
@@ -34,6 +35,46 @@ public class ModBlocks {
             new GemSeedBlock(Block.Properties
                     .create(Material.IRON)
                     .hardnessAndResistance(5.0f, 6.0f)
+                    .sound(SoundType.STONE)
+                    .harvestLevel(1)
+                    .harvestTool(ToolType.PICKAXE)
+            )
+    );
+
+    public static final RegistryObject<Block> DRAINED_PURPLE_SOIL = BLOCKS.register("drained_purple_soil", () ->
+            new DrainedBlock(Block.Properties
+                    .create(Material.EARTH)
+                    .hardnessAndResistance(10f, 10f)
+                    .sound(SoundType.GROUND)
+                    .harvestLevel(1)
+                    .harvestTool(ToolType.SHOVEL)
+            )
+    );
+
+    public static final RegistryObject<Block> DRAINED_PURPLE_STONE = BLOCKS.register("drained_purple_stone", () ->
+            new DrainedBlock(Block.Properties
+                    .create(Material.IRON)
+                    .hardnessAndResistance(10f, 10f)
+                    .sound(SoundType.STONE)
+                    .harvestLevel(1)
+                    .harvestTool(ToolType.PICKAXE)
+            )
+    );
+
+    public static final RegistryObject<Block> DRAINED_PURPLE_STONE_2 = BLOCKS.register("drained_purple_stone_2", () ->
+            new DrainedBlock(Block.Properties
+                    .create(Material.IRON)
+                    .hardnessAndResistance(10f, 10f)
+                    .sound(SoundType.STONE)
+                    .harvestLevel(1)
+                    .harvestTool(ToolType.PICKAXE)
+            )
+    );
+
+    public static final RegistryObject<Block> DRAINED_BANDED_PURPLE_STONE = BLOCKS.register("drained_purple_stone_bands", () ->
+            new DrainedBlock(Block.Properties
+                    .create(Material.IRON)
+                    .hardnessAndResistance(10f, 10f)
                     .sound(SoundType.STONE)
                     .harvestLevel(1)
                     .harvestTool(ToolType.PICKAXE)

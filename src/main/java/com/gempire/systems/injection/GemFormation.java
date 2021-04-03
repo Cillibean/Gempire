@@ -4,6 +4,7 @@ import com.gempire.entities.bases.EntityGem;
 import com.gempire.entities.gems.EntityRuby;
 import com.gempire.entities.gems.EntitySapphire;
 import com.gempire.entities.gems.starter.EntityPebble;
+import com.gempire.init.ModBlocks;
 import com.gempire.init.ModEntities;
 import net.minecraft.block.AirBlock;
 import net.minecraft.block.Block;
@@ -72,6 +73,7 @@ public class GemFormation {
         gem.setPosition(this.pos.getX(), this.pos.getY(), this.pos.getZ());
         gem.setHealth(gem.getMaxHealth());
         this.world.addEntity(gem);
+        this.Drain(GemFormation.getBlockPosInVolume(this.world, this.pos, this.volumeToCheck));
     }
 
     public static ArrayList<Block> getBlocksInVolume(World domhain, BlockPos position, BlockPos volume){
@@ -94,6 +96,26 @@ public class GemFormation {
         }
         return blocksInVolume;
     }
+    public static ArrayList<BlockPos> getBlockPosInVolume(World domhain, BlockPos position, BlockPos volume){
+        ArrayList<BlockPos> blocksInVolume = new ArrayList<>();
+        float xo = GemFormation.getHalfMiddleOffsetRight(volume.getX());
+        float yo = GemFormation.getHalfMiddleOffsetRight(volume.getY());
+        float zo = GemFormation.getHalfMiddleOffsetRight(volume.getZ());
+        for(int z = GemFormation.getHalfMiddleOffsetLeft(volume.getZ()); z < xo; z++){
+            for(int y = GemFormation.getHalfMiddleOffsetLeft(volume.getY()); y < yo; y++){
+                for(int x = GemFormation.getHalfMiddleOffsetLeft(volume.getX()); x < zo; x++){
+                    BlockPos block = position.add(new BlockPos(x, y, z));
+                    if(domhain.getBlockState(block).getBlock() instanceof AirBlock){
+                        continue;
+                    }
+                    else{
+                        blocksInVolume.add(block);
+                    }
+                }
+            }
+        }
+        return blocksInVolume;
+    }
 
     public static int getHalfMiddleOffsetLeft(float value){
         return -(int)Math.floor(value / 2);
@@ -103,7 +125,7 @@ public class GemFormation {
         return (int)Math.ceil(value / 2);
     }
 
-    public String EvaluateCruxes(){
+    public String EvaluateCruxes() {
         //INPUT: List of gems and their cruxes as well as crux temperatures and depth preferences, list of blocks to check
         HashMap<String, ArrayList<Crux>> GEM_CRUXES = ModEntities.CRUXTOGEM;
         ArrayList<Block> BLOCKS_TO_CHECK = GemFormation.getBlocksInVolume(this.world, this.pos, this.volumeToCheck);
@@ -117,19 +139,29 @@ public class GemFormation {
         float totalWeight = 0;
 
         //Loop through every gem
-        for(String gem : GEMS){
+        for (String gem : GEMS) {
             float gemWeight = 0;
             //GEM_CRUXES.get(gem) is an ArrayList of Cruxes
-            if(GEM_CRUXES.get(gem) != null) for (Crux crux : GEM_CRUXES.get(gem)){
+            if (GEM_CRUXES.get(gem) != null) for (Crux crux : GEM_CRUXES.get(gem)) {
                 //Do some math to multiply the gem weight by the inverse of the difference in biome temperature to preferred temperature
-                float temperatureDifference = crux.temperature - BLOCK_TEMPERATURE == 0 ? 1 : Math.abs(crux.temperature - BLOCK_TEMPERATURE);
-                for(Block block : BLOCKS_TO_CHECK){
-                    //Then for every crux, calculate the total weight of crux that matches every block in the volume for every gem
-                    //Example: if there are three stone in the volume, the total weight will be 3 stone times however many gems there are that have stone as a crux, and so forth
-                    if(block != crux.block) {
-                        continue;
+                float temperatureDifference = 0; //crux.temperature - BLOCK_TEMPERATURE == 0 ? 1 : Math.abs(crux.temperature - BLOCK_TEMPERATURE);
+                if(BLOCK_TEMPERATURE >= crux.temperatureMin){
+                    if(BLOCK_TEMPERATURE <= crux.temperatureMax) {
+                        temperatureDifference = 0;
                     }
                     else{
+                        temperatureDifference = crux.temperatureMax - BLOCK_TEMPERATURE == 0 ? 1 : Math.abs(crux.temperatureMax - BLOCK_TEMPERATURE);
+                    }
+                }
+                else{
+                    temperatureDifference = crux.temperatureMin - BLOCK_TEMPERATURE == 0 ? 1 : Math.abs(crux.temperatureMin - BLOCK_TEMPERATURE);
+                }
+                for (Block block : BLOCKS_TO_CHECK) {
+                    //Then for every crux, calculate the total weight of crux that matches every block in the volume for every gem
+                    //Example: if there are three stone in the volume, the total weight will be 3 stone times however many gems there are that have stone as a crux, and so forth
+                    if (block != crux.block) {
+                        continue;
+                    } else {
                         totalWeight += crux.weight;
                         gemWeight += crux.weight * (1 - temperatureDifference);
                     }
@@ -146,72 +178,38 @@ public class GemFormation {
         String returnGem = "";
         double lowestR = 100000000;
         String lowestRGem = "";
-        for(String gem : GemFormation.POSSIBLE_GEMS){
+        for (String gem : GemFormation.POSSIBLE_GEMS) {
             double r = Math.random() * totalWeight;
             r -= WEIGHTS_OF_GEMS.get(gem);
-            if(WEIGHTS_OF_GEMS.get(gem) < 12){
+            if (WEIGHTS_OF_GEMS.get(gem) < 12) {
                 r = 1000000;
             }
-            if(r < lowestR){
+            if (r < lowestR) {
                 lowestR = r;
                 lowestRGem = gem;
             }
             returnGem = gem;
             //DEBUG FEATURES
             System.out.println("R for " + gem + " equals: " + r);
-            if(r > 0 && gem == GemFormation.POSSIBLE_GEMS[GemFormation.POSSIBLE_GEMS.length - 1]){
+            if (r > 0 && gem == GemFormation.POSSIBLE_GEMS[GemFormation.POSSIBLE_GEMS.length - 1]) {
                 returnGem = lowestRGem;
                 break;
             }
-            if(r<=0) break;
+            if (r <= 0) break;
         }
         //OUTPUT: A gem
         return returnGem;
+    }
 
-
-
-        /*float biomeTemperature = this.world.getBiome(this.pos).getTemperature(this.pos);
-        ArrayList<Block> blocksInVolume = new ArrayList<>();
-        for(int z = 0; z < this.volumeToCheck.getZ(); z++){
-            for(int y = 0; y < this.volumeToCheck.getY(); y++){
-                for(int x = 0; x < this.volumeToCheck.getX(); x++){
-                    Block block = this.world.getBlockState(new BlockPos(-(int)Math.floor(x/2), -(int)Math.floor(y/2), -(int)Math.floor(z/2)).add(this.pos)).getBlock();
-                    if(block instanceof AirBlock){
-                        continue;
-                    }
-                    blocksInVolume.add(block);
-                }
+    public void Drain(ArrayList<BlockPos> blockPosList){
+        for (BlockPos pos : blockPosList){
+            BlockState block = this.world.getBlockState(pos);
+            if(block == Blocks.DIRT.getDefaultState() || block == Blocks.GRASS_BLOCK.getDefaultState() || block == Blocks.GRASS_PATH.getDefaultState()){
+                this.world.setBlockState(pos, ModBlocks.DRAINED_PURPLE_SOIL.get().getDefaultState());
+            }
+            else{
+                this.world.setBlockState(pos, ModBlocks.DRAINED_PURPLE_STONE.get().getDefaultState());
             }
         }
-        HashMap<String, Float> weights = new HashMap<>();
-        float totalWeight = 0;
-        for(String gem : GemFormation.POSSIBLE_GEMS){
-            float gemWeight = 0;
-            if(ModEntities.CRUXTOGEM.containsKey(gem)) {
-                for (int i = 0; i < ModEntities.CRUXTOGEM.get(gem).size(); i++) {
-                    Crux crux = null;
-                    if (ModEntities.CRUXTOGEM.get(gem).get(i) != null) {
-                        crux = ModEntities.CRUXTOGEM.get(gem).get(i);
-                    }
-                    totalWeight += crux.weight;
-                    for (Block block : blocksInVolume) {
-                        if (block == crux.block) {
-                            gemWeight += crux.weight;
-                        }
-                    }
-                }
-            }
-            System.out.println(gem + ": " + gemWeight);
-            weights.put(gem, gemWeight);
-        }
-        System.out.println("Total Weight: " + totalWeight);
-        String returnGem = "";
-        for(String gem : GemFormation.POSSIBLE_GEMS){
-            double r = Math.random() * totalWeight;
-            r -= weights.get(gem);
-            returnGem = gem;
-            if(r<=0) break;
-        }
-        return returnGem;*/
     }
 }
