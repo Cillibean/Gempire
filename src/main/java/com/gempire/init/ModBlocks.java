@@ -3,6 +3,7 @@ package com.gempire.init;
 import com.gempire.Gempire;
 import com.gempire.blocks.DrainedBlock;
 import com.gempire.blocks.GemSeedBlock;
+import com.gempire.blocks.InjectorBlock;
 import com.gempire.blocks.TankBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.FlowingFluidBlock;
@@ -33,6 +34,16 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> GEM_SEED_BLOCK = BLOCKS.register("gem_seed_block", () ->
             new GemSeedBlock(Block.Properties
+                    .create(Material.IRON)
+                    .hardnessAndResistance(5.0f, 6.0f)
+                    .sound(SoundType.STONE)
+                    .harvestLevel(1)
+                    .harvestTool(ToolType.PICKAXE)
+            )
+    );
+
+    public static final RegistryObject<Block> INJECTOR_BLOCK = BLOCKS.register("injector_block", () ->
+            new InjectorBlock(Block.Properties
                     .create(Material.IRON)
                     .hardnessAndResistance(5.0f, 6.0f)
                     .sound(SoundType.STONE)
@@ -211,7 +222,7 @@ public class ModBlocks {
             )
     );
 
-    public static final RegistryObject<Block> DRAINED_YELLOW_STONE = BLOCKS.register("drained_red_stone", () ->
+    public static final RegistryObject<Block> DRAINED_YELLOW_STONE = BLOCKS.register("drained_yellow_stone", () ->
             new DrainedBlock(Block.Properties
                     .create(Material.IRON)
                     .hardnessAndResistance(10f, 10f)

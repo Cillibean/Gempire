@@ -117,6 +117,7 @@ public class ItemGem extends Item {
             gem.setHealth(gem.getMaxHealth());
             gem.extinguish();
             gem.clearActivePotions();
+            gem.setVelocity(0, 0 ,0);
             world.addEntity(gem);
             return true;
         }

@@ -4,6 +4,7 @@ import com.gempire.Gempire;
 import com.gempire.items.ItemGem;
 import com.gempire.items.TestItem;
 import com.gempire.util.ModItemGroup;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.item.*;
 import net.minecraftforge.fml.RegistryObject;
@@ -90,7 +91,7 @@ public class ModItems {
             )
     );
 
-    public static final RegistryObject<Item> DRAINED_RED_SAND = ITEMS.register("drained_red_soil", () ->
+    public static final RegistryObject<Item> DRAINED_RED_SAND = ITEMS.register("drained_red_sand", () ->
             new BlockItem(
                     ModBlocks.DRAINED_RED_SAND.get(),
                     new Item.Properties().group(ModItemGroup.BLOCKS)
@@ -115,7 +116,7 @@ public class ModItems {
             )
     );
 
-    public static final RegistryObject<Item> DRAINED_SAND = ITEMS.register("drained_soil", () ->
+    public static final RegistryObject<Item> DRAINED_SAND = ITEMS.register("drained_sand", () ->
             new BlockItem(
                     ModBlocks.DRAINED_SAND.get(),
                     new Item.Properties().group(ModItemGroup.BLOCKS)
@@ -146,6 +147,12 @@ public class ModItems {
                     new Item.Properties().group(ModItemGroup.BLOCKS)
             )
     );
+    public static final RegistryObject<Item> INJECTOR_BLOCK_ITEM = ITEMS.register("injector_block", () ->
+            new BlockItem(
+                    ModBlocks.INJECTOR_BLOCK.get(),
+                    new Item.Properties().group(ModItemGroup.BLOCKS)
+            )
+    );
     public static final RegistryObject<Item> TANK_BLOCK_ITEM = ITEMS.register("tank_block", () ->
             new BlockItem(
                     ModBlocks.TANK_BLOCK.get(),
@@ -160,14 +167,16 @@ public class ModItems {
             )
     );*/
 
+    public static final RegistryObject<Item> ESSENCE_BOTTLE = ITEMS.register("essence_bottle", () ->
+            new BucketItem(Fluids.EMPTY, new Item.Properties().containerItem(Items.BUCKET).maxStackSize(16).group(ModItemGroup.ITEMS)));
     public static final RegistryObject<Item> PINK_ESSENCE = ITEMS.register("pink_essence", () ->
-            new BucketItem(ModFluids.PINK_ESSENCE, new Item.Properties().containerItem(Items.BUCKET).maxStackSize(1).group(ModItemGroup.ITEMS)));
+            new BucketItem(ModFluids.PINK_ESSENCE, new Item.Properties().containerItem(ModItems.ESSENCE_BOTTLE.get()).maxStackSize(1).group(ModItemGroup.ITEMS)));
     public static final RegistryObject<Item> BLUE_ESSENCE = ITEMS.register("blue_essence", () ->
-            new BucketItem(ModFluids.BLUE_ESSENCE, new Item.Properties().containerItem(Items.BUCKET).maxStackSize(1).group(ModItemGroup.ITEMS)));
+            new BucketItem(ModFluids.BLUE_ESSENCE, new Item.Properties().containerItem(ModItems.ESSENCE_BOTTLE.get()).maxStackSize(1).group(ModItemGroup.ITEMS)));
     public static final RegistryObject<Item> YELLOW_ESSENCE = ITEMS.register("yellow_essence", () ->
-            new BucketItem(ModFluids.YELLOW_ESSENCE, new Item.Properties().containerItem(Items.BUCKET).maxStackSize(1).group(ModItemGroup.ITEMS)));
+            new BucketItem(ModFluids.YELLOW_ESSENCE, new Item.Properties().containerItem(ModItems.ESSENCE_BOTTLE.get()).maxStackSize(1).group(ModItemGroup.ITEMS)));
     public static final RegistryObject<Item> WHITE_ESSENCE = ITEMS.register("white_essence", () ->
-            new BucketItem(ModFluids.WHITE_ESSENCE, new Item.Properties().containerItem(Items.BUCKET).maxStackSize(1).group(ModItemGroup.ITEMS)));
+            new BucketItem(ModFluids.WHITE_ESSENCE, new Item.Properties().containerItem(ModItems.ESSENCE_BOTTLE.get()).maxStackSize(1).group(ModItemGroup.ITEMS)));
 
     public static final RegistryObject<Item> WHITE_SAPPHIRE_GEM = ITEMS.register("sapphire_gem_0", () ->
             new ItemGem(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));

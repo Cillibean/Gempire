@@ -5,6 +5,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.pathfinding.PathNodeType;
+import net.minecraft.util.math.BlockPos;
 
 import java.util.List;
 
@@ -36,7 +37,7 @@ public class EntityAIFollowOwner extends Goal {
 
     @Override
     public boolean shouldContinueExecuting() {
-        return this.owner != null && !this.follower.getNavigator().noPath() && follower.getMovementType() == 2;
+        return this.owner != null && !this.follower.getNavigator().noPath() && follower.getMovementType() == 2 && this.follower.getDistanceSq(this.owner) > Math.pow(3, 2);
     }
 
     @Override
@@ -44,6 +45,9 @@ public class EntityAIFollowOwner extends Goal {
         super.startExecuting();
         this.follower.setPathPriority(PathNodeType.WATER, 0);
         this.follower.getNavigator().tryMoveToXYZ(owner.getPosX(), owner.getPosY(), owner.getPosZ(), this.speed);
+        if(this.follower.getDistanceSq(this.owner) > Math.pow(16, 2)){
+            this.follower.setPosition(this.owner.getPosX(), this.owner.getPosY(), this.owner.getPosZ());
+        }
     }
 
     @Override

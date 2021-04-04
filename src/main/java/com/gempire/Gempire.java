@@ -1,5 +1,6 @@
 package com.gempire;
 
+import com.gempire.client.screen.InjectorScreen;
 import com.gempire.client.screen.TankScreen;
 import com.gempire.entities.TestEntity;
 import com.gempire.entities.gems.EntityRuby;
@@ -83,6 +84,7 @@ public class Gempire
         // do something that can only be done on the client
         //ScreenManager.registerFactory(ModContainers.TEST_CONTAINER.get(), TestContainerScreen::new);
         ScreenManager.registerFactory(ModContainers.TANK_CONTAINER.get(), TankScreen::new);
+        ScreenManager.registerFactory(ModContainers.INJECTOR_CONTAINER.get(), InjectorScreen::new);
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event)

@@ -25,12 +25,14 @@
   "block.gempire.drained_yellow_stone_bands": "Drained Banded Yellow Stone",
 
   "block.gempire.gem_seed_block": "Gem Seed",
+  "block.gempire.injector_block": "Injector",
   "block.gempire.tank_block": "Fluid Tank",
   "block.gempire.pink_essence": "Pink Essence",
   "block.gempire.blue_essence": "Blue Essence",
   "block.gempire.yellow_essence": "Yellow Essence",
   "block.gempire.white_essence": "White Essence",
 
+  "item.gempire.essence_bottle": "Essence Bottle",
   "item.gempire.pink_essence": "Pink Essence",
   "item.gempire.yellow_essence": "Yellow Essence",
   "item.gempire.blue_essence": "Blue Essence",
@@ -230,5 +232,6 @@
   "fluid.gempire.yellow_essence": "Yellow Essence",
   "fluid.gempire.white_essence": "White Essence",
 
-  "container.gempire.tank": "Tank"
+  "container.gempire.tank": "Tank",
+  "container.gempire.injector": "Injector"
 }

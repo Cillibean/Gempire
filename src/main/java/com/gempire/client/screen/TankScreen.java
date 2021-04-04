@@ -42,12 +42,6 @@ public class TankScreen extends ContainerScreen<TankContainer> {
 
     @SuppressWarnings("deprecation")
     @Override
-    protected void drawGuiContainerForegroundLayer(MatrixStack matrixStack, int mouseX, int mouseY) {
-        this.font.func_243248_b(matrixStack, this.playerInventory.getDisplayName(), (float)this.playerInventoryTitleX, (float)this.playerInventoryTitleY, 4210752);
-    }
-
-    @SuppressWarnings("deprecation")
-    @Override
     protected void drawGuiContainerBackgroundLayer(MatrixStack matrixStack, float partialTicks, int mouseX, int mouseY) {
         RenderSystem.color4f(1f, 1f, 1f, 1f);
         this.minecraft.getTextureManager().bindTexture(TankScreen.TANK_GUI);

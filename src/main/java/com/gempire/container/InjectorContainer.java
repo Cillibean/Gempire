@@ -2,6 +2,7 @@ package com.gempire.container;
 
 import com.gempire.init.ModBlocks;
 import com.gempire.init.ModContainers;
+import com.gempire.tileentities.InjectorTE;
 import com.gempire.tileentities.TankTE;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -15,7 +16,7 @@ import net.minecraft.util.IWorldPosCallable;
 
 import java.util.Objects;
 
-public class TankContainer extends Container {
+public class InjectorContainer extends Container {
     public static final int HOTBAR_SLOT_COUNT = 9;
     public static final int PLAYER_INVENTORY_ROW_COUNT = 3;
     public static final int PLAYER_INVENTORY_COLUMN_COUNT = 9;
@@ -31,46 +32,50 @@ public class TankContainer extends Container {
 
     public final IWorldPosCallable canInteract;
 
-    public final TankTE tank;
+    public final InjectorTE injector;
 
-    public TankContainer(int windowID, PlayerInventory playerInventory, TankTE tank) {
-        super(ModContainers.TANK_CONTAINER.get(), windowID);
-        this.tank = tank;
-        this.canInteract = IWorldPosCallable.of(this.tank.getWorld(), this.tank.getPos());
+    public InjectorContainer(int windowID, PlayerInventory playerInventory, InjectorTE injector) {
+        super(ModContainers.INJECTOR_CONTAINER.get(), windowID);
+        this.injector = injector;
+        this.canInteract = IWorldPosCallable.of(this.injector.getWorld(), this.injector.getPos());
 
         //TILE ENTITY
-        this.addSlot(new Slot((IInventory)this.tank, TankTE.BUCKET_INPUT_SLOT_INDEX, 152, 61));
+        this.addSlot(new Slot((IInventory)this.injector, InjectorTE.WHITE_INPUT_SLOT_INDEX, 61, 14));
+        this.addSlot(new Slot((IInventory)this.injector, InjectorTE.YELLOW_INPUT_SLOT_INDEX, 43, 32));
+        this.addSlot(new Slot((IInventory)this.injector, InjectorTE.PRIME_INPUT_SLOT_INDEX, 61, 32));
+        this.addSlot(new Slot((IInventory)this.injector, InjectorTE.BLUE_INPUT_SLOT_INDEX, 79, 32));
+        this.addSlot(new Slot((IInventory)this.injector, InjectorTE.PINK_INPUT_SLOT_INDEX, 61, 50));
 
         //PLAYER INVENTORY
         for(int row = 0; row < 3; row++){
             for(int col = 0; col < 9; col++){
-                this.addSlot(new Slot(playerInventory, col + row * 9 + 9, 8 + col * 18, 166 - (4 - row) * 18 - 10));
+                this.addSlot(new Slot(playerInventory, col + row * 9 + 9, 8 + col * 18, 165 - (4 - row) * 18 - 10));
             }
         }
 
         //PLAYER HOTBAR
         for(int col = 0; col < 9; col++){
-            this.addSlot(new Slot(playerInventory, col, 8 + col * 18, 142));
+            this.addSlot(new Slot(playerInventory, col, 8 + col * 18, 141));
         }
     }
 
-    public TankContainer(int windowID, PlayerInventory playerInventory, net.minecraft.network.PacketBuffer extraData){
-        this(windowID, playerInventory, TankContainer.getTileEntity(playerInventory, extraData));
+    public InjectorContainer(int windowID, PlayerInventory playerInventory, PacketBuffer extraData){
+        this(windowID, playerInventory, InjectorContainer.getTileEntity(playerInventory, extraData));
     }
 
-    public static TankTE getTileEntity(PlayerInventory playerInventory, PacketBuffer extraData){
+    public static InjectorTE getTileEntity(PlayerInventory playerInventory, PacketBuffer extraData){
         Objects.requireNonNull(playerInventory, "Player Inventory can not be null");
         Objects.requireNonNull(playerInventory, "Data Packet can not be null");
         TileEntity te = playerInventory.player.world.getTileEntity(extraData.readBlockPos());
-        if(te instanceof TankTE){
-            return (TankTE)te;
+        if(te instanceof InjectorTE){
+            return (InjectorTE)te;
         }
         throw new IllegalStateException("Tile entity is not correct");
     }
 
     @Override
     public boolean canInteractWith(PlayerEntity playerIn) {
-        return this.isWithinUsableDistance(this.canInteract, playerIn, ModBlocks.TANK_BLOCK.get());
+        return this.isWithinUsableDistance(this.canInteract, playerIn, ModBlocks.INJECTOR_BLOCK.get());
     }
 
     @Override
@@ -80,10 +85,10 @@ public class TankContainer extends Container {
         if(slot != null && slot.getHasStack()){
             ItemStack slotStack = slot.getStack();
             stack = slotStack.copy();
-            if(index < TankTE.NUMBER_OF_SLOTS && !this.mergeItemStack(slotStack, TankTE.NUMBER_OF_SLOTS, this.inventorySlots.size(), true)){
+            if(index < InjectorTE.NUMBER_OF_SLOTS && !this.mergeItemStack(slotStack, InjectorTE.NUMBER_OF_SLOTS, this.inventorySlots.size(), true)){
                 return ItemStack.EMPTY;
             }
-            if(!this.mergeItemStack(slotStack, 0, TankTE.NUMBER_OF_SLOTS, false)){
+            if(!this.mergeItemStack(slotStack, 0, InjectorTE.NUMBER_OF_SLOTS, false)){
                 return ItemStack.EMPTY;
             }
             if(slotStack.isEmpty()){
