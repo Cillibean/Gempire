@@ -24,6 +24,9 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidTank;
 import net.minecraftforge.fluids.capability.IFluidHandler;
@@ -96,21 +99,22 @@ public class InjectorTE extends LockableLootTileEntity implements IFluidTank, IN
 
     @Override
     public void tick() {
-        this.tick++;
-        if(this.tick % 5 == 0) {
-            for (int i = 0; i < 4; i++) {
-                ItemStack stack = this.getStackInSlot(i);
-                if (this.shouldPullFluidFromStack(i)) {
-                    if (stack != ItemStack.EMPTY) {
-                        if(stack.getItem() instanceof BucketItem) {
-                            BucketItem bucket = (BucketItem) stack.getItem();
-                            if (this.isValidForSlot(i, bucket)) {
-                                int filled = this.FillFluidTanks(i, 1000);
-                                //TODO: TEMPORARY
-                                this.setInventorySlotContents(i, new ItemStack(ModItems.ESSENCE_BOTTLE.get()));
-                                this.world.notifyBlockUpdate(this.pos, this.getBlockState(), this.getBlockState(), 3);
-                                this.markDirty();
-                            }
+        HandleSlotUpdates();
+    }
+
+    public void HandleSlotUpdates(){
+        for (int i = 0; i < 4; i++) {
+            ItemStack stack = this.getStackInSlot(i);
+            if (this.shouldPullFluidFromStack(i)) {
+                if (stack != ItemStack.EMPTY) {
+                    if(stack.getItem() instanceof BucketItem) {
+                        BucketItem bucket = (BucketItem) stack.getItem();
+                        if (this.isValidForSlot(i, bucket)) {
+                            int filled = this.FillFluidTanks(i, 1000);
+                            //TODO: TEMPORARY
+                            this.setInventorySlotContents(i, new ItemStack(ModItems.ESSENCE_BOTTLE.get()));
+                            this.world.notifyBlockUpdate(this.pos, this.getBlockState(), this.getBlockState(), 2);
+                            this.markDirty();
                         }
                     }
                 }
@@ -118,17 +122,20 @@ public class InjectorTE extends LockableLootTileEntity implements IFluidTank, IN
         }
     }
 
-
-
     //INJECTOR FUNCTIONALITY
 
     //INJECTOR FUNCTIONALITY
 
     public void Inject(){
+        int portionToDrain = 0;
+        portionToDrain = this.pinkOpen ? portionToDrain++ : portionToDrain;
+        portionToDrain = this.blueOpen ? portionToDrain++ : portionToDrain;
+        portionToDrain = this.yellowOpen ? portionToDrain++ : portionToDrain;
+        portionToDrain = this.whiteOpen ? portionToDrain++ : portionToDrain;
         if(this.pinkOpen){
             FluidTank tank = this.getTankFromValue(0);
             if(tank.getFluid().getFluid() != Fluids.EMPTY) {
-                if (tank.getFluidAmount() - 200 > 0) {
+                if (tank.getFluidAmount() - 200 / portionToDrain> 0) {
                     tank.getFluid().setAmount(tank.getFluidAmount() - 200);
                 } else {
                     tank.getFluid().setAmount(0);
@@ -138,7 +145,7 @@ public class InjectorTE extends LockableLootTileEntity implements IFluidTank, IN
         if(this.blueOpen){
             FluidTank tank = this.getTankFromValue(1);
             if(tank.getFluid().getFluid() != Fluids.EMPTY) {
-                if (tank.getFluidAmount() - 200 > 0) {
+                if (tank.getFluidAmount() - 200 / portionToDrain > 0) {
                     tank.getFluid().setAmount(tank.getFluidAmount() - 200);
                 } else {
                     tank.getFluid().setAmount(0);
@@ -148,7 +155,7 @@ public class InjectorTE extends LockableLootTileEntity implements IFluidTank, IN
         if(this.yellowOpen){
             FluidTank tank = this.getTankFromValue(2);
             if(tank.getFluid().getFluid() != Fluids.EMPTY) {
-                if (tank.getFluidAmount() - 200 > 0) {
+                if (tank.getFluidAmount() - 200 / portionToDrain> 0) {
                     tank.getFluid().setAmount(tank.getFluidAmount() - 200);
                 } else {
                     tank.getFluid().setAmount(0);
@@ -158,13 +165,15 @@ public class InjectorTE extends LockableLootTileEntity implements IFluidTank, IN
         if(this.whiteOpen){
             FluidTank tank = this.getTankFromValue(3);
             if(tank.getFluid().getFluid() != Fluids.EMPTY) {
-                if (tank.getFluidAmount() - 200 > 0) {
+                if (tank.getFluidAmount() - 200 / portionToDrain > 0) {
                     tank.getFluid().setAmount(tank.getFluidAmount() - 200);
                 } else {
                     tank.getFluid().setAmount(0);
                 }
             }
         }
+        this.world.notifyBlockUpdate(this.pos, this.getBlockState(), this.getBlockState(), 2);
+        this.markDirty();
     }
 
     public boolean shouldPullFluidFromStack(int tank){
@@ -210,7 +219,7 @@ public class InjectorTE extends LockableLootTileEntity implements IFluidTank, IN
                 this.pinkOpen = this.pinkOpen ? false : true;
                 break;
         }
-        this.world.notifyBlockUpdate(this.pos, this.getBlockState(), this.getBlockState(), 4);
+        this.world.notifyBlockUpdate(this.pos, this.getBlockState(), this.getBlockState(), 2);
         this.markDirty();
     }
 
@@ -409,7 +418,13 @@ public class InjectorTE extends LockableLootTileEntity implements IFluidTank, IN
     public SUpdateTileEntityPacket getUpdatePacket() {
         //Debug
         System.out.println("[DEBUG]:Server sent tile sync packet");
-        return new SUpdateTileEntityPacket(this.pos, 0, this.getUpdateTag());
+        return new SUpdateTileEntityPacket(this.pos, -1, this.getUpdateTag());
+    }
+
+    @Override
+    public void handleUpdateTag(BlockState state, CompoundNBT tag) {
+        System.out.println("[DEBUG]:Handling tag on chunk load");
+        this.read(state, tag);
     }
 
     //REDUNDANT STUFF

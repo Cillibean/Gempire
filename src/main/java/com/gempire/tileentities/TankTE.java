@@ -74,7 +74,7 @@ public class TankTE extends LockableLootTileEntity implements IFluidTank, INamed
                     this.tank.fill(new FluidStack(bucket.getFluid(), 1000), IFluidHandler.FluidAction.EXECUTE);
                     this.setInventorySlotContents(TankTE.BUCKET_INPUT_SLOT_INDEX, new ItemStack(Items.BUCKET));
                     System.out.println("Tank level is at " + this.getFluidAmount() + "mb");
-                    this.world.notifyBlockUpdate(this.pos, this.getBlockState(), this.getBlockState(), 3);
+                    this.world.notifyBlockUpdate(this.pos, this.getBlockState(), this.getBlockState(), 2);
                     this.markDirty();
                 }
             }
@@ -239,6 +239,6 @@ public class TankTE extends LockableLootTileEntity implements IFluidTank, INamed
     public SUpdateTileEntityPacket getUpdatePacket() {
         //Debug
         System.out.println("[DEBUG]:Server sent tile sync packet");
-        return new SUpdateTileEntityPacket(this.pos, 0, this.getUpdateTag());
+        return new SUpdateTileEntityPacket(this.pos, -1, this.getUpdateTag());
     }
 }

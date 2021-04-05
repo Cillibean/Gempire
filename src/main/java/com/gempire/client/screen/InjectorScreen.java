@@ -3,6 +3,9 @@ package com.gempire.client.screen;
 import com.gempire.container.InjectorContainer;
 import com.gempire.container.TankContainer;
 import com.gempire.init.ModFluids;
+import com.gempire.init.ModPacketHandler;
+import com.gempire.networking.C2SRequestInject;
+import com.gempire.networking.C2SRequestUpdateInjectorValves;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
@@ -12,7 +15,11 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.inventory.container.PlayerContainer;
+import net.minecraft.network.play.client.CUpdateCommandBlockPacket;
+import net.minecraft.network.play.server.SUpdateTileEntityPacket;
+import net.minecraft.tileentity.CommandBlockLogic;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -43,26 +50,23 @@ public class InjectorScreen extends ContainerScreen<InjectorContainer> {
         int x = (this.width - this.xSize) / 2;
         int y = (this.height - this.ySize) / 2;
         this.addButton(new ImageButton(x + 83, y + 58, 51, 12, 0, 0, 0, InjectorScreen.INJECT_BUTTON_TEXTURE, 51, 12, (p_213029_1_) -> {
-            this.container.injector.Inject();
-            this.container.injector.getWorld().notifyBlockUpdate(this.container.injector.getPos(), this.container.injector.getBlockState(), this.container.injector.getBlockState(), 4);
+            ModPacketHandler.INSTANCE.sendToServer(new C2SRequestInject(this.container.injector.getPos()));
         }));
         this.addButton(new ImageButton(x + 101, y + 39, 6, 14, 0, 0, 0, InjectorScreen.BUTTON_TEXTURE, 6, 14, (p_213029_1_) -> {
-            this.container.injector.ToggleTankOpen("pink");
-            this.container.injector.getWorld().notifyBlockUpdate(this.container.injector.getPos(), this.container.injector.getBlockState(), this.container.injector.getBlockState(), 4);
+            ModPacketHandler.INSTANCE.sendToServer(new C2SRequestUpdateInjectorValves("pink", this.container.injector.getPos()));
         }));
         this.addButton(new ImageButton(x + 109, y + 39, 6, 14, 0, 0, 0, InjectorScreen.BUTTON_TEXTURE, 6, 14,(p_213029_1_) -> {
-            this.container.injector.ToggleTankOpen("blue");
-            this.container.injector.getWorld().notifyBlockUpdate(this.container.injector.getPos(), this.container.injector.getBlockState(), this.container.injector.getBlockState(), 4);
+            ModPacketHandler.INSTANCE.sendToServer(new C2SRequestUpdateInjectorValves("blue", this.container.injector.getPos()));
         }));
         this.addButton(new ImageButton(x + 117, y + 39, 6, 14, 0, 0, 0, InjectorScreen.BUTTON_TEXTURE, 6, 14,(p_213029_1_) -> {
-            this.container.injector.ToggleTankOpen("yellow");
-            this.container.injector.getWorld().notifyBlockUpdate(this.container.injector.getPos(), this.container.injector.getBlockState(), this.container.injector.getBlockState(), 4);
+            ModPacketHandler.INSTANCE.sendToServer(new C2SRequestUpdateInjectorValves("yellow", this.container.injector.getPos()));
         }));
         this.addButton(new ImageButton(x + 125, y + 39, 6, 14, 0, 0, 0, InjectorScreen.BUTTON_TEXTURE, 6, 14,(p_213029_1_) -> {
-            this.container.injector.ToggleTankOpen("white");
-            this.container.injector.getWorld().notifyBlockUpdate(this.container.injector.getPos(), this.container.injector.getBlockState(), this.container.injector.getBlockState(), 4);
+            ModPacketHandler.INSTANCE.sendToServer(new C2SRequestUpdateInjectorValves("white", this.container.injector.getPos()));
         }));
     }
+
+
 
     @Override
     public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
@@ -142,22 +146,18 @@ public class InjectorScreen extends ContainerScreen<InjectorContainer> {
         }
         RenderSystem.color4f(1f, 1f, 1f, 1f);
         if(this.container.injector.pinkOpen){
-            System.out.println("pink is open");
             this.minecraft.getTextureManager().bindTexture(InjectorScreen.HALO_GUI_PINK);
             this.blit(matrixStack, x, y, 0, 0, this.width, this.height);
         }
         if(this.container.injector.blueOpen){
-            System.out.println("blue is open");
             this.minecraft.getTextureManager().bindTexture(InjectorScreen.HALO_GUI_BLUE);
             this.blit(matrixStack, x, y, 0, 0, this.width, this.height);
         }
         if(this.container.injector.yellowOpen){
-            System.out.println("yellow is open");
             this.minecraft.getTextureManager().bindTexture(InjectorScreen.HALO_GUI_YELLOW);
             this.blit(matrixStack, x, y, 0, 0, this.width, this.height);
         }
         if(this.container.injector.whiteOpen){
-            System.out.println("white is open");
             this.minecraft.getTextureManager().bindTexture(InjectorScreen.HALO_GUI_WHITE);
             this.blit(matrixStack, x, y, 0, 0, this.width, this.height);
         }
