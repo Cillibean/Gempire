@@ -9,6 +9,7 @@ import com.gempire.entities.gems.starter.EntityMica;
 import com.gempire.entities.gems.starter.EntityPebble;
 import com.gempire.entities.gems.starter.EntityShale;
 import com.gempire.systems.injection.Crux;
+import com.gempire.systems.injection.GemConditions;
 import com.gempire.systems.injection.GemFormation;
 import com.gempire.util.CruxType;
 import net.minecraft.block.Block;
@@ -26,7 +27,7 @@ import java.util.HashMap;
 
 public class ModEntities {
     public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITIES, Gempire.MODID);
-    public static HashMap<String, ArrayList<Crux>> CRUXTOGEM = new HashMap<>();
+    public static HashMap<String, GemConditions> CRUXTOGEM = new HashMap<>();
     // Entity Types
     public static final RegistryObject<EntityType<TestEntity>> TEST = ENTITIES.register("test",
             () -> EntityType.Builder.create(TestEntity::new, EntityClassification.CREATURE)
@@ -59,18 +60,15 @@ public class ModEntities {
                     .build(new ResourceLocation(Gempire.MODID, "sapphire").toString()));
 
     public static void registerCruxes(){
-        EntityRuby.setCruxes();
-        EntitySapphire.setCruxes();
-        EntityPebble.setCruxes();
-        EntityMica.setCruxes();
-        EntityShale.setCruxes();
-        ModEntities.CRUXTOGEM.put("ruby", EntityRuby.RUBY_CRUXES);
-        ModEntities.CRUXTOGEM.put("sapphire", EntitySapphire.SAPPHIRE_CRUXES);
-        ModEntities.CRUXTOGEM.put("pebble", EntityPebble.PEBBLE_CRUXES);
-        ModEntities.CRUXTOGEM.put("mica", EntityMica.MICA_CRUXES);
-        ModEntities.CRUXTOGEM.put("shale", EntityShale.SHALE_CRUXES);
-        for(String name : GemFormation.POSSIBLE_GEMS){
-            System.out.println("GEM DEBUG - Number of cruxes " + name + " has: " + ModEntities.CRUXTOGEM.get(name).size());
-        }
+        ModEntities.CRUXTOGEM.put("ruby", ModCruxes.RUBY_CONDITIONS());
+        ModEntities.CRUXTOGEM.put("sapphire", ModCruxes.SAPPHIRE_CONDITIONS());
+        ModEntities.CRUXTOGEM.put("pebble", ModCruxes.PEBBLE_CONDITIONS());
+        ModEntities.CRUXTOGEM.put("mica", ModCruxes.MICA_CONDITIONS());
+        ModEntities.CRUXTOGEM.put("shale", ModCruxes.SHALE_CONDITIONS());
+        GemFormation.POSSIBLE_GEMS.add("ruby");
+        GemFormation.POSSIBLE_GEMS.add("sapphire");
+        GemFormation.POSSIBLE_GEMS.add("pebble");
+        GemFormation.POSSIBLE_GEMS.add("mica");
+        GemFormation.POSSIBLE_GEMS.add("shale");
     }
 }

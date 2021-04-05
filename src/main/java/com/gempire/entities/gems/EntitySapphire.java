@@ -4,6 +4,7 @@ import com.gempire.Gempire;
 import com.gempire.entities.ai.EntityAIFollowOwner;
 import com.gempire.entities.ai.EntityAIWander;
 import com.gempire.entities.bases.EntityGem;
+import com.gempire.entities.bases.EntityVaryingGem;
 import com.gempire.systems.injection.Crux;
 import com.gempire.util.Abilities;
 import com.gempire.util.Color;
@@ -34,8 +35,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class EntitySapphire extends EntityGem {
-    public static ArrayList<Crux> SAPPHIRE_CRUXES = new ArrayList<>();
+public class EntitySapphire extends EntityVaryingGem {
 
     public EntitySapphire(EntityType<? extends CreatureEntity> type, World worldIn) {
         super(type, worldIn);
@@ -173,10 +173,6 @@ public class EntitySapphire extends EntityGem {
         };
     }
 
-    public int generateSkinColorVariant() {
-        return this.initalSkinVariant;
-    }
-
     @Override
     public boolean generateIsEmotional() {
         return false;
@@ -199,20 +195,19 @@ public class EntitySapphire extends EntityGem {
         return true;
     }
 
-    public static ArrayList<Crux> generateCruxes() {
-        ArrayList<Crux> gemCruxes = new ArrayList<>();
-        float gemTemperatureMin = 0f;
-        float gemTemperatureMax = .7f;
-        gemCruxes.add(new Crux(Blocks.STONE.getDefaultState(), 2, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
-        gemCruxes.add(new Crux(Blocks.ICE.getDefaultState(), 5, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
-        gemCruxes.add(new Crux(Blocks.PACKED_ICE.getDefaultState(), 5, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
-        gemCruxes.add(new Crux(Blocks.SNOW_BLOCK.getDefaultState(), 5, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
-        gemCruxes.add(new Crux(Blocks.IRON_ORE.getDefaultState(), 3, CruxType.MINERAL, gemTemperatureMin, gemTemperatureMax));
-        gemCruxes.add(new Crux(Blocks.DIAMOND_BLOCK.getDefaultState(), 10, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
-        return gemCruxes;
+    @Override
+    public int[] NeglectedColors() {
+        return new int[]{
+                14
+        };
     }
 
-    public static void setCruxes(){
-        EntitySapphire.SAPPHIRE_CRUXES = EntitySapphire.generateCruxes();
+    public boolean isColorValid(int color){
+        for(int i : this.NeglectedColors()){
+            if(this.NeglectedColors()[i] == color){
+                return false;
+            }
+        }
+        return true;
     }
 }

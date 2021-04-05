@@ -27,7 +27,6 @@ import net.minecraft.world.World;
 import java.util.ArrayList;
 
 public class EntityShale extends EntityStarterGem {
-    public static ArrayList<Crux> SHALE_CRUXES = new ArrayList<>();
     public static final int SKIN_COLOR_START = 0x63666E;
     public static final int SKIN_COLOR_END = 0x7E82AF;
 
@@ -87,16 +86,5 @@ public class EntityShale extends EntityStarterGem {
     @Override
     public Abilities[] possibleAbilities() {
         return new Abilities[0];
-    }
-
-    public static ArrayList<Crux> generateCruxes() {
-        ArrayList<Crux> gemCruxes = new ArrayList<>();
-        float gemTemperature = 1.5f;
-        gemCruxes.add(new Crux(Blocks.STONE.getDefaultState(), 2, CruxType.INORGANIC));
-        return gemCruxes;
-    }
-
-    public static void setCruxes(){
-        EntityShale.SHALE_CRUXES = EntityShale.generateCruxes();
     }
 }

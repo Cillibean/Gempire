@@ -1,5 +1,6 @@
 package com.gempire.container;
 
+import com.gempire.gui.ChromaSlot;
 import com.gempire.init.ModBlocks;
 import com.gempire.init.ModContainers;
 import com.gempire.tileentities.InjectorTE;
@@ -42,8 +43,9 @@ public class InjectorContainer extends Container {
         //TILE ENTITY
         this.addSlot(new Slot((IInventory)this.injector, InjectorTE.WHITE_INPUT_SLOT_INDEX, 61, 14));
         this.addSlot(new Slot((IInventory)this.injector, InjectorTE.YELLOW_INPUT_SLOT_INDEX, 43, 32));
-        this.addSlot(new Slot((IInventory)this.injector, InjectorTE.PRIME_INPUT_SLOT_INDEX, 61, 32));
+        this.addSlot(new ChromaSlot((IInventory)this.injector, InjectorTE.CHROMA_INPUT_SLOT_INDEX, 61, 32));
         this.addSlot(new Slot((IInventory)this.injector, InjectorTE.BLUE_INPUT_SLOT_INDEX, 79, 32));
+        this.addSlot(new Slot((IInventory)this.injector, InjectorTE.PRIME_INPUT_SLOT_INDEX, 43, 50));
         this.addSlot(new Slot((IInventory)this.injector, InjectorTE.PINK_INPUT_SLOT_INDEX, 61, 50));
 
         //PLAYER INVENTORY

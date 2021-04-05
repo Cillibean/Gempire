@@ -53,7 +53,6 @@ public class Gempire
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
 
         RegistryHandler.init();
-        ModEntities.registerCruxes();
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
     }
@@ -78,6 +77,7 @@ public class Gempire
         DeferredWorkQueue.runLater(() -> {
             GlobalEntityTypeAttributes.put(ModEntities.SAPPHIRE.get(), EntitySapphire.setCustomAttributes().create());
         });
+        ModEntities.registerCruxes();
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {

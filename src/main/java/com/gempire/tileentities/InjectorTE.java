@@ -1,10 +1,14 @@
 package com.gempire.tileentities;
 
+import com.gempire.blocks.GemSeedBlock;
 import com.gempire.container.InjectorContainer;
 import com.gempire.container.TankContainer;
+import com.gempire.init.ModBlocks;
 import com.gempire.init.ModFluids;
 import com.gempire.init.ModItems;
 import com.gempire.init.ModTE;
+import com.gempire.items.ItemChroma;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.fluid.Fluid;
@@ -21,6 +25,7 @@ import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.LockableLootTileEntity;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
@@ -31,17 +36,20 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidTank;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
+import org.lwjgl.system.CallbackI;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 
 public class InjectorTE extends LockableLootTileEntity implements IFluidTank, INamedContainerProvider, ITickableTileEntity {
-    public static final int NUMBER_OF_SLOTS = 5;
+    public static final int NUMBER_OF_SLOTS = 6;
     public static final int PINK_INPUT_SLOT_INDEX = 0;
     public static final int BLUE_INPUT_SLOT_INDEX = 1;
     public static final int YELLOW_INPUT_SLOT_INDEX = 2;
     public static final int WHITE_INPUT_SLOT_INDEX = 3;
-    public static final int PRIME_INPUT_SLOT_INDEX = 4;
+    public static final int CHROMA_INPUT_SLOT_INDEX = 4;
+    public static final int PRIME_INPUT_SLOT_INDEX = 5;
     public int TANK_CAPACITY(){
         return 1000;
     }
@@ -99,7 +107,7 @@ public class InjectorTE extends LockableLootTileEntity implements IFluidTank, IN
 
     @Override
     public void tick() {
-        HandleSlotUpdates();
+        this.HandleSlotUpdates();
     }
 
     public void HandleSlotUpdates(){
@@ -126,54 +134,91 @@ public class InjectorTE extends LockableLootTileEntity implements IFluidTank, IN
 
     //INJECTOR FUNCTIONALITY
 
-    public void Inject(){
-        int portionToDrain = 0;
-        portionToDrain = this.pinkOpen ? portionToDrain++ : portionToDrain;
-        portionToDrain = this.blueOpen ? portionToDrain++ : portionToDrain;
-        portionToDrain = this.yellowOpen ? portionToDrain++ : portionToDrain;
-        portionToDrain = this.whiteOpen ? portionToDrain++ : portionToDrain;
-        if(this.pinkOpen){
-            FluidTank tank = this.getTankFromValue(0);
-            if(tank.getFluid().getFluid() != Fluids.EMPTY) {
-                if (tank.getFluidAmount() - 200 / portionToDrain> 0) {
-                    tank.getFluid().setAmount(tank.getFluidAmount() - 200);
-                } else {
-                    tank.getFluid().setAmount(0);
+    public void Inject() {
+        if (this.getStackInSlot(InjectorTE.CHROMA_INPUT_SLOT_INDEX).getItem() instanceof ItemChroma &&
+                (this.getTankFromValue(0).getFluid().getFluid() != Fluids.EMPTY && this.pinkOpen ||
+                        this.getTankFromValue(1).getFluid().getFluid() != Fluids.EMPTY && this.blueOpen ||
+                        this.getTankFromValue(2).getFluid().getFluid() != Fluids.EMPTY && this.yellowOpen ||
+                        this.getTankFromValue(3).getFluid().getFluid() != Fluids.EMPTY && this.whiteOpen)) {
+            int portionToDrain = 0;
+            if(this.pinkOpen){
+                portionToDrain++;
+            }
+            if(this.blueOpen){
+                portionToDrain++;
+            }
+            if(this.yellowOpen){
+                portionToDrain++;
+            }
+            if(this.whiteOpen){
+                portionToDrain++;
+            }
+            ArrayList<Fluid> fluidArrayList = new ArrayList<>();
+            if (this.pinkOpen) {
+                FluidTank tank = this.getTankFromValue(0);
+                if (tank.getFluid().getFluid() != Fluids.EMPTY) {
+                    fluidArrayList.add(ModFluids.PINK_ESSENCE.get());
+                    if (tank.getFluidAmount() - 200 / portionToDrain > 0) {
+                        tank.getFluid().setAmount(tank.getFluidAmount() - 200);
+                    } else {
+                        tank.getFluid().setAmount(0);
+                    }
                 }
             }
-        }
-        if(this.blueOpen){
-            FluidTank tank = this.getTankFromValue(1);
-            if(tank.getFluid().getFluid() != Fluids.EMPTY) {
-                if (tank.getFluidAmount() - 200 / portionToDrain > 0) {
-                    tank.getFluid().setAmount(tank.getFluidAmount() - 200);
-                } else {
-                    tank.getFluid().setAmount(0);
+            if (this.blueOpen) {
+                FluidTank tank = this.getTankFromValue(1);
+                if (tank.getFluid().getFluid() != Fluids.EMPTY) {
+                    fluidArrayList.add(ModFluids.BLUE_ESSENCE.get());
+                    if (tank.getFluidAmount() - 200 / portionToDrain > 0) {
+                        tank.getFluid().setAmount(tank.getFluidAmount() - 200);
+                    } else {
+                        tank.getFluid().setAmount(0);
+                    }
                 }
             }
-        }
-        if(this.yellowOpen){
-            FluidTank tank = this.getTankFromValue(2);
-            if(tank.getFluid().getFluid() != Fluids.EMPTY) {
-                if (tank.getFluidAmount() - 200 / portionToDrain> 0) {
-                    tank.getFluid().setAmount(tank.getFluidAmount() - 200);
-                } else {
-                    tank.getFluid().setAmount(0);
+            if (this.yellowOpen) {
+                FluidTank tank = this.getTankFromValue(2);
+                if (tank.getFluid().getFluid() != Fluids.EMPTY) {
+                    fluidArrayList.add(ModFluids.YELLOW_ESSENCE.get());
+                    if (tank.getFluidAmount() - 200 / portionToDrain > 0) {
+                        tank.getFluid().setAmount(tank.getFluidAmount() - 200);
+                    } else {
+                        tank.getFluid().setAmount(0);
+                    }
                 }
             }
-        }
-        if(this.whiteOpen){
-            FluidTank tank = this.getTankFromValue(3);
-            if(tank.getFluid().getFluid() != Fluids.EMPTY) {
-                if (tank.getFluidAmount() - 200 / portionToDrain > 0) {
-                    tank.getFluid().setAmount(tank.getFluidAmount() - 200);
-                } else {
-                    tank.getFluid().setAmount(0);
+            if (this.whiteOpen) {
+                FluidTank tank = this.getTankFromValue(3);
+                if (tank.getFluid().getFluid() != Fluids.EMPTY) {
+                    fluidArrayList.add(ModFluids.WHITE_ESSENCE.get());
+                    if (tank.getFluidAmount() - 200 / portionToDrain > 0) {
+                        tank.getFluid().setAmount(tank.getFluidAmount() - 200);
+                    } else {
+                        tank.getFluid().setAmount(0);
+                    }
                 }
             }
+            this.world.setBlockState(this.getPos().add(new BlockPos(0, -5, 0)), ModBlocks.GEM_SEED_BLOCK.get().getDefaultState());
+            GemSeedTE te = (GemSeedTE) this.world.getTileEntity(this.getPos().add(new BlockPos(0, -5, 0)));
+            ItemChroma chroma = (ItemChroma)this.getStackInSlot(InjectorTE.CHROMA_INPUT_SLOT_INDEX).getItem();
+            te.chroma = chroma;
+            te.primer = this.getStackInSlot(InjectorTE.PRIME_INPUT_SLOT_INDEX).getItem();
+            Fluid[] array = new Fluid[fluidArrayList.size()];
+            for(int i = 0; i < fluidArrayList.size(); i++){
+                if(fluidArrayList.get(i) != null && fluidArrayList.get(i) != Fluids.EMPTY){
+                    array[i] = fluidArrayList.get(i);
+                }
+            }
+            te.essences = array;
+            GemSeedBlock gemseed = (GemSeedBlock) this.world.getBlockState(this.getPos().add(new BlockPos(0, -5, 0))).getBlock();
+            gemseed.chroma = chroma;
+            gemseed.primer = this.getStackInSlot(InjectorTE.PRIME_INPUT_SLOT_INDEX).getItem();
+            gemseed.essences = array;
+            this.getStackInSlot(InjectorTE.CHROMA_INPUT_SLOT_INDEX).shrink(1);
+            this.getStackInSlot(InjectorTE.PRIME_INPUT_SLOT_INDEX).shrink(1);
+            this.world.notifyBlockUpdate(this.pos, this.getBlockState(), this.getBlockState(), 2);
+            this.markDirty();
         }
-        this.world.notifyBlockUpdate(this.pos, this.getBlockState(), this.getBlockState(), 2);
-        this.markDirty();
     }
 
     public boolean shouldPullFluidFromStack(int tank){

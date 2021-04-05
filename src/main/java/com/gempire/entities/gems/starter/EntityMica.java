@@ -26,7 +26,6 @@ import net.minecraft.world.World;
 import java.util.ArrayList;
 
 public class EntityMica extends EntityStarterGem {
-    public static ArrayList<Crux> MICA_CRUXES = new ArrayList<>();
     public static final int SKIN_COLOR_START = 0xBAA884;
     public static final int SKIN_COLOR_END = 0xF2DAA9;
 
@@ -86,16 +85,5 @@ public class EntityMica extends EntityStarterGem {
     @Override
     public Abilities[] possibleAbilities() {
         return new Abilities[0];
-    }
-
-    public static ArrayList<Crux> generateCruxes() {
-        ArrayList<Crux> gemCruxes = new ArrayList<>();
-        float gemTemperature = 1.5f;
-        gemCruxes.add(new Crux(Blocks.STONE.getDefaultState(), 2, CruxType.INORGANIC));
-        return gemCruxes;
-    }
-
-    public static void setCruxes(){
-        EntityMica.MICA_CRUXES = EntityMica.generateCruxes();
     }
 }

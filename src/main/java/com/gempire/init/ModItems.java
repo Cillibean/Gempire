@@ -1,6 +1,7 @@
 package com.gempire.init;
 
 import com.gempire.Gempire;
+import com.gempire.items.ItemChroma;
 import com.gempire.items.ItemGem;
 import com.gempire.items.TestItem;
 import com.gempire.util.ModItemGroup;
@@ -177,6 +178,13 @@ public class ModItems {
             new BucketItem(ModFluids.YELLOW_ESSENCE, new Item.Properties().containerItem(ModItems.ESSENCE_BOTTLE.get()).maxStackSize(1).group(ModItemGroup.ITEMS)));
     public static final RegistryObject<Item> WHITE_ESSENCE = ITEMS.register("white_essence", () ->
             new BucketItem(ModFluids.WHITE_ESSENCE, new Item.Properties().containerItem(ModItems.ESSENCE_BOTTLE.get()).maxStackSize(1).group(ModItemGroup.ITEMS)));
+
+    public static final RegistryObject<Item> WHITE_CHROMA = ITEMS.register("white_chroma", () ->
+            new ItemChroma(new Item.Properties().group(ModItemGroup.ITEMS).maxStackSize(64), 0));
+    public static final RegistryObject<Item> ORANGE_CHROMA = ITEMS.register("orange_chroma", () ->
+            new ItemChroma(new Item.Properties().group(ModItemGroup.ITEMS).maxStackSize(64), 1));
+    public static final RegistryObject<Item> BLUE_CHROMA = ITEMS.register("blue_chroma", () ->
+            new ItemChroma(new Item.Properties().group(ModItemGroup.ITEMS).maxStackSize(64), 11));
 
     public static final RegistryObject<Item> WHITE_SAPPHIRE_GEM = ITEMS.register("sapphire_gem_0", () ->
             new ItemGem(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));

@@ -8,8 +8,8 @@ public class Crux {
     public Block block;
     public float weight;
     public CruxType type;
-    public float temperatureMin = .7f;
-    public float temperatureMax = 1.4f;
+    public float temperatureMin = -1f;
+    public float temperatureMax = 2f;
 
     public Crux(BlockState block, float weight, CruxType type){
         this.block = block.getBlock();
