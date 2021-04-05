@@ -6,6 +6,7 @@ import com.gempire.systems.injection.GemFormation;
 import com.gempire.tileentities.GemSeedTE;
 import com.gempire.tileentities.InjectorTE;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.entity.item.TNTEntity;
@@ -15,6 +16,9 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.shapes.ISelectionContext;
+import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
@@ -41,7 +45,7 @@ public class GemSeedBlock extends Block {
     @Override
     public void onExplosionDestroy(World worldIn, BlockPos pos, Explosion explosionIn) {
         super.onExplosionDestroy(worldIn, pos, explosionIn);
-        GemFormation form = new GemFormation(worldIn, pos, new BlockPos(5, 5, 5), this.chroma, this.primer, this.essences);
+        GemFormation form = new GemFormation(worldIn, pos, new BlockPos(7, 7, 7), this.chroma, this.primer, this.essences);
         form.SpawnGem();
         worldIn.destroyBlock(pos, false);
     }
@@ -50,4 +54,17 @@ public class GemSeedBlock extends Block {
     public boolean hasTileEntity(BlockState state) {
         return true;
     }
+
+    @Override
+    public BlockRenderType getRenderType(BlockState state) {
+        return BlockRenderType.MODEL;
+    }
+
+    @Override
+    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
+        VoxelShape shape1 = Block.makeCuboidShape(3, 3, 3, 13, 13, 13);
+        return shape1;
+    }
+
+
 }

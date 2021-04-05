@@ -1,5 +1,5 @@
 {
   "variants": {
-    "": { "model": "gempire:block/gem_seed_block" }
+    "": { "model": "gempire:block/gem_seed" }
   }
 }

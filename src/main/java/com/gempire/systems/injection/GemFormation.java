@@ -171,7 +171,7 @@ public class GemFormation {
                         }
                     }
                 }
-                if(essenceCount != this.essences.length){
+                if(essenceCount != conditions.essences.length){
                     System.out.println("Essences Equal: " + essenceCount);
                     weightThisGem = false;
                 }
