@@ -3,6 +3,7 @@ package com.gempire.init;
 import com.gempire.Gempire;
 import com.gempire.tileentities.GemSeedTE;
 import com.gempire.tileentities.InjectorTE;
+import com.gempire.tileentities.PowerCrystalTE;
 import com.gempire.tileentities.TankTE;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.fml.RegistryObject;
@@ -25,8 +26,11 @@ public class ModTE {
             "test_container_te", () -> TileEntityType.Builder.create(TestContainerTE::new, ModBlocks.TEST_CONTAINER_BLOCK.get()).build(null));*/
 
     public static final RegistryObject<TileEntityType<InjectorTE>> INJECTOR_TE = TILE_ENTITIES.register(
-            "injector_te", () -> TileEntityType.Builder.create(InjectorTE::new, ModBlocks.INJECTOR_BLOCK.get()).build(null));
+            "injector_te", () -> TileEntityType.Builder.create(InjectorTE::new, ModBlocks.DRILL_BLOCK.get()).build(null));
 
     public static final RegistryObject<TileEntityType<TankTE>> TANK_TE = TILE_ENTITIES.register(
             "tank_te", () -> TileEntityType.Builder.create(TankTE::new, ModBlocks.TANK_BLOCK.get()).build(null));
+
+    public static final RegistryObject<TileEntityType<PowerCrystalTE>> POWER_CRYSTAL_TE = TILE_ENTITIES.register(
+            "power_crystal_te", () -> TileEntityType.Builder.create(PowerCrystalTE::new, ModBlocks.POWER_CRYSTAL_BLOCK.get()).build(null));
 }

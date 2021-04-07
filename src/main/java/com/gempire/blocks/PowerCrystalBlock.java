@@ -2,14 +2,13 @@ package com.gempire.blocks;
 
 import com.gempire.init.ModBlocks;
 import com.gempire.tileentities.InjectorTE;
-import com.gempire.tileentities.TankTE;
+import com.gempire.tileentities.PowerCrystalTE;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ContainerBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.state.properties.DoubleBlockHalf;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
@@ -23,29 +22,20 @@ import net.minecraftforge.fml.network.NetworkHooks;
 
 import javax.annotation.Nullable;
 
-import static com.gempire.blocks.TankBlock.HALF;
+public class PowerCrystalBlock extends ContainerBlock {
 
-public class InjectorBlock extends ContainerBlock {
-
-    public InjectorBlock(Properties builder) {
-        super(builder);
+    public PowerCrystalBlock(Properties properties) {
+        super(properties);
     }
 
-    @Nullable
-    @Override
-    public TileEntity createNewTileEntity(IBlockReader worldIn) {
-        return new InjectorTE();
-    }
-
-    @SuppressWarnings("deprecation")
     @Override
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        if(!worldIn.isRemote()){
-            if(worldIn.getBlockState(pos.up()).getBlock() == ModBlocks.TANK_BLOCK.get()){
-                if(worldIn.getBlockState(pos.up().up().up()).getBlock() == ModBlocks.POWER_CRYSTAL_BLOCK.get()){
-                    TileEntity te = worldIn.getTileEntity(pos);
-                    if(te instanceof InjectorTE){
-                        NetworkHooks.openGui((ServerPlayerEntity) player, (InjectorTE)te, pos);
+        if(!worldIn.isRemote()) {
+            if (worldIn.getBlockState(pos.down()).getBlock() == ModBlocks.TANK_BLOCK.get()) {
+                if (worldIn.getBlockState(pos.down().down().down()).getBlock() == ModBlocks.DRILL_BLOCK.get()) {
+                    TileEntity te = worldIn.getTileEntity(pos.down().down().down());
+                    if (te instanceof InjectorTE) {
+                        NetworkHooks.openGui((ServerPlayerEntity) player, (InjectorTE) te, pos.down().down().down());
                         return ActionResultType.SUCCESS;
                     }
                 }
@@ -54,14 +44,20 @@ public class InjectorBlock extends ContainerBlock {
         return ActionResultType.PASS;
     }
 
+    @Override
+    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
+        return Block.makeCuboidShape(0.1D, 0.1D, 0.1D, 15.9D, 15.9D , 15.9D);
+    }
+
+    @Nullable
+    @Override
+    public TileEntity createNewTileEntity(IBlockReader worldIn) {
+        return new PowerCrystalTE();
+    }
+
     @SuppressWarnings("deprecation")
     @Override
     public BlockRenderType getRenderType(BlockState state) {
         return BlockRenderType.MODEL;
-    }
-
-    @Override
-    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-        return Block.makeCuboidShape(0.1D, 0.1D, 0.1D, 15.9D, 15.9D , 15.9D);
     }
 }

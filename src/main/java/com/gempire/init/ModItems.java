@@ -148,15 +148,27 @@ public class ModItems {
                     new Item.Properties().group(ModItemGroup.BLOCKS)
             )
     );
-    public static final RegistryObject<Item> INJECTOR_BLOCK_ITEM = ITEMS.register("injector_block", () ->
+    public static final RegistryObject<Item> POWER_CRYSTAL_BLOCK_ITEM = ITEMS.register("power_crystal_block", () ->
             new BlockItem(
-                    ModBlocks.INJECTOR_BLOCK.get(),
+                    ModBlocks.POWER_CRYSTAL_BLOCK.get(),
                     new Item.Properties().group(ModItemGroup.BLOCKS)
             )
     );
     public static final RegistryObject<Item> TANK_BLOCK_ITEM = ITEMS.register("tank_block", () ->
             new BlockItem(
                     ModBlocks.TANK_BLOCK.get(),
+                    new Item.Properties().group(ModItemGroup.BLOCKS)
+            )
+    );
+    public static final RegistryObject<Item> DRILL_BLOCK_ITEM = ITEMS.register("drill_block", () ->
+            new BlockItem(
+                    ModBlocks.DRILL_BLOCK.get(),
+                    new Item.Properties().group(ModItemGroup.BLOCKS)
+            )
+    );
+    public static final RegistryObject<Item> INJECTOR_BLOCK_ITEM = ITEMS.register("injector_block", () ->
+            new BlockItem(
+                    ModBlocks.INJECTOR_BLOCK.get(),
                     new Item.Properties().group(ModItemGroup.BLOCKS)
             )
     );

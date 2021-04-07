@@ -1,8 +1,7 @@
 package com.gempire.init;
 
 import com.gempire.Gempire;
-import com.gempire.networking.C2SRequestInject;
-import com.gempire.networking.C2SRequestUpdateInjectorValves;
+import com.gempire.networking.*;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.network.NetworkRegistry;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
@@ -30,5 +29,23 @@ public class ModPacketHandler {
                 C2SRequestInject::encode,
                 C2SRequestInject::decode,
                 C2SRequestInject::handle);
+        ModPacketHandler.INSTANCE.registerMessage(
+                networkId++,
+                C2SRequestDumpFluidsInjector.class,
+                C2SRequestDumpFluidsInjector::encode,
+                C2SRequestDumpFluidsInjector::decode,
+                C2SRequestDumpFluidsInjector::handle);
+        ModPacketHandler.INSTANCE.registerMessage(
+                networkId++,
+                C2SRequestDumpFluidsTank.class,
+                C2SRequestDumpFluidsTank::encode,
+                C2SRequestDumpFluidsTank::decode,
+                C2SRequestDumpFluidsTank::handle);
+        ModPacketHandler.INSTANCE.registerMessage(
+                networkId++,
+                S2SSendGemSeedInfo.class,
+                S2SSendGemSeedInfo::encode,
+                S2SSendGemSeedInfo::decode,
+                S2SSendGemSeedInfo::handle);
     }
 }

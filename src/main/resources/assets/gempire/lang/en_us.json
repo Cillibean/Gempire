@@ -26,7 +26,9 @@
 
   "block.gempire.gem_seed_block": "Gem Seed",
   "block.gempire.injector_block": "Injector",
+  "block.gempire.drill_block": "Drill",
   "block.gempire.tank_block": "Fluid Tank",
+  "block.gempire.power_crystal_block": "Power Crystal",
   "block.gempire.pink_essence": "Pink Essence",
   "block.gempire.blue_essence": "Blue Essence",
   "block.gempire.yellow_essence": "Yellow Essence",

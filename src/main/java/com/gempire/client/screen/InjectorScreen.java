@@ -1,25 +1,17 @@
 package com.gempire.client.screen;
 
 import com.gempire.container.InjectorContainer;
-import com.gempire.container.TankContainer;
-import com.gempire.init.ModFluids;
 import com.gempire.init.ModPacketHandler;
+import com.gempire.networking.C2SRequestDumpFluidsInjector;
 import com.gempire.networking.C2SRequestInject;
 import com.gempire.networking.C2SRequestUpdateInjectorValves;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.client.gui.widget.button.ImageButton;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.fluid.Fluids;
-import net.minecraft.inventory.container.PlayerContainer;
-import net.minecraft.network.play.client.CUpdateCommandBlockPacket;
-import net.minecraft.network.play.server.SUpdateTileEntityPacket;
-import net.minecraft.tileentity.CommandBlockLogic;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -35,6 +27,7 @@ public class InjectorScreen extends ContainerScreen<InjectorContainer> {
     public static final ResourceLocation HALO_GUI_WHITE = new ResourceLocation("gempire:textures/gui/injector_gui_fluid_overlay_white.png");
     public static final ResourceLocation BUTTON_TEXTURE = new ResourceLocation("gempire:textures/gui/injector_gui_fluid_button.png");
     public static final ResourceLocation INJECT_BUTTON_TEXTURE = new ResourceLocation("gempire:textures/gui/inject_button.png");
+    public static final ResourceLocation DUMP_BUTTON = new ResourceLocation("gempire:textures/gui/injector_dump_button.png");
 
     public InjectorScreen(InjectorContainer screenContainer, PlayerInventory inv, ITextComponent titleIn) {
         super(screenContainer, inv, titleIn);
@@ -51,6 +44,9 @@ public class InjectorScreen extends ContainerScreen<InjectorContainer> {
         int y = (this.height - this.ySize) / 2;
         this.addButton(new ImageButton(x + 83, y + 58, 51, 12, 0, 0, 0, InjectorScreen.INJECT_BUTTON_TEXTURE, 51, 12, (p_213029_1_) -> {
             ModPacketHandler.INSTANCE.sendToServer(new C2SRequestInject(this.container.injector.getPos()));
+        }));
+        this.addButton(new ImageButton(x + 133, y + 36, 7, 20, 0, 0, 0, InjectorScreen.DUMP_BUTTON, 7, 20, (p_213029_1_) -> {
+            ModPacketHandler.INSTANCE.sendToServer(new C2SRequestDumpFluidsInjector(this.container.injector.getPos()));
         }));
         this.addButton(new ImageButton(x + 101, y + 39, 6, 14, 0, 0, 0, InjectorScreen.BUTTON_TEXTURE, 6, 14, (p_213029_1_) -> {
             ModPacketHandler.INSTANCE.sendToServer(new C2SRequestUpdateInjectorValves("pink", this.container.injector.getPos()));

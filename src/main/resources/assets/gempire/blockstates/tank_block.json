@@ -1,5 +1,5 @@
 {
   "variants": {
-    "": { "model": "gempire:block/tank_block" }
+    "": { "model": "gempire:block/tank" }
   }
 }

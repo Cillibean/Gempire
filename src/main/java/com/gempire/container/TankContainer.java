@@ -39,18 +39,19 @@ public class TankContainer extends Container {
         this.canInteract = IWorldPosCallable.of(this.tank.getWorld(), this.tank.getPos());
 
         //TILE ENTITY
-        this.addSlot(new Slot((IInventory)this.tank, TankTE.BUCKET_INPUT_SLOT_INDEX, 152, 61));
+        this.addSlot(new Slot((IInventory)this.tank, TankTE.BUCKET_INPUT_SLOT_INDEX, 78, 50));
+        this.addSlot(new Slot((IInventory)this.tank, TankTE.BUCKET_OUTPUT_SLOT_INDEX, 96, 50));
 
         //PLAYER INVENTORY
         for(int row = 0; row < 3; row++){
             for(int col = 0; col < 9; col++){
-                this.addSlot(new Slot(playerInventory, col + row * 9 + 9, 8 + col * 18, 166 - (4 - row) * 18 - 10));
+                this.addSlot(new Slot(playerInventory, col + row * 9 + 9, 8 + col * 18, 160 - (4 - row) * 18 - 10));
             }
         }
 
         //PLAYER HOTBAR
         for(int col = 0; col < 9; col++){
-            this.addSlot(new Slot(playerInventory, col, 8 + col * 18, 142));
+            this.addSlot(new Slot(playerInventory, col, 8 + col * 18, 136));
         }
     }
 

@@ -77,7 +77,7 @@ public class InjectorContainer extends Container {
 
     @Override
     public boolean canInteractWith(PlayerEntity playerIn) {
-        return this.isWithinUsableDistance(this.canInteract, playerIn, ModBlocks.INJECTOR_BLOCK.get());
+        return this.isWithinUsableDistance(this.canInteract, playerIn, ModBlocks.DRILL_BLOCK.get());
     }
 
     @Override

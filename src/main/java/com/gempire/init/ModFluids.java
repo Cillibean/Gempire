@@ -1,7 +1,10 @@
 package com.gempire.init;
 
+import com.gempire.tileentities.TankTE;
 import net.minecraft.fluid.FlowingFluid;
 import net.minecraft.fluid.Fluid;
+import net.minecraft.fluid.Fluids;
+import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
@@ -115,5 +118,14 @@ public class ModFluids {
                         .density(3000).viscosity(6000).luminosity(15))
                 .block(ModBlocks.WHITE_ESSENCE_BLOCK)
                 .bucket(ModItems.WHITE_ESSENCE);
+    }
+
+    public static void registerFluidBuckets(){
+        TankTE.FLUID_BUCKETS.put(ModFluids.WHITE_ESSENCE.get(), ModItems.WHITE_ESSENCE.get());
+        TankTE.FLUID_BUCKETS.put(ModFluids.YELLOW_ESSENCE.get(), ModItems.YELLOW_ESSENCE.get());
+        TankTE.FLUID_BUCKETS.put(ModFluids.BLUE_ESSENCE.get(), ModItems.BLUE_ESSENCE.get());
+        TankTE.FLUID_BUCKETS.put(ModFluids.PINK_ESSENCE.get(), ModItems.PINK_ESSENCE.get());
+        TankTE.FLUID_BUCKETS.put(Fluids.WATER, Items.WATER_BUCKET);
+        TankTE.FLUID_BUCKETS.put(Fluids.LAVA, Items.LAVA_BUCKET);
     }
 }

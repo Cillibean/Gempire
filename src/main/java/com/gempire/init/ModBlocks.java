@@ -1,10 +1,7 @@
 package com.gempire.init;
 
 import com.gempire.Gempire;
-import com.gempire.blocks.DrainedBlock;
-import com.gempire.blocks.GemSeedBlock;
-import com.gempire.blocks.InjectorBlock;
-import com.gempire.blocks.TankBlock;
+import com.gempire.blocks.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.FlowingFluidBlock;
 import net.minecraft.block.SoundType;
@@ -34,6 +31,36 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> GEM_SEED_BLOCK = BLOCKS.register("gem_seed_block", () ->
             new GemSeedBlock(Block.Properties
+                    .create(Material.IRON)
+                    .hardnessAndResistance(5.0f, 6.0f)
+                    .sound(SoundType.STONE)
+                    .harvestLevel(1)
+                    .harvestTool(ToolType.PICKAXE)
+            )
+    );
+
+    public static final RegistryObject<Block> POWER_CRYSTAL_BLOCK = BLOCKS.register("power_crystal_block", () ->
+            new PowerCrystalBlock(Block.Properties
+                    .create(Material.IRON)
+                    .hardnessAndResistance(5.0f, 6.0f)
+                    .sound(SoundType.GLASS)
+                    .harvestLevel(1)
+                    .harvestTool(ToolType.PICKAXE)
+            )
+    );
+
+    public static final RegistryObject<Block> TANK_BLOCK = BLOCKS.register("tank_block", () ->
+            new TankBlock(Block.Properties
+                    .create(Material.IRON)
+                    .hardnessAndResistance(5.0f, 6.0f)
+                    .sound(SoundType.CHAIN)
+                    .harvestLevel(1)
+                    .harvestTool(ToolType.PICKAXE)
+            )
+    );
+
+    public static final RegistryObject<Block> DRILL_BLOCK = BLOCKS.register("drill_block", () ->
+            new InjectorBlock(Block.Properties
                     .create(Material.IRON)
                     .hardnessAndResistance(5.0f, 6.0f)
                     .sound(SoundType.STONE)
@@ -262,13 +289,4 @@ public class ModBlocks {
             )
     );*/
 
-    public static final RegistryObject<Block> TANK_BLOCK = BLOCKS.register("tank_block", () ->
-            new TankBlock(Block.Properties
-                    .create(Material.IRON)
-                    .hardnessAndResistance(5.0f, 6.0f)
-                    .sound(SoundType.GLASS)
-                    .harvestLevel(1)
-                    .harvestTool(ToolType.PICKAXE)
-            )
-    );
 }

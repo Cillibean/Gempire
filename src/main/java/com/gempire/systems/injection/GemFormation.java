@@ -163,18 +163,19 @@ public class GemFormation {
                 if(this.primer == conditions.primer && conditions.primer != Items.AIR && this.primer != Items.AIR){
                     temperatureDifference = 0;
                 }
-                int essenceCount = 0;
+                //int essenceCount = 0;
                 for (Fluid essence : this.essences){
+                    System.out.println(essence.getRegistryName().toString());
                     for(Fluid essenceGem : conditions.essences){
                         if(essence == essenceGem){
-                            essenceCount++;
+                            //essenceCount++;
                         }
                     }
                 }
-                if(essenceCount != conditions.essences.length){
+                /*if(essenceCount != this.essences.length){
                     System.out.println("Essences Equal: " + essenceCount);
                     weightThisGem = false;
-                }
+                }*/
                 if(weightThisGem) {
                     for (Crux crux : GEM_CONDITIONS.get(gem).cruxes) {
                         for (Block block : BLOCKS_TO_CHECK) {
@@ -225,7 +226,10 @@ public class GemFormation {
                 returnGem = lowestRGem;
                 break;
             }
-            if (r <= 0) break;
+            if (r <= 0) {
+                returnGem = gem;
+                break;
+            }
         }
         //OUTPUT: A gem
         return returnGem;

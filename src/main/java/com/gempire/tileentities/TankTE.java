@@ -1,16 +1,21 @@
 package com.gempire.tileentities;
 
 import com.gempire.container.TankContainer;
+import com.gempire.init.ModFluids;
+import com.gempire.init.ModItems;
 import com.gempire.init.ModTE;
+import com.sun.org.apache.xpath.internal.operations.String;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.renderer.texture.ITickable;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.BucketItem;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
@@ -22,6 +27,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidTank;
@@ -30,16 +36,19 @@ import net.minecraftforge.fluids.capability.templates.FluidTank;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.HashMap;
 
 public class TankTE extends LockableLootTileEntity implements IFluidTank, INamedContainerProvider, ITickableTileEntity {
-    public static final int NUMBER_OF_SLOTS = 1;
+    public static final int NUMBER_OF_SLOTS = 2;
     public static final int BUCKET_INPUT_SLOT_INDEX = 0;
+    public static final int BUCKET_OUTPUT_SLOT_INDEX = 1;
+    public static HashMap<Fluid, Item> FLUID_BUCKETS = new HashMap<>();
     public NonNullList<ItemStack> items = NonNullList.withSize(TankTE.NUMBER_OF_SLOTS, ItemStack.EMPTY);
     public FluidTank tank;
 
     public TankTE() {
         super(ModTE.TANK_TE.get());
-        this.tank = new FluidTank(8000);
+        this.tank = new FluidTank(4000);
     }
 
     @Override
@@ -64,16 +73,48 @@ public class TankTE extends LockableLootTileEntity implements IFluidTank, INamed
 
     @Override
     public void tick() {
-        ItemStack stack = this.getStackInSlot(TankTE.BUCKET_INPUT_SLOT_INDEX);
+        ItemStack stackToInput = this.getStackInSlot(TankTE.BUCKET_INPUT_SLOT_INDEX);
         if(this.getFluid() != null) {
-            if (stack != ItemStack.EMPTY) {
+            if (stackToInput != ItemStack.EMPTY) {
                 //System.out.println("Stack is not empty");
-                if (this.shouldPullFluid() && this.canPullFluidFromStack(stack)) {
+                if (this.shouldPullFluid() && this.canPullFluidFromStack(stackToInput)) {
                     System.out.println("Should Pull");
-                    BucketItem bucket = (BucketItem) stack.getItem();
+                    BucketItem bucket = (BucketItem) stackToInput.getItem();
                     this.tank.fill(new FluidStack(bucket.getFluid(), 1000), IFluidHandler.FluidAction.EXECUTE);
-                    this.setInventorySlotContents(TankTE.BUCKET_INPUT_SLOT_INDEX, new ItemStack(Items.BUCKET));
+                    if(bucket == ModItems.WHITE_ESSENCE.get() || bucket == ModItems.YELLOW_ESSENCE.get() || bucket == ModItems.BLUE_ESSENCE.get()
+                    || bucket == ModItems.PINK_ESSENCE.get()){
+                        this.setInventorySlotContents(TankTE.BUCKET_INPUT_SLOT_INDEX, new ItemStack(ModItems.ESSENCE_BOTTLE.get()));
+                    }
+                    else {
+                        this.setInventorySlotContents(TankTE.BUCKET_INPUT_SLOT_INDEX, new ItemStack(Items.BUCKET));
+                    }
                     System.out.println("Tank level is at " + this.getFluidAmount() + "mb");
+                    this.world.notifyBlockUpdate(this.pos, this.getBlockState(), this.getBlockState(), 2);
+                    this.markDirty();
+                }
+            }
+        }
+        ItemStack stackToOutput = this.getStackInSlot(TankTE.BUCKET_OUTPUT_SLOT_INDEX);
+        if(this.getFluid() != null) {
+            if (stackToOutput != ItemStack.EMPTY) {
+                if (this.shouldPutFluid() && this.canPutFluidFromStack(stackToOutput)) {
+                    BucketItem bucket = (BucketItem) stackToOutput.getItem();
+                    /*if(this.tank.getFluid().getFluid() == ModFluids.WHITE_ESSENCE.get() ||
+                            this.tank.getFluid().getFluid() == ModFluids.YELLOW_ESSENCE.get() ||
+                            this.tank.getFluid().getFluid() == ModFluids.BLUE_ESSENCE.get() ||
+                            this.tank.getFluid().getFluid() == ModFluids.PINK_ESSENCE.get()){
+                        if(bucket == ModItems.ESSENCE_BOTTLE.get()) {
+                            this.tank.drain(new FluidStack(this.tank.getFluid().getFluid(), 1000), IFluidHandler.FluidAction.EXECUTE);
+                            this.setInventorySlotContents(TankTE.BUCKET_OUTPUT_SLOT_INDEX, new ItemStack(this.tank.getFluid().getFluid().getFilledBucket()));
+                            this.world.notifyBlockUpdate(this.pos, this.getBlockState(), this.getBlockState(), 2);
+                            this.markDirty();
+                        }
+                    }
+                    else {
+                    }*/
+                    Fluid fluid = this.tank.getFluid().getFluid();
+                    this.tank.drain(new FluidStack(this.tank.getFluid().getFluid(), 1000), IFluidHandler.FluidAction.EXECUTE);
+                    this.setInventorySlotContents(TankTE.BUCKET_OUTPUT_SLOT_INDEX, new ItemStack((BucketItem)TankTE.FLUID_BUCKETS.get(fluid)));
                     this.world.notifyBlockUpdate(this.pos, this.getBlockState(), this.getBlockState(), 2);
                     this.markDirty();
                 }
@@ -96,12 +137,28 @@ public class TankTE extends LockableLootTileEntity implements IFluidTank, INamed
         return this.getFluid().getAmount() < this.getCapacity();
     }
 
-    //TANK FUNCTIONALITY
+    public boolean canPutFluidFromStack(ItemStack stack){
+        if(stack.getItem() instanceof BucketItem){
+            BucketItem bucket = (BucketItem)stack.getItem();
+            if(bucket.getFluid() == Fluids.EMPTY){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean shouldPutFluid(){
+        return this.getFluid().getAmount() >= 1000;
+    }
 
     //TANK FUNCTIONALITY
 
-    public void pullFluid(ItemStack stack){
+    //TANK FUNCTIONALITY
 
+    public void EmptyTank(){
+        this.tank.setFluid(FluidStack.EMPTY);
+        this.world.notifyBlockUpdate(this.pos, this.getBlockState(), this.getBlockState(), 2);
+        this.markDirty();
     }
 
     //CONTAINER STUFF
@@ -110,12 +167,12 @@ public class TankTE extends LockableLootTileEntity implements IFluidTank, INamed
 
     @Override
     public ITextComponent getDisplayName() {
-        return new TranslationTextComponent("container.gempire.tank");
+        return new StringTextComponent("");
     }
 
     @Override
     protected ITextComponent getDefaultName() {
-        return new TranslationTextComponent("container.gempire.tank");
+        return new StringTextComponent("");
     }
 
     @Override
@@ -155,7 +212,7 @@ public class TankTE extends LockableLootTileEntity implements IFluidTank, INamed
 
     @Override
     public int getCapacity() {
-        return 8000;
+        return 4000;
     }
 
     @Override

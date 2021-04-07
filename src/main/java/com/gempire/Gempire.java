@@ -10,6 +10,7 @@ import com.gempire.entities.gems.starter.EntityPebble;
 import com.gempire.entities.gems.starter.EntityShale;
 import com.gempire.init.ModContainers;
 import com.gempire.init.ModEntities;
+import com.gempire.init.ModFluids;
 import com.gempire.init.RegistryHandler;
 import com.gempire.proxy.ClientProxy;
 import net.minecraft.block.Block;
@@ -78,6 +79,7 @@ public class Gempire
             GlobalEntityTypeAttributes.put(ModEntities.SAPPHIRE.get(), EntitySapphire.setCustomAttributes().create());
         });
         ModEntities.registerCruxes();
+        ModFluids.registerFluidBuckets();
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {

@@ -18,6 +18,8 @@ import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
@@ -26,6 +28,7 @@ import net.minecraft.world.Explosion;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.RegistryObject;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Set;
@@ -51,9 +54,40 @@ public class GemSeedTE extends TileEntity implements ITickableTileEntity {
             this.spawned = true;
             TNTEntity tnt = new TNTEntity(this.world, this.getPos().getX(), this.getPos().getY(), this.getPos().getZ(), null);
             this.world.addEntity(tnt);
+            this.world.notifyBlockUpdate(this.getPos(), this.getBlockState(), this.getBlockState(), 2);
+            this.markDirty();
         }
     }
 
+    public void SetChroma(ItemChroma chroma){
+        this.chroma = chroma;
+        this.world.notifyBlockUpdate(this.getPos(), this.getBlockState(), this.getBlockState(), 2);
+        this.markDirty();
+    }
+
+    public ItemChroma getChroma(){
+        return this.chroma;
+    }
+
+    public void SetPrimer(Item primer){
+        this.primer = primer;
+        this.world.notifyBlockUpdate(this.getPos(), this.getBlockState(), this.getBlockState(), 2);
+        this.markDirty();
+    }
+
+    public Item getPrimer(){
+        return this.primer;
+    }
+
+    public void setEssences(Fluid[] essec){
+        this.essences = essec;
+        this.world.notifyBlockUpdate(this.getPos(), this.getBlockState(), this.getBlockState(), 2);
+        this.markDirty();
+    }
+
+    public Fluid[] getEssences(){
+        return this.essences;
+    }
     @Override
     public CompoundNBT write(CompoundNBT compound) {
         super.write(compound);
@@ -135,5 +169,31 @@ public class GemSeedTE extends TileEntity implements ITickableTileEntity {
         else {
             return Fluids.EMPTY;
         }
+    }
+
+    @Override
+    public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
+        //Debug
+        System.out.println("[DEBUG]:Client recived tile sync packet");
+        this.read(this.world.getBlockState(pkt.getPos()), pkt.getNbtCompound());
+    }
+
+    @Override
+    public CompoundNBT getUpdateTag() {
+        return this.write(new CompoundNBT());
+    }
+
+    @Nullable
+    @Override
+    public SUpdateTileEntityPacket getUpdatePacket() {
+        //Debug
+        System.out.println("[DEBUG]:Server sent tile sync packet");
+        return new SUpdateTileEntityPacket(this.pos, -1, this.getUpdateTag());
+    }
+
+    @Override
+    public void handleUpdateTag(BlockState state, CompoundNBT tag) {
+        System.out.println("[DEBUG]:Handling tag on chunk load");
+        this.read(state, tag);
     }
 }
