@@ -195,8 +195,36 @@ public class ModItems {
             new ItemChroma(new Item.Properties().group(ModItemGroup.ITEMS).maxStackSize(64), 0));
     public static final RegistryObject<Item> ORANGE_CHROMA = ITEMS.register("orange_chroma", () ->
             new ItemChroma(new Item.Properties().group(ModItemGroup.ITEMS).maxStackSize(64), 1));
+    public static final RegistryObject<Item> MAGENTA_CHROMA = ITEMS.register("magenta_chroma", () ->
+            new ItemChroma(new Item.Properties().group(ModItemGroup.ITEMS).maxStackSize(64), 2));
+    public static final RegistryObject<Item> LIGHT_BLUE_CHROMA = ITEMS.register("light_blue_chroma", () ->
+            new ItemChroma(new Item.Properties().group(ModItemGroup.ITEMS).maxStackSize(64), 3));
+    public static final RegistryObject<Item> YELLOW_CHROMA = ITEMS.register("yellow_chroma", () ->
+            new ItemChroma(new Item.Properties().group(ModItemGroup.ITEMS).maxStackSize(64), 4));
+    public static final RegistryObject<Item> LIME_CHROMA = ITEMS.register("lime_chroma", () ->
+            new ItemChroma(new Item.Properties().group(ModItemGroup.ITEMS).maxStackSize(64), 5));
+    public static final RegistryObject<Item> PINK_CHROMA = ITEMS.register("pink_chroma", () ->
+            new ItemChroma(new Item.Properties().group(ModItemGroup.ITEMS).maxStackSize(64), 6));
+    public static final RegistryObject<Item> GRAY_CHROMA = ITEMS.register("gray_chroma", () ->
+            new ItemChroma(new Item.Properties().group(ModItemGroup.ITEMS).maxStackSize(64), 7));
+    public static final RegistryObject<Item> LIGHT_GRAY_CHROMA = ITEMS.register("light_gray_chroma", () ->
+            new ItemChroma(new Item.Properties().group(ModItemGroup.ITEMS).maxStackSize(64), 8));
+    public static final RegistryObject<Item> CYAN_CHROMA = ITEMS.register("cyan_chroma", () ->
+            new ItemChroma(new Item.Properties().group(ModItemGroup.ITEMS).maxStackSize(64), 9));
+    public static final RegistryObject<Item> PURPLE_CHROMA = ITEMS.register("purple_chroma", () ->
+            new ItemChroma(new Item.Properties().group(ModItemGroup.ITEMS).maxStackSize(64), 10));
     public static final RegistryObject<Item> BLUE_CHROMA = ITEMS.register("blue_chroma", () ->
             new ItemChroma(new Item.Properties().group(ModItemGroup.ITEMS).maxStackSize(64), 11));
+    public static final RegistryObject<Item> BROWN_CHROMA = ITEMS.register("brown_chroma", () ->
+            new ItemChroma(new Item.Properties().group(ModItemGroup.ITEMS).maxStackSize(64), 12));
+    public static final RegistryObject<Item> GREEN_CHROMA = ITEMS.register("green_chroma", () ->
+            new ItemChroma(new Item.Properties().group(ModItemGroup.ITEMS).maxStackSize(64), 13));
+    public static final RegistryObject<Item> RED_CHROMA = ITEMS.register("red_chroma", () ->
+            new ItemChroma(new Item.Properties().group(ModItemGroup.ITEMS).maxStackSize(64), 14));
+    public static final RegistryObject<Item> BLACK_CHROMA = ITEMS.register("black_chroma", () ->
+            new ItemChroma(new Item.Properties().group(ModItemGroup.ITEMS).maxStackSize(64), 15));
+    public static final RegistryObject<Item> SPECIAL_CHROMA = ITEMS.register("special_chroma", () ->
+            new ItemChroma(new Item.Properties().group(ModItemGroup.ITEMS).maxStackSize(64), 16));
 
     public static final RegistryObject<Item> WHITE_SAPPHIRE_GEM = ITEMS.register("sapphire_gem_0", () ->
             new ItemGem(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
