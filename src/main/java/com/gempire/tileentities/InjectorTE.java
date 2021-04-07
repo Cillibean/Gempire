@@ -173,11 +173,11 @@ public class InjectorTE extends LockableLootTileEntity implements IFluidTank, IN
             if(this.whiteOpen){
                 portionToDrain++;
             }
-            ArrayList<Fluid> fluidArrayList = new ArrayList<>();
+            String essences = "";
             if (this.pinkOpen) {
                 FluidTank tank = this.getTankFromValue(0);
-                if (tank.getFluid().getFluid() != Fluids.EMPTY) {
-                    fluidArrayList.add(ModFluids.PINK_ESSENCE.get());
+                if (tank.getFluid() != FluidStack.EMPTY) {
+                    essences+="pink";
                     if (tank.getFluidAmount() - 200 / portionToDrain > 0) {
                         tank.getFluid().setAmount(tank.getFluidAmount() - 200);
                     } else {
@@ -187,8 +187,13 @@ public class InjectorTE extends LockableLootTileEntity implements IFluidTank, IN
             }
             if (this.blueOpen) {
                 FluidTank tank = this.getTankFromValue(1);
-                if (tank.getFluid().getFluid() != Fluids.EMPTY) {
-                    fluidArrayList.add(ModFluids.BLUE_ESSENCE.get());
+                if (tank.getFluid() != FluidStack.EMPTY) {
+                    if(essences == ""){
+                        essences += "blue";
+                    }
+                    else{
+                        essences+="-blue";
+                    }
                     if (tank.getFluidAmount() - 200 / portionToDrain > 0) {
                         tank.getFluid().setAmount(tank.getFluidAmount() - 200);
                     } else {
@@ -198,8 +203,13 @@ public class InjectorTE extends LockableLootTileEntity implements IFluidTank, IN
             }
             if (this.yellowOpen) {
                 FluidTank tank = this.getTankFromValue(2);
-                if (tank.getFluid().getFluid() != Fluids.EMPTY) {
-                    fluidArrayList.add(ModFluids.YELLOW_ESSENCE.get());
+                if (tank.getFluid() != FluidStack.EMPTY) {
+                    if(essences == ""){
+                        essences += "yellow";
+                    }
+                    else{
+                        essences+="-yellow";
+                    }
                     if (tank.getFluidAmount() - 200 / portionToDrain > 0) {
                         tank.getFluid().setAmount(tank.getFluidAmount() - 200);
                     } else {
@@ -209,8 +219,13 @@ public class InjectorTE extends LockableLootTileEntity implements IFluidTank, IN
             }
             if (this.whiteOpen) {
                 FluidTank tank = this.getTankFromValue(3);
-                if (tank.getFluid().getFluid() != Fluids.EMPTY) {
-                    fluidArrayList.add(ModFluids.WHITE_ESSENCE.get());
+                if (tank.getFluid() != FluidStack.EMPTY) {
+                    if(essences == ""){
+                        essences += "white";
+                    }
+                    else{
+                        essences+="-white";
+                    }
                     if (tank.getFluidAmount() - 200 / portionToDrain > 0) {
                         tank.getFluid().setAmount(tank.getFluidAmount() - 200);
                     } else {
@@ -218,28 +233,15 @@ public class InjectorTE extends LockableLootTileEntity implements IFluidTank, IN
                     }
                 }
             }
-            BlockPos seedPos = this.getPos().add(new BlockPos(0, -7, 0));
-            System.out.println(seedPos);
-
+            BlockPos seedPos = this.getPos().add(new BlockPos(0, -GemSeedTE.DRAIN_SIZE, 0));
             ItemChroma chroma = (ItemChroma)this.getStackInSlot(InjectorTE.CHROMA_INPUT_SLOT_INDEX).getItem();
             Item primer = this.getStackInSlot(InjectorTE.PRIME_INPUT_SLOT_INDEX).getItem();
-            Fluid[] array = new Fluid[fluidArrayList.size()];
-            for(int i = 0; i < fluidArrayList.size(); i++){
-                if(fluidArrayList.get(i) != null && fluidArrayList.get(i) != Fluids.EMPTY){
-                    array[i] = fluidArrayList.get(i);
-                }
-            }
-            //TODO: TRY MAKING THE FLUID PRIMER AND CHROMA STUFF ENTIRELY STRING BASED
             GemSeedBlock seedBlock = (GemSeedBlock) ModBlocks.GEM_SEED_BLOCK.get();
-            seedBlock.chroma = chroma;
-            seedBlock.primer = primer;
-            seedBlock.essences = array;
             this.world.setBlockState(seedPos, seedBlock.getDefaultState());
-            //ModPacketHandler.INSTANCE.sendToServer(new S2SSendGemSeedInfo(seedPos, this.getCompountNBTForPacket(chroma, primer, array)));
             GemSeedTE gemSeedTE = (GemSeedTE) this.world.getTileEntity(seedPos);
             gemSeedTE.SetChroma(chroma);
             gemSeedTE.SetPrimer(primer);
-            gemSeedTE.setEssences(array);
+            gemSeedTE.setEssences(essences);
             this.getStackInSlot(InjectorTE.CHROMA_INPUT_SLOT_INDEX).shrink(1);
             this.getStackInSlot(InjectorTE.PRIME_INPUT_SLOT_INDEX).shrink(1);
             this.world.notifyBlockUpdate(this.pos, this.getBlockState(), this.getBlockState(), 2);

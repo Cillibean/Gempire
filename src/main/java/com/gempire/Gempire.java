@@ -8,13 +8,12 @@ import com.gempire.entities.gems.EntitySapphire;
 import com.gempire.entities.gems.starter.EntityMica;
 import com.gempire.entities.gems.starter.EntityPebble;
 import com.gempire.entities.gems.starter.EntityShale;
-import com.gempire.init.ModContainers;
-import com.gempire.init.ModEntities;
-import com.gempire.init.ModFluids;
-import com.gempire.init.RegistryHandler;
+import com.gempire.init.*;
 import com.gempire.proxy.ClientProxy;
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.ScreenManager;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
@@ -87,6 +86,8 @@ public class Gempire
         //ScreenManager.registerFactory(ModContainers.TEST_CONTAINER.get(), TestContainerScreen::new);
         ScreenManager.registerFactory(ModContainers.TANK_CONTAINER.get(), TankScreen::new);
         ScreenManager.registerFactory(ModContainers.INJECTOR_CONTAINER.get(), InjectorScreen::new);
+
+        RenderTypeLookup.setRenderLayer(ModBlocks.POWER_CRYSTAL_BLOCK.get(), RenderType.getTranslucent());
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event)

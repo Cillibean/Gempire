@@ -17,9 +17,7 @@ public class ModCruxes {
         float gemTemperatureMin = 1.2f;
         float gemTemperatureMax = 2f;
         Item primer = Items.NETHERITE_INGOT;
-        Fluid[] essences = new Fluid[]{
-                ModFluids.PINK_ESSENCE.get()
-        };
+        String essences = "pink";
         gemCruxes.add(new Crux(Blocks.STONE.getDefaultState(), 2, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.MAGMA_BLOCK.getDefaultState(), 5, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.IRON_ORE.getDefaultState(), 3, CruxType.MINERAL, gemTemperatureMin, gemTemperatureMax));
@@ -35,9 +33,7 @@ public class ModCruxes {
         float gemTemperatureMin = 0f;
         float gemTemperatureMax = .7f;
         Item primer = Items.ENDER_EYE;
-        Fluid[] essences = new Fluid[]{
-                ModFluids.BLUE_ESSENCE.get(), ModFluids.WHITE_ESSENCE.get()
-        };
+        String essences = "blue-white";
         gemCruxes.add(new Crux(Blocks.STONE.getDefaultState(), 2, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.ICE.getDefaultState(), 5, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.PACKED_ICE.getDefaultState(), 5, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
@@ -49,27 +45,21 @@ public class ModCruxes {
 
     public static final GemConditions PEBBLE_CONDITIONS(){
         ArrayList<Crux> gemCruxes = new ArrayList<>();
-        Fluid[] essences = new Fluid[]{
-                ModFluids.PINK_ESSENCE.get()
-        };
+        String essences = "pink";
         gemCruxes.add(new Crux(Blocks.STONE.getDefaultState(), 2, CruxType.INORGANIC));
         return new GemConditions(gemCruxes, essences, 1);
     }
 
     public static final GemConditions MICA_CONDITIONS(){
         ArrayList<Crux> gemCruxes = new ArrayList<>();
-        Fluid[] essences = new Fluid[]{
-                ModFluids.YELLOW_ESSENCE.get()
-        };
+        String essences = "yellow";
         gemCruxes.add(new Crux(Blocks.STONE.getDefaultState(), 2, CruxType.INORGANIC));
         return new GemConditions(gemCruxes, essences, 1);
     }
 
     public static final GemConditions SHALE_CONDITIONS(){
         ArrayList<Crux> gemCruxes = new ArrayList<>();
-        Fluid[] essences = new Fluid[]{
-                ModFluids.BLUE_ESSENCE.get()
-        };
+        String essences = "blue";
         gemCruxes.add(new Crux(Blocks.STONE.getDefaultState(), 2, CruxType.INORGANIC));
         return new GemConditions(gemCruxes, essences, 1);
     }

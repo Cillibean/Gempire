@@ -33,9 +33,9 @@ public class GemFormation {
     public Block drained_sand, drained_soil, drained_stone, drained_stone_2, banded_drained_stone;
     public ItemChroma chroma;
     public Item primer;
-    public Fluid[] essences;
+    public String essences;
 
-    public GemFormation(World world, BlockPos pos, BlockPos volumeToCheck, ItemChroma chroma, Item primer, Fluid[] essences){
+    public GemFormation(World world, BlockPos pos, BlockPos volumeToCheck, ItemChroma chroma, Item primer, String essences){
         this.world = world;
         this.pos = pos;
         this.volumeToCheck = volumeToCheck;
@@ -75,10 +75,11 @@ public class GemFormation {
         catch (Exception e){
             e.printStackTrace();
         }
-        gem.setPosition(this.pos.getX(), this.pos.getY(), this.pos.getZ());
+        gem.setPosition(this.pos.getX() + .5f, this.pos.getY(), this.pos.getZ() + .5f);
         gem.setHealth(gem.getMaxHealth());
         this.world.addEntity(gem);
         this.Drain(GemFormation.getBlockPosInVolume(this.world, this.pos, this.volumeToCheck));
+        this.GenerateExitHole();
     }
 
     public static ArrayList<Block> getBlocksInVolume(World domhain, BlockPos position, BlockPos volume){
@@ -148,7 +149,7 @@ public class GemFormation {
             float gemWeight = 0;
             if (GEM_CONDITIONS.get(gem) != null) {
                 GemConditions conditions = GEM_CONDITIONS.get(gem);
-                boolean weightThisGem = true;
+                boolean weightThisGem = false;
                 //Do some math to multiply the gem weight by the inverse of the difference in biome temperature to preferred temperature
                 float temperatureDifference = 0;
                 if (BLOCK_TEMPERATURE >= conditions.temperatureMin) {
@@ -163,19 +164,21 @@ public class GemFormation {
                 if(this.primer == conditions.primer && conditions.primer != Items.AIR && this.primer != Items.AIR){
                     temperatureDifference = 0;
                 }
-                //int essenceCount = 0;
-                for (Fluid essence : this.essences){
-                    System.out.println(essence.getRegistryName().toString());
-                    for(Fluid essenceGem : conditions.essences){
-                        if(essence == essenceGem){
-                            //essenceCount++;
+                int essenceCount = 0;
+                String[] indEssencesInj = this.essences.split("-");
+                String[] indEssencesCond = conditions.essences.split("-");
+                for(int i = 0; i < indEssencesInj.length; i++){
+                    String essJ = indEssencesInj[i];
+                    for(int j = 0; j < indEssencesCond.length; j++){
+                        String essC = indEssencesCond[j];
+                        if(essJ.equalsIgnoreCase(essC)){
+                            essenceCount++;
                         }
                     }
                 }
-                /*if(essenceCount != this.essences.length){
-                    System.out.println("Essences Equal: " + essenceCount);
-                    weightThisGem = false;
-                }*/
+                if(essenceCount == indEssencesCond.length){
+                    weightThisGem = true;
+                }
                 if(weightThisGem) {
                     for (Crux crux : GEM_CONDITIONS.get(gem).cruxes) {
                         for (Block block : BLOCKS_TO_CHECK) {
@@ -235,6 +238,117 @@ public class GemFormation {
         return returnGem;
     }
 
+    public void GenerateExitHole(){
+        boolean found = false;
+        if(!found) {
+            ArrayList<BlockPos> blocks = new ArrayList<>();
+            ArrayList<BlockPos> blocksToDrain = new ArrayList<>();
+            for (int i = 0; i < 16; i++) {
+                if (this.world.getBlockState(this.pos.add(i, 0, 0)).getBlock() != Blocks.AIR) {
+                    blocks.add(this.pos.add(i, 0, 0));
+                    blocks.add(this.pos.add(i, 1, 0));
+                    blocks.add(this.pos.add(i, 2, 0));
+
+                    blocksToDrain.add(this.pos.add(i, 0, 0).down());
+                    blocksToDrain.add(this.pos.add(i, 0, 0).up().up().up());
+                    blocksToDrain.add(this.pos.add(i, 0, 0).north());
+                    blocksToDrain.add(this.pos.add(i, 0, 0).up().north());
+                    blocksToDrain.add(this.pos.add(i, 0, 0).up().up().north());
+                    blocksToDrain.add(this.pos.add(i, 0, 0).south());
+                    blocksToDrain.add(this.pos.add(i, 0, 0).up().south());
+                    blocksToDrain.add(this.pos.add(i, 0, 0).up().up().south());
+                } else {
+                    found = true;
+                    break;
+                }
+            }
+            if(found){
+                for(BlockPos pos : blocks){
+                    this.world.destroyBlock(pos, false);
+                }
+                this.Drain(blocksToDrain);
+            }
+        }
+        if(!found) {
+            ArrayList<BlockPos> blocks = new ArrayList<>();
+            ArrayList<BlockPos> blocksToDrain = new ArrayList<>();
+            for (int i = 0; i < 16; i++) {
+                if (this.world.getBlockState(this.pos.add(-i, 0, 0)).getBlock() != Blocks.AIR) {
+                    blocks.add(this.pos.add(-i, 0, 0));
+                    blocks.add(this.pos.add(-i, 1, 0));
+                    blocks.add(this.pos.add(-i, 2, 0));
+
+                    blocksToDrain.add(this.pos.add(-i, 0, 0).down());
+                    blocksToDrain.add(this.pos.add(-i, 0, 0).up().up().up());
+                    blocksToDrain.add(this.pos.add(-i, 0, 0).north());
+                    blocksToDrain.add(this.pos.add(-i, 0, 0).up().north());
+                    blocksToDrain.add(this.pos.add(-i, 0, 0).up().up().north());
+                    blocksToDrain.add(this.pos.add(-i, 0, 0).south());
+                    blocksToDrain.add(this.pos.add(-i, 0, 0).up().south());
+                    blocksToDrain.add(this.pos.add(-i, 0, 0).up().up().south());
+                } else {
+                    found = true;
+                    break;
+                }
+            }
+            if(found){
+                for(BlockPos pos : blocks){
+                    this.world.destroyBlock(pos, false);
+                }
+                this.Drain(blocksToDrain);
+            }
+        }
+        if(!found) {
+            ArrayList<BlockPos> blocks = new ArrayList<>();
+            ArrayList<BlockPos> blocksToDrain = new ArrayList<>();
+            for (int i = 0; i < 16; i++) {
+                if (this.world.getBlockState(this.pos.add(0, 0, i)).getBlock() != Blocks.AIR) {
+                    blocks.add(this.pos.add(0, 0, i));
+                    blocks.add(this.pos.add(0, 1, i));
+                    blocks.add(this.pos.add(0, 2, i));
+
+                    blocksToDrain.add(this.pos.add(0, 0, i).down());
+                    blocksToDrain.add(this.pos.add(0, 0, i).up().up().up());
+                    blocksToDrain.add(this.pos.add(0, 0, i).west());
+                    blocksToDrain.add(this.pos.add(0, 0, i).up().west());
+                    blocksToDrain.add(this.pos.add(0, 0, i).up().up().west());
+                    blocksToDrain.add(this.pos.add(0, 0, i).east());
+                    blocksToDrain.add(this.pos.add(0, 0, i).up().east());
+                    blocksToDrain.add(this.pos.add(0, 0, i).up().up().east());
+                } else {
+                    found = true;
+                    break;
+                }
+            }
+            if(found){
+                for(BlockPos pos : blocks){
+                    this.world.destroyBlock(pos, false);
+                }
+                this.Drain(blocksToDrain);
+            }
+        }
+        if(!found) {
+            ArrayList<BlockPos> blocksToDrain = new ArrayList<>();
+            for (int i = 0; i < 16; i++) {
+                this.world.destroyBlock(this.pos.add(0, 0, -i), false);
+                this.world.destroyBlock(this.pos.add(0, 1, -i), false);
+                this.world.destroyBlock(this.pos.add(0, 2, -i), false);
+
+                if(this.world.getBlockState(this.pos.add(0, 0, -i)) != Blocks.AIR.getDefaultState()) {
+                    blocksToDrain.add(this.pos.add(0, 0, -i).down());
+                    blocksToDrain.add(this.pos.add(0, 0, -i).up().up().up());
+                    blocksToDrain.add(this.pos.add(0, 0, -i).west());
+                    blocksToDrain.add(this.pos.add(0, 0, -i).up().west());
+                    blocksToDrain.add(this.pos.add(0, 0, -i).up().up().west());
+                    blocksToDrain.add(this.pos.add(0, 0, -i).east());
+                    blocksToDrain.add(this.pos.add(0, 0, -i).up().east());
+                    blocksToDrain.add(this.pos.add(0, 0, -i).up().up().east());
+                }
+            }
+            this.Drain(blocksToDrain);
+        }
+    }
+
     public int getColorFromChroma(){
         return this.chroma.color;
     }
@@ -242,11 +356,14 @@ public class GemFormation {
     public void Drain(ArrayList<BlockPos> blockPosList){
         for (BlockPos pos : blockPosList){
             BlockState block = this.world.getBlockState(pos);
-            if(block == Blocks.DIRT.getDefaultState() || block == Blocks.GRASS_BLOCK.getDefaultState() || block == Blocks.GRASS_PATH.getDefaultState()){
+            if(block.getBlock() == ModBlocks.GEM_SEED_BLOCK.get()){
+                continue;
+            }
+            if(block == Blocks.DIRT.getDefaultState() || block == Blocks.GRASS_BLOCK.getDefaultState() || block == Blocks.GRASS_PATH.getDefaultState()
+                    || block == Blocks.GRAVEL.getDefaultState()){
                 this.world.setBlockState(pos, this.drained_soil.getDefaultState());
             }
-            else if(block == Blocks.SAND.getDefaultState() || block == Blocks.RED_SAND.getDefaultState() || block == Blocks.SOUL_SAND.getDefaultState()
-            || block == Blocks.GRAVEL.getDefaultState()){
+            else if(block == Blocks.SAND.getDefaultState() || block == Blocks.RED_SAND.getDefaultState() || block == Blocks.SOUL_SAND.getDefaultState()){
                 this.world.setBlockState(pos, this.drained_sand.getDefaultState());
             }
             else{

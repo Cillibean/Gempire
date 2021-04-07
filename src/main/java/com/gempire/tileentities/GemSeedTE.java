@@ -23,6 +23,7 @@ import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.Explosion;
 import net.minecraftforge.fluids.FluidStack;
@@ -38,9 +39,12 @@ public class GemSeedTE extends TileEntity implements ITickableTileEntity {
     Random random;
     boolean spawned = false;
     public int ticks = 0;
+    public int stage = 0;
+    public static final int STAGE_LIFETIME = 60;
+    public static final int DRAIN_SIZE = 9;
     public ItemChroma chroma;
     public Item primer;
-    public Fluid[] essences;
+    public String essences;
 
     public GemSeedTE() {
         super(ModTE.GEM_SEED_TE.get());
@@ -50,10 +54,17 @@ public class GemSeedTE extends TileEntity implements ITickableTileEntity {
     @Override
     public void tick() {
         this.ticks++;
-        if(this.ticks > 200 && !this.spawned){
+        if(this.ticks > GemSeedTE.STAGE_LIFETIME){
+            this.stage++;
+            System.out.println("Stage: " + this.stage);
+            this.ticks = 0;
+            this.world.notifyBlockUpdate(this.getPos(), this.getBlockState(), this.getBlockState(), 2);
+            this.markDirty();
+        }
+        if(this.stage > 2 && !this.spawned){
             this.spawned = true;
-            TNTEntity tnt = new TNTEntity(this.world, this.getPos().getX(), this.getPos().getY(), this.getPos().getZ(), null);
-            this.world.addEntity(tnt);
+            GemFormation form = new GemFormation(this.world, this.pos, new BlockPos(GemSeedTE.DRAIN_SIZE, GemSeedTE.DRAIN_SIZE, GemSeedTE.DRAIN_SIZE), this.chroma, this.primer, this.essences);
+            form.SpawnGem();
             this.world.notifyBlockUpdate(this.getPos(), this.getBlockState(), this.getBlockState(), 2);
             this.markDirty();
         }
@@ -79,60 +90,37 @@ public class GemSeedTE extends TileEntity implements ITickableTileEntity {
         return this.primer;
     }
 
-    public void setEssences(Fluid[] essec){
+    public void setEssences(String essec){
         this.essences = essec;
         this.world.notifyBlockUpdate(this.getPos(), this.getBlockState(), this.getBlockState(), 2);
         this.markDirty();
     }
 
-    public Fluid[] getEssences(){
+    public String getEssences(){
         return this.essences;
     }
     @Override
     public CompoundNBT write(CompoundNBT compound) {
         super.write(compound);
-        compound.putInt("ticks", this.ticks);
+        compound.putInt("stage", this.stage);
         compound.putBoolean("spawned", this.spawned);
         compound.put("chroma", new ItemStack(this.chroma).write(new CompoundNBT()));
         compound.put("primer", new ItemStack(this.primer).write(new CompoundNBT()));
-        String fluids = "";
-        for(int i = 0; i < this.essences.length; i++){
-            if(i == 0){
-                fluids+=GemSeedTE.StringFromFluid(this.essences[0]);
-            }
-            else{
-                fluids+= "-"+GemSeedTE.StringFromFluid(this.essences[i]);
-            }
-        }
-        compound.putString("essences", fluids);
+        compound.putString("essences", this.essences);
         return compound;
     }
 
     @Override
     public void read(BlockState state, CompoundNBT nbt) {
         super.read(state, nbt);
-        this.ticks = nbt.getInt("ticks");
+        this.stage = nbt.getInt("stage");
         this.spawned = nbt.getBoolean("spawned");
         ItemStack chroma = ItemStack.read(nbt.getCompound("chroma"));
         this.chroma = (ItemChroma)chroma.getItem();
         ItemStack primer = ItemStack.read(nbt.getCompound("primer"));
         this.primer = primer.getItem();
-        String[] fluids = nbt.getString("essences").split("-");
-        ArrayList<Fluid> fluidArrayList = new ArrayList<>();
-        for (String string : fluids){
-            fluidArrayList.add(GemSeedTE.FluidFromString(string));
-        }
-        Fluid[] array = new Fluid[fluidArrayList.size()];
-        for(int i = 0; i < fluidArrayList.size(); i++){
-            if(fluidArrayList.get(i) != null && fluidArrayList.get(i) != Fluids.EMPTY){
-                array[i] = fluidArrayList.get(i);
-            }
-        }
-        this.essences = array;
-        GemSeedBlock block = (GemSeedBlock) this.world.getBlockState(this.getPos()).getBlock();
-        block.chroma = this.chroma;
-        block.primer = this.primer;
-        block.essences = this.essences;
+        String fluids = nbt.getString("essences");
+        this.essences = fluids;
     }
 
     public static String StringFromFluid(Fluid fluid){

@@ -29,9 +29,6 @@ import javax.annotation.Nullable;
 import java.util.Random;
 
 public class GemSeedBlock extends Block {
-    public ItemChroma chroma;
-    public Item primer;
-    public Fluid[] essences;
 
     public GemSeedBlock(Properties properties) {
         super(properties);
@@ -40,16 +37,6 @@ public class GemSeedBlock extends Block {
     @Override
     public TileEntity createTileEntity(BlockState state, IBlockReader world) {
         return new GemSeedTE();
-    }
-
-    @Override
-    public void onExplosionDestroy(World worldIn, BlockPos pos, Explosion explosionIn) {
-        super.onExplosionDestroy(worldIn, pos, explosionIn);
-        System.out.println(pos);
-        GemSeedTE te = (GemSeedTE) worldIn.getTileEntity(pos);
-        GemFormation form = new GemFormation(worldIn, pos, new BlockPos(7, 7, 7), this.chroma, this.primer, this.essences);
-        form.SpawnGem();
-        worldIn.destroyBlock(pos, false);
     }
 
     @Override
