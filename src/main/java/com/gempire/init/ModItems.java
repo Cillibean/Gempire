@@ -166,12 +166,6 @@ public class ModItems {
                     new Item.Properties().group(ModItemGroup.BLOCKS)
             )
     );
-    public static final RegistryObject<Item> INJECTOR_BLOCK_ITEM = ITEMS.register("injector_block", () ->
-            new BlockItem(
-                    ModBlocks.INJECTOR_BLOCK.get(),
-                    new Item.Properties().group(ModItemGroup.BLOCKS)
-            )
-    );
 
     /*public static final RegistryObject<Item> TEST_CONTAINER_BLOCK_ITEM = ITEMS.register("test_container_block", () ->
             new BlockItem(

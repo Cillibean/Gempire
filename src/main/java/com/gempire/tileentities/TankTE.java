@@ -99,27 +99,46 @@ public class TankTE extends LockableLootTileEntity implements IFluidTank, INamed
             if (stackToOutput != ItemStack.EMPTY) {
                 if (this.shouldPutFluid() && this.canPutFluidFromStack(stackToOutput)) {
                     BucketItem bucket = (BucketItem) stackToOutput.getItem();
-                    /*if(this.tank.getFluid().getFluid() == ModFluids.WHITE_ESSENCE.get() ||
-                            this.tank.getFluid().getFluid() == ModFluids.YELLOW_ESSENCE.get() ||
-                            this.tank.getFluid().getFluid() == ModFluids.BLUE_ESSENCE.get() ||
-                            this.tank.getFluid().getFluid() == ModFluids.PINK_ESSENCE.get()){
-                        if(bucket == ModItems.ESSENCE_BOTTLE.get()) {
-                            this.tank.drain(new FluidStack(this.tank.getFluid().getFluid(), 1000), IFluidHandler.FluidAction.EXECUTE);
-                            this.setInventorySlotContents(TankTE.BUCKET_OUTPUT_SLOT_INDEX, new ItemStack(this.tank.getFluid().getFluid().getFilledBucket()));
-                            this.world.notifyBlockUpdate(this.pos, this.getBlockState(), this.getBlockState(), 2);
-                            this.markDirty();
-                        }
-                    }
-                    else {
-                    }*/
                     Fluid fluid = this.tank.getFluid().getFluid();
                     this.tank.drain(new FluidStack(this.tank.getFluid().getFluid(), 1000), IFluidHandler.FluidAction.EXECUTE);
                     this.setInventorySlotContents(TankTE.BUCKET_OUTPUT_SLOT_INDEX, new ItemStack((BucketItem)TankTE.FLUID_BUCKETS.get(fluid)));
                     this.world.notifyBlockUpdate(this.pos, this.getBlockState(), this.getBlockState(), 2);
                     this.markDirty();
                 }
+                else if(this.shouldPutFluidToButton() && this.canPutFluidToButton(stackToOutput)){
+                    Fluid fluid = this.tank.getFluid().getFluid();
+                    if(fluid == ModFluids.PINK_ESSENCE.get()){
+                        this.tank.drain(new FluidStack(this.tank.getFluid().getFluid(), 200), IFluidHandler.FluidAction.EXECUTE);
+                        this.setInventorySlotContents(TankTE.BUCKET_OUTPUT_SLOT_INDEX, new ItemStack(ModItems.PEBBLE_GEM.get()));
+                        this.world.notifyBlockUpdate(this.pos, this.getBlockState(), this.getBlockState(), 2);
+                        this.markDirty();
+                    }
+                    else if(fluid == ModFluids.BLUE_ESSENCE.get()){
+                        this.tank.drain(new FluidStack(this.tank.getFluid().getFluid(), 200), IFluidHandler.FluidAction.EXECUTE);
+                        this.setInventorySlotContents(TankTE.BUCKET_OUTPUT_SLOT_INDEX, new ItemStack(ModItems.SHALE_GEM.get()));
+                        this.world.notifyBlockUpdate(this.pos, this.getBlockState(), this.getBlockState(), 2);
+                        this.markDirty();
+                    }
+                    else if(fluid == ModFluids.YELLOW_ESSENCE.get()){
+                        this.tank.drain(new FluidStack(this.tank.getFluid().getFluid(), 200), IFluidHandler.FluidAction.EXECUTE);
+                        this.setInventorySlotContents(TankTE.BUCKET_OUTPUT_SLOT_INDEX, new ItemStack(ModItems.MICA_GEM.get()));
+                        this.world.notifyBlockUpdate(this.pos, this.getBlockState(), this.getBlockState(), 2);
+                        this.markDirty();
+                    }
+                }
             }
         }
+    }
+
+    public boolean canPutFluidToButton(ItemStack stack){
+        if(stack.getItem() == Items.STONE_BUTTON){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean shouldPutFluidToButton(){
+        return this.tank.getFluidAmount() >= 200;
     }
 
     public boolean canPullFluidFromStack(ItemStack stack){

@@ -7,17 +7,17 @@
   ],
   "key": {
     "c": {
-      "item": "minecraft:cobblestone"
+      "item": "minecraft:bucket"
     },
     "e": {
-      "item": "gempire:white_essence"
+      "item": "minecraft:glass"
     },
     "d": {
-      "item": "minecraft:dirt"
+      "item": "minecraft:iron_ingot"
     }
   },
   "result": {
-    "item": "gempire:gem_seed_block",
+    "item": "gempire:tank_block",
     "count": 1
   }
 }

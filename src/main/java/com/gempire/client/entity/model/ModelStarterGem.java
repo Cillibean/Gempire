@@ -5,7 +5,9 @@ import com.gempire.util.GemPlacements;
 import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
+import net.minecraft.client.renderer.entity.model.IHasArm;
 import net.minecraft.client.renderer.model.ModelRenderer;
+import net.minecraft.util.HandSide;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -15,7 +17,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
  * Created using Tabula 8.0.0
  */
 @OnlyIn(Dist.CLIENT)
-public class ModelStarterGem<T extends EntityStarterGem> extends ModelGem<T> {
+public class ModelStarterGem<T extends EntityStarterGem> extends ModelGem<T> implements IHasArm {
     /*public ModelRenderer body;
     public ModelRenderer Back_of_headgem;
     public ModelRenderer head1;
@@ -281,5 +283,17 @@ public class ModelStarterGem<T extends EntityStarterGem> extends ModelGem<T> {
         modelRenderer.rotateAngleX = x;
         modelRenderer.rotateAngleY = y;
         modelRenderer.rotateAngleZ = z;
+    }
+
+    public void translateHand(HandSide sideIn, MatrixStack matrixStackIn) {
+        matrixStackIn.push();
+        this.getArmForSide(sideIn).translateRotate(matrixStackIn);
+        matrixStackIn.scale(.1f, .1f, .1f);
+        matrixStackIn.translate(.1f, .1f, 0);
+        matrixStackIn.pop();
+    }
+
+    protected ModelRenderer getArmForSide(HandSide side) {
+        return side == HandSide.LEFT ? this.LeftArm : this.RightArm;
     }
 }

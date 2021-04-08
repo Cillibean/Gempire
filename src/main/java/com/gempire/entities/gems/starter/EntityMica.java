@@ -1,6 +1,7 @@
 package com.gempire.entities.gems.starter;
 
 import com.gempire.entities.ai.EntityAIFollowOwner;
+import com.gempire.entities.ai.EntityAIMakePowerCrystal;
 import com.gempire.entities.ai.EntityAIWander;
 import com.gempire.entities.bases.EntityStarterGem;
 import com.gempire.systems.injection.Crux;
@@ -18,6 +19,8 @@ import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.passive.CatEntity;
 import net.minecraft.entity.passive.OcelotEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.PickaxeItem;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.vector.Vector3d;
@@ -28,6 +31,9 @@ import java.util.ArrayList;
 public class EntityMica extends EntityStarterGem {
     public static final int SKIN_COLOR_START = 0xBAA884;
     public static final int SKIN_COLOR_END = 0xF2DAA9;
+    public boolean hopperGoal = false;
+    public int ticksDoingHopperGoal = 0;
+    public int maxTicksDoingHopperGoal = 200;
 
     public EntityMica(EntityType<? extends CreatureEntity> type, World worldIn) {
         super(type, worldIn);
@@ -38,13 +44,41 @@ public class EntityMica extends EntityStarterGem {
                 .createMutableAttribute(Attributes.MAX_HEALTH, 10.0D)
                 .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.3D);
     }
+    @Override
+    public void read(CompoundNBT compound) {
+        super.read(compound);
+        this.hopperGoal = compound.getBoolean("hopperGoal");
+    }
+
+    @Override
+    public void writeAdditional(CompoundNBT compound) {
+        super.writeAdditional(compound);
+        compound.putBoolean("hopperGoal", this.hopperGoal);
+    }
 
     @Override
     public ActionResultType applyPlayerInteraction(PlayerEntity player, Vector3d vec, Hand hand){
         if(player.world.isRemote){
             return super.applyPlayerInteraction(player, vec, hand);
         }
+        if(this.isOwner(player)){
+            if(player.getHeldItem(hand).getItem() instanceof PickaxeItem){
+                this.hopperGoal = true;
+            }
+        }
         return super.applyPlayerInteraction(player, vec, hand);
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+        if(this.hopperGoal){
+            this.ticksDoingHopperGoal++;
+            if(this.ticksDoingHopperGoal > this.maxTicksDoingHopperGoal){
+                this.hopperGoal = false;
+                this.ticksDoingHopperGoal = 0;
+            }
+        }
     }
 
     @Override
@@ -58,6 +92,7 @@ public class EntityMica extends EntityStarterGem {
         this.goalSelector.addGoal(8, new LookRandomlyGoal(this));
         this.goalSelector.addGoal(8, new EntityAIWander(this, 1.0D));
         this.goalSelector.addGoal(8, new EntityAIFollowOwner(this, 1.0D));
+        this.goalSelector.addGoal(10, new EntityAIMakePowerCrystal(this, 1.0D));
     }
 
     @Override

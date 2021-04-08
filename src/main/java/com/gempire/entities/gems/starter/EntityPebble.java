@@ -1,6 +1,7 @@
 package com.gempire.entities.gems.starter;
 
 import com.gempire.entities.ai.EntityAIFollowOwner;
+import com.gempire.entities.ai.EntityAIMakeDrill;
 import com.gempire.entities.ai.EntityAIWander;
 import com.gempire.entities.bases.EntityStarterGem;
 import com.gempire.systems.injection.Crux;
@@ -18,9 +19,15 @@ import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.passive.CatEntity;
 import net.minecraft.entity.passive.OcelotEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.DyeItem;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.item.PickaxeItem;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;
@@ -28,6 +35,9 @@ import java.util.ArrayList;
 public class EntityPebble extends EntityStarterGem {
     public static final int SKIN_COLOR_START = 0x808080;
     public static final int SKIN_COLOR_END = 0x575757;
+    public boolean hopperGoal = false;
+    public int ticksDoingHopperGoal = 0;
+    public int maxTicksDoingHopperGoal = 200;
 
     public EntityPebble(EntityType<? extends CreatureEntity> type, World worldIn) {
         super(type, worldIn);
@@ -40,11 +50,40 @@ public class EntityPebble extends EntityStarterGem {
     }
 
     @Override
+    public void read(CompoundNBT compound) {
+        super.read(compound);
+        this.hopperGoal = compound.getBoolean("hopperGoal");
+    }
+
+    @Override
+    public void writeAdditional(CompoundNBT compound) {
+        super.writeAdditional(compound);
+        compound.putBoolean("hopperGoal", this.hopperGoal);
+    }
+
+    @Override
     public ActionResultType applyPlayerInteraction(PlayerEntity player, Vector3d vec, Hand hand){
         if(player.world.isRemote){
             return super.applyPlayerInteraction(player, vec, hand);
         }
+        if(this.isOwner(player)){
+            if(player.getHeldItem(hand).getItem() instanceof PickaxeItem){
+                this.hopperGoal = true;
+            }
+        }
         return super.applyPlayerInteraction(player, vec, hand);
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+        if(this.hopperGoal){
+            this.ticksDoingHopperGoal++;
+            if(this.ticksDoingHopperGoal > this.maxTicksDoingHopperGoal){
+                this.hopperGoal = false;
+                this.ticksDoingHopperGoal = 0;
+            }
+        }
     }
 
     @Override
@@ -58,6 +97,7 @@ public class EntityPebble extends EntityStarterGem {
         this.goalSelector.addGoal(8, new LookRandomlyGoal(this));
         this.goalSelector.addGoal(8, new EntityAIWander(this, 1.0D));
         this.goalSelector.addGoal(8, new EntityAIFollowOwner(this, 1.0D));
+        this.goalSelector.addGoal(10, new EntityAIMakeDrill(this, 1.0D));
     }
 
     @Override

@@ -9,6 +9,8 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.ContainerBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.loot.LootContext;
 import net.minecraft.state.properties.DoubleBlockHalf;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
@@ -22,6 +24,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 
 import javax.annotation.Nullable;
+
+import java.util.List;
 
 import static com.gempire.blocks.TankBlock.HALF;
 
@@ -62,6 +66,6 @@ public class InjectorBlock extends ContainerBlock {
 
     @Override
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-        return Block.makeCuboidShape(0.1D, 0.1D, 0.1D, 15.9D, 15.9D , 15.9D);
+        return Block.makeCuboidShape(0.1D, 0.1D, 0.1D, 15.9D, 15.9D, 15.9D);
     }
 }

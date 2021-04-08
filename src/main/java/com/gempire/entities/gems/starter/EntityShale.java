@@ -4,6 +4,7 @@ import com.gempire.entities.ai.EntityAIFollowOwner;
 import com.gempire.entities.ai.EntityAIWander;
 import com.gempire.entities.bases.EntityStarterGem;
 import com.gempire.entities.gems.EntityRuby;
+import com.gempire.init.ModItems;
 import com.gempire.systems.injection.Crux;
 import com.gempire.util.Abilities;
 import com.gempire.util.Color;
@@ -16,9 +17,12 @@ import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.item.ExperienceOrbEntity;
 import net.minecraft.entity.passive.CatEntity;
 import net.minecraft.entity.passive.OcelotEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.vector.Vector3d;
@@ -44,6 +48,24 @@ public class EntityShale extends EntityStarterGem {
     public ActionResultType applyPlayerInteraction(PlayerEntity player, Vector3d vec, Hand hand){
         if(player.world.isRemote){
             return super.applyPlayerInteraction(player, vec, hand);
+        }
+        if(this.isOwner(player)) {
+            if (player.getHeldItem(hand).getItem() == ModItems.ESSENCE_BOTTLE.get()) {
+                if (player.experienceTotal >= 20) {
+                    EntityShale.decreaseExp(player, 20);
+                    player.getHeldItem(hand).shrink(1);
+                    int rand = this.rand.nextInt(4);
+                    if (rand == 0) {
+                        player.addItemStackToInventory(new ItemStack(ModItems.PINK_ESSENCE.get()));
+                    } else if (rand == 1) {
+                        player.addItemStackToInventory(new ItemStack(ModItems.BLUE_ESSENCE.get()));
+                    } else if (rand == 2) {
+                        player.addItemStackToInventory(new ItemStack(ModItems.YELLOW_ESSENCE.get()));
+                    } else {
+                        player.addItemStackToInventory(new ItemStack(ModItems.WHITE_ESSENCE.get()));
+                    }
+                }
+            }
         }
         return super.applyPlayerInteraction(player, vec, hand);
     }
@@ -86,5 +108,33 @@ public class EntityShale extends EntityStarterGem {
     @Override
     public Abilities[] possibleAbilities() {
         return new Abilities[0];
+    }
+
+    public static void decreaseExp(PlayerEntity player, float amount)
+    {
+        if (player.experienceTotal - amount <= 0)
+        {
+            player.experienceLevel = 0;
+            player.experience = 0;
+            player.experienceTotal = 0;
+            return;
+        }
+
+        player.experienceTotal -= amount;
+
+        if (player.experience * (float)player.xpBarCap() <= amount)
+        {
+            amount -= player.experience * (float)player.xpBarCap();
+            player.experience = 1.0f;
+            player.experienceLevel--;
+        }
+
+        while (player.xpBarCap() < amount)
+        {
+            amount -= player.xpBarCap();
+            player.experienceLevel--;
+        }
+
+        player.experience -= amount / (float)player.xpBarCap();
     }
 }
