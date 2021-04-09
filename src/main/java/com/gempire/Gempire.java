@@ -1,5 +1,6 @@
 package com.gempire;
 
+import com.gempire.client.entity.render.*;
 import com.gempire.client.screen.InjectorScreen;
 import com.gempire.client.screen.TankScreen;
 import com.gempire.entities.TestEntity;
@@ -10,16 +11,22 @@ import com.gempire.entities.gems.starter.EntityPebble;
 import com.gempire.entities.gems.starter.EntityShale;
 import com.gempire.init.*;
 import com.gempire.proxy.ClientProxy;
+import com.gempire.proxy.CommonProxy;
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
+import net.minecraft.loot.LootPool;
+import net.minecraft.loot.TableLootEntry;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DeferredWorkQueue;
 import net.minecraftforge.fml.InterModComms;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -50,11 +57,12 @@ public class Gempire
         // Register the processIMC method for modloading
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::processIMC);
         // Register the doClientStuff method for modloading
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onClientSetup);
 
         RegistryHandler.init();
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
+        //MinecraftForge.EVENT_BUS.register(CommonProxy.class);
     }
 
     private void setup(final FMLCommonSetupEvent event)
@@ -81,13 +89,22 @@ public class Gempire
         ModFluids.registerFluidBuckets();
     }
 
-    private void doClientStuff(final FMLClientSetupEvent event) {
-        // do something that can only be done on the client
-        //ScreenManager.registerFactory(ModContainers.TEST_CONTAINER.get(), TestContainerScreen::new);
-        ScreenManager.registerFactory(ModContainers.TANK_CONTAINER.get(), TankScreen::new);
-        ScreenManager.registerFactory(ModContainers.INJECTOR_CONTAINER.get(), InjectorScreen::new);
+    @SubscribeEvent
+    public void onLootTablesLoad(final LootTableLoadEvent event) {
 
-        RenderTypeLookup.setRenderLayer(ModBlocks.POWER_CRYSTAL_BLOCK.get(), RenderType.getTranslucent());
+        // Test: /loot give @p loot minecraft:chests/end_city_treasure
+        if (event.getName().equals(new ResourceLocation("minecraft", "chests/abandoned_mineshaft"))
+                || event.getName().equals(new ResourceLocation("minecraft", "chests/underwater_ruin_big"))
+                || event.getName().equals(new ResourceLocation("minecraft", "chests/pillager_outpost"))
+                || event.getName().equals(new ResourceLocation("minecraft", "chests/end_city_treasure"))
+                || event.getName().equals(new ResourceLocation("minecraft", "chests/stronghold_library"))
+                || event.getName().equals(new ResourceLocation("minecraft", "chests/village_armorer "))
+                || event.getName().equals(new ResourceLocation("minecraft", "chests/village_toolsmith"))
+                || event.getName().equals(new ResourceLocation("minecraft", "chests/ruined_portal "))
+                || event.getName().equals(new ResourceLocation("minecraft", "chests/desert_pyramid  "))
+        ) {
+            event.getTable().addPool(LootPool.builder().addEntry(TableLootEntry.builder(new ResourceLocation(MODID, "chests/essence"))).build());
+        }
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event)
@@ -108,6 +125,21 @@ public class Gempire
     public void onServerStarting(FMLServerStartingEvent event) {
         // do something when the server starts
         LOGGER.info("HELLO from server starting");
+    }
+
+    @SubscribeEvent
+    public void onClientSetup(FMLClientSetupEvent event) {
+        //RenderingRegistry.registerEntityRenderingHandler(ModEntities.TEST.get(), RenderTestEntity::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.PEBBLE.get(), RenderPebble::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.MICA.get(), RenderMica::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.SHALE.get(), RenderShale::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.RUBY.get(), RenderRuby::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.SAPPHIRE.get(), RenderSapphire::new);
+
+        ScreenManager.registerFactory(ModContainers.TANK_CONTAINER.get(), TankScreen::new);
+        ScreenManager.registerFactory(ModContainers.INJECTOR_CONTAINER.get(), InjectorScreen::new);
+
+        RenderTypeLookup.setRenderLayer(ModBlocks.POWER_CRYSTAL_BLOCK.get(), RenderType.getTranslucent());
     }
 
     // You can use EventBusSubscriber to automatically subscribe events on the contained class (this is subscribing to the MOD

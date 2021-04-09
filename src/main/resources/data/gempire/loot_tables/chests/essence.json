@@ -1,0 +1,27 @@
+{
+  "pools": [{
+    "rolls": 1,
+    "entries": [
+      {
+        "type": "minecraft:item",
+        "name": "gempire:pink_essence",
+        "weight": 20
+      },
+      {
+        "type": "minecraft:item",
+        "name": "gempire:blue_essence",
+        "weight": 20
+      },
+      {
+        "type": "minecraft:item",
+        "name": "gempire:yellow_essence",
+        "weight": 20
+      },
+      {
+        "type": "minecraft:item",
+        "name": "gempire:white_essence",
+        "weight": 20
+      }
+    ]
+  }]
+}

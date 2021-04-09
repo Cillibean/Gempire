@@ -1,6 +1,7 @@
 package com.gempire.tileentities;
 
 import com.gempire.blocks.GemSeedBlock;
+import com.gempire.blocks.InjectorBlock;
 import com.gempire.container.InjectorContainer;
 import com.gempire.container.TankContainer;
 import com.gempire.init.*;
@@ -9,6 +10,7 @@ import com.gempire.networking.S2SSendGemSeedInfo;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.HorizontalBlock;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
@@ -22,8 +24,10 @@ import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
+import net.minecraft.state.DirectionProperty;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.LockableLootTileEntity;
+import net.minecraft.util.Direction;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
@@ -247,10 +251,31 @@ public class InjectorTE extends LockableLootTileEntity implements IFluidTank, IN
             gemSeedTE.SetChroma(chroma);
             gemSeedTE.SetPrimer(primer);
             gemSeedTE.setEssences(essences);
+            int facing = InjectorTE.getFacingFromState(this.getBlockState());
+            gemSeedTE.setFacing(facing);
+            System.out.println("Facing :" + facing);
             this.getStackInSlot(InjectorTE.CHROMA_INPUT_SLOT_INDEX).shrink(1);
             this.getStackInSlot(InjectorTE.PRIME_INPUT_SLOT_INDEX).shrink(1);
             this.world.notifyBlockUpdate(this.pos, this.getBlockState(), this.getBlockState(), 2);
             this.markDirty();
+        }
+    }
+
+    public static int getFacingFromState(BlockState state){
+        if(state.get(InjectorBlock.FACING) == Direction.EAST){
+            return 0;
+        }
+        else if(state.get(InjectorBlock.FACING) == Direction.NORTH){
+            return 1;
+        }
+        else if(state.get(InjectorBlock.FACING) == Direction.WEST){
+            return 2;
+        }
+        else if(state.get(InjectorBlock.FACING) == Direction.SOUTH){
+            return 3;
+        }
+        else{
+            return -1;
         }
     }
 

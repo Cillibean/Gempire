@@ -45,6 +45,7 @@ public class GemSeedTE extends TileEntity implements ITickableTileEntity {
     public ItemChroma chroma;
     public Item primer;
     public String essences;
+    public int facing;
 
     public GemSeedTE() {
         super(ModTE.GEM_SEED_TE.get());
@@ -63,7 +64,7 @@ public class GemSeedTE extends TileEntity implements ITickableTileEntity {
         }
         if(this.stage > 2 && !this.spawned){
             this.spawned = true;
-            GemFormation form = new GemFormation(this.world, this.pos, new BlockPos(GemSeedTE.DRAIN_SIZE, GemSeedTE.DRAIN_SIZE, GemSeedTE.DRAIN_SIZE), this.chroma, this.primer, this.essences);
+            GemFormation form = new GemFormation(this.world, this.pos, new BlockPos(GemSeedTE.DRAIN_SIZE, GemSeedTE.DRAIN_SIZE, GemSeedTE.DRAIN_SIZE), this.chroma, this.primer, this.essences, this.facing);
             form.SpawnGem();
             this.world.notifyBlockUpdate(this.getPos(), this.getBlockState(), this.getBlockState(), 2);
             this.markDirty();
@@ -99,6 +100,17 @@ public class GemSeedTE extends TileEntity implements ITickableTileEntity {
     public String getEssences(){
         return this.essences;
     }
+
+    public void setFacing(int facing){
+        this.facing = facing;
+        this.world.notifyBlockUpdate(this.getPos(), this.getBlockState(), this.getBlockState(), 2);
+        this.markDirty();
+    }
+
+    public int getFacing(){
+        return this.facing;
+    }
+
     @Override
     public CompoundNBT write(CompoundNBT compound) {
         super.write(compound);
@@ -107,6 +119,7 @@ public class GemSeedTE extends TileEntity implements ITickableTileEntity {
         compound.put("chroma", new ItemStack(this.chroma).write(new CompoundNBT()));
         compound.put("primer", new ItemStack(this.primer).write(new CompoundNBT()));
         compound.putString("essences", this.essences);
+        compound.putInt("facing", this.facing);
         return compound;
     }
 
@@ -121,6 +134,7 @@ public class GemSeedTE extends TileEntity implements ITickableTileEntity {
         this.primer = primer.getItem();
         String fluids = nbt.getString("essences");
         this.essences = fluids;
+        this.facing = nbt.getInt("facing");
     }
 
     public static String StringFromFluid(Fluid fluid){

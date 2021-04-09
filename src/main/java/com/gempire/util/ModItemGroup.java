@@ -12,7 +12,7 @@ public class ModItemGroup extends ItemGroup {
 
     public static final ModItemGroup GEMSTONES = new ModItemGroup("gemstones", () -> new ItemStack(ModItems.RUBY_GEM.get()));
     public static final ModItemGroup ITEMS = new ModItemGroup("items", () -> new ItemStack(ModItems.PINK_ESSENCE.get()));
-    public static final ModItemGroup BLOCKS = new ModItemGroup("blocks", () -> new ItemStack(ModItems.GEM_SEED_BLOCK_ITEM.get()));
+    public static final ModItemGroup BLOCKS = new ModItemGroup("blocks", () -> new ItemStack(ModItems.DRAINED_RED_STONE_2.get()));
 
     private ModItemGroup(String label, Supplier<ItemStack> displayStack) {
         super(label);

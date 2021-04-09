@@ -142,12 +142,12 @@ public class ModItems {
             )
     );
 
-    public static final RegistryObject<Item> GEM_SEED_BLOCK_ITEM = ITEMS.register("gem_seed_block", () ->
+    /*public static final RegistryObject<Item> GEM_SEED_BLOCK_ITEM = ITEMS.register("gem_seed_block", () ->
             new BlockItem(
                     ModBlocks.GEM_SEED_BLOCK.get(),
                     new Item.Properties().group(ModItemGroup.BLOCKS)
             )
-    );
+    );*/
     public static final RegistryObject<Item> POWER_CRYSTAL_BLOCK_ITEM = ITEMS.register("power_crystal_block", () ->
             new BlockItem(
                     ModBlocks.POWER_CRYSTAL_BLOCK.get(),

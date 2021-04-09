@@ -21,6 +21,7 @@ import net.minecraft.world.IServerWorld;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.RegistryObject;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
@@ -34,14 +35,16 @@ public class GemFormation {
     public ItemChroma chroma;
     public Item primer;
     public String essences;
+    public int facing = 0;
 
-    public GemFormation(World world, BlockPos pos, BlockPos volumeToCheck, ItemChroma chroma, Item primer, String essences){
+    public GemFormation(World world, BlockPos pos, BlockPos volumeToCheck, ItemChroma chroma, Item primer, String essences, int facing){
         this.world = world;
         this.pos = pos;
         this.volumeToCheck = volumeToCheck;
         this.chroma = chroma;
         this.primer = primer;
         this.essences = essences;
+        this.facing = facing;
     }
 
     public void SpawnGem(){
@@ -79,7 +82,7 @@ public class GemFormation {
         gem.setHealth(gem.getMaxHealth());
         this.world.addEntity(gem);
         this.Drain(GemFormation.getBlockPosInVolume(this.world, this.pos, this.volumeToCheck));
-        this.GenerateExitHole();
+        this.GenerateFacingExitHole();
     }
 
     public static ArrayList<Block> getBlocksInVolume(World domhain, BlockPos position, BlockPos volume){
@@ -236,6 +239,57 @@ public class GemFormation {
         }
         //OUTPUT: A gem
         return returnGem;
+    }
+
+    public void GenerateFacingExitHole(){
+        if(this.facing <= 3 && this.facing >= 0) {
+            boolean found = false;
+            ArrayList<BlockPos> blocks = new ArrayList<>();
+            ArrayList<BlockPos> blocksToDrain = new ArrayList<>();
+            BlockPos dir = BlockPos.ZERO;
+            for (int i = 0; i < 16; i++) {
+                if(this.facing == 0){
+                    dir = new BlockPos(i, 0 ,0);
+                }
+                else if(this.facing == 1){
+                    dir = new BlockPos(0, 0 ,i);
+                }
+                else if(this.facing == 2){
+                    dir = new BlockPos(-i, 0 ,0);
+                }
+                else if(this.facing == 3){
+                    dir = new BlockPos(0, 0 ,-i);
+                }
+                if (this.world.getBlockState(this.pos.add(dir)).getBlock() != Blocks.AIR) {
+                    blocks.add(this.pos.add(dir));
+                    blocks.add(this.pos.add(dir.up()));
+                    blocks.add(this.pos.add(dir.up().up()));
+
+                    blocksToDrain.add(this.pos.add(i, 0, 0).down());
+                    blocksToDrain.add(this.pos.add(i, 0, 0).up().up().up());
+                    blocksToDrain.add(this.pos.add(i, 0, 0).north());
+                    blocksToDrain.add(this.pos.add(i, 0, 0).up().north());
+                    blocksToDrain.add(this.pos.add(i, 0, 0).up().up().north());
+                    blocksToDrain.add(this.pos.add(i, 0, 0).south());
+                    blocksToDrain.add(this.pos.add(i, 0, 0).up().south());
+                    blocksToDrain.add(this.pos.add(i, 0, 0).up().up().south());
+                } else {
+                    found = true;
+                    break;
+                }
+            }
+            if (found) {
+                for (BlockPos pos : blocks) {
+                    this.world.destroyBlock(pos, false);
+                }
+                this.Drain(blocksToDrain);
+            } else {
+                this.GenerateExitHole();
+            }
+        }
+        else{
+            this.GenerateExitHole();
+        }
     }
 
     public void GenerateExitHole(){
@@ -402,7 +456,7 @@ public class GemFormation {
         }
         else if(temperature > .9f && temperature <= 1.2f){
             this.drained_sand = ModBlocks.DRAINED_SAND.get();
-            this.drained_soil = ModBlocks.DRAINED_SAND.get();
+            this.drained_soil = ModBlocks.DRAINED_PURPLE_SOIL.get();
             this.drained_stone = ModBlocks.DRAINED_YELLOW_STONE.get();
             this.drained_stone_2 = ModBlocks.DRAINED_YELLOW_STONE_2.get();
             this.banded_drained_stone = ModBlocks.DRAINED_BANDED_YELLOW_STONE.get();
