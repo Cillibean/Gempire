@@ -59,7 +59,7 @@ public class EntityAIMakePowerCrystal extends Goal {
         super.startExecuting();
         this.follower.setPathPriority(PathNodeType.WATER, 0);
         this.follower.getNavigator().tryMoveToXYZ(target.getX(), target.getY(), target.getZ(), this.speed);
-        if(this.follower.getDistanceSq(target.getX(), target.getY(), target.getZ()) < 2.25){
+        if(this.follower.getDistanceSq(target.getX(), target.getY(), target.getZ()) < 4){
             if(this.follower.world.getBlockState(this.target).getBlock() == Blocks.REDSTONE_BLOCK){
                 if(this.follower.world.getBlockState(this.target.north()).getBlock() instanceof AbstractGlassBlock){
                     if(this.follower.world.getBlockState(this.target.south()).getBlock() instanceof AbstractGlassBlock){

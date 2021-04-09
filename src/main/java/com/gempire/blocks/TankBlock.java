@@ -149,5 +149,12 @@ public class TankBlock extends ContainerBlock {
                 world.setBlockState(blockpos, Blocks.AIR.getDefaultState(), 35);
             }
         }
+        else{
+            BlockPos blockpos = pos.down();
+            BlockState blockstate = world.getBlockState(blockpos);
+            if (blockstate.getBlock() == state.getBlock() && blockstate.get(HALF) == DoubleBlockHalf.LOWER) {
+                world.setBlockState(blockpos, Blocks.AIR.getDefaultState(), 35);
+            }
+        }
     }
 }

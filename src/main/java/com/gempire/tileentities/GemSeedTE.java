@@ -41,7 +41,7 @@ public class GemSeedTE extends TileEntity implements ITickableTileEntity {
     public int ticks = 0;
     public int stage = 0;
     public static final int STAGE_LIFETIME = 60;
-    public static final int DRAIN_SIZE = 9;
+    public static final int DRAIN_SIZE = 11;
     public ItemChroma chroma;
     public Item primer;
     public String essences;

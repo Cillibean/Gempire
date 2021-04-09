@@ -8,6 +8,7 @@ import com.gempire.items.ItemChroma;
 import com.gempire.networking.S2SSendGemSeedInfo;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
@@ -233,7 +234,11 @@ public class InjectorTE extends LockableLootTileEntity implements IFluidTank, IN
                     }
                 }
             }
-            BlockPos seedPos = this.getPos().add(new BlockPos(0, -GemSeedTE.DRAIN_SIZE, 0));
+            BlockPos seedPos = this.getPos().add(new BlockPos(0, -Math.ceil(GemSeedTE.DRAIN_SIZE / 2), 0));
+            while(this.world.getBlockState(seedPos) == Blocks.AIR.getDefaultState() ||
+                    this.world.getBlockState(seedPos) == ModBlocks.GEM_SEED_BLOCK.get().getDefaultState()){
+                seedPos = seedPos.add(0, -4 - Math.ceil(GemSeedTE.DRAIN_SIZE / 2), 0);
+            }
             ItemChroma chroma = (ItemChroma)this.getStackInSlot(InjectorTE.CHROMA_INPUT_SLOT_INDEX).getItem();
             Item primer = this.getStackInSlot(InjectorTE.PRIME_INPUT_SLOT_INDEX).getItem();
             GemSeedBlock seedBlock = (GemSeedBlock) ModBlocks.GEM_SEED_BLOCK.get();

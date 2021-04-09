@@ -356,7 +356,9 @@ public class GemFormation {
     public void Drain(ArrayList<BlockPos> blockPosList){
         for (BlockPos pos : blockPosList){
             BlockState block = this.world.getBlockState(pos);
-            if(block.getBlock() == ModBlocks.GEM_SEED_BLOCK.get()){
+            if(block.getBlock() == ModBlocks.GEM_SEED_BLOCK.get() ||
+                    block.getBlock() == ModBlocks.DRILL_BLOCK.get() || block.getBlock() == ModBlocks.TANK_BLOCK.get() ||
+                    block.getBlock() == ModBlocks.POWER_CRYSTAL_BLOCK.get()){
                 continue;
             }
             if(block == Blocks.DIRT.getDefaultState() || block == Blocks.GRASS_BLOCK.getDefaultState() || block == Blocks.GRASS_PATH.getDefaultState()
