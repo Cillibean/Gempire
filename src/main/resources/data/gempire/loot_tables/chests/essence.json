@@ -5,22 +5,22 @@
       {
         "type": "minecraft:item",
         "name": "gempire:pink_essence",
-        "weight": 20
+        "weight": 15
       },
       {
         "type": "minecraft:item",
         "name": "gempire:blue_essence",
-        "weight": 20
+        "weight": 10
       },
       {
         "type": "minecraft:item",
         "name": "gempire:yellow_essence",
-        "weight": 20
+        "weight": 10
       },
       {
         "type": "minecraft:item",
         "name": "gempire:white_essence",
-        "weight": 20
+        "weight": 10
       }
     ]
   }]

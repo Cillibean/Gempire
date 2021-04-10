@@ -14,9 +14,215 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class ModBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Gempire.MODID);
 
-    /*public static RegistryObject<FlowingFluidBlock> TEST_FLUID_BLOCK = BLOCKS.register("test_fluid_block", () ->
-                    new FlowingFluidBlock(ModFluids.TEST_FLUID, Block.Properties.create(Material.WATER).doesNotBlockMovement().hardnessAndResistance(100.0F).noDrops()));
-*/
+    public static final RegistryObject<Block> WHITE_CHROMA_CRYSTAL = BLOCKS.register("white_chroma_crystal", () ->
+            new ChromaBlock(Block.Properties
+                    .create(Material.IRON)
+                    .hardnessAndResistance(3.0f, 6.0f)
+                    .sound(SoundType.GLASS)
+                    .harvestLevel(2)
+                    .harvestTool(ToolType.PICKAXE)
+                    .setLightLevel((state) -> {
+                        return 10;
+                    })
+            , 0)
+    );
+
+    public static final RegistryObject<Block> ORANGE_CHROMA_CRYSTAL = BLOCKS.register("orange_chroma_crystal", () ->
+            new ChromaBlock(Block.Properties
+                    .create(Material.IRON)
+                    .hardnessAndResistance(3.0f, 6.0f)
+                    .sound(SoundType.GLASS)
+                    .harvestLevel(2)
+                    .harvestTool(ToolType.PICKAXE)
+                    .setLightLevel((state) -> {
+                        return 10;
+                    })
+                    , 1)
+    );
+
+    public static final RegistryObject<Block> MAGENTA_CHROMA_CRYSTAL = BLOCKS.register("magenta_chroma_crystal", () ->
+            new ChromaBlock(Block.Properties
+                    .create(Material.IRON)
+                    .hardnessAndResistance(3.0f, 6.0f)
+                    .sound(SoundType.GLASS)
+                    .harvestLevel(2)
+                    .harvestTool(ToolType.PICKAXE)
+                    .setLightLevel((state) -> {
+                        return 10;
+                    })
+                    , 2)
+    );
+
+    public static final RegistryObject<Block> LIGHT_BLUE_CHROMA_CRYSTAL = BLOCKS.register("light_blue_chroma_crystal", () ->
+            new ChromaBlock(Block.Properties
+                    .create(Material.IRON)
+                    .hardnessAndResistance(3.0f, 6.0f)
+                    .sound(SoundType.GLASS)
+                    .harvestLevel(2)
+                    .harvestTool(ToolType.PICKAXE)
+                    .setLightLevel((state) -> {
+                        return 10;
+                    })
+                    , 3)
+    );
+
+    public static final RegistryObject<Block> YELLOW_CHROMA_CRYSTAL = BLOCKS.register("yellow_chroma_crystal", () ->
+            new ChromaBlock(Block.Properties
+                    .create(Material.IRON)
+                    .hardnessAndResistance(3.0f, 6.0f)
+                    .sound(SoundType.GLASS)
+                    .harvestLevel(2)
+                    .harvestTool(ToolType.PICKAXE)
+                    .setLightLevel((state) -> {
+                        return 10;
+                    })
+                    , 4)
+    );
+
+    public static final RegistryObject<Block> LIME_CHROMA_CRYSTAL = BLOCKS.register("lime_chroma_crystal", () ->
+            new ChromaBlock(Block.Properties
+                    .create(Material.IRON)
+                    .hardnessAndResistance(3.0f, 6.0f)
+                    .sound(SoundType.GLASS)
+                    .harvestLevel(2)
+                    .harvestTool(ToolType.PICKAXE)
+                    .setLightLevel((state) -> {
+                        return 10;
+                    })
+                    , 5)
+    );
+
+    public static final RegistryObject<Block> PINK_CHROMA_CRYSTAL = BLOCKS.register("pink_chroma_crystal", () ->
+            new ChromaBlock(Block.Properties
+                    .create(Material.IRON)
+                    .hardnessAndResistance(3.0f, 6.0f)
+                    .sound(SoundType.GLASS)
+                    .harvestLevel(2)
+                    .harvestTool(ToolType.PICKAXE)
+                    .setLightLevel((state) -> {
+                        return 10;
+                    })
+                    , 6)
+    );
+
+    public static final RegistryObject<Block> GRAY_CHROMA_CRYSTAL = BLOCKS.register("gray_chroma_crystal", () ->
+            new ChromaBlock(Block.Properties
+                    .create(Material.IRON)
+                    .hardnessAndResistance(3.0f, 6.0f)
+                    .sound(SoundType.GLASS)
+                    .harvestLevel(2)
+                    .harvestTool(ToolType.PICKAXE)
+                    .setLightLevel((state) -> {
+                        return 10;
+                    })
+                    , 7)
+    );
+
+    public static final RegistryObject<Block> LIGHT_GRAY_CHROMA_CRYSTAL = BLOCKS.register("light_gray_chroma_crystal", () ->
+            new ChromaBlock(Block.Properties
+                    .create(Material.IRON)
+                    .hardnessAndResistance(3.0f, 6.0f)
+                    .sound(SoundType.GLASS)
+                    .harvestLevel(2)
+                    .harvestTool(ToolType.PICKAXE)
+                    .setLightLevel((state) -> {
+                        return 10;
+                    })
+                    , 8)
+    );
+
+    public static final RegistryObject<Block> CYAN_CHROMA_CRYSTAL = BLOCKS.register("cyan_chroma_crystal", () ->
+            new ChromaBlock(Block.Properties
+                    .create(Material.IRON)
+                    .hardnessAndResistance(3.0f, 6.0f)
+                    .sound(SoundType.GLASS)
+                    .harvestLevel(2)
+                    .harvestTool(ToolType.PICKAXE)
+                    .setLightLevel((state) -> {
+                        return 10;
+                    })
+                    , 9)
+    );
+
+    public static final RegistryObject<Block> PURPLE_CHROMA_CRYSTAL = BLOCKS.register("purple_chroma_crystal", () ->
+            new ChromaBlock(Block.Properties
+                    .create(Material.IRON)
+                    .hardnessAndResistance(3.0f, 6.0f)
+                    .sound(SoundType.GLASS)
+                    .harvestLevel(2)
+                    .harvestTool(ToolType.PICKAXE)
+                    .setLightLevel((state) -> {
+                        return 10;
+                    })
+                    , 10)
+    );
+
+    public static final RegistryObject<Block> BLUE_CHROMA_CRYSTAL = BLOCKS.register("blue_chroma_crystal", () ->
+            new ChromaBlock(Block.Properties
+                    .create(Material.IRON)
+                    .hardnessAndResistance(3.0f, 6.0f)
+                    .sound(SoundType.GLASS)
+                    .harvestLevel(2)
+                    .harvestTool(ToolType.PICKAXE)
+                    .setLightLevel((state) -> {
+                        return 10;
+                    })
+                    , 11)
+    );
+
+    public static final RegistryObject<Block> BROWN_CHROMA_CRYSTAL = BLOCKS.register("brown_chroma_crystal", () ->
+            new ChromaBlock(Block.Properties
+                    .create(Material.IRON)
+                    .hardnessAndResistance(3.0f, 6.0f)
+                    .sound(SoundType.GLASS)
+                    .harvestLevel(2)
+                    .harvestTool(ToolType.PICKAXE)
+                    .setLightLevel((state) -> {
+                        return 10;
+                    })
+                    , 12)
+    );
+
+    public static final RegistryObject<Block> GREEN_CHROMA_CRYSTAL = BLOCKS.register("green_chroma_crystal", () ->
+            new ChromaBlock(Block.Properties
+                    .create(Material.IRON)
+                    .hardnessAndResistance(3.0f, 6.0f)
+                    .sound(SoundType.GLASS)
+                    .harvestLevel(2)
+                    .harvestTool(ToolType.PICKAXE)
+                    .setLightLevel((state) -> {
+                        return 10;
+                    })
+                    , 13)
+    );
+
+    public static final RegistryObject<Block> RED_CHROMA_CRYSTAL = BLOCKS.register("red_chroma_crystal", () ->
+            new ChromaBlock(Block.Properties
+                    .create(Material.IRON)
+                    .hardnessAndResistance(3.0f, 6.0f)
+                    .sound(SoundType.GLASS)
+                    .harvestLevel(2)
+                    .harvestTool(ToolType.PICKAXE)
+                    .setLightLevel((state) -> {
+                        return 10;
+                    })
+                    , 14)
+    );
+
+    public static final RegistryObject<Block> BLACK_CHROMA_CRYSTAL = BLOCKS.register("black_chroma_crystal", () ->
+            new ChromaBlock(Block.Properties
+                    .create(Material.IRON)
+                    .hardnessAndResistance(3.0f, 6.0f)
+                    .sound(SoundType.GLASS)
+                    .harvestLevel(2)
+                    .harvestTool(ToolType.PICKAXE)
+                    .setLightLevel((state) -> {
+                        return 10;
+                    })
+                    , 15)
+    );
+
+
     public static RegistryObject<FlowingFluidBlock> PINK_ESSENCE_BLOCK = BLOCKS.register("pink_essence_block", () ->
             new FlowingFluidBlock(ModFluids.PINK_ESSENCE, Block.Properties.create(Material.WATER).doesNotBlockMovement().hardnessAndResistance(100.0F).noDrops()));
 

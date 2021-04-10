@@ -1,5 +1,7 @@
 {
   "variants": {
-    "": { "model": "gempire:block/drill" }
+    "": {
+      "model": "gempire:block/drill"
+    }
   }
 }

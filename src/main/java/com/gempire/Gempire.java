@@ -140,6 +140,23 @@ public class Gempire
         ScreenManager.registerFactory(ModContainers.INJECTOR_CONTAINER.get(), InjectorScreen::new);
 
         RenderTypeLookup.setRenderLayer(ModBlocks.POWER_CRYSTAL_BLOCK.get(), RenderType.getTranslucent());
+
+        RenderTypeLookup.setRenderLayer(ModBlocks.WHITE_CHROMA_CRYSTAL.get(), RenderType.getTranslucent());
+        RenderTypeLookup.setRenderLayer(ModBlocks.ORANGE_CHROMA_CRYSTAL.get(), RenderType.getTranslucent());
+        RenderTypeLookup.setRenderLayer(ModBlocks.MAGENTA_CHROMA_CRYSTAL.get(), RenderType.getTranslucent());
+        RenderTypeLookup.setRenderLayer(ModBlocks.LIGHT_BLUE_CHROMA_CRYSTAL.get(), RenderType.getTranslucent());
+        RenderTypeLookup.setRenderLayer(ModBlocks.YELLOW_CHROMA_CRYSTAL.get(), RenderType.getTranslucent());
+        RenderTypeLookup.setRenderLayer(ModBlocks.LIME_CHROMA_CRYSTAL.get(), RenderType.getTranslucent());
+        RenderTypeLookup.setRenderLayer(ModBlocks.PINK_CHROMA_CRYSTAL.get(), RenderType.getTranslucent());
+        RenderTypeLookup.setRenderLayer(ModBlocks.GRAY_CHROMA_CRYSTAL.get(), RenderType.getTranslucent());
+        RenderTypeLookup.setRenderLayer(ModBlocks.LIGHT_GRAY_CHROMA_CRYSTAL.get(), RenderType.getTranslucent());
+        RenderTypeLookup.setRenderLayer(ModBlocks.CYAN_CHROMA_CRYSTAL.get(), RenderType.getTranslucent());
+        RenderTypeLookup.setRenderLayer(ModBlocks.PURPLE_CHROMA_CRYSTAL.get(), RenderType.getTranslucent());
+        RenderTypeLookup.setRenderLayer(ModBlocks.BLUE_CHROMA_CRYSTAL.get(), RenderType.getTranslucent());
+        RenderTypeLookup.setRenderLayer(ModBlocks.BROWN_CHROMA_CRYSTAL.get(), RenderType.getTranslucent());
+        RenderTypeLookup.setRenderLayer(ModBlocks.GREEN_CHROMA_CRYSTAL.get(), RenderType.getTranslucent());
+        RenderTypeLookup.setRenderLayer(ModBlocks.RED_CHROMA_CRYSTAL.get(), RenderType.getTranslucent());
+        RenderTypeLookup.setRenderLayer(ModBlocks.BLACK_CHROMA_CRYSTAL.get(), RenderType.getTranslucent());
     }
 
     // You can use EventBusSubscriber to automatically subscribe events on the contained class (this is subscribing to the MOD

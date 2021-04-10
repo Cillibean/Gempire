@@ -17,6 +17,106 @@ import java.awt.*;
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Gempire.MODID);
 
+
+    public static final RegistryObject<Item> WHITE_CHROMA_CRYSTAL = ITEMS.register("white_chroma_crystal", () ->
+            new BlockItem(
+                    ModBlocks.WHITE_CHROMA_CRYSTAL.get(),
+                    new Item.Properties().group(ModItemGroup.BLOCKS)
+            )
+    );
+    public static final RegistryObject<Item> ORANGE_CHROMA_CRYSTAL = ITEMS.register("orange_chroma_crystal", () ->
+            new BlockItem(
+                    ModBlocks.ORANGE_CHROMA_CRYSTAL.get(),
+                    new Item.Properties().group(ModItemGroup.BLOCKS)
+            )
+    );
+    public static final RegistryObject<Item> MAGENTA_CHROMA_CRYSTAL = ITEMS.register("magenta_chroma_crystal", () ->
+            new BlockItem(
+                    ModBlocks.MAGENTA_CHROMA_CRYSTAL.get(),
+                    new Item.Properties().group(ModItemGroup.BLOCKS)
+            )
+    );
+    public static final RegistryObject<Item> LIGHT_BLUE_CHROMA_CRYSTAL = ITEMS.register("light_blue_chroma_crystal", () ->
+            new BlockItem(
+                    ModBlocks.LIGHT_BLUE_CHROMA_CRYSTAL.get(),
+                    new Item.Properties().group(ModItemGroup.BLOCKS)
+            )
+    );
+    public static final RegistryObject<Item> YELLOW_CHROMA_CRYSTAL = ITEMS.register("yellow_chroma_crystal", () ->
+            new BlockItem(
+                    ModBlocks.YELLOW_CHROMA_CRYSTAL.get(),
+                    new Item.Properties().group(ModItemGroup.BLOCKS)
+            )
+    );
+    public static final RegistryObject<Item> LIME_CHROMA_CRYSTAL = ITEMS.register("lime_chroma_crystal", () ->
+            new BlockItem(
+                    ModBlocks.LIME_CHROMA_CRYSTAL.get(),
+                    new Item.Properties().group(ModItemGroup.BLOCKS)
+            )
+    );
+    public static final RegistryObject<Item> PINK_CHROMA_CRYSTAL = ITEMS.register("pink_chroma_crystal", () ->
+            new BlockItem(
+                    ModBlocks.PINK_CHROMA_CRYSTAL.get(),
+                    new Item.Properties().group(ModItemGroup.BLOCKS)
+            )
+    );
+    public static final RegistryObject<Item> GRAY_CHROMA_CRYSTAL = ITEMS.register("gray_chroma_crystal", () ->
+            new BlockItem(
+                    ModBlocks.GRAY_CHROMA_CRYSTAL.get(),
+                    new Item.Properties().group(ModItemGroup.BLOCKS)
+            )
+    );
+    public static final RegistryObject<Item> LIGHT_GRAY_CHROMA_CRYSTAL = ITEMS.register("light_gray_chroma_crystal", () ->
+            new BlockItem(
+                    ModBlocks.LIGHT_GRAY_CHROMA_CRYSTAL.get(),
+                    new Item.Properties().group(ModItemGroup.BLOCKS)
+            )
+    );
+    public static final RegistryObject<Item> CYAN_CHROMA_CRYSTAL = ITEMS.register("cyan_chroma_crystal", () ->
+            new BlockItem(
+                    ModBlocks.CYAN_CHROMA_CRYSTAL.get(),
+                    new Item.Properties().group(ModItemGroup.BLOCKS)
+            )
+    );
+    public static final RegistryObject<Item> PURPLE_CHROMA_CRYSTAL = ITEMS.register("purple_chroma_crystal", () ->
+            new BlockItem(
+                    ModBlocks.PURPLE_CHROMA_CRYSTAL.get(),
+                    new Item.Properties().group(ModItemGroup.BLOCKS)
+            )
+    );
+    public static final RegistryObject<Item> BLUE_CHROMA_CRYSTAL = ITEMS.register("blue_chroma_crystal", () ->
+            new BlockItem(
+                    ModBlocks.BLUE_CHROMA_CRYSTAL.get(),
+                    new Item.Properties().group(ModItemGroup.BLOCKS)
+            )
+    );
+    public static final RegistryObject<Item> BROWN_CHROMA_CRYSTAL = ITEMS.register("brown_chroma_crystal", () ->
+            new BlockItem(
+                    ModBlocks.BROWN_CHROMA_CRYSTAL.get(),
+                    new Item.Properties().group(ModItemGroup.BLOCKS)
+            )
+    );
+    public static final RegistryObject<Item> GREEN_CHROMA_CRYSTAL = ITEMS.register("green_chroma_crystal", () ->
+            new BlockItem(
+                    ModBlocks.GREEN_CHROMA_CRYSTAL.get(),
+                    new Item.Properties().group(ModItemGroup.BLOCKS)
+            )
+    );
+    public static final RegistryObject<Item> RED_CHROMA_CRYSTAL = ITEMS.register("red_chroma_crystal", () ->
+            new BlockItem(
+                    ModBlocks.RED_CHROMA_CRYSTAL.get(),
+                    new Item.Properties().group(ModItemGroup.BLOCKS)
+            )
+    );
+    public static final RegistryObject<Item> BLACK_CHROMA_CRYSTAL = ITEMS.register("black_chroma_crystal", () ->
+            new BlockItem(
+                    ModBlocks.BLACK_CHROMA_CRYSTAL.get(),
+                    new Item.Properties().group(ModItemGroup.BLOCKS)
+            )
+    );
+
+
+
     public static final RegistryObject<Item> DRAINED_BLUE_SOIL = ITEMS.register("drained_blue_soil", () ->
             new BlockItem(
                     ModBlocks.DRAINED_BLUE_SOIL.get(),

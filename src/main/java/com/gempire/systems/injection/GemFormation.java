@@ -265,14 +265,14 @@ public class GemFormation {
                     blocks.add(this.pos.add(dir.up()));
                     blocks.add(this.pos.add(dir.up().up()));
 
-                    blocksToDrain.add(this.pos.add(i, 0, 0).down());
-                    blocksToDrain.add(this.pos.add(i, 0, 0).up().up().up());
-                    blocksToDrain.add(this.pos.add(i, 0, 0).north());
-                    blocksToDrain.add(this.pos.add(i, 0, 0).up().north());
-                    blocksToDrain.add(this.pos.add(i, 0, 0).up().up().north());
-                    blocksToDrain.add(this.pos.add(i, 0, 0).south());
-                    blocksToDrain.add(this.pos.add(i, 0, 0).up().south());
-                    blocksToDrain.add(this.pos.add(i, 0, 0).up().up().south());
+                    blocksToDrain.add(this.pos.add(dir).down());
+                    blocksToDrain.add(this.pos.add(dir).up().up().up());
+                    blocksToDrain.add(this.pos.add(dir).north());
+                    blocksToDrain.add(this.pos.add(dir).up().north());
+                    blocksToDrain.add(this.pos.add(dir).up().up().north());
+                    blocksToDrain.add(this.pos.add(dir).south());
+                    blocksToDrain.add(this.pos.add(dir).up().south());
+                    blocksToDrain.add(this.pos.add(dir).up().up().south());
                 } else {
                     found = true;
                     break;

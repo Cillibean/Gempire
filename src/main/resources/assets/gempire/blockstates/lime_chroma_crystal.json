@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "facing=down":  { "model": "gempire:block/lime_chroma_crystal", "x" : 180},
+    "facing=up": { "model": "gempire:block/lime_chroma_crystal" },
+    "facing=north":  { "model": "gempire:block/lime_chroma_crystal", "x":  90 },
+    "facing=east":  { "model": "gempire:block/lime_chroma_crystal", "y": 90, "x": 90 },
+    "facing=south": { "model": "gempire:block/lime_chroma_crystal", "x": 270 },
+    "facing=west":  { "model": "gempire:block/lime_chroma_crystal", "y": 90, "x": 270 }
+  }
+}
