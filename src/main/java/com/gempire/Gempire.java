@@ -20,9 +20,13 @@ import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
 import net.minecraft.loot.LootPool;
 import net.minecraft.loot.TableLootEntry;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.FlowersFeature;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DeferredWorkQueue;
 import net.minecraftforge.fml.InterModComms;
@@ -34,6 +38,7 @@ import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -61,6 +66,7 @@ public class Gempire
 
         RegistryHandler.init();
         // Register ourselves for server and other game events we are interested in
+        MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, ModFeatures::addOres);
         MinecraftForge.EVENT_BUS.register(this);
         //MinecraftForge.EVENT_BUS.register(CommonProxy.class);
     }
@@ -87,6 +93,13 @@ public class Gempire
         });
         ModEntities.registerCruxes();
         ModFluids.registerFluidBuckets();
+        setupWorldGen(event);
+    }
+
+    public static void setupWorldGen(FMLCommonSetupEvent event){
+        //for(Biome biome : ForgeRegistries.BIOMES){
+        //    biome.
+        //}
     }
 
     @SubscribeEvent
