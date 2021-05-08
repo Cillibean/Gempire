@@ -3,7 +3,6 @@ package com.gempire.blocks;
 import com.gempire.init.ModBlocks;
 import com.gempire.tileentities.InjectorTE;
 import com.gempire.tileentities.TankTE;
-import com.sun.org.apache.xpath.internal.operations.String;
 import net.minecraft.block.*;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;

@@ -82,6 +82,11 @@ public abstract class EntityStarterGem extends EntityGem {
         return false;
     }
 
+    @Override
+    public byte EmotionThreshold() {
+        return 10;
+    }
+
     public int generateOutfitVariant(){
         return 0;
     }

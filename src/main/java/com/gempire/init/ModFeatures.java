@@ -18,7 +18,6 @@ import java.util.*;
 public class ModFeatures {
 
     public static void addOres(final BiomeLoadingEvent event){
-        System.out.println("Adding ores");
         addCrystal(event, ModBlocks.WHITE_CHROMA_CRYSTAL.get().getDefaultState().with(ChromaBlock.FACING, Direction.UP), 0, 60, 2);
         addCrystal(event, ModBlocks.WHITE_CHROMA_CRYSTAL.get().getDefaultState().with(ChromaBlock.FACING, Direction.DOWN), 0, 60, 2);
 

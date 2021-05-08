@@ -64,7 +64,12 @@ public class GemFormation {
                 EntityVaryingGem varyingGem = (EntityVaryingGem)gem;
                 varyingGem.setSkinVariantOnInitialSpawn = false;
                 int variant = this.getColorFromChroma();
-                varyingGem.initalSkinVariant = variant;
+                if(varyingGem.isColorValid(variant)){
+                    varyingGem.initalSkinVariant = variant;
+                }
+                else{
+                    varyingGem.initalSkinVariant = varyingGem.generateRandomInitialSkin();
+                }
             }
             gem.setUniqueId(MathHelper.getRandomUUID(this.world.rand));
         }
@@ -163,9 +168,6 @@ public class GemFormation {
                     }
                 } else {
                     temperatureDifference = conditions.temperatureMin - BLOCK_TEMPERATURE == 0 ? 1 : Math.abs(conditions.temperatureMin - BLOCK_TEMPERATURE);
-                }
-                if(this.primer == conditions.primer && conditions.primer != Items.AIR && this.primer != Items.AIR){
-                    temperatureDifference = 0;
                 }
                 int essenceCount = 0;
                 String[] indEssencesInj = this.essences.split("-");

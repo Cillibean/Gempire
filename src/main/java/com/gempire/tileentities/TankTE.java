@@ -4,7 +4,6 @@ import com.gempire.container.TankContainer;
 import com.gempire.init.ModFluids;
 import com.gempire.init.ModItems;
 import com.gempire.init.ModTE;
-import com.sun.org.apache.xpath.internal.operations.String;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.renderer.texture.ITickable;
 import net.minecraft.entity.player.PlayerEntity;

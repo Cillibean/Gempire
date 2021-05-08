@@ -6,23 +6,29 @@ import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.World;
 
-public class EntityVaryingGem extends EntityGem{
+public abstract class EntityVaryingGem extends EntityGem{
 
     public EntityVaryingGem(EntityType<? extends CreatureEntity> type, World worldIn) {
         super(type, worldIn);
     }
 
-    public int[] NeglectedColors() {
-        return new int[0];
-    }
+    public abstract int[] NeglectedColors();
 
     public boolean isColorValid(int color){
-        for(int i : this.NeglectedColors()){
+        for(int i = 0; i < this.NeglectedColors().length; i++){
             if(this.NeglectedColors()[i] == color){
                 return false;
             }
         }
         return true;
+    }
+
+    public int generateRandomInitialSkin(){
+        int rando = this.rand.nextInt(16);
+        while(!this.isColorValid(rando)){
+            rando = this.rand.nextInt(16);
+        }
+        return rando;
     }
 
     @Override

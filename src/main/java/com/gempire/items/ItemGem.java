@@ -72,8 +72,6 @@ public class ItemGem extends Item {
             RegistryObject<EntityType<EntityPebble>> gemm = ModEntities.PEBBLE;
             String skinColorVariant = "";
             EntityGem gem = gemm.get().create(world);
-            System.out.println(this.getRegistryName().toString());
-            //sapphire__x
             String namee = this.getRegistryName().toString().replaceAll("gempire", "").replaceAll("gem", "").replaceAll(":", "").replaceAll(" ", "");
 
             //This whole section here checks for variations in color so it can spawn the correct type of gem

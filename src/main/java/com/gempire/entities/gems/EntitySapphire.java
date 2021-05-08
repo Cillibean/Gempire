@@ -15,16 +15,20 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.client.renderer.texture.Texture;
 import net.minecraft.client.renderer.texture.TextureUtil;
-import net.minecraft.entity.CreatureEntity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.monster.IMob;
+import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.projectile.SnowballEntity;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.resources.IResourceManager;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvents;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import org.apache.commons.io.IOUtils;
 
@@ -36,6 +40,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class EntitySapphire extends EntityVaryingGem {
+    public boolean defensive = false;
 
     public EntitySapphire(EntityType<? extends CreatureEntity> type, World worldIn) {
         super(type, worldIn);
@@ -49,6 +54,24 @@ public class EntitySapphire extends EntityVaryingGem {
     }
 
     @Override
+    public void writeAdditional(CompoundNBT compound) {
+        compound.putBoolean("defensive", this.defensive);
+        super.writeAdditional(compound);
+    }
+
+    @Override
+    public void read(CompoundNBT compound) {
+        super.read(compound);
+        this.defensive = compound.getBoolean("defensive");
+    }
+
+    @Override
+    public boolean attackEntityFrom(DamageSource source, float amount) {
+        this.defensive = true;
+        return super.attackEntityFrom(source, amount);
+    }
+
+    @Override
     protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(9, new SwimGoal(this));
@@ -57,28 +80,9 @@ public class EntitySapphire extends EntityVaryingGem {
         this.goalSelector.addGoal(8, new LookRandomlyGoal(this));
         this.goalSelector.addGoal(7, new EntityAIWander(this, 1.0D));
         this.goalSelector.addGoal(7, new EntityAIFollowOwner(this, 1.0D));
-    }
-
-    @Override
-    public int generateSkinColor(){
-        ArrayList<Integer> skins = new ArrayList<>();
-        ResourceLocation paletteTexture = new ResourceLocation(Gempire.MODID + ":textures/entity/" + this.getGemName().toLowerCase() + "/skin_palette.png");
-        BufferedImage palette = null;
-        try{
-            palette = ImageIO.read(Minecraft.getInstance().getResourceManager().getResource(paletteTexture).getInputStream());
-            System.out.println("Palette Read!");
-            for (int x = 0; x < palette.getWidth(); x++) {
-                int color = palette.getRGB(x, this.getSkinColorVariant());
-                if((color>>24) == 0x00){
-                    continue;
-                }
-                skins.add(color);
-            }
-        }
-        catch (IOException e){
-            e.printStackTrace();
-        }
-        return Color.lerpHex(skins);
+        this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, MobEntity.class, 10, true, false, (p_213621_0_) -> {
+            return p_213621_0_ instanceof IMob;
+        }));
     }
 
     @Override
@@ -92,57 +96,12 @@ public class EntitySapphire extends EntityVaryingGem {
                 GemPlacements.TOP_OF_HEAD, GemPlacements.FOREHEAD, GemPlacements.BACK_OF_HEAD, GemPlacements.LEFT_EYE,
                 GemPlacements.LEFT_CHEEK, GemPlacements.RIGHT_CHEEK, GemPlacements.LEFT_EAR, GemPlacements.RIGHT_EAR,
                 GemPlacements.CHEST, GemPlacements.BACK, GemPlacements.BELLY, GemPlacements.LEFT_ARM, GemPlacements.RIGHT_ARM,
-                GemPlacements.LEFT_HAND, GemPlacements.RIGHT_HAND, GemPlacements.LEFT_PALM, GemPlacements.RIGHT_PALM
         };
-    }
-
-    @Override
-    public int generateHairColor() {
-        ArrayList<Integer> skins = new ArrayList<>();
-        ResourceLocation paletteTexture = new ResourceLocation(Gempire.MODID + ":textures/entity/" + this.getGemName().toLowerCase() + "/hair_palette.png");
-        BufferedImage palette = null;
-        try{
-            palette = ImageIO.read(Minecraft.getInstance().getResourceManager().getResource(paletteTexture).getInputStream());
-            System.out.println("Palette Read!");
-            for (int x = 0; x < palette.getWidth(); x++) {
-                int color = palette.getRGB(x, this.getSkinColorVariant());
-                if((color>>24) == 0x00){
-                    continue;
-                }
-                skins.add(color);
-            }
-        }
-        catch (IOException e){
-            e.printStackTrace();
-        }
-        return Color.lerpHex(skins);
     }
 
     @Override
     public int generateHairVariant() {
         return this.rand.nextInt(5);
-    }
-
-    @Override
-    public int generateGemColor() {
-        ArrayList<Integer> skins = new ArrayList<>();
-        ResourceLocation paletteTexture = new ResourceLocation(Gempire.MODID + ":textures/entity/" + this.getGemName().toLowerCase() + "/gem_palette.png");
-        BufferedImage palette = null;
-        try{
-            palette = ImageIO.read(Minecraft.getInstance().getResourceManager().getResource(paletteTexture).getInputStream());
-            System.out.println("Palette Read!");
-            for (int x = 0; x < palette.getWidth(); x++) {
-                int color = palette.getRGB(x, this.getSkinColorVariant());
-                if((color>>24) == 0x00){
-                    continue;
-                }
-                skins.add(color);
-            }
-        }
-        catch (IOException e){
-            e.printStackTrace();
-        }
-        return Color.lerpHex(skins);
     }
 
     public int generateOutfitVariant() {
@@ -154,28 +113,27 @@ public class EntitySapphire extends EntityVaryingGem {
     }
 
     @Override
-    public int generateAbilitySlots(){
-        //TODO: Temporary
-        return 1;
-    }
-
-    @Override
     public Abilities[] possibleAbilities() {
         return new Abilities[]{
-                Abilities.NO_ABILITY
+                Abilities.NO_ABILITY, Abilities.TANK, Abilities.BEEFCAKE, Abilities.UNHINGED
         };
     }
 
     @Override
     public Abilities[] definiteAbilities() {
         return new Abilities[]{
-                Abilities.NO_ABILITY
+                Abilities.CRYOKINESIS, Abilities.LUCK
         };
     }
 
     @Override
     public boolean generateIsEmotional() {
         return false;
+    }
+
+    @Override
+    public byte EmotionThreshold() {
+        return 30;
     }
 
     public boolean canChangeUniformColorByDefault() {
@@ -195,19 +153,9 @@ public class EntitySapphire extends EntityVaryingGem {
         return true;
     }
 
-    @Override
     public int[] NeglectedColors() {
         return new int[]{
-                14
+                14, 16
         };
-    }
-
-    public boolean isColorValid(int color){
-        for(int i : this.NeglectedColors()){
-            if(this.NeglectedColors()[i] == color){
-                return false;
-            }
-        }
-        return true;
     }
 }

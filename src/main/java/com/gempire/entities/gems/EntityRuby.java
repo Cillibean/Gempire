@@ -93,15 +93,9 @@ public class EntityRuby extends EntityGem {
         return 8;
     }
 
-    @Override
-    public int generateAbilitySlots(){
-        //TODO: Temporary
-        return 3;
-    }
-
     public Abilities[] possibleAbilities(){
         return new Abilities[]{
-                Abilities.KNOCKBACK, Abilities.PARALYSIS, Abilities.NO_ABILITY
+                Abilities.KNOCKBACK, Abilities.PARALYSIS, Abilities.NO_ABILITY, Abilities.TANK, Abilities.BEEFCAKE, Abilities.POWERHOUSE, Abilities.UNHINGED
         };
     }
     public Abilities[] definiteAbilities(){
@@ -117,6 +111,11 @@ public class EntityRuby extends EntityGem {
     @Override
     public boolean generateIsEmotional() {
         return true;
+    }
+
+    @Override
+    public byte EmotionThreshold() {
+        return 15;
     }
 
     public boolean canChangeUniformColorByDefault() {

@@ -68,6 +68,7 @@ public class Gempire
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, ModFeatures::addOres);
         MinecraftForge.EVENT_BUS.register(this);
+        MinecraftForge.EVENT_BUS.register(new EventHandler());
         //MinecraftForge.EVENT_BUS.register(CommonProxy.class);
     }
 
@@ -93,30 +94,26 @@ public class Gempire
         });
         ModEntities.registerCruxes();
         ModFluids.registerFluidBuckets();
-        setupWorldGen(event);
-    }
-
-    public static void setupWorldGen(FMLCommonSetupEvent event){
-        //for(Biome biome : ForgeRegistries.BIOMES){
-        //    biome.
-        //}
+        ModAbilities.registerAbilities();
     }
 
     @SubscribeEvent
     public void onLootTablesLoad(final LootTableLoadEvent event) {
-
         // Test: /loot give @p loot minecraft:chests/end_city_treasure
         if (event.getName().equals(new ResourceLocation("minecraft", "chests/abandoned_mineshaft"))
                 || event.getName().equals(new ResourceLocation("minecraft", "chests/underwater_ruin_big"))
                 || event.getName().equals(new ResourceLocation("minecraft", "chests/pillager_outpost"))
                 || event.getName().equals(new ResourceLocation("minecraft", "chests/end_city_treasure"))
                 || event.getName().equals(new ResourceLocation("minecraft", "chests/stronghold_library"))
-                || event.getName().equals(new ResourceLocation("minecraft", "chests/village_armorer "))
+                || event.getName().equals(new ResourceLocation("minecraft", "chests/village_armorer"))
                 || event.getName().equals(new ResourceLocation("minecraft", "chests/village_toolsmith"))
-                || event.getName().equals(new ResourceLocation("minecraft", "chests/ruined_portal "))
-                || event.getName().equals(new ResourceLocation("minecraft", "chests/desert_pyramid  "))
+                || event.getName().equals(new ResourceLocation("minecraft", "chests/ruined_portal"))
+                || event.getName().equals(new ResourceLocation("minecraft", "chests/desert_pyramid"))
         ) {
             event.getTable().addPool(LootPool.builder().addEntry(TableLootEntry.builder(new ResourceLocation(MODID, "chests/essence"))).build());
+        }
+        else{
+            event.getTable().addPool(LootPool.builder().addEntry(TableLootEntry.builder(event.getName())).build());
         }
     }
 

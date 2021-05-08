@@ -1,20 +1,21 @@
 package com.gempire.entities.bases;
 
 import com.gempire.Gempire;
-import com.gempire.entities.abilities.Ability;
+import com.gempire.entities.abilities.base.Ability;
 import com.gempire.entities.abilities.AbilityZilch;
+import com.gempire.entities.abilities.interfaces.*;
 import com.gempire.init.ModItems;
 import com.gempire.items.ItemGem;
-import com.gempire.systems.injection.Crux;
 import com.gempire.util.Abilities;
 import com.gempire.util.Color;
-import com.gempire.util.CruxType;
 import com.gempire.util.GemPlacements;
-import net.minecraft.block.Blocks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.Attributes;
+import net.minecraft.entity.ai.goal.Goal;
+import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.item.ItemEntity;
+import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.DyeItem;
 import net.minecraft.item.Item;
@@ -41,11 +42,13 @@ import javax.annotation.Nullable;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-public abstract class EntityGem extends CreatureEntity {
+public abstract class EntityGem extends CreatureEntity implements IRangedAttackMob {
     public static DataParameter<Optional<UUID>> OWNER_ID = EntityDataManager.<Optional<UUID>>createKey(EntityGem.class, DataSerializers.OPTIONAL_UNIQUE_ID);
     public static DataParameter<Boolean> OWNED = EntityDataManager.<Boolean>createKey(EntityGem.class, DataSerializers.BOOLEAN);
     public static final DataParameter<Boolean> PRIMARY = EntityDataManager.<Boolean>createKey(EntityGem.class, DataSerializers.BOOLEAN);
@@ -70,6 +73,8 @@ public abstract class EntityGem extends CreatureEntity {
     public byte emotionMeter = 0;
     public int initalSkinVariant = 0;
     public boolean setSkinVariantOnInitialSpawn = true;
+
+    public byte effectAbilityCounter = 99;
 
     public EntityGem(EntityType<? extends CreatureEntity> type, World worldIn) {
         super(type, worldIn);
@@ -113,6 +118,8 @@ public abstract class EntityGem extends CreatureEntity {
         this.setAbilites(this.generateAbilities());
         this.setEmotional(this.generateIsEmotional());
         this.setAbilityPowers(this.findAbilities(this.getAbilites()));
+        this.addAbilityGoals();
+        this.applyAttributeAbilities();
         return super.onInitialSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
     }
 
@@ -162,6 +169,34 @@ public abstract class EntityGem extends CreatureEntity {
         this.emotionMeter = compound.getByte("emotionMeter");
         this.setMovementType(compound.getByte("movementType"));
         this.setAbilityPowers(this.findAbilities(compound.getString("abilities")));
+        this.addAbilityGoals();
+        this.applyAttributeAbilities();
+    }
+
+    @Override
+    public void livingTick() {
+        super.livingTick();
+        if(!this.world.isRemote) {
+            if (this.effectAbilityCounter > 99) {
+                List<Entity> owners = this.world.getEntitiesWithinAABBExcludingEntity(this, this.getBoundingBox().grow(6));
+                for (Entity entity : owners) {
+                    if (entity instanceof PlayerEntity) {
+                        if (this.isOwner((PlayerEntity) entity)) {
+                            PlayerEntity owner = (PlayerEntity) entity;
+                            for (Ability ability : this.getAbilityPowers()) {
+                                if (ability instanceof IEffectAbility && !(ability instanceof IViolentAbility)) {
+                                    owner.addPotionEffect(((IEffectAbility) ability).effect());
+                                }
+                            }
+                        }
+                    }
+                    break;
+                }
+                this.effectAbilityCounter = 0;
+            } else {
+                this.effectAbilityCounter++;
+            }
+        }
     }
 
     @Override
@@ -242,12 +277,14 @@ public abstract class EntityGem extends CreatureEntity {
             return super.attackEntityFrom(source, amount);
         }
         if(this.isEmotional() && !source.isExplosion() && !source.isFireDamage()) {
-            if(this.emotionMeter < 10 + this.rand.nextInt(9)){
+            if(this.emotionMeter <= this.EmotionThreshold()){
                 this.emotionMeter++;
             }
             else {
                 for(Ability power : this.getAbilityPowers()){
-                    power.EmotionalOutburst();
+                    if(power instanceof IEmotionalAbility){
+                        ((IEmotionalAbility)power).outburst();
+                    }
                 }
                 this.emotionMeter = 0;
             }
@@ -257,13 +294,23 @@ public abstract class EntityGem extends CreatureEntity {
 
     @Override
     public boolean attackEntityAsMob(Entity entityIn) {
-        if(entityIn.world.isRemote){
-            return super.attackEntityAsMob(entityIn);
-        }
-        for(Ability power : this.getAbilityPowers()){
-            power.Fight(entityIn, this.getAttributeValue(Attributes.ATTACK_DAMAGE));
+        if(!entityIn.world.isRemote){
+            for(Ability power : this.getAbilityPowers()){
+                if(power instanceof IMeleeAbility) {
+                    ((IMeleeAbility)power).fight(entityIn, this.getAttributeValue(Attributes.ATTACK_DAMAGE));
+                }
+            }
         }
         return super.attackEntityAsMob(entityIn);
+    }
+
+    @Override
+    public void attackEntityWithRangedAttack(LivingEntity target, float distanceFactor) {
+        for(Ability power : this.getAbilityPowers()){
+            if(power instanceof IRangedAbility){
+                ((IRangedAbility)power).attack(target, distanceFactor);
+            }
+        }
     }
 
     @Override
@@ -279,26 +326,6 @@ public abstract class EntityGem extends CreatureEntity {
             this.world.addEntity(item);
         }
         super.onDeath(source);
-    }
-
-    public ArrayList<Ability> findAbilities(String getab){
-        ArrayList<Abilities> abilities = new ArrayList<>();
-        ArrayList<Ability> powers = new ArrayList<>();
-        if(!getab.isEmpty()) {
-            String[] powerViolenceList = getab.split(",");
-            for (int i = 0; i < powerViolenceList.length; i++) {
-                abilities.add(Abilities.getAbility(Integer.valueOf(powerViolenceList[i])));
-            }
-            for (Abilities ability : abilities) {
-                powers.add(Ability.GetAbilityFromAbilities(this, ability));
-            }
-        }
-        else{
-            ArrayList<Ability> nulab = new ArrayList<>();
-            nulab.add(new AbilityZilch(this));
-            return nulab;
-        }
-        return powers;
     }
 
     public Item getGemItem() {
@@ -539,6 +566,106 @@ public abstract class EntityGem extends CreatureEntity {
         return this.getSkinColorVariant();
     }
 
+    public int getSkinColorVariant(){
+        return this.dataManager.get(EntityGem.SKIN_COLOR_VARIANT);
+    }
+
+    public void setSkinColorVariant(int value){
+        this.dataManager.set(EntityGem.SKIN_COLOR_VARIANT, value);
+    }
+
+    public abstract int generateSkinColorVariant();
+
+    public abstract boolean hasSkinColorVariant();
+
+    public boolean isEmotional(){
+        return this.dataManager.get(EntityGem.EMOTIONAL);
+    }
+
+    public void setEmotional(boolean value){
+        this.dataManager.set(EntityGem.EMOTIONAL, value);
+    }
+
+    public abstract boolean generateIsEmotional();
+
+    public abstract byte EmotionThreshold();
+
+    public boolean isPrimary(){
+        return this.dataManager.get(EntityGem.PRIMARY);
+    }
+
+    public void setPrimary(boolean value){
+        this.dataManager.set(EntityGem.PRIMARY, value);
+    }
+
+    public boolean isDefective(){
+        return this.dataManager.get(EntityGem.DEFECTIVE);
+    }
+
+    public void setDefective(boolean value){
+        this.dataManager.set(EntityGem.DEFECTIVE, value);
+    }
+
+    public abstract boolean canChangeUniformColorByDefault();
+
+    public abstract boolean canChangeInsigniaColorByDefault();
+
+
+    public String getGemName(){
+        return this.getType().getRegistryName().toString().replaceAll("(?i)item", "").replaceAll("gempire", "").replaceAll("(?i)gem", "").replaceAll("_", "").replaceAll(":", "").replaceAll(" ", "");
+    }
+
+    //ABILITY STUFF
+
+    public ArrayList<Ability> findAbilities(String getab){
+        ArrayList<Abilities> abilities = new ArrayList<>();
+        ArrayList<Ability> powers = new ArrayList<>();
+        if(!getab.isEmpty()) {
+            String[] powerViolenceList = getab.split(",");
+            for (int i = 0; i < powerViolenceList.length; i++) {
+                abilities.add(Abilities.getAbility(Integer.valueOf(powerViolenceList[i])));
+            }
+            for (Abilities ability : abilities) {
+                //powers.add(Ability.getAbilityFromAbilities(ability).assignAbility(this));
+                Class[] parameterType = null;
+                try {
+                    powers.add(Ability.ABILITY_FROM_ABILITIES.get(ability).getConstructor(parameterType).newInstance(null).assignAbility(this));
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        }
+        else{
+            ArrayList<Ability> nulab = new ArrayList<>();
+            nulab.add(new AbilityZilch().assignAbility(this));
+            return nulab;
+        }
+        return powers;
+    }
+
+    public void addAbilityGoals(){
+        for(Ability ability : this.getAbilityPowers()){
+            if(ability instanceof ITaskAbility){
+                if(((ITaskAbility)ability).targetTask()){
+                    this.targetSelector.addGoal(2, ((ITaskAbility)ability).goal());
+                    System.out.println("DEBUG: ADDIN TARGET TASK UWU");
+                }
+                else{
+                    this.goalSelector.addGoal(2, ((ITaskAbility)ability).goal());
+                }
+            }
+        }
+    }
+
+    public void applyAttributeAbilities(){
+        for(Ability ability : this.getAbilityPowers()){
+            if(ability instanceof IAttributeAbility){
+                this.getAttribute(((IAttributeAbility)ability).attribute()).setBaseValue(((IAttributeAbility)ability).baseValue());
+            }
+        }
+    }
+
     public int getAbilitySlots(){
         return this.dataManager.get(EntityGem.ABILITY_SLOTS);
     }
@@ -590,13 +717,13 @@ public abstract class EntityGem extends CreatureEntity {
                 totalWeight+=i.weight;
             }
             int idx = 0;
-            for(double r = Math.random() * totalWeight; idx < abilities.length - 1; idx++){
+            for (double r = Math.random() * totalWeight; idx < abilities.length - 1; idx++) {
                 r -= abilities[idx].weight;
-                if(r<=0) break;
+                if (r <= 0) break;
             }
             Abilities weightedAbility = abilities[idx];
             abilityList+=weightedAbility.id + ",";
-            abilities = ArrayUtils.remove(abilities, idx);
+            if(this.possibleAbilities().length + this.definiteAbilities().length > this.getAbilitySlots()) abilities = ArrayUtils.remove(abilities, idx);
             remainingSlots--;
             complete = remainingSlots > 0 ? false : true;
         }
@@ -613,50 +740,4 @@ public abstract class EntityGem extends CreatureEntity {
 
     public abstract Abilities[] possibleAbilities();
     public abstract Abilities[] definiteAbilities();
-
-    public int getSkinColorVariant(){
-        return this.dataManager.get(EntityGem.SKIN_COLOR_VARIANT);
-    }
-
-    public void setSkinColorVariant(int value){
-        this.dataManager.set(EntityGem.SKIN_COLOR_VARIANT, value);
-    }
-
-    public abstract int generateSkinColorVariant();
-
-    public abstract boolean hasSkinColorVariant();
-
-    public boolean isEmotional(){
-        return this.dataManager.get(EntityGem.EMOTIONAL);
-    }
-
-    public void setEmotional(boolean value){
-        this.dataManager.set(EntityGem.EMOTIONAL, value);
-    }
-
-    public abstract boolean generateIsEmotional();
-
-    public boolean isPrimary(){
-        return this.dataManager.get(EntityGem.PRIMARY);
-    }
-
-    public void setPrimary(boolean value){
-        this.dataManager.set(EntityGem.PRIMARY, value);
-    }
-
-    public boolean isDefective(){
-        return this.dataManager.get(EntityGem.DEFECTIVE);
-    }
-
-    public void setDefective(boolean value){
-        this.dataManager.set(EntityGem.DEFECTIVE, value);
-    }
-
-    public abstract boolean canChangeUniformColorByDefault();
-
-    public abstract boolean canChangeInsigniaColorByDefault();
-
-    public String getGemName(){
-        return this.getType().getRegistryName().toString().replaceAll("(?i)item", "").replaceAll("gempire", "").replaceAll("(?i)gem", "").replaceAll("_", "").replaceAll(":", "").replaceAll(" ", "");
-    }
 }

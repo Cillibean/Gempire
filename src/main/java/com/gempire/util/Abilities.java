@@ -2,9 +2,15 @@ package com.gempire.util;
 
 public enum Abilities {
     NO_ABILITY(0, 10),
-    KNOCKBACK(1, 7),
+    KNOCKBACK(1, 6),
     PYROKINESIS(2, 3),
-    PARALYSIS(3, 2);
+    PARALYSIS(3, 2),
+    CRYOKINESIS(4, 3),
+    LUCK(5, 2),
+    TANK(6, 3),
+    BEEFCAKE(7, 3),
+    POWERHOUSE(8, 3),
+    UNHINGED(9, 5);
     public int id;
     public int weight;
     private static Abilities[] vals = Abilities.values();
