@@ -50,7 +50,8 @@ public class EntitySapphire extends EntityVaryingGem {
         return MobEntity.func_233666_p_()
                 .createMutableAttribute(Attributes.MAX_HEALTH, 50.0D)
                 .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.4D)
-                .createMutableAttribute(Attributes.ATTACK_DAMAGE, 1.0D);
+                .createMutableAttribute(Attributes.ATTACK_DAMAGE, 1.0D)
+                .createMutableAttribute(Attributes.ATTACK_SPEED, 1.0D);
     }
 
     @Override
@@ -104,6 +105,20 @@ public class EntitySapphire extends EntityVaryingGem {
         return this.rand.nextInt(5);
     }
 
+    @Override
+    public boolean UsesUniqueNames() {
+        return false;
+    }
+
+    @Override
+    public String NameFromColor(byte i) {
+        return null;
+    }
+
+    public String NameFromColor() {
+        return "";
+    }
+
     public int generateOutfitVariant() {
         return this.rand.nextInt(6);
     }
@@ -155,7 +170,7 @@ public class EntitySapphire extends EntityVaryingGem {
 
     public int[] NeglectedColors() {
         return new int[]{
-                14, 16
+                14, 16, 17
         };
     }
 }

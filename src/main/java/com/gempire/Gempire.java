@@ -4,6 +4,7 @@ import com.gempire.client.entity.render.*;
 import com.gempire.client.screen.InjectorScreen;
 import com.gempire.client.screen.TankScreen;
 import com.gempire.entities.TestEntity;
+import com.gempire.entities.gems.EntityQuartz;
 import com.gempire.entities.gems.EntityRuby;
 import com.gempire.entities.gems.EntitySapphire;
 import com.gempire.entities.gems.starter.EntityMica;
@@ -92,6 +93,9 @@ public class Gempire
         DeferredWorkQueue.runLater(() -> {
             GlobalEntityTypeAttributes.put(ModEntities.SAPPHIRE.get(), EntitySapphire.setCustomAttributes().create());
         });
+        DeferredWorkQueue.runLater(() -> {
+            GlobalEntityTypeAttributes.put(ModEntities.QUARTZ.get(), EntityQuartz.setCustomAttributes().create());
+        });
         ModEntities.registerCruxes();
         ModFluids.registerFluidBuckets();
         ModAbilities.registerAbilities();
@@ -145,6 +149,7 @@ public class Gempire
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.SHALE.get(), RenderShale::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.RUBY.get(), RenderRuby::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.SAPPHIRE.get(), RenderSapphire::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.QUARTZ.get(), RenderQuartz::new);
 
         ScreenManager.registerFactory(ModContainers.TANK_CONTAINER.get(), TankScreen::new);
         ScreenManager.registerFactory(ModContainers.INJECTOR_CONTAINER.get(), InjectorScreen::new);

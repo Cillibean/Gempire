@@ -3,6 +3,7 @@ package com.gempire.init;
 import com.gempire.Gempire;
 import com.gempire.entities.TestEntity;
 import com.gempire.entities.bases.EntityGem;
+import com.gempire.entities.gems.EntityQuartz;
 import com.gempire.entities.gems.EntityRuby;
 import com.gempire.entities.gems.EntitySapphire;
 import com.gempire.entities.gems.starter.EntityMica;
@@ -58,6 +59,11 @@ public class ModEntities {
             () -> EntityType.Builder.create(EntitySapphire::new, EntityClassification.CREATURE)
                     .size(.75f, 1.5f) // Hitbox Size
                     .build(new ResourceLocation(Gempire.MODID, "sapphire").toString()));
+
+    public static final RegistryObject<EntityType<EntityQuartz>> QUARTZ = ENTITIES.register("quartz",
+            () -> EntityType.Builder.create(EntityQuartz::new, EntityClassification.CREATURE)
+                    .size(.75f, 1.8f) // Hitbox Size
+                    .build(new ResourceLocation(Gempire.MODID, "quartz").toString()));
 
     public static void registerCruxes(){
         ModEntities.CRUXTOGEM.put("ruby", ModCruxes.RUBY_CONDITIONS());

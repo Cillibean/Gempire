@@ -4,6 +4,7 @@ import com.gempire.Gempire;
 import com.gempire.entities.abilities.base.Ability;
 import com.gempire.entities.abilities.AbilityZilch;
 import com.gempire.entities.abilities.interfaces.*;
+import com.gempire.entities.gems.EntityQuartz;
 import com.gempire.init.ModItems;
 import com.gempire.items.ItemGem;
 import com.gempire.util.Abilities;
@@ -307,7 +308,7 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
     @Override
     public void attackEntityWithRangedAttack(LivingEntity target, float distanceFactor) {
         for(Ability power : this.getAbilityPowers()){
-            if(power instanceof IRangedAbility){
+            if(power instanceof IRangedAbility && this.canEntityBeSeen(target)){
                 ((IRangedAbility)power).attack(target, distanceFactor);
             }
         }
@@ -332,7 +333,13 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
         RegistryObject<Item> gemm = ModItems.PEBBLE_GEM;
         //TODO: Make this code more efficient for variations
         ItemGem gem = null;
-        String name = this.hasSkinColorVariant() ? Color.getColorName(this.getSkinColorVariant()) + "_" + this.getGemName().toLowerCase() + "_gem" : this.getGemName().toLowerCase() + "_gem";
+        String name = "";
+        if(this instanceof AbstractQuartz){
+            name = ((AbstractQuartz)this).NameFromColor((byte) this.getSkinColorVariant()) + "_" + this.getWholeGemName() + "_gem";
+        }
+        else{
+            name = this.hasSkinColorVariant() ? Color.getColorName(this.getSkinColorVariant()) + "_" + this.getWholeGemName().toLowerCase() + "_gem" : this.getWholeGemName().toLowerCase() + "_gem";
+        }
         try {
             gemm = (RegistryObject<Item>) ModItems.class.getField(name.toUpperCase()).get(null);
             gem = (ItemGem) gemm.get();
@@ -411,7 +418,7 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
 
     public int generateSkinColor(){
         ArrayList<Integer> skins = new ArrayList<>();
-        ResourceLocation paletteTexture = new ResourceLocation(Gempire.MODID + ":textures/entity/" + this.getGemName().toLowerCase() + "/skin_palette.png");
+        ResourceLocation paletteTexture = new ResourceLocation(Gempire.MODID + ":textures/entity/" + this.getWholeGemName().toLowerCase() + "/skin_palette.png");
         BufferedImage palette = null;
         try{
             palette = ImageIO.read(Minecraft.getInstance().getResourceManager().getResource(paletteTexture).getInputStream());
@@ -469,7 +476,7 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
 
     public int generateHairColor(){
         ArrayList<Integer> skins = new ArrayList<>();
-        ResourceLocation paletteTexture = new ResourceLocation(Gempire.MODID + ":textures/entity/" + this.getGemName().toLowerCase() + "/hair_palette.png");
+        ResourceLocation paletteTexture = new ResourceLocation(Gempire.MODID + ":textures/entity/" + this.getWholeGemName().toLowerCase() + "/hair_palette.png");
         BufferedImage palette = null;
         try{
             palette = ImageIO.read(Minecraft.getInstance().getResourceManager().getResource(paletteTexture).getInputStream());
@@ -508,7 +515,7 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
     }
 
     public int generateGemColor(){
-        ResourceLocation paletteTexture = new ResourceLocation(Gempire.MODID + ":textures/entity/" + this.getGemName().toLowerCase() + "/gem_palette.png");
+        ResourceLocation paletteTexture = new ResourceLocation(Gempire.MODID + ":textures/entity/" + this.getWholeGemName().toLowerCase() + "/gem_palette.png");
         BufferedImage palette = null;
         int color = 0;
         try{
@@ -610,8 +617,16 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
 
     public abstract boolean canChangeInsigniaColorByDefault();
 
-
     public String getGemName(){
+        if(this instanceof EntityVaryingGem){
+            if(((EntityVaryingGem)this).UsesUniqueNames()){
+                return ((EntityVaryingGem)this).NameFromColor((byte) this.getSkinColorVariant());
+            }
+        }
+        return this.getType().getRegistryName().toString().replaceAll("(?i)item", "").replaceAll("gempire", "").replaceAll("(?i)gem", "").replaceAll("_", "").replaceAll(":", "").replaceAll(" ", "");
+    }
+
+    public String getWholeGemName(){
         return this.getType().getRegistryName().toString().replaceAll("(?i)item", "").replaceAll("gempire", "").replaceAll("(?i)gem", "").replaceAll("_", "").replaceAll(":", "").replaceAll(" ", "");
     }
 
