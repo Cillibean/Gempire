@@ -390,37 +390,37 @@ public class ModItems {
     public static final RegistryObject<Item> LACE_AMETHYST_QUARTZ_GEM = ITEMS.register("quartz_gem_17", () ->
             new ItemGem(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
 
-    public static final RegistryObject<Item> RED_JASPER_GEM = ITEMS.register("jasper_gem_0", () ->
+    public static final RegistryObject<Item> WHITE_JASPER_GEM = ITEMS.register("jasper_gem_0", () ->
             new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
     public static final RegistryObject<Item> ORANGE_JASPER_GEM = ITEMS.register("jasper_gem_1", () ->
             new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> YELLOW_JASPER_GEM = ITEMS.register("jasper_gem_2", () ->
+    public static final RegistryObject<Item> MAGENTA_JASPER_GEM = ITEMS.register("jasper_gem_2", () ->
             new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> LIME_JASPER_GEM = ITEMS.register("jasper_gem_3", () ->
+    public static final RegistryObject<Item> LIGHT_BLUE_JASPER_GEM = ITEMS.register("jasper_gem_3", () ->
             new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> GREEN_JASPER_GEM = ITEMS.register("jasper_gem_4", () ->
+    public static final RegistryObject<Item> YELLOW_JASPER_GEM = ITEMS.register("jasper_gem_4", () ->
             new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> CYAN_JASPER_GEM = ITEMS.register("jasper_gem_5", () ->
+    public static final RegistryObject<Item> LIME_JASPER_GEM = ITEMS.register("jasper_gem_5", () ->
             new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> LIGHT_BLUE_JASPER_GEM = ITEMS.register("jasper_gem_6", () ->
+    public static final RegistryObject<Item> PINK_JASPER_GEM = ITEMS.register("jasper_gem_6", () ->
             new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> BLUE_JASPER_GEM = ITEMS.register("jasper_gem_7", () ->
+    public static final RegistryObject<Item> GRAY_JASPER_GEM = ITEMS.register("jasper_gem_7", () ->
             new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> PURPLE_JASPER_GEM = ITEMS.register("jasper_gem_8", () ->
+    public static final RegistryObject<Item> LIGHT_GRAY_JASPER_GEM = ITEMS.register("jasper_gem_8", () ->
             new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> MAGENTA_JASPER_GEM = ITEMS.register("jasper_gem_9", () ->
+    public static final RegistryObject<Item> CYAN_JASPER_GEM = ITEMS.register("jasper_gem_9", () ->
             new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> PINK_JASPER_GEM = ITEMS.register("jasper_gem_10", () ->
+    public static final RegistryObject<Item> PURPLE_JASPER_GEM = ITEMS.register("jasper_gem_10", () ->
             new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> BROWN_JASPER_GEM = ITEMS.register("jasper_gem_11", () ->
+    public static final RegistryObject<Item> BLUE_JASPER_GEM = ITEMS.register("jasper_gem_11", () ->
             new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> BLACK_JASPER_GEM = ITEMS.register("jasper_gem_12", () ->
+    public static final RegistryObject<Item> BROWN_JASPER_GEM = ITEMS.register("jasper_gem_12", () ->
             new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> GRAY_JASPER_GEM = ITEMS.register("jasper_gem_13", () ->
+    public static final RegistryObject<Item> GREEN_JASPER_GEM = ITEMS.register("jasper_gem_13", () ->
             new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> LIGHT_GRAY_JASPER_GEM = ITEMS.register("jasper_gem_14", () ->
+    public static final RegistryObject<Item> RED_GRAY_JASPER_GEM = ITEMS.register("jasper_gem_14", () ->
             new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> WHITE_JASPER_GEM = ITEMS.register("jasper_gem_15", () ->
+    public static final RegistryObject<Item> BLACK_JASPER_GEM = ITEMS.register("jasper_gem_15", () ->
             new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
     public static final RegistryObject<Item> SPECIAL_JASPER_GEM = ITEMS.register("jasper_gem_16", () ->
             new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
