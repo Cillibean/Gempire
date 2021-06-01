@@ -367,9 +367,9 @@ public class ModItems {
             new ItemGem(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
     public static final RegistryObject<Item> ROSE_QUARTZ_QUARTZ_GEM = ITEMS.register("quartz_gem_6", () ->
             new ItemGem(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> SMOKY_QUARTZ_QUARTZ_GEM = ITEMS.register("quartz_gem_7", () ->
+    public static final RegistryObject<Item> FLINT_QUARTZ_GEM = ITEMS.register("quartz_gem_7", () ->
             new ItemGem(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> FLINT_QUARTZ_GEM = ITEMS.register("quartz_gem_8", () ->
+    public static final RegistryObject<Item> SMOKY_QUARTZ_QUARTZ_GEM = ITEMS.register("quartz_gem_8", () ->
             new ItemGem(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
     public static final RegistryObject<Item> CHALCEDONY_QUARTZ_GEM = ITEMS.register("quartz_gem_9", () ->
             new ItemGem(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
