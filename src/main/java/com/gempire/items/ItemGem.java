@@ -2,6 +2,7 @@ package com.gempire.items;
 
 import com.gempire.entities.bases.EntityGem;
 import com.gempire.entities.gems.starter.EntityPebble;
+import com.gempire.init.AddonHandler;
 import com.gempire.init.ModEntities;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
@@ -23,9 +24,15 @@ import org.apache.commons.lang3.ArrayUtils;
 import javax.annotation.Nonnull;
 
 public class ItemGem extends Item {
+    public String ID = "";
 
     public ItemGem(Properties properties) {
         super(properties);
+    }
+
+    public ItemGem(Properties properties, String ID) {
+        super(properties);
+        this.ID = ID;
     }
 
     @Nonnull
@@ -72,7 +79,14 @@ public class ItemGem extends Item {
             RegistryObject<EntityType<EntityPebble>> gemm = ModEntities.PEBBLE;
             String skinColorVariant = "";
             EntityGem gem = gemm.get().create(world);
-            String namee = this.getRegistryName().toString().replaceAll("gempire", "").replaceAll("gem", "").replaceAll(":", "").replaceAll(" ", "");
+            String namee = "pebble";
+
+            if (this.ID == "") {
+                namee = this.getRegistryName().toString().replaceAll("gempire", "").replaceAll("gem", "").replaceAll(":", "").replaceAll(" ", "");
+            }
+            else{
+                namee = this.getRegistryName().toString().replaceAll(this.ID, "").replaceAll("gem", "").replaceAll(":", "").replaceAll(" ", "");
+            }
 
             //This whole section here checks for variations in color so it can spawn the correct type of gem
 
@@ -95,7 +109,13 @@ public class ItemGem extends Item {
             //End of check and set
 
             try {
-                gemm = (RegistryObject<EntityType<EntityPebble>>) ModEntities.class.getField(namee.toUpperCase()).get(null);
+                gemm = ModEntities.PEBBLE;
+                if(this.ID == ""){
+                    gemm = (RegistryObject<EntityType<EntityPebble>>) ModEntities.class.getField(namee.toUpperCase()).get(null);
+                }
+                else{
+                    gemm = (RegistryObject<EntityType<EntityPebble>>) AddonHandler.ADDON_ENTITY_REGISTRIES.get(this.ID).getField(namee.toUpperCase()).get(null);
+                }
                 gem = gemm.get().create(world);
                 gem.setUniqueId(MathHelper.getRandomUUID(world.rand));
             } catch(Exception e){

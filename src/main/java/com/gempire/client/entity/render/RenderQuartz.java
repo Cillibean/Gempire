@@ -30,6 +30,7 @@ public class RenderQuartz extends MobRenderer<EntityQuartz, ModelQuartz<EntityQu
 
     @Override
     protected void preRenderCallback(EntityQuartz entitylivingbaseIn, MatrixStack matrixStackIn, float partialTickTime) {
+        matrixStackIn.scale(1.1f, 1.2f, 1.1f);
         super.preRenderCallback(entitylivingbaseIn, matrixStackIn, partialTickTime);
     }
 }

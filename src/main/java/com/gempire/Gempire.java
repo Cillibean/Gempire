@@ -96,6 +96,7 @@ public class Gempire
         DeferredWorkQueue.runLater(() -> {
             GlobalEntityTypeAttributes.put(ModEntities.QUARTZ.get(), EntityQuartz.setCustomAttributes().create());
         });
+        ModEntities.setVanillaGems();
         ModEntities.registerCruxes();
         ModFluids.registerFluidBuckets();
         ModAbilities.registerAbilities();

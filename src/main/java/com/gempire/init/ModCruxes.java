@@ -43,24 +43,17 @@ public class ModCruxes {
         return new GemConditions(gemCruxes, essences, primer, 1, gemTemperatureMin, gemTemperatureMax);
     }
 
-    public static final GemConditions PEBBLE_CONDITIONS(){
+    public static GemConditions QUARTZ_CONDITIONS(){
         ArrayList<Crux> gemCruxes = new ArrayList<>();
-        String essences = "pink";
-        gemCruxes.add(new Crux(Blocks.STONE.getDefaultState(), 2, CruxType.INORGANIC));
-        return new GemConditions(gemCruxes, essences, 1);
-    }
-
-    public static final GemConditions MICA_CONDITIONS(){
-        ArrayList<Crux> gemCruxes = new ArrayList<>();
-        String essences = "yellow";
-        gemCruxes.add(new Crux(Blocks.STONE.getDefaultState(), 2, CruxType.INORGANIC));
-        return new GemConditions(gemCruxes, essences, 1);
-    }
-
-    public static final GemConditions SHALE_CONDITIONS(){
-        ArrayList<Crux> gemCruxes = new ArrayList<>();
-        String essences = "blue";
-        gemCruxes.add(new Crux(Blocks.STONE.getDefaultState(), 2, CruxType.INORGANIC));
-        return new GemConditions(gemCruxes, essences, 1);
+        float gemTemperatureMin = 0f;
+        float gemTemperatureMax = 2f;
+        Item primer = Items.NETHER_STAR;
+        String essences = "pink-white";
+        gemCruxes.add(new Crux(Blocks.STONE.getDefaultState(), 2, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
+        gemCruxes.add(new Crux(Blocks.MAGMA_BLOCK.getDefaultState(), 3, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
+        gemCruxes.add(new Crux(Blocks.IRON_ORE.getDefaultState(), 3, CruxType.MINERAL, gemTemperatureMin, gemTemperatureMax));
+        gemCruxes.add(new Crux(Blocks.NETHER_QUARTZ_ORE.getDefaultState(), 5, CruxType.MINERAL, gemTemperatureMin, gemTemperatureMax));
+        gemCruxes.add(new Crux(Blocks.QUARTZ_BLOCK.getDefaultState(), 8, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
+        return new GemConditions(gemCruxes, essences, primer, 1, gemTemperatureMin, gemTemperatureMax);
     }
 }

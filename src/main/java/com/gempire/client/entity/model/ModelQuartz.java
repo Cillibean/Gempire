@@ -76,7 +76,7 @@ public class ModelQuartz<T extends AbstractQuartz> extends ModelGem<T> {
         this.arm2.setTextureOffset(70, 18).addBox(0.0F, 0.0F, 0.0F, 4.0F, 14.0F, 4.0F, 0.2F, 0.0F, 0.2F);
         this.head = new ModelRenderer(this, 0, 0);
         this.head.setRotationPoint(4, -8.1F, 4);
-        this.head.setTextureOffset(32, 0).addBox(-3, .2f, -5, 8.0F, 8.0F, 8.0F, 0.0F, 0.0F, 0.0F);
+        this.head.setTextureOffset(32, 0).addBox(-3, 0.2f, -5, 8.0F, 8.0F, 8.0F, 0.0F, 0.0F, 0.0F);
         this.head.addChild(this.hair);
         this.arm1.addChild(this.shoulderpuff1);
         //this.hair.addChild(this.agatehair);
@@ -100,7 +100,7 @@ public class ModelQuartz<T extends AbstractQuartz> extends ModelGem<T> {
 
     @Override
     public void setRotationAngles(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        this.setRotateAngle(this.head, headPitch * 0.9f * ((float)Math.PI / 180F), netHeadYaw * ((float)Math.PI / 180F), 0);
+        this.setRotateAngle(this.head, headPitch * 0.5f * ((float)Math.PI / 180F), netHeadYaw * ((float)Math.PI / 180F), 0);
         this.setRotateAngle(this.arm1, MathHelper.cos(limbSwing * 0.5F + (float)Math.PI) * limbSwingAmount * 0.8f, 0, 0);
         this.setRotateAngle(this.arm2, MathHelper.cos(limbSwing * 0.5F)  * limbSwingAmount * 0.8f, 0, 0);
         this.setRotateAngle(this.leg1, MathHelper.cos(limbSwing * 0.5F) * limbSwingAmount * 0.8f, 0, 0);

@@ -341,7 +341,7 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
             name = this.hasSkinColorVariant() ? Color.getColorName(this.getSkinColorVariant()) + "_" + this.getWholeGemName().toLowerCase() + "_gem" : this.getWholeGemName().toLowerCase() + "_gem";
         }
         try {
-            gemm = (RegistryObject<Item>) ModItems.class.getField(name.toUpperCase()).get(null);
+            gemm = (RegistryObject<Item>) this.getItemRegister().getField(name.toUpperCase()).get(null);
             gem = (ItemGem) gemm.get();
         } catch(Exception e){
             e.printStackTrace();
@@ -418,7 +418,7 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
 
     public int generateSkinColor(){
         ArrayList<Integer> skins = new ArrayList<>();
-        ResourceLocation paletteTexture = new ResourceLocation(Gempire.MODID + ":textures/entity/" + this.getWholeGemName().toLowerCase() + "/skin_palette.png");
+        ResourceLocation paletteTexture = new ResourceLocation(this.getModID() + ":textures/entity/" + this.getWholeGemName().toLowerCase() + "/skin_palette.png");
         BufferedImage palette = null;
         try{
             palette = ImageIO.read(Minecraft.getInstance().getResourceManager().getResource(paletteTexture).getInputStream());
@@ -476,7 +476,7 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
 
     public int generateHairColor(){
         ArrayList<Integer> skins = new ArrayList<>();
-        ResourceLocation paletteTexture = new ResourceLocation(Gempire.MODID + ":textures/entity/" + this.getWholeGemName().toLowerCase() + "/hair_palette.png");
+        ResourceLocation paletteTexture = new ResourceLocation(this.getModID() + ":textures/entity/" + this.getWholeGemName().toLowerCase() + "/hair_palette.png");
         BufferedImage palette = null;
         try{
             palette = ImageIO.read(Minecraft.getInstance().getResourceManager().getResource(paletteTexture).getInputStream());
@@ -515,7 +515,7 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
     }
 
     public int generateGemColor(){
-        ResourceLocation paletteTexture = new ResourceLocation(Gempire.MODID + ":textures/entity/" + this.getWholeGemName().toLowerCase() + "/gem_palette.png");
+        ResourceLocation paletteTexture = new ResourceLocation(this.getModID() + ":textures/entity/" + this.getWholeGemName().toLowerCase() + "/gem_palette.png");
         BufferedImage palette = null;
         int color = 0;
         try{
@@ -623,11 +623,11 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
                 return ((EntityVaryingGem)this).NameFromColor((byte) this.getSkinColorVariant());
             }
         }
-        return this.getType().getRegistryName().toString().replaceAll("(?i)item", "").replaceAll("gempire", "").replaceAll("(?i)gem", "").replaceAll("_", "").replaceAll(":", "").replaceAll(" ", "");
+        return this.getType().getRegistryName().toString().replaceAll("(?i)item", "").replaceAll(this.getModID(), "").replaceAll("(?i)gem", "").replaceAll("_", "").replaceAll(":", "").replaceAll(" ", "");
     }
 
     public String getWholeGemName(){
-        return this.getType().getRegistryName().toString().replaceAll("(?i)item", "").replaceAll("gempire", "").replaceAll("(?i)gem", "").replaceAll("_", "").replaceAll(":", "").replaceAll(" ", "");
+        return this.getType().getRegistryName().toString().replaceAll("(?i)item", "").replaceAll(this.getModID(), "").replaceAll("(?i)gem", "").replaceAll("_", "").replaceAll(":", "").replaceAll(" ", "");
     }
 
     //ABILITY STUFF
@@ -755,4 +755,22 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
 
     public abstract Abilities[] possibleAbilities();
     public abstract Abilities[] definiteAbilities();
+
+    //-------------------------------------------------------------------------------------------------------------------------------------------------------------//
+
+
+
+    //TODO: ADDON STUFF
+
+
+
+    //-------------------------------------------------------------------------------------------------------------------------------------------------------------//
+
+    public String getModID(){
+        return Gempire.MODID;
+    }
+
+    public Class getItemRegister(){
+        return ModItems.class;
+    }
 }

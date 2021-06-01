@@ -62,19 +62,24 @@ public class ModEntities {
 
     public static final RegistryObject<EntityType<EntityQuartz>> QUARTZ = ENTITIES.register("quartz",
             () -> EntityType.Builder.create(EntityQuartz::new, EntityClassification.CREATURE)
-                    .size(.75f, 1.8f) // Hitbox Size
+                    .size(.75f, 2f) // Hitbox Size
                     .build(new ResourceLocation(Gempire.MODID, "quartz").toString()));
 
     public static void registerCruxes(){
         ModEntities.CRUXTOGEM.put("ruby", ModCruxes.RUBY_CONDITIONS());
         ModEntities.CRUXTOGEM.put("sapphire", ModCruxes.SAPPHIRE_CONDITIONS());
-        ModEntities.CRUXTOGEM.put("pebble", ModCruxes.PEBBLE_CONDITIONS());
-        ModEntities.CRUXTOGEM.put("mica", ModCruxes.MICA_CONDITIONS());
-        ModEntities.CRUXTOGEM.put("shale", ModCruxes.SHALE_CONDITIONS());
+        ModEntities.CRUXTOGEM.put("quartz", ModCruxes.QUARTZ_CONDITIONS());
         GemFormation.POSSIBLE_GEMS.add("ruby");
         GemFormation.POSSIBLE_GEMS.add("sapphire");
-        GemFormation.POSSIBLE_GEMS.add("pebble");
-        GemFormation.POSSIBLE_GEMS.add("mica");
-        GemFormation.POSSIBLE_GEMS.add("shale");
+        GemFormation.POSSIBLE_GEMS.add("quartz");
+    }
+
+    public static void setVanillaGems(){
+        AddonHandler.VANILLA_GEMS.add("ruby");
+        AddonHandler.VANILLA_GEMS.add("sapphire");
+        AddonHandler.VANILLA_GEMS.add("quartz");
+        AddonHandler.VANILLA_GEMS.add("pebble");
+        AddonHandler.VANILLA_GEMS.add("mica");
+        AddonHandler.VANILLA_GEMS.add("shale");
     }
 }

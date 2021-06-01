@@ -2,7 +2,9 @@ package com.gempire.systems.injection;
 
 import com.gempire.entities.bases.EntityGem;
 import com.gempire.entities.bases.EntityVaryingGem;
+import com.gempire.entities.gems.EntityQuartz;
 import com.gempire.entities.gems.starter.EntityPebble;
+import com.gempire.init.AddonHandler;
 import com.gempire.init.ModBlocks;
 import com.gempire.init.ModEntities;
 import com.gempire.items.ItemChroma;
@@ -24,6 +26,7 @@ import net.minecraftforge.fml.RegistryObject;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 import java.util.UUID;
 
 public class GemFormation {
@@ -58,12 +61,25 @@ public class GemFormation {
             return;
         }
         try {
-            gemm = (RegistryObject<EntityType<EntityPebble>>) ModEntities.class.getField(gemtoform.toUpperCase()).get(null);
+            boolean isVanillaGem = false;
+            for(String gemama : AddonHandler.VANILLA_GEMS){
+                if(gemtoform == gemama) isVanillaGem = true;
+            }
+            if(isVanillaGem) {
+                gemm = (RegistryObject<EntityType<EntityPebble>>) ModEntities.class.getField(gemtoform.toUpperCase()).get(null);
+            }
+            else{
+                gemm = (RegistryObject<EntityType<EntityPebble>>) AddonHandler.ENTITY_ADDON_ENTITY_REGISTRIES.get(gemtoform).getField(gemtoform.toUpperCase()).get(null);
+            }
             gem = gemm.get().create(this.world);
             if(gem instanceof EntityVaryingGem){
                 EntityVaryingGem varyingGem = (EntityVaryingGem)gem;
                 varyingGem.setSkinVariantOnInitialSpawn = false;
                 int variant = this.getColorFromChroma();
+                Random rand = new Random();
+                if(gem instanceof EntityQuartz && variant == 16){
+                    variant += rand.nextBoolean() ? 1 : 0;
+                }
                 if(varyingGem.isColorValid(variant)){
                     varyingGem.initalSkinVariant = variant;
                 }

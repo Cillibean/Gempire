@@ -28,7 +28,7 @@ public class HairLayer<E extends EntityGem, M extends ModelGem<E>> extends Gempi
         float r = ((hair & 16711680) >> 16) / 255f;
         float g = ((hair & 65280) >> 8) / 255f;
         float b = ((hair & 255) >> 0) / 255f;
-        IVertexBuilder builder = bufferIn.getBuffer(RenderType.getEntityCutoutNoCull(new ResourceLocation(Gempire.MODID+":textures/entity/" + this.getName(gem).toLowerCase() + "/hair_" + gem.getHairVariant() + ".png")));
+        IVertexBuilder builder = bufferIn.getBuffer(RenderType.getEntityCutoutNoCull(new ResourceLocation(gem.getModID()+":textures/entity/" + this.getName(gem).toLowerCase() + "/hair_" + gem.getHairVariant() + ".png")));
         this.getEntityModel().setRotationAngles(gem, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
         this.getEntityModel().render(matrixStackIn, builder, packedLightIn, OverlayTexture.NO_OVERLAY, r, g, b, 1.0F);
         /*if(gem instanceof EntityStarterGem){
