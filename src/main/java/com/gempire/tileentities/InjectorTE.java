@@ -4,6 +4,7 @@ import com.gempire.blocks.GemSeedBlock;
 import com.gempire.blocks.InjectorBlock;
 import com.gempire.container.InjectorContainer;
 import com.gempire.container.TankContainer;
+import com.gempire.events.InjectEvent;
 import com.gempire.init.*;
 import com.gempire.items.ItemChroma;
 import com.gempire.networking.S2SSendGemSeedInfo;
@@ -35,6 +36,7 @@ import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidTank;
@@ -258,6 +260,8 @@ public class InjectorTE extends LockableLootTileEntity implements IFluidTank, IN
             this.getStackInSlot(InjectorTE.PRIME_INPUT_SLOT_INDEX).shrink(1);
             this.world.notifyBlockUpdate(this.pos, this.getBlockState(), this.getBlockState(), 2);
             this.markDirty();
+            InjectEvent event = new InjectEvent(gemSeedTE, seedPos);
+            MinecraftForge.EVENT_BUS.post(event);
         }
     }
 

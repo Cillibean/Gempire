@@ -5,6 +5,7 @@ import com.gempire.entities.abilities.base.Ability;
 import com.gempire.entities.abilities.AbilityZilch;
 import com.gempire.entities.abilities.interfaces.*;
 import com.gempire.entities.gems.EntityQuartz;
+import com.gempire.events.GemPoofEvent;
 import com.gempire.init.ModItems;
 import com.gempire.items.ItemGem;
 import com.gempire.util.Abilities;
@@ -36,6 +37,7 @@ import net.minecraft.util.text.*;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IServerWorld;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.RegistryObject;
 import org.apache.commons.lang3.ArrayUtils;
 
@@ -318,6 +320,8 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
     public void onDeath(DamageSource source){
         //When the Gem dies.
         if(!this.world.isRemote){
+            GemPoofEvent event = new GemPoofEvent(this, this.getPosition(), source);
+            MinecraftForge.EVENT_BUS.post(event);
             BasicParticleType particle = ParticleTypes.EXPLOSION;
             this.world.addOptionalParticle(particle, this.getPosX(), this.getPosY(), this.getPosZ(), 0, 0, 0);
             ItemStack stack = new ItemStack(this.getGemItem());

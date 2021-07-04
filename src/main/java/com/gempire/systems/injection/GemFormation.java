@@ -4,6 +4,8 @@ import com.gempire.entities.bases.EntityGem;
 import com.gempire.entities.bases.EntityVaryingGem;
 import com.gempire.entities.gems.EntityQuartz;
 import com.gempire.entities.gems.starter.EntityPebble;
+import com.gempire.events.DrainEvent;
+import com.gempire.events.GemFormEvent;
 import com.gempire.init.AddonHandler;
 import com.gempire.init.ModBlocks;
 import com.gempire.init.ModEntities;
@@ -21,6 +23,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IServerWorld;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.RegistryObject;
 
 import javax.annotation.Nullable;
@@ -101,8 +104,13 @@ public class GemFormation {
         }
         gem.setPosition(this.pos.getX() + .5f, this.pos.getY(), this.pos.getZ() + .5f);
         gem.setHealth(gem.getMaxHealth());
+        GemFormEvent event1 = new GemFormEvent(gem, gem.getPosition());
+        MinecraftForge.EVENT_BUS.post(event1);
         this.world.addEntity(gem);
-        this.Drain(GemFormation.getBlockPosInVolume(this.world, this.pos, this.volumeToCheck));
+        ArrayList<BlockPos> blocks = GemFormation.getBlockPosInVolume(this.world, this.pos, this.volumeToCheck);
+        DrainEvent event2 = new DrainEvent(blocks);
+        MinecraftForge.EVENT_BUS.post(event2);
+        this.Drain(blocks);
         this.GenerateFacingExitHole();
     }
 

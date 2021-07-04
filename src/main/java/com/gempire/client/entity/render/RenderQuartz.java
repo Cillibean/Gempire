@@ -16,11 +16,12 @@ public class RenderQuartz extends MobRenderer<EntityQuartz, ModelQuartz<EntityQu
     public RenderQuartz(EntityRendererManager renderManagerIn) {
         super(renderManagerIn, new ModelQuartz<>(), .25f);
         this.addLayer(new SkinLayer(this));
+        this.addLayer(new QuartzMarkingLayer(this));
         this.addLayer(new FaceLayer(this));
         this.addLayer(new OutfitLayer(this));
         this.addLayer(new InsigniaLayer(this));
         this.addLayer(new HairLayer(this));
-        //this.addLayer(new GemPlacementLayer(this));
+        this.addLayer(new GemPlacementLayer(this));
     }
 
     @Override
@@ -30,7 +31,7 @@ public class RenderQuartz extends MobRenderer<EntityQuartz, ModelQuartz<EntityQu
 
     @Override
     protected void preRenderCallback(EntityQuartz entitylivingbaseIn, MatrixStack matrixStackIn, float partialTickTime) {
-        matrixStackIn.scale(1.1f, 1.2f, 1.1f);
+        matrixStackIn.scale(1.1f, 1.25f, 1.1f);
         super.preRenderCallback(entitylivingbaseIn, matrixStackIn, partialTickTime);
     }
 }

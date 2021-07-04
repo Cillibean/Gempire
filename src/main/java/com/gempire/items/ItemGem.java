@@ -2,10 +2,13 @@ package com.gempire.items;
 
 import com.gempire.entities.bases.EntityGem;
 import com.gempire.entities.gems.starter.EntityPebble;
+import com.gempire.events.GemFormEvent;
+import com.gempire.events.GemPoofEvent;
 import com.gempire.init.AddonHandler;
 import com.gempire.init.ModEntities;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -18,13 +21,17 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.*;
 import net.minecraft.world.IServerWorld;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.RegistryObject;
 import org.apache.commons.lang3.ArrayUtils;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class ItemGem extends Item {
     public String ID = "";
+    int coundownMax = 600;
+    int countdown = 600;
 
     public ItemGem(Properties properties) {
         super(properties);
@@ -59,7 +66,7 @@ public class ItemGem extends Item {
                     }
 
                     if (worldIn.isBlockModifiable(playerIn, blockpos) && playerIn.canPlayerEdit(blockpos, blockraytraceresult.getFace(), itemstack)) {
-                        spawned = this.formGem(worldIn, playerIn, blockpos, itemstack);
+                        spawned = this.formGem(worldIn, playerIn, blockpos, itemstack, null);
                     }
                 }
                 //Problem with the claiming of gems ??
@@ -74,7 +81,7 @@ public class ItemGem extends Item {
     //TODO: A lot needs fixing here
 
     //(?i) means case sensitive
-    public boolean formGem(World world, PlayerEntity player, BlockPos pos, ItemStack stack) {
+    public boolean formGem(World world, @Nullable PlayerEntity player, BlockPos pos, ItemStack stack, @Nullable ItemEntity item) {
         if (!world.isRemote) {
             RegistryObject<EntityType<EntityPebble>> gemm = ModEntities.PEBBLE;
             String skinColorVariant = "";
@@ -128,26 +135,26 @@ public class ItemGem extends Item {
                     gem.setSkinVariantOnInitialSpawn = false;
                     gem.initalSkinVariant = Integer.valueOf(skinColorVariant);
                 }
-                gem.onInitialSpawn((IServerWorld) world, world.getDifficultyForLocation(player.getPosition()), SpawnReason.TRIGGERED, null, null);
-                gem.setOwned(true, PlayerEntity.getUUID(player.getGameProfile()));
+                if(player != null) {
+                    gem.onInitialSpawn((IServerWorld) world, world.getDifficultyForLocation(player.getPosition()), SpawnReason.TRIGGERED, null, null);
+                    gem.setOwned(true, PlayerEntity.getUUID(player.getGameProfile()));
+                }
+                else{
+                    gem.onInitialSpawn((IServerWorld) world, world.getDifficultyForLocation(item.getPosition()), SpawnReason.TRIGGERED, null, null);
+                }
             }
             gem.setPosition(pos.getX() + 0.5, pos.getY() + 1.0, pos.getZ() + 0.5);
             gem.setHealth(gem.getMaxHealth());
             gem.extinguish();
             gem.clearActivePotions();
             gem.setVelocity(0, 0 ,0);
+            GemFormEvent event = new GemFormEvent(gem, gem.getPosition());
+            MinecraftForge.EVENT_BUS.post(event);
             world.addEntity(gem);
             return true;
         }
         return false;
     }
-
-    /*@Override
-    public boolean onEntityItemUpdate(ItemStack stack, ItemEntity entity) {
-        entity.setNoDespawn();
-        entity.extinguish();
-        return true;
-    }*/
 
     public void setData(EntityGem host, ItemStack stack) {
         stack.setTag(host.writeWithoutTypeId(new CompoundNBT()));
@@ -156,5 +163,24 @@ public class ItemGem extends Item {
 
     public void clearData(ItemStack stack) {
         stack.setTag(new CompoundNBT());
+    }
+
+    @Override
+    public boolean onEntityItemUpdate(ItemStack stack, ItemEntity entity) {
+        entity.setNoDespawn();
+        entity.extinguish();
+        this.Countdown(stack, entity);
+        return super.onEntityItemUpdate(stack, entity);
+    }
+
+    public void Countdown(ItemStack stack, ItemEntity entity){
+        if(this.countdown > 0){
+            this.countdown--;
+        }
+        else{
+            this.formGem(entity.world, null, entity.getPosition(), stack, entity);
+            entity.remove();
+            this.countdown = this.coundownMax;
+        }
     }
 }

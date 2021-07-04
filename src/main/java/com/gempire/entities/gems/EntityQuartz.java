@@ -45,13 +45,33 @@ public class EntityQuartz extends AbstractQuartz {
     }
 
     @Override
+    public boolean hasMarkings() {
+        return this.getSkinColorVariant() == 2 || this.getSkinColorVariant() == 3 || this.getSkinColorVariant() == 17;
+    }
+
+    @Override
+    public boolean hasMarkings2() {
+        return false;
+    }
+
+    @Override
+    public int maxMarkings() {
+        return 2;
+    }
+
+    @Override
+    public int maxMarkings2() {
+        return 0;
+    }
+
+    @Override
     public int generateSkinVariant() {
         return 0;
     }
 
     @Override
     public int generateHairVariant() {
-        return this.rand.nextInt(11);
+        return this.rand.nextInt(12);
     }
 
     @Override
