@@ -425,40 +425,40 @@ public class ModItems {
     public static final RegistryObject<Item> BUTTERFLY_JASPER_GEM = ITEMS.register("jasper_gem_16", () ->
             new ItemGem(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
 
-    public static final RegistryObject<Item> RED_AGATE_GEM = ITEMS.register("agate_gem_0", () ->
-            new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> ORANGE_AGATE_GEM = ITEMS.register("agate_gem_1", () ->
-            new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> YELLOW_AGATE_GEM = ITEMS.register("agate_gem_2", () ->
-            new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> LIME_AGATE_GEM = ITEMS.register("agate_gem_3", () ->
-            new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> GREEN_AGATE_GEM = ITEMS.register("agate_gem_4", () ->
-            new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> CYAN_AGATE_GEM = ITEMS.register("agate_gem_5", () ->
-            new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> LIGHT_BLUE_AGATE_GEM = ITEMS.register("agate_gem_6", () ->
-            new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> BLUE_AGATE_GEM = ITEMS.register("agate_gem_7", () ->
-            new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> PURPLE_AGATE_GEM = ITEMS.register("agate_gem_8", () ->
-            new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> MAGENTA_AGATE_GEM = ITEMS.register("agate_gem_9", () ->
-            new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> PINK_AGATE_GEM = ITEMS.register("agate_gem_10", () ->
-            new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> BROWN_AGATE_GEM = ITEMS.register("agate_gem_11", () ->
-            new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> BLACK_AGATE_GEM = ITEMS.register("agate_gem_12", () ->
-            new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> GRAY_AGATE_GEM = ITEMS.register("agate_gem_13", () ->
-            new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> LIGHT_GRAY_AGATE_GEM = ITEMS.register("agate_gem_14", () ->
-            new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> WHITE_AGATE_GEM = ITEMS.register("agate_gem_15", () ->
-            new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> SPECIAL_AGATE_GEM = ITEMS.register("agate_gem_16", () ->
-            new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
+    public static final RegistryObject<Item> DENDRITIC_AGATE_GEM = ITEMS.register("agate_gem_0", () ->
+            new ItemGem(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
+    public static final RegistryObject<Item> WINGATE_PASS_PLUME_AGATE_GEM = ITEMS.register("agate_gem_1", () ->
+            new ItemGem(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
+    public static final RegistryObject<Item> ROSE_AGATE_GEM = ITEMS.register("agate_gem_2", () ->
+            new ItemGem(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
+    public static final RegistryObject<Item> HOLLY_BLUE_AGATE_GEM = ITEMS.register("agate_gem_3", () ->
+            new ItemGem(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
+    public static final RegistryObject<Item> TAWNY_AGATE_GEM = ITEMS.register("agate_gem_4", () ->
+            new ItemGem(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
+    public static final RegistryObject<Item> DRAGONS_VEIN_AGATE_GEM = ITEMS.register("agate_gem_5", () ->
+            new ItemGem(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
+    public static final RegistryObject<Item> SAKURA_AGATE_GEM = ITEMS.register("agate_gem_6", () ->
+            new ItemGem(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
+    public static final RegistryObject<Item> BOTSWANA_AGATE_GEM = ITEMS.register("agate_gem_7", () ->
+            new ItemGem(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
+    public static final RegistryObject<Item> WATER_AGATE_GEM = ITEMS.register("agate_gem_8", () ->
+            new ItemGem(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
+    public static final RegistryObject<Item> BLUE_LACE_AGATE_GEM = ITEMS.register("agate_gem_9", () ->
+            new ItemGem(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
+    public static final RegistryObject<Item> GRAPE_AGATE_GEM = ITEMS.register("agate_gem_10", () ->
+            new ItemGem(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
+    public static final RegistryObject<Item> ELLENSBURG_BLUE_AGATE_GEM = ITEMS.register("agate_gem_11", () ->
+            new ItemGem(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
+    public static final RegistryObject<Item> TURRITELLA_AGATE_GEM = ITEMS.register("agate_gem_12", () ->
+            new ItemGem(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
+    public static final RegistryObject<Item> TREE_AGATE_GEM = ITEMS.register("agate_gem_13", () ->
+            new ItemGem(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
+    public static final RegistryObject<Item> LAKE_SUPERIOR_GRAY_AGATE_GEM = ITEMS.register("agate_gem_14", () ->
+            new ItemGem(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
+    public static final RegistryObject<Item> ORCA_AGATE_GEM = ITEMS.register("agate_gem_15", () ->
+            new ItemGem(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
+    public static final RegistryObject<Item> IRIS_AGATE_GEM = ITEMS.register("agate_gem_16", () ->
+            new ItemGem(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
 
     public static final RegistryObject<Item> RED_PEARL_GEM = ITEMS.register("pearl_gem_0", () ->
             new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));

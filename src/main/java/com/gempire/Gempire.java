@@ -4,10 +4,7 @@ import com.gempire.client.entity.render.*;
 import com.gempire.client.screen.InjectorScreen;
 import com.gempire.client.screen.TankScreen;
 import com.gempire.entities.TestEntity;
-import com.gempire.entities.gems.EntityJasper;
-import com.gempire.entities.gems.EntityQuartz;
-import com.gempire.entities.gems.EntityRuby;
-import com.gempire.entities.gems.EntitySapphire;
+import com.gempire.entities.gems.*;
 import com.gempire.entities.gems.starter.EntityMica;
 import com.gempire.entities.gems.starter.EntityPebble;
 import com.gempire.entities.gems.starter.EntityShale;
@@ -100,6 +97,9 @@ public class Gempire
         DeferredWorkQueue.runLater(() -> {
             GlobalEntityTypeAttributes.put(ModEntities.JASPER.get(), EntityJasper.setCustomAttributes().create());
         });
+        DeferredWorkQueue.runLater(() -> {
+            GlobalEntityTypeAttributes.put(ModEntities.AGATE.get(), EntityAgate.setCustomAttributes().create());
+        });
         ModEntities.setVanillaGems();
         ModEntities.registerCruxes();
         ModFluids.registerFluidBuckets();
@@ -156,6 +156,7 @@ public class Gempire
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.SAPPHIRE.get(), RenderSapphire::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.QUARTZ.get(), RenderQuartz::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.JASPER.get(), RenderJasper::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.AGATE.get(), RenderAgate::new);
 
         ScreenManager.registerFactory(ModContainers.TANK_CONTAINER.get(), TankScreen::new);
         ScreenManager.registerFactory(ModContainers.INJECTOR_CONTAINER.get(), InjectorScreen::new);

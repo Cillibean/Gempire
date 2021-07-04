@@ -3,10 +3,7 @@ package com.gempire.init;
 import com.gempire.Gempire;
 import com.gempire.entities.TestEntity;
 import com.gempire.entities.bases.EntityGem;
-import com.gempire.entities.gems.EntityJasper;
-import com.gempire.entities.gems.EntityQuartz;
-import com.gempire.entities.gems.EntityRuby;
-import com.gempire.entities.gems.EntitySapphire;
+import com.gempire.entities.gems.*;
 import com.gempire.entities.gems.starter.EntityMica;
 import com.gempire.entities.gems.starter.EntityPebble;
 import com.gempire.entities.gems.starter.EntityShale;
@@ -71,15 +68,22 @@ public class ModEntities {
                     .size(.7f, 1.9f) // Hitbox Size
                     .build(new ResourceLocation(Gempire.MODID, "jasper").toString()));
 
+    public static final RegistryObject<EntityType<EntityAgate>> AGATE = ENTITIES.register("agate",
+            () -> EntityType.Builder.create(EntityAgate::new, EntityClassification.CREATURE)
+                    .size(.7f, 1.9f) // Hitbox Size
+                    .build(new ResourceLocation(Gempire.MODID, "agate").toString()));
+
     public static void registerCruxes(){
         ModEntities.CRUXTOGEM.put("ruby", ModCruxes.RUBY_CONDITIONS());
         ModEntities.CRUXTOGEM.put("sapphire", ModCruxes.SAPPHIRE_CONDITIONS());
         ModEntities.CRUXTOGEM.put("quartz", ModCruxes.QUARTZ_CONDITIONS());
         ModEntities.CRUXTOGEM.put("jasper", ModCruxes.QUARTZ_CONDITIONS());
+        ModEntities.CRUXTOGEM.put("agate", ModCruxes.QUARTZ_CONDITIONS());
         GemFormation.POSSIBLE_GEMS.add("ruby");
         GemFormation.POSSIBLE_GEMS.add("sapphire");
         GemFormation.POSSIBLE_GEMS.add("quartz");
         GemFormation.POSSIBLE_GEMS.add("jasper");
+        GemFormation.POSSIBLE_GEMS.add("agate");
     }
 
     public static void setVanillaGems(){
@@ -87,6 +91,7 @@ public class ModEntities {
         AddonHandler.VANILLA_GEMS.add("sapphire");
         AddonHandler.VANILLA_GEMS.add("quartz");
         AddonHandler.VANILLA_GEMS.add("jasper");
+        AddonHandler.VANILLA_GEMS.add("agate");
         AddonHandler.VANILLA_GEMS.add("pebble");
         AddonHandler.VANILLA_GEMS.add("mica");
         AddonHandler.VANILLA_GEMS.add("shale");
