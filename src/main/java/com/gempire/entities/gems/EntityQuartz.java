@@ -46,7 +46,7 @@ public class EntityQuartz extends AbstractQuartz {
 
     @Override
     public boolean hasMarkings() {
-        return this.getSkinColorVariant() == 2 || this.getSkinColorVariant() == 3 || this.getSkinColorVariant() == 17;
+        return this.getSkinColorVariant() == 2 || this.getSkinColorVariant() == 3 || this.getSkinColorVariant() == 12 || this.getSkinColorVariant() == 13 || this.getSkinColorVariant() == 17;
     }
 
     @Override
