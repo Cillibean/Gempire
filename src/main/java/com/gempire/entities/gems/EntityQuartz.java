@@ -190,4 +190,9 @@ public class EntityQuartz extends AbstractQuartz {
     public Abilities[] definiteAbilities() {
         return new Abilities[0];
     }
+
+    @Override
+    public int baseFocus() {
+        return 7;
+    }
 }

@@ -30,6 +30,7 @@ public class RenderSapphire extends MobRenderer<EntitySapphire, ModelSapphire<En
 
     @Override
     protected void preRenderCallback(EntitySapphire entitylivingbaseIn, MatrixStack matrixStackIn, float partialTickTime) {
+        matrixStackIn.scale(.8f, .85f, .8f);
         super.preRenderCallback(entitylivingbaseIn, matrixStackIn, partialTickTime);
     }
 }

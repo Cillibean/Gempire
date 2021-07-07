@@ -173,4 +173,9 @@ public class EntitySapphire extends EntityVaryingGem {
                 14, 16, 17
         };
     }
+
+    @Override
+    public boolean isFocused() {
+        return true;
+    }
 }

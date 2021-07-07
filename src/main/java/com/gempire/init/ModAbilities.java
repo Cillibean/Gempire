@@ -24,5 +24,7 @@ public class ModAbilities {
         Ability.ABILITY_FROM_ABILITIES.put(Abilities.BEEFCAKE, AbilityBeefcake.class);
         Ability.ABILITY_FROM_ABILITIES.put(Abilities.POWERHOUSE, AbilityPowerhouse.class);
         Ability.ABILITY_FROM_ABILITIES.put(Abilities.UNHINGED, AbilityUnhinged.class);
+
+        Ability.ABILITY_FROM_ABILITIES.put(Abilities.STERN, AbilityStern.class);
     }
 }

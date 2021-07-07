@@ -11,10 +11,10 @@ import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.util.ResourceLocation;
 
-public class RenderAgate extends MobRenderer<EntityAgate, ModelAgate<EntityAgate>> {
+public class RenderAgate extends MobRenderer<EntityAgate, ModelQuartz<EntityAgate>> {
 
     public RenderAgate(EntityRendererManager renderManagerIn) {
-        super(renderManagerIn, new ModelAgate<>(), .25f);
+        super(renderManagerIn, new ModelQuartz<>(), .25f);
         this.addLayer(new SkinLayer(this));
         this.addLayer(new QuartzMarkingLayer(this));
         this.addLayer(new FaceLayer(this));
@@ -32,7 +32,7 @@ public class RenderAgate extends MobRenderer<EntityAgate, ModelAgate<EntityAgate
 
     @Override
     protected void preRenderCallback(EntityAgate entitylivingbaseIn, MatrixStack matrixStackIn, float partialTickTime) {
-        matrixStackIn.scale(1.1f, 1.25f, 1.1f);
+        matrixStackIn.scale(1.1f, 1.15f, 1.1f);
         super.preRenderCallback(entitylivingbaseIn, matrixStackIn, partialTickTime);
     }
 }

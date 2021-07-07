@@ -30,7 +30,7 @@ public class RenderJasper extends MobRenderer<EntityJasper, ModelQuartz<EntityJa
 
     @Override
     protected void preRenderCallback(EntityJasper entitylivingbaseIn, MatrixStack matrixStackIn, float partialTickTime) {
-        matrixStackIn.scale(1.1f, 1.25f, 1.1f);
+        matrixStackIn.scale(1.05f, 1.15f, 1.05f);
         super.preRenderCallback(entitylivingbaseIn, matrixStackIn, partialTickTime);
     }
 }

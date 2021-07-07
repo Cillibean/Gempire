@@ -143,4 +143,9 @@ public class EntityRuby extends EntityGem {
     public int generateInsigniaVariant(){
         return 0;
     }
+
+    @Override
+    public int baseFocus() {
+        return 7;
+    }
 }

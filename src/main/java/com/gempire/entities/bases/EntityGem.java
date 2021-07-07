@@ -78,6 +78,9 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
     public boolean setSkinVariantOnInitialSpawn = true;
 
     public byte effectAbilityCounter = 99;
+    public byte focusCounter = 99;
+
+    public int focusLevel = 2;
 
     public EntityGem(EntityType<? extends CreatureEntity> type, World worldIn) {
         super(type, worldIn);
@@ -146,6 +149,7 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
         compound.putInt("insigniaColor", this.getInsigniaColor());
         compound.putInt("insigniaVariant", this.getInsigniaVariant());
         compound.putInt("abilitySlots", this.getAbilitySlots());
+        compound.putInt("focusLevel", this.focusLevel);
         compound.putByte("emotionMeter", this.emotionMeter);
     }
 
@@ -170,6 +174,7 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
         this.setInsigniaVariant(compound.getInt("insigniaVariant"));
         this.setAbilitySlots(compound.getInt("abilitySlots"));
         this.emotionMeter = compound.getByte("emotionMeter");
+        this.focusLevel = compound.getInt("focusLevel");
         this.setMovementType(compound.getByte("movementType"));
         this.setAbilityPowers(this.findAbilities(compound.getString("abilities")));
         this.addAbilityGoals();
@@ -186,18 +191,39 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
                     if (entity instanceof PlayerEntity) {
                         if (this.isOwner((PlayerEntity) entity)) {
                             PlayerEntity owner = (PlayerEntity) entity;
-                            for (Ability ability : this.getAbilityPowers()) {
+                            if(this.focusCheck()) for (Ability ability : this.getAbilityPowers()) {
                                 if (ability instanceof IEffectAbility && !(ability instanceof IViolentAbility)) {
                                     owner.addPotionEffect(((IEffectAbility) ability).effect());
                                 }
                             }
                         }
                     }
+                    else if(entity instanceof EntityGem){
+                        if(((EntityGem)entity).getOwnerID() == this.getOwnerID()){
+                            if(this.focusCheck()) for (Ability ability : this.getAbilityPowers()) {
+                                if (ability instanceof IEffectAbility && !(ability instanceof IViolentAbility)) {
+                                    ((EntityGem) entity).addPotionEffect(((IEffectAbility) ability).effect());
+                                }
+                            }
+                        }
+                    }
                     break;
+                }
+                if(this.focusCheck()) for (Ability ability : this.getAbilityPowers()) {
+                    if (ability instanceof IAreaAbility && !(ability instanceof IViolentAbility)) {
+                        ((IAreaAbility)ability).AOeffect();
+                    }
                 }
                 this.effectAbilityCounter = 0;
             } else {
                 this.effectAbilityCounter++;
+            }
+            if(this.focusCounter > 99){
+                this.focusLevel = this.baseFocus();
+                this.focusCounter = 0;
+            }
+            else{
+                this.focusCounter++;
             }
         }
     }
@@ -298,7 +324,7 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
     @Override
     public boolean attackEntityAsMob(Entity entityIn) {
         if(!entityIn.world.isRemote){
-            for(Ability power : this.getAbilityPowers()){
+            if(this.focusCheck()) for(Ability power : this.getAbilityPowers()){
                 if(power instanceof IMeleeAbility) {
                     ((IMeleeAbility)power).fight(entityIn, this.getAttributeValue(Attributes.ATTACK_DAMAGE));
                 }
@@ -310,7 +336,7 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
     @Override
     public void attackEntityWithRangedAttack(LivingEntity target, float distanceFactor) {
         for(Ability power : this.getAbilityPowers()){
-            if(power instanceof IRangedAbility && this.canEntityBeSeen(target)){
+            if(power instanceof IRangedAbility && this.canEntityBeSeen(target) && this.focusCheck()){
                 ((IRangedAbility)power).attack(target, distanceFactor);
             }
         }
@@ -759,6 +785,18 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
 
     public abstract Abilities[] possibleAbilities();
     public abstract Abilities[] definiteAbilities();
+
+    public boolean isFocused(){
+        return false;
+    }
+
+    public boolean focusCheck(){
+        return this.isFocused() || (!this.isFocused() && this.focusLevel <=1 ? true : this.rand.nextInt(this.focusLevel) == 0);
+    }
+
+    public int baseFocus(){
+        return 2;
+    }
 
     //-------------------------------------------------------------------------------------------------------------------------------------------------------------//
 

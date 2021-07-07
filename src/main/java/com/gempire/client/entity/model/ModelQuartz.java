@@ -28,7 +28,7 @@ public class ModelQuartz<T extends AbstractQuartz> extends ModelGem<T> {
     public ModelRenderer mohawk;
     public ModelRenderer messyponytail;
     public ModelRenderer cherryponytail;
-    //public ModelRenderer agatehair;
+    public ModelRenderer agatehair;
     public ModelRenderer shoulderpuff1;
     public ModelRenderer shoulderpuff2;
 
@@ -42,9 +42,9 @@ public class ModelQuartz<T extends AbstractQuartz> extends ModelGem<T> {
         this.shoulderpuff1.setRotationPoint(-1.0F, -0.5F, -0.5F);
         this.shoulderpuff1.setTextureOffset(0, 17).addBox(0.0F, 0.0F, 0.0F, 6.0F, 3.0F, 5.0F, 0.0F, 0.0F, 0.0F);
         this.setRotateAngle(shoulderpuff1, 0.0F, 0.0F, 0.08726646259971647F);
-        //this.agatehair = new ModelRenderer(this, 0, 0);
-        //this.agatehair.setRotationPoint(-3.0F, 2.0F, 2.0F);
-        //this.agatehair.setTextureOffset(0, 50).addBox(0.0F, 0.0F, 0.0F, 14.0F, 4.0F, 4.0F, 0.5F, -0.1F, -0.1F);
+        this.agatehair = new ModelRenderer(this, 0, 0);
+        this.agatehair.setRotationPoint(0.0F, 2.0F, 0.0F);
+        this.agatehair.setTextureOffset(0, 50).addBox(-6F, 0.0F, -3F, 14.0F, 4.0F, 4.0F, 0.5F, -0.1F, -0.1F);
         this.leg1 = new ModelRenderer(this, 0, 0);
         this.leg1.setRotationPoint(0.3F, 13.9F, 1.0F);
         this.leg1.setTextureOffset(16, 36).addBox(0.0F, 0.0F, 0.0F, 4.0F, 9.5F, 4.0F, 0.1F, 0.0F, 0.1F);
@@ -59,8 +59,8 @@ public class ModelQuartz<T extends AbstractQuartz> extends ModelGem<T> {
         this.leg2.setRotationPoint(5.7F, 13.9F, 1.0F);
         this.leg2.setTextureOffset(64, 36).addBox(0.0F, 0.0F, 0.0F, 4.0F, 9.5F, 4.0F, 0.1F, 0.0F, 0.1F);
         this.mohawk = new ModelRenderer(this, 0, 0);
-        this.mohawk.setRotationPoint(1.0F, -2.0F, -2.0F);
-        this.mohawk.setTextureOffset(70, 40).addBox(0.0F, 0.0F, 0.0F, 6.0F, 3.0F, 10.0F, 0.0F, 0.0F, 0.0F);
+        this.mohawk.setRotationPoint(0, -2.0F, 0F);
+        this.mohawk.setTextureOffset(70, 40).addBox(-2F, 0.0F, -6F, 6.0F, 3.0F, 10.0F, 0.0F, 0.0F, 0.0F);
         this.arm1 = new ModelRenderer(this, 0, 0);
         this.arm1.setRotationPoint(-4.3F, 0.1F, 1.0F);
         this.arm1.setTextureOffset(22, 18).addBox(0.0F, 0.0F, 0.0F, 4.0F, 14.0F, 4.0F, 0.2F, 0.0F, 0.2F);
@@ -79,7 +79,7 @@ public class ModelQuartz<T extends AbstractQuartz> extends ModelGem<T> {
         this.head.setTextureOffset(32, 0).addBox(-3, 0.2f, -5, 8.0F, 8.0F, 8.0F, 0.0F, 0.0F, 0.0F);
         this.head.addChild(this.hair);
         this.arm1.addChild(this.shoulderpuff1);
-        //this.hair.addChild(this.agatehair);
+        this.hair.addChild(this.agatehair);
         this.body.addChild(this.leg1);
         this.hair.addChild(this.messyponytail);
         this.body.addChild(this.leg2);

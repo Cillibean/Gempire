@@ -66,7 +66,7 @@ public class EntityAgate extends AbstractQuartz {
 
     @Override
     public int generateHairVariant() {
-        return this.rand.nextInt(4);
+        return this.rand.nextInt(3);
     }
 
     @Override
@@ -185,6 +185,13 @@ public class EntityAgate extends AbstractQuartz {
 
     @Override
     public Abilities[] definiteAbilities() {
-        return new Abilities[0];
+        return new Abilities[]{
+                Abilities.STERN
+        };
+    }
+
+    @Override
+    public boolean isFocused() {
+        return true;
     }
 }

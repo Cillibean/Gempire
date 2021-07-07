@@ -62,8 +62,8 @@ public abstract class AbstractQuartz extends EntityVaryingGem {
         super.read(compound);
         this.setMarkingVariant(compound.getInt("markingVariant"));
         this.setMarkingColor(compound.getInt("markingColor"));
-        this.setMarkingVariant(compound.getInt("marking2Variant"));
-        this.setMarkingColor(compound.getInt("marking2Color"));
+        this.setMarking2Variant(compound.getInt("marking2Variant"));
+        this.setMarking2Color(compound.getInt("marking2Color"));
     }
 
     public int generateMarkingVariant(){

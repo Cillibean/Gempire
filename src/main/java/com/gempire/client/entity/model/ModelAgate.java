@@ -40,7 +40,7 @@ public class ModelAgate<T extends AbstractQuartz> extends ModelGem<T> {
         this.shoulderpuff1.setTextureOffset(0, 17).addBox(0.0F, 0.0F, 0.0F, 6.0F, 3.0F, 5.0F, 0.0F, 0.0F, 0.0F);
         this.setRotateAngle(shoulderpuff1, 0.0F, 0.0F, 0.08726646259971647F);
         this.agatehair = new ModelRenderer(this, 0, 0);
-        this.agatehair.setRotationPoint(-3.0F, 2.0F, 2.0F);
+        this.agatehair.setRotationPoint(12F, 2.0F, 0F);
         this.agatehair.setTextureOffset(0, 50).addBox(0.0F, 0.0F, 0.0F, 14.0F, 4.0F, 4.0F, 0.5F, -0.1F, -0.1F);
         this.leg1 = new ModelRenderer(this, 0, 0);
         this.leg1.setRotationPoint(0.3F, 13.9F, 1.0F);
@@ -56,8 +56,8 @@ public class ModelAgate<T extends AbstractQuartz> extends ModelGem<T> {
         this.leg2.setRotationPoint(5.7F, 13.9F, 1.0F);
         this.leg2.setTextureOffset(64, 36).addBox(0.0F, 0.0F, 0.0F, 4.0F, 9.5F, 4.0F, 0.1F, 0.0F, 0.1F);
         this.mohawk = new ModelRenderer(this, 0, 0);
-        this.mohawk.setRotationPoint(1.0F, -2.0F, -2.0F);
-        this.mohawk.setTextureOffset(70, 40).addBox(0.0F, 0.0F, 0.0F, 6.0F, 3.0F, 10.0F, 0.0F, 0.0F, 0.0F);
+        this.mohawk.setRotationPoint(0, -2.0F, 0);
+        this.mohawk.setTextureOffset(70, 40).addBox(0, 0.0F, 0, 6.0F, 3.0F, 10.0F, 0.0F, 0.0F, 0.0F);
         this.arm1 = new ModelRenderer(this, 0, 0);
         this.arm1.setRotationPoint(-4.3F, 0.1F, 1.0F);
         this.arm1.setTextureOffset(22, 18).addBox(0.0F, 0.0F, 0.0F, 4.0F, 14.0F, 4.0F, 0.2F, 0.0F, 0.2F);
@@ -93,6 +93,7 @@ public class ModelAgate<T extends AbstractQuartz> extends ModelGem<T> {
         ImmutableList.of(this.body).forEach((modelRenderer) -> { 
             modelRenderer.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
         });
+        //this.mohawk.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
     }
 
     @Override

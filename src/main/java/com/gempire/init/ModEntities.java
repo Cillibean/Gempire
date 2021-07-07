@@ -77,8 +77,8 @@ public class ModEntities {
         ModEntities.CRUXTOGEM.put("ruby", ModCruxes.RUBY_CONDITIONS());
         ModEntities.CRUXTOGEM.put("sapphire", ModCruxes.SAPPHIRE_CONDITIONS());
         ModEntities.CRUXTOGEM.put("quartz", ModCruxes.QUARTZ_CONDITIONS());
-        ModEntities.CRUXTOGEM.put("jasper", ModCruxes.QUARTZ_CONDITIONS());
-        ModEntities.CRUXTOGEM.put("agate", ModCruxes.QUARTZ_CONDITIONS());
+        ModEntities.CRUXTOGEM.put("jasper", ModCruxes.JASPER_CONDITIONS());
+        ModEntities.CRUXTOGEM.put("agate", ModCruxes.AGATE_CONDITIONS());
         GemFormation.POSSIBLE_GEMS.add("ruby");
         GemFormation.POSSIBLE_GEMS.add("sapphire");
         GemFormation.POSSIBLE_GEMS.add("quartz");

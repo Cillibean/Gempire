@@ -24,6 +24,7 @@ public class RenderRuby extends MobRenderer<EntityRuby, ModelRuby<EntityRuby>> {
 
     @Override
     protected void preRenderCallback(EntityRuby entitylivingbaseIn, MatrixStack matrixStackIn, float partialTickTime) {
+        matrixStackIn.scale(.8f, .85f, .8f);
         super.preRenderCallback(entitylivingbaseIn, matrixStackIn, partialTickTime);
     }
 
