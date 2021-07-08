@@ -11,7 +11,9 @@ public enum Abilities {
     BEEFCAKE(7, 3),
     POWERHOUSE(8, 3),
     UNHINGED(9, 5),
-    STERN(10, 3);
+    STERN(10, 3),
+    FIRST_AID(11, 2),
+    HEALER(12, 1);
     public int id;
     public int weight;
     private static Abilities[] vals = Abilities.values();
