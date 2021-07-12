@@ -3,6 +3,7 @@ package com.gempire.init;
 import com.gempire.Gempire;
 import com.gempire.items.ItemChroma;
 import com.gempire.items.ItemGem;
+import com.gempire.items.ItemIceShard;
 import com.gempire.items.TestItem;
 import com.gempire.util.ModItemGroup;
 import net.minecraft.fluid.Fluids;
@@ -16,7 +17,6 @@ import java.awt.*;
 
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Gempire.MODID);
-
 
     public static final RegistryObject<Item> WHITE_CHROMA_CRYSTAL = ITEMS.register("white_chroma_crystal", () ->
             new BlockItem(
@@ -285,6 +285,9 @@ public class ModItems {
     public static final RegistryObject<Item> WHITE_ESSENCE = ITEMS.register("white_essence", () ->
             new BucketItem(ModFluids.WHITE_ESSENCE, new Item.Properties().containerItem(ModItems.ESSENCE_BOTTLE.get()).maxStackSize(1).group(ModItemGroup.ITEMS)));
 
+    public static final RegistryObject<Item> ICE_SHARD = ITEMS.register("ice_shard", () ->
+            new ItemIceShard(new Item.Properties().group(ModItemGroup.ITEMS).maxStackSize(64)));
+
     public static final RegistryObject<Item> WHITE_CHROMA = ITEMS.register("white_chroma", () ->
             new ItemChroma(new Item.Properties().group(ModItemGroup.ITEMS).maxStackSize(64), 0));
     public static final RegistryObject<Item> ORANGE_CHROMA = ITEMS.register("orange_chroma", () ->
@@ -390,7 +393,7 @@ public class ModItems {
             new ItemGem(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
     public static final RegistryObject<Item> CHERT_QUARTZ_GEM = ITEMS.register("quartz_gem_1", () ->
             new ItemGem(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> CHERRY_QUARTZ_GEM = ITEMS.register("quartz_gem_2", () ->
+    public static final RegistryObject<Item> CHERRY_QUARTZ_QUARTZ_GEM = ITEMS.register("quartz_gem_2", () ->
             new ItemGem(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
     public static final RegistryObject<Item> BLUE_AVENTURINE_QUARTZ_GEM = ITEMS.register("quartz_gem_3", () ->
             new ItemGem(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
@@ -486,7 +489,7 @@ public class ModItems {
             new ItemGem(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
     public static final RegistryObject<Item> TREE_AGATE_GEM = ITEMS.register("agate_gem_13", () ->
             new ItemGem(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> LAKE_SUPERIOR_GRAY_AGATE_GEM = ITEMS.register("agate_gem_14", () ->
+    public static final RegistryObject<Item> LAKE_SUPERIOR_AGATE_GEM = ITEMS.register("agate_gem_14", () ->
             new ItemGem(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
     public static final RegistryObject<Item> ORCA_AGATE_GEM = ITEMS.register("agate_gem_15", () ->
             new ItemGem(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));

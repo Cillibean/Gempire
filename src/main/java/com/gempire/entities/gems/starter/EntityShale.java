@@ -31,8 +31,6 @@ import net.minecraft.world.World;
 import java.util.ArrayList;
 
 public class EntityShale extends EntityStarterGem {
-    public static final int SKIN_COLOR_START = 0x63666E;
-    public static final int SKIN_COLOR_END = 0x7E82AF;
 
     public EntityShale(EntityType<? extends CreatureEntity> type, World worldIn) {
         super(type, worldIn);
@@ -51,8 +49,8 @@ public class EntityShale extends EntityStarterGem {
         }
         if(this.isOwner(player)) {
             if (player.getHeldItem(hand).getItem() == ModItems.ESSENCE_BOTTLE.get()) {
-                if (player.experienceTotal >= 20) {
-                    EntityShale.decreaseExp(player, 20);
+                if (player.experienceTotal >= 40) {
+                    EntityShale.decreaseExp(player, 40);
                     player.getHeldItem(hand).shrink(1);
                     int rand = this.rand.nextInt(4);
                     if (rand == 0) {
@@ -84,34 +82,22 @@ public class EntityShale extends EntityStarterGem {
     }
 
     @Override
-    public int generateSkinColor(){
-        ArrayList<Integer> skins = new ArrayList<>();
-        skins.add(EntityShale.SKIN_COLOR_START);
-        skins.add(EntityShale.SKIN_COLOR_END);
-        return Color.lerpHex(skins);
-    }
-
-    @Override
-    public int generateSkinVariant() {
-        return 0;
-    }
-
-    @Override
     public GemPlacements[] getPlacements() {
         GemPlacements[] placement = new GemPlacements[]{
                 GemPlacements.BACK_OF_HEAD, GemPlacements.LEFT_EYE, GemPlacements.RIGHT_EYE, GemPlacements.BACK, GemPlacements.CHEST,
-                GemPlacements.LEFT_KNEE, GemPlacements.RIGHT_KNEE, GemPlacements.LEFT_HAND, GemPlacements.RIGHT_HAND
+                GemPlacements.LEFT_THIGH, GemPlacements.RIGHT_THIGH, GemPlacements.LEFT_HAND, GemPlacements.RIGHT_HAND, GemPlacements.FOREHEAD
         };
         return placement;
     }
 
     @Override
     public Abilities[] possibleAbilities() {
-        return new Abilities[0];
+        return new Abilities[]{
+                Abilities.NO_ABILITY
+        };
     }
 
-    public static void decreaseExp(PlayerEntity player, float amount)
-    {
+    public static void decreaseExp(PlayerEntity player, float amount) {
         if (player.experienceTotal - amount <= 0)
         {
             player.experienceLevel = 0;
@@ -119,22 +105,18 @@ public class EntityShale extends EntityStarterGem {
             player.experienceTotal = 0;
             return;
         }
-
         player.experienceTotal -= amount;
-
         if (player.experience * (float)player.xpBarCap() <= amount)
         {
             amount -= player.experience * (float)player.xpBarCap();
             player.experience = 1.0f;
             player.experienceLevel--;
         }
-
         while (player.xpBarCap() < amount)
         {
             amount -= player.xpBarCap();
             player.experienceLevel--;
         }
-
         player.experience -= amount / (float)player.xpBarCap();
     }
 }

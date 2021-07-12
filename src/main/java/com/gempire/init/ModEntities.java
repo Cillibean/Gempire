@@ -7,6 +7,7 @@ import com.gempire.entities.gems.*;
 import com.gempire.entities.gems.starter.EntityMica;
 import com.gempire.entities.gems.starter.EntityPebble;
 import com.gempire.entities.gems.starter.EntityShale;
+import com.gempire.entities.projectiles.IceShardEntity;
 import com.gempire.systems.injection.Crux;
 import com.gempire.systems.injection.GemConditions;
 import com.gempire.systems.injection.GemFormation;
@@ -15,6 +16,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.projectile.SnowballEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
@@ -72,6 +74,16 @@ public class ModEntities {
             () -> EntityType.Builder.create(EntityAgate::new, EntityClassification.CREATURE)
                     .size(.7f, 1.9f) // Hitbox Size
                     .build(new ResourceLocation(Gempire.MODID, "agate").toString()));
+
+    public static final RegistryObject<EntityType<IceShardEntity>> ICE_SHARD = ENTITIES.register("ice_shard", () -> {
+        return EntityType.Builder.<IceShardEntity>create(IceShardEntity::new, EntityClassification.MISC)
+                .size(0.25F, 0.25F)
+                .setTrackingRange(64)
+                .setUpdateInterval(10)
+                .setCustomClientFactory((spawnEntity, world) -> new IceShardEntity(ModEntities.ICE_SHARD.get(), world))
+                .setShouldReceiveVelocityUpdates(true)
+                .build(new ResourceLocation(Gempire.MODID, "ice_shard").toString());
+    });
 
     public static void registerCruxes(){
         ModEntities.CRUXTOGEM.put("ruby", ModCruxes.RUBY_CONDITIONS());

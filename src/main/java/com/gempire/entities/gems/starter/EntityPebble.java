@@ -33,8 +33,6 @@ import net.minecraft.world.World;
 import java.util.ArrayList;
 
 public class EntityPebble extends EntityStarterGem {
-    public static final int SKIN_COLOR_START = 0x808080;
-    public static final int SKIN_COLOR_END = 0x575757;
     public boolean hopperGoal = false;
     public int ticksDoingHopperGoal = 0;
     public int maxTicksDoingHopperGoal = 200;
@@ -101,29 +99,18 @@ public class EntityPebble extends EntityStarterGem {
     }
 
     @Override
-    public int generateSkinColor(){
-        ArrayList<Integer> skins = new ArrayList<>();
-        skins.add(EntityPebble.SKIN_COLOR_START);
-        skins.add(EntityPebble.SKIN_COLOR_END);
-        return Color.lerpHex(skins);
-    }
-
-    @Override
-    public int generateSkinVariant() {
-        return 0;
-    }
-
-    @Override
     public GemPlacements[] getPlacements() {
         GemPlacements[] placement = new GemPlacements[]{
             GemPlacements.BACK_OF_HEAD, GemPlacements.LEFT_EYE, GemPlacements.RIGHT_EYE, GemPlacements.BACK, GemPlacements.CHEST,
-                GemPlacements.LEFT_KNEE, GemPlacements.RIGHT_KNEE, GemPlacements.LEFT_HAND, GemPlacements.RIGHT_HAND
+                GemPlacements.LEFT_THIGH, GemPlacements.RIGHT_THIGH, GemPlacements.LEFT_HAND, GemPlacements.RIGHT_HAND, GemPlacements.FOREHEAD
         };
         return placement;
     }
 
     @Override
     public Abilities[] possibleAbilities() {
-        return new Abilities[0];
+        return new Abilities[]{
+                Abilities.NO_ABILITY
+        };
     }
 }

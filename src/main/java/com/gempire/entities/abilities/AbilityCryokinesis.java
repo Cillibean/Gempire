@@ -4,6 +4,7 @@ import com.gempire.entities.abilities.base.Ability;
 import com.gempire.entities.abilities.interfaces.IRangedAbility;
 import com.gempire.entities.abilities.interfaces.ITaskAbility;
 import com.gempire.entities.abilities.interfaces.IViolentAbility;
+import com.gempire.entities.projectiles.IceShardEntity;
 import com.gempire.util.Abilities;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.Goal;
@@ -20,7 +21,7 @@ public class AbilityCryokinesis extends Ability implements IRangedAbility, IViol
 
     @Override
     public void attack(LivingEntity target, float distanceFactor) {
-        SnowballEntity snowballentity = new SnowballEntity(this.holder.world, this.holder);
+        IceShardEntity snowballentity = new IceShardEntity(this.holder.world, this.holder);
         double d0 = target.getPosYEye() - (double) 1.1F;
         double d1 = target.getPosX() - this.holder.getPosX();
         double d2 = d0 - snowballentity.getPosY();

@@ -27,9 +27,11 @@ public class InsigniaLayer<E extends EntityGem, M extends ModelGem<E>> extends G
     @Override
     public void render(MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn, EntityGem gem, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
         float[] outfitColors = SheepEntity.getDyeRgb(DyeColor.byId(gem.getInsigniaColor()));
-        IVertexBuilder builder = bufferIn.getBuffer(RenderType.getEntityCutoutNoCull(new ResourceLocation(gem.getModID()+":textures/entity/" + this.getName(gem).toLowerCase() + "/insignia_" + gem.getInsigniaVariant() + ".png")));
-        this.getEntityModel().setRotationAngles(gem, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-        this.getEntityModel().render(matrixStackIn, builder, packedLightIn, OverlayTexture.NO_OVERLAY, outfitColors[0], outfitColors[1], outfitColors[2], 1.0F);
+        if(gem.getInsigniaVariant() < 99) {
+            IVertexBuilder builder = bufferIn.getBuffer(RenderType.getEntityCutoutNoCull(new ResourceLocation(gem.getModID() + ":textures/entity/" + this.getName(gem).toLowerCase() + "/outfits/insignia_" + gem.getInsigniaVariant() + ".png")));
+            this.getEntityModel().setRotationAngles(gem, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
+            this.getEntityModel().render(matrixStackIn, builder, packedLightIn, OverlayTexture.NO_OVERLAY, outfitColors[0], outfitColors[1], outfitColors[2], 1.0F);
+        }
         /*if(gem instanceof EntityStarterGem){
             ModelStarterGem model = ((ModelStarterGem)this.getEntityModel());
             model.

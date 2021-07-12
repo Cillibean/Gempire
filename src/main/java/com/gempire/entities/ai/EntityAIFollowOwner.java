@@ -37,14 +37,14 @@ public class EntityAIFollowOwner extends Goal {
 
     @Override
     public boolean shouldContinueExecuting() {
-        return this.owner != null && !this.follower.getNavigator().noPath() && follower.getMovementType() == 2 && this.follower.getDistanceSq(this.owner) > Math.pow(3, 2);
+        return this.owner != null && !this.follower.getNavigator().noPath() && this.follower.getMovementType() == 2 && this.follower.getDistanceSq(this.owner) > Math.pow(7, 2);
     }
 
     @Override
     public void startExecuting(){
         super.startExecuting();
         this.follower.setPathPriority(PathNodeType.WATER, 0);
-        this.follower.getNavigator().tryMoveToXYZ(owner.getPosX(), owner.getPosY(), owner.getPosZ(), this.speed);
+        this.follower.getNavigator().tryMoveToXYZ(this.owner.getPosX(), this.owner.getPosY(), this.owner.getPosZ(), this.speed);
         if(this.follower.getDistanceSq(this.owner) > Math.pow(16, 2)){
             this.follower.setPosition(this.owner.getPosX(), this.owner.getPosY(), this.owner.getPosZ());
         }

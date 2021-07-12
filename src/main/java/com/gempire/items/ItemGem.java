@@ -151,6 +151,7 @@ public class ItemGem extends Item {
             GemFormEvent event = new GemFormEvent(gem, gem.getPosition());
             MinecraftForge.EVENT_BUS.post(event);
             world.addEntity(gem);
+            System.out.println(gem.getGemPlacementE());
             return true;
         }
         return false;
@@ -163,14 +164,6 @@ public class ItemGem extends Item {
 
     public void clearData(ItemStack stack) {
         stack.setTag(new CompoundNBT());
-    }
-
-    @Override
-    public boolean onEntityItemUpdate(ItemStack stack, ItemEntity entity) {
-        entity.setNoDespawn();
-        entity.extinguish();
-        this.Countdown(stack, entity);
-        return super.onEntityItemUpdate(stack, entity);
     }
 
     public void Countdown(ItemStack stack, ItemEntity entity){

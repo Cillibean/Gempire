@@ -1,16 +1,12 @@
 package com.gempire.client.entity.render.layers;
 
-import com.gempire.Gempire;
 import com.gempire.client.entity.model.ModelGem;
-import com.gempire.client.entity.model.ModelStarterGem;
 import com.gempire.entities.bases.EntityGem;
-import com.gempire.entities.bases.EntityStarterGem;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.IEntityRenderer;
-import net.minecraft.client.renderer.entity.model.EntityModel;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;

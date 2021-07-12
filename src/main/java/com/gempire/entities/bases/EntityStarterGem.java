@@ -9,6 +9,8 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
+import net.minecraft.entity.passive.SheepEntity;
+import net.minecraft.item.DyeColor;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
@@ -21,41 +23,23 @@ public abstract class EntityStarterGem extends EntityGem {
     }
 
     public int generateHairColor(){
-        return 0;
+        return this.getSkinColor();
     }
 
     public int generateHairVariant(){
-        return 0;
-    }
-
-    public int generateGemColor(){
-        return 0;
+        return this.rand.nextInt(3);
     }
 
     public int generateOutfitColor(){
-        return 0;
-    }
-
-    public int getOutfitVariant(){
-        return 0;
+        return this.rand.nextInt(16);
     }
 
     public int generateInsigniaColor(){
-        return 0;
+        return this.rand.nextInt(16);
     }
 
     public int generateAbilitySlots() {
         return 1;
-    }
-
-    public boolean generateIsEmotional(){
-        return false;
-    }
-
-    //TODO : FIX THIS PIECE OF HELL ON EARTH
-    @Override
-    public String generateAbilities(){
-        return "0";
     }
 
     public Abilities[] definiteAbilities(){
@@ -65,7 +49,7 @@ public abstract class EntityStarterGem extends EntityGem {
     }
 
     public boolean canChangeInsigniaColorByDefault(){
-        return false;
+        return true;
     }
 
     @Override
@@ -73,7 +57,6 @@ public abstract class EntityStarterGem extends EntityGem {
         return 0;
     }
 
-    @Override
     public boolean canChangeUniformColorByDefault() {
         return true;
     }
@@ -88,12 +71,19 @@ public abstract class EntityStarterGem extends EntityGem {
     }
 
     public int generateOutfitVariant(){
-        return 0;
+        return this.rand.nextInt(4);
     }
     public int generateInsigniaVariant(){
-        return 0;
+        return this.getOutfitVariant();
     }
-    public float formingTemperature(){
-        return 1;
+
+    @Override
+    public boolean generateIsEmotional() {
+        return false;
+    }
+
+    @Override
+    public int generateSkinVariant() {
+        return 0;
     }
 }

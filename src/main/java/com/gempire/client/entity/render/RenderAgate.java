@@ -1,11 +1,9 @@
 package com.gempire.client.entity.render;
 
 import com.gempire.Gempire;
-import com.gempire.client.entity.model.ModelAgate;
 import com.gempire.client.entity.model.ModelQuartz;
 import com.gempire.client.entity.render.layers.*;
 import com.gempire.entities.gems.EntityAgate;
-import com.gempire.entities.gems.EntityJasper;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;

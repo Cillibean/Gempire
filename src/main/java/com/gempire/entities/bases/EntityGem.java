@@ -448,7 +448,7 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
 
     public int generateSkinColor(){
         ArrayList<Integer> skins = new ArrayList<>();
-        ResourceLocation paletteTexture = new ResourceLocation(this.getModID() + ":textures/entity/" + this.getWholeGemName().toLowerCase() + "/skin_palette.png");
+        ResourceLocation paletteTexture = new ResourceLocation(this.getModID() + ":textures/entity/" + this.getWholeGemName().toLowerCase() + "/palettes/skin_palette.png");
         BufferedImage palette = null;
         try{
             palette = ImageIO.read(Minecraft.getInstance().getResourceManager().getResource(paletteTexture).getInputStream());
@@ -506,7 +506,7 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
 
     public int generateHairColor(){
         ArrayList<Integer> skins = new ArrayList<>();
-        ResourceLocation paletteTexture = new ResourceLocation(this.getModID() + ":textures/entity/" + this.getWholeGemName().toLowerCase() + "/hair_palette.png");
+        ResourceLocation paletteTexture = new ResourceLocation(this.getModID() + ":textures/entity/" + this.getWholeGemName().toLowerCase() + "/palettes/hair_palette.png");
         BufferedImage palette = null;
         try{
             palette = ImageIO.read(Minecraft.getInstance().getResourceManager().getResource(paletteTexture).getInputStream());
@@ -545,7 +545,7 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
     }
 
     public int generateGemColor(){
-        ResourceLocation paletteTexture = new ResourceLocation(this.getModID() + ":textures/entity/" + this.getWholeGemName().toLowerCase() + "/gem_palette.png");
+        ResourceLocation paletteTexture = new ResourceLocation(this.getModID() + ":textures/entity/" + this.getWholeGemName().toLowerCase() + "/palettes/gem_palette.png");
         BufferedImage palette = null;
         int color = 0;
         try{
@@ -579,6 +579,14 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
 
     public int getOutfitVariant(){
         return this.dataManager.get(EntityGem.OUTFIT_VARIANT);
+    }
+
+    public boolean hasOutfitPlacementVariant(){
+        return false;
+    }
+
+    public int[] outfitPlacementVariants(){
+        return new int[]{};
     }
 
     public abstract int generateInsigniaVariant();
@@ -791,7 +799,7 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
     }
 
     public boolean focusCheck(){
-        return this.isFocused() || (!this.isFocused() && this.focusLevel <=1 ? true : this.rand.nextInt(this.focusLevel) == 0);
+        return this.isFocused() || (this.focusLevel <=1 ? true : this.rand.nextInt(this.focusLevel) == 0);
     }
 
     public int baseFocus(){

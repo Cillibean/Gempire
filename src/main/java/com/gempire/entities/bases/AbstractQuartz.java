@@ -76,7 +76,7 @@ public abstract class AbstractQuartz extends EntityVaryingGem {
 
     public int generateMarkingColor(){
         ArrayList<Integer> markings = new ArrayList<>();
-        ResourceLocation paletteTexture = new ResourceLocation(this.getModID() + ":textures/entity/" + this.getWholeGemName().toLowerCase() + "/marking_palette.png");
+        ResourceLocation paletteTexture = new ResourceLocation(this.getModID() + ":textures/entity/" + this.getWholeGemName().toLowerCase() + "/palettes/marking_palette.png");
         BufferedImage palette = null;
         try{
             palette = ImageIO.read(Minecraft.getInstance().getResourceManager().getResource(paletteTexture).getInputStream());
@@ -98,7 +98,7 @@ public abstract class AbstractQuartz extends EntityVaryingGem {
 
     public int generateMarking2Color(){
         ArrayList<Integer> markings = new ArrayList<>();
-        ResourceLocation paletteTexture = new ResourceLocation(this.getModID() + ":textures/entity/" + this.getWholeGemName().toLowerCase() + "/marking_2_palette.png");
+        ResourceLocation paletteTexture = new ResourceLocation(this.getModID() + ":textures/entity/" + this.getWholeGemName().toLowerCase() + "/palettes/marking_2_palette.png");
         BufferedImage palette = null;
         try{
             palette = ImageIO.read(Minecraft.getInstance().getResourceManager().getResource(paletteTexture).getInputStream());

@@ -195,4 +195,16 @@ public class EntityQuartz extends AbstractQuartz {
     public int baseFocus() {
         return 7;
     }
+
+    @Override
+    public boolean hasOutfitPlacementVariant() {
+        return true;
+    }
+
+    @Override
+    public int[] outfitPlacementVariants() {
+        return new int[]{
+                17
+        };
+    }
 }

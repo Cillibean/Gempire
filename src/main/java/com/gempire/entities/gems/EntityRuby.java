@@ -80,11 +80,6 @@ public class EntityRuby extends EntityGem {
     }
 
     @Override
-    public int getOutfitVariant() {
-        return 0;
-    }
-
-    @Override
     public int generateInsigniaColor() {
         return 4;
     }
@@ -92,6 +87,18 @@ public class EntityRuby extends EntityGem {
     @Override
     public int generateOutfitColor() {
         return 8;
+    }
+
+    @Override
+    public boolean hasOutfitPlacementVariant() {
+        return true;
+    }
+
+    @Override
+    public int[] outfitPlacementVariants() {
+        return new int[]{
+                11, 17
+        };
     }
 
     public Abilities[] possibleAbilities(){
@@ -137,11 +144,19 @@ public class EntityRuby extends EntityGem {
     }
 
     public int generateOutfitVariant(){
-        return 0;
+        return this.rand.nextInt(4);
     }
 
     public int generateInsigniaVariant(){
-        return 0;
+        boolean flag = false;
+        if(this.hasOutfitPlacementVariant()){
+            for(int i : this.outfitPlacementVariants()){
+                if(this.getGemPlacement() == i){
+                    flag = true;
+                }
+            }
+        }
+        return !flag ? this.getOutfitVariant() : 99;
     }
 
     @Override
