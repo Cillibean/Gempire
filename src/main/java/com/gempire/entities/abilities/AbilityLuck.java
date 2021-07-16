@@ -18,4 +18,9 @@ public class AbilityLuck extends Ability implements IEffectAbility {
     public EffectInstance effect() {
         return new EffectInstance(Effects.LUCK, 200, 3);
     }
+
+    @Override
+    public boolean playerOnly() {
+        return true;
+    }
 }

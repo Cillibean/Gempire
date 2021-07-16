@@ -16,4 +16,9 @@ public class AbilityFirstAid extends Ability implements IEffectAbility {
     public EffectInstance effect() {
         return new EffectInstance(Effects.INSTANT_HEALTH, 40, 1);
     }
+
+    @Override
+    public boolean playerOnly() {
+        return false;
+    }
 }

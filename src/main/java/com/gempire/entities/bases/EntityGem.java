@@ -32,6 +32,7 @@ import net.minecraft.util.ActionResultType;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.text.*;
 import net.minecraft.world.DifficultyInstance;
@@ -70,6 +71,7 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
     public static final DataParameter<Integer> INSIGNIA_VARIANT = EntityDataManager.<Integer>createKey(EntityGem.class, DataSerializers.VARINT);
     public static final DataParameter<Integer> ABILITY_SLOTS = EntityDataManager.<Integer>createKey(EntityGem.class, DataSerializers.VARINT);
     public static final DataParameter<String> ABILITIES = EntityDataManager.<String>createKey(EntityGem.class, DataSerializers.STRING);
+    public static final DataParameter<Boolean> USES_AREA_ABILITIES = EntityDataManager.<Boolean>createKey(EntityGem.class, DataSerializers.BOOLEAN);
     public static ArrayList<Ability> ABILITY_POWERS = new ArrayList<>();
 
     public byte movementType = 1;
@@ -77,8 +79,10 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
     public int initalSkinVariant = 0;
     public boolean setSkinVariantOnInitialSpawn = true;
 
-    public byte effectAbilityCounter = 99;
-    public byte focusCounter = 99;
+    public int areaCounter = 100;
+    public int maxAreaCounter = 100;
+    public int focusCounter = 100;
+    public int maxFocusCounter = 100;
 
     public int focusLevel = 2;
 
@@ -102,6 +106,7 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
         this.dataManager.register(EntityGem.INSIGNIA_VARIANT, 0);
         this.dataManager.register(EntityGem.ABILITY_SLOTS, 1);
         this.dataManager.register(EntityGem.ABILITIES, "-1");
+        this.dataManager.register(EntityGem.USES_AREA_ABILITIES, false);
     }
 
     @Nullable
@@ -149,6 +154,7 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
         compound.putInt("insigniaColor", this.getInsigniaColor());
         compound.putInt("insigniaVariant", this.getInsigniaVariant());
         compound.putInt("abilitySlots", this.getAbilitySlots());
+        compound.putBoolean("usesAreaAbility", this.usesAreaAbilities());
         compound.putInt("focusLevel", this.focusLevel);
         compound.putByte("emotionMeter", this.emotionMeter);
     }
@@ -184,41 +190,16 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
     @Override
     public void livingTick() {
         super.livingTick();
-        if(!this.world.isRemote) {
-            if (this.effectAbilityCounter > 99) {
-                List<Entity> owners = this.world.getEntitiesWithinAABBExcludingEntity(this, this.getBoundingBox().grow(6));
-                for (Entity entity : owners) {
-                    if (entity instanceof PlayerEntity) {
-                        if (this.isOwner((PlayerEntity) entity)) {
-                            PlayerEntity owner = (PlayerEntity) entity;
-                            if(this.focusCheck()) for (Ability ability : this.getAbilityPowers()) {
-                                if (ability instanceof IEffectAbility && !(ability instanceof IViolentAbility)) {
-                                    owner.addPotionEffect(((IEffectAbility) ability).effect());
-                                }
-                            }
-                        }
-                    }
-                    else if(entity instanceof EntityGem){
-                        if(((EntityGem)entity).getOwnerID() == this.getOwnerID()){
-                            if(this.focusCheck()) for (Ability ability : this.getAbilityPowers()) {
-                                if (ability instanceof IEffectAbility && !(ability instanceof IViolentAbility)) {
-                                    ((EntityGem) entity).addPotionEffect(((IEffectAbility) ability).effect());
-                                }
-                            }
-                        }
-                    }
-                    break;
-                }
-                if(this.focusCheck()) for (Ability ability : this.getAbilityPowers()) {
-                    if (ability instanceof IAreaAbility && !(ability instanceof IViolentAbility)) {
-                        ((IAreaAbility)ability).AOeffect();
-                    }
-                }
-                this.effectAbilityCounter = 0;
-            } else {
-                this.effectAbilityCounter++;
+        if(!this.world.isRemote && this.usesAreaAbilities()) {
+            if(this.areaCounter > this.maxAreaCounter){
+                this.executeAreaAbilities();
+                this.areaCounter = 0;
             }
-            if(this.focusCounter > 99){
+            else{
+                this.areaCounter++;
+            }
+            //System.out.println("Counter set to: " + this.areaCounter);
+            if(this.focusCounter > this.maxFocusCounter){
                 this.focusLevel = this.baseFocus();
                 this.focusCounter = 0;
             }
@@ -226,6 +207,51 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
                 this.focusCounter++;
             }
         }
+    }
+
+    public void executeAreaAbilities(){//Generate list of nearby entities
+        List<Entity> entities = this.world.getEntitiesWithinAABB(Entity.class, new AxisAlignedBB(this.getPosX(), this.getPosY(), this.getPosZ(), this.getPosX() + 1, this.getPosY() + 1 , this.getPosZ() + 1).grow(16, this.world.getHeight(), 16));
+
+        //Run through all abilities and entities, O(ab)
+        ArrayList<Ability> abilities = this.getAbilityPowers();
+        for(Ability ability : abilities){
+            for(Entity entity1 : entities){
+                if(entity1 instanceof LivingEntity) {
+                    LivingEntity entity = (LivingEntity)entity1;
+                    boolean flag1 = ability instanceof IEffectAbility;
+                    boolean flag2 = ability instanceof IAreaAbility;
+                    boolean flag3 = ability instanceof IViolentAbility;
+                    boolean flagOwner = this.isOwner(entity);
+                    boolean flagFocus = this.focusCheck();
+                    IEffectAbility effectAbility = null;
+                    IAreaAbility areaAbility = null;
+                    if (!flag3 && flagFocus && entity.getUniqueID() != this.getUniqueID()) {
+                        //Run through effect abilities - Check if they apply to the player only - Apply for each entity
+                        System.out.println("Entity should be valid");
+                        if (flag1) {
+                            effectAbility = (IEffectAbility) ability;
+                            if (effectAbility.playerOnly()) {
+                                if (flagOwner) {
+                                    entity.addPotionEffect(effectAbility.effect());
+                                    System.out.println("Effect Ability Deployed On Player");
+                                }
+                            } else {
+                                entity.addPotionEffect(effectAbility.effect());
+                                System.out.println("Effect Ability Deployed");
+                            }
+                        }
+                        //Run through area abilities - Apply for each entity
+                        if (flag2) {
+                            areaAbility = (IAreaAbility) ability;
+                            areaAbility.AOeffect(entity, this.getOwnerID());
+                            System.out.println("AOE Ability Deployed");
+                        }
+                    }
+                }
+            }
+        }
+
+        entities = null;
     }
 
     @Override
@@ -681,8 +707,13 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
             for (Abilities ability : abilities) {
                 //powers.add(Ability.getAbilityFromAbilities(ability).assignAbility(this));
                 Class[] parameterType = null;
+                Ability ability1 = null;
                 try {
-                    powers.add(Ability.ABILITY_FROM_ABILITIES.get(ability).getConstructor(parameterType).newInstance(null).assignAbility(this));
+                    ability1 = Ability.ABILITY_FROM_ABILITIES.get(ability).getConstructor(parameterType).newInstance(null).assignAbility(this);
+                    powers.add(ability1);
+                    if((ability1 instanceof IEffectAbility || ability1 instanceof IAreaAbility) && !(ability1 instanceof IViolentAbility)){
+                        this.dataManager.set(EntityGem.USES_AREA_ABILITIES, true);
+                    }
                 }
                 catch (Exception e){
                     e.printStackTrace();
@@ -793,6 +824,10 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
 
     public abstract Abilities[] possibleAbilities();
     public abstract Abilities[] definiteAbilities();
+
+    public boolean usesAreaAbilities(){
+        return this.dataManager.get(EntityGem.USES_AREA_ABILITIES);
+    }
 
     public boolean isFocused(){
         return false;

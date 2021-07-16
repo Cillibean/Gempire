@@ -107,7 +107,7 @@ public class Gempire
         ModAbilities.registerAbilities();
     }
 
-    @SubscribeEvent
+    /*@SubscribeEvent
     public void onLootTablesLoad(final LootTableLoadEvent event) {
         // Test: /loot give @p loot minecraft:chests/end_city_treasure
         if (event.getName().equals(new ResourceLocation("minecraft", "chests/abandoned_mineshaft"))
@@ -125,7 +125,7 @@ public class Gempire
         else{
             event.getTable().addPool(LootPool.builder().addEntry(TableLootEntry.builder(event.getName())).build());
         }
-    }
+    }*/
 
     private void enqueueIMC(final InterModEnqueueEvent event)
     {

@@ -4,4 +4,5 @@ import net.minecraft.potion.EffectInstance;
 
 public interface IEffectAbility {
     EffectInstance effect();
+    boolean playerOnly();
 }

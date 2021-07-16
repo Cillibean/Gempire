@@ -50,4 +50,9 @@ public class AbilityParalysis extends Ability implements IMeleeAbility, IEffectA
             entity.addPotionEffect(new EffectInstance(Effects.SLOWNESS, 20 * 15, 99));
         }
     }
+
+    @Override
+    public boolean playerOnly() {
+        return false;
+    }
 }

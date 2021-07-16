@@ -16,4 +16,9 @@ public class AbilityHealer extends Ability implements IEffectAbility {
     public EffectInstance effect() {
         return new EffectInstance(Effects.REGENERATION, 200, 1);
     }
+
+    @Override
+    public boolean playerOnly() {
+        return false;
+    }
 }

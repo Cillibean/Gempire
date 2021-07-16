@@ -32,7 +32,7 @@ public class EntityAIFollowOwner extends Goal {
                 }
             }
         }
-        return this.owner != null && follower.getMovementType() == 2;
+        return this.owner != null && follower.getMovementType() == 2 && this.follower.getDistanceSq(this.owner) > Math.pow(3, 2);
     }
 
     @Override

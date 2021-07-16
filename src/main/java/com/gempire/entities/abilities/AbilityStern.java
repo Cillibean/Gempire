@@ -12,6 +12,7 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 
 import java.util.List;
+import java.util.UUID;
 
 public class AbilityStern extends Ability implements IAreaAbility, IEffectAbility {
 
@@ -21,12 +22,19 @@ public class AbilityStern extends Ability implements IAreaAbility, IEffectAbilit
 
     @Override
     public void AOeffect() {
-        List<Entity> owners = this.holder.world.getEntitiesWithinAABBExcludingEntity(this.holder, this.holder.getBoundingBox().grow(12));
-        for (Entity entity : owners) {
-            if (entity instanceof EntityGem) {
-                ((EntityGem)entity).focusLevel = 1;
-            }
-            break;
+
+    }
+
+    @Override
+    public void AOeffect(Entity entity) {
+
+    }
+
+    @Override
+    public void AOeffect(Entity entity, UUID id) {
+        if (entity instanceof EntityGem) {
+            if(((EntityGem)entity).getOwnerID() == id) ((EntityGem)entity).focusLevel = 1;
+            System.out.println("Gem focused");
         }
     }
 
@@ -34,5 +42,10 @@ public class AbilityStern extends Ability implements IAreaAbility, IEffectAbilit
     @Override
     public EffectInstance effect() {
         return new EffectInstance(Effects.NIGHT_VISION, 200, 1);
+    }
+
+    @Override
+    public boolean playerOnly() {
+        return false;
     }
 }
