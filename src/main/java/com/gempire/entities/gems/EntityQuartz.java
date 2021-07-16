@@ -102,10 +102,10 @@ public class EntityQuartz extends AbstractQuartz {
                 name = "rose_quartz";
                 break;
             case 7:
-                name = "smoky_quartz";
+                name = "flint";
                 break;
             case 8:
-                name = "flint";
+                name = "smoky_quartz";
                 break;
             case 9:
                 name = "chalcedony";

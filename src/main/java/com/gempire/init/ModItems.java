@@ -669,23 +669,23 @@ public class ModItems {
     public static final RegistryObject<Item> RED_SAPPHIRE_GEM = ITEMS.register("sapphire_gem_14", () ->
             new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
 
-    public static final RegistryObject<Item> ORANGE_SPODUMENE_GEM = ITEMS.register("spodumene_gem_0", () ->
+    public static final RegistryObject<Item> ORANGE_SPODUMENE_GEM = ITEMS.register("spodumene_gem_1", () ->
             new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> YELLOW_SPODUMENE_GEM = ITEMS.register("spodumene_gem_1", () ->
+    public static final RegistryObject<Item> YELLOW_SPODUMENE_GEM = ITEMS.register("spodumene_gem_4", () ->
             new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> GREEN_SPODUMENE_GEM = ITEMS.register("spodumene_gem_2", () ->
+    public static final RegistryObject<Item> PURPLE_SPODUMENE_GEM = ITEMS.register("spodumene_gem_10", () ->
             new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> BLUE_SPODUMENE_GEM = ITEMS.register("spodumene_gem_3", () ->
+    public static final RegistryObject<Item> BLUE_SPODUMENE_GEM = ITEMS.register("spodumene_gem_11", () ->
             new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> PURPLE_SPODUMENE_GEM = ITEMS.register("spodumene_gem_4", () ->
+    public static final RegistryObject<Item> GREEN_SPODUMENE_GEM = ITEMS.register("spodumene_gem_13", () ->
             new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
 
-    public static final RegistryObject<Item> YELLOW_TOPAZ_GEM = ITEMS.register("topaz_gem_0", () ->
+    public static final RegistryObject<Item> WHITE_TOPAZ_GEM = ITEMS.register("topaz_gem_0", () ->
             new ItemGem(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> BLUE_TOPAZ_GEM = ITEMS.register("topaz_gem_1", () ->
+    public static final RegistryObject<Item> YELLOW_TOPAZ_GEM = ITEMS.register("topaz_gem_4", () ->
             new ItemGem(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> PINK_TOPAZ_GEM = ITEMS.register("topaz_gem_2", () ->
+    public static final RegistryObject<Item> BLUE_TOPAZ_GEM = ITEMS.register("topaz_gem_6", () ->
             new ItemGem(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> WHITE_TOPAZ_GEM = ITEMS.register("topaz_gem_3", () ->
+    public static final RegistryObject<Item> PINK_TOPAZ_GEM = ITEMS.register("topaz_gem_11", () ->
             new ItemGem(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
 }

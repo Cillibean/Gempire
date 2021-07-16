@@ -77,9 +77,15 @@ public class EntityJasper extends AbstractQuartz {
 
     @Override
     public boolean hasMarkings2() {
-        return this.getSkinColorVariant() == 2 || this.getSkinColorVariant() == 3 || this.getSkinColorVariant() == 6 || this.getSkinColorVariant() == 8
-                || this.getSkinColorVariant() == 10 || this.getSkinColorVariant() == 11 || this.getSkinColorVariant() == 12 || this.getSkinColorVariant() == 14
-                || this.getSkinColorVariant() == 16;
+        return this.getSkinColorVariant() == 2 ||
+                this.getSkinColorVariant() == 3 ||
+                this.getSkinColorVariant() == 6 ||
+                this.getSkinColorVariant() == 8 ||
+                this.getSkinColorVariant() == 10 ||
+                this.getSkinColorVariant() == 11 ||
+                this.getSkinColorVariant() == 12 ||
+                this.getSkinColorVariant() == 14 ||
+                this.getSkinColorVariant() == 16;
     }
 
     @Override
