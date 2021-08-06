@@ -240,7 +240,7 @@ public class InjectorTE extends LockableLootTileEntity implements IFluidTank, IN
                     }
                 }
             }
-            BlockPos seedPos = this.getPos().add(new BlockPos(0, -Math.ceil(GemSeedTE.DRAIN_SIZE / 2), 0));
+            BlockPos seedPos = this.getPos().add(new BlockPos(0, -Math.floor(GemSeedTE.DRAIN_SIZE / 2), 0));
             while(this.world.getBlockState(seedPos) == Blocks.AIR.getDefaultState() ||
                     this.world.getBlockState(seedPos) == ModBlocks.GEM_SEED_BLOCK.get().getDefaultState()){
                 seedPos = seedPos.add(0, -GemSeedTE.DRAIN_SIZE, 0);

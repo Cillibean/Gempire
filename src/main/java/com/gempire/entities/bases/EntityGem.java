@@ -4,6 +4,8 @@ import com.gempire.Gempire;
 import com.gempire.entities.abilities.base.Ability;
 import com.gempire.entities.abilities.AbilityZilch;
 import com.gempire.entities.abilities.interfaces.*;
+import com.gempire.entities.ai.EntityAIAreaAbility;
+import com.gempire.entities.ai.EntityAIWander;
 import com.gempire.entities.gems.EntityQuartz;
 import com.gempire.events.GemPoofEvent;
 import com.gempire.init.ModItems;
@@ -189,29 +191,29 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
 
     @Override
     public void livingTick() {
-        super.livingTick();
-        if(!this.world.isRemote && this.usesAreaAbilities()) {
+        /*if(this.usesAreaAbilities()) {
             if(this.areaCounter > this.maxAreaCounter){
-                this.executeAreaAbilities();
+                //Generate list of nearby entities
+                List<Entity> entities = this.world.getEntitiesWithinAABB(Entity.class,
+                        new AxisAlignedBB(this.getPosX(), this.getPosY(), this.getPosZ(), this.getPosX() + 1, this.getPosY() + 1 , this.getPosZ() + 1)
+                                .grow(16, this.world.getHeight(), 16));
+                this.executeAreaAbilities(entities);
                 this.areaCounter = 0;
             }
-            else{
-                this.areaCounter++;
-            }
+            this.areaCounter++;
             //System.out.println("Counter set to: " + this.areaCounter);
+        }*/
+        if(!this.isFocused()){
             if(this.focusCounter > this.maxFocusCounter){
                 this.focusLevel = this.baseFocus();
                 this.focusCounter = 0;
             }
-            else{
-                this.focusCounter++;
-            }
+            this.focusCounter++;
         }
+        super.livingTick();
     }
 
-    public void executeAreaAbilities(){//Generate list of nearby entities
-        List<Entity> entities = this.world.getEntitiesWithinAABB(Entity.class, new AxisAlignedBB(this.getPosX(), this.getPosY(), this.getPosZ(), this.getPosX() + 1, this.getPosY() + 1 , this.getPosZ() + 1).grow(16, this.world.getHeight(), 16));
-
+    /*public void executeAreaAbilities(List<Entity> entities){
         //Run through all abilities and entities, O(ab)
         ArrayList<Ability> abilities = this.getAbilityPowers();
         for(Ability ability : abilities){
@@ -229,19 +231,23 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
                         //Run through effect abilities - Check if they apply to the player only - Apply for each entity
                         System.out.println("Entity should be valid");
                         if (flag1) {
+                            System.out.println("Is effect ability");
                             effectAbility = (IEffectAbility) ability;
                             if (effectAbility.playerOnly()) {
                                 if (flagOwner) {
+                                    System.out.println("Is owner");
                                     entity.addPotionEffect(effectAbility.effect());
                                     System.out.println("Effect Ability Deployed On Player");
                                 }
                             } else {
+                                System.out.println("Is not player only");
                                 entity.addPotionEffect(effectAbility.effect());
                                 System.out.println("Effect Ability Deployed");
                             }
                         }
                         //Run through area abilities - Apply for each entity
                         if (flag2) {
+                            System.out.println("Area ability");
                             areaAbility = (IAreaAbility) ability;
                             areaAbility.AOeffect(entity, this.getOwnerID());
                             System.out.println("AOE Ability Deployed");
@@ -250,9 +256,8 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
                 }
             }
         }
-
         entities = null;
-    }
+    }*/
 
     @Override
     public ActionResultType applyPlayerInteraction(PlayerEntity player, Vector3d vec, Hand hand) {
@@ -408,6 +413,7 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
     @Override
     protected void registerGoals() {
         super.registerGoals();
+        //this.goalSelector.addGoal(1, new EntityAIAreaAbility(this, 1.0D));
     }
 
     @Override

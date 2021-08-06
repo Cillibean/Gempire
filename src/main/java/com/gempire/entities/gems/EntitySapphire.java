@@ -1,6 +1,7 @@
 package com.gempire.entities.gems;
 
 import com.gempire.Gempire;
+import com.gempire.entities.ai.EntityAIAreaAbility;
 import com.gempire.entities.ai.EntityAIFollowOwner;
 import com.gempire.entities.ai.EntityAIWander;
 import com.gempire.entities.bases.EntityGem;
@@ -75,6 +76,7 @@ public class EntitySapphire extends EntityVaryingGem {
     @Override
     protected void registerGoals() {
         super.registerGoals();
+        this.goalSelector.addGoal(1, new EntityAIAreaAbility(this, 1.0D));
         this.goalSelector.addGoal(9, new SwimGoal(this));
         this.goalSelector.addGoal(6, new PanicGoal(this, 1.1D));
         this.goalSelector.addGoal(7, new LookAtGoal(this, PlayerEntity.class, 4.0F));

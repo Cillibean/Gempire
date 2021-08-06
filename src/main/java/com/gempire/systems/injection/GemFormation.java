@@ -33,6 +33,7 @@ import java.util.Random;
 import java.util.UUID;
 
 public class GemFormation {
+    private static final int EXIT_HOLE_LENGTH = 16;
     public World world;
     public BlockPos pos;
     public BlockPos volumeToCheck;
@@ -43,7 +44,12 @@ public class GemFormation {
     public String essences;
     public int facing = 0;
 
-    public GemFormation(World world, BlockPos pos, BlockPos volumeToCheck, ItemChroma chroma, Item primer, String essences, int facing){
+    HashMap<String, Float> WEIGHTS_OF_GEMS = new HashMap<>();
+
+    //Create an object to store the total weight
+    float totalWeight = 0;
+
+    public GemFormation(World world, BlockPos pos, BlockPos volumeToCheck, ItemChroma chroma, Item primer, String essences, int facing, HashMap<String, Float> weights, float total){
         this.world = world;
         this.pos = pos;
         this.volumeToCheck = volumeToCheck;
@@ -51,6 +57,8 @@ public class GemFormation {
         this.primer = primer;
         this.essences = essences;
         this.facing = facing;
+        this.WEIGHTS_OF_GEMS = weights;
+        this.totalWeight = total;
     }
 
     public void SpawnGem(){
@@ -60,7 +68,7 @@ public class GemFormation {
         this.SetDrainedStoneColor(BIOME_TEMPERATURE);
         String gemtoform = this.EvaluateCruxes();
         if (gemtoform == "") {
-            this.Drain(GemFormation.getBlockPosInVolume(this.world, this.pos, this.volumeToCheck));
+            //this.Drain(GemFormation.getBlockPosInVolume(this.world, this.pos, this.volumeToCheck));
             return;
         }
         try {
@@ -110,7 +118,7 @@ public class GemFormation {
         ArrayList<BlockPos> blocks = GemFormation.getBlockPosInVolume(this.world, this.pos, this.volumeToCheck);
         DrainEvent event2 = new DrainEvent(blocks);
         MinecraftForge.EVENT_BUS.post(event2);
-        this.Drain(blocks);
+        //this.Drain(blocks);
         this.GenerateFacingExitHole();
     }
 
@@ -164,80 +172,6 @@ public class GemFormation {
     }
 
     public String EvaluateCruxes() {
-        //INPUT: List of gems and their cruxes as well as crux temperatures and depth preferences, list of blocks to check
-        HashMap<String, GemConditions> GEM_CONDITIONS = ModEntities.CRUXTOGEM;
-        ArrayList<Block> BLOCKS_TO_CHECK = GemFormation.getBlocksInVolume(this.world, this.pos, this.volumeToCheck);
-        ArrayList<String> GEMS = this.POSSIBLE_GEMS;
-        float BLOCK_TEMPERATURE = this.world.getBiome(this.pos).getTemperature(this.pos);
-
-        //Create an object to store the gems and their weights once the cruxes have been evaluated
-        HashMap<String, Float> WEIGHTS_OF_GEMS = new HashMap<>();
-
-        //Create an object to store the total weight
-        float totalWeight = 0;
-
-        //Loop through every gem
-        for (String gem : GEMS) {
-            float gemWeight = 0;
-            if (GEM_CONDITIONS.get(gem) != null) {
-                GemConditions conditions = GEM_CONDITIONS.get(gem);
-                boolean weightThisGem = false;
-                //Do some math to multiply the gem weight by the inverse of the difference in biome temperature to preferred temperature
-                float temperatureDifference = 0;
-                if (BLOCK_TEMPERATURE >= conditions.temperatureMin) {
-                    if (BLOCK_TEMPERATURE <= conditions.temperatureMax) {
-                        temperatureDifference = 0;
-                    } else {
-                        temperatureDifference = conditions.temperatureMax - BLOCK_TEMPERATURE == 0 ? 1 : Math.abs(conditions.temperatureMax - BLOCK_TEMPERATURE);
-                    }
-                } else {
-                    temperatureDifference = conditions.temperatureMin - BLOCK_TEMPERATURE == 0 ? 1 : Math.abs(conditions.temperatureMin - BLOCK_TEMPERATURE);
-                }
-                int essenceCount = 0;
-                String[] indEssencesInj = this.essences.split("-");
-                String[] indEssencesCond = conditions.essences.split("-");
-                for(int i = 0; i < indEssencesInj.length; i++){
-                    String essJ = indEssencesInj[i];
-                    for(int j = 0; j < indEssencesCond.length; j++){
-                        String essC = indEssencesCond[j];
-                        if(essJ.equalsIgnoreCase(essC)){
-                            essenceCount++;
-                        }
-                    }
-                }
-                if(essenceCount == indEssencesCond.length){
-                    weightThisGem = true;
-                }
-                if(weightThisGem) {
-                    for (Crux crux : GEM_CONDITIONS.get(gem).cruxes) {
-                        for (Block block : BLOCKS_TO_CHECK) {
-                            //Then for every crux, calculate the total weight of crux that matches every block in the volume for every gem
-                            //Example: if there are three stone in the volume, the total weight will be 3 stone times however many gems there are that have stone as a crux, and so forth
-                            if (block != crux.block) {
-                                continue;
-                            } else {
-                                totalWeight += 1;
-                                totalWeight += crux.weight;
-                                gemWeight += 1 * (1 - temperatureDifference);
-                                gemWeight += crux.weight * (1 - temperatureDifference);
-                            }
-                        }
-                    }
-                }
-                if(this.primer == conditions.primer && conditions.primer != Items.AIR && this.primer != Items.AIR){
-                    gemWeight *= 3;
-                }
-                //Once the total weight has been obtained, store the individual weights of every gem in a hashmap.
-                if(weightThisGem) {
-                    WEIGHTS_OF_GEMS.put(gem, gemWeight);
-                }else WEIGHTS_OF_GEMS.put(gem, 0f);
-                //DEBUG FEATURES
-                System.out.println(gem + " weight: " + gemWeight);
-            }
-        }
-        //DEBUG FEATURES
-        System.out.println("Total Weight: " + totalWeight);
-        //Finally, do a weighted chance selection using the total weight and the individual weights.
         String returnGem = "";
         double lowestR = 100000000;
         String lowestRGem = "";
@@ -252,8 +186,6 @@ public class GemFormation {
                 lowestRGem = gem;
             }
             returnGem = gem;
-            //DEBUG FEATURES
-            System.out.println("R for " + gem + " equals: " + r);
             if (r > 0 && gem == this.POSSIBLE_GEMS.get(this.POSSIBLE_GEMS.size() - 1)){
                 returnGem = lowestRGem;
                 break;
@@ -267,58 +199,46 @@ public class GemFormation {
         return returnGem;
     }
 
-    public void GenerateFacingExitHole(){
-        if(this.facing <= 3 && this.facing >= 0) {
-            boolean found = false;
-            ArrayList<BlockPos> blocks = new ArrayList<>();
-            ArrayList<BlockPos> blocksToDrain = new ArrayList<>();
-            BlockPos dir = BlockPos.ZERO;
-            for (int i = 0; i < 16; i++) {
-                if(this.facing == 0){
-                    dir = new BlockPos(i, 0 ,0);
-                }
-                else if(this.facing == 1){
-                    dir = new BlockPos(0, 0 ,i);
-                }
-                else if(this.facing == 2){
-                    dir = new BlockPos(-i, 0 ,0);
-                }
-                else if(this.facing == 3){
-                    dir = new BlockPos(0, 0 ,-i);
-                }
-                if (this.world.getBlockState(this.pos.add(dir)).getBlock() != Blocks.AIR) {
-                    blocks.add(this.pos.add(dir));
-                    blocks.add(this.pos.add(dir.up()));
-                    blocks.add(this.pos.add(dir.up().up()));
-
-                    blocksToDrain.add(this.pos.add(dir).down());
-                    blocksToDrain.add(this.pos.add(dir).up().up().up());
-                    blocksToDrain.add(this.pos.add(dir).north());
-                    blocksToDrain.add(this.pos.add(dir).up().north());
-                    blocksToDrain.add(this.pos.add(dir).up().up().north());
-                    blocksToDrain.add(this.pos.add(dir).south());
-                    blocksToDrain.add(this.pos.add(dir).up().south());
-                    blocksToDrain.add(this.pos.add(dir).up().up().south());
-                } else {
-                    found = true;
-                    break;
-                }
-            }
-            if (found) {
-                for (BlockPos pos : blocks) {
-                    this.world.destroyBlock(pos, false);
-                }
-                this.Drain(blocksToDrain);
-            } else {
-                this.GenerateExitHole();
-            }
+    public BlockPos DirectionFromFacing(int face){
+        BlockPos pos = new BlockPos(1,0,0);
+        switch(face){
+            case 0: pos = new BlockPos(1,0, 0);
+                break;
+            case 1: pos = new BlockPos(0,0, -1);
+                break;
+            case 2: pos = new BlockPos(-1,0, 0);
+                break;
+            case 3: pos = new BlockPos(0,0, 1);
+                break;
         }
-        else{
-            this.GenerateExitHole();
+        return pos;
+    }
+
+    public void GenerateFacingExitHole(){
+        System.out.println("This block is facing: " + this.facing);
+        BlockPos direction = this.DirectionFromFacing(this.facing);
+        BlockPos currentPos = new BlockPos(this.pos);
+        boolean flag = false;
+        for(int i = 0; i < this.EXIT_HOLE_LENGTH; i++){
+            if(!flag) {
+                if(this.world.getBlockState(currentPos).getBlock() instanceof AirBlock
+                        && this.world.getBlockState(currentPos.up()).getBlock() instanceof AirBlock){
+                    flag = true;
+                }
+                this.world.destroyBlock(currentPos, false);
+                this.world.destroyBlock(currentPos.up(), false);
+                this.world.destroyBlock(currentPos.up().up(), false);
+                currentPos = currentPos.add(direction);
+            }
+            else{
+                break;
+            }
         }
     }
 
-    public void GenerateExitHole(){
+
+
+    /*public void GenerateExitHole(){
         boolean found = false;
         if(!found) {
             ArrayList<BlockPos> blocks = new ArrayList<>();
@@ -427,7 +347,7 @@ public class GemFormation {
             }
             this.Drain(blocksToDrain);
         }
-    }
+    }*/
 
     public int getColorFromChroma(){
         return this.chroma.color;
