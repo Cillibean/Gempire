@@ -1,5 +1,5 @@
 {
-  "parent": "block/cube_all",
+  "parent": "block/cube_bottom_top",
   "textures": {
     "top": "gempire:blocks/drained_yellow_stone_top_2",
     "bottom": "gempire:blocks/drained_yellow_stone_top_2",
