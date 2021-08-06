@@ -21,7 +21,7 @@ public class EntityAIAreaAbility extends Goal {
     public World world;
     public double speed;
     boolean flag1, flag2, flag3, flagOwner, flagFocus;
-    List<Entity> entities = null;
+    List<LivingEntity> entities = null;
     ArrayList<Ability> abilities = null;
 
     public EntityAIAreaAbility(EntityGem entityIn, double speedIn) {
@@ -32,7 +32,7 @@ public class EntityAIAreaAbility extends Goal {
 
     @Override
     public boolean shouldExecute() {
-        List<Entity> entity = this.world.getEntitiesWithinAABB(Entity.class, new AxisAlignedBB(this.gem.getPosX(), this.gem.getPosY(), this.gem.getPosZ(), this.gem.getPosX() + 1, this.gem.getPosY() + 1 , this.gem.getPosZ() + 1)
+        List<LivingEntity> entity = this.world.getEntitiesWithinAABB(LivingEntity.class, new AxisAlignedBB(this.gem.getPosX(), this.gem.getPosY(), this.gem.getPosZ(), this.gem.getPosX() + 1, this.gem.getPosY() + 1 , this.gem.getPosZ() + 1)
                         .grow(16, this.world.getHeight(), 16));
         this.entities = entity;
         this.abilities = this.gem.getAbilityPowers();
@@ -41,7 +41,7 @@ public class EntityAIAreaAbility extends Goal {
 
     @Override
     public boolean shouldContinueExecuting() {
-        return this.abilities != null && this.entities != null && this.gem.ticksExisted % 100 == 0;
+        return this.abilities != null && this.entities != null && this.gem.ticksExisted % 100 == 0 && this.gem.usesAreaAbilities();
     }
 
     @Override
@@ -50,40 +50,37 @@ public class EntityAIAreaAbility extends Goal {
         for(Ability ability : this.gem.getAbilityPowers()){
             this.flag1 = ability instanceof IEffectAbility;
             this.flag2 = ability instanceof IAreaAbility;
-            this.flag3 = ability instanceof IViolentAbility;
-            for(Entity entity1 : this.entities){
-                System.out.println("Entity Type: " + entity1 + " - Entity is living?: " + (entity1 instanceof LivingEntity));
+            //this.flag3 = ability instanceof IViolentAbility;
+            for(LivingEntity entity : this.entities){
+                System.out.println("Entity Type: " + entity);
                 System.out.println("For Entity: Flag 1: " + this.flag1 + " - Flag 2: " + this.flag2 + " - Flag 3: " + this.flag3);
-                if(entity1 instanceof LivingEntity) {
-                    LivingEntity entity = (LivingEntity)entity1;
-                    this.flagOwner = this.gem.isOwner(entity);
-                    this.flagFocus = this.gem.focusCheck();
-                    IEffectAbility effectAbility = null;
-                    IAreaAbility areaAbility = null;
-                    if (!this.flag3 && this.flagFocus && entity != this.gem) {
-                        //Run through effect abilities - Check if they apply to the player only - Apply for each entity
-                        if (this.flag1) {
-                            System.out.println("Is effect ability");
-                            effectAbility = (IEffectAbility) ability;
-                            if (effectAbility.playerOnly()) {
-                                if (this.flagOwner) {
-                                    System.out.println("Is owner");
-                                    entity.addPotionEffect(effectAbility.effect());
-                                    System.out.println("Effect Ability Deployed On Player");
-                                }
-                            } else {
-                                System.out.println("Is not player only");
+                this.flagOwner = this.gem.isOwner(entity);
+                this.flagFocus = this.gem.focusCheck();
+                IEffectAbility effectAbility = null;
+                IAreaAbility areaAbility = null;
+                if (this.flagFocus && entity != this.gem) {
+                    //Run through effect abilities - Check if they apply to the player only - Apply for each entity
+                    if (this.flag1) {
+                        System.out.println("Is effect ability");
+                        effectAbility = (IEffectAbility) ability;
+                        if (effectAbility.playerOnly()) {
+                            if (this.flagOwner) {
+                                System.out.println("Is owner");
                                 entity.addPotionEffect(effectAbility.effect());
-                                System.out.println("Effect Ability Deployed");
+                                System.out.println("Effect Ability Deployed On Player");
                             }
+                        } else {
+                            System.out.println("Is not player only");
+                            entity.addPotionEffect(effectAbility.effect());
+                            System.out.println("Effect Ability Deployed");
                         }
-                        //Run through area abilities - Apply for each entity
-                        if (this.flag2) {
-                            System.out.println("Area ability");
-                            areaAbility = (IAreaAbility) ability;
-                            areaAbility.AOeffect(entity, this.gem.getOwnerID());
-                            System.out.println("AOE Ability Deployed");
-                        }
+                    }
+                    //Run through area abilities - Apply for each entity
+                    if (this.flag2) {
+                        System.out.println("Area ability");
+                        areaAbility = (IAreaAbility) ability;
+                        areaAbility.AOeffect(entity, this.gem.OWNERS);
+                        System.out.println("AOE Ability Deployed");
                     }
                 }
             }

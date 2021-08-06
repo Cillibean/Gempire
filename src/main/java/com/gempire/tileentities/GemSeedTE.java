@@ -11,10 +11,7 @@ import com.gempire.systems.injection.Crux;
 import com.gempire.systems.injection.GemConditions;
 import com.gempire.systems.injection.GemFormation;
 import com.mojang.datafixers.types.Type;
-import net.minecraft.block.AirBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
+import net.minecraft.block.*;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.item.TNTEntity;
@@ -26,6 +23,7 @@ import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
+import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
@@ -199,7 +197,11 @@ public class GemSeedTE extends TileEntity implements ITickableTileEntity {
                 TEMPORARY_WEIGHTS.get(i).add(0f);
             }
         }
-        if(!(block instanceof AirBlock)){
+        if(!(block instanceof AirBlock) &&
+                !(block.isTransparent(block.getDefaultState())) &&
+                !(block instanceof SlabBlock) &&
+                !(block instanceof BushBlock) &&
+                !(block instanceof SnowBlock)){
             if(block.getBlock() == ModBlocks.GEM_SEED_BLOCK.get() ||
                     block.getBlock() == ModBlocks.DRILL_BLOCK.get() || block.getBlock() == ModBlocks.TANK_BLOCK.get() ||
                     block.getBlock() == ModBlocks.POWER_CRYSTAL_BLOCK.get()){

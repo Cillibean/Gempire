@@ -4,9 +4,6 @@ import com.gempire.Gempire;
 import com.gempire.entities.abilities.base.Ability;
 import com.gempire.entities.abilities.AbilityZilch;
 import com.gempire.entities.abilities.interfaces.*;
-import com.gempire.entities.ai.EntityAIAreaAbility;
-import com.gempire.entities.ai.EntityAIWander;
-import com.gempire.entities.gems.EntityQuartz;
 import com.gempire.events.GemPoofEvent;
 import com.gempire.init.ModItems;
 import com.gempire.items.ItemGem;
@@ -16,10 +13,7 @@ import com.gempire.util.GemPlacements;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.ai.goal.Goal;
-import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.item.ItemEntity;
-import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.DyeItem;
 import net.minecraft.item.Item;
@@ -34,7 +28,6 @@ import net.minecraft.util.ActionResultType;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.text.*;
 import net.minecraft.world.DifficultyInstance;
@@ -48,14 +41,12 @@ import javax.annotation.Nullable;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 public abstract class EntityGem extends CreatureEntity implements IRangedAttackMob {
-    public static DataParameter<Optional<UUID>> OWNER_ID = EntityDataManager.<Optional<UUID>>createKey(EntityGem.class, DataSerializers.OPTIONAL_UNIQUE_ID);
+    //public static DataParameter<Optional<UUID>> OWNER_ID = EntityDataManager.<Optional<UUID>>createKey(EntityGem.class, DataSerializers.OPTIONAL_UNIQUE_ID);
     public static DataParameter<Boolean> OWNED = EntityDataManager.<Boolean>createKey(EntityGem.class, DataSerializers.BOOLEAN);
     public static final DataParameter<Boolean> PRIMARY = EntityDataManager.<Boolean>createKey(EntityGem.class, DataSerializers.BOOLEAN);
     public static final DataParameter<Boolean> DEFECTIVE = EntityDataManager.<Boolean>createKey(EntityGem.class, DataSerializers.BOOLEAN);
@@ -74,7 +65,9 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
     public static final DataParameter<Integer> ABILITY_SLOTS = EntityDataManager.<Integer>createKey(EntityGem.class, DataSerializers.VARINT);
     public static final DataParameter<String> ABILITIES = EntityDataManager.<String>createKey(EntityGem.class, DataSerializers.STRING);
     public static final DataParameter<Boolean> USES_AREA_ABILITIES = EntityDataManager.<Boolean>createKey(EntityGem.class, DataSerializers.BOOLEAN);
-    public static ArrayList<Ability> ABILITY_POWERS = new ArrayList<>();
+    public ArrayList<Ability> ABILITY_POWERS = new ArrayList<>();
+    public static ArrayList<UUID> OWNERS = new ArrayList<>();
+    public static UUID FOLLOW_ID;
 
     public byte movementType = 1;
     public byte emotionMeter = 0;
@@ -90,7 +83,7 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
 
     public EntityGem(EntityType<? extends CreatureEntity> type, World worldIn) {
         super(type, worldIn);
-        this.dataManager.register(EntityGem.OWNER_ID, Optional.ofNullable(UUID.randomUUID()));
+        //this.dataManager.register(EntityGem.OWNER_ID, Optional.ofNullable(UUID.randomUUID()));
         this.dataManager.register(EntityGem.OWNED, false);
         this.dataManager.register(EntityGem.PRIMARY, false);
         this.dataManager.register(EntityGem.DEFECTIVE, false);
@@ -133,6 +126,7 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
         this.setAbilityPowers(this.findAbilities(this.getAbilites()));
         this.addAbilityGoals();
         this.applyAttributeAbilities();
+        this.FOLLOW_ID = UUID.randomUUID();
         return super.onInitialSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
     }
 
@@ -142,7 +136,8 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
         compound.putString("abilities", this.getAbilites());
         compound.putBoolean("emotional", this.isEmotional());
         compound.putBoolean("isOwned", this.getOwned());
-        compound.putUniqueId("ownerID", this.getOwnerID());
+        this.writeOwners(compound);
+        compound.putUniqueId("followID", this.FOLLOW_ID);
         compound.putByte("movementType", this.getMovementType());
         compound.putInt("skinColorVariant", this.getSkinColorVariant());
         compound.putInt("skinColor", this.getSkinColor());
@@ -161,13 +156,21 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
         compound.putByte("emotionMeter", this.emotionMeter);
     }
 
+    public void writeOwners(CompoundNBT compound){
+        for(int i = 0; i < this.OWNERS.size(); i++){
+            compound.putUniqueId("owner" + i, this.OWNERS.get(i));
+        }
+        compound.putInt("ownerAmount", this.OWNERS.size());
+    }
+
     @Override
     public void read(CompoundNBT compound) {
         super.read(compound);
         this.setAbilites(compound.getString("abilities"));
         this.setEmotional(compound.getBoolean("emotional"));
         this.setIsOwned(compound.getBoolean("isOwned"));
-        if(compound.contains("ownerID")) this.setOwnerID(compound.getUniqueId("ownerID"));
+        this.readOwners(compound);
+        this.FOLLOW_ID = compound.getUniqueId("followID");
         this.setMovementType(compound.getByte("movementType"));
         this.setSkinColorVariant(compound.getInt("skinColorVariant"));
         this.setSkinColor(compound.getInt("skinColor"));
@@ -187,6 +190,13 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
         this.setAbilityPowers(this.findAbilities(compound.getString("abilities")));
         this.addAbilityGoals();
         this.applyAttributeAbilities();
+    }
+
+    public void readOwners(CompoundNBT compound){
+        int n = compound.getInt("ownerAmount");
+        for(int i = 0; i < n; i++){
+            this.OWNERS.add(compound.getUniqueId("owner" + i));
+        }
     }
 
     @Override
@@ -269,6 +279,7 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
             if(player.getHeldItemMainhand() == ItemStack.EMPTY) {
                 if (this.isOwner(player)) {
                     if (player.isSneaking()) {
+                        this.FOLLOW_ID = player.getUniqueID();
                         this.cycleMovementAI(player);
                     }
                 }
@@ -430,27 +441,44 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
     public void setOwned(boolean value, @Nullable UUID ID){
         this.dataManager.set(EntityGem.OWNED, value);
         if(value) {
-            this.dataManager.set(EntityGem.OWNER_ID, Optional.ofNullable(ID));
+            //this.dataManager.set(EntityGem.OWNER_ID, Optional.ofNullable(ID));
+            this.addOwner(ID);
         } else{
-            this.dataManager.set(EntityGem.OWNER_ID, Optional.ofNullable(UUID.randomUUID()));
+            this.addOwner(UUID.randomUUID());
         }
     }
 
-    public void setOwnerID(UUID ID){
-        this.dataManager.set(EntityGem.OWNER_ID, Optional.ofNullable(ID));
+    public void addOwner(UUID ID){
+        this.OWNERS.add(ID);
+    }
+
+    public void removeOwner(UUID ID){
+        for(int i = 0; i < this.OWNERS.size(); i++){
+            if(this.OWNERS.get(i).equals(ID)){
+                this.OWNERS.remove(i);
+                break;
+            }
+        }
     }
 
     public boolean getOwned(){
         return this.dataManager.get(EntityGem.OWNED);
     }
 
-    public UUID getOwnerID(){
+    /*public UUID getOwnerID(){
         return this.dataManager.get(EntityGem.OWNER_ID).get();
-    }
+    }*/
 
     public boolean isOwner(LivingEntity entity){
-        if(this.getOwnerID().equals(entity.getUniqueID())){
-            return true;
+        for(UUID uuid : this.OWNERS){
+            if(entity.getUniqueID().equals(uuid)) return true;
+        }
+        return false;
+    }
+
+    public boolean isOwner(UUID id){
+        for(UUID uuid : this.OWNERS){
+            if(id.equals(uuid)) return true;
         }
         return false;
     }

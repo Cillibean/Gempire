@@ -21,7 +21,7 @@ public class AbilityCryokinesis extends Ability implements IRangedAbility, IViol
 
     @Override
     public void attack(LivingEntity target, float distanceFactor) {
-        IceShardEntity snowballentity = new IceShardEntity(this.holder.world, this.holder);
+        SnowballEntity snowballentity = new SnowballEntity(this.holder.world, this.holder);
         double d0 = target.getPosYEye() - (double) 1.1F;
         double d1 = target.getPosX() - this.holder.getPosX();
         double d2 = d0 - snowballentity.getPosY();

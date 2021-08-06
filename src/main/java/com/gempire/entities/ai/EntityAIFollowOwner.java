@@ -5,13 +5,13 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.pathfinding.PathNodeType;
-import net.minecraft.util.math.BlockPos;
 
 import java.util.List;
+import java.util.UUID;
 
 public class EntityAIFollowOwner extends Goal {
     public EntityGem follower;
-    public LivingEntity owner;
+    public LivingEntity toFollow;
     public double speed;
 
     public EntityAIFollowOwner(EntityGem entityIn, double speedIn) {
@@ -21,38 +21,40 @@ public class EntityAIFollowOwner extends Goal {
 
     @Override
     public boolean shouldExecute() {
-        List<PlayerEntity> list = this.follower.world.<PlayerEntity>getEntitiesWithinAABB(PlayerEntity.class, this.follower.getBoundingBox().grow(20.0D, 10.0D, 20.0D));
+        List<LivingEntity> list = this.follower.world.<LivingEntity>getEntitiesWithinAABB(LivingEntity.class, this.follower.getBoundingBox().grow(20.0D, 10.0D, 20.0D));
         double maxDistance = Double.MAX_VALUE;
-        for (PlayerEntity entity : list) {
+        for (LivingEntity entity : list) {
             if (!entity.isSpectator() || !entity.isInvisible() && this.follower.isOwner(entity)) {
-                double newDistance = entity.getDistanceSq(this.follower);
-                if (newDistance <= maxDistance) {
-                    maxDistance = newDistance;
-                    this.owner = entity;
+                if(this.follower.FOLLOW_ID.equals(entity.getUniqueID())) {
+                    double newDistance = entity.getDistanceSq(this.follower);
+                    if (newDistance <= maxDistance) {
+                        maxDistance = newDistance;
+                        this.toFollow = entity;
+                    }
                 }
             }
         }
-        return this.owner != null && follower.getMovementType() == 2 && this.follower.getDistanceSq(this.owner) > Math.pow(3, 2);
+        return this.toFollow != null && follower.getMovementType() == 2 && this.follower.getDistanceSq(this.toFollow) > Math.pow(3, 2);
     }
 
     @Override
     public boolean shouldContinueExecuting() {
-        return this.owner != null && !this.follower.getNavigator().noPath() && this.follower.getMovementType() == 2 && this.follower.getDistanceSq(this.owner) > Math.pow(7, 2);
+        return this.toFollow != null && !this.follower.getNavigator().noPath() && this.follower.getMovementType() == 2 && this.follower.getDistanceSq(this.toFollow) > Math.pow(7, 2);
     }
 
     @Override
     public void startExecuting(){
         super.startExecuting();
         this.follower.setPathPriority(PathNodeType.WATER, 0);
-        this.follower.getNavigator().tryMoveToXYZ(this.owner.getPosX(), this.owner.getPosY(), this.owner.getPosZ(), this.speed);
-        if(this.follower.getDistanceSq(this.owner) > Math.pow(16, 2)){
-            this.follower.setPosition(this.owner.getPosX(), this.owner.getPosY(), this.owner.getPosZ());
+        this.follower.getNavigator().tryMoveToXYZ(this.toFollow.getPosX(), this.toFollow.getPosY(), this.toFollow.getPosZ(), this.speed);
+        if(this.follower.getDistanceSq(this.toFollow) > Math.pow(16, 2)){
+            this.follower.setPosition(this.toFollow.getPosX(), this.toFollow.getPosY(), this.toFollow.getPosZ());
         }
     }
 
     @Override
     public void resetTask() {
-        this.owner = null;
+        this.toFollow = null;
         this.follower.getNavigator().clearPath();
         this.follower.setPathPriority(PathNodeType.WATER, 0);
     }

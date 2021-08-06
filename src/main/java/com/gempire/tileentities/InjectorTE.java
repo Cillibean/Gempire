@@ -185,8 +185,8 @@ public class InjectorTE extends LockableLootTileEntity implements IFluidTank, IN
                 FluidTank tank = this.getTankFromValue(0);
                 if (tank.getFluid() != FluidStack.EMPTY) {
                     essences+="pink";
-                    if (tank.getFluidAmount() - 200 / portionToDrain > 0) {
-                        tank.getFluid().setAmount(tank.getFluidAmount() - 200);
+                    if (tank.getFluidAmount() - (200 / portionToDrain) > 0) {
+                        tank.getFluid().setAmount(tank.getFluidAmount() - (200 / portionToDrain));
                     } else {
                         tank.getFluid().setAmount(0);
                     }
@@ -201,8 +201,8 @@ public class InjectorTE extends LockableLootTileEntity implements IFluidTank, IN
                     else{
                         essences+="-blue";
                     }
-                    if (tank.getFluidAmount() - 200 / portionToDrain > 0) {
-                        tank.getFluid().setAmount(tank.getFluidAmount() - 200);
+                    if (tank.getFluidAmount() - (200 / portionToDrain) > 0) {
+                        tank.getFluid().setAmount(tank.getFluidAmount() - (200 / portionToDrain));
                     } else {
                         tank.getFluid().setAmount(0);
                     }
@@ -217,8 +217,8 @@ public class InjectorTE extends LockableLootTileEntity implements IFluidTank, IN
                     else{
                         essences+="-yellow";
                     }
-                    if (tank.getFluidAmount() - 200 / portionToDrain > 0) {
-                        tank.getFluid().setAmount(tank.getFluidAmount() - 200);
+                    if (tank.getFluidAmount() - (200 / portionToDrain) > 0) {
+                        tank.getFluid().setAmount(tank.getFluidAmount() - (200 / portionToDrain));
                     } else {
                         tank.getFluid().setAmount(0);
                     }
@@ -233,14 +233,14 @@ public class InjectorTE extends LockableLootTileEntity implements IFluidTank, IN
                     else{
                         essences+="-white";
                     }
-                    if (tank.getFluidAmount() - 200 / portionToDrain > 0) {
-                        tank.getFluid().setAmount(tank.getFluidAmount() - 200);
+                    if (tank.getFluidAmount() - (200 / portionToDrain) > 0) {
+                        tank.getFluid().setAmount(tank.getFluidAmount() - (200 / portionToDrain));
                     } else {
                         tank.getFluid().setAmount(0);
                     }
                 }
             }
-            BlockPos seedPos = this.getPos().add(new BlockPos(0, -Math.floor(GemSeedTE.DRAIN_SIZE / 2), 0));
+            BlockPos seedPos = this.getPos().add(new BlockPos(0, -Math.ceil(GemSeedTE.DRAIN_SIZE / 2) - 1, 0));
             while(this.world.getBlockState(seedPos) == Blocks.AIR.getDefaultState() ||
                     this.world.getBlockState(seedPos) == ModBlocks.GEM_SEED_BLOCK.get().getDefaultState()){
                 seedPos = seedPos.add(0, -GemSeedTE.DRAIN_SIZE, 0);

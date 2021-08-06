@@ -11,6 +11,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -31,10 +32,12 @@ public class AbilityStern extends Ability implements IAreaAbility, IEffectAbilit
     }
 
     @Override
-    public void AOeffect(Entity entity, UUID id) {
+    public void AOeffect(Entity entity, ArrayList<UUID> id) {
         if (entity instanceof EntityGem) {
-            if(((EntityGem)entity).getOwnerID() == id) ((EntityGem)entity).focusLevel = 1;
-            System.out.println("Gem focused");
+            for(UUID idd : id) {
+                if (((EntityGem) entity).isOwner(idd)) ((EntityGem) entity).focusLevel = 1;
+                System.out.println("Gem focused");
+            }
         }
     }
 
