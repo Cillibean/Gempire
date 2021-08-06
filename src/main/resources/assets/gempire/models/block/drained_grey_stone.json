@@ -1,6 +1,8 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "all": "gempire:blocks/drained_grey_stone"
+    "top": "gempire:blocks/drained_gray_stone_top",
+    "bottom": "gempire:blocks/drained_gray_stone_top",
+    "side": "gempire:blocks/drained_gray_stone"
   }
 }
