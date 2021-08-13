@@ -28,5 +28,7 @@ public class ModAbilities {
         Ability.ABILITY_FROM_ABILITIES.put(Abilities.UNHINGED, AbilityUnhinged.class);
 
         Ability.ABILITY_FROM_ABILITIES.put(Abilities.STERN, AbilityStern.class);
+
+        Ability.ABILITY_FROM_ABILITIES.put(Abilities.GUARD, AbilityGuard.class);
     }
 }

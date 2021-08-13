@@ -47,7 +47,8 @@ public enum Abilities {
     AQUAPHILE(43, 4),
     TERRAFORMER(44, 3),
     WATER_WALKING(45, 2),
-    ALCHEMIST(46, 4);
+    ALCHEMIST(46, 4),
+    GUARD(47, 2);
     public int id;
     public int weight;
     private static Abilities[] vals = Abilities.values();

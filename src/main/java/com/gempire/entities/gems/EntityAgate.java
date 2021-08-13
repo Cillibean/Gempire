@@ -43,7 +43,7 @@ public class EntityAgate extends AbstractQuartz {
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, MobEntity.class, 1, false, false, (p_234199_0_) -> {
             return p_234199_0_ instanceof IMob;
         }));
-        this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.1D, false));
+        this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.1D, false));
     }
 
     @Override

@@ -4,7 +4,6 @@ import com.gempire.Gempire;
 import com.gempire.client.entity.model.ModelQuartz;
 import com.gempire.client.entity.render.layers.*;
 import com.gempire.entities.gems.EntityJasper;
-import com.gempire.entities.gems.EntityQuartz;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;
@@ -15,7 +14,7 @@ public class RenderJasper extends MobRenderer<EntityJasper, ModelQuartz<EntityJa
     public RenderJasper(EntityRendererManager renderManagerIn) {
         super(renderManagerIn, new ModelQuartz<>(), .25f);
         this.addLayer(new SkinLayer(this));
-        this.addLayer(new QuartzMarkingLayer(this));
+        this.addLayer(new MarkingLayer(this));
         this.addLayer(new FaceLayer(this));
         this.addLayer(new OutfitLayer(this));
         this.addLayer(new InsigniaLayer(this));

@@ -3,45 +3,41 @@ package com.gempire.entities.gems;
 import com.gempire.entities.ai.EntityAIFollowOwner;
 import com.gempire.entities.ai.EntityAIWander;
 import com.gempire.entities.bases.EntityGem;
-import com.gempire.entities.gems.starter.EntityMica;
-import com.gempire.systems.injection.Crux;
 import com.gempire.util.Abilities;
-import com.gempire.util.Color;
-import com.gempire.util.CruxType;
 import com.gempire.util.GemPlacements;
-import net.minecraft.block.Blocks;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
-import net.minecraft.entity.monster.CaveSpiderEntity;
-import net.minecraft.entity.monster.CreeperEntity;
 import net.minecraft.entity.monster.IMob;
-import net.minecraft.entity.passive.CatEntity;
-import net.minecraft.entity.passive.OcelotEntity;
+import net.minecraft.entity.passive.PigEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.DifficultyInstance;
-import net.minecraft.world.IServerWorld;
+import net.minecraft.item.Items;
+import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import org.w3c.dom.Attr;
 
 import javax.annotation.Nullable;
-import java.util.ArrayList;
 
-public class EntityRuby extends EntityGem {
+public class EntityObsidian extends EntityGem implements IRideable {
 
-    public EntityRuby(EntityType<? extends CreatureEntity> type, World worldIn) {
+    public EntityObsidian(EntityType<? extends CreatureEntity> type, World worldIn) {
         super(type, worldIn);
     }
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
         return MobEntity.func_233666_p_()
-                .createMutableAttribute(Attributes.MAX_HEALTH, 50.0D)
-                .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.4D)
-                .createMutableAttribute(Attributes.ATTACK_DAMAGE, 5.0D)
-                .createMutableAttribute(Attributes.ATTACK_SPEED, 1.0D);
+                .createMutableAttribute(Attributes.MAX_HEALTH, 10.0D)
+                .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.3D)
+                .createMutableAttribute(Attributes.ATTACK_DAMAGE, 10.0D)
+                .createMutableAttribute(Attributes.ATTACK_SPEED, 1.5D)
+                .createMutableAttribute(net.minecraftforge.common.ForgeMod.SWIM_SPEED.get(), 0.3D);
     }
 
     @Override
@@ -76,39 +72,32 @@ public class EntityRuby extends EntityGem {
 
     @Override
     public int generateHairVariant() {
-        return this.rand.nextInt(3);
+        return 0;
     }
 
     @Override
     public int generateInsigniaColor() {
-        return 4;
+        return 0;
     }
 
     @Override
     public int generateOutfitColor() {
-        return 8;
+        return 7;
     }
 
     @Override
     public boolean hasOutfitPlacementVariant() {
-        return true;
-    }
-
-    @Override
-    public int[] outfitPlacementVariants() {
-        return new int[]{
-                11, 17
-        };
+        return false;
     }
 
     public Abilities[] possibleAbilities(){
         return new Abilities[]{
-                Abilities.KNOCKBACK, Abilities.PARALYSIS, Abilities.NO_ABILITY, Abilities.TANK, Abilities.BEEFCAKE, Abilities.POWERHOUSE, Abilities.UNHINGED
+                Abilities.KNOCKBACK, Abilities.PARALYSIS, Abilities.NO_ABILITY, Abilities.BEEFCAKE, Abilities.POWERHOUSE, Abilities.UNHINGED
         };
     }
     public Abilities[] definiteAbilities(){
         return new Abilities[]{
-                Abilities.PYROKINESIS
+                Abilities.CRYOKINESIS
         };
     }
 
@@ -123,7 +112,7 @@ public class EntityRuby extends EntityGem {
 
     @Override
     public byte EmotionThreshold() {
-        return 15;
+        return 25;
     }
 
     public boolean canChangeUniformColorByDefault() {
@@ -134,33 +123,55 @@ public class EntityRuby extends EntityGem {
         return true;
     }
 
-    @Override
-    public boolean isImmuneToFire(){
-        return true;
-    }
-
     public boolean hasSkinColorVariant(){
         return false;
     }
 
     public int generateOutfitVariant(){
-        return this.rand.nextInt(4);
+        return 0;
     }
 
     public int generateInsigniaVariant(){
-        boolean flag = false;
-        if(this.hasOutfitPlacementVariant()){
-            for(int i : this.outfitPlacementVariants()){
-                if(this.getGemPlacement() == i){
-                    flag = true;
-                }
-            }
-        }
-        return !flag ? this.getOutfitVariant() : 99;
+        return 0;
     }
 
     @Override
     public int baseFocus() {
-        return 7;
+        return 5;
+    }
+
+    @Override
+    public boolean hasMarkings() {
+        return true;
+    }
+
+    @Override
+    public boolean hasMarkings2() {
+        return false;
+    }
+
+    @Override
+    public int maxMarkings() {
+        return 1;
+    }
+
+    @Override
+    public int maxMarkings2() {
+        return 1;
+    }
+
+    @Override
+    public boolean isRideable() {
+        return true;
+    }
+
+    @Override
+    public boolean canWalkOnFluids() {
+        return true;
+    }
+
+    @Override
+    public boolean isImmuneToFire() {
+        return true;
     }
 }

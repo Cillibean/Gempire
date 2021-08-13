@@ -684,8 +684,8 @@ public class ModItems {
             new ItemGem(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
     public static final RegistryObject<Item> YELLOW_TOPAZ_GEM = ITEMS.register("topaz_gem_4", () ->
             new ItemGem(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> BLUE_TOPAZ_GEM = ITEMS.register("topaz_gem_6", () ->
+    public static final RegistryObject<Item> BLUE_TOPAZ_GEM = ITEMS.register("topaz_gem_11", () ->
             new ItemGem(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> PINK_TOPAZ_GEM = ITEMS.register("topaz_gem_11", () ->
+    public static final RegistryObject<Item> PINK_TOPAZ_GEM = ITEMS.register("topaz_gem_6", () ->
             new ItemGem(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
 }

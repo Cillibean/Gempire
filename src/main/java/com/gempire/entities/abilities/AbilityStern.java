@@ -36,7 +36,6 @@ public class AbilityStern extends Ability implements IAreaAbility, IEffectAbilit
         if (entity instanceof EntityGem) {
             for(UUID idd : id) {
                 if (((EntityGem) entity).isOwner(idd)) ((EntityGem) entity).focusLevel = 1;
-                System.out.println("Gem focused");
             }
         }
     }
@@ -44,7 +43,7 @@ public class AbilityStern extends Ability implements IAreaAbility, IEffectAbilit
 
     @Override
     public EffectInstance effect() {
-        return new EffectInstance(Effects.NIGHT_VISION, 200, 1);
+        return new EffectInstance(Effects.NIGHT_VISION, 400, 1);
     }
 
     @Override

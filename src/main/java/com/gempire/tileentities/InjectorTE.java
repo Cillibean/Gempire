@@ -8,10 +8,7 @@ import com.gempire.events.InjectEvent;
 import com.gempire.init.*;
 import com.gempire.items.ItemChroma;
 import com.gempire.networking.S2SSendGemSeedInfo;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.HorizontalBlock;
+import net.minecraft.block.*;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
@@ -39,6 +36,8 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.ForgeFlowingFluid;
+import net.minecraftforge.fluids.IFluidBlock;
 import net.minecraftforge.fluids.IFluidTank;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
@@ -242,6 +241,7 @@ public class InjectorTE extends LockableLootTileEntity implements IFluidTank, IN
             }
             BlockPos seedPos = this.getPos().add(new BlockPos(0, -Math.ceil(GemSeedTE.DRAIN_SIZE / 2) - 1, 0));
             while(this.world.getBlockState(seedPos) == Blocks.AIR.getDefaultState() ||
+                    this.world.getBlockState(seedPos).getBlock() instanceof FlowingFluidBlock ||
                     this.world.getBlockState(seedPos) == ModBlocks.GEM_SEED_BLOCK.get().getDefaultState()){
                 seedPos = seedPos.add(0, -GemSeedTE.DRAIN_SIZE, 0);
             }
@@ -250,9 +250,9 @@ public class InjectorTE extends LockableLootTileEntity implements IFluidTank, IN
             GemSeedBlock seedBlock = (GemSeedBlock) ModBlocks.GEM_SEED_BLOCK.get();
             this.world.setBlockState(seedPos, seedBlock.getDefaultState());
             GemSeedTE gemSeedTE = (GemSeedTE) this.world.getTileEntity(seedPos);
+            gemSeedTE.setEssences(essences);
             gemSeedTE.SetChroma(chroma);
             gemSeedTE.SetPrimer(primer);
-            gemSeedTE.setEssences(essences);
             int facing = InjectorTE.getFacingFromState(this.getBlockState());
             gemSeedTE.setFacing(facing);
             System.out.println("Facing :" + facing);

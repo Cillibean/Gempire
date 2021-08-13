@@ -1,11 +1,13 @@
 package com.gempire.client.entity.model;
 
+import com.gempire.entities.bases.EntityGem;
 import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import net.minecraft.client.renderer.entity.model.EntityModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -14,7 +16,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
  * Created using Tabula 8.0.0
  */
 @OnlyIn(Dist.CLIENT)
-public class Obsidian<T extends Entity> extends EntityModel<T> {
+public class ModelObsidian<T extends EntityGem> extends ModelGem<T> {
     public ModelRenderer Body;
     public ModelRenderer Waist;
     public ModelRenderer LeftArm;
@@ -23,12 +25,12 @@ public class Obsidian<T extends Entity> extends EntityModel<T> {
     public ModelRenderer LeftLeg;
     public ModelRenderer RightLeg;
 
-    public Obsidian() {
+    public ModelObsidian() {
         this.textureWidth = 104;
         this.textureHeight = 62;
         this.Head = new ModelRenderer(this, 46, 0);
-        this.Head.setRotationPoint(-1.0F, -13.0F, -1.4F);
-        this.Head.addBox(0.0F, 0.0F, 0.0F, 16.0F, 14.0F, 12.0F, 0.0F, 0.0F, 0.5F);
+        this.Head.setRotationPoint(1, -13.0F, .6f);
+        this.Head.addBox(-2.0F, 0.0F, -2F, 16.0F, 14.0F, 12.0F, 0.0F, 0.0F, 0.5F);
         this.RightArm = new ModelRenderer(this, 58, 25);
         this.RightArm.setRotationPoint(14.0F, 0.0F, 1.5F);
         this.RightArm.setTextureOffset(0, 1).addBox(0.0F, 0.0F, 0.0F, 6.0F, 17.0F, 6.0F, 0.0F, 0.0F, 0.0F);
@@ -63,7 +65,13 @@ public class Obsidian<T extends Entity> extends EntityModel<T> {
     }
 
     @Override
-    public void setRotationAngles(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {}
+    public void setRotationAngles(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+        this.setRotateAngle(this.Head, headPitch * 0.5f * ((float)Math.PI / 180F), netHeadYaw * .5f * ((float)Math.PI / 180F), 0);
+        this.setRotateAngle(this.LeftArm, MathHelper.cos(limbSwing * 0.5F + (float)Math.PI) * limbSwingAmount * 0.8f, 0, 0);
+        this.setRotateAngle(this.RightArm, MathHelper.cos(limbSwing * 0.5F)  * limbSwingAmount * 0.8f, 0, 0);
+        this.setRotateAngle(this.LeftLeg, MathHelper.cos(limbSwing * 0.5F) * limbSwingAmount * 0.8f, 0, 0);
+        this.setRotateAngle(this.RightLeg, MathHelper.cos(limbSwing * 0.5F + (float)Math.PI) * limbSwingAmount * 0.8f, 0, 0);
+    }
 
     /**
      * This is a helper function from Tabula to set the rotation of model parts

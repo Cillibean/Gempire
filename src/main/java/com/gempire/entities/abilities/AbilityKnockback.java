@@ -23,6 +23,6 @@ public class AbilityKnockback extends Ability implements IMeleeAbility, IViolent
         else{
             return;
         }
-        entity.applyKnockback(2F, 1, 1);
+        entity.applyKnockback(3F, 1, 1);
     }
 }

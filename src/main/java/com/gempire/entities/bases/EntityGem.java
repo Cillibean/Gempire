@@ -4,16 +4,20 @@ import com.gempire.Gempire;
 import com.gempire.entities.abilities.base.Ability;
 import com.gempire.entities.abilities.AbilityZilch;
 import com.gempire.entities.abilities.interfaces.*;
+import com.gempire.entities.gems.EntityObsidian;
 import com.gempire.events.GemPoofEvent;
 import com.gempire.init.ModItems;
 import com.gempire.items.ItemGem;
 import com.gempire.util.Abilities;
 import com.gempire.util.Color;
 import com.gempire.util.GemPlacements;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.FlowingFluidBlock;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.item.ItemEntity;
+import net.minecraft.entity.passive.PigEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.DyeItem;
 import net.minecraft.item.Item;
@@ -24,15 +28,20 @@ import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.particles.BasicParticleType;
 import net.minecraft.particles.ParticleTypes;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.text.*;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IServerWorld;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.RegistryObject;
 import org.apache.commons.lang3.ArrayUtils;
@@ -45,7 +54,7 @@ import java.util.ArrayList;
 import java.util.Optional;
 import java.util.UUID;
 
-public abstract class EntityGem extends CreatureEntity implements IRangedAttackMob {
+public abstract class EntityGem extends CreatureEntity implements IRangedAttackMob, IRideable {
     //public static DataParameter<Optional<UUID>> OWNER_ID = EntityDataManager.<Optional<UUID>>createKey(EntityGem.class, DataSerializers.OPTIONAL_UNIQUE_ID);
     public static DataParameter<Boolean> OWNED = EntityDataManager.<Boolean>createKey(EntityGem.class, DataSerializers.BOOLEAN);
     public static final DataParameter<Boolean> PRIMARY = EntityDataManager.<Boolean>createKey(EntityGem.class, DataSerializers.BOOLEAN);
@@ -65,9 +74,19 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
     public static final DataParameter<Integer> ABILITY_SLOTS = EntityDataManager.<Integer>createKey(EntityGem.class, DataSerializers.VARINT);
     public static final DataParameter<String> ABILITIES = EntityDataManager.<String>createKey(EntityGem.class, DataSerializers.STRING);
     public static final DataParameter<Boolean> USES_AREA_ABILITIES = EntityDataManager.<Boolean>createKey(EntityGem.class, DataSerializers.BOOLEAN);
+    public static final DataParameter<Integer> MARKING_COLOR = EntityDataManager.<Integer>createKey(EntityGem.class, DataSerializers.VARINT);
+    public static final DataParameter<Integer> MARKING_VARIANT = EntityDataManager.<Integer>createKey(EntityGem.class, DataSerializers.VARINT);
+    public static final DataParameter<Integer> MARKING_2_COLOR = EntityDataManager.<Integer>createKey(EntityGem.class, DataSerializers.VARINT);
+    public static final DataParameter<Integer> MARKING_2_VARIANT = EntityDataManager.<Integer>createKey(EntityGem.class, DataSerializers.VARINT);
+    public static final DataParameter<Boolean> SADDLED = EntityDataManager.createKey(EntityGem.class, DataSerializers.BOOLEAN);
+    public static final DataParameter<Integer> BOOST_TIME = EntityDataManager.createKey(EntityGem.class, DataSerializers.VARINT);
+    public static DataParameter<Boolean> HAS_VISOR = EntityDataManager.<Boolean>createKey(EntityGem.class, DataSerializers.BOOLEAN);
     public ArrayList<Ability> ABILITY_POWERS = new ArrayList<>();
-    public static ArrayList<UUID> OWNERS = new ArrayList<>();
-    public static UUID FOLLOW_ID;
+    public ArrayList<UUID> OWNERS = new ArrayList<>();
+    public UUID FOLLOW_ID;
+    public int[] GUARD_POS = new int[3];
+
+    private final BoostHelper booster = new BoostHelper(this.dataManager, BOOST_TIME, SADDLED);
 
     public byte movementType = 1;
     public byte emotionMeter = 0;
@@ -102,6 +121,14 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
         this.dataManager.register(EntityGem.ABILITY_SLOTS, 1);
         this.dataManager.register(EntityGem.ABILITIES, "-1");
         this.dataManager.register(EntityGem.USES_AREA_ABILITIES, false);
+        this.dataManager.register(EntityGem.HAS_VISOR, false);
+        this.dataManager.register(EntityGem.MARKING_COLOR, 0);
+        this.dataManager.register(EntityGem.MARKING_VARIANT, 0);
+        this.dataManager.register(EntityGem.MARKING_2_COLOR, 0);
+        this.dataManager.register(EntityGem.MARKING_2_VARIANT, 0);
+        this.dataManager.register(EntityGem.SADDLED, true);
+        this.dataManager.set(EntityGem.SADDLED, true);
+        this.dataManager.register(EntityGem.BOOST_TIME, 0);
     }
 
     @Nullable
@@ -127,6 +154,10 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
         this.addAbilityGoals();
         this.applyAttributeAbilities();
         this.FOLLOW_ID = UUID.randomUUID();
+        this.setMarkingVariant(this.generateMarkingVariant());
+        this.setMarkingColor(this.generateMarkingColor());
+        this.setMarking2Variant(this.generateMarking2Variant());
+        this.setMarking2Color(this.generateMarking2Color());
         return super.onInitialSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
     }
 
@@ -152,8 +183,13 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
         compound.putInt("insigniaVariant", this.getInsigniaVariant());
         compound.putInt("abilitySlots", this.getAbilitySlots());
         compound.putBoolean("usesAreaAbility", this.usesAreaAbilities());
+        compound.putIntArray("guardPos", this.GUARD_POS);
         compound.putInt("focusLevel", this.focusLevel);
         compound.putByte("emotionMeter", this.emotionMeter);
+        compound.putInt("markingVariant", this.getMarkingVariant());
+        compound.putInt("markingColor", this.getMarkingColor());
+        compound.putInt("marking2Variant", this.getMarking2Variant());
+        compound.putInt("marking2Color", this.getMarking2Color());
     }
 
     public void writeOwners(CompoundNBT compound){
@@ -188,11 +224,17 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
         this.focusLevel = compound.getInt("focusLevel");
         this.setMovementType(compound.getByte("movementType"));
         this.setAbilityPowers(this.findAbilities(compound.getString("abilities")));
+        this.GUARD_POS = compound.getIntArray("guardPos");
         this.addAbilityGoals();
         this.applyAttributeAbilities();
+        this.setMarkingVariant(compound.getInt("markingVariant"));
+        this.setMarkingColor(compound.getInt("markingColor"));
+        this.setMarking2Variant(compound.getInt("marking2Variant"));
+        this.setMarking2Color(compound.getInt("marking2Color"));
     }
 
     public void readOwners(CompoundNBT compound){
+        this.OWNERS = new ArrayList<>();
         int n = compound.getInt("ownerAmount");
         for(int i = 0; i < n; i++){
             this.OWNERS.add(compound.getUniqueId("owner" + i));
@@ -220,6 +262,7 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
             }
             this.focusCounter++;
         }
+        if (this.canWalkOnFluids()) this.adjustForFluids();
         super.livingTick();
     }
 
@@ -279,17 +322,25 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
             if(player.getHeldItemMainhand() == ItemStack.EMPTY) {
                 if (this.isOwner(player)) {
                     if (player.isSneaking()) {
-                        this.FOLLOW_ID = player.getUniqueID();
                         this.cycleMovementAI(player);
+                    }
+                    else {
+                        if(this.isRideable()){
+                            if(!this.isBeingRidden()){
+                                player.startRiding(this);
+                            }
+                        }
                     }
                 }
                 else {
                     //Test to see if the gem has an owner
                     if (!this.getOwned()) {
-                        this.setOwned(true, PlayerEntity.getUUID(player.getGameProfile()));
-                        this.setMovementType((byte) 2);
-                        player.sendMessage(new TranslationTextComponent("messages.gempire.entity.claimed"), this.getUniqueID());
-                        return super.applyPlayerInteraction(player, vec, hand);
+                        if(!this.isOwner(player)) {
+                            this.setOwned(true, PlayerEntity.getUUID(player.getGameProfile()));
+                            this.setMovementType((byte) 2);
+                            player.sendMessage(new TranslationTextComponent("messages.gempire.entity.claimed"), this.getUniqueID());
+                            return super.applyPlayerInteraction(player, vec, hand);
+                        }
                     }
                 }
             }
@@ -321,6 +372,7 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
     public void cycleMovementAI(PlayerEntity player){
         //Cycles through the various movement types.
         this.navigator.clearPath();
+        this.FOLLOW_ID = player.getUniqueID();
         if(this.getMovementType() < 2){
             this.addMovementType(1);
             switch(this.getMovementType()){
@@ -338,6 +390,9 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
         else if(this.getMovementType() == 2){
             this.setMovementType((byte) 0);
             player.sendMessage(new TranslationTextComponent("messages.gempire.entity.stay"), this.getUniqueID());
+            this.GUARD_POS[0] = (int) this.getPosX();
+            this.GUARD_POS[1] = (int) this.getPosY();
+            this.GUARD_POS[2] = (int) this.getPosZ();
             return;
         }
     }
@@ -387,11 +442,13 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
     @Override
     public void onDeath(DamageSource source){
         //When the Gem dies.
+        float f = (this.rand.nextFloat() - 0.5F) * 8.0F;
+        float f1 = (this.rand.nextFloat() - 0.5F) * 4.0F;
+        float f2 = (this.rand.nextFloat() - 0.5F) * 8.0F;
+        this.world.addParticle(ParticleTypes.EXPLOSION_EMITTER, this.getPosX() + (double)f, this.getPosY() + 2.0D + (double)f1, this.getPosZ() + (double)f2, 0.0D, 0.0D, 0.0D);
         if(!this.world.isRemote){
             GemPoofEvent event = new GemPoofEvent(this, this.getPosition(), source);
             MinecraftForge.EVENT_BUS.post(event);
-            BasicParticleType particle = ParticleTypes.EXPLOSION;
-            this.world.addOptionalParticle(particle, this.getPosX(), this.getPosY(), this.getPosZ(), 0, 0, 0);
             ItemStack stack = new ItemStack(this.getGemItem());
             ((ItemGem) stack.getItem()).setData(this, stack);
             ItemEntity item = new ItemEntity(this.world, this.getPosX(), this.getPosY(), this.getPosZ(), stack);
@@ -424,7 +481,6 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
     @Override
     protected void registerGoals() {
         super.registerGoals();
-        //this.goalSelector.addGoal(1, new EntityAIAreaAbility(this, 1.0D));
     }
 
     @Override
@@ -443,8 +499,6 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
         if(value) {
             //this.dataManager.set(EntityGem.OWNER_ID, Optional.ofNullable(ID));
             this.addOwner(ID);
-        } else{
-            this.addOwner(UUID.randomUUID());
         }
     }
 
@@ -536,6 +590,104 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
 
     public void setSkinVariant(int value){
         this.dataManager.set(EntityGem.SKIN_VARIANT, value);
+    }
+
+
+    public int generateMarkingVariant(){
+        return this.hasMarkings() ? this.rand.nextInt(this.maxMarkings()) : 0;
+    }
+
+    public int generateMarking2Variant(){
+        return this.hasMarkings2() ? this.rand.nextInt(this.maxMarkings2()) : 0;
+    }
+
+    public int generateMarkingColor(){
+        ArrayList<Integer> markings = new ArrayList<>();
+        if(this.hasMarkings()) {
+            ResourceLocation paletteTexture = new ResourceLocation(this.getModID() + ":textures/entity/" + this.getWholeGemName().toLowerCase() + "/palettes/marking_palette.png");
+            BufferedImage palette = null;
+            try {
+                palette = ImageIO.read(Minecraft.getInstance().getResourceManager().getResource(paletteTexture).getInputStream());
+                System.out.println("Palette Read!");
+                for (int x = 0; x < palette.getWidth(); x++) {
+                    int color = palette.getRGB(x, this.getSkinColorVariant());
+                    if ((color >> 24) == 0x00) {
+                        continue;
+                    }
+                    markings.add(color);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+                markings.add(0x00000);
+            }
+        }
+        return Color.lerpHex(markings);
+    }
+
+    public int generateMarking2Color(){
+        ArrayList<Integer> markings = new ArrayList<>();
+        if(this.hasMarkings2()) {
+            ResourceLocation paletteTexture = new ResourceLocation(this.getModID() + ":textures/entity/" + this.getWholeGemName().toLowerCase() + "/palettes/marking_2_palette.png");
+            BufferedImage palette = null;
+            try {
+                palette = ImageIO.read(Minecraft.getInstance().getResourceManager().getResource(paletteTexture).getInputStream());
+                System.out.println("Palette Read!");
+                for (int x = 0; x < palette.getWidth(); x++) {
+                    int color = palette.getRGB(x, this.getSkinColorVariant());
+                    if ((color >> 24) == 0x00) {
+                        continue;
+                    }
+                    markings.add(color);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+                markings.add(0x00000);
+            }
+        }
+        return Color.lerpHex(markings);
+    }
+
+    public boolean hasMarkings(){
+        return false;
+    }
+    public boolean hasMarkings2(){
+        return false;
+    }
+    public int maxMarkings(){
+        return 1;
+    }
+    public int maxMarkings2(){
+        return 1;
+    }
+
+    public void setMarkingColor(int color){
+        this.dataManager.set(EntityGem.MARKING_COLOR, color);
+    }
+
+    public int getMarkingColor(){
+        return this.dataManager.get(EntityGem.MARKING_COLOR);
+    }
+    public void setMarkingVariant(int value){
+        this.dataManager.set(EntityGem.MARKING_VARIANT, value);
+    }
+
+    public int getMarkingVariant(){
+        return this.dataManager.get(EntityGem.MARKING_VARIANT);
+    }
+
+    public void setMarking2Color(int color){
+        this.dataManager.set(EntityGem.MARKING_2_COLOR, color);
+    }
+
+    public int getMarking2Color(){
+        return this.dataManager.get(EntityGem.MARKING_2_COLOR);
+    }
+    public void setMarking2Variant(int value){
+        this.dataManager.set(EntityGem.MARKING_2_VARIANT, value);
+    }
+
+    public int getMarking2Variant(){
+        return this.dataManager.get(EntityGem.MARKING_2_VARIANT);
     }
 
     public int getGemPlacement(){
@@ -767,7 +919,6 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
             if(ability instanceof ITaskAbility){
                 if(((ITaskAbility)ability).targetTask()){
                     this.targetSelector.addGoal(2, ((ITaskAbility)ability).goal());
-                    System.out.println("DEBUG: ADDIN TARGET TASK UWU");
                 }
                 else{
                     this.goalSelector.addGoal(2, ((ITaskAbility)ability).goal());
@@ -863,6 +1014,18 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
         return this.dataManager.get(EntityGem.USES_AREA_ABILITIES);
     }
 
+    public void setHasVisor(boolean value){
+        this.dataManager.set(EntityGem.HAS_VISOR, value);
+    }
+
+    public boolean hasVisor(){
+        return this.dataManager.get(EntityGem.HAS_VISOR);
+    }
+
+    public boolean hasVisorCosmeticOnly(){
+        return false;
+    }
+
     public boolean isFocused(){
         return false;
     }
@@ -874,6 +1037,81 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
     public int baseFocus(){
         return 2;
     }
+
+    public boolean isRideable(){
+        return false;
+    }
+
+    public boolean canWalkOnFluids(){
+        return false;
+    }
+
+    @Override
+    public boolean boost() {
+        return booster.boost(this.getRNG());
+    }
+
+    public void travelTowards(Vector3d travelVec) {
+        if(this.getControllingPassenger() != null && this.getControllingPassenger() instanceof PlayerEntity){
+            double speed = ((PlayerEntity) this.getControllingPassenger()).moveForward;
+            double speedSwim = this.isSwimming() ? 10 : 1;
+            super.travel(travelVec.mul(speed,speed,speed).mul(speedSwim, speedSwim, speedSwim));
+        }
+        else{
+            super.travel(travelVec);
+        }
+    }
+
+    public void travel(Vector3d travelVector) {
+        this.ride(this, this.booster, travelVector);
+    }
+
+    @Nullable
+    public Entity getControllingPassenger() {
+        return this.getPassengers().isEmpty() ? null : this.getPassengers().get(0);
+    }
+
+    public boolean canBeSteered() {
+        Entity entity = this.getControllingPassenger();
+        if (!(entity instanceof PlayerEntity)) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public Vector3d func_241205_ce_() {
+        return new Vector3d(0.0D, (double)(0.8F * this.getEyeHeight()), (double)(this.getWidth() * 0.4F));
+    }
+
+    public float getMountedSpeed() {
+        return (float)this.getAttributeValue(Attributes.MOVEMENT_SPEED);
+    }
+
+    public void adjustForFluids() {
+        if(this.canWalkOnFluids()) {
+            if (this.isInWater() || this.isInLava()) {
+                ISelectionContext iselectioncontext = ISelectionContext.forEntity(this);
+                if (iselectioncontext.func_216378_a(FlowingFluidBlock.LAVA_COLLISION_SHAPE, this.getPosition(), true) && !this.world.getFluidState(this.getPosition().up()).isTagged(FluidTags.LAVA)
+                || iselectioncontext.func_216378_a(FlowingFluidBlock.LAVA_COLLISION_SHAPE, this.getPosition(), true) && !this.world.getFluidState(this.getPosition().up()).isTagged(FluidTags.WATER)) {
+                    this.onGround = true;
+                } else {
+                    this.setMotion(this.getMotion().scale(.5D).add(0.0D, 0.05D, 0.0D));
+                }
+            }
+        }
+    }
+
+    protected void updateFallState(double y, boolean onGroundIn, BlockState state, BlockPos pos) {
+        this.doBlockCollisions();
+        if (this.isInLava()) {
+            this.fallDistance = 0.0F;
+        } else {
+            super.updateFallState(y, onGroundIn, state, pos);
+        }
+    }
+
 
     //-------------------------------------------------------------------------------------------------------------------------------------------------------------//
 

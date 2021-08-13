@@ -3,19 +3,15 @@ package com.gempire.init;
 import com.gempire.Gempire;
 import com.gempire.entities.bases.EntityGem;
 import com.gempire.entities.gems.EntityAgate;
-import net.minecraft.client.Minecraft;
-import net.minecraft.entity.MobEntity;
+import com.gempire.items.ItemGem;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
-import net.minecraft.entity.monster.IMob;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.monster.MonsterEntity;
-import net.minecraft.entity.passive.OcelotEntity;
-import net.minecraftforge.client.event.RenderBlockOverlayEvent;
-import net.minecraftforge.event.entity.EntityEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = Gempire.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)

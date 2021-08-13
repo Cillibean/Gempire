@@ -10,7 +10,6 @@ import com.gempire.entities.gems.starter.EntityPebble;
 import com.gempire.entities.gems.starter.EntityShale;
 import com.gempire.init.*;
 import com.gempire.proxy.ClientProxy;
-import com.gempire.proxy.CommonProxy;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScreenManager;
@@ -20,9 +19,6 @@ import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
 import net.minecraft.loot.LootPool;
 import net.minecraft.loot.TableLootEntry;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.FlowersFeature;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.RegistryEvent;
@@ -38,7 +34,6 @@ import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.registries.ForgeRegistries;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -101,6 +96,12 @@ public class Gempire
         DeferredWorkQueue.runLater(() -> {
             GlobalEntityTypeAttributes.put(ModEntities.AGATE.get(), EntityAgate.setCustomAttributes().create());
         });
+        DeferredWorkQueue.runLater(() -> {
+            GlobalEntityTypeAttributes.put(ModEntities.TOPAZ.get(), EntityTopaz.setCustomAttributes().create());
+        });
+        DeferredWorkQueue.runLater(() -> {
+            GlobalEntityTypeAttributes.put(ModEntities.OBSIDIAN.get(), EntityObsidian.setCustomAttributes().create());
+        });
         ModEntities.setVanillaGems();
         ModEntities.registerCruxes();
         ModFluids.registerFluidBuckets();
@@ -159,6 +160,8 @@ public class Gempire
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.QUARTZ.get(), RenderQuartz::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.JASPER.get(), RenderJasper::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.AGATE.get(), RenderAgate::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.TOPAZ.get(), RenderTopaz::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.OBSIDIAN.get(), RenderObsidian::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.ICE_SHARD.get(), (manager) -> new RenderIceShard(manager, Minecraft.getInstance().getItemRenderer()));
 
         ScreenManager.registerFactory(ModContainers.TANK_CONTAINER.get(), TankScreen::new);

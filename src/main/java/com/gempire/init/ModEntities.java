@@ -2,28 +2,20 @@ package com.gempire.init;
 
 import com.gempire.Gempire;
 import com.gempire.entities.TestEntity;
-import com.gempire.entities.bases.EntityGem;
 import com.gempire.entities.gems.*;
 import com.gempire.entities.gems.starter.EntityMica;
 import com.gempire.entities.gems.starter.EntityPebble;
 import com.gempire.entities.gems.starter.EntityShale;
 import com.gempire.entities.projectiles.IceShardEntity;
-import com.gempire.systems.injection.Crux;
 import com.gempire.systems.injection.GemConditions;
 import com.gempire.systems.injection.GemFormation;
-import com.gempire.util.CruxType;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.projectile.SnowballEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
-import javax.print.DocFlavor;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ModEntities {
@@ -75,6 +67,16 @@ public class ModEntities {
                     .size(.7f, 1.9f) // Hitbox Size
                     .build(new ResourceLocation(Gempire.MODID, "agate").toString()));
 
+    public static final RegistryObject<EntityType<EntityTopaz>> TOPAZ = ENTITIES.register("topaz",
+            () -> EntityType.Builder.create(EntityTopaz::new, EntityClassification.CREATURE)
+                    .size(.95f, 1.9f) // Hitbox Size
+                    .build(new ResourceLocation(Gempire.MODID, "topaz").toString()));
+
+    public static final RegistryObject<EntityType<EntityObsidian>> OBSIDIAN = ENTITIES.register("obsidian",
+            () -> EntityType.Builder.create(EntityObsidian::new, EntityClassification.CREATURE)
+                    .size(.95f, 1.9f) // Hitbox Size
+                    .build(new ResourceLocation(Gempire.MODID, "obsidian").toString()));
+
     public static final RegistryObject<EntityType<IceShardEntity>> ICE_SHARD = ENTITIES.register("ice_shard", () -> {
         return EntityType.Builder.<IceShardEntity>create(IceShardEntity::new, EntityClassification.MISC)
                 .size(0.25F, 0.25F)
@@ -91,21 +93,27 @@ public class ModEntities {
         ModEntities.CRUXTOGEM.put("quartz", ModCruxes.QUARTZ_CONDITIONS());
         ModEntities.CRUXTOGEM.put("jasper", ModCruxes.JASPER_CONDITIONS());
         ModEntities.CRUXTOGEM.put("agate", ModCruxes.AGATE_CONDITIONS());
+        ModEntities.CRUXTOGEM.put("topaz", ModCruxes.TOPAZ_CONDITIONS());
+        ModEntities.CRUXTOGEM.put("obsidian", ModCruxes.OBSIDIAN_CONDITIONS());
         GemFormation.POSSIBLE_GEMS.add("ruby");
         GemFormation.POSSIBLE_GEMS.add("sapphire");
         GemFormation.POSSIBLE_GEMS.add("quartz");
         GemFormation.POSSIBLE_GEMS.add("jasper");
         GemFormation.POSSIBLE_GEMS.add("agate");
+        GemFormation.POSSIBLE_GEMS.add("topaz");
+        GemFormation.POSSIBLE_GEMS.add("obsidian");
     }
 
     public static void setVanillaGems(){
+        AddonHandler.VANILLA_GEMS.add("pebble");
+        AddonHandler.VANILLA_GEMS.add("mica");
+        AddonHandler.VANILLA_GEMS.add("shale");
         AddonHandler.VANILLA_GEMS.add("ruby");
         AddonHandler.VANILLA_GEMS.add("sapphire");
         AddonHandler.VANILLA_GEMS.add("quartz");
         AddonHandler.VANILLA_GEMS.add("jasper");
         AddonHandler.VANILLA_GEMS.add("agate");
-        AddonHandler.VANILLA_GEMS.add("pebble");
-        AddonHandler.VANILLA_GEMS.add("mica");
-        AddonHandler.VANILLA_GEMS.add("shale");
+        AddonHandler.VANILLA_GEMS.add("topaz");
+        AddonHandler.VANILLA_GEMS.add("obsidian");
     }
 }

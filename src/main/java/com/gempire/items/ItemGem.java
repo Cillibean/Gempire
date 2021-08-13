@@ -3,17 +3,18 @@ package com.gempire.items;
 import com.gempire.entities.bases.EntityGem;
 import com.gempire.entities.gems.starter.EntityPebble;
 import com.gempire.events.GemFormEvent;
-import com.gempire.events.GemPoofEvent;
 import com.gempire.init.AddonHandler;
 import com.gempire.init.ModEntities;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.item.ItemEntity;
+import net.minecraft.entity.passive.PandaEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUseContext;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
@@ -27,11 +28,16 @@ import org.apache.commons.lang3.ArrayUtils;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.List;
+import java.util.Random;
+import java.util.UUID;
 
 public class ItemGem extends Item {
     public String ID = "";
     int coundownMax = 600;
     int countdown = 600;
+    Random rand = new Random();
+    public boolean doEffect = false;
 
     public ItemGem(Properties properties) {
         super(properties);
@@ -157,9 +163,17 @@ public class ItemGem extends Item {
         return false;
     }
 
+
+
     public void setData(EntityGem host, ItemStack stack) {
         stack.setTag(host.writeWithoutTypeId(new CompoundNBT()));
         stack.getTag().putString("name", host.getName().getString());
+    }
+
+    @Override
+    public boolean onEntityItemUpdate(ItemStack stack, ItemEntity entity) {
+        this.Countdown(stack, entity);
+        return super.onEntityItemUpdate(stack, entity);
     }
 
     public void clearData(ItemStack stack) {
@@ -168,6 +182,13 @@ public class ItemGem extends Item {
 
     public void Countdown(ItemStack stack, ItemEntity entity){
         if(this.countdown > 0){
+            if(this.countdown < (int)Math.floor(this.coundownMax / 6)){
+                this.doEffect = true;
+                float f = (this.rand.nextFloat() - 0.5F) * 2.0F;
+                float f1 = (this.rand.nextFloat() - 0.5F) * 2.0F;
+                float f2 = (this.rand.nextFloat() - 0.5F) * 2.0F;
+                entity.world.addParticle(ParticleTypes.EXPLOSION_EMITTER, entity.getPosX() + (double)f, entity.getPosY() + 2.0D + (double)f1, entity.getPosZ() + (double)f2, 0.0D, 0.0D, 0.0D);
+            }
             this.countdown--;
         }
         else{

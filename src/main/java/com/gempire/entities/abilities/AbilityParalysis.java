@@ -44,7 +44,7 @@ public class AbilityParalysis extends Ability implements IMeleeAbility, IEffectA
     public void outburst() {
         List<CreatureEntity> entities = this.holder.world.<CreatureEntity>getEntitiesWithinAABB(CreatureEntity.class, this.holder.getBoundingBox().grow(20.0D, 10.0D, 20.0D));
         for(CreatureEntity entity : entities){
-            if(entity instanceof EntityGem){
+            if(entity instanceof EntityGem || ((EntityGem)this.holder).isOwner(entity)){
                 continue;
             }
             entity.addPotionEffect(new EffectInstance(Effects.SLOWNESS, 20 * 15, 99));

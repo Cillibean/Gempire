@@ -46,41 +46,31 @@ public class EntityAIAreaAbility extends Goal {
 
     @Override
     public void startExecuting(){
-        System.out.println("Ability List: " + this.abilities);
         for(Ability ability : this.gem.getAbilityPowers()){
             this.flag1 = ability instanceof IEffectAbility;
             this.flag2 = ability instanceof IAreaAbility;
-            //this.flag3 = ability instanceof IViolentAbility;
+            this.flag3 = ability instanceof IViolentAbility;
             for(LivingEntity entity : this.entities){
-                System.out.println("Entity Type: " + entity);
-                System.out.println("For Entity: Flag 1: " + this.flag1 + " - Flag 2: " + this.flag2 + " - Flag 3: " + this.flag3);
                 this.flagOwner = this.gem.isOwner(entity);
                 this.flagFocus = this.gem.focusCheck();
                 IEffectAbility effectAbility = null;
                 IAreaAbility areaAbility = null;
-                if (this.flagFocus && entity != this.gem) {
+                if (this.flagFocus && entity != this.gem && !this.flag3) {
                     //Run through effect abilities - Check if they apply to the player only - Apply for each entity
                     if (this.flag1) {
-                        System.out.println("Is effect ability");
                         effectAbility = (IEffectAbility) ability;
                         if (effectAbility.playerOnly()) {
                             if (this.flagOwner) {
-                                System.out.println("Is owner");
                                 entity.addPotionEffect(effectAbility.effect());
-                                System.out.println("Effect Ability Deployed On Player");
                             }
                         } else {
-                            System.out.println("Is not player only");
                             entity.addPotionEffect(effectAbility.effect());
-                            System.out.println("Effect Ability Deployed");
                         }
                     }
                     //Run through area abilities - Apply for each entity
                     if (this.flag2) {
-                        System.out.println("Area ability");
                         areaAbility = (IAreaAbility) ability;
                         areaAbility.AOeffect(entity, this.gem.OWNERS);
-                        System.out.println("AOE Ability Deployed");
                     }
                 }
             }
