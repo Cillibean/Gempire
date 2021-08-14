@@ -222,6 +222,15 @@ public class ModBlocks {
                     , 15)
     );
 
+    public static final RegistryObject<Block> ICE_SPIKE = BLOCKS.register("ice_spike", () ->
+            new IceSpikeBlock(Block.Properties
+                    .create(Material.ICE)
+                    .hardnessAndResistance(3.0f, 6.0f)
+                    .sound(SoundType.GLASS)
+                    .harvestLevel(2)
+                    .harvestTool(ToolType.PICKAXE))
+    );
+
 
     public static RegistryObject<FlowingFluidBlock> PINK_ESSENCE_BLOCK = BLOCKS.register("pink_essence_block", () ->
             new FlowingFluidBlock(ModFluids.PINK_ESSENCE, Block.Properties.create(Material.WATER).doesNotBlockMovement().hardnessAndResistance(100.0F).noDrops()));

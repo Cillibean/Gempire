@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "half=upper": {
+      "model": "gempire:block/ice_spike_upper"
+    },
+    "half=lower": {
+      "model": "gempire:block/ice_spike_lower"
+    }
+  }
+}

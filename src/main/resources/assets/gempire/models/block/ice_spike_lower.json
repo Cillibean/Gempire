@@ -1,0 +1,7 @@
+{
+  "parent": "block/cross",
+  "textures": {
+    "particle": "gempire:blocks/ice_spike_lower",
+    "cross": "gempire:blocks/ice_spike_lower"
+  }
+}

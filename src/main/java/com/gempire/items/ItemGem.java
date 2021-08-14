@@ -187,7 +187,7 @@ public class ItemGem extends Item {
                 float f = (this.rand.nextFloat() - 0.5F) * 2.0F;
                 float f1 = (this.rand.nextFloat() - 0.5F) * 2.0F;
                 float f2 = (this.rand.nextFloat() - 0.5F) * 2.0F;
-                entity.world.addParticle(ParticleTypes.EXPLOSION_EMITTER, entity.getPosX() + (double)f, entity.getPosY() + 2.0D + (double)f1, entity.getPosZ() + (double)f2, 0.0D, 0.0D, 0.0D);
+                entity.world.addParticle(ParticleTypes.EXPLOSION, entity.getPosX() + (double)f, entity.getPosY() + 2.0D + (double)f1, entity.getPosZ() + (double)f2, 0.0D, 0.0D, 0.0D);
             }
             this.countdown--;
         }

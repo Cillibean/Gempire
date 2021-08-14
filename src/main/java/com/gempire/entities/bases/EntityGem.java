@@ -445,7 +445,7 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
         float f = (this.rand.nextFloat() - 0.5F) * 8.0F;
         float f1 = (this.rand.nextFloat() - 0.5F) * 4.0F;
         float f2 = (this.rand.nextFloat() - 0.5F) * 8.0F;
-        this.world.addParticle(ParticleTypes.EXPLOSION_EMITTER, this.getPosX() + (double)f, this.getPosY() + 2.0D + (double)f1, this.getPosZ() + (double)f2, 0.0D, 0.0D, 0.0D);
+        this.world.addParticle(ParticleTypes.EXPLOSION_EMITTER, this.getPosX() , this.getPosY() + 2.0D, this.getPosZ(), 0.0D, 0.0D, 0.0D);
         if(!this.world.isRemote){
             GemPoofEvent event = new GemPoofEvent(this, this.getPosition(), source);
             MinecraftForge.EVENT_BUS.post(event);
@@ -543,7 +543,7 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
     }
 
     public void setMovementType(byte value){
-        //Sets the movement type variable.
+        //Sets the movement type variable.f
         this.movementType = value;
     }
 

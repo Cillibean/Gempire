@@ -23,4 +23,9 @@ public class AbilityLuck extends Ability implements IEffectAbility {
     public boolean playerOnly() {
         return true;
     }
+
+    @Override
+    public boolean gemAndPlayerOnly() {
+        return false;
+    }
 }

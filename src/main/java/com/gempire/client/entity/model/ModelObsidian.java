@@ -12,54 +12,48 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 /**
- * Obsidian - Undefined
+ * ModelObsidian - Pezzottaite
  * Created using Tabula 8.0.0
  */
 @OnlyIn(Dist.CLIENT)
 public class ModelObsidian<T extends EntityGem> extends ModelGem<T> {
+    public ModelRenderer Head;
+    public ModelRenderer RightArm;
+    public ModelRenderer LeftArm;
     public ModelRenderer Body;
     public ModelRenderer Waist;
-    public ModelRenderer LeftArm;
-    public ModelRenderer RightArm;
-    public ModelRenderer Head;
     public ModelRenderer LeftLeg;
     public ModelRenderer RightLeg;
 
     public ModelObsidian() {
-        this.textureWidth = 104;
-        this.textureHeight = 62;
-        this.Head = new ModelRenderer(this, 46, 0);
-        this.Head.setRotationPoint(1, -13.0F, .6f);
-        this.Head.addBox(-2.0F, 0.0F, -2F, 16.0F, 14.0F, 12.0F, 0.0F, 0.0F, 0.5F);
-        this.RightArm = new ModelRenderer(this, 58, 25);
-        this.RightArm.setRotationPoint(14.0F, 0.0F, 1.5F);
-        this.RightArm.setTextureOffset(0, 1).addBox(0.0F, 0.0F, 0.0F, 6.0F, 17.0F, 6.0F, 0.0F, 0.0F, 0.0F);
-        this.LeftLeg = new ModelRenderer(this, 82, 26);
-        this.LeftLeg.setRotationPoint(0.0F, 7.0F, 1.0F);
-        this.LeftLeg.setTextureOffset(0, 1).addBox(0.0F, 0.0F, 0.0F, 4.0F, 9.0F, 4.0F, 0.0F, 0.0F, 0.0F);
-        this.RightLeg = new ModelRenderer(this, 82, 39);
-        this.RightLeg.setRotationPoint(7.0F, 7.0F, 1.0F);
-        this.RightLeg.setTextureOffset(0, 1).addBox(0.0F, 0.0F, 0.0F, 4.0F, 9.0F, 4.0F, 0.0F, 0.0F, 0.0F);
-        this.LeftArm = new ModelRenderer(this, 34, 25);
-        this.LeftArm.setRotationPoint(-6.0F, 0.0F, 1.5F);
-        this.LeftArm.setTextureOffset(0, 1).addBox(0.0F, 0.0F, 0.0F, 6.0F, 17.0F, 6.0F, 0.0F, 0.0F, 0.0F);
-        this.Waist = new ModelRenderer(this, 0, 20);
-        this.Waist.setRotationPoint(1.5F, 11.0F, 1.5F);
-        this.Waist.addBox(0.0F, 0.0F, 0.0F, 11.0F, 7.0F, 6.0F, 0.0F, 0.0F, 0.0F);
+        this.textureWidth = 112;
+        this.textureHeight = 64;
+        this.LeftLeg = new ModelRenderer(this, 82, 27);
+        this.LeftLeg.setRotationPoint(-3.5F, 15.0F, 1.0F);
+        this.LeftLeg.addBox(-2.0F, 0.0F, -2.0F, 4.0F, 9.0F, 4.0F, 0.0F, 0.0F, 0.0F);
+        this.LeftArm = new ModelRenderer(this, 34, 26);
+        this.LeftArm.setRotationPoint(10.0F, -3.0F, 1.0F);
+        this.LeftArm.addBox(-3.0F, 0.0F, -3.0F, 6.0F, 17.0F, 6.0F, 0.0F, 0.0F, 0.0F);
         this.Body = new ModelRenderer(this, 0, 0);
-        this.Body.setRotationPoint(-7.0F, -3.0F, -4.0F);
-        this.Body.addBox(0.0F, 0.0F, 0.0F, 14.0F, 11.0F, 9.0F, 0.0F, 0.0F, 0.0F);
-        this.Body.addChild(this.Head);
-        this.Body.addChild(this.RightArm);
-        this.Waist.addChild(this.LeftLeg);
-        this.Waist.addChild(this.RightLeg);
-        this.Body.addChild(this.LeftArm);
-        this.Body.addChild(this.Waist);
+        this.Body.setRotationPoint(0.0F, -3.0F, 1.0F);
+        this.Body.addBox(-7.0F, 0.0F, -4.5F, 14.0F, 11.0F, 9.0F, 0.0F, 0.0F, 0.0F);
+        this.RightLeg = new ModelRenderer(this, 82, 40);
+        this.RightLeg.setRotationPoint(3.5F, 15.0F, 1.0F);
+        this.RightLeg.addBox(-2.0F, 0.0F, -2.0F, 4.0F, 9.0F, 4.0F, 0.0F, 0.0F, 0.0F);
+        this.Waist = new ModelRenderer(this, 0, 20);
+        this.Waist.setRotationPoint(0.0F, 8.0F, 1.0F);
+        this.Waist.addBox(-5.5F, 0.0F, -3.0F, 11.0F, 7.0F, 6.0F, 0.0F, 0.0F, 0.0F);
+        this.Head = new ModelRenderer(this, 46, 0);
+        this.Head.setRotationPoint(4F, -3.0F, 0F);
+        this.Head.addBox(-12.0F, -14.0F, -5.0F, 16.0F, 14.0F, 12.0F, 0.0F, 0.0F, 0.5F);
+        this.RightArm = new ModelRenderer(this, 58, 26);
+        this.RightArm.setRotationPoint(-10.0F, -3.0F, 1.0F);
+        this.RightArm.addBox(-3.0F, 0.0F, -3.0F, 6.0F, 17.0F, 6.0F, 0.0F, 0.0F, 0.0F);
     }
 
     @Override
     public void render(MatrixStack matrixStackIn, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) { 
-        ImmutableList.of(this.Body).forEach((modelRenderer) -> { 
+        ImmutableList.of(this.LeftLeg, this.LeftArm, this.Body, this.RightLeg, this.Waist, this.Head, this.RightArm).forEach((modelRenderer) -> { 
             modelRenderer.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
         });
     }

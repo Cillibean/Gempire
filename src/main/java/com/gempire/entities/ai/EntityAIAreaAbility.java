@@ -20,7 +20,7 @@ public class EntityAIAreaAbility extends Goal {
     public EntityGem gem;
     public World world;
     public double speed;
-    boolean flag1, flag2, flag3, flagOwner, flagFocus;
+    boolean flag1, flag2, flag3, flagOwner, flagFocus, flagGem, flagPlayer;
     List<LivingEntity> entities = null;
     ArrayList<Ability> abilities = null;
 
@@ -52,6 +52,8 @@ public class EntityAIAreaAbility extends Goal {
             this.flag3 = ability instanceof IViolentAbility;
             for(LivingEntity entity : this.entities){
                 this.flagOwner = this.gem.isOwner(entity);
+                this.flagGem = entity instanceof EntityGem;
+                this.flagPlayer = entity instanceof PlayerEntity;
                 this.flagFocus = this.gem.focusCheck();
                 IEffectAbility effectAbility = null;
                 IAreaAbility areaAbility = null;
@@ -60,10 +62,23 @@ public class EntityAIAreaAbility extends Goal {
                     if (this.flag1) {
                         effectAbility = (IEffectAbility) ability;
                         if (effectAbility.playerOnly()) {
-                            if (this.flagOwner) {
+                            if (this.flagPlayer) {
+                                if(this.flagOwner) {
+                                    entity.addPotionEffect(effectAbility.effect());
+                                }
+                            }
+                        }
+                        else if(effectAbility.gemAndPlayerOnly()){
+                            if(this.flagGem){
                                 entity.addPotionEffect(effectAbility.effect());
                             }
-                        } else {
+                            if(this.flagPlayer){
+                                if(this.flagOwner){
+                                    entity.addPotionEffect(effectAbility.effect());
+                                }
+                            }
+                        }
+                        else {
                             entity.addPotionEffect(effectAbility.effect());
                         }
                     }

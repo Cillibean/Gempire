@@ -119,7 +119,7 @@ public class GemSeedTE extends TileEntity implements ITickableTileEntity {
             for (int y = GemFormation.getHalfMiddleOffsetLeft(volume.getY()); y < yo; y++) {
                 for (int x = GemFormation.getHalfMiddleOffsetLeft(volume.getX()); x < xo; x++) {
                     BlockPos block = position.add(new BlockPos(x, y, z));
-                    if (domhain.getBlockState(block).getBlock() instanceof AirBlock || this.world.isOutsideBuildHeight(block)) {
+                    if (domhain.getBlockState(block).getBlock() instanceof FlowingFluidBlock || domhain.getBlockState(block).getBlock() instanceof AirBlock || this.world.isOutsideBuildHeight(block)) {
                         continue;
                     } else {
                         this.POSITIONS.put(id, block);

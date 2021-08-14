@@ -50,4 +50,9 @@ public class AbilityStern extends Ability implements IAreaAbility, IEffectAbilit
     public boolean playerOnly() {
         return false;
     }
+
+    @Override
+    public boolean gemAndPlayerOnly() {
+        return true;
+    }
 }

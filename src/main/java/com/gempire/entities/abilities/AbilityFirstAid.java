@@ -21,4 +21,9 @@ public class AbilityFirstAid extends Ability implements IEffectAbility {
     public boolean playerOnly() {
         return false;
     }
+
+    @Override
+    public boolean gemAndPlayerOnly() {
+        return true;
+    }
 }

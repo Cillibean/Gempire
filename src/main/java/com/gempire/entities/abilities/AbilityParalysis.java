@@ -55,4 +55,9 @@ public class AbilityParalysis extends Ability implements IMeleeAbility, IEffectA
     public boolean playerOnly() {
         return false;
     }
+
+    @Override
+    public boolean gemAndPlayerOnly() {
+        return false;
+    }
 }

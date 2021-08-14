@@ -34,6 +34,8 @@
   "block.gempire.yellow_essence": "Yellow Essence",
   "block.gempire.white_essence": "White Essence",
 
+  "block.gempire.ice_spike": "Ice Spike",
+
   "block.gempire.white_chroma_crystal": "White Chroma Crystal",
   "block.gempire.orange_chroma_crystal": "Orange Chroma Crystal",
   "block.gempire.magenta_chroma_crystal": "Magenta Chroma Crystal",
@@ -268,9 +270,14 @@
 
   "entity.gempire.pebble": "Pebble",
   "entity.gempire.mica": "Mica",
-  "entity.gempire.ruby": "Ruby",
   "entity.gempire.shale": "Shale",
+  "entity.gempire.ruby": "Ruby",
   "entity.gempire.sapphire": "Sapphire",
+  "entity.gempire.quartz": "Quartz",
+  "entity.gempire.jasper": "Jasper",
+  "entity.gempire.agate": "Agate",
+  "entity.gempire.topaz": "Topaz",
+  "entity.gempire.obsidian": "Obsidian",
 
   "messages.gempire.entity.claimed": "This Gem now belongs to you!",
   "messages.gempire.entity.follow": "This Gem will now follow you.",

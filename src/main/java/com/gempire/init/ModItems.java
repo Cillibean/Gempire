@@ -115,6 +115,13 @@ public class ModItems {
             )
     );
 
+    public static final RegistryObject<Item> ICE_SPIKE = ITEMS.register("ice_spike", () ->
+            new BlockItem(
+                    ModBlocks.ICE_SPIKE.get(),
+                    new Item.Properties().group(ModItemGroup.BLOCKS)
+            )
+    );
+
 
 
     public static final RegistryObject<Item> DRAINED_BLUE_SOIL = ITEMS.register("drained_blue_soil", () ->

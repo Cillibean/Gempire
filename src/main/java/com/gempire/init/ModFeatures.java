@@ -18,53 +18,53 @@ import java.util.*;
 public class ModFeatures {
 
     public static void addOres(final BiomeLoadingEvent event){
-        addCrystal(event, ModBlocks.WHITE_CHROMA_CRYSTAL.get().getDefaultState().with(ChromaBlock.FACING, Direction.UP), 0, 60, 2);
-        addCrystal(event, ModBlocks.WHITE_CHROMA_CRYSTAL.get().getDefaultState().with(ChromaBlock.FACING, Direction.DOWN), 0, 60, 2);
+        addCrystal(event, ModBlocks.WHITE_CHROMA_CRYSTAL.get().getDefaultState().with(ChromaBlock.FACING, Direction.UP), 0, 60, 1);
+        addCrystal(event, ModBlocks.WHITE_CHROMA_CRYSTAL.get().getDefaultState().with(ChromaBlock.FACING, Direction.DOWN), 0, 60, 1);
 
-        addCrystal(event, ModBlocks.ORANGE_CHROMA_CRYSTAL.get().getDefaultState().with(ChromaBlock.FACING, Direction.UP), 0, 60, 2);
-        addCrystal(event, ModBlocks.ORANGE_CHROMA_CRYSTAL.get().getDefaultState().with(ChromaBlock.FACING, Direction.DOWN), 0, 60, 2);
+        addCrystal(event, ModBlocks.ORANGE_CHROMA_CRYSTAL.get().getDefaultState().with(ChromaBlock.FACING, Direction.UP), 0, 60, 1);
+        addCrystal(event, ModBlocks.ORANGE_CHROMA_CRYSTAL.get().getDefaultState().with(ChromaBlock.FACING, Direction.DOWN), 0, 60, 1);
 
-        addCrystal(event, ModBlocks.MAGENTA_CHROMA_CRYSTAL.get().getDefaultState().with(ChromaBlock.FACING, Direction.UP), 0, 60, 2);
-        addCrystal(event, ModBlocks.MAGENTA_CHROMA_CRYSTAL.get().getDefaultState().with(ChromaBlock.FACING, Direction.DOWN), 0, 60, 2);
+        addCrystal(event, ModBlocks.MAGENTA_CHROMA_CRYSTAL.get().getDefaultState().with(ChromaBlock.FACING, Direction.UP), 0, 60, 1);
+        addCrystal(event, ModBlocks.MAGENTA_CHROMA_CRYSTAL.get().getDefaultState().with(ChromaBlock.FACING, Direction.DOWN), 0, 60, 1);
 
-        addCrystal(event, ModBlocks.LIGHT_BLUE_CHROMA_CRYSTAL.get().getDefaultState().with(ChromaBlock.FACING, Direction.UP), 0, 60, 2);
-        addCrystal(event, ModBlocks.LIGHT_BLUE_CHROMA_CRYSTAL.get().getDefaultState().with(ChromaBlock.FACING, Direction.DOWN), 0, 60, 2);
+        addCrystal(event, ModBlocks.LIGHT_BLUE_CHROMA_CRYSTAL.get().getDefaultState().with(ChromaBlock.FACING, Direction.UP), 0, 60, 1);
+        addCrystal(event, ModBlocks.LIGHT_BLUE_CHROMA_CRYSTAL.get().getDefaultState().with(ChromaBlock.FACING, Direction.DOWN), 0, 60, 1);
 
-        addCrystal(event, ModBlocks.YELLOW_CHROMA_CRYSTAL.get().getDefaultState().with(ChromaBlock.FACING, Direction.UP), 0, 60, 2);
-        addCrystal(event, ModBlocks.YELLOW_CHROMA_CRYSTAL.get().getDefaultState().with(ChromaBlock.FACING, Direction.DOWN), 0, 60, 2);
+        addCrystal(event, ModBlocks.YELLOW_CHROMA_CRYSTAL.get().getDefaultState().with(ChromaBlock.FACING, Direction.UP), 0, 60, 1);
+        addCrystal(event, ModBlocks.YELLOW_CHROMA_CRYSTAL.get().getDefaultState().with(ChromaBlock.FACING, Direction.DOWN), 0, 60, 1);
 
-        addCrystal(event, ModBlocks.LIME_CHROMA_CRYSTAL.get().getDefaultState().with(ChromaBlock.FACING, Direction.UP), 0, 60, 2);
-        addCrystal(event, ModBlocks.LIME_CHROMA_CRYSTAL.get().getDefaultState().with(ChromaBlock.FACING, Direction.DOWN), 0, 60, 2);
+        addCrystal(event, ModBlocks.LIME_CHROMA_CRYSTAL.get().getDefaultState().with(ChromaBlock.FACING, Direction.UP), 0, 60, 1);
+        addCrystal(event, ModBlocks.LIME_CHROMA_CRYSTAL.get().getDefaultState().with(ChromaBlock.FACING, Direction.DOWN), 0, 60, 1);
 
-        addCrystal(event, ModBlocks.PINK_CHROMA_CRYSTAL.get().getDefaultState().with(ChromaBlock.FACING, Direction.UP), 0, 60, 2);
-        addCrystal(event, ModBlocks.PINK_CHROMA_CRYSTAL.get().getDefaultState().with(ChromaBlock.FACING, Direction.DOWN), 0, 60, 2);
+        addCrystal(event, ModBlocks.PINK_CHROMA_CRYSTAL.get().getDefaultState().with(ChromaBlock.FACING, Direction.UP), 0, 60, 1);
+        addCrystal(event, ModBlocks.PINK_CHROMA_CRYSTAL.get().getDefaultState().with(ChromaBlock.FACING, Direction.DOWN), 0, 60, 1);
 
-        addCrystal(event, ModBlocks.GRAY_CHROMA_CRYSTAL.get().getDefaultState().with(ChromaBlock.FACING, Direction.UP), 0, 60, 2);
-        addCrystal(event, ModBlocks.GRAY_CHROMA_CRYSTAL.get().getDefaultState().with(ChromaBlock.FACING, Direction.DOWN), 0, 60, 2);
+        addCrystal(event, ModBlocks.GRAY_CHROMA_CRYSTAL.get().getDefaultState().with(ChromaBlock.FACING, Direction.UP), 0, 60, 1);
+        addCrystal(event, ModBlocks.GRAY_CHROMA_CRYSTAL.get().getDefaultState().with(ChromaBlock.FACING, Direction.DOWN), 0, 60, 1);
 
-        addCrystal(event, ModBlocks.LIGHT_GRAY_CHROMA_CRYSTAL.get().getDefaultState().with(ChromaBlock.FACING, Direction.UP), 0, 60, 2);
-        addCrystal(event, ModBlocks.LIGHT_GRAY_CHROMA_CRYSTAL.get().getDefaultState().with(ChromaBlock.FACING, Direction.DOWN), 0, 60, 2);
+        addCrystal(event, ModBlocks.LIGHT_GRAY_CHROMA_CRYSTAL.get().getDefaultState().with(ChromaBlock.FACING, Direction.UP), 0, 60, 1);
+        addCrystal(event, ModBlocks.LIGHT_GRAY_CHROMA_CRYSTAL.get().getDefaultState().with(ChromaBlock.FACING, Direction.DOWN), 0, 60, 1);
 
-        addCrystal(event, ModBlocks.CYAN_CHROMA_CRYSTAL.get().getDefaultState().with(ChromaBlock.FACING, Direction.UP), 0, 60, 2);
-        addCrystal(event, ModBlocks.CYAN_CHROMA_CRYSTAL.get().getDefaultState().with(ChromaBlock.FACING, Direction.DOWN), 0, 60, 2);
+        addCrystal(event, ModBlocks.CYAN_CHROMA_CRYSTAL.get().getDefaultState().with(ChromaBlock.FACING, Direction.UP), 0, 60, 1);
+        addCrystal(event, ModBlocks.CYAN_CHROMA_CRYSTAL.get().getDefaultState().with(ChromaBlock.FACING, Direction.DOWN), 0, 60, 1);
 
-        addCrystal(event, ModBlocks.PURPLE_CHROMA_CRYSTAL.get().getDefaultState().with(ChromaBlock.FACING, Direction.UP), 0, 60, 2);
-        addCrystal(event, ModBlocks.PURPLE_CHROMA_CRYSTAL.get().getDefaultState().with(ChromaBlock.FACING, Direction.DOWN), 0, 60, 2);
+        addCrystal(event, ModBlocks.PURPLE_CHROMA_CRYSTAL.get().getDefaultState().with(ChromaBlock.FACING, Direction.UP), 0, 60, 1);
+        addCrystal(event, ModBlocks.PURPLE_CHROMA_CRYSTAL.get().getDefaultState().with(ChromaBlock.FACING, Direction.DOWN), 0, 60, 1);
 
-        addCrystal(event, ModBlocks.BLUE_CHROMA_CRYSTAL.get().getDefaultState().with(ChromaBlock.FACING, Direction.UP), 0, 60, 2);
-        addCrystal(event, ModBlocks.BLUE_CHROMA_CRYSTAL.get().getDefaultState().with(ChromaBlock.FACING, Direction.DOWN), 0, 60, 2);
+        addCrystal(event, ModBlocks.BLUE_CHROMA_CRYSTAL.get().getDefaultState().with(ChromaBlock.FACING, Direction.UP), 0, 60, 1);
+        addCrystal(event, ModBlocks.BLUE_CHROMA_CRYSTAL.get().getDefaultState().with(ChromaBlock.FACING, Direction.DOWN), 0, 60, 1);
 
-        addCrystal(event, ModBlocks.BROWN_CHROMA_CRYSTAL.get().getDefaultState().with(ChromaBlock.FACING, Direction.UP), 0, 60, 2);
-        addCrystal(event, ModBlocks.BROWN_CHROMA_CRYSTAL.get().getDefaultState().with(ChromaBlock.FACING, Direction.DOWN), 0, 60, 2);
+        addCrystal(event, ModBlocks.BROWN_CHROMA_CRYSTAL.get().getDefaultState().with(ChromaBlock.FACING, Direction.UP), 0, 60, 1);
+        addCrystal(event, ModBlocks.BROWN_CHROMA_CRYSTAL.get().getDefaultState().with(ChromaBlock.FACING, Direction.DOWN), 0, 60, 1);
 
-        addCrystal(event, ModBlocks.GREEN_CHROMA_CRYSTAL.get().getDefaultState().with(ChromaBlock.FACING, Direction.UP), 0, 60, 2);
-        addCrystal(event, ModBlocks.GREEN_CHROMA_CRYSTAL.get().getDefaultState().with(ChromaBlock.FACING, Direction.DOWN), 0, 60, 2);
+        addCrystal(event, ModBlocks.GREEN_CHROMA_CRYSTAL.get().getDefaultState().with(ChromaBlock.FACING, Direction.UP), 0, 60, 1);
+        addCrystal(event, ModBlocks.GREEN_CHROMA_CRYSTAL.get().getDefaultState().with(ChromaBlock.FACING, Direction.DOWN), 0, 60, 1);
 
-        addCrystal(event, ModBlocks.RED_CHROMA_CRYSTAL.get().getDefaultState().with(ChromaBlock.FACING, Direction.UP), 0, 60, 2);
-        addCrystal(event, ModBlocks.RED_CHROMA_CRYSTAL.get().getDefaultState().with(ChromaBlock.FACING, Direction.DOWN), 0, 60, 2);
+        addCrystal(event, ModBlocks.RED_CHROMA_CRYSTAL.get().getDefaultState().with(ChromaBlock.FACING, Direction.UP), 0, 60, 1);
+        addCrystal(event, ModBlocks.RED_CHROMA_CRYSTAL.get().getDefaultState().with(ChromaBlock.FACING, Direction.DOWN), 0, 60, 1);
 
-        addCrystal(event, ModBlocks.BLACK_CHROMA_CRYSTAL.get().getDefaultState().with(ChromaBlock.FACING, Direction.UP), 0, 60, 2);
-        addCrystal(event, ModBlocks.BLACK_CHROMA_CRYSTAL.get().getDefaultState().with(ChromaBlock.FACING, Direction.DOWN), 0, 60, 2);
+        addCrystal(event, ModBlocks.BLACK_CHROMA_CRYSTAL.get().getDefaultState().with(ChromaBlock.FACING, Direction.UP), 0, 60, 1);
+        addCrystal(event, ModBlocks.BLACK_CHROMA_CRYSTAL.get().getDefaultState().with(ChromaBlock.FACING, Direction.DOWN), 0, 60, 1);
     }
 
     public static void addCrystal(final BiomeLoadingEvent event, BlockState state, int minHeight, int maxHeight, int amount){
