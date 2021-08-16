@@ -67,7 +67,7 @@ public class InjectorContainer extends Container {
 
     public static InjectorTE getTileEntity(PlayerInventory playerInventory, PacketBuffer extraData){
         Objects.requireNonNull(playerInventory, "Player Inventory can not be null");
-        Objects.requireNonNull(playerInventory, "Data Packet can not be null");
+        Objects.requireNonNull(extraData, "Data Packet can not be null");
         TileEntity te = playerInventory.player.world.getTileEntity(extraData.readBlockPos());
         if(te instanceof InjectorTE){
             return (InjectorTE)te;

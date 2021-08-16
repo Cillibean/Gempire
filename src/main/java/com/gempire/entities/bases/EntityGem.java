@@ -1,6 +1,8 @@
 package com.gempire.entities.bases;
 
 import com.gempire.Gempire;
+import com.gempire.container.GemUIContainer;
+import com.gempire.container.InjectorContainer;
 import com.gempire.entities.abilities.base.Ability;
 import com.gempire.entities.abilities.AbilityZilch;
 import com.gempire.entities.abilities.interfaces.*;
@@ -8,9 +10,11 @@ import com.gempire.entities.gems.EntityObsidian;
 import com.gempire.events.GemPoofEvent;
 import com.gempire.init.ModItems;
 import com.gempire.items.ItemGem;
+import com.gempire.tileentities.InjectorTE;
 import com.gempire.util.Abilities;
 import com.gempire.util.Color;
 import com.gempire.util.GemPlacements;
+import com.google.common.collect.ImmutableList;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FlowingFluidBlock;
 import net.minecraft.client.Minecraft;
@@ -19,20 +23,23 @@ import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.passive.PigEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.DyeItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.IInventoryChangedListener;
+import net.minecraft.inventory.ItemStackHelper;
+import net.minecraft.inventory.container.Container;
+import net.minecraft.inventory.container.INamedContainerProvider;
+import net.minecraft.item.*;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.network.PacketBuffer;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.particles.BasicParticleType;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.Hand;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.vector.Vector3d;
@@ -44,17 +51,17 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.fml.network.NetworkHooks;
 import org.apache.commons.lang3.ArrayUtils;
 
 import javax.annotation.Nullable;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
+import java.util.function.Consumer;
 
-public abstract class EntityGem extends CreatureEntity implements IRangedAttackMob, IRideable {
+public abstract class EntityGem extends CreatureEntity implements IRangedAttackMob, IRideable, IInventory, INamedContainerProvider, IInventoryChangedListener {
     //public static DataParameter<Optional<UUID>> OWNER_ID = EntityDataManager.<Optional<UUID>>createKey(EntityGem.class, DataSerializers.OPTIONAL_UNIQUE_ID);
     public static DataParameter<Boolean> OWNED = EntityDataManager.<Boolean>createKey(EntityGem.class, DataSerializers.BOOLEAN);
     public static final DataParameter<Boolean> PRIMARY = EntityDataManager.<Boolean>createKey(EntityGem.class, DataSerializers.BOOLEAN);
@@ -99,6 +106,10 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
     public int maxFocusCounter = 100;
 
     public int focusLevel = 2;
+
+    public static final int NUMBER_OF_SLOTS = 31;
+    public NonNullList<ItemStack> items = NonNullList.withSize(EntityGem.NUMBER_OF_SLOTS, ItemStack.EMPTY);
+
 
     public EntityGem(EntityType<? extends CreatureEntity> type, World worldIn) {
         super(type, worldIn);
@@ -162,6 +173,11 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
     }
 
     @Override
+    public boolean canEquipItem(ItemStack stack) {
+        return stack.getItem() instanceof ArmorItem ||  stack.getItem() instanceof ToolItem;
+    }
+
+    @Override
     public void writeAdditional(CompoundNBT compound) {
         super.writeAdditional(compound);
         compound.putString("abilities", this.getAbilites());
@@ -190,6 +206,7 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
         compound.putInt("markingColor", this.getMarkingColor());
         compound.putInt("marking2Variant", this.getMarking2Variant());
         compound.putInt("marking2Color", this.getMarking2Color());
+        ItemStackHelper.saveAllItems(compound, this.items);
     }
 
     public void writeOwners(CompoundNBT compound){
@@ -231,6 +248,7 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
         this.setMarkingColor(compound.getInt("markingColor"));
         this.setMarking2Variant(compound.getInt("marking2Variant"));
         this.setMarking2Color(compound.getInt("marking2Color"));
+        ItemStackHelper.loadAllItems(compound, this.items);
     }
 
     public void readOwners(CompoundNBT compound){
@@ -266,52 +284,6 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
         super.livingTick();
     }
 
-    /*public void executeAreaAbilities(List<Entity> entities){
-        //Run through all abilities and entities, O(ab)
-        ArrayList<Ability> abilities = this.getAbilityPowers();
-        for(Ability ability : abilities){
-            for(Entity entity1 : entities){
-                if(entity1 instanceof LivingEntity) {
-                    LivingEntity entity = (LivingEntity)entity1;
-                    boolean flag1 = ability instanceof IEffectAbility;
-                    boolean flag2 = ability instanceof IAreaAbility;
-                    boolean flag3 = ability instanceof IViolentAbility;
-                    boolean flagOwner = this.isOwner(entity);
-                    boolean flagFocus = this.focusCheck();
-                    IEffectAbility effectAbility = null;
-                    IAreaAbility areaAbility = null;
-                    if (!flag3 && flagFocus && entity.getUniqueID() != this.getUniqueID()) {
-                        //Run through effect abilities - Check if they apply to the player only - Apply for each entity
-                        System.out.println("Entity should be valid");
-                        if (flag1) {
-                            System.out.println("Is effect ability");
-                            effectAbility = (IEffectAbility) ability;
-                            if (effectAbility.playerOnly()) {
-                                if (flagOwner) {
-                                    System.out.println("Is owner");
-                                    entity.addPotionEffect(effectAbility.effect());
-                                    System.out.println("Effect Ability Deployed On Player");
-                                }
-                            } else {
-                                System.out.println("Is not player only");
-                                entity.addPotionEffect(effectAbility.effect());
-                                System.out.println("Effect Ability Deployed");
-                            }
-                        }
-                        //Run through area abilities - Apply for each entity
-                        if (flag2) {
-                            System.out.println("Area ability");
-                            areaAbility = (IAreaAbility) ability;
-                            areaAbility.AOeffect(entity, this.getOwnerID());
-                            System.out.println("AOE Ability Deployed");
-                        }
-                    }
-                }
-            }
-        }
-        entities = null;
-    }*/
-
     @Override
     public ActionResultType applyPlayerInteraction(PlayerEntity player, Vector3d vec, Hand hand) {
         if(player.world.isRemote){
@@ -325,6 +297,8 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
                         this.cycleMovementAI(player);
                     }
                     else {
+                        System.out.println(this.OWNERS);
+                        NetworkHooks.openGui((ServerPlayerEntity) player, this, this.getPosition());
                         if(this.isRideable()){
                             if(!this.isBeingRidden()){
                                 player.startRiding(this);
@@ -367,7 +341,6 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
     0 is stay still
     1 is wander
     2 is follow
-    3 is stay
      */
     public void cycleMovementAI(PlayerEntity player){
         //Cycles through the various movement types.
@@ -1112,6 +1085,103 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
         }
     }
 
+
+    //CONTAINER STUFF
+
+    //CONTAINER STUFF
+
+    @Override
+    public int getInventoryStackLimit() {
+        return 64;
+    }
+
+    @Override
+    public void openInventory(PlayerEntity player) {
+        player.openContainer(this);
+    }
+
+    @Override
+    public void closeInventory(PlayerEntity player) {
+        player.closeScreen();
+    }
+
+    @Override
+    public boolean isItemValidForSlot(int index, ItemStack stack) {
+        return true;
+    }
+
+    @Override
+    public int count(Item itemIn) {
+        return 0;
+    }
+
+    @Override
+    public boolean hasAny(Set<Item> set) {
+        return false;
+    }
+
+    @Override
+    public int getSizeInventory() {
+        return EntityGem.NUMBER_OF_SLOTS;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return false;
+    }
+
+    @Override
+    public ItemStack getStackInSlot(int index) {
+        return this.getItems().get(index - 36);
+    }
+
+    @Override
+    public ItemStack decrStackSize(int index, int count) {
+        return ItemStackHelper.getAndSplit(this.getItems(), index - 36, count);
+    }
+
+    @Override
+    public ItemStack removeStackFromSlot(int index) {
+        return null;
+    }
+
+    @Override
+    public void setInventorySlotContents(int index, ItemStack stack) {
+        this.getItems().set(index - 36, stack);
+    }
+
+    @Override
+    public void markDirty() {
+
+    }
+
+    @Override
+    public boolean isUsableByPlayer(PlayerEntity player) {
+        return true;
+    }
+
+    @Nullable
+    @Override
+    public Container createMenu(int p_createMenu_1_, PlayerInventory p_createMenu_2_, PlayerEntity p_createMenu_3_) {
+        return new GemUIContainer(p_createMenu_1_, p_createMenu_2_, this);
+    }
+
+    @Override
+    public void onInventoryChanged(IInventory invBasic) {
+    }
+
+    public NonNullList<ItemStack> getItems() {
+        return this.items;
+    }
+
+    public void setItems(NonNullList<ItemStack> itemsIn) {
+        this.items = itemsIn;
+    }
+
+    @Override
+    public void clear() {
+
+    }
 
     //-------------------------------------------------------------------------------------------------------------------------------------------------------------//
 

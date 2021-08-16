@@ -1,8 +1,10 @@
 package com.gempire;
 
 import com.gempire.client.entity.render.*;
+import com.gempire.client.screen.GemUIScreen;
 import com.gempire.client.screen.InjectorScreen;
 import com.gempire.client.screen.TankScreen;
+import com.gempire.container.GemUIContainer;
 import com.gempire.entities.TestEntity;
 import com.gempire.entities.gems.*;
 import com.gempire.entities.gems.starter.EntityMica;
@@ -102,6 +104,7 @@ public class Gempire
         DeferredWorkQueue.runLater(() -> {
             GlobalEntityTypeAttributes.put(ModEntities.OBSIDIAN.get(), EntityObsidian.setCustomAttributes().create());
         });
+        ModPacketHandler.registerPackets();
         ModEntities.setVanillaGems();
         ModEntities.registerCruxes();
         ModFluids.registerFluidBuckets();
@@ -166,6 +169,7 @@ public class Gempire
 
         ScreenManager.registerFactory(ModContainers.TANK_CONTAINER.get(), TankScreen::new);
         ScreenManager.registerFactory(ModContainers.INJECTOR_CONTAINER.get(), InjectorScreen::new);
+        ScreenManager.registerFactory(ModContainers.GEM_UI_CONTAINER.get(), GemUIScreen::new);
 
         RenderTypeLookup.setRenderLayer(ModBlocks.POWER_CRYSTAL_BLOCK.get(), RenderType.getTranslucent());
 
