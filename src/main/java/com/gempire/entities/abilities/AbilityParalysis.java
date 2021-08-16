@@ -11,6 +11,8 @@ import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import org.spongepowered.asm.mixin.extensibility.IMixinErrorHandler;
 
 import java.util.List;
@@ -59,5 +61,9 @@ public class AbilityParalysis extends Ability implements IMeleeAbility, IEffectA
     @Override
     public boolean gemAndPlayerOnly() {
         return false;
+    }
+    @Override
+    public ITextComponent getName() {
+        return new TranslationTextComponent("ability.gempire.paralysis");
     }
 }

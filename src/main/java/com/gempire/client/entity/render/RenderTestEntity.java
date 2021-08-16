@@ -5,6 +5,7 @@ import com.gempire.client.entity.model.ModelTest;
 import com.gempire.entities.TestEntity;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.LivingRenderer;
+
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.client.renderer.entity.model.PigModel;
 import net.minecraft.client.renderer.entity.model.PlayerModel;

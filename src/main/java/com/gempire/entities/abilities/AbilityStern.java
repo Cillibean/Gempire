@@ -10,6 +10,8 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,5 +56,9 @@ public class AbilityStern extends Ability implements IAreaAbility, IEffectAbilit
     @Override
     public boolean gemAndPlayerOnly() {
         return true;
+    }
+    @Override
+    public ITextComponent getName() {
+        return new TranslationTextComponent("ability.gempire.stern");
     }
 }

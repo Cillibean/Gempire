@@ -9,6 +9,8 @@ import net.minecraft.block.Blocks;
 import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 
 public class AbilityPyrokinesis extends Ability implements IMeleeAbility, IEmotionalAbility, IViolentAbility {
 
@@ -33,5 +35,9 @@ public class AbilityPyrokinesis extends Ability implements IMeleeAbility, IEmoti
     @Override
     public void fight(Entity entityIn, double damage) {
         entityIn.setFire(5);
+    }
+    @Override
+    public ITextComponent getName() {
+        return new TranslationTextComponent("ability.gempire.pyrokinesis");
     }
 }

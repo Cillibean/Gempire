@@ -6,6 +6,8 @@ import com.gempire.entities.abilities.interfaces.IViolentAbility;
 import com.gempire.util.Abilities;
 import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.Entity;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.Explosion;
 
 public class AbilityKnockback extends Ability implements IMeleeAbility, IViolentAbility {
@@ -24,5 +26,9 @@ public class AbilityKnockback extends Ability implements IMeleeAbility, IViolent
             return;
         }
         entity.applyKnockback(3F, 1, 1);
+    }
+    @Override
+    public ITextComponent getName() {
+        return new TranslationTextComponent("ability.gempire.knockback");
     }
 }

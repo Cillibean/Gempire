@@ -15,6 +15,9 @@ import com.gempire.util.Abilities;
 import com.gempire.util.Color;
 import com.gempire.util.GemPlacements;
 import com.google.common.collect.ImmutableList;
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.ByteBufAllocator;
+import io.netty.util.ByteProcessor;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FlowingFluidBlock;
 import net.minecraft.client.Minecraft;
@@ -51,6 +54,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.network.NetworkHooks;
 import org.apache.commons.lang3.ArrayUtils;
 
@@ -58,12 +62,21 @@ import javax.annotation.Nullable;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+import java.nio.channels.FileChannel;
+import java.nio.channels.GatheringByteChannel;
+import java.nio.channels.ScatteringByteChannel;
+import java.nio.charset.Charset;
 import java.util.*;
 import java.util.function.Consumer;
 
 public abstract class EntityGem extends CreatureEntity implements IRangedAttackMob, IRideable, IInventory, INamedContainerProvider, IInventoryChangedListener {
     //public static DataParameter<Optional<UUID>> OWNER_ID = EntityDataManager.<Optional<UUID>>createKey(EntityGem.class, DataSerializers.OPTIONAL_UNIQUE_ID);
     public static DataParameter<Boolean> OWNED = EntityDataManager.<Boolean>createKey(EntityGem.class, DataSerializers.BOOLEAN);
+    public static final DataParameter<Boolean> HAS_CUSTOM_NAME = EntityDataManager.<Boolean>createKey(EntityGem.class, DataSerializers.BOOLEAN);
     public static final DataParameter<Boolean> PRIMARY = EntityDataManager.<Boolean>createKey(EntityGem.class, DataSerializers.BOOLEAN);
     public static final DataParameter<Boolean> DEFECTIVE = EntityDataManager.<Boolean>createKey(EntityGem.class, DataSerializers.BOOLEAN);
     public static final DataParameter<Boolean> EMOTIONAL = EntityDataManager.<Boolean>createKey(EntityGem.class, DataSerializers.BOOLEAN);
@@ -107,7 +120,7 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
 
     public int focusLevel = 2;
 
-    public static final int NUMBER_OF_SLOTS = 31;
+    public static final int NUMBER_OF_SLOTS = 27;
     public NonNullList<ItemStack> items = NonNullList.withSize(EntityGem.NUMBER_OF_SLOTS, ItemStack.EMPTY);
 
 
@@ -115,6 +128,7 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
         super(type, worldIn);
         //this.dataManager.register(EntityGem.OWNER_ID, Optional.ofNullable(UUID.randomUUID()));
         this.dataManager.register(EntityGem.OWNED, false);
+        this.dataManager.register(EntityGem.HAS_CUSTOM_NAME, false);
         this.dataManager.register(EntityGem.PRIMARY, false);
         this.dataManager.register(EntityGem.DEFECTIVE, false);
         this.dataManager.register(EntityGem.EMOTIONAL, false);
@@ -169,6 +183,7 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
         this.setMarkingColor(this.generateMarkingColor());
         this.setMarking2Variant(this.generateMarking2Variant());
         this.setMarking2Color(this.generateMarking2Color());
+        this.setCustomName(this.getDisplayName());
         return super.onInitialSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
     }
 
@@ -297,8 +312,7 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
                         this.cycleMovementAI(player);
                     }
                     else {
-                        System.out.println(this.OWNERS);
-                        NetworkHooks.openGui((ServerPlayerEntity) player, this, this.getPosition());
+                        NetworkHooks.openGui((ServerPlayerEntity) player, this, buf -> buf.writeInt(this.getEntityId()));
                         if(this.isRideable()){
                             if(!this.isBeingRidden()){
                                 player.startRiding(this);
@@ -1085,6 +1099,14 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
         }
     }
 
+    public void setHasCustomName(boolean value){
+        this.dataManager.set(EntityGem.HAS_CUSTOM_NAME, value);
+    }
+
+    public boolean customName(){
+        return this.dataManager.get(EntityGem.HAS_CUSTOM_NAME);
+    }
+
 
     //CONTAINER STUFF
 
@@ -1108,16 +1130,6 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
     @Override
     public boolean isItemValidForSlot(int index, ItemStack stack) {
         return true;
-    }
-
-    @Override
-    public int count(Item itemIn) {
-        return 0;
-    }
-
-    @Override
-    public boolean hasAny(Set<Item> set) {
-        return false;
     }
 
     @Override

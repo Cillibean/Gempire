@@ -6,9 +6,13 @@ import com.gempire.client.entity.model.ModelTopaz;
 import com.gempire.client.entity.render.layers.*;
 import com.gempire.entities.gems.EntityObsidian;
 import com.gempire.entities.gems.EntityTopaz;
+import com.gempire.entities.gems.starter.EntityMica;
+import com.mojang.blaze3d.matrix.MatrixStack;
+import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.ITextComponent;
 
 public class RenderObsidian extends MobRenderer<EntityObsidian, ModelObsidian<EntityObsidian>> {
 
@@ -26,5 +30,11 @@ public class RenderObsidian extends MobRenderer<EntityObsidian, ModelObsidian<En
     @Override
     public ResourceLocation getEntityTexture(EntityObsidian entity) {
         return new ResourceLocation(Gempire.MODID+":textures/entity/obsidian/blank.png");
+    }
+    @Override
+    protected void renderName(EntityObsidian entityIn, ITextComponent displayNameIn, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn) {
+        matrixStackIn.translate(0, -1.7, 0);
+        matrixStackIn.translate(0, entityIn.getBoundingBox().getYSize(), 0);
+        super.renderName(entityIn, displayNameIn, matrixStackIn, bufferIn, packedLightIn);
     }
 }

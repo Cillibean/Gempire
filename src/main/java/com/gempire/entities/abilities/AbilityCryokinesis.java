@@ -24,6 +24,8 @@ import net.minecraft.particles.ParticleTypes;
 import net.minecraft.state.properties.DoubleBlockHalf;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 
 public class AbilityCryokinesis extends Ability implements IRangedAbility, IViolentAbility, ITaskAbility, ITargetAbility {
 
@@ -77,5 +79,9 @@ public class AbilityCryokinesis extends Ability implements IRangedAbility, IViol
     @Override
     public int chanceToSummon() {
         return ((EntityGem)this.holder).isFocused() ? 1 : ((EntityGem)this.holder).focusLevel;
+    }
+    @Override
+    public ITextComponent getName() {
+        return new TranslationTextComponent("ability.gempire.cryokinesis");
     }
 }

@@ -14,6 +14,8 @@ import net.minecraft.entity.ai.goal.RangedAttackGoal;
 import net.minecraft.entity.projectile.SnowballEntity;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 
 public class AbilityGuard extends Ability implements ITaskAbility {
 
@@ -29,5 +31,9 @@ public class AbilityGuard extends Ability implements ITaskAbility {
     @Override
     public boolean targetTask() {
         return false;
+    }
+    @Override
+    public ITextComponent getName() {
+        return new TranslationTextComponent("ability.gempire.guard");
     }
 }

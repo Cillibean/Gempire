@@ -7,6 +7,8 @@ import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 
 public class AbilityLuck extends Ability implements IEffectAbility {
 
@@ -27,5 +29,9 @@ public class AbilityLuck extends Ability implements IEffectAbility {
     @Override
     public boolean gemAndPlayerOnly() {
         return false;
+    }
+    @Override
+    public ITextComponent getName() {
+        return new TranslationTextComponent("ability.gempire.luck");
     }
 }

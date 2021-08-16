@@ -3,11 +3,14 @@ package com.gempire.client.entity.render;
 import com.gempire.Gempire;
 import com.gempire.client.entity.model.ModelPebble;
 import com.gempire.client.entity.render.layers.*;
+import com.gempire.entities.gems.EntityJasper;
 import com.gempire.entities.gems.starter.EntityMica;
 import com.mojang.blaze3d.matrix.MatrixStack;
+import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.ITextComponent;
 
 public class RenderMica extends MobRenderer<EntityMica, ModelPebble<EntityMica>> {
 
@@ -32,5 +35,11 @@ public class RenderMica extends MobRenderer<EntityMica, ModelPebble<EntityMica>>
         if(entity.getHairVariant() == 1) return new ResourceLocation(Gempire.MODID+":textures/entity/mica/blank_1.png");
         else if(entity.getHairVariant() == 2) return new ResourceLocation(Gempire.MODID+":textures/entity/mica/blank_2.png");
         else return new ResourceLocation(Gempire.MODID+":textures/entity/mica/blank.png");
+    }
+    @Override
+    protected void renderName(EntityMica entityIn, ITextComponent displayNameIn, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn) {
+        matrixStackIn.translate(0, -1.7, 0);
+        matrixStackIn.translate(0, entityIn.getBoundingBox().getYSize(), 0);
+        super.renderName(entityIn, displayNameIn, matrixStackIn, bufferIn, packedLightIn);
     }
 }

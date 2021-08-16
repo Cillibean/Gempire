@@ -5,6 +5,8 @@ import com.gempire.entities.abilities.interfaces.IEffectAbility;
 import com.gempire.util.Abilities;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 
 public class AbilityFirstAid extends Ability implements IEffectAbility {
 
@@ -25,5 +27,9 @@ public class AbilityFirstAid extends Ability implements IEffectAbility {
     @Override
     public boolean gemAndPlayerOnly() {
         return true;
+    }
+    @Override
+    public ITextComponent getName() {
+        return new TranslationTextComponent("ability.gempire.first_aid");
     }
 }

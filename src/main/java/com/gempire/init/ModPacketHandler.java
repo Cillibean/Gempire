@@ -47,5 +47,11 @@ public class ModPacketHandler {
                 S2SSendGemSeedInfo::encode,
                 S2SSendGemSeedInfo::decode,
                 S2SSendGemSeedInfo::handle);
+        ModPacketHandler.INSTANCE.registerMessage(
+                networkId++,
+                C2SRequestUpdateGemName.class,
+                C2SRequestUpdateGemName::encode,
+                C2SRequestUpdateGemName::decode,
+                C2SRequestUpdateGemName::handle);
     }
 }

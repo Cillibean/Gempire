@@ -6,6 +6,7 @@ import com.gempire.init.ModContainers;
 import com.gempire.tileentities.InjectorTE;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.EquipmentSlotType;
@@ -94,13 +95,10 @@ public class GemUIContainer extends Container {
     public static EntityGem getGem(PlayerInventory playerInventory, PacketBuffer extraData){
         Objects.requireNonNull(playerInventory, "Player Inventory can not be null");
         Objects.requireNonNull(extraData, "Data Packet can not be null");
-        BlockPos pos = extraData.readBlockPos();
-        AxisAlignedBB aabb = new AxisAlignedBB(pos.getX() - .5f, pos.getY() - .5f, pos.getZ() - .5f, pos.getX() + .5f, pos.getY() + .5f, pos.getZ() + .5f);
-        List<EntityGem> gems = playerInventory.player.world.getEntitiesWithinAABB(EntityGem.class, aabb);
-        for(EntityGem candidate : gems){
-            System.out.println(candidate.OWNERS);
-            System.out.println(playerInventory.player.getUniqueID());
-            return candidate;
+        int ID = extraData.readInt();
+        Entity entity = playerInventory.player.world.getEntityByID(ID);
+        if(entity instanceof EntityGem){
+            return (EntityGem) entity;
         }
         throw new IllegalStateException("Entity is not correct");
     }
@@ -113,7 +111,6 @@ public class GemUIContainer extends Container {
     @Override
     public ItemStack transferStackInSlot(PlayerEntity playerIn, int index) {
         ItemStack stack = ItemStack.EMPTY;
-        System.out.println("sus");
         Slot slot = this.inventorySlots.get(index);
         if(slot != null && slot.getHasStack()){
             ItemStack slotStack = slot.getStack();
