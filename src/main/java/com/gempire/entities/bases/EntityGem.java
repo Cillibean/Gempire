@@ -28,6 +28,7 @@ import net.minecraft.entity.passive.PigEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.IInventoryChangedListener;
 import net.minecraft.inventory.ItemStackHelper;
@@ -120,8 +121,14 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
 
     public int focusLevel = 2;
 
-    public static final int NUMBER_OF_SLOTS = 27;
+    public static final int NUMBER_OF_SLOTS = 33;
     public NonNullList<ItemStack> items = NonNullList.withSize(EntityGem.NUMBER_OF_SLOTS, ItemStack.EMPTY);
+
+    public int maxBrewingTime = 1;
+    public Item inputItem = Items.AIR;
+    public Item outputItem = Items.AIR;
+    public int brewingTicks = 0;
+    public boolean brewing = false;
 
 
     public EntityGem(EntityType<? extends CreatureEntity> type, World worldIn) {
@@ -178,6 +185,7 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
         this.setAbilityPowers(this.findAbilities(this.getAbilites()));
         this.addAbilityGoals();
         this.applyAttributeAbilities();
+        this.applyAlchemyPowers();
         this.FOLLOW_ID = UUID.randomUUID();
         this.setMarkingVariant(this.generateMarkingVariant());
         this.setMarkingColor(this.generateMarkingColor());
@@ -221,6 +229,8 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
         compound.putInt("markingColor", this.getMarkingColor());
         compound.putInt("marking2Variant", this.getMarking2Variant());
         compound.putInt("marking2Color", this.getMarking2Color());
+        compound.putInt("brewingTicks", this.brewingTicks);
+        compound.putBoolean("brewing", this.brewing);
         ItemStackHelper.saveAllItems(compound, this.items);
     }
 
@@ -258,11 +268,14 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
         this.setAbilityPowers(this.findAbilities(compound.getString("abilities")));
         this.GUARD_POS = compound.getIntArray("guardPos");
         this.addAbilityGoals();
-        this.applyAttributeAbilities();
+        //this.applyAttributeAbilities();
+        this.applyAlchemyPowers();
         this.setMarkingVariant(compound.getInt("markingVariant"));
         this.setMarkingColor(compound.getInt("markingColor"));
         this.setMarking2Variant(compound.getInt("marking2Variant"));
         this.setMarking2Color(compound.getInt("marking2Color"));
+        this.brewingTicks = compound.getInt("brewingTicks");
+        this.brewing = compound.getBoolean("brewing");
         ItemStackHelper.loadAllItems(compound, this.items);
     }
 
@@ -276,26 +289,23 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
 
     @Override
     public void livingTick() {
-        /*if(this.usesAreaAbilities()) {
-            if(this.areaCounter > this.maxAreaCounter){
-                //Generate list of nearby entities
-                List<Entity> entities = this.world.getEntitiesWithinAABB(Entity.class,
-                        new AxisAlignedBB(this.getPosX(), this.getPosY(), this.getPosZ(), this.getPosX() + 1, this.getPosY() + 1 , this.getPosZ() + 1)
-                                .grow(16, this.world.getHeight(), 16));
-                this.executeAreaAbilities(entities);
-                this.areaCounter = 0;
-            }
-            this.areaCounter++;
-            //System.out.println("Counter set to: " + this.areaCounter);
-        }*/
         if(!this.isFocused()){
+            this.focusCounter++;
             if(this.focusCounter > this.maxFocusCounter){
                 this.focusLevel = this.baseFocus();
                 this.focusCounter = 0;
             }
-            this.focusCounter++;
         }
         if (this.canWalkOnFluids()) this.adjustForFluids();
+        if(this.inputItem != Items.AIR && this.outputItem != Items.AIR && this.brewing){
+            if(this.getStackInSlot(68) == ItemStack.EMPTY) this.brewingTicks++;
+            if(this.brewingTicks > this.maxBrewingTime && this.getStackInSlot(67).getItem() == this.inputItem){
+                this.setInventorySlotContents(67, ItemStack.EMPTY);
+                this.setInventorySlotContents(68, new ItemStack(this.outputItem));
+                this.brewingTicks = 0;
+                this.brewing = false;
+            }
+        }
         super.livingTick();
     }
 
@@ -922,6 +932,17 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
         }
     }
 
+    public void applyAlchemyPowers() {
+        for(Ability ability : this.getAbilityPowers()){
+            if(ability instanceof IAlchemyAbility){
+                IAlchemyAbility power = (IAlchemyAbility)ability;
+                this.maxBrewingTime = power.maxTime();
+                this.inputItem = power.input();
+                this.outputItem = power.output();
+            }
+        }
+    }
+
     public int getAbilitySlots(){
         return this.dataManager.get(EntityGem.ABILITY_SLOTS);
     }
@@ -1154,12 +1175,45 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
 
     @Override
     public ItemStack removeStackFromSlot(int index) {
+        if(index - 36 > 26 && index < 31){
+            switch(index){
+                case 27:
+                    this.setItemStackToSlot(EquipmentSlotType.HEAD, ItemStack.EMPTY);
+                case 28:
+                    this.setItemStackToSlot(EquipmentSlotType.CHEST, ItemStack.EMPTY);
+                case 29:
+                    this.setItemStackToSlot(EquipmentSlotType.LEGS, ItemStack.EMPTY);
+                default:
+                    this.setItemStackToSlot(EquipmentSlotType.FEET, ItemStack.EMPTY);
+            }
+        }
         return null;
     }
 
     @Override
     public void setInventorySlotContents(int index, ItemStack stack) {
         this.getItems().set(index - 36, stack);
+        int ind = index - 36;
+        if(stack.getItem() instanceof ArmorItem && index - 36 > 26 && index < 31){
+            switch(ind){
+                case 27:
+                    this.setItemStackToSlot(EquipmentSlotType.HEAD, stack);
+                case 28:
+                    this.setItemStackToSlot(EquipmentSlotType.CHEST, stack);
+                case 29:
+                    this.setItemStackToSlot(EquipmentSlotType.LEGS, stack);
+                default:
+                    this.setItemStackToSlot(EquipmentSlotType.FEET, stack);
+            }
+        }
+        if(index == 67){
+            for(Ability ability : this.getAbilityPowers()){
+                if(ability instanceof IAlchemyAbility){
+                    IAlchemyAbility power = (IAlchemyAbility)ability;
+                    this.brewing = power.doSpecialActionOnInput();
+                }
+            }
+        }
     }
 
     @Override
@@ -1193,6 +1247,11 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
     @Override
     public void clear() {
 
+    }
+
+    @Override
+    public void damageEntity(DamageSource damageSrc, float damageAmount) {
+        super.damageEntity(damageSrc, damageAmount);
     }
 
     //-------------------------------------------------------------------------------------------------------------------------------------------------------------//

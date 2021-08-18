@@ -34,8 +34,6 @@ public class RenderTopaz extends MobRenderer<EntityTopaz, ModelTopaz<EntityTopaz
     }
     @Override
     protected void renderName(EntityTopaz entityIn, ITextComponent displayNameIn, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn) {
-        matrixStackIn.translate(0, -1.7, 0);
-        matrixStackIn.translate(0, entityIn.getBoundingBox().getYSize(), 0);
         super.renderName(entityIn, displayNameIn, matrixStackIn, bufferIn, packedLightIn);
     }
 }

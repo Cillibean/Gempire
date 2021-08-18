@@ -21,7 +21,7 @@ public class AbilityPowerhouse extends Ability implements IAttributeAbility {
 
     @Override
     public double baseValue() {
-        return this.holder.getAttributeValue(Attributes.ATTACK_DAMAGE) * 1.5D;
+        return this.holder.getAttributeValue(this.attribute()) * 2D;
     }
     @Override
     public ITextComponent getName() {

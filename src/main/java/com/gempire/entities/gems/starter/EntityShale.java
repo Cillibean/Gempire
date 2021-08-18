@@ -39,7 +39,8 @@ public class EntityShale extends EntityStarterGem {
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
         return MobEntity.func_233666_p_()
                 .createMutableAttribute(Attributes.MAX_HEALTH, 10.0D)
-                .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.3D);
+                .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.3D)
+                .createMutableAttribute(Attributes.ATTACK_DAMAGE, 0);
     }
 
     @Override
@@ -118,5 +119,17 @@ public class EntityShale extends EntityStarterGem {
             player.experienceLevel--;
         }
         player.experience -= amount / (float)player.xpBarCap();
+    }
+
+    @Override
+    public int generateAbilitySlots() {
+        return 1;
+    }
+
+    @Override
+    public Abilities[] definiteAbilities() {
+        return new Abilities[]{
+                Abilities.ESSENCE_BREWER
+        };
     }
 }

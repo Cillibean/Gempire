@@ -37,8 +37,6 @@ public class RenderRuby extends MobRenderer<EntityRuby, ModelRuby<EntityRuby>> {
     }
     @Override
     protected void renderName(EntityRuby entityIn, ITextComponent displayNameIn, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn) {
-        matrixStackIn.translate(0, -1.7, 0);
-        matrixStackIn.translate(0, entityIn.getBoundingBox().getYSize(), 0);
         super.renderName(entityIn, displayNameIn, matrixStackIn, bufferIn, packedLightIn);
     }
 }

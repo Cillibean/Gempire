@@ -38,8 +38,6 @@ public class RenderQuartz extends MobRenderer<EntityQuartz, ModelQuartz<EntityQu
     }
     @Override
     protected void renderName(EntityQuartz entityIn, ITextComponent displayNameIn, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn) {
-        matrixStackIn.translate(0, -1.7, 0);
-        matrixStackIn.translate(0, entityIn.getBoundingBox().getYSize(), 0);
         super.renderName(entityIn, displayNameIn, matrixStackIn, bufferIn, packedLightIn);
     }
 }

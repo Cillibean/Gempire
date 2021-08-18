@@ -6,21 +6,28 @@ import com.gempire.entities.abilities.AbilityZilch;
 import com.gempire.entities.abilities.base.Ability;
 import com.gempire.init.ModPacketHandler;
 import com.gempire.networking.C2SRequestDumpFluidsTank;
+import com.gempire.networking.C2SRequestInject;
+import com.gempire.networking.C2SRequestPoof;
 import com.gempire.networking.C2SRequestUpdateGemName;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.client.gui.widget.TextFieldWidget;
+import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.client.gui.widget.button.ImageButton;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.ai.attributes.Attribute;
+import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.fluid.Fluids;
+import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.inventory.container.PlayerContainer;
+import net.minecraft.item.ArmorItem;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.vector.Quaternion;
 import net.minecraft.util.math.vector.Vector3f;
@@ -37,6 +44,7 @@ import java.util.ArrayList;
 @OnlyIn(Dist.CLIENT)
 public class GemUIScreen extends ContainerScreen<GemUIContainer> {
     public static final ResourceLocation GUI = new ResourceLocation("gempire:textures/gui/base.png");
+    public static final ResourceLocation ARROW = new ResourceLocation("gempire:textures/gui/arrow_down.png");
     public TextFieldWidget nameBox;
 
     public GemUIScreen(GemUIContainer screenContainer, PlayerInventory inv, ITextComponent titleIn) {
@@ -61,6 +69,10 @@ public class GemUIScreen extends ContainerScreen<GemUIContainer> {
 
         this.children.add(this.nameBox);
         this.setFocusedDefault(this.nameBox);
+        this.addButton(new Button(this.guiLeft + 27, this.guiTop + 123, 83, 20, new TranslationTextComponent("screens.gempire.poof"), (button) -> {
+            ModPacketHandler.INSTANCE.sendToServer(new C2SRequestPoof(this.container.gem.getEntityId()));
+            this.closeScreen();
+        }));
     }
 
     @Override
@@ -85,15 +97,24 @@ public class GemUIScreen extends ContainerScreen<GemUIContainer> {
         int i = this.guiLeft;
         int j = this.guiTop;
         this.blit(matrixStack, x, y, 0, 0, this.xSize, this.ySize, 272, 250);
+        this.minecraft.getTextureManager().bindTexture(GemUIScreen.ARROW);
+        int progress = 31 * this.container.gem.brewingTicks / this.container.gem.maxBrewingTime;
+        this.blit(matrixStack, i + 181, j + 31, 0, 0, 9, 11);
         this.nameBox.render(matrixStack, mouseX, mouseY, partialTicks);
         drawEntityOnScreen(i + 228, j + 76, 30, (float)(i + 229) - mouseX, (float)(j + 46) - mouseY, this.container.gem);
+        drawStats(matrixStack, i, j);
     }
 
     @Override
     public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
-        this.nameBox.keyPressed(keyCode, scanCode, modifiers);
-        ModPacketHandler.INSTANCE.sendToServer(new C2SRequestUpdateGemName(this.nameBox.getText(), this.container.gem.getEntityId()));
-        return super.keyPressed(keyCode, scanCode, modifiers);
+        if(this.nameBox.isFocused()) {
+            this.nameBox.keyPressed(keyCode, scanCode, modifiers);
+            ModPacketHandler.INSTANCE.sendToServer(new C2SRequestUpdateGemName(this.nameBox.getText(), this.container.gem.getEntityId()));
+            return true;
+        }
+        else{
+            return super.keyPressed(keyCode, scanCode, modifiers);
+        }
     }
 
     @Override
@@ -143,6 +164,14 @@ public class GemUIScreen extends ContainerScreen<GemUIContainer> {
         livingEntity.prevRotationYawHead = f3;
         livingEntity.rotationYawHead = f3;
         RenderSystem.popMatrix();
+    }
+
+
+    public void drawStats(MatrixStack stack, int x, int y){
+        ITextComponent health = new TranslationTextComponent("screens.gempire.health");
+        ITextComponent damage = new TranslationTextComponent("screens.gempire.damage");
+        this.font.func_243248_b(stack, new StringTextComponent(health.getString() + ": " + (int)this.container.gem.getHealth() + " / " + (int)this.container.gem.getMaxHealth()), x + 12, y + 98, 4210752);
+        this.font.func_243248_b(stack, new StringTextComponent(damage.getString() + ": " + (int)this.container.gem.getBaseAttributeValue(Attributes.ATTACK_DAMAGE)), x + 12, y + 110, 4210752);
     }
 
     public void drawAbilityList(MatrixStack stack, int x, int y){

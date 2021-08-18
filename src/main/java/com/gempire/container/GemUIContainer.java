@@ -3,6 +3,7 @@ package com.gempire.container;
 import com.gempire.entities.bases.EntityGem;
 import com.gempire.init.ModBlocks;
 import com.gempire.init.ModContainers;
+import com.gempire.init.ModItems;
 import com.gempire.tileentities.InjectorTE;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -14,6 +15,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.PlayerContainer;
 import net.minecraft.inventory.container.Slot;
+import net.minecraft.item.GlassBottleItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
@@ -62,11 +64,41 @@ public class GemUIContainer extends Container {
         /*this.addSlot(new Slot((IInventory)this.gem, TankTE.BUCKET_INPUT_SLOT_INDEX, 78, 50));
         this.addSlot(new Slot((IInventory)this.gem, TankTE.BUCKET_OUTPUT_SLOT_INDEX, 96, 50));*/
 
+        //POTION SLOTS
+        this.addSlot(new Slot(gem, 67, 177, 10){
+            public boolean isItemValid(ItemStack stack) {
+                return stack.getItem() instanceof GlassBottleItem || stack.getItem() == ModItems.ESSENCE_BOTTLE.get();
+            }
+            public int getSlotStackLimit() {
+                return 1;
+            }
+        });
+        this.addSlot(new Slot(gem, 68, 177, 48){
+            public boolean isItemValid(ItemStack stack) {
+                return false;
+            }
+        });
+
         //INITIALIZE ARMOR SLOTS
-        /*for(int k = 0; k < 4; ++k) {
+        for(int k = 0; k < 4; ++k) {
             final EquipmentSlotType equipmentslottype = VALID_EQUIPMENT_SLOTS[k];
-            this.addSlot(new Slot(playerInventory, 63 + k, 11 + k*18, 65));
-        }*/
+            this.addSlot(new Slot(gem, 63 + k, 11 + k*18, 65){
+                @OnlyIn(Dist.CLIENT)
+                public Pair<ResourceLocation, ResourceLocation> getBackground() {
+                    return Pair.of(PlayerContainer.LOCATION_BLOCKS_TEXTURE, GemUIContainer.ARMOR_SLOT_TEXTURES[equipmentslottype.getIndex()]);
+                }
+                public boolean isItemValid(ItemStack stack) {
+                    return stack.canEquip(equipmentslottype, gem);
+                }
+                public boolean canTakeStack(PlayerEntity playerIn) {
+                    ItemStack itemstack = this.getStack();
+                    return !itemstack.isEmpty() && !playerIn.isCreative() && EnchantmentHelper.hasBindingCurse(itemstack) ? false : super.canTakeStack(playerIn);
+                }
+                public int getSlotStackLimit() {
+                    return 1;
+                }
+            });
+        }
 
         //INITIALIZE GEM INVENTORY HERE
         for(int row = 0; row < 3; row++){
@@ -115,10 +147,10 @@ public class GemUIContainer extends Container {
         if(slot != null && slot.getHasStack()){
             ItemStack slotStack = slot.getStack();
             stack = slotStack.copy();
-            if(index < EntityGem.NUMBER_OF_SLOTS && !this.mergeItemStack(slotStack, EntityGem.NUMBER_OF_SLOTS, this.inventorySlots.size(), true)){
+            if(index < EntityGem.NUMBER_OF_SLOTS && !this.mergeItemStack(slotStack, EntityGem.NUMBER_OF_SLOTS - 1, this.inventorySlots.size(), true)){
                 return ItemStack.EMPTY;
             }
-            if(!this.mergeItemStack(slotStack, 0, EntityGem.NUMBER_OF_SLOTS, false)){
+            if(!this.mergeItemStack(slotStack, 0, EntityGem.NUMBER_OF_SLOTS - 1, false)){
                 return ItemStack.EMPTY;
             }
             if(slotStack.isEmpty()){

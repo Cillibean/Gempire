@@ -39,8 +39,6 @@ public class RenderAgate extends MobRenderer<EntityAgate, ModelQuartz<EntityAgat
 
     @Override
     protected void renderName(EntityAgate entityIn, ITextComponent displayNameIn, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn) {
-        matrixStackIn.translate(0, -1.7, 0);
-        matrixStackIn.translate(0, entityIn.getBoundingBox().getYSize(), 0);
         super.renderName(entityIn, displayNameIn, matrixStackIn, bufferIn, packedLightIn);
     }
 }

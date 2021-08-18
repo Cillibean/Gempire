@@ -38,8 +38,6 @@ public class RenderPebble extends MobRenderer<EntityPebble, ModelPebble<EntityPe
     }
     @Override
     protected void renderName(EntityPebble entityIn, ITextComponent displayNameIn, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn) {
-        matrixStackIn.translate(0, -1.7, 0);
-        matrixStackIn.translate(0, entityIn.getBoundingBox().getYSize(), 0);
         super.renderName(entityIn, displayNameIn, matrixStackIn, bufferIn, packedLightIn);
     }
 }

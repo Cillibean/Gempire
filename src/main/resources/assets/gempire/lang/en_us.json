@@ -345,5 +345,10 @@
   "ability.gempire.terraformer": "Terraformer",
   "ability.gempire.water_walking": "Water Walking",
   "ability.gempire.alchemist": "Alchemist",
-  "ability.gempire.guard": "Guard"
+  "ability.gempire.guard": "Guard",
+  "ability.gempire.essence": "Essence-Brewing",
+
+  "screens.gempire.health": "Health",
+  "screens.gempire.damage": "Attack Damage",
+  "screens.gempire.poof": "Poof"
 }

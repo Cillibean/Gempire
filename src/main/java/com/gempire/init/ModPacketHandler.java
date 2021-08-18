@@ -53,5 +53,11 @@ public class ModPacketHandler {
                 C2SRequestUpdateGemName::encode,
                 C2SRequestUpdateGemName::decode,
                 C2SRequestUpdateGemName::handle);
+        ModPacketHandler.INSTANCE.registerMessage(
+                networkId++,
+                C2SRequestPoof.class,
+                C2SRequestPoof::encode,
+                C2SRequestPoof::decode,
+                C2SRequestPoof::handle);
     }
 }
