@@ -545,105 +545,105 @@ public class ModItems {
     public static final RegistryObject<Item> BLACK_PEARL_GEM = ITEMS.register("pearl_gem_15", () ->
             new ItemGem(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
 
-    public static final RegistryObject<Item> RED_SPINEL_GEM = ITEMS.register("spinel_gem_0", () ->
+    public static final RegistryObject<Item> WHITE_SPINEL_GEM = ITEMS.register("spinel_gem_0", () ->
             new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
     public static final RegistryObject<Item> ORANGE_SPINEL_GEM = ITEMS.register("spinel_gem_1", () ->
             new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> YELLOW_SPINEL_GEM = ITEMS.register("spinel_gem_2", () ->
+    public static final RegistryObject<Item> MAGENTA_SPINEL_GEM = ITEMS.register("spinel_gem_2", () ->
             new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> LIME_SPINEL_GEM = ITEMS.register("spinel_gem_3", () ->
+    public static final RegistryObject<Item> LIGHT_BLUE_SPINEL_GEM = ITEMS.register("spinel_gem_3", () ->
             new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> GREEN_SPINEL_GEM = ITEMS.register("spinel_gem_4", () ->
+    public static final RegistryObject<Item> YELLOW_SPINEL_GEM = ITEMS.register("spinel_gem_4", () ->
             new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> CYAN_SPINEL_GEM = ITEMS.register("spinel_gem_5", () ->
+    public static final RegistryObject<Item> LIME_SPINEL_GEM = ITEMS.register("spinel_gem_5", () ->
             new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> LIGHT_BLUE_SPINEL_GEM = ITEMS.register("spinel_gem_6", () ->
+    public static final RegistryObject<Item> PINK_SPINEL_GEM = ITEMS.register("spinel_gem_6", () ->
             new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> BLUE_SPINEL_GEM = ITEMS.register("spinel_gem_7", () ->
+    public static final RegistryObject<Item> GRAY_SPINEL_GEM = ITEMS.register("spinel_gem_7", () ->
             new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> PURPLE_SPINEL_GEM = ITEMS.register("spinel_gem_8", () ->
+    public static final RegistryObject<Item> LIGHT_GRAY_SPINEL_GEM = ITEMS.register("spinel_gem_8", () ->
             new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> MAGENTA_SPINEL_GEM = ITEMS.register("spinel_gem_9", () ->
+    public static final RegistryObject<Item> CYAN_SPINEL_GEM = ITEMS.register("spinel_gem_9", () ->
             new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> PINK_SPINEL_GEM = ITEMS.register("spinel_gem_10", () ->
+    public static final RegistryObject<Item> PURPLE_SPINEL_GEM = ITEMS.register("spinel_gem_10", () ->
             new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> BROWN_SPINEL_GEM = ITEMS.register("spinel_gem_11", () ->
+    public static final RegistryObject<Item> BLUE_SPINEL_GEM = ITEMS.register("spinel_gem_11", () ->
             new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> BLACK_SPINEL_GEM = ITEMS.register("spinel_gem_12", () ->
+    public static final RegistryObject<Item> BROWN_SPINEL_GEM = ITEMS.register("spinel_gem_12", () ->
             new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> GRAY_SPINEL_GEM = ITEMS.register("spinel_gem_13", () ->
+    public static final RegistryObject<Item> GREEN_SPINEL_GEM = ITEMS.register("spinel_gem_13", () ->
             new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> LIGHT_GRAY_SPINEL_GEM = ITEMS.register("spinel_gem_14", () ->
+    public static final RegistryObject<Item> RED_SPINEL_GEM = ITEMS.register("spinel_gem_14", () ->
             new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> WHITE_SPINEL_GEM = ITEMS.register("spinel_gem_15", () ->
+    public static final RegistryObject<Item> BLACK_SPINEL_GEM = ITEMS.register("spinel_gem_15", () ->
             new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
 
-    public static final RegistryObject<Item> RED_TOURMALINE_GEM = ITEMS.register("tourmaline_gem_0", () ->
+    public static final RegistryObject<Item> WHITE_TOURMALINE_GEM = ITEMS.register("tourmaline_gem_0", () ->
             new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
     public static final RegistryObject<Item> ORANGE_TOURMALINE_GEM = ITEMS.register("tourmaline_gem_1", () ->
             new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> YELLOW_TOURMALINE_GEM = ITEMS.register("tourmaline_gem_2", () ->
+    public static final RegistryObject<Item> MAGENTA_TOURMALINE_GEM = ITEMS.register("tourmaline_gem_2", () ->
             new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> LIME_TOURMALINE_GEM = ITEMS.register("tourmaline_gem_3", () ->
+    public static final RegistryObject<Item> LIGHT_BLUE_TOURMALINE_GEM = ITEMS.register("tourmaline_gem_3", () ->
             new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> GREEN_TOURMALINE_GEM = ITEMS.register("tourmaline_gem_4", () ->
+    public static final RegistryObject<Item> YELLOW_TOURMALINE_GEM = ITEMS.register("tourmaline_gem_4", () ->
             new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> CYAN_TOURMALINE_GEM = ITEMS.register("tourmaline_gem_5", () ->
+    public static final RegistryObject<Item> LIME_TOURMALINE_GEM = ITEMS.register("tourmaline_gem_5", () ->
             new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> LIGHT_BLUE_TOURMALINE_GEM = ITEMS.register("tourmaline_gem_6", () ->
+    public static final RegistryObject<Item> PINK_TOURMALINE_GEM = ITEMS.register("tourmaline_gem_6", () ->
             new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> BLUE_TOURMALINE_GEM = ITEMS.register("tourmaline_gem_7", () ->
+    public static final RegistryObject<Item> GRAY_TOURMALINE_GEM = ITEMS.register("tourmaline_gem_7", () ->
             new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> PURPLE_TOURMALINE_GEM = ITEMS.register("tourmaline_gem_8", () ->
+    public static final RegistryObject<Item> LIGHT_GRAY_TOURMALINE_GEM = ITEMS.register("tourmaline_gem_8", () ->
             new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> MAGENTA_TOURMALINE_GEM = ITEMS.register("tourmaline_gem_9", () ->
+    public static final RegistryObject<Item> CYAN_TOURMALINE_GEM = ITEMS.register("tourmaline_gem_9", () ->
             new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> PINK_TOURMALINE_GEM = ITEMS.register("tourmaline_gem_10", () ->
+    public static final RegistryObject<Item> PURPLE_TOURMALINE_GEM = ITEMS.register("tourmaline_gem_10", () ->
             new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> BROWN_TOURMALINE_GEM = ITEMS.register("tourmaline_gem_11", () ->
+    public static final RegistryObject<Item> BLUE_TOURMALINE_GEM = ITEMS.register("tourmaline_gem_11", () ->
             new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> BLACK_TOURMALINE_GEM = ITEMS.register("tourmaline_gem_12", () ->
+    public static final RegistryObject<Item> BROWN_TOURMALINE_GEM = ITEMS.register("tourmaline_gem_12", () ->
             new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> GRAY_TOURMALINE_GEM = ITEMS.register("tourmaline_gem_13", () ->
+    public static final RegistryObject<Item> GREEN_TOURMALINE_GEM = ITEMS.register("tourmaline_gem_13", () ->
             new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> LIGHT_GRAY_TOURMALINE_GEM = ITEMS.register("tourmaline_gem_14", () ->
+    public static final RegistryObject<Item> RED_TOURMALINE_GEM = ITEMS.register("tourmaline_gem_14", () ->
             new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> WHITE_TOURMALINE_GEM = ITEMS.register("tourmaline_gem_15", () ->
+    public static final RegistryObject<Item> BLACK_TOURMALINE_GEM = ITEMS.register("tourmaline_gem_15", () ->
             new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
     public static final RegistryObject<Item> SPECIAL_TOURMALINE_GEM = ITEMS.register("tourmaline_gem_16", () ->
             new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
 
-    public static final RegistryObject<Item> RED_ZIRCON_GEM = ITEMS.register("zircon_gem_0", () ->
+    public static final RegistryObject<Item> WHITE_ZIRCON_GEM = ITEMS.register("zircon_gem_0", () ->
             new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
     public static final RegistryObject<Item> ORANGE_ZIRCON_GEM = ITEMS.register("zircon_gem_1", () ->
             new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> YELLOW_ZIRCON_GEM = ITEMS.register("zircon_gem_2", () ->
+    public static final RegistryObject<Item> MAGENTA_ZIRCON_GEM = ITEMS.register("zircon_gem_2", () ->
             new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> LIME_ZIRCON_GEM = ITEMS.register("zircon_gem_3", () ->
+    public static final RegistryObject<Item> LIGHT_BLUE_ZIRCON_GEM = ITEMS.register("zircon_gem_3", () ->
             new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> GREEN_ZIRCON_GEM = ITEMS.register("zircon_gem_4", () ->
+    public static final RegistryObject<Item> YELLOW_ZIRCON_GEM = ITEMS.register("zircon_gem_4", () ->
             new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> CYAN_ZIRCON_GEM = ITEMS.register("zircon_gem_5", () ->
+    public static final RegistryObject<Item> LIME_ZIRCON_GEM = ITEMS.register("zircon_gem_5", () ->
             new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> LIGHT_BLUE_ZIRCON_GEM = ITEMS.register("zircon_gem_6", () ->
+    public static final RegistryObject<Item> PINK_ZIRCON_GEM = ITEMS.register("zircon_gem_6", () ->
             new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> BLUE_ZIRCON_GEM = ITEMS.register("zircon_gem_7", () ->
+    public static final RegistryObject<Item> GRAY_ZIRCON_GEM = ITEMS.register("zircon_gem_7", () ->
             new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> PURPLE_ZIRCON_GEM = ITEMS.register("zircon_gem_8", () ->
+    public static final RegistryObject<Item> LIGHT_GRAY_ZIRCON_GEM = ITEMS.register("zircon_gem_8", () ->
             new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> MAGENTA_ZIRCON_GEM = ITEMS.register("zircon_gem_9", () ->
+    public static final RegistryObject<Item> CYAN_ZIRCON_GEM = ITEMS.register("zircon_gem_9", () ->
             new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> PINK_ZIRCON_GEM = ITEMS.register("zircon_gem_10", () ->
+    public static final RegistryObject<Item> PURPLE_ZIRCON_GEM = ITEMS.register("zircon_gem_10", () ->
             new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> BROWN_ZIRCON_GEM = ITEMS.register("zircon_gem_11", () ->
+    public static final RegistryObject<Item> BLUE_ZIRCON_GEM = ITEMS.register("zircon_gem_11", () ->
             new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> BLACK_ZIRCON_GEM = ITEMS.register("zircon_gem_12", () ->
+    public static final RegistryObject<Item> BROWN_ZIRCON_GEM = ITEMS.register("zircon_gem_12", () ->
             new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> GRAY_ZIRCON_GEM = ITEMS.register("zircon_gem_13", () ->
+    public static final RegistryObject<Item> GREEN_ZIRCON_GEM = ITEMS.register("zircon_gem_13", () ->
             new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> LIGHT_GRAY_ZIRCON_GEM = ITEMS.register("zircon_gem_14", () ->
+    public static final RegistryObject<Item> RED_ZIRCON_GEM = ITEMS.register("zircon_gem_14", () ->
             new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> WHITE_ZIRCON_GEM = ITEMS.register("zircon_gem_15", () ->
+    public static final RegistryObject<Item> BLACK_ZIRCON_GEM = ITEMS.register("zircon_gem_15", () ->
             new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
 
     public static final RegistryObject<Item> AQUAMARINE_GEM = ITEMS.register("aquamarine_gem", () ->
