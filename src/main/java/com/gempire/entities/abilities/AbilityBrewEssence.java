@@ -57,23 +57,8 @@ public class AbilityBrewEssence extends Ability implements IAlchemyAbility {
     @Override
     public boolean doSpecialActionOnInput(@Nullable PlayerEntity player) {
         if(player.isCreative()) return true;
-        boolean flagXP = false, flagLapis = true;
-        /*for(ItemStack stack : this.holder.items){
-            if(stack.getItem() == ModItems.GILDED_LAPIS.get()){
-                stack.shrink(1);
-                flagLapis = true;
-                break;
-            }
-        }
-        if(!flagLapis){
-            for(ItemStack stack : player.inventory.mainInventory){
-                if(stack.getItem() == ModItems.GILDED_LAPIS.get()){
-                    stack.shrink(1);
-                    flagLapis = true;
-                    break;
-                }
-            }
-        }*/
+        boolean flagXP = false;
+        boolean flagLapis = this.holder.consumeItemCheck(ModItems.GILDED_LAPIS.get());
         if(flagLapis){
             if (player.experienceTotal >= AbilityBrewEssence.EXPERIENCE) {
                 EntityShale.decreaseExp(player, AbilityBrewEssence.EXPERIENCE);

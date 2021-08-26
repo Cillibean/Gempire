@@ -2,6 +2,7 @@ package com.gempire.tileentities;
 
 import com.gempire.blocks.GemSeedBlock;
 import com.gempire.blocks.InjectorBlock;
+import com.gempire.blocks.ShellBlock;
 import com.gempire.container.InjectorContainer;
 import com.gempire.container.ShellContainer;
 import com.gempire.entities.bases.AbstractQuartz;
@@ -111,6 +112,12 @@ public class ShellTE extends LockableLootTileEntity implements INamedContainerPr
             this.HandleChromaTick();
             if(this.ticks % 20 == 0) this.HandleEssenceTick();
             this.HandleFormPearlTick();
+            if(this.gravelConsumed == 1){
+                this.world.setBlockState(this.getPos(), this.getBlockState().with(ShellBlock.STAGE, 1));
+            }
+            if(this.sandConsumed == ShellTE.MAX_SAND){
+                this.world.setBlockState(this.getPos(), this.getBlockState().with(ShellBlock.STAGE, 2));
+            }
             if(this.ticks > 100){
                 this.ticks = 0;
             }
@@ -220,6 +227,7 @@ public class ShellTE extends LockableLootTileEntity implements INamedContainerPr
         this.chromaConsumed = false;
         this.essenceConsumed = false;
         this.chromaColor = 0;
+        this.world.setBlockState(this.getPos(), this.getBlockState().with(ShellBlock.STAGE, 0));
     }
 
     //TODO: FIX LOTS OF NBT STUFF
@@ -257,6 +265,12 @@ public class ShellTE extends LockableLootTileEntity implements INamedContainerPr
     public int getSizeInventory() {
         return ShellTE.NUMBER_OF_SLOTS;
     }
+
+    public ItemStack getPearlItem(){
+        return this.getStackInSlot(ShellTE.PEARL_OUTPUT_SLOT_INDEX);
+    }
+
+
 
     //NETWORKING STUFF
 

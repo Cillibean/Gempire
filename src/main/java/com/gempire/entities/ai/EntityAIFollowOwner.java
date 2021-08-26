@@ -21,7 +21,7 @@ public class EntityAIFollowOwner extends Goal {
 
     @Override
     public boolean shouldExecute() {
-        List<LivingEntity> list = this.follower.world.<LivingEntity>getEntitiesWithinAABB(LivingEntity.class, this.follower.getBoundingBox().grow(20.0D, 10.0D, 20.0D));
+        List<LivingEntity> list = this.follower.world.<LivingEntity>getEntitiesWithinAABB(LivingEntity.class, this.follower.getBoundingBox().grow(24.0D, 10.0D, 24.0D));
         double maxDistance = Double.MAX_VALUE;
         for (LivingEntity entity : list) {
             if (!entity.isSpectator() || !entity.isInvisible() && this.follower.isOwner(entity) && this.follower.FOLLOW_ID != null) {
@@ -47,7 +47,7 @@ public class EntityAIFollowOwner extends Goal {
         super.startExecuting();
         this.follower.setPathPriority(PathNodeType.WATER, 0);
         this.follower.getNavigator().tryMoveToXYZ(this.toFollow.getPosX(), this.toFollow.getPosY(), this.toFollow.getPosZ(), this.speed);
-        if(this.follower.getDistanceSq(this.toFollow) > Math.pow(16, 2)){
+        if(this.follower.getDistanceSq(this.toFollow) > Math.pow(12, 2)){
             this.follower.setPosition(this.toFollow.getPosX(), this.toFollow.getPosY(), this.toFollow.getPosZ());
         }
     }

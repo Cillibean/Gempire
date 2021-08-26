@@ -142,7 +142,7 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
     public Item inputItem = Items.AIR;
     public Item outputItem = Items.AIR;
     public int brewingTicks = 0;
-    public int brewProgress = 0;
+    public static final DataParameter<Integer> BREWING_PROGRESS = EntityDataManager.createKey(EntityGem.class, DataSerializers.VARINT);
     public boolean brewing = false;
 
     public PlayerEntity currentPlayer;
@@ -181,6 +181,7 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
         this.dataManager.register(EntityGem.SADDLED, true);
         this.dataManager.set(EntityGem.SADDLED, true);
         this.dataManager.register(EntityGem.BOOST_TIME, 0);
+        this.dataManager.register(EntityGem.BREWING_PROGRESS, 0);
         this.FOLLOW_ID = UUID.randomUUID();
     }
 
@@ -251,6 +252,7 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
         compound.putInt("marking2Variant", this.getMarking2Variant());
         compound.putInt("marking2Color", this.getMarking2Color());
         compound.putInt("brewingTicks", this.brewingTicks);
+        compound.putInt("brewProgress", this.getBrewProgress());
         compound.putBoolean("brewing", this.brewing);
         compound.putInt("structureTime", this.structureTime);
         ItemStackHelper.saveAllItems(compound, this.items);
@@ -298,6 +300,7 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
         this.setMarking2Color(compound.getInt("marking2Color"));
         this.brewingTicks = compound.getInt("brewingTicks");
         this.brewing = compound.getBoolean("brewing");
+        this.setBrewProgress(compound.getInt("brewProgress"));
         this.structureTime = compound.getInt("structureTime");
         ItemStackHelper.loadAllItems(compound, this.items);
     }
@@ -322,12 +325,13 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
         if (this.canWalkOnFluids()) this.adjustForFluids();
         if(this.inputItem != Items.AIR && this.outputItem != Items.AIR && this.brewing){
             if(this.getStackInSlot(68) == ItemStack.EMPTY) this.brewingTicks++;
-            this.brewProgress = (int)Math.floor(11 * this.brewingTicks / this.maxBrewingTime);
+            this.setBrewProgress((int)Math.floor(11 * this.brewingTicks / this.maxBrewingTime));
             //System.out.println("Progress: " + this.getBrewProgress());
             if(this.brewingTicks > this.maxBrewingTime && this.getStackInSlot(67).getItem() == this.inputItem){
                 this.setInventorySlotContents(67, ItemStack.EMPTY);
                 this.setInventorySlotContents(68, new ItemStack(this.outputItem));
                 this.brewingTicks = 0;
+                this.setBrewProgress(0);
                 this.brewing = false;
             }
         }
@@ -1162,7 +1166,6 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
         return this.dataManager.get(EntityGem.HAS_CUSTOM_NAME);
     }
 
-
     //CONTAINER STUFF
 
     //CONTAINER STUFF
@@ -1223,6 +1226,7 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
         }
         if(index == 68){
             this.brewingTicks = 0;
+            this.setBrewProgress(0);
         }
         return null;
     }
@@ -1293,7 +1297,11 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
     }
 
     public int getBrewProgress(){
-        return this.brewProgress;
+        return this.dataManager.get(EntityGem.BREWING_PROGRESS);
+    }
+
+    public void setBrewProgress(int value){
+        this.dataManager.set(EntityGem.BREWING_PROGRESS, value);
     }
 
     public boolean canOpenInventoryByDefault(){

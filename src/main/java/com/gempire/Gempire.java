@@ -2,6 +2,7 @@ package com.gempire;
 
 import com.gempire.client.entity.render.*;
 import com.gempire.client.screen.*;
+import com.gempire.client.ter.ShellTER;
 import com.gempire.container.GemUIContainer;
 import com.gempire.container.ShellContainer;
 import com.gempire.entities.TestEntity;
@@ -31,6 +32,7 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DeferredWorkQueue;
 import net.minecraftforge.fml.InterModComms;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -214,6 +216,8 @@ public class Gempire
         RenderTypeLookup.setRenderLayer(ModBlocks.BLACK_CHROMA_CRYSTAL.get(), RenderType.getTranslucent());
 
         RenderTypeLookup.setRenderLayer(ModBlocks.ICE_SPIKE.get(), RenderType.getCutout());
+
+        ClientRegistry.bindTileEntityRenderer(ModTE.SHELL_TE.get(), ShellTER::new);
     }
 
     // You can use EventBusSubscriber to automatically subscribe events on the contained class (this is subscribing to the MOD

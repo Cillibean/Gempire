@@ -16,6 +16,7 @@ import net.minecraft.fluid.Fluids;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.DirectionProperty;
+import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tileentity.TileEntity;
@@ -34,11 +35,12 @@ import javax.annotation.Nullable;
 
 public class ShellBlock extends ContainerBlock implements IWaterLoggable{
     public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
+    public static final IntegerProperty STAGE = IntegerProperty.create("stage", 0, 2);
     public static final BooleanProperty WATERLOGGED = BooleanProperty.create("waterlogged");
 
     public ShellBlock(Properties builder) {
         super(builder);
-        this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH).with(WATERLOGGED, false));
+        this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH).with(WATERLOGGED, false).with(STAGE, 0));
     }
 
     @Nullable
@@ -68,11 +70,11 @@ public class ShellBlock extends ContainerBlock implements IWaterLoggable{
 
     @Override
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-        return Block.makeCuboidShape(0.1D, 0.1D, 0.1D, 15.9D, 15.9D, 15.9D);
+        return Block.makeCuboidShape(3D, 0D, 3D, 12D, 12D, 12D);
     }
 
     public BlockState getStateForPlacement(BlockItemUseContext context) {
-        return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite()).with(WATERLOGGED, false);
+        return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite()).with(WATERLOGGED, false).with(STAGE, 0);
     }
 
     public BlockState rotate(BlockState state, Rotation rot) {
@@ -84,7 +86,7 @@ public class ShellBlock extends ContainerBlock implements IWaterLoggable{
     }
 
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-        builder.add(FACING).add(WATERLOGGED);
+        builder.add(FACING).add(WATERLOGGED).add(STAGE);
     }
 
     @Override
@@ -113,6 +115,16 @@ public class ShellBlock extends ContainerBlock implements IWaterLoggable{
             return ModFluids.WHITE_ESSENCE.get();
         } else {
             return Fluids.EMPTY;
+        }
+    }
+
+    @Override
+    public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
+        if(worldIn.isRemote){
+            return;
+        }
+        if(!(newState.getBlock() instanceof ShellBlock)){
+            worldIn.removeTileEntity(pos);
         }
     }
 }
