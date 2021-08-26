@@ -125,6 +125,15 @@ public class TankTE extends LockableLootTileEntity implements IFluidTank, INamed
                         this.markDirty();
                     }
                 }
+                else if(this.shouldPutFluidToButton() && stackToOutput.getItem() == Items.NAUTILUS_SHELL){
+                    Fluid fluid = this.tank.getFluid().getFluid();
+                    if(fluid == ModFluids.WHITE_ESSENCE.get()) {
+                       this.tank.drain(new FluidStack(this.tank.getFluid().getFluid(), 200), IFluidHandler.FluidAction.EXECUTE);
+                       this.setInventorySlotContents(TankTE.BUCKET_OUTPUT_SLOT_INDEX, new ItemStack(ModItems.NACRE_GEM.get()));
+                       this.world.notifyBlockUpdate(this.pos, this.getBlockState(), this.getBlockState(), 2);
+                       this.markDirty();
+                    }
+                }
             }
         }
     }

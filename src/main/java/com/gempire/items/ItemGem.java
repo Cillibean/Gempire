@@ -5,6 +5,7 @@ import com.gempire.entities.gems.starter.EntityPebble;
 import com.gempire.events.GemFormEvent;
 import com.gempire.init.AddonHandler;
 import com.gempire.init.ModEntities;
+import com.gempire.init.ModItems;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.item.ItemEntity;
@@ -46,6 +47,11 @@ public class ItemGem extends Item {
     public ItemGem(Properties properties, String ID) {
         super(properties);
         this.ID = ID;
+    }
+
+    @Override
+    public boolean hasEffect(ItemStack stack) {
+        return super.hasEffect(stack) || stack.getItem() == ModItems.NACRE_GEM.get();
     }
 
     @Nonnull

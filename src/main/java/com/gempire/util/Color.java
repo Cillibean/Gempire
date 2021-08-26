@@ -38,9 +38,11 @@ public class Color {
     }
 
     public static String getColorName(int c){
+        Random random = new Random();
+        if(c > 15 || c < 0){
+            return Color.getColorName(random.nextInt(16));
+        }
         switch (c){
-            case 0:
-                return "white";
             case 1:
                 return "orange";
             case 2:

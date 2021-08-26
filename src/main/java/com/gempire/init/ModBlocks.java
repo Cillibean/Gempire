@@ -284,6 +284,16 @@ public class ModBlocks {
             )
     );
 
+    public static final RegistryObject<Block> SHELL_BLOCK = BLOCKS.register("shell_block", () ->
+            new ShellBlock(Block.Properties
+                    .create(Material.ROCK)
+                    .hardnessAndResistance(3.0f, 6.0f)
+                    .sound(SoundType.STONE)
+                    .harvestLevel(1)
+                    .harvestTool(ToolType.PICKAXE)
+            )
+    );
+
     public static final RegistryObject<Block> DRAINED_BLUE_SOIL = BLOCKS.register("drained_blue_soil", () ->
             new DrainedBlock(Block.Properties
                     .create(Material.EARTH)

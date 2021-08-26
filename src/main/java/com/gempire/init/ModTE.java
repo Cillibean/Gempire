@@ -1,10 +1,7 @@
 package com.gempire.init;
 
 import com.gempire.Gempire;
-import com.gempire.tileentities.GemSeedTE;
-import com.gempire.tileentities.InjectorTE;
-import com.gempire.tileentities.PowerCrystalTE;
-import com.gempire.tileentities.TankTE;
+import com.gempire.tileentities.*;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
@@ -33,4 +30,7 @@ public class ModTE {
 
     public static final RegistryObject<TileEntityType<PowerCrystalTE>> POWER_CRYSTAL_TE = TILE_ENTITIES.register(
             "power_crystal_te", () -> TileEntityType.Builder.create(PowerCrystalTE::new, ModBlocks.POWER_CRYSTAL_BLOCK.get()).build(null));
+
+    public static final RegistryObject<TileEntityType<ShellTE>> SHELL_TE = TILE_ENTITIES.register(
+            "shell_te", () -> TileEntityType.Builder.create(ShellTE::new, ModBlocks.SHELL_BLOCK.get()).build(null));
 }

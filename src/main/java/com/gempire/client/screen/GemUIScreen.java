@@ -98,9 +98,9 @@ public class GemUIScreen extends ContainerScreen<GemUIContainer> {
         int j = this.guiTop;
         this.blit(matrixStack, x, y, 0, 0, this.xSize, this.ySize, 272, 250);
         this.minecraft.getTextureManager().bindTexture(GemUIScreen.ARROW);
-        int progress = 31 * this.container.gem.brewingTicks / this.container.gem.maxBrewingTime;
-        this.blit(matrixStack, i + 181, j + 31, 0, 0, 9, 11);
+        this.blit(matrixStack, i + 181, j + (31 + (int)Math.floor(this.container.gem.getBrewProgress())), 9, 11, 0, 0, 9, 11, 9, 11);
         this.nameBox.render(matrixStack, mouseX, mouseY, partialTicks);
+        //System.out.println("Progress: " + this.container.brewProgress.get());
         drawEntityOnScreen(i + 228, j + 76, 30, (float)(i + 229) - mouseX, (float)(j + 46) - mouseY, this.container.gem);
         drawStats(matrixStack, i, j);
     }

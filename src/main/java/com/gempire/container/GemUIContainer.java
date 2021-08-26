@@ -20,6 +20,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IWorldPosCallable;
+import net.minecraft.util.IntReferenceHolder;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -47,6 +48,7 @@ public class GemUIContainer extends Container {
     public final IWorldPosCallable canInteract;
 
     public final EntityGem gem;
+    public final IntReferenceHolder brewProgress = IntReferenceHolder.single();
 
     public static final ResourceLocation EMPTY_ARMOR_SLOT_HELMET = new ResourceLocation("item/empty_armor_slot_helmet");
     public static final ResourceLocation EMPTY_ARMOR_SLOT_CHESTPLATE = new ResourceLocation("item/empty_armor_slot_chestplate");
@@ -118,6 +120,7 @@ public class GemUIContainer extends Container {
         for(int col = 0; col < 9; col++){
             this.addSlot(new Slot(playerInventory, col, 56 + col * 18, 226));
         }
+        this.trackInt(this.brewProgress).set((int) this.gem.getBrewProgress());
     }
 
     public GemUIContainer(int windowID, PlayerInventory playerInventory, PacketBuffer extraData){

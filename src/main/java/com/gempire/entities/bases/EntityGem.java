@@ -85,13 +85,13 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
     public static final DataParameter<Integer> HAIR_COLOR = EntityDataManager.<Integer>createKey(EntityGem.class, DataSerializers.VARINT);
     public static final DataParameter<Integer> SKIN_VARIANT = EntityDataManager.<Integer>createKey(EntityGem.class, DataSerializers.VARINT);
     public static final DataParameter<Integer> SKIN_COLOR_VARIANT = EntityDataManager.<Integer>createKey(EntityGem.class, DataSerializers.VARINT);
-    public static final DataParameter<Integer> HAIR_VARIANT = EntityDataManager.<Integer>createKey(EntityGem.class, DataSerializers.VARINT);
+    public static DataParameter<Integer> HAIR_VARIANT = EntityDataManager.<Integer>createKey(EntityGem.class, DataSerializers.VARINT);
     public static final DataParameter<Integer> GEM_PLACEMENT = EntityDataManager.<Integer>createKey(EntityGem.class, DataSerializers.VARINT);
     public static final DataParameter<Integer> GEM_COLOR = EntityDataManager.<Integer>createKey(EntityGem.class, DataSerializers.VARINT);
     public static DataParameter<Integer> OUTFIT_COLOR = EntityDataManager.<Integer>createKey(EntityGem.class, DataSerializers.VARINT);
-    public static final DataParameter<Integer> OUTFIT_VARIANT = EntityDataManager.<Integer>createKey(EntityGem.class, DataSerializers.VARINT);
+    public static DataParameter<Integer> OUTFIT_VARIANT = EntityDataManager.<Integer>createKey(EntityGem.class, DataSerializers.VARINT);
     public static DataParameter<Integer> INSIGNIA_COLOR = EntityDataManager.<Integer>createKey(EntityGem.class, DataSerializers.VARINT);
-    public static final DataParameter<Integer> INSIGNIA_VARIANT = EntityDataManager.<Integer>createKey(EntityGem.class, DataSerializers.VARINT);
+    public static DataParameter<Integer> INSIGNIA_VARIANT = EntityDataManager.<Integer>createKey(EntityGem.class, DataSerializers.VARINT);
     public static final DataParameter<Integer> ABILITY_SLOTS = EntityDataManager.<Integer>createKey(EntityGem.class, DataSerializers.VARINT);
     public static final DataParameter<String> ABILITIES = EntityDataManager.<String>createKey(EntityGem.class, DataSerializers.STRING);
     public static final DataParameter<Boolean> USES_AREA_ABILITIES = EntityDataManager.<Boolean>createKey(EntityGem.class, DataSerializers.BOOLEAN);
@@ -128,7 +128,10 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
     public Item inputItem = Items.AIR;
     public Item outputItem = Items.AIR;
     public int brewingTicks = 0;
+    public int brewProgress = 0;
     public boolean brewing = false;
+
+    public PlayerEntity currentPlayer;
 
 
     public EntityGem(EntityType<? extends CreatureEntity> type, World worldIn) {
@@ -161,17 +164,18 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
         this.dataManager.register(EntityGem.SADDLED, true);
         this.dataManager.set(EntityGem.SADDLED, true);
         this.dataManager.register(EntityGem.BOOST_TIME, 0);
+        this.FOLLOW_ID = UUID.randomUUID();
     }
 
     @Nullable
     @Override
     public ILivingEntityData onInitialSpawn(IServerWorld worldIn, DifficultyInstance difficultyIn, SpawnReason reason, @Nullable ILivingEntityData spawnDataIn, @Nullable CompoundNBT dataTag) {
+        this.setGemPlacement(this.generateGemPlacement());
         this.setSkinVariant(this.generateSkinVariant());
         if(this.setSkinVariantOnInitialSpawn) {
             this.setSkinColorVariant(this.generateSkinColorVariant());
         } else this.setSkinColorVariant(this.initalSkinVariant);
         this.setHairVariant(this.generateHairVariant());
-        this.setGemPlacement(this.generateGemPlacement());
         this.setSkinColor(this.generateSkinColor());
         this.setHairColor(this.generateHairColor());
         this.setGemColor(this.generateGemColor());
@@ -248,7 +252,7 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
         this.setEmotional(compound.getBoolean("emotional"));
         this.setIsOwned(compound.getBoolean("isOwned"));
         this.readOwners(compound);
-        this.FOLLOW_ID = compound.getUniqueId("followID");
+        if(compound.contains("followID"))this.FOLLOW_ID = compound.getUniqueId("followID");
         this.setMovementType(compound.getByte("movementType"));
         this.setSkinColorVariant(compound.getInt("skinColorVariant"));
         this.setSkinColor(compound.getInt("skinColor"));
@@ -299,6 +303,8 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
         if (this.canWalkOnFluids()) this.adjustForFluids();
         if(this.inputItem != Items.AIR && this.outputItem != Items.AIR && this.brewing){
             if(this.getStackInSlot(68) == ItemStack.EMPTY) this.brewingTicks++;
+            this.brewProgress = (int)Math.floor(11 * this.brewingTicks / this.maxBrewingTime);
+            //System.out.println("Progress: " + this.getBrewProgress());
             if(this.brewingTicks > this.maxBrewingTime && this.getStackInSlot(67).getItem() == this.inputItem){
                 this.setInventorySlotContents(67, ItemStack.EMPTY);
                 this.setInventorySlotContents(68, new ItemStack(this.outputItem));
@@ -316,6 +322,7 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
         }
         //This part of the code checks if the player has a blank hand
         if(hand == Hand.MAIN_HAND) {
+            this.currentPlayer = player;
             if(player.getHeldItemMainhand() == ItemStack.EMPTY) {
                 if (this.isOwner(player)) {
                     if (player.isSneaking()) {
@@ -457,7 +464,6 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
 
     public Item getGemItem() {
         RegistryObject<Item> gemm = ModItems.PEBBLE_GEM;
-        //TODO: Make this code more efficient for variations
         ItemGem gem = null;
         String name = "";
         if(this instanceof AbstractQuartz){
@@ -1150,7 +1156,7 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
 
     @Override
     public boolean isItemValidForSlot(int index, ItemStack stack) {
-        return true;
+        return !(stack.getItem() instanceof ItemGem);
     }
 
     @Override
@@ -1175,7 +1181,7 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
 
     @Override
     public ItemStack removeStackFromSlot(int index) {
-        if(index - 36 > 26 && index < 31){
+        if(index - 36 > 26 && index - 36 < 31){
             switch(index){
                 case 27:
                     this.setItemStackToSlot(EquipmentSlotType.HEAD, ItemStack.EMPTY);
@@ -1186,6 +1192,9 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
                 default:
                     this.setItemStackToSlot(EquipmentSlotType.FEET, ItemStack.EMPTY);
             }
+        }
+        if(index == 68){
+            this.brewingTicks = 0;
         }
         return null;
     }
@@ -1208,9 +1217,10 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
         }
         if(index == 67){
             for(Ability ability : this.getAbilityPowers()){
-                if(ability instanceof IAlchemyAbility){
+                if(ability instanceof IAlchemyAbility && this.currentPlayer != null && !this.brewing){
                     IAlchemyAbility power = (IAlchemyAbility)ability;
-                    this.brewing = power.doSpecialActionOnInput();
+                    this.outputItem = power.output();
+                    this.brewing = power.doSpecialActionOnInput(this.currentPlayer);
                 }
             }
         }
@@ -1252,6 +1262,10 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
     @Override
     public void damageEntity(DamageSource damageSrc, float damageAmount) {
         super.damageEntity(damageSrc, damageAmount);
+    }
+
+    public int getBrewProgress(){
+        return this.brewProgress;
     }
 
     //-------------------------------------------------------------------------------------------------------------------------------------------------------------//

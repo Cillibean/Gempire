@@ -3,16 +3,21 @@ package com.gempire.entities.abilities;
 import com.gempire.entities.abilities.base.Ability;
 import com.gempire.entities.abilities.interfaces.IAlchemyAbility;
 import com.gempire.entities.abilities.interfaces.IAttributeAbility;
+import com.gempire.entities.gems.starter.EntityShale;
 import com.gempire.init.ModItems;
 import com.gempire.util.Abilities;
 import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.Attributes;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 
+import javax.annotation.Nullable;
+
 public class AbilityBrewEssence extends Ability implements IAlchemyAbility {
+    public static final int EXPERIENCE = 40;
 
     public AbilityBrewEssence(){
         this.ability = Abilities.ESSENCE_BREWER;
@@ -47,5 +52,34 @@ public class AbilityBrewEssence extends Ability implements IAlchemyAbility {
                 break;
         }
         return essence;
+    }
+
+    @Override
+    public boolean doSpecialActionOnInput(@Nullable PlayerEntity player) {
+        if(player.isCreative()) return true;
+        boolean flagXP = false, flagLapis = true;
+        /*for(ItemStack stack : this.holder.items){
+            if(stack.getItem() == ModItems.GILDED_LAPIS.get()){
+                stack.shrink(1);
+                flagLapis = true;
+                break;
+            }
+        }
+        if(!flagLapis){
+            for(ItemStack stack : player.inventory.mainInventory){
+                if(stack.getItem() == ModItems.GILDED_LAPIS.get()){
+                    stack.shrink(1);
+                    flagLapis = true;
+                    break;
+                }
+            }
+        }*/
+        if(flagLapis){
+            if (player.experienceTotal >= AbilityBrewEssence.EXPERIENCE) {
+                EntityShale.decreaseExp(player, AbilityBrewEssence.EXPERIENCE);
+                flagXP = true;
+            }
+        }
+        return flagLapis && flagXP;
     }
 }

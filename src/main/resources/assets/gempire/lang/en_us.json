@@ -27,6 +27,7 @@
   "block.gempire.gem_seed_block": "Geode",
   "block.gempire.injector_block": "Injector",
   "block.gempire.drill_block": "Drill",
+  "block.gempire.shell_block": "Shell",
   "block.gempire.tank_block": "Fluid Tank",
   "block.gempire.power_crystal_block": "Power Crystal",
   "block.gempire.pink_essence": "Pink Essence",
@@ -88,6 +89,7 @@
   "item.gempire.red_shards": "Red Shards",
   "item.gempire.black_shards": "Black Shards",
 
+  "item.gempire.gilded_lapis": "Gilded Lapis Lazuli",
   "item.gempire.ice_shard": "Ice Shard",
 
   "item.gempire.essence_bottle": "Essence Bottle",
@@ -256,6 +258,7 @@
   "item.gempire.pyrope_gem": "Pyrope Gem",
   "item.gempire.rutile_gem": "Rutile Gem",
   "item.gempire.shale_gem": "Shale Gem",
+  "item.gempire.nacre_gem": "Nacre Gem",
 
   "item.gempire.spodumene_gem_1": "Spodumene Gem",
   "item.gempire.spodumene_gem_4": "Triphane Gem",
@@ -271,6 +274,7 @@
   "entity.gempire.pebble": "Pebble",
   "entity.gempire.mica": "Mica",
   "entity.gempire.shale": "Shale",
+  "entity.gempire.nacre": "Nacre",
   "entity.gempire.ruby": "Ruby",
   "entity.gempire.sapphire": "Sapphire",
   "entity.gempire.quartz": "Quartz",
@@ -278,6 +282,7 @@
   "entity.gempire.agate": "Agate",
   "entity.gempire.topaz": "Topaz",
   "entity.gempire.obsidian": "Obsidian",
+  "entity.gempire.pearl": "Pearl",
 
   "messages.gempire.entity.claimed": "This Gem now belongs to you!",
   "messages.gempire.entity.follow": "This Gem will now follow you.",
@@ -350,5 +355,7 @@
 
   "screens.gempire.health": "Health",
   "screens.gempire.damage": "Attack Damage",
-  "screens.gempire.poof": "Poof"
+  "screens.gempire.poof": "Poof",
+
+  "commands.gempire.nounderstand": "I'm not sure she understands..."
 }

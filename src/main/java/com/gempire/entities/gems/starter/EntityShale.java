@@ -44,32 +44,6 @@ public class EntityShale extends EntityStarterGem {
     }
 
     @Override
-    public ActionResultType applyPlayerInteraction(PlayerEntity player, Vector3d vec, Hand hand){
-        if(player.world.isRemote){
-            return super.applyPlayerInteraction(player, vec, hand);
-        }
-        if(this.isOwner(player)) {
-            if (player.getHeldItem(hand).getItem() == ModItems.ESSENCE_BOTTLE.get()) {
-                if (player.experienceTotal >= 40) {
-                    EntityShale.decreaseExp(player, 40);
-                    player.getHeldItem(hand).shrink(1);
-                    int rand = this.rand.nextInt(4);
-                    if (rand == 0) {
-                        player.addItemStackToInventory(new ItemStack(ModItems.PINK_ESSENCE.get()));
-                    } else if (rand == 1) {
-                        player.addItemStackToInventory(new ItemStack(ModItems.BLUE_ESSENCE.get()));
-                    } else if (rand == 2) {
-                        player.addItemStackToInventory(new ItemStack(ModItems.YELLOW_ESSENCE.get()));
-                    } else {
-                        player.addItemStackToInventory(new ItemStack(ModItems.WHITE_ESSENCE.get()));
-                    }
-                }
-            }
-        }
-        return super.applyPlayerInteraction(player, vec, hand);
-    }
-
-    @Override
     protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(0, new SwimGoal(this));

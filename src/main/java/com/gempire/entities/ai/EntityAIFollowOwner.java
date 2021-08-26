@@ -24,7 +24,7 @@ public class EntityAIFollowOwner extends Goal {
         List<LivingEntity> list = this.follower.world.<LivingEntity>getEntitiesWithinAABB(LivingEntity.class, this.follower.getBoundingBox().grow(20.0D, 10.0D, 20.0D));
         double maxDistance = Double.MAX_VALUE;
         for (LivingEntity entity : list) {
-            if (!entity.isSpectator() || !entity.isInvisible() && this.follower.isOwner(entity)) {
+            if (!entity.isSpectator() || !entity.isInvisible() && this.follower.isOwner(entity) && this.follower.FOLLOW_ID != null) {
                 if(this.follower.FOLLOW_ID.equals(entity.getUniqueID())) {
                     double newDistance = entity.getDistanceSq(this.follower);
                     if (newDistance <= maxDistance) {

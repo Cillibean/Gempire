@@ -4,6 +4,7 @@ import com.gempire.Gempire;
 import com.gempire.entities.TestEntity;
 import com.gempire.entities.gems.*;
 import com.gempire.entities.gems.starter.EntityMica;
+import com.gempire.entities.gems.starter.EntityNacre;
 import com.gempire.entities.gems.starter.EntityPebble;
 import com.gempire.entities.gems.starter.EntityShale;
 import com.gempire.entities.projectiles.IceShardEntity;
@@ -42,6 +43,11 @@ public class ModEntities {
                     .size(.4f, .4f) // Hitbox Size
                     .build(new ResourceLocation(Gempire.MODID, "shale").toString()));
 
+    public static final RegistryObject<EntityType<EntityNacre>> NACRE = ENTITIES.register("nacre",
+            () -> EntityType.Builder.create(EntityNacre::new, EntityClassification.CREATURE)
+                    .size(.4f, .4f) // Hitbox Size
+                    .build(new ResourceLocation(Gempire.MODID, "nacre").toString()));
+
     public static final RegistryObject<EntityType<EntityRuby>> RUBY = ENTITIES.register("ruby",
             () -> EntityType.Builder.create(EntityRuby::new, EntityClassification.CREATURE)
                     .size(.75f, 1.5f) // Hitbox Size
@@ -76,6 +82,11 @@ public class ModEntities {
             () -> EntityType.Builder.create(EntityObsidian::new, EntityClassification.CREATURE)
                     .size(.95f, 1.9f) // Hitbox Size
                     .build(new ResourceLocation(Gempire.MODID, "obsidian").toString()));
+
+    public static final RegistryObject<EntityType<EntityPearl>> PEARL = ENTITIES.register("pearl",
+            () -> EntityType.Builder.create(EntityPearl::new, EntityClassification.CREATURE)
+                    .size(.5f, 1.8f) // Hitbox Size
+                    .build(new ResourceLocation(Gempire.MODID, "pearl").toString()));
 
     public static final RegistryObject<EntityType<IceShardEntity>> ICE_SHARD = ENTITIES.register("ice_shard", () -> {
         return EntityType.Builder.<IceShardEntity>create(IceShardEntity::new, EntityClassification.MISC)

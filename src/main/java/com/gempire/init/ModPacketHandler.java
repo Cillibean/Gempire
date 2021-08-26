@@ -59,5 +59,29 @@ public class ModPacketHandler {
                 C2SRequestPoof::encode,
                 C2SRequestPoof::decode,
                 C2SRequestPoof::handle);
+        ModPacketHandler.INSTANCE.registerMessage(
+                networkId++,
+                C2SRequestPageChange.class,
+                C2SRequestPageChange::encode,
+                C2SRequestPageChange::decode,
+                C2SRequestPageChange::handle);
+        ModPacketHandler.INSTANCE.registerMessage(
+                networkId++,
+                C2SRequestHairChange.class,
+                C2SRequestHairChange::encode,
+                C2SRequestHairChange::decode,
+                C2SRequestHairChange::handle);
+        ModPacketHandler.INSTANCE.registerMessage(
+                networkId++,
+                C2SRequestOutfitChange.class,
+                C2SRequestOutfitChange::encode,
+                C2SRequestOutfitChange::decode,
+                C2SRequestOutfitChange::handle);
+        ModPacketHandler.INSTANCE.registerMessage(
+                networkId++,
+                C2SRequestInsigniaChange.class,
+                C2SRequestInsigniaChange::encode,
+                C2SRequestInsigniaChange::decode,
+                C2SRequestInsigniaChange::handle);
     }
 }

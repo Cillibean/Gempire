@@ -1,6 +1,9 @@
 package com.gempire.entities.abilities.interfaces;
 
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
+
+import javax.annotation.Nullable;
 
 public interface IAlchemyAbility {
     default int maxTime(){
@@ -8,7 +11,7 @@ public interface IAlchemyAbility {
     }
     Item input();
     Item output();
-    default boolean doSpecialActionOnInput(){
+    default boolean doSpecialActionOnInput(@Nullable PlayerEntity player){
         return true;
     }
 }
