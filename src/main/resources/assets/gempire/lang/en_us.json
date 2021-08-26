@@ -283,6 +283,7 @@
   "entity.gempire.topaz": "Topaz",
   "entity.gempire.obsidian": "Obsidian",
   "entity.gempire.pearl": "Pearl",
+  "entity.gempire.nephrite": "Nephrite",
 
   "messages.gempire.entity.claimed": "This Gem now belongs to you!",
   "messages.gempire.entity.follow": "This Gem will now follow you.",
@@ -357,5 +358,8 @@
   "screens.gempire.damage": "Attack Damage",
   "screens.gempire.poof": "Poof",
 
-  "commands.gempire.nounderstand": "I'm not sure she understands..."
+  "commands.gempire.nounderstand": "I'm not sure she understands...",
+  "commands.gempire.faillocate": "I don't think she could find any...",
+  "commands.gempire.foundit": "Here's your map! (Check her inventory)",
+  "commands.gempire.nomap": "She needs a map!"
 }

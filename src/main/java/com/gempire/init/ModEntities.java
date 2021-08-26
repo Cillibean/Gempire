@@ -88,6 +88,11 @@ public class ModEntities {
                     .size(.5f, 1.8f) // Hitbox Size
                     .build(new ResourceLocation(Gempire.MODID, "pearl").toString()));
 
+    public static final RegistryObject<EntityType<EntityNephrite>> NEPHRITE = ENTITIES.register("nephrite",
+            () -> EntityType.Builder.create(EntityNephrite::new, EntityClassification.CREATURE)
+                    .size(.5f, 1.8f) // Hitbox Size
+                    .build(new ResourceLocation(Gempire.MODID, "nephrite").toString()));
+
     public static final RegistryObject<EntityType<IceShardEntity>> ICE_SHARD = ENTITIES.register("ice_shard", () -> {
         return EntityType.Builder.<IceShardEntity>create(IceShardEntity::new, EntityClassification.MISC)
                 .size(0.25F, 0.25F)
@@ -106,6 +111,7 @@ public class ModEntities {
         ModEntities.CRUXTOGEM.put("agate", ModCruxes.AGATE_CONDITIONS());
         ModEntities.CRUXTOGEM.put("topaz", ModCruxes.TOPAZ_CONDITIONS());
         ModEntities.CRUXTOGEM.put("obsidian", ModCruxes.OBSIDIAN_CONDITIONS());
+        ModEntities.CRUXTOGEM.put("nephrite", ModCruxes.NEPHRITE_CONDITIONS());
         GemFormation.POSSIBLE_GEMS.add("ruby");
         GemFormation.POSSIBLE_GEMS.add("sapphire");
         GemFormation.POSSIBLE_GEMS.add("quartz");
@@ -113,12 +119,14 @@ public class ModEntities {
         GemFormation.POSSIBLE_GEMS.add("agate");
         GemFormation.POSSIBLE_GEMS.add("topaz");
         GemFormation.POSSIBLE_GEMS.add("obsidian");
+        GemFormation.POSSIBLE_GEMS.add("nephrite");
     }
 
     public static void setVanillaGems(){
         AddonHandler.VANILLA_GEMS.add("pebble");
         AddonHandler.VANILLA_GEMS.add("mica");
         AddonHandler.VANILLA_GEMS.add("shale");
+        AddonHandler.VANILLA_GEMS.add("nacre");
         AddonHandler.VANILLA_GEMS.add("ruby");
         AddonHandler.VANILLA_GEMS.add("sapphire");
         AddonHandler.VANILLA_GEMS.add("quartz");
@@ -126,5 +134,7 @@ public class ModEntities {
         AddonHandler.VANILLA_GEMS.add("agate");
         AddonHandler.VANILLA_GEMS.add("topaz");
         AddonHandler.VANILLA_GEMS.add("obsidian");
+        AddonHandler.VANILLA_GEMS.add("pearl");
+        AddonHandler.VANILLA_GEMS.add("nephrite");
     }
 }

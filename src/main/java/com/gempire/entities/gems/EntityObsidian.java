@@ -97,7 +97,7 @@ public class EntityObsidian extends EntityGem implements IRideable {
     }
     public Abilities[] definiteAbilities(){
         return new Abilities[]{
-                Abilities.CRYOKINESIS
+                Abilities.CRYOKINESIS, Abilities.VEHICLE
         };
     }
 

@@ -106,4 +106,9 @@ public class EntityShale extends EntityStarterGem {
                 Abilities.ESSENCE_BREWER
         };
     }
+
+    @Override
+    public boolean canOpenInventoryByDefault() {
+        return true;
+    }
 }

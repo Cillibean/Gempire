@@ -3,6 +3,8 @@ package com.gempire.entities.bases;
 import com.gempire.Gempire;
 import com.gempire.container.GemUIContainer;
 import com.gempire.container.InjectorContainer;
+import com.gempire.entities.abilities.AbilityScout;
+import com.gempire.entities.abilities.AbilityVehicle;
 import com.gempire.entities.abilities.base.Ability;
 import com.gempire.entities.abilities.AbilityZilch;
 import com.gempire.entities.abilities.interfaces.*;
@@ -15,12 +17,17 @@ import com.gempire.util.Abilities;
 import com.gempire.util.Color;
 import com.gempire.util.GemPlacements;
 import com.google.common.collect.ImmutableList;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufAllocator;
 import io.netty.util.ByteProcessor;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FlowingFluidBlock;
 import net.minecraft.client.Minecraft;
+import net.minecraft.command.CommandSource;
+import net.minecraft.command.impl.LocateBiomeCommand;
+import net.minecraft.command.impl.LocateCommand;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.item.ItemEntity;
@@ -47,10 +54,17 @@ import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.util.text.*;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IServerWorld;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.gen.feature.Features;
+import net.minecraft.world.gen.feature.structure.Structure;
+import net.minecraft.world.server.ServerWorld;
+import net.minecraft.world.storage.MapData;
+import net.minecraft.world.storage.MapDecoration;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
@@ -133,6 +147,9 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
 
     public PlayerEntity currentPlayer;
 
+    public static final SimpleCommandExceptionType LOCATE_FAILED_EXCEPTION = new SimpleCommandExceptionType(new TranslationTextComponent("commands.gempire.faillocate"));
+    public int maxStructureTime = 5 * 20;
+    public int structureTime = 0;
 
     public EntityGem(EntityType<? extends CreatureEntity> type, World worldIn) {
         super(type, worldIn);
@@ -235,6 +252,7 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
         compound.putInt("marking2Color", this.getMarking2Color());
         compound.putInt("brewingTicks", this.brewingTicks);
         compound.putBoolean("brewing", this.brewing);
+        compound.putInt("structureTime", this.structureTime);
         ItemStackHelper.saveAllItems(compound, this.items);
     }
 
@@ -280,6 +298,7 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
         this.setMarking2Color(compound.getInt("marking2Color"));
         this.brewingTicks = compound.getInt("brewingTicks");
         this.brewing = compound.getBoolean("brewing");
+        this.structureTime = compound.getInt("structureTime");
         ItemStackHelper.loadAllItems(compound, this.items);
     }
 
@@ -329,10 +348,12 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
                         this.cycleMovementAI(player);
                     }
                     else {
-                        NetworkHooks.openGui((ServerPlayerEntity) player, this, buf -> buf.writeInt(this.getEntityId()));
-                        if(this.isRideable()){
-                            if(!this.isBeingRidden()){
-                                player.startRiding(this);
+                        if(this.canOpenInventoryByDefault()) {
+                            NetworkHooks.openGui((ServerPlayerEntity) player, this, buf -> buf.writeInt(this.getEntityId()));
+                            if (this.isRideable()) {
+                                if (!this.isBeingRidden()) {
+                                    player.startRiding(this);
+                                }
                             }
                         }
                     }
@@ -373,6 +394,7 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
     1 is wander
     2 is follow
      */
+
     public void cycleMovementAI(PlayerEntity player){
         //Cycles through the various movement types.
         this.navigator.clearPath();
@@ -1053,6 +1075,12 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
     }
 
     public boolean isRideable(){
+        boolean flag = false;
+        for(Ability ability : this.getAbilityPowers()){
+            if(ability instanceof AbilityVehicle){
+                flag = true;
+            }
+        }
         return false;
     }
 
@@ -1266,6 +1294,101 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
 
     public int getBrewProgress(){
         return this.brewProgress;
+    }
+
+    public boolean canOpenInventoryByDefault(){
+        return true;
+    }
+
+    public boolean consumeItemCheck(Item item){
+        for(int i = 0; i < EntityGem.NUMBER_OF_SLOTS - 4; i++){
+            if(this.getStackInSlot(i + 36).getItem() == item){
+                this.getStackInSlot(i + 36).shrink(1);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /*
+
+    COMMAND STUFF
+
+    */
+
+    public static BlockPos findStructure(EntityGem gem, Structure<?> structure) {
+        if(gem.world.isRemote){
+            return BlockPos.ZERO;
+        }
+        BlockPos blockpos = new BlockPos(gem.getPosition());
+        BlockPos blockpos1 = ((ServerWorld)gem.getEntityWorld()).func_241117_a_(structure, blockpos, 100, false);
+        if (blockpos1 == null) {
+            return BlockPos.ZERO;
+        } else {
+            return blockpos1;
+        }
+    }
+
+    public static BlockPos findBiome(EntityGem gem, ResourceLocation biomeResource) throws CommandSyntaxException {
+        if(gem.world.isRemote){
+            return BlockPos.ZERO;
+        }
+        Biome biome = gem.getServer().func_244267_aX().getRegistry(Registry.BIOME_KEY).getOptional(biomeResource).orElseThrow(() -> {
+            return LocateBiomeCommand.field_241044_a_.create(biomeResource);
+        });
+        BlockPos blockpos = new BlockPos(gem.getPosition());
+        BlockPos blockpos1 = ((ServerWorld)gem.getEntityWorld()).func_241116_a_(biome, blockpos, 6400, 8);
+        String s = biomeResource.toString();
+        if (blockpos1 == null) {
+            return BlockPos.ZERO;
+        } else {
+            return blockpos1;
+        }
+    }
+
+    public void runFindCommand(ServerPlayerEntity player, @Nullable Structure<?> structure, @Nullable ResourceLocation biomeResource, boolean biome)
+            throws CommandSyntaxException {
+        BlockPos pos = biome ? EntityGem.findBiome(this, biomeResource) : EntityGem.findStructure(this, structure);
+        if(this.consumeItemCheck(Items.MAP)) {
+            if (pos == BlockPos.ZERO) {
+                player.sendMessage(new TranslationTextComponent("commands.gempire.faillocate"), UUID.randomUUID());
+                return;
+            }
+            boolean done = false;
+            ItemStack map = FilledMapItem.setupNewMap(this.world, pos.getX(), pos.getZ(), (byte) 0, true, true);
+            MapData.addTargetDecoration(map, pos, "location", MapDecoration.Type.RED_X);
+            String name = biome ? biomeResource.toString().replaceAll("minecraft:", "") :
+                    structure.getStructureName().replaceAll("minecraft:", "");
+            map.setDisplayName(new StringTextComponent(name));
+            for (int i = 0; i < EntityGem.NUMBER_OF_SLOTS - 6; i++) {
+                if (this.getStackInSlot(i + 36) == ItemStack.EMPTY) {
+                    this.setInventorySlotContents(i + 36, map);
+                    done = true;
+                    break;
+                }
+            }
+            if (!done) {
+                this.entityDropItem(map);
+            }
+            player.sendMessage(new TranslationTextComponent("commands.gempire.foundit"), UUID.randomUUID());
+        }
+        else{
+            player.sendMessage(new TranslationTextComponent("commands.gempire.nomap"), UUID.randomUUID());
+        }
+    }
+
+    public boolean canLocateStructures(){
+        boolean flag = false;
+        for(Ability ability : this.getAbilityPowers()){
+            if(ability instanceof AbilityScout){
+                return flag = true;
+            }
+        }
+        return flag;
+    }
+
+    public boolean isOnStructureCooldown(){
+        return true;
     }
 
     //-------------------------------------------------------------------------------------------------------------------------------------------------------------//

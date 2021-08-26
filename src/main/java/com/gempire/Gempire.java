@@ -25,6 +25,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.LootTableLoadEvent;
+import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -112,6 +113,9 @@ public class Gempire
         DeferredWorkQueue.runLater(() -> {
             GlobalEntityTypeAttributes.put(ModEntities.PEARL.get(), EntityPearl.setCustomAttributes().create());
         });
+        DeferredWorkQueue.runLater(() -> {
+            GlobalEntityTypeAttributes.put(ModEntities.NEPHRITE.get(), EntityNephrite.setCustomAttributes().create());
+        });
         ModPacketHandler.registerPackets();
         ModEntities.setVanillaGems();
         ModEntities.registerCruxes();
@@ -138,6 +142,11 @@ public class Gempire
         else{
             event.getTable().addPool(LootPool.builder().addEntry(TableLootEntry.builder(event.getName())).build());
         }
+    }
+
+    @SubscribeEvent
+    public void onCommandRegister(final RegisterCommandsEvent event){
+        ModCommands.registerCommands(event);
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event)
@@ -175,6 +184,7 @@ public class Gempire
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.TOPAZ.get(), RenderTopaz::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.OBSIDIAN.get(), RenderObsidian::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.PEARL.get(), RenderPearl::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.NEPHRITE.get(), RenderNephrite::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.ICE_SHARD.get(), (manager) -> new RenderIceShard(manager, Minecraft.getInstance().getItemRenderer()));
 
         ScreenManager.registerFactory(ModContainers.TANK_CONTAINER.get(), TankScreen::new);

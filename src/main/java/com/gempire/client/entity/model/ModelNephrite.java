@@ -39,10 +39,10 @@ public class ModelNephrite<T extends EntityGem> extends ModelGem<T> {
         this.textureWidth = 128;
         this.textureHeight = 64;
         this.HairPoof = new ModelRenderer(this, 32, 39);
-        this.HairPoof.setRotationPoint(0.0F, -1.0F, 0.0F);
+        //this.HairPoof.setRotationPoint(0.0F, -1.0F, 0.0F);
         this.HairPoof.addBox(-7.0F, -5.2F, -3.0F, 14.0F, 4.0F, 10.0F, 0.0F, 0.0F, 0.0F);
         this.Ponytail_1 = new ModelRenderer(this, 73, 50);
-        this.Ponytail_1.setRotationPoint(0.0F, -1.0F, 0.0F);
+        //this.Ponytail_1.setRotationPoint(0.0F, -1.0F, 0.0F);
         this.Ponytail_1.addBox(-3.5F, -12.0F, 2.5F, 7.0F, 7.0F, 7.0F, 0.0F, 0.0F, 0.0F);
         this.Body = new ModelRenderer(this, 8, 16);
         this.Body.setRotationPoint(1.0F, -1.0F, 0.0F);
@@ -57,16 +57,16 @@ public class ModelNephrite<T extends EntityGem> extends ModelGem<T> {
         this.ArmR.setRotationPoint(3.0F, 0.0F, 0.0F);
         this.ArmR.addBox(0.0F, -1.0F, -1.0F, 2.0F, 14.0F, 2.0F, 0.0F, 0.0F, 0.0F);
         this.Hair = new ModelRenderer(this, 32, 0);
-        this.Hair.setRotationPoint(0.0F, -1.0F, 0.0F);
+        //this.Hair.setRotationPoint(0.0F, -1.0F, 0.0F);
         this.Hair.addBox(-4.0F, -8.0F, -4.2F, 8.0F, 8.0F, 8.0F, 0.5F, 0.5F, 0.5F);
         this.Head = new ModelRenderer(this, 0, 0);
         this.Head.setRotationPoint(0.0F, -1.0F, 0.0F);
         this.Head.addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, 0.0F, 0.0F, 0.0F);
         this.PigtailR = new ModelRenderer(this, 48, 53);
-        this.PigtailR.setRotationPoint(0.0F, -1.0F, 0.0F);
+        //this.PigtailR.setRotationPoint(0.0F, -1.0F, 0.0F);
         this.PigtailR.addBox(4.0F, -9.5F, -2.0F, 4.0F, 7.0F, 4.0F, 0.0F, 0.0F, 0.0F);
         this.Pigtail2L = new ModelRenderer(this, 54, 16);
-        this.Pigtail2L.setRotationPoint(0.0F, -1.0F, 0.0F);
+        //this.Pigtail2L.setRotationPoint(0.0F, -1.0F, 0.0F);
         this.Pigtail2L.addBox(-8.5F, -5.5F, -1.5F, 3.0F, 8.0F, 3.0F, 0.0F, 0.0F, 0.0F);
         this.setRotateAngle(Pigtail2L, 0.0F, 0.0F, 0.296705972839036F);
         this.ArmL = new ModelRenderer(this, 0, 16);
@@ -79,11 +79,11 @@ public class ModelNephrite<T extends EntityGem> extends ModelGem<T> {
         this.LShoulder.setRotationPoint(-3.0F, 0.0F, 0.0F);
         this.LShoulder.addBox(-5.0F, -3.0F, -2.0F, 5.0F, 5.0F, 4.0F, 0.0F, 0.0F, 0.0F);
         this.Pigtail2R = new ModelRenderer(this, 66, 16);
-        this.Pigtail2R.setRotationPoint(0.0F, -1.0F, 0.0F);
+        //this.Pigtail2R.setRotationPoint(0.0F, -1.0F, 0.0F);
         this.Pigtail2R.addBox(5.5F, -5.5F, -1.5F, 3.0F, 8.0F, 3.0F, 0.0F, 0.0F, 0.0F);
         this.setRotateAngle(Pigtail2R, 0.0F, 0.0F, -0.296705972839036F);
         this.Ponytail = new ModelRenderer(this, 8, 32);
-        this.Ponytail.setRotationPoint(0.0F, -1.0F, 0.0F);
+        //this.Ponytail.setRotationPoint(0.0F, -1.0F, 0.0F);
         this.Ponytail.addBox(-2.5F, -9.5F, 5.5F, 5.0F, 9.0F, 5.0F, 0.0F, 0.0F, 0.0F);
         this.setRotateAngle(Ponytail, 0.2617993877991494F, 0.0F, 0.0F);
         this.Skirt = new ModelRenderer(this, 0, 53);
@@ -91,13 +91,21 @@ public class ModelNephrite<T extends EntityGem> extends ModelGem<T> {
         this.Skirt.addBox(0.0F, 0.0F, 0.0F, 16.0F, 11.0F, 0.0F, 0.0F, 0.0F, 0.0F);
         this.setRotateAngle(Skirt, 0.08726646259971647F, 0.0F, 0.0F);
         this.PigtailL = new ModelRenderer(this, 32, 53);
-        this.PigtailL.setRotationPoint(0.0F, -1.0F, 0.0F);
+        //this.PigtailL.setRotationPoint(0.0F, -1.0F, 0.0F);
         this.PigtailL.addBox(-8.0F, -9.5F, -2.0F, 4.0F, 7.0F, 4.0F, 0.0F, 0.0F, 0.0F);
+        this.Head.addChild(this.Hair);
+        this.Hair.addChild(this.PigtailL);
+        this.Hair.addChild(this.PigtailR);
+        this.Hair.addChild(this.Pigtail2L);
+        this.Hair.addChild(this.Pigtail2R);
+        this.Hair.addChild(this.Ponytail);
+        this.Hair.addChild(this.HairPoof);
+        this.Hair.addChild(this.Ponytail_1);
     }
 
     @Override
     public void render(MatrixStack matrixStackIn, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) { 
-        ImmutableList.of(this.HairPoof, this.Ponytail_1, this.Body, this.LegL, this.RShoulder, this.ArmR, this.Hair, this.Head, this.PigtailR, this.Pigtail2L, this.ArmL, this.LegR, this.LShoulder, this.Pigtail2R, this.Ponytail, this.Skirt, this.PigtailL).forEach((modelRenderer) -> { 
+        ImmutableList.of(this.Body, this.LegL, this.RShoulder, this.ArmR, this.Head, this.ArmL, this.LegR, this.LShoulder, this.Skirt).forEach((modelRenderer) -> {
             modelRenderer.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
         });
     }

@@ -194,7 +194,7 @@ public class ModCruxes {
         float gemTemperatureMin = 0.95f;
         float gemTemperatureMax = 1f;
         Item primer = Items.WITHER_ROSE;
-        String essences = "yellow";
+        String essences = "blue-yellow";
         gemCruxes.add(new Crux(Blocks.STONE.getDefaultState(), 2, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.GRANITE.getDefaultState(), 2, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.DIORITE.getDefaultState(), 2, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));

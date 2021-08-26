@@ -161,8 +161,8 @@ public class GemUIScreen extends ContainerScreen<GemUIContainer> {
         livingEntity.renderYawOffset = f2;
         livingEntity.rotationYaw = f3;
         livingEntity.rotationPitch = f4;
-        livingEntity.prevRotationYawHead = f3;
-        livingEntity.rotationYawHead = f3;
+        livingEntity.prevRotationYawHead = f5;
+        livingEntity.rotationYawHead = f6;
         RenderSystem.popMatrix();
     }
 

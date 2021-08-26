@@ -359,6 +359,11 @@ public class EntityPearl extends EntityVaryingGem {
         return 16;
     }
 
+    @Override
+    public boolean canOpenInventoryByDefault() {
+        return true;
+    }
+
     /*
 
     INVENTORY STUFF

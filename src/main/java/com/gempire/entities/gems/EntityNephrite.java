@@ -38,9 +38,10 @@ public class EntityNephrite extends EntityGem {
         this.goalSelector.addGoal(8, new LookRandomlyGoal(this));
         this.goalSelector.addGoal(7, new EntityAIWander(this, 1.0D));
         this.goalSelector.addGoal(7, new EntityAIFollowOwner(this, 1.0D));
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, MobEntity.class, 1, false, false, (p_234199_0_) -> {
+        this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, MobEntity.class, 1, false, false, (p_234199_0_) -> {
             return p_234199_0_ instanceof IMob;
         }));
+        this.goalSelector.addGoal(4, new MeleeAttackGoal(this, 1.1D, false));
     }
 
     @Override
@@ -51,10 +52,7 @@ public class EntityNephrite extends EntityGem {
     @Override
     public GemPlacements[] getPlacements() {
         return new GemPlacements[]{
-                GemPlacements.TOP_OF_HEAD, GemPlacements.FOREHEAD, GemPlacements.BACK_OF_HEAD, GemPlacements.LEFT_EYE, GemPlacements.RIGHT_EYE, GemPlacements.NOSE,
-                GemPlacements.LEFT_CHEEK, GemPlacements.RIGHT_CHEEK, GemPlacements.LEFT_EAR, GemPlacements.RIGHT_EAR, GemPlacements.CHEST, GemPlacements.BACK, GemPlacements.BELLY,
-                GemPlacements.LEFT_SHOULDER, GemPlacements.RIGHT_SHOULDER, GemPlacements.LEFT_HAND, GemPlacements.RIGHT_HAND, GemPlacements.LEFT_PALM, GemPlacements.RIGHT_PALM,
-                GemPlacements.LEFT_THIGH, GemPlacements.RIGHT_THIGH, GemPlacements.LEFT_ANKLE, GemPlacements.RIGHT_ANKLE
+                GemPlacements.CHEST
         };
     }
 
@@ -92,7 +90,7 @@ public class EntityNephrite extends EntityGem {
     }
     public Abilities[] definiteAbilities(){
         return new Abilities[]{
-                Abilities.PARALYSIS
+                Abilities.PARALYSIS, Abilities.SCOUT
         };
     }
 
@@ -138,5 +136,20 @@ public class EntityNephrite extends EntityGem {
     @Override
     public int baseFocus() {
         return 7;
+    }
+
+    @Override
+    public boolean canLocateStructures() {
+        return true;
+    }
+
+    @Override
+    public boolean isOnStructureCooldown() {
+        return false;
+    }
+
+    @Override
+    public boolean canOpenInventoryByDefault() {
+        return true;
     }
 }

@@ -42,7 +42,7 @@ public class ModelTopaz<T extends EntityGem> extends ModelGem<T> {
         this.RightLeg.setTextureOffset(70, 45).addBox(0.0F, 0.0F, 0.0F, 6.0F, 10.0F, 6.0F, -0.5F, 0.0F, -0.5F);
         this.gems = new ModelRenderer(this, 0, 0);
         this.gems.setRotationPoint(-6.0F, 3F, -2.0F);
-        this.gems.setTextureOffset(30, 46).addBox(0.0F, 0.0F, 0.0F, 12.0F, 6.0F, 6.0F, -0.8F, -1.0F, -1.0F);
+        this.gems.setTextureOffset(30, 45).addBox(0.0F, 0.0F, 0.0F, 12.0F, 6.0F, 6.0F, -0.8F, -1.0F, -1.0F);
         this.Head = new ModelRenderer(this, 0, 0);
         this.Head.setRotationPoint(0, -16.9F, 0);
         this.Head.setTextureOffset(28, 0).addBox(-4F, 0.0F, -3.5F, 8.0F, 10.0F, 8.0F, 0.0F, -0.1F, 0.0F);
