@@ -90,8 +90,18 @@ public class ModEntities {
 
     public static final RegistryObject<EntityType<EntityNephrite>> NEPHRITE = ENTITIES.register("nephrite",
             () -> EntityType.Builder.create(EntityNephrite::new, EntityClassification.CREATURE)
-                    .size(.5f, 1.8f) // Hitbox Size
+                    .size(.5f, 1.9f) // Hitbox Size
                     .build(new ResourceLocation(Gempire.MODID, "nephrite").toString()));
+
+    public static final RegistryObject<EntityType<EntitySpodumene>> SPODUMENE = ENTITIES.register("spodumene",
+            () -> EntityType.Builder.create(EntitySpodumene::new, EntityClassification.CREATURE)
+                    .size(.75f, 1.9f) // Hitbox Size
+                    .build(new ResourceLocation(Gempire.MODID, "spodumene").toString()));
+
+    public static final RegistryObject<EntityType<EntityZircon>> ZIRCON = ENTITIES.register("zircon",
+            () -> EntityType.Builder.create(EntityZircon::new, EntityClassification.CREATURE)
+                    .size(.5f, 1.8f) // Hitbox Size
+                    .build(new ResourceLocation(Gempire.MODID, "zircon").toString()));
 
     public static final RegistryObject<EntityType<IceShardEntity>> ICE_SHARD = ENTITIES.register("ice_shard", () -> {
         return EntityType.Builder.<IceShardEntity>create(IceShardEntity::new, EntityClassification.MISC)
@@ -112,6 +122,8 @@ public class ModEntities {
         ModEntities.CRUXTOGEM.put("topaz", ModCruxes.TOPAZ_CONDITIONS());
         ModEntities.CRUXTOGEM.put("obsidian", ModCruxes.OBSIDIAN_CONDITIONS());
         ModEntities.CRUXTOGEM.put("nephrite", ModCruxes.NEPHRITE_CONDITIONS());
+        ModEntities.CRUXTOGEM.put("spodumene", ModCruxes.SPODUMENE_CONDITIONS());
+        ModEntities.CRUXTOGEM.put("zircon", ModCruxes.ZIRCON_CONDITIONS());
         GemFormation.POSSIBLE_GEMS.add("ruby");
         GemFormation.POSSIBLE_GEMS.add("sapphire");
         GemFormation.POSSIBLE_GEMS.add("quartz");
@@ -120,6 +132,8 @@ public class ModEntities {
         GemFormation.POSSIBLE_GEMS.add("topaz");
         GemFormation.POSSIBLE_GEMS.add("obsidian");
         GemFormation.POSSIBLE_GEMS.add("nephrite");
+        GemFormation.POSSIBLE_GEMS.add("spodumene");
+        GemFormation.POSSIBLE_GEMS.add("zircon");
     }
 
     public static void setVanillaGems(){
@@ -136,5 +150,7 @@ public class ModEntities {
         AddonHandler.VANILLA_GEMS.add("obsidian");
         AddonHandler.VANILLA_GEMS.add("pearl");
         AddonHandler.VANILLA_GEMS.add("nephrite");
+        AddonHandler.VANILLA_GEMS.add("spodumene");
+        AddonHandler.VANILLA_GEMS.add("zircon");
     }
 }

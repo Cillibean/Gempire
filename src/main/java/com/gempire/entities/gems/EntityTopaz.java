@@ -59,13 +59,13 @@ public class EntityTopaz extends EntityVaryingGem {
 
     @Override
     public boolean UsesUniqueNames() {
-        return true;
+        return false;
     }
 
     @Override
     public int[] NeglectedColors() {
         return new int[]{
-                1,2,3,5,7,8,9,10,12,13,14,15
+                1,2,3,5,7,8,9,10,12,13,14,15,16,17
         };
     }
 
@@ -167,6 +167,6 @@ public class EntityTopaz extends EntityVaryingGem {
 
     @Override
     public boolean hasVisorCosmeticOnly() {
-        return false;
+        return true;
     }
 }

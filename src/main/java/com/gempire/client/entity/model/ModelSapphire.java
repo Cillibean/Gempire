@@ -15,7 +15,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
  * Sapphire - TheBetaZeta
  * Created using Tabula 8.0.0
  */
-@OnlyIn(Dist.CLIENT)
+
 public class ModelSapphire<T extends EntityGem> extends ModelGem<T> {
     public ModelRenderer body;
     public ModelRenderer leg2;

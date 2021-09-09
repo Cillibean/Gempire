@@ -15,7 +15,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
  * Pearl - Segapop
  * Created using Tabula 8.0.0
  */
-@OnlyIn(Dist.CLIENT)
+
 public class ModelPearl<T extends EntityGem> extends ModelGem<T> {
     public ModelRenderer Hair;
     public ModelRenderer Head;

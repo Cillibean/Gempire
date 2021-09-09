@@ -17,4 +17,5 @@ public class ModContainers {
     public static final RegistryObject<ContainerType<GemUIContainer>> GEM_UI_CONTAINER = CONTAINERS.register("gem_ui_container", () -> IForgeContainerType.create(GemUIContainer::new));
     public static final RegistryObject<ContainerType<ShellContainer>> SHELL_CONTAINER = CONTAINERS.register("shell_container", () -> IForgeContainerType.create(ShellContainer::new));
     public static final RegistryObject<ContainerType<PearlUIContainer>> PEARL_UI_CONTAINER = CONTAINERS.register("pearl_ui_container", () -> IForgeContainerType.create(PearlUIContainer::new));
+    public static final RegistryObject<ContainerType<ZirconUIContainer>> ZIRCON_UI_CONTAINER = CONTAINERS.register("zircon_ui_container", () -> IForgeContainerType.create(ZirconUIContainer::new));
 }

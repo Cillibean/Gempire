@@ -15,7 +15,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
  * Pebble - TheBetaZeta
  * Created using Tabula 8.0.0
  */
-@OnlyIn(Dist.CLIENT)
+
 public class ModelPebble<T extends EntityStarterGem> extends ModelGem<T> {
     public ModelRenderer body;
     public ModelRenderer Back_of_headgem;

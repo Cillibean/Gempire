@@ -37,13 +37,13 @@ public class IceShardEntity extends ProjectileItemEntity {
         return ModItems.ICE_SHARD.get();
     }
 
-    @OnlyIn(Dist.CLIENT)
+
     private IParticleData makeParticle() {
         ItemStack itemstack = this.func_213882_k();
         return (IParticleData)(itemstack.isEmpty() ? ParticleTypes.ITEM_SNOWBALL : new ItemParticleData(ParticleTypes.ITEM, itemstack));
     }
 
-    @OnlyIn(Dist.CLIENT)
+
     public void handleStatusUpdate(byte id) {
         if (id == 3) {
             IParticleData iparticledata = this.makeParticle();

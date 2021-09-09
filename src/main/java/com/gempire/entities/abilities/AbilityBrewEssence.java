@@ -15,6 +15,7 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 
 import javax.annotation.Nullable;
+import java.util.UUID;
 
 public class AbilityBrewEssence extends Ability implements IAlchemyAbility {
     public static final int EXPERIENCE = 40;
@@ -58,13 +59,18 @@ public class AbilityBrewEssence extends Ability implements IAlchemyAbility {
     public boolean doSpecialActionOnInput(@Nullable PlayerEntity player) {
         if(player.isCreative()) return true;
         boolean flagXP = false;
-        boolean flagLapis = this.holder.consumeItemCheck(ModItems.GILDED_LAPIS.get());
-        if(flagLapis){
-            if (player.experienceTotal >= AbilityBrewEssence.EXPERIENCE) {
-                EntityShale.decreaseExp(player, AbilityBrewEssence.EXPERIENCE);
-                flagXP = true;
-            }
+        if (player.experienceTotal >= AbilityBrewEssence.EXPERIENCE) {
+            EntityShale.decreaseExp(player, AbilityBrewEssence.EXPERIENCE);
+            flagXP = true;
         }
-        return flagLapis && flagXP;
+        else{
+            player.sendMessage(new TranslationTextComponent("messages.gempire.entity.player_need_xp"), UUID.randomUUID());
+        }
+        return flagXP;
+    }
+
+    @Override
+    public Item consume() {
+        return ModItems.GILDED_LAPIS.get();
     }
 }

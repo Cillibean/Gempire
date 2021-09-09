@@ -1,6 +1,7 @@
 package com.gempire.entities.ai;
 
 import com.gempire.entities.bases.EntityGem;
+import com.gempire.entities.gems.EntitySpodumene;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.player.PlayerEntity;
@@ -45,7 +46,9 @@ public class EntityAIFollowOwner extends Goal {
     @Override
     public void startExecuting(){
         super.startExecuting();
-        this.follower.setPathPriority(PathNodeType.WATER, 0);
+        if(!(this.follower instanceof EntitySpodumene)){
+            this.follower.setPathPriority(PathNodeType.WATER, 0);
+        }
         this.follower.getNavigator().tryMoveToXYZ(this.toFollow.getPosX(), this.toFollow.getPosY(), this.toFollow.getPosZ(), this.speed);
         if(this.follower.getDistanceSq(this.toFollow) > Math.pow(12, 2)){
             this.follower.setPosition(this.toFollow.getPosX(), this.toFollow.getPosY(), this.toFollow.getPosZ());
@@ -56,6 +59,8 @@ public class EntityAIFollowOwner extends Goal {
     public void resetTask() {
         this.toFollow = null;
         this.follower.getNavigator().clearPath();
-        this.follower.setPathPriority(PathNodeType.WATER, 0);
+        if(!(this.follower instanceof EntitySpodumene)) {
+            this.follower.setPathPriority(PathNodeType.WATER, 0);
+        }
     }
 }

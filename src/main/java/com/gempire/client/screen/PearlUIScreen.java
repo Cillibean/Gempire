@@ -29,7 +29,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.ArrayList;
 
-@OnlyIn(Dist.CLIENT)
+
 public class PearlUIScreen extends ContainerScreen<PearlUIContainer> {
     public static final ResourceLocation GUI = new ResourceLocation("gempire:textures/gui/pearl_ui.png");
     public static final ResourceLocation LEFT = new ResourceLocation("gempire:textures/gui/left.png");

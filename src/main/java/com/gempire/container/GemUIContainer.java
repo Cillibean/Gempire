@@ -68,9 +68,6 @@ public class GemUIContainer extends Container {
 
         //POTION SLOTS
         this.addSlot(new Slot(gem, 67, 177, 10){
-            public boolean isItemValid(ItemStack stack) {
-                return stack.getItem() instanceof GlassBottleItem || stack.getItem() == ModItems.ESSENCE_BOTTLE.get();
-            }
             public int getSlotStackLimit() {
                 return 1;
             }
@@ -85,7 +82,7 @@ public class GemUIContainer extends Container {
         for(int k = 0; k < 4; ++k) {
             final EquipmentSlotType equipmentslottype = VALID_EQUIPMENT_SLOTS[k];
             this.addSlot(new Slot(gem, 63 + k, 11 + k*18, 65){
-                @OnlyIn(Dist.CLIENT)
+
                 public Pair<ResourceLocation, ResourceLocation> getBackground() {
                     return Pair.of(PlayerContainer.LOCATION_BLOCKS_TEXTURE, GemUIContainer.ARMOR_SLOT_TEXTURES[equipmentslottype.getIndex()]);
                 }

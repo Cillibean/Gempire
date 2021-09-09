@@ -15,7 +15,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
  * ModelRuby - pezzottaite
  * Created using Tabula 8.0.0
  */
-@OnlyIn(Dist.CLIENT)
+
 public class ModelRuby<T extends EntityGem> extends ModelGem<T> {
     public ModelRenderer gemHead;
     public ModelRenderer gemBody;

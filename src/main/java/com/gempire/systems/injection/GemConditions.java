@@ -13,6 +13,7 @@ public class GemConditions {
     public int tier = 1;
     public float temperatureMin = .7f;
     public float temperatureMax = 1.4f;
+    public double rarity = 1;
 
     public GemConditions(ArrayList<Crux> cruxes, String essences, Item primer, int tier, float temperatureMin, float temperatureMax){
         this.cruxes = cruxes;
@@ -21,6 +22,16 @@ public class GemConditions {
         this.tier = tier;
         this.temperatureMin = temperatureMin;
         this.temperatureMax = temperatureMax;
+    }
+
+    public GemConditions(ArrayList<Crux> cruxes, String essences, Item primer, int tier, float temperatureMin, float temperatureMax, double rarity){
+        this.cruxes = cruxes;
+        this.essences = essences;
+        this.primer = primer;
+        this.tier = tier;
+        this.temperatureMin = temperatureMin;
+        this.temperatureMax = temperatureMax;
+        this.rarity = 1 / rarity;
     }
 
     public GemConditions(ArrayList<Crux> cruxes, String essences, Item primer, int tier){

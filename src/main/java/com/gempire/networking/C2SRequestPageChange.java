@@ -2,6 +2,7 @@ package com.gempire.networking;
 
 import com.gempire.entities.bases.EntityGem;
 import com.gempire.entities.gems.EntityPearl;
+import com.gempire.entities.gems.EntityZircon;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.DamageSource;
@@ -34,13 +35,22 @@ public class C2SRequestPageChange {
         ServerPlayerEntity sender = ctx.getSender();
         boolean hasPermission = true;
         if (hasPermission) {
-            EntityPearl gem = (EntityPearl) sender.world.getEntityByID(msg.entityID);
+            EntityGem gem = (EntityGem) sender.world.getEntityByID(msg.entityID);
             boolean forwardd = msg.forward;
-            if(forwardd){
-                gem.CyclePageForward();
+            boolean pearl = gem instanceof EntityPearl;
+            if(pearl) {
+                if (forwardd) {
+                    ((EntityPearl)gem).CyclePageForward();
+                } else {
+                    ((EntityPearl)gem).CyclePageBackwards();
+                }
             }
             else{
-                gem.CyclePageBackwards();
+                if (forwardd) {
+                    ((EntityZircon)gem).CyclePageForward();
+                } else {
+                    ((EntityZircon)gem).CyclePageBackwards();
+                }
             }
         }
         ctx.setPacketHandled(true);

@@ -15,7 +15,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
  * ModelObsidian - Pezzottaite
  * Created using Tabula 8.0.0
  */
-@OnlyIn(Dist.CLIENT)
+
 public class ModelObsidian<T extends EntityGem> extends ModelGem<T> {
     public ModelRenderer Head;
     public ModelRenderer RightArm;

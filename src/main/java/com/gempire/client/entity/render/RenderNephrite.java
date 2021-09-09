@@ -2,10 +2,8 @@ package com.gempire.client.entity.render;
 
 import com.gempire.Gempire;
 import com.gempire.client.entity.model.ModelNephrite;
-import com.gempire.client.entity.model.ModelRuby;
 import com.gempire.client.entity.render.layers.*;
 import com.gempire.entities.gems.EntityNephrite;
-import com.gempire.entities.gems.EntityRuby;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;

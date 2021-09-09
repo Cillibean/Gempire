@@ -180,4 +180,9 @@ public class EntitySapphire extends EntityVaryingGem {
     public boolean isFocused() {
         return true;
     }
+
+    @Override
+    public int getLuck() {
+        return 4;
+    }
 }

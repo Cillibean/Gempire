@@ -10,6 +10,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.pathfinding.PathNodeType;
+import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 
@@ -41,7 +42,7 @@ public class EntityAIAreaAbility extends Goal {
 
     @Override
     public boolean shouldContinueExecuting() {
-        return this.abilities != null && this.entities != null && this.gem.ticksExisted % 100 == 0 && this.gem.usesAreaAbilities();
+        return this.abilities != null && this.entities != null;
     }
 
     @Override
@@ -64,22 +65,50 @@ public class EntityAIAreaAbility extends Goal {
                         if (effectAbility.playerOnly()) {
                             if (this.flagPlayer) {
                                 if(this.flagOwner) {
-                                    entity.addPotionEffect(effectAbility.effect());
+                                    if(effectAbility.hasMultipleEffects()){
+                                        for(EffectInstance effect : effectAbility.effects()){
+                                            entity.addPotionEffect(effect);
+                                        }
+                                    }
+                                    else {
+                                        entity.addPotionEffect(effectAbility.effect());
+                                    }
                                 }
                             }
                         }
                         else if(effectAbility.gemAndPlayerOnly()){
                             if(this.flagGem){
-                                entity.addPotionEffect(effectAbility.effect());
+                                if(effectAbility.hasMultipleEffects()){
+                                    for(EffectInstance effect : effectAbility.effects()){
+                                        entity.addPotionEffect(effect);
+                                    }
+                                }
+                                else {
+                                    entity.addPotionEffect(effectAbility.effect());
+                                }
                             }
                             if(this.flagPlayer){
                                 if(this.flagOwner){
-                                    entity.addPotionEffect(effectAbility.effect());
+                                    if(effectAbility.hasMultipleEffects()){
+                                        for(EffectInstance effect : effectAbility.effects()){
+                                            entity.addPotionEffect(effect);
+                                        }
+                                    }
+                                    else {
+                                        entity.addPotionEffect(effectAbility.effect());
+                                    }
                                 }
                             }
                         }
                         else {
-                            entity.addPotionEffect(effectAbility.effect());
+                            if(effectAbility.hasMultipleEffects()){
+                                for(EffectInstance effect : effectAbility.effects()){
+                                    entity.addPotionEffect(effect);
+                                }
+                            }
+                            else {
+                                entity.addPotionEffect(effectAbility.effect());
+                            }
                         }
                     }
                     //Run through area abilities - Apply for each entity

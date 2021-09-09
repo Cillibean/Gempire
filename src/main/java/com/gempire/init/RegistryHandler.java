@@ -12,6 +12,7 @@ public class RegistryHandler {
 
     public static void init() {
         // attach DeferredRegister to the event bus
+        ModSounds.SOUNDS.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModBlocks.BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModItems.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModFluids.FLUIDS.register(FMLJavaModLoadingContext.get().getModEventBus());

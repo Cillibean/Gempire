@@ -19,7 +19,7 @@ import net.minecraft.util.math.vector.Vector3f;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
+
 public class RenderIceShard extends EntityRenderer<IceShardEntity> {
     private final ItemRenderer itemRenderer;
 

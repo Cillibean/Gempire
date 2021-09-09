@@ -118,16 +118,24 @@ public class Gempire
         DeferredWorkQueue.runLater(() -> {
             GlobalEntityTypeAttributes.put(ModEntities.NEPHRITE.get(), EntityNephrite.setCustomAttributes().create());
         });
+        DeferredWorkQueue.runLater(() -> {
+            GlobalEntityTypeAttributes.put(ModEntities.SPODUMENE.get(), EntitySpodumene.setCustomAttributes().create());
+        });
+        DeferredWorkQueue.runLater(() -> {
+            GlobalEntityTypeAttributes.put(ModEntities.ZIRCON.get(), EntityZircon.setCustomAttributes().create());
+        });
         ModPacketHandler.registerPackets();
         ModEntities.setVanillaGems();
         ModEntities.registerCruxes();
         ModFluids.registerFluidBuckets();
         ModAbilities.registerAbilities();
+        ModEnchants.registerVanillaEnchantments();
+        ModEnchants.registerItemDiscounts();
     }
 
     @SuppressWarnings("WARN")
     @SubscribeEvent
-    public void onLootTablesLoad(final LootTableLoadEvent event) {
+    public void onLootTablesLoad(LootTableLoadEvent event) {
         // Test: /loot give @p loot minecraft:chests/end_city_treasure
         if (event.getName().equals(new ResourceLocation("minecraft", "chests/abandoned_mineshaft"))
                 || event.getName().equals(new ResourceLocation("minecraft", "chests/underwater_ruin_big"))
@@ -187,6 +195,8 @@ public class Gempire
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.OBSIDIAN.get(), RenderObsidian::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.PEARL.get(), RenderPearl::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.NEPHRITE.get(), RenderNephrite::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.SPODUMENE.get(), RenderSpodumene::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.ZIRCON.get(), RenderZircon::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.ICE_SHARD.get(), (manager) -> new RenderIceShard(manager, Minecraft.getInstance().getItemRenderer()));
 
         ScreenManager.registerFactory(ModContainers.TANK_CONTAINER.get(), TankScreen::new);
@@ -194,6 +204,7 @@ public class Gempire
         ScreenManager.registerFactory(ModContainers.GEM_UI_CONTAINER.get(), GemUIScreen::new);
         ScreenManager.registerFactory(ModContainers.SHELL_CONTAINER.get(), ShellScreen::new);
         ScreenManager.registerFactory(ModContainers.PEARL_UI_CONTAINER.get(), PearlUIScreen::new);
+        ScreenManager.registerFactory(ModContainers.ZIRCON_UI_CONTAINER.get(), ZirconUIScreen::new);
 
         RenderTypeLookup.setRenderLayer(ModBlocks.POWER_CRYSTAL_BLOCK.get(), RenderType.getTranslucent());
         RenderTypeLookup.setRenderLayer(ModBlocks.SHELL_BLOCK.get(), RenderType.getTranslucent());

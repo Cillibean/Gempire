@@ -105,7 +105,6 @@ public class GemFormation {
         }
         try{
             gem.onInitialSpawn((IServerWorld) this.world, this.world.getDifficultyForLocation(this.pos), SpawnReason.TRIGGERED, null, null);
-            gem.setOwned(false, UUID.randomUUID());
         }
         catch (Exception e){
             e.printStackTrace();

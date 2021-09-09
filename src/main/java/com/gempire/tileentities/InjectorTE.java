@@ -27,6 +27,8 @@ import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.LockableLootTileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
@@ -249,6 +251,9 @@ public class InjectorTE extends LockableLootTileEntity implements IFluidTank, IN
             Item primer = this.getStackInSlot(InjectorTE.PRIME_INPUT_SLOT_INDEX).getItem();
             GemSeedBlock seedBlock = (GemSeedBlock) ModBlocks.GEM_SEED_BLOCK.get();
             this.world.setBlockState(seedPos, seedBlock.getDefaultState());
+            if(this.world.getBlockState(seedPos).getBlock() == ModBlocks.GEM_SEED_BLOCK.get()) {
+                this.getWorld().playSound(null, this.getPos(), ModSounds.INJECT.get(), SoundCategory.AMBIENT, 2f, 1);
+            }
             GemSeedTE gemSeedTE = (GemSeedTE) this.world.getTileEntity(seedPos);
             gemSeedTE.setEssences(essences);
             gemSeedTE.SetChroma(chroma);

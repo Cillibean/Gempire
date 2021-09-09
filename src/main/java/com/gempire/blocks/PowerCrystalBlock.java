@@ -68,7 +68,7 @@ public class PowerCrystalBlock extends ContainerBlock {
         return VoxelShapes.empty();
     }
 
-    @OnlyIn(Dist.CLIENT)
+
     public float getAmbientOcclusionLightValue(BlockState state, IBlockReader worldIn, BlockPos pos) {
         return 1.0F;
     }

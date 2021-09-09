@@ -41,7 +41,7 @@ import org.lwjgl.system.CallbackI;
 
 import java.util.ArrayList;
 
-@OnlyIn(Dist.CLIENT)
+
 public class GemUIScreen extends ContainerScreen<GemUIContainer> {
     public static final ResourceLocation GUI = new ResourceLocation("gempire:textures/gui/base.png");
     public static final ResourceLocation ARROW = new ResourceLocation("gempire:textures/gui/arrow_down.png");
@@ -63,7 +63,7 @@ public class GemUIScreen extends ContainerScreen<GemUIContainer> {
         this.nameBox = new TextFieldWidget(this.font, x + 87, y + 69, 101, 12, new StringTextComponent("Sussy"));
         this.nameBox.setEnableBackgroundDrawing(true);
         this.nameBox.setVisible(true);
-        String name = this.container.gem.customName() ? this.container.gem.getCustomName().getString() : this.container.gem.getDisplayName().getString();
+        String name = this.container.gem.customName() ? this.container.gem.getCustomName().getString() : this.container.gem.getNickname().getString();
         this.nameBox.setText(name);
         this.nameBox.setFocused2(true);
 
@@ -101,7 +101,8 @@ public class GemUIScreen extends ContainerScreen<GemUIContainer> {
         this.blit(matrixStack, i + 181, j + (31), 9, this.container.gem.getBrewProgress(), 0, 0, 9, this.container.gem.getBrewProgress(), 9, 11);
         this.nameBox.render(matrixStack, mouseX, mouseY, partialTicks);
         //System.out.println("Progress: " + this.container.brewProgress.get());
-        drawEntityOnScreen(i + 228, j + 76, 30, (float)(i + 229) - mouseX, (float)(j + 46) - mouseY, this.container.gem);
+        int scale = this.container.gem.getBoundingBox().getYSize() > 1.8f ? 25 : 30;
+        drawEntityOnScreen(i + 228, j + 76, scale, (float)(i + 229) - mouseX, (float)(j + 46) - mouseY, this.container.gem);
         drawStats(matrixStack, i, j);
     }
 
@@ -122,8 +123,6 @@ public class GemUIScreen extends ContainerScreen<GemUIContainer> {
         this.nameBox.mouseClicked(mouseX, mouseY, button);
         return super.mouseClicked(mouseX, mouseY, button);
     }
-
-
 
     public static void drawEntityOnScreen(int posX, int posY, int scale, float mouseX, float mouseY, LivingEntity livingEntity) {
         float f = (float)Math.atan((double)(mouseX / 40.0F));
@@ -154,7 +153,8 @@ public class GemUIScreen extends ContainerScreen<GemUIContainer> {
         entityrenderermanager.setRenderShadow(false);
         IRenderTypeBuffer.Impl irendertypebuffer$impl = Minecraft.getInstance().getRenderTypeBuffers().getBufferSource();
         RenderSystem.runAsFancy(() -> {
-            entityrenderermanager.renderEntityStatic(livingEntity, 0.0D, 0.0D, 0.0D, 0.0F, 1.0F, matrixstack, irendertypebuffer$impl, 15728880);
+            entityrenderermanager.renderEntityStatic(livingEntity, 0.0D, 0.0D, 0.0D, 0.0F, 1.0F,
+                    matrixstack, irendertypebuffer$impl, 15728880);
         });
         irendertypebuffer$impl.finish();
         entityrenderermanager.setRenderShadow(true);

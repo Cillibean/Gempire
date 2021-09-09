@@ -60,7 +60,7 @@ public class PearlUIContainer extends Container {
         for(int k = 0; k < 4; ++k) {
             final EquipmentSlotType equipmentslottype = VALID_EQUIPMENT_SLOTS[k];
             this.addSlot(new Slot(gem, 89 + k, 272 + k*18, 9){
-                @OnlyIn(Dist.CLIENT)
+
                 public Pair<ResourceLocation, ResourceLocation> getBackground() {
                     return Pair.of(PlayerContainer.LOCATION_BLOCKS_TEXTURE, PearlUIContainer.ARMOR_SLOT_TEXTURES[equipmentslottype.getIndex()]);
                 }

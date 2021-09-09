@@ -31,7 +31,7 @@ public enum Abilities {
     TORCHBEARER(27, 5),
     DECOY(28, 3),
     JESTER(29, 4),
-    FISHER(30, 5),
+    ANGLER(30, 5),
     FARMER(31, 5),
     ENCHANTMENT(32, 2),
     ELECTROKINESIS(33, 3),

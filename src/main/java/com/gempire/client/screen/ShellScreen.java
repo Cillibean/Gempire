@@ -18,7 +18,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fluids.FluidStack;
 
-@OnlyIn(Dist.CLIENT)
+
 public class ShellScreen extends ContainerScreen<ShellContainer> {
     public static final ResourceLocation GUI = new ResourceLocation("gempire:textures/gui/base_shell.png");
     public static final ResourceLocation LIGHT = new ResourceLocation("gempire:textures/gui/shell_light.png");

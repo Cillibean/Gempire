@@ -83,5 +83,11 @@ public class ModPacketHandler {
                 C2SRequestInsigniaChange::encode,
                 C2SRequestInsigniaChange::decode,
                 C2SRequestInsigniaChange::handle);
+        ModPacketHandler.INSTANCE.registerMessage(
+                networkId++,
+                C2SRequestEnchant.class,
+                C2SRequestEnchant::encode,
+                C2SRequestEnchant::decode,
+                C2SRequestEnchant::handle);
     }
 }

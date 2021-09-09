@@ -19,7 +19,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fluids.FluidStack;
 
-@OnlyIn(Dist.CLIENT)
+
 public class TankScreen extends ContainerScreen<TankContainer> {
     public static final ResourceLocation TANK_GUI = new ResourceLocation("gempire:textures/gui/tank_gui.png");
     public static final ResourceLocation TANK_FOREGROUND = new ResourceLocation("gempire:textures/gui/tank_foreground.png");

@@ -141,6 +141,9 @@ public class ItemGem extends Item {
                 e.printStackTrace();
             }
             try {
+                if(item != null){
+                    gem.spawnGem = item;
+                }
                 gem.read(stack.getTag());
             } catch (Exception e){
                 if(ainmneacha.length > 1) {
@@ -149,10 +152,15 @@ public class ItemGem extends Item {
                 }
                 if(player != null) {
                     gem.onInitialSpawn((IServerWorld) world, world.getDifficultyForLocation(player.getPosition()), SpawnReason.TRIGGERED, null, null);
-                    gem.setOwned(true, PlayerEntity.getUUID(player.getGameProfile()));
+                    gem.addOwner(player.getUUID(player.getGameProfile()));
+                    gem.FOLLOW_ID = player.getUUID(player.getGameProfile());
+                    gem.setMovementType((byte) 2);
                 }
                 else{
-                    gem.onInitialSpawn((IServerWorld) world, world.getDifficultyForLocation(item.getPosition()), SpawnReason.TRIGGERED, null, null);
+                    if(item != null){
+                        gem.spawnGem = item;
+                    }
+                    gem.onInitialSpawn((IServerWorld) world, world.getDifficultyForLocation(item.getPosition()), SpawnReason.MOB_SUMMONED, null, null);
                 }
             }
             gem.setPosition(pos.getX() + 0.5, pos.getY() + 1.0, pos.getZ() + 0.5);
@@ -160,6 +168,7 @@ public class ItemGem extends Item {
             gem.extinguish();
             gem.clearActivePotions();
             gem.setVelocity(0, 0 ,0);
+            gem.fallDistance = 0;
             GemFormEvent event = new GemFormEvent(gem, gem.getPosition());
             MinecraftForge.EVENT_BUS.post(event);
             world.addEntity(gem);
@@ -199,7 +208,6 @@ public class ItemGem extends Item {
         }
         else{
             this.formGem(entity.world, null, entity.getPosition(), stack, entity);
-            entity.remove();
             this.countdown = this.coundownMax;
         }
     }

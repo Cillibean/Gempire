@@ -60,7 +60,7 @@ public class ChromaBlock extends DirectionalBlock {
         return blockstate.isIn(this) && blockstate.get(FACING) == direction ? this.getDefaultState().with(FACING, direction.getOpposite()) : this.getDefaultState().with(FACING, direction);
     }
 
-    @OnlyIn(Dist.CLIENT)
+
     public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
         Direction direction = stateIn.get(FACING);
         double d0 = (double)pos.getX() + 1 - (double)(rand.nextFloat());

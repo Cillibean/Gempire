@@ -8,6 +8,7 @@ import com.gempire.entities.abilities.AbilityVehicle;
 import com.gempire.entities.abilities.base.Ability;
 import com.gempire.entities.abilities.AbilityZilch;
 import com.gempire.entities.abilities.interfaces.*;
+import com.gempire.entities.ai.EntityAIAreaAbility;
 import com.gempire.entities.gems.EntityObsidian;
 import com.gempire.events.GemPoofEvent;
 import com.gempire.init.ModItems;
@@ -75,6 +76,7 @@ import org.apache.commons.lang3.ArrayUtils;
 
 import javax.annotation.Nullable;
 import javax.imageio.ImageIO;
+import java.awt.TextComponent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
@@ -90,7 +92,6 @@ import java.util.function.Consumer;
 
 public abstract class EntityGem extends CreatureEntity implements IRangedAttackMob, IRideable, IInventory, INamedContainerProvider, IInventoryChangedListener {
     //public static DataParameter<Optional<UUID>> OWNER_ID = EntityDataManager.<Optional<UUID>>createKey(EntityGem.class, DataSerializers.OPTIONAL_UNIQUE_ID);
-    public static DataParameter<Boolean> OWNED = EntityDataManager.<Boolean>createKey(EntityGem.class, DataSerializers.BOOLEAN);
     public static final DataParameter<Boolean> HAS_CUSTOM_NAME = EntityDataManager.<Boolean>createKey(EntityGem.class, DataSerializers.BOOLEAN);
     public static final DataParameter<Boolean> PRIMARY = EntityDataManager.<Boolean>createKey(EntityGem.class, DataSerializers.BOOLEAN);
     public static final DataParameter<Boolean> DEFECTIVE = EntityDataManager.<Boolean>createKey(EntityGem.class, DataSerializers.BOOLEAN);
@@ -120,6 +121,7 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
     public ArrayList<UUID> OWNERS = new ArrayList<>();
     public UUID FOLLOW_ID;
     public int[] GUARD_POS = new int[3];
+    public ArrayList<IIdleAbility> idlePowers = new ArrayList<>();
 
     private final BoostHelper booster = new BoostHelper(this.dataManager, BOOST_TIME, SADDLED);
 
@@ -142,7 +144,7 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
     public Item inputItem = Items.AIR;
     public Item outputItem = Items.AIR;
     public int brewingTicks = 0;
-    public static final DataParameter<Integer> BREWING_PROGRESS = EntityDataManager.createKey(EntityGem.class, DataSerializers.VARINT);
+    public static DataParameter<Integer> BREWING_PROGRESS = EntityDataManager.createKey(EntityGem.class, DataSerializers.VARINT);
     public boolean brewing = false;
 
     public PlayerEntity currentPlayer;
@@ -151,10 +153,11 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
     public int maxStructureTime = 5 * 20;
     public int structureTime = 0;
 
+    public ItemEntity spawnGem = null;
+
     public EntityGem(EntityType<? extends CreatureEntity> type, World worldIn) {
         super(type, worldIn);
         //this.dataManager.register(EntityGem.OWNER_ID, Optional.ofNullable(UUID.randomUUID()));
-        this.dataManager.register(EntityGem.OWNED, false);
         this.dataManager.register(EntityGem.HAS_CUSTOM_NAME, false);
         this.dataManager.register(EntityGem.PRIMARY, false);
         this.dataManager.register(EntityGem.DEFECTIVE, false);
@@ -213,7 +216,11 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
         this.setMarkingColor(this.generateMarkingColor());
         this.setMarking2Variant(this.generateMarking2Variant());
         this.setMarking2Color(this.generateMarking2Color());
-        this.setCustomName(this.getDisplayName());
+        this.setCustomName(this.getNickname());
+        this.idlePowers = this.generateIdlePowers();
+        if(this.spawnGem != null){
+            this.spawnGem.remove();
+        }
         return super.onInitialSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
     }
 
@@ -227,7 +234,6 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
         super.writeAdditional(compound);
         compound.putString("abilities", this.getAbilites());
         compound.putBoolean("emotional", this.isEmotional());
-        compound.putBoolean("isOwned", this.getOwned());
         this.writeOwners(compound);
         compound.putUniqueId("followID", this.FOLLOW_ID);
         compound.putByte("movementType", this.getMovementType());
@@ -270,7 +276,6 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
         super.read(compound);
         this.setAbilites(compound.getString("abilities"));
         this.setEmotional(compound.getBoolean("emotional"));
-        this.setIsOwned(compound.getBoolean("isOwned"));
         this.readOwners(compound);
         if(compound.contains("followID"))this.FOLLOW_ID = compound.getUniqueId("followID");
         this.setMovementType(compound.getByte("movementType"));
@@ -302,7 +307,11 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
         this.brewing = compound.getBoolean("brewing");
         this.setBrewProgress(compound.getInt("brewProgress"));
         this.structureTime = compound.getInt("structureTime");
+        this.idlePowers = this.generateIdlePowers();
         ItemStackHelper.loadAllItems(compound, this.items);
+        if(this.spawnGem != null){
+            this.spawnGem.remove();
+        }
     }
 
     public void readOwners(CompoundNBT compound){
@@ -335,6 +344,15 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
                 this.brewing = false;
             }
         }
+        for(IIdleAbility power : this.getIdlePowers()){
+            if(this.focusCheck()) power.execute();
+        }
+        if(this.isInDaylight()){
+            if (this.getHealth() < this.getMaxHealth() && this.ticksExisted % 20 == 0) {
+                this.heal(1.0F);
+                this.world.addParticle(ParticleTypes.HEART, this.getPosX(), this.getPosY() + 2, this.getPosZ(), 0,0,0F);
+            }
+        }
         super.livingTick();
     }
 
@@ -354,10 +372,10 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
                     else {
                         if(this.canOpenInventoryByDefault()) {
                             NetworkHooks.openGui((ServerPlayerEntity) player, this, buf -> buf.writeInt(this.getEntityId()));
-                            if (this.isRideable()) {
-                                if (!this.isBeingRidden()) {
-                                    player.startRiding(this);
-                                }
+                        }
+                        if (this.isRideable()) {
+                            if (!this.isBeingRidden()) {
+                                player.startRiding(this);
                             }
                         }
                     }
@@ -366,7 +384,8 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
                     //Test to see if the gem has an owner
                     if (!this.getOwned()) {
                         if(!this.isOwner(player)) {
-                            this.setOwned(true, PlayerEntity.getUUID(player.getGameProfile()));
+                            this.addOwner(PlayerEntity.getUUID(player.getGameProfile()));
+                            this.FOLLOW_ID = player.getUUID(player.getGameProfile());
                             this.setMovementType((byte) 2);
                             player.sendMessage(new TranslationTextComponent("messages.gempire.entity.claimed"), this.getUniqueID());
                             return super.applyPlayerInteraction(player, vec, hand);
@@ -378,14 +397,14 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
                 if(this.isOwner(player)) {
                     if (player.getHeldItemMainhand().getItem() instanceof DyeItem) {
                         DyeItem dye = (DyeItem) player.getHeldItemMainhand().getItem();
-                        System.out.println("Yeah it's dye");
                         if (player.isSneaking()) {
                             this.setInsigniaColor(dye.getDyeColor().getId());
-                            System.out.println(dye.getDyeColor().getId());
                         } else {
                             this.setOutfitColor(dye.getDyeColor().getId());
-                            System.out.println(dye.getDyeColor().getId());
                         }
+                    }
+                    else if (player.getHeldItemMainhand().getItem() == Items.PAPER){
+                        NetworkHooks.openGui((ServerPlayerEntity) player, this, buf -> buf.writeInt(this.getEntityId()));
                     }
                 }
             }
@@ -402,7 +421,7 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
     public void cycleMovementAI(PlayerEntity player){
         //Cycles through the various movement types.
         this.navigator.clearPath();
-        this.FOLLOW_ID = player.getUniqueID();
+        this.FOLLOW_ID = player.getUUID(player.getGameProfile());
         if(this.getMovementType() < 2){
             this.addMovementType(1);
             switch(this.getMovementType()){
@@ -434,6 +453,9 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
         }
         if(this.isEmotional() && !source.isExplosion() && !source.isFireDamage()) {
             if(this.emotionMeter <= this.EmotionThreshold()){
+                if(this.EmotionThreshold() - this.emotionMeter < 5){
+                    this.world.addParticle(ParticleTypes.ANGRY_VILLAGER, this.getPosX(), this.getPosY() + 2, this.getPosZ(),0,0,0);
+                }
                 this.emotionMeter++;
             }
             else {
@@ -488,12 +510,26 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
         super.onDeath(source);
     }
 
+    public TranslationTextComponent getNickname(){
+        if(this instanceof EntityVaryingGem){
+            if(((EntityVaryingGem)this).UsesUniqueNames()) {
+                return new TranslationTextComponent("nickname.gempire." + this.getWholeGemName() + "_" + this.getSkinColorVariant());
+            }
+        }
+        return new TranslationTextComponent("entity.gempire." + this.getWholeGemName());
+    }
+
     public Item getGemItem() {
         RegistryObject<Item> gemm = ModItems.PEBBLE_GEM;
         ItemGem gem = null;
         String name = "";
-        if(this instanceof AbstractQuartz){
-            name = ((AbstractQuartz)this).NameFromColor((byte) this.getSkinColorVariant()) + "_" + this.getWholeGemName() + "_gem";
+        if(this instanceof EntityVaryingGem){
+            if(((EntityVaryingGem)this).UsesUniqueNames()) {
+                name = ((EntityVaryingGem) this).NameFromColor((byte) this.getSkinColorVariant()) + "_" + this.getWholeGemName() + "_gem";
+            }
+            else{
+                name = this.hasSkinColorVariant() ? Color.getColorName(this.getSkinColorVariant()) + "_" + this.getWholeGemName().toLowerCase() + "_gem" : this.getWholeGemName().toLowerCase() + "_gem";
+            }
         }
         else{
             name = this.hasSkinColorVariant() ? Color.getColorName(this.getSkinColorVariant()) + "_" + this.getWholeGemName().toLowerCase() + "_gem" : this.getWholeGemName().toLowerCase() + "_gem";
@@ -519,18 +555,6 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
 
     //GETTERS AND SETTERS!!!
 
-    public void setIsOwned(boolean value){
-        this.dataManager.set(EntityGem.OWNED, value);
-    }
-
-    public void setOwned(boolean value, @Nullable UUID ID){
-        this.dataManager.set(EntityGem.OWNED, value);
-        if(value) {
-            //this.dataManager.set(EntityGem.OWNER_ID, Optional.ofNullable(ID));
-            this.addOwner(ID);
-        }
-    }
-
     public void addOwner(UUID ID){
         this.OWNERS.add(ID);
     }
@@ -545,7 +569,7 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
     }
 
     public boolean getOwned(){
-        return this.dataManager.get(EntityGem.OWNED);
+        return this.OWNERS.size() > 0;
     }
 
     /*public UUID getOwnerID(){
@@ -554,7 +578,12 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
 
     public boolean isOwner(LivingEntity entity){
         for(UUID uuid : this.OWNERS){
-            if(entity.getUniqueID().equals(uuid)) return true;
+            if(entity instanceof PlayerEntity){
+                if(((PlayerEntity)entity).getUUID(((PlayerEntity) entity).getGameProfile()).equals(uuid)) return true;
+            }
+            else {
+                if (entity.getUniqueID().equals(uuid)) return true;
+            }
         }
         return false;
     }
@@ -911,6 +940,7 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
 
     //ABILITY STUFF
 
+    @SuppressWarnings("non-varargs")
     public ArrayList<Ability> findAbilities(String getab){
         ArrayList<Abilities> abilities = new ArrayList<>();
         ArrayList<Ability> powers = new ArrayList<>();
@@ -1054,6 +1084,20 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
         return this.dataManager.get(EntityGem.USES_AREA_ABILITIES);
     }
 
+    public ArrayList<IIdleAbility> getIdlePowers(){
+        return this.idlePowers;
+    }
+
+    public ArrayList<IIdleAbility> generateIdlePowers(){
+        ArrayList<IIdleAbility> powers = new ArrayList<>();
+        for(Ability ability : this.getAbilityPowers()){
+            if(ability instanceof IIdleAbility){
+                powers.add((IIdleAbility) ability);
+            }
+        }
+        return powers;
+    }
+
     public void setHasVisor(boolean value){
         this.dataManager.set(EntityGem.HAS_VISOR, value);
     }
@@ -1126,7 +1170,7 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
         }
     }
 
-    @OnlyIn(Dist.CLIENT)
+
     public Vector3d func_241205_ce_() {
         return new Vector3d(0.0D, (double)(0.8F * this.getEyeHeight()), (double)(this.getWidth() * 0.4F));
     }
@@ -1149,6 +1193,10 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
         }
     }
 
+    public boolean onLivingFall(float distance, float damageMultiplier) {
+        return false;
+    }
+
     protected void updateFallState(double y, boolean onGroundIn, BlockState state, BlockPos pos) {
         this.doBlockCollisions();
         if (this.isInLava()) {
@@ -1164,6 +1212,10 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
 
     public boolean customName(){
         return this.dataManager.get(EntityGem.HAS_CUSTOM_NAME);
+    }
+
+    public int getLuck(){
+        return 0;
     }
 
     //CONTAINER STUFF
@@ -1228,6 +1280,11 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
             this.brewingTicks = 0;
             this.setBrewProgress(0);
         }
+        else if(index == 67){
+            this.brewingTicks = 0;
+            this.setBrewProgress(0);
+            this.brewing = false;
+        }
         return null;
     }
 
@@ -1247,12 +1304,15 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
                     this.setItemStackToSlot(EquipmentSlotType.FEET, stack);
             }
         }
-        if(index == 67){
+        if(index == 67 || index == 68){
             for(Ability ability : this.getAbilityPowers()){
                 if(ability instanceof IAlchemyAbility && this.currentPlayer != null && !this.brewing){
                     IAlchemyAbility power = (IAlchemyAbility)ability;
-                    this.outputItem = power.output();
-                    this.brewing = power.doSpecialActionOnInput(this.currentPlayer);
+                    if(this.getStackInSlot(67).getItem() == power.input()) {
+                        this.outputItem = power.output();
+                        this.brewing = power.consume() != Items.AIR ? this.consumeItemCheck(power.consume()) && power.doSpecialActionOnInput(this.currentPlayer) :
+                                power.doSpecialActionOnInput(this.currentPlayer);
+                    }
                 }
             }
         }
@@ -1305,14 +1365,21 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
     }
 
     public boolean canOpenInventoryByDefault(){
-        return true;
+        return false;
     }
 
     public boolean consumeItemCheck(Item item){
         for(int i = 0; i < EntityGem.NUMBER_OF_SLOTS - 4; i++){
             if(this.getStackInSlot(i + 36).getItem() == item){
-                this.getStackInSlot(i + 36).shrink(1);
-                return true;
+                if(this.getStackInSlot(i + 36).getCount() == 1){
+                    this.setInventorySlotContents(i + 36, ItemStack.EMPTY);
+                    return true;
+                }else {
+                    this.setInventorySlotContents(i + 36, new ItemStack(this.getStackInSlot(i + 36).getItem(),
+                            this.getStackInSlot(i + 36).getCount() - 1));
+                    //this.getStackInSlot(i + 36).shrink(1);
+                    return true;
+                }
             }
         }
         return false;

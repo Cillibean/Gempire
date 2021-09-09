@@ -17,7 +17,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fluids.FluidStack;
 
-@OnlyIn(Dist.CLIENT)
+
 public class InjectorScreen extends ContainerScreen<InjectorContainer> {
     public static final ResourceLocation INJECTOR_GUI = new ResourceLocation("gempire:textures/gui/injector_gui.png");
     public static final ResourceLocation FLUID_GUI = new ResourceLocation("gempire:textures/gui/injector_gui_fluid.png");

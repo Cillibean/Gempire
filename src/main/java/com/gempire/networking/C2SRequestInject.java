@@ -1,8 +1,12 @@
 package com.gempire.networking;
 
+import com.gempire.init.ModSounds;
 import com.gempire.tileentities.InjectorTE;
+import net.minecraft.client.audio.Sound;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.network.PacketBuffer;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.network.NetworkEvent;
 

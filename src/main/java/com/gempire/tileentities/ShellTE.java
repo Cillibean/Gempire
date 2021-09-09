@@ -106,17 +106,19 @@ public class ShellTE extends LockableLootTileEntity implements INamedContainerPr
     @Override
     public void tick() {
         if(this.getStackInSlot(ShellTE.PEARL_OUTPUT_SLOT_INDEX) == ItemStack.EMPTY) {
-            this.HandleGravelTick();
-            this.HandleSandTick();
-            this.HandleClayTick();
-            this.HandleChromaTick();
-            if(this.ticks % 20 == 0) this.HandleEssenceTick();
-            this.HandleFormPearlTick();
-            if(this.gravelConsumed == 1){
-                this.world.setBlockState(this.getPos(), this.getBlockState().with(ShellBlock.STAGE, 1));
-            }
-            if(this.sandConsumed == ShellTE.MAX_SAND){
-                this.world.setBlockState(this.getPos(), this.getBlockState().with(ShellBlock.STAGE, 2));
+            if(this.ticks % 1 == 0) {
+                this.HandleGravelTick();
+                this.HandleSandTick();
+                this.HandleClayTick();
+                this.HandleChromaTick();
+                this.HandleEssenceTick();
+                this.HandleFormPearlTick();
+                if (this.gravelConsumed == 1) {
+                    this.world.setBlockState(this.getPos(), this.getBlockState().with(ShellBlock.STAGE, 1));
+                }
+                if (this.sandConsumed == ShellTE.MAX_SAND) {
+                    this.world.setBlockState(this.getPos(), this.getBlockState().with(ShellBlock.STAGE, 2));
+                }
             }
             if(this.ticks > 100){
                 this.ticks = 0;

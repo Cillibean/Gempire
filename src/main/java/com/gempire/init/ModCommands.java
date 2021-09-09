@@ -1,8 +1,7 @@
 package com.gempire.init;
 
 import com.gempire.commands.CommandBase;
-import com.gempire.commands.impl.CommandGempireLocate;
-import com.gempire.commands.impl.CommandGempireLocateBiome;
+import com.gempire.commands.impl.*;
 import com.mojang.brigadier.CommandDispatcher;
 import net.minecraft.command.CommandSource;
 import net.minecraftforge.event.RegisterCommandsEvent;
@@ -17,6 +16,9 @@ public class ModCommands {
 
         COMMANDS.add(new CommandGempireLocate("scoutlocate", 0, true));
         COMMANDS.add(new CommandGempireLocateBiome("scoutlocatebiome", 0, true));
+        COMMANDS.add(new CommandGempireFollow("massfollow", 0, true));
+        COMMANDS.add(new CommandGempireStay("massstay", 0, true));
+        COMMANDS.add(new CommandGempireWander("masswander", 0, true));
 
         COMMANDS.forEach(command -> {
             if(command.isEnabled() && command.setExecution() != null){

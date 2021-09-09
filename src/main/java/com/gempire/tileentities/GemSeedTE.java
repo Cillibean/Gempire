@@ -51,7 +51,7 @@ public class GemSeedTE extends TileEntity implements ITickableTileEntity {
     public static final int DRAIN_SIZE = 11;
     public ItemChroma chroma;
     public Item primer;
-    public String essences;
+    public String essences = "pink-blue-yellow-white";
     public int facing;
     public boolean checked = false;
     public Block drained_sand, drained_soil, drained_stone, drained_stone_2, banded_drained_stone;
@@ -176,9 +176,10 @@ public class GemSeedTE extends TileEntity implements ITickableTileEntity {
                             continue;
                         } else {
                             totalWeight += 1;
-                            totalWeight += crux.weight;
+                            totalWeight += crux.weight * GEM_CONDITIONS.get(gem).rarity;
                             gemWeight += 1 * (1 - temperatureDifference);
                             gemWeight += crux.weight * (1 - temperatureDifference);
+                            gemWeight *= GEM_CONDITIONS.get(gem).rarity;
                         }
                     }
                 }
@@ -213,6 +214,9 @@ public class GemSeedTE extends TileEntity implements ITickableTileEntity {
             }
             else if(block == Blocks.SAND || block == Blocks.RED_SAND || block == Blocks.SOUL_SAND){
                 this.world.setBlockState(blockPos, this.drained_sand.getDefaultState());
+            }
+            else if(block instanceof BushBlock){
+                this.world.setBlockState(blockPos, Blocks.DEAD_BUSH.getDefaultState());
             }
             else{
                 if(blockPos.getY() < 80) {

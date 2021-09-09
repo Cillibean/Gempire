@@ -494,6 +494,16 @@ public class ModBlocks {
             )
     );
 
+    public static final RegistryObject<Block> WIRE_BLOCK = BLOCKS.register("wire_block", () ->
+            new SixWayConnectorBlock(0.5f, Block.Properties
+                    .create(Material.IRON)
+                    .hardnessAndResistance(1f, 1f)
+                    .sound(SoundType.SNOW)
+                    .harvestLevel(0)
+                    .harvestTool(ToolType.PICKAXE)
+            )
+    );
+
     /*public static final RegistryObject<Block> TEST_CONTAINER_BLOCK = BLOCKS.register("test_container_block", () ->
             new GUITestBlock(Block.Properties
                     .create(Material.IRON)

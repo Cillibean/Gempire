@@ -16,7 +16,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
  * Quartz - TheBetaZeta
  * Created using Tabula 8.0.0
  */
-@OnlyIn(Dist.CLIENT)
+
 public class ModelQuartz<T extends AbstractQuartz> extends ModelGem<T> {
     public ModelRenderer body;
     public ModelRenderer head;
