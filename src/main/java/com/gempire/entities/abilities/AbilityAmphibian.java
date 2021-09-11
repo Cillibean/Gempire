@@ -3,8 +3,10 @@ package com.gempire.entities.abilities;
 import com.gempire.entities.abilities.base.Ability;
 import com.gempire.entities.abilities.interfaces.IAlchemyAbility;
 import com.gempire.entities.abilities.interfaces.IEffectAbility;
+import com.gempire.entities.bases.EntityGem;
 import com.gempire.init.ModItems;
 import com.gempire.util.Abilities;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
@@ -41,13 +43,10 @@ public class AbilityAmphibian extends Ability implements IEffectAbility, IAlchem
     }
 
     @Override
-    public boolean playerOnly() {
-        return true;
-    }
-
-    @Override
-    public boolean gemAndPlayerOnly() {
-        return false;
+    public Class<LivingEntity>[] applicableEntities() {
+        return new Class[]{
+                PlayerEntity.class
+        };
     }
 
     @Override

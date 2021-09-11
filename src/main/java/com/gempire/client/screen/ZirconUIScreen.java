@@ -71,7 +71,7 @@ public class ZirconUIScreen extends ContainerScreen<ZirconUIContainer> {
         this.children.add(this.nameBox);
         this.setFocusedDefault(this.nameBox);
 
-        this.addButton(new ImageButton(this.guiLeft + 19, this.guiTop + 41, 11, 21, 0, 0, 0, ZirconUIScreen.LEFT,
+        /*this.addButton(new ImageButton(this.guiLeft + 19, this.guiTop + 41, 11, 21, 0, 0, 0, ZirconUIScreen.LEFT,
                 11, 21, (p_213029_1_) -> {
             ModPacketHandler.INSTANCE.sendToServer(new C2SRequestPageChange(this.container.gem.getEntityId(), false));
         }));
@@ -79,7 +79,7 @@ public class ZirconUIScreen extends ContainerScreen<ZirconUIContainer> {
         this.addButton(new ImageButton(this.guiLeft + 180, this.guiTop + 41, 11, 21, 0, 0, 0, ZirconUIScreen.RIGHT,
                 11, 21, (p_213029_1_) -> {
             ModPacketHandler.INSTANCE.sendToServer(new C2SRequestPageChange(this.container.gem.getEntityId(), true));
-        }));
+        }));*/
 
         this.addButton(new ImageButton(this.guiLeft + 90, this.guiTop + 55, 30, 10, 0, 0, 0, ZirconUIScreen.ENCHANT_BUTTON,
                 30, 10, (p_213029_1_) -> {

@@ -1,11 +1,6 @@
 package com.gempire.entities.gems;
 
-import com.gempire.client.screen.ZirconUIScreen;
-import com.gempire.container.GemUIContainer;
 import com.gempire.container.ZirconUIContainer;
-import com.gempire.entities.abilities.base.Ability;
-import com.gempire.entities.abilities.interfaces.IAlchemyAbility;
-import com.gempire.entities.ai.EntityAIAreaAbility;
 import com.gempire.entities.ai.EntityAIFollowOwner;
 import com.gempire.entities.ai.EntityAIWander;
 import com.gempire.entities.bases.EntityGem;
@@ -14,29 +9,24 @@ import com.gempire.entities.gems.starter.EntityShale;
 import com.gempire.init.ModEnchants;
 import com.gempire.util.Abilities;
 import com.gempire.util.GemPlacements;
-import net.minecraft.entity.CreatureEntity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.inventory.container.Container;
-import net.minecraft.item.ArmorItem;
-import net.minecraft.item.BookItem;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
+import net.minecraft.item.*;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.NonNullList;
+import net.minecraft.util.*;
 import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.IServerWorld;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
@@ -45,13 +35,22 @@ import java.util.UUID;
 public class EntityZircon extends EntityVaryingGem {
     public static final int NUMBER_OF_SLOTS = 3;
     public NonNullList<ItemStack> zirconItems = NonNullList.withSize(EntityZircon.NUMBER_OF_SLOTS, ItemStack.EMPTY);
-    public static DataParameter<Integer> ENCHANT_PAGE = EntityDataManager.<Integer>createKey(EntityGem.class, DataSerializers.VARINT);
+    public static final DataParameter<Integer> ENCHANT_PAGE = EntityDataManager.<Integer>createKey(EntityGem.class, DataSerializers.VARINT);
+    public static DataParameter<Integer> ENCHANT_MIN = EntityDataManager.<Integer>createKey(EntityGem.class, DataSerializers.VARINT);
     public int ENCHANTMENT_PAGES = 0;
 
     public EntityZircon(EntityType<? extends CreatureEntity> type, World worldIn) {
         super(type, worldIn);
         this.dataManager.register(EntityZircon.ENCHANT_PAGE, 0);
+        this.dataManager.register(EntityZircon.ENCHANT_MIN, 0);
         this.ENCHANTMENT_PAGES = ModEnchants.VANILLA_ENCHANTMENTS.size();
+    }
+
+    @Nullable
+    @Override
+    public ILivingEntityData onInitialSpawn(IServerWorld worldIn, DifficultyInstance difficultyIn, SpawnReason reason, @Nullable ILivingEntityData spawnDataIn, @Nullable CompoundNBT dataTag) {
+        this.setEnchantPage(this.rand.nextInt(ModEnchants.VANILLA_ENCHANTMENTS.size()));
+        return super.onInitialSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
     }
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
@@ -80,6 +79,7 @@ public class EntityZircon extends EntityVaryingGem {
     public void writeAdditional(CompoundNBT compound) {
         super.writeAdditional(compound);
         compound.putInt("page", this.getEnchantPage());
+        compound.putInt("min", this.getEnchantMin());
         ItemStackHelper.saveAllItems(compound, this.zirconItems);
     }
 
@@ -87,6 +87,7 @@ public class EntityZircon extends EntityVaryingGem {
     public void read(CompoundNBT compound) {
         super.read(compound);
         this.setEnchantPage(compound.getInt("page"));
+        this.setEnchantMin(compound.getInt("min"));
         ItemStackHelper.loadAllItems(compound, this.zirconItems);
     }
 
@@ -198,6 +199,10 @@ public class EntityZircon extends EntityVaryingGem {
     public void CyclePageForward(){
         if(this.getEnchantPage() == this.ENCHANTMENT_PAGES - 1){
             this.setEnchantPage(0);
+            return;
+        }
+        else if(this.getEnchantPage() == this.getEnchantMin() + 3){
+            this.setEnchantPage(0);
         }
         else{
             this.setEnchantPage(this.getEnchantPage() + 1);
@@ -206,7 +211,11 @@ public class EntityZircon extends EntityVaryingGem {
 
     public void CyclePageBackwards(){
         if(this.getEnchantPage() == 0){
-            this.setEnchantPage(this.ENCHANTMENT_PAGES - 1);
+            this.setEnchantPage(this.getEnchantMin() + 3);
+            return;
+        }
+        else if(this.getEnchantPage() == this.getEnchantMin()){
+            this.setEnchantPage(this.getEnchantMin() + 3);
         }
         else{
             this.setEnchantPage(this.getEnchantPage() - 1);
@@ -218,6 +227,14 @@ public class EntityZircon extends EntityVaryingGem {
     }
 
     public int getEnchantPage(){
+        return this.dataManager.get(EntityZircon.ENCHANT_PAGE);
+    }
+
+    public void setEnchantMin(int page){
+        this.dataManager.set(EntityZircon.ENCHANT_MIN, page);
+    }
+
+    public int getEnchantMin(){
         return this.dataManager.get(EntityZircon.ENCHANT_PAGE);
     }
 

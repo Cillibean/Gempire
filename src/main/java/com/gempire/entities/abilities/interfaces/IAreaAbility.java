@@ -8,6 +8,4 @@ import java.util.UUID;
 
 public interface IAreaAbility {
     void AOeffect();
-    void AOeffect(Entity entity);
-    void AOeffect(Entity entity, ArrayList<UUID> id);
 }

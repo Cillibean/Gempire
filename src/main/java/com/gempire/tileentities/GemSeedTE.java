@@ -1,5 +1,6 @@
 package com.gempire.tileentities;
 
+import com.gempire.blocks.DrainedBlock;
 import com.gempire.blocks.GemSeedBlock;
 import com.gempire.entities.bases.EntityGem;
 import com.gempire.entities.gems.EntityRuby;
@@ -122,9 +123,11 @@ public class GemSeedTE extends TileEntity implements ITickableTileEntity {
                     if (domhain.getBlockState(block).getBlock() instanceof FlowingFluidBlock || domhain.getBlockState(block).getBlock() instanceof AirBlock || this.world.isOutsideBuildHeight(block)) {
                         continue;
                     } else {
-                        this.POSITIONS.put(id, block);
-                        this.IDS.add(id);
-                        id++;
+                        if(this.random.nextInt(10) > 3) {
+                            this.POSITIONS.put(id, block);
+                            this.IDS.add(id);
+                            id++;
+                        }
                     }
                 }
             }
@@ -136,6 +139,7 @@ public class GemSeedTE extends TileEntity implements ITickableTileEntity {
         float BLOCK_TEMPERATURE = this.world.getBiome(this.pos).getTemperature(this.pos);
         this.SetDrainedStoneColor(BLOCK_TEMPERATURE);
         Block block = this.world.getBlockState(blockPos).getBlock();
+        if(block instanceof DrainedBlock) return;
         for (int i = 0; i < GemFormation.POSSIBLE_GEMS.size(); i++) {
             String gem = GemFormation.POSSIBLE_GEMS.get(i);
             float gemWeight = 0;

@@ -429,6 +429,8 @@
   "screens.gempire.poof": "Poof",
 
   "commands.gempire.nounderstand": "I'm not sure she understands...",
+  "commands.gempire.norecstruc": "I'm not sure she recognises that structure...",
+  "commands.gempire.norecbio": "I'm not sure she recognises that biome...",
   "commands.gempire.faillocate": "I don't think she could find any...",
   "commands.gempire.foundit": "Here's your map! (Check her inventory)",
   "commands.gempire.nomap": "She needs a map!",

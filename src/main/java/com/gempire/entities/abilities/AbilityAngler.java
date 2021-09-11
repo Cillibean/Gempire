@@ -30,7 +30,7 @@ public class AbilityAngler extends Ability implements IIdleAbility {
 
     @Override
     public void execute() {
-        if (this.holder.ticksExisted % 40 == 0) {
+        if (this.holder.ticksExisted % 200 == 0) {
             if (this.holder.isInWater()) {
                 ItemStack rod = new ItemStack(Items.FISHING_ROD);
                 rod.addEnchantment(Enchantments.LUCK_OF_THE_SEA, 4);

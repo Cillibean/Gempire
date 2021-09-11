@@ -54,15 +54,6 @@ public class AbilityParalysis extends Ability implements IMeleeAbility, IEffectA
     }
 
     @Override
-    public boolean playerOnly() {
-        return false;
-    }
-
-    @Override
-    public boolean gemAndPlayerOnly() {
-        return false;
-    }
-    @Override
     public ITextComponent getName() {
         return new TranslationTextComponent("ability.gempire.paralysis");
     }

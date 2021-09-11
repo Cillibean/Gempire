@@ -7,11 +7,15 @@ import com.gempire.entities.abilities.interfaces.IViolentAbility;
 import com.gempire.entities.bases.EntityGem;
 import com.gempire.util.Abilities;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraftforge.event.world.NoteBlockEvent;
+import org.lwjgl.system.CallbackI;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,40 +29,30 @@ public class AbilityStern extends Ability implements IAreaAbility, IEffectAbilit
 
     @Override
     public void AOeffect() {
-
-    }
-
-    @Override
-    public void AOeffect(Entity entity) {
-
-    }
-
-    @Override
-    public void AOeffect(Entity entity, ArrayList<UUID> id) {
-        if (entity instanceof EntityGem) {
-            for(UUID idd : id) {
-                if (((EntityGem) entity).isOwner(idd)) ((EntityGem) entity).focusLevel = 1;
+        ArrayList<EntityGem> entities = new ArrayList<>(this.holder.world.getEntitiesWithinAABB(EntityGem.class,
+                new AxisAlignedBB(this.holder.getPosX(), this.holder.getPosY(), this.holder.getPosZ(), this.holder.getPosX() + 1, this.holder.getPosY() + 1 , this.holder.getPosZ() + 1)
+                .grow(16, this.holder.world.getHeight(), 16)));
+        for(int i = 0; i < entities.size(); i++){
+            EntityGem gem = entities.get(i);
+            if(EntityGem.sharesOwners(gem, this.holder)) {
+                gem.focusLevel = 1;
             }
         }
     }
-
 
     @Override
     public EffectInstance effect() {
         return new EffectInstance(Effects.NIGHT_VISION, 400, 1);
     }
-
-    @Override
-    public boolean playerOnly() {
-        return false;
-    }
-
-    @Override
-    public boolean gemAndPlayerOnly() {
-        return true;
-    }
     @Override
     public ITextComponent getName() {
         return new TranslationTextComponent("ability.gempire.stern");
+    }
+
+    @Override
+    public Class<LivingEntity>[] applicableEntities() {
+        return new Class[]{
+                EntityGem.class, PlayerEntity.class
+        };
     }
 }

@@ -2,37 +2,26 @@ package com.gempire.entities.bases;
 
 import com.gempire.Gempire;
 import com.gempire.container.GemUIContainer;
-import com.gempire.container.InjectorContainer;
 import com.gempire.entities.abilities.AbilityScout;
 import com.gempire.entities.abilities.AbilityVehicle;
 import com.gempire.entities.abilities.base.Ability;
 import com.gempire.entities.abilities.AbilityZilch;
 import com.gempire.entities.abilities.interfaces.*;
-import com.gempire.entities.ai.EntityAIAreaAbility;
-import com.gempire.entities.gems.EntityObsidian;
 import com.gempire.events.GemPoofEvent;
 import com.gempire.init.ModItems;
 import com.gempire.items.ItemGem;
-import com.gempire.tileentities.InjectorTE;
 import com.gempire.util.Abilities;
 import com.gempire.util.Color;
 import com.gempire.util.GemPlacements;
-import com.google.common.collect.ImmutableList;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
-import io.netty.buffer.ByteBuf;
-import io.netty.buffer.ByteBufAllocator;
-import io.netty.util.ByteProcessor;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FlowingFluidBlock;
 import net.minecraft.client.Minecraft;
-import net.minecraft.command.CommandSource;
 import net.minecraft.command.impl.LocateBiomeCommand;
-import net.minecraft.command.impl.LocateCommand;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.item.ItemEntity;
-import net.minecraft.entity.passive.PigEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -44,14 +33,14 @@ import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.*;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.PacketBuffer;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.particles.BasicParticleType;
 import net.minecraft.particles.ParticleTypes;
+import net.minecraft.potion.EffectInstance;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.*;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.vector.Vector3d;
@@ -61,34 +50,21 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IServerWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.feature.Features;
 import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraft.world.storage.MapData;
 import net.minecraft.world.storage.MapDecoration;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.RegistryObject;
-import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.network.NetworkHooks;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.apache.commons.lang3.ArrayUtils;
 
 import javax.annotation.Nullable;
 import javax.imageio.ImageIO;
-import java.awt.TextComponent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.nio.channels.FileChannel;
-import java.nio.channels.GatheringByteChannel;
-import java.nio.channels.ScatteringByteChannel;
-import java.nio.charset.Charset;
 import java.util.*;
-import java.util.function.Consumer;
 
 public abstract class EntityGem extends CreatureEntity implements IRangedAttackMob, IRideable, IInventory, INamedContainerProvider, IInventoryChangedListener {
     //public static DataParameter<Optional<UUID>> OWNER_ID = EntityDataManager.<Optional<UUID>>createKey(EntityGem.class, DataSerializers.OPTIONAL_UNIQUE_ID);
@@ -152,6 +128,8 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
     public static final SimpleCommandExceptionType LOCATE_FAILED_EXCEPTION = new SimpleCommandExceptionType(new TranslationTextComponent("commands.gempire.faillocate"));
     public int maxStructureTime = 5 * 20;
     public int structureTime = 0;
+    public ArrayList<String> structures = new ArrayList<>();
+    public ArrayList<String> biomes = new ArrayList<>();
 
     public ItemEntity spawnGem = null;
 
@@ -217,6 +195,7 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
         this.setMarking2Variant(this.generateMarking2Variant());
         this.setMarking2Color(this.generateMarking2Color());
         this.setCustomName(this.getNickname());
+        this.generateScoutList();
         this.idlePowers = this.generateIdlePowers();
         if(this.spawnGem != null){
             this.spawnGem.remove();
@@ -261,6 +240,7 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
         compound.putInt("brewProgress", this.getBrewProgress());
         compound.putBoolean("brewing", this.brewing);
         compound.putInt("structureTime", this.structureTime);
+        this.writeStructures(compound);
         ItemStackHelper.saveAllItems(compound, this.items);
     }
 
@@ -269,6 +249,17 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
             compound.putUniqueId("owner" + i, this.OWNERS.get(i));
         }
         compound.putInt("ownerAmount", this.OWNERS.size());
+    }
+
+    public void writeStructures(CompoundNBT compound){
+        for(int i = 0; i < this.structures.size(); i++){
+            compound.putString("structure" + i, this.structures.get(i));
+        }
+        for(int i = 0; i < this.biomes.size(); i++){
+            compound.putString("biome" + i, this.biomes.get(i));
+        }
+        compound.putInt("structureAmount", this.structures.size());
+        compound.putInt("biomeAmount", this.biomes.size());
     }
 
     @Override
@@ -309,6 +300,7 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
         this.structureTime = compound.getInt("structureTime");
         this.idlePowers = this.generateIdlePowers();
         ItemStackHelper.loadAllItems(compound, this.items);
+        this.readStructures(compound);
         if(this.spawnGem != null){
             this.spawnGem.remove();
         }
@@ -319,6 +311,19 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
         int n = compound.getInt("ownerAmount");
         for(int i = 0; i < n; i++){
             this.OWNERS.add(compound.getUniqueId("owner" + i));
+        }
+    }
+
+    public void readStructures(CompoundNBT compound){
+        this.structures = new ArrayList<>();
+        int n = compound.getInt("structureAmount");
+        for(int i = 0; i < n; i++){
+            this.structures.add(compound.getString("structure" + i));
+        }
+        this.biomes = new ArrayList<>();
+        int t = compound.getInt("biomeAmount");
+        for(int i = 0; i < t; i++){
+            this.biomes.add(compound.getString("biome" + i));
         }
     }
 
@@ -353,6 +358,60 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
                 this.world.addParticle(ParticleTypes.HEART, this.getPosX(), this.getPosY() + 2, this.getPosZ(), 0,0,0F);
             }
         }
+
+        if(this.usesAreaAbilities()) {
+            if (this.ticksExisted % 100 == 0) {
+                ArrayList<LivingEntity> entityl = new ArrayList<>(this.world.getEntitiesWithinAABB(LivingEntity.class, new AxisAlignedBB(this.getPosX(), this.getPosY(), this.getPosZ(), this.getPosX() + 1, this.getPosY() + 1, this.getPosZ() + 1)
+                        .grow(16, this.world.getHeight(), 16), (target) -> {
+                    return target != this;
+                }));
+                ArrayList<Ability> abilities = this.getAbilityPowers();
+                for (int e = 0; e < entityl.size(); e++) {
+                    LivingEntity entity = entityl.get(e);
+                    boolean flagGem = entity instanceof EntityGem;
+                    boolean flagPlayer = entity instanceof PlayerEntity;
+                    boolean flagOwner = this.isOwner(entity);
+                    EntityGem gemEntity = flagGem ? (EntityGem) entity : null;
+                    for (int a = 0; a < abilities.size(); a++) {
+                        Ability ability = abilities.get(a);
+                        IEffectAbility effectAbility = ability instanceof IEffectAbility ? (IEffectAbility) ability : null;
+                        IAreaAbility areaAbility = ability instanceof IAreaAbility ? (IAreaAbility) ability : null;
+                        boolean flagArea = areaAbility != null;
+                        boolean flagEffect = effectAbility != null;
+                        boolean flagViolent = ability instanceof IViolentAbility;
+                        if (!flagViolent) {
+                            if (flagEffect) {
+                                ArrayList<EffectInstance> effects = new ArrayList<>();
+                                if (effectAbility.hasMultipleEffects()) {
+                                    for (EffectInstance effect : effectAbility.effects()) {
+                                        effects.add(effect);
+                                    }
+                                } else {
+                                    effects.add(effectAbility.effect());
+                                }
+                                if (effectAbility.isEntityApplicable(entity)) {
+                                    effects.forEach((effectInstance -> {
+                                        if (flagGem) {
+                                            if (EntityGem.sharesOwners(this, gemEntity)) {
+                                                System.out.println("shares owner");
+                                                entity.addPotionEffect(effectInstance);
+                                            }
+                                        }
+                                        if (this.isOwner(entity)) {
+                                            entity.addPotionEffect(effectInstance);
+                                        }
+                                    }));
+                                }
+                            }
+                            if (flagArea) {
+                                areaAbility.AOeffect();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         super.livingTick();
     }
 
@@ -405,6 +464,28 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
                     }
                     else if (player.getHeldItemMainhand().getItem() == Items.PAPER){
                         NetworkHooks.openGui((ServerPlayerEntity) player, this, buf -> buf.writeInt(this.getEntityId()));
+                    }
+                    else if(player.getHeldItemMainhand().getItem() == Items.BOOK){
+                        String list1 = "";
+                        for(int i = 0; i < this.structures.size(); i++){
+                            if(i == this.structures.size() - 1){
+                                list1 += this.structures.get(i);
+                            }
+                            else{
+                                list1 += this.structures.get(i) + ", ";
+                            }
+                        }
+                        String list2 = "";
+                        for(int i = 0; i < this.biomes.size(); i++){
+                            if(i == this.biomes.size() - 1){
+                                list2 += this.biomes.get(i);
+                            }
+                            else{
+                                list2 += this.biomes.get(i) + ", ";
+                            }
+                        }
+                        player.sendMessage(new StringTextComponent("Findable Structures: " + list1), UUID.randomUUID());
+                        player.sendMessage(new StringTextComponent("Findable Biomes: " + list2), UUID.randomUUID());
                     }
                 }
             }
@@ -541,6 +622,17 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
             e.printStackTrace();
         }
         return gem;
+    }
+
+    public static boolean sharesOwners(EntityGem gem1, EntityGem gem2){
+        for (int x = 0; x < gem1.OWNERS.size(); x++){
+            for(int y = 0; y < gem2.OWNERS.size(); y++){
+                if(gem1.OWNERS.get(x) == gem2.OWNERS.get(y)){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     @Override
@@ -1395,8 +1487,11 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
         if(gem.world.isRemote){
             return BlockPos.ZERO;
         }
+        BlockPos blockpos1 = null;
         BlockPos blockpos = new BlockPos(gem.getPosition());
-        BlockPos blockpos1 = ((ServerWorld)gem.getEntityWorld()).func_241117_a_(structure, blockpos, 100, false);
+        if(gem.structures.contains(structure.getRegistryName().toString().replace("minecraft:", ""))) {
+             blockpos1 = ((ServerWorld) gem.getEntityWorld()).func_241117_a_(structure, blockpos, 100, false);
+        }
         if (blockpos1 == null) {
             return BlockPos.ZERO;
         } else {
@@ -1411,9 +1506,12 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
         Biome biome = gem.getServer().func_244267_aX().getRegistry(Registry.BIOME_KEY).getOptional(biomeResource).orElseThrow(() -> {
             return LocateBiomeCommand.field_241044_a_.create(biomeResource);
         });
-        BlockPos blockpos = new BlockPos(gem.getPosition());
-        BlockPos blockpos1 = ((ServerWorld)gem.getEntityWorld()).func_241116_a_(biome, blockpos, 6400, 8);
         String s = biomeResource.toString();
+        BlockPos blockpos = new BlockPos(gem.getPosition());
+        BlockPos blockpos1 = null;
+        if(gem.biomes.contains(s.replace("minecraft:", ""))) {
+            blockpos1 = ((ServerWorld) gem.getEntityWorld()).func_241116_a_(biome, blockpos, 6400, 8);
+        }
         if (blockpos1 == null) {
             return BlockPos.ZERO;
         } else {
@@ -1426,7 +1524,12 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
         BlockPos pos = biome ? EntityGem.findBiome(this, biomeResource) : EntityGem.findStructure(this, structure);
         if(this.consumeItemCheck(Items.MAP)) {
             if (pos == BlockPos.ZERO) {
-                player.sendMessage(new TranslationTextComponent("commands.gempire.faillocate"), UUID.randomUUID());
+                if(biome) {
+                    player.sendMessage(new TranslationTextComponent("commands.gempire.norecbio"), UUID.randomUUID());
+                }
+                else{
+                    player.sendMessage(new TranslationTextComponent("commands.gempire.norecstruc"), UUID.randomUUID());
+                }
                 return;
             }
             boolean done = false;
@@ -1460,6 +1563,35 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
             }
         }
         return flag;
+    }
+
+    public void generateScoutList(){
+        //STRUCTURES
+        ArrayList<ResourceLocation> rls = new ArrayList<>();
+        Set<ResourceLocation> sussy = net.minecraftforge.registries.ForgeRegistries.STRUCTURE_FEATURES.getKeys();
+        rls.addAll(sussy);
+        ArrayList<ResourceLocation> resourceLocations = new ArrayList<>();
+        while(resourceLocations.size() < 3){
+            int m = this.rand.nextInt(sussy.size());
+            if(!resourceLocations.contains(rls.get(m))) resourceLocations.add(rls.get(m));
+        }
+        for(ResourceLocation key : resourceLocations){
+            this.structures.add(net.minecraftforge.registries.ForgeRegistries.STRUCTURE_FEATURES.getValue(key).getRegistryName().toString().replace("minecraft:", ""));
+        }
+
+        //BIOMES
+
+        ArrayList<ResourceLocation> rls1 = new ArrayList<>();
+        Set<ResourceLocation> sus = ForgeRegistries.BIOMES.getKeys();
+        rls1.addAll(sus);
+        ArrayList<ResourceLocation> resourceLocations1 = new ArrayList<>();
+        while(resourceLocations1.size() < 3){
+            int m = this.rand.nextInt(sus.size());
+            if(!resourceLocations1.contains(rls1.get(m))) resourceLocations1.add(rls1.get(m));
+        }
+        for(ResourceLocation key : resourceLocations1){
+            this.biomes.add(net.minecraftforge.registries.ForgeRegistries.BIOMES.getValue(key).getRegistryName().toString().replace("minecraft:", ""));
+        }
     }
 
     public boolean isOnStructureCooldown(){
