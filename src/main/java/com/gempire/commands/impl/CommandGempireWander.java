@@ -33,7 +33,7 @@ public class CommandGempireWander extends CommandBase {
         List<EntityGem> gems = source.getWorld().getEntitiesWithinAABB(EntityGem.class, aabb);
         for(EntityGem gem : gems){
             if(gem.isOwner(source.asPlayer())){
-                gem.FOLLOW_ID = source.asPlayer().getUUID(source.asPlayer().getGameProfile());
+                gem.FOLLOW_ID = source.asPlayer().getUniqueID();
                 gem.setMovementType((byte) 1);
             }
         }

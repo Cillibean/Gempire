@@ -1,8 +1,5 @@
 package com.gempire;
 
-import com.gempire.client.entity.render.*;
-import com.gempire.client.screen.*;
-import com.gempire.client.ter.ShellTER;
 import com.gempire.container.GemUIContainer;
 import com.gempire.container.ShellContainer;
 import com.gempire.entities.TestEntity;
@@ -15,15 +12,12 @@ import com.gempire.init.*;
 import com.gempire.proxy.ClientProxy;
 import com.google.common.eventbus.Subscribe;
 import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.ScreenManager;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
 import net.minecraft.loot.LootPool;
 import net.minecraft.loot.TableLootEntry;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.event.TextureStitchEvent;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
@@ -31,11 +25,9 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DeferredWorkQueue;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.InterModComms;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
-import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
@@ -53,8 +45,7 @@ public class Gempire
     public static final String MODID = "gempire";
     // Directly reference a log4j logger.
     private static final Logger LOGGER = LogManager.getLogger();
-
-    public static final ClientProxy clientProxy = new ClientProxy();
+    public static MinecraftServer server;
 
     public Gempire() {
         // Register the setup method for modloading
@@ -64,10 +55,11 @@ public class Gempire
         // Register the processIMC method for modloading
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::processIMC);
         // Register the doClientStuff method for modloading
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onClientSetup);
+        //FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientProxy::onClientSetup);
 
         RegistryHandler.init();
         // Register ourselves for server and other game events we are interested in
+        //MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGHEST, ClientProxy::onClientSetup);
         MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, ModFeatures::addOres);
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(new EventHandler());
@@ -175,61 +167,10 @@ public class Gempire
     // You can use SubscribeEvent and let the Event Bus discover methods to call
     @SubscribeEvent
     public void onServerStarting(FMLServerStartingEvent event) {
-        // do something when the server starts
+        server = event.getServer();
         LOGGER.info("HELLO from server starting");
     }
 
-    @SubscribeEvent
-    public void onClientSetup(FMLClientSetupEvent event) {
-        //RenderingRegistry.registerEntityRenderingHandler(ModEntities.TEST.get(), RenderTestEntity::new);
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.PEBBLE.get(), RenderPebble::new);
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.MICA.get(), RenderMica::new);
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.SHALE.get(), RenderShale::new);
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.NACRE.get(), RenderNacre::new);
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.RUBY.get(), RenderRuby::new);
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.SAPPHIRE.get(), RenderSapphire::new);
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.QUARTZ.get(), RenderQuartz::new);
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.JASPER.get(), RenderJasper::new);
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.AGATE.get(), RenderAgate::new);
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.TOPAZ.get(), RenderTopaz::new);
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.OBSIDIAN.get(), RenderObsidian::new);
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.PEARL.get(), RenderPearl::new);
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.NEPHRITE.get(), RenderNephrite::new);
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.SPODUMENE.get(), RenderSpodumene::new);
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.ZIRCON.get(), RenderZircon::new);
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.ICE_SHARD.get(), (manager) -> new RenderIceShard(manager, Minecraft.getInstance().getItemRenderer()));
-
-        ScreenManager.registerFactory(ModContainers.TANK_CONTAINER.get(), TankScreen::new);
-        ScreenManager.registerFactory(ModContainers.INJECTOR_CONTAINER.get(), InjectorScreen::new);
-        ScreenManager.registerFactory(ModContainers.GEM_UI_CONTAINER.get(), GemUIScreen::new);
-        ScreenManager.registerFactory(ModContainers.SHELL_CONTAINER.get(), ShellScreen::new);
-        ScreenManager.registerFactory(ModContainers.PEARL_UI_CONTAINER.get(), PearlUIScreen::new);
-        ScreenManager.registerFactory(ModContainers.ZIRCON_UI_CONTAINER.get(), ZirconUIScreen::new);
-
-        RenderTypeLookup.setRenderLayer(ModBlocks.POWER_CRYSTAL_BLOCK.get(), RenderType.getTranslucent());
-        RenderTypeLookup.setRenderLayer(ModBlocks.SHELL_BLOCK.get(), RenderType.getTranslucent());
-
-        RenderTypeLookup.setRenderLayer(ModBlocks.WHITE_CHROMA_CRYSTAL.get(), RenderType.getTranslucent());
-        RenderTypeLookup.setRenderLayer(ModBlocks.ORANGE_CHROMA_CRYSTAL.get(), RenderType.getTranslucent());
-        RenderTypeLookup.setRenderLayer(ModBlocks.MAGENTA_CHROMA_CRYSTAL.get(), RenderType.getTranslucent());
-        RenderTypeLookup.setRenderLayer(ModBlocks.LIGHT_BLUE_CHROMA_CRYSTAL.get(), RenderType.getTranslucent());
-        RenderTypeLookup.setRenderLayer(ModBlocks.YELLOW_CHROMA_CRYSTAL.get(), RenderType.getTranslucent());
-        RenderTypeLookup.setRenderLayer(ModBlocks.LIME_CHROMA_CRYSTAL.get(), RenderType.getTranslucent());
-        RenderTypeLookup.setRenderLayer(ModBlocks.PINK_CHROMA_CRYSTAL.get(), RenderType.getTranslucent());
-        RenderTypeLookup.setRenderLayer(ModBlocks.GRAY_CHROMA_CRYSTAL.get(), RenderType.getTranslucent());
-        RenderTypeLookup.setRenderLayer(ModBlocks.LIGHT_GRAY_CHROMA_CRYSTAL.get(), RenderType.getTranslucent());
-        RenderTypeLookup.setRenderLayer(ModBlocks.CYAN_CHROMA_CRYSTAL.get(), RenderType.getTranslucent());
-        RenderTypeLookup.setRenderLayer(ModBlocks.PURPLE_CHROMA_CRYSTAL.get(), RenderType.getTranslucent());
-        RenderTypeLookup.setRenderLayer(ModBlocks.BLUE_CHROMA_CRYSTAL.get(), RenderType.getTranslucent());
-        RenderTypeLookup.setRenderLayer(ModBlocks.BROWN_CHROMA_CRYSTAL.get(), RenderType.getTranslucent());
-        RenderTypeLookup.setRenderLayer(ModBlocks.GREEN_CHROMA_CRYSTAL.get(), RenderType.getTranslucent());
-        RenderTypeLookup.setRenderLayer(ModBlocks.RED_CHROMA_CRYSTAL.get(), RenderType.getTranslucent());
-        RenderTypeLookup.setRenderLayer(ModBlocks.BLACK_CHROMA_CRYSTAL.get(), RenderType.getTranslucent());
-
-        RenderTypeLookup.setRenderLayer(ModBlocks.ICE_SPIKE.get(), RenderType.getCutout());
-
-        ClientRegistry.bindTileEntityRenderer(ModTE.SHELL_TE.get(), ShellTER::new);
-    }
 
     // You can use EventBusSubscriber to automatically subscribe events on the contained class (this is subscribing to the MOD
     // Event bus for receiving Registry Events)

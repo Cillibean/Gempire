@@ -231,6 +231,16 @@ public class ModBlocks {
                     .harvestTool(ToolType.PICKAXE))
     );
 
+    public static final RegistryObject<Block> FLOATANIUM_REACTOR = BLOCKS.register("floatanium_reactor", () ->
+            new Block(Block.Properties
+                    .create(Material.IRON)
+                    .hardnessAndResistance(5, 5)
+                    .sound(SoundType.GLASS)
+                    .harvestLevel(1)
+                    .harvestTool(ToolType.PICKAXE)
+            )
+    );
+
 
     public static RegistryObject<FlowingFluidBlock> PINK_ESSENCE_BLOCK = BLOCKS.register("pink_essence_block", () ->
             new FlowingFluidBlock(ModFluids.PINK_ESSENCE, Block.Properties.create(Material.WATER).doesNotBlockMovement().hardnessAndResistance(100.0F).noDrops()));

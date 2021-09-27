@@ -54,6 +54,8 @@ import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraft.world.storage.MapData;
 import net.minecraft.world.storage.MapDecoration;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.network.NetworkHooks;
@@ -63,6 +65,7 @@ import org.apache.commons.lang3.ArrayUtils;
 import javax.annotation.Nullable;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
@@ -443,8 +446,8 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
                     //Test to see if the gem has an owner
                     if (!this.getOwned()) {
                         if(!this.isOwner(player)) {
-                            this.addOwner(PlayerEntity.getUUID(player.getGameProfile()));
-                            this.FOLLOW_ID = player.getUUID(player.getGameProfile());
+                            this.addOwner(player.getUniqueID());
+                            this.FOLLOW_ID = player.getUniqueID();
                             this.setMovementType((byte) 2);
                             player.sendMessage(new TranslationTextComponent("messages.gempire.entity.claimed"), this.getUniqueID());
                             return super.applyPlayerInteraction(player, vec, hand);
@@ -502,7 +505,7 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
     public void cycleMovementAI(PlayerEntity player){
         //Cycles through the various movement types.
         this.navigator.clearPath();
-        this.FOLLOW_ID = player.getUUID(player.getGameProfile());
+        this.FOLLOW_ID = player.getUniqueID();
         if(this.getMovementType() < 2){
             this.addMovementType(1);
             switch(this.getMovementType()){
@@ -671,7 +674,7 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
     public boolean isOwner(LivingEntity entity){
         for(UUID uuid : this.OWNERS){
             if(entity instanceof PlayerEntity){
-                if(((PlayerEntity)entity).getUUID(((PlayerEntity) entity).getGameProfile()).equals(uuid)) return true;
+                if((((PlayerEntity)entity).getUniqueID()).equals(uuid)) return true;
             }
             else {
                 if (entity.getUniqueID().equals(uuid)) return true;
@@ -712,10 +715,10 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
 
     public int generateSkinColor(){
         ArrayList<Integer> skins = new ArrayList<>();
-        ResourceLocation paletteTexture = new ResourceLocation(this.getModID() + ":textures/entity/" + this.getWholeGemName().toLowerCase() + "/palettes/skin_palette.png");
+        ResourceLocation paletteTexture = new ResourceLocation(this.getModID() + "/assets/" + this.getModID() + "/textures/entity/" + this.getWholeGemName().toLowerCase() + "/palettes/skin_palette.png");
         BufferedImage palette = null;
         try{
-            palette = ImageIO.read(Minecraft.getInstance().getResourceManager().getResource(paletteTexture).getInputStream());
+            palette = ImageIO.read(EntityGem.class.getClassLoader().getResourceAsStream("/assets/" + this.getModID() + "/textures/entity/" + this.getWholeGemName().toLowerCase() + "/palettes/skin_palette.png"));
             System.out.println("Palette Read!");
             for (int x = 0; x < palette.getWidth(); x++) {
                 int color = palette.getRGB(x, this.getSkinColorVariant());
@@ -757,7 +760,7 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
             ResourceLocation paletteTexture = new ResourceLocation(this.getModID() + ":textures/entity/" + this.getWholeGemName().toLowerCase() + "/palettes/marking_palette.png");
             BufferedImage palette = null;
             try {
-                palette = ImageIO.read(Minecraft.getInstance().getResourceManager().getResource(paletteTexture).getInputStream());
+                palette = ImageIO.read(EntityGem.class.getClassLoader().getResourceAsStream("/assets/" + this.getModID() + "/textures/entity/" + this.getWholeGemName().toLowerCase() + "/palettes/marking_palette.png"));
                 System.out.println("Palette Read!");
                 for (int x = 0; x < palette.getWidth(); x++) {
                     int color = palette.getRGB(x, this.getSkinColorVariant());
@@ -780,7 +783,7 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
             ResourceLocation paletteTexture = new ResourceLocation(this.getModID() + ":textures/entity/" + this.getWholeGemName().toLowerCase() + "/palettes/marking_2_palette.png");
             BufferedImage palette = null;
             try {
-                palette = ImageIO.read(Minecraft.getInstance().getResourceManager().getResource(paletteTexture).getInputStream());
+                palette = ImageIO.read(EntityGem.class.getClassLoader().getResourceAsStream("/assets/" + this.getModID() + "/textures/entity/" + this.getWholeGemName().toLowerCase() + "/palettes/marking_2_palette.png"));
                 System.out.println("Palette Read!");
                 for (int x = 0; x < palette.getWidth(); x++) {
                     int color = palette.getRGB(x, this.getSkinColorVariant());
@@ -871,7 +874,7 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
         ResourceLocation paletteTexture = new ResourceLocation(this.getModID() + ":textures/entity/" + this.getWholeGemName().toLowerCase() + "/palettes/hair_palette.png");
         BufferedImage palette = null;
         try{
-            palette = ImageIO.read(Minecraft.getInstance().getResourceManager().getResource(paletteTexture).getInputStream());
+            palette = ImageIO.read(EntityGem.class.getClassLoader().getResourceAsStream("/assets/" + this.getModID() + "/textures/entity/" + this.getWholeGemName().toLowerCase() + "/palettes/hair_palette.png"));
             System.out.println("Palette Read!");
             for (int x = 0; x < palette.getWidth(); x++) {
                 int color = palette.getRGB(x, this.getSkinColorVariant());
@@ -911,7 +914,7 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
         BufferedImage palette = null;
         int color = 0;
         try{
-            palette = ImageIO.read(Minecraft.getInstance().getResourceManager().getResource(paletteTexture).getInputStream());
+            palette = ImageIO.read(EntityGem.class.getClassLoader().getResourceAsStream("/assets/" + this.getModID() + "/textures/entity/" + this.getWholeGemName().toLowerCase() + "/palettes/gem_palette.png"));
             color = palette.getRGB(0, this.getSkinColorVariant());
         }
         catch (IOException e){

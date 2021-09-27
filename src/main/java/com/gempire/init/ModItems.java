@@ -18,6 +18,13 @@ import java.awt.*;
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Gempire.MODID);
 
+    public static final RegistryObject<Item> FLOATANIUM_REACTOR = ITEMS.register("floatanium_reactor", () ->
+            new BlockItem(
+                    ModBlocks.FLOATANIUM_REACTOR.get(),
+                    new Item.Properties()
+            )
+    );
+
     public static final RegistryObject<Item> WHITE_CHROMA_CRYSTAL = ITEMS.register("white_chroma_crystal", () ->
             new BlockItem(
                     ModBlocks.WHITE_CHROMA_CRYSTAL.get(),
@@ -312,6 +319,15 @@ public class ModItems {
 
     public static final RegistryObject<Item> ICE_SHARD = ITEMS.register("ice_shard", () ->
             new ItemIceShard(new Item.Properties().group(ModItemGroup.ITEMS).maxStackSize(64)));
+
+    public static final RegistryObject<Item> BASIC_WIRE_BLOCK_ITEM = ITEMS.register("basic_wire_block", () ->
+            new Item(new Item.Properties().group(ItemGroup.MATERIALS).maxStackSize(64)));
+    public static final RegistryObject<Item> ENERGY_INTERFACE = ITEMS.register("energy_interface", () ->
+            new Item(new Item.Properties().maxStackSize(64)));
+    public static final RegistryObject<Item> FLUID_INTERFACE = ITEMS.register("fluid_interface", () ->
+            new Item(new Item.Properties().maxStackSize(64)));
+    public static final RegistryObject<Item> STACK_INTERFACE = ITEMS.register("stack_interface", () ->
+            new Item(new Item.Properties().maxStackSize(64)));
 
     public static final RegistryObject<Item> WHITE_CHROMA = ITEMS.register("white_chroma", () ->
             new ItemChroma(new Item.Properties().group(ModItemGroup.ITEMS).maxStackSize(64), 0));

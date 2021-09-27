@@ -18,7 +18,7 @@ public class C2SRequestUpdateInjectorValves {
     }
 
     public static C2SRequestUpdateInjectorValves decode(PacketBuffer buffer) {
-        final String color = buffer.readString();
+        final String color = buffer.readString(32767);
         final BlockPos injector = buffer.readBlockPos();
         return new C2SRequestUpdateInjectorValves(color, injector);
     }

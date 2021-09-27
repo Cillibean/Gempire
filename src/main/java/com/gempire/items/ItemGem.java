@@ -152,8 +152,8 @@ public class ItemGem extends Item {
                 }
                 if(player != null) {
                     gem.onInitialSpawn((IServerWorld) world, world.getDifficultyForLocation(player.getPosition()), SpawnReason.TRIGGERED, null, null);
-                    gem.addOwner(player.getUUID(player.getGameProfile()));
-                    gem.FOLLOW_ID = player.getUUID(player.getGameProfile());
+                    gem.addOwner(player.getUniqueID());
+                    gem.FOLLOW_ID = player.getUniqueID();
                     gem.setMovementType((byte) 2);
                 }
                 else{

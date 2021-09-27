@@ -20,7 +20,7 @@ public class C2SRequestUpdateGemName {
     }
 
     public static C2SRequestUpdateGemName decode(PacketBuffer buffer) {
-        final String newName = buffer.readString();
+        final String newName = buffer.readString(32767);
         final int entityID = buffer.readInt();
         return new C2SRequestUpdateGemName(newName, entityID);
     }
