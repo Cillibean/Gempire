@@ -677,11 +677,7 @@ public class ModItems {
             new ItemGem(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
     public static final RegistryObject<Item> BIXBITE_GEM = ITEMS.register("bixbite_gem", () ->
             new ItemGem(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> DEMANTOID_GEM = ITEMS.register("demantoid_gem", () ->
-            new ItemGem(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
     public static final RegistryObject<Item> EMERALD_GEM = ITEMS.register("emerald_gem", () ->
-            new ItemGem(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> HESSONITE_GEM = ITEMS.register("hessonite_gem", () ->
             new ItemGem(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
     public static final RegistryObject<Item> LAPIS_LAZULI_GEM = ITEMS.register("lapis_lazuli_gem", () ->
             new ItemGem(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
@@ -699,8 +695,6 @@ public class ModItems {
             new ItemGem(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
     public static final RegistryObject<Item> PERIDOT_GEM = ITEMS.register("peridot_gem", () ->
             new ItemGem(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
-    public static final RegistryObject<Item> PYROPE_GEM = ITEMS.register("pyrope_gem", () ->
-            new ItemGem(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
     public static final RegistryObject<Item> RUTILE_GEM = ITEMS.register("rutile_gem", () ->
             new ItemGem(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
     public static final RegistryObject<Item> SHALE_GEM = ITEMS.register("shale_gem", () ->
@@ -711,6 +705,15 @@ public class ModItems {
             new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
     public static final RegistryObject<Item> RED_SAPPHIRE_GEM = ITEMS.register("sapphire_gem_14", () ->
             new Item(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
+
+    public static final RegistryObject<Item> HESSONITE_GARNET_GEM = ITEMS.register("garnet_gem_1", () ->
+            new ItemGem(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
+    public static final RegistryObject<Item> DEMANTOID_GARNET_GEM = ITEMS.register("garnet_gem_5", () ->
+            new ItemGem(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
+    public static final RegistryObject<Item> PYROPE_GARNET_GEM = ITEMS.register("garnet_gem_14", () ->
+            new ItemGem(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
+    public static final RegistryObject<Item> MELANITE_GARNET_GEM = ITEMS.register("garnet_gem_15", () ->
+            new ItemGem(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));
 
     public static final RegistryObject<Item> SPODUMENE_SPODUMENE_GEM = ITEMS.register("spodumene_gem_1", () ->
             new ItemGem(new Item.Properties().group(ModItemGroup.GEMSTONES).maxStackSize(1).isImmuneToFire()));

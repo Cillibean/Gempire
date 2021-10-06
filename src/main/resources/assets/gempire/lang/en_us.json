@@ -251,9 +251,7 @@
   "item.gempire.aquamarine_gem": "Aquamarine Gem",
   "item.gempire.bismuth_gem": "Bismuth Gem",
   "item.gempire.bixbite_gem": "Bixbite Gem",
-  "item.gempire.demantoid_gem": "Demantoid Gem",
   "item.gempire.emerald_gem": "Emerald Gem",
-  "item.gempire.hessonite_gem": "Hessonite Gem",
   "item.gempire.lapis_lazuli_gem": "Lapis Lazuli Gem",
   "item.gempire.larimar_gem": "Larimar Gem",
   "item.gempire.morganite_gem": "Morganite Gem",
@@ -262,10 +260,14 @@
   "item.gempire.obsidian_gem": "Snowflake Obsidian Gem",
   "item.gempire.pebble_gem": "Pebble Gem",
   "item.gempire.peridot_gem": "Peridot Gem",
-  "item.gempire.pyrope_gem": "Pyrope Gem",
   "item.gempire.rutile_gem": "Rutile Gem",
   "item.gempire.shale_gem": "Shale Gem",
   "item.gempire.nacre_gem": "Nacre Gem",
+
+  "item.gempire.garnet_gem_1": "Hessonite Gem",
+  "item.gempire.garnet_gem_5": "Demantoid Gem",
+  "item.gempire.garnet_gem_14": "Pyrope Gem",
+  "item.gempire.garnet_gem_15": "Melanite Gem",
 
   "item.gempire.spodumene_gem_1": "Spodumene Gem",
   "item.gempire.spodumene_gem_4": "Triphane Gem",
@@ -364,7 +366,7 @@
   "messages.gempire.entity.player_hungry": "I'm too hungry to make her brew...",
   "messages.gempire.entity.player_need_xp": "I don't have enough XP...",
   "messages.gempire.entity.cant_enchant": "This tool can't be enchanted...",
-  "messages.gempire.entity.enchant_not_apply": "This tool cant accept this enchantment...",
+  "messages.gempire.entity.enchant_not_apply": "This tool can't accept this enchantment...",
   "messages.gempire.entity.need_lapis": "She needs more lapis lazuli...",
 
   "itemGroup.gemstones" : "Gemstones",
@@ -428,7 +430,7 @@
   "ability.gempire.water_walking": "Water Walking",
   "ability.gempire.alchemist": "Alchemist",
   "ability.gempire.guard": "Guard",
-  "ability.gempire.essence": "Essence-Brewing",
+  "ability.gempire.essence": "Essence Brewing",
 
   "screens.gempire.health": "Health",
   "screens.gempire.damage": "Attack Damage",
