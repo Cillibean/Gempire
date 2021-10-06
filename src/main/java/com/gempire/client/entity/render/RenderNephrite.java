@@ -20,6 +20,7 @@ public class RenderNephrite extends MobRenderer<EntityNephrite, ModelNephrite<En
         this.addLayer(new OutfitLayer(this));
         this.addLayer(new HairLayer(this));
         this.addLayer(new InsigniaLayer(this));
+        this.addLayer(new HairLayer(this));
         this.addLayer(new GemPlacementLayer(this));
     }
 

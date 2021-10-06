@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "gempire:items/tech_scraps"
+    "layer0": "gempire:blocks/wire_node"
   }
 }

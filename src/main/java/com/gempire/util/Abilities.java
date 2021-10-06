@@ -12,7 +12,7 @@ public enum Abilities {
     POWERHOUSE(8, 3),
     UNHINGED(9, 5),
     STERN(10, 3),
-    FIRST_AID(11, 2),
+    FIRST_AID(11, 1),
     HEALER(12, 1),
     NEGOTIATOR(13, 5),
     SEEKER(14, 5),

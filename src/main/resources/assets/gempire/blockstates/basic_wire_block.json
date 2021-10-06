@@ -12,7 +12,7 @@
       "apply": {
         "model": "gempire:block/wire_side",
         "y": 270,
-        "uvlock": true
+        "uvlock": false
       }
     },
     {
@@ -22,7 +22,7 @@
       "apply": {
         "model": "gempire:block/wire_side",
         "y": 180,
-        "uvlock": true
+        "uvlock": false
       }
     },
     {
@@ -32,7 +32,7 @@
       "apply": {
         "model": "gempire:block/wire_side",
         "y": 90,
-        "uvlock": true
+        "uvlock": false
       }
     },
     {
@@ -42,7 +42,7 @@
       "apply": {
         "model": "gempire:block/wire_side",
         "y": 0,
-        "uvlock": true
+        "uvlock": false
       }
     },
     {
@@ -52,7 +52,7 @@
       "apply": {
         "model": "gempire:block/wire_side",
         "x": 90,
-        "uvlock": true
+        "uvlock": false
       }
     },
     {
@@ -62,7 +62,7 @@
       "apply": {
         "model": "gempire:block/wire_side",
         "x": 270,
-        "uvlock": true
+        "uvlock": false
       }
     }
   ]
