@@ -60,7 +60,7 @@ public class ModelQuartz<T extends AbstractQuartz> extends ModelGem<T> {
         this.leg2.setTextureOffset(64, 36).addBox(0.0F, 0.0F, 0.0F, 4.0F, 9.5F, 4.0F, 0.1F, 0.0F, 0.1F);
         this.mohawk = new ModelRenderer(this, 0, 0);
         this.mohawk.setRotationPoint(0, -2.0F, 0F);
-        this.mohawk.setTextureOffset(70, 40).addBox(-2F, 0.0F, -6F, 6.0F, 3.0F, 10.0F, 0.0F, 0.0F, 0.0F);
+        this.mohawk.setTextureOffset(70, 40).addBox(-2F, 0.0F, -7.0F, 6.0F, 3.0F, 10.0F, 0.0F, 0.0F, 0.0F);
         this.arm1 = new ModelRenderer(this, 0, 0);
         this.arm1.setRotationPoint(-4.3F, 0.1F, 1.0F);
         this.arm1.setTextureOffset(22, 18).addBox(0.0F, 0.0F, 0.0F, 4.0F, 14.0F, 4.0F, 0.2F, 0.0F, 0.2F);

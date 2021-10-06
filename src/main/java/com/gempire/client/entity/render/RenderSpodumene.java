@@ -15,12 +15,12 @@ public class RenderSpodumene extends MobRenderer<EntitySpodumene, ModelSpodumene
 
     public RenderSpodumene(EntityRendererManager renderManagerIn) {
         super(renderManagerIn, new ModelSpodumene<>(), .25f);
+        this.addLayer(new GemPlacementLayer(this));
         this.addLayer(new SkinLayer(this));
         //this.addLayer(new FaceLayer(this));
         this.addLayer(new SpodumeneHairLayer(this));
         this.addLayer(new OutfitLayer(this));
         this.addLayer(new InsigniaLayer(this));
-        this.addLayer(new GemPlacementLayer(this));
     }
 
     @Override

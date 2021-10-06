@@ -61,7 +61,7 @@ public class ModelNephrite<T extends EntityGem> extends ModelGem<T> {
         this.Head.addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, 0.0F, 0.0F, 0.0F);
         this.Skirt = new ModelRenderer(this, 0, 53);
         //this.Skirt.setRotationPoint(-8.0F, 8.0F, 1.8F);
-        this.Skirt.addBox(0.0F, 0.0F, 0.0F, 16.0F, 11.0F, 0.0F, 0.0F, 0.0F, 0.0F);
+        this.Skirt.addBox(-8.0F, 8.0F, 1.0F, 16.0F, 11.0F, 0.0F, 0.0F, 0.0F, 0.0F);
         this.setRotateAngle(Skirt, 0.08726646259971647F, 0.0F, 0.0F);
         this.HairPoof = new ModelRenderer(this, 32, 39);
         //this.HairPoof.setRotationPoint(0.0F, -1.0F, 0.0F);
@@ -111,6 +111,9 @@ public class ModelNephrite<T extends EntityGem> extends ModelGem<T> {
         this.Hair.addChild(this.Ponytail_1);
         this.Hair.addChild(this.Fuzz);
         this.Hair.addChild(this.HairL);
+        this.Body.addChild(this.Skirt);
+        this.ArmL.addChild(this.LShoulder);
+        this.ArmR.addChild(this.RShoulder);
     }
 
     @Override
