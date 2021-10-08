@@ -31,16 +31,16 @@ public class OutfitLayer<E extends EntityGem, M extends ModelGem<E>> extends Gem
         if(gem.hasOutfitPlacementVariant()){
             for(int i : gem.outfitPlacementVariants()){
                 if(i == gem.getGemPlacement()) {
-                    builder = bufferIn.getBuffer(RenderType.getEntityCutoutNoCull(new ResourceLocation(gem.getModID() + ":textures/entity/" + this.getName(gem).toLowerCase() + "/outfits/outfit_" + gem.getGemPlacement() + "_0.png")));
+                    builder = bufferIn.getBuffer(RenderType.getEntityTranslucent(new ResourceLocation(gem.getModID() + ":textures/entity/" + this.getName(gem).toLowerCase() + "/outfits/outfit_" + gem.getGemPlacement() + "_0.png")));
                     break;
                 }
                 else{
-                    builder = bufferIn.getBuffer(RenderType.getEntityCutoutNoCull(new ResourceLocation(gem.getModID() + ":textures/entity/" + this.getName(gem).toLowerCase() + "/outfits/outfit_" + gem.getOutfitVariant() + ".png")));
+                    builder = bufferIn.getBuffer(RenderType.getEntityTranslucent(new ResourceLocation(gem.getModID() + ":textures/entity/" + this.getName(gem).toLowerCase() + "/outfits/outfit_" + gem.getOutfitVariant() + ".png")));
                 }
             }
         }
         else{
-            builder = bufferIn.getBuffer(RenderType.getEntityCutoutNoCull(new ResourceLocation(gem.getModID() + ":textures/entity/" + this.getName(gem).toLowerCase() + "/outfits/outfit_" + gem.getOutfitVariant() + ".png")));
+            builder = bufferIn.getBuffer(RenderType.getEntityTranslucent(new ResourceLocation(gem.getModID() + ":textures/entity/" + this.getName(gem).toLowerCase() + "/outfits/outfit_" + gem.getOutfitVariant() + ".png")));
         }
         this.getEntityModel().setRotationAngles(gem, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
         this.getEntityModel().render(matrixStackIn, builder, packedLightIn, OverlayTexture.NO_OVERLAY, outfitColors[0], outfitColors[1], outfitColors[2], 1.0F);
