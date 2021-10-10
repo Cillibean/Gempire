@@ -715,10 +715,10 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
 
     public int generateSkinColor(){
         ArrayList<Integer> skins = new ArrayList<>();
-        ResourceLocation paletteTexture = new ResourceLocation(this.getModID() + "/assets/" + this.getModID() + "/textures/entity/" + this.getWholeGemName().toLowerCase() + "/palettes/skin_palette.png");
+        ResourceLocation paletteTexture = new ResourceLocation(this.getModID() + ":textures/entity/" + this.getWholeGemName().toLowerCase() + "/palettes/skin_palette.png");
         BufferedImage palette = null;
         try{
-            palette = ImageIO.read(EntityGem.class.getClassLoader().getResourceAsStream("/assets/" + this.getModID() + "/textures/entity/" + this.getWholeGemName().toLowerCase() + "/palettes/skin_palette.png"));
+            palette = ImageIO.read(Minecraft.getInstance().getResourceManager().getResource(paletteTexture).getInputStream());
             System.out.println("Palette Read!");
             for (int x = 0; x < palette.getWidth(); x++) {
                 int color = palette.getRGB(x, this.getSkinColorVariant());
@@ -760,7 +760,7 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
             ResourceLocation paletteTexture = new ResourceLocation(this.getModID() + ":textures/entity/" + this.getWholeGemName().toLowerCase() + "/palettes/marking_palette.png");
             BufferedImage palette = null;
             try {
-                palette = ImageIO.read(EntityGem.class.getClassLoader().getResourceAsStream("/assets/" + this.getModID() + "/textures/entity/" + this.getWholeGemName().toLowerCase() + "/palettes/marking_palette.png"));
+                palette = ImageIO.read(Minecraft.getInstance().getResourceManager().getResource(paletteTexture).getInputStream());
                 System.out.println("Palette Read!");
                 for (int x = 0; x < palette.getWidth(); x++) {
                     int color = palette.getRGB(x, this.getSkinColorVariant());
@@ -783,7 +783,7 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
             ResourceLocation paletteTexture = new ResourceLocation(this.getModID() + ":textures/entity/" + this.getWholeGemName().toLowerCase() + "/palettes/marking_2_palette.png");
             BufferedImage palette = null;
             try {
-                palette = ImageIO.read(EntityGem.class.getClassLoader().getResourceAsStream("/assets/" + this.getModID() + "/textures/entity/" + this.getWholeGemName().toLowerCase() + "/palettes/marking_2_palette.png"));
+                palette = ImageIO.read(Minecraft.getInstance().getResourceManager().getResource(paletteTexture).getInputStream());
                 System.out.println("Palette Read!");
                 for (int x = 0; x < palette.getWidth(); x++) {
                     int color = palette.getRGB(x, this.getSkinColorVariant());
@@ -874,7 +874,7 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
         ResourceLocation paletteTexture = new ResourceLocation(this.getModID() + ":textures/entity/" + this.getWholeGemName().toLowerCase() + "/palettes/hair_palette.png");
         BufferedImage palette = null;
         try{
-            palette = ImageIO.read(EntityGem.class.getClassLoader().getResourceAsStream("/assets/" + this.getModID() + "/textures/entity/" + this.getWholeGemName().toLowerCase() + "/palettes/hair_palette.png"));
+            palette = ImageIO.read(Minecraft.getInstance().getResourceManager().getResource(paletteTexture).getInputStream());
             System.out.println("Palette Read!");
             for (int x = 0; x < palette.getWidth(); x++) {
                 int color = palette.getRGB(x, this.getSkinColorVariant());
@@ -910,18 +910,25 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
     }
 
     public int generateGemColor(){
+        ArrayList<Integer> skins = new ArrayList<>();
         ResourceLocation paletteTexture = new ResourceLocation(this.getModID() + ":textures/entity/" + this.getWholeGemName().toLowerCase() + "/palettes/gem_palette.png");
         BufferedImage palette = null;
-        int color = 0;
         try{
-            palette = ImageIO.read(EntityGem.class.getClassLoader().getResourceAsStream("/assets/" + this.getModID() + "/textures/entity/" + this.getWholeGemName().toLowerCase() + "/palettes/gem_palette.png"));
-            color = palette.getRGB(0, this.getSkinColorVariant());
+            palette = ImageIO.read(Minecraft.getInstance().getResourceManager().getResource(paletteTexture).getInputStream());
+            System.out.println("Palette Read!");
+            for (int x = 0; x < palette.getWidth(); x++) {
+                int color = palette.getRGB(x, this.getSkinColorVariant());
+                if((color>>24) == 0x00){
+                    continue;
+                }
+                skins.add(color);
+            }
         }
         catch (IOException e){
             e.printStackTrace();
-            color = 0x00000;
+            skins.add(0x00000);
         }
-        return color;
+        return Color.lerpHex(skins);
     }
 
     public int getOutfitColor(){
