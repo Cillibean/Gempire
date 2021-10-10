@@ -125,7 +125,7 @@ public class Gempire
         ModEnchants.registerItemDiscounts();
     }
 
-    @SuppressWarnings("WARN")
+    @SuppressWarnings("warning")
     @SubscribeEvent
     public void onLootTablesLoad(LootTableLoadEvent event) {
         // Test: /loot give @p loot minecraft:chests/end_city_treasure
@@ -141,9 +141,10 @@ public class Gempire
         ) {
             event.getTable().addPool(LootPool.builder().addEntry(TableLootEntry.builder(new ResourceLocation(MODID, "chests/essence"))).build());
         }
-        else{
+        /*else{
+            event.getTable().
             event.getTable().addPool(LootPool.builder().addEntry(TableLootEntry.builder(event.getName())).build());
-        }
+        }*/
     }
 
     @SubscribeEvent

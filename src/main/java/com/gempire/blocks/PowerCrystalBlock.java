@@ -1,5 +1,6 @@
 package com.gempire.blocks;
 
+import com.gempire.blocks.markers.IPowerMarker;
 import com.gempire.init.ModBlocks;
 import com.gempire.tileentities.InjectorTE;
 import com.gempire.tileentities.PowerCrystalTE;
@@ -25,7 +26,7 @@ import net.minecraftforge.fml.network.NetworkHooks;
 
 import javax.annotation.Nullable;
 
-public class PowerCrystalBlock extends ContainerBlock {
+public class PowerCrystalBlock extends ContainerBlock implements IPowerMarker {
 
     public PowerCrystalBlock(Properties properties) {
         super(properties);
@@ -49,7 +50,7 @@ public class PowerCrystalBlock extends ContainerBlock {
 
     @Override
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-        return Block.makeCuboidShape(2D, 2D, 2D, 14D, 14D , 14D);
+        return Block.makeCuboidShape(1D, 1D, 1D, 15D, 15D , 15D);
     }
 
     @Nullable
@@ -65,9 +66,8 @@ public class PowerCrystalBlock extends ContainerBlock {
     }
 
     public VoxelShape getRayTraceShape(BlockState state, IBlockReader reader, BlockPos pos, ISelectionContext context) {
-        return VoxelShapes.empty();
+        return Block.makeCuboidShape(1D, 1D, 1D, 15D, 15D , 15D);
     }
-
 
     public float getAmbientOcclusionLightValue(BlockState state, IBlockReader worldIn, BlockPos pos) {
         return 1.0F;

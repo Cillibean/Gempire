@@ -103,6 +103,4 @@ public class InjectorBlock extends ContainerBlock {
     public boolean canConnectRedstone(BlockState state, IBlockReader world, BlockPos pos, @Nullable Direction side) {
         return true;
     }
-
-
 }

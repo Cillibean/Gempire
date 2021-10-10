@@ -51,7 +51,7 @@ public class ShellScreen extends ContainerScreen<ShellContainer> {
         int y = (this.height - this.ySize) / 2;
         this.minecraft.getTextureManager().bindTexture(ShellScreen.GUI);
         this.blit(matrixStack, x, y, 0, 0, this.xSize, this.ySize);
-        if(this.container.shell.waterlogged){
+        if(this.container.shell.essenceMarker){
             this.minecraft.getTextureManager().bindTexture(ShellScreen.LIGHT);
             this.blit(matrixStack, x, y, 0, 0, this.xSize, this.ySize);
         }

@@ -1,5 +1,6 @@
 package com.gempire.blocks;
 
+import com.gempire.blocks.markers.IPowerMarker;
 import com.gempire.init.ModBlocks;
 import net.minecraft.block.*;
 import net.minecraft.item.BlockItemUseContext;
@@ -41,12 +42,12 @@ public class SixWayConnectorBlock extends SixWayBlock {
         Block block4 = blockReader.getBlockState(pos.south()).getBlock();
         Block block5 = blockReader.getBlockState(pos.west()).getBlock();
         return this.getDefaultState()
-                .with(DOWN, Boolean.valueOf(block == this || block == ModBlocks.WIRE_BLOCK.get()))
-                .with(UP, Boolean.valueOf(block1 == this || block1 == ModBlocks.WIRE_BLOCK.get()))
-                .with(NORTH, Boolean.valueOf(block2 == this || block2 == ModBlocks.WIRE_BLOCK.get()))
-                .with(EAST, Boolean.valueOf(block3 == this || block3 == ModBlocks.WIRE_BLOCK.get()))
-                .with(SOUTH, Boolean.valueOf(block4 == this || block4 == ModBlocks.WIRE_BLOCK.get()))
-                .with(WEST, Boolean.valueOf(block5 == this || block5 == ModBlocks.WIRE_BLOCK.get()));
+                .with(DOWN, block == this || block instanceof IPowerMarker)
+                .with(UP, block1 == this || block1 instanceof IPowerMarker)
+                .with(NORTH, block2 == this || block2 instanceof IPowerMarker)
+                .with(EAST, block3 == this || block3 instanceof IPowerMarker)
+                .with(SOUTH, block4 == this || block4 instanceof IPowerMarker)
+                .with(WEST, block5 == this || block5 instanceof IPowerMarker);
     }
 
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {

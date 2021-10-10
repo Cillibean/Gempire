@@ -65,6 +65,7 @@ public class ShellTE extends LockableLootTileEntity implements INamedContainerPr
     public int clayConsumed = 0;
     public boolean chromaConsumed = false;
     public boolean essenceConsumed = false;
+    public boolean essenceMarker = false;
     public int chromaColor = 0;
     public int ticks = 0;
 
@@ -80,6 +81,7 @@ public class ShellTE extends LockableLootTileEntity implements INamedContainerPr
         this.clayConsumed = nbt.getInt("clay");
         this.chromaConsumed = nbt.getBoolean("chroma");
         this.essenceConsumed = nbt.getBoolean("essence");
+        this.essenceMarker = nbt.getBoolean("marker");
         this.chromaColor = nbt.getInt("color");
         this.items = NonNullList.withSize(this.getSizeInventory(), ItemStack.EMPTY);
         if(!this.checkLootAndRead(nbt)){
@@ -95,6 +97,7 @@ public class ShellTE extends LockableLootTileEntity implements INamedContainerPr
         compound.putInt("clay", this.clayConsumed);
         compound.putBoolean("chroma", this.chromaConsumed);
         compound.putBoolean("essence", this.essenceConsumed);
+        compound.putBoolean("marker", this.essenceMarker);
         compound.putInt("color", this.chromaColor);
         if(!this.checkLootAndWrite(compound)){
             ItemStackHelper.saveAllItems(compound, this.items);
@@ -181,6 +184,19 @@ public class ShellTE extends LockableLootTileEntity implements INamedContainerPr
                     if(block.getFluid() == ModFluids.WHITE_ESSENCE.get()) {
                         this.world.setBlockState(this.pos.add(ShellTE.direction(i)), Blocks.AIR.getDefaultState());
                         this.essenceConsumed = true;
+                        this.essenceMarker = true;
+                        break;
+                    }
+                }
+            }
+        }
+        else{
+            this.essenceMarker = false;
+            for(int i = 0; i < 6; i++){
+                if(this.world.getBlockState(this.pos.add(ShellTE.direction(i))).getBlock() == ModBlocks.WHITE_ESSENCE_BLOCK.get()){
+                    FlowingFluidBlock block = (FlowingFluidBlock) this.world.getBlockState(this.pos.add(ShellTE.direction(i))).getBlock();
+                    if(block.getFluid() == ModFluids.WHITE_ESSENCE.get()) {
+                        this.essenceMarker = true;
                         break;
                     }
                 }

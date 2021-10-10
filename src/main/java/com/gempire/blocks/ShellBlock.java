@@ -1,5 +1,6 @@
 package com.gempire.blocks;
 
+import com.gempire.blocks.markers.IPowerMarker;
 import com.gempire.container.ShellContainer;
 import com.gempire.init.ModBlocks;
 import com.gempire.init.ModFluids;
@@ -33,7 +34,7 @@ import net.minecraftforge.fml.network.NetworkHooks;
 
 import javax.annotation.Nullable;
 
-public class ShellBlock extends ContainerBlock implements IWaterLoggable{
+public class ShellBlock extends ContainerBlock implements IWaterLoggable, IPowerMarker {
     public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
     public static final IntegerProperty STAGE = IntegerProperty.create("stage", 0, 2);
     public static final BooleanProperty WATERLOGGED = BooleanProperty.create("waterlogged");
