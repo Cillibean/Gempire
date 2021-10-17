@@ -292,17 +292,28 @@
   "entity.gempire.jasper": "Jasper",
   "entity.gempire.agate": "Agate",
   "entity.gempire.topaz": "Topaz",
-  "entity.gempire.obsidian": "Obsidian",
+  "entity.gempire.obsidian": "Snowflake Obsidian",
   "entity.gempire.pearl": "Pearl",
   "entity.gempire.nephrite": "Nephrite",
   "entity.gempire.spodumene": "Spodumene",
   "entity.gempire.zircon": "Zircon",
+  "entity.gempire.garnet": "Garnet",
+  "entity.gempire.larimar": "Larimar",
+  "entity.gempire.spinel": "Spinel",
+  "entity.gempire.tourmaline": "Tourmaline",
 
   "nickname.gempire.spodumene_1": "Spodumene",
   "nickname.gempire.spodumene_4": "Triphane",
   "nickname.gempire.spodumene_10": "Kunzite",
   "nickname.gempire.spodumene_11": "Blue Spodumene",
   "nickname.gempire.spodumene_13": "Hiddenite",
+
+  "nickname.gempire.garnet_1": "Hessonite",
+  "nickname.gempire.garnet_5": "Demantoid",
+  "nickname.gempire.garnet_14": "Pyrope",
+  "nickname.gempire.garnet_15": "Melanite",
+
+  "nickname.gempire.tourmaline_16": "Watermelon Tourmaline",
 
   "nickname.gempire.quartz_0": "Milky Quartz",
   "nickname.gempire.quartz_1": "Chert",
@@ -369,7 +380,7 @@
   "messages.gempire.entity.player_need_xp": "I don't have enough XP...",
   "messages.gempire.entity.cant_enchant": "This tool can't be enchanted...",
   "messages.gempire.entity.enchant_not_apply": "This tool can't accept this enchantment...",
-  "messages.gempire.entity.need_lapis": "She needs more lapis lazuli...",
+  "messages.gempire.entity.need_lapis": "She needs more Lapis Lazuli...",
 
   "itemGroup.gemstones" : "Gemstones",
   "itemGroup.items" : "Items",
@@ -442,7 +453,7 @@
   "commands.gempire.norecstruc": "I'm not sure she recognises that structure...",
   "commands.gempire.norecbio": "I'm not sure she recognises that biome...",
   "commands.gempire.faillocate": "I don't think she could find any...",
-  "commands.gempire.foundit": "Here's your map! (Check her inventory)",
+  "commands.gempire.foundit": "Here's your map! Please check her inventory.",
   "commands.gempire.nomap": "She needs a map!",
 
   "gempire.subtitle.inject": "Injection"
