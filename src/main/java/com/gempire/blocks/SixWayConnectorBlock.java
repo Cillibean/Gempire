@@ -17,7 +17,7 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 
-public class SixWayConnectorBlock extends SixWayBlock {
+public abstract class SixWayConnectorBlock extends SixWayBlock {
 
     public SixWayConnectorBlock(float apothem, Properties properties) {
         super(apothem, properties);
@@ -34,6 +34,8 @@ public class SixWayConnectorBlock extends SixWayBlock {
         return this.makeConnections(context.getWorld(), context.getPos());
     }
 
+    public abstract boolean typeMarker(Block predicate);
+
     public BlockState makeConnections(IBlockReader blockReader, BlockPos pos) {
         Block block = blockReader.getBlockState(pos.down()).getBlock();
         Block block1 = blockReader.getBlockState(pos.up()).getBlock();
@@ -42,12 +44,12 @@ public class SixWayConnectorBlock extends SixWayBlock {
         Block block4 = blockReader.getBlockState(pos.south()).getBlock();
         Block block5 = blockReader.getBlockState(pos.west()).getBlock();
         return this.getDefaultState()
-                .with(DOWN, block == this || block instanceof IPowerMarker)
-                .with(UP, block1 == this || block1 instanceof IPowerMarker)
-                .with(NORTH, block2 == this || block2 instanceof IPowerMarker)
-                .with(EAST, block3 == this || block3 instanceof IPowerMarker)
-                .with(SOUTH, block4 == this || block4 instanceof IPowerMarker)
-                .with(WEST, block5 == this || block5 instanceof IPowerMarker);
+                .with(DOWN, block == this || typeMarker(block))
+                .with(UP, block1 == this || typeMarker(block1))
+                .with(NORTH, block2 == this || typeMarker(block2))
+                .with(EAST, block3 == this || typeMarker(block3))
+                .with(SOUTH, block4 == this || typeMarker(block4))
+                .with(WEST, block5 == this || typeMarker(block5));
     }
 
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {

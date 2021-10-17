@@ -141,10 +141,6 @@ public class Gempire
         ) {
             event.getTable().addPool(LootPool.builder().addEntry(TableLootEntry.builder(new ResourceLocation(MODID, "chests/essence"))).build());
         }
-        /*else{
-            event.getTable().
-            event.getTable().addPool(LootPool.builder().addEntry(TableLootEntry.builder(event.getName())).build());
-        }*/
     }
 
     @SubscribeEvent

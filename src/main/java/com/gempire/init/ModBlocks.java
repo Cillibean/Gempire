@@ -505,7 +505,7 @@ public class ModBlocks {
     );
 
     public static final RegistryObject<Block> WIRE_BLOCK = BLOCKS.register("basic_wire_block", () ->
-            new SixWayConnectorBlock(0.5f, Block.Properties
+            new WireBlock(0.5f, Block.Properties
                     .create(Material.IRON)
                     .hardnessAndResistance(1f, 1f)
                     .sound(SoundType.SNOW)
