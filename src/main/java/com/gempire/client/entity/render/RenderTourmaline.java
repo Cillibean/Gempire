@@ -17,6 +17,7 @@ public class RenderTourmaline extends MobRenderer<EntityTourmaline, ModelRuby<En
         super(renderManagerIn, new ModelRuby<>(), .25f);
         this.addLayer(new SkinLayer(this));
         this.addLayer(new FaceLayer(this));
+        this.addLayer(new MarkingLayer(this));
         this.addLayer(new HairLayer(this));
         this.addLayer(new OutfitLayer(this));
         this.addLayer(new InsigniaLayer(this));
