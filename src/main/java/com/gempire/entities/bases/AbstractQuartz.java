@@ -33,7 +33,8 @@ public abstract class AbstractQuartz extends EntityVaryingGem {
     public Abilities[] possibleAbilities() {
         return new Abilities[]{
             Abilities.NO_ABILITY, Abilities.PYROKINESIS, Abilities.CRYOKINESIS, Abilities.UNHINGED, Abilities.BEEFCAKE, Abilities.TANK, Abilities.KNOCKBACK, Abilities.PARALYSIS,
-                Abilities.POWERHOUSE, Abilities.HEALER, Abilities.FIRST_AID
+                Abilities.POWERHOUSE, Abilities.HEALER, Abilities.FIRST_AID, Abilities.BERSERKER, Abilities.BEASTMASTER, Abilities.CHARMER, Abilities.FRAGOKINESIS, Abilities.AZUR_PYROKINESIS,
+                Abilities.ELECTROKINESIS, Abilities.AQUAPHILE, Abilities.AEROKINESIS
         };
     }
 

@@ -86,7 +86,7 @@ public class EntityRuby extends EntityGem {
 
     @Override
     public int generateOutfitColor() {
-        return 8;
+        return 14;
     }
 
     @Override
@@ -148,15 +148,13 @@ public class EntityRuby extends EntityGem {
     }
 
     public int generateInsigniaVariant(){
-        boolean flag = false;
-        if(this.hasOutfitPlacementVariant()){
-            for(int i : this.outfitPlacementVariants()){
-                if(this.getGemPlacement() == i){
-                    flag = true;
-                }
-            }
+        if (this.getGemPlacement() == 11) {
+            return this.getGemPlacement() != 11 ? this.getOutfitVariant() : 4;
+        } else if (this.getGemPlacement() == 17) {
+            return this.getGemPlacement() != 17 ? this.getOutfitVariant() : 5;
+        } else {
+            return this.getOutfitVariant();
         }
-        return !flag ? this.getOutfitVariant() : 99;
     }
 
     @Override

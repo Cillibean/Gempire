@@ -169,7 +169,7 @@ public class EntityPearl extends EntityVaryingGem {
 
     @Override
     public int generateHairVariant() {
-        return this.rand.nextInt(32);
+        return this.rand.nextInt(34);
     }
 
     @Override
@@ -235,11 +235,11 @@ public class EntityPearl extends EntityVaryingGem {
     }
 
     public int generateOutfitVariant(){
-        return this.rand.nextInt(51);
+        return this.rand.nextInt(52);
     }
 
     public int generateInsigniaVariant(){
-        return this.rand.nextInt(33);
+        return this.rand.nextInt(34);
     }
 
     @Override
@@ -348,15 +348,15 @@ public class EntityPearl extends EntityVaryingGem {
     }
 
     public int getHairs(){
-        return 32;
+        return 34;
     }
 
     public int getOutfits(){
-        return 51;
+        return 52;
     }
 
     public int getInsignias(){
-        return 33;
+        return 34;
     }
 
     @Override
