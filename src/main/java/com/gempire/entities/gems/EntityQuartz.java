@@ -158,7 +158,7 @@ public class EntityQuartz extends AbstractQuartz {
 
     @Override
     public int generateInsigniaVariant() {
-        return this.getOutfitVariant();
+        return this.getGemPlacement() != 17 ? this.getOutfitVariant() : 0;
     }
 
     @Override

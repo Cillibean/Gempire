@@ -19,7 +19,7 @@ public class RenderObsidian extends MobRenderer<EntityObsidian, ModelObsidian<En
     public RenderObsidian(EntityRendererManager renderManagerIn) {
         super(renderManagerIn, new ModelObsidian<>(), .25f);
         this.addLayer(new SkinLayer(this));
-        //this.addLayer(new FaceLayer(this));
+        this.addLayer(new FaceLayer(this));
         this.addLayer(new MarkingLayer(this));
         this.addLayer(new HairLayer(this));
         this.addLayer(new OutfitLayer(this));
@@ -31,6 +31,7 @@ public class RenderObsidian extends MobRenderer<EntityObsidian, ModelObsidian<En
     public ResourceLocation getEntityTexture(EntityObsidian entity) {
         return new ResourceLocation(Gempire.MODID+":textures/entity/obsidian/blank.png");
     }
+
     @Override
     protected void renderName(EntityObsidian entityIn, ITextComponent displayNameIn, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn) {
         super.renderName(entityIn, displayNameIn, matrixStackIn, bufferIn, packedLightIn);

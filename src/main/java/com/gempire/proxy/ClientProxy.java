@@ -1,11 +1,9 @@
 package com.gempire.proxy;
 
 import com.gempire.Gempire;
-import com.gempire.client.entity.model.ModelTest;
 import com.gempire.client.entity.render.*;
 import com.gempire.client.screen.*;
 import com.gempire.client.ter.ShellTER;
-import com.gempire.entities.TestEntity;
 import com.gempire.init.ModBlocks;
 import com.gempire.init.ModContainers;
 import com.gempire.init.ModEntities;
@@ -14,15 +12,12 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
-import net.minecraft.entity.EntityType;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import org.lwjgl.opengl.NVPathRenderingSharedEdge;
 
 @Mod.EventBusSubscriber(modid = Gempire.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ClientProxy {
@@ -45,6 +40,21 @@ public class ClientProxy {
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.NEPHRITE.get(), RenderNephrite::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.SPODUMENE.get(), RenderSpodumene::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.ZIRCON.get(), RenderZircon::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.AQUAMARINE.get(), RenderAquamarine::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.BISMUTH.get(), RenderBismuth::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.BIXBITE.get(), RenderBixbite::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.DEMANTOID.get(), RenderDemantoid::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.EMERALD.get(), RenderEmerald::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.HESSONITE.get(), RenderHessonite::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.LAPIS.get(), RenderLapis::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.LARIMAR.get(), RenderLarimar::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.MELANITE.get(), RenderMelanite::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.MORGANITE.get(), RenderMorganite::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.PERIDOT.get(), RenderPeridot::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.PYROPE.get(), RenderPyrope::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.RUTILE.get(), RenderRutile::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.SPINEL.get(), RenderSpinel::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.TOURMALINE.get(), RenderTourmaline::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.ICE_SHARD.get(), (manager) -> new RenderIceShard(manager, Minecraft.getInstance().getItemRenderer()));
 
         ScreenManager.registerFactory(ModContainers.TANK_CONTAINER.get(), TankScreen::new);
