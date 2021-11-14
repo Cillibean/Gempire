@@ -84,7 +84,7 @@ public class EntityTourmaline extends EntityVaryingGem {
 
     @Override
     public int generateHairVariant() {
-        return this.rand.nextInt(3);
+        return this.rand.nextInt(1);
     }
 
     @Override
@@ -145,14 +145,10 @@ public class EntityTourmaline extends EntityVaryingGem {
                 name = "watermelon";
                 break;
             default:
-                name = "tourmaline";
+                name = "achroite";
                 break;
         }
         return name;
-    }
-
-    public String NameFromColor() {
-        return "tourmaline";
     }
 
     @Override
