@@ -22,7 +22,6 @@ public class RenderTourmaline extends MobRenderer<EntityTourmaline, ModelRuby<En
         this.addLayer(new OutfitLayer(this));
         this.addLayer(new InsigniaLayer(this));
         this.addLayer(new GemPlacementLayer(this));
-        //TO-DO: marking layer for watermelon tourm, and heartbreak tourm for valentine's day
     }
 
     @Override
