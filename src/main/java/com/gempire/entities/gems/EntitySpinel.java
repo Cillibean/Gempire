@@ -2,7 +2,7 @@ package com.gempire.entities.gems;
 
 import com.gempire.entities.ai.EntityAIFollowOwner;
 import com.gempire.entities.ai.EntityAIWander;
-import com.gempire.entities.bases.EntityGem;
+import com.gempire.entities.bases.EntityVaryingGem;
 import com.gempire.util.Abilities;
 import com.gempire.util.GemPlacements;
 import net.minecraft.entity.CreatureEntity;
@@ -15,7 +15,7 @@ import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
 
-public class EntitySpinel extends EntityGem {
+public class EntitySpinel extends EntityVaryingGem {
     //TO-DO: IMPLEMENT SPINEL. Will draw the attention of hostile mobs, and will give gifts to gems on the brink of rebellion or a mental meltdown.
     //Gifts will range from items in her inventory, to stealing things out of nearby chests. bad spinel no crystal chest
     //TO-DO: IMPLEMENT COLOR VARIANTS
@@ -67,6 +67,20 @@ public class EntitySpinel extends EntityGem {
     }
 
     @Override
+    public boolean UsesUniqueNames() {
+        return false;
+    }
+
+    @Override
+    public String NameFromColor(byte i) {
+        return "spinel";
+    }
+
+    public String NameFromColor() {
+        return "spinel";
+    }
+
+    @Override
     public int generateInsigniaColor() {
         return 6;
     }
@@ -99,10 +113,6 @@ public class EntitySpinel extends EntityGem {
         };
     }
 
-    public int generateSkinColorVariant() {
-        return 0;
-    }
-
     @Override
     public boolean generateIsEmotional() {
         return true;
@@ -127,7 +137,13 @@ public class EntitySpinel extends EntityGem {
     }
 
     public boolean hasSkinColorVariant(){
-        return false;
+        return true;
+    }
+
+    public int[] NeglectedColors() {
+        return new int[]{
+                16, 17
+        };
     }
 
     public int generateOutfitVariant(){

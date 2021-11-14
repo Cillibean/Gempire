@@ -2,7 +2,7 @@ package com.gempire.entities.gems;
 
 import com.gempire.entities.ai.EntityAIFollowOwner;
 import com.gempire.entities.ai.EntityAIWander;
-import com.gempire.entities.bases.EntityGem;
+import com.gempire.entities.bases.EntityVaryingGem;
 import com.gempire.util.Abilities;
 import com.gempire.util.GemPlacements;
 import net.minecraft.entity.CreatureEntity;
@@ -15,7 +15,7 @@ import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
 
-public class EntityTourmaline extends EntityGem {
+public class EntityTourmaline extends EntityVaryingGem {
     //TO-DO: IMPLEMENT TOURMALINE. Tourmaline will take care of one crop variety per Tourmaline.
     // Perfect Tourmalines will take care of several. Much like Zircon and her enchantments.
     // Tourmaline will have aerokinesis (wind manipulation) as an additional ability.
@@ -48,11 +48,6 @@ public class EntityTourmaline extends EntityGem {
     }
 
     @Override
-    public int generateSkinVariant() {
-        return 0;
-    }
-
-    @Override
     public GemPlacements[] getPlacements() {
         return new GemPlacements[]{
                 GemPlacements.TOP_OF_HEAD, GemPlacements.FOREHEAD, GemPlacements.BACK_OF_HEAD, GemPlacements.LEFT_EYE, GemPlacements.RIGHT_EYE, GemPlacements.NOSE,
@@ -63,8 +58,101 @@ public class EntityTourmaline extends EntityGem {
     }
 
     @Override
+    public boolean hasMarkings() {
+        return this.getSkinColorVariant() == 16;
+    }
+
+    @Override
+    public boolean hasMarkings2() {
+        return false;
+    }
+
+    @Override
+    public int maxMarkings() {
+        return 1;
+    }
+
+    @Override
+    public int maxMarkings2() {
+        return 0;
+    }
+
+    @Override
+    public int generateSkinVariant() {
+        return 0;
+    }
+
+    @Override
     public int generateHairVariant() {
         return this.rand.nextInt(3);
+    }
+
+    @Override
+    public boolean UsesUniqueNames() {
+        return true;
+    }
+
+    @Override
+    public String NameFromColor(byte i) {
+        String name = "";
+        switch(i){
+            case 1:
+                name = "pumpkin";
+                break;
+            case 2:
+                name = "mushroom";
+                break;
+            case 3:
+                name = "olenite";
+                break;
+            case 4:
+                name = "canary";
+                break;
+            case 5:
+                name = "verdelite";
+                break;
+            case 6:
+                name = "rossmanite";
+                break;
+            case 7:
+                name = "adachiite";
+                break;
+            case 8:
+                name = "povondraite";
+                break;
+            case 9:
+                name = "paraiba";
+                break;
+            case 10:
+                name = "siberite";
+                break;
+            case 11:
+                name = "indicolite";
+                break;
+            case 12:
+                name = "dravite";
+                break;
+            case 13:
+                name = "congo";
+                break;
+            case 14:
+                name = "rubellite";
+                break;
+            case 15:
+                name = "schorl";
+                break;
+            case 16:
+                name = "watermelon";
+                break;
+            default:
+                name = "tourmaline";
+                break;
+        }
+        return name;
+    }
+
+    public String NameFromColor() {
+        return "tourmaline";
     }
 
     @Override
@@ -100,10 +188,6 @@ public class EntityTourmaline extends EntityGem {
         };
     }
 
-    public int generateSkinColorVariant() {
-        return 0;
-    }
-
     @Override
     public boolean generateIsEmotional() {
         return true;
@@ -128,7 +212,13 @@ public class EntityTourmaline extends EntityGem {
     }
 
     public boolean hasSkinColorVariant(){
-        return false;
+        return true;
+    }
+
+    public int[] NeglectedColors() {
+        return new int[]{
+                17
+        };
     }
 
     public int generateOutfitVariant(){
