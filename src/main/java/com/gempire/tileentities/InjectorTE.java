@@ -324,30 +324,25 @@ public class InjectorTE extends LockableLootTileEntity implements IFluidTank, IN
         else if(slot == InjectorTE.WHITE_INPUT_SLOT_INDEX){
             return bucket == ModItems.WHITE_ESSENCE.get();
         }
-        else if(slot == InjectorTE.PRIME_INPUT_SLOT_INDEX){
-            return true;
-        }
-        else{
-            return false;
-        }
+        else return slot == InjectorTE.PRIME_INPUT_SLOT_INDEX;
     }
 
     public void ToggleTankOpen(String color){
         switch (color){
             case "pink":
-                this.pinkOpen = this.pinkOpen ? false : true;
+                this.pinkOpen = !this.pinkOpen;
                 break;
             case "blue":
-                this.blueOpen = this.blueOpen ? false : true;
+                this.blueOpen = !this.blueOpen;
                 break;
             case "yellow":
-                this.yellowOpen = this.yellowOpen ? false : true;
+                this.yellowOpen = !this.yellowOpen;
                 break;
             case "white":
-                this.whiteOpen = this.whiteOpen ? false : true;
+                this.whiteOpen = !this.whiteOpen;
                 break;
             default:
-                this.pinkOpen = this.pinkOpen ? false : true;
+                this.pinkOpen = !this.pinkOpen;
                 break;
         }
         this.world.notifyBlockUpdate(this.pos, this.getBlockState(), this.getBlockState(), 2);

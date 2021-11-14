@@ -82,7 +82,7 @@ public class GemSeedTE extends TileEntity implements ITickableTileEntity {
     public void tick() {
         //System.out.println("Gem List is of size: " + GemFormation.POSSIBLE_GEMS.size());
         if(!this.checked){
-           this.ScanPositions(this.world, this.pos, new BlockPos(this.DRAIN_SIZE, this.DRAIN_SIZE, this.DRAIN_SIZE));
+           this.ScanPositions(this.world, this.pos, new BlockPos(DRAIN_SIZE, DRAIN_SIZE, DRAIN_SIZE));
            this.checked = true;
         }
         if(this.ticks % 1 == 0) {
@@ -120,7 +120,7 @@ public class GemSeedTE extends TileEntity implements ITickableTileEntity {
             for (int y = GemFormation.getHalfMiddleOffsetLeft(volume.getY()); y < yo; y++) {
                 for (int x = GemFormation.getHalfMiddleOffsetLeft(volume.getX()); x < xo; x++) {
                     BlockPos block = position.add(new BlockPos(x, y, z));
-                    if (domhain.getBlockState(block).getBlock() instanceof FlowingFluidBlock || domhain.getBlockState(block).getBlock() instanceof AirBlock || this.world.isOutsideBuildHeight(block)) {
+                    if (domhain.getBlockState(block).getBlock() instanceof FlowingFluidBlock || domhain.getBlockState(block).getBlock() instanceof AirBlock || World.isOutsideBuildHeight(block)) {
                         continue;
                     } else {
                         if(this.random.nextInt(10) > 3) {

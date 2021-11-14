@@ -1,5 +1,8 @@
 package com.gempire.systems.machine;
 
+import net.minecraft.util.Direction;
+import net.minecraft.util.math.BlockPos;
+
 public enum MachineSide {
     BOTTOM(0, 1),
     TOP(1, 0),

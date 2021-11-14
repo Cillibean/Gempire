@@ -198,7 +198,7 @@ public class GemFormation {
         return returnGem;
     }
 
-    public BlockPos DirectionFromFacing(int face){
+    public static BlockPos DirectionFromFacing(int face){
         BlockPos pos = new BlockPos(1,0,0);
         switch(face){
             case 0: pos = new BlockPos(1,0, 0);
@@ -215,7 +215,7 @@ public class GemFormation {
 
     public void GenerateFacingExitHole(){
         System.out.println("This block is facing: " + this.facing);
-        BlockPos direction = this.DirectionFromFacing(this.facing);
+        BlockPos direction = GemFormation.DirectionFromFacing(this.facing);
         BlockPos currentPos = new BlockPos(this.pos);
         boolean flag = false;
         for(int i = 0; i < this.EXIT_HOLE_LENGTH; i++){

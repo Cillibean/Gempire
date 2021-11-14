@@ -14,7 +14,7 @@ public class Socket {
     }
 
     public static Socket GENERIC(MachineSide side){
-        return new Socket(side, SocketType.NONE, false, true);
+        return new Socket(side, SocketType.NONE, true, true);
     }
 
     public MachineSide getSide() {

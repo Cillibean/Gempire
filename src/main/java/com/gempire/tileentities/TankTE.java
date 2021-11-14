@@ -100,7 +100,7 @@ public class TankTE extends LockableLootTileEntity implements IFluidTank, INamed
                     BucketItem bucket = (BucketItem) stackToOutput.getItem();
                     Fluid fluid = this.tank.getFluid().getFluid();
                     this.tank.drain(new FluidStack(this.tank.getFluid().getFluid(), 1000), IFluidHandler.FluidAction.EXECUTE);
-                    this.setInventorySlotContents(TankTE.BUCKET_OUTPUT_SLOT_INDEX, new ItemStack((BucketItem)TankTE.FLUID_BUCKETS.get(fluid)));
+                    this.setInventorySlotContents(TankTE.BUCKET_OUTPUT_SLOT_INDEX, new ItemStack(TankTE.FLUID_BUCKETS.get(fluid)));
                     this.world.notifyBlockUpdate(this.pos, this.getBlockState(), this.getBlockState(), 2);
                     this.markDirty();
                 }
@@ -139,10 +139,7 @@ public class TankTE extends LockableLootTileEntity implements IFluidTank, INamed
     }
 
     public boolean canPutFluidToButton(ItemStack stack){
-        if(stack.getItem() == Items.STONE_BUTTON){
-            return true;
-        }
-        return false;
+        return stack.getItem() == Items.STONE_BUTTON;
     }
 
     public boolean shouldPutFluidToButton(){
@@ -167,9 +164,7 @@ public class TankTE extends LockableLootTileEntity implements IFluidTank, INamed
     public boolean canPutFluidFromStack(ItemStack stack){
         if(stack.getItem() instanceof BucketItem){
             BucketItem bucket = (BucketItem)stack.getItem();
-            if(bucket.getFluid() == Fluids.EMPTY){
-                return true;
-            }
+            return bucket.getFluid() == Fluids.EMPTY;
         }
         return false;
     }
@@ -246,7 +241,7 @@ public class TankTE extends LockableLootTileEntity implements IFluidTank, INamed
     public boolean isFluidValid(FluidStack stack) {
         System.out.println(stack.getFluid());
         System.out.println(this.tank.getFluid().getFluid());
-        return this.getFluid().getFluid() == Fluids.EMPTY ? true : stack.getFluid() == this.getFluid().getFluid();
+        return this.getFluid().getFluid() == Fluids.EMPTY || stack.getFluid() == this.getFluid().getFluid();
     }
 
     @Override

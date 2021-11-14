@@ -6,16 +6,10 @@ import com.gempire.systems.machine.Socket;
 import java.util.ArrayList;
 
 public interface ISixWayInterface {
-    ArrayList<Socket> SOCKETS = new ArrayList<>();
 
-    default void setupInitialSockets(){
-        for(int i = 0; i < 6; i++){
-            SOCKETS.add(Socket.GENERIC(MachineSide.getSide(i)));
-        }
-    }
+    void setupInitialSockets();
 
-    default void setupSocket(int ID, Socket socket) {
-        if(ID >= SOCKETS.size() ||  ID < 0) throw new ArrayIndexOutOfBoundsException();
-        SOCKETS.set(ID, socket);
-    }
+    void setupSocket(int ID, Socket socket);
+
+    ArrayList<Socket> getSockets();
 }
