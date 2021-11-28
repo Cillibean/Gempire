@@ -12,15 +12,33 @@ import java.util.UUID;
 public class EnergyPackage {
     BlockPos position;
     UUID identifier;
+    boolean remove;
+
+    public EnergyPackage(boolean remove){
+        this(BlockPos.ZERO, remove);
+    }
 
     public EnergyPackage(BlockPos position){
         this.position = position;
         this.identifier = UUID.randomUUID();
+        this.remove = false;
+    }
+    public EnergyPackage(BlockPos position, boolean remove){
+        this.position = position;
+        this.identifier = UUID.randomUUID();
+        this.remove = remove;
     }
 
     public EnergyPackage(BlockPos position, UUID identifier){
         this.position = position;
         this.identifier = identifier;
+        this.remove = false;
+    }
+
+    public EnergyPackage(BlockPos position, UUID identifier, boolean remove){
+        this.position = position;
+        this.identifier = identifier;
+        this.remove = remove;
     }
 
     public static EnergyPackage DEFAULT(){
@@ -35,6 +53,10 @@ public class EnergyPackage {
         return identifier;
     }
 
+    public boolean getState() {
+        return remove;
+    }
+
     public static CompoundNBT NBTFromPackage(EnergyPackage PACKAGE){
         CompoundNBT tag = new CompoundNBT();
         tag.putUniqueId("identifier", PACKAGE.getIdentifier());
@@ -43,6 +65,7 @@ public class EnergyPackage {
         position[1] = PACKAGE.getPosition().getY();
         position[2] = PACKAGE.getPosition().getZ();
         tag.putIntArray("position", position);
+        tag.putBoolean("remove", PACKAGE.getState());
         return tag;
     }
 
@@ -52,6 +75,7 @@ public class EnergyPackage {
                 tag.getIntArray("position")[0],
                 tag.getIntArray("position")[1],
                 tag.getIntArray("position")[2]);
-        return new EnergyPackage(position, identifier);
+        boolean remove = tag.getBoolean("remove");
+        return new EnergyPackage(position, identifier, remove);
     }
 }

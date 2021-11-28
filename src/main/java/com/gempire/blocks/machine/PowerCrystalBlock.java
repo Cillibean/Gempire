@@ -1,9 +1,10 @@
-package com.gempire.blocks;
+package com.gempire.blocks.machine;
 
 import com.gempire.blocks.markers.IPowerMarker;
 import com.gempire.init.ModBlocks;
 import com.gempire.tileentities.InjectorTE;
 import com.gempire.tileentities.PowerCrystalTE;
+import com.gempire.tileentities.PowerGeneratorTE;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
@@ -56,8 +57,13 @@ public class PowerCrystalBlock extends ContainerBlock implements IPowerMarker {
 
     @Nullable
     @Override
-    public TileEntity createNewTileEntity(IBlockReader worldIn) {
+    public TileEntity createNewTileEntity(IBlockReader world) {
         return new PowerCrystalTE();
+    }
+
+    @Override
+    public boolean hasTileEntity(BlockState state) {
+        return true;
     }
 
     @SuppressWarnings("deprecation")

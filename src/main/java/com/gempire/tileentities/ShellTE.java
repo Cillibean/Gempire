@@ -1,29 +1,22 @@
 package com.gempire.tileentities;
 
-import com.gempire.blocks.GemSeedBlock;
-import com.gempire.blocks.InjectorBlock;
-import com.gempire.blocks.ShellBlock;
-import com.gempire.container.InjectorContainer;
+import com.gempire.blocks.machine.ShellBlock;
 import com.gempire.container.ShellContainer;
-import com.gempire.entities.bases.AbstractQuartz;
-import com.gempire.events.InjectEvent;
 import com.gempire.init.ModBlocks;
 import com.gempire.init.ModFluids;
 import com.gempire.init.ModItems;
 import com.gempire.init.ModTE;
 import com.gempire.items.ItemChroma;
 import com.gempire.items.ItemGem;
+import com.gempire.systems.machine.interfaces.IPowerConsumer;
 import com.gempire.util.Color;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.FlowingFluidBlock;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.fluid.Fluids;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
-import net.minecraft.item.BucketItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -32,20 +25,13 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.LockableLootTileEntity;
-import net.minecraft.util.Direction;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.IFluidTank;
-import net.minecraftforge.fluids.capability.IFluidHandler;
-import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.minecraftforge.fml.RegistryObject;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class ShellTE extends LockableLootTileEntity implements INamedContainerProvider, ITickableTileEntity {

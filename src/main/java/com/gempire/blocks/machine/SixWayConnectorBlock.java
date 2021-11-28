@@ -1,4 +1,4 @@
-package com.gempire.blocks;
+package com.gempire.blocks.machine;
 
 import com.gempire.blocks.markers.IPowerMarker;
 import com.gempire.init.ModBlocks;
@@ -34,6 +34,7 @@ public abstract class SixWayConnectorBlock extends SixWayBlock {
         return this.makeConnections(context.getWorld(), context.getPos());
     }
 
+    public abstract boolean facingMarker(BlockPos direction);
     public abstract boolean typeMarker(Block predicate);
 
     public BlockState makeConnections(IBlockReader blockReader, BlockPos pos) {
@@ -44,12 +45,12 @@ public abstract class SixWayConnectorBlock extends SixWayBlock {
         Block block4 = blockReader.getBlockState(pos.south()).getBlock();
         Block block5 = blockReader.getBlockState(pos.west()).getBlock();
         return this.getDefaultState()
-                .with(DOWN, block == this || typeMarker(block))
-                .with(UP, block1 == this || typeMarker(block1))
-                .with(NORTH, block2 == this || typeMarker(block2))
-                .with(EAST, block3 == this || typeMarker(block3))
-                .with(SOUTH, block4 == this || typeMarker(block4))
-                .with(WEST, block5 == this || typeMarker(block5));
+                .with(DOWN, block == this || typeMarker(block) && facingMarker(pos.down()))
+                .with(UP, block1 == this || typeMarker(block1) && facingMarker(pos.up()))
+                .with(NORTH, block2 == this || typeMarker(block2) && facingMarker(pos.north()))
+                .with(EAST, block3 == this || typeMarker(block3) && facingMarker(pos.east()))
+                .with(SOUTH, block4 == this || typeMarker(block4) && facingMarker(pos.south()))
+                .with(WEST, block5 == this || typeMarker(block5) && facingMarker(pos.west()));
     }
 
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {

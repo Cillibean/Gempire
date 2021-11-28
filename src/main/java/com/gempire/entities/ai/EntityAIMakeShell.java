@@ -1,10 +1,8 @@
 package com.gempire.entities.ai;
 
-import com.gempire.blocks.PowerCrystalBlock;
-import com.gempire.entities.gems.starter.EntityMica;
+import com.gempire.blocks.machine.PowerCrystalBlock;
 import com.gempire.entities.gems.starter.EntityNacre;
 import com.gempire.init.ModBlocks;
-import net.minecraft.block.AbstractGlassBlock;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.pathfinding.PathNodeType;

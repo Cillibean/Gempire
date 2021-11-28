@@ -8,6 +8,6 @@ import com.gempire.systems.machine.SocketType;
 import java.util.ArrayList;
 
 public interface IPowerGenerator extends IPowerProvider {
-    void emitPackage();
-    EnergyPackage generatePackage();
+    void emitPackage(boolean remove);
+    EnergyPackage generatePackage(boolean remove);
 }

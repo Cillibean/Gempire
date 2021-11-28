@@ -33,4 +33,7 @@ public class ModTE {
 
     public static final RegistryObject<TileEntityType<ShellTE>> SHELL_TE = TILE_ENTITIES.register(
             "shell_te", () -> TileEntityType.Builder.create(ShellTE::new, ModBlocks.SHELL_BLOCK.get()).build(null));
+
+    public static final RegistryObject<TileEntityType<WireTE>> WIRE_TE = TILE_ENTITIES.register(
+            "wire_te", () -> TileEntityType.Builder.create(WireTE::new, ModBlocks.WIRE_BLOCK.get()).build(null));
 }

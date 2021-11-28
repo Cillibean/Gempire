@@ -1,14 +1,9 @@
-package com.gempire.blocks;
+package com.gempire.blocks.machine;
 
 import com.gempire.blocks.markers.IPowerMarker;
-import com.gempire.container.ShellContainer;
-import com.gempire.init.ModBlocks;
 import com.gempire.init.ModFluids;
-import com.gempire.tileentities.InjectorTE;
 import com.gempire.tileentities.ShellTE;
 import net.minecraft.block.*;
-import net.minecraft.entity.ai.brain.task.WalkToTargetTask;
-import net.minecraft.entity.passive.SheepEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.fluid.Fluid;
@@ -28,7 +23,6 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
-import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 

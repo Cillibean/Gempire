@@ -1,6 +1,6 @@
 package com.gempire.client.ter;
 
-import com.gempire.blocks.ShellBlock;
+import com.gempire.blocks.machine.ShellBlock;
 import com.gempire.tileentities.ShellTE;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.client.Minecraft;
@@ -16,7 +16,6 @@ import net.minecraft.item.Items;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.vector.Quaternion;
-import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.math.vector.Vector3f;
 import net.minecraft.world.LightType;
 import net.minecraft.world.World;

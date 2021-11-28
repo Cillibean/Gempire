@@ -2,6 +2,7 @@ package com.gempire.init;
 
 import com.gempire.Gempire;
 import com.gempire.blocks.*;
+import com.gempire.blocks.machine.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.FlowingFluidBlock;
 import net.minecraft.block.SoundType;

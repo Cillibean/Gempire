@@ -21,14 +21,14 @@ public class PowerGeneratorTE extends PowerProviderTE implements IPowerGenerator
     }
 
     @Override
-    public void emitPackage() {
+    public void emitPackage(boolean remove) {
         for(Socket socket : SOCKETS){
             if(socket.getType().equals(SocketType.POWER)){
                 if(!socket.isIO()){
                     BlockPos nextPos = getPos().add(Direction.byIndex(socket.getSide().id).getDirectionVec());
                     if(world.getTileEntity(nextPos) instanceof IPowerConductor){
                         IPowerConductor conductor = (IPowerConductor) world.getTileEntity(nextPos);
-                        conductor.receivePackage(generatePackage());
+                        conductor.receivePackage(generatePackage(remove));
                     }
                 }
             }
@@ -36,7 +36,8 @@ public class PowerGeneratorTE extends PowerProviderTE implements IPowerGenerator
     }
 
     @Override
-    public EnergyPackage generatePackage() {
-        return new EnergyPackage(getPos());
+    public EnergyPackage generatePackage(boolean remove) {
+        if(!remove) return new EnergyPackage(getPos());
+        else return new EnergyPackage(remove);
     }
 }
