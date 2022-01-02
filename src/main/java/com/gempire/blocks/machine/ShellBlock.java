@@ -1,5 +1,6 @@
 package com.gempire.blocks.machine;
 
+import com.gempire.blocks.machine.interfaces.IConsumer;
 import com.gempire.blocks.markers.IPowerMarker;
 import com.gempire.init.ModFluids;
 import com.gempire.tileentities.ShellTE;
@@ -28,7 +29,7 @@ import net.minecraftforge.fml.network.NetworkHooks;
 
 import javax.annotation.Nullable;
 
-public class ShellBlock extends ContainerBlock implements IWaterLoggable, IPowerMarker {
+public class ShellBlock extends ContainerBlock implements IWaterLoggable, IPowerMarker, IConsumer {
     public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
     public static final IntegerProperty STAGE = IntegerProperty.create("stage", 0, 2);
     public static final BooleanProperty WATERLOGGED = BooleanProperty.create("waterlogged");
@@ -42,6 +43,10 @@ public class ShellBlock extends ContainerBlock implements IWaterLoggable, IPower
     @Override
     public TileEntity createNewTileEntity(IBlockReader worldIn) {
         return new ShellTE();
+    }
+    @Override
+    public boolean hasTileEntity(BlockState state) {
+        return true;
     }
 
     @SuppressWarnings("deprecation")

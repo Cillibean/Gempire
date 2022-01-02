@@ -8,6 +8,9 @@ import com.gempire.init.ModItems;
 import com.gempire.init.ModTE;
 import com.gempire.items.ItemChroma;
 import com.gempire.items.ItemGem;
+import com.gempire.systems.machine.EnergyPackage;
+import com.gempire.systems.machine.MachineSide;
+import com.gempire.systems.machine.Socket;
 import com.gempire.systems.machine.interfaces.IPowerConsumer;
 import com.gempire.util.Color;
 import net.minecraft.block.BlockState;
@@ -33,8 +36,9 @@ import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.fml.RegistryObject;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 
-public class ShellTE extends LockableLootTileEntity implements INamedContainerProvider, ITickableTileEntity {
+public class ShellTE extends LockableLootTileEntity implements INamedContainerProvider, ITickableTileEntity, IPowerConsumer {
     public static final int NUMBER_OF_SLOTS = 5;
     public static final int CHROMA_INPUT_SLOT_INDEX = 0;
     public static final int CLAY_INPUT_SLOT_INDEX = 1;
@@ -57,6 +61,13 @@ public class ShellTE extends LockableLootTileEntity implements INamedContainerPr
 
     public ShellTE() {
         super(ModTE.SHELL_TE.get());
+        setupInitialSockets(this);
+        setupSocket(0, Socket.POWER_IN(MachineSide.BOTTOM), this);
+        setupSocket(1, Socket.POWER_IN(MachineSide.TOP), this);
+        setupSocket(2, Socket.POWER_IN(MachineSide.BACK), this);
+        setupSocket(3, Socket.POWER_IN(MachineSide.FRONT), this);
+        setupSocket(4, Socket.POWER_IN(MachineSide.LEFT), this);
+        setupSocket(5, Socket.POWER_IN(MachineSide.RIGHT), this);
     }
 
     @Override
@@ -78,6 +89,8 @@ public class ShellTE extends LockableLootTileEntity implements INamedContainerPr
     @Override
     public CompoundNBT write(CompoundNBT compound) {
         super.write(compound);
+        WriteConductor(compound, this, this);
+        WriteConsumer(compound, this, this);
         compound.putInt("gravel", this.gravelConsumed);
         compound.putInt("sand", this.sandConsumed);
         compound.putInt("clay", this.clayConsumed);
@@ -94,8 +107,10 @@ public class ShellTE extends LockableLootTileEntity implements INamedContainerPr
 
     @Override
     public void tick() {
+        TickTE(this, this);
         if(this.getStackInSlot(ShellTE.PEARL_OUTPUT_SLOT_INDEX) == ItemStack.EMPTY) {
             if(this.ticks % 1 == 0) {
+                DrainPower(this, this);
                 this.HandleGravelTick();
                 this.HandleSandTick();
                 this.HandleClayTick();
@@ -304,6 +319,72 @@ public class ShellTE extends LockableLootTileEntity implements INamedContainerPr
     public void handleUpdateTag(BlockState state, CompoundNBT tag) {
         System.out.println("[DEBUG]:Handling tag on chunk load");
         this.read(state, tag);
+    }
+
+    //ENERGY
+
+    ArrayList<Socket> SOCKETS = new ArrayList<>();
+    ArrayList<BlockPos> GENERATORS = new ArrayList<>();
+    EnergyPackage CURRENT_PACKAGE = EnergyPackage.DEFAULT();
+    ArrayList<EnergyPackage> STORED_PACKAGES = new ArrayList<>();
+    boolean CHANGED = false;
+    boolean CONDUCT = false;
+    int tiks = 0;
+
+    @Override
+    public ArrayList<EnergyPackage> getStoredPackages() {
+        return STORED_PACKAGES;
+    }
+
+    @Override
+    public EnergyPackage getCurrentPackage() {
+        return CURRENT_PACKAGE;
+    }
+
+    @Override
+    public void setChanged(boolean value) {
+        CHANGED = value;
+    }
+
+    @Override
+    public boolean getChanged() {
+        return CHANGED;
+    }
+
+    @Override
+    public void setConduct(boolean value) {
+        CONDUCT = value;
+    }
+
+    @Override
+    public boolean getConduct() {
+        return CONDUCT;
+    }
+
+    @Override
+    public void setCP(EnergyPackage PACKAGE) {
+        CURRENT_PACKAGE = PACKAGE;
+        addGenerator(PACKAGE, this, this);
+    }
+
+    @Override
+    public int getTicks() {
+        return tiks;
+    }
+
+    @Override
+    public void addTicks() {
+        tiks++;
+    }
+
+    @Override
+    public ArrayList<BlockPos> getGenerators() {
+        return GENERATORS;
+    }
+
+    @Override
+    public ArrayList<Socket> getSockets() {
+        return SOCKETS;
     }
 
     /*

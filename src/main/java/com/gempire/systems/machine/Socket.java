@@ -13,8 +13,22 @@ public class Socket {
         this.chargeable = chargeable;
     }
 
+    public Socket(MachineSide side, SocketType type, boolean chargeable){
+        this.side = side;
+        this.type = type;
+        this.IO = true;
+        this.chargeable = chargeable;
+    }
+
     public static Socket GENERIC(MachineSide side){
         return new Socket(side, SocketType.NONE, true, true);
+    }
+
+    public static Socket POWER_IN(MachineSide side){
+        return new Socket(side, SocketType.POWER, true);
+    }
+    public static Socket POWER_OUT(MachineSide side){
+        return new Socket(side, SocketType.POWER, false, true);
     }
 
     public MachineSide getSide() {
