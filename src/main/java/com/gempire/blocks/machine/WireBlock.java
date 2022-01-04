@@ -1,7 +1,8 @@
 package com.gempire.blocks.machine;
 
-import com.gempire.blocks.machine.interfaces.IConductor;
 import com.gempire.blocks.markers.IPowerMarker;
+import com.gempire.systems.machine.interfaces.IPowerConductor;
+import com.gempire.systems.machine.interfaces.IPowerGenerator;
 import com.gempire.tileentities.WireTE;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -14,7 +15,7 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-public class WireBlock extends SixWayConnectorBlock implements IConductor {
+public class WireBlock extends SixWayConnectorBlock {
 
     public WireBlock(float apothem, Properties properties) {
         super(apothem, properties);

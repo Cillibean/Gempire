@@ -8,10 +8,11 @@ import com.gempire.init.ModItems;
 import com.gempire.init.ModTE;
 import com.gempire.items.ItemChroma;
 import com.gempire.items.ItemGem;
-import com.gempire.systems.machine.EnergyPackage;
 import com.gempire.systems.machine.MachineSide;
 import com.gempire.systems.machine.Socket;
+import com.gempire.systems.machine.interfaces.IPowerConductor;
 import com.gempire.systems.machine.interfaces.IPowerConsumer;
+import com.gempire.systems.machine.interfaces.IPowerProvider;
 import com.gempire.util.Color;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -28,6 +29,7 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.LockableLootTileEntity;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
@@ -89,8 +91,6 @@ public class ShellTE extends LockableLootTileEntity implements INamedContainerPr
     @Override
     public CompoundNBT write(CompoundNBT compound) {
         super.write(compound);
-        WriteConductor(compound, this, this);
-        WriteConsumer(compound, this, this);
         compound.putInt("gravel", this.gravelConsumed);
         compound.putInt("sand", this.sandConsumed);
         compound.putInt("clay", this.clayConsumed);
@@ -107,10 +107,8 @@ public class ShellTE extends LockableLootTileEntity implements INamedContainerPr
 
     @Override
     public void tick() {
-        TickTE(this, this);
         if(this.getStackInSlot(ShellTE.PEARL_OUTPUT_SLOT_INDEX) == ItemStack.EMPTY) {
             if(this.ticks % 1 == 0) {
-                DrainPower(this, this);
                 this.HandleGravelTick();
                 this.HandleSandTick();
                 this.HandleClayTick();
@@ -289,8 +287,6 @@ public class ShellTE extends LockableLootTileEntity implements INamedContainerPr
         return this.getStackInSlot(ShellTE.PEARL_OUTPUT_SLOT_INDEX);
     }
 
-
-
     //NETWORKING STUFF
 
     //NETWORKING STUFF
@@ -324,67 +320,41 @@ public class ShellTE extends LockableLootTileEntity implements INamedContainerPr
     //ENERGY
 
     ArrayList<Socket> SOCKETS = new ArrayList<>();
-    ArrayList<BlockPos> GENERATORS = new ArrayList<>();
-    EnergyPackage CURRENT_PACKAGE = EnergyPackage.DEFAULT();
-    ArrayList<EnergyPackage> STORED_PACKAGES = new ArrayList<>();
-    boolean CHANGED = false;
-    boolean CONDUCT = false;
-    int tiks = 0;
-
-    @Override
-    public ArrayList<EnergyPackage> getStoredPackages() {
-        return STORED_PACKAGES;
-    }
-
-    @Override
-    public EnergyPackage getCurrentPackage() {
-        return CURRENT_PACKAGE;
-    }
-
-    @Override
-    public void setChanged(boolean value) {
-        CHANGED = value;
-    }
-
-    @Override
-    public boolean getChanged() {
-        return CHANGED;
-    }
-
-    @Override
-    public void setConduct(boolean value) {
-        CONDUCT = value;
-    }
-
-    @Override
-    public boolean getConduct() {
-        return CONDUCT;
-    }
-
-    @Override
-    public void setCP(EnergyPackage PACKAGE) {
-        CURRENT_PACKAGE = PACKAGE;
-        addGenerator(PACKAGE, this, this);
-    }
-
-    @Override
-    public int getTicks() {
-        return tiks;
-    }
-
-    @Override
-    public void addTicks() {
-        tiks++;
-    }
-
-    @Override
-    public ArrayList<BlockPos> getGenerators() {
-        return GENERATORS;
-    }
+    public float voltage;
 
     @Override
     public ArrayList<Socket> getSockets() {
         return SOCKETS;
+    }
+
+    @Override
+    public float getVoltage() {
+        return voltage;
+    }
+
+    @Override
+    public void combineVoltage(float inVoltage) {
+        voltage += inVoltage;
+    }
+
+    @Override
+    public void setVoltage(float inVoltage) {
+        voltage = inVoltage;
+    }
+
+    @Override
+    public boolean isSource() {
+        return false;
+    }
+
+    @Override
+    public TileEntity getTE() {
+        return this;
+    }
+
+    @Override
+    public IPowerConductor getThisConductor() {
+        return this;
     }
 
     /*

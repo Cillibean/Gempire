@@ -1,6 +1,5 @@
 package com.gempire.blocks.machine;
 
-import com.gempire.blocks.machine.interfaces.IGenerator;
 import com.gempire.blocks.markers.IPowerMarker;
 import com.gempire.init.ModBlocks;
 import com.gempire.systems.machine.interfaces.IPowerGenerator;
@@ -33,17 +32,10 @@ import net.minecraftforge.fml.network.NetworkHooks;
 
 import javax.annotation.Nullable;
 
-public class PowerCrystalBlock extends ContainerBlock implements IPowerMarker, IGenerator {
+public class PowerCrystalBlock extends ContainerBlock implements IPowerMarker {
 
     public PowerCrystalBlock(Properties properties) {
         super(properties);
-    }
-
-    @Override
-    public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
-        IPowerGenerator generator = getGenerator(pos, worldIn);
-        generator.emitPackage(false, generator, worldIn.getTileEntity(pos));
-        super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
     }
 
     @Override
@@ -63,18 +55,6 @@ public class PowerCrystalBlock extends ContainerBlock implements IPowerMarker, I
     }
 
     @Override
-    public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
-        if(worldIn.isRemote){
-            return;
-        }
-        if(!(newState.getBlock() instanceof PowerCrystalBlock)){
-            IPowerGenerator generator = getGenerator(pos, worldIn);
-            generator.emitPackage(true, generator, worldIn.getTileEntity(pos));
-            worldIn.removeTileEntity(pos);
-        }
-    }
-
-    @Override
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
         return Block.makeCuboidShape(1D, 1D, 1D, 15D, 15D , 15D);
     }
@@ -88,13 +68,6 @@ public class PowerCrystalBlock extends ContainerBlock implements IPowerMarker, I
     @Override
     public boolean hasTileEntity(BlockState state) {
         return true;
-    }
-
-    @Override
-    public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
-        IPowerGenerator generator = getGenerator(currentPos, worldIn);
-        generator.emitPackage(false, generator, worldIn.getTileEntity(currentPos));
-        return super.updatePostPlacement(stateIn,facing,facingState,worldIn,currentPos,facingPos);
     }
 
     @SuppressWarnings("deprecation")
