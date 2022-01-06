@@ -10,12 +10,27 @@ public interface IPowerConductor extends IPowerProvider {
             BlockPos otherConductorPosition = getTE().getPos().offset(direction);
             if(getTE().getWorld().getTileEntity(otherConductorPosition) instanceof IPowerProvider){
                 IPowerProvider otherConductor = (IPowerProvider) getTE().getWorld().getTileEntity(otherConductorPosition);
-                if(otherConductor.getVoltage() > getThisConductor().getVoltage() || otherConductor.isSource()){
+                if(otherConductor.getVoltage() > getVoltage() || otherConductor.isSource()){
                     return true;
                 }
             }
         }
         return false;
+    }
+
+    default IPowerProvider getHighestSurroundingPowerProvider(){
+        IPowerProvider powerProvider = null;
+        float p = getHighestSurroundingPower();
+        for(Direction direction : Direction.values()){
+            BlockPos otherConductorPosition = getTE().getPos().offset(direction);
+            if(getTE().getWorld().getTileEntity(otherConductorPosition) instanceof IPowerProvider){
+                IPowerProvider otherConductor = (IPowerProvider) getTE().getWorld().getTileEntity(otherConductorPosition);
+                if(otherConductor.getBattery().getCharge() == p){
+                    powerProvider = otherConductor;
+                }
+            }
+        }
+        return powerProvider;
     }
 
     default float getHighestSurroundingVoltage(){
@@ -30,17 +45,39 @@ public interface IPowerConductor extends IPowerProvider {
         return v;
     }
 
+    default float getHighestSurroundingPower(){
+        float p = 0;
+        for(Direction direction : Direction.values()){
+            BlockPos otherConductorPosition = getTE().getPos().offset(direction);
+            if(getTE().getWorld().getTileEntity(otherConductorPosition) instanceof IPowerProvider){
+                IPowerProvider otherConductor = (IPowerProvider) getTE().getWorld().getTileEntity(otherConductorPosition);
+                p = otherConductor.getBattery().getCharge() > p ? otherConductor.getBattery().getCharge() : p;
+            }
+        }
+        return p;
+    }
+
     default void adjustToSurroundingConductors(){
         if (isAllowedToExist()) {
-            float voltageToSet = getHighestSurroundingVoltage() - getResistance();
-            if(getVoltage() - voltageToSet < 0) {
-                getThisConductor().setVoltage(voltageToSet);
+            //VOLTAGE STUFF
+            if(!isSource()) {
+                float voltageToSet = getHighestSurroundingVoltage() - getResistance();
+                if (voltageToSet > 0) {
+                    setVoltage(voltageToSet);
+                } else {
+                    setVoltage(0);
+                }
             }
-            else{
-                getThisConductor().setVoltage(0);
-            }
+            //VOLTAGE STUFF
+
+            //POWER STUFF
+            float powerToSet = getHighestSurroundingPower() > 0 ? getBandwidth() : 0;
+            IPowerProvider provider = getHighestSurroundingPowerProvider();
+            receivePower(powerToSet, provider);
+            //POWER STUFF
         } else {
-            getThisConductor().setVoltage(0);
+            setVoltage(0);
+            getBattery().setCharge(0);
         }
     }
 
@@ -48,7 +85,33 @@ public interface IPowerConductor extends IPowerProvider {
         return 1f;
     }
 
+    default void receivePower(float amount, IPowerProvider provider){
+        if(getVoltage() <= 0){
+            getBattery().setCharge(0);
+        }
+        else{
+            if(getBattery().getCharge() < getBattery().getMaxCapacity()) {
+                getBattery().chargeBattery(amount);
+                provider.getBattery().dischargeBattery(amount);
+            }
+        }
+    }
+
+    default void ConductorTick(){
+        if(getTicks() > drawTicks()){
+            adjustToSurroundingConductors();
+            setTicks(0);
+        }
+        addTick();
+    }
+
     TileEntity getTE();
 
-    IPowerConductor getThisConductor();
+    default int drawTicks(){
+        return 5;
+    }
+
+    int getTicks();
+    void addTick();
+    void setTicks(int ticks);
 }

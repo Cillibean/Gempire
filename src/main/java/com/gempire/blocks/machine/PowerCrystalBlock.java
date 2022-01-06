@@ -6,14 +6,16 @@ import com.gempire.systems.machine.interfaces.IPowerGenerator;
 import com.gempire.tileentities.InjectorTE;
 import com.gempire.tileentities.PowerCrystalTE;
 import com.gempire.tileentities.PowerGeneratorTE;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockRenderType;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.ContainerBlock;
+import com.gempire.tileentities.WireTE;
+import net.minecraft.block.*;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.state.BooleanProperty;
+import net.minecraft.state.StateContainer;
+import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraft.state.properties.DoubleBlockHalf;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
@@ -32,10 +34,22 @@ import net.minecraftforge.fml.network.NetworkHooks;
 
 import javax.annotation.Nullable;
 
-public class PowerCrystalBlock extends ContainerBlock implements IPowerMarker {
+public class PowerCrystalBlock extends SixWayConnectorBlock implements IPowerMarker {
+    public static final BooleanProperty INJECTOR = BooleanProperty.create("injector");
 
-    public PowerCrystalBlock(Properties properties) {
-        super(properties);
+    public PowerCrystalBlock(float apothem, Properties properties) {
+        super(apothem, properties);
+        this.setDefaultState(this.stateContainer.getBaseState().with(INJECTOR, false));
+    }
+
+    @Override
+    public boolean facingMarker(BlockPos direction) {
+        return true;
+    }
+
+    @Override
+    public boolean typeMarker(Block predicate) {
+        return predicate instanceof IPowerMarker;
     }
 
     @Override
@@ -55,13 +69,35 @@ public class PowerCrystalBlock extends ContainerBlock implements IPowerMarker {
     }
 
     @Override
+    public BlockState makeConnections(IBlockReader blockReader, BlockPos pos) {
+        Block block = blockReader.getBlockState(pos.down()).getBlock();
+        Block block1 = blockReader.getBlockState(pos.up()).getBlock();
+        Block block2 = blockReader.getBlockState(pos.north()).getBlock();
+        Block block3 = blockReader.getBlockState(pos.east()).getBlock();
+        Block block4 = blockReader.getBlockState(pos.south()).getBlock();
+        Block block5 = blockReader.getBlockState(pos.west()).getBlock();
+        return this.getDefaultState()
+                .with(DOWN, block == this || typeMarker(block) && facingMarker(pos.down()))
+                .with(UP, block1 == this || typeMarker(block1) && facingMarker(pos.up()))
+                .with(NORTH, block2 == this || typeMarker(block2) && facingMarker(pos.north()))
+                .with(EAST, block3 == this || typeMarker(block3) && facingMarker(pos.east()))
+                .with(SOUTH, block4 == this || typeMarker(block4) && facingMarker(pos.south()))
+                .with(WEST, block5 == this || typeMarker(block5) && facingMarker(pos.west()))
+                .with(INJECTOR, block == ModBlocks.TANK_BLOCK.get());
+    }
+
+    @Override
+    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+        builder.add(NORTH, EAST, SOUTH, WEST, UP, DOWN, INJECTOR);
+    }
+
+    @Override
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
         return Block.makeCuboidShape(1D, 1D, 1D, 15D, 15D , 15D);
     }
 
-    @Nullable
     @Override
-    public TileEntity createNewTileEntity(IBlockReader world) {
+    public TileEntity createTileEntity(BlockState state, IBlockReader world) {
         return new PowerCrystalTE();
     }
 

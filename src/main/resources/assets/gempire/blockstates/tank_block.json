@@ -1,5 +1,10 @@
 {
   "variants": {
-    "": { "model": "gempire:block/tank" }
+    "half=upper": {
+      "model": "gempire:block/tank_top"
+    },
+    "half=lower": {
+      "model": "gempire:block/tank_bottom"
+    }
   }
 }

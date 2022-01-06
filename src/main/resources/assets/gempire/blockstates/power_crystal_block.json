@@ -1,5 +1,84 @@
 {
-  "variants": {
-    "": { "model": "gempire:block/power_crystal" }
-  }
+  "multipart": [
+    {
+      "when": {
+        "injector": "true"
+      },
+      "apply": {
+        "model": "gempire:block/power_crystal"
+      }
+    },
+    {
+      "when": {
+        "injector": "false"
+      },
+      "apply": {
+        "model": "gempire:block/power_crystal_orb"
+      }
+    },
+    {
+      "when": {
+        "east": "true"
+      },
+      "apply": {
+        "model": "gempire:block/power_crystal_base",
+        "x": 90,
+        "y": 270,
+        "uvlock": false
+      }
+    },
+    {
+      "when": {
+        "north": "true"
+      },
+      "apply": {
+        "model": "gempire:block/power_crystal_base",
+        "x": 90,
+        "y": 180,
+        "uvlock": false
+      }
+    },
+    {
+      "when": {
+        "west": "true"
+      },
+      "apply": {
+        "model": "gempire:block/power_crystal_base",
+        "x": 90,
+        "y": 90,
+        "uvlock": false
+      }
+    },
+    {
+      "when": {
+        "south": "true"
+      },
+      "apply": {
+        "model": "gempire:block/power_crystal_base",
+        "x": 90,
+        "y": 0,
+        "uvlock": false
+      }
+    },
+    {
+      "when": {
+        "up": "true"
+      },
+      "apply": {
+        "model": "gempire:block/power_crystal_base",
+        "x": 180,
+        "uvlock": false
+      }
+    },
+    {
+      "when": {
+        "down": "true"
+      },
+      "apply": {
+        "model": "gempire:block/power_crystal_base",
+        "x": 0,
+        "uvlock": false
+      }
+    }
+  ]
 }

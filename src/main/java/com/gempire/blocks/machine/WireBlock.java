@@ -15,7 +15,7 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-public class WireBlock extends SixWayConnectorBlock {
+public class WireBlock extends SixWayConnectorBlock implements IPowerMarker {
 
     public WireBlock(float apothem, Properties properties) {
         super(apothem, properties);

@@ -266,7 +266,7 @@ public class ModBlocks {
     );
 
     public static final RegistryObject<Block> POWER_CRYSTAL_BLOCK = BLOCKS.register("power_crystal_block", () ->
-            new PowerCrystalBlock(Block.Properties
+            new PowerCrystalBlock(1f, Block.Properties
                     .create(Material.IRON)
                     .hardnessAndResistance(3.0f, 6.0f)
                     .sound(SoundType.GLASS)
