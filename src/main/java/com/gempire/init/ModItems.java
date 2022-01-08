@@ -320,6 +320,18 @@ public class ModItems {
     public static final RegistryObject<Item> ICE_SHARD = ITEMS.register("ice_shard", () ->
             new ItemIceShard(new Item.Properties().group(ModItemGroup.ITEMS).maxStackSize(64)));
 
+    public static final RegistryObject<Item> WHITE_DESTABILIZER = ITEMS.register("white_destabilizer", () ->
+            new Item(new Item.Properties().group(ModItemGroup.ITEMS).maxStackSize(1)));
+    public static final RegistryObject<Item> YELLOW_DESTABILIZER = ITEMS.register("yellow_destabilizer", () ->
+            new Item(new Item.Properties().group(ModItemGroup.ITEMS).maxStackSize(1)));
+    public static final RegistryObject<Item> BLUE_DESTABILIZER = ITEMS.register("blue_destabilizer", () ->
+            new Item(new Item.Properties().group(ModItemGroup.ITEMS).maxStackSize(1)));
+    public static final RegistryObject<Item> PINK_DESTABILIZER = ITEMS.register("pink_destabilizer", () ->
+            new Item(new Item.Properties().group(ModItemGroup.ITEMS).maxStackSize(1)));
+
+    public static final RegistryObject<Item> PINK_REJUVENATOR = ITEMS.register("pink_rejuvenator", () ->
+            new Item(new Item.Properties().group(ModItemGroup.ITEMS).maxStackSize(1)));
+
     /*public static final RegistryObject<Item> BASIC_WIRE_BLOCK_ITEM = ITEMS.register("basic_wire_block", () ->
             new Item(new Item.Properties().group(ItemGroup.MATERIALS).maxStackSize(64)));*/
     public static final RegistryObject<Item> ENERGY_INTERFACE = ITEMS.register("energy_interface", () ->
