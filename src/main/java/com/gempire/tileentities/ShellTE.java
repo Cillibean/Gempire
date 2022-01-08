@@ -64,7 +64,7 @@ public class ShellTE extends LockableLootTileEntity implements INamedContainerPr
 
     public ShellTE() {
         super(ModTE.SHELL_TE.get());
-        setupBattery(1000);
+        setupBattery(800);
         setupInitialSockets(this);
         setupSocket(0, Socket.POWER_IN(MachineSide.BOTTOM), this);
         setupSocket(1, Socket.POWER_IN(MachineSide.TOP), this);
@@ -400,7 +400,7 @@ public class ShellTE extends LockableLootTileEntity implements INamedContainerPr
 
     @Override
     public float getBandwidth() {
-        return .5f;
+        return 5f;
     }
 
     /*

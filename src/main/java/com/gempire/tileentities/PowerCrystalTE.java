@@ -1,5 +1,6 @@
 package com.gempire.tileentities;
 
+import com.gempire.entities.gems.starter.EntityMica;
 import com.gempire.init.ModTE;
 import com.gempire.systems.machine.Battery;
 import com.gempire.systems.machine.MachineSide;
@@ -8,6 +9,9 @@ import com.gempire.util.Debug;
 import net.minecraft.block.Blocks;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.math.AxisAlignedBB;
+
+import java.util.List;
 
 public class PowerCrystalTE extends PowerGeneratorTE implements ITickableTileEntity {
 
@@ -26,6 +30,18 @@ public class PowerCrystalTE extends PowerGeneratorTE implements ITickableTileEnt
     @Override
     public void tick() {
         generatePower();
+    }
+
+    @Override
+    public void generatePower() {
+        AxisAlignedBB box = new AxisAlignedBB(getPos().getX(), getPos().getY(), getPos().getZ(),
+                getPos().getX() + 1, getPos().getY() + 1, getPos().getZ() + 1).grow(4);
+        List<EntityMica> entities = getWorld().getEntitiesWithinAABB(EntityMica.class, box);
+        for(EntityMica mica : entities){
+            if(mica.getPlaying()){
+                getBattery().chargeBattery(1);
+            }
+        }
     }
 
     @Override

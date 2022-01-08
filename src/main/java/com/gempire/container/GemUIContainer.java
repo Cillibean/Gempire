@@ -67,12 +67,12 @@ public class GemUIContainer extends Container {
         this.addSlot(new Slot((IInventory)this.gem, TankTE.BUCKET_OUTPUT_SLOT_INDEX, 96, 50));*/
 
         //POTION SLOTS
-        this.addSlot(new Slot(gem, 67, 177, 10){
+        this.addSlot(new Slot(gem, 31, 177, 10){
             public int getSlotStackLimit() {
                 return 1;
             }
         });
-        this.addSlot(new Slot(gem, 68, 177, 48){
+        this.addSlot(new Slot(gem, 32, 177, 48){
             public boolean isItemValid(ItemStack stack) {
                 return false;
             }
@@ -81,7 +81,7 @@ public class GemUIContainer extends Container {
         //INITIALIZE ARMOR SLOTS
         for(int k = 0; k < 4; ++k) {
             final EquipmentSlotType equipmentslottype = VALID_EQUIPMENT_SLOTS[k];
-            this.addSlot(new Slot(gem, 63 + k, 11 + k*18, 65){
+            this.addSlot(new Slot(gem, 27 + k, 11 + k*18, 65){
 
                 public Pair<ResourceLocation, ResourceLocation> getBackground() {
                     return Pair.of(PlayerContainer.LOCATION_BLOCKS_TEXTURE, GemUIContainer.ARMOR_SLOT_TEXTURES[equipmentslottype.getIndex()]);
@@ -102,7 +102,7 @@ public class GemUIContainer extends Container {
         //INITIALIZE GEM INVENTORY HERE
         for(int row = 0; row < 3; row++){
             for(int col = 0; col < 9; col++){
-                this.addSlot(new Slot(gem, col + row * 9 + 36, 11 + col * 18, 93 - (4 - row) * 18 - 10));
+                this.addSlot(new Slot(gem, col + row * 9, 11 + col * 18, 93 - (4 - row) * 18 - 10));
             }
         }
 

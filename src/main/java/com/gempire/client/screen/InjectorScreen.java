@@ -5,6 +5,8 @@ import com.gempire.init.ModPacketHandler;
 import com.gempire.networking.C2SRequestDumpFluidsInjector;
 import com.gempire.networking.C2SRequestInject;
 import com.gempire.networking.C2SRequestUpdateInjectorValves;
+import com.gempire.systems.machine.gui.EnergyMeter;
+import com.gempire.systems.machine.gui.MeterSize;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
@@ -45,7 +47,7 @@ public class InjectorScreen extends ContainerScreen<InjectorContainer> {
         this.addButton(new ImageButton(x + 83, y + 58, 51, 12, 0, 0, 0, InjectorScreen.INJECT_BUTTON_TEXTURE, 51, 12, (p_213029_1_) -> {
             ModPacketHandler.INSTANCE.sendToServer(new C2SRequestInject(this.container.injector.getPos()));
         }));
-        this.addButton(new ImageButton(x + 133, y + 36, 7, 20, 0, 0, 0, InjectorScreen.DUMP_BUTTON, 7, 20, (p_213029_1_) -> {
+        this.addButton(new ImageButton(x + 133, y + 38, 7, 20, 0, 0, 0, InjectorScreen.DUMP_BUTTON, 7, 20, (p_213029_1_) -> {
             ModPacketHandler.INSTANCE.sendToServer(new C2SRequestDumpFluidsInjector(this.container.injector.getPos()));
         }));
         this.addButton(new ImageButton(x + 101, y + 39, 6, 14, 0, 0, 0, InjectorScreen.BUTTON_TEXTURE, 6, 14, (p_213029_1_) -> {
@@ -157,5 +159,6 @@ public class InjectorScreen extends ContainerScreen<InjectorContainer> {
             this.minecraft.getTextureManager().bindTexture(InjectorScreen.HALO_GUI_WHITE);
             this.blit(matrixStack, x, y, 0, 0, this.width, this.height);
         }
+        EnergyMeter.RenderBattery(this, matrixStack, container.injector, container.injector, x + 97, y + 32, MeterSize.INJECTOR);
     }
 }

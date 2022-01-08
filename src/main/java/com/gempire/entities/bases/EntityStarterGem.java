@@ -3,6 +3,7 @@ package com.gempire.entities.bases;
 import com.gempire.systems.injection.Crux;
 import com.gempire.util.Abilities;
 import com.gempire.util.CruxType;
+import com.gempire.util.PaletteType;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.EntityType;
@@ -22,8 +23,12 @@ public abstract class EntityStarterGem extends EntityGem {
         super(type, worldIn);
     }
 
-    public int generateHairColor(){
-        return this.getSkinColor();
+    @Override
+    public int generatePaletteColor(PaletteType type) {
+        if(type == PaletteType.HAIR){
+            return getSkinColor();
+        }
+        return super.generatePaletteColor(type);
     }
 
     public int generateHairVariant(){

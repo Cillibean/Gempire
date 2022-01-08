@@ -39,12 +39,10 @@ public class InjectorBlock extends ContainerBlock {
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
         if(!worldIn.isRemote()){
             if(worldIn.getBlockState(pos.up()).getBlock() == ModBlocks.TANK_BLOCK.get()){
-                if(worldIn.getBlockState(pos.up().up().up()).getBlock() == ModBlocks.POWER_CRYSTAL_BLOCK.get()){
-                    TileEntity te = worldIn.getTileEntity(pos);
-                    if(te instanceof InjectorTE){
-                        NetworkHooks.openGui((ServerPlayerEntity) player, (InjectorTE)te, pos);
-                        return ActionResultType.SUCCESS;
-                    }
+                TileEntity te = worldIn.getTileEntity(pos);
+                if(te instanceof InjectorTE){
+                    NetworkHooks.openGui((ServerPlayerEntity) player, (InjectorTE)te, pos);
+                    return ActionResultType.SUCCESS;
                 }
             }
         }

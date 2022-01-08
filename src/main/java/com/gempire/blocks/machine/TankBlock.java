@@ -47,9 +47,7 @@ public class TankBlock extends ContainerBlock {
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
         if(!worldIn.isRemote()){
             BlockPos drillPos = state.get(HALF) == DoubleBlockHalf.UPPER ? pos.down().down() : pos.down();
-            BlockPos powerCrystalPos = state.get(HALF) == DoubleBlockHalf.UPPER ? pos.up() : pos.up().up();
-            if(worldIn.getBlockState(drillPos).getBlock() == ModBlocks.DRILL_BLOCK.get() &&
-                    worldIn.getBlockState(powerCrystalPos).getBlock() == ModBlocks.POWER_CRYSTAL_BLOCK.get()){
+            if(worldIn.getBlockState(drillPos).getBlock() == ModBlocks.DRILL_BLOCK.get()){
                 TileEntity te = worldIn.getTileEntity(drillPos);
                 if (te != null && te instanceof InjectorTE) {
                     NetworkHooks.openGui((ServerPlayerEntity) player, (InjectorTE) te, drillPos);

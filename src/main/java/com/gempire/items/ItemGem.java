@@ -167,7 +167,7 @@ public class ItemGem extends Item {
             gem.setHealth(gem.getMaxHealth());
             gem.extinguish();
             gem.clearActivePotions();
-            gem.setVelocity(0, 0 ,0);
+            gem.setMotion(0, 0 ,0);
             gem.fallDistance = 0;
             GemFormEvent event = new GemFormEvent(gem, gem.getPosition());
             MinecraftForge.EVENT_BUS.post(event);

@@ -6,6 +6,11 @@ import com.gempire.container.InjectorContainer;
 import com.gempire.events.InjectEvent;
 import com.gempire.init.*;
 import com.gempire.items.ItemChroma;
+import com.gempire.systems.machine.Battery;
+import com.gempire.systems.machine.MachineSide;
+import com.gempire.systems.machine.Socket;
+import com.gempire.systems.machine.interfaces.IPowerConsumer;
+import com.gempire.systems.machine.interfaces.IPowerGenerator;
 import net.minecraft.block.*;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.fluid.Fluid;
@@ -21,6 +26,7 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.LockableLootTileEntity;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
@@ -36,8 +42,9 @@ import net.minecraftforge.fluids.capability.templates.FluidTank;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 
-public class InjectorTE extends LockableLootTileEntity implements IFluidTank, INamedContainerProvider, ITickableTileEntity {
+public class InjectorTE extends LockableLootTileEntity implements IFluidTank, INamedContainerProvider, ITickableTileEntity, IPowerConsumer {
     public static final int NUMBER_OF_SLOTS = 6;
     public static final int PINK_INPUT_SLOT_INDEX = 0;
     public static final int BLUE_INPUT_SLOT_INDEX = 1;
@@ -62,11 +69,20 @@ public class InjectorTE extends LockableLootTileEntity implements IFluidTank, IN
         this.blueTank = new FluidTank(this.TANK_CAPACITY());
         this.yellowTank = new FluidTank(this.TANK_CAPACITY());
         this.whiteTank = new FluidTank(this.TANK_CAPACITY());
+        setupBattery(200);
+        setupInitialSockets(this);
+        setupSocket(0, Socket.POWER_IN(MachineSide.BOTTOM), this);
+        setupSocket(1, Socket.POWER_IN(MachineSide.TOP), this);
+        setupSocket(2, Socket.POWER_IN(MachineSide.BACK), this);
+        setupSocket(3, Socket.POWER_IN(MachineSide.FRONT), this);
+        setupSocket(4, Socket.POWER_IN(MachineSide.LEFT), this);
+        setupSocket(5, Socket.POWER_IN(MachineSide.RIGHT), this);
     }
 
     @Override
     public void read(BlockState state, CompoundNBT nbt) {
         super.read(state, nbt);
+        ReadPoweredMachine(nbt);
         this.pinkTank.readFromNBT(nbt.getCompound("pinkTank"));
         this.blueTank.readFromNBT(nbt.getCompound("blueTank"));
         this.yellowTank.readFromNBT(nbt.getCompound("yellowTank"));
@@ -84,6 +100,7 @@ public class InjectorTE extends LockableLootTileEntity implements IFluidTank, IN
     @Override
     public CompoundNBT write(CompoundNBT compound) {
         super.write(compound);
+        WritePoweredMachine(compound);
         compound.put("pinkTank", this.pinkTank.writeToNBT(new CompoundNBT()));
         compound.put("blueTank", this.blueTank.writeToNBT(new CompoundNBT()));
         compound.put("yellowTank", this.yellowTank.writeToNBT(new CompoundNBT()));
@@ -103,6 +120,7 @@ public class InjectorTE extends LockableLootTileEntity implements IFluidTank, IN
     @Override
     public void tick() {
         this.HandleSlotUpdates();
+        ConductorTick();
     }
 
     public void HandleSlotUpdates(){
@@ -155,7 +173,7 @@ public class InjectorTE extends LockableLootTileEntity implements IFluidTank, IN
                 (this.getTankFromValue(0).getFluid().getFluid() != Fluids.EMPTY && this.pinkOpen ||
                         this.getTankFromValue(1).getFluid().getFluid() != Fluids.EMPTY && this.blueOpen ||
                         this.getTankFromValue(2).getFluid().getFluid() != Fluids.EMPTY && this.yellowOpen ||
-                        this.getTankFromValue(3).getFluid().getFluid() != Fluids.EMPTY && this.whiteOpen)) {
+                        this.getTankFromValue(3).getFluid().getFluid() != Fluids.EMPTY && this.whiteOpen) && isPowered()) {
             int portionToDrain = 0;
             if(this.pinkOpen){
                 portionToDrain++;
@@ -251,6 +269,7 @@ public class InjectorTE extends LockableLootTileEntity implements IFluidTank, IN
             System.out.println("Facing :" + facing);
             this.getStackInSlot(InjectorTE.CHROMA_INPUT_SLOT_INDEX).shrink(1);
             this.getStackInSlot(InjectorTE.PRIME_INPUT_SLOT_INDEX).shrink(1);
+            usePower();
             this.world.notifyBlockUpdate(this.pos, this.getBlockState(), this.getBlockState(), 2);
             this.markDirty();
             InjectEvent event = new InjectEvent(gemSeedTE, seedPos);
@@ -596,5 +615,115 @@ public class InjectorTE extends LockableLootTileEntity implements IFluidTank, IN
             }
         }*/
         return 0;
+    }
+
+    //ENERGY
+
+    ArrayList<Socket> SOCKETS = new ArrayList<>();
+    Battery battery;
+    float voltage;
+
+    @Override
+    public ArrayList<Socket> getSockets() {
+        return SOCKETS;
+    }
+
+    @Override
+    public float getVoltage() {
+        return voltage;
+    }
+
+    @Override
+    public void combineVoltage(float inVoltage) {
+        voltage += inVoltage;
+    }
+
+    @Override
+    public void setVoltage(float inVoltage) {
+        voltage = inVoltage;
+    }
+
+    @Override
+    public boolean isSource() {
+        return false;
+    }
+
+    @Override
+    public Battery getBattery() {
+        return battery;
+    }
+
+    @Override
+    public void setupBattery(float maxCapacity) {
+        battery = new Battery(maxCapacity);
+    }
+
+    @Override
+    public void setBattery(Battery battery) {
+        this.battery = battery;
+    }
+
+    @Override
+    public TileEntity getTE() {
+        return this;
+    }
+
+    int drawTicks = 0;
+
+    @Override
+    public int getTicks() {
+        return drawTicks;
+    }
+
+    @Override
+    public void addTick() {
+        drawTicks++;
+    }
+
+    @Override
+    public void setTicks(int ticks) {
+        drawTicks = ticks;
+    }
+
+    @Override
+    public float getBandwidth() {
+        return 2f;
+    }
+
+    @Override
+    public float minimumUnitPower() {
+        return 100;
+    }
+
+    @Override
+    public void ConductorTick() {
+        if(getTicks() > drawTicks()){
+            if(!drawFromTopGenerator()) {
+                adjustToSurroundingConductors();
+            }
+            setTicks(0);
+        }
+        addTick();
+    }
+
+    public boolean drawFromTopGenerator(){
+        BlockPos crystalPos = getPos().up().up().up();
+        if(getWorld().getTileEntity(crystalPos) instanceof IPowerGenerator){
+            IPowerGenerator generator = (IPowerGenerator) getWorld().getTileEntity(crystalPos);
+            if(generator.getBattery().getCharge() > getHighestSurroundingPower()){
+                float powerToSet = 0;
+                if(generator.getBattery().getCharge() <= 0){
+                    powerToSet = 0;
+                }
+                else{
+                    powerToSet = generator.getBattery().getCharge() > getBandwidth() ? getBandwidth() : generator.getBattery().getCharge();
+                }
+                receivePower(powerToSet, generator);
+                return true;
+            }
+        }
+        this.world.notifyBlockUpdate(this.pos, this.getBlockState(), this.getBlockState(), 2);
+        this.markDirty();
+        return false;
     }
 }

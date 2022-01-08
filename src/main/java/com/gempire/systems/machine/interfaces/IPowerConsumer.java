@@ -18,4 +18,12 @@ public interface IPowerConsumer extends IPowerConductor {
     default boolean isPowered(){
         return getBattery().getCharge() >= minimumUnitPower();
     }
+
+    @Override
+    default void receivePower(float amount, IPowerProvider provider) {
+        if (getBattery().getCharge() < getBattery().getMaxCapacity()) {
+            getBattery().chargeBattery(amount);
+            provider.getBattery().dischargeBattery(amount);
+        }
+    }
 }

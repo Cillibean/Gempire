@@ -199,7 +199,7 @@ public class ModEntities {
         ModEntities.CRUXTOGEM.put("nephrite", ModCruxes.NEPHRITE_CONDITIONS());
         ModEntities.CRUXTOGEM.put("spodumene", ModCruxes.SPODUMENE_CONDITIONS());
         ModEntities.CRUXTOGEM.put("zircon", ModCruxes.ZIRCON_CONDITIONS());
-        ModEntities.CRUXTOGEM.put("aquamarine", ModCruxes.AQUAMARINE_CONDITIONS());
+        /*ModEntities.CRUXTOGEM.put("aquamarine", ModCruxes.AQUAMARINE_CONDITIONS());
         ModEntities.CRUXTOGEM.put("bismuth", ModCruxes.BISMUTH_CONDITIONS());
         ModEntities.CRUXTOGEM.put("bixbite", ModCruxes.BIXBITE_CONDITIONS());
         ModEntities.CRUXTOGEM.put("demantoid", ModCruxes.DEMANTOID_CONDITIONS());
@@ -213,7 +213,7 @@ public class ModEntities {
         ModEntities.CRUXTOGEM.put("pyrope", ModCruxes.PYROPE_CONDITIONS());
         ModEntities.CRUXTOGEM.put("rutile", ModCruxes.RUTILE_CONDITIONS());
         ModEntities.CRUXTOGEM.put("spinel", ModCruxes.SPINEL_CONDITIONS());
-        ModEntities.CRUXTOGEM.put("tourmaline", ModCruxes.TOURMALINE_CONDITIONS());
+        ModEntities.CRUXTOGEM.put("tourmaline", ModCruxes.TOURMALINE_CONDITIONS());*/
 
         GemFormation.POSSIBLE_GEMS.add("ruby");
         GemFormation.POSSIBLE_GEMS.add("sapphire");
@@ -225,7 +225,7 @@ public class ModEntities {
         GemFormation.POSSIBLE_GEMS.add("nephrite");
         GemFormation.POSSIBLE_GEMS.add("spodumene");
         GemFormation.POSSIBLE_GEMS.add("zircon");
-        GemFormation.POSSIBLE_GEMS.add("aquamarine");
+        /*GemFormation.POSSIBLE_GEMS.add("aquamarine");
         GemFormation.POSSIBLE_GEMS.add("bismuth");
         GemFormation.POSSIBLE_GEMS.add("bixbite");
         GemFormation.POSSIBLE_GEMS.add("demantoid");
@@ -239,7 +239,7 @@ public class ModEntities {
         GemFormation.POSSIBLE_GEMS.add("pyrope");
         GemFormation.POSSIBLE_GEMS.add("rutile");
         GemFormation.POSSIBLE_GEMS.add("spinel");
-        GemFormation.POSSIBLE_GEMS.add("tourmaline");
+        GemFormation.POSSIBLE_GEMS.add("tourmaline");*/
     }
 
     public static void setVanillaGems(){

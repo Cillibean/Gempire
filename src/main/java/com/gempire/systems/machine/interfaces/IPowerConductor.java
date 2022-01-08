@@ -6,6 +6,9 @@ import net.minecraft.util.math.BlockPos;
 
 public interface IPowerConductor extends IPowerProvider {
     default boolean isAllowedToExist(){
+        if(this instanceof IPowerConsumer){
+            return true;
+        }
         for(Direction direction : Direction.values()){
             BlockPos otherConductorPosition = getTE().getPos().offset(direction);
             if(getTE().getWorld().getTileEntity(otherConductorPosition) instanceof IPowerProvider){
@@ -37,7 +40,7 @@ public interface IPowerConductor extends IPowerProvider {
         float v = 0;
         for(Direction direction : Direction.values()){
             BlockPos otherConductorPosition = getTE().getPos().offset(direction);
-            if(getTE().getWorld().getTileEntity(otherConductorPosition) instanceof IPowerProvider){
+            if(getTE().getWorld().getTileEntity(otherConductorPosition) instanceof IPowerProvider && !(getTE().getWorld().getTileEntity(otherConductorPosition) instanceof IPowerConsumer)){
                 IPowerProvider otherConductor = (IPowerProvider) getTE().getWorld().getTileEntity(otherConductorPosition);
                 v = otherConductor.getVoltage() > v ? otherConductor.getVoltage() : v;
             }
@@ -49,7 +52,7 @@ public interface IPowerConductor extends IPowerProvider {
         float p = 0;
         for(Direction direction : Direction.values()){
             BlockPos otherConductorPosition = getTE().getPos().offset(direction);
-            if(getTE().getWorld().getTileEntity(otherConductorPosition) instanceof IPowerProvider){
+            if(getTE().getWorld().getTileEntity(otherConductorPosition) instanceof IPowerProvider && !(getTE().getWorld().getTileEntity(otherConductorPosition) instanceof IPowerConsumer)){
                 IPowerProvider otherConductor = (IPowerProvider) getTE().getWorld().getTileEntity(otherConductorPosition);
                 p = otherConductor.getBattery().getCharge() > p ? otherConductor.getBattery().getCharge() : p;
             }
@@ -71,9 +74,17 @@ public interface IPowerConductor extends IPowerProvider {
             //VOLTAGE STUFF
 
             //POWER STUFF
-            float powerToSet = getHighestSurroundingPower() > 0 ? getBandwidth() : 0;
             IPowerProvider provider = getHighestSurroundingPowerProvider();
-            receivePower(powerToSet, provider);
+            if(!(provider instanceof IPowerConsumer) && provider != null) {
+                float powerToSet = 0;
+                if(getHighestSurroundingPower() <= 0){
+                    powerToSet = 0;
+                }
+                else{
+                    powerToSet = getHighestSurroundingPower() > getBandwidth() ? getBandwidth() : getHighestSurroundingPower();
+                }
+                receivePower(powerToSet, provider);
+            }
             //POWER STUFF
         } else {
             setVoltage(0);
@@ -88,11 +99,15 @@ public interface IPowerConductor extends IPowerProvider {
     default void receivePower(float amount, IPowerProvider provider){
         if(getVoltage() <= 0){
             getBattery().setCharge(0);
+            getTE().getWorld().notifyBlockUpdate(getTE().getPos(), getTE().getBlockState(), getTE().getBlockState(), 2);
+            getTE().markDirty();
         }
         else{
             if(getBattery().getCharge() < getBattery().getMaxCapacity()) {
                 getBattery().chargeBattery(amount);
                 provider.getBattery().dischargeBattery(amount);
+                getTE().getWorld().notifyBlockUpdate(getTE().getPos(), getTE().getBlockState(), getTE().getBlockState(), 2);
+                getTE().markDirty();
             }
         }
     }

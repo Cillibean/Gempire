@@ -384,16 +384,16 @@ public class EntityPearl extends EntityVaryingGem {
     public ItemStack getStackInSlot(int index) {
         ItemStack stack = ItemStack.EMPTY;
         if(this.getPage() == 0) {
-            return this.getItems1().get(index - 36);
+            return this.getItems1().get(index);
         }
         else if(this.getPage() == 1){
-            return this.getItems2().get(index - 36);
+            return this.getItems2().get(index);
         }
         else if(this.getPage() == 2){
-            return this.getItems3().get(index - 36);
+            return this.getItems3().get(index);
         }
         else if(this.getPage() == 3){
-            return this.getItems4().get(index - 36);
+            return this.getItems4().get(index);
         }
         return stack;
     }
@@ -402,16 +402,16 @@ public class EntityPearl extends EntityVaryingGem {
     public ItemStack decrStackSize(int index, int count) {
         ItemStack stack = ItemStack.EMPTY;
         if(this.getPage() == 0) {
-            return ItemStackHelper.getAndSplit(this.getItems1(), index - 36, count);
+            return ItemStackHelper.getAndSplit(this.getItems1(), index, count);
         }
         else if(this.getPage() == 1){
-            return ItemStackHelper.getAndSplit(this.getItems2(), index - 36, count);
+            return ItemStackHelper.getAndSplit(this.getItems2(), index, count);
         }
         else if(this.getPage() == 2){
-            return ItemStackHelper.getAndSplit(this.getItems3(), index - 36, count);
+            return ItemStackHelper.getAndSplit(this.getItems3(), index, count);
         }
         else if(this.getPage() == 3){
-            return ItemStackHelper.getAndSplit(this.getItems4(), index - 36, count);
+            return ItemStackHelper.getAndSplit(this.getItems4(), index, count);
         }
         return stack;
     }
@@ -424,18 +424,18 @@ public class EntityPearl extends EntityVaryingGem {
     @Override
     public void setInventorySlotContents(int index, ItemStack stack) {
         if(this.getPage() == 0) {
-            this.getItems1().set(index - 36, stack);
+            this.getItems1().set(index, stack);
         }
         else if(this.getPage() == 1){
-            this.getItems2().set(index - 36, stack);
+            this.getItems2().set(index, stack);
         }
         else if(this.getPage() == 2){
-            this.getItems3().set(index - 36, stack);
+            this.getItems3().set(index, stack);
         }
         else if(this.getPage() == 3){
-            this.getItems4().set(index - 36, stack);
+            this.getItems4().set(index, stack);
         }
-        int ind = index - 36;
+        int ind = index;
     }
 
     @Nullable

@@ -59,7 +59,7 @@ public class PearlUIContainer extends Container {
         //INITIALIZE ARMOR SLOTS
         for(int k = 0; k < 4; ++k) {
             final EquipmentSlotType equipmentslottype = VALID_EQUIPMENT_SLOTS[k];
-            this.addSlot(new Slot(gem, 89 + k, 272 + k*18, 9){
+            this.addSlot(new Slot(gem, 54 + k, 272 + k*18, 9){
 
                 public Pair<ResourceLocation, ResourceLocation> getBackground() {
                     return Pair.of(PlayerContainer.LOCATION_BLOCKS_TEXTURE, PearlUIContainer.ARMOR_SLOT_TEXTURES[equipmentslottype.getIndex()]);
@@ -80,7 +80,7 @@ public class PearlUIContainer extends Container {
         //INITIALIZE GEM INVENTORY HERE
         for(int row = 0; row < 6; row++){
             for(int col = 0; col < 9; col++){
-                this.addSlot(new Slot(gem, col + row * 9 + 36, 182 + col * 18, 135 - (6 - row) * 18));
+                this.addSlot(new Slot(gem, col + row * 9, 182 + col * 18, 135 - (6 - row) * 18));
             }
         }
 

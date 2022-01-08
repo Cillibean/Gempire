@@ -13,6 +13,7 @@ import com.gempire.items.ItemGem;
 import com.gempire.util.Abilities;
 import com.gempire.util.Color;
 import com.gempire.util.GemPlacements;
+import com.gempire.util.PaletteType;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
 import net.minecraft.block.BlockState;
@@ -178,9 +179,9 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
             this.setSkinColorVariant(this.generateSkinColorVariant());
         } else this.setSkinColorVariant(this.initalSkinVariant);
         this.setHairVariant(this.generateHairVariant());
-        this.setSkinColor(this.generateSkinColor());
-        this.setHairColor(this.generateHairColor());
-        this.setGemColor(this.generateGemColor());
+        this.setSkinColor(this.generatePaletteColor(PaletteType.SKIN));
+        this.setHairColor(this.generatePaletteColor(PaletteType.HAIR));
+        this.setGemColor(this.generatePaletteColor(PaletteType.GEM));
         this.setOutfitVariant(this.generateOutfitVariant());
         this.setOutfitColor(this.generateOutfitColor());
         this.setInsigniaVariant(this.generateInsigniaVariant());
@@ -194,9 +195,9 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
         this.applyAlchemyPowers();
         this.FOLLOW_ID = UUID.randomUUID();
         this.setMarkingVariant(this.generateMarkingVariant());
-        this.setMarkingColor(this.generateMarkingColor());
+        this.setMarkingColor(this.generatePaletteColor(PaletteType.MARKINGS));
         this.setMarking2Variant(this.generateMarking2Variant());
-        this.setMarking2Color(this.generateMarking2Color());
+        this.setMarking2Color(this.generatePaletteColor(PaletteType.MARKINGS_2));
         this.setCustomName(this.getNickname());
         this.generateScoutList();
         this.idlePowers = this.generateIdlePowers();
@@ -460,9 +461,9 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
                     if (player.getHeldItemMainhand().getItem() instanceof DyeItem) {
                         DyeItem dye = (DyeItem) player.getHeldItemMainhand().getItem();
                         if (player.isSneaking()) {
-                            this.setInsigniaColor(dye.getDyeColor().getId());
+                            if (canChangeInsigniaColorByDefault()) this.setInsigniaColor(dye.getDyeColor().getId());
                         } else {
-                            this.setOutfitColor(dye.getDyeColor().getId());
+                            if(canChangeUniformColorByDefault()) this.setOutfitColor(dye.getDyeColor().getId());
                         }
                     }
                     else if (player.getHeldItemMainhand().getItem() == Items.PAPER){
@@ -713,26 +714,41 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
         this.dataManager.set(EntityGem.SKIN_COLOR, value);
     }
 
-    public int generateSkinColor(){
-        ArrayList<Integer> skins = new ArrayList<>();
-        ResourceLocation paletteTexture = new ResourceLocation(this.getModID() + ":textures/entity/" + this.getWholeGemName().toLowerCase() + "/palettes/skin_palette.png");
+    public int generatePaletteColor(PaletteType type){
+        if(type == PaletteType.MARKINGS){
+            if(!hasMarkings()){
+                return 0;
+            }
+        }
+        if(type == PaletteType.MARKINGS_2){
+            if(!hasMarkings2()){
+                return 0;
+            }
+        }
+        String locString = type.type + "_palette";
+        System.out.println("[DEBUG] " + locString);
+        ArrayList<Integer> colors = new ArrayList<>();
         BufferedImage palette = null;
-        try{
-            palette = ImageIO.read(Minecraft.getInstance().getResourceManager().getResource(paletteTexture).getInputStream());
+        try {
+            palette = ImageIO.read(EntityGem.class.getClassLoader().getResourceAsStream("/assets/" + this.getModID() + "/textures/entity/" + this.getWholeGemName().toLowerCase() + "/palettes/" + locString + ".png"));
+            /*if(!Minecraft.getInstance().isIntegratedServerRunning()) {
+                palette = ImageIO.read(Minecraft.getInstance().getResourceManager().getResource(paletteTexture).getInputStream());
+            }
+            else{
+            }*/
             System.out.println("Palette Read!");
             for (int x = 0; x < palette.getWidth(); x++) {
                 int color = palette.getRGB(x, this.getSkinColorVariant());
-                if((color>>24) == 0x00){
+                if ((color >> 24) == 0x00) {
                     continue;
                 }
-                skins.add(color);
+                colors.add(color);
             }
-        }
-        catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
-            skins.add(0x00000);
+            colors.add(0x00000);
         }
-        return Color.lerpHex(skins);
+        return Color.lerpHex(colors);
     }
 
     public abstract int generateSkinVariant();
@@ -752,52 +768,6 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
 
     public int generateMarking2Variant(){
         return this.hasMarkings2() ? this.rand.nextInt(this.maxMarkings2()) : 0;
-    }
-
-    public int generateMarkingColor(){
-        ArrayList<Integer> markings = new ArrayList<>();
-        if(this.hasMarkings()) {
-            ResourceLocation paletteTexture = new ResourceLocation(this.getModID() + ":textures/entity/" + this.getWholeGemName().toLowerCase() + "/palettes/marking_palette.png");
-            BufferedImage palette = null;
-            try {
-                palette = ImageIO.read(Minecraft.getInstance().getResourceManager().getResource(paletteTexture).getInputStream());
-                System.out.println("Palette Read!");
-                for (int x = 0; x < palette.getWidth(); x++) {
-                    int color = palette.getRGB(x, this.getSkinColorVariant());
-                    if ((color >> 24) == 0x00) {
-                        continue;
-                    }
-                    markings.add(color);
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-                markings.add(0x00000);
-            }
-        }
-        return Color.lerpHex(markings);
-    }
-
-    public int generateMarking2Color(){
-        ArrayList<Integer> markings = new ArrayList<>();
-        if(this.hasMarkings2()) {
-            ResourceLocation paletteTexture = new ResourceLocation(this.getModID() + ":textures/entity/" + this.getWholeGemName().toLowerCase() + "/palettes/marking_2_palette.png");
-            BufferedImage palette = null;
-            try {
-                palette = ImageIO.read(Minecraft.getInstance().getResourceManager().getResource(paletteTexture).getInputStream());
-                System.out.println("Palette Read!");
-                for (int x = 0; x < palette.getWidth(); x++) {
-                    int color = palette.getRGB(x, this.getSkinColorVariant());
-                    if ((color >> 24) == 0x00) {
-                        continue;
-                    }
-                    markings.add(color);
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-                markings.add(0x00000);
-            }
-        }
-        return Color.lerpHex(markings);
     }
 
     public boolean hasMarkings(){
@@ -869,28 +839,6 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
         this.dataManager.set(EntityGem.HAIR_COLOR, value);
     }
 
-    public int generateHairColor(){
-        ArrayList<Integer> skins = new ArrayList<>();
-        ResourceLocation paletteTexture = new ResourceLocation(this.getModID() + ":textures/entity/" + this.getWholeGemName().toLowerCase() + "/palettes/hair_palette.png");
-        BufferedImage palette = null;
-        try{
-            palette = ImageIO.read(Minecraft.getInstance().getResourceManager().getResource(paletteTexture).getInputStream());
-            System.out.println("Palette Read!");
-            for (int x = 0; x < palette.getWidth(); x++) {
-                int color = palette.getRGB(x, this.getSkinColorVariant());
-                if((color>>24) == 0x00){
-                    continue;
-                }
-                skins.add(color);
-            }
-        }
-        catch (IOException e){
-            e.printStackTrace();
-            skins.add(0x00000);
-        }
-        return Color.lerpHex(skins);
-    }
-
     public int getHairVariant(){
         return this.dataManager.get(EntityGem.HAIR_VARIANT);
     }
@@ -907,28 +855,6 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
 
     public void setGemColor(int value){
         this.dataManager.set(EntityGem.GEM_COLOR, value);
-    }
-
-    public int generateGemColor(){
-        ArrayList<Integer> skins = new ArrayList<>();
-        ResourceLocation paletteTexture = new ResourceLocation(this.getModID() + ":textures/entity/" + this.getWholeGemName().toLowerCase() + "/palettes/gem_palette.png");
-        BufferedImage palette = null;
-        try{
-            palette = ImageIO.read(Minecraft.getInstance().getResourceManager().getResource(paletteTexture).getInputStream());
-            System.out.println("Palette Read!");
-            for (int x = 0; x < palette.getWidth(); x++) {
-                int color = palette.getRGB(x, this.getSkinColorVariant());
-                if((color>>24) == 0x00){
-                    continue;
-                }
-                skins.add(color);
-            }
-        }
-        catch (IOException e){
-            e.printStackTrace();
-            skins.add(0x00000);
-        }
-        return Color.lerpHex(skins);
     }
 
     public int getOutfitColor(){
@@ -1356,17 +1282,17 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
 
     @Override
     public ItemStack getStackInSlot(int index) {
-        return this.getItems().get(index - 36);
+        return this.getItems().get(index);
     }
 
     @Override
     public ItemStack decrStackSize(int index, int count) {
-        return ItemStackHelper.getAndSplit(this.getItems(), index - 36, count);
+        return ItemStackHelper.getAndSplit(this.getItems(), index, count);
     }
 
     @Override
     public ItemStack removeStackFromSlot(int index) {
-        if(index - 36 > 26 && index - 36 < 31){
+        if(index > 26 && index < 31){
             switch(index){
                 case 27:
                     this.setItemStackToSlot(EquipmentSlotType.HEAD, ItemStack.EMPTY);
@@ -1378,11 +1304,11 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
                     this.setItemStackToSlot(EquipmentSlotType.FEET, ItemStack.EMPTY);
             }
         }
-        if(index == 68){
+        if(index == 32){
             this.brewingTicks = 0;
             this.setBrewProgress(0);
         }
-        else if(index == 67){
+        else if(index == 31){
             this.brewingTicks = 0;
             this.setBrewProgress(0);
             this.brewing = false;
@@ -1392,9 +1318,9 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
 
     @Override
     public void setInventorySlotContents(int index, ItemStack stack) {
-        this.getItems().set(index - 36, stack);
-        int ind = index - 36;
-        if(stack.getItem() instanceof ArmorItem && index - 36 > 26 && index < 31){
+        this.getItems().set(index, stack);
+        int ind = index;
+        if(stack.getItem() instanceof ArmorItem && index > 26 && index < 31){
             switch(ind){
                 case 27:
                     this.setItemStackToSlot(EquipmentSlotType.HEAD, stack);
@@ -1406,11 +1332,11 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
                     this.setItemStackToSlot(EquipmentSlotType.FEET, stack);
             }
         }
-        if(index == 67 || index == 68){
+        if(index == 31 || index == 32){
             for(Ability ability : this.getAbilityPowers()){
                 if(ability instanceof IAlchemyAbility && this.currentPlayer != null && !this.brewing){
                     IAlchemyAbility power = (IAlchemyAbility)ability;
-                    if(this.getStackInSlot(67).getItem() == power.input()) {
+                    if(this.getStackInSlot(31).getItem() == power.input()) {
                         this.outputItem = power.output();
                         this.brewing = power.consume() != Items.AIR ? this.consumeItemCheck(power.consume()) && power.doSpecialActionOnInput(this.currentPlayer) :
                                 power.doSpecialActionOnInput(this.currentPlayer);
@@ -1472,14 +1398,14 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
 
     public boolean consumeItemCheck(Item item){
         for(int i = 0; i < EntityGem.NUMBER_OF_SLOTS - 4; i++){
-            if(this.getStackInSlot(i + 36).getItem() == item){
-                if(this.getStackInSlot(i + 36).getCount() == 1){
-                    this.setInventorySlotContents(i + 36, ItemStack.EMPTY);
+            if(this.getStackInSlot(i).getItem() == item){
+                if(this.getStackInSlot(i).getCount() == 1){
+                    this.setInventorySlotContents(i, ItemStack.EMPTY);
                     return true;
                 }else {
-                    this.setInventorySlotContents(i + 36, new ItemStack(this.getStackInSlot(i + 36).getItem(),
-                            this.getStackInSlot(i + 36).getCount() - 1));
-                    //this.getStackInSlot(i + 36).shrink(1);
+                    this.setInventorySlotContents(i, new ItemStack(this.getStackInSlot(i).getItem(),
+                            this.getStackInSlot(i).getCount() - 1));
+                    //this.getStackInSlot(i).shrink(1);
                     return true;
                 }
             }
@@ -1549,8 +1475,8 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
                     structure.getStructureName().replaceAll("minecraft:", "");
             map.setDisplayName(new StringTextComponent(name));
             for (int i = 0; i < EntityGem.NUMBER_OF_SLOTS - 6; i++) {
-                if (this.getStackInSlot(i + 36) == ItemStack.EMPTY) {
-                    this.setInventorySlotContents(i + 36, map);
+                if (this.getStackInSlot(i) == ItemStack.EMPTY) {
+                    this.setInventorySlotContents(i, map);
                     done = true;
                     break;
                 }

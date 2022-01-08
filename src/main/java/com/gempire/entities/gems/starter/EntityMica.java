@@ -22,6 +22,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.PickaxeItem;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ActionResultType;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
@@ -32,6 +33,7 @@ public class EntityMica extends EntityStarterGem {
     public boolean hopperGoal = false;
     public int ticksDoingHopperGoal = 0;
     public int maxTicksDoingHopperGoal = 200;
+    public boolean playing = false;
 
     public EntityMica(EntityType<? extends CreatureEntity> type, World worldIn) {
         super(type, worldIn);
@@ -47,12 +49,27 @@ public class EntityMica extends EntityStarterGem {
     public void read(CompoundNBT compound) {
         super.read(compound);
         this.hopperGoal = compound.getBoolean("hopperGoal");
+        setPlaying(compound.getBoolean("isPlaying"));
     }
 
     @Override
     public void writeAdditional(CompoundNBT compound) {
         super.writeAdditional(compound);
         compound.putBoolean("hopperGoal", this.hopperGoal);
+        compound.putBoolean("isPlaying", getPlaying());
+    }
+
+    @Override
+    public boolean attackEntityFrom(DamageSource source, float amount) {
+        if(this.world.isRemote){
+            return super.attackEntityFrom(source, amount);
+        }
+        else{
+            if(source.isProjectile()){
+                setPlaying(true);
+            }
+        }
+        return super.attackEntityFrom(source, amount);
     }
 
     @Override
@@ -77,6 +94,9 @@ public class EntityMica extends EntityStarterGem {
                 this.hopperGoal = false;
                 this.ticksDoingHopperGoal = 0;
             }
+        }
+        if(ticksExisted % 200 == 0){
+            setPlaying(false);
         }
     }
 
@@ -108,5 +128,13 @@ public class EntityMica extends EntityStarterGem {
         return new Abilities[]{
                 Abilities.NO_ABILITY
         };
+    }
+
+    public void setPlaying(boolean value){
+        playing = value;
+    }
+
+    public boolean getPlaying(){
+        return playing;
     }
 }
