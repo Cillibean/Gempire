@@ -4,17 +4,23 @@ import com.gempire.Gempire;
 import com.gempire.client.entity.render.*;
 import com.gempire.client.screen.*;
 import com.gempire.client.ter.ShellTER;
+import com.gempire.entities.projectiles.IceShardEntity;
 import com.gempire.init.ModBlocks;
 import com.gempire.init.ModContainers;
 import com.gempire.init.ModEntities;
 import com.gempire.init.ModTE;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScreenManager;
+import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
+import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.client.renderer.entity.EntityRendererManager;
+import net.minecraft.client.renderer.entity.SpriteRenderer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraftforge.fml.client.registry.IRenderFactory;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -55,7 +61,7 @@ public class ClientProxy {
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.RUTILE.get(), RenderRutile::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.SPINEL.get(), RenderSpinel::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.TOURMALINE.get(), RenderTourmaline::new);
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.ICE_SHARD.get(), (manager) -> new RenderIceShard(manager, Minecraft.getInstance().getItemRenderer()));
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.ICE_SHARD.get(), (manager) -> new com.gempire.client.entity.render.RenderIceShard(manager, Minecraft.getInstance().getItemRenderer()));
 
         ScreenManager.registerFactory(ModContainers.TANK_CONTAINER.get(), TankScreen::new);
         ScreenManager.registerFactory(ModContainers.INJECTOR_CONTAINER.get(), InjectorScreen::new);
@@ -87,5 +93,14 @@ public class ClientProxy {
         RenderTypeLookup.setRenderLayer(ModBlocks.ICE_SPIKE.get(), RenderType.getCutout());
 
         ClientRegistry.bindTileEntityRenderer(ModTE.SHELL_TE.get(), ShellTER::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.ICE_SHARD.get(), new RenderIceShard());
+    }
+
+    private static class RenderIceShard implements IRenderFactory<IceShardEntity> {
+        @Override
+        public EntityRenderer<? super IceShardEntity> createRenderFor(EntityRendererManager manager) {
+            ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
+            return new SpriteRenderer<>(manager, itemRenderer);
+        }
     }
 }

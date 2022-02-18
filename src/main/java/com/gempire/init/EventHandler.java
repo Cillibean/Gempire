@@ -28,7 +28,7 @@ public class EventHandler {
             if (event.getEntity() instanceof MonsterEntity) {
                 MonsterEntity entity = (MonsterEntity) event.getEntity();
                 entity.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(entity, EntityGem.class, 1, false, false, (p_234199_0_) -> {
-                    return true;
+                    return !(p_234199_0_ instanceof EntityAgate);
                 }));
                 entity.goalSelector.addGoal(1, new AvoidEntityGoal<>(entity, EntityAgate.class, 6.0F, 1.0D, 1.2D));
             }

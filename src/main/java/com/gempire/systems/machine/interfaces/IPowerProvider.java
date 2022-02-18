@@ -1,7 +1,12 @@
 package com.gempire.systems.machine.interfaces;
 
 import com.gempire.systems.machine.Battery;
+import com.gempire.systems.machine.Socket;
+import com.gempire.systems.machine.SocketType;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.util.Direction;
+
+import java.util.ArrayList;
 
 public interface IPowerProvider extends ISixWayInterface {
     float getVoltage();
@@ -19,5 +24,14 @@ public interface IPowerProvider extends ISixWayInterface {
     }
     default void ReadPoweredMachine(CompoundNBT nbt){
         if(nbt.contains("battery")) setBattery(Battery.GetBatteryFromNBT(nbt.getCompound("battery")));
+    }
+    default ArrayList<Direction> getPowerSocketDirections(){
+        ArrayList<Direction> directions = getPowerSocketDirections();
+        for(Socket socket : getSockets()){
+            if(socket.isChargeable() || socket.getType() == SocketType.POWER){
+                directions.add(Direction.byIndex(socket.getSide().id));
+            }
+        }
+        return directions;
     }
 }

@@ -13,9 +13,12 @@ import net.minecraft.network.IPacket;
 import net.minecraft.particles.IParticleData;
 import net.minecraft.particles.ItemParticleData;
 import net.minecraft.particles.ParticleTypes;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.fml.network.NetworkHooks;
 
 public class IceShardEntity extends ProjectileItemEntity {
 
@@ -31,10 +34,20 @@ public class IceShardEntity extends ProjectileItemEntity {
         super(ModEntities.ICE_SHARD.get(), x, y, z, worldIn);
     }
 
+    @Override
+    public IPacket<?> createSpawnPacket() {
+        return NetworkHooks.getEntitySpawningPacket(this);
+    }
+
 
     @Override
     protected Item getDefaultItem() {
         return ModItems.ICE_SHARD.get();
+    }
+
+    protected void onEntityHit(EntityRayTraceResult p_213868_1_) {
+        super.onEntityHit(p_213868_1_);
+        p_213868_1_.getEntity().attackEntityFrom(DamageSource.MAGIC, 1.0F);
     }
 
 

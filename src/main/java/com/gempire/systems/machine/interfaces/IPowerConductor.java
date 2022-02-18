@@ -4,6 +4,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 
+import java.util.ArrayList;
+
 public interface IPowerConductor extends IPowerProvider {
     default boolean isAllowedToExist(){
         if(this instanceof IPowerConsumer){
@@ -97,6 +99,9 @@ public interface IPowerConductor extends IPowerProvider {
     }
 
     default void receivePower(float amount, IPowerProvider provider){
+        if(amount <= 0){
+            return;
+        }
         if(getVoltage() <= 0){
             getBattery().setCharge(0);
             getTE().getWorld().notifyBlockUpdate(getTE().getPos(), getTE().getBlockState(), getTE().getBlockState(), 2);

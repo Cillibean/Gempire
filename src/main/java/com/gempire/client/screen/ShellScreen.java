@@ -38,11 +38,16 @@ public class ShellScreen extends ContainerScreen<ShellContainer> {
         this.renderBackground(matrixStack);
         super.render(matrixStack, mouseX, mouseY, partialTicks);
         this.renderHoveredTooltip(matrixStack, mouseX, mouseY);
+        int x = (this.width - this.xSize) / 2;
+        int y = (this.height - this.ySize) / 2;
+        EnergyMeter.RenderBattery(this, matrixStack, container.shell, container.shell, x + 8, y + 4, MeterSize.NORMAL);
     }
 
     @Override
-    protected void drawGuiContainerForegroundLayer(MatrixStack matrixStack, int x, int y) {
-
+    protected void drawGuiContainerForegroundLayer(MatrixStack matrixStack, int x1, int y1) {
+        int x = (this.width - this.xSize) / 2;
+        int y = (this.height - this.ySize) / 2;
+        //EnergyMeter.RenderBattery(this, matrixStack, container.shell, container.shell, x + 8, y + 4, MeterSize.NORMAL);
     }
 
     @SuppressWarnings("deprecation")
@@ -57,6 +62,6 @@ public class ShellScreen extends ContainerScreen<ShellContainer> {
             this.minecraft.getTextureManager().bindTexture(ShellScreen.LIGHT);
             this.blit(matrixStack, x, y, 0, 0, this.xSize, this.ySize);
         }
-        EnergyMeter.RenderBattery(this, matrixStack, container.shell, container.shell, x + 8, y + 4, MeterSize.NORMAL);
+        //EnergyMeter.RenderBattery(this, matrixStack, container.shell, container.shell, x + 8, y + 4, MeterSize.NORMAL);
     }
 }

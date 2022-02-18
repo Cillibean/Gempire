@@ -3,6 +3,7 @@ package com.gempire.systems.machine.gui;
 import com.gempire.Gempire;
 import com.gempire.systems.machine.Battery;
 import com.gempire.systems.machine.interfaces.IPowerProvider;
+import com.gempire.tileentities.PowerProviderTE;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.tileentity.TileEntity;

@@ -45,7 +45,7 @@ public class ItemGem extends Item {
     }
 
     public ItemGem(Properties properties, String ID) {
-        super(properties);
+        super(properties.maxDamage(100).setNoRepair());
         this.ID = ID;
     }
 
@@ -177,8 +177,6 @@ public class ItemGem extends Item {
         }
         return false;
     }
-
-
 
     public void setData(EntityGem host, ItemStack stack) {
         stack.setTag(host.writeWithoutTypeId(new CompoundNBT()));

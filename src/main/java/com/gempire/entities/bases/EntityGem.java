@@ -9,7 +9,9 @@ import com.gempire.entities.abilities.AbilityZilch;
 import com.gempire.entities.abilities.interfaces.*;
 import com.gempire.events.GemPoofEvent;
 import com.gempire.init.ModItems;
+import com.gempire.items.ItemDestabilizer;
 import com.gempire.items.ItemGem;
+import com.gempire.items.ItemRejuvenator;
 import com.gempire.util.Abilities;
 import com.gempire.util.Color;
 import com.gempire.util.GemPlacements;
@@ -448,7 +450,7 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
                     if (!this.getOwned()) {
                         if(!this.isOwner(player)) {
                             this.addOwner(player.getUniqueID());
-                            this.FOLLOW_ID = player.getUniqueID();
+                            setFollow(player.getUniqueID());
                             this.setMovementType((byte) 2);
                             player.sendMessage(new TranslationTextComponent("messages.gempire.entity.claimed"), this.getUniqueID());
                             return super.applyPlayerInteraction(player, vec, hand);
@@ -506,7 +508,7 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
     public void cycleMovementAI(PlayerEntity player){
         //Cycles through the various movement types.
         this.navigator.clearPath();
-        this.FOLLOW_ID = player.getUniqueID();
+        setFollow(player.getUniqueID());
         if(this.getMovementType() < 2){
             this.addMovementType(1);
             switch(this.getMovementType()){
@@ -535,6 +537,17 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
     public boolean attackEntityFrom(DamageSource source, float amount){
         if(this.world.isRemote){
             return super.attackEntityFrom(source, amount);
+        }
+        if(source.getImmediateSource() instanceof LivingEntity){
+            LivingEntity entity = (LivingEntity) source.getImmediateSource();
+            ItemStack stack = entity.getHeldItemMainhand();
+            if(stack.getItem() instanceof ItemRejuvenator){
+                resetOwners();
+                attackEntityFrom(DamageSource.GENERIC, getMaxHealth());
+            }
+            if(stack.getItem() instanceof ItemDestabilizer){
+                attackEntityFrom(DamageSource.GENERIC, getMaxHealth());
+            }
         }
         if(this.isEmotional() && !source.isExplosion() && !source.isFireDamage()) {
             if(this.emotionMeter <= this.EmotionThreshold()){
@@ -651,6 +664,10 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
 
     //GETTERS AND SETTERS!!!
 
+    public void setOwners(ArrayList<UUID> owners){
+        this.OWNERS = owners;
+    }
+
     public void addOwner(UUID ID){
         this.OWNERS.add(ID);
     }
@@ -662,6 +679,11 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
                 break;
             }
         }
+    }
+
+    public void resetOwners(){
+        setOwners(new ArrayList<UUID>());
+        setFollow(getUniqueID());
     }
 
     public boolean getOwned(){
@@ -689,6 +711,10 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
             if(id.equals(uuid)) return true;
         }
         return false;
+    }
+
+    public void setFollow(UUID id){
+        this.FOLLOW_ID = id;
     }
 
     public byte getMovementType(){
@@ -728,14 +754,16 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
         String locString = type.type + "_palette";
         System.out.println("[DEBUG] " + locString);
         ArrayList<Integer> colors = new ArrayList<>();
+        ResourceLocation loc = new ResourceLocation(this.getModID() + ":textures/entity/" + this.getWholeGemName().toLowerCase() + "/palettes/" + locString + ".png");
         BufferedImage palette = null;
         try {
-            palette = ImageIO.read(EntityGem.class.getClassLoader().getResourceAsStream("/assets/" + this.getModID() + "/textures/entity/" + this.getWholeGemName().toLowerCase() + "/palettes/" + locString + ".png"));
-            /*if(!Minecraft.getInstance().isIntegratedServerRunning()) {
-                palette = ImageIO.read(Minecraft.getInstance().getResourceManager().getResource(paletteTexture).getInputStream());
+            if(getServer().isSinglePlayer()) {
+                palette = ImageIO.read(Minecraft.getInstance().getResourceManager().getResource(loc).getInputStream());
             }
             else{
-            }*/
+
+                palette = ImageIO.read(EntityGem.class.getClassLoader().getResourceAsStream("/assets/" + this.getModID() + "/textures/entity/" + this.getWholeGemName().toLowerCase() + "/palettes/" + locString + ".png"));
+            }
             System.out.println("Palette Read!");
             for (int x = 0; x < palette.getWidth(); x++) {
                 int color = palette.getRGB(x, this.getSkinColorVariant());
