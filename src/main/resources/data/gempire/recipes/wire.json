@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " g ",
+    "bDb",
+    " g "
+  ],
+  "key": {
+    "b": {
+      "item": "minecraft:iron_nugget"
+    },
+    "D": {
+      "item": "minecraft:redstone"
+    },
+    "g": {
+      "item": "minecraft:gold_nugget"
+    }
+  },
+  "result": {
+    "item": "gempire:basic_wire_block",
+    "count": 2
+  }
+}

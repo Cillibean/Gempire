@@ -61,4 +61,9 @@ public class PowerProviderTE extends SixWayInterfaceTE implements IPowerProvider
         WritePoweredMachine(compound);
         return super.write(compound);
     }
+
+    @Override
+    public TileEntity getTE() {
+        return this;
+    }
 }

@@ -21,7 +21,7 @@ public class Socket {
     }
 
     public static Socket GENERIC(MachineSide side){
-        return new Socket(side, SocketType.NONE, true, true);
+        return new Socket(side, SocketType.NONE, true, false);
     }
 
     public static Socket POWER_IN(MachineSide side){

@@ -85,7 +85,7 @@ public class GemSeedTE extends TileEntity implements ITickableTileEntity {
            this.ScanPositions(this.world, this.pos, new BlockPos(DRAIN_SIZE, DRAIN_SIZE, DRAIN_SIZE));
            this.checked = true;
         }
-        if(this.ticks % 1 == 0) {
+        if(this.ticks % 20 == 0) {
             if (!this.spawned && this.checked) {
                 if (this.IDS.size() > 0) {
                     int rando = this.random.nextInt(this.IDS.size());

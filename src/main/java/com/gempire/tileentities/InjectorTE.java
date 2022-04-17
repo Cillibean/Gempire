@@ -71,8 +71,8 @@ public class InjectorTE extends LockableLootTileEntity implements IFluidTank, IN
         this.whiteTank = new FluidTank(this.TANK_CAPACITY());
         setupBattery(200);
         setupInitialSockets(this);
-        setupSocket(0, Socket.POWER_IN(MachineSide.BOTTOM), this);
-        setupSocket(1, Socket.POWER_IN(MachineSide.TOP), this);
+        //setupSocket(0, Socket.POWER_IN(MachineSide.BOTTOM), this);
+        //setupSocket(1, Socket.POWER_IN(MachineSide.TOP), this);
         setupSocket(2, Socket.POWER_IN(MachineSide.BACK), this);
         setupSocket(3, Socket.POWER_IN(MachineSide.FRONT), this);
         setupSocket(4, Socket.POWER_IN(MachineSide.LEFT), this);

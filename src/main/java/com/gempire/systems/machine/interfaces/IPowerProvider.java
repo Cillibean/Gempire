@@ -25,13 +25,4 @@ public interface IPowerProvider extends ISixWayInterface {
     default void ReadPoweredMachine(CompoundNBT nbt){
         if(nbt.contains("battery")) setBattery(Battery.GetBatteryFromNBT(nbt.getCompound("battery")));
     }
-    default ArrayList<Direction> getPowerSocketDirections(){
-        ArrayList<Direction> directions = getPowerSocketDirections();
-        for(Socket socket : getSockets()){
-            if(socket.isChargeable() || socket.getType() == SocketType.POWER){
-                directions.add(Direction.byIndex(socket.getSide().id));
-            }
-        }
-        return directions;
-    }
 }

@@ -12,6 +12,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.AxisAlignedBB;
 
 import java.util.List;
+import java.util.Random;
 
 public class PowerCrystalTE extends PowerGeneratorTE implements ITickableTileEntity {
 
@@ -34,14 +35,21 @@ public class PowerCrystalTE extends PowerGeneratorTE implements ITickableTileEnt
 
     @Override
     public void generatePower() {
-        AxisAlignedBB box = new AxisAlignedBB(getPos().getX(), getPos().getY(), getPos().getZ(),
+        Random rand = new Random();
+        if(getWorld().isDaytime()) {
+            getBattery().chargeBattery(1);
+        }
+        /*if(rand.nextInt(12000) == 0){
+            getWorld().destroyBlock(getPos(), false);
+        }*/
+        /*AxisAlignedBB box = new AxisAlignedBB(getPos().getX(), getPos().getY(), getPos().getZ(),
                 getPos().getX() + 1, getPos().getY() + 1, getPos().getZ() + 1).grow(4);
         List<EntityMica> entities = getWorld().getEntitiesWithinAABB(EntityMica.class, box);
         for(EntityMica mica : entities){
             if(mica.getPlaying()){
                 getBattery().chargeBattery(1);
             }
-        }
+        }*/
     }
 
     @Override

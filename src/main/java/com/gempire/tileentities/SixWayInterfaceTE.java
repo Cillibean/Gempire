@@ -19,4 +19,9 @@ public class SixWayInterfaceTE extends TileEntity implements ISixWayInterface {
     public ArrayList<Socket> getSockets() {
         return SOCKETS;
     }
+
+    @Override
+    public TileEntity getTE() {
+        return this;
+    }
 }

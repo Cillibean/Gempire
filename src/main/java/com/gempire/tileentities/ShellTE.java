@@ -66,12 +66,12 @@ public class ShellTE extends LockableLootTileEntity implements INamedContainerPr
         super(ModTE.SHELL_TE.get());
         setupBattery(800);
         setupInitialSockets(this);
-        setupSocket(0, Socket.POWER_IN(MachineSide.BOTTOM), this);
-        setupSocket(1, Socket.POWER_IN(MachineSide.TOP), this);
+        //setupSocket(0, Socket.POWER_IN(MachineSide.BOTTOM), this);
+        //setupSocket(1, Socket.POWER_IN(MachineSide.TOP), this);
         setupSocket(2, Socket.POWER_IN(MachineSide.BACK), this);
-        setupSocket(3, Socket.POWER_IN(MachineSide.FRONT), this);
-        setupSocket(4, Socket.POWER_IN(MachineSide.LEFT), this);
-        setupSocket(5, Socket.POWER_IN(MachineSide.RIGHT), this);
+        //setupSocket(3, Socket.POWER_IN(MachineSide.FRONT), this);
+        //setupSocket(4, Socket.POWER_IN(MachineSide.LEFT), this);
+        //setupSocket(5, Socket.POWER_IN(MachineSide.RIGHT), this);
     }
 
     @Override
@@ -113,7 +113,7 @@ public class ShellTE extends LockableLootTileEntity implements INamedContainerPr
     public void tick() {
         ConductorTick();
         if(this.getStackInSlot(ShellTE.PEARL_OUTPUT_SLOT_INDEX) == ItemStack.EMPTY) {
-            if(this.ticks % 1 == 0) {
+            if(this.ticks % 100 == 0) {
                 if(isPowered()) {
                     this.HandleGravelTick();
                     this.HandleSandTick();
@@ -401,6 +401,11 @@ public class ShellTE extends LockableLootTileEntity implements INamedContainerPr
     @Override
     public float getBandwidth() {
         return 5f;
+    }
+
+    @Override
+    public float minimumUnitPower() {
+        return 10;
     }
 
     /*

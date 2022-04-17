@@ -126,4 +126,84 @@ public class ShellBlock extends ContainerBlock implements IWaterLoggable, IPower
             worldIn.removeTileEntity(pos);
         }
     }
+
+    public static int getDirectionFacingValue(TileEntity te){
+        BlockState block = te.getWorld().getTileEntity(te.getPos()).getBlockState();
+        switch(block.get(FACING)){
+            case EAST:
+                return 5;
+            case NORTH:
+                return 2;
+            case WEST:
+                return 4;
+            case SOUTH:
+                return 3;
+            default:
+                return 5;
+        }
+    }
+
+    public static Direction getDirectionFromValue(int value){
+        switch(value){
+            case 5:
+                return Direction.EAST;
+            case 2:
+                return Direction.NORTH;
+            case 4:
+                return Direction.WEST;
+            case 3:
+                return Direction.SOUTH;
+            default:
+                return Direction.EAST;
+        }
+    }
+
+    public static int getAdjustedDirectionValue(int facing, int svalue){
+        if (facing == 3){
+            return svalue;
+        }
+        else if (facing == 5){
+            switch (svalue){
+                case 5:
+                    return 2;
+                case 2:
+                    return 4;
+                case 4:
+                    return 3;
+                case 3:
+                    return 5;
+                default:
+                    return 2;
+            }
+        }
+        else if (facing == 2){
+            switch (svalue){
+                case 5:
+                    return 4;
+                case 2:
+                    return 3;
+                case 4:
+                    return 5;
+                case 3:
+                    return 2;
+                default:
+                    return 4;
+            }
+        }
+        else if (facing == 4){
+            switch (svalue){
+                case 5:
+                    return 3;
+                case 2:
+                    return 5;
+                case 4:
+                    return 2;
+                case 3:
+                    return 4;
+                default:
+                    return 3;
+            }
+        }
+        return 2;
+    }
 }
