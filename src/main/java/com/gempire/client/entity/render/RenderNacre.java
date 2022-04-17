@@ -5,16 +5,16 @@ import com.gempire.client.entity.model.ModelPebble;
 import com.gempire.client.entity.render.layers.*;
 import com.gempire.entities.gems.starter.EntityMica;
 import com.gempire.entities.gems.starter.EntityNacre;
-import com.mojang.blaze3d.matrix.MatrixStack;
-import net.minecraft.client.renderer.IRenderTypeBuffer;
-import net.minecraft.client.renderer.entity.EntityRendererManager;
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.network.chat.Component;
 
 public class RenderNacre extends MobRenderer<EntityNacre, ModelPebble<EntityNacre>> {
 
-    public RenderNacre(EntityRendererManager renderManagerIn) {
+    public RenderNacre(EntityRenderDispatcher renderManagerIn) {
         super(renderManagerIn, new ModelPebble<>(), .1f);
         this.addLayer(new SkinLayer(this));
         this.addLayer(new PebbleFaceLayer(this));
@@ -25,19 +25,19 @@ public class RenderNacre extends MobRenderer<EntityNacre, ModelPebble<EntityNacr
     }
 
     @Override
-    protected void preRenderCallback(EntityNacre entitylivingbaseIn, MatrixStack matrixStackIn, float partialTickTime) {
+    protected void scale(EntityNacre entitylivingbaseIn, PoseStack matrixStackIn, float partialTickTime) {
         matrixStackIn.scale(0.2f, 0.2f, 0.2f);
-        super.preRenderCallback(entitylivingbaseIn, matrixStackIn, partialTickTime);
+        super.scale(entitylivingbaseIn, matrixStackIn, partialTickTime);
     }
 
     @Override
-    public ResourceLocation getEntityTexture(EntityNacre entity) {
+    public ResourceLocation getTextureLocation(EntityNacre entity) {
         if(entity.getHairVariant() == 1) return new ResourceLocation(Gempire.MODID+":textures/entity/nacre/blank_1.png");
         else if(entity.getHairVariant() == 2) return new ResourceLocation(Gempire.MODID+":textures/entity/nacre/blank_2.png");
         else return new ResourceLocation(Gempire.MODID+":textures/entity/nacre/blank.png");
     }
     @Override
-    protected void renderName(EntityNacre entityIn, ITextComponent displayNameIn, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn) {
-        super.renderName(entityIn, displayNameIn, matrixStackIn, bufferIn, packedLightIn);
+    protected void renderNameTag(EntityNacre entityIn, Component displayNameIn, PoseStack matrixStackIn, MultiBufferSource bufferIn, int packedLightIn) {
+        super.renderNameTag(entityIn, displayNameIn, matrixStackIn, bufferIn, packedLightIn);
     }
 }

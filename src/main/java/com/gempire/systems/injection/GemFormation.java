@@ -10,19 +10,19 @@ import com.gempire.init.AddonHandler;
 import com.gempire.init.ModBlocks;
 import com.gempire.init.ModEntities;
 import com.gempire.items.ItemChroma;
-import net.minecraft.block.AirBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SpawnReason;
+import net.minecraft.world.level.block.AirBlock;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.fluid.Fluid;
-import net.minecraft.item.Item;
+import net.minecraft.world.item.Item;
 import net.minecraft.item.Items;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.IServerWorld;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.Mth;
+import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.RegistryObject;
 
@@ -34,7 +34,7 @@ import java.util.UUID;
 
 public class GemFormation {
     private static final int EXIT_HOLE_LENGTH = 16;
-    public World world;
+    public Level world;
     public BlockPos pos;
     public BlockPos volumeToCheck;
     public static ArrayList<String> POSSIBLE_GEMS = new ArrayList<>();
@@ -49,7 +49,7 @@ public class GemFormation {
     //Create an object to store the total weight
     float totalWeight = 0;
 
-    public GemFormation(World world, BlockPos pos, BlockPos volumeToCheck, ItemChroma chroma, Item primer, String essences, int facing, HashMap<String, Float> weights, float total){
+    public GemFormation(Level world, BlockPos pos, BlockPos volumeToCheck, ItemChroma chroma, Item primer, String essences, int facing, HashMap<String, Float> weights, float total){
         this.world = world;
         this.pos = pos;
         this.volumeToCheck = volumeToCheck;
@@ -64,7 +64,7 @@ public class GemFormation {
     public void SpawnGem(){
         RegistryObject<EntityType<EntityPebble>> gemm = ModEntities.PEBBLE;
         EntityGem gem = gemm.get().create(this.world);
-        float BIOME_TEMPERATURE = this.world.getBiome(this.pos).getTemperature();
+        float BIOME_TEMPERATURE = this.world.getBiome(this.pos).getBaseTemperature();
         this.SetDrainedStoneColor(BIOME_TEMPERATURE);
         String gemtoform = this.EvaluateCruxes();
         if (gemtoform == "") {
@@ -98,22 +98,22 @@ public class GemFormation {
                     varyingGem.initalSkinVariant = varyingGem.generateRandomInitialSkin();
                 }
             }
-            gem.setUniqueId(MathHelper.getRandomUUID(this.world.rand));
+            gem.setUUID(Mth.createInsecureUUID(this.world.random));
         }
         catch (Exception e){
             e.printStackTrace();
         }
         try{
-            gem.onInitialSpawn((IServerWorld) this.world, this.world.getDifficultyForLocation(this.pos), SpawnReason.TRIGGERED, null, null);
+            gem.finalizeSpawn((ServerLevelAccessor) this.world, this.world.getCurrentDifficultyAt(this.pos), MobSpawnType.TRIGGERED, null, null);
         }
         catch (Exception e){
             e.printStackTrace();
         }
-        gem.setPosition(this.pos.getX() + .5f, this.pos.getY(), this.pos.getZ() + .5f);
+        gem.setPos(this.pos.getX() + .5f, this.pos.getY(), this.pos.getZ() + .5f);
         gem.setHealth(gem.getMaxHealth());
-        GemFormEvent event1 = new GemFormEvent(gem, gem.getPosition());
+        GemFormEvent event1 = new GemFormEvent(gem, gem.blockPosition());
         MinecraftForge.EVENT_BUS.post(event1);
-        this.world.addEntity(gem);
+        this.world.addFreshEntity(gem);
         ArrayList<BlockPos> blocks = GemFormation.getBlockPosInVolume(this.world, this.pos, this.volumeToCheck);
         DrainEvent event2 = new DrainEvent(blocks);
         MinecraftForge.EVENT_BUS.post(event2);
@@ -121,7 +121,7 @@ public class GemFormation {
         this.GenerateFacingExitHole();
     }
 
-    public static ArrayList<Block> getBlocksInVolume(World domhain, BlockPos position, BlockPos volume){
+    public static ArrayList<Block> getBlocksInVolume(Level domhain, BlockPos position, BlockPos volume){
         ArrayList<Block> blocksInVolume = new ArrayList<>();
         float xo = GemFormation.getHalfMiddleOffsetRight(volume.getX());
         float yo = GemFormation.getHalfMiddleOffsetRight(volume.getY());
@@ -129,7 +129,7 @@ public class GemFormation {
         for(int z = GemFormation.getHalfMiddleOffsetLeft(volume.getZ()); z < xo; z++){
             for(int y = GemFormation.getHalfMiddleOffsetLeft(volume.getY()); y < yo; y++){
                 for(int x = GemFormation.getHalfMiddleOffsetLeft(volume.getX()); x < zo; x++){
-                    Block block = domhain.getBlockState(position.add(new BlockPos(x, y, z))).getBlock();
+                    Block block = domhain.getBlockState(position.offset(new BlockPos(x, y, z))).getBlock();
                     if(block.getBlock() instanceof AirBlock){
                         continue;
                     }
@@ -141,7 +141,7 @@ public class GemFormation {
         }
         return blocksInVolume;
     }
-    public static ArrayList<BlockPos> getBlockPosInVolume(World domhain, BlockPos position, BlockPos volume){
+    public static ArrayList<BlockPos> getBlockPosInVolume(Level domhain, BlockPos position, BlockPos volume){
         ArrayList<BlockPos> blocksInVolume = new ArrayList<>();
         float xo = GemFormation.getHalfMiddleOffsetRight(volume.getX());
         float yo = GemFormation.getHalfMiddleOffsetRight(volume.getY());
@@ -149,7 +149,7 @@ public class GemFormation {
         for(int z = GemFormation.getHalfMiddleOffsetLeft(volume.getZ()); z < xo; z++){
             for(int y = GemFormation.getHalfMiddleOffsetLeft(volume.getY()); y < yo; y++){
                 for(int x = GemFormation.getHalfMiddleOffsetLeft(volume.getX()); x < zo; x++){
-                    BlockPos block = position.add(new BlockPos(x, y, z));
+                    BlockPos block = position.offset(new BlockPos(x, y, z));
                     if(domhain.getBlockState(block).getBlock() instanceof AirBlock){
                         continue;
                     }
@@ -221,13 +221,13 @@ public class GemFormation {
         for(int i = 0; i < this.EXIT_HOLE_LENGTH; i++){
             if(!flag) {
                 if(this.world.getBlockState(currentPos).getBlock() instanceof AirBlock
-                        && this.world.getBlockState(currentPos.up()).getBlock() instanceof AirBlock){
+                        && this.world.getBlockState(currentPos.above()).getBlock() instanceof AirBlock){
                     flag = true;
                 }
                 this.world.destroyBlock(currentPos, false);
-                this.world.destroyBlock(currentPos.up(), false);
-                this.world.destroyBlock(currentPos.up().up(), false);
-                currentPos = currentPos.add(direction);
+                this.world.destroyBlock(currentPos.above(), false);
+                this.world.destroyBlock(currentPos.above().above(), false);
+                currentPos = currentPos.offset(direction);
             }
             else{
                 break;
@@ -360,25 +360,25 @@ public class GemFormation {
                     block.getBlock() == ModBlocks.POWER_CRYSTAL_BLOCK.get()){
                 continue;
             }
-            if(block == Blocks.DIRT.getDefaultState() || block == Blocks.GRASS_BLOCK.getDefaultState() || block == Blocks.GRASS_PATH.getDefaultState()
-                    || block == Blocks.GRAVEL.getDefaultState()){
-                this.world.setBlockState(pos, this.drained_soil.getDefaultState());
+            if(block == Blocks.DIRT.defaultBlockState() || block == Blocks.GRASS_BLOCK.defaultBlockState() || block == Blocks.GRASS_PATH.defaultBlockState()
+                    || block == Blocks.GRAVEL.defaultBlockState()){
+                this.world.setBlockAndUpdate(pos, this.drained_soil.defaultBlockState());
             }
-            else if(block == Blocks.SAND.getDefaultState() || block == Blocks.RED_SAND.getDefaultState() || block == Blocks.SOUL_SAND.getDefaultState()){
-                this.world.setBlockState(pos, this.drained_sand.getDefaultState());
+            else if(block == Blocks.SAND.defaultBlockState() || block == Blocks.RED_SAND.defaultBlockState() || block == Blocks.SOUL_SAND.defaultBlockState()){
+                this.world.setBlockAndUpdate(pos, this.drained_sand.defaultBlockState());
             }
             else{
                 if(pos.getY() < 80) {
-                    this.world.setBlockState(pos, this.drained_stone.getDefaultState());
+                    this.world.setBlockAndUpdate(pos, this.drained_stone.defaultBlockState());
                 }
                 else{
-                    this.world.setBlockState(pos, this.drained_stone_2.getDefaultState());
+                    this.world.setBlockAndUpdate(pos, this.drained_stone_2.defaultBlockState());
                     if(pos.getY() % 6 == 0){
-                        this.world.setBlockState(pos, this.banded_drained_stone.getDefaultState());
+                        this.world.setBlockAndUpdate(pos, this.banded_drained_stone.defaultBlockState());
                     }
                 }
                 if(pos.getY() == 80){
-                    this.world.setBlockState(pos, this.banded_drained_stone.getDefaultState());
+                    this.world.setBlockAndUpdate(pos, this.banded_drained_stone.defaultBlockState());
                 }
             }
         }

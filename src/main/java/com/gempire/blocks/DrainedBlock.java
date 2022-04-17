@@ -1,8 +1,10 @@
 package com.gempire.blocks;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.material.PushReaction;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.PushReaction;
+
+import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 
 public class DrainedBlock extends Block {
 
@@ -11,7 +13,7 @@ public class DrainedBlock extends Block {
     }
 
     @Override
-    public PushReaction getPushReaction(BlockState state) {
+    public PushReaction getPistonPushReaction(BlockState state) {
         return PushReaction.BLOCK;
     }
 }

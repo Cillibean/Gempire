@@ -1,12 +1,12 @@
 package com.gempire.util;
 
 import com.gempire.init.ModItems;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
 
 import java.util.function.Supplier;
 
-public class ModItemGroup extends ItemGroup {
+public class ModItemGroup extends CreativeModeTab {
 
     private Supplier<ItemStack> displayStack;
 
@@ -20,10 +20,10 @@ public class ModItemGroup extends ItemGroup {
     }
 
     @Override
-    public ItemStack createIcon() { return displayStack.get(); }
+    public ItemStack makeIcon() { return displayStack.get(); }
 
     @Override
-    public boolean hasScrollbar() {
+    public boolean canScroll() {
         return true;
     }
 

@@ -12,28 +12,28 @@ import com.gempire.systems.machine.Socket;
 import com.gempire.systems.machine.interfaces.IPowerConsumer;
 import com.gempire.systems.machine.interfaces.IPowerGenerator;
 import net.minecraft.block.*;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.inventory.ItemStackHelper;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.INamedContainerProvider;
-import net.minecraft.item.BucketItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SUpdateTileEntityPacket;
-import net.minecraft.tileentity.ITickableTileEntity;
-import net.minecraft.tileentity.LockableLootTileEntity;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Direction;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.ContainerHelper;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.item.BucketItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.Connection;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.world.level.block.entity.TickableBlockEntity;
+import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.core.Direction;
+import net.minecraft.core.NonNullList;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidTank;
@@ -44,7 +44,11 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 
-public class InjectorTE extends LockableLootTileEntity implements IFluidTank, INamedContainerProvider, ITickableTileEntity, IPowerConsumer {
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.LiquidBlock;
+import net.minecraft.world.level.block.state.BlockState;
+
+public class InjectorTE extends RandomizableContainerBlockEntity implements IFluidTank, MenuProvider, TickableBlockEntity, IPowerConsumer {
     public static final int NUMBER_OF_SLOTS = 6;
     public static final int PINK_INPUT_SLOT_INDEX = 0;
     public static final int BLUE_INPUT_SLOT_INDEX = 1;
@@ -80,8 +84,8 @@ public class InjectorTE extends LockableLootTileEntity implements IFluidTank, IN
     }
 
     @Override
-    public void read(BlockState state, CompoundNBT nbt) {
-        super.read(state, nbt);
+    public void load(BlockState state, CompoundTag nbt) {
+        super.load(state, nbt);
         ReadPoweredMachine(nbt);
         this.pinkTank.readFromNBT(nbt.getCompound("pinkTank"));
         this.blueTank.readFromNBT(nbt.getCompound("blueTank"));
@@ -91,26 +95,26 @@ public class InjectorTE extends LockableLootTileEntity implements IFluidTank, IN
         this.blueOpen = nbt.getBoolean("blueOpen");
         this.yellowOpen = nbt.getBoolean("yellowOpen");
         this.whiteOpen = nbt.getBoolean("whiteOpen");
-        this.items = NonNullList.withSize(this.getSizeInventory(), ItemStack.EMPTY);
-        if(!this.checkLootAndRead(nbt)){
-            ItemStackHelper.loadAllItems(nbt, this.items);
+        this.items = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
+        if(!this.tryLoadLootTable(nbt)){
+            ContainerHelper.loadAllItems(nbt, this.items);
         }
     }
 
     @Override
-    public CompoundNBT write(CompoundNBT compound) {
-        super.write(compound);
+    public CompoundTag save(CompoundTag compound) {
+        super.save(compound);
         WritePoweredMachine(compound);
-        compound.put("pinkTank", this.pinkTank.writeToNBT(new CompoundNBT()));
-        compound.put("blueTank", this.blueTank.writeToNBT(new CompoundNBT()));
-        compound.put("yellowTank", this.yellowTank.writeToNBT(new CompoundNBT()));
-        compound.put("whiteTank", this.whiteTank.writeToNBT(new CompoundNBT()));
+        compound.put("pinkTank", this.pinkTank.writeToNBT(new CompoundTag()));
+        compound.put("blueTank", this.blueTank.writeToNBT(new CompoundTag()));
+        compound.put("yellowTank", this.yellowTank.writeToNBT(new CompoundTag()));
+        compound.put("whiteTank", this.whiteTank.writeToNBT(new CompoundTag()));
         compound.putBoolean("pinkOpen", this.pinkOpen);
         compound.putBoolean("blueOpen", this.blueOpen);
         compound.putBoolean("yellowOpen", this.yellowOpen);
         compound.putBoolean("whiteOpen", this.whiteOpen);
-        if(!this.checkLootAndWrite(compound)){
-            ItemStackHelper.saveAllItems(compound, this.items);
+        if(!this.trySaveLootTable(compound)){
+            ContainerHelper.saveAllItems(compound, this.items);
         }
         return compound;
     }
@@ -125,7 +129,7 @@ public class InjectorTE extends LockableLootTileEntity implements IFluidTank, IN
 
     public void HandleSlotUpdates(){
         for (int i = 0; i < 4; i++) {
-            ItemStack stack = this.getStackInSlot(i);
+            ItemStack stack = this.getItem(i);
             if (this.shouldPullFluidFromStack(i)) {
                 if (stack != ItemStack.EMPTY) {
                     if(stack.getItem() instanceof BucketItem) {
@@ -133,9 +137,9 @@ public class InjectorTE extends LockableLootTileEntity implements IFluidTank, IN
                         if (this.isValidForSlot(i, bucket)) {
                             int filled = this.FillFluidTanks(i, 1000);
                             //TODO: TEMPORARY
-                            this.setInventorySlotContents(i, new ItemStack(ModItems.ESSENCE_BOTTLE.get()));
-                            this.world.notifyBlockUpdate(this.pos, this.getBlockState(), this.getBlockState(), 2);
-                            this.markDirty();
+                            this.setItem(i, new ItemStack(ModItems.ESSENCE_BOTTLE.get()));
+                            this.level.sendBlockUpdated(this.worldPosition, this.getBlockState(), this.getBlockState(), 2);
+                            this.setChanged();
                         }
                     }
                 }
@@ -164,12 +168,12 @@ public class InjectorTE extends LockableLootTileEntity implements IFluidTank, IN
             FluidTank tank = this.getTankFromValue(3);
             tank.setFluid(FluidStack.EMPTY);
         }
-        this.world.notifyBlockUpdate(this.pos, this.getBlockState(), this.getBlockState(), 2);
-        this.markDirty();
+        this.level.sendBlockUpdated(this.worldPosition, this.getBlockState(), this.getBlockState(), 2);
+        this.setChanged();
     }
 
     public void Inject() {
-        if (this.getStackInSlot(InjectorTE.CHROMA_INPUT_SLOT_INDEX).getItem() instanceof ItemChroma &&
+        if (this.getItem(InjectorTE.CHROMA_INPUT_SLOT_INDEX).getItem() instanceof ItemChroma &&
                 (this.getTankFromValue(0).getFluid().getFluid() != Fluids.EMPTY && this.pinkOpen ||
                         this.getTankFromValue(1).getFluid().getFluid() != Fluids.EMPTY && this.blueOpen ||
                         this.getTankFromValue(2).getFluid().getFluid() != Fluids.EMPTY && this.yellowOpen ||
@@ -247,47 +251,47 @@ public class InjectorTE extends LockableLootTileEntity implements IFluidTank, IN
                     }
                 }
             }
-            BlockPos seedPos = this.getPos().add(new BlockPos(0, -Math.ceil(GemSeedTE.DRAIN_SIZE / 2) - 1, 0));
-            while(this.world.getBlockState(seedPos) == Blocks.AIR.getDefaultState() ||
-                    this.world.getBlockState(seedPos).getBlock() instanceof FlowingFluidBlock ||
-                    this.world.getBlockState(seedPos) == ModBlocks.GEM_SEED_BLOCK.get().getDefaultState()){
-                seedPos = seedPos.add(0, -GemSeedTE.DRAIN_SIZE, 0);
+            BlockPos seedPos = this.getBlockPos().offset(new BlockPos(0, -Math.ceil(GemSeedTE.DRAIN_SIZE / 2) - 1, 0));
+            while(this.level.getBlockState(seedPos) == Blocks.AIR.defaultBlockState() ||
+                    this.level.getBlockState(seedPos).getBlock() instanceof LiquidBlock ||
+                    this.level.getBlockState(seedPos) == ModBlocks.GEM_SEED_BLOCK.get().defaultBlockState()){
+                seedPos = seedPos.offset(0, -GemSeedTE.DRAIN_SIZE, 0);
             }
-            ItemChroma chroma = (ItemChroma)this.getStackInSlot(InjectorTE.CHROMA_INPUT_SLOT_INDEX).getItem();
-            Item primer = this.getStackInSlot(InjectorTE.PRIME_INPUT_SLOT_INDEX).getItem();
+            ItemChroma chroma = (ItemChroma)this.getItem(InjectorTE.CHROMA_INPUT_SLOT_INDEX).getItem();
+            Item primer = this.getItem(InjectorTE.PRIME_INPUT_SLOT_INDEX).getItem();
             GemSeedBlock seedBlock = (GemSeedBlock) ModBlocks.GEM_SEED_BLOCK.get();
-            this.world.setBlockState(seedPos, seedBlock.getDefaultState());
-            if(this.world.getBlockState(seedPos).getBlock() == ModBlocks.GEM_SEED_BLOCK.get()) {
-                this.getWorld().playSound(null, this.getPos(), ModSounds.INJECT.get(), SoundCategory.AMBIENT, 2f, 1);
+            this.level.setBlockAndUpdate(seedPos, seedBlock.defaultBlockState());
+            if(this.level.getBlockState(seedPos).getBlock() == ModBlocks.GEM_SEED_BLOCK.get()) {
+                this.getLevel().playSound(null, this.getBlockPos(), ModSounds.INJECT.get(), SoundSource.AMBIENT, 2f, 1);
             }
-            GemSeedTE gemSeedTE = (GemSeedTE) this.world.getTileEntity(seedPos);
+            GemSeedTE gemSeedTE = (GemSeedTE) this.level.getBlockEntity(seedPos);
             gemSeedTE.setEssences(essences);
             gemSeedTE.SetChroma(chroma);
             gemSeedTE.SetPrimer(primer);
             int facing = InjectorTE.getFacingFromState(this.getBlockState());
             gemSeedTE.setFacing(facing);
             System.out.println("Facing :" + facing);
-            this.getStackInSlot(InjectorTE.CHROMA_INPUT_SLOT_INDEX).shrink(1);
-            this.getStackInSlot(InjectorTE.PRIME_INPUT_SLOT_INDEX).shrink(1);
+            this.getItem(InjectorTE.CHROMA_INPUT_SLOT_INDEX).shrink(1);
+            this.getItem(InjectorTE.PRIME_INPUT_SLOT_INDEX).shrink(1);
             usePower();
-            this.world.notifyBlockUpdate(this.pos, this.getBlockState(), this.getBlockState(), 2);
-            this.markDirty();
+            this.level.sendBlockUpdated(this.worldPosition, this.getBlockState(), this.getBlockState(), 2);
+            this.setChanged();
             InjectEvent event = new InjectEvent(gemSeedTE, seedPos);
             MinecraftForge.EVENT_BUS.post(event);
         }
     }
 
     public static int getFacingFromState(BlockState state){
-        if(state.get(InjectorBlock.FACING) == Direction.EAST){
+        if(state.getValue(InjectorBlock.FACING) == Direction.EAST){
             return 0;
         }
-        else if(state.get(InjectorBlock.FACING) == Direction.NORTH){
+        else if(state.getValue(InjectorBlock.FACING) == Direction.NORTH){
             return 1;
         }
-        else if(state.get(InjectorBlock.FACING) == Direction.WEST){
+        else if(state.getValue(InjectorBlock.FACING) == Direction.WEST){
             return 2;
         }
-        else if(state.get(InjectorBlock.FACING) == Direction.SOUTH){
+        else if(state.getValue(InjectorBlock.FACING) == Direction.SOUTH){
             return 3;
         }
         else{
@@ -295,12 +299,12 @@ public class InjectorTE extends LockableLootTileEntity implements IFluidTank, IN
         }
     }
 
-    public CompoundNBT getCompountNBTForPacket(ItemChroma chroma, Item primer, Fluid[] essences){
-        CompoundNBT compound = new CompoundNBT();
+    public CompoundTag getCompountNBTForPacket(ItemChroma chroma, Item primer, Fluid[] essences){
+        CompoundTag compound = new CompoundTag();
         compound.putInt("ticks", 0);
         compound.putBoolean("spawned", false);
-        compound.put("chroma", new ItemStack(chroma).write(new CompoundNBT()));
-        compound.put("primer", new ItemStack(primer).write(new CompoundNBT()));
+        compound.put("chroma", new ItemStack(chroma).save(new CompoundTag()));
+        compound.put("primer", new ItemStack(primer).save(new CompoundTag()));
         String fluids = "";
         for(int i = 0; i < essences.length; i++){
             if(i == 0){
@@ -352,8 +356,8 @@ public class InjectorTE extends LockableLootTileEntity implements IFluidTank, IN
                 this.pinkOpen = !this.pinkOpen;
                 break;
         }
-        this.world.notifyBlockUpdate(this.pos, this.getBlockState(), this.getBlockState(), 2);
-        this.markDirty();
+        this.level.sendBlockUpdated(this.worldPosition, this.getBlockState(), this.getBlockState(), 2);
+        this.setChanged();
     }
 
     //CONTAINER STUFF
@@ -361,13 +365,13 @@ public class InjectorTE extends LockableLootTileEntity implements IFluidTank, IN
     //CONTAINER STUFF
 
     @Override
-    public ITextComponent getDisplayName() {
-        return new StringTextComponent("");//TranslationTextComponent("container.gempire.injector");
+    public Component getDisplayName() {
+        return new TextComponent("");//TranslationTextComponent("container.gempire.injector");
     }
 
     @Override
-    protected ITextComponent getDefaultName() {
-        return new TranslationTextComponent("container.gempire.injector");
+    protected Component getDefaultName() {
+        return new TranslatableComponent("container.gempire.injector");
     }
 
     @Override
@@ -381,12 +385,12 @@ public class InjectorTE extends LockableLootTileEntity implements IFluidTank, IN
     }
 
     @Override
-    protected Container createMenu(int id, PlayerInventory player) {
+    protected AbstractContainerMenu createMenu(int id, Inventory player) {
         return new InjectorContainer(id, player, this);
     }
 
     @Override
-    public int getSizeInventory() {
+    public int getContainerSize() {
         return InjectorTE.NUMBER_OF_SLOTS;
     }
 
@@ -535,29 +539,29 @@ public class InjectorTE extends LockableLootTileEntity implements IFluidTank, IN
     //NETWORKING STUFF
 
     @Override
-    public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
+    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
         //Debug
         System.out.println("[DEBUG]:Client recived tile sync packet");
-        this.read(this.world.getBlockState(pkt.getPos()), pkt.getNbtCompound());
+        this.load(this.level.getBlockState(pkt.getPos()), pkt.getTag());
     }
 
     @Override
-    public CompoundNBT getUpdateTag() {
-        return this.write(new CompoundNBT());
+    public CompoundTag getUpdateTag() {
+        return this.save(new CompoundTag());
     }
 
     @Nullable
     @Override
-    public SUpdateTileEntityPacket getUpdatePacket() {
+    public ClientboundBlockEntityDataPacket getUpdatePacket() {
         //Debug
         System.out.println("[DEBUG]:Server sent tile sync packet");
-        return new SUpdateTileEntityPacket(this.pos, -1, this.getUpdateTag());
+        return new ClientboundBlockEntityDataPacket(this.worldPosition, -1, this.getUpdateTag());
     }
 
     @Override
-    public void handleUpdateTag(BlockState state, CompoundNBT tag) {
+    public void handleUpdateTag(BlockState state, CompoundTag tag) {
         System.out.println("[DEBUG]:Handling tag on chunk load");
-        this.read(state, tag);
+        this.load(state, tag);
     }
 
     //REDUNDANT STUFF
@@ -664,7 +668,7 @@ public class InjectorTE extends LockableLootTileEntity implements IFluidTank, IN
     }
 
     @Override
-    public TileEntity getTE() {
+    public BlockEntity getTE() {
         return this;
     }
 
@@ -707,9 +711,9 @@ public class InjectorTE extends LockableLootTileEntity implements IFluidTank, IN
     }
 
     public boolean drawFromTopGenerator(){
-        BlockPos crystalPos = getPos().up().up().up();
-        if(getWorld().getTileEntity(crystalPos) instanceof IPowerGenerator){
-            IPowerGenerator generator = (IPowerGenerator) getWorld().getTileEntity(crystalPos);
+        BlockPos crystalPos = getBlockPos().above().above().above();
+        if(getLevel().getBlockEntity(crystalPos) instanceof IPowerGenerator){
+            IPowerGenerator generator = (IPowerGenerator) getLevel().getBlockEntity(crystalPos);
             if(generator.getBattery().getCharge() > getHighestSurroundingPower()){
                 float powerToSet = 0;
                 if(generator.getBattery().getCharge() <= 0){
@@ -722,8 +726,8 @@ public class InjectorTE extends LockableLootTileEntity implements IFluidTank, IN
                 return true;
             }
         }
-        this.world.notifyBlockUpdate(this.pos, this.getBlockState(), this.getBlockState(), 2);
-        this.markDirty();
+        this.level.sendBlockUpdated(this.worldPosition, this.getBlockState(), this.getBlockState(), 2);
+        this.setChanged();
         return false;
     }
 }

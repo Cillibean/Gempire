@@ -6,154 +6,154 @@ import com.gempire.entities.abilities.AbilityZilch;
 import com.gempire.entities.abilities.base.Ability;
 import com.gempire.init.ModPacketHandler;
 import com.gempire.networking.*;
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screen.inventory.ContainerScreen;
-import net.minecraft.client.gui.widget.TextFieldWidget;
-import net.minecraft.client.gui.widget.button.Button;
-import net.minecraft.client.gui.widget.button.ImageButton;
-import net.minecraft.client.renderer.IRenderTypeBuffer;
-import net.minecraft.client.renderer.entity.EntityRendererManager;
-import net.minecraft.entity.LivingEntity;
+import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.gui.components.EditBox;
+import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.components.ImageButton;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.vector.Quaternion;
-import net.minecraft.util.math.vector.Vector3f;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.resources.ResourceLocation;
+import com.mojang.math.Quaternion;
+import com.mojang.math.Vector3f;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.ArrayList;
 
 
-public class PearlUIScreen extends ContainerScreen<PearlUIContainer> {
+public class PearlUIScreen extends AbstractContainerScreen<PearlUIContainer> {
     public static final ResourceLocation GUI = new ResourceLocation("gempire:textures/gui/pearl_ui.png");
     public static final ResourceLocation LEFT = new ResourceLocation("gempire:textures/gui/left.png");
     public static final ResourceLocation RIGHT = new ResourceLocation("gempire:textures/gui/right.png");
     public static final ResourceLocation LEFT_L = new ResourceLocation("gempire:textures/gui/left_light.png");
     public static final ResourceLocation RIGHT_L = new ResourceLocation("gempire:textures/gui/right_light.png");
 
-    public TextFieldWidget nameBox;
+    public EditBox nameBox;
 
-    public PearlUIScreen(PearlUIContainer screenContainer, PlayerInventory inv, ITextComponent titleIn) {
+    public PearlUIScreen(PearlUIContainer screenContainer, Inventory inv, Component titleIn) {
         super(screenContainer, inv, titleIn);
-        this.guiLeft = 0;
-        this.guiTop = 0;
-        this.xSize = 350;
-        this.ySize = 240;
+        this.leftPos = 0;
+        this.topPos = 0;
+        this.imageWidth = 350;
+        this.imageHeight = 240;
     }
 
     @Override
     protected void init() {
         super.init();
-        int x = (this.width - this.xSize) / 2;
-        int y = (this.height - this.ySize) / 2;
+        int x = (this.width - this.imageWidth) / 2;
+        int y = (this.height - this.imageHeight) / 2;
 
-        this.nameBox = new TextFieldWidget(this.font, x + 74, y + 9, 101, 12, new StringTextComponent("Sussy"));
-        this.nameBox.setEnableBackgroundDrawing(true);
+        this.nameBox = new EditBox(this.font, x + 74, y + 9, 101, 12, new TextComponent("Sussy"));
+        this.nameBox.setBordered(true);
         this.nameBox.setVisible(true);
-        String name = this.container.gem.customName() ? this.container.gem.getCustomName().getString() : this.container.gem.getDisplayName().getString();
-        this.nameBox.setText(name);
-        this.nameBox.setFocused2(true);
+        String name = this.menu.gem.customName() ? this.menu.gem.getCustomName().getString() : this.menu.gem.getDisplayName().getString();
+        this.nameBox.setValue(name);
+        this.nameBox.setFocus(true);
         this.children.add(this.nameBox);
-        this.setFocusedDefault(this.nameBox);
+        this.setInitialFocus(this.nameBox);
 
-        this.addButton(new ImageButton(this.guiLeft + 241, this.guiTop + 11, 11, 9, 0, 0, 0, PearlUIScreen.LEFT,
+        this.addButton(new ImageButton(this.leftPos + 241, this.topPos + 11, 11, 9, 0, 0, 0, PearlUIScreen.LEFT,
                 11, 9, (p_213029_1_) -> {
-            ModPacketHandler.INSTANCE.sendToServer(new C2SRequestPageChange(this.container.gem.getEntityId(), false));
+            ModPacketHandler.INSTANCE.sendToServer(new C2SRequestPageChange(this.menu.gem.getId(), false));
         }));
 
-        this.addButton(new ImageButton(this.guiLeft + 256, this.guiTop + 11, 11, 9, 0, 0, 0, PearlUIScreen.RIGHT,
+        this.addButton(new ImageButton(this.leftPos + 256, this.topPos + 11, 11, 9, 0, 0, 0, PearlUIScreen.RIGHT,
                 11, 9, (p_213029_1_) -> {
-            ModPacketHandler.INSTANCE.sendToServer(new C2SRequestPageChange(this.container.gem.getEntityId(), true));
+            ModPacketHandler.INSTANCE.sendToServer(new C2SRequestPageChange(this.menu.gem.getId(), true));
         }));
 
-        this.addButton(new Button(this.guiLeft + 10, this.guiTop + 108, 83, 20, new TranslationTextComponent("screens.gempire.poof"),
+        this.addButton(new Button(this.leftPos + 10, this.topPos + 108, 83, 20, new TranslatableComponent("screens.gempire.poof"),
                 (button) -> {
-            ModPacketHandler.INSTANCE.sendToServer(new C2SRequestPoof(this.container.gem.getEntityId()));
-            this.closeScreen();
+            ModPacketHandler.INSTANCE.sendToServer(new C2SRequestPoof(this.menu.gem.getId()));
+            this.onClose();
         }));
 
         //CUSTOMIZATION STUFF
 
-        this.addButton(new ImageButton(this.guiLeft + 122, this.guiTop + 35, 11, 9, 0, 0, 0, PearlUIScreen.LEFT_L,
+        this.addButton(new ImageButton(this.leftPos + 122, this.topPos + 35, 11, 9, 0, 0, 0, PearlUIScreen.LEFT_L,
                 11, 9, (p_213029_1_) -> {
-            ModPacketHandler.INSTANCE.sendToServer(new C2SRequestHairChange(this.container.gem.getEntityId(), false));
+            ModPacketHandler.INSTANCE.sendToServer(new C2SRequestHairChange(this.menu.gem.getId(), false));
         }));
-        this.addButton(new ImageButton(this.guiLeft + 137, this.guiTop + 35, 11, 9, 0, 0, 0, PearlUIScreen.RIGHT_L,
+        this.addButton(new ImageButton(this.leftPos + 137, this.topPos + 35, 11, 9, 0, 0, 0, PearlUIScreen.RIGHT_L,
                 11, 9, (p_213029_1_) -> {
-            ModPacketHandler.INSTANCE.sendToServer(new C2SRequestHairChange(this.container.gem.getEntityId(), true));
-        }));
-
-        this.addButton(new ImageButton(this.guiLeft + 139, this.guiTop + 53, 11, 9, 0, 0, 0, PearlUIScreen.LEFT_L,
-                11, 9, (p_213029_1_) -> {
-            ModPacketHandler.INSTANCE.sendToServer(new C2SRequestOutfitChange(this.container.gem.getEntityId(), false));
-        }));
-        this.addButton(new ImageButton(this.guiLeft + 154, this.guiTop + 53, 11, 9, 0, 0, 0, PearlUIScreen.RIGHT_L,
-                11, 9, (p_213029_1_) -> {
-            ModPacketHandler.INSTANCE.sendToServer(new C2SRequestOutfitChange(this.container.gem.getEntityId(), true));
+            ModPacketHandler.INSTANCE.sendToServer(new C2SRequestHairChange(this.menu.gem.getId(), true));
         }));
 
-        this.addButton(new ImageButton(this.guiLeft + 138, this.guiTop + 71, 11, 9, 0, 0, 0, PearlUIScreen.LEFT_L,
+        this.addButton(new ImageButton(this.leftPos + 139, this.topPos + 53, 11, 9, 0, 0, 0, PearlUIScreen.LEFT_L,
                 11, 9, (p_213029_1_) -> {
-            ModPacketHandler.INSTANCE.sendToServer(new C2SRequestInsigniaChange(this.container.gem.getEntityId(), false));
+            ModPacketHandler.INSTANCE.sendToServer(new C2SRequestOutfitChange(this.menu.gem.getId(), false));
         }));
-        this.addButton(new ImageButton(this.guiLeft + 153, this.guiTop + 71, 11, 9, 0, 0, 0, PearlUIScreen.RIGHT_L,
+        this.addButton(new ImageButton(this.leftPos + 154, this.topPos + 53, 11, 9, 0, 0, 0, PearlUIScreen.RIGHT_L,
                 11, 9, (p_213029_1_) -> {
-            ModPacketHandler.INSTANCE.sendToServer(new C2SRequestInsigniaChange(this.container.gem.getEntityId(), true));
+            ModPacketHandler.INSTANCE.sendToServer(new C2SRequestOutfitChange(this.menu.gem.getId(), true));
+        }));
+
+        this.addButton(new ImageButton(this.leftPos + 138, this.topPos + 71, 11, 9, 0, 0, 0, PearlUIScreen.LEFT_L,
+                11, 9, (p_213029_1_) -> {
+            ModPacketHandler.INSTANCE.sendToServer(new C2SRequestInsigniaChange(this.menu.gem.getId(), false));
+        }));
+        this.addButton(new ImageButton(this.leftPos + 153, this.topPos + 71, 11, 9, 0, 0, 0, PearlUIScreen.RIGHT_L,
+                11, 9, (p_213029_1_) -> {
+            ModPacketHandler.INSTANCE.sendToServer(new C2SRequestInsigniaChange(this.menu.gem.getId(), true));
         }));
     }
 
     @Override
-    protected void drawGuiContainerForegroundLayer(MatrixStack matrixStack, int x, int y) {
+    protected void renderLabels(PoseStack matrixStack, int x, int y) {
 
     }
 
     @Override
-    public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+    public void render(PoseStack matrixStack, int mouseX, int mouseY, float partialTicks) {
         this.renderBackground(matrixStack);
         super.render(matrixStack, mouseX, mouseY, partialTicks);
-        this.renderHoveredTooltip(matrixStack, mouseX, mouseY);
+        this.renderTooltip(matrixStack, mouseX, mouseY);
     }
 
     @SuppressWarnings("deprecation")
     @Override
-    protected void drawGuiContainerBackgroundLayer(MatrixStack matrixStack, float partialTicks, int mouseX, int mouseY) {
+    protected void renderBg(PoseStack matrixStack, float partialTicks, int mouseX, int mouseY) {
         RenderSystem.color4f(1f, 1f, 1f, 1f);
-        this.minecraft.getTextureManager().bindTexture(PearlUIScreen.GUI);
-        int x = (this.width - this.xSize) / 2;
-        int y = (this.height - this.ySize) / 2;
-        int i = this.guiLeft;
-        int j = this.guiTop;
-        this.blit(matrixStack, x, y, 0, 0, this.xSize, this.ySize, 352, 240);
+        this.minecraft.getTextureManager().bind(PearlUIScreen.GUI);
+        int x = (this.width - this.imageWidth) / 2;
+        int y = (this.height - this.imageHeight) / 2;
+        int i = this.leftPos;
+        int j = this.topPos;
+        this.blit(matrixStack, x, y, 0, 0, this.imageWidth, this.imageHeight, 352, 240);
 
         this.nameBox.render(matrixStack, mouseX, mouseY, partialTicks);
 
-        drawEntityOnScreen(i + 38, j + 76, 26, (float)(i + 37) - mouseX, (float)(j + 43) - mouseY, this.container.gem);
+        drawEntityOnScreen(i + 38, j + 76, 26, (float)(i + 37) - mouseX, (float)(j + 43) - mouseY, this.menu.gem);
 
         drawStats(matrixStack, i, j);
 
-        int ddOffsetHair = this.container.gem.getHairVariant() > 8 ? -3 : 0;
-        int ddOffsetOutfit = this.container.gem.getOutfitVariant() > 9 ? -3 : 0;
-        int ddOffsetInsignia = this.container.gem.getInsigniaVariant() > 9 ? -3 : 0;
+        int ddOffsetHair = this.menu.gem.getHairVariant() > 8 ? -3 : 0;
+        int ddOffsetOutfit = this.menu.gem.getOutfitVariant() > 9 ? -3 : 0;
+        int ddOffsetInsignia = this.menu.gem.getInsigniaVariant() > 9 ? -3 : 0;
 
-        this.font.func_243248_b(matrixStack, new StringTextComponent("Page: " + (this.container.gem.getPage() + 1)),
+        this.font.draw(matrixStack, new TextComponent("Page: " + (this.menu.gem.getPage() + 1)),
                 i + 190, j + 11, 4210752);
-        this.font.func_243248_b(matrixStack, new StringTextComponent("Hair:"),
+        this.font.draw(matrixStack, new TextComponent("Hair:"),
                 i + 77, j + 36, 0xFFFFFF);
-        this.font.func_243248_b(matrixStack, new StringTextComponent("Uniform:"),
+        this.font.draw(matrixStack, new TextComponent("Uniform:"),
                 i + 77, j + 54, 0xFFFFFF);
-        this.font.func_243248_b(matrixStack, new StringTextComponent("Insignia:"),
+        this.font.draw(matrixStack, new TextComponent("Insignia:"),
                 i + 77, j + 72, 0xFFFFFF);
-        this.font.func_243248_b(matrixStack, new StringTextComponent("" + (this.container.gem.getHairVariant() + 1)),
+        this.font.draw(matrixStack, new TextComponent("" + (this.menu.gem.getHairVariant() + 1)),
                 i + 107 + ddOffsetHair, j + 37, 0xFFFFFF);
-        this.font.func_243248_b(matrixStack, new StringTextComponent("" + (this.container.gem.getOutfitVariant() + 1)),
+        this.font.draw(matrixStack, new TextComponent("" + (this.menu.gem.getOutfitVariant() + 1)),
                 i + 124 + ddOffsetOutfit, j + 55, 0xFFFFFF);
-        this.font.func_243248_b(matrixStack, new StringTextComponent("" + (this.container.gem.getInsigniaVariant() + 1)),
+        this.font.draw(matrixStack, new TextComponent("" + (this.menu.gem.getInsigniaVariant() + 1)),
                 i + 123 + ddOffsetInsignia, j + 73, 0xFFFFFF);
     }
 
@@ -161,7 +161,7 @@ public class PearlUIScreen extends ContainerScreen<PearlUIContainer> {
     public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
         if(this.nameBox.isFocused()) {
             this.nameBox.keyPressed(keyCode, scanCode, modifiers);
-            ModPacketHandler.INSTANCE.sendToServer(new C2SRequestUpdateGemName(this.nameBox.getText(), this.container.gem.getEntityId()));
+            ModPacketHandler.INSTANCE.sendToServer(new C2SRequestUpdateGemName(this.nameBox.getValue(), this.menu.gem.getId()));
             return true;
         }
         else{
@@ -181,51 +181,51 @@ public class PearlUIScreen extends ContainerScreen<PearlUIContainer> {
         RenderSystem.pushMatrix();
         RenderSystem.translatef((float)posX, (float)posY, 1050.0F);
         RenderSystem.scalef(1.0F, 1.0F, -1.0F);
-        MatrixStack matrixstack = new MatrixStack();
+        PoseStack matrixstack = new PoseStack();
         matrixstack.translate(0.0D, 0.0D, 1000.0D);
         matrixstack.scale((float)scale, (float)scale, (float)scale);
         Quaternion quaternion = Vector3f.ZP.rotationDegrees(180.0F);
         Quaternion quaternion1 = Vector3f.XP.rotationDegrees(f1 * 20.0F);
-        quaternion.multiply(quaternion1);
-        matrixstack.rotate(quaternion);
-        float f2 = livingEntity.renderYawOffset;
-        float f3 = livingEntity.rotationYaw;
-        float f4 = livingEntity.rotationPitch;
-        float f5 = livingEntity.prevRotationYawHead;
-        float f6 = livingEntity.rotationYawHead;
-        livingEntity.renderYawOffset = 180 + f * 20.0F;
-        livingEntity.rotationYaw = 180 + f * 40.0F;
-        livingEntity.rotationPitch = -f1 * 20.0F;
-        livingEntity.rotationYawHead = livingEntity.rotationYaw;
-        livingEntity.prevRotationYawHead = livingEntity.rotationYaw;
-        EntityRendererManager entityrenderermanager = Minecraft.getInstance().getRenderManager();
-        quaternion1.conjugate();
-        entityrenderermanager.setCameraOrientation(quaternion1);
+        quaternion.mul(quaternion1);
+        matrixstack.mulPose(quaternion);
+        float f2 = livingEntity.yBodyRot;
+        float f3 = livingEntity.yRot;
+        float f4 = livingEntity.xRot;
+        float f5 = livingEntity.yHeadRotO;
+        float f6 = livingEntity.yHeadRot;
+        livingEntity.yBodyRot = 180 + f * 20.0F;
+        livingEntity.yRot = 180 + f * 40.0F;
+        livingEntity.xRot = -f1 * 20.0F;
+        livingEntity.yHeadRot = livingEntity.yRot;
+        livingEntity.yHeadRotO = livingEntity.yRot;
+        EntityRenderDispatcher entityrenderermanager = Minecraft.getInstance().getEntityRenderDispatcher();
+        quaternion1.conj();
+        entityrenderermanager.overrideCameraOrientation(quaternion1);
         entityrenderermanager.setRenderShadow(false);
-        IRenderTypeBuffer.Impl irendertypebuffer$impl = Minecraft.getInstance().getRenderTypeBuffers().getBufferSource();
+        MultiBufferSource.BufferSource irendertypebuffer$impl = Minecraft.getInstance().renderBuffers().bufferSource();
         RenderSystem.runAsFancy(() -> {
-            entityrenderermanager.renderEntityStatic(livingEntity, 0.0D, 0.0D, 0.0D, 0.0F, 1.0F,
+            entityrenderermanager.render(livingEntity, 0.0D, 0.0D, 0.0D, 0.0F, 1.0F,
                     matrixstack, irendertypebuffer$impl, 15728880);
         });
-        irendertypebuffer$impl.finish();
+        irendertypebuffer$impl.endBatch();
         entityrenderermanager.setRenderShadow(true);
-        livingEntity.renderYawOffset = f2;
-        livingEntity.rotationYaw = f3;
-        livingEntity.rotationPitch = f4;
-        livingEntity.prevRotationYawHead = f5;
-        livingEntity.rotationYawHead = f6;
+        livingEntity.yBodyRot = f2;
+        livingEntity.yRot = f3;
+        livingEntity.xRot = f4;
+        livingEntity.yHeadRotO = f5;
+        livingEntity.yHeadRot = f6;
         RenderSystem.popMatrix();
     }
 
 
-    public void drawStats(MatrixStack stack, int x, int y){
-        ITextComponent health = new TranslationTextComponent("screens.gempire.health");
-        this.font.func_243248_b(stack, new StringTextComponent(health.getString() + ": " + (int)this.container.gem.getHealth()
-                + " / " + (int)this.container.gem.getMaxHealth()), x + 10, y + 97, 4210752);
+    public void drawStats(PoseStack stack, int x, int y){
+        Component health = new TranslatableComponent("screens.gempire.health");
+        this.font.draw(stack, new TextComponent(health.getString() + ": " + (int)this.menu.gem.getHealth()
+                + " / " + (int)this.menu.gem.getMaxHealth()), x + 10, y + 97, 4210752);
     }
 
-    public void drawAbilityList(MatrixStack stack, int x, int y){
-        ArrayList<Ability> powers1 = this.container.gem.findAbilities(this.container.gem.getAbilites());
+    public void drawAbilityList(PoseStack stack, int x, int y){
+        ArrayList<Ability> powers1 = this.menu.gem.findAbilities(this.menu.gem.getAbilites());
         ArrayList<Ability> powers = new ArrayList<>();
         for(Ability ability : powers1){
             if(!(ability instanceof AbilityZilch)){
@@ -233,8 +233,8 @@ public class PearlUIScreen extends ContainerScreen<PearlUIContainer> {
             }
         }
         for(int i = 0; i < powers.size(); i++){
-            ITextComponent text = powers.get(i).getName();
-            this.font.func_243248_b(stack, text, x, y + i * 9, 4210752);
+            Component text = powers.get(i).getName();
+            this.font.draw(stack, text, x, y + i * 9, 4210752);
         }
     }
 }

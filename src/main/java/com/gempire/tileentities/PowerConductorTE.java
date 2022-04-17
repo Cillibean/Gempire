@@ -3,17 +3,17 @@ package com.gempire.tileentities;
 import com.gempire.systems.machine.Battery;
 import com.gempire.systems.machine.interfaces.IPowerConductor;
 import net.minecraft.tileentity.ITickableTileEntity;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 
 public class PowerConductorTE extends PowerProviderTE implements IPowerConductor {
 
-    public PowerConductorTE(TileEntityType<?> tileEntityTypeIn) {
+    public PowerConductorTE(BlockEntityType<?> tileEntityTypeIn) {
         super(tileEntityTypeIn);
     }
 
     @Override
-    public TileEntity getTE() {
+    public BlockEntity getTE() {
         return this;
     }
 

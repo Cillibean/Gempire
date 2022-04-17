@@ -1,9 +1,9 @@
 package com.gempire.systems.machine.interfaces;
 
 import com.gempire.tileentities.ShellTE;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.core.Direction;
+import net.minecraft.core.BlockPos;
 
 import java.util.ArrayList;
 
@@ -13,9 +13,9 @@ public interface IPowerConductor extends IPowerProvider {
             return true;
         }
         for(Direction direction : getPowerSocketDirections()){
-            BlockPos otherConductorPosition = getTE().getPos().offset(direction);
-            if(getTE().getWorld().getTileEntity(otherConductorPosition) instanceof IPowerProvider){
-                IPowerProvider otherConductor = (IPowerProvider) getTE().getWorld().getTileEntity(otherConductorPosition);
+            BlockPos otherConductorPosition = getTE().getBlockPos().relative(direction);
+            if(getTE().getLevel().getBlockEntity(otherConductorPosition) instanceof IPowerProvider){
+                IPowerProvider otherConductor = (IPowerProvider) getTE().getLevel().getBlockEntity(otherConductorPosition);
                 if(otherConductor.getVoltage() > getVoltage() || otherConductor.isSource()){
                     return true;
                 }
@@ -31,9 +31,9 @@ public interface IPowerConductor extends IPowerProvider {
             if(this instanceof ShellTE) {
                 System.out.println(direction);
             }
-            BlockPos otherConductorPosition = getTE().getPos().offset(direction);
-            if(getTE().getWorld().getTileEntity(otherConductorPosition) instanceof IPowerProvider){
-                IPowerProvider otherConductor = (IPowerProvider) getTE().getWorld().getTileEntity(otherConductorPosition);
+            BlockPos otherConductorPosition = getTE().getBlockPos().relative(direction);
+            if(getTE().getLevel().getBlockEntity(otherConductorPosition) instanceof IPowerProvider){
+                IPowerProvider otherConductor = (IPowerProvider) getTE().getLevel().getBlockEntity(otherConductorPosition);
                 if(otherConductor.getBattery().getCharge() == p){
                     powerProvider = otherConductor;
                 }
@@ -45,9 +45,9 @@ public interface IPowerConductor extends IPowerProvider {
     default float getHighestSurroundingVoltage(){
         float v = 0;
         for(Direction direction : getPowerSocketDirections()){
-            BlockPos otherConductorPosition = getTE().getPos().offset(direction);
-            if(getTE().getWorld().getTileEntity(otherConductorPosition) instanceof IPowerProvider && !(getTE().getWorld().getTileEntity(otherConductorPosition) instanceof IPowerConsumer)){
-                IPowerProvider otherConductor = (IPowerProvider) getTE().getWorld().getTileEntity(otherConductorPosition);
+            BlockPos otherConductorPosition = getTE().getBlockPos().relative(direction);
+            if(getTE().getLevel().getBlockEntity(otherConductorPosition) instanceof IPowerProvider && !(getTE().getLevel().getBlockEntity(otherConductorPosition) instanceof IPowerConsumer)){
+                IPowerProvider otherConductor = (IPowerProvider) getTE().getLevel().getBlockEntity(otherConductorPosition);
                 v = otherConductor.getVoltage() > v ? otherConductor.getVoltage() : v;
             }
         }
@@ -57,9 +57,9 @@ public interface IPowerConductor extends IPowerProvider {
     default float getHighestSurroundingPower(){
         float p = 0;
         for(Direction direction : getPowerSocketDirections()){
-            BlockPos otherConductorPosition = getTE().getPos().offset(direction);
-            if(getTE().getWorld().getTileEntity(otherConductorPosition) instanceof IPowerProvider && !(getTE().getWorld().getTileEntity(otherConductorPosition) instanceof IPowerConsumer)){
-                IPowerProvider otherConductor = (IPowerProvider) getTE().getWorld().getTileEntity(otherConductorPosition);
+            BlockPos otherConductorPosition = getTE().getBlockPos().relative(direction);
+            if(getTE().getLevel().getBlockEntity(otherConductorPosition) instanceof IPowerProvider && !(getTE().getLevel().getBlockEntity(otherConductorPosition) instanceof IPowerConsumer)){
+                IPowerProvider otherConductor = (IPowerProvider) getTE().getLevel().getBlockEntity(otherConductorPosition);
                 p = otherConductor.getBattery().getCharge() > p ? otherConductor.getBattery().getCharge() : p;
             }
         }
@@ -108,15 +108,15 @@ public interface IPowerConductor extends IPowerProvider {
         }
         if(getVoltage() <= 0){
             getBattery().setCharge(0);
-            getTE().getWorld().notifyBlockUpdate(getTE().getPos(), getTE().getBlockState(), getTE().getBlockState(), 2);
-            getTE().markDirty();
+            getTE().getLevel().sendBlockUpdated(getTE().getBlockPos(), getTE().getBlockState(), getTE().getBlockState(), 2);
+            getTE().setChanged();
         }
         else{
             if(getBattery().getCharge() < getBattery().getMaxCapacity()) {
                 getBattery().chargeBattery(amount);
                 provider.getBattery().dischargeBattery(amount);
-                getTE().getWorld().notifyBlockUpdate(getTE().getPos(), getTE().getBlockState(), getTE().getBlockState(), 2);
-                getTE().markDirty();
+                getTE().getLevel().sendBlockUpdated(getTE().getBlockPos(), getTE().getBlockState(), getTE().getBlockState(), 2);
+                getTE().setChanged();
             }
         }
     }
@@ -129,7 +129,7 @@ public interface IPowerConductor extends IPowerProvider {
         addTick();
     }
 
-    TileEntity getTE();
+    BlockEntity getTE();
 
     default int drawTicks(){
         return 5;

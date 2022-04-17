@@ -6,23 +6,23 @@ import com.gempire.events.GemFormEvent;
 import com.gempire.init.AddonHandler;
 import com.gempire.init.ModEntities;
 import com.gempire.init.ModItems;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.item.ItemEntity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.entity.passive.PandaEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemUseContext;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.particles.ParticleTypes;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Direction;
-import net.minecraft.util.Hand;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.core.Direction;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.util.math.*;
-import net.minecraft.world.IServerWorld;
-import net.minecraft.world.World;
+import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.RegistryObject;
 import org.apache.commons.lang3.ArrayUtils;
@@ -32,6 +32,14 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
+
+import net.minecraft.world.item.Item.Properties;
+
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.Mth;
+import net.minecraft.world.level.ClipContext;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult;
 
 public class ItemGem extends Item {
     public String ID = "";
@@ -45,56 +53,56 @@ public class ItemGem extends Item {
     }
 
     public ItemGem(Properties properties, String ID) {
-        super(properties.maxDamage(100).setNoRepair());
+        super(properties.durability(100).setNoRepair());
         this.ID = ID;
     }
 
     @Override
-    public boolean hasEffect(ItemStack stack) {
-        return super.hasEffect(stack) || stack.getItem() == ModItems.NACRE_GEM.get();
+    public boolean isFoil(ItemStack stack) {
+        return super.isFoil(stack) || stack.getItem() == ModItems.NACRE_GEM.get();
     }
 
     @Nonnull
     @Override
-    public ActionResultType onItemUse(ItemUseContext context) {
-        return ActionResultType.PASS;
+    public InteractionResult useOn(UseOnContext context) {
+        return InteractionResult.PASS;
     }
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
+    public InteractionResultHolder<ItemStack> use(Level worldIn, Player playerIn, InteractionHand handIn) {
         boolean spawned = false;
-        if(!worldIn.isRemote) {
-            ItemStack itemstack = playerIn.getHeldItem(handIn);
-            RayTraceResult raytraceresult = this.rayTrace(worldIn, playerIn, RayTraceContext.FluidMode.NONE);
-            if (raytraceresult.getType() == RayTraceResult.Type.MISS) {
-                return super.onItemRightClick(worldIn, playerIn, handIn);
+        if(!worldIn.isClientSide) {
+            ItemStack itemstack = playerIn.getItemInHand(handIn);
+            HitResult raytraceresult = this.getPlayerPOVHitResult(worldIn, playerIn, ClipContext.Fluid.NONE);
+            if (raytraceresult.getType() == HitResult.Type.MISS) {
+                return super.use(worldIn, playerIn, handIn);
             } else {
-                if (raytraceresult.getType() == RayTraceResult.Type.BLOCK) {
-                    BlockRayTraceResult blockraytraceresult = (BlockRayTraceResult) raytraceresult;
-                    BlockPos blockpos = blockraytraceresult.getPos();
-                    Direction direction = blockraytraceresult.getFace();
-                    if (!worldIn.isBlockModifiable(playerIn, blockpos) || !playerIn.canPlayerEdit(blockpos.offset(direction), direction, itemstack)) {
-                        return super.onItemRightClick(worldIn, playerIn, handIn);
+                if (raytraceresult.getType() == HitResult.Type.BLOCK) {
+                    BlockHitResult blockraytraceresult = (BlockHitResult) raytraceresult;
+                    BlockPos blockpos = blockraytraceresult.getBlockPos();
+                    Direction direction = blockraytraceresult.getDirection();
+                    if (!worldIn.mayInteract(playerIn, blockpos) || !playerIn.mayUseItemAt(blockpos.relative(direction), direction, itemstack)) {
+                        return super.use(worldIn, playerIn, handIn);
                     }
 
-                    if (worldIn.isBlockModifiable(playerIn, blockpos) && playerIn.canPlayerEdit(blockpos, blockraytraceresult.getFace(), itemstack)) {
+                    if (worldIn.mayInteract(playerIn, blockpos) && playerIn.mayUseItemAt(blockpos, blockraytraceresult.getDirection(), itemstack)) {
                         spawned = this.formGem(worldIn, playerIn, blockpos, itemstack, null);
                     }
                 }
                 //Problem with the claiming of gems ??
                 if (!playerIn.isCreative() && spawned) {
-                    playerIn.getHeldItemMainhand().shrink(1);
+                    playerIn.getMainHandItem().shrink(1);
                 }
             }
         }
-        return super.onItemRightClick(worldIn, playerIn, handIn);
+        return super.use(worldIn, playerIn, handIn);
     }
 
     //TODO: A lot needs fixing here
 
     //(?i) means case sensitive
-    public boolean formGem(World world, @Nullable PlayerEntity player, BlockPos pos, ItemStack stack, @Nullable ItemEntity item) {
-        if (!world.isRemote) {
+    public boolean formGem(Level world, @Nullable Player player, BlockPos pos, ItemStack stack, @Nullable ItemEntity item) {
+        if (!world.isClientSide) {
             RegistryObject<EntityType<EntityPebble>> gemm = ModEntities.PEBBLE;
             String skinColorVariant = "";
             EntityGem gem = gemm.get().create(world);
@@ -136,7 +144,7 @@ public class ItemGem extends Item {
                     gemm = (RegistryObject<EntityType<EntityPebble>>) AddonHandler.ADDON_ENTITY_REGISTRIES.get(this.ID).getField(namee.toUpperCase()).get(null);
                 }
                 gem = gemm.get().create(world);
-                gem.setUniqueId(MathHelper.getRandomUUID(world.rand));
+                gem.setUUID(Mth.createInsecureUUID(world.random));
             } catch(Exception e){
                 e.printStackTrace();
             }
@@ -144,34 +152,34 @@ public class ItemGem extends Item {
                 if(item != null){
                     gem.spawnGem = item;
                 }
-                gem.read(stack.getTag());
+                gem.load(stack.getTag());
             } catch (Exception e){
                 if(ainmneacha.length > 1) {
                     gem.setSkinVariantOnInitialSpawn = false;
                     gem.initalSkinVariant = Integer.valueOf(skinColorVariant);
                 }
                 if(player != null) {
-                    gem.onInitialSpawn((IServerWorld) world, world.getDifficultyForLocation(player.getPosition()), SpawnReason.TRIGGERED, null, null);
-                    gem.addOwner(player.getUniqueID());
-                    gem.FOLLOW_ID = player.getUniqueID();
+                    gem.finalizeSpawn((ServerLevelAccessor) world, world.getCurrentDifficultyAt(player.blockPosition()), MobSpawnType.TRIGGERED, null, null);
+                    gem.addOwner(player.getUUID());
+                    gem.FOLLOW_ID = player.getUUID();
                     gem.setMovementType((byte) 2);
                 }
                 else{
                     if(item != null){
                         gem.spawnGem = item;
                     }
-                    gem.onInitialSpawn((IServerWorld) world, world.getDifficultyForLocation(item.getPosition()), SpawnReason.MOB_SUMMONED, null, null);
+                    gem.finalizeSpawn((ServerLevelAccessor) world, world.getCurrentDifficultyAt(item.blockPosition()), MobSpawnType.MOB_SUMMONED, null, null);
                 }
             }
-            gem.setPosition(pos.getX() + 0.5, pos.getY() + 1.0, pos.getZ() + 0.5);
+            gem.setPos(pos.getX() + 0.5, pos.getY() + 1.0, pos.getZ() + 0.5);
             gem.setHealth(gem.getMaxHealth());
-            gem.extinguish();
-            gem.clearActivePotions();
-            gem.setMotion(0, 0 ,0);
+            gem.clearFire();
+            gem.removeAllEffects();
+            gem.setDeltaMovement(0, 0 ,0);
             gem.fallDistance = 0;
-            GemFormEvent event = new GemFormEvent(gem, gem.getPosition());
+            GemFormEvent event = new GemFormEvent(gem, gem.blockPosition());
             MinecraftForge.EVENT_BUS.post(event);
-            world.addEntity(gem);
+            world.addFreshEntity(gem);
             System.out.println(gem.getGemPlacementE());
             return true;
         }
@@ -179,7 +187,7 @@ public class ItemGem extends Item {
     }
 
     public void setData(EntityGem host, ItemStack stack) {
-        stack.setTag(host.writeWithoutTypeId(new CompoundNBT()));
+        stack.setTag(host.saveWithoutId(new CompoundTag()));
         stack.getTag().putString("name", host.getName().getString());
     }
 
@@ -190,7 +198,7 @@ public class ItemGem extends Item {
     }
 
     public void clearData(ItemStack stack) {
-        stack.setTag(new CompoundNBT());
+        stack.setTag(new CompoundTag());
     }
 
     public void Countdown(ItemStack stack, ItemEntity entity){
@@ -200,12 +208,12 @@ public class ItemGem extends Item {
                 float f = (this.rand.nextFloat() - 0.5F) * 2.0F;
                 float f1 = (this.rand.nextFloat() - 0.5F) * 2.0F;
                 float f2 = (this.rand.nextFloat() - 0.5F) * 2.0F;
-                entity.world.addParticle(ParticleTypes.EXPLOSION, entity.getPosX() + (double)f, entity.getPosY() + 2.0D + (double)f1, entity.getPosZ() + (double)f2, 0.0D, 0.0D, 0.0D);
+                entity.level.addParticle(ParticleTypes.EXPLOSION, entity.getX() + (double)f, entity.getY() + 2.0D + (double)f1, entity.getZ() + (double)f2, 0.0D, 0.0D, 0.0D);
             }
             this.countdown--;
         }
         else{
-            this.formGem(entity.world, null, entity.getPosition(), stack, entity);
+            this.formGem(entity.level, null, entity.blockPosition(), stack, entity);
             this.countdown = this.coundownMax;
         }
     }

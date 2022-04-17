@@ -16,22 +16,22 @@ import net.minecraft.block.*;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.item.TNTEntity;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SUpdateTileEntityPacket;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.Connection;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.tileentity.ITickableTileEntity;
-import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.level.block.entity.TickableBlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.core.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.Explosion;
-import net.minecraft.world.World;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.RegistryObject;
 
@@ -42,7 +42,16 @@ import java.util.Random;
 import java.util.Set;
 import java.util.function.Supplier;
 
-public class GemSeedTE extends TileEntity implements ITickableTileEntity {
+import net.minecraft.world.level.block.AirBlock;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.BushBlock;
+import net.minecraft.world.level.block.LiquidBlock;
+import net.minecraft.world.level.block.SlabBlock;
+import net.minecraft.world.level.block.SnowLayerBlock;
+import net.minecraft.world.level.block.state.BlockState;
+
+public class GemSeedTE extends BlockEntity implements TickableBlockEntity {
     Random random;
     boolean spawned = false;
     public int ticks = 0;
@@ -82,7 +91,7 @@ public class GemSeedTE extends TileEntity implements ITickableTileEntity {
     public void tick() {
         //System.out.println("Gem List is of size: " + GemFormation.POSSIBLE_GEMS.size());
         if(!this.checked){
-           this.ScanPositions(this.world, this.pos, new BlockPos(DRAIN_SIZE, DRAIN_SIZE, DRAIN_SIZE));
+           this.ScanPositions(this.level, this.worldPosition, new BlockPos(DRAIN_SIZE, DRAIN_SIZE, DRAIN_SIZE));
            this.checked = true;
         }
         if(this.ticks % 20 == 0) {
@@ -91,7 +100,7 @@ public class GemSeedTE extends TileEntity implements ITickableTileEntity {
                     int rando = this.random.nextInt(this.IDS.size());
                     this.DrainBlock(this.POSITIONS.get(this.IDS.get(rando)));
                     this.IDS.remove(rando);
-                    this.markDirty();
+                    this.setChanged();
                 } else {
                     this.spawned = true;
                     for (int i = 0; i < GemFormation.POSSIBLE_GEMS.size(); i++) {
@@ -101,17 +110,17 @@ public class GemSeedTE extends TileEntity implements ITickableTileEntity {
                         }
                         WEIGHTS_OF_GEMS.put(GemFormation.POSSIBLE_GEMS.get(i), weight);
                     }
-                    GemFormation form = new GemFormation(this.world, this.pos, new BlockPos(GemSeedTE.DRAIN_SIZE, GemSeedTE.DRAIN_SIZE, GemSeedTE.DRAIN_SIZE), this.chroma, this.primer, this.essences, this.facing, this.WEIGHTS_OF_GEMS, this.totalWeight);
+                    GemFormation form = new GemFormation(this.level, this.worldPosition, new BlockPos(GemSeedTE.DRAIN_SIZE, GemSeedTE.DRAIN_SIZE, GemSeedTE.DRAIN_SIZE), this.chroma, this.primer, this.essences, this.facing, this.WEIGHTS_OF_GEMS, this.totalWeight);
                     form.SpawnGem();
-                    this.world.notifyBlockUpdate(this.getPos(), this.getBlockState(), this.getBlockState(), 2);
-                    this.markDirty();
+                    this.level.sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), 2);
+                    this.setChanged();
                 }
             }
         }
         this.ticks++;
     }
 
-    public void ScanPositions(World domhain, BlockPos position, BlockPos volume) {
+    public void ScanPositions(Level domhain, BlockPos position, BlockPos volume) {
         int id = 0;
         float xo = GemFormation.getHalfMiddleOffsetRight(volume.getX());
         float yo = GemFormation.getHalfMiddleOffsetRight(volume.getY());
@@ -119,8 +128,8 @@ public class GemSeedTE extends TileEntity implements ITickableTileEntity {
         for (int z = GemFormation.getHalfMiddleOffsetLeft(volume.getZ()); z < zo; z++) {
             for (int y = GemFormation.getHalfMiddleOffsetLeft(volume.getY()); y < yo; y++) {
                 for (int x = GemFormation.getHalfMiddleOffsetLeft(volume.getX()); x < xo; x++) {
-                    BlockPos block = position.add(new BlockPos(x, y, z));
-                    if (domhain.getBlockState(block).getBlock() instanceof FlowingFluidBlock || domhain.getBlockState(block).getBlock() instanceof AirBlock || World.isOutsideBuildHeight(block)) {
+                    BlockPos block = position.offset(new BlockPos(x, y, z));
+                    if (domhain.getBlockState(block).getBlock() instanceof LiquidBlock || domhain.getBlockState(block).getBlock() instanceof AirBlock || Level.isOutsideBuildHeight(block)) {
                         continue;
                     } else {
                         if(this.random.nextInt(10) > 3) {
@@ -136,9 +145,9 @@ public class GemSeedTE extends TileEntity implements ITickableTileEntity {
 
     public void DrainBlock(BlockPos blockPos) {
         this.GEM_CONDITIONS = ModEntities.CRUXTOGEM;
-        float BLOCK_TEMPERATURE = this.world.getBiome(this.pos).getTemperature(this.pos);
+        float BLOCK_TEMPERATURE = this.level.getBiome(this.worldPosition).getTemperature(this.worldPosition);
         this.SetDrainedStoneColor(BLOCK_TEMPERATURE);
-        Block block = this.world.getBlockState(blockPos).getBlock();
+        Block block = this.level.getBlockState(blockPos).getBlock();
         if(block instanceof DrainedBlock) return;
         for (int i = 0; i < GemFormation.POSSIBLE_GEMS.size(); i++) {
             String gem = GemFormation.POSSIBLE_GEMS.get(i);
@@ -203,10 +212,10 @@ public class GemSeedTE extends TileEntity implements ITickableTileEntity {
             }
         }
         if(!(block instanceof AirBlock) &&
-                !(block.isTransparent(block.getDefaultState())) &&
+                !(block.useShapeForLightOcclusion(block.defaultBlockState())) &&
                 !(block instanceof SlabBlock) &&
                 !(block instanceof BushBlock) &&
-                !(block instanceof SnowBlock)){
+                !(block instanceof SnowLayerBlock)){
             if(block.getBlock() == ModBlocks.GEM_SEED_BLOCK.get() ||
                     block.getBlock() == ModBlocks.DRILL_BLOCK.get() || block.getBlock() == ModBlocks.TANK_BLOCK.get() ||
                     block.getBlock() == ModBlocks.POWER_CRYSTAL_BLOCK.get()){
@@ -214,26 +223,26 @@ public class GemSeedTE extends TileEntity implements ITickableTileEntity {
             }
             else if(block == Blocks.DIRT || block == Blocks.GRASS_BLOCK || block == Blocks.GRASS_PATH
                     || block == Blocks.GRAVEL){
-                this.world.setBlockState(blockPos, this.drained_soil.getDefaultState());
+                this.level.setBlockAndUpdate(blockPos, this.drained_soil.defaultBlockState());
             }
             else if(block == Blocks.SAND || block == Blocks.RED_SAND || block == Blocks.SOUL_SAND){
-                this.world.setBlockState(blockPos, this.drained_sand.getDefaultState());
+                this.level.setBlockAndUpdate(blockPos, this.drained_sand.defaultBlockState());
             }
             else if(block instanceof BushBlock){
-                this.world.setBlockState(blockPos, Blocks.DEAD_BUSH.getDefaultState());
+                this.level.setBlockAndUpdate(blockPos, Blocks.DEAD_BUSH.defaultBlockState());
             }
             else{
                 if(blockPos.getY() < 80) {
-                    this.world.setBlockState(blockPos, this.drained_stone.getDefaultState());
+                    this.level.setBlockAndUpdate(blockPos, this.drained_stone.defaultBlockState());
                 }
                 else{
-                    this.world.setBlockState(blockPos, this.drained_stone_2.getDefaultState());
+                    this.level.setBlockAndUpdate(blockPos, this.drained_stone_2.defaultBlockState());
                     if(blockPos.getY() % 6 == 0){
-                        this.world.setBlockState(blockPos, this.banded_drained_stone.getDefaultState());
+                        this.level.setBlockAndUpdate(blockPos, this.banded_drained_stone.defaultBlockState());
                     }
                 }
                 if(blockPos.getY() == 80){
-                    this.world.setBlockState(blockPos, this.banded_drained_stone.getDefaultState());
+                    this.level.setBlockAndUpdate(blockPos, this.banded_drained_stone.defaultBlockState());
                 }
             }
         }
@@ -280,8 +289,8 @@ public class GemSeedTE extends TileEntity implements ITickableTileEntity {
 
     public void SetChroma(ItemChroma chroma){
         this.chroma = chroma;
-        this.world.notifyBlockUpdate(this.getPos(), this.getBlockState(), this.getBlockState(), 2);
-        this.markDirty();
+        this.level.sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), 2);
+        this.setChanged();
     }
 
     public ItemChroma getChroma(){
@@ -290,8 +299,8 @@ public class GemSeedTE extends TileEntity implements ITickableTileEntity {
 
     public void SetPrimer(Item primer){
         this.primer = primer;
-        this.world.notifyBlockUpdate(this.getPos(), this.getBlockState(), this.getBlockState(), 2);
-        this.markDirty();
+        this.level.sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), 2);
+        this.setChanged();
     }
 
     public Item getPrimer(){
@@ -300,8 +309,8 @@ public class GemSeedTE extends TileEntity implements ITickableTileEntity {
 
     public void setEssences(String essec){
         this.essences = essec;
-        this.world.notifyBlockUpdate(this.getPos(), this.getBlockState(), this.getBlockState(), 2);
-        this.markDirty();
+        this.level.sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), 2);
+        this.setChanged();
     }
 
     public String getEssences(){
@@ -310,8 +319,8 @@ public class GemSeedTE extends TileEntity implements ITickableTileEntity {
 
     public void setFacing(int facing){
         this.facing = facing;
-        this.world.notifyBlockUpdate(this.getPos(), this.getBlockState(), this.getBlockState(), 2);
-        this.markDirty();
+        this.level.sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), 2);
+        this.setChanged();
     }
 
     public int getFacing(){
@@ -319,12 +328,12 @@ public class GemSeedTE extends TileEntity implements ITickableTileEntity {
     }
 
     @Override
-    public CompoundNBT write(CompoundNBT compound) {
-        super.write(compound);
+    public CompoundTag save(CompoundTag compound) {
+        super.save(compound);
         compound.putInt("stage", this.stage);
         compound.putBoolean("spawned", this.spawned);
-        compound.put("chroma", new ItemStack(this.chroma).write(new CompoundNBT()));
-        compound.put("primer", new ItemStack(this.primer).write(new CompoundNBT()));
+        compound.put("chroma", new ItemStack(this.chroma).save(new CompoundTag()));
+        compound.put("primer", new ItemStack(this.primer).save(new CompoundTag()));
         compound.putString("essences", this.essences);
         compound.putInt("facing", this.facing);
         compound.putBoolean("checked", this.checked);
@@ -365,14 +374,14 @@ public class GemSeedTE extends TileEntity implements ITickableTileEntity {
     }
 
     @Override
-    public void read(BlockState state, CompoundNBT nbt) {
-        super.read(state, nbt);
+    public void load(BlockState state, CompoundTag nbt) {
+        super.load(state, nbt);
         this.GEM_CONDITIONS = ModEntities.CRUXTOGEM;
         this.stage = nbt.getInt("stage");
         this.spawned = nbt.getBoolean("spawned");
-        ItemStack chroma = ItemStack.read(nbt.getCompound("chroma"));
+        ItemStack chroma = ItemStack.of(nbt.getCompound("chroma"));
         this.chroma = (ItemChroma)chroma.getItem();
-        ItemStack primer = ItemStack.read(nbt.getCompound("primer"));
+        ItemStack primer = ItemStack.of(nbt.getCompound("primer"));
         this.primer = primer.getItem();
         String fluids = nbt.getString("essences");
         this.essences = fluids;
@@ -386,21 +395,21 @@ public class GemSeedTE extends TileEntity implements ITickableTileEntity {
         this.setPOSITIONS(nbt);
     }
 
-    public void setIDS(CompoundNBT nbt){
+    public void setIDS(CompoundTag nbt){
         int[] TEMPIDS = nbt.getIntArray("IDS");
         for(int i = 0; i < TEMPIDS.length; i++){
             this.IDS.add(i, TEMPIDS[i]);
         }
     }
 
-    public void setTEMPORARY_WEIGHTS(CompoundNBT nbt){
+    public void setTEMPORARY_WEIGHTS(CompoundTag nbt){
         if(this.TEMPORARY_WEIGHTS.size() == GemFormation.POSSIBLE_GEMS.size())for(int i = 0; i < GemFormation.POSSIBLE_GEMS.size(); i++){
             float weight = nbt.getFloat(GemFormation.POSSIBLE_GEMS.get(i) + "_weight");
             this.TEMPORARY_WEIGHTS.get(i).add(weight);
         }
     }
 
-    public void setPOSITIONS(CompoundNBT nbt){
+    public void setPOSITIONS(CompoundTag nbt){
         for(int i = 0; i < nbt.getIntArray("xs").length; i++){
             int[] xs = nbt.getIntArray("xs");
             int[] ys = nbt.getIntArray("ys");
@@ -446,28 +455,28 @@ public class GemSeedTE extends TileEntity implements ITickableTileEntity {
     }
 
     @Override
-    public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
+    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
         //Debug
         System.out.println("[DEBUG]:Client recived tile sync packet");
-        this.read(this.world.getBlockState(pkt.getPos()), pkt.getNbtCompound());
+        this.load(this.level.getBlockState(pkt.getPos()), pkt.getTag());
     }
 
     @Override
-    public CompoundNBT getUpdateTag() {
-        return this.write(new CompoundNBT());
+    public CompoundTag getUpdateTag() {
+        return this.save(new CompoundTag());
     }
 
     @Nullable
     @Override
-    public SUpdateTileEntityPacket getUpdatePacket() {
+    public ClientboundBlockEntityDataPacket getUpdatePacket() {
         //Debug
         System.out.println("[DEBUG]:Server sent tile sync packet");
-        return new SUpdateTileEntityPacket(this.pos, -1, this.getUpdateTag());
+        return new ClientboundBlockEntityDataPacket(this.worldPosition, -1, this.getUpdateTag());
     }
 
     @Override
-    public void handleUpdateTag(BlockState state, CompoundNBT tag) {
+    public void handleUpdateTag(BlockState state, CompoundTag tag) {
         System.out.println("[DEBUG]:Handling tag on chunk load");
-        this.read(state, tag);
+        this.load(state, tag);
     }
 }

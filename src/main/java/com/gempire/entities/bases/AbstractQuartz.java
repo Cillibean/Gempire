@@ -4,18 +4,9 @@ import com.gempire.util.Abilities;
 import com.gempire.util.Color;
 import com.gempire.util.GemPlacements;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.CreatureEntity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.ILivingEntityData;
-import net.minecraft.entity.SpawnReason;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.DifficultyInstance;
-import net.minecraft.world.IServerWorld;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.PathfinderMob;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.level.Level;
 
 import javax.annotation.Nullable;
 import javax.imageio.ImageIO;
@@ -25,7 +16,7 @@ import java.util.ArrayList;
 
 public abstract class AbstractQuartz extends EntityVaryingGem {
 
-    public AbstractQuartz(EntityType<? extends CreatureEntity> type, World worldIn) {
+    public AbstractQuartz(EntityType<? extends PathfinderMob> type, Level worldIn) {
         super(type, worldIn);
     }
 

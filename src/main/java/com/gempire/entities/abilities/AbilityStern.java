@@ -6,14 +6,13 @@ import com.gempire.entities.abilities.interfaces.IEffectAbility;
 import com.gempire.entities.abilities.interfaces.IViolentAbility;
 import com.gempire.entities.bases.EntityGem;
 import com.gempire.util.Abilities;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraftforge.event.world.NoteBlockEvent;
 import org.lwjgl.system.CallbackI;
 
@@ -29,9 +28,9 @@ public class AbilityStern extends Ability implements IAreaAbility, IEffectAbilit
 
     @Override
     public void AOeffect() {
-        ArrayList<EntityGem> entities = new ArrayList<>(this.holder.world.getEntitiesWithinAABB(EntityGem.class,
-                new AxisAlignedBB(this.holder.getPosX(), this.holder.getPosY(), this.holder.getPosZ(), this.holder.getPosX() + 1, this.holder.getPosY() + 1 , this.holder.getPosZ() + 1)
-                .grow(16, this.holder.world.getHeight(), 16)));
+        ArrayList<EntityGem> entities = new ArrayList<>(this.holder.level.getEntitiesOfClass(EntityGem.class,
+                new AABB(this.holder.getX(), this.holder.getY(), this.holder.getZ(), this.holder.getX() + 1, this.holder.getY() + 1 , this.holder.getZ() + 1)
+                .inflate(16, this.holder.level.getMaxBuildHeight(), 16)));
         for(int i = 0; i < entities.size(); i++){
             EntityGem gem = entities.get(i);
             if(EntityGem.sharesOwners(gem, this.holder)) {
@@ -41,18 +40,18 @@ public class AbilityStern extends Ability implements IAreaAbility, IEffectAbilit
     }
 
     @Override
-    public EffectInstance effect() {
-        return new EffectInstance(Effects.NIGHT_VISION, 400, 1);
+    public MobEffectInstance effect() {
+        return new MobEffectInstance(MobEffects.NIGHT_VISION, 400, 1);
     }
     @Override
-    public ITextComponent getName() {
-        return new TranslationTextComponent("ability.gempire.stern");
+    public Component getName() {
+        return new TranslatableComponent("ability.gempire.stern");
     }
 
     @Override
     public Class<LivingEntity>[] applicableEntities() {
         return new Class[]{
-                EntityGem.class, PlayerEntity.class
+                EntityGem.class, Player.class
         };
     }
 }

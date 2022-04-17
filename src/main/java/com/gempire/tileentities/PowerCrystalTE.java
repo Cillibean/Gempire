@@ -7,14 +7,14 @@ import com.gempire.systems.machine.MachineSide;
 import com.gempire.systems.machine.Socket;
 import com.gempire.util.Debug;
 import net.minecraft.block.Blocks;
-import net.minecraft.tileentity.ITickableTileEntity;
-import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.level.block.entity.TickableBlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.util.math.AxisAlignedBB;
 
 import java.util.List;
 import java.util.Random;
 
-public class PowerCrystalTE extends PowerGeneratorTE implements ITickableTileEntity {
+public class PowerCrystalTE extends PowerGeneratorTE implements TickableBlockEntity {
 
     public PowerCrystalTE() {
         super(ModTE.POWER_CRYSTAL_TE.get());
@@ -36,7 +36,7 @@ public class PowerCrystalTE extends PowerGeneratorTE implements ITickableTileEnt
     @Override
     public void generatePower() {
         Random rand = new Random();
-        if(getWorld().isDaytime()) {
+        if(getLevel().isDay()) {
             getBattery().chargeBattery(1);
         }
         /*if(rand.nextInt(12000) == 0){
@@ -53,7 +53,7 @@ public class PowerCrystalTE extends PowerGeneratorTE implements ITickableTileEnt
     }
 
     @Override
-    public TileEntity getTE() {
+    public BlockEntity getTE() {
         return this;
     }
 }

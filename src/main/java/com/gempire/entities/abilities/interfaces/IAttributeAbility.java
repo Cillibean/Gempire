@@ -1,6 +1,6 @@
 package com.gempire.entities.abilities.interfaces;
 
-import net.minecraft.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.Attribute;
 
 public interface IAttributeAbility {
     Attribute attribute();

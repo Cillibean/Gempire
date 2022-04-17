@@ -1,9 +1,9 @@
 package com.gempire.networking;
 
 import com.gempire.entities.gems.EntityPearl;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.network.PacketBuffer;
-import net.minecraftforge.fml.network.NetworkEvent;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraftforge.fmllegacy.network.NetworkEvent;
 
 import java.util.function.Supplier;
 
@@ -16,23 +16,23 @@ public class C2SRequestHairChange {
         this.forward = forward;
     }
 
-    public static C2SRequestHairChange decode(PacketBuffer buffer) {
+    public static C2SRequestHairChange decode(FriendlyByteBuf buffer) {
         final int entityID = buffer.readInt();
         final boolean forward = buffer.readBoolean();
         return new C2SRequestHairChange(entityID, forward);
     }
 
-    public static void encode(C2SRequestHairChange msg, PacketBuffer buffer) {
+    public static void encode(C2SRequestHairChange msg, FriendlyByteBuf buffer) {
         buffer.writeInt(msg.entityID);
         buffer.writeBoolean(msg.forward);
     }
 
     public static void handle(final C2SRequestHairChange msg, final Supplier<NetworkEvent.Context> contextSupplier) {
         NetworkEvent.Context ctx = contextSupplier.get();
-        ServerPlayerEntity sender = ctx.getSender();
+        ServerPlayer sender = ctx.getSender();
         boolean hasPermission = true;
         if (hasPermission) {
-            EntityPearl gem = (EntityPearl) sender.world.getEntityByID(msg.entityID);
+            EntityPearl gem = (EntityPearl) sender.level.getEntity(msg.entityID);
             boolean forwardd = msg.forward;
             if(forwardd){
                 gem.CycleHairForward();

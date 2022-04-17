@@ -3,7 +3,7 @@ package com.gempire.init;
 import com.gempire.commands.CommandBase;
 import com.gempire.commands.impl.*;
 import com.mojang.brigadier.CommandDispatcher;
-import net.minecraft.command.CommandSource;
+import net.minecraft.commands.CommandSourceStack;
 import net.minecraftforge.event.RegisterCommandsEvent;
 
 import java.util.ArrayList;
@@ -12,7 +12,7 @@ public class ModCommands {
     public static final ArrayList<CommandBase> COMMANDS = new ArrayList<>();
 
     public static void registerCommands(final RegisterCommandsEvent event){
-        CommandDispatcher<CommandSource> dispatcher = event.getDispatcher();
+        CommandDispatcher<CommandSourceStack> dispatcher = event.getDispatcher();
 
         COMMANDS.add(new CommandGempireLocate("scoutlocate", 0, true));
         COMMANDS.add(new CommandGempireLocateBiome("scoutlocatebiome", 0, true));

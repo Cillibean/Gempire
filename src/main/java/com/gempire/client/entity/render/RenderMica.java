@@ -5,16 +5,16 @@ import com.gempire.client.entity.model.ModelPebble;
 import com.gempire.client.entity.render.layers.*;
 import com.gempire.entities.gems.EntityJasper;
 import com.gempire.entities.gems.starter.EntityMica;
-import com.mojang.blaze3d.matrix.MatrixStack;
-import net.minecraft.client.renderer.IRenderTypeBuffer;
-import net.minecraft.client.renderer.entity.EntityRendererManager;
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.network.chat.Component;
 
 public class RenderMica extends MobRenderer<EntityMica, ModelPebble<EntityMica>> {
 
-    public RenderMica(EntityRendererManager renderManagerIn) {
+    public RenderMica(EntityRenderDispatcher renderManagerIn) {
         super(renderManagerIn, new ModelPebble<>(), .1f);
         this.addLayer(new SkinLayer(this));
         this.addLayer(new PebbleFaceLayer(this));
@@ -25,19 +25,19 @@ public class RenderMica extends MobRenderer<EntityMica, ModelPebble<EntityMica>>
     }
 
     @Override
-    protected void preRenderCallback(EntityMica entitylivingbaseIn, MatrixStack matrixStackIn, float partialTickTime) {
+    protected void scale(EntityMica entitylivingbaseIn, PoseStack matrixStackIn, float partialTickTime) {
         matrixStackIn.scale(0.2f, 0.2f, 0.2f);
-        super.preRenderCallback(entitylivingbaseIn, matrixStackIn, partialTickTime);
+        super.scale(entitylivingbaseIn, matrixStackIn, partialTickTime);
     }
 
     @Override
-    public ResourceLocation getEntityTexture(EntityMica entity) {
+    public ResourceLocation getTextureLocation(EntityMica entity) {
         if(entity.getHairVariant() == 1) return new ResourceLocation(Gempire.MODID+":textures/entity/mica/blank_1.png");
         else if(entity.getHairVariant() == 2) return new ResourceLocation(Gempire.MODID+":textures/entity/mica/blank_2.png");
         else return new ResourceLocation(Gempire.MODID+":textures/entity/mica/blank.png");
     }
     @Override
-    protected void renderName(EntityMica entityIn, ITextComponent displayNameIn, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn) {
-        super.renderName(entityIn, displayNameIn, matrixStackIn, bufferIn, packedLightIn);
+    protected void renderNameTag(EntityMica entityIn, Component displayNameIn, PoseStack matrixStackIn, MultiBufferSource bufferIn, int packedLightIn) {
+        super.renderNameTag(entityIn, displayNameIn, matrixStackIn, bufferIn, packedLightIn);
     }
 }

@@ -1,8 +1,10 @@
 package com.gempire.blocks;
 
-import net.minecraft.block.Block;
+import net.minecraft.world.level.block.Block;
 
 import java.util.List;
+
+import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 
 public class TestBlock extends Block {
 

@@ -1,9 +1,8 @@
 package com.gempire.entities.abilities.interfaces;
 
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 
 import javax.annotation.Nullable;
 
@@ -16,7 +15,7 @@ public interface IAlchemyAbility {
     default Item consume(){
         return Items.AIR;
     }
-    default boolean doSpecialActionOnInput(@Nullable PlayerEntity player){
+    default boolean doSpecialActionOnInput(@Nullable Player player){
         return true;
     }
 }

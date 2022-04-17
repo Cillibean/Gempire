@@ -3,10 +3,10 @@ package com.gempire.init;
 import com.gempire.entities.abilities.base.Ability;
 import com.gempire.entities.gems.EntityZircon;
 import com.gempire.util.Abilities;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.Enchantments;
-import net.minecraft.item.Item;
-import net.minecraft.item.Items;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,9 +26,9 @@ public class ModEnchants {
 
     public static void registerVanillaEnchantments(){
         ArrayList<Enchantment> enchants = new ArrayList<>();
-        enchants.add(Enchantments.FLAME);
-        enchants.add(Enchantments.FORTUNE);
-        enchants.add(Enchantments.LURE);
+        enchants.add(Enchantments.FLAMING_ARROWS);
+        enchants.add(Enchantments.BLOCK_FORTUNE);
+        enchants.add(Enchantments.FISHING_SPEED);
         enchants.add(Enchantments.RIPTIDE);
         enchants.add(Enchantments.SMITE);
         enchants.add(Enchantments.QUICK_CHARGE);
@@ -37,29 +37,29 @@ public class ModEnchants {
         enchants.add(Enchantments.BLAST_PROTECTION);
         enchants.add(Enchantments.CHANNELING);
         enchants.add(Enchantments.DEPTH_STRIDER);
-        enchants.add(Enchantments.EFFICIENCY);
-        enchants.add(Enchantments.FEATHER_FALLING);
+        enchants.add(Enchantments.BLOCK_EFFICIENCY);
+        enchants.add(Enchantments.FALL_PROTECTION);
         enchants.add(Enchantments.FIRE_ASPECT);
         enchants.add(Enchantments.FIRE_PROTECTION);
         enchants.add(Enchantments.FROST_WALKER);
         enchants.add(Enchantments.IMPALING);
-        enchants.add(Enchantments.INFINITY);
+        enchants.add(Enchantments.INFINITY_ARROWS);
         enchants.add(Enchantments.KNOCKBACK);
-        enchants.add(Enchantments.LOOTING);
+        enchants.add(Enchantments.MOB_LOOTING);
         enchants.add(Enchantments.LOYALTY);
-        enchants.add(Enchantments.LUCK_OF_THE_SEA);
+        enchants.add(Enchantments.FISHING_LUCK);
         enchants.add(Enchantments.MENDING);
         enchants.add(Enchantments.MULTISHOT);
         enchants.add(Enchantments.PIERCING);
-        enchants.add(Enchantments.POWER);
+        enchants.add(Enchantments.POWER_ARROWS);
         enchants.add(Enchantments.PROJECTILE_PROTECTION);
-        enchants.add(Enchantments.PROTECTION);
-        enchants.add(Enchantments.PUNCH);
+        enchants.add(Enchantments.ALL_DAMAGE_PROTECTION);
+        enchants.add(Enchantments.PUNCH_ARROWS);
         enchants.add(Enchantments.RESPIRATION);
         enchants.add(Enchantments.SHARPNESS);
         enchants.add(Enchantments.SILK_TOUCH);
         enchants.add(Enchantments.SOUL_SPEED);
-        enchants.add(Enchantments.SWEEPING);
+        enchants.add(Enchantments.SWEEPING_EDGE);
         enchants.add(Enchantments.THORNS);
         enchants.add(Enchantments.UNBREAKING);
 

@@ -2,8 +2,8 @@ package com.gempire.entities.abilities;
 
 import com.gempire.entities.abilities.base.Ability;
 import com.gempire.util.Abilities;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 
 public class AbilityVehicle extends Ability {
 
@@ -12,7 +12,7 @@ public class AbilityVehicle extends Ability {
     }
 
     @Override
-    public ITextComponent getName() {
-        return new TranslationTextComponent("ability.gempire.vehicle");
+    public Component getName() {
+        return new TranslatableComponent("ability.gempire.vehicle");
     }
 }

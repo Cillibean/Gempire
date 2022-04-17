@@ -1,6 +1,6 @@
 package com.gempire.systems.machine.interfaces;
 
-import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.level.block.entity.BlockEntity;
 
 public interface IPowerGenerator extends IPowerProvider {
     default void generatePower(){
@@ -16,5 +16,5 @@ public interface IPowerGenerator extends IPowerProvider {
         return 1;
     }
 
-    TileEntity getTE();
+    BlockEntity getTE();
 }

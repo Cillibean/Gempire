@@ -2,14 +2,14 @@ package com.gempire.client.entity.render.layers;
 
 import com.gempire.client.entity.model.ModelGem;
 import com.gempire.entities.bases.EntityGem;
-import com.mojang.blaze3d.matrix.MatrixStack;
-import net.minecraft.client.renderer.IRenderTypeBuffer;
-import net.minecraft.client.renderer.entity.IEntityRenderer;
-import net.minecraft.client.renderer.entity.layers.LayerRenderer;
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.entity.RenderLayerParent;
+import net.minecraft.client.renderer.entity.layers.RenderLayer;
 
-public class GempireLayer<E extends EntityGem, M extends ModelGem<E>> extends LayerRenderer<E, M>  {
+public class GempireLayer<E extends EntityGem, M extends ModelGem<E>> extends RenderLayer<E, M>  {
 
-    public GempireLayer(IEntityRenderer<E, M> entityRendererIn) {
+    public GempireLayer(RenderLayerParent<E, M> entityRendererIn) {
         super(entityRendererIn);
     }
 
@@ -18,7 +18,7 @@ public class GempireLayer<E extends EntityGem, M extends ModelGem<E>> extends La
     }
 
     @Override
-    public void render(MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn, EntityGem entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
+    public void render(PoseStack matrixStackIn, MultiBufferSource bufferIn, int packedLightIn, EntityGem entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
 
     }
 }

@@ -3,11 +3,13 @@ package com.gempire.items;
 import com.gempire.entities.bases.EntityGem;
 import com.gempire.systems.machine.Battery;
 import com.gempire.systems.machine.interfaces.IPoweredItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.item.ItemUseContext;
-import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.ActionResultType;
+
+import net.minecraft.world.item.Item.Properties;
 
 public class PoweredItem extends Item implements IPoweredItem {
     Battery battery;
@@ -33,9 +35,9 @@ public class PoweredItem extends Item implements IPoweredItem {
     }
 
     @Override
-    public boolean updateItemStackNBT(CompoundNBT nbt) {
+    public boolean verifyTagAfterLoad(CompoundTag nbt) {
         //WritePowered(nbt);
-        return super.updateItemStackNBT(nbt);
+        return super.verifyTagAfterLoad(nbt);
     }
 
     @Override

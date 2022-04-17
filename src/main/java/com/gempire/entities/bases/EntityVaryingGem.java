@@ -2,13 +2,13 @@ package com.gempire.entities.bases;
 
 import com.gempire.util.Abilities;
 import com.gempire.util.GemPlacements;
-import net.minecraft.entity.CreatureEntity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.PathfinderMob;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.level.Level;
 
 public abstract class EntityVaryingGem extends EntityGem{
 
-    public EntityVaryingGem(EntityType<? extends CreatureEntity> type, World worldIn) {
+    public EntityVaryingGem(EntityType<? extends PathfinderMob> type, Level worldIn) {
         super(type, worldIn);
     }
 
@@ -24,9 +24,9 @@ public abstract class EntityVaryingGem extends EntityGem{
     }
 
     public int generateRandomInitialSkin(){
-        int rando = this.rand.nextInt(16);
+        int rando = this.random.nextInt(16);
         while(!this.isColorValid(rando)){
-            rando = this.rand.nextInt(16);
+            rando = this.random.nextInt(16);
         }
         return rando;
     }

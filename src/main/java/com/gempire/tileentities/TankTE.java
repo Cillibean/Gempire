@@ -4,29 +4,29 @@ import com.gempire.container.TankContainer;
 import com.gempire.init.ModFluids;
 import com.gempire.init.ModItems;
 import com.gempire.init.ModTE;
-import net.minecraft.block.BlockState;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.client.renderer.texture.ITickable;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.inventory.ItemStackHelper;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.INamedContainerProvider;
-import net.minecraft.item.BucketItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SUpdateTileEntityPacket;
-import net.minecraft.tileentity.ITickableTileEntity;
-import net.minecraft.tileentity.LockableLootTileEntity;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.ContainerHelper;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.item.BucketItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.Connection;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.world.level.block.entity.TickableBlockEntity;
+import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.core.NonNullList;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidTank;
@@ -37,7 +37,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.HashMap;
 
-public class TankTE extends LockableLootTileEntity implements IFluidTank, INamedContainerProvider, ITickableTileEntity {
+public class TankTE extends RandomizableContainerBlockEntity implements IFluidTank, MenuProvider, TickableBlockEntity {
     public static final int NUMBER_OF_SLOTS = 2;
     public static final int BUCKET_INPUT_SLOT_INDEX = 0;
     public static final int BUCKET_OUTPUT_SLOT_INDEX = 1;
@@ -51,28 +51,28 @@ public class TankTE extends LockableLootTileEntity implements IFluidTank, INamed
     }
 
     @Override
-    public void read(BlockState state, CompoundNBT nbt) {
-        super.read(state, nbt);
+    public void load(BlockState state, CompoundTag nbt) {
+        super.load(state, nbt);
         this.tank.readFromNBT(nbt.getCompound("tank"));
-        this.items = NonNullList.withSize(this.getSizeInventory(), ItemStack.EMPTY);
-        if(!this.checkLootAndRead(nbt)){
-            ItemStackHelper.loadAllItems(nbt, this.items);
+        this.items = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
+        if(!this.tryLoadLootTable(nbt)){
+            ContainerHelper.loadAllItems(nbt, this.items);
         }
     }
 
     @Override
-    public CompoundNBT write(CompoundNBT compound) {
-        super.write(compound);
-        compound.put("tank", this.tank.writeToNBT(new CompoundNBT()));
-        if(!this.checkLootAndWrite(compound)){
-            ItemStackHelper.saveAllItems(compound, this.items);
+    public CompoundTag save(CompoundTag compound) {
+        super.save(compound);
+        compound.put("tank", this.tank.writeToNBT(new CompoundTag()));
+        if(!this.trySaveLootTable(compound)){
+            ContainerHelper.saveAllItems(compound, this.items);
         }
         return compound;
     }
 
     @Override
     public void tick() {
-        ItemStack stackToInput = this.getStackInSlot(TankTE.BUCKET_INPUT_SLOT_INDEX);
+        ItemStack stackToInput = this.getItem(TankTE.BUCKET_INPUT_SLOT_INDEX);
         if(this.getFluid() != null) {
             if (stackToInput != ItemStack.EMPTY) {
                 //System.out.println("Stack is not empty");
@@ -82,56 +82,56 @@ public class TankTE extends LockableLootTileEntity implements IFluidTank, INamed
                     this.tank.fill(new FluidStack(bucket.getFluid(), 1000), IFluidHandler.FluidAction.EXECUTE);
                     if(bucket == ModItems.WHITE_ESSENCE.get() || bucket == ModItems.YELLOW_ESSENCE.get() || bucket == ModItems.BLUE_ESSENCE.get()
                     || bucket == ModItems.PINK_ESSENCE.get()){
-                        this.setInventorySlotContents(TankTE.BUCKET_INPUT_SLOT_INDEX, new ItemStack(ModItems.ESSENCE_BOTTLE.get()));
+                        this.setItem(TankTE.BUCKET_INPUT_SLOT_INDEX, new ItemStack(ModItems.ESSENCE_BOTTLE.get()));
                     }
                     else {
-                        this.setInventorySlotContents(TankTE.BUCKET_INPUT_SLOT_INDEX, new ItemStack(Items.BUCKET));
+                        this.setItem(TankTE.BUCKET_INPUT_SLOT_INDEX, new ItemStack(Items.BUCKET));
                     }
                     System.out.println("Tank level is at " + this.getFluidAmount() + "mb");
-                    this.world.notifyBlockUpdate(this.pos, this.getBlockState(), this.getBlockState(), 2);
-                    this.markDirty();
+                    this.level.sendBlockUpdated(this.worldPosition, this.getBlockState(), this.getBlockState(), 2);
+                    this.setChanged();
                 }
             }
         }
-        ItemStack stackToOutput = this.getStackInSlot(TankTE.BUCKET_OUTPUT_SLOT_INDEX);
+        ItemStack stackToOutput = this.getItem(TankTE.BUCKET_OUTPUT_SLOT_INDEX);
         if(this.getFluid() != null) {
             if (stackToOutput != ItemStack.EMPTY) {
                 if (this.shouldPutFluid() && this.canPutFluidFromStack(stackToOutput)) {
                     BucketItem bucket = (BucketItem) stackToOutput.getItem();
                     Fluid fluid = this.tank.getFluid().getFluid();
                     this.tank.drain(new FluidStack(this.tank.getFluid().getFluid(), 1000), IFluidHandler.FluidAction.EXECUTE);
-                    this.setInventorySlotContents(TankTE.BUCKET_OUTPUT_SLOT_INDEX, new ItemStack(TankTE.FLUID_BUCKETS.get(fluid)));
-                    this.world.notifyBlockUpdate(this.pos, this.getBlockState(), this.getBlockState(), 2);
-                    this.markDirty();
+                    this.setItem(TankTE.BUCKET_OUTPUT_SLOT_INDEX, new ItemStack(TankTE.FLUID_BUCKETS.get(fluid)));
+                    this.level.sendBlockUpdated(this.worldPosition, this.getBlockState(), this.getBlockState(), 2);
+                    this.setChanged();
                 }
                 else if(this.shouldPutFluidToButton() && this.canPutFluidToButton(stackToOutput)){
                     Fluid fluid = this.tank.getFluid().getFluid();
                     if(fluid == ModFluids.PINK_ESSENCE.get()){
                         this.tank.drain(new FluidStack(this.tank.getFluid().getFluid(), 200), IFluidHandler.FluidAction.EXECUTE);
-                        this.setInventorySlotContents(TankTE.BUCKET_OUTPUT_SLOT_INDEX, new ItemStack(ModItems.PEBBLE_GEM.get()));
-                        this.world.notifyBlockUpdate(this.pos, this.getBlockState(), this.getBlockState(), 2);
-                        this.markDirty();
+                        this.setItem(TankTE.BUCKET_OUTPUT_SLOT_INDEX, new ItemStack(ModItems.PEBBLE_GEM.get()));
+                        this.level.sendBlockUpdated(this.worldPosition, this.getBlockState(), this.getBlockState(), 2);
+                        this.setChanged();
                     }
                     else if(fluid == ModFluids.BLUE_ESSENCE.get()){
                         this.tank.drain(new FluidStack(this.tank.getFluid().getFluid(), 200), IFluidHandler.FluidAction.EXECUTE);
-                        this.setInventorySlotContents(TankTE.BUCKET_OUTPUT_SLOT_INDEX, new ItemStack(ModItems.SHALE_GEM.get()));
-                        this.world.notifyBlockUpdate(this.pos, this.getBlockState(), this.getBlockState(), 2);
-                        this.markDirty();
+                        this.setItem(TankTE.BUCKET_OUTPUT_SLOT_INDEX, new ItemStack(ModItems.SHALE_GEM.get()));
+                        this.level.sendBlockUpdated(this.worldPosition, this.getBlockState(), this.getBlockState(), 2);
+                        this.setChanged();
                     }
                     else if(fluid == ModFluids.YELLOW_ESSENCE.get()){
                         this.tank.drain(new FluidStack(this.tank.getFluid().getFluid(), 200), IFluidHandler.FluidAction.EXECUTE);
-                        this.setInventorySlotContents(TankTE.BUCKET_OUTPUT_SLOT_INDEX, new ItemStack(ModItems.MICA_GEM.get()));
-                        this.world.notifyBlockUpdate(this.pos, this.getBlockState(), this.getBlockState(), 2);
-                        this.markDirty();
+                        this.setItem(TankTE.BUCKET_OUTPUT_SLOT_INDEX, new ItemStack(ModItems.MICA_GEM.get()));
+                        this.level.sendBlockUpdated(this.worldPosition, this.getBlockState(), this.getBlockState(), 2);
+                        this.setChanged();
                     }
                 }
                 else if(this.shouldPutFluidToButton() && stackToOutput.getItem() == Items.NAUTILUS_SHELL){
                     Fluid fluid = this.tank.getFluid().getFluid();
                     if(fluid == ModFluids.WHITE_ESSENCE.get()) {
                        this.tank.drain(new FluidStack(this.tank.getFluid().getFluid(), 200), IFluidHandler.FluidAction.EXECUTE);
-                       this.setInventorySlotContents(TankTE.BUCKET_OUTPUT_SLOT_INDEX, new ItemStack(ModItems.NACRE_GEM.get()));
-                       this.world.notifyBlockUpdate(this.pos, this.getBlockState(), this.getBlockState(), 2);
-                       this.markDirty();
+                       this.setItem(TankTE.BUCKET_OUTPUT_SLOT_INDEX, new ItemStack(ModItems.NACRE_GEM.get()));
+                       this.level.sendBlockUpdated(this.worldPosition, this.getBlockState(), this.getBlockState(), 2);
+                       this.setChanged();
                     }
                 }
             }
@@ -179,8 +179,8 @@ public class TankTE extends LockableLootTileEntity implements IFluidTank, INamed
 
     public void EmptyTank(){
         this.tank.setFluid(FluidStack.EMPTY);
-        this.world.notifyBlockUpdate(this.pos, this.getBlockState(), this.getBlockState(), 2);
-        this.markDirty();
+        this.level.sendBlockUpdated(this.worldPosition, this.getBlockState(), this.getBlockState(), 2);
+        this.setChanged();
     }
 
     //CONTAINER STUFF
@@ -188,13 +188,13 @@ public class TankTE extends LockableLootTileEntity implements IFluidTank, INamed
     //CONTAINER STUFF
 
     @Override
-    public ITextComponent getDisplayName() {
-        return new StringTextComponent("");
+    public Component getDisplayName() {
+        return new TextComponent("");
     }
 
     @Override
-    protected ITextComponent getDefaultName() {
-        return new StringTextComponent("");
+    protected Component getDefaultName() {
+        return new TextComponent("");
     }
 
     @Override
@@ -208,12 +208,12 @@ public class TankTE extends LockableLootTileEntity implements IFluidTank, INamed
     }
 
     @Override
-    protected Container createMenu(int id, PlayerInventory player) {
+    protected AbstractContainerMenu createMenu(int id, Inventory player) {
         return new TankContainer(id, player, this);
     }
 
     @Override
-    public int getSizeInventory() {
+    public int getContainerSize() {
         return TankTE.NUMBER_OF_SLOTS;
     }
 
@@ -248,18 +248,18 @@ public class TankTE extends LockableLootTileEntity implements IFluidTank, INamed
     public int fill(FluidStack resource, IFluidHandler.FluidAction action) {
         if(this.getFluid() == FluidStack.EMPTY) {
             this.tank.setFluid(resource);
-            this.markDirty();
+            this.setChanged();
             return resource.getAmount();
         }
         else{
             if (resource.getFluid() != this.getFluid().getFluid()) {
                 System.out.println("Couldnt Fill");
-                this.markDirty();
+                this.setChanged();
                 return 0;
             } else {
                 if (this.getFluidAmount() >= this.getCapacity()) {
                     System.out.println("Couldn't fill");
-                    this.markDirty();
+                    this.setChanged();
                     return 0;
                 } else {
                     if (this.getFluidAmount() + resource.getAmount() > this.getCapacity()) {
@@ -268,7 +268,7 @@ public class TankTE extends LockableLootTileEntity implements IFluidTank, INamed
                         this.getFluid().setAmount(this.getFluidAmount() + resource.getAmount());
                     }
                     System.out.println("Filled");
-                    this.markDirty();
+                    this.setChanged();
                     return resource.getAmount();
                 }
             }
@@ -279,12 +279,12 @@ public class TankTE extends LockableLootTileEntity implements IFluidTank, INamed
     @Override
     public FluidStack drain(int maxDrain, IFluidHandler.FluidAction action) {
         if(this.getFluid().getAmount() - maxDrain < 0){
-            this.markDirty();
+            this.setChanged();
             return FluidStack.EMPTY;
         }
         else{
             this.getFluid().setAmount(this.getFluidAmount() - maxDrain);
-            this.markDirty();
+            this.setChanged();
             return this.getFluid();
         }
     }
@@ -293,31 +293,31 @@ public class TankTE extends LockableLootTileEntity implements IFluidTank, INamed
     @Override
     public FluidStack drain(FluidStack resource, IFluidHandler.FluidAction action) {
         if(resource.getFluid() != this.getFluid().getFluid()) {
-            this.markDirty();
+            this.setChanged();
             return null;
         }
         int amount = this.getFluidAmount() - resource.getAmount() < 0 ? this.getFluidAmount() : resource.getAmount();
-        this.markDirty();
+        this.setChanged();
         return this.drain(amount, IFluidHandler.FluidAction.EXECUTE);
     }
 
     @Override
-    public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
+    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
         //Debug
         System.out.println("[DEBUG]:Client recived tile sync packet");
-        this.read(this.world.getBlockState(pkt.getPos()), pkt.getNbtCompound());
+        this.load(this.level.getBlockState(pkt.getPos()), pkt.getTag());
     }
 
     @Override
-    public CompoundNBT getUpdateTag() {
-        return this.write(new CompoundNBT());
+    public CompoundTag getUpdateTag() {
+        return this.save(new CompoundTag());
     }
 
     @Nullable
     @Override
-    public SUpdateTileEntityPacket getUpdatePacket() {
+    public ClientboundBlockEntityDataPacket getUpdatePacket() {
         //Debug
         System.out.println("[DEBUG]:Server sent tile sync packet");
-        return new SUpdateTileEntityPacket(this.pos, -1, this.getUpdateTag());
+        return new ClientboundBlockEntityDataPacket(this.worldPosition, -1, this.getUpdateTag());
     }
 }

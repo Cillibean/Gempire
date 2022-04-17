@@ -3,15 +3,15 @@ package com.gempire.tileentities;
 import com.gempire.systems.machine.MachineSide;
 import com.gempire.systems.machine.Socket;
 import com.gempire.systems.machine.interfaces.ISixWayInterface;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 
 import java.util.ArrayList;
 
-public class SixWayInterfaceTE extends TileEntity implements ISixWayInterface {
+public class SixWayInterfaceTE extends BlockEntity implements ISixWayInterface {
     ArrayList<Socket> SOCKETS = new ArrayList<>();
 
-    public SixWayInterfaceTE(TileEntityType<?> tileEntityTypeIn) {
+    public SixWayInterfaceTE(BlockEntityType<?> tileEntityTypeIn) {
         super(tileEntityTypeIn);
     }
 
@@ -21,7 +21,7 @@ public class SixWayInterfaceTE extends TileEntity implements ISixWayInterface {
     }
 
     @Override
-    public TileEntity getTE() {
+    public BlockEntity getTE() {
         return this;
     }
 }

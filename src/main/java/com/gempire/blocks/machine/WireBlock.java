@@ -4,18 +4,18 @@ import com.gempire.blocks.markers.IPowerMarker;
 import com.gempire.systems.machine.interfaces.IPowerConductor;
 import com.gempire.systems.machine.interfaces.IPowerGenerator;
 import com.gempire.tileentities.WireTE;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.World;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.BlockGetter;
 
 import javax.annotation.Nullable;
 
-public class WireBlock extends SixWayConnectorBlock implements IPowerMarker {
+import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
+
+public class WireBlock extends SixWayConnectorBlock implements IPowerMarker, EntityBlock {
 
     public WireBlock(float apothem, Properties properties) {
         super(apothem, properties);
@@ -31,13 +31,9 @@ public class WireBlock extends SixWayConnectorBlock implements IPowerMarker {
         return predicate instanceof IPowerMarker;
     }
 
+    @Nullable
     @Override
-    public TileEntity createTileEntity(BlockState state, IBlockReader world) {
+    public BlockEntity newBlockEntity(BlockPos p_153215_, BlockState p_153216_) {
         return new WireTE();
-    }
-
-    @Override
-    public boolean hasTileEntity(BlockState state) {
-        return true;
     }
 }

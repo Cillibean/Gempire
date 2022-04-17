@@ -11,47 +11,52 @@ import com.gempire.util.Color;
 import com.gempire.util.CruxType;
 import com.gempire.util.GemPlacements;
 import net.minecraft.block.Blocks;
-import net.minecraft.entity.CreatureEntity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.MobEntity;
-import net.minecraft.entity.ai.attributes.AttributeModifierMap;
-import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.ai.goal.*;
+import net.minecraft.world.entity.PathfinderMob;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.entity.item.ExperienceOrbEntity;
-import net.minecraft.entity.passive.CatEntity;
-import net.minecraft.entity.passive.OcelotEntity;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.world.entity.animal.Cat;
+import net.minecraft.world.entity.animal.Ocelot;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.world.World;
+import net.minecraft.world.level.Level;
 
 import java.util.ArrayList;
 
+import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
+import net.minecraft.world.entity.ai.goal.FloatGoal;
+import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
+import net.minecraft.world.entity.ai.goal.PanicGoal;
+import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
+
 public class EntityShale extends EntityStarterGem {
 
-    public EntityShale(EntityType<? extends CreatureEntity> type, World worldIn) {
+    public EntityShale(EntityType<? extends PathfinderMob> type, Level worldIn) {
         super(type, worldIn);
     }
 
-    public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
-        return MobEntity.func_233666_p_()
-                .createMutableAttribute(Attributes.MAX_HEALTH, 10.0D)
-                .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.3D)
-                .createMutableAttribute(Attributes.ATTACK_DAMAGE, 0);
+    public static AttributeSupplier.Builder setCustomAttributes() {
+        return Mob.createMobAttributes()
+                .add(Attributes.MAX_HEALTH, 10.0D)
+                .add(Attributes.MOVEMENT_SPEED, 0.3D)
+                .add(Attributes.ATTACK_DAMAGE, 0);
     }
 
     @Override
     protected void registerGoals() {
         super.registerGoals();
-        this.goalSelector.addGoal(0, new SwimGoal(this));
+        this.goalSelector.addGoal(0, new FloatGoal(this));
         this.goalSelector.addGoal(1, new PanicGoal(this, 1.25D));
-        this.goalSelector.addGoal(4, new AvoidEntityGoal<>(this, CatEntity.class, 3.0F, 1.25D, 1.0D));
-        this.goalSelector.addGoal(4, new AvoidEntityGoal<>(this, OcelotEntity.class, 3.0F, 1.25D, 1.0D));
-        this.goalSelector.addGoal(7, new LookAtGoal(this, PlayerEntity.class, 6.0F));
-        this.goalSelector.addGoal(8, new LookRandomlyGoal(this));
+        this.goalSelector.addGoal(4, new AvoidEntityGoal<>(this, Cat.class, 3.0F, 1.25D, 1.0D));
+        this.goalSelector.addGoal(4, new AvoidEntityGoal<>(this, Ocelot.class, 3.0F, 1.25D, 1.0D));
+        this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 6.0F));
+        this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
         this.goalSelector.addGoal(8, new EntityAIWander(this, 1.0D));
         this.goalSelector.addGoal(8, new EntityAIFollowOwner(this, 1.0D));
     }
@@ -72,27 +77,27 @@ public class EntityShale extends EntityStarterGem {
         };
     }
 
-    public static void decreaseExp(PlayerEntity player, float amount) {
-        if (player.experienceTotal - amount <= 0)
+    public static void decreaseExp(Player player, float amount) {
+        if (player.totalExperience - amount <= 0)
         {
             player.experienceLevel = 0;
-            player.experience = 0;
-            player.experienceTotal = 0;
+            player.experienceProgress = 0;
+            player.totalExperience = 0;
             return;
         }
-        player.experienceTotal -= amount;
-        if (player.experience * (float)player.xpBarCap() <= amount)
+        player.totalExperience -= amount;
+        if (player.experienceProgress * (float)player.getXpNeededForNextLevel() <= amount)
         {
-            amount -= player.experience * (float)player.xpBarCap();
-            player.experience = 1.0f;
+            amount -= player.experienceProgress * (float)player.getXpNeededForNextLevel();
+            player.experienceProgress = 1.0f;
             player.experienceLevel--;
         }
-        while (player.xpBarCap() < amount)
+        while (player.getXpNeededForNextLevel() < amount)
         {
-            amount -= player.xpBarCap();
+            amount -= player.getXpNeededForNextLevel();
             player.experienceLevel--;
         }
-        player.experience -= amount / (float)player.xpBarCap();
+        player.experienceProgress -= amount / (float)player.getXpNeededForNextLevel();
     }
 
     @Override

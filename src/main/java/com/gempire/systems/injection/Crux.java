@@ -1,8 +1,8 @@
 package com.gempire.systems.injection;
 
 import com.gempire.util.CruxType;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.util.ResourceLocation;
 
 public class Crux {

@@ -1,8 +1,8 @@
 package com.gempire.systems.machine.interfaces;
 
 import com.gempire.systems.machine.Battery;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.nbt.CompoundTag;
 
 public interface IPoweredItem {
     Battery getBattery();
@@ -11,10 +11,10 @@ public interface IPoweredItem {
     default float getBandwidth(){
         return 1f;
     }
-    default void WritePowered(CompoundNBT nbt){
+    default void WritePowered(CompoundTag nbt){
         nbt.put("battery", Battery.WriteBattery(getBattery()));
     }
-    default boolean ReadPowered(CompoundNBT nbt){
+    default boolean ReadPowered(CompoundTag nbt){
         if(nbt.contains("battery")){
             setBattery(Battery.GetBatteryFromNBT(nbt.getCompound("battery")));
             return true;

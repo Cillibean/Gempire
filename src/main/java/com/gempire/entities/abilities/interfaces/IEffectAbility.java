@@ -1,24 +1,24 @@
 package com.gempire.entities.abilities.interfaces;
 
 import com.gempire.entities.bases.EntityGem;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.potion.EffectInstance;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.effect.MobEffectInstance;
 
 import java.util.ArrayList;
 
 public interface IEffectAbility {
-    EffectInstance effect();
+    MobEffectInstance effect();
     default Class<LivingEntity>[] applicableEntities(){
         return new Class[]{
-                PlayerEntity.class
+                Player.class
         };
     }
     default boolean hasMultipleEffects(){
         return false;
     }
-    default EffectInstance[] effects(){
-        return new EffectInstance[]{};
+    default MobEffectInstance[] effects(){
+        return new MobEffectInstance[]{};
     }
     default boolean isEntityApplicable(LivingEntity subject){
         Class<LivingEntity>[] classes = this.applicableEntities();

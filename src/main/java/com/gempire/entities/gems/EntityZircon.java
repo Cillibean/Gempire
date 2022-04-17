@@ -10,85 +10,97 @@ import com.gempire.init.ModEnchants;
 import com.gempire.util.Abilities;
 import com.gempire.util.GemPlacements;
 import net.minecraft.entity.*;
-import net.minecraft.entity.ai.attributes.AttributeModifierMap;
-import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.ai.goal.*;
-import net.minecraft.entity.monster.IMob;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.ItemStackHelper;
-import net.minecraft.inventory.container.Container;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.monster.Enemy;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.ContainerHelper;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.item.*;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.util.*;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.DifficultyInstance;
-import net.minecraft.world.IServerWorld;
-import net.minecraft.world.World;
+import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.Level;
 
 import javax.annotation.Nullable;
 import java.util.UUID;
 
+import net.minecraft.core.NonNullList;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.PathfinderMob;
+import net.minecraft.world.entity.SpawnGroupData;
+import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
+import net.minecraft.world.entity.ai.goal.FloatGoal;
+import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
+import net.minecraft.world.entity.ai.goal.PanicGoal;
+import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
+import net.minecraft.world.item.ItemStack;
+
 public class EntityZircon extends EntityVaryingGem {
     public static final int NUMBER_OF_SLOTS = 3;
     public NonNullList<ItemStack> zirconItems = NonNullList.withSize(EntityZircon.NUMBER_OF_SLOTS, ItemStack.EMPTY);
-    public static final DataParameter<Integer> ENCHANT_PAGE = EntityDataManager.<Integer>createKey(EntityGem.class, DataSerializers.VARINT);
-    public static DataParameter<Integer> ENCHANT_MIN = EntityDataManager.<Integer>createKey(EntityGem.class, DataSerializers.VARINT);
+    public static final EntityDataAccessor<Integer> ENCHANT_PAGE = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
+    public static EntityDataAccessor<Integer> ENCHANT_MIN = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
     public int ENCHANTMENT_PAGES = 0;
 
-    public EntityZircon(EntityType<? extends CreatureEntity> type, World worldIn) {
+    public EntityZircon(EntityType<? extends PathfinderMob> type, Level worldIn) {
         super(type, worldIn);
-        this.dataManager.register(EntityZircon.ENCHANT_PAGE, 0);
-        this.dataManager.register(EntityZircon.ENCHANT_MIN, 0);
+        this.entityData.define(EntityZircon.ENCHANT_PAGE, 0);
+        this.entityData.define(EntityZircon.ENCHANT_MIN, 0);
         this.ENCHANTMENT_PAGES = ModEnchants.VANILLA_ENCHANTMENTS.size();
     }
 
     @Nullable
     @Override
-    public ILivingEntityData onInitialSpawn(IServerWorld worldIn, DifficultyInstance difficultyIn, SpawnReason reason, @Nullable ILivingEntityData spawnDataIn, @Nullable CompoundNBT dataTag) {
-        this.setEnchantPage(this.rand.nextInt(ModEnchants.VANILLA_ENCHANTMENTS.size()));
-        return super.onInitialSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
+    public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, DifficultyInstance difficultyIn, MobSpawnType reason, @Nullable SpawnGroupData spawnDataIn, @Nullable CompoundTag dataTag) {
+        this.setEnchantPage(this.random.nextInt(ModEnchants.VANILLA_ENCHANTMENTS.size()));
+        return super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
     }
 
-    public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
-        return MobEntity.func_233666_p_()
-                .createMutableAttribute(Attributes.MAX_HEALTH, 50.0D)
-                .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.4D)
-                .createMutableAttribute(Attributes.ATTACK_DAMAGE, 1.0D)
-                .createMutableAttribute(Attributes.ATTACK_SPEED, 1.0D);
+    public static AttributeSupplier.Builder setCustomAttributes() {
+        return Mob.createMobAttributes()
+                .add(Attributes.MAX_HEALTH, 50.0D)
+                .add(Attributes.MOVEMENT_SPEED, 0.4D)
+                .add(Attributes.ATTACK_DAMAGE, 1.0D)
+                .add(Attributes.ATTACK_SPEED, 1.0D);
     }
 
     @Override
     protected void registerGoals() {
         super.registerGoals();
-        this.goalSelector.addGoal(9, new SwimGoal(this));
+        this.goalSelector.addGoal(9, new FloatGoal(this));
         this.goalSelector.addGoal(6, new PanicGoal(this, 1.1D));
-        this.goalSelector.addGoal(7, new LookAtGoal(this, PlayerEntity.class, 4.0F));
-        this.goalSelector.addGoal(8, new LookRandomlyGoal(this));
+        this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 4.0F));
+        this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
         this.goalSelector.addGoal(7, new EntityAIWander(this, 1.0D));
         this.goalSelector.addGoal(7, new EntityAIFollowOwner(this, 1.0D));
-        this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, MobEntity.class, 6.0F, 1.0D, 1.2D, (mob)->{
-            return mob instanceof IMob;
+        this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, Mob.class, 6.0F, 1.0D, 1.2D, (mob)->{
+            return mob instanceof Enemy;
         }));
     }
 
     @Override
-    public void writeAdditional(CompoundNBT compound) {
-        super.writeAdditional(compound);
+    public void addAdditionalSaveData(CompoundTag compound) {
+        super.addAdditionalSaveData(compound);
         compound.putInt("page", this.getEnchantPage());
         compound.putInt("min", this.getEnchantMin());
-        ItemStackHelper.saveAllItems(compound, this.zirconItems);
+        ContainerHelper.saveAllItems(compound, this.zirconItems);
     }
 
     @Override
-    public void read(CompoundNBT compound) {
-        super.read(compound);
+    public void load(CompoundTag compound) {
+        super.load(compound);
         this.setEnchantPage(compound.getInt("page"));
         this.setEnchantMin(compound.getInt("min"));
-        ItemStackHelper.loadAllItems(compound, this.zirconItems);
+        ContainerHelper.loadAllItems(compound, this.zirconItems);
     }
 
     @Override
@@ -109,7 +121,7 @@ public class EntityZircon extends EntityVaryingGem {
 
     @Override
     public int generateHairVariant() {
-        return this.rand.nextInt(3);
+        return this.random.nextInt(3);
     }
 
     @Override
@@ -127,7 +139,7 @@ public class EntityZircon extends EntityVaryingGem {
     }
 
     public int generateOutfitVariant() {
-        return this.rand.nextInt(4);
+        return this.random.nextInt(4);
     }
 
     public int generateInsigniaVariant() {
@@ -167,7 +179,7 @@ public class EntityZircon extends EntityVaryingGem {
     }
 
     @Override
-    public boolean isImmuneToFire(){
+    public boolean fireImmune(){
         return false;
     }
 
@@ -223,58 +235,58 @@ public class EntityZircon extends EntityVaryingGem {
     }
 
     public void setEnchantPage(int page){
-        this.dataManager.set(EntityZircon.ENCHANT_PAGE, page);
+        this.entityData.set(EntityZircon.ENCHANT_PAGE, page);
     }
 
     public int getEnchantPage(){
-        return this.dataManager.get(EntityZircon.ENCHANT_PAGE);
+        return this.entityData.get(EntityZircon.ENCHANT_PAGE);
     }
 
     public void setEnchantMin(int page){
-        this.dataManager.set(EntityZircon.ENCHANT_MIN, page);
+        this.entityData.set(EntityZircon.ENCHANT_MIN, page);
     }
 
     public int getEnchantMin(){
-        return this.dataManager.get(EntityZircon.ENCHANT_PAGE);
+        return this.entityData.get(EntityZircon.ENCHANT_PAGE);
     }
 
     public void beginEnchant(){
-        ItemStack lapis = this.getStackInSlot(0);
-        ItemStack tool = this.getStackInSlot(1);
+        ItemStack lapis = this.getItem(0);
+        ItemStack tool = this.getItem(1);
         int level = EntityZircon.getEnchantLevelFromLapisCount(lapis.getCount(), this);
-        int xp = this.currentPlayer.isCreative() ? 0 : this.getXP(this.getDiscountFromStack(this.getStackInSlot(2))) < 0 ? 0 : this.getXP(this.getDiscountFromStack(this.getStackInSlot(2)));
-        if(this.currentPlayer.experienceTotal >= xp) {
+        int xp = this.currentPlayer.isCreative() ? 0 : this.getXP(this.getDiscountFromStack(this.getItem(2))) < 0 ? 0 : this.getXP(this.getDiscountFromStack(this.getItem(2)));
+        if(this.currentPlayer.totalExperience >= xp) {
             if (tool.isEnchantable()) {
                 if(level >= 1) {
                     if (tool.canApplyAtEnchantingTable(ModEnchants.VANILLA_ENCHANTMENTS.get(this.getEnchantPage()))) {
-                        tool.addEnchantment(ModEnchants.VANILLA_ENCHANTMENTS.get(this.getEnchantPage()), level);
-                        this.setInventorySlotContents(0, ItemStack.EMPTY);
-                        this.setInventorySlotContents(2, ItemStack.EMPTY);
+                        tool.enchant(ModEnchants.VANILLA_ENCHANTMENTS.get(this.getEnchantPage()), level);
+                        this.setItem(0, ItemStack.EMPTY);
+                        this.setItem(2, ItemStack.EMPTY);
                         EntityShale.decreaseExp(this.currentPlayer, xp);
                     }
                     else{
-                        this.currentPlayer.sendMessage(new TranslationTextComponent("messages.gempire.entity.enchant_not_apply"), UUID.randomUUID());
+                        this.currentPlayer.sendMessage(new TranslatableComponent("messages.gempire.entity.enchant_not_apply"), UUID.randomUUID());
                         return;
                     }
                 }
                 else{
-                    this.currentPlayer.sendMessage(new TranslationTextComponent("messages.gempire.entity.need_lapis"), UUID.randomUUID());
+                    this.currentPlayer.sendMessage(new TranslatableComponent("messages.gempire.entity.need_lapis"), UUID.randomUUID());
                     return;
                 }
             }
             else{
-                this.currentPlayer.sendMessage(new TranslationTextComponent("messages.gempire.entity.cant_enchant"), UUID.randomUUID());
+                this.currentPlayer.sendMessage(new TranslatableComponent("messages.gempire.entity.cant_enchant"), UUID.randomUUID());
                 return;
             }
         }
         else{
-            this.currentPlayer.sendMessage(new TranslationTextComponent("messages.gempire.entity.player_need_xp"), UUID.randomUUID());
+            this.currentPlayer.sendMessage(new TranslatableComponent("messages.gempire.entity.player_need_xp"), UUID.randomUUID());
             return;
         }
     }
 
     public int getXP(int discount){
-        int level = getEnchantLevelFromLapisCount(this.getStackInSlot(0).getCount(), this);
+        int level = getEnchantLevelFromLapisCount(this.getItem(0).getCount(), this);
         int returnv = level > 0 ? 255 * level : 255;
         return returnv - discount;
     }
@@ -309,33 +321,33 @@ public class EntityZircon extends EntityVaryingGem {
     }
 
     @Override
-    public int getSizeInventory() {
+    public int getContainerSize() {
         return EntityZircon.NUMBER_OF_SLOTS;
     }
 
     @Override
-    public ItemStack getStackInSlot(int index) {
+    public ItemStack getItem(int index) {
         return this.getZirconItems().get(index);
     }
 
     @Override
-    public ItemStack decrStackSize(int index, int count) {
-        return ItemStackHelper.getAndSplit(this.getZirconItems(), index, count);
+    public ItemStack removeItem(int index, int count) {
+        return ContainerHelper.removeItem(this.getZirconItems(), index, count);
     }
 
     @Override
-    public ItemStack removeStackFromSlot(int index) {
+    public ItemStack removeItemNoUpdate(int index) {
         return null;
     }
 
     @Override
-    public void setInventorySlotContents(int index, ItemStack stack) {
+    public void setItem(int index, ItemStack stack) {
         this.getZirconItems().set(index, stack);
     }
 
     @Nullable
     @Override
-    public Container createMenu(int p_createMenu_1_, PlayerInventory p_createMenu_2_, PlayerEntity p_createMenu_3_) {
+    public AbstractContainerMenu createMenu(int p_createMenu_1_, Inventory p_createMenu_2_, Player p_createMenu_3_) {
         return new ZirconUIContainer(p_createMenu_1_, p_createMenu_2_, this);
     }
 

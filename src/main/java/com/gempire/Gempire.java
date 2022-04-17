@@ -7,16 +7,17 @@ import com.gempire.entities.gems.starter.EntityNacre;
 import com.gempire.entities.gems.starter.EntityPebble;
 import com.gempire.entities.gems.starter.EntityShale;
 import com.gempire.init.*;
-import net.minecraft.block.Block;
-import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
-import net.minecraft.loot.LootPool;
-import net.minecraft.loot.TableLootEntry;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.entity.ai.attributes.DefaultAttributes;
+import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.entries.LootTableReference;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DeferredWorkQueue;
@@ -25,8 +26,8 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
-import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fmlserverevents.FMLServerStartingEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -60,101 +61,73 @@ public class Gempire
         //MinecraftForge.EVENT_BUS.register(CommonProxy.class);
     }
 
+    @SubscribeEvent
+    public void EntityAttributes(EntityAttributeCreationEvent event){
+        event.put(ModEntities.TEST.get(), TestEntity.setCustomAttributes().build());
+
+        event.put(ModEntities.PEBBLE.get(), EntityPebble.setCustomAttributes().build());
+
+        event.put(ModEntities.MICA.get(), EntityMica.setCustomAttributes().build());
+
+        event.put(ModEntities.SHALE.get(), EntityShale.setCustomAttributes().build());
+
+        event.put(ModEntities.NACRE.get(), EntityNacre.setCustomAttributes().build());
+
+        event.put(ModEntities.RUBY.get(), EntityRuby.setCustomAttributes().build());
+
+        event.put(ModEntities.SAPPHIRE.get(), EntitySapphire.setCustomAttributes().build());
+
+        event.put(ModEntities.QUARTZ.get(), EntityQuartz.setCustomAttributes().build());
+
+        event.put(ModEntities.JASPER.get(), EntityJasper.setCustomAttributes().build());
+
+        event.put(ModEntities.AGATE.get(), EntityAgate.setCustomAttributes().build());
+
+        event.put(ModEntities.TOPAZ.get(), EntityTopaz.setCustomAttributes().build());
+
+        event.put(ModEntities.OBSIDIAN.get(), EntityObsidian.setCustomAttributes().build());
+
+        event.put(ModEntities.PEARL.get(), EntityPearl.setCustomAttributes().build());
+
+        event.put(ModEntities.NEPHRITE.get(), EntityNephrite.setCustomAttributes().build());
+
+        event.put(ModEntities.SPODUMENE.get(), EntitySpodumene.setCustomAttributes().build());
+
+        event.put(ModEntities.ZIRCON.get(), EntityZircon.setCustomAttributes().build());
+
+        event.put(ModEntities.AQUAMARINE.get(), EntityAquamarine.setCustomAttributes().build());
+
+        event.put(ModEntities.BISMUTH.get(), EntityBismuth.setCustomAttributes().build());
+
+        event.put(ModEntities.BIXBITE.get(), EntityBixbite.setCustomAttributes().build());
+
+        event.put(ModEntities.DEMANTOID.get(), EntityDemantoid.setCustomAttributes().build());
+
+        event.put(ModEntities.EMERALD.get(), EntityEmerald.setCustomAttributes().build());
+
+        event.put(ModEntities.HESSONITE.get(), EntityHessonite.setCustomAttributes().build());
+
+        event.put(ModEntities.LAPIS.get(), EntityLapis.setCustomAttributes().build());
+
+        event.put(ModEntities.LARIMAR.get(), EntityLarimar.setCustomAttributes().build());
+
+        event.put(ModEntities.MELANITE.get(), EntityMelanite.setCustomAttributes().build());
+
+        event.put(ModEntities.MORGANITE.get(), EntityMorganite.setCustomAttributes().build());
+
+        event.put(ModEntities.PERIDOT.get(), EntityPeridot.setCustomAttributes().build());
+
+        event.put(ModEntities.PYROPE.get(), EntityPyrope.setCustomAttributes().build());
+
+        event.put(ModEntities.RUTILE.get(), EntityRutile.setCustomAttributes().build());
+
+        event.put(ModEntities.SPINEL.get(), EntitySpinel.setCustomAttributes().build());
+
+        event.put(ModEntities.TOURMALINE.get(), EntityTourmaline.setCustomAttributes().build());
+    }
+
     private void setup(final FMLCommonSetupEvent event)
     {
-        DeferredWorkQueue.runLater(() -> {
-            GlobalEntityTypeAttributes.put(ModEntities.TEST.get(), TestEntity.setCustomAttributes().create());
-        });
-        DeferredWorkQueue.runLater(() -> {
-            GlobalEntityTypeAttributes.put(ModEntities.PEBBLE.get(), EntityPebble.setCustomAttributes().create());
-        });
-        DeferredWorkQueue.runLater(() -> {
-            GlobalEntityTypeAttributes.put(ModEntities.MICA.get(), EntityMica.setCustomAttributes().create());
-        });
-        DeferredWorkQueue.runLater(() -> {
-            GlobalEntityTypeAttributes.put(ModEntities.SHALE.get(), EntityShale.setCustomAttributes().create());
-        });
-        DeferredWorkQueue.runLater(() -> {
-            GlobalEntityTypeAttributes.put(ModEntities.NACRE.get(), EntityNacre.setCustomAttributes().create());
-        });
-        DeferredWorkQueue.runLater(() -> {
-            GlobalEntityTypeAttributes.put(ModEntities.RUBY.get(), EntityRuby.setCustomAttributes().create());
-        });
-        DeferredWorkQueue.runLater(() -> {
-            GlobalEntityTypeAttributes.put(ModEntities.SAPPHIRE.get(), EntitySapphire.setCustomAttributes().create());
-        });
-        DeferredWorkQueue.runLater(() -> {
-            GlobalEntityTypeAttributes.put(ModEntities.QUARTZ.get(), EntityQuartz.setCustomAttributes().create());
-        });
-        DeferredWorkQueue.runLater(() -> {
-            GlobalEntityTypeAttributes.put(ModEntities.JASPER.get(), EntityJasper.setCustomAttributes().create());
-        });
-        DeferredWorkQueue.runLater(() -> {
-            GlobalEntityTypeAttributes.put(ModEntities.AGATE.get(), EntityAgate.setCustomAttributes().create());
-        });
-        DeferredWorkQueue.runLater(() -> {
-            GlobalEntityTypeAttributes.put(ModEntities.TOPAZ.get(), EntityTopaz.setCustomAttributes().create());
-        });
-        DeferredWorkQueue.runLater(() -> {
-            GlobalEntityTypeAttributes.put(ModEntities.OBSIDIAN.get(), EntityObsidian.setCustomAttributes().create());
-        });
-        DeferredWorkQueue.runLater(() -> {
-            GlobalEntityTypeAttributes.put(ModEntities.PEARL.get(), EntityPearl.setCustomAttributes().create());
-        });
-        DeferredWorkQueue.runLater(() -> {
-            GlobalEntityTypeAttributes.put(ModEntities.NEPHRITE.get(), EntityNephrite.setCustomAttributes().create());
-        });
-        DeferredWorkQueue.runLater(() -> {
-            GlobalEntityTypeAttributes.put(ModEntities.SPODUMENE.get(), EntitySpodumene.setCustomAttributes().create());
-        });
-        DeferredWorkQueue.runLater(() -> {
-            GlobalEntityTypeAttributes.put(ModEntities.ZIRCON.get(), EntityZircon.setCustomAttributes().create());
-        });
-        DeferredWorkQueue.runLater(() -> {
-            GlobalEntityTypeAttributes.put(ModEntities.AQUAMARINE.get(), EntityAquamarine.setCustomAttributes().create());
-        });
-        DeferredWorkQueue.runLater(() -> {
-            GlobalEntityTypeAttributes.put(ModEntities.BISMUTH.get(), EntityBismuth.setCustomAttributes().create());
-        });
-        DeferredWorkQueue.runLater(() -> {
-            GlobalEntityTypeAttributes.put(ModEntities.BIXBITE.get(), EntityBixbite.setCustomAttributes().create());
-        });
-        DeferredWorkQueue.runLater(() -> {
-            GlobalEntityTypeAttributes.put(ModEntities.DEMANTOID.get(), EntityDemantoid.setCustomAttributes().create());
-        });
-        DeferredWorkQueue.runLater(() -> {
-            GlobalEntityTypeAttributes.put(ModEntities.EMERALD.get(), EntityEmerald.setCustomAttributes().create());
-        });
-        DeferredWorkQueue.runLater(() -> {
-            GlobalEntityTypeAttributes.put(ModEntities.HESSONITE.get(), EntityHessonite.setCustomAttributes().create());
-        });
-        DeferredWorkQueue.runLater(() -> {
-            GlobalEntityTypeAttributes.put(ModEntities.LAPIS.get(), EntityLapis.setCustomAttributes().create());
-        });
-        DeferredWorkQueue.runLater(() -> {
-            GlobalEntityTypeAttributes.put(ModEntities.LARIMAR.get(), EntityLarimar.setCustomAttributes().create());
-        });
-        DeferredWorkQueue.runLater(() -> {
-            GlobalEntityTypeAttributes.put(ModEntities.MELANITE.get(), EntityMelanite.setCustomAttributes().create());
-        });
-        DeferredWorkQueue.runLater(() -> {
-            GlobalEntityTypeAttributes.put(ModEntities.MORGANITE.get(), EntityMorganite.setCustomAttributes().create());
-        });
-        DeferredWorkQueue.runLater(() -> {
-            GlobalEntityTypeAttributes.put(ModEntities.PERIDOT.get(), EntityPeridot.setCustomAttributes().create());
-        });
-        DeferredWorkQueue.runLater(() -> {
-            GlobalEntityTypeAttributes.put(ModEntities.PYROPE.get(), EntityPyrope.setCustomAttributes().create());
-        });
-        DeferredWorkQueue.runLater(() -> {
-            GlobalEntityTypeAttributes.put(ModEntities.RUTILE.get(), EntityRutile.setCustomAttributes().create());
-        });
-        DeferredWorkQueue.runLater(() -> {
-            GlobalEntityTypeAttributes.put(ModEntities.SPINEL.get(), EntitySpinel.setCustomAttributes().create());
-        });
-        DeferredWorkQueue.runLater(() -> {
-            GlobalEntityTypeAttributes.put(ModEntities.TOURMALINE.get(), EntityTourmaline.setCustomAttributes().create());
-        });
         ModPacketHandler.registerPackets();
         ModEntities.setVanillaGems();
         ModEntities.registerCruxes();
@@ -178,7 +151,7 @@ public class Gempire
                 || event.getName().equals(new ResourceLocation("minecraft", "chests/ruined_portal"))
                 || event.getName().equals(new ResourceLocation("minecraft", "chests/desert_pyramid"))
         ) {
-            event.getTable().addPool(LootPool.builder().addEntry(TableLootEntry.builder(new ResourceLocation(MODID, "chests/essence"))).build());
+            event.getTable().addPool(LootPool.lootPool().add(LootTableReference.lootTableReference(new ResourceLocation(MODID, "chests/essence"))).build());
         }
     }
 

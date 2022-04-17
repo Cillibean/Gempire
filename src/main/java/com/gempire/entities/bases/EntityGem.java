@@ -18,50 +18,47 @@ import com.gempire.util.GemPlacements;
 import com.gempire.util.PaletteType;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.FlowingFluidBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.client.Minecraft;
-import net.minecraft.command.impl.LocateBiomeCommand;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.item.ItemEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.IInventoryChangedListener;
-import net.minecraft.inventory.ItemStackHelper;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.INamedContainerProvider;
-import net.minecraft.item.*;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.particles.ParticleTypes;
-import net.minecraft.potion.EffectInstance;
+import net.minecraft.server.commands.LocateBiomeCommand;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.Container;
+import net.minecraft.world.ContainerListener;
+import net.minecraft.world.ContainerHelper;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.*;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.text.*;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.core.Registry;
 import net.minecraft.world.DifficultyInstance;
-import net.minecraft.world.IServerWorld;
-import net.minecraft.world.World;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.feature.structure.Structure;
-import net.minecraft.world.server.ServerWorld;
-import net.minecraft.world.storage.MapData;
-import net.minecraft.world.storage.MapDecoration;
+import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.levelgen.feature.StructureFeature;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
+import net.minecraft.world.level.saveddata.maps.MapDecoration;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.RegistryObject;
-import net.minecraftforge.fml.network.NetworkHooks;
+import net.minecraftforge.fmllegacy.RegistryObject;
+import net.minecraftforge.fmllegacy.network.NetworkHooks;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.apache.commons.lang3.ArrayUtils;
 
@@ -72,40 +69,64 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
-public abstract class EntityGem extends CreatureEntity implements IRangedAttackMob, IRideable, IInventory, INamedContainerProvider, IInventoryChangedListener {
+import net.minecraft.core.NonNullList;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.ItemBasedSteering;
+import net.minecraft.world.entity.ItemSteerable;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.PathfinderMob;
+import net.minecraft.world.entity.SpawnGroupData;
+import net.minecraft.world.entity.monster.RangedAttackMob;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.DiggerItem;
+import net.minecraft.world.item.DyeItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.MapItem;
+
+public abstract class EntityGem extends PathfinderMob implements RangedAttackMob, ItemSteerable, Container, MenuProvider, ContainerListener {
     //public static DataParameter<Optional<UUID>> OWNER_ID = EntityDataManager.<Optional<UUID>>createKey(EntityGem.class, DataSerializers.OPTIONAL_UNIQUE_ID);
-    public static final DataParameter<Boolean> HAS_CUSTOM_NAME = EntityDataManager.<Boolean>createKey(EntityGem.class, DataSerializers.BOOLEAN);
-    public static final DataParameter<Boolean> PRIMARY = EntityDataManager.<Boolean>createKey(EntityGem.class, DataSerializers.BOOLEAN);
-    public static final DataParameter<Boolean> DEFECTIVE = EntityDataManager.<Boolean>createKey(EntityGem.class, DataSerializers.BOOLEAN);
-    public static final DataParameter<Boolean> EMOTIONAL = EntityDataManager.<Boolean>createKey(EntityGem.class, DataSerializers.BOOLEAN);
-    public static final DataParameter<Integer> SKIN_COLOR = EntityDataManager.<Integer>createKey(EntityGem.class, DataSerializers.VARINT);
-    public static final DataParameter<Integer> HAIR_COLOR = EntityDataManager.<Integer>createKey(EntityGem.class, DataSerializers.VARINT);
-    public static final DataParameter<Integer> SKIN_VARIANT = EntityDataManager.<Integer>createKey(EntityGem.class, DataSerializers.VARINT);
-    public static final DataParameter<Integer> SKIN_COLOR_VARIANT = EntityDataManager.<Integer>createKey(EntityGem.class, DataSerializers.VARINT);
-    public static DataParameter<Integer> HAIR_VARIANT = EntityDataManager.<Integer>createKey(EntityGem.class, DataSerializers.VARINT);
-    public static final DataParameter<Integer> GEM_PLACEMENT = EntityDataManager.<Integer>createKey(EntityGem.class, DataSerializers.VARINT);
-    public static final DataParameter<Integer> GEM_COLOR = EntityDataManager.<Integer>createKey(EntityGem.class, DataSerializers.VARINT);
-    public static DataParameter<Integer> OUTFIT_COLOR = EntityDataManager.<Integer>createKey(EntityGem.class, DataSerializers.VARINT);
-    public static DataParameter<Integer> OUTFIT_VARIANT = EntityDataManager.<Integer>createKey(EntityGem.class, DataSerializers.VARINT);
-    public static DataParameter<Integer> INSIGNIA_COLOR = EntityDataManager.<Integer>createKey(EntityGem.class, DataSerializers.VARINT);
-    public static DataParameter<Integer> INSIGNIA_VARIANT = EntityDataManager.<Integer>createKey(EntityGem.class, DataSerializers.VARINT);
-    public static final DataParameter<Integer> ABILITY_SLOTS = EntityDataManager.<Integer>createKey(EntityGem.class, DataSerializers.VARINT);
-    public static final DataParameter<String> ABILITIES = EntityDataManager.<String>createKey(EntityGem.class, DataSerializers.STRING);
-    public static final DataParameter<Boolean> USES_AREA_ABILITIES = EntityDataManager.<Boolean>createKey(EntityGem.class, DataSerializers.BOOLEAN);
-    public static final DataParameter<Integer> MARKING_COLOR = EntityDataManager.<Integer>createKey(EntityGem.class, DataSerializers.VARINT);
-    public static final DataParameter<Integer> MARKING_VARIANT = EntityDataManager.<Integer>createKey(EntityGem.class, DataSerializers.VARINT);
-    public static final DataParameter<Integer> MARKING_2_COLOR = EntityDataManager.<Integer>createKey(EntityGem.class, DataSerializers.VARINT);
-    public static final DataParameter<Integer> MARKING_2_VARIANT = EntityDataManager.<Integer>createKey(EntityGem.class, DataSerializers.VARINT);
-    public static final DataParameter<Boolean> SADDLED = EntityDataManager.createKey(EntityGem.class, DataSerializers.BOOLEAN);
-    public static final DataParameter<Integer> BOOST_TIME = EntityDataManager.createKey(EntityGem.class, DataSerializers.VARINT);
-    public static DataParameter<Boolean> HAS_VISOR = EntityDataManager.<Boolean>createKey(EntityGem.class, DataSerializers.BOOLEAN);
+    public static final EntityDataAccessor<Boolean> HAS_CUSTOM_NAME = SynchedEntityData.<Boolean>defineId(EntityGem.class, EntityDataSerializers.BOOLEAN);
+    public static final EntityDataAccessor<Boolean> PRIMARY = SynchedEntityData.<Boolean>defineId(EntityGem.class, EntityDataSerializers.BOOLEAN);
+    public static final EntityDataAccessor<Boolean> DEFECTIVE = SynchedEntityData.<Boolean>defineId(EntityGem.class, EntityDataSerializers.BOOLEAN);
+    public static final EntityDataAccessor<Boolean> EMOTIONAL = SynchedEntityData.<Boolean>defineId(EntityGem.class, EntityDataSerializers.BOOLEAN);
+    public static final EntityDataAccessor<Integer> SKIN_COLOR = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Integer> HAIR_COLOR = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Integer> SKIN_VARIANT = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Integer> SKIN_COLOR_VARIANT = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
+    public static EntityDataAccessor<Integer> HAIR_VARIANT = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Integer> GEM_PLACEMENT = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Integer> GEM_COLOR = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
+    public static EntityDataAccessor<Integer> OUTFIT_COLOR = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
+    public static EntityDataAccessor<Integer> OUTFIT_VARIANT = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
+    public static EntityDataAccessor<Integer> INSIGNIA_COLOR = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
+    public static EntityDataAccessor<Integer> INSIGNIA_VARIANT = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Integer> ABILITY_SLOTS = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<String> ABILITIES = SynchedEntityData.<String>defineId(EntityGem.class, EntityDataSerializers.STRING);
+    public static final EntityDataAccessor<Boolean> USES_AREA_ABILITIES = SynchedEntityData.<Boolean>defineId(EntityGem.class, EntityDataSerializers.BOOLEAN);
+    public static final EntityDataAccessor<Integer> MARKING_COLOR = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Integer> MARKING_VARIANT = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Integer> MARKING_2_COLOR = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Integer> MARKING_2_VARIANT = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Boolean> SADDLED = SynchedEntityData.defineId(EntityGem.class, EntityDataSerializers.BOOLEAN);
+    public static final EntityDataAccessor<Integer> BOOST_TIME = SynchedEntityData.defineId(EntityGem.class, EntityDataSerializers.INT);
+    public static EntityDataAccessor<Boolean> HAS_VISOR = SynchedEntityData.<Boolean>defineId(EntityGem.class, EntityDataSerializers.BOOLEAN);
     public ArrayList<Ability> ABILITY_POWERS = new ArrayList<>();
     public ArrayList<UUID> OWNERS = new ArrayList<>();
     public UUID FOLLOW_ID;
     public int[] GUARD_POS = new int[3];
     public ArrayList<IIdleAbility> idlePowers = new ArrayList<>();
 
-    private final BoostHelper booster = new BoostHelper(this.dataManager, BOOST_TIME, SADDLED);
+    private final ItemBasedSteering booster = new ItemBasedSteering(this.entityData, BOOST_TIME, SADDLED);
 
     public byte movementType = 1;
     public byte emotionMeter = 0;
@@ -126,12 +147,12 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
     public Item inputItem = Items.AIR;
     public Item outputItem = Items.AIR;
     public int brewingTicks = 0;
-    public static DataParameter<Integer> BREWING_PROGRESS = EntityDataManager.createKey(EntityGem.class, DataSerializers.VARINT);
+    public static EntityDataAccessor<Integer> BREWING_PROGRESS = SynchedEntityData.defineId(EntityGem.class, EntityDataSerializers.INT);
     public boolean brewing = false;
 
-    public PlayerEntity currentPlayer;
+    public Player currentPlayer;
 
-    public static final SimpleCommandExceptionType LOCATE_FAILED_EXCEPTION = new SimpleCommandExceptionType(new TranslationTextComponent("commands.gempire.faillocate"));
+    public static final SimpleCommandExceptionType LOCATE_FAILED_EXCEPTION = new SimpleCommandExceptionType(new TranslatableComponent("commands.gempire.faillocate"));
     public int maxStructureTime = 5 * 20;
     public int structureTime = 0;
     public ArrayList<String> structures = new ArrayList<>();
@@ -139,42 +160,42 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
 
     public ItemEntity spawnGem = null;
 
-    public EntityGem(EntityType<? extends CreatureEntity> type, World worldIn) {
+    public EntityGem(EntityType<? extends PathfinderMob> type, Level worldIn) {
         super(type, worldIn);
         //this.dataManager.register(EntityGem.OWNER_ID, Optional.ofNullable(UUID.randomUUID()));
-        this.dataManager.register(EntityGem.HAS_CUSTOM_NAME, false);
-        this.dataManager.register(EntityGem.PRIMARY, false);
-        this.dataManager.register(EntityGem.DEFECTIVE, false);
-        this.dataManager.register(EntityGem.EMOTIONAL, false);
-        this.dataManager.register(EntityGem.SKIN_COLOR, 0);
-        this.dataManager.register(EntityGem.HAIR_COLOR, 0);
-        this.dataManager.register(EntityGem.SKIN_VARIANT, 0);
-        this.dataManager.register(EntityGem.SKIN_COLOR_VARIANT, 0);
-        this.dataManager.register(EntityGem.HAIR_VARIANT, 0);
-        this.dataManager.register(EntityGem.GEM_PLACEMENT, 0);
-        this.dataManager.register(EntityGem.GEM_COLOR, 0);
-        this.dataManager.register(EntityGem.OUTFIT_COLOR, 0);
-        this.dataManager.register(EntityGem.OUTFIT_VARIANT, 0);
-        this.dataManager.register(EntityGem.INSIGNIA_COLOR, 0);
-        this.dataManager.register(EntityGem.INSIGNIA_VARIANT, 0);
-        this.dataManager.register(EntityGem.ABILITY_SLOTS, 1);
-        this.dataManager.register(EntityGem.ABILITIES, "-1");
-        this.dataManager.register(EntityGem.USES_AREA_ABILITIES, false);
-        this.dataManager.register(EntityGem.HAS_VISOR, false);
-        this.dataManager.register(EntityGem.MARKING_COLOR, 0);
-        this.dataManager.register(EntityGem.MARKING_VARIANT, 0);
-        this.dataManager.register(EntityGem.MARKING_2_COLOR, 0);
-        this.dataManager.register(EntityGem.MARKING_2_VARIANT, 0);
-        this.dataManager.register(EntityGem.SADDLED, true);
-        this.dataManager.set(EntityGem.SADDLED, true);
-        this.dataManager.register(EntityGem.BOOST_TIME, 0);
-        this.dataManager.register(EntityGem.BREWING_PROGRESS, 0);
+        this.entityData.define(EntityGem.HAS_CUSTOM_NAME, false);
+        this.entityData.define(EntityGem.PRIMARY, false);
+        this.entityData.define(EntityGem.DEFECTIVE, false);
+        this.entityData.define(EntityGem.EMOTIONAL, false);
+        this.entityData.define(EntityGem.SKIN_COLOR, 0);
+        this.entityData.define(EntityGem.HAIR_COLOR, 0);
+        this.entityData.define(EntityGem.SKIN_VARIANT, 0);
+        this.entityData.define(EntityGem.SKIN_COLOR_VARIANT, 0);
+        this.entityData.define(EntityGem.HAIR_VARIANT, 0);
+        this.entityData.define(EntityGem.GEM_PLACEMENT, 0);
+        this.entityData.define(EntityGem.GEM_COLOR, 0);
+        this.entityData.define(EntityGem.OUTFIT_COLOR, 0);
+        this.entityData.define(EntityGem.OUTFIT_VARIANT, 0);
+        this.entityData.define(EntityGem.INSIGNIA_COLOR, 0);
+        this.entityData.define(EntityGem.INSIGNIA_VARIANT, 0);
+        this.entityData.define(EntityGem.ABILITY_SLOTS, 1);
+        this.entityData.define(EntityGem.ABILITIES, "-1");
+        this.entityData.define(EntityGem.USES_AREA_ABILITIES, false);
+        this.entityData.define(EntityGem.HAS_VISOR, false);
+        this.entityData.define(EntityGem.MARKING_COLOR, 0);
+        this.entityData.define(EntityGem.MARKING_VARIANT, 0);
+        this.entityData.define(EntityGem.MARKING_2_COLOR, 0);
+        this.entityData.define(EntityGem.MARKING_2_VARIANT, 0);
+        this.entityData.define(EntityGem.SADDLED, true);
+        this.entityData.set(EntityGem.SADDLED, true);
+        this.entityData.define(EntityGem.BOOST_TIME, 0);
+        this.entityData.define(EntityGem.BREWING_PROGRESS, 0);
         this.FOLLOW_ID = UUID.randomUUID();
     }
 
     @Nullable
     @Override
-    public ILivingEntityData onInitialSpawn(IServerWorld worldIn, DifficultyInstance difficultyIn, SpawnReason reason, @Nullable ILivingEntityData spawnDataIn, @Nullable CompoundNBT dataTag) {
+    public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, DifficultyInstance difficultyIn, MobSpawnType reason, @Nullable SpawnGroupData spawnDataIn, @Nullable CompoundTag dataTag) {
         this.setGemPlacement(this.generateGemPlacement());
         this.setSkinVariant(this.generateSkinVariant());
         if(this.setSkinVariantOnInitialSpawn) {
@@ -204,23 +225,23 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
         this.generateScoutList();
         this.idlePowers = this.generateIdlePowers();
         if(this.spawnGem != null){
-            this.spawnGem.remove();
+            this.spawnGem.remove(RemovalReason.DISCARDED);
         }
-        return super.onInitialSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
+        return super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
     }
 
     @Override
-    public boolean canEquipItem(ItemStack stack) {
-        return stack.getItem() instanceof ArmorItem ||  stack.getItem() instanceof ToolItem;
+    public boolean canHoldItem(ItemStack stack) {
+        return stack.getItem() instanceof ArmorItem ||  stack.getItem() instanceof DiggerItem;
     }
 
     @Override
-    public void writeAdditional(CompoundNBT compound) {
-        super.writeAdditional(compound);
+    public void addAdditionalSaveData(CompoundTag compound) {
+        super.addAdditionalSaveData(compound);
         compound.putString("abilities", this.getAbilites());
         compound.putBoolean("emotional", this.isEmotional());
         this.writeOwners(compound);
-        compound.putUniqueId("followID", this.FOLLOW_ID);
+        compound.putUUID("followID", this.FOLLOW_ID);
         compound.putByte("movementType", this.getMovementType());
         compound.putInt("skinColorVariant", this.getSkinColorVariant());
         compound.putInt("skinColor", this.getSkinColor());
@@ -247,17 +268,17 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
         compound.putBoolean("brewing", this.brewing);
         compound.putInt("structureTime", this.structureTime);
         this.writeStructures(compound);
-        ItemStackHelper.saveAllItems(compound, this.items);
+        ContainerHelper.saveAllItems(compound, this.items);
     }
 
-    public void writeOwners(CompoundNBT compound){
+    public void writeOwners(CompoundTag compound){
         for(int i = 0; i < this.OWNERS.size(); i++){
-            compound.putUniqueId("owner" + i, this.OWNERS.get(i));
+            compound.putUUID("owner" + i, this.OWNERS.get(i));
         }
         compound.putInt("ownerAmount", this.OWNERS.size());
     }
 
-    public void writeStructures(CompoundNBT compound){
+    public void writeStructures(CompoundTag compound){
         for(int i = 0; i < this.structures.size(); i++){
             compound.putString("structure" + i, this.structures.get(i));
         }
@@ -269,12 +290,12 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
     }
 
     @Override
-    public void read(CompoundNBT compound) {
-        super.read(compound);
+    public void load(CompoundTag compound) {
+        super.load(compound);
         this.setAbilites(compound.getString("abilities"));
         this.setEmotional(compound.getBoolean("emotional"));
         this.readOwners(compound);
-        if(compound.contains("followID"))this.FOLLOW_ID = compound.getUniqueId("followID");
+        if(compound.contains("followID"))this.FOLLOW_ID = compound.getUUID("followID");
         this.setMovementType(compound.getByte("movementType"));
         this.setSkinColorVariant(compound.getInt("skinColorVariant"));
         this.setSkinColor(compound.getInt("skinColor"));
@@ -305,22 +326,22 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
         this.setBrewProgress(compound.getInt("brewProgress"));
         this.structureTime = compound.getInt("structureTime");
         this.idlePowers = this.generateIdlePowers();
-        ItemStackHelper.loadAllItems(compound, this.items);
+        ContainerHelper.loadAllItems(compound, this.items);
         this.readStructures(compound);
         if(this.spawnGem != null){
-            this.spawnGem.remove();
+            this.spawnGem.remove(RemovalReason.DISCARDED);
         }
     }
 
-    public void readOwners(CompoundNBT compound){
+    public void readOwners(CompoundTag compound){
         this.OWNERS = new ArrayList<>();
         int n = compound.getInt("ownerAmount");
         for(int i = 0; i < n; i++){
-            this.OWNERS.add(compound.getUniqueId("owner" + i));
+            this.OWNERS.add(compound.getUUID("owner" + i));
         }
     }
 
-    public void readStructures(CompoundNBT compound){
+    public void readStructures(CompoundTag compound){
         this.structures = new ArrayList<>();
         int n = compound.getInt("structureAmount");
         for(int i = 0; i < n; i++){
@@ -334,7 +355,7 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
     }
 
     @Override
-    public void livingTick() {
+    public void aiStep() {
         if(!this.isFocused()){
             this.focusCounter++;
             if(this.focusCounter > this.maxFocusCounter){
@@ -344,12 +365,12 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
         }
         if (this.canWalkOnFluids()) this.adjustForFluids();
         if(this.inputItem != Items.AIR && this.outputItem != Items.AIR && this.brewing){
-            if(this.getStackInSlot(68) == ItemStack.EMPTY) this.brewingTicks++;
+            if(this.getItem(68) == ItemStack.EMPTY) this.brewingTicks++;
             this.setBrewProgress((int)Math.floor(11 * this.brewingTicks / this.maxBrewingTime));
             //System.out.println("Progress: " + this.getBrewProgress());
-            if(this.brewingTicks > this.maxBrewingTime && this.getStackInSlot(67).getItem() == this.inputItem){
-                this.setInventorySlotContents(67, ItemStack.EMPTY);
-                this.setInventorySlotContents(68, new ItemStack(this.outputItem));
+            if(this.brewingTicks > this.maxBrewingTime && this.getItem(67).getItem() == this.inputItem){
+                this.setItem(67, ItemStack.EMPTY);
+                this.setItem(68, new ItemStack(this.outputItem));
                 this.brewingTicks = 0;
                 this.setBrewProgress(0);
                 this.brewing = false;
@@ -358,24 +379,24 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
         for(IIdleAbility power : this.getIdlePowers()){
             if(this.focusCheck()) power.execute();
         }
-        if(this.isInDaylight()){
-            if (this.getHealth() < this.getMaxHealth() && this.ticksExisted % 20 == 0) {
+        if(this.isSunBurnTick()){
+            if (this.getHealth() < this.getMaxHealth() && this.tickCount % 20 == 0) {
                 this.heal(1.0F);
-                this.world.addParticle(ParticleTypes.HEART, this.getPosX(), this.getPosY() + 2, this.getPosZ(), 0,0,0F);
+                this.level.addParticle(ParticleTypes.HEART, this.getX(), this.getY() + 2, this.getZ(), 0,0,0F);
             }
         }
 
         if(this.usesAreaAbilities()) {
-            if (this.ticksExisted % 100 == 0) {
-                ArrayList<LivingEntity> entityl = new ArrayList<>(this.world.getEntitiesWithinAABB(LivingEntity.class, new AxisAlignedBB(this.getPosX(), this.getPosY(), this.getPosZ(), this.getPosX() + 1, this.getPosY() + 1, this.getPosZ() + 1)
-                        .grow(16, this.world.getHeight(), 16), (target) -> {
+            if (this.tickCount % 100 == 0) {
+                ArrayList<LivingEntity> entityl = new ArrayList<>(this.level.getEntitiesOfClass(LivingEntity.class, new AABB(this.getX(), this.getY(), this.getZ(), this.getX() + 1, this.getY() + 1, this.getZ() + 1)
+                        .inflate(16, this.level.getMaxBuildHeight(), 16), (target) -> {
                     return target != this;
                 }));
                 ArrayList<Ability> abilities = this.getAbilityPowers();
                 for (int e = 0; e < entityl.size(); e++) {
                     LivingEntity entity = entityl.get(e);
                     boolean flagGem = entity instanceof EntityGem;
-                    boolean flagPlayer = entity instanceof PlayerEntity;
+                    boolean flagPlayer = entity instanceof Player;
                     boolean flagOwner = this.isOwner(entity);
                     EntityGem gemEntity = flagGem ? (EntityGem) entity : null;
                     for (int a = 0; a < abilities.size(); a++) {
@@ -387,9 +408,9 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
                         boolean flagViolent = ability instanceof IViolentAbility;
                         if (!flagViolent) {
                             if (flagEffect) {
-                                ArrayList<EffectInstance> effects = new ArrayList<>();
+                                ArrayList<MobEffectInstance> effects = new ArrayList<>();
                                 if (effectAbility.hasMultipleEffects()) {
-                                    for (EffectInstance effect : effectAbility.effects()) {
+                                    for (MobEffectInstance effect : effectAbility.effects()) {
                                         effects.add(effect);
                                     }
                                 } else {
@@ -400,11 +421,11 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
                                         if (flagGem) {
                                             if (EntityGem.sharesOwners(this, gemEntity)) {
                                                 System.out.println("shares owner");
-                                                entity.addPotionEffect(effectInstance);
+                                                entity.addEffect(effectInstance);
                                             }
                                         }
                                         if (this.isOwner(entity)) {
-                                            entity.addPotionEffect(effectInstance);
+                                            entity.addEffect(effectInstance);
                                         }
                                     }));
                                 }
@@ -418,28 +439,28 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
             }
         }
 
-        super.livingTick();
+        super.aiStep();
     }
 
     @Override
-    public ActionResultType applyPlayerInteraction(PlayerEntity player, Vector3d vec, Hand hand) {
-        if(player.world.isRemote){
-            return super.applyPlayerInteraction(player, vec, hand);
+    public InteractionResult interactAt(Player player, Vec3 vec, InteractionHand hand) {
+        if(player.level.isClientSide){
+            return super.interactAt(player, vec, hand);
         }
         //This part of the code checks if the player has a blank hand
-        if(hand == Hand.MAIN_HAND) {
+        if(hand == InteractionHand.MAIN_HAND) {
             this.currentPlayer = player;
-            if(player.getHeldItemMainhand() == ItemStack.EMPTY) {
+            if(player.getMainHandItem() == ItemStack.EMPTY) {
                 if (this.isOwner(player)) {
-                    if (player.isSneaking()) {
+                    if (player.isShiftKeyDown()) {
                         this.cycleMovementAI(player);
                     }
                     else {
                         if(this.canOpenInventoryByDefault()) {
-                            NetworkHooks.openGui((ServerPlayerEntity) player, this, buf -> buf.writeInt(this.getEntityId()));
+                            NetworkHooks.openGui((ServerPlayer) player, this, buf -> buf.writeInt(this.getId()));
                         }
                         if (this.isRideable()) {
-                            if (!this.isBeingRidden()) {
+                            if (!this.isVehicle()) {
                                 player.startRiding(this);
                             }
                         }
@@ -449,29 +470,29 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
                     //Test to see if the gem has an owner
                     if (!this.getOwned()) {
                         if(!this.isOwner(player)) {
-                            this.addOwner(player.getUniqueID());
-                            setFollow(player.getUniqueID());
+                            this.addOwner(player.getUUID());
+                            setFollow(player.getUUID());
                             this.setMovementType((byte) 2);
-                            player.sendMessage(new TranslationTextComponent("messages.gempire.entity.claimed"), this.getUniqueID());
-                            return super.applyPlayerInteraction(player, vec, hand);
+                            player.sendMessage(new TranslatableComponent("messages.gempire.entity.claimed"), this.getUUID());
+                            return super.interactAt(player, vec, hand);
                         }
                     }
                 }
             }
             else {
                 if(this.isOwner(player)) {
-                    if (player.getHeldItemMainhand().getItem() instanceof DyeItem) {
-                        DyeItem dye = (DyeItem) player.getHeldItemMainhand().getItem();
-                        if (player.isSneaking()) {
+                    if (player.getMainHandItem().getItem() instanceof DyeItem) {
+                        DyeItem dye = (DyeItem) player.getMainHandItem().getItem();
+                        if (player.isShiftKeyDown()) {
                             if (canChangeInsigniaColorByDefault()) this.setInsigniaColor(dye.getDyeColor().getId());
                         } else {
                             if(canChangeUniformColorByDefault()) this.setOutfitColor(dye.getDyeColor().getId());
                         }
                     }
-                    else if (player.getHeldItemMainhand().getItem() == Items.PAPER){
-                        NetworkHooks.openGui((ServerPlayerEntity) player, this, buf -> buf.writeInt(this.getEntityId()));
+                    else if (player.getMainHandItem().getItem() == Items.PAPER){
+                        NetworkHooks.openGui((ServerPlayer) player, this, buf -> buf.writeInt(this.getId()));
                     }
-                    else if(player.getHeldItemMainhand().getItem() == Items.BOOK){
+                    else if(player.getMainHandItem().getItem() == Items.BOOK){
                         String list1 = "";
                         for(int i = 0; i < this.structures.size(); i++){
                             if(i == this.structures.size() - 1){
@@ -490,13 +511,13 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
                                 list2 += this.biomes.get(i) + ", ";
                             }
                         }
-                        player.sendMessage(new StringTextComponent("Findable Structures: " + list1), UUID.randomUUID());
-                        player.sendMessage(new StringTextComponent("Findable Biomes: " + list2), UUID.randomUUID());
+                        player.sendMessage(new TextComponent("Findable Structures: " + list1), UUID.randomUUID());
+                        player.sendMessage(new TextComponent("Findable Biomes: " + list2), UUID.randomUUID());
                     }
                 }
             }
         }
-        return super.applyPlayerInteraction(player, vec, hand);
+        return super.interactAt(player, vec, hand);
     }
 
     /*
@@ -505,54 +526,54 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
     2 is follow
      */
 
-    public void cycleMovementAI(PlayerEntity player){
+    public void cycleMovementAI(Player player){
         //Cycles through the various movement types.
-        this.navigator.clearPath();
-        setFollow(player.getUniqueID());
+        this.navigation.stop();
+        setFollow(player.getUUID());
         if(this.getMovementType() < 2){
             this.addMovementType(1);
             switch(this.getMovementType()){
                 case 1:
-                    player.sendMessage(new TranslationTextComponent("messages.gempire.entity.wander"), this.getUniqueID());
+                    player.sendMessage(new TranslatableComponent("messages.gempire.entity.wander"), this.getUUID());
                     return;
                 case 2:
-                    player.sendMessage(new TranslationTextComponent("messages.gempire.entity.follow"), this.getUniqueID());
+                    player.sendMessage(new TranslatableComponent("messages.gempire.entity.follow"), this.getUUID());
                     return;
                 default:
-                    player.sendMessage(new TranslationTextComponent("messages.gempire.entity.stay"), this.getUniqueID());
+                    player.sendMessage(new TranslatableComponent("messages.gempire.entity.stay"), this.getUUID());
                     return;
             }
         }
         else if(this.getMovementType() == 2){
             this.setMovementType((byte) 0);
-            player.sendMessage(new TranslationTextComponent("messages.gempire.entity.stay"), this.getUniqueID());
-            this.GUARD_POS[0] = (int) this.getPosX();
-            this.GUARD_POS[1] = (int) this.getPosY();
-            this.GUARD_POS[2] = (int) this.getPosZ();
+            player.sendMessage(new TranslatableComponent("messages.gempire.entity.stay"), this.getUUID());
+            this.GUARD_POS[0] = (int) this.getX();
+            this.GUARD_POS[1] = (int) this.getY();
+            this.GUARD_POS[2] = (int) this.getZ();
             return;
         }
     }
 
     @Override
-    public boolean attackEntityFrom(DamageSource source, float amount){
-        if(this.world.isRemote){
-            return super.attackEntityFrom(source, amount);
+    public boolean hurt(DamageSource source, float amount){
+        if(this.level.isClientSide){
+            return super.hurt(source, amount);
         }
-        if(source.getImmediateSource() instanceof LivingEntity){
-            LivingEntity entity = (LivingEntity) source.getImmediateSource();
-            ItemStack stack = entity.getHeldItemMainhand();
+        if(source.getDirectEntity() instanceof LivingEntity){
+            LivingEntity entity = (LivingEntity) source.getDirectEntity();
+            ItemStack stack = entity.getMainHandItem();
             if(stack.getItem() instanceof ItemRejuvenator){
                 resetOwners();
-                attackEntityFrom(DamageSource.GENERIC, getMaxHealth());
+                hurt(DamageSource.GENERIC, getMaxHealth());
             }
             if(stack.getItem() instanceof ItemDestabilizer){
-                attackEntityFrom(DamageSource.GENERIC, getMaxHealth());
+                hurt(DamageSource.GENERIC, getMaxHealth());
             }
         }
-        if(this.isEmotional() && !source.isExplosion() && !source.isFireDamage()) {
+        if(this.isEmotional() && !source.isExplosion() && !source.isFire()) {
             if(this.emotionMeter <= this.EmotionThreshold()){
                 if(this.EmotionThreshold() - this.emotionMeter < 5){
-                    this.world.addParticle(ParticleTypes.ANGRY_VILLAGER, this.getPosX(), this.getPosY() + 2, this.getPosZ(),0,0,0);
+                    this.level.addParticle(ParticleTypes.ANGRY_VILLAGER, this.getX(), this.getY() + 2, this.getZ(),0,0,0);
                 }
                 this.emotionMeter++;
             }
@@ -565,56 +586,56 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
                 this.emotionMeter = 0;
             }
         }
-        return super.attackEntityFrom(source, amount);
+        return super.hurt(source, amount);
     }
 
     @Override
-    public boolean attackEntityAsMob(Entity entityIn) {
-        if(!entityIn.world.isRemote){
+    public boolean doHurtTarget(Entity entityIn) {
+        if(!entityIn.level.isClientSide){
             if(this.focusCheck()) for(Ability power : this.getAbilityPowers()){
                 if(power instanceof IMeleeAbility) {
                     ((IMeleeAbility)power).fight(entityIn, this.getAttributeValue(Attributes.ATTACK_DAMAGE));
                 }
             }
         }
-        return super.attackEntityAsMob(entityIn);
+        return super.doHurtTarget(entityIn);
     }
 
     @Override
-    public void attackEntityWithRangedAttack(LivingEntity target, float distanceFactor) {
+    public void performRangedAttack(LivingEntity target, float distanceFactor) {
         for(Ability power : this.getAbilityPowers()){
-            if(power instanceof IRangedAbility && this.canEntityBeSeen(target) && this.focusCheck()){
+            if(power instanceof IRangedAbility && this.focusCheck()){
                 ((IRangedAbility)power).attack(target, distanceFactor);
             }
         }
     }
 
     @Override
-    public void onDeath(DamageSource source){
+    public void die(DamageSource source){
         //When the Gem dies.
-        float f = (this.rand.nextFloat() - 0.5F) * 8.0F;
-        float f1 = (this.rand.nextFloat() - 0.5F) * 4.0F;
-        float f2 = (this.rand.nextFloat() - 0.5F) * 8.0F;
-        this.world.addParticle(ParticleTypes.EXPLOSION_EMITTER, this.getPosX() , this.getPosY() + 2.0D, this.getPosZ(), 0.0D, 0.0D, 0.0D);
-        if(!this.world.isRemote){
-            GemPoofEvent event = new GemPoofEvent(this, this.getPosition(), source);
+        float f = (this.random.nextFloat() - 0.5F) * 8.0F;
+        float f1 = (this.random.nextFloat() - 0.5F) * 4.0F;
+        float f2 = (this.random.nextFloat() - 0.5F) * 8.0F;
+        this.level.addParticle(ParticleTypes.EXPLOSION_EMITTER, this.getX() , this.getY() + 2.0D, this.getZ(), 0.0D, 0.0D, 0.0D);
+        if(!this.level.isClientSide){
+            GemPoofEvent event = new GemPoofEvent(this, this.blockPosition(), source);
             MinecraftForge.EVENT_BUS.post(event);
             ItemStack stack = new ItemStack(this.getGemItem());
             ((ItemGem) stack.getItem()).setData(this, stack);
-            ItemEntity item = new ItemEntity(this.world, this.getPosX(), this.getPosY(), this.getPosZ(), stack);
-            item.setNoDespawn();
-            this.world.addEntity(item);
+            ItemEntity item = new ItemEntity(this.level, this.getX(), this.getY(), this.getZ(), stack);
+            item.setExtendedLifetime();
+            this.level.addFreshEntity(item);
         }
-        super.onDeath(source);
+        super.die(source);
     }
 
-    public TranslationTextComponent getNickname(){
+    public TranslatableComponent getNickname(){
         if(this instanceof EntityVaryingGem){
             if(((EntityVaryingGem)this).UsesUniqueNames()) {
-                return new TranslationTextComponent("nickname.gempire." + this.getWholeGemName() + "_" + this.getSkinColorVariant());
+                return new TranslatableComponent("nickname.gempire." + this.getWholeGemName() + "_" + this.getSkinColorVariant());
             }
         }
-        return new TranslationTextComponent("entity.gempire." + this.getWholeGemName());
+        return new TranslatableComponent("entity.gempire." + this.getWholeGemName());
     }
 
     public Item getGemItem() {
@@ -658,7 +679,7 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
     }
 
     @Override
-    public boolean canDespawn(double xix){
+    public boolean removeWhenFarAway(double xix){
         return false;
     }
 
@@ -683,7 +704,7 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
 
     public void resetOwners(){
         setOwners(new ArrayList<UUID>());
-        setFollow(getUniqueID());
+        setFollow(getUUID());
     }
 
     public boolean getOwned(){
@@ -696,11 +717,11 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
 
     public boolean isOwner(LivingEntity entity){
         for(UUID uuid : this.OWNERS){
-            if(entity instanceof PlayerEntity){
-                if((((PlayerEntity)entity).getUniqueID()).equals(uuid)) return true;
+            if(entity instanceof Player){
+                if((((Player)entity).getUUID()).equals(uuid)) return true;
             }
             else {
-                if (entity.getUniqueID().equals(uuid)) return true;
+                if (entity.getUUID().equals(uuid)) return true;
             }
         }
         return false;
@@ -733,11 +754,11 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
     }
 
     public int getSkinColor(){
-        return this.dataManager.get(EntityGem.SKIN_COLOR);
+        return this.entityData.get(EntityGem.SKIN_COLOR);
     }
 
     public void setSkinColor(int value){
-        this.dataManager.set(EntityGem.SKIN_COLOR, value);
+        this.entityData.set(EntityGem.SKIN_COLOR, value);
     }
 
     public int generatePaletteColor(PaletteType type){
@@ -757,7 +778,7 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
         ResourceLocation loc = new ResourceLocation(this.getModID() + ":textures/entity/" + this.getWholeGemName().toLowerCase() + "/palettes/" + locString + ".png");
         BufferedImage palette = null;
         try {
-            if(getServer().isSinglePlayer()) {
+            if(getServer().isSingleplayer()) {
                 palette = ImageIO.read(Minecraft.getInstance().getResourceManager().getResource(loc).getInputStream());
             }
             else{
@@ -782,20 +803,20 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
     public abstract int generateSkinVariant();
 
     public int getSkinVariant(){
-        return this.dataManager.get(EntityGem.SKIN_VARIANT);
+        return this.entityData.get(EntityGem.SKIN_VARIANT);
     }
 
     public void setSkinVariant(int value){
-        this.dataManager.set(EntityGem.SKIN_VARIANT, value);
+        this.entityData.set(EntityGem.SKIN_VARIANT, value);
     }
 
 
     public int generateMarkingVariant(){
-        return this.hasMarkings() ? this.rand.nextInt(this.maxMarkings()) : 0;
+        return this.hasMarkings() ? this.random.nextInt(this.maxMarkings()) : 0;
     }
 
     public int generateMarking2Variant(){
-        return this.hasMarkings2() ? this.rand.nextInt(this.maxMarkings2()) : 0;
+        return this.hasMarkings2() ? this.random.nextInt(this.maxMarkings2()) : 0;
     }
 
     public boolean hasMarkings(){
@@ -812,37 +833,37 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
     }
 
     public void setMarkingColor(int color){
-        this.dataManager.set(EntityGem.MARKING_COLOR, color);
+        this.entityData.set(EntityGem.MARKING_COLOR, color);
     }
 
     public int getMarkingColor(){
-        return this.dataManager.get(EntityGem.MARKING_COLOR);
+        return this.entityData.get(EntityGem.MARKING_COLOR);
     }
     public void setMarkingVariant(int value){
-        this.dataManager.set(EntityGem.MARKING_VARIANT, value);
+        this.entityData.set(EntityGem.MARKING_VARIANT, value);
     }
 
     public int getMarkingVariant(){
-        return this.dataManager.get(EntityGem.MARKING_VARIANT);
+        return this.entityData.get(EntityGem.MARKING_VARIANT);
     }
 
     public void setMarking2Color(int color){
-        this.dataManager.set(EntityGem.MARKING_2_COLOR, color);
+        this.entityData.set(EntityGem.MARKING_2_COLOR, color);
     }
 
     public int getMarking2Color(){
-        return this.dataManager.get(EntityGem.MARKING_2_COLOR);
+        return this.entityData.get(EntityGem.MARKING_2_COLOR);
     }
     public void setMarking2Variant(int value){
-        this.dataManager.set(EntityGem.MARKING_2_VARIANT, value);
+        this.entityData.set(EntityGem.MARKING_2_VARIANT, value);
     }
 
     public int getMarking2Variant(){
-        return this.dataManager.get(EntityGem.MARKING_2_VARIANT);
+        return this.entityData.get(EntityGem.MARKING_2_VARIANT);
     }
 
     public int getGemPlacement(){
-        return this.dataManager.get(EntityGem.GEM_PLACEMENT);
+        return this.entityData.get(EntityGem.GEM_PLACEMENT);
     }
 
     public GemPlacements getGemPlacementE(){
@@ -850,47 +871,47 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
     }
 
     public void setGemPlacement(int value){
-        this.dataManager.set(EntityGem.GEM_PLACEMENT, value);
+        this.entityData.set(EntityGem.GEM_PLACEMENT, value);
     }
 
     public abstract GemPlacements[] getPlacements();
 
     public int generateGemPlacement(){
-        return this.getPlacements()[this.rand.nextInt(this.getPlacements().length)].id;
+        return this.getPlacements()[this.random.nextInt(this.getPlacements().length)].id;
     }
 
     public int getHairColor(){
-        return this.dataManager.get(EntityGem.HAIR_COLOR);
+        return this.entityData.get(EntityGem.HAIR_COLOR);
     }
 
     public void setHairColor(int value){
-        this.dataManager.set(EntityGem.HAIR_COLOR, value);
+        this.entityData.set(EntityGem.HAIR_COLOR, value);
     }
 
     public int getHairVariant(){
-        return this.dataManager.get(EntityGem.HAIR_VARIANT);
+        return this.entityData.get(EntityGem.HAIR_VARIANT);
     }
 
     public void setHairVariant(int value){
-        this.dataManager.set(EntityGem.HAIR_VARIANT, value);
+        this.entityData.set(EntityGem.HAIR_VARIANT, value);
     }
 
     public abstract int generateHairVariant();
 
     public int getGemColor(){
-        return this.dataManager.get(EntityGem.GEM_COLOR);
+        return this.entityData.get(EntityGem.GEM_COLOR);
     }
 
     public void setGemColor(int value){
-        this.dataManager.set(EntityGem.GEM_COLOR, value);
+        this.entityData.set(EntityGem.GEM_COLOR, value);
     }
 
     public int getOutfitColor(){
-        return this.dataManager.get(EntityGem.OUTFIT_COLOR);
+        return this.entityData.get(EntityGem.OUTFIT_COLOR);
     }
 
     public void setOutfitColor(int value){
-        this.dataManager.set(EntityGem.OUTFIT_COLOR, value);
+        this.entityData.set(EntityGem.OUTFIT_COLOR, value);
     }
 
     public int generateOutfitColor(){
@@ -900,11 +921,11 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
     public abstract int generateOutfitVariant();
 
     public void setOutfitVariant(int value){
-        this.dataManager.set(EntityGem.OUTFIT_VARIANT, value);
+        this.entityData.set(EntityGem.OUTFIT_VARIANT, value);
     }
 
     public int getOutfitVariant(){
-        return this.dataManager.get(EntityGem.OUTFIT_VARIANT);
+        return this.entityData.get(EntityGem.OUTFIT_VARIANT);
     }
 
     public boolean hasOutfitPlacementVariant(){
@@ -918,19 +939,19 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
     public abstract int generateInsigniaVariant();
 
     public void setInsigniaVariant(int value){
-        this.dataManager.set(EntityGem.INSIGNIA_VARIANT, value);
+        this.entityData.set(EntityGem.INSIGNIA_VARIANT, value);
     }
 
     public int getInsigniaVariant(){
-        return this.dataManager.get(EntityGem.INSIGNIA_VARIANT);
+        return this.entityData.get(EntityGem.INSIGNIA_VARIANT);
     }
 
     public int getInsigniaColor(){
-        return this.dataManager.get(EntityGem.INSIGNIA_COLOR);
+        return this.entityData.get(EntityGem.INSIGNIA_COLOR);
     }
 
     public void setInsigniaColor(int value){
-        this.dataManager.set(EntityGem.INSIGNIA_COLOR, value);
+        this.entityData.set(EntityGem.INSIGNIA_COLOR, value);
     }
 
     public int generateInsigniaColor(){
@@ -938,11 +959,11 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
     }
 
     public int getSkinColorVariant(){
-        return this.dataManager.get(EntityGem.SKIN_COLOR_VARIANT);
+        return this.entityData.get(EntityGem.SKIN_COLOR_VARIANT);
     }
 
     public void setSkinColorVariant(int value){
-        this.dataManager.set(EntityGem.SKIN_COLOR_VARIANT, value);
+        this.entityData.set(EntityGem.SKIN_COLOR_VARIANT, value);
     }
 
     public abstract int generateSkinColorVariant();
@@ -950,11 +971,11 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
     public abstract boolean hasSkinColorVariant();
 
     public boolean isEmotional(){
-        return this.dataManager.get(EntityGem.EMOTIONAL);
+        return this.entityData.get(EntityGem.EMOTIONAL);
     }
 
     public void setEmotional(boolean value){
-        this.dataManager.set(EntityGem.EMOTIONAL, value);
+        this.entityData.set(EntityGem.EMOTIONAL, value);
     }
 
     public abstract boolean generateIsEmotional();
@@ -962,19 +983,19 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
     public abstract byte EmotionThreshold();
 
     public boolean isPrimary(){
-        return this.dataManager.get(EntityGem.PRIMARY);
+        return this.entityData.get(EntityGem.PRIMARY);
     }
 
     public void setPrimary(boolean value){
-        this.dataManager.set(EntityGem.PRIMARY, value);
+        this.entityData.set(EntityGem.PRIMARY, value);
     }
 
     public boolean isDefective(){
-        return this.dataManager.get(EntityGem.DEFECTIVE);
+        return this.entityData.get(EntityGem.DEFECTIVE);
     }
 
     public void setDefective(boolean value){
-        this.dataManager.set(EntityGem.DEFECTIVE, value);
+        this.entityData.set(EntityGem.DEFECTIVE, value);
     }
 
     public abstract boolean canChangeUniformColorByDefault();
@@ -1013,7 +1034,7 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
                     ability1 = Ability.ABILITY_FROM_ABILITIES.get(ability).getConstructor(parameterType).newInstance(null).assignAbility(this);
                     powers.add(ability1);
                     if((ability1 instanceof IEffectAbility || ability1 instanceof IAreaAbility) && !(ability1 instanceof IViolentAbility)){
-                        this.dataManager.set(EntityGem.USES_AREA_ABILITIES, true);
+                        this.entityData.set(EntityGem.USES_AREA_ABILITIES, true);
                     }
                 }
                 catch (Exception e){
@@ -1062,11 +1083,11 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
     }
 
     public int getAbilitySlots(){
-        return this.dataManager.get(EntityGem.ABILITY_SLOTS);
+        return this.entityData.get(EntityGem.ABILITY_SLOTS);
     }
 
     public void setAbilitySlots(int value){
-        this.dataManager.set(EntityGem.ABILITY_SLOTS, value);
+        this.entityData.set(EntityGem.ABILITY_SLOTS, value);
     }
 
     public int generateAbilitySlots(){
@@ -1080,11 +1101,11 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
     }
 
     public String getAbilites(){
-        return this.dataManager.get(EntityGem.ABILITIES);
+        return this.entityData.get(EntityGem.ABILITIES);
     }
 
     public void setAbilites(String value){
-        this.dataManager.set(EntityGem.ABILITIES, value);
+        this.entityData.set(EntityGem.ABILITIES, value);
     }
 
     public String generateAbilities(){
@@ -1137,7 +1158,7 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
     public abstract Abilities[] definiteAbilities();
 
     public boolean usesAreaAbilities(){
-        return this.dataManager.get(EntityGem.USES_AREA_ABILITIES);
+        return this.entityData.get(EntityGem.USES_AREA_ABILITIES);
     }
 
     public ArrayList<IIdleAbility> getIdlePowers(){
@@ -1155,11 +1176,11 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
     }
 
     public void setHasVisor(boolean value){
-        this.dataManager.set(EntityGem.HAS_VISOR, value);
+        this.entityData.set(EntityGem.HAS_VISOR, value);
     }
 
     public boolean hasVisor(){
-        return this.dataManager.get(EntityGem.HAS_VISOR);
+        return this.entityData.get(EntityGem.HAS_VISOR);
     }
 
     public boolean hasVisorCosmeticOnly(){
@@ -1171,7 +1192,7 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
     }
 
     public boolean focusCheck(){
-        return this.isFocused() || (this.focusLevel <=1 ? true : this.rand.nextInt(this.focusLevel) == 0);
+        return this.isFocused() || (this.focusLevel <=1 ? true : this.random.nextInt(this.focusLevel) == 0);
     }
 
     public int baseFocus(){
@@ -1194,22 +1215,22 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
 
     @Override
     public boolean boost() {
-        return booster.boost(this.getRNG());
+        return booster.boost(this.getRandom());
     }
 
-    public void travelTowards(Vector3d travelVec) {
-        if(this.getControllingPassenger() != null && this.getControllingPassenger() instanceof PlayerEntity){
-            double speed = ((PlayerEntity) this.getControllingPassenger()).moveForward;
+    public void travelWithInput(Vec3 travelVec) {
+        if(this.getControllingPassenger() != null && this.getControllingPassenger() instanceof Player){
+            double speed = ((Player) this.getControllingPassenger()).zza;
             double speedSwim = this.isSwimming() ? 10 : 1;
-            super.travel(travelVec.mul(speed,speed,speed).mul(speedSwim, speedSwim, speedSwim));
+            super.travel(travelVec.multiply(speed,speed,speed).multiply(speedSwim, speedSwim, speedSwim));
         }
         else{
             super.travel(travelVec);
         }
     }
 
-    public void travel(Vector3d travelVector) {
-        this.ride(this, this.booster, travelVector);
+    public void travel(Vec3 travelVector) {
+        this.travel(this, this.booster, travelVector);
     }
 
     @Nullable
@@ -1217,9 +1238,9 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
         return this.getPassengers().isEmpty() ? null : this.getPassengers().get(0);
     }
 
-    public boolean canBeSteered() {
+    public boolean canBeControlledByRider() {
         Entity entity = this.getControllingPassenger();
-        if (!(entity instanceof PlayerEntity)) {
+        if (!(entity instanceof Player)) {
             return false;
         } else {
             return true;
@@ -1227,47 +1248,47 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
     }
 
 
-    public Vector3d func_241205_ce_() {
-        return new Vector3d(0.0D, (double)(0.8F * this.getEyeHeight()), (double)(this.getWidth() * 0.4F));
+    public Vec3 getLeashOffset() {
+        return new Vec3(0.0D, (double)(0.8F * this.getEyeHeight()), (double)(this.getBbWidth() * 0.4F));
     }
 
-    public float getMountedSpeed() {
+    public float getSteeringSpeed() {
         return (float)this.getAttributeValue(Attributes.MOVEMENT_SPEED);
     }
 
     public void adjustForFluids() {
         if(this.canWalkOnFluids()) {
             if (this.isInWater() || this.isInLava()) {
-                ISelectionContext iselectioncontext = ISelectionContext.forEntity(this);
-                if (iselectioncontext.func_216378_a(FlowingFluidBlock.LAVA_COLLISION_SHAPE, this.getPosition(), true) && !this.world.getFluidState(this.getPosition().up()).isTagged(FluidTags.LAVA)
-                || iselectioncontext.func_216378_a(FlowingFluidBlock.LAVA_COLLISION_SHAPE, this.getPosition(), true) && !this.world.getFluidState(this.getPosition().up()).isTagged(FluidTags.WATER)) {
+                CollisionContext iselectioncontext = CollisionContext.of(this);
+                if (iselectioncontext.isAbove(LiquidBlock.STABLE_SHAPE, this.blockPosition(), true) && !this.level.getFluidState(this.blockPosition().above()).is(FluidTags.LAVA)
+                || iselectioncontext.isAbove(LiquidBlock.STABLE_SHAPE, this.blockPosition(), true) && !this.level.getFluidState(this.blockPosition().above()).is(FluidTags.WATER)) {
                     this.onGround = true;
                 } else {
-                    this.setMotion(this.getMotion().scale(.5D).add(0.0D, 0.05D, 0.0D));
+                    this.setDeltaMovement(this.getDeltaMovement().scale(.5D).add(0.0D, 0.05D, 0.0D));
                 }
             }
         }
     }
 
-    public boolean onLivingFall(float distance, float damageMultiplier) {
+    public boolean causeFallDamage(float distance, float damageMultiplier) {
         return false;
     }
 
-    protected void updateFallState(double y, boolean onGroundIn, BlockState state, BlockPos pos) {
-        this.doBlockCollisions();
+    protected void checkFallDamage(double y, boolean onGroundIn, BlockState state, BlockPos pos) {
+        this.checkInsideBlocks();
         if (this.isInLava()) {
             this.fallDistance = 0.0F;
         } else {
-            super.updateFallState(y, onGroundIn, state, pos);
+            super.checkFallDamage(y, onGroundIn, state, pos);
         }
     }
 
     public void setHasCustomName(boolean value){
-        this.dataManager.set(EntityGem.HAS_CUSTOM_NAME, value);
+        this.entityData.set(EntityGem.HAS_CUSTOM_NAME, value);
     }
 
     public boolean customName(){
-        return this.dataManager.get(EntityGem.HAS_CUSTOM_NAME);
+        return this.entityData.get(EntityGem.HAS_CUSTOM_NAME);
     }
 
     public int getLuck(){
@@ -1279,27 +1300,27 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
     //CONTAINER STUFF
 
     @Override
-    public int getInventoryStackLimit() {
+    public int getMaxStackSize() {
         return 64;
     }
 
     @Override
-    public void openInventory(PlayerEntity player) {
-        player.openContainer(this);
+    public void startOpen(Player player) {
+        player.openMenu(this);
     }
 
     @Override
-    public void closeInventory(PlayerEntity player) {
-        player.closeScreen();
+    public void stopOpen(Player player) {
+        player.closeContainer();
     }
 
     @Override
-    public boolean isItemValidForSlot(int index, ItemStack stack) {
+    public boolean canPlaceItem(int index, ItemStack stack) {
         return !(stack.getItem() instanceof ItemGem);
     }
 
     @Override
-    public int getSizeInventory() {
+    public int getContainerSize() {
         return EntityGem.NUMBER_OF_SLOTS;
     }
 
@@ -1309,27 +1330,27 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
     }
 
     @Override
-    public ItemStack getStackInSlot(int index) {
+    public ItemStack getItem(int index) {
         return this.getItems().get(index);
     }
 
     @Override
-    public ItemStack decrStackSize(int index, int count) {
-        return ItemStackHelper.getAndSplit(this.getItems(), index, count);
+    public ItemStack removeItem(int index, int count) {
+        return ContainerHelper.removeItem(this.getItems(), index, count);
     }
 
     @Override
-    public ItemStack removeStackFromSlot(int index) {
+    public ItemStack removeItemNoUpdate(int index) {
         if(index > 26 && index < 31){
             switch(index){
                 case 27:
-                    this.setItemStackToSlot(EquipmentSlotType.HEAD, ItemStack.EMPTY);
+                    this.setItemSlot(EquipmentSlot.HEAD, ItemStack.EMPTY);
                 case 28:
-                    this.setItemStackToSlot(EquipmentSlotType.CHEST, ItemStack.EMPTY);
+                    this.setItemSlot(EquipmentSlot.CHEST, ItemStack.EMPTY);
                 case 29:
-                    this.setItemStackToSlot(EquipmentSlotType.LEGS, ItemStack.EMPTY);
+                    this.setItemSlot(EquipmentSlot.LEGS, ItemStack.EMPTY);
                 default:
-                    this.setItemStackToSlot(EquipmentSlotType.FEET, ItemStack.EMPTY);
+                    this.setItemSlot(EquipmentSlot.FEET, ItemStack.EMPTY);
             }
         }
         if(index == 32){
@@ -1345,26 +1366,26 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
     }
 
     @Override
-    public void setInventorySlotContents(int index, ItemStack stack) {
+    public void setItem(int index, ItemStack stack) {
         this.getItems().set(index, stack);
         int ind = index;
         if(stack.getItem() instanceof ArmorItem && index > 26 && index < 31){
             switch(ind){
                 case 27:
-                    this.setItemStackToSlot(EquipmentSlotType.HEAD, stack);
+                    this.setItemSlot(EquipmentSlot.HEAD, stack);
                 case 28:
-                    this.setItemStackToSlot(EquipmentSlotType.CHEST, stack);
+                    this.setItemSlot(EquipmentSlot.CHEST, stack);
                 case 29:
-                    this.setItemStackToSlot(EquipmentSlotType.LEGS, stack);
+                    this.setItemSlot(EquipmentSlot.LEGS, stack);
                 default:
-                    this.setItemStackToSlot(EquipmentSlotType.FEET, stack);
+                    this.setItemSlot(EquipmentSlot.FEET, stack);
             }
         }
         if(index == 31 || index == 32){
             for(Ability ability : this.getAbilityPowers()){
                 if(ability instanceof IAlchemyAbility && this.currentPlayer != null && !this.brewing){
                     IAlchemyAbility power = (IAlchemyAbility)ability;
-                    if(this.getStackInSlot(31).getItem() == power.input()) {
+                    if(this.getItem(31).getItem() == power.input()) {
                         this.outputItem = power.output();
                         this.brewing = power.consume() != Items.AIR ? this.consumeItemCheck(power.consume()) && power.doSpecialActionOnInput(this.currentPlayer) :
                                 power.doSpecialActionOnInput(this.currentPlayer);
@@ -1375,23 +1396,23 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
     }
 
     @Override
-    public void markDirty() {
+    public void setChanged() {
 
     }
 
     @Override
-    public boolean isUsableByPlayer(PlayerEntity player) {
+    public boolean stillValid(Player player) {
         return true;
     }
 
     @Nullable
     @Override
-    public Container createMenu(int p_createMenu_1_, PlayerInventory p_createMenu_2_, PlayerEntity p_createMenu_3_) {
+    public AbstractContainerMenu createMenu(int p_createMenu_1_, Inventory p_createMenu_2_, Player p_createMenu_3_) {
         return new GemUIContainer(p_createMenu_1_, p_createMenu_2_, this);
     }
 
     @Override
-    public void onInventoryChanged(IInventory invBasic) {
+    public void containerChanged(Container invBasic) {
     }
 
     public NonNullList<ItemStack> getItems() {
@@ -1403,21 +1424,21 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
     }
 
     @Override
-    public void clear() {
+    public void clearContent() {
 
     }
 
     @Override
-    public void damageEntity(DamageSource damageSrc, float damageAmount) {
-        super.damageEntity(damageSrc, damageAmount);
+    public void actuallyHurt(DamageSource damageSrc, float damageAmount) {
+        super.actuallyHurt(damageSrc, damageAmount);
     }
 
     public int getBrewProgress(){
-        return this.dataManager.get(EntityGem.BREWING_PROGRESS);
+        return this.entityData.get(EntityGem.BREWING_PROGRESS);
     }
 
     public void setBrewProgress(int value){
-        this.dataManager.set(EntityGem.BREWING_PROGRESS, value);
+        this.entityData.set(EntityGem.BREWING_PROGRESS, value);
     }
 
     public boolean canOpenInventoryByDefault(){
@@ -1426,13 +1447,13 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
 
     public boolean consumeItemCheck(Item item){
         for(int i = 0; i < EntityGem.NUMBER_OF_SLOTS - 4; i++){
-            if(this.getStackInSlot(i).getItem() == item){
-                if(this.getStackInSlot(i).getCount() == 1){
-                    this.setInventorySlotContents(i, ItemStack.EMPTY);
+            if(this.getItem(i).getItem() == item){
+                if(this.getItem(i).getCount() == 1){
+                    this.setItem(i, ItemStack.EMPTY);
                     return true;
                 }else {
-                    this.setInventorySlotContents(i, new ItemStack(this.getStackInSlot(i).getItem(),
-                            this.getStackInSlot(i).getCount() - 1));
+                    this.setItem(i, new ItemStack(this.getItem(i).getItem(),
+                            this.getItem(i).getCount() - 1));
                     //this.getStackInSlot(i).shrink(1);
                     return true;
                 }
@@ -1447,14 +1468,14 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
 
     */
 
-    public static BlockPos findStructure(EntityGem gem, Structure<?> structure) {
-        if(gem.world.isRemote){
+    public static BlockPos findStructure(EntityGem gem, StructureFeature<?> structure) {
+        if(gem.level.isClientSide){
             return BlockPos.ZERO;
         }
         BlockPos blockpos1 = null;
-        BlockPos blockpos = new BlockPos(gem.getPosition());
+        BlockPos blockpos = new BlockPos(gem.blockPosition());
         if(gem.structures.contains(structure.getRegistryName().toString().replace("minecraft:", ""))) {
-             blockpos1 = ((ServerWorld) gem.getEntityWorld()).func_241117_a_(structure, blockpos, 100, false);
+             blockpos1 = ((ServerLevel) gem.getCommandSenderWorld()).findNearestMapFeature(structure, blockpos, 100, false);
         }
         if (blockpos1 == null) {
             return BlockPos.ZERO;
@@ -1464,17 +1485,17 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
     }
 
     public static BlockPos findBiome(EntityGem gem, ResourceLocation biomeResource) throws CommandSyntaxException {
-        if(gem.world.isRemote){
+        if(gem.level.isClientSide){
             return BlockPos.ZERO;
         }
-        Biome biome = gem.getServer().func_244267_aX().getRegistry(Registry.BIOME_KEY).getOptional(biomeResource).orElseThrow(() -> {
-            return LocateBiomeCommand.field_241044_a_.create(biomeResource);
+        Biome biome = gem.getServer().registryAccess().registryOrThrow(Registry.BIOME_REGISTRY).getOptional(biomeResource).orElseThrow(() -> {
+            return LocateBiomeCommand.ERROR_INVALID_BIOME.create(biomeResource);
         });
         String s = biomeResource.toString();
-        BlockPos blockpos = new BlockPos(gem.getPosition());
+        BlockPos blockpos = new BlockPos(gem.blockPosition());
         BlockPos blockpos1 = null;
         if(gem.biomes.contains(s.replace("minecraft:", ""))) {
-            blockpos1 = ((ServerWorld) gem.getEntityWorld()).func_241116_a_(biome, blockpos, 6400, 8);
+            blockpos1 = ((ServerLevel) gem.getCommandSenderWorld()).findNearestBiome(biome, blockpos, 6400, 8);
         }
         if (blockpos1 == null) {
             return BlockPos.ZERO;
@@ -1483,39 +1504,39 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
         }
     }
 
-    public void runFindCommand(ServerPlayerEntity player, @Nullable Structure<?> structure, @Nullable ResourceLocation biomeResource, boolean biome)
+    public void runFindCommand(ServerPlayer player, @Nullable StructureFeature<?> structure, @Nullable ResourceLocation biomeResource, boolean biome)
             throws CommandSyntaxException {
         BlockPos pos = biome ? EntityGem.findBiome(this, biomeResource) : EntityGem.findStructure(this, structure);
         if(this.consumeItemCheck(Items.MAP)) {
             if (pos == BlockPos.ZERO) {
                 if(biome) {
-                    player.sendMessage(new TranslationTextComponent("commands.gempire.norecbio"), UUID.randomUUID());
+                    player.sendMessage(new TranslatableComponent("commands.gempire.norecbio"), UUID.randomUUID());
                 }
                 else{
-                    player.sendMessage(new TranslationTextComponent("commands.gempire.norecstruc"), UUID.randomUUID());
+                    player.sendMessage(new TranslatableComponent("commands.gempire.norecstruc"), UUID.randomUUID());
                 }
                 return;
             }
             boolean done = false;
-            ItemStack map = FilledMapItem.setupNewMap(this.world, pos.getX(), pos.getZ(), (byte) 0, true, true);
-            MapData.addTargetDecoration(map, pos, "location", MapDecoration.Type.RED_X);
+            ItemStack map = MapItem.create(this.level, pos.getX(), pos.getZ(), (byte) 0, true, true);
+            MapItemSavedData.addTargetDecoration(map, pos, "location", MapDecoration.Type.RED_X);
             String name = biome ? biomeResource.toString().replaceAll("minecraft:", "") :
-                    structure.getStructureName().replaceAll("minecraft:", "");
-            map.setDisplayName(new StringTextComponent(name));
+                    structure.getFeatureName().replaceAll("minecraft:", "");
+            map.setHoverName(new TextComponent(name));
             for (int i = 0; i < EntityGem.NUMBER_OF_SLOTS - 6; i++) {
-                if (this.getStackInSlot(i) == ItemStack.EMPTY) {
-                    this.setInventorySlotContents(i, map);
+                if (this.getItem(i) == ItemStack.EMPTY) {
+                    this.setItem(i, map);
                     done = true;
                     break;
                 }
             }
             if (!done) {
-                this.entityDropItem(map);
+                this.spawnAtLocation(map);
             }
-            player.sendMessage(new TranslationTextComponent("commands.gempire.foundit"), UUID.randomUUID());
+            player.sendMessage(new TranslatableComponent("commands.gempire.foundit"), UUID.randomUUID());
         }
         else{
-            player.sendMessage(new TranslationTextComponent("commands.gempire.nomap"), UUID.randomUUID());
+            player.sendMessage(new TranslatableComponent("commands.gempire.nomap"), UUID.randomUUID());
         }
     }
 
@@ -1536,7 +1557,7 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
         rls.addAll(sussy);
         ArrayList<ResourceLocation> resourceLocations = new ArrayList<>();
         while(resourceLocations.size() < 3){
-            int m = this.rand.nextInt(sussy.size());
+            int m = this.random.nextInt(sussy.size());
             if(!resourceLocations.contains(rls.get(m))) resourceLocations.add(rls.get(m));
         }
         for(ResourceLocation key : resourceLocations){
@@ -1550,7 +1571,7 @@ public abstract class EntityGem extends CreatureEntity implements IRangedAttackM
         rls1.addAll(sus);
         ArrayList<ResourceLocation> resourceLocations1 = new ArrayList<>();
         while(resourceLocations1.size() < 3){
-            int m = this.rand.nextInt(sus.size());
+            int m = this.random.nextInt(sus.size());
             if(!resourceLocations1.contains(rls1.get(m))) resourceLocations1.add(rls1.get(m));
         }
         for(ResourceLocation key : resourceLocations1){

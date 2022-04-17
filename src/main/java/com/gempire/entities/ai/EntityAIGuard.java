@@ -1,9 +1,8 @@
 package com.gempire.entities.ai;
 
 import com.gempire.entities.bases.EntityGem;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.goal.Goal;
-import net.minecraft.pathfinding.PathNodeType;
+import net.minecraft.world.entity.ai.goal.Goal;
+import net.minecraft.world.level.pathfinder.BlockPathTypes;
 
 import java.util.List;
 
@@ -17,25 +16,25 @@ public class EntityAIGuard extends Goal {
     }
 
     @Override
-    public boolean shouldExecute() {
-        return follower.getMovementType() == 0 && this.follower.getDistanceSq(this.follower.GUARD_POS[0], this.follower.GUARD_POS[1], this.follower.GUARD_POS[2]) > .25f;
+    public boolean canUse() {
+        return follower.getMovementType() == 0 && this.follower.distanceToSqr(this.follower.GUARD_POS[0], this.follower.GUARD_POS[1], this.follower.GUARD_POS[2]) > .25f;
     }
 
     @Override
-    public boolean shouldContinueExecuting() {
-        return !this.follower.getNavigator().noPath() && this.follower.getMovementType() == 0 && this.follower.getDistanceSq(this.follower.GUARD_POS[0], this.follower.GUARD_POS[1], this.follower.GUARD_POS[2]) > .25f;
+    public boolean canContinueToUse() {
+        return !this.follower.getNavigation().isDone() && this.follower.getMovementType() == 0 && this.follower.distanceToSqr(this.follower.GUARD_POS[0], this.follower.GUARD_POS[1], this.follower.GUARD_POS[2]) > .25f;
     }
 
     @Override
-    public void startExecuting(){
-        super.startExecuting();
-        this.follower.setPathPriority(PathNodeType.WATER, 0);
-        this.follower.getNavigator().tryMoveToXYZ(this.follower.GUARD_POS[0], this.follower.GUARD_POS[1], this.follower.GUARD_POS[2], this.speed);
+    public void start(){
+        super.start();
+        this.follower.setPathfindingMalus(BlockPathTypes.WATER, 0);
+        this.follower.getNavigation().moveTo(this.follower.GUARD_POS[0], this.follower.GUARD_POS[1], this.follower.GUARD_POS[2], this.speed);
     }
 
     @Override
-    public void resetTask() {
-        this.follower.getNavigator().clearPath();
-        this.follower.setPathPriority(PathNodeType.WATER, 0);
+    public void stop() {
+        this.follower.getNavigation().stop();
+        this.follower.setPathfindingMalus(BlockPathTypes.WATER, 0);
     }
 }

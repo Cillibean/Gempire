@@ -4,22 +4,16 @@ import com.gempire.systems.injection.Crux;
 import com.gempire.util.Abilities;
 import com.gempire.util.CruxType;
 import com.gempire.util.PaletteType;
-import net.minecraft.block.Blocks;
-import net.minecraft.entity.CreatureEntity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.MobEntity;
-import net.minecraft.entity.ai.attributes.AttributeModifierMap;
-import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.passive.SheepEntity;
-import net.minecraft.item.DyeColor;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.PathfinderMob;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.level.Level;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 
 public abstract class EntityStarterGem extends EntityGem {
 
-    public EntityStarterGem(EntityType<? extends CreatureEntity> type, World worldIn) {
+    public EntityStarterGem(EntityType<? extends PathfinderMob> type, Level worldIn) {
         super(type, worldIn);
     }
 
@@ -32,15 +26,15 @@ public abstract class EntityStarterGem extends EntityGem {
     }
 
     public int generateHairVariant(){
-        return this.rand.nextInt(3);
+        return this.random.nextInt(3);
     }
 
     public int generateOutfitColor(){
-        return this.rand.nextInt(16);
+        return this.random.nextInt(16);
     }
 
     public int generateInsigniaColor(){
-        return this.rand.nextInt(16);
+        return this.random.nextInt(16);
     }
 
     public int generateAbilitySlots() {
@@ -76,7 +70,7 @@ public abstract class EntityStarterGem extends EntityGem {
     }
 
     public int generateOutfitVariant(){
-        return this.rand.nextInt(4);
+        return this.random.nextInt(4);
     }
     public int generateInsigniaVariant(){
         return this.getOutfitVariant();

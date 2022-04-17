@@ -6,59 +6,67 @@ import com.gempire.entities.bases.EntityVaryingGem;
 import com.gempire.util.Abilities;
 import com.gempire.util.GemPlacements;
 import net.minecraft.entity.*;
-import net.minecraft.entity.ai.attributes.AttributeModifierMap;
-import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.ai.goal.*;
-import net.minecraft.entity.monster.IMob;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.DamageSource;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.monster.Enemy;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.level.Level;
+
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.PathfinderMob;
+import net.minecraft.world.entity.ai.goal.FloatGoal;
+import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
+import net.minecraft.world.entity.ai.goal.PanicGoal;
+import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 
 public class EntitySapphire extends EntityVaryingGem {
     public boolean defensive = false;
 
-    public EntitySapphire(EntityType<? extends CreatureEntity> type, World worldIn) {
+    public EntitySapphire(EntityType<? extends PathfinderMob> type, Level worldIn) {
         super(type, worldIn);
     }
 
-    public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
-        return MobEntity.func_233666_p_()
-                .createMutableAttribute(Attributes.MAX_HEALTH, 50.0D)
-                .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.4D)
-                .createMutableAttribute(Attributes.ATTACK_DAMAGE, 1.0D)
-                .createMutableAttribute(Attributes.ATTACK_SPEED, 1.0D);
+    public static AttributeSupplier.Builder setCustomAttributes() {
+        return Mob.createMobAttributes()
+                .add(Attributes.MAX_HEALTH, 50.0D)
+                .add(Attributes.MOVEMENT_SPEED, 0.4D)
+                .add(Attributes.ATTACK_DAMAGE, 1.0D)
+                .add(Attributes.ATTACK_SPEED, 1.0D);
     }
 
     @Override
-    public void writeAdditional(CompoundNBT compound) {
+    public void addAdditionalSaveData(CompoundTag compound) {
         compound.putBoolean("defensive", this.defensive);
-        super.writeAdditional(compound);
+        super.addAdditionalSaveData(compound);
     }
 
     @Override
-    public void read(CompoundNBT compound) {
-        super.read(compound);
+    public void load(CompoundTag compound) {
+        super.load(compound);
         this.defensive = compound.getBoolean("defensive");
     }
 
     @Override
-    public boolean attackEntityFrom(DamageSource source, float amount) {
+    public boolean hurt(DamageSource source, float amount) {
         this.defensive = true;
-        return super.attackEntityFrom(source, amount);
+        return super.hurt(source, amount);
     }
 
     @Override
     protected void registerGoals() {
         super.registerGoals();
-        this.goalSelector.addGoal(9, new SwimGoal(this));
+        this.goalSelector.addGoal(9, new FloatGoal(this));
         this.goalSelector.addGoal(6, new PanicGoal(this, 1.1D));
-        this.goalSelector.addGoal(7, new LookAtGoal(this, PlayerEntity.class, 4.0F));
-        this.goalSelector.addGoal(8, new LookRandomlyGoal(this));
+        this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 4.0F));
+        this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
         this.goalSelector.addGoal(7, new EntityAIWander(this, 1.0D));
         this.goalSelector.addGoal(7, new EntityAIFollowOwner(this, 1.0D));
-        this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, MobEntity.class, 10, true, false, (p_213621_0_) -> {
-            return p_213621_0_ instanceof IMob;
+        this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, Mob.class, 10, true, false, (p_213621_0_) -> {
+            return p_213621_0_ instanceof Enemy;
         }));
     }
 
@@ -78,7 +86,7 @@ public class EntitySapphire extends EntityVaryingGem {
 
     @Override
     public int generateHairVariant() {
-        return this.rand.nextInt(5);
+        return this.random.nextInt(5);
     }
 
     @Override
@@ -96,7 +104,7 @@ public class EntitySapphire extends EntityVaryingGem {
     }
 
     public int generateOutfitVariant() {
-        return this.rand.nextInt(6);
+        return this.random.nextInt(6);
     }
 
     public int generateInsigniaVariant() {
@@ -136,7 +144,7 @@ public class EntitySapphire extends EntityVaryingGem {
     }
 
     @Override
-    public boolean isImmuneToFire(){
+    public boolean fireImmune(){
         return false;
     }
 

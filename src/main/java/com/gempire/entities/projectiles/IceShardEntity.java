@@ -2,40 +2,38 @@ package com.gempire.entities.projectiles;
 
 import com.gempire.init.ModEntities;
 import com.gempire.init.ModItems;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.projectile.ProjectileEntity;
-import net.minecraft.entity.projectile.ProjectileItemEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.network.IPacket;
-import net.minecraft.particles.IParticleData;
-import net.minecraft.particles.ItemParticleData;
-import net.minecraft.particles.ParticleTypes;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.math.EntityRayTraceResult;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ItemParticleOption;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.fml.network.NetworkHooks;
+import net.minecraftforge.fmllegacy.network.NetworkHooks;
 
-public class IceShardEntity extends ProjectileItemEntity {
+public class IceShardEntity extends ThrowableItemProjectile {
 
-    public IceShardEntity(World worldIn, LivingEntity throwerIn) {
+    public IceShardEntity(Level worldIn, LivingEntity throwerIn) {
         super(ModEntities.ICE_SHARD.get(), throwerIn, worldIn);
     }
 
-    public IceShardEntity(EntityType<? extends ProjectileItemEntity> type, World worldIn) {
+    public IceShardEntity(EntityType<? extends ThrowableItemProjectile> type, Level worldIn) {
         super(type, worldIn);
     }
 
-    public IceShardEntity(World worldIn, double x, double y, double z) {
+    public IceShardEntity(Level worldIn, double x, double y, double z) {
         super(ModEntities.ICE_SHARD.get(), x, y, z, worldIn);
     }
 
     @Override
-    public IPacket<?> createSpawnPacket() {
+    public Packet<?> getAddEntityPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
     }
 
@@ -45,24 +43,24 @@ public class IceShardEntity extends ProjectileItemEntity {
         return ModItems.ICE_SHARD.get();
     }
 
-    protected void onEntityHit(EntityRayTraceResult p_213868_1_) {
-        super.onEntityHit(p_213868_1_);
-        p_213868_1_.getEntity().attackEntityFrom(DamageSource.MAGIC, 1.0F);
+    protected void onHitEntity(EntityHitResult p_213868_1_) {
+        super.onHitEntity(p_213868_1_);
+        p_213868_1_.getEntity().hurt(DamageSource.MAGIC, 1.0F);
     }
 
 
-    private IParticleData makeParticle() {
-        ItemStack itemstack = this.func_213882_k();
-        return (IParticleData)(itemstack.isEmpty() ? ParticleTypes.ITEM_SNOWBALL : new ItemParticleData(ParticleTypes.ITEM, itemstack));
+    private ParticleOptions makeParticle() {
+        ItemStack itemstack = this.getItemRaw();
+        return (ParticleOptions)(itemstack.isEmpty() ? ParticleTypes.ITEM_SNOWBALL : new ItemParticleOption(ParticleTypes.ITEM, itemstack));
     }
 
 
-    public void handleStatusUpdate(byte id) {
+    public void handleEntityEvent(byte id) {
         if (id == 3) {
-            IParticleData iparticledata = this.makeParticle();
+            ParticleOptions iparticledata = this.makeParticle();
 
             for(int i = 0; i < 8; ++i) {
-                this.world.addParticle(iparticledata, this.getPosX(), this.getPosY(), this.getPosZ(), 0.0D, 0.0D, 0.0D);
+                this.level.addParticle(iparticledata, this.getX(), this.getY(), this.getZ(), 0.0D, 0.0D, 0.0D);
             }
         }
     }

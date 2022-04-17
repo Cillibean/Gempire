@@ -2,10 +2,10 @@ package com.gempire.networking;
 
 import com.gempire.tileentities.InjectorTE;
 import com.gempire.tileentities.TankTE;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.math.BlockPos;
-import net.minecraftforge.fml.network.NetworkEvent;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.core.BlockPos;
+import net.minecraftforge.fmllegacy.network.NetworkEvent;
 
 import java.util.function.Supplier;
 
@@ -16,22 +16,22 @@ public class C2SRequestDumpFluidsTank {
         this.tankPos = tankPos;
     }
 
-    public static C2SRequestDumpFluidsTank decode(PacketBuffer buffer) {
+    public static C2SRequestDumpFluidsTank decode(FriendlyByteBuf buffer) {
         final BlockPos injector = buffer.readBlockPos();
         return new C2SRequestDumpFluidsTank(injector);
     }
 
-    public static void encode(C2SRequestDumpFluidsTank msg, PacketBuffer buffer) {
+    public static void encode(C2SRequestDumpFluidsTank msg, FriendlyByteBuf buffer) {
         buffer.writeBlockPos(msg.tankPos);
     }
 
     public static void handle(final C2SRequestDumpFluidsTank msg, final Supplier<NetworkEvent.Context> contextSupplier) {
         NetworkEvent.Context ctx = contextSupplier.get();
-        ServerPlayerEntity sender = ctx.getSender();
+        ServerPlayer sender = ctx.getSender();
         boolean hasPermission = true;
         if (hasPermission) {
             if(msg.tankPos != null) {
-                TankTE tank = (TankTE) sender.world.getTileEntity(msg.tankPos);
+                TankTE tank = (TankTE) sender.level.getBlockEntity(msg.tankPos);
                 tank.EmptyTank();
             }
         }

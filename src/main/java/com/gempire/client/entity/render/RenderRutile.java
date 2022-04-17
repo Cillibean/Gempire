@@ -5,16 +5,16 @@ import com.gempire.client.entity.model.ModelRuby;
 import com.gempire.client.entity.render.layers.*;
 import com.gempire.entities.gems.EntityAquamarine;
 import com.gempire.entities.gems.EntityRutile;
-import com.mojang.blaze3d.matrix.MatrixStack;
-import net.minecraft.client.renderer.IRenderTypeBuffer;
-import net.minecraft.client.renderer.entity.EntityRendererManager;
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.network.chat.Component;
 
 public class RenderRutile extends MobRenderer<EntityRutile, ModelRuby<EntityRutile>> {
 
-    public RenderRutile(EntityRendererManager renderManagerIn) {
+    public RenderRutile(EntityRenderDispatcher renderManagerIn) {
         super(renderManagerIn, new ModelRuby<>(), .25f);
         this.addLayer(new SkinLayer(this));
         this.addLayer(new FaceLayer(this));
@@ -25,17 +25,17 @@ public class RenderRutile extends MobRenderer<EntityRutile, ModelRuby<EntityRuti
     }
 
     @Override
-    protected void preRenderCallback(EntityRutile entitylivingbaseIn, MatrixStack matrixStackIn, float partialTickTime) {
+    protected void scale(EntityRutile entitylivingbaseIn, PoseStack matrixStackIn, float partialTickTime) {
         matrixStackIn.scale(.8f, .85f, .8f);
-        super.preRenderCallback(entitylivingbaseIn, matrixStackIn, partialTickTime);
+        super.scale(entitylivingbaseIn, matrixStackIn, partialTickTime);
     }
 
     @Override
-    public ResourceLocation getEntityTexture(EntityRutile entity) {
+    public ResourceLocation getTextureLocation(EntityRutile entity) {
         return new ResourceLocation(Gempire.MODID+":textures/entity/rutile/blank.png");
     }
     @Override
-    protected void renderName(EntityRutile entityIn, ITextComponent displayNameIn, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn) {
-        super.renderName(entityIn, displayNameIn, matrixStackIn, bufferIn, packedLightIn);
+    protected void renderNameTag(EntityRutile entityIn, Component displayNameIn, PoseStack matrixStackIn, MultiBufferSource bufferIn, int packedLightIn) {
+        super.renderNameTag(entityIn, displayNameIn, matrixStackIn, bufferIn, packedLightIn);
     }
 }

@@ -10,40 +10,31 @@ import com.gempire.entities.bases.EntityGem;
 import com.gempire.entities.bases.EntityVaryingGem;
 import com.gempire.util.Abilities;
 import com.gempire.util.GemPlacements;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.ShulkerBoxBlock;
-import net.minecraft.entity.CreatureEntity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.IRideable;
-import net.minecraft.entity.MobEntity;
-import net.minecraft.entity.ai.attributes.AttributeModifierMap;
-import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.ai.goal.*;
-import net.minecraft.entity.monster.IMob;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.inventory.ItemStackHelper;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.item.ArmorItem;
-import net.minecraft.item.DyeItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.ListNBT;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Hand;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.World;
-import net.minecraftforge.fml.network.NetworkHooks;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.entity.PathfinderMob;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.ContainerHelper;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.core.NonNullList;
+import net.minecraft.world.level.Level;
 
 import javax.annotation.Nullable;
+
+import net.minecraft.world.entity.ai.goal.FloatGoal;
+import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
+import net.minecraft.world.entity.ai.goal.PanicGoal;
+import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 
 public class EntityPearl extends EntityVaryingGem {
     public static final int NUMBER_OF_SLOTS_PEARL = 58;
@@ -51,44 +42,44 @@ public class EntityPearl extends EntityVaryingGem {
     public NonNullList<ItemStack> items2 = NonNullList.withSize(EntityPearl.NUMBER_OF_SLOTS_PEARL, ItemStack.EMPTY);
     public NonNullList<ItemStack> items3 = NonNullList.withSize(EntityPearl.NUMBER_OF_SLOTS_PEARL, ItemStack.EMPTY);
     public NonNullList<ItemStack> items4 = NonNullList.withSize(EntityPearl.NUMBER_OF_SLOTS_PEARL, ItemStack.EMPTY);
-    public static DataParameter<Integer> PAGE = EntityDataManager.<Integer>createKey(EntityPearl.class, DataSerializers.VARINT);
+    public static EntityDataAccessor<Integer> PAGE = SynchedEntityData.<Integer>defineId(EntityPearl.class, EntityDataSerializers.INT);
 
-    public EntityPearl(EntityType<? extends CreatureEntity> type, World worldIn) {
+    public EntityPearl(EntityType<? extends PathfinderMob> type, Level worldIn) {
         super(type, worldIn);
-        this.dataManager.register(EntityPearl.PAGE, 0);
+        this.entityData.define(EntityPearl.PAGE, 0);
     }
 
-    public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
-        return MobEntity.func_233666_p_()
-                .createMutableAttribute(Attributes.MAX_HEALTH, 50.0D)
-                .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.3D)
-                .createMutableAttribute(Attributes.ATTACK_DAMAGE, 10.0D)
-                .createMutableAttribute(Attributes.ATTACK_SPEED, 1.5D);
+    public static AttributeSupplier.Builder setCustomAttributes() {
+        return Mob.createMobAttributes()
+                .add(Attributes.MAX_HEALTH, 50.0D)
+                .add(Attributes.MOVEMENT_SPEED, 0.3D)
+                .add(Attributes.ATTACK_DAMAGE, 10.0D)
+                .add(Attributes.ATTACK_SPEED, 1.5D);
     }
 
     @Override
-    public void writeAdditional(CompoundNBT compound) {
-        super.writeAdditional(compound);
+    public void addAdditionalSaveData(CompoundTag compound) {
+        super.addAdditionalSaveData(compound);
         compound.putInt("page", this.getPage());
         this.saveItems(compound);
     }
 
-    public void saveItems(CompoundNBT compoundNBT){
-        ListNBT list1 = new ListNBT();
+    public void saveItems(CompoundTag compoundNBT){
+        ListTag list1 = new ListTag();
         for(int i = 0; i < this.items1.size(); i++){
-            list1.add(i, this.items1.get(i).write(new CompoundNBT()));
+            list1.add(i, this.items1.get(i).save(new CompoundTag()));
         }
-        ListNBT list2 = new ListNBT();
+        ListTag list2 = new ListTag();
         for(int i = 0; i < this.items2.size(); i++){
-            list2.add(i, this.items2.get(i).write(new CompoundNBT()));
+            list2.add(i, this.items2.get(i).save(new CompoundTag()));
         }
-        ListNBT list3 = new ListNBT();
+        ListTag list3 = new ListTag();
         for(int i = 0; i < this.items3.size(); i++){
-            list3.add(i, this.items3.get(i).write(new CompoundNBT()));
+            list3.add(i, this.items3.get(i).save(new CompoundTag()));
         }
-        ListNBT list4 = new ListNBT();
+        ListTag list4 = new ListTag();
         for(int i = 0; i < this.items4.size(); i++){
-            list4.add(i, this.items4.get(i).write(new CompoundNBT()));
+            list4.add(i, this.items4.get(i).save(new CompoundTag()));
         }
         compoundNBT.put("Items1", list1);
         compoundNBT.put("Items2", list2);
@@ -97,36 +88,36 @@ public class EntityPearl extends EntityVaryingGem {
     }
 
     @Override
-    public void read(CompoundNBT compound) {
-        super.read(compound);
+    public void load(CompoundTag compound) {
+        super.load(compound);
         this.setPage(compound.getInt("page"));
         this.loadItems(compound);
     }
 
-    public void loadItems(CompoundNBT compoundNBT){
-        ListNBT list1 = compoundNBT.getList("Items1", 10);
-        ListNBT list2 = compoundNBT.getList("Items2", 10);
-        ListNBT list3 = compoundNBT.getList("Items3", 10);
-        ListNBT list4 = compoundNBT.getList("Items4", 10);
+    public void loadItems(CompoundTag compoundNBT){
+        ListTag list1 = compoundNBT.getList("Items1", 10);
+        ListTag list2 = compoundNBT.getList("Items2", 10);
+        ListTag list3 = compoundNBT.getList("Items3", 10);
+        ListTag list4 = compoundNBT.getList("Items4", 10);
         NonNullList<ItemStack> newItems1 = NonNullList.withSize(EntityPearl.NUMBER_OF_SLOTS_PEARL, ItemStack.EMPTY);
         NonNullList<ItemStack> newItems2 = NonNullList.withSize(EntityPearl.NUMBER_OF_SLOTS_PEARL, ItemStack.EMPTY);
         NonNullList<ItemStack> newItems3 = NonNullList.withSize(EntityPearl.NUMBER_OF_SLOTS_PEARL, ItemStack.EMPTY);
         NonNullList<ItemStack> newItems4 = NonNullList.withSize(EntityPearl.NUMBER_OF_SLOTS_PEARL, ItemStack.EMPTY);
         for(int i = 0; i < list1.size(); ++i) {
-            CompoundNBT compoundnbt = list1.getCompound(i);
-            newItems1.set(i, ItemStack.read(compoundnbt));
+            CompoundTag compoundnbt = list1.getCompound(i);
+            newItems1.set(i, ItemStack.of(compoundnbt));
         }
         for(int i = 0; i < list2.size(); ++i) {
-            CompoundNBT compoundnbt = list2.getCompound(i);
-            newItems2.set(i, ItemStack.read(compoundnbt));
+            CompoundTag compoundnbt = list2.getCompound(i);
+            newItems2.set(i, ItemStack.of(compoundnbt));
         }
         for(int i = 0; i < list3.size(); ++i) {
-            CompoundNBT compoundnbt = list3.getCompound(i);
-            newItems3.set(i, ItemStack.read(compoundnbt));
+            CompoundTag compoundnbt = list3.getCompound(i);
+            newItems3.set(i, ItemStack.of(compoundnbt));
         }
         for(int i = 0; i < list4.size(); ++i) {
-            CompoundNBT compoundnbt = list4.getCompound(i);
-            newItems4.set(i, ItemStack.read(compoundnbt));
+            CompoundTag compoundnbt = list4.getCompound(i);
+            newItems4.set(i, ItemStack.of(compoundnbt));
         }
         this.items1 = newItems1;
         this.items2 = newItems2;
@@ -137,10 +128,10 @@ public class EntityPearl extends EntityVaryingGem {
     @Override
     protected void registerGoals() {
         super.registerGoals();
-        this.goalSelector.addGoal(7, new SwimGoal(this));
+        this.goalSelector.addGoal(7, new FloatGoal(this));
         this.goalSelector.addGoal(6, new PanicGoal(this, 1.1D));
-        this.goalSelector.addGoal(7, new LookAtGoal(this, PlayerEntity.class, 4.0F));
-        this.goalSelector.addGoal(8, new LookRandomlyGoal(this));
+        this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 4.0F));
+        this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
         this.goalSelector.addGoal(7, new EntityAIWander(this, 1.0D));
         this.goalSelector.addGoal(7, new EntityAIFollowOwner(this, 1.0D));
     }
@@ -169,7 +160,7 @@ public class EntityPearl extends EntityVaryingGem {
 
     @Override
     public int generateHairVariant() {
-        return this.rand.nextInt(34);
+        return this.random.nextInt(34);
     }
 
     @Override
@@ -199,7 +190,7 @@ public class EntityPearl extends EntityVaryingGem {
     }
 
     public int generateSkinColorVariant() {
-        return this.rand.nextInt(16);
+        return this.random.nextInt(16);
     }
 
     @Override
@@ -235,11 +226,11 @@ public class EntityPearl extends EntityVaryingGem {
     }
 
     public int generateOutfitVariant(){
-        return this.rand.nextInt(52);
+        return this.random.nextInt(52);
     }
 
     public int generateInsigniaVariant(){
-        return this.rand.nextInt(34);
+        return this.random.nextInt(34);
     }
 
     @Override
@@ -268,11 +259,11 @@ public class EntityPearl extends EntityVaryingGem {
     }
 
     public void setPage(int value){
-        this.dataManager.set(EntityPearl.PAGE, value);
+        this.entityData.set(EntityPearl.PAGE, value);
     }
 
     public int getPage(){
-        return this.dataManager.get(EntityPearl.PAGE);
+        return this.entityData.get(EntityPearl.PAGE);
     }
 
     public void CyclePageForward(){
@@ -371,17 +362,17 @@ public class EntityPearl extends EntityVaryingGem {
     */
 
     @Override
-    public boolean isItemValidForSlot(int index, ItemStack stack) {
-        return super.isItemValidForSlot(index, stack) && stack.getItem() != Blocks.SHULKER_BOX.asItem();
+    public boolean canPlaceItem(int index, ItemStack stack) {
+        return super.canPlaceItem(index, stack) && stack.getItem() != Blocks.SHULKER_BOX.asItem();
     }
 
     @Override
-    public int getSizeInventory() {
+    public int getContainerSize() {
         return EntityPearl.NUMBER_OF_SLOTS_PEARL;
     }
 
     @Override
-    public ItemStack getStackInSlot(int index) {
+    public ItemStack getItem(int index) {
         ItemStack stack = ItemStack.EMPTY;
         if(this.getPage() == 0) {
             return this.getItems1().get(index);
@@ -399,30 +390,30 @@ public class EntityPearl extends EntityVaryingGem {
     }
 
     @Override
-    public ItemStack decrStackSize(int index, int count) {
+    public ItemStack removeItem(int index, int count) {
         ItemStack stack = ItemStack.EMPTY;
         if(this.getPage() == 0) {
-            return ItemStackHelper.getAndSplit(this.getItems1(), index, count);
+            return ContainerHelper.removeItem(this.getItems1(), index, count);
         }
         else if(this.getPage() == 1){
-            return ItemStackHelper.getAndSplit(this.getItems2(), index, count);
+            return ContainerHelper.removeItem(this.getItems2(), index, count);
         }
         else if(this.getPage() == 2){
-            return ItemStackHelper.getAndSplit(this.getItems3(), index, count);
+            return ContainerHelper.removeItem(this.getItems3(), index, count);
         }
         else if(this.getPage() == 3){
-            return ItemStackHelper.getAndSplit(this.getItems4(), index, count);
+            return ContainerHelper.removeItem(this.getItems4(), index, count);
         }
         return stack;
     }
 
     @Override
-    public ItemStack removeStackFromSlot(int index) {
+    public ItemStack removeItemNoUpdate(int index) {
         return null;
     }
 
     @Override
-    public void setInventorySlotContents(int index, ItemStack stack) {
+    public void setItem(int index, ItemStack stack) {
         if(this.getPage() == 0) {
             this.getItems1().set(index, stack);
         }
@@ -440,7 +431,7 @@ public class EntityPearl extends EntityVaryingGem {
 
     @Nullable
     @Override
-    public Container createMenu(int p_createMenu_1_, PlayerInventory p_createMenu_2_, PlayerEntity p_createMenu_3_) {
+    public AbstractContainerMenu createMenu(int p_createMenu_1_, Inventory p_createMenu_2_, Player p_createMenu_3_) {
         return new PearlUIContainer(p_createMenu_1_, p_createMenu_2_, this);
     }
 

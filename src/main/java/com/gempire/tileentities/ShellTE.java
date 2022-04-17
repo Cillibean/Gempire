@@ -15,33 +15,33 @@ import com.gempire.systems.machine.interfaces.IPowerConductor;
 import com.gempire.systems.machine.interfaces.IPowerConsumer;
 import com.gempire.systems.machine.interfaces.IPowerProvider;
 import com.gempire.util.Color;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.FlowingFluidBlock;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.ItemStackHelper;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.INamedContainerProvider;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SUpdateTileEntityPacket;
-import net.minecraft.tileentity.ITickableTileEntity;
-import net.minecraft.tileentity.LockableLootTileEntity;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.LiquidBlock;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.ContainerHelper;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.Connection;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.world.level.block.entity.TickableBlockEntity;
+import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.core.NonNullList;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraftforge.fml.RegistryObject;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 
-public class ShellTE extends LockableLootTileEntity implements INamedContainerProvider, ITickableTileEntity, IPowerConsumer {
+public class ShellTE extends RandomizableContainerBlockEntity implements MenuProvider, TickableBlockEntity, IPowerConsumer {
     public static final int NUMBER_OF_SLOTS = 5;
     public static final int CHROMA_INPUT_SLOT_INDEX = 0;
     public static final int CLAY_INPUT_SLOT_INDEX = 1;
@@ -75,8 +75,8 @@ public class ShellTE extends LockableLootTileEntity implements INamedContainerPr
     }
 
     @Override
-    public void read(BlockState state, CompoundNBT nbt) {
-        super.read(state, nbt);
+    public void load(BlockState state, CompoundTag nbt) {
+        super.load(state, nbt);
         ReadPoweredMachine(nbt);
         this.gravelConsumed = nbt.getInt("gravel");
         this.sandConsumed = nbt.getInt("sand");
@@ -85,15 +85,15 @@ public class ShellTE extends LockableLootTileEntity implements INamedContainerPr
         this.essenceConsumed = nbt.getBoolean("essence");
         this.essenceMarker = nbt.getBoolean("marker");
         this.chromaColor = nbt.getInt("color");
-        this.items = NonNullList.withSize(this.getSizeInventory(), ItemStack.EMPTY);
-        if(!this.checkLootAndRead(nbt)){
-            ItemStackHelper.loadAllItems(nbt, this.items);
+        this.items = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
+        if(!this.tryLoadLootTable(nbt)){
+            ContainerHelper.loadAllItems(nbt, this.items);
         }
     }
 
     @Override
-    public CompoundNBT write(CompoundNBT compound) {
-        super.write(compound);
+    public CompoundTag save(CompoundTag compound) {
+        super.save(compound);
         WritePoweredMachine(compound);
         compound.putInt("gravel", this.gravelConsumed);
         compound.putInt("sand", this.sandConsumed);
@@ -102,8 +102,8 @@ public class ShellTE extends LockableLootTileEntity implements INamedContainerPr
         compound.putBoolean("essence", this.essenceConsumed);
         compound.putBoolean("marker", this.essenceMarker);
         compound.putInt("color", this.chromaColor);
-        if(!this.checkLootAndWrite(compound)){
-            ItemStackHelper.saveAllItems(compound, this.items);
+        if(!this.trySaveLootTable(compound)){
+            ContainerHelper.saveAllItems(compound, this.items);
         }
         return compound;
     }
@@ -112,7 +112,7 @@ public class ShellTE extends LockableLootTileEntity implements INamedContainerPr
     @Override
     public void tick() {
         ConductorTick();
-        if(this.getStackInSlot(ShellTE.PEARL_OUTPUT_SLOT_INDEX) == ItemStack.EMPTY) {
+        if(this.getItem(ShellTE.PEARL_OUTPUT_SLOT_INDEX) == ItemStack.EMPTY) {
             if(this.ticks % 100 == 0) {
                 if(isPowered()) {
                     this.HandleGravelTick();
@@ -122,10 +122,10 @@ public class ShellTE extends LockableLootTileEntity implements INamedContainerPr
                     this.HandleEssenceTick();
                     this.HandleFormPearlTick();
                     if (this.gravelConsumed == 1) {
-                        this.world.setBlockState(this.getPos(), this.getBlockState().with(ShellBlock.STAGE, 1));
+                        this.level.setBlockAndUpdate(this.getBlockPos(), this.getBlockState().setValue(ShellBlock.STAGE, 1));
                     }
                     if (this.sandConsumed == ShellTE.MAX_SAND) {
-                        this.world.setBlockState(this.getPos(), this.getBlockState().with(ShellBlock.STAGE, 2));
+                        this.level.setBlockAndUpdate(this.getBlockPos(), this.getBlockState().setValue(ShellBlock.STAGE, 2));
                     }
                 }
             }
@@ -140,7 +140,7 @@ public class ShellTE extends LockableLootTileEntity implements INamedContainerPr
 
     public void HandleGravelTick(){
         if(this.gravelConsumed < ShellTE.MAX_GRAVEL) {
-            ItemStack stack = this.getStackInSlot(ShellTE.GRAVEL_INPUT_SLOT_INDEX);
+            ItemStack stack = this.getItem(ShellTE.GRAVEL_INPUT_SLOT_INDEX);
             if (stack.getItem() == Blocks.GRAVEL.asItem()) {
                 stack.shrink(1);
                 usePower();
@@ -151,7 +151,7 @@ public class ShellTE extends LockableLootTileEntity implements INamedContainerPr
 
     public void HandleSandTick(){
         if(this.gravelConsumed == ShellTE.MAX_GRAVEL && this.sandConsumed < ShellTE.MAX_SAND){
-            ItemStack stack = this.getStackInSlot(ShellTE.SAND_INPUT_SLOT_INDEX);
+            ItemStack stack = this.getItem(ShellTE.SAND_INPUT_SLOT_INDEX);
             if(stack.getItem() == Blocks.SAND.asItem()){
                 stack.shrink(1);
                 usePower();
@@ -162,7 +162,7 @@ public class ShellTE extends LockableLootTileEntity implements INamedContainerPr
 
     public void HandleClayTick(){
         if(this.gravelConsumed == ShellTE.MAX_GRAVEL && this.sandConsumed == ShellTE.MAX_SAND && this.clayConsumed < ShellTE.MAX_CLAY){
-            ItemStack stack = this.getStackInSlot(ShellTE.CLAY_INPUT_SLOT_INDEX);
+            ItemStack stack = this.getItem(ShellTE.CLAY_INPUT_SLOT_INDEX);
             if(stack.getItem() == Items.CLAY_BALL){
                 stack.shrink(1);
                 usePower();
@@ -173,7 +173,7 @@ public class ShellTE extends LockableLootTileEntity implements INamedContainerPr
 
     public void HandleChromaTick() {
         if(this.gravelConsumed == ShellTE.MAX_GRAVEL && this.sandConsumed == ShellTE.MAX_SAND && this.clayConsumed == ShellTE.MAX_CLAY && !this.chromaConsumed){
-            ItemStack stack = this.getStackInSlot(ShellTE.CHROMA_INPUT_SLOT_INDEX);
+            ItemStack stack = this.getItem(ShellTE.CHROMA_INPUT_SLOT_INDEX);
             if(stack.getItem() instanceof ItemChroma){
                 ItemChroma chroma = (ItemChroma) stack.getItem();
                 usePower();
@@ -189,10 +189,10 @@ public class ShellTE extends LockableLootTileEntity implements INamedContainerPr
             //ESSENCE CHECK
             for(int i = 0; i < 6; i++){
                 //TODO: MAKE THERE BE A CHANCE OF MAGIC MOSS APPEARING
-                if(this.world.getBlockState(this.pos.add(ShellTE.direction(i))).getBlock() == ModBlocks.WHITE_ESSENCE_BLOCK.get()){
-                    FlowingFluidBlock block = (FlowingFluidBlock) this.world.getBlockState(this.pos.add(ShellTE.direction(i))).getBlock();
+                if(this.level.getBlockState(this.worldPosition.offset(ShellTE.direction(i))).getBlock() == ModBlocks.WHITE_ESSENCE_BLOCK.get()){
+                    LiquidBlock block = (LiquidBlock) this.level.getBlockState(this.worldPosition.offset(ShellTE.direction(i))).getBlock();
                     if(block.getFluid() == ModFluids.WHITE_ESSENCE.get()) {
-                        this.world.setBlockState(this.pos.add(ShellTE.direction(i)), Blocks.AIR.getDefaultState());
+                        this.level.setBlockAndUpdate(this.worldPosition.offset(ShellTE.direction(i)), Blocks.AIR.defaultBlockState());
                         this.essenceConsumed = true;
                         this.essenceMarker = true;
                         usePower();
@@ -204,8 +204,8 @@ public class ShellTE extends LockableLootTileEntity implements INamedContainerPr
         else{
             this.essenceMarker = false;
             for(int i = 0; i < 6; i++){
-                if(this.world.getBlockState(this.pos.add(ShellTE.direction(i))).getBlock() == ModBlocks.WHITE_ESSENCE_BLOCK.get()){
-                    FlowingFluidBlock block = (FlowingFluidBlock) this.world.getBlockState(this.pos.add(ShellTE.direction(i))).getBlock();
+                if(this.level.getBlockState(this.worldPosition.offset(ShellTE.direction(i))).getBlock() == ModBlocks.WHITE_ESSENCE_BLOCK.get()){
+                    LiquidBlock block = (LiquidBlock) this.level.getBlockState(this.worldPosition.offset(ShellTE.direction(i))).getBlock();
                     if(block.getFluid() == ModFluids.WHITE_ESSENCE.get()) {
                         this.essenceMarker = true;
                         break;
@@ -220,11 +220,11 @@ public class ShellTE extends LockableLootTileEntity implements INamedContainerPr
             case 1:
                 return BlockPos.ZERO.south();
             case 2:
-                return BlockPos.ZERO.up();
+                return BlockPos.ZERO.above();
             case 3:
                 return BlockPos.ZERO.west();
             case 4:
-                return BlockPos.ZERO.down();
+                return BlockPos.ZERO.below();
             case 5:
                 return BlockPos.ZERO.east();
             default:
@@ -250,14 +250,14 @@ public class ShellTE extends LockableLootTileEntity implements INamedContainerPr
         } catch(Exception e){
             e.printStackTrace();
         }
-        this.setInventorySlotContents(ShellTE.PEARL_OUTPUT_SLOT_INDEX, new ItemStack(gem));
+        this.setItem(ShellTE.PEARL_OUTPUT_SLOT_INDEX, new ItemStack(gem));
         this.gravelConsumed = 0;
         this.sandConsumed = 0;
         this.clayConsumed = 0;
         this.chromaConsumed = false;
         this.essenceConsumed = false;
         this.chromaColor = 0;
-        this.world.setBlockState(this.getPos(), this.getBlockState().with(ShellBlock.STAGE, 0));
+        this.level.setBlockAndUpdate(this.getBlockPos(), this.getBlockState().setValue(ShellBlock.STAGE, 0));
     }
 
     //TODO: FIX LOTS OF NBT STUFF
@@ -267,13 +267,13 @@ public class ShellTE extends LockableLootTileEntity implements INamedContainerPr
     //CONTAINER STUFF
 
     @Override
-    public ITextComponent getDisplayName() {
-        return new StringTextComponent("");//TranslationTextComponent("container.gempire.injector");
+    public Component getDisplayName() {
+        return new TextComponent("");//TranslationTextComponent("container.gempire.injector");
     }
 
     @Override
-    protected ITextComponent getDefaultName() {
-        return new TranslationTextComponent("container.gempire.injector");
+    protected Component getDefaultName() {
+        return new TranslatableComponent("container.gempire.injector");
     }
 
     @Override
@@ -287,17 +287,17 @@ public class ShellTE extends LockableLootTileEntity implements INamedContainerPr
     }
 
     @Override
-    protected Container createMenu(int id, PlayerInventory player) {
+    protected AbstractContainerMenu createMenu(int id, Inventory player) {
         return new ShellContainer(id, player, this);
     }
 
     @Override
-    public int getSizeInventory() {
+    public int getContainerSize() {
         return ShellTE.NUMBER_OF_SLOTS;
     }
 
     public ItemStack getPearlItem(){
-        return this.getStackInSlot(ShellTE.PEARL_OUTPUT_SLOT_INDEX);
+        return this.getItem(ShellTE.PEARL_OUTPUT_SLOT_INDEX);
     }
 
     //NETWORKING STUFF
@@ -305,29 +305,29 @@ public class ShellTE extends LockableLootTileEntity implements INamedContainerPr
     //NETWORKING STUFF
 
     @Override
-    public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
+    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
         //Debug
         System.out.println("[DEBUG]:Client recived tile sync packet");
-        this.read(this.world.getBlockState(pkt.getPos()), pkt.getNbtCompound());
+        this.load(this.level.getBlockState(pkt.getPos()), pkt.getTag());
     }
 
     @Override
-    public CompoundNBT getUpdateTag() {
-        return this.write(new CompoundNBT());
+    public CompoundTag getUpdateTag() {
+        return this.save(new CompoundTag());
     }
 
     @Nullable
     @Override
-    public SUpdateTileEntityPacket getUpdatePacket() {
+    public ClientboundBlockEntityDataPacket getUpdatePacket() {
         //Debug
         System.out.println("[DEBUG]:Server sent tile sync packet");
-        return new SUpdateTileEntityPacket(this.pos, -1, this.getUpdateTag());
+        return new ClientboundBlockEntityDataPacket(this.worldPosition, -1, this.getUpdateTag());
     }
 
     @Override
-    public void handleUpdateTag(BlockState state, CompoundNBT tag) {
+    public void handleUpdateTag(BlockState state, CompoundTag tag) {
         System.out.println("[DEBUG]:Handling tag on chunk load");
-        this.read(state, tag);
+        this.load(state, tag);
     }
 
     //ENERGY
@@ -377,7 +377,7 @@ public class ShellTE extends LockableLootTileEntity implements INamedContainerPr
     }
 
     @Override
-    public TileEntity getTE() {
+    public BlockEntity getTE() {
         return this;
     }
 

@@ -5,19 +5,19 @@ import com.gempire.init.ModBlocks;
 import com.gempire.init.ModContainers;
 import com.gempire.tileentities.InjectorTE;
 import com.gempire.tileentities.TankTE;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.Slot;
-import net.minecraft.item.ItemStack;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.IWorldPosCallable;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.Container;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.inventory.ContainerLevelAccess;
 
 import java.util.Objects;
 
-public class InjectorContainer extends Container {
+public class InjectorContainer extends AbstractContainerMenu {
     public static final int HOTBAR_SLOT_COUNT = 9;
     public static final int PLAYER_INVENTORY_ROW_COUNT = 3;
     public static final int PLAYER_INVENTORY_COLUMN_COUNT = 9;
@@ -31,22 +31,22 @@ public class InjectorContainer extends Container {
     public static final int TILE_INVENTORY_YPOS = 20;
     public static final int PLAYER_INVENTORY_YPOS = 51;
 
-    public final IWorldPosCallable canInteract;
+    public final ContainerLevelAccess canInteract;
 
     public final InjectorTE injector;
 
-    public InjectorContainer(int windowID, PlayerInventory playerInventory, InjectorTE injector) {
+    public InjectorContainer(int windowID, Inventory playerInventory, InjectorTE injector) {
         super(ModContainers.INJECTOR_CONTAINER.get(), windowID);
         this.injector = injector;
-        this.canInteract = IWorldPosCallable.of(this.injector.getWorld(), this.injector.getPos());
+        this.canInteract = ContainerLevelAccess.create(this.injector.getLevel(), this.injector.getBlockPos());
 
         //TILE ENTITY
-        this.addSlot(new Slot((IInventory)this.injector, InjectorTE.WHITE_INPUT_SLOT_INDEX, 61, 14));
-        this.addSlot(new Slot((IInventory)this.injector, InjectorTE.YELLOW_INPUT_SLOT_INDEX, 43, 32));
-        this.addSlot(new ChromaSlot((IInventory)this.injector, InjectorTE.CHROMA_INPUT_SLOT_INDEX, 61, 32));
-        this.addSlot(new Slot((IInventory)this.injector, InjectorTE.BLUE_INPUT_SLOT_INDEX, 79, 32));
-        this.addSlot(new Slot((IInventory)this.injector, InjectorTE.PRIME_INPUT_SLOT_INDEX, 43, 50));
-        this.addSlot(new Slot((IInventory)this.injector, InjectorTE.PINK_INPUT_SLOT_INDEX, 61, 50));
+        this.addSlot(new Slot((Container)this.injector, InjectorTE.WHITE_INPUT_SLOT_INDEX, 61, 14));
+        this.addSlot(new Slot((Container)this.injector, InjectorTE.YELLOW_INPUT_SLOT_INDEX, 43, 32));
+        this.addSlot(new ChromaSlot((Container)this.injector, InjectorTE.CHROMA_INPUT_SLOT_INDEX, 61, 32));
+        this.addSlot(new Slot((Container)this.injector, InjectorTE.BLUE_INPUT_SLOT_INDEX, 79, 32));
+        this.addSlot(new Slot((Container)this.injector, InjectorTE.PRIME_INPUT_SLOT_INDEX, 43, 50));
+        this.addSlot(new Slot((Container)this.injector, InjectorTE.PINK_INPUT_SLOT_INDEX, 61, 50));
 
         //PLAYER INVENTORY
         for(int row = 0; row < 3; row++){
@@ -61,14 +61,14 @@ public class InjectorContainer extends Container {
         }
     }
 
-    public InjectorContainer(int windowID, PlayerInventory playerInventory, PacketBuffer extraData){
+    public InjectorContainer(int windowID, Inventory playerInventory, FriendlyByteBuf extraData){
         this(windowID, playerInventory, InjectorContainer.getTileEntity(playerInventory, extraData));
     }
 
-    public static InjectorTE getTileEntity(PlayerInventory playerInventory, PacketBuffer extraData){
+    public static InjectorTE getTileEntity(Inventory playerInventory, FriendlyByteBuf extraData){
         Objects.requireNonNull(playerInventory, "Player Inventory can not be null");
         Objects.requireNonNull(extraData, "Data Packet can not be null");
-        TileEntity te = playerInventory.player.world.getTileEntity(extraData.readBlockPos());
+        BlockEntity te = playerInventory.player.level.getBlockEntity(extraData.readBlockPos());
         if(te instanceof InjectorTE){
             return (InjectorTE)te;
         }
@@ -76,28 +76,28 @@ public class InjectorContainer extends Container {
     }
 
     @Override
-    public boolean canInteractWith(PlayerEntity playerIn) {
-        return this.isWithinUsableDistance(this.canInteract, playerIn, ModBlocks.DRILL_BLOCK.get());
+    public boolean stillValid(Player playerIn) {
+        return this.stillValid(this.canInteract, playerIn, ModBlocks.DRILL_BLOCK.get());
     }
 
     @Override
-    public ItemStack transferStackInSlot(PlayerEntity playerIn, int index) {
+    public ItemStack quickMoveStack(Player playerIn, int index) {
         ItemStack stack = ItemStack.EMPTY;
-        Slot slot = this.inventorySlots.get(index);
-        if(slot != null && slot.getHasStack()){
-            ItemStack slotStack = slot.getStack();
+        Slot slot = this.slots.get(index);
+        if(slot != null && slot.hasItem()){
+            ItemStack slotStack = slot.getItem();
             stack = slotStack.copy();
-            if(index < InjectorTE.NUMBER_OF_SLOTS && !this.mergeItemStack(slotStack, InjectorTE.NUMBER_OF_SLOTS, this.inventorySlots.size(), true)){
+            if(index < InjectorTE.NUMBER_OF_SLOTS && !this.moveItemStackTo(slotStack, InjectorTE.NUMBER_OF_SLOTS, this.slots.size(), true)){
                 return ItemStack.EMPTY;
             }
-            if(!this.mergeItemStack(slotStack, 0, InjectorTE.NUMBER_OF_SLOTS, false)){
+            if(!this.moveItemStackTo(slotStack, 0, InjectorTE.NUMBER_OF_SLOTS, false)){
                 return ItemStack.EMPTY;
             }
             if(slotStack.isEmpty()){
-                slot.putStack(ItemStack.EMPTY);
+                slot.set(ItemStack.EMPTY);
             }
             else{
-                slot.onSlotChanged();
+                slot.setChanged();
             }
         }
         return stack;

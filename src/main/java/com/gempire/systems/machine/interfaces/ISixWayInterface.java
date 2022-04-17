@@ -8,8 +8,8 @@ import com.gempire.systems.machine.SocketType;
 import com.gempire.tileentities.SixWayInterfaceTE;
 import com.gempire.tileentities.WireTE;
 import jdk.nashorn.tools.Shell;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Direction;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.core.Direction;
 
 import java.util.ArrayList;
 
@@ -30,14 +30,14 @@ public interface ISixWayInterface {
             if(socket.isChargeable() || socket.getType() == SocketType.POWER){
                 boolean doTheThing = !(this instanceof WireTE);
                 if(doTheThing){
-                    directions.add(Direction.byIndex(ShellBlock.getAdjustedDirectionValue(ShellBlock.getDirectionFacingValue(getTE()), socket.getSide().id)));
+                    directions.add(Direction.from3DDataValue(ShellBlock.getAdjustedDirectionValue(ShellBlock.getDirectionFacingValue(getTE()), socket.getSide().id)));
                 }
                 else{
-                    directions.add(Direction.byIndex(socket.getSide().id));
+                    directions.add(Direction.from3DDataValue(socket.getSide().id));
                 }
             }
         }
         return directions;
     }
-    TileEntity getTE();
+    BlockEntity getTE();
 }

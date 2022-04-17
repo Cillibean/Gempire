@@ -2,11 +2,10 @@ package com.gempire.networking;
 
 import com.gempire.entities.bases.EntityGem;
 import com.gempire.tileentities.InjectorTE;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraftforge.fml.network.NetworkEvent;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraftforge.fmllegacy.network.NetworkEvent;
 
 import java.util.function.Supplier;
 
@@ -19,27 +18,27 @@ public class C2SRequestUpdateGemName {
         this.entityID = entityID;
     }
 
-    public static C2SRequestUpdateGemName decode(PacketBuffer buffer) {
-        final String newName = buffer.readString(32767);
+    public static C2SRequestUpdateGemName decode(FriendlyByteBuf buffer) {
+        final String newName = buffer.readUtf(32767);
         final int entityID = buffer.readInt();
         return new C2SRequestUpdateGemName(newName, entityID);
     }
 
-    public static void encode(C2SRequestUpdateGemName msg, PacketBuffer buffer) {
-        buffer.writeString(msg.newName);
+    public static void encode(C2SRequestUpdateGemName msg, FriendlyByteBuf buffer) {
+        buffer.writeUtf(msg.newName);
         buffer.writeInt(msg.entityID);
     }
 
     public static void handle(final C2SRequestUpdateGemName msg, final Supplier<NetworkEvent.Context> contextSupplier) {
         NetworkEvent.Context ctx = contextSupplier.get();
-        ServerPlayerEntity sender = ctx.getSender();
+        ServerPlayer sender = ctx.getSender();
         boolean hasPermission = true;
         if (hasPermission) {
-            EntityGem gem = (EntityGem) sender.world.getEntityByID(msg.entityID);
+            EntityGem gem = (EntityGem) sender.level.getEntity(msg.entityID);
             if(!gem.customName()){
                 gem.setHasCustomName(true);
             }
-            gem.setCustomName(new StringTextComponent(msg.newName));
+            gem.setCustomName(new TextComponent(msg.newName));
         }
         ctx.setPacketHandled(true);
     }

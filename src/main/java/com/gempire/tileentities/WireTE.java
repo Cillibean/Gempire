@@ -3,10 +3,10 @@ package com.gempire.tileentities;
 import com.gempire.init.ModTE;
 import com.gempire.systems.machine.MachineSide;
 import com.gempire.systems.machine.Socket;
-import net.minecraft.tileentity.ITickableTileEntity;
+import net.minecraft.world.level.block.entity.TickableBlockEntity;
 import net.minecraft.tileentity.TileEntityType;
 
-public class WireTE extends PowerConductorTE implements ITickableTileEntity {
+public class WireTE extends PowerConductorTE implements TickableBlockEntity {
     public WireTE() {
         super(ModTE.WIRE_TE.get());
         setupBattery(10);

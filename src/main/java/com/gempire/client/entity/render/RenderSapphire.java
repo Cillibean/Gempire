@@ -6,17 +6,17 @@ import com.gempire.client.entity.model.ModelSapphire;
 import com.gempire.client.entity.render.layers.*;
 import com.gempire.entities.gems.EntityRuby;
 import com.gempire.entities.gems.EntitySapphire;
-import com.mojang.blaze3d.matrix.MatrixStack;
-import net.minecraft.client.renderer.IRenderTypeBuffer;
-import net.minecraft.client.renderer.entity.EntityRendererManager;
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 
 import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.network.chat.Component;
 
 public class RenderSapphire extends MobRenderer<EntitySapphire, ModelSapphire<EntitySapphire>> {
 
-    public RenderSapphire(EntityRendererManager renderManagerIn) {
+    public RenderSapphire(EntityRenderDispatcher renderManagerIn) {
         super(renderManagerIn, new ModelSapphire<>(), .25f);
         this.addLayer(new SkinLayer(this));
         this.addLayer(new OutfitLayer(this));
@@ -27,17 +27,17 @@ public class RenderSapphire extends MobRenderer<EntitySapphire, ModelSapphire<En
     }
 
     @Override
-    public ResourceLocation getEntityTexture(EntitySapphire entity) {
+    public ResourceLocation getTextureLocation(EntitySapphire entity) {
         return new ResourceLocation(Gempire.MODID+":textures/entity/sapphire/blank.png");
     }
 
     @Override
-    protected void preRenderCallback(EntitySapphire entitylivingbaseIn, MatrixStack matrixStackIn, float partialTickTime) {
+    protected void scale(EntitySapphire entitylivingbaseIn, PoseStack matrixStackIn, float partialTickTime) {
         matrixStackIn.scale(.8f, .85f, .8f);
-        super.preRenderCallback(entitylivingbaseIn, matrixStackIn, partialTickTime);
+        super.scale(entitylivingbaseIn, matrixStackIn, partialTickTime);
     }
     @Override
-    protected void renderName(EntitySapphire entityIn, ITextComponent displayNameIn, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn) {
-        super.renderName(entityIn, displayNameIn, matrixStackIn, bufferIn, packedLightIn);
+    protected void renderNameTag(EntitySapphire entityIn, Component displayNameIn, PoseStack matrixStackIn, MultiBufferSource bufferIn, int packedLightIn) {
+        super.renderNameTag(entityIn, displayNameIn, matrixStackIn, bufferIn, packedLightIn);
     }
 }

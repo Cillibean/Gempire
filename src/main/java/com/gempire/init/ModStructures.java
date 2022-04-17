@@ -2,11 +2,11 @@ package com.gempire.init;
 
 import com.gempire.Gempire;
 import com.google.common.collect.ImmutableMap;
-import net.minecraft.util.registry.WorldGenRegistries;
+import net.minecraft.data.BuiltinRegistries;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
-import net.minecraft.world.gen.feature.structure.Structure;
-import net.minecraft.world.gen.settings.DimensionStructuresSettings;
-import net.minecraft.world.gen.settings.StructureSeparationSettings;
+import net.minecraft.world.level.levelgen.feature.StructureFeature;
+import net.minecraft.world.level.levelgen.StructureSettings;
+import net.minecraft.world.level.levelgen.feature.configurations.StructureFeatureConfiguration;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ModStructures {
-    public static final DeferredRegister<Structure<?>> DEFERRED_REGISTRY_STRUCTURE = DeferredRegister.create(ForgeRegistries.STRUCTURE_FEATURES, Gempire.MODID);
+    public static final DeferredRegister<StructureFeature<?>> DEFERRED_REGISTRY_STRUCTURE = DeferredRegister.create(ForgeRegistries.STRUCTURE_FEATURES, Gempire.MODID);
 
     //public static final RegistryObject<Structure<NoFeatureConfig>> RUINED_YELLOW_DOME = DEFERRED_REGISTRY_STRUCTURE.register("ruined_yellow_dome", () -> (new RuinedYellowDomeStructure(NoFeatureConfig.NO_FEATURE_CONFIG)));
 
@@ -37,9 +37,9 @@ public class ModStructures {
      * this method in the structureSeparationSettings argument.
      * This method is called by setupStructures above.
      */
-    public static <F extends Structure<?>> void setupMapSpacingAndLand(
+    public static <F extends StructureFeature<?>> void setupMapSpacingAndLand(
             F structure,
-            StructureSeparationSettings structureSeparationSettings,
+            StructureFeatureConfiguration structureSeparationSettings,
             boolean transformSurroundingLand)
     {
         /*
@@ -49,7 +49,7 @@ public class ModStructures {
          * If the registration is setup properly for the structure,
          * getRegistryName() should never return null.
          */
-        Structure.NAME_STRUCTURE_BIMAP.put(structure.getRegistryName().toString(), structure);
+        StructureFeature.STRUCTURES_REGISTRY.put(structure.getRegistryName().toString(), structure);
 
 
         /*
@@ -65,9 +65,9 @@ public class ModStructures {
          *
          * DEFAULTS requires AccessTransformer  (See resources/META-INF/accesstransformer.cfg)
          */
-        DimensionStructuresSettings.field_236191_b_ =
-                ImmutableMap.<Structure<?>, StructureSeparationSettings>builder()
-                        .putAll(DimensionStructuresSettings.field_236191_b_)
+        StructureSettings.DEFAULTS =
+                ImmutableMap.<StructureFeature<?>, StructureFeatureConfiguration>builder()
+                        .putAll(StructureSettings.DEFAULTS)
                         .put(structure, structureSeparationSettings)
                         .build();
 
@@ -79,8 +79,8 @@ public class ModStructures {
          * that field only applies for the default overworld and won't add to other worldtypes or dimensions (like amplified or Nether).
          * So yeah, don't do DimensionSettings.BUILTIN_OVERWORLD. Use the NOISE_GENERATOR_SETTINGS loop below instead if you must.
          */
-        WorldGenRegistries.NOISE_SETTINGS.getEntries().forEach(settings -> {
-            Map<Structure<?>, StructureSeparationSettings> structureMap = settings.getValue().getStructures().field_236193_d_;
+        BuiltinRegistries.NOISE_GENERATOR_SETTINGS.entrySet().forEach(settings -> {
+            Map<StructureFeature<?>, StructureFeatureConfiguration> structureMap = settings.getValue().structureSettings().structureConfig;
 
             /*
              * Pre-caution in case a mod makes the structure map immutable like datapacks do.
@@ -89,9 +89,9 @@ public class ModStructures {
              * structureConfig requires AccessTransformer  (See resources/META-INF/accesstransformer.cfg)
              */
             if(structureMap instanceof ImmutableMap){
-                Map<Structure<?>, StructureSeparationSettings> tempMap = new HashMap<>(structureMap);
+                Map<StructureFeature<?>, StructureFeatureConfiguration> tempMap = new HashMap<>(structureMap);
                 tempMap.put(structure, structureSeparationSettings);
-                settings.getValue().getStructures().field_236193_d_ = tempMap;
+                settings.getValue().structureSettings().structureConfig = tempMap;
             }
             else{
                 structureMap.put(structure, structureSeparationSettings);

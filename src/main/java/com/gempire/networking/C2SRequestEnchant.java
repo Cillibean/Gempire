@@ -3,9 +3,9 @@ package com.gempire.networking;
 import com.gempire.entities.bases.EntityGem;
 import com.gempire.entities.gems.EntityPearl;
 import com.gempire.entities.gems.EntityZircon;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.network.PacketBuffer;
-import net.minecraftforge.fml.network.NetworkEvent;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraftforge.fmllegacy.network.NetworkEvent;
 
 import java.util.function.Supplier;
 
@@ -16,21 +16,21 @@ public class C2SRequestEnchant {
         this.entityID = entityID;
     }
 
-    public static C2SRequestEnchant decode(PacketBuffer buffer) {
+    public static C2SRequestEnchant decode(FriendlyByteBuf buffer) {
         final int entityID = buffer.readInt();
         return new C2SRequestEnchant(entityID);
     }
 
-    public static void encode(C2SRequestEnchant msg, PacketBuffer buffer) {
+    public static void encode(C2SRequestEnchant msg, FriendlyByteBuf buffer) {
         buffer.writeInt(msg.entityID);
     }
 
     public static void handle(final C2SRequestEnchant msg, final Supplier<NetworkEvent.Context> contextSupplier) {
         NetworkEvent.Context ctx = contextSupplier.get();
-        ServerPlayerEntity sender = ctx.getSender();
+        ServerPlayer sender = ctx.getSender();
         boolean hasPermission = true;
         if (hasPermission) {
-            EntityZircon gem = (EntityZircon) sender.world.getEntityByID(msg.entityID);
+            EntityZircon gem = (EntityZircon) sender.level.getEntity(msg.entityID);
             gem.beginEnchant();
         }
         ctx.setPacketHandled(true);

@@ -7,20 +7,20 @@ import com.gempire.networking.C2SRequestInject;
 import com.gempire.networking.C2SRequestUpdateInjectorValves;
 import com.gempire.systems.machine.gui.EnergyMeter;
 import com.gempire.systems.machine.gui.MeterSize;
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.systems.RenderSystem;
-import net.minecraft.client.gui.screen.inventory.ContainerScreen;
-import net.minecraft.client.gui.widget.button.ImageButton;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.gui.components.ImageButton;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.network.chat.Component;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fluids.FluidStack;
 
 
-public class InjectorScreen extends ContainerScreen<InjectorContainer> {
+public class InjectorScreen extends AbstractContainerScreen<InjectorContainer> {
     public static final ResourceLocation INJECTOR_GUI = new ResourceLocation("gempire:textures/gui/injector_gui.png");
     public static final ResourceLocation FLUID_GUI = new ResourceLocation("gempire:textures/gui/injector_gui_fluid.png");
     public static final ResourceLocation HALO_GUI_PINK = new ResourceLocation("gempire:textures/gui/injector_gui_fluid_overlay_pink.png");
@@ -31,71 +31,71 @@ public class InjectorScreen extends ContainerScreen<InjectorContainer> {
     public static final ResourceLocation INJECT_BUTTON_TEXTURE = new ResourceLocation("gempire:textures/gui/inject_button.png");
     public static final ResourceLocation DUMP_BUTTON = new ResourceLocation("gempire:textures/gui/injector_dump_button.png");
 
-    public InjectorScreen(InjectorContainer screenContainer, PlayerInventory inv, ITextComponent titleIn) {
+    public InjectorScreen(InjectorContainer screenContainer, Inventory inv, Component titleIn) {
         super(screenContainer, inv, titleIn);
-        this.guiLeft = 0;
-        this.guiTop = 0;
-        this.xSize = 176;
-        this.ySize = 165;
+        this.leftPos = 0;
+        this.topPos = 0;
+        this.imageWidth = 176;
+        this.imageHeight = 165;
     }
 
     @Override
     protected void init() {
         super.init();
-        int x = (this.width - this.xSize) / 2;
-        int y = (this.height - this.ySize) / 2;
+        int x = (this.width - this.imageWidth) / 2;
+        int y = (this.height - this.imageHeight) / 2;
         this.addButton(new ImageButton(x + 83, y + 58, 51, 12, 0, 0, 0, InjectorScreen.INJECT_BUTTON_TEXTURE, 51, 12, (p_213029_1_) -> {
-            ModPacketHandler.INSTANCE.sendToServer(new C2SRequestInject(this.container.injector.getPos()));
+            ModPacketHandler.INSTANCE.sendToServer(new C2SRequestInject(this.menu.injector.getBlockPos()));
         }));
         this.addButton(new ImageButton(x + 133, y + 38, 7, 20, 0, 0, 0, InjectorScreen.DUMP_BUTTON, 7, 20, (p_213029_1_) -> {
-            ModPacketHandler.INSTANCE.sendToServer(new C2SRequestDumpFluidsInjector(this.container.injector.getPos()));
+            ModPacketHandler.INSTANCE.sendToServer(new C2SRequestDumpFluidsInjector(this.menu.injector.getBlockPos()));
         }));
         this.addButton(new ImageButton(x + 101, y + 39, 6, 14, 0, 0, 0, InjectorScreen.BUTTON_TEXTURE, 6, 14, (p_213029_1_) -> {
-            ModPacketHandler.INSTANCE.sendToServer(new C2SRequestUpdateInjectorValves("pink", this.container.injector.getPos()));
+            ModPacketHandler.INSTANCE.sendToServer(new C2SRequestUpdateInjectorValves("pink", this.menu.injector.getBlockPos()));
         }));
         this.addButton(new ImageButton(x + 109, y + 39, 6, 14, 0, 0, 0, InjectorScreen.BUTTON_TEXTURE, 6, 14,(p_213029_1_) -> {
-            ModPacketHandler.INSTANCE.sendToServer(new C2SRequestUpdateInjectorValves("blue", this.container.injector.getPos()));
+            ModPacketHandler.INSTANCE.sendToServer(new C2SRequestUpdateInjectorValves("blue", this.menu.injector.getBlockPos()));
         }));
         this.addButton(new ImageButton(x + 117, y + 39, 6, 14, 0, 0, 0, InjectorScreen.BUTTON_TEXTURE, 6, 14,(p_213029_1_) -> {
-            ModPacketHandler.INSTANCE.sendToServer(new C2SRequestUpdateInjectorValves("yellow", this.container.injector.getPos()));
+            ModPacketHandler.INSTANCE.sendToServer(new C2SRequestUpdateInjectorValves("yellow", this.menu.injector.getBlockPos()));
         }));
         this.addButton(new ImageButton(x + 125, y + 39, 6, 14, 0, 0, 0, InjectorScreen.BUTTON_TEXTURE, 6, 14,(p_213029_1_) -> {
-            ModPacketHandler.INSTANCE.sendToServer(new C2SRequestUpdateInjectorValves("white", this.container.injector.getPos()));
+            ModPacketHandler.INSTANCE.sendToServer(new C2SRequestUpdateInjectorValves("white", this.menu.injector.getBlockPos()));
         }));
     }
 
 
 
     @Override
-    public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+    public void render(PoseStack matrixStack, int mouseX, int mouseY, float partialTicks) {
         this.renderBackground(matrixStack);
         super.render(matrixStack, mouseX, mouseY, partialTicks);
-        this.renderHoveredTooltip(matrixStack, mouseX, mouseY);
+        this.renderTooltip(matrixStack, mouseX, mouseY);
     }
 
     @Override
-    protected void drawGuiContainerForegroundLayer(MatrixStack matrixStack, int x, int y) {
+    protected void renderLabels(PoseStack matrixStack, int x, int y) {
 
     }
 
     @SuppressWarnings("deprecation")
     @Override
-    protected void drawGuiContainerBackgroundLayer(MatrixStack matrixStack, float partialTicks, int mouseX, int mouseY) {
+    protected void renderBg(PoseStack matrixStack, float partialTicks, int mouseX, int mouseY) {
         RenderSystem.color4f(1f, 1f, 1f, 1f);
-        int x = (this.width - this.xSize) / 2;
-        int y = (this.height - this.ySize) / 2;
-        this.minecraft.getTextureManager().bindTexture(InjectorScreen.INJECTOR_GUI);
-        this.blit(matrixStack, x, y, 0, 0, this.xSize, this.ySize);
-        FluidStack pinkFluid = this.container.injector.getTankFromValue(0).getFluid();
-        FluidStack blueFluid = this.container.injector.getTankFromValue(1).getFluid();
-        FluidStack yellowFluid = this.container.injector.getTankFromValue(2).getFluid();
-        FluidStack whiteFluid = this.container.injector.getTankFromValue(3).getFluid();
+        int x = (this.width - this.imageWidth) / 2;
+        int y = (this.height - this.imageHeight) / 2;
+        this.minecraft.getTextureManager().bind(InjectorScreen.INJECTOR_GUI);
+        this.blit(matrixStack, x, y, 0, 0, this.imageWidth, this.imageHeight);
+        FluidStack pinkFluid = this.menu.injector.getTankFromValue(0).getFluid();
+        FluidStack blueFluid = this.menu.injector.getTankFromValue(1).getFluid();
+        FluidStack yellowFluid = this.menu.injector.getTankFromValue(2).getFluid();
+        FluidStack whiteFluid = this.menu.injector.getTankFromValue(3).getFluid();
         if(pinkFluid.getFluid() != Fluids.EMPTY)
         {
-            this.minecraft.getTextureManager().bindTexture(InjectorScreen.FLUID_GUI);
+            this.minecraft.getTextureManager().bind(InjectorScreen.FLUID_GUI);
             int xPink = x + 102;
             int yPink = y + 40;
-            int fluidStored = 12 * pinkFluid.getAmount() / this.container.injector.getCapacity();
+            int fluidStored = 12 * pinkFluid.getAmount() / this.menu.injector.getCapacity();
             int color = 0xFF7FFF;
             float r = ((color & 16711680) >> 16) / 255f;
             float g = ((color & 65280) >> 8) / 255f;
@@ -105,10 +105,10 @@ public class InjectorScreen extends ContainerScreen<InjectorContainer> {
         }
         if(blueFluid.getFluid() != Fluids.EMPTY)
         {
-            this.minecraft.getTextureManager().bindTexture(InjectorScreen.FLUID_GUI);
+            this.minecraft.getTextureManager().bind(InjectorScreen.FLUID_GUI);
             int xBlue = x + 110;
             int yBlue = y + 40;
-            int fluidStored = 12 * blueFluid.getAmount() / this.container.injector.getCapacity();
+            int fluidStored = 12 * blueFluid.getAmount() / this.menu.injector.getCapacity();
             int color = 0x697FFF;
             float r = ((color & 16711680) >> 16) / 255f;
             float g = ((color & 65280) >> 8) / 255f;
@@ -118,10 +118,10 @@ public class InjectorScreen extends ContainerScreen<InjectorContainer> {
         }
         if(yellowFluid.getFluid() != Fluids.EMPTY)
         {
-            this.minecraft.getTextureManager().bindTexture(InjectorScreen.FLUID_GUI);
+            this.minecraft.getTextureManager().bind(InjectorScreen.FLUID_GUI);
             int xYellow = x + 118;
             int yYellow = y + 40;
-            int fluidStored = 12 * yellowFluid.getAmount() / this.container.injector.getCapacity();
+            int fluidStored = 12 * yellowFluid.getAmount() / this.menu.injector.getCapacity();
             int color = 0xFFFC84;
             float r = ((color & 16711680) >> 16) / 255f;
             float g = ((color & 65280) >> 8) / 255f;
@@ -131,10 +131,10 @@ public class InjectorScreen extends ContainerScreen<InjectorContainer> {
         }
         if(whiteFluid.getFluid() != Fluids.EMPTY)
         {
-            this.minecraft.getTextureManager().bindTexture(InjectorScreen.FLUID_GUI);
+            this.minecraft.getTextureManager().bind(InjectorScreen.FLUID_GUI);
             int xWhite = x + 126;
             int yWhite = y + 40;
-            int fluidStored = 12 * whiteFluid.getAmount() / this.container.injector.getCapacity();
+            int fluidStored = 12 * whiteFluid.getAmount() / this.menu.injector.getCapacity();
             int color = 0xD8D8D8;
             float r = ((color & 16711680) >> 16) / 255f;
             float g = ((color & 65280) >> 8) / 255f;
@@ -143,22 +143,22 @@ public class InjectorScreen extends ContainerScreen<InjectorContainer> {
             this.blit(matrixStack, xWhite, yWhite + (12 - fluidStored), 0, 0, 4, fluidStored);
         }
         RenderSystem.color4f(1f, 1f, 1f, 1f);
-        if(this.container.injector.pinkOpen){
-            this.minecraft.getTextureManager().bindTexture(InjectorScreen.HALO_GUI_PINK);
+        if(this.menu.injector.pinkOpen){
+            this.minecraft.getTextureManager().bind(InjectorScreen.HALO_GUI_PINK);
             this.blit(matrixStack, x, y, 0, 0, this.width, this.height);
         }
-        if(this.container.injector.blueOpen){
-            this.minecraft.getTextureManager().bindTexture(InjectorScreen.HALO_GUI_BLUE);
+        if(this.menu.injector.blueOpen){
+            this.minecraft.getTextureManager().bind(InjectorScreen.HALO_GUI_BLUE);
             this.blit(matrixStack, x, y, 0, 0, this.width, this.height);
         }
-        if(this.container.injector.yellowOpen){
-            this.minecraft.getTextureManager().bindTexture(InjectorScreen.HALO_GUI_YELLOW);
+        if(this.menu.injector.yellowOpen){
+            this.minecraft.getTextureManager().bind(InjectorScreen.HALO_GUI_YELLOW);
             this.blit(matrixStack, x, y, 0, 0, this.width, this.height);
         }
-        if(this.container.injector.whiteOpen){
-            this.minecraft.getTextureManager().bindTexture(InjectorScreen.HALO_GUI_WHITE);
+        if(this.menu.injector.whiteOpen){
+            this.minecraft.getTextureManager().bind(InjectorScreen.HALO_GUI_WHITE);
             this.blit(matrixStack, x, y, 0, 0, this.width, this.height);
         }
-        EnergyMeter.RenderBattery(this, matrixStack, container.injector, container.injector, x + 97, y + 32, MeterSize.INJECTOR);
+        EnergyMeter.RenderBattery(this, matrixStack, menu.injector, menu.injector, x + 97, y + 32, MeterSize.INJECTOR);
     }
 }

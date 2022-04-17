@@ -7,15 +7,9 @@ import com.gempire.entities.abilities.interfaces.IViolentAbility;
 import com.gempire.entities.ai.EntityAIGuard;
 import com.gempire.entities.bases.EntityGem;
 import com.gempire.util.Abilities;
-import net.minecraft.entity.IRangedAttackMob;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.goal.Goal;
-import net.minecraft.entity.ai.goal.RangedAttackGoal;
-import net.minecraft.entity.projectile.SnowballEntity;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.world.entity.ai.goal.Goal;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 
 public class AbilityGuard extends Ability implements ITaskAbility {
 
@@ -33,7 +27,7 @@ public class AbilityGuard extends Ability implements ITaskAbility {
         return false;
     }
     @Override
-    public ITextComponent getName() {
-        return new TranslationTextComponent("ability.gempire.guard");
+    public Component getName() {
+        return new TranslatableComponent("ability.gempire.guard");
     }
 }

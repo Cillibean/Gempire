@@ -11,65 +11,65 @@ import com.gempire.networking.C2SRequestEnchant;
 import com.gempire.networking.C2SRequestPageChange;
 import com.gempire.networking.C2SRequestPoof;
 import com.gempire.networking.C2SRequestUpdateGemName;
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screen.inventory.ContainerScreen;
-import net.minecraft.client.gui.widget.TextFieldWidget;
+import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.widget.button.Button;
-import net.minecraft.client.gui.widget.button.ImageButton;
-import net.minecraft.client.renderer.IRenderTypeBuffer;
-import net.minecraft.client.renderer.entity.EntityRendererManager;
+import net.minecraft.client.gui.components.ImageButton;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.Enchantments;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.vector.Quaternion;
-import net.minecraft.util.math.vector.Vector3f;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.resources.ResourceLocation;
+import com.mojang.math.Quaternion;
+import com.mojang.math.Vector3f;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.util.text.TextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.ArrayList;
 
 
-public class ZirconUIScreen extends ContainerScreen<ZirconUIContainer> {
+public class ZirconUIScreen extends AbstractContainerScreen<ZirconUIContainer> {
     public static final ResourceLocation GUI = new ResourceLocation("gempire:textures/gui/zircon_menu.png");
     public static final ResourceLocation LEFT = new ResourceLocation("gempire:textures/gui/zircon_arrow_left.png");
     public static final ResourceLocation RIGHT = new ResourceLocation("gempire:textures/gui/zircon_arrow_right.png");
     public static final ResourceLocation ENCHANT_BUTTON = new ResourceLocation("gempire:textures/gui/enchant_button.png");
     public static final ResourceLocation XP_ORB = new ResourceLocation("gempire:textures/gui/xp_orb.png");
-    public TextFieldWidget nameBox;
+    public EditBox nameBox;
 
-    public ZirconUIScreen(ZirconUIContainer screenContainer, PlayerInventory inv, ITextComponent titleIn) {
+    public ZirconUIScreen(ZirconUIContainer screenContainer, Inventory inv, Component titleIn) {
         super(screenContainer, inv, titleIn);
-        this.guiLeft = 0;
-        this.guiTop = 0;
-        this.xSize = 210;
-        this.ySize = 208;
+        this.leftPos = 0;
+        this.topPos = 0;
+        this.imageWidth = 210;
+        this.imageHeight = 208;
     }
 
     @Override
     protected void init() {
         super.init();
-        int x = (this.width - this.xSize) / 2;
-        int y = (this.height - this.ySize) / 2;
-        int i = this.guiLeft;
-        int j = this.guiTop;
-        this.nameBox = new TextFieldWidget(this.font, i + 102, j + 11, 101, 12, new StringTextComponent("Sussy"));
-        this.nameBox.setEnableBackgroundDrawing(false);
+        int x = (this.width - this.imageWidth) / 2;
+        int y = (this.height - this.imageHeight) / 2;
+        int i = this.leftPos;
+        int j = this.topPos;
+        this.nameBox = new EditBox(this.font, i + 102, j + 11, 101, 12, new TextComponent("Sussy"));
+        this.nameBox.setBordered(false);
         this.nameBox.setVisible(true);
-        String name = this.container.gem.customName() ? this.container.gem.getCustomName().getString() : this.container.gem.getNickname().getString();
-        this.nameBox.setText(name);
-        this.nameBox.setFocused2(true);
+        String name = this.menu.gem.customName() ? this.menu.gem.getCustomName().getString() : this.menu.gem.getNickname().getString();
+        this.nameBox.setValue(name);
+        this.nameBox.setFocus(true);
         this.children.add(this.nameBox);
-        this.setFocusedDefault(this.nameBox);
+        this.setInitialFocus(this.nameBox);
 
         /*this.addButton(new ImageButton(this.guiLeft + 19, this.guiTop + 41, 11, 21, 0, 0, 0, ZirconUIScreen.LEFT,
                 11, 21, (p_213029_1_) -> {
@@ -81,48 +81,48 @@ public class ZirconUIScreen extends ContainerScreen<ZirconUIContainer> {
             ModPacketHandler.INSTANCE.sendToServer(new C2SRequestPageChange(this.container.gem.getEntityId(), true));
         }));*/
 
-        this.addButton(new ImageButton(this.guiLeft + 90, this.guiTop + 55, 30, 10, 0, 0, 0, ZirconUIScreen.ENCHANT_BUTTON,
+        this.addButton(new ImageButton(this.leftPos + 90, this.topPos + 55, 30, 10, 0, 0, 0, ZirconUIScreen.ENCHANT_BUTTON,
                 30, 10, (p_213029_1_) -> {
-            ModPacketHandler.INSTANCE.sendToServer(new C2SRequestEnchant(this.container.gem.getEntityId()));
+            ModPacketHandler.INSTANCE.sendToServer(new C2SRequestEnchant(this.menu.gem.getId()));
         }));
     }
 
     @Override
-    protected void drawGuiContainerForegroundLayer(MatrixStack matrixStack, int x, int y) {
+    protected void renderLabels(PoseStack matrixStack, int x, int y) {
 
     }
 
     @Override
-    public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+    public void render(PoseStack matrixStack, int mouseX, int mouseY, float partialTicks) {
         this.renderBackground(matrixStack);
         super.render(matrixStack, mouseX, mouseY, partialTicks);
-        this.renderHoveredTooltip(matrixStack, mouseX, mouseY);
+        this.renderTooltip(matrixStack, mouseX, mouseY);
     }
 
     @SuppressWarnings("deprecation")
     @Override
-    protected void drawGuiContainerBackgroundLayer(MatrixStack matrixStack, float partialTicks, int mouseX, int mouseY) {
+    protected void renderBg(PoseStack matrixStack, float partialTicks, int mouseX, int mouseY) {
         RenderSystem.color4f(1f, 1f, 1f, 1f);
-        this.minecraft.getTextureManager().bindTexture(ZirconUIScreen.GUI);
-        int x = (this.width - this.xSize) / 2;
-        int y = (this.height - this.ySize) / 2;
-        int i = this.guiLeft;
-        int j = this.guiTop;
-        this.blit(matrixStack, x, y, 0, 0, this.xSize, this.ySize, 224, 208);
+        this.minecraft.getTextureManager().bind(ZirconUIScreen.GUI);
+        int x = (this.width - this.imageWidth) / 2;
+        int y = (this.height - this.imageHeight) / 2;
+        int i = this.leftPos;
+        int j = this.topPos;
+        this.blit(matrixStack, x, y, 0, 0, this.imageWidth, this.imageHeight, 224, 208);
         this.nameBox.render(matrixStack, mouseX, mouseY, partialTicks);
-        this.font.func_243248_b(matrixStack, ZirconUIScreen.getEnchantStringFromLapisCount(this.container.gem),
+        this.font.draw(matrixStack, ZirconUIScreen.getEnchantStringFromLapisCount(this.menu.gem),
                 i + 45, j + 29, 4210752);
-        if(this.container.gem.getStackInSlot(1).canApplyAtEnchantingTable(ModEnchants.VANILLA_ENCHANTMENTS.get(this.container.gem.getEnchantPage()))) {
-            this.minecraft.getTextureManager().bindTexture(ZirconUIScreen.XP_ORB);
+        if(this.menu.gem.getItem(1).canApplyAtEnchantingTable(ModEnchants.VANILLA_ENCHANTMENTS.get(this.menu.gem.getEnchantPage()))) {
+            this.minecraft.getTextureManager().bind(ZirconUIScreen.XP_ORB);
             this.blit(matrixStack, x + 45, y + 64, 0, 0, 11, 11, 11 ,11);
-            int xp = this.getXP(this.getDiscountFromStack(this.container.gem.getStackInSlot(2))) < 0 ? 0 : this.getXP(this.getDiscountFromStack(this.container.gem.getStackInSlot(2)));
-            this.font.func_243248_b(matrixStack, new StringTextComponent(xp + "XP"),
+            int xp = this.getXP(this.getDiscountFromStack(this.menu.gem.getItem(2))) < 0 ? 0 : this.getXP(this.getDiscountFromStack(this.menu.gem.getItem(2)));
+            this.font.draw(matrixStack, new TextComponent(xp + "XP"),
                     i + 59, j + 66, 0x88FF00);
         }
     }
 
     public int getXP(int discount){
-        int level = getEnchantLevelFromLapisCount(this.container.gem);
+        int level = getEnchantLevelFromLapisCount(this.menu.gem);
         int returnv = level > 0 ? 255 * level : 255;
         return returnv - discount;
     }
@@ -141,24 +141,24 @@ public class ZirconUIScreen extends ContainerScreen<ZirconUIContainer> {
 
     public static int getEnchantLevelFromLapisCount(EntityZircon gem){
         int maxEnchant = ModEnchants.VANILLA_ENCHANTMENTS.get(gem.getEnchantPage()).getMaxLevel();
-        int lapisCount = gem.getStackInSlot(0).getCount();
+        int lapisCount = gem.getItem(0).getCount();
         int level = (int) Math.ceil(lapisCount * maxEnchant / 32);
         return level;
     }
 
-    public static StringTextComponent getEnchantStringFromLapisCount(EntityZircon gem){
+    public static TextComponent getEnchantStringFromLapisCount(EntityZircon gem){
         int maxEnchant = ModEnchants.VANILLA_ENCHANTMENTS.get(gem.getEnchantPage()).getMaxLevel();
         int level = ZirconUIScreen.getEnchantLevelFromLapisCount(gem);
         if(level >= maxEnchant) {
-            return new StringTextComponent(new TranslationTextComponent(ModEnchants.VANILLA_ENCHANTMENTS.get(gem.getEnchantPage()).getName()).getString() + " " +
+            return new TextComponent(new TranslatableComponent(ModEnchants.VANILLA_ENCHANTMENTS.get(gem.getEnchantPage()).getDescriptionId()).getString() + " " +
                     ZirconUIScreen.getNumeralsFromLevel(maxEnchant));
         }
         else if(level >= 1 && level < maxEnchant){
-            return new StringTextComponent(new TranslationTextComponent(ModEnchants.VANILLA_ENCHANTMENTS.get(gem.getEnchantPage()).getName()).getString() + " " +
+            return new TextComponent(new TranslatableComponent(ModEnchants.VANILLA_ENCHANTMENTS.get(gem.getEnchantPage()).getDescriptionId()).getString() + " " +
                     ZirconUIScreen.getNumeralsFromLevel(level));
         }
         else{
-            return new StringTextComponent(new TranslationTextComponent(ModEnchants.VANILLA_ENCHANTMENTS.get(gem.getEnchantPage()).getName()).getString());
+            return new TextComponent(new TranslatableComponent(ModEnchants.VANILLA_ENCHANTMENTS.get(gem.getEnchantPage()).getDescriptionId()).getString());
         }
     }
 
@@ -187,7 +187,7 @@ public class ZirconUIScreen extends ContainerScreen<ZirconUIContainer> {
     public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
         if(this.nameBox.isFocused()) {
             this.nameBox.keyPressed(keyCode, scanCode, modifiers);
-            ModPacketHandler.INSTANCE.sendToServer(new C2SRequestUpdateGemName(this.nameBox.getText(), this.container.gem.getEntityId()));
+            ModPacketHandler.INSTANCE.sendToServer(new C2SRequestUpdateGemName(this.nameBox.getValue(), this.menu.gem.getId()));
             return true;
         }
         else{
@@ -207,52 +207,52 @@ public class ZirconUIScreen extends ContainerScreen<ZirconUIContainer> {
         RenderSystem.pushMatrix();
         RenderSystem.translatef((float)posX, (float)posY, 1050.0F);
         RenderSystem.scalef(1.0F, 1.0F, -1.0F);
-        MatrixStack matrixstack = new MatrixStack();
+        PoseStack matrixstack = new PoseStack();
         matrixstack.translate(0.0D, 0.0D, 1000.0D);
         matrixstack.scale((float)scale, (float)scale, (float)scale);
         Quaternion quaternion = Vector3f.ZP.rotationDegrees(180.0F);
         Quaternion quaternion1 = Vector3f.XP.rotationDegrees(f1 * 20.0F);
-        quaternion.multiply(quaternion1);
-        matrixstack.rotate(quaternion);
-        float f2 = livingEntity.renderYawOffset;
-        float f3 = livingEntity.rotationYaw;
-        float f4 = livingEntity.rotationPitch;
-        float f5 = livingEntity.prevRotationYawHead;
-        float f6 = livingEntity.rotationYawHead;
-        livingEntity.renderYawOffset = 180 + f * 20.0F;
-        livingEntity.rotationYaw = 180 + f * 40.0F;
-        livingEntity.rotationPitch = -f1 * 20.0F;
-        livingEntity.rotationYawHead = livingEntity.rotationYaw;
-        livingEntity.prevRotationYawHead = livingEntity.rotationYaw;
-        EntityRendererManager entityrenderermanager = Minecraft.getInstance().getRenderManager();
-        quaternion1.conjugate();
-        entityrenderermanager.setCameraOrientation(quaternion1);
+        quaternion.mul(quaternion1);
+        matrixstack.mulPose(quaternion);
+        float f2 = livingEntity.yBodyRot;
+        float f3 = livingEntity.yRot;
+        float f4 = livingEntity.xRot;
+        float f5 = livingEntity.yHeadRotO;
+        float f6 = livingEntity.yHeadRot;
+        livingEntity.yBodyRot = 180 + f * 20.0F;
+        livingEntity.yRot = 180 + f * 40.0F;
+        livingEntity.xRot = -f1 * 20.0F;
+        livingEntity.yHeadRot = livingEntity.yRot;
+        livingEntity.yHeadRotO = livingEntity.yRot;
+        EntityRenderDispatcher entityrenderermanager = Minecraft.getInstance().getEntityRenderDispatcher();
+        quaternion1.conj();
+        entityrenderermanager.overrideCameraOrientation(quaternion1);
         entityrenderermanager.setRenderShadow(false);
-        IRenderTypeBuffer.Impl irendertypebuffer$impl = Minecraft.getInstance().getRenderTypeBuffers().getBufferSource();
+        MultiBufferSource.BufferSource irendertypebuffer$impl = Minecraft.getInstance().renderBuffers().bufferSource();
         RenderSystem.runAsFancy(() -> {
-            entityrenderermanager.renderEntityStatic(livingEntity, 0.0D, 0.0D, 0.0D, 0.0F, 1.0F,
+            entityrenderermanager.render(livingEntity, 0.0D, 0.0D, 0.0D, 0.0F, 1.0F,
                     matrixstack, irendertypebuffer$impl, 15728880);
         });
-        irendertypebuffer$impl.finish();
+        irendertypebuffer$impl.endBatch();
         entityrenderermanager.setRenderShadow(true);
-        livingEntity.renderYawOffset = f2;
-        livingEntity.rotationYaw = f3;
-        livingEntity.rotationPitch = f4;
-        livingEntity.prevRotationYawHead = f5;
-        livingEntity.rotationYawHead = f6;
+        livingEntity.yBodyRot = f2;
+        livingEntity.yRot = f3;
+        livingEntity.xRot = f4;
+        livingEntity.yHeadRotO = f5;
+        livingEntity.yHeadRot = f6;
         RenderSystem.popMatrix();
     }
 
 
-    public void drawStats(MatrixStack stack, int x, int y){
-        ITextComponent health = new TranslationTextComponent("screens.gempire.health");
-        ITextComponent damage = new TranslationTextComponent("screens.gempire.damage");
-        this.font.func_243248_b(stack, new StringTextComponent(health.getString() + ": " + (int)this.container.gem.getHealth() + " / " + (int)this.container.gem.getMaxHealth()), x + 12, y + 98, 4210752);
-        this.font.func_243248_b(stack, new StringTextComponent(damage.getString() + ": " + (int)this.container.gem.getBaseAttributeValue(Attributes.ATTACK_DAMAGE)), x + 12, y + 110, 4210752);
+    public void drawStats(PoseStack stack, int x, int y){
+        Component health = new TranslatableComponent("screens.gempire.health");
+        Component damage = new TranslatableComponent("screens.gempire.damage");
+        this.font.draw(stack, new TextComponent(health.getString() + ": " + (int)this.menu.gem.getHealth() + " / " + (int)this.menu.gem.getMaxHealth()), x + 12, y + 98, 4210752);
+        this.font.draw(stack, new TextComponent(damage.getString() + ": " + (int)this.menu.gem.getAttributeBaseValue(Attributes.ATTACK_DAMAGE)), x + 12, y + 110, 4210752);
     }
 
-    public void drawAbilityList(MatrixStack stack, int x, int y){
-        ArrayList<Ability> powers1 = this.container.gem.findAbilities(this.container.gem.getAbilites());
+    public void drawAbilityList(PoseStack stack, int x, int y){
+        ArrayList<Ability> powers1 = this.menu.gem.findAbilities(this.menu.gem.getAbilites());
         ArrayList<Ability> powers = new ArrayList<>();
         for(Ability ability : powers1){
             if(!(ability instanceof AbilityZilch)){
@@ -260,8 +260,8 @@ public class ZirconUIScreen extends ContainerScreen<ZirconUIContainer> {
             }
         }
         for(int i = 0; i < powers.size(); i++){
-            ITextComponent text = powers.get(i).getName();
-            this.font.func_243248_b(stack, text, x, y + i * 9, 4210752);
+            Component text = powers.get(i).getName();
+            this.font.draw(stack, text, x, y + i * 9, 4210752);
         }
     }
 }

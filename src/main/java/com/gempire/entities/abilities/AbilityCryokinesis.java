@@ -11,21 +11,21 @@ import com.gempire.entities.projectiles.IceShardEntity;
 import com.gempire.init.ModBlocks;
 import com.gempire.init.ModItems;
 import com.gempire.util.Abilities;
-import net.minecraft.block.AirBlock;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.BushBlock;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.goal.Goal;
-import net.minecraft.entity.ai.goal.RangedAttackGoal;
-import net.minecraft.entity.projectile.SnowballEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.particles.ParticleType;
-import net.minecraft.particles.ParticleTypes;
-import net.minecraft.state.properties.DoubleBlockHalf;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.world.level.block.AirBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.BushBlock;
+import net.minecraft.world.entity.ai.goal.Goal;
+import net.minecraft.world.entity.ai.goal.RangedAttackGoal;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.Mth;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
+
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.monster.RangedAttackMob;
 
 public class AbilityCryokinesis extends Ability implements IRangedAbility, IViolentAbility, ITaskAbility, ITargetAbility {
 
@@ -35,35 +35,35 @@ public class AbilityCryokinesis extends Ability implements IRangedAbility, IViol
 
     @Override
     public void attack(LivingEntity target, float distanceFactor) {
-        IceShardEntity snowballentity = new IceShardEntity(this.holder.world, this.holder);
-        double d0 = target.getPosYEye() - (double) 1.1F;
-        double d1 = target.getPosX() - this.holder.getPosX();
-        double d2 = d0 - snowballentity.getPosY();
-        double d3 = target.getPosZ() - this.holder.getPosZ();
-        float f = MathHelper.sqrt(d1 * d1 + d3 * d3) * 0.2F;
+        IceShardEntity snowballentity = new IceShardEntity(this.holder.level, this.holder);
+        double d0 = target.getEyeY() - (double) 1.1F;
+        double d1 = target.getX() - this.holder.getX();
+        double d2 = d0 - snowballentity.getY();
+        double d3 = target.getZ() - this.holder.getZ();
+        float f = Mth.sqrt((float)( d1 * d1 + d3 * d3)) * 0.2F;
         snowballentity.shoot(d1, d2 + (double) f, d3, 1.6F, 6.0F);
-        this.holder.playSound(SoundEvents.ENTITY_SNOW_GOLEM_SHOOT, 1.0F, 0.4F / (this.holder.getRNG().nextFloat() * 0.4F + 0.8F));
-        this.holder.world.addEntity(snowballentity);
+        this.holder.playSound(SoundEvents.SNOW_GOLEM_SHOOT, 1.0F, 0.4F / (this.holder.getRandom().nextFloat() * 0.4F + 0.8F));
+        this.holder.level.addFreshEntity(snowballentity);
 
 
-        if(this.holder.getRNG().nextInt(5) == 0) {
-            if(!(target.world.getBlockState(target.getPosition().down()).getBlock() instanceof AirBlock) &&
-                    !(target.world.getBlockState(target.getPosition().down()).getBlock() instanceof BushBlock)&&
-                    (target.world.getBlockState(target.getPosition().up()).getBlock() instanceof AirBlock)) {
-                float f5 = (target.world.rand.nextFloat() - 0.5F) * 8.0F;
-                float f1 = (target.world.rand.nextFloat() - 0.5F) * 4.0F;
-                float f2 = (target.world.rand.nextFloat() - 0.5F) * 8.0F;
-                target.world.addParticle(ParticleTypes.EXPLOSION, target.getPosX() + (double) f5, target.getPosY() + 2.0D + (double) f1, target.getPosZ() + (double) f2, 0.0D, 0.0D, 0.0D);
-                this.holder.world.setBlockState(target.getPosition(), this.blockToSummon());
-                ((IceSpikeBlock) this.holder.world.getBlockState(target.getPosition()).getBlock()).onBlockPlacedBy(this.holder.world, target.getPosition(),
-                        this.holder.world.getBlockState(target.getPosition()), this.holder, new ItemStack(ModItems.ICE_SPIKE.get()));
+        if(this.holder.getRandom().nextInt(5) == 0) {
+            if(!(target.level.getBlockState(target.blockPosition().below()).getBlock() instanceof AirBlock) &&
+                    !(target.level.getBlockState(target.blockPosition().below()).getBlock() instanceof BushBlock)&&
+                    (target.level.getBlockState(target.blockPosition().above()).getBlock() instanceof AirBlock)) {
+                float f5 = (target.level.random.nextFloat() - 0.5F) * 8.0F;
+                float f1 = (target.level.random.nextFloat() - 0.5F) * 4.0F;
+                float f2 = (target.level.random.nextFloat() - 0.5F) * 8.0F;
+                target.level.addParticle(ParticleTypes.EXPLOSION, target.getX() + (double) f5, target.getY() + 2.0D + (double) f1, target.getZ() + (double) f2, 0.0D, 0.0D, 0.0D);
+                this.holder.level.setBlockAndUpdate(target.blockPosition(), this.blockToSummon());
+                ((IceSpikeBlock) this.holder.level.getBlockState(target.blockPosition()).getBlock()).setPlacedBy(this.holder.level, target.blockPosition(),
+                        this.holder.level.getBlockState(target.blockPosition()), this.holder, new ItemStack(ModItems.ICE_SPIKE.get()));
             }
         }
     }
 
     @Override
     public Goal goal() {
-        return new RangedAttackGoal((IRangedAttackMob) this.holder, 1.25D, 20, 10.0F);
+        return new RangedAttackGoal((RangedAttackMob) this.holder, 1.25D, 20, 10.0F);
     }
 
     @Override
@@ -73,7 +73,7 @@ public class AbilityCryokinesis extends Ability implements IRangedAbility, IViol
 
     @Override
     public BlockState blockToSummon() {
-        return ModBlocks.ICE_SPIKE.get().getDefaultState().with(IceSpikeBlock.HALF, DoubleBlockHalf.LOWER);
+        return ModBlocks.ICE_SPIKE.get().defaultBlockState().setValue(IceSpikeBlock.HALF, DoubleBlockHalf.LOWER);
     }
 
     @Override
@@ -81,7 +81,7 @@ public class AbilityCryokinesis extends Ability implements IRangedAbility, IViol
         return ((EntityGem)this.holder).isFocused() ? 1 : ((EntityGem)this.holder).focusLevel;
     }
     @Override
-    public ITextComponent getName() {
-        return new TranslationTextComponent("ability.gempire.cryokinesis");
+    public Component getName() {
+        return new TranslatableComponent("ability.gempire.cryokinesis");
     }
 }

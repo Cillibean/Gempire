@@ -6,15 +6,15 @@ import com.gempire.entities.abilities.interfaces.IEffectAbility;
 import com.gempire.entities.bases.EntityGem;
 import com.gempire.init.ModItems;
 import com.gempire.util.Abilities;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.Items;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 
 import javax.annotation.Nullable;
 import java.util.UUID;
@@ -26,9 +26,9 @@ public class AbilityAmphibian extends Ability implements IEffectAbility, IAlchem
     }
 
     @Override
-    public EffectInstance[] effects() {
-        return new EffectInstance[]{
-                new EffectInstance(Effects.DOLPHINS_GRACE, 400, 4), new EffectInstance(Effects.WATER_BREATHING, 400, 4)
+    public MobEffectInstance[] effects() {
+        return new MobEffectInstance[]{
+                new MobEffectInstance(MobEffects.DOLPHINS_GRACE, 400, 4), new MobEffectInstance(MobEffects.WATER_BREATHING, 400, 4)
         };
     }
 
@@ -38,20 +38,20 @@ public class AbilityAmphibian extends Ability implements IEffectAbility, IAlchem
     }
 
     @Override
-    public EffectInstance effect() {
+    public MobEffectInstance effect() {
         return null;
     }
 
     @Override
     public Class<LivingEntity>[] applicableEntities() {
         return new Class[]{
-                PlayerEntity.class
+                Player.class
         };
     }
 
     @Override
-    public ITextComponent getName() {
-        return new TranslationTextComponent("ability.gempire.amphibian");
+    public Component getName() {
+        return new TranslatableComponent("ability.gempire.amphibian");
     }
 
     @Override
@@ -65,29 +65,29 @@ public class AbilityAmphibian extends Ability implements IEffectAbility, IAlchem
     }
 
     @Override
-    public boolean doSpecialActionOnInput(@Nullable PlayerEntity player) {
+    public boolean doSpecialActionOnInput(@Nullable Player player) {
         boolean flagHunger = false;
         boolean flagHealth = false;
         boolean flagHeart = player.isCreative();
         for(int i = 0; i < this.holder.NUMBER_OF_SLOTS - 6; i++){
-            if(this.holder.getStackInSlot(i + 36).getItem() == Items.HEART_OF_THE_SEA ){
+            if(this.holder.getItem(i + 36).getItem() == Items.HEART_OF_THE_SEA ){
                 flagHeart = true;
             }
         }
         if(flagHeart) {
             if (this.holder.getHealth() <= this.holder.getMaxHealth() / 2 && !player.isCreative()) {
-                player.sendMessage(new TranslationTextComponent("messages.gempire.entity.spodumene_sore"), UUID.randomUUID());
+                player.sendMessage(new TranslatableComponent("messages.gempire.entity.spodumene_sore"), UUID.randomUUID());
                 return false;
             } else {
                 flagHealth = true;
                 if (!player.isCreative())
-                    this.holder.damageEntity(DamageSource.GENERIC, this.holder.getMaxHealth() / 2);
+                    this.holder.actuallyHurt(DamageSource.GENERIC, this.holder.getMaxHealth() / 2);
             }
-            if (player.getFoodStats().getFoodLevel() < 10 && !player.isCreative()) {
-                player.sendMessage(new TranslationTextComponent("messages.gempire.entity.player_hungry"), UUID.randomUUID());
+            if (player.getFoodData().getFoodLevel() < 10 && !player.isCreative()) {
+                player.sendMessage(new TranslatableComponent("messages.gempire.entity.player_hungry"), UUID.randomUUID());
             } else {
                 flagHunger = true;
-                if (!player.isCreative()) player.getFoodStats().setFoodLevel(player.getFoodStats().getFoodLevel() - 10);
+                if (!player.isCreative()) player.getFoodData().setFoodLevel(player.getFoodData().getFoodLevel() - 10);
             }
         }
         return flagHealth && flagHunger && flagHeart;

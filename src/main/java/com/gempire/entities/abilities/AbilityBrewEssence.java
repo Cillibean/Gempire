@@ -6,13 +6,10 @@ import com.gempire.entities.abilities.interfaces.IAttributeAbility;
 import com.gempire.entities.gems.starter.EntityShale;
 import com.gempire.init.ModItems;
 import com.gempire.util.Abilities;
-import net.minecraft.entity.ai.attributes.Attribute;
-import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 
 import javax.annotation.Nullable;
 import java.util.UUID;
@@ -25,8 +22,8 @@ public class AbilityBrewEssence extends Ability implements IAlchemyAbility {
     }
 
     @Override
-    public ITextComponent getName() {
-        return new TranslationTextComponent("ability.gempire.essence");
+    public Component getName() {
+        return new TranslatableComponent("ability.gempire.essence");
     }
 
     @Override
@@ -36,7 +33,7 @@ public class AbilityBrewEssence extends Ability implements IAlchemyAbility {
 
     @Override
     public Item output() {
-        int i = this.holder.getRNG().nextInt(4);
+        int i = this.holder.getRandom().nextInt(4);
         Item essence = ModItems.ESSENCE_BOTTLE.get();
         switch (i){
             case 1:
@@ -56,15 +53,15 @@ public class AbilityBrewEssence extends Ability implements IAlchemyAbility {
     }
 
     @Override
-    public boolean doSpecialActionOnInput(@Nullable PlayerEntity player) {
+    public boolean doSpecialActionOnInput(@Nullable Player player) {
         if(player.isCreative()) return true;
         boolean flagXP = false;
-        if (player.experienceTotal >= AbilityBrewEssence.EXPERIENCE) {
+        if (player.totalExperience >= AbilityBrewEssence.EXPERIENCE) {
             EntityShale.decreaseExp(player, AbilityBrewEssence.EXPERIENCE);
             flagXP = true;
         }
         else{
-            player.sendMessage(new TranslationTextComponent("messages.gempire.entity.player_need_xp"), UUID.randomUUID());
+            player.sendMessage(new TranslatableComponent("messages.gempire.entity.player_need_xp"), UUID.randomUUID());
         }
         return flagXP;
     }

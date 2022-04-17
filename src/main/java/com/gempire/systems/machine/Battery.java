@@ -1,6 +1,6 @@
 package com.gempire.systems.machine;
 
-import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.CompoundTag;
 
 public class Battery {
     float maxCapacity;
@@ -45,14 +45,14 @@ public class Battery {
         }
     }
 
-    public static CompoundNBT WriteBattery(Battery battery){
-        CompoundNBT nbt = new CompoundNBT();
+    public static CompoundTag WriteBattery(Battery battery){
+        CompoundTag nbt = new CompoundTag();
         nbt.putFloat("capacity", battery.getMaxCapacity());
         nbt.putFloat("charge", battery.getCharge());
         return nbt;
     }
 
-    public static Battery GetBatteryFromNBT(CompoundNBT nbt){
+    public static Battery GetBatteryFromNBT(CompoundTag nbt){
         float maxBattery = nbt.getFloat("capacity");
         float charge = nbt.getFloat("charge");
         return new Battery(maxBattery, charge);

@@ -4,11 +4,10 @@ import com.gempire.entities.abilities.base.Ability;
 import com.gempire.entities.abilities.interfaces.IMeleeAbility;
 import com.gempire.entities.abilities.interfaces.IViolentAbility;
 import com.gempire.util.Abilities;
-import net.minecraft.entity.CreatureEntity;
-import net.minecraft.entity.Entity;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.Explosion;
+import net.minecraft.world.entity.PathfinderMob;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 
 public class AbilityKnockback extends Ability implements IMeleeAbility, IViolentAbility {
 
@@ -18,17 +17,17 @@ public class AbilityKnockback extends Ability implements IMeleeAbility, IViolent
 
     @Override
     public void fight(Entity entityIn, double damage) {
-        CreatureEntity entity = null;
-        if(entityIn instanceof CreatureEntity){
-            entity = (CreatureEntity) entityIn;
+        PathfinderMob entity = null;
+        if(entityIn instanceof PathfinderMob){
+            entity = (PathfinderMob) entityIn;
         }
         else{
             return;
         }
-        entity.applyKnockback(3F, 1, 1);
+        entity.knockback(3F, 1, 1);
     }
     @Override
-    public ITextComponent getName() {
-        return new TranslationTextComponent("ability.gempire.knockback");
+    public Component getName() {
+        return new TranslatableComponent("ability.gempire.knockback");
     }
 }

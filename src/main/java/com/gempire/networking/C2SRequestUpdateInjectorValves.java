@@ -1,10 +1,10 @@
 package com.gempire.networking;
 
 import com.gempire.tileentities.InjectorTE;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.math.BlockPos;
-import net.minecraftforge.fml.network.NetworkEvent;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.core.BlockPos;
+import net.minecraftforge.fmllegacy.network.NetworkEvent;
 
 import java.util.function.Supplier;
 
@@ -17,23 +17,23 @@ public class C2SRequestUpdateInjectorValves {
         this.injectorPos = pos;
     }
 
-    public static C2SRequestUpdateInjectorValves decode(PacketBuffer buffer) {
-        final String color = buffer.readString(32767);
+    public static C2SRequestUpdateInjectorValves decode(FriendlyByteBuf buffer) {
+        final String color = buffer.readUtf(32767);
         final BlockPos injector = buffer.readBlockPos();
         return new C2SRequestUpdateInjectorValves(color, injector);
     }
 
-    public static void encode(C2SRequestUpdateInjectorValves msg, PacketBuffer buffer) {
-        buffer.writeString(msg.color);
+    public static void encode(C2SRequestUpdateInjectorValves msg, FriendlyByteBuf buffer) {
+        buffer.writeUtf(msg.color);
         buffer.writeBlockPos(msg.injectorPos);
     }
 
     public static void handle(final C2SRequestUpdateInjectorValves msg, final Supplier<NetworkEvent.Context> contextSupplier) {
         NetworkEvent.Context ctx = contextSupplier.get();
-        ServerPlayerEntity sender = ctx.getSender();
+        ServerPlayer sender = ctx.getSender();
         boolean hasPermission = true;
         if (hasPermission) {
-            InjectorTE injector = (InjectorTE)sender.world.getTileEntity(msg.injectorPos);
+            InjectorTE injector = (InjectorTE)sender.level.getBlockEntity(msg.injectorPos);
             injector.ToggleTankOpen(msg.color);
         }
         ctx.setPacketHandled(true);
