@@ -4,6 +4,7 @@ import com.gempire.container.TankContainer;
 import com.gempire.init.ModPacketHandler;
 import com.gempire.networking.C2SRequestDumpFluidsInjector;
 import com.gempire.networking.C2SRequestDumpFluidsTank;
+import com.gempire.util.GUIUtilities;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
@@ -30,7 +31,7 @@ public class TankScreen extends AbstractContainerScreen<TankContainer> {
         super.init();
         int x = (this.width - this.imageWidth) / 2;
         int y = (this.height - this.imageHeight) / 2;
-        this.addButton(new ImageButton(x + 79, y + 32, 39, 12, 0, 0, 0, TankScreen.DUMP_BUTTON, 39, 12, (p_213029_1_) -> {
+        addRenderableWidget(new ImageButton(x + 79, y + 32, 39, 12, 0, 0, 0, TankScreen.DUMP_BUTTON, 39, 12, (p_213029_1_) -> {
             ModPacketHandler.INSTANCE.sendToServer(new C2SRequestDumpFluidsTank(this.menu.tank.getBlockPos()));
         }));
     }
@@ -58,8 +59,7 @@ public class TankScreen extends AbstractContainerScreen<TankContainer> {
     @SuppressWarnings("deprecation")
     @Override
     protected void renderBg(PoseStack matrixStack, float partialTicks, int mouseX, int mouseY) {
-        RenderSystem.color4f(1f, 1f, 1f, 1f);
-        this.minecraft.getTextureManager().bind(TankScreen.TANK_GUI);
+        GUIUtilities.setup(TANK_GUI);
         int x = (this.width - this.imageWidth) / 2;
         int y = (this.height - this.imageHeight) / 2;
         this.blit(matrixStack, x, y, 0, 0, this.imageWidth, this.imageHeight);
@@ -69,7 +69,7 @@ public class TankScreen extends AbstractContainerScreen<TankContainer> {
             ResourceLocation stillLocation = fluid.getFluid().getAttributes().getFlowingTexture(this.menu.tank.getFluid());
             TextureAtlasSprite sprite = Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(stillLocation);
             ResourceLocation spriteLocation = sprite.getName();
-            this.minecraft.getTextureManager().bind(new ResourceLocation(spriteLocation.getNamespace(), "textures/" + spriteLocation.getPath() + ".png"));
+            GUIUtilities.setup(new ResourceLocation(spriteLocation.getNamespace(), "textures/" + spriteLocation.getPath() + ".png"));
             int x2 = 58 + x;
             int y2 = 9 + y;
             int fluidStored = 57 * fluid.getAmount() / 4000;
@@ -78,12 +78,11 @@ public class TankScreen extends AbstractContainerScreen<TankContainer> {
                 float r = ((color & 16711680) >> 16) / 255f;
                 float g = ((color & 65280) >> 8) / 255f;
                 float b = ((color & 255) >> 0) / 255f;
-                RenderSystem.color4f(r, g, b, 1);
+                RenderSystem.setShaderColor(r, g, b, 1);
             }
             this.blit(matrixStack, x2, y2 + (57 - fluidStored), (int)sprite.getU0(), (int)sprite.getV0(), 15, fluidStored);
         }
-        RenderSystem.color4f(1f, 1f, 1f, 1f);
-        this.minecraft.getTextureManager().bind(TankScreen.TANK_FOREGROUND);
+        GUIUtilities.setup(TANK_FOREGROUND);
         this.blit(matrixStack, x, y, 0, 0, this.imageWidth, this.imageWidth);
     }
 }

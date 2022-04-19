@@ -9,6 +9,8 @@ import com.gempire.networking.C2SRequestDumpFluidsTank;
 import com.gempire.networking.C2SRequestInject;
 import com.gempire.networking.C2SRequestPoof;
 import com.gempire.networking.C2SRequestUpdateGemName;
+import com.gempire.util.GUIUtilities;
+import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
@@ -59,9 +61,9 @@ public class GemUIScreen extends AbstractContainerScreen<GemUIContainer> {
         this.nameBox.setValue(name);
         this.nameBox.setFocus(true);
 
-        this.children.add(this.nameBox);
+        addRenderableWidget(this.nameBox);
         this.setInitialFocus(this.nameBox);
-        this.addButton(new Button(this.leftPos + 27, this.topPos + 123, 83, 20, new TranslatableComponent("screens.gempire.poof"), (button) -> {
+        addRenderableWidget(new Button(this.leftPos + 27, this.topPos + 123, 83, 20, new TranslatableComponent("screens.gempire.poof"), (button) -> {
             ModPacketHandler.INSTANCE.sendToServer(new C2SRequestPoof(this.menu.gem.getId()));
             this.onClose();
         }));
@@ -82,19 +84,22 @@ public class GemUIScreen extends AbstractContainerScreen<GemUIContainer> {
     @SuppressWarnings("deprecation")
     @Override
     protected void renderBg(PoseStack matrixStack, float partialTicks, int mouseX, int mouseY) {
-        RenderSystem.color4f(1f, 1f, 1f, 1f);
-        this.minecraft.getTextureManager().bind(GemUIScreen.GUI);
+        GUIUtilities.setup(GemUIScreen.GUI);
+
         int x = (this.width - this.imageWidth) / 2;
         int y = (this.height - this.imageHeight) / 2;
         int i = this.leftPos;
         int j = this.topPos;
+
         this.blit(matrixStack, x, y, 0, 0, this.imageWidth, this.imageHeight, 272, 250);
-        this.minecraft.getTextureManager().bind(GemUIScreen.ARROW);
+
+        GUIUtilities.setup(GemUIScreen.ARROW);
         this.blit(matrixStack, i + 181, j + (31), 9, this.menu.gem.getBrewProgress(), 0, 0, 9, this.menu.gem.getBrewProgress(), 9, 11);
+
         this.nameBox.render(matrixStack, mouseX, mouseY, partialTicks);
-        //System.out.println("Progress: " + this.container.brewProgress.get());
+
         int scale = this.menu.gem.getBoundingBox().getYsize() > 1.8f ? 25 : 30;
-        drawEntityOnScreen(i + 228, j + 76, scale, (float)(i + 229) - mouseX, (float)(j + 46) - mouseY, this.menu.gem);
+        renderEntityInInventory(i + 228, j + 76, scale, (float)(i + 229) - mouseX, (float)(j + 46) - mouseY, this.menu.gem);
         drawStats(matrixStack, i, j);
     }
 
@@ -116,46 +121,50 @@ public class GemUIScreen extends AbstractContainerScreen<GemUIContainer> {
         return super.mouseClicked(mouseX, mouseY, button);
     }
 
-    public static void drawEntityOnScreen(int posX, int posY, int scale, float mouseX, float mouseY, LivingEntity livingEntity) {
-        float f = (float)Math.atan((double)(mouseX / 40.0F));
-        float f1 = (float)Math.atan((double)(mouseY / 40.0F));
-        RenderSystem.pushMatrix();
-        RenderSystem.translatef((float)posX, (float)posY, 1050.0F);
-        RenderSystem.scalef(1.0F, 1.0F, -1.0F);
-        PoseStack matrixstack = new PoseStack();
-        matrixstack.translate(0.0D, 0.0D, 1000.0D);
-        matrixstack.scale((float)scale, (float)scale, (float)scale);
+    public static void renderEntityInInventory(int p_98851_, int p_98852_, int p_98853_, float p_98854_, float p_98855_, LivingEntity p_98856_) {
+        float f = (float)Math.atan((double)(p_98854_ / 40.0F));
+        float f1 = (float)Math.atan((double)(p_98855_ / 40.0F));
+        PoseStack posestack = RenderSystem.getModelViewStack();
+        posestack.pushPose();
+        posestack.translate((double)p_98851_, (double)p_98852_, 1050.0D);
+        posestack.scale(1.0F, 1.0F, -1.0F);
+        RenderSystem.applyModelViewMatrix();
+        PoseStack posestack1 = new PoseStack();
+        posestack1.translate(0.0D, 0.0D, 1000.0D);
+        posestack1.scale((float)p_98853_, (float)p_98853_, (float)p_98853_);
         Quaternion quaternion = Vector3f.ZP.rotationDegrees(180.0F);
         Quaternion quaternion1 = Vector3f.XP.rotationDegrees(f1 * 20.0F);
         quaternion.mul(quaternion1);
-        matrixstack.mulPose(quaternion);
-        float f2 = livingEntity.yBodyRot;
-        float f3 = livingEntity.yRot;
-        float f4 = livingEntity.xRot;
-        float f5 = livingEntity.yHeadRotO;
-        float f6 = livingEntity.yHeadRot;
-        livingEntity.yBodyRot = 180 + f * 20.0F;
-        livingEntity.yRot = 180 + f * 40.0F;
-        livingEntity.xRot = -f1 * 20.0F;
-        livingEntity.yHeadRot = livingEntity.yRot;
-        livingEntity.yHeadRotO = livingEntity.yRot;
-        EntityRenderDispatcher entityrenderermanager = Minecraft.getInstance().getEntityRenderDispatcher();
+        posestack1.mulPose(quaternion);
+        float f2 = p_98856_.yBodyRot;
+        float f3 = p_98856_.getYRot();
+        float f4 = p_98856_.getXRot();
+        float f5 = p_98856_.yHeadRotO;
+        float f6 = p_98856_.yHeadRot;
+        p_98856_.yBodyRot = 180.0F + f * 20.0F;
+        p_98856_.setYRot(180.0F + f * 40.0F);
+        p_98856_.setXRot(-f1 * 20.0F);
+        p_98856_.yHeadRot = p_98856_.getYRot();
+        p_98856_.yHeadRotO = p_98856_.getYRot();
+        Lighting.setupForEntityInInventory();
+        EntityRenderDispatcher entityrenderdispatcher = Minecraft.getInstance().getEntityRenderDispatcher();
         quaternion1.conj();
-        entityrenderermanager.overrideCameraOrientation(quaternion1);
-        entityrenderermanager.setRenderShadow(false);
-        MultiBufferSource.BufferSource irendertypebuffer$impl = Minecraft.getInstance().renderBuffers().bufferSource();
+        entityrenderdispatcher.overrideCameraOrientation(quaternion1);
+        entityrenderdispatcher.setRenderShadow(false);
+        MultiBufferSource.BufferSource multibuffersource$buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
         RenderSystem.runAsFancy(() -> {
-            entityrenderermanager.render(livingEntity, 0.0D, 0.0D, 0.0D, 0.0F, 1.0F,
-                    matrixstack, irendertypebuffer$impl, 15728880);
+            entityrenderdispatcher.render(p_98856_, 0.0D, 0.0D, 0.0D, 0.0F, 1.0F, posestack1, multibuffersource$buffersource, 15728880);
         });
-        irendertypebuffer$impl.endBatch();
-        entityrenderermanager.setRenderShadow(true);
-        livingEntity.yBodyRot = f2;
-        livingEntity.yRot = f3;
-        livingEntity.xRot = f4;
-        livingEntity.yHeadRotO = f5;
-        livingEntity.yHeadRot = f6;
-        RenderSystem.popMatrix();
+        multibuffersource$buffersource.endBatch();
+        entityrenderdispatcher.setRenderShadow(true);
+        p_98856_.yBodyRot = f2;
+        p_98856_.setYRot(f3);
+        p_98856_.setXRot(f4);
+        p_98856_.yHeadRotO = f5;
+        p_98856_.yHeadRot = f6;
+        posestack.popPose();
+        RenderSystem.applyModelViewMatrix();
+        Lighting.setupFor3DItems();
     }
 
 

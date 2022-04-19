@@ -1,11 +1,12 @@
 package com.gempire.client.screen;
 
-import com.gempire.container.GemUIContainer;
 import com.gempire.container.PearlUIContainer;
 import com.gempire.entities.abilities.AbilityZilch;
 import com.gempire.entities.abilities.base.Ability;
 import com.gempire.init.ModPacketHandler;
 import com.gempire.networking.*;
+import com.gempire.util.GUIUtilities;
+import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
@@ -16,7 +17,6 @@ import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.resources.ResourceLocation;
 import com.mojang.math.Quaternion;
@@ -24,8 +24,6 @@ import com.mojang.math.Vector3f;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.ArrayList;
 
@@ -59,20 +57,20 @@ public class PearlUIScreen extends AbstractContainerScreen<PearlUIContainer> {
         String name = this.menu.gem.customName() ? this.menu.gem.getCustomName().getString() : this.menu.gem.getDisplayName().getString();
         this.nameBox.setValue(name);
         this.nameBox.setFocus(true);
-        this.children.add(this.nameBox);
+        addRenderableWidget(this.nameBox);
         this.setInitialFocus(this.nameBox);
 
-        this.addButton(new ImageButton(this.leftPos + 241, this.topPos + 11, 11, 9, 0, 0, 0, PearlUIScreen.LEFT,
+        addRenderableWidget(new ImageButton(this.leftPos + 241, this.topPos + 11, 11, 9, 0, 0, 0, PearlUIScreen.LEFT,
                 11, 9, (p_213029_1_) -> {
             ModPacketHandler.INSTANCE.sendToServer(new C2SRequestPageChange(this.menu.gem.getId(), false));
         }));
 
-        this.addButton(new ImageButton(this.leftPos + 256, this.topPos + 11, 11, 9, 0, 0, 0, PearlUIScreen.RIGHT,
+        addRenderableWidget(new ImageButton(this.leftPos + 256, this.topPos + 11, 11, 9, 0, 0, 0, PearlUIScreen.RIGHT,
                 11, 9, (p_213029_1_) -> {
             ModPacketHandler.INSTANCE.sendToServer(new C2SRequestPageChange(this.menu.gem.getId(), true));
         }));
 
-        this.addButton(new Button(this.leftPos + 10, this.topPos + 108, 83, 20, new TranslatableComponent("screens.gempire.poof"),
+        addRenderableWidget(new Button(this.leftPos + 10, this.topPos + 108, 83, 20, new TranslatableComponent("screens.gempire.poof"),
                 (button) -> {
             ModPacketHandler.INSTANCE.sendToServer(new C2SRequestPoof(this.menu.gem.getId()));
             this.onClose();
@@ -80,29 +78,29 @@ public class PearlUIScreen extends AbstractContainerScreen<PearlUIContainer> {
 
         //CUSTOMIZATION STUFF
 
-        this.addButton(new ImageButton(this.leftPos + 122, this.topPos + 35, 11, 9, 0, 0, 0, PearlUIScreen.LEFT_L,
+        addRenderableWidget(new ImageButton(this.leftPos + 122, this.topPos + 35, 11, 9, 0, 0, 0, PearlUIScreen.LEFT_L,
                 11, 9, (p_213029_1_) -> {
             ModPacketHandler.INSTANCE.sendToServer(new C2SRequestHairChange(this.menu.gem.getId(), false));
         }));
-        this.addButton(new ImageButton(this.leftPos + 137, this.topPos + 35, 11, 9, 0, 0, 0, PearlUIScreen.RIGHT_L,
+        addRenderableWidget(new ImageButton(this.leftPos + 137, this.topPos + 35, 11, 9, 0, 0, 0, PearlUIScreen.RIGHT_L,
                 11, 9, (p_213029_1_) -> {
             ModPacketHandler.INSTANCE.sendToServer(new C2SRequestHairChange(this.menu.gem.getId(), true));
         }));
 
-        this.addButton(new ImageButton(this.leftPos + 139, this.topPos + 53, 11, 9, 0, 0, 0, PearlUIScreen.LEFT_L,
+        addRenderableWidget(new ImageButton(this.leftPos + 139, this.topPos + 53, 11, 9, 0, 0, 0, PearlUIScreen.LEFT_L,
                 11, 9, (p_213029_1_) -> {
             ModPacketHandler.INSTANCE.sendToServer(new C2SRequestOutfitChange(this.menu.gem.getId(), false));
         }));
-        this.addButton(new ImageButton(this.leftPos + 154, this.topPos + 53, 11, 9, 0, 0, 0, PearlUIScreen.RIGHT_L,
+        addRenderableWidget(new ImageButton(this.leftPos + 154, this.topPos + 53, 11, 9, 0, 0, 0, PearlUIScreen.RIGHT_L,
                 11, 9, (p_213029_1_) -> {
             ModPacketHandler.INSTANCE.sendToServer(new C2SRequestOutfitChange(this.menu.gem.getId(), true));
         }));
 
-        this.addButton(new ImageButton(this.leftPos + 138, this.topPos + 71, 11, 9, 0, 0, 0, PearlUIScreen.LEFT_L,
+        addRenderableWidget(new ImageButton(this.leftPos + 138, this.topPos + 71, 11, 9, 0, 0, 0, PearlUIScreen.LEFT_L,
                 11, 9, (p_213029_1_) -> {
             ModPacketHandler.INSTANCE.sendToServer(new C2SRequestInsigniaChange(this.menu.gem.getId(), false));
         }));
-        this.addButton(new ImageButton(this.leftPos + 153, this.topPos + 71, 11, 9, 0, 0, 0, PearlUIScreen.RIGHT_L,
+        addRenderableWidget(new ImageButton(this.leftPos + 153, this.topPos + 71, 11, 9, 0, 0, 0, PearlUIScreen.RIGHT_L,
                 11, 9, (p_213029_1_) -> {
             ModPacketHandler.INSTANCE.sendToServer(new C2SRequestInsigniaChange(this.menu.gem.getId(), true));
         }));
@@ -123,8 +121,7 @@ public class PearlUIScreen extends AbstractContainerScreen<PearlUIContainer> {
     @SuppressWarnings("deprecation")
     @Override
     protected void renderBg(PoseStack matrixStack, float partialTicks, int mouseX, int mouseY) {
-        RenderSystem.color4f(1f, 1f, 1f, 1f);
-        this.minecraft.getTextureManager().bind(PearlUIScreen.GUI);
+        GUIUtilities.setup(GUI);
         int x = (this.width - this.imageWidth) / 2;
         int y = (this.height - this.imageHeight) / 2;
         int i = this.leftPos;
@@ -133,7 +130,7 @@ public class PearlUIScreen extends AbstractContainerScreen<PearlUIContainer> {
 
         this.nameBox.render(matrixStack, mouseX, mouseY, partialTicks);
 
-        drawEntityOnScreen(i + 38, j + 76, 26, (float)(i + 37) - mouseX, (float)(j + 43) - mouseY, this.menu.gem);
+        renderEntityInInventory(i + 38, j + 76, 26, (float)(i + 37) - mouseX, (float)(j + 43) - mouseY, this.menu.gem);
 
         drawStats(matrixStack, i, j);
 
@@ -175,48 +172,51 @@ public class PearlUIScreen extends AbstractContainerScreen<PearlUIContainer> {
         return super.mouseClicked(mouseX, mouseY, button);
     }
 
-    public static void drawEntityOnScreen(int posX, int posY, int scale, float mouseX, float mouseY, LivingEntity livingEntity) {
-        float f = (float)Math.atan((double)(mouseX / 40.0F));
-        float f1 = (float)Math.atan((double)(mouseY / 40.0F));
-        RenderSystem.pushMatrix();
-        RenderSystem.translatef((float)posX, (float)posY, 1050.0F);
-        RenderSystem.scalef(1.0F, 1.0F, -1.0F);
-        PoseStack matrixstack = new PoseStack();
-        matrixstack.translate(0.0D, 0.0D, 1000.0D);
-        matrixstack.scale((float)scale, (float)scale, (float)scale);
+    public static void renderEntityInInventory(int p_98851_, int p_98852_, int p_98853_, float p_98854_, float p_98855_, LivingEntity p_98856_) {
+        float f = (float)Math.atan((double)(p_98854_ / 40.0F));
+        float f1 = (float)Math.atan((double)(p_98855_ / 40.0F));
+        PoseStack posestack = RenderSystem.getModelViewStack();
+        posestack.pushPose();
+        posestack.translate((double)p_98851_, (double)p_98852_, 1050.0D);
+        posestack.scale(1.0F, 1.0F, -1.0F);
+        RenderSystem.applyModelViewMatrix();
+        PoseStack posestack1 = new PoseStack();
+        posestack1.translate(0.0D, 0.0D, 1000.0D);
+        posestack1.scale((float)p_98853_, (float)p_98853_, (float)p_98853_);
         Quaternion quaternion = Vector3f.ZP.rotationDegrees(180.0F);
         Quaternion quaternion1 = Vector3f.XP.rotationDegrees(f1 * 20.0F);
         quaternion.mul(quaternion1);
-        matrixstack.mulPose(quaternion);
-        float f2 = livingEntity.yBodyRot;
-        float f3 = livingEntity.yRot;
-        float f4 = livingEntity.xRot;
-        float f5 = livingEntity.yHeadRotO;
-        float f6 = livingEntity.yHeadRot;
-        livingEntity.yBodyRot = 180 + f * 20.0F;
-        livingEntity.yRot = 180 + f * 40.0F;
-        livingEntity.xRot = -f1 * 20.0F;
-        livingEntity.yHeadRot = livingEntity.yRot;
-        livingEntity.yHeadRotO = livingEntity.yRot;
-        EntityRenderDispatcher entityrenderermanager = Minecraft.getInstance().getEntityRenderDispatcher();
+        posestack1.mulPose(quaternion);
+        float f2 = p_98856_.yBodyRot;
+        float f3 = p_98856_.getYRot();
+        float f4 = p_98856_.getXRot();
+        float f5 = p_98856_.yHeadRotO;
+        float f6 = p_98856_.yHeadRot;
+        p_98856_.yBodyRot = 180.0F + f * 20.0F;
+        p_98856_.setYRot(180.0F + f * 40.0F);
+        p_98856_.setXRot(-f1 * 20.0F);
+        p_98856_.yHeadRot = p_98856_.getYRot();
+        p_98856_.yHeadRotO = p_98856_.getYRot();
+        Lighting.setupForEntityInInventory();
+        EntityRenderDispatcher entityrenderdispatcher = Minecraft.getInstance().getEntityRenderDispatcher();
         quaternion1.conj();
-        entityrenderermanager.overrideCameraOrientation(quaternion1);
-        entityrenderermanager.setRenderShadow(false);
-        MultiBufferSource.BufferSource irendertypebuffer$impl = Minecraft.getInstance().renderBuffers().bufferSource();
+        entityrenderdispatcher.overrideCameraOrientation(quaternion1);
+        entityrenderdispatcher.setRenderShadow(false);
+        MultiBufferSource.BufferSource multibuffersource$buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
         RenderSystem.runAsFancy(() -> {
-            entityrenderermanager.render(livingEntity, 0.0D, 0.0D, 0.0D, 0.0F, 1.0F,
-                    matrixstack, irendertypebuffer$impl, 15728880);
+            entityrenderdispatcher.render(p_98856_, 0.0D, 0.0D, 0.0D, 0.0F, 1.0F, posestack1, multibuffersource$buffersource, 15728880);
         });
-        irendertypebuffer$impl.endBatch();
-        entityrenderermanager.setRenderShadow(true);
-        livingEntity.yBodyRot = f2;
-        livingEntity.yRot = f3;
-        livingEntity.xRot = f4;
-        livingEntity.yHeadRotO = f5;
-        livingEntity.yHeadRot = f6;
-        RenderSystem.popMatrix();
+        multibuffersource$buffersource.endBatch();
+        entityrenderdispatcher.setRenderShadow(true);
+        p_98856_.yBodyRot = f2;
+        p_98856_.setYRot(f3);
+        p_98856_.setXRot(f4);
+        p_98856_.yHeadRotO = f5;
+        p_98856_.yHeadRot = f6;
+        posestack.popPose();
+        RenderSystem.applyModelViewMatrix();
+        Lighting.setupFor3DItems();
     }
-
 
     public void drawStats(PoseStack stack, int x, int y){
         Component health = new TranslatableComponent("screens.gempire.health");

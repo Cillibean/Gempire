@@ -1,12 +1,15 @@
 package com.gempire.client.entity.model;
 
+import com.gempire.Gempire;
 import com.gempire.entities.bases.EntityGem;
 import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
 /**
@@ -15,6 +18,8 @@ import net.minecraft.util.Mth;
  */
 
 public class ModelTopaz<T extends EntityGem> extends ModelGem<T> {
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
+            new ResourceLocation(Gempire.MODID, "topaz"), "main");
     public ModelPart body;
     public ModelPart head;
     public ModelPart legl;

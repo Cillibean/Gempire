@@ -1,15 +1,16 @@
 package com.gempire.client.entity.model;
 
+import com.gempire.Gempire;
 import com.gempire.entities.bases.EntityGem;
 import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.minecraft.client.renderer.entity.model.EntityModel;
+import net.minecraft.client.model.geom.ModelLayerLocation;
+import net.minecraft.client.model.geom.PartPose;
+import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.client.model.geom.ModelPart;
-import net.minecraft.entity.Entity;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
 /**
  * Pearl - Segapop
@@ -17,92 +18,93 @@ import net.minecraftforge.api.distmarker.OnlyIn;
  */
 
 public class ModelPearl<T extends EntityGem> extends ModelGem<T> {
-    public ModelPart Hair;
-    public ModelPart Head;
-    public ModelPart Body;
-    public ModelPart LegL;
-    public ModelPart LegR;
-    public ModelPart ArmL;
-    public ModelPart ArmR;
-    public ModelPart Nose;
-    public ModelPart Shawl;
-    public ModelPart Skirt;
-    public ModelPart LShoulder;
-    public ModelPart RShoulder;
-    public ModelPart BunL;
-    public ModelPart BunR;
-    public ModelPart Ponytail;
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
+            new ResourceLocation(Gempire.MODID, "pearl"), "main");
+    public ModelPart head;
+    public ModelPart body;
+    public ModelPart legl;
+    public ModelPart legr;
+    public ModelPart arml;
+    public ModelPart armr;
 
-    public ModelPearl() {
-        this.texWidth = 64;
-        this.texHeight = 64;
-        this.BunR = new ModelPart(this, 8, 33);
-        this.BunR.mirror = true;
-        this.BunR.setPos(0.0F, -1.0F, 0.0F);
-        this.BunR.addBox(4.5F, -8.5F, -2.5F, 2.0F, 5.0F, 5.0F, 0.0F, 0.0F, 0.0F);
-        this.Nose = new ModelPart(this, 0, 5);
-        this.Nose.setPos(0.0F, 0, 0.0F);
-        this.Nose.addBox(-0.5F, -3.5F, -6.0F, 1.0F, 1.0F, 2.0F, 0.0F, 0.0F, 0.0F);
-        this.RShoulder = new ModelPart(this, 16, 56);
-        this.RShoulder.setPos(3.0F, 0.0F, 0.0F);
-        this.RShoulder.addBox(0.0F, -2.0F, -2.0F, 4.0F, 4.0F, 4.0F, 0.0F, 0.0F, 0.0F);
-        this.Body = new ModelPart(this, 8, 17);
-        this.Body.setPos(1.0F, -1.0F, 0.0F);
-        this.Body.addBox(-4.0F, 0.0F, -2.0F, 6.0F, 12.0F, 4.0F, 0.0F, 0.0F, 0.0F);
-        this.LegL = new ModelPart(this, 0, 32);
-        this.LegL.setPos(-1.5F, 11.0F, 1.0F);
-        this.LegL.addBox(-1.0F, 0.0F, -2.0F, 2.0F, 13.0F, 2.0F, 0.0F, 0.0F, 0.0F);
-        this.LShoulder = new ModelPart(this, 0, 56);
-        this.LShoulder.setPos(-3.0F, 0.0F, 0.0F);
-        this.LShoulder.addBox(-4.0F, -2.0F, -2.0F, 4.0F, 4.0F, 4.0F, 0.0F, 0.0F, 0.0F);
-        this.Shawl = new ModelPart(this, 32, 42);
-        this.Shawl.setPos(-1.5F, -1.0F, -0.5F);
-        this.Shawl.addBox(-4.0F, 0.0F, -2.0F, 11.0F, 13.0F, 5.0F, 0.0F, 0.0F, 0.0F);
-        this.Ponytail = new ModelPart(this, 8, 43);
-        this.Ponytail.setPos(0.0F, -1.0F, 0.0F);
-        this.Ponytail.addBox(-2.0F, -10.5F, 4.0F, 4.0F, 9.0F, 4.0F, 0.0F, 0.0F, 0.0F);
-        this.ArmR = new ModelPart(this, 28, 17);
-        this.ArmR.setPos(3.0F, 0.0F, 0.0F);
-        this.ArmR.addBox(0.0F, -1.0F, -1.0F, 2.0F, 13.0F, 2.0F, 0.0F, 0.0F, 0.0F);
-        this.Head = new ModelPart(this, 0, 0);
-        this.Head.setPos(0.0F, -1.0F, 0.0F);
-        this.Head.addBox(-4.0F, -9.0F, -4.0F, 8.0F, 9.0F, 8.0F, 0.0F, 0.0F, 0.0F);
-        this.Skirt = new ModelPart(this, 36, 17);
-        this.Skirt.setPos(0.0F, 7.0F, -1.0F);
-        this.Skirt.addBox(-4.0F, 0.0F, -2.0F, 8.0F, 17.0F, 6.0F, 0.0F, 0.0F, 0.0F);
-        this.BunL = new ModelPart(this, 8, 33);
-        this.BunL.setPos(0.0F, -1.0F, 0.0F);
-        this.BunL.addBox(-6.5F, -8.5F, -2.5F, 2.0F, 5.0F, 5.0F, 0.0F, 0.0F, 0.0F);
-        this.Hair = new ModelPart(this, 32, 0);
-        this.Hair.setPos(0.0F, 0, 0.0F);
-        this.Hair.addBox(-4.0F, -9.0F, -4.2F, 8.0F, 9.0F, 8.0F, 0.5F, 0.5F, 0.5F);
-        this.LegR = new ModelPart(this, 28, 32);
-        this.LegR.setPos(1.5F, 11.0F, 1.0F);
-        this.LegR.addBox(-1.0F, 0.0F, -2.0F, 2.0F, 13.0F, 2.0F, 0.0F, 0.0F, 0.0F);
-        this.ArmL = new ModelPart(this, 0, 17);
-        this.ArmL.setPos(-3.0F, 0.0F, 0.0F);
-        this.ArmL.addBox(-2.0F, -1.0F, -1.0F, 2.0F, 13.0F, 2.0F, 0.0F, 0.0F, 0.0F);
-        this.Head.addChild(this.Hair);
-        this.Head.addChild(this.Nose);
-        this.Hair.addChild(this.BunR);
-        this.Hair.addChild(this.BunL);
-        this.Hair.addChild(this.Ponytail);
+    public ModelPearl(ModelPart root) {
+        head = root.getChild("head");
+        body = root.getChild("body");
+        arml = root.getChild("arml");
+        armr = root.getChild("armr");
+        legl = root.getChild("legl");
+        legr = root.getChild("legr");
+    }
+
+    public static LayerDefinition createBodyLayer() {
+        MeshDefinition meshdefinition = new MeshDefinition();
+        PartDefinition partdefinition = meshdefinition.getRoot();
+
+        PartDefinition head = partdefinition.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 0)
+                        .addBox(-4.0F, -9.0F, -4.0F, 8.0F, 9.0F, 8.0F, new CubeDeformation(0.0F)),
+                PartPose.offset(0.0F, -1.0F, 0.0F));
+        head.addOrReplaceChild("nose", CubeListBuilder.create().texOffs(0, 5)
+                        .addBox(-0.5F, -3.5F, -6.0F, 1.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)),
+                PartPose.offset(0.0F, 0, 0.0F));
+        head.addOrReplaceChild("hair", CubeListBuilder.create().texOffs(32, 0)
+                        .addBox(-4.0F, -9.0F, -4.2F, 8.0F, 9.0F, 8.0F, new CubeDeformation(0.5F)),
+                PartPose.offset(0.0F, 0, 0.0F));
+        head.addOrReplaceChild("bunr", CubeListBuilder.create().texOffs(8, 33).mirror()
+                        .addBox(4.5F, -8.5F, -2.5F, 2.0F, 5.0F, 5.0F, new CubeDeformation(0.0F)),
+                PartPose.offset(0.0F, -1.0F, 0.0F));
+        head.addOrReplaceChild("bunl", CubeListBuilder.create().texOffs(8, 43)
+                        .addBox(-2.0F, -10.5F, 4.0F, 4.0F, 9.0F, 4.0F, new CubeDeformation(0.0F)),
+                PartPose.offset(0.0F, -1.0F, 0.0F));
+
+        PartDefinition body = partdefinition.addOrReplaceChild("body", CubeListBuilder.create().texOffs(8, 17)
+                        .addBox(-4.0F, 0.0F, -2.0F, 6.0F, 12.0F, 4.0F, new CubeDeformation(0.0F)),
+                PartPose.offset(1.0F, -1.0F, 0.0F));
+        body.addOrReplaceChild("skirt", CubeListBuilder.create().texOffs(36, 17)
+                        .addBox(-4.0F, 0.0F, -2.0F, 8.0F, 17.0F, 6.0F, new CubeDeformation(0.0F)),
+                PartPose.offset(0.0F, 7.0F, -1.0F));
+        body.addOrReplaceChild("shawl", CubeListBuilder.create().texOffs(32, 42)
+                        .addBox(-4.0F, 0.0F, -2.0F, 11.0F, 13.0F, 5.0F, new CubeDeformation(0.0F)),
+                PartPose.offset(-1.5F, -1.0F, -0.5F));
+
+        PartDefinition legr = partdefinition.addOrReplaceChild("legr", CubeListBuilder.create().texOffs(28, 32)
+                        .addBox(-1.0F, 0.0F, -2.0F, 2.0F, 13.0F, 2.0F, new CubeDeformation(0.0F)),
+                PartPose.offset(1.5F, 11.0F, 1.0F));
+
+        PartDefinition legl = partdefinition.addOrReplaceChild("legl", CubeListBuilder.create().texOffs(0, 32)
+                        .addBox(-1.0F, 0.0F, -2.0F, 2.0F, 13.0F, 2.0F, new CubeDeformation(0.0F)),
+                PartPose.offset(-1.5F, 11.0F, 1.0F));
+
+        PartDefinition armr = partdefinition.addOrReplaceChild("armr", CubeListBuilder.create().texOffs(28, 17)
+                        .addBox(0.0F, -1.0F, -1.0F, 2.0F, 13.0F, 2.0F, new CubeDeformation(0.0F)),
+                PartPose.offset(3.0F, 0.0F, 0.0F));
+        armr.addOrReplaceChild("rshoulder", CubeListBuilder.create().texOffs(16, 56)
+                        .addBox(0.0F, -2.0F, -2.0F, 4.0F, 4.0F, 4.0F, new CubeDeformation(0.0F)),
+                PartPose.offset(3.0F, 0.0F, 0.0F));
+
+        PartDefinition arml = partdefinition.addOrReplaceChild("arml", CubeListBuilder.create().texOffs(0, 17)
+                        .addBox(-2.0F, -1.0F, -1.0F, 2.0F, 13.0F, 2.0F, new CubeDeformation(0.0F)),
+                PartPose.offset(-3.0F, 0.0F, 0.0F));
+        armr.addOrReplaceChild("lshoulder", CubeListBuilder.create().texOffs(0, 56)
+                        .addBox(-4.0F, -2.0F, -2.0F, 4.0F, 4.0F, 4.0F, new CubeDeformation(0.0F)),
+                PartPose.offset(-3.0F, 0.0F, 0.0F));
+
+        return LayerDefinition.create(meshdefinition, 64, 64);
     }
 
     @Override
     public void renderToBuffer(PoseStack matrixStackIn, VertexConsumer bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) { 
-        ImmutableList.of(this.RShoulder, this.Body, this.LegL, this.LShoulder, this.Shawl, this.ArmR, this.Head, this.Skirt, this.LegR, this.ArmL).forEach((modelRenderer) -> {
+        ImmutableList.of(this.body, this.legl, this.armr, this.head, this.legr, this.arml).forEach((modelRenderer) -> {
             modelRenderer.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
         });
     }
 
     @Override
     public void setupAnim(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        this.setRotateAngle(this.Head, headPitch * 0.5f * ((float)Math.PI / 180F), netHeadYaw * .5f * ((float)Math.PI / 180F), 0);
-        this.setRotateAngle(this.ArmL, Mth.cos(limbSwing * 0.5F + (float)Math.PI) * limbSwingAmount * 0.8f, 0, 0);
-        this.setRotateAngle(this.ArmR, Mth.cos(limbSwing * 0.5F)  * limbSwingAmount * 0.8f, 0, 0);
-        this.setRotateAngle(this.LegL, Mth.cos(limbSwing * 0.5F) * limbSwingAmount * 0.8f, 0, 0);
-        this.setRotateAngle(this.LegR, Mth.cos(limbSwing * 0.5F + (float)Math.PI) * limbSwingAmount * 0.8f, 0, 0);
+        this.setRotateAngle(this.head, headPitch * 0.5f * ((float)Math.PI / 180F), netHeadYaw * .5f * ((float)Math.PI / 180F), 0);
+        this.setRotateAngle(this.arml, Mth.cos(limbSwing * 0.5F + (float)Math.PI) * limbSwingAmount * 0.8f, 0, 0);
+        this.setRotateAngle(this.armr, Mth.cos(limbSwing * 0.5F)  * limbSwingAmount * 0.8f, 0, 0);
+        this.setRotateAngle(this.legl, Mth.cos(limbSwing * 0.5F) * limbSwingAmount * 0.8f, 0, 0);
+        this.setRotateAngle(this.legr, Mth.cos(limbSwing * 0.5F + (float)Math.PI) * limbSwingAmount * 0.8f, 0, 0);
     }
 
     /**

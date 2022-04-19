@@ -11,17 +11,16 @@ import com.gempire.networking.C2SRequestEnchant;
 import com.gempire.networking.C2SRequestPageChange;
 import com.gempire.networking.C2SRequestPoof;
 import com.gempire.networking.C2SRequestUpdateGemName;
+import com.gempire.util.GUIUtilities;
+import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.components.EditBox;
-import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.Enchantments;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Inventory;
@@ -31,7 +30,6 @@ import com.mojang.math.Quaternion;
 import com.mojang.math.Vector3f;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
-import net.minecraft.util.text.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -68,7 +66,7 @@ public class ZirconUIScreen extends AbstractContainerScreen<ZirconUIContainer> {
         String name = this.menu.gem.customName() ? this.menu.gem.getCustomName().getString() : this.menu.gem.getNickname().getString();
         this.nameBox.setValue(name);
         this.nameBox.setFocus(true);
-        this.children.add(this.nameBox);
+        addRenderableWidget(this.nameBox);
         this.setInitialFocus(this.nameBox);
 
         /*this.addButton(new ImageButton(this.guiLeft + 19, this.guiTop + 41, 11, 21, 0, 0, 0, ZirconUIScreen.LEFT,
@@ -81,7 +79,7 @@ public class ZirconUIScreen extends AbstractContainerScreen<ZirconUIContainer> {
             ModPacketHandler.INSTANCE.sendToServer(new C2SRequestPageChange(this.container.gem.getEntityId(), true));
         }));*/
 
-        this.addButton(new ImageButton(this.leftPos + 90, this.topPos + 55, 30, 10, 0, 0, 0, ZirconUIScreen.ENCHANT_BUTTON,
+        addRenderableWidget(new ImageButton(this.leftPos + 90, this.topPos + 55, 30, 10, 0, 0, 0, ZirconUIScreen.ENCHANT_BUTTON,
                 30, 10, (p_213029_1_) -> {
             ModPacketHandler.INSTANCE.sendToServer(new C2SRequestEnchant(this.menu.gem.getId()));
         }));
@@ -102,8 +100,7 @@ public class ZirconUIScreen extends AbstractContainerScreen<ZirconUIContainer> {
     @SuppressWarnings("deprecation")
     @Override
     protected void renderBg(PoseStack matrixStack, float partialTicks, int mouseX, int mouseY) {
-        RenderSystem.color4f(1f, 1f, 1f, 1f);
-        this.minecraft.getTextureManager().bind(ZirconUIScreen.GUI);
+        GUIUtilities.setup(GUI);
         int x = (this.width - this.imageWidth) / 2;
         int y = (this.height - this.imageHeight) / 2;
         int i = this.leftPos;
@@ -113,7 +110,7 @@ public class ZirconUIScreen extends AbstractContainerScreen<ZirconUIContainer> {
         this.font.draw(matrixStack, ZirconUIScreen.getEnchantStringFromLapisCount(this.menu.gem),
                 i + 45, j + 29, 4210752);
         if(this.menu.gem.getItem(1).canApplyAtEnchantingTable(ModEnchants.VANILLA_ENCHANTMENTS.get(this.menu.gem.getEnchantPage()))) {
-            this.minecraft.getTextureManager().bind(ZirconUIScreen.XP_ORB);
+            GUIUtilities.setup(XP_ORB);
             this.blit(matrixStack, x + 45, y + 64, 0, 0, 11, 11, 11 ,11);
             int xp = this.getXP(this.getDiscountFromStack(this.menu.gem.getItem(2))) < 0 ? 0 : this.getXP(this.getDiscountFromStack(this.menu.gem.getItem(2)));
             this.font.draw(matrixStack, new TextComponent(xp + "XP"),
@@ -201,46 +198,50 @@ public class ZirconUIScreen extends AbstractContainerScreen<ZirconUIContainer> {
         return super.mouseClicked(mouseX, mouseY, button);
     }
 
-    public static void drawEntityOnScreen(int posX, int posY, int scale, float mouseX, float mouseY, LivingEntity livingEntity) {
-        float f = (float)Math.atan((double)(mouseX / 40.0F));
-        float f1 = (float)Math.atan((double)(mouseY / 40.0F));
-        RenderSystem.pushMatrix();
-        RenderSystem.translatef((float)posX, (float)posY, 1050.0F);
-        RenderSystem.scalef(1.0F, 1.0F, -1.0F);
-        PoseStack matrixstack = new PoseStack();
-        matrixstack.translate(0.0D, 0.0D, 1000.0D);
-        matrixstack.scale((float)scale, (float)scale, (float)scale);
+    public static void renderEntityInInventory(int p_98851_, int p_98852_, int p_98853_, float p_98854_, float p_98855_, LivingEntity p_98856_) {
+        float f = (float)Math.atan((double)(p_98854_ / 40.0F));
+        float f1 = (float)Math.atan((double)(p_98855_ / 40.0F));
+        PoseStack posestack = RenderSystem.getModelViewStack();
+        posestack.pushPose();
+        posestack.translate((double)p_98851_, (double)p_98852_, 1050.0D);
+        posestack.scale(1.0F, 1.0F, -1.0F);
+        RenderSystem.applyModelViewMatrix();
+        PoseStack posestack1 = new PoseStack();
+        posestack1.translate(0.0D, 0.0D, 1000.0D);
+        posestack1.scale((float)p_98853_, (float)p_98853_, (float)p_98853_);
         Quaternion quaternion = Vector3f.ZP.rotationDegrees(180.0F);
         Quaternion quaternion1 = Vector3f.XP.rotationDegrees(f1 * 20.0F);
         quaternion.mul(quaternion1);
-        matrixstack.mulPose(quaternion);
-        float f2 = livingEntity.yBodyRot;
-        float f3 = livingEntity.yRot;
-        float f4 = livingEntity.xRot;
-        float f5 = livingEntity.yHeadRotO;
-        float f6 = livingEntity.yHeadRot;
-        livingEntity.yBodyRot = 180 + f * 20.0F;
-        livingEntity.yRot = 180 + f * 40.0F;
-        livingEntity.xRot = -f1 * 20.0F;
-        livingEntity.yHeadRot = livingEntity.yRot;
-        livingEntity.yHeadRotO = livingEntity.yRot;
-        EntityRenderDispatcher entityrenderermanager = Minecraft.getInstance().getEntityRenderDispatcher();
+        posestack1.mulPose(quaternion);
+        float f2 = p_98856_.yBodyRot;
+        float f3 = p_98856_.getYRot();
+        float f4 = p_98856_.getXRot();
+        float f5 = p_98856_.yHeadRotO;
+        float f6 = p_98856_.yHeadRot;
+        p_98856_.yBodyRot = 180.0F + f * 20.0F;
+        p_98856_.setYRot(180.0F + f * 40.0F);
+        p_98856_.setXRot(-f1 * 20.0F);
+        p_98856_.yHeadRot = p_98856_.getYRot();
+        p_98856_.yHeadRotO = p_98856_.getYRot();
+        Lighting.setupForEntityInInventory();
+        EntityRenderDispatcher entityrenderdispatcher = Minecraft.getInstance().getEntityRenderDispatcher();
         quaternion1.conj();
-        entityrenderermanager.overrideCameraOrientation(quaternion1);
-        entityrenderermanager.setRenderShadow(false);
-        MultiBufferSource.BufferSource irendertypebuffer$impl = Minecraft.getInstance().renderBuffers().bufferSource();
+        entityrenderdispatcher.overrideCameraOrientation(quaternion1);
+        entityrenderdispatcher.setRenderShadow(false);
+        MultiBufferSource.BufferSource multibuffersource$buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
         RenderSystem.runAsFancy(() -> {
-            entityrenderermanager.render(livingEntity, 0.0D, 0.0D, 0.0D, 0.0F, 1.0F,
-                    matrixstack, irendertypebuffer$impl, 15728880);
+            entityrenderdispatcher.render(p_98856_, 0.0D, 0.0D, 0.0D, 0.0F, 1.0F, posestack1, multibuffersource$buffersource, 15728880);
         });
-        irendertypebuffer$impl.endBatch();
-        entityrenderermanager.setRenderShadow(true);
-        livingEntity.yBodyRot = f2;
-        livingEntity.yRot = f3;
-        livingEntity.xRot = f4;
-        livingEntity.yHeadRotO = f5;
-        livingEntity.yHeadRot = f6;
-        RenderSystem.popMatrix();
+        multibuffersource$buffersource.endBatch();
+        entityrenderdispatcher.setRenderShadow(true);
+        p_98856_.yBodyRot = f2;
+        p_98856_.setYRot(f3);
+        p_98856_.setXRot(f4);
+        p_98856_.yHeadRotO = f5;
+        p_98856_.yHeadRot = f6;
+        posestack.popPose();
+        RenderSystem.applyModelViewMatrix();
+        Lighting.setupFor3DItems();
     }
 
 
