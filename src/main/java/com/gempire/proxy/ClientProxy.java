@@ -1,6 +1,7 @@
 package com.gempire.proxy;
 
 import com.gempire.Gempire;
+import com.gempire.client.entity.model.*;
 import com.gempire.client.entity.render.*;
 import com.gempire.client.screen.*;
 import com.gempire.client.ter.ShellTER;
@@ -11,17 +12,12 @@ import com.gempire.init.ModEntities;
 import com.gempire.init.ModTE;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
-import net.minecraft.client.renderer.entity.ItemRenderer;
+import net.minecraft.client.renderer.entity.*;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
-import net.minecraft.client.renderer.entity.EntityRenderer;
-import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
-import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
-import net.minecraftforge.fml.client.registry.IRenderFactory;
-import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
@@ -29,39 +25,38 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 public class ClientProxy {
 
     @SubscribeEvent
-    public static void onClientSetup(FMLClientSetupEvent event) {
+    public static void onClientSetup(EntityRenderersEvent.RegisterRenderers event) {
         //RenderingRegistry.registerEntityRenderingHandler(ModEntities.TEST.get(), RenderTestEntity::new);
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.PEBBLE.get(), RenderPebble::new);
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.MICA.get(), RenderMica::new);
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.SHALE.get(), RenderShale::new);
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.NACRE.get(), RenderNacre::new);
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.RUBY.get(), RenderRuby::new);
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.SAPPHIRE.get(), RenderSapphire::new);
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.QUARTZ.get(), RenderQuartz::new);
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.JASPER.get(), RenderJasper::new);
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.AGATE.get(), RenderAgate::new);
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.TOPAZ.get(), RenderTopaz::new);
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.OBSIDIAN.get(), RenderObsidian::new);
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.PEARL.get(), RenderPearl::new);
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.NEPHRITE.get(), RenderNephrite::new);
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.SPODUMENE.get(), RenderSpodumene::new);
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.ZIRCON.get(), RenderZircon::new);
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.AQUAMARINE.get(), RenderAquamarine::new);
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.BISMUTH.get(), RenderBismuth::new);
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.BIXBITE.get(), RenderBixbite::new);
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.DEMANTOID.get(), RenderDemantoid::new);
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.EMERALD.get(), RenderEmerald::new);
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.HESSONITE.get(), RenderHessonite::new);
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.LAPIS.get(), RenderLapis::new);
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.LARIMAR.get(), RenderLarimar::new);
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.MELANITE.get(), RenderMelanite::new);
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.MORGANITE.get(), RenderMorganite::new);
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.PERIDOT.get(), RenderPeridot::new);
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.PYROPE.get(), RenderPyrope::new);
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.RUTILE.get(), RenderRutile::new);
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.SPINEL.get(), RenderSpinel::new);
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.TOURMALINE.get(), RenderTourmaline::new);
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.ICE_SHARD.get(), (manager) -> new com.gempire.client.entity.render.RenderIceShard(manager, Minecraft.getInstance().getItemRenderer()));
+        event.registerEntityRenderer(ModEntities.PEBBLE.get(), m -> new RenderPebble(m, new ModelPebble<>(m.bakeLayer(ModelPebble.LAYER_LOCATION_P))));
+        event.registerEntityRenderer(ModEntities.MICA.get(), m -> new RenderMica(m, new ModelPebble<>(m.bakeLayer(ModelPebble.LAYER_LOCATION_M))));
+        event.registerEntityRenderer(ModEntities.SHALE.get(), m -> new RenderShale(m, new ModelPebble<>(m.bakeLayer(ModelPebble.LAYER_LOCATION_S))));
+        event.registerEntityRenderer(ModEntities.NACRE.get(), m -> new RenderNacre(m, new ModelPebble<>(m.bakeLayer(ModelPebble.LAYER_LOCATION_N))));
+        event.registerEntityRenderer(ModEntities.RUBY.get(), m -> new RenderRuby(m, new ModelRuby<>(m.bakeLayer(ModelRuby.LAYER_LOCATION))));
+        event.registerEntityRenderer(ModEntities.SAPPHIRE.get(), m -> new RenderSapphire(m, new ModelSapphire<>(m.bakeLayer(ModelSapphire.LAYER_LOCATION))));
+        event.registerEntityRenderer(ModEntities.QUARTZ.get(), m -> new RenderQuartz(m, new ModelQuartz<>(m.bakeLayer(ModelQuartz.LAYER_LOCATION_Q))));
+        event.registerEntityRenderer(ModEntities.JASPER.get(), m -> new RenderJasper(m, new ModelQuartz<>(m.bakeLayer(ModelQuartz.LAYER_LOCATION_J))));
+        event.registerEntityRenderer(ModEntities.AGATE.get(), m -> new RenderAgate(m, new ModelQuartz<>(m.bakeLayer(ModelQuartz.LAYER_LOCATION_A))));
+        event.registerEntityRenderer(ModEntities.TOPAZ.get(), m -> new RenderTopaz(m, new ModelTopaz<>(m.bakeLayer(ModelTopaz.LAYER_LOCATION))));
+        event.registerEntityRenderer(ModEntities.OBSIDIAN.get(), m -> new RenderObsidian(m, new ModelObsidian<>(m.bakeLayer(ModelObsidian.LAYER_LOCATION))));
+        event.registerEntityRenderer(ModEntities.PEARL.get(), m -> new RenderPearl(m, new ModelPearl<>(m.bakeLayer(ModelPearl.LAYER_LOCATION))));
+        event.registerEntityRenderer(ModEntities.NEPHRITE.get(), m -> new RenderNephrite(m, new ModelNephrite<>(m.bakeLayer(ModelNephrite.LAYER_LOCATION))));
+        event.registerEntityRenderer(ModEntities.SPODUMENE.get(), m -> new RenderSpodumene(m, new ModelSpodumene<>(m.bakeLayer(ModelSpodumene.LAYER_LOCATION))));
+        event.registerEntityRenderer(ModEntities.ZIRCON.get(), m -> new RenderZircon(m, new ModelZircon<>(m.bakeLayer(ModelZircon.LAYER_LOCATION))));
+        event.registerEntityRenderer(ModEntities.AQUAMARINE.get(), m -> new RenderAquamarine(m, new ModelRuby<>(m.bakeLayer(ModelRuby.LAYER_LOCATION))));
+        event.registerEntityRenderer(ModEntities.BISMUTH.get(), m -> new RenderBismuth(m, new ModelRuby<>(m.bakeLayer(ModelRuby.LAYER_LOCATION))));
+        event.registerEntityRenderer(ModEntities.BIXBITE.get(), m -> new RenderBixbite(m, new ModelRuby<>(m.bakeLayer(ModelRuby.LAYER_LOCATION))));
+        event.registerEntityRenderer(ModEntities.DEMANTOID.get(), m -> new RenderDemantoid(m, new ModelRuby<>(m.bakeLayer(ModelRuby.LAYER_LOCATION))));
+        event.registerEntityRenderer(ModEntities.EMERALD.get(), m -> new RenderEmerald(m, new ModelRuby<>(m.bakeLayer(ModelRuby.LAYER_LOCATION))));
+        event.registerEntityRenderer(ModEntities.HESSONITE.get(), m -> new RenderHessonite(m, new ModelRuby<>(m.bakeLayer(ModelRuby.LAYER_LOCATION))));
+        event.registerEntityRenderer(ModEntities.LAPIS.get(), m -> new RenderLapis(m, new ModelRuby<>(m.bakeLayer(ModelRuby.LAYER_LOCATION))));
+        event.registerEntityRenderer(ModEntities.LARIMAR.get(), m -> new RenderLarimar(m, new ModelRuby<>(m.bakeLayer(ModelRuby.LAYER_LOCATION))));
+        event.registerEntityRenderer(ModEntities.MELANITE.get(), m -> new RenderMelanite(m, new ModelRuby<>(m.bakeLayer(ModelRuby.LAYER_LOCATION))));
+        event.registerEntityRenderer(ModEntities.MORGANITE.get(), m -> new RenderMorganite(m, new ModelRuby<>(m.bakeLayer(ModelRuby.LAYER_LOCATION))));
+        event.registerEntityRenderer(ModEntities.PERIDOT.get(), m -> new RenderPeridot(m, new ModelRuby<>(m.bakeLayer(ModelRuby.LAYER_LOCATION))));
+        event.registerEntityRenderer(ModEntities.PYROPE.get(), m -> new RenderPyrope(m, new ModelRuby<>(m.bakeLayer(ModelRuby.LAYER_LOCATION))));
+        event.registerEntityRenderer(ModEntities.RUTILE.get(), m -> new RenderRutile(m, new ModelRuby<>(m.bakeLayer(ModelRuby.LAYER_LOCATION))));
+        event.registerEntityRenderer(ModEntities.SPINEL.get(), m -> new RenderSpinel(m, new ModelRuby<>(m.bakeLayer(ModelRuby.LAYER_LOCATION))));
+        event.registerEntityRenderer(ModEntities.TOURMALINE.get(), m -> new RenderTourmaline(m, new ModelRuby<>(m.bakeLayer(ModelRuby.LAYER_LOCATION))));
 
         MenuScreens.register(ModContainers.TANK_CONTAINER.get(), TankScreen::new);
         MenuScreens.register(ModContainers.INJECTOR_CONTAINER.get(), InjectorScreen::new);
@@ -92,9 +87,14 @@ public class ClientProxy {
 
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.ICE_SPIKE.get(), RenderType.cutout());
 
-        ClientRegistry.bindTileEntityRenderer(ModTE.SHELL_TE.get(), ShellTER::new);
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.ICE_SHARD.get(), new RenderIceShard());
+        event.registerBlockEntityRenderer(ModTE.SHELL_TE.get(), ShellTER::new);
     }
+
+    @SubscribeEvent
+    public static void doSetup(FMLClientSetupEvent event) {
+        EntityRenderers.register(ModEntities.ICE_SHARD.get(), RenderIceShard::new);
+    }
+}
 
     private static class RenderIceShard implements IRenderFactory<IceShardEntity> {
         @Override

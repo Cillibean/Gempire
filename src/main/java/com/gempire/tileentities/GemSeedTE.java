@@ -16,6 +16,7 @@ import net.minecraft.block.*;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.item.TNTEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.item.Item;
@@ -51,7 +52,7 @@ import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.SnowLayerBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class GemSeedTE extends BlockEntity implements TickableBlockEntity {
+public class GemSeedTE extends BlockEntity implements BlockEntityTicker {
     Random random;
     boolean spawned = false;
     public int ticks = 0;
@@ -79,8 +80,8 @@ public class GemSeedTE extends BlockEntity implements TickableBlockEntity {
     //Create an object to store the total weight
     float totalWeight = 0;
 
-    public GemSeedTE() {
-        super(ModTE.GEM_SEED_TE.get());
+    public GemSeedTE(BlockPos pos, BlockState state) {
+        super(ModTE.GEM_SEED_TE.get(), pos, state);
         this.random = new Random();
         for(int i = 0; i < GemFormation.POSSIBLE_GEMS.size(); i++){
             this.TEMPORARY_WEIGHTS.add(i, new ArrayList<Float>());

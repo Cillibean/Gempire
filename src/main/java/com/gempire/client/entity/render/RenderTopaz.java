@@ -2,8 +2,10 @@ package com.gempire.client.entity.render;
 
 import com.gempire.Gempire;
 import com.gempire.client.entity.model.ModelRuby;
+import com.gempire.client.entity.model.ModelTest;
 import com.gempire.client.entity.model.ModelTopaz;
 import com.gempire.client.entity.render.layers.*;
+import com.gempire.entities.TestEntity;
 import com.gempire.entities.gems.EntityRuby;
 import com.gempire.entities.gems.EntityTopaz;
 import com.gempire.entities.gems.starter.EntityShale;
@@ -11,14 +13,15 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.network.chat.Component;
 
 public class RenderTopaz extends MobRenderer<EntityTopaz, ModelTopaz<EntityTopaz>> {
 
-    public RenderTopaz(EntityRenderDispatcher renderManagerIn) {
-        super(renderManagerIn, new ModelTopaz<>(), .25f);
+    public RenderTopaz(EntityRendererProvider.Context renderManagerIn, ModelTopaz<EntityTopaz> baseModel) {
+        super(renderManagerIn, baseModel, .25f);
         this.addLayer(new SkinLayer(this));
         this.addLayer(new FaceLayer(this));
         this.addLayer(new HairLayer(this));

@@ -1,20 +1,23 @@
 package com.gempire.client.entity.render;
 
 import com.gempire.Gempire;
+import com.gempire.client.entity.model.ModelRuby;
 import com.gempire.client.entity.model.ModelSpodumene;
 import com.gempire.client.entity.render.layers.*;
+import com.gempire.entities.gems.EntitySpinel;
 import com.gempire.entities.gems.EntitySpodumene;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.network.chat.Component;
 
 public class RenderSpodumene extends MobRenderer<EntitySpodumene, ModelSpodumene<EntitySpodumene>> {
 
-    public RenderSpodumene(EntityRenderDispatcher renderManagerIn) {
-        super(renderManagerIn, new ModelSpodumene<>(), .25f);
+    public RenderSpodumene(EntityRendererProvider.Context renderManagerIn, ModelSpodumene<EntitySpodumene> baseModel) {
+        super(renderManagerIn, baseModel, .25f);
         this.addLayer(new GemPlacementLayer(this));
         this.addLayer(new SkinLayer(this));
         //this.addLayer(new FaceLayer(this));

@@ -2,20 +2,23 @@ package com.gempire.client.entity.render;
 
 import com.gempire.Gempire;
 import com.gempire.client.entity.model.ModelPebble;
+import com.gempire.client.entity.model.ModelRuby;
 import com.gempire.client.entity.render.layers.*;
 import com.gempire.entities.gems.EntityJasper;
+import com.gempire.entities.gems.EntityMelanite;
 import com.gempire.entities.gems.starter.EntityMica;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.network.chat.Component;
 
 public class RenderMica extends MobRenderer<EntityMica, ModelPebble<EntityMica>> {
 
-    public RenderMica(EntityRenderDispatcher renderManagerIn) {
-        super(renderManagerIn, new ModelPebble<>(), .1f);
+    public RenderMica(EntityRendererProvider.Context renderManagerIn, ModelPebble<EntityMica> baseModel) {
+        super(renderManagerIn, baseModel, .25f);
         this.addLayer(new SkinLayer(this));
         this.addLayer(new PebbleFaceLayer(this));
         this.addLayer(new OutfitLayer(this));

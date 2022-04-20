@@ -4,6 +4,7 @@ import com.gempire.init.ModEntities;
 import com.gempire.init.ModItems;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -18,13 +19,13 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fmllegacy.network.NetworkHooks;
 
-public class IceShardEntity extends ThrowableItemProjectile {
+public class IceShardEntity extends AbstractArrow {
 
     public IceShardEntity(Level worldIn, LivingEntity throwerIn) {
         super(ModEntities.ICE_SHARD.get(), throwerIn, worldIn);
     }
 
-    public IceShardEntity(EntityType<? extends ThrowableItemProjectile> type, Level worldIn) {
+    public IceShardEntity(EntityType<? extends AbstractArrow> type, Level worldIn) {
         super(type, worldIn);
     }
 
@@ -38,20 +39,19 @@ public class IceShardEntity extends ThrowableItemProjectile {
     }
 
 
-    @Override
-    protected Item getDefaultItem() {
-        return ModItems.ICE_SHARD.get();
-    }
-
     protected void onHitEntity(EntityHitResult p_213868_1_) {
         super.onHitEntity(p_213868_1_);
         p_213868_1_.getEntity().hurt(DamageSource.MAGIC, 1.0F);
     }
 
+    @Override
+    protected ItemStack getPickupItem() {
+        return ItemStack.EMPTY;
+    }
+
 
     private ParticleOptions makeParticle() {
-        ItemStack itemstack = this.getItemRaw();
-        return (ParticleOptions)(itemstack.isEmpty() ? ParticleTypes.ITEM_SNOWBALL : new ItemParticleOption(ParticleTypes.ITEM, itemstack));
+        return ParticleTypes.ITEM_SNOWBALL;
     }
 
 

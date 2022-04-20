@@ -84,7 +84,7 @@ public class ModelPearl<T extends EntityGem> extends ModelGem<T> {
         PartDefinition arml = partdefinition.addOrReplaceChild("arml", CubeListBuilder.create().texOffs(0, 17)
                         .addBox(-2.0F, -1.0F, -1.0F, 2.0F, 13.0F, 2.0F, new CubeDeformation(0.0F)),
                 PartPose.offset(-3.0F, 0.0F, 0.0F));
-        armr.addOrReplaceChild("lshoulder", CubeListBuilder.create().texOffs(0, 56)
+        arml.addOrReplaceChild("lshoulder", CubeListBuilder.create().texOffs(0, 56)
                         .addBox(-4.0F, -2.0F, -2.0F, 4.0F, 4.0F, 4.0F, new CubeDeformation(0.0F)),
                 PartPose.offset(-3.0F, 0.0F, 0.0F));
 
