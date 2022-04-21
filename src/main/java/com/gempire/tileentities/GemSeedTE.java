@@ -11,12 +11,9 @@ import com.gempire.items.ItemChroma;
 import com.gempire.systems.injection.Crux;
 import com.gempire.systems.injection.GemConditions;
 import com.gempire.systems.injection.GemFormation;
-import com.mojang.datafixers.types.Type;
-import net.minecraft.block.*;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.item.TNTEntity;
+import net.minecraft.world.level.block.entity.BeehiveBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.TickingBlockEntity;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.item.Item;
@@ -25,17 +22,11 @@ import net.minecraft.world.item.Items;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
-import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.entity.TickableBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.core.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.Explosion;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fml.RegistryObject;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -51,8 +42,12 @@ import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.SnowLayerBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
+import net.minecraftforge.client.model.data.IModelData;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.util.LazyOptional;
 
-public class GemSeedTE extends BlockEntity implements BlockEntityTicker {
+public class GemSeedTE extends BlockEntity {
     Random random;
     boolean spawned = false;
     public int ticks = 0;
@@ -88,37 +83,39 @@ public class GemSeedTE extends BlockEntity implements BlockEntityTicker {
         }
     }
 
-    @Override
-    public void tick() {
-        //System.out.println("Gem List is of size: " + GemFormation.POSSIBLE_GEMS.size());
-        if(!this.checked){
-           this.ScanPositions(this.level, this.worldPosition, new BlockPos(DRAIN_SIZE, DRAIN_SIZE, DRAIN_SIZE));
-           this.checked = true;
-        }
-        if(this.ticks % 20 == 0) {
-            if (!this.spawned && this.checked) {
-                if (this.IDS.size() > 0) {
-                    int rando = this.random.nextInt(this.IDS.size());
-                    this.DrainBlock(this.POSITIONS.get(this.IDS.get(rando)));
-                    this.IDS.remove(rando);
-                    this.setChanged();
-                } else {
-                    this.spawned = true;
-                    for (int i = 0; i < GemFormation.POSSIBLE_GEMS.size(); i++) {
-                        float weight = 0;
-                        for (int n = 0; n < this.TEMPORARY_WEIGHTS.get(i).size(); n++) {
-                            weight += this.TEMPORARY_WEIGHTS.get(i).get(n);
+    public static <T extends BlockEntity> void tick(Level level, BlockPos pos, BlockState state, T be) {
+        GemSeedTE te = (GemSeedTE)be;
+        if(!level.isClientSide()) {
+            if (!te.checked) {
+                te.ScanPositions(level, pos, new BlockPos(DRAIN_SIZE, DRAIN_SIZE, DRAIN_SIZE));
+                te.checked = true;
+            }
+            if (te.ticks % 20 == 0) {
+                if (!te.spawned && te.checked) {
+                    if (te.IDS.size() > 0) {
+                        int rando = te.random.nextInt(te.IDS.size());
+                        te.DrainBlock(te.POSITIONS.get(te.IDS.get(rando)));
+                        te.IDS.remove(rando);
+                        te.setChanged();
+                    } else {
+                        te.spawned = true;
+                        for (int i = 0; i < GemFormation.POSSIBLE_GEMS.size(); i++) {
+                            float weight = 0;
+                            for (int n = 0; n < te.TEMPORARY_WEIGHTS.get(i).size(); n++) {
+                                weight += te.TEMPORARY_WEIGHTS.get(i).get(n);
+                            }
+                            te.WEIGHTS_OF_GEMS.put(GemFormation.POSSIBLE_GEMS.get(i), weight);
                         }
-                        WEIGHTS_OF_GEMS.put(GemFormation.POSSIBLE_GEMS.get(i), weight);
+                        GemFormation form = new GemFormation(level, pos, new BlockPos(GemSeedTE.DRAIN_SIZE, GemSeedTE.DRAIN_SIZE, GemSeedTE.DRAIN_SIZE),
+                                te.chroma, te.primer, te.essences, te.facing, te.WEIGHTS_OF_GEMS, te.totalWeight);
+                        form.SpawnGem();
+                        level.sendBlockUpdated(pos, state, state, 2);
+                        te.setChanged();
                     }
-                    GemFormation form = new GemFormation(this.level, this.worldPosition, new BlockPos(GemSeedTE.DRAIN_SIZE, GemSeedTE.DRAIN_SIZE, GemSeedTE.DRAIN_SIZE), this.chroma, this.primer, this.essences, this.facing, this.WEIGHTS_OF_GEMS, this.totalWeight);
-                    form.SpawnGem();
-                    this.level.sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), 2);
-                    this.setChanged();
                 }
             }
+            te.ticks++;
         }
-        this.ticks++;
     }
 
     public void ScanPositions(Level domhain, BlockPos position, BlockPos volume) {
@@ -130,7 +127,7 @@ public class GemSeedTE extends BlockEntity implements BlockEntityTicker {
             for (int y = GemFormation.getHalfMiddleOffsetLeft(volume.getY()); y < yo; y++) {
                 for (int x = GemFormation.getHalfMiddleOffsetLeft(volume.getX()); x < xo; x++) {
                     BlockPos block = position.offset(new BlockPos(x, y, z));
-                    if (domhain.getBlockState(block).getBlock() instanceof LiquidBlock || domhain.getBlockState(block).getBlock() instanceof AirBlock || Level.isOutsideBuildHeight(block)) {
+                    if (domhain.getBlockState(block).getBlock() instanceof LiquidBlock || domhain.getBlockState(block).getBlock() instanceof AirBlock || domhain.isInWorldBounds(block)) {
                         continue;
                     } else {
                         if(this.random.nextInt(10) > 3) {
@@ -217,12 +214,12 @@ public class GemSeedTE extends BlockEntity implements BlockEntityTicker {
                 !(block instanceof SlabBlock) &&
                 !(block instanceof BushBlock) &&
                 !(block instanceof SnowLayerBlock)){
-            if(block.getBlock() == ModBlocks.GEM_SEED_BLOCK.get() ||
-                    block.getBlock() == ModBlocks.DRILL_BLOCK.get() || block.getBlock() == ModBlocks.TANK_BLOCK.get() ||
-                    block.getBlock() == ModBlocks.POWER_CRYSTAL_BLOCK.get()){
+            if(block == ModBlocks.GEM_SEED_BLOCK.get() ||
+                    block == ModBlocks.DRILL_BLOCK.get() || block == ModBlocks.TANK_BLOCK.get() ||
+                    block == ModBlocks.POWER_CRYSTAL_BLOCK.get()){
 
             }
-            else if(block == Blocks.DIRT || block == Blocks.GRASS_BLOCK || block == Blocks.GRASS_PATH
+            else if(block == Blocks.DIRT || block == Blocks.GRASS_BLOCK || block == Blocks.DIRT_PATH
                     || block == Blocks.GRAVEL){
                 this.level.setBlockAndUpdate(blockPos, this.drained_soil.defaultBlockState());
             }
@@ -374,9 +371,10 @@ public class GemSeedTE extends BlockEntity implements BlockEntityTicker {
         return compound;
     }
 
+
     @Override
-    public void load(BlockState state, CompoundTag nbt) {
-        super.load(state, nbt);
+    public void load(CompoundTag nbt) {
+        super.load(nbt);
         this.GEM_CONDITIONS = ModEntities.CRUXTOGEM;
         this.stage = nbt.getInt("stage");
         this.spawned = nbt.getBoolean("spawned");
@@ -456,10 +454,85 @@ public class GemSeedTE extends BlockEntity implements BlockEntityTicker {
     }
 
     @Override
+    public void deserializeNBT(CompoundTag nbt) {
+        super.load(nbt);
+        this.GEM_CONDITIONS = ModEntities.CRUXTOGEM;
+        this.stage = nbt.getInt("stage");
+        this.spawned = nbt.getBoolean("spawned");
+        ItemStack chroma = ItemStack.of(nbt.getCompound("chroma"));
+        this.chroma = (ItemChroma)chroma.getItem();
+        ItemStack primer = ItemStack.of(nbt.getCompound("primer"));
+        this.primer = primer.getItem();
+        String fluids = nbt.getString("essences");
+        this.essences = fluids;
+        this.facing = nbt.getInt("facing");
+        this.checked = nbt.getBoolean("checked");
+
+        //LOADING CRUX STUFF
+        this.totalWeight = nbt.getFloat("totalWeight");
+        this.setIDS(nbt);
+        this.setTEMPORARY_WEIGHTS(nbt);
+        this.setPOSITIONS(nbt);
+    }
+
+    @Override
+    public CompoundTag serializeNBT() {
+        CompoundTag compound = new CompoundTag();
+        super.serializeNBT();
+        compound.putInt("stage", this.stage);
+        compound.putBoolean("spawned", this.spawned);
+        compound.put("chroma", new ItemStack(this.chroma).save(new CompoundTag()));
+        compound.put("primer", new ItemStack(this.primer).save(new CompoundTag()));
+        compound.putString("essences", this.essences);
+        compound.putInt("facing", this.facing);
+        compound.putBoolean("checked", this.checked);
+
+        //SAVING CRUX STUFF
+        compound.putFloat("totalWeight", this.totalWeight);
+
+        //IDS
+        compound.putIntArray("IDS", this.IDS);
+
+        //TEMPORARY_WEIGHTS
+        if(this.TEMPORARY_WEIGHTS.size() > 0)for(int i = 0; i < GemFormation.POSSIBLE_GEMS.size(); i++){
+            float weight = 0;
+            System.out.println("Gem List Cycle: " + i);
+            for(int n = 0; n < this.TEMPORARY_WEIGHTS.get(i).size(); n++){
+                weight += this.TEMPORARY_WEIGHTS.get(i).get(n);
+            }
+            compound.putFloat(GemFormation.POSSIBLE_GEMS.get(i) + "_weight", weight);
+        }
+
+        //POSITIONS
+        ArrayList<Integer> xs = new ArrayList<>();
+        ArrayList<Integer> ys = new ArrayList<>();
+        ArrayList<Integer> zs = new ArrayList<>();
+        ArrayList<BlockPos> positions = new ArrayList<>();
+        for (int i : this.POSITIONS.keySet()){
+            BlockPos pos = this.POSITIONS.get(i);
+            positions.add(pos);
+        }
+        for(BlockPos pos : positions){
+            xs.add(pos.getX());ys.add(pos.getY());zs.add(pos.getZ());
+        }
+        compound.putIntArray("xs", xs);
+        compound.putIntArray("ys", ys);
+        compound.putIntArray("zs", zs);
+
+        return compound;
+    }
+
+    @Override
     public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
         //Debug
         System.out.println("[DEBUG]:Client recived tile sync packet");
-        this.load(this.level.getBlockState(pkt.getPos()), pkt.getTag());
+        this.load(pkt.getTag());
+    }
+
+    @Override
+    public void handleUpdateTag(CompoundTag tag) {
+        System.out.println("[DEBUG]:Handling tag on chunk load");
+        this.load(tag);
     }
 
     @Override
@@ -473,11 +546,5 @@ public class GemSeedTE extends BlockEntity implements BlockEntityTicker {
         //Debug
         System.out.println("[DEBUG]:Server sent tile sync packet");
         return new ClientboundBlockEntityDataPacket(this.worldPosition, -1, this.getUpdateTag());
-    }
-
-    @Override
-    public void handleUpdateTag(BlockState state, CompoundTag tag) {
-        System.out.println("[DEBUG]:Handling tag on chunk load");
-        this.load(state, tag);
     }
 }

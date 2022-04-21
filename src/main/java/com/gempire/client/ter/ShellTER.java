@@ -7,6 +7,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.LightTexture;
+import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
@@ -20,11 +21,12 @@ import com.mojang.math.Vector3f;
 import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.Level;
 
-public class ShellTER extends BlockEntityRenderer<ShellTE> {
+public class ShellTER implements BlockEntityRenderer<ShellTE> {
     public Minecraft mc = Minecraft.getInstance();
+    private final BlockEntityRendererProvider.Context context;
 
-    public ShellTER(BlockEntityRenderDispatcher rendererDispatcherIn) {
-        super(rendererDispatcherIn);
+    public ShellTER(BlockEntityRendererProvider.Context context) {
+        this.context = context;
     }
 
     @Override
@@ -44,7 +46,7 @@ public class ShellTER extends BlockEntityRenderer<ShellTE> {
         matrixStack.translate(translation[0], translation[1], translation[2]);
         matrixStack.mulPose(rotation);
         matrixStack.scale(scale, scale, scale);
-        BakedModel model = mc.getItemRenderer().getModel(stack, null, null);
+        BakedModel model = mc.getItemRenderer().getModel(stack, null, null, 1);
         mc.getItemRenderer().render(stack, ItemTransforms.TransformType.GROUND, true, matrixStack, buffer, lightLevel, combinedOverley, model);
         matrixStack.popPose();
     }

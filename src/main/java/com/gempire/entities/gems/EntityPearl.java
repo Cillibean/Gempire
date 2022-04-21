@@ -49,7 +49,7 @@ public class EntityPearl extends EntityVaryingGem {
         this.entityData.define(EntityPearl.PAGE, 0);
     }
 
-    public static AttributeSupplier.Builder setCustomAttributes() {
+    public static AttributeSupplier.Builder registerAttributes() {
         return Mob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 50.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.3D)

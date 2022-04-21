@@ -2,21 +2,22 @@ package com.gempire.init;
 
 import com.gempire.Gempire;
 import com.gempire.entities.bases.EntityGem;
-import com.gempire.entities.gems.EntityAgate;
+import com.gempire.entities.gems.*;
+import com.gempire.entities.gems.starter.EntityMica;
+import com.gempire.entities.gems.starter.EntityNacre;
+import com.gempire.entities.gems.starter.EntityPebble;
+import com.gempire.entities.gems.starter.EntityShale;
 import com.gempire.items.ItemGem;
-import net.minecraft.entity.CreatureEntity;
-import net.minecraft.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
-import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.entity.EntityEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.item.ItemEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = Gempire.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -34,4 +35,5 @@ public class EventHandler {
             }
         }
     }
+
 }

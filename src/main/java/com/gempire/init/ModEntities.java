@@ -1,7 +1,6 @@
 package com.gempire.init;
 
 import com.gempire.Gempire;
-import com.gempire.entities.TestEntity;
 import com.gempire.entities.gems.*;
 import com.gempire.entities.gems.starter.EntityMica;
 import com.gempire.entities.gems.starter.EntityNacre;
@@ -13,7 +12,7 @@ import com.gempire.systems.injection.GemFormation;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.fmllegacy.RegistryObject;
+import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -23,10 +22,6 @@ public class ModEntities {
     public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITIES, Gempire.MODID);
     public static HashMap<String, GemConditions> CRUXTOGEM = new HashMap<>();
     // Entity Types
-    public static final RegistryObject<EntityType<TestEntity>> TEST = ENTITIES.register("test",
-            () -> EntityType.Builder.of(TestEntity::new, MobCategory.CREATURE)
-                    .sized(1.0f, 1.0f) // Hitbox Size
-                    .build(new ResourceLocation(Gempire.MODID, "test").toString()));
     //Pebble
     public static final RegistryObject<EntityType<EntityPebble>> PEBBLE = ENTITIES.register("pebble",
             () -> EntityType.Builder.of(EntityPebble::new, MobCategory.CREATURE)

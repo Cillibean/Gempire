@@ -2,6 +2,7 @@ package com.gempire.tileentities;
 
 import com.gempire.systems.machine.Battery;
 import com.gempire.systems.machine.interfaces.IPowerProvider;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -11,8 +12,8 @@ public class PowerProviderTE extends SixWayInterfaceTE implements IPowerProvider
     float voltage;
     Battery battery;
 
-    public PowerProviderTE(BlockEntityType<?> tileEntityTypeIn) {
-        super(tileEntityTypeIn);
+    public PowerProviderTE(BlockEntityType<?> tileEntityTypeIn, BlockPos pos, BlockState state) {
+        super(tileEntityTypeIn,pos,state);
     }
 
     @Override
@@ -51,8 +52,8 @@ public class PowerProviderTE extends SixWayInterfaceTE implements IPowerProvider
     }
 
     @Override
-    public void load(BlockState state, CompoundTag nbt) {
-        super.load(state, nbt);
+    public void load(CompoundTag nbt) {
+        super.load(nbt);
         ReadPoweredMachine(nbt);
     }
 

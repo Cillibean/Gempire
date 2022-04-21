@@ -4,7 +4,6 @@ import com.gempire.systems.machine.Battery;
 import com.gempire.systems.machine.Socket;
 import com.gempire.systems.machine.SocketType;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.util.Direction;
 
 import java.util.ArrayList;
 

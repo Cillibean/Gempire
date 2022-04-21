@@ -1,6 +1,5 @@
 package com.gempire.systems.injection;
 
-import net.minecraft.fluid.Fluid;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 

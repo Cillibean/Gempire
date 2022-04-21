@@ -7,13 +7,10 @@ import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
 import net.minecraft.commands.CommandSourceStack;
-import net.minecraft.command.Commands;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.TranslatableComponent;
-import net.minecraft.world.gen.feature.structure.Structure;
 
-import javax.jws.soap.SOAPBinding;
 import java.util.List;
 import java.util.UUID;
 

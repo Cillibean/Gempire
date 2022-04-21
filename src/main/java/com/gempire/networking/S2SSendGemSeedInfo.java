@@ -1,12 +1,11 @@
 package com.gempire.networking;
 
 import com.gempire.tileentities.GemSeedTE;
-import com.gempire.tileentities.InjectorTE;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.core.BlockPos;
-import net.minecraftforge.fmllegacy.network.NetworkEvent;
+import net.minecraftforge.network.NetworkEvent;
 
 import java.util.function.Supplier;
 
@@ -36,7 +35,7 @@ public class S2SSendGemSeedInfo {
         boolean hasPermission = true;
         if (hasPermission) {
             GemSeedTE seedTE = (GemSeedTE) sender.level.getBlockEntity(msg.seedPos);
-            seedTE.load(seedTE.getBlockState(), msg.seedInfo);
+            seedTE.load(msg.seedInfo);
             seedTE.getLevel().sendBlockUpdated(msg.seedPos, seedTE.getBlockState(), seedTE.getBlockState(), 2);
             seedTE.setChanged();
         }

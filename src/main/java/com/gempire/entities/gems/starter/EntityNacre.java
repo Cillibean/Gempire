@@ -37,7 +37,7 @@ public class EntityNacre extends EntityStarterGem {
         super(type, worldIn);
     }
 
-    public static AttributeSupplier.Builder setCustomAttributes() {
+    public static AttributeSupplier.Builder registerAttributes() {
         return Mob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 10.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.3D)

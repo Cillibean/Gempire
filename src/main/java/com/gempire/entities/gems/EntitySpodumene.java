@@ -27,7 +27,7 @@ public class EntitySpodumene extends EntityVaryingGem {
         super(type, worldIn);
     }
 
-    public static AttributeSupplier.Builder setCustomAttributes() {
+    public static AttributeSupplier.Builder registerAttributes() {
         return Mob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 60.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.35D)

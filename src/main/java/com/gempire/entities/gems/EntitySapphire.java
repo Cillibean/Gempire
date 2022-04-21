@@ -5,7 +5,6 @@ import com.gempire.entities.ai.EntityAIWander;
 import com.gempire.entities.bases.EntityVaryingGem;
 import com.gempire.util.Abilities;
 import com.gempire.util.GemPlacements;
-import net.minecraft.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Enemy;
@@ -30,7 +29,7 @@ public class EntitySapphire extends EntityVaryingGem {
         super(type, worldIn);
     }
 
-    public static AttributeSupplier.Builder setCustomAttributes() {
+    public static AttributeSupplier.Builder registerAttributes() {
         return Mob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 50.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.4D)

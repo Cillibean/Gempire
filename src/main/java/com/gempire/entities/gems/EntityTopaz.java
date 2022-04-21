@@ -28,7 +28,7 @@ public class EntityTopaz extends EntityVaryingGem {
         super(type, worldIn);
     }
 
-    public static AttributeSupplier.Builder setCustomAttributes() {
+    public static AttributeSupplier.Builder registerAttributes() {
         return Mob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 80.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.33D)

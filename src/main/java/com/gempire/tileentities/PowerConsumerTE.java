@@ -2,15 +2,16 @@ package com.gempire.tileentities;
 
 import com.gempire.systems.machine.interfaces.IPowerConsumer;
 import com.gempire.systems.machine.interfaces.IPowerGenerator;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.ArrayList;
 
 public class PowerConsumerTE extends PowerConductorTE implements IPowerConsumer{
 
-    public PowerConsumerTE(BlockEntityType<?> tileEntityTypeIn) {
-        super(tileEntityTypeIn);
+    public PowerConsumerTE(BlockEntityType<?> tileEntityTypeIn, BlockPos pos, BlockState state) {
+        super(tileEntityTypeIn,pos,state);
         setupBattery(1000);
     }
 

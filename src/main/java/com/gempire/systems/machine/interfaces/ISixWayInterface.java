@@ -7,7 +7,6 @@ import com.gempire.systems.machine.Socket;
 import com.gempire.systems.machine.SocketType;
 import com.gempire.tileentities.SixWayInterfaceTE;
 import com.gempire.tileentities.WireTE;
-import jdk.nashorn.tools.Shell;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.core.Direction;
 

@@ -11,10 +11,9 @@ import com.gempire.items.ItemGem;
 import com.gempire.systems.machine.Battery;
 import com.gempire.systems.machine.MachineSide;
 import com.gempire.systems.machine.Socket;
-import com.gempire.systems.machine.interfaces.IPowerConductor;
 import com.gempire.systems.machine.interfaces.IPowerConsumer;
-import com.gempire.systems.machine.interfaces.IPowerProvider;
 import com.gempire.util.Color;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LiquidBlock;
@@ -28,7 +27,6 @@ import net.minecraft.world.item.Items;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
-import net.minecraft.world.level.block.entity.TickableBlockEntity;
 import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.core.NonNullList;
@@ -36,12 +34,12 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
-import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.registries.RegistryObject;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 
-public class ShellTE extends RandomizableContainerBlockEntity implements MenuProvider, TickableBlockEntity, IPowerConsumer {
+public class ShellTE extends RandomizableContainerBlockEntity implements MenuProvider,  IPowerConsumer {
     public static final int NUMBER_OF_SLOTS = 5;
     public static final int CHROMA_INPUT_SLOT_INDEX = 0;
     public static final int CLAY_INPUT_SLOT_INDEX = 1;
@@ -62,8 +60,8 @@ public class ShellTE extends RandomizableContainerBlockEntity implements MenuPro
     public int chromaColor = 0;
     public int ticks = 0;
 
-    public ShellTE() {
-        super(ModTE.SHELL_TE.get());
+    public ShellTE(BlockPos pos, BlockState state) {
+        super(ModTE.SHELL_TE.get(), pos, state);
         setupBattery(800);
         setupInitialSockets(this);
         //setupSocket(0, Socket.POWER_IN(MachineSide.BOTTOM), this);
@@ -75,8 +73,8 @@ public class ShellTE extends RandomizableContainerBlockEntity implements MenuPro
     }
 
     @Override
-    public void load(BlockState state, CompoundTag nbt) {
-        super.load(state, nbt);
+    public void load(CompoundTag nbt) {
+        super.load(nbt);
         ReadPoweredMachine(nbt);
         this.gravelConsumed = nbt.getInt("gravel");
         this.sandConsumed = nbt.getInt("sand");
@@ -108,32 +106,32 @@ public class ShellTE extends RandomizableContainerBlockEntity implements MenuPro
         return compound;
     }
 
-
-    @Override
-    public void tick() {
-        ConductorTick();
-        if(this.getItem(ShellTE.PEARL_OUTPUT_SLOT_INDEX) == ItemStack.EMPTY) {
-            if(this.ticks % 100 == 0) {
-                if(isPowered()) {
-                    this.HandleGravelTick();
-                    this.HandleSandTick();
-                    this.HandleClayTick();
-                    this.HandleChromaTick();
-                    this.HandleEssenceTick();
-                    this.HandleFormPearlTick();
-                    if (this.gravelConsumed == 1) {
-                        this.level.setBlockAndUpdate(this.getBlockPos(), this.getBlockState().setValue(ShellBlock.STAGE, 1));
-                    }
-                    if (this.sandConsumed == ShellTE.MAX_SAND) {
-                        this.level.setBlockAndUpdate(this.getBlockPos(), this.getBlockState().setValue(ShellBlock.STAGE, 2));
+    public static <T extends BlockEntity> void tick(Level level, BlockPos pos, BlockState state, T be) {
+        ShellTE te = (ShellTE)be;
+        if(!level.isClientSide()) {
+            te.ConductorTick();
+            if (te.getItem(ShellTE.PEARL_OUTPUT_SLOT_INDEX) == ItemStack.EMPTY) {
+                if (te.ticks % 100 == 0) {
+                    if (te.isPowered()) {
+                        te.HandleGravelTick();
+                        te.HandleSandTick();
+                        te.HandleClayTick();
+                        te.HandleChromaTick();
+                        te.HandleEssenceTick();
+                        te.HandleFormPearlTick();
+                        if (te.gravelConsumed == 1) {
+                            te.level.setBlockAndUpdate(pos, state.setValue(ShellBlock.STAGE, 1));
+                        }
+                        if (te.sandConsumed == ShellTE.MAX_SAND) {
+                            te.level.setBlockAndUpdate(pos, state.setValue(ShellBlock.STAGE, 2));
+                        }
                     }
                 }
-            }
-            if(this.ticks > 100){
-                this.ticks = 0;
-            }
-            else {
-                this.ticks++;
+                if (te.ticks > 100) {
+                    te.ticks = 0;
+                } else {
+                    te.ticks++;
+                }
             }
         }
     }
@@ -308,7 +306,7 @@ public class ShellTE extends RandomizableContainerBlockEntity implements MenuPro
     public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
         //Debug
         System.out.println("[DEBUG]:Client recived tile sync packet");
-        this.load(this.level.getBlockState(pkt.getPos()), pkt.getTag());
+        this.load(pkt.getTag());
     }
 
     @Override
@@ -325,9 +323,9 @@ public class ShellTE extends RandomizableContainerBlockEntity implements MenuPro
     }
 
     @Override
-    public void handleUpdateTag(BlockState state, CompoundTag tag) {
+    public void handleUpdateTag(CompoundTag tag) {
         System.out.println("[DEBUG]:Handling tag on chunk load");
-        this.load(state, tag);
+        this.load(tag);
     }
 
     //ENERGY

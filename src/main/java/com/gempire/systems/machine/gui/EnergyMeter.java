@@ -4,6 +4,7 @@ import com.gempire.Gempire;
 import com.gempire.systems.machine.Battery;
 import com.gempire.systems.machine.interfaces.IPowerProvider;
 import com.gempire.tileentities.PowerProviderTE;
+import com.gempire.util.GUIUtilities;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -18,10 +19,10 @@ public class EnergyMeter {
 
     public static void RenderBattery(AbstractContainerScreen screen, PoseStack stack, BlockEntity tileEntity, IPowerProvider powerProvider, int x, int y, MeterSize size){
 
-        screen.getMinecraft().getTextureManager().bind(getMeterLocationFromSize(size));
+        GUIUtilities.setup(getMeterLocationFromSize(size));
         screen.blit(stack, x, y, getMeterUV_X_FromSize(size), getMeterUV_Y_FromSize(size), 0, 0, getMeterUV_X_FromSize(size), getMeterUV_Y_FromSize(size), getMeterUV_X_FromSize(size), getMeterUV_Y_FromSize(size));
 
-        screen.getMinecraft().getTextureManager().bind(getMeterFillLocationFromSize(size));
+        GUIUtilities.setup(getMeterFillLocationFromSize(size));
         Battery battery = powerProvider.getBattery();
         int powerStored = (int) Math.floor((getMeterUV_X_FromSize(size) - 2) * battery.getCharge() / battery.getMaxCapacity());
         screen.blit(stack, x + 1, y + 1, powerStored, getMeterUV_Y_FromSize(size) - 2, 0, 0,

@@ -4,9 +4,10 @@ import com.gempire.container.TankContainer;
 import com.gempire.init.ModFluids;
 import com.gempire.init.ModItems;
 import com.gempire.init.ModTE;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.client.renderer.texture.ITickable;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
@@ -20,14 +21,10 @@ import net.minecraft.world.item.Items;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
-import net.minecraft.world.level.block.entity.TickableBlockEntity;
 import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidTank;
 import net.minecraftforge.fluids.capability.IFluidHandler;
@@ -37,7 +34,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.HashMap;
 
-public class TankTE extends RandomizableContainerBlockEntity implements IFluidTank, MenuProvider, TickableBlockEntity {
+public class TankTE extends RandomizableContainerBlockEntity implements IFluidTank, MenuProvider {
     public static final int NUMBER_OF_SLOTS = 2;
     public static final int BUCKET_INPUT_SLOT_INDEX = 0;
     public static final int BUCKET_OUTPUT_SLOT_INDEX = 1;
@@ -45,14 +42,13 @@ public class TankTE extends RandomizableContainerBlockEntity implements IFluidTa
     public NonNullList<ItemStack> items = NonNullList.withSize(TankTE.NUMBER_OF_SLOTS, ItemStack.EMPTY);
     public FluidTank tank;
 
-    public TankTE() {
-        super(ModTE.TANK_TE.get());
+    public TankTE(BlockPos pos, BlockState state) {
+        super(ModTE.TANK_TE.get(), pos, state);
         this.tank = new FluidTank(4000);
     }
 
-    @Override
     public void load(BlockState state, CompoundTag nbt) {
-        super.load(state, nbt);
+        super.load(nbt);
         this.tank.readFromNBT(nbt.getCompound("tank"));
         this.items = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
         if(!this.tryLoadLootTable(nbt)){
@@ -70,68 +66,65 @@ public class TankTE extends RandomizableContainerBlockEntity implements IFluidTa
         return compound;
     }
 
-    @Override
-    public void tick() {
-        ItemStack stackToInput = this.getItem(TankTE.BUCKET_INPUT_SLOT_INDEX);
-        if(this.getFluid() != null) {
-            if (stackToInput != ItemStack.EMPTY) {
-                //System.out.println("Stack is not empty");
-                if (this.shouldPullFluid() && this.canPullFluidFromStack(stackToInput)) {
-                    System.out.println("Should Pull");
-                    BucketItem bucket = (BucketItem) stackToInput.getItem();
-                    this.tank.fill(new FluidStack(bucket.getFluid(), 1000), IFluidHandler.FluidAction.EXECUTE);
-                    if(bucket == ModItems.WHITE_ESSENCE.get() || bucket == ModItems.YELLOW_ESSENCE.get() || bucket == ModItems.BLUE_ESSENCE.get()
-                    || bucket == ModItems.PINK_ESSENCE.get()){
-                        this.setItem(TankTE.BUCKET_INPUT_SLOT_INDEX, new ItemStack(ModItems.ESSENCE_BOTTLE.get()));
+    public static <T extends BlockEntity> void tick(Level level, BlockPos pos, BlockState state, T be) {
+        TankTE te = (TankTE)be;
+        if(!level.isClientSide()) {
+            ItemStack stackToInput = te.getItem(TankTE.BUCKET_INPUT_SLOT_INDEX);
+            if (te.getFluid() != null) {
+                if (stackToInput != ItemStack.EMPTY) {
+                    //System.out.println("Stack is not empty");
+                    if (te.shouldPullFluid() && te.canPullFluidFromStack(stackToInput)) {
+                        System.out.println("Should Pull");
+                        BucketItem bucket = (BucketItem) stackToInput.getItem();
+                        te.tank.fill(new FluidStack(bucket.getFluid(), 1000), IFluidHandler.FluidAction.EXECUTE);
+                        if (bucket == ModItems.WHITE_ESSENCE.get() || bucket == ModItems.YELLOW_ESSENCE.get() || bucket == ModItems.BLUE_ESSENCE.get()
+                                || bucket == ModItems.PINK_ESSENCE.get()) {
+                            te.setItem(TankTE.BUCKET_INPUT_SLOT_INDEX, new ItemStack(ModItems.ESSENCE_BOTTLE.get()));
+                        } else {
+                            te.setItem(TankTE.BUCKET_INPUT_SLOT_INDEX, new ItemStack(Items.BUCKET));
+                        }
+                        System.out.println("Tank level is at " + te.getFluidAmount() + "mb");
+                        te.level.sendBlockUpdated(pos, state, state, 2);
+                        te.setChanged();
                     }
-                    else {
-                        this.setItem(TankTE.BUCKET_INPUT_SLOT_INDEX, new ItemStack(Items.BUCKET));
-                    }
-                    System.out.println("Tank level is at " + this.getFluidAmount() + "mb");
-                    this.level.sendBlockUpdated(this.worldPosition, this.getBlockState(), this.getBlockState(), 2);
-                    this.setChanged();
                 }
             }
-        }
-        ItemStack stackToOutput = this.getItem(TankTE.BUCKET_OUTPUT_SLOT_INDEX);
-        if(this.getFluid() != null) {
-            if (stackToOutput != ItemStack.EMPTY) {
-                if (this.shouldPutFluid() && this.canPutFluidFromStack(stackToOutput)) {
-                    BucketItem bucket = (BucketItem) stackToOutput.getItem();
-                    Fluid fluid = this.tank.getFluid().getFluid();
-                    this.tank.drain(new FluidStack(this.tank.getFluid().getFluid(), 1000), IFluidHandler.FluidAction.EXECUTE);
-                    this.setItem(TankTE.BUCKET_OUTPUT_SLOT_INDEX, new ItemStack(TankTE.FLUID_BUCKETS.get(fluid)));
-                    this.level.sendBlockUpdated(this.worldPosition, this.getBlockState(), this.getBlockState(), 2);
-                    this.setChanged();
-                }
-                else if(this.shouldPutFluidToButton() && this.canPutFluidToButton(stackToOutput)){
-                    Fluid fluid = this.tank.getFluid().getFluid();
-                    if(fluid == ModFluids.PINK_ESSENCE.get()){
-                        this.tank.drain(new FluidStack(this.tank.getFluid().getFluid(), 200), IFluidHandler.FluidAction.EXECUTE);
-                        this.setItem(TankTE.BUCKET_OUTPUT_SLOT_INDEX, new ItemStack(ModItems.PEBBLE_GEM.get()));
-                        this.level.sendBlockUpdated(this.worldPosition, this.getBlockState(), this.getBlockState(), 2);
-                        this.setChanged();
-                    }
-                    else if(fluid == ModFluids.BLUE_ESSENCE.get()){
-                        this.tank.drain(new FluidStack(this.tank.getFluid().getFluid(), 200), IFluidHandler.FluidAction.EXECUTE);
-                        this.setItem(TankTE.BUCKET_OUTPUT_SLOT_INDEX, new ItemStack(ModItems.SHALE_GEM.get()));
-                        this.level.sendBlockUpdated(this.worldPosition, this.getBlockState(), this.getBlockState(), 2);
-                        this.setChanged();
-                    }
-                    else if(fluid == ModFluids.YELLOW_ESSENCE.get()){
-                        this.tank.drain(new FluidStack(this.tank.getFluid().getFluid(), 200), IFluidHandler.FluidAction.EXECUTE);
-                        this.setItem(TankTE.BUCKET_OUTPUT_SLOT_INDEX, new ItemStack(ModItems.MICA_GEM.get()));
-                        this.level.sendBlockUpdated(this.worldPosition, this.getBlockState(), this.getBlockState(), 2);
-                        this.setChanged();
-                    }
-                }
-                else if(this.shouldPutFluidToButton() && stackToOutput.getItem() == Items.NAUTILUS_SHELL){
-                    Fluid fluid = this.tank.getFluid().getFluid();
-                    if(fluid == ModFluids.WHITE_ESSENCE.get()) {
-                       this.tank.drain(new FluidStack(this.tank.getFluid().getFluid(), 200), IFluidHandler.FluidAction.EXECUTE);
-                       this.setItem(TankTE.BUCKET_OUTPUT_SLOT_INDEX, new ItemStack(ModItems.NACRE_GEM.get()));
-                       this.level.sendBlockUpdated(this.worldPosition, this.getBlockState(), this.getBlockState(), 2);
-                       this.setChanged();
+            ItemStack stackToOutput = te.getItem(TankTE.BUCKET_OUTPUT_SLOT_INDEX);
+            if (te.getFluid() != null) {
+                if (stackToOutput != ItemStack.EMPTY) {
+                    if (te.shouldPutFluid() && te.canPutFluidFromStack(stackToOutput)) {
+                        BucketItem bucket = (BucketItem) stackToOutput.getItem();
+                        Fluid fluid = te.tank.getFluid().getFluid();
+                        te.tank.drain(new FluidStack(te.tank.getFluid().getFluid(), 1000), IFluidHandler.FluidAction.EXECUTE);
+                        te.setItem(TankTE.BUCKET_OUTPUT_SLOT_INDEX, new ItemStack(TankTE.FLUID_BUCKETS.get(fluid)));
+                        te.level.sendBlockUpdated(pos, state, state, 2);
+                        te.setChanged();
+                    } else if (te.shouldPutFluidToButton() && te.canPutFluidToButton(stackToOutput)) {
+                        Fluid fluid = te.tank.getFluid().getFluid();
+                        if (fluid == ModFluids.PINK_ESSENCE.get()) {
+                            te.tank.drain(new FluidStack(te.tank.getFluid().getFluid(), 200), IFluidHandler.FluidAction.EXECUTE);
+                            te.setItem(TankTE.BUCKET_OUTPUT_SLOT_INDEX, new ItemStack(ModItems.PEBBLE_GEM.get()));
+                            te.level.sendBlockUpdated(pos, state, state, 2);
+                            te.setChanged();
+                        } else if (fluid == ModFluids.BLUE_ESSENCE.get()) {
+                            te.tank.drain(new FluidStack(te.tank.getFluid().getFluid(), 200), IFluidHandler.FluidAction.EXECUTE);
+                            te.setItem(TankTE.BUCKET_OUTPUT_SLOT_INDEX, new ItemStack(ModItems.SHALE_GEM.get()));
+                            te.level.sendBlockUpdated(pos, state, state, 2);
+                            te.setChanged();
+                        } else if (fluid == ModFluids.YELLOW_ESSENCE.get()) {
+                            te.tank.drain(new FluidStack(te.tank.getFluid().getFluid(), 200), IFluidHandler.FluidAction.EXECUTE);
+                            te.setItem(TankTE.BUCKET_OUTPUT_SLOT_INDEX, new ItemStack(ModItems.MICA_GEM.get()));
+                            te.level.sendBlockUpdated(pos, state, state, 2);
+                            te.setChanged();
+                        }
+                    } else if (te.shouldPutFluidToButton() && stackToOutput.getItem() == Items.NAUTILUS_SHELL) {
+                        Fluid fluid = te.tank.getFluid().getFluid();
+                        if (fluid == ModFluids.WHITE_ESSENCE.get()) {
+                            te.tank.drain(new FluidStack(te.tank.getFluid().getFluid(), 200), IFluidHandler.FluidAction.EXECUTE);
+                            te.setItem(TankTE.BUCKET_OUTPUT_SLOT_INDEX, new ItemStack(ModItems.NACRE_GEM.get()));
+                            te.level.sendBlockUpdated(pos, state, state, 2);
+                            te.setChanged();
+                        }
                     }
                 }
             }

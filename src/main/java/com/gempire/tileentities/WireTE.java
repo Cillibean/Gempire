@@ -3,12 +3,14 @@ package com.gempire.tileentities;
 import com.gempire.init.ModTE;
 import com.gempire.systems.machine.MachineSide;
 import com.gempire.systems.machine.Socket;
-import net.minecraft.world.level.block.entity.TickableBlockEntity;
-import net.minecraft.tileentity.TileEntityType;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 
-public class WireTE extends PowerConductorTE implements TickableBlockEntity {
-    public WireTE() {
-        super(ModTE.WIRE_TE.get());
+public class WireTE extends PowerConductorTE  {
+    public WireTE(BlockPos pos, BlockState state) {
+        super(ModTE.WIRE_TE.get(),pos,state);
         setupBattery(10);
         setupInitialSockets(this);
         setupSocket(0, Socket.POWER_IN(MachineSide.BOTTOM), this);
@@ -19,9 +21,11 @@ public class WireTE extends PowerConductorTE implements TickableBlockEntity {
         setupSocket(5, Socket.POWER_IN(MachineSide.RIGHT), this);
     }
 
-    @Override
-    public void tick() {
-        ConductorTick();
+    public static <T extends BlockEntity> void tick(Level level, BlockPos pos, BlockState state, T be) {
+        WireTE te = (WireTE)be;
+        if(!level.isClientSide()){
+            te.ConductorTick();
+        }
     }
 
     @Override

@@ -16,21 +16,17 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobSpawnType;
-import net.minecraft.fluid.Fluid;
 import net.minecraft.world.item.Item;
-import net.minecraft.item.Items;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.registries.RegistryObject;
 
-import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
-import java.util.UUID;
 
 public class GemFormation {
     private static final int EXIT_HOLE_LENGTH = 16;
@@ -130,7 +126,7 @@ public class GemFormation {
             for(int y = GemFormation.getHalfMiddleOffsetLeft(volume.getY()); y < yo; y++){
                 for(int x = GemFormation.getHalfMiddleOffsetLeft(volume.getX()); x < zo; x++){
                     Block block = domhain.getBlockState(position.offset(new BlockPos(x, y, z))).getBlock();
-                    if(block.getBlock() instanceof AirBlock){
+                    if(block instanceof AirBlock){
                         continue;
                     }
                     else{
@@ -360,7 +356,7 @@ public class GemFormation {
                     block.getBlock() == ModBlocks.POWER_CRYSTAL_BLOCK.get()){
                 continue;
             }
-            if(block == Blocks.DIRT.defaultBlockState() || block == Blocks.GRASS_BLOCK.defaultBlockState() || block == Blocks.GRASS_PATH.defaultBlockState()
+            if(block == Blocks.DIRT.defaultBlockState() || block == Blocks.GRASS_BLOCK.defaultBlockState() || block == Blocks.DIRT_PATH.defaultBlockState()
                     || block == Blocks.GRAVEL.defaultBlockState()){
                 this.world.setBlockAndUpdate(pos, this.drained_soil.defaultBlockState());
             }

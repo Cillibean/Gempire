@@ -9,21 +9,10 @@ import com.gempire.util.Abilities;
 import com.gempire.util.Color;
 import com.gempire.util.CruxType;
 import com.gempire.util.GemPlacements;
-import net.minecraft.block.Blocks;
-import net.minecraft.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.entity.monster.CaveSpiderEntity;
-import net.minecraft.entity.monster.CreeperEntity;
 import net.minecraft.world.entity.monster.Enemy;
-import net.minecraft.entity.passive.CatEntity;
-import net.minecraft.entity.passive.OcelotEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.DifficultyInstance;
-import net.minecraft.world.IServerWorld;
 import net.minecraft.world.level.Level;
 
 import javax.annotation.Nullable;
@@ -45,7 +34,7 @@ public class EntityRuby extends EntityGem {
         super(type, worldIn);
     }
 
-    public static AttributeSupplier.Builder setCustomAttributes() {
+    public static AttributeSupplier.Builder registerAttributes() {
         return Mob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 50.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.4D)

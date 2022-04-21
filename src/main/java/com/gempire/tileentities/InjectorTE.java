@@ -11,8 +11,8 @@ import com.gempire.systems.machine.MachineSide;
 import com.gempire.systems.machine.Socket;
 import com.gempire.systems.machine.interfaces.IPowerConsumer;
 import com.gempire.systems.machine.interfaces.IPowerGenerator;
-import net.minecraft.block.*;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.ContainerHelper;
@@ -24,7 +24,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
-import net.minecraft.world.level.block.entity.TickableBlockEntity;
 import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.core.Direction;
@@ -48,7 +47,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class InjectorTE extends RandomizableContainerBlockEntity implements IFluidTank, MenuProvider, TickableBlockEntity, IPowerConsumer {
+public class InjectorTE extends RandomizableContainerBlockEntity implements IFluidTank, MenuProvider, IPowerConsumer {
     public static final int NUMBER_OF_SLOTS = 6;
     public static final int PINK_INPUT_SLOT_INDEX = 0;
     public static final int BLUE_INPUT_SLOT_INDEX = 1;
@@ -67,8 +66,8 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
     public boolean pinkOpen, blueOpen, yellowOpen, whiteOpen = false;
     public int tick = 0;
 
-    public InjectorTE() {
-        super(ModTE.INJECTOR_TE.get());
+    public InjectorTE(BlockPos pos, BlockState state) {
+        super(ModTE.INJECTOR_TE.get(),pos,state);
         this.pinkTank = new FluidTank(this.TANK_CAPACITY());
         this.blueTank = new FluidTank(this.TANK_CAPACITY());
         this.yellowTank = new FluidTank(this.TANK_CAPACITY());
@@ -84,8 +83,8 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
     }
 
     @Override
-    public void load(BlockState state, CompoundTag nbt) {
-        super.load(state, nbt);
+    public void load(CompoundTag nbt) {
+        super.load(nbt);
         ReadPoweredMachine(nbt);
         this.pinkTank.readFromNBT(nbt.getCompound("pinkTank"));
         this.blueTank.readFromNBT(nbt.getCompound("blueTank"));
@@ -121,10 +120,12 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
 
     //TODO: FIX LOTS OF NBT STUFF
 
-    @Override
-    public void tick() {
-        this.HandleSlotUpdates();
-        ConductorTick();
+    public static <T extends BlockEntity> void tick(Level level, BlockPos pos, BlockState state, T be) {
+        InjectorTE te = (InjectorTE)be;
+        if(!level.isClientSide()) {
+            te.HandleSlotUpdates();
+            te.ConductorTick();
+        }
     }
 
     public void HandleSlotUpdates(){
@@ -542,7 +543,7 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
     public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
         //Debug
         System.out.println("[DEBUG]:Client recived tile sync packet");
-        this.load(this.level.getBlockState(pkt.getPos()), pkt.getTag());
+        this.load(pkt.getTag());
     }
 
     @Override
@@ -559,9 +560,9 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
     }
 
     @Override
-    public void handleUpdateTag(BlockState state, CompoundTag tag) {
+    public void handleUpdateTag(CompoundTag tag) {
         System.out.println("[DEBUG]:Handling tag on chunk load");
-        this.load(state, tag);
+        this.load(tag);
     }
 
     //REDUNDANT STUFF

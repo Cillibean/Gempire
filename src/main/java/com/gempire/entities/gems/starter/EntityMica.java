@@ -9,7 +9,6 @@ import com.gempire.util.Abilities;
 import com.gempire.util.Color;
 import com.gempire.util.CruxType;
 import com.gempire.util.GemPlacements;
-import net.minecraft.block.Blocks;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
@@ -44,7 +43,7 @@ public class EntityMica extends EntityStarterGem {
         super(type, worldIn);
     }
 
-    public static AttributeSupplier.Builder setCustomAttributes() {
+    public static AttributeSupplier.Builder registerAttributes() {
         return Mob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 10.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.3D)

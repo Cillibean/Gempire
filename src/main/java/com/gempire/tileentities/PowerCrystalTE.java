@@ -6,18 +6,19 @@ import com.gempire.systems.machine.Battery;
 import com.gempire.systems.machine.MachineSide;
 import com.gempire.systems.machine.Socket;
 import com.gempire.util.Debug;
-import net.minecraft.block.Blocks;
-import net.minecraft.world.level.block.entity.TickableBlockEntity;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.List;
 import java.util.Random;
 
-public class PowerCrystalTE extends PowerGeneratorTE implements TickableBlockEntity {
+public class PowerCrystalTE extends PowerGeneratorTE {
 
-    public PowerCrystalTE() {
-        super(ModTE.POWER_CRYSTAL_TE.get());
+    public PowerCrystalTE(BlockPos pos, BlockState state) {
+        super(ModTE.POWER_CRYSTAL_TE.get(), pos, state);
         setVoltage(9);
         setupInitialSockets(this);
         setupSocket(0, Socket.POWER_OUT(MachineSide.BOTTOM), this);
@@ -28,9 +29,11 @@ public class PowerCrystalTE extends PowerGeneratorTE implements TickableBlockEnt
         setupSocket(5, Socket.POWER_OUT(MachineSide.RIGHT), this);
     }
 
-    @Override
-    public void tick() {
-        generatePower();
+    public static <T extends BlockEntity> void tick(Level level, BlockPos pos, BlockState state, T be) {
+        PowerCrystalTE te = (PowerCrystalTE)be;
+        if(!level.isClientSide()) {
+            te.generatePower();
+        }
     }
 
     @Override

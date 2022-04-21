@@ -3,11 +3,9 @@ package com.gempire.init;
 import com.gempire.Gempire;
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.data.BuiltinRegistries;
-import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.level.levelgen.feature.StructureFeature;
 import net.minecraft.world.level.levelgen.StructureSettings;
 import net.minecraft.world.level.levelgen.feature.configurations.StructureFeatureConfiguration;
-import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 

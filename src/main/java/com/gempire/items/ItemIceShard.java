@@ -1,7 +1,6 @@
 package com.gempire.items;
 
 import com.gempire.systems.machine.interfaces.IPowerProvider;
-import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;

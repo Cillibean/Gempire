@@ -5,16 +5,10 @@ import com.gempire.entities.ai.EntityAIWander;
 import com.gempire.entities.bases.EntityGem;
 import com.gempire.util.Abilities;
 import com.gempire.util.GemPlacements;
-import net.minecraft.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.inventory.ItemStackHelper;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.DifficultyInstance;
-import net.minecraft.world.IServerWorld;
 import net.minecraft.world.level.Level;
 
 import javax.annotation.Nullable;
@@ -37,7 +31,7 @@ public class EntityNephrite extends EntityGem {
         super(type, worldIn);
     }
 
-    public static AttributeSupplier.Builder setCustomAttributes() {
+    public static AttributeSupplier.Builder registerAttributes() {
         return Mob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 50.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.4D)

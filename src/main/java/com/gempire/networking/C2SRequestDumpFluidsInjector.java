@@ -1,13 +1,11 @@
 package com.gempire.networking;
 
 import com.gempire.tileentities.InjectorTE;
-import com.gempire.tileentities.TankTE;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.core.BlockPos;
-import net.minecraftforge.fmllegacy.network.NetworkEvent;
+import net.minecraftforge.network.NetworkEvent;
 
-import javax.annotation.Nullable;
 import java.util.function.Supplier;
 
 public class C2SRequestDumpFluidsInjector {

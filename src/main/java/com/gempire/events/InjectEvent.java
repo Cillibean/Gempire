@@ -2,7 +2,6 @@ package com.gempire.events;
 
 import com.gempire.entities.bases.EntityGem;
 import com.gempire.tileentities.GemSeedTE;
-import net.minecraft.util.DamageSource;
 import net.minecraft.core.BlockPos;
 import net.minecraftforge.eventbus.api.Event;
 

@@ -2,14 +2,13 @@ package com.gempire.blocks.machine;
 
 import com.gempire.blocks.markers.IPowerMarker;
 import com.gempire.init.ModBlocks;
-import com.gempire.systems.machine.interfaces.IPowerGenerator;
-import com.gempire.tileentities.InjectorTE;
-import com.gempire.tileentities.PowerCrystalTE;
-import com.gempire.tileentities.PowerGeneratorTE;
-import com.gempire.tileentities.WireTE;
+import com.gempire.init.ModTE;
+import com.gempire.tileentities.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -24,12 +23,10 @@ import net.minecraft.world.level.Level;
 
 import javax.annotation.Nullable;
 
-import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
-
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.fmllegacy.network.NetworkHooks;
+import net.minecraftforge.network.NetworkHooks;
 
 public class PowerCrystalBlock extends SixWayConnectorBlock implements IPowerMarker, EntityBlock {
     public static final BooleanProperty INJECTOR = BooleanProperty.create("injector");
@@ -38,6 +35,7 @@ public class PowerCrystalBlock extends SixWayConnectorBlock implements IPowerMar
         super(apothem, properties);
         this.registerDefaultState(this.stateDefinition.any().setValue(INJECTOR, false));
     }
+
 
     @Override
     public boolean facingMarker(BlockPos direction) {
@@ -113,7 +111,12 @@ public class PowerCrystalBlock extends SixWayConnectorBlock implements IPowerMar
 
     @Nullable
     @Override
-    public BlockEntity newBlockEntity(BlockPos p_153215_, BlockState p_153216_) {
-        return new PowerCrystalTE();
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new PowerCrystalTE(pos, state);
+    }
+
+    @Nullable
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level p_152180_, BlockState p_152181_, BlockEntityType<T> p_152182_) {
+        return p_152182_ == ModTE.POWER_CRYSTAL_TE.get() ? PowerCrystalTE::tick : null;
     }
 }

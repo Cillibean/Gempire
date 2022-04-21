@@ -2,13 +2,15 @@ package com.gempire.blocks.machine;
 
 import com.gempire.blocks.markers.IPowerMarker;
 import com.gempire.init.ModFluids;
+import com.gempire.init.ModTE;
 import com.gempire.tileentities.ShellTE;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
-import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
@@ -16,7 +18,6 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.util.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -27,13 +28,11 @@ import net.minecraft.world.level.Level;
 
 import javax.annotation.Nullable;
 
-import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
-
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.fmllegacy.network.NetworkHooks;
+import net.minecraftforge.network.NetworkHooks;
 
 public class ShellBlock extends BaseEntityBlock implements SimpleWaterloggedBlock, IPowerMarker, EntityBlock {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
@@ -44,6 +43,7 @@ public class ShellBlock extends BaseEntityBlock implements SimpleWaterloggedBloc
         super(builder);
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(WATERLOGGED, false).setValue(STAGE, 0));
     }
+
 
     @SuppressWarnings("deprecation")
     @Override
@@ -196,7 +196,12 @@ public class ShellBlock extends BaseEntityBlock implements SimpleWaterloggedBloc
 
     @Nullable
     @Override
-    public BlockEntity newBlockEntity(BlockPos p_153215_, BlockState p_153216_) {
-        return new ShellTE();
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new ShellTE(pos, state);
+    }
+
+    @Nullable
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level p_152180_, BlockState p_152181_, BlockEntityType<T> p_152182_) {
+        return p_152182_ == ModTE.SHELL_TE.get() ? ShellTE::tick : null;
     }
 }

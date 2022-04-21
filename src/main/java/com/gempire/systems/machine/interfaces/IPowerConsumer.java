@@ -1,6 +1,5 @@
 package com.gempire.systems.machine.interfaces;
 
-import net.minecraft.particles.ParticleTypes;
 
 public interface IPowerConsumer extends IPowerConductor {
     default void usePower(){

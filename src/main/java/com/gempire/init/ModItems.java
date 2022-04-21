@@ -4,11 +4,9 @@ import com.gempire.Gempire;
 import com.gempire.items.*;
 import com.gempire.util.ModItemGroup;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraftforge.fmllegacy.RegistryObject;
+import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-
-import java.awt.*;
 
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.BucketItem;

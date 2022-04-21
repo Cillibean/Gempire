@@ -5,7 +5,7 @@ import com.gempire.entities.gems.EntityPearl;
 import com.gempire.entities.gems.EntityZircon;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraftforge.fmllegacy.network.NetworkEvent;
+import net.minecraftforge.network.NetworkEvent;
 
 import java.util.function.Supplier;
 

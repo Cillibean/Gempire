@@ -1,6 +1,5 @@
 package com.gempire;
 
-import com.gempire.entities.TestEntity;
 import com.gempire.entities.gems.*;
 import com.gempire.entities.gems.starter.EntityMica;
 import com.gempire.entities.gems.starter.EntityNacre;
@@ -8,7 +7,6 @@ import com.gempire.entities.gems.starter.EntityPebble;
 import com.gempire.entities.gems.starter.EntityShale;
 import com.gempire.init.*;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.entity.ai.attributes.DefaultAttributes;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.entries.LootTableReference;
 import net.minecraft.server.MinecraftServer;
@@ -20,14 +18,13 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.DeferredWorkQueue;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.fmlserverevents.FMLServerStartingEvent;
+import net.minecraftforge.event.server.ServerStartingEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -49,7 +46,8 @@ public class Gempire
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::enqueueIMC);
         // Register the processIMC method for modloading
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::processIMC);
-        // Register the doClientStuff method for modloading
+
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::EntityAttributes);
         //FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientProxy::onClientSetup);
 
         RegistryHandler.init();
@@ -61,69 +59,66 @@ public class Gempire
         //MinecraftForge.EVENT_BUS.register(CommonProxy.class);
     }
 
-    @SubscribeEvent
-    public void EntityAttributes(EntityAttributeCreationEvent event){
-        event.put(ModEntities.TEST.get(), TestEntity.setCustomAttributes().build());
+    public void EntityAttributes(final EntityAttributeCreationEvent event){
+        event.put(ModEntities.PEBBLE.get(), EntityPebble.registerAttributes().build());
 
-        event.put(ModEntities.PEBBLE.get(), EntityPebble.setCustomAttributes().build());
+        event.put(ModEntities.MICA.get(), EntityMica.registerAttributes().build());
 
-        event.put(ModEntities.MICA.get(), EntityMica.setCustomAttributes().build());
+        event.put(ModEntities.SHALE.get(), EntityShale.registerAttributes().build());
 
-        event.put(ModEntities.SHALE.get(), EntityShale.setCustomAttributes().build());
+        event.put(ModEntities.NACRE.get(), EntityNacre.registerAttributes().build());
 
-        event.put(ModEntities.NACRE.get(), EntityNacre.setCustomAttributes().build());
+        event.put(ModEntities.RUBY.get(), EntityRuby.registerAttributes().build());
 
-        event.put(ModEntities.RUBY.get(), EntityRuby.setCustomAttributes().build());
+        event.put(ModEntities.SAPPHIRE.get(), EntitySapphire.registerAttributes().build());
 
-        event.put(ModEntities.SAPPHIRE.get(), EntitySapphire.setCustomAttributes().build());
+        event.put(ModEntities.QUARTZ.get(), EntityQuartz.registerAttributes().build());
 
-        event.put(ModEntities.QUARTZ.get(), EntityQuartz.setCustomAttributes().build());
+        event.put(ModEntities.JASPER.get(), EntityJasper.registerAttributes().build());
 
-        event.put(ModEntities.JASPER.get(), EntityJasper.setCustomAttributes().build());
+        event.put(ModEntities.AGATE.get(), EntityAgate.registerAttributes().build());
 
-        event.put(ModEntities.AGATE.get(), EntityAgate.setCustomAttributes().build());
+        event.put(ModEntities.TOPAZ.get(), EntityTopaz.registerAttributes().build());
 
-        event.put(ModEntities.TOPAZ.get(), EntityTopaz.setCustomAttributes().build());
+        event.put(ModEntities.OBSIDIAN.get(), EntityObsidian.registerAttributes().build());
 
-        event.put(ModEntities.OBSIDIAN.get(), EntityObsidian.setCustomAttributes().build());
+        event.put(ModEntities.PEARL.get(), EntityPearl.registerAttributes().build());
 
-        event.put(ModEntities.PEARL.get(), EntityPearl.setCustomAttributes().build());
+        event.put(ModEntities.NEPHRITE.get(), EntityNephrite.registerAttributes().build());
 
-        event.put(ModEntities.NEPHRITE.get(), EntityNephrite.setCustomAttributes().build());
+        event.put(ModEntities.SPODUMENE.get(), EntitySpodumene.registerAttributes().build());
 
-        event.put(ModEntities.SPODUMENE.get(), EntitySpodumene.setCustomAttributes().build());
+        event.put(ModEntities.ZIRCON.get(), EntityZircon.registerAttributes().build());
 
-        event.put(ModEntities.ZIRCON.get(), EntityZircon.setCustomAttributes().build());
+        event.put(ModEntities.AQUAMARINE.get(), EntityAquamarine.registerAttributes().build());
 
-        event.put(ModEntities.AQUAMARINE.get(), EntityAquamarine.setCustomAttributes().build());
+        event.put(ModEntities.BISMUTH.get(), EntityBismuth.registerAttributes().build());
 
-        event.put(ModEntities.BISMUTH.get(), EntityBismuth.setCustomAttributes().build());
+        event.put(ModEntities.BIXBITE.get(), EntityBixbite.registerAttributes().build());
 
-        event.put(ModEntities.BIXBITE.get(), EntityBixbite.setCustomAttributes().build());
+        event.put(ModEntities.DEMANTOID.get(), EntityDemantoid.registerAttributes().build());
 
-        event.put(ModEntities.DEMANTOID.get(), EntityDemantoid.setCustomAttributes().build());
+        event.put(ModEntities.EMERALD.get(), EntityEmerald.registerAttributes().build());
 
-        event.put(ModEntities.EMERALD.get(), EntityEmerald.setCustomAttributes().build());
+        event.put(ModEntities.HESSONITE.get(), EntityHessonite.registerAttributes().build());
 
-        event.put(ModEntities.HESSONITE.get(), EntityHessonite.setCustomAttributes().build());
+        event.put(ModEntities.LAPIS.get(), EntityLapis.registerAttributes().build());
 
-        event.put(ModEntities.LAPIS.get(), EntityLapis.setCustomAttributes().build());
+        event.put(ModEntities.LARIMAR.get(), EntityLarimar.registerAttributes().build());
 
-        event.put(ModEntities.LARIMAR.get(), EntityLarimar.setCustomAttributes().build());
+        event.put(ModEntities.MELANITE.get(), EntityMelanite.registerAttributes().build());
 
-        event.put(ModEntities.MELANITE.get(), EntityMelanite.setCustomAttributes().build());
+        event.put(ModEntities.MORGANITE.get(), EntityMorganite.registerAttributes().build());
 
-        event.put(ModEntities.MORGANITE.get(), EntityMorganite.setCustomAttributes().build());
+        event.put(ModEntities.PERIDOT.get(), EntityPeridot.registerAttributes().build());
 
-        event.put(ModEntities.PERIDOT.get(), EntityPeridot.setCustomAttributes().build());
+        event.put(ModEntities.PYROPE.get(), EntityPyrope.registerAttributes().build());
 
-        event.put(ModEntities.PYROPE.get(), EntityPyrope.setCustomAttributes().build());
+        event.put(ModEntities.RUTILE.get(), EntityRutile.registerAttributes().build());
 
-        event.put(ModEntities.RUTILE.get(), EntityRutile.setCustomAttributes().build());
+        event.put(ModEntities.SPINEL.get(), EntitySpinel.registerAttributes().build());
 
-        event.put(ModEntities.SPINEL.get(), EntitySpinel.setCustomAttributes().build());
-
-        event.put(ModEntities.TOURMALINE.get(), EntityTourmaline.setCustomAttributes().build());
+        event.put(ModEntities.TOURMALINE.get(), EntityTourmaline.registerAttributes().build());
     }
 
     private void setup(final FMLCommonSetupEvent event)
@@ -175,7 +170,7 @@ public class Gempire
     }
     // You can use SubscribeEvent and let the Event Bus discover methods to call
     @SubscribeEvent
-    public void onServerStarting(FMLServerStartingEvent event) {
+    public void onServerStarting(ServerStartingEvent event) {
         server = event.getServer();
         LOGGER.info("HELLO from server starting");
     }

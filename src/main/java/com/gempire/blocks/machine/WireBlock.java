@@ -1,11 +1,16 @@
 package com.gempire.blocks.machine;
 
 import com.gempire.blocks.markers.IPowerMarker;
+import com.gempire.init.ModTE;
 import com.gempire.systems.machine.interfaces.IPowerConductor;
 import com.gempire.systems.machine.interfaces.IPowerGenerator;
+import com.gempire.tileentities.GemSeedTE;
 import com.gempire.tileentities.WireTE;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.core.BlockPos;
@@ -33,7 +38,13 @@ public class WireBlock extends SixWayConnectorBlock implements IPowerMarker, Ent
 
     @Nullable
     @Override
-    public BlockEntity newBlockEntity(BlockPos p_153215_, BlockState p_153216_) {
-        return new WireTE();
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new WireTE(pos, state);
     }
+
+    @Nullable
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level p_152180_, BlockState p_152181_, BlockEntityType<T> p_152182_) {
+        return p_152182_ == ModTE.WIRE_TE.get() ? WireTE::tick : null;
+    }
+
 }
