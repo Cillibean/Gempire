@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "gempire:blocks/chiseled_ruined_marble_block"
+  }
+}

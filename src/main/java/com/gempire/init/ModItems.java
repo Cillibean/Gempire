@@ -291,7 +291,60 @@ public class ModItems {
                     new Item.Properties().tab(ModItemGroup.BLOCKS).stacksTo(64)
             )
     );
-
+    public static final RegistryObject<Item> RUINED_MARBLE_BLOCK = ITEMS.register("ruined_marble_block", () ->
+            new BlockItem(
+                    ModBlocks.RUINED_MARBLE_BLOCK.get(),
+                    new Item.Properties().tab(ModItemGroup.BLOCKS)
+            )
+    );
+    public static final RegistryObject<Item> RUINED_MARBLE_BRICK = ITEMS.register("ruined_marble_brick", () ->
+            new BlockItem(
+                    ModBlocks.RUINED_MARBLE_BRICK.get(),
+                    new Item.Properties().tab(ModItemGroup.BLOCKS)
+            )
+    );
+    public static final RegistryObject<Item> RUINED_MARBLE_PILLAR = ITEMS.register("ruined_marble_pillar", () ->
+            new BlockItem(
+                    ModBlocks.RUINED_MARBLE_PILLAR.get(),
+                    new Item.Properties().tab(ModItemGroup.BLOCKS)
+            )
+    );
+    public static final RegistryObject<Item> CHISELED_RUINED_MARBLE_BLOCK = ITEMS.register("chiseled_ruined_marble_block", () ->
+            new BlockItem(
+                    ModBlocks.CHISELED_RUINED_MARBLE_BLOCK.get(),
+                    new Item.Properties().tab(ModItemGroup.BLOCKS)
+            )
+    );
+    public static final RegistryObject<Item> SMOOTH_RUINED_MARBLE_BLOCK = ITEMS.register("smooth_ruined_marble_block", () ->
+            new BlockItem(
+                    ModBlocks.SMOOTH_RUINED_MARBLE_BLOCK.get(),
+                    new Item.Properties().tab(ModItemGroup.BLOCKS)
+            )
+    );
+    public static final RegistryObject<Item> SMOOTH_RUINED_MARBLE_SLAB = ITEMS.register("smooth_ruined_marble_slab", () ->
+            new BlockItem(
+                    ModBlocks.SMOOTH_RUINED_MARBLE_SLAB.get(),
+                    new Item.Properties().tab(ModItemGroup.BLOCKS)
+            )
+    );
+    public static final RegistryObject<Item> RUINED_MARBLE_SLAB = ITEMS.register("ruined_marble_slab", () ->
+            new BlockItem(
+                    ModBlocks.RUINED_MARBLE_SLAB.get(),
+                    new Item.Properties().tab(ModItemGroup.BLOCKS)
+            )
+    );
+    public static final RegistryObject<Item> SMOOTH_RUINED_MARBLE_STAIRS = ITEMS.register("smooth_ruined_marble_stairs", () ->
+            new BlockItem(
+                    ModBlocks.SMOOTH_RUINED_MARBLE_STAIRS.get(),
+                    new Item.Properties().tab(ModItemGroup.BLOCKS)
+            )
+    );
+    public static final RegistryObject<Item> RUINED_MARBLE_STAIRS = ITEMS.register("ruined_marble_stairs", () ->
+            new BlockItem(
+                    ModBlocks.RUINED_MARBLE_STAIRS.get(),
+                    new Item.Properties().tab(ModItemGroup.BLOCKS)
+            )
+    );
     /*public static final RegistryObject<Item> TEST_CONTAINER_BLOCK_ITEM = ITEMS.register("test_container_block", () ->
             new BlockItem(
                     ModBlocks.TEST_CONTAINER_BLOCK.get(),

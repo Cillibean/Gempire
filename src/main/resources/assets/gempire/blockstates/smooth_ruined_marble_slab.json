@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "gempire:block/smooth_ruined_marble_slab"
+    },
+    "type=double": {
+      "model": "gempire:block/smooth_ruined_marble_block"
+    },
+    "type=top": {
+      "model": "gempire:block/smooth_ruined_marble_slab_top"
+    }
+  }
+}

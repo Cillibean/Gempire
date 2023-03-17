@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "gempire:blocks/ruined_marble_pillar_top",
+    "side": "gempire:blocks/ruined_marble_pillar"
+  }
+}

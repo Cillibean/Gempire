@@ -24,6 +24,16 @@
   "block.gempire.drained_yellow_stone_2": "Drained Yellow Stone",
   "block.gempire.drained_yellow_stone_bands": "Drained Banded Yellow Stone",
 
+  "block.gempire.ruined_marble_block": "Ancient Marble Block",
+  "block.gempire.ruined_marble_brick": "Ancient Marble Bricks",
+  "block.gempire.ruined_marble_pillar": "Ancient Marble Pillar",
+  "block.gempire.chiseled_ruined_marble_block": "Ancient Chiseled Marble Block",
+  "block.gempire.smooth_ruined_marble_block": "Ancient Smooth Marble Block",
+  "block.gempire.smooth_ruined_marble_slab": "Ancient Smooth Marble Slab",
+  "block.gempire.ruined_marble_slab": "Ancient Marble Slab",
+  "block.gempire.smooth_ruined_marble_stairs": "Ancient Smooth Marble Stairs",
+  "block.gempire.ruined_marble_stairs": "Ancient Marble Stairs",
+
   "block.gempire.gem_seed_block": "Geode",
   "block.gempire.injector_block": "Injector",
   "block.gempire.drill_block": "Drill",
