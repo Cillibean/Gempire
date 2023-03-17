@@ -1027,7 +1027,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                 Class[] parameterType = null;
                 Ability ability1 = null;
                 try {
-                    ability1 = Ability.ABILITY_FROM_ABILITIES.get(ability).getConstructor(parameterType).newInstance(null).assignAbility(this);
+                    ability1 = Ability.ABILITY_FROM_ABILITIES.get(ability).getConstructor(parameterType).newInstance((Object) null).assignAbility(this);
                     powers.add(ability1);
                     if((ability1 instanceof IEffectAbility || ability1 instanceof IAreaAbility) && !(ability1 instanceof IViolentAbility)){
                         this.entityData.set(EntityGem.USES_AREA_ABILITIES, true);

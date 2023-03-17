@@ -143,7 +143,7 @@ public class GemSeedTE extends BlockEntity {
 
     public void DrainBlock(BlockPos blockPos) {
         this.GEM_CONDITIONS = ModEntities.CRUXTOGEM;
-        float BLOCK_TEMPERATURE = this.level.getBiome(this.worldPosition).getTemperature(this.worldPosition);
+        float BLOCK_TEMPERATURE = this.level.getBiome(this.worldPosition).getBaseTemperature();
         this.SetDrainedStoneColor(BLOCK_TEMPERATURE);
         Block block = this.level.getBlockState(blockPos).getBlock();
         if(block instanceof DrainedBlock) return;
@@ -545,6 +545,6 @@ public class GemSeedTE extends BlockEntity {
     public ClientboundBlockEntityDataPacket getUpdatePacket() {
         //Debug
         System.out.println("[DEBUG]:Server sent tile sync packet");
-        return new ClientboundBlockEntityDataPacket(this.worldPosition, -1, this.getUpdateTag());
+        return ClientboundBlockEntityDataPacket.create(this);
     }
 }

@@ -130,6 +130,11 @@ public class Gempire
         ModAbilities.registerAbilities();
         ModEnchants.registerVanillaEnchantments();
         ModEnchants.registerItemDiscounts();
+
+        event.enqueueWork(() -> {
+            ModFeatures.registerConfiguredFeatures();
+            ModFeatures.registerPlacedFeatures();
+        });
     }
 
     @SuppressWarnings("warning")

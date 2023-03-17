@@ -42,7 +42,7 @@ public class ClientProxy {
         event.registerEntityRenderer(ModEntities.NEPHRITE.get(), m -> new RenderNephrite(m, new ModelNephrite<>(m.bakeLayer(ModelNephrite.LAYER_LOCATION))));
         event.registerEntityRenderer(ModEntities.SPODUMENE.get(), m -> new RenderSpodumene(m, new ModelSpodumene<>(m.bakeLayer(ModelSpodumene.LAYER_LOCATION))));
         event.registerEntityRenderer(ModEntities.ZIRCON.get(), m -> new RenderZircon(m, new ModelZircon<>(m.bakeLayer(ModelZircon.LAYER_LOCATION))));
-        /*event.registerEntityRenderer(ModEntities.AQUAMARINE.get(), m -> new RenderAquamarine(m, new ModelRuby<>(m.bakeLayer(ModelRuby.LAYER_LOCATION))));
+        event.registerEntityRenderer(ModEntities.AQUAMARINE.get(), m -> new RenderAquamarine(m, new ModelRuby<>(m.bakeLayer(ModelRuby.LAYER_LOCATION))));
         event.registerEntityRenderer(ModEntities.BISMUTH.get(), m -> new RenderBismuth(m, new ModelRuby<>(m.bakeLayer(ModelRuby.LAYER_LOCATION))));
         event.registerEntityRenderer(ModEntities.BIXBITE.get(), m -> new RenderBixbite(m, new ModelRuby<>(m.bakeLayer(ModelRuby.LAYER_LOCATION))));
         event.registerEntityRenderer(ModEntities.DEMANTOID.get(), m -> new RenderDemantoid(m, new ModelRuby<>(m.bakeLayer(ModelRuby.LAYER_LOCATION))));
@@ -56,7 +56,7 @@ public class ClientProxy {
         event.registerEntityRenderer(ModEntities.PYROPE.get(), m -> new RenderPyrope(m, new ModelRuby<>(m.bakeLayer(ModelRuby.LAYER_LOCATION))));
         event.registerEntityRenderer(ModEntities.RUTILE.get(), m -> new RenderRutile(m, new ModelRuby<>(m.bakeLayer(ModelRuby.LAYER_LOCATION))));
         event.registerEntityRenderer(ModEntities.SPINEL.get(), m -> new RenderSpinel(m, new ModelRuby<>(m.bakeLayer(ModelRuby.LAYER_LOCATION))));
-        event.registerEntityRenderer(ModEntities.TOURMALINE.get(), m -> new RenderTourmaline(m, new ModelRuby<>(m.bakeLayer(ModelRuby.LAYER_LOCATION))));*/
+        event.registerEntityRenderer(ModEntities.TOURMALINE.get(), m -> new RenderTourmaline(m, new ModelRuby<>(m.bakeLayer(ModelRuby.LAYER_LOCATION))));
 
         MenuScreens.register(ModContainers.TANK_CONTAINER.get(), TankScreen::new);
         MenuScreens.register(ModContainers.INJECTOR_CONTAINER.get(), InjectorScreen::new);

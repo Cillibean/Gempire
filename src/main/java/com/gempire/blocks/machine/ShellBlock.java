@@ -95,7 +95,7 @@ public class ShellBlock extends BaseEntityBlock implements SimpleWaterloggedBloc
         if (!state.getValue(BlockStateProperties.WATERLOGGED)) {
             if (!worldIn.isClientSide()) {
                 worldIn.setBlock(pos, state.setValue(BlockStateProperties.WATERLOGGED, Boolean.valueOf(true)), 3);
-                worldIn.getLiquidTicks().scheduleTick(pos, fluidStateIn.getType(), fluidStateIn.getType().getTickDelay(worldIn));
+                worldIn.scheduleTick(pos, fluidStateIn.getType(), fluidStateIn.getType().getTickDelay(worldIn));
             }
 
             return true;

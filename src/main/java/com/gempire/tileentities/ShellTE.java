@@ -319,7 +319,7 @@ public class ShellTE extends RandomizableContainerBlockEntity implements MenuPro
     public ClientboundBlockEntityDataPacket getUpdatePacket() {
         //Debug
         System.out.println("[DEBUG]:Server sent tile sync packet");
-        return new ClientboundBlockEntityDataPacket(this.worldPosition, -1, this.getUpdateTag());
+        return ClientboundBlockEntityDataPacket.create(this);
     }
 
     @Override

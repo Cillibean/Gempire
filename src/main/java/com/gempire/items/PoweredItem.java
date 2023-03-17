@@ -32,12 +32,10 @@ public class PoweredItem extends Item implements IPoweredItem {
         this.battery = battery;
     }
 
-    @Override
     public boolean showDurabilityBar(ItemStack stack) {
         return true;
     }
 
-    @Override
     public double getDurabilityForDisplay(ItemStack stack) {
         Battery battery = getBattery();
         System.out.println("[DEBUG] " + (getMaxDamage(stack) - (int) Math.floor(battery.getCharge() * getMaxDamage(stack) / battery.getMaxCapacity())));
