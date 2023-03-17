@@ -24,7 +24,6 @@ import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidTank;
 import net.minecraftforge.fluids.capability.IFluidHandler;
@@ -32,6 +31,7 @@ import net.minecraftforge.fluids.capability.templates.FluidTank;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.awt.*;
 import java.util.HashMap;
 
 public class TankTE extends RandomizableContainerBlockEntity implements IFluidTank, MenuProvider {
@@ -55,15 +55,13 @@ public class TankTE extends RandomizableContainerBlockEntity implements IFluidTa
             ContainerHelper.loadAllItems(nbt, this.items);
         }
     }
-
     @Override
-    public CompoundTag save(CompoundTag compound) {
-        super.save(compound);
+    public void saveAdditional(CompoundTag compound) {
+        super.saveAdditional(compound);
         compound.put("tank", this.tank.writeToNBT(new CompoundTag()));
         if(!this.trySaveLootTable(compound)){
             ContainerHelper.saveAllItems(compound, this.items);
         }
-        return compound;
     }
 
     public static <T extends BlockEntity> void tick(Level level, BlockPos pos, BlockState state, T be) {
@@ -101,17 +99,17 @@ public class TankTE extends RandomizableContainerBlockEntity implements IFluidTa
                         te.setChanged();
                     } else if (te.shouldPutFluidToButton() && te.canPutFluidToButton(stackToOutput)) {
                         Fluid fluid = te.tank.getFluid().getFluid();
-                        if (fluid == ModFluids.PINK_ESSENCE.get()) {
+                        if (fluid == ModFluids.SOURCE_PINK_ESSENCE.get()) {
                             te.tank.drain(new FluidStack(te.tank.getFluid().getFluid(), 200), IFluidHandler.FluidAction.EXECUTE);
                             te.setItem(TankTE.BUCKET_OUTPUT_SLOT_INDEX, new ItemStack(ModItems.PEBBLE_GEM.get()));
                             te.level.sendBlockUpdated(pos, state, state, 2);
                             te.setChanged();
-                        } else if (fluid == ModFluids.BLUE_ESSENCE.get()) {
+                        } else if (fluid == ModFluids.SOURCE_BLUE_ESSENCE.get()) {
                             te.tank.drain(new FluidStack(te.tank.getFluid().getFluid(), 200), IFluidHandler.FluidAction.EXECUTE);
                             te.setItem(TankTE.BUCKET_OUTPUT_SLOT_INDEX, new ItemStack(ModItems.SHALE_GEM.get()));
                             te.level.sendBlockUpdated(pos, state, state, 2);
                             te.setChanged();
-                        } else if (fluid == ModFluids.YELLOW_ESSENCE.get()) {
+                        } else if (fluid == ModFluids.SOURCE_YELLOW_ESSENCE.get()) {
                             te.tank.drain(new FluidStack(te.tank.getFluid().getFluid(), 200), IFluidHandler.FluidAction.EXECUTE);
                             te.setItem(TankTE.BUCKET_OUTPUT_SLOT_INDEX, new ItemStack(ModItems.MICA_GEM.get()));
                             te.level.sendBlockUpdated(pos, state, state, 2);
@@ -119,7 +117,7 @@ public class TankTE extends RandomizableContainerBlockEntity implements IFluidTa
                         }
                     } else if (te.shouldPutFluidToButton() && stackToOutput.getItem() == Items.NAUTILUS_SHELL) {
                         Fluid fluid = te.tank.getFluid().getFluid();
-                        if (fluid == ModFluids.WHITE_ESSENCE.get()) {
+                        if (fluid == ModFluids.SOURCE_WHITE_ESSENCE.get()) {
                             te.tank.drain(new FluidStack(te.tank.getFluid().getFluid(), 200), IFluidHandler.FluidAction.EXECUTE);
                             te.setItem(TankTE.BUCKET_OUTPUT_SLOT_INDEX, new ItemStack(ModItems.NACRE_GEM.get()));
                             te.level.sendBlockUpdated(pos, state, state, 2);
@@ -182,12 +180,12 @@ public class TankTE extends RandomizableContainerBlockEntity implements IFluidTa
 
     @Override
     public Component getDisplayName() {
-        return new TextComponent("");
+        return Component.translatable("");
     }
 
     @Override
     protected Component getDefaultName() {
-        return new TextComponent("");
+        return Component.translatable("");
     }
 
     @Override
@@ -302,8 +300,8 @@ public class TankTE extends RandomizableContainerBlockEntity implements IFluidTa
     }
 
     @Override
-    public CompoundTag getUpdateTag() {
-        return this.save(new CompoundTag());
+    public void handleUpdateTag(CompoundTag compound) {
+        this.load(compound);
     }
 
     @Nullable

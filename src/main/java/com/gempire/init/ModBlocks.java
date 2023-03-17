@@ -3,9 +3,7 @@ package com.gempire.init;
 import com.gempire.Gempire;
 import com.gempire.blocks.*;
 import com.gempire.blocks.machine.*;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.LiquidBlock;
-import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.material.Material;
 import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
@@ -223,17 +221,17 @@ public class ModBlocks {
     );
 
 
-    public static RegistryObject<LiquidBlock> PINK_ESSENCE_BLOCK = BLOCKS.register("pink_essence_block", () ->
-            new LiquidBlock(ModFluids.PINK_ESSENCE, BlockBehaviour.Properties.of(Material.WATER).noCollission().strength(100.0F).noDrops()));
+    public static final RegistryObject<LiquidBlock> PINK_ESSENCE_BLOCK = BLOCKS.register("pink_essence_block",
+            () -> new LiquidBlock(ModFluids.SOURCE_PINK_ESSENCE, BlockBehaviour.Properties.copy(Blocks.WATER)));
 
-    public static RegistryObject<LiquidBlock> BLUE_ESSENCE_BLOCK = BLOCKS.register("blue_essence_block", () ->
-            new LiquidBlock(ModFluids.BLUE_ESSENCE, BlockBehaviour.Properties.of(Material.WATER).noCollission().strength(100.0F).noDrops()));
+    public static final RegistryObject<LiquidBlock> BLUE_ESSENCE_BLOCK = BLOCKS.register("blue_essence_block",
+            () -> new LiquidBlock(ModFluids.SOURCE_BLUE_ESSENCE, BlockBehaviour.Properties.copy(Blocks.WATER)));
 
-    public static RegistryObject<LiquidBlock> YELLOW_ESSENCE_BLOCK = BLOCKS.register("yellow_essence_block", () ->
-            new LiquidBlock(ModFluids.YELLOW_ESSENCE, BlockBehaviour.Properties.of(Material.WATER).noCollission().strength(100.0F).noDrops()));
+    public static final RegistryObject<LiquidBlock> YELLOW_ESSENCE_BLOCK = BLOCKS.register("yellow_essence_block",
+            () -> new LiquidBlock(ModFluids.SOURCE_YELLOW_ESSENCE, BlockBehaviour.Properties.copy(Blocks.WATER)));
 
-    public static RegistryObject<LiquidBlock> WHITE_ESSENCE_BLOCK = BLOCKS.register("white_essence_block", () ->
-            new LiquidBlock(ModFluids.WHITE_ESSENCE, BlockBehaviour.Properties.of(Material.WATER).noCollission().strength(100.0F).noDrops()));
+    public static final RegistryObject<LiquidBlock> WHITE_ESSENCE_BLOCK = BLOCKS.register("white_essence_block",
+            () -> new LiquidBlock(ModFluids.SOURCE_WHITE_ESSENCE, BlockBehaviour.Properties.copy(Blocks.WATER)));
 
     public static final RegistryObject<Block> GEM_SEED_BLOCK = BLOCKS.register("gem_seed_block", () ->
             new GemSeedBlock(BlockBehaviour.Properties
@@ -468,6 +466,62 @@ public class ModBlocks {
 
             )
     );
+    public static final RegistryObject<Block> RUINED_MARBLE_BLOCK = BLOCKS.register("ruined_marble_block", () ->
+            new Block(Block.Properties
+                    .of(Material.STONE)
+                    .strength(1.5f, 6f)
+                    .sound(SoundType.STONE)
+            )
+    );
+    public static final RegistryObject<Block> SMOOTH_RUINED_MARBLE_BLOCK = BLOCKS.register("smooth_ruined_marble_block", () ->
+            new Block(Block.Properties
+                    .of(Material.STONE)
+                    .strength(1.5f, 6f)
+                    .sound(SoundType.STONE)
+            )
+    );
+    public static final RegistryObject<Block> CHISELED_RUINED_MARBLE_BLOCK = BLOCKS.register("chiseled_ruined_marble_block", () ->
+            new Block(Block.Properties
+                    .of(Material.STONE)
+                    .strength(1.5f, 6f)
+                    .sound(SoundType.STONE)
+            )
+    );
+    public static final RegistryObject<Block> RUINED_MARBLE_BRICK = BLOCKS.register("ruined_marble_brick", () ->
+            new Block(Block.Properties
+                    .of(Material.STONE)
+                    .strength(1.5f, 6f)
+                    .sound(SoundType.STONE)
+            )
+    );
+    public static final RegistryObject<Block> RUINED_MARBLE_PILLAR = BLOCKS.register("ruined_marble_pillar", () ->
+            new RotatedPillarBlock(Block.Properties
+                    .of(Material.STONE)
+                    .strength(1.5f, 6f)
+                    .sound(SoundType.STONE)
+            )
+    );
+    public static final RegistryObject<Block> SMOOTH_RUINED_MARBLE_SLAB = BLOCKS.register("smooth_ruined_marble_slab", () ->
+            new SlabBlock(Block.Properties
+                    .of(Material.STONE)
+                    .strength(1.5f, 6f)
+                    .sound(SoundType.STONE)
+            )
+    );
+    public static final RegistryObject<Block> RUINED_MARBLE_SLAB = BLOCKS.register("ruined_marble_slab", () ->
+            new SlabBlock(Block.Properties
+                    .of(Material.STONE)
+                    .strength(1.5f, 6f)
+                    .sound(SoundType.STONE)
+            )
+    );
+    public static final RegistryObject<Block> RUINED_MARBLE_STAIRS = BLOCKS.register("ruined_marble_stairs",
+            () -> new StairBlock(() -> ModBlocks.RUINED_MARBLE_BLOCK.get().defaultBlockState(),
+                    BlockBehaviour.Properties.of(Material.STONE).strength(5f).requiresCorrectToolForDrops()));
+
+    public static final RegistryObject<Block> SMOOTH_RUINED_MARBLE_STAIRS = BLOCKS.register("smooth_ruined_marble_stairs",
+            () -> new StairBlock(() -> ModBlocks.SMOOTH_RUINED_MARBLE_BLOCK.get().defaultBlockState(),
+                    BlockBehaviour.Properties.of(Material.STONE).strength(5f).requiresCorrectToolForDrops()));
 
     /*public static final RegistryObject<Block> TEST_CONTAINER_BLOCK = BLOCKS.register("test_container_block", () ->
             new GUITestBlock(Block.Properties

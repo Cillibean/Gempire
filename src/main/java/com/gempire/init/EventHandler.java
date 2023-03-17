@@ -15,7 +15,7 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.entity.EntityEvent;
-import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.item.ItemEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -24,7 +24,7 @@ import net.minecraftforge.fml.common.Mod;
 public class EventHandler {
 
     @SubscribeEvent
-    public void OnEntitySpawn(EntityJoinWorldEvent event){
+    public void OnEntitySpawn(EntityJoinLevelEvent event){
         if(event.getEntity() instanceof LivingEntity) {
             if (event.getEntity() instanceof Monster) {
                 Monster entity = (Monster) event.getEntity();

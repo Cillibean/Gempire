@@ -9,7 +9,6 @@ import com.gempire.entities.bases.EntityGem;
 import com.gempire.util.Abilities;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 
 public class AbilityGuard extends Ability implements ITaskAbility {
 
@@ -28,6 +27,6 @@ public class AbilityGuard extends Ability implements ITaskAbility {
     }
     @Override
     public Component getName() {
-        return new TranslatableComponent("ability.gempire.guard");
+        return Component.translatable("ability.gempire.guard");
     }
 }

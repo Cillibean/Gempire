@@ -63,10 +63,10 @@ public class TankScreen extends AbstractContainerScreen<TankContainer> {
         int x = (this.width - this.imageWidth) / 2;
         int y = (this.height - this.imageHeight) / 2;
         this.blit(matrixStack, x, y, 0, 0, this.imageWidth, this.imageHeight);
-        FluidStack fluid = this.menu.tank.getFluid();
+        /*FluidStack fluid = this.menu.tank.getFluid();
         if(fluid.getFluid() != Fluids.EMPTY)
         {
-            ResourceLocation stillLocation = fluid.getFluid().getAttributes().getFlowingTexture(this.menu.tank.getFluid());
+            ResourceLocation stillLocation = fluid.getFluid().getFluidType(this.menu.tank.getFluid());
             TextureAtlasSprite sprite = Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(stillLocation);
             ResourceLocation spriteLocation = sprite.getName();
             GUIUtilities.setup(new ResourceLocation(spriteLocation.getNamespace(), "textures/" + spriteLocation.getPath() + ".png"));
@@ -74,14 +74,14 @@ public class TankScreen extends AbstractContainerScreen<TankContainer> {
             int y2 = 9 + y;
             int fluidStored = 57 * fluid.getAmount() / 4000;
             if(fluid.getFluid() == Fluids.WATER){
-                int color = Fluids.WATER.getAttributes().getColor();
+                int color = FluidStack.EMPTY.getAmount();
                 float r = ((color & 16711680) >> 16) / 255f;
                 float g = ((color & 65280) >> 8) / 255f;
                 float b = ((color & 255) >> 0) / 255f;
                 RenderSystem.setShaderColor(r, g, b, 1);
             }
             this.blit(matrixStack, x2, y2 + (57 - fluidStored), (int)sprite.getU0(), (int)sprite.getV0(), 15, fluidStored);
-        }
+        }*/
         GUIUtilities.setup(TANK_FOREGROUND);
         this.blit(matrixStack, x, y, 0, 0, this.imageWidth, this.imageWidth);
     }

@@ -4,6 +4,7 @@ import com.gempire.init.ModBlocks;
 import com.gempire.tileentities.InjectorTE;
 import com.gempire.tileentities.TankTE;
 import com.sun.jna.platform.win32.WinDef;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -78,10 +79,9 @@ public class IceSpikeBlock extends Block {
         }
 
     }
-
     @Override
-    public void randomTick(BlockState state, ServerLevel worldIn, BlockPos pos, Random random) {
-        super.randomTick(state, worldIn, pos, random);
+    public void randomTick(BlockState state, ServerLevel worldIn, BlockPos pos, RandomSource random) {
+        super.randomTick(state, worldIn, pos, (RandomSource) random);
         this.remove(worldIn, pos, state);
     }
 

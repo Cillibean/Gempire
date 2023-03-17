@@ -7,7 +7,6 @@ import com.gempire.util.Abilities;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 
 public class AbilityKnockback extends Ability implements IMeleeAbility, IViolentAbility {
 
@@ -28,6 +27,6 @@ public class AbilityKnockback extends Ability implements IMeleeAbility, IViolent
     }
     @Override
     public Component getName() {
-        return new TranslatableComponent("ability.gempire.knockback");
+        return Component.translatable("ability.gempire.knockback");
     }
 }

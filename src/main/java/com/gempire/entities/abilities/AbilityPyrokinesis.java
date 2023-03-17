@@ -9,7 +9,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 
 public class AbilityPyrokinesis extends Ability implements IMeleeAbility, IEmotionalAbility, IViolentAbility {
 
@@ -37,6 +36,6 @@ public class AbilityPyrokinesis extends Ability implements IMeleeAbility, IEmoti
     }
     @Override
     public Component getName() {
-        return new TranslatableComponent("ability.gempire.pyrokinesis");
+        return Component.translatable("ability.gempire.pyrokinesis");
     }
 }

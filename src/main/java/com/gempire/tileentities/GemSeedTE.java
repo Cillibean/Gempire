@@ -1,19 +1,11 @@
 package com.gempire.tileentities;
 
 import com.gempire.blocks.DrainedBlock;
-import com.gempire.blocks.GemSeedBlock;
-import com.gempire.entities.bases.EntityGem;
-import com.gempire.entities.gems.EntityRuby;
-import com.gempire.entities.gems.starter.EntityPebble;
-import com.gempire.events.GemFormEvent;
 import com.gempire.init.*;
 import com.gempire.items.ItemChroma;
 import com.gempire.systems.injection.Crux;
 import com.gempire.systems.injection.GemConditions;
 import com.gempire.systems.injection.GemFormation;
-import net.minecraft.world.level.block.entity.BeehiveBlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityTicker;
-import net.minecraft.world.level.block.entity.TickingBlockEntity;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.item.Item;
@@ -31,8 +23,6 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
-import java.util.Set;
-import java.util.function.Supplier;
 
 import net.minecraft.world.level.block.AirBlock;
 import net.minecraft.world.level.block.Block;
@@ -42,10 +32,6 @@ import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.SnowLayerBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.AABB;
-import net.minecraftforge.client.model.data.IModelData;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.util.LazyOptional;
 
 public class GemSeedTE extends BlockEntity {
     Random random;
@@ -143,7 +129,7 @@ public class GemSeedTE extends BlockEntity {
 
     public void DrainBlock(BlockPos blockPos) {
         this.GEM_CONDITIONS = ModEntities.CRUXTOGEM;
-        float BLOCK_TEMPERATURE = this.level.getBiome(this.worldPosition).getBaseTemperature();
+        float BLOCK_TEMPERATURE = this.level.getBiome(this.worldPosition).get().getBaseTemperature();
         this.SetDrainedStoneColor(BLOCK_TEMPERATURE);
         Block block = this.level.getBlockState(blockPos).getBlock();
         if(block instanceof DrainedBlock) return;
@@ -326,8 +312,8 @@ public class GemSeedTE extends BlockEntity {
     }
 
     @Override
-    public CompoundTag save(CompoundTag compound) {
-        super.save(compound);
+    public void saveAdditional(CompoundTag compound) {
+        super.saveAdditional(compound);
         compound.putInt("stage", this.stage);
         compound.putBoolean("spawned", this.spawned);
         compound.put("chroma", new ItemStack(this.chroma).save(new CompoundTag()));
@@ -367,8 +353,6 @@ public class GemSeedTE extends BlockEntity {
         compound.putIntArray("xs", xs);
         compound.putIntArray("ys", ys);
         compound.putIntArray("zs", zs);
-
-        return compound;
     }
 
 
@@ -418,16 +402,16 @@ public class GemSeedTE extends BlockEntity {
     }
 
     public static String StringFromFluid(Fluid fluid){
-        if(fluid == ModFluids.PINK_ESSENCE.get()){
+        if(fluid == ModFluids.SOURCE_PINK_ESSENCE.get()){
             return "pink";
         }
-        else if(fluid == ModFluids.BLUE_ESSENCE.get()){
+        else if(fluid == ModFluids.SOURCE_BLUE_ESSENCE.get()){
             return "blue";
         }
-        else if(fluid == ModFluids.YELLOW_ESSENCE.get()){
+        else if(fluid == ModFluids.SOURCE_YELLOW_ESSENCE.get()){
             return "yellow";
         }
-        else if(fluid == ModFluids.WHITE_ESSENCE.get()){
+        else if(fluid == ModFluids.SOURCE_WHITE_ESSENCE.get()){
             return "white";
         }
         else{
@@ -437,16 +421,16 @@ public class GemSeedTE extends BlockEntity {
 
     public static Fluid FluidFromString(String fluid){
         if(fluid == "pink"){
-            return ModFluids.PINK_ESSENCE.get();
+            return ModFluids.SOURCE_PINK_ESSENCE.get();
         }
         else if(fluid == "blue"){
-            return ModFluids.BLUE_ESSENCE.get();
+            return ModFluids.SOURCE_BLUE_ESSENCE.get();
         }
         else if(fluid == "yellow"){
-            return ModFluids.YELLOW_ESSENCE.get();
+            return ModFluids.SOURCE_YELLOW_ESSENCE.get();
         }
         else if(fluid == "white"){
-            return ModFluids.WHITE_ESSENCE.get();
+            return ModFluids.SOURCE_WHITE_ESSENCE.get();
         }
         else {
             return Fluids.EMPTY;
@@ -535,11 +519,13 @@ public class GemSeedTE extends BlockEntity {
         this.load(tag);
     }
 
+    @Nonnull
     @Override
     public CompoundTag getUpdateTag() {
-        return this.save(new CompoundTag());
+        CompoundTag compound = new CompoundTag();
+        this.saveAdditional(compound);
+        return compound;
     }
-
     @Nullable
     @Override
     public ClientboundBlockEntityDataPacket getUpdatePacket() {

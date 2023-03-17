@@ -31,8 +31,6 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidTank;
@@ -101,8 +99,8 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
     }
 
     @Override
-    public CompoundTag save(CompoundTag compound) {
-        super.save(compound);
+    public void saveAdditional(CompoundTag compound) {
+        super.saveAdditional(compound);
         WritePoweredMachine(compound);
         compound.put("pinkTank", this.pinkTank.writeToNBT(new CompoundTag()));
         compound.put("blueTank", this.blueTank.writeToNBT(new CompoundTag()));
@@ -115,7 +113,6 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
         if(!this.trySaveLootTable(compound)){
             ContainerHelper.saveAllItems(compound, this.items);
         }
-        return compound;
     }
 
     //TODO: FIX LOTS OF NBT STUFF
@@ -341,9 +338,6 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
 
     public void ToggleTankOpen(String color){
         switch (color){
-            case "pink":
-                this.pinkOpen = !this.pinkOpen;
-                break;
             case "blue":
                 this.blueOpen = !this.blueOpen;
                 break;
@@ -367,12 +361,12 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
 
     @Override
     public Component getDisplayName() {
-        return new TextComponent("");//TranslationTextComponent("container.gempire.injector");
+        return Component.translatable("");//TranslationTextComponent("container.gempire.injector");
     }
 
     @Override
     protected Component getDefaultName() {
-        return new TranslatableComponent("container.gempire.injector");
+        return Component.translatable("container.gempire.injector");
     }
 
     @Override
@@ -434,16 +428,16 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
     }
 
     public FluidTank getTankFromFluid(FluidStack fluidStack){
-        if(fluidStack.getFluid() == ModFluids.PINK_ESSENCE.get()){
+        if(fluidStack.getFluid() == ModFluids.SOURCE_PINK_ESSENCE.get()){
             return this.pinkTank;
         }
-        else if(fluidStack.getFluid() == ModFluids.BLUE_ESSENCE.get()){
+        else if(fluidStack.getFluid() == ModFluids.SOURCE_BLUE_ESSENCE.get()){
             return this.blueTank;
         }
-        else if(fluidStack.getFluid() == ModFluids.YELLOW_ESSENCE.get()){
+        else if(fluidStack.getFluid() == ModFluids.SOURCE_YELLOW_ESSENCE.get()){
             return this.yellowTank;
         }
-        else if(fluidStack.getFluid() == ModFluids.WHITE_ESSENCE.get()){
+        else if(fluidStack.getFluid() == ModFluids.SOURCE_WHITE_ESSENCE.get()){
             return this.whiteTank;
         }
         else{
@@ -471,16 +465,16 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
 
     public Fluid getFluidFromValue(int value){
         if(value == 0){
-            return ModFluids.PINK_ESSENCE.get();
+            return ModFluids.SOURCE_PINK_ESSENCE.get();
         }
         else if(value == 1){
-            return ModFluids.BLUE_ESSENCE.get();
+            return ModFluids.SOURCE_BLUE_ESSENCE.get();
         }
         else if(value == 2){
-            return ModFluids.YELLOW_ESSENCE.get();
+            return ModFluids.SOURCE_YELLOW_ESSENCE.get();
         }
         else if(value == 3){
-            return ModFluids.WHITE_ESSENCE.get();
+            return ModFluids.SOURCE_WHITE_ESSENCE.get();
         }
         else{
             return Fluids.EMPTY;
@@ -546,9 +540,12 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
         this.load(pkt.getTag());
     }
 
+    @Nonnull
     @Override
     public CompoundTag getUpdateTag() {
-        return this.save(new CompoundTag());
+        CompoundTag compound = new CompoundTag();
+        this.saveAdditional(compound);
+        return compound;
     }
 
     @Nullable
@@ -590,8 +587,8 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
     }
     @Override
     public int fill(FluidStack resource, IFluidHandler.FluidAction action) {
-        /*if(this.getFluid(resource) == FluidStack.EMPTY) {
-            this.markDirty();
+        if(this.getFluid(resource) == FluidStack.EMPTY) {
+            this.setChanged();
             return resource.getAmount();
         }
         else if(resource == null){
@@ -602,11 +599,11 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
                 this.getTankFromFluid(resource).setFluid(resource);
             }
             if (resource.getFluid() != this.getFluid(resource).getFluid()) {
-                this.markDirty();
+                this.setChanged();
                 return 0;
             } else {
                 if (this.getFluidAmount(resource) >= this.getCapacity()) {
-                    this.markDirty();
+                    this.setChanged();
                     return 0;
                 } else {
                     if (this.getFluidAmount(resource) + resource.getAmount() > this.getCapacity()) {
@@ -614,12 +611,12 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
                     } else {
                         this.getFluid(resource).setAmount(this.getFluidAmount(resource) + resource.getAmount());
                     }
-                    this.markDirty();
+                    this.setChanged();
                     return resource.getAmount();
                 }
             }
-        }*/
-        return 0;
+        }
+        //return 0;
     }
 
     //ENERGY

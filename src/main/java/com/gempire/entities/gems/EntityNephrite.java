@@ -153,12 +153,12 @@ public class EntityNephrite extends EntityGem {
         return 7;
     }
 
-    @Override
+    //@Override
     public boolean canLocateStructures() {
         return true;
     }
 
-    @Override
+    //@Override
     public boolean isOnStructureCooldown() {
         return false;
     }

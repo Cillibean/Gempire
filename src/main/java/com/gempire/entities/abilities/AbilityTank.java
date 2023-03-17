@@ -6,7 +6,6 @@ import com.gempire.util.Abilities;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 
 public class AbilityTank extends Ability implements IAttributeAbility {
 
@@ -26,6 +25,6 @@ public class AbilityTank extends Ability implements IAttributeAbility {
 
     @Override
     public Component getName() {
-        return new TranslatableComponent("ability.gempire.tank");
+        return Component.translatable("ability.gempire.tank");
     }
 }

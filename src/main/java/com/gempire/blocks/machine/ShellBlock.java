@@ -51,7 +51,7 @@ public class ShellBlock extends BaseEntityBlock implements SimpleWaterloggedBloc
         if(!worldIn.isClientSide()){
             BlockEntity te = worldIn.getBlockEntity(pos);
             if(te instanceof ShellTE){
-                NetworkHooks.openGui((ServerPlayer) player, (ShellTE)te, pos);
+                NetworkHooks.openScreen((ServerPlayer) player, (ShellTE)te, pos);
                 return InteractionResult.SUCCESS;
             }
         }
@@ -85,10 +85,10 @@ public class ShellBlock extends BaseEntityBlock implements SimpleWaterloggedBloc
         builder.add(FACING).add(WATERLOGGED).add(STAGE);
     }
 
-    @Override
+    /*@Override
     public boolean canPlaceLiquid(BlockGetter worldIn, BlockPos pos, BlockState state, Fluid fluidIn) {
         return !state.getValue(BlockStateProperties.WATERLOGGED) && fluidIn == ModFluids.WHITE_ESSENCE.get();
-    }
+    }*/
 
     @Override
     public boolean placeLiquid(LevelAccessor worldIn, BlockPos pos, BlockState state, FluidState fluidStateIn) {

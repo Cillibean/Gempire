@@ -1,9 +1,9 @@
 package com.gempire.networking;
 
 import com.gempire.entities.bases.EntityGem;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraftforge.network.NetworkEvent;
 
 import java.util.function.Supplier;
@@ -37,7 +37,7 @@ public class C2SRequestUpdateGemName {
             if(!gem.customName()){
                 gem.setHasCustomName(true);
             }
-            gem.setCustomName(new TextComponent(msg.newName));
+            gem.setCustomName(Component.translatable(msg.newName));
         }
         ctx.setPacketHandled(true);
     }

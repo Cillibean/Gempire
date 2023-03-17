@@ -7,7 +7,6 @@ import com.gempire.util.Abilities;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 
 public class AbilityLuck extends Ability implements IEffectAbility {
 
@@ -21,6 +20,6 @@ public class AbilityLuck extends Ability implements IEffectAbility {
     }
     @Override
     public Component getName() {
-        return new TranslatableComponent("ability.gempire.luck");
+        return Component.translatable("ability.gempire.luck");
     }
 }

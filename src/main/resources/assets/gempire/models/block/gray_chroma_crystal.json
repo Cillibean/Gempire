@@ -1,6 +1,7 @@
 {
 	"credit": "Made with Blockbench",
 	"texture_size": [64, 64],
+	"render_type": "transparent",
 	"textures": {
 		"0": "gempire:blocks/gray_chroma_texture",
 		"particle": "gempire:blocks/gray_chroma_texture"

@@ -65,28 +65,6 @@ public class ClientProxy {
         MenuScreens.register(ModContainers.PEARL_UI_CONTAINER.get(), PearlUIScreen::new);
         MenuScreens.register(ModContainers.ZIRCON_UI_CONTAINER.get(), ZirconUIScreen::new);
 
-        ItemBlockRenderTypes.setRenderLayer(ModBlocks.POWER_CRYSTAL_BLOCK.get(), RenderType.translucent());
-        ItemBlockRenderTypes.setRenderLayer(ModBlocks.SHELL_BLOCK.get(), RenderType.translucent());
-
-        ItemBlockRenderTypes.setRenderLayer(ModBlocks.WHITE_CHROMA_CRYSTAL.get(), RenderType.translucent());
-        ItemBlockRenderTypes.setRenderLayer(ModBlocks.ORANGE_CHROMA_CRYSTAL.get(), RenderType.translucent());
-        ItemBlockRenderTypes.setRenderLayer(ModBlocks.MAGENTA_CHROMA_CRYSTAL.get(), RenderType.translucent());
-        ItemBlockRenderTypes.setRenderLayer(ModBlocks.LIGHT_BLUE_CHROMA_CRYSTAL.get(), RenderType.translucent());
-        ItemBlockRenderTypes.setRenderLayer(ModBlocks.YELLOW_CHROMA_CRYSTAL.get(), RenderType.translucent());
-        ItemBlockRenderTypes.setRenderLayer(ModBlocks.LIME_CHROMA_CRYSTAL.get(), RenderType.translucent());
-        ItemBlockRenderTypes.setRenderLayer(ModBlocks.PINK_CHROMA_CRYSTAL.get(), RenderType.translucent());
-        ItemBlockRenderTypes.setRenderLayer(ModBlocks.GRAY_CHROMA_CRYSTAL.get(), RenderType.translucent());
-        ItemBlockRenderTypes.setRenderLayer(ModBlocks.LIGHT_GRAY_CHROMA_CRYSTAL.get(), RenderType.translucent());
-        ItemBlockRenderTypes.setRenderLayer(ModBlocks.CYAN_CHROMA_CRYSTAL.get(), RenderType.translucent());
-        ItemBlockRenderTypes.setRenderLayer(ModBlocks.PURPLE_CHROMA_CRYSTAL.get(), RenderType.translucent());
-        ItemBlockRenderTypes.setRenderLayer(ModBlocks.BLUE_CHROMA_CRYSTAL.get(), RenderType.translucent());
-        ItemBlockRenderTypes.setRenderLayer(ModBlocks.BROWN_CHROMA_CRYSTAL.get(), RenderType.translucent());
-        ItemBlockRenderTypes.setRenderLayer(ModBlocks.GREEN_CHROMA_CRYSTAL.get(), RenderType.translucent());
-        ItemBlockRenderTypes.setRenderLayer(ModBlocks.RED_CHROMA_CRYSTAL.get(), RenderType.translucent());
-        ItemBlockRenderTypes.setRenderLayer(ModBlocks.BLACK_CHROMA_CRYSTAL.get(), RenderType.translucent());
-
-        ItemBlockRenderTypes.setRenderLayer(ModBlocks.ICE_SPIKE.get(), RenderType.cutout());
-
         event.registerBlockEntityRenderer(ModTE.SHELL_TE.get(), ShellTER::new);
     }
 

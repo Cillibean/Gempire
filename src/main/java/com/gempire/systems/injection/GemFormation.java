@@ -60,7 +60,7 @@ public class GemFormation {
     public void SpawnGem(){
         RegistryObject<EntityType<EntityPebble>> gemm = ModEntities.PEBBLE;
         EntityGem gem = gemm.get().create(this.world);
-        float BIOME_TEMPERATURE = this.world.getBiome(this.pos).getBaseTemperature();
+        float BIOME_TEMPERATURE = this.world.getBiome(this.pos).get().getBaseTemperature();
         this.SetDrainedStoneColor(BIOME_TEMPERATURE);
         String gemtoform = this.EvaluateCruxes();
         if (gemtoform == "") {

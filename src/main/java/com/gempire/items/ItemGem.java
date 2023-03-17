@@ -22,6 +22,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.apache.commons.lang3.ArrayUtils;
 
@@ -103,10 +104,10 @@ public class ItemGem extends Item {
             String namee = "pebble";
 
             if (this.ID == "") {
-                namee = this.getRegistryName().toString().replaceAll("gempire", "").replaceAll("gem", "").replaceAll(":", "").replaceAll(" ", "");
+                namee = ForgeRegistries.ITEMS.getKey(this).toString().replaceAll("gempire", "").replaceAll("gem", "").replaceAll(":", "").replaceAll(" ", "");
             }
             else{
-                namee = this.getRegistryName().toString().replaceAll(this.ID, "").replaceAll("gem", "").replaceAll(":", "").replaceAll(" ", "");
+                namee = ForgeRegistries.ITEMS.getKey(this).toString().replaceAll(this.ID, "").replaceAll("gem", "").replaceAll(":", "").replaceAll(" ", "");
             }
 
             //This whole section here checks for variations in color so it can spawn the correct type of gem
