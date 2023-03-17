@@ -12,7 +12,6 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import org.spongepowered.asm.mixin.extensibility.IMixinErrorHandler;
 
 import java.util.List;
@@ -55,6 +54,6 @@ public class AbilityParalysis extends Ability implements IMeleeAbility, IEffectA
 
     @Override
     public Component getName() {
-        return new TranslatableComponent("ability.gempire.paralysis");
+        return Component.translatable("ability.gempire.paralysis");
     }
 }

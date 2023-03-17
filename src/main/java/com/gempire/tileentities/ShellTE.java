@@ -32,10 +32,9 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraftforge.registries.RegistryObject;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 
@@ -90,8 +89,8 @@ public class ShellTE extends RandomizableContainerBlockEntity implements MenuPro
     }
 
     @Override
-    public CompoundTag save(CompoundTag compound) {
-        super.save(compound);
+    public void saveAdditional(CompoundTag compound) {
+        super.saveAdditional(compound);
         WritePoweredMachine(compound);
         compound.putInt("gravel", this.gravelConsumed);
         compound.putInt("sand", this.sandConsumed);
@@ -103,7 +102,6 @@ public class ShellTE extends RandomizableContainerBlockEntity implements MenuPro
         if(!this.trySaveLootTable(compound)){
             ContainerHelper.saveAllItems(compound, this.items);
         }
-        return compound;
     }
 
     public static <T extends BlockEntity> void tick(Level level, BlockPos pos, BlockState state, T be) {
@@ -189,7 +187,7 @@ public class ShellTE extends RandomizableContainerBlockEntity implements MenuPro
                 //TODO: MAKE THERE BE A CHANCE OF MAGIC MOSS APPEARING
                 if(this.level.getBlockState(this.worldPosition.offset(ShellTE.direction(i))).getBlock() == ModBlocks.WHITE_ESSENCE_BLOCK.get()){
                     LiquidBlock block = (LiquidBlock) this.level.getBlockState(this.worldPosition.offset(ShellTE.direction(i))).getBlock();
-                    if(block.getFluid() == ModFluids.WHITE_ESSENCE.get()) {
+                    if(block.getFluid() == ModFluids.SOURCE_WHITE_ESSENCE.get()) {
                         this.level.setBlockAndUpdate(this.worldPosition.offset(ShellTE.direction(i)), Blocks.AIR.defaultBlockState());
                         this.essenceConsumed = true;
                         this.essenceMarker = true;
@@ -204,7 +202,7 @@ public class ShellTE extends RandomizableContainerBlockEntity implements MenuPro
             for(int i = 0; i < 6; i++){
                 if(this.level.getBlockState(this.worldPosition.offset(ShellTE.direction(i))).getBlock() == ModBlocks.WHITE_ESSENCE_BLOCK.get()){
                     LiquidBlock block = (LiquidBlock) this.level.getBlockState(this.worldPosition.offset(ShellTE.direction(i))).getBlock();
-                    if(block.getFluid() == ModFluids.WHITE_ESSENCE.get()) {
+                    if(block.getFluid() == ModFluids.SOURCE_WHITE_ESSENCE.get()) {
                         this.essenceMarker = true;
                         break;
                     }
@@ -266,12 +264,12 @@ public class ShellTE extends RandomizableContainerBlockEntity implements MenuPro
 
     @Override
     public Component getDisplayName() {
-        return new TextComponent("");//TranslationTextComponent("container.gempire.injector");
+        return Component.translatable("");//TranslationTextComponent("container.gempire.injector");
     }
 
     @Override
     protected Component getDefaultName() {
-        return new TranslatableComponent("container.gempire.injector");
+        return Component.translatable("container.gempire.injector");
     }
 
     @Override
@@ -309,11 +307,6 @@ public class ShellTE extends RandomizableContainerBlockEntity implements MenuPro
         this.load(pkt.getTag());
     }
 
-    @Override
-    public CompoundTag getUpdateTag() {
-        return this.save(new CompoundTag());
-    }
-
     @Nullable
     @Override
     public ClientboundBlockEntityDataPacket getUpdatePacket() {
@@ -321,7 +314,13 @@ public class ShellTE extends RandomizableContainerBlockEntity implements MenuPro
         System.out.println("[DEBUG]:Server sent tile sync packet");
         return ClientboundBlockEntityDataPacket.create(this);
     }
-
+    @Nonnull
+    @Override
+    public CompoundTag getUpdateTag() {
+        CompoundTag compound = new CompoundTag();
+        this.saveAdditional(compound);
+        return compound;
+    }
     @Override
     public void handleUpdateTag(CompoundTag tag) {
         System.out.println("[DEBUG]:Handling tag on chunk load");

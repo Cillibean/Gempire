@@ -1,131 +1,74 @@
 package com.gempire.init;
 
+import com.gempire.Gempire;
 import com.gempire.tileentities.TankTE;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.item.Items;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.fluids.FluidAttributes;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
-import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-
-import static com.gempire.Gempire.MODID;
+import net.minecraftforge.registries.RegistryObject;
 
 public class ModFluids {
-    public static final DeferredRegister<Fluid> FLUIDS = DeferredRegister.create(ForgeRegistries.FLUIDS, MODID);
+    public static final DeferredRegister<Fluid> FLUIDS =
+            DeferredRegister.create(ForgeRegistries.FLUIDS, Gempire.MODID);
 
-    public static final ResourceLocation TEST_FLUID_STILL_LOCATION = new ResourceLocation("gempire:blocks/test_fluid_still");
-    public static final ResourceLocation TEST_FLUID_FLOWING_LOCATION = new ResourceLocation("gempire:blocks/test_fluid_flowing");
-    public static final ResourceLocation TEST_FLUID_OVERLAY_LOCATION = new ResourceLocation("gempire:blocks/test_fluid_overlay");
+    public static final RegistryObject<FlowingFluid> SOURCE_PINK_ESSENCE = FLUIDS.register("pink_essence_fluid",
+            () -> new ForgeFlowingFluid.Source(ModFluids.PINK_ESSENCE_FLUID_PROPERTIES));
+    public static final RegistryObject<FlowingFluid> FLOWING_PINK_ESSENCE = FLUIDS.register("pink_essence_water",
+            () -> new ForgeFlowingFluid.Flowing(ModFluids.PINK_ESSENCE_FLUID_PROPERTIES));
 
-    public static final ResourceLocation PINK_ESSENCE_STILL_LOCATION = new ResourceLocation("gempire:blocks/pink_essence_still");
-    public static final ResourceLocation PINK_ESSENCE_FLOWING_LOCATION = new ResourceLocation("gempire:blocks/pink_essence_flowing");
 
-    public static final ResourceLocation BLUE_ESSENCE_STILL_LOCATION = new ResourceLocation("gempire:blocks/blue_essence_still");
-    public static final ResourceLocation BLUE_ESSENCE_FLOWING_LOCATION = new ResourceLocation("gempire:blocks/blue_essence_flowing");
+    public static final ForgeFlowingFluid.Properties PINK_ESSENCE_FLUID_PROPERTIES = new ForgeFlowingFluid.Properties(
+            ModFluidTypes.PINK_ESSENCE_FLUID_TYPE, SOURCE_PINK_ESSENCE, FLOWING_PINK_ESSENCE)
+            .slopeFindDistance(2).levelDecreasePerBlock(2).block(ModBlocks.PINK_ESSENCE_BLOCK)
+            .bucket(ModItems.PINK_ESSENCE);
 
-    public static final ResourceLocation YELLOW_ESSENCE_STILL_LOCATION = new ResourceLocation("gempire:blocks/yellow_essence_still");
-    public static final ResourceLocation YELLOW_ESSENCE_FLOWING_LOCATION = new ResourceLocation("gempire:blocks/yellow_essence_flowing");
+    public static final RegistryObject<FlowingFluid> SOURCE_YELLOW_ESSENCE = FLUIDS.register("yellow_essence_fluid",
+            () -> new ForgeFlowingFluid.Source(ModFluids.YELLOW_ESSENCE_FLUID_PROPERTIES));
+    public static final RegistryObject<FlowingFluid> FLOWING_YELLOW_ESSENCE = FLUIDS.register("yellow_essence_water",
+            () -> new ForgeFlowingFluid.Flowing(ModFluids.YELLOW_ESSENCE_FLUID_PROPERTIES));
 
-    public static final ResourceLocation WHITE_ESSENCE_STILL_LOCATION = new ResourceLocation("gempire:blocks/white_essence_still");
-    public static final ResourceLocation WHITE_ESSENCE_FLOWING_LOCATION = new ResourceLocation("gempire:blocks/white_essence_flowing");
 
-    public static RegistryObject<FlowingFluid> PINK_ESSENCE = FLUIDS.register("pink_essence", () ->
-            new ForgeFlowingFluid.Source(ModFluids.PinkEssenceProperties())
-    );
-    public static RegistryObject<FlowingFluid> PINK_ESSENCE_FLOWING = FLUIDS.register("pink_essence_flowing", () ->
-            new ForgeFlowingFluid.Flowing(ModFluids.PinkEssenceProperties())
-    );
-    public static RegistryObject<FlowingFluid> BLUE_ESSENCE = FLUIDS.register("blue_essence", () ->
-            new ForgeFlowingFluid.Source(ModFluids.BlueEssenceProperties())
-    );
-    public static RegistryObject<FlowingFluid> BLUE_ESSENCE_FLOWING = FLUIDS.register("blue_essence_flowing", () ->
-            new ForgeFlowingFluid.Flowing(ModFluids.BlueEssenceProperties())
-    );
-    public static RegistryObject<FlowingFluid> YELLOW_ESSENCE = FLUIDS.register("yellow_essence", () ->
-            new ForgeFlowingFluid.Source(ModFluids.YellowEssenceProperties())
-    );
-    public static RegistryObject<FlowingFluid> YELLOW_ESSENCE_FLOWING = FLUIDS.register("yellow_essence_flowing", () ->
-            new ForgeFlowingFluid.Flowing(ModFluids.YellowEssenceProperties())
-    );
-    public static RegistryObject<FlowingFluid> WHITE_ESSENCE = FLUIDS.register("white_essence", () ->
-            new ForgeFlowingFluid.Source(ModFluids.WhiteEssenceProperties())
-    );
-    public static RegistryObject<FlowingFluid> WHITE_ESSENCE_FLOWING = FLUIDS.register("white_essence_flowing", () ->
-            new ForgeFlowingFluid.Flowing(ModFluids.WhiteEssenceProperties())
-    );
+    public static final ForgeFlowingFluid.Properties YELLOW_ESSENCE_FLUID_PROPERTIES = new ForgeFlowingFluid.Properties(
+            ModFluidTypes.YELLOW_ESSENCE_FLUID_TYPE, SOURCE_YELLOW_ESSENCE, FLOWING_YELLOW_ESSENCE)
+            .slopeFindDistance(2).levelDecreasePerBlock(2).block(ModBlocks.YELLOW_ESSENCE_BLOCK)
+            .bucket(ModItems.YELLOW_ESSENCE);
 
-    /*public static RegistryObject<FlowingFluid> TEST_FLUID = FLUIDS.register("test_fluid", () ->
-            new ForgeFlowingFluid.Source(ModFluids.TestFluidProperties())
-    );
-    public static RegistryObject<FlowingFluid> TEST_FLUID_FLOWING = FLUIDS.register("test_fluid_flowing", () ->
-            new ForgeFlowingFluid.Flowing(ModFluids.TestFluidProperties())
-    );*/
+    public static final RegistryObject<FlowingFluid> SOURCE_BLUE_ESSENCE = FLUIDS.register("blue_essence_fluid",
+            () -> new ForgeFlowingFluid.Source(ModFluids.BLUE_ESSENCE_FLUID_PROPERTIES));
+    public static final RegistryObject<FlowingFluid> FLOWING_BLUE_ESSENCE = FLUIDS.register("blue_essence_water",
+            () -> new ForgeFlowingFluid.Flowing(ModFluids.BLUE_ESSENCE_FLUID_PROPERTIES));
 
-    /*private static ForgeFlowingFluid.Properties TestFluidProperties()
-    {
-        return new ForgeFlowingFluid.Properties(ModFluids.TEST_FLUID, ModFluids.TEST_FLUID_FLOWING,
-                FluidAttributes.builder(
-                        ModFluids.TEST_FLUID_STILL_LOCATION,
-                        ModFluids.TEST_FLUID_FLOWING_LOCATION)
-                        .overlay(ModFluids.TEST_FLUID_OVERLAY_LOCATION)
-                        .density(3000).viscosity(6000))
-                .block(ModBlocks.TEST_FLUID_BLOCK);
-    }*/
 
-    private static ForgeFlowingFluid.Properties PinkEssenceProperties()
-    {
-        return new ForgeFlowingFluid.Properties(ModFluids.PINK_ESSENCE, ModFluids.PINK_ESSENCE_FLOWING,
-                FluidAttributes.builder(
-                        ModFluids.PINK_ESSENCE_STILL_LOCATION,
-                        ModFluids.PINK_ESSENCE_FLOWING_LOCATION)
-                        .density(3000).viscosity(6000).luminosity(15))
-                .block(ModBlocks.PINK_ESSENCE_BLOCK)
-                .bucket(ModItems.PINK_ESSENCE);
-    }
+    public static final ForgeFlowingFluid.Properties BLUE_ESSENCE_FLUID_PROPERTIES = new ForgeFlowingFluid.Properties(
+            ModFluidTypes.BLUE_ESSENCE_FLUID_TYPE, SOURCE_BLUE_ESSENCE, FLOWING_BLUE_ESSENCE)
+            .slopeFindDistance(2).levelDecreasePerBlock(2).block(ModBlocks.BLUE_ESSENCE_BLOCK)
+            .bucket(ModItems.BLUE_ESSENCE);
 
-    private static ForgeFlowingFluid.Properties BlueEssenceProperties()
-    {
-        return new ForgeFlowingFluid.Properties(ModFluids.BLUE_ESSENCE, ModFluids.BLUE_ESSENCE_FLOWING,
-                FluidAttributes.builder(
-                        ModFluids.BLUE_ESSENCE_STILL_LOCATION,
-                        ModFluids.BLUE_ESSENCE_FLOWING_LOCATION)
-                        .density(3000).viscosity(6000).luminosity(15))
-                .block(ModBlocks.BLUE_ESSENCE_BLOCK)
-                .bucket(ModItems.BLUE_ESSENCE);
-    }
+    public static final RegistryObject<FlowingFluid> SOURCE_WHITE_ESSENCE = FLUIDS.register("white_essence_fluid",
+            () -> new ForgeFlowingFluid.Source(ModFluids.WHITE_ESSENCE_FLUID_PROPERTIES));
+    public static final RegistryObject<FlowingFluid> FLOWING_WHITE_ESSENCE = FLUIDS.register("white_essence_water",
+            () -> new ForgeFlowingFluid.Flowing(ModFluids.WHITE_ESSENCE_FLUID_PROPERTIES));
 
-    private static ForgeFlowingFluid.Properties YellowEssenceProperties()
-    {
-        return new ForgeFlowingFluid.Properties(ModFluids.YELLOW_ESSENCE, ModFluids.YELLOW_ESSENCE_FLOWING,
-                FluidAttributes.builder(
-                        ModFluids.YELLOW_ESSENCE_STILL_LOCATION,
-                        ModFluids.YELLOW_ESSENCE_FLOWING_LOCATION)
-                        .density(3000).viscosity(6000).luminosity(15))
-                .block(ModBlocks.YELLOW_ESSENCE_BLOCK)
-                .bucket(ModItems.YELLOW_ESSENCE);
-    }
 
-    private static ForgeFlowingFluid.Properties WhiteEssenceProperties()
-    {
-        return new ForgeFlowingFluid.Properties(ModFluids.WHITE_ESSENCE, ModFluids.WHITE_ESSENCE_FLOWING,
-                FluidAttributes.builder(
-                        ModFluids.WHITE_ESSENCE_STILL_LOCATION,
-                        ModFluids.WHITE_ESSENCE_FLOWING_LOCATION)
-                        .density(3000).viscosity(6000).luminosity(15))
-                .block(ModBlocks.WHITE_ESSENCE_BLOCK)
-                .bucket(ModItems.WHITE_ESSENCE);
-    }
+    public static final ForgeFlowingFluid.Properties WHITE_ESSENCE_FLUID_PROPERTIES = new ForgeFlowingFluid.Properties(
+            ModFluidTypes.WHITE_ESSENCE_FLUID_TYPE, SOURCE_WHITE_ESSENCE, FLOWING_WHITE_ESSENCE)
+            .slopeFindDistance(2).levelDecreasePerBlock(2).block(ModBlocks.WHITE_ESSENCE_BLOCK)
+            .bucket(ModItems.WHITE_ESSENCE);
 
     public static void registerFluidBuckets(){
-        TankTE.FLUID_BUCKETS.put(ModFluids.WHITE_ESSENCE.get(), ModItems.WHITE_ESSENCE.get());
-        TankTE.FLUID_BUCKETS.put(ModFluids.YELLOW_ESSENCE.get(), ModItems.YELLOW_ESSENCE.get());
-        TankTE.FLUID_BUCKETS.put(ModFluids.BLUE_ESSENCE.get(), ModItems.BLUE_ESSENCE.get());
-        TankTE.FLUID_BUCKETS.put(ModFluids.PINK_ESSENCE.get(), ModItems.PINK_ESSENCE.get());
+        TankTE.FLUID_BUCKETS.put(ModFluids.SOURCE_WHITE_ESSENCE.get(), ModItems.WHITE_ESSENCE.get());
+        TankTE.FLUID_BUCKETS.put(ModFluids.SOURCE_YELLOW_ESSENCE.get(), ModItems.YELLOW_ESSENCE.get());
+        TankTE.FLUID_BUCKETS.put(ModFluids.SOURCE_BLUE_ESSENCE.get(), ModItems.BLUE_ESSENCE.get());
+        TankTE.FLUID_BUCKETS.put(ModFluids.SOURCE_PINK_ESSENCE.get(), ModItems.PINK_ESSENCE.get());
         TankTE.FLUID_BUCKETS.put(Fluids.WATER, Items.WATER_BUCKET);
         TankTE.FLUID_BUCKETS.put(Fluids.LAVA, Items.LAVA_BUCKET);
+    }
+    public static void register(IEventBus eventBus) {
+        FLUIDS.register(eventBus);
     }
 }

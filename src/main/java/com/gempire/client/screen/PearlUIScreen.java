@@ -22,8 +22,6 @@ import net.minecraft.resources.ResourceLocation;
 import com.mojang.math.Quaternion;
 import com.mojang.math.Vector3f;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
 
 import java.util.ArrayList;
 
@@ -51,7 +49,7 @@ public class PearlUIScreen extends AbstractContainerScreen<PearlUIContainer> {
         int x = (this.width - this.imageWidth) / 2;
         int y = (this.height - this.imageHeight) / 2;
 
-        this.nameBox = new EditBox(this.font, x + 74, y + 9, 101, 12, new TextComponent("Sussy"));
+        this.nameBox = new EditBox(this.font, x + 74, y + 9, 101, 12, Component.translatable("Sussy"));
         this.nameBox.setBordered(true);
         this.nameBox.setVisible(true);
         String name = this.menu.gem.customName() ? this.menu.gem.getCustomName().getString() : this.menu.gem.getDisplayName().getString();
@@ -70,7 +68,7 @@ public class PearlUIScreen extends AbstractContainerScreen<PearlUIContainer> {
             ModPacketHandler.INSTANCE.sendToServer(new C2SRequestPageChange(this.menu.gem.getId(), true));
         }));
 
-        addRenderableWidget(new Button(this.leftPos + 10, this.topPos + 108, 83, 20, new TranslatableComponent("screens.gempire.poof"),
+        addRenderableWidget(new Button(this.leftPos + 10, this.topPos + 108, 83, 20, Component.translatable("screens.gempire.poof"),
                 (button) -> {
             ModPacketHandler.INSTANCE.sendToServer(new C2SRequestPoof(this.menu.gem.getId()));
             this.onClose();
@@ -138,19 +136,19 @@ public class PearlUIScreen extends AbstractContainerScreen<PearlUIContainer> {
         int ddOffsetOutfit = this.menu.gem.getOutfitVariant() > 9 ? -3 : 0;
         int ddOffsetInsignia = this.menu.gem.getInsigniaVariant() > 9 ? -3 : 0;
 
-        this.font.draw(matrixStack, new TextComponent("Page: " + (this.menu.gem.getPage() + 1)),
+        this.font.draw(matrixStack, Component.translatable("Page: " + (this.menu.gem.getPage() + 1)),
                 i + 190, j + 11, 4210752);
-        this.font.draw(matrixStack, new TextComponent("Hair:"),
+        this.font.draw(matrixStack, Component.translatable("Hair:"),
                 i + 77, j + 36, 0xFFFFFF);
-        this.font.draw(matrixStack, new TextComponent("Uniform:"),
+        this.font.draw(matrixStack, Component.translatable("Uniform:"),
                 i + 77, j + 54, 0xFFFFFF);
-        this.font.draw(matrixStack, new TextComponent("Insignia:"),
+        this.font.draw(matrixStack, Component.translatable("Insignia:"),
                 i + 77, j + 72, 0xFFFFFF);
-        this.font.draw(matrixStack, new TextComponent("" + (this.menu.gem.getHairVariant() + 1)),
+        this.font.draw(matrixStack, Component.translatable("" + (this.menu.gem.getHairVariant() + 1)),
                 i + 107 + ddOffsetHair, j + 37, 0xFFFFFF);
-        this.font.draw(matrixStack, new TextComponent("" + (this.menu.gem.getOutfitVariant() + 1)),
+        this.font.draw(matrixStack, Component.translatable("" + (this.menu.gem.getOutfitVariant() + 1)),
                 i + 124 + ddOffsetOutfit, j + 55, 0xFFFFFF);
-        this.font.draw(matrixStack, new TextComponent("" + (this.menu.gem.getInsigniaVariant() + 1)),
+        this.font.draw(matrixStack, Component.translatable("" + (this.menu.gem.getInsigniaVariant() + 1)),
                 i + 123 + ddOffsetInsignia, j + 73, 0xFFFFFF);
     }
 
@@ -219,8 +217,8 @@ public class PearlUIScreen extends AbstractContainerScreen<PearlUIContainer> {
     }
 
     public void drawStats(PoseStack stack, int x, int y){
-        Component health = new TranslatableComponent("screens.gempire.health");
-        this.font.draw(stack, new TextComponent(health.getString() + ": " + (int)this.menu.gem.getHealth()
+        Component health = Component.translatable("screens.gempire.health");
+        this.font.draw(stack, Component.translatable(health.getString() + ": " + (int)this.menu.gem.getHealth()
                 + " / " + (int)this.menu.gem.getMaxHealth()), x + 10, y + 97, 4210752);
     }
 

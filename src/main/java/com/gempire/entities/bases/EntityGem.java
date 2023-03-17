@@ -18,10 +18,11 @@ import com.gempire.util.GemPlacements;
 import com.gempire.util.PaletteType;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.commands.LocateCommand;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.client.Minecraft;
-import net.minecraft.server.commands.LocateBiomeCommand;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
@@ -49,7 +50,6 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.levelgen.feature.StructureFeature;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
 import net.minecraft.world.level.saveddata.maps.MapDecoration;
@@ -66,8 +66,6 @@ import java.io.IOException;
 import java.util.*;
 
 import net.minecraft.core.NonNullList;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -148,7 +146,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
 
     public Player currentPlayer;
 
-    public static final SimpleCommandExceptionType LOCATE_FAILED_EXCEPTION = new SimpleCommandExceptionType(new TranslatableComponent("commands.gempire.faillocate"));
+    public static final SimpleCommandExceptionType LOCATE_FAILED_EXCEPTION = new SimpleCommandExceptionType(Component.translatable("commands.gempire.faillocate"));
     public int maxStructureTime = 5 * 20;
     public int structureTime = 0;
     public ArrayList<String> structures = new ArrayList<>();
@@ -218,7 +216,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.setMarking2Variant(this.generateMarking2Variant());
         this.setMarking2Color(this.generatePaletteColor(PaletteType.MARKINGS_2));
         this.setCustomName(this.getNickname());
-        this.generateScoutList();
+        //this.generateScoutList();
         this.idlePowers = this.generateIdlePowers();
         if(this.spawnGem != null){
             this.spawnGem.remove(RemovalReason.DISCARDED);
@@ -453,7 +451,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                     }
                     else {
                         if(this.canOpenInventoryByDefault()) {
-                            NetworkHooks.openGui((ServerPlayer) player, this, buf -> buf.writeInt(this.getId()));
+                            NetworkHooks.openScreen((ServerPlayer) player, this, buf -> buf.writeInt(this.getId()));
                         }
                         if (this.isRideable()) {
                             if (!this.isVehicle()) {
@@ -469,7 +467,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                             this.addOwner(player.getUUID());
                             setFollow(player.getUUID());
                             this.setMovementType((byte) 2);
-                            player.sendMessage(new TranslatableComponent("messages.gempire.entity.claimed"), this.getUUID());
+                            player.sendSystemMessage(Component.translatable("messages.gempire.entity.claimed"));
                             return super.interactAt(player, vec, hand);
                         }
                     }
@@ -486,7 +484,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                         }
                     }
                     else if (player.getMainHandItem().getItem() == Items.PAPER){
-                        NetworkHooks.openGui((ServerPlayer) player, this, buf -> buf.writeInt(this.getId()));
+                        NetworkHooks.openScreen((ServerPlayer) player, this, buf -> buf.writeInt(this.getId()));
                     }
                     else if(player.getMainHandItem().getItem() == Items.BOOK){
                         String list1 = "";
@@ -507,8 +505,8 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                                 list2 += this.biomes.get(i) + ", ";
                             }
                         }
-                        player.sendMessage(new TextComponent("Findable Structures: " + list1), UUID.randomUUID());
-                        player.sendMessage(new TextComponent("Findable Biomes: " + list2), UUID.randomUUID());
+                        player.sendSystemMessage(Component.translatable("Findable Structures: " + list1));
+                        player.sendSystemMessage(Component.translatable("Findable Biomes: " + list2));
                     }
                 }
             }
@@ -530,19 +528,19 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             this.addMovementType(1);
             switch(this.getMovementType()){
                 case 1:
-                    player.sendMessage(new TranslatableComponent("messages.gempire.entity.wander"), this.getUUID());
+                    player.sendSystemMessage(Component.translatable("messages.gempire.entity.wander"));
                     return;
                 case 2:
-                    player.sendMessage(new TranslatableComponent("messages.gempire.entity.follow"), this.getUUID());
+                    player.sendSystemMessage(Component.translatable("messages.gempire.entity.follow"));
                     return;
                 default:
-                    player.sendMessage(new TranslatableComponent("messages.gempire.entity.stay"), this.getUUID());
+                    player.sendSystemMessage(Component.translatable("messages.gempire.entity.stay"));
                     return;
             }
         }
         else if(this.getMovementType() == 2){
             this.setMovementType((byte) 0);
-            player.sendMessage(new TranslatableComponent("messages.gempire.entity.stay"), this.getUUID());
+            player.sendSystemMessage(Component.translatable("messages.gempire.entity.stay"));
             this.GUARD_POS[0] = (int) this.getX();
             this.GUARD_POS[1] = (int) this.getY();
             this.GUARD_POS[2] = (int) this.getZ();
@@ -625,13 +623,13 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         super.die(source);
     }
 
-    public TranslatableComponent getNickname(){
+    public Component getNickname(){
         if(this instanceof EntityVaryingGem){
             if(((EntityVaryingGem)this).UsesUniqueNames()) {
-                return new TranslatableComponent("nickname.gempire." + this.getWholeGemName() + "_" + this.getSkinColorVariant());
+                return Component.translatable("nickname.gempire." + this.getWholeGemName() + "_" + this.getSkinColorVariant());
             }
         }
-        return new TranslatableComponent("entity.gempire." + this.getWholeGemName());
+        return Component.translatable("entity.gempire." + this.getWholeGemName());
     }
 
     public Item getGemItem() {
@@ -775,7 +773,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         BufferedImage palette = null;
         try {
             if(getServer().isSingleplayer()) {
-                palette = ImageIO.read(Minecraft.getInstance().getResourceManager().getResource(loc).getInputStream());
+                palette = ImageIO.read(Minecraft.getInstance().getResourceManager().getResource(loc).get().open());
             }
             else{
 
@@ -1004,11 +1002,11 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                 return ((EntityVaryingGem)this).NameFromColor((byte) this.getSkinColorVariant());
             }
         }
-        return this.getType().getRegistryName().toString().replaceAll("(?i)item", "").replaceAll(this.getModID(), "").replaceAll("(?i)gem", "").replaceAll("_", "").replaceAll(":", "").replaceAll(" ", "");
+        return ForgeRegistries.ENTITY_TYPES.getKey(this.getType()).toString().replaceAll("(?i)item", "").replaceAll(this.getModID(), "").replaceAll("(?i)gem", "").replaceAll("_", "").replaceAll(":", "").replaceAll(" ", "");
     }
 
     public String getWholeGemName(){
-        return this.getType().getRegistryName().toString().replaceAll("(?i)item", "").replaceAll(this.getModID(), "").replaceAll("(?i)gem", "").replaceAll("_", "").replaceAll(":", "").replaceAll(" ", "");
+        return ForgeRegistries.ENTITY_TYPES.getKey(this.getType()).toString().replaceAll("(?i)item", "").replaceAll(this.getModID(), "").replaceAll("(?i)gem", "").replaceAll("_", "").replaceAll(":", "").replaceAll(" ", "");
     }
 
     //ABILITY STUFF
@@ -1464,7 +1462,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
 
     */
 
-    public static BlockPos findStructure(EntityGem gem, StructureFeature<?> structure) {
+    /*public static BlockPos findStructure(EntityGem gem, StructureFeature<?> structure) {
         if(gem.level.isClientSide){
             return BlockPos.ZERO;
         }
@@ -1485,7 +1483,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             return BlockPos.ZERO;
         }
         Biome biome = gem.getServer().registryAccess().registryOrThrow(Registry.BIOME_REGISTRY).getOptional(biomeResource).orElseThrow(() -> {
-            return LocateBiomeCommand.ERROR_INVALID_BIOME.create(biomeResource);
+            return LocateCommand.ERROR_BIOME_INVALID.create(biomeResource);
         });
         String s = biomeResource.toString();
         BlockPos blockpos = new BlockPos(gem.blockPosition());
@@ -1506,10 +1504,10 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         if(this.consumeItemCheck(Items.MAP)) {
             if (pos == BlockPos.ZERO) {
                 if(biome) {
-                    player.sendMessage(new TranslatableComponent("commands.gempire.norecbio"), UUID.randomUUID());
+                    player.sendSystemMessage(Component.translatable("commands.gempire.norecbio"), UUID.randomUUID());
                 }
                 else{
-                    player.sendMessage(new TranslatableComponent("commands.gempire.norecstruc"), UUID.randomUUID());
+                    player.sendSystemMessage(Component.translatable("commands.gempire.norecstruc"), UUID.randomUUID());
                 }
                 return;
             }
@@ -1518,7 +1516,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             MapItemSavedData.addTargetDecoration(map, pos, "location", MapDecoration.Type.RED_X);
             String name = biome ? biomeResource.toString().replaceAll("minecraft:", "") :
                     structure.getFeatureName().replaceAll("minecraft:", "");
-            map.setHoverName(new TextComponent(name));
+            map.setHoverName(Component.translatable(name));
             for (int i = 0; i < EntityGem.NUMBER_OF_SLOTS - 6; i++) {
                 if (this.getItem(i) == ItemStack.EMPTY) {
                     this.setItem(i, map);
@@ -1529,10 +1527,10 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             if (!done) {
                 this.spawnAtLocation(map);
             }
-            player.sendMessage(new TranslatableComponent("commands.gempire.foundit"), UUID.randomUUID());
+            player.sendSystemMessage(Component.translatable("commands.gempire.foundit"), UUID.randomUUID());
         }
         else{
-            player.sendMessage(new TranslatableComponent("commands.gempire.nomap"), UUID.randomUUID());
+            player.sendSystemMessage(Component.translatable("commands.gempire.nomap"), UUID.randomUUID());
         }
     }
 
@@ -1549,7 +1547,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     public void generateScoutList(){
         //STRUCTURES
         ArrayList<ResourceLocation> rls = new ArrayList<>();
-        Set<ResourceLocation> sussy = net.minecraftforge.registries.ForgeRegistries.STRUCTURE_FEATURES.getKeys();
+        Set<ResourceLocation> sussy = ForgeRegistries.STRUCTURE_FEATURES.getKeys();
         rls.addAll(sussy);
         ArrayList<ResourceLocation> resourceLocations = new ArrayList<>();
         while(resourceLocations.size() < 3){
@@ -1557,7 +1555,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             if(!resourceLocations.contains(rls.get(m))) resourceLocations.add(rls.get(m));
         }
         for(ResourceLocation key : resourceLocations){
-            this.structures.add(net.minecraftforge.registries.ForgeRegistries.STRUCTURE_FEATURES.getValue(key).getRegistryName().toString().replace("minecraft:", ""));
+            this.structures.add(ForgeRegistries.SRE_FEATURES.getValue(key).getRegistryName().toString().replace("minecraft:", ""));
         }
 
         //BIOMES
@@ -1571,13 +1569,13 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             if(!resourceLocations1.contains(rls1.get(m))) resourceLocations1.add(rls1.get(m));
         }
         for(ResourceLocation key : resourceLocations1){
-            this.biomes.add(net.minecraftforge.registries.ForgeRegistries.BIOMES.getValue(key).getRegistryName().toString().replace("minecraft:", ""));
+            this.biomes.add(ForgeRegistries.BIOMES.getValue(key).toString().replace("minecraft:", ""));
         }
     }
 
     public boolean isOnStructureCooldown(){
         return true;
-    }
+    }*/
 
     //-------------------------------------------------------------------------------------------------------------------------------------------------------------//
 

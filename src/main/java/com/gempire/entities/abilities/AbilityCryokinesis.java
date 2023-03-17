@@ -22,7 +22,6 @@ import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.RangedAttackMob;
@@ -82,6 +81,6 @@ public class AbilityCryokinesis extends Ability implements IRangedAbility, IViol
     }
     @Override
     public Component getName() {
-        return new TranslatableComponent("ability.gempire.cryokinesis");
+        return Component.translatable("ability.gempire.cryokinesis");
     }
 }

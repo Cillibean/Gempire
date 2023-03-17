@@ -9,7 +9,6 @@ import com.gempire.util.Abilities;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 
 import javax.annotation.Nullable;
 import java.util.UUID;
@@ -23,7 +22,7 @@ public class AbilityBrewEssence extends Ability implements IAlchemyAbility {
 
     @Override
     public Component getName() {
-        return new TranslatableComponent("ability.gempire.essence");
+        return Component.translatable("ability.gempire.essence");
     }
 
     @Override
@@ -61,7 +60,7 @@ public class AbilityBrewEssence extends Ability implements IAlchemyAbility {
             flagXP = true;
         }
         else{
-            player.sendMessage(new TranslatableComponent("messages.gempire.entity.player_need_xp"), UUID.randomUUID());
+            player.sendSystemMessage(Component.translatable("messages.gempire.entity.player_need_xp"));
         }
         return flagXP;
     }

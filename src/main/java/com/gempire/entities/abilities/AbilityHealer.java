@@ -9,7 +9,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 
 public class AbilityHealer extends Ability implements IEffectAbility {
 
@@ -31,6 +30,6 @@ public class AbilityHealer extends Ability implements IEffectAbility {
 
     @Override
     public Component getName() {
-        return new TranslatableComponent("ability.gempire.healer");
+        return Component.translatable("ability.gempire.healer");
     }
 }

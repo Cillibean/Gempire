@@ -1,6 +1,7 @@
 package com.gempire.items;
 
 import com.gempire.systems.machine.interfaces.IPowerProvider;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -11,7 +12,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.phys.HitResult;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.level.Level;
 
 import javax.annotation.Nullable;
@@ -58,8 +58,8 @@ public class ItemIceShard extends Item  {
     public boolean testWire(Level world, Player player, BlockPos pos, ItemStack stack) {
         if(world.getBlockEntity(pos) instanceof IPowerProvider){
             IPowerProvider provider = (IPowerProvider) world.getBlockEntity(pos);
-            player.sendMessage(new TextComponent("VOLTAGE: " + provider.getVoltage() + "V"), player.getUUID());
-            player.sendMessage(new TextComponent("POWER: " + provider.getBattery().getCharge() + "J"), player.getUUID());
+            player.sendSystemMessage(Component.translatable("VOLTAGE: " + provider.getVoltage() + "V"));
+            player.sendSystemMessage(Component.translatable("POWER: " + provider.getBattery().getCharge() + "J"));
             return true;
         }
         return false;

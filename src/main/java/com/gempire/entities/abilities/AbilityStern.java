@@ -12,8 +12,6 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
-import net.minecraftforge.event.world.NoteBlockEvent;
 import org.lwjgl.system.CallbackI;
 
 import java.util.ArrayList;
@@ -45,7 +43,7 @@ public class AbilityStern extends Ability implements IAreaAbility, IEffectAbilit
     }
     @Override
     public Component getName() {
-        return new TranslatableComponent("ability.gempire.stern");
+        return Component.translatable("ability.gempire.stern");
     }
 
     @Override

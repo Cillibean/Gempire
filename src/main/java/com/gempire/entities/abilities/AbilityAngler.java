@@ -8,7 +8,6 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerLevel;
 
 import java.util.ArrayList;
@@ -29,7 +28,7 @@ public class AbilityAngler extends Ability implements IIdleAbility {
 
     @Override
     public Component getName() {
-        return new TranslatableComponent("ability.gempire.angler");
+        return Component.translatable("ability.gempire.angler");
     }
 
     @Override

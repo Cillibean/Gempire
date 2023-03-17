@@ -9,6 +9,7 @@ import com.gempire.entities.gems.starter.EntityShale;
 import com.gempire.init.ModEnchants;
 import com.gempire.util.Abilities;
 import com.gempire.util.GemPlacements;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Enemy;
@@ -21,7 +22,6 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.util.*;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.Level;
@@ -263,22 +263,22 @@ public class EntityZircon extends EntityVaryingGem {
                         EntityShale.decreaseExp(this.currentPlayer, xp);
                     }
                     else{
-                        this.currentPlayer.sendMessage(new TranslatableComponent("messages.gempire.entity.enchant_not_apply"), UUID.randomUUID());
+                        this.currentPlayer.sendSystemMessage(Component.translatable("messages.gempire.entity.enchant_not_apply"));
                         return;
                     }
                 }
                 else{
-                    this.currentPlayer.sendMessage(new TranslatableComponent("messages.gempire.entity.need_lapis"), UUID.randomUUID());
+                    this.currentPlayer.sendSystemMessage(Component.translatable("messages.gempire.entity.need_lapis"));
                     return;
                 }
             }
             else{
-                this.currentPlayer.sendMessage(new TranslatableComponent("messages.gempire.entity.cant_enchant"), UUID.randomUUID());
+                this.currentPlayer.sendSystemMessage(Component.translatable("messages.gempire.entity.cant_enchant"));
                 return;
             }
         }
         else{
-            this.currentPlayer.sendMessage(new TranslatableComponent("messages.gempire.entity.player_need_xp"), UUID.randomUUID());
+            this.currentPlayer.sendSystemMessage(Component.translatable("messages.gempire.entity.player_need_xp"));
             return;
         }
     }

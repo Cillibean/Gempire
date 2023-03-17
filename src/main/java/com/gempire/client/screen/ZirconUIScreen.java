@@ -1,6 +1,5 @@
 package com.gempire.client.screen;
 
-import com.gempire.container.GemUIContainer;
 import com.gempire.container.ZirconUIContainer;
 import com.gempire.entities.abilities.AbilityZilch;
 import com.gempire.entities.abilities.base.Ability;
@@ -8,8 +7,6 @@ import com.gempire.entities.gems.EntityZircon;
 import com.gempire.init.ModEnchants;
 import com.gempire.init.ModPacketHandler;
 import com.gempire.networking.C2SRequestEnchant;
-import com.gempire.networking.C2SRequestPageChange;
-import com.gempire.networking.C2SRequestPoof;
 import com.gempire.networking.C2SRequestUpdateGemName;
 import com.gempire.util.GUIUtilities;
 import com.mojang.blaze3d.platform.Lighting;
@@ -29,10 +26,6 @@ import net.minecraft.resources.ResourceLocation;
 import com.mojang.math.Quaternion;
 import com.mojang.math.Vector3f;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.ArrayList;
 
@@ -60,7 +53,7 @@ public class ZirconUIScreen extends AbstractContainerScreen<ZirconUIContainer> {
         int y = (this.height - this.imageHeight) / 2;
         int i = this.leftPos;
         int j = this.topPos;
-        this.nameBox = new EditBox(this.font, i + 102, j + 11, 101, 12, new TextComponent("Sussy"));
+        this.nameBox = new EditBox(this.font, i + 102, j + 11, 101, 12,Component.translatable("Sussy"));
         this.nameBox.setBordered(false);
         this.nameBox.setVisible(true);
         String name = this.menu.gem.customName() ? this.menu.gem.getCustomName().getString() : this.menu.gem.getNickname().getString();
@@ -113,7 +106,7 @@ public class ZirconUIScreen extends AbstractContainerScreen<ZirconUIContainer> {
             GUIUtilities.setup(XP_ORB);
             this.blit(matrixStack, x + 45, y + 64, 0, 0, 11, 11, 11 ,11);
             int xp = this.getXP(this.getDiscountFromStack(this.menu.gem.getItem(2))) < 0 ? 0 : this.getXP(this.getDiscountFromStack(this.menu.gem.getItem(2)));
-            this.font.draw(matrixStack, new TextComponent(xp + "XP"),
+            this.font.draw(matrixStack, Component.translatable(xp + "XP"),
                     i + 59, j + 66, 0x88FF00);
         }
     }
@@ -143,19 +136,19 @@ public class ZirconUIScreen extends AbstractContainerScreen<ZirconUIContainer> {
         return level;
     }
 
-    public static TextComponent getEnchantStringFromLapisCount(EntityZircon gem){
+    public static String getEnchantStringFromLapisCount(EntityZircon gem){
         int maxEnchant = ModEnchants.VANILLA_ENCHANTMENTS.get(gem.getEnchantPage()).getMaxLevel();
         int level = ZirconUIScreen.getEnchantLevelFromLapisCount(gem);
         if(level >= maxEnchant) {
-            return new TextComponent(new TranslatableComponent(ModEnchants.VANILLA_ENCHANTMENTS.get(gem.getEnchantPage()).getDescriptionId()).getString() + " " +
-                    ZirconUIScreen.getNumeralsFromLevel(maxEnchant));
+            return Component.translatable(ModEnchants.VANILLA_ENCHANTMENTS.get(gem.getEnchantPage()).getDescriptionId()).getString() + " " +
+                    ZirconUIScreen.getNumeralsFromLevel(maxEnchant);
         }
         else if(level >= 1 && level < maxEnchant){
-            return new TextComponent(new TranslatableComponent(ModEnchants.VANILLA_ENCHANTMENTS.get(gem.getEnchantPage()).getDescriptionId()).getString() + " " +
-                    ZirconUIScreen.getNumeralsFromLevel(level));
+            return Component.translatable(ModEnchants.VANILLA_ENCHANTMENTS.get(gem.getEnchantPage()).getDescriptionId()).getString() + " " +
+                    ZirconUIScreen.getNumeralsFromLevel(level);
         }
         else{
-            return new TextComponent(new TranslatableComponent(ModEnchants.VANILLA_ENCHANTMENTS.get(gem.getEnchantPage()).getDescriptionId()).getString());
+            return Component.translatable(ModEnchants.VANILLA_ENCHANTMENTS.get(gem.getEnchantPage()).getDescriptionId()).getString();
         }
     }
 
@@ -246,10 +239,10 @@ public class ZirconUIScreen extends AbstractContainerScreen<ZirconUIContainer> {
 
 
     public void drawStats(PoseStack stack, int x, int y){
-        Component health = new TranslatableComponent("screens.gempire.health");
-        Component damage = new TranslatableComponent("screens.gempire.damage");
-        this.font.draw(stack, new TextComponent(health.getString() + ": " + (int)this.menu.gem.getHealth() + " / " + (int)this.menu.gem.getMaxHealth()), x + 12, y + 98, 4210752);
-        this.font.draw(stack, new TextComponent(damage.getString() + ": " + (int)this.menu.gem.getAttributeBaseValue(Attributes.ATTACK_DAMAGE)), x + 12, y + 110, 4210752);
+        Component health = Component.translatable("screens.gempire.health");
+        Component damage = Component.translatable("screens.gempire.damage");
+        this.font.draw(stack, Component.translatable(health.getString() + ": " + (int)this.menu.gem.getHealth() + " / " + (int)this.menu.gem.getMaxHealth()), x + 12, y + 98, 4210752);
+        this.font.draw(stack, Component.translatable(damage.getString() + ": " + (int)this.menu.gem.getAttributeBaseValue(Attributes.ATTACK_DAMAGE)), x + 12, y + 110, 4210752);
     }
 
     public void drawAbilityList(PoseStack stack, int x, int y){

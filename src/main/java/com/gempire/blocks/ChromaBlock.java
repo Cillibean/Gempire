@@ -1,5 +1,6 @@
 package com.gempire.blocks;
 
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.core.particles.ParticleTypes;
@@ -131,7 +132,7 @@ public class ChromaBlock extends DirectionalBlock {
     }
 
     @Override
-    public int getExpDrop(BlockState state, LevelReader world, BlockPos pos, int fortune, int silktouch) {
-        return 5 + (fortune * 2);
+    public int getExpDrop(BlockState state, net.minecraft.world.level.LevelReader world, RandomSource randomSource, BlockPos pos, int fortune, int silktouch) {
+        return silktouch == 0 ? 1 + randomSource.nextInt(5) : 0;
     }
 }

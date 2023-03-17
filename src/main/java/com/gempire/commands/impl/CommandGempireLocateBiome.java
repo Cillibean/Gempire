@@ -10,16 +10,16 @@ import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.ResourceLocationArgument;
 import net.minecraft.commands.synchronization.SuggestionProviders;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.TranslatableComponent;
 
 import java.util.List;
 import java.util.UUID;
 
-public class CommandGempireLocateBiome extends CommandBase {
-    public static final SimpleCommandExceptionType FAILED_EXCEPTION = new SimpleCommandExceptionType(new TranslatableComponent("commands.gempire.nounderstand"));
+public class CommandGempireLocateBiome /*extends CommandBase*/ {
+    /*public static final SimpleCommandExceptionType FAILED_EXCEPTION = new SimpleCommandExceptionType(Component.translatable("commands.gempire.nounderstand"));
 
     public CommandGempireLocateBiome(String name, int permissionLevel, boolean enabled) {
         super(name, permissionLevel, enabled);
@@ -54,5 +54,5 @@ public class CommandGempireLocateBiome extends CommandBase {
             source.getPlayerOrException().sendMessage(new TranslatableComponent("commands.gempire.nounderstand"), UUID.randomUUID());
             throw CommandGempireLocateBiome.FAILED_EXCEPTION.create();
         }
-    }
+    }*/
 }

@@ -26,8 +26,6 @@ import net.minecraft.resources.ResourceLocation;
 import com.mojang.math.Quaternion;
 import com.mojang.math.Vector3f;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fluids.FluidStack;
@@ -54,7 +52,7 @@ public class GemUIScreen extends AbstractContainerScreen<GemUIContainer> {
         super.init();
         int x = (this.width - this.imageWidth) / 2;
         int y = (this.height - this.imageHeight) / 2;
-        this.nameBox = new EditBox(this.font, x + 87, y + 69, 101, 12, new TextComponent("Sussy"));
+        this.nameBox = new EditBox(this.font, x + 87, y + 69, 101, 12, Component.translatable("Sussy"));
         this.nameBox.setBordered(true);
         this.nameBox.setVisible(true);
         String name = this.menu.gem.customName() ? this.menu.gem.getCustomName().getString() : this.menu.gem.getNickname().getString();
@@ -63,7 +61,7 @@ public class GemUIScreen extends AbstractContainerScreen<GemUIContainer> {
 
         addRenderableWidget(this.nameBox);
         this.setInitialFocus(this.nameBox);
-        addRenderableWidget(new Button(this.leftPos + 27, this.topPos + 123, 83, 20, new TranslatableComponent("screens.gempire.poof"), (button) -> {
+        addRenderableWidget(new Button(this.leftPos + 27, this.topPos + 123, 83, 20, Component.translatable("screens.gempire.poof"), (button) -> {
             ModPacketHandler.INSTANCE.sendToServer(new C2SRequestPoof(this.menu.gem.getId()));
             this.onClose();
         }));
@@ -169,10 +167,10 @@ public class GemUIScreen extends AbstractContainerScreen<GemUIContainer> {
 
 
     public void drawStats(PoseStack stack, int x, int y){
-        Component health = new TranslatableComponent("screens.gempire.health");
-        Component damage = new TranslatableComponent("screens.gempire.damage");
-        this.font.draw(stack, new TextComponent(health.getString() + ": " + (int)this.menu.gem.getHealth() + " / " + (int)this.menu.gem.getMaxHealth()), x + 12, y + 98, 4210752);
-        this.font.draw(stack, new TextComponent(damage.getString() + ": " + (int)this.menu.gem.getAttributeBaseValue(Attributes.ATTACK_DAMAGE)), x + 12, y + 110, 4210752);
+        Component health = Component.translatable("screens.gempire.health");
+        Component damage = Component.translatable("screens.gempire.damage");
+        this.font.draw(stack, Component.translatable(health.getString() + ": " + (int)this.menu.gem.getHealth() + " / " + (int)this.menu.gem.getMaxHealth()), x + 12, y + 98, 4210752);
+        this.font.draw(stack,Component.translatable(damage.getString() + ": " + (int)this.menu.gem.getAttributeBaseValue(Attributes.ATTACK_DAMAGE)), x + 12, y + 110, 4210752);
     }
 
     public void drawAbilityList(PoseStack stack, int x, int y){

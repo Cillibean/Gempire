@@ -54,7 +54,7 @@ public class PowerCrystalBlock extends SixWayConnectorBlock implements IPowerMar
                 if (worldIn.getBlockState(pos.below().below().below()).getBlock() == ModBlocks.DRILL_BLOCK.get()) {
                     BlockEntity te = worldIn.getBlockEntity(pos.below().below().below());
                     if (te instanceof InjectorTE) {
-                        NetworkHooks.openGui((ServerPlayer) player, (InjectorTE) te, pos.below().below().below());
+                        NetworkHooks.openScreen((ServerPlayer) player, (InjectorTE) te, pos.below().below().below());
                         return InteractionResult.SUCCESS;
                     }
                 }

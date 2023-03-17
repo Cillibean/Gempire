@@ -52,7 +52,7 @@ public class TankBlock extends BaseEntityBlock {
             if(worldIn.getBlockState(drillPos).getBlock() == ModBlocks.DRILL_BLOCK.get()){
                 BlockEntity te = worldIn.getBlockEntity(drillPos);
                 if (te != null && te instanceof InjectorTE) {
-                    NetworkHooks.openGui((ServerPlayer) player, (InjectorTE) te, drillPos);
+                    NetworkHooks.openScreen((ServerPlayer) player, (InjectorTE) te, drillPos);
                     return InteractionResult.SUCCESS;
                 }
             }
@@ -60,7 +60,7 @@ public class TankBlock extends BaseEntityBlock {
                 BlockPos posToCheck = state.getValue(HALF) == DoubleBlockHalf.UPPER ? pos.below() : pos;
                 BlockEntity te = worldIn.getBlockEntity(posToCheck);
                 if (te != null && te instanceof TankTE) {
-                    NetworkHooks.openGui((ServerPlayer) player, (TankTE) te, posToCheck);
+                    NetworkHooks.openScreen((ServerPlayer) player, (TankTE) te, posToCheck);
                     return InteractionResult.SUCCESS;
                 }
             }

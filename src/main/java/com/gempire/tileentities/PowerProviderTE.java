@@ -58,9 +58,9 @@ public class PowerProviderTE extends SixWayInterfaceTE implements IPowerProvider
     }
 
     @Override
-    public CompoundTag save(CompoundTag compound) {
+    public void saveAdditional(CompoundTag compound) {
         WritePoweredMachine(compound);
-        return super.save(compound);
+        super.saveAdditional(compound);
     }
 
     @Override

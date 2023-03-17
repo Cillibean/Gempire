@@ -14,7 +14,6 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 
 import javax.annotation.Nullable;
 import java.util.UUID;
@@ -51,7 +50,7 @@ public class AbilityAmphibian extends Ability implements IEffectAbility, IAlchem
 
     @Override
     public Component getName() {
-        return new TranslatableComponent("ability.gempire.amphibian");
+        return Component.translatable("ability.gempire.amphibian");
     }
 
     @Override
@@ -76,7 +75,7 @@ public class AbilityAmphibian extends Ability implements IEffectAbility, IAlchem
         }
         if(flagHeart) {
             if (this.holder.getHealth() <= this.holder.getMaxHealth() / 2 && !player.isCreative()) {
-                player.sendMessage(new TranslatableComponent("messages.gempire.entity.spodumene_sore"), UUID.randomUUID());
+                player.sendSystemMessage(Component.translatable("messages.gempire.entity.spodumene_sore"));
                 return false;
             } else {
                 flagHealth = true;
@@ -84,7 +83,7 @@ public class AbilityAmphibian extends Ability implements IEffectAbility, IAlchem
                     this.holder.actuallyHurt(DamageSource.GENERIC, this.holder.getMaxHealth() / 2);
             }
             if (player.getFoodData().getFoodLevel() < 10 && !player.isCreative()) {
-                player.sendMessage(new TranslatableComponent("messages.gempire.entity.player_hungry"), UUID.randomUUID());
+                player.sendSystemMessage(Component.translatable("messages.gempire.entity.player_hungry"));
             } else {
                 flagHunger = true;
                 if (!player.isCreative()) player.getFoodData().setFoodLevel(player.getFoodData().getFoodLevel() - 10);

@@ -221,17 +221,17 @@ public class ModBlocks {
     );
 
 
-    public static RegistryObject<LiquidBlock> PINK_ESSENCE_BLOCK = BLOCKS.register("pink_essence_block", () ->
-            new LiquidBlock(ModFluids.PINK_ESSENCE, BlockBehaviour.Properties.of(Material.WATER).noCollission().strength(100.0F).noDrops()));
+    public static final RegistryObject<LiquidBlock> PINK_ESSENCE_BLOCK = BLOCKS.register("pink_essence_block",
+            () -> new LiquidBlock(ModFluids.SOURCE_PINK_ESSENCE, BlockBehaviour.Properties.copy(Blocks.WATER)));
 
-    public static RegistryObject<LiquidBlock> BLUE_ESSENCE_BLOCK = BLOCKS.register("blue_essence_block", () ->
-            new LiquidBlock(ModFluids.BLUE_ESSENCE, BlockBehaviour.Properties.of(Material.WATER).noCollission().strength(100.0F).noDrops()));
+    public static final RegistryObject<LiquidBlock> BLUE_ESSENCE_BLOCK = BLOCKS.register("blue_essence_block",
+            () -> new LiquidBlock(ModFluids.SOURCE_BLUE_ESSENCE, BlockBehaviour.Properties.copy(Blocks.WATER)));
 
-    public static RegistryObject<LiquidBlock> YELLOW_ESSENCE_BLOCK = BLOCKS.register("yellow_essence_block", () ->
-            new LiquidBlock(ModFluids.YELLOW_ESSENCE, BlockBehaviour.Properties.of(Material.WATER).noCollission().strength(100.0F).noDrops()));
+    public static final RegistryObject<LiquidBlock> YELLOW_ESSENCE_BLOCK = BLOCKS.register("yellow_essence_block",
+            () -> new LiquidBlock(ModFluids.SOURCE_YELLOW_ESSENCE, BlockBehaviour.Properties.copy(Blocks.WATER)));
 
-    public static RegistryObject<LiquidBlock> WHITE_ESSENCE_BLOCK = BLOCKS.register("white_essence_block", () ->
-            new LiquidBlock(ModFluids.WHITE_ESSENCE, BlockBehaviour.Properties.of(Material.WATER).noCollission().strength(100.0F).noDrops()));
+    public static final RegistryObject<LiquidBlock> WHITE_ESSENCE_BLOCK = BLOCKS.register("white_essence_block",
+            () -> new LiquidBlock(ModFluids.SOURCE_WHITE_ESSENCE, BlockBehaviour.Properties.copy(Blocks.WATER)));
 
     public static final RegistryObject<Block> GEM_SEED_BLOCK = BLOCKS.register("gem_seed_block", () ->
             new GemSeedBlock(BlockBehaviour.Properties
