@@ -1,6 +1,5 @@
 package com.gempire.blocks.machine;
 
-import com.gempire.blocks.markers.IPowerMarker;
 import com.gempire.init.ModFluids;
 import com.gempire.init.ModTE;
 import com.gempire.tileentities.ShellTE;
@@ -34,7 +33,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.network.NetworkHooks;
 
-public class ShellBlock extends BaseEntityBlock implements SimpleWaterloggedBlock, IPowerMarker, EntityBlock {
+public class ShellBlock extends BaseEntityBlock implements SimpleWaterloggedBlock, EntityBlock {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     public static final IntegerProperty STAGE = IntegerProperty.create("stage", 0, 2);
     public static final BooleanProperty WATERLOGGED = BooleanProperty.create("waterlogged");

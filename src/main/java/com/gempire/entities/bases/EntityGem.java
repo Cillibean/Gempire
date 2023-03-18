@@ -556,13 +556,13 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         if(source.getDirectEntity() instanceof LivingEntity){
             LivingEntity entity = (LivingEntity) source.getDirectEntity();
             ItemStack stack = entity.getMainHandItem();
-            if(stack.getItem() instanceof ItemRejuvenator){
+            /*if(stack.getItem() instanceof ItemRejuvenator){
                 resetOwners();
                 hurt(DamageSource.GENERIC, getMaxHealth());
             }
             if(stack.getItem() instanceof ItemDestabilizer){
                 hurt(DamageSource.GENERIC, getMaxHealth());
-            }
+            }*/
         }
         if(this.isEmotional() && !source.isExplosion() && !source.isFire()) {
             if(this.emotionMeter <= this.EmotionThreshold()){
