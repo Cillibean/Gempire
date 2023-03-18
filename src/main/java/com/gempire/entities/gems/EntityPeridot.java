@@ -100,7 +100,7 @@ public class EntityPeridot extends EntityGem {
     }
     public Abilities[] definiteAbilities(){
         return new Abilities[]{
-                Abilities.TECHNICIAN, Abilities.FERROKINESIS
+                //Abilities.TECHNICIAN, Abilities.FERROKINESIS
         };
     }
 

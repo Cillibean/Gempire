@@ -100,7 +100,7 @@ public class EntityMorganite extends EntityGem {
     }
     public Abilities[] definiteAbilities(){
         return new Abilities[]{
-                Abilities.ORGANIZATION
+                //Abilities.ORGANIZATION
         };
     }
 

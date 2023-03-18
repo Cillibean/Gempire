@@ -1011,21 +1011,20 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
 
     //ABILITY STUFF
 
-    @SuppressWarnings("non-varargs")
     public ArrayList<Ability> findAbilities(String getab){
         ArrayList<Abilities> abilities = new ArrayList<>();
         ArrayList<Ability> powers = new ArrayList<>();
         if(!getab.isEmpty()) {
             String[] powerViolenceList = getab.split(",");
             for (int i = 0; i < powerViolenceList.length; i++) {
-                abilities.add(Abilities.getAbility(Integer.valueOf(powerViolenceList[i])));
+                abilities.add(Abilities.getAbility(Integer.parseInt(powerViolenceList[i])));
             }
             for (Abilities ability : abilities) {
                 //powers.add(Ability.getAbilityFromAbilities(ability).assignAbility(this));
                 Class[] parameterType = null;
                 Ability ability1 = null;
                 try {
-                    ability1 = Ability.ABILITY_FROM_ABILITIES.get(ability).getConstructor(parameterType).newInstance((Object) null).assignAbility(this);
+                    ability1 = Ability.ABILITY_FROM_ABILITIES.get(ability).getConstructor(parameterType).newInstance(null).assignAbility(this);
                     powers.add(ability1);
                     if((ability1 instanceof IEffectAbility || ability1 instanceof IAreaAbility) && !(ability1 instanceof IViolentAbility)){
                         this.entityData.set(EntityGem.USES_AREA_ABILITIES, true);
@@ -1043,7 +1042,6 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         }
         return powers;
     }
-
     public void addAbilityGoals(){
         for(Ability ability : this.getAbilityPowers()){
             if(ability instanceof ITaskAbility){

@@ -16,20 +16,20 @@ import net.minecraft.util.Mth;
 
 public class ModelGarnet<T extends EntityGem> extends ModelGem<T> {
 	// This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
-	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation("gempire", "garnet"), "main");
+	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation("gempire", "custom_model"), "main");
 	private final ModelPart Head;
 	private final ModelPart ArmLeft;
 	private final ModelPart ArmRight;
-	private final ModelPart LegLeft;
 	private final ModelPart LegRight;
+	private final ModelPart LegLeft;
 	private final ModelPart Body;
 
 	public ModelGarnet(ModelPart root) {
 		this.Head = root.getChild("Head");
 		this.ArmLeft = root.getChild("ArmLeft");
 		this.ArmRight = root.getChild("ArmRight");
-		this.LegLeft = root.getChild("LegLeft");
 		this.LegRight = root.getChild("LegRight");
+		this.LegLeft = root.getChild("LegLeft");
 		this.Body = root.getChild("Body");
 	}
 
@@ -37,7 +37,7 @@ public class ModelGarnet<T extends EntityGem> extends ModelGem<T> {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
 
-		PartDefinition Head = partdefinition.addOrReplaceChild("Head", CubeListBuilder.create().texOffs(0, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -7.0F, 0.0F));
+		PartDefinition Head = partdefinition.addOrReplaceChild("Head", CubeListBuilder.create().texOffs(0, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.2F)), PartPose.offset(0.0F, -7.0F, 0.0F));
 
 		PartDefinition Hair5 = Head.addOrReplaceChild("Hair5", CubeListBuilder.create().texOffs(0, 48).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.2F)), PartPose.offset(0.0F, 0.0F, 0.0F));
 
@@ -45,43 +45,43 @@ public class ModelGarnet<T extends EntityGem> extends ModelGem<T> {
 
 		PartDefinition Hair4 = Hair5.addOrReplaceChild("Hair4", CubeListBuilder.create().texOffs(68, 43).addBox(-6.0F, -11.1F, -4.9F, 12.0F, 16.0F, 10.0F, new CubeDeformation(-0.4F)), PartPose.offset(0.0F, 0.0F, 0.0F));
 
-		PartDefinition Hair1 = Hair5.addOrReplaceChild("Hair1", CubeListBuilder.create().texOffs(0, 26).addBox(-6.0F, -12.0F, -4.0F, 12.0F, 12.0F, 10.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
+		PartDefinition Hair1 = Hair5.addOrReplaceChild("Hair1", CubeListBuilder.create().texOffs(0, 26).addBox(-6.0F, -12.0F, -4.0F, 12.0F, 12.0F, 10.0F, new CubeDeformation(0.2F)), PartPose.offset(0.0F, 0.0F, 0.0F));
 
-		PartDefinition Hair2 = Hair5.addOrReplaceChild("Hair2", CubeListBuilder.create().texOffs(28, 80).addBox(-5.0F, -16.0F, -4.0F, 10.0F, 16.0F, 10.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
+		PartDefinition Hair2 = Hair5.addOrReplaceChild("Hair2", CubeListBuilder.create().texOffs(28, 80).addBox(-5.0F, -16.0F, -4.0F, 10.0F, 16.0F, 10.0F, new CubeDeformation(0.2F)), PartPose.offset(0.0F, 0.0F, 0.0F));
 
-		PartDefinition ArmLeft = partdefinition.addOrReplaceChild("ArmLeft", CubeListBuilder.create().texOffs(80, 0).addBox(-2.0F, -1.3F, -1.0F, 2.0F, 13.0F, 2.0F, new CubeDeformation(0.3F)), PartPose.offset(-4.5F, -3.0F, 0.0F));
+		PartDefinition ArmLeft = partdefinition.addOrReplaceChild("ArmLeft", CubeListBuilder.create().texOffs(80, 0).addBox(0.0F, -1.3F, -1.0F, 2.0F, 13.0F, 2.0F, new CubeDeformation(0.3F)), PartPose.offset(4.5F, -3.0F, 0.0F));
 
-		PartDefinition ArmPuffLeft = ArmLeft.addOrReplaceChild("ArmPuffLeft", CubeListBuilder.create().texOffs(116, 6).addBox(-2.9F, 6.0F, -1.5F, 3.0F, 4.0F, 3.0F, new CubeDeformation(0.3F)), PartPose.offset(0.0F, 0.0F, 0.0F));
+		PartDefinition ArmPuffLeft = ArmLeft.addOrReplaceChild("ArmPuffLeft", CubeListBuilder.create().texOffs(116, 6).addBox(-0.35F, 6.0F, -1.5F, 3.0F, 4.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
 
-		PartDefinition ShoulderPuffLeft = ArmLeft.addOrReplaceChild("ShoulderPuffLeft", CubeListBuilder.create().texOffs(27, 15).addBox(-4.5F, -2.0F, -2.5F, 5.0F, 5.0F, 5.0F, new CubeDeformation(-0.2F)), PartPose.offset(0.0F, -1.0F, 0.0F));
+		PartDefinition ShoulderPuffLeft = ArmLeft.addOrReplaceChild("ShoulderPuffLeft", CubeListBuilder.create().texOffs(27, 15).addBox(-0.5F, -2.0F, -2.5F, 5.0F, 5.0F, 5.0F, new CubeDeformation(-0.2F)), PartPose.offset(0.0F, -1.0F, 0.0F));
 
-		PartDefinition ArmRight = partdefinition.addOrReplaceChild("ArmRight", CubeListBuilder.create().texOffs(108, 0).mirror().addBox(0.0F, -1.3F, -1.0F, 2.0F, 13.0F, 2.0F, new CubeDeformation(0.3F)).mirror(false), PartPose.offset(4.5F, -3.0F, 0.0F));
+		PartDefinition ArmRight = partdefinition.addOrReplaceChild("ArmRight", CubeListBuilder.create().texOffs(108, 0).mirror().addBox(-2.0F, -1.3F, -1.0F, 2.0F, 13.0F, 2.0F, new CubeDeformation(0.3F)).mirror(false), PartPose.offset(-4.5F, -3.0F, 0.0F));
 
-		PartDefinition ArmPuffRight = ArmRight.addOrReplaceChild("ArmPuffRight", CubeListBuilder.create().texOffs(113, 13).addBox(-0.4F, 6.0F, -1.5F, 3.0F, 4.0F, 3.0F, new CubeDeformation(0.3F)), PartPose.offset(0.0F, 0.0F, 0.0F));
+		PartDefinition ArmPuffRight = ArmRight.addOrReplaceChild("ArmPuffRight", CubeListBuilder.create().texOffs(113, 13).addBox(-2.6F, 6.0F, -1.5F, 3.0F, 4.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
 
-		PartDefinition ShoulderPuffRight = ArmRight.addOrReplaceChild("ShoulderPuffRight", CubeListBuilder.create().texOffs(88, 32).mirror().addBox(-0.5F, -2.0F, -2.5F, 5.0F, 5.0F, 5.0F, new CubeDeformation(-0.2F)).mirror(false), PartPose.offset(0.0F, -1.0F, 0.0F));
+		PartDefinition ShoulderPuffRight = ArmRight.addOrReplaceChild("ShoulderPuffRight", CubeListBuilder.create().texOffs(88, 32).addBox(-4.5F, -2.0F, -2.5F, 5.0F, 5.0F, 5.0F, new CubeDeformation(-0.2F)), PartPose.offset(0.0F, -1.0F, 0.0F));
 
-		PartDefinition LegLeft = partdefinition.addOrReplaceChild("LegLeft", CubeListBuilder.create().texOffs(56, 43).mirror().addBox(-1.5F, 0.0F, -1.5F, 3.0F, 15.0F, 3.0F, new CubeDeformation(0.2F)).mirror(false), PartPose.offset(2.5F, 8.7F, 0.0F));
+		PartDefinition LegRight = partdefinition.addOrReplaceChild("LegRight", CubeListBuilder.create().texOffs(44, 43).addBox(-1.5F, 0.0F, -1.5F, 3.0F, 15.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(2.5F, 8.7F, 0.0F));
 
-		PartDefinition LegPuffLeft = LegLeft.addOrReplaceChild("LegPuffLeft", CubeListBuilder.create().texOffs(88, 20).addBox(-2.3F, -3.2F, -2.5F, 5.0F, 7.0F, 5.0F, new CubeDeformation(0.1F)), PartPose.offset(0.0F, 0.0F, 0.0F));
+		PartDefinition LegPuffRight = LegRight.addOrReplaceChild("LegPuffRight", CubeListBuilder.create().texOffs(108, 20).mirror().addBox(-2.3F, -3.2F, -2.5F, 5.0F, 7.0F, 5.0F, new CubeDeformation(0.1F)).mirror(false), PartPose.offset(0.0F, 0.0F, 0.0F));
 
-		PartDefinition LegRight = partdefinition.addOrReplaceChild("LegRight", CubeListBuilder.create().texOffs(44, 43).addBox(-1.5F, 0.0F, -1.5F, 3.0F, 15.0F, 3.0F, new CubeDeformation(0.2F)), PartPose.offset(-2.5F, 8.7F, 0.0F));
+		PartDefinition LegLeft = partdefinition.addOrReplaceChild("LegLeft", CubeListBuilder.create().texOffs(56, 43).mirror().addBox(-1.5F, 0.0F, -1.5F, 3.0F, 15.0F, 3.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offset(-2.5F, 8.7F, 0.0F));
 
-		PartDefinition LegPuffRight = LegRight.addOrReplaceChild("LegPuffRight", CubeListBuilder.create().texOffs(108, 20).mirror().addBox(-2.7F, -3.2F, -2.5F, 5.0F, 7.0F, 5.0F, new CubeDeformation(0.1F)).mirror(false), PartPose.offset(0.0F, 0.0F, 0.0F));
+		PartDefinition LegPuffLeft = LegLeft.addOrReplaceChild("LegPuffLeft", CubeListBuilder.create().texOffs(88, 20).addBox(-2.7F, -3.2F, -2.5F, 5.0F, 7.0F, 5.0F, new CubeDeformation(0.1F)), PartPose.offset(0.0F, 0.0F, 0.0F));
 
 		PartDefinition Body = partdefinition.addOrReplaceChild("Body", CubeListBuilder.create().texOffs(88, 0).addBox(-3.0F, 0.0F, -2.0F, 6.0F, 9.0F, 4.0F, new CubeDeformation(0.3F)), PartPose.offset(0.0F, -4.5F, 0.0F));
 
-		PartDefinition Chest = Body.addOrReplaceChild("Chest", CubeListBuilder.create().texOffs(0, 16).addBox(-4.0F, 0.0F, -2.5F, 8.0F, 5.0F, 5.0F, new CubeDeformation(0.3F)), PartPose.offset(0.0F, 0.0F, 0.0F));
+		PartDefinition CapeTop = Body.addOrReplaceChild("CapeTop", CubeListBuilder.create().texOffs(32, 0).addBox(-8.0F, -4.0F, -2.3F, 16.0F, 7.0F, 8.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -0.4F, 0.0F));
 
-		PartDefinition Neck = Body.addOrReplaceChild("Neck", CubeListBuilder.create().texOffs(0, 0).addBox(-1.0F, -4.0F, -1.0F, 2.0F, 4.0F, 2.0F, new CubeDeformation(0.3F)), PartPose.offset(0.0F, -0.5F, 0.0F));
-
-		PartDefinition Hips = Body.addOrReplaceChild("Hips", CubeListBuilder.create().texOffs(84, 13).addBox(-4.0F, 9.0F, -2.0F, 8.0F, 3.0F, 4.0F, new CubeDeformation(0.3F)), PartPose.offset(0.0F, 0.5F, 0.0F));
+		PartDefinition Cape = Body.addOrReplaceChild("Cape", CubeListBuilder.create().texOffs(1, 108).addBox(-10.0F, 0.0F, 0.0F, 20.0F, 18.0F, 0.0F, new CubeDeformation(0.3F,0.3F,0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 3.0F, 0.1047F, 0.0F, 0.0F));
 
 		PartDefinition Dress = Body.addOrReplaceChild("Dress", CubeListBuilder.create().texOffs(44, 15).addBox(-5.5F, 9.9F, -5.5F, 11.0F, 17.0F, 11.0F, new CubeDeformation(0.3F)), PartPose.offset(0.0F, -0.5F, 0.0F));
 
-		PartDefinition Cape = Body.addOrReplaceChild("Cape", CubeListBuilder.create().texOffs(1, 108).addBox(-10.0F, 0.0F, 0.0F, 20.0F, 18.0F, 0.0F, new CubeDeformation(0.3F)), PartPose.offsetAndRotation(0.0F, 0.0F, 3.0F, 0.1047F, 0.0F, 0.0F));
+		PartDefinition Neck = Body.addOrReplaceChild("Neck", CubeListBuilder.create().texOffs(0, 0).addBox(-1.0F, -4.0F, -1.0F, 2.0F, 4.0F, 2.0F, new CubeDeformation(0.3F)), PartPose.offset(0.0F, -0.5F, 0.0F));
 
-		PartDefinition CapeTop = Body.addOrReplaceChild("CapeTop", CubeListBuilder.create().texOffs(32, 0).addBox(-8.0F, -4.0F, -2.3F, 16.0F, 7.0F, 8.0F, new CubeDeformation(0.3F)), PartPose.offset(0.0F, -0.4F, 0.0F));
+		PartDefinition Chest = Body.addOrReplaceChild("Chest", CubeListBuilder.create().texOffs(0, 16).addBox(-4.0F, 0.0F, -2.5F, 8.0F, 5.0F, 5.0F, new CubeDeformation(0.3F)), PartPose.offset(0.0F, 0.0F, 0.0F));
+
+		PartDefinition Hips = Body.addOrReplaceChild("Hips", CubeListBuilder.create().texOffs(84, 13).addBox(-4.0F, 9.0F, -2.0F, 8.0F, 3.0F, 4.0F, new CubeDeformation(0.3F)), PartPose.offset(0.0F, 0.5F, 0.0F));
 
 		return LayerDefinition.create(meshdefinition, 128, 128);
 	}
@@ -109,8 +109,8 @@ public class ModelGarnet<T extends EntityGem> extends ModelGem<T> {
 		Head.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 		ArmLeft.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 		ArmRight.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-		LegLeft.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 		LegRight.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+		LegLeft.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 		Body.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 	}
 }

@@ -101,7 +101,7 @@ public class EntityLarimar extends EntityGem {
     }
     public Abilities[] definiteAbilities(){
         return new Abilities[]{
-                Abilities.CRYOKINESIS,Abilities.WATER_WALKING
+                //Abilities.CRYOKINESIS,Abilities.WATER_WALKING
         };
     }
 

@@ -1,6 +1,7 @@
 package com.gempire.client.entity.render;
 
 import com.gempire.Gempire;
+import com.gempire.client.entity.model.ModelMorganite;
 import com.gempire.client.entity.model.ModelPebble;
 import com.gempire.client.entity.model.ModelRuby;
 import com.gempire.client.entity.render.layers.*;
@@ -15,9 +16,9 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.network.chat.Component;
 
-public class RenderMorganite extends MobRenderer<EntityMorganite, ModelRuby<EntityMorganite>> {
+public class RenderMorganite extends MobRenderer<EntityMorganite, ModelMorganite<EntityMorganite>> {
 
-    public RenderMorganite(EntityRendererProvider.Context renderManagerIn, ModelRuby<EntityMorganite> baseModel) {
+    public RenderMorganite(EntityRendererProvider.Context renderManagerIn, ModelMorganite<EntityMorganite> baseModel) {
         super(renderManagerIn, baseModel, .25f);
         this.addLayer(new SkinLayer(this));
         this.addLayer(new FaceLayer(this));

@@ -98,7 +98,7 @@ public class EntityBixbite extends EntityGem {
     }
     public Abilities[] definiteAbilities(){
         return new Abilities[]{
-                Abilities.RECYCLER
+                //Abilities.RECYCLER
         };
     }
 
