@@ -69,7 +69,7 @@ public class EntityLarimar extends EntityGem {
 
     @Override
     public int generateHairVariant() {
-        return this.random.nextInt(3);
+        return this.random.nextInt(1);
     }
 
     @Override
@@ -84,7 +84,7 @@ public class EntityLarimar extends EntityGem {
 
     @Override
     public boolean hasOutfitPlacementVariant() {
-        return true;
+        return false;
     }
 
     @Override
@@ -137,17 +137,11 @@ public class EntityLarimar extends EntityGem {
     }
 
     public int generateOutfitVariant(){
-        return this.random.nextInt(4);
+        return this.random.nextInt(1);
     }
 
     public int generateInsigniaVariant(){
-        if (this.getGemPlacement() == 11) {
-            return this.getGemPlacement() != 11 ? this.getOutfitVariant() : 4;
-        } else if (this.getGemPlacement() == 17) {
-            return this.getGemPlacement() != 17 ? this.getOutfitVariant() : 5;
-        } else {
-            return this.getOutfitVariant();
-        }
+        return generateOutfitVariant();
     }
 
     @Override

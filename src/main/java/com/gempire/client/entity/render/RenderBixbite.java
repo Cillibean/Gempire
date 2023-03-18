@@ -1,6 +1,7 @@
 package com.gempire.client.entity.render;
 
 import com.gempire.Gempire;
+import com.gempire.client.entity.model.ModelBixbite;
 import com.gempire.client.entity.model.ModelRuby;
 import com.gempire.client.entity.render.layers.*;
 import com.gempire.entities.gems.EntityBismuth;
@@ -13,9 +14,9 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.network.chat.Component;
 
-public class RenderBixbite extends MobRenderer<EntityBixbite, ModelRuby<EntityBixbite>> {
+public class RenderBixbite extends MobRenderer<EntityBixbite, ModelBixbite<EntityBixbite>> {
 
-    public RenderBixbite(EntityRendererProvider.Context renderManagerIn, ModelRuby<EntityBixbite> baseModel) {
+    public RenderBixbite(EntityRendererProvider.Context renderManagerIn, ModelBixbite<EntityBixbite> baseModel) {
         super(renderManagerIn, baseModel, .25f);
         this.addLayer(new SkinLayer(this));
         this.addLayer(new FaceLayer(this));

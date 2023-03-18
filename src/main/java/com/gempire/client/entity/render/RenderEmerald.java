@@ -1,6 +1,7 @@
 package com.gempire.client.entity.render;
 
 import com.gempire.Gempire;
+import com.gempire.client.entity.model.ModelEmerald;
 import com.gempire.client.entity.model.ModelRuby;
 import com.gempire.client.entity.render.layers.*;
 import com.gempire.entities.gems.EntityAquamarine;
@@ -14,9 +15,9 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.network.chat.Component;
 
-public class RenderEmerald extends MobRenderer<EntityEmerald, ModelRuby<EntityEmerald>> {
+public class RenderEmerald extends MobRenderer<EntityEmerald, ModelEmerald<EntityEmerald>> {
 
-    public RenderEmerald(EntityRendererProvider.Context renderManagerIn, ModelRuby<EntityEmerald> baseModel) {
+    public RenderEmerald(EntityRendererProvider.Context renderManagerIn, ModelEmerald<EntityEmerald> baseModel) {
         super(renderManagerIn, baseModel, .25f);
         this.addLayer(new SkinLayer(this));
         this.addLayer(new FaceLayer(this));
