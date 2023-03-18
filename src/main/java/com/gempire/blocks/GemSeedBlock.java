@@ -5,7 +5,6 @@ import com.gempire.items.ItemChroma;
 import com.gempire.systems.injection.GemFormation;
 import com.gempire.tileentities.GemSeedTE;
 import com.gempire.tileentities.InjectorTE;
-import com.gempire.tileentities.WireTE;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;

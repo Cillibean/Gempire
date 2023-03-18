@@ -285,12 +285,6 @@ public class ModItems {
                     new Item.Properties().tab(ModItemGroup.BLOCKS)
             )
     );
-    public static final RegistryObject<Item> WIRE_BLOCK_ITEM = ITEMS.register("basic_wire_block", () ->
-            new BlockItem(
-                    ModBlocks.WIRE_BLOCK.get(),
-                    new Item.Properties().tab(ModItemGroup.BLOCKS).stacksTo(64)
-            )
-    );
     public static final RegistryObject<Item> RUINED_MARBLE_BLOCK = ITEMS.register("ruined_marble_block", () ->
             new BlockItem(
                     ModBlocks.RUINED_MARBLE_BLOCK.get(),

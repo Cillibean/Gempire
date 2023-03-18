@@ -6,11 +6,6 @@ import com.gempire.container.InjectorContainer;
 import com.gempire.events.InjectEvent;
 import com.gempire.init.*;
 import com.gempire.items.ItemChroma;
-import com.gempire.systems.machine.Battery;
-import com.gempire.systems.machine.MachineSide;
-import com.gempire.systems.machine.Socket;
-import com.gempire.systems.machine.interfaces.IPowerConsumer;
-import com.gempire.systems.machine.interfaces.IPowerGenerator;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.Fluid;
@@ -45,7 +40,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class InjectorTE extends RandomizableContainerBlockEntity implements IFluidTank, MenuProvider, IPowerConsumer {
+public class InjectorTE extends RandomizableContainerBlockEntity implements IFluidTank, MenuProvider {
     public static final int NUMBER_OF_SLOTS = 6;
     public static final int PINK_INPUT_SLOT_INDEX = 0;
     public static final int BLUE_INPUT_SLOT_INDEX = 1;
@@ -70,20 +65,11 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
         this.blueTank = new FluidTank(this.TANK_CAPACITY());
         this.yellowTank = new FluidTank(this.TANK_CAPACITY());
         this.whiteTank = new FluidTank(this.TANK_CAPACITY());
-        setupBattery(200);
-        setupInitialSockets(this);
-        //setupSocket(0, Socket.POWER_IN(MachineSide.BOTTOM), this);
-        //setupSocket(1, Socket.POWER_IN(MachineSide.TOP), this);
-        setupSocket(2, Socket.POWER_IN(MachineSide.BACK), this);
-        setupSocket(3, Socket.POWER_IN(MachineSide.FRONT), this);
-        setupSocket(4, Socket.POWER_IN(MachineSide.LEFT), this);
-        setupSocket(5, Socket.POWER_IN(MachineSide.RIGHT), this);
     }
 
     @Override
     public void load(CompoundTag nbt) {
         super.load(nbt);
-        ReadPoweredMachine(nbt);
         this.pinkTank.readFromNBT(nbt.getCompound("pinkTank"));
         this.blueTank.readFromNBT(nbt.getCompound("blueTank"));
         this.yellowTank.readFromNBT(nbt.getCompound("yellowTank"));
@@ -101,7 +87,6 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
     @Override
     public void saveAdditional(CompoundTag compound) {
         super.saveAdditional(compound);
-        WritePoweredMachine(compound);
         compound.put("pinkTank", this.pinkTank.writeToNBT(new CompoundTag()));
         compound.put("blueTank", this.blueTank.writeToNBT(new CompoundTag()));
         compound.put("yellowTank", this.yellowTank.writeToNBT(new CompoundTag()));
@@ -121,7 +106,6 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
         InjectorTE te = (InjectorTE)be;
         if(!level.isClientSide()) {
             te.HandleSlotUpdates();
-            te.ConductorTick();
         }
     }
 
@@ -175,7 +159,7 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
                 (this.getTankFromValue(0).getFluid().getFluid() != Fluids.EMPTY && this.pinkOpen ||
                         this.getTankFromValue(1).getFluid().getFluid() != Fluids.EMPTY && this.blueOpen ||
                         this.getTankFromValue(2).getFluid().getFluid() != Fluids.EMPTY && this.yellowOpen ||
-                        this.getTankFromValue(3).getFluid().getFluid() != Fluids.EMPTY && this.whiteOpen) && isPowered()) {
+                        this.getTankFromValue(3).getFluid().getFluid() != Fluids.EMPTY && this.whiteOpen)) {
             int portionToDrain = 0;
             if(this.pinkOpen){
                 portionToDrain++;
@@ -271,7 +255,7 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
             System.out.println("Facing :" + facing);
             this.getItem(InjectorTE.CHROMA_INPUT_SLOT_INDEX).shrink(1);
             this.getItem(InjectorTE.PRIME_INPUT_SLOT_INDEX).shrink(1);
-            usePower();
+
             this.level.sendBlockUpdated(this.worldPosition, this.getBlockState(), this.getBlockState(), 2);
             this.setChanged();
             InjectEvent event = new InjectEvent(gemSeedTE, seedPos);
@@ -617,115 +601,5 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
             }
         }
         //return 0;
-    }
-
-    //ENERGY
-
-    ArrayList<Socket> SOCKETS = new ArrayList<>();
-    Battery battery;
-    float voltage;
-
-    @Override
-    public ArrayList<Socket> getSockets() {
-        return SOCKETS;
-    }
-
-    @Override
-    public float getVoltage() {
-        return voltage;
-    }
-
-    @Override
-    public void combineVoltage(float inVoltage) {
-        voltage += inVoltage;
-    }
-
-    @Override
-    public void setVoltage(float inVoltage) {
-        voltage = inVoltage;
-    }
-
-    @Override
-    public boolean isSource() {
-        return false;
-    }
-
-    @Override
-    public Battery getBattery() {
-        return battery;
-    }
-
-    @Override
-    public void setupBattery(float maxCapacity) {
-        battery = new Battery(maxCapacity);
-    }
-
-    @Override
-    public void setBattery(Battery battery) {
-        this.battery = battery;
-    }
-
-    @Override
-    public BlockEntity getTE() {
-        return this;
-    }
-
-    int drawTicks = 0;
-
-    @Override
-    public int getTicks() {
-        return drawTicks;
-    }
-
-    @Override
-    public void addTick() {
-        drawTicks++;
-    }
-
-    @Override
-    public void setTicks(int ticks) {
-        drawTicks = ticks;
-    }
-
-    @Override
-    public float getBandwidth() {
-        return 2f;
-    }
-
-    @Override
-    public float minimumUnitPower() {
-        return 100;
-    }
-
-    @Override
-    public void ConductorTick() {
-        if(getTicks() > drawTicks()){
-            if(!drawFromTopGenerator()) {
-                adjustToSurroundingConductors();
-            }
-            setTicks(0);
-        }
-        addTick();
-    }
-
-    public boolean drawFromTopGenerator(){
-        BlockPos crystalPos = getBlockPos().above().above().above();
-        if(getLevel().getBlockEntity(crystalPos) instanceof IPowerGenerator){
-            IPowerGenerator generator = (IPowerGenerator) getLevel().getBlockEntity(crystalPos);
-            if(generator.getBattery().getCharge() > getHighestSurroundingPower()){
-                float powerToSet = 0;
-                if(generator.getBattery().getCharge() <= 0){
-                    powerToSet = 0;
-                }
-                else{
-                    powerToSet = generator.getBattery().getCharge() > getBandwidth() ? getBandwidth() : generator.getBattery().getCharge();
-                }
-                receivePower(powerToSet, generator);
-                return true;
-            }
-        }
-        this.level.sendBlockUpdated(this.worldPosition, this.getBlockState(), this.getBlockState(), 2);
-        this.setChanged();
-        return false;
     }
 }

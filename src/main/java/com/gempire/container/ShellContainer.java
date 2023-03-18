@@ -1,7 +1,6 @@
 package com.gempire.container;
 
 import com.gempire.Gempire;
-import com.gempire.gui.ChromaSlot;
 import com.gempire.init.ModBlocks;
 import com.gempire.init.ModContainers;
 import com.gempire.init.ModItems;

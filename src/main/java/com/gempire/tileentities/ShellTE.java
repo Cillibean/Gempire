@@ -8,10 +8,6 @@ import com.gempire.init.ModItems;
 import com.gempire.init.ModTE;
 import com.gempire.items.ItemChroma;
 import com.gempire.items.ItemGem;
-import com.gempire.systems.machine.Battery;
-import com.gempire.systems.machine.MachineSide;
-import com.gempire.systems.machine.Socket;
-import com.gempire.systems.machine.interfaces.IPowerConsumer;
 import com.gempire.util.Color;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
@@ -38,7 +34,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 
-public class ShellTE extends RandomizableContainerBlockEntity implements MenuProvider,  IPowerConsumer {
+public class ShellTE extends RandomizableContainerBlockEntity implements MenuProvider {
     public static final int NUMBER_OF_SLOTS = 5;
     public static final int CHROMA_INPUT_SLOT_INDEX = 0;
     public static final int CLAY_INPUT_SLOT_INDEX = 1;
@@ -61,20 +57,11 @@ public class ShellTE extends RandomizableContainerBlockEntity implements MenuPro
 
     public ShellTE(BlockPos pos, BlockState state) {
         super(ModTE.SHELL_TE.get(), pos, state);
-        setupBattery(800);
-        setupInitialSockets(this);
-        //setupSocket(0, Socket.POWER_IN(MachineSide.BOTTOM), this);
-        //setupSocket(1, Socket.POWER_IN(MachineSide.TOP), this);
-        setupSocket(2, Socket.POWER_IN(MachineSide.BACK), this);
-        //setupSocket(3, Socket.POWER_IN(MachineSide.FRONT), this);
-        //setupSocket(4, Socket.POWER_IN(MachineSide.LEFT), this);
-        //setupSocket(5, Socket.POWER_IN(MachineSide.RIGHT), this);
     }
 
     @Override
     public void load(CompoundTag nbt) {
         super.load(nbt);
-        ReadPoweredMachine(nbt);
         this.gravelConsumed = nbt.getInt("gravel");
         this.sandConsumed = nbt.getInt("sand");
         this.clayConsumed = nbt.getInt("clay");
@@ -91,7 +78,6 @@ public class ShellTE extends RandomizableContainerBlockEntity implements MenuPro
     @Override
     public void saveAdditional(CompoundTag compound) {
         super.saveAdditional(compound);
-        WritePoweredMachine(compound);
         compound.putInt("gravel", this.gravelConsumed);
         compound.putInt("sand", this.sandConsumed);
         compound.putInt("clay", this.clayConsumed);
@@ -107,10 +93,8 @@ public class ShellTE extends RandomizableContainerBlockEntity implements MenuPro
     public static <T extends BlockEntity> void tick(Level level, BlockPos pos, BlockState state, T be) {
         ShellTE te = (ShellTE)be;
         if(!level.isClientSide()) {
-            te.ConductorTick();
             if (te.getItem(ShellTE.PEARL_OUTPUT_SLOT_INDEX) == ItemStack.EMPTY) {
                 if (te.ticks % 100 == 0) {
-                    if (te.isPowered()) {
                         te.HandleGravelTick();
                         te.HandleSandTick();
                         te.HandleClayTick();
@@ -123,7 +107,7 @@ public class ShellTE extends RandomizableContainerBlockEntity implements MenuPro
                         if (te.sandConsumed == ShellTE.MAX_SAND) {
                             te.level.setBlockAndUpdate(pos, state.setValue(ShellBlock.STAGE, 2));
                         }
-                    }
+
                 }
                 if (te.ticks > 100) {
                     te.ticks = 0;
@@ -139,7 +123,6 @@ public class ShellTE extends RandomizableContainerBlockEntity implements MenuPro
             ItemStack stack = this.getItem(ShellTE.GRAVEL_INPUT_SLOT_INDEX);
             if (stack.getItem() == Blocks.GRAVEL.asItem()) {
                 stack.shrink(1);
-                usePower();
                 this.gravelConsumed++;
             }
         }
@@ -150,7 +133,6 @@ public class ShellTE extends RandomizableContainerBlockEntity implements MenuPro
             ItemStack stack = this.getItem(ShellTE.SAND_INPUT_SLOT_INDEX);
             if(stack.getItem() == Blocks.SAND.asItem()){
                 stack.shrink(1);
-                usePower();
                 this.sandConsumed++;
             }
         }
@@ -161,7 +143,6 @@ public class ShellTE extends RandomizableContainerBlockEntity implements MenuPro
             ItemStack stack = this.getItem(ShellTE.CLAY_INPUT_SLOT_INDEX);
             if(stack.getItem() == Items.CLAY_BALL){
                 stack.shrink(1);
-                usePower();
                 this.clayConsumed++;
             }
         }
@@ -172,7 +153,6 @@ public class ShellTE extends RandomizableContainerBlockEntity implements MenuPro
             ItemStack stack = this.getItem(ShellTE.CHROMA_INPUT_SLOT_INDEX);
             if(stack.getItem() instanceof ItemChroma){
                 ItemChroma chroma = (ItemChroma) stack.getItem();
-                usePower();
                 this.chromaConsumed = true;
                 this.chromaColor = chroma.color;
                 stack.shrink(1);
@@ -191,7 +171,6 @@ public class ShellTE extends RandomizableContainerBlockEntity implements MenuPro
                         this.level.setBlockAndUpdate(this.worldPosition.offset(ShellTE.direction(i)), Blocks.AIR.defaultBlockState());
                         this.essenceConsumed = true;
                         this.essenceMarker = true;
-                        usePower();
                         break;
                     }
                 }
@@ -232,7 +211,6 @@ public class ShellTE extends RandomizableContainerBlockEntity implements MenuPro
         if(this.gravelConsumed == ShellTE.MAX_GRAVEL && this.sandConsumed == ShellTE.MAX_SAND && this.clayConsumed == ShellTE.MAX_CLAY && this.chromaConsumed
                 && this.essenceConsumed) {
             this.formPearl(this.chromaColor);
-            usePower();
         }
     }
 
@@ -326,85 +304,6 @@ public class ShellTE extends RandomizableContainerBlockEntity implements MenuPro
         System.out.println("[DEBUG]:Handling tag on chunk load");
         this.load(tag);
     }
-
-    //ENERGY
-
-    ArrayList<Socket> SOCKETS = new ArrayList<>();
-    Battery battery;
-    float voltage;
-
-    @Override
-    public ArrayList<Socket> getSockets() {
-        return SOCKETS;
-    }
-
-    @Override
-    public float getVoltage() {
-        return voltage;
-    }
-
-    @Override
-    public void combineVoltage(float inVoltage) {
-        voltage += inVoltage;
-    }
-
-    @Override
-    public void setVoltage(float inVoltage) {
-        voltage = inVoltage;
-    }
-
-    @Override
-    public boolean isSource() {
-        return false;
-    }
-
-    @Override
-    public Battery getBattery() {
-        return battery;
-    }
-
-    @Override
-    public void setupBattery(float maxCapacity) {
-        battery = new Battery(maxCapacity);
-    }
-
-    @Override
-    public void setBattery(Battery battery) {
-        this.battery = battery;
-    }
-
-    @Override
-    public BlockEntity getTE() {
-        return this;
-    }
-
-    int drawTicks = 0;
-
-    @Override
-    public int getTicks() {
-        return drawTicks;
-    }
-
-    @Override
-    public void addTick() {
-        drawTicks++;
-    }
-
-    @Override
-    public void setTicks(int ticks) {
-        drawTicks = ticks;
-    }
-
-    @Override
-    public float getBandwidth() {
-        return 5f;
-    }
-
-    @Override
-    public float minimumUnitPower() {
-        return 10;
-    }
-
     /*
 
     1) Handle Gravel, Sand, Clay consumption in correct order.
