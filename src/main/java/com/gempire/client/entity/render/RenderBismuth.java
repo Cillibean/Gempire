@@ -1,6 +1,7 @@
 package com.gempire.client.entity.render;
 
 import com.gempire.Gempire;
+import com.gempire.client.entity.model.ModelBismuth;
 import com.gempire.client.entity.model.ModelRuby;
 import com.gempire.client.entity.render.layers.*;
 import com.gempire.entities.gems.EntityAquamarine;
@@ -13,9 +14,9 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.network.chat.Component;
 
-public class RenderBismuth extends MobRenderer<EntityBismuth, ModelRuby<EntityBismuth>> {
+public class RenderBismuth extends MobRenderer<EntityBismuth, ModelBismuth<EntityBismuth>> {
 
-    public RenderBismuth(EntityRendererProvider.Context renderManagerIn, ModelRuby<EntityBismuth> baseModel) {
+    public RenderBismuth(EntityRendererProvider.Context renderManagerIn, ModelBismuth<EntityBismuth> baseModel) {
         super(renderManagerIn, baseModel, .25f);
         this.addLayer(new SkinLayer(this));
         this.addLayer(new FaceLayer(this));

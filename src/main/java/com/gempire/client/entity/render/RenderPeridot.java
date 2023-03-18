@@ -2,6 +2,7 @@ package com.gempire.client.entity.render;
 
 import com.gempire.Gempire;
 import com.gempire.client.entity.model.ModelPearl;
+import com.gempire.client.entity.model.ModelPeridot;
 import com.gempire.client.entity.model.ModelRuby;
 import com.gempire.client.entity.render.layers.*;
 import com.gempire.entities.gems.EntityAquamarine;
@@ -15,9 +16,9 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.network.chat.Component;
 
-public class RenderPeridot extends MobRenderer<EntityPeridot, ModelRuby<EntityPeridot>> {
+public class RenderPeridot extends MobRenderer<EntityPeridot, ModelPeridot<EntityPeridot>> {
 
-    public RenderPeridot(EntityRendererProvider.Context renderManagerIn, ModelRuby<EntityPeridot> baseModel) {
+    public RenderPeridot(EntityRendererProvider.Context renderManagerIn, ModelPeridot<EntityPeridot> baseModel) {
         super(renderManagerIn, baseModel, .25f);
         this.addLayer(new SkinLayer(this));
         this.addLayer(new FaceLayer(this));
