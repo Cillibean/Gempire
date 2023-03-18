@@ -99,7 +99,7 @@ public class EntityAquamarine extends EntityGem {
     }
     public Abilities[] definiteAbilities(){
         return new Abilities[]{
-                Abilities.PARALYSIS
+                //Abilities.PARALYSIS
         };
     }
 

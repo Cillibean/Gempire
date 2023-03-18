@@ -115,7 +115,7 @@ public class EntitySpinel extends EntityVaryingGem {
     }
     public Abilities[] definiteAbilities(){
         return new Abilities[]{
-                Abilities.JESTER, Abilities.DECOY
+                //Abilities.JESTER, Abilities.DECOY
         };
     }
 
