@@ -42,21 +42,21 @@ public class ClientProxy {
         event.registerEntityRenderer(ModEntities.NEPHRITE.get(), m -> new RenderNephrite(m, new ModelNephrite<>(m.bakeLayer(ModelNephrite.LAYER_LOCATION))));
         event.registerEntityRenderer(ModEntities.SPODUMENE.get(), m -> new RenderSpodumene(m, new ModelSpodumene<>(m.bakeLayer(ModelSpodumene.LAYER_LOCATION))));
         event.registerEntityRenderer(ModEntities.ZIRCON.get(), m -> new RenderZircon(m, new ModelZircon<>(m.bakeLayer(ModelZircon.LAYER_LOCATION))));
-        event.registerEntityRenderer(ModEntities.AQUAMARINE.get(), m -> new RenderAquamarine(m, new ModelRuby<>(m.bakeLayer(ModelRuby.LAYER_LOCATION))));
+        event.registerEntityRenderer(ModEntities.AQUAMARINE.get(), m -> new RenderAquamarine(m, new ModelAquamarine<>(m.bakeLayer(ModelAquamarine.LAYER_LOCATION))));
         event.registerEntityRenderer(ModEntities.BISMUTH.get(), m -> new RenderBismuth(m, new ModelRuby<>(m.bakeLayer(ModelRuby.LAYER_LOCATION))));
-        event.registerEntityRenderer(ModEntities.BIXBITE.get(), m -> new RenderBixbite(m, new ModelRuby<>(m.bakeLayer(ModelRuby.LAYER_LOCATION))));
-        event.registerEntityRenderer(ModEntities.DEMANTOID.get(), m -> new RenderDemantoid(m, new ModelRuby<>(m.bakeLayer(ModelRuby.LAYER_LOCATION))));
-        event.registerEntityRenderer(ModEntities.EMERALD.get(), m -> new RenderEmerald(m, new ModelRuby<>(m.bakeLayer(ModelRuby.LAYER_LOCATION))));
-        event.registerEntityRenderer(ModEntities.HESSONITE.get(), m -> new RenderHessonite(m, new ModelRuby<>(m.bakeLayer(ModelRuby.LAYER_LOCATION))));
-        event.registerEntityRenderer(ModEntities.LAPIS.get(), m -> new RenderLapis(m, new ModelRuby<>(m.bakeLayer(ModelRuby.LAYER_LOCATION))));
-        event.registerEntityRenderer(ModEntities.LARIMAR.get(), m -> new RenderLarimar(m, new ModelRuby<>(m.bakeLayer(ModelRuby.LAYER_LOCATION))));
-        event.registerEntityRenderer(ModEntities.MELANITE.get(), m -> new RenderMelanite(m, new ModelRuby<>(m.bakeLayer(ModelRuby.LAYER_LOCATION))));
+        event.registerEntityRenderer(ModEntities.BIXBITE.get(), m -> new RenderBixbite(m, new ModelBixbite<>(m.bakeLayer(ModelBixbite.LAYER_LOCATION))));
+        event.registerEntityRenderer(ModEntities.DEMANTOID.get(), m -> new RenderDemantoid(m, new ModelGarnet<>(m.bakeLayer(ModelGarnet.LAYER_LOCATION))));
+        event.registerEntityRenderer(ModEntities.EMERALD.get(), m -> new RenderEmerald(m, new ModelEmerald<>(m.bakeLayer(ModelEmerald.LAYER_LOCATION))));
+        event.registerEntityRenderer(ModEntities.HESSONITE.get(), m -> new RenderHessonite(m, new ModelGarnet<>(m.bakeLayer(ModelGarnet.LAYER_LOCATION))));
+        event.registerEntityRenderer(ModEntities.LAPIS.get(), m -> new RenderLapis(m, new ModelLapis<>(m.bakeLayer(ModelLapis.LAYER_LOCATION))));
+        event.registerEntityRenderer(ModEntities.LARIMAR.get(), m -> new RenderLarimar(m, new ModelLarimar<>(m.bakeLayer(ModelLarimar.LAYER_LOCATION))));
+        event.registerEntityRenderer(ModEntities.MELANITE.get(), m -> new RenderMelanite(m, new ModelGarnet<>(m.bakeLayer(ModelGarnet.LAYER_LOCATION))));
         event.registerEntityRenderer(ModEntities.MORGANITE.get(), m -> new RenderMorganite(m, new ModelRuby<>(m.bakeLayer(ModelRuby.LAYER_LOCATION))));
         event.registerEntityRenderer(ModEntities.PERIDOT.get(), m -> new RenderPeridot(m, new ModelRuby<>(m.bakeLayer(ModelRuby.LAYER_LOCATION))));
-        event.registerEntityRenderer(ModEntities.PYROPE.get(), m -> new RenderPyrope(m, new ModelRuby<>(m.bakeLayer(ModelRuby.LAYER_LOCATION))));
-        event.registerEntityRenderer(ModEntities.RUTILE.get(), m -> new RenderRutile(m, new ModelRuby<>(m.bakeLayer(ModelRuby.LAYER_LOCATION))));
-        event.registerEntityRenderer(ModEntities.SPINEL.get(), m -> new RenderSpinel(m, new ModelRuby<>(m.bakeLayer(ModelRuby.LAYER_LOCATION))));
-        event.registerEntityRenderer(ModEntities.TOURMALINE.get(), m -> new RenderTourmaline(m, new ModelRuby<>(m.bakeLayer(ModelRuby.LAYER_LOCATION))));
+        event.registerEntityRenderer(ModEntities.PYROPE.get(), m -> new RenderPyrope(m, new ModelGarnet<>(m.bakeLayer(ModelGarnet.LAYER_LOCATION))));
+        event.registerEntityRenderer(ModEntities.RUTILE.get(), m -> new RenderRutile(m, new ModelRutile<>(m.bakeLayer(ModelRutile.LAYER_LOCATION))));
+        event.registerEntityRenderer(ModEntities.SPINEL.get(), m -> new RenderSpinel(m, new ModelSpinel<>(m.bakeLayer(ModelSpinel.LAYER_LOCATION))));
+        event.registerEntityRenderer(ModEntities.TOURMALINE.get(), m -> new RenderTourmaline(m, new ModelTourmaline<>(m.bakeLayer(ModelTourmaline.LAYER_LOCATION))));
 
         MenuScreens.register(ModContainers.TANK_CONTAINER.get(), TankScreen::new);
         MenuScreens.register(ModContainers.INJECTOR_CONTAINER.get(), InjectorScreen::new);
@@ -89,6 +89,15 @@ public class ClientProxy {
         event.registerLayerDefinition(ModelPearl.LAYER_LOCATION, ModelPearl::createBodyLayer);
         event.registerLayerDefinition(ModelObsidian.LAYER_LOCATION, ModelObsidian::createBodyLayer);
         event.registerLayerDefinition(ModelZircon.LAYER_LOCATION, ModelZircon::createBodyLayer);
+        event.registerLayerDefinition(ModelLarimar.LAYER_LOCATION, ModelLarimar::createBodyLayer);
+        event.registerLayerDefinition(ModelBixbite.LAYER_LOCATION, ModelBixbite::createBodyLayer);
         event.registerLayerDefinition(ModelTopaz.LAYER_LOCATION, ModelTopaz::createBodyLayer);
+        event.registerLayerDefinition(ModelTourmaline.LAYER_LOCATION, ModelTourmaline::createBodyLayer);
+        event.registerLayerDefinition(ModelAquamarine.LAYER_LOCATION, ModelAquamarine::createBodyLayer);
+        event.registerLayerDefinition(ModelEmerald.LAYER_LOCATION, ModelEmerald::createBodyLayer);
+        event.registerLayerDefinition(ModelLapis.LAYER_LOCATION, ModelLapis::createBodyLayer);
+        event.registerLayerDefinition(ModelSpinel.LAYER_LOCATION, ModelSpinel::createBodyLayer);
+        event.registerLayerDefinition(ModelGarnet.LAYER_LOCATION, ModelGarnet::createBodyLayer);
+        event.registerLayerDefinition(ModelRutile.LAYER_LOCATION, ModelRutile::createBodyLayer);
     }
 }

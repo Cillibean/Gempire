@@ -1,6 +1,7 @@
 package com.gempire.client.entity.render;
 
 import com.gempire.Gempire;
+import com.gempire.client.entity.model.ModelAquamarine;
 import com.gempire.client.entity.model.ModelQuartz;
 import com.gempire.client.entity.model.ModelRuby;
 import com.gempire.client.entity.render.layers.*;
@@ -14,9 +15,9 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.network.chat.Component;
 
-public class RenderAquamarine extends MobRenderer<EntityAquamarine, ModelRuby<EntityAquamarine>> {
+public class RenderAquamarine extends MobRenderer<EntityAquamarine, ModelAquamarine<EntityAquamarine>> {
 
-    public RenderAquamarine(EntityRendererProvider.Context renderManagerIn, ModelRuby<EntityAquamarine> baseModel) {
+    public RenderAquamarine(EntityRendererProvider.Context renderManagerIn, ModelAquamarine<EntityAquamarine> baseModel) {
         super(renderManagerIn, baseModel, .25f);
         this.addLayer(new SkinLayer(this));
         this.addLayer(new FaceLayer(this));

@@ -3,6 +3,7 @@ package com.gempire.client.entity.render;
 import com.gempire.Gempire;
 import com.gempire.client.entity.model.ModelPebble;
 import com.gempire.client.entity.model.ModelRuby;
+import com.gempire.client.entity.model.ModelSpinel;
 import com.gempire.client.entity.render.layers.*;
 import com.gempire.entities.gems.EntityAquamarine;
 import com.gempire.entities.gems.EntitySpinel;
@@ -15,9 +16,9 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.network.chat.Component;
 
-public class RenderSpinel extends MobRenderer<EntitySpinel, ModelRuby<EntitySpinel>> {
+public class RenderSpinel extends MobRenderer<EntitySpinel, ModelSpinel<EntitySpinel>> {
 
-    public RenderSpinel(EntityRendererProvider.Context renderManagerIn, ModelRuby<EntitySpinel> baseModel) {
+    public RenderSpinel(EntityRendererProvider.Context renderManagerIn, ModelSpinel<EntitySpinel> baseModel) {
         super(renderManagerIn, baseModel, .25f);
         this.addLayer(new SkinLayer(this));
         this.addLayer(new FaceLayer(this));
