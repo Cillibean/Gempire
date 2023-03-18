@@ -5,8 +5,6 @@ import com.gempire.init.ModPacketHandler;
 import com.gempire.networking.C2SRequestDumpFluidsInjector;
 import com.gempire.networking.C2SRequestInject;
 import com.gempire.networking.C2SRequestUpdateInjectorValves;
-import com.gempire.systems.machine.gui.EnergyMeter;
-import com.gempire.systems.machine.gui.MeterSize;
 import com.gempire.util.GUIUtilities;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -159,6 +157,5 @@ public class InjectorScreen extends AbstractContainerScreen<InjectorContainer> {
             GUIUtilities.setup(HALO_GUI_WHITE);
             this.blit(matrixStack, x, y, 0, 0, this.width, this.height);
         }
-        EnergyMeter.RenderBattery(this, matrixStack, menu.injector, menu.injector, x + 97, y + 32, MeterSize.INJECTOR);
     }
 }

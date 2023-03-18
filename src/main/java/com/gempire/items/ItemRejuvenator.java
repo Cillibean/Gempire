@@ -5,15 +5,15 @@ import net.minecraft.world.item.ItemStack;
 
 import net.minecraft.world.item.Item.Properties;
 
-public class ItemRejuvenator extends PoweredItem {
+public class ItemRejuvenator {
 
     public ItemRejuvenator(Properties properties){
-        super(properties);
+        super();
     }
 
-    @Override
+    /*@Override
     public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         use(stack);
         return super.hurtEnemy(stack, target, attacker);
-    }
+    }*/
 }

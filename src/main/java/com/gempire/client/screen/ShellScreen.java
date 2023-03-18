@@ -1,8 +1,6 @@
 package com.gempire.client.screen;
 
 import com.gempire.container.ShellContainer;
-import com.gempire.systems.machine.gui.EnergyMeter;
-import com.gempire.systems.machine.gui.MeterSize;
 import com.gempire.util.GUIUtilities;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -31,7 +29,6 @@ public class ShellScreen extends AbstractContainerScreen<ShellContainer> {
         this.renderTooltip(matrixStack, mouseX, mouseY);
         int x = (this.width - this.imageWidth) / 2;
         int y = (this.height - this.imageHeight) / 2;
-        EnergyMeter.RenderBattery(this, matrixStack, menu.shell, menu.shell, x + 8, y + 4, MeterSize.NORMAL);
     }
 
     @Override

@@ -458,14 +458,6 @@ public class ModBlocks {
             )
     );
 
-    public static final RegistryObject<Block> WIRE_BLOCK = BLOCKS.register("basic_wire_block", () ->
-            new WireBlock(0.5f, BlockBehaviour.Properties
-                    .of(Material.METAL)
-                    .strength(1f, 1f)
-                    .sound(SoundType.SNOW)
-
-            )
-    );
     public static final RegistryObject<Block> RUINED_MARBLE_BLOCK = BLOCKS.register("ruined_marble_block", () ->
             new Block(Block.Properties
                     .of(Material.STONE)

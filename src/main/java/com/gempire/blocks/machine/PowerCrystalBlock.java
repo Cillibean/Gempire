@@ -1,6 +1,5 @@
 package com.gempire.blocks.machine;
 
-import com.gempire.blocks.markers.IPowerMarker;
 import com.gempire.init.ModBlocks;
 import com.gempire.init.ModTE;
 import com.gempire.tileentities.*;
@@ -28,7 +27,7 @@ import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.network.NetworkHooks;
 
-public class PowerCrystalBlock extends SixWayConnectorBlock implements IPowerMarker, EntityBlock {
+public class PowerCrystalBlock extends SixWayConnectorBlock implements EntityBlock {
     public static final BooleanProperty INJECTOR = BooleanProperty.create("injector");
 
     public PowerCrystalBlock(float apothem, Properties properties) {
@@ -44,7 +43,7 @@ public class PowerCrystalBlock extends SixWayConnectorBlock implements IPowerMar
 
     @Override
     public boolean typeMarker(Block predicate) {
-        return predicate instanceof IPowerMarker;
+        return true;
     }
 
     @Override

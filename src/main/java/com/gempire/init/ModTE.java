@@ -34,6 +34,4 @@ public class ModTE {
     public static final RegistryObject<BlockEntityType<ShellTE>> SHELL_TE = TILE_ENTITIES.register(
             "shell_te", () -> BlockEntityType.Builder.of(ShellTE::new, ModBlocks.SHELL_BLOCK.get()).build(null));
 
-    public static final RegistryObject<BlockEntityType<WireTE>> WIRE_TE = TILE_ENTITIES.register(
-            "wire_te", () -> BlockEntityType.Builder.of(WireTE::new, ModBlocks.WIRE_BLOCK.get()).build(null));
 }

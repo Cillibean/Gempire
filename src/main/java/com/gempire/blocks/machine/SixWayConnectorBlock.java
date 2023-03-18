@@ -1,6 +1,5 @@
 package com.gempire.blocks.machine;
 
-import com.gempire.blocks.markers.IPowerMarker;
 import com.gempire.init.ModBlocks;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.pathfinder.PathComputationType;
