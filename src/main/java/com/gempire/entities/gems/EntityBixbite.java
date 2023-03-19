@@ -88,9 +88,7 @@ public class EntityBixbite extends EntityGem {
 
     @Override
     public int[] outfitPlacementVariants() {
-        return new int[]{
-                11, 17
-        };
+        return new int[] { 23 };
     }
 
     public Abilities[] possibleAbilities(){
@@ -100,7 +98,7 @@ public class EntityBixbite extends EntityGem {
     }
     public Abilities[] definiteAbilities(){
         return new Abilities[]{
-                Abilities.RECYCLER
+                //Abilities.RECYCLER
         };
     }
 
@@ -139,14 +137,8 @@ public class EntityBixbite extends EntityGem {
         return this.random.nextInt(4);
     }
 
-    public int generateInsigniaVariant(){
-        if (this.getGemPlacement() == 11) {
-            return this.getGemPlacement() != 11 ? this.getOutfitVariant() : 4;
-        } else if (this.getGemPlacement() == 17) {
-            return this.getGemPlacement() != 17 ? this.getOutfitVariant() : 5;
-        } else {
-            return this.getOutfitVariant();
-        }
+    public int generateInsigniaVariant() {
+        return getOutfitVariant();
     }
 
     @Override

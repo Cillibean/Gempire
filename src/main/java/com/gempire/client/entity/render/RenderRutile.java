@@ -2,6 +2,7 @@ package com.gempire.client.entity.render;
 
 import com.gempire.Gempire;
 import com.gempire.client.entity.model.ModelRuby;
+import com.gempire.client.entity.model.ModelRutile;
 import com.gempire.client.entity.render.layers.*;
 import com.gempire.entities.gems.EntityAquamarine;
 import com.gempire.entities.gems.EntityRuby;
@@ -14,9 +15,9 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.network.chat.Component;
 
-public class RenderRutile extends MobRenderer<EntityRutile, ModelRuby<EntityRutile>> {
+public class RenderRutile extends MobRenderer<EntityRutile, ModelRutile<EntityRutile>> {
 
-    public RenderRutile(EntityRendererProvider.Context renderManagerIn, ModelRuby<EntityRutile> baseModel) {
+    public RenderRutile(EntityRendererProvider.Context renderManagerIn, ModelRutile<EntityRutile> baseModel) {
         super(renderManagerIn, baseModel, .25f);
         this.addLayer(new SkinLayer(this));
         this.addLayer(new FaceLayer(this));

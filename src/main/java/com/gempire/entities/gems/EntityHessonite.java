@@ -99,7 +99,7 @@ public class EntityHessonite extends EntityGem {
     }
     public Abilities[] definiteAbilities(){
         return new Abilities[]{
-                Abilities.LOOTMASTER
+                //Abilities.LOOTMASTER
         };
     }
 

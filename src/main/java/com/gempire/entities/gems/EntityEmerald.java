@@ -101,7 +101,7 @@ public class EntityEmerald extends EntityGem {
     }
     public Abilities[] definiteAbilities(){
         return new Abilities[]{
-                Abilities.NEGOTIATOR
+                //Abilities.NEGOTIATOR
         };
     }
 

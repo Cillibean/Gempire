@@ -3,6 +3,7 @@ package com.gempire.client.entity.render;
 import com.gempire.Gempire;
 import com.gempire.client.entity.model.ModelRuby;
 import com.gempire.client.entity.model.ModelTopaz;
+import com.gempire.client.entity.model.ModelTourmaline;
 import com.gempire.client.entity.render.layers.*;
 import com.gempire.entities.gems.EntityTopaz;
 import com.gempire.entities.gems.EntityTourmaline;
@@ -14,9 +15,9 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.network.chat.Component;
 
-public class RenderTourmaline extends MobRenderer<EntityTourmaline, ModelRuby<EntityTourmaline>> {
+public class RenderTourmaline extends MobRenderer<EntityTourmaline, ModelTourmaline<EntityTourmaline>> {
 
-    public RenderTourmaline(EntityRendererProvider.Context renderManagerIn, ModelRuby<EntityTourmaline> baseModel) {
+    public RenderTourmaline(EntityRendererProvider.Context renderManagerIn, ModelTourmaline<EntityTourmaline> baseModel) {
         super(renderManagerIn, baseModel, .25f);
         this.addLayer(new SkinLayer(this));
         this.addLayer(new FaceLayer(this));

@@ -99,7 +99,7 @@ public class EntityMelanite extends EntityGem {
     }
     public Abilities[] definiteAbilities(){
         return new Abilities[]{
-                Abilities.ABUNDANCE, Abilities.LOOTMASTER, Abilities.FORTUNATE
+                //Abilities.ABUNDANCE, Abilities.LOOTMASTER, Abilities.FORTUNATE
         };
     }
 

@@ -1,10 +1,15 @@
-package com.gempire.client.entity.model;
+package com.gempire.client.entity.model;// Made with Blockbench 4.6.5
+// Exported for Minecraft version 1.17 or later with Mojang mappings
+// Paste this class into your mod and generate all required imports
+
 
 import com.gempire.Gempire;
+import com.gempire.entities.bases.EntityGem;
 import com.gempire.entities.bases.EntityStarterGem;
-import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
@@ -12,131 +17,83 @@ import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
-/**
- * Pebble - TheBetaZeta
- * Created using Tabula 8.0.0
- */
-
 public class ModelPebble<T extends EntityStarterGem> extends ModelGem<T> {
-    public static final ModelLayerLocation LAYER_LOCATION_P = new ModelLayerLocation(
-            new ResourceLocation(Gempire.MODID, "pebble"), "main");
-    public static final ModelLayerLocation LAYER_LOCATION_M = new ModelLayerLocation(
-            new ResourceLocation(Gempire.MODID, "mica"), "main");
-    public static final ModelLayerLocation LAYER_LOCATION_S = new ModelLayerLocation(
-            new ResourceLocation(Gempire.MODID, "shale"), "main");
-    public static final ModelLayerLocation LAYER_LOCATION_N = new ModelLayerLocation(
-            new ResourceLocation(Gempire.MODID, "nacre"), "main");
-    public ModelPart body;
-    public ModelPart head;
-    public ModelPart legr;
-    public ModelPart armr;
-    public ModelPart arml;
-    public ModelPart legl;
+	// This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
+        public static final ModelLayerLocation LAYER_LOCATION_P = new ModelLayerLocation(
+                new ResourceLocation(Gempire.MODID, "pebble"), "main");
+        public static final ModelLayerLocation LAYER_LOCATION_M = new ModelLayerLocation(
+                new ResourceLocation(Gempire.MODID, "mica"), "main");
+        public static final ModelLayerLocation LAYER_LOCATION_S = new ModelLayerLocation(
+                new ResourceLocation(Gempire.MODID, "shale"), "main");
+        public static final ModelLayerLocation LAYER_LOCATION_N = new ModelLayerLocation(
+                new ResourceLocation(Gempire.MODID, "nacre"), "main");	private final ModelPart body;
+	private final ModelPart head;
+	private final ModelPart legr;
+	private final ModelPart armr;
+	private final ModelPart arml;
+	private final ModelPart legl;
 
-    public ModelPebble(ModelPart root) {
-        head = root.getChild("head");
-        body = root.getChild("body");
-        arml = root.getChild("arml");
-        armr = root.getChild("armr");
-        legl = root.getChild("legl");
-        legr = root.getChild("legr");
-    }
+	public ModelPebble(ModelPart root) {
+		this.body = root.getChild("body");
+		this.head = root.getChild("head");
+		this.legr = root.getChild("legr");
+		this.armr = root.getChild("armr");
+		this.arml = root.getChild("arml");
+		this.legl = root.getChild("legl");
+	}
 
-    public static LayerDefinition createBodyLayer() {
-        MeshDefinition meshdefinition = new MeshDefinition();
-        PartDefinition partdefinition = meshdefinition.getRoot();
+	public static LayerDefinition createBodyLayer() {
+		MeshDefinition meshdefinition = new MeshDefinition();
+		PartDefinition partdefinition = meshdefinition.getRoot();
 
-        PartDefinition head = partdefinition.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 0)
-                        .addBox(-4F, 0.5F, -5.5f, 8.0F, 8.0F, 7.0F, new CubeDeformation(0.0F)),
-                PartPose.offset(4F, -8.5F, 4.5F));
-        head.addOrReplaceChild("head2", CubeListBuilder.create().texOffs(30, 0)
-                        .addBox(-6F, 0.0F, -6.0F, 12.0F, 8.0F, 7.0F, new CubeDeformation(0.0F)),
-                PartPose.offset(0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("head3", CubeListBuilder.create().texOffs(43, 18)
-                        .addBox(-4.0F, -1.0F, -5F, 8.0F, 10.0F, 7.0F, new CubeDeformation(0.0F)),
-                PartPose.offset(0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("headgem", CubeListBuilder.create().texOffs(0, 46)
-                        .addBox(-2F, -1F, -7.0F, 4.0F, 4.0F, 4.0F, new CubeDeformation(0.0F)),
-                PartPose.offset(0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("eyegeml", CubeListBuilder.create().texOffs(16, 46)
-                        .addBox(-5F, 3.0F, -7F, 4.0F, 4.0F, 4.0F, new CubeDeformation(0.0F)),
-                PartPose.offset(0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("eyegemr", CubeListBuilder.create().texOffs(32, 46)
-                        .addBox(1.0F, 1.0F, -6.5F, 4.0F, 4.0F, 4.0F, new CubeDeformation(0.0F)),
-                PartPose.offset(0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("backofheadgem", CubeListBuilder.create().texOffs(48, 51)
-                        .addBox(-2.0F, 1.0F, 0.0F, 4.0F, 4.0F, 4.0F, new CubeDeformation(0.0F)),
-                PartPose.offset(0.0F, 0.0F, 0.0F));
+		PartDefinition body = partdefinition.addOrReplaceChild("body", CubeListBuilder.create().texOffs(12, 15).addBox(-8.0F, 0.0F, 0.0F, 8.0F, 9.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(4.0F, 9.5F, -3.2F));
 
+		PartDefinition chestgem = body.addOrReplaceChild("chestgem", CubeListBuilder.create().texOffs(0, 38).addBox(-4.0F, 0.0F, 0.0F, 4.0F, 4.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(-2.0F, 1.0F, -2.0F));
 
-        PartDefinition body = partdefinition.addOrReplaceChild("body", CubeListBuilder.create().texOffs(12, 15)
-                        .addBox(0.0F, 0.0F, 0.0F, 8.0F, 9.0F, 5.0F, new CubeDeformation(0.0F)),
-                PartPose.offset(-4.0F, 9.5F, -3.2F));
-        body.addOrReplaceChild("dress", CubeListBuilder.create().texOffs(18, 32)
-                        .addBox(0.0F, 0.0F, 0.0F, 9.0F, 7.5F, 6.0F, new CubeDeformation(0.0F)),
-                PartPose.offset(-0.5F, 7.0F, -0.5F));
-        body.addOrReplaceChild("backgem", CubeListBuilder.create().texOffs(32, 54)
-                        .addBox(0.0F, 0.0F, 0.0F, 4.0F, 4.0F, 4.0F, new CubeDeformation(0.0F)),
-                PartPose.offset(2.0F, 1.0F, 3.0F));
-        body.addOrReplaceChild("chestgem", CubeListBuilder.create().texOffs(0, 38)
-                        .addBox(0.0F, 0.0F, 0.0F, 4.0F, 4.0F, 4.0F, new CubeDeformation(0.0F)),
-                PartPose.offset(2.0F, 1.0F, -2.0F));
+		PartDefinition dress = body.addOrReplaceChild("dress", CubeListBuilder.create().texOffs(18, 32).addBox(-9.0F, 0.0F, 0.0F, 9.0F, 7.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offset(0.5F, 7.0F, -0.5F));
 
+		PartDefinition backgem = body.addOrReplaceChild("backgem", CubeListBuilder.create().texOffs(32, 54).addBox(-4.0F, 0.0F, 0.0F, 4.0F, 4.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(-2.0F, 1.0F, 3.0F));
 
-        PartDefinition legr = partdefinition.addOrReplaceChild("legr", CubeListBuilder.create().texOffs(12, 29)
-                        .addBox(0.0F, 0.0F, 0.0F, 3.0F, 5.5F, 3.0F, new CubeDeformation(0.0F)),
-                PartPose.offset(5.0F, 9.0F, 1.0F));
-        legr.addOrReplaceChild("leggemr", CubeListBuilder.create().texOffs(16, 54)
-                        .addBox(0F, 0.0F, 0.0F, 4.0F, 4.0F, 4.0F, new CubeDeformation(0.0F)),
-                PartPose.offset(0.5F, 2.0F, -0.5F));
+		PartDefinition head = partdefinition.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 0).addBox(-4.0F, -4.0F, -4.2F, 8.0F, 8.0F, 7.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 5.5F, 0.0F));
 
+		PartDefinition head2 = head.addOrReplaceChild("head2", CubeListBuilder.create().texOffs(30, 0).addBox(-12.0F, 0.0F, 0.0F, 12.0F, 8.0F, 7.0F, new CubeDeformation(0.0F)), PartPose.offset(6.0F, -4.0F, -4.2F));
 
-        PartDefinition legl = partdefinition.addOrReplaceChild("legl", CubeListBuilder.create().texOffs(0, 29)
-                        .addBox(0.0F, 0.0F, 0.0F, 3.0F, 5.5F, 3.0F, new CubeDeformation(0.0F)),
-                PartPose.offset(0.0F, 9.0F, 1.0F));
-        legl.addOrReplaceChild("leggeml", CubeListBuilder.create().texOffs(0, 54)
-                        .addBox(0F, 0.0F, 0.0F, 4.0F, 4.0F, 4.0F, new CubeDeformation(0.0F)),
-                PartPose.offset(-0.5F, 2.0F, -0.5F));
+		PartDefinition head3 = head.addOrReplaceChild("head3", CubeListBuilder.create().texOffs(43, 18).addBox(-8.0F, 0.0F, 0.0F, 8.0F, 10.0F, 7.0F, new CubeDeformation(0.0F)), PartPose.offset(4.0F, -6.0F, -4.2F));
 
+		PartDefinition eyegem1 = head.addOrReplaceChild("eyegem1", CubeListBuilder.create().texOffs(16, 46).addBox(-4.0F, 0.0F, 0.0F, 4.0F, 4.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(5.0F, -2.0F, -5.7F));
 
-        PartDefinition armr = partdefinition.addOrReplaceChild("armr", CubeListBuilder.create().texOffs(38, 15)
-                        .addBox(0.0F, 0.0F, 0.0F, 3.0F, 7.0F, 3.0F, new CubeDeformation(0.0F)),
-                PartPose.offset(8.0F, 0.0F, 1.0F));
-        armr.addOrReplaceChild("handgemr", CubeListBuilder.create().texOffs(48, 43)
-                        .addBox(0F, 0.0F, 0.0F, 4.0F, 4.0F, 4.0F, new CubeDeformation(0.0F)),
-                PartPose.offset(0.5F, 5.0F, -0.5F));
+		PartDefinition eyegem2 = head.addOrReplaceChild("eyegem2", CubeListBuilder.create().texOffs(32, 46).addBox(-4.0F, 0.0F, 0.0F, 4.0F, 4.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(-1.0F, -2.0F, -5.7F));
 
+		PartDefinition headgem = head.addOrReplaceChild("headgem", CubeListBuilder.create().texOffs(0, 46).addBox(-4.0F, 0.0F, 0.0F, 4.0F, 4.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(2.0F, -5.0F, -5.2F));
 
-        PartDefinition arml = partdefinition.addOrReplaceChild("arml", CubeListBuilder.create().texOffs(48, 35)
-                        .addBox(0.0F, 0.0F, 0.0F, 3.0F, 7.0F, 3.0F, new CubeDeformation(0.0F)),
-                PartPose.offset(-3.0F, 0.0F, 1.0F));
-        arml.addOrReplaceChild("handgeml", CubeListBuilder.create().texOffs(48, 43)
-                        .addBox(0F, 0.0F, 0.0F, 4.0F, 4.0F, 4.0F, new CubeDeformation(0.0F)),
-                PartPose.offset(-0.5F, 5.0F, -0.5F));
+		PartDefinition Back_of_headgem = head.addOrReplaceChild("Back_of_headgem", CubeListBuilder.create().texOffs(48, 51).addBox(-4.0F, 0.0F, 0.0F, 4.0F, 4.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(2.0F, -5.5F, 1.5F));
 
+		PartDefinition legr = partdefinition.addOrReplaceChild("legr", CubeListBuilder.create().texOffs(12, 29).addBox(-3.0F, 0.0F, 0.0F, 3.0F, 5.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(-1.0F, 18.5F, -2.2F));
 
-        return LayerDefinition.create(meshdefinition, 74, 62);
-    }
+		PartDefinition leggem2 = legr.addOrReplaceChild("leggem2", CubeListBuilder.create().texOffs(16, 54).addBox(-4.0F, 0.0F, 0.0F, 4.0F, 4.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(0.5F, 2.0F, -0.5F));
 
-    @Override
-    public void renderToBuffer(PoseStack matrixStackIn, VertexConsumer bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) { 
-        ImmutableList.of(legl, arml, body, legr, head, armr).forEach((modelRenderer) -> {
-            modelRenderer.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
-        });
-    }
+		PartDefinition armr = partdefinition.addOrReplaceChild("armr", CubeListBuilder.create().texOffs(38, 15).addBox(-3.0F, 0.0F, -1.2F, 3.0F, 7.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(-4.0F, 9.5F, -1.0F));
+
+		PartDefinition HandGem2 = armr.addOrReplaceChild("HandGem2", CubeListBuilder.create().texOffs(48, 43).addBox(-4.0F, 0.0F, 0.0F, 4.0F, 4.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(0.5F, 5.0F, -1.7F));
+
+		PartDefinition arml = partdefinition.addOrReplaceChild("arml", CubeListBuilder.create().texOffs(0, 15).addBox(-3.0F, 0.0F, 0.0F, 3.0F, 7.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(7.0F, 9.5F, -2.2F));
+
+		PartDefinition handgem1 = arml.addOrReplaceChild("handgem1", CubeListBuilder.create().texOffs(48, 35).addBox(-4.0F, 0.0F, 0.0F, 4.0F, 4.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(0.5F, 5.0F, -0.5F));
+
+		PartDefinition legl = partdefinition.addOrReplaceChild("legl", CubeListBuilder.create().texOffs(0, 29).addBox(-3.0F, 0.0F, 0.0F, 3.0F, 5.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(4.0F, 18.5F, -2.2F));
+
+		PartDefinition leggem1 = legl.addOrReplaceChild("leggem1", CubeListBuilder.create().texOffs(0, 54).addBox(-4.0F, 0.0F, 0.0F, 4.0F, 4.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(0.5F, 2.0F, -0.5F));
+
+		return LayerDefinition.create(meshdefinition, 74, 62);
+	}
 
     @Override
     public void setupAnim(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        this.head.xRot = headPitch * .5f * ((float)Math.PI / 180F);
-        this.head.yRot = netHeadYaw  * ((float)Math.PI / 180F);
-        /*this.head2.rotateAngleX = headPitch * .5f * ((float)Math.PI / 180F);
-        this.head2.rotateAngleY = netHeadYaw * ((float)Math.PI / 180F);
-        this.head3.rotateAngleX = headPitch * .5f * ((float)Math.PI / 180F);
-        this.head3.rotateAngleY = netHeadYaw * ((float)Math.PI / 180F);*/
-        this.arml.xRot = Mth.cos(limbSwing * 0.5F + (float)Math.PI) * 1.5F * limbSwingAmount;
-        this.armr.xRot = Mth.cos(limbSwing * 0.5F) * 1.5F * limbSwingAmount;
-        this.legl.xRot = Mth.cos(limbSwing * 0.5F) * 1.5F * limbSwingAmount;
-        this.legr.xRot = Mth.cos(limbSwing * 0.5F + (float)Math.PI) * 1.5F * limbSwingAmount;
+        this.setRotateAngle(this.head, headPitch * 0.5f * ((float)Math.PI / 180F), netHeadYaw * .5f * ((float)Math.PI / 180F), 0);
+        this.setRotateAngle(this.arml, Mth.cos(limbSwing * 0.5F + (float)Math.PI) * limbSwingAmount * 0.8f, 0, 0);
+        this.setRotateAngle(this.armr, Mth.cos(limbSwing * 0.5F)  * limbSwingAmount * 0.8f, 0, 0);
+        this.setRotateAngle(this.legl, Mth.cos(limbSwing * 0.5F) * limbSwingAmount * 0.8f, 0, 0);
+        this.setRotateAngle(this.legr, Mth.cos(limbSwing * 0.5F + (float)Math.PI) * limbSwingAmount * 0.8f, 0, 0);
     }
 
     /**
@@ -147,4 +104,14 @@ public class ModelPebble<T extends EntityStarterGem> extends ModelGem<T> {
         modelRenderer.yRot = y;
         modelRenderer.zRot = z;
     }
+
+	@Override
+	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+		body.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+		head.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+		legr.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+		armr.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+		arml.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+		legl.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+	}
 }

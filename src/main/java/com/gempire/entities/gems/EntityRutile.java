@@ -99,7 +99,7 @@ public class EntityRutile extends EntityGem {
     }
     public Abilities[] definiteAbilities(){
         return new Abilities[]{
-                Abilities.SPELUNKER, Abilities.PROSPECTOR, Abilities.TORCHBEARER
+                //Abilities.SPELUNKER, Abilities.PROSPECTOR, Abilities.TORCHBEARER
         };
     }
 

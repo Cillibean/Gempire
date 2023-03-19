@@ -100,7 +100,7 @@ public class EntityPyrope extends EntityGem {
     }
     public Abilities[] definiteAbilities(){
         return new Abilities[]{
-                Abilities.FORTUNATE
+                //Abilities.FORTUNATE
         };
     }
 

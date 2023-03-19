@@ -99,7 +99,7 @@ public class EntityDemantoid extends EntityGem {
     }
     public Abilities[] definiteAbilities(){
         return new Abilities[]{
-                Abilities.ABUNDANCE
+                //Abilities.ABUNDANCE
         };
     }
 

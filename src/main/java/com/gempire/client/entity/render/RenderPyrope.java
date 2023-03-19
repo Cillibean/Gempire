@@ -1,6 +1,7 @@
 package com.gempire.client.entity.render;
 
 import com.gempire.Gempire;
+import com.gempire.client.entity.model.ModelGarnet;
 import com.gempire.client.entity.model.ModelRuby;
 import com.gempire.client.entity.render.layers.*;
 import com.gempire.entities.gems.EntityAquamarine;
@@ -14,9 +15,9 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.network.chat.Component;
 
-public class RenderPyrope extends MobRenderer<EntityPyrope, ModelRuby<EntityPyrope>> {
+public class RenderPyrope extends MobRenderer<EntityPyrope, ModelGarnet<EntityPyrope>> {
 
-    public RenderPyrope(EntityRendererProvider.Context renderManagerIn, ModelRuby<EntityPyrope> baseModel) {
+    public RenderPyrope(EntityRendererProvider.Context renderManagerIn, ModelGarnet<EntityPyrope> baseModel) {
         super(renderManagerIn, baseModel, .25f);
         this.addLayer(new SkinLayer(this));
         this.addLayer(new FaceLayer(this));

@@ -1,6 +1,7 @@
 package com.gempire.client.entity.render;
 
 import com.gempire.Gempire;
+import com.gempire.client.entity.model.ModelLarimar;
 import com.gempire.client.entity.model.ModelRuby;
 import com.gempire.client.entity.render.layers.*;
 import com.gempire.entities.gems.EntityLapis;
@@ -13,9 +14,9 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.network.chat.Component;
 
-public class RenderLarimar extends MobRenderer<EntityLarimar, ModelRuby<EntityLarimar>> {
+public class RenderLarimar extends MobRenderer<EntityLarimar, ModelLarimar<EntityLarimar>> {
 
-    public RenderLarimar(EntityRendererProvider.Context renderManagerIn, ModelRuby<EntityLarimar> baseModel) {
+    public RenderLarimar(EntityRendererProvider.Context renderManagerIn, ModelLarimar<EntityLarimar> baseModel) {
         super(renderManagerIn, baseModel, .25f);
         this.addLayer(new SkinLayer(this));
         this.addLayer(new FaceLayer(this));
