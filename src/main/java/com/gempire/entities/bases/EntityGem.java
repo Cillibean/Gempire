@@ -4,6 +4,7 @@ import com.gempire.Gempire;
 import com.gempire.container.GemUIContainer;
 import com.gempire.entities.abilities.AbilityScout;
 import com.gempire.entities.abilities.AbilityVehicle;
+import com.gempire.entities.abilities.AbilityWaterWalking;
 import com.gempire.entities.abilities.base.Ability;
 import com.gempire.entities.abilities.AbilityZilch;
 import com.gempire.entities.abilities.interfaces.*;
@@ -204,9 +205,9 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.setInsigniaVariant(this.generateInsigniaVariant());
         this.setInsigniaColor(this.generateInsigniaColor());
         this.setAbilitySlots(this.generateAbilitySlots());
-        this.setAbilites(this.generateAbilities());
+        this.setAbilities(this.generateAbilities());
         this.setEmotional(this.generateIsEmotional());
-        this.setAbilityPowers(this.findAbilities(this.getAbilites()));
+        this.setAbilityPowers(this.findAbilities(this.getAbilities()));
         this.addAbilityGoals();
         this.applyAttributeAbilities();
         this.applyAlchemyPowers();
@@ -232,7 +233,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     @Override
     public void addAdditionalSaveData(CompoundTag compound) {
         super.addAdditionalSaveData(compound);
-        compound.putString("abilities", this.getAbilites());
+        compound.putString("abilities", this.getAbilities());
         compound.putBoolean("emotional", this.isEmotional());
         this.writeOwners(compound);
         compound.putUUID("followID", this.FOLLOW_ID);
@@ -286,7 +287,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     @Override
     public void load(CompoundTag compound) {
         super.load(compound);
-        this.setAbilites(compound.getString("abilities"));
+        this.setAbilities(compound.getString("abilities"));
         this.setEmotional(compound.getBoolean("emotional"));
         this.readOwners(compound);
         if(compound.contains("followID"))this.FOLLOW_ID = compound.getUUID("followID");
@@ -1023,7 +1024,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             for (Abilities ability : abilities) {
                 //powers.add(Ability.getAbilityFromAbilities(ability).assignAbility(this));
                 Class[] parameterType = null;
-                Ability ability1 = null;
+                Ability ability1;
                 try {
                     ability1 = Ability.ABILITY_FROM_ABILITIES.get(ability).getConstructor(parameterType).newInstance((Object) null).assignAbility(this);
                     powers.add(ability1);
@@ -1094,11 +1095,11 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         return 3;
     }
 
-    public String getAbilites(){
+    public String getAbilities(){
         return this.entityData.get(EntityGem.ABILITIES);
     }
 
-    public void setAbilites(String value){
+    public void setAbilities(String value){
         this.entityData.set(EntityGem.ABILITIES, value);
     }
 
@@ -1204,6 +1205,12 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     }
 
     public boolean canWalkOnFluids(){
+        boolean flag = false;
+        for(Ability ability : this.getAbilityPowers()){
+            if(ability instanceof AbilityWaterWalking){
+                flag = true;
+            }
+        }
         return false;
     }
 

@@ -50,7 +50,8 @@ public class InjectorBlock extends BaseEntityBlock implements EntityBlock {
     @Override
     public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
         if(!worldIn.isClientSide()){
-            if(worldIn.getBlockState(pos.above()).getBlock() == ModBlocks.TANK_BLOCK.get()){
+            if(worldIn.getBlockState(pos.above()).getBlock() == ModBlocks.TANK_BLOCK.get() &&
+                    worldIn.getBlockState(pos.above().above().above()).getBlock() == ModBlocks.POWER_CRYSTAL_BLOCK.get()){
                 BlockEntity te = worldIn.getBlockEntity(pos);
                 if(te instanceof InjectorTE){
                     NetworkHooks.openScreen((ServerPlayer) player, (InjectorTE)te, pos);

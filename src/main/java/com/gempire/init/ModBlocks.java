@@ -458,6 +458,22 @@ public class ModBlocks {
             )
     );
 
+    public static final RegistryObject<Block> WARP_CORE = BLOCKS.register("warp_core", () ->
+            new Block(Block.Properties
+                    .of(Material.METAL)
+                    .strength(3.0f, 4.0f)
+                    .sound(SoundType.GLASS)
+            )
+    );
+
+    public static final RegistryObject<Block> WARP_PAD = BLOCKS.register("warp_pad", () ->
+            new WarpPadBlock(Block.Properties
+                    .of(Material.METAL)
+                    .strength(3.0f, 4.0f)
+                    .sound(SoundType.GLASS)
+            )
+    );
+
     public static final RegistryObject<Block> RUINED_MARBLE_BLOCK = BLOCKS.register("ruined_marble_block", () ->
             new Block(Block.Properties
                     .of(Material.STONE)
