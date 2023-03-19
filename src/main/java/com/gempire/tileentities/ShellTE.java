@@ -165,9 +165,9 @@ public class ShellTE extends RandomizableContainerBlockEntity implements MenuPro
             //ESSENCE CHECK
             for(int i = 0; i < 6; i++){
                 //TODO: MAKE THERE BE A CHANCE OF MAGIC MOSS APPEARING
-                if(this.level.getBlockState(this.worldPosition.offset(ShellTE.direction(i))).getBlock() == ModBlocks.WHITE_ESSENCE_BLOCK.get()){
+                if(this.level.getBlockState(this.worldPosition.offset(ShellTE.direction(i))).getBlock() == ModFluids.WHITE_ESSENCE.block.get()){
                     LiquidBlock block = (LiquidBlock) this.level.getBlockState(this.worldPosition.offset(ShellTE.direction(i))).getBlock();
-                    if(block.getFluid() == ModFluids.SOURCE_WHITE_ESSENCE.get()) {
+                    if(block.getFluid() == ModFluids.FLUIDS.getEntries()) {
                         this.level.setBlockAndUpdate(this.worldPosition.offset(ShellTE.direction(i)), Blocks.AIR.defaultBlockState());
                         this.essenceConsumed = true;
                         this.essenceMarker = true;
@@ -179,9 +179,9 @@ public class ShellTE extends RandomizableContainerBlockEntity implements MenuPro
         else{
             this.essenceMarker = false;
             for(int i = 0; i < 6; i++){
-                if(this.level.getBlockState(this.worldPosition.offset(ShellTE.direction(i))).getBlock() == ModBlocks.WHITE_ESSENCE_BLOCK.get()){
+                if(this.level.getBlockState(this.worldPosition.offset(ShellTE.direction(i))).getBlock() == ModFluids.WHITE_ESSENCE.block.get()){
                     LiquidBlock block = (LiquidBlock) this.level.getBlockState(this.worldPosition.offset(ShellTE.direction(i))).getBlock();
-                    if(block.getFluid() == ModFluids.SOURCE_WHITE_ESSENCE.get()) {
+                    if(block.getFluid() == ModFluids.WHITE_ESSENCE.flowing.get()) {
                         this.essenceMarker = true;
                         break;
                     }

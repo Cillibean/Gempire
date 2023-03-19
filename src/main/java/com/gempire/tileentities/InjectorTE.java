@@ -7,6 +7,7 @@ import com.gempire.events.InjectEvent;
 import com.gempire.init.*;
 import com.gempire.items.ItemChroma;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
@@ -119,7 +120,7 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
                         if (this.isValidForSlot(i, bucket)) {
                             int filled = this.FillFluidTanks(i, 1000);
                             //TODO: TEMPORARY
-                            this.setItem(i, new ItemStack(ModItems.ESSENCE_BOTTLE.get()));
+                            this.setItem(i, new ItemStack(Items.BUCKET.asItem()));
                             this.level.sendBlockUpdated(this.worldPosition, this.getBlockState(), this.getBlockState(), 2);
                             this.setChanged();
                         }
@@ -306,16 +307,16 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
 
     public boolean isValidForSlot(int slot, BucketItem bucket){
         if(slot == InjectorTE.PINK_INPUT_SLOT_INDEX){
-            return bucket == ModItems.PINK_ESSENCE.get();
+            return bucket == ModFluids.PINK_ESSENCE.bucket.get();
         }
         else if(slot == InjectorTE.BLUE_INPUT_SLOT_INDEX){
-            return bucket == ModItems.BLUE_ESSENCE.get();
+            return bucket == ModFluids.BLUE_ESSENCE.bucket.get();
         }
         else if(slot == InjectorTE.YELLOW_INPUT_SLOT_INDEX){
-            return bucket == ModItems.YELLOW_ESSENCE.get();
+            return bucket == ModFluids.YELLOW_ESSENCE.bucket.get();
         }
         else if(slot == InjectorTE.WHITE_INPUT_SLOT_INDEX){
-            return bucket == ModItems.WHITE_ESSENCE.get();
+            return bucket == ModFluids.WHITE_ESSENCE.bucket.get();
         }
         else return slot == InjectorTE.PRIME_INPUT_SLOT_INDEX;
     }
@@ -412,16 +413,16 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
     }
 
     public FluidTank getTankFromFluid(FluidStack fluidStack){
-        if(fluidStack.getFluid() == ModFluids.SOURCE_PINK_ESSENCE.get()){
+        if(fluidStack.getFluid() == ModFluids.PINK_ESSENCE.source.get()){
             return this.pinkTank;
         }
-        else if(fluidStack.getFluid() == ModFluids.SOURCE_BLUE_ESSENCE.get()){
+        else if(fluidStack.getFluid() == ModFluids.BLUE_ESSENCE.source.get()){
             return this.blueTank;
         }
-        else if(fluidStack.getFluid() == ModFluids.SOURCE_YELLOW_ESSENCE.get()){
+        else if(fluidStack.getFluid() == ModFluids.YELLOW_ESSENCE.source.get()){
             return this.yellowTank;
         }
-        else if(fluidStack.getFluid() == ModFluids.SOURCE_WHITE_ESSENCE.get()){
+        else if(fluidStack.getFluid() == ModFluids.WHITE_ESSENCE.source.get()){
             return this.whiteTank;
         }
         else{
@@ -449,16 +450,16 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
 
     public Fluid getFluidFromValue(int value){
         if(value == 0){
-            return ModFluids.SOURCE_PINK_ESSENCE.get();
+            return ModFluids.PINK_ESSENCE.source.get();
         }
         else if(value == 1){
-            return ModFluids.SOURCE_BLUE_ESSENCE.get();
+            return ModFluids.BLUE_ESSENCE.source.get();
         }
         else if(value == 2){
-            return ModFluids.SOURCE_YELLOW_ESSENCE.get();
+            return ModFluids.YELLOW_ESSENCE.source.get();
         }
         else if(value == 3){
-            return ModFluids.SOURCE_WHITE_ESSENCE.get();
+            return ModFluids.WHITE_ESSENCE.source.get();
         }
         else{
             return Fluids.EMPTY;

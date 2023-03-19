@@ -346,17 +346,6 @@ public class ModItems {
             )
     );*/
 
-    public static final RegistryObject<Item> ESSENCE_BOTTLE = ITEMS.register("essence_bottle", () ->
-            new BucketItem(Fluids.EMPTY, new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(16).tab(ModItemGroup.ITEMS)));
-    public static final RegistryObject<Item> PINK_ESSENCE = ITEMS.register("pink_essence", () ->
-            new BucketItem(ModFluids.SOURCE_PINK_ESSENCE, new Item.Properties().craftRemainder(ModItems.ESSENCE_BOTTLE.get()).stacksTo(1).tab(ModItemGroup.ITEMS)));
-    public static final RegistryObject<Item> BLUE_ESSENCE = ITEMS.register("blue_essence", () ->
-            new BucketItem(ModFluids.SOURCE_BLUE_ESSENCE, new Item.Properties().craftRemainder(ModItems.ESSENCE_BOTTLE.get()).stacksTo(1).tab(ModItemGroup.ITEMS)));
-    public static final RegistryObject<Item> YELLOW_ESSENCE = ITEMS.register("yellow_essence", () ->
-            new BucketItem(ModFluids.SOURCE_YELLOW_ESSENCE, new Item.Properties().craftRemainder(ModItems.ESSENCE_BOTTLE.get()).stacksTo(1).tab(ModItemGroup.ITEMS)));
-    public static final RegistryObject<Item> WHITE_ESSENCE = ITEMS.register("white_essence", () ->
-            new BucketItem(ModFluids.SOURCE_WHITE_ESSENCE, new Item.Properties().craftRemainder(ModItems.ESSENCE_BOTTLE.get()).stacksTo(1).tab(ModItemGroup.ITEMS)));
-
     public static final RegistryObject<Item> GILDED_LAPIS = ITEMS.register("gilded_lapis", () ->
             new Item(new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS).stacksTo(64)));
 

@@ -142,7 +142,6 @@ public class Gempire
         ModPacketHandler.registerPackets();
         ModEntities.setVanillaGems();
         ModEntities.registerCruxes();
-        ModFluids.registerFluidBuckets();
         ModAbilities.registerAbilities();
         ModEnchants.registerVanillaEnchantments();
         ModEnchants.registerItemDiscounts();

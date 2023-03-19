@@ -1,7 +1,7 @@
 {
 	"credit": "Made with Blockbench",
 	"texture_size": [64, 64],
-	"render_type": "transparent",
+	"render_type": "translucent",
 	"textures": {
 		"0": "gempire:blocks/pink_chroma_texture",
 		"particle": "gempire:blocks/pink_chroma_texture"
