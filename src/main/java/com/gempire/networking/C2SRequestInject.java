@@ -13,7 +13,7 @@ public class C2SRequestInject {
     public static BlockPos injectorPos;
 
     public C2SRequestInject(BlockPos pos) {
-        this.injectorPos = pos;
+        injectorPos = pos;
     }
 
     public static C2SRequestInject decode(FriendlyByteBuf buffer) {
@@ -22,7 +22,7 @@ public class C2SRequestInject {
     }
 
     public static void encode(C2SRequestInject msg, FriendlyByteBuf buffer) {
-        buffer.writeBlockPos(msg.injectorPos);
+        buffer.writeBlockPos(injectorPos);
     }
 
     public static void handle(final C2SRequestInject msg, final Supplier<NetworkEvent.Context> contextSupplier) {

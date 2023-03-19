@@ -33,6 +33,7 @@ import net.minecraftforge.registries.RegistryObject;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class ShellTE extends RandomizableContainerBlockEntity implements MenuProvider {
     public static final int NUMBER_OF_SLOTS = 5;
@@ -283,7 +284,7 @@ public class ShellTE extends RandomizableContainerBlockEntity implements MenuPro
     public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
         //Debug
         System.out.println("[DEBUG]:Client recived tile sync packet");
-        this.load(pkt.getTag());
+        this.load(Objects.requireNonNull(pkt.getTag()));
     }
 
     @Nullable

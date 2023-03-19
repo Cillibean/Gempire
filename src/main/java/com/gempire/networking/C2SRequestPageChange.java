@@ -45,10 +45,8 @@ public class C2SRequestPageChange {
         }
         else{
             if (forwardd) {
-                assert gem != null;
                 ((EntityZircon)gem).CyclePageForward();
             } else {
-                assert gem != null;
                 ((EntityZircon)gem).CyclePageBackwards();
             }
         }

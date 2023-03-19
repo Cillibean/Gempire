@@ -36,7 +36,6 @@ public class S2SSendGemSeedInfo {
         NetworkEvent.Context ctx = contextSupplier.get();
         ServerPlayer sender = ctx.getSender();
         boolean hasPermission = true;
-        assert Minecraft.getInstance().level != null;
         if(Minecraft.getInstance().level.getBlockEntity(seedPos) instanceof GemSeedTE blockEntity) {
             blockEntity.load(msg.seedInfo);
             Objects.requireNonNull(blockEntity.getLevel()).sendBlockUpdated(seedPos, blockEntity.getBlockState(), blockEntity.getBlockState(), 2);

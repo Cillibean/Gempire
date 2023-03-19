@@ -86,7 +86,7 @@ public class GemUIContainer extends AbstractContainerMenu {
                 }
                 public boolean mayPickup(Player playerIn) {
                     ItemStack itemstack = this.getItem();
-                    return !itemstack.isEmpty() && !playerIn.isCreative() && EnchantmentHelper.hasBindingCurse(itemstack) ? false : super.mayPickup(playerIn);
+                    return (itemstack.isEmpty() || playerIn.isCreative() || !EnchantmentHelper.hasBindingCurse(itemstack)) && super.mayPickup(playerIn);
                 }
                 public int getMaxStackSize() {
                     return 1;
