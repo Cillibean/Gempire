@@ -79,7 +79,7 @@ public class EntityRuby extends EntityGem {
 
     @Override
     public int generateInsigniaColor() {
-        return 4;
+        return 14;
     }
 
     @Override
@@ -142,7 +142,7 @@ public class EntityRuby extends EntityGem {
     }
 
     public int generateOutfitVariant(){
-        return this.random.nextInt(4);
+        return this.random.nextInt(5);
     }
 
     public int generateInsigniaVariant(){

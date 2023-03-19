@@ -59,32 +59,30 @@ public class EntityEmerald extends EntityGem {
 
     @Override
     public GemPlacements[] getPlacements() {
-        return new GemPlacements[]{
-                GemPlacements.TOP_OF_HEAD, GemPlacements.FOREHEAD, GemPlacements.BACK_OF_HEAD, GemPlacements.LEFT_EYE, GemPlacements.RIGHT_EYE, GemPlacements.NOSE,
-                GemPlacements.LEFT_CHEEK, GemPlacements.RIGHT_CHEEK, GemPlacements.LEFT_EAR, GemPlacements.RIGHT_EAR, GemPlacements.CHEST, GemPlacements.BACK, GemPlacements.BELLY,
-                GemPlacements.LEFT_SHOULDER, GemPlacements.RIGHT_SHOULDER, GemPlacements.LEFT_HAND, GemPlacements.RIGHT_HAND, GemPlacements.LEFT_PALM, GemPlacements.RIGHT_PALM,
-                GemPlacements.LEFT_THIGH, GemPlacements.RIGHT_THIGH, GemPlacements.LEFT_ANKLE, GemPlacements.RIGHT_ANKLE
-        };
+        return new GemPlacements[] {
+                GemPlacements.FOREHEAD, GemPlacements.LEFT_EYE, GemPlacements.RIGHT_EYE, GemPlacements.NOSE, GemPlacements.LEFT_CHEEK, GemPlacements.RIGHT_CHEEK, GemPlacements.CHEST, GemPlacements.BACK, GemPlacements.BELLY, GemPlacements.LEFT_SHOULDER,
+                GemPlacements.RIGHT_SHOULDER, GemPlacements.LEFT_ARM, GemPlacements.RIGHT_ARM, GemPlacements.LEFT_HAND, GemPlacements.RIGHT_HAND, GemPlacements.LEFT_PALM, GemPlacements.RIGHT_PALM, GemPlacements.LEFT_THIGH, GemPlacements.RIGHT_THIGH, GemPlacements.LEFT_KNEE,
+                GemPlacements.RIGHT_KNEE, GemPlacements.LEFT_ANKLE, GemPlacements.RIGHT_ANKLE };
     }
 
     @Override
     public int generateHairVariant() {
-        return this.random.nextInt(3);
+        return this.random.nextInt(6);
     }
 
     @Override
     public int generateInsigniaColor() {
-        return 4;
+        return 13;
     }
 
     @Override
     public int generateOutfitColor() {
-        return 14;
+        return 13;
     }
 
     @Override
     public boolean hasOutfitPlacementVariant() {
-        return true;
+        return false;
     }
 
     @Override
@@ -137,17 +135,11 @@ public class EntityEmerald extends EntityGem {
     }
 
     public int generateOutfitVariant(){
-        return this.random.nextInt(4);
+        return this.random.nextInt(2);
     }
 
     public int generateInsigniaVariant(){
-        if (this.getGemPlacement() == 11) {
-            return this.getGemPlacement() != 11 ? this.getOutfitVariant() : 4;
-        } else if (this.getGemPlacement() == 17) {
-            return this.getGemPlacement() != 17 ? this.getOutfitVariant() : 5;
-        } else {
             return this.getOutfitVariant();
-        }
     }
 
     @Override

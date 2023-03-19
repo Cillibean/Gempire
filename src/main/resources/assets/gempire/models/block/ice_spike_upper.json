@@ -1,6 +1,6 @@
 {
   "parent": "block/cross",
-  "render_type": "transparent",
+  "render_type": "translucent",
   "textures": {
     "particle": "gempire:blocks/ice_spike_upper",
     "cross": "gempire:blocks/ice_spike_upper"

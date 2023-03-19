@@ -28,10 +28,10 @@ public class C2SRequestPoof {
         NetworkEvent.Context ctx = contextSupplier.get();
         ServerPlayer sender = ctx.getSender();
         boolean hasPermission = true;
-        if (hasPermission) {
-            EntityGem gem = (EntityGem) sender.level.getEntity(msg.entityID);
-            gem.hurt(DamageSource.GENERIC, gem.getMaxHealth());
-        }
+        assert sender != null;
+        EntityGem gem = (EntityGem) sender.level.getEntity(msg.entityID);
+        assert gem != null;
+        gem.hurt(DamageSource.GENERIC, gem.getMaxHealth());
         ctx.setPacketHandled(true);
     }
 }

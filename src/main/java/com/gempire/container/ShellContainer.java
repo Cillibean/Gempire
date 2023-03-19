@@ -3,11 +3,8 @@ package com.gempire.container;
 import com.gempire.Gempire;
 import com.gempire.init.ModBlocks;
 import com.gempire.init.ModContainers;
-import com.gempire.init.ModItems;
-import com.gempire.tileentities.InjectorTE;
 import com.gempire.tileentities.ShellTE;
 import com.gempire.tileentities.TankTE;
-import com.mojang.datafixers.util.Pair;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.player.Inventory;
@@ -19,8 +16,6 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.Objects;
 

@@ -72,13 +72,23 @@ public class EntityNephrite extends EntityGem {
     }
 
     @Override
+    public boolean hasMarkings() {
+        return true;
+    }
+
+    @Override
+    public int maxMarkings() {
+        return 1;
+    }
+
+    @Override
     public int generateHairVariant() {
         return this.random.nextInt(10);
     }
 
     @Override
     public int generateInsigniaColor() {
-        return 6;
+        return 13;
     }
 
     @Override

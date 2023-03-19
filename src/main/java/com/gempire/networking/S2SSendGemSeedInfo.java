@@ -1,20 +1,23 @@
 package com.gempire.networking;
 
 import com.gempire.tileentities.GemSeedTE;
+import com.gempire.tileentities.InjectorTE;
+import net.minecraft.client.Minecraft;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.core.BlockPos;
 import net.minecraftforge.network.NetworkEvent;
 
+import java.util.Objects;
 import java.util.function.Supplier;
 
 public class S2SSendGemSeedInfo {
-    public final BlockPos seedPos;
+    public static BlockPos seedPos;
     public final CompoundTag seedInfo;
 
     public S2SSendGemSeedInfo(BlockPos pos, CompoundTag seedInfo) {
-        this.seedPos = pos;
+        seedPos = pos;
         this.seedInfo = seedInfo;
     }
 
@@ -25,7 +28,7 @@ public class S2SSendGemSeedInfo {
     }
 
     public static void encode(S2SSendGemSeedInfo msg, FriendlyByteBuf buffer) {
-        buffer.writeBlockPos(msg.seedPos);
+        buffer.writeBlockPos(seedPos);
         buffer.writeNbt(msg.seedInfo);
     }
 
@@ -33,11 +36,10 @@ public class S2SSendGemSeedInfo {
         NetworkEvent.Context ctx = contextSupplier.get();
         ServerPlayer sender = ctx.getSender();
         boolean hasPermission = true;
-        if (hasPermission) {
-            GemSeedTE seedTE = (GemSeedTE) sender.level.getBlockEntity(msg.seedPos);
-            seedTE.load(msg.seedInfo);
-            seedTE.getLevel().sendBlockUpdated(msg.seedPos, seedTE.getBlockState(), seedTE.getBlockState(), 2);
-            seedTE.setChanged();
+        if(Minecraft.getInstance().level.getBlockEntity(seedPos) instanceof GemSeedTE blockEntity) {
+            blockEntity.load(msg.seedInfo);
+            Objects.requireNonNull(blockEntity.getLevel()).sendBlockUpdated(seedPos, blockEntity.getBlockState(), blockEntity.getBlockState(), 2);
+            blockEntity.setChanged();
         }
         ctx.setPacketHandled(true);
     }

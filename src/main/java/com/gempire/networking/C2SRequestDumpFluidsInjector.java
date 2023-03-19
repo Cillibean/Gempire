@@ -1,6 +1,7 @@
 package com.gempire.networking;
 
 import com.gempire.tileentities.InjectorTE;
+import net.minecraft.client.Minecraft;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.core.BlockPos;
@@ -9,7 +10,7 @@ import net.minecraftforge.network.NetworkEvent;
 import java.util.function.Supplier;
 
 public class C2SRequestDumpFluidsInjector {
-    public final BlockPos injectorPos;
+    public static BlockPos injectorPos;
 
     public C2SRequestDumpFluidsInjector(BlockPos injectorPos) {
         this.injectorPos = injectorPos;
@@ -29,15 +30,17 @@ public class C2SRequestDumpFluidsInjector {
         ServerPlayer sender = ctx.getSender();
         boolean hasPermission = true;
         if (hasPermission) {
-            if(msg.injectorPos != null) {
-                InjectorTE injector = (InjectorTE) sender.level.getBlockEntity(msg.injectorPos);
-                injector.DumpFluids();
-            }/*
+            if (msg.injectorPos != null) {
+                if (Minecraft.getInstance().level.getBlockEntity(injectorPos) instanceof InjectorTE blockEntity) {
+                    InjectorTE injector = (InjectorTE) sender.level.getBlockEntity(msg.injectorPos);
+                    injector.DumpFluids();
+                }/*
             if(msg.tankPos != null) {
                 TankTE tank = (TankTE) sender.world.getTileEntity(msg.tankPos);
                 tank.EmptyTank();
             }*/
+            }
+            ctx.setPacketHandled(true);
         }
-        ctx.setPacketHandled(true);
     }
 }

@@ -29,7 +29,7 @@ public class RenderEmerald extends MobRenderer<EntityEmerald, ModelEmerald<Entit
 
     @Override
     protected void scale(EntityEmerald entitylivingbaseIn, PoseStack matrixStackIn, float partialTickTime) {
-        matrixStackIn.scale(.8f, .85f, .8f);
+        matrixStackIn.scale(1.25f, 1.35f, 1.25f);
         super.scale(entitylivingbaseIn, matrixStackIn, partialTickTime);
     }
 
@@ -39,6 +39,7 @@ public class RenderEmerald extends MobRenderer<EntityEmerald, ModelEmerald<Entit
     }
     @Override
     protected void renderNameTag(EntityEmerald entityIn, Component displayNameIn, PoseStack matrixStackIn, MultiBufferSource bufferIn, int packedLightIn) {
+        matrixStackIn.scale(1.1f, 1.1f, 1.1f);
         super.renderNameTag(entityIn, displayNameIn, matrixStackIn, bufferIn, packedLightIn);
     }
 }

@@ -28,7 +28,7 @@ public class RenderHessonite extends MobRenderer<EntityHessonite, ModelGarnet<En
 
     @Override
     protected void scale(EntityHessonite entitylivingbaseIn, PoseStack matrixStackIn, float partialTickTime) {
-        matrixStackIn.scale(.8f, .85f, .8f);
+        matrixStackIn.scale(1.2f, 1.3f, 1.2f);
         super.scale(entitylivingbaseIn, matrixStackIn, partialTickTime);
     }
 
@@ -38,6 +38,7 @@ public class RenderHessonite extends MobRenderer<EntityHessonite, ModelGarnet<En
     }
     @Override
     protected void renderNameTag(EntityHessonite entityIn, Component displayNameIn, PoseStack matrixStackIn, MultiBufferSource bufferIn, int packedLightIn) {
+        matrixStackIn.scale(1.1f, 1.1f, 1.1f);
         super.renderNameTag(entityIn, displayNameIn, matrixStackIn, bufferIn, packedLightIn);
     }
 }

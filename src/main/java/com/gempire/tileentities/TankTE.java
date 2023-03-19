@@ -75,12 +75,7 @@ public class TankTE extends RandomizableContainerBlockEntity implements IFluidTa
                         System.out.println("Should Pull");
                         BucketItem bucket = (BucketItem) stackToInput.getItem();
                         te.tank.fill(new FluidStack(bucket.getFluid(), 1000), IFluidHandler.FluidAction.EXECUTE);
-                        if (bucket == ModItems.WHITE_ESSENCE.get() || bucket == ModItems.YELLOW_ESSENCE.get() || bucket == ModItems.BLUE_ESSENCE.get()
-                                || bucket == ModItems.PINK_ESSENCE.get()) {
-                            te.setItem(TankTE.BUCKET_INPUT_SLOT_INDEX, new ItemStack(ModItems.ESSENCE_BOTTLE.get()));
-                        } else {
-                            te.setItem(TankTE.BUCKET_INPUT_SLOT_INDEX, new ItemStack(Items.BUCKET));
-                        }
+                            te.setItem(TankTE.BUCKET_INPUT_SLOT_INDEX, new ItemStack(Items.BUCKET.asItem()));
                         System.out.println("Tank level is at " + te.getFluidAmount() + "mb");
                         te.level.sendBlockUpdated(pos, state, state, 2);
                         te.setChanged();
@@ -99,17 +94,17 @@ public class TankTE extends RandomizableContainerBlockEntity implements IFluidTa
                         te.setChanged();
                     } else if (te.shouldPutFluidToButton() && te.canPutFluidToButton(stackToOutput)) {
                         Fluid fluid = te.tank.getFluid().getFluid();
-                        if (fluid == ModFluids.SOURCE_PINK_ESSENCE.get()) {
+                        if (fluid == ModFluids.PINK_ESSENCE.source.get()) {
                             te.tank.drain(new FluidStack(te.tank.getFluid().getFluid(), 200), IFluidHandler.FluidAction.EXECUTE);
                             te.setItem(TankTE.BUCKET_OUTPUT_SLOT_INDEX, new ItemStack(ModItems.PEBBLE_GEM.get()));
                             te.level.sendBlockUpdated(pos, state, state, 2);
                             te.setChanged();
-                        } else if (fluid == ModFluids.SOURCE_BLUE_ESSENCE.get()) {
+                        } else if (fluid == ModFluids.BLUE_ESSENCE.source.get()) {
                             te.tank.drain(new FluidStack(te.tank.getFluid().getFluid(), 200), IFluidHandler.FluidAction.EXECUTE);
                             te.setItem(TankTE.BUCKET_OUTPUT_SLOT_INDEX, new ItemStack(ModItems.SHALE_GEM.get()));
                             te.level.sendBlockUpdated(pos, state, state, 2);
                             te.setChanged();
-                        } else if (fluid == ModFluids.SOURCE_YELLOW_ESSENCE.get()) {
+                        } else if (fluid == ModFluids.YELLOW_ESSENCE.source.get()) {
                             te.tank.drain(new FluidStack(te.tank.getFluid().getFluid(), 200), IFluidHandler.FluidAction.EXECUTE);
                             te.setItem(TankTE.BUCKET_OUTPUT_SLOT_INDEX, new ItemStack(ModItems.MICA_GEM.get()));
                             te.level.sendBlockUpdated(pos, state, state, 2);
@@ -117,7 +112,7 @@ public class TankTE extends RandomizableContainerBlockEntity implements IFluidTa
                         }
                     } else if (te.shouldPutFluidToButton() && stackToOutput.getItem() == Items.NAUTILUS_SHELL) {
                         Fluid fluid = te.tank.getFluid().getFluid();
-                        if (fluid == ModFluids.SOURCE_WHITE_ESSENCE.get()) {
+                        if (fluid == ModFluids.WHITE_ESSENCE.source.get()) {
                             te.tank.drain(new FluidStack(te.tank.getFluid().getFluid(), 200), IFluidHandler.FluidAction.EXECUTE);
                             te.setItem(TankTE.BUCKET_OUTPUT_SLOT_INDEX, new ItemStack(ModItems.NACRE_GEM.get()));
                             te.level.sendBlockUpdated(pos, state, state, 2);

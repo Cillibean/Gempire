@@ -30,7 +30,7 @@ public class RenderAquamarine extends MobRenderer<EntityAquamarine, ModelAquamar
 
     @Override
     protected void scale(EntityAquamarine entitylivingbaseIn, PoseStack matrixStackIn, float partialTickTime) {
-        matrixStackIn.scale(.8f, .85f, .8f);
+        matrixStackIn.scale(.6f, .65f, .6f);
         super.scale(entitylivingbaseIn, matrixStackIn, partialTickTime);
     }
 
