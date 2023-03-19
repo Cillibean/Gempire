@@ -53,7 +53,7 @@ public class ModelBismuth<T extends EntityGem> extends ModelGem<T> {
 
 		PartDefinition LongHair = Head.addOrReplaceChild("LongHair", CubeListBuilder.create().texOffs(0, 100).addBox(-5.0F, -8.5F, -7.0F, 10.0F, 15.0F, 10.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
 
-		PartDefinition rightarm = partdefinition.addOrReplaceChild("rightarm", CubeListBuilder.create().texOffs(35, 81).addBox(-6.5F, -3.0F, -3.0F, 6.0F, 20.0F, 6.0F, new CubeDeformation(0.5F)), PartPose.offset(-8.0F, -0.5F, 0.0F));
+		PartDefinition rightarm = partdefinition.addOrReplaceChild("rightarm", CubeListBuilder.create().texOffs(35, 81).mirror().addBox(-6.5F, -3.0F, -3.0F, 6.0F, 20.0F, 6.0F, new CubeDeformation(0.5F)), PartPose.offset(-8.0F, -0.5F, 0.0F));
 
 		PartDefinition rightleg = partdefinition.addOrReplaceChild("rightleg", CubeListBuilder.create().texOffs(0, 85).addBox(-3.0F, 0.0F, -3.0F, 6.0F, 9.0F, 6.0F, new CubeDeformation(-.5F,0f,-.5f)), PartPose.offset(-3.5F, 15.0F, 0.0F));
 

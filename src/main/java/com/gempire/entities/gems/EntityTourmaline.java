@@ -70,7 +70,7 @@ public class EntityTourmaline extends EntityVaryingGem {
 
     @Override
     public boolean hasMarkings2() {
-        return false;
+        return this.getSkinColorVariant() == 16;
     }
 
     @Override
@@ -80,7 +80,7 @@ public class EntityTourmaline extends EntityVaryingGem {
 
     @Override
     public int maxMarkings2() {
-        return 0;
+        return 1;
     }
 
     @Override
@@ -158,18 +158,8 @@ public class EntityTourmaline extends EntityVaryingGem {
     }
 
     @Override
-    public int generateInsigniaColor() {
-        return 5;
-    }
-
-    @Override
-    public int generateOutfitColor() {
-        return 13;
-    }
-
-    @Override
     public boolean hasOutfitPlacementVariant() {
-        return true;
+        return false;
     }
 
     @Override
@@ -224,17 +214,11 @@ public class EntityTourmaline extends EntityVaryingGem {
     }
 
     public int generateOutfitVariant(){
-        return this.random.nextInt(4);
+        return this.random.nextInt(3);
     }
 
     public int generateInsigniaVariant(){
-        if (this.getGemPlacement() == 11) {
-            return this.getGemPlacement() != 11 ? this.getOutfitVariant() : 4;
-        } else if (this.getGemPlacement() == 17) {
-            return this.getGemPlacement() != 17 ? this.getOutfitVariant() : 5;
-        } else {
             return this.getOutfitVariant();
-        }
     }
 
     @Override

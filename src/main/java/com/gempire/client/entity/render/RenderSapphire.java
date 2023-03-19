@@ -40,6 +40,7 @@ public class RenderSapphire extends MobRenderer<EntitySapphire, ModelSapphire<En
     }
     @Override
     protected void renderNameTag(EntitySapphire entityIn, Component displayNameIn, PoseStack matrixStackIn, MultiBufferSource bufferIn, int packedLightIn) {
+        matrixStackIn.scale(.77f, .77f, .77f);
         super.renderNameTag(entityIn, displayNameIn, matrixStackIn, bufferIn, packedLightIn);
     }
 }

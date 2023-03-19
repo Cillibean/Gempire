@@ -52,22 +52,22 @@ public class EntityQuartz extends AbstractQuartz {
 
     @Override
     public boolean hasMarkings() {
-        return this.getSkinColorVariant() == 2 || this.getSkinColorVariant() == 3 || this.getSkinColorVariant() == 12 || this.getSkinColorVariant() == 13 || this.getSkinColorVariant() == 17;
+        return this.getSkinColorVariant() == 2 || this.getSkinColorVariant() == 3 || this.getSkinColorVariant() == 6 || this.getSkinColorVariant() == 12 || this.getSkinColorVariant() == 13 || this.getSkinColorVariant() == 17;
     }
 
     @Override
     public boolean hasMarkings2() {
-        return false;
+        return this.getSkinColorVariant() == 17;
     }
 
     @Override
     public int maxMarkings() {
-        return 2;
+        return 1;
     }
 
     @Override
     public int maxMarkings2() {
-        return 0;
+        return 1;
     }
 
     @Override

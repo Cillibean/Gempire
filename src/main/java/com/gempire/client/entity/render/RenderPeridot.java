@@ -30,7 +30,7 @@ public class RenderPeridot extends MobRenderer<EntityPeridot, ModelPeridot<Entit
 
     @Override
     protected void scale(EntityPeridot entitylivingbaseIn, PoseStack matrixStackIn, float partialTickTime) {
-        matrixStackIn.scale(.8f, .85f, .8f);
+        matrixStackIn.scale(.95f, 1.15f, .95f);
         super.scale(entitylivingbaseIn, matrixStackIn, partialTickTime);
     }
 
@@ -40,6 +40,7 @@ public class RenderPeridot extends MobRenderer<EntityPeridot, ModelPeridot<Entit
     }
     @Override
     protected void renderNameTag(EntityPeridot entityIn, Component displayNameIn, PoseStack matrixStackIn, MultiBufferSource bufferIn, int packedLightIn) {
+        matrixStackIn.scale(1.3f, 1.3f, 1.3f);
         super.renderNameTag(entityIn, displayNameIn, matrixStackIn, bufferIn, packedLightIn);
     }
 }

@@ -47,7 +47,7 @@ public class ModelBixbite<T extends EntityGem> extends ModelGem<T> {
 
 		PartDefinition hair3 = hair1.addOrReplaceChild("hair3", CubeListBuilder.create().texOffs(40, 36).addBox(-5.8F, -2.1F, -5.0F, 0.0F, 5.0F, 9.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.5236F));
 
-		PartDefinition horns = Head.addOrReplaceChild("horns", CubeListBuilder.create().texOffs(30, 29).addBox(-6.0F, -11.8F, 0.0F, 12.0F, 5.0F, 0.0F, new CubeDeformation(-0.2F)), PartPose.offset(0.0F, 0.0F, 0.0F));
+		PartDefinition horns = Head.addOrReplaceChild("horns", CubeListBuilder.create().texOffs(30, 29).addBox(-6.0F, -11.8F, 0.0F, 12.0F, 5.0F, 0.0F, new CubeDeformation(-0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
 
 		PartDefinition rightarm = partdefinition.addOrReplaceChild("rightarm", CubeListBuilder.create().texOffs(54, 30).addBox(0.0F, -0.8F, -1.0F, 2.0F, 13.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(3.0F, -0.7F, 0.0F));
 

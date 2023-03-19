@@ -29,7 +29,7 @@ public class RenderPyrope extends MobRenderer<EntityPyrope, ModelGarnet<EntityPy
 
     @Override
     protected void scale(EntityPyrope entitylivingbaseIn, PoseStack matrixStackIn, float partialTickTime) {
-        matrixStackIn.scale(.8f, .85f, .8f);
+        matrixStackIn.scale(1.2f, 1.3f, 1.2f);
         super.scale(entitylivingbaseIn, matrixStackIn, partialTickTime);
     }
 
@@ -39,6 +39,7 @@ public class RenderPyrope extends MobRenderer<EntityPyrope, ModelGarnet<EntityPy
     }
     @Override
     protected void renderNameTag(EntityPyrope entityIn, Component displayNameIn, PoseStack matrixStackIn, MultiBufferSource bufferIn, int packedLightIn) {
+        matrixStackIn.scale(1.1f, 1.1f, 1.1f);
         super.renderNameTag(entityIn, displayNameIn, matrixStackIn, bufferIn, packedLightIn);
     }
 }

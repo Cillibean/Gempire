@@ -40,6 +40,7 @@ public class RenderRuby extends MobRenderer<EntityRuby, ModelRuby<EntityRuby>> {
     }
     @Override
     protected void renderNameTag(EntityRuby entityIn, Component displayNameIn, PoseStack matrixStackIn, MultiBufferSource bufferIn, int packedLightIn) {
+        matrixStackIn.scale(.8f, .8f, .8f);
         super.renderNameTag(entityIn, displayNameIn, matrixStackIn, bufferIn, packedLightIn);
     }
 }

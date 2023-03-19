@@ -55,7 +55,6 @@ public class EntityJasper extends AbstractQuartz {
         return true;
     }
 
-
     @Override
     public int maxMarkings() {
         return (this.getSkinColorVariant() == 5 || this.getSkinColorVariant() == 9) ? 2 : 1;
