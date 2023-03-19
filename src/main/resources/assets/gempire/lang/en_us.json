@@ -43,10 +43,6 @@
   "block.gempire.tank_block": "Fluid Tank",
   "block.gempire.floatanium_reactor": "Mysterious Block",
   "block.gempire.power_crystal_block": "Power Crystal",
-  "block.gempire.pink_essence": "Pink Essence",
-  "block.gempire.blue_essence": "Blue Essence",
-  "block.gempire.yellow_essence": "Yellow Essence",
-  "block.gempire.white_essence": "White Essence",
 
   "block.gempire.ice_spike": "Ice Spike",
 
@@ -68,6 +64,11 @@
   "block.gempire.green_chroma_crystal": "Green Chroma Crystal",
   "block.gempire.red_chroma_crystal": "Red Chroma Crystal",
   "block.gempire.black_chroma_crystal": "Black Chroma Crystal",
+
+  "item.gempire.pink_essence_bucket": "Pink Essence",
+  "item.gempire.blue_essence_bucket": "Blue Essence",
+  "item.gempire.yellow_essence_bucket": "Yellow Essence",
+  "item.gempire.white_essence_bucket": "White Essence",
 
   "item.gempire.white_chroma": "White Chroma",
   "item.gempire.orange_chroma": "Orange Chroma",
