@@ -15,7 +15,7 @@ public class C2SRequestUpdateInjectorValves {
 
     public C2SRequestUpdateInjectorValves(String pinkValve, BlockPos pos) {
         this.color = pinkValve;
-        this.pos = pos;
+        C2SRequestUpdateInjectorValves.pos = pos;
     }
 
     public static C2SRequestUpdateInjectorValves decode(FriendlyByteBuf buffer) {
@@ -26,12 +26,13 @@ public class C2SRequestUpdateInjectorValves {
 
     public static void encode(C2SRequestUpdateInjectorValves msg, FriendlyByteBuf buffer) {
         buffer.writeUtf(msg.color);
-        buffer.writeBlockPos(msg.pos);
+        buffer.writeBlockPos(pos);
     }
 
     public static void handle(final C2SRequestUpdateInjectorValves msg, final Supplier<NetworkEvent.Context> contextSupplier) {
         NetworkEvent.Context ctx = contextSupplier.get();
         ServerPlayer sender = ctx.getSender();
+        assert Minecraft.getInstance().level != null;
         if(Minecraft.getInstance().level.getBlockEntity(pos) instanceof InjectorTE blockEntity) {
             boolean hasPermission = true;
             blockEntity.ToggleTankOpen(msg.color);

@@ -32,13 +32,13 @@ public class C2SRequestUpdateGemName {
         NetworkEvent.Context ctx = contextSupplier.get();
         ServerPlayer sender = ctx.getSender();
         boolean hasPermission = true;
-        if (hasPermission) {
-            EntityGem gem = (EntityGem) sender.level.getEntity(msg.entityID);
-            if(!gem.customName()){
-                gem.setHasCustomName(true);
-            }
-            gem.setCustomName(Component.translatable(msg.newName));
+        assert sender != null;
+        EntityGem gem = (EntityGem) sender.level.getEntity(msg.entityID);
+        assert gem != null;
+        if(!gem.customName()){
+            gem.setHasCustomName(true);
         }
+        gem.setCustomName(Component.translatable(msg.newName));
         ctx.setPacketHandled(true);
     }
 }

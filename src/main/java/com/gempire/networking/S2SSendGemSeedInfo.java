@@ -9,6 +9,7 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.core.BlockPos;
 import net.minecraftforge.network.NetworkEvent;
 
+import java.util.Objects;
 import java.util.function.Supplier;
 
 public class S2SSendGemSeedInfo {
@@ -16,7 +17,7 @@ public class S2SSendGemSeedInfo {
     public final CompoundTag seedInfo;
 
     public S2SSendGemSeedInfo(BlockPos pos, CompoundTag seedInfo) {
-        this.seedPos = pos;
+        seedPos = pos;
         this.seedInfo = seedInfo;
     }
 
@@ -27,7 +28,7 @@ public class S2SSendGemSeedInfo {
     }
 
     public static void encode(S2SSendGemSeedInfo msg, FriendlyByteBuf buffer) {
-        buffer.writeBlockPos(msg.seedPos);
+        buffer.writeBlockPos(seedPos);
         buffer.writeNbt(msg.seedInfo);
     }
 
@@ -35,12 +36,11 @@ public class S2SSendGemSeedInfo {
         NetworkEvent.Context ctx = contextSupplier.get();
         ServerPlayer sender = ctx.getSender();
         boolean hasPermission = true;
-        if (hasPermission) {
-            if(Minecraft.getInstance().level.getBlockEntity(seedPos) instanceof GemSeedTE blockEntity) {
-                blockEntity.load(msg.seedInfo);
-                blockEntity.getLevel().sendBlockUpdated(msg.seedPos, blockEntity.getBlockState(), blockEntity.getBlockState(), 2);
-                blockEntity.setChanged();
-            }
+        assert Minecraft.getInstance().level != null;
+        if(Minecraft.getInstance().level.getBlockEntity(seedPos) instanceof GemSeedTE blockEntity) {
+            blockEntity.load(msg.seedInfo);
+            Objects.requireNonNull(blockEntity.getLevel()).sendBlockUpdated(seedPos, blockEntity.getBlockState(), blockEntity.getBlockState(), 2);
+            blockEntity.setChanged();
         }
         ctx.setPacketHandled(true);
     }

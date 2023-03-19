@@ -102,6 +102,7 @@ public class ShellTE extends RandomizableContainerBlockEntity implements MenuPro
                         te.HandleEssenceTick();
                         te.HandleFormPearlTick();
                         if (te.gravelConsumed == 1) {
+                            assert te.level != null;
                             te.level.setBlockAndUpdate(pos, state.setValue(ShellBlock.STAGE, 1));
                         }
                         if (te.sandConsumed == ShellTE.MAX_SAND) {

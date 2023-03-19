@@ -22,6 +22,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.Random;
 
 import net.minecraft.world.level.block.AirBlock;
@@ -32,6 +33,7 @@ import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.SnowLayerBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
 
 public class GemSeedTE extends BlockEntity {
     Random random;
@@ -129,6 +131,7 @@ public class GemSeedTE extends BlockEntity {
 
     public void DrainBlock(BlockPos blockPos) {
         this.GEM_CONDITIONS = ModEntities.CRUXTOGEM;
+        assert this.level != null;
         float BLOCK_TEMPERATURE = this.level.getBiome(this.worldPosition).get().getBaseTemperature();
         this.SetDrainedStoneColor(BLOCK_TEMPERATURE);
         Block block = this.level.getBlockState(blockPos).getBlock();
@@ -273,6 +276,7 @@ public class GemSeedTE extends BlockEntity {
 
     public void SetChroma(ItemChroma chroma){
         this.chroma = chroma;
+        assert this.level != null;
         this.level.sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), 2);
         this.setChanged();
     }
@@ -283,6 +287,7 @@ public class GemSeedTE extends BlockEntity {
 
     public void SetPrimer(Item primer){
         this.primer = primer;
+        assert this.level != null;
         this.level.sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), 2);
         this.setChanged();
     }
@@ -293,6 +298,7 @@ public class GemSeedTE extends BlockEntity {
 
     public void setEssences(String essec){
         this.essences = essec;
+        assert this.level != null;
         this.level.sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), 2);
         this.setChanged();
     }
@@ -303,6 +309,7 @@ public class GemSeedTE extends BlockEntity {
 
     public void setFacing(int facing){
         this.facing = facing;
+        assert this.level != null;
         this.level.sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), 2);
         this.setChanged();
     }
@@ -312,7 +319,7 @@ public class GemSeedTE extends BlockEntity {
     }
 
     @Override
-    public void saveAdditional(CompoundTag compound) {
+    public void saveAdditional(@NotNull CompoundTag compound) {
         super.saveAdditional(compound);
         compound.putInt("stage", this.stage);
         compound.putBoolean("spawned", this.spawned);
@@ -357,7 +364,7 @@ public class GemSeedTE extends BlockEntity {
 
 
     @Override
-    public void load(CompoundTag nbt) {
+    public void load(@NotNull CompoundTag nbt) {
         super.load(nbt);
         this.GEM_CONDITIONS = ModEntities.CRUXTOGEM;
         this.stage = nbt.getInt("stage");
@@ -420,16 +427,16 @@ public class GemSeedTE extends BlockEntity {
     }
 
     public static Fluid FluidFromString(String fluid){
-        if(fluid == "pink"){
+        if(Objects.equals(fluid, "pink")){
             return ModFluids.PINK_ESSENCE.source.get();
         }
-        else if(fluid == "blue"){
+        else if(Objects.equals(fluid, "blue")){
             return ModFluids.BLUE_ESSENCE.source.get();
         }
-        else if(fluid == "yellow"){
+        else if(Objects.equals(fluid, "yellow")){
             return ModFluids.YELLOW_ESSENCE.source.get();
         }
-        else if(fluid == "white"){
+        else if(Objects.equals(fluid, "white")){
             return ModFluids.PINK_ESSENCE.source.get();
         }
         else {
@@ -510,7 +517,7 @@ public class GemSeedTE extends BlockEntity {
     public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
         //Debug
         System.out.println("[DEBUG]:Client recived tile sync packet");
-        this.load(pkt.getTag());
+        this.load(Objects.requireNonNull(pkt.getTag()));
     }
 
     @Override

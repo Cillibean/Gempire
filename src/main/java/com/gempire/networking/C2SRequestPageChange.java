@@ -33,23 +33,23 @@ public class C2SRequestPageChange {
         NetworkEvent.Context ctx = contextSupplier.get();
         ServerPlayer sender = ctx.getSender();
         boolean hasPermission = true;
-        if (hasPermission) {
-            EntityGem gem = (EntityGem) sender.level.getEntity(msg.entityID);
-            boolean forwardd = msg.forward;
-            boolean pearl = gem instanceof EntityPearl;
-            if(pearl) {
-                if (forwardd) {
-                    ((EntityPearl)gem).CyclePageForward();
-                } else {
-                    ((EntityPearl)gem).CyclePageBackwards();
-                }
+        EntityGem gem = (EntityGem) sender.level.getEntity(msg.entityID);
+        boolean forwardd = msg.forward;
+        boolean pearl = gem instanceof EntityPearl;
+        if(pearl) {
+            if (forwardd) {
+                ((EntityPearl)gem).CyclePageForward();
+            } else {
+                ((EntityPearl)gem).CyclePageBackwards();
             }
-            else{
-                if (forwardd) {
-                    ((EntityZircon)gem).CyclePageForward();
-                } else {
-                    ((EntityZircon)gem).CyclePageBackwards();
-                }
+        }
+        else{
+            if (forwardd) {
+                assert gem != null;
+                ((EntityZircon)gem).CyclePageForward();
+            } else {
+                assert gem != null;
+                ((EntityZircon)gem).CyclePageBackwards();
             }
         }
         ctx.setPacketHandled(true);
