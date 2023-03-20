@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "gempire:mystery_block"
+          "name": "gempire:ruined_marble_block"
         }
       ],
       "conditions": [

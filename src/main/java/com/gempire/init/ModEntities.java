@@ -178,9 +178,8 @@ public class ModEntities {
                 .sized(0.25F, 0.25F)
                 .setTrackingRange(64)
                 .setUpdateInterval(10)
-                .setCustomClientFactory((spawnEntity, world) -> new IceShardEntity(ModEntities.ICE_SHARD.get(), world))
                 .setShouldReceiveVelocityUpdates(true)
-                .build(new ResourceLocation(Gempire.MODID, "bubble").toString());
+                .build(new ResourceLocation(Gempire.MODID, "ice_shard").toString());
     });
 
     public static void registerCruxes(){

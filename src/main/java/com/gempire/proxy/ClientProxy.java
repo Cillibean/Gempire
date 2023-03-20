@@ -58,6 +58,8 @@ public class ClientProxy {
         event.registerEntityRenderer(ModEntities.SPINEL.get(), m -> new RenderSpinel(m, new ModelSpinel<>(m.bakeLayer(ModelSpinel.LAYER_LOCATION))));
         event.registerEntityRenderer(ModEntities.TOURMALINE.get(), m -> new RenderTourmaline(m, new ModelTourmaline<>(m.bakeLayer(ModelTourmaline.LAYER_LOCATION))));
 
+        event.registerEntityRenderer(ModEntities.ICE_SHARD.get(), ThrownItemRenderer::new);
+
         MenuScreens.register(ModContainers.TANK_CONTAINER.get(), TankScreen::new);
         MenuScreens.register(ModContainers.INJECTOR_CONTAINER.get(), InjectorScreen::new);
         MenuScreens.register(ModContainers.GEM_UI_CONTAINER.get(), GemUIScreen::new);
@@ -70,7 +72,6 @@ public class ClientProxy {
 
     @SubscribeEvent
     public static void doSetup(FMLClientSetupEvent event) {
-        EntityRenderers.register(ModEntities.ICE_SHARD.get(), RenderIceShard::new);
     }
 
     @SubscribeEvent

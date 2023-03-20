@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "gempire:drained_blue_soil",
+    "gempire:drained_grey_soil",
+    "gempire:drained_purple_soil",
+    "gempire:drained_red_soil",
+    "gempire:drained_yellow_soil"
+  ]
+}
