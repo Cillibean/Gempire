@@ -1,35 +1,28 @@
 package com.gempire.client.screen;
 
 import com.gempire.container.GemUIContainer;
-import com.gempire.container.TankContainer;
 import com.gempire.entities.abilities.AbilityZilch;
 import com.gempire.entities.abilities.base.Ability;
 import com.gempire.init.ModPacketHandler;
-import com.gempire.networking.C2SRequestDumpFluidsTank;
-import com.gempire.networking.C2SRequestInject;
 import com.gempire.networking.C2SRequestPoof;
 import com.gempire.networking.C2SRequestUpdateGemName;
 import com.gempire.util.GUIUtilities;
 import com.mojang.blaze3d.platform.Lighting;
-import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Quaternion;
+import com.mojang.math.Vector3f;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.components.EditBox;
+import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.resources.ResourceLocation;
-import com.mojang.math.Quaternion;
-import com.mojang.math.Vector3f;
-import net.minecraft.network.chat.Component;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.fluids.FluidStack;
-import org.lwjgl.system.CallbackI;
 
 import java.util.ArrayList;
 
@@ -79,7 +72,6 @@ public class GemUIScreen extends AbstractContainerScreen<GemUIContainer> {
         this.renderTooltip(matrixStack, mouseX, mouseY);
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     protected void renderBg(PoseStack matrixStack, float partialTicks, int mouseX, int mouseY) {
         GUIUtilities.setup(GemUIScreen.GUI);
@@ -89,12 +81,23 @@ public class GemUIScreen extends AbstractContainerScreen<GemUIContainer> {
         int i = this.leftPos;
         int j = this.topPos;
 
-        this.blit(matrixStack, x, y, 0, 0, this.imageWidth, this.imageHeight, 197, 250);
+        blit(matrixStack, x, y, 0, 0, this.imageWidth, this.imageHeight, 197, 250);
 
         this.nameBox.render(matrixStack, mouseX, mouseY, partialTicks);
-
-        int scale = this.menu.gem.getBoundingBox().getYsize() > 1.8f ? 25 : 30;
-        renderEntityInInventory(i + 135, j + 85, scale, (float)(i + 136) - mouseX, (float)(j + 55) - mouseY, this.menu.gem);
+        int scale = 0;
+        float boundingy = (float) this.menu.gem.getBoundingBox().getYsize();
+        if (boundingy > 2.4)
+        {
+            scale = 17;
+        } else if (boundingy > 1.8) {
+            scale = 25;
+        }
+        else
+        {
+            scale = 30;
+        }
+        //int scale = this.menu.gem.getBoundingBox().getYsize() > 1.8f ? 25 : 30;
+        renderEntityInInventory(i + 135, j + 85, scale, (float)(i + 135) - mouseX, (float)(j + 25) - mouseY, this.menu.gem);
         drawStats(matrixStack, i, j);
     }
 
@@ -166,8 +169,8 @@ public class GemUIScreen extends AbstractContainerScreen<GemUIContainer> {
     public void drawStats(PoseStack stack, int x, int y){
         Component health = Component.translatable("screens.gempire.health");
         Component damage = Component.translatable("screens.gempire.damage");
-        this.font.draw(stack, Component.translatable(health.getString() + ": " + (int)this.menu.gem.getHealth() + " / " + (int)this.menu.gem.getMaxHealth()), x + 11, y + 98, 4210752);
-        this.font.draw(stack,Component.translatable(damage.getString() + ": " + (int)this.menu.gem.getAttributeBaseValue(Attributes.ATTACK_DAMAGE)), x + 11, y + 110, 4210752);
+        this.font.draw(stack, Component.translatable(health.getString() + ": " + (int)this.menu.gem.getHealth() + " / " + (int)this.menu.gem.getMaxHealth()), x + 7, y + 98, 4210752);
+        this.font.draw(stack,Component.translatable(damage.getString() + ": " + (int)this.menu.gem.getAttributeBaseValue(Attributes.ATTACK_DAMAGE)), x + 7, y + 110, 4210752);
     }
 
     public void drawAbilityList(PoseStack stack, int x, int y){

@@ -17,7 +17,7 @@ public abstract class AbstractGarnet extends EntityVaryingGem {
     @Override
     public Abilities[] possibleAbilities() {
         return new Abilities[]{
-                Abilities.NO_ABILITY, Abilities.DISARMING
+                Abilities.NO_ABILITY//, Abilities.DISARMING
         };
     }
 }

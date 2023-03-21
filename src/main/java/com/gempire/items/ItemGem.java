@@ -28,6 +28,7 @@ import org.apache.commons.lang3.ArrayUtils;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.Objects;
 import java.util.Random;
 
 import net.minecraft.core.BlockPos;
@@ -35,6 +36,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
+import org.jetbrains.annotations.NotNull;
 
 public class ItemGem extends Item {
     public String ID = "";
@@ -64,23 +66,22 @@ public class ItemGem extends Item {
     }
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level worldIn, Player playerIn, InteractionHand handIn) {
+    public @NotNull InteractionResultHolder<ItemStack> use(Level worldIn, @NotNull Player playerIn, @NotNull InteractionHand handIn) {
         boolean spawned = false;
         if(!worldIn.isClientSide) {
             ItemStack itemstack = playerIn.getItemInHand(handIn);
-            HitResult raytraceresult = this.getPlayerPOVHitResult(worldIn, playerIn, ClipContext.Fluid.NONE);
+            BlockHitResult raytraceresult = getPlayerPOVHitResult(worldIn, playerIn, ClipContext.Fluid.NONE);
             if (raytraceresult.getType() == HitResult.Type.MISS) {
                 return super.use(worldIn, playerIn, handIn);
             } else {
                 if (raytraceresult.getType() == HitResult.Type.BLOCK) {
-                    BlockHitResult blockraytraceresult = (BlockHitResult) raytraceresult;
-                    BlockPos blockpos = blockraytraceresult.getBlockPos();
-                    Direction direction = blockraytraceresult.getDirection();
+                    BlockPos blockpos = raytraceresult.getBlockPos();
+                    Direction direction = raytraceresult.getDirection();
                     if (!worldIn.mayInteract(playerIn, blockpos) || !playerIn.mayUseItemAt(blockpos.relative(direction), direction, itemstack)) {
                         return super.use(worldIn, playerIn, handIn);
                     }
 
-                    if (worldIn.mayInteract(playerIn, blockpos) && playerIn.mayUseItemAt(blockpos, blockraytraceresult.getDirection(), itemstack)) {
+                    if (worldIn.mayInteract(playerIn, blockpos) && playerIn.mayUseItemAt(blockpos, raytraceresult.getDirection(), itemstack)) {
                         spawned = this.formGem(worldIn, playerIn, blockpos, itemstack, null);
                     }
                 }
@@ -103,11 +104,11 @@ public class ItemGem extends Item {
             EntityGem gem = gemm.get().create(world);
             String namee = "pebble";
 
-            if (this.ID == "") {
-                namee = ForgeRegistries.ITEMS.getKey(this).toString().replaceAll("gempire", "").replaceAll("gem", "").replaceAll(":", "").replaceAll(" ", "");
+            if (Objects.equals(this.ID, "")) {
+                namee = Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(this)).toString().replaceAll("gempire", "").replaceAll("gem", "").replaceAll(":", "").replaceAll(" ", "");
             }
             else{
-                namee = ForgeRegistries.ITEMS.getKey(this).toString().replaceAll(this.ID, "").replaceAll("gem", "").replaceAll(":", "").replaceAll(" ", "");
+                namee = Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(this)).toString().replaceAll(this.ID, "").replaceAll("gem", "").replaceAll(":", "").replaceAll(" ", "");
             }
 
             //This whole section here checks for variations in color so it can spawn the correct type of gem
@@ -131,29 +132,34 @@ public class ItemGem extends Item {
             //End of check and set
 
             try {
-                gemm = ModEntities.PEBBLE;
-                if(this.ID == ""){
+                if(Objects.equals(this.ID, "")){
                     gemm = (RegistryObject<EntityType<EntityPebble>>) ModEntities.class.getField(namee.toUpperCase()).get(null);
                 }
-                else{
+                else {
                     gemm = (RegistryObject<EntityType<EntityPebble>>) AddonHandler.ADDON_ENTITY_REGISTRIES.get(this.ID).getField(namee.toUpperCase()).get(null);
                 }
                 gem = gemm.get().create(world);
+                assert gem != null;
                 gem.setUUID(Mth.createInsecureUUID(world.random));
             } catch(Exception e){
                 e.printStackTrace();
             }
             try {
                 if(item != null){
+                    assert gem != null;
                     gem.spawnGem = item;
                 }
+                assert stack.getTag() != null;
+                assert gem != null;
                 gem.load(stack.getTag());
             } catch (Exception e){
                 if(ainmneacha.length > 1) {
+                    assert gem != null;
                     gem.setSkinVariantOnInitialSpawn = false;
-                    gem.initalSkinVariant = Integer.valueOf(skinColorVariant);
+                    gem.initalSkinVariant = Integer.parseInt(skinColorVariant);
                 }
                 if(player != null) {
+                    assert gem != null;
                     gem.finalizeSpawn((ServerLevelAccessor) world, world.getCurrentDifficultyAt(player.blockPosition()), MobSpawnType.TRIGGERED, null, null);
                     gem.addOwner(player.getUUID());
                     gem.FOLLOW_ID = player.getUUID();
@@ -163,6 +169,8 @@ public class ItemGem extends Item {
                     if(item != null){
                         gem.spawnGem = item;
                     }
+                    assert gem != null;
+                    assert item != null;
                     gem.finalizeSpawn((ServerLevelAccessor) world, world.getCurrentDifficultyAt(item.blockPosition()), MobSpawnType.MOB_SUMMONED, null, null);
                 }
             }
@@ -183,6 +191,7 @@ public class ItemGem extends Item {
 
     public void setData(EntityGem host, ItemStack stack) {
         stack.setTag(host.saveWithoutId(new CompoundTag()));
+        assert stack.getTag() != null;
         stack.getTag().putString("name", host.getName().getString());
     }
 

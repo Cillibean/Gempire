@@ -35,7 +35,7 @@ public enum Abilities {
     AEROKINESIS(31, 3),
     AZUR_PYROKINESIS(32, 1),
     FRAGOKINESIS(33, 3),
-    BERSERKER(34, 4),
+    BERSERKER(34, 2),
     BEASTMASTER(35, 3),
     CHARMER(36, 5),
     DISARMING(37, 3),
