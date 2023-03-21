@@ -1434,7 +1434,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     }
 
     public boolean canOpenInventoryByDefault(){
-        return false;
+        return true;
     }
 
     public boolean consumeItemCheck(Item item){
