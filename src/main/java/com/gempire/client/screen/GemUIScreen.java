@@ -36,32 +36,32 @@ import java.util.ArrayList;
 
 public class GemUIScreen extends AbstractContainerScreen<GemUIContainer> {
     public static final ResourceLocation GUI = new ResourceLocation("gempire:textures/gui/base.png");
-    public static final ResourceLocation ARROW = new ResourceLocation("gempire:textures/gui/arrow_down.png");
     public EditBox nameBox;
 
     public GemUIScreen(GemUIContainer screenContainer, Inventory inv, Component titleIn) {
         super(screenContainer, inv, titleIn);
         this.leftPos = 0;
         this.topPos = 0;
-        this.imageWidth = 272;
+        this.imageWidth = 197;
         this.imageHeight = 250;
     }
 
     @Override
     protected void init() {
+        //name box
         super.init();
         int x = (this.width - this.imageWidth) / 2;
         int y = (this.height - this.imageHeight) / 2;
-        this.nameBox = new EditBox(this.font, x + 87, y + 69, 101, 12, Component.translatable("Sussy"));
+        this.nameBox = new EditBox(this.font, x + 27, y + 4, 144, 12, Component.translatable("Sussy"));
         this.nameBox.setBordered(true);
         this.nameBox.setVisible(true);
         String name = this.menu.gem.customName() ? this.menu.gem.getCustomName().getString() : this.menu.gem.getNickname().getString();
         this.nameBox.setValue(name);
         this.nameBox.setFocus(true);
-
+        //poof button
         addRenderableWidget(this.nameBox);
         this.setInitialFocus(this.nameBox);
-        addRenderableWidget(new Button(this.leftPos + 27, this.topPos + 123, 83, 20, Component.translatable("screens.gempire.poof"), (button) -> {
+        addRenderableWidget(new Button(this.leftPos + 10, this.topPos + 123, 83, 20, Component.translatable("screens.gempire.poof"), (button) -> {
             ModPacketHandler.INSTANCE.sendToServer(new C2SRequestPoof(this.menu.gem.getId()));
             this.onClose();
         }));
@@ -69,7 +69,7 @@ public class GemUIScreen extends AbstractContainerScreen<GemUIContainer> {
 
     @Override
     protected void renderLabels(PoseStack matrixStack, int x, int y) {
-        this.drawAbilityList(matrixStack, 148, 98);
+        this.drawAbilityList(matrixStack, 104, 97);
     }
 
     @Override
@@ -89,15 +89,12 @@ public class GemUIScreen extends AbstractContainerScreen<GemUIContainer> {
         int i = this.leftPos;
         int j = this.topPos;
 
-        this.blit(matrixStack, x, y, 0, 0, this.imageWidth, this.imageHeight, 272, 250);
-
-        GUIUtilities.setup(GemUIScreen.ARROW);
-        this.blit(matrixStack, i + 181, j + (31), 9, this.menu.gem.getBrewProgress(), 0, 0, 9, this.menu.gem.getBrewProgress(), 9, 11);
+        this.blit(matrixStack, x, y, 0, 0, this.imageWidth, this.imageHeight, 197, 250);
 
         this.nameBox.render(matrixStack, mouseX, mouseY, partialTicks);
 
         int scale = this.menu.gem.getBoundingBox().getYsize() > 1.8f ? 25 : 30;
-        renderEntityInInventory(i + 228, j + 76, scale, (float)(i + 229) - mouseX, (float)(j + 46) - mouseY, this.menu.gem);
+        renderEntityInInventory(i + 135, j + 85, scale, (float)(i + 136) - mouseX, (float)(j + 55) - mouseY, this.menu.gem);
         drawStats(matrixStack, i, j);
     }
 
@@ -169,8 +166,8 @@ public class GemUIScreen extends AbstractContainerScreen<GemUIContainer> {
     public void drawStats(PoseStack stack, int x, int y){
         Component health = Component.translatable("screens.gempire.health");
         Component damage = Component.translatable("screens.gempire.damage");
-        this.font.draw(stack, Component.translatable(health.getString() + ": " + (int)this.menu.gem.getHealth() + " / " + (int)this.menu.gem.getMaxHealth()), x + 12, y + 98, 4210752);
-        this.font.draw(stack,Component.translatable(damage.getString() + ": " + (int)this.menu.gem.getAttributeBaseValue(Attributes.ATTACK_DAMAGE)), x + 12, y + 110, 4210752);
+        this.font.draw(stack, Component.translatable(health.getString() + ": " + (int)this.menu.gem.getHealth() + " / " + (int)this.menu.gem.getMaxHealth()), x + 11, y + 98, 4210752);
+        this.font.draw(stack,Component.translatable(damage.getString() + ": " + (int)this.menu.gem.getAttributeBaseValue(Attributes.ATTACK_DAMAGE)), x + 11, y + 110, 4210752);
     }
 
     public void drawAbilityList(PoseStack stack, int x, int y){
