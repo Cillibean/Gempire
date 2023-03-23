@@ -1,9 +1,9 @@
 package com.gempire.client.entity.render;
 
 import com.gempire.Gempire;
-import com.gempire.client.entity.model.ModelEmerald;
+import com.gempire.client.entity.model.ModelGarnet;
 import com.gempire.client.entity.render.layers.*;
-import com.gempire.entities.gems.EntityEmerald;
+import com.gempire.entities.gems.EntityGarnet;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -11,9 +11,9 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.network.chat.Component;
 
-public class RenderEmerald extends MobRenderer<EntityEmerald, ModelEmerald<EntityEmerald>> {
+public class RenderGarnet extends MobRenderer<EntityGarnet, ModelGarnet<EntityGarnet>> {
 
-    public RenderEmerald(EntityRendererProvider.Context renderManagerIn, ModelEmerald<EntityEmerald> baseModel) {
+    public RenderGarnet(EntityRendererProvider.Context renderManagerIn, ModelGarnet<EntityGarnet> baseModel) {
         super(renderManagerIn, baseModel, .25f);
         this.addLayer(new SkinLayer(this));
         this.addLayer(new FaceLayer(this));
@@ -24,17 +24,17 @@ public class RenderEmerald extends MobRenderer<EntityEmerald, ModelEmerald<Entit
     }
 
     @Override
-    protected void scale(EntityEmerald entitylivingbaseIn, PoseStack matrixStackIn, float partialTickTime) {
-        matrixStackIn.scale(1.25f, 1.35f, 1.25f);
+    protected void scale(EntityGarnet entitylivingbaseIn, PoseStack matrixStackIn, float partialTickTime) {
+        matrixStackIn.scale(1.2f, 1.3f, 1.2f);
         super.scale(entitylivingbaseIn, matrixStackIn, partialTickTime);
     }
 
     @Override
-    public ResourceLocation getTextureLocation(EntityEmerald entity) {
-        return new ResourceLocation(Gempire.MODID+":textures/entity/emerald/blank.png");
+    public ResourceLocation getTextureLocation(EntityGarnet entity) {
+        return new ResourceLocation(Gempire.MODID+":textures/entity/garnet/blank.png");
     }
     @Override
-    protected void renderNameTag(EntityEmerald entityIn, Component displayNameIn, PoseStack matrixStackIn, MultiBufferSource bufferIn, int packedLightIn) {
+    protected void renderNameTag(EntityGarnet entityIn, Component displayNameIn, PoseStack matrixStackIn, MultiBufferSource bufferIn, int packedLightIn) {
         matrixStackIn.scale(1.1f, 1.1f, 1.1f);
         super.renderNameTag(entityIn, displayNameIn, matrixStackIn, bufferIn, packedLightIn);
     }

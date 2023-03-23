@@ -113,20 +113,15 @@ public class ModEntities {
                     .sized(.75f, 2.5f) // Hitbox Size
                     .build(new ResourceLocation(Gempire.MODID, "bixbite").toString()));
 
-    public static final RegistryObject<EntityType<EntityDemantoid>> DEMANTOID = ENTITIES.register("demantoid",
-            () -> EntityType.Builder.of(EntityDemantoid::new, MobCategory.CREATURE)
+    public static final RegistryObject<EntityType<EntityGarnet>> GARNET = ENTITIES.register("garnet",
+            () -> EntityType.Builder.of(EntityGarnet::new, MobCategory.CREATURE)
                     .sized(.75f, 3.0f) // Hitbox Size
-                    .build(new ResourceLocation(Gempire.MODID, "demantoid").toString()));
+                    .build(new ResourceLocation(Gempire.MODID, "garnet").toString()));
 
     public static final RegistryObject<EntityType<EntityEmerald>> EMERALD = ENTITIES.register("emerald",
             () -> EntityType.Builder.of(EntityEmerald::new, MobCategory.CREATURE)
                     .sized(.75f, 3.0f) // Hitbox Size
                     .build(new ResourceLocation(Gempire.MODID, "emerald").toString()));
-
-    public static final RegistryObject<EntityType<EntityHessonite>> HESSONITE = ENTITIES.register("hessonite",
-            () -> EntityType.Builder.of(EntityHessonite::new, MobCategory.CREATURE)
-                    .sized(.75f, 3.0f) // Hitbox Size
-                    .build(new ResourceLocation(Gempire.MODID, "hessonite").toString()));
 
     public static final RegistryObject<EntityType<EntityLapis>> LAPIS = ENTITIES.register("lapis",
             () -> EntityType.Builder.of(EntityLapis::new, MobCategory.CREATURE)
@@ -138,11 +133,6 @@ public class ModEntities {
                     .sized(.75f, 1.99f) // Hitbox Size
                     .build(new ResourceLocation(Gempire.MODID, "larimar").toString()));
 
-    public static final RegistryObject<EntityType<EntityMelanite>> MELANITE = ENTITIES.register("melanite",
-            () -> EntityType.Builder.of(EntityMelanite::new, MobCategory.CREATURE)
-                    .sized(.75f, 3.0f) // Hitbox Size
-                    .build(new ResourceLocation(Gempire.MODID, "melanite").toString()));
-
     public static final RegistryObject<EntityType<EntityMorganite>> MORGANITE = ENTITIES.register("morganite",
             () -> EntityType.Builder.of(EntityMorganite::new, MobCategory.CREATURE)
                     .sized(.75f, 1.5f) // Hitbox Size
@@ -152,12 +142,7 @@ public class ModEntities {
             () -> EntityType.Builder.of(EntityPeridot::new, MobCategory.CREATURE)
                     .sized(.75f, 1.99f) // Hitbox Size
                     .build(new ResourceLocation(Gempire.MODID, "peridot").toString()));
-
-    public static final RegistryObject<EntityType<EntityPyrope>> PYROPE = ENTITIES.register("pyrope",
-            () -> EntityType.Builder.of(EntityPyrope::new, MobCategory.CREATURE)
-                    .sized(.75f, 3.0f) // Hitbox Size
-                    .build(new ResourceLocation(Gempire.MODID, "pyrope").toString()));
-
+    
     public static final RegistryObject<EntityType<EntityRutile>> RUTILE = ENTITIES.register("rutile",
             () -> EntityType.Builder.of(EntityRutile::new, MobCategory.CREATURE)
                     .sized(.75f, 1.99f) // Hitbox Size
