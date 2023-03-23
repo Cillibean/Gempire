@@ -20,7 +20,6 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.commands.LocateCommand;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.client.Minecraft;
@@ -152,7 +151,6 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     public int structureTime = 0;
     public ArrayList<String> structures = new ArrayList<>();
     public ArrayList<String> biomes = new ArrayList<>();
-    private int attackAnimationTick;
 
     public ItemEntity spawnGem = null;
 
@@ -352,9 +350,6 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
 
     @Override
     public void aiStep() {
-        if (this.attackAnimationTick > 0) {
-            --this.attackAnimationTick;
-        }
         if(!this.isFocused()){
             this.focusCounter++;
             if(this.focusCounter > this.maxFocusCounter){
@@ -584,7 +579,6 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
 
     @Override
     public boolean doHurtTarget(Entity entityIn) {
-        this.attackAnimationTick = 10;
         if(!entityIn.level.isClientSide){
             if(this.focusCheck()) for(Ability power : this.getAbilityPowers()){
                 if(power instanceof IMeleeAbility) {
@@ -594,18 +588,9 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         }
         return super.doHurtTarget(entityIn);
     }
-    public void handleEntityEvent(byte p_28844_) {
-        if (p_28844_ == 4) {
-            this.attackAnimationTick = 10;
-        }
 
-    }
-    public int getAttackAnimationTick() {
-        return this.attackAnimationTick;
-    }
     @Override
     public void performRangedAttack(LivingEntity target, float distanceFactor) {
-        this.attackAnimationTick = 10;
         for(Ability power : this.getAbilityPowers()){
             if(power instanceof IRangedAbility && this.focusCheck()){
                 ((IRangedAbility)power).attack(target, distanceFactor);

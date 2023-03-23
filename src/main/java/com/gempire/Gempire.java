@@ -1,5 +1,6 @@
 package com.gempire;
 
+import com.gempire.entities.bases.AbstractGarnet;
 import com.gempire.entities.gems.*;
 import com.gempire.entities.gems.starter.EntityMica;
 import com.gempire.entities.gems.starter.EntityNacre;
@@ -112,23 +113,23 @@ public class Gempire
 
         event.put(ModEntities.BIXBITE.get(), EntityBixbite.registerAttributes().build());
 
-        event.put(ModEntities.DEMANTOID.get(), EntityDemantoid.registerAttributes().build());
+        event.put(ModEntities.DEMANTOID.get(), AbstractGarnet.registerAttributes().build());
 
         event.put(ModEntities.EMERALD.get(), EntityEmerald.registerAttributes().build());
 
-        event.put(ModEntities.HESSONITE.get(), EntityHessonite.registerAttributes().build());
+        event.put(ModEntities.HESSONITE.get(), AbstractGarnet.registerAttributes().build());
 
         event.put(ModEntities.LAPIS.get(), EntityLapis.registerAttributes().build());
 
         event.put(ModEntities.LARIMAR.get(), EntityLarimar.registerAttributes().build());
 
-        event.put(ModEntities.MELANITE.get(), EntityMelanite.registerAttributes().build());
+        event.put(ModEntities.MELANITE.get(), AbstractGarnet.registerAttributes().build());
 
         event.put(ModEntities.MORGANITE.get(), EntityMorganite.registerAttributes().build());
 
         event.put(ModEntities.PERIDOT.get(), EntityPeridot.registerAttributes().build());
 
-        event.put(ModEntities.PYROPE.get(), EntityPyrope.registerAttributes().build());
+        event.put(ModEntities.PYROPE.get(), AbstractGarnet.registerAttributes().build());
 
         event.put(ModEntities.RUTILE.get(), EntityRutile.registerAttributes().build());
 

@@ -49,9 +49,9 @@ public class EntityPearl extends EntityVaryingGem {
 
     public static AttributeSupplier.Builder registerAttributes() {
         return Mob.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 50.0D)
+                .add(Attributes.MAX_HEALTH, 20.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.3D)
-                .add(Attributes.ATTACK_DAMAGE, 10.0D)
+                .add(Attributes.ATTACK_DAMAGE, 1.0D)
                 .add(Attributes.ATTACK_SPEED, 1.5D);
     }
 
