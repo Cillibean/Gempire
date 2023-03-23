@@ -113,23 +113,17 @@ public class Gempire
 
         event.put(ModEntities.BIXBITE.get(), EntityBixbite.registerAttributes().build());
 
-        event.put(ModEntities.DEMANTOID.get(), AbstractGarnet.registerAttributes().build());
+        event.put(ModEntities.GARNET.get(), EntityGarnet.registerAttributes().build());
 
         event.put(ModEntities.EMERALD.get(), EntityEmerald.registerAttributes().build());
-
-        event.put(ModEntities.HESSONITE.get(), AbstractGarnet.registerAttributes().build());
 
         event.put(ModEntities.LAPIS.get(), EntityLapis.registerAttributes().build());
 
         event.put(ModEntities.LARIMAR.get(), EntityLarimar.registerAttributes().build());
 
-        event.put(ModEntities.MELANITE.get(), AbstractGarnet.registerAttributes().build());
-
         event.put(ModEntities.MORGANITE.get(), EntityMorganite.registerAttributes().build());
 
         event.put(ModEntities.PERIDOT.get(), EntityPeridot.registerAttributes().build());
-
-        event.put(ModEntities.PYROPE.get(), AbstractGarnet.registerAttributes().build());
 
         event.put(ModEntities.RUTILE.get(), EntityRutile.registerAttributes().build());
 

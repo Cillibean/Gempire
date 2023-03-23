@@ -284,10 +284,10 @@
   "item.gempire.shale_gem": "Shale Gem",
   "item.gempire.nacre_gem": "Nacre Gem",
 
-  "item.gempire.hessonite_gem": "Hessonite Gem",
-  "item.gempire.demantoid_gem": "Demantoid Gem",
-  "item.gempire.pyrope_gem": "Pyrope Gem",
-  "item.gempire.melanite_gem": "Melanite Gem",
+  "item.gempire.garnet_gem_1": "Hessonite Gem",
+  "item.gempire.garnet_gem_5": "Demantoid Gem",
+  "item.gempire.garnet_gem_14": "Pyrope Gem",
+  "item.gempire.garnet_gem_15": "Melanite Gem",
 
   "item.gempire.spodumene_gem_1": "Spodumene Gem",
   "item.gempire.spodumene_gem_4": "Triphane Gem",
@@ -318,10 +318,6 @@
   "entity.gempire.larimar": "Larimar",
   "entity.gempire.spinel": "Spinel",
   "entity.gempire.tourmaline": "Tourmaline",
-  "entity.gempire.hessonite": "Hessonite",
-  "entity.gempire.demantoid": "Demantoid",
-  "entity.gempire.pyrope": "Pyrope",
-  "entity.gempire.melanite": "Melanite",
   "entity.gempire.aquamarine": "Aquamarine",
   "entity.gempire.bismuth": "Bismuth",
   "entity.gempire.bixbite": "Bixbite",
@@ -330,6 +326,11 @@
   "entity.gempire.morganite": "Morganite",
   "entity.gempire.peridot": "Peridot",
   "entity.gempire.rutile": "Rutile",
+
+  "nickname.gempire.garnet_1": "Hessonite",
+  "nickname.gempire.garnet_5": "Demantoid",
+  "nickname.gempire.garnet_14": "Pyrope",
+  "nickname.gempire.garnet_15": "Melanite",
 
   "nickname.gempire.spodumene_1": "Spodumene",
   "nickname.gempire.spodumene_4": "Triphane",
