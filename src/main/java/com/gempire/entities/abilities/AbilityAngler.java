@@ -36,7 +36,7 @@ public class AbilityAngler extends Ability implements IIdleAbility {
         if (this.holder.tickCount % 200 == 0) {
             if (this.holder.isInWater()) {
                 ItemStack rod = new ItemStack(Items.FISHING_ROD);
-                rod.enchant(Enchantments.FISHING_LUCK, 4);
+                rod.enchant(Enchantments.FISHING_LUCK, 1);
                 LootTable loottable = this.holder.level.getServer().getLootTables().get(BuiltInLootTables.FISHING);
                 List<ItemStack> items = loottable.getRandomItems((new LootContext.Builder((ServerLevel) this.holder.level))
                         .withLuck(this.holder.getLuck())

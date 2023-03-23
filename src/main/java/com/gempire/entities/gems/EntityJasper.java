@@ -27,14 +27,6 @@ public class EntityJasper extends AbstractQuartz {
         super(type, worldIn);
     }
 
-    public static AttributeSupplier.Builder registerAttributes() {
-        return Mob.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 60.0D)
-                .add(Attributes.MOVEMENT_SPEED, 0.35D)
-                .add(Attributes.ATTACK_DAMAGE, 7.0D)
-                .add(Attributes.ATTACK_SPEED, 1.0D);
-    }
-
     @Override
     protected void registerGoals() {
         super.registerGoals();

@@ -20,7 +20,7 @@ public class AbilityTank extends Ability implements IAttributeAbility {
 
     @Override
     public double baseValue() {
-        return this.holder.getAttributeValue(Attributes.MAX_HEALTH) * 1.5D;
+        return this.holder.getAttributeValue(Attributes.MAX_HEALTH) * 1.25D;
     }
 
     @Override

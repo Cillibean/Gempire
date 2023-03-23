@@ -1,11 +1,8 @@
 package com.gempire.entities.abilities.interfaces;
 
-import com.gempire.entities.bases.EntityGem;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.effect.MobEffectInstance;
-
-import java.util.ArrayList;
 
 public interface IEffectAbility {
     MobEffectInstance effect();
@@ -22,9 +19,8 @@ public interface IEffectAbility {
     }
     default boolean isEntityApplicable(LivingEntity subject){
         Class<LivingEntity>[] classes = this.applicableEntities();
-        for(int i = 0; i < classes.length; i++) {
-            Class tclass = classes[i];
-            if(tclass.isAssignableFrom(subject.getClass()) || subject.getClass().getCanonicalName().equals(tclass.getCanonicalName())){
+        for (Class<LivingEntity> tclass : classes) {
+            if (tclass.isAssignableFrom(subject.getClass()) || subject.getClass().getCanonicalName().equals(tclass.getCanonicalName())) {
                 return true;
             }
         }
