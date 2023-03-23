@@ -1,19 +1,24 @@
 package com.gempire.entities.gems;
 
+import com.gempire.entities.abilities.AbilityDisarming;
+import com.gempire.entities.abilities.base.Ability;
+import com.gempire.entities.abilities.interfaces.IAlchemyAbility;
+import com.gempire.entities.abilities.interfaces.IMeleeAbility;
 import com.gempire.entities.ai.EntityAIFollowOwner;
 import com.gempire.entities.ai.EntityAIWander;
 import com.gempire.entities.bases.EntityVaryingGem;
 import com.gempire.util.Abilities;
 import com.gempire.util.GemPlacements;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.PathfinderMob;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 
 public class EntityGarnet extends EntityVaryingGem {
@@ -77,15 +82,32 @@ public class EntityGarnet extends EntityVaryingGem {
     }
     public Abilities[] possibleAbilities(){
         return new Abilities[]{
-                Abilities.NO_ABILITY, Abilities.TANK, Abilities.BEEFCAKE, Abilities.POWERHOUSE, Abilities.UNHINGED
+                Abilities.NO_ABILITY, Abilities.TANK, Abilities.BEEFCAKE, Abilities.POWERHOUSE, Abilities.UNHINGED, Abilities.BERSERKER
         };
     }
     public Abilities[] definiteAbilities(){
         return new Abilities[]{
-                //Abilities.LOOTMASTER
+                Abilities.DISARMING
         };
     }
-
+    public boolean doHurtTarget(Entity entityIn) {
+        for (Ability ability : this.getAbilityPowers()) {
+            if (ability instanceof AbilityDisarming) {
+                if (!entityIn.level.isClientSide) {
+                    if (this.random.nextFloat() < 0.25f) {
+                        ItemStack item = ((PathfinderMob) entityIn).getItemBySlot(EquipmentSlot.MAINHAND);
+                        if (item.isDamageableItem()) {
+                            item.setDamageValue(item.getMaxDamage() - this.random.nextInt(1 + this.random.nextInt(Math.max(item.getMaxDamage() - 3, 1))));
+                        }
+                        ItemEntity dropitem = new ItemEntity(entityIn.level, entityIn.getX(), entityIn.getY(), entityIn.getZ(), item);
+                        entityIn.level.addFreshEntity(dropitem);
+                        entityIn.setItemSlot(EquipmentSlot.MAINHAND, ItemStack.EMPTY);
+                    }
+                }
+            }
+        }
+        return super.doHurtTarget(entityIn);
+    }
     @Override
     public boolean UsesUniqueNames() {
         return true;

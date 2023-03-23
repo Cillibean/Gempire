@@ -29,11 +29,14 @@ public class ModAbilities {
         Ability.ABILITY_FROM_ABILITIES.put(Abilities.UNHINGED, AbilityUnhinged.class);
         Ability.ABILITY_FROM_ABILITIES.put(Abilities.BERSERKER, AbilityBerserker.class);
 
+        Ability.ABILITY_FROM_ABILITIES.put(Abilities.DISARMING, AbilityDisarming.class);
+
         Ability.ABILITY_FROM_ABILITIES.put(Abilities.STERN, AbilityStern.class);
 
         Ability.ABILITY_FROM_ABILITIES.put(Abilities.GUARD, AbilityGuard.class);
         Ability.ABILITY_FROM_ABILITIES.put(Abilities.VEHICLE, AbilityVehicle.class);
         Ability.ABILITY_FROM_ABILITIES.put(Abilities.SCOUT, AbilityScout.class);
+
 
         Ability.ABILITY_FROM_ABILITIES.put(Abilities.ESSENCE_BREWER, AbilityBrewEssence.class);
 
