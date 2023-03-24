@@ -49,9 +49,9 @@ public class ModelQuartz<T extends EntityGem> extends ModelGem<T> {
 
 		PartDefinition agatehair = head.addOrReplaceChild("agatehair", CubeListBuilder.create().texOffs(0, 50).addBox(-14.0F, 0.0F, 0.0F, 14.0F, 4.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(7.0F, -2.0F, -2.3F));
 
-		PartDefinition messyponytail = head.addOrReplaceChild("messyponytail", CubeListBuilder.create().texOffs(33, 36).addBox(-8.0F, 0.0F, 0.0F, 8.0F, 8.0F, 7.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(3.8F, -5.8F, 3.0F, 0.2618F, 0.0F, 0.0F));
+		PartDefinition messyponytail = head.addOrReplaceChild("messyponytail", CubeListBuilder.create().texOffs(33, 36).addBox(-8.0F, 0.0F, 0.0F, 8.0F, 8.0F, 7.0F, new CubeDeformation(0.4F)), PartPose.offsetAndRotation(3.8F, -5.8F, 3.0F, 0.2618F, 0.0F, 0.0F));
 
-		PartDefinition cherryponytail = head.addOrReplaceChild("cherryponytail", CubeListBuilder.create().texOffs(64, 0).addBox(-6.0F, 0.0F, 0.0F, 6.0F, 9.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offset(2.8F, -5.8F, 4.2F));
+		PartDefinition cherryponytail = head.addOrReplaceChild("cherryponytail", CubeListBuilder.create().texOffs(64, 0).addBox(-6.0F, 0.0F, 0.0F, 6.0F, 9.0F, 6.0F, new CubeDeformation(0.4F)), PartPose.offset(2.8F, -5.8F, 4.2F));
 
 		PartDefinition hair = head.addOrReplaceChild("hair", CubeListBuilder.create().texOffs(0, 0).addBox(-8.0F, 0.0F, 0.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.25F)), PartPose.offset(3.8F, -4.1F, -4.3F));
 

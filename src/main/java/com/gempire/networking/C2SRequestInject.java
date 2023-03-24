@@ -2,6 +2,7 @@ package com.gempire.networking;
 
 import com.gempire.tileentities.InjectorTE;
 import net.minecraft.client.Minecraft;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.core.BlockPos;
@@ -28,9 +29,10 @@ public class C2SRequestInject {
     public static void handle(final C2SRequestInject msg, final Supplier<NetworkEvent.Context> contextSupplier) {
         NetworkEvent.Context ctx = contextSupplier.get();
         ServerPlayer sender = ctx.getSender();
+        ServerLevel level = sender.getLevel();
         boolean hasPermission = true;
         if (hasPermission) {
-            if (Minecraft.getInstance().level.getBlockEntity(injectorPos) instanceof InjectorTE blockEntity) {
+            if (level.getBlockEntity(injectorPos) instanceof InjectorTE blockEntity) {
                 blockEntity.Inject();
             }
             ctx.setPacketHandled(true);

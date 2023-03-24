@@ -67,8 +67,8 @@ public class ModelLarimar<T extends EntityGem> extends ModelGem<T> {
 	@Override
 	public void setupAnim(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		this.setRotateAngle(head, headPitch * 0.5f * ((float)Math.PI / 180F), netHeadYaw * .5f * ((float)Math.PI / 180F), 0);
-		this.setRotateAngle(leftarm, Mth.cos(limbSwing * 0.5F + (float)Math.PI) * limbSwingAmount * 0.8f, 0, 0);
-		this.setRotateAngle(rightarm, Mth.cos(limbSwing * 0.5F)  * limbSwingAmount * 0.8f, 0, 0);
+		this.setRotateAngle(leftarm, Mth.cos(limbSwing * 0.5F + (float)Math.PI) * limbSwingAmount * 0.8f, 0, 0.1745F);
+		this.setRotateAngle(rightarm, Mth.cos(limbSwing * 0.5F)  * limbSwingAmount * 0.8f, 0, -0.1745F);
 		this.setRotateAngle(leftleg, Mth.cos(limbSwing * 0.5F) * limbSwingAmount * 0.8f, 0, 0);
 		this.setRotateAngle(rightleg, Mth.cos(limbSwing * 0.5F + (float)Math.PI) * limbSwingAmount * 0.8f, 0, 0);
 	}

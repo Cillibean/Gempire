@@ -547,17 +547,6 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         if(this.level.isClientSide){
             return super.hurt(source, amount);
         }
-        if(source.getDirectEntity() instanceof LivingEntity){
-            LivingEntity entity = (LivingEntity) source.getDirectEntity();
-            ItemStack stack = entity.getMainHandItem();
-            /*if(stack.getItem() instanceof ItemRejuvenator){
-                resetOwners();
-                hurt(DamageSource.GENERIC, getMaxHealth());
-            }
-            if(stack.getItem() instanceof ItemDestabilizer){
-                hurt(DamageSource.GENERIC, getMaxHealth());
-            }*/
-        }
         if(this.isEmotional() && !source.isExplosion() && !source.isFire()) {
             if(this.emotionMeter <= this.EmotionThreshold()){
                 if(this.EmotionThreshold() - this.emotionMeter < 5){
@@ -1255,17 +1244,11 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         }
     }
 
-    public boolean causeFallDamage(float distance, float damageMultiplier) {
+    public boolean causeFallDamage(float p_148750_, float p_148751_, DamageSource p_148752_) {
         return false;
     }
 
-    protected void checkFallDamage(double y, boolean onGroundIn, BlockState state, BlockPos pos) {
-        this.checkInsideBlocks();
-        if (this.isInLava()) {
-            this.fallDistance = 0.0F;
-        } else {
-            super.checkFallDamage(y, onGroundIn, state, pos);
-        }
+    protected void checkFallDamage(double p_27754_, boolean p_27755_, BlockState p_27756_, BlockPos p_27757_) {
     }
 
     public void setHasCustomName(boolean value){

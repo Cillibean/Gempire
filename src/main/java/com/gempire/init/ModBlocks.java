@@ -22,7 +22,7 @@ public class ModBlocks {
                     .requiresCorrectToolForDrops()
 
                     .lightLevel((state) -> {
-                        return 10;
+                        return 3;
                     })
             , 0)
     );
@@ -35,7 +35,7 @@ public class ModBlocks {
                     .requiresCorrectToolForDrops()
 
                     .lightLevel((state) -> {
-                        return 10;
+                        return 3;
                     })
                     , 1)
     );
@@ -47,7 +47,7 @@ public class ModBlocks {
                     .sound(SoundType.GLASS)
                     .requiresCorrectToolForDrops()
                     .lightLevel((state) -> {
-                        return 10;
+                        return 3;
                     })
                     , 2)
     );
@@ -60,7 +60,7 @@ public class ModBlocks {
                     .requiresCorrectToolForDrops()
 
                     .lightLevel((state) -> {
-                        return 10;
+                        return 3;
                     })
                     , 3)
     );
@@ -73,7 +73,7 @@ public class ModBlocks {
                     .requiresCorrectToolForDrops()
 
                     .lightLevel((state) -> {
-                        return 10;
+                        return 3;
                     })
                     , 4)
     );
@@ -86,7 +86,7 @@ public class ModBlocks {
                     .requiresCorrectToolForDrops()
 
                     .lightLevel((state) -> {
-                        return 10;
+                        return 3;
                     })
                     , 5)
     );
@@ -99,7 +99,7 @@ public class ModBlocks {
                     .requiresCorrectToolForDrops()
 
                     .lightLevel((state) -> {
-                        return 10;
+                        return 3;
                     })
                     , 6)
     );
@@ -112,7 +112,7 @@ public class ModBlocks {
                     .requiresCorrectToolForDrops()
 
                     .lightLevel((state) -> {
-                        return 10;
+                        return 3;
                     })
                     , 7)
     );
@@ -124,7 +124,7 @@ public class ModBlocks {
                     .sound(SoundType.GLASS)
                     .requiresCorrectToolForDrops()
                     .lightLevel((state) -> {
-                        return 10;
+                        return 3;
                     })
                     , 8)
     );
@@ -137,7 +137,7 @@ public class ModBlocks {
                     .requiresCorrectToolForDrops()
 
                     .lightLevel((state) -> {
-                        return 10;
+                        return 3;
                     })
                     , 9)
     );
@@ -150,7 +150,7 @@ public class ModBlocks {
                     .requiresCorrectToolForDrops()
 
                     .lightLevel((state) -> {
-                        return 10;
+                        return 3;
                     })
                     , 10)
     );
@@ -163,7 +163,7 @@ public class ModBlocks {
                     .requiresCorrectToolForDrops()
 
                     .lightLevel((state) -> {
-                        return 10;
+                        return 3;
                     })
                     , 11)
     );
@@ -176,7 +176,7 @@ public class ModBlocks {
                     .requiresCorrectToolForDrops()
 
                     .lightLevel((state) -> {
-                        return 10;
+                        return 3;
                     })
                     , 12)
     );
@@ -189,7 +189,7 @@ public class ModBlocks {
                     .requiresCorrectToolForDrops()
 
                     .lightLevel((state) -> {
-                        return 10;
+                        return 3;
                     })
                     , 13)
     );
@@ -202,7 +202,7 @@ public class ModBlocks {
                     .requiresCorrectToolForDrops()
 
                     .lightLevel((state) -> {
-                        return 10;
+                        return 3;
                     })
                     , 14)
     );
@@ -215,7 +215,7 @@ public class ModBlocks {
                     .requiresCorrectToolForDrops()
 
                     .lightLevel((state) -> {
-                        return 10;
+                        return 3;
                     })
                     , 15)
     );

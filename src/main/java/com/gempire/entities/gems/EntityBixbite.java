@@ -123,7 +123,7 @@ public class EntityBixbite extends EntityGem {
 
     @Override
     public boolean fireImmune(){
-        return true;
+        return false;
     }
 
     public boolean hasSkinColorVariant(){

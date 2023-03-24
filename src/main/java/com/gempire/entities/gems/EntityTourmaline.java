@@ -200,7 +200,7 @@ public class EntityTourmaline extends EntityVaryingGem {
 
     @Override
     public boolean fireImmune(){
-        return true;
+        return false;
     }
 
     public boolean hasSkinColorVariant(){

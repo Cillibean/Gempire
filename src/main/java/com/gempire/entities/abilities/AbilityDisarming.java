@@ -13,7 +13,7 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
-public class AbilityDisarming extends Ability implements IMeleeAbility, IViolentAbility {
+public class AbilityDisarming extends Ability{
 
     public AbilityDisarming() {
         this.ability = Abilities.DISARMING;
@@ -24,8 +24,4 @@ public class AbilityDisarming extends Ability implements IMeleeAbility, IViolent
         return Component.translatable("ability.gempire.disarming");
     }
 
-    @Override
-    public void fight(Entity entityIn, double damage) {
-
-    }
 }

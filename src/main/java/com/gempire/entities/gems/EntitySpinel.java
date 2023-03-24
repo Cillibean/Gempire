@@ -46,10 +46,6 @@ public class EntitySpinel extends EntityVaryingGem {
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
         this.goalSelector.addGoal(7, new EntityAIWander(this, 1.0D));
         this.goalSelector.addGoal(7, new EntityAIFollowOwner(this, 1.0D));
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Mob.class, 1, false, false, (p_234199_0_) -> {
-            return p_234199_0_ instanceof Enemy;
-        }));
-        this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.1D, false));
     }
 
     @Override
@@ -127,7 +123,7 @@ public class EntitySpinel extends EntityVaryingGem {
 
     @Override
     public boolean fireImmune(){
-        return true;
+        return false;
     }
 
     public boolean hasSkinColorVariant(){

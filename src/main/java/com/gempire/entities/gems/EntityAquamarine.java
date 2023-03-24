@@ -5,11 +5,17 @@ import com.gempire.entities.ai.EntityAIWander;
 import com.gempire.entities.bases.EntityGem;
 import com.gempire.util.Abilities;
 import com.gempire.util.GemPlacements;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.control.FlyingMoveControl;
+import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
+import net.minecraft.world.entity.ai.navigation.PathNavigation;
+import net.minecraft.world.entity.animal.Bee;
+import net.minecraft.world.entity.animal.FlyingAnimal;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -21,17 +27,19 @@ import net.minecraft.world.entity.ai.goal.PanicGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 
-public class EntityAquamarine extends EntityGem {
+public class EntityAquamarine extends EntityGem implements FlyingAnimal {
     //TO-DO: IMPLEMENT AQUAMARINE. Advanced paralysis, DoT (Damage over Time)
     public EntityAquamarine(EntityType<? extends PathfinderMob> type, Level worldIn) {
         super(type, worldIn);
+        this.moveControl = new FlyingMoveControl(this, 20, true);
     }
 
     public static AttributeSupplier.Builder registerAttributes() {
         return Mob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 30.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.4D)
-                .add(Attributes.ATTACK_DAMAGE, 2.0D)
+                .add(Attributes.FLYING_SPEED, 6.0D)
+                .add(Attributes.ATTACK_DAMAGE, 3.0D)
                 .add(Attributes.ATTACK_SPEED, 1.0D);
     }
 
@@ -62,7 +70,17 @@ public class EntityAquamarine extends EntityGem {
                 GemPlacements.CHEST, GemPlacements.BACK, GemPlacements.BELLY, GemPlacements.LEFT_SHOULDER, GemPlacements.RIGHT_SHOULDER, GemPlacements.LEFT_HAND, GemPlacements.RIGHT_HAND, GemPlacements.LEFT_PALM, GemPlacements.RIGHT_PALM, GemPlacements.LEFT_THIGH,
                 GemPlacements.RIGHT_THIGH, GemPlacements.LEFT_ANKLE, GemPlacements.RIGHT_ANKLE };
     }
-
+    protected PathNavigation createNavigation(Level p_27815_) {
+        FlyingPathNavigation flyingpathnavigation = new FlyingPathNavigation(this, p_27815_) {
+            public boolean isStableDestination(BlockPos p_27947_) {
+                return !this.level.getBlockState(p_27947_.below()).isAir();
+            }
+        };
+        flyingpathnavigation.setCanOpenDoors(false);
+        flyingpathnavigation.setCanFloat(false);
+        flyingpathnavigation.setCanPassDoors(true);
+        return flyingpathnavigation;
+    }
     @Override
     public int generateHairVariant() {
         return this.random.nextInt(1);
@@ -125,7 +143,7 @@ public class EntityAquamarine extends EntityGem {
 
     @Override
     public boolean fireImmune(){
-        return true;
+        return false;
     }
 
     public boolean hasSkinColorVariant(){
@@ -145,4 +163,8 @@ public class EntityAquamarine extends EntityGem {
         return 7;
     }
 
+    @Override
+    public boolean isFlying() {
+        return true;
+    }
 }

@@ -41,7 +41,7 @@ public class ZirconUIContainer extends AbstractContainerMenu {
         this.gem = gem;
         this.canInteract = ContainerLevelAccess.create(this.gem.level, this.gem.blockPosition());
 
-        this.addSlot(new Slot(gem, 0, 38, 83){
+        this.addSlot(new Slot(gem, 0, 46, 83){
             public boolean mayPlace(ItemStack stack) {
                 return stack.getItem() == Items.LAPIS_LAZULI;
             }
@@ -50,9 +50,9 @@ public class ZirconUIContainer extends AbstractContainerMenu {
             }
         });
 
-        this.addSlot(new Slot(gem, 1, 97, 83));
+        this.addSlot(new Slot(gem, 1, 66, 83));
 
-        this.addSlot(new Slot(gem, 2, 156, 83));
+        this.addSlot(new Slot(gem, 2, 86, 83));
 
         //PLAYER INVENTORY
         for(int row = 0; row < 3; row++){
