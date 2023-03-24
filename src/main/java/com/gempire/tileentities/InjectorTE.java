@@ -159,86 +159,57 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
     }
 
     public void Inject() {
-        if (this.getItem(InjectorTE.CHROMA_INPUT_SLOT_INDEX).getItem() instanceof ItemChroma &&
-                (this.getTankFromValue(0).getFluid().getFluid() != Fluids.EMPTY && this.pinkOpen ||
-                        this.getTankFromValue(1).getFluid().getFluid() != Fluids.EMPTY && this.blueOpen ||
-                        this.getTankFromValue(2).getFluid().getFluid() != Fluids.EMPTY && this.yellowOpen ||
-                        this.getTankFromValue(3).getFluid().getFluid() != Fluids.EMPTY && this.whiteOpen)) {
-            int portionToDrain = 0;
-            if(this.pinkOpen){
-                portionToDrain++;
-            }
-            if(this.blueOpen){
-                portionToDrain++;
-            }
-            if(this.yellowOpen){
-                portionToDrain++;
-            }
-            if(this.whiteOpen){
-                portionToDrain++;
-            }
-            String essences = "";
-            if (this.pinkOpen) {
-                FluidTank tank = this.getTankFromValue(0);
-                if (tank.getFluid() != FluidStack.EMPTY) {
-                    essences+="pink";
-                    tank.getFluid().setAmount(Math.max(tank.getFluidAmount() - (200 / portionToDrain), 0));
+        ItemStack chromaInput = getItem(InjectorTE.CHROMA_INPUT_SLOT_INDEX);
+        if (chromaInput.getItem() instanceof ItemChroma) {
+            FluidTank[] tanks = {getTankFromValue(0), getTankFromValue(1), getTankFromValue(2), getTankFromValue(3)};
+            boolean[] colors = {pinkOpen, blueOpen, yellowOpen, whiteOpen};
+            int numOpenTanks = 0;
+            for (int i = 0; i < 4; i++) {
+                if (tanks[i].getFluid().getFluid() != Fluids.EMPTY && colors[i]) {
+                    numOpenTanks++;
                 }
             }
-            if (this.blueOpen) {
-                FluidTank tank = this.getTankFromValue(1);
-                if (tank.getFluid() != FluidStack.EMPTY) {
-                    if(essences.equals("")){
-                        essences += "blue";
+            StringBuilder essences = null;
+            if (numOpenTanks > 0) {
+                essences = new StringBuilder();
+                for (int i = 0; i < 4; i++) {
+                    if (colors[i]) {
+                        FluidTank tank = tanks[i];
+                        if (tank.getFluid() != FluidStack.EMPTY) {
+                            String colorName = switch (i) {
+                                case 0 -> "pink";
+                                case 1 -> "blue";
+                                case 2 -> "yellow";
+                                case 3 -> "white";
+                                default -> "";
+                            };
+                            if (essences.toString().equals("")) {
+                                essences.append(colorName);
+                            } else {
+                                essences.append("-").append(colorName);
+                            }
+                            tank.getFluid().setAmount(Math.max(tank.getFluidAmount() - (200 / numOpenTanks), 0));
+                        }
                     }
-                    else{
-                        essences+="-blue";
-                    }
-                    tank.getFluid().setAmount(Math.max(tank.getFluidAmount() - (200 / portionToDrain), 0));
-                }
-            }
-            if (this.yellowOpen) {
-                FluidTank tank = this.getTankFromValue(2);
-                if (tank.getFluid() != FluidStack.EMPTY) {
-                    if(essences.equals("")){
-                        essences += "yellow";
-                    }
-                    else{
-                        essences+="-yellow";
-                    }
-                    tank.getFluid().setAmount(Math.max(tank.getFluidAmount() - (200 / portionToDrain), 0));
-                }
-            }
-            if (this.whiteOpen) {
-                FluidTank tank = this.getTankFromValue(3);
-                if (tank.getFluid() != FluidStack.EMPTY) {
-                    if(essences.equals("")){
-                        essences += "white";
-                    }
-                    else{
-                        essences+="-white";
-                    }
-                    tank.getFluid().setAmount(Math.max(tank.getFluidAmount() - (200 / portionToDrain), 0));
                 }
             }
             BlockPos seedPos = this.getBlockPos().offset(new BlockPos(0, -Math.ceil(GemSeedTE.DRAIN_SIZE / 2) - 1, 0));
-            while(true){
+            while (true) {
                 assert this.level != null;
                 if (!(this.level.getBlockState(seedPos) == Blocks.AIR.defaultBlockState() ||
-                                    this.level.getBlockState(seedPos).getBlock() instanceof LiquidBlock ||
-                                    this.level.getBlockState(seedPos) == ModBlocks.GEM_SEED_BLOCK.get().defaultBlockState())) break;
+                        this.level.getBlockState(seedPos).getBlock() instanceof LiquidBlock ||
+                        this.level.getBlockState(seedPos) == ModBlocks.GEM_SEED_BLOCK.get().defaultBlockState())) break;
                 seedPos = seedPos.offset(0, -GemSeedTE.DRAIN_SIZE, 0);
             }
-            ItemChroma chroma = (ItemChroma)this.getItem(InjectorTE.CHROMA_INPUT_SLOT_INDEX).getItem();
-            Item primer = this.getItem(InjectorTE.PRIME_INPUT_SLOT_INDEX).getItem();
             GemSeedBlock seedBlock = (GemSeedBlock) ModBlocks.GEM_SEED_BLOCK.get();
             this.level.setBlockAndUpdate(seedPos, seedBlock.defaultBlockState());
-            if(this.level.getBlockState(seedPos).getBlock() == ModBlocks.GEM_SEED_BLOCK.get()) {
+            if (this.level.getBlockState(seedPos).getBlock() == ModBlocks.GEM_SEED_BLOCK.get()) {
                 Objects.requireNonNull(this.getLevel()).playSound(null, this.getBlockPos(), ModSounds.INJECT.get(), SoundSource.AMBIENT, 2f, 1);
             }
-            GemSeedTE gemSeedTE = (GemSeedTE) this.level.getBlockEntity(seedPos);
-            assert gemSeedTE != null;
-            gemSeedTE.setEssences(essences);
+            ItemChroma chroma = (ItemChroma) this.getItem(InjectorTE.CHROMA_INPUT_SLOT_INDEX).getItem();
+            Item primer = this.getItem(InjectorTE.PRIME_INPUT_SLOT_INDEX).getItem();
+            GemSeedTE gemSeedTE = (GemSeedTE) level.getBlockEntity(seedPos);
+            gemSeedTE.setEssences(essences.toString());
             gemSeedTE.SetChroma(chroma);
             gemSeedTE.SetPrimer(primer);
             int facing = InjectorTE.getFacingFromState(this.getBlockState());
@@ -246,7 +217,6 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
             System.out.println("Facing :" + facing);
             this.getItem(InjectorTE.CHROMA_INPUT_SLOT_INDEX).shrink(1);
             this.getItem(InjectorTE.PRIME_INPUT_SLOT_INDEX).shrink(1);
-
             this.level.sendBlockUpdated(this.worldPosition, this.getBlockState(), this.getBlockState(), 2);
             this.setChanged();
             InjectEvent event = new InjectEvent(gemSeedTE, seedPos);

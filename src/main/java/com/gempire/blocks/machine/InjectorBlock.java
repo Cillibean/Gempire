@@ -53,6 +53,9 @@ public class InjectorBlock extends BaseEntityBlock implements EntityBlock {
             if(worldIn.getBlockState(pos.above()).getBlock() == ModBlocks.TANK_BLOCK.get()){
                 BlockEntity te = worldIn.getBlockEntity(pos);
                 if(te instanceof InjectorTE){
+                    if(player.isCrouching()) {
+                        ((InjectorTE) te).Inject();
+                    }
                     NetworkHooks.openScreen((ServerPlayer) player, (InjectorTE)te, pos);
                     return InteractionResult.SUCCESS;
                 }
