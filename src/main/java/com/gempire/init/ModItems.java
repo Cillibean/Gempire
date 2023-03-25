@@ -353,7 +353,9 @@ public class ModItems {
             new Item(new Item.Properties().tab(CreativeModeTab.TAB_FOOD).stacksTo(64).food(ModFoods.SPODUMENE_PIECE)));
 
     public static final RegistryObject<Item> ICE_SHARD = ITEMS.register("ice_shard", () ->
-            new ItemIceShard(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(64)));
+            new Item(new Item.Properties().stacksTo(64)));
+    public static final RegistryObject<Item> ACID_SPIT = ITEMS.register("acid_spit", () ->
+            new Item(new Item.Properties().stacksTo(64)));
 
     /*public static final RegistryObject<Item> WHITE_DESTABILIZER = ITEMS.register("white_destabilizer", () ->
             new ItemDestabilizer(new Item.Properties().group(ModItemGroup.ITEMS).maxStackSize(1)));

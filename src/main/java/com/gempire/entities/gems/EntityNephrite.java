@@ -51,7 +51,6 @@ public class EntityNephrite extends EntityGem {
         this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, Mob.class, 1, false, false, (p_234199_0_) -> {
             return p_234199_0_ instanceof Enemy;
         }));
-        this.goalSelector.addGoal(4, new MeleeAttackGoal(this, 1.1D, false));
     }
 
     @Override
@@ -115,7 +114,7 @@ public class EntityNephrite extends EntityGem {
     }
     public Abilities[] definiteAbilities(){
         return new Abilities[]{
-                Abilities.PARALYSIS, Abilities.SCOUT
+                Abilities.SCOUT, Abilities.ACIDIC_SPIT
         };
     }
 

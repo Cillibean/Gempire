@@ -56,6 +56,7 @@ public class ClientProxy {
         event.registerEntityRenderer(ModEntities.TOURMALINE.get(), m -> new RenderTourmaline(m, new ModelTourmaline<>(m.bakeLayer(ModelTourmaline.LAYER_LOCATION))));
 
         event.registerEntityRenderer(ModEntities.ICE_SHARD.get(), ThrownItemRenderer::new);
+        event.registerEntityRenderer(ModEntities.ACID_SPIT.get(), ThrownItemRenderer::new);
 
         MenuScreens.register(ModContainers.TANK_CONTAINER.get(), TankScreen::new);
         MenuScreens.register(ModContainers.INJECTOR_CONTAINER.get(), InjectorScreen::new);

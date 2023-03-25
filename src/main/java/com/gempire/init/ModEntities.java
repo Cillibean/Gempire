@@ -6,6 +6,7 @@ import com.gempire.entities.gems.starter.EntityMica;
 import com.gempire.entities.gems.starter.EntityNacre;
 import com.gempire.entities.gems.starter.EntityPebble;
 import com.gempire.entities.gems.starter.EntityShale;
+import com.gempire.entities.projectiles.AcidSpitEntity;
 import com.gempire.entities.projectiles.IceShardEntity;
 import com.gempire.systems.injection.GemConditions;
 import com.gempire.systems.injection.GemFormation;
@@ -165,6 +166,15 @@ public class ModEntities {
                 .setUpdateInterval(10)
                 .setShouldReceiveVelocityUpdates(true)
                 .build(new ResourceLocation(Gempire.MODID, "ice_shard").toString());
+    });
+
+    public static final RegistryObject<EntityType<AcidSpitEntity>> ACID_SPIT = ENTITIES.register("acid_spit", () -> {
+        return EntityType.Builder.<AcidSpitEntity>of(AcidSpitEntity::new, MobCategory.MISC)
+                .sized(0.25F, 0.25F)
+                .setTrackingRange(64)
+                .setUpdateInterval(10)
+                .setShouldReceiveVelocityUpdates(true)
+                .build(new ResourceLocation(Gempire.MODID, "acid_spit").toString());
     });
 
     public static void registerCruxes(){
