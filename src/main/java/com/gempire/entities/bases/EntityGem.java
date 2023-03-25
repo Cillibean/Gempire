@@ -20,6 +20,11 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.commands.LocateCommand;
+import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.animal.Wolf;
+import net.minecraft.world.entity.animal.horse.AbstractHorse;
+import net.minecraft.world.entity.monster.Creeper;
+import net.minecraft.world.entity.monster.Ghast;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.client.Minecraft;
@@ -28,7 +33,6 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.Container;
 import net.minecraft.world.ContainerListener;
 import net.minecraft.world.ContainerHelper;
@@ -70,14 +74,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.ItemBasedSteering;
-import net.minecraft.world.entity.ItemSteerable;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.MobSpawnType;
-import net.minecraft.world.entity.PathfinderMob;
-import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.DiggerItem;
@@ -271,7 +267,22 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         }
         compound.putInt("ownerAmount", this.OWNERS.size());
     }
-
+    public boolean wantsToAttack(LivingEntity p_30389_, LivingEntity p_30390_) {
+        if (!(p_30389_ instanceof Creeper) && !(p_30389_ instanceof Ghast)) {
+            if (p_30389_ instanceof Wolf) {
+                Wolf wolf = (Wolf)p_30389_;
+                return !wolf.isTame() || wolf.getOwner() != p_30390_;
+            } else if (p_30389_ instanceof Player && p_30390_ instanceof Player && !((Player)p_30390_).canHarmPlayer((Player)p_30389_)) {
+                return false;
+            } else if (p_30389_ instanceof AbstractHorse && ((AbstractHorse)p_30389_).isTamed()) {
+                return false;
+            } else {
+                return !(p_30389_ instanceof TamableAnimal) || !((TamableAnimal)p_30389_).isTame();
+            }
+        } else {
+            return false;
+        }
+    }
     public void writeStructures(CompoundTag compound){
         for(int i = 0; i < this.structures.size(); i++){
             compound.putString("structure" + i, this.structures.get(i));
@@ -601,6 +612,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             ((ItemGem) stack.getItem()).setData(this, stack);
             ItemEntity item = new ItemEntity(this.level, this.getX(), this.getY(), this.getZ(), stack);
             item.setExtendedLifetime();
+            this.kill();
             this.level.addFreshEntity(item);
         }
         super.die(source);
@@ -1235,7 +1247,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             if (this.isInWater() || this.isInLava()) {
                 CollisionContext iselectioncontext = CollisionContext.of(this);
                 if (iselectioncontext.isAbove(LiquidBlock.STABLE_SHAPE, this.blockPosition(), true) && !this.level.getFluidState(this.blockPosition().above()).is(FluidTags.LAVA)
-                || iselectioncontext.isAbove(LiquidBlock.STABLE_SHAPE, this.blockPosition(), true) && !this.level.getFluidState(this.blockPosition().above()).is(FluidTags.WATER)) {
+                        || iselectioncontext.isAbove(LiquidBlock.STABLE_SHAPE, this.blockPosition(), true) && !this.level.getFluidState(this.blockPosition().above()).is(FluidTags.WATER)) {
                     this.onGround = true;
                 } else {
                     this.setDeltaMovement(this.getDeltaMovement().scale(.5D).add(0.0D, 0.05D, 0.0D));
@@ -1430,9 +1442,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     }
 
     /*
-
     COMMAND STUFF
-
     */
 
     /*public static BlockPos findStructure(EntityGem gem, StructureFeature<?> structure) {
@@ -1450,7 +1460,6 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             return blockpos1;
         }
     }
-
     public static BlockPos findBiome(EntityGem gem, ResourceLocation biomeResource) throws CommandSyntaxException {
         if(gem.level.isClientSide){
             return BlockPos.ZERO;
@@ -1470,7 +1479,6 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             return blockpos1;
         }
     }
-
     public void runFindCommand(ServerPlayer player, @Nullable StructureFeature<?> structure, @Nullable ResourceLocation biomeResource, boolean biome)
             throws CommandSyntaxException {
         BlockPos pos = biome ? EntityGem.findBiome(this, biomeResource) : EntityGem.findStructure(this, structure);
@@ -1506,7 +1514,6 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             player.sendSystemMessage(Component.translatable("commands.gempire.nomap"), UUID.randomUUID());
         }
     }
-
     public boolean canLocateStructures(){
         boolean flag = false;
         for(Ability ability : this.getAbilityPowers()){
@@ -1516,7 +1523,6 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         }
         return flag;
     }
-
     public void generateScoutList(){
         //STRUCTURES
         ArrayList<ResourceLocation> rls = new ArrayList<>();
@@ -1530,9 +1536,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         for(ResourceLocation key : resourceLocations){
             this.structures.add(ForgeRegistries.SRE_FEATURES.getValue(key).getRegistryName().toString().replace("minecraft:", ""));
         }
-
         //BIOMES
-
         ArrayList<ResourceLocation> rls1 = new ArrayList<>();
         Set<ResourceLocation> sus = ForgeRegistries.BIOMES.getKeys();
         rls1.addAll(sus);
@@ -1545,7 +1549,6 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             this.biomes.add(ForgeRegistries.BIOMES.getValue(key).toString().replace("minecraft:", ""));
         }
     }
-
     public boolean isOnStructureCooldown(){
         return true;
     }*/

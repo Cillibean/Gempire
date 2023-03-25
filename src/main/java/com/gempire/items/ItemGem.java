@@ -107,11 +107,18 @@ public class ItemGem extends Item {
             String namee = "";
             boolean dying = false;
             System.out.println(gem.getUUID());
-            List<EntityGem> list = player.level.getEntitiesOfClass(EntityGem.class, player.getBoundingBox().inflate(4.0D, 4.0D, 4.0D));
-            for (EntityGem gemmy : list) {
+            List<EntityGem> list;
+            if (player == null) {
+                dying = false;
+            }
+            else
+            {
+                list = player.level.getEntitiesOfClass(EntityGem.class, player.getBoundingBox().inflate(4.0D, 4.0D, 4.0D));
+                for (EntityGem gemmy : list) {
                 if (gemmy.isDeadOrDying())
                     dying = true;
                 System.out.println(gemmy.getUUID());
+                }
             }
             if (!dying) {
                 if (Objects.equals(this.ID, "")) {
