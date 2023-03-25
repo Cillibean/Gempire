@@ -85,7 +85,7 @@ public class EntitySapphire extends EntityVaryingGem {
 
     @Override
     public int generateHairVariant() {
-        return this.random.nextInt(5);
+        return this.random.nextInt(24);
     }
 
     @Override
@@ -103,7 +103,7 @@ public class EntitySapphire extends EntityVaryingGem {
     }
 
     public int generateOutfitVariant() {
-        return this.random.nextInt(6);
+        return this.random.nextInt(31);
     }
 
     public int generateInsigniaVariant() {
