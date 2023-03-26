@@ -6,6 +6,7 @@ import com.gempire.client.entity.model.ModelSapphire;
 import com.gempire.client.entity.model.ModelZircon;
 import com.gempire.client.entity.render.layers.*;
 import com.gempire.entities.gems.EntitySapphire;
+import com.gempire.entities.gems.EntityTopaz;
 import com.gempire.entities.gems.EntityTourmaline;
 import com.gempire.entities.gems.EntityZircon;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -27,6 +28,12 @@ public class RenderZircon extends MobRenderer<EntityZircon, ModelZircon<EntityZi
         this.addLayer(new FaceLayer(this));
         this.addLayer(new GemPlacementLayer(this));
         this.addLayer(new VisorLayer(this));
+    }
+
+    @Override
+    protected void scale(EntityZircon entitylivingbaseIn, PoseStack matrixStackIn, float partialTickTime) {
+        matrixStackIn.scale(1.2F, 1.2F, 1.2F);
+        super.scale(entitylivingbaseIn, matrixStackIn, partialTickTime);
     }
 
     @Override

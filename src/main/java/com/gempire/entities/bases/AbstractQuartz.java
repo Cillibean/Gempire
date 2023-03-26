@@ -4,8 +4,11 @@ import com.gempire.util.Abilities;
 import com.gempire.util.Color;
 import com.gempire.util.GemPlacements;
 import net.minecraft.client.Minecraft;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.level.Level;
 
 import javax.annotation.Nullable;
@@ -20,12 +23,19 @@ public abstract class AbstractQuartz extends EntityVaryingGem {
         super(type, worldIn);
     }
 
+    public static AttributeSupplier.Builder registerAttributes() {
+        return Mob.createMobAttributes()
+                .add(Attributes.MAX_HEALTH, 50.0D)
+                .add(Attributes.MOVEMENT_SPEED, 0.35D)
+                .add(Attributes.ATTACK_DAMAGE, 5.0D)
+                .add(Attributes.ATTACK_SPEED, 1.0D);
+    }
     @Override
     public Abilities[] possibleAbilities() {
         return new Abilities[]{
             Abilities.NO_ABILITY, Abilities.PYROKINESIS, Abilities.CRYOKINESIS, Abilities.UNHINGED, Abilities.BEEFCAKE, Abilities.TANK, Abilities.KNOCKBACK, Abilities.PARALYSIS,
-                Abilities.POWERHOUSE, Abilities.HEALER, Abilities.FIRST_AID, Abilities.BERSERKER, Abilities.BEASTMASTER, Abilities.CHARMER, Abilities.FRAGOKINESIS, Abilities.AZUR_PYROKINESIS,
-                Abilities.ELECTROKINESIS, Abilities.AQUAPHILE, Abilities.AEROKINESIS
+                Abilities.POWERHOUSE, Abilities.HEALER, Abilities.FIRST_AID, Abilities.BERSERKER/*, Abilities.BEASTMASTER, Abilities.CHARMER, Abilities.FRAGOKINESIS, Abilities.AZUR_PYROKINESIS,
+                Abilities.ELECTROKINESIS, Abilities.AQUAPHILE, Abilities.AEROKINESIS*/
         };
     }
 

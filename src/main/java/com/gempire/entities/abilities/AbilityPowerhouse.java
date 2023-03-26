@@ -20,7 +20,7 @@ public class AbilityPowerhouse extends Ability implements IAttributeAbility {
 
     @Override
     public double baseValue() {
-        return this.holder.getAttributeValue(this.attribute()) * 2D;
+        return this.holder.getAttributeValue(this.attribute()) * 1.25D;
     }
     @Override
     public Component getName() {

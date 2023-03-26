@@ -1,9 +1,5 @@
 package com.gempire.blocks;
 
-import com.gempire.init.ModBlocks;
-import com.gempire.tileentities.InjectorTE;
-import com.gempire.tileentities.TankTE;
-import com.sun.jna.platform.win32.WinDef;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -25,9 +21,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.server.level.ServerLevel;
 
 import javax.annotation.Nullable;
-import java.util.Random;
-
-import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -162,6 +155,8 @@ public class IceSpikeBlock extends Block {
     }
 
     public void entityInside(BlockState state, Level worldIn, BlockPos pos, Entity entityIn) {
-        if(state.getValue(HALF) == DoubleBlockHalf.UPPER) entityIn.hurt(DamageSource.GENERIC, 2.0F);
+        if (entityIn instanceof LivingEntity) {
+            if (state.getValue(HALF) == DoubleBlockHalf.UPPER) entityIn.hurt(DamageSource.GENERIC, 2.0F);
+        }
     }
 }

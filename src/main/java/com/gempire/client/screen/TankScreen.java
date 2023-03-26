@@ -12,12 +12,14 @@ import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.network.chat.Component;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.minecraftforge.fluids.FluidStack;
 
 
@@ -56,6 +58,17 @@ public class TankScreen extends AbstractContainerScreen<TankContainer> {
         this.renderTooltip(matrixStack, mouseX, mouseY);
     }
 
+    private int getColorTint(FluidStack ingredient) {
+        Fluid fluid = ingredient.getFluid();
+        IClientFluidTypeExtensions renderProperties = IClientFluidTypeExtensions.of(fluid);
+        return renderProperties.getTintColor(ingredient);
+    }
+    private ResourceLocation getStillFluidSprite(FluidStack fluidStack) {
+        Fluid fluid = fluidStack.getFluid();
+        IClientFluidTypeExtensions renderProperties = IClientFluidTypeExtensions.of(fluid);
+        ResourceLocation fluidStill = renderProperties.getFlowingTexture(fluidStack);
+        return fluidStill;
+    }
     @SuppressWarnings("deprecation")
     @Override
     protected void renderBg(PoseStack matrixStack, float partialTicks, int mouseX, int mouseY) {
@@ -63,25 +76,26 @@ public class TankScreen extends AbstractContainerScreen<TankContainer> {
         int x = (this.width - this.imageWidth) / 2;
         int y = (this.height - this.imageHeight) / 2;
         this.blit(matrixStack, x, y, 0, 0, this.imageWidth, this.imageHeight);
-        /*FluidStack fluid = this.menu.tank.getFluid();
+        FluidStack fluid = this.menu.tank.getFluid();
+        int color = getColorTint(fluid);
         if(fluid.getFluid() != Fluids.EMPTY)
-        {
-            ResourceLocation stillLocation = fluid.getFluid().getFluidType(this.menu.tank.getFluid());
-            TextureAtlasSprite sprite = Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(stillLocation);
-            ResourceLocation spriteLocation = sprite.getName();
-            GUIUtilities.setup(new ResourceLocation(spriteLocation.getNamespace(), "textures/" + spriteLocation.getPath() + ".png"));
-            int x2 = 58 + x;
-            int y2 = 9 + y;
-            int fluidStored = 57 * fluid.getAmount() / 4000;
-            if(fluid.getFluid() == Fluids.WATER){
-                int color = FluidStack.EMPTY.getAmount();
-                float r = ((color & 16711680) >> 16) / 255f;
-                float g = ((color & 65280) >> 8) / 255f;
-                float b = ((color & 255) >> 0) / 255f;
-                RenderSystem.setShaderColor(r, g, b, 1);
+            if(fluid.getFluid() != Fluids.EMPTY)
+            {
+                ResourceLocation stillLocation = getStillFluidSprite(fluid);
+                TextureAtlasSprite sprite = Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(stillLocation);
+                ResourceLocation spriteLocation = sprite.getName();
+                GUIUtilities.setup(new ResourceLocation(spriteLocation.getNamespace(), "textures/" + spriteLocation.getPath() + ".png"));
+                int x2 = 58 + x;
+                int y2 = 9 + y;
+                int fluidStored = 57 * fluid.getAmount() / 4000;
+                if(fluid.getFluid() == Fluids.WATER){
+                    float r = ((color & 16711680) >> 16) / 255f;
+                    float g = ((color & 65280) >> 8) / 255f;
+                    float b = ((color & 255) >> 0) / 255f;
+                    RenderSystem.setShaderColor(r, g, b, 1);
+                }
+                this.blit(matrixStack, x2, y2 + (57 - fluidStored), (int)sprite.getU0(), (int)sprite.getV0(), 15, fluidStored);
             }
-            this.blit(matrixStack, x2, y2 + (57 - fluidStored), (int)sprite.getU0(), (int)sprite.getV0(), 15, fluidStored);
-        }*/
         GUIUtilities.setup(TANK_FOREGROUND);
         this.blit(matrixStack, x, y, 0, 0, this.imageWidth, this.imageWidth);
     }

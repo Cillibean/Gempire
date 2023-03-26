@@ -28,7 +28,7 @@ public class RenderBixbite extends MobRenderer<EntityBixbite, ModelBixbite<Entit
 
     @Override
     protected void scale(EntityBixbite entitylivingbaseIn, PoseStack matrixStackIn, float partialTickTime) {
-        matrixStackIn.scale(.8f, .85f, .8f);
+        matrixStackIn.scale(1.0f, 1.1f, 1.0f);
         super.scale(entitylivingbaseIn, matrixStackIn, partialTickTime);
     }
 

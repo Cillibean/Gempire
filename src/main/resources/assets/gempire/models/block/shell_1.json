@@ -1,7 +1,7 @@
 {
 	"credit": "Made with Blockbench",
 	"texture_size": [48, 48],
-	"render_type": "transparent",
+	"render_type": "translucent",
 	"textures": {
 		"2": "gempire:blocks/shell",
 		"particle": "gempire:blocks/shell"

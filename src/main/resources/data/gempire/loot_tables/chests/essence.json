@@ -4,22 +4,22 @@
     "entries": [
       {
         "type": "minecraft:item",
-        "name": "gempire:pink_essence",
+        "name": "gempire:pink_essence_bucket",
         "weight": 15
       },
       {
         "type": "minecraft:item",
-        "name": "gempire:blue_essence",
+        "name": "gempire:blue_essence_bucket",
         "weight": 10
       },
       {
         "type": "minecraft:item",
-        "name": "gempire:yellow_essence",
+        "name": "gempire:yellow_essence_bucket",
         "weight": 10
       },
       {
         "type": "minecraft:item",
-        "name": "gempire:white_essence",
+        "name": "gempire:white_essence_bucket",
         "weight": 10
       }
     ]

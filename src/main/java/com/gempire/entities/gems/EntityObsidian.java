@@ -141,7 +141,10 @@ public class EntityObsidian extends EntityGem implements ItemSteerable {
     public int baseFocus() {
         return 5;
     }
-
+    @Override
+    public boolean canOpenInventoryByDefault() {
+        return false;
+    }
     @Override
     public boolean hasMarkings() {
         return true;

@@ -22,17 +22,23 @@ public class ModAbilities {
         Ability.ABILITY_FROM_ABILITIES.put(Abilities.FIRST_AID, AbilityFirstAid.class);
         Ability.ABILITY_FROM_ABILITIES.put(Abilities.HEALER, AbilityHealer.class);
         Ability.ABILITY_FROM_ABILITIES.put(Abilities.AMPHIBIAN, AbilityAmphibian.class);
+        Ability.ABILITY_FROM_ABILITIES.put(Abilities.HYDROKINESIS, AbilityHydrokinesis.class);
 
         Ability.ABILITY_FROM_ABILITIES.put(Abilities.TANK, AbilityTank.class);
         Ability.ABILITY_FROM_ABILITIES.put(Abilities.BEEFCAKE, AbilityBeefcake.class);
         Ability.ABILITY_FROM_ABILITIES.put(Abilities.POWERHOUSE, AbilityPowerhouse.class);
         Ability.ABILITY_FROM_ABILITIES.put(Abilities.UNHINGED, AbilityUnhinged.class);
+        Ability.ABILITY_FROM_ABILITIES.put(Abilities.BERSERKER, AbilityBerserker.class);
+        Ability.ABILITY_FROM_ABILITIES.put(Abilities.ACIDIC_SPIT, AbilityAcidicSaliva.class);
+
+        Ability.ABILITY_FROM_ABILITIES.put(Abilities.DISARMING, AbilityDisarming.class);
 
         Ability.ABILITY_FROM_ABILITIES.put(Abilities.STERN, AbilityStern.class);
 
         Ability.ABILITY_FROM_ABILITIES.put(Abilities.GUARD, AbilityGuard.class);
         Ability.ABILITY_FROM_ABILITIES.put(Abilities.VEHICLE, AbilityVehicle.class);
         Ability.ABILITY_FROM_ABILITIES.put(Abilities.SCOUT, AbilityScout.class);
+
 
         Ability.ABILITY_FROM_ABILITIES.put(Abilities.ESSENCE_BREWER, AbilityBrewEssence.class);
 

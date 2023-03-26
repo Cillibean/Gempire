@@ -31,8 +31,8 @@ public class EntitySapphire extends EntityVaryingGem {
 
     public static AttributeSupplier.Builder registerAttributes() {
         return Mob.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 50.0D)
-                .add(Attributes.MOVEMENT_SPEED, 0.4D)
+                .add(Attributes.MAX_HEALTH, 30.0D)
+                .add(Attributes.MOVEMENT_SPEED, 0.6D)
                 .add(Attributes.ATTACK_DAMAGE, 1.0D)
                 .add(Attributes.ATTACK_SPEED, 1.0D);
     }
@@ -85,7 +85,7 @@ public class EntitySapphire extends EntityVaryingGem {
 
     @Override
     public int generateHairVariant() {
-        return this.random.nextInt(5);
+        return this.random.nextInt(24);
     }
 
     @Override
@@ -103,7 +103,7 @@ public class EntitySapphire extends EntityVaryingGem {
     }
 
     public int generateOutfitVariant() {
-        return this.random.nextInt(6);
+        return this.random.nextInt(31);
     }
 
     public int generateInsigniaVariant() {

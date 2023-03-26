@@ -33,6 +33,7 @@ import net.minecraftforge.registries.RegistryObject;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class ShellTE extends RandomizableContainerBlockEntity implements MenuProvider {
     public static final int NUMBER_OF_SLOTS = 5;
@@ -102,6 +103,7 @@ public class ShellTE extends RandomizableContainerBlockEntity implements MenuPro
                         te.HandleEssenceTick();
                         te.HandleFormPearlTick();
                         if (te.gravelConsumed == 1) {
+                            assert te.level != null;
                             te.level.setBlockAndUpdate(pos, state.setValue(ShellBlock.STAGE, 1));
                         }
                         if (te.sandConsumed == ShellTE.MAX_SAND) {
@@ -165,9 +167,9 @@ public class ShellTE extends RandomizableContainerBlockEntity implements MenuPro
             //ESSENCE CHECK
             for(int i = 0; i < 6; i++){
                 //TODO: MAKE THERE BE A CHANCE OF MAGIC MOSS APPEARING
-                if(this.level.getBlockState(this.worldPosition.offset(ShellTE.direction(i))).getBlock() == ModBlocks.WHITE_ESSENCE_BLOCK.get()){
+                if(this.level.getBlockState(this.worldPosition.offset(ShellTE.direction(i))).getBlock() == ModFluids.WHITE_ESSENCE.block.get()){
                     LiquidBlock block = (LiquidBlock) this.level.getBlockState(this.worldPosition.offset(ShellTE.direction(i))).getBlock();
-                    if(block.getFluid() == ModFluids.SOURCE_WHITE_ESSENCE.get()) {
+                    if(block.getFluid() == ModFluids.FLUIDS.getEntries()) {
                         this.level.setBlockAndUpdate(this.worldPosition.offset(ShellTE.direction(i)), Blocks.AIR.defaultBlockState());
                         this.essenceConsumed = true;
                         this.essenceMarker = true;
@@ -179,9 +181,9 @@ public class ShellTE extends RandomizableContainerBlockEntity implements MenuPro
         else{
             this.essenceMarker = false;
             for(int i = 0; i < 6; i++){
-                if(this.level.getBlockState(this.worldPosition.offset(ShellTE.direction(i))).getBlock() == ModBlocks.WHITE_ESSENCE_BLOCK.get()){
+                if(this.level.getBlockState(this.worldPosition.offset(ShellTE.direction(i))).getBlock() == ModFluids.WHITE_ESSENCE.block.get()){
                     LiquidBlock block = (LiquidBlock) this.level.getBlockState(this.worldPosition.offset(ShellTE.direction(i))).getBlock();
-                    if(block.getFluid() == ModFluids.SOURCE_WHITE_ESSENCE.get()) {
+                    if(block.getFluid() == ModFluids.WHITE_ESSENCE.flowing.get()) {
                         this.essenceMarker = true;
                         break;
                     }
@@ -282,7 +284,7 @@ public class ShellTE extends RandomizableContainerBlockEntity implements MenuPro
     public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
         //Debug
         System.out.println("[DEBUG]:Client recived tile sync packet");
-        this.load(pkt.getTag());
+        this.load(Objects.requireNonNull(pkt.getTag()));
     }
 
     @Nullable

@@ -27,7 +27,7 @@ public class AbilityAmphibian extends Ability implements IEffectAbility, IAlchem
     @Override
     public MobEffectInstance[] effects() {
         return new MobEffectInstance[]{
-                new MobEffectInstance(MobEffects.DOLPHINS_GRACE, 400, 4), new MobEffectInstance(MobEffects.WATER_BREATHING, 400, 4)
+                new MobEffectInstance(MobEffects.DOLPHINS_GRACE, 400, 0), new MobEffectInstance(MobEffects.WATER_BREATHING, 400, 0)
         };
     }
 

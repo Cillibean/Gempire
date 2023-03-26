@@ -1,7 +1,6 @@
 package com.gempire;
 
-import com.gempire.config.GempireClientConfigs;
-import com.gempire.config.GempireCommonConfigs;
+import com.gempire.entities.bases.AbstractGarnet;
 import com.gempire.entities.gems.*;
 import com.gempire.entities.gems.starter.EntityMica;
 import com.gempire.entities.gems.starter.EntityNacre;
@@ -32,9 +31,7 @@ import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.InterModComms;
-import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
@@ -70,9 +67,6 @@ public class Gempire
         //FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientProxy::onClientSetup);
 
         RegistryHandler.init();
-
-        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, GempireClientConfigs.SPEC, "gempire-client.toml");
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, GempireCommonConfigs.SPEC, "gempire-common.toml");
         // Register ourselves for server and other game events we are interested in
         //MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGHEST, ClientProxy::onClientSetup);
         MinecraftForge.EVENT_BUS.register(this);
@@ -119,23 +113,17 @@ public class Gempire
 
         event.put(ModEntities.BIXBITE.get(), EntityBixbite.registerAttributes().build());
 
-        event.put(ModEntities.DEMANTOID.get(), EntityDemantoid.registerAttributes().build());
+        event.put(ModEntities.GARNET.get(), EntityGarnet.registerAttributes().build());
 
         event.put(ModEntities.EMERALD.get(), EntityEmerald.registerAttributes().build());
-
-        event.put(ModEntities.HESSONITE.get(), EntityHessonite.registerAttributes().build());
 
         event.put(ModEntities.LAPIS.get(), EntityLapis.registerAttributes().build());
 
         event.put(ModEntities.LARIMAR.get(), EntityLarimar.registerAttributes().build());
 
-        event.put(ModEntities.MELANITE.get(), EntityMelanite.registerAttributes().build());
-
         event.put(ModEntities.MORGANITE.get(), EntityMorganite.registerAttributes().build());
 
         event.put(ModEntities.PERIDOT.get(), EntityPeridot.registerAttributes().build());
-
-        event.put(ModEntities.PYROPE.get(), EntityPyrope.registerAttributes().build());
 
         event.put(ModEntities.RUTILE.get(), EntityRutile.registerAttributes().build());
 
@@ -149,7 +137,6 @@ public class Gempire
         ModPacketHandler.registerPackets();
         ModEntities.setVanillaGems();
         ModEntities.registerCruxes();
-        ModFluids.registerFluidBuckets();
         ModAbilities.registerAbilities();
         ModEnchants.registerVanillaEnchantments();
         ModEnchants.registerItemDiscounts();

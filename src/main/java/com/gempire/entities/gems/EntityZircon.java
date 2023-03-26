@@ -1,5 +1,6 @@
 package com.gempire.entities.gems;
 
+import com.gempire.container.GemUIContainer;
 import com.gempire.container.ZirconUIContainer;
 import com.gempire.entities.ai.EntityAIFollowOwner;
 import com.gempire.entities.ai.EntityAIWander;
@@ -23,6 +24,7 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.util.*;
 import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.Level;
 
@@ -65,7 +67,7 @@ public class EntityZircon extends EntityVaryingGem {
 
     public static AttributeSupplier.Builder registerAttributes() {
         return Mob.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 50.0D)
+                .add(Attributes.MAX_HEALTH, 30.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.4D)
                 .add(Attributes.ATTACK_DAMAGE, 1.0D)
                 .add(Attributes.ATTACK_SPEED, 1.0D);
@@ -147,7 +149,7 @@ public class EntityZircon extends EntityVaryingGem {
     @Override
     public Abilities[] possibleAbilities() {
         return new Abilities[]{
-                Abilities.NO_ABILITY, Abilities.LUCK, Abilities.STERN, Abilities.ESSENCE_BREWER
+                Abilities.NO_ABILITY, Abilities.STERN
         };
     }
 
@@ -252,7 +254,7 @@ public class EntityZircon extends EntityVaryingGem {
         ItemStack lapis = this.getItem(0);
         ItemStack tool = this.getItem(1);
         int level = EntityZircon.getEnchantLevelFromLapisCount(lapis.getCount(), this);
-        int xp = this.currentPlayer.isCreative() ? 0 : this.getXP(this.getDiscountFromStack(this.getItem(2))) < 0 ? 0 : this.getXP(this.getDiscountFromStack(this.getItem(2)));
+        int xp = this.currentPlayer.isCreative() ? 0 : Math.max(this.getXP(this.getDiscountFromStack(this.getItem(2))), 0);
         if(this.currentPlayer.totalExperience >= xp) {
             if (tool.isEnchantable()) {
                 if(level >= 1) {

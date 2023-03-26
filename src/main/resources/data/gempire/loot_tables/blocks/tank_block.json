@@ -13,6 +13,13 @@
               "properties": {
                 "half": "lower"
               }
+            },
+            {
+              "condition": "minecraft:block_state_property",
+              "block": "gempire:tank_block",
+              "properties": {
+                "half": "upper"
+              }
             }
           ],
           "name": "gempire:tank_block"

@@ -33,25 +33,25 @@ public class EntityNephrite extends EntityGem {
 
     public static AttributeSupplier.Builder registerAttributes() {
         return Mob.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 50.0D)
+                .add(Attributes.MAX_HEALTH, 30.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.4D)
-                .add(Attributes.ATTACK_DAMAGE, 5.0D)
-                .add(Attributes.ATTACK_SPEED, 1.0D);
+                .add(Attributes.ATTACK_DAMAGE, 1.0D)
+                .add(Attributes.ATTACK_SPEED, 0.5D);
     }
 
     @Override
     protected void registerGoals() {
         super.registerGoals();
-        this.goalSelector.addGoal(7, new FloatGoal(this));
+        this.goalSelector.addGoal(9, new FloatGoal(this));
         this.goalSelector.addGoal(6, new PanicGoal(this, 1.1D));
         this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 4.0F));
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
         this.goalSelector.addGoal(7, new EntityAIWander(this, 1.0D));
         this.goalSelector.addGoal(7, new EntityAIFollowOwner(this, 1.0D));
-        this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, Mob.class, 1, false, false, (p_234199_0_) -> {
-            return p_234199_0_ instanceof Enemy;
+        this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.1D, false));
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Mob.class, 10, true, false, (p_213621_0_) -> {
+            return p_213621_0_ instanceof Enemy;
         }));
-        this.goalSelector.addGoal(4, new MeleeAttackGoal(this, 1.1D, false));
     }
 
     @Override
@@ -72,13 +72,23 @@ public class EntityNephrite extends EntityGem {
     }
 
     @Override
+    public boolean hasMarkings() {
+        return true;
+    }
+
+    @Override
+    public int maxMarkings() {
+        return 1;
+    }
+
+    @Override
     public int generateHairVariant() {
         return this.random.nextInt(10);
     }
 
     @Override
     public int generateInsigniaColor() {
-        return 6;
+        return 13;
     }
 
     @Override
@@ -100,12 +110,12 @@ public class EntityNephrite extends EntityGem {
 
     public Abilities[] possibleAbilities(){
         return new Abilities[]{
-                Abilities.KNOCKBACK, Abilities.NO_ABILITY, Abilities.TANK, Abilities.BEEFCAKE, Abilities.POWERHOUSE, Abilities.UNHINGED
+                Abilities.KNOCKBACK, Abilities.NO_ABILITY, Abilities.TANK, Abilities.BEEFCAKE, Abilities.POWERHOUSE, Abilities.UNHINGED, Abilities.BERSERKER
         };
     }
     public Abilities[] definiteAbilities(){
         return new Abilities[]{
-                Abilities.PARALYSIS, Abilities.SCOUT
+                Abilities.SCOUT, Abilities.ACIDIC_SPIT
         };
     }
 
@@ -161,10 +171,5 @@ public class EntityNephrite extends EntityGem {
     //@Override
     public boolean isOnStructureCooldown() {
         return false;
-    }
-
-    @Override
-    public boolean canOpenInventoryByDefault() {
-        return true;
     }
 }

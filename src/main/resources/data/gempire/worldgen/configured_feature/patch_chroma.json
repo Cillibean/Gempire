@@ -1,0 +1,23 @@
+{
+  "type": "simple_random_selector",
+  "config": {
+    "features": [
+      "gempire:patch_white_chroma",
+      "gempire:patch_orange_chroma",
+      "gempire:patch_magenta_chroma",
+      "gempire:patch_light_blue_chroma",
+      "gempire:patch_yellow_chroma",
+      "gempire:patch_lime_chroma",
+      "gempire:patch_pink_chroma",
+      "gempire:patch_gray_chroma",
+      "gempire:patch_light_gray_chroma",
+      "gempire:patch_cyan_chroma",
+      "gempire:patch_purple_chroma",
+      "gempire:patch_blue_chroma",
+      "gempire:patch_brown_chroma",
+      "gempire:patch_green_chroma",
+      "gempire:patch_red_chroma",
+      "gempire:patch_black_chroma"
+    ]
+  }
+}

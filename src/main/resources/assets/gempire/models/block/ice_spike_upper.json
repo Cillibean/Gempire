@@ -1,8 +1,7 @@
 {
-  "parent": "block/cross",
-  "render_type": "transparent",
+"parent": "minecraft:block/pointed_dripstone",
+  "render_type": "cutout",
   "textures": {
-    "particle": "gempire:blocks/ice_spike_upper",
-    "cross": "gempire:blocks/ice_spike_upper"
+"cross": "gempire:blocks/ice_spike_upper"
   }
 }

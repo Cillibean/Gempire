@@ -40,8 +40,6 @@ public class EntityPearl extends EntityVaryingGem {
     public static final int NUMBER_OF_SLOTS_PEARL = 58;
     public NonNullList<ItemStack> items1 = NonNullList.withSize(EntityPearl.NUMBER_OF_SLOTS_PEARL, ItemStack.EMPTY);
     public NonNullList<ItemStack> items2 = NonNullList.withSize(EntityPearl.NUMBER_OF_SLOTS_PEARL, ItemStack.EMPTY);
-    public NonNullList<ItemStack> items3 = NonNullList.withSize(EntityPearl.NUMBER_OF_SLOTS_PEARL, ItemStack.EMPTY);
-    public NonNullList<ItemStack> items4 = NonNullList.withSize(EntityPearl.NUMBER_OF_SLOTS_PEARL, ItemStack.EMPTY);
     public static EntityDataAccessor<Integer> PAGE = SynchedEntityData.<Integer>defineId(EntityPearl.class, EntityDataSerializers.INT);
 
     public EntityPearl(EntityType<? extends PathfinderMob> type, Level worldIn) {
@@ -51,9 +49,9 @@ public class EntityPearl extends EntityVaryingGem {
 
     public static AttributeSupplier.Builder registerAttributes() {
         return Mob.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 50.0D)
+                .add(Attributes.MAX_HEALTH, 20.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.3D)
-                .add(Attributes.ATTACK_DAMAGE, 10.0D)
+                .add(Attributes.ATTACK_DAMAGE, 1.0D)
                 .add(Attributes.ATTACK_SPEED, 1.5D);
     }
 
@@ -73,18 +71,8 @@ public class EntityPearl extends EntityVaryingGem {
         for(int i = 0; i < this.items2.size(); i++){
             list2.add(i, this.items2.get(i).save(new CompoundTag()));
         }
-        ListTag list3 = new ListTag();
-        for(int i = 0; i < this.items3.size(); i++){
-            list3.add(i, this.items3.get(i).save(new CompoundTag()));
-        }
-        ListTag list4 = new ListTag();
-        for(int i = 0; i < this.items4.size(); i++){
-            list4.add(i, this.items4.get(i).save(new CompoundTag()));
-        }
         compoundNBT.put("Items1", list1);
         compoundNBT.put("Items2", list2);
-        compoundNBT.put("Items3", list3);
-        compoundNBT.put("Items4", list4);
     }
 
     @Override
@@ -121,8 +109,6 @@ public class EntityPearl extends EntityVaryingGem {
         }
         this.items1 = newItems1;
         this.items2 = newItems2;
-        this.items3 = newItems3;
-        this.items4 = newItems4;
     }
 
     @Override
@@ -267,7 +253,7 @@ public class EntityPearl extends EntityVaryingGem {
     }
 
     public void CyclePageForward(){
-        if(this.getPage() == 3){
+        if(this.getPage() == 1){
             this.setPage(0);
         }
         else{
@@ -277,7 +263,7 @@ public class EntityPearl extends EntityVaryingGem {
 
     public void CyclePageBackwards(){
         if(this.getPage() == 0){
-            this.setPage(3);
+            this.setPage(1);
         }
         else{
             this.setPage(this.getPage() - 1);
@@ -380,12 +366,6 @@ public class EntityPearl extends EntityVaryingGem {
         else if(this.getPage() == 1){
             return this.getItems2().get(index);
         }
-        else if(this.getPage() == 2){
-            return this.getItems3().get(index);
-        }
-        else if(this.getPage() == 3){
-            return this.getItems4().get(index);
-        }
         return stack;
     }
 
@@ -397,12 +377,6 @@ public class EntityPearl extends EntityVaryingGem {
         }
         else if(this.getPage() == 1){
             return ContainerHelper.removeItem(this.getItems2(), index, count);
-        }
-        else if(this.getPage() == 2){
-            return ContainerHelper.removeItem(this.getItems3(), index, count);
-        }
-        else if(this.getPage() == 3){
-            return ContainerHelper.removeItem(this.getItems4(), index, count);
         }
         return stack;
     }
@@ -419,12 +393,6 @@ public class EntityPearl extends EntityVaryingGem {
         }
         else if(this.getPage() == 1){
             this.getItems2().set(index, stack);
-        }
-        else if(this.getPage() == 2){
-            this.getItems3().set(index, stack);
-        }
-        else if(this.getPage() == 3){
-            this.getItems4().set(index, stack);
         }
         int ind = index;
     }
@@ -443,11 +411,4 @@ public class EntityPearl extends EntityVaryingGem {
         return this.items2;
     }
 
-    public NonNullList<ItemStack> getItems3(){
-        return this.items3;
-    }
-
-    public NonNullList<ItemStack> getItems4(){
-        return this.items4;
-    }
 }

@@ -6,35 +6,29 @@ import com.gempire.items.ItemChroma;
 import com.gempire.systems.injection.Crux;
 import com.gempire.systems.injection.GemConditions;
 import com.gempire.systems.injection.GemFormation;
-import net.minecraft.world.level.material.Fluid;
-import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
+import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.core.BlockPos;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraftforge.fluids.IFluidBlock;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Random;
-
-import net.minecraft.world.level.block.AirBlock;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.BushBlock;
-import net.minecraft.world.level.block.LiquidBlock;
-import net.minecraft.world.level.block.SlabBlock;
-import net.minecraft.world.level.block.SnowLayerBlock;
-import net.minecraft.world.level.block.state.BlockState;
+import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.function.Supplier;
 
 public class GemSeedTE extends BlockEntity {
-    Random random;
     boolean spawned = false;
     public int ticks = 0;
     public int stage = 0;
@@ -42,6 +36,7 @@ public class GemSeedTE extends BlockEntity {
     public static final int STAGES = 3;
     public static final int DRAIN_SIZE = 11;
     public ItemChroma chroma;
+
     public Item primer;
     public String essences = "pink-blue-yellow-white";
     public int facing;
@@ -63,7 +58,6 @@ public class GemSeedTE extends BlockEntity {
 
     public GemSeedTE(BlockPos pos, BlockState state) {
         super(ModTE.GEM_SEED_TE.get(), pos, state);
-        this.random = new Random();
         for(int i = 0; i < GemFormation.POSSIBLE_GEMS.size(); i++){
             this.TEMPORARY_WEIGHTS.add(i, new ArrayList<Float>());
         }
@@ -71,37 +65,35 @@ public class GemSeedTE extends BlockEntity {
 
     public static <T extends BlockEntity> void tick(Level level, BlockPos pos, BlockState state, T be) {
         GemSeedTE te = (GemSeedTE)be;
-        if(!level.isClientSide()) {
-            if (!te.checked) {
-                te.ScanPositions(level, pos, new BlockPos(DRAIN_SIZE, DRAIN_SIZE, DRAIN_SIZE));
-                te.checked = true;
-            }
-            if (te.ticks % 20 == 0) {
-                if (!te.spawned && te.checked) {
-                    if (te.IDS.size() > 0) {
-                        int rando = te.random.nextInt(te.IDS.size());
-                        te.DrainBlock(te.POSITIONS.get(te.IDS.get(rando)));
-                        te.IDS.remove(rando);
-                        te.setChanged();
-                    } else {
-                        te.spawned = true;
-                        for (int i = 0; i < GemFormation.POSSIBLE_GEMS.size(); i++) {
-                            float weight = 0;
-                            for (int n = 0; n < te.TEMPORARY_WEIGHTS.get(i).size(); n++) {
-                                weight += te.TEMPORARY_WEIGHTS.get(i).get(n);
-                            }
-                            te.WEIGHTS_OF_GEMS.put(GemFormation.POSSIBLE_GEMS.get(i), weight);
+        //System.out.println("Gem List is of size: " + GemFormation.POSSIBLE_GEMS.size());
+        if(!te.checked){
+            te.ScanPositions(level, te.getBlockPos(), new BlockPos(DRAIN_SIZE, DRAIN_SIZE, DRAIN_SIZE));
+            te.checked = true;
+        }
+        if(te.ticks % 1 == 0) {
+            if (!te.spawned && te.checked) {
+                if (te.IDS.size() > 0) {
+                    int rando = ThreadLocalRandom.current().nextInt(te.IDS.size());
+                    te.DrainBlock(te.POSITIONS.get(te.IDS.get(rando)));
+                    te.IDS.remove(rando);
+                    te.setChanged();
+                } else {
+                    te.spawned = true;
+                    for (int i = 0; i < GemFormation.POSSIBLE_GEMS.size(); i++) {
+                        float weight = 0;
+                        for (int n = 0; n < te.TEMPORARY_WEIGHTS.get(i).size(); n++) {
+                            weight += te.TEMPORARY_WEIGHTS.get(i).get(n);
                         }
-                        GemFormation form = new GemFormation(level, pos, new BlockPos(GemSeedTE.DRAIN_SIZE, GemSeedTE.DRAIN_SIZE, GemSeedTE.DRAIN_SIZE),
-                                te.chroma, te.primer, te.essences, te.facing, te.WEIGHTS_OF_GEMS, te.totalWeight);
-                        form.SpawnGem();
-                        level.sendBlockUpdated(pos, state, state, 2);
-                        te.setChanged();
+                        te.WEIGHTS_OF_GEMS.put(GemFormation.POSSIBLE_GEMS.get(i), weight);
                     }
+                    GemFormation form = new GemFormation(te.level, te.getBlockPos(), new BlockPos(GemSeedTE.DRAIN_SIZE, GemSeedTE.DRAIN_SIZE, GemSeedTE.DRAIN_SIZE), te.chroma, te.primer, te.essences, te.facing, te.WEIGHTS_OF_GEMS, te.totalWeight);
+                    form.SpawnGem();
+                    level.sendBlockUpdated(te.getBlockPos(), te.getBlockState(), te.getBlockState(), 2);
+                    te.setChanged();
                 }
             }
-            te.ticks++;
         }
+        te.ticks++;
     }
 
     public void ScanPositions(Level domhain, BlockPos position, BlockPos volume) {
@@ -113,10 +105,9 @@ public class GemSeedTE extends BlockEntity {
             for (int y = GemFormation.getHalfMiddleOffsetLeft(volume.getY()); y < yo; y++) {
                 for (int x = GemFormation.getHalfMiddleOffsetLeft(volume.getX()); x < xo; x++) {
                     BlockPos block = position.offset(new BlockPos(x, y, z));
-                    if (domhain.getBlockState(block).getBlock() instanceof LiquidBlock || domhain.getBlockState(block).getBlock() instanceof AirBlock || domhain.isInWorldBounds(block)) {
-                        continue;
+                    if (domhain.getBlockState(block).getBlock() instanceof IFluidBlock || domhain.getBlockState(block).getBlock() instanceof AirBlock || level.isOutsideBuildHeight(block)) {
                     } else {
-                        if(this.random.nextInt(10) > 3) {
+                        if(ThreadLocalRandom.current().nextInt(10) > 3) {
                             this.POSITIONS.put(id, block);
                             this.IDS.add(id);
                             id++;
@@ -129,7 +120,7 @@ public class GemSeedTE extends BlockEntity {
 
     public void DrainBlock(BlockPos blockPos) {
         this.GEM_CONDITIONS = ModEntities.CRUXTOGEM;
-        float BLOCK_TEMPERATURE = this.level.getBiome(this.worldPosition).get().getBaseTemperature();
+        float BLOCK_TEMPERATURE = this.level.getBiome(this.getBlockPos()).get().getBaseTemperature();
         this.SetDrainedStoneColor(BLOCK_TEMPERATURE);
         Block block = this.level.getBlockState(blockPos).getBlock();
         if(block instanceof DrainedBlock) return;
@@ -196,7 +187,6 @@ public class GemSeedTE extends BlockEntity {
             }
         }
         if(!(block instanceof AirBlock) &&
-                !(block.useShapeForLightOcclusion(block.defaultBlockState())) &&
                 !(block instanceof SlabBlock) &&
                 !(block instanceof BushBlock) &&
                 !(block instanceof SnowLayerBlock)){
@@ -212,10 +202,7 @@ public class GemSeedTE extends BlockEntity {
             else if(block == Blocks.SAND || block == Blocks.RED_SAND || block == Blocks.SOUL_SAND){
                 this.level.setBlockAndUpdate(blockPos, this.drained_sand.defaultBlockState());
             }
-            else if(block instanceof BushBlock){
-                this.level.setBlockAndUpdate(blockPos, Blocks.DEAD_BUSH.defaultBlockState());
-            }
-            else{
+            else {
                 if(blockPos.getY() < 80) {
                     this.level.setBlockAndUpdate(blockPos, this.drained_stone.defaultBlockState());
                 }
@@ -312,7 +299,7 @@ public class GemSeedTE extends BlockEntity {
     }
 
     @Override
-    public void saveAdditional(CompoundTag compound) {
+    public void saveAdditional(@NotNull CompoundTag compound) {
         super.saveAdditional(compound);
         compound.putInt("stage", this.stage);
         compound.putBoolean("spawned", this.spawned);
@@ -357,7 +344,7 @@ public class GemSeedTE extends BlockEntity {
 
 
     @Override
-    public void load(CompoundTag nbt) {
+    public void load(@NotNull CompoundTag nbt) {
         super.load(nbt);
         this.GEM_CONDITIONS = ModEntities.CRUXTOGEM;
         this.stage = nbt.getInt("stage");
@@ -402,16 +389,16 @@ public class GemSeedTE extends BlockEntity {
     }
 
     public static String StringFromFluid(Fluid fluid){
-        if(fluid == ModFluids.SOURCE_PINK_ESSENCE.get()){
+        if(fluid == ModFluids.PINK_ESSENCE.source.get()){
             return "pink";
         }
-        else if(fluid == ModFluids.SOURCE_BLUE_ESSENCE.get()){
+        else if(fluid == ModFluids.PINK_ESSENCE.source.get()){
             return "blue";
         }
-        else if(fluid == ModFluids.SOURCE_YELLOW_ESSENCE.get()){
+        else if(fluid == ModFluids.PINK_ESSENCE.source.get()){
             return "yellow";
         }
-        else if(fluid == ModFluids.SOURCE_WHITE_ESSENCE.get()){
+        else if(fluid == ModFluids.PINK_ESSENCE.source.get()){
             return "white";
         }
         else{
@@ -420,17 +407,17 @@ public class GemSeedTE extends BlockEntity {
     }
 
     public static Fluid FluidFromString(String fluid){
-        if(fluid == "pink"){
-            return ModFluids.SOURCE_PINK_ESSENCE.get();
+        if(Objects.equals(fluid, "pink")){
+            return ModFluids.PINK_ESSENCE.source.get();
         }
-        else if(fluid == "blue"){
-            return ModFluids.SOURCE_BLUE_ESSENCE.get();
+        else if(Objects.equals(fluid, "blue")){
+            return ModFluids.BLUE_ESSENCE.source.get();
         }
-        else if(fluid == "yellow"){
-            return ModFluids.SOURCE_YELLOW_ESSENCE.get();
+        else if(Objects.equals(fluid, "yellow")){
+            return ModFluids.YELLOW_ESSENCE.source.get();
         }
-        else if(fluid == "white"){
-            return ModFluids.SOURCE_WHITE_ESSENCE.get();
+        else if(Objects.equals(fluid, "white")){
+            return ModFluids.PINK_ESSENCE.source.get();
         }
         else {
             return Fluids.EMPTY;
@@ -510,7 +497,7 @@ public class GemSeedTE extends BlockEntity {
     public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
         //Debug
         System.out.println("[DEBUG]:Client recived tile sync packet");
-        this.load(pkt.getTag());
+        this.load(Objects.requireNonNull(pkt.getTag()));
     }
 
     @Override

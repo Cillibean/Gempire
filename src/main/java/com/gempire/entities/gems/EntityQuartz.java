@@ -26,15 +26,6 @@ public class EntityQuartz extends AbstractQuartz {
     public EntityQuartz(EntityType<? extends PathfinderMob> type, Level worldIn) {
         super(type, worldIn);
     }
-
-    public static AttributeSupplier.Builder registerAttributes() {
-        return Mob.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 60.0D)
-                .add(Attributes.MOVEMENT_SPEED, 0.35D)
-                .add(Attributes.ATTACK_DAMAGE, 7.0D)
-                .add(Attributes.ATTACK_SPEED, 1.0D);
-    }
-
     @Override
     protected void registerGoals() {
         super.registerGoals();
@@ -52,22 +43,22 @@ public class EntityQuartz extends AbstractQuartz {
 
     @Override
     public boolean hasMarkings() {
-        return this.getSkinColorVariant() == 2 || this.getSkinColorVariant() == 3 || this.getSkinColorVariant() == 12 || this.getSkinColorVariant() == 13 || this.getSkinColorVariant() == 17;
+        return this.getSkinColorVariant() == 2 || this.getSkinColorVariant() == 3 || this.getSkinColorVariant() == 6 || this.getSkinColorVariant() == 12 || this.getSkinColorVariant() == 13 || this.getSkinColorVariant() == 17;
     }
 
     @Override
     public boolean hasMarkings2() {
-        return false;
+        return this.getSkinColorVariant() == 17;
     }
 
     @Override
     public int maxMarkings() {
-        return 2;
+        return 1;
     }
 
     @Override
     public int maxMarkings2() {
-        return 0;
+        return 1;
     }
 
     @Override

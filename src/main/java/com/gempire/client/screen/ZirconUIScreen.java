@@ -7,12 +7,15 @@ import com.gempire.entities.gems.EntityZircon;
 import com.gempire.init.ModEnchants;
 import com.gempire.init.ModPacketHandler;
 import com.gempire.networking.C2SRequestEnchant;
+import com.gempire.networking.C2SRequestPoof;
 import com.gempire.networking.C2SRequestUpdateGemName;
 import com.gempire.util.GUIUtilities;
 import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiComponent;
+import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.components.ImageButton;
@@ -53,7 +56,7 @@ public class ZirconUIScreen extends AbstractContainerScreen<ZirconUIContainer> {
         int y = (this.height - this.imageHeight) / 2;
         int i = this.leftPos;
         int j = this.topPos;
-        this.nameBox = new EditBox(this.font, i + 102, j + 11, 101, 12,Component.translatable("Sussy"));
+        this.nameBox = new EditBox(this.font, i + 15, j + 11, 110, 14,Component.translatable("Sussy"));
         this.nameBox.setBordered(false);
         this.nameBox.setVisible(true);
         String name = this.menu.gem.customName() ? this.menu.gem.getCustomName().getString() : this.menu.gem.getNickname().getString();
@@ -71,9 +74,12 @@ public class ZirconUIScreen extends AbstractContainerScreen<ZirconUIContainer> {
                 11, 21, (p_213029_1_) -> {
             ModPacketHandler.INSTANCE.sendToServer(new C2SRequestPageChange(this.container.gem.getEntityId(), true));
         }));*/
-
-        addRenderableWidget(new ImageButton(this.leftPos + 90, this.topPos + 55, 30, 10, 0, 0, 0, ZirconUIScreen.ENCHANT_BUTTON,
-                30, 10, (p_213029_1_) -> {
+        addRenderableWidget(new Button(this.leftPos + 138, this.topPos + 81, 65, 20, Component.translatable("screens.gempire.poof"), (button) -> {
+            ModPacketHandler.INSTANCE.sendToServer(new C2SRequestPoof(this.menu.gem.getId()));
+            this.onClose();
+        }));
+        addRenderableWidget(new ImageButton(this.leftPos + 57, this.topPos + 57, 30, 10, 0, 0, 0, ZirconUIScreen.ENCHANT_BUTTON,
+                31, 10, (p_213029_1_) -> {
             ModPacketHandler.INSTANCE.sendToServer(new C2SRequestEnchant(this.menu.gem.getId()));
         }));
     }
@@ -98,17 +104,18 @@ public class ZirconUIScreen extends AbstractContainerScreen<ZirconUIContainer> {
         int y = (this.height - this.imageHeight) / 2;
         int i = this.leftPos;
         int j = this.topPos;
-        this.blit(matrixStack, x, y, 0, 0, this.imageWidth, this.imageHeight, 224, 208);
+        blit(matrixStack, x, y, 0, 0, this.imageWidth, this.imageHeight, 224, 208);
         this.nameBox.render(matrixStack, mouseX, mouseY, partialTicks);
         this.font.draw(matrixStack, ZirconUIScreen.getEnchantStringFromLapisCount(this.menu.gem),
-                i + 45, j + 29, 4210752);
+                i + 15, j + 29, 4210752);
         if(this.menu.gem.getItem(1).canApplyAtEnchantingTable(ModEnchants.VANILLA_ENCHANTMENTS.get(this.menu.gem.getEnchantPage()))) {
             GUIUtilities.setup(XP_ORB);
-            this.blit(matrixStack, x + 45, y + 64, 0, 0, 11, 11, 11 ,11);
-            int xp = this.getXP(this.getDiscountFromStack(this.menu.gem.getItem(2))) < 0 ? 0 : this.getXP(this.getDiscountFromStack(this.menu.gem.getItem(2)));
+            blit(matrixStack, x + 14, y + 56, 0, 0, 11, 11, 11 ,11);
+            int xp = Math.max(this.getXP(this.getDiscountFromStack(this.menu.gem.getItem(2))), 0);
             this.font.draw(matrixStack, Component.translatable(xp + "XP"),
-                    i + 59, j + 66, 0x88FF00);
+                    i + 26, j + 58, 0x88FF00);
         }
+        renderEntityInInventory(i + 170, j + 72, 23, (float)(i + 170) - mouseX, (float)(j + 25) - mouseY, this.menu.gem);
     }
 
     public int getXP(int discount){
@@ -132,8 +139,7 @@ public class ZirconUIScreen extends AbstractContainerScreen<ZirconUIContainer> {
     public static int getEnchantLevelFromLapisCount(EntityZircon gem){
         int maxEnchant = ModEnchants.VANILLA_ENCHANTMENTS.get(gem.getEnchantPage()).getMaxLevel();
         int lapisCount = gem.getItem(0).getCount();
-        int level = (int) Math.ceil(lapisCount * maxEnchant / 32);
-        return level;
+        return (int) Math.ceil(lapisCount * maxEnchant / 32);
     }
 
     public static String getEnchantStringFromLapisCount(EntityZircon gem){

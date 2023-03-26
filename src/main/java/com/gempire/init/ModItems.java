@@ -363,17 +363,6 @@ public class ModItems {
             )
     );*/
 
-    public static final RegistryObject<Item> ESSENCE_BOTTLE = ITEMS.register("essence_bottle", () ->
-            new BucketItem(Fluids.EMPTY, new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(16).tab(ModItemGroup.ITEMS)));
-    public static final RegistryObject<Item> PINK_ESSENCE = ITEMS.register("pink_essence", () ->
-            new BucketItem(ModFluids.SOURCE_PINK_ESSENCE, new Item.Properties().craftRemainder(ModItems.ESSENCE_BOTTLE.get()).stacksTo(1).tab(ModItemGroup.ITEMS)));
-    public static final RegistryObject<Item> BLUE_ESSENCE = ITEMS.register("blue_essence", () ->
-            new BucketItem(ModFluids.SOURCE_BLUE_ESSENCE, new Item.Properties().craftRemainder(ModItems.ESSENCE_BOTTLE.get()).stacksTo(1).tab(ModItemGroup.ITEMS)));
-    public static final RegistryObject<Item> YELLOW_ESSENCE = ITEMS.register("yellow_essence", () ->
-            new BucketItem(ModFluids.SOURCE_YELLOW_ESSENCE, new Item.Properties().craftRemainder(ModItems.ESSENCE_BOTTLE.get()).stacksTo(1).tab(ModItemGroup.ITEMS)));
-    public static final RegistryObject<Item> WHITE_ESSENCE = ITEMS.register("white_essence", () ->
-            new BucketItem(ModFluids.SOURCE_WHITE_ESSENCE, new Item.Properties().craftRemainder(ModItems.ESSENCE_BOTTLE.get()).stacksTo(1).tab(ModItemGroup.ITEMS)));
-
     public static final RegistryObject<Item> GILDED_LAPIS = ITEMS.register("gilded_lapis", () ->
             new Item(new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS).stacksTo(64)));
 
@@ -381,7 +370,13 @@ public class ModItems {
             new Item(new Item.Properties().tab(CreativeModeTab.TAB_FOOD).stacksTo(64).food(ModFoods.SPODUMENE_PIECE)));
 
     public static final RegistryObject<Item> ICE_SHARD = ITEMS.register("ice_shard", () ->
-            new ItemIceShard(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(64)));
+            new Item(new Item.Properties().stacksTo(64)));
+    public static final RegistryObject<Item> ACID_SPIT = ITEMS.register("acid_spit", () ->
+            new Item(new Item.Properties().stacksTo(64)));
+
+    public static final RegistryObject<Item> WATER_ORB = ITEMS.register("water_orb", () ->
+            new Item(new Item.Properties().stacksTo(64)));
+
 
     /*public static final RegistryObject<Item> WHITE_DESTABILIZER = ITEMS.register("white_destabilizer", () ->
             new ItemDestabilizer(new Item.Properties().group(ModItemGroup.ITEMS).maxStackSize(1)));
@@ -781,13 +776,13 @@ public class ModItems {
     public static final RegistryObject<Item> RED_SAPPHIRE_GEM = ITEMS.register("sapphire_gem_14", () ->
             new Item(new Item.Properties().tab(ModItemGroup.GEMSTONES).stacksTo(1).fireResistant()));
 
-    public static final RegistryObject<Item> HESSONITE_GEM = ITEMS.register("hessonite_gem", () ->
+    public static final RegistryObject<Item> HESSONITE_GARNET_GEM = ITEMS.register("garnet_gem_1", () ->
             new ItemGem(new Item.Properties().tab(ModItemGroup.GEMSTONES).stacksTo(1).fireResistant()));
-    public static final RegistryObject<Item> DEMANTOID_GEM = ITEMS.register("demantoid_gem", () ->
+    public static final RegistryObject<Item> DEMANTOID_GARNET_GEM = ITEMS.register("garnet_gem_5", () ->
             new ItemGem(new Item.Properties().tab(ModItemGroup.GEMSTONES).stacksTo(1).fireResistant()));
-    public static final RegistryObject<Item> PYROPE_GEM = ITEMS.register("pyrope_gem", () ->
+    public static final RegistryObject<Item> PYROPE_GARNET_GEM = ITEMS.register("garnet_gem_14", () ->
             new ItemGem(new Item.Properties().tab(ModItemGroup.GEMSTONES).stacksTo(1).fireResistant()));
-    public static final RegistryObject<Item> MELANITE_GEM = ITEMS.register("melanite_gem", () ->
+    public static final RegistryObject<Item> MELANITE_GARNET_GEM = ITEMS.register("garnet_gem_15", () ->
             new ItemGem(new Item.Properties().tab(ModItemGroup.GEMSTONES).stacksTo(1).fireResistant()));
 
     public static final RegistryObject<Item> SPODUMENE_SPODUMENE_GEM = ITEMS.register("spodumene_gem_1", () ->

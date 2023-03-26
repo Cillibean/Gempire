@@ -37,7 +37,7 @@ public class InjectorContainer extends AbstractContainerMenu {
     public InjectorContainer(int windowID, Inventory playerInventory, InjectorTE injector) {
         super(ModContainers.INJECTOR_CONTAINER.get(), windowID);
         this.injector = injector;
-        this.canInteract = ContainerLevelAccess.create(this.injector.getLevel(), this.injector.getBlockPos());
+        this.canInteract = ContainerLevelAccess.create(Objects.requireNonNull(this.injector.getLevel()), this.injector.getBlockPos());
 
         //TILE ENTITY
         this.addSlot(new Slot((Container)this.injector, InjectorTE.WHITE_INPUT_SLOT_INDEX, 61, 14));
@@ -76,7 +76,7 @@ public class InjectorContainer extends AbstractContainerMenu {
 
     @Override
     public boolean stillValid(Player playerIn) {
-        return this.stillValid(this.canInteract, playerIn, ModBlocks.DRILL_BLOCK.get());
+        return stillValid(this.canInteract, playerIn, ModBlocks.DRILL_BLOCK.get());
     }
 
     @Override

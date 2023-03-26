@@ -41,12 +41,12 @@ public class ModPacketHandler {
                 C2SRequestDumpFluidsTank::encode,
                 C2SRequestDumpFluidsTank::decode,
                 C2SRequestDumpFluidsTank::handle);
-        ModPacketHandler.INSTANCE.registerMessage(
+        /*ModPacketHandler.INSTANCE.registerMessage(
                 networkId++,
                 S2SSendGemSeedInfo.class,
                 S2SSendGemSeedInfo::encode,
                 S2SSendGemSeedInfo::decode,
-                S2SSendGemSeedInfo::handle);
+                S2SSendGemSeedInfo::handle);*/
         ModPacketHandler.INSTANCE.registerMessage(
                 networkId++,
                 C2SRequestUpdateGemName.class,

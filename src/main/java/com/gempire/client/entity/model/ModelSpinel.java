@@ -40,9 +40,9 @@ public class ModelSpinel<T extends EntityGem> extends ModelGem<T> {
 
 		PartDefinition flathair = head.addOrReplaceChild("flathair", CubeListBuilder.create().texOffs(0, 43).addBox(-12.0F, -18.0F, 0.0F, 24.0F, 18.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
 
-		PartDefinition leftpigtail = head.addOrReplaceChild("leftpigtail", CubeListBuilder.create().texOffs(0, 81).addBox(8.0F, -5.0F, -2.0F, 8.0F, 4.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, -0.7854F));
+		PartDefinition leftpigtail = head.addOrReplaceChild("leftpigtail", CubeListBuilder.create().texOffs(0, 81).mirror().addBox(8.0F, -5.0F, -2.0F, 8.0F, 4.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, -0.7854F));
 
-		PartDefinition rightpigtail = head.addOrReplaceChild("rightpigtail", CubeListBuilder.create().texOffs(0, 81).mirror().addBox(-16.0F, -5.0F, -2.0F, 8.0F, 4.0F, 4.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.7854F));
+		PartDefinition rightpigtail = head.addOrReplaceChild("rightpigtail", CubeListBuilder.create().texOffs(0, 81).addBox(-16.0F, -5.0F, -2.0F, 8.0F, 4.0F, 4.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.7854F));
 
 		PartDefinition flathair2 = head.addOrReplaceChild("flathair2", CubeListBuilder.create().texOffs(0, 37).addBox(0.0F, -20.0F, -12.0F, 0.0F, 20.0F, 24.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
 

@@ -32,9 +32,9 @@ public class EntityTourmaline extends EntityVaryingGem {
 
     public static AttributeSupplier.Builder registerAttributes() {
         return Mob.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 50.0D)
+                .add(Attributes.MAX_HEALTH, 30.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.4D)
-                .add(Attributes.ATTACK_DAMAGE, 5.0D)
+                .add(Attributes.ATTACK_DAMAGE, 3.0D)
                 .add(Attributes.ATTACK_SPEED, 1.0D);
     }
 
@@ -70,7 +70,7 @@ public class EntityTourmaline extends EntityVaryingGem {
 
     @Override
     public boolean hasMarkings2() {
-        return false;
+        return this.getSkinColorVariant() == 16;
     }
 
     @Override
@@ -80,7 +80,7 @@ public class EntityTourmaline extends EntityVaryingGem {
 
     @Override
     public int maxMarkings2() {
-        return 0;
+        return 1;
     }
 
     @Override
@@ -158,18 +158,8 @@ public class EntityTourmaline extends EntityVaryingGem {
     }
 
     @Override
-    public int generateInsigniaColor() {
-        return 5;
-    }
-
-    @Override
-    public int generateOutfitColor() {
-        return 13;
-    }
-
-    @Override
     public boolean hasOutfitPlacementVariant() {
-        return true;
+        return false;
     }
 
     @Override
@@ -181,7 +171,7 @@ public class EntityTourmaline extends EntityVaryingGem {
 
     public Abilities[] possibleAbilities(){
         return new Abilities[]{
-                Abilities.NO_ABILITY, Abilities.TANK, Abilities.BEEFCAKE, Abilities.POWERHOUSE, Abilities.UNHINGED
+                Abilities.NO_ABILITY, Abilities.TANK, Abilities.BEEFCAKE, Abilities.POWERHOUSE, Abilities.UNHINGED, Abilities.BERSERKER
         };
     }
     public Abilities[] definiteAbilities(){
@@ -210,7 +200,7 @@ public class EntityTourmaline extends EntityVaryingGem {
 
     @Override
     public boolean fireImmune(){
-        return true;
+        return false;
     }
 
     public boolean hasSkinColorVariant(){
@@ -224,17 +214,11 @@ public class EntityTourmaline extends EntityVaryingGem {
     }
 
     public int generateOutfitVariant(){
-        return this.random.nextInt(4);
+        return this.random.nextInt(3);
     }
 
     public int generateInsigniaVariant(){
-        if (this.getGemPlacement() == 11) {
-            return this.getGemPlacement() != 11 ? this.getOutfitVariant() : 4;
-        } else if (this.getGemPlacement() == 17) {
-            return this.getGemPlacement() != 17 ? this.getOutfitVariant() : 5;
-        } else {
             return this.getOutfitVariant();
-        }
     }
 
     @Override

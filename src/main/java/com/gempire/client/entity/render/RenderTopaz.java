@@ -4,6 +4,7 @@ import com.gempire.Gempire;
 import com.gempire.client.entity.model.ModelTopaz;
 import com.gempire.client.entity.render.layers.*;
 import com.gempire.entities.gems.EntityTopaz;
+import com.gempire.entities.gems.EntityTourmaline;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.MultiBufferSource;
 
@@ -23,6 +24,12 @@ public class RenderTopaz extends MobRenderer<EntityTopaz, ModelTopaz<EntityTopaz
         this.addLayer(new InsigniaLayer(this));
         this.addLayer(new GemPlacementLayer(this));
         this.addLayer(new VisorLayer(this));
+    }
+
+    @Override
+    protected void scale(EntityTopaz entitylivingbaseIn, PoseStack matrixStackIn, float partialTickTime) {
+        matrixStackIn.scale(0.7F, 0.75F, 0.7F);
+        super.scale(entitylivingbaseIn, matrixStackIn, partialTickTime);
     }
 
     @Override

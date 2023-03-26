@@ -30,11 +30,11 @@ public class EntityTopaz extends EntityVaryingGem {
 
     public static AttributeSupplier.Builder registerAttributes() {
         return Mob.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 80.0D)
+                .add(Attributes.MAX_HEALTH, 40.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.33D)
-                .add(Attributes.ATTACK_DAMAGE, 8.0D)
-                .add(Attributes.ATTACK_SPEED, .5D)
-                .add(Attributes.ATTACK_KNOCKBACK, 3D)
+                .add(Attributes.ATTACK_DAMAGE, 6.0D)
+                .add(Attributes.ATTACK_SPEED, .25D)
+                .add(Attributes.ATTACK_KNOCKBACK, 1D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 2D);
     }
 
@@ -143,7 +143,7 @@ public class EntityTopaz extends EntityVaryingGem {
     @Override
     public Abilities[] possibleAbilities(){
         return new Abilities[]{
-                Abilities.PARALYSIS, Abilities.NO_ABILITY, Abilities.TANK, Abilities.BEEFCAKE, Abilities.POWERHOUSE, Abilities.STERN
+                Abilities.PARALYSIS, Abilities.NO_ABILITY, Abilities.TANK, Abilities.BEEFCAKE, Abilities.POWERHOUSE, Abilities.STERN, Abilities.BERSERKER
         };
     }
 

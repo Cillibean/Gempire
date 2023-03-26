@@ -22,7 +22,6 @@ public class RenderTourmaline extends MobRenderer<EntityTourmaline, ModelTourmal
         this.addLayer(new SkinLayer(this));
         this.addLayer(new FaceLayer(this));
         this.addLayer(new MarkingLayer(this));
-        this.addLayer(new HairLayer(this));
         this.addLayer(new OutfitLayer(this));
         this.addLayer(new InsigniaLayer(this));
         this.addLayer(new GemPlacementLayer(this));
@@ -30,7 +29,7 @@ public class RenderTourmaline extends MobRenderer<EntityTourmaline, ModelTourmal
 
     @Override
     protected void scale(EntityTourmaline entitylivingbaseIn, PoseStack matrixStackIn, float partialTickTime) {
-        matrixStackIn.scale(.8f, .85f, .8f);
+        matrixStackIn.scale(1.0F, 1.1F, 1.0F);
         super.scale(entitylivingbaseIn, matrixStackIn, partialTickTime);
     }
 
@@ -40,6 +39,7 @@ public class RenderTourmaline extends MobRenderer<EntityTourmaline, ModelTourmal
     }
     @Override
     protected void renderNameTag(EntityTourmaline entityIn, Component displayNameIn, PoseStack matrixStackIn, MultiBufferSource bufferIn, int packedLightIn) {
+        matrixStackIn.scale(1.0F, 1.1F, 1.0F);
         super.renderNameTag(entityIn, displayNameIn, matrixStackIn, bufferIn, packedLightIn);
     }
 }

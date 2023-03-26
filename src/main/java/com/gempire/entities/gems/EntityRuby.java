@@ -36,9 +36,9 @@ public class EntityRuby extends EntityGem {
 
     public static AttributeSupplier.Builder registerAttributes() {
         return Mob.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 50.0D)
+                .add(Attributes.MAX_HEALTH, 30.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.4D)
-                .add(Attributes.ATTACK_DAMAGE, 5.0D)
+                .add(Attributes.ATTACK_DAMAGE, 3.0D)
                 .add(Attributes.ATTACK_SPEED, 1.0D);
     }
 
@@ -79,7 +79,7 @@ public class EntityRuby extends EntityGem {
 
     @Override
     public int generateInsigniaColor() {
-        return 4;
+        return 14;
     }
 
     @Override
@@ -142,7 +142,7 @@ public class EntityRuby extends EntityGem {
     }
 
     public int generateOutfitVariant(){
-        return this.random.nextInt(4);
+        return this.random.nextInt(5);
     }
 
     public int generateInsigniaVariant(){
