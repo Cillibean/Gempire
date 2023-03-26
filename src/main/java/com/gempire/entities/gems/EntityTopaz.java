@@ -143,7 +143,7 @@ public class EntityTopaz extends EntityVaryingGem {
     @Override
     public Abilities[] possibleAbilities(){
         return new Abilities[]{
-                Abilities.PARALYSIS, Abilities.NO_ABILITY, Abilities.TANK, Abilities.BEEFCAKE, Abilities.POWERHOUSE, Abilities.STERN
+                Abilities.PARALYSIS, Abilities.NO_ABILITY, Abilities.TANK, Abilities.BEEFCAKE, Abilities.POWERHOUSE, Abilities.STERN, Abilities.BERSERKER
         };
     }
 

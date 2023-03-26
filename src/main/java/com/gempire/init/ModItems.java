@@ -357,6 +357,10 @@ public class ModItems {
     public static final RegistryObject<Item> ACID_SPIT = ITEMS.register("acid_spit", () ->
             new Item(new Item.Properties().stacksTo(64)));
 
+    public static final RegistryObject<Item> WATER_ORB = ITEMS.register("water_orb", () ->
+            new Item(new Item.Properties().stacksTo(64)));
+
+
     /*public static final RegistryObject<Item> WHITE_DESTABILIZER = ITEMS.register("white_destabilizer", () ->
             new ItemDestabilizer(new Item.Properties().group(ModItemGroup.ITEMS).maxStackSize(1)));
     public static final RegistryObject<Item> YELLOW_DESTABILIZER = ITEMS.register("yellow_destabilizer", () ->

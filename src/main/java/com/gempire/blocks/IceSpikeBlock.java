@@ -155,6 +155,8 @@ public class IceSpikeBlock extends Block {
     }
 
     public void entityInside(BlockState state, Level worldIn, BlockPos pos, Entity entityIn) {
-        if(state.getValue(HALF) == DoubleBlockHalf.UPPER) entityIn.hurt(DamageSource.GENERIC, 2.0F);
+        if (entityIn instanceof LivingEntity) {
+            if (state.getValue(HALF) == DoubleBlockHalf.UPPER) entityIn.hurt(DamageSource.GENERIC, 2.0F);
+        }
     }
 }

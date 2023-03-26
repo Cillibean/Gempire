@@ -8,6 +8,7 @@ import com.gempire.entities.gems.starter.EntityPebble;
 import com.gempire.entities.gems.starter.EntityShale;
 import com.gempire.entities.projectiles.AcidSpitEntity;
 import com.gempire.entities.projectiles.IceShardEntity;
+import com.gempire.entities.projectiles.WaterOrbEntity;
 import com.gempire.systems.injection.GemConditions;
 import com.gempire.systems.injection.GemFormation;
 import net.minecraft.world.entity.MobCategory;
@@ -175,6 +176,14 @@ public class ModEntities {
                 .setUpdateInterval(10)
                 .setShouldReceiveVelocityUpdates(true)
                 .build(new ResourceLocation(Gempire.MODID, "acid_spit").toString());
+    });
+    public static final RegistryObject<EntityType<WaterOrbEntity>> WATER_ORB = ENTITIES.register("water_orb", () -> {
+        return EntityType.Builder.<WaterOrbEntity>of(WaterOrbEntity::new, MobCategory.MISC)
+                .sized(0.25F, 0.25F)
+                .setTrackingRange(64)
+                .setUpdateInterval(10)
+                .setShouldReceiveVelocityUpdates(true)
+                .build(new ResourceLocation(Gempire.MODID, "water_orb").toString());
     });
 
     public static void registerCruxes(){

@@ -181,6 +181,9 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.entityData.define(EntityGem.BOOST_TIME, 0);
         this.entityData.define(EntityGem.BREWING_PROGRESS, 0);
         this.FOLLOW_ID = UUID.randomUUID();
+
+        Arrays.fill(this.armorDropChances, 0);
+        Arrays.fill(this.handDropChances, 0);
     }
 
     @Nullable
@@ -219,7 +222,6 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         }
         return super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
     }
-
     @Override
     public boolean canHoldItem(ItemStack stack) {
         return stack.getItem() instanceof ArmorItem ||  stack.getItem() instanceof DiggerItem;

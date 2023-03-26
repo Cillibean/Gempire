@@ -48,6 +48,7 @@ public class IceShardEntity extends ThrowableItemProjectile {
     protected void onHitEntity(EntityHitResult p_213868_1_) {
         super.onHitEntity(p_213868_1_);
         p_213868_1_.getEntity().hurt(DamageSource.MAGIC, 1.0F);
+        this.kill();
     }
 
     private ParticleOptions makeParticle() {

@@ -39,16 +39,15 @@ public class EntityLapis extends EntityGem {
     @Override
     protected void registerGoals() {
         super.registerGoals();
-        this.goalSelector.addGoal(7, new FloatGoal(this));
+        this.goalSelector.addGoal(9, new FloatGoal(this));
         this.goalSelector.addGoal(6, new PanicGoal(this, 1.1D));
         this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 4.0F));
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
         this.goalSelector.addGoal(7, new EntityAIWander(this, 1.0D));
         this.goalSelector.addGoal(7, new EntityAIFollowOwner(this, 1.0D));
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Mob.class, 1, false, false, (p_234199_0_) -> {
-            return p_234199_0_ instanceof Enemy;
+        this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, Mob.class, 10, true, false, (p_213621_0_) -> {
+            return p_213621_0_ instanceof Enemy;
         }));
-        this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.1D, false));
     }
 
     @Override
@@ -71,7 +70,7 @@ public class EntityLapis extends EntityGem {
 
     @Override
     public int generateInsigniaColor() {
-        return 3;
+        return 11;
     }
 
     @Override
@@ -93,12 +92,12 @@ public class EntityLapis extends EntityGem {
 
     public Abilities[] possibleAbilities(){
         return new Abilities[]{
-                Abilities.NO_ABILITY, Abilities.TANK, Abilities.BEEFCAKE, Abilities.POWERHOUSE, Abilities.UNHINGED
+                Abilities.NO_ABILITY, Abilities.TANK, Abilities.BEEFCAKE, Abilities.POWERHOUSE, Abilities.UNHINGED, Abilities.BERSERKER
         };
     }
     public Abilities[] definiteAbilities(){
         return new Abilities[]{
-                //Abilities.HYDROKINESIS, Abilities.VEHICLE, Abilities.TERRAFORMER
+                Abilities.HYDROKINESIS//, Abilities.VEHICLE, Abilities.TERRAFORMER
         };
     }
 

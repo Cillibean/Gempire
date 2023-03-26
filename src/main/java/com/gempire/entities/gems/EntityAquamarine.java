@@ -115,7 +115,7 @@ public class EntityAquamarine extends EntityGem implements FlyingAnimal {
     }
     public Abilities[] definiteAbilities(){
         return new Abilities[]{
-                //Abilities.PARALYSIS
+                Abilities.PARALYSIS, Abilities.HYDROKINESIS
         };
     }
 

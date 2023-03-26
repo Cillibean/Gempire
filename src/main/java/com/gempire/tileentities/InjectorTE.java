@@ -193,6 +193,9 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
                     }
                 }
             }
+            essences = new StringBuilder("pink-blue-yellow-white");
+            String hehe = ("pink-blue-yellow-white");
+            chromaInput = new ItemStack(ModItems.SPECIAL_CHROMA.get());
             BlockPos seedPos = this.getBlockPos().offset(new BlockPos(0, -Math.ceil(GemSeedTE.DRAIN_SIZE / 2) - 1, 0));
             while (true) {
                 assert this.level != null;
@@ -209,7 +212,7 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
             ItemChroma chroma = (ItemChroma) this.getItem(InjectorTE.CHROMA_INPUT_SLOT_INDEX).getItem();
             Item primer = this.getItem(InjectorTE.PRIME_INPUT_SLOT_INDEX).getItem();
             GemSeedTE gemSeedTE = (GemSeedTE) level.getBlockEntity(seedPos);
-            gemSeedTE.setEssences(essences.toString());
+            gemSeedTE.setEssences(hehe);
             gemSeedTE.SetChroma(chroma);
             gemSeedTE.SetPrimer(primer);
             int facing = InjectorTE.getFacingFromState(this.getBlockState());
