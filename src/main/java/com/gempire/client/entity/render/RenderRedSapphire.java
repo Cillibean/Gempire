@@ -1,7 +1,6 @@
 package com.gempire.client.entity.render;
 
 import com.gempire.Gempire;
-import com.gempire.client.entity.model.ModelRedSapphire;
 import com.gempire.client.entity.model.ModelSapphire;
 import com.gempire.client.entity.render.layers.*;
 import com.gempire.entities.gems.EntityRedSapphire;
@@ -13,9 +12,9 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
-public class RenderRedSapphire extends MobRenderer<EntityRedSapphire, ModelRedSapphire<EntityRedSapphire>> {
+public class RenderRedSapphire extends MobRenderer<EntityRedSapphire, ModelSapphire<EntityRedSapphire>> {
 
-    public RenderRedSapphire(EntityRendererProvider.Context renderManagerIn, ModelRedSapphire<EntityRedSapphire> baseModel) {
+    public RenderRedSapphire(EntityRendererProvider.Context renderManagerIn, ModelSapphire<EntityRedSapphire> baseModel) {
         super(renderManagerIn, baseModel, .25f);
         this.addLayer(new SkinLayer(this));
         this.addLayer(new OutfitLayer(this));
@@ -27,7 +26,7 @@ public class RenderRedSapphire extends MobRenderer<EntityRedSapphire, ModelRedSa
 
     @Override
     public ResourceLocation getTextureLocation(EntityRedSapphire entity) {
-        return new ResourceLocation(Gempire.MODID+":textures/entity/sapphire/blank.png");
+        return new ResourceLocation(Gempire.MODID+":textures/entity/redsapphire/blank.png");
     }
 
     @Override

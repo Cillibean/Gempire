@@ -68,12 +68,12 @@ public class EntityBlueRuby extends EntityGem {
 
     @Override
     public int generateInsigniaColor() {
-        return 14;
+        return 11;
     }
 
     @Override
     public int generateOutfitColor() {
-        return 14;
+        return 11;
     }
 
     @Override
@@ -114,11 +114,11 @@ public class EntityBlueRuby extends EntityGem {
     }
 
     public boolean canChangeUniformColorByDefault() {
-        return true;
+        return false;
     }
 
     public boolean canChangeInsigniaColorByDefault(){
-        return true;
+        return false;
     }
 
     @Override

@@ -1,7 +1,6 @@
 package com.gempire.client.entity.render;
 
 import com.gempire.Gempire;
-import com.gempire.client.entity.model.ModelBlueRuby;
 import com.gempire.client.entity.model.ModelRuby;
 import com.gempire.client.entity.render.layers.*;
 import com.gempire.entities.gems.EntityBlueRuby;
@@ -13,9 +12,9 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
-public class RenderBlueRuby extends MobRenderer<EntityBlueRuby, ModelBlueRuby<EntityBlueRuby>> {
+public class RenderBlueRuby extends MobRenderer<EntityBlueRuby, ModelRuby<EntityBlueRuby>> {
 
-    public RenderBlueRuby(EntityRendererProvider.Context renderManagerIn, ModelBlueRuby<EntityBlueRuby> baseModel) {
+    public RenderBlueRuby(EntityRendererProvider.Context renderManagerIn, ModelRuby<EntityBlueRuby> baseModel) {
         super(renderManagerIn, baseModel, .25f);
         this.addLayer(new SkinLayer(this));
         this.addLayer(new FaceLayer(this));
@@ -33,7 +32,7 @@ public class RenderBlueRuby extends MobRenderer<EntityBlueRuby, ModelBlueRuby<En
 
     @Override
     public ResourceLocation getTextureLocation(EntityBlueRuby entity) {
-        return new ResourceLocation(Gempire.MODID+":textures/entity/ruby/blank.png");
+        return new ResourceLocation(Gempire.MODID+":textures/entity/blueruby/blank.png");
     }
     @Override
     protected void renderNameTag(EntityBlueRuby entityIn, Component displayNameIn, PoseStack matrixStackIn, MultiBufferSource bufferIn, int packedLightIn) {

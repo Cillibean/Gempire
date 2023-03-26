@@ -60,15 +60,15 @@ public class ModEntities {
                     .sized(.75f, 1.5f) // Hitbox Size
                     .build(new ResourceLocation(Gempire.MODID, "sapphire").toString()));
 
-    public static final RegistryObject<EntityType<EntityBlueRuby>> BLUE_RUBY = ENTITIES.register("blue_ruby",
+    public static final RegistryObject<EntityType<EntityBlueRuby>> BLUERUBY = ENTITIES.register("blueruby",
             () -> EntityType.Builder.of(EntityBlueRuby::new, MobCategory.CREATURE)
                     .sized(.75f, 1.5f) // Hitbox Size
-                    .build(new ResourceLocation(Gempire.MODID, "blue_ruby").toString()));
+                    .build(new ResourceLocation(Gempire.MODID, "blueruby").toString()));
 
-    public static final RegistryObject<EntityType<EntityRedSapphire>> RED_SAPPHIRE = ENTITIES.register("red_sapphire",
+    public static final RegistryObject<EntityType<EntityRedSapphire>> REDSAPPHIRE = ENTITIES.register("redsapphire",
             () -> EntityType.Builder.of(EntityRedSapphire::new, MobCategory.CREATURE)
                     .sized(.75f, 1.5f) // Hitbox Size
-                    .build(new ResourceLocation(Gempire.MODID, "red_sapphire").toString()));
+                    .build(new ResourceLocation(Gempire.MODID, "redsapphire").toString()));
 
     public static final RegistryObject<EntityType<EntityQuartz>> QUARTZ = ENTITIES.register("quartz",
             () -> EntityType.Builder.of(EntityQuartz::new, MobCategory.CREATURE)

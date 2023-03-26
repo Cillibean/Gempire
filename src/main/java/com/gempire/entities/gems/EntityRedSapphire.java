@@ -2,6 +2,7 @@ package com.gempire.entities.gems;
 
 import com.gempire.entities.ai.EntityAIFollowOwner;
 import com.gempire.entities.ai.EntityAIWander;
+import com.gempire.entities.bases.EntityGem;
 import com.gempire.entities.bases.EntityVaryingGem;
 import com.gempire.util.Abilities;
 import com.gempire.util.GemPlacements;
@@ -21,7 +22,7 @@ import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
-public class EntityRedSapphire extends EntityVaryingGem {
+public class EntityRedSapphire extends EntityGem {
     public boolean defensive = false;
 
     public EntityRedSapphire(EntityType<? extends PathfinderMob> type, Level worldIn) {
@@ -87,16 +88,6 @@ public class EntityRedSapphire extends EntityVaryingGem {
         return this.random.nextInt(24);
     }
 
-    @Override
-    public boolean UsesUniqueNames() {
-        return false;
-    }
-
-    @Override
-    public String NameFromColor(byte i) {
-        return null;
-    }
-
     public String NameFromColor() {
         return "";
     }
@@ -107,6 +98,11 @@ public class EntityRedSapphire extends EntityVaryingGem {
 
     public int generateInsigniaVariant() {
         return this.getOutfitVariant();
+    }
+
+    @Override
+    public int generateSkinColorVariant() {
+        return 14;
     }
 
     @Override
@@ -134,11 +130,11 @@ public class EntityRedSapphire extends EntityVaryingGem {
     }
 
     public boolean canChangeUniformColorByDefault() {
-        return true;
+        return false;
     }
 
     public boolean canChangeInsigniaColorByDefault(){
-        return true;
+        return false;
     }
 
     @Override
@@ -147,13 +143,7 @@ public class EntityRedSapphire extends EntityVaryingGem {
     }
 
     public boolean hasSkinColorVariant(){
-        return true;
-    }
-
-    public int[] NeglectedColors() {
-        return new int[]{
-                0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 15, 16, 17
-        };
+        return false;
     }
 
     @Override

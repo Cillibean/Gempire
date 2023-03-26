@@ -127,7 +127,7 @@
   "item.gempire.stack_interface": "Tech Scraps",
 
   "item.gempire.ruby_gem": "Ruby Gem",
-  "item.gempire.ruby_gem_1": "Blue Ruby Gem",
+  "item.gempire.blueruby_gem": "Blue Ruby Gem",
   "item.gempire.sapphire_gem_0": "White Sapphire Gem",
   "item.gempire.sapphire_gem_1": "Padparadscha Gem",
   "item.gempire.sapphire_gem_2": "Magenta Sapphire Gem",
@@ -142,7 +142,7 @@
   "item.gempire.sapphire_gem_11": "Blue Sapphire Gem",
   "item.gempire.sapphire_gem_12": "Brown Sapphire Gem",
   "item.gempire.sapphire_gem_13": "Green Sapphire Gem",
-  "item.gempire.sapphire_gem_14": "Red Sapphire Gem",
+  "item.gempire.redsapphire_gem": "Red Sapphire Gem",
   "item.gempire.sapphire_gem_15": "Black Sapphire Gem",
 
   "item.gempire.quartz_gem_0": "Milky Quartz Gem",
@@ -307,6 +307,8 @@
   "entity.gempire.nacre": "Nacre",
   "entity.gempire.ruby": "Ruby",
   "entity.gempire.sapphire": "Sapphire",
+  "entity.gempire.blueruby": "Blue Ruby",
+  "entity.gempire.redsapphire": "Red Sapphire",
   "entity.gempire.quartz": "Quartz",
   "entity.gempire.jasper": "Jasper",
   "entity.gempire.agate": "Agate",
