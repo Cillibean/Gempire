@@ -24,7 +24,7 @@ public class ModItems {
             )
     );
 
-    public static final RegistryObject<Item> WARP_SEED = ITEMS.register("warp_seed", () ->
+    /*public static final RegistryObject<Item> WARP_SEED = ITEMS.register("warp_seed", () ->
             new ItemWarpSeed(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(64)));
 
     public static final RegistryObject<Item> WARP_CORE = ITEMS.register("warp_core", () ->
@@ -39,7 +39,7 @@ public class ModItems {
                     ModBlocks.WARP_PAD.get(),
                     new Item.Properties().tab(ModItemGroup.BLOCKS)
             )
-    );
+    );*/
 
     public static final RegistryObject<Item> WHITE_CHROMA_CRYSTAL = ITEMS.register("white_chroma_crystal", () ->
             new BlockItem(
@@ -378,20 +378,18 @@ public class ModItems {
             new Item(new Item.Properties().stacksTo(64)));
 
 
-    /*public static final RegistryObject<Item> WHITE_DESTABILIZER = ITEMS.register("white_destabilizer", () ->
-            new ItemDestabilizer(new Item.Properties().group(ModItemGroup.ITEMS).maxStackSize(1)));
+    public static final RegistryObject<Item> WHITE_DESTABILIZER = ITEMS.register("white_destabilizer", () ->
+            new ItemDestabilizer(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(1)));
     public static final RegistryObject<Item> YELLOW_DESTABILIZER = ITEMS.register("yellow_destabilizer", () ->
-            new ItemDestabilizer(new Item.Properties().group(ModItemGroup.ITEMS).maxStackSize(1)));
+            new ItemDestabilizer(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(1)));
     public static final RegistryObject<Item> BLUE_DESTABILIZER = ITEMS.register("blue_destabilizer", () ->
-            new ItemDestabilizer(new Item.Properties().group(ModItemGroup.ITEMS).maxStackSize(1)));
+            new ItemDestabilizer(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(1)));
     public static final RegistryObject<Item> PINK_DESTABILIZER = ITEMS.register("pink_destabilizer", () ->
-            new ItemDestabilizer(new Item.Properties().group(ModItemGroup.ITEMS).maxStackSize(1)));
+            new ItemDestabilizer(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(1)));
 
-    public static final RegistryObject<Item> PINK_REJUVENATOR = ITEMS.register("pink_rejuvenator", () ->
-            new ItemRejuvenator(new Item.Properties().group(ModItemGroup.ITEMS).maxStackSize(1)));
+   public static final RegistryObject<Item> PINK_REJUVENATOR = ITEMS.register("pink_rejuvenator", () ->
+            new ItemRejuvenator(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(1)));
 
-    /*public static final RegistryObject<Item> BASIC_ _BLOCK_ITEM = ITEMS.register("basic_wire_block", () ->
-            new Item(new Item.Properties().group(ItemGroup.MATERIALS).maxStackSize(64)));*/
     public static final RegistryObject<Item> ENERGY_INTERFACE = ITEMS.register("energy_interface", () ->
             new Item(new Item.Properties().stacksTo(64)));
     public static final RegistryObject<Item> FLUID_INTERFACE = ITEMS.register("fluid_interface", () ->
