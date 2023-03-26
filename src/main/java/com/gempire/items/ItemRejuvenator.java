@@ -22,9 +22,7 @@ public class ItemRejuvenator extends Item {
         if (pTarget.isAlive()){
             if (pTarget instanceof EntityGem) {
                 ((EntityGem) pTarget).poof(DamageSource.sting(pAttacker));
-                if (pAttacker instanceof Player) {
-                    ((Player) pAttacker).getCooldowns().addCooldown(this, 100);
-                }
+                ((EntityGem) pTarget).removeOwner(pAttacker.getUUID());
             }
         }
     }
@@ -33,7 +31,7 @@ public class ItemRejuvenator extends Item {
     public InteractionResult interactLivingEntity(ItemStack item, Player player, LivingEntity entity, InteractionHand hand) {
         if (!player.getCooldowns().isOnCooldown(this)) {
             poofGem(entity, player);
-            player.getCooldowns().addCooldown(this, 200);
+            player.getCooldowns().addCooldown(this, 100);
         }
         return super.interactLivingEntity(item, player, entity, hand);
     }
