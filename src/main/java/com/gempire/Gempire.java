@@ -130,6 +130,9 @@ public class Gempire
         event.put(ModEntities.SPINEL.get(), EntitySpinel.registerAttributes().build());
 
         event.put(ModEntities.TOURMALINE.get(), EntityTourmaline.registerAttributes().build());
+        event.put(ModEntities.BLUE_RUBY.get(), EntityBlueRuby.registerAttributes().build());
+
+        event.put(ModEntities.RED_SAPPHIRE.get(), EntityRedSapphire.registerAttributes().build());
     }
 
     private void setup(final FMLCommonSetupEvent event)
