@@ -39,11 +39,9 @@ public class WarpPadTE extends BlockEntity implements MenuProvider{
         Level worldIn = player.level;
         BlockEntity te = worldIn.getBlockEntity(player.blockPosition().below());
         if(!worldIn.isClientSide()){
-            if(worldIn.getBlockState(te.getBlockPos().below()).getBlock() == ModBlocks.WARP_CORE.get()){
-                if(te instanceof WarpPadTE){
-                    test = true;
-                }
-            } else test = false;
+            if(te instanceof WarpPadTE){
+                test = true;
+            }
         }
         return test;
     }

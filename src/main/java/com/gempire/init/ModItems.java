@@ -24,7 +24,7 @@ public class ModItems {
             )
     );
 
-    /*public static final RegistryObject<Item> WARP_SEED = ITEMS.register("warp_seed", () ->
+    public static final RegistryObject<Item> WARP_SEED = ITEMS.register("warp_seed", () ->
             new ItemWarpSeed(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(64)));
 
     public static final RegistryObject<Item> WARP_CORE = ITEMS.register("warp_core", () ->
@@ -39,7 +39,7 @@ public class ModItems {
                     ModBlocks.WARP_PAD.get(),
                     new Item.Properties().tab(ModItemGroup.BLOCKS)
             )
-    );*/
+    );
 
     public static final RegistryObject<Item> WHITE_CHROMA_CRYSTAL = ITEMS.register("white_chroma_crystal", () ->
             new BlockItem(
