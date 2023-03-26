@@ -589,10 +589,6 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         }
     }
 
-    public void poof(DamageSource source) {
-        die(source);
-    }
-
     @Override
     public void die(DamageSource source){
         //When the Gem dies.

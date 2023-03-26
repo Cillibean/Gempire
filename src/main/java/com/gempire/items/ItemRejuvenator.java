@@ -18,11 +18,11 @@ public class ItemRejuvenator extends Item {
     }
 
 
-    public void poofGem(LivingEntity pTarget, LivingEntity pAttacker) {
+    public void poofGem(LivingEntity pTarget, Player pAttacker) {
         if (pTarget.isAlive()){
             if (pTarget instanceof EntityGem) {
-                ((EntityGem) pTarget).poof(DamageSource.sting(pAttacker));
-                ((EntityGem) pTarget).removeOwner(pAttacker.getUUID());
+                pTarget.hurt(DamageSource.GENERIC, pTarget.getMaxHealth());
+                ((EntityGem) pTarget).resetOwners();
             }
         }
     }

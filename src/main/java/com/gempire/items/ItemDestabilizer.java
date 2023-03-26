@@ -6,6 +6,7 @@ import com.gempire.entities.gems.EntitySpinel;
 import com.gempire.entities.gems.EntitySpodumene;
 import com.gempire.entities.gems.EntityTopaz;
 import com.gempire.entities.gems.EntityTourmaline;
+import com.gempire.networking.C2SRequestPoof;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -31,11 +32,10 @@ public class ItemDestabilizer extends Item {
     public void poofGem(LivingEntity pTarget, LivingEntity pAttacker) {
         if (pTarget.isAlive()){
             if (pTarget instanceof EntityGem) {
-                ((EntityGem) pTarget).poof(DamageSource.sting(pAttacker));
+                pTarget.hurt(DamageSource.GENERIC, pTarget.getMaxHealth());
             }
         }
     }
-
     @Override
     public InteractionResult interactLivingEntity(ItemStack item, Player player, LivingEntity entity, InteractionHand hand) {
         if (!player.getCooldowns().isOnCooldown(this)) {
