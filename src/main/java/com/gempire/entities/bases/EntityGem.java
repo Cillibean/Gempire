@@ -2,24 +2,19 @@ package com.gempire.entities.bases;
 
 import com.gempire.Gempire;
 import com.gempire.container.GemUIContainer;
-import com.gempire.entities.abilities.AbilityScout;
 import com.gempire.entities.abilities.AbilityVehicle;
 import com.gempire.entities.abilities.base.Ability;
 import com.gempire.entities.abilities.AbilityZilch;
 import com.gempire.entities.abilities.interfaces.*;
 import com.gempire.events.GemPoofEvent;
 import com.gempire.init.ModItems;
-import com.gempire.items.ItemDestabilizer;
 import com.gempire.items.ItemGem;
-import com.gempire.items.ItemRejuvenator;
 import com.gempire.util.Abilities;
 import com.gempire.util.Color;
 import com.gempire.util.GemPlacements;
 import com.gempire.util.PaletteType;
-import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
 import net.minecraft.network.chat.Component;
-import net.minecraft.server.commands.LocateCommand;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.animal.Wolf;
 import net.minecraft.world.entity.animal.horse.AbstractHorse;
@@ -49,14 +44,9 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.Vec3;
-import net.minecraft.core.Registry;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.biome.Biome;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
-import net.minecraft.world.level.saveddata.maps.MapDecoration;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.network.NetworkHooks;
@@ -81,7 +71,6 @@ import net.minecraft.world.item.DyeItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.MapItem;
 
 public abstract class EntityGem extends PathfinderMob implements RangedAttackMob, ItemSteerable, Container, MenuProvider, ContainerListener {
     //public static DataParameter<Optional<UUID>> OWNER_ID = EntityDataManager.<Optional<UUID>>createKey(EntityGem.class, DataSerializers.OPTIONAL_UNIQUE_ID);
@@ -203,9 +192,9 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.setInsigniaVariant(this.generateInsigniaVariant());
         this.setInsigniaColor(this.generateInsigniaColor());
         this.setAbilitySlots(this.generateAbilitySlots());
-        this.setAbilites(this.generateAbilities());
+        this.setAbilities(this.generateAbilities());
         this.setEmotional(this.generateIsEmotional());
-        this.setAbilityPowers(this.findAbilities(this.getAbilites()));
+        this.setAbilityPowers(this.findAbilities(this.getAbilities()));
         this.addAbilityGoals();
         this.applyAttributeAbilities();
         this.applyAlchemyPowers();
@@ -230,7 +219,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     @Override
     public void addAdditionalSaveData(CompoundTag compound) {
         super.addAdditionalSaveData(compound);
-        compound.putString("abilities", this.getAbilites());
+        compound.putString("abilities", this.getAbilities());
         compound.putBoolean("emotional", this.isEmotional());
         this.writeOwners(compound);
         compound.putUUID("followID", this.FOLLOW_ID);
@@ -299,7 +288,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     @Override
     public void load(CompoundTag compound) {
         super.load(compound);
-        this.setAbilites(compound.getString("abilities"));
+        this.setAbilities(compound.getString("abilities"));
         this.setEmotional(compound.getBoolean("emotional"));
         this.readOwners(compound);
         if(compound.contains("followID"))this.FOLLOW_ID = compound.getUUID("followID");
@@ -603,9 +592,9 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     @Override
     public void die(DamageSource source){
         //When the Gem dies.
-        float f = (this.random.nextFloat() - 0.5F) * 8.0F;
+        /*float f = (this.random.nextFloat() - 0.5F) * 8.0F;
         float f1 = (this.random.nextFloat() - 0.5F) * 4.0F;
-        float f2 = (this.random.nextFloat() - 0.5F) * 8.0F;
+        float f2 = (this.random.nextFloat() - 0.5F) * 8.0F; these dont do anything*/
         this.level.addParticle(ParticleTypes.EXPLOSION_EMITTER, this.getX() , this.getY() + 2.0D, this.getZ(), 0.0D, 0.0D, 0.0D);
         if(!this.level.isClientSide){
             GemPoofEvent event = new GemPoofEvent(this, this.blockPosition(), source);
@@ -1019,7 +1008,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             for (Abilities ability : abilities) {
                 //powers.add(Ability.getAbilityFromAbilities(ability).assignAbility(this));
                 Class[] parameterType = new Class[0];
-                Ability ability1 = null;
+                Ability ability1;
                 try {
                     ability1 = Ability.ABILITY_FROM_ABILITIES.get(ability).getConstructor(parameterType).newInstance().assignAbility(this);
                     powers.add(ability1);
@@ -1088,11 +1077,11 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         return 3;
     }
 
-    public String getAbilites(){
+    public String getAbilities(){
         return this.entityData.get(EntityGem.ABILITIES);
     }
 
-    public void setAbilites(String value){
+    public void setAbilities(String value){
         this.entityData.set(EntityGem.ABILITIES, value);
     }
 

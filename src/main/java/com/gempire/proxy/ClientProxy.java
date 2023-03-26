@@ -10,20 +10,26 @@ import com.gempire.init.ModBlocks;
 import com.gempire.init.ModContainers;
 import com.gempire.init.ModEntities;
 import com.gempire.init.ModTE;
+import com.gempire.keybindings.KeyBindings;
+import com.gempire.tileentities.WarpPadTE;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.entity.*;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.network.chat.Component;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.client.event.InputEvent;
+import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
-@Mod.EventBusSubscriber(modid = Gempire.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ClientProxy {
-
+    @Mod.EventBusSubscriber(modid = Gempire.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+    public static class ClientModBusEvents {
     @SubscribeEvent
     public static void onClientSetup(EntityRenderersEvent.RegisterRenderers event) {
         //RenderingRegistry.registerEntityRenderingHandler(ModEntities.TEST.get(), RenderTestEntity::new);
@@ -103,4 +109,26 @@ public class ClientProxy {
         event.registerLayerDefinition(ModelPeridot.LAYER_LOCATION, ModelPeridot::createBodyLayer);
         event.registerLayerDefinition(ModelBismuth.LAYER_LOCATION, ModelBismuth::createBodyLayer);
     }
+
+    @SubscribeEvent
+    public static void onKeyRegister(RegisterKeyMappingsEvent event) {
+        event.register(KeyBindings.WARP_KEY);
+    }
+}
+    @Mod.EventBusSubscriber(modid = Gempire.MODID, value = Dist.CLIENT)
+    public static class ClientForgeEvents {
+        @SubscribeEvent
+        public static void onKeyInput(InputEvent.Key event) {
+            if(KeyBindings.WARP_KEY.consumeClick()) {
+                LocalPlayer player = Minecraft.getInstance().player;
+                System.out.println("warp attempt");
+                if (WarpPadTE.TestForWarpPad(player)) {
+                    Minecraft.getInstance().player.sendSystemMessage(Component.literal("Warped!"));
+                } else if (!WarpPadTE.TestForWarpPad(player)) {
+                    Minecraft.getInstance().player.sendSystemMessage(Component.literal("This is not a warp pad!"));
+                }
+            }
+        }
+    }
+
 }

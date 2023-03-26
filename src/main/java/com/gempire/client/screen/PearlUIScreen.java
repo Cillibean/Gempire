@@ -223,7 +223,7 @@ public class PearlUIScreen extends AbstractContainerScreen<PearlUIContainer> {
     }
 
     public void drawAbilityList(PoseStack stack, int x, int y){
-        ArrayList<Ability> powers1 = this.menu.gem.findAbilities(this.menu.gem.getAbilites());
+        ArrayList<Ability> powers1 = this.menu.gem.findAbilities(this.menu.gem.getAbilities());
         ArrayList<Ability> powers = new ArrayList<>();
         for(Ability ability : powers1){
             if(!(ability instanceof AbilityZilch)){
