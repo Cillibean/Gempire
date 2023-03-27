@@ -42,11 +42,9 @@ public class ItemDestabilizer extends Item {
         if (f == 1) {
             poofGem(enemy, (Player) player);
         }
-        if (player instanceof Player) {
-            if (enemy instanceof EntityGem && !((Player) player).isCreative()) {
-                itemStack.setDamageValue(getDamage(itemStack) + 1);
-            }
-        }
+        itemStack.hurtAndBreak(1, player, (p_43296_) -> {
+            p_43296_.broadcastBreakEvent(EquipmentSlot.MAINHAND);
+        });
         return super.hurtEnemy(itemStack, enemy, player);
     }
     @Override
