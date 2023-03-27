@@ -683,8 +683,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     }
 
     public void resetOwners(){
-        setOwners(new ArrayList<UUID>());
-        setFollow(getUUID());
+        setOwners(new ArrayList<>());
     }
 
     public boolean getOwned(){

@@ -1,121 +1,15 @@
 {
-	"credit": "Made with Blockbench",
-	"texture_size": [64, 64],
-	"textures": {
-		"0": "gempire:items/pink_rejuvenator",
-		"particle": "gempire:items/pink_rejuvenator"
-	},
-	"elements": [
-		{
-			"name": "Shaft",
-			"from": [7, 0, 7],
-			"to": [8, 24, 8],
-			"rotation": {"angle": 0, "axis": "y", "origin": [7.5, 9, 7.5]},
-			"faces": {
-				"north": {"uv": [0.25, 0.25, 0.5, 6.25], "texture": "#0"},
-				"east": {"uv": [0, 0.25, 0.25, 6.25], "texture": "#0"},
-				"south": {"uv": [0.75, 0.25, 1, 6.25], "texture": "#0"},
-				"west": {"uv": [0.5, 0.25, 0.75, 6.25], "texture": "#0"},
-				"up": {"uv": [0.5, 0.25, 0.25, 0], "texture": "#0"},
-				"down": {"uv": [0.75, 0, 0.5, 0.25], "texture": "#0"}
-			}
-		},
-		{
-			"name": "BottomGrip",
-			"from": [6.5, 1, 6.5],
-			"to": [8.5, 5, 8.5],
-			"rotation": {"angle": 0, "axis": "y", "origin": [7.5, 3, 7.5]},
-			"faces": {
-				"north": {"uv": [1.5, 0.5, 2, 1.5], "texture": "#0"},
-				"east": {"uv": [1, 0.5, 1.5, 1.5], "texture": "#0"},
-				"south": {"uv": [2.5, 0.5, 3, 1.5], "texture": "#0"},
-				"west": {"uv": [2, 0.5, 2.5, 1.5], "texture": "#0"},
-				"up": {"uv": [2, 0.5, 1.5, 0], "texture": "#0"},
-				"down": {"uv": [2.5, 0, 2, 0.5], "texture": "#0"}
-			}
-		},
-		{
-			"name": "TopGrip",
-			"from": [6.5, 19, 6.5],
-			"to": [8.5, 23, 8.5],
-			"rotation": {"angle": 0, "axis": "y", "origin": [7.5, 15, 7.5]},
-			"faces": {
-				"north": {"uv": [1.5, 0.5, 2, 1.5], "texture": "#0"},
-				"east": {"uv": [1, 0.5, 1.5, 1.5], "texture": "#0"},
-				"south": {"uv": [2.5, 0.5, 3, 1.5], "texture": "#0"},
-				"west": {"uv": [2, 0.5, 2.5, 1.5], "texture": "#0"},
-				"up": {"uv": [2, 0.5, 1.5, 0], "texture": "#0"},
-				"down": {"uv": [2.5, 0, 2, 0.5], "texture": "#0"}
-			}
-		},
-		{
-			"name": "CrystalPlane1",
-			"from": [5.5, 24, 7.5],
-			"to": [9.5, 28, 7.5],
-			"rotation": {"angle": -45, "axis": "y", "origin": [7.5, 20, 7.5]},
-			"faces": {
-				"north": {"uv": [3, 0, 4, 1], "texture": "#0"},
-				"east": {"uv": [3, 0, 3, 1], "texture": "#0"},
-				"south": {"uv": [4, 0, 5, 1], "texture": "#0"},
-				"west": {"uv": [4, 0, 4, 1], "texture": "#0"},
-				"up": {"uv": [4, 0, 3, 0], "texture": "#0"},
-				"down": {"uv": [5, 0, 4, 0], "texture": "#0"}
-			}
-		},
-		{
-			"name": "CrystalPlane2",
-			"from": [5.5, 24, 7.5],
-			"to": [9.5, 28, 7.5],
-			"rotation": {"angle": 45, "axis": "y", "origin": [7.5, 20, 7.5]},
-			"faces": {
-				"north": {"uv": [3, 0, 4, 1], "texture": "#0"},
-				"east": {"uv": [3, 0, 3, 1], "texture": "#0"},
-				"south": {"uv": [4, 0, 5, 1], "texture": "#0"},
-				"west": {"uv": [4, 0, 4, 1], "texture": "#0"},
-				"up": {"uv": [4, 0, 3, 0], "texture": "#0"},
-				"down": {"uv": [5, 0, 4, 0], "texture": "#0"}
-			}
-		},
-		{
-			"name": "Blade",
-			"from": [7.5, 0, -9],
-			"to": [7.5, 32, 23],
-			"rotation": {"angle": 0, "axis": "y", "origin": [7.5, 16, 7]},
-			"faces": {
-				"north": {"uv": [8, 8, 8, 16], "texture": "#0"},
-				"east": {"uv": [0, 8, 8, 16], "texture": "#0"},
-				"south": {"uv": [16, 8, 16, 16], "texture": "#0"},
-				"west": {"uv": [8, 8, 16, 16], "texture": "#0"},
-				"up": {"uv": [8, 8, 8, 0], "texture": "#0"},
-				"down": {"uv": [8, 0, 8, 8], "texture": "#0"}
-			}
-		}
-	],
-	"display": {
-		"thirdperson_righthand": {
-			"translation": [0, -2, 0]
-		},
-		"thirdperson_lefthand": {
-			"translation": [0, -2, 0]
-		},
-		"firstperson_righthand": {
-			"translation": [0, -5, 0]
-		},
-		"firstperson_lefthand": {
-			"translation": [0, -5, 0]
-		},
-		"ground": {
-			"translation": [0, 4.25, 0]
-		},
-		"gui": {
-			"rotation": [0, 90, 0],
-			"translation": [1.25, -3.5, -1.5],
-			"scale": [0.5, 0.5, 0.5]
-		},
-		"fixed": {
-			"rotation": [0, 90, 0],
-			"translation": [1.25, -4.5, -1.5],
-			"scale": [0.6, 0.6, 0.6]
-		}
-	}
+  "parent":"forge:item/default",
+  "loader":"forge:separate-perspective",
+  "base": {
+    "parent": "gempire:item/pink_rejuvenator_held"
+  },
+  "perspectives": {
+    "gui": {
+      "parent": "minecraft:item/generated",
+      "textures": {
+        "layer0": "gempire:items/pink_rejuvenator_held"
+      }
+    }
+  }
 }

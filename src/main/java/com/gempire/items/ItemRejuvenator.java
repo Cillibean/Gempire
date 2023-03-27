@@ -1,38 +1,36 @@
 package com.gempire.items;
 
 import com.gempire.entities.bases.EntityGem;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
+import com.google.common.collect.ImmutableMultimap;
+import com.google.common.collect.Multimap;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 
-import net.minecraft.world.item.Item.Properties;
-
-public class ItemRejuvenator extends Item {
+public class ItemRejuvenator extends ItemDestabilizer {
+    private final Multimap<Attribute, AttributeModifier> defaultModifiers;
 
     public ItemRejuvenator(Properties properties){
         super(properties);
-    }
-
-
-    public void poofGem(LivingEntity pTarget, Player pAttacker) {
-        if (pTarget.isAlive()){
-            if (pTarget instanceof EntityGem) {
-                pTarget.hurt(DamageSource.GENERIC, pTarget.getMaxHealth());
-                ((EntityGem) pTarget).resetOwners();
-            }
-        }
+        ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
+        builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Weapon modifier", -3F, AttributeModifier.Operation.ADDITION));
+        this.defaultModifiers = builder.build();
     }
 
     @Override
-    public InteractionResult interactLivingEntity(ItemStack item, Player player, LivingEntity entity, InteractionHand hand) {
-        if (!player.getCooldowns().isOnCooldown(this)) {
-            poofGem(entity, player);
-            player.getCooldowns().addCooldown(this, 100);
+    public void poofGem(LivingEntity pTarget, Player player) {
+        if (pTarget.isAlive()) {
+            if (pTarget instanceof EntityGem)
+                ((EntityGem) pTarget).resetOwners();
+            pTarget.hurt(DamageSource.GENERIC, pTarget.getMaxHealth());
         }
-        return super.interactLivingEntity(item, player, entity, hand);
+    }
+    @Override
+    public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlot p_43383_) {
+        return p_43383_ == EquipmentSlot.MAINHAND ? this.defaultModifiers : super.getDefaultAttributeModifiers(p_43383_);
     }
 }

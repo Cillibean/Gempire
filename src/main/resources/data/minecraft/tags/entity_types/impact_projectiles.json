@@ -1,6 +1,8 @@
 {
   "replace": false,
   "values": [
-    "gempire:ice_shard"
+    "gempire:ice_shard",
+    "gempire:water_orb",
+    "gempire:acid_spit"
   ]
 }
