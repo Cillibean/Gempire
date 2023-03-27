@@ -44,22 +44,22 @@ public class InjectorScreen extends AbstractContainerScreen<InjectorContainer> {
         int x = (this.width - this.imageWidth) / 2;
         int y = (this.height - this.imageHeight) / 2;
         addRenderableWidget(new ImageButton(x + 83, y + 58, 51, 12, 0, 0, 0, InjectorScreen.INJECT_BUTTON_TEXTURE, 51, 12, (p_213029_1_) -> {
-            ModPacketHandler.INSTANCE.sendToServer(new C2SRequestInject(this.menu.injector.getBlockPos()));
+            ModPacketHandler.INSTANCE.sendToServer(new C2SRequestInject(this.menu.blockEntity.getBlockPos()));
         }));
         addRenderableWidget(new ImageButton(x + 133, y + 38, 7, 20, 0, 0, 0, InjectorScreen.DUMP_BUTTON, 7, 20, (p_213029_1_) -> {
-            ModPacketHandler.INSTANCE.sendToServer(new C2SRequestDumpFluidsInjector(this.menu.injector.getBlockPos()));
+            ModPacketHandler.INSTANCE.sendToServer(new C2SRequestDumpFluidsInjector(this.menu.blockEntity.getBlockPos()));
         }));
         addRenderableWidget(new ImageButton(x + 101, y + 39, 6, 14, 0, 0, 0, InjectorScreen.BUTTON_TEXTURE, 6, 14, (p_213029_1_) -> {
-            ModPacketHandler.INSTANCE.sendToServer(new C2SRequestUpdateInjectorValves("pink", this.menu.injector.getBlockPos()));
+            ModPacketHandler.INSTANCE.sendToServer(new C2SRequestUpdateInjectorValves("pink", this.menu.blockEntity.getBlockPos()));
         }));
         addRenderableWidget(new ImageButton(x + 109, y + 39, 6, 14, 0, 0, 0, InjectorScreen.BUTTON_TEXTURE, 6, 14,(p_213029_1_) -> {
-            ModPacketHandler.INSTANCE.sendToServer(new C2SRequestUpdateInjectorValves("blue", this.menu.injector.getBlockPos()));
+            ModPacketHandler.INSTANCE.sendToServer(new C2SRequestUpdateInjectorValves("blue", this.menu.blockEntity.getBlockPos()));
         }));
         addRenderableWidget(new ImageButton(x + 117, y + 39, 6, 14, 0, 0, 0, InjectorScreen.BUTTON_TEXTURE, 6, 14,(p_213029_1_) -> {
-            ModPacketHandler.INSTANCE.sendToServer(new C2SRequestUpdateInjectorValves("yellow", this.menu.injector.getBlockPos()));
+            ModPacketHandler.INSTANCE.sendToServer(new C2SRequestUpdateInjectorValves("yellow", this.menu.blockEntity.getBlockPos()));
         }));
         addRenderableWidget(new ImageButton(x + 125, y + 39, 6, 14, 0, 0, 0, InjectorScreen.BUTTON_TEXTURE, 6, 14,(p_213029_1_) -> {
-            ModPacketHandler.INSTANCE.sendToServer(new C2SRequestUpdateInjectorValves("white", this.menu.injector.getBlockPos()));
+            ModPacketHandler.INSTANCE.sendToServer(new C2SRequestUpdateInjectorValves("white", this.menu.blockEntity.getBlockPos()));
         }));
     }
 
@@ -84,16 +84,16 @@ public class InjectorScreen extends AbstractContainerScreen<InjectorContainer> {
         int x = (this.width - this.imageWidth) / 2;
         int y = (this.height - this.imageHeight) / 2;
         this.blit(matrixStack, x, y, 0, 0, this.imageWidth, this.imageHeight);
-        FluidStack pinkFluid = this.menu.injector.getTankFromValue(0).getFluid();
-        FluidStack blueFluid = this.menu.injector.getTankFromValue(1).getFluid();
-        FluidStack yellowFluid = this.menu.injector.getTankFromValue(2).getFluid();
-        FluidStack whiteFluid = this.menu.injector.getTankFromValue(3).getFluid();
+        FluidStack pinkFluid = this.menu.blockEntity.getTankFromValue(0).getFluid();
+        FluidStack blueFluid = this.menu.blockEntity.getTankFromValue(1).getFluid();
+        FluidStack yellowFluid = this.menu.blockEntity.getTankFromValue(2).getFluid();
+        FluidStack whiteFluid = this.menu.blockEntity.getTankFromValue(3).getFluid();
         if(pinkFluid.getFluid() != Fluids.EMPTY)
         {
             GUIUtilities.setup(FLUID_GUI);
             int xPink = x + 102;
             int yPink = y + 40;
-            int fluidStored = 12 * pinkFluid.getAmount() / this.menu.injector.getCapacity();
+            int fluidStored = 12 * pinkFluid.getAmount() / this.menu.blockEntity.getCapacity();
             int color = 0xFF7FFF;
             float r = ((color & 16711680) >> 16) / 255f;
             float g = ((color & 65280) >> 8) / 255f;
@@ -106,7 +106,7 @@ public class InjectorScreen extends AbstractContainerScreen<InjectorContainer> {
             GUIUtilities.setup(FLUID_GUI);
             int xBlue = x + 110;
             int yBlue = y + 40;
-            int fluidStored = 12 * blueFluid.getAmount() / this.menu.injector.getCapacity();
+            int fluidStored = 12 * blueFluid.getAmount() / this.menu.blockEntity.getCapacity();
             int color = 0x697FFF;
             float r = ((color & 16711680) >> 16) / 255f;
             float g = ((color & 65280) >> 8) / 255f;
@@ -119,7 +119,7 @@ public class InjectorScreen extends AbstractContainerScreen<InjectorContainer> {
             GUIUtilities.setup(FLUID_GUI);
             int xYellow = x + 118;
             int yYellow = y + 40;
-            int fluidStored = 12 * yellowFluid.getAmount() / this.menu.injector.getCapacity();
+            int fluidStored = 12 * yellowFluid.getAmount() / this.menu.blockEntity.getCapacity();
             int color = 0xFFFC84;
             float r = ((color & 16711680) >> 16) / 255f;
             float g = ((color & 65280) >> 8) / 255f;
@@ -132,7 +132,7 @@ public class InjectorScreen extends AbstractContainerScreen<InjectorContainer> {
             GUIUtilities.setup(FLUID_GUI);
             int xWhite = x + 126;
             int yWhite = y + 40;
-            int fluidStored = 12 * whiteFluid.getAmount() / this.menu.injector.getCapacity();
+            int fluidStored = 12 * whiteFluid.getAmount() / this.menu.blockEntity.getCapacity();
             int color = 0xD8D8D8;
             float r = ((color & 16711680) >> 16) / 255f;
             float g = ((color & 65280) >> 8) / 255f;
@@ -141,19 +141,19 @@ public class InjectorScreen extends AbstractContainerScreen<InjectorContainer> {
             this.blit(matrixStack, xWhite, yWhite + (12 - fluidStored), 0, 0, 4, fluidStored);
         }
         RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
-        if(this.menu.injector.pinkOpen){
+        if(this.menu.blockEntity.pinkOpen){
             GUIUtilities.setup(HALO_GUI_PINK);
             this.blit(matrixStack, x, y, 0, 0, this.width, this.height);
         }
-        if(this.menu.injector.blueOpen){
+        if(this.menu.blockEntity.blueOpen){
             GUIUtilities.setup(HALO_GUI_BLUE);
             this.blit(matrixStack, x, y, 0, 0, this.width, this.height);
         }
-        if(this.menu.injector.yellowOpen){
+        if(this.menu.blockEntity.yellowOpen){
             GUIUtilities.setup(HALO_GUI_YELLOW);
             this.blit(matrixStack, x, y, 0, 0, this.width, this.height);
         }
-        if(this.menu.injector.whiteOpen){
+        if(this.menu.blockEntity.whiteOpen){
             GUIUtilities.setup(HALO_GUI_WHITE);
             this.blit(matrixStack, x, y, 0, 0, this.width, this.height);
         }
