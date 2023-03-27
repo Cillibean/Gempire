@@ -385,17 +385,10 @@ public class ModItems {
     public static final RegistryObject<Item> BLUE_DESTABILIZER = ITEMS.register("blue_destabilizer", () ->
             new ItemDestabilizer(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(1)));
     public static final RegistryObject<Item> PINK_DESTABILIZER = ITEMS.register("pink_destabilizer", () ->
-            new ItemDestabilizer(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(1)));
+            new ItemDestabilizer(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(1).durability(256)));
 
    public static final RegistryObject<Item> PINK_REJUVENATOR = ITEMS.register("pink_rejuvenator", () ->
             new ItemRejuvenator(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(1)));
-
-    public static final RegistryObject<Item> ENERGY_INTERFACE = ITEMS.register("energy_interface", () ->
-            new Item(new Item.Properties().stacksTo(64)));
-    public static final RegistryObject<Item> FLUID_INTERFACE = ITEMS.register("fluid_interface", () ->
-            new Item(new Item.Properties().stacksTo(64)));
-    public static final RegistryObject<Item> STACK_INTERFACE = ITEMS.register("stack_interface", () ->
-            new Item(new Item.Properties().stacksTo(64)));
 
     public static final RegistryObject<Item> WHITE_CHROMA = ITEMS.register("white_chroma", () ->
             new ItemChroma(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(64), 0));
@@ -769,10 +762,10 @@ public class ModItems {
             new ItemGem(new Item.Properties().tab(ModItemGroup.GEMSTONES).stacksTo(1).fireResistant()));
     public static final RegistryObject<Item> NACRE_GEM = ITEMS.register("nacre_gem", () ->
             new ItemGem(new Item.Properties().tab(ModItemGroup.GEMSTONES).stacksTo(1).fireResistant()));
-    public static final RegistryObject<Item> BLUE_RUBY_GEM = ITEMS.register("ruby_gem_1", () ->
-            new Item(new Item.Properties().tab(ModItemGroup.GEMSTONES).stacksTo(1).fireResistant()));
-    public static final RegistryObject<Item> RED_SAPPHIRE_GEM = ITEMS.register("sapphire_gem_14", () ->
-            new Item(new Item.Properties().tab(ModItemGroup.GEMSTONES).stacksTo(1).fireResistant()));
+    public static final RegistryObject<Item> BLUERUBY_GEM = ITEMS.register("blueruby_gem", () ->
+            new ItemGem(new Item.Properties().tab(ModItemGroup.GEMSTONES).stacksTo(1).fireResistant()));
+    public static final RegistryObject<Item> REDSAPPHIRE_GEM = ITEMS.register("redsapphire_gem", () ->
+            new ItemGem(new Item.Properties().tab(ModItemGroup.GEMSTONES).stacksTo(1).fireResistant()));
 
     public static final RegistryObject<Item> HESSONITE_GARNET_GEM = ITEMS.register("garnet_gem_1", () ->
             new ItemGem(new Item.Properties().tab(ModItemGroup.GEMSTONES).stacksTo(1).fireResistant()));

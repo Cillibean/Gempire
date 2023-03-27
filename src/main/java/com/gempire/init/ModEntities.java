@@ -12,6 +12,7 @@ import com.gempire.entities.projectiles.IceShardEntity;
 import com.gempire.entities.projectiles.WaterOrbEntity;
 import com.gempire.systems.injection.GemConditions;
 import com.gempire.systems.injection.GemFormation;
+import com.gempire.util.DateTime;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.resources.ResourceLocation;
@@ -19,11 +20,14 @@ import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 
 public class ModEntities {
     public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, Gempire.MODID);
     public static HashMap<String, GemConditions> CRUXTOGEM = new HashMap<>();
+
     // Entity Types
     //Pebble
     public static final RegistryObject<EntityType<EntityPebble>> PEBBLE = ENTITIES.register("pebble",
@@ -55,6 +59,16 @@ public class ModEntities {
             () -> EntityType.Builder.of(EntitySapphire::new, MobCategory.CREATURE)
                     .sized(.75f, 1.5f) // Hitbox Size
                     .build(new ResourceLocation(Gempire.MODID, "sapphire").toString()));
+
+    public static final RegistryObject<EntityType<EntityBlueRuby>> BLUERUBY = ENTITIES.register("blueruby",
+            () -> EntityType.Builder.of(EntityBlueRuby::new, MobCategory.CREATURE)
+                    .sized(.75f, 1.5f) // Hitbox Size
+                    .build(new ResourceLocation(Gempire.MODID, "blueruby").toString()));
+
+    public static final RegistryObject<EntityType<EntityRedSapphire>> REDSAPPHIRE = ENTITIES.register("redsapphire",
+            () -> EntityType.Builder.of(EntityRedSapphire::new, MobCategory.CREATURE)
+                    .sized(.75f, 1.5f) // Hitbox Size
+                    .build(new ResourceLocation(Gempire.MODID, "redsapphire").toString()));
 
     public static final RegistryObject<EntityType<EntityQuartz>> QUARTZ = ENTITIES.register("quartz",
             () -> EntityType.Builder.of(EntityQuartz::new, MobCategory.CREATURE)
@@ -187,7 +201,7 @@ public class ModEntities {
                 .build(new ResourceLocation(Gempire.MODID, "water_orb").toString());
     });
 
-    public static void registerCruxes(){
+    public static void registerCruxes() {
         ModEntities.CRUXTOGEM.put("ruby", ModCruxes.RUBY_CONDITIONS());
         ModEntities.CRUXTOGEM.put("sapphire", ModCruxes.SAPPHIRE_CONDITIONS());
         ModEntities.CRUXTOGEM.put("quartz", ModCruxes.QUARTZ_CONDITIONS());
@@ -213,6 +227,8 @@ public class ModEntities {
         ModEntities.CRUXTOGEM.put("rutile", ModCruxes.RUTILE_CONDITIONS());
         ModEntities.CRUXTOGEM.put("spinel", ModCruxes.SPINEL_CONDITIONS());
         ModEntities.CRUXTOGEM.put("tourmaline", ModCruxes.TOURMALINE_CONDITIONS());
+        ModEntities.CRUXTOGEM.put("blue_ruby", ModCruxes.BLUE_RUBY_CONDITIONS());
+        ModEntities.CRUXTOGEM.put("red_sapphire", ModCruxes.RED_SAPPHIRE_CONDITIONS());
 
         GemFormation.POSSIBLE_GEMS.add("ruby");
         GemFormation.POSSIBLE_GEMS.add("sapphire");
@@ -224,21 +240,26 @@ public class ModEntities {
         GemFormation.POSSIBLE_GEMS.add("nephrite");
         GemFormation.POSSIBLE_GEMS.add("spodumene");
         GemFormation.POSSIBLE_GEMS.add("zircon");
-            GemFormation.POSSIBLE_GEMS.add("aquamarine");
-            GemFormation.POSSIBLE_GEMS.add("bismuth");
-            GemFormation.POSSIBLE_GEMS.add("bixbite");
-            GemFormation.POSSIBLE_GEMS.add("demantoid");
-            GemFormation.POSSIBLE_GEMS.add("emerald");
-            GemFormation.POSSIBLE_GEMS.add("hessonite");
-            GemFormation.POSSIBLE_GEMS.add("lapis");
-            GemFormation.POSSIBLE_GEMS.add("larimar");
-            GemFormation.POSSIBLE_GEMS.add("melanite");
-            GemFormation.POSSIBLE_GEMS.add("morganite");
-            GemFormation.POSSIBLE_GEMS.add("peridot");
-            GemFormation.POSSIBLE_GEMS.add("pyrope");
-            GemFormation.POSSIBLE_GEMS.add("rutile");
-            GemFormation.POSSIBLE_GEMS.add("spinel");
-            GemFormation.POSSIBLE_GEMS.add("tourmaline");
+        GemFormation.POSSIBLE_GEMS.add("aquamarine");
+        GemFormation.POSSIBLE_GEMS.add("bismuth");
+        GemFormation.POSSIBLE_GEMS.add("bixbite");
+        GemFormation.POSSIBLE_GEMS.add("demantoid");
+        GemFormation.POSSIBLE_GEMS.add("emerald");
+        GemFormation.POSSIBLE_GEMS.add("hessonite");
+        GemFormation.POSSIBLE_GEMS.add("lapis");
+        GemFormation.POSSIBLE_GEMS.add("larimar");
+        GemFormation.POSSIBLE_GEMS.add("melanite");
+        GemFormation.POSSIBLE_GEMS.add("morganite");
+        GemFormation.POSSIBLE_GEMS.add("peridot");
+        GemFormation.POSSIBLE_GEMS.add("pyrope");
+        GemFormation.POSSIBLE_GEMS.add("rutile");
+        GemFormation.POSSIBLE_GEMS.add("spinel");
+        GemFormation.POSSIBLE_GEMS.add("tourmaline");
+        if (DateTime.aprilFools()) {
+            GemFormation.POSSIBLE_GEMS.add("blue_ruby");
+            GemFormation.POSSIBLE_GEMS.add("red_sapphire");
+        }
+
     }
 
     public static void setVanillaGems(){
@@ -272,5 +293,7 @@ public class ModEntities {
         AddonHandler.VANILLA_GEMS.add("rutile");
         AddonHandler.VANILLA_GEMS.add("spinel");
         AddonHandler.VANILLA_GEMS.add("tourmaline");
+        AddonHandler.VANILLA_GEMS.add("blue_ruby");
+        AddonHandler.VANILLA_GEMS.add("red_sapphire");
     }
 }
