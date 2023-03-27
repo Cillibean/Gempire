@@ -13,6 +13,8 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.monster.Strider;
+import net.minecraft.world.entity.monster.ZombieVillager;
 
 public class RenderShale extends MobRenderer<EntityShale, ModelPebble<EntityShale>> {
 
