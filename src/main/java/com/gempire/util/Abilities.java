@@ -33,25 +33,25 @@ public enum Abilities {
     ENCHANTMENT(29, 2),
     ELECTROKINESIS(30, 1),
     AEROKINESIS(31, 1),
-    FRAGOKINESIS(33, 1),
-    BERSERKER(34, 2),
-    BEASTMASTER(35, 2),
-    CHARMER(36, 5),
-    DISARMING(37, 3),
-    LOOTMASTER(38, 5),
-    AQUAPHILE(39, 4),
-    TERRAFORMER(41, 3),
-    ACIDIC_SPIT(40, 2),
-    GUARD(42, 2),
-    ESSENCE_BREWER(43, 1),
-    BUILDER(44, 4),
-    REFINERY(45, 4),
-    ABUNDANCE(46, 3),
-    ORGANIZATION(47, 5),
-    FORTUNATE(48, 3);
-    public int id;
-    public int weight;
-    private static Abilities[] vals = Abilities.values();
+    FRAGOKINESIS(32, 1),
+    BERSERKER(33, 2),
+    BEASTMASTER(34, 2),
+    CHARMER(35, 5),
+    DISARMING(36, 3),
+    LOOTMASTER(37, 5),
+    AQUAPHILE(38, 4),
+    ACIDIC_SPIT(39, 2),
+    TERRAFORMER(40, 3),
+    GUARD(41, 2),
+    ESSENCE_BREWER(42, 1),
+    BUILDER(43, 4),
+    REFINERY(44, 4),
+    ABUNDANCE(45, 3),
+    ORGANIZATION(46, 5),
+    FORTUNATE(47, 3);
+    public final int id;
+    public final int weight;
+    private static final Abilities[] vals = Abilities.values();
     Abilities(int id, int weight) {
         this.id = id;
         this.weight = weight;
