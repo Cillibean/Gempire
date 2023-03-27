@@ -57,7 +57,10 @@ public class InjectorBlock extends BaseEntityBlock implements EntityBlock {
                     if(player.isCrouching()) {
                         ((InjectorTE) te).Inject();
                     }
-                    NetworkHooks.openScreen((ServerPlayer) player, (InjectorTE)te, pos);
+                    else
+                    {
+                        NetworkHooks.openScreen((ServerPlayer) player, (InjectorTE)te, pos);
+                    }
                     return InteractionResult.SUCCESS;
                 }
             }
