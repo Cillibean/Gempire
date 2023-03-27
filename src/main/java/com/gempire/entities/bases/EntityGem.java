@@ -122,13 +122,6 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     public static final int NUMBER_OF_SLOTS = 33;
     public NonNullList<ItemStack> items = NonNullList.withSize(EntityGem.NUMBER_OF_SLOTS, ItemStack.EMPTY);
 
-    public int maxBrewingTime = 1;
-    public Item inputItem = Items.AIR;
-    public Item outputItem = Items.AIR;
-    public int brewingTicks = 0;
-    public static EntityDataAccessor<Integer> BREWING_PROGRESS = SynchedEntityData.defineId(EntityGem.class, EntityDataSerializers.INT);
-    public boolean brewing = false;
-
     public Player currentPlayer;
 
     public static final SimpleCommandExceptionType LOCATE_FAILED_EXCEPTION = new SimpleCommandExceptionType(Component.translatable("commands.gempire.faillocate"));
@@ -168,7 +161,6 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.entityData.define(EntityGem.SADDLED, true);
         this.entityData.set(EntityGem.SADDLED, true);
         this.entityData.define(EntityGem.BOOST_TIME, 0);
-        this.entityData.define(EntityGem.BREWING_PROGRESS, 0);
         this.FOLLOW_ID = UUID.randomUUID();
 
         Arrays.fill(this.armorDropChances, 0);
@@ -197,7 +189,6 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.setAbilityPowers(this.findAbilities(this.getAbilities()));
         this.addAbilityGoals();
         this.applyAttributeAbilities();
-        this.applyAlchemyPowers();
         this.FOLLOW_ID = UUID.randomUUID();
         this.setMarkingVariant(this.generateMarkingVariant());
         this.setMarkingColor(this.generatePaletteColor(PaletteType.MARKINGS));
@@ -244,9 +235,6 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         compound.putInt("markingColor", this.getMarkingColor());
         compound.putInt("marking2Variant", this.getMarking2Variant());
         compound.putInt("marking2Color", this.getMarking2Color());
-        compound.putInt("brewingTicks", this.brewingTicks);
-        compound.putInt("brewProgress", this.getBrewProgress());
-        compound.putBoolean("brewing", this.brewing);
         compound.putInt("structureTime", this.structureTime);
         this.writeStructures(compound);
         ContainerHelper.saveAllItems(compound, this.items);
@@ -258,22 +246,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         }
         compound.putInt("ownerAmount", this.OWNERS.size());
     }
-    public boolean wantsToAttack(LivingEntity p_30389_, LivingEntity p_30390_) {
-        if (!(p_30389_ instanceof Creeper) && !(p_30389_ instanceof Ghast)) {
-            if (p_30389_ instanceof Wolf) {
-                Wolf wolf = (Wolf)p_30389_;
-                return !wolf.isTame() || wolf.getOwner() != p_30390_;
-            } else if (p_30389_ instanceof Player && p_30390_ instanceof Player && !((Player)p_30390_).canHarmPlayer((Player)p_30389_)) {
-                return false;
-            } else if (p_30389_ instanceof AbstractHorse && ((AbstractHorse)p_30389_).isTamed()) {
-                return false;
-            } else {
-                return !(p_30389_ instanceof TamableAnimal) || !((TamableAnimal)p_30389_).isTame();
-            }
-        } else {
-            return false;
-        }
-    }
+
     public void writeStructures(CompoundTag compound){
         for(int i = 0; i < this.structures.size(); i++){
             compound.putString("structure" + i, this.structures.get(i));
@@ -312,14 +285,10 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.GUARD_POS = compound.getIntArray("guardPos");
         this.addAbilityGoals();
         //this.applyAttributeAbilities();
-        this.applyAlchemyPowers();
         this.setMarkingVariant(compound.getInt("markingVariant"));
         this.setMarkingColor(compound.getInt("markingColor"));
         this.setMarking2Variant(compound.getInt("marking2Variant"));
         this.setMarking2Color(compound.getInt("marking2Color"));
-        this.brewingTicks = compound.getInt("brewingTicks");
-        this.brewing = compound.getBoolean("brewing");
-        this.setBrewProgress(compound.getInt("brewProgress"));
         this.structureTime = compound.getInt("structureTime");
         this.idlePowers = this.generateIdlePowers();
         ContainerHelper.loadAllItems(compound, this.items);
@@ -360,18 +329,6 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             }
         }
         if (this.canWalkOnFluids()) this.adjustForFluids();
-        if(this.inputItem != Items.AIR && this.outputItem != Items.AIR && this.brewing){
-            if(this.getItem(68) == ItemStack.EMPTY) this.brewingTicks++;
-            this.setBrewProgress((int)Math.floor(11 * this.brewingTicks / this.maxBrewingTime));
-            //System.out.println("Progress: " + this.getBrewProgress());
-            if(this.brewingTicks > this.maxBrewingTime && this.getItem(67).getItem() == this.inputItem){
-                this.setItem(67, ItemStack.EMPTY);
-                this.setItem(68, new ItemStack(this.outputItem));
-                this.brewingTicks = 0;
-                this.setBrewProgress(0);
-                this.brewing = false;
-            }
-        }
         for(IIdleAbility power : this.getIdlePowers()){
             if(this.focusCheck()) power.execute();
         }
@@ -1048,16 +1005,6 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         }
     }
 
-    public void applyAlchemyPowers() {
-        for(Ability ability : this.getAbilityPowers()){
-            if(ability instanceof IAlchemyAbility power){
-                this.maxBrewingTime = power.maxTime();
-                this.inputItem = power.input();
-                this.outputItem = power.output();
-            }
-        }
-    }
-
     public int getAbilitySlots(){
         return this.entityData.get(EntityGem.ABILITY_SLOTS);
     }
@@ -1323,15 +1270,6 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                     this.setItemSlot(EquipmentSlot.FEET, ItemStack.EMPTY);
             }
         }
-        if(index == 32){
-            this.brewingTicks = 0;
-            this.setBrewProgress(0);
-        }
-        else if(index == 31){
-            this.brewingTicks = 0;
-            this.setBrewProgress(0);
-            this.brewing = false;
-        }
         return null;
     }
 
@@ -1349,17 +1287,6 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                     this.setItemSlot(EquipmentSlot.LEGS, stack);
                 default:
                     this.setItemSlot(EquipmentSlot.FEET, stack);
-            }
-        }
-        if(index == 31 || index == 32){
-            for(Ability ability : this.getAbilityPowers()){
-                if(ability instanceof IAlchemyAbility power && this.currentPlayer != null && !this.brewing){
-                    if(this.getItem(31).getItem() == power.input()) {
-                        this.outputItem = power.output();
-                        this.brewing = power.consume() != Items.AIR ? this.consumeItemCheck(power.consume()) && power.doSpecialActionOnInput(this.currentPlayer) :
-                                power.doSpecialActionOnInput(this.currentPlayer);
-                    }
-                }
             }
         }
     }
@@ -1400,14 +1327,6 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     @Override
     public void actuallyHurt(DamageSource damageSrc, float damageAmount) {
         super.actuallyHurt(damageSrc, damageAmount);
-    }
-
-    public int getBrewProgress(){
-        return this.entityData.get(EntityGem.BREWING_PROGRESS);
-    }
-
-    public void setBrewProgress(int value){
-        this.entityData.set(EntityGem.BREWING_PROGRESS, value);
     }
 
     public boolean canOpenInventoryByDefault(){

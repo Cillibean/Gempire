@@ -1,9 +1,7 @@
 package com.gempire.entities.abilities;
 
 import com.gempire.entities.abilities.base.Ability;
-import com.gempire.entities.abilities.interfaces.IAlchemyAbility;
 import com.gempire.entities.abilities.interfaces.IEffectAbility;
-import com.gempire.entities.bases.EntityGem;
 import com.gempire.init.ModItems;
 import com.gempire.util.Abilities;
 import net.minecraft.world.entity.LivingEntity;
@@ -16,9 +14,8 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.network.chat.Component;
 
 import javax.annotation.Nullable;
-import java.util.UUID;
 
-public class AbilityAmphibian extends Ability implements IEffectAbility, IAlchemyAbility {
+public class AbilityAmphibian extends Ability implements IEffectAbility {
 
     public AbilityAmphibian(){
         this.ability = Abilities.AMPHIBIAN;
@@ -51,44 +48,5 @@ public class AbilityAmphibian extends Ability implements IEffectAbility, IAlchem
     @Override
     public Component getName() {
         return Component.translatable("ability.gempire.amphibian");
-    }
-
-    @Override
-    public Item input() {
-        return Items.SLIME_BALL;
-    }
-
-    @Override
-    public Item output() {
-        return ModItems.SPODUMENE_PIECE.get();
-    }
-
-    @Override
-    public boolean doSpecialActionOnInput(@Nullable Player player) {
-        boolean flagHunger = false;
-        boolean flagHealth = false;
-        boolean flagHeart = player.isCreative();
-        for(int i = 0; i < this.holder.NUMBER_OF_SLOTS - 6; i++){
-            if(this.holder.getItem(i + 36).getItem() == Items.HEART_OF_THE_SEA ){
-                flagHeart = true;
-            }
-        }
-        if(flagHeart) {
-            if (this.holder.getHealth() <= this.holder.getMaxHealth() / 2 && !player.isCreative()) {
-                player.sendSystemMessage(Component.translatable("messages.gempire.entity.spodumene_sore"));
-                return false;
-            } else {
-                flagHealth = true;
-                if (!player.isCreative())
-                    this.holder.actuallyHurt(DamageSource.GENERIC, this.holder.getMaxHealth() / 2);
-            }
-            if (player.getFoodData().getFoodLevel() < 10 && !player.isCreative()) {
-                player.sendSystemMessage(Component.translatable("messages.gempire.entity.player_hungry"));
-            } else {
-                flagHunger = true;
-                if (!player.isCreative()) player.getFoodData().setFoodLevel(player.getFoodData().getFoodLevel() - 10);
-            }
-        }
-        return flagHealth && flagHunger && flagHeart;
     }
 }

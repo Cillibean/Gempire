@@ -365,18 +365,16 @@ public class ModItems {
 
     public static final RegistryObject<Item> GILDED_LAPIS = ITEMS.register("gilded_lapis", () ->
             new Item(new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS).stacksTo(64)));
-
     public static final RegistryObject<Item> SPODUMENE_PIECE = ITEMS.register("spodumene_piece", () ->
             new Item(new Item.Properties().tab(CreativeModeTab.TAB_FOOD).stacksTo(64).food(ModFoods.SPODUMENE_PIECE)));
-
     public static final RegistryObject<Item> ICE_SHARD = ITEMS.register("ice_shard", () ->
             new Item(new Item.Properties().stacksTo(64)));
     public static final RegistryObject<Item> ACID_SPIT = ITEMS.register("acid_spit", () ->
             new Item(new Item.Properties().stacksTo(64)));
-
     public static final RegistryObject<Item> WATER_ORB = ITEMS.register("water_orb", () ->
             new Item(new Item.Properties().stacksTo(64)));
-
+    public static final RegistryObject<Item> GEM_SLUSH_BUCKET = ITEMS.register("gem_slush_bucket", () ->
+            new Item(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(1)));
 
     public static final RegistryObject<Item> WHITE_DESTABILIZER = ITEMS.register("white_destabilizer", () ->
             new ItemDestabilizer(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(1).durability(25)));

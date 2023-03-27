@@ -1,12 +1,8 @@
 package com.gempire.entities.gems;
 
-import com.gempire.container.GemUIContainer;
 import com.gempire.container.PearlUIContainer;
-import com.gempire.entities.abilities.base.Ability;
-import com.gempire.entities.abilities.interfaces.IAlchemyAbility;
 import com.gempire.entities.ai.EntityAIFollowOwner;
 import com.gempire.entities.ai.EntityAIWander;
-import com.gempire.entities.bases.EntityGem;
 import com.gempire.entities.bases.EntityVaryingGem;
 import com.gempire.util.Abilities;
 import com.gempire.util.GemPlacements;
