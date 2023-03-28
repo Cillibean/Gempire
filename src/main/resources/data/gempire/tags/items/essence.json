@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "gempire:pink_essence_bucket",
+    "gempire:blue_essence_bucket",
+    "gempire:yellow_essence_bucket",
+    "gempire:white_essence_bucket"
+  ]
+}

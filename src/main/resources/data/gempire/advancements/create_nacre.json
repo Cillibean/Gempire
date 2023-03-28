@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "gempire:nacre_gem"
+    },
+    "title": "That was expensive..",
+    "description": "Obtain a Nacre",
+    "frame": "task",
+    "hidden": false
+  },
+  "parent": "gempire:obtain_essence",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "gempire:nacre_gem"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

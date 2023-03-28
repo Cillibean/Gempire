@@ -1,0 +1,28 @@
+{
+  "display": {
+    "icon": {
+      "item": "gempire:pebble_gem"
+    },
+    "title": "Thank you!",
+    "description": "Obtain a Pebble ",
+    "frame": "task",
+    "hidden": false
+  },
+  "parent": "gempire:obtain_essence",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "gempire:pebble_gem",
+              "gempire:shale_gem",
+              "gempire:mica_gem"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

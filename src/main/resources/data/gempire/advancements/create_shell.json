@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "gempire:shell_block"
+    },
+    "title": "Hello, I am Shell.",
+    "description": "Have a Nacre create Shell for you",
+    "frame": "task",
+    "hidden": false
+  },
+  "parent": "gempire:create_nacre",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:item_used_on_block",
+      "conditions": {
+        "location": {
+          "block": {
+            "blocks": [
+              "gempire:shell_block"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
