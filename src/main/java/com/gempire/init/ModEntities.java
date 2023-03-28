@@ -60,16 +60,6 @@ public class ModEntities {
                     .sized(.75f, 1.5f) // Hitbox Size
                     .build(new ResourceLocation(Gempire.MODID, "sapphire").toString()));
 
-    public static final RegistryObject<EntityType<EntityBlueRuby>> BLUERUBY = ENTITIES.register("blueruby",
-            () -> EntityType.Builder.of(EntityBlueRuby::new, MobCategory.CREATURE)
-                    .sized(.75f, 1.5f) // Hitbox Size
-                    .build(new ResourceLocation(Gempire.MODID, "blueruby").toString()));
-
-    public static final RegistryObject<EntityType<EntityRedSapphire>> REDSAPPHIRE = ENTITIES.register("redsapphire",
-            () -> EntityType.Builder.of(EntityRedSapphire::new, MobCategory.CREATURE)
-                    .sized(.75f, 1.5f) // Hitbox Size
-                    .build(new ResourceLocation(Gempire.MODID, "redsapphire").toString()));
-
     public static final RegistryObject<EntityType<EntityQuartz>> QUARTZ = ENTITIES.register("quartz",
             () -> EntityType.Builder.of(EntityQuartz::new, MobCategory.CREATURE)
                     .sized(.7f, 1.99f) // Hitbox Size
@@ -227,8 +217,6 @@ public class ModEntities {
         ModEntities.CRUXTOGEM.put("rutile", ModCruxes.RUTILE_CONDITIONS());
         ModEntities.CRUXTOGEM.put("spinel", ModCruxes.SPINEL_CONDITIONS());
         ModEntities.CRUXTOGEM.put("tourmaline", ModCruxes.TOURMALINE_CONDITIONS());
-        ModEntities.CRUXTOGEM.put("blue_ruby", ModCruxes.BLUE_RUBY_CONDITIONS());
-        ModEntities.CRUXTOGEM.put("red_sapphire", ModCruxes.RED_SAPPHIRE_CONDITIONS());
 
         GemFormation.POSSIBLE_GEMS.add("ruby");
         GemFormation.POSSIBLE_GEMS.add("sapphire");
@@ -255,11 +243,6 @@ public class ModEntities {
         GemFormation.POSSIBLE_GEMS.add("rutile");
         GemFormation.POSSIBLE_GEMS.add("spinel");
         GemFormation.POSSIBLE_GEMS.add("tourmaline");
-        if (DateTime.aprilFools()) {
-            GemFormation.POSSIBLE_GEMS.add("blue_ruby");
-            GemFormation.POSSIBLE_GEMS.add("red_sapphire");
-        }
-
     }
 
     public static void setVanillaGems(){
@@ -293,7 +276,5 @@ public class ModEntities {
         AddonHandler.VANILLA_GEMS.add("rutile");
         AddonHandler.VANILLA_GEMS.add("spinel");
         AddonHandler.VANILLA_GEMS.add("tourmaline");
-        AddonHandler.VANILLA_GEMS.add("blue_ruby");
-        AddonHandler.VANILLA_GEMS.add("red_sapphire");
     }
 }

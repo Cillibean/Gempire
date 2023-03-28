@@ -198,7 +198,7 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
     }
 
     public void Inject() {
-        System.out.println(this.blueOpen+"bluetankopen");
+        /*System.out.println(this.blueOpen+"bluetankopen");
         System.out.println(this.getTankFromValue(0).getFluid().getFluid());
         System.out.println(this.getFluidFromValue(0));
         System.out.println(itemHandler.getStackInSlot(CHROMA_INPUT_SLOT_INDEX));
@@ -263,7 +263,10 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
                     }
                     tank.getFluid().setAmount(Math.max(tank.getFluidAmount() - (200 / portionToDrain), 0));
                 }
-            }
+            }*/
+            if (itemHandler.getStackInSlot(CHROMA_INPUT_SLOT_INDEX).getItem() instanceof ItemChroma chroma)
+            {
+            String essences = "pink-blue-yellow-white";
             BlockPos seedPos = this.getBlockPos().offset(new BlockPos(0, -Math.ceil(GemSeedTE.DRAIN_SIZE / 2) - 1, 0));
             while(this.level.getBlockState(seedPos) == Blocks.AIR.defaultBlockState() ||
                     this.level.getBlockState(seedPos).getBlock() instanceof LiquidBlock ||

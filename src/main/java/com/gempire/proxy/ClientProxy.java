@@ -60,8 +60,6 @@ public class ClientProxy {
         event.registerEntityRenderer(ModEntities.RUTILE.get(), m -> new RenderRutile(m, new ModelRutile<>(m.bakeLayer(ModelRutile.LAYER_LOCATION))));
         event.registerEntityRenderer(ModEntities.SPINEL.get(), m -> new RenderSpinel(m, new ModelSpinel<>(m.bakeLayer(ModelSpinel.LAYER_LOCATION))));
         event.registerEntityRenderer(ModEntities.TOURMALINE.get(), m -> new RenderTourmaline(m, new ModelTourmaline<>(m.bakeLayer(ModelTourmaline.LAYER_LOCATION))));
-        event.registerEntityRenderer(ModEntities.REDSAPPHIRE.get(), m -> new RenderRedSapphire(m, new ModelSapphire<>(m.bakeLayer(ModelSapphire.LAYER_LOCATION))));
-        event.registerEntityRenderer(ModEntities.BLUERUBY.get(), m -> new RenderBlueRuby(m, new ModelRuby<>(m.bakeLayer(ModelRuby.LAYER_LOCATION))));
 
         event.registerEntityRenderer(ModEntities.ICE_SHARD.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer(ModEntities.ACID_SPIT.get(), ThrownItemRenderer::new);

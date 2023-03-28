@@ -24,7 +24,7 @@ public class ModItems {
             )
     );
 
-    public static final RegistryObject<Item> WARP_SEED = ITEMS.register("warp_seed", () ->
+    /*public static final RegistryObject<Item> WARP_SEED = ITEMS.register("warp_seed", () ->
             new ItemWarpSeed(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(64)));
 
     public static final RegistryObject<Item> WARP_CORE = ITEMS.register("warp_core", () ->
@@ -39,8 +39,7 @@ public class ModItems {
                     ModBlocks.WARP_PAD.get(),
                     new Item.Properties().tab(ModItemGroup.BLOCKS)
             )
-    );
-
+    );*/
     public static final RegistryObject<Item> WHITE_CHROMA_CRYSTAL = ITEMS.register("white_chroma_crystal", () ->
             new BlockItem(
                     ModBlocks.WHITE_CHROMA_CRYSTAL.get(),
@@ -767,10 +766,6 @@ public class ModItems {
             new ItemGem(new Item.Properties().tab(ModItemGroup.GEMSTONES).stacksTo(1).fireResistant()));
     public static final RegistryObject<Item> NACRE_GEM = ITEMS.register("nacre_gem", () ->
             new ItemGem(new Item.Properties().tab(ModItemGroup.GEMSTONES).stacksTo(1).fireResistant()));
-    public static final RegistryObject<Item> BLUE_RUBY_GEM = ITEMS.register("ruby_gem_1", () ->
-            new Item(new Item.Properties().tab(ModItemGroup.GEMSTONES).stacksTo(1).fireResistant()));
-    public static final RegistryObject<Item> RED_SAPPHIRE_GEM = ITEMS.register("sapphire_gem_14", () ->
-            new Item(new Item.Properties().tab(ModItemGroup.GEMSTONES).stacksTo(1).fireResistant()));
 
     public static final RegistryObject<Item> HESSONITE_GARNET_GEM = ITEMS.register("garnet_gem_1", () ->
             new ItemGem(new Item.Properties().tab(ModItemGroup.GEMSTONES).stacksTo(1).fireResistant()));
