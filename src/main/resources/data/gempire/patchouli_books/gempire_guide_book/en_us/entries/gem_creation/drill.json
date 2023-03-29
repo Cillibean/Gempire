@@ -1,0 +1,23 @@
+{
+  "name": "Drill",
+  "icon": "gempire:special_chroma",
+  "category": "gempire:gem_creation_category",
+  "pages": [
+    {
+      "type": "patchouli:multiblock",
+      "name": "Drill",
+      "advancement": "gempire:obtain_essence",
+      "multiblock": {
+        "pattern": [
+          [" I ","I0I"," I "]
+        ],
+        "mapping": {
+          "I": "minecraft:iron_bars",
+          "0": "minecraft:hopper"
+        },
+        "symmetrical": false
+      },
+      "text": "Here is how to make a Drill"
+    }
+  ]
+}

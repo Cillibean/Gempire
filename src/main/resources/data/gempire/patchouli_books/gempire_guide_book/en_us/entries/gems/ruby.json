@@ -1,0 +1,21 @@
+{
+  "name": "Ruby",
+  "advancement": "gempire:obtain_essence",
+  "icon": "gempire:ruby_gem",
+  "category": "gempire:gem_category",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "gempire:ruby{skinColor:15683662,hairVariant:1,insigniaColor:15,outfitColor:15}",
+      "name": "A Ruby",
+      "rotate": "true",
+      "text": "A Ruby guard, but just a single one."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "gempire:ruby_gem",
+      "rotate": "true",
+      "text": "They tend to come in teams of three, or four."
+    }
+  ]
+}

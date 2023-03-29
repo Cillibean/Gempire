@@ -1,0 +1,22 @@
+{
+  "replace": false,
+  "values": [
+    "gempire:pink_chroma",
+    "gempire:red_chroma",
+    "gempire:orange_chroma",
+    "gempire:yellow_chroma",
+    "gempire:lime_chroma",
+    "gempire:green_chroma",
+    "gempire:cyan_chroma",
+    "gempire:light_blue_chroma",
+    "gempire:blue_chroma",
+    "gempire:purple_chroma",
+    "gempire:magenta_chroma",
+    "gempire:white_chroma",
+    "gempire:light_gray_chroma",
+    "gempire:gray_chroma",
+    "gempire:black_chroma",
+    "gempire:brown_chroma",
+    "gempire:special_chroma"
+  ]
+}
