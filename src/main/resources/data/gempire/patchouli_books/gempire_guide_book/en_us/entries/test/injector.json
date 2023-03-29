@@ -1,0 +1,26 @@
+{
+  "name": "Injecting",
+  "icon": "gempire:special_chroma",
+  "category": "gempire:test_category",
+  "pages": [
+    {
+      "type": "patchouli:multiblock",
+      "name": "Injector",
+      "multiblock": {
+        "pattern": [
+          [ " ","C"],
+          [ " ","T"],
+          [ " ","T"],
+          [ "0","D"]
+        ],
+        "mapping": {
+          "C": "gempire:power_crystal_block",
+          "T": "gempire:tank_block",
+          "D": "gempire:drill_block"
+        },
+        "symmetrical": true
+      },
+      "text": "Here is how to make an injector"
+    }
+  ]
+}
