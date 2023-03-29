@@ -1,0 +1,6 @@
+{
+  "name": "Gems",
+  "description": "Learn what gems do and how to manage them!",
+  "icon": "gempire:ruby_gem",
+  "secret": "true"
+}

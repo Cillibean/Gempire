@@ -1,0 +1,26 @@
+{
+  "name": "Shell",
+  "icon": "gempire:shell_block",
+  "category": "gempire:gem_creation_category",
+  "pages": [
+    {
+      "type": "patchouli:multiblock",
+      "name": "Shell",
+      "advancement": "gempire:obtain_essence",
+      "multiblock": {
+        "pattern": [
+          ["P"],
+          ["C"],
+          ["0"]
+        ],
+        "mapping": {
+          "P": "gempire:power_crystal_block",
+          "C": "minecraft:conduit",
+          "0": "minecraft:prismarine"
+        },
+        "symmetrical": true
+      },
+      "text": "Here is how to make a Shell"
+    }
+  ]
+}

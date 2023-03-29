@@ -1,0 +1,12 @@
+{
+  "type": "patchouli:shapeless_book_recipe",
+  "ingredients": [
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "tag": "gempire:chroma"
+    }
+  ],
+  "book": "gempire:gempire_guide_book"
+}
