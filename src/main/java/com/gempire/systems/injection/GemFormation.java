@@ -39,6 +39,7 @@ public class GemFormation {
     public Item primer;
     public String essences;
     public int facing = 0;
+    public int chromaColour;
 
     HashMap<String, Float> WEIGHTS_OF_GEMS = new HashMap<>();
 
@@ -62,42 +63,78 @@ public class GemFormation {
         EntityGem gem = gemm.get().create(this.world);
         float BIOME_TEMPERATURE = this.world.getBiome(this.pos).get().getBaseTemperature();
         this.SetDrainedStoneColor(BIOME_TEMPERATURE);
-        String gemtoform = this.EvaluateCruxes();
-        if (gemtoform == "") {
-            //this.Drain(GemFormation.getBlockPosInVolume(this.world, this.pos, this.volumeToCheck));
-            return;
-        }
-        try {
-            boolean isVanillaGem = false;
-            for(String gemama : AddonHandler.VANILLA_GEMS){
-                if(gemtoform == gemama) isVanillaGem = true;
-            }
-            if(isVanillaGem) {
-                gemm = (RegistryObject<EntityType<EntityPebble>>) ModEntities.class.getField(gemtoform.toUpperCase()).get(null);
-            }
-            else{
-                gemm = (RegistryObject<EntityType<EntityPebble>>) AddonHandler.ENTITY_ADDON_ENTITY_REGISTRIES.get(gemtoform).getField(gemtoform.toUpperCase()).get(null);
-            }
-            gem = gemm.get().create(this.world);
-            if(gem instanceof EntityVaryingGem){
-                EntityVaryingGem varyingGem = (EntityVaryingGem)gem;
-                varyingGem.setSkinVariantOnInitialSpawn = false;
-                int variant = this.getColorFromChroma();
-                Random rand = new Random();
-                if(gem instanceof EntityQuartz && variant == 16){
-                    variant += rand.nextBoolean() ? 1 : 0;
+        if (gem.chromaColourRequired) {
+            if (getColorFromChroma() == chromaColour) {
+                String gemtoform = this.EvaluateCruxes();
+                if (gemtoform == "") {
+                    //this.Drain(GemFormation.getBlockPosInVolume(this.world, this.pos, this.volumeToCheck));
+                    return;
                 }
-                if(varyingGem.isColorValid(variant)){
-                    varyingGem.initalSkinVariant = variant;
-                }
-                else{
-                    varyingGem.initalSkinVariant = varyingGem.generateRandomInitialSkin();
+                try {
+                    boolean isVanillaGem = false;
+                    for (String gemama : AddonHandler.VANILLA_GEMS) {
+                        if (gemtoform == gemama) isVanillaGem = true;
+                    }
+                    if (isVanillaGem) {
+                        gemm = (RegistryObject<EntityType<EntityPebble>>) ModEntities.class.getField(gemtoform.toUpperCase()).get(null);
+                    } else {
+                        gemm = (RegistryObject<EntityType<EntityPebble>>) AddonHandler.ENTITY_ADDON_ENTITY_REGISTRIES.get(gemtoform).getField(gemtoform.toUpperCase()).get(null);
+                    }
+                    gem = gemm.get().create(this.world);
+                    if (gem instanceof EntityVaryingGem) {
+                        EntityVaryingGem varyingGem = (EntityVaryingGem) gem;
+                        varyingGem.setSkinVariantOnInitialSpawn = false;
+                        int variant = this.getColorFromChroma();
+                        Random rand = new Random();
+                        if (gem instanceof EntityQuartz && variant == 16) {
+                            variant += rand.nextBoolean() ? 1 : 0;
+                        }
+                        if (varyingGem.isColorValid(variant)) {
+                            varyingGem.initalSkinVariant = variant;
+                        } else {
+                            varyingGem.initalSkinVariant = varyingGem.generateRandomInitialSkin();
+                        }
+                    }
+                    gem.setUUID(Mth.createInsecureUUID(this.world.random));
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
-            gem.setUUID(Mth.createInsecureUUID(this.world.random));
-        }
-        catch (Exception e){
-            e.printStackTrace();
+        } else {
+            String gemtoform = this.EvaluateCruxes();
+            if (gemtoform == "") {
+                //this.Drain(GemFormation.getBlockPosInVolume(this.world, this.pos, this.volumeToCheck));
+                return;
+            }
+            try {
+                boolean isVanillaGem = false;
+                for (String gemama : AddonHandler.VANILLA_GEMS) {
+                    if (gemtoform == gemama) isVanillaGem = true;
+                }
+                if (isVanillaGem) {
+                    gemm = (RegistryObject<EntityType<EntityPebble>>) ModEntities.class.getField(gemtoform.toUpperCase()).get(null);
+                } else {
+                    gemm = (RegistryObject<EntityType<EntityPebble>>) AddonHandler.ENTITY_ADDON_ENTITY_REGISTRIES.get(gemtoform).getField(gemtoform.toUpperCase()).get(null);
+                }
+                gem = gemm.get().create(this.world);
+                if (gem instanceof EntityVaryingGem) {
+                    EntityVaryingGem varyingGem = (EntityVaryingGem) gem;
+                    varyingGem.setSkinVariantOnInitialSpawn = false;
+                    int variant = this.getColorFromChroma();
+                    Random rand = new Random();
+                    if (gem instanceof EntityQuartz && variant == 16) {
+                        variant += rand.nextBoolean() ? 1 : 0;
+                    }
+                    if (varyingGem.isColorValid(variant)) {
+                        varyingGem.initalSkinVariant = variant;
+                    } else {
+                        varyingGem.initalSkinVariant = varyingGem.generateRandomInitialSkin();
+                    }
+                }
+                gem.setUUID(Mth.createInsecureUUID(this.world.random));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         try{
             gem.finalizeSpawn((ServerLevelAccessor) this.world, this.world.getCurrentDifficultyAt(this.pos), MobSpawnType.TRIGGERED, null, null);

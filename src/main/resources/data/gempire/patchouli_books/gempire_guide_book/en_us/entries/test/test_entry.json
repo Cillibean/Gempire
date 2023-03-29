@@ -1,0 +1,12 @@
+{
+  "name": "Test Entry",
+  "icon": "minecraft:writable_book",
+  "category": "gempire:test_category",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "This is a test entry",
+      "advancement": "gempire:obtain_essence"
+    }
+  ]
+}

@@ -131,6 +131,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     public ArrayList<String> biomes = new ArrayList<>();
 
     public ItemEntity spawnGem = null;
+    public boolean chromaColourRequired;
 
     public EntityGem(EntityType<? extends PathfinderMob> type, Level worldIn) {
         super(type, worldIn);

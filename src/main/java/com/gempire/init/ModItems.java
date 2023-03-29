@@ -25,7 +25,7 @@ public class ModItems {
     );
 
     /*public static final RegistryObject<Item> WARP_SEED = ITEMS.register("warp_seed", () ->
-            new ItemWarpSeed(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(64)));
+            new ItemWarpSeed(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(1)));
 
     public static final RegistryObject<Item> WARP_CORE = ITEMS.register("warp_core", () ->
             new BlockItem(
