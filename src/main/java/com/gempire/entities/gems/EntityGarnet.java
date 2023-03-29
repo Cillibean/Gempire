@@ -2,8 +2,6 @@ package com.gempire.entities.gems;
 
 import com.gempire.entities.abilities.AbilityDisarming;
 import com.gempire.entities.abilities.base.Ability;
-import com.gempire.entities.abilities.interfaces.IAlchemyAbility;
-import com.gempire.entities.abilities.interfaces.IMeleeAbility;
 import com.gempire.entities.ai.EntityAIFollowOwner;
 import com.gempire.entities.ai.EntityAIWander;
 import com.gempire.entities.bases.EntityVaryingGem;
@@ -18,7 +16,6 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 
 public class EntityGarnet extends EntityVaryingGem {

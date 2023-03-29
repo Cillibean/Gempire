@@ -1,0 +1,19 @@
+{
+  "display": {
+    "icon": {
+      "item": "gempire:pink_essence_bucket"
+    },
+    "title": "Gempire",
+    "description": "Rock time",
+    "background": "gempire:textures/blocks/chiseled_ruined_marble_block.png",
+    "frame": "task",
+    "show_toast": false,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:location"
+    }
+  }
+}

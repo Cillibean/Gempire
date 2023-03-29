@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "gempire:white_essence_bucket"
+    },
+    "title": "Diamond Juice",
+    "description": "Obtain essence",
+    "frame": "task",
+    "hidden": false
+  },
+  "parent": "gempire:root",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "gempire:essence"
+          }
+        ]
+      }
+    }
+  }
+}

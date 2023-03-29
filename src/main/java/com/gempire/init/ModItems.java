@@ -24,7 +24,7 @@ public class ModItems {
             )
     );
 
-    public static final RegistryObject<Item> WARP_SEED = ITEMS.register("warp_seed", () ->
+    /*public static final RegistryObject<Item> WARP_SEED = ITEMS.register("warp_seed", () ->
             new ItemWarpSeed(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(64)));
 
     public static final RegistryObject<Item> WARP_CORE = ITEMS.register("warp_core", () ->
@@ -39,8 +39,7 @@ public class ModItems {
                     ModBlocks.WARP_PAD.get(),
                     new Item.Properties().tab(ModItemGroup.BLOCKS)
             )
-    );
-
+    );*/
     public static final RegistryObject<Item> WHITE_CHROMA_CRYSTAL = ITEMS.register("white_chroma_crystal", () ->
             new BlockItem(
                     ModBlocks.WHITE_CHROMA_CRYSTAL.get(),
@@ -365,30 +364,35 @@ public class ModItems {
 
     public static final RegistryObject<Item> GILDED_LAPIS = ITEMS.register("gilded_lapis", () ->
             new Item(new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS).stacksTo(64)));
-
     public static final RegistryObject<Item> SPODUMENE_PIECE = ITEMS.register("spodumene_piece", () ->
             new Item(new Item.Properties().tab(CreativeModeTab.TAB_FOOD).stacksTo(64).food(ModFoods.SPODUMENE_PIECE)));
-
     public static final RegistryObject<Item> ICE_SHARD = ITEMS.register("ice_shard", () ->
             new Item(new Item.Properties().stacksTo(64)));
     public static final RegistryObject<Item> ACID_SPIT = ITEMS.register("acid_spit", () ->
             new Item(new Item.Properties().stacksTo(64)));
-
     public static final RegistryObject<Item> WATER_ORB = ITEMS.register("water_orb", () ->
             new Item(new Item.Properties().stacksTo(64)));
-
+    public static final RegistryObject<Item> GEM_SLUSH_BUCKET = ITEMS.register("gem_slush_bucket", () ->
+            new Item(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(1)));
 
     public static final RegistryObject<Item> WHITE_DESTABILIZER = ITEMS.register("white_destabilizer", () ->
-            new ItemDestabilizer(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(1)));
+            new ItemDestabilizer(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(1).durability(25)));
     public static final RegistryObject<Item> YELLOW_DESTABILIZER = ITEMS.register("yellow_destabilizer", () ->
-            new ItemDestabilizer(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(1)));
+            new ItemDestabilizer(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(1).durability(25)));
     public static final RegistryObject<Item> BLUE_DESTABILIZER = ITEMS.register("blue_destabilizer", () ->
-            new ItemDestabilizer(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(1)));
+            new ItemDestabilizer(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(1).durability(25)));
     public static final RegistryObject<Item> PINK_DESTABILIZER = ITEMS.register("pink_destabilizer", () ->
-            new ItemDestabilizer(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(1).durability(256)));
+            new ItemDestabilizer(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(1).durability(25)));
 
    public static final RegistryObject<Item> PINK_REJUVENATOR = ITEMS.register("pink_rejuvenator", () ->
-            new ItemRejuvenator(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(1)));
+            new ItemRejuvenator(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(1).durability(15)));
+
+    public static final RegistryObject<Item> ENERGY_INTERFACE = ITEMS.register("energy_interface", () ->
+            new Item(new Item.Properties().stacksTo(64)));
+    public static final RegistryObject<Item> FLUID_INTERFACE = ITEMS.register("fluid_interface", () ->
+            new Item(new Item.Properties().stacksTo(64)));
+    public static final RegistryObject<Item> STACK_INTERFACE = ITEMS.register("stack_interface", () ->
+            new Item(new Item.Properties().stacksTo(64)));
 
     public static final RegistryObject<Item> WHITE_CHROMA = ITEMS.register("white_chroma", () ->
             new ItemChroma(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(64), 0));
@@ -761,10 +765,6 @@ public class ModItems {
     public static final RegistryObject<Item> SHALE_GEM = ITEMS.register("shale_gem", () ->
             new ItemGem(new Item.Properties().tab(ModItemGroup.GEMSTONES).stacksTo(1).fireResistant()));
     public static final RegistryObject<Item> NACRE_GEM = ITEMS.register("nacre_gem", () ->
-            new ItemGem(new Item.Properties().tab(ModItemGroup.GEMSTONES).stacksTo(1).fireResistant()));
-    public static final RegistryObject<Item> BLUERUBY_GEM = ITEMS.register("blueruby_gem", () ->
-            new ItemGem(new Item.Properties().tab(ModItemGroup.GEMSTONES).stacksTo(1).fireResistant()));
-    public static final RegistryObject<Item> REDSAPPHIRE_GEM = ITEMS.register("redsapphire_gem", () ->
             new ItemGem(new Item.Properties().tab(ModItemGroup.GEMSTONES).stacksTo(1).fireResistant()));
 
     public static final RegistryObject<Item> HESSONITE_GARNET_GEM = ITEMS.register("garnet_gem_1", () ->

@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "gempire:pearl_gem_0"
+    },
+    "title": "Welcome to your new Pearl~",
+    "description": "Obtain a Pearl",
+    "frame": "task",
+    "hidden": false
+  },
+  "parent": "gempire:create_shell",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "gempire:pearl"
+          }
+        ]
+      }
+    }
+  }
+}
