@@ -1,0 +1,21 @@
+{
+  "name": "Spinel",
+  "advancement": "gempire:obtain_essence",
+  "icon": "gempire:spinel_gem_6",
+  "category": "gempire:gem_category",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "gempire:spinel",
+      "name": "Spinel",
+      "rotate": "true",
+      "text": "This will be fun, aren't you the lucky one! Her cut is perfect and she's pink, as well."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "gempire:spinel_gem_6",
+      "rotate": "true",
+      "text": "She'll bring you endless entertainment, your new best friend Spinel"
+    }
+  ]
+}

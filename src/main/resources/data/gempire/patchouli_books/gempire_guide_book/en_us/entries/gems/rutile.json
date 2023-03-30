@@ -1,0 +1,21 @@
+{
+  "name": "Rutile",
+  "advancement": "gempire:obtain_essence",
+  "icon": "gempire:rutile_gem",
+  "category": "gempire:gem_category",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "gempire:rutile",
+      "name": "Rutile",
+      "rotate": "true",
+      "text": "idk wjat to put here"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "gempire:rutile_gem",
+      "rotate": "true",
+      "text": "same here"
+    }
+  ]
+}

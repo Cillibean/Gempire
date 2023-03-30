@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "patchouli:entity",
-      "entity": "gempire:ruby{skinColor:15683662,hairVariant:1,insigniaColor:15,outfitColor:15}",
+      "entity": "gempire:ruby{skinColor:15683662,gemColor:11141145,hairColor:3933200,hairVariant:1,insigniaColor:15,outfitColor:15}",
       "name": "A Ruby",
       "rotate": "true",
       "text": "A Ruby guard, but just a single one."
@@ -14,8 +14,12 @@
     {
       "type": "patchouli:spotlight",
       "item": "gempire:ruby_gem",
-      "rotate": "true",
       "text": "They tend to come in teams of three, or four."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "They tend to come in teams of three, or four.",
+      "advancement": "gempire:peridot"
     }
   ]
 }
