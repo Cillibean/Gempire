@@ -22,7 +22,7 @@ public class ItemRejuvenator extends ItemDestabilizer {
     }
 
     @Override
-    public void poofGem(LivingEntity pTarget, Player player) {
+    public void poofGem(LivingEntity pTarget) {
         if (pTarget.isAlive()) {
             if (pTarget instanceof EntityGem)
                 ((EntityGem) pTarget).resetOwners();

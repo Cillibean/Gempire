@@ -1,12 +1,12 @@
 {
   "name": "Shell",
   "icon": "gempire:shell_block",
+  "advancement": "gempire:obtain_essence",
   "category": "gempire:gem_creation_category",
   "pages": [
     {
       "type": "patchouli:multiblock",
       "name": "Shell",
-      "advancement": "gempire:obtain_essence",
       "multiblock": {
         "pattern": [
           ["P"],

@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "gempire:peridot_gem"
+    },
+    "title": "Log Date: 7-44-2",
+    "description": "Create a peridot and she will provide you more guide book entries",
+    "frame": "task",
+    "hidden": true
+  },
+  "parent": "gempire:root",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "gempire:peridot"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -25,7 +25,7 @@ public class ItemDestabilizer extends Item {
         this.defaultModifiers = builder.build();
     }
 
-    public void poofGem(LivingEntity pTarget, Player player) {
+    public void poofGem(LivingEntity pTarget) {
         if (pTarget.isAlive()){
             if (pTarget instanceof EntityGem) {
                 pTarget.hurt(DamageSource.GENERIC, pTarget.getMaxHealth());
@@ -40,13 +40,14 @@ public class ItemDestabilizer extends Item {
             f = ((Player) player).getAttackStrengthScale(0f);
         }
         if (f == 1) {
-            poofGem(enemy, (Player) player);
+            poofGem(enemy);
         }
         itemStack.hurtAndBreak(1, player, (p_43296_) -> {
             p_43296_.broadcastBreakEvent(EquipmentSlot.MAINHAND);
         });
         return super.hurtEnemy(itemStack, enemy, player);
     }
+
     @Override
     public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlot p_43383_) {
         return p_43383_ == EquipmentSlot.MAINHAND ? this.defaultModifiers : super.getDefaultAttributeModifiers(p_43383_);

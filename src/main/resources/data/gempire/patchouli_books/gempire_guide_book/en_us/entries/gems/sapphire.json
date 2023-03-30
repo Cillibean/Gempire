@@ -7,7 +7,7 @@
     {
       "type": "patchouli:entity",
       "entity": "gempire:sapphire",
-      "name": "A Sapphire",
+      "name": "Sapphire",
       "rotate": "true",
       "text": "A precious Sapphire, she sees the future."
     },

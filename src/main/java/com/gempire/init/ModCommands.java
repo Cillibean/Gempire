@@ -19,6 +19,7 @@ public class ModCommands {
         COMMANDS.add(new CommandGempireFollow("massfollow", 0, true));
         COMMANDS.add(new CommandGempireStay("massstay", 0, true));
         COMMANDS.add(new CommandGempireWander("masswander", 0, true));
+        COMMANDS.add(new CommandGempirePoof("masspoof", 1, true));
 
         COMMANDS.forEach(command -> {
             if(command.isEnabled() && command.setExecution() != null){

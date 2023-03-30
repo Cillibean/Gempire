@@ -1,6 +1,7 @@
 {
   "name": "Injecting",
   "icon": "gempire:special_chroma",
+  "advancement": "gempire:obtain_essence",
   "category": "gempire:gem_creation_category",
   "pages": [
     {

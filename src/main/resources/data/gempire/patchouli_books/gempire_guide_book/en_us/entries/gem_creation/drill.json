@@ -1,6 +1,7 @@
 {
   "name": "Drill",
-  "icon": "gempire:special_chroma",
+  "advancement": "gempire:obtain_essence",
+  "icon": "gempire:drill_block",
   "category": "gempire:gem_creation_category",
   "pages": [
     {
