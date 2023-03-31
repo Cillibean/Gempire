@@ -1,5 +1,6 @@
 {
-  "name": "GEMPIRE GUIDE BOOK",
+  "name": "GEM Field Guide",
   "landing_text": "LANDING TEXT",
-  "version": 1
+  "version": 1,
+  "book_texture": "gempire:textures/gui/book_gem.png"
 }
