@@ -70,6 +70,10 @@ public class ModelSapphire<T extends EntityGem> extends ModelGem<T> {
 
 		PartDefinition PigtailR = Head.addOrReplaceChild("PigtailR", CubeListBuilder.create().texOffs(26, 50).addBox(-14.0F, 0.5F, -2.0F, 15.0F, 4.0F, 4.0F, new CubeDeformation(3.0F, 0.3F, 0.3F)), PartPose.offsetAndRotation(2.5F, -6.0F, 4.0F, 0.0F, 0.0F, -1.5708F));
 
+		PartDefinition SideRingletL = Head.addOrReplaceChild("SideRingletL", CubeListBuilder.create().texOffs(15, 38).addBox(-2.0F, 0.0F, 0.0F, 2.0F, 3.0F, 4.0F, new CubeDeformation(0.0F, 0.5F, 1.5F)), PartPose.offset(-4.5F, -5.0F, -2.0F));
+
+		PartDefinition SideRingletR = Head.addOrReplaceChild("SideRingletR", CubeListBuilder.create().texOffs(15, 38).addBox(-2.0F, 0.0F, 0.0F, 2.0F, 3.0F, 4.0F, new CubeDeformation(0.0F, 0.5F, 1.5F)), PartPose.offset(6.5F, -5.0F, -2.0F));
+
 		PartDefinition LegR = partdefinition.addOrReplaceChild("LegR", CubeListBuilder.create().texOffs(0, 28).addBox(-1.5F, 0.5F, -1.5F, 3.0F, 6.0F, 3.0F, new CubeDeformation(-0.2F, 0.8F, -0.2F)), PartPose.offset(1.4F, 16.8F, 0.0F));
 
 		PartDefinition PantlegR = LegR.addOrReplaceChild("PantlegR", CubeListBuilder.create().texOffs(40, 58).addBox(-1.5F, 0.5F, -1.5F, 3.0F, 3.0F, 3.0F, new CubeDeformation(0.2F, 0.3F, 0.2F)), PartPose.offset(0.0F, 1.7F, 0.0F));
@@ -82,13 +86,13 @@ public class ModelSapphire<T extends EntityGem> extends ModelGem<T> {
 
 		PartDefinition Body = partdefinition.addOrReplaceChild("Body", CubeListBuilder.create().texOffs(8, 16).addBox(-6.0F, 0.0F, 0.0F, 6.0F, 8.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(3.0F, 8.5F, -2.0F));
 
-		PartDefinition ArmL = partdefinition.addOrReplaceChild("ArmL", CubeListBuilder.create().texOffs(28, 16).addBox(-2.0F, -1.0F, -1.0F, 2.0F, 8.0F, 2.0F, new CubeDeformation(-0.1F, 0F, -0.1F)), PartPose.offsetAndRotation(-2.9F, 9.5F, 0.0F, 0.0F, 0.0F, 9.0F));
+		PartDefinition ArmL = partdefinition.addOrReplaceChild("ArmL", CubeListBuilder.create().texOffs(0, 16).addBox(-2.0F, -1.0F, -1.0F, 2.0F, 8.0F, 2.0F, new CubeDeformation(-0.1F, 0F, -0.1F)), PartPose.offsetAndRotation(-2.9F, 9.5F, 0.0F, 0.0F, 0.0F, 9.0F));
 
 		PartDefinition ShoulderL = ArmL.addOrReplaceChild("ShoulderL", CubeListBuilder.create().texOffs(48, 16).addBox(-3.0F, 0.0F, 0.0F, 3.0F, 3.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(0.5F, -1.5F, -1.5F));
 
 		PartDefinition SleeveL = ArmL.addOrReplaceChild("SleeveL", CubeListBuilder.create().texOffs(4, 0).addBox(-0.5F, 0.5F, -0.5F, 1.0F, 7.0F, 1.0F, new CubeDeformation(1F)), PartPose.offset(-1.0F, 3.5F, 0.0F));
 
-		PartDefinition ArmR = partdefinition.addOrReplaceChild("ArmR", CubeListBuilder.create().texOffs(0, 16).addBox(0.0F, -1.0F, -1.0F, 2.0F, 8.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(2.9F, 9.5F, 0.0F, 0.0F, 0.0F, -9F));
+		PartDefinition ArmR = partdefinition.addOrReplaceChild("ArmR", CubeListBuilder.create().texOffs(28, 16).addBox(0.0F, -1.0F, -1.0F, 2.0F, 8.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(2.9F, 9.5F, 0.0F, 0.0F, 0.0F, -9F));
 
 		PartDefinition ShoulderR = ArmR.addOrReplaceChild("ShoulderR", CubeListBuilder.create().texOffs(36, 16).addBox(-3.0F, 0.0F, 0.0F, 3.0F, 3.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(2.4F, -1.5F, -1.5F));
 

@@ -78,7 +78,7 @@ public class EntitySapphire extends EntityVaryingGem {
     public GemPlacements[] getPlacements() {
         return new GemPlacements[]{
                 GemPlacements.TOP_OF_HEAD, GemPlacements.FOREHEAD, GemPlacements.BACK_OF_HEAD, GemPlacements.LEFT_EYE,
-                GemPlacements.LEFT_CHEEK, GemPlacements.RIGHT_CHEEK, GemPlacements.LEFT_EAR, GemPlacements.RIGHT_EAR,
+                GemPlacements.LEFT_CHEEK, GemPlacements.RIGHT_CHEEK, GemPlacements.LEFT_EAR, GemPlacements.RIGHT_EAR, GemPlacements.MOUTH,
                 GemPlacements.CHEST, GemPlacements.BACK, GemPlacements.BELLY, GemPlacements.LEFT_ARM, GemPlacements.RIGHT_ARM,
         };
     }
@@ -86,6 +86,11 @@ public class EntitySapphire extends EntityVaryingGem {
     @Override
     public int generateHairVariant() {
         return this.random.nextInt(24);
+    }
+
+    @Override
+    public int generateInsigniaColor() {
+        return 0;
     }
 
     @Override
