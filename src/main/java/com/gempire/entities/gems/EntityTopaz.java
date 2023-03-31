@@ -101,7 +101,7 @@ public class EntityTopaz extends EntityVaryingGem {
                 GemPlacements.BACK, GemPlacements.BACK_OF_HEAD, GemPlacements.CHEST, GemPlacements.FOREHEAD, GemPlacements.LEFT_CHEEK,
                 GemPlacements.LEFT_EAR, GemPlacements.LEFT_EYE, GemPlacements.LEFT_HAND, GemPlacements.LEFT_SHOULDER,
                 GemPlacements.BELLY, GemPlacements.NOSE, GemPlacements.RIGHT_CHEEK, GemPlacements.RIGHT_EAR, GemPlacements.RIGHT_EYE,
-                GemPlacements.RIGHT_HAND, GemPlacements.RIGHT_SHOULDER, GemPlacements.TOP_OF_HEAD
+                GemPlacements.RIGHT_HAND, GemPlacements.RIGHT_SHOULDER, GemPlacements.TOP_OF_HEAD, GemPlacements.RIGHT_KNEE, GemPlacements.RIGHT_KNEE,
         };
     }
 

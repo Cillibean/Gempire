@@ -147,9 +147,9 @@ public class EntityRuby extends EntityGem {
 
     public int generateInsigniaVariant(){
         if (this.getGemPlacement() == 11) {
-            return this.getGemPlacement() != 11 ? this.getOutfitVariant() : 4;
+            return this.getGemPlacement() != 11 ? this.getOutfitVariant() : 11;
         } else if (this.getGemPlacement() == 17) {
-            return this.getGemPlacement() != 17 ? this.getOutfitVariant() : 5;
+            return this.getGemPlacement() != 17 ? this.getOutfitVariant() : 17;
         } else {
             return this.getOutfitVariant();
         }
