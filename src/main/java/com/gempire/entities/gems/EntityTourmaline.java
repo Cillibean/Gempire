@@ -106,7 +106,7 @@ public class EntityTourmaline extends EntityVaryingGem {
                 name = "pumpkin";
                 break;
             case 2:
-                name = "mushroom";
+                name = "magenta";
                 break;
             case 3:
                 name = "olenite";

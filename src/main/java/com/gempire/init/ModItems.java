@@ -675,7 +675,7 @@ public class ModItems {
             new ItemGem(new Item.Properties().tab(ModItemGroup.GEMSTONES).stacksTo(1).fireResistant()));
     public static final RegistryObject<Item> PUMPKIN_TOURMALINE_GEM = ITEMS.register("tourmaline_gem_1", () ->
             new ItemGem(new Item.Properties().tab(ModItemGroup.GEMSTONES).stacksTo(1).fireResistant()));
-    public static final RegistryObject<Item> MUSHROOM_TOURMALINE_GEM = ITEMS.register("tourmaline_gem_2", () ->
+    public static final RegistryObject<Item> MAGENTA_TOURMALINE_GEM = ITEMS.register("tourmaline_gem_2", () ->
             new ItemGem(new Item.Properties().tab(ModItemGroup.GEMSTONES).stacksTo(1).fireResistant()));
     public static final RegistryObject<Item> OLENITE_TOURMALINE_GEM = ITEMS.register("tourmaline_gem_3", () ->
             new ItemGem(new Item.Properties().tab(ModItemGroup.GEMSTONES).stacksTo(1).fireResistant()));
