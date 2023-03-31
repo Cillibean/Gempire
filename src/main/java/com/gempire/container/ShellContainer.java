@@ -4,7 +4,6 @@ import com.gempire.Gempire;
 import com.gempire.init.ModBlocks;
 import com.gempire.init.ModContainers;
 import com.gempire.tileentities.ShellTE;
-import com.gempire.tileentities.TankTE;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.player.Inventory;
@@ -28,7 +27,6 @@ public class ShellContainer extends AbstractContainerMenu {
 
     public static final int VANILLA_FIRST_SLOT_INDEX = 0;
     public static final int TE_INVENTORY_FIRST_SLOT_INDEX = VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT;
-    public static final int TE_INVENTORY_SLOT_COUNT = TankTE.NUMBER_OF_SLOTS;
 
     public static final int TILE_INVENTORY_YPOS = 20;
     public static final int PLAYER_INVENTORY_YPOS = 51;

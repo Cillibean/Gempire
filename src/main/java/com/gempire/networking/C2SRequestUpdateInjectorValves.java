@@ -31,10 +31,8 @@ public class C2SRequestUpdateInjectorValves {
 
     public static void handle(final C2SRequestUpdateInjectorValves msg, final Supplier<NetworkEvent.Context> contextSupplier) {
         NetworkEvent.Context ctx = contextSupplier.get();
-        ServerPlayer sender = ctx.getSender();
         assert Minecraft.getInstance().level != null;
         if(Minecraft.getInstance().level.getBlockEntity(pos) instanceof InjectorTE blockEntity) {
-            boolean hasPermission = true;
             blockEntity.ToggleTankOpen(msg.color);
             ctx.setPacketHandled(true);
         }

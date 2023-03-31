@@ -35,12 +35,6 @@ public class ModPacketHandler {
                 C2SRequestDumpFluidsInjector::encode,
                 C2SRequestDumpFluidsInjector::decode,
                 C2SRequestDumpFluidsInjector::handle);
-        ModPacketHandler.INSTANCE.registerMessage(
-                networkId++,
-                C2SRequestDumpFluidsTank.class,
-                C2SRequestDumpFluidsTank::encode,
-                C2SRequestDumpFluidsTank::decode,
-                C2SRequestDumpFluidsTank::handle);
         /*ModPacketHandler.INSTANCE.registerMessage(
                 networkId++,
                 S2SSendGemSeedInfo.class,

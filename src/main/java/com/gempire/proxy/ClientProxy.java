@@ -65,7 +65,6 @@ public class ClientProxy {
         event.registerEntityRenderer(ModEntities.ACID_SPIT.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer(ModEntities.WATER_ORB.get(), ThrownItemRenderer::new);
 
-        MenuScreens.register(ModContainers.TANK_CONTAINER.get(), TankScreen::new);
         MenuScreens.register(ModContainers.INJECTOR_CONTAINER.get(), InjectorScreen::new);
         MenuScreens.register(ModContainers.GEM_UI_CONTAINER.get(), GemUIScreen::new);
         MenuScreens.register(ModContainers.SHELL_CONTAINER.get(), ShellScreen::new);

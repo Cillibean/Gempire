@@ -248,12 +248,11 @@ public class ModBlocks {
     );
 
     public static final RegistryObject<Block> POWER_CRYSTAL_BLOCK = BLOCKS.register("power_crystal_block", () ->
-            new PowerCrystalBlock(1f, BlockBehaviour.Properties
+            new PowerCrystalBlock(BlockBehaviour.Properties
                     .of(Material.METAL)
                     .strength(3.0f, 6.0f)
                     .sound(SoundType.GLASS)
                     .instabreak()
-                    
             )
     );
 

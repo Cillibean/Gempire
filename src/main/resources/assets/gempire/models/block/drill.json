@@ -1,5 +1,6 @@
 {
 	"credit": "Made with Blockbench",
+	"render_type": "translucent",
 	"texture_size": [64, 64],
 	"textures": {
 		"0": "gempire:blocks/drill",
@@ -184,6 +185,11 @@
 			"scale": [0.5, 0.25, 0.25]
 		},
 		"ground": {
+			"scale": [0.5, 0.5, 0.5]
+		},
+		"gui": {
+			"rotation": [18, -22, 0],
+			"translation": [0, -0.5, 0],
 			"scale": [0.5, 0.5, 0.5]
 		}
 	},

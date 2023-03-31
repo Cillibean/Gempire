@@ -1,121 +1,106 @@
 package com.gempire.blocks.machine;
 
-import com.gempire.init.ModBlocks;
-import com.gempire.init.ModTE;
-import com.gempire.tileentities.*;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.level.block.EntityBlock;
-import net.minecraft.world.level.block.entity.BlockEntityTicker;
-import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.InteractionHand;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.Rotation;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
-
-import javax.annotation.Nullable;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
 
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.DirectionalBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.network.NetworkHooks;
 
-public class PowerCrystalBlock extends SixWayConnectorBlock implements EntityBlock {
-    public static final BooleanProperty INJECTOR = BooleanProperty.create("injector");
+public class PowerCrystalBlock extends DirectionalBlock {
+    protected static final VoxelShape CRYSTAL_VERTICAL_AABB = Block.box(1.0D, 0.0D, 1.0D, 15.0D, 16.0D, 15.0D);
+    protected static final VoxelShape CRYSTAL_NS_AABB = Block.box(1D, 1.0D, 0D, 15.0D, 15.0D, 16);
+    protected static final VoxelShape CRYSTAL_EW_AABB = Block.box(0.0D, 1D, 1D, 16.0D, 15.0D, 15);
+    public int colour;
 
-    public PowerCrystalBlock(float apothem, Properties properties) {
-        super(apothem, properties);
-        this.registerDefaultState(this.stateDefinition.any().setValue(INJECTOR, false));
+    public PowerCrystalBlock(Properties properties) {
+        super(properties);
+        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.UP));
     }
 
-
-    @Override
-    public boolean facingMarker(BlockPos direction) {
-        return true;
+    public BlockState rotate(BlockState state, Rotation rot) {
+        return state.setValue(FACING, rot.rotate(state.getValue(FACING)));
     }
 
-    @Override
-    public boolean typeMarker(Block predicate) {
-        return true;
+    public BlockState mirror(BlockState state, Mirror mirrorIn) {
+        return state.setValue(FACING, mirrorIn.mirror(state.getValue(FACING)));
     }
 
-    @Override
-    public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
-        if(!worldIn.isClientSide()) {
-            if (worldIn.getBlockState(pos.below()).getBlock() == ModBlocks.TANK_BLOCK.get()) {
-                if (worldIn.getBlockState(pos.below().below().below()).getBlock() == ModBlocks.DRILL_BLOCK.get()) {
-                    BlockEntity te = worldIn.getBlockEntity(pos.below().below().below());
-                    if (te instanceof InjectorTE) {
-                        NetworkHooks.openScreen((ServerPlayer) player, (InjectorTE) te, pos.below().below().below());
-                        return InteractionResult.SUCCESS;
-                    }
+    public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
+        switch(state.getValue(FACING).getAxis()) {
+            case X:
+            default:
+                return CRYSTAL_EW_AABB;
+            case Z:
+                return CRYSTAL_NS_AABB;
+            case Y:
+                return CRYSTAL_VERTICAL_AABB;
+        }
+    }
+
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
+        Direction direction = context.getClickedFace();
+        BlockState blockstate = context.getLevel().getBlockState(context.getClickedPos().relative(direction.getOpposite()));
+        return blockstate.is(this) && blockstate.getValue(FACING) == direction ? this.defaultBlockState().setValue(FACING, direction.getOpposite()) : this.defaultBlockState().setValue(FACING, direction);
+    }
+
+    public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor worldIn, BlockPos currentPos, BlockPos facingPos) {
+        return !stateIn.canSurvive(worldIn, currentPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(stateIn, facing, facingState, worldIn, currentPos, facingPos);
+    }
+
+    public boolean canSurvive(BlockState state, LevelReader worldIn, BlockPos pos) {
+        Direction direction = state.getValue(FACING);
+        if (state.getBlock() == this) { //Forge: This function is called during world gen and placement, before this block is set, so if we are not 'here' then assume it's the pre-check.
+            if (direction == Direction.UP) {
+                if (worldIn.getBlockState(pos.below()) != Blocks.AIR.defaultBlockState()) {
+                    return super.canSurvive(state, worldIn, pos);
+                }
+            }
+            if(direction == Direction.DOWN){
+                if(worldIn.getBlockState(pos.above()) != Blocks.AIR.defaultBlockState()){
+                    return super.canSurvive(state, worldIn, pos);
+                }
+            }
+            if(direction == Direction.NORTH){
+                if(worldIn.getBlockState(pos.south()) != Blocks.AIR.defaultBlockState()){
+                    return super.canSurvive(state, worldIn, pos);
+                }
+            }
+            if(direction == Direction.EAST){
+                if(worldIn.getBlockState(pos.west()) != Blocks.AIR.defaultBlockState()){
+                    return super.canSurvive(state, worldIn, pos);
+                }
+            }
+            if(direction == Direction.SOUTH){
+                if(worldIn.getBlockState(pos.north()) != Blocks.AIR.defaultBlockState()){
+                    return super.canSurvive(state, worldIn, pos);
+                }
+            }
+            if(direction == Direction.WEST){
+                if(worldIn.getBlockState(pos.east()) != Blocks.AIR.defaultBlockState()){
+                    return super.canSurvive(state, worldIn, pos);
                 }
             }
         }
-        return InteractionResult.PASS;
+        return false;
     }
 
-    @Override
-    public BlockState makeConnections(BlockGetter blockReader, BlockPos pos) {
-        Block block = blockReader.getBlockState(pos.below()).getBlock();
-        Block block1 = blockReader.getBlockState(pos.above()).getBlock();
-        Block block2 = blockReader.getBlockState(pos.north()).getBlock();
-        Block block3 = blockReader.getBlockState(pos.east()).getBlock();
-        Block block4 = blockReader.getBlockState(pos.south()).getBlock();
-        Block block5 = blockReader.getBlockState(pos.west()).getBlock();
-        return this.defaultBlockState()
-                .setValue(DOWN, block == this || typeMarker(block) && facingMarker(pos.below()))
-                .setValue(UP, block1 == this || typeMarker(block1) && facingMarker(pos.above()))
-                .setValue(NORTH, block2 == this || typeMarker(block2) && facingMarker(pos.north()))
-                .setValue(EAST, block3 == this || typeMarker(block3) && facingMarker(pos.east()))
-                .setValue(SOUTH, block4 == this || typeMarker(block4) && facingMarker(pos.south()))
-                .setValue(WEST, block5 == this || typeMarker(block5) && facingMarker(pos.west()))
-                .setValue(INJECTOR, block == ModBlocks.TANK_BLOCK.get());
-    }
-
-    @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(NORTH, EAST, SOUTH, WEST, UP, DOWN, INJECTOR);
+        builder.add(FACING);
     }
 
-    @Override
-    public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
-        return Block.box(1D, 1D, 1D, 15D, 15D , 15D);
-    }
-
-    @SuppressWarnings("deprecation")
-    @Override
-    public RenderShape getRenderShape(BlockState state) {
-        return RenderShape.MODEL;
-    }
-
-    public VoxelShape getVisualShape(BlockState state, BlockGetter reader, BlockPos pos, CollisionContext context) {
-        return Block.box(1D, 1D, 1D, 15D, 15D , 15D);
-    }
-
-    public float getShadeBrightness(BlockState state, BlockGetter worldIn, BlockPos pos) {
-        return 1.0F;
-    }
-
-    public boolean propagatesSkylightDown(BlockState state, BlockGetter reader, BlockPos pos) {
-        return true;
-    }
-
-    @Nullable
-    @Override
-    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new PowerCrystalTE(pos, state);
-    }
-
-    @Nullable
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level p_152180_, BlockState p_152181_, BlockEntityType<T> p_152182_) {
-        return p_152182_ == ModTE.POWER_CRYSTAL_TE.get() ? PowerCrystalTE::tick : null;
+    public boolean isPathfindable(BlockState state, BlockGetter worldIn, BlockPos pos, PathComputationType type) {
+        return false;
     }
 }

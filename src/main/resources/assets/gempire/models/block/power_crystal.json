@@ -1,151 +1,81 @@
 {
 	"credit": "Made with Blockbench",
-	"texture_size": [80, 80],
 	"render_type": "translucent",
+	"texture_size": [64, 64],
 	"textures": {
 		"0": "gempire:blocks/power_crystal",
 		"particle": "gempire:blocks/power_crystal"
 	},
 	"elements": [
 		{
-			"name": "CrystalBase",
+			"name": "base",
 			"from": [3, 0, 3],
-			"to": [13, 1, 13],
-			"rotation": {"angle": 0, "axis": "y", "origin": [8, 0.5, 8]},
+			"to": [13, 2, 13],
 			"faces": {
-				"north": {"uv": [2, 2, 4, 2.2], "texture": "#0"},
-				"east": {"uv": [0, 2, 2, 2.2], "texture": "#0"},
-				"south": {"uv": [6, 2, 8, 2.2], "texture": "#0"},
-				"west": {"uv": [4, 2, 6, 2.2], "texture": "#0"},
-				"up": {"uv": [4, 2, 2, 0], "texture": "#0"},
-				"down": {"uv": [6, 0, 4, 2], "texture": "#0"}
+				"north": {"uv": [2.5, 15.5, 5, 16], "texture": "#0"},
+				"east": {"uv": [0, 15.5, 2.5, 16], "texture": "#0"},
+				"south": {"uv": [7.5, 15.5, 10, 16], "texture": "#0"},
+				"west": {"uv": [5, 15.5, 7.5, 16], "texture": "#0"},
+				"up": {"uv": [5, 15.5, 2.5, 13], "texture": "#0"},
+				"down": {"uv": [7.5, 13, 5, 15.5], "texture": "#0"}
 			}
 		},
 		{
-			"name": "CrystalMiddle",
-			"from": [4, 1, 4],
-			"to": [12, 20, 12],
-			"rotation": {"angle": 0, "axis": "y", "origin": [8, 10.5, 8]},
+			"name": "crystal1",
+			"from": [1.5, 2, 1.5],
+			"to": [14.5, 15, 14.5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 0, 0]},
 			"faces": {
-				"north": {"uv": [1.6, 4, 3.2, 7.8], "texture": "#0"},
-				"east": {"uv": [0, 4, 1.6, 7.8], "texture": "#0"},
-				"south": {"uv": [4.8, 4, 6.4, 7.8], "texture": "#0"},
-				"west": {"uv": [3.2, 4, 4.8, 7.8], "texture": "#0"},
-				"up": {"uv": [3.2, 4, 1.6, 2.4], "texture": "#0"},
-				"down": {"uv": [4.8, 2.4, 3.2, 4], "texture": "#0"}
+				"north": {"uv": [3.25, 3.25, 6.5, 6.5], "texture": "#0"},
+				"east": {"uv": [0, 3.25, 3.25, 6.5], "texture": "#0"},
+				"south": {"uv": [9.75, 3.25, 13, 6.5], "texture": "#0"},
+				"west": {"uv": [6.5, 3.25, 9.75, 6.5], "texture": "#0"},
+				"up": {"uv": [6.5, 3.25, 3.25, 0], "texture": "#0"},
+				"down": {"uv": [9.75, 0, 6.5, 3.25], "texture": "#0"}
 			}
 		},
 		{
-			"name": "CrystalOuter1",
-			"from": [3, 2, 3],
-			"to": [13, 19, 13],
-			"rotation": {"angle": 0, "axis": "y", "origin": [8, 10.5, 8]},
+			"from": [3, 15, 3],
+			"to": [13, 17, 13],
 			"faces": {
-				"north": {"uv": [8.4, 4.4, 10.4, 7.8], "texture": "#0"},
-				"east": {"uv": [6.4, 4.4, 8.4, 7.8], "texture": "#0"},
-				"south": {"uv": [12.4, 4.4, 14.4, 7.8], "texture": "#0"},
-				"west": {"uv": [10.4, 4.4, 12.4, 7.8], "texture": "#0"},
-				"up": {"uv": [10.4, 4.4, 8.4, 2.4], "texture": "#0"},
-				"down": {"uv": [12.4, 2.4, 10.4, 4.4], "texture": "#0"}
-			}
-		},
-		{
-			"name": "CrystalOuter2",
-			"from": [2, 4, 2],
-			"to": [14, 17, 14],
-			"rotation": {"angle": 0, "axis": "y", "origin": [8, 10.5, 8]},
-			"faces": {
-				"north": {"uv": [2.4, 10.4, 4.8, 13], "texture": "#0"},
-				"east": {"uv": [0, 10.4, 2.4, 13], "texture": "#0"},
-				"south": {"uv": [7.2, 10.4, 9.6, 13], "texture": "#0"},
-				"west": {"uv": [4.8, 10.4, 7.2, 13], "texture": "#0"},
-				"up": {"uv": [4.8, 10.4, 2.4, 8], "texture": "#0"},
-				"down": {"uv": [7.2, 8, 4.8, 10.4], "texture": "#0"}
-			}
-		},
-		{
-			"name": "CrystalFrontGrip",
-			"from": [6, 1, 2],
-			"to": [10, 4, 4],
-			"rotation": {"angle": -22.5, "axis": "x", "origin": [8, 2.5, 3]},
-			"faces": {
-				"north": {"uv": [0.4, 8.4, 1.2, 9], "texture": "#0"},
-				"east": {"uv": [0, 8.4, 0.4, 9], "texture": "#0"},
-				"south": {"uv": [1.6, 8.4, 2.4, 9], "texture": "#0"},
-				"west": {"uv": [1.2, 8.4, 1.6, 9], "texture": "#0"},
-				"up": {"uv": [1.2, 8.4, 0.4, 8], "texture": "#0"},
-				"down": {"uv": [2, 8, 1.2, 8.4], "texture": "#0"}
-			}
-		},
-		{
-			"name": "CrystalBackGrip",
-			"from": [6, 1, 12],
-			"to": [10, 4, 14],
-			"rotation": {"angle": 22.5, "axis": "x", "origin": [8, 2.5, 13]},
-			"faces": {
-				"north": {"uv": [0.4, 8.4, 1.2, 9], "texture": "#0"},
-				"east": {"uv": [0, 8.4, 0.4, 9], "texture": "#0"},
-				"south": {"uv": [1.6, 8.4, 2.4, 9], "texture": "#0"},
-				"west": {"uv": [1.2, 8.4, 1.6, 9], "texture": "#0"},
-				"up": {"uv": [1.2, 8.4, 0.4, 8], "texture": "#0"},
-				"down": {"uv": [2, 8, 1.2, 8.4], "texture": "#0"}
-			}
-		},
-		{
-			"name": "CrystalLeftGrip",
-			"from": [2, 1, 6],
-			"to": [4, 4, 10],
-			"rotation": {"angle": 22.5, "axis": "z", "origin": [3, 2.5, 8]},
-			"faces": {
-				"north": {"uv": [0.8, 9.8, 1.2, 10.4], "texture": "#0"},
-				"east": {"uv": [0, 9.8, 0.8, 10.4], "texture": "#0"},
-				"south": {"uv": [2, 9.8, 2.4, 10.4], "texture": "#0"},
-				"west": {"uv": [1.2, 9.8, 2, 10.4], "texture": "#0"},
-				"up": {"uv": [1.2, 9.8, 0.8, 9], "texture": "#0"},
-				"down": {"uv": [1.6, 9, 1.2, 9.8], "texture": "#0"}
-			}
-		},
-		{
-			"name": "CrystalRightGrip",
-			"from": [12, 1, 6],
-			"to": [14, 4, 10],
-			"rotation": {"angle": -22.5, "axis": "z", "origin": [13, 2.5, 8]},
-			"faces": {
-				"north": {"uv": [0.8, 9.8, 1.2, 10.4], "texture": "#0"},
-				"east": {"uv": [0, 9.8, 0.8, 10.4], "texture": "#0"},
-				"south": {"uv": [2, 9.8, 2.4, 10.4], "texture": "#0"},
-				"west": {"uv": [1.2, 9.8, 2, 10.4], "texture": "#0"},
-				"up": {"uv": [1.2, 9.8, 0.8, 9], "texture": "#0"},
-				"down": {"uv": [1.6, 9, 1.2, 9.8], "texture": "#0"}
+				"north": {"uv": [2.5, 9.5, 5, 10], "texture": "#0"},
+				"east": {"uv": [0, 9.5, 2.5, 10], "texture": "#0"},
+				"south": {"uv": [7.5, 9.5, 10, 10], "texture": "#0"},
+				"west": {"uv": [5, 9.5, 7.5, 10], "texture": "#0"},
+				"up": {"uv": [5, 9.5, 2.5, 7], "texture": "#0"},
+				"down": {"uv": [7.5, 7, 5, 9.5], "texture": "#0"}
 			}
 		}
 	],
 	"display": {
 		"thirdperson_righthand": {
-			"scale": [0.5, 0.5, 0.5]
+			"translation": [0, 3, 0],
+			"scale": [0.6, 0.6, 0.6]
 		},
 		"thirdperson_lefthand": {
-			"scale": [0.5, 0.5, 0.5]
+			"translation": [0, 3, 0],
+			"scale": [0.6, 0.6, 0.6]
 		},
 		"firstperson_righthand": {
-			"scale": [0.5, 0.5, 0.5]
+			"translation": [0, 0.75, 0],
+			"scale": [0.41, 0.41, 0.41]
 		},
 		"firstperson_lefthand": {
-			"scale": [0.5, 0.5, 0.5]
+			"translation": [0, 0.75, 0],
+			"scale": [0.41, 0.41, 0.41]
 		},
 		"ground": {
-			"scale": [0.5, 0.5, 0.5]
+			"scale": [0.41, 0.41, 0.41]
 		},
 		"gui": {
-			"rotation": [35, 45, 0],
-			"translation": [0, -1, 0],
-			"scale": [0.5, 0.5, 0.5]
+			"scale": [0.75, 0.75, 1]
 		},
 		"head": {
-			"translation": [0, 10.5, 0]
+			"translation": [0, 14.5, 0]
 		},
 		"fixed": {
-			"scale": [0.5, 0.5, 0.5]
+			"translation": [0, 0, 3.75],
+			"scale": [0.75, 0.75, 1]
 		}
 	}
 }

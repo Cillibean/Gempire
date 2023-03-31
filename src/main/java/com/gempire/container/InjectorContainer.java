@@ -3,41 +3,43 @@ package com.gempire.container;
 import com.gempire.init.ModBlocks;
 import com.gempire.init.ModContainers;
 import com.gempire.tileentities.InjectorTE;
-import com.gempire.tileentities.TankTE;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.Container;
-import net.minecraft.world.inventory.*;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.items.SlotItemHandler;
 
 import java.util.Objects;
 
 public class InjectorContainer extends AbstractContainerMenu {
-    public final InjectorTE blockEntity;
-    private final Level level;
+    public static final int HOTBAR_SLOT_COUNT = 9;
+    public static final int PLAYER_INVENTORY_ROW_COUNT = 3;
+    public static final int PLAYER_INVENTORY_COLUMN_COUNT = 9;
+    public static final int PLAYER_INVENTORY_SLOT_COUNT = PLAYER_INVENTORY_COLUMN_COUNT * PLAYER_INVENTORY_ROW_COUNT;
+    public static final int VANILLA_SLOT_COUNT = HOTBAR_SLOT_COUNT + PLAYER_INVENTORY_SLOT_COUNT;
+
+    public static final int VANILLA_FIRST_SLOT_INDEX = 0;
+    public static final int TE_INVENTORY_FIRST_SLOT_INDEX = VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT;
+
+    public static final int TILE_INVENTORY_YPOS = 20;
+    public static final int PLAYER_INVENTORY_YPOS = 51;
+
     public final ContainerLevelAccess canInteract;
 
-    private final ContainerData data;
-    public InjectorContainer(int id, Inventory inv, FriendlyByteBuf extraData) {
-        this(id, inv, inv.player.level.getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(2));
-    }
-    public InjectorContainer(int id, Inventory inv, BlockEntity entity, ContainerData data) {
-        super(ModContainers.INJECTOR_CONTAINER.get(), id);
-        checkContainerSize(inv, 6);
-        blockEntity = (InjectorTE) entity;
-        this.canInteract = ContainerLevelAccess.create(Objects.requireNonNull(this.blockEntity.getLevel()), this.blockEntity.getBlockPos());
-        this.level = inv.player.level;
-        this.data = data;
+    public final InjectorTE injector;
 
-        addPlayerInventory(inv);
-        addPlayerHotbar(inv);
+    public InjectorContainer(int windowID, Inventory playerInventory, InjectorTE injector) {
+        super(ModContainers.INJECTOR_CONTAINER.get(), windowID);
+        this.injector = injector;
+        this.canInteract = ContainerLevelAccess.create(Objects.requireNonNull(this.injector.getLevel()), this.injector.getBlockPos());
 
-        this.blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(handler -> {
+        //TILE ENTITY
+        this.injector.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(handler -> {
             this.addSlot(new SlotItemHandler(handler, InjectorTE.WHITE_INPUT_SLOT_INDEX, 61, 14));
             this.addSlot(new SlotItemHandler(handler, InjectorTE.YELLOW_INPUT_SLOT_INDEX, 43    , 32));
             this.addSlot(new SlotItemHandler(handler, InjectorTE.CHROMA_INPUT_SLOT_INDEX, 61, 32));
@@ -45,91 +47,62 @@ public class InjectorContainer extends AbstractContainerMenu {
             this.addSlot(new SlotItemHandler(handler, InjectorTE.PRIME_INPUT_SLOT_INDEX, 43, 50));
             this.addSlot(new SlotItemHandler(handler, InjectorTE.PINK_INPUT_SLOT_INDEX, 61, 50));
         });
-        addDataSlots(data);
+        //PLAYER INVENTORY
+        for(int row = 0; row < 3; row++){
+            for(int col = 0; col < 9; col++){
+                this.addSlot(new Slot(playerInventory, col + row * 9 + 9, 8 + col * 18, 165 - (4 - row) * 18 - 10));
+            }
+        }
+
+        //PLAYER HOTBAR
+        for(int col = 0; col < 9; col++){
+            this.addSlot(new Slot(playerInventory, col, 8 + col * 18, 141));
+        }
     }
 
-    // CREDIT GOES TO: diesieben07 | https://github.com/diesieben07/SevenCommons
-    // must assign a slot number to each of the slots used by the GUI.
-    // For this container, we can see both the tile inventory's slots as well as the player inventory slots and the hotbar.
-    // Each time we add a Slot to the container, it automatically increases the slotIndex, which means
-    //  0 - 8 = hotbar slots (which will map to the InventoryPlayer slot numbers 0 - 8)
-    //  9 - 35 = player inventory slots (which map to the InventoryPlayer slot numbers 9 - 35)
-    //  36 - 44 = TileInventory slots, which map to our TileEntity slot numbers 0 - 8)
-    private static final int HOTBAR_SLOT_COUNT = 9;
-    private static final int PLAYER_INVENTORY_ROW_COUNT = 3;
-    private static final int PLAYER_INVENTORY_COLUMN_COUNT = 9;
-    private static final int PLAYER_INVENTORY_SLOT_COUNT = PLAYER_INVENTORY_COLUMN_COUNT * PLAYER_INVENTORY_ROW_COUNT;
-    private static final int VANILLA_SLOT_COUNT = HOTBAR_SLOT_COUNT + PLAYER_INVENTORY_SLOT_COUNT;
-    private static final int VANILLA_FIRST_SLOT_INDEX = 0;
-    private static final int TE_INVENTORY_FIRST_SLOT_INDEX = VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT;
-
-    // THIS YOU HAVE TO DEFINE!
-    private static final int TE_INVENTORY_SLOT_COUNT = 6;  // must be the number of slots you have!
-
-    @Override
-    public ItemStack quickMoveStack(Player playerIn, int index) {
-        Slot sourceSlot = slots.get(index);
-        if (sourceSlot == null || !sourceSlot.hasItem()) return ItemStack.EMPTY;  //EMPTY_ITEM
-        ItemStack sourceStack = sourceSlot.getItem();
-        ItemStack copyOfSourceStack = sourceStack.copy();
-
-        // Check if the slot clicked is one of the vanilla container slots
-        if (index < VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT) {
-            // This is a vanilla container slot so merge the stack into the tile inventory
-            if (!moveItemStackTo(sourceStack, TE_INVENTORY_FIRST_SLOT_INDEX, TE_INVENTORY_FIRST_SLOT_INDEX
-                    + TE_INVENTORY_SLOT_COUNT, false)) {
-                return ItemStack.EMPTY;  // EMPTY_ITEM
-            }
-        } else if (index < TE_INVENTORY_FIRST_SLOT_INDEX + TE_INVENTORY_SLOT_COUNT) {
-            // This is a TE slot so merge the stack into the players inventory
-            if (!moveItemStackTo(sourceStack, VANILLA_FIRST_SLOT_INDEX, VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT, false)) {
-                return ItemStack.EMPTY;
-            }
-        } else {
-            System.out.println("Invalid slotIndex:" + index);
-            return ItemStack.EMPTY;
-        }
-        // If stack size == 0 (the entire stack was moved) set slot contents to null
-        if (sourceStack.getCount() == 0) {
-            sourceSlot.set(ItemStack.EMPTY);
-        } else {
-            sourceSlot.setChanged();
-        }
-        sourceSlot.onTake(playerIn, sourceStack);
-        return copyOfSourceStack;
+    public InjectorContainer(int windowID, Inventory playerInventory, FriendlyByteBuf extraData){
+        this(windowID, playerInventory, InjectorContainer.getTileEntity(playerInventory, extraData));
     }
+
     public boolean getPinkOpen()
     {
-        return data.get(0) > 0;
+        return this.injector.pinkOpen;
     }
-    public boolean getBlueOpen()
-    {
-        return data.get(1) > 0;
+    public static InjectorTE getTileEntity(Inventory playerInventory, FriendlyByteBuf extraData){
+        Objects.requireNonNull(playerInventory, "Player Inventory can not be null");
+        Objects.requireNonNull(extraData, "Data Packet can not be null");
+        BlockEntity te = playerInventory.player.level.getBlockEntity(extraData.readBlockPos());
+        if(te instanceof InjectorTE){
+            return (InjectorTE)te;
+        }
+        throw new IllegalStateException("Tile entity is not correct");
     }
-    public boolean getYellowOpen()
-    {
-        return data.get(2) > 0;
-    }
-    public boolean getWhiteOpen()
-    {
-        return data.get(3) > 0;
-    }
+
     @Override
     public boolean stillValid(Player playerIn) {
         return stillValid(this.canInteract, playerIn, ModBlocks.DRILL_BLOCK.get());
     }
 
-    private void addPlayerInventory(Inventory playerInventory) {
-        for (int i = 0; i < 3; ++i) {
-            for (int l = 0; l < 9; ++l) {
-                this.addSlot(new Slot(playerInventory, l + i * 9 + 9, 8 + l * 18, 86 + i * 18));
+    @Override
+    public ItemStack quickMoveStack(Player playerIn, int index) {
+        ItemStack stack = ItemStack.EMPTY;
+        Slot slot = this.slots.get(index);
+        if(slot != null && slot.hasItem()){
+            ItemStack slotStack = slot.getItem();
+            stack = slotStack.copy();
+            if(index < InjectorTE.NUMBER_OF_SLOTS && !this.moveItemStackTo(slotStack, InjectorTE.NUMBER_OF_SLOTS, this.slots.size(), true)){
+                return ItemStack.EMPTY;
+            }
+            if(!this.moveItemStackTo(slotStack, 0, InjectorTE.NUMBER_OF_SLOTS, false)){
+                return ItemStack.EMPTY;
+            }
+            if(slotStack.isEmpty()){
+                slot.set(ItemStack.EMPTY);
+            }
+            else{
+                slot.setChanged();
             }
         }
-    }
-
-    private void addPlayerHotbar(Inventory playerInventory) {
-        for (int i = 0; i < 9; ++i) {
-            this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 144));
-        }
+        return stack;
     }
 }

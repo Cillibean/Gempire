@@ -5,6 +5,8 @@ import com.gempire.init.ModTE;
 import com.gempire.tileentities.InjectorTE;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
@@ -44,28 +46,6 @@ public class InjectorBlock extends BaseEntityBlock implements EntityBlock {
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new InjectorTE(pos, state);
-    }
-
-    @SuppressWarnings("deprecation")
-    @Override
-    public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
-        if(!worldIn.isClientSide()){
-            if(worldIn.getBlockState(pos.above()).getBlock() == ModBlocks.TANK_BLOCK.get() &&
-                    worldIn.getBlockState(pos.above().above().above()).getBlock() == ModBlocks.POWER_CRYSTAL_BLOCK.get()){
-                BlockEntity te = worldIn.getBlockEntity(pos);
-                if(te instanceof InjectorTE){
-                    if(player.isCrouching()) {
-                        ((InjectorTE) te).Inject();
-                    }
-                    else
-                    {
-                        NetworkHooks.openScreen((ServerPlayer) player, (InjectorTE)te, pos);
-                    }
-                    return InteractionResult.SUCCESS;
-                }
-            }
-        }
-        return InteractionResult.PASS;
     }
 
     @SuppressWarnings("deprecation")

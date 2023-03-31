@@ -6,17 +6,14 @@ import com.gempire.container.InjectorContainer;
 import com.gempire.events.InjectEvent;
 import com.gempire.init.*;
 import com.gempire.items.ItemChroma;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.Containers;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.item.BucketItem;
@@ -90,12 +87,12 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
         this.whiteTank = new FluidTank(this.TANK_CAPACITY());
         this.data = new ContainerData() {
             @Override
-            public int get(int index) {
+            public int get(int p_39284_) {
                 return 0;
             }
 
             @Override
-            public void set(int index, int value) {
+            public void set(int p_39285_, int p_39286_) {
 
             }
 
@@ -116,8 +113,7 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
         this.blueOpen = nbt.getBoolean("blueOpen");
         this.yellowOpen = nbt.getBoolean("yellowOpen");
         this.whiteOpen = nbt.getBoolean("whiteOpen");
-        this.items = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
-        lazyItemHandler = LazyOptional.of(() -> itemHandler);
+        itemHandler.deserializeNBT(nbt.getCompound("inventory"));
         super.load(nbt);
     }
     public void drops() {
@@ -153,14 +149,14 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
 
     public void HandleSlotUpdates(){
         for (int i = 0; i < 4; i++) {
-            ItemStack stack = this.getItem(i);
+            ItemStack stack = itemHandler.getStackInSlot(i);
             if (this.shouldPullFluidFromStack(i)) {
-                if (stack != ItemStack.EMPTY) {
+                if (stack.getItem() != Items.AIR) {
                     if(stack.getItem() instanceof BucketItem bucket) {
                         if (this.isValidForSlot(i, bucket)) {
-                            int filled = this.FillFluidTanks(i, 1000);
                             //TODO: TEMPORARY
-                            this.setItem(i, new ItemStack(Items.BUCKET.asItem()));
+                            this.FillFluidTanks(i, 1000);
+                            itemHandler.setStackInSlot(i, new ItemStack(Items.BUCKET.asItem()));
                             assert this.level != null;
                             this.level.sendBlockUpdated(this.worldPosition, this.getBlockState(), this.getBlockState(), 2);
                             this.setChanged();
@@ -198,7 +194,7 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
     }
 
     public void Inject() {
-        /*System.out.println(this.blueOpen+"bluetankopen");
+        System.out.println(this.blueOpen+"bluetankopen");
         System.out.println(this.getTankFromValue(0).getFluid().getFluid());
         System.out.println(this.getFluidFromValue(0));
         System.out.println(itemHandler.getStackInSlot(CHROMA_INPUT_SLOT_INDEX));
@@ -221,57 +217,35 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
                 portionToDrain++;
             }
             String essences = "";
-            if (this.pinkOpen) {
-                FluidTank tank = this.getTankFromValue(0);
-                if (tank.getFluid() != FluidStack.EMPTY) {
-                    essences+="pink";
+            for (int i = 0; i < 4; i++) {
+                String essenceName = "";
+                FluidTank tank = this.getTankFromValue(i);
+                if (i == 0 && this.pinkOpen) {
+                    essenceName = "pink";
+                } else if (i == 1 && this.blueOpen) {
+                    essenceName = "blue";
+                } else if (i == 2 && this.yellowOpen) {
+                    essenceName = "yellow";
+                } else if (i == 3 && this.whiteOpen) {
+                    essenceName = "white";
+                }
+                if (!essenceName.isEmpty() && tank.getFluid() != FluidStack.EMPTY) {
+                    if (!essences.isEmpty()) {
+                        essences += "-";
+                    }
+                    essences += essenceName;
                     tank.getFluid().setAmount(Math.max(tank.getFluidAmount() - (200 / portionToDrain), 0));
                 }
             }
-            if (this.blueOpen) {
-                FluidTank tank = this.getTankFromValue(1);
-                if (tank.getFluid() != FluidStack.EMPTY) {
-                    if(essences.equals("")){
-                        essences += "blue";
-                    }
-                    else{
-                        essences+="-blue";
-                    }
-                    tank.getFluid().setAmount(Math.max(tank.getFluidAmount() - (200 / portionToDrain), 0));
-                }
-            }
-            if (this.yellowOpen) {
-                FluidTank tank = this.getTankFromValue(2);
-                if (tank.getFluid() != FluidStack.EMPTY) {
-                    if(essences.equals("")){
-                        essences += "yellow";
-                    }
-                    else{
-                        essences+="-yellow";
-                    }
-                    tank.getFluid().setAmount(Math.max(tank.getFluidAmount() - (200 / portionToDrain), 0));
-                }
-            }
-            if (this.whiteOpen) {
-                FluidTank tank = this.getTankFromValue(3);
-                if (tank.getFluid() != FluidStack.EMPTY) {
-                    if(essences.equals("")){
-                        essences += "white";
-                    }
-                    else{
-                        essences+="-white";
-                    }
-                    tank.getFluid().setAmount(Math.max(tank.getFluidAmount() - (200 / portionToDrain), 0));
-                }
-            }*/
-            if (itemHandler.getStackInSlot(CHROMA_INPUT_SLOT_INDEX).getItem() instanceof ItemChroma chroma)
-            {
-            String essences = "pink-blue-yellow-white";
             BlockPos seedPos = this.getBlockPos().offset(new BlockPos(0, -Math.ceil(GemSeedTE.DRAIN_SIZE / 2) - 1, 0));
-            while(this.level.getBlockState(seedPos) == Blocks.AIR.defaultBlockState() ||
-                    this.level.getBlockState(seedPos).getBlock() instanceof LiquidBlock ||
-                    this.level.getBlockState(seedPos) == ModBlocks.GEM_SEED_BLOCK.get().defaultBlockState()){
-                seedPos = seedPos.offset(0, -GemSeedTE.DRAIN_SIZE, 0);
+            for (int i = 0; i < GemSeedTE.DRAIN_SIZE; i++) {
+                BlockState state = this.level.getBlockState(seedPos);
+                if (state != Blocks.AIR.defaultBlockState() &&
+                        !(state.getBlock() instanceof LiquidBlock) &&
+                        state != ModBlocks.GEM_SEED_BLOCK.get().defaultBlockState()) {
+                    break;
+                }
+                seedPos = seedPos.offset(0, -1, 0);
             }
             Item primer = itemHandler.getStackInSlot(PRIME_INPUT_SLOT_INDEX).getItem();
             GemSeedBlock seedBlock = (GemSeedBlock) ModBlocks.GEM_SEED_BLOCK.get();
@@ -371,7 +345,7 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
 
     @Override
     protected AbstractContainerMenu createMenu(int p_58627_, Inventory p_58628_) {
-        return new InjectorContainer(p_58627_, p_58628_,this,  this.data);
+        return new InjectorContainer(p_58627_, p_58628_,this);
     }
 
     @Override
@@ -499,13 +473,6 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
 
     //NETWORKING STUFF
 
-    @Override
-    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
-        //Debug
-        System.out.println("[DEBUG]:Client recived tile sync packet");
-        this.load(Objects.requireNonNull(pkt.getTag()));
-    }
-
     @Nonnull
     @Override
     public CompoundTag getUpdateTag() {
@@ -526,6 +493,12 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
     public void handleUpdateTag(CompoundTag tag) {
         System.out.println("[DEBUG]:Handling tag on chunk load");
         this.load(tag);
+    }
+
+    @Override
+    public void onLoad() {
+        super.onLoad();
+        lazyItemHandler = LazyOptional.of(() -> itemHandler);
     }
 
     //REDUNDANT STUFF

@@ -42,8 +42,12 @@ import org.jetbrains.annotations.NotNull;
 
 public class ItemGem extends Item {
     public String ID = "";
+
+    private static final String TAG_CRACKED = "Cracked";
+
     int coundownMax = 600;
     int countdown = 600;
+
     Random rand = new Random();
     public boolean doEffect = false;
 
@@ -51,10 +55,6 @@ public class ItemGem extends Item {
         super(properties);
     }
 
-    public ItemGem(Properties properties, String ID) {
-        super(properties.durability(100).setNoRepair());
-        this.ID = ID;
-    }
 
     @Override
     public boolean isFoil(ItemStack stack) {
@@ -89,7 +89,7 @@ public class ItemGem extends Item {
                 }
                 //Problem with the claiming of gems ??
                 if (!playerIn.isCreative() && spawned) {
-                    playerIn.getMainHandItem().shrink(1);
+                    playerIn.getItemInHand(handIn).shrink(1);
                 }
             }
         }
@@ -106,7 +106,6 @@ public class ItemGem extends Item {
             EntityGem gem = gemm.get().create(world);
             String namee = "";
             boolean dying = false;
-            System.out.println(gem.getUUID());
             List<EntityGem> list;
             if (player == null) {
                 dying = false;
@@ -215,7 +214,6 @@ public class ItemGem extends Item {
         this.Countdown(stack, entity);
         return super.onEntityItemUpdate(stack, entity);
     }
-
     public void clearData(ItemStack stack) {
         stack.setTag(new CompoundTag());
     }
