@@ -5,6 +5,8 @@ import com.gempire.entities.ai.EntityAIWander;
 import com.gempire.entities.bases.EntityGem;
 import com.gempire.util.Abilities;
 import com.gempire.util.GemPlacements;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Enemy;
@@ -56,7 +58,11 @@ public class EntityObsidian extends EntityGem implements ItemSteerable {
         }));
         this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.1D, false));
     }
-
+    @Override
+    public SoundEvent getInstrument()
+    {
+        return SoundEvents.NOTE_BLOCK_BASS;
+    }
     @Override
     public int generateSkinVariant() {
         return 0;

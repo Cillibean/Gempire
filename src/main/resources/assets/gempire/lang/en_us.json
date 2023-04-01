@@ -501,5 +501,6 @@
   "commands.gempire.foundit": "Here's your map! Please check her inventory.",
   "commands.gempire.nomap": "She needs a map!",
 
-  "gempire.subtitle.inject": "Injection"
+  "gempire.subtitle.inject": "Injection",
+  "gempire.subtitle.poof": "Gem Poofed"
 }

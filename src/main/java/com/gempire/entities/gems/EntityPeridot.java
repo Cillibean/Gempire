@@ -5,6 +5,8 @@ import com.gempire.entities.ai.EntityAIWander;
 import com.gempire.entities.bases.EntityGem;
 import com.gempire.util.Abilities;
 import com.gempire.util.GemPlacements;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
@@ -31,7 +33,11 @@ public class EntityPeridot extends EntityGem {
                 .add(Attributes.ATTACK_DAMAGE, 2.0D)
                 .add(Attributes.ATTACK_SPEED, 1.0D);
     }
-
+    @Override
+    public SoundEvent getInstrument()
+    {
+        return SoundEvents.NOTE_BLOCK_BIT;
+    }
     @Override
     protected void registerGoals() {
         super.registerGoals();

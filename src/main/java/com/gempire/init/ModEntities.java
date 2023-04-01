@@ -205,15 +205,12 @@ public class ModEntities {
         ModEntities.CRUXTOGEM.put("aquamarine", ModCruxes.AQUAMARINE_CONDITIONS());
         ModEntities.CRUXTOGEM.put("bismuth", ModCruxes.BISMUTH_CONDITIONS());
         ModEntities.CRUXTOGEM.put("bixbite", ModCruxes.BIXBITE_CONDITIONS());
-        ModEntities.CRUXTOGEM.put("demantoid", ModCruxes.DEMANTOID_CONDITIONS());
+        ModEntities.CRUXTOGEM.put("garnet", ModCruxes.GARNET_CONDITIONS());
         ModEntities.CRUXTOGEM.put("emerald", ModCruxes.EMERALD_CONDITIONS());
-        ModEntities.CRUXTOGEM.put("hessonite", ModCruxes.HESSONITE_CONDITIONS());
         ModEntities.CRUXTOGEM.put("lapis", ModCruxes.LAPIS_CONDITIONS());
         ModEntities.CRUXTOGEM.put("larimar", ModCruxes.LARIMAR_CONDITIONS());
-        ModEntities.CRUXTOGEM.put("melanite", ModCruxes.MELANITE_CONDITIONS());
         ModEntities.CRUXTOGEM.put("morganite", ModCruxes.MORGANITE_CONDITIONS());
         ModEntities.CRUXTOGEM.put("peridot", ModCruxes.PERIDOT_CONDITIONS());
-        ModEntities.CRUXTOGEM.put("pyrope", ModCruxes.PYROPE_CONDITIONS());
         ModEntities.CRUXTOGEM.put("rutile", ModCruxes.RUTILE_CONDITIONS());
         ModEntities.CRUXTOGEM.put("spinel", ModCruxes.SPINEL_CONDITIONS());
         ModEntities.CRUXTOGEM.put("tourmaline", ModCruxes.TOURMALINE_CONDITIONS());

@@ -5,6 +5,8 @@ import com.gempire.entities.ai.EntityAIWander;
 import com.gempire.entities.bases.EntityVaryingGem;
 import com.gempire.util.Abilities;
 import com.gempire.util.GemPlacements;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Enemy;
@@ -73,7 +75,11 @@ public class EntitySapphire extends EntityVaryingGem {
     public int generateSkinVariant() {
         return 0;
     }
-
+    @Override
+    public SoundEvent getInstrument()
+    {
+        return SoundEvents.NOTE_BLOCK_PLING;
+    }
     @Override
     public GemPlacements[] getPlacements() {
         return new GemPlacements[]{

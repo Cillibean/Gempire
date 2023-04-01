@@ -5,6 +5,8 @@ import com.gempire.entities.ai.EntityAIWander;
 import com.gempire.entities.bases.EntityGem;
 import com.gempire.util.Abilities;
 import com.gempire.util.GemPlacements;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
@@ -49,7 +51,11 @@ public class EntityLapis extends EntityGem {
             return p_213621_0_ instanceof Enemy;
         }));
     }
-
+    @Override
+    public SoundEvent getInstrument()
+    {
+        return SoundEvents.NOTE_BLOCK_HARP;
+    }
     @Override
     public int generateSkinVariant() {
         return 0;

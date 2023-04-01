@@ -6,6 +6,8 @@ import com.gempire.entities.ai.EntityAIWander;
 import com.gempire.entities.bases.EntityVaryingGem;
 import com.gempire.util.Abilities;
 import com.gempire.util.GemPlacements;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.EntityType;
@@ -50,7 +52,11 @@ public class EntityPearl extends EntityVaryingGem {
                 .add(Attributes.ATTACK_DAMAGE, 1.0D)
                 .add(Attributes.ATTACK_SPEED, 1.5D);
     }
-
+    @Override
+    public SoundEvent getInstrument()
+    {
+        return SoundEvents.NOTE_BLOCK_HARP;
+    }
     @Override
     public void addAdditionalSaveData(CompoundTag compound) {
         super.addAdditionalSaveData(compound);

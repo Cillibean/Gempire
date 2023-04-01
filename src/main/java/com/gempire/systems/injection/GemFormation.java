@@ -41,6 +41,8 @@ public class GemFormation {
     public int facing = 0;
     public int chromaColour;
 
+    public int yLevelNeeded;
+
     HashMap<String, Float> WEIGHTS_OF_GEMS = new HashMap<>();
 
     //Create an object to store the total weight

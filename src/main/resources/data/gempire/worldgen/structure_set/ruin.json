@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "gempire:ruin",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 224050396,
+    "spacing": 100,
+    "separation": 20
+  }
+}

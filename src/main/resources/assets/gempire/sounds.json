@@ -2,5 +2,9 @@
   "inject": {
     "subtitle": "gempire.subtitle.inject",
     "sounds": [ "gempire:inject" ]
+  },
+  "poof": {
+    "subtitle": "gempire.subtitle.poof",
+    "sounds": [ "gempire:poof" ]
   }
 }

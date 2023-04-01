@@ -11,4 +11,5 @@ public class ModSounds {
     public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, Gempire.MODID);
 
     public static final RegistryObject<SoundEvent> INJECT = SOUNDS.register("inject", () -> new SoundEvent(new ResourceLocation(Gempire.MODID, "inject")));
+    public static final RegistryObject<SoundEvent> POOF = SOUNDS.register("poof", () -> new SoundEvent(new ResourceLocation(Gempire.MODID, "poof")));
 }

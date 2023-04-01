@@ -8,6 +8,7 @@ import com.gempire.entities.abilities.AbilityZilch;
 import com.gempire.entities.abilities.interfaces.*;
 import com.gempire.events.GemPoofEvent;
 import com.gempire.init.ModItems;
+import com.gempire.init.ModSounds;
 import com.gempire.items.ItemGem;
 import com.gempire.util.Abilities;
 import com.gempire.util.Color;
@@ -15,6 +16,8 @@ import com.gempire.util.GemPlacements;
 import com.gempire.util.PaletteType;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
 import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.animal.Wolf;
 import net.minecraft.world.entity.animal.horse.AbstractHorse;
@@ -207,6 +210,19 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     public boolean canHoldItem(ItemStack stack) {
         return stack.getItem() instanceof ArmorItem ||  stack.getItem() instanceof DiggerItem;
     }
+
+    public SoundEvent getInstrument()
+    {
+        return SoundEvents.NOTE_BLOCK_HARP;
+    }
+    protected SoundEvent getAmbientSound() {
+        return getInstrument();
+    }
+
+    protected SoundEvent getHurtSound(DamageSource p_30424_) {
+        return getInstrument();
+    }
+
 
     @Override
     public void addAdditionalSaveData(CompoundTag compound) {
@@ -404,14 +420,17 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                 if (this.isOwner(player)) {
                     if (player.isShiftKeyDown()) {
                         this.cycleMovementAI(player);
+                        this.playSound(getInstrument(), this.getSoundVolume(), (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
                     }
                     else {
                         if(this.canOpenInventoryByDefault()) {
                             NetworkHooks.openScreen((ServerPlayer) player, this, buf -> buf.writeInt(this.getId()));
+                            this.playSound(getInstrument(), this.getSoundVolume(), (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
                         }
                         if (this.isRideable()) {
                             if (!this.isVehicle()) {
                                 player.startRiding(this);
+                                this.playSound(getInstrument(), this.getSoundVolume(), (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
                             }
                         }
                     }
@@ -424,6 +443,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                             setFollow(player.getUUID());
                             this.setMovementType((byte) 2);
                             player.sendSystemMessage(Component.translatable("messages.gempire.entity.claimed"));
+                            this.playSound(getInstrument(), this.getSoundVolume(), (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
                             return super.interactAt(player, vec, hand);
                         }
                     }
@@ -555,6 +575,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         float f2 = (this.random.nextFloat() - 0.5F) * 8.0F; these dont do anything*/
         this.level.addParticle(ParticleTypes.EXPLOSION_EMITTER, this.getX() , this.getY() + 2.0D, this.getZ(), 0.0D, 0.0D, 0.0D);
         if(!this.level.isClientSide){
+            this.playSound(ModSounds.POOF.get());
             GemPoofEvent event = new GemPoofEvent(this, this.blockPosition(), source);
             MinecraftForge.EVENT_BUS.post(event);
             ItemStack stack = new ItemStack(this.getGemItem());

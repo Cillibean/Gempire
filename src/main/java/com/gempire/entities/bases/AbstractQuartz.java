@@ -4,6 +4,8 @@ import com.gempire.util.Abilities;
 import com.gempire.util.Color;
 import com.gempire.util.GemPlacements;
 import net.minecraft.client.Minecraft;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.EntityType;
@@ -38,7 +40,11 @@ public abstract class AbstractQuartz extends EntityVaryingGem {
                 Abilities.ELECTROKINESIS, Abilities.AQUAPHILE, Abilities.AEROKINESIS*/
         };
     }
-
+    @Override
+    public SoundEvent getInstrument()
+    {
+        return SoundEvents.NOTE_BLOCK_BASS;
+    }
     @Override
     public boolean UsesUniqueNames() {
         return true;

@@ -11,6 +11,8 @@ import com.gempire.init.ModEnchants;
 import com.gempire.util.Abilities;
 import com.gempire.util.GemPlacements;
 import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Enemy;
@@ -72,7 +74,11 @@ public class EntityZircon extends EntityVaryingGem {
                 .add(Attributes.ATTACK_DAMAGE, 1.0D)
                 .add(Attributes.ATTACK_SPEED, 1.0D);
     }
-
+    @Override
+    public SoundEvent getInstrument()
+    {
+        return SoundEvents.NOTE_BLOCK_PLING;
+    }
     @Override
     protected void registerGoals() {
         super.registerGoals();
