@@ -14,10 +14,10 @@ import net.minecraft.world.phys.AABB;
 
 import java.util.List;
 
-public class CommandGempirePoof extends CommandBase {
+public class CommandGempireRelease extends CommandBase {
     public static final SimpleCommandExceptionType FAILED_EXCEPTION = new SimpleCommandExceptionType(Component.translatable("commands.gempire.nounderstand"));
 
-    public CommandGempirePoof(String name, int permissionLevel, boolean enabled) {
+    public CommandGempireRelease(String name, int permissionLevel, boolean enabled) {
         super(name, permissionLevel, enabled);
     }
 
@@ -32,7 +32,7 @@ public class CommandGempirePoof extends CommandBase {
         List<EntityGem> gems = source.getLevel().getEntitiesOfClass(EntityGem.class, aabb);
         for(EntityGem gem : gems){
             if(gem.isOwner(source.getPlayerOrException())){
-                gem.hurt(DamageSource.GENERIC, gem.getMaxHealth());
+                gem.resetOwners();
             }
         }
         return Command.SINGLE_SUCCESS;

@@ -41,6 +41,8 @@ public class ModAbilities {
         Ability.ABILITY_FROM_ABILITIES.put(Abilities.PROSPECTOR, AbilityProspector.class);
         Ability.ABILITY_FROM_ABILITIES.put(Abilities.TORCHBEARER, AbilityTorchBearer.class);
 
+        Ability.ABILITY_FROM_ABILITIES.put(Abilities.FRAGOKINESIS, AbilityFragokinesis.class);
+
         Ability.ABILITY_FROM_ABILITIES.put(Abilities.GUARD, AbilityGuard.class);
         Ability.ABILITY_FROM_ABILITIES.put(Abilities.VEHICLE, AbilityVehicle.class);
         Ability.ABILITY_FROM_ABILITIES.put(Abilities.SCOUT, AbilityScout.class);

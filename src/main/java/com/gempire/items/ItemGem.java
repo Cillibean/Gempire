@@ -266,4 +266,8 @@ public class ItemGem extends Item {
             this.countdown = this.coundownMax;
         }
     }
+
+    public EntityGem getAssigned_gem() {
+        return assigned_gem;
+    }
 }

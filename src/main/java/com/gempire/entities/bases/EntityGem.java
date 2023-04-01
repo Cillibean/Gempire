@@ -15,17 +15,11 @@ import com.gempire.util.Abilities;
 import com.gempire.util.Color;
 import com.gempire.util.GemPlacements;
 import com.gempire.util.PaletteType;
-import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.animal.Wolf;
-import net.minecraft.world.entity.animal.horse.AbstractHorse;
-import net.minecraft.world.entity.monster.Creeper;
-import net.minecraft.world.entity.monster.Ghast;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.client.Minecraft;
@@ -105,6 +99,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     public static final EntityDataAccessor<Boolean> SADDLED = SynchedEntityData.defineId(EntityGem.class, EntityDataSerializers.BOOLEAN);
     public static final EntityDataAccessor<Integer> BOOST_TIME = SynchedEntityData.defineId(EntityGem.class, EntityDataSerializers.INT);
     public static EntityDataAccessor<Boolean> HAS_VISOR = SynchedEntityData.<Boolean>defineId(EntityGem.class, EntityDataSerializers.BOOLEAN);
+    public static final EntityDataAccessor<Boolean> REBEL = SynchedEntityData.<Boolean>defineId(EntityGem.class, EntityDataSerializers.BOOLEAN);
     public ArrayList<Ability> ABILITY_POWERS = new ArrayList<>();
     public ArrayList<UUID> OWNERS = new ArrayList<>();
     public UUID FOLLOW_ID;
@@ -170,7 +165,11 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.entityData.define(EntityGem.SADDLED, true);
         this.entityData.set(EntityGem.SADDLED, true);
         this.entityData.define(EntityGem.BOOST_TIME, 0);
+        this.entityData.define(EntityGem.REBEL, false);
+        this.entityData.set(EntityGem.REBEL, false);
         this.FOLLOW_ID = UUID.randomUUID();
+        this.assignedGem = null;
+        System.out.println(assignedGem);
         Arrays.fill(this.armorDropChances, 0);
         Arrays.fill(this.handDropChances, 0);
     }
@@ -249,6 +248,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         compound.putInt("insigniaVariant", this.getInsigniaVariant());
         compound.putInt("abilitySlots", this.getAbilitySlots());
         compound.putBoolean("usesAreaAbility", this.usesAreaAbilities());
+        compound.putBoolean("rebel", this.getRebelled());
         compound.putIntArray("guardPos", this.GUARD_POS);
         compound.putInt("focusLevel", this.focusLevel);
         compound.putByte("emotionMeter", this.emotionMeter);
@@ -414,78 +414,73 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
 
     @Override
     public InteractionResult interactAt(Player player, Vec3 vec, InteractionHand hand) {
-        if(player.level.isClientSide){
-            return super.interactAt(player, vec, hand);
-        }
-        //This part of the code checks if the player has a blank hand
-        if(hand == InteractionHand.MAIN_HAND) {
-            this.currentPlayer = player;
-            if(player.getMainHandItem() == ItemStack.EMPTY) {
-                if (this.isOwner(player)) {
-                    if (player.isShiftKeyDown()) {
-                        this.cycleMovementAI(player);
-                        this.playSound(getInstrument(), this.getSoundVolume(), (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
-                    }
-                    else {
-                        if(this.canOpenInventoryByDefault()) {
-                            NetworkHooks.openScreen((ServerPlayer) player, this, buf -> buf.writeInt(this.getId()));
+        if (!this.getRebelled()) {
+            if (player.level.isClientSide) {
+                return super.interactAt(player, vec, hand);
+            }
+            //This part of the code checks if the player has a blank hand
+            if (hand == InteractionHand.MAIN_HAND) {
+                this.currentPlayer = player;
+                if (player.getMainHandItem() == ItemStack.EMPTY) {
+                    if (this.isOwner(player)) {
+                        if (player.isShiftKeyDown()) {
+                            this.cycleMovementAI(player);
                             this.playSound(getInstrument(), this.getSoundVolume(), (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
-                        }
-                        if (this.isRideable()) {
-                            if (!this.isVehicle()) {
-                                player.startRiding(this);
+                        } else {
+                            if (this.canOpenInventoryByDefault()) {
+                                NetworkHooks.openScreen((ServerPlayer) player, this, buf -> buf.writeInt(this.getId()));
                                 this.playSound(getInstrument(), this.getSoundVolume(), (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
                             }
-                        }
-                    }
-                }
-                else {
-                    //Test to see if the gem has an owner
-                    if (!this.getOwned()) {
-                        if(!this.isOwner(player)) {
-                            this.addOwner(player.getUUID());
-                            setFollow(player.getUUID());
-                            this.setMovementType((byte) 2);
-                            player.sendSystemMessage(Component.translatable("messages.gempire.entity.claimed"));
-                            this.playSound(getInstrument(), this.getSoundVolume(), (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
-                            return super.interactAt(player, vec, hand);
-                        }
-                    }
-                }
-            }
-            else {
-                if(this.isOwner(player)) {
-                    if (player.getMainHandItem().getItem() instanceof DyeItem dye) {
-                        if (player.isShiftKeyDown()) {
-                            if (canChangeInsigniaColorByDefault()) this.setInsigniaColor(dye.getDyeColor().getId());
-                        } else {
-                            if(canChangeUniformColorByDefault()) this.setOutfitColor(dye.getDyeColor().getId());
-                        }
-                    }
-                    else if (player.getMainHandItem().getItem() == Items.PAPER){
-                        NetworkHooks.openScreen((ServerPlayer) player, this, buf -> buf.writeInt(this.getId()));
-                    }
-                    else if(player.getMainHandItem().getItem() == Items.BOOK){
-                        StringBuilder list1 = new StringBuilder();
-                        for(int i = 0; i < this.structures.size(); i++){
-                            if(i == this.structures.size() - 1){
-                                list1.append(this.structures.get(i));
-                            }
-                            else{
-                                list1.append(this.structures.get(i)).append(", ");
+                            if (this.isRideable()) {
+                                if (!this.isVehicle()) {
+                                    player.startRiding(this);
+                                    this.playSound(getInstrument(), this.getSoundVolume(), (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
+                                }
                             }
                         }
-                        StringBuilder list2 = new StringBuilder();
-                        for(int i = 0; i < this.biomes.size(); i++){
-                            if(i == this.biomes.size() - 1){
-                                list2.append(this.biomes.get(i));
-                            }
-                            else{
-                                list2.append(this.biomes.get(i)).append(", ");
+                    } else {
+                        //Test to see if the gem has an owner
+                        if (!this.getOwned()) {
+                            if (!this.isOwner(player)) {
+                                this.addOwner(player.getUUID());
+                                setFollow(player.getUUID());
+                                this.setMovementType((byte) 2);
+                                player.sendSystemMessage(Component.translatable("messages.gempire.entity.claimed"));
+                                this.playSound(getInstrument(), this.getSoundVolume(), (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
+                                return super.interactAt(player, vec, hand);
                             }
                         }
-                        player.sendSystemMessage(Component.translatable("Findable Structures: " + list1));
-                        player.sendSystemMessage(Component.translatable("Findable Biomes: " + list2));
+                    }
+                } else {
+                    if (this.isOwner(player)) {
+                        if (player.getMainHandItem().getItem() instanceof DyeItem dye) {
+                            if (player.isShiftKeyDown()) {
+                                if (canChangeInsigniaColorByDefault()) this.setInsigniaColor(dye.getDyeColor().getId());
+                            } else {
+                                if (canChangeUniformColorByDefault()) this.setOutfitColor(dye.getDyeColor().getId());
+                            }
+                        } else if (player.getMainHandItem().getItem() == Items.PAPER) {
+                            NetworkHooks.openScreen((ServerPlayer) player, this, buf -> buf.writeInt(this.getId()));
+                        } else if (player.getMainHandItem().getItem() == Items.BOOK) {
+                            StringBuilder list1 = new StringBuilder();
+                            for (int i = 0; i < this.structures.size(); i++) {
+                                if (i == this.structures.size() - 1) {
+                                    list1.append(this.structures.get(i));
+                                } else {
+                                    list1.append(this.structures.get(i)).append(", ");
+                                }
+                            }
+                            StringBuilder list2 = new StringBuilder();
+                            for (int i = 0; i < this.biomes.size(); i++) {
+                                if (i == this.biomes.size() - 1) {
+                                    list2.append(this.biomes.get(i));
+                                } else {
+                                    list2.append(this.biomes.get(i)).append(", ");
+                                }
+                            }
+                            player.sendSystemMessage(Component.translatable("Findable Structures: " + list1));
+                            player.sendSystemMessage(Component.translatable("Findable Biomes: " + list2));
+                        }
                     }
                 }
             }
@@ -509,33 +504,34 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     }
 
     public void cycleMovementAI(Player player){
-        //Cycles through the various movement types.
-        this.navigation.stop();
-        setFollow(player.getUUID());
-        System.out.println(assignedGem);
-        if(this.getMovementType() < 3){
-            this.addMovementType(1);
-            switch (this.getMovementType()) {
-                case 1 -> {
-                    player.sendSystemMessage(Component.translatable("messages.gempire.entity.wander"));
+        if (!this.getRebelled()) {
+            //Cycles through the various movement types.
+            this.navigation.stop();
+            setFollow(player.getUUID());
+            System.out.println(assignedGem);
+            if (this.getMovementType() < 3) {
+                this.addMovementType(1);
+                switch (this.getMovementType()) {
+                    case 1 -> {
+                        player.sendSystemMessage(Component.translatable("messages.gempire.entity.wander"));
+                    }
+                    case 2 -> {
+                        player.sendSystemMessage(Component.translatable("messages.gempire.entity.follow.owner"));
+                    }
+                    case 3 -> {
+                        player.sendSystemMessage(Component.translatable("messages.gempire.entity.follow.assigned"));
+                    }
+                    default -> {
+                        player.sendSystemMessage(Component.translatable("messages.gempire.entity.stay"));
+                    }
                 }
-                case 2 -> {
-                    player.sendSystemMessage(Component.translatable("messages.gempire.entity.follow.owner"));
-                }
-                case 3 -> {
-                    player.sendSystemMessage(Component.translatable("messages.gempire.entity.follow.assigned"));
-                }
-                default -> {
-                    player.sendSystemMessage(Component.translatable("messages.gempire.entity.stay"));
-                }
+            } else if (this.getMovementType() == 3) {
+                this.setMovementType((byte) 0);
+                player.sendSystemMessage(Component.translatable("messages.gempire.entity.stay"));
+                this.GUARD_POS[0] = (int) this.getX();
+                this.GUARD_POS[1] = (int) this.getY();
+                this.GUARD_POS[2] = (int) this.getZ();
             }
-        }
-        else if(this.getMovementType() == 3){
-            this.setMovementType((byte) 0);
-            player.sendSystemMessage(Component.translatable("messages.gempire.entity.stay"));
-            this.GUARD_POS[0] = (int) this.getX();
-            this.GUARD_POS[1] = (int) this.getY();
-            this.GUARD_POS[2] = (int) this.getZ();
         }
     }
 
@@ -662,11 +658,15 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     //GETTERS AND SETTERS!!!
 
     public void setOwners(ArrayList<UUID> owners){
-        this.OWNERS = owners;
+        if (!getRebelled()) {
+            this.OWNERS = owners;
+        }
     }
 
     public void addOwner(UUID ID){
-        this.OWNERS.add(ID);
+        if (!getRebelled()) {
+            this.OWNERS.add(ID);
+        }
     }
 
     public void removeOwner(UUID ID){
@@ -971,6 +971,14 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     public abstract boolean canChangeUniformColorByDefault();
 
     public abstract boolean canChangeInsigniaColorByDefault();
+
+    public Boolean getRebelled(){
+        return this.entityData.get(EntityGem.REBEL);
+    }
+
+    public void setRebelled(boolean rebelled){
+        this.entityData.set(EntityGem.REBEL, rebelled);
+    }
 
     public String getGemName(){
         if(this instanceof EntityVaryingGem){
@@ -1443,6 +1451,16 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         else{
             player.sendSystemMessage(Component.translatable("commands.gempire.noeye"));
         }
+    }
+
+    public void rebel() {
+        this.resetOwners();
+        this.generateInsigniaColor();
+        this.generateOutfitColor();
+        this.generateOutfitVariant();
+        this.generateHairVariant();
+        this.generateInsigniaVariant();
+        this.setRebelled(true);
     }
 
     /*public static BlockPos findStructure(EntityGem gem, StructureFeature<?> structure) {
