@@ -1,21 +1,21 @@
 {
   "display": {
     "icon": {
-      "item": "gempire:pearl_gem_0"
+      "item": "gempire:tourmaline_gem_16"
     },
-    "title": "Welcome to your new Pearl~",
-    "description": "Obtain a Pearl",
+    "title": "Boing Boing Boing Boing",
+    "description": "Create a Topaz",
     "frame": "task",
     "hidden": true
   },
-  "parent": "gempire:create_shell",
+  "parent": "gempire:create_injector",
   "criteria": {
     "requirement": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "tag": "gempire:pearl"
+            "tag": "gempire:topaz"
           }
         ]
       }

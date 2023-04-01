@@ -1,21 +1,21 @@
 {
   "display": {
     "icon": {
-      "item": "gempire:pearl_gem_0"
+      "item": "gempire:zircon_gem_11"
     },
-    "title": "Welcome to your new Pearl~",
-    "description": "Obtain a Pearl",
+    "title": "What's the case?",
+    "description": "Create a Zircon",
     "frame": "task",
     "hidden": true
   },
-  "parent": "gempire:create_shell",
+  "parent": "gempire:create_injector",
   "criteria": {
     "requirement": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "tag": "gempire:pearl"
+            "tag": "gempire:zircon"
           }
         ]
       }

@@ -355,15 +355,10 @@ public class ModItems {
                     new Item.Properties().tab(ModItemGroup.BLOCKS)
             )
     );
-    /*public static final RegistryObject<Item> TEST_CONTAINER_BLOCK_ITEM = ITEMS.register("test_container_block", () ->
-            new BlockItem(
-                    ModBlocks.TEST_CONTAINER_BLOCK.get(),
-                    new Item.Properties().group(ModItemGroup.BLOCKS)
-            )
-    );*/
 
     public static final RegistryObject<Item> GILDED_LAPIS = ITEMS.register("gilded_lapis", () ->
             new Item(new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS).stacksTo(64)));
+
     public static final RegistryObject<Item> SPODUMENE_PIECE = ITEMS.register("spodumene_piece", () ->
             new Item(new Item.Properties().tab(CreativeModeTab.TAB_FOOD).stacksTo(64).food(ModFoods.SPODUMENE_PIECE)));
     public static final RegistryObject<Item> ICE_SHARD = ITEMS.register("ice_shard", () ->
@@ -377,7 +372,6 @@ public class ModItems {
 
     public static final RegistryObject<Item> INJECTOR_PANEL = ITEMS.register("injector_panel", () ->
             new ItemInjectorPanel(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(1)));
-
     public static final RegistryObject<Item> GEM_SCRAP = ITEMS.register("gem_scrap", () ->
             new Item(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(64)));
     public static final RegistryObject<Item> PRISMATIC_INGOT = ITEMS.register("prismatic_ingot", () ->

@@ -1,21 +1,21 @@
 {
   "display": {
     "icon": {
-      "item": "gempire:pearl_gem_0"
+      "item": "gempire:spinel_gem_6"
     },
-    "title": "Welcome to your new Pearl~",
-    "description": "Obtain a Pearl",
+    "title": "Your new best friend!",
+    "description": "Create a Spinel",
     "frame": "task",
-    "hidden": true
+    "hidden": false
   },
-  "parent": "gempire:create_shell",
+  "parent": "gempire:create_injector",
   "criteria": {
     "requirement": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "tag": "gempire:pearl"
+            "tag": "gempire:spinel"
           }
         ]
       }

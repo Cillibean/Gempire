@@ -1,21 +1,21 @@
 {
   "display": {
     "icon": {
-      "item": "gempire:pearl_gem_0"
+      "item": "gempire:garnet_gem_1"
     },
-    "title": "Welcome to your new Pearl~",
-    "description": "Obtain a Pearl",
+    "title": "Did you miss me?",
+    "description": "Create a Garnet",
     "frame": "task",
     "hidden": true
   },
-  "parent": "gempire:create_shell",
+  "parent": "gempire:create_injector",
   "criteria": {
     "requirement": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "tag": "gempire:pearl"
+            "tag": "gempire:garnet"
           }
         ]
       }

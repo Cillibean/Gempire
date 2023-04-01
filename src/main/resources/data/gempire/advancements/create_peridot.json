@@ -1,21 +1,21 @@
 {
   "display": {
     "icon": {
-      "item": "gempire:pearl_gem_0"
+      "item": "gempire:peridot_gem"
     },
-    "title": "Welcome to your new Pearl~",
-    "description": "Obtain a Pearl",
+    "title": "Log Date: 7-44-2",
+    "description": "Create a peridot and she will provide you more guide book entries",
     "frame": "task",
     "hidden": true
   },
-  "parent": "gempire:create_shell",
+  "parent": "gempire:create_injector",
   "criteria": {
     "requirement": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "tag": "gempire:pearl"
+            "item": "gempire:spinel"
           }
         ]
       }

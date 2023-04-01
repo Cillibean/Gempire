@@ -1,21 +1,21 @@
 {
   "display": {
     "icon": {
-      "item": "gempire:peridot_gem"
+      "item": "gempire:sapphire_gem_11"
     },
-    "title": "Log Date: 7-44-2",
-    "description": "Create a peridot and she will provide you more guide book entries",
+    "title": "I see.",
+    "description": "Create a Sapphire",
     "frame": "task",
     "hidden": true
   },
-  "parent": "gempire:root",
+  "parent": "gempire:create_injector",
   "criteria": {
     "requirement": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "gempire:peridot"
+            "tag": "gempire:sapphire"
           }
         ]
       }
