@@ -134,7 +134,7 @@ public class EntityPeridot extends EntityGem {
     }
 
     public int generateOutfitVariant(){
-        return this.random.nextInt(3);
+        return this.random.nextInt(4);
     }
 
     public int generateInsigniaVariant(){
