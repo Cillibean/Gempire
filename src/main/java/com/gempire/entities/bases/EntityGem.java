@@ -500,6 +500,14 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     3 is follow assigned
      */
 
+    public EntityGem getAssignedGem() {
+        return assignedGem;
+    }
+
+    public void setAssignedGem(EntityGem assignedGem) {
+        this.assignedGem = assignedGem;
+    }
+
     public void cycleMovementAI(Player player){
         //Cycles through the various movement types.
         this.navigation.stop();

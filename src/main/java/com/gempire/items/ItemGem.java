@@ -78,6 +78,7 @@ public class ItemGem extends Item {
         if (entity instanceof EntityGem) {
             if (!(entity instanceof EntityPearl)) {
                 livingEntityHit = true;
+                System.out.println("gem interact");
                 gemToAssign = (EntityGem) entity;
             }
         }
@@ -113,7 +114,10 @@ public class ItemGem extends Item {
                     } else {
                         playerIn.sendSystemMessage(Component.translatable("messages.gempire.entity.assigned"));
                         livingEntityHit = false;
+                    System.out.println("ToAssign to assigned");
                         assigned_gem = gemToAssign;
+                    System.out.println(assigned_gem);
+                    System.out.println(gemToAssign);
                     }
                 }
         return super.use(worldIn, playerIn, handIn);
@@ -130,6 +134,10 @@ public class ItemGem extends Item {
             String namee = "";
             boolean dying = false;
             List<EntityGem> list;
+            System.out.println("setter");
+            assert gem != null;
+            gem.setAssignedGem(assigned_gem);
+            System.out.println(gem.getAssignedGem());
             if (player == null) {
                 dying = false;
             }
@@ -185,7 +193,6 @@ public class ItemGem extends Item {
                     if (item != null) {
                         assert gem != null;
                         gem.spawnGem = item;
-                        gem.assignedGem = assigned_gem;
                     }
                     assert stack.getTag() != null;
                     assert gem != null;
