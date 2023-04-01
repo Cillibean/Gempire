@@ -13,7 +13,7 @@
       "item": "minecraft:glass"
     },
     "d": {
-      "item": "minecraft:iron_ingot"
+      "item": "gempire:prismatic_ingot"
     }
   },
   "result": {

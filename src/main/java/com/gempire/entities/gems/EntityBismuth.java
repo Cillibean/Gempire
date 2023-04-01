@@ -3,6 +3,8 @@ package com.gempire.entities.gems;
 import com.gempire.entities.ai.EntityAIFollowOwner;
 import com.gempire.entities.ai.EntityAIWander;
 import com.gempire.entities.bases.EntityGem;
+import com.gempire.init.ModFluids;
+import com.gempire.init.ModItems;
 import com.gempire.util.Abilities;
 import com.gempire.util.GemPlacements;
 import net.minecraft.sounds.SoundEvent;
@@ -14,6 +16,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 
 import net.minecraft.world.entity.ai.goal.FloatGoal;
@@ -143,7 +146,21 @@ public class EntityBismuth extends EntityGem {
             return 17;
         return this.random.nextInt(3);
     }
-
+    @Override
+    public Item getInputItem()
+    {
+        return ModItems.GEM_SCRAP.get();
+    }
+    @Override
+    public Item getOutputItem()
+    {
+        return ModItems.PRISMATIC_INGOT.get();
+    }
+    @Override
+    public int getTimetoCraft()
+    {
+        return 25 * 20;
+    }
     public int generateInsigniaVariant(){
             return this.getOutfitVariant();
     }

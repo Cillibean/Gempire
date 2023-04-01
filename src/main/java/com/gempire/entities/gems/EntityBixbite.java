@@ -76,7 +76,7 @@ public class EntityBixbite extends EntityGem {
 
     @Override
     public int generateInsigniaColor() {
-        return 1;
+        return 14;
     }
 
     @Override

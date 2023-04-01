@@ -14,6 +14,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -63,7 +64,7 @@ public class FluidRegistryContainer {
         this.block = ModBlocks.BLOCKS.register(name, () -> new LiquidBlock(this.source, blockProperties));
         this.properties.block(this.block);
 
-        this.bucket = ModItems.ITEMS.register(name + "_bucket", () -> new BucketItem(this.source, itemProperties));
+        this.bucket = ModItems.ITEMS.register(name + "_bucket", () -> new BucketItem(this.source, itemProperties.craftRemainder(Items.BUCKET)));
         this.properties.bucket(this.bucket);
     }
 

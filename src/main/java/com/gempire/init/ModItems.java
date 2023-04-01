@@ -378,6 +378,12 @@ public class ModItems {
     public static final RegistryObject<Item> INJECTOR_PANEL = ITEMS.register("injector_panel", () ->
             new ItemInjectorPanel(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(1)));
 
+    public static final RegistryObject<Item> GEM_SCRAP = ITEMS.register("gem_scrap", () ->
+            new Item(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(64)));
+    public static final RegistryObject<Item> PRISMATIC_INGOT = ITEMS.register("prismatic_ingot", () ->
+            new Item(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(64)));
+
+
     public static final RegistryObject<Item> WHITE_DESTABILIZER = ITEMS.register("white_destabilizer", () ->
             new ItemDestabilizer(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(1).durability(25)));
     public static final RegistryObject<Item> YELLOW_DESTABILIZER = ITEMS.register("yellow_destabilizer", () ->

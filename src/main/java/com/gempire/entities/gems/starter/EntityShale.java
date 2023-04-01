@@ -52,24 +52,13 @@ public class EntityShale extends EntityStarterGem {
     public EntityShale(EntityType<? extends PathfinderMob> type, Level worldIn) {
         super(type, worldIn);
     }
+
     public static AttributeSupplier.Builder registerAttributes() {
         return Mob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 10.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.3D)
                 .add(Attributes.ATTACK_DAMAGE, 0);
     }
-    public void addAdditionalSaveData(CompoundTag tag) {
-        super.addAdditionalSaveData(tag);
-        tag.putInt("ShaleTicks", this.ticking);
-        tag.putBoolean("isBrewing", this.isBrewing);
-    }
-    public void readAdditionalSaveData(CompoundTag tag) {
-        super.readAdditionalSaveData(tag);
-        this.ticking = tag.getInt("ShaleTicks");
-        this.isBrewing = tag.getBoolean("isBrewing");
-    }
-    private int ticking;
-    public boolean isBrewing;
 
     @Override
     protected void registerGoals() {
@@ -84,60 +73,6 @@ public class EntityShale extends EntityStarterGem {
         this.goalSelector.addGoal(8, new EntityAIFollowOwner(this, 1.0D));
     }
 
-    @Override
-    public InteractionResult interactAt(Player player, Vec3 vec, InteractionHand hand) {
-        if (player.level.isClientSide) {
-            return super.interactAt(player, vec, hand);
-        }
-        if(hand == InteractionHand.MAIN_HAND && !isBrewing) {
-            this.currentPlayer = player;
-            if (player.getMainHandItem().getItem() == ModItems.GEM_SLUSH_BUCKET.get()) {
-                if (this.isOwner(player)) {
-                    isBrewing = true;
-                    if (!player.isCreative()) {
-                        player.getMainHandItem().shrink(1);
-                    }
-                }
-            }
-        }
-        return super.interactAt(player, vec, hand);
-    }
-    private void popShitOut()
-    {
-        Item essence;
-        int i = this.getRandom().nextInt(4);
-        essence = switch (i) {
-            case 1 -> ModFluids.PINK_ESSENCE.bucket.get();
-            case 2 -> ModFluids.BLUE_ESSENCE.bucket.get();
-            case 3 -> ModFluids.YELLOW_ESSENCE.bucket.get();
-            default -> ModFluids.WHITE_ESSENCE.bucket.get();
-        };
-        ItemStack essenceStack = new ItemStack(essence);
-        ItemEntity essenceEntity = new ItemEntity(this.level, this.getX(), this.getY(), this.getZ(), essenceStack);
-        this.level.addFreshEntity(essenceEntity);
-        this.currentPlayer.sendSystemMessage(Component.translatable("All done!"));
-        ticking = 0;
-        isBrewing = false;
-    }
-    @Override
-    public void tick() {
-        if (!this.level.isClientSide && isBrewing)
-        {
-            ticking++;
-            if (ticking >= 200) {
-                popShitOut();
-            }
-        }
-        super.tick();
-    }
-    protected void addParticlesAroundSelf(ParticleOptions p_35288_) {
-        for(int i = 0; i < 5; ++i) {
-            double d0 = this.random.nextGaussian() * 0.02D;
-            double d1 = this.random.nextGaussian() * 0.02D;
-            double d2 = this.random.nextGaussian() * 0.02D;
-            this.level.addParticle(p_35288_, this.getRandomX(1.0D), this.getRandomY() + 1.0D, this.getRandomZ(1.0D), d0, d1, d2);
-        }
-    }
     @Override
     public GemPlacements[] getPlacements() {
         GemPlacements[] placement = new GemPlacements[]{
@@ -188,13 +123,31 @@ public class EntityShale extends EntityStarterGem {
                 Abilities.ESSENCE_BREWER
         };
     }
-
+    @Override
+    public Item getInputItem()
+    {
+        return ModItems.GEM_SLUSH_BUCKET.get();
+    }
+    @Override
+    public Item getOutputItem()
+    {
+        int i = this.getRandom().nextInt(4);
+        Item essence = switch (i) {
+            case 1 -> ModFluids.PINK_ESSENCE.bucket.get();
+            case 2 -> ModFluids.BLUE_ESSENCE.bucket.get();
+            case 3 -> ModFluids.YELLOW_ESSENCE.bucket.get();
+            default -> ModFluids.WHITE_ESSENCE.bucket.get();
+        };
+        return essence;
+    }
+    @Override
+    public int getTimetoCraft()
+    {
+        return 10 * 20;
+    }
     @Override
     public boolean canOpenInventoryByDefault() {
         return true;
     }
 
-    public boolean isBrewing() {
-        return this.isBrewing;
-    }
 }

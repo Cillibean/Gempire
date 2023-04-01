@@ -7,6 +7,7 @@ import com.gempire.entities.abilities.base.Ability;
 import com.gempire.entities.abilities.AbilityZilch;
 import com.gempire.entities.abilities.interfaces.*;
 import com.gempire.events.GemPoofEvent;
+import com.gempire.init.ModFluids;
 import com.gempire.init.ModItems;
 import com.gempire.init.ModSounds;
 import com.gempire.items.ItemGem;
@@ -119,7 +120,15 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     public int maxAreaCounter = 100;
     public int focusCounter = 100;
     public int maxFocusCounter = 100;
+    public int ticking;
 
+    public Item inputItem = Items.AIR;
+    public Item outputItem = Items.AIR;
+
+    public int timeToCraft = 10;
+    public boolean isCrafting;
+
+    public Item input;
     public int focusLevel = 2;
 
     public static final int NUMBER_OF_SLOTS = 33;
@@ -170,6 +179,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         Arrays.fill(this.armorDropChances, 0);
         Arrays.fill(this.handDropChances, 0);
     }
+
 
     @Nullable
     @Override
@@ -237,6 +247,8 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         compound.putInt("hairColor", this.getHairColor());
         compound.putInt("skinVariant", this.getSkinVariant());
         compound.putInt("hairVariant", this.getHairVariant());
+        compound.putInt("CraftTicks", this.ticking);
+        compound.putBoolean("isCrafting", this.isCrafting);
         compound.putInt("gemPlacement", this.getGemPlacement());
         compound.putInt("gemColor", this.getGemColor());
         compound.putInt("outfitColor", this.getOutfitColor());
@@ -290,6 +302,8 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.setHairVariant(compound.getInt("hairVariant"));
         this.setGemPlacement(compound.getInt("gemPlacement"));
         this.setGemColor(compound.getInt("gemColor"));
+        this.ticking = compound.getInt("CraftTicks");
+        this.isCrafting = compound.getBoolean("isCrafting");
         this.setOutfitColor(compound.getInt("outfitColor"));
         this.setOutfitVariant(compound.getInt("outfitVariant"));
         this.setInsigniaColor(compound.getInt("insigniaColor"));
@@ -408,6 +422,31 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         super.aiStep();
     }
 
+    public Item getInputItem()
+    {
+        return inputItem;
+    }
+
+    public Item getOutputItem()
+    {
+        return outputItem;
+    }
+
+    public int getTimetoCraft()
+    {
+        return timeToCraft;
+    }
+    @Override
+    public void tick() {
+        if (!this.level.isClientSide && isCrafting)
+        {
+            ticking++;
+            if (ticking >= getTimetoCraft()) {
+                popShitOut();
+            }
+        }
+        super.tick();
+    }
     @Override
     public InteractionResult interactAt(Player player, Vec3 vec, InteractionHand hand) {
         if(player.level.isClientSide){
@@ -483,6 +522,14 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                         player.sendSystemMessage(Component.translatable("Findable Structures: " + list1));
                         player.sendSystemMessage(Component.translatable("Findable Biomes: " + list2));
                     }
+                }
+            }
+        }
+        if (player.getItemInHand(hand).getItem() == getInputItem() && !isCrafting && hand == InteractionHand.MAIN_HAND && getInputItem() != Items.AIR.asItem()) {
+            if (this.isOwner(player)) {
+                isCrafting = true;
+                if (!player.isCreative()) {
+                    player.getMainHandItem().shrink(1);
                 }
             }
         }
@@ -757,7 +804,15 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         }
         return Color.lerpHex(colors);
     }
-
+    public void popShitOut()
+    {
+        ItemStack itemStack = new ItemStack(getOutputItem());
+        ItemEntity itemEntity = new ItemEntity(this.level, this.getX(), this.getY(), this.getZ(), itemStack);
+        this.level.addFreshEntity(itemEntity);
+        this.currentPlayer.sendSystemMessage(Component.translatable("All done!"));
+        ticking = 0;
+        isCrafting = false;
+    }
     public abstract int generateSkinVariant();
 
     public int getSkinVariant(){

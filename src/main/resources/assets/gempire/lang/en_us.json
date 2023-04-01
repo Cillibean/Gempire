@@ -112,6 +112,9 @@
   "item.gempire.blue_destabilizer": "Blue Destabilizer",
   "item.gempire.pink_destabilizer": "Pink Destabilizer",
   "item.gempire.pink_rejuvenator": "Pink Rejuvenator",
+  "item.gempire.injector_panel": "Injector Remote",
+  "item.gempire.prismatic_ingot": "Prismatic Ingot",
+  "item.gempire.gem_scrap": "Prismatic Scraps",
 
   "item.gempire.essence_bottle": "Essence Bottle",
   "item.gempire.pink_essence": "Pink Essence",
@@ -299,8 +302,6 @@
   "item.gempire.topaz_gem_6": "Pink Topaz Gem",
   "item.gempire.topaz_gem_11": "Blue Topaz Gem",
 
-  "item.gempire.injector_panel": "Injector Remote",
-
   "entity.gempire.pebble": "Pebble",
   "entity.gempire.mica": "Mica",
   "entity.gempire.shale": "Shale",
@@ -430,7 +431,6 @@
   "itemGroup.items" : "Items",
   "itemGroup.blocks" : "Blocks",
 
-  "fluid.gempire.test_fluid": "Test Fluid",
   "fluid.gempire.pink_essence": "Pink Essence",
   "fluid.gempire.blue_essence": "Blue Essence",
   "fluid.gempire.yellow_essence": "Yellow Essence",

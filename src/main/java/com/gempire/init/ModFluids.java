@@ -30,7 +30,7 @@ public class ModFluids {
             ),
             BlockBehaviour.Properties.copy(Blocks.WATER),
             new Item.Properties()
-                    .tab(ModItemGroup.BLOCKS)
+                    .tab(ModItemGroup.ITEMS)
                     .stacksTo(1)
     );
 
@@ -47,7 +47,7 @@ public class ModFluids {
             ),
             BlockBehaviour.Properties.copy(Blocks.WATER),
             new Item.Properties()
-                    .tab(ModItemGroup.BLOCKS)
+                    .tab(ModItemGroup.ITEMS)
                     .stacksTo(1)
     );
 
@@ -64,7 +64,7 @@ public class ModFluids {
             ),
             BlockBehaviour.Properties.copy(Blocks.WATER),
             new Item.Properties()
-                    .tab(ModItemGroup.BLOCKS)
+                    .tab(ModItemGroup.ITEMS)
                     .stacksTo(1)
     );
 
@@ -81,7 +81,7 @@ public class ModFluids {
             ),
             BlockBehaviour.Properties.copy(Blocks.WATER),
             new Item.Properties()
-                    .tab(ModItemGroup.BLOCKS)
+                    .tab(ModItemGroup.ITEMS)
                     .stacksTo(1)
     );
 }
