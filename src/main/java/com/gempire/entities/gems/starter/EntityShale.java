@@ -13,8 +13,11 @@ import com.gempire.util.CruxType;
 import com.gempire.util.GemPlacements;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.Dynamic;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtOps;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -112,6 +115,7 @@ public class EntityShale extends EntityStarterGem {
         ItemStack essenceStack = new ItemStack(essence);
         ItemEntity essenceEntity = new ItemEntity(this.level, this.getX(), this.getY(), this.getZ(), essenceStack);
         this.level.addFreshEntity(essenceEntity);
+        this.currentPlayer.sendSystemMessage(Component.translatable("All done!"));
         ticking = 0;
         isBrewing = false;
     }
@@ -120,14 +124,20 @@ public class EntityShale extends EntityStarterGem {
         if (!this.level.isClientSide && isBrewing)
         {
             ticking++;
-            if (ticking >= 200)
-            {
+            if (ticking >= 200) {
                 popShitOut();
             }
         }
         super.tick();
     }
-
+    protected void addParticlesAroundSelf(ParticleOptions p_35288_) {
+        for(int i = 0; i < 5; ++i) {
+            double d0 = this.random.nextGaussian() * 0.02D;
+            double d1 = this.random.nextGaussian() * 0.02D;
+            double d2 = this.random.nextGaussian() * 0.02D;
+            this.level.addParticle(p_35288_, this.getRandomX(1.0D), this.getRandomY() + 1.0D, this.getRandomZ(1.0D), d0, d1, d2);
+        }
+    }
     @Override
     public GemPlacements[] getPlacements() {
         GemPlacements[] placement = new GemPlacements[]{
