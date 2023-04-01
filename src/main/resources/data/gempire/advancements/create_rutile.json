@@ -1,10 +1,10 @@
 {
   "display": {
     "icon": {
-      "item": "gempire:topaz_gem_4"
+      "item": "gempire:rutile_gem"
     },
-    "title": "Topaz Name Here",
-    "description": "Create a Topaz",
+    "title": "Rutile Name Here",
+    "description": "Create a Rutile",
     "frame": "task",
     "hidden": true
   },
@@ -15,7 +15,7 @@
       "conditions": {
         "items": [
           {
-            "tag": "gempire:topaz"
+            "items": ["gempire:rutile_gem"]
           }
         ]
       }

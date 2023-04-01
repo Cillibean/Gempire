@@ -1,9 +1,9 @@
 {
   "replace": false,
   "values": [
-    "gempire:zircon_gem_0",
-    "gempire:zircon_gem_4",
-    "gempire:zircon_gem_11",
-    "gempire:zircon_gem_6"
+    "gempire:topaz_gem_0",
+    "gempire:topaz_gem_4",
+    "gempire:topaz_gem_11",
+    "gempire:topaz_gem_6"
   ]
 }

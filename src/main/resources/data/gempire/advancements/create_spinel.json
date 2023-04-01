@@ -3,10 +3,10 @@
     "icon": {
       "item": "gempire:spinel_gem_6"
     },
-    "title": "Your new best friend!",
+    "title": "Your New Best Friend!",
     "description": "Create a Spinel",
     "frame": "task",
-    "hidden": false
+    "hidden": true
   },
   "parent": "gempire:create_injector",
   "criteria": {

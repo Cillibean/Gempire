@@ -3,7 +3,7 @@
     "icon": {
       "item": "gempire:tank_block"
     },
-    "title": "Leave nothing behind.",
+    "title": "Leave Nothing Behind.",
     "description": "Craft an Injector",
     "frame": "task",
     "hidden": false
@@ -15,7 +15,7 @@
       "conditions": {
         "items": [
           {
-            "item": "gempire:tank_block"
+            "items": ["gempire:tank_block"]
           }
         ]
       }

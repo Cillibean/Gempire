@@ -1,10 +1,10 @@
 {
   "display": {
     "icon": {
-      "item": "gempire:topaz_gem_4"
+      "item": "gempire:obsidian_gem"
     },
-    "title": "Topaz Name Here",
-    "description": "Create a Topaz",
+    "title": "Obsidian Name Here",
+    "description": "Create an Obsidian",
     "frame": "task",
     "hidden": true
   },
@@ -15,7 +15,7 @@
       "conditions": {
         "items": [
           {
-            "tag": "gempire:topaz"
+            "items": ["gempire:obsidian_gem"]
           }
         ]
       }

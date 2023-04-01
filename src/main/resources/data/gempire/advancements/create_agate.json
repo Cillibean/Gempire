@@ -1,10 +1,10 @@
 {
   "display": {
     "icon": {
-      "item": "gempire:topaz_gem_4"
+      "item": "gempire:agate_gem_3"
     },
-    "title": "Topaz Name Here",
-    "description": "Create a Topaz",
+    "title": "Agate Name Here",
+    "description": "Create an Agate",
     "frame": "task",
     "hidden": true
   },
@@ -15,7 +15,7 @@
       "conditions": {
         "items": [
           {
-            "tag": "gempire:topaz"
+            "tag": "gempire:agate"
           }
         ]
       }

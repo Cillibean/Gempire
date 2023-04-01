@@ -1,10 +1,10 @@
 {
   "display": {
     "icon": {
-      "item": "gempire:topaz_gem_4"
+      "item": "gempire:quartz_gem_10"
     },
-    "title": "Topaz Name Here",
-    "description": "Create a Topaz",
+    "title": "Bigger, Badder, Better",
+    "description": "Create a Quartz",
     "frame": "task",
     "hidden": true
   },
@@ -15,7 +15,7 @@
       "conditions": {
         "items": [
           {
-            "tag": "gempire:topaz"
+            "tag": "gempire:quartz"
           }
         ]
       }

@@ -1,10 +1,10 @@
 {
   "display": {
     "icon": {
-      "item": "gempire:topaz_gem_4"
+      "item": "gempire:morganite_gem"
     },
-    "title": "Topaz Name Here",
-    "description": "Create a Topaz",
+    "title": "Morganite Name Here",
+    "description": "Create a Morganite",
     "frame": "task",
     "hidden": true
   },
@@ -15,7 +15,7 @@
       "conditions": {
         "items": [
           {
-            "tag": "gempire:topaz"
+            "items": ["gempire:morganite_gem"]
           }
         ]
       }
