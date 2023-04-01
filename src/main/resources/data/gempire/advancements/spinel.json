@@ -1,0 +1,15 @@
+{
+  "parent": "gempire:root",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "gempire:spinel"
+          }
+        ]
+      }
+    }
+  }
+}

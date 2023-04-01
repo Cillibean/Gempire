@@ -33,6 +33,7 @@ public class ModAbilities {
         Ability.ABILITY_FROM_ABILITIES.put(Abilities.ACIDIC_SPIT, AbilityAcidicSaliva.class);
 
         Ability.ABILITY_FROM_ABILITIES.put(Abilities.DISARMING, AbilityDisarming.class);
+        Ability.ABILITY_FROM_ABILITIES.put(Abilities.ABUNDANCE, AbilityAbundance.class);
 
         Ability.ABILITY_FROM_ABILITIES.put(Abilities.STERN, AbilityStern.class);
 
@@ -44,6 +45,8 @@ public class ModAbilities {
         Ability.ABILITY_FROM_ABILITIES.put(Abilities.VEHICLE, AbilityVehicle.class);
         Ability.ABILITY_FROM_ABILITIES.put(Abilities.SCOUT, AbilityScout.class);
 
+        Ability.ABILITY_FROM_ABILITIES.put(Abilities.NEGOTIATOR, AbilityNegotiator.class);
+        Ability.ABILITY_FROM_ABILITIES.put(Abilities.RECALL, AbilityRecall.class);
 
         Ability.ABILITY_FROM_ABILITIES.put(Abilities.ESSENCE_BREWER, AbilityBrewEssence.class);
 

@@ -17,6 +17,7 @@ import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import org.checkerframework.checker.units.qual.A;
 
 public class EntityGarnet extends EntityVaryingGem {
 
@@ -83,8 +84,9 @@ public class EntityGarnet extends EntityVaryingGem {
         };
     }
     public Abilities[] definiteAbilities(){
-        return new Abilities[]{
-                Abilities.DISARMING
+        return new Abilities[] {
+            Abilities.ABUNDANCE,
+            Abilities.DISARMING
         };
     }
     public boolean doHurtTarget(Entity entityIn) {

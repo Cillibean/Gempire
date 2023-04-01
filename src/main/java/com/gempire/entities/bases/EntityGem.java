@@ -2,6 +2,7 @@ package com.gempire.entities.bases;
 
 import com.gempire.Gempire;
 import com.gempire.container.GemUIContainer;
+import com.gempire.entities.abilities.AbilityRecall;
 import com.gempire.entities.abilities.AbilityVehicle;
 import com.gempire.entities.abilities.base.Ability;
 import com.gempire.entities.abilities.AbilityZilch;
@@ -14,10 +15,12 @@ import com.gempire.util.Abilities;
 import com.gempire.util.Color;
 import com.gempire.util.GemPlacements;
 import com.gempire.util.PaletteType;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.animal.Wolf;
 import net.minecraft.world.entity.animal.horse.AbstractHorse;
@@ -105,6 +108,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     public ArrayList<Ability> ABILITY_POWERS = new ArrayList<>();
     public ArrayList<UUID> OWNERS = new ArrayList<>();
     public UUID FOLLOW_ID;
+    public EntityGem assignedGem;
     public int[] GUARD_POS = new int[3];
     public ArrayList<IIdleAbility> idlePowers = new ArrayList<>();
 
@@ -128,6 +132,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     public Player currentPlayer;
 
     public static final SimpleCommandExceptionType LOCATE_FAILED_EXCEPTION = new SimpleCommandExceptionType(Component.translatable("commands.gempire.faillocate"));
+    public static final SimpleCommandExceptionType RECALL_FAILED_EXCEPTION = new SimpleCommandExceptionType(Component.translatable("commands.gempire.failrecall"));
     public int maxStructureTime = 5 * 20;
     public int structureTime = 0;
     public ArrayList<String> structures = new ArrayList<>();
@@ -166,7 +171,6 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.entityData.set(EntityGem.SADDLED, true);
         this.entityData.define(EntityGem.BOOST_TIME, 0);
         this.FOLLOW_ID = UUID.randomUUID();
-
         Arrays.fill(this.armorDropChances, 0);
         Arrays.fill(this.handDropChances, 0);
     }
@@ -493,27 +497,32 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     0 is stay still
     1 is wander
     2 is follow
+    3 is follow assigned
      */
 
     public void cycleMovementAI(Player player){
         //Cycles through the various movement types.
         this.navigation.stop();
         setFollow(player.getUUID());
-        if(this.getMovementType() < 2){
+        System.out.println(assignedGem);
+        if(this.getMovementType() < 3){
             this.addMovementType(1);
             switch (this.getMovementType()) {
                 case 1 -> {
                     player.sendSystemMessage(Component.translatable("messages.gempire.entity.wander"));
                 }
                 case 2 -> {
-                    player.sendSystemMessage(Component.translatable("messages.gempire.entity.follow"));
+                    player.sendSystemMessage(Component.translatable("messages.gempire.entity.follow.owner"));
+                }
+                case 3 -> {
+                    player.sendSystemMessage(Component.translatable("messages.gempire.entity.follow.assigned"));
                 }
                 default -> {
                     player.sendSystemMessage(Component.translatable("messages.gempire.entity.stay"));
                 }
             }
         }
-        else if(this.getMovementType() == 2){
+        else if(this.getMovementType() == 3){
             this.setMovementType((byte) 0);
             player.sendSystemMessage(Component.translatable("messages.gempire.entity.stay"));
             this.GUARD_POS[0] = (int) this.getX();
@@ -551,7 +560,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         if(!entityIn.level.isClientSide){
             if(this.focusCheck()) for(Ability power : this.getAbilityPowers()){
                 if(power instanceof IMeleeAbility) {
-                    ((IMeleeAbility)power).fight(entityIn, this.getAttributeValue(Attributes.ATTACK_DAMAGE));
+                    ((IMeleeAbility)power).fight((LivingEntity) entityIn, this.getAttributeValue(Attributes.ATTACK_DAMAGE));
                 }
             }
         }
@@ -675,12 +684,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
 
     public boolean isOwner(LivingEntity entity){
         for(UUID uuid : this.OWNERS){
-            if(entity instanceof Player){
-                if((((Player)entity).getUUID()).equals(uuid)) return true;
-            }
-            else {
-                if (entity.getUUID().equals(uuid)) return true;
-            }
+            if(entity.getUUID().equals(uuid)) return true;
         }
         return false;
     }
@@ -1375,6 +1379,63 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     /*
     COMMAND STUFF
     */
+
+    public boolean canRecall(){
+        boolean flag = false;
+        for(Ability ability : this.getAbilityPowers()){
+            if(ability instanceof AbilityRecall){
+                return flag = true;
+            }
+        }
+        return flag;
+    }
+
+    public static void decreaseExp(Player player, float amount) {
+        if (player.totalExperience - amount <= 0)
+        {
+            player.experienceLevel = 0;
+            player.experienceProgress = 0;
+            player.totalExperience = 0;
+            return;
+        }
+        player.totalExperience -= amount;
+        if (player.experienceProgress * (float)player.getXpNeededForNextLevel() <= amount)
+        {
+            amount -= player.experienceProgress * (float)player.getXpNeededForNextLevel();
+            player.experienceProgress = 1.0f;
+            player.experienceLevel--;
+        }
+        while (player.getXpNeededForNextLevel() < amount)
+        {
+            amount -= player.getXpNeededForNextLevel();
+            player.experienceLevel--;
+        }
+        player.experienceProgress -= amount / (float)player.getXpNeededForNextLevel();
+    }
+
+    public void runRecallCommand(ServerPlayer player) {
+        if(this.consumeItemCheck(Items.ENDER_EYE)) {
+            BlockPos pos = this.getOnPos();
+            AABB aabb = this.getBoundingBox().inflate(12.0D);
+            List<EntityGem> gems = this.getLevel().getEntitiesOfClass(EntityGem.class, aabb);
+            int x = player.getRespawnPosition().getX();
+            int y = player.getRespawnPosition().getY();
+            int z = player.getRespawnPosition().getZ();
+            if (player.totalExperience >= 40) {
+                if (gems.size() == 1) {
+                    player.teleportTo(x, y, z);
+                    this.teleportTo(x, y, z);
+                    player.sendSystemMessage(Component.translatable("commands.gempire.recall"));
+                    decreaseExp(player, 20);
+                }
+            } else {
+                player.sendSystemMessage(Component.translatable(  "messages.gempire.entity.player_need_xp"));
+            }
+        }
+        else{
+            player.sendSystemMessage(Component.translatable("commands.gempire.noeye"));
+        }
+    }
 
     /*public static BlockPos findStructure(EntityGem gem, StructureFeature<?> structure) {
         if(gem.level.isClientSide){

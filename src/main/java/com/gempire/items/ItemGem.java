@@ -1,11 +1,13 @@
 package com.gempire.items;
 
 import com.gempire.entities.bases.EntityGem;
+import com.gempire.entities.gems.EntityPearl;
 import com.gempire.entities.gems.starter.EntityPebble;
 import com.gempire.events.GemFormEvent;
 import com.gempire.init.AddonHandler;
 import com.gempire.init.ModEntities;
 import com.gempire.init.ModItems;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobSpawnType;
@@ -22,6 +24,8 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.EntityHitResult;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -50,11 +54,13 @@ public class ItemGem extends Item {
 
     Random rand = new Random();
     public boolean doEffect = false;
+    public EntityGem assigned_gem;
+    public EntityGem gemToAssign;
+    public boolean livingEntityHit = false;
 
     public ItemGem(Properties properties) {
         super(properties);
     }
-
 
     @Override
     public boolean isFoil(ItemStack stack) {
@@ -68,31 +74,48 @@ public class ItemGem extends Item {
     }
 
     @Override
-    public @NotNull InteractionResultHolder<ItemStack> use(Level worldIn, @NotNull Player playerIn, @NotNull InteractionHand handIn) {
-        boolean spawned = false;
-        if(!worldIn.isClientSide) {
-            ItemStack itemstack = playerIn.getItemInHand(handIn);
-            BlockHitResult raytraceresult = getPlayerPOVHitResult(worldIn, playerIn, ClipContext.Fluid.NONE);
-            if (raytraceresult.getType() == HitResult.Type.MISS) {
-                return super.use(worldIn, playerIn, handIn);
-            } else {
-                if (raytraceresult.getType() == HitResult.Type.BLOCK) {
-                    BlockPos blockpos = raytraceresult.getBlockPos();
-                    Direction direction = raytraceresult.getDirection();
-                    if (!worldIn.mayInteract(playerIn, blockpos) || !playerIn.mayUseItemAt(blockpos.relative(direction), direction, itemstack)) {
-                        return super.use(worldIn, playerIn, handIn);
-                    }
-
-                    if (worldIn.mayInteract(playerIn, blockpos) && playerIn.mayUseItemAt(blockpos, raytraceresult.getDirection(), itemstack)) {
-                        spawned = this.formGem(worldIn, playerIn, blockpos, itemstack, null);
-                    }
-                }
-                //Problem with the claiming of gems ??
-                if (!playerIn.isCreative() && spawned) {
-                    playerIn.getItemInHand(handIn).shrink(1);
-                }
+    public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity entity, InteractionHand hand) {
+        if (entity instanceof EntityGem) {
+            if (!(entity instanceof EntityPearl)) {
+                livingEntityHit = true;
+                gemToAssign = (EntityGem) entity;
             }
         }
+        return super.interactLivingEntity(stack, player, entity, hand);
+    }
+
+    @Override
+    public @NotNull InteractionResultHolder<ItemStack> use(Level worldIn, @NotNull Player playerIn, @NotNull InteractionHand handIn) {
+        boolean spawned = false;
+            if (!worldIn.isClientSide) {
+                if (!livingEntityHit) {
+                    ItemStack itemstack = playerIn.getItemInHand(handIn);
+                    BlockHitResult raytraceresult = getPlayerPOVHitResult(worldIn, playerIn, ClipContext.Fluid.NONE);
+                        if (raytraceresult.getType() == HitResult.Type.MISS) {
+                            return super.use(worldIn, playerIn, handIn);
+                        } else {
+                            if (raytraceresult.getType() == HitResult.Type.BLOCK) {
+                                BlockPos blockpos = raytraceresult.getBlockPos();
+                                Direction direction = raytraceresult.getDirection();
+                                if (!worldIn.mayInteract(playerIn, blockpos) || !playerIn.mayUseItemAt(blockpos.relative(direction), direction, itemstack)) {
+                                    return super.use(worldIn, playerIn, handIn);
+                                }
+
+                                if (worldIn.mayInteract(playerIn, blockpos) && playerIn.mayUseItemAt(blockpos, raytraceresult.getDirection(), itemstack)) {
+                                    spawned = this.formGem(worldIn, playerIn, blockpos, itemstack, null);
+                                }
+                            }
+                            //Problem with the claiming of gems ??
+                            if (!playerIn.isCreative() && spawned) {
+                                playerIn.getMainHandItem().shrink(1);
+                            }
+                        }
+                    } else {
+                        playerIn.sendSystemMessage(Component.translatable("messages.gempire.entity.assigned"));
+                        livingEntityHit = false;
+                        assigned_gem = gemToAssign;
+                    }
+                }
         return super.use(worldIn, playerIn, handIn);
     }
 
@@ -162,6 +185,7 @@ public class ItemGem extends Item {
                     if (item != null) {
                         assert gem != null;
                         gem.spawnGem = item;
+                        gem.assignedGem = assigned_gem;
                     }
                     assert stack.getTag() != null;
                     assert gem != null;
@@ -214,6 +238,7 @@ public class ItemGem extends Item {
         this.Countdown(stack, entity);
         return super.onEntityItemUpdate(stack, entity);
     }
+
     public void clearData(ItemStack stack) {
         stack.setTag(new CompoundTag());
     }

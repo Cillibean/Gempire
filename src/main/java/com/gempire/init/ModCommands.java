@@ -16,6 +16,7 @@ public class ModCommands {
 
         //COMMANDS.add(new CommandGempireLocate("scoutlocate", 0, true));
         //COMMANDS.add(new CommandGempireLocateBiome("scoutlocatebiome", 0, true));
+        COMMANDS.add(new CommandGempireRecall("recall", 0, true));
         COMMANDS.add(new CommandGempireFollow("massfollow", 0, true));
         COMMANDS.add(new CommandGempireStay("massstay", 0, true));
         COMMANDS.add(new CommandGempireWander("masswander", 0, true));
