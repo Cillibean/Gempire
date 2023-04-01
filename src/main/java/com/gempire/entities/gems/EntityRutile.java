@@ -49,7 +49,7 @@ public class EntityRutile extends EntityGem {
     @Override
     public SoundEvent getInstrument()
     {
-        return SoundEvents.NOTE_BLOCK_FLUTE;
+        return SoundEvents.NOTE_BLOCK_IRON_XYLOPHONE;
     }
     @Override
     public int generateSkinVariant() {

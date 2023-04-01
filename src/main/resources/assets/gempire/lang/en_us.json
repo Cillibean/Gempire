@@ -36,7 +36,7 @@
   "block.gempire.injector_block": "Injector",
   "block.gempire.drill_block": "Drill",
   "block.gempire.shell_block": "Shell",
-  "block.gempire.tank_block": "Fluid Tank",
+  "block.gempire.tank_block": "Injector Core",
   "block.gempire.floatanium_reactor": "Mysterious Block",
   "block.gempire.power_crystal_block": "Power Crystal",
 
