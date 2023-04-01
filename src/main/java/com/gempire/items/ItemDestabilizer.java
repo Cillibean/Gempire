@@ -2,6 +2,7 @@ package com.gempire.items;
 
 
 import com.gempire.entities.bases.EntityGem;
+import com.gempire.init.ModItems;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import com.mojang.authlib.GameProfile;
@@ -14,6 +15,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 
 public class ItemDestabilizer extends Item {
     private final Multimap<Attribute, AttributeModifier> defaultModifiers;
@@ -51,5 +53,9 @@ public class ItemDestabilizer extends Item {
     @Override
     public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlot p_43383_) {
         return p_43383_ == EquipmentSlot.MAINHAND ? this.defaultModifiers : super.getDefaultAttributeModifiers(p_43383_);
+    }
+    @Override
+    public boolean isValidRepairItem(ItemStack p_41134_, ItemStack p_41135_) {
+        return p_41135_.is(ModItems.POWER_CRYSTAL_BLOCK_ITEM.get());
     }
 }

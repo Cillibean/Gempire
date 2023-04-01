@@ -16,6 +16,7 @@ import com.gempire.util.Color;
 import com.gempire.util.GemPlacements;
 import com.gempire.util.PaletteType;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
+import it.unimi.dsi.fastutil.bytes.AbstractByte2FloatSortedMap;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -232,7 +233,18 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     protected SoundEvent getHurtSound(DamageSource p_30424_) {
         return getInstrument();
     }
-
+    @Override
+    protected void playHurtSound(DamageSource p_21160_) {
+        this.playSound(getInstrument(), this.getSoundVolume(), this.hurtPitch());
+    }
+    public float interactPitch()
+    {
+        return (float) (1 + random.nextFloat() * (1.5 - 1));
+    }
+    public float hurtPitch()
+    {
+        return (float) (0.25 + random.nextFloat() * (0.75 - 0.25));
+    }
 
     @Override
     public void addAdditionalSaveData(CompoundTag compound) {
@@ -459,17 +471,17 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                 if (this.isOwner(player)) {
                     if (player.isShiftKeyDown()) {
                         this.cycleMovementAI(player);
-                        this.playSound(getInstrument(), this.getSoundVolume(), (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
+                        this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
                     }
                     else {
                         if(this.canOpenInventoryByDefault()) {
                             NetworkHooks.openScreen((ServerPlayer) player, this, buf -> buf.writeInt(this.getId()));
-                            this.playSound(getInstrument(), this.getSoundVolume(), (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
+                            this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
                         }
                         if (this.isRideable()) {
                             if (!this.isVehicle()) {
                                 player.startRiding(this);
-                                this.playSound(getInstrument(), this.getSoundVolume(), (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
+                                this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
                             }
                         }
                     }
@@ -482,7 +494,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                             setFollow(player.getUUID());
                             this.setMovementType((byte) 2);
                             player.sendSystemMessage(Component.translatable("messages.gempire.entity.claimed"));
-                            this.playSound(getInstrument(), this.getSoundVolume(), (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
+                            this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
                             return super.interactAt(player, vec, hand);
                         }
                     }
@@ -528,6 +540,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         if (player.getItemInHand(hand).getItem() == getInputItem() && !isCrafting && hand == InteractionHand.MAIN_HAND && getInputItem() != Items.AIR.asItem()) {
             if (this.isOwner(player)) {
                 isCrafting = true;
+                this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
                 if (!player.isCreative()) {
                     player.getMainHandItem().shrink(1);
                 }
@@ -811,6 +824,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.level.addFreshEntity(itemEntity);
         this.currentPlayer.sendSystemMessage(Component.translatable("All done!"));
         ticking = 0;
+        this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
         isCrafting = false;
     }
     public abstract int generateSkinVariant();

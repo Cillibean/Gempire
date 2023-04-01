@@ -46,6 +46,7 @@ public class AbilityAngler extends Ability implements IIdleAbility {
                         .create(LootContextParamSets.FISHING));
                 for (ItemStack stack : items) {
                     this.holder.spawnAtLocation(stack);
+                    this.holder.playSound(this.holder.getInstrument());
                 }
             }
         }

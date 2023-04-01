@@ -1,6 +1,7 @@
 {
 	"credit": "Made with Blockbench",
 	"render_type": "translucent",
+	"gui_light": "front",
 	"texture_size": [64, 64],
 	"textures": {
 		"0": "gempire:blocks/power_crystal",
@@ -68,7 +69,8 @@
 			"scale": [0.41, 0.41, 0.41]
 		},
 		"gui": {
-			"scale": [0.75, 0.75, 1]
+			"rotation": [15, 22, 0],
+			"scale": [0.75, 0.75, 0.75]
 		},
 		"head": {
 			"translation": [0, 14.5, 0]

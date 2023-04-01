@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " C ",
+    " P ",
+    " I "
+  ],
+  "key": {
+    "C": {
+      "item": "gempire:blue_chroma"
+    },
+    "P": {
+      "item": "gempire:power_crystal_block"
+    },
+    "I": {
+      "item": "gempire:prismatic_ingot"
+    }
+  },
+  "result": {
+    "item": "gempire:blue_destabilizer"
+  }
+}
