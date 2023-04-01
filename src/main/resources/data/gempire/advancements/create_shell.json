@@ -3,7 +3,7 @@
     "icon": {
       "item": "gempire:shell_block"
     },
-    "title": "Hello, I am Shell.",
+    "title": "Greetings, I am Shell.",
     "description": "Have a Nacre create Shell for you",
     "frame": "task",
     "hidden": false
