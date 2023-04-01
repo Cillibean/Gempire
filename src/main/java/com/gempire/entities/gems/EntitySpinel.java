@@ -48,6 +48,7 @@ public class EntitySpinel extends EntityVaryingGem {
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
         this.goalSelector.addGoal(7, new EntityAIWander(this, 1.0D));
         this.goalSelector.addGoal(7, new EntityAIFollowOwner(this, 1.0D));
+
     }
     @Override
     public SoundEvent getInstrument()
