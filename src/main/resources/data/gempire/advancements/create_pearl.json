@@ -3,10 +3,10 @@
     "icon": {
       "item": "gempire:pearl_gem_0"
     },
-    "title": "Welcome to your new Pearl~",
+    "title": "Welcome to Your New Pearl~",
     "description": "Obtain a Pearl",
     "frame": "task",
-    "hidden": false
+    "hidden": true
   },
   "parent": "gempire:create_shell",
   "criteria": {

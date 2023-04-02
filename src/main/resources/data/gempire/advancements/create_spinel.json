@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "gempire:spinel_gem_6"
+    },
+    "title": "Your New Best Friend!",
+    "description": "Create a Spinel",
+    "frame": "task",
+    "hidden": true
+  },
+  "parent": "gempire:create_injector",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "gempire:spinel"
+          }
+        ]
+      }
+    }
+  }
+}

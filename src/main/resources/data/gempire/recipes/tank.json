@@ -1,23 +1,28 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "dcd",
-    "cec",
-    "dcd"
+    "PIP",
+    "GRG",
+    "PBP"
   ],
   "key": {
-    "c": {
-      "item": "minecraft:bucket"
+    "P": {
+      "item": "gempire:prismatic_ingot"
     },
-    "e": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "G": {
       "item": "minecraft:glass"
     },
-    "d": {
-      "item": "minecraft:iron_ingot"
+    "B": {
+      "item": "minecraft:bucket"
+    },
+    "R": {
+      "item": "minecraft:redstone"
     }
   },
   "result": {
-    "item": "gempire:tank_block",
-    "count": 1
+    "item": "gempire:tank_block"
   }
 }

@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "gempire:emerald_gem"
+    },
+    "title": "Emerald Name Here",
+    "description": "Create an Emerald",
+    "frame": "task",
+    "hidden": true
+  },
+  "parent": "gempire:create_injector",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["gempire:emerald_gem"]
+          }
+        ]
+      }
+    }
+  }
+}

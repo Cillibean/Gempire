@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "gempire:agate_gem_3"
+    },
+    "title": "Agate Name Here",
+    "description": "Create an Agate",
+    "frame": "task",
+    "hidden": true
+  },
+  "parent": "gempire:create_injector",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "gempire:agate"
+          }
+        ]
+      }
+    }
+  }
+}

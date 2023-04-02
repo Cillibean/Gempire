@@ -3,8 +3,8 @@
     "icon": {
       "item": "gempire:pink_essence_bucket"
     },
-    "title": "Gempire",
-    "description": "Rock time",
+    "title": "Welcome to Gempire!",
+    "description": "The Beginning To Your Magical Journey",
     "background": "gempire:textures/blocks/chiseled_ruined_marble_block.png",
     "frame": "task",
     "show_toast": false,

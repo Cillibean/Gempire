@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "gempire:zircon_gem_11"
+    },
+    "title": "What's the Case?",
+    "description": "Create a Zircon",
+    "frame": "task",
+    "hidden": true
+  },
+  "parent": "gempire:create_injector",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "gempire:zircon"
+          }
+        ]
+      }
+    }
+  }
+}

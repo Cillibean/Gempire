@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "gempire:spodumene_gem_1"
+    },
+    "title": "Spodumene Name here",
+    "description": "Create a Spodumene",
+    "frame": "task",
+    "hidden": true
+  },
+  "parent": "gempire:create_injector",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "gempire:spodumene"
+          }
+        ]
+      }
+    }
+  }
+}

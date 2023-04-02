@@ -1,6 +1,8 @@
 {
 	"credit": "Made with Blockbench",
+	"ambientocclusion": false,
 	"render_type": "translucent",
+	"gui_light": "front",
 	"texture_size": [128, 64],
 	"textures": {
 		"particle": "gempire:blocks/injector",
@@ -82,7 +84,7 @@
 			"scale": [0.25, 0.25, 0.25]
 		},
 		"gui": {
-			"rotation": [0, 154, 0],
+			"rotation": [9, -146, 0],
 			"translation": [0, -3.5, 0],
 			"scale": [0.44, 0.44, 0.5]
 		},

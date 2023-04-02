@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "gempire:jasper_gem_1"
+    },
+    "title": "Jasper Name Here",
+    "description": "Create a Jasper",
+    "frame": "task",
+    "hidden": true
+  },
+  "parent": "gempire:create_injector",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "gempire:jasper"
+          }
+        ]
+      }
+    }
+  }
+}

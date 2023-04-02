@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "gempire:sapphire_gem_11"
+    },
+    "title": "The Path of Fate",
+    "description": "Create a Sapphire",
+    "frame": "task",
+    "hidden": true
+  },
+  "parent": "gempire:create_injector",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "gempire:sapphire"
+          }
+        ]
+      }
+    }
+  }
+}

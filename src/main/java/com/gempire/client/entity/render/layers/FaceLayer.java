@@ -24,10 +24,10 @@ public class FaceLayer<E extends EntityGem, M extends ModelGem<E>> extends Gempi
 
     @Override
     public void render(PoseStack matrixStackIn, MultiBufferSource bufferIn, int packedLightIn, EntityGem gem, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
-        int skin = gem.getSkinColor();
-        float r = ((skin & 16711680) >> 16) / 255f;
-        float g = ((skin & 65280) >> 8) / 255f;
-        float b = ((skin & 255) >> 0) / 255f;
+        int gemColor = gem.getGemColor();
+        float r = ((gemColor & 16711680) >> 16) / 255f;
+        float g = ((gemColor & 65280) >> 8) / 255f;
+        float b = ((gemColor & 255) >> 0) / 255f;
         VertexConsumer builder = bufferIn.getBuffer(RenderType.entityCutoutNoCull(new ResourceLocation(gem.getModID()+":textures/entity/" + this.getName(gem).toLowerCase() + "/" + this.getName(gem).toLowerCase() + ".png")));
         this.getParentModel().setupAnim(gem, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
         this.getParentModel().renderToBuffer(matrixStackIn, builder, packedLightIn, OverlayTexture.NO_OVERLAY, r, g, b, 1.0F);

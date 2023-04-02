@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "gempire:tank_block"
+    },
+    "title": "Leave Nothing Behind.",
+    "description": "Craft an Injector",
+    "frame": "task",
+    "hidden": false
+  },
+  "parent": "gempire:create_pebble",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["gempire:tank_block"]
+          }
+        ]
+      }
+    }
+  }
+}

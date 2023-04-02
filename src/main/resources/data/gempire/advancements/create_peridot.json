@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "gempire:peridot_gem"
+    },
+    "title": "Log Date: 7-44-2",
+    "description": "Create a Peridot, and she'll fill out your guide with new information (If you have Patchouli)",
+    "frame": "task",
+    "hidden": true
+  },
+  "parent": "gempire:create_injector",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["gempire:peridot_gem"]
+          }
+        ]
+      }
+    }
+  }
+}

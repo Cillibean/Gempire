@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "gempire:bixbite_gem"
+    },
+    "title": "Bixbite Name Here",
+    "description": "Create a Bixbite",
+    "frame": "task",
+    "hidden": true
+  },
+  "parent": "gempire:create_injector",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["gempire:bixbite_gem"]
+          }
+        ]
+      }
+    }
+  }
+}

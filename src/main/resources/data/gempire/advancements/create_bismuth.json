@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "gempire:bismuth_gem"
+    },
+    "title": "Bismuth as Usual",
+    "description": "Create a Bismuth",
+    "frame": "task",
+    "hidden": true
+  },
+  "parent": "gempire:create_injector",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["gempire:bismuth_gem"]
+          }
+        ]
+      }
+    }
+  }
+}

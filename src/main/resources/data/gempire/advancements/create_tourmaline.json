@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "gempire:tourmaline_gem_16"
+    },
+    "title": "Gardening made easy!",
+    "description": "Create a Tourmaline",
+    "frame": "task",
+    "hidden": true
+  },
+  "parent": "gempire:create_injector",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "gempire:tourmaline"
+          }
+        ]
+      }
+    }
+  }
+}

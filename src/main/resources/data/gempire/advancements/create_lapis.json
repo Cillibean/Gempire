@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "gempire:lapis_gem"
+    },
+    "title": "Lapis Name Here",
+    "description": "Create a Lapis Lazuli",
+    "frame": "task",
+    "hidden": true
+  },
+  "parent": "gempire:create_injector",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["gempire:lapis_gem"]
+          }
+        ]
+      }
+    }
+  }
+}

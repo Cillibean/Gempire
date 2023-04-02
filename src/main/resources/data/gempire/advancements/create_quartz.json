@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "gempire:quartz_gem_10"
+    },
+    "title": "Bigger, Badder, Better",
+    "description": "Create a Quartz",
+    "frame": "task",
+    "hidden": true
+  },
+  "parent": "gempire:create_injector",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "gempire:quartz"
+          }
+        ]
+      }
+    }
+  }
+}

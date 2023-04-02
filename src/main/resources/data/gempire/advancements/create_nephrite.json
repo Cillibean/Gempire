@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "gempire:nephrite_gem"
+    },
+    "title": "Nephrite Name Here",
+    "description": "Create a Nephrite",
+    "frame": "task",
+    "hidden": true
+  },
+  "parent": "gempire:create_injector",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["gempire:nephrite_gem"]
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "gempire:rutile_gem"
+    },
+    "title": "Rutile Name Here",
+    "description": "Create a Rutile",
+    "frame": "task",
+    "hidden": true
+  },
+  "parent": "gempire:create_injector",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["gempire:rutile_gem"]
+          }
+        ]
+      }
+    }
+  }
+}

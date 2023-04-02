@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "gempire:obsidian_gem"
+    },
+    "title": "Obsidian Name Here",
+    "description": "Create an Obsidian",
+    "frame": "task",
+    "hidden": true
+  },
+  "parent": "gempire:create_injector",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["gempire:obsidian_gem"]
+          }
+        ]
+      }
+    }
+  }
+}

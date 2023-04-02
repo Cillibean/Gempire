@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "gempire:morganite_gem"
+    },
+    "title": "Morganite Name Here",
+    "description": "Create a Morganite",
+    "frame": "task",
+    "hidden": true
+  },
+  "parent": "gempire:create_injector",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["gempire:morganite_gem"]
+          }
+        ]
+      }
+    }
+  }
+}
