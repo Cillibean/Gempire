@@ -36,6 +36,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Objects;
 import java.util.Random;
+import java.util.UUID;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
@@ -57,6 +58,7 @@ public class ItemGem extends Item {
     public EntityGem assigned_gem;
     public EntityGem gemToAssign;
     public boolean livingEntityHit = false;
+    public boolean isAssigned = false;
 
     public ItemGem(Properties properties) {
         super(properties);
@@ -77,9 +79,19 @@ public class ItemGem extends Item {
     public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity entity, InteractionHand hand) {
         if (entity instanceof EntityGem) {
             if (!(entity instanceof EntityPearl)) {
-                livingEntityHit = true;
-                System.out.println("gem interact");
-                gemToAssign = (EntityGem) entity;
+                if (((EntityGem) entity).assignedGem == null) {
+                    if (player.isShiftKeyDown()) {
+                        livingEntityHit = true;
+                        System.out.println("gem interact");
+                        gemToAssign = null;
+                        isAssigned = true;
+                    } else {
+                        livingEntityHit = true;
+                        System.out.println("gem interact");
+                        gemToAssign = (EntityGem) entity;
+                        isAssigned = false;
+                    }
+                }
             }
         }
         return super.interactLivingEntity(stack, player, entity, hand);
@@ -112,13 +124,19 @@ public class ItemGem extends Item {
                             }
                         }
                     } else {
+                    if (isAssigned) {
+                        playerIn.sendSystemMessage(Component.translatable("messages.gempire.entity.unassigned"));
+                        livingEntityHit = false;
+                        assigned_gem = null;
+                    } else {
                         playerIn.sendSystemMessage(Component.translatable("messages.gempire.entity.assigned"));
                         livingEntityHit = false;
-                    System.out.println("ToAssign to assigned");
+                        System.out.println("ToAssign to assigned");
                         assigned_gem = gemToAssign;
-                    System.out.println(assigned_gem);
-                    System.out.println(gemToAssign);
+                        System.out.println(assigned_gem);
+                        System.out.println(gemToAssign);
                     }
+                }
                 }
         return super.use(worldIn, playerIn, handIn);
     }
@@ -128,16 +146,15 @@ public class ItemGem extends Item {
     //(?i) means case sensitive
     public boolean formGem(Level world, @Nullable Player player, BlockPos pos, ItemStack stack, @Nullable ItemEntity item) {
         if (!world.isClientSide) {
+            System.out.println("form event");
+            System.out.println(assigned_gem);
+            System.out.println(gemToAssign);
             RegistryObject<EntityType<EntityPebble>> gemm = ModEntities.PEBBLE;
             String skinColorVariant = "";
             EntityGem gem = gemm.get().create(world);
             String namee = "";
             boolean dying = false;
             List<EntityGem> list;
-            System.out.println("setter");
-            assert gem != null;
-            gem.setAssignedGem(assigned_gem);
-            System.out.println(gem.getAssignedGem());
             if (player == null) {
                 dying = false;
             }
@@ -218,12 +235,19 @@ public class ItemGem extends Item {
                         gem.finalizeSpawn((ServerLevelAccessor) world, world.getCurrentDifficultyAt(item.blockPosition()), MobSpawnType.MOB_SUMMONED, null, null);
                     }
                 }
+                if (isAssigned) {
+                    gem.ASSIGNED_ID = UUID.randomUUID();
+                }
+                System.out.println(assigned_gem);
+                System.out.println(gemToAssign);
                 gem.setPos(pos.getX() + 0.5, pos.getY() + 1.0, pos.getZ() + 0.5);
                 gem.setHealth(gem.getMaxHealth());
                 gem.clearFire();
                 gem.removeAllEffects();
                 gem.setDeltaMovement(0, 0, 0);
                 gem.fallDistance = 0;
+                gem.setAssignedGem(assigned_gem);
+                System.out.println(getAssigned_gem());
                 GemFormEvent event = new GemFormEvent(gem, gem.blockPosition());
                 MinecraftForge.EVENT_BUS.post(event);
                 world.addFreshEntity(gem);

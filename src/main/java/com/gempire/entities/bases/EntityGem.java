@@ -103,6 +103,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     public ArrayList<Ability> ABILITY_POWERS = new ArrayList<>();
     public ArrayList<UUID> OWNERS = new ArrayList<>();
     public UUID FOLLOW_ID;
+    public UUID ASSIGNED_ID;
     public EntityGem assignedGem;
     public int[] GUARD_POS = new int[3];
     public ArrayList<IIdleAbility> idlePowers = new ArrayList<>();
@@ -168,8 +169,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.entityData.define(EntityGem.REBEL, false);
         this.entityData.set(EntityGem.REBEL, false);
         this.FOLLOW_ID = UUID.randomUUID();
-        this.assignedGem = null;
-        System.out.println(assignedGem);
+        this.ASSIGNED_ID = UUID.randomUUID();
         Arrays.fill(this.armorDropChances, 0);
         Arrays.fill(this.handDropChances, 0);
     }
@@ -182,6 +182,8 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         if(this.setSkinVariantOnInitialSpawn) {
             this.setSkinColorVariant(this.generateSkinColorVariant());
         } else this.setSkinColorVariant(this.initalSkinVariant);
+        setAssignedGem(((ItemGem)this.getGemItem().getDefaultInstance().getItem()).assigned_gem);
+        System.out.println(this.getAssignedGem());
         this.setHairVariant(this.generateHairVariant());
         this.setSkinColor(this.generatePaletteColor(PaletteType.SKIN));
         this.setHairColor(this.generatePaletteColor(PaletteType.HAIR));
@@ -197,6 +199,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.addAbilityGoals();
         this.applyAttributeAbilities();
         this.FOLLOW_ID = UUID.randomUUID();
+        this.ASSIGNED_ID = UUID.randomUUID();
         this.setMarkingVariant(this.generateMarkingVariant());
         this.setMarkingColor(this.generatePaletteColor(PaletteType.MARKINGS));
         this.setMarking2Variant(this.generateMarking2Variant());
@@ -234,6 +237,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         compound.putBoolean("emotional", this.isEmotional());
         this.writeOwners(compound);
         compound.putUUID("followID", this.FOLLOW_ID);
+        compound.putUUID("assignedID", this.ASSIGNED_ID);
         compound.putByte("movementType", this.getMovementType());
         compound.putInt("skinColorVariant", this.getSkinColorVariant());
         compound.putInt("skinColor", this.getSkinColor());
@@ -286,6 +290,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.setEmotional(compound.getBoolean("emotional"));
         this.readOwners(compound);
         if(compound.contains("followID"))this.FOLLOW_ID = compound.getUUID("followID");
+        if(compound.contains("assignedID"))this.ASSIGNED_ID = compound.getUUID("assignedID");
         this.setMovementType(compound.getByte("movementType"));
         this.setSkinColorVariant(compound.getInt("skinColorVariant"));
         this.setSkinColor(compound.getInt("skinColor"));
@@ -444,6 +449,9 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                             if (!this.isOwner(player)) {
                                 this.addOwner(player.getUUID());
                                 setFollow(player.getUUID());
+                                if (getAssignedGem() != null) {
+                                    setAssignedId(getAssignedGem().getUUID());
+                                }
                                 this.setMovementType((byte) 2);
                                 player.sendSystemMessage(Component.translatable("messages.gempire.entity.claimed"));
                                 this.playSound(getInstrument(), this.getSoundVolume(), (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
@@ -508,6 +516,9 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             //Cycles through the various movement types.
             this.navigation.stop();
             setFollow(player.getUUID());
+            if (getAssignedGem() != null) {
+                setAssignedId(getAssignedGem().getUUID());
+            }
             System.out.println(assignedGem);
             if (this.getMovementType() < 3) {
                 this.addMovementType(1);
@@ -706,6 +717,10 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
 
     public void setFollow(UUID id){
         this.FOLLOW_ID = id;
+    }
+
+    public void setAssignedId(UUID id){
+        this.ASSIGNED_ID = id;
     }
 
     public byte getMovementType(){
