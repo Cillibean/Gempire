@@ -552,6 +552,13 @@ public class ModBlocks {
                     .sound(SoundType.STONE)
             )
     );
+
+    /*public static final RegistryObject<Block> CRYSTALLINE_LOG = BLOCKS.register("crystalline_log", () ->
+            new RotatedPillarBlock(Block.Properties
+                    .of(Material.WOOD)
+                    .sound(SoundType.AMETHYST)
+            )
+    );*/
     public static final RegistryObject<Block> RUINED_MARBLE_STAIRS = BLOCKS.register("ruined_marble_stairs",
             () -> new StairBlock(() -> ModBlocks.RUINED_MARBLE_BLOCK.get().defaultBlockState(),
                     BlockBehaviour.Properties.of(Material.STONE).strength(1.5f).requiresCorrectToolForDrops()));

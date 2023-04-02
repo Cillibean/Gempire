@@ -355,6 +355,12 @@ public class ModItems {
                     new Item.Properties().tab(ModItemGroup.BLOCKS)
             )
     );
+    /*public static final RegistryObject<Item> CRYSTALLINE_LOG = ITEMS.register("crystalline_log", () ->
+            new BlockItem(
+                    ModBlocks.CRYSTALLINE_LOG.get(),
+                    new Item.Properties().tab(ModItemGroup.BLOCKS)
+            )
+    );*/
 
     public static final RegistryObject<Item> GILDED_LAPIS = ITEMS.register("gilded_lapis", () ->
             new Item(new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS).stacksTo(64)));

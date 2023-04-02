@@ -94,50 +94,50 @@ public class ItemGem extends Item {
         return super.interactLivingEntity(stack, player, entity, hand);
     }
 
+
     @Override
     public @NotNull InteractionResultHolder<ItemStack> use(Level worldIn, @NotNull Player playerIn, @NotNull InteractionHand handIn) {
         boolean spawned = false;
-            if (!worldIn.isClientSide) {
-                if (!livingEntityHit) {
-                    ItemStack itemstack = playerIn.getItemInHand(handIn);
-                    BlockHitResult raytraceresult = getPlayerPOVHitResult(worldIn, playerIn, ClipContext.Fluid.NONE);
-                        if (raytraceresult.getType() == HitResult.Type.MISS) {
+        if (!worldIn.isClientSide) {
+            if (!livingEntityHit) {
+                ItemStack itemstack = playerIn.getItemInHand(handIn);
+                BlockHitResult raytraceresult = getPlayerPOVHitResult(worldIn, playerIn, ClipContext.Fluid.NONE);
+                if (raytraceresult.getType() == HitResult.Type.MISS) {
+                    return super.use(worldIn, playerIn, handIn);
+                } else {
+                    if (raytraceresult.getType() == HitResult.Type.BLOCK) {
+                        BlockPos blockpos = raytraceresult.getBlockPos();
+                        Direction direction = raytraceresult.getDirection();
+                        if (!worldIn.mayInteract(playerIn, blockpos) || !playerIn.mayUseItemAt(blockpos.relative(direction), direction, itemstack)) {
                             return super.use(worldIn, playerIn, handIn);
-                        } else {
-                            if (raytraceresult.getType() == HitResult.Type.BLOCK) {
-                                BlockPos blockpos = raytraceresult.getBlockPos();
-                                Direction direction = raytraceresult.getDirection();
-                                if (!worldIn.mayInteract(playerIn, blockpos) || !playerIn.mayUseItemAt(blockpos.relative(direction), direction, itemstack)) {
-                                    return super.use(worldIn, playerIn, handIn);
-                                }
-
-                                if (worldIn.mayInteract(playerIn, blockpos) && playerIn.mayUseItemAt(blockpos, raytraceresult.getDirection(), itemstack)) {
-                                    spawned = this.formGem(worldIn, playerIn, blockpos, itemstack, null);
-                                }
-                            }
-                            //Problem with the claiming of gems ??
-                            if (!playerIn.isCreative() && spawned) {
-                                playerIn.getMainHandItem().shrink(1);
-                            }
                         }
-                    } else {
-                    if (isAssigned) {
-                        playerIn.sendSystemMessage(Component.translatable("messages.gempire.entity.unassigned"));
-                        livingEntityHit = false;
-                        assigned_gem = null;
-                    } else {
-                        playerIn.sendSystemMessage(Component.translatable("messages.gempire.entity.assigned"));
-                        livingEntityHit = false;
-                        System.out.println("ToAssign to assigned");
-                        assigned_gem = gemToAssign;
-                        System.out.println(assigned_gem);
-                        System.out.println(gemToAssign);
+
+                        if (worldIn.mayInteract(playerIn, blockpos) && playerIn.mayUseItemAt(blockpos, raytraceresult.getDirection(), itemstack)) {
+                            spawned = this.formGem(worldIn, playerIn, blockpos, itemstack, null);
+                        }
+                    }
+                    //Problem with the claiming of gems ??
+                    if (!playerIn.isCreative() && spawned) {
+                        playerIn.getMainHandItem().shrink(1);
                     }
                 }
+            } else {
+                if (isAssigned) {
+                    playerIn.sendSystemMessage(Component.translatable("messages.gempire.entity.unassigned"));
+                    livingEntityHit = false;
+                    assigned_gem = null;
+                } else {
+                    playerIn.sendSystemMessage(Component.translatable("messages.gempire.entity.assigned"));
+                    livingEntityHit = false;
+                    System.out.println("ToAssign to assigned");
+                    assigned_gem = gemToAssign;
+                    System.out.println(assigned_gem);
+                    System.out.println(gemToAssign);
+                }
             }
+        }
         return super.use(worldIn, playerIn, handIn);
     }
-
     //TODO: A lot needs fixing here
 
     //(?i) means case sensitive
