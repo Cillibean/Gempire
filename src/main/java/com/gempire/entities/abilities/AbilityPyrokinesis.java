@@ -5,6 +5,7 @@ import com.gempire.entities.abilities.interfaces.IEmotionalAbility;
 import com.gempire.entities.abilities.interfaces.IMeleeAbility;
 import com.gempire.entities.abilities.interfaces.IViolentAbility;
 import com.gempire.util.Abilities;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.core.BlockPos;
@@ -31,7 +32,7 @@ public class AbilityPyrokinesis extends Ability implements IMeleeAbility, IEmoti
     }
 
     @Override
-    public void fight(Entity entityIn, double damage) {
+    public void fight(LivingEntity entityIn, double damage) {
         entityIn.setSecondsOnFire(5);
     }
     @Override

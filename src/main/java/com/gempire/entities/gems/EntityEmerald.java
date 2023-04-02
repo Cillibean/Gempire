@@ -33,6 +33,7 @@ public class EntityEmerald extends EntityGem {
         super(type, worldIn);
     }
 
+
     public static AttributeSupplier.Builder registerAttributes() {
         return Mob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 75.0D)
@@ -105,7 +106,7 @@ public class EntityEmerald extends EntityGem {
     }
     public Abilities[] definiteAbilities(){
         return new Abilities[]{
-                //Abilities.NEGOTIATOR
+                Abilities.NEGOTIATOR, Abilities.RECALL
         };
     }
 

@@ -7,6 +7,7 @@ import com.gempire.entities.abilities.interfaces.IMeleeAbility;
 import com.gempire.entities.abilities.interfaces.IViolentAbility;
 import com.gempire.entities.bases.EntityGem;
 import com.gempire.util.Abilities;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -29,7 +30,7 @@ public class AbilityParalysis extends Ability implements IMeleeAbility, IEffectA
     }
 
     @Override
-    public void fight(Entity entityIn, double damage) {
+    public void fight(LivingEntity entityIn, double damage) {
         PathfinderMob entity = null;
         if(entityIn instanceof PathfinderMob){
             entity = (PathfinderMob) entityIn;

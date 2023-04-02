@@ -10,6 +10,7 @@ import java.util.HashMap;
 public abstract class Ability {
     public EntityGem holder;
     public Abilities ability;
+    public int cooldown;
     public static HashMap<Abilities, Class<? extends Ability>> ABILITY_FROM_ABILITIES = new HashMap<>();
 
     public Ability assignAbility(EntityGem holder){

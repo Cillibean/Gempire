@@ -7,17 +7,19 @@ import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
 import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.commands.Commands;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.phys.AABB;
 
+import java.awt.*;
 import java.util.List;
+import java.util.UUID;
 
-public class CommandGempirePoof extends CommandBase {
+public class CommandGempireRecall extends CommandBase {
     public static final SimpleCommandExceptionType FAILED_EXCEPTION = new SimpleCommandExceptionType(Component.translatable("commands.gempire.nounderstand"));
 
-    public CommandGempirePoof(String name, int permissionLevel, boolean enabled) {
+    public CommandGempireRecall(String name, int permissionLevel, boolean enabled) {
         super(name, permissionLevel, enabled);
     }
 
@@ -29,12 +31,22 @@ public class CommandGempirePoof extends CommandBase {
 
     public int execute(CommandSourceStack source) throws CommandSyntaxException {
         AABB aabb = source.getPlayerOrException().getBoundingBox().inflate(12.0D);
+        EntityGem emerald = null;
         List<EntityGem> gems = source.getLevel().getEntitiesOfClass(EntityGem.class, aabb);
-        for(EntityGem gem : gems){
-            if(gem.isOwner(source.getPlayerOrException())){
-                gem.hurt(DamageSource.GENERIC, gem.getMaxHealth());
+        for (EntityGem gem : gems) {
+            if (gem.canRecall()) {
+                if (gem.isOwner(source.getPlayerOrException())) {
+                    emerald = gem;
+                }
             }
         }
-        return Command.SINGLE_SUCCESS;
+        if (emerald != null) {
+            emerald.runRecallCommand(source.getPlayerOrException());
+            return Command.SINGLE_SUCCESS;
+        } else {
+            source.getPlayerOrException().sendSystemMessage(Component.translatable("commands.gempire.nounderstand"));
+            throw CommandGempireLocate.FAILED_EXCEPTION.create();
+        }
     }
+
 }
