@@ -238,14 +238,10 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
                 }
             }
             BlockPos seedPos = this.getBlockPos().offset(new BlockPos(0, -Math.ceil(GemSeedTE.DRAIN_SIZE / 2) - 1, 0));
-            for (int i = 0; i < GemSeedTE.DRAIN_SIZE; i++) {
-                BlockState state = this.level.getBlockState(seedPos);
-                if (state != Blocks.AIR.defaultBlockState() &&
-                        !(state.getBlock() instanceof LiquidBlock) &&
-                        state != ModBlocks.GEM_SEED_BLOCK.get().defaultBlockState()) {
-                    break;
-                }
-                seedPos = seedPos.offset(0, -1, 0);
+            while(this.level.getBlockState(seedPos) == Blocks.AIR.defaultBlockState() ||
+                    this.level.getBlockState(seedPos).getBlock() instanceof LiquidBlock ||
+                    this.level.getBlockState(seedPos) == ModBlocks.GEM_SEED_BLOCK.get().defaultBlockState()) {
+                seedPos = seedPos.offset(0, -GemSeedTE.DRAIN_SIZE, 0);
             }
             Item primer = itemHandler.getStackInSlot(PRIME_INPUT_SLOT_INDEX).getItem();
             GemSeedBlock seedBlock = (GemSeedBlock) ModBlocks.GEM_SEED_BLOCK.get();
