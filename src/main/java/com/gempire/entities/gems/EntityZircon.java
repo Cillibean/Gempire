@@ -262,7 +262,7 @@ public class EntityZircon extends EntityVaryingGem {
                         tool.enchant(ModEnchants.VANILLA_ENCHANTMENTS.get(this.getEnchantPage()), level);
                         this.setItem(0, ItemStack.EMPTY);
                         this.setItem(2, ItemStack.EMPTY);
-                        EntityShale.decreaseExp(this.currentPlayer, xp);
+                        decreaseExp(this.currentPlayer, xp);
                     }
                     else{
                         this.currentPlayer.sendSystemMessage(Component.translatable("messages.gempire.entity.enchant_not_apply"));

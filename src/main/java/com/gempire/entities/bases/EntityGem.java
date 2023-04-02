@@ -586,23 +586,15 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                 setAssignedId(getAssignedGem().getUUID());
             }
             System.out.println(assignedGem);
-            if (this.getMovementType() < 3) {
+            if (getAssignedGem() != null ? this.getMovementType() < 3 : this.getMovementType() <2) {
                 this.addMovementType(1);
                 switch (this.getMovementType()) {
-                    case 1 -> {
-                        player.sendSystemMessage(Component.translatable("messages.gempire.entity.wander"));
-                    }
-                    case 2 -> {
-                        player.sendSystemMessage(Component.translatable("messages.gempire.entity.follow.owner"));
-                    }
-                    case 3 -> {
-                        player.sendSystemMessage(Component.translatable("messages.gempire.entity.follow.assigned"));
-                    }
-                    default -> {
-                        player.sendSystemMessage(Component.translatable("messages.gempire.entity.stay"));
-                    }
+                    case 1 -> player.sendSystemMessage(Component.translatable("messages.gempire.entity.wander"));
+                    case 2 -> player.sendSystemMessage(Component.translatable("messages.gempire.entity.follow.owner"));
+                    case 3 -> player.sendSystemMessage(Component.translatable("messages.gempire.entity.follow.assigned"));
+                    default -> player.sendSystemMessage(Component.translatable("messages.gempire.entity.stay"));
                 }
-            } else if (this.getMovementType() == 3) {
+            } else if (getAssignedGem() != null ? this.getMovementType() == 3 : this.getMovementType() == 2) {
                 this.setMovementType((byte) 0);
                 player.sendSystemMessage(Component.translatable("messages.gempire.entity.stay"));
                 this.GUARD_POS[0] = (int) this.getX();
@@ -1521,19 +1513,14 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
 
     public void runRecallCommand(ServerPlayer player) {
         if(this.consumeItemCheck(Items.ENDER_EYE)) {
-            BlockPos pos = this.getOnPos();
-            AABB aabb = this.getBoundingBox().inflate(12.0D);
-            List<EntityGem> gems = this.getLevel().getEntitiesOfClass(EntityGem.class, aabb);
             int x = player.getRespawnPosition().getX();
             int y = player.getRespawnPosition().getY();
             int z = player.getRespawnPosition().getZ();
-            if (player.totalExperience >= 40) {
-                if (gems.size() == 1) {
+            if (player.isCreative() ? player.experienceLevel >= 0 : player.experienceLevel >= 20) {
                     player.teleportTo(x, y, z);
                     this.teleportTo(x, y, z);
                     player.sendSystemMessage(Component.translatable("commands.gempire.recall"));
                     decreaseExp(player, 20);
-                }
             } else {
                 player.sendSystemMessage(Component.translatable(  "messages.gempire.entity.player_need_xp"));
             }

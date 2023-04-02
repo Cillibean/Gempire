@@ -80,7 +80,7 @@ public class ItemGem extends Item {
         if (entity instanceof EntityGem) {
             if (!(entity instanceof EntityPearl)) {
                 if (((EntityGem) entity).assignedGem == null) {
-                    if (player.isShiftKeyDown()) {
+                    if (player.isCrouching()) {
                         livingEntityHit = true;
                         System.out.println("gem interact");
                         gemToAssign = null;

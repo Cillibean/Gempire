@@ -51,6 +51,7 @@ public class ModAbilities {
         Ability.ABILITY_FROM_ABILITIES.put(Abilities.RECALL, AbilityRecall.class);
 
         Ability.ABILITY_FROM_ABILITIES.put(Abilities.ESSENCE_BREWER, AbilityBrewEssence.class);
+        Ability.ABILITY_FROM_ABILITIES.put(Abilities.REFINERY, AbilityPrismaticRefinery.class);
 
         Ability.ABILITY_FROM_ABILITIES.put(Abilities.ANGLER, AbilityAngler.class);
     }

@@ -91,29 +91,6 @@ public class EntityShale extends EntityStarterGem {
         };
     }
 
-    public static void decreaseExp(Player player, float amount) {
-        if (player.totalExperience - amount <= 0)
-        {
-            player.experienceLevel = 0;
-            player.experienceProgress = 0;
-            player.totalExperience = 0;
-            return;
-        }
-        player.totalExperience -= amount;
-        if (player.experienceProgress * (float)player.getXpNeededForNextLevel() <= amount)
-        {
-            amount -= player.experienceProgress * (float)player.getXpNeededForNextLevel();
-            player.experienceProgress = 1.0f;
-            player.experienceLevel--;
-        }
-        while (player.getXpNeededForNextLevel() < amount)
-        {
-            amount -= player.getXpNeededForNextLevel();
-            player.experienceLevel--;
-        }
-        player.experienceProgress -= amount / (float)player.getXpNeededForNextLevel();
-    }
-
     @Override
     public int generateAbilitySlots() {
         return 1;

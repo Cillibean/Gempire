@@ -105,7 +105,7 @@ public class EntityBismuth extends EntityGem {
     }
     public Abilities[] definiteAbilities(){
         return new Abilities[]{
-                //Abilities.BUILDER, Abilities.REFINERY
+                Abilities.REFINERY// ,Abilities.BUILDER
         };
     }
 

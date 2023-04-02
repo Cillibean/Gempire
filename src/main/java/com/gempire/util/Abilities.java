@@ -14,7 +14,7 @@ public enum Abilities {
     STERN(10, 3),
     FIRST_AID(11, 1),
     HEALER(12, 1),
-    NEGOTIATOR(13, 5),
+    NEGOTIATOR(13, 2),
     FERROKINESIS(14, 5),
     RECYCLER(15, 7),
     HYDROKINESIS(16, 1),
