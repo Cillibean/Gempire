@@ -75,7 +75,7 @@ public class EntityGarnet extends EntityVaryingGem {
     @Override
     public int[] NeglectedColors() {
         return new int[]{
-                0,2,3,4,6,7,8,9,10,11,12,13,14,17
+                0,2,3,4,6,7,8,9,10,11,12,13,14,16,17
         };
     }
     public Abilities[] possibleAbilities(){
@@ -158,6 +158,9 @@ public class EntityGarnet extends EntityVaryingGem {
 
     public boolean hasSkinColorVariant() {
         return true;
+    }
+    public int generateSkinVariant() {
+        return 0;
     }
 
     public int generateOutfitVariant(){

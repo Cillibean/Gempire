@@ -26,6 +26,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.Random;
 
 public class GemFormation {
@@ -68,14 +69,17 @@ public class GemFormation {
         if (gem.chromaColourRequired) {
             if (getColorFromChroma() == chromaColour) {
                 String gemtoform = this.EvaluateCruxes();
-                if (gemtoform == "") {
+                if (Objects.equals(gemtoform, "")) {
                     //this.Drain(GemFormation.getBlockPosInVolume(this.world, this.pos, this.volumeToCheck));
                     return;
                 }
                 try {
                     boolean isVanillaGem = false;
                     for (String gemama : AddonHandler.VANILLA_GEMS) {
-                        if (gemtoform == gemama) isVanillaGem = true;
+                        if (Objects.equals(gemtoform, gemama)) {
+                            isVanillaGem = true;
+                            break;
+                        }
                     }
                     if (isVanillaGem) {
                         gemm = (RegistryObject<EntityType<EntityPebble>>) ModEntities.class.getField(gemtoform.toUpperCase()).get(null);
