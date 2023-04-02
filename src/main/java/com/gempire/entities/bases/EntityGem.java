@@ -600,6 +600,9 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                 this.GUARD_POS[0] = (int) this.getX();
                 this.GUARD_POS[1] = (int) this.getY();
                 this.GUARD_POS[2] = (int) this.getZ();
+            } else if (getAssignedGem() == null && this.getMovementType() == 3)
+            {
+                this.setMovementType((byte) 0);
             }
         }
     }

@@ -24,9 +24,11 @@ public class ItemRejuvenator extends ItemDestabilizer {
     @Override
     public void poofGem(LivingEntity pTarget) {
         if (pTarget.isAlive()) {
-            if (pTarget instanceof EntityGem)
+            if (pTarget instanceof EntityGem) {
                 ((EntityGem) pTarget).resetOwners();
-            pTarget.hurt(DamageSource.GENERIC, pTarget.getMaxHealth());
+                ((EntityGem) pTarget).setRebelled(false);
+                pTarget.hurt(DamageSource.GENERIC, pTarget.getMaxHealth());
+            }
         }
     }
     @Override

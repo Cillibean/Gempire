@@ -1,7 +1,6 @@
 package com.gempire.items;
 
 import com.gempire.entities.bases.EntityGem;
-import com.gempire.entities.gems.EntityPearl;
 import com.gempire.entities.gems.starter.EntityPebble;
 import com.gempire.events.GemFormEvent;
 import com.gempire.init.AddonHandler;
@@ -78,19 +77,17 @@ public class ItemGem extends Item {
     @Override
     public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity entity, InteractionHand hand) {
         if (entity instanceof EntityGem) {
-            if (!(entity instanceof EntityPearl)) {
-                if (((EntityGem) entity).assignedGem == null) {
-                    if (player.isCrouching()) {
-                        livingEntityHit = true;
-                        System.out.println("gem interact");
-                        gemToAssign = null;
-                        isAssigned = true;
-                    } else {
-                        livingEntityHit = true;
-                        System.out.println("gem interact");
-                        gemToAssign = (EntityGem) entity;
-                        isAssigned = false;
-                    }
+            if (((EntityGem) entity).assignedGem == null) {
+                if (player.isCrouching()) {
+                    livingEntityHit = true;
+                    System.out.println("gem interact");
+                    gemToAssign = null;
+                    isAssigned = true;
+                } else {
+                    livingEntityHit = true;
+                    System.out.println("gem interact");
+                    gemToAssign = (EntityGem) entity;
+                    isAssigned = false;
                 }
             }
         }
@@ -137,7 +134,7 @@ public class ItemGem extends Item {
                         System.out.println(gemToAssign);
                     }
                 }
-                }
+            }
         return super.use(worldIn, playerIn, handIn);
     }
 
