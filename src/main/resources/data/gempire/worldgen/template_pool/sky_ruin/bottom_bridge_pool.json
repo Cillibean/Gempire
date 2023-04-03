@@ -1,0 +1,15 @@
+{
+  "name": "gempire:sky_ruin/bottom_bridge_pool",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "projection": "rigid",
+        "location": "gempire:sky_ruin_bottom_bridge_1",
+        "processors": "minecraft:empty"
+      }
+    }
+  ]
+}
