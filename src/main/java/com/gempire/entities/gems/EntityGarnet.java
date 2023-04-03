@@ -58,7 +58,7 @@ public class EntityGarnet extends EntityVaryingGem {
 
     @Override
     public int generateHairVariant() {
-        return this.random.nextInt(6);
+        return this.random.nextInt(7);
     }
 
     @Override
@@ -164,7 +164,7 @@ public class EntityGarnet extends EntityVaryingGem {
     }
 
     public int generateOutfitVariant(){
-        return this.random.nextInt(4);
+        return this.random.nextInt(6);
     }
 
     public int generateInsigniaVariant(){

@@ -49,6 +49,12 @@ public class ModelGarnet<T extends EntityGem> extends ModelGem<T> {
 
 		PartDefinition Hair2 = Hair5.addOrReplaceChild("Hair2", CubeListBuilder.create().texOffs(28, 80).addBox(-5.0F, -16.0F, -4.0F, 10.0F, 16.0F, 10.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
 
+		PartDefinition Puff1 = Hair5.addOrReplaceChild("Puff1", CubeListBuilder.create().texOffs(96, 69).addBox(4.0F, -11.0F, -1.0F, 4.0F, 10.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
+
+		PartDefinition Puff2 = Hair5.addOrReplaceChild("Puff2", CubeListBuilder.create().texOffs(112, 69).addBox(-8.0F, -11.0F, -1.0F, 4.0F, 10.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
+
+		PartDefinition Bangs = Hair5.addOrReplaceChild("Bangs", CubeListBuilder.create().texOffs(104, 83).addBox(-4.0F, -9.5F, -7.0F, 8.0F, 4.0F, 4.0F, new CubeDeformation(0.2F, 0.2F, 0.2F)), PartPose.offset(0.0F, 0.0F, 0.0F));
+
 		PartDefinition ArmLeft = partdefinition.addOrReplaceChild("ArmLeft", CubeListBuilder.create().texOffs(80, 0).addBox(0.0F, -1.3F, -1.0F, 2.0F, 13.0F, 2.0F, new CubeDeformation(0.3F)), PartPose.offset(4.5F, -3.0F, 0.0F));
 
 		PartDefinition ArmPuffLeft = ArmLeft.addOrReplaceChild("ArmPuffLeft", CubeListBuilder.create().texOffs(116, 6).addBox(-0.35F, 6.0F, -1.5F, 3.0F, 4.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));

@@ -37,7 +37,7 @@ public class ModelZircon<T extends EntityGem> extends ModelGem<T> {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
 
-		PartDefinition Body = partdefinition.addOrReplaceChild("Body", CubeListBuilder.create().texOffs(32, 12).addBox(-3.0F, 0.1F, -1.9F, 6.0F, 10.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 1.8F, 0.0F));
+		PartDefinition Body = partdefinition.addOrReplaceChild("Body", CubeListBuilder.create().texOffs(32, 12).addBox(-3.0F, 0.1F, -1.9F, 6.0F, 10.0F, 4.0F, new CubeDeformation(-0.1F, 0.1F, -0.1F)), PartPose.offset(0.0F, 1.8F, 0.0F));
 
 		PartDefinition Shoulders = Body.addOrReplaceChild("Shoulders", CubeListBuilder.create().texOffs(0, 43).addBox(-7.0F, 0.0F, -2.5F, 14.0F, 3.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
 
@@ -47,15 +47,15 @@ public class ModelZircon<T extends EntityGem> extends ModelGem<T> {
 
 		PartDefinition RArmPuff = RightArm.addOrReplaceChild("RArmPuff", CubeListBuilder.create().texOffs(0, 22).mirror().addBox(-2.5F, 6.3F, -1.5F, 3.0F, 3.0F, 3.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offset(0.0F, 0.2F, 0.0F));
 
-		PartDefinition Head = partdefinition.addOrReplaceChild("Head", CubeListBuilder.create().texOffs(0, 0).addBox(-4.0F, -7.8F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 1.8F, 0.0F));
+		PartDefinition Head = partdefinition.addOrReplaceChild("Head", CubeListBuilder.create().texOffs(0, 0).addBox(-4.0F, -7.8F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(-0.3F, -0.2F, -0.3F)), PartPose.offset(0.0F, 1.8F, 0.0F));
 
-		PartDefinition Hat1 = Head.addOrReplaceChild("Hat1", CubeListBuilder.create().texOffs(28, 28).addBox(-4.0F, -9.8F, -6.0F, 8.0F, 4.0F, 10.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
+		PartDefinition Hat1 = Head.addOrReplaceChild("Hat1", CubeListBuilder.create().texOffs(28, 28).addBox(-4.0F, -9.5F, -6.0F, 8.0F, 4.0F, 10.0F, new CubeDeformation(-0.3F, -0.2F, -0.3F)), PartPose.offset(0.0F, 0.0F, 0.0F));
 
 		PartDefinition Nose = Head.addOrReplaceChild("Nose", CubeListBuilder.create().texOffs(0, 0).addBox(-0.2F, -3.2F, -5.7F, 1.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(-0.3F, -0.1F, 0.0F));
 
-		PartDefinition EyeGlass = Head.addOrReplaceChild("EyeGlass", CubeListBuilder.create().texOffs(0, 17).addBox(-3.4F, -6.2F, -4.15F, 3.0F, 4.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
+		PartDefinition EyeGlass = Head.addOrReplaceChild("EyeGlass", CubeListBuilder.create().texOffs(0, 17).addBox(-4.0F, -6.2F, -4.0F, 8.0F, 4.0F, 0.0F, new CubeDeformation(-0.1F, -0.1F, 0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
 
-		PartDefinition Hat2 = Head.addOrReplaceChild("Hat2", CubeListBuilder.create().texOffs(32, 45).addBox(-4.0F, -12.8F, -4.0F, 8.0F, 5.0F, 8.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
+		PartDefinition Hat2 = Head.addOrReplaceChild("Hat2", CubeListBuilder.create().texOffs(32, 45).addBox(-4.0F, -12.6F, -4.0F, 8.0F, 5.0F, 8.0F, new CubeDeformation(-0.3F, 0.0F, -0.3F)), PartPose.offset(0.0F, 0.0F, 0.0F));
 
 		PartDefinition RightLeg = partdefinition.addOrReplaceChild("RightLeg", CubeListBuilder.create().texOffs(55, 24).mirror().addBox(-1.0F, 0.0F, -1.0F, 2.0F, 12.0F, 2.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offset(-1.9F, 12.0F, 0.0F));
 
