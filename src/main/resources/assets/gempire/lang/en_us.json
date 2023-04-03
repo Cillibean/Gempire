@@ -433,8 +433,8 @@
   "messages.gempire.entity.need_lapis": "She needs more Lapis Lazuli...",
 
   "itemGroup.gemstones" : "Gemstones",
-  "itemGroup.items" : "Items",
-  "itemGroup.blocks" : "Blocks",
+  "itemGroup.gempire_items" : "Items",
+  "itemGroup.gempire_blocks" : "Blocks",
 
   "fluid.gempire.pink_essence": "Pink Essence",
   "fluid.gempire.blue_essence": "Blue Essence",

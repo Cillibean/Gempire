@@ -1,7 +1,7 @@
 {
   "name": "Injecting",
-  "icon": "gempire:special_chroma",
-  "advancement": "gempire:obtain_essence",
+  "icon": "gempire:tank_block",
+  "advancement": "gempire:root",
   "category": "gempire:gem_creation_category",
   "pages": [
     {

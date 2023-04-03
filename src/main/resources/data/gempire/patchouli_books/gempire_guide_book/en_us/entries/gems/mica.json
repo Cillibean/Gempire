@@ -1,0 +1,20 @@
+{
+  "name": "Mica",
+  "advancement": "gempire:root",
+  "icon": "gempire:mica_gem",
+  "category": "gempire:gems_category",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "gempire:mica",
+      "name": "A Mica",
+      "rotate": "true",
+      "text": "Mica"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "gempire:mica_gem",
+      "text": "Recipe for Micas"
+    }
+  ]
+}

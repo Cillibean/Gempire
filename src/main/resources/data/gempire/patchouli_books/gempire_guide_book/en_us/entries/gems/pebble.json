@@ -1,0 +1,20 @@
+{
+  "name": "Pebble",
+  "advancement": "gempire:root",
+  "icon": "gempire:pebble_gem",
+  "category": "gempire:gems_category",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "gempire:pebble",
+      "name": "A Pebble",
+      "rotate": "true",
+      "text": "Pebble"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "gempire:pebble_gem",
+      "text": "Recipe for Pebbles"
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "name": "Creating a Power Crystal",
+  "icon": "gempire:power_crystal_block",
+  "advancement": "gempire:root",
+  "category": "gempire:gem_creation_category",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "link_recipe ": true,
+      "item": "gempire:mica_gem",
+      "text": "In order to make a Power Crystal, you will need a Mica. Please shift click the gem icon."
+    },
+    {
+      "type": "patchouli:multiblock",
+      "name": "Drill",
+      "text": "In order to have your Mica construct a Power Crystal, you will need to build this multiblock, then interact with her with a pickaxe in your hand.",
+      "multiblock": {
+        "pattern": [
+          [
+            " I ",
+            "I0I",
+            " I "
+          ]
+        ],
+        "mapping": {
+          "I": "minecraft:glass",
+          "0": "minecraft:redstone_block"
+        },
+        "symmetrical": true
+      }
+    }
+  ]
+}

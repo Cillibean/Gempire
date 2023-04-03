@@ -1,0 +1,25 @@
+{
+  "name": "Shale",
+  "advancement": "gempire:root",
+  "icon": "gempire:shale_gem",
+  "category": "gempire:gems_category",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "gempire:shale",
+      "name": "A Shale",
+      "rotate": "true",
+      "text": "Shale"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "gempire:shale_gem",
+      "text": "Recipe for Shales"
+    },
+    {
+      "type": "patchouli:crafting",
+      "text": "Shales can be given Gem Slush Buckets and they will create essence, this will take 10 seconds to complete",
+      "recipe": "gempire:gem_slush_bucket"
+    }
+  ]
+}

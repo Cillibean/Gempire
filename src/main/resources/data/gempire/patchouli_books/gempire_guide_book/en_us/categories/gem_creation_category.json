@@ -1,6 +1,6 @@
 {
-  "name": "Gem Creation",
+  "name": "Getting Started",
   "description": "Learn how to make your very own gems!",
-  "icon": "gempire:drill_block",
-  "secret": "true"
+  "icon": "gempire:tank_block",
+  "secret": "false"
 }
