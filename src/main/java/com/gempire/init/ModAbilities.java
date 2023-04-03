@@ -46,6 +46,7 @@ public class ModAbilities {
         Ability.ABILITY_FROM_ABILITIES.put(Abilities.GUARD, AbilityGuard.class);
         Ability.ABILITY_FROM_ABILITIES.put(Abilities.VEHICLE, AbilityVehicle.class);
         Ability.ABILITY_FROM_ABILITIES.put(Abilities.SCOUT, AbilityScout.class);
+        Ability.ABILITY_FROM_ABILITIES.put(Abilities.KINDERGARTENER, AbilityKindergardener.class);
 
         Ability.ABILITY_FROM_ABILITIES.put(Abilities.NEGOTIATOR, AbilityNegotiator.class);
         Ability.ABILITY_FROM_ABILITIES.put(Abilities.RECALL, AbilityRecall.class);

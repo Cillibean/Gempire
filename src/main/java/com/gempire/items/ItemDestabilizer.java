@@ -30,7 +30,7 @@ public class ItemDestabilizer extends Item {
     public void poofGem(LivingEntity pTarget) {
         if (pTarget.isAlive()){
             if (pTarget instanceof EntityGem) {
-                pTarget.hurt(DamageSource.GENERIC, pTarget.getMaxHealth());
+                pTarget.hurt(DamageSource.GENERIC,pTarget.getMaxHealth() * 2);
             }
         }
     }

@@ -3,16 +3,13 @@ package com.gempire.init;
 import com.gempire.Gempire;
 import com.gempire.items.*;
 import com.gempire.util.ModItemGroup;
-import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Gempire.MODID);
@@ -394,7 +391,13 @@ public class ModItems {
             new ItemDestabilizer(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(1).durability(25)));
 
    public static final RegistryObject<Item> PINK_REJUVENATOR = ITEMS.register("pink_rejuvenator", () ->
-            new ItemRejuvenator(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(1).durability(15)));
+            new ItemPinkRejuvenator(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(1).durability(15)));
+    public static final RegistryObject<Item> YELLOW_REJUVENATOR = ITEMS.register("yellow_rejuvenator", () ->
+            new ItemYellowRejuvenator(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(1).durability(20)));
+    public static final RegistryObject<Item> WHITE_REJUVENATOR = ITEMS.register("white_rejuvenator", () ->
+            new ItemWhiteRejuvenator(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(1).durability(20)));
+    public static final RegistryObject<Item> BLUE_REJUVENATOR = ITEMS.register("blue_rejuvenator", () ->
+            new ItemBlueRejuvenator(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(1).durability(10)));
 
     public static final RegistryObject<Item> ENERGY_INTERFACE = ITEMS.register("energy_interface", () ->
             new Item(new Item.Properties().stacksTo(64)));

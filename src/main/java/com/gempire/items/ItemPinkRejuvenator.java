@@ -9,12 +9,11 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.player.Player;
 
-public class ItemRejuvenator extends ItemDestabilizer {
+public class ItemPinkRejuvenator extends ItemDestabilizer {
     private final Multimap<Attribute, AttributeModifier> defaultModifiers;
 
-    public ItemRejuvenator(Properties properties){
+    public ItemPinkRejuvenator(Properties properties){
         super(properties);
         ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
         builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Weapon modifier", -3F, AttributeModifier.Operation.ADDITION));
@@ -27,7 +26,7 @@ public class ItemRejuvenator extends ItemDestabilizer {
             if (pTarget instanceof EntityGem) {
                 ((EntityGem) pTarget).resetOwners();
                 ((EntityGem) pTarget).setRebelled(false);
-                pTarget.hurt(DamageSource.GENERIC, pTarget.getMaxHealth());
+                pTarget.hurt(DamageSource.GENERIC, pTarget.getMaxHealth() * 2);
             }
         }
     }

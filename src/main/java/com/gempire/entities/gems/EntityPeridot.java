@@ -3,6 +3,7 @@ package com.gempire.entities.gems;
 import com.gempire.entities.ai.EntityAIFollowAssigned;
 import com.gempire.entities.ai.EntityAIFollowOwner;
 import com.gempire.entities.ai.EntityAIWander;
+import com.gempire.entities.ai.EntityAiAssignGems;
 import com.gempire.entities.bases.EntityGem;
 import com.gempire.util.Abilities;
 import com.gempire.util.GemPlacements;
@@ -50,6 +51,7 @@ public class EntityPeridot extends EntityGem {
         this.goalSelector.addGoal(7, new EntityAIWander(this, 1.0D));
         this.goalSelector.addGoal(7, new EntityAIFollowAssigned(this, 1.0D));
         this.goalSelector.addGoal(7, new EntityAIFollowOwner(this, 1.0D));
+        //this.goalSelector.addGoal(2, new EntityAiAssignGems(this,1));
         this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, Mob.class, 6.0F, 1.0D, 1.2D, (mob)-> mob.getClassification(true)== MobCategory.MONSTER));
     }
 
@@ -99,7 +101,7 @@ public class EntityPeridot extends EntityGem {
     }
     public Abilities[] definiteAbilities(){
         return new Abilities[]{
-                //Abilities.TECHNICIAN, Abilities.FERROKINESIS
+                Abilities.KINDERGARTENER//Abilities.TECHNICIAN, Abilities.FERROKINESIS
         };
     }
 

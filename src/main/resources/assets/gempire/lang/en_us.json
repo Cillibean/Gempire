@@ -107,11 +107,17 @@
   "item.gempire.spodumene_piece": "Amphibian Gel",
   "item.gempire.ice_shard": "Ice Shard",
   "item.gempire.acid_spit": "Acid Spit",
+
   "item.gempire.white_destabilizer": "White Destabilizer",
   "item.gempire.yellow_destabilizer": "Yellow Destabilizer",
   "item.gempire.blue_destabilizer": "Blue Destabilizer",
   "item.gempire.pink_destabilizer": "Pink Destabilizer",
+
   "item.gempire.pink_rejuvenator": "Pink Rejuvenator",
+  "item.gempire.blue_rejuvenator": "Blue Rejuvenator",
+  "item.gempire.yellow_rejuvenator": "Yellow Rejuvenator",
+  "item.gempire.white_rejuvenator": "White Rejuvenator",
+
   "item.gempire.injector_panel": "Injector Remote",
   "item.gempire.prismatic_ingot": "Prismatic Ingot",
   "item.gempire.gem_scrap": "Prismatic Scraps",
@@ -495,6 +501,7 @@
   "ability.gempire.abundance": "Abundance (NYI)",
   "ability.gempire.organization": "Organization (NYI)",
   "ability.gempire.fortunate": "Fortunate (NYI)",
+  "ability.gempire.kindergardener": "Kindergardener (NYI)",
 
   "screens.gempire.health": "Health",
   "screens.gempire.damage": "Attack Damage",

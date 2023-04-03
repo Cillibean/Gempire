@@ -1,8 +1,11 @@
 package com.gempire.entities.gems;
 
+import com.gempire.entities.abilities.AbilityKindergardener;
+import com.gempire.entities.abilities.base.Ability;
 import com.gempire.entities.ai.EntityAIFollowAssigned;
 import com.gempire.entities.ai.EntityAIFollowOwner;
 import com.gempire.entities.ai.EntityAIWander;
+import com.gempire.entities.ai.EntityAiAssignGems;
 import com.gempire.entities.bases.EntityGem;
 import com.gempire.util.Abilities;
 import com.gempire.util.GemPlacements;
@@ -61,6 +64,7 @@ public class EntityAquamarine extends EntityGem implements FlyingAnimal {
         this.goalSelector.addGoal(7, new EntityAIFollowAssigned(this, 1.0D));
         this.goalSelector.addGoal(7, new EntityAIWander(this, 1.0D));
         this.goalSelector.addGoal(7, new EntityAIFollowOwner(this, 1.0D));
+        //this.goalSelector.addGoal(2, new EntityAiAssignGems(this,1));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Mob.class, 1, false, false, (p_234199_0_) -> p_234199_0_.getClassification(true) == MobCategory.MONSTER));
 
     }
@@ -122,7 +126,7 @@ public class EntityAquamarine extends EntityGem implements FlyingAnimal {
     }
     public Abilities[] definiteAbilities(){
         return new Abilities[]{
-                Abilities.PARALYSIS, Abilities.HYDROKINESIS
+                Abilities.PARALYSIS, Abilities.HYDROKINESIS, Abilities.KINDERGARTENER
         };
     }
 
