@@ -118,17 +118,5 @@
 			"translation": [0, -4, -0.25],
 			"scale": [0.5, 0.5, 0.5]
 		}
-	},
-	"loader": "forge:separate-perspective",
-	"base": {
-		"parent": "gempire:item/pink_rejuvenator_held"
-	},
-	"perspectives": {
-		"gui": {
-			"parent": "minecraft:item/generated",
-			"textures": {
-				"layer0": "gempire:items/pink_rejuvenator_held"
-			}
-		}
 	}
 }

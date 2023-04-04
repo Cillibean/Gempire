@@ -37,12 +37,12 @@
   "block.gempire.drill_block": "Drill",
   "block.gempire.shell_block": "Shell",
   "block.gempire.tank_block": "Injector Core",
-  "block.gempire.floatanium_reactor": "Mysterious Block",
   "block.gempire.power_crystal_block": "Power Crystal",
+  "block.gempire.power_crystal_block_tier_2": "Advanced Power Crystal",
 
   "block.gempire.ice_spike": "Ice Spike",
 
-  "block.gempire.basic_wire_block": "Basic Wire",
+  "block.gempire.prismatic_block": "Prismatic Block",
 
   "block.gempire.white_chroma_crystal": "White Chroma Crystal",
   "block.gempire.orange_chroma_crystal": "Orange Chroma Crystal",
@@ -127,11 +127,6 @@
   "item.gempire.yellow_essence": "Yellow Essence",
   "item.gempire.blue_essence": "Blue Essence",
   "item.gempire.white_essence": "White Essence",
-
-  "item.gempire.basic_wire_block": "Tech Scraps",
-  "item.gempire.energy_interface": "Tech Scraps",
-  "item.gempire.fluid_interface": "Tech Scraps",
-  "item.gempire.stack_interface": "Tech Scraps",
 
   "item.gempire.ruby_gem": "Ruby Gem",
   "item.gempire.blueruby_gem": "Blue Ruby Gem",
@@ -477,7 +472,7 @@
   "ability.gempire.prospector": "Prospector",
   "ability.gempire.spelunker": "Spelunker",
   "ability.gempire.torchbearer": "Torchbearer",
-  "ability.gempire.decoy": "Decoy (NYI)",
+  "ability.gempire.lure": "Lure",
   "ability.gempire.jester": "Jester (NYI)",
   "ability.gempire.angler": "Angler",
   "ability.gempire.farmer": "Farmer (NYI)",

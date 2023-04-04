@@ -17,30 +17,7 @@ public class ModPacketHandler {
 
     public static void registerPackets(){
         int networkId = 0;
-        ModPacketHandler.INSTANCE.registerMessage(
-                networkId++,
-                C2SRequestUpdateInjectorValves.class,
-                C2SRequestUpdateInjectorValves::encode,
-                C2SRequestUpdateInjectorValves::decode,
-                C2SRequestUpdateInjectorValves::handle);
-        ModPacketHandler.INSTANCE.registerMessage(
-                networkId++,
-                C2SRequestInject.class,
-                C2SRequestInject::encode,
-                C2SRequestInject::decode,
-                C2SRequestInject::handle);
-        ModPacketHandler.INSTANCE.registerMessage(
-                networkId++,
-                C2SRequestDumpFluidsInjector.class,
-                C2SRequestDumpFluidsInjector::encode,
-                C2SRequestDumpFluidsInjector::decode,
-                C2SRequestDumpFluidsInjector::handle);
-        /*ModPacketHandler.INSTANCE.registerMessage(
-                networkId++,
-                S2SSendGemSeedInfo.class,
-                S2SSendGemSeedInfo::encode,
-                S2SSendGemSeedInfo::decode,
-                S2SSendGemSeedInfo::handle);*/
+
         ModPacketHandler.INSTANCE.registerMessage(
                 networkId++,
                 C2SRequestUpdateGemName.class,

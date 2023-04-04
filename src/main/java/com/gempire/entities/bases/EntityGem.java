@@ -1383,6 +1383,10 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         return ContainerHelper.removeItem(this.getItems(), index, count);
     }
 
+    public boolean canBreatheUnderwater() {
+        return true;
+    }
+
     @Override
     public ItemStack removeItemNoUpdate(int index) {
         if(index > 26 && index < 31){
