@@ -1,0 +1,8 @@
+{
+    "type": "minecraft:stonecutting",
+    "ingredient": {
+        "item": "gempire:smooth_ruined_marble_block"
+    },
+    "result": "gempire:smooth_ruined_marble_stairs",
+    "count": 1
+}

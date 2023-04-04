@@ -243,7 +243,7 @@ public class ModBlocks {
                     .of(Material.METAL)
                     .strength(5.0f, 6.0f)
                     .sound(SoundType.STONE)
-                    
+                    .noLootTable()
             )
     );
 
@@ -251,7 +251,7 @@ public class ModBlocks {
             new PowerCrystalBlock(BlockBehaviour.Properties
                     .of(Material.METAL)
                     .strength(3.0f, 6.0f)
-                    .sound(SoundType.GLASS)
+                    .sound(SoundType.AMETHYST)
                     .instabreak()
             )
     );
@@ -262,7 +262,7 @@ public class ModBlocks {
                     .strength(3.0f, 6.0f)
                     .sound(SoundType.CHAIN)
                     .instabreak()
-
+                    .noOcclusion()
             )
     );
 
@@ -270,7 +270,7 @@ public class ModBlocks {
             new InjectorBlock(BlockBehaviour.Properties
                     .of(Material.METAL)
                     .strength(3.0f, 6.0f)
-                    .sound(SoundType.STONE)
+                    .sound(SoundType.METAL)
                     .instabreak()
 
             )
@@ -280,7 +280,7 @@ public class ModBlocks {
             new ShellBlock(BlockBehaviour.Properties
                     .of(Material.STONE)
                     .strength(3.0f, 6.0f)
-                    .sound(SoundType.STONE)
+                    .sound(SoundType.METAL)
                     
             )
     );
@@ -552,13 +552,6 @@ public class ModBlocks {
                     .sound(SoundType.STONE)
             )
     );
-
-    /*public static final RegistryObject<Block> CRYSTALLINE_LOG = BLOCKS.register("crystalline_log", () ->
-            new RotatedPillarBlock(Block.Properties
-                    .of(Material.WOOD)
-                    .sound(SoundType.AMETHYST)
-            )
-    );*/
     public static final RegistryObject<Block> RUINED_MARBLE_STAIRS = BLOCKS.register("ruined_marble_stairs",
             () -> new StairBlock(() -> ModBlocks.RUINED_MARBLE_BLOCK.get().defaultBlockState(),
                     BlockBehaviour.Properties.of(Material.STONE).strength(1.5f).requiresCorrectToolForDrops()));
@@ -566,14 +559,5 @@ public class ModBlocks {
     public static final RegistryObject<Block> SMOOTH_RUINED_MARBLE_STAIRS = BLOCKS.register("smooth_ruined_marble_stairs",
             () -> new StairBlock(() -> ModBlocks.SMOOTH_RUINED_MARBLE_BLOCK.get().defaultBlockState(),
                     BlockBehaviour.Properties.of(Material.STONE).strength(1.5f).requiresCorrectToolForDrops()));
-
-    /*public static final RegistryObject<Block> TEST_CONTAINER_BLOCK = BLOCKS.register("test_container_block", () ->
-            new GUITestBlock(Block.Properties
-                    .create(Material.IRON)
-                    .hardnessAndResistance(5.0f, 6.0f)
-                    .sound(SoundType.STONE)
-                    
-            )
-    );*/
 
 }
