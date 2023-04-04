@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "OCO",
+    "DPD",
+    " I "
+  ],
+  "key": {
+    "C": {
+      "item": "gempire:yellow_chroma"
+    },
+    "D": {
+      "item": "minecraft:diamond"
+    },
+    "P": {
+      "item": "gempire:power_crystal_block_tier_2"
+    },
+    "I": {
+      "item": "gempire:prismatic_ingot"
+    },
+    "O": {
+      "item": "gempire:special_chroma"
+    }
+  },
+  "result": {
+    "item": "gempire:yellow_rejuvenator"
+  }
+}

@@ -256,6 +256,17 @@ public class ModBlocks {
             )
     );
 
+    public static final RegistryObject<Block> POWER_CRYSTAL_BLOCK_TIER_2 = BLOCKS.register("power_crystal_block_tier_2", () ->
+            new PowerCrystalBlock(BlockBehaviour.Properties
+                    .of(Material.METAL)
+                    .strength(3.0f, 6.0f)
+                    .sound(SoundType.AMETHYST)
+                    .instabreak()
+                    .lightLevel((state) -> {
+                        return 10;
+                    })            )
+    );
+
     public static final RegistryObject<Block> TANK_BLOCK = BLOCKS.register("tank_block", () ->
             new TankBlock(BlockBehaviour.Properties
                     .of(Material.METAL)
@@ -291,6 +302,15 @@ public class ModBlocks {
                     .strength(0.6f, 0.6f)
                     .sound(SoundType.GRAVEL)
                     
+            )
+    );
+
+    public static final RegistryObject<Block> PRISMATIC_BLOCK = BLOCKS.register("prismatic_block", () ->
+            new Block(BlockBehaviour.Properties
+                    .of(Material.METAL)
+                    .requiresCorrectToolForDrops()
+                    .strength(4.6f, 4.6f)
+                    .sound(SoundType.METAL)
             )
     );
 

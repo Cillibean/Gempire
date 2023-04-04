@@ -6,6 +6,8 @@ import com.gempire.init.ModItems;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import com.mojang.authlib.GameProfile;
+import net.minecraft.core.BlockPos;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -16,6 +18,10 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Material;
 
 public class ItemDestabilizer extends Item {
     private final Multimap<Attribute, AttributeModifier> defaultModifiers;
@@ -52,6 +58,16 @@ public class ItemDestabilizer extends Item {
     public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlot p_43383_) {
         return p_43383_ == EquipmentSlot.MAINHAND ? this.defaultModifiers : super.getDefaultAttributeModifiers(p_43383_);
     }
+
+    public boolean mineBlock(ItemStack p_43282_, Level p_43283_, BlockState p_43284_, BlockPos p_43285_, LivingEntity p_43286_) {
+        if (p_43284_.getDestroySpeed(p_43283_, p_43285_) != 0.0F) {
+            p_43282_.hurtAndBreak(2, p_43286_, (p_43276_) -> {
+                p_43276_.broadcastBreakEvent(EquipmentSlot.MAINHAND);
+            });
+        }
+        return true;
+    }
+
     @Override
     public boolean isValidRepairItem(ItemStack p_41134_, ItemStack p_41135_) {
         return p_41135_.is(ModItems.POWER_CRYSTAL_BLOCK_ITEM.get());

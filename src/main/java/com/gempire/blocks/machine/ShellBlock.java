@@ -93,7 +93,7 @@ public class ShellBlock extends BaseEntityBlock implements SimpleWaterloggedBloc
     public boolean placeLiquid(LevelAccessor worldIn, BlockPos pos, BlockState state, FluidState fluidStateIn) {
         if (!state.getValue(BlockStateProperties.WATERLOGGED)) {
             if (!worldIn.isClientSide()) {
-                worldIn.setBlock(pos, state.setValue(BlockStateProperties.WATERLOGGED, Boolean.valueOf(true)), 3);
+                worldIn.setBlock(pos, state.setValue(BlockStateProperties.WATERLOGGED, Boolean.TRUE), 3);
                 worldIn.scheduleTick(pos, fluidStateIn.getType(), fluidStateIn.getType().getTickDelay(worldIn));
             }
 
@@ -115,33 +115,23 @@ public class ShellBlock extends BaseEntityBlock implements SimpleWaterloggedBloc
 
     public static int getDirectionFacingValue(BlockEntity te){
         BlockState block = te.getLevel().getBlockEntity(te.getBlockPos()).getBlockState();
-        switch(block.getValue(FACING)){
-            case EAST:
-                return 5;
-            case NORTH:
-                return 2;
-            case WEST:
-                return 4;
-            case SOUTH:
-                return 3;
-            default:
-                return 5;
-        }
+        return switch (block.getValue(FACING)) {
+            case EAST -> 5;
+            case NORTH -> 2;
+            case WEST -> 4;
+            case SOUTH -> 3;
+            default -> 5;
+        };
     }
 
     public static Direction getDirectionFromValue(int value){
-        switch(value){
-            case 5:
-                return Direction.EAST;
-            case 2:
-                return Direction.NORTH;
-            case 4:
-                return Direction.WEST;
-            case 3:
-                return Direction.SOUTH;
-            default:
-                return Direction.EAST;
-        }
+        return switch (value) {
+            case 5 -> Direction.EAST;
+            case 2 -> Direction.NORTH;
+            case 4 -> Direction.WEST;
+            case 3 -> Direction.SOUTH;
+            default -> Direction.EAST;
+        };
     }
 
     public static int getAdjustedDirectionValue(int facing, int svalue){
@@ -149,46 +139,31 @@ public class ShellBlock extends BaseEntityBlock implements SimpleWaterloggedBloc
             return svalue;
         }
         else if (facing == 5){
-            switch (svalue){
-                case 5:
-                    return 2;
-                case 2:
-                    return 4;
-                case 4:
-                    return 3;
-                case 3:
-                    return 5;
-                default:
-                    return 2;
-            }
+            return switch (svalue) {
+                case 5 -> 2;
+                case 2 -> 4;
+                case 4 -> 3;
+                case 3 -> 5;
+                default -> 2;
+            };
         }
         else if (facing == 2){
-            switch (svalue){
-                case 5:
-                    return 4;
-                case 2:
-                    return 3;
-                case 4:
-                    return 5;
-                case 3:
-                    return 2;
-                default:
-                    return 4;
-            }
+            return switch (svalue) {
+                case 5 -> 4;
+                case 2 -> 3;
+                case 4 -> 5;
+                case 3 -> 2;
+                default -> 4;
+            };
         }
         else if (facing == 4){
-            switch (svalue){
-                case 5:
-                    return 3;
-                case 2:
-                    return 5;
-                case 4:
-                    return 2;
-                case 3:
-                    return 4;
-                default:
-                    return 3;
-            }
+            return switch (svalue) {
+                case 5 -> 3;
+                case 2 -> 5;
+                case 4 -> 2;
+                case 3 -> 4;
+                default -> 3;
+            };
         }
         return 2;
     }

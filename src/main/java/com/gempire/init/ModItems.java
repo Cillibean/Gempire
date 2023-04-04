@@ -280,6 +280,12 @@ public class ModItems {
                     new Item.Properties().tab(ModItemGroup.BLOCKS)
             )
     );
+    public static final RegistryObject<Item> POWER_CRYSTAL_BLOCK_TIER_2_ITEM = ITEMS.register("power_crystal_block_tier_2", () ->
+            new BlockItem(
+                    ModBlocks.POWER_CRYSTAL_BLOCK_TIER_2.get(),
+                    new Item.Properties().tab(ModItemGroup.BLOCKS)
+            )
+    );
     public static final RegistryObject<Item> TANK_BLOCK_ITEM = ITEMS.register("tank_block", () ->
             new BlockItem(
                     ModBlocks.TANK_BLOCK.get(),
@@ -295,6 +301,12 @@ public class ModItems {
     public static final RegistryObject<Item> SHELL_BLOCK_ITEM = ITEMS.register("shell_block", () ->
             new BlockItem(
                     ModBlocks.SHELL_BLOCK.get(),
+                    new Item.Properties().tab(ModItemGroup.BLOCKS)
+            )
+    );
+    public static final RegistryObject<Item> PRISMATIC_BLOCK = ITEMS.register("prismatic_block", () ->
+            new BlockItem(
+                    ModBlocks.PRISMATIC_BLOCK.get(),
                     new Item.Properties().tab(ModItemGroup.BLOCKS)
             )
     );

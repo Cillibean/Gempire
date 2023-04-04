@@ -11,11 +11,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
-import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.block.state.properties.*;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.core.Direction;
@@ -50,7 +47,8 @@ public class TankBlock extends Block {
     public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
         if(!worldIn.isClientSide()) {
             BlockPos drillPos = state.getValue(HALF) == DoubleBlockHalf.UPPER ? pos.below().below() : pos.below();
-            if (worldIn.getBlockState(drillPos).getBlock() == ModBlocks.DRILL_BLOCK.get()) {
+            BlockPos crystalPos = state.getValue(HALF) == DoubleBlockHalf.UPPER ? pos.above() : pos.above().above();
+            if (worldIn.getBlockState(drillPos).getBlock() == ModBlocks.DRILL_BLOCK.get() && worldIn.getBlockState(crystalPos).getBlock() instanceof PowerCrystalBlock) {
                 BlockEntity te = worldIn.getBlockEntity(drillPos);
                 if (te instanceof InjectorTE) {
                     if (player.getItemInHand(InteractionHand.MAIN_HAND) == ItemStack.EMPTY) {

@@ -1,0 +1,83 @@
+{
+	"credit": "Made with Blockbench",
+	"render_type": "translucent",
+	"gui_light": "front",
+	"texture_size": [64, 64],
+	"textures": {
+		"0": "gempire:blocks/power_crystal_tier_2",
+		"particle": "gempire:blocks/power_crystal_tier_2"
+	},
+	"elements": [
+		{
+			"name": "base",
+			"from": [3, 0, 3],
+			"to": [13, 2, 13],
+			"faces": {
+				"north": {"uv": [2.5, 15.5, 5, 16], "texture": "#0"},
+				"east": {"uv": [0, 15.5, 2.5, 16], "texture": "#0"},
+				"south": {"uv": [7.5, 15.5, 10, 16], "texture": "#0"},
+				"west": {"uv": [5, 15.5, 7.5, 16], "texture": "#0"},
+				"up": {"uv": [5, 15.5, 2.5, 13], "texture": "#0"},
+				"down": {"uv": [7.5, 13, 5, 15.5], "texture": "#0"}
+			}
+		},
+		{
+			"name": "crystal1",
+			"from": [1.5, 2, 1.5],
+			"to": [14.5, 15, 14.5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 0, 0]},
+			"faces": {
+				"north": {"uv": [3.25, 3.25, 6.5, 6.5], "texture": "#0"},
+				"east": {"uv": [0, 3.25, 3.25, 6.5], "texture": "#0"},
+				"south": {"uv": [9.75, 3.25, 13, 6.5], "texture": "#0"},
+				"west": {"uv": [6.5, 3.25, 9.75, 6.5], "texture": "#0"},
+				"up": {"uv": [6.5, 3.25, 3.25, 0], "texture": "#0"},
+				"down": {"uv": [9.75, 0, 6.5, 3.25], "texture": "#0"}
+			}
+		},
+		{
+			"from": [3, 15, 3],
+			"to": [13, 17, 13],
+			"faces": {
+				"north": {"uv": [2.5, 9.5, 5, 10], "texture": "#0"},
+				"east": {"uv": [0, 9.5, 2.5, 10], "texture": "#0"},
+				"south": {"uv": [7.5, 9.5, 10, 10], "texture": "#0"},
+				"west": {"uv": [5, 9.5, 7.5, 10], "texture": "#0"},
+				"up": {"uv": [5, 9.5, 2.5, 7], "texture": "#0"},
+				"down": {"uv": [7.5, 7, 5, 9.5], "texture": "#0"}
+			}
+		}
+	],
+	"display": {
+		"thirdperson_righthand": {
+			"translation": [0, 3, 0],
+			"scale": [0.6, 0.6, 0.6]
+		},
+		"thirdperson_lefthand": {
+			"translation": [0, 3, 0],
+			"scale": [0.6, 0.6, 0.6]
+		},
+		"firstperson_righthand": {
+			"translation": [0, 0.75, 0],
+			"scale": [0.41, 0.41, 0.41]
+		},
+		"firstperson_lefthand": {
+			"translation": [0, 0.75, 0],
+			"scale": [0.41, 0.41, 0.41]
+		},
+		"ground": {
+			"scale": [0.41, 0.41, 0.41]
+		},
+		"gui": {
+			"rotation": [15, 22, 0],
+			"scale": [0.75, 0.75, 0.75]
+		},
+		"head": {
+			"translation": [0, 14.5, 0]
+		},
+		"fixed": {
+			"translation": [0, 0, 3.75],
+			"scale": [0.75, 0.75, 1]
+		}
+	}
+}

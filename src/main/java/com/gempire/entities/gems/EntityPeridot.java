@@ -1,14 +1,14 @@
 package com.gempire.entities.gems;
 
-import com.gempire.entities.ai.EntityAIFollowAssigned;
-import com.gempire.entities.ai.EntityAIFollowOwner;
-import com.gempire.entities.ai.EntityAIWander;
-import com.gempire.entities.ai.EntityAiAssignGems;
+import com.gempire.entities.ai.*;
 import com.gempire.entities.bases.EntityGem;
 import com.gempire.util.Abilities;
 import com.gempire.util.GemPlacements;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.EntityType;
@@ -18,9 +18,11 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.PickaxeItem;
 import net.minecraft.world.level.Level;
 
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.phys.Vec3;
 
 public class EntityPeridot extends EntityGem {
     //TO-DO: IMPLEMENT PERIDOT. She will upgrade your injector from tier 1 to tier 2. Will require a moderate amount of resources in her inventory.
@@ -28,6 +30,9 @@ public class EntityPeridot extends EntityGem {
     public EntityPeridot(EntityType<? extends PathfinderMob> type, Level worldIn) {
         super(type, worldIn);
     }
+    public boolean hopperGoal = false;
+    public int ticksDoingHopperGoal = 0;
+    public int maxTicksDoingHopperGoal = 200;
 
     public static AttributeSupplier.Builder registerAttributes() {
         return Mob.createMobAttributes()
@@ -52,9 +57,20 @@ public class EntityPeridot extends EntityGem {
         this.goalSelector.addGoal(7, new EntityAIFollowAssigned(this, 1.0D));
         this.goalSelector.addGoal(7, new EntityAIFollowOwner(this, 1.0D));
         //this.goalSelector.addGoal(2, new EntityAiAssignGems(this,1));
-        this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, Mob.class, 6.0F, 1.0D, 1.2D, (mob)-> mob.getClassification(true)== MobCategory.MONSTER));
+        this.goalSelector.addGoal(10, new EntityAIMakePowerCrystal2(this, 1.0D));
+        this.goalSelector.addGoal(2, new AvoidEntityGoal<>(this, Mob.class, 6.0F, 1.0D, 1.2D, (mob)-> mob.getClassification(true)== MobCategory.MONSTER));
     }
 
+    @Override
+    public void addAdditionalSaveData(CompoundTag compound) {
+        super.addAdditionalSaveData(compound);
+        compound.putBoolean("hopperGoal", this.hopperGoal);
+    }
+    @Override
+    public void load(CompoundTag compound) {
+        super.load(compound);
+        this.hopperGoal = compound.getBoolean("hopperGoal");
+    }
     @Override
     public int generateSkinVariant() {
         return 0;
@@ -66,6 +82,29 @@ public class EntityPeridot extends EntityGem {
                 GemPlacements.FOREHEAD, GemPlacements.LEFT_EYE, GemPlacements.RIGHT_EYE, GemPlacements.NOSE, GemPlacements.LEFT_CHEEK, GemPlacements.RIGHT_CHEEK, GemPlacements.CHEST, GemPlacements.BACK, GemPlacements.BELLY, GemPlacements.LEFT_SHOULDER,
                 GemPlacements.RIGHT_SHOULDER, GemPlacements.LEFT_HAND, GemPlacements.RIGHT_HAND, GemPlacements.LEFT_PALM, GemPlacements.RIGHT_PALM, GemPlacements.LEFT_THIGH, GemPlacements.RIGHT_THIGH, GemPlacements.LEFT_ANKLE, GemPlacements.RIGHT_ANKLE };
     };
+    @Override
+    public void tick() {
+        super.tick();
+        if(this.hopperGoal){
+            this.ticksDoingHopperGoal++;
+            if(this.ticksDoingHopperGoal > this.maxTicksDoingHopperGoal){
+                this.hopperGoal = false;
+                this.ticksDoingHopperGoal = 0;
+            }
+        }
+    }
+    @Override
+    public InteractionResult interactAt(Player player, Vec3 vec, InteractionHand hand){
+        if(player.level.isClientSide){
+            return super.interactAt(player, vec, hand);
+        }
+        if(this.isOwner(player)){
+            if(player.getItemInHand(hand).getItem() instanceof PickaxeItem){
+                this.hopperGoal = true;
+            }
+        }
+        return super.interactAt(player, vec, hand);
+    }
 
     @Override
     public int generateHairVariant() {

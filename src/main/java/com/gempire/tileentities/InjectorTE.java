@@ -2,6 +2,7 @@ package com.gempire.tileentities;
 
 import com.gempire.blocks.GemSeedBlock;
 import com.gempire.blocks.machine.InjectorBlock;
+import com.gempire.blocks.machine.PowerCrystalBlock;
 import com.gempire.container.InjectorContainer;
 import com.gempire.events.InjectEvent;
 import com.gempire.init.*;
@@ -12,6 +13,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -48,6 +50,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
+
+import static com.gempire.blocks.machine.TankBlock.HALF;
 
 public class InjectorTE extends RandomizableContainerBlockEntity implements IFluidTank, MenuProvider {
     private final ItemStackHandler itemHandler = new ItemStackHandler(6) {
@@ -194,74 +198,73 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
     }
 
     public void Inject() {
-        System.out.println(this.blueOpen+"bluetankopen");
-        System.out.println(this.getTankFromValue(0).getFluid().getFluid());
-        System.out.println(this.getFluidFromValue(0));
-        System.out.println(itemHandler.getStackInSlot(CHROMA_INPUT_SLOT_INDEX));
-        if (itemHandler.getStackInSlot(CHROMA_INPUT_SLOT_INDEX).getItem() instanceof ItemChroma chroma &&
-                (this.getFluidFromValue(0) != Fluids.EMPTY && this.pinkOpen ||
-                        this.getFluidFromValue(1) != Fluids.EMPTY && this.blueOpen ||
-                        this.getFluidFromValue(2) != Fluids.EMPTY && this.yellowOpen ||
-                        this.getFluidFromValue(3) != Fluids.EMPTY && this.whiteOpen)) {
-            int portionToDrain = 0;
-            if(this.pinkOpen){
-                portionToDrain++;
-            }
-            if(this.blueOpen){
-                portionToDrain++;
-            }
-            if(this.yellowOpen){
-                portionToDrain++;
-            }
-            if(this.whiteOpen){
-                portionToDrain++;
-            }
-            String essences = "";
-            for (int i = 0; i < 4; i++) {
-                String essenceName = "";
-                FluidTank tank = this.getTankFromValue(i);
-                if (i == 0 && this.pinkOpen) {
-                    essenceName = "pink";
-                } else if (i == 1 && this.blueOpen) {
-                    essenceName = "blue";
-                } else if (i == 2 && this.yellowOpen) {
-                    essenceName = "yellow";
-                } else if (i == 3 && this.whiteOpen) {
-                    essenceName = "white";
+        BlockPos crystalPos = getBlockPos().above().above().above();
+        if (level.getBlockState(crystalPos).getBlock() instanceof PowerCrystalBlock) {
+            if (itemHandler.getStackInSlot(CHROMA_INPUT_SLOT_INDEX).getItem() instanceof ItemChroma chroma &&
+                    (this.getFluidFromValue(0) != Fluids.EMPTY && this.pinkOpen ||
+                            this.getFluidFromValue(1) != Fluids.EMPTY && this.blueOpen ||
+                            this.getFluidFromValue(2) != Fluids.EMPTY && this.yellowOpen ||
+                            this.getFluidFromValue(3) != Fluids.EMPTY && this.whiteOpen)) {
+                int portionToDrain = 0;
+                if (this.pinkOpen) {
+                    portionToDrain++;
                 }
-                if (!essenceName.isEmpty() && tank.getFluid() != FluidStack.EMPTY) {
-                    if (!essences.isEmpty()) {
-                        essences += "-";
+                if (this.blueOpen) {
+                    portionToDrain++;
+                }
+                if (this.yellowOpen) {
+                    portionToDrain++;
+                }
+                if (this.whiteOpen) {
+                    portionToDrain++;
+                }
+                String essences = "";
+                for (int i = 0; i < 4; i++) {
+                    String essenceName = "";
+                    FluidTank tank = this.getTankFromValue(i);
+                    if (i == 0 && this.pinkOpen) {
+                        essenceName = "pink";
+                    } else if (i == 1 && this.blueOpen) {
+                        essenceName = "blue";
+                    } else if (i == 2 && this.yellowOpen) {
+                        essenceName = "yellow";
+                    } else if (i == 3 && this.whiteOpen) {
+                        essenceName = "white";
                     }
-                    essences += essenceName;
-                    tank.getFluid().setAmount(Math.max(tank.getFluidAmount() - (200 / portionToDrain), 0));
+                    if (!essenceName.isEmpty() && tank.getFluid() != FluidStack.EMPTY) {
+                        if (!essences.isEmpty()) {
+                            essences += "-";
+                        }
+                        essences += essenceName;
+                        tank.getFluid().setAmount(Math.max(tank.getFluidAmount() - (200 / portionToDrain), 0));
+                    }
                 }
+                BlockPos seedPos = this.getBlockPos().offset(new BlockPos(0, -Math.ceil(GemSeedTE.DRAIN_SIZE / 2) - 1, 0));
+                while (this.level.getBlockState(seedPos) == Blocks.AIR.defaultBlockState() ||
+                        this.level.getBlockState(seedPos).getBlock() instanceof LiquidBlock ||
+                        this.level.getBlockState(seedPos) == ModBlocks.GEM_SEED_BLOCK.get().defaultBlockState()) {
+                    seedPos = seedPos.offset(0, -GemSeedTE.DRAIN_SIZE, 0);
+                }
+                Item primer = itemHandler.getStackInSlot(PRIME_INPUT_SLOT_INDEX).getItem();
+                GemSeedBlock seedBlock = (GemSeedBlock) ModBlocks.GEM_SEED_BLOCK.get();
+                this.level.setBlockAndUpdate(seedPos, seedBlock.defaultBlockState());
+                if (this.level.getBlockState(seedPos).getBlock() == ModBlocks.GEM_SEED_BLOCK.get()) {
+                    this.getLevel().playSound(null, this.getBlockPos(), ModSounds.INJECT.get(), SoundSource.AMBIENT, 2f, 1);
+                }
+                GemSeedTE gemSeedTE = (GemSeedTE) this.level.getBlockEntity(seedPos);
+                gemSeedTE.setEssences(essences);
+                gemSeedTE.SetChroma(chroma);
+                gemSeedTE.SetPrimer(primer);
+                int facing = InjectorTE.getFacingFromState(this.getBlockState());
+                gemSeedTE.setFacing(facing);
+                System.out.println("Facing :" + facing);
+                itemHandler.extractItem(InjectorTE.CHROMA_INPUT_SLOT_INDEX, 1, false);
+                itemHandler.extractItem(InjectorTE.PRIME_INPUT_SLOT_INDEX, 1, false);
+                this.level.sendBlockUpdated(this.worldPosition, this.getBlockState(), this.getBlockState(), 2);
+                this.setChanged();
+                InjectEvent event = new InjectEvent(gemSeedTE, seedPos);
+                MinecraftForge.EVENT_BUS.post(event);
             }
-            BlockPos seedPos = this.getBlockPos().offset(new BlockPos(0, -Math.ceil(GemSeedTE.DRAIN_SIZE / 2) - 1, 0));
-            while(this.level.getBlockState(seedPos) == Blocks.AIR.defaultBlockState() ||
-                    this.level.getBlockState(seedPos).getBlock() instanceof LiquidBlock ||
-                    this.level.getBlockState(seedPos) == ModBlocks.GEM_SEED_BLOCK.get().defaultBlockState()) {
-                seedPos = seedPos.offset(0, -GemSeedTE.DRAIN_SIZE, 0);
-            }
-            Item primer = itemHandler.getStackInSlot(PRIME_INPUT_SLOT_INDEX).getItem();
-            GemSeedBlock seedBlock = (GemSeedBlock) ModBlocks.GEM_SEED_BLOCK.get();
-            this.level.setBlockAndUpdate(seedPos, seedBlock.defaultBlockState());
-            if(this.level.getBlockState(seedPos).getBlock() == ModBlocks.GEM_SEED_BLOCK.get()) {
-                this.getLevel().playSound(null, this.getBlockPos(), ModSounds.INJECT.get(), SoundSource.AMBIENT, 2f, 1);
-            }
-            GemSeedTE gemSeedTE = (GemSeedTE) this.level.getBlockEntity(seedPos);
-            gemSeedTE.setEssences(essences);
-            gemSeedTE.SetChroma(chroma);
-            gemSeedTE.SetPrimer(primer);
-            int facing = InjectorTE.getFacingFromState(this.getBlockState());
-            gemSeedTE.setFacing(facing);
-            System.out.println("Facing :" + facing);
-            itemHandler.extractItem(InjectorTE.CHROMA_INPUT_SLOT_INDEX,1,false);
-            itemHandler.extractItem(InjectorTE.PRIME_INPUT_SLOT_INDEX,1,false);
-            this.level.sendBlockUpdated(this.worldPosition, this.getBlockState(), this.getBlockState(), 2);
-            this.setChanged();
-            InjectEvent event = new InjectEvent(gemSeedTE, seedPos);
-            MinecraftForge.EVENT_BUS.post(event);
         }
     }
 
