@@ -32,9 +32,9 @@ public class AbilityBeastmaster extends Ability implements IIdleAbility {
         int timer = 100;
         if (holder.getOwned()) {
         Player player = this.holder.currentPlayer;
-        BlockPos pos = this.holder.getOnPos();
         AABB aabb = this.holder.getBoundingBox().inflate(12.0D);
         List<Wolf> wolves = this.holder.getLevel().getEntitiesOfClass(Wolf.class, aabb);
+        if (player != null)
             if (timer >= 0) {
                 for(Wolf wolf : wolves){
                     System.out.println("tame attempt");

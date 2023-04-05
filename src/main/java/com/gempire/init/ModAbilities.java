@@ -34,6 +34,7 @@ public class ModAbilities {
 
         Ability.ABILITY_FROM_ABILITIES.put(Abilities.DISARMING, AbilityDisarming.class);
         Ability.ABILITY_FROM_ABILITIES.put(Abilities.ABUNDANCE, AbilityAbundance.class);
+        Ability.ABILITY_FROM_ABILITIES.put(Abilities.LOOTMASTER, AbilityLootmaster.class);
 
         Ability.ABILITY_FROM_ABILITIES.put(Abilities.STERN, AbilityStern.class);
 
