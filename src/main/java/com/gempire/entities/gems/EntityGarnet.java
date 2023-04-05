@@ -79,13 +79,11 @@ public class EntityGarnet extends EntityVaryingGem {
 
     public Abilities[] possibleAbilities(){
         return new Abilities[]{
-                Abilities.NO_ABILITY, Abilities.TANK, Abilities.BEEFCAKE, Abilities.POWERHOUSE, Abilities.UNHINGED, Abilities.BERSERKER
+                Abilities.NO_ABILITY, Abilities.TANK, Abilities.BEEFCAKE, Abilities.POWERHOUSE, Abilities.UNHINGED, Abilities.BERSERKER,Abilities.LOOTMASTER, Abilities.ABUNDANCE
         };
     }
     public Abilities[] definiteAbilities(){
-        return new Abilities[] {
-                Abilities.LOOTMASTER,
-                Abilities.ABUNDANCE,
+        return new Abilities[]{
                 Abilities.DISARMING
         };
     }

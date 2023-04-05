@@ -38,7 +38,7 @@ public enum Abilities {
     BEASTMASTER(34, 2),
     CHARMER(35, 5),
     DISARMING(36, 3),
-    LOOTMASTER(37, 5),
+    LOOTMASTER(37, 4),
     AQUAPHILE(38, 4),
     ACIDIC_SPIT(39, 2),
     TERRAFORMER(40, 3),
@@ -46,11 +46,11 @@ public enum Abilities {
     ESSENCE_BREWER(42, 1),
     BUILDER(43, 4),
     REFINERY(44, 4),
-    ABUNDANCE(45, 3),
+    ABUNDANCE(45, 4),
     ORGANIZATION(46, 5),
     FORTUNATE(47, 3),
     RECALL(48,3),
-    KINDERGARTENER(49,4);;
+    KINDERGARTENER(49,3);;
     public final int id;
     public final int weight;
     private static final Abilities[] vals = Abilities.values();

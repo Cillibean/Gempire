@@ -26,7 +26,7 @@ public class AbilityLootmaster extends Ability implements IViolentAbility, IMele
 
     @Override
     public void fight(LivingEntity entityIn, double damage) {
-        ResourceLocation lootTable = entityIn.getLootTable();
+        /*ResourceLocation lootTable = entityIn.getLootTable();
         LootContext.Builder lootContextBuilder = new LootContext.Builder((ServerLevel) this.holder.getLevel());
         lootContextBuilder.withParameter(LootContextParams.DAMAGE_SOURCE, DamageSource.MAGIC);
         lootContextBuilder.withOptionalParameter(LootContextParams.DIRECT_KILLER_ENTITY, this.holder);
@@ -39,7 +39,7 @@ public class AbilityLootmaster extends Ability implements IViolentAbility, IMele
             ItemEntity itementity = new ItemEntity(serverlevel, this.holder.getX(), this.holder.getY(), this.holder.getZ(), itemStack.copy());
             itementity.setDefaultPickUpDelay();
             serverlevel.addFreshEntity(itementity);
-        });
+        });*/
     }
 
     @Override

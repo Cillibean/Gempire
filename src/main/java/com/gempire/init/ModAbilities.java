@@ -4,9 +4,6 @@ import com.gempire.entities.abilities.*;
 import com.gempire.entities.abilities.base.Ability;
 import com.gempire.util.Abilities;
 
-import javax.swing.text.html.parser.Entity;
-import java.util.HashMap;
-
 public class ModAbilities {
 
     public static void registerAbilities(){
@@ -47,7 +44,7 @@ public class ModAbilities {
         Ability.ABILITY_FROM_ABILITIES.put(Abilities.GUARD, AbilityGuard.class);
         Ability.ABILITY_FROM_ABILITIES.put(Abilities.VEHICLE, AbilityVehicle.class);
         Ability.ABILITY_FROM_ABILITIES.put(Abilities.SCOUT, AbilityScout.class);
-        Ability.ABILITY_FROM_ABILITIES.put(Abilities.KINDERGARTENER, AbilityKindergardener.class);
+        Ability.ABILITY_FROM_ABILITIES.put(Abilities.KINDERGARTENER, AbilityKindergartener.class);
 
         Ability.ABILITY_FROM_ABILITIES.put(Abilities.NEGOTIATOR, AbilityNegotiator.class);
         Ability.ABILITY_FROM_ABILITIES.put(Abilities.RECALL, AbilityRecall.class);

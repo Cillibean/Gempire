@@ -519,10 +519,10 @@
   "ability.gempire.essence": "Essence Brewing",
   "ability.gempire.builder": "Builder (NYI)",
   "ability.gempire.refinery": "Refinery (NYI)",
-  "ability.gempire.abundance": "Abundance",
+  "ability.gempire.abundance": "Abundance (NYI)",
   "ability.gempire.organization": "Organization (NYI)",
   "ability.gempire.fortunate": "Fortunate (NYI)",
-  "ability.gempire.kindergardener": "Kindergardener (NYI)",
+  "ability.gempire.kindergardener": "Kindergardener",
 
   "screens.gempire.health": "Health",
   "screens.gempire.damage": "Attack Damage",
