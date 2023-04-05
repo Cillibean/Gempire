@@ -12,6 +12,7 @@ import com.gempire.items.ItemGem;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Monster;
@@ -30,11 +31,13 @@ public class EventHandler {
     public void OnEntitySpawn(EntityJoinLevelEvent event){
         if(event.getEntity() instanceof LivingEntity) {
             if (event.getEntity().getClassification(true) == MobCategory.MONSTER) {
-                Monster entity = (Monster) event.getEntity();
+                Mob entity = (Mob) event.getEntity();
                 entity.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(entity, EntityGem.class, 1, false, false, (p_234199_0_) -> {
                     return !(p_234199_0_ instanceof EntityAgate);
                 }));
-                entity.goalSelector.addGoal(1, new AvoidEntityGoal<>(entity, EntityAgate.class, 6.0F, 1.0D, 1.2D));
+                if (entity instanceof PathfinderMob) {
+                    entity.goalSelector.addGoal(1, new AvoidEntityGoal<>((PathfinderMob) entity, EntityAgate.class, 6.0F, 1.0D, 1.2D));
+                }
             }
             else if (event.getEntity().getClassification(true) == MobCategory.CREATURE)
             {
