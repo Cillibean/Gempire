@@ -6,6 +6,7 @@ import com.gempire.init.ModBlocks;
 import net.minecraft.world.level.block.AbstractGlassBlock;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.entity.ai.goal.Goal;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Explosion;
@@ -59,23 +60,21 @@ public class EntityAIMakePowerCrystal extends Goal {
         super.start();
         this.follower.setPathfindingMalus(BlockPathTypes.WATER, 0);
         this.follower.getNavigation().moveTo(target.getX(), target.getY(), target.getZ(), this.speed);
-        if(this.follower.distanceToSqr(target.getX(), target.getY(), target.getZ()) < 4){
-            if(this.follower.level.getBlockState(this.target).getBlock() == Blocks.REDSTONE_BLOCK){
-                if(this.follower.level.getBlockState(this.target.north()).getBlock() instanceof AbstractGlassBlock){
-                    if(this.follower.level.getBlockState(this.target.south()).getBlock() instanceof AbstractGlassBlock){
-                        if(this.follower.level.getBlockState(this.target.west()).getBlock() instanceof AbstractGlassBlock){
-                            if(this.follower.level.getBlockState(this.target.east()).getBlock() instanceof AbstractGlassBlock){
-                                this.follower.level.explode(null, this.target.getX(), this.target.getY(), this.target.getZ(), .75f, Explosion.BlockInteraction.NONE);
-                                this.follower.level.setBlockAndUpdate(this.target, ModBlocks.POWER_CRYSTAL_BLOCK.get().defaultBlockState());
-                                this.follower.level.setBlockAndUpdate(this.target.north(), Blocks.AIR.defaultBlockState());
-                                this.follower.level.setBlockAndUpdate(this.target.south(), Blocks.AIR.defaultBlockState());
-                                this.follower.level.setBlockAndUpdate(this.target.west(), Blocks.AIR.defaultBlockState());
-                                this.follower.level.setBlockAndUpdate(this.target.east(), Blocks.AIR.defaultBlockState());
-                                this.follower.hopperGoal = false;
-                            }
-                        }
-                    }
-                }
+        double distanceToTargetSqr = this.follower.distanceToSqr(target.getX(), target.getY(), target.getZ());
+        if (distanceToTargetSqr < 4) {
+            BlockState targetBlockState = this.follower.level.getBlockState(this.target);
+            if (targetBlockState.getBlock() == Blocks.REDSTONE_BLOCK &&
+                    this.follower.level.getBlockState(this.target.north()).getBlock() instanceof AbstractGlassBlock &&
+                    this.follower.level.getBlockState(this.target.south()).getBlock() instanceof AbstractGlassBlock &&
+                    this.follower.level.getBlockState(this.target.west()).getBlock() instanceof AbstractGlassBlock &&
+                    this.follower.level.getBlockState(this.target.east()).getBlock() instanceof AbstractGlassBlock) {
+                this.follower.level.explode(null, this.target.getX(), this.target.getY(), this.target.getZ(), .75f, Explosion.BlockInteraction.NONE);
+                this.follower.level.setBlockAndUpdate(this.target, ModBlocks.POWER_CRYSTAL_BLOCK.get().defaultBlockState());
+                this.follower.level.setBlockAndUpdate(this.target.north(), Blocks.AIR.defaultBlockState());
+                this.follower.level.setBlockAndUpdate(this.target.south(), Blocks.AIR.defaultBlockState());
+                this.follower.level.setBlockAndUpdate(this.target.west(), Blocks.AIR.defaultBlockState());
+                this.follower.level.setBlockAndUpdate(this.target.east(), Blocks.AIR.defaultBlockState());
+                this.follower.hopperGoal = false;
             }
         }
     }

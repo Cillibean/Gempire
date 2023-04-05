@@ -200,7 +200,7 @@ public class EntityGarnet extends EntityVaryingGem {
     }
 
     public int generateOutfitVariant(){
-        return this.random.nextInt(6);
+        return this.random.nextInt(8);
     }
 
     public int generateInsigniaVariant(){
