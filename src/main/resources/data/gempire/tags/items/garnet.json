@@ -1,9 +1,22 @@
 {
   "replace": false,
   "values": [
+    "gempire:garnet_gem_0",
     "gempire:garnet_gem_1",
+    "gempire:garnet_gem_2",
+    "gempire:garnet_gem_3",
+    "gempire:garnet_gem_4",
     "gempire:garnet_gem_5",
+    "gempire:garnet_gem_6",
+    "gempire:garnet_gem_7",
+    "gempire:garnet_gem_8",
+    "gempire:garnet_gem_9",
+    "gempire:garnet_gem_10",
+    "gempire:garnet_gem_11",
+    "gempire:garnet_gem_12",
+    "gempire:garnet_gem_13",
     "gempire:garnet_gem_14",
-    "gempire:garnet_gem_15"
+    "gempire:garnet_gem_15",
+    "gempire:garnet_gem_16"
   ]
 }

@@ -286,7 +286,6 @@ public class GemFormation {
                     blocks.add(this.pos.add(i, 0, 0));
                     blocks.add(this.pos.add(i, 1, 0));
                     blocks.add(this.pos.add(i, 2, 0));
-
                     blocksToDrain.add(this.pos.add(i, 0, 0).down());
                     blocksToDrain.add(this.pos.add(i, 0, 0).up().up().up());
                     blocksToDrain.add(this.pos.add(i, 0, 0).north());
@@ -315,7 +314,6 @@ public class GemFormation {
                     blocks.add(this.pos.add(-i, 0, 0));
                     blocks.add(this.pos.add(-i, 1, 0));
                     blocks.add(this.pos.add(-i, 2, 0));
-
                     blocksToDrain.add(this.pos.add(-i, 0, 0).down());
                     blocksToDrain.add(this.pos.add(-i, 0, 0).up().up().up());
                     blocksToDrain.add(this.pos.add(-i, 0, 0).north());
@@ -344,7 +342,6 @@ public class GemFormation {
                     blocks.add(this.pos.add(0, 0, i));
                     blocks.add(this.pos.add(0, 1, i));
                     blocks.add(this.pos.add(0, 2, i));
-
                     blocksToDrain.add(this.pos.add(0, 0, i).down());
                     blocksToDrain.add(this.pos.add(0, 0, i).up().up().up());
                     blocksToDrain.add(this.pos.add(0, 0, i).west());
@@ -371,7 +368,6 @@ public class GemFormation {
                 this.world.destroyBlock(this.pos.add(0, 0, -i), false);
                 this.world.destroyBlock(this.pos.add(0, 1, -i), false);
                 this.world.destroyBlock(this.pos.add(0, 2, -i), false);
-
                 if(this.world.getBlockState(this.pos.add(0, 0, -i)) != Blocks.AIR.getDefaultState()) {
                     blocksToDrain.add(this.pos.add(0, 0, -i).down());
                     blocksToDrain.add(this.pos.add(0, 0, -i).up().up().up());

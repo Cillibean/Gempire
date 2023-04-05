@@ -1,21 +1,14 @@
 package com.gempire.client.screen;
 
 import com.gempire.container.InjectorContainer;
-import com.gempire.init.ModPacketHandler;
-import com.gempire.networking.C2SRequestDumpFluidsInjector;
-import com.gempire.networking.C2SRequestInject;
-import com.gempire.networking.C2SRequestUpdateInjectorValves;
 import com.gempire.util.GUIUtilities;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.network.chat.Component;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fluids.FluidStack;
 
 

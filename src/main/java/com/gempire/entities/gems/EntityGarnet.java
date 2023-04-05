@@ -74,10 +74,9 @@ public class EntityGarnet extends EntityVaryingGem {
     }
     @Override
     public int[] NeglectedColors() {
-        return new int[]{
-                0,2,3,4,6,7,8,9,10,11,12,13,14,16,17
-        };
+        return null;
     }
+
     public Abilities[] possibleAbilities(){
         return new Abilities[]{
                 Abilities.NO_ABILITY, Abilities.TANK, Abilities.BEEFCAKE, Abilities.POWERHOUSE, Abilities.UNHINGED, Abilities.BERSERKER
@@ -120,14 +119,50 @@ public class EntityGarnet extends EntityVaryingGem {
             case 1:
                 name = "hessonite";
                 break;
+            case 2:
+                name = "rhodolite";
+                break;
+            case 3:
+                name = "umbalite";
+                break;
+            case 4:
+                name = "topazolite";
+                break;
             case 5:
                 name = "demantoid";
+                break;
+            case 6:
+                name = "imperial";
+                break;
+            case 7:
+                name = "kimzeyite";
+                break;
+            case 8:
+                name = "katoite";
+                break;
+            case 9:
+                name = "bekily";
+                break;
+            case 10:
+                name = "grape";
+                break;
+            case 11:
+                name = "blue";
+                break;
+            case 12:
+                name = "andalusite";
+                break;
+            case 13:
+                name = "grossularite";
                 break;
             case 14:
                 name = "pyrope";
                 break;
-            default:
+            case 15:
                 name = "melanite";
+                break;
+            default:
+                name = "leuco";
                 break;
         }
         return name;

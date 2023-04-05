@@ -26,7 +26,7 @@ public enum Abilities {
     PROSPECTOR(22, 5),
     SPELUNKER(23, 4),
     TORCHBEARER(24, 5),
-    DECOY(25, 3),
+    LURE(25, 3),
     JESTER(26, 4),
     ANGLER(27, 5),
     FARMER(28, 5),
