@@ -791,13 +791,39 @@ public class ModItems {
     public static final RegistryObject<Item> NACRE_GEM = ITEMS.register("nacre_gem", () ->
             new ItemGem(new Item.Properties().tab(ModItemGroup.GEMSTONES).stacksTo(1).fireResistant()));
 
+    public static final RegistryObject<Item> LEUCO_GARNET_GEM = ITEMS.register("garnet_gem_0", () ->
+            new ItemGem(new Item.Properties().tab(ModItemGroup.GEMSTONES).stacksTo(1).fireResistant()));
     public static final RegistryObject<Item> HESSONITE_GARNET_GEM = ITEMS.register("garnet_gem_1", () ->
             new ItemGem(new Item.Properties().tab(ModItemGroup.GEMSTONES).stacksTo(1).fireResistant()));
+    public static final RegistryObject<Item> RHODOLITE_GARNET_GEM = ITEMS.register("garnet_gem_2", () ->
+            new ItemGem(new Item.Properties().tab(ModItemGroup.GEMSTONES).stacksTo(1).fireResistant()));
+    public static final RegistryObject<Item> UMBALITE_GARNET_GEM = ITEMS.register("garnet_gem_3", () ->
+            new ItemGem(new Item.Properties().tab(ModItemGroup.GEMSTONES).stacksTo(1).fireResistant()));
+    public static final RegistryObject<Item> TOPAZOLITE_GARNET_GEM = ITEMS.register("garnet_gem_4", () ->
+            new ItemGem(new Item.Properties().tab(ModItemGroup.GEMSTONES).stacksTo(1).fireResistant()));
     public static final RegistryObject<Item> DEMANTOID_GARNET_GEM = ITEMS.register("garnet_gem_5", () ->
+            new ItemGem(new Item.Properties().tab(ModItemGroup.GEMSTONES).stacksTo(1).fireResistant()));
+    public static final RegistryObject<Item> IMPERIAL_GARNET_GEM = ITEMS.register("garnet_gem_6", () ->
+            new ItemGem(new Item.Properties().tab(ModItemGroup.GEMSTONES).stacksTo(1).fireResistant()));
+    public static final RegistryObject<Item> KIMZEYITE_GARNET_GEM = ITEMS.register("garnet_gem_7", () ->
+            new ItemGem(new Item.Properties().tab(ModItemGroup.GEMSTONES).stacksTo(1).fireResistant()));
+    public static final RegistryObject<Item> KATOITE_GARNET_GEM = ITEMS.register("garnet_gem_8", () ->
+            new ItemGem(new Item.Properties().tab(ModItemGroup.GEMSTONES).stacksTo(1).fireResistant()));
+    public static final RegistryObject<Item> BEKILY_GARNET_GEM = ITEMS.register("garnet_gem_9", () ->
+            new ItemGem(new Item.Properties().tab(ModItemGroup.GEMSTONES).stacksTo(1).fireResistant()));
+    public static final RegistryObject<Item> GRAPE_GARNET_GEM = ITEMS.register("garnet_gem_10", () ->
+            new ItemGem(new Item.Properties().tab(ModItemGroup.GEMSTONES).stacksTo(1).fireResistant()));
+    public static final RegistryObject<Item> BLUE_GARNET_GEM = ITEMS.register("garnet_gem_11", () ->
+            new ItemGem(new Item.Properties().tab(ModItemGroup.GEMSTONES).stacksTo(1).fireResistant()));
+    public static final RegistryObject<Item> ANDALUSITE_GARNET_GEM = ITEMS.register("garnet_gem_12", () ->
+            new ItemGem(new Item.Properties().tab(ModItemGroup.GEMSTONES).stacksTo(1).fireResistant()));
+    public static final RegistryObject<Item> GROSSULARITE_GARNET_GEM = ITEMS.register("garnet_gem_13", () ->
             new ItemGem(new Item.Properties().tab(ModItemGroup.GEMSTONES).stacksTo(1).fireResistant()));
     public static final RegistryObject<Item> PYROPE_GARNET_GEM = ITEMS.register("garnet_gem_14", () ->
             new ItemGem(new Item.Properties().tab(ModItemGroup.GEMSTONES).stacksTo(1).fireResistant()));
     public static final RegistryObject<Item> MELANITE_GARNET_GEM = ITEMS.register("garnet_gem_15", () ->
+            new ItemGem(new Item.Properties().tab(ModItemGroup.GEMSTONES).stacksTo(1).fireResistant()));
+    public static final RegistryObject<Item> IRIDESCENT_ANDRADITE_GARNET_GEM = ITEMS.register("garnet_gem_16", () ->
             new ItemGem(new Item.Properties().tab(ModItemGroup.GEMSTONES).stacksTo(1).fireResistant()));
 
     public static final RegistryObject<Item> SPODUMENE_SPODUMENE_GEM = ITEMS.register("spodumene_gem_1", () ->
