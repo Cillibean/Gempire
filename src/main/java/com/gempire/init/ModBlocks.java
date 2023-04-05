@@ -253,6 +253,7 @@ public class ModBlocks {
                     .strength(3.0f, 6.0f)
                     .sound(SoundType.AMETHYST)
                     .instabreak()
+                    .noOcclusion()
             )
     );
 
@@ -264,7 +265,9 @@ public class ModBlocks {
                     .instabreak()
                     .lightLevel((state) -> {
                         return 10;
-                    })            )
+                    })
+                    .noOcclusion()
+            )
     );
 
     public static final RegistryObject<Block> TANK_BLOCK = BLOCKS.register("tank_block", () ->
@@ -283,7 +286,8 @@ public class ModBlocks {
                     .strength(3.0f, 6.0f)
                     .sound(SoundType.METAL)
                     .instabreak()
-
+                    .noOcclusion()
+                    .noOcclusion()
             )
     );
 

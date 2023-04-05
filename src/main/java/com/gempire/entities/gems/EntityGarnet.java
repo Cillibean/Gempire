@@ -84,8 +84,9 @@ public class EntityGarnet extends EntityVaryingGem {
     }
     public Abilities[] definiteAbilities(){
         return new Abilities[] {
-            Abilities.ABUNDANCE,
-            Abilities.DISARMING
+                Abilities.LOOTMASTER,
+                Abilities.ABUNDANCE,
+                Abilities.DISARMING
         };
     }
     public boolean doHurtTarget(Entity entityIn) {
