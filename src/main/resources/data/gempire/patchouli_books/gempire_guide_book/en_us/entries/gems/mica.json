@@ -1,4 +1,4 @@
-{
+ {
   "name": "Mica",
   "advancement": "gempire:root",
   "icon": "gempire:mica_gem",
@@ -6,10 +6,10 @@
   "pages": [
     {
       "type": "patchouli:entity",
-      "entity": "gempire:mica",
+      "entity": "gempire:mica{gemColor:13282713,skinColor:12234664,hairVariant:2,hairColor:12234664,insigniaColor:4,outfitColor:4}",
       "name": "A Mica",
       "rotate": "true",
-      "text": "Mica"
+      "text": "A small gem that can be used to make Power Crystals."
     },
     {
       "type": "patchouli:crafting",

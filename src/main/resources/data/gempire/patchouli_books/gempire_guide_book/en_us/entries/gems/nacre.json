@@ -1,0 +1,20 @@
+{
+  "name": "Nacre",
+  "advancement": "gempire:root",
+  "icon": "gempire:nacre_gem",
+  "category": "gempire:gems_category",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "gempire:nacre{gemColor:16641019,skinColor:15858684,hairVariant:1,hairColor:15858684}",
+      "name": "A Nacre",
+      "rotate": "true",
+      "text": "A small gem that can be used to make Shell."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "gempire:nacre_gem",
+      "text": "Recipe for Nacres"
+    }
+  ]
+}

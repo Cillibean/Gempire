@@ -1,0 +1,37 @@
+{
+  "name": "Shell",
+  "icon": "gempire:shell_block",
+  "advancement": "gempire:root",
+  "category": "gempire:gem_creation_category",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "link_recipe ": true,
+      "item": "gempire:nacre_gem",
+      "text": "In order to make Shell, you'll need a Nacre. Shift click on this icon to see how to make one."
+    },
+    {
+      "type": "patchouli:multiblock",
+      "name": "Shell",
+      "text": "In order to have your Nacre construct a Drill, you will need to build this multiblock, then interact with her with a pickaxe in your hand.",
+      "multiblock": {
+        "pattern": [
+          ["P"],
+          ["C"],
+          ["0"]
+        ],
+        "mapping": {
+          "P": "gempire:power_crystal_block",
+          "C": "minecraft:conduit",
+          "0": "minecraft:prismarine"
+        },
+        "symmetrical": true
+      }
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Creating a Pearl",
+      "text": "In order to use shell, you will need to place 64 Gravel at the top, 64 Sand on the left, 64 Clay balls on the right, and a chroma of your choice at the bottom. After time passes it'll slowly drain these materials. After it's finished it will create a pearl for you to collect."
+    }
+  ]
+}

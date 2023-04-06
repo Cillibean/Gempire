@@ -603,6 +603,10 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             } else if (getAssignedGem() == null && this.getMovementType() == 3)
             {
                 this.setMovementType((byte) 0);
+                player.sendSystemMessage(Component.translatable("messages.gempire.entity.stay"));
+                this.GUARD_POS[0] = (int) this.getX();
+                this.GUARD_POS[1] = (int) this.getY();
+                this.GUARD_POS[2] = (int) this.getZ();
             }
         }
     }

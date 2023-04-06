@@ -6,10 +6,10 @@
   "pages": [
     {
       "type": "patchouli:entity",
-      "entity": "gempire:pebble",
+      "entity": "gempire:pebble{gemColor:14277093,skinColor:9997719,hairVariant:0,hairColor:9997719,insigniaColor:6,outfitColor:6}",
       "name": "A Pebble",
       "rotate": "true",
-      "text": "Pebble"
+      "text": "A small gem that can be used to make Drills."
     },
     {
       "type": "patchouli:crafting",
