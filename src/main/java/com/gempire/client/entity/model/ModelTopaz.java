@@ -22,7 +22,6 @@ public class ModelTopaz<T extends EntityGem> extends ModelGem<T> {
 	private final ModelPart LeftArm;
 	private final ModelPart RightArm;
 	private final ModelPart RightLeg;
-	private final ModelPart gems;
 
 	public ModelTopaz(ModelPart root) {
 		this.Body = root.getChild("Body");
@@ -31,7 +30,6 @@ public class ModelTopaz<T extends EntityGem> extends ModelGem<T> {
 		this.LeftArm = root.getChild("LeftArm");
 		this.RightArm = root.getChild("RightArm");
 		this.RightLeg = root.getChild("RightLeg");
-		this.gems = root.getChild("gems");
 	}
 
 	public static LayerDefinition createBodyLayer() {
@@ -42,15 +40,15 @@ public class ModelTopaz<T extends EntityGem> extends ModelGem<T> {
 
 		PartDefinition Head = partdefinition.addOrReplaceChild("Head", CubeListBuilder.create().texOffs(28, 0).addBox(-4.0F, -9.0F, -3.5F, 8.0F, 10.0F, 8.0F, new CubeDeformation(0.0F,-0.10f,0f)), PartPose.offset(0.0F, -7.9F, 0.0F));
 
-		PartDefinition LeftLeg = partdefinition.addOrReplaceChild("LeftLeg", CubeListBuilder.create().texOffs(0, 45).addBox(1.3F, 0.0F, -2.7F, 6.0F, 10.0F, 6.0F, new CubeDeformation(-0.5f,0f,-0.5f)), PartPose.offset(0.0F, 14.0F, 0.0F));
+		PartDefinition LeftLeg = partdefinition.addOrReplaceChild("LeftLeg", CubeListBuilder.create().texOffs(70, 45).addBox(1.3F, 0.0F, -2.7F, 6.0F, 10.0F, 6.0F, new CubeDeformation(-0.5f,0f,-0.5f)), PartPose.offset(0.0F, 14.0F, 0.0F));
 
-		PartDefinition LeftArm = partdefinition.addOrReplaceChild("LeftArm", CubeListBuilder.create().texOffs(0, 18).addBox(0.0F, 0.0F, -3.0F, 6.0F, 21.0F, 6.0F, new CubeDeformation(0.4f,0.8f,0.8f)), PartPose.offset(8.6F, -6.2F, 0.5F));
+		PartDefinition LeftArm = partdefinition.addOrReplaceChild("LeftArm", CubeListBuilder.create().texOffs(70, 18).addBox(0.0F, 0.0F, -3.0F, 6.0F, 21.0F, 6.0F, new CubeDeformation(0.4f,0.8f,0.8f)), PartPose.offset(8.6F, -6.2F, 0.5F));
 
-		PartDefinition RightArm = partdefinition.addOrReplaceChild("RightArm", CubeListBuilder.create().texOffs(70, 18).addBox(-6.0F, 0.0F, -3.0F, 6.0F, 21.0F, 6.0F, new CubeDeformation(0.4f,0.8f,0.8f)), PartPose.offset(-8.6F, -6.2F, 0.5F));
+		PartDefinition RightArm = partdefinition.addOrReplaceChild("RightArm", CubeListBuilder.create().texOffs(0, 18).addBox(-6.0F, 0.0F, -3.0F, 6.0F, 21.0F, 6.0F, new CubeDeformation(0.4f,0.8f,0.8f)), PartPose.offset(-8.6F, -6.2F, 0.5F));
 
-		PartDefinition RightLeg = partdefinition.addOrReplaceChild("RightLeg", CubeListBuilder.create().texOffs(70, 45).addBox(-7.7F, 0.0F, -2.7F, 6.0F, 10.0F, 6.0F, new CubeDeformation(-0.5f,0f,-0.5f)), PartPose.offset(0.0F, 14.0F, 0.0F));
+		PartDefinition RightLeg = partdefinition.addOrReplaceChild("RightLeg", CubeListBuilder.create().texOffs(0, 45).addBox(-7.7F, 0.0F, -2.7F, 6.0F, 10.0F, 6.0F, new CubeDeformation(-0.5f,0f,-0.5f)), PartPose.offset(0.0F, 14.0F, 0.0F));
 
-		PartDefinition gems = partdefinition.addOrReplaceChild("gems", CubeListBuilder.create().texOffs(30, 46).addBox(-12.0F, 0.0F, 0.0F, 12.0F, 6.0F, 6.0F, new CubeDeformation(-0.8F,-1f,-1f)), PartPose.offset(6.0F, -15.0F, -2.0F));
+		PartDefinition gems = Head.addOrReplaceChild("gems", CubeListBuilder.create().texOffs(30, 46).addBox(-12.0F, 0.0F, 0.0F, 12.0F, 6.0F, 6.0F, new CubeDeformation(-0.8F,-1f,-1f)), PartPose.offset(6.0F, -7.0F, -2.0F));
 
 		return LayerDefinition.create(meshdefinition, 94, 64);
 	}
@@ -81,6 +79,5 @@ public class ModelTopaz<T extends EntityGem> extends ModelGem<T> {
 		LeftArm.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 		RightArm.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 		RightLeg.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-		gems.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 	}
 }

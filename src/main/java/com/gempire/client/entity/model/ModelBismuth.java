@@ -55,9 +55,9 @@ public class ModelBismuth<T extends EntityGem> extends ModelGem<T> {
 
 		PartDefinition rightarm = partdefinition.addOrReplaceChild("rightarm", CubeListBuilder.create().texOffs(35, 81).mirror().addBox(-6.5F, -3.0F, -3.0F, 6.0F, 20.0F, 6.0F, new CubeDeformation(0.5F)), PartPose.offset(-8.0F, -0.5F, 0.0F));
 
-		PartDefinition rightleg = partdefinition.addOrReplaceChild("rightleg", CubeListBuilder.create().texOffs(0, 85).addBox(-3.0F, 0.0F, -3.0F, 6.0F, 9.0F, 6.0F, new CubeDeformation(-.5F,0f,-.5f)), PartPose.offset(-3.5F, 15.0F, 0.0F));
+		PartDefinition rightleg = partdefinition.addOrReplaceChild("rightleg", CubeListBuilder.create().texOffs(0, 30).addBox(-3.0F, 0.0F, -3.0F, 6.0F, 9.0F, 6.0F, new CubeDeformation(-.5F,0f,-.5f)), PartPose.offset(-3.5F, 15.0F, 0.0F));
 
-		PartDefinition leftleg = partdefinition.addOrReplaceChild("leftleg", CubeListBuilder.create().texOffs(0, 30).addBox(-3.0F, 0.0F, -3.0F, 6.0F, 9.0F, 6.0F, new CubeDeformation(-.5F,0f,-.5f)), PartPose.offset(3.5F, 15.0F, 0.0F));
+		PartDefinition leftleg = partdefinition.addOrReplaceChild("leftleg", CubeListBuilder.create().texOffs(0, 85).addBox(-3.0F, 0.0F, -3.0F, 6.0F, 9.0F, 6.0F, new CubeDeformation(-.5F,0f,-.5f)), PartPose.offset(3.5F, 15.0F, 0.0F));
 
 		PartDefinition leftarm = partdefinition.addOrReplaceChild("leftarm", CubeListBuilder.create().texOffs(32, 38).addBox(0.5F, -3.0F, -3.0F, 6.0F, 20.0F, 6.0F, new CubeDeformation(0.5F)), PartPose.offset(8.0F, -0.5F, 0.0F));
 

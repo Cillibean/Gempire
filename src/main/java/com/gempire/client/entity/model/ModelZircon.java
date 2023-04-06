@@ -43,9 +43,9 @@ public class ModelZircon<T extends EntityGem> extends ModelGem<T> {
 
 		PartDefinition Chest = Body.addOrReplaceChild("Chest", CubeListBuilder.create().texOffs(32, 0).addBox(-4.0F, 0.0F, -2.5F, 8.0F, 7.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
 
-		PartDefinition RightArm = partdefinition.addOrReplaceChild("RightArm", CubeListBuilder.create().texOffs(56, 10).mirror().addBox(-2.0F, -0.5F, -1.0F, 2.0F, 12.0F, 2.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offset(-4.0F, 2.8F, 0.0F));
+		PartDefinition RightArm = partdefinition.addOrReplaceChild("RightArm", CubeListBuilder.create().texOffs(12, 28).addBox(-2.0F, -0.5F, -1.0F, 2.0F, 12.0F, 2.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offset(-4.0F, 2.8F, 0.0F));
 
-		PartDefinition RArmPuff = RightArm.addOrReplaceChild("RArmPuff", CubeListBuilder.create().texOffs(0, 22).mirror().addBox(-2.5F, 6.3F, -1.5F, 3.0F, 3.0F, 3.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offset(0.0F, 0.2F, 0.0F));
+		PartDefinition RArmPuff = RightArm.addOrReplaceChild("RArmPuff", CubeListBuilder.create().texOffs(0, 28).mirror().addBox(-2.5F, 6.3F, -1.5F, 3.0F, 3.0F, 3.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offset(0.0F, 0.2F, 0.0F));
 
 		PartDefinition Head = partdefinition.addOrReplaceChild("Head", CubeListBuilder.create().texOffs(0, 0).addBox(-4.0F, -7.8F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(-0.3F, -0.2F, -0.3F)), PartPose.offset(0.0F, 1.8F, 0.0F));
 
@@ -57,17 +57,17 @@ public class ModelZircon<T extends EntityGem> extends ModelGem<T> {
 
 		PartDefinition Hat2 = Head.addOrReplaceChild("Hat2", CubeListBuilder.create().texOffs(32, 45).addBox(-4.0F, -12.6F, -4.0F, 8.0F, 5.0F, 8.0F, new CubeDeformation(-0.3F, 0.0F, -0.3F)), PartPose.offset(0.0F, 0.0F, 0.0F));
 
-		PartDefinition RightLeg = partdefinition.addOrReplaceChild("RightLeg", CubeListBuilder.create().texOffs(55, 24).mirror().addBox(-1.0F, 0.0F, -1.0F, 2.0F, 12.0F, 2.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offset(-1.9F, 12.0F, 0.0F));
+		PartDefinition RightLeg = partdefinition.addOrReplaceChild("RightLeg", CubeListBuilder.create().texOffs(20, 28).addBox(-1.0F, 0.0F, -1.0F, 2.0F, 12.0F, 2.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offset(-1.9F, 12.0F, 0.0F));
 
-		PartDefinition RLegPuff = RightLeg.addOrReplaceChild("RLegPuff", CubeListBuilder.create().texOffs(0, 51).mirror().addBox(-1.5F, 5.0F, -1.5F, 3.0F, 5.0F, 3.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offset(-0.1F, 0.0F, 0.0F));
+		PartDefinition RLegPuff = RightLeg.addOrReplaceChild("RLegPuff", CubeListBuilder.create().texOffs(0, 34).addBox(-1.5F, 5.0F, -1.5F, 3.0F, 5.0F, 3.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offset(-0.1F, 0.0F, 0.0F));
 
-		PartDefinition LeftArm = partdefinition.addOrReplaceChild("LeftArm", CubeListBuilder.create().texOffs(12, 28).addBox(0.0F, -0.5F, -1.0F, 2.0F, 12.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(4.0F, 2.8F, 0.0F));
+		PartDefinition LeftArm = partdefinition.addOrReplaceChild("LeftArm", CubeListBuilder.create().texOffs(56, 10).addBox(0.0F, -0.5F, -1.0F, 2.0F, 12.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(4.0F, 2.8F, 0.0F));
 
-		PartDefinition LArmPuff = LeftArm.addOrReplaceChild("LArmPuff", CubeListBuilder.create().texOffs(0, 28).addBox(-0.5F, 6.3F, -1.5F, 3.0F, 3.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.2F, 0.0F));
+		PartDefinition LArmPuff = LeftArm.addOrReplaceChild("LArmPuff", CubeListBuilder.create().texOffs(0, 22).addBox(-0.5F, 6.3F, -1.5F, 3.0F, 3.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.2F, 0.0F));
 
-		PartDefinition LeftLeg = partdefinition.addOrReplaceChild("LeftLeg", CubeListBuilder.create().texOffs(20, 28).addBox(-1.0F, 0.0F, -1.0F, 2.0F, 12.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(1.9F, 12.0F, 0.0F));
+		PartDefinition LeftLeg = partdefinition.addOrReplaceChild("LeftLeg", CubeListBuilder.create().texOffs(55, 24).addBox(-1.0F, 0.0F, -1.0F, 2.0F, 12.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(1.9F, 12.0F, 0.0F));
 
-		PartDefinition LLegPuff = LeftLeg.addOrReplaceChild("LLegPuff", CubeListBuilder.create().texOffs(0, 34).addBox(-1.5F, 5.0F, -1.5F, 3.0F, 5.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(0.1F, -0.1F, 0.0F));
+		PartDefinition LLegPuff = LeftLeg.addOrReplaceChild("LLegPuff", CubeListBuilder.create().texOffs(0, 51).mirror().addBox(-1.5F, 5.0F, -1.5F, 3.0F, 5.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(0.1F, -0.1F, 0.0F));
 
 		return LayerDefinition.create(meshdefinition, 64, 64);
 	}

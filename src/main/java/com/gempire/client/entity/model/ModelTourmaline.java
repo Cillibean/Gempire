@@ -46,13 +46,13 @@ public class ModelTourmaline<T extends EntityGem> extends ModelGem<T> {
 
 		PartDefinition waist = body.addOrReplaceChild("waist", CubeListBuilder.create().texOffs(24, 36).addBox(-5.5F, 16.0F, -3.5F, 11.0F, 3.0F, 8.0F, new CubeDeformation(0.2F)), PartPose.offset(0.0F, 0.0F, 0.0F));
 
-		PartDefinition leftarmbase = partdefinition.addOrReplaceChild("leftarmbase", CubeListBuilder.create().texOffs(32, 47).addBox(-1.0F, -0.5F, -2.0F, 0.0F, 0.0F, 0.0F, new CubeDeformation(0.3F)), PartPose.offset(7.5F, 2.0F, 0.0F));
+		PartDefinition leftarmbase = partdefinition.addOrReplaceChild("leftarmbase", CubeListBuilder.create().texOffs(32, 47).addBox(-1.0F, -0.5F, -2.0F, 0.0F, 0.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offset(7.5F, 2.0F, 0.0F));
 
-		PartDefinition leftarm = leftarmbase.addOrReplaceChild("leftarm", CubeListBuilder.create().texOffs(32, 47).addBox(-1.0F, -0.5F, -2.0F, 4.0F, 10.0F, 4.0F, new CubeDeformation(0.3F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, -0.4363F));
+		PartDefinition leftarm = leftarmbase.addOrReplaceChild("leftarm", CubeListBuilder.create().texOffs(48, 47).addBox(-1.0F, -0.5F, -2.0F, 4.0F, 10.0F, 4.0F, new CubeDeformation(0.3F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, -0.4363F));
 
-		PartDefinition rightarmbase = partdefinition.addOrReplaceChild("rightarmbase", CubeListBuilder.create().texOffs(32, 47).addBox(-1.0F, -0.5F, -2.0F, 0.0F, 0.0F, 0.0F, new CubeDeformation(0.3F)), PartPose.offset(-7.5F, 2.0F, 0.0F));
+		PartDefinition rightarmbase = partdefinition.addOrReplaceChild("rightarmbase", CubeListBuilder.create().texOffs(32, 47).addBox(-1.0F, -0.5F, -2.0F, 0.0F, 0.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offset(-7.5F, 2.0F, 0.0F));
 
-		PartDefinition rightarm = rightarmbase.addOrReplaceChild("rightarm", CubeListBuilder.create().texOffs(48, 47).addBox(-3.0F, -0.5F, -2.0F, 4.0F, 10.0F, 4.0F, new CubeDeformation(0.3F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.4363F));
+		PartDefinition rightarm = rightarmbase.addOrReplaceChild("rightarm", CubeListBuilder.create().texOffs(32, 47).addBox(-3.0F, -0.5F, -2.0F, 4.0F, 10.0F, 4.0F, new CubeDeformation(0.3F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.4363F));
 
 		return LayerDefinition.create(meshdefinition, 64, 64);
 	}

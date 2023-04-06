@@ -50,7 +50,7 @@ public class ModelRuby<T extends EntityGem> extends ModelGem<T> {
                 PartPose.offset(0.0F, 14.5F, 0.0F));
 
 
-        PartDefinition legr = partdefinition.addOrReplaceChild("legr", CubeListBuilder.create().texOffs(0, 32)
+        PartDefinition legr = partdefinition.addOrReplaceChild("legr", CubeListBuilder.create().texOffs(42, 32)
                         .addBox(-2.0F, 0.0F, -2.0F, 4.0F, 6.0F, 4.0F, new CubeDeformation(0.0F)),
                 PartPose.offset(2.0F, 18.0F, 0.0F));
 
