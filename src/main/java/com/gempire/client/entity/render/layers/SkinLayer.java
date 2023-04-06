@@ -27,7 +27,7 @@ public class SkinLayer<E extends EntityGem, M extends ModelGem<E>> extends Gempi
         float r = ((skin & 16711680) >> 16) / 255f;
         float g = ((skin & 65280) >> 8) / 255f;
         float b = ((skin & 255) >> 0) / 255f;
-        VertexConsumer builder = bufferIn.getBuffer(RenderType.entityCutoutNoCull(new ResourceLocation(gem.getModID()+":textures/entity/" + this.getName(gem).toLowerCase() + "/skin_" + gem.getSkinVariant() + ".png")));
+        VertexConsumer builder = bufferIn.getBuffer(RenderType.entityTranslucent(new ResourceLocation(gem.getModID()+":textures/entity/" + this.getName(gem).toLowerCase() + "/skin_" + gem.getSkinVariant() + ".png")));
         this.getParentModel().setupAnim(gem, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
         this.getParentModel().renderToBuffer(matrixStackIn, builder, packedLightIn, OverlayTexture.NO_OVERLAY, r, g, b, 1.0F);
         /*if(gem instanceof EntityStarterGem){
