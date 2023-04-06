@@ -1,0 +1,19 @@
+{
+  "name": "Ruby",
+  "advancement": "gempire:create_ruby",
+  "icon": "gempire:ruby_gem",
+  "category": "gempire:gems_category",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "gempire:ruby{skinColor:15683662,hairVariant:1,insigniaColor:15,outfitColor:15}",
+      "name": "A Ruby",
+      "rotate": "true",
+      "text": "A beginner solider, best used in groups."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Possible Abilities$() $(br)$(li)Knockback$(li)Paralysis$(li)Tank$(li)Beefcake$(li)Powerhouse$(li)Unhinged$(br2) $(l)Definite Abilities$() $(br)$(li)Pyrokinesis"
+    }
+  ]
+}
