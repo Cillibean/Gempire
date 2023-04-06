@@ -159,6 +159,9 @@ public class EntityGarnet extends EntityVaryingGem {
             case 15:
                 name = "melanite";
                 break;
+            case 16:
+                name = "iridescent_andradite";
+                break;
             default:
                 name = "leuco";
                 break;
