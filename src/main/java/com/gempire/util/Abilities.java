@@ -47,7 +47,7 @@ public enum Abilities {
     BUILDER(43, 4),
     REFINERY(44, 4),
     ABUNDANCE(45, 4),
-    ORGANIZATION(46, 5),
+    DESIGNER(46, 5),
     FORTUNATE(47, 3),
     RECALL(48,3),
     KINDERGARTENER(49,3);;

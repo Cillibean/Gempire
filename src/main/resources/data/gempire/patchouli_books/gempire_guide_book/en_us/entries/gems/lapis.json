@@ -1,0 +1,19 @@
+{
+  "name": "Lapis Lazuli",
+  "advancement": "gempire:create_lapis",
+  "icon": "gempire:lapis_gem",
+  "category": "gempire:gems_category",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "gempire:lapis{gemColor:3623377,skinColor:7508735,hairColor:12969,hairVariant:0,insigniaColor:11,outfitColor:11,gemPlacement:12}",
+      "name": "A Lapis Lazuli",
+      "rotate": "true",
+      "text": "A transport gem (NYI), also uses water as a weapon."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Possible Abilities$() $(br)$(li)Tank$(li)Beefcake$(li)Powerhouse$(li)Unhinged$(li)Berserker$(br2) $(l)Definite Abilities$()$(br)$(li)Hydrokinesis$(li)Vehicle (NYI)"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "name": "Aquamarine",
+  "advancement": "gempire:create_aquamarine",
+  "icon": "gempire:aquamarine_gem",
+  "category": "gempire:gems_category",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "gempire:aquamarine{gemColor:5039871,skinColor:10944249,hairColor:36551,hairVariant:0,insigniaColor:3,outfitColor:3,gemPlacement:6}",
+      "name": "A Aquamarine",
+      "rotate": "true",
+      "text": "A flying gem that's useful in ranged combat."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Possible Abilities$() $(br)$(li)Tank$(li)Beefcake$(li)Powerhouse$(li)Unhinged$(li)Kindergartener$(br2) $(l)Definite Abilities$()$(br)$(li)Paralysis$(li)Hydrokinesis"
+    }
+  ]
+}

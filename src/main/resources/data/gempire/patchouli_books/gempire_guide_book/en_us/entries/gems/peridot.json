@@ -1,0 +1,20 @@
+{
+  "name": "Peridot",
+  "advancement": "gempire:create_peridot",
+  "icon": "gempire:peridot_gem",
+  "category": "gempire:gems_category",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "gempire:peridot{gemColor:3143722,skinColor:13434513,hairColor:16777190,hairVariant:0,insigniaColor:5,outfitColor:5,gemPlacement:0}",
+      "name": "A Peridot",
+      "rotate": "true",
+      "offset": 0.4,
+      "text": "A kindergartener gem, she can tame gems for you from kindergartens. She can also create Tier 2 Power Crystals"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Possible Abilities$() $(br)$(li)Tank$(li)Beefcake$(li)Powerhouse$(li)Unhinged$(br2) $(l)Definite Abilities$()$(br)$(li)Kindergartener$(li)Ferrokinesis (NYI)"
+    }
+  ]
+}

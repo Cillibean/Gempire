@@ -1,0 +1,19 @@
+{
+  "name": "Morganite",
+  "advancement": "gempire:create_morganite",
+  "icon": "gempire:morganite_gem",
+  "category": "gempire:gems_category",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "gempire:morganite{gemColor:16687003,skinColor:16699852,hairColor:16416152,hairVariant:0,insigniaColor:6,outfitColor:6,gemPlacement:11}",
+      "name": "A Morganite",
+      "rotate": "true",
+      "text": "A gem that can create many decorative blocks (NYI)."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Possible Abilities$() $(br)$(li)Tank$(li)Beefcake$(li)Powerhouse$(li)Unhinged$(br2) $(l)Definite Abilities$()$(br)$(li)Designer (NYI)"
+    }
+  ]
+}
