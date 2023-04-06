@@ -1,0 +1,19 @@
+{
+  "name": "Agate",
+  "advancement": "gempire:create_agate",
+  "icon": "gempire:agate_gem_3",
+  "category": "gempire:gems_category",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "gempire:agate{skinColorVariant:3,skinColor:10599677,hairColor:15460605,gemColor:9660408,gemPlacement:20,hairVariant:1,insigniaColor:3,outfitColor:3}",
+      "name": "An Agate",
+      "rotate": "true",
+      "text": "A mid-game solider, has many possible abilities, also has the Stern ability, making other gems perform their tasks more efficiently."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Possible Abilities$() $(li)Knockback$(li)Paralysis$(li)Tank$(li)Beefcake$(li)Powerhouse$(li)Unhinged$(li)Pyrokinesis$(li)Cryokinesis$(li)Healer$(li)First-Aid$(li)Berserker$(li)Beastmaster$(br2) $(l)Definite Abilities$() $(br)$(li)Stern"
+    }
+  ]
+}

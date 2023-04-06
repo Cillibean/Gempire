@@ -1,0 +1,19 @@
+{
+  "name": "Quartz",
+  "advancement": "gempire:create_quartz",
+  "icon": "gempire:quartz_gem_10",
+  "category": "gempire:gems_category",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "gempire:quartz{skinColor:14472175,hairColor:16512511,gemColor:12347117,gemPlacement:11,hairVariant:0,insigniaColor:10,outfitColor:10}",
+      "name": "A Quartz",
+      "rotate": "true",
+      "text": "A mid-game solider, has many possible abilities."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Possible Abilities$() $(br)$(li)Knockback$(li)Paralysis$(li)Tank$(li)Beefcake$(li)Powerhouse$(li)Unhinged$(li)Pyrokinesis$(li)Cryokinesis$(li)Healer$(li)First-Aid$(li)Berserker$(li)Beastmaster"
+    }
+  ]
+}
