@@ -9,7 +9,7 @@
       "entity": "gempire:zircon{hairColor:6324980,gemColor:2835390,skinColor:3032779,hairVariant:0,insigniaColor:11,outfitColor:11,gemPlacement:11}",
       "name": "A Zircon",
       "rotate": "true",
-      "offset": 0.4,
+      "offset": 0.2,
       "text": "A rare gem that spawns with a random enchantment, and can enchant items with it. Needs Lapis Lazuli and can be given gold to make EXP prices lower."
     },
     {

@@ -10,17 +10,22 @@
       {
         "type": "minecraft:item",
         "name": "gempire:blue_essence_bucket",
-        "weight": 10
+        "weight": 15
       },
       {
         "type": "minecraft:item",
         "name": "gempire:yellow_essence_bucket",
-        "weight": 10
+        "weight": 15
       },
       {
         "type": "minecraft:item",
         "name": "gempire:white_essence_bucket",
-        "weight": 10
+        "weight": 15
+      },
+      {
+        "type": "minecraft:item",
+        "name": "gempire:prismatic_ingot",
+        "weight": 15
       }
     ]
   }]

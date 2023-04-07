@@ -9,6 +9,7 @@
       "entity": "gempire:pearl{hairColor:16363770,gemColor:15720175,skinColor:16116975,hairVariant:4,insigniaColor:6,outfitColor:6,gemPlacement:17,outfitVariant:5,insigniaVariant:3}",
       "name": "A Pearl",
       "rotate": "true",
+      "offset": 0.1,
       "text": "A servant gem that can hold up to 108 items in her inventory. She can also be customized right from her GUI."
     },
     {

@@ -9,6 +9,7 @@
       "entity": "gempire:lapis{gemColor:3623377,skinColor:7508735,hairColor:12969,hairVariant:0,insigniaColor:11,outfitColor:11,gemPlacement:12}",
       "name": "A Lapis Lazuli",
       "rotate": "true",
+      "offset": 0.1,
       "text": "A transport gem (NYI), also uses water as a weapon."
     },
     {

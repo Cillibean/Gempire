@@ -9,6 +9,7 @@
       "entity": "gempire:quartz{skinColor:14472175,hairColor:16512511,gemColor:12347117,gemPlacement:11,hairVariant:0,insigniaColor:10,outfitColor:10}",
       "name": "A Quartz",
       "rotate": "true",
+      "offset": 0.2,
       "text": "A mid-game solider, has many possible abilities."
     },
     {
