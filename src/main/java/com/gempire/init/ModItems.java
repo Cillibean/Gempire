@@ -398,13 +398,13 @@ public class ModItems {
             new ItemDestabilizer(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(1).durability(25)));
 
    public static final RegistryObject<Item> PINK_REJUVENATOR = ITEMS.register("pink_rejuvenator", () ->
-            new ItemPinkRejuvenator(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(1).durability(15)));
+            new ItemPinkRejuvenator(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(1).durability(20)));
     public static final RegistryObject<Item> YELLOW_REJUVENATOR = ITEMS.register("yellow_rejuvenator", () ->
-            new ItemYellowRejuvenator(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(1).durability(20)));
+            new ItemYellowRejuvenator(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(1).durability(25)));
     public static final RegistryObject<Item> WHITE_REJUVENATOR = ITEMS.register("white_rejuvenator", () ->
-            new ItemWhiteRejuvenator(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(1).durability(20)));
+            new ItemWhiteRejuvenator(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(1).durability(25)));
     public static final RegistryObject<Item> BLUE_REJUVENATOR = ITEMS.register("blue_rejuvenator", () ->
-            new ItemBlueRejuvenator(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(1).durability(10)));
+            new ItemBlueRejuvenator(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(1).durability(15)));
 
     public static final RegistryObject<Item> ENERGY_INTERFACE = ITEMS.register("energy_interface", () ->
             new Item(new Item.Properties().stacksTo(64)));
