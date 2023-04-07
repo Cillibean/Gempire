@@ -10,7 +10,7 @@
       "name": "An Emerald",
       "rotate": "true",
       "offset": 0.4,
-      "text": "A rare combat gem, that when given an eye of ender in her inventory, and doing /recall, brings you back home."
+      "text": "A rare combat gem that, when given an Eye of Ender in her inventory, and by using the command /recall, brings you back home to your bed."
     },
     {
       "type": "patchouli:text",

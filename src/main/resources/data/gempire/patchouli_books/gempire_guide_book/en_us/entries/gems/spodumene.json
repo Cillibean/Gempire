@@ -9,7 +9,7 @@
       "entity": "gempire:spodumene{gemColor:16033690,skinColor:16217679,hairColor:15859711,hairVariant:0,insigniaColor:1,outfitColor:1,gemPlacement:11}",
       "name": "A Spodumene",
       "rotate": "true",
-      "text": "A fishing gem that can give the player dolphins grace and waterbreathing in a small AOE."
+      "text": "A fishing gem that can give the player dolphins grace and water breathing in a small area around her."
     },
     {
       "type": "patchouli:text",

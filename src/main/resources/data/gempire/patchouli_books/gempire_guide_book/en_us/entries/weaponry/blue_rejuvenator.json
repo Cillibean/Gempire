@@ -8,7 +8,7 @@
       "type": "patchouli:spotlight",
       "link_recipe ": true,
       "item": "gempire:blue_rejuvenator",
-      "text": "Blue rejuvenators are used to randomize a gems abilities. In order for it to function, you need to make sure the weapon is fully readied."
+      "text": "Blue rejuvenators are used to randomize a gem's abilities. In order for it to function, you need to make sure the weapon is fully readied."
     },
     {
       "type": "patchouli:crafting",

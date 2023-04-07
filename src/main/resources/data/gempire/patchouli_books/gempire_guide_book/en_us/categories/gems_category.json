@@ -1,6 +1,6 @@
 {
   "name": "Gems",
-  "description": "See the uses for gems!",
+  "description": "A catalog for all gem species and their uses!",
   "icon": "gempire:ruby_gem",
   "secret": "false"
 }
