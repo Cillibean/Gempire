@@ -1,0 +1,24 @@
+{
+  "name": "Destabilizers",
+  "icon": "gempire:yellow_destabilizer",
+  "advancement": "gempire:root",
+  "category": "gempire:weaponry",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "link_recipe ": true,
+      "item": "gempire:yellow_destabilizer",
+      "text": "Destabilizers are used to destabilize gems, making them poof instantly. they can be made in Pink, Blue, Yellow and White, you need to make sure the weapon is fully readied."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "gempire:ydestab",
+      "recipe2": "gempire:bdestab"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "gempire:wdestab",
+      "recipe2": "gempire:pdestab"
+    }
+  ]
+}

@@ -7,5 +7,6 @@
   "creative_tab": "gempire_items",
   "show_progress": false,
   "use_blocky_font": true,
-  "filler_texture": "gempire:textures/gui/patchouli/page_filler.png"
+  "filler_texture": "gempire:textures/gui/patchouli/page_filler.png",
+  "model": "gempire:book"
 }

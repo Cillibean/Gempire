@@ -1,0 +1,18 @@
+{
+  "name": "Pink Rejuvenator",
+  "icon": "gempire:pink_rejuvenator",
+  "advancement": "gempire:root",
+  "category": "gempire:weaponry",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "link_recipe ": true,
+      "item": "gempire:pink_rejuvenator",
+      "text": "Pink rejuvenators are used to make gems lose all ownership, including rebels (NYI). In order for it to function, you need to make sure the weapon is fully readied."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "gempire:prejuv"
+    }
+  ]
+}

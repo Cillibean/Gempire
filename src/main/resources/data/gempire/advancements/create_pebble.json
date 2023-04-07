@@ -3,7 +3,7 @@
     "icon": {
       "item": "gempire:pebble_gem"
     },
-    "title": "Pebble Name Here",
+    "title": "Pebbled",
     "description": "Obtain a Pebble ",
     "frame": "task",
     "hidden": false

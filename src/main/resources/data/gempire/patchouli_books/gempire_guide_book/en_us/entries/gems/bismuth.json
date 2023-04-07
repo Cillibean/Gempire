@@ -1,0 +1,20 @@
+{
+  "name": "Bismuth",
+  "advancement": "gempire:create_bismuth",
+  "icon": "gempire:bismuth_gem",
+  "category": "gempire:gems_category",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "gempire:bismuth{skinColor:9545935,hairVariant:1,insigniaColor:3,outfitColor:3,gemPlacement:11,hairColor:16777215,gemColor:16777215}",
+      "name": "A Bismuth",
+      "rotate": "true",
+      "offset": 0.3,
+      "text": "A smithing gem, give her a prismatic scrap and she'll smelt it into a prismatic ingot.."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Possible Abilities$() $(br)$(li)Tank$(li)Beefcake$(li)Powerhouse$(li)Unhinged$(br2) $(l)Definite Abilities$()$(li)Refinery"
+    }
+  ]
+}
