@@ -229,14 +229,10 @@ public class ModBlocks {
                     )
     );
 
-    public static final RegistryObject<Block> FLOATANIUM_REACTOR = BLOCKS.register("floatanium_reactor", () ->
-            new Block(BlockBehaviour.Properties
-                    .of(Material.METAL)
-                    .strength(5, 5)
-                    .sound(SoundType.GLASS)
-                    
-            )
-    );
+    public static final RegistryObject<Block> PEDISTAL = BLOCKS.register("pedistal", () ->
+            new PedistalBlock(BlockBehaviour.Properties.of(Material.STONE).noOcclusion(),true)
+            );
+    ;
 
     public static final RegistryObject<Block> GEM_SEED_BLOCK = BLOCKS.register("gem_seed_block", () ->
             new GemSeedBlock(BlockBehaviour.Properties

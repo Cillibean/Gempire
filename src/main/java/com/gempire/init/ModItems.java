@@ -31,7 +31,14 @@ public class ModItems {
                     ModBlocks.WARP_PAD.get(),
                     new Item.Properties().tab(ModItemGroup.BLOCKS)
             )
+
     );*/
+    public static final RegistryObject<Item> PEDISTAL = ITEMS.register("pedistal", () ->
+            new BlockItem(
+                    ModBlocks.PEDISTAL.get(),
+                    new Item.Properties().tab(ModItemGroup.BLOCKS)
+            )
+    );
     public static final RegistryObject<Item> WHITE_CHROMA_CRYSTAL = ITEMS.register("white_chroma_crystal", () ->
             new BlockItem(
                     ModBlocks.WHITE_CHROMA_CRYSTAL.get(),
@@ -405,13 +412,6 @@ public class ModItems {
             new ItemWhiteRejuvenator(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(1).durability(25)));
     public static final RegistryObject<Item> BLUE_REJUVENATOR = ITEMS.register("blue_rejuvenator", () ->
             new ItemBlueRejuvenator(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(1).durability(15)));
-
-    public static final RegistryObject<Item> ENERGY_INTERFACE = ITEMS.register("energy_interface", () ->
-            new Item(new Item.Properties().stacksTo(64)));
-    public static final RegistryObject<Item> FLUID_INTERFACE = ITEMS.register("fluid_interface", () ->
-            new Item(new Item.Properties().stacksTo(64)));
-    public static final RegistryObject<Item> STACK_INTERFACE = ITEMS.register("stack_interface", () ->
-            new Item(new Item.Properties().stacksTo(64)));
 
     public static final RegistryObject<Item> WHITE_CHROMA = ITEMS.register("white_chroma", () ->
             new ItemChroma(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(64), 0));

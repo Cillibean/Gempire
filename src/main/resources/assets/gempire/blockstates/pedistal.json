@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "facing=east,powered=false": {
+      "model": "gempire:block/hand_pedistal_unpowered",
+      "y": 90
+    },
+    "facing=north,powered=false": {
+      "model": "gempire:block/hand_pedistal_unpowered"
+    },
+    "facing=south,powered=false": {
+      "model": "gempire:block/hand_pedistal_unpowered",
+      "y": 180
+    },
+    "facing=west,powered=false": {
+      "model": "gempire:block/hand_pedistal_unpowered",
+      "y": 270
+    },
+    "facing=east,powered=true": {
+      "model": "gempire:block/hand_pedistal_powered",
+      "y": 90
+    },
+    "facing=north,powered=true": {
+      "model": "gempire:block/hand_pedistal_powered"
+    },
+    "facing=south,powered=true": {
+      "model": "gempire:block/hand_pedistal_powered",
+      "y": 180
+    },
+    "facing=west,powered=true": {
+      "model": "gempire:block/hand_pedistal_powered",
+      "y": 270
+    }
+  }
+}
