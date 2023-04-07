@@ -74,7 +74,10 @@ public class EntitySpinel extends EntityVaryingGem {
     public int generateHairVariant() {
         return this.random.nextInt(13);
     }
-
+    @Override
+    public int generateInsigniaColor() {
+        return 0;
+    }
     @Override
     public boolean UsesUniqueNames() {
         return false;
@@ -108,7 +111,7 @@ public class EntitySpinel extends EntityVaryingGem {
     }
     public Abilities[] definiteAbilities(){
         return new Abilities[]{
-                Abilities.LURE//Abilities.JESTER, Abilities.DECOY
+                Abilities.LURE//Abilities.JESTER
         };
     }
 

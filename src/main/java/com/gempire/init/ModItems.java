@@ -3,6 +3,8 @@ package com.gempire.init;
 import com.gempire.Gempire;
 import com.gempire.items.*;
 import com.gempire.util.ModItemGroup;
+import net.minecraft.tags.BannerPatternTags;
+import net.minecraft.world.item.BannerPatternItem;
 import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -13,13 +15,6 @@ import net.minecraft.world.item.Item;
 
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Gempire.MODID);
-
-    public static final RegistryObject<Item> FLOATANIUM_REACTOR = ITEMS.register("floatanium_reactor", () ->
-            new BlockItem(
-                    ModBlocks.FLOATANIUM_REACTOR.get(),
-                    new Item.Properties()
-            )
-    );
 
     /*public static final RegistryObject<Item> WARP_SEED = ITEMS.register("warp_seed", () ->
             new ItemWarpSeed(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(1)));

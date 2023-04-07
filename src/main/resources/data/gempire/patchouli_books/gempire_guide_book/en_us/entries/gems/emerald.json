@@ -1,0 +1,20 @@
+{
+  "name": "Emerald",
+  "advancement": "gempire:create_emerald",
+  "icon": "gempire:emerald_gem",
+  "category": "gempire:gems_category",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "gempire:emerald{gemColor:47224,skinColor:7601316,hairColor:1494665,hairVariant:0,insigniaColor:13,outfitColor:13,gemPlacement:2}",
+      "name": "An Emerald",
+      "rotate": "true",
+      "offset": 0.4,
+      "text": "A rare combat gem, that when given an eye of ender in her inventory, and doing /recall, brings you back home."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Possible Abilities$() $(br)$(li)Tank$(li)Beefcake$(li)Powerhouse$(li)Unhinged$(li)Negotiator(br2) $(l)Definite Abilities$()$(br)$(li)Recall"
+    }
+  ]
+}

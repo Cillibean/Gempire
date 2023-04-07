@@ -1,6 +1,10 @@
 package com.gempire.init;
 
+import net.minecraft.world.level.block.entity.BannerPattern;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+
+import java.util.Locale;
 
 public class RegistryHandler {
 
@@ -17,5 +21,4 @@ public class RegistryHandler {
         ModFeatures.FEATURES.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModEffects.MOB_EFFECTS.register(FMLJavaModLoadingContext.get().getModEventBus());
     }
-
 }

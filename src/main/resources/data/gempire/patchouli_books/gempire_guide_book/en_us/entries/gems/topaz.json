@@ -1,0 +1,19 @@
+{
+  "name": "Topaz",
+  "advancement": "gempire:create_topaz",
+  "icon": "gempire:topaz_gem_4",
+  "category": "gempire:gems_category",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "gempire:topaz{hairColor:16580036,gemColor:16773200,skinColor:16181310,hairVariant:0,insigniaColor:4,outfitColor:4,gemPlacement:3}",
+      "name": "A Topaz",
+      "rotate": "true",
+      "text": "A solider that's good for guarding, as she returns to her post."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Possible Abilities$() $(br)$(li)Paralysis$(li)Tank$(li)Beefcake$(li)Powerhouse$(li)Unhinged$(li)Stern$(br2) $(l)Definite Abilities$()$(li)Knockback"
+    }
+  ]
+}

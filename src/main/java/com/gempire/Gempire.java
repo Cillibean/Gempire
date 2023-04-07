@@ -7,6 +7,11 @@ import com.gempire.entities.gems.starter.EntityNacre;
 import com.gempire.entities.gems.starter.EntityPebble;
 import com.gempire.entities.gems.starter.EntityShale;
 import com.gempire.init.*;
+import net.minecraft.WorldVersion;
+import net.minecraft.data.DataGenerator;
+import net.minecraft.data.models.ModelProvider;
+import net.minecraft.data.structures.SnbtToNbt;
+import net.minecraft.data.structures.StructureUpdater;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobCategory;
@@ -30,6 +35,8 @@ import net.minecraftforge.event.server.ServerStartingEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.nio.file.Path;
+import java.util.Collection;
 import java.util.stream.Collectors;
 
 // The value here should match an entry in the META-INF/mods.toml file

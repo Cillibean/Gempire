@@ -1,0 +1,19 @@
+{
+  "name": "Tourmaline",
+  "advancement": "gempire:create_tourmaline",
+  "icon": "gempire:tourmaline_gem_16",
+  "category": "gempire:gems_category",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "gempire:tourmaline{gemColor:14977977,skinColor:16429032,hairColor:16755907,marking2Color:4646815,markingColor:4646815,markingVariant:0,marking2Variant:0,hairVariant:0,insigniaColor:16,outfitColor:16,gemPlacement:13,skinColorVariant:16}",
+      "name": "A Tourmaline",
+      "rotate": "true",
+      "text": "A farmer gem (NYI) that can use wind as a weapon (NYI)."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Possible Abilities$() $(br)$(li)Tank$(li)Beefcake$(li)Berserker$(li)Unhinged$(li)Powerhouse$(br2) $(l)Definite Abilities$()$(br)$(li)Farmer (NYI) $(li)Aerokinesis (NYI)"
+    }
+  ]
+}

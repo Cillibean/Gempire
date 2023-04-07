@@ -208,7 +208,7 @@ public class EntityTourmaline extends EntityVaryingGem {
     }
     public Abilities[] definiteAbilities(){
         return new Abilities[]{
-                //Abilities.FARMER, Abilities.AEROKINESIS
+                Abilities.FARMER, Abilities.AEROKINESIS
         };
     }
 

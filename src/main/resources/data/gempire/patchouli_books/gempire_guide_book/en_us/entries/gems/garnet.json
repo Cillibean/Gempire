@@ -1,0 +1,20 @@
+{
+  "name": "Garnet",
+  "advancement": "gempire:create_garnet",
+  "icon": "gempire:garnet_gem_1",
+  "category": "gempire:gems_category",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "gempire:garnet{skinColorVariant:1,skinColor:15902210,hairColor:16315033,gemColor:15833600,gemPlacement:11,hairVariant:1,insigniaColor:1,outfitColor:1,outfitVariant:2,insigniaVariant:2}",
+      "name": "A Garnet",
+      "rotate": "true",
+      "offset": 0.4,
+      "text": "A late-game solider, has great strength."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Possible Abilities$() $(li)Tank$(li)Beefcake$(li)Powerhouse$(li)Unhinged$(li)Berserker$(li)Lootmaster (NYI)$(li)Abundanc (NYI)$(br2) $(l)Definite Abilities$() $(br)$(li)Disarming"
+    }
+  ]
+}
