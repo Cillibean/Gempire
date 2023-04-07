@@ -5,18 +5,19 @@ import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -25,6 +26,8 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -34,13 +37,19 @@ public class PedistalBlock extends HorizontalDirectionalBlock{
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     private final boolean sensitive;
 
+    protected static final VoxelShape Z_AXIS_AABB = Block.box(5.0D, 0.0D, 4.0D, 11.0D, 16.0D, 11.0D);
+
+
     public PedistalBlock(Properties p_49795_, Boolean sensitive) {
         super(p_49795_);
         this.registerDefaultState(this.stateDefinition.any().setValue(POWERED, Boolean.FALSE).setValue(FACING, Direction.NORTH));
         this.sensitive = sensitive;
     }
+    public boolean mayPlaceOn(BlockState p_51042_, BlockGetter p_51043_, BlockPos p_51044_) {
+        return p_51042_.is(BlockTags.DIRT) || p_51042_.is(Blocks.FARMLAND);
+    }
     private int getPressDuration() {
-        return this.sensitive ? 30 : 20;
+        return this.sensitive ? 60 : 20;
     }
     public InteractionResult use(BlockState p_51088_, Level p_51089_, BlockPos p_51090_, Player p_51091_, InteractionHand p_51092_, BlockHitResult p_51093_) {
         if (p_51088_.getValue(POWERED)) {
@@ -52,9 +61,12 @@ public class PedistalBlock extends HorizontalDirectionalBlock{
             return InteractionResult.sidedSuccess(p_51089_.isClientSide);
         }
     }
+    public VoxelShape getShape(BlockState p_154346_, BlockGetter p_154347_, BlockPos p_154348_, CollisionContext p_154349_) {
+        return Z_AXIS_AABB;
+    }
 
     public void press(BlockState p_51117_, Level p_51118_, BlockPos p_51119_) {
-        p_51118_.setBlock(p_51119_, p_51117_.setValue(POWERED, Boolean.valueOf(true)), 3);
+        p_51118_.setBlock(p_51119_, p_51117_.setValue(POWERED, Boolean.TRUE), 3);
         this.updateNeighbours(p_51117_, p_51118_, p_51119_);
         p_51118_.scheduleTick(p_51119_, this, this.getPressDuration());
     }
@@ -63,7 +75,13 @@ public class PedistalBlock extends HorizontalDirectionalBlock{
         p_51069_.playSound(p_51071_ ? p_51068_ : null, p_51070_, this.getSound(p_51071_), SoundSource.BLOCKS, 0.3F, p_51071_ ? 0.6F : 0.5F);
     }
     public BlockState getStateForPlacement(BlockPlaceContext p_51377_) {
-        return this.defaultBlockState().setValue(FACING, p_51377_.getHorizontalDirection().getOpposite());
+        if(p_51377_.getClickedFace().equals(Direction.UP)) {
+            return this.defaultBlockState().setValue(FACING, p_51377_.getHorizontalDirection().getOpposite());
+        }
+        else
+        {
+            return null;
+        }
     }
     protected SoundEvent getSound(boolean p_51102_) {
         return null;
