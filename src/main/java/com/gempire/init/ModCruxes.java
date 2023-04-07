@@ -10,7 +10,7 @@ import net.minecraft.world.item.Items;
 import java.util.ArrayList;
 
 public class ModCruxes {
-    private static int stoneCruxValue = 1;
+    private static final int stoneCruxValue = 1;
     public static final GemConditions JASPER_CONDITIONS(){
         ArrayList<Crux> gemCruxes = new ArrayList<>();
         float gemTemperatureMin = 0f;
@@ -28,7 +28,7 @@ public class ModCruxes {
         gemCruxes.add(new Crux(Blocks.NETHER_QUARTZ_ORE.defaultBlockState(), 5, CruxType.MINERAL, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.AMETHYST_BLOCK.defaultBlockState(), 6, CruxType.MINERAL, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.QUARTZ_BLOCK.defaultBlockState(), 8, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
-        return new GemConditions(gemCruxes, essences, primer, 1, gemTemperatureMin, gemTemperatureMax, 2.50);
+        return new GemConditions(gemCruxes, essences, primer, 1, gemTemperatureMin, gemTemperatureMax);
     }
 
     public static final GemConditions LARIMAR_CONDITIONS(){

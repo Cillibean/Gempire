@@ -13,7 +13,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "$(l)Possible Abilities$() $(br)$(li)Tank$(li)Beefcake$(li)Powerhouse$(li)Unhinged$(li)Knockback$(li)Berserker$(br2) $(l)Definite Abilities$()$(br)$(li)Scout (NYI)(li)Acid Spit"
+      "text": "$(l)Possible Abilities$() $(br)$(li)Tank$(li)Beefcake$(li)Powerhouse$(li)Unhinged$(li)Knockback$(li)Berserker$(br2) $(l)Definite Abilities$()$(br)$(li)Scout (NYI)$(li)Acid Spit"
     }
   ]
 }

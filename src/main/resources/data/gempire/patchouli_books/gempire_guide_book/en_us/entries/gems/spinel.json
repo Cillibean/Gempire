@@ -1,0 +1,20 @@
+{
+  "name": "Spinel",
+  "advancement": "gempire:create_spinel",
+  "icon": "gempire:spinel_gem_6",
+  "category": "gempire:gems_category",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "gempire:spinel{hairColor:14296965,gemColor:16738220,skinColor:16754642,hairVariant:7,insigniaColor:0,outfitColor:6,gemPlacement:11}",
+      "name": "A Spinel",
+      "rotate": "true",
+      "offset": 0.2,
+      "text": "A playful gem that attracts passive mobs such as sheep and cows."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Possible Abilities$() $(br)$(li)Tank$(li)Beefcake$(li)Unhinged$(li)Powerhouse$(br2) $(l)Definite Abilities$()$(li)Lure"
+    }
+  ]
+}

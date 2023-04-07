@@ -5,6 +5,7 @@ import com.gempire.entities.ai.EntityAIFollowOwner;
 import com.gempire.entities.ai.EntityAIWander;
 import com.gempire.entities.ai.EntityAiFollowSpinel;
 import com.gempire.entities.bases.EntityGem;
+import com.gempire.init.ModItems;
 import com.gempire.util.Abilities;
 import com.gempire.util.GemPlacements;
 import net.minecraft.sounds.SoundEvent;
@@ -18,9 +19,11 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.level.block.Blocks;
 
 public class EntityMorganite extends EntityGem {
     //TO-DO: IMPLEMENT MORGANITE. Sorts your items into Crystal Chests for you.
@@ -104,7 +107,21 @@ public class EntityMorganite extends EntityGem {
                 Abilities.DESIGNER
         };
     }
-
+    @Override
+    public Item getInputItem()
+    {
+        return Blocks.STONE.asItem();
+    }
+    @Override
+    public Item getOutputItem()
+    {
+        return ModItems.PEDISTAL.get();
+    }
+    @Override
+    public int getTimetoCraft()
+    {
+        return 3 * 20;
+    }
     public int generateSkinColorVariant() {
         return 0;
     }

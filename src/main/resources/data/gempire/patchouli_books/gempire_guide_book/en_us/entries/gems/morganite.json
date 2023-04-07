@@ -9,11 +9,15 @@
       "entity": "gempire:morganite{gemColor:16687003,skinColor:16699852,hairColor:16416152,hairVariant:0,insigniaColor:6,outfitColor:6,gemPlacement:11}",
       "name": "A Morganite",
       "rotate": "true",
-      "text": "A gem that can create many decorative blocks (NYI)."
+      "text": "A gem that can create many decorative blocks, see page 3 for recipes."
     },
     {
       "type": "patchouli:text",
-      "text": "$(l)Possible Abilities$() $(br)$(li)Tank$(li)Beefcake$(li)Powerhouse$(li)Unhinged$(br2) $(l)Definite Abilities$()$(br)$(li)Designer (NYI)"
+      "text": "$(l)Possible Abilities$() $(br)$(li)Tank$(li)Beefcake$(li)Powerhouse$(li)Unhinged$(br2) $(l)Definite Abilities$()$(br)$(li)Designer"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Recipes$()$(br)To make a hand Pedestal, give her stone."
     }
   ]
 }
