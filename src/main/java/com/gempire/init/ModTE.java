@@ -28,10 +28,10 @@ public class ModTE {
     public static final RegistryObject<BlockEntityType<WarpPadTE>> WARP_PAD_TE = TILE_ENTITIES.register(
             "warp_pad_te", () -> BlockEntityType.Builder.of(WarpPadTE::new, ModBlocks.WARP_PAD.get()).build(null));
 
-    public static final RegistryObject<BlockEntityType<PowerCrystalTE>> POWER_CRYSTAL_TE = TILE_ENTITIES.register(
-            "power_crystal_te", () -> BlockEntityType.Builder.of(PowerCrystalTE::new, ModBlocks.POWER_CRYSTAL_BLOCK.get()).build(null));
-
     public static final RegistryObject<BlockEntityType<ShellTE>> SHELL_TE = TILE_ENTITIES.register(
             "shell_te", () -> BlockEntityType.Builder.of(ShellTE::new, ModBlocks.SHELL_BLOCK.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<PedistalTE>> PEDISTAL_TE = TILE_ENTITIES.register(
+            "pedistal_te", () -> BlockEntityType.Builder.of(PedistalTE::new, ModBlocks.PEDISTAL.get()).build(null));
 
 }
