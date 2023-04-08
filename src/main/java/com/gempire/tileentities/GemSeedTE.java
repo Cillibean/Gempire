@@ -41,7 +41,7 @@ public class GemSeedTE extends BlockEntity {
     public String essences = "pink-blue-yellow-white";
     public int facing;
     public boolean checked = false;
-    public Block drained_sand, drained_soil, drained_stone, drained_stone_2, banded_drained_stone;
+    public Block drained_sand, drained_soil, drained_stone, drained_stone_2, banded_drained_stone, drained_log, drained_log_cracked, drained_ice;
 
     public HashMap<Integer, BlockPos> POSITIONS = new HashMap<>();
     public ArrayList<Integer> IDS = new ArrayList<>();
@@ -202,6 +202,21 @@ public class GemSeedTE extends BlockEntity {
             else if(block == Blocks.SAND || block == Blocks.RED_SAND || block == Blocks.SOUL_SAND){
                 this.level.setBlockAndUpdate(blockPos, this.drained_sand.defaultBlockState());
             }
+            else if(block == Blocks.OAK_LOG || block == Blocks.STRIPPED_OAK_LOG || block == Blocks.STRIPPED_OAK_WOOD || block == Blocks.OAK_WOOD
+                    || block == Blocks.SPRUCE_LOG || block == Blocks.STRIPPED_SPRUCE_LOG || block == Blocks.STRIPPED_SPRUCE_WOOD|| block == Blocks.SPRUCE_WOOD
+                    || block == Blocks.BIRCH_LOG|| block == Blocks.STRIPPED_BIRCH_LOG || block == Blocks.STRIPPED_BIRCH_WOOD || block == Blocks.BIRCH_WOOD
+                    || block == Blocks.JUNGLE_LOG || block == Blocks.STRIPPED_JUNGLE_LOG || block == Blocks.STRIPPED_JUNGLE_WOOD || block == Blocks.JUNGLE_WOOD
+                    || block == Blocks.ACACIA_LOG || block == Blocks.STRIPPED_ACACIA_LOG || block == Blocks.STRIPPED_ACACIA_WOOD || block == Blocks.ACACIA_WOOD
+                    || block == Blocks.DARK_OAK_LOG || block == Blocks.STRIPPED_DARK_OAK_LOG || block == Blocks.STRIPPED_DARK_OAK_WOOD || block == Blocks.DARK_OAK_WOOD) {
+                this.level.setBlockAndUpdate(blockPos, this.drained_log.defaultBlockState());
+            }
+            else if(block == Blocks.CRIMSON_STEM || block == Blocks.WARPED_STEM || block == Blocks.STRIPPED_CRIMSON_STEM || block == Blocks.STRIPPED_WARPED_STEM
+                    || block == Blocks.CRIMSON_HYPHAE || block == Blocks.WARPED_HYPHAE || block == Blocks.STRIPPED_CRIMSON_HYPHAE || block == Blocks.STRIPPED_WARPED_HYPHAE) {
+                this.level.setBlockAndUpdate(blockPos, this.drained_log_cracked.defaultBlockState());
+            }
+            else if(block == Blocks.BLUE_ICE || block == Blocks.PACKED_ICE) {
+                this.level.setBlockAndUpdate(blockPos, this.drained_ice.defaultBlockState());
+            }
             else {
                 if(blockPos.getY() < 80) {
                     this.level.setBlockAndUpdate(blockPos, this.drained_stone.defaultBlockState());
@@ -223,37 +238,52 @@ public class GemSeedTE extends BlockEntity {
         if(temperature > .1f && temperature <= .5F){
             this.drained_sand = ModBlocks.DRAINED_SAND.get();
             this.drained_soil = ModBlocks.DRAINED_GREY_SOIL.get();
+            this.drained_ice = ModBlocks.DRAINED_ICE.get();
             this.drained_stone = ModBlocks.DRAINED_GREY_STONE.get();
             this.drained_stone_2 = ModBlocks.DRAINED_GREY_STONE_2.get();
             this.banded_drained_stone = ModBlocks.DRAINED_BANDED_GREY_STONE.get();
+            this.drained_log = ModBlocks.DRAINED_LOG.get();
+            this.drained_log_cracked = ModBlocks.DRAINED_LOG_CRACKED.get();
         }
         else if(temperature > .5f && temperature <= .9f){
             this.drained_sand = ModBlocks.DRAINED_SAND.get();
             this.drained_soil = ModBlocks.DRAINED_PURPLE_SOIL.get();
+            this.drained_ice = ModBlocks.DRAINED_ICE.get();
             this.drained_stone = ModBlocks.DRAINED_PURPLE_STONE.get();
             this.drained_stone_2 = ModBlocks.DRAINED_PURPLE_STONE_2.get();
             this.banded_drained_stone = ModBlocks.DRAINED_BANDED_PURPLE_STONE.get();
+            this.drained_log = ModBlocks.DRAINED_LOG.get();
+            this.drained_log_cracked = ModBlocks.DRAINED_LOG_CRACKED.get();
         }
         else if(temperature > .9f && temperature <= 1.2f){
             this.drained_sand = ModBlocks.DRAINED_SAND.get();
             this.drained_soil = ModBlocks.DRAINED_PURPLE_SOIL.get();
+            this.drained_ice = ModBlocks.DRAINED_ICE.get();
             this.drained_stone = ModBlocks.DRAINED_YELLOW_STONE.get();
             this.drained_stone_2 = ModBlocks.DRAINED_YELLOW_STONE_2.get();
             this.banded_drained_stone = ModBlocks.DRAINED_BANDED_YELLOW_STONE.get();
+            this.drained_log = ModBlocks.DRAINED_LOG.get();
+            this.drained_log_cracked = ModBlocks.DRAINED_LOG_CRACKED.get();
         }
         else if(temperature > 1.2f && temperature <= 2f){
             this.drained_sand = ModBlocks.DRAINED_RED_SAND.get();
             this.drained_soil = ModBlocks.DRAINED_RED_SAND.get();
+            this.drained_ice = ModBlocks.DRAINED_ICE.get();
             this.drained_stone = ModBlocks.DRAINED_RED_STONE.get();
             this.drained_stone_2 = ModBlocks.DRAINED_RED_STONE_2.get();
             this.banded_drained_stone = ModBlocks.DRAINED_BANDED_RED_STONE.get();
+            this.drained_log = ModBlocks.DRAINED_LOG.get();
+            this.drained_log_cracked = ModBlocks.DRAINED_LOG_CRACKED.get();
         }
         else{
             this.drained_sand = ModBlocks.DRAINED_SAND.get();
             this.drained_soil = ModBlocks.DRAINED_BLUE_SOIL.get();
+            this.drained_ice = ModBlocks.DRAINED_ICE.get();
             this.drained_stone = ModBlocks.DRAINED_BLUE_STONE.get();
             this.drained_stone_2 = ModBlocks.DRAINED_BLUE_STONE_2.get();
             this.banded_drained_stone = ModBlocks.DRAINED_BANDED_BLUE_STONE.get();
+            this.drained_log = ModBlocks.DRAINED_LOG.get();
+            this.drained_log_cracked = ModBlocks.DRAINED_LOG_CRACKED.get();
         }
     }
 

@@ -500,6 +500,31 @@ public class ModBlocks {
             )
     );
 
+    public static final RegistryObject<Block> DRAINED_LOG = BLOCKS.register("drained_log", () ->
+            new RotatedPillarBlock(Block.Properties
+                    .of(Material.STONE)
+                    .strength(1.5f, 0.8f)
+                    .sound(SoundType.STONE)
+                    .requiresCorrectToolForDrops()
+            )
+    );
+    public static final RegistryObject<Block> DRAINED_LOG_CRACKED = BLOCKS.register("drained_log_cracked", () ->
+            new RotatedPillarBlock(Block.Properties
+                    .of(Material.STONE)
+                    .strength(1.5f, 0.8f)
+                    .sound(SoundType.STONE)
+                    .requiresCorrectToolForDrops()
+            )
+    );
+    public static final RegistryObject<Block> DRAINED_ICE = BLOCKS.register("drained_ice", () ->
+            new RotatedPillarBlock(Block.Properties
+                    .of(Material.ICE_SOLID)
+                    .strength(1.5f, 0.8f)
+                    .sound(SoundType.GLASS)
+                    .requiresCorrectToolForDrops()
+            )
+    );
+
     public static final RegistryObject<Block> WARP_CORE = BLOCKS.register("warp_core", () ->
             new Block(Block.Properties
                     .of(Material.METAL)

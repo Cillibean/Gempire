@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "gempire:block/drained_log_cracked_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "gempire:block/drained_log_cracked"
+    },
+    "axis=z": {
+      "model": "gempire:block/drained_log_cracked_horizontal",
+      "x": 90
+    }
+  }
+}

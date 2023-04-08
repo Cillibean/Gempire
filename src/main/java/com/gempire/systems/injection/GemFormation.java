@@ -35,7 +35,7 @@ public class GemFormation {
     public BlockPos pos;
     public BlockPos volumeToCheck;
     public static ArrayList<String> POSSIBLE_GEMS = new ArrayList<>();
-    public Block drained_sand, drained_soil, drained_stone, drained_stone_2, banded_drained_stone;
+    public Block drained_sand, drained_soil, drained_stone, drained_stone_2, banded_drained_stone, drained_ice, drained_log, drained_log_cracked;
     public ItemChroma chroma;
     public Item primer;
     public String essences;
@@ -368,7 +368,7 @@ public class GemFormation {
                 this.world.destroyBlock(this.pos.add(0, 0, -i), false);
                 this.world.destroyBlock(this.pos.add(0, 1, -i), false);
                 this.world.destroyBlock(this.pos.add(0, 2, -i), false);
-                if(this.world.getBlockState(this.pos.add(0, 0, -i)) != Blocks.AIR.getDefaultState()) {
+                if(this.world.getBlockState(this.pos.add(0, 0, -i)) != Blocks.AIR.defaultBlockState()) {
                     blocksToDrain.add(this.pos.add(0, 0, -i).down());
                     blocksToDrain.add(this.pos.add(0, 0, -i).up().up().up());
                     blocksToDrain.add(this.pos.add(0, 0, -i).west());
@@ -402,6 +402,24 @@ public class GemFormation {
             else if(block == Blocks.SAND.defaultBlockState() || block == Blocks.RED_SAND.defaultBlockState() || block == Blocks.SOUL_SAND.defaultBlockState()){
                 this.world.setBlockAndUpdate(pos, this.drained_sand.defaultBlockState());
             }
+            else if(block == Blocks.SAND.defaultBlockState() || block == Blocks.RED_SAND.defaultBlockState() || block == Blocks.SOUL_SAND.defaultBlockState()){
+                this.world.setBlockAndUpdate(pos, this.drained_sand.defaultBlockState());
+            }
+            else if(block == Blocks.OAK_LOG.defaultBlockState() || block == Blocks.STRIPPED_OAK_LOG.defaultBlockState() || block == Blocks.STRIPPED_OAK_WOOD.defaultBlockState() || block == Blocks.OAK_WOOD
+                    .defaultBlockState() || block == Blocks.SPRUCE_LOG.defaultBlockState() || block == Blocks.STRIPPED_SPRUCE_LOG.defaultBlockState() || block == Blocks.STRIPPED_SPRUCE_WOOD.defaultBlockState() || block == Blocks.SPRUCE_WOOD
+                    .defaultBlockState() || block == Blocks.BIRCH_LOG.defaultBlockState() || block == Blocks.STRIPPED_BIRCH_LOG.defaultBlockState() || block == Blocks.STRIPPED_BIRCH_WOOD.defaultBlockState() || block == Blocks.BIRCH_WOOD
+                    .defaultBlockState() || block == Blocks.JUNGLE_LOG.defaultBlockState() || block == Blocks.STRIPPED_JUNGLE_LOG.defaultBlockState() || block == Blocks.STRIPPED_JUNGLE_WOOD.defaultBlockState() || block == Blocks.JUNGLE_WOOD
+                    .defaultBlockState() || block == Blocks.ACACIA_LOG.defaultBlockState() || block == Blocks.STRIPPED_ACACIA_LOG.defaultBlockState() || block == Blocks.STRIPPED_ACACIA_WOOD.defaultBlockState() || block == Blocks.ACACIA_WOOD
+                    .defaultBlockState() || block == Blocks.DARK_OAK_LOG.defaultBlockState() || block == Blocks.STRIPPED_DARK_OAK_LOG.defaultBlockState() || block == Blocks.STRIPPED_DARK_OAK_WOOD.defaultBlockState() || block == Blocks.DARK_OAK_WOOD.defaultBlockState()) {
+                this.world.setBlockAndUpdate(pos, this.drained_log.defaultBlockState());
+            }
+            else if(block == Blocks.CRIMSON_STEM.defaultBlockState() || block == Blocks.WARPED_STEM.defaultBlockState() || block == Blocks.STRIPPED_CRIMSON_STEM.defaultBlockState() || block == Blocks.STRIPPED_WARPED_STEM
+                    .defaultBlockState() || block == Blocks.CRIMSON_HYPHAE.defaultBlockState() || block == Blocks.WARPED_HYPHAE.defaultBlockState() || block == Blocks.STRIPPED_CRIMSON_HYPHAE.defaultBlockState() || block == Blocks.STRIPPED_WARPED_HYPHAE.defaultBlockState()) {
+                this.world.setBlockAndUpdate(pos, this.drained_log_cracked.defaultBlockState());
+            }
+            else if(block == Blocks.BLUE_ICE.defaultBlockState() || block == Blocks.PACKED_ICE.defaultBlockState()) {
+                this.world.setBlockAndUpdate(pos, this.drained_ice.defaultBlockState());
+            }
             else{
                 if(pos.getY() < 80) {
                     this.world.setBlockAndUpdate(pos, this.drained_stone.defaultBlockState());
@@ -423,37 +441,52 @@ public class GemFormation {
         if(temperature > .1f && temperature <= .5F){
             this.drained_sand = ModBlocks.DRAINED_SAND.get();
             this.drained_soil = ModBlocks.DRAINED_GREY_SOIL.get();
+            this.drained_ice = ModBlocks.DRAINED_ICE.get();
             this.drained_stone = ModBlocks.DRAINED_GREY_STONE.get();
             this.drained_stone_2 = ModBlocks.DRAINED_GREY_STONE_2.get();
             this.banded_drained_stone = ModBlocks.DRAINED_BANDED_GREY_STONE.get();
+            this.drained_log = ModBlocks.DRAINED_LOG.get();
+            this.drained_log_cracked = ModBlocks.DRAINED_LOG_CRACKED.get();
         }
         else if(temperature > .5f && temperature <= .9f){
             this.drained_sand = ModBlocks.DRAINED_SAND.get();
             this.drained_soil = ModBlocks.DRAINED_PURPLE_SOIL.get();
+            this.drained_ice = ModBlocks.DRAINED_ICE.get();
             this.drained_stone = ModBlocks.DRAINED_PURPLE_STONE.get();
             this.drained_stone_2 = ModBlocks.DRAINED_PURPLE_STONE_2.get();
             this.banded_drained_stone = ModBlocks.DRAINED_BANDED_PURPLE_STONE.get();
+            this.drained_log = ModBlocks.DRAINED_LOG.get();
+            this.drained_log_cracked = ModBlocks.DRAINED_LOG_CRACKED.get();
         }
         else if(temperature > .9f && temperature <= 1.2f){
             this.drained_sand = ModBlocks.DRAINED_SAND.get();
             this.drained_soil = ModBlocks.DRAINED_PURPLE_SOIL.get();
+            this.drained_ice = ModBlocks.DRAINED_ICE.get();
             this.drained_stone = ModBlocks.DRAINED_YELLOW_STONE.get();
             this.drained_stone_2 = ModBlocks.DRAINED_YELLOW_STONE_2.get();
             this.banded_drained_stone = ModBlocks.DRAINED_BANDED_YELLOW_STONE.get();
+            this.drained_log = ModBlocks.DRAINED_LOG.get();
+            this.drained_log_cracked = ModBlocks.DRAINED_LOG_CRACKED.get();
         }
         else if(temperature > 1.2f && temperature <= 2f){
             this.drained_sand = ModBlocks.DRAINED_RED_SAND.get();
             this.drained_soil = ModBlocks.DRAINED_RED_SAND.get();
+            this.drained_ice = ModBlocks.DRAINED_ICE.get();
             this.drained_stone = ModBlocks.DRAINED_RED_STONE.get();
             this.drained_stone_2 = ModBlocks.DRAINED_RED_STONE_2.get();
             this.banded_drained_stone = ModBlocks.DRAINED_BANDED_RED_STONE.get();
+            this.drained_log = ModBlocks.DRAINED_LOG.get();
+            this.drained_log_cracked = ModBlocks.DRAINED_LOG_CRACKED.get();
         }
         else{
             this.drained_sand = ModBlocks.DRAINED_SAND.get();
             this.drained_soil = ModBlocks.DRAINED_BLUE_SOIL.get();
+            this.drained_ice = ModBlocks.DRAINED_ICE.get();
             this.drained_stone = ModBlocks.DRAINED_BLUE_STONE.get();
             this.drained_stone_2 = ModBlocks.DRAINED_BLUE_STONE_2.get();
             this.banded_drained_stone = ModBlocks.DRAINED_BANDED_BLUE_STONE.get();
+            this.drained_log = ModBlocks.DRAINED_LOG.get();
+            this.drained_log_cracked = ModBlocks.DRAINED_LOG_CRACKED.get();
         }
     }
 }

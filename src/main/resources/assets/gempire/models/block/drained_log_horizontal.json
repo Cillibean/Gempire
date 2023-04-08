@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column_horizontal",
+  "textures": {
+    "end": "gempire:blocks/rough_carbonite_top_crackless",
+    "side": "gempire:blocks/rough_carbonite_crackless"
+  }
+}
