@@ -7,7 +7,10 @@ import com.gempire.entities.gems.starter.EntityNacre;
 import com.gempire.entities.gems.starter.EntityPebble;
 import com.gempire.entities.gems.starter.EntityShale;
 import com.gempire.init.*;
+import com.gempire.proxy.ClientProxy;
 import net.minecraft.WorldVersion;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.models.ModelProvider;
 import net.minecraft.data.structures.SnbtToNbt;
@@ -27,6 +30,7 @@ import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
@@ -57,7 +61,7 @@ public class Gempire
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::processIMC);
 
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::EntityAttributes);
-        //FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientProxy::onClientSetup);
+        //FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onClientSetup);
 
         RegistryHandler.init();
         // Register ourselves for server and other game events we are interested in
@@ -135,6 +139,7 @@ public class Gempire
         ModEnchants.registerItemDiscounts();
     }
 
+
     @SuppressWarnings("warning")
     @SubscribeEvent
     public void onLootTablesLoad(LootTableLoadEvent event) {
@@ -152,6 +157,7 @@ public class Gempire
             event.getTable().addPool(LootPool.lootPool().add(LootTableReference.lootTableReference(new ResourceLocation(MODID, "chests/essence"))).build());
         }
     }
+
     @SubscribeEvent
     public void onCommandRegister(final RegisterCommandsEvent event){
         ModCommands.registerCommands(event);

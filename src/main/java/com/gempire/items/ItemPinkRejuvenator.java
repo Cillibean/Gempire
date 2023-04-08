@@ -10,7 +10,7 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 
-public class ItemPinkRejuvenator extends ItemDestabilizer {
+public class ItemPinkRejuvenator extends DestabBase {
     private final Multimap<Attribute, AttributeModifier> defaultModifiers;
 
     public ItemPinkRejuvenator(Properties properties){

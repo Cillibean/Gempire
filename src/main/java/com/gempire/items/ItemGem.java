@@ -78,16 +78,18 @@ public class ItemGem extends Item {
     public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity entity, InteractionHand hand) {
         if (entity instanceof EntityGem) {
             if (((EntityGem) entity).assignedGem == null) {
-                if (player.isCrouching()) {
-                    livingEntityHit = true;
-                    System.out.println("gem interact");
-                    gemToAssign = null;
-                    isAssigned = true;
-                } else {
-                    livingEntityHit = true;
-                    System.out.println("gem interact");
-                    gemToAssign = (EntityGem) entity;
-                    isAssigned = false;
+                if (((EntityGem) entity).currentPlayer == player) {
+                    if (player.isCrouching()) {
+                        livingEntityHit = true;
+                        System.out.println("gem interact");
+                        gemToAssign = null;
+                        isAssigned = true;
+                    } else {
+                        livingEntityHit = true;
+                        System.out.println("gem interact");
+                        gemToAssign = (EntityGem) entity;
+                        isAssigned = false;
+                    }
                 }
             }
         }

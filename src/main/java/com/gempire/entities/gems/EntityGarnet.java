@@ -79,7 +79,7 @@ public class EntityGarnet extends EntityVaryingGem {
 
     public Abilities[] possibleAbilities(){
         return new Abilities[]{
-                Abilities.NO_ABILITY, Abilities.TANK, Abilities.BEEFCAKE, Abilities.POWERHOUSE, Abilities.UNHINGED, Abilities.BERSERKER,Abilities.LOOTMASTER, Abilities.ABUNDANCE
+                Abilities.NO_ABILITY, Abilities.TANK, Abilities.BEEFCAKE, Abilities.POWERHOUSE, Abilities.UNHINGED, Abilities.BERSERKER
         };
     }
     public Abilities[] definiteAbilities(){
@@ -158,9 +158,6 @@ public class EntityGarnet extends EntityVaryingGem {
                 break;
             case 15:
                 name = "melanite";
-                break;
-            case 16:
-                name = "iridescent_andradite";
                 break;
             default:
                 name = "leuco";
