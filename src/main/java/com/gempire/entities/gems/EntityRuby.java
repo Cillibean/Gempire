@@ -150,7 +150,7 @@ public class EntityRuby extends EntityGem {
     }
 
     public int generateOutfitVariant(){
-        return this.random.nextInt(5);
+        return this.random.nextInt(7);
     }
 
     public int generateInsigniaVariant(){
