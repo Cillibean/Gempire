@@ -14,6 +14,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -70,7 +71,7 @@ public class GemSeedTE extends BlockEntity {
             te.ScanPositions(level, te.getBlockPos(), new BlockPos(DRAIN_SIZE, DRAIN_SIZE, DRAIN_SIZE));
             te.checked = true;
         }
-        if(te.ticks % 4 == 0) {
+        if(te.ticks % 1 == 0) {
             if (!te.spawned && te.checked) {
                 if (te.IDS.size() > 0) {
                     int rando = ThreadLocalRandom.current().nextInt(te.IDS.size());

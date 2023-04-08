@@ -3,13 +3,19 @@ package com.gempire.systems.injection;
 import com.gempire.entities.bases.EntityGem;
 import com.gempire.entities.bases.EntityVaryingGem;
 import com.gempire.entities.gems.EntityQuartz;
+import com.gempire.entities.gems.EntityZircon;
 import com.gempire.entities.gems.starter.EntityPebble;
 import com.gempire.events.DrainEvent;
 import com.gempire.events.GemFormEvent;
 import com.gempire.init.AddonHandler;
 import com.gempire.init.ModBlocks;
+import com.gempire.init.ModEnchants;
 import com.gempire.init.ModEntities;
 import com.gempire.items.ItemChroma;
+import com.gempire.items.ItemGem;
+import com.gempire.util.PaletteType;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.block.AirBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -24,10 +30,7 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.registries.RegistryObject;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Objects;
-import java.util.Random;
+import java.util.*;
 
 public class GemFormation {
     private static final int EXIT_HOLE_LENGTH = 16;
@@ -142,11 +145,42 @@ public class GemFormation {
                 e.printStackTrace();
             }
         }
-        try{
-            gem.finalizeSpawn((ServerLevelAccessor) this.world, this.world.getCurrentDifficultyAt(this.pos), MobSpawnType.TRIGGERED, null, null);
+        gem.setGemPlacement(gem.generateGemPlacement());
+        gem.setSkinVariant(gem.generateSkinVariant());
+        if(gem.setSkinVariantOnInitialSpawn) {
+            gem.setSkinColorVariant(gem.generateSkinColorVariant());
+        } else gem.setSkinColorVariant(gem.initalSkinVariant);
+        gem.setAssignedGem(((ItemGem)gem.getGemItem().getDefaultInstance().getItem()).assigned_gem);
+        System.out.println(gem.getAssignedGem());
+        gem.setHairVariant(gem.generateHairVariant());
+        gem.setSkinColor(gem.generatePaletteColor(PaletteType.SKIN));
+        gem.setHairColor(gem.generatePaletteColor(PaletteType.HAIR));
+        gem.setGemColor(gem.generatePaletteColor(PaletteType.GEM));
+        gem.setOutfitVariant(gem.generateOutfitVariant());
+        gem.setOutfitColor(gem.generateOutfitColor());
+        gem.setInsigniaVariant(gem.generateInsigniaVariant());
+        gem.setInsigniaColor(gem.generateInsigniaColor());
+        gem.setAbilitySlots(gem.generateAbilitySlots());
+        gem.setAbilities(gem.generateAbilities());
+        gem.setEmotional(gem.generateIsEmotional());
+        gem.setAbilityPowers(gem.findAbilities(gem.getAbilities()));
+        gem.addAbilityGoals();
+        gem.applyAttributeAbilities();
+        gem.FOLLOW_ID = UUID.randomUUID();
+        gem.ASSIGNED_ID = UUID.randomUUID();
+        gem.setMarkingVariant(gem.generateMarkingVariant());
+        gem.setMarkingColor(gem.generatePaletteColor(PaletteType.MARKINGS));
+        gem.setMarking2Variant(gem.generateMarking2Variant());
+        gem.setMarking2Color(gem.generatePaletteColor(PaletteType.MARKINGS_2));
+        gem.setCustomName(gem.getNickname());
+        if (gem instanceof EntityZircon)
+        {
+            ((EntityZircon) gem).setEnchantPage(RandomSource.create().nextInt(ModEnchants.VANILLA_ENCHANTMENTS.size()));
         }
-        catch (Exception e){
-            e.printStackTrace();
+        //gem.generateScoutList();
+        gem.idlePowers = gem.generateIdlePowers();
+        if(gem.spawnGem != null){
+            gem.spawnGem.remove(Entity.RemovalReason.DISCARDED);
         }
         gem.setPos(this.pos.getX() + .5f, this.pos.getY(), this.pos.getZ() + .5f);
         gem.setHealth(gem.getMaxHealth());

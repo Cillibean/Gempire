@@ -57,13 +57,6 @@ public class EntityZircon extends EntityVaryingGem {
         this.ENCHANTMENT_PAGES = ModEnchants.VANILLA_ENCHANTMENTS.size();
     }
 
-    @Nullable
-    @Override
-    public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, DifficultyInstance difficultyIn, MobSpawnType reason, @Nullable SpawnGroupData spawnDataIn, @Nullable CompoundTag dataTag) {
-        this.setEnchantPage(this.random.nextInt(ModEnchants.VANILLA_ENCHANTMENTS.size()));
-        return super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
-    }
-
     public static AttributeSupplier.Builder registerAttributes() {
         return Mob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 30.0D)

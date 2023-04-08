@@ -1,8 +1,11 @@
 package com.gempire.items;
 
 import com.gempire.entities.bases.EntityGem;
+import com.gempire.entities.gems.EntityZircon;
+import com.gempire.init.ModEnchants;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -25,6 +28,10 @@ public class ItemBlueRejuvenator extends ItemDestabilizer {
         if (pTarget.isAlive()) {
             if (pTarget instanceof EntityGem) {
                 ((EntityGem) pTarget).setAbilities(((EntityGem) pTarget).generateAbilities());
+                if (pTarget instanceof EntityZircon)
+                {
+                    ((EntityZircon) pTarget).setEnchantPage(RandomSource.create().nextInt(ModEnchants.VANILLA_ENCHANTMENTS.size()));
+                }
                 pTarget.hurt(DamageSource.GENERIC, pTarget.getMaxHealth() * 2);
             }
         }
