@@ -1,7 +1,12 @@
 package com.gempire.blocks;
 
+import com.gempire.init.ModTE;
+import com.gempire.tileentities.GemSeedTE;
+import com.gempire.tileentities.InjectorTE;
+import com.gempire.tileentities.PedistalTE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
@@ -18,7 +23,11 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -31,12 +40,13 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.UUID;
 
-public class PedistalBlock extends HorizontalDirectionalBlock{
+public class PedistalBlock extends HorizontalDirectionalBlock implements EntityBlock {
     public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     private final boolean sensitive;
-
+    private UUID owner;
     protected static final VoxelShape Z_AXIS_AABB = Block.box(5.0D, 0.0D, 4.0D, 11.0D, 16.0D, 11.0D);
 
 
@@ -51,15 +61,33 @@ public class PedistalBlock extends HorizontalDirectionalBlock{
     private int getPressDuration() {
         return this.sensitive ? 60 : 20;
     }
-    public InteractionResult use(BlockState p_51088_, Level p_51089_, BlockPos p_51090_, Player p_51091_, InteractionHand p_51092_, BlockHitResult p_51093_) {
-        if (p_51088_.getValue(POWERED)) {
-            return InteractionResult.CONSUME;
-        } else {
-            this.press(p_51088_, p_51089_, p_51090_);
-            this.playSound(p_51091_, p_51089_, p_51090_, true);
-            p_51089_.gameEvent(p_51091_, GameEvent.BLOCK_ACTIVATE, p_51090_);
-            return InteractionResult.sidedSuccess(p_51089_.isClientSide);
+    public InteractionResult use(BlockState blockState, Level level, BlockPos pos, Player player, InteractionHand interactionHand, BlockHitResult hitResult) {
+        if (!level.isClientSide) {
+            if (level.getBlockEntity(pos) instanceof PedistalTE toto) {
+                if (player.isCrouching()) {
+                    if (toto.owner == null) {
+                        toto.owner = player.getUUID();
+                        player.sendSystemMessage(Component.translatable("block.gempire.pedistal.setprivate"));
+                    } else if (toto.owner == player.getUUID()) {
+                        toto.owner = null;
+                        player.sendSystemMessage(Component.translatable("block.gempire.pedistal.setpublic"));
+                    }
+                }
+                else if (toto.owner == null || player.getUUID() == toto.owner) {
+                    if (blockState.getValue(POWERED)) {
+                        return InteractionResult.CONSUME;
+                    } else {
+                        this.press(blockState, level, pos);
+                        this.playSound(player, level, pos, true);
+                        level.gameEvent(player, GameEvent.BLOCK_ACTIVATE, pos);
+                        return InteractionResult.sidedSuccess(true);
+                    }
+                } else {
+                    player.sendSystemMessage(Component.translatable("block.gempire.pedistal.notowner"));
+                }
+            }
         }
+        return InteractionResult.sidedSuccess(true);
     }
     public VoxelShape getShape(BlockState p_154346_, BlockGetter p_154347_, BlockPos p_154348_, CollisionContext p_154349_) {
         return Z_AXIS_AABB;
@@ -154,5 +182,10 @@ public class PedistalBlock extends HorizontalDirectionalBlock{
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> p_51101_) {
         p_51101_.add(POWERED);
         p_51101_.add(FACING);
+    }
+    @Nullable
+    @Override
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new PedistalTE(pos, state);
     }
 }

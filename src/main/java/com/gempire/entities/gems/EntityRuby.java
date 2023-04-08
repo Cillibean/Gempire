@@ -129,7 +129,7 @@ public class EntityRuby extends EntityGem {
 
     @Override
     public byte EmotionThreshold() {
-        return 15;
+        return 5;
     }
 
     public boolean canChangeUniformColorByDefault() {

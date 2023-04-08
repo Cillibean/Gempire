@@ -5,6 +5,7 @@ import com.gempire.blocks.*;
 import com.gempire.blocks.machine.*;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
