@@ -15,6 +15,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -235,7 +237,7 @@ public class GemSeedTE extends BlockEntity {
             this.drained_stone_2 = ModBlocks.DRAINED_PURPLE_STONE_2.get();
             this.banded_drained_stone = ModBlocks.DRAINED_BANDED_PURPLE_STONE.get();
         }
-        else if(temperature > .9f && temperature <= 1.2f){
+        else if(temperature > .9f && temperature <= 1.2f || Objects.requireNonNull(this.level).getBiome(getBlockPos()).is(Biomes.DESERT)){
             this.drained_sand = ModBlocks.DRAINED_SAND.get();
             this.drained_soil = ModBlocks.DRAINED_PURPLE_SOIL.get();
             this.drained_stone = ModBlocks.DRAINED_YELLOW_STONE.get();
