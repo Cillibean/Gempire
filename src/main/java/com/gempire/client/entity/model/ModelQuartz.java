@@ -53,15 +53,21 @@ public class ModelQuartz<T extends EntityGem> extends ModelGem<T> {
 
 		PartDefinition cherryponytail = head.addOrReplaceChild("cherryponytail", CubeListBuilder.create().texOffs(64, 0).addBox(-6.0F, 0.0F, 0.0F, 6.0F, 9.0F, 6.0F, new CubeDeformation(0.4F)), PartPose.offset(2.8F, -5.8F, 4.2F));
 
+		PartDefinition agatebun = head.addOrReplaceChild("agatebun", CubeListBuilder.create().texOffs(24, 0).mirror().addBox(-7.0F, -7.0F, -2.0F, 4.0F, 4.0F, 4.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offset(0.0F, 0.0F, 0.0F));
+
+		PartDefinition agatebun2 = head.addOrReplaceChild("agatebun2", CubeListBuilder.create().texOffs(24, 0).addBox(3.0F, -7.0F, -2.0F, 4.0F, 4.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
+
+		PartDefinition hood = head.addOrReplaceChild("hood", CubeListBuilder.create().texOffs(96, 0).addBox(-7.0F, -10.0F, 0.0F, 14.0F, 11.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
+
 		PartDefinition hair = head.addOrReplaceChild("hair", CubeListBuilder.create().texOffs(0, 0).addBox(-8.0F, 0.0F, 0.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.25F)), PartPose.offset(3.8F, -4.1F, -4.3F));
 
-		PartDefinition arml = partdefinition.addOrReplaceChild("arml", CubeListBuilder.create().texOffs(70, 18).addBox(-0.2F, 0.0F, -2.0F, 4.0F, 14.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(5.1F, 0.7F, -0.1F));
+		PartDefinition arml = partdefinition.addOrReplaceChild("arml", CubeListBuilder.create().texOffs(70, 18).addBox(-0.3F, 0.0F, -2.0F, 4.0F, 14.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(5.1F, 0.7F, -0.1F));
 
 		PartDefinition shoulderpuff1 = arml.addOrReplaceChild("shoulderpuff1", CubeListBuilder.create().texOffs(86, 17).addBox(-6.0F, 0.0F, 0.0F, 6.0F, 3.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(4.9F, -0.5F, -2.5F, 0.0F, 0.0F, -0.0873F));
 
 		PartDefinition armr = partdefinition.addOrReplaceChild("armr", CubeListBuilder.create().texOffs(22, 18).addBox(-3.7F, 0.0F, -2.0F, 4.0F, 14.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(-5.5F, 0.7F, -0.1F));
 
-		PartDefinition shoulderpuff2 = armr.addOrReplaceChild("shoulderpuff2", CubeListBuilder.create().texOffs(0, 17).addBox(-6.0F, 0.0F, 0.0F, 6.0F, 3.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(1.0F, 0.1F, -2.5F, 0.0F, 0.0F, 0.0873F));
+		PartDefinition shoulderpuff2 = armr.addOrReplaceChild("shoulderpuff2", CubeListBuilder.create().texOffs(0, 17).addBox(-6.0F, 0.0F, 0.0F, 6.0F, 3.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(1.0F, 0.0F, -2.5F, 0.0F, 0.0F, 0.0873F));
 
 		PartDefinition legl = partdefinition.addOrReplaceChild("legl", CubeListBuilder.create().texOffs(64, 36).addBox(-4.0F, 0.0F, 0.0F, 4.0F, 9.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(4.5F, 14.5F, -2.1F));
 

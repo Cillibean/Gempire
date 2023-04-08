@@ -65,7 +65,7 @@ public class EntityJasper extends AbstractQuartz {
 
     @Override
     public int generateHairVariant() {
-        return this.random.nextInt(12);
+        return this.random.nextInt(20);
     }
 
     @Override
@@ -157,7 +157,7 @@ public class EntityJasper extends AbstractQuartz {
 
     @Override
     public int generateOutfitVariant() {
-        return this.random.nextInt(3);
+        return this.random.nextInt(5);
     }
 
     @Override
