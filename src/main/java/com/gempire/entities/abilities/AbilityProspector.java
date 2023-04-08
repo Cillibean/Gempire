@@ -9,6 +9,12 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Stream;
 
 public class AbilityProspector extends Ability implements IIdleAbility {
 
@@ -23,44 +29,29 @@ public class AbilityProspector extends Ability implements IIdleAbility {
 
     @Override
     public void execute() {
-        BlockPos pos = this.holder.getOnPos();
         Player player = holder.currentPlayer;
         boolean foundBlock = false;
+        AABB aabb = this.holder.getBoundingBox().inflate(10D);
+        List<BlockState> blocks = new ArrayList<>(this.holder.getLevel().getBlockStates(aabb).toList());
+        System.out.println("list");
         if (!foundBlock) {
-            for (int i = 0; i <= pos.getY() + 9; i++) {
-                for (int i1 = 0; i1 <= pos.getY() - 9; i1++) {
-                    for (int i2 = 0; i2 <= pos.getX() + 9; i2++) {
-                        for (int i3 = 0; i3 <= pos.getX() - 9; i3++) {
-                            for (int i4 = 0; i4 <= pos.getZ() + 9; i4++) {
-                                for (int i5 = 0; i5 <= pos.getZ() - 9; i5++) {
-                                    BlockState blockPosi = holder.getLevel().getBlockState(pos.offset(i2, i1, i4));
-                                    BlockState blockNeg = holder.getLevel().getBlockState(pos.offset(i3, i, i5));
-
-                                    if (isValuableBlock(blockPosi)) {
-                                        outputValuableCoordinates(pos.offset(i2, i1, i4), player, blockPosi.getBlock());
-                                        foundBlock = true;
-                                        if (!isValuableBlock(blockPosi)) {
-                                            break;
-                                        }
-                                    } else if (isValuableBlock(blockNeg)) {
-                                        outputValuableCoordinates(pos.offset(i3, i, i5), player, blockNeg.getBlock());
-                                        foundBlock = true;
-                                        if (!isValuableBlock(blockPosi)) {
-                                            break;
-                                        }
-                                    }
-                                }
+            System.out.println("found block false");
+            for (BlockState block : blocks) {
+                System.out.println("block check");
+                if (isValuableBlock(block)); {
+                    while (isValuableBlock(block)) {
+                        System.out.println("found block");
+                        if (player != null) {
+                            if (!foundBlock) {
+                                foundBlock = true;
+                                System.out.println("found block bool false");
+                                //player.sendSystemMessage(Component.literal("Found " + blockBelow.getName() + " at " + "(" + blockPos.getX() + ", " + blockPos.getY() + "," + blockPos.getZ() + ")"));
                             }
                         }
                     }
                 }
             }
         }
-    }
-
-    private void outputValuableCoordinates(BlockPos blockPos, Player player, Block blockBelow) {
-        player.sendSystemMessage(Component.literal("Found " + blockBelow.getName() + " at " +
-                "(" + blockPos.getX() + ", " + blockPos.getY() + "," + blockPos.getZ() + ")"));
     }
 
     private boolean isValuableBlock(BlockState state) {

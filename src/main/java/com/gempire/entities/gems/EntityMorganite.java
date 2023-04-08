@@ -115,7 +115,7 @@ public class EntityMorganite extends EntityGem {
     @Override
     public Item getOutputItem()
     {
-        return ModItems.PEDISTAL.get();
+        return ModItems.PEDESTAL.get();
     }
     @Override
     public int getTimetoCraft()

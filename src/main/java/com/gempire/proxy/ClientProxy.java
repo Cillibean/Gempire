@@ -122,9 +122,9 @@ public class ClientProxy {
                 LocalPlayer player = Minecraft.getInstance().player;
                 System.out.println("warp attempt");
                 if (WarpPadTE.TestForWarpPad(player)) {
-                    Minecraft.getInstance().player.sendSystemMessage(Component.literal("Warped!"));
+                    //Minecraft.getInstance().player.sendSystemMessage(Component.literal("Warped!"));
                 } else if (!WarpPadTE.TestForWarpPad(player)) {
-                    Minecraft.getInstance().player.sendSystemMessage(Component.literal("This is not a warp pad!"));
+                    //Minecraft.getInstance().player.sendSystemMessage(Component.literal("This is not a warp pad!"));
                 }
             }
         }
