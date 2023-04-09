@@ -42,6 +42,10 @@ public class EntityNephrite extends EntityGem {
                 .add(Attributes.ATTACK_DAMAGE, 1.0D)
                 .add(Attributes.ATTACK_SPEED, 0.5D);
     }
+    public boolean getIsCut()
+    {
+        return false;
+    }
 
     @Override
     protected void registerGoals() {

@@ -516,7 +516,7 @@ public class ModBlocks {
             )
     );
 
-    public static final RegistryObject<Block> DESTAB_WALL = BLOCKS.register("destab_wall", () ->
+    /*public static final RegistryObject<Block> DESTAB_WALL = BLOCKS.register("destab_wall", () ->
             new DestabWallBlock(Block.Properties
                     .of(Material.METAL)
                     .strength(3.0f, 4.0f)
@@ -524,7 +524,7 @@ public class ModBlocks {
                     .speedFactor(0.4F)
                     .noOcclusion()
             )
-    );
+    );*/
 
     public static final RegistryObject<Block> RUINED_MARBLE_BLOCK = BLOCKS.register("ruined_marble_block", () ->
             new Block(Block.Properties

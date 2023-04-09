@@ -42,6 +42,10 @@ public class EntityJasper extends AbstractQuartz {
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Mob.class, 1, false, false, (p_234199_0_) -> p_234199_0_.getClassification(true) == MobCategory.MONSTER));
         this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.1D, false));
     }
+    public boolean getIsCut()
+    {
+        return false;
+    }
 
     @Override
     public boolean hasMarkings() {

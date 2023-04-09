@@ -321,6 +321,10 @@ public class EntityPearl extends EntityVaryingGem {
             this.setInsigniaVariant(this.getInsigniaVariant() + 1);
         }
     }
+    public boolean getIsCut()
+    {
+        return false;
+    }
 
     public void CycleInsigniaBackwards(){
         if(this.getInsigniaVariant() == 0){

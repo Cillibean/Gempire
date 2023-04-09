@@ -48,6 +48,11 @@ public class EntityAquamarine extends EntityGem implements FlyingAnimal {
     {
         return SoundEvents.NOTE_BLOCK_FLUTE;
     }
+    public boolean getIsCut()
+    {
+        return false;
+    }
+
     @Override
     protected void registerGoals() {
         super.registerGoals();

@@ -162,6 +162,8 @@ public class GemFormation {
         gem.setInsigniaColor(gem.generateInsigniaColor());
         gem.setAbilitySlots(gem.generateAbilitySlots());
         gem.setAbilities(gem.generateAbilities());
+        gem.setFacet(gem.generateFacet());
+        gem.setCut(gem.generateCut());
         gem.setEmotional(gem.generateIsEmotional());
         gem.setAbilityPowers(gem.findAbilities(gem.getAbilities()));
         gem.addAbilityGoals();

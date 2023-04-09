@@ -39,7 +39,8 @@ public class RenderTourmaline extends MobRenderer<EntityTourmaline, ModelTourmal
     }
     @Override
     protected void renderNameTag(EntityTourmaline entityIn, Component displayNameIn, PoseStack matrixStackIn, MultiBufferSource bufferIn, int packedLightIn) {
-        matrixStackIn.scale(1.0F, 1.1F, 1.0F);
+        super.renderNameTag(entityIn, Component.literal("<"+entityIn.getFacet()+" "+entityIn.getCut()+">"), matrixStackIn, bufferIn, packedLightIn);
+        matrixStackIn.translate(0.0D, (double)(9.0F * 1.15F * 0.025F), 0.0D);
         super.renderNameTag(entityIn, displayNameIn, matrixStackIn, bufferIn, packedLightIn);
     }
 }

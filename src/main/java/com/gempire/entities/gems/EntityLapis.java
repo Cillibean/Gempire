@@ -96,7 +96,11 @@ public class EntityLapis extends EntityGem {
                 11, 17
         };
     }
-
+    @Override
+    public boolean getIsCut()
+    {
+        return false;
+    }
     public Abilities[] possibleAbilities(){
         return new Abilities[]{
                 Abilities.NO_ABILITY, Abilities.TANK, Abilities.BEEFCAKE, Abilities.POWERHOUSE, Abilities.UNHINGED, Abilities.BERSERKER

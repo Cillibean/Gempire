@@ -27,7 +27,7 @@ public class ItemDestabilizer extends DestabBase {
         return p_43383_ == EquipmentSlot.MAINHAND ? this.defaultModifiers : super.getDefaultAttributeModifiers(p_43383_);
     }
 
-    @Override
+    /*@Override
     public InteractionResult useOn(UseOnContext context) {
         if (context.getPlayer().isShiftKeyDown()) {
             BlockPos pos = context.getClickedPos().above();
@@ -36,5 +36,5 @@ public class ItemDestabilizer extends DestabBase {
             context.getItemInHand().hurtAndBreak(5, context.getPlayer(), (p_43296_) -> p_43296_.broadcastBreakEvent(EquipmentSlot.MAINHAND));
         }
         return super.useOn(context);
-    }
+    }*/
 }

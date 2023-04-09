@@ -16,7 +16,6 @@ import com.gempire.util.Color;
 import com.gempire.util.GemPlacements;
 import com.gempire.util.PaletteType;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
-import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -104,7 +103,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     public static final EntityDataAccessor<Boolean> CRACKED = SynchedEntityData.<Boolean>defineId(EntityGem.class, EntityDataSerializers.BOOLEAN);
     public static final EntityDataAccessor<String> FACET = SynchedEntityData.defineId(EntityGem.class, EntityDataSerializers.STRING);
     public static final EntityDataAccessor<String> CUT = SynchedEntityData.defineId(EntityGem.class, EntityDataSerializers.STRING);
-
+    public boolean isCut;
     public ArrayList<Ability> ABILITY_POWERS = new ArrayList<>();
     public ArrayList<UUID> OWNERS = new ArrayList<>();
     public UUID FOLLOW_ID;
@@ -125,7 +124,6 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     public int focusCounter = 100;
     public int maxFocusCounter = 100;
     public int ticking;
-
     public Item inputItem = Items.AIR;
     public Item outputItem = Items.AIR;
 
@@ -845,13 +843,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         ResourceLocation loc = new ResourceLocation(this.getModID() + ":textures/entity/" + this.getWholeGemName().toLowerCase() + "/palettes/" + locString + ".png");
         BufferedImage palette = null;
         try {
-            if(getServer().isSingleplayer()) {
-                palette = ImageIO.read(Minecraft.getInstance().getResourceManager().getResource(loc).get().open());
-            }
-            else{
-
-                palette = ImageIO.read(EntityGem.class.getClassLoader().getResourceAsStream("/assets/" + this.getModID() + "/textures/entity/" + this.getWholeGemName().toLowerCase() + "/palettes/" + locString + ".png"));
-            }
+            palette = ImageIO.read(Minecraft.getInstance().getResourceManager().getResource(loc).get().open());
             System.out.println("Palette Read!");
             for (int x = 0; x < palette.getWidth(); x++) {
                 int color = palette.getRGB(x, this.getSkinColorVariant());
@@ -900,7 +892,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         String cut1 = "" + a + b + this.random.nextInt(9);
         String cut = cut1.toUpperCase();
         String start;
-        if (this.random.nextInt(1) == 1) {
+        if (getIsCut()) {
             start = "Cut-";
         } else {
             start = "Cabochon-";
@@ -911,7 +903,10 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     public String getCut(){
         return this.entityData.get(EntityGem.CUT);
     }
-
+    public boolean getIsCut()
+    {
+        return true;
+    }
     public void setCut(String value){
         this.entityData.set(EntityGem.CUT, value);
     }

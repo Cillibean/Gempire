@@ -40,7 +40,8 @@ public class RenderPeridot extends MobRenderer<EntityPeridot, ModelPeridot<Entit
     }
     @Override
     protected void renderNameTag(EntityPeridot entityIn, Component displayNameIn, PoseStack matrixStackIn, MultiBufferSource bufferIn, int packedLightIn) {
-        matrixStackIn.scale(1.3f, 1.3f, 1.3f);
+        super.renderNameTag(entityIn, Component.literal("<"+entityIn.getFacet()+" "+entityIn.getCut()+">"), matrixStackIn, bufferIn, packedLightIn);
+        matrixStackIn.translate(0.0D, (double)(9.0F * 1.15F * 0.025F), 0.0D);
         super.renderNameTag(entityIn, displayNameIn, matrixStackIn, bufferIn, packedLightIn);
     }
 }
