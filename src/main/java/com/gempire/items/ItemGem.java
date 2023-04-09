@@ -125,11 +125,11 @@ public class ItemGem extends Item {
                 }
             } else {
                 if (isAssigned) {
-                    playerIn.sendSystemMessage(Component.translatable("messages.gempire.entity.unassigned"));
+                    playerIn.sendSystemMessage(Component.translatable("This Gem is no longer assigned to " + assigned_gem.getCapitalGemName() + " " + assigned_gem.getFacetAndCut()));
                     livingEntityHit = false;
                     assigned_gem = null;
                 } else {
-                    playerIn.sendSystemMessage(Component.translatable("messages.gempire.entity.assigned"));
+                    playerIn.sendSystemMessage(Component.translatable("This Gem was assigned to " + gemToAssign.getCapitalGemName() + " " + gemToAssign.getFacetAndCut()));
                     livingEntityHit = false;
                     System.out.println("ToAssign to assigned");
                     assigned_gem = gemToAssign;

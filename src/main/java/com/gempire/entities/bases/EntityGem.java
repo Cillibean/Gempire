@@ -490,7 +490,6 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         //This part of the code checks if the player has a blank hand
         if(hand == InteractionHand.MAIN_HAND) {
             this.currentPlayer = player;
-            currentPlayer.sendSystemMessage(Component.translatable(this.getCapitalGemName() + "! " + getFacet() + ", " + getCut()));
             if (player.getMainHandItem() == ItemStack.EMPTY) {
                 if (this.isOwner(player)) {
                     if (player.isShiftKeyDown()) {
@@ -518,7 +517,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                                 setAssignedId(getAssignedGem().getUUID());
                             }
                             this.setMovementType((byte) 2);
-                            player.sendSystemMessage(Component.literal(this.getGemName() + "! " + getFacet() + ", " + getCut()));
+                            player.sendSystemMessage(Component.translatable(this.getCapitalGemName() + "! " + getFacet() + ", " + getCut()));
                             this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
                             return super.interactAt(player, vec, hand);
                         }
@@ -599,21 +598,21 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             if (getAssignedGem() != null ? this.getMovementType() < 3 : this.getMovementType() <2) {
                 this.addMovementType(1);
                 switch (this.getMovementType()) {
-                    case 1 -> player.sendSystemMessage(Component.translatable("messages.gempire.entity.wander"));
-                    case 2 -> player.sendSystemMessage(Component.translatable("messages.gempire.entity.follow.owner"));
-                    case 3 -> player.sendSystemMessage(Component.translatable("messages.gempire.entity.follow.assigned"));
-                    default -> player.sendSystemMessage(Component.translatable("messages.gempire.entity.stay"));
+                    case 1 -> player.sendSystemMessage(Component.translatable(this.getCapitalGemName() + " will wander around"));
+                    case 2 -> player.sendSystemMessage(Component.translatable(this.getCapitalGemName() + " will now follow you"));
+                    case 3 -> player.sendSystemMessage(Component.translatable(this.getCapitalGemName() + " will now follow " + assignedGem.getCapitalGemName() + " " + assignedGem.getFacetAndCut()));
+                    default -> player.sendSystemMessage(Component.translatable(this.getCapitalGemName() + " will now stay put"));
                 }
-            } else if (getAssignedGem() != null ? this.getMovementType() == 3 : this.getMovementType() == 2) {
+            } else if (getAssignedGem() != null && getAssignedGem().isAlive() ? this.getMovementType() == 3 : this.getMovementType() == 2) {
                 this.setMovementType((byte) 0);
-                player.sendSystemMessage(Component.translatable("messages.gempire.entity.stay"));
+                player.sendSystemMessage(Component.translatable(this.getCapitalGemName() + " will now stay put"));
                 this.GUARD_POS[0] = (int) this.getX();
                 this.GUARD_POS[1] = (int) this.getY();
                 this.GUARD_POS[2] = (int) this.getZ();
             } else if (getAssignedGem() == null && this.getMovementType() == 3)
             {
                 this.setMovementType((byte) 0);
-                player.sendSystemMessage(Component.translatable("messages.gempire.entity.stay"));
+                player.sendSystemMessage(Component.translatable(this.getCapitalGemName() + " will now stay put"));
                 this.GUARD_POS[0] = (int) this.getX();
                 this.GUARD_POS[1] = (int) this.getY();
                 this.GUARD_POS[2] = (int) this.getZ();
@@ -911,6 +910,9 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.entityData.set(EntityGem.CUT, value);
     }
 
+    public String getFacetAndCut() {
+        return this.getFacet() + ", " + this.getCut();
+    }
 
     public abstract int generateSkinVariant();
 
@@ -1552,6 +1554,15 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         return false;
     }
 
+    public boolean itemCheck(Item item){
+        for(int i = 0; i < EntityGem.NUMBER_OF_SLOTS - 4; i++){
+            if(this.getItem(i).getItem() == item){
+                return true;
+            }
+        }
+        return false;
+    }
+
     /*
     COMMAND STUFF
     */
@@ -1731,6 +1742,8 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
 
 
     //TODO: ADDON STUFF
+    //TODO: CRACKING AND SHATTERING
+    //TODO: CORRUPTION
 
 
 
