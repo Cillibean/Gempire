@@ -50,7 +50,9 @@ public enum Abilities {
     DESIGNER(46, 5),
     FORTUNATE(47, 3),
     RECALL(48,3),
-    KINDERGARTENER(49,3);;
+    KINDERGARTENER(49,3),
+    MINING(50,3);
+
     public final int id;
     public final int weight;
     private static final Abilities[] vals = Abilities.values();

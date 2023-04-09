@@ -1,16 +1,27 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "ingredients": [
-    {
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GPG",
+    "CDC",
+    "GBG"
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:glowstone_dust"
+    },
+    "P": {
+      "item": "minecraft:pumpkin"
+    },
+    "C": {
+      "item": "gempire:special_chroma"
+    },
+    "B": {
       "item": "minecraft:bucket"
     },
-    {
-      "item": "gempire:gilded_lapis"
-    },
-    {
+    "D": {
       "item": "minecraft:dirt"
     }
-  ],
+  },
   "result": {
     "item": "gempire:gem_slush_bucket"
   }
