@@ -38,6 +38,8 @@ public class RenderLarimar extends MobRenderer<EntityLarimar, ModelLarimar<Entit
     }
     @Override
     protected void renderNameTag(EntityLarimar entityIn, Component displayNameIn, PoseStack matrixStackIn, MultiBufferSource bufferIn, int packedLightIn) {
+        super.renderNameTag(entityIn, Component.literal("<"+entityIn.getFacet()+" "+entityIn.getCut()+">"), matrixStackIn, bufferIn, packedLightIn);
+        matrixStackIn.translate(0.0D, (double)(9.0F * 1.15F * 0.025F), 0.0D);
         super.renderNameTag(entityIn, displayNameIn, matrixStackIn, bufferIn, packedLightIn);
     }
 }

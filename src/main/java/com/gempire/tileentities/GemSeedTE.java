@@ -73,7 +73,7 @@ public class GemSeedTE extends BlockEntity {
             te.ScanPositions(level, te.getBlockPos(), new BlockPos(DRAIN_SIZE, DRAIN_SIZE, DRAIN_SIZE));
             te.checked = true;
         }
-        if(te.ticks % 8 == 0) {
+        if(te.ticks % 1 == 0) {
             if (!te.spawned && te.checked) {
                 if (te.IDS.size() > 0) {
                     int rando = ThreadLocalRandom.current().nextInt(te.IDS.size());

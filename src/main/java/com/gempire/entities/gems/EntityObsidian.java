@@ -42,6 +42,10 @@ public class EntityObsidian extends EntityGem implements ItemSteerable {
                 .add(net.minecraftforge.common.ForgeMod.SWIM_SPEED.get(), 0.3D);
     }
 
+    public boolean getIsCut()
+    {
+        return false;
+    }
     @Override
     protected void registerGoals() {
         super.registerGoals();

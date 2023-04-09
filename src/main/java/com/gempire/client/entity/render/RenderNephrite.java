@@ -33,6 +33,8 @@ public class RenderNephrite extends MobRenderer<EntityNephrite, ModelNephrite<En
     }
     @Override
     protected void renderNameTag(EntityNephrite entityIn, Component displayNameIn, PoseStack matrixStackIn, MultiBufferSource bufferIn, int packedLightIn) {
+        super.renderNameTag(entityIn, Component.literal("<"+entityIn.getFacet()+" "+entityIn.getCut()+">"), matrixStackIn, bufferIn, packedLightIn);
+        matrixStackIn.translate(0.0D, (double)(9.0F * 1.15F * 0.025F), 0.0D);
         super.renderNameTag(entityIn, displayNameIn, matrixStackIn, bufferIn, packedLightIn);
     }
 }
