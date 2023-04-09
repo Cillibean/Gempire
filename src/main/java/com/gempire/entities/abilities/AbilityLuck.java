@@ -16,7 +16,7 @@ public class AbilityLuck extends Ability implements IEffectAbility {
 
     @Override
     public MobEffectInstance effect() {
-        return new MobEffectInstance(MobEffects.LUCK, 400, 0);
+        return new MobEffectInstance(MobEffects.LUCK, 400, 0,false,false);
     }
     @Override
     public Component getName() {

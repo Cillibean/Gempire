@@ -140,7 +140,7 @@ public class EntityAquamarine extends EntityGem implements FlyingAnimal {
 
     @Override
     public byte EmotionThreshold() {
-        return 15;
+        return 8;
     }
 
     public boolean canChangeUniformColorByDefault() {
@@ -171,6 +171,10 @@ public class EntityAquamarine extends EntityGem implements FlyingAnimal {
     @Override
     public int baseFocus() {
         return 7;
+    }
+
+    public boolean isFocused() {
+        return true;
     }
 
     @Override

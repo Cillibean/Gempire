@@ -42,5 +42,6 @@ public class RenderNacre extends MobRenderer<EntityNacre, ModelPebble<EntityNacr
     @Override
     protected void renderNameTag(EntityNacre entityIn, Component displayNameIn, PoseStack matrixStackIn, MultiBufferSource bufferIn, int packedLightIn) {
         super.renderNameTag(entityIn, displayNameIn, matrixStackIn, bufferIn, packedLightIn);
+        super.shadowRadius = 0;
     }
 }

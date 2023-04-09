@@ -219,7 +219,7 @@ public class EntityTourmaline extends EntityVaryingGem {
 
     @Override
     public byte EmotionThreshold() {
-        return 15;
+        return 10;
     }
 
     public boolean canChangeUniformColorByDefault() {
@@ -251,6 +251,9 @@ public class EntityTourmaline extends EntityVaryingGem {
 
     public int generateInsigniaVariant(){
             return this.getOutfitVariant();
+    }
+    public boolean isFocused() {
+        return true;
     }
 
     @Override

@@ -121,7 +121,7 @@ public class EntityObsidian extends EntityGem implements ItemSteerable {
 
     @Override
     public byte EmotionThreshold() {
-        return 25;
+        return 10;
     }
 
     public boolean canChangeUniformColorByDefault() {
@@ -179,6 +179,9 @@ public class EntityObsidian extends EntityGem implements ItemSteerable {
 
     @Override
     public boolean canWalkOnFluids() {
+        return true;
+    }
+    public boolean isFocused() {
         return true;
     }
 

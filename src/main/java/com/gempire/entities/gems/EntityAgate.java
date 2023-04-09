@@ -169,7 +169,7 @@ public class EntityAgate extends AbstractQuartz {
 
     @Override
     public byte EmotionThreshold() {
-        return 30;
+        return 10;
     }
 
     @Override

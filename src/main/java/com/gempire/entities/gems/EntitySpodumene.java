@@ -126,7 +126,7 @@ public class EntitySpodumene extends EntityVaryingGem {
 
     @Override
     public byte EmotionThreshold() {
-        return 20;
+        return 10;
     }
 
     @Override

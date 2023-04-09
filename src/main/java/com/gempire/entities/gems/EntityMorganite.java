@@ -133,7 +133,7 @@ public class EntityMorganite extends EntityGem {
 
     @Override
     public byte EmotionThreshold() {
-        return 15;
+        return 8;
     }
 
     public boolean canChangeUniformColorByDefault() {

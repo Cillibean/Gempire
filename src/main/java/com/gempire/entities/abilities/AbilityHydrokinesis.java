@@ -36,7 +36,7 @@ public class AbilityHydrokinesis extends Ability implements IRangedAbility, IVio
 
     @Override
     public Goal goal() {
-        return new RangedAttackGoal((RangedAttackMob) this.holder, 1.25D, 20, 10.0F);
+        return new RangedAttackGoal(this.holder, 1.25D, 20, 10.0F);
     }
 
     @Override

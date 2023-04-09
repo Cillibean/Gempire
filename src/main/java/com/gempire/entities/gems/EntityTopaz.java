@@ -134,7 +134,7 @@ public class EntityTopaz extends EntityVaryingGem {
 
     @Override
     public byte EmotionThreshold() {
-        return 30;
+        return 15;
     }
 
     @Override

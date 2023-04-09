@@ -49,4 +49,8 @@ public abstract class AbstractQuartz extends EntityVaryingGem {
         return true;
     }
 
+    public boolean isFocused() {
+        return true;
+    }
+
 }

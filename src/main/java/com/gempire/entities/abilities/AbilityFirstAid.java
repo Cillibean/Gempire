@@ -18,7 +18,7 @@ public class AbilityFirstAid extends Ability implements IEffectAbility {
 
     @Override
     public MobEffectInstance effect() {
-        return new MobEffectInstance(MobEffects.HEAL, 40, 1);
+        return new MobEffectInstance(MobEffects.HEAL, 40, 1,false,false);
     }
 
     @Override

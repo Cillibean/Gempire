@@ -228,7 +228,6 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         if(this.spawnGem != null){
             this.spawnGem.remove(RemovalReason.DISCARDED);
         }
-        System.out.println(getFacet() + ", " + getCut());
         return super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
     }
     @Override

@@ -42,5 +42,6 @@ public class RenderRutile extends MobRenderer<EntityRutile, ModelRutile<EntityRu
         super.renderNameTag(entityIn, Component.literal("<"+entityIn.getFacet()+" "+entityIn.getCut()+">"), matrixStackIn, bufferIn, packedLightIn);
         matrixStackIn.translate(0.0D, (double)(9.0F * 1.15F * 0.025F), 0.0D);
         super.renderNameTag(entityIn, displayNameIn, matrixStackIn, bufferIn, packedLightIn);
+        super.shadowRadius = 0;
     }
 }

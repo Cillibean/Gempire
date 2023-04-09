@@ -123,7 +123,7 @@ public class EntityLapis extends EntityGem {
 
     @Override
     public byte EmotionThreshold() {
-        return 15;
+        return 10;
     }
 
     public boolean canChangeUniformColorByDefault() {
@@ -149,6 +149,9 @@ public class EntityLapis extends EntityGem {
 
     public int generateInsigniaVariant(){
             return this.getOutfitVariant();
+    }
+    public boolean isFocused() {
+        return true;
     }
 
     @Override

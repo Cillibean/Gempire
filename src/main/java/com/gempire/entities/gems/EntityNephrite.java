@@ -141,7 +141,7 @@ public class EntityNephrite extends EntityGem {
 
     @Override
     public byte EmotionThreshold() {
-        return 20;
+        return 10;
     }
 
     public boolean canChangeUniformColorByDefault() {
@@ -172,6 +172,9 @@ public class EntityNephrite extends EntityGem {
     @Override
     public int baseFocus() {
         return 7;
+    }
+    public boolean isFocused() {
+        return true;
     }
 
     //@Override

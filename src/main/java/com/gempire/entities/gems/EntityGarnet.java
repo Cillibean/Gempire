@@ -174,7 +174,7 @@ public class EntityGarnet extends EntityVaryingGem {
 
     @Override
     public byte EmotionThreshold() {
-        return 15;
+        return 10;
     }
 
     public boolean canChangeUniformColorByDefault() {

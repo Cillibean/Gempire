@@ -144,7 +144,7 @@ public class EntitySapphire extends EntityVaryingGem {
 
     @Override
     public byte EmotionThreshold() {
-        return 30;
+        return 10;
     }
 
     public boolean canChangeUniformColorByDefault() {

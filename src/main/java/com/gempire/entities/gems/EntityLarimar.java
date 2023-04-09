@@ -124,7 +124,7 @@ public class EntityLarimar extends EntityGem {
 
     @Override
     public byte EmotionThreshold() {
-        return 15;
+        return 10;
     }
 
     public boolean canChangeUniformColorByDefault() {
@@ -150,6 +150,9 @@ public class EntityLarimar extends EntityGem {
 
     public int generateInsigniaVariant(){
         return generateOutfitVariant();
+    }
+    public boolean isFocused() {
+        return true;
     }
 
     @Override

@@ -162,7 +162,7 @@ public class EntityZircon extends EntityVaryingGem {
 
     @Override
     public byte EmotionThreshold() {
-        return 50;
+        return 15;
     }
 
     public boolean canChangeUniformColorByDefault() {

@@ -118,7 +118,7 @@ public class EntityBixbite extends EntityGem {
 
     @Override
     public byte EmotionThreshold() {
-        return 15;
+        return 10;
     }
 
     public boolean canChangeUniformColorByDefault() {

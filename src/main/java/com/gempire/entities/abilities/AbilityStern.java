@@ -39,7 +39,7 @@ public class AbilityStern extends Ability implements IAreaAbility, IEffectAbilit
 
     @Override
     public MobEffectInstance effect() {
-        return new MobEffectInstance(MobEffects.NIGHT_VISION, 400, 0);
+        return new MobEffectInstance(MobEffects.NIGHT_VISION, 400, 0,true,true);
     }
     @Override
     public Component getName() {

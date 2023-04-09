@@ -18,7 +18,7 @@ public class AbilityHealer extends Ability implements IEffectAbility {
 
     @Override
     public MobEffectInstance effect() {
-        return new MobEffectInstance(MobEffects.REGENERATION, 100, 0);
+        return new MobEffectInstance(MobEffects.REGENERATION, 100, 0,false,false);
     }
 
     @Override
