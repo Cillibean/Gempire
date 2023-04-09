@@ -226,6 +226,12 @@ public class ModItems {
                     new Item.Properties().tab(ModItemGroup.BLOCKS)
             )
     );
+    public static final RegistryObject<Item> DRAINED_RED_SOIL = ITEMS.register("drained_red_soil", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_RED_SOIL.get(),
+                    new Item.Properties().tab(ModItemGroup.BLOCKS)
+            )
+    );
     public static final RegistryObject<Item> DRAINED_RED_STONE = ITEMS.register("drained_red_stone", () ->
             new BlockItem(
                     ModBlocks.DRAINED_RED_STONE.get(),
@@ -248,6 +254,12 @@ public class ModItems {
     public static final RegistryObject<Item> DRAINED_SAND = ITEMS.register("drained_sand", () ->
             new BlockItem(
                     ModBlocks.DRAINED_SAND.get(),
+                    new Item.Properties().tab(ModItemGroup.BLOCKS)
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_YELLOW_SOIL = ITEMS.register("drained_yellow_soil", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_YELLOW_SOIL.get(),
                     new Item.Properties().tab(ModItemGroup.BLOCKS)
             )
     );

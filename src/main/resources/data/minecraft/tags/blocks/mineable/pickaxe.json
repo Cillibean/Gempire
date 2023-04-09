@@ -40,6 +40,9 @@
     "gempire:ruined_marble_brick",
     "gempire:chiseled_ruined_marble_block",
     "gempire:ruined_marble_pillar",
-    "gempire:prismatic_block"
+    "gempire:prismatic_block",
+    "gempire:drained_ice",
+    "gempire:drained_log",
+    "gempire:drained_log_cracked"
   ]
 }

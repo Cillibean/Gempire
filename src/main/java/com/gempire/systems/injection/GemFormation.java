@@ -494,7 +494,7 @@ public class GemFormation {
         }
         else if(temperature > .9f && temperature <= 1.2f){
             this.drained_sand = ModBlocks.DRAINED_SAND.get();
-            this.drained_soil = ModBlocks.DRAINED_PURPLE_SOIL.get();
+            this.drained_soil = ModBlocks.DRAINED_YELLOW_SOIL.get();
             this.drained_ice = ModBlocks.DRAINED_ICE.get();
             this.drained_stone = ModBlocks.DRAINED_YELLOW_STONE.get();
             this.drained_stone_2 = ModBlocks.DRAINED_YELLOW_STONE_2.get();
@@ -504,7 +504,7 @@ public class GemFormation {
         }
         else if(temperature > 1.2f && temperature <= 2f){
             this.drained_sand = ModBlocks.DRAINED_RED_SAND.get();
-            this.drained_soil = ModBlocks.DRAINED_RED_SAND.get();
+            this.drained_soil = ModBlocks.DRAINED_RED_SOIL.get();
             this.drained_ice = ModBlocks.DRAINED_ICE.get();
             this.drained_stone = ModBlocks.DRAINED_RED_STONE.get();
             this.drained_stone_2 = ModBlocks.DRAINED_RED_STONE_2.get();
