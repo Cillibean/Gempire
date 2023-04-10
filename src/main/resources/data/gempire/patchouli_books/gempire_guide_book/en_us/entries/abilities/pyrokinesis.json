@@ -1,6 +1,6 @@
 {
   "name": "Pyrokinesis",
-  "icon": "minecraft:fire",
+  "icon": "minecraft:campfire",
   "advancement": "gempire:root",
   "category": "gempire:abilities",
   "pages": [

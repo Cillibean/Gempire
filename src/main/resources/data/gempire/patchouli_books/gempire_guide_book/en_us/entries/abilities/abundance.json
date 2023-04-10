@@ -1,5 +1,5 @@
 {
-  "name": "Abundance",
+  "name": "Abundance (NYI)",
   "icon": "minecraft:gold_ingot",
   "advancement": "gempire:root",
   "category": "gempire:abilities",
@@ -10,7 +10,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "$(l)Gems that are guaranteed to have it$()$(li)Garnet$(br2) $(l)Gems that have a chance to have it$()$(li)N/A"
+      "text": "$(l)Gems that are guaranteed to have it$()$(li)N/A$(br2) $(l)Gems that have a chance to have it$()$(li)Garnet"
     }
   ]
 }
