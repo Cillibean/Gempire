@@ -1,6 +1,6 @@
 {
   "name": "Acidic Saliva",
-  "icon": "minecraft:slime_ball",
+  "icon": "gempire:acid_spit",
   "advancement": "gempire:root",
   "category": "gempire:abilities",
   "pages": [

@@ -10,7 +10,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "$(l)Gems that are guaranteed to have it$()$(li)Sapphire$(li)Snowflake Obsidian$(li)Larimar$(br2) $(l)Gems that have a chance to have it$()$(li)Quartz"
+      "text": "$(l)Gems that are guaranteed to have it$()$(li)Sapphire$(li)Snowflake Obsidian$(li)Larimar$(br2) $(l)Gems that have a chance to have it$()$(li)Quartzes"
     }
   ]
 }

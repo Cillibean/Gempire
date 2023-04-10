@@ -480,6 +480,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         }
         super.tick();
     }
+
     @Override
     public InteractionResult interactAt(Player player, Vec3 vec, InteractionHand hand) {
         if (!this.getRebelled()) {

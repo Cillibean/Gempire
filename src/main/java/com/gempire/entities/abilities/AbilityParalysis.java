@@ -26,7 +26,7 @@ public class AbilityParalysis extends Ability implements IMeleeAbility, IEffectA
 
     @Override
     public MobEffectInstance effect() {
-        return new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 20 * 5, 99);
+        return new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 20 * 3, 99);
     }
 
     @Override
