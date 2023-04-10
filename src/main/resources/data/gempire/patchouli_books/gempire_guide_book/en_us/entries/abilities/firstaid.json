@@ -1,0 +1,16 @@
+{
+  "name": "First-Aid",
+  "icon": "minecraft:apple",
+  "advancement": "gempire:root",
+  "category": "gempire:abilities",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "First-Aid is a rare ability that makes the gem give off a healing pulse at a set interval."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Gems that are guaranteed to have it$()$(li)N/A$(br2) $(l)Gems that have a chance to have it$()$(li)Quartzes"
+    }
+  ]
+}
