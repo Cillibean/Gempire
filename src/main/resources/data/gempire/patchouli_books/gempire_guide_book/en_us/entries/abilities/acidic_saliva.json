@@ -1,0 +1,16 @@
+{
+  "name": "Acidic Saliva",
+  "icon": "minecraft:slime_ball",
+  "advancement": "gempire:root",
+  "category": "gempire:abilities",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Acidic Saliva is an ability that gives gems the power to spit globules of acid at their foes."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Gems that are guaranteed to have it$()$(li)Nephrite$(br2) $(l)Gems that have a chance to have it$()$(li)N/A"
+    }
+  ]
+}

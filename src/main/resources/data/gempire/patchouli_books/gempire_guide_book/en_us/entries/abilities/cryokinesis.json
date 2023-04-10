@@ -6,11 +6,11 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Cryokinesis is an ability that gives gems that have it ice shard projectiles and when they get emotional, ice spikes that shoot from the ground dealing damage."
+      "text": "Cryokinesis is an ability that gives gems the power to throw ice shard projectiles at their foes. When they get emotional, there are ice spikes that shoot from the ground to deal further damage."
     },
     {
       "type": "patchouli:text",
-      "text": "$(l)Gems that are guaranteed to have$()$(li)Sapphire$(li)Snowflake Obsidian$(li)Larimar$(br2) $(l)Gems that have a chance to have$()$(li)Quartzes"
+      "text": "$(l)Gems that are guaranteed to have it$()$(li)Sapphire$(li)Snowflake Obsidian$(li)Larimar$(br2) $(l)Gems that have a chance to have it$()$(li)Quartz"
     }
   ]
 }
