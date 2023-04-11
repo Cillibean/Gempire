@@ -244,7 +244,27 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     @Override
     protected void registerGoals() {
         super.registerGoals();
+        this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, EntityGem.class, 1, false, false, this::checkNotRebel));
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, 1, true, false, this::isHostileAt));
+    }
+
+    public boolean checkRebel(LivingEntity entity) {
+        if (!this.getRebelled()) {
+            return ((EntityGem) entity).getRebelled();
+        }
+        else
+        {
+            return false;
+        }
+    }
+    public boolean checkNotRebel(LivingEntity entity) {
+        if (this.getRebelled()) {
+            return !((EntityGem) entity).getRebelled();
+        }
+        else
+        {
+            return false;
+        }
     }
 
     private boolean isHostileAt(LivingEntity entity) {

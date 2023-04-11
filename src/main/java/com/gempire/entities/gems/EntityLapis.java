@@ -49,6 +49,7 @@ public class EntityLapis extends EntityGem {
         this.goalSelector.addGoal(7, new EntityAIFollowAssigned(this, 1.0D));
         this.goalSelector.addGoal(7, new EntityAIWander(this, 1.0D));
         this.goalSelector.addGoal(7, new EntityAIFollowOwner(this, 1.0D));
+        this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, EntityGem.class, 1, false, false, this::checkRebel));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Mob.class, 1, false, false, (p_234199_0_) -> p_234199_0_.getClassification(true) == MobCategory.MONSTER));
     }
     @Override

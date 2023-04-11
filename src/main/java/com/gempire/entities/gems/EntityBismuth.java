@@ -8,6 +8,7 @@ import com.gempire.init.ModFluids;
 import com.gempire.init.ModItems;
 import com.gempire.util.Abilities;
 import com.gempire.util.GemPlacements;
+import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.MobCategory;
@@ -55,6 +56,7 @@ public class EntityBismuth extends EntityGem {
         this.goalSelector.addGoal(7, new EntityAIFollowOwner(this, 1.0D));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Mob.class, 1, false, false, (p_234199_0_) -> p_234199_0_.getClassification(true) == MobCategory.MONSTER));
         this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.1D, false));
+        this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, EntityGem.class, 1, false, false, this::checkRebel));
     }
     @Override
     public SoundEvent getInstrument()
