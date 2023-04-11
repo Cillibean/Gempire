@@ -32,7 +32,7 @@ public class ItemBlueRejuvenator extends DestabBase {
                 {
                     ((EntityZircon) pTarget).setEnchantPage(RandomSource.create().nextInt(ModEnchants.VANILLA_ENCHANTMENTS.size()));
                 }
-                ((EntityGem) pTarget).rebelPoints += 2F;
+                ((EntityGem) pTarget).rebelPoints += 5F;
                 pTarget.hurt(DamageSource.GENERIC, pTarget.getMaxHealth() * 2);
             }
         }

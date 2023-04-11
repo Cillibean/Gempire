@@ -38,11 +38,14 @@ public class AbilityKindergartener extends Ability implements IIdleAbility {
                 }
             } else {
                 holder.getNavigation().moveTo(gemToTame, 1);
+                holder.lookAt(gemToTame,90F,90F);
                 if (holder.distanceToSqr(gemToTame) < Math.pow(2, 1)) {
-                    if (holder.getRebelled())
+                    if (holder.getRebelled() && !gemToTame.getRebelled())
                     {
                         gemToTame.rebel();
+                        gemToTame = null;
                     }
+                    else if (!gemToTame.getRebelled())
                     {
                         gemToTame.OWNERS.addAll(holder.OWNERS);
                         gemToTame.playSound(gemToTame.getInstrument());

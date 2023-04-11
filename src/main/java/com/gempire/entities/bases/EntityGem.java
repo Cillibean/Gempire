@@ -2,6 +2,7 @@ package com.gempire.entities.bases;
 
 import com.gempire.Gempire;
 import com.gempire.container.GemUIContainer;
+import com.gempire.entities.abilities.AbilityJester;
 import com.gempire.entities.abilities.AbilityRecall;
 import com.gempire.entities.abilities.AbilityVehicle;
 import com.gempire.entities.abilities.base.Ability;
@@ -139,6 +140,8 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     public float rebelPoints = 0.5F;
     public int rebelTicks;
 
+    public int jesterTicks;
+
     public static final int NUMBER_OF_SLOTS = 33;
     public NonNullList<ItemStack> items = NonNullList.withSize(EntityGem.NUMBER_OF_SLOTS, ItemStack.EMPTY);
 
@@ -229,6 +232,8 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.setMarking2Variant(this.generateMarking2Variant());
         this.setMarking2Color(this.generatePaletteColor(PaletteType.MARKINGS_2));
         this.setCustomName(this.getNickname());
+        this.rebelPoints = 0.5f;
+        this.rebelTicks = 1;
         //this.generateScoutList();
         this.idlePowers = this.generateIdlePowers();
         if(this.spawnGem != null){
@@ -335,7 +340,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         compound.putInt("marking2Color", this.getMarking2Color());
         compound.putInt("structureTime", this.structureTime);
         compound.putFloat("rebelPoints", this.rebelPoints);
-        compound.putInt("rebeLTicks", this.rebelTicks);
+        compound.putInt("rebelTicks", this.rebelTicks);
         this.writeStructures(compound);
         ContainerHelper.saveAllItems(compound, this.items);
     }
@@ -523,12 +528,17 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                 popShitOut();
             }
         }
-        if (!getRebelled() && getOwned())
+        if (!this.level.isClientSide && !getRebelled() && getOwned())
         {
             rebelTicks++;
             if (rebelTicks > 20 * (60 * 5))
             {
                 checkRebel();
+            }
+        }
+        if (!this.level.isClientSide) {
+            if (jesterTicks > 0) {
+                jesterTicks--;
             }
         }
         super.tick();
