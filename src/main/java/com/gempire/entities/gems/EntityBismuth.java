@@ -143,7 +143,7 @@ public class EntityBismuth extends EntityGem {
     public int generateOutfitVariant() {
         if (getGemPlacement() == 17)
             return 17;
-        return this.random.nextInt(3);
+        return this.random.nextInt(4);
     }
     @Override
     public Item getInputItem()
