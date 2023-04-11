@@ -36,7 +36,9 @@ public class AbilityJester extends Ability implements IIdleAbility {
             for (EntityGem entityGem : list) {
                 if (holder.getRebelled())
                 {
-                    entityGem.rebelPoints = 5;
+                    if (entityGem.rebelPoints < 5) {
+                        entityGem.rebelPoints = 5;
+                    }
                 }
                 else
                 {
