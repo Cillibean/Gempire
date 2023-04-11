@@ -632,12 +632,14 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         } else if (!this.getRebelled()) {
             player.sendSystemMessage(Component.translatable("messages.gempire.entity.rebel"));
         }
-        if (player.getItemInHand(hand).getItem() == getInputItem() && !isCrafting && hand == InteractionHand.MAIN_HAND && getInputItem() != Items.AIR.asItem()) {
-            if (this.isOwner(player)) {
-                isCrafting = true;
-                this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
-                if (!player.isCreative()) {
-                    player.getMainHandItem().shrink(1);
+        if (!level.isClientSide) {
+            if (player.getItemInHand(hand).getItem() == getInputItem() && !isCrafting && hand == InteractionHand.MAIN_HAND && getInputItem() != Items.AIR.asItem()) {
+                if (this.isOwner(player)) {
+                    isCrafting = true;
+                    this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
+                    if (!player.isCreative()) {
+                        player.getMainHandItem().shrink(1);
+                    }
                 }
             }
         }

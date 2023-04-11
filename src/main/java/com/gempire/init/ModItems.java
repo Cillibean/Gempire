@@ -444,6 +444,9 @@ public class ModItems {
     public static final RegistryObject<Item> BLUE_REJUVENATOR = ITEMS.register("blue_rejuvenator", () ->
             new ItemBlueRejuvenator(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(1).durability(15)));
 
+    public static final RegistryObject<Item> REBEL_STICK = ITEMS.register("rebel_stick", () ->
+            new ItemRebelStick(new Item.Properties().stacksTo(1)));
+
     public static final RegistryObject<Item> WHITE_CHROMA = ITEMS.register("white_chroma", () ->
             new ItemChroma(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(64), 0));
     public static final RegistryObject<Item> ORANGE_CHROMA = ITEMS.register("orange_chroma", () ->
