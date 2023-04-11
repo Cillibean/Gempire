@@ -62,7 +62,6 @@ public class EntityShale extends EntityStarterGem {
                 .add(Attributes.ATTACK_DAMAGE, 0);
     }
 
-    @Override
     protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(0, new FloatGoal(this));

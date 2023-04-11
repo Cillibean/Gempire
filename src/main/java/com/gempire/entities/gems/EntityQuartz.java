@@ -28,7 +28,6 @@ public class EntityQuartz extends AbstractQuartz {
     public EntityQuartz(EntityType<? extends PathfinderMob> type, Level worldIn) {
         super(type, worldIn);
     }
-    @Override
     protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(7, new FloatGoal(this));

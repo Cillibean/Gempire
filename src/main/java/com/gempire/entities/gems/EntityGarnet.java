@@ -34,7 +34,6 @@ public class EntityGarnet extends EntityVaryingGem {
                 .add(Attributes.ATTACK_SPEED, 0.5D);
     }
 
-    @Override
     protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(7, new FloatGoal(this));

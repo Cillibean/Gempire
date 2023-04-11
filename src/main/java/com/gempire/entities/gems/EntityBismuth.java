@@ -44,7 +44,6 @@ public class EntityBismuth extends EntityGem {
                 .add(Attributes.ATTACK_SPEED, 1.0D);
     }
 
-    @Override
     protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(7, new FloatGoal(this));

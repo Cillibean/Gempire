@@ -40,7 +40,6 @@ public class EntityLapis extends EntityGem {
                 .add(Attributes.ATTACK_SPEED, 1.0D);
     }
 
-    @Override
     protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(9, new FloatGoal(this));

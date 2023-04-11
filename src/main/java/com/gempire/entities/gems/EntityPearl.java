@@ -116,7 +116,6 @@ public class EntityPearl extends EntityVaryingGem {
         this.items2 = newItems2;
     }
 
-    @Override
     protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(7, new FloatGoal(this));

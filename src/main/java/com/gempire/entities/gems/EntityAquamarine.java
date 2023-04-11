@@ -53,7 +53,6 @@ public class EntityAquamarine extends EntityGem implements FlyingAnimal {
         return false;
     }
 
-    @Override
     protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(9, new FloatGoal(this));

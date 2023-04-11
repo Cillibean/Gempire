@@ -69,7 +69,6 @@ public class EntityZircon extends EntityVaryingGem {
     {
         return SoundEvents.NOTE_BLOCK_PLING;
     }
-    @Override
     protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(9, new FloatGoal(this));

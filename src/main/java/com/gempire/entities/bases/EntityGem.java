@@ -7,6 +7,9 @@ import com.gempire.entities.abilities.AbilityVehicle;
 import com.gempire.entities.abilities.base.Ability;
 import com.gempire.entities.abilities.AbilityZilch;
 import com.gempire.entities.abilities.interfaces.*;
+import com.gempire.entities.ai.EntityAIFollowAssigned;
+import com.gempire.entities.ai.EntityAIFollowOwner;
+import com.gempire.entities.ai.EntityAIWander;
 import com.gempire.events.GemPoofEvent;
 import com.gempire.init.ModItems;
 import com.gempire.init.ModSounds;
@@ -20,6 +23,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.ai.goal.*;
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.client.Minecraft;
@@ -130,8 +135,13 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     public int timeToCraft = 10;
     public boolean isCrafting;
 
+    public boolean isHostile;
+
     public Item input;
     public int focusLevel = 2;
+
+    public float rebelPoints = 0.5F;
+    public int rebelTicks;
 
     public static final int NUMBER_OF_SLOTS = 33;
     public NonNullList<ItemStack> items = NonNullList.withSize(EntityGem.NUMBER_OF_SLOTS, ItemStack.EMPTY);
@@ -230,6 +240,18 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         }
         return super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
     }
+
+    @Override
+    protected void registerGoals() {
+        super.registerGoals();
+        this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, 1, true, false, this::isHostileAt));
+    }
+
+    private boolean isHostileAt(LivingEntity entity) {
+        return isHostile || getRebelled();
+    }
+
+
     @Override
     public boolean canHoldItem(ItemStack stack) {
         return stack.getItem() instanceof ArmorItem ||  stack.getItem() instanceof DiggerItem;
@@ -286,6 +308,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         compound.putString("facet", this.getFacet());
         compound.putString("cut", this.getCut());
         compound.putBoolean("rebel", this.getRebelled());
+        compound.putBoolean("isHostile", this.getHostile());
         compound.putBoolean("cracked", this.getCracked());
         compound.putIntArray("guardPos", this.GUARD_POS);
         compound.putInt("focusLevel", this.focusLevel);
@@ -295,6 +318,8 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         compound.putInt("marking2Variant", this.getMarking2Variant());
         compound.putInt("marking2Color", this.getMarking2Color());
         compound.putInt("structureTime", this.structureTime);
+        compound.putFloat("rebelPoints", this.rebelPoints);
+        compound.putInt("rebeLTicks", this.rebelTicks);
         this.writeStructures(compound);
         ContainerHelper.saveAllItems(compound, this.items);
     }
@@ -354,6 +379,10 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.setMarking2Variant(compound.getInt("marking2Variant"));
         this.setMarking2Color(compound.getInt("marking2Color"));
         this.structureTime = compound.getInt("structureTime");
+        this.setRebelled(compound.getBoolean("rebel"));
+        this.isHostile = compound.getBoolean("isHostile");
+        this.rebelPoints = compound.getFloat("rebelPoints");
+        this.rebelTicks = compound.getInt("rebelTicks");
         this.idlePowers = this.generateIdlePowers();
         ContainerHelper.loadAllItems(compound, this.items);
         this.readStructures(compound);
@@ -478,7 +507,25 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                 popShitOut();
             }
         }
+        if (!getRebelled() && getOwned())
+        {
+            rebelTicks++;
+            if (rebelTicks > 20 * (60 * 5))
+            {
+                checkRebel();
+            }
+        }
         super.tick();
+    }
+
+    private void checkRebel() {
+        float rebelly;
+        rebelly = (float) (0 + Math.random() * 300);
+        if (rebelly < rebelPoints)
+        {
+            rebel();
+        }
+        rebelTicks = 0;
     }
 
     @Override
@@ -736,11 +783,6 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     }
 
     @Override
-    protected void registerGoals() {
-        super.registerGoals();
-    }
-
-    @Override
     public boolean removeWhenFarAway(double xix){
         return false;
     }
@@ -748,9 +790,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     //GETTERS AND SETTERS!!!
 
     public void setOwners(ArrayList<UUID> owners){
-        if (!getRebelled()) {
-            this.OWNERS = owners;
-        }
+        this.OWNERS = owners;
     }
 
     public void addOwner(UUID ID){
@@ -1127,7 +1167,9 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     public Boolean getRebelled(){
         return this.entityData.get(EntityGem.REBEL);
     }
-
+    public Boolean getHostile(){
+        return isHostile;
+    }
     public void setRebelled(boolean rebelled){
         this.entityData.set(EntityGem.REBEL, rebelled);
     }
@@ -1621,11 +1663,11 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
 
     public void rebel() {
         this.resetOwners();
-        this.generateInsigniaColor();
-        this.generateOutfitColor();
-        this.generateOutfitVariant();
-        this.generateHairVariant();
-        this.generateInsigniaVariant();
+        this.setInsigniaColor(random.nextInt(16));
+        this.setOutfitColor(random.nextInt(16));
+        this.setHairVariant((this).generateHairVariant());
+        this.setOutfitVariant((this).generateOutfitVariant());
+        this.setInsigniaVariant((this).generateInsigniaVariant());
         this.setRebelled(true);
     }
 

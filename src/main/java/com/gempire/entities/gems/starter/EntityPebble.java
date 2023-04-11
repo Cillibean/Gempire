@@ -86,7 +86,6 @@ public class EntityPebble extends EntityStarterGem {
         }
     }
 
-    @Override
     protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(0, new FloatGoal(this));

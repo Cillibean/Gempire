@@ -42,7 +42,6 @@ public class EntityTopaz extends EntityVaryingGem {
                 .add(Attributes.KNOCKBACK_RESISTANCE, 2D);
     }
 
-    @Override
     protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(7, new FloatGoal(this));

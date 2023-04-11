@@ -29,7 +29,6 @@ public class EntityAgate extends AbstractQuartz {
         super(type, worldIn);
     }
 
-    @Override
     protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(7, new FloatGoal(this));

@@ -59,7 +59,6 @@ public class EntitySapphire extends EntityVaryingGem {
         return super.hurt(source, amount);
     }
 
-    @Override
     protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(9, new FloatGoal(this));

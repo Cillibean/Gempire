@@ -46,7 +46,6 @@ public class EntityPeridot extends EntityGem {
     {
         return SoundEvents.NOTE_BLOCK_BIT;
     }
-    @Override
     protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(7, new FloatGoal(this));
