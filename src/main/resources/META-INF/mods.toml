@@ -27,7 +27,7 @@ displayName="Gempire" #mandatory
 # A URL for the "homepage" for this mod, displayed in the mod UI
 # displayURL="http://example.com/" #optional
 # A file name (in the root of the mod JAR) containing a logo for display
-logoFile="gempire.png" #optional
+logoFile="gempire_icon.png" #optional
 # A text field displayed in the mod UI
 credits="Cillibean, lillemby, Solangelo, Taaffeite, and the Gempire Staff" #optional
 # A text field displayed in the mod UI

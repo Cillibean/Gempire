@@ -6,6 +6,7 @@ import com.gempire.entities.abilities.interfaces.IEmotionalAbility;
 import com.gempire.entities.abilities.interfaces.IMeleeAbility;
 import com.gempire.entities.abilities.interfaces.IViolentAbility;
 import com.gempire.entities.bases.EntityGem;
+import com.gempire.init.ModEffects;
 import com.gempire.util.Abilities;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.PathfinderMob;
@@ -26,7 +27,7 @@ public class AbilityParalysis extends Ability implements IMeleeAbility, IEffectA
 
     @Override
     public MobEffectInstance effect() {
-        return new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 20 * 5, 99);
+        return new MobEffectInstance(ModEffects.PARALYSIS.get(), 20 * 5, 99);
     }
 
     @Override
@@ -49,7 +50,7 @@ public class AbilityParalysis extends Ability implements IMeleeAbility, IEffectA
             if(entity instanceof EntityGem || this.holder.isOwner(entity)){
                 continue;
             }
-            entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 20 * 15, 99,false,false));
+            entity.addEffect(new MobEffectInstance(ModEffects.PARALYSIS.get(), 20 * 15, 99,false,false));
         }
     }
 

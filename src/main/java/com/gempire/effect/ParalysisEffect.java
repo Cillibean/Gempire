@@ -10,34 +10,39 @@ public class ParalysisEffect extends MobEffect {
     double prevx = 0;
     double prevy = 0;
     double prevz = 0;
+    LivingEntity entity;
+    int duration;
 
     public ParalysisEffect(MobEffectCategory mobEffectCategory, int color) {
         super(mobEffectCategory, color);
     }
 
     @Override
-    public void applyEffectTick(LivingEntity pLivingEntity, int pAmplifier) {
-        if (!pLivingEntity.level.isClientSide()) {
-            if (!effectApplied) {
-                prevx = pLivingEntity.getX();
-                prevy = pLivingEntity.getY();
-                prevz = pLivingEntity.getZ();
-                effectApplied = true;
-            } else {
-                pLivingEntity.teleportTo(prevx, prevy, prevz);
-                if (pLivingEntity.getHealth() > 1.0F) {
-                    pLivingEntity.hurt(DamageSource.MAGIC, 1.0F);
+    public void applyEffectTick(LivingEntity entity, int pAmplifier) {
+            if (!entity.level.isClientSide()) {
+                if (duration > 1) {
+                    if (!effectApplied) {
+                        prevx = entity.getX();
+                        prevy = entity.getY();
+                        prevz = entity.getZ();
+                        effectApplied = true;
+                    } else {
+                        entity.teleportTo(prevx, prevy, prevz);
+                        if (entity.getHealth() > 1.0F) {
+                            entity.hurt(DamageSource.MAGIC, 1.0F);
+                        }
+                    }
+                } else {
+                    effectApplied = false;
                 }
             }
-            if (!pLivingEntity.hasEffect(this)) {
-                effectApplied = false;
-            }
-        }
-        super.applyEffectTick(pLivingEntity, pAmplifier);
+        super.applyEffectTick(entity, pAmplifier);
     }
 
     @Override
     public boolean isDurationEffectTick(int pDuration, int pAmplifier) {
+        duration = pDuration;
         return true;
     }
+
 }
