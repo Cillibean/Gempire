@@ -1,0 +1,16 @@
+{
+  "name": "Luck",
+  "icon": "minecraft:rabbit_foot",
+  "advancement": "gempire:root",
+  "category": "gempire:abilities",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Pyrokinesis is an ability that makes the gem permanently give off the luck effect."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Gems that are guaranteed to have it$()$(li)Sapphire$(br2) $(l)Gems that have a chance to have it$()$(li)N/A"
+    }
+  ]
+}

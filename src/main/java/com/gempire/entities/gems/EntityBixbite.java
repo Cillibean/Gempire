@@ -98,7 +98,7 @@ public class EntityBixbite extends EntityGem {
 
     public Abilities[] possibleAbilities(){
         return new Abilities[]{
-                Abilities.NO_ABILITY, Abilities.TANK, Abilities.BEEFCAKE, Abilities.POWERHOUSE, Abilities.UNHINGED
+                Abilities.NO_ABILITY, Abilities.TANK, Abilities.BEEFCAKE, Abilities.POWERHOUSE, Abilities.UNHINGED, Abilities.MINING
         };
     }
     public Abilities[] definiteAbilities(){

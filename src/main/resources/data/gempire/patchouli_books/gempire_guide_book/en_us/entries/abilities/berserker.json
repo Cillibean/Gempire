@@ -1,0 +1,16 @@
+{
+  "name": "Berserker",
+  "icon": "minecraft:goat_horn",
+  "advancement": "gempire:root",
+  "category": "gempire:abilities",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Berserker is an ability that when the gem is below 30% of their hp, strength and damage resistance."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Gems that are guaranteed to have it$()$(li)N/A$(br2) $(l)Gems that have a chance to have it$()$(li)Quartzes$(li)Garnet$(li)Lapis Lazuli$(li)Nephrite$(li)Topaz$(li)Tourmaline"
+    }
+  ]
+}

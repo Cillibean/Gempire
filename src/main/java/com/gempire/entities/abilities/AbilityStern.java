@@ -29,9 +29,8 @@ public class AbilityStern extends Ability implements IAreaAbility, IEffectAbilit
         ArrayList<EntityGem> entities = new ArrayList<>(this.holder.level.getEntitiesOfClass(EntityGem.class,
                 new AABB(this.holder.getX(), this.holder.getY(), this.holder.getZ(), this.holder.getX() + 1, this.holder.getY() + 1 , this.holder.getZ() + 1)
                 .inflate(16, this.holder.level.getMaxBuildHeight(), 16)));
-        for(int i = 0; i < entities.size(); i++){
-            EntityGem gem = entities.get(i);
-            if(EntityGem.sharesOwners(gem, this.holder)) {
+        for (EntityGem gem : entities) {
+            if (EntityGem.sharesOwners(gem, this.holder)) {
                 gem.focusLevel = 1;
             }
         }
@@ -39,7 +38,7 @@ public class AbilityStern extends Ability implements IAreaAbility, IEffectAbilit
 
     @Override
     public MobEffectInstance effect() {
-        return new MobEffectInstance(MobEffects.NIGHT_VISION, 400, 0,true,true);
+        return new MobEffectInstance(MobEffects.NIGHT_VISION, 400, 0,false,false);
     }
     @Override
     public Component getName() {

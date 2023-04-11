@@ -1,0 +1,16 @@
+{
+  "name": "Knockback",
+  "icon": "minecraft:iron_axe",
+  "advancement": "gempire:root",
+  "category": "gempire:abilities",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Knockback is an ability that gives the gem that has it more knockback to their attacks."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Gems that are guaranteed to have it$()$(li)Topaz$(br2) $(l)Gems that have a chance to have it$()$(li)Quartzes$(li)Nephrite$(li)Obsidian$(li)Ruby"
+    }
+  ]
+}

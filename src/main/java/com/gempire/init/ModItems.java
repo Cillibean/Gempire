@@ -416,7 +416,7 @@ public class ModItems {
     public static final RegistryObject<Item> WATER_ORB = ITEMS.register("water_orb", () ->
             new Item(new Item.Properties().stacksTo(64)));
     public static final RegistryObject<Item> GEM_SLUSH_BUCKET = ITEMS.register("gem_slush_bucket", () ->
-            new Item(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(1)));
+            new Item(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(16)));
 
     public static final RegistryObject<Item> INJECTOR_PANEL = ITEMS.register("injector_panel", () ->
             new ItemInjectorPanel(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(1)));

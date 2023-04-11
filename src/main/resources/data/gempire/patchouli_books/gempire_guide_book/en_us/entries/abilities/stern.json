@@ -1,0 +1,16 @@
+{
+  "name": "Stern",
+  "icon": "minecraft:ender_pearl",
+  "advancement": "gempire:root",
+  "category": "gempire:abilities",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Stern is an ability that makes gems give off an intimidating aura, making gems more efficient at their jobs. They will also give off night vision."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Gems that are guaranteed to have it$()$(li)Topaz$(li)Zircon$(br2) $(l)Gems that have a chance to have it$()$(li)Agate"
+    }
+  ]
+}

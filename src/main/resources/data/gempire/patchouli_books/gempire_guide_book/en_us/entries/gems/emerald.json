@@ -14,7 +14,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "$(l)Possible Abilities$() $(br)$(li)Tank$(li)Beefcake$(li)Powerhouse$(li)Unhinged$(li)Negotiator(br2) $(l)Definite Abilities$()$(br)$(li)Recall"
+      "text": "$(l)Possible Abilities$() $(br)$(li)Tank$(li)Beefcake$(li)Powerhouse$(li)Unhinged$(li)Negotiator$(br2) $(l)Definite Abilities$()$(br)$(li)Recall"
     }
   ]
 }

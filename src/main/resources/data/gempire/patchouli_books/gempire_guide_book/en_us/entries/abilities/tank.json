@@ -1,0 +1,16 @@
+{
+  "name": "Tank",
+  "icon": "minecraft:iron_chestplate",
+  "advancement": "gempire:root",
+  "category": "gempire:abilities",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Tank is an ability that gives the gem that has it 25% more health than default."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Gems that are guaranteed to have it$()$(li)N/A$(br2) $(l)Gems that have a chance to have it$()$(li)Quartzes$(li)Aquamarine$(li)Bismuth$(li)Bixbite$(li)Emerald$(li)Garnet$(li)Lapis Lazuli$(li)Larimar$(li)Morganite$(li)Nephrite$(li)Peridot$(li)Ruby$(li)Rutile$(li)Sapphire$(li)Spinel$(li)Spodumene$(li)Topaz$(li)Tourmaline"
+    }
+  ]
+}

@@ -35,7 +35,7 @@ public class EntityLapis extends EntityGem {
     public static AttributeSupplier.Builder registerAttributes() {
         return Mob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 35.0D)
-                .add(Attributes.MOVEMENT_SPEED, 0.4D)
+                .add(Attributes.MOVEMENT_SPEED, 0.3D)
                 .add(Attributes.ATTACK_DAMAGE, 2.0D)
                 .add(Attributes.ATTACK_SPEED, 1.0D);
     }
@@ -108,7 +108,7 @@ public class EntityLapis extends EntityGem {
     }
     public Abilities[] definiteAbilities(){
         return new Abilities[]{
-                Abilities.HYDROKINESIS//, Abilities.VEHICLE, Abilities.TERRAFORMER
+                Abilities.HYDROKINESIS, Abilities.VEHICLE//, Abilities.TERRAFORMER
         };
     }
 
@@ -132,6 +132,13 @@ public class EntityLapis extends EntityGem {
 
     public boolean canChangeInsigniaColorByDefault(){
         return true;
+    }
+    @Override
+    public boolean isRideable() {
+        return true;
+    }
+    public boolean canOpenInventoryByDefault() {
+        return false;
     }
 
     @Override

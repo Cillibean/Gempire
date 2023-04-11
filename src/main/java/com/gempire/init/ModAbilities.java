@@ -53,6 +53,7 @@ public class ModAbilities {
         Ability.ABILITY_FROM_ABILITIES.put(Abilities.RECYCLER, AbilityRecycler.class);
         Ability.ABILITY_FROM_ABILITIES.put(Abilities.ELECTROKINESIS, AbilityElectrokinesis.class);
         Ability.ABILITY_FROM_ABILITIES.put(Abilities.FERROKINESIS, AbilityFerrokinesis.class);
+        Ability.ABILITY_FROM_ABILITIES.put(Abilities.MINING, AbilityMiningInspiration.class);
 
         Ability.ABILITY_FROM_ABILITIES.put(Abilities.ESSENCE_BREWER, AbilityBrewEssence.class);
         Ability.ABILITY_FROM_ABILITIES.put(Abilities.REFINERY, AbilityPrismaticRefinery.class);
