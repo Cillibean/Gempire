@@ -245,7 +245,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     }
 
     public boolean checkRebel(LivingEntity entity) {
-        if (!this.getRebelled()) {
+        if (!this.getRebelled() && !((EntityGem) entity).getOwned()) {
             return ((EntityGem) entity).getRebelled();
         }
         else
