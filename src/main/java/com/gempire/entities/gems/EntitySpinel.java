@@ -110,7 +110,7 @@ public class EntitySpinel extends EntityVaryingGem {
     }
     public Abilities[] definiteAbilities(){
         return new Abilities[]{
-                Abilities.LURE//Abilities.JESTER
+                Abilities.LURE, Abilities.JESTER
         };
     }
 

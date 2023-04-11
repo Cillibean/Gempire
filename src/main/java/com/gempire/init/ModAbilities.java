@@ -20,6 +20,7 @@ public class ModAbilities {
         Ability.ABILITY_FROM_ABILITIES.put(Abilities.HEALER, AbilityHealer.class);
         Ability.ABILITY_FROM_ABILITIES.put(Abilities.AMPHIBIAN, AbilityAmphibian.class);
         Ability.ABILITY_FROM_ABILITIES.put(Abilities.HYDROKINESIS, AbilityHydrokinesis.class);
+        Ability.ABILITY_FROM_ABILITIES.put(Abilities.JESTER, AbilityJester.class);
 
         Ability.ABILITY_FROM_ABILITIES.put(Abilities.TANK, AbilityTank.class);
         Ability.ABILITY_FROM_ABILITIES.put(Abilities.BEEFCAKE, AbilityBeefcake.class);
