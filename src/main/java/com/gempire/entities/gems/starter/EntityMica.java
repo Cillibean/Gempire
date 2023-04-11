@@ -5,10 +5,7 @@ import com.gempire.entities.ai.EntityAIFollowOwner;
 import com.gempire.entities.ai.EntityAIMakePowerCrystal;
 import com.gempire.entities.ai.EntityAIWander;
 import com.gempire.entities.bases.EntityStarterGem;
-import com.gempire.systems.injection.Crux;
 import com.gempire.util.Abilities;
-import com.gempire.util.Color;
-import com.gempire.util.CruxType;
 import com.gempire.util.GemPlacements;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.PathfinderMob;
@@ -26,8 +23,6 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.level.Level;
-
-import java.util.ArrayList;
 
 import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.world.entity.ai.goal.FloatGoal;

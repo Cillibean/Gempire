@@ -3,7 +3,6 @@ package com.gempire.entities.gems;
 import com.gempire.entities.ai.EntityAIFollowAssigned;
 import com.gempire.entities.ai.EntityAIFollowOwner;
 import com.gempire.entities.ai.EntityAIWander;
-import com.gempire.entities.ai.EntityAiFollowSpinel;
 import com.gempire.entities.bases.EntityGem;
 import com.gempire.init.ModItems;
 import com.gempire.util.Abilities;
@@ -17,12 +16,10 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
-import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 
-import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.level.block.Blocks;
 
 public class EntityMorganite extends EntityGem {

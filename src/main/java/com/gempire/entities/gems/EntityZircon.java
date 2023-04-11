@@ -1,13 +1,11 @@
 package com.gempire.entities.gems;
 
-import com.gempire.container.GemUIContainer;
 import com.gempire.container.ZirconUIContainer;
 import com.gempire.entities.ai.EntityAIFollowAssigned;
 import com.gempire.entities.ai.EntityAIFollowOwner;
 import com.gempire.entities.ai.EntityAIWander;
 import com.gempire.entities.bases.EntityGem;
 import com.gempire.entities.bases.EntityVaryingGem;
-import com.gempire.entities.gems.starter.EntityShale;
 import com.gempire.init.ModEnchants;
 import com.gempire.util.Abilities;
 import com.gempire.util.GemPlacements;
@@ -17,7 +15,6 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.ContainerHelper;
@@ -26,14 +23,9 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.util.*;
-import net.minecraft.world.DifficultyInstance;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.Level;
 
 import javax.annotation.Nullable;
-import java.util.UUID;
 
 import net.minecraft.core.NonNullList;
 import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;

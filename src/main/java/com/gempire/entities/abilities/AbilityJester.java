@@ -36,11 +36,11 @@ public class AbilityJester extends Ability implements IIdleAbility {
             for (EntityGem entityGem : list) {
                 if (holder.getRebelled())
                 {
-                    entityGem.rebelPoints = 10;
+                    entityGem.rebelPoints = 5;
                 }
                 else
                 {
-                    if (entityGem.rebelPoints < 10) {
+                    if (entityGem.rebelPoints < 3) {
                         entityGem.rebelPoints = 0.1F;
                     }
                 }
