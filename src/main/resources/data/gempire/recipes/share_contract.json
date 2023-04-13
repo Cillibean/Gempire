@@ -5,5 +5,7 @@
       "item": "gempire:transfer_contract"
     }
   ],
-  "book": "gempire:share_contract"
+  "result": {
+    "item": "gempire:share_contract"
+  }
 }
