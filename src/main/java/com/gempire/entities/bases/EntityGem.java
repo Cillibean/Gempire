@@ -374,7 +374,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.readOwners(compound);
         if(compound.contains("followID"))this.FOLLOW_ID = compound.getUUID("followID");
         if(compound.contains("assignedID"))this.ASSIGNED_ID = compound.getUUID("assignedID");
-        this.MASTER_OWNER = (compound.getUUID("masterID"));
+        if(compound.contains("masterID"))this.MASTER_OWNER = compound.getUUID("masterID");
         this.setMovementType(compound.getByte("movementType"));
         this.setSkinColorVariant(compound.getInt("skinColorVariant"));
         this.setSkinColor(compound.getInt("skinColor"));
@@ -595,7 +595,6 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                                     setAssignedId(getAssignedGem().getUUID());
                                 }
                                 this.setMovementType((byte) 2);
-                                player.sendSystemMessage(Component.translatable(this.getCapitalGemName() + "! " + getFacet() + ", " + getCut()));
                                 this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
                                 return super.interactAt(player, vec, hand);
                             }
@@ -678,21 +677,14 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             if (getAssignedGem() != null ? this.getMovementType() < 3 : this.getMovementType() <2) {
                 this.addMovementType(1);
                 switch (this.getMovementType()) {
-                    case 1 -> player.sendSystemMessage(Component.translatable(this.getCapitalGemName() + " will wander around"));
-                    case 2 -> player.sendSystemMessage(Component.translatable(this.getCapitalGemName() + " will now follow you"));
-                    case 3 -> player.sendSystemMessage(Component.translatable(this.getCapitalGemName() + " will now follow " + assignedGem.getCapitalGemName() + " " + assignedGem.getFacetAndCut()));
-                    default -> player.sendSystemMessage(Component.translatable(this.getCapitalGemName() + " will now stay put"));
+                    case 1 -> player.sendSystemMessage(Component.translatable(this.getName().getString()).append(" will wander around"));
+                    case 2 -> player.sendSystemMessage(Component.translatable(this.getName().getString()).append(" will now follow you"));
+                    default -> player.sendSystemMessage(Component.translatable(this.getName().getString()).append(" will now stay put"));
                 }
-            } else if (getAssignedGem() != null && getAssignedGem().isAlive() ? this.getMovementType() == 3 : this.getMovementType() == 2) {
-                this.setMovementType((byte) 0);
-                player.sendSystemMessage(Component.translatable(this.getCapitalGemName() + " will now stay put"));
-                this.GUARD_POS[0] = (int) this.getX();
-                this.GUARD_POS[1] = (int) this.getY();
-                this.GUARD_POS[2] = (int) this.getZ();
-            } else if (getAssignedGem() == null && this.getMovementType() == 3)
+            } else if (this.getMovementType() == 2 || this.getMovementType() == 3)
             {
                 this.setMovementType((byte) 0);
-                player.sendSystemMessage(Component.translatable(this.getCapitalGemName() + " will now stay put"));
+                player.sendSystemMessage(Component.translatable(this.getName().getString()).append(" will now stay put"));
                 this.GUARD_POS[0] = (int) this.getX();
                 this.GUARD_POS[1] = (int) this.getY();
                 this.GUARD_POS[2] = (int) this.getZ();
