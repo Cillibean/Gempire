@@ -223,6 +223,7 @@ public class ItemGem extends Item {
                         assert gem != null;
                         gem.finalizeSpawn((ServerLevelAccessor) world, world.getCurrentDifficultyAt(player.blockPosition()), MobSpawnType.TRIGGERED, null, null);
                         gem.addOwner(player.getUUID());
+                        gem.addMasterOwner(player.getUUID());
                         gem.FOLLOW_ID = player.getUUID();
                         gem.setMovementType((byte) 2);
                     } else {

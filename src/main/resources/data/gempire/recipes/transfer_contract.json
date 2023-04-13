@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "gempire:share_contract"
+    }
+  ],
+  "book": "gempire:transfer_contract"
+}

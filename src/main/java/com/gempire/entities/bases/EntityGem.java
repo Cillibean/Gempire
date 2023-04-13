@@ -108,6 +108,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     public boolean isCut;
     public ArrayList<Ability> ABILITY_POWERS = new ArrayList<>();
     public ArrayList<UUID> OWNERS = new ArrayList<>();
+    public UUID MASTER_OWNER;
     public UUID FOLLOW_ID;
     public UUID ASSIGNED_ID;
     public EntityGem assignedGem;
@@ -310,6 +311,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.writeOwners(compound);
         compound.putUUID("followID", this.FOLLOW_ID);
         compound.putUUID("assignedID", this.ASSIGNED_ID);
+        compound.putUUID("masterID", this.MASTER_OWNER);
         compound.putByte("movementType", this.getMovementType());
         compound.putInt("skinColorVariant", this.getSkinColorVariant());
         compound.putInt("skinColor", this.getSkinColor());
@@ -371,6 +373,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.readOwners(compound);
         if(compound.contains("followID"))this.FOLLOW_ID = compound.getUUID("followID");
         if(compound.contains("assignedID"))this.ASSIGNED_ID = compound.getUUID("assignedID");
+        this.MASTER_OWNER = (compound.getUUID("masterID"));
         this.setMovementType(compound.getByte("movementType"));
         this.setSkinColorVariant(compound.getInt("skinColorVariant"));
         this.setSkinColor(compound.getInt("skinColor"));
@@ -557,80 +560,81 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     @Override
     public InteractionResult interactAt(Player player, Vec3 vec, InteractionHand hand) {
         if (!this.getRebelled()) {
-        if(player.level.isClientSide){
-            return super.interactAt(player, vec, hand);
-        }
-        //This part of the code checks if the player has a blank hand
-        if(hand == InteractionHand.MAIN_HAND) {
-            this.currentPlayer = player;
-            if (player.getMainHandItem() == ItemStack.EMPTY) {
-                if (this.isOwner(player)) {
-                    if (player.isShiftKeyDown()) {
-                        this.cycleMovementAI(player);
-                        this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
-                    } else {
-                        if (this.canOpenInventoryByDefault()) {
-                            NetworkHooks.openScreen((ServerPlayer) player, this, buf -> buf.writeInt(this.getId()));
+            if (player.level.isClientSide) {
+                return super.interactAt(player, vec, hand);
+            }
+            //This part of the code checks if the player has a blank hand
+            if (!level.isClientSide) {
+                if (player.getItemInHand(hand).isEmpty() && hand == InteractionHand.MAIN_HAND) {
+                    this.currentPlayer = player;
+                    if (this.isOwner(player)) {
+                        if (player.isShiftKeyDown()) {
+                            this.cycleMovementAI(player);
                             this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
-                        }
-                        if (this.isRideable()) {
-                            if (!this.isVehicle()) {
-                                player.startRiding(this);
+                        } else {
+                            if (this.canOpenInventoryByDefault()) {
+                                NetworkHooks.openScreen((ServerPlayer) player, this, buf -> buf.writeInt(this.getId()));
                                 this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
+                            }
+                            if (this.isRideable()) {
+                                if (!this.isVehicle()) {
+                                    player.startRiding(this);
+                                    this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
+                                }
+                            }
+                        }
+                    } else {
+                        //Test to see if the gem has an owner
+                        if (!this.getOwned()) {
+                            if (!this.isOwner(player)) {
+                                this.addOwner(player.getUUID());
+                                this.addMasterOwner(player.getUUID());
+                                setFollow(player.getUUID());
+                                if (getAssignedGem() != null) {
+                                    setAssignedId(getAssignedGem().getUUID());
+                                }
+                                this.setMovementType((byte) 2);
+                                player.sendSystemMessage(Component.translatable(this.getCapitalGemName() + "! " + getFacet() + ", " + getCut()));
+                                this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
+                                return super.interactAt(player, vec, hand);
                             }
                         }
                     }
                 } else {
-                    //Test to see if the gem has an owner
-                    if (!this.getOwned()) {
-                        if (!this.isOwner(player)) {
-                            this.addOwner(player.getUUID());
-                            setFollow(player.getUUID());
-                            if (getAssignedGem() != null) {
-                                setAssignedId(getAssignedGem().getUUID());
-                            }
-                            this.setMovementType((byte) 2);
-                            player.sendSystemMessage(Component.translatable(this.getCapitalGemName() + "! " + getFacet() + ", " + getCut()));
-                            this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
-                            return super.interactAt(player, vec, hand);
-                        }
-                    }
-                }
-            } else {
-                if (this.isOwner(player)) {
-                    if (player.getMainHandItem().getItem() instanceof DyeItem dye) {
-                        if (player.isShiftKeyDown()) {
-                            if (canChangeInsigniaColorByDefault()) this.setInsigniaColor(dye.getDyeColor().getId());
-                        } else {
-                            if (canChangeUniformColorByDefault()) this.setOutfitColor(dye.getDyeColor().getId());
-                        }
-                    } else if (player.getMainHandItem().getItem() == Items.PAPER) {
-                        NetworkHooks.openScreen((ServerPlayer) player, this, buf -> buf.writeInt(this.getId()));
-                    } else if (player.getMainHandItem().getItem() == Items.BOOK) {
-                        StringBuilder list1 = new StringBuilder();
-                        for (int i = 0; i < this.structures.size(); i++) {
-                            if (i == this.structures.size() - 1) {
-                                list1.append(this.structures.get(i));
+                    if (this.isOwner(player)) {
+                        if (player.getMainHandItem().getItem() instanceof DyeItem dye) {
+                            if (player.isShiftKeyDown()) {
+                                if (canChangeInsigniaColorByDefault())
+                                    this.setInsigniaColor(dye.getDyeColor().getId());
                             } else {
-                                list1.append(this.structures.get(i)).append(", ");
+                                if (canChangeUniformColorByDefault())
+                                    this.setOutfitColor(dye.getDyeColor().getId());
                             }
-                        }
-                        StringBuilder list2 = new StringBuilder();
-                        for (int i = 0; i < this.biomes.size(); i++) {
-                            if (i == this.biomes.size() - 1) {
-                                list2.append(this.biomes.get(i));
-                            } else {
-                                list2.append(this.biomes.get(i)).append(", ");
+                        } else if (player.getMainHandItem().getItem() == Items.PAPER) {
+                            NetworkHooks.openScreen((ServerPlayer) player, this, buf -> buf.writeInt(this.getId()));
+                        } else if (player.getMainHandItem().getItem() == Items.BOOK) {
+                            StringBuilder list1 = new StringBuilder();
+                            for (int i = 0; i < this.structures.size(); i++) {
+                                if (i == this.structures.size() - 1) {
+                                    list1.append(this.structures.get(i));
+                                } else {
+                                    list1.append(this.structures.get(i)).append(", ");
+                                }
                             }
+                            StringBuilder list2 = new StringBuilder();
+                            for (int i = 0; i < this.biomes.size(); i++) {
+                                if (i == this.biomes.size() - 1) {
+                                    list2.append(this.biomes.get(i));
+                                } else {
+                                    list2.append(this.biomes.get(i)).append(", ");
+                                }
+                            }
+                            player.sendSystemMessage(Component.translatable("Findable Structures: " + list1));
+                            player.sendSystemMessage(Component.translatable("Findable Biomes: " + list2));
                         }
-                        player.sendSystemMessage(Component.translatable("Findable Structures: " + list1));
-                        player.sendSystemMessage(Component.translatable("Findable Biomes: " + list2));
                     }
                 }
             }
-        }
-        } else if (!this.getRebelled()) {
-            player.sendSystemMessage(Component.translatable("messages.gempire.entity.rebel"));
         }
         if (!level.isClientSide) {
             if (player.getItemInHand(hand).getItem() == getInputItem() && !isCrafting && hand == InteractionHand.MAIN_HAND && getInputItem() != Items.AIR.asItem()) {
@@ -826,6 +830,10 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             this.OWNERS.add(ID);
         }
     }
+    public void addMasterOwner(UUID ID)
+    {
+        MASTER_OWNER = ID;
+    }
 
     public void removeOwner(UUID ID){
         for(int i = 0; i < this.OWNERS.size(); i++){
@@ -838,6 +846,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
 
     public void resetOwners(){
         setOwners(new ArrayList<>());
+        addMasterOwner(UUID.randomUUID());
     }
 
     public boolean getOwned(){
@@ -850,7 +859,9 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
 
     public boolean isOwner(LivingEntity entity){
         for(UUID uuid : this.OWNERS){
-            if(entity.getUUID().equals(uuid)) return true;
+            if(entity.getUUID().equals(uuid)){
+                return true;
+            }
         }
         return false;
     }
@@ -930,7 +941,6 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         ItemStack itemStack = new ItemStack(getOutputItem());
         ItemEntity itemEntity = new ItemEntity(this.level, this.getX(), this.getY(), this.getZ(), itemStack);
         this.level.addFreshEntity(itemEntity);
-        this.currentPlayer.sendSystemMessage(Component.translatable("All done!"));
         ticking = 0;
         this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
         isCrafting = false;

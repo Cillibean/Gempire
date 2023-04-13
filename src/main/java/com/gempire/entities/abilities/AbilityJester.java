@@ -35,26 +35,23 @@ public class AbilityJester extends Ability implements IIdleAbility {
         List<EntityGem> list = this.holder.level.getEntitiesOfClass(EntityGem.class, this.holder.getBoundingBox().inflate(14.0D, 8.0D, 14.0D));
         if (holder.getOwned()) {
             for (EntityGem entityGem : list) {
-                if (holder.jesterTicks == 0) {
-                    holder.getNavigation().moveTo(entityGem, 1);
-                    holder.lookAt(entityGem,90F,90F);
-                    if (holder.distanceToSqr(entityGem) < Math.pow(2, 1)) {
-                        if (holder.getRebelled())
-                        {
-                            if (entityGem.rebelPoints <= 6)
-                            {
-                                entityGem.rebelPoints = 6;
-                                holder.playSound(SoundEvents.GOAT_HORN_SOUND_VARIANTS.get(6));
-                                holder.jesterTicks = 20*60;
-                            }
-                        }
-                        else
-                        {
-                            if (entityGem.rebelPoints <= 3)
-                            {
-                                entityGem.rebelPoints = 0.1F;
-                                holder.playSound(SoundEvents.GOAT_HORN_SOUND_VARIANTS.get(1));
-                                holder.jesterTicks = 20*60;
+                if (entityGem != holder) {
+                    if (holder.jesterTicks == 0) {
+                        holder.getNavigation().moveTo(entityGem, 1);
+                        holder.lookAt(entityGem, 90F, 90F);
+                        if (holder.distanceToSqr(entityGem) < Math.pow(2, 1)) {
+                            if (holder.getRebelled()) {
+                                if (entityGem.rebelPoints <= 6) {
+                                    entityGem.rebelPoints = 6;
+                                    holder.playSound(SoundEvents.GOAT_HORN_SOUND_VARIANTS.get(6));
+                                    holder.jesterTicks = 20 * 60;
+                                }
+                            } else {
+                                if (entityGem.rebelPoints <= 3) {
+                                    entityGem.rebelPoints = 0.1F;
+                                    holder.playSound(SoundEvents.GOAT_HORN_SOUND_VARIANTS.get(1));
+                                    holder.jesterTicks = 20 * 60;
+                                }
                             }
                         }
                     }
