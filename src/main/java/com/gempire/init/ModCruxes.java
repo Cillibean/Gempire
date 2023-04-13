@@ -318,7 +318,7 @@ public class ModCruxes {
         float gemTemperatureMin = 0.95f;
         float gemTemperatureMax = 1f;
         Item primer = Items.EMERALD_BLOCK;
-        String essences = "blue";
+        String essences = "blue-yellow";
         gemCruxes.add(new Crux(Blocks.STONE.defaultBlockState(), stoneCruxValue, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.GRANITE.defaultBlockState(), stoneCruxValue, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.DIORITE.defaultBlockState(), stoneCruxValue, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));

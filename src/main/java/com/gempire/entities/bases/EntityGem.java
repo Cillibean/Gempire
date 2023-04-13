@@ -233,6 +233,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.setMarking2Variant(this.generateMarking2Variant());
         this.setMarking2Color(this.generatePaletteColor(PaletteType.MARKINGS_2));
         this.setCustomName(this.getNickname());
+        this.MASTER_OWNER = UUID.randomUUID();
         this.rebelPoints = 0.5f;
         this.rebelTicks = 1;
         //this.generateScoutList();
@@ -549,7 +550,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
 
     private void checkRebel() {
         float rebelly;
-        rebelly = (float) (0 + Math.random() * 300);
+        rebelly = (float) (0 + Math.random() * 500);
         if (rebelly < rebelPoints)
         {
             rebel();
@@ -598,39 +599,39 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                                 this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
                                 return super.interactAt(player, vec, hand);
                             }
-                        }
-                    }
-                } else {
-                    if (this.isOwner(player)) {
-                        if (player.getMainHandItem().getItem() instanceof DyeItem dye) {
-                            if (player.isShiftKeyDown()) {
-                                if (canChangeInsigniaColorByDefault())
-                                    this.setInsigniaColor(dye.getDyeColor().getId());
-                            } else {
-                                if (canChangeUniformColorByDefault())
-                                    this.setOutfitColor(dye.getDyeColor().getId());
-                            }
-                        } else if (player.getMainHandItem().getItem() == Items.PAPER) {
-                            NetworkHooks.openScreen((ServerPlayer) player, this, buf -> buf.writeInt(this.getId()));
-                        } else if (player.getMainHandItem().getItem() == Items.BOOK) {
-                            StringBuilder list1 = new StringBuilder();
-                            for (int i = 0; i < this.structures.size(); i++) {
-                                if (i == this.structures.size() - 1) {
-                                    list1.append(this.structures.get(i));
-                                } else {
-                                    list1.append(this.structures.get(i)).append(", ");
+                        } else {
+                            if (this.isOwner(player)) {
+                                if (player.getMainHandItem().getItem() instanceof DyeItem dye) {
+                                    if (player.isShiftKeyDown()) {
+                                        if (canChangeInsigniaColorByDefault())
+                                            this.setInsigniaColor(dye.getDyeColor().getId());
+                                    } else {
+                                        if (canChangeUniformColorByDefault())
+                                            this.setOutfitColor(dye.getDyeColor().getId());
+                                    }
+                                } else if (player.getMainHandItem().getItem() == Items.PAPER) {
+                                    NetworkHooks.openScreen((ServerPlayer) player, this, buf -> buf.writeInt(this.getId()));
+                                } else if (player.getMainHandItem().getItem() == Items.BOOK) {
+                                    StringBuilder list1 = new StringBuilder();
+                                    for (int i = 0; i < this.structures.size(); i++) {
+                                        if (i == this.structures.size() - 1) {
+                                            list1.append(this.structures.get(i));
+                                        } else {
+                                            list1.append(this.structures.get(i)).append(", ");
+                                        }
+                                    }
+                                    StringBuilder list2 = new StringBuilder();
+                                    for (int i = 0; i < this.biomes.size(); i++) {
+                                        if (i == this.biomes.size() - 1) {
+                                            list2.append(this.biomes.get(i));
+                                        } else {
+                                            list2.append(this.biomes.get(i)).append(", ");
+                                        }
+                                    }
+                                    player.sendSystemMessage(Component.translatable("Findable Structures: " + list1));
+                                    player.sendSystemMessage(Component.translatable("Findable Biomes: " + list2));
                                 }
                             }
-                            StringBuilder list2 = new StringBuilder();
-                            for (int i = 0; i < this.biomes.size(); i++) {
-                                if (i == this.biomes.size() - 1) {
-                                    list2.append(this.biomes.get(i));
-                                } else {
-                                    list2.append(this.biomes.get(i)).append(", ");
-                                }
-                            }
-                            player.sendSystemMessage(Component.translatable("Findable Structures: " + list1));
-                            player.sendSystemMessage(Component.translatable("Findable Biomes: " + list2));
                         }
                     }
                 }
