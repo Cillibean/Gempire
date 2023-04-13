@@ -195,6 +195,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.entityData.define(EntityGem.CUT, " ");
         this.FOLLOW_ID = UUID.randomUUID();
         this.ASSIGNED_ID = UUID.randomUUID();
+        this.MASTER_OWNER = UUID.randomUUID();
         Arrays.fill(this.armorDropChances, 0);
         Arrays.fill(this.handDropChances, 0);
     }
@@ -228,12 +229,12 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.setCut(this.generateCut());
         this.FOLLOW_ID = UUID.randomUUID();
         this.ASSIGNED_ID = UUID.randomUUID();
+        this.MASTER_OWNER = UUID.randomUUID();
         this.setMarkingVariant(this.generateMarkingVariant());
         this.setMarkingColor(this.generatePaletteColor(PaletteType.MARKINGS));
         this.setMarking2Variant(this.generateMarking2Variant());
         this.setMarking2Color(this.generatePaletteColor(PaletteType.MARKINGS_2));
         this.setCustomName(this.getNickname());
-        this.MASTER_OWNER = UUID.randomUUID();
         this.rebelPoints = 0.5f;
         this.rebelTicks = 1;
         //this.generateScoutList();
@@ -572,6 +573,11 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                         if (player.isShiftKeyDown()) {
                             this.cycleMovementAI(player);
                             this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
+                            if(OWNERS.size() <= 1 && this.MASTER_OWNER != player.getUUID())
+                            {
+                                MASTER_OWNER = player.getUUID();
+                                System.out.println("Added master owner");
+                            }
                         } else {
                             if (this.canOpenInventoryByDefault()) {
                                 NetworkHooks.openScreen((ServerPlayer) player, this, buf -> buf.writeInt(this.getId()));
