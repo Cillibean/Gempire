@@ -206,10 +206,10 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, DifficultyInstance difficultyIn, MobSpawnType reason, @Nullable SpawnGroupData spawnDataIn, @Nullable CompoundTag dataTag) {
         this.setGemPlacement(this.generateGemPlacement());
         this.setSkinVariant(this.generateSkinVariant());
-        if(this.setSkinVariantOnInitialSpawn) {
+        if (this.setSkinVariantOnInitialSpawn) {
             this.setSkinColorVariant(this.generateSkinColorVariant());
         } else this.setSkinColorVariant(this.initalSkinVariant);
-        setAssignedGem(((ItemGem)this.getGemItem().getDefaultInstance().getItem()).assigned_gem);
+        setAssignedGem(((ItemGem) this.getGemItem().getDefaultInstance().getItem()).assigned_gem);
         System.out.println(this.getAssignedGem());
         this.setHairVariant(this.generateHairVariant());
         this.setSkinColor(this.generatePaletteColor(PaletteType.SKIN));
@@ -239,7 +239,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.rebelTicks = 1;
         //this.generateScoutList();
         this.idlePowers = this.generateIdlePowers();
-        if(this.spawnGem != null){
+        if (this.spawnGem != null) {
             this.spawnGem.remove(RemovalReason.DISCARDED);
         }
         return super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
@@ -255,18 +255,15 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     public boolean checkRebel(LivingEntity entity) {
         if (!this.getRebelled() && !((EntityGem) entity).getOwned()) {
             return ((EntityGem) entity).getRebelled();
-        }
-        else
-        {
+        } else {
             return false;
         }
     }
+
     public boolean checkNotRebel(LivingEntity entity) {
         if (this.getRebelled()) {
             return !((EntityGem) entity).getRebelled();
-        }
-        else
-        {
+        } else {
             return false;
         }
     }
@@ -278,13 +275,13 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
 
     @Override
     public boolean canHoldItem(ItemStack stack) {
-        return stack.getItem() instanceof ArmorItem ||  stack.getItem() instanceof DiggerItem;
+        return stack.getItem() instanceof ArmorItem || stack.getItem() instanceof DiggerItem;
     }
 
-    public SoundEvent getInstrument()
-    {
+    public SoundEvent getInstrument() {
         return SoundEvents.NOTE_BLOCK_HARP;
     }
+
     protected SoundEvent getAmbientSound() {
         return getInstrument();
     }
@@ -292,16 +289,17 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     protected SoundEvent getHurtSound(DamageSource p_30424_) {
         return getInstrument();
     }
+
     @Override
     protected void playHurtSound(DamageSource p_21160_) {
         this.playSound(getInstrument(), this.getSoundVolume(), this.hurtPitch());
     }
-    public float interactPitch()
-    {
+
+    public float interactPitch() {
         return (float) (1 + random.nextFloat() * (1.5 - 1));
     }
-    public float hurtPitch()
-    {
+
+    public float hurtPitch() {
         return (float) (0.25 + random.nextFloat() * (0.75 - 0.25));
     }
 
@@ -349,18 +347,18 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         ContainerHelper.saveAllItems(compound, this.items);
     }
 
-    public void writeOwners(CompoundTag compound){
-        for(int i = 0; i < this.OWNERS.size(); i++){
+    public void writeOwners(CompoundTag compound) {
+        for (int i = 0; i < this.OWNERS.size(); i++) {
             compound.putUUID("owner" + i, this.OWNERS.get(i));
         }
         compound.putInt("ownerAmount", this.OWNERS.size());
     }
 
-    public void writeStructures(CompoundTag compound){
-        for(int i = 0; i < this.structures.size(); i++){
+    public void writeStructures(CompoundTag compound) {
+        for (int i = 0; i < this.structures.size(); i++) {
             compound.putString("structure" + i, this.structures.get(i));
         }
-        for(int i = 0; i < this.biomes.size(); i++){
+        for (int i = 0; i < this.biomes.size(); i++) {
             compound.putString("biome" + i, this.biomes.get(i));
         }
         compound.putInt("structureAmount", this.structures.size());
@@ -373,9 +371,9 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.setAbilities(compound.getString("abilities"));
         this.setEmotional(compound.getBoolean("emotional"));
         this.readOwners(compound);
-        if(compound.contains("followID"))this.FOLLOW_ID = compound.getUUID("followID");
-        if(compound.contains("assignedID"))this.ASSIGNED_ID = compound.getUUID("assignedID");
-        if(compound.contains("masterID"))this.MASTER_OWNER = compound.getUUID("masterID");
+        if (compound.contains("followID")) this.FOLLOW_ID = compound.getUUID("followID");
+        if (compound.contains("assignedID")) this.ASSIGNED_ID = compound.getUUID("assignedID");
+        if (compound.contains("masterID")) this.MASTER_OWNER = compound.getUUID("masterID");
         this.setMovementType(compound.getByte("movementType"));
         this.setSkinColorVariant(compound.getInt("skinColorVariant"));
         this.setSkinColor(compound.getInt("skinColor"));
@@ -412,53 +410,53 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.idlePowers = this.generateIdlePowers();
         ContainerHelper.loadAllItems(compound, this.items);
         this.readStructures(compound);
-        if(this.spawnGem != null){
+        if (this.spawnGem != null) {
             this.spawnGem.remove(RemovalReason.DISCARDED);
         }
     }
 
-    public void readOwners(CompoundTag compound){
+    public void readOwners(CompoundTag compound) {
         this.OWNERS = new ArrayList<>();
         int n = compound.getInt("ownerAmount");
-        for(int i = 0; i < n; i++){
+        for (int i = 0; i < n; i++) {
             this.OWNERS.add(compound.getUUID("owner" + i));
         }
     }
 
-    public void readStructures(CompoundTag compound){
+    public void readStructures(CompoundTag compound) {
         this.structures = new ArrayList<>();
         int n = compound.getInt("structureAmount");
-        for(int i = 0; i < n; i++){
+        for (int i = 0; i < n; i++) {
             this.structures.add(compound.getString("structure" + i));
         }
         this.biomes = new ArrayList<>();
         int t = compound.getInt("biomeAmount");
-        for(int i = 0; i < t; i++){
+        for (int i = 0; i < t; i++) {
             this.biomes.add(compound.getString("biome" + i));
         }
     }
 
     @Override
     public void aiStep() {
-        if(!this.isFocused()){
+        if (!this.isFocused()) {
             this.focusCounter++;
-            if(this.focusCounter > this.maxFocusCounter){
+            if (this.focusCounter > this.maxFocusCounter) {
                 this.focusLevel = this.baseFocus();
                 this.focusCounter = 0;
             }
         }
         if (this.canWalkOnFluids()) this.adjustForFluids();
-        for(IIdleAbility power : this.getIdlePowers()){
-            if(this.focusCheck()) power.execute();
+        for (IIdleAbility power : this.getIdlePowers()) {
+            if (this.focusCheck()) power.execute();
         }
-        if(this.isSunBurnTick()){
+        if (this.isSunBurnTick()) {
             if (this.getHealth() < this.getMaxHealth() && this.tickCount % 20 == 0) {
                 this.heal(1.0F);
-                this.level.addParticle(ParticleTypes.HEART, this.getX(), this.getY() + 2, this.getZ(), 0,0,0F);
+                this.level.addParticle(ParticleTypes.HEART, this.getX(), this.getY() + 2, this.getZ(), 0, 0, 0F);
             }
         }
 
-        if(this.usesAreaAbilities()) {
+        if (this.usesAreaAbilities()) {
             if (this.tickCount % 100 == 0) {
                 ArrayList<LivingEntity> entityl = new ArrayList<>(this.level.getEntitiesOfClass(LivingEntity.class, new AABB(this.getX(), this.getY(), this.getZ(), this.getX() + 1, this.getY() + 1, this.getZ() + 1)
                         .inflate(16, this.level.getMaxBuildHeight(), 16), (target) -> {
@@ -510,34 +508,29 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         super.aiStep();
     }
 
-    public Item getInputItem()
-    {
+    public Item getInputItem() {
         return inputItem;
     }
 
-    public Item getOutputItem()
-    {
+    public Item getOutputItem() {
         return outputItem;
     }
 
-    public int getTimetoCraft()
-    {
+    public int getTimetoCraft() {
         return timeToCraft;
     }
+
     @Override
     public void tick() {
-        if (!this.level.isClientSide && isCrafting)
-        {
+        if (!this.level.isClientSide && isCrafting) {
             ticking++;
             if (ticking >= getTimetoCraft()) {
                 popShitOut();
             }
         }
-        if (!this.level.isClientSide && !getRebelled() && getOwned())
-        {
+        if (!this.level.isClientSide && !getRebelled() && getOwned()) {
             rebelTicks++;
-            if (rebelTicks > 20 * (60 * 5))
-            {
+            if (rebelTicks > 20 * (60 * 5)) {
                 checkRebel();
             }
         }
@@ -552,8 +545,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     private void checkRebel() {
         float rebelly;
         rebelly = (float) (0 + Math.random() * 500);
-        if (rebelly < rebelPoints)
-        {
+        if (rebelly < rebelPoints) {
             rebel();
         }
         rebelTicks = 0;
@@ -567,75 +559,76 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             }
             //This part of the code checks if the player has a blank hand
             if (!level.isClientSide) {
-                if (player.getItemInHand(hand).isEmpty() && hand == InteractionHand.MAIN_HAND) {
-                    this.currentPlayer = player;
-                    if (this.isOwner(player)) {
-                        if (player.isShiftKeyDown()) {
-                            this.cycleMovementAI(player);
-                            this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
-                            if(OWNERS.size() <= 1 && this.MASTER_OWNER != player.getUUID())
-                            {
-                                MASTER_OWNER = player.getUUID();
-                                System.out.println("Added master owner");
+                if (hand == InteractionHand.MAIN_HAND) {
+                    if (player.getItemInHand(hand).isEmpty()) {
+                        this.currentPlayer = player;
+                        if (this.isOwner(player)) {
+                            if (player.isShiftKeyDown()) {
+                                this.cycleMovementAI(player);
+                                this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
+                                if (OWNERS.size() <= 1 && this.MASTER_OWNER != player.getUUID()) {
+                                    MASTER_OWNER = player.getUUID();
+                                    System.out.println("Added master owner");
+                                }
+                            } else {
+                                if (this.canOpenInventoryByDefault()) {
+                                    NetworkHooks.openScreen((ServerPlayer) player, this, buf -> buf.writeInt(this.getId()));
+                                    this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
+                                }
+                                if (this.isRideable()) {
+                                    if (!this.isVehicle()) {
+                                        player.startRiding(this);
+                                        this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
+                                    }
+                                }
                             }
                         } else {
-                            if (this.canOpenInventoryByDefault()) {
-                                NetworkHooks.openScreen((ServerPlayer) player, this, buf -> buf.writeInt(this.getId()));
-                                this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
-                            }
-                            if (this.isRideable()) {
-                                if (!this.isVehicle()) {
-                                    player.startRiding(this);
+                            //Test to see if the gem has an owner
+                            if (!this.getOwned()) {
+                                if (!this.isOwner(player)) {
+                                    this.addOwner(player.getUUID());
+                                    this.addMasterOwner(player.getUUID());
+                                    setFollow(player.getUUID());
+                                    if (getAssignedGem() != null) {
+                                        setAssignedId(getAssignedGem().getUUID());
+                                    }
+                                    this.setMovementType((byte) 2);
                                     this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
+                                    return super.interactAt(player, vec, hand);
                                 }
                             }
                         }
                     } else {
-                        //Test to see if the gem has an owner
-                        if (!this.getOwned()) {
-                            if (!this.isOwner(player)) {
-                                this.addOwner(player.getUUID());
-                                this.addMasterOwner(player.getUUID());
-                                setFollow(player.getUUID());
-                                if (getAssignedGem() != null) {
-                                    setAssignedId(getAssignedGem().getUUID());
+                        if (this.isOwner(player)) {
+                            if (player.getMainHandItem().getItem() instanceof DyeItem dye) {
+                                if (player.isShiftKeyDown()) {
+                                    if (canChangeInsigniaColorByDefault())
+                                        this.setInsigniaColor(dye.getDyeColor().getId());
+                                } else {
+                                    if (canChangeUniformColorByDefault())
+                                        this.setOutfitColor(dye.getDyeColor().getId());
                                 }
-                                this.setMovementType((byte) 2);
-                                this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
-                                return super.interactAt(player, vec, hand);
-                            }
-                        } else {
-                            if (this.isOwner(player)) {
-                                if (player.getMainHandItem().getItem() instanceof DyeItem dye) {
-                                    if (player.isShiftKeyDown()) {
-                                        if (canChangeInsigniaColorByDefault())
-                                            this.setInsigniaColor(dye.getDyeColor().getId());
+                            } else if (player.getMainHandItem().getItem() == Items.PAPER) {
+                                NetworkHooks.openScreen((ServerPlayer) player, this, buf -> buf.writeInt(this.getId()));
+                            } else if (player.getMainHandItem().getItem() == Items.BOOK) {
+                                StringBuilder list1 = new StringBuilder();
+                                for (int i = 0; i < this.structures.size(); i++) {
+                                    if (i == this.structures.size() - 1) {
+                                        list1.append(this.structures.get(i));
                                     } else {
-                                        if (canChangeUniformColorByDefault())
-                                            this.setOutfitColor(dye.getDyeColor().getId());
+                                        list1.append(this.structures.get(i)).append(", ");
                                     }
-                                } else if (player.getMainHandItem().getItem() == Items.PAPER) {
-                                    NetworkHooks.openScreen((ServerPlayer) player, this, buf -> buf.writeInt(this.getId()));
-                                } else if (player.getMainHandItem().getItem() == Items.BOOK) {
-                                    StringBuilder list1 = new StringBuilder();
-                                    for (int i = 0; i < this.structures.size(); i++) {
-                                        if (i == this.structures.size() - 1) {
-                                            list1.append(this.structures.get(i));
-                                        } else {
-                                            list1.append(this.structures.get(i)).append(", ");
-                                        }
-                                    }
-                                    StringBuilder list2 = new StringBuilder();
-                                    for (int i = 0; i < this.biomes.size(); i++) {
-                                        if (i == this.biomes.size() - 1) {
-                                            list2.append(this.biomes.get(i));
-                                        } else {
-                                            list2.append(this.biomes.get(i)).append(", ");
-                                        }
-                                    }
-                                    player.sendSystemMessage(Component.translatable("Findable Structures: " + list1));
-                                    player.sendSystemMessage(Component.translatable("Findable Biomes: " + list2));
                                 }
+                                StringBuilder list2 = new StringBuilder();
+                                for (int i = 0; i < this.biomes.size(); i++) {
+                                    if (i == this.biomes.size() - 1) {
+                                        list2.append(this.biomes.get(i));
+                                    } else {
+                                        list2.append(this.biomes.get(i)).append(", ");
+                                    }
+                                }
+                                player.sendSystemMessage(Component.translatable("Findable Structures: " + list1));
+                                player.sendSystemMessage(Component.translatable("Findable Biomes: " + list2));
                             }
                         }
                     }
