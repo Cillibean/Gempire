@@ -29,15 +29,11 @@ displayName="Gempire" #mandatory
 # A file name (in the root of the mod JAR) containing a logo for display
 logoFile="gempire.png" #optional
 # A text field displayed in the mod UI
-credits="Cillibean, lillemby, Solangelo, Taaffeite, and the Gempire Staff" #optional
+credits="Gempire is a Steven Universe inspired tech/magic mod that lets the players create Gems. These gems can perform many tasks, and are highly customizable and varied, with over a billion possibilities." #optional
 # A text field displayed in the mod UI
-authors="" #optional
+authors="Cillibean, lillemby, Solangelo, Taaffeite, The Moon, and Segapop" #optional
 # The description text for the mod (multi line!) (#mandatory)
-description='''
-
- In Gempire, you can grow your own gem entities that can fulfill tasks, protect you while you explore, and more. Install Patchouli for an in-game guide.
-
-'''
+description='''In Gempire, you can grow your own gem entities that can fulfill tasks, protect you while you explore, and more. Install Patchouli for an in-game guide.'''
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
 [[dependencies.gempire]] #optional
     # the modid of the dependency
