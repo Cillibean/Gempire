@@ -1,0 +1,16 @@
+{
+  "name": "Rebellion",
+  "icon": "gempire:quartz_gem_6",
+  "advancement": "gempire:root",
+  "category": "gempire:gem_concepts",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Rebellion is the ultimate punishment for mistreating gems, and can lead to losing countless gems. This entry will explain some details on how it works."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A gem will have chance to rebel every 5 minutes, and it will depend on their 'Rebel Points'. Gems start out with 0.1 rebel points, and will have a 0.5/500 chance of rebelling without external influence. However, rejuvenating them will increase their rebel points. The only way to revert it is to rejuvenate them with a Pink Rejuvenator."
+    }
+  ]
+}

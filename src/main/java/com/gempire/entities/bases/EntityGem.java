@@ -139,7 +139,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     public Item input;
     public int focusLevel = 2;
 
-    public float rebelPoints = 0.5F;
+    public float rebelPoints = 0.1F;
     public int rebelTicks;
 
     public int abilityTicks;
