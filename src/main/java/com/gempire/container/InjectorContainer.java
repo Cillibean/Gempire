@@ -2,6 +2,9 @@ package com.gempire.container;
 
 import com.gempire.init.ModBlocks;
 import com.gempire.init.ModContainers;
+import com.gempire.init.ModFluids;
+import com.gempire.items.ItemChroma;
+import com.gempire.items.ItemGem;
 import com.gempire.tileentities.InjectorTE;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.player.Inventory;
@@ -40,12 +43,32 @@ public class InjectorContainer extends AbstractContainerMenu {
 
         //TILE ENTITY
         this.injector.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(handler -> {
-            this.addSlot(new SlotItemHandler(handler, InjectorTE.WHITE_INPUT_SLOT_INDEX, 61, 14));
-            this.addSlot(new SlotItemHandler(handler, InjectorTE.YELLOW_INPUT_SLOT_INDEX, 43    , 32));
-            this.addSlot(new SlotItemHandler(handler, InjectorTE.CHROMA_INPUT_SLOT_INDEX, 61, 32));
-            this.addSlot(new SlotItemHandler(handler, InjectorTE.BLUE_INPUT_SLOT_INDEX, 79, 32));
-            this.addSlot(new SlotItemHandler(handler, InjectorTE.PRIME_INPUT_SLOT_INDEX, 43, 50));
-            this.addSlot(new SlotItemHandler(handler, InjectorTE.PINK_INPUT_SLOT_INDEX, 61, 50));
+            this.addSlot(new SlotItemHandler(handler, InjectorTE.WHITE_INPUT_SLOT_INDEX, 61, 14) {
+                public boolean mayPlace(ItemStack stack) {
+                    return (stack.getItem() == ModFluids.WHITE_ESSENCE.bucket.get());
+                }
+            });
+            this.addSlot(new SlotItemHandler(handler, InjectorTE.YELLOW_INPUT_SLOT_INDEX, 43    , 32){
+                public boolean mayPlace(ItemStack stack) {
+                    return (stack.getItem() == ModFluids.YELLOW_ESSENCE.bucket.get());
+                }
+            });
+            this.addSlot(new SlotItemHandler(handler, InjectorTE.CHROMA_INPUT_SLOT_INDEX, 61, 32){
+                public boolean mayPlace(ItemStack stack) {
+                    return (stack.getItem() instanceof ItemChroma);
+                }
+            });
+            this.addSlot(new SlotItemHandler(handler, InjectorTE.BLUE_INPUT_SLOT_INDEX, 79, 32){
+                public boolean mayPlace(ItemStack stack) {
+                    return (stack.getItem() == ModFluids.BLUE_ESSENCE.bucket.get());
+                }
+            });
+            //this.addSlot(new SlotItemHandler(handler, InjectorTE.PRIME_INPUT_SLOT_INDEX, 43, 50));
+            this.addSlot(new SlotItemHandler(handler, InjectorTE.PINK_INPUT_SLOT_INDEX, 61, 50){
+                public boolean mayPlace(ItemStack stack) {
+                    return (stack.getItem() == ModFluids.PINK_ESSENCE.bucket.get());
+                }
+            });
         });
         //PLAYER INVENTORY
         for(int row = 0; row < 3; row++){
@@ -64,10 +87,6 @@ public class InjectorContainer extends AbstractContainerMenu {
         this(windowID, playerInventory, InjectorContainer.getTileEntity(playerInventory, extraData));
     }
 
-    public boolean getPinkOpen()
-    {
-        return this.injector.pinkOpen;
-    }
     public static InjectorTE getTileEntity(Inventory playerInventory, FriendlyByteBuf extraData){
         Objects.requireNonNull(playerInventory, "Player Inventory can not be null");
         Objects.requireNonNull(extraData, "Data Packet can not be null");

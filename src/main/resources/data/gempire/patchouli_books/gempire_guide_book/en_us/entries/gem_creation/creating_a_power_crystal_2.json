@@ -1,5 +1,5 @@
 {
-  "name": "Making a Power Crystal",
+  "name": "Advanced Power Crystal",
   "icon": "gempire:power_crystal_block",
   "advancement": "gempire:root",
   "category": "gempire:gem_creation_category",
@@ -7,13 +7,13 @@
     {
       "type": "patchouli:spotlight",
       "link_recipe ": true,
-      "item": "gempire:mica_gem",
-      "text": "In order to make a Power Crystal, you will need a Mica. Please shift click the gem icon."
+      "item": "gempire:peridot_gem",
+      "text": "In order to make an Advanced Power Crystal, you will need a Peridot."
     },
     {
       "type": "patchouli:multiblock",
-      "name": "Power Crystal",
-      "text": "In order to have your Mica construct a Power Crystal, you will need to build this multiblock, then interact with her with a pickaxe in your hand.",
+      "name": "Advanced Power Crystal",
+      "text": "In order to have your Mica construct an advanced Power Crystal, you will need to build this multiblock, then interact with her with a pickaxe in your hand.",
       "multiblock": {
         "pattern": [
           [
@@ -23,7 +23,7 @@
           ]
         ],
         "mapping": {
-          "I": "minecraft:glass",
+          "I": "gempire:prismatic_block",
           "0": "minecraft:redstone_block"
         },
         "symmetrical": true
