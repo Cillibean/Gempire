@@ -4,10 +4,7 @@ import com.gempire.Gempire;
 import com.gempire.entities.ai.EntityAiFollowSpinel;
 import com.gempire.entities.bases.EntityGem;
 import com.gempire.entities.gems.*;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.MobCategory;
-import net.minecraft.world.entity.PathfinderMob;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
@@ -31,7 +28,7 @@ public class EventHandler {
             }
             else if (event.getEntity().getClassification(true) == MobCategory.CREATURE)
             {
-                if (event.getEntity() instanceof EntityGem)
+                if (event.getEntity() instanceof EntityGem || event.getEntity() instanceof TamableAnimal)
                 {
                 }
                 else
@@ -42,5 +39,4 @@ public class EventHandler {
             }
         }
     }
-
 }

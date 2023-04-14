@@ -142,7 +142,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     public float rebelPoints = 0.5F;
     public int rebelTicks;
 
-    public int jesterTicks;
+    public int abilityTicks;
 
     public static final int NUMBER_OF_SLOTS = 33;
     public NonNullList<ItemStack> items = NonNullList.withSize(EntityGem.NUMBER_OF_SLOTS, ItemStack.EMPTY);
@@ -320,6 +320,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         compound.putInt("skinVariant", this.getSkinVariant());
         compound.putInt("hairVariant", this.getHairVariant());
         compound.putInt("CraftTicks", this.ticking);
+        compound.putInt("abilityTicks", this.abilityTicks);
         compound.putBoolean("isCrafting", this.isCrafting);
         compound.putInt("gemPlacement", this.getGemPlacement());
         compound.putInt("gemColor", this.getGemColor());
@@ -384,6 +385,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.setGemPlacement(compound.getInt("gemPlacement"));
         this.setGemColor(compound.getInt("gemColor"));
         this.ticking = compound.getInt("CraftTicks");
+        this.abilityTicks = compound.getInt("abilityTicks");
         this.isCrafting = compound.getBoolean("isCrafting");
         this.setOutfitColor(compound.getInt("outfitColor"));
         this.setOutfitVariant(compound.getInt("outfitVariant"));
@@ -536,8 +538,8 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             }
         }
         if (!this.level.isClientSide) {
-            if (jesterTicks > 0) {
-                jesterTicks--;
+            if (abilityTicks > 0) {
+                abilityTicks--;
             }
         }
         super.tick();

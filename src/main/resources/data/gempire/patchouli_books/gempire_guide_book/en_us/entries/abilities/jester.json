@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Jester is an ability that lets the gem that has it play with other gems, making them way less likely to rebel, doing this will make her play a horn noise, however if they're a rebel, makes the other gems way more likely to rebel."
+      "text": "Jester is an ability that lets the gem that has it play with other gems, making them way less likely to rebel, doing this will make her play a horn noise, however if they're a rebel, she will do the opposite."
     },
     {
       "type": "patchouli:text",
