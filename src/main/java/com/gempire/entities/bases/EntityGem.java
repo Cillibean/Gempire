@@ -42,6 +42,7 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -754,10 +755,9 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             MinecraftForge.EVENT_BUS.post(event);
             ItemStack stack = new ItemStack(this.getGemItem());
             ((ItemGem) stack.getItem()).setData(this, stack);
-            ItemEntity item = new ItemEntity(this.level, this.getX(), this.getY(), this.getZ(), stack);
-            item.setExtendedLifetime();
+            this.spawnAtLocation(stack).setExtendedLifetime();
+            this.gameEvent(GameEvent.ENTITY_PLACE);
             this.kill();
-            this.level.addFreshEntity(item);
         }
         super.die(source);
     }
@@ -931,8 +931,8 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     public void popShitOut()
     {
         ItemStack itemStack = new ItemStack(getOutputItem());
-        ItemEntity itemEntity = new ItemEntity(this.level, this.getX(), this.getY(), this.getZ(), itemStack);
-        this.level.addFreshEntity(itemEntity);
+        this.spawnAtLocation(itemStack);
+        this.gameEvent(GameEvent.ENTITY_PLACE);
         ticking = 0;
         this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
         isCrafting = false;
