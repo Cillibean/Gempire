@@ -136,6 +136,8 @@ public class ItemGem extends Item {
         return tag != null;
     }
     //(?i) means case sensitive
+
+
     public boolean formGem(Level world, @Nullable Player player, BlockPos pos, ItemStack stack, @Nullable ItemEntity item) {
         if (!world.isClientSide) {
             System.out.println("form event");

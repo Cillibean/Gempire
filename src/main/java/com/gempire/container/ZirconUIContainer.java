@@ -3,6 +3,7 @@ package com.gempire.container;
 import com.gempire.entities.bases.EntityGem;
 import com.gempire.entities.gems.EntityZircon;
 import com.gempire.init.ModContainers;
+import com.gempire.items.ItemGem;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.player.Inventory;
@@ -10,6 +11,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.inventory.ContainerLevelAccess;
+import net.minecraft.world.level.block.ShulkerBoxBlock;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -50,9 +52,17 @@ public class ZirconUIContainer extends AbstractContainerMenu {
             }
         });
 
-        this.addSlot(new Slot(gem, 1, 66, 83));
+        this.addSlot(new Slot(gem, 1, 66, 83){
+            public boolean mayPlace(ItemStack stack) {
+                return !(stack.getItem() instanceof ItemGem || !(stack.getItem().canFitInsideContainerItems()));
+            }
+        });
 
-        this.addSlot(new Slot(gem, 2, 86, 83));
+        this.addSlot(new Slot(gem, 2, 86, 83){
+            public boolean mayPlace(ItemStack stack) {
+                return !(stack.getItem() instanceof ItemGem || !(stack.getItem().canFitInsideContainerItems()));
+            }
+        });
 
         //PLAYER INVENTORY
         for(int row = 0; row < 3; row++){

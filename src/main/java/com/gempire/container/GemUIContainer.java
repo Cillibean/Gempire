@@ -4,6 +4,7 @@ import com.gempire.entities.bases.EntityGem;
 import com.gempire.init.ModBlocks;
 import com.gempire.init.ModContainers;
 import com.gempire.init.ModItems;
+import com.gempire.items.ItemGem;
 import com.gempire.tileentities.InjectorTE;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
@@ -19,6 +20,7 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.DataSlot;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.lwjgl.system.CallbackI;
@@ -72,7 +74,11 @@ public class GemUIContainer extends AbstractContainerMenu {
         //INITIALIZE GEM INVENTORY HERE
         for(int row = 0; row < 3; row++){
             for(int col = 0; col < 4; col++){
-                this.addSlot(new Slot(gem, col + row * 4, 27 + col * 18, 103 - (4 - row) * 18 - 10));
+                this.addSlot(new Slot(gem, col + row * 4, 27 + col * 18, 103 - (4 - row) * 18 - 10){
+                    public boolean mayPlace(ItemStack stack) {
+                        return !(stack.getItem() instanceof ItemGem || !(stack.getItem().canFitInsideContainerItems()));
+                    }
+                });
             }
         }
 

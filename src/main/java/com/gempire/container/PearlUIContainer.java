@@ -4,6 +4,7 @@ import com.gempire.entities.bases.EntityGem;
 import com.gempire.entities.gems.EntityPearl;
 import com.gempire.init.ModContainers;
 import com.gempire.init.ModItems;
+import com.gempire.items.ItemGem;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.entity.Entity;
@@ -79,7 +80,11 @@ public class PearlUIContainer extends AbstractContainerMenu {
         //INITIALIZE GEM INVENTORY HERE
         for(int row = 0; row < 6; row++){
             for(int col = 0; col < 9; col++){
-                this.addSlot(new Slot(gem, col + row * 9, 182 + col * 18, 135 - (6 - row) * 18));
+                this.addSlot(new Slot(gem, col + row * 9, 182 + col * 18, 135 - (6 - row) * 18){
+                    public boolean mayPlace(ItemStack stack) {
+                        return !(stack.getItem() instanceof ItemGem || !(stack.getItem().canFitInsideContainerItems()));
+                    }
+                });
             }
         }
 

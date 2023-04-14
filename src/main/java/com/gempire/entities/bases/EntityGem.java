@@ -523,7 +523,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         }
         if (!this.level.isClientSide && !getRebelled() && getOwned()) {
             rebelTicks++;
-            if (rebelTicks > 20 * (60 * 5)) {
+            if (rebelTicks >= 20 * (10*60)) {
                 checkRebel();
             }
         }
@@ -536,9 +536,8 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     }
 
     private void checkRebel() {
-        float rebelly;
-        rebelly = (float) (0 + Math.random() * 500);
-        if (rebelly < rebelPoints) {
+        Double rebel = (0 + random.nextDouble() * 500);
+        if (rebel < rebelPoints) {
             rebel();
         }
         rebelTicks = 0;
@@ -585,6 +584,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                                     if (getAssignedGem() != null) {
                                         setAssignedId(getAssignedGem().getUUID());
                                     }
+                                    player.sendSystemMessage(Component.literal("Claimed ").append(getName().getString()).append(" "+getFacetAndCut()));
                                     this.setMovementType((byte) 2);
                                     this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
                                     return super.interactAt(player, vec, hand);

@@ -10,7 +10,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "A gem will have chance to rebel every 5 minutes, and it will depend on their 'Rebel Points'. Gems start out with 0.1 rebel points, and will have a 0.5/500 chance of rebelling without external influence. However, rejuvenating them will increase their rebel points. The only way to revert it is to rejuvenate them with a Pink Rejuvenator."
+      "text": "A gem will have chance to rebel every 10 minutes, and it will depend on their 'Rebel Points'. Gems start out with 0.1 rebel points, and will have a 0.001% chance of rebelling without external influence every 10 minutes. However, rejuvenating them will increase their rebel points. The only way to revert it is to rejuvenate them with a Pink Rejuvenator."
     }
   ]
 }
