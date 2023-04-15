@@ -1,4 +1,4 @@
 {
-  "parent": "gempire:block/hand_pedistal_unpowered",
+  "parent": "gempire:block/wall_hand_pedistal",
   "gui_light": "front"
 }

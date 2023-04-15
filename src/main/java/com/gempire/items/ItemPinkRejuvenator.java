@@ -25,6 +25,10 @@ public class ItemPinkRejuvenator extends DestabBase {
         if (pTarget.isAlive()) {
             if (pTarget instanceof EntityGem) {
                 ((EntityGem) pTarget).resetOwners();
+                if (((EntityGem) pTarget).getRebelled())
+                {
+                    ((EntityGem) pTarget).setOutFitHairInsignia();
+                }
                 ((EntityGem) pTarget).setRebelled(false);
                 ((EntityGem) pTarget).rebelPoints = 1F;
                 pTarget.hurt(DamageSource.MAGIC,pTarget.getMaxHealth() * 4);

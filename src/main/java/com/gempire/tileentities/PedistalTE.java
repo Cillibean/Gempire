@@ -17,7 +17,7 @@ public class PedistalTE extends BlockEntity {
     }
     @Override
     public void saveAdditional(@NotNull CompoundTag compound) {
-        compound.putUUID("owner", this.owner);
+        if (compound.contains("owner")) compound.putUUID("owner", this.owner);
         super.saveAdditional(compound);
     }
     @Override

@@ -27,6 +27,7 @@ public class ItemYellowRejuvenator extends DestabBase {
                 ((EntityGem) pTarget).setHairVariant(((EntityGem) pTarget).generateHairVariant());
                 ((EntityGem) pTarget).setOutfitVariant(((EntityGem) pTarget).generateOutfitVariant());
                 ((EntityGem) pTarget).setInsigniaVariant(((EntityGem) pTarget).generateInsigniaVariant());
+                ((EntityGem) pTarget).saveOutfitHairInsignia();
                 ((EntityGem) pTarget).rebelPoints += 0.5F;
                 pTarget.hurt(DamageSource.MAGIC,pTarget.getMaxHealth() * 4);
             }

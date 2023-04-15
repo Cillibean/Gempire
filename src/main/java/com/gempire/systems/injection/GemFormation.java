@@ -170,6 +170,7 @@ public class GemFormation {
         gem.applyAttributeAbilities();
         gem.FOLLOW_ID = UUID.randomUUID();
         gem.ASSIGNED_ID = UUID.randomUUID();
+        gem.MASTER_OWNER = UUID.randomUUID();
         gem.setMarkingVariant(gem.generateMarkingVariant());
         gem.setMarkingColor(gem.generatePaletteColor(PaletteType.MARKINGS));
         gem.setMarking2Variant(gem.generateMarking2Variant());

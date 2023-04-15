@@ -21,18 +21,13 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.EntityBlock;
-import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.*;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -42,22 +37,28 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.UUID;
 
-public class PedistalBlock extends HorizontalDirectionalBlock implements EntityBlock {
+public class PedistalBlock extends FaceAttachedHorizontalDirectionalBlock implements EntityBlock {
     public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
-    public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
+    public static final DirectionProperty FACING = FaceAttachedHorizontalDirectionalBlock.FACING;
+    public static final EnumProperty<AttachFace> FACE = FaceAttachedHorizontalDirectionalBlock.FACE;
     private final boolean sensitive;
     private UUID owner;
-    protected static final VoxelShape Z_AXIS_AABB = Block.box(5.0D, 0.0D, 4.0D, 11.0D, 16.0D, 11.0D);
+    protected static final VoxelShape FACING_NORTH_FLOOR = Block.box(5.0D, 0.0D, 4.0D, 11.0D, 16.0D, 12.0D);
+    protected static final VoxelShape FACING_WEST_FLOOR = Block.box(4.0D, 0.0D, 5.0D, 12.0D, 16.0D, 11.0D);
+
+    protected static final VoxelShape FACING_NORTH_WALL = Block.box(5.0D, 4.0D, 14.0D, 11.0D, 12.0D, 16.0D);
+    protected static final VoxelShape FACING_SOUTH_WALL = Block.box(5.0D, 4.0D, 0.0D, 11.0D, 12.0D, 2.0D);
+    protected static final VoxelShape FACING_WEST_WALL = Block.box(14.0D, 4.0D, 5.0D, 16.0D, 12.0D, 11.0D);
+    protected static final VoxelShape FACING_EAST_WALL = Block.box(0.0D, 4.0D, 5.0D, 2.0D, 12.0D, 11.0D);
+
 
 
     public PedistalBlock(Properties p_49795_, Boolean sensitive) {
         super(p_49795_);
-        this.registerDefaultState(this.stateDefinition.any().setValue(POWERED, Boolean.FALSE).setValue(FACING, Direction.NORTH));
+        this.registerDefaultState(this.stateDefinition.any().setValue(FACE,AttachFace.FLOOR).setValue(FACING,Direction.NORTH).setValue(POWERED,false));
         this.sensitive = sensitive;
     }
-    public boolean mayPlaceOn(BlockState p_51042_, BlockGetter p_51043_, BlockPos p_51044_) {
-        return p_51042_.is(BlockTags.DIRT) || p_51042_.is(Blocks.FARMLAND);
-    }
+
     private int getPressDuration() {
         return this.sensitive ? 60 : 20;
     }
@@ -89,8 +90,35 @@ public class PedistalBlock extends HorizontalDirectionalBlock implements EntityB
         }
         return InteractionResult.sidedSuccess(true);
     }
-    public VoxelShape getShape(BlockState p_154346_, BlockGetter p_154347_, BlockPos p_154348_, CollisionContext p_154349_) {
-        return Z_AXIS_AABB;
+    public VoxelShape getShape(BlockState p_51104_, BlockGetter p_51105_, BlockPos p_51106_, CollisionContext p_51107_) {
+        Direction direction = p_51104_.getValue(FACING);
+        switch (p_51104_.getValue(FACE)) {
+            case FLOOR:
+                if (direction.getAxis() == Direction.Axis.X) {
+                    return FACING_WEST_FLOOR;
+                }
+
+                return FACING_NORTH_FLOOR;
+            case WALL:
+                switch (direction) {
+                    case EAST:
+                        return FACING_EAST_WALL;
+                    case WEST:
+                        return FACING_WEST_WALL;
+                    case SOUTH:
+                        return FACING_SOUTH_WALL;
+                    case NORTH:
+                    default:
+                        return FACING_NORTH_WALL;
+                }
+            case CEILING:
+            default:
+                if (direction.getAxis() == Direction.Axis.X) {
+                    return FACING_WEST_FLOOR;
+                } else {
+                    return FACING_NORTH_FLOOR;
+                }
+        }
     }
 
     public void press(BlockState p_51117_, Level p_51118_, BlockPos p_51119_) {
@@ -102,14 +130,22 @@ public class PedistalBlock extends HorizontalDirectionalBlock implements EntityB
     protected void playSound(@Nullable Player p_51068_, LevelAccessor p_51069_, BlockPos p_51070_, boolean p_51071_) {
         p_51069_.playSound(p_51071_ ? p_51068_ : null, p_51070_, this.getSound(p_51071_), SoundSource.BLOCKS, 0.3F, p_51071_ ? 0.6F : 0.5F);
     }
-    public BlockState getStateForPlacement(BlockPlaceContext p_51377_) {
-        if(p_51377_.getClickedFace().equals(Direction.UP)) {
-            return this.defaultBlockState().setValue(FACING, p_51377_.getHorizontalDirection().getOpposite());
+    @Nullable
+    public BlockState getStateForPlacement(BlockPlaceContext p_53184_) {
+        for(Direction direction : p_53184_.getNearestLookingDirections()) {
+            BlockState blockstate;
+            if (direction.getAxis() == Direction.Axis.Y) {
+                blockstate = this.defaultBlockState().setValue(FACE, direction == Direction.UP ? AttachFace.CEILING : AttachFace.FLOOR).setValue(FACING, p_53184_.getHorizontalDirection());
+            } else {
+                blockstate = this.defaultBlockState().setValue(FACE, AttachFace.WALL).setValue(FACING, direction.getOpposite());
+            }
+
+            if (blockstate.canSurvive(p_53184_.getLevel(), p_53184_.getClickedPos())) {
+                return blockstate;
+            }
         }
-        else
-        {
-            return null;
-        }
+
+        return null;
     }
     protected SoundEvent getSound(boolean p_51102_) {
         return null;
@@ -176,12 +212,13 @@ public class PedistalBlock extends HorizontalDirectionalBlock implements EntityB
 
     private void updateNeighbours(BlockState p_51125_, Level p_51126_, BlockPos p_51127_) {
         p_51126_.updateNeighborsAt(p_51127_, this);
-        p_51126_.updateNeighborsAt(p_51127_.below(), this);
+        p_51126_.updateNeighborsAt(p_51127_.relative(getConnectedDirection(p_51125_).getOpposite()), this);
     }
 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> p_51101_) {
         p_51101_.add(POWERED);
         p_51101_.add(FACING);
+        p_51101_.add(FACE);
     }
     @Nullable
     @Override
