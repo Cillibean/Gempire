@@ -80,10 +80,8 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     public static final EntityDataAccessor<Integer> GEM_COLOR = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
     public static EntityDataAccessor<Integer> OUTFIT_COLOR = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
     public static EntityDataAccessor<Integer> OUTFIT_VARIANT = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
-
     public static EntityDataAccessor<Integer> INSIGNIA_COLOR = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
     public static EntityDataAccessor<Integer> INSIGNIA_VARIANT = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
-
     public static final EntityDataAccessor<Integer> ABILITY_SLOTS = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<String> ABILITIES = SynchedEntityData.<String>defineId(EntityGem.class, EntityDataSerializers.STRING);
     public static final EntityDataAccessor<Boolean> USES_AREA_ABILITIES = SynchedEntityData.<Boolean>defineId(EntityGem.class, EntityDataSerializers.BOOLEAN);
@@ -174,11 +172,6 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.entityData.define(EntityGem.OUTFIT_VARIANT, 0);
         this.entityData.define(EntityGem.INSIGNIA_COLOR, 0);
         this.entityData.define(EntityGem.INSIGNIA_VARIANT, 0);
-        this.entityData.define(EntityGem.SAVED_HAIR_VARIANT, 0);
-        this.entityData.define(EntityGem.SAVED_INSIGNIA_VARIANT, 0);
-        this.entityData.define(EntityGem.SAVED_INSIGNIA_VARIANT_COLOR, 0);
-        this.entityData.define(EntityGem.SAVED_OUTFIT_VARIANT, 0);
-        this.entityData.define(EntityGem.SAVED_OUTFIT_VARIANT_COLOR, 0);
         this.entityData.define(EntityGem.ABILITY_SLOTS, 1);
         this.entityData.define(EntityGem.ABILITIES, "-1");
         this.entityData.define(EntityGem.USES_AREA_ABILITIES, false);
@@ -692,14 +685,21 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             if (getAssignedGem() != null ? this.getMovementType() < 3 : this.getMovementType() <2) {
                 this.addMovementType(1);
                 switch (this.getMovementType()) {
-                    case 1 -> player.sendSystemMessage(Component.translatable(this.getName().getString()).append(" will wander around"));
-                    case 2 -> player.sendSystemMessage(Component.translatable(this.getName().getString()).append(" will now follow you"));
-                    default -> player.sendSystemMessage(Component.translatable(this.getName().getString()).append(" will now stay put"));
+                    case 1 -> player.sendSystemMessage(Component.translatable(this.getCapitalGemName() + " will wander around"));
+                    case 2 -> player.sendSystemMessage(Component.translatable(this.getCapitalGemName() + " will now follow you"));
+                    case 3 -> player.sendSystemMessage(Component.translatable(this.getCapitalGemName() + " will now follow " + assignedGem.getCapitalGemName() + " " + assignedGem.getFacetAndCut()));
+                    default -> player.sendSystemMessage(Component.translatable(this.getCapitalGemName() + " will now stay put"));
                 }
-            } else if (this.getMovementType() == 2 || this.getMovementType() == 3)
+            } else if (getAssignedGem() != null && getAssignedGem().isAlive() ? this.getMovementType() == 3 : this.getMovementType() == 2) {
+                this.setMovementType((byte) 0);
+                player.sendSystemMessage(Component.translatable(this.getName().getString() + " will now stay put"));
+                this.GUARD_POS[0] = (int) this.getX();
+                this.GUARD_POS[1] = (int) this.getY();
+                this.GUARD_POS[2] = (int) this.getZ();
+            } else if (getAssignedGem() == null && this.getMovementType() == 3)
             {
                 this.setMovementType((byte) 0);
-                player.sendSystemMessage(Component.translatable(this.getName().getString()).append(" will now stay put"));
+                player.sendSystemMessage(Component.translatable(this.getCapitalGemName() + " will now stay put"));
                 this.GUARD_POS[0] = (int) this.getX();
                 this.GUARD_POS[1] = (int) this.getY();
                 this.GUARD_POS[2] = (int) this.getZ();

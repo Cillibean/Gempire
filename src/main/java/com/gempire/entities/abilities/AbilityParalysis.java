@@ -6,6 +6,7 @@ import com.gempire.entities.abilities.interfaces.IEmotionalAbility;
 import com.gempire.entities.abilities.interfaces.IMeleeAbility;
 import com.gempire.entities.abilities.interfaces.IViolentAbility;
 import com.gempire.entities.bases.EntityGem;
+import com.gempire.init.ModEffects;
 import com.gempire.util.Abilities;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.PathfinderMob;

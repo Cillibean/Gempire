@@ -27,7 +27,7 @@ displayName="Gempire" #mandatory
 # A URL for the "homepage" for this mod, displayed in the mod UI
 # displayURL="http://example.com/" #optional
 # A file name (in the root of the mod JAR) containing a logo for display
-logoFile="gempire.png" #optional
+logoFile="gempire_icon.png" #optional
 # A text field displayed in the mod UI
 credits="Gempire is a Steven Universe inspired tech/magic mod that lets the players create Gems. These gems can perform many tasks, and are highly customizable and varied, with over a billion possibilities." #optional
 # A text field displayed in the mod UI
