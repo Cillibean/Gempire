@@ -125,6 +125,17 @@ public class ItemGem extends Item {
                         playerIn.getMainHandItem().shrink(1);
                     }
                 }
+            } else {
+                if (isAssigned) {
+                    playerIn.sendSystemMessage(Component.translatable("This Gem is no longer assigned to " + gemToAssign.getName().getString() + " " + gemToAssign.getFacetAndCut()));                    livingEntityHit = false;
+                    assigned_gem = null;
+                } else {
+                    playerIn.sendSystemMessage(Component.translatable("This Gem was assigned to " + gemToAssign.getName().getString() + " " + gemToAssign.getFacetAndCut()));                    livingEntityHit = false;
+                    System.out.println("ToAssign to assigned");
+                    assigned_gem = gemToAssign;
+                    System.out.println(assigned_gem);
+                    System.out.println(gemToAssign);
+                }
             }
         }
         return super.use(worldIn, playerIn, handIn);
