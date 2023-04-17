@@ -5,6 +5,7 @@ import com.gempire.entities.abilities.base.Ability;
 import com.gempire.entities.ai.EntityAIFollowAssigned;
 import com.gempire.entities.ai.EntityAIFollowOwner;
 import com.gempire.entities.ai.EntityAIWander;
+import com.gempire.entities.bases.EntityGem;
 import com.gempire.entities.bases.EntityVaryingGem;
 import com.gempire.util.Abilities;
 import com.gempire.util.GemPlacements;
@@ -14,11 +15,9 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import org.checkerframework.checker.units.qual.A;
 
 public class EntityGarnet extends EntityVaryingGem {
 
@@ -34,7 +33,6 @@ public class EntityGarnet extends EntityVaryingGem {
                 .add(Attributes.ATTACK_SPEED, 0.5D);
     }
 
-    @Override
     protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(7, new FloatGoal(this));
@@ -44,6 +42,7 @@ public class EntityGarnet extends EntityVaryingGem {
         this.goalSelector.addGoal(7, new EntityAIFollowAssigned(this, 1.0D));
         this.goalSelector.addGoal(7, new EntityAIWander(this, 1.0D));
         this.goalSelector.addGoal(7, new EntityAIFollowOwner(this, 1.0D));
+        this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, EntityGem.class, 1, false, false, this::checkRebel));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Mob.class, 1, false, false, (p_234199_0_) -> p_234199_0_.getClassification(true) == MobCategory.MONSTER));
         this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.1D, false));
     }
@@ -158,6 +157,9 @@ public class EntityGarnet extends EntityVaryingGem {
                 break;
             case 15:
                 name = "melanite";
+                break;
+            case 16:
+                name = "iridescent_andradite";
                 break;
             default:
                 name = "leuco";

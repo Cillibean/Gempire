@@ -3,8 +3,6 @@ package com.gempire.init;
 import com.gempire.Gempire;
 import com.gempire.items.*;
 import com.gempire.util.ModItemGroup;
-import net.minecraft.tags.BannerPatternTags;
-import net.minecraft.world.item.BannerPatternItem;
 import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -443,6 +441,14 @@ public class ModItems {
             new ItemWhiteRejuvenator(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(1).durability(25)));
     public static final RegistryObject<Item> BLUE_REJUVENATOR = ITEMS.register("blue_rejuvenator", () ->
             new ItemBlueRejuvenator(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(1).durability(15)));
+
+    public static final RegistryObject<Item> REBEL_STICK = ITEMS.register("rebel_stick", () ->
+            new ItemRebelStick(new Item.Properties().stacksTo(1)));
+
+    public static final RegistryObject<Item> SHARE_CONTRACT = ITEMS.register("share_contract", () ->
+            new ItemShareContract(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(1)));
+    public static final RegistryObject<Item> TRANSFER_CONTRACT = ITEMS.register("transfer_contract", () ->
+            new ItemTransferContract(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(1)));
 
     public static final RegistryObject<Item> WHITE_CHROMA = ITEMS.register("white_chroma", () ->
             new ItemChroma(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(64), 0));

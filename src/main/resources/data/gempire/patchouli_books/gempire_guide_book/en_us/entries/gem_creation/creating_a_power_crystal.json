@@ -12,7 +12,7 @@
     },
     {
       "type": "patchouli:multiblock",
-      "name": "Drill",
+      "name": "Power Crystal",
       "text": "In order to have your Mica construct a Power Crystal, you will need to build this multiblock, then interact with her with a pickaxe in your hand.",
       "multiblock": {
         "pattern": [

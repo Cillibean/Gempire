@@ -23,13 +23,15 @@ public class EntityAIFollowOwner extends Goal {
     public boolean canUse() {
         List<LivingEntity> list = this.follower.level.<LivingEntity>getEntitiesOfClass(LivingEntity.class, this.follower.getBoundingBox().inflate(24.0D, 10.0D, 24.0D));
         double maxDistance = Double.MAX_VALUE;
-        for (LivingEntity entity : list) {
-            if (!entity.isSpectator() || !entity.isInvisible() && this.follower.isOwner(entity) && this.follower.FOLLOW_ID != null) {
-                if(this.follower.FOLLOW_ID.equals(entity.getUUID())) {
-                    double newDistance = entity.distanceToSqr(this.follower);
-                    if (newDistance <= maxDistance) {
-                        maxDistance = newDistance;
-                        this.toFollow = entity;
+        if (!follower.getRebelled()) {
+            for (LivingEntity entity : list) {
+                if (!entity.isSpectator() || !entity.isInvisible() && this.follower.isOwner(entity) && this.follower.FOLLOW_ID != null) {
+                    if (this.follower.FOLLOW_ID.equals(entity.getUUID())) {
+                        double newDistance = entity.distanceToSqr(this.follower);
+                        if (newDistance <= maxDistance) {
+                            maxDistance = newDistance;
+                            this.toFollow = entity;
+                        }
                     }
                 }
             }

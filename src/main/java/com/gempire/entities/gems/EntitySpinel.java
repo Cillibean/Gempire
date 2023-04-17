@@ -13,16 +13,13 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
 import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
-import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.world.entity.ai.goal.PanicGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
-import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 
 public class EntitySpinel extends EntityVaryingGem {
     //TO-DO: IMPLEMENT SPINEL. Will draw the attention of hostile mobs, and will give gifts to gems on the brink of rebellion or a mental meltdown.
@@ -40,7 +37,6 @@ public class EntitySpinel extends EntityVaryingGem {
                 .add(Attributes.ATTACK_SPEED, 1.0D);
     }
 
-    @Override
     protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(7, new FloatGoal(this));
@@ -111,7 +107,7 @@ public class EntitySpinel extends EntityVaryingGem {
     }
     public Abilities[] definiteAbilities(){
         return new Abilities[]{
-                Abilities.LURE//Abilities.JESTER
+                Abilities.LURE, Abilities.JESTER
         };
     }
 

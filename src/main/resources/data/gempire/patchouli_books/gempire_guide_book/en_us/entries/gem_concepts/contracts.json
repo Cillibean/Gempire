@@ -1,0 +1,24 @@
+{
+  "name": "Contracts",
+  "icon": "gempire:transfer_contract",
+  "advancement": "gempire:root",
+  "category": "gempire:gem_concepts",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Gem Contracts are items that can effect gems ownerships statuses, and what gems they're assigned to (NYI). Gem contracts will only work on gems you're the Master Owner of, which means you're the first to claim them. Shift click to clear any data on a contract."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Transfer Contract",
+      "item": "gempire:transfer_contract",
+      "text": "The transfer contract is a contract that lets you completely transfer your ownership of a gem to another player. In order to use it, interact with the player you'd like to transfer to with the item in your main hand, then the gem you'd like to transfer."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Share Contract",
+      "item": "gempire:share_contract",
+      "text": "The share contract is a contract that lets you share ownership of a gem with another player. In order to use it, interact with the player you'd like to share with the item in your main hand, then the gem you'd like to share."
+    }
+  ]
+}

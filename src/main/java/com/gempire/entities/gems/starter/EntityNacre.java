@@ -1,7 +1,10 @@
 package com.gempire.entities.gems.starter;
 
-import com.gempire.entities.ai.*;
 import com.gempire.entities.bases.EntityStarterGem;
+import com.gempire.entities.ai.EntityAIFollowAssigned;
+import com.gempire.entities.ai.EntityAIFollowOwner;
+import com.gempire.entities.ai.EntityAIMakeShell;
+import com.gempire.entities.ai.EntityAIWander;
 import com.gempire.util.Abilities;
 import com.gempire.util.GemPlacements;
 import net.minecraft.world.entity.MobCategory;
@@ -79,7 +82,6 @@ public class EntityNacre extends EntityStarterGem {
         }
     }
 
-    @Override
     protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(0, new FloatGoal(this));

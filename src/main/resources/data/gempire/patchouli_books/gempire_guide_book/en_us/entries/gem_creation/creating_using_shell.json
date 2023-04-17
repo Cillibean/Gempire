@@ -16,12 +16,12 @@
       "text": "In order to have your Nacre construct a Drill, you will need to build this multiblock, then interact with her with a pickaxe in your hand.",
       "multiblock": {
         "pattern": [
-          ["P"],
           ["C"],
+          ["P"],
           ["0"]
         ],
         "mapping": {
-          "P": "gempire:power_crystal_block",
+          "P": "gempire:power_crystal_block[facing=up]",
           "C": "minecraft:conduit",
           "0": "minecraft:prismarine"
         },

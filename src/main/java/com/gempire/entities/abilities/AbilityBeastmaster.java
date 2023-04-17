@@ -6,6 +6,7 @@ import com.gempire.entities.bases.EntityGem;
 import com.gempire.util.Abilities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.animal.Wolf;
@@ -16,9 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AbilityBeastmaster extends Ability implements IIdleAbility {
-    List<Wolf> tamed_wolves = new ArrayList<>();
 
-    public AbilityBeastmaster(){
+    public AbilityBeastmaster() {
         this.ability = Abilities.BEASTMASTER;
     }
 
@@ -29,21 +29,34 @@ public class AbilityBeastmaster extends Ability implements IIdleAbility {
 
     @Override
     public void execute() {
-        int timer = 100;
-        if (holder.getOwned()) {
-        Player player = this.holder.currentPlayer;
-        AABB aabb = this.holder.getBoundingBox().inflate(12.0D);
-        List<Wolf> wolves = this.holder.getLevel().getEntitiesOfClass(Wolf.class, aabb);
-        if (player != null)
-            if (timer >= 0) {
-                for(Wolf wolf : wolves){
-                    System.out.println("tame attempt");
-                    wolf.tame(player);
-                    tamed_wolves.add(wolf);
-                    timer = 100;
+        List<Wolf> list = this.holder.level.getEntitiesOfClass(Wolf.class, this.holder.getBoundingBox().inflate(14.0D, 8.0D, 14.0D));
+        for (Wolf wolf : list) {
+            if (holder.getOwned()) {
+                if (holder.currentPlayer != null) {
+                    if (holder.abilityTicks == 0) {
+                        holder.getNavigation().moveTo(wolf, 1);
+                        holder.lookAt(wolf, 90F, 90F);
+                        if (holder.distanceToSqr(wolf) < Math.pow(2, 1)) {
+                            wolf.tame(holder.currentPlayer);
+                            holder.abilityTicks = 20 * 30;
+                        }
+                    }
                 }
-            } else {
-                timer--;
+            } else if (holder.getRebelled()) {
+                if (holder.abilityTicks == 0) {
+                    if (!wolf.isTame()) {
+                        holder.getNavigation().moveTo(wolf, 1);
+                        holder.lookAt(wolf, 90F, 90F);
+                        if (holder.distanceToSqr(wolf) < Math.pow(2, 1)) {
+                            List<Player> list2 = this.holder.level.getEntitiesOfClass(Player.class, this.holder.getBoundingBox().inflate(14.0D, 8.0D, 14.0D));
+                            if (!list2.isEmpty()) {
+                                wolf.setAggressive(true);
+                                wolf.setTarget(list2.get(0));
+                                holder.abilityTicks = 20 * 30;
+                            }
+                        }
+                    }
+                }
             }
         }
     }

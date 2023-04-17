@@ -1,9 +1,7 @@
 package com.gempire.entities.abilities;
 
 import com.gempire.entities.abilities.base.Ability;
-import com.gempire.entities.abilities.interfaces.IRangedAbility;
 import com.gempire.entities.abilities.interfaces.ITaskAbility;
-import com.gempire.entities.abilities.interfaces.IViolentAbility;
 import com.gempire.entities.ai.EntityAIGuard;
 import com.gempire.entities.bases.EntityGem;
 import com.gempire.util.Abilities;

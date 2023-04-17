@@ -36,7 +36,8 @@ public class ItemWhiteRejuvenator extends DestabBase {
                 {
                     ((EntityGem) pTarget).setMarkingColor(((EntityGem) pTarget).generatePaletteColor(PaletteType.MARKINGS));
                 }
-                pTarget.hurt(DamageSource.GENERIC, pTarget.getMaxHealth() * 2);
+                ((EntityGem) pTarget).rebelPoints += 0.5F;
+                pTarget.hurt(DamageSource.MAGIC,pTarget.getMaxHealth() * 4);
             }
         }
     }

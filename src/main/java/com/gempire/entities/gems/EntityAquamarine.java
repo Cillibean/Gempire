@@ -53,7 +53,6 @@ public class EntityAquamarine extends EntityGem implements FlyingAnimal {
         return false;
     }
 
-    @Override
     protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(9, new FloatGoal(this));
@@ -63,7 +62,7 @@ public class EntityAquamarine extends EntityGem implements FlyingAnimal {
         this.goalSelector.addGoal(7, new EntityAIFollowAssigned(this, 1.0D));
         this.goalSelector.addGoal(7, new EntityAIWander(this, 1.0D));
         this.goalSelector.addGoal(7, new EntityAIFollowOwner(this, 1.0D));
-        //this.goalSelector.addGoal(2, new EntityAiAssignGems(this,1));
+        this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, EntityGem.class, 1, false, false, this::checkRebel));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Mob.class, 1, false, false, (p_234199_0_) -> p_234199_0_.getClassification(true) == MobCategory.MONSTER));
 
     }

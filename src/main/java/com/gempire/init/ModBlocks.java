@@ -292,7 +292,7 @@ public class ModBlocks {
                     .of(Material.STONE)
                     .strength(3.0f, 6.0f)
                     .sound(SoundType.METAL)
-                    
+                    .instabreak()
             )
     );
 

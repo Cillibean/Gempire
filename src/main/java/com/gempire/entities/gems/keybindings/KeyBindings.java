@@ -1,4 +1,4 @@
-package com.gempire.keybindings;
+package com.gempire.entities.gems.keybindings;
 
 import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.KeyMapping;

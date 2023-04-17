@@ -26,9 +26,4 @@ public class ModItemGroup extends CreativeModeTab {
     public boolean canScroll() {
         return true;
     }
-
-    @Override
-    public boolean hasSearchBar() {
-        return true;
-    }
 }

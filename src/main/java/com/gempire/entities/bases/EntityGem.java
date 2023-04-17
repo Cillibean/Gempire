@@ -4,8 +4,8 @@ import com.gempire.Gempire;
 import com.gempire.container.GemUIContainer;
 import com.gempire.entities.abilities.AbilityRecall;
 import com.gempire.entities.abilities.AbilityVehicle;
-import com.gempire.entities.abilities.base.Ability;
 import com.gempire.entities.abilities.AbilityZilch;
+import com.gempire.entities.abilities.base.Ability;
 import com.gempire.entities.abilities.interfaces.*;
 import com.gempire.events.GemPoofEvent;
 import com.gempire.init.ModItems;
@@ -16,61 +16,54 @@ import com.gempire.util.Color;
 import com.gempire.util.GemPlacements;
 import com.gempire.util.PaletteType;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
-import net.minecraft.network.chat.Component;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.client.Minecraft;
-import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.Container;
-import net.minecraft.world.ContainerListener;
-import net.minecraft.world.ContainerHelper;
-import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.MenuProvider;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.NonNullList;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.world.phys.AABB;
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.Vec3;
-import net.minecraft.world.DifficultyInstance;
-import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.*;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.monster.RangedAttackMob;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.block.LiquidBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.network.NetworkHooks;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 import org.apache.commons.lang3.ArrayUtils;
 
 import javax.annotation.Nullable;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.*;
-
-import net.minecraft.core.NonNullList;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.monster.RangedAttackMob;
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.DiggerItem;
-import net.minecraft.world.item.DyeItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Objects;
+import java.util.UUID;
 
 public abstract class EntityGem extends PathfinderMob implements RangedAttackMob, ItemSteerable, Container, MenuProvider, ContainerListener {
     //public static DataParameter<Optional<UUID>> OWNER_ID = EntityDataManager.<Optional<UUID>>createKey(EntityGem.class, DataSerializers.OPTIONAL_UNIQUE_ID);
@@ -83,15 +76,12 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     public static final EntityDataAccessor<Integer> SKIN_VARIANT = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<Integer> SKIN_COLOR_VARIANT = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
     public static EntityDataAccessor<Integer> HAIR_VARIANT = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
-    public static EntityDataAccessor<Integer> REBEL_HAIR_VARIANT = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<Integer> GEM_PLACEMENT = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<Integer> GEM_COLOR = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
     public static EntityDataAccessor<Integer> OUTFIT_COLOR = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
     public static EntityDataAccessor<Integer> OUTFIT_VARIANT = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
-    public static EntityDataAccessor<Integer> REBEL_OUTFIT_VARIANT = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
     public static EntityDataAccessor<Integer> INSIGNIA_COLOR = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
     public static EntityDataAccessor<Integer> INSIGNIA_VARIANT = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
-    public static EntityDataAccessor<Integer> REBEL_INSIGNIA_VARIANT = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<Integer> ABILITY_SLOTS = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<String> ABILITIES = SynchedEntityData.<String>defineId(EntityGem.class, EntityDataSerializers.STRING);
     public static final EntityDataAccessor<Boolean> USES_AREA_ABILITIES = SynchedEntityData.<Boolean>defineId(EntityGem.class, EntityDataSerializers.BOOLEAN);
@@ -109,6 +99,12 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     public boolean isCut;
     public ArrayList<Ability> ABILITY_POWERS = new ArrayList<>();
     public ArrayList<UUID> OWNERS = new ArrayList<>();
+    public UUID MASTER_OWNER;
+    public static final EntityDataAccessor<Integer> SAVED_HAIR_VARIANT = SynchedEntityData.defineId(EntityGem.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Integer> SAVED_OUTFIT_VARIANT= SynchedEntityData.defineId(EntityGem.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Integer> SAVED_INSIGNIA_VARIANT= SynchedEntityData.defineId(EntityGem.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Integer> SAVED_OUTFIT_VARIANT_COLOR= SynchedEntityData.defineId(EntityGem.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Integer> SAVED_INSIGNIA_VARIANT_COLOR= SynchedEntityData.defineId(EntityGem.class, EntityDataSerializers.INT);
     public UUID FOLLOW_ID;
     public UUID ASSIGNED_ID;
     public EntityGem assignedGem;
@@ -133,8 +129,15 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     public int timeToCraft = 10;
     public boolean isCrafting;
 
+    public boolean isHostile;
+
     public Item input;
     public int focusLevel = 2;
+
+    public float rebelPoints = 0.1F;
+    public int rebelTicks;
+
+    public int abilityTicks;
 
     public static final int NUMBER_OF_SLOTS = 33;
     public NonNullList<ItemStack> items = NonNullList.withSize(EntityGem.NUMBER_OF_SLOTS, ItemStack.EMPTY);
@@ -163,15 +166,12 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.entityData.define(EntityGem.SKIN_VARIANT, 0);
         this.entityData.define(EntityGem.SKIN_COLOR_VARIANT, 0);
         this.entityData.define(EntityGem.HAIR_VARIANT, 0);
-        this.entityData.define(EntityGem.REBEL_HAIR_VARIANT, 0);
         this.entityData.define(EntityGem.GEM_PLACEMENT, 0);
         this.entityData.define(EntityGem.GEM_COLOR, 0);
         this.entityData.define(EntityGem.OUTFIT_COLOR, 0);
         this.entityData.define(EntityGem.OUTFIT_VARIANT, 0);
-        this.entityData.define(EntityGem.REBEL_OUTFIT_VARIANT, 0);
         this.entityData.define(EntityGem.INSIGNIA_COLOR, 0);
         this.entityData.define(EntityGem.INSIGNIA_VARIANT, 0);
-        this.entityData.define(EntityGem.REBEL_INSIGNIA_VARIANT, 0);
         this.entityData.define(EntityGem.ABILITY_SLOTS, 1);
         this.entityData.define(EntityGem.ABILITIES, "-1");
         this.entityData.define(EntityGem.USES_AREA_ABILITIES, false);
@@ -191,6 +191,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.entityData.define(EntityGem.CUT, " ");
         this.FOLLOW_ID = UUID.randomUUID();
         this.ASSIGNED_ID = UUID.randomUUID();
+        this.MASTER_OWNER = UUID.randomUUID();
         Arrays.fill(this.armorDropChances, 0);
         Arrays.fill(this.handDropChances, 0);
     }
@@ -201,21 +202,18 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, DifficultyInstance difficultyIn, MobSpawnType reason, @Nullable SpawnGroupData spawnDataIn, @Nullable CompoundTag dataTag) {
         this.setGemPlacement(this.generateGemPlacement());
         this.setSkinVariant(this.generateSkinVariant());
-        if(this.setSkinVariantOnInitialSpawn) {
+        if (this.setSkinVariantOnInitialSpawn) {
             this.setSkinColorVariant(this.generateSkinColorVariant());
         } else this.setSkinColorVariant(this.initalSkinVariant);
-        setAssignedGem(((ItemGem)this.getGemItem().getDefaultInstance().getItem()).assigned_gem);
+        setAssignedGem(((ItemGem) this.getGemItem().getDefaultInstance().getItem()).assigned_gem);
         System.out.println(this.getAssignedGem());
         this.setHairVariant(this.generateHairVariant());
-        this.setRebelHairVariant(this.generateHairVariant());
         this.setSkinColor(this.generatePaletteColor(PaletteType.SKIN));
         this.setHairColor(this.generatePaletteColor(PaletteType.HAIR));
         this.setGemColor(this.generatePaletteColor(PaletteType.GEM));
         this.setOutfitVariant(this.generateOutfitVariant());
-        this.setRebelOutfitVariant(this.generateOutfitVariant());
         this.setOutfitColor(this.generateOutfitColor());
         this.setInsigniaVariant(this.generateInsigniaVariant());
-        this.setRebelInsigniaVariant(this.generateInsigniaVariant());
         this.setInsigniaColor(this.generateInsigniaColor());
         this.setAbilitySlots(this.generateAbilitySlots());
         this.setAbilities(this.generateAbilities());
@@ -227,27 +225,59 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.setCut(this.generateCut());
         this.FOLLOW_ID = UUID.randomUUID();
         this.ASSIGNED_ID = UUID.randomUUID();
+        this.MASTER_OWNER = UUID.randomUUID();
         this.setMarkingVariant(this.generateMarkingVariant());
         this.setMarkingColor(this.generatePaletteColor(PaletteType.MARKINGS));
         this.setMarking2Variant(this.generateMarking2Variant());
         this.setMarking2Color(this.generatePaletteColor(PaletteType.MARKINGS_2));
         this.setCustomName(this.getNickname());
+        this.rebelPoints = 0.5f;
+        this.rebelTicks = 1;
         //this.generateScoutList();
         this.idlePowers = this.generateIdlePowers();
-        if(this.spawnGem != null){
+        if (this.spawnGem != null) {
             this.spawnGem.remove(RemovalReason.DISCARDED);
         }
         return super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
     }
+
     @Override
-    public boolean canHoldItem(ItemStack stack) {
-        return stack.getItem() instanceof ArmorItem ||  stack.getItem() instanceof DiggerItem;
+    protected void registerGoals() {
+        super.registerGoals();
+        this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, EntityGem.class, 1, false, false, this::checkNotRebel));
+        this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, 1, true, false, this::isHostileAt));
     }
 
-    public SoundEvent getInstrument()
-    {
+    public boolean checkRebel(LivingEntity entity) {
+        if (!this.getRebelled() && !((EntityGem) entity).getOwned()) {
+            return ((EntityGem) entity).getRebelled();
+        } else {
+            return false;
+        }
+    }
+
+    public boolean checkNotRebel(LivingEntity entity) {
+        if (this.getRebelled()) {
+            return !((EntityGem) entity).getRebelled();
+        } else {
+            return false;
+        }
+    }
+
+    private boolean isHostileAt(LivingEntity entity) {
+        return isHostile || getRebelled();
+    }
+
+
+    @Override
+    public boolean canHoldItem(ItemStack stack) {
+        return stack.getItem() instanceof ArmorItem || stack.getItem() instanceof DiggerItem;
+    }
+
+    public SoundEvent getInstrument() {
         return SoundEvents.NOTE_BLOCK_HARP;
     }
+
     protected SoundEvent getAmbientSound() {
         return getInstrument();
     }
@@ -255,16 +285,17 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     protected SoundEvent getHurtSound(DamageSource p_30424_) {
         return getInstrument();
     }
+
     @Override
     protected void playHurtSound(DamageSource p_21160_) {
         this.playSound(getInstrument(), this.getSoundVolume(), this.hurtPitch());
     }
-    public float interactPitch()
-    {
+
+    public float interactPitch() {
         return (float) (1 + random.nextFloat() * (1.5 - 1));
     }
-    public float hurtPitch()
-    {
+
+    public float hurtPitch() {
         return (float) (0.25 + random.nextFloat() * (0.75 - 0.25));
     }
 
@@ -276,27 +307,34 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.writeOwners(compound);
         compound.putUUID("followID", this.FOLLOW_ID);
         compound.putUUID("assignedID", this.ASSIGNED_ID);
+        compound.putUUID("masterID", this.MASTER_OWNER);
         compound.putByte("movementType", this.getMovementType());
         compound.putInt("skinColorVariant", this.getSkinColorVariant());
         compound.putInt("skinColor", this.getSkinColor());
         compound.putInt("hairColor", this.getHairColor());
         compound.putInt("skinVariant", this.getSkinVariant());
         compound.putInt("hairVariant", this.getHairVariant());
-        compound.putInt("rebelHairVariant", this.getRebelHairVariant());
         compound.putInt("CraftTicks", this.ticking);
+        compound.putInt("abilityTicks", this.abilityTicks);
         compound.putBoolean("isCrafting", this.isCrafting);
         compound.putInt("gemPlacement", this.getGemPlacement());
         compound.putInt("gemColor", this.getGemColor());
         compound.putInt("outfitColor", this.getOutfitColor());
         compound.putInt("outfitVariant", this.getOutfitVariant());
+        compound.putInt("savedOutfitVariant", SAVED_OUTFIT_VARIANT.getId());
+        compound.putInt("savedHairVariant", SAVED_HAIR_VARIANT.getId());
+        compound.putInt("savedInsigniaVariant", SAVED_INSIGNIA_VARIANT.getId());
+        compound.putInt("savedInsigniaColor", SAVED_INSIGNIA_VARIANT_COLOR.getId());
+        compound.putInt("savedOutfitColor", SAVED_OUTFIT_VARIANT_COLOR.getId());
+        compound.putInt("outfitVariant", this.getOutfitVariant());
         compound.putInt("insigniaColor", this.getInsigniaColor());
-        compound.putInt("rebelInsigniaVariant", this.getRebelInsigniaVariant());
         compound.putInt("insigniaVariant", this.getInsigniaVariant());
         compound.putInt("abilitySlots", this.getAbilitySlots());
         compound.putBoolean("usesAreaAbility", this.usesAreaAbilities());
         compound.putString("facet", this.getFacet());
         compound.putString("cut", this.getCut());
         compound.putBoolean("rebel", this.getRebelled());
+        compound.putBoolean("isHostile", this.getHostile());
         compound.putBoolean("cracked", this.getCracked());
         compound.putIntArray("guardPos", this.GUARD_POS);
         compound.putInt("focusLevel", this.focusLevel);
@@ -306,22 +344,24 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         compound.putInt("marking2Variant", this.getMarking2Variant());
         compound.putInt("marking2Color", this.getMarking2Color());
         compound.putInt("structureTime", this.structureTime);
+        compound.putFloat("rebelPoints", this.rebelPoints);
+        compound.putInt("rebelTicks", this.rebelTicks);
         this.writeStructures(compound);
         ContainerHelper.saveAllItems(compound, this.items);
     }
 
-    public void writeOwners(CompoundTag compound){
-        for(int i = 0; i < this.OWNERS.size(); i++){
+    public void writeOwners(CompoundTag compound) {
+        for (int i = 0; i < this.OWNERS.size(); i++) {
             compound.putUUID("owner" + i, this.OWNERS.get(i));
         }
         compound.putInt("ownerAmount", this.OWNERS.size());
     }
 
-    public void writeStructures(CompoundTag compound){
-        for(int i = 0; i < this.structures.size(); i++){
+    public void writeStructures(CompoundTag compound) {
+        for (int i = 0; i < this.structures.size(); i++) {
             compound.putString("structure" + i, this.structures.get(i));
         }
-        for(int i = 0; i < this.biomes.size(); i++){
+        for (int i = 0; i < this.biomes.size(); i++) {
             compound.putString("biome" + i, this.biomes.get(i));
         }
         compound.putInt("structureAmount", this.structures.size());
@@ -334,25 +374,29 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.setAbilities(compound.getString("abilities"));
         this.setEmotional(compound.getBoolean("emotional"));
         this.readOwners(compound);
-        if(compound.contains("followID"))this.FOLLOW_ID = compound.getUUID("followID");
-        if(compound.contains("assignedID"))this.ASSIGNED_ID = compound.getUUID("assignedID");
+        if (compound.contains("followID")) this.FOLLOW_ID = compound.getUUID("followID");
+        if (compound.contains("assignedID")) this.ASSIGNED_ID = compound.getUUID("assignedID");
+        if (compound.contains("masterID")) this.MASTER_OWNER = compound.getUUID("masterID");
         this.setMovementType(compound.getByte("movementType"));
         this.setSkinColorVariant(compound.getInt("skinColorVariant"));
         this.setSkinColor(compound.getInt("skinColor"));
         this.setHairColor(compound.getInt("hairColor"));
         this.setSkinVariant(compound.getInt("skinVariant"));
         this.setHairVariant(compound.getInt("hairVariant"));
-        this.setRebelHairVariant(compound.getInt("rebelHairVariant"));
         this.setGemPlacement(compound.getInt("gemPlacement"));
         this.setGemColor(compound.getInt("gemColor"));
+        this.entityData.set(EntityGem.SAVED_HAIR_VARIANT, (compound.getInt("savedHairVariant")));
+        this.entityData.set(EntityGem.SAVED_OUTFIT_VARIANT, (compound.getInt("savedOutfitVariant")));
+        this.entityData.set(EntityGem.SAVED_INSIGNIA_VARIANT, (compound.getInt("savedInsigniaVariant")));
+        this.entityData.set(EntityGem.SAVED_OUTFIT_VARIANT_COLOR, (compound.getInt("savedOutfitColor")));
+        this.entityData.set(EntityGem.SAVED_INSIGNIA_VARIANT_COLOR, (compound.getInt("savedInsigniaColor")));
         this.ticking = compound.getInt("CraftTicks");
+        this.abilityTicks = compound.getInt("abilityTicks");
         this.isCrafting = compound.getBoolean("isCrafting");
         this.setOutfitColor(compound.getInt("outfitColor"));
         this.setOutfitVariant(compound.getInt("outfitVariant"));
-        this.setRebelOutfitVariant(compound.getInt("rebelOutfitVariant"));
         this.setInsigniaColor(compound.getInt("insigniaColor"));
         this.setInsigniaVariant(compound.getInt("insigniaVariant"));
-        this.setRebelInsigniaVariant(compound.getInt("rebelInsigniaVariant"));
         this.setAbilitySlots(compound.getInt("abilitySlots"));
         this.setFacet(compound.getString("facet"));
         this.setCut(compound.getString("cut"));
@@ -368,56 +412,60 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.setMarking2Variant(compound.getInt("marking2Variant"));
         this.setMarking2Color(compound.getInt("marking2Color"));
         this.structureTime = compound.getInt("structureTime");
+        this.setRebelled(compound.getBoolean("rebel"));
+        this.isHostile = compound.getBoolean("isHostile");
+        this.rebelPoints = compound.getFloat("rebelPoints");
+        this.rebelTicks = compound.getInt("rebelTicks");
         this.idlePowers = this.generateIdlePowers();
         ContainerHelper.loadAllItems(compound, this.items);
         this.readStructures(compound);
-        if(this.spawnGem != null){
+        if (this.spawnGem != null) {
             this.spawnGem.remove(RemovalReason.DISCARDED);
         }
     }
 
-    public void readOwners(CompoundTag compound){
+    public void readOwners(CompoundTag compound) {
         this.OWNERS = new ArrayList<>();
         int n = compound.getInt("ownerAmount");
-        for(int i = 0; i < n; i++){
+        for (int i = 0; i < n; i++) {
             this.OWNERS.add(compound.getUUID("owner" + i));
         }
     }
 
-    public void readStructures(CompoundTag compound){
+    public void readStructures(CompoundTag compound) {
         this.structures = new ArrayList<>();
         int n = compound.getInt("structureAmount");
-        for(int i = 0; i < n; i++){
+        for (int i = 0; i < n; i++) {
             this.structures.add(compound.getString("structure" + i));
         }
         this.biomes = new ArrayList<>();
         int t = compound.getInt("biomeAmount");
-        for(int i = 0; i < t; i++){
+        for (int i = 0; i < t; i++) {
             this.biomes.add(compound.getString("biome" + i));
         }
     }
 
     @Override
     public void aiStep() {
-        if(!this.isFocused()){
+        if (!this.isFocused()) {
             this.focusCounter++;
-            if(this.focusCounter > this.maxFocusCounter){
+            if (this.focusCounter > this.maxFocusCounter) {
                 this.focusLevel = this.baseFocus();
                 this.focusCounter = 0;
             }
         }
         if (this.canWalkOnFluids()) this.adjustForFluids();
-        for(IIdleAbility power : this.getIdlePowers()){
-            if(this.focusCheck()) power.execute();
+        for (IIdleAbility power : this.getIdlePowers()) {
+            if (this.focusCheck()) power.execute();
         }
-        if(this.isSunBurnTick()){
+        if (this.isSunBurnTick()) {
             if (this.getHealth() < this.getMaxHealth() && this.tickCount % 20 == 0) {
                 this.heal(1.0F);
-                this.level.addParticle(ParticleTypes.HEART, this.getX(), this.getY() + 2, this.getZ(), 0,0,0F);
+                this.level.addParticle(ParticleTypes.HEART, this.getX(), this.getY() + 2, this.getZ(), 0, 0, 0F);
             }
         }
 
-        if(this.usesAreaAbilities()) {
+        if (this.usesAreaAbilities()) {
             if (this.tickCount % 100 == 0) {
                 ArrayList<LivingEntity> entityl = new ArrayList<>(this.level.getEntitiesOfClass(LivingEntity.class, new AABB(this.getX(), this.getY(), this.getZ(), this.getX() + 1, this.getY() + 1, this.getZ() + 1)
                         .inflate(16, this.level.getMaxBuildHeight(), 16), (target) -> {
@@ -469,116 +517,141 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         super.aiStep();
     }
 
-    public Item getInputItem()
-    {
+    public Item getInputItem() {
         return inputItem;
     }
 
-    public Item getOutputItem()
-    {
+    public Item getOutputItem() {
         return outputItem;
     }
 
-    public int getTimetoCraft()
-    {
+    public int getTimetoCraft() {
         return timeToCraft;
     }
+
     @Override
     public void tick() {
-        if (!this.level.isClientSide && isCrafting)
-        {
+        if (!this.level.isClientSide && isCrafting) {
             ticking++;
             if (ticking >= getTimetoCraft()) {
                 popShitOut();
             }
         }
+        if (!this.level.isClientSide && !getRebelled() && getOwned()) {
+            rebelTicks++;
+            if (rebelTicks >= 20 * (10*60)) {
+                checkRebel();
+            }
+        }
+        if (!this.level.isClientSide) {
+            if (abilityTicks > 0) {
+                abilityTicks--;
+            }
+        }
         super.tick();
+    }
+
+    private void checkRebel() {
+        Double rebel = (0 + random.nextDouble() * 500);
+        if (rebel < rebelPoints) {
+            rebel();
+        }
+        rebelTicks = 0;
     }
 
     @Override
     public InteractionResult interactAt(Player player, Vec3 vec, InteractionHand hand) {
         if (!this.getRebelled()) {
-        if(player.level.isClientSide){
-            return super.interactAt(player, vec, hand);
-        }
-        //This part of the code checks if the player has a blank hand
-        if(hand == InteractionHand.MAIN_HAND) {
-            this.currentPlayer = player;
-            if (player.getMainHandItem() == ItemStack.EMPTY) {
-                if (this.isOwner(player)) {
-                    if (player.isShiftKeyDown()) {
-                        this.cycleMovementAI(player);
-                        this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
-                    } else {
-                        if (this.canOpenInventoryByDefault()) {
-                            NetworkHooks.openScreen((ServerPlayer) player, this, buf -> buf.writeInt(this.getId()));
-                            this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
-                        }
-                        if (this.isRideable()) {
-                            if (!this.isVehicle()) {
-                                player.startRiding(this);
+            if (player.level.isClientSide) {
+                return super.interactAt(player, vec, hand);
+            }
+            //This part of the code checks if the player has a blank hand
+            if (!level.isClientSide) {
+                if (hand == InteractionHand.MAIN_HAND) {
+                    if (player.getItemInHand(hand).isEmpty()) {
+                        this.currentPlayer = player;
+                        if (this.isOwner(player)) {
+                            if (player.isShiftKeyDown()) {
+                                this.cycleMovementAI(player);
                                 this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
+                                if (OWNERS.size() <= 1 && this.MASTER_OWNER != player.getUUID()) {
+                                    MASTER_OWNER = player.getUUID();
+                                    System.out.println("Added master owner");
+                                }
+                            } else {
+                                if (this.canOpenInventoryByDefault()) {
+                                    NetworkHooks.openScreen((ServerPlayer) player, this, buf -> buf.writeInt(this.getId()));
+                                    this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
+                                }
+                                if (this.isRideable()) {
+                                    if (!this.isVehicle()) {
+                                        player.startRiding(this);
+                                        this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
+                                    }
+                                }
                             }
-                        }
-                    }
-                } else {
-                    //Test to see if the gem has an owner
-                    if (!this.getOwned()) {
-                        if (!this.isOwner(player)) {
-                            this.addOwner(player.getUUID());
-                            setFollow(player.getUUID());
-                            if (getAssignedGem() != null) {
-                                setAssignedId(getAssignedGem().getUUID());
-                            }
-                            this.setMovementType((byte) 2);
-                            player.sendSystemMessage(Component.translatable(this.getCapitalGemName() + "! " + getFacet() + ", " + getCut()));
-                            this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
-                            return super.interactAt(player, vec, hand);
-                        }
-                    }
-                }
-            } else {
-                if (this.isOwner(player)) {
-                    if (player.getMainHandItem().getItem() instanceof DyeItem dye) {
-                        if (player.isShiftKeyDown()) {
-                            if (canChangeInsigniaColorByDefault()) this.setInsigniaColor(dye.getDyeColor().getId());
                         } else {
-                            if (canChangeUniformColorByDefault()) this.setOutfitColor(dye.getDyeColor().getId());
-                        }
-                    } else if (player.getMainHandItem().getItem() == Items.PAPER) {
-                        NetworkHooks.openScreen((ServerPlayer) player, this, buf -> buf.writeInt(this.getId()));
-                    } else if (player.getMainHandItem().getItem() == Items.BOOK) {
-                        StringBuilder list1 = new StringBuilder();
-                        for (int i = 0; i < this.structures.size(); i++) {
-                            if (i == this.structures.size() - 1) {
-                                list1.append(this.structures.get(i));
-                            } else {
-                                list1.append(this.structures.get(i)).append(", ");
+                            //Test to see if the gem has an owner
+                            if (!this.getOwned()) {
+                                if (!this.isOwner(player)) {
+                                    this.addOwner(player.getUUID());
+                                    this.addMasterOwner(player.getUUID());
+                                    setFollow(player.getUUID());
+                                    if (getAssignedGem() != null) {
+                                        setAssignedId(getAssignedGem().getUUID());
+                                    }
+                                    player.sendSystemMessage(Component.literal("Claimed ").append(getName().getString()).append(" "+getFacetAndCut()));
+                                    this.setMovementType((byte) 2);
+                                    this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
+                                    return super.interactAt(player, vec, hand);
+                                }
                             }
                         }
-                        StringBuilder list2 = new StringBuilder();
-                        for (int i = 0; i < this.biomes.size(); i++) {
-                            if (i == this.biomes.size() - 1) {
-                                list2.append(this.biomes.get(i));
-                            } else {
-                                list2.append(this.biomes.get(i)).append(", ");
+                    } else {
+                        if (this.isOwner(player)) {
+                            if (player.getMainHandItem().getItem() instanceof DyeItem dye) {
+                                if (player.isShiftKeyDown()) {
+                                    if (canChangeInsigniaColorByDefault())
+                                        this.setInsigniaColor(dye.getDyeColor().getId());
+                                } else {
+                                    if (canChangeUniformColorByDefault())
+                                        this.setOutfitColor(dye.getDyeColor().getId());
+                                }
+                            } else if (player.getMainHandItem().getItem() == Items.PAPER) {
+                                NetworkHooks.openScreen((ServerPlayer) player, this, buf -> buf.writeInt(this.getId()));
+                            } else if (player.getMainHandItem().getItem() == Items.BOOK) {
+                                StringBuilder list1 = new StringBuilder();
+                                for (int i = 0; i < this.structures.size(); i++) {
+                                    if (i == this.structures.size() - 1) {
+                                        list1.append(this.structures.get(i));
+                                    } else {
+                                        list1.append(this.structures.get(i)).append(", ");
+                                    }
+                                }
+                                StringBuilder list2 = new StringBuilder();
+                                for (int i = 0; i < this.biomes.size(); i++) {
+                                    if (i == this.biomes.size() - 1) {
+                                        list2.append(this.biomes.get(i));
+                                    } else {
+                                        list2.append(this.biomes.get(i)).append(", ");
+                                    }
+                                }
+                                player.sendSystemMessage(Component.translatable("Findable Structures: " + list1));
+                                player.sendSystemMessage(Component.translatable("Findable Biomes: " + list2));
                             }
                         }
-                        player.sendSystemMessage(Component.translatable("Findable Structures: " + list1));
-                        player.sendSystemMessage(Component.translatable("Findable Biomes: " + list2));
                     }
                 }
             }
         }
-        } else if (!this.getRebelled()) {
-            player.sendSystemMessage(Component.translatable("messages.gempire.entity.rebel"));
-        }
-        if (player.getItemInHand(hand).getItem() == getInputItem() && !isCrafting && hand == InteractionHand.MAIN_HAND && getInputItem() != Items.AIR.asItem()) {
-            if (this.isOwner(player)) {
-                isCrafting = true;
-                this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
-                if (!player.isCreative()) {
-                    player.getMainHandItem().shrink(1);
+        if (!level.isClientSide) {
+            if (player.getItemInHand(hand).getItem() == getInputItem() && !isCrafting && hand == InteractionHand.MAIN_HAND && getInputItem() != Items.AIR.asItem()) {
+                if (this.isOwner(player)) {
+                    isCrafting = true;
+                    this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
+                    if (!player.isCreative()) {
+                        player.getMainHandItem().shrink(1);
+                    }
                 }
             }
         }
@@ -619,7 +692,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                 }
             } else if (getAssignedGem() != null && getAssignedGem().isAlive() ? this.getMovementType() == 3 : this.getMovementType() == 2) {
                 this.setMovementType((byte) 0);
-                player.sendSystemMessage(Component.translatable(this.getCapitalGemName() + " will now stay put"));
+                player.sendSystemMessage(Component.translatable(this.getName().getString() + " will now stay put"));
                 this.GUARD_POS[0] = (int) this.getX();
                 this.GUARD_POS[1] = (int) this.getY();
                 this.GUARD_POS[2] = (int) this.getZ();
@@ -697,10 +770,9 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             MinecraftForge.EVENT_BUS.post(event);
             ItemStack stack = new ItemStack(this.getGemItem());
             ((ItemGem) stack.getItem()).setData(this, stack);
-            ItemEntity item = new ItemEntity(this.level, this.getX(), this.getY(), this.getZ(), stack);
-            item.setExtendedLifetime();
+            this.spawnAtLocation(stack).setExtendedLifetime();
+            this.gameEvent(GameEvent.ENTITY_PLACE);
             this.kill();
-            this.level.addFreshEntity(item);
         }
         super.die(source);
     }
@@ -750,11 +822,6 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     }
 
     @Override
-    protected void registerGoals() {
-        super.registerGoals();
-    }
-
-    @Override
     public boolean removeWhenFarAway(double xix){
         return false;
     }
@@ -762,15 +829,17 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     //GETTERS AND SETTERS!!!
 
     public void setOwners(ArrayList<UUID> owners){
-        if (!getRebelled()) {
-            this.OWNERS = owners;
-        }
+        this.OWNERS = owners;
     }
 
     public void addOwner(UUID ID){
         if (!getRebelled()) {
             this.OWNERS.add(ID);
         }
+    }
+    public void addMasterOwner(UUID ID)
+    {
+        MASTER_OWNER = ID;
     }
 
     public void removeOwner(UUID ID){
@@ -784,6 +853,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
 
     public void resetOwners(){
         setOwners(new ArrayList<>());
+        addMasterOwner(UUID.randomUUID());
     }
 
     public boolean getOwned(){
@@ -796,7 +866,9 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
 
     public boolean isOwner(LivingEntity entity){
         for(UUID uuid : this.OWNERS){
-            if(entity.getUUID().equals(uuid)) return true;
+            if(entity.getUUID().equals(uuid)){
+                return true;
+            }
         }
         return false;
     }
@@ -874,9 +946,8 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     public void popShitOut()
     {
         ItemStack itemStack = new ItemStack(getOutputItem());
-        ItemEntity itemEntity = new ItemEntity(this.level, this.getX(), this.getY(), this.getZ(), itemStack);
-        this.level.addFreshEntity(itemEntity);
-        this.currentPlayer.sendSystemMessage(Component.translatable("All done!"));
+        this.spawnAtLocation(itemStack);
+        this.gameEvent(GameEvent.ENTITY_PLACE);
         ticking = 0;
         this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
         isCrafting = false;
@@ -1024,14 +1095,6 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.entityData.set(EntityGem.HAIR_VARIANT, value);
     }
 
-    public int getRebelHairVariant(){
-        return this.entityData.get(EntityGem.REBEL_HAIR_VARIANT);
-    }
-
-    public void setRebelHairVariant(int value){
-        this.entityData.set(EntityGem.REBEL_HAIR_VARIANT, value);
-    }
-
     public abstract int generateHairVariant();
 
     public int getGemColor(){
@@ -1056,20 +1119,30 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
 
     public abstract int generateOutfitVariant();
 
+    public void saveOutfitHairInsignia()
+    {
+        entityData.set(SAVED_OUTFIT_VARIANT,entityData.get(OUTFIT_VARIANT));
+        entityData.set(SAVED_INSIGNIA_VARIANT,entityData.get(INSIGNIA_VARIANT));
+        entityData.set(SAVED_HAIR_VARIANT,entityData.get(HAIR_VARIANT));
+        entityData.set(SAVED_OUTFIT_VARIANT_COLOR,entityData.get(OUTFIT_COLOR));
+        entityData.set(SAVED_INSIGNIA_VARIANT_COLOR,entityData.get(INSIGNIA_COLOR));
+        System.out.println("Saved Stuff");
+    }
+    public void setOutFitHairInsignia()
+    {
+        this.entityData.set(EntityGem.OUTFIT_VARIANT, entityData.get(SAVED_OUTFIT_VARIANT));
+        this.entityData.set(EntityGem.INSIGNIA_VARIANT, entityData.get(SAVED_INSIGNIA_VARIANT));
+        this.entityData.set(EntityGem.HAIR_VARIANT, entityData.get(SAVED_HAIR_VARIANT));
+        this.entityData.set(EntityGem.OUTFIT_COLOR,entityData.get(SAVED_OUTFIT_VARIANT_COLOR));
+        this.entityData.set(EntityGem.INSIGNIA_COLOR,entityData.get(SAVED_INSIGNIA_VARIANT_COLOR));
+    }
+
     public void setOutfitVariant(int value){
         this.entityData.set(EntityGem.OUTFIT_VARIANT, value);
     }
 
     public int getOutfitVariant(){
         return this.entityData.get(EntityGem.OUTFIT_VARIANT);
-    }
-
-    public void setRebelOutfitVariant(int value){
-        this.entityData.set(EntityGem.REBEL_OUTFIT_VARIANT, value);
-    }
-
-    public int getRebelOutfitVariant(){
-        return this.entityData.get(EntityGem.REBEL_OUTFIT_VARIANT);
     }
 
     public boolean hasOutfitPlacementVariant(){
@@ -1088,14 +1161,6 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
 
     public int getInsigniaVariant(){
         return this.entityData.get(EntityGem.INSIGNIA_VARIANT);
-    }
-
-    public void setRebelInsigniaVariant(int value){
-        this.entityData.set(EntityGem.REBEL_INSIGNIA_VARIANT, value);
-    }
-
-    public int getRebelInsigniaVariant(){
-        return this.entityData.get(EntityGem.REBEL_INSIGNIA_VARIANT);
     }
 
     public int getInsigniaColor(){
@@ -1165,7 +1230,9 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     public Boolean getRebelled(){
         return this.entityData.get(EntityGem.REBEL);
     }
-
+    public Boolean getHostile(){
+        return isHostile;
+    }
     public void setRebelled(boolean rebelled){
         this.entityData.set(EntityGem.REBEL, rebelled);
     }
@@ -1659,11 +1726,12 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
 
     public void rebel() {
         this.resetOwners();
-        this.generateInsigniaColor();
-        this.generateOutfitColor();
-        this.generateOutfitVariant();
-        this.generateHairVariant();
-        this.generateInsigniaVariant();
+        this.saveOutfitHairInsignia();
+        this.setInsigniaColor(random.nextInt(16));
+        this.setOutfitColor(random.nextInt(16));
+        this.setHairVariant((this).generateHairVariant());
+        this.setOutfitVariant((this).generateOutfitVariant());
+        this.setInsigniaVariant((this).generateInsigniaVariant());
         this.setRebelled(true);
     }
 

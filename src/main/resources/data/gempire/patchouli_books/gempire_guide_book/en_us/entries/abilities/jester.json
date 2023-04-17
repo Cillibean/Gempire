@@ -1,0 +1,16 @@
+{
+  "name": "Jester",
+  "icon": "minecraft:slime_block",
+  "advancement": "gempire:root",
+  "category": "gempire:abilities",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Jester is an ability that lets the gem that has it play with other gems, making them way less likely to rebel, doing this will make her play a horn noise, however if they're a rebel, she will do the opposite."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Gems that are guaranteed to have it$()$(li)Spinel$(br2) $(l)Gems that have a chance to have it$()$(li)N/A"
+    }
+  ]
+}

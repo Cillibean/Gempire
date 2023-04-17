@@ -1,33 +1,109 @@
 {
   "variants": {
-    "facing=east,powered=false": {
-      "model": "gempire:block/hand_pedistal_unpowered",
-      "y": 90
-    },
-    "facing=north,powered=false": {
-      "model": "gempire:block/hand_pedistal_unpowered"
-    },
-    "facing=south,powered=false": {
-      "model": "gempire:block/hand_pedistal_unpowered",
-      "y": 180
-    },
-    "facing=west,powered=false": {
-      "model": "gempire:block/hand_pedistal_unpowered",
+    "face=ceiling,facing=east,powered=false": {
+      "model": "gempire:block/hand_pedistal",
+      "x": 180,
       "y": 270
     },
-    "facing=east,powered=true": {
-      "model": "gempire:block/hand_pedistal_powered",
-      "y": 90
+    "face=ceiling,facing=east,powered=true": {
+      "model": "gempire:block/hand_pedistal_pressed",
+      "x": 180,
+      "y": 270
     },
-    "facing=north,powered=true": {
-      "model": "gempire:block/hand_pedistal_powered"
-    },
-    "facing=south,powered=true": {
-      "model": "gempire:block/hand_pedistal_powered",
+    "face=ceiling,facing=north,powered=false": {
+      "model": "gempire:block/hand_pedistal",
+      "x": 180,
       "y": 180
     },
-    "facing=west,powered=true": {
-      "model": "gempire:block/hand_pedistal_powered",
+    "face=ceiling,facing=north,powered=true": {
+      "model": "gempire:block/hand_pedistal_pressed",
+      "x": 180,
+      "y": 180
+    },
+    "face=ceiling,facing=south,powered=false": {
+      "model": "gempire:block/hand_pedistal",
+      "x": 180
+    },
+    "face=ceiling,facing=south,powered=true": {
+      "model": "gempire:block/hand_pedistal_pressed",
+      "x": 180
+    },
+    "face=ceiling,facing=west,powered=false": {
+      "model": "gempire:block/hand_pedistal",
+      "x": 180,
+      "y": 90
+    },
+    "face=ceiling,facing=west,powered=true": {
+      "model": "gempire:block/hand_pedistal_pressed",
+      "x": 180,
+      "y": 90
+    },
+    "face=floor,facing=east,powered=false": {
+      "model": "gempire:block/hand_pedistal",
+      "y": 90
+    },
+    "face=floor,facing=east,powered=true": {
+      "model": "gempire:block/hand_pedistal_pressed",
+      "y": 90
+    },
+    "face=floor,facing=north,powered=false": {
+      "model": "gempire:block/hand_pedistal"
+    },
+    "face=floor,facing=north,powered=true": {
+      "model": "gempire:block/hand_pedistal_pressed"
+    },
+    "face=floor,facing=south,powered=false": {
+      "model": "gempire:block/hand_pedistal",
+      "y": 180
+    },
+    "face=floor,facing=south,powered=true": {
+      "model": "gempire:block/hand_pedistal_pressed",
+      "y": 180
+    },
+    "face=floor,facing=west,powered=false": {
+      "model": "gempire:block/hand_pedistal",
+      "y": 270
+    },
+    "face=floor,facing=west,powered=true": {
+      "model": "gempire:block/hand_pedistal_pressed",
+      "y": 270
+    },
+    "face=wall,facing=east,powered=false": {
+      "model": "gempire:block/wall_hand_pedistal",
+      "x": 90,
+      "y": 90
+    },
+    "face=wall,facing=east,powered=true": {
+      "model": "gempire:block/wall_hand_pedistal_pressed",
+      "x": 90,
+      "y": 90
+    },
+    "face=wall,facing=north,powered=false": {
+      "model": "gempire:block/wall_hand_pedistal",
+      "x": 90
+    },
+    "face=wall,facing=north,powered=true": {
+      "model": "gempire:block/wall_hand_pedistal_pressed",
+      "x": 90
+    },
+    "face=wall,facing=south,powered=false": {
+      "model": "gempire:block/wall_hand_pedistal",
+      "x": 90,
+      "y": 180
+    },
+    "face=wall,facing=south,powered=true": {
+      "model": "gempire:block/wall_hand_pedistal_pressed",
+      "x": 90,
+      "y": 180
+    },
+    "face=wall,facing=west,powered=false": {
+      "model": "gempire:block/wall_hand_pedistal",
+      "x": 90,
+      "y": 270
+    },
+    "face=wall,facing=west,powered=true": {
+      "model": "gempire:block/wall_hand_pedistal_pressed",
+      "x": 90,
       "y": 270
     }
   }

@@ -6,6 +6,7 @@ import com.gempire.events.GemFormEvent;
 import com.gempire.init.AddonHandler;
 import com.gempire.init.ModEntities;
 import com.gempire.init.ModItems;
+import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -14,6 +15,7 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.core.particles.ParticleTypes;
@@ -123,26 +125,19 @@ public class ItemGem extends Item {
                         playerIn.getMainHandItem().shrink(1);
                     }
                 }
-            } else {
-                if (isAssigned) {
-                    playerIn.sendSystemMessage(Component.translatable("This Gem is no longer assigned to " + assigned_gem.getCapitalGemName() + " " + assigned_gem.getFacetAndCut()));
-                    livingEntityHit = false;
-                    assigned_gem = null;
-                } else {
-                    playerIn.sendSystemMessage(Component.translatable("This Gem was assigned to " + gemToAssign.getCapitalGemName() + " " + gemToAssign.getFacetAndCut()));
-                    livingEntityHit = false;
-                    System.out.println("ToAssign to assigned");
-                    assigned_gem = gemToAssign;
-                    System.out.println(assigned_gem);
-                    System.out.println(gemToAssign);
-                }
             }
         }
         return super.use(worldIn, playerIn, handIn);
     }
     //TODO: A lot needs fixing here
-
+    public boolean checkTags(ItemStack itemStack)
+    {
+        CompoundTag tag = itemStack.getTag();
+        return tag != null;
+    }
     //(?i) means case sensitive
+
+
     public boolean formGem(Level world, @Nullable Player player, BlockPos pos, ItemStack stack, @Nullable ItemEntity item) {
         if (!world.isClientSide) {
             System.out.println("form event");
@@ -223,6 +218,7 @@ public class ItemGem extends Item {
                         assert gem != null;
                         gem.finalizeSpawn((ServerLevelAccessor) world, world.getCurrentDifficultyAt(player.blockPosition()), MobSpawnType.TRIGGERED, null, null);
                         gem.addOwner(player.getUUID());
+                        gem.addMasterOwner(player.getUUID());
                         gem.FOLLOW_ID = player.getUUID();
                         gem.setMovementType((byte) 2);
                     } else {
@@ -256,7 +252,11 @@ public class ItemGem extends Item {
         }
         return false;
     }
-
+    public void appendHoverText(ItemStack itemStack, @Nullable Level level, List<Component> p_40553_, TooltipFlag p_40554_) {
+        if (checkTags(itemStack)) {
+            p_40553_.add(Component.translatable(itemStack.getTag().getString("name")).withStyle(ChatFormatting.GRAY));
+        }
+    }
     public void setData(EntityGem host, ItemStack stack) {
         stack.setTag(host.saveWithoutId(new CompoundTag()));
         assert stack.getTag() != null;

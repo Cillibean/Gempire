@@ -60,53 +60,53 @@ public class InjectorScreen extends AbstractContainerScreen<InjectorContainer> {
         {
             GUIUtilities.setup(FLUID_GUI);
             int xPink = x + 102;
-            int yPink = y + 40;
-            int fluidStored = 12 * pinkFluid.getAmount() / this.menu.injector.getCapacity();
+            int yPink = y + 32;
+            int fluidStored = 16 * pinkFluid.getAmount() / this.menu.injector.getCapacity();
             int color = 0xFF7FFF;
             float r = ((color & 16711680) >> 16) / 255f;
             float g = ((color & 65280) >> 8) / 255f;
             float b = ((color & 255) >> 0) / 255f;
             RenderSystem.setShaderColor(r, g, b, 1);
-            this.blit(matrixStack, xPink, yPink + (12 - fluidStored), 0, 0, 4, fluidStored);
+            this.blit(matrixStack, xPink, yPink + (16 - fluidStored), 0, 0, 4, fluidStored);
         }
         if(blueFluid.getFluid() != Fluids.EMPTY)
         {
             GUIUtilities.setup(FLUID_GUI);
             int xBlue = x + 110;
-            int yBlue = y + 40;
-            int fluidStored = 12 * blueFluid.getAmount() / this.menu.injector.getCapacity();
+            int yBlue = y + 32;
+            int fluidStored = 16 * blueFluid.getAmount() / this.menu.injector.getCapacity();
             int color = 0x697FFF;
             float r = ((color & 16711680) >> 16) / 255f;
             float g = ((color & 65280) >> 8) / 255f;
             float b = ((color & 255) >> 0) / 255f;
             RenderSystem.setShaderColor(r, g, b, 1);
-            this.blit(matrixStack, xBlue, yBlue + (12 - fluidStored), 0, 0, 4, fluidStored);
+            this.blit(matrixStack, xBlue, yBlue + (16 - fluidStored), 0, 0, 4, fluidStored);
         }
         if(yellowFluid.getFluid() != Fluids.EMPTY)
         {
             GUIUtilities.setup(FLUID_GUI);
             int xYellow = x + 118;
-            int yYellow = y + 40;
-            int fluidStored = 12 * yellowFluid.getAmount() / this.menu.injector.getCapacity();
+            int yYellow = y + 32;
+            int fluidStored = 16 * yellowFluid.getAmount() / this.menu.injector.getCapacity();
             int color = 0xFFFC84;
             float r = ((color & 16711680) >> 16) / 255f;
             float g = ((color & 65280) >> 8) / 255f;
             float b = ((color & 255) >> 0) / 255f;
             RenderSystem.setShaderColor(r, g, b, 1);
-            this.blit(matrixStack, xYellow, yYellow + (12 - fluidStored), 0, 0, 4, fluidStored);
+            this.blit(matrixStack, xYellow, yYellow + (16 - fluidStored), 0, 0, 4, fluidStored);
         }
         if(whiteFluid.getFluid() != Fluids.EMPTY)
         {
             GUIUtilities.setup(FLUID_GUI);
             int xWhite = x + 126;
-            int yWhite = y + 40;
-            int fluidStored = 12 * whiteFluid.getAmount() / this.menu.injector.getCapacity();
+            int yWhite = y + 32;
+            int fluidStored = 16 * whiteFluid.getAmount() / this.menu.injector.getCapacity();
             int color = 0xD8D8D8;
             float r = ((color & 16711680) >> 16) / 255f;
             float g = ((color & 65280) >> 8) / 255f;
             float b = ((color & 255) >> 0) / 255f;
             RenderSystem.setShaderColor(r, g, b, 1);
-            this.blit(matrixStack, xWhite, yWhite + (12 - fluidStored), 0, 0, 4, fluidStored);
+            this.blit(matrixStack, xWhite, yWhite + (16 - fluidStored), 0, 0, 4, fluidStored);
         }
         RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
     }
