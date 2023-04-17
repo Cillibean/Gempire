@@ -111,7 +111,7 @@ public class ShellTE extends RandomizableContainerBlockEntity implements MenuPro
                         }
 
                 }
-                if (te.ticks > 100) {
+                if (te.ticks > 50) {
                     te.ticks = 0;
                 } else {
                     te.ticks++;
