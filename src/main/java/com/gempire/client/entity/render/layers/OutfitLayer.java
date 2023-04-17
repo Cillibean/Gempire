@@ -33,11 +33,8 @@ public class OutfitLayer<E extends EntityGem, M extends ModelGem<E>> extends Gem
                 if(i == gem.getGemPlacement()) {
                     builder = bufferIn.getBuffer(RenderType.entityTranslucent(new ResourceLocation(gem.getModID() + ":textures/entity/" + this.getName(gem).toLowerCase() + "/outfits/outfit_" + gem.getGemPlacement() + "_0.png")));
                     break;
-                }
-                else if (!gem.getRebelled()){
-                    builder = bufferIn.getBuffer(RenderType.entityTranslucent(new ResourceLocation(gem.getModID() + ":textures/entity/" + this.getName(gem).toLowerCase() + "/outfits/outfit_" + gem.getOutfitVariant() + ".png")));
                 } else {
-                    builder = bufferIn.getBuffer(RenderType.entityTranslucent(new ResourceLocation(gem.getModID() + ":textures/entity/" + this.getName(gem).toLowerCase() + "/outfits/outfit_" + gem.getRebelOutfitVariant() + ".png")));
+                    builder = bufferIn.getBuffer(RenderType.entityTranslucent(new ResourceLocation(gem.getModID() + ":textures/entity/" + this.getName(gem).toLowerCase() + "/outfits/outfit_" + gem.getOutfitVariant() + ".png")));
                 }
             }
         }
