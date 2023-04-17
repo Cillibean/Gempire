@@ -13,6 +13,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.MossBlock;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
@@ -252,6 +253,11 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
                     this.getLevel().playSound(null, this.getBlockPos(), ModSounds.INJECT.get(), SoundSource.AMBIENT, 2f, 1);
                 }
                 GemSeedTE gemSeedTE = (GemSeedTE) this.level.getBlockEntity(seedPos);
+                if (level.getBlockState(crystalPos).getBlock() == ModBlocks.POWER_CRYSTAL_BLOCK.get()) {
+                    gemSeedTE.setTier(1);
+                } else if (level.getBlockState(crystalPos).getBlock() == ModBlocks.POWER_CRYSTAL_BLOCK_TIER_2.get()) {
+                    gemSeedTE.setTier(2);
+                }
                 gemSeedTE.setEssences(essences);
                 gemSeedTE.SetChroma(chroma);
                 gemSeedTE.SetPrimer(primer);

@@ -33,11 +33,12 @@ import net.minecraftforge.registries.RegistryObject;
 import java.util.*;
 
 public class GemFormation {
-    private static final int EXIT_HOLE_LENGTH = 16;
+    private static final int EXIT_HOLE_LENGTH = 12;
     public Level world;
     public BlockPos pos;
     public BlockPos volumeToCheck;
-    public static ArrayList<String> POSSIBLE_GEMS = new ArrayList<>();
+    public static ArrayList<String> POSSIBLE_GEMS_TIER_1 = new ArrayList<>();
+    public static ArrayList<String> POSSIBLE_GEMS_TIER_2 = new ArrayList<>();
     public Block drained_sand, drained_soil, drained_stone, drained_stone_2, banded_drained_stone, drained_ice, drained_log, drained_log_cracked;
     public ItemChroma chroma;
     public Item primer;
@@ -46,13 +47,14 @@ public class GemFormation {
     public int chromaColour;
 
     public int yLevelNeeded;
+    public int tier;
 
     HashMap<String, Float> WEIGHTS_OF_GEMS = new HashMap<>();
 
     //Create an object to store the total weight
     float totalWeight = 0;
 
-    public GemFormation(Level world, BlockPos pos, BlockPos volumeToCheck, ItemChroma chroma, Item primer, String essences, int facing, HashMap<String, Float> weights, float total){
+    public GemFormation(Level world, BlockPos pos, BlockPos volumeToCheck, ItemChroma chroma, Item primer, String essences, int facing, HashMap<String, Float> weights, float total, int tier){
         this.world = world;
         this.pos = pos;
         this.volumeToCheck = volumeToCheck;
@@ -62,6 +64,7 @@ public class GemFormation {
         this.facing = facing;
         this.WEIGHTS_OF_GEMS = weights;
         this.totalWeight = total;
+        this.tier = tier;
     }
 
     public void SpawnGem(){
@@ -110,6 +113,7 @@ public class GemFormation {
                 }
             }
         } else {
+            System.out.println("to evaluate cruxes");
             String gemtoform = this.EvaluateCruxes();
             if (gemtoform == "") {
                 //this.Drain(GemFormation.getBlockPosInVolume(this.world, this.pos, this.volumeToCheck));
@@ -145,6 +149,7 @@ public class GemFormation {
                 e.printStackTrace();
             }
         }
+        System.out.println("placement");
         gem.setGemPlacement(gem.generateGemPlacement());
         gem.setSkinVariant(gem.generateSkinVariant());
         if(gem.setSkinVariantOnInitialSpawn) {
@@ -194,7 +199,12 @@ public class GemFormation {
         DrainEvent event2 = new DrainEvent(blocks);
         MinecraftForge.EVENT_BUS.post(event2);
         //this.Drain(blocks);
-        this.GenerateFacingExitHole();
+        System.out.println("exit hole attempt");
+        if (getClosestExitDirection() == 4) {
+            this.GenerateFacingExitHole();
+        } else {
+            this.GenerateClosestExitHole(getClosestExitDirection());
+        }
     }
 
     public static ArrayList<Block> getBlocksInVolume(Level domhain, BlockPos position, BlockPos volume){
@@ -248,28 +258,56 @@ public class GemFormation {
 
     public String EvaluateCruxes() {
         String returnGem = "";
-        double lowestR = 100000000;
-        String lowestRGem = "";
-        for (String gem : this.POSSIBLE_GEMS) {
-            double r = Math.random() * totalWeight;
-            r -= WEIGHTS_OF_GEMS.get(gem);
-            if (WEIGHTS_OF_GEMS.get(gem) < 12) {
-                r = 1000000;
-            }
-            if (r < lowestR) {
-                lowestR = r;
-                lowestRGem = gem;
-            }
-            returnGem = gem;
-            if (r > 0 && gem == this.POSSIBLE_GEMS.get(this.POSSIBLE_GEMS.size() - 1)){
-                returnGem = lowestRGem;
-                break;
-            }
-            if (r <= 0) {
+        System.out.println("test tier");
+        if (tier == 1) {
+            double lowestR = 100000000;
+            String lowestRGem = "";
+            System.out.println("check out of possible gems");
+            for (String gem : POSSIBLE_GEMS_TIER_1) {
+                double r = Math.random() * totalWeight;
+                r -= WEIGHTS_OF_GEMS.get(gem);
+                if (WEIGHTS_OF_GEMS.get(gem) < 12) {
+                    r = 1000000;
+                }
+                if (r < lowestR) {
+                    lowestR = r;
+                    lowestRGem = gem;
+                }
                 returnGem = gem;
-                break;
+                if (r > 0 && gem == POSSIBLE_GEMS_TIER_1.get(POSSIBLE_GEMS_TIER_1.size() - 1)) {
+                    returnGem = lowestRGem;
+                    break;
+                }
+                if (r <= 0) {
+                    returnGem = gem;
+                    break;
+                }
+            }
+        } else if (tier == 2) {
+            double lowestR = 100000000;
+            String lowestRGem = "";
+            for (String gem : POSSIBLE_GEMS_TIER_2) {
+                double r = Math.random() * totalWeight;
+                r -= WEIGHTS_OF_GEMS.get(gem);
+                if (WEIGHTS_OF_GEMS.get(gem) < 12) {
+                    r = 1000000;
+                }
+                if (r < lowestR) {
+                    lowestR = r;
+                    lowestRGem = gem;
+                }
+                returnGem = gem;
+                if (r > 0 && gem == POSSIBLE_GEMS_TIER_2.get(POSSIBLE_GEMS_TIER_2.size() - 1)) {
+                    returnGem = lowestRGem;
+                    break;
+                }
+                if (r <= 0) {
+                    returnGem = gem;
+                    break;
+                }
             }
         }
+        System.out.println(returnGem);
         //OUTPUT: A gem
         return returnGem;
     }
@@ -309,6 +347,59 @@ public class GemFormation {
                 break;
             }
         }
+    }
+
+    public void GenerateClosestExitHole(int facing){
+        System.out.println("This block is facing: " + facing);
+        BlockPos direction = GemFormation.DirectionFromFacing(facing);
+        BlockPos currentPos = new BlockPos(this.pos);
+        boolean flag = false;
+        for(int i = 0; i < this.EXIT_HOLE_LENGTH; i++){
+            if(!flag) {
+                if(this.world.getBlockState(currentPos).getBlock() instanceof AirBlock
+                        && this.world.getBlockState(currentPos.above()).getBlock() instanceof AirBlock){
+                    flag = true;
+                }
+                this.world.destroyBlock(currentPos, false);
+                this.world.destroyBlock(currentPos.above(), false);
+                this.world.destroyBlock(currentPos.above().above(), false);
+                currentPos = currentPos.offset(direction);
+            }
+            else{
+                break;
+            }
+        }
+    }
+
+    public int getClosestExitDirection(){
+        BlockPos currentPos = new BlockPos(this.pos);
+        boolean flag = false;
+        int direction = 4;
+        for (int i = 0; i < EXIT_HOLE_LENGTH; i++){
+            if(!flag) {
+                if (this.world.getBlockState(currentPos.north(i)).getBlock() instanceof AirBlock) {
+                    flag = true;
+                    direction = 1;
+                    System.out.println("north");
+                } else if (this.world.getBlockState(currentPos.south(i)).getBlock() instanceof AirBlock) {
+                    flag = true;
+                    System.out.println("south");
+                    direction = 3;
+
+                } else if (this.world.getBlockState(currentPos.east(i)).getBlock() instanceof AirBlock) {
+                    flag = true;
+                    System.out.println("east");
+                    direction = 0;
+
+                } else if (this.world.getBlockState(currentPos.west(i)).getBlock() instanceof AirBlock) {
+                    flag = true;
+                    System.out.println("west");
+                    direction = 2;
+
+                }
+            }
+        }
+        return direction;
     }
 
 
@@ -429,15 +520,12 @@ public class GemFormation {
             BlockState block = this.world.getBlockState(pos);
             if(block.getBlock() == ModBlocks.GEM_SEED_BLOCK.get() ||
                     block.getBlock() == ModBlocks.DRILL_BLOCK.get() || block.getBlock() == ModBlocks.TANK_BLOCK.get() ||
-                    block.getBlock() == ModBlocks.POWER_CRYSTAL_BLOCK.get()){
+                    block.getBlock() == ModBlocks.POWER_CRYSTAL_BLOCK.get() || block.getBlock() == ModBlocks.POWER_CRYSTAL_BLOCK_TIER_2.get()){
                 continue;
             }
             if(block == Blocks.DIRT.defaultBlockState() || block == Blocks.GRASS_BLOCK.defaultBlockState() || block == Blocks.DIRT_PATH.defaultBlockState()
                     || block == Blocks.GRAVEL.defaultBlockState()){
                 this.world.setBlockAndUpdate(pos, this.drained_soil.defaultBlockState());
-            }
-            else if(block == Blocks.SAND.defaultBlockState() || block == Blocks.RED_SAND.defaultBlockState() || block == Blocks.SOUL_SAND.defaultBlockState()){
-                this.world.setBlockAndUpdate(pos, this.drained_sand.defaultBlockState());
             }
             else if(block == Blocks.SAND.defaultBlockState() || block == Blocks.RED_SAND.defaultBlockState() || block == Blocks.SOUL_SAND.defaultBlockState()){
                 this.world.setBlockAndUpdate(pos, this.drained_sand.defaultBlockState());

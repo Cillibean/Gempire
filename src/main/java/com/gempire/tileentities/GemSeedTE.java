@@ -35,8 +35,7 @@ public class GemSeedTE extends BlockEntity {
     boolean spawned = false;
     public int ticks = 0;
     public int stage = 0;
-    public static final int STAGE_LIFETIME = 60;
-    public static final int STAGES = 3;
+    public int tier;
     public static final int DRAIN_SIZE = 11;
     public ItemChroma chroma;
 
@@ -61,19 +60,19 @@ public class GemSeedTE extends BlockEntity {
 
     public GemSeedTE(BlockPos pos, BlockState state) {
         super(ModTE.GEM_SEED_TE.get(), pos, state);
-        for(int i = 0; i < GemFormation.POSSIBLE_GEMS.size(); i++){
-            this.TEMPORARY_WEIGHTS.add(i, new ArrayList<Float>());
-        }
+            for (int i = 0; i < GemFormation.POSSIBLE_GEMS_TIER_1.size(); i++) {
+                this.TEMPORARY_WEIGHTS.add(i, new ArrayList<Float>());
+            }
     }
 
     public static <T extends BlockEntity> void tick(Level level, BlockPos pos, BlockState state, T be) {
-        GemSeedTE te = (GemSeedTE)be;
+        GemSeedTE te = (GemSeedTE) be;
         //System.out.println("Gem List is of size: " + GemFormation.POSSIBLE_GEMS.size());
-        if(!te.checked){
+        if (!te.checked) {
             te.ScanPositions(level, te.getBlockPos(), new BlockPos(DRAIN_SIZE, DRAIN_SIZE, DRAIN_SIZE));
             te.checked = true;
         }
-        if(te.ticks % 8 == 0) {
+        if (te.ticks % 1 == 0) {
             if (!te.spawned && te.checked) {
                 if (te.IDS.size() > 0) {
                     int rando = ThreadLocalRandom.current().nextInt(te.IDS.size());
@@ -82,14 +81,28 @@ public class GemSeedTE extends BlockEntity {
                     te.setChanged();
                 } else {
                     te.spawned = true;
-                    for (int i = 0; i < GemFormation.POSSIBLE_GEMS.size(); i++) {
-                        float weight = 0;
-                        for (int n = 0; n < te.TEMPORARY_WEIGHTS.get(i).size(); n++) {
-                            weight += te.TEMPORARY_WEIGHTS.get(i).get(n);
+                    System.out.println("temporary weights shit");
+                    if (te.tier == 1) {
+                        for (int i = 0; i < GemFormation.POSSIBLE_GEMS_TIER_1.size(); i++) {
+                            te.TEMPORARY_WEIGHTS.add(i, new ArrayList<Float>());
+                            float weight = 0;
+                            for (int n = 0; n < te.TEMPORARY_WEIGHTS.get(i).size(); n++) {
+                                weight += te.TEMPORARY_WEIGHTS.get(i).get(n);
+                            }
+                            te.WEIGHTS_OF_GEMS.put(GemFormation.POSSIBLE_GEMS_TIER_1.get(i), weight);
                         }
-                        te.WEIGHTS_OF_GEMS.put(GemFormation.POSSIBLE_GEMS.get(i), weight);
+                    } else if (te.tier == 2) {
+                        for (int i = 0; i < GemFormation.POSSIBLE_GEMS_TIER_2.size(); i++) {
+                            te.TEMPORARY_WEIGHTS.add(i, new ArrayList<Float>());
+                            float weight = 0;
+                            for (int n = 0; n < te.TEMPORARY_WEIGHTS.get(i).size(); n++) {
+                                weight += te.TEMPORARY_WEIGHTS.get(i).get(n);
+                            }
+                            te.WEIGHTS_OF_GEMS.put(GemFormation.POSSIBLE_GEMS_TIER_2.get(i), weight);
+                        }
                     }
-                    GemFormation form = new GemFormation(te.level, te.getBlockPos(), new BlockPos(GemSeedTE.DRAIN_SIZE, GemSeedTE.DRAIN_SIZE, GemSeedTE.DRAIN_SIZE), te.chroma, te.primer, te.essences, te.facing, te.WEIGHTS_OF_GEMS, te.totalWeight);
+                    GemFormation form = new GemFormation(te.level, te.getBlockPos(), new BlockPos(GemSeedTE.DRAIN_SIZE, GemSeedTE.DRAIN_SIZE, GemSeedTE.DRAIN_SIZE), te.chroma, te.primer, te.essences, te.facing, te.WEIGHTS_OF_GEMS, te.totalWeight, te.tier);
+                    System.out.println("spawn gem attempt");
                     form.SpawnGem();
                     level.sendBlockUpdated(te.getBlockPos(), te.getBlockState(), te.getBlockState(), 2);
                     te.setChanged();
@@ -110,7 +123,7 @@ public class GemSeedTE extends BlockEntity {
                     BlockPos block = position.offset(new BlockPos(x, y, z));
                     if (domhain.getBlockState(block).getBlock() instanceof IFluidBlock || domhain.getBlockState(block).getBlock() instanceof AirBlock || level.isOutsideBuildHeight(block)) {
                     } else {
-                        if(ThreadLocalRandom.current().nextInt(10) > 3) {
+                        if (ThreadLocalRandom.current().nextInt(10) > 3) {
                             this.POSITIONS.put(id, block);
                             this.IDS.add(id);
                             id++;
@@ -126,116 +139,126 @@ public class GemSeedTE extends BlockEntity {
         float BLOCK_TEMPERATURE = this.level.getBiome(this.getBlockPos()).get().getBaseTemperature();
         this.SetDrainedStoneColor(BLOCK_TEMPERATURE);
         Block block = this.level.getBlockState(blockPos).getBlock();
-        if(block instanceof DrainedBlock) return;
-        for (int i = 0; i < GemFormation.POSSIBLE_GEMS.size(); i++) {
-            String gem = GemFormation.POSSIBLE_GEMS.get(i);
-            float gemWeight = 0;
-            if (GEM_CONDITIONS.get(gem) != null) {
-                GemConditions conditions = GEM_CONDITIONS.get(gem);
-                boolean weighThisGem = false;
-                //Do some math to multiply the gem weight by the inverse of the difference in biome temperature to preferred temperature
-                float temperatureDifference = 0;
-                if (BLOCK_TEMPERATURE >= conditions.temperatureMin) {
-                    if (BLOCK_TEMPERATURE <= conditions.temperatureMax) {
-                        temperatureDifference = 0;
-                    } else {
-                        temperatureDifference = conditions.temperatureMax - BLOCK_TEMPERATURE == 0 ? 1 : Math.abs(conditions.temperatureMax - BLOCK_TEMPERATURE);
-                    }
-                } else {
-                    temperatureDifference = conditions.temperatureMin - BLOCK_TEMPERATURE == 0 ? 1 : Math.abs(conditions.temperatureMin - BLOCK_TEMPERATURE);
-                }
-                int essenceCount = 0;
-                String[] indEssencesInj = this.essences.split("-");
-                String[] indEssencesCond = conditions.essences.split("-");
-                for(int n = 0; n < indEssencesInj.length; n++){
-                    String essJ = indEssencesInj[n];
-                    for(int j = 0; j < indEssencesCond.length; j++){
-                        String essC = indEssencesCond[j];
-                        if(essJ.equalsIgnoreCase(essC)){
-                            essenceCount++;
-                        }
-                    }
-                }
-                if(essenceCount == indEssencesCond.length){
-                    weighThisGem = true;
-                }
-                if(weighThisGem) {
-                    for (Crux crux : GEM_CONDITIONS.get(gem).cruxes) {
-                        //Then for every crux, calculate the total weight of crux that matches every block in the volume for every gem
-                        //Example: if there are three stone in the volume, the total weight will be 3 stone times however many gems there are that have stone as a crux, and so forth
-                        if (block != crux.block) {
-                            continue;
-                        } else {
-                            totalWeight += 1;
-                            totalWeight += crux.weight * GEM_CONDITIONS.get(gem).rarity;
-                            gemWeight += 1 * (1 - temperatureDifference);
-                            gemWeight += crux.weight * (1 - temperatureDifference);
-                            gemWeight *= GEM_CONDITIONS.get(gem).rarity;
-                        }
-                    }
-                }
-                if(this.primer == conditions.primer && conditions.primer != Items.AIR && this.primer != Items.AIR){
-                    gemWeight *= 3;
-                }
-                //Once the total weight has been obtained, store the individual weights of every gem in a hashmap.
-                if(weighThisGem) {
-                    TEMPORARY_WEIGHTS.get(i).add(gemWeight);
-                }
-                else {
-                    TEMPORARY_WEIGHTS.get(i).add(0f);
-                }
+        if (block instanceof DrainedBlock) return;
+        // TODO: fix it
+        if (tier == 1) {
+            for (int i = 0; i < GemFormation.POSSIBLE_GEMS_TIER_1.size(); i++) {
+                String gem = GemFormation.POSSIBLE_GEMS_TIER_1.get(i);
+                float gemWeight = 0;
+                weightStuff(gem, blockPos, gemWeight, i);
             }
-            else{
-                TEMPORARY_WEIGHTS.get(i).add(0f);
+        } else if (tier == 2) {
+            for (int i = 0; i < GemFormation.POSSIBLE_GEMS_TIER_2.size(); i++) {
+                String gem = GemFormation.POSSIBLE_GEMS_TIER_2.get(i);
+                float gemWeight = 0;
+                weightStuff(gem, blockPos, gemWeight, i);
             }
         }
-        if(!(block instanceof AirBlock) &&
+
+        if (!(block instanceof AirBlock) &&
                 !(block instanceof SlabBlock) &&
                 !(block instanceof BushBlock) &&
-                !(block instanceof SnowLayerBlock)){
-            if(block == ModBlocks.GEM_SEED_BLOCK.get() ||
+                !(block instanceof SnowLayerBlock)) {
+            if (block == ModBlocks.GEM_SEED_BLOCK.get() ||
                     block == ModBlocks.DRILL_BLOCK.get() || block == ModBlocks.TANK_BLOCK.get() ||
-                    block == ModBlocks.POWER_CRYSTAL_BLOCK.get()){
+                    block == ModBlocks.POWER_CRYSTAL_BLOCK.get()) {
 
-            }
-            else if(block == Blocks.DIRT || block == Blocks.GRASS_BLOCK || block == Blocks.DIRT_PATH
-                    || block == Blocks.GRAVEL){
+            } else if (block == Blocks.DIRT || block == Blocks.GRASS_BLOCK || block == Blocks.DIRT_PATH
+                    || block == Blocks.GRAVEL) {
                 this.level.setBlockAndUpdate(blockPos, this.drained_soil.defaultBlockState());
-            }
-            else if(block == Blocks.SAND || block == Blocks.RED_SAND || block == Blocks.SOUL_SAND){
+            } else if (block == Blocks.SAND || block == Blocks.RED_SAND || block == Blocks.SOUL_SAND) {
                 this.level.setBlockAndUpdate(blockPos, this.drained_sand.defaultBlockState());
-            }
-            else if(block == Blocks.OAK_LOG || block == Blocks.STRIPPED_OAK_LOG || block == Blocks.STRIPPED_OAK_WOOD || block == Blocks.OAK_WOOD
-                    || block == Blocks.SPRUCE_LOG || block == Blocks.STRIPPED_SPRUCE_LOG || block == Blocks.STRIPPED_SPRUCE_WOOD|| block == Blocks.SPRUCE_WOOD
-                    || block == Blocks.BIRCH_LOG|| block == Blocks.STRIPPED_BIRCH_LOG || block == Blocks.STRIPPED_BIRCH_WOOD || block == Blocks.BIRCH_WOOD
+            } else if (block == Blocks.OAK_LOG || block == Blocks.STRIPPED_OAK_LOG || block == Blocks.STRIPPED_OAK_WOOD || block == Blocks.OAK_WOOD
+                    || block == Blocks.SPRUCE_LOG || block == Blocks.STRIPPED_SPRUCE_LOG || block == Blocks.STRIPPED_SPRUCE_WOOD || block == Blocks.SPRUCE_WOOD
+                    || block == Blocks.BIRCH_LOG || block == Blocks.STRIPPED_BIRCH_LOG || block == Blocks.STRIPPED_BIRCH_WOOD || block == Blocks.BIRCH_WOOD
                     || block == Blocks.JUNGLE_LOG || block == Blocks.STRIPPED_JUNGLE_LOG || block == Blocks.STRIPPED_JUNGLE_WOOD || block == Blocks.JUNGLE_WOOD
                     || block == Blocks.ACACIA_LOG || block == Blocks.STRIPPED_ACACIA_LOG || block == Blocks.STRIPPED_ACACIA_WOOD || block == Blocks.ACACIA_WOOD
                     || block == Blocks.DARK_OAK_LOG || block == Blocks.STRIPPED_DARK_OAK_LOG || block == Blocks.STRIPPED_DARK_OAK_WOOD || block == Blocks.DARK_OAK_WOOD) {
                 this.level.setBlockAndUpdate(blockPos, this.drained_log.defaultBlockState());
-            }
-            else if(block == Blocks.CRIMSON_STEM || block == Blocks.WARPED_STEM || block == Blocks.STRIPPED_CRIMSON_STEM || block == Blocks.STRIPPED_WARPED_STEM
+            } else if (block == Blocks.CRIMSON_STEM || block == Blocks.WARPED_STEM || block == Blocks.STRIPPED_CRIMSON_STEM || block == Blocks.STRIPPED_WARPED_STEM
                     || block == Blocks.CRIMSON_HYPHAE || block == Blocks.WARPED_HYPHAE || block == Blocks.STRIPPED_CRIMSON_HYPHAE || block == Blocks.STRIPPED_WARPED_HYPHAE) {
                 this.level.setBlockAndUpdate(blockPos, this.drained_log_cracked.defaultBlockState());
-            }
-            else if(block == Blocks.BLUE_ICE || block == Blocks.PACKED_ICE) {
+            } else if (block == Blocks.BLUE_ICE || block == Blocks.PACKED_ICE) {
                 this.level.setBlockAndUpdate(blockPos, this.drained_ice.defaultBlockState());
-            }
-            else {
-                if(blockPos.getY() < 80) {
+            } else {
+                if (blockPos.getY() < 80) {
                     this.level.setBlockAndUpdate(blockPos, this.drained_stone.defaultBlockState());
-                }
-                else{
+                } else {
                     this.level.setBlockAndUpdate(blockPos, this.drained_stone_2.defaultBlockState());
-                    if(blockPos.getY() % 6 == 0){
+                    if (blockPos.getY() % 6 == 0) {
                         this.level.setBlockAndUpdate(blockPos, this.banded_drained_stone.defaultBlockState());
                     }
                 }
-                if(blockPos.getY() == 80){
+                if (blockPos.getY() == 80) {
                     this.level.setBlockAndUpdate(blockPos, this.banded_drained_stone.defaultBlockState());
                 }
             }
         }
     }
+
+    public void weightStuff(String gem, BlockPos blockPos, float gemWeight, int i) {
+        if (GEM_CONDITIONS.get(gem) != null) {
+            this.GEM_CONDITIONS = ModEntities.CRUXTOGEM;
+            float BLOCK_TEMPERATURE = this.level.getBiome(this.getBlockPos()).get().getBaseTemperature();
+            this.SetDrainedStoneColor(BLOCK_TEMPERATURE);
+            Block block = this.level.getBlockState(blockPos).getBlock();
+            GemConditions conditions = GEM_CONDITIONS.get(gem);
+            boolean weighThisGem = false;
+            //Do some math to multiply the gem weight by the inverse of the difference in biome temperature to preferred temperature
+            float temperatureDifference = 0;
+            if (BLOCK_TEMPERATURE >= conditions.temperatureMin) {
+                if (BLOCK_TEMPERATURE <= conditions.temperatureMax) {
+                    temperatureDifference = 0;
+                } else {
+                    temperatureDifference = conditions.temperatureMax - BLOCK_TEMPERATURE == 0 ? 1 : Math.abs(conditions.temperatureMax - BLOCK_TEMPERATURE);
+                }
+            } else {
+                temperatureDifference = conditions.temperatureMin - BLOCK_TEMPERATURE == 0 ? 1 : Math.abs(conditions.temperatureMin - BLOCK_TEMPERATURE);
+            }
+            int essenceCount = 0;
+            String[] indEssencesInj = this.essences.split("-");
+            String[] indEssencesCond = conditions.essences.split("-");
+            for(int n = 0; n < indEssencesInj.length; n++){
+                String essJ = indEssencesInj[n];
+                for(int j = 0; j < indEssencesCond.length; j++){
+                    String essC = indEssencesCond[j];
+                    if(essJ.equalsIgnoreCase(essC)){
+                        essenceCount++;
+                    }
+                }
+            }
+            if (essenceCount == indEssencesCond.length) {
+                weighThisGem = true;
+            }
+            if (weighThisGem) {
+                for (Crux crux : GEM_CONDITIONS.get(gem).cruxes) {
+                    //Then for every crux, calculate the total weight of crux that matches every block in the volume for every gem
+                    //Example: if there are three stone in the volume, the total weight will be 3 stone times however many gems there are that have stone as a crux, and so forth
+                    if (block != crux.block) {
+                        continue;
+                    } else {
+                        totalWeight += 1;
+                        totalWeight += crux.weight * GEM_CONDITIONS.get(gem).rarity;
+                        gemWeight += 1 * (1 - temperatureDifference);
+                        gemWeight += crux.weight * (1 - temperatureDifference);
+                        gemWeight *= GEM_CONDITIONS.get(gem).rarity;
+                    }
+                }
+            }
+            if (this.primer == conditions.primer && conditions.primer != Items.AIR) {
+                gemWeight *= 3;
+            }
+            //Once the total weight has been obtained, store the individual weights of every gem in a hashmap.
+            if (weighThisGem) {
+                TEMPORARY_WEIGHTS.get(i).add(gemWeight);
+            } else {
+                TEMPORARY_WEIGHTS.get(i).add(0f);
+            }
+        } else {
+            TEMPORARY_WEIGHTS.get(i).add(0f);
+        }
+    }
+
 
     public void SetDrainedStoneColor(float temperature){
         if(temperature > .1f && temperature <= .5F){
@@ -321,6 +344,17 @@ public class GemSeedTE extends BlockEntity {
         return this.essences;
     }
 
+    public void setTier(int tier){
+        this.tier = tier;
+        this.level.sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), 2);
+        this.setChanged();
+    }
+
+    public int getTier(){
+        return this.tier;
+    }
+
+
     public void setFacing(int facing){
         this.facing = facing;
         this.level.sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), 2);
@@ -341,6 +375,7 @@ public class GemSeedTE extends BlockEntity {
         compound.putString("essences", this.essences);
         compound.putInt("facing", this.facing);
         compound.putBoolean("checked", this.checked);
+        compound.putInt("tier", this.tier);
 
         //SAVING CRUX STUFF
         compound.putFloat("totalWeight", this.totalWeight);
@@ -349,13 +384,24 @@ public class GemSeedTE extends BlockEntity {
         compound.putIntArray("IDS", this.IDS);
 
         //TEMPORARY_WEIGHTS
-        if(this.TEMPORARY_WEIGHTS.size() > 0)for(int i = 0; i < GemFormation.POSSIBLE_GEMS.size(); i++){
-            float weight = 0;
-            System.out.println("Gem List Cycle: " + i);
-            for(int n = 0; n < this.TEMPORARY_WEIGHTS.get(i).size(); n++){
-                weight += this.TEMPORARY_WEIGHTS.get(i).get(n);
+        if (tier == 1) {
+            if(this.TEMPORARY_WEIGHTS.size() > 0)for(int i = 0; i < GemFormation.POSSIBLE_GEMS_TIER_1.size(); i++){
+                float weight = 0;
+                System.out.println("Gem List Cycle: " + i);
+                for(int n = 0; n < this.TEMPORARY_WEIGHTS.get(i).size(); n++){
+                    weight += this.TEMPORARY_WEIGHTS.get(i).get(n);
+                }
+                compound.putFloat(GemFormation.POSSIBLE_GEMS_TIER_1.get(i) + "_weight", weight);
             }
-            compound.putFloat(GemFormation.POSSIBLE_GEMS.get(i) + "_weight", weight);
+        } else if (tier == 2) {
+            if(this.TEMPORARY_WEIGHTS.size() > 0)for(int i = 0; i < GemFormation.POSSIBLE_GEMS_TIER_2.size(); i++){
+                float weight = 0;
+                System.out.println("Gem List Cycle: " + i);
+                for(int n = 0; n < this.TEMPORARY_WEIGHTS.get(i).size(); n++){
+                    weight += this.TEMPORARY_WEIGHTS.get(i).get(n);
+                }
+                compound.putFloat(GemFormation.POSSIBLE_GEMS_TIER_2.get(i) + "_weight", weight);
+            }
         }
 
         //POSITIONS
@@ -406,9 +452,16 @@ public class GemSeedTE extends BlockEntity {
     }
 
     public void setTEMPORARY_WEIGHTS(CompoundTag nbt){
-        if(this.TEMPORARY_WEIGHTS.size() == GemFormation.POSSIBLE_GEMS.size())for(int i = 0; i < GemFormation.POSSIBLE_GEMS.size(); i++){
-            float weight = nbt.getFloat(GemFormation.POSSIBLE_GEMS.get(i) + "_weight");
-            this.TEMPORARY_WEIGHTS.get(i).add(weight);
+        if (tier == 1) {
+            if(this.TEMPORARY_WEIGHTS.size() == GemFormation.POSSIBLE_GEMS_TIER_1.size())for(int i = 0; i < GemFormation.POSSIBLE_GEMS_TIER_1.size(); i++){
+                float weight = nbt.getFloat(GemFormation.POSSIBLE_GEMS_TIER_1.get(i) + "_weight");
+                this.TEMPORARY_WEIGHTS.get(i).add(weight);
+            }
+        } else if (tier == 2) {
+            if(this.TEMPORARY_WEIGHTS.size() == GemFormation.POSSIBLE_GEMS_TIER_2.size())for(int i = 0; i < GemFormation.POSSIBLE_GEMS_TIER_2.size(); i++){
+                float weight = nbt.getFloat(GemFormation.POSSIBLE_GEMS_TIER_2.get(i) + "_weight");
+                this.TEMPORARY_WEIGHTS.get(i).add(weight);
+            }
         }
     }
 
@@ -470,6 +523,7 @@ public class GemSeedTE extends BlockEntity {
         String fluids = nbt.getString("essences");
         this.essences = fluids;
         this.facing = nbt.getInt("facing");
+        this.tier = nbt.getInt("tier");
         this.checked = nbt.getBoolean("checked");
 
         //LOADING CRUX STUFF
@@ -490,6 +544,7 @@ public class GemSeedTE extends BlockEntity {
         compound.putString("essences", this.essences);
         compound.putInt("facing", this.facing);
         compound.putBoolean("checked", this.checked);
+        compound.putInt("tier", this.tier);
 
         //SAVING CRUX STUFF
         compound.putFloat("totalWeight", this.totalWeight);
@@ -498,13 +553,24 @@ public class GemSeedTE extends BlockEntity {
         compound.putIntArray("IDS", this.IDS);
 
         //TEMPORARY_WEIGHTS
-        if(this.TEMPORARY_WEIGHTS.size() > 0)for(int i = 0; i < GemFormation.POSSIBLE_GEMS.size(); i++){
-            float weight = 0;
-            System.out.println("Gem List Cycle: " + i);
-            for(int n = 0; n < this.TEMPORARY_WEIGHTS.get(i).size(); n++){
-                weight += this.TEMPORARY_WEIGHTS.get(i).get(n);
+        if (tier == 1) {
+            if(this.TEMPORARY_WEIGHTS.size() > 0)for(int i = 0; i < GemFormation.POSSIBLE_GEMS_TIER_1.size(); i++){
+                float weight = 0;
+                System.out.println("Gem List Cycle: " + i);
+                for(int n = 0; n < this.TEMPORARY_WEIGHTS.get(i).size(); n++){
+                    weight += this.TEMPORARY_WEIGHTS.get(i).get(n);
+                }
+                compound.putFloat(GemFormation.POSSIBLE_GEMS_TIER_1.get(i) + "_weight", weight);
             }
-            compound.putFloat(GemFormation.POSSIBLE_GEMS.get(i) + "_weight", weight);
+        } else if (tier == 2) {
+            if(this.TEMPORARY_WEIGHTS.size() > 0)for(int i = 0; i < GemFormation.POSSIBLE_GEMS_TIER_2.size(); i++){
+                float weight = 0;
+                System.out.println("Gem List Cycle: " + i);
+                for(int n = 0; n < this.TEMPORARY_WEIGHTS.get(i).size(); n++){
+                    weight += this.TEMPORARY_WEIGHTS.get(i).get(n);
+                }
+                compound.putFloat(GemFormation.POSSIBLE_GEMS_TIER_2.get(i) + "_weight", weight);
+            }
         }
 
         //POSITIONS
