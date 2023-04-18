@@ -44,6 +44,8 @@ public class AbilityCryokinesis extends Ability implements IRangedAbility, IViol
         this.holder.playSound(SoundEvents.SNOW_GOLEM_SHOOT, 1.0F, 0.4F / (this.holder.getRandom().nextFloat() * 0.4F + 0.8F));
         this.holder.level.addFreshEntity(snowballentity);
 
+        this.holder.enemy = target;
+        this.holder.enemyDying = true;
 
         if(this.holder.getRandom().nextInt(5) == 0) {
             if(!(target.level.getBlockState(target.blockPosition().below()).getBlock() instanceof AirBlock) &&
