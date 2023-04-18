@@ -71,7 +71,7 @@ public class EntityBismuth extends EntityGem {
                 GemPlacements.FOREHEAD, GemPlacements.LEFT_EYE, GemPlacements.RIGHT_EYE, GemPlacements.NOSE, GemPlacements.MOUTH, GemPlacements.LEFT_CHEEK, GemPlacements.RIGHT_CHEEK, GemPlacements.CHEST, GemPlacements.BACK, GemPlacements.BELLY,
                 GemPlacements.LEFT_SHOULDER, GemPlacements.RIGHT_SHOULDER, GemPlacements.LEFT_ARM, GemPlacements.RIGHT_ARM, GemPlacements.LEFT_HAND, GemPlacements.RIGHT_HAND, GemPlacements.LEFT_PALM, GemPlacements.RIGHT_PALM, GemPlacements.LEFT_THIGH, GemPlacements.RIGHT_THIGH,
                 GemPlacements.LEFT_KNEE, GemPlacements.RIGHT_KNEE, GemPlacements.LEFT_ANKLE, GemPlacements.RIGHT_ANKLE };
-    };
+    }
 
     @Override
     public int generateHairVariant() {
@@ -105,7 +105,7 @@ public class EntityBismuth extends EntityGem {
     }
     public Abilities[] definiteAbilities(){
         return new Abilities[]{
-                Abilities.REFINERY// ,Abilities.BUILDER
+                Abilities.REFINERY
         };
     }
 

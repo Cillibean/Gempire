@@ -101,12 +101,12 @@ public class EntityEmerald extends EntityGem {
 
     public Abilities[] possibleAbilities(){
         return new Abilities[]{
-                Abilities.NO_ABILITY, Abilities.TANK, Abilities.BEEFCAKE, Abilities.POWERHOUSE, Abilities.UNHINGED, Abilities.NEGOTIATOR//, Abilities.ELECTROKINESIS
+                Abilities.NO_ABILITY, Abilities.TANK, Abilities.BEEFCAKE, Abilities.POWERHOUSE, Abilities.UNHINGED
         };
     }
     public Abilities[] definiteAbilities(){
         return new Abilities[]{
-                 Abilities.RECALL
+                 Abilities.RECALL, Abilities.NEGOTIATOR, Abilities.ELECTROKINESIS
         };
     }
 
