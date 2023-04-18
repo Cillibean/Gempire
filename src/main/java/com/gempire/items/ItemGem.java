@@ -50,7 +50,6 @@ public class ItemGem extends Item {
     public String ID = "";
 
     private static final String TAG_CRACKED = "Cracked";
-
     int coundownMax = 600;
     int countdown = 600;
 
@@ -129,10 +128,12 @@ public class ItemGem extends Item {
                 }
             } else {
                 if (isAssigned) {
-                    playerIn.sendSystemMessage(Component.translatable("This Gem is no longer assigned to " + assigned_gem.getName().getString() + " " + assigned_gem.getFacetAndCut()));                    livingEntityHit = false;
+                    playerIn.sendSystemMessage(Component.translatable("This Gem is no longer assigned to " + assigned_gem.getName().getString() + " " + assigned_gem.getFacetAndCut()));
+                    livingEntityHit = false;
                     assigned_gem = null;
                 } else {
-                    playerIn.sendSystemMessage(Component.translatable("This Gem was assigned to " + gemToAssign.getName().getString() + " " + gemToAssign.getFacetAndCut()));                    livingEntityHit = false;
+                    playerIn.sendSystemMessage(Component.translatable("This Gem was assigned to " + gemToAssign.getName().getString() + " " + gemToAssign.getFacetAndCut()));
+                    livingEntityHit = false;
                     System.out.println("ToAssign to assigned");
                     assigned_gem = gemToAssign;
                     System.out.println(assigned_gem);
