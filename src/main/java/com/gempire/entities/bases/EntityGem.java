@@ -2,6 +2,7 @@ package com.gempire.entities.bases;
 
 import com.gempire.Gempire;
 import com.gempire.container.GemUIContainer;
+import com.gempire.entities.abilities.AbilityAbundance;
 import com.gempire.entities.abilities.AbilityRecall;
 import com.gempire.entities.abilities.AbilityVehicle;
 import com.gempire.entities.abilities.AbilityZilch;
@@ -26,6 +27,7 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -154,6 +156,8 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
 
     public ItemEntity spawnGem = null;
     public boolean chromaColourRequired;
+    public boolean enemyDying;
+    public LivingEntity enemy;
 
     public EntityGem(EntityType<? extends PathfinderMob> type, Level worldIn) {
         super(type, worldIn);
@@ -557,12 +561,25 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             if (abilityTicks > 0) {
                 abilityTicks--;
             }
+            if (enemyDying) {
+                System.out.println(enemy.getHealth());
+                if (enemy.getHealth() <= 0) {
+                    for(Ability ability : this.getAbilityPowers()){
+                        if(ability instanceof AbilityAbundance){
+                            dropXP(enemy);
+                        }
+                    }
+                    dropXP(enemy);
+                    enemy = null;
+                    enemyDying = false;
+                }
+            }
         }
         super.tick();
     }
 
     private void checkRebel() {
-        Double rebel = (0 + random.nextDouble() * 500);
+        double rebel = (0 + random.nextDouble() * 500);
         if (rebel < rebelPoints) {
             rebel();
         }
@@ -692,24 +709,23 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                 setAssignedId(getAssignedGem().getUUID());
             }
             System.out.println(assignedGem);
-            if (getAssignedGem() != null ? this.getMovementType() < 3 : this.getMovementType() <2) {
+            if (getAssignedGem() != null ? this.getMovementType() < 3 : this.getMovementType() < 2) {
                 this.addMovementType(1);
                 switch (this.getMovementType()) {
-                    case 1 -> player.sendSystemMessage(Component.translatable(this.getCapitalGemName() + " will wander around"));
-                    case 2 -> player.sendSystemMessage(Component.translatable(this.getCapitalGemName() + " will now follow you"));
-                    case 3 -> player.sendSystemMessage(Component.translatable(this.getCapitalGemName() + " will now follow " + assignedGem.getCapitalGemName() + " " + assignedGem.getFacetAndCut()));
-                    default -> player.sendSystemMessage(Component.translatable(this.getCapitalGemName() + " will now stay put"));
+                    case 1 -> player.sendSystemMessage(Component.translatable(this.getName().getString() + " will wander around"));
+                    case 2 -> player.sendSystemMessage(Component.translatable(this.getName().getString() + " will now follow you"));
+                    case 3 -> player.sendSystemMessage(Component.translatable(this.getName().getString() + " will now follow " + assignedGem.getName().getString() + " " + assignedGem.getFacetAndCut()));
+                    default -> player.sendSystemMessage(Component.translatable(this.getName().getString() + " will now stay put"));
                 }
-            } else if (getAssignedGem() != null && getAssignedGem().isAlive() ? this.getMovementType() == 3 : this.getMovementType() == 2) {
+            } else if (getAssignedGem() != null ? this.getMovementType() == 3 : this.getMovementType() == 2) {
                 this.setMovementType((byte) 0);
                 player.sendSystemMessage(Component.translatable(this.getName().getString() + " will now stay put"));
                 this.GUARD_POS[0] = (int) this.getX();
                 this.GUARD_POS[1] = (int) this.getY();
                 this.GUARD_POS[2] = (int) this.getZ();
-            } else if (getAssignedGem() == null && this.getMovementType() == 3)
-            {
+            } else if (getAssignedGem() == null && this.getMovementType() == 3 || !getAssignedGem().isAlive()) {
                 this.setMovementType((byte) 0);
-                player.sendSystemMessage(Component.translatable(this.getCapitalGemName() + " will now stay put"));
+                player.sendSystemMessage(Component.translatable(this.getName().getString() + " will now stay put"));
                 this.GUARD_POS[0] = (int) this.getX();
                 this.GUARD_POS[1] = (int) this.getY();
                 this.GUARD_POS[2] = (int) this.getZ();
@@ -746,12 +762,29 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         return super.hurt(source, amount);
     }
 
+    public void dropXP(LivingEntity entityIn) {
+        if (!entityIn.level.isClientSide) {
+            if (entityIn.level instanceof ServerLevel) {
+                System.out.println("experience reward check");
+                int reward = net.minecraftforge.event.ForgeEventFactory.getExperienceDrop(entityIn, this.currentPlayer, entityIn.getExperienceReward());
+                ExperienceOrb.award((ServerLevel) entityIn.level, entityIn.position(), reward);
+                System.out.println("experience reward awarded");
+            }
+        }
+    }
+
     @Override
     public boolean doHurtTarget(Entity entityIn) {
         if(!entityIn.level.isClientSide){
-            if(this.focusCheck()) for(Ability power : this.getAbilityPowers()){
-                if(power instanceof IMeleeAbility) {
-                    ((IMeleeAbility)power).fight((LivingEntity) entityIn, this.getAttributeValue(Attributes.ATTACK_DAMAGE));
+            if (entityIn instanceof LivingEntity) {
+                if (!enemyDying) {
+                    enemyDying = true;
+                    enemy = (LivingEntity) entityIn;
+                }
+                if(this.focusCheck()) for(Ability power : this.getAbilityPowers()){
+                    if(power instanceof IMeleeAbility) {
+                        ((IMeleeAbility)power).fight((LivingEntity) entityIn, this.getAttributeValue(Attributes.ATTACK_DAMAGE));
+                    }
                 }
             }
         }
@@ -780,6 +813,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             MinecraftForge.EVENT_BUS.post(event);
             ItemStack stack = new ItemStack(this.getGemItem());
             ((ItemGem) stack.getItem()).setData(this, stack);
+            ((ItemGem) stack.getItem()).cracked = this.getCracked();
             this.spawnAtLocation(stack).setExtendedLifetime();
             this.gameEvent(GameEvent.ENTITY_PLACE);
             this.kill();
@@ -1699,10 +1733,6 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         return false;
     }
 
-    /*
-    COMMAND STUFF
-    */
-
     public boolean canRecall(){
         boolean flag = false;
         for(Ability ability : this.getAbilityPowers()){
@@ -1712,6 +1742,10 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         }
         return flag;
     }
+
+    /*
+    COMMAND STUFF
+    */
 
     public static void decreaseExp(Player player, float amount) {
         if (player.totalExperience - amount <= 0)
