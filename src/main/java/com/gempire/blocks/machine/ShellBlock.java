@@ -3,6 +3,8 @@ package com.gempire.blocks.machine;
 import com.gempire.init.ModFluids;
 import com.gempire.init.ModTE;
 import com.gempire.tileentities.ShellTE;
+import net.minecraft.world.Container;
+import net.minecraft.world.Containers;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.block.*;
@@ -105,11 +107,13 @@ public class ShellBlock extends BaseEntityBlock implements SimpleWaterloggedBloc
 
     @Override
     public void onRemove(BlockState state, Level worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
-        if(worldIn.isClientSide){
-            return;
-        }
-        if(!(newState.getBlock() instanceof ShellBlock)){
-            worldIn.removeBlockEntity(pos);
+        if (!state.is(newState.getBlock())) {
+            BlockEntity blockentity = worldIn.getBlockEntity(pos);
+            if (blockentity instanceof Container) {
+                Containers.dropContents(worldIn, pos, (Container)blockentity);
+                worldIn.updateNeighbourForOutputSignal(pos, this);
+            }
+            super.onRemove(state, worldIn, pos, newState, isMoving);
         }
     }
 

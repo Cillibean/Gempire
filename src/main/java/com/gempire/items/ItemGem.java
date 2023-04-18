@@ -60,6 +60,7 @@ public class ItemGem extends Item {
     public EntityGem gemToAssign;
     public boolean livingEntityHit = false;
     public boolean isAssigned = false;
+    public boolean cracked;
 
     public ItemGem(Properties properties) {
         super(properties);
@@ -128,7 +129,7 @@ public class ItemGem extends Item {
                 }
             } else {
                 if (isAssigned) {
-                    playerIn.sendSystemMessage(Component.translatable("This Gem is no longer assigned to " + gemToAssign.getName().getString() + " " + gemToAssign.getFacetAndCut()));                    livingEntityHit = false;
+                    playerIn.sendSystemMessage(Component.translatable("This Gem is no longer assigned to " + assigned_gem.getName().getString() + " " + assigned_gem.getFacetAndCut()));                    livingEntityHit = false;
                     assigned_gem = null;
                 } else {
                     playerIn.sendSystemMessage(Component.translatable("This Gem was assigned to " + gemToAssign.getName().getString() + " " + gemToAssign.getFacetAndCut()));                    livingEntityHit = false;

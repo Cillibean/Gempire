@@ -1,5 +1,6 @@
 package com.gempire.entities.gems;
 
+import com.gempire.entities.abilities.AbilityAbundance;
 import com.gempire.entities.abilities.AbilityDisarming;
 import com.gempire.entities.abilities.base.Ability;
 import com.gempire.entities.ai.EntityAIFollowAssigned;
@@ -9,6 +10,7 @@ import com.gempire.entities.bases.EntityGem;
 import com.gempire.entities.bases.EntityVaryingGem;
 import com.gempire.util.Abilities;
 import com.gempire.util.GemPlacements;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -83,7 +85,8 @@ public class EntityGarnet extends EntityVaryingGem {
     }
     public Abilities[] definiteAbilities(){
         return new Abilities[]{
-                Abilities.DISARMING
+                Abilities.DISARMING,
+                Abilities.ABUNDANCE
         };
     }
     public boolean doHurtTarget(Entity entityIn) {

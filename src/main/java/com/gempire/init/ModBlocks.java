@@ -2,10 +2,11 @@ package com.gempire.init;
 
 import com.gempire.Gempire;
 import com.gempire.blocks.*;
+import com.gempire.blocks.crystalchest.CrystalChestBlock;
 import com.gempire.blocks.machine.*;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.material.Material;
-import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -27,6 +28,13 @@ public class ModBlocks {
                     })
             , 0)
     );
+
+    public static final RegistryObject<Block> CRYSTAL_CHEST = BLOCKS.register("crystal_chest", () ->
+            new CrystalChestBlock(BlockBehaviour.Properties
+                    .of(Material.STONE).strength(2.5F)
+                    .sound(SoundType.GLASS), () -> {
+        return BlockEntityType.CHEST;
+    }));
 
     public static final RegistryObject<Block> ORANGE_CHROMA_CRYSTAL = BLOCKS.register("orange_chroma_crystal", () ->
             new ChromaBlock(BlockBehaviour.Properties

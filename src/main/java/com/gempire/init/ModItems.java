@@ -31,6 +31,13 @@ public class ModItems {
             )
 
     );*/
+/*
+    public static final RegistryObject<Item> CRYSTAL_CHEST = ITEMS.register("crystal_chest", () ->
+            new BlockItem(
+                    ModBlocks.CRYSTAL_CHEST.get(),
+                    new Item.Properties().tab(ModItemGroup.BLOCKS)
+            )
+    );*/
     public static final RegistryObject<Item> PEDISTAL = ITEMS.register("pedistal", () ->
             new BlockItem(
                     ModBlocks.PEDISTAL.get(),

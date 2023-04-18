@@ -52,7 +52,6 @@ public class ShellTE extends RandomizableContainerBlockEntity implements MenuPro
     public int clayConsumed = 0;
     public boolean chromaConsumed = false;
     public boolean essenceConsumed = false;
-    public boolean essenceMarker = false;
     public int chromaColor = 0;
     public int ticks = 0;
 
@@ -68,7 +67,6 @@ public class ShellTE extends RandomizableContainerBlockEntity implements MenuPro
         this.clayConsumed = nbt.getInt("clay");
         this.chromaConsumed = nbt.getBoolean("chroma");
         this.essenceConsumed = nbt.getBoolean("essence");
-        this.essenceMarker = nbt.getBoolean("marker");
         this.chromaColor = nbt.getInt("color");
         this.items = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
         if(!this.tryLoadLootTable(nbt)){
@@ -84,7 +82,6 @@ public class ShellTE extends RandomizableContainerBlockEntity implements MenuPro
         compound.putInt("clay", this.clayConsumed);
         compound.putBoolean("chroma", this.chromaConsumed);
         compound.putBoolean("essence", this.essenceConsumed);
-        compound.putBoolean("marker", this.essenceMarker);
         compound.putInt("color", this.chromaColor);
         if(!this.trySaveLootTable(compound)){
             ContainerHelper.saveAllItems(compound, this.items);
@@ -162,33 +159,20 @@ public class ShellTE extends RandomizableContainerBlockEntity implements MenuPro
         }
     }
 
-    public void HandleEssenceTick(){
-        if(this.gravelConsumed == ShellTE.MAX_GRAVEL && this.sandConsumed == ShellTE.MAX_SAND && this.clayConsumed == ShellTE.MAX_CLAY && this.chromaConsumed){
+    public void HandleEssenceTick() {
+        if (this.gravelConsumed == ShellTE.MAX_GRAVEL && this.sandConsumed == ShellTE.MAX_SAND && this.clayConsumed == ShellTE.MAX_CLAY && this.chromaConsumed) {
             //ESSENCE CHECK
-            for(int i = 0; i < 6; i++){
                 //TODO: MAKE THERE BE A CHANCE OF MAGIC MOSS APPEARING
-                if(this.level.getBlockState(this.worldPosition.offset(ShellTE.direction(i))).getBlock() == ModFluids.WHITE_ESSENCE.block.get()){
-                    LiquidBlock block = (LiquidBlock) this.level.getBlockState(this.worldPosition.offset(ShellTE.direction(i))).getBlock();
-                    if(block.getFluid() == ModFluids.FLUIDS.getEntries()) {
-                        this.level.setBlockAndUpdate(this.worldPosition.offset(ShellTE.direction(i)), Blocks.AIR.defaultBlockState());
+            System.out.println("essence check");
+                if (this.level.getBlockState(this.worldPosition.offset(ShellTE.direction(4))).getBlock() == ModFluids.WHITE_ESSENCE.block.get()) {
+                    System.out.println("essence is there");
+                    LiquidBlock block = (LiquidBlock) this.level.getBlockState(this.worldPosition.offset(ShellTE.direction(4))).getBlock();
+                    if (block.getFluid() == ModFluids.WHITE_ESSENCE.source.get()) {
+                        this.level.setBlockAndUpdate(this.worldPosition.offset(ShellTE.direction(4)), Blocks.AIR.defaultBlockState());
                         this.essenceConsumed = true;
-                        this.essenceMarker = true;
-                        break;
+                        System.out.println("essence marker true");
                     }
                 }
-            }
-        }
-        else{
-            this.essenceMarker = false;
-            for(int i = 0; i < 6; i++){
-                if(this.level.getBlockState(this.worldPosition.offset(ShellTE.direction(i))).getBlock() == ModFluids.WHITE_ESSENCE.block.get()){
-                    LiquidBlock block = (LiquidBlock) this.level.getBlockState(this.worldPosition.offset(ShellTE.direction(i))).getBlock();
-                    if(block.getFluid() == ModFluids.WHITE_ESSENCE.flowing.get()) {
-                        this.essenceMarker = true;
-                        break;
-                    }
-                }
-            }
         }
     }
 
