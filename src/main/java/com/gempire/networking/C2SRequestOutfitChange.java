@@ -40,7 +40,6 @@ public class C2SRequestOutfitChange {
             else{
                 gem.CycleOutfitBackwards();
             }
-            gem.saveOutfitHairInsignia();
         }
         ctx.setPacketHandled(true);
     }

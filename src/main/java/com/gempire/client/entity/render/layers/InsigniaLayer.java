@@ -27,11 +27,19 @@ public class InsigniaLayer<E extends EntityGem, M extends ModelGem<E>> extends G
     @Override
     public void render(PoseStack matrixStackIn, MultiBufferSource bufferIn, int packedLightIn, EntityGem gem, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
         float[] outfitColors = Sheep.getColorArray(DyeColor.byId(gem.getInsigniaColor()));
-            if(gem.getInsigniaVariant() < 99) {
+        if (gem.getRebelled()) {
+            if (gem.getInsigniaVariant() < 99) {
+                VertexConsumer builder = bufferIn.getBuffer(RenderType.entityTranslucent(new ResourceLocation(gem.getModID() + ":textures/entity/" + this.getName(gem).toLowerCase() + "/outfits/insignia_" + gem.getRebelInsigniaVariant() + ".png")));
+                this.getParentModel().setupAnim(gem, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
+                this.getParentModel().renderToBuffer(matrixStackIn, builder, packedLightIn, OverlayTexture.NO_OVERLAY, outfitColors[0], outfitColors[1], outfitColors[2], 1.0F);
+            }
+        } else {
+            if (gem.getInsigniaVariant() < 99) {
                 VertexConsumer builder = bufferIn.getBuffer(RenderType.entityTranslucent(new ResourceLocation(gem.getModID() + ":textures/entity/" + this.getName(gem).toLowerCase() + "/outfits/insignia_" + gem.getInsigniaVariant() + ".png")));
                 this.getParentModel().setupAnim(gem, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
                 this.getParentModel().renderToBuffer(matrixStackIn, builder, packedLightIn, OverlayTexture.NO_OVERLAY, outfitColors[0], outfitColors[1], outfitColors[2], 1.0F);
             }
+        }
         /*if(gem instanceof EntityStarterGem){
             ModelStarterGem model = ((ModelStarterGem)this.getEntityModel());
             model.

@@ -8,7 +8,7 @@ import com.gempire.client.ter.ShellTER;
 import com.gempire.init.ModContainers;
 import com.gempire.init.ModEntities;
 import com.gempire.init.ModTE;
-import com.gempire.entities.gems.keybindings.KeyBindings;
+import com.gempire.keybindings.KeyBindings;
 import com.gempire.tileentities.WarpPadTE;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;

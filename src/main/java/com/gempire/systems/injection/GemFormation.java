@@ -264,11 +264,17 @@ public class GemFormation {
             String lowestRGem = "";
             System.out.println("check out of possible gems");
             for (String gem : POSSIBLE_GEMS_TIER_1) {
+                System.out.println(gem);
                 double r = Math.random() * totalWeight;
                 r -= WEIGHTS_OF_GEMS.get(gem);
-                if (WEIGHTS_OF_GEMS.get(gem) < 12) {
+                System.out.println(r);
+                System.out.println("lowest r " + lowestRGem);
+                System.out.println("lowest r = " + lowestR);
+                System.out.println(WEIGHTS_OF_GEMS.get(gem));
+                /*if (WEIGHTS_OF_GEMS.get(gem) < 12) {
                     r = 1000000;
-                }
+                }*/
+                System.out.println("r after weights check " + r);
                 if (r < lowestR) {
                     lowestR = r;
                     lowestRGem = gem;
@@ -286,12 +292,19 @@ public class GemFormation {
         } else if (tier == 2) {
             double lowestR = 100000000;
             String lowestRGem = "";
+            System.out.println("check out of possible gems");
             for (String gem : POSSIBLE_GEMS_TIER_2) {
+                System.out.println(gem);
                 double r = Math.random() * totalWeight;
                 r -= WEIGHTS_OF_GEMS.get(gem);
-                if (WEIGHTS_OF_GEMS.get(gem) < 12) {
+                System.out.println(r);
+                System.out.println("lowest r " + lowestRGem);
+                System.out.println("lowest r = " + lowestR);
+                System.out.println(WEIGHTS_OF_GEMS.get(gem));
+                /*if (WEIGHTS_OF_GEMS.get(gem) < 12) {
                     r = 1000000;
-                }
+                }*/
+                System.out.println("r after weights check " + r);
                 if (r < lowestR) {
                     lowestR = r;
                     lowestRGem = gem;

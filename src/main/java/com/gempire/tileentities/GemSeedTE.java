@@ -60,7 +60,7 @@ public class GemSeedTE extends BlockEntity {
 
     public GemSeedTE(BlockPos pos, BlockState state) {
         super(ModTE.GEM_SEED_TE.get(), pos, state);
-            for (int i = 0; i < GemFormation.POSSIBLE_GEMS_TIER_1.size(); i++) {
+            for (int i = 0; i < GemFormation.POSSIBLE_GEMS_TIER_2.size(); i++) {
                 this.TEMPORARY_WEIGHTS.add(i, new ArrayList<Float>());
             }
     }
@@ -90,6 +90,7 @@ public class GemSeedTE extends BlockEntity {
                                 weight += te.TEMPORARY_WEIGHTS.get(i).get(n);
                             }
                             te.WEIGHTS_OF_GEMS.put(GemFormation.POSSIBLE_GEMS_TIER_1.get(i), weight);
+                            System.out.println("tile entity weights " + te.WEIGHTS_OF_GEMS.get(GemFormation.POSSIBLE_GEMS_TIER_1.get(i)));
                         }
                     } else if (te.tier == 2) {
                         for (int i = 0; i < GemFormation.POSSIBLE_GEMS_TIER_2.size(); i++) {
@@ -394,6 +395,7 @@ public class GemSeedTE extends BlockEntity {
                 compound.putFloat(GemFormation.POSSIBLE_GEMS_TIER_1.get(i) + "_weight", weight);
             }
         } else if (tier == 2) {
+            System.out.println(TEMPORARY_WEIGHTS.size());
             if(this.TEMPORARY_WEIGHTS.size() > 0)for(int i = 0; i < GemFormation.POSSIBLE_GEMS_TIER_2.size(); i++){
                 float weight = 0;
                 System.out.println("Gem List Cycle: " + i);
