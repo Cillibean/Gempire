@@ -105,9 +105,18 @@ public class EntityEmerald extends EntityGem {
         };
     }
     public Abilities[] definiteAbilities(){
-        return new Abilities[]{
-                 Abilities.RECALL, Abilities.NEGOTIATOR, Abilities.ELECTROKINESIS
-        };
+        int test = random.nextInt(2);
+        if (test == 0) {
+            return new Abilities[]{
+                    Abilities.NEGOTIATOR,
+                    Abilities.ELECTROKINESIS
+            };
+        } else {
+            return new Abilities[]{
+                    Abilities.RECALL,
+                    Abilities.ELECTROKINESIS
+            };
+        }
     }
 
     public int generateSkinColorVariant() {

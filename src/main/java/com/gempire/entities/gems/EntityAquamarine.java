@@ -123,9 +123,16 @@ public class EntityAquamarine extends EntityGem implements FlyingAnimal {
         };
     }
     public Abilities[] definiteAbilities(){
-        return new Abilities[]{
-                Abilities.PARALYSIS, Abilities.HYDROKINESIS
-        };
+        if (random.nextInt(2) == 0) {
+            return new Abilities[]{
+                    Abilities.PARALYSIS
+            };
+        } else {
+            return new Abilities[]{
+                    Abilities.HYDROKINESIS,
+                    Abilities.PARALYSIS
+            };
+        }
     }
 
     public int generateSkinColorVariant() {
