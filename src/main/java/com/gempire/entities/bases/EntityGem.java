@@ -96,15 +96,16 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     public static final EntityDataAccessor<Boolean> CRACKED = SynchedEntityData.<Boolean>defineId(EntityGem.class, EntityDataSerializers.BOOLEAN);
     public static final EntityDataAccessor<String> FACET = SynchedEntityData.defineId(EntityGem.class, EntityDataSerializers.STRING);
     public static final EntityDataAccessor<String> CUT = SynchedEntityData.defineId(EntityGem.class, EntityDataSerializers.STRING);
+    public static EntityDataAccessor<Integer> REBEL_HAIR_VARIANT = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
+    public static EntityDataAccessor<Integer> REBEL_OUTFIT_COLOR = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
+    public static EntityDataAccessor<Integer> REBEL_OUTFIT_VARIANT = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
+    public static EntityDataAccessor<Integer> REBEL_INSIGNIA_COLOR = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
+    public static EntityDataAccessor<Integer> REBEL_INSIGNIA_VARIANT = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
+
     public boolean isCut;
     public ArrayList<Ability> ABILITY_POWERS = new ArrayList<>();
     public ArrayList<UUID> OWNERS = new ArrayList<>();
     public UUID MASTER_OWNER;
-    public static final EntityDataAccessor<Integer> SAVED_HAIR_VARIANT = SynchedEntityData.defineId(EntityGem.class, EntityDataSerializers.INT);
-    public static final EntityDataAccessor<Integer> SAVED_OUTFIT_VARIANT= SynchedEntityData.defineId(EntityGem.class, EntityDataSerializers.INT);
-    public static final EntityDataAccessor<Integer> SAVED_INSIGNIA_VARIANT= SynchedEntityData.defineId(EntityGem.class, EntityDataSerializers.INT);
-    public static final EntityDataAccessor<Integer> SAVED_OUTFIT_VARIANT_COLOR= SynchedEntityData.defineId(EntityGem.class, EntityDataSerializers.INT);
-    public static final EntityDataAccessor<Integer> SAVED_INSIGNIA_VARIANT_COLOR= SynchedEntityData.defineId(EntityGem.class, EntityDataSerializers.INT);
     public UUID FOLLOW_ID;
     public UUID ASSIGNED_ID;
     public EntityGem assignedGem;
@@ -189,6 +190,11 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.entityData.set(EntityGem.CRACKED, false);
         this.entityData.define(EntityGem.FACET, " ");
         this.entityData.define(EntityGem.CUT, " ");
+        this.entityData.define(EntityGem.REBEL_HAIR_VARIANT, 0);
+        this.entityData.define(EntityGem.REBEL_OUTFIT_COLOR, 0);
+        this.entityData.define(EntityGem.REBEL_OUTFIT_VARIANT, 0);
+        this.entityData.define(EntityGem.REBEL_INSIGNIA_COLOR, 0);
+        this.entityData.define(EntityGem.REBEL_INSIGNIA_VARIANT, 0);
         this.FOLLOW_ID = UUID.randomUUID();
         this.ASSIGNED_ID = UUID.randomUUID();
         this.MASTER_OWNER = UUID.randomUUID();
@@ -238,6 +244,11 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         if (this.spawnGem != null) {
             this.spawnGem.remove(RemovalReason.DISCARDED);
         }
+        this.setRebelHairVariant(this.generateHairVariant());
+        this.setRebelOutfitVariant(this.generateOutfitVariant());
+        this.setRebelOutfitColor(this.generateOutfitColor());
+        this.setRebelInsigniaVariant(this.generateInsigniaVariant());
+        this.setRebelInsigniaColor(this.generateInsigniaColor());
         return super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
     }
 
@@ -321,12 +332,6 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         compound.putInt("gemColor", this.getGemColor());
         compound.putInt("outfitColor", this.getOutfitColor());
         compound.putInt("outfitVariant", this.getOutfitVariant());
-        compound.putInt("savedOutfitVariant", SAVED_OUTFIT_VARIANT.getId());
-        compound.putInt("savedHairVariant", SAVED_HAIR_VARIANT.getId());
-        compound.putInt("savedInsigniaVariant", SAVED_INSIGNIA_VARIANT.getId());
-        compound.putInt("savedInsigniaColor", SAVED_INSIGNIA_VARIANT_COLOR.getId());
-        compound.putInt("savedOutfitColor", SAVED_OUTFIT_VARIANT_COLOR.getId());
-        compound.putInt("outfitVariant", this.getOutfitVariant());
         compound.putInt("insigniaColor", this.getInsigniaColor());
         compound.putInt("insigniaVariant", this.getInsigniaVariant());
         compound.putInt("abilitySlots", this.getAbilitySlots());
@@ -346,6 +351,11 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         compound.putInt("structureTime", this.structureTime);
         compound.putFloat("rebelPoints", this.rebelPoints);
         compound.putInt("rebelTicks", this.rebelTicks);
+        compound.putInt("rebelHairVariant", this.getRebelHairVariant());
+        compound.putInt("rebelOutfitColor", this.getRebelOutfitColor());
+        compound.putInt("rebelOutfitVariant", this.getRebelOutfitVariant());
+        compound.putInt("rebelInsigniaColor", this.getRebelInsigniaColor());
+        compound.putInt("rebelInsigniaVariant", this.getRebelInsigniaVariant());
         this.writeStructures(compound);
         ContainerHelper.saveAllItems(compound, this.items);
     }
@@ -385,11 +395,6 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.setHairVariant(compound.getInt("hairVariant"));
         this.setGemPlacement(compound.getInt("gemPlacement"));
         this.setGemColor(compound.getInt("gemColor"));
-        this.entityData.set(EntityGem.SAVED_HAIR_VARIANT, (compound.getInt("savedHairVariant")));
-        this.entityData.set(EntityGem.SAVED_OUTFIT_VARIANT, (compound.getInt("savedOutfitVariant")));
-        this.entityData.set(EntityGem.SAVED_INSIGNIA_VARIANT, (compound.getInt("savedInsigniaVariant")));
-        this.entityData.set(EntityGem.SAVED_OUTFIT_VARIANT_COLOR, (compound.getInt("savedOutfitColor")));
-        this.entityData.set(EntityGem.SAVED_INSIGNIA_VARIANT_COLOR, (compound.getInt("savedInsigniaColor")));
         this.ticking = compound.getInt("CraftTicks");
         this.abilityTicks = compound.getInt("abilityTicks");
         this.isCrafting = compound.getBoolean("isCrafting");
@@ -416,6 +421,11 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.isHostile = compound.getBoolean("isHostile");
         this.rebelPoints = compound.getFloat("rebelPoints");
         this.rebelTicks = compound.getInt("rebelTicks");
+        this.setRebelHairVariant(compound.getInt("rebelHairVariant"));
+        this.setRebelOutfitColor(compound.getInt("rebelOutfitColor"));
+        this.setRebelOutfitVariant(compound.getInt("rebelOutfitVariant"));
+        this.setRebelInsigniaColor(compound.getInt("rebelInsigniaColor"));
+        this.setRebelInsigniaVariant(compound.getInt("rebelInsigniaVariant"));
         this.idlePowers = this.generateIdlePowers();
         ContainerHelper.loadAllItems(compound, this.items);
         this.readStructures(compound);
@@ -1097,6 +1107,14 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
 
     public abstract int generateHairVariant();
 
+    public int getRebelHairVariant(){
+        return this.entityData.get(EntityGem.REBEL_HAIR_VARIANT);
+    }
+
+    public void setRebelHairVariant(int value){
+        this.entityData.set(EntityGem.REBEL_HAIR_VARIANT, value);
+    }
+
     public int getGemColor(){
         return this.entityData.get(EntityGem.GEM_COLOR);
     }
@@ -1116,26 +1134,15 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     public int generateOutfitColor(){
         return this.getSkinColorVariant();
     }
+    public int getRebelOutfitColor(){
+        return this.entityData.get(EntityGem.REBEL_OUTFIT_COLOR);
+    }
+
+    public void setRebelOutfitColor(int value){
+        this.entityData.set(EntityGem.REBEL_OUTFIT_COLOR, value);
+    }
 
     public abstract int generateOutfitVariant();
-
-    public void saveOutfitHairInsignia()
-    {
-        entityData.set(SAVED_OUTFIT_VARIANT,entityData.get(OUTFIT_VARIANT));
-        entityData.set(SAVED_INSIGNIA_VARIANT,entityData.get(INSIGNIA_VARIANT));
-        entityData.set(SAVED_HAIR_VARIANT,entityData.get(HAIR_VARIANT));
-        entityData.set(SAVED_OUTFIT_VARIANT_COLOR,entityData.get(OUTFIT_COLOR));
-        entityData.set(SAVED_INSIGNIA_VARIANT_COLOR,entityData.get(INSIGNIA_COLOR));
-        System.out.println("Saved Stuff");
-    }
-    public void setOutFitHairInsignia()
-    {
-        this.entityData.set(EntityGem.OUTFIT_VARIANT, entityData.get(SAVED_OUTFIT_VARIANT));
-        this.entityData.set(EntityGem.INSIGNIA_VARIANT, entityData.get(SAVED_INSIGNIA_VARIANT));
-        this.entityData.set(EntityGem.HAIR_VARIANT, entityData.get(SAVED_HAIR_VARIANT));
-        this.entityData.set(EntityGem.OUTFIT_COLOR,entityData.get(SAVED_OUTFIT_VARIANT_COLOR));
-        this.entityData.set(EntityGem.INSIGNIA_COLOR,entityData.get(SAVED_INSIGNIA_VARIANT_COLOR));
-    }
 
     public void setOutfitVariant(int value){
         this.entityData.set(EntityGem.OUTFIT_VARIANT, value);
@@ -1143,6 +1150,14 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
 
     public int getOutfitVariant(){
         return this.entityData.get(EntityGem.OUTFIT_VARIANT);
+    }
+
+    public void setRebelOutfitVariant(int value){
+        this.entityData.set(EntityGem.REBEL_OUTFIT_VARIANT, value);
+    }
+
+    public int getRebelOutfitVariant(){
+        return this.entityData.get(EntityGem.REBEL_OUTFIT_VARIANT);
     }
 
     public boolean hasOutfitPlacementVariant(){
@@ -1169,6 +1184,22 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
 
     public void setInsigniaColor(int value){
         this.entityData.set(EntityGem.INSIGNIA_COLOR, value);
+    }
+
+    public void setRebelInsigniaVariant(int value){
+        this.entityData.set(EntityGem.REBEL_INSIGNIA_VARIANT, value);
+    }
+
+    public int getRebelInsigniaVariant(){
+        return this.entityData.get(EntityGem.REBEL_INSIGNIA_VARIANT);
+    }
+
+    public int getRebelInsigniaColor(){
+        return this.entityData.get(EntityGem.REBEL_INSIGNIA_COLOR);
+    }
+
+    public void setRebelInsigniaColor(int value){
+        this.entityData.set(EntityGem.REBEL_INSIGNIA_COLOR, value);
     }
 
     public int generateInsigniaColor(){
@@ -1726,12 +1757,6 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
 
     public void rebel() {
         this.resetOwners();
-        this.saveOutfitHairInsignia();
-        this.setInsigniaColor(random.nextInt(16));
-        this.setOutfitColor(random.nextInt(16));
-        this.setHairVariant((this).generateHairVariant());
-        this.setOutfitVariant((this).generateOutfitVariant());
-        this.setInsigniaVariant((this).generateInsigniaVariant());
         this.setRebelled(true);
     }
 
