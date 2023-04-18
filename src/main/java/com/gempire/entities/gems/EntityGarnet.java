@@ -21,6 +21,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
+import java.util.Random;
+
 public class EntityGarnet extends EntityVaryingGem {
 
     public EntityGarnet(EntityType<? extends PathfinderMob> type, Level worldIn) {
@@ -84,10 +86,15 @@ public class EntityGarnet extends EntityVaryingGem {
         };
     }
     public Abilities[] definiteAbilities(){
-        return new Abilities[]{
-                Abilities.DISARMING,
-                Abilities.ABUNDANCE
-        };
+        if (random.nextInt(2) == 0) {
+            return new Abilities[]{
+                    Abilities.DISARMING
+            };
+        } else {
+            return new Abilities[]{
+                    Abilities.ABUNDANCE
+            };
+        }
     }
     public boolean doHurtTarget(Entity entityIn) {
         for (Ability ability : this.getAbilityPowers()) {

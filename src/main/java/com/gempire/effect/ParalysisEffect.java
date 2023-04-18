@@ -10,7 +10,6 @@ public class ParalysisEffect extends MobEffect {
     double prevx = 0;
     double prevy = 0;
     double prevz = 0;
-    LivingEntity entity;
     int duration;
 
     public ParalysisEffect(MobEffectCategory mobEffectCategory, int color) {

@@ -106,9 +106,15 @@ public class EntitySpinel extends EntityVaryingGem {
         };
     }
     public Abilities[] definiteAbilities(){
-        return new Abilities[]{
-                Abilities.LURE, Abilities.JESTER
-        };
+        if (random.nextInt(2) == 0) {
+            return new Abilities[]{
+                    Abilities.LURE
+            };
+        } else {
+            return new Abilities[]{
+                    Abilities.JESTER
+            };
+        }
     }
 
     @Override
