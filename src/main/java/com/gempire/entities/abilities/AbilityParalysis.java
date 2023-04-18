@@ -27,7 +27,7 @@ public class AbilityParalysis extends Ability implements IMeleeAbility, IEffectA
 
     @Override
     public MobEffectInstance effect() {
-        return new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 20 * 3, 99);
+        return new MobEffectInstance(ModEffects.PARALYSIS.get(), 20 * 3, 1, false, false);
     }
 
     @Override
@@ -40,7 +40,7 @@ public class AbilityParalysis extends Ability implements IMeleeAbility, IEffectA
             return;
         }
         Random rand = new Random();
-        if (rand.nextInt(10) == 0) entity.addEffect(this.effect());
+        if (rand.nextInt(5) == 0) entity.addEffect(this.effect());
     }
 
     @Override
@@ -50,7 +50,7 @@ public class AbilityParalysis extends Ability implements IMeleeAbility, IEffectA
             if(entity instanceof EntityGem || this.holder.isOwner(entity)){
                 continue;
             }
-            entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 20 * 15, 99,false,false));
+            entity.addEffect(effect());
         }
     }
 
