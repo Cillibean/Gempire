@@ -32,6 +32,8 @@ public class AbilityHydrokinesis extends Ability implements IRangedAbility, IVio
         waterOrb.shoot(d1, d2 + (double) f, d3, 1.6F, 6.0F);
         this.holder.playSound(SoundEvents.WATER_AMBIENT, 1.0F, 0.4F / (this.holder.getRandom().nextFloat() * 0.4F + 0.8F));
         this.holder.level.addFreshEntity(waterOrb);
+        this.holder.enemy = target;
+        this.holder.enemyDying = true;
     }
 
     @Override
