@@ -31,7 +31,7 @@
     {
       "type": "patchouli:text",
       "title": "Creating a Pearl",
-      "text": "In order to use shell, you will need to place 64 Gravel at the top, 64 Sand on the left, 64 Clay balls on the right, and a chroma of your choice at the bottom. After time passes it'll slowly drain these materials. After it's finished it will create a pearl for you to collect."
+      "text": "In order to use Shell, you will need to place the Shell over a block of White Gem essence, then insert 64 Gravel at the top, 64 Sand on the left, 64 Clay balls on the right, and a Chroma of your choice at the bottom. After time passes it'll slowly drain these materials, and once it's finished it will create a Pearl for you to collect."
     }
   ]
 }
