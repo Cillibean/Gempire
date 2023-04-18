@@ -10,11 +10,11 @@
       "name": "A Peridot",
       "rotate": "true",
       "offset": 0.4,
-      "text": "A kindergartener gem, she can tame gems for you from your kindergartens. She can also create Tier 2 Power Crystals"
+      "text": "A kindergartener gem, she can tame gems for you from your kindergartens. She can also create Advanced Power Crystals."
     },
     {
       "type": "patchouli:text",
-      "text": "$(l)Possible Abilities$() $(br)$(li)Tank$(li)Beefcake$(li)Powerhouse$(li)Unhinged$(br2) $(l)Definite Abilities$()$(br)$(li)Kindergartener$(li)Ferrokinesis (NYI)"
+      "text": "$(l)Possible Abilities$() $(br)$(li)Tank$(li)Beefcake$(li)Powerhouse$(li)Unhinged$(br2) $(l)Definite Abilities$()$(br)$(li)Kindergartener"
     }
   ]
 }

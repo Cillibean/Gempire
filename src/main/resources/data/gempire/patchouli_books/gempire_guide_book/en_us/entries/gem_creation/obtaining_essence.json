@@ -6,13 +6,13 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "To obtain essence at first, you will be required to locate essence in structure chests. Gem Sturctures have a higher likelyhood to contain them."
+      "text": "To obtain essence at first, you will have to locate essence in structure chests. Gem Structures have a higher likelihood to contain them."
     },
     {
       "type": "patchouli:spotlight",
       "link_recipe ": true,
       "item": "gempire:shale_gem",
-      "text": "The secondary, and more advanced way of obtaining essence, is by using Shales. See Shales page for more info by shift clicking the gem icon"
+      "text": "The secondary, and more advanced way of obtaining essence, is by using a Shale. See Shale's page for more info by shift clicking the gem icon"
     }
   ]
 }
