@@ -1,0 +1,12 @@
+{
+  "name": "Assignment",
+  "icon": "gempire:sapphire_gem_6",
+  "advancement": "gempire:root",
+  "category": "gempire:gem_concepts",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Assigning a gem to another gem is easy. Take the gemstone of the gem you want to assign to another, and right click on the entity with the gemstone. A string of text will appear in your chat box if done successfully. Then, summon that gem and set her following mode to that of the gem she's assigned to. To unassign a gem from another gem, poof the assigned gem and shift-right click her on the gem she was assigned to."
+    }
+  ]
+}

@@ -27,7 +27,6 @@ import net.minecraft.world.phys.Vec3;
 
 public class EntityPeridot extends EntityGem {
     //TO-DO: IMPLEMENT PERIDOT. She will upgrade your injector from tier 1 to tier 2. Will require a moderate amount of resources in her inventory.
-    //Will also upgrade Injectors to tier 3 as long as she has other required resources and a Bismuth.
     public EntityPeridot(EntityType<? extends PathfinderMob> type, Level worldIn) {
         super(type, worldIn);
     }
@@ -81,7 +80,7 @@ public class EntityPeridot extends EntityGem {
         return new GemPlacements[] {
                 GemPlacements.FOREHEAD, GemPlacements.LEFT_EYE, GemPlacements.RIGHT_EYE, GemPlacements.NOSE, GemPlacements.LEFT_CHEEK, GemPlacements.RIGHT_CHEEK, GemPlacements.CHEST, GemPlacements.BACK, GemPlacements.BELLY, GemPlacements.LEFT_SHOULDER,
                 GemPlacements.RIGHT_SHOULDER, GemPlacements.LEFT_HAND, GemPlacements.RIGHT_HAND, GemPlacements.LEFT_PALM, GemPlacements.RIGHT_PALM, GemPlacements.LEFT_THIGH, GemPlacements.RIGHT_THIGH, GemPlacements.LEFT_ANKLE, GemPlacements.RIGHT_ANKLE };
-    };
+    }
     @Override
     public void tick() {
         super.tick();
@@ -140,7 +139,7 @@ public class EntityPeridot extends EntityGem {
     }
     public Abilities[] definiteAbilities(){
         return new Abilities[]{
-                Abilities.KINDERGARTENER, Abilities.FERROKINESIS
+                Abilities.KINDERGARTENER
         };
     }
 

@@ -105,7 +105,7 @@ public class EntityLapis extends EntityGem {
     }
     public Abilities[] definiteAbilities(){
         return new Abilities[]{
-                Abilities.HYDROKINESIS, Abilities.VEHICLE//, Abilities.TERRAFORMER
+                Abilities.HYDROKINESIS, Abilities.VEHICLE
         };
     }
 
