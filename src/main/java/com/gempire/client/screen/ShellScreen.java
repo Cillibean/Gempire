@@ -45,10 +45,6 @@ public class ShellScreen extends AbstractContainerScreen<ShellContainer> {
         int x = (this.width - this.imageWidth) / 2;
         int y = (this.height - this.imageHeight) / 2;
         this.blit(matrixStack, x, y, 0, 0, this.imageWidth, this.imageHeight);
-        if(this.menu.shell.essenceMarker){
-            GUIUtilities.setup(LIGHT);
-            this.blit(matrixStack, x, y, 0, 0, this.imageWidth, this.imageHeight);
-        }
         //EnergyMeter.RenderBattery(this, matrixStack, container.shell, container.shell, x + 8, y + 4, MeterSize.NORMAL);
     }
 }
