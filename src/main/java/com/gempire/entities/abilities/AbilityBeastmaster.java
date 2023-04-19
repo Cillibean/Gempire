@@ -42,18 +42,17 @@ public class AbilityBeastmaster extends Ability implements IIdleAbility {
                             holder.getNavigation().moveTo(wolf, 1);
                             holder.lookAt(wolf, 90F, 90F);
                             if (holder.distanceToSqr(wolf) < Math.pow(2, 1)) {
-                                wolf.setTame(true);
+                                wolf.tame(holder.currentPlayer);
+                                /*wolf.setTame(true);
+                                System.out.println(wolf.isInSittingPose());
+                                System.out.println(wolf.isOrderedToSit());
                                 wolf.setOwnerUUID(holder.getUUID());
                                 wolf.setInSittingPose(false);
                                 wolf.setOrderedToSit(false);
+                                System.out.println(wolf.isInSittingPose());
+                                System.out.println(wolf.isOrderedToSit());
                                 //wolf.setCollarColor((DyeColor) this.holder.getOutfitColor());
-                                wolf.setJumping(false);
-                                wolf.getNavigation().stop();
-                                wolf.setTarget(holder.getTarget());
-                                wolf.getAttribute(Attributes.MAX_HEALTH).setBaseValue(20.0D);
-                                wolf.setHealth(20.0F);
-                                wolf.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(4.0D);
-                                holder.level.broadcastEntityEvent(wolf, (byte)7);
+                                //holder.level.broadcastEntityEvent(wolf, (byte)7);*/
                                 holder.abilityTicks = 20 * 30;
                                 tamedList.add(wolf);
                             }
