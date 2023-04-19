@@ -1,14 +1,17 @@
 package com.gempire.items;
 
 import com.gempire.entities.bases.EntityGem;
+import com.gempire.entities.gems.EntityZircon;
 import com.gempire.entities.gems.starter.EntityPebble;
 import com.gempire.events.GemFormEvent;
 import com.gempire.init.AddonHandler;
+import com.gempire.init.ModEnchants;
 import com.gempire.init.ModEntities;
 import com.gempire.init.ModItems;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobSpawnType;
@@ -233,7 +236,9 @@ public class ItemGem extends Item {
                         assert gem != null;
                         gem.finalizeSpawn((ServerLevelAccessor) world, world.getCurrentDifficultyAt(player.blockPosition()), MobSpawnType.TRIGGERED, null, null);
                         gem.addOwner(player.getUUID());
-                        gem.addMasterOwner(player.getUUID());
+                        if (gem.MASTER_OWNER == null){
+                            gem.addMasterOwner(player.getUUID());
+                        }
                         gem.FOLLOW_ID = player.getUUID();
                         gem.setMovementType((byte) 2);
                     } else {
@@ -248,8 +253,17 @@ public class ItemGem extends Item {
                 if (isAssigned) {
                     gem.ASSIGNED_ID = UUID.randomUUID();
                 }
+                if (gem instanceof EntityZircon) {
+                    if (!((EntityZircon) gem).getEnchantPageDefined()) {
+                        ((EntityZircon) gem).setEnchantPage(RandomSource.create().nextInt(ModEnchants.VANILLA_ENCHANTMENTS.size()));
+                        ((EntityZircon) gem).setEnchantPageDefined(true);
+                    }
+                }
                 System.out.println(assigned_gem);
                 System.out.println(gemToAssign);
+                if (gem.MASTER_OWNER == null) {
+                    gem.MASTER_OWNER = player.getUUID();
+                }
                 gem.setPos(pos.getX() + 0.5, pos.getY() + 1.0, pos.getZ() + 0.5);
                 gem.setHealth(gem.getMaxHealth());
                 gem.clearFire();

@@ -32,23 +32,27 @@ public class AbilityBeastmaster extends Ability implements IIdleAbility {
     @Override
     public void execute() {
         List<Wolf> list = this.holder.level.getEntitiesOfClass(Wolf.class, this.holder.getBoundingBox().inflate(14.0D, 8.0D, 14.0D));
+        List<Wolf> tamedList = new ArrayList<Wolf>();
         for (Wolf wolf : list) {
-            if (holder.getOwned()) {
-                if (holder.currentPlayer != null) {
-                    if (holder.abilityTicks == 0) {
-                        holder.getNavigation().moveTo(wolf, 1);
-                        holder.lookAt(wolf, 90F, 90F);
-                        if (holder.distanceToSqr(wolf) < Math.pow(2, 1)) {
-                            wolf.setTame(false);
-                            wolf.setOwnerUUID(holder.getUUID());
-                            wolf.setOrderedToSit(false);
-                            wolf.getNavigation().stop();
-                            wolf.setTarget(holder.getTarget());
-                            wolf.getAttribute(Attributes.MAX_HEALTH).setBaseValue(20.0D);
-                            wolf.setHealth(20.0F);
-                            wolf.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(4.0D);
-                            holder.level.broadcastEntityEvent(wolf, (byte)7);
-                            holder.abilityTicks = 20 * 30;
+            if (!tamedList.contains(wolf)) {
+                if (holder.getOwned()) {
+                    if (holder.currentPlayer != null) {
+                        if (holder.abilityTicks == 0) {
+                            holder.getNavigation().moveTo(wolf, 1);
+                            holder.lookAt(wolf, 90F, 90F);
+                            if (holder.distanceToSqr(wolf) < Math.pow(2, 1)) {
+                                wolf.getNavigation().stop();
+                                wolf.setTame(false);
+                                wolf.setOwnerUUID(holder.getUUID());
+                                wolf.setOrderedToSit(false);
+                                wolf.setTarget(holder.getTarget());
+                                wolf.getAttribute(Attributes.MAX_HEALTH).setBaseValue(20.0D);
+                                wolf.setHealth(20.0F);
+                                wolf.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(4.0D);
+                                holder.level.broadcastEntityEvent(wolf, (byte)7);
+                                holder.abilityTicks = 20 * 30;
+                                tamedList.add(wolf);
+                            }
                         }
                     }
                 }

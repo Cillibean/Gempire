@@ -16,7 +16,7 @@ public class AbilityGuard extends Ability implements ITaskAbility {
 
     @Override
     public Goal goal() {
-        return new EntityAIGuard((EntityGem)this.holder, 1D);
+        return new EntityAIGuard(this.holder, 1D);
     }
 
     @Override

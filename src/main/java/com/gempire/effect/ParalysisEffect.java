@@ -6,11 +6,6 @@ import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
 
 public class ParalysisEffect extends MobEffect {
-    boolean effectApplied = false;
-    double prevx = 0;
-    double prevy = 0;
-    double prevz = 0;
-    int duration;
 
     public ParalysisEffect(MobEffectCategory mobEffectCategory, int color) {
         super(mobEffectCategory, color);
@@ -18,29 +13,18 @@ public class ParalysisEffect extends MobEffect {
 
     @Override
     public void applyEffectTick(LivingEntity entity, int pAmplifier) {
-            if (!entity.level.isClientSide()) {
-                if (duration > 1) {
-                    if (!effectApplied) {
-                        prevx = entity.getX();
-                        prevy = entity.getY();
-                        prevz = entity.getZ();
-                        effectApplied = true;
-                    } else {
-                        entity.teleportTo(prevx, prevy, prevz);
-                        if (entity.getHealth() > 1.0F) {
-                            entity.hurt(DamageSource.MAGIC, 1.0F);
-                        }
-                    }
-                } else {
-                    effectApplied = false;
-                }
-            }
-        super.applyEffectTick(entity, pAmplifier);
+        if (!entity.level.isClientSide()) {
+            double x = entity.getX();
+            double y = entity.getY();
+            double z = entity.getZ();
+
+            entity.teleportTo(x, y, z);
+            entity.setDeltaMovement(0, 0, 0);
+        }
     }
 
     @Override
     public boolean isDurationEffectTick(int pDuration, int pAmplifier) {
-        duration = pDuration;
         return true;
     }
 

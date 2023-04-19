@@ -1,8 +1,6 @@
 package com.gempire.entities.gems;
 
-import com.gempire.entities.ai.EntityAIFollowAssigned;
-import com.gempire.entities.ai.EntityAIFollowOwner;
-import com.gempire.entities.ai.EntityAIWander;
+import com.gempire.entities.ai.*;
 import com.gempire.entities.bases.EntityGem;
 import com.gempire.util.Abilities;
 import com.gempire.util.GemPlacements;
@@ -11,6 +9,8 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.goal.target.OwnerHurtByTargetGoal;
+import net.minecraft.world.entity.ai.goal.target.OwnerHurtTargetGoal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
@@ -50,6 +50,8 @@ public class EntityRuby extends EntityGem {
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, EntityGem.class, 1, false, false, this::checkRebel));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Mob.class, 1, false, false, (p_234199_0_) -> p_234199_0_.getClassification(true) == MobCategory.MONSTER));
         this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.1D, false));
+        this.targetSelector.addGoal(1, new OwnerHurtByTargetGemGoal(this));
+        this.targetSelector.addGoal(2, new OwnerHurtTargetGemGoal(this));
     }
 
     @Override
@@ -101,7 +103,7 @@ public class EntityRuby extends EntityGem {
 
     public Abilities[] possibleAbilities(){
         return new Abilities[]{
-                Abilities.KNOCKBACK, Abilities.PARALYSIS, Abilities.NO_ABILITY, Abilities.TANK, Abilities.BEEFCAKE, Abilities.POWERHOUSE, Abilities.UNHINGED
+                Abilities.KNOCKBACK, Abilities.NO_ABILITY, Abilities.TANK, Abilities.BEEFCAKE, Abilities.POWERHOUSE, Abilities.UNHINGED
         };
     }
     public Abilities[] definiteAbilities(){

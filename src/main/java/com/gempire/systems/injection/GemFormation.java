@@ -181,9 +181,9 @@ public class GemFormation {
         gem.setMarking2Variant(gem.generateMarking2Variant());
         gem.setMarking2Color(gem.generatePaletteColor(PaletteType.MARKINGS_2));
         gem.setCustomName(gem.getNickname());
-        if (gem instanceof EntityZircon)
-        {
+        if (gem instanceof EntityZircon) {
             ((EntityZircon) gem).setEnchantPage(RandomSource.create().nextInt(ModEnchants.VANILLA_ENCHANTMENTS.size()));
+            ((EntityZircon) gem).setEnchantPageDefined(true);
         }
         //gem.generateScoutList();
         gem.idlePowers = gem.generateIdlePowers();

@@ -31,8 +31,10 @@ public class CommandGempireRelease extends CommandBase {
         AABB aabb = source.getPlayerOrException().getBoundingBox().inflate(12.0D);
         List<EntityGem> gems = source.getLevel().getEntitiesOfClass(EntityGem.class, aabb);
         for(EntityGem gem : gems){
-            if(gem.isOwner(source.getPlayerOrException())){
-                gem.resetOwners();
+            if (!gem.getRebelled()) {
+                if(gem.isOwner(source.getPlayerOrException())){
+                    gem.resetOwners();
+                }
             }
         }
         return Command.SINGLE_SUCCESS;
