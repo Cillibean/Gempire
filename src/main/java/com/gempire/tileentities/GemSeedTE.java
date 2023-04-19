@@ -1,6 +1,9 @@
 package com.gempire.tileentities;
 
 import com.gempire.blocks.DrainedBlock;
+import com.gempire.blocks.GemSeedBlock;
+import com.gempire.blocks.machine.PowerCrystalBlock;
+import com.gempire.blocks.machine.TankBlock;
 import com.gempire.init.*;
 import com.gempire.items.ItemChroma;
 import com.gempire.systems.injection.Crux;
@@ -160,13 +163,35 @@ public class GemSeedTE extends BlockEntity {
         if (!(block instanceof AirBlock) &&
                 !(block instanceof SlabBlock) &&
                 !(block instanceof BushBlock) &&
-                !(block instanceof SnowLayerBlock) && !(block instanceof LiquidBlock)) {
-            if (block == ModBlocks.GEM_SEED_BLOCK.get() ||
-                    block == ModBlocks.DRILL_BLOCK.get() || block == ModBlocks.TANK_BLOCK.get() ||
-                    block == ModBlocks.POWER_CRYSTAL_BLOCK.get()) {
+                !(block instanceof SnowLayerBlock) &&
+                !(block instanceof LiquidBlock) &&
+                !(block instanceof TorchBlock) &&
+                !(block instanceof BedBlock) &&
+                !(block instanceof BeaconBlock) &&
+                !(block instanceof WoolCarpetBlock) &&
+                !(block instanceof TargetBlock) &&
+                !(block instanceof DoorBlock) &&
+                !(block instanceof RailBlock) &&
+                !(block instanceof ChestBlock) &&
+                !(block instanceof FurnaceBlock) &&
+                !(block instanceof FenceBlock) &&
+                !(block instanceof FenceGateBlock) &&
+                !(block instanceof GlassBlock) &&
+                !(block instanceof IronBarsBlock) &&
+                !(block instanceof CraftingTableBlock) &&
+                !(block instanceof AnvilBlock) &&
+                !(block instanceof BlastFurnaceBlock) &&
+                !(block instanceof SmokerBlock) &&
+                !(block instanceof LoomBlock) &&
+                !(block instanceof CartographyTableBlock) &&
+                !(block instanceof CactusBlock) &&
+                !(block instanceof TankBlock) &&
+                !(block instanceof GemSeedBlock) &&
+                !(block instanceof PowerCrystalBlock) ) {
+            if (block == ModBlocks.DRILL_BLOCK.get()) {
 
             } else if (block == Blocks.DIRT || block == Blocks.GRASS_BLOCK || block == Blocks.DIRT_PATH
-                    || block == Blocks.GRAVEL) {
+                    || block == Blocks.GRAVEL || block == Blocks.MOSS_BLOCK) {
                 this.level.setBlockAndUpdate(blockPos, this.drained_soil.defaultBlockState());
             } else if (block == Blocks.SAND || block == Blocks.RED_SAND || block == Blocks.SOUL_SAND) {
                 this.level.setBlockAndUpdate(blockPos, this.drained_sand.defaultBlockState());

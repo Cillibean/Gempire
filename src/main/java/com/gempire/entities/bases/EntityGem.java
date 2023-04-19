@@ -27,6 +27,7 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
@@ -57,6 +58,7 @@ import net.minecraftforge.network.NetworkHooks;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.apache.commons.lang3.ArrayUtils;
+import org.lwjgl.stb.STBIIOCallbacks;
 
 import javax.annotation.Nullable;
 import javax.imageio.ImageIO;
@@ -954,15 +956,24 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     public void setSkinColor(int value){
         this.entityData.set(EntityGem.SKIN_COLOR, value);
     }
+    public void popShitOut()
+    {
+        ItemStack itemStack = new ItemStack(getOutputItem());
+        this.spawnAtLocation(itemStack);
+        this.gameEvent(GameEvent.ENTITY_PLACE);
+        ticking = 0;
+        this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
+        isCrafting = false;
+    }
 
-    public int generatePaletteColor(PaletteType type){
-        if(type == PaletteType.MARKINGS){
-            if(!hasMarkings()){
+    public int generatePaletteColor(PaletteType type) {
+        if (type == PaletteType.MARKINGS) {
+            if (!hasMarkings()) {
                 return 0;
             }
         }
-        if(type == PaletteType.MARKINGS_2){
-            if(!hasMarkings2()){
+        if (type == PaletteType.MARKINGS_2) {
+            if (!hasMarkings2()) {
                 return 0;
             }
         }
@@ -986,15 +997,6 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             colors.add(0x00000);
         }
         return Color.lerpHex(colors);
-    }
-    public void popShitOut()
-    {
-        ItemStack itemStack = new ItemStack(getOutputItem());
-        this.spawnAtLocation(itemStack);
-        this.gameEvent(GameEvent.ENTITY_PLACE);
-        ticking = 0;
-        this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
-        isCrafting = false;
     }
 
     public String generateFacet() {

@@ -17,9 +17,9 @@
       "multiblock": {
         "pattern": [
           [
-            " I ",
+            "_I_",
             "I0I",
-            " I "
+            "_I_"
           ]
         ],
         "mapping": {
