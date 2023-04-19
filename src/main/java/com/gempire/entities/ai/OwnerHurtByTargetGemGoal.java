@@ -35,10 +35,12 @@ public class OwnerHurtByTargetGemGoal extends TargetGoal {
                     }
                 } else {
                     player = this.entityGem.level.getPlayerByUUID(this.entityGem.OWNERS.get(0));
-                    this.ownerLastHurtBy = player.getLastHurtByMob();
-                    int n = player.getLastHurtByMobTimestamp();
-                    if (n != this.timestamp && this.canAttack(this.ownerLastHurtBy, TargetingConditions.DEFAULT) && this.entityGem.wantsToAttack(this.ownerLastHurtBy, player)) {
-                        use = true;
+                    if (this.player != null) {
+                        this.ownerLastHurtBy = player.getLastHurtByMob();
+                        int n = player.getLastHurtByMobTimestamp();
+                        if (n != this.timestamp && this.canAttack(this.ownerLastHurtBy, TargetingConditions.DEFAULT) && this.entityGem.wantsToAttack(this.ownerLastHurtBy, player)) {
+                            use = true;
+                        }
                     }
                 }
                 } else {
