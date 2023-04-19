@@ -82,20 +82,15 @@ public class EntityGarnet extends EntityVaryingGem {
 
     public Abilities[] possibleAbilities(){
         return new Abilities[]{
-                Abilities.NO_ABILITY, Abilities.TANK, Abilities.BEEFCAKE, Abilities.POWERHOUSE, Abilities.UNHINGED, Abilities.BERSERKER
+                Abilities.NO_ABILITY, Abilities.TANK, Abilities.BEEFCAKE, Abilities.POWERHOUSE, Abilities.UNHINGED, Abilities.BERSERKER, Abilities.ABUNDANCE
         };
     }
     public Abilities[] definiteAbilities(){
-        if (random.nextInt(2) == 0) {
-            return new Abilities[]{
+        return new Abilities[]{
                     Abilities.DISARMING
-            };
-        } else {
-            return new Abilities[]{
-                    Abilities.ABUNDANCE
-            };
-        }
+        };
     }
+
     public boolean doHurtTarget(Entity entityIn) {
         for (Ability ability : this.getAbilityPowers()) {
             if (ability instanceof AbilityDisarming) {

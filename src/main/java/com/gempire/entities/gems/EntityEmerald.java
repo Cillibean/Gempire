@@ -101,22 +101,13 @@ public class EntityEmerald extends EntityGem {
 
     public Abilities[] possibleAbilities(){
         return new Abilities[]{
-                Abilities.NO_ABILITY, Abilities.TANK, Abilities.BEEFCAKE, Abilities.POWERHOUSE, Abilities.UNHINGED
+                Abilities.NO_ABILITY, Abilities.TANK, Abilities.BEEFCAKE, Abilities.POWERHOUSE, Abilities.UNHINGED, Abilities.ELECTROKINESIS
         };
     }
     public Abilities[] definiteAbilities(){
-        int test = random.nextInt(2);
-        if (test == 0) {
-            return new Abilities[]{
-                    Abilities.NEGOTIATOR,
-                    Abilities.ELECTROKINESIS
-            };
-        } else {
-            return new Abilities[]{
-                    Abilities.RECALL,
-                    Abilities.ELECTROKINESIS
-            };
-        }
+        return new Abilities[]{
+                Abilities.NEGOTIATOR, Abilities.RECALL
+        };
     }
 
     public int generateSkinColorVariant() {
