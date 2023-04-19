@@ -33,9 +33,8 @@ public class AbilityBeastmaster extends Ability implements IIdleAbility {
     @Override
     public void execute() {
         List<Wolf> list = this.holder.level.getEntitiesOfClass(Wolf.class, this.holder.getBoundingBox().inflate(14.0D, 8.0D, 14.0D));
-        List<Wolf> tamedList = new ArrayList<Wolf>();
         for (Wolf wolf : list) {
-            if (!tamedList.contains(wolf)) {
+            if (!wolf.isTame()) {
                 if (holder.getOwned()) {
                     if (holder.currentPlayer != null) {
                         if (holder.abilityTicks == 0) {
@@ -47,9 +46,8 @@ public class AbilityBeastmaster extends Ability implements IIdleAbility {
                                 wolf.setInSittingPose(false);
                                 wolf.setOrderedToSit(false);
                                 wolf.getNavigation().stop();
-                                wolf.setTarget((LivingEntity)null);
+                                wolf.setTarget(null);
                                 holder.abilityTicks = 20 * 30;
-                                tamedList.add(wolf);
                             }
                         }
                     }
