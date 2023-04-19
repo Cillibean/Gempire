@@ -18,6 +18,10 @@ public class ItemTransferContract extends ItemContractBase{
             ((EntityGem) entity).OWNERS.remove(player.getUUID());
             ((EntityGem) entity).MASTER_OWNER = getPlayerUUID(itemStack);
             ((EntityGem) entity).OWNERS.add(getPlayerUUID(itemStack));
+            if (((EntityGem) entity).getMovementType() == 2) {
+                ((EntityGem) entity).getNavigation().stop();
+                ((EntityGem) entity).setFollow(((EntityGem) entity).MASTER_OWNER);
+            }
             player.sendSystemMessage(Component.translatable("Transferred ").append(entity.getName()).append(" to ").append(Component.literal((getPlayerName(itemStack)))));
         }
         else {
