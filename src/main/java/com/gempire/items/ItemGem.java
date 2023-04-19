@@ -271,10 +271,10 @@ public class ItemGem extends Item {
     public void appendHoverText(ItemStack itemStack, @Nullable Level level, List<Component> p_40553_, TooltipFlag p_40554_) {
         if (Screen.hasShiftDown()) {
             if (checkTags(itemStack)) {
-                if (this.gemToAssign != null) {
-                    p_40553_.add(Component.translatable(itemStack.getTag().getString("name")).withStyle(ChatFormatting.GOLD));
-                    p_40553_.add(Component.translatable( "Assigned to " + assigned_gem.getName().getString() + " " + assigned_gem.getFacetAndCut()));
-                }
+                p_40553_.add(Component.translatable(itemStack.getTag().getString("name")).withStyle(ChatFormatting.GRAY));
+            }
+            if (this.gemToAssign != null) {
+                p_40553_.add(Component.translatable( "Assigned to " + assigned_gem.getName().getString() + " " + assigned_gem.getFacetAndCut()));
             }
         } else {
             if (checkTags(itemStack)) {

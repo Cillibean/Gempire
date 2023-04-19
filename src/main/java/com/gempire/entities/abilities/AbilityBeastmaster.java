@@ -9,6 +9,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.animal.Wolf;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.AABB;
@@ -37,7 +39,15 @@ public class AbilityBeastmaster extends Ability implements IIdleAbility {
                         holder.getNavigation().moveTo(wolf, 1);
                         holder.lookAt(wolf, 90F, 90F);
                         if (holder.distanceToSqr(wolf) < Math.pow(2, 1)) {
-                            wolf.tame(holder.currentPlayer);
+                            wolf.setTame(false);
+                            wolf.setOwnerUUID(holder.getUUID());
+                            wolf.setOrderedToSit(false);
+                            wolf.getNavigation().stop();
+                            wolf.setTarget(holder.getTarget());
+                            wolf.getAttribute(Attributes.MAX_HEALTH).setBaseValue(20.0D);
+                            wolf.setHealth(20.0F);
+                            wolf.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(4.0D);
+                            holder.level.broadcastEntityEvent(wolf, (byte)7);
                             holder.abilityTicks = 20 * 30;
                         }
                     }
