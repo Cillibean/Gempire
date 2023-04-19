@@ -28,26 +28,36 @@ public class OutfitLayer<E extends EntityGem, M extends ModelGem<E>> extends Gem
     public void render(PoseStack matrixStackIn, MultiBufferSource bufferIn, int packedLightIn, EntityGem gem, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
         float[] outfitColors = Sheep.getColorArray(DyeColor.byId(gem.getOutfitColor()));
         VertexConsumer builder = null;
-        if (gem.hasOutfitPlacementVariant()) {
-            for (int i : gem.outfitPlacementVariants()) {
-                if (i == gem.getGemPlacement()) {
-                    if (gem.getRebelled()) {
+        if (gem.getRebelled()) {
+            if (gem.hasOutfitPlacementVariant()) {
+                for (int i : gem.outfitPlacementVariants()) {
+                    if (i == gem.getGemPlacement()) {
                         builder = bufferIn.getBuffer(RenderType.entityTranslucent(new ResourceLocation(gem.getModID() + ":textures/entity/" + this.getName(gem).toLowerCase() + "/outfits/outfit_" + gem.getGemPlacement() + "_0.png")));
                         break;
                     } else {
-                        builder = bufferIn.getBuffer(RenderType.entityTranslucent(new ResourceLocation(gem.getModID() + ":textures/entity/" + this.getName(gem).toLowerCase() + "/outfits/outfit_" + gem.getGemPlacement() + "_0.png")));
+                        builder = bufferIn.getBuffer(RenderType.entityTranslucent(new ResourceLocation(gem.getModID() + ":textures/entity/" + this.getName(gem).toLowerCase() + "/outfits/outfit_" + gem.getOutfitVariant() + "_0.png")));
                     }
                 }
+            } else {
+                builder = bufferIn.getBuffer(RenderType.entityTranslucent(new ResourceLocation(gem.getModID() + ":textures/entity/" + this.getName(gem).toLowerCase() + "/outfits/outfit_" + gem.getRebelOutfitVariant() + ".png")));
             }
-        } else if (gem.getRebelled()){
-            builder = bufferIn.getBuffer(RenderType.entityTranslucent(new ResourceLocation(gem.getModID() + ":textures/entity/" + this.getName(gem).toLowerCase() + "/outfits/outfit_" + gem.getRebelOutfitVariant() + ".png")));
-        } else {
-            builder = bufferIn.getBuffer(RenderType.entityTranslucent(new ResourceLocation(gem.getModID() + ":textures/entity/" + this.getName(gem).toLowerCase() + "/outfits/outfit_" + gem.getOutfitVariant() + ".png")));
+        }
+        if (!gem.getRebelled()) {
+            if (gem.hasOutfitPlacementVariant()) {
+                for (int i : gem.outfitPlacementVariants()) {
+                    if (i == gem.getGemPlacement()) {
+                        builder = bufferIn.getBuffer(RenderType.entityTranslucent(new ResourceLocation(gem.getModID() + ":textures/entity/" + this.getName(gem).toLowerCase() + "/outfits/outfit_" + gem.getGemPlacement() + "_0.png")));
+                        break;
+                    } else {
+                        builder = bufferIn.getBuffer(RenderType.entityTranslucent(new ResourceLocation(gem.getModID() + ":textures/entity/" + this.getName(gem).toLowerCase() + "/outfits/outfit_" + gem.getOutfitVariant() + ".png")));
+                    }
+                }
+            } else {
+                builder = bufferIn.getBuffer(RenderType.entityTranslucent(new ResourceLocation(gem.getModID() + ":textures/entity/" + this.getName(gem).toLowerCase() + "/outfits/outfit_" + gem.getOutfitVariant() + ".png")));
+            }
         }
         this.getParentModel().setupAnim(gem, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-        if (builder != null) {
-            this.getParentModel().renderToBuffer(matrixStackIn, builder, packedLightIn, OverlayTexture.NO_OVERLAY, outfitColors[0], outfitColors[1], outfitColors[2], 1.0F);
-        }
+        this.getParentModel().renderToBuffer(matrixStackIn, builder, packedLightIn, OverlayTexture.NO_OVERLAY, outfitColors[0], outfitColors[1], outfitColors[2], 1.0F);
         /*if(gem instanceof EntityStarterGem){
             ModelStarterGem model = ((ModelStarterGem)this.getEntityModel());
             model.

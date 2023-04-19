@@ -18,7 +18,8 @@
         "pattern": [
           ["C"],
           ["P"],
-          ["0"]
+          ["0"],
+          ["_"]
         ],
         "mapping": {
           "P": "gempire:power_crystal_block[facing=up]",

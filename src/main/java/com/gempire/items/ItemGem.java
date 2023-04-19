@@ -7,6 +7,7 @@ import com.gempire.init.AddonHandler;
 import com.gempire.init.ModEntities;
 import com.gempire.init.ModItems;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -261,14 +262,26 @@ public class ItemGem extends Item {
                 MinecraftForge.EVENT_BUS.post(event);
                 world.addFreshEntity(gem);
                 System.out.println(gem.getGemPlacementE());
+                System.out.println(gem.getOutfitVariant() + " and " + gem.getInsigniaVariant());
                 return true;
             }
         }
         return false;
     }
     public void appendHoverText(ItemStack itemStack, @Nullable Level level, List<Component> p_40553_, TooltipFlag p_40554_) {
-        if (checkTags(itemStack)) {
-            p_40553_.add(Component.translatable(itemStack.getTag().getString("name")).withStyle(ChatFormatting.GRAY));
+        if (Screen.hasShiftDown()) {
+            if (checkTags(itemStack)) {
+                if (this.gemToAssign != null) {
+                    p_40553_.add(Component.translatable(itemStack.getTag().getString("name")).withStyle(ChatFormatting.GOLD));
+                    p_40553_.add(Component.translatable( "Assigned to " + assigned_gem.getName().getString() + " " + assigned_gem.getFacetAndCut()));
+                }
+            }
+        } else {
+            if (checkTags(itemStack)) {
+                p_40553_.add(Component.translatable(itemStack.getTag().getString("name")).withStyle(ChatFormatting.GRAY));
+            }
+            p_40553_.add(Component.translatable("Hold Shift for more info").withStyle(ChatFormatting.GOLD));
+
         }
     }
     public void setData(EntityGem host, ItemStack stack) {
