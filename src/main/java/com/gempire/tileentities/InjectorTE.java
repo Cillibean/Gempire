@@ -253,14 +253,15 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
                     this.getLevel().playSound(null, this.getBlockPos(), ModSounds.INJECT.get(), SoundSource.AMBIENT, 2f, 1);
                 }
                 GemSeedTE gemSeedTE = (GemSeedTE) this.level.getBlockEntity(seedPos);
+                assert gemSeedTE != null;
+                gemSeedTE.setEssences(essences);
+                gemSeedTE.SetChroma(chroma);
+                gemSeedTE.SetPrimer(primer);
                 if (level.getBlockState(crystalPos).getBlock() == ModBlocks.POWER_CRYSTAL_BLOCK.get()) {
                     gemSeedTE.setTier(1);
                 } else if (level.getBlockState(crystalPos).getBlock() == ModBlocks.POWER_CRYSTAL_BLOCK_TIER_2.get()) {
                     gemSeedTE.setTier(2);
                 }
-                gemSeedTE.setEssences(essences);
-                gemSeedTE.SetChroma(chroma);
-                gemSeedTE.SetPrimer(primer);
                 int facing = InjectorTE.getFacingFromState(this.getBlockState());
                 gemSeedTE.setFacing(facing);
                 System.out.println("Facing :" + facing);

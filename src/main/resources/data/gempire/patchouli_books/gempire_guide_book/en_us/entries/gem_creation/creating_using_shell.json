@@ -13,7 +13,7 @@
     {
       "type": "patchouli:multiblock",
       "name": "Shell",
-      "text": "In order to have your Nacre construct a Drill, you will need to build this multiblock, then interact with her with a pickaxe in your hand.",
+      "text": "In order to have your Nacre construct a Shell, you will need to build this multiblock, then interact with her with a pickaxe in your hand.",
       "multiblock": {
         "pattern": [
           ["C"],
@@ -22,7 +22,7 @@
         ],
         "mapping": {
           "P": "gempire:power_crystal_block[facing=up]",
-          "C": "minecraft:conduit",
+          "C": "minecraft:conduit[waterlogged=false]",
           "0": "minecraft:prismarine"
         },
         "symmetrical": true

@@ -22,6 +22,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.level.material.WaterFluid;
 import net.minecraftforge.fluids.IFluidBlock;
 import org.jetbrains.annotations.NotNull;
 
@@ -159,7 +160,7 @@ public class GemSeedTE extends BlockEntity {
         if (!(block instanceof AirBlock) &&
                 !(block instanceof SlabBlock) &&
                 !(block instanceof BushBlock) &&
-                !(block instanceof SnowLayerBlock)) {
+                !(block instanceof SnowLayerBlock) && !(block instanceof LiquidBlock)) {
             if (block == ModBlocks.GEM_SEED_BLOCK.get() ||
                     block == ModBlocks.DRILL_BLOCK.get() || block == ModBlocks.TANK_BLOCK.get() ||
                     block == ModBlocks.POWER_CRYSTAL_BLOCK.get()) {
