@@ -251,7 +251,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.setRebelHairVariant(this.generateHairVariant());
         this.setRebelOutfitVariant(this.generateOutfitVariant());
         this.setRebelOutfitColor(this.generateOutfitColor());
-        this.setRebelInsigniaVariant(this.generateInsigniaVariant());
+        this.setRebelInsigniaVariant(this.getRebelOutfitVariant());
         this.setRebelInsigniaColor(this.generateInsigniaColor());
         return super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
     }
