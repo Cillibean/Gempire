@@ -981,9 +981,14 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         System.out.println("[DEBUG] " + locString);
         ArrayList<Integer> colors = new ArrayList<>();
         ResourceLocation loc = new ResourceLocation(this.getModID() + ":textures/entity/" + this.getWholeGemName().toLowerCase() + "/palettes/" + locString + ".png");
+        ResourceLocation serverLoc = new ResourceLocation(this.getModID() + ":entity/" + this.getWholeGemName().toLowerCase() + "/palettes/" + locString + ".png");
         BufferedImage palette = null;
         try {
-            palette = ImageIO.read(Minecraft.getInstance().getResourceManager().getResource(loc).get().open());
+            if (this.level.isClientSide) {
+                palette = ImageIO.read(Minecraft.getInstance().getResourceManager().getResource(loc).get().open());
+            } else {
+                palette = ImageIO.read(this.getServer().getServerResources().resourceManager().open(serverLoc));
+            }
             System.out.println("Palette Read!");
             for (int x = 0; x < palette.getWidth(); x++) {
                 int color = palette.getRGB(x, this.getSkinColorVariant());
