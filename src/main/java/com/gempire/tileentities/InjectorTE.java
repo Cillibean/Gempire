@@ -68,7 +68,10 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
     public static final int WHITE_INPUT_SLOT_INDEX = 3;
     public static final int CHROMA_INPUT_SLOT_INDEX = 4;
     public static final int PRIME_INPUT_SLOT_INDEX = 5;
-    public int TANK_CAPACITY(){
+
+    public boolean incorrectEssence;
+
+    public int TANK_CAPACITY() {
         return 1000;
     }
 
@@ -121,6 +124,7 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
         itemHandler.deserializeNBT(nbt.getCompound("inventory"));
         super.load(nbt);
     }
+
     public void drops() {
         SimpleContainer inventory = new SimpleContainer(itemHandler.getSlots());
         for (int i = 0; i < itemHandler.getSlots(); i++) {
@@ -129,6 +133,7 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
 
         Containers.dropContents(this.level, this.worldPosition, inventory);
     }
+
     @Override
     public void saveAdditional(@NotNull CompoundTag compound) {
         compound.put("pinkTank", this.pinkTank.writeToNBT(new CompoundTag()));
@@ -146,18 +151,18 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
     //TODO: FIX LOTS OF NBT STUFF
 
     public static <T extends BlockEntity> void tick(Level level, BlockPos pos, BlockState state, T be) {
-        InjectorTE te = (InjectorTE)be;
-        if(!level.isClientSide()) {
+        InjectorTE te = (InjectorTE) be;
+        if (!level.isClientSide()) {
             te.HandleSlotUpdates();
         }
     }
 
-    public void HandleSlotUpdates(){
+    public void HandleSlotUpdates() {
         for (int i = 0; i < 4; i++) {
             ItemStack stack = itemHandler.getStackInSlot(i);
             if (this.shouldPullFluidFromStack(i)) {
                 if (stack.getItem() != Items.AIR) {
-                    if(stack.getItem() instanceof BucketItem bucket) {
+                    if (stack.getItem() instanceof BucketItem bucket) {
                         if (this.isValidForSlot(i, bucket)) {
                             //TODO: TEMPORARY
                             this.FillFluidTanks(i, 1000);
@@ -176,7 +181,7 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
 
     //INJECTOR FUNCTIONALITY
 
-    public void DumpFluids(){
+    public void DumpFluids() {
         if (this.pinkOpen) {
             FluidTank tank = this.getTankFromValue(0);
             tank.setFluid(FluidStack.EMPTY);
@@ -198,14 +203,94 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
         this.setChanged();
     }
 
+    public boolean fluidValid() {
+        if (pinkOpen) {
+            if (!this.blueOpen && !this.yellowOpen && !this.whiteOpen) {
+                return !this.getTankFromValue(0).isFluidValid(FluidStack.EMPTY);
+            } else if (this.blueOpen && !this.yellowOpen && !this.whiteOpen) {
+                return !this.getTankFromValue(0).isFluidValid(FluidStack.EMPTY) && !this.getTankFromValue(1).isFluidValid(FluidStack.EMPTY);
+            } else if (this.yellowOpen && !this.blueOpen && !this.whiteOpen) {
+                return !this.getTankFromValue(0).isFluidValid(FluidStack.EMPTY) && !this.getTankFromValue(2).isFluidValid(FluidStack.EMPTY);
+            } else if (this.whiteOpen && !this.blueOpen && !this.yellowOpen) {
+                return !this.getTankFromValue(0).isFluidValid(FluidStack.EMPTY) && !this.getTankFromValue(3).isFluidValid(FluidStack.EMPTY);
+            } else if (this.blueOpen && this.yellowOpen && !this.whiteOpen) {
+                return !this.getTankFromValue(0).isFluidValid(FluidStack.EMPTY) && !this.getTankFromValue(1).isFluidValid(FluidStack.EMPTY) && !this.getTankFromValue(2).isFluidValid(FluidStack.EMPTY);
+            } else if (this.blueOpen && !this.yellowOpen) {
+                return !this.getTankFromValue(0).isFluidValid(FluidStack.EMPTY) && !this.getTankFromValue(1).isFluidValid(FluidStack.EMPTY) && !this.getTankFromValue(3).isFluidValid(FluidStack.EMPTY);
+            } else if (!this.blueOpen) {
+                return !this.getTankFromValue(0).isFluidValid(FluidStack.EMPTY) && !this.getTankFromValue(2).isFluidValid(FluidStack.EMPTY) && !this.getTankFromValue(3).isFluidValid(FluidStack.EMPTY);
+            } else {
+                return !this.getTankFromValue(0).isFluidValid(FluidStack.EMPTY) && !this.getTankFromValue(1).isFluidValid(FluidStack.EMPTY) && !this.getTankFromValue(2).isFluidValid(FluidStack.EMPTY) && !this.getTankFromValue(3).isFluidValid(FluidStack.EMPTY);
+            }
+        }
+        if (blueOpen) {
+            if (!this.pinkOpen && !this.yellowOpen && !this.whiteOpen) {
+                return !this.getTankFromValue(1).isFluidValid(FluidStack.EMPTY);
+            } else if (this.pinkOpen && !this.yellowOpen && !this.whiteOpen) {
+                return !this.getTankFromValue(1).isFluidValid(FluidStack.EMPTY) && !this.getTankFromValue(0).isFluidValid(FluidStack.EMPTY);
+            } else if (this.yellowOpen && !this.pinkOpen && !this.whiteOpen) {
+                return !this.getTankFromValue(1).isFluidValid(FluidStack.EMPTY) && !this.getTankFromValue(2).isFluidValid(FluidStack.EMPTY);
+            } else if (this.whiteOpen && !this.pinkOpen && !this.yellowOpen) {
+                return !this.getTankFromValue(1).isFluidValid(FluidStack.EMPTY) && !this.getTankFromValue(3).isFluidValid(FluidStack.EMPTY);
+            } else if (this.pinkOpen && this.yellowOpen && !this.whiteOpen) {
+                return !this.getTankFromValue(1).isFluidValid(FluidStack.EMPTY) && !this.getTankFromValue(0).isFluidValid(FluidStack.EMPTY) && !this.getTankFromValue(2).isFluidValid(FluidStack.EMPTY);
+            } else if (this.pinkOpen && !this.yellowOpen) {
+                return !this.getTankFromValue(1).isFluidValid(FluidStack.EMPTY) && !this.getTankFromValue(0).isFluidValid(FluidStack.EMPTY) && !this.getTankFromValue(3).isFluidValid(FluidStack.EMPTY);
+            } else if (!this.pinkOpen) {
+                return !this.getTankFromValue(1).isFluidValid(FluidStack.EMPTY) && !this.getTankFromValue(2).isFluidValid(FluidStack.EMPTY) && !this.getTankFromValue(3).isFluidValid(FluidStack.EMPTY);
+            } else {
+                return !this.getTankFromValue(1).isFluidValid(FluidStack.EMPTY) && !this.getTankFromValue(0).isFluidValid(FluidStack.EMPTY) && !this.getTankFromValue(2).isFluidValid(FluidStack.EMPTY) && !this.getTankFromValue(3).isFluidValid(FluidStack.EMPTY);
+            }
+        }
+        if (yellowOpen) {
+            if (!this.blueOpen && !this.pinkOpen && !this.whiteOpen) {
+                return !this.getTankFromValue(2).isFluidValid(FluidStack.EMPTY);
+            } else if (this.blueOpen && !this.pinkOpen && !this.whiteOpen) {
+                return !this.getTankFromValue(2).isFluidValid(FluidStack.EMPTY) && !this.getTankFromValue(1).isFluidValid(FluidStack.EMPTY);
+            } else if (this.pinkOpen && !this.blueOpen && !this.whiteOpen) {
+                return !this.getTankFromValue(2).isFluidValid(FluidStack.EMPTY) && !this.getTankFromValue(0).isFluidValid(FluidStack.EMPTY);
+            } else if (this.whiteOpen && !this.blueOpen && !this.pinkOpen) {
+                return !this.getTankFromValue(2).isFluidValid(FluidStack.EMPTY) && !this.getTankFromValue(3).isFluidValid(FluidStack.EMPTY);
+            } else if (this.blueOpen && this.pinkOpen && !this.whiteOpen) {
+                return !this.getTankFromValue(2).isFluidValid(FluidStack.EMPTY) && !this.getTankFromValue(1).isFluidValid(FluidStack.EMPTY) && !this.getTankFromValue(0).isFluidValid(FluidStack.EMPTY);
+            } else if (this.blueOpen && !this.pinkOpen) {
+                return !this.getTankFromValue(2).isFluidValid(FluidStack.EMPTY) && !this.getTankFromValue(1).isFluidValid(FluidStack.EMPTY) && !this.getTankFromValue(3).isFluidValid(FluidStack.EMPTY);
+            } else if (!this.blueOpen) {
+                return !this.getTankFromValue(2).isFluidValid(FluidStack.EMPTY) && !this.getTankFromValue(0).isFluidValid(FluidStack.EMPTY) && !this.getTankFromValue(3).isFluidValid(FluidStack.EMPTY);
+            } else {
+                return !this.getTankFromValue(2).isFluidValid(FluidStack.EMPTY) && !this.getTankFromValue(1).isFluidValid(FluidStack.EMPTY) && !this.getTankFromValue(0).isFluidValid(FluidStack.EMPTY) && !this.getTankFromValue(3).isFluidValid(FluidStack.EMPTY);
+            }
+        }
+        if (whiteOpen) {
+            if (!this.blueOpen && !this.yellowOpen && !this.pinkOpen) {
+                return !this.getTankFromValue(3).isFluidValid(FluidStack.EMPTY);
+            } else if (this.blueOpen && !this.yellowOpen && !this.pinkOpen) {
+                return !this.getTankFromValue(3).isFluidValid(FluidStack.EMPTY) && !this.getTankFromValue(1).isFluidValid(FluidStack.EMPTY);
+            } else if (this.yellowOpen && !this.blueOpen && !this.pinkOpen) {
+                return !this.getTankFromValue(3).isFluidValid(FluidStack.EMPTY) && !this.getTankFromValue(2).isFluidValid(FluidStack.EMPTY);
+            } else if (this.pinkOpen && !this.blueOpen && !this.yellowOpen) {
+                return !this.getTankFromValue(3).isFluidValid(FluidStack.EMPTY) && !this.getTankFromValue(0).isFluidValid(FluidStack.EMPTY);
+            } else if (this.blueOpen && this.yellowOpen && !this.pinkOpen) {
+                return !this.getTankFromValue(3).isFluidValid(FluidStack.EMPTY) && !this.getTankFromValue(1).isFluidValid(FluidStack.EMPTY) && !this.getTankFromValue(2).isFluidValid(FluidStack.EMPTY);
+            } else if (this.blueOpen && !this.yellowOpen) {
+                return !this.getTankFromValue(3).isFluidValid(FluidStack.EMPTY) && !this.getTankFromValue(1).isFluidValid(FluidStack.EMPTY) && !this.getTankFromValue(0).isFluidValid(FluidStack.EMPTY);
+            } else if (!this.blueOpen) {
+                return !this.getTankFromValue(3).isFluidValid(FluidStack.EMPTY) && !this.getTankFromValue(2).isFluidValid(FluidStack.EMPTY) && !this.getTankFromValue(0).isFluidValid(FluidStack.EMPTY);
+            } else {
+                return !this.getTankFromValue(3).isFluidValid(FluidStack.EMPTY) && !this.getTankFromValue(1).isFluidValid(FluidStack.EMPTY) && !this.getTankFromValue(2).isFluidValid(FluidStack.EMPTY) && !this.getTankFromValue(0).isFluidValid(FluidStack.EMPTY);
+            }
+        } else {
+            return true;
+        }
+    }
+
+
     public void Inject() {
         BlockPos crystalPos = getBlockPos().above().above().above();
+        incorrectEssence = true;
         if (level.getBlockState(crystalPos).getBlock() instanceof PowerCrystalBlock) {
             if (itemHandler.getStackInSlot(CHROMA_INPUT_SLOT_INDEX).getItem() instanceof ItemChroma chroma &&
-                    (this.getFluidFromValue(0) != Fluids.EMPTY && this.pinkOpen ||
-                            this.getFluidFromValue(1) != Fluids.EMPTY && this.blueOpen ||
-                            this.getFluidFromValue(2) != Fluids.EMPTY && this.yellowOpen ||
-                            this.getFluidFromValue(3) != Fluids.EMPTY && this.whiteOpen)) {
+                    (fluidValid())) {
                 int portionToDrain = 0;
                 if (this.pinkOpen) {
                     portionToDrain++;
@@ -232,45 +317,49 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
                     } else if (i == 3 && this.whiteOpen) {
                         essenceName = "white";
                     }
-                    if (!essenceName.isEmpty() && tank.getFluid() != FluidStack.EMPTY) {
-                        if (!essences.isEmpty()) {
-                            essences += "-";
+                    if (!essenceName.isEmpty()) {
+                        if (tank.getFluid() != FluidStack.EMPTY && !tank.isEmpty()) {
+                            if (!essences.isEmpty()) {
+                                essences += "-";
+                            }
+                            incorrectEssence = false;
+                            essences += essenceName;
+                            tank.getFluid().setAmount(Math.max(tank.getFluidAmount() - (200 / portionToDrain), 0));
                         }
-                        essences += essenceName;
-                        tank.getFluid().setAmount(Math.max(tank.getFluidAmount() - (200 / portionToDrain), 0));
                     }
                 }
-                BlockPos seedPos = this.getBlockPos().offset(new BlockPos(0, -Math.ceil(GemSeedTE.DRAIN_SIZE / 2) - 1, 0));
-                while (this.level.getBlockState(seedPos) == Blocks.AIR.defaultBlockState() ||
-                        this.level.getBlockState(seedPos).getBlock() instanceof LiquidBlock ||
-                        this.level.getBlockState(seedPos) == ModBlocks.GEM_SEED_BLOCK.get().defaultBlockState()) {
-                    seedPos = seedPos.offset(0, -GemSeedTE.DRAIN_SIZE, 0);
-                }
-                Item primer = itemHandler.getStackInSlot(PRIME_INPUT_SLOT_INDEX).getItem();
-                GemSeedBlock seedBlock = (GemSeedBlock) ModBlocks.GEM_SEED_BLOCK.get();
-                this.level.setBlockAndUpdate(seedPos, seedBlock.defaultBlockState());
-                if (this.level.getBlockState(seedPos).getBlock() == ModBlocks.GEM_SEED_BLOCK.get()) {
-                    this.getLevel().playSound(null, this.getBlockPos(), ModSounds.INJECT.get(), SoundSource.AMBIENT, 2f, 1);
-                }
-                GemSeedTE gemSeedTE = (GemSeedTE) this.level.getBlockEntity(seedPos);
-                assert gemSeedTE != null;
-                gemSeedTE.setEssences(essences);
-                gemSeedTE.SetChroma(chroma);
-                gemSeedTE.SetPrimer(primer);
-                if (level.getBlockState(crystalPos).getBlock() == ModBlocks.POWER_CRYSTAL_BLOCK.get()) {
-                    gemSeedTE.setTier(1);
-                } else if (level.getBlockState(crystalPos).getBlock() == ModBlocks.POWER_CRYSTAL_BLOCK_TIER_2.get()) {
-                    gemSeedTE.setTier(2);
-                }
-                int facing = InjectorTE.getFacingFromState(this.getBlockState());
-                gemSeedTE.setFacing(facing);
-                System.out.println("Facing :" + facing);
-                itemHandler.extractItem(InjectorTE.CHROMA_INPUT_SLOT_INDEX, 1, false);
-                itemHandler.extractItem(InjectorTE.PRIME_INPUT_SLOT_INDEX, 1, false);
-                this.level.sendBlockUpdated(this.worldPosition, this.getBlockState(), this.getBlockState(), 2);
-                this.setChanged();
-                InjectEvent event = new InjectEvent(gemSeedTE, seedPos);
-                MinecraftForge.EVENT_BUS.post(event);
+                    BlockPos seedPos = this.getBlockPos().offset(new BlockPos(0, -Math.ceil(GemSeedTE.DRAIN_SIZE / 2) - 1, 0));
+                    while (this.level.getBlockState(seedPos) == Blocks.AIR.defaultBlockState() ||
+                            this.level.getBlockState(seedPos).getBlock() instanceof LiquidBlock ||
+                            this.level.getBlockState(seedPos) == ModBlocks.GEM_SEED_BLOCK.get().defaultBlockState()) {
+                        seedPos = seedPos.offset(0, -GemSeedTE.DRAIN_SIZE, 0);
+                    }
+                    Item primer = itemHandler.getStackInSlot(PRIME_INPUT_SLOT_INDEX).getItem();
+                    GemSeedBlock seedBlock = (GemSeedBlock) ModBlocks.GEM_SEED_BLOCK.get();
+                    this.level.setBlockAndUpdate(seedPos, seedBlock.defaultBlockState());
+                    if (this.level.getBlockState(seedPos).getBlock() == ModBlocks.GEM_SEED_BLOCK.get()) {
+                        this.getLevel().playSound(null, this.getBlockPos(), ModSounds.INJECT.get(), SoundSource.AMBIENT, 2f, 1);
+                    }
+                    GemSeedTE gemSeedTE = (GemSeedTE) this.level.getBlockEntity(seedPos);
+                    if (gemSeedTE != null) {
+                        gemSeedTE.setEssences(essences);
+                        gemSeedTE.SetChroma(chroma);
+                        gemSeedTE.SetPrimer(primer);
+                        if (level.getBlockState(crystalPos).getBlock() == ModBlocks.POWER_CRYSTAL_BLOCK.get()) {
+                            gemSeedTE.setTier(1);
+                        } else if (level.getBlockState(crystalPos).getBlock() == ModBlocks.POWER_CRYSTAL_BLOCK_TIER_2.get()) {
+                            gemSeedTE.setTier(2);
+                        }
+                        int facing = InjectorTE.getFacingFromState(this.getBlockState());
+                        gemSeedTE.setFacing(facing);
+                        System.out.println("Facing :" + facing);
+                        itemHandler.extractItem(InjectorTE.CHROMA_INPUT_SLOT_INDEX, 1, false);
+                        itemHandler.extractItem(InjectorTE.PRIME_INPUT_SLOT_INDEX, 1, false);
+                        this.level.sendBlockUpdated(this.worldPosition, this.getBlockState(), this.getBlockState(), 2);
+                        this.setChanged();
+                        InjectEvent event = new InjectEvent(gemSeedTE, seedPos);
+                        MinecraftForge.EVENT_BUS.post(event);
+                    }
             }
         }
     }
