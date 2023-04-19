@@ -9,6 +9,7 @@ import com.gempire.entities.bases.EntityVaryingGem;
 import com.gempire.init.ModEnchants;
 import com.gempire.util.Abilities;
 import com.gempire.util.GemPlacements;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -23,6 +24,9 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.world.item.AirItem;
+import net.minecraft.world.item.BookItem;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 
 import javax.annotation.Nullable;
@@ -40,12 +44,15 @@ public class EntityZircon extends EntityVaryingGem {
     public NonNullList<ItemStack> zirconItems = NonNullList.withSize(EntityZircon.NUMBER_OF_SLOTS, ItemStack.EMPTY);
     public static final EntityDataAccessor<Integer> ENCHANT_PAGE = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
     public static EntityDataAccessor<Integer> ENCHANT_MIN = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
+    public static EntityDataAccessor<Boolean> ENCHANT_PAGE_DEFINED = SynchedEntityData.<Boolean>defineId(EntityGem.class, EntityDataSerializers.BOOLEAN);
+
     public int ENCHANTMENT_PAGES = 0;
 
     public EntityZircon(EntityType<? extends PathfinderMob> type, Level worldIn) {
         super(type, worldIn);
         this.entityData.define(EntityZircon.ENCHANT_PAGE, 0);
         this.entityData.define(EntityZircon.ENCHANT_MIN, 0);
+        this.entityData.define(EntityZircon.ENCHANT_PAGE_DEFINED, false);
         this.ENCHANTMENT_PAGES = ModEnchants.VANILLA_ENCHANTMENTS.size();
     }
 
@@ -78,6 +85,7 @@ public class EntityZircon extends EntityVaryingGem {
         super.addAdditionalSaveData(compound);
         compound.putInt("page", this.getEnchantPage());
         compound.putInt("min", this.getEnchantMin());
+        compound.putBoolean("pagedefined", this.getEnchantPageDefined());
         ContainerHelper.saveAllItems(compound, this.zirconItems);
     }
 
@@ -86,6 +94,7 @@ public class EntityZircon extends EntityVaryingGem {
         super.load(compound);
         this.setEnchantPage(compound.getInt("page"));
         this.setEnchantMin(compound.getInt("min"));
+        this.setEnchantPageDefined(compound.getBoolean("pagedefined"));
         ContainerHelper.loadAllItems(compound, this.zirconItems);
     }
 
@@ -228,6 +237,10 @@ public class EntityZircon extends EntityVaryingGem {
         return this.entityData.get(EntityZircon.ENCHANT_PAGE);
     }
 
+    public int generateEnchantPage(){
+        return this.random.nextInt(ModEnchants.VANILLA_ENCHANTMENTS.size());
+    }
+
     public void setEnchantMin(int page){
         this.entityData.set(EntityZircon.ENCHANT_MIN, page);
     }
@@ -241,33 +254,33 @@ public class EntityZircon extends EntityVaryingGem {
         ItemStack tool = this.getItem(1);
         int level = EntityZircon.getEnchantLevelFromLapisCount(lapis.getCount(), this);
         int xp = this.currentPlayer.isCreative() ? 0 : Math.max(this.getXP(this.getDiscountFromStack(this.getItem(2))), 0);
+        Item item = tool.getItem();
         if(this.currentPlayer.totalExperience >= xp) {
-            if (tool.isEnchantable()) {
-                if(level >= 1) {
-                    if (tool.canApplyAtEnchantingTable(ModEnchants.VANILLA_ENCHANTMENTS.get(this.getEnchantPage()))) {
-                        tool.enchant(ModEnchants.VANILLA_ENCHANTMENTS.get(this.getEnchantPage()), level);
-                        this.setItem(0, ItemStack.EMPTY);
-                        this.setItem(2, ItemStack.EMPTY);
-                        decreaseExp(this.currentPlayer, xp);
+            if (!tool.isEmpty()) {
+                if (tool.isEnchantable() || item instanceof BookItem) {
+                    if(level >= 1) {
+                        if (tool.canApplyAtEnchantingTable(ModEnchants.VANILLA_ENCHANTMENTS.get(this.getEnchantPage())) || item instanceof BookItem) {
+                            tool.enchant(ModEnchants.VANILLA_ENCHANTMENTS.get(this.getEnchantPage()), level);
+                            this.setItem(0, ItemStack.EMPTY);
+                            this.setItem(2, ItemStack.EMPTY);
+                            decreaseExp(this.currentPlayer, xp);
+                        }
+                        else{
+                            this.currentPlayer.sendSystemMessage(Component.translatable("messages.gempire.entity.enchant_not_apply"));
+                        }
                     }
                     else{
-                        this.currentPlayer.sendSystemMessage(Component.translatable("messages.gempire.entity.enchant_not_apply"));
-                        return;
+                        this.currentPlayer.sendSystemMessage(Component.translatable("messages.gempire.entity.need_lapis"));
                     }
+                } else {
+                    this.currentPlayer.sendSystemMessage(Component.translatable("messages.gempire.entity.cant_enchant"));
                 }
-                else{
-                    this.currentPlayer.sendSystemMessage(Component.translatable("messages.gempire.entity.need_lapis"));
-                    return;
-                }
-            }
-            else{
-                this.currentPlayer.sendSystemMessage(Component.translatable("messages.gempire.entity.cant_enchant"));
-                return;
+            } else{
+                this.currentPlayer.sendSystemMessage(Component.translatable("messages.gempire.entity.cant_enchant_air"));
             }
         }
         else{
             this.currentPlayer.sendSystemMessage(Component.translatable("messages.gempire.entity.player_need_xp"));
-            return;
         }
     }
 
@@ -340,5 +353,13 @@ public class EntityZircon extends EntityVaryingGem {
     @Override
     public boolean canOpenInventoryByDefault() {
         return true;
+    }
+
+    public boolean getEnchantPageDefined() {
+        return this.entityData.get(ENCHANT_PAGE_DEFINED);
+    }
+
+    public void setEnchantPageDefined(boolean enchantPageDefined) {
+        this.entityData.set(ENCHANT_PAGE_DEFINED, enchantPageDefined);
     }
 }

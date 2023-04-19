@@ -32,9 +32,11 @@ public class CommandGempireFollow extends CommandBase {
         AABB aabb = source.getPlayerOrException().getBoundingBox().inflate(12.0D);
         List<EntityGem> gems = source.getLevel().getEntitiesOfClass(EntityGem.class, aabb);
         for(EntityGem gem : gems){
-            if(gem.isOwner(source.getPlayerOrException())){
-                gem.FOLLOW_ID = source.getPlayerOrException().getUUID();
-                gem.setMovementType((byte) 2);
+            if (!gem.getRebelled()) {
+                if(gem.isOwner(source.getPlayerOrException())){
+                    gem.FOLLOW_ID = source.getPlayerOrException().getUUID();
+                    gem.setMovementType((byte) 2);
+                }
             }
         }
         return Command.SINGLE_SUCCESS;

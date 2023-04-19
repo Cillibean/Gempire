@@ -273,6 +273,10 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         }
     }
 
+    public boolean wantsToAttack(LivingEntity p_21810_, LivingEntity p_21811_) {
+        return true;
+    }
+
     public boolean checkNotRebel(LivingEntity entity) {
         if (this.getRebelled()) {
             return !((EntityGem) entity).getRebelled();

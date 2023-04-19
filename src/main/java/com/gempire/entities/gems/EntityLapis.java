@@ -1,8 +1,6 @@
 package com.gempire.entities.gems;
 
-import com.gempire.entities.ai.EntityAIFollowAssigned;
-import com.gempire.entities.ai.EntityAIFollowOwner;
-import com.gempire.entities.ai.EntityAIWander;
+import com.gempire.entities.ai.*;
 import com.gempire.entities.bases.EntityGem;
 import com.gempire.util.Abilities;
 import com.gempire.util.GemPlacements;
@@ -48,6 +46,8 @@ public class EntityLapis extends EntityGem {
         this.goalSelector.addGoal(7, new EntityAIFollowOwner(this, 1.0D));
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, EntityGem.class, 1, false, false, this::checkRebel));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Mob.class, 1, false, false, (p_234199_0_) -> p_234199_0_.getClassification(true) == MobCategory.MONSTER));
+        this.targetSelector.addGoal(1, new OwnerHurtByTargetGemGoal(this));
+        this.targetSelector.addGoal(2, new OwnerHurtTargetGemGoal(this));
     }
     @Override
     public SoundEvent getInstrument()

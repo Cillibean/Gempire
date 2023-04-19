@@ -3,9 +3,7 @@ package com.gempire.entities.gems;
 import com.gempire.entities.abilities.AbilityAbundance;
 import com.gempire.entities.abilities.AbilityDisarming;
 import com.gempire.entities.abilities.base.Ability;
-import com.gempire.entities.ai.EntityAIFollowAssigned;
-import com.gempire.entities.ai.EntityAIFollowOwner;
-import com.gempire.entities.ai.EntityAIWander;
+import com.gempire.entities.ai.*;
 import com.gempire.entities.bases.EntityGem;
 import com.gempire.entities.bases.EntityVaryingGem;
 import com.gempire.util.Abilities;
@@ -49,6 +47,8 @@ public class EntityGarnet extends EntityVaryingGem {
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, EntityGem.class, 1, false, false, this::checkRebel));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Mob.class, 1, false, false, (p_234199_0_) -> p_234199_0_.getClassification(true) == MobCategory.MONSTER));
         this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.1D, false));
+        this.targetSelector.addGoal(1, new OwnerHurtByTargetGemGoal(this));
+        this.targetSelector.addGoal(2, new OwnerHurtTargetGemGoal(this));
     }
 
     @Override
