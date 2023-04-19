@@ -32,9 +32,10 @@ public class C2SRequestOutfitChange {
         ServerPlayer sender = ctx.getSender();
         boolean hasPermission = true;
         if (hasPermission) {
+            assert sender != null;
             EntityPearl gem = (EntityPearl) sender.level.getEntity(msg.entityID);
-            boolean forwardd = msg.forward;
-            if(forwardd){
+            assert gem != null;
+            if(msg.forward){
                 gem.CycleOutfitForward();
             }
             else{
