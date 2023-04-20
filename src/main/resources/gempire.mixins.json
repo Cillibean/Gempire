@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "com.gempire.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "gempire.refmap.json",
+  "mixins": [
+    "TamableAnimalMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "minVersion": "0.8"
+}
