@@ -14,7 +14,15 @@
     },
     {
       "type": "patchouli:text",
-      "text": "$(l)Possible Abilities$() $(li)Tank$(li)Beefcake$(li)Powerhouse$(li)Unhinged$(li)Berserker$(li)Lootmaster (NYI)$(li)Abundanc (NYI)$(br2) $(l)Definite Abilities$() $(br)$(li)Disarming"
+      "text": "$(l)Possible Abilities$() $(li)Tank$(li)Beefcake$(li)Powerhouse$(li)Unhinged$(li)Berserker$(li)Lootmaster (NYI)$(li)Fortunate (NYI)$(li)Abundance$(br2) $(l)Definite Abilities$() $(br)$(li)Disarming"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Essence Requirements$() $(br)$(li)Pink$(li)Yellow$(li)White"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Cruxes$() $(br)$(li)Ancient Debris$(li)Copper Ore$(li)Sculk$(li)Bone Block$(li)End Stone"
     }
   ]
 }

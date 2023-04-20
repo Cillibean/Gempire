@@ -18,6 +18,14 @@
     {
       "type": "patchouli:text",
       "text": "$(l)Recipes$()$(br)To make a hand Pedestal, give her stone."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Essence Requirements$() $(br)$(li)Pink"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Cruxes$() $(br)$(li)Gravel$(li)Clay$(li)Iron Ore$(li)Soul Sand"
     }
   ]
 }

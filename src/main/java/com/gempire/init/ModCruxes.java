@@ -336,7 +336,7 @@ public class ModCruxes {
         float gemTemperatureMin = 0.0f;
         float gemTemperatureMax = 2f;
         Item primer = Items.WITHER_SKELETON_SKULL;
-        String essences = "pink-blue-yellow-white";
+        String essences = "pink-yellow-white";
         gemCruxes.add(new Crux(Blocks.ANCIENT_DEBRIS.defaultBlockState(), 16, CruxType.MINERAL, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.COPPER_ORE.defaultBlockState(), 1, CruxType.MINERAL, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.DEEPSLATE.defaultBlockState(), stoneCruxValue, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
@@ -403,7 +403,7 @@ public class ModCruxes {
         float gemTemperatureMin = 0.5f;
         float gemTemperatureMax = 1f;
         Item primer = Items.TOTEM_OF_UNDYING;
-        String essences = "pink-blue-yellow-white";
+        String essences = "blue-white";
         gemCruxes.add(new Crux(Blocks.STONE.defaultBlockState(), stoneCruxValue, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.GRANITE.defaultBlockState(), stoneCruxValue, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.DIORITE.defaultBlockState(), stoneCruxValue, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));

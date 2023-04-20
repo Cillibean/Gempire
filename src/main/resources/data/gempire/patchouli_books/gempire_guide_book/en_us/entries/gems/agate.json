@@ -15,6 +15,14 @@
     {
       "type": "patchouli:text",
       "text": "$(l)Possible Abilities$() $(li)Knockback$(li)Paralysis$(li)Tank$(li)Beefcake$(li)Powerhouse$(li)Unhinged$(li)Pyrokinesis$(li)Cryokinesis$(li)Healer$(li)First-Aid$(li)Berserker$(li)Beastmaster$(li)Electrokinesis (NYI)$(li)Aerokinesis$(br2) $(l)Definite Abilities$() $(br)$(li)Stern"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Essence Requirements$() $(br)$(li)Blue$(li)White"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Cruxes$() $(br)$(li)Amethyst Block$(li)Magma Block$(li)Copper Ore$(li)Iron Ore$(li)Nether Quartz Ore$(li)Quartz Block"
     }
   ]
 }
