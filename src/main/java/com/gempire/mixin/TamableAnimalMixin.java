@@ -1,5 +1,6 @@
 package com.gempire.mixin;
 
+import com.gempire.entities.bases.EntityGem;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -22,10 +23,10 @@ public class TamableAnimalMixin {
     private void gempire_tamableAnimalMixin(CallbackInfoReturnable<LivingEntity> cir) {
         TamableAnimal tamableAnimal = ((TamableAnimal) (Object) this);
         UUID uuid = tamableAnimal.getOwnerUUID();
-        if (!tamableAnimal.level.isClientSide) {
+        if (uuid != null && !tamableAnimal.level.isClientSide) {
             Entity owner = ((ServerLevel) tamableAnimal.getLevel()).getEntity(uuid);
-            if (owner instanceof LivingEntity livingEntity && !(owner instanceof Player))
-                cir.setReturnValue(livingEntity);
+            if (owner instanceof EntityGem gem)
+                cir.setReturnValue(gem);
         }
     }
 }
