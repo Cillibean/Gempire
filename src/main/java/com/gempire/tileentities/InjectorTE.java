@@ -242,7 +242,7 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
         if (whiteOpen) {
             return this.getFluidFromValue(3) != Fluids.EMPTY;
         } else {
-            return true;
+            return false;
         }
     }
 

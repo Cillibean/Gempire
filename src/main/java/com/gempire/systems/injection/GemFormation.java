@@ -270,11 +270,9 @@ public class GemFormation {
                 System.out.println(r);
                 System.out.println("lowest r " + lowestRGem);
                 System.out.println("lowest r = " + lowestR);
-                System.out.println(WEIGHTS_OF_GEMS.get(gem));
                 /*if (WEIGHTS_OF_GEMS.get(gem) < 12) {
                     r = 1000000;
                 }*/
-                System.out.println("r after weights check " + r);
                 if (r < lowestR) {
                     lowestR = r;
                     lowestRGem = gem;
