@@ -13,7 +13,15 @@
     },
     {
       "type": "patchouli:text",
-      "text": "$(l)Possible Abilities$() $(br)$(li)Tank$(li)Beefcake$(li)Unhinged$(br2) $(l)Definite Abilities$()$(li)Luck"
+      "text": "$(l)Possible Abilities$()$(br)$(li)Tank$(li)Beefcake$(li)Unhinged$(br2) $(l)Definite Abilities$()$(li)Luck$(li)Cryokinesis"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Essence Requirements$() $(br)$(li)Blue$(li)White"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Cruxes$() $(br)$(li)Iron Ore$(li)Ice$(li)Packed Ice$(li)Snow Block$(li)Diamond Block"
     }
   ]
 }

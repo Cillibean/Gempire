@@ -15,6 +15,14 @@
     {
       "type": "patchouli:text",
       "text": "$(l)Possible Abilities$() $(br)$(li)Stern$(br2) $(l)Definite Abilities$()$(li)Enchanter"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Essence Requirements$() $(br)$(li)Blue$(li)White"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Cruxes$() $(br)$(li)Diamond Ore$(li)Ancient Debris$(li)Diamond Block"
     }
   ]
 }

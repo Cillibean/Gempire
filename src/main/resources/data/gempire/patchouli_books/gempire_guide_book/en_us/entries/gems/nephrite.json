@@ -14,6 +14,14 @@
     {
       "type": "patchouli:text",
       "text": "$(l)Possible Abilities$() $(br)$(li)Tank$(li)Beefcake$(li)Powerhouse$(li)Unhinged$(li)Knockback$(li)Berserker$(br2) $(l)Definite Abilities$()$(br)$(li)Scout (NYI)$(li)Acid Spit"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Essence Requirements$() $(br)$(li)Blue$(li)Yellow"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Cruxes$() $(br)$(li)Honey Block$(li)White Concrete$(li)Iron Ore$(li)Slime Block"
     }
   ]
 }

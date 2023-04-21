@@ -14,6 +14,14 @@
     {
       "type": "patchouli:text",
       "text": "$(l)Possible Abilities$() $(br)$(li)Paralysis$(li)Tank$(li)Beefcake$(li)Powerhouse$(li)Unhinged$(li)Stern$(br2) $(l)Definite Abilities$()$(li)Knockback"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Essence Requirements$() $(br)$(li)Yellow"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Cruxes$() $(br)$(li)Coal Ore$(li)Clay$(li)Gold Ore$(li)Raw Gold Block$(li)Gold Block"
     }
   ]
 }

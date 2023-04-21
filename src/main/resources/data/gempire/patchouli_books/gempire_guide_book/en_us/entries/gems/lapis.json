@@ -15,6 +15,14 @@
     {
       "type": "patchouli:text",
       "text": "$(l)Possible Abilities$() $(br)$(li)Tank$(li)Beefcake$(li)Powerhouse$(li)Unhinged$(li)Berserker$(br2) $(l)Definite Abilities$()$(br)$(li)Hydrokinesis$(li)Vehicle (NYI)"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Essence Requirements$() $(br)$(li)Blue"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Cruxes$() $(br)$(li)Prismarine$(li)Lapis Ore$(li)Dark Prismarine$(li)Lapis Block"
     }
   ]
 }

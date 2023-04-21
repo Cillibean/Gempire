@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Gem Contracts are items that can effect gems ownerships statuses, and what gems they're assigned to (NYI). Gem contracts will only work on gems you're the Master Owner of, which means you're the first to claim them. Shift click to clear any data on a contract."
+      "text": "Gem Contracts are items that can effect a gem's ownerships status. Gem contracts will only work on gems you're the 'master' owner of, meaning you're the first to claim them. Shift click to clear any data on a contract."
     },
     {
       "type": "patchouli:spotlight",

@@ -14,6 +14,14 @@
     {
       "type": "patchouli:text",
       "text": "$(l)Possible Abilities$() $(br)$(li)Knockback$(li)Paralysis$(li)Tank$(li)Beefcake$(li)Powerhouse$(li)Unhinged$(br2) $(l)Definite Abilities$()$(li)Pyrokinesis"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Essence Requirements$() $(br)$(li)Pink"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Cruxes$() $(br)$(li)Iron Ore$(li)Copper Ore$(li)Nether Gold Ore$(li)Magma Block$(li)Ancient Debris$(li)Netherite Block"
     }
   ]
 }

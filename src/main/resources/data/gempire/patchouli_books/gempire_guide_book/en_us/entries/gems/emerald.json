@@ -14,7 +14,15 @@
     },
     {
       "type": "patchouli:text",
-      "text": "$(l)Possible Abilities$() $(br)$(li)Tank$(li)Beefcake$(li)Powerhouse$(li)Unhinged$(li)Negotiator$(br2) $(l)Definite Abilities$()$(br)$(li)Recall"
+      "text": "$(l)Possible Abilities$() $(br)$(li)Tank$(li)Beefcake$(li)Powerhouse$(li)Unhinged$(li)Electrokinesis (NYI)$(br2) $(l)Definite Abilities$()$(br)$(li)Recall$(li)Negotiator"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Essence Requirements$() $(br)$(li)Blue$(li)Yellow"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Cruxes$() $(br)$(li)Clay$(li)Ancient Debris$(li)Emerald Ore$(li)Emerald Block"
     }
   ]
 }

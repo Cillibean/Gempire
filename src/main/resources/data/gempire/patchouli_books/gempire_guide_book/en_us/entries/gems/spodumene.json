@@ -14,6 +14,14 @@
     {
       "type": "patchouli:text",
       "text": "$(l)Possible Abilities$() $(br)$(li)Paralysis$(li)Beefcake$(li)Powerhouse$(li)Tank$(br2) $(l)Definite Abilities$()$(br)$(li)Angler$(li)Amphibian"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Essence Requirements$() $(br)$(li)Pink"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Cruxes$() $(br)$(li)Bone Block$(li)Slime Block$(li)Brain Coral$(li)Glowstone"
     }
   ]
 }
