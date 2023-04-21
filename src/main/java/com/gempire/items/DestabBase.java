@@ -30,7 +30,8 @@ public class DestabBase extends Item {
     public void poofGem(LivingEntity pTarget) {
         if (pTarget.isAlive()){
             if (pTarget instanceof EntityGem) {
-                pTarget.hurt(DamageSource.MAGIC,pTarget.getMaxHealth() * 4);
+                pTarget.hurt(DamageSource.MAGIC,pTarget.getHealth() + 3);
+                ((EntityGem) pTarget).setCracked(false);
             }
         }
     }
@@ -42,8 +43,10 @@ public class DestabBase extends Item {
             f = ((Player) player).getAttackStrengthScale(0f);
         }
         if (f == 1) {
-            poofGem(enemy);
-            itemStack.hurtAndBreak(1, player, (p_43296_) -> p_43296_.broadcastBreakEvent(EquipmentSlot.MAINHAND));
+            if (enemy instanceof EntityGem) {
+                poofGem(enemy);
+                itemStack.hurtAndBreak(1, player, (p_43296_) -> p_43296_.broadcastBreakEvent(EquipmentSlot.MAINHAND));
+            }
         }
         return super.hurtEnemy(itemStack, enemy, player);
     }

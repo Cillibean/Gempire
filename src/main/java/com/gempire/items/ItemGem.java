@@ -266,6 +266,7 @@ public class ItemGem extends Item {
                     if (gem.MASTER_OWNER == null) {
                         gem.MASTER_OWNER = player.getUUID();
                     }
+                    gem.registerRecipes();
                     gem.setPos(pos.getX() + 0.5, pos.getY() + 1.0, pos.getZ() + 0.5);
                     gem.setHealth(gem.getMaxHealth());
                     gem.clearFire();

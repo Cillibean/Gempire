@@ -81,13 +81,12 @@ public class EntityShale extends EntityStarterGem {
         };
     }
     @Override
-    public Item getInputItem()
-    {
+    public Item getInputItem(int i) {
+        currentRecipe = 0;
         return ModItems.GEM_SLUSH_BUCKET.get();
     }
     @Override
-    public Item getOutputItem()
-    {
+    public Item getOutputItem(int n) {
         int i = this.getRandom().nextInt(4);
         Item essence = switch (i) {
             case 1 -> ModFluids.PINK_ESSENCE.bucket.get();
