@@ -204,43 +204,43 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
     public boolean fluidValid() {
         if (pinkOpen) {
             if (!this.blueOpen && !this.yellowOpen && !this.whiteOpen) {
-                return !this.getTankFromValue(0).isFluidValid(FluidStack.EMPTY);
+                return this.getFluidFromValue(0) != Fluids.EMPTY;
             } else if (this.blueOpen && !this.yellowOpen && !this.whiteOpen) {
-                return !this.getTankFromValue(0).isFluidValid(FluidStack.EMPTY) && !this.getTankFromValue(1).isFluidValid(FluidStack.EMPTY);
+                return this.getFluidFromValue(0) != Fluids.EMPTY && this.getFluidFromValue(1) != Fluids.EMPTY;
             } else if (this.yellowOpen && !this.blueOpen && !this.whiteOpen) {
-                return !this.getTankFromValue(0).isFluidValid(FluidStack.EMPTY) && !this.getTankFromValue(2).isFluidValid(FluidStack.EMPTY);
+                return this.getFluidFromValue(0) != Fluids.EMPTY && this.getFluidFromValue(2) != Fluids.EMPTY;
             } else if (this.whiteOpen && !this.blueOpen && !this.yellowOpen) {
-                return !this.getTankFromValue(0).isFluidValid(FluidStack.EMPTY) && !this.getTankFromValue(3).isFluidValid(FluidStack.EMPTY);
+                return this.getFluidFromValue(0) != Fluids.EMPTY && this.getFluidFromValue(3) != Fluids.EMPTY;
             } else if (this.blueOpen && this.yellowOpen && !this.whiteOpen) {
-                return !this.getTankFromValue(0).isFluidValid(FluidStack.EMPTY) && !this.getTankFromValue(1).isFluidValid(FluidStack.EMPTY) && !this.getTankFromValue(2).isFluidValid(FluidStack.EMPTY);
+                return this.getFluidFromValue(0) != Fluids.EMPTY && this.getFluidFromValue(1) != Fluids.EMPTY && this.getFluidFromValue(2) != Fluids.EMPTY;
             } else if (this.blueOpen && !this.yellowOpen) {
-                return !this.getTankFromValue(0).isFluidValid(FluidStack.EMPTY) && !this.getTankFromValue(1).isFluidValid(FluidStack.EMPTY) && !this.getTankFromValue(3).isFluidValid(FluidStack.EMPTY);
+                return this.getFluidFromValue(0) != Fluids.EMPTY && this.getFluidFromValue(1) != Fluids.EMPTY && this.getFluidFromValue(3) != Fluids.EMPTY;
             } else if (!this.blueOpen) {
-                return !this.getTankFromValue(0).isFluidValid(FluidStack.EMPTY) && !this.getTankFromValue(2).isFluidValid(FluidStack.EMPTY) && !this.getTankFromValue(3).isFluidValid(FluidStack.EMPTY);
+                return this.getFluidFromValue(0) != Fluids.EMPTY && this.getFluidFromValue(2) != Fluids.EMPTY && this.getFluidFromValue(3) != Fluids.EMPTY;
             } else {
-                return !this.getTankFromValue(0).isFluidValid(FluidStack.EMPTY) && !this.getTankFromValue(1).isFluidValid(FluidStack.EMPTY) && !this.getTankFromValue(2).isFluidValid(FluidStack.EMPTY) && !this.getTankFromValue(3).isFluidValid(FluidStack.EMPTY);
+                return this.getFluidFromValue(0) != Fluids.EMPTY && this.getFluidFromValue(1) != Fluids.EMPTY && this.getFluidFromValue(2) != Fluids.EMPTY && this.getFluidFromValue(3) != Fluids.EMPTY;
             }
         }
         if (blueOpen) {
             if (!this.yellowOpen && !this.whiteOpen) {
-                return !this.getTankFromValue(1).isFluidValid(FluidStack.EMPTY);
+                return this.getFluidFromValue(1) != Fluids.EMPTY;
             } else if (this.yellowOpen && !this.whiteOpen) {
-                return !this.getTankFromValue(1).isFluidValid(FluidStack.EMPTY) && !this.getTankFromValue(2).isFluidValid(FluidStack.EMPTY);
+                return this.getFluidFromValue(1) != Fluids.EMPTY && this.getFluidFromValue(2) != Fluids.EMPTY;
             } else if (!this.yellowOpen) {
-                return !this.getTankFromValue(1).isFluidValid(FluidStack.EMPTY) && !this.getTankFromValue(3).isFluidValid(FluidStack.EMPTY);
+                return this.getFluidFromValue(1) != Fluids.EMPTY && this.getFluidFromValue(3) != Fluids.EMPTY;
             } else {
-                return !this.getTankFromValue(1).isFluidValid(FluidStack.EMPTY) && !this.getTankFromValue(2).isFluidValid(FluidStack.EMPTY) && !this.getTankFromValue(3).isFluidValid(FluidStack.EMPTY);
+                return this.getFluidFromValue(1) != Fluids.EMPTY && this.getFluidFromValue(2) != Fluids.EMPTY && this.getFluidFromValue(3) != Fluids.EMPTY;
             }
         }
         if (yellowOpen) {
             if (!this.whiteOpen) {
-                return !this.getTankFromValue(2).isFluidValid(FluidStack.EMPTY);
+                return this.getFluidFromValue(2) != Fluids.EMPTY;
             } else {
-                return !this.getTankFromValue(2).isFluidValid(FluidStack.EMPTY) && !this.getTankFromValue(3).isFluidValid(FluidStack.EMPTY);
+                return this.getFluidFromValue(2) != Fluids.EMPTY && this.getFluidFromValue(3) != Fluids.EMPTY;
             }
         }
         if (whiteOpen) {
-            return !this.getTankFromValue(3).isFluidValid(FluidStack.EMPTY);
+            return this.getFluidFromValue(3) != Fluids.EMPTY;
         } else {
             return false;
         }
@@ -250,8 +250,10 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
     public void Inject() {
         BlockPos crystalPos = getBlockPos().above().above().above();
         if (level.getBlockState(crystalPos).getBlock() instanceof PowerCrystalBlock) {
+            System.out.println(fluidValid());
             if (itemHandler.getStackInSlot(CHROMA_INPUT_SLOT_INDEX).getItem() instanceof ItemChroma chroma &&
                     fluidValid()) {
+                System.out.println("got thrpugh fluid check");
                 int portionToDrain = 0;
                 if (this.pinkOpen) {
                     portionToDrain++;

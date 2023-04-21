@@ -10,7 +10,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "$(l)Gems that are guaranteed to have it$()$(li)Ruby$(li)Obsidian$(li)Spodumene$(li)Topaz$(br2) $(l)Gems that have a chance to have it$()$(li)Aquamarine"
+      "text": "$(l)Gems that are guaranteed to have it$()$(li)Aquamarine$(br2) Gems that have a chance to have it $()$(li)Ruby$(li)Obsidian$(li)Spodumene$(li)Topaz$(br2)"
     }
   ]
 }
