@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "gempire:items/garnet_gem_14",
+    "layer1": "gempire:items/cracks/med_gem_crack"
+  }
+}

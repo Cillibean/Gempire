@@ -10,7 +10,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "$(l)Gems that are guaranteed to have it$()$(li)Topaz$(li)Zircon$(br2) $(l)Gems that have a chance to have it$()$(li)Agate"
+      "text": "$(l)Gems that are guaranteed to have it$()$(li)Agate$(br2) $(l)Gems that have a chance to have it$()$(li)Topaz$(li)Zircon"
     }
   ]
 }
