@@ -175,6 +175,6 @@ public class EntityBismuth extends EntityGem {
     }
 
     public int generateHardness() {
-        return 5;
+        return 2;
     }
 }

@@ -183,6 +183,6 @@ public class EntityNephrite extends EntityGem {
     }
 
     public int generateHardness() {
-        return 4;
+        return 6;
     }
 }

@@ -54,6 +54,6 @@ public abstract class AbstractQuartz extends EntityVaryingGem {
     }
 
     public int generateHardness() {
-        return 5;
+        return 7;
     }
 }

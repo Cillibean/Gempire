@@ -176,6 +176,6 @@ public class EntitySpodumene extends EntityVaryingGem {
     }
 
     public int generateHardness() {
-        return 4;
+        return 7;
     }
 }

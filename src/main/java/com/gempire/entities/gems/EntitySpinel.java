@@ -164,6 +164,6 @@ public class EntitySpinel extends EntityVaryingGem {
     }
 
     public int generateHardness() {
-        return 3;
+        return 8;
     }
 }

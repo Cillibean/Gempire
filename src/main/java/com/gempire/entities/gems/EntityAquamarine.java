@@ -182,6 +182,6 @@ public class EntityAquamarine extends EntityGem implements FlyingAnimal {
     }
 
     public int generateHardness() {
-        return 5;
+        return 8;
     }
 }

@@ -364,6 +364,6 @@ public class EntityZircon extends EntityVaryingGem {
     }
 
     public int generateHardness() {
-        return 2;
+        return 7;
     }
 }

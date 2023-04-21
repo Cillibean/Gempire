@@ -95,6 +95,6 @@ public abstract class EntityStarterGem extends EntityGem {
 
     @Override
     public int generateHardness() {
-        return 1;
+        return 3;
     }
 }

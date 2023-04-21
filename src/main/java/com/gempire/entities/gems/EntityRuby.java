@@ -163,6 +163,6 @@ public class EntityRuby extends EntityGem {
     }
 
     public int generateHardness() {
-        return 2;
+        return 9;
     }
 }

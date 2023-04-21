@@ -185,6 +185,6 @@ public class EntityObsidian extends EntityGem implements ItemSteerable {
     }
 
     public int generateHardness() {
-        return 3;
+        return 6;
     }
 }

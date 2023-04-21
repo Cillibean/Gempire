@@ -147,6 +147,6 @@ public class EntityRutile extends EntityGem {
     }
 
     public int generateHardness() {
-        return 3;
+        return 6;
     }
 }

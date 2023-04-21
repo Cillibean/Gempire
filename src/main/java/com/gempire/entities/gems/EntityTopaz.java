@@ -183,6 +183,6 @@ public class EntityTopaz extends EntityVaryingGem {
     }
 
     public int generateHardness() {
-        return 6;
+        return 8;
     }
 }
