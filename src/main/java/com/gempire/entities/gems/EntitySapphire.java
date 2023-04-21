@@ -179,4 +179,8 @@ public class EntitySapphire extends EntityVaryingGem {
     public int getLuck() {
         return 4;
     }
+
+    public int generateHardness() {
+        return 3;
+    }
 }

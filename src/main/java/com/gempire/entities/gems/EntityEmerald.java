@@ -154,4 +154,8 @@ public class EntityEmerald extends EntityGem {
         return 7;
     }
 
+
+    public int generateHardness() {
+        return 6;
+    }
 }

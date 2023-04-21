@@ -181,4 +181,8 @@ public class EntityNephrite extends EntityGem {
     public boolean isOnStructureCooldown() {
         return false;
     }
+
+    public int generateHardness() {
+        return 4;
+    }
 }

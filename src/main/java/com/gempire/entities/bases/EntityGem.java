@@ -105,6 +105,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     public static EntityDataAccessor<Integer> REBEL_OUTFIT_VARIANT = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
     public static EntityDataAccessor<Integer> REBEL_INSIGNIA_COLOR = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
     public static EntityDataAccessor<Integer> REBEL_INSIGNIA_VARIANT = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
+    public static EntityDataAccessor<Integer> HARDNESS = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
 
     public boolean isCut;
     public ArrayList<Ability> ABILITY_POWERS = new ArrayList<>();
@@ -201,6 +202,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.entityData.define(EntityGem.REBEL_OUTFIT_VARIANT, 0);
         this.entityData.define(EntityGem.REBEL_INSIGNIA_COLOR, 0);
         this.entityData.define(EntityGem.REBEL_INSIGNIA_VARIANT, 0);
+        this.entityData.define(EntityGem.HARDNESS, 0);
         this.FOLLOW_ID = UUID.randomUUID();
         this.ASSIGNED_ID = UUID.randomUUID();
         this.MASTER_OWNER = UUID.randomUUID();
@@ -217,7 +219,9 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         if (this.setSkinVariantOnInitialSpawn) {
             this.setSkinColorVariant(this.generateSkinColorVariant());
         } else this.setSkinColorVariant(this.initalSkinVariant);
-        setAssignedGem(((ItemGem) this.getGemItem().getDefaultInstance().getItem()).assigned_gem);
+        ItemStack stack = new ItemStack(this.getGemItem());
+        ((ItemGem) stack.getItem()).setData(this, stack);
+        setAssignedGem(((ItemGem) stack.getItem()).assigned_gem);
         System.out.println(this.getAssignedGem());
         this.setHairVariant(this.generateHairVariant());
         this.setSkinColor(this.generatePaletteColor(PaletteType.SKIN));
@@ -351,6 +355,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         compound.putBoolean("rebel", this.getRebelled());
         compound.putBoolean("isHostile", this.getHostile());
         compound.putBoolean("cracked", this.getCracked());
+        compound.putInt("hardness", this.getHardness());
         compound.putIntArray("guardPos", this.GUARD_POS);
         compound.putInt("focusLevel", this.focusLevel);
         compound.putByte("emotionMeter", this.emotionMeter);
@@ -436,6 +441,8 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.setRebelOutfitVariant(compound.getInt("rebelOutfitVariant"));
         this.setRebelInsigniaColor(compound.getInt("rebelInsigniaColor"));
         this.setRebelInsigniaVariant(compound.getInt("rebelInsigniaVariant"));
+        this.setHardness(compound.getInt("hardness"));
+        this.setCracked(compound.getBoolean("cracked"));
         this.idlePowers = this.generateIdlePowers();
         ContainerHelper.loadAllItems(compound, this.items);
         this.readStructures(compound);
@@ -698,6 +705,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     3 is follow assigned
      */
 
+    public abstract int generateHardness();
     public EntityGem getAssignedGem() {
         return assignedGem;
     }
@@ -741,28 +749,28 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
 
     @Override
     public boolean hurt(DamageSource source, float amount){
-        if(this.level.isClientSide){
-            return super.hurt(source, amount);
-        }
-        /*int crackChance = 5;
-        if (amount - getHealth() > hardness && (this.random.nextInt(crackChance) + 1 == crackChance)) {
-            setCracked(true);
-            currentPlayer.sendSystemMessage(Component.translatable("cracked"));
-        }*/
-        if(this.isEmotional() && !source.isExplosion() && !source.isFire()) {
-            if(this.emotionMeter <= this.EmotionThreshold()){
-                if(this.EmotionThreshold() - this.emotionMeter < 5){
-                    this.level.addParticle(ParticleTypes.ANGRY_VILLAGER, this.getX(), this.getY() + 2, this.getZ(),0,0,0);
+        if (!this.level.isClientSide) {
+            int crackChance = 1;
+            if (amount - getHealth() > getHardness() && (this.random.nextInt(crackChance) + 1 == crackChance)) {
+                setCracked(true);
+                for (UUID owner : OWNERS) {
+                    this.level.getPlayerByUUID(owner).sendSystemMessage(Component.translatable("cracked"));
                 }
-                this.emotionMeter++;
             }
-            else {
-                for(Ability power : this.getAbilityPowers()){
-                    if(power instanceof IEmotionalAbility){
-                        ((IEmotionalAbility)power).outburst();
+            if (this.isEmotional() && !source.isExplosion() && !source.isFire()) {
+                if (this.emotionMeter <= this.EmotionThreshold()) {
+                    if (this.EmotionThreshold() - this.emotionMeter < 5) {
+                        this.level.addParticle(ParticleTypes.ANGRY_VILLAGER, this.getX(), this.getY() + 2, this.getZ(), 0, 0, 0);
                     }
+                    this.emotionMeter++;
+                } else {
+                    for (Ability power : this.getAbilityPowers()) {
+                        if (power instanceof IEmotionalAbility) {
+                            ((IEmotionalAbility) power).outburst();
+                        }
+                    }
+                    this.emotionMeter = 0;
                 }
-                this.emotionMeter = 0;
             }
         }
         return super.hurt(source, amount);
@@ -819,7 +827,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             MinecraftForge.EVENT_BUS.post(event);
             ItemStack stack = new ItemStack(this.getGemItem());
             ((ItemGem) stack.getItem()).setData(this, stack);
-            ((ItemGem) stack.getItem()).cracked = this.getCracked();
+            //TODO: fix cracking ((ItemGem) stack.getItem()).setCracked(getCracked());
             this.spawnAtLocation(stack).setExtendedLifetime();
             this.gameEvent(GameEvent.ENTITY_PLACE);
             this.kill();
@@ -1300,6 +1308,14 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
 
     public void setCracked(boolean cracked){
         this.entityData.set(EntityGem.CRACKED, cracked);
+    }
+
+    public void setHardness(int value){
+        this.entityData.set(EntityGem.HARDNESS, value);
+    }
+
+    public int getHardness(){
+        return this.entityData.get(EntityGem.HARDNESS);
     }
 
 

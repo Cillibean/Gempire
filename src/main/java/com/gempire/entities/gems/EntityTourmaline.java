@@ -237,4 +237,7 @@ public class EntityTourmaline extends EntityVaryingGem {
         return 7;
     }
 
+    public int generateHardness() {
+        return 5;
+    }
 }

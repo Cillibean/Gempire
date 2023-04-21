@@ -163,4 +163,7 @@ public class EntityLapis extends EntityGem {
         return 7;
     }
 
+    public int generateHardness() {
+        return 5;
+    }
 }

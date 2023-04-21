@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "gempire:items/aquamarine_gem",
+    "layer1": "gempire:items/cracks/small_gem_crack"
+  }
+}

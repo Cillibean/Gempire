@@ -174,4 +174,8 @@ public class EntitySpodumene extends EntityVaryingGem {
     public int getLuck() {
         return 3;
     }
+
+    public int generateHardness() {
+        return 4;
+    }
 }

@@ -217,4 +217,8 @@ public class EntityGarnet extends EntityVaryingGem {
         return 7;
     }
 
+    public int generateHardness() {
+        return 7;
+    }
+
 }

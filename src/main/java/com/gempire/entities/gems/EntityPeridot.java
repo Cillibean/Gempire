@@ -187,4 +187,8 @@ public class EntityPeridot extends EntityGem {
         return 7;
     }
 
+
+    public int generateHardness() {
+        return 4;
+    }
 }
