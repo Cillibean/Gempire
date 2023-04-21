@@ -478,8 +478,6 @@ public class GemFormation {
         return direction;
     }
 
-
-
     /*public void GenerateExitHole(){
         boolean found = false;
         if(!found) {
