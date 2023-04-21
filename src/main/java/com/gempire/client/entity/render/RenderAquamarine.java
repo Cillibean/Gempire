@@ -2,10 +2,7 @@ package com.gempire.client.entity.render;
 
 import com.gempire.Gempire;
 import com.gempire.client.entity.model.ModelAquamarine;
-import com.gempire.client.entity.model.ModelQuartz;
-import com.gempire.client.entity.model.ModelRuby;
 import com.gempire.client.entity.render.layers.*;
-import com.gempire.entities.gems.EntityAgate;
 import com.gempire.entities.gems.EntityAquamarine;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.MultiBufferSource;

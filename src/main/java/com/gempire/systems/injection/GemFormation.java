@@ -107,6 +107,7 @@ public class GemFormation {
                             varyingGem.initalSkinVariant = varyingGem.generateRandomInitialSkin();
                         }
                     }
+                    gem.setCracked(false);
                     gem.setUUID(Mth.createInsecureUUID(this.world.random));
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -190,6 +191,7 @@ public class GemFormation {
         if(gem.spawnGem != null){
             gem.spawnGem.remove(Entity.RemovalReason.DISCARDED);
         }
+        gem.setCracked(false);
         gem.setPos(this.pos.getX() + .5f, this.pos.getY(), this.pos.getZ() + .5f);
         gem.setHealth(gem.getMaxHealth());
         GemFormEvent event1 = new GemFormEvent(gem, gem.blockPosition());
@@ -262,20 +264,53 @@ public class GemFormation {
         if (tier == 1) {
             double lowestR = 100000000;
             String lowestRGem = "";
+            double lowestR2 = 100000000;
+            String lowestRGem2 = "";
+            double lowestR3 = 100000000;
+            String lowestRGem3 = "";
+            double lowestR4 = 100000000;
+            String lowestRGem4 = "";
             System.out.println("check out of possible gems");
+            System.out.println("total " + totalWeight);
             for (String gem : POSSIBLE_GEMS_TIER_1) {
+                System.out.println(" ");
                 System.out.println(gem);
-                double r = Math.random() * totalWeight;
+                Random rand = new Random();
+                //double r1 = rand.nextDouble();
+                //System.out.println("r1 random " + r1);
+                double r = /*r1 **/ totalWeight;
+                System.out.println("random " + r);
                 r -= WEIGHTS_OF_GEMS.get(gem);
-                System.out.println(r);
                 System.out.println("lowest r " + lowestRGem);
                 System.out.println("lowest r = " + lowestR);
+                System.out.println("second lowest r " + lowestRGem2);
+                System.out.println("second lowest r = " + lowestR2);
+                System.out.println("third lowest r " + lowestRGem3);
+                System.out.println("third lowest r = " + lowestR3);
+                System.out.println("fourth lowest r " + lowestRGem4);
+                System.out.println("fourth lowest r = " + lowestR4);
                 /*if (WEIGHTS_OF_GEMS.get(gem) < 12) {
                     r = 1000000;
                 }*/
                 if (r < lowestR) {
                     lowestR = r;
                     lowestRGem = gem;
+                } else if (r < lowestR2) {
+                    lowestR2 = r;
+                    lowestRGem2 = gem;
+                } else if (r < lowestR3) {
+                    lowestR3 = r;
+                    lowestRGem3 = gem;
+                } else if (r < lowestR4) {
+                    lowestR4 = r;
+                    lowestRGem4 = gem;
+                }
+                int r2 = rand.nextInt(4);
+                switch (r2) {
+                    case 0 -> returnGem = lowestRGem;
+                    case 1 -> returnGem = lowestRGem2;
+                    case 2 -> returnGem = lowestRGem3;
+                    case 3 -> returnGem = lowestRGem4;
                 }
                 returnGem = gem;
                 if (r > 0 && gem == POSSIBLE_GEMS_TIER_1.get(POSSIBLE_GEMS_TIER_1.size() - 1)) {
@@ -290,22 +325,52 @@ public class GemFormation {
         } else if (tier == 2) {
             double lowestR = 100000000;
             String lowestRGem = "";
+            double lowestR2 = 100000000;
+            String lowestRGem2 = "";
+            double lowestR3 = 100000000;
+            String lowestRGem3 = "";
+            double lowestR4 = 100000000;
+            String lowestRGem4 = "";
             System.out.println("check out of possible gems");
             for (String gem : POSSIBLE_GEMS_TIER_2) {
+                System.out.println(" ");
                 System.out.println(gem);
-                double r = Math.random() * totalWeight;
+                Random rand = new Random();
+                //double r1 = rand.nextDouble();
+                //System.out.println("r1 random " + r1);
+                double r = /*r1 **/ totalWeight;
+                System.out.println("random " + r);
                 r -= WEIGHTS_OF_GEMS.get(gem);
-                System.out.println(r);
                 System.out.println("lowest r " + lowestRGem);
                 System.out.println("lowest r = " + lowestR);
-                System.out.println(WEIGHTS_OF_GEMS.get(gem));
+                System.out.println("second lowest r " + lowestRGem2);
+                System.out.println("second lowest r = " + lowestR2);
+                System.out.println("third lowest r " + lowestRGem3);
+                System.out.println("third lowest r = " + lowestR3);
+                System.out.println("fourth lowest r " + lowestRGem4);
+                System.out.println("fourth lowest r = " + lowestR4);
                 /*if (WEIGHTS_OF_GEMS.get(gem) < 12) {
                     r = 1000000;
                 }*/
-                System.out.println("r after weights check " + r);
                 if (r < lowestR) {
                     lowestR = r;
                     lowestRGem = gem;
+                } else if (r < lowestR2) {
+                    lowestR2 = r;
+                    lowestRGem2 = gem;
+                } else if (r < lowestR3) {
+                    lowestR3 = r;
+                    lowestRGem3 = gem;
+                } else if (r < lowestR4) {
+                    lowestR4 = r;
+                    lowestRGem4 = gem;
+                }
+                int r2 = rand.nextInt(4);
+                switch (r2) {
+                    case 0 -> returnGem = lowestRGem;
+                    case 1 -> returnGem = lowestRGem2;
+                    case 2 -> returnGem = lowestRGem3;
+                    case 3 -> returnGem = lowestRGem4;
                 }
                 returnGem = gem;
                 if (r > 0 && gem == POSSIBLE_GEMS_TIER_2.get(POSSIBLE_GEMS_TIER_2.size() - 1)) {

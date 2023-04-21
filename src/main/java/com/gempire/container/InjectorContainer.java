@@ -12,6 +12,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
@@ -68,6 +69,22 @@ public class InjectorContainer extends AbstractContainerMenu {
                 public boolean mayPlace(ItemStack stack) {
                     return (stack.getItem() == ModFluids.PINK_ESSENCE.bucket.get());
                 }
+            });
+            this.addSlot(new SlotItemHandler(handler, InjectorTE.PRIME_INPUT_SLOT_INDEX, 43, 50){
+                public boolean mayPlace(ItemStack stack) {
+                    return stack.getItem() == Items.GOLDEN_APPLE || stack.getItem() == Items.GOLD_BLOCK ||
+                            stack.getItem() == Items.BLAZE_ROD || stack.getItem() == Items.BLUE_ICE ||
+                            stack.getItem() == Items.EXPERIENCE_BOTTLE || stack.getItem() == Items.NETHER_STAR ||
+                            stack.getItem() == Items.NETHERITE_INGOT || stack.getItem() == Items.FIRE_CHARGE ||
+                            stack.getItem() == Items.DRAGON_BREATH || stack.getItem() == Items.GHAST_TEAR ||
+                            stack.getItem() == Items.NETHERITE_SWORD || stack.getItem() == Items.BONE_BLOCK ||
+                            stack.getItem() == Items.NAUTILUS_SHELL || stack.getItem() == Items.WITHER_ROSE ||
+                            stack.getItem() == Items.ENDER_EYE || stack.getItem() == Items.HEART_OF_THE_SEA ||
+                            stack.getItem() == Items.ENCHANTED_GOLDEN_APPLE || stack.getItem() == Items.EMERALD_BLOCK ||
+                            stack.getItem() == Items.WITHER_SKELETON_SKULL || stack.getItem() == Items.PHANTOM_MEMBRANE ||
+                            stack.getItem() == Items.END_CRYSTAL || stack.getItem() == Items.NETHER_WART ||
+                            stack.getItem() == Items.TOTEM_OF_UNDYING;
+                };
             });
         });
         //PLAYER INVENTORY

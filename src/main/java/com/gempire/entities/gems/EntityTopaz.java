@@ -181,4 +181,8 @@ public class EntityTopaz extends EntityVaryingGem {
     public boolean hasVisorCosmeticOnly() {
         return true;
     }
+
+    public int generateHardness() {
+        return 6;
+    }
 }

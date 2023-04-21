@@ -180,4 +180,8 @@ public class EntityAquamarine extends EntityGem implements FlyingAnimal {
     public boolean isFlying() {
         return true;
     }
+
+    public int generateHardness() {
+        return 5;
+    }
 }

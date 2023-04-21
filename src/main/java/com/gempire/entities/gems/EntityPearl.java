@@ -421,4 +421,7 @@ public class EntityPearl extends EntityVaryingGem {
         return this.items2;
     }
 
+    public int generateHardness() {
+        return 1;
+    }
 }

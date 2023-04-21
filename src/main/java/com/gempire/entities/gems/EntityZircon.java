@@ -362,4 +362,8 @@ public class EntityZircon extends EntityVaryingGem {
     public void setEnchantPageDefined(boolean enchantPageDefined) {
         this.entityData.set(ENCHANT_PAGE_DEFINED, enchantPageDefined);
     }
+
+    public int generateHardness() {
+        return 2;
+    }
 }

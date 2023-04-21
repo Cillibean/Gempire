@@ -24,10 +24,14 @@ import net.minecraft.world.entity.ai.goal.PanicGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class EntityBismuth extends EntityGem {
     //TO-DO: IMPLEMENT BISMUTH. Will upgrade Injector to final tier with a Peridot.
     //Implement Builder and Refinery skills. Builder requires a trigger item and ample resources to build what's being asked.
     //Refinery is that skill that is used with Peridot's Ferrokinesis.
+
     public EntityBismuth(EntityType<? extends PathfinderMob> type, Level worldIn) {
         super(type, worldIn);
     }
@@ -146,14 +150,15 @@ public class EntityBismuth extends EntityGem {
         return this.random.nextInt(4);
     }
     @Override
-    public Item getInputItem()
-    {
-        return ModItems.GEM_SCRAP.get();
+    public Item getInputItem(int i) {
+        if ((inputList.get(i) == ModItems.GEM_SCRAP.get())) {
+            currentRecipe = 1;
+        }
+        return inputList.get(i);
     }
     @Override
-    public Item getOutputItem()
-    {
-        return ModItems.PRISMATIC_INGOT.get();
+    public Item getOutputItem(int i) {
+        return outputList.get(i);
     }
     @Override
     public int getTimetoCraft()
@@ -169,4 +174,7 @@ public class EntityBismuth extends EntityGem {
         return 7;
     }
 
+    public int generateHardness() {
+        return 5;
+    }
 }

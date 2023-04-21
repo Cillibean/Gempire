@@ -27,6 +27,7 @@ import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
@@ -108,40 +109,42 @@ public class ItemGem extends Item {
     public @NotNull InteractionResultHolder<ItemStack> use(Level worldIn, @NotNull Player playerIn, @NotNull InteractionHand handIn) {
         boolean spawned = false;
         if (!worldIn.isClientSide) {
-            if (!livingEntityHit) {
-                ItemStack itemstack = playerIn.getItemInHand(handIn);
-                BlockHitResult raytraceresult = getPlayerPOVHitResult(worldIn, playerIn, ClipContext.Fluid.NONE);
-                if (raytraceresult.getType() == HitResult.Type.MISS) {
-                    return super.use(worldIn, playerIn, handIn);
-                } else {
-                    if (raytraceresult.getType() == HitResult.Type.BLOCK) {
-                        BlockPos blockpos = raytraceresult.getBlockPos();
-                        Direction direction = raytraceresult.getDirection();
-                        if (!worldIn.mayInteract(playerIn, blockpos) || !playerIn.mayUseItemAt(blockpos.relative(direction), direction, itemstack)) {
-                            return super.use(worldIn, playerIn, handIn);
-                        }
+            if (!cracked) {
+                if (!livingEntityHit) {
+                    ItemStack itemstack = playerIn.getItemInHand(handIn);
+                    BlockHitResult raytraceresult = getPlayerPOVHitResult(worldIn, playerIn, ClipContext.Fluid.NONE);
+                    if (raytraceresult.getType() == HitResult.Type.MISS) {
+                        return super.use(worldIn, playerIn, handIn);
+                    } else {
+                        if (raytraceresult.getType() == HitResult.Type.BLOCK) {
+                            BlockPos blockpos = raytraceresult.getBlockPos();
+                            Direction direction = raytraceresult.getDirection();
+                            if (!worldIn.mayInteract(playerIn, blockpos) || !playerIn.mayUseItemAt(blockpos.relative(direction), direction, itemstack)) {
+                                return super.use(worldIn, playerIn, handIn);
+                            }
 
-                        if (worldIn.mayInteract(playerIn, blockpos) && playerIn.mayUseItemAt(blockpos, raytraceresult.getDirection(), itemstack)) {
-                            spawned = this.formGem(worldIn, playerIn, blockpos, itemstack, null);
+                            if (worldIn.mayInteract(playerIn, blockpos) && playerIn.mayUseItemAt(blockpos, raytraceresult.getDirection(), itemstack)) {
+                                spawned = this.formGem(worldIn, playerIn, blockpos, itemstack, null);
+                            }
+                        }
+                        //Problem with the claiming of gems ??
+                        if (!playerIn.isCreative() && spawned) {
+                            playerIn.getMainHandItem().shrink(1);
                         }
                     }
-                    //Problem with the claiming of gems ??
-                    if (!playerIn.isCreative() && spawned) {
-                        playerIn.getMainHandItem().shrink(1);
-                    }
-                }
-            } else {
-                if (isAssigned) {
-                    playerIn.sendSystemMessage(Component.translatable("This Gem is no longer assigned to " + assigned_gem.getName().getString() + " " + assigned_gem.getFacetAndCut()));
-                    livingEntityHit = false;
-                    assigned_gem = null;
                 } else {
-                    playerIn.sendSystemMessage(Component.translatable("This Gem was assigned to " + gemToAssign.getName().getString() + " " + gemToAssign.getFacetAndCut()));
-                    livingEntityHit = false;
-                    System.out.println("ToAssign to assigned");
-                    assigned_gem = gemToAssign;
-                    System.out.println(assigned_gem);
-                    System.out.println(gemToAssign);
+                    if (isAssigned) {
+                        playerIn.sendSystemMessage(Component.translatable("This Gem is no longer assigned to " + assigned_gem.getName().getString() + " " + assigned_gem.getFacetAndCut()));
+                        livingEntityHit = false;
+                        assigned_gem = null;
+                    } else {
+                        playerIn.sendSystemMessage(Component.translatable("This Gem was assigned to " + gemToAssign.getName().getString() + " " + gemToAssign.getFacetAndCut()));
+                        livingEntityHit = false;
+                        System.out.println("ToAssign to assigned");
+                        assigned_gem = gemToAssign;
+                        System.out.println(assigned_gem);
+                        System.out.println(gemToAssign);
+                    }
                 }
             }
         }
@@ -158,134 +161,139 @@ public class ItemGem extends Item {
 
     public boolean formGem(Level world, @Nullable Player player, BlockPos pos, ItemStack stack, @Nullable ItemEntity item) {
         if (!world.isClientSide) {
-            System.out.println("form event");
-            System.out.println(assigned_gem);
-            System.out.println(gemToAssign);
-            RegistryObject<EntityType<EntityPebble>> gemm = ModEntities.PEBBLE;
-            String skinColorVariant = "";
-            EntityGem gem = gemm.get().create(world);
-            String namee = "";
-            boolean dying = false;
-            List<EntityGem> list;
-            if (player == null) {
-                dying = false;
-            }
-            else
-            {
-                list = player.level.getEntitiesOfClass(EntityGem.class, player.getBoundingBox().inflate(4.0D, 4.0D, 4.0D));
-                for (EntityGem gemmy : list) {
-                if (gemmy.isDeadOrDying())
-                    dying = true;
-                System.out.println(gemmy.getUUID());
-                }
-            }
-            if (!dying) {
-                if (Objects.equals(this.ID, "")) {
-                    namee = Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(this)).toString().replaceAll("gempire", "").replaceAll("gem", "").replaceAll(":", "").replaceAll(" ", "");
-                } else {
-                    namee = Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(this)).toString().replaceAll(this.ID, "").replaceAll("gem", "").replaceAll(":", "").replaceAll(" ", "");
-                }
-
-                //This whole section here checks for variations in color so it can spawn the correct type of gem
-
-                String[] ainmneacha = namee.split("_");
-                boolean nullFlag = false;
-                int idx = 0;
-                for (int i = 0; i < ainmneacha.length; i++) {
-                    if (ainmneacha[i].isEmpty()) {
-                        nullFlag = true;
-                        idx = i;
-                    }
-                }
-                if (nullFlag) ainmneacha = ArrayUtils.remove(ainmneacha, idx);
-                namee = ainmneacha[0];
-                if (ainmneacha.length > 1) skinColorVariant = ainmneacha[1];
-                for (String s : ainmneacha) {
-                    System.out.println(s);
-                }
-
-                //End of check and set
-
-                try {
-                    if (Objects.equals(this.ID, "")) {
-                        gemm = (RegistryObject<EntityType<EntityPebble>>) ModEntities.class.getField(namee.toUpperCase()).get(null);
-                    } else {
-                        gemm = (RegistryObject<EntityType<EntityPebble>>) AddonHandler.ADDON_ENTITY_REGISTRIES.get(this.ID).getField(namee.toUpperCase()).get(null);
-                    }
-                    gem = gemm.get().create(world);
-                    assert gem != null;
-                    gem.setUUID(Mth.createInsecureUUID(world.random));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                try {
-                    if (item != null) {
-                        assert gem != null;
-                        gem.spawnGem = item;
-                    }
-                    assert stack.getTag() != null;
-                    assert gem != null;
-                    gem.load(stack.getTag());
-                } catch (Exception e) {
-                    if (ainmneacha.length > 1) {
-                        assert gem != null;
-                        gem.setSkinVariantOnInitialSpawn = false;
-                        gem.initalSkinVariant = Integer.parseInt(skinColorVariant);
-                    }
-                    if (player != null) {
-                        assert gem != null;
-                        gem.finalizeSpawn((ServerLevelAccessor) world, world.getCurrentDifficultyAt(player.blockPosition()), MobSpawnType.TRIGGERED, null, null);
-                        gem.addOwner(player.getUUID());
-                        if (gem.MASTER_OWNER == null){
-                            gem.addMasterOwner(player.getUUID());
-                        }
-                        gem.FOLLOW_ID = player.getUUID();
-                        gem.setMovementType((byte) 2);
-                    } else {
-                        if (item != null) {
-                            gem.spawnGem = item;
-                        }
-                        assert gem != null;
-                        assert item != null;
-                        gem.finalizeSpawn((ServerLevelAccessor) world, world.getCurrentDifficultyAt(item.blockPosition()), MobSpawnType.MOB_SUMMONED, null, null);
-                    }
-                }
-                if (isAssigned) {
-                    gem.ASSIGNED_ID = UUID.randomUUID();
-                }
-                if (gem instanceof EntityZircon) {
-                    if (!((EntityZircon) gem).getEnchantPageDefined()) {
-                        ((EntityZircon) gem).setEnchantPage(RandomSource.create().nextInt(ModEnchants.VANILLA_ENCHANTMENTS.size()));
-                        ((EntityZircon) gem).setEnchantPageDefined(true);
-                    }
-                }
+            if (!cracked) {
+                System.out.println("form event");
                 System.out.println(assigned_gem);
                 System.out.println(gemToAssign);
-                if (gem.MASTER_OWNER == null) {
-                    gem.MASTER_OWNER = player.getUUID();
+                RegistryObject<EntityType<EntityPebble>> gemm = ModEntities.PEBBLE;
+                String skinColorVariant = "";
+                EntityGem gem = gemm.get().create(world);
+                String namee = "";
+                boolean dying = false;
+                List<EntityGem> list;
+                if (player == null) {
+                    dying = false;
+                } else {
+                    list = player.level.getEntitiesOfClass(EntityGem.class, player.getBoundingBox().inflate(4.0D, 4.0D, 4.0D));
+                    for (EntityGem gemmy : list) {
+                        if (gemmy.isDeadOrDying())
+                            dying = true;
+                        System.out.println(gemmy.getUUID());
+                    }
                 }
-                gem.setPos(pos.getX() + 0.5, pos.getY() + 1.0, pos.getZ() + 0.5);
-                gem.setHealth(gem.getMaxHealth());
-                gem.clearFire();
-                gem.removeAllEffects();
-                gem.setDeltaMovement(0, 0, 0);
-                gem.fallDistance = 0;
-                gem.setAssignedGem(assigned_gem);
-                System.out.println(getAssigned_gem());
-                GemFormEvent event = new GemFormEvent(gem, gem.blockPosition());
-                MinecraftForge.EVENT_BUS.post(event);
-                world.addFreshEntity(gem);
-                System.out.println(gem.getGemPlacementE());
-                System.out.println(gem.getOutfitVariant() + " and " + gem.getInsigniaVariant());
-                return true;
+                if (!dying) {
+                    if (Objects.equals(this.ID, "")) {
+                        namee = Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(this)).toString().replaceAll("gempire", "").replaceAll("gem", "").replaceAll(":", "").replaceAll(" ", "");
+                    } else {
+                        namee = Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(this)).toString().replaceAll(this.ID, "").replaceAll("gem", "").replaceAll(":", "").replaceAll(" ", "");
+                    }
+
+                    //This whole section here checks for variations in color so it can spawn the correct type of gem
+
+                    String[] ainmneacha = namee.split("_");
+                    boolean nullFlag = false;
+                    int idx = 0;
+                    for (int i = 0; i < ainmneacha.length; i++) {
+                        if (ainmneacha[i].isEmpty()) {
+                            nullFlag = true;
+                            idx = i;
+                        }
+                    }
+                    if (nullFlag) ainmneacha = ArrayUtils.remove(ainmneacha, idx);
+                    namee = ainmneacha[0];
+                    if (ainmneacha.length > 1) skinColorVariant = ainmneacha[1];
+                    for (String s : ainmneacha) {
+                        System.out.println(s);
+                    }
+
+                    //End of check and set
+
+                    try {
+                        if (Objects.equals(this.ID, "")) {
+                            gemm = (RegistryObject<EntityType<EntityPebble>>) ModEntities.class.getField(namee.toUpperCase()).get(null);
+                        } else {
+                            gemm = (RegistryObject<EntityType<EntityPebble>>) AddonHandler.ADDON_ENTITY_REGISTRIES.get(this.ID).getField(namee.toUpperCase()).get(null);
+                        }
+                        gem = gemm.get().create(world);
+                        assert gem != null;
+                        gem.setUUID(Mth.createInsecureUUID(world.random));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    try {
+                        if (item != null) {
+                            assert gem != null;
+                            gem.spawnGem = item;
+                        }
+                        assert stack.getTag() != null;
+                        assert gem != null;
+                        gem.load(stack.getTag());
+                    } catch (Exception e) {
+                        if (ainmneacha.length > 1) {
+                            assert gem != null;
+                            gem.setSkinVariantOnInitialSpawn = false;
+                            gem.initalSkinVariant = Integer.parseInt(skinColorVariant);
+                        }
+                        if (player != null) {
+                            assert gem != null;
+                            gem.finalizeSpawn((ServerLevelAccessor) world, world.getCurrentDifficultyAt(player.blockPosition()), MobSpawnType.TRIGGERED, null, null);
+                            gem.addOwner(player.getUUID());
+                            if (gem.MASTER_OWNER == null) {
+                                gem.addMasterOwner(player.getUUID());
+                            }
+                            gem.FOLLOW_ID = player.getUUID();
+                            gem.setMovementType((byte) 2);
+                        } else {
+                            if (item != null) {
+                                gem.spawnGem = item;
+                            }
+                            assert gem != null;
+                            assert item != null;
+                            gem.finalizeSpawn((ServerLevelAccessor) world, world.getCurrentDifficultyAt(item.blockPosition()), MobSpawnType.MOB_SUMMONED, null, null);
+                        }
+                    }
+                    if (isAssigned) {
+                        gem.ASSIGNED_ID = UUID.randomUUID();
+                    }
+                    if (gem instanceof EntityZircon) {
+                        if (!((EntityZircon) gem).getEnchantPageDefined()) {
+                            ((EntityZircon) gem).setEnchantPage(RandomSource.create().nextInt(ModEnchants.VANILLA_ENCHANTMENTS.size()));
+                            ((EntityZircon) gem).setEnchantPageDefined(true);
+                        }
+                    }
+                    System.out.println(assigned_gem);
+                    System.out.println(gemToAssign);
+                    if (gem.MASTER_OWNER == null) {
+                        gem.MASTER_OWNER = player.getUUID();
+                    }
+                    gem.registerRecipes();
+                    gem.setPos(pos.getX() + 0.5, pos.getY() + 1.0, pos.getZ() + 0.5);
+                    gem.setHealth(gem.getMaxHealth());
+                    gem.clearFire();
+                    gem.removeAllEffects();
+                    gem.setDeltaMovement(0, 0, 0);
+                    gem.fallDistance = 0;
+                    gem.setAssignedGem(assigned_gem);
+                    System.out.println(getAssigned_gem());
+                    GemFormEvent event = new GemFormEvent(gem, gem.blockPosition());
+                    MinecraftForge.EVENT_BUS.post(event);
+                    world.addFreshEntity(gem);
+                    System.out.println(gem.getGemPlacementE());
+                    System.out.println(gem.getOutfitVariant() + " and " + gem.getInsigniaVariant());
+                    return true;
+                }
             }
         }
         return false;
     }
+
     public void appendHoverText(ItemStack itemStack, @Nullable Level level, List<Component> p_40553_, TooltipFlag p_40554_) {
         if (Screen.hasShiftDown()) {
             if (checkTags(itemStack)) {
                 p_40553_.add(Component.translatable(itemStack.getTag().getString("name")).withStyle(ChatFormatting.GRAY));
+            }
+            if (cracked) {
+                p_40553_.add(Component.translatable("Cracked").withStyle(ChatFormatting.RED));
             }
             if (this.gemToAssign != null) {
                 p_40553_.add(Component.translatable( "Assigned to " + assigned_gem.getName().getString() + " " + assigned_gem.getFacetAndCut()));
@@ -293,6 +301,9 @@ public class ItemGem extends Item {
         } else {
             if (checkTags(itemStack)) {
                 p_40553_.add(Component.translatable(itemStack.getTag().getString("name")).withStyle(ChatFormatting.GRAY));
+            }
+            if (cracked) {
+                p_40553_.add(Component.translatable("Cracked").withStyle(ChatFormatting.RED));
             }
             p_40553_.add(Component.translatable("Hold Shift for more info").withStyle(ChatFormatting.GOLD));
 
@@ -333,5 +344,13 @@ public class ItemGem extends Item {
 
     public EntityGem getAssigned_gem() {
         return assigned_gem;
+    }
+
+    public boolean getCracked() {
+        return cracked;
+    }
+
+    public void setCracked(boolean cracked1) {
+        cracked = cracked1;
     }
 }

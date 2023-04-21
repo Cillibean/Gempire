@@ -2,5 +2,13 @@
   "parent": "item/generated",
   "textures": {
     "layer0": "gempire:items/spinel_gem_2"
-  }
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "minecraft:cracked": 1
+      },
+      "model": "gempire:item/spinel_gem_2_cracked"
+    }
+  ]
 }

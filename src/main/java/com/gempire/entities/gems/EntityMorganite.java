@@ -18,6 +18,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 
 import net.minecraft.world.level.block.Blocks;
@@ -104,14 +105,20 @@ public class EntityMorganite extends EntityGem {
         };
     }
     @Override
-    public Item getInputItem()
-    {
-        return Blocks.STONE.asItem();
+    public Item getInputItem(int i) {
+        if ((inputList.get(i) == Items.STONE)) {
+            currentRecipe = 1;
+        }
+        return inputList.get(i);
     }
     @Override
-    public Item getOutputItem()
-    {
-        return ModItems.PEDISTAL.get();
+    public Item getOutputItem(int i) {
+        return inputList.get(i);
+    }
+
+    public void registerRecipes() {
+        inputList.add(Items.STONE);
+        outputList.add(ModItems.PEDISTAL.get());
     }
     @Override
     public int getTimetoCraft()
@@ -162,4 +169,7 @@ public class EntityMorganite extends EntityGem {
         return 7;
     }
 
+    public int generateHardness() {
+        return 3;
+    }
 }

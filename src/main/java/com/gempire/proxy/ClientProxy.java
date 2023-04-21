@@ -7,6 +7,7 @@ import com.gempire.client.screen.*;
 import com.gempire.client.ter.ShellTER;
 import com.gempire.init.ModContainers;
 import com.gempire.init.ModEntities;
+import com.gempire.init.ModItemProperties;
 import com.gempire.init.ModTE;
 import com.gempire.keybindings.KeyBindings;
 import com.gempire.tileentities.WarpPadTE;
@@ -71,6 +72,7 @@ public class ClientProxy {
 
     @SubscribeEvent
     public static void doSetup(FMLClientSetupEvent event) {
+        ModItemProperties.addCustomItemProperties();
     }
 
     @SubscribeEvent

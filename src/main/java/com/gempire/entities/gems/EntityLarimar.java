@@ -156,4 +156,7 @@ public class EntityLarimar extends EntityGem {
         return 7;
     }
 
+    public int generateHardness() {
+        return 4;
+    }
 }

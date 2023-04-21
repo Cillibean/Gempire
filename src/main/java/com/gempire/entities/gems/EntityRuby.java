@@ -161,4 +161,8 @@ public class EntityRuby extends EntityGem {
     public int baseFocus() {
         return 7;
     }
+
+    public int generateHardness() {
+        return 2;
+    }
 }

@@ -183,4 +183,8 @@ public class EntityObsidian extends EntityGem implements ItemSteerable {
     public boolean fireImmune() {
         return true;
     }
+
+    public int generateHardness() {
+        return 3;
+    }
 }
