@@ -12,7 +12,6 @@ public class GemConditions {
     public float temperatureMin = .7f;
     public float temperatureMax = 1.4f;
     public double rarity = 1;
-    public int chromaColour;
 
     public GemConditions(ArrayList<Crux> cruxes, String essences, Item primer, float temperatureMin, float temperatureMax){
         this.cruxes = cruxes;

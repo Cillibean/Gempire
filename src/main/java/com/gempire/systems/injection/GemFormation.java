@@ -48,8 +48,11 @@ public class GemFormation {
 
     public int yLevelNeeded;
     public int tier;
+    public float weight;
 
     HashMap<String, Float> WEIGHTS_OF_GEMS = new HashMap<>();
+    HashMap<String, GemConditions> CONDITIONS = new HashMap<>();
+    public GemConditions conditions;
 
     //Create an object to store the total weight
     float totalWeight = 0;
@@ -72,9 +75,9 @@ public class GemFormation {
         EntityGem gem = gemm.get().create(this.world);
         float BIOME_TEMPERATURE = this.world.getBiome(this.pos).get().getBaseTemperature();
         this.SetDrainedStoneColor(BIOME_TEMPERATURE);
+        String gemtoform = this.EvaluateCruxes();
         if (gem.chromaColourRequired) {
             if (getColorFromChroma() == chromaColour) {
-                String gemtoform = this.EvaluateCruxes();
                 if (Objects.equals(gemtoform, "")) {
                     //this.Drain(GemFormation.getBlockPosInVolume(this.world, this.pos, this.volumeToCheck));
                     return;
@@ -114,8 +117,6 @@ public class GemFormation {
                 }
             }
         } else {
-            System.out.println("to evaluate cruxes");
-            String gemtoform = this.EvaluateCruxes();
             if (gemtoform == "") {
                 //this.Drain(GemFormation.getBlockPosInVolume(this.world, this.pos, this.volumeToCheck));
                 return;
@@ -191,7 +192,16 @@ public class GemFormation {
         if(gem.spawnGem != null){
             gem.spawnGem.remove(Entity.RemovalReason.DISCARDED);
         }
+
+        double rarity = CONDITIONS.get(gemtoform).rarity;
+        System.out.println(weight / rarity);
+        if (weight / rarity <= 10) {
+            gem.setDefective(true);
+        } else if (weight / rarity >= 100){
+            gem.setPrimary(true);
+        }
         gem.setCracked(false);
+        System.out.println(gem.getCracked());
         gem.setPos(this.pos.getX() + .5f, this.pos.getY(), this.pos.getZ() + .5f);
         gem.setHealth(gem.getMaxHealth());
         GemFormEvent event1 = new GemFormEvent(gem, gem.blockPosition());
@@ -273,6 +283,7 @@ public class GemFormation {
             System.out.println("check out of possible gems");
             System.out.println("total " + totalWeight);
             for (String gem : POSSIBLE_GEMS_TIER_1) {
+                CONDITIONS = ModEntities.CRUXTOGEM;
                 System.out.println(" ");
                 System.out.println(gem);
                 Random rand = new Random();
@@ -313,14 +324,8 @@ public class GemFormation {
                     case 3 -> returnGem = lowestRGem4;
                 }
                 returnGem = gem;
-                if (r > 0 && gem == POSSIBLE_GEMS_TIER_1.get(POSSIBLE_GEMS_TIER_1.size() - 1)) {
-                    returnGem = lowestRGem;
-                    break;
-                }
-                if (r <= 0) {
-                    returnGem = gem;
-                    break;
-                }
+                conditions = CONDITIONS.get(gem);
+                weight = WEIGHTS_OF_GEMS.get(gem);
             }
         } else if (tier == 2) {
             double lowestR = 100000000;

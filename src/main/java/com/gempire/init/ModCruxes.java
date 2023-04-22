@@ -30,8 +30,7 @@ public class ModCruxes {
         gemCruxes.add(new Crux(Blocks.NETHER_QUARTZ_ORE.defaultBlockState(), 5, CruxType.MINERAL, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.AMETHYST_BLOCK.defaultBlockState(), 9, CruxType.MINERAL, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.QUARTZ_BLOCK.defaultBlockState(), 16, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
-        return new GemConditions(gemCruxes, essences, primer, gemTemperatureMin, gemTemperatureMax);
-    }
+        return new GemConditions(gemCruxes, essences, primer, gemTemperatureMin, gemTemperatureMax, 4);    }
 
     public static GemConditions LARIMAR_CONDITIONS(){
         ArrayList<Crux> gemCruxes = new ArrayList<>();
@@ -39,7 +38,6 @@ public class ModCruxes {
         float gemTemperatureMax = 0.1f;
         Item primer = Items.BLUE_ICE;
         String essences = "blue";
-
         gemCruxes.add(new Crux(Blocks.STONE.defaultBlockState(), stoneCruxValue, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.DEEPSLATE.defaultBlockState(), stoneCruxValue, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.GRANITE.defaultBlockState(), stoneCruxValue, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
@@ -47,8 +45,7 @@ public class ModCruxes {
         gemCruxes.add(new Crux(Blocks.ICE.defaultBlockState(), 3, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.SNOW_BLOCK.defaultBlockState(), 6, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.PACKED_ICE.defaultBlockState(), 8, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
-        return new GemConditions(gemCruxes, essences, primer, gemTemperatureMin, gemTemperatureMax);
-    }
+        return new GemConditions(gemCruxes, essences, primer, gemTemperatureMin, gemTemperatureMax, 6);    }
 
     public static GemConditions PERIDOT_CONDITIONS(){
         ArrayList<Crux> gemCruxes = new ArrayList<>();
@@ -56,6 +53,7 @@ public class ModCruxes {
         float gemTemperatureMax = 1.8f;
         Item primer = Items.EXPERIENCE_BOTTLE;
         String essences = "blue-yellow";
+        int emergeSpeed = 6;
 
         gemCruxes.add(new Crux(Blocks.STONE.defaultBlockState(), stoneCruxValue, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.GRANITE.defaultBlockState(), stoneCruxValue, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
@@ -65,7 +63,7 @@ public class ModCruxes {
         gemCruxes.add(new Crux(Blocks.IRON_ORE.defaultBlockState(), 2, CruxType.MINERAL, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.CLAY.defaultBlockState(), 2, CruxType.MINERAL, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.IRON_BLOCK.defaultBlockState(), 16, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
-        return new GemConditions(gemCruxes, essences, primer, gemTemperatureMin, gemTemperatureMax);
+        return new GemConditions(gemCruxes, essences, primer, gemTemperatureMin, gemTemperatureMax, 4);
     }
 
     public static GemConditions QUARTZ_CONDITIONS(){
@@ -74,6 +72,7 @@ public class ModCruxes {
         float gemTemperatureMax = 2f;
         Item primer = Items.NETHER_STAR;
         String essences = "pink-white";
+        int emergeSpeed = 4;
 
         gemCruxes.add(new Crux(Blocks.STONE.defaultBlockState(), stoneCruxValue, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.GRANITE.defaultBlockState(), stoneCruxValue, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
@@ -85,8 +84,7 @@ public class ModCruxes {
         gemCruxes.add(new Crux(Blocks.COPPER_ORE.defaultBlockState(), 4, CruxType.MINERAL, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.NETHER_QUARTZ_ORE.defaultBlockState(), 5, CruxType.MINERAL, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.QUARTZ_BLOCK.defaultBlockState(), 16, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
-        return new GemConditions(gemCruxes, essences, primer, gemTemperatureMin, gemTemperatureMax);
-    }
+        return new GemConditions(gemCruxes, essences, primer, gemTemperatureMin, gemTemperatureMax, 3);    }
 
     public static GemConditions RUBY_CONDITIONS(){
         ArrayList<Crux> gemCruxes = new ArrayList<>();
@@ -94,6 +92,8 @@ public class ModCruxes {
         float gemTemperatureMax = 2f;
         Item primer = Items.NETHERITE_INGOT;
         String essences = "pink";
+        int emergeSpeed = 2;
+
         gemCruxes.add(new Crux(Blocks.NETHERRACK.defaultBlockState(), stoneCruxValue, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.STONE.defaultBlockState(), stoneCruxValue, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.GRANITE.defaultBlockState(), stoneCruxValue, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
@@ -107,8 +107,7 @@ public class ModCruxes {
         gemCruxes.add(new Crux(Blocks.MAGMA_BLOCK.defaultBlockState(), 5, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.ANCIENT_DEBRIS.defaultBlockState(), 16, CruxType.MINERAL, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.NETHERITE_BLOCK.defaultBlockState(), 16, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
-        return new GemConditions(gemCruxes, essences, primer, gemTemperatureMin, gemTemperatureMax);
-    }
+        return new GemConditions(gemCruxes, essences, primer, gemTemperatureMin, gemTemperatureMax, 1);    }
 
     public static GemConditions RUTILE_CONDITIONS(){
         ArrayList<Crux> gemCruxes = new ArrayList<>();
@@ -116,6 +115,8 @@ public class ModCruxes {
         float gemTemperatureMax = 2f;
         Item primer = Items.FIRE_CHARGE;
         String essences = "pink";
+        int emergeSpeed = 4;
+
         gemCruxes.add(new Crux(Blocks.STONE.defaultBlockState(), stoneCruxValue, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.GRANITE.defaultBlockState(), stoneCruxValue, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.DIORITE.defaultBlockState(), stoneCruxValue, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
@@ -127,8 +128,7 @@ public class ModCruxes {
         gemCruxes.add(new Crux(Blocks.RED_SANDSTONE.defaultBlockState(), 4, CruxType.MINERAL, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.COPPER_ORE.defaultBlockState(), 4, CruxType.MINERAL, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.GLOWSTONE.defaultBlockState(), 5, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
-        return new GemConditions(gemCruxes, essences, primer, gemTemperatureMin, gemTemperatureMax);
-    }
+        return new GemConditions(gemCruxes, essences, primer, gemTemperatureMin, gemTemperatureMax, 3);    }
 
     public static GemConditions AGATE_CONDITIONS(){
         ArrayList<Crux> gemCruxes = new ArrayList<>();
@@ -136,6 +136,8 @@ public class ModCruxes {
         float gemTemperatureMax = 1.5f;
         Item primer = Items.DRAGON_BREATH;
         String essences = "blue-white";
+        int emergeSpeed = 5;
+
         gemCruxes.add(new Crux(Blocks.STONE.defaultBlockState(), stoneCruxValue, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.GRANITE.defaultBlockState(), stoneCruxValue, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.AMETHYST_BLOCK.defaultBlockState(), 9, CruxType.MINERAL, gemTemperatureMin, gemTemperatureMax));
@@ -146,8 +148,7 @@ public class ModCruxes {
         gemCruxes.add(new Crux(Blocks.IRON_ORE.defaultBlockState(), 3, CruxType.MINERAL, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.NETHER_QUARTZ_ORE.defaultBlockState(), 5, CruxType.MINERAL, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.QUARTZ_BLOCK.defaultBlockState(), 16, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
-        return new GemConditions(gemCruxes, essences, primer, gemTemperatureMin, gemTemperatureMax);
-    }
+        return new GemConditions(gemCruxes, essences, primer, gemTemperatureMin, gemTemperatureMax, 6);    }
 
     public static GemConditions AQUAMARINE_CONDITIONS(){
         ArrayList<Crux> gemCruxes = new ArrayList<>();
@@ -155,6 +156,8 @@ public class ModCruxes {
         float gemTemperatureMax = 1f;
         Item primer = Items.GHAST_TEAR;
         String essences = "blue-white";
+        int emergeSpeed = 6;
+
         gemCruxes.add(new Crux(Blocks.STONE.defaultBlockState(), stoneCruxValue, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.GRANITE.defaultBlockState(), stoneCruxValue, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.DIORITE.defaultBlockState(), stoneCruxValue, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
@@ -164,8 +167,7 @@ public class ModCruxes {
         gemCruxes.add(new Crux(Blocks.CLAY.defaultBlockState(), 4, CruxType.MINERAL, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.PRISMARINE.defaultBlockState(), 7, CruxType.MINERAL, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.SOUL_SAND.defaultBlockState(), 4, CruxType.MINERAL, gemTemperatureMin, gemTemperatureMax));
-        return new GemConditions(gemCruxes, essences, primer, gemTemperatureMin, gemTemperatureMax);
-    }
+        return new GemConditions(gemCruxes, essences, primer, gemTemperatureMin, gemTemperatureMax, 7);    }
 
     public static GemConditions BISMUTH_CONDITIONS(){
         ArrayList<Crux> gemCruxes = new ArrayList<>();
@@ -173,6 +175,8 @@ public class ModCruxes {
         float gemTemperatureMax = 1.5f;
         Item primer = Items.NETHERITE_SWORD;
         String essences = "pink-blue";
+        int emergeSpeed = 4;
+
         gemCruxes.add(new Crux(Blocks.STONE.defaultBlockState(), stoneCruxValue, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.GRANITE.defaultBlockState(), stoneCruxValue, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.DIORITE.defaultBlockState(), stoneCruxValue, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
@@ -182,8 +186,7 @@ public class ModCruxes {
         gemCruxes.add(new Crux(Blocks.IRON_ORE.defaultBlockState(), 3, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.MAGMA_BLOCK.defaultBlockState(), 5, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.GOLD_BLOCK.defaultBlockState(), 16, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
-        return new GemConditions(gemCruxes, essences, primer, gemTemperatureMin, gemTemperatureMax);
-    }
+        return new GemConditions(gemCruxes, essences, primer, gemTemperatureMin, gemTemperatureMax, 4);    }
 
     public static GemConditions BIXBITE_CONDITIONS(){
         ArrayList<Crux> gemCruxes = new ArrayList<>();
@@ -191,6 +194,8 @@ public class ModCruxes {
         float gemTemperatureMax = 1.5f;
         Item primer = Items.BONE_BLOCK;
         String essences = "pink";
+        int emergeSpeed = 5;
+
         gemCruxes.add(new Crux(Blocks.STONE.defaultBlockState(), stoneCruxValue, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.GRANITE.defaultBlockState(), stoneCruxValue, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.DIORITE.defaultBlockState(), stoneCruxValue, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
@@ -201,8 +206,7 @@ public class ModCruxes {
         gemCruxes.add(new Crux(Blocks.IRON_ORE.defaultBlockState(), 2, CruxType.MINERAL, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.CLAY.defaultBlockState(), stoneCruxValue, CruxType.MINERAL, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.REDSTONE_BLOCK.defaultBlockState(), 16, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
-        return new GemConditions(gemCruxes, essences, primer, gemTemperatureMin, gemTemperatureMax);
-    }
+        return new GemConditions(gemCruxes, essences, primer, gemTemperatureMin, gemTemperatureMax, 5);    }
 
     public static GemConditions LAPIS_CONDITIONS(){
         ArrayList<Crux> gemCruxes = new ArrayList<>();
@@ -218,8 +222,7 @@ public class ModCruxes {
         gemCruxes.add(new Crux(Blocks.LAPIS_ORE.defaultBlockState(), 5, CruxType.MINERAL, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.DARK_PRISMARINE.defaultBlockState(), 9, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.LAPIS_BLOCK.defaultBlockState(), 16, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
-        return new GemConditions(gemCruxes, essences, primer, gemTemperatureMin, gemTemperatureMax);
-    }
+        return new GemConditions(gemCruxes, essences, primer, gemTemperatureMin, gemTemperatureMax, 6);    }
 
     public static GemConditions NEPHRITE_CONDITIONS(){
         ArrayList<Crux> gemCruxes = new ArrayList<>();
@@ -237,8 +240,7 @@ public class ModCruxes {
         gemCruxes.add(new Crux(Blocks.WHITE_CONCRETE.defaultBlockState(), 3, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.IRON_ORE.defaultBlockState(), 4, CruxType.MINERAL, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.SLIME_BLOCK.defaultBlockState(), 16, CruxType.ORGANIC, gemTemperatureMin, gemTemperatureMax));
-        return new GemConditions(gemCruxes, essences, primer, gemTemperatureMin, gemTemperatureMax);
-    }
+        return new GemConditions(gemCruxes, essences, primer, gemTemperatureMin, gemTemperatureMax, 4);    }
 
     public static GemConditions SAPPHIRE_CONDITIONS(){
         ArrayList<Crux> gemCruxes = new ArrayList<>();
@@ -255,8 +257,7 @@ public class ModCruxes {
         gemCruxes.add(new Crux(Blocks.PACKED_ICE.defaultBlockState(), 5, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.SNOW_BLOCK.defaultBlockState(), 5, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.DIAMOND_BLOCK.defaultBlockState(), 16, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
-        return new GemConditions(gemCruxes, essences, primer, gemTemperatureMin, gemTemperatureMax);
-    }
+        return new GemConditions(gemCruxes, essences, primer, gemTemperatureMin, gemTemperatureMax, 7);    }
 
     public static GemConditions SPODUMENE_CONDITIONS(){
         ArrayList<Crux> gemCruxes = new ArrayList<>();
@@ -272,8 +273,7 @@ public class ModCruxes {
         gemCruxes.add(new Crux(Blocks.SLIME_BLOCK.defaultBlockState(), 16, CruxType.ORGANIC, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.BRAIN_CORAL.defaultBlockState(), 6, CruxType.ORGANIC, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.GLOWSTONE.defaultBlockState(), 8, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
-        return new GemConditions(gemCruxes, essences, primer, gemTemperatureMin, gemTemperatureMax);
-    }
+        return new GemConditions(gemCruxes, essences, primer, gemTemperatureMin, gemTemperatureMax, 5);    }
 
     public static GemConditions TOPAZ_CONDITIONS(){
         ArrayList<Crux> gemCruxes = new ArrayList<>();
@@ -292,8 +292,7 @@ public class ModCruxes {
         gemCruxes.add(new Crux(Blocks.GOLD_ORE.defaultBlockState(), 4, CruxType.MINERAL, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.RAW_GOLD_BLOCK.defaultBlockState(), 5, CruxType.MINERAL, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.GOLD_BLOCK.defaultBlockState(), 16, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
-        return new GemConditions(gemCruxes, essences, primer, gemTemperatureMin, gemTemperatureMax);
-    }
+        return new GemConditions(gemCruxes, essences, primer, gemTemperatureMin, gemTemperatureMax, 4);    }
 
     public static GemConditions TOURMALINE_CONDITIONS(){
         ArrayList<Crux> gemCruxes = new ArrayList<>();
@@ -310,8 +309,7 @@ public class ModCruxes {
         gemCruxes.add(new Crux(Blocks.SLIME_BLOCK.defaultBlockState(), 16, CruxType.ORGANIC, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.MYCELIUM.defaultBlockState(), 9, CruxType.ORGANIC, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.MOSS_BLOCK.defaultBlockState(), 4, CruxType.ORGANIC, gemTemperatureMin, gemTemperatureMax));
-        return new GemConditions(gemCruxes, essences, primer, gemTemperatureMin, gemTemperatureMax);
-    }
+        return new GemConditions(gemCruxes, essences, primer, gemTemperatureMin, gemTemperatureMax, 5);    }
 
     public static GemConditions EMERALD_CONDITIONS(){
         ArrayList<Crux> gemCruxes = new ArrayList<>();
@@ -328,8 +326,7 @@ public class ModCruxes {
         gemCruxes.add(new Crux(Blocks.ANCIENT_DEBRIS.defaultBlockState(), 6, CruxType.MINERAL, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.EMERALD_ORE.defaultBlockState(), 10, CruxType.MINERAL, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.EMERALD_BLOCK.defaultBlockState(), 16, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
-        return new GemConditions(gemCruxes, essences, primer, gemTemperatureMin, gemTemperatureMax);
-    }
+        return new GemConditions(gemCruxes, essences, primer, gemTemperatureMin, gemTemperatureMax, 9);    }
 
     public static GemConditions GARNET_CONDITIONS(){
         ArrayList<Crux> gemCruxes = new ArrayList<>();
@@ -343,8 +340,7 @@ public class ModCruxes {
         gemCruxes.add(new Crux(Blocks.SCULK.defaultBlockState(), 8, CruxType.ORGANIC, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.BONE_BLOCK.defaultBlockState(), 6, CruxType.ORGANIC, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.END_STONE.defaultBlockState(), 8, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
-        return new GemConditions(gemCruxes, essences, primer, gemTemperatureMin, gemTemperatureMax);
-    }
+        return new GemConditions(gemCruxes, essences, primer, gemTemperatureMin, gemTemperatureMax, 8);    }
 
     public static GemConditions MORGANITE_CONDITIONS(){
         ArrayList<Crux> gemCruxes = new ArrayList<>();
@@ -361,8 +357,7 @@ public class ModCruxes {
         gemCruxes.add(new Crux(Blocks.IRON_ORE.defaultBlockState(), 3, CruxType.MINERAL, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.ANDESITE.defaultBlockState(), stoneCruxValue, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.SOUL_SAND.defaultBlockState(), 4, CruxType.MINERAL, gemTemperatureMin, gemTemperatureMax));
-        return new GemConditions(gemCruxes, essences, primer, gemTemperatureMin, gemTemperatureMax);
-    }
+        return new GemConditions(gemCruxes, essences, primer, gemTemperatureMin, gemTemperatureMax, 7);    }
 
     public static GemConditions OBSIDIAN_CONDITIONS(){
         ArrayList<Crux> gemCruxes = new ArrayList<>();
@@ -375,8 +370,7 @@ public class ModCruxes {
         gemCruxes.add(new Crux(Blocks.GRANITE.defaultBlockState(), stoneCruxValue, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.DIORITE.defaultBlockState(), stoneCruxValue, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.OBSIDIAN.defaultBlockState(), 8, CruxType.MINERAL, gemTemperatureMin, gemTemperatureMax));
-        return new GemConditions(gemCruxes, essences, primer, gemTemperatureMin, gemTemperatureMax);
-    }
+        return new GemConditions(gemCruxes, essences, primer, gemTemperatureMin, gemTemperatureMax, 5);    }
 
     public static GemConditions SPINEL_CONDITIONS(){
         ArrayList<Crux> gemCruxes = new ArrayList<>();
@@ -395,8 +389,7 @@ public class ModCruxes {
         gemCruxes.add(new Crux(Blocks.COPPER_ORE.defaultBlockState(), 2, CruxType.MINERAL, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.IRON_BLOCK.defaultBlockState(), 5, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.SLIME_BLOCK.defaultBlockState(), 16, CruxType.ORGANIC, gemTemperatureMin, gemTemperatureMax));
-        return new GemConditions(gemCruxes, essences, primer, gemTemperatureMin, gemTemperatureMax);
-    }
+        return new GemConditions(gemCruxes, essences, primer, gemTemperatureMin, gemTemperatureMax, 6);    }
 
     public static GemConditions ZIRCON_CONDITIONS(){
         ArrayList<Crux> gemCruxes = new ArrayList<>();
@@ -411,6 +404,5 @@ public class ModCruxes {
         gemCruxes.add(new Crux(Blocks.DIAMOND_ORE.defaultBlockState(), 10, CruxType.MINERAL, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.ANCIENT_DEBRIS.defaultBlockState(), 16, CruxType.MINERAL, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.DIAMOND_BLOCK.defaultBlockState(), 16, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
-        return new GemConditions(gemCruxes, essences, primer, gemTemperatureMin, gemTemperatureMax);
-    }
+        return new GemConditions(gemCruxes, essences, primer, gemTemperatureMin, gemTemperatureMax, 8);    }
 }
