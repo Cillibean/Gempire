@@ -64,7 +64,6 @@ public class ItemGem extends Item {
     public EntityGem gemToAssign;
     public boolean livingEntityHit = false;
     public boolean isAssigned = false;
-    public boolean cracked;
 
     public ItemGem(Properties properties) {
         super(properties);
@@ -286,7 +285,7 @@ public class ItemGem extends Item {
                             gem.removeAllEffects();
                             gem.setDeltaMovement(0, 0, 0);
                             gem.fallDistance = 0;
-                            gem.setCracked(cracked);
+                            gem.setCracked(stack.getOrCreateTag().getBoolean("cracked"));
                             gem.setAssignedGem(assigned_gem);
                             System.out.println(getAssigned_gem());
                             GemFormEvent event = new GemFormEvent(gem, gem.blockPosition());
@@ -307,7 +306,7 @@ public class ItemGem extends Item {
             if (checkTags(itemStack)) {
                 p_40553_.add(Component.translatable(itemStack.getTag().getString("name")).withStyle(ChatFormatting.GRAY));
             }
-            if (cracked) {
+            if (itemStack.getOrCreateTag().getBoolean("cracked")) {
                 p_40553_.add(Component.translatable("Cracked").withStyle(ChatFormatting.RED));
             }
             if (this.gemToAssign != null) {
@@ -317,21 +316,20 @@ public class ItemGem extends Item {
             if (checkTags(itemStack)) {
                 p_40553_.add(Component.translatable(itemStack.getTag().getString("name")).withStyle(ChatFormatting.GRAY));
             }
-            if (cracked) {
+            if (itemStack.getOrCreateTag().getBoolean("cracked")) {
                 p_40553_.add(Component.translatable("Cracked").withStyle(ChatFormatting.RED));
             }
             p_40553_.add(Component.translatable("Hold Shift for more info").withStyle(ChatFormatting.GOLD));
 
         }
     }
-    public void setData(EntityGem host, ItemStack stack, boolean crack) {
-        stack.setTag(host.saveWithoutId(new CompoundTag()));
-        assert stack.getTag() != null;
-        stack.getTag().putString("name", host.getName().getString());
-        stack.getTag().putBoolean("cracked", crack);
-        cracked = stack.getTag().getBoolean("cracked");
-        stack.getTag().putBoolean("prime", host.isPrimary());
-        stack.getTag().putBoolean("defective", host.isDefective());
+
+    public static void saveData(ItemStack stack, EntityGem gem, boolean cracked) {
+        CompoundTag tag = stack.getOrCreateTag();
+        tag.putString("name", gem.getName().getString());
+        tag.putBoolean("cracked", cracked);
+        tag.putBoolean("prime", gem.isPrimary());
+        tag.putBoolean("defective", gem.isDefective());
     }
 
     @Override

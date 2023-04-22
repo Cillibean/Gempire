@@ -257,7 +257,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             this.spawnGem.remove(RemovalReason.DISCARDED);
         }
         ItemStack stack = new ItemStack(this.getGemItem());
-        ((ItemGem) stack.getItem()).setData(this, stack, getCracked());
+        ItemGem.saveData(stack, this, this.getCracked());
         setAssignedGem(((ItemGem) stack.getItem()).assigned_gem);
         System.out.println(this.getAssignedGem());
         this.setRebelHairVariant(this.generateHairVariant());
@@ -869,14 +869,14 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                 }
             } else if (getCracked()){
                 ItemStack stack = new ItemStack(this.getGemItem());
-                ((ItemGem) stack.getItem()).setData(this, stack, true);
+                ItemGem.saveData(stack, this, true);
                 this.spawnAtLocation(stack).setExtendedLifetime();
                 for (UUID owner : OWNERS) {
                     this.level.getPlayerByUUID(owner).sendSystemMessage(Component.translatable(this.getName().getString() + " " + this.getFacetAndCut() + " has cracked"));
                 }
             } else {
                 ItemStack stack = new ItemStack(this.getGemItem());
-                ((ItemGem) stack.getItem()).setData(this, stack, false);
+                ItemGem.saveData(stack, this, false);
                 this.spawnAtLocation(stack).setExtendedLifetime();
             }
             //TODO: fix cracking
