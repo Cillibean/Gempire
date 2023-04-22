@@ -194,13 +194,16 @@ public class GemFormation {
         }
 
         double rarity = CONDITIONS.get(gemtoform).rarity;
-        System.out.println(weight / rarity);
+        System.out.println("weight / rarity check "+weight / rarity);
+        System.out.println("weight "+weight);
         if (weight / rarity <= 10) {
             gem.setDefective(true);
+            System.out.println("defective");
         } else if (weight / rarity >= 100){
             gem.setPrimary(true);
+            System.out.println("prime");
         }
-        gem.setCracked(false);
+        gem.setCracked(gem.getCracked());
         System.out.println(gem.getCracked());
         gem.setPos(this.pos.getX() + .5f, this.pos.getY(), this.pos.getZ() + .5f);
         gem.setHealth(gem.getMaxHealth());
@@ -292,14 +295,6 @@ public class GemFormation {
                 double r = /*r1 **/ totalWeight;
                 System.out.println("random " + r);
                 r -= WEIGHTS_OF_GEMS.get(gem);
-                System.out.println("lowest r " + lowestRGem);
-                System.out.println("lowest r = " + lowestR);
-                System.out.println("second lowest r " + lowestRGem2);
-                System.out.println("second lowest r = " + lowestR2);
-                System.out.println("third lowest r " + lowestRGem3);
-                System.out.println("third lowest r = " + lowestR3);
-                System.out.println("fourth lowest r " + lowestRGem4);
-                System.out.println("fourth lowest r = " + lowestR4);
                 /*if (WEIGHTS_OF_GEMS.get(gem) < 12) {
                     r = 1000000;
                 }*/
@@ -316,6 +311,14 @@ public class GemFormation {
                     lowestR4 = r;
                     lowestRGem4 = gem;
                 }
+                System.out.println("lowest r " + lowestRGem);
+                System.out.println("lowest r = " + lowestR);
+                System.out.println("second lowest r " + lowestRGem2);
+                System.out.println("second lowest r = " + lowestR2);
+                System.out.println("third lowest r " + lowestRGem3);
+                System.out.println("third lowest r = " + lowestR3);
+                System.out.println("fourth lowest r " + lowestRGem4);
+                System.out.println("fourth lowest r = " + lowestR4);
                 int r2 = rand.nextInt(4);
                 switch (r2) {
                     case 0 -> returnGem = lowestRGem;
@@ -323,8 +326,6 @@ public class GemFormation {
                     case 2 -> returnGem = lowestRGem3;
                     case 3 -> returnGem = lowestRGem4;
                 }
-                returnGem = gem;
-                conditions = CONDITIONS.get(gem);
                 weight = WEIGHTS_OF_GEMS.get(gem);
             }
         } else if (tier == 2) {
@@ -337,7 +338,9 @@ public class GemFormation {
             double lowestR4 = 100000000;
             String lowestRGem4 = "";
             System.out.println("check out of possible gems");
+            System.out.println("total " + totalWeight);
             for (String gem : POSSIBLE_GEMS_TIER_2) {
+                CONDITIONS = ModEntities.CRUXTOGEM;
                 System.out.println(" ");
                 System.out.println(gem);
                 Random rand = new Random();
@@ -346,14 +349,6 @@ public class GemFormation {
                 double r = /*r1 **/ totalWeight;
                 System.out.println("random " + r);
                 r -= WEIGHTS_OF_GEMS.get(gem);
-                System.out.println("lowest r " + lowestRGem);
-                System.out.println("lowest r = " + lowestR);
-                System.out.println("second lowest r " + lowestRGem2);
-                System.out.println("second lowest r = " + lowestR2);
-                System.out.println("third lowest r " + lowestRGem3);
-                System.out.println("third lowest r = " + lowestR3);
-                System.out.println("fourth lowest r " + lowestRGem4);
-                System.out.println("fourth lowest r = " + lowestR4);
                 /*if (WEIGHTS_OF_GEMS.get(gem) < 12) {
                     r = 1000000;
                 }*/
@@ -370,6 +365,14 @@ public class GemFormation {
                     lowestR4 = r;
                     lowestRGem4 = gem;
                 }
+                System.out.println("lowest r " + lowestRGem);
+                System.out.println("lowest r = " + lowestR);
+                System.out.println("second lowest r " + lowestRGem2);
+                System.out.println("second lowest r = " + lowestR2);
+                System.out.println("third lowest r " + lowestRGem3);
+                System.out.println("third lowest r = " + lowestR3);
+                System.out.println("fourth lowest r " + lowestRGem4);
+                System.out.println("fourth lowest r = " + lowestR4);
                 int r2 = rand.nextInt(4);
                 switch (r2) {
                     case 0 -> returnGem = lowestRGem;
@@ -377,15 +380,7 @@ public class GemFormation {
                     case 2 -> returnGem = lowestRGem3;
                     case 3 -> returnGem = lowestRGem4;
                 }
-                returnGem = gem;
-                if (r > 0 && gem == POSSIBLE_GEMS_TIER_2.get(POSSIBLE_GEMS_TIER_2.size() - 1)) {
-                    returnGem = lowestRGem;
-                    break;
-                }
-                if (r <= 0) {
-                    returnGem = gem;
-                    break;
-                }
+                weight = WEIGHTS_OF_GEMS.get(gem);
             }
         }
         System.out.println(returnGem);

@@ -493,37 +493,37 @@ public class ModItems {
             new ItemChroma(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(64), 16));
 
     public static final RegistryObject<Item> WHITE_SHARDS = ITEMS.register("white_shards", () ->
-            new ItemChroma(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(64), 0));
+            new ItemShard(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(64), 0));
     public static final RegistryObject<Item> ORANGE_SHARDS = ITEMS.register("orange_shards", () ->
-            new ItemChroma(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(64), 1));
+            new ItemShard(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(64), 1));
     public static final RegistryObject<Item> MAGENTA_SHARDS = ITEMS.register("magenta_shards", () ->
-            new ItemChroma(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(64), 2));
+            new ItemShard(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(64), 2));
     public static final RegistryObject<Item> LIGHT_BLUE_SHARDS = ITEMS.register("light_blue_shards", () ->
-            new ItemChroma(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(64), 3));
+            new ItemShard(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(64), 3));
     public static final RegistryObject<Item> YELLOW_SHARDS = ITEMS.register("yellow_shards", () ->
-            new ItemChroma(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(64), 4));
+            new ItemShard(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(64), 4));
     public static final RegistryObject<Item> LIME_SHARDS = ITEMS.register("lime_shards", () ->
-            new ItemChroma(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(64), 5));
+            new ItemShard(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(64), 5));
     public static final RegistryObject<Item> PINK_SHARDS = ITEMS.register("pink_shards", () ->
-            new ItemChroma(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(64), 6));
+            new ItemShard(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(64), 6));
     public static final RegistryObject<Item> GRAY_SHARDS = ITEMS.register("gray_shards", () ->
-            new ItemChroma(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(64), 7));
+            new ItemShard(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(64), 7));
     public static final RegistryObject<Item> LIGHT_GRAY_SHARDS = ITEMS.register("light_gray_shards", () ->
-            new ItemChroma(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(64), 8));
+            new ItemShard(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(64), 8));
     public static final RegistryObject<Item> CYAN_SHARDS = ITEMS.register("cyan_shards", () ->
-            new ItemChroma(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(64), 9));
+            new ItemShard(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(64), 9));
     public static final RegistryObject<Item> PURPLE_SHARDS = ITEMS.register("purple_shards", () ->
-            new ItemChroma(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(64), 10));
+            new ItemShard(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(64), 10));
     public static final RegistryObject<Item> BLUE_SHARDS = ITEMS.register("blue_shards", () ->
-            new ItemChroma(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(64), 11));
+            new ItemShard(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(64), 11));
     public static final RegistryObject<Item> BROWN_SHARDS = ITEMS.register("brown_shards", () ->
-            new ItemChroma(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(64), 12));
+            new ItemShard(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(64), 12));
     public static final RegistryObject<Item> GREEN_SHARDS = ITEMS.register("green_shards", () ->
-            new ItemChroma(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(64), 13));
+            new ItemShard(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(64), 13));
     public static final RegistryObject<Item> RED_SHARDS = ITEMS.register("red_shards", () ->
-            new ItemChroma(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(64), 14));
+            new ItemShard(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(64), 14));
     public static final RegistryObject<Item> BLACK_SHARDS = ITEMS.register("black_shards", () ->
-            new ItemChroma(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(64), 15));
+            new ItemShard(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(64), 15));
 
     public static final RegistryObject<Item> WHITE_SAPPHIRE_GEM = ITEMS.register("sapphire_gem_0", () ->
             new ItemGem(new Item.Properties().tab(ModItemGroup.GEMSTONES).stacksTo(1).fireResistant()));
