@@ -212,7 +212,7 @@ public class ModItemProperties {
     private static void makeGem(Item item) {
         ItemProperties.register(item, new ResourceLocation("cracked"), (stack, p_174636_, p_174637_, p_174638_) -> {
             if (stack.getItem().asItem() instanceof ItemGem) {
-                if ((((ItemGem) stack.getItem().asItem()).cracked)) {
+                if (stack.getOrCreateTag().getBoolean("cracked")) {
                     return 1.0F;
                 }
                 else {
