@@ -109,6 +109,8 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     public static EntityDataAccessor<Integer> REBEL_INSIGNIA_VARIANT = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
     public static EntityDataAccessor<Integer> HARDNESS = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<Integer> CRACK_AMOUNT = SynchedEntityData.defineId(EntityGem.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Boolean> ASSIGNED = SynchedEntityData.<Boolean>defineId(EntityGem.class, EntityDataSerializers.BOOLEAN);
+
 
 
     public boolean isCut;
@@ -212,6 +214,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.entityData.define(EntityGem.REBEL_INSIGNIA_VARIANT, 0);
         this.entityData.define(EntityGem.HARDNESS, 0);
         this.entityData.define(EntityGem.CRACK_AMOUNT, 0);
+        this.entityData.define(EntityGem.ASSIGNED, false);
         this.FOLLOW_ID = UUID.randomUUID();
         this.ASSIGNED_ID = UUID.randomUUID();
         this.MASTER_OWNER = UUID.randomUUID();
@@ -270,6 +273,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.setRebelInsigniaColor(this.random.nextInt(16));
         this.setHardness(this.getHardness());
         this.setCrackAmount(this.getCrackAmount());
+        this.setAssigned(this.getAssigned());
         this.registerRecipes();
         return super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
     }
@@ -367,6 +371,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         compound.putBoolean("rebel", this.getRebelled());
         compound.putBoolean("isHostile", this.getHostile());
         compound.putBoolean("cracked", this.getCracked());
+        compound.putBoolean("assigned", this.getAssigned());
         compound.putInt("hardness", this.getHardness());
         compound.putInt("crackAmount", this.getCrackAmount());
         compound.putInt("focusLevel", this.focusLevel);
@@ -455,6 +460,9 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.setHardness(compound.getInt("hardness"));
         this.setCrackAmount(compound.getInt("crackAmount"));
         this.setCracked(compound.getBoolean("cracked"));
+        this.setAssigned(compound.getBoolean("assigned"));
+        this.setPrimary(compound.getBoolean("prime"));
+        this.setDefective(compound.getBoolean("defective"));
         this.idlePowers = this.generateIdlePowers();
         ContainerHelper.loadAllItems(compound, this.items);
         this.readStructures(compound);
@@ -599,12 +607,14 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             if (enemyDying) {
                 System.out.println(enemy.getHealth());
                 if (enemy.getHealth() <= 0) {
-                    for(Ability ability : this.getAbilityPowers()){
-                        if(ability instanceof AbilityAbundance){
-                            dropXP(enemy);
+                    if (enemy.getLastHurtByMob() == this) {
+                        dropXP(enemy);
+                        for(Ability ability : this.getAbilityPowers()){
+                            if(ability instanceof AbilityAbundance){
+                                dropXP(enemy);
+                            }
                         }
                     }
-                    dropXP(enemy);
                     enemy = null;
                     enemyDying = false;
                 }
@@ -1144,6 +1154,14 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
 
     public void setFacet(String value){
         this.entityData.set(EntityGem.FACET, value);
+    }
+
+    public Boolean getAssigned(){
+        return this.entityData.get(EntityGem.ASSIGNED);
+    }
+
+    public void setAssigned(boolean value){
+        this.entityData.set(EntityGem.ASSIGNED, value);
     }
 
 

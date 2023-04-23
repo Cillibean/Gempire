@@ -196,6 +196,9 @@ public class GemSeedTE extends BlockEntity {
                         System.out.println("weigh");
                         weighThisGem = true;
                     }
+                    if (this.primer == conditions.primer && conditions.primer != Items.AIR) {
+                        gemWeight *= 3;
+                    }
                     if (weighThisGem) {
                         for (Crux crux : GEM_CONDITIONS.get(gem).cruxes) {
                             //Then for every crux, calculate the total weight of crux that matches every block in the volume for every gem
@@ -218,9 +221,6 @@ public class GemSeedTE extends BlockEntity {
                             }
                         }
                     }
-                    if (this.primer == conditions.primer && conditions.primer != Items.AIR) {
-                        gemWeight *= 3;
-                    }
                     //Once the total weight has been obtained, store the individual weights of every gem in a hashmap.
                     else {
                         TEMPORARY_WEIGHTS.get(i).add(0f);
@@ -236,6 +236,7 @@ public class GemSeedTE extends BlockEntity {
                 if (GEM_CONDITIONS.get(gem) != null) {
                     this.GEM_CONDITIONS = ModEntities.CRUXTOGEM;
                     this.SetDrainedStoneColor(BLOCK_TEMPERATURE);
+                    GemConditions conditions = GEM_CONDITIONS.get(gem);
                     //Do some math to multiply the gem weight by the inverse of the difference in biome temperature to preferred temperature
                     float temperatureDifference = 0;
                     if (BLOCK_TEMPERATURE >= conditions.temperatureMin) {
@@ -264,6 +265,9 @@ public class GemSeedTE extends BlockEntity {
                         System.out.println("weigh");
                         weighThisGem = true;
                     }
+                    if (this.primer == conditions.primer && conditions.primer != Items.AIR) {
+                        gemWeight *= 3;
+                    }
                     if (weighThisGem) {
                         for (Crux crux : GEM_CONDITIONS.get(gem).cruxes) {
                             //Then for every crux, calculate the total weight of crux that matches every block in the volume for every gem
@@ -285,9 +289,6 @@ public class GemSeedTE extends BlockEntity {
                                 }
                             }
                         }
-                    }
-                    if (this.primer == conditions.primer && conditions.primer != Items.AIR) {
-                        gemWeight *= 3;
                     }
                     //Once the total weight has been obtained, store the individual weights of every gem in a hashmap.
                     else {

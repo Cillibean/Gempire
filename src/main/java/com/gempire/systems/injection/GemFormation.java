@@ -152,6 +152,16 @@ public class GemFormation {
             }
         }
         System.out.println("placement");
+        double rarity = CONDITIONS.get(gemtoform).rarity;
+        System.out.println("weight / rarity check "+weight / rarity);
+        System.out.println("weight "+weight);
+        if (weight / rarity <= 10) {
+            gem.setDefective(true);
+            System.out.println("defective");
+        } else if (weight / rarity >= 25){
+            gem.setPrimary(true);
+            System.out.println("prime");
+        }
         gem.setGemPlacement(gem.generateGemPlacement());
         gem.setSkinVariant(gem.generateSkinVariant());
         if(gem.setSkinVariantOnInitialSpawn) {
@@ -191,17 +201,6 @@ public class GemFormation {
         gem.idlePowers = gem.generateIdlePowers();
         if(gem.spawnGem != null){
             gem.spawnGem.remove(Entity.RemovalReason.DISCARDED);
-        }
-
-        double rarity = CONDITIONS.get(gemtoform).rarity;
-        System.out.println("weight / rarity check "+weight / rarity);
-        System.out.println("weight "+weight);
-        if (weight / rarity <= 10) {
-            gem.setDefective(true);
-            System.out.println("defective");
-        } else if (weight / rarity >= 100){
-            gem.setPrimary(true);
-            System.out.println("prime");
         }
         gem.setCracked(gem.getCracked());
         System.out.println(gem.getCracked());
@@ -322,12 +321,23 @@ public class GemFormation {
                 System.out.println("fourth lowest r = " + lowestR4);
                 int r2 = rand.nextInt(4);
                 switch (r2) {
-                    case 0 -> returnGem = lowestRGem;
-                    case 1 -> returnGem = lowestRGem2;
-                    case 2 -> returnGem = lowestRGem3;
-                    case 3 -> returnGem = lowestRGem4;
+                    case 0 -> {
+                        returnGem = lowestRGem;
+                        weight = (float) (totalWeight - lowestR);
+                    }
+                    case 1 -> {
+                        returnGem = lowestRGem2;
+                        weight = (float) (totalWeight - lowestR2);
+                    }
+                    case 2 -> {
+                        returnGem = lowestRGem3;
+                        weight = (float) (totalWeight - lowestR3);
+                    }
+                    case 3 -> {
+                        returnGem = lowestRGem4;
+                        weight = (float) (totalWeight - lowestR4);
+                    }
                 }
-                weight = WEIGHTS_OF_GEMS.get(gem);
             }
         } else if (tier == 2) {
             double lowestR = 100000000;
@@ -376,12 +386,23 @@ public class GemFormation {
                 System.out.println("fourth lowest r = " + lowestR4);
                 int r2 = rand.nextInt(4);
                 switch (r2) {
-                    case 0 -> returnGem = lowestRGem;
-                    case 1 -> returnGem = lowestRGem2;
-                    case 2 -> returnGem = lowestRGem3;
-                    case 3 -> returnGem = lowestRGem4;
+                    case 0 -> {
+                        returnGem = lowestRGem;
+                        weight = (float) (totalWeight - lowestR);
+                    }
+                    case 1 -> {
+                        returnGem = lowestRGem2;
+                        weight = (float) (totalWeight - lowestR2);
+                    }
+                    case 2 -> {
+                        returnGem = lowestRGem3;
+                        weight = (float) (totalWeight - lowestR3);
+                    }
+                    case 3 -> {
+                        returnGem = lowestRGem4;
+                        weight = (float) (totalWeight - lowestR4);
+                    }
                 }
-                weight = WEIGHTS_OF_GEMS.get(gem);
             }
         }
         System.out.println(returnGem);
