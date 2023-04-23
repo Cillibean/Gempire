@@ -114,6 +114,10 @@ public class EntitySpodumene extends EntityVaryingGem {
         return this.getOutfitVariant();
     }
 
+    public int generateRebelInsigniaVariant() {
+        return this.getRebelOutfitVariant();
+    }
+
     @Override
     public boolean hasSkinColorVariant() {
         return true;

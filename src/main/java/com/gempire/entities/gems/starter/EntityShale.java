@@ -89,10 +89,10 @@ public class EntityShale extends EntityStarterGem {
     public Item getOutputItem(int n) {
         int i = this.getRandom().nextInt(4);
         Item essence = switch (i) {
-            case 1 -> ModFluids.PINK_ESSENCE.bucket.get();
-            case 2 -> ModFluids.BLUE_ESSENCE.bucket.get();
-            case 3 -> ModFluids.YELLOW_ESSENCE.bucket.get();
-            default -> ModFluids.WHITE_ESSENCE.bucket.get();
+            case 1 -> ModItems.PINK_ESSENCE_BUCKET.get();
+            case 2 -> ModItems.BLUE_ESSENCE_BUCKET.get();
+            case 3 -> ModItems.YELLOW_ESSENCE_BUCKET.get();
+            default -> ModItems.WHITE_ESSENCE_BUCKET.get();
         };
         return essence;
     }

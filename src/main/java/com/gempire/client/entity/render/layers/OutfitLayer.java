@@ -26,9 +26,11 @@ public class OutfitLayer<E extends EntityGem, M extends ModelGem<E>> extends Gem
 
     @Override
     public void render(PoseStack matrixStackIn, MultiBufferSource bufferIn, int packedLightIn, EntityGem gem, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
-        float[] outfitColors = Sheep.getColorArray(DyeColor.byId(gem.getOutfitColor()));
         VertexConsumer builder = null;
+
+        float[] outfitColors;
         if (gem.getRebelled()) {
+            outfitColors = Sheep.getColorArray(DyeColor.byId(gem.getRebelOutfitColor()));
             if (gem.hasOutfitPlacementVariant()) {
                 for (int i : gem.outfitPlacementVariants()) {
                     if (i == gem.getGemPlacement()) {
@@ -36,13 +38,14 @@ public class OutfitLayer<E extends EntityGem, M extends ModelGem<E>> extends Gem
                         break;
                     } else {
                         builder = bufferIn.getBuffer(RenderType.entityTranslucent(new ResourceLocation(gem.getModID() + ":textures/entity/" + this.getName(gem).toLowerCase() + "/outfits/outfit_" + gem.getRebelOutfitVariant() + ".png")));
+                        break;
                     }
                 }
             } else {
                 builder = bufferIn.getBuffer(RenderType.entityTranslucent(new ResourceLocation(gem.getModID() + ":textures/entity/" + this.getName(gem).toLowerCase() + "/outfits/outfit_" + gem.getRebelOutfitVariant() + ".png")));
             }
-        }
-        if (!gem.getRebelled()) {
+        } else if (!gem.getRebelled()) {
+            outfitColors = Sheep.getColorArray(DyeColor.byId(gem.getOutfitColor()));
             if (gem.hasOutfitPlacementVariant()) {
                 for (int i : gem.outfitPlacementVariants()) {
                     if (i == gem.getGemPlacement()) {
@@ -50,11 +53,14 @@ public class OutfitLayer<E extends EntityGem, M extends ModelGem<E>> extends Gem
                         break;
                     } else {
                         builder = bufferIn.getBuffer(RenderType.entityTranslucent(new ResourceLocation(gem.getModID() + ":textures/entity/" + this.getName(gem).toLowerCase() + "/outfits/outfit_" + gem.getOutfitVariant() + ".png")));
+                        break;
                     }
                 }
             } else {
                 builder = bufferIn.getBuffer(RenderType.entityTranslucent(new ResourceLocation(gem.getModID() + ":textures/entity/" + this.getName(gem).toLowerCase() + "/outfits/outfit_" + gem.getOutfitVariant() + ".png")));
             }
+        } else {
+            outfitColors = Sheep.getColorArray(DyeColor.byId(gem.getOutfitColor()));
         }
         this.getParentModel().setupAnim(gem, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
         this.getParentModel().renderToBuffer(matrixStackIn, builder, packedLightIn, OverlayTexture.NO_OVERLAY, outfitColors[0], outfitColors[1], outfitColors[2], 1.0F);

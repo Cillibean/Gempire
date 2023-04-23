@@ -164,6 +164,10 @@ public class EntityNephrite extends EntityGem {
         return 0;
     }
 
+    public int generateRebelInsigniaVariant() {
+        return 0;
+    }
+
     @Override
     public int baseFocus() {
         return 7;

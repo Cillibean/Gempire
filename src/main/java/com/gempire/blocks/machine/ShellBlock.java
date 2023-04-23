@@ -38,11 +38,10 @@ import net.minecraftforge.network.NetworkHooks;
 public class ShellBlock extends BaseEntityBlock implements SimpleWaterloggedBlock, EntityBlock {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     public static final IntegerProperty STAGE = IntegerProperty.create("stage", 0, 2);
-    public static final BooleanProperty WATERLOGGED = BooleanProperty.create("waterlogged");
 
     public ShellBlock(Properties builder) {
         super(builder);
-        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(WATERLOGGED, false).setValue(STAGE, 0));
+        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(STAGE, 0));
     }
 
 
@@ -71,7 +70,7 @@ public class ShellBlock extends BaseEntityBlock implements SimpleWaterloggedBloc
     }
 
     public BlockState getStateForPlacement(BlockPlaceContext context) {
-        return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite()).setValue(WATERLOGGED, false).setValue(STAGE, 0);
+        return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite()).setValue(STAGE, 0);
     }
 
     public BlockState rotate(BlockState state, Rotation rot) {
@@ -83,7 +82,7 @@ public class ShellBlock extends BaseEntityBlock implements SimpleWaterloggedBloc
     }
 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING).add(WATERLOGGED).add(STAGE);
+        builder.add(FACING).add(STAGE);
     }
 
     /*@Override

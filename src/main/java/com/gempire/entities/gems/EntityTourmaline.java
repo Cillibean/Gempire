@@ -228,6 +228,10 @@ public class EntityTourmaline extends EntityVaryingGem {
     public int generateInsigniaVariant(){
             return this.getOutfitVariant();
     }
+
+    public int generateRebelInsigniaVariant() {
+        return this.getRebelOutfitVariant();
+    }
     public boolean isFocused() {
         return true;
     }

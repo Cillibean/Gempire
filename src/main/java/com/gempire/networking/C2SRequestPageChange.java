@@ -1,5 +1,6 @@
 package com.gempire.networking;
 
+import com.gempire.container.PearlUIContainer;
 import com.gempire.entities.bases.EntityGem;
 import com.gempire.entities.gems.EntityPearl;
 import com.gempire.entities.gems.EntityZircon;

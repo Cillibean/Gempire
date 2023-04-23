@@ -580,16 +580,16 @@ public class GemSeedTE extends BlockEntity {
     }
 
     public static String StringFromFluid(Fluid fluid){
-        if(fluid == ModFluids.PINK_ESSENCE.source.get()){
+        if(fluid == ModFluids.PINK_ESSENCE.get()){
             return "pink";
         }
-        else if(fluid == ModFluids.PINK_ESSENCE.source.get()){
+        else if(fluid == ModFluids.BLUE_ESSENCE.get()){
             return "blue";
         }
-        else if(fluid == ModFluids.PINK_ESSENCE.source.get()){
+        else if(fluid == ModFluids.YELLOW_ESSENCE.get()){
             return "yellow";
         }
-        else if(fluid == ModFluids.PINK_ESSENCE.source.get()){
+        else if(fluid == ModFluids.WHITE_ESSENCE.get()){
             return "white";
         }
         else{
@@ -599,16 +599,16 @@ public class GemSeedTE extends BlockEntity {
 
     public static Fluid FluidFromString(String fluid){
         if(Objects.equals(fluid, "pink")){
-            return ModFluids.PINK_ESSENCE.source.get();
+            return ModFluids.PINK_ESSENCE.get();
         }
         else if(Objects.equals(fluid, "blue")){
-            return ModFluids.BLUE_ESSENCE.source.get();
+            return ModFluids.BLUE_ESSENCE.get();
         }
         else if(Objects.equals(fluid, "yellow")){
-            return ModFluids.YELLOW_ESSENCE.source.get();
+            return ModFluids.YELLOW_ESSENCE.get();
         }
         else if(Objects.equals(fluid, "white")){
-            return ModFluids.PINK_ESSENCE.source.get();
+            return ModFluids.WHITE_ESSENCE.get();
         }
         else {
             return Fluids.EMPTY;

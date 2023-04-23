@@ -207,6 +207,7 @@ public class GemFormation {
         System.out.println(gem.getCracked());
         gem.setPos(this.pos.getX() + .5f, this.pos.getY(), this.pos.getZ() + .5f);
         gem.setHealth(gem.getMaxHealth());
+        gem.GUARD_POS = gem.getOnPos().above();
         GemFormEvent event1 = new GemFormEvent(gem, gem.blockPosition());
         MinecraftForge.EVENT_BUS.post(event1);
         this.world.addFreshEntity(gem);

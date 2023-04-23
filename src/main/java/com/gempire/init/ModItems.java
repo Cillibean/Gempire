@@ -3,6 +3,7 @@ package com.gempire.init;
 import com.gempire.Gempire;
 import com.gempire.items.*;
 import com.gempire.util.ModItemGroup;
+import net.minecraft.world.item.BucketItem;
 import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -38,6 +39,23 @@ public class ModItems {
                     new Item.Properties().tab(ModItemGroup.BLOCKS)
             )
     );*/
+
+    public static final RegistryObject<Item> PINK_ESSENCE_BUCKET = ITEMS.register("pink_essence_bucket", () ->
+            new BucketItem(
+                    ModFluids.PINK_ESSENCE.get(),
+                    new Item.Properties().tab(ModItemGroup.ITEMS)));
+    public static final RegistryObject<Item> BLUE_ESSENCE_BUCKET = ITEMS.register("blue_essence_bucket", () ->
+            new BucketItem(
+                    ModFluids.BLUE_ESSENCE.get(),
+                    new Item.Properties().tab(ModItemGroup.ITEMS)));
+    public static final RegistryObject<Item> YELLOW_ESSENCE_BUCKET = ITEMS.register("yellow_essence_bucket", () ->
+            new BucketItem(
+                    ModFluids.YELLOW_ESSENCE.get(),
+                    new Item.Properties().tab(ModItemGroup.ITEMS)));
+    public static final RegistryObject<Item> WHITE_ESSENCE_BUCKET = ITEMS.register("white_essence_bucket", () ->
+            new BucketItem(
+                    ModFluids.WHITE_ESSENCE.get(),
+                    new Item.Properties().tab(ModItemGroup.ITEMS)));
     public static final RegistryObject<Item> PEDISTAL = ITEMS.register("pedistal", () ->
             new BlockItem(
                     ModBlocks.PEDISTAL.get(),

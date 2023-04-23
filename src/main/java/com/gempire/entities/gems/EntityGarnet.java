@@ -212,6 +212,10 @@ public class EntityGarnet extends EntityVaryingGem {
         return this.getOutfitVariant();
     }
 
+    public int generateRebelInsigniaVariant() {
+        return this.getRebelOutfitVariant();
+    }
+
     @Override
     public int baseFocus() {
         return 7;

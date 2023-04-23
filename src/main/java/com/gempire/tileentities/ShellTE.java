@@ -164,10 +164,10 @@ public class ShellTE extends RandomizableContainerBlockEntity implements MenuPro
             //ESSENCE CHECK
                 //TODO: MAKE THERE BE A CHANCE OF MAGIC MOSS APPEARING
             System.out.println("essence check");
-                if (this.level.getBlockState(this.worldPosition.offset(ShellTE.direction(4))).getBlock() == ModFluids.WHITE_ESSENCE.block.get()) {
+                if (this.level.getBlockState(this.worldPosition.offset(ShellTE.direction(4))).getBlock() == ModBlocks.WHITE_ESSENCE_BLOCK.get()) {
                     System.out.println("essence is there");
                     LiquidBlock block = (LiquidBlock) this.level.getBlockState(this.worldPosition.offset(ShellTE.direction(4))).getBlock();
-                    if (block.getFluid() == ModFluids.WHITE_ESSENCE.source.get()) {
+                    if (block.getFluid() == ModFluids.WHITE_ESSENCE.get()) {
                         this.level.setBlockAndUpdate(this.worldPosition.offset(ShellTE.direction(4)), Blocks.AIR.defaultBlockState());
                         this.essenceConsumed = true;
                         System.out.println("essence marker true");

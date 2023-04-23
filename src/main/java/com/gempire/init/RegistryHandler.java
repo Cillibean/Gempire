@@ -1,5 +1,6 @@
 package com.gempire.init;
 
+import com.gempire.fluids.ModFluidTypes;
 import net.minecraft.world.level.block.entity.BannerPattern;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -15,6 +16,7 @@ public class RegistryHandler {
         ModItems.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModFluids.FLUIDS.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModFluids.FLUID_TYPES.register(FMLJavaModLoadingContext.get().getModEventBus());
+        ModFluidTypes.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModTE.TILE_ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModContainers.CONTAINERS.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModEntities.ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());

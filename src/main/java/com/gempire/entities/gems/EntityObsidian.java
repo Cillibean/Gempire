@@ -138,6 +138,10 @@ public class EntityObsidian extends EntityGem implements ItemSteerable {
         return 0;
     }
 
+    public int generateRebelInsigniaVariant() {
+        return 0;
+    }
+
     @Override
     public int baseFocus() {
         return 5;

@@ -121,6 +121,10 @@ public class EntityTopaz extends EntityVaryingGem {
         return this.getGemPlacement() != 17 ? this.getOutfitVariant() : 1;
     }
 
+    public int generateRebelInsigniaVariant() {
+        return this.getGemPlacement() != 17 ? this.getRebelOutfitVariant() : 1;
+    }
+
     @Override
     public boolean hasSkinColorVariant() {
         return true;

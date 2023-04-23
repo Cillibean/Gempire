@@ -144,6 +144,10 @@ public class EntityBixbite extends EntityGem {
         return getOutfitVariant();
     }
 
+    public int generateRebelInsigniaVariant() {
+        return this.getRebelOutfitVariant();
+    }
+
     @Override
     public int baseFocus() {
         return 7;

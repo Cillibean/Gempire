@@ -157,6 +157,16 @@ public class EntityRuby extends EntityGem {
         }
     }
 
+    public int generateRebelInsigniaVariant(){
+        if (this.getGemPlacement() == 11) {
+            return this.getGemPlacement() != 11 ? this.getRebelOutfitVariant() : 11;
+        } else if (this.getGemPlacement() == 17) {
+            return this.getGemPlacement() != 17 ? this.getRebelOutfitVariant() : 17;
+        } else {
+            return this.getRebelOutfitVariant();
+        }
+    }
+
     @Override
     public int baseFocus() {
         return 7;

@@ -108,6 +108,8 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     public static EntityDataAccessor<Integer> REBEL_INSIGNIA_COLOR = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
     public static EntityDataAccessor<Integer> REBEL_INSIGNIA_VARIANT = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
     public static EntityDataAccessor<Integer> HARDNESS = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Integer> CRACK_AMOUNT = SynchedEntityData.defineId(EntityGem.class, EntityDataSerializers.INT);
+
 
     public boolean isCut;
     public ArrayList<Ability> ABILITY_POWERS = new ArrayList<>();
@@ -116,7 +118,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     public UUID FOLLOW_ID;
     public UUID ASSIGNED_ID;
     public EntityGem assignedGem;
-    public int[] GUARD_POS = new int[3];
+    public BlockPos GUARD_POS;
     public ArrayList<IIdleAbility> idlePowers = new ArrayList<>();
 
     private final ItemBasedSteering booster = new ItemBasedSteering(this.entityData, BOOST_TIME, SADDLED);
@@ -209,6 +211,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.entityData.define(EntityGem.REBEL_INSIGNIA_COLOR, 0);
         this.entityData.define(EntityGem.REBEL_INSIGNIA_VARIANT, 0);
         this.entityData.define(EntityGem.HARDNESS, 0);
+        this.entityData.define(EntityGem.CRACK_AMOUNT, 0);
         this.FOLLOW_ID = UUID.randomUUID();
         this.ASSIGNED_ID = UUID.randomUUID();
         this.MASTER_OWNER = UUID.randomUUID();
@@ -257,14 +260,16 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             this.spawnGem.remove(RemovalReason.DISCARDED);
         }
         ItemStack stack = new ItemStack(this.getGemItem());
-        ItemGem.saveData(stack, this, this.getCracked());
+        ItemGem.saveData(stack, this);
         setAssignedGem(((ItemGem) stack.getItem()).assigned_gem);
         System.out.println(this.getAssignedGem());
         this.setRebelHairVariant(this.generateHairVariant());
         this.setRebelOutfitVariant(this.generateOutfitVariant());
-        this.setRebelOutfitColor(this.generateOutfitColor());
-        this.setRebelInsigniaVariant(this.generateInsigniaVariant());
-        this.setRebelInsigniaColor(this.generateInsigniaColor());
+        this.setRebelOutfitColor(this.random.nextInt(16));
+        this.setRebelInsigniaVariant(this.generateRebelInsigniaVariant());
+        this.setRebelInsigniaColor(this.random.nextInt(16));
+        this.setHardness(this.getHardness());
+        this.setCrackAmount(this.getCrackAmount());
         this.registerRecipes();
         return super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
     }
@@ -303,7 +308,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
 
     @Override
     public boolean canHoldItem(ItemStack stack) {
-        return stack.getItem() instanceof ArmorItem || stack.getItem() instanceof DiggerItem;
+        return stack.getItem() instanceof ArmorItem || stack.getItem() instanceof DiggerItem || stack.getItem() instanceof SwordItem;
     }
 
     public SoundEvent getInstrument() {
@@ -363,7 +368,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         compound.putBoolean("isHostile", this.getHostile());
         compound.putBoolean("cracked", this.getCracked());
         compound.putInt("hardness", this.getHardness());
-        compound.putIntArray("guardPos", this.GUARD_POS);
+        compound.putInt("crackAmount", this.getCrackAmount());
         compound.putInt("focusLevel", this.focusLevel);
         compound.putByte("emotionMeter", this.emotionMeter);
         compound.putInt("markingVariant", this.getMarkingVariant());
@@ -431,7 +436,6 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.focusLevel = compound.getInt("focusLevel");
         this.setMovementType(compound.getByte("movementType"));
         this.setAbilityPowers(this.findAbilities(compound.getString("abilities")));
-        this.GUARD_POS = compound.getIntArray("guardPos");
         this.addAbilityGoals();
         //this.applyAttributeAbilities();
         this.setMarkingVariant(compound.getInt("markingVariant"));
@@ -449,6 +453,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.setRebelInsigniaColor(compound.getInt("rebelInsigniaColor"));
         this.setRebelInsigniaVariant(compound.getInt("rebelInsigniaVariant"));
         this.setHardness(compound.getInt("hardness"));
+        this.setCrackAmount(compound.getInt("crackAmount"));
         this.setCracked(compound.getBoolean("cracked"));
         this.idlePowers = this.generateIdlePowers();
         ContainerHelper.loadAllItems(compound, this.items);
@@ -764,15 +769,11 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             } else if (getAssignedGem() != null ? this.getMovementType() == 3 : this.getMovementType() == 2) {
                 this.setMovementType((byte) 0);
                 player.sendSystemMessage(Component.translatable(this.getName().getString() + " will now stay put"));
-                this.GUARD_POS[0] = (int) this.getX();
-                this.GUARD_POS[1] = (int) this.getY();
-                this.GUARD_POS[2] = (int) this.getZ();
+                this.GUARD_POS = this.getOnPos().above();
             } else if (getAssignedGem() == null && this.getMovementType() == 3 || !getAssignedGem().isAlive()) {
                 this.setMovementType((byte) 0);
                 player.sendSystemMessage(Component.translatable(this.getName().getString() + " will now stay put"));
-                this.GUARD_POS[0] = (int) this.getX();
-                this.GUARD_POS[1] = (int) this.getY();
-                this.GUARD_POS[2] = (int) this.getZ();
+                this.GUARD_POS = this.getOnPos().above();
             }
         }
     }
@@ -781,16 +782,21 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     public boolean hurt(DamageSource source, float amount){
         if (!this.level.isClientSide) {
             if (source.isExplosion()) {
-                if (amount - getHealth() > (getHardness() / 2) && (this.random.nextInt(shatterChance/2) == 1)) {
+                if (amount - getHealth() > (getHardness() / 2) && (this.random.nextInt(shatterChance / 2) == 1)) {
                     shatter = true;
                 }
-            } else if (amount - getHealth() > getHardness() && (this.random.nextInt(shatterChance) == shatterChance)) {
-                shatter = true;
-            } else if (amount - getHealth() > getHardness() /*&& (this.random.nextInt(crackChance) == crackChance)*/) {
-                setCracked(true);
-                shatterChance--;
-                if (this.random.nextInt(10) == 10) {
-                    crackChance--;
+            } else if (amount - getHealth() > getHardness()) {
+                if ((this.random.nextInt(shatterChance) == shatterChance)) {
+                    shatter = true;
+                } else if (getCrackAmount() == getHardness() * 10) {
+                    shatter = true;
+                } else if (this.random.nextInt(crackChance) == crackChance) {
+                    setCracked(true);
+                    shatterChance--;
+                    setCrackAmount(getCrackAmount() * 2);
+                    if (this.random.nextInt(10) == 10) {
+                        crackChance--;
+                    }
                 }
             }
             if (this.isEmotional() && !source.isExplosion() && !source.isFire()) {
@@ -869,14 +875,14 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                 }
             } else if (getCracked()){
                 ItemStack stack = new ItemStack(this.getGemItem());
-                ItemGem.saveData(stack, this, true);
+                ItemGem.saveData(stack, this);
                 this.spawnAtLocation(stack).setExtendedLifetime();
                 for (UUID owner : OWNERS) {
                     this.level.getPlayerByUUID(owner).sendSystemMessage(Component.translatable(this.getName().getString() + " " + this.getFacetAndCut() + " has cracked"));
                 }
             } else {
                 ItemStack stack = new ItemStack(this.getGemItem());
-                ItemGem.saveData(stack, this, false);
+                ItemGem.saveData(stack, this);
                 this.spawnAtLocation(stack).setExtendedLifetime();
             }
             //TODO: fix cracking
@@ -1330,6 +1336,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     }
 
     public abstract int generateInsigniaVariant();
+    public abstract int generateRebelInsigniaVariant();
 
     public void setInsigniaVariant(int value){
         this.entityData.set(EntityGem.INSIGNIA_VARIANT, value);
@@ -1426,6 +1433,13 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         return this.entityData.get(EntityGem.HARDNESS);
     }
 
+    public void setCrackAmount(int value){
+        this.entityData.set(EntityGem.CRACK_AMOUNT, value);
+    }
+
+    public int getCrackAmount(){
+        return this.entityData.get(EntityGem.CRACK_AMOUNT);
+    }
 
     public Boolean getRebelled(){
         return this.entityData.get(EntityGem.REBEL);

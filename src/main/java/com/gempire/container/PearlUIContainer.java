@@ -43,39 +43,10 @@ public class PearlUIContainer extends AbstractContainerMenu {
     public final EntityPearl gem;
     public final DataSlot brewProgress = DataSlot.standalone();
 
-    public static final ResourceLocation EMPTY_ARMOR_SLOT_HELMET = new ResourceLocation("item/empty_armor_slot_helmet");
-    public static final ResourceLocation EMPTY_ARMOR_SLOT_CHESTPLATE = new ResourceLocation("item/empty_armor_slot_chestplate");
-    public static final ResourceLocation EMPTY_ARMOR_SLOT_LEGGINGS = new ResourceLocation("item/empty_armor_slot_leggings");
-    public static final ResourceLocation EMPTY_ARMOR_SLOT_BOOTS = new ResourceLocation("item/empty_armor_slot_boots");
-
-    private static final ResourceLocation[] ARMOR_SLOT_TEXTURES = new ResourceLocation[]{EMPTY_ARMOR_SLOT_BOOTS, EMPTY_ARMOR_SLOT_LEGGINGS, EMPTY_ARMOR_SLOT_CHESTPLATE, EMPTY_ARMOR_SLOT_HELMET};
-    private static final EquipmentSlot[] VALID_EQUIPMENT_SLOTS = new EquipmentSlot[]{EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET};
-
     public PearlUIContainer(int windowID, Inventory playerInventory, EntityPearl gem) {
         super(ModContainers.PEARL_UI_CONTAINER.get(), windowID);
         this.gem = gem;
         this.canInteract = ContainerLevelAccess.create(this.gem.level, this.gem.blockPosition());
-
-        //INITIALIZE ARMOR SLOTS
-        for(int k = 0; k < 4; ++k) {
-            final EquipmentSlot equipmentslottype = VALID_EQUIPMENT_SLOTS[k];
-            this.addSlot(new Slot(gem, 54 + k, 272 + k*18, 9){
-
-                public Pair<ResourceLocation, ResourceLocation> getNoItemIcon() {
-                    return Pair.of(InventoryMenu.BLOCK_ATLAS, PearlUIContainer.ARMOR_SLOT_TEXTURES[equipmentslottype.getIndex()]);
-                }
-                public boolean mayPlace(ItemStack stack) {
-                    return stack.canEquip(equipmentslottype, gem);
-                }
-                public boolean mayPickup(Player playerIn) {
-                    ItemStack itemstack = this.getItem();
-                    return !itemstack.isEmpty() && !playerIn.isCreative() && EnchantmentHelper.hasBindingCurse(itemstack) ? false : super.mayPickup(playerIn);
-                }
-                public int getMaxStackSize() {
-                    return 1;
-                }
-            });
-        }
 
         //INITIALIZE GEM INVENTORY HERE
         for(int row = 0; row < 6; row++){
