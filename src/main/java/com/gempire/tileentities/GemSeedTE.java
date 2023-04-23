@@ -97,7 +97,7 @@ public class GemSeedTE extends BlockEntity {
                             float weight = 0;
                             for (int n = 0; n <= 1; n++) {
                                 weight += te.TEMPORARY_WEIGHTS.get(i).get(n);
-                                System.out.println("temp weights i n " + te.TEMPORARY_WEIGHTS.get(i));
+                                System.out.println("temp weights in " + te.TEMPORARY_WEIGHTS.get(i));
                             }
                             System.out.println(weight);
                             System.out.println(GemFormation.POSSIBLE_GEMS_TIER_1.get(i));
@@ -109,7 +109,7 @@ public class GemSeedTE extends BlockEntity {
                             float weight = 0;
                             for (int n = 0; n <= 1; n++) {
                                 weight += te.TEMPORARY_WEIGHTS.get(i).get(n);
-                                System.out.println("temp weights i n " + te.TEMPORARY_WEIGHTS.get(i));
+                                System.out.println("temp weights in " + te.TEMPORARY_WEIGHTS.get(i));
                             }
                             System.out.println(weight);
                             System.out.println(GemFormation.POSSIBLE_GEMS_TIER_2.get(i));
@@ -196,16 +196,13 @@ public class GemSeedTE extends BlockEntity {
                         System.out.println("weigh");
                         weighThisGem = true;
                     }
-                    if (this.primer == conditions.primer && conditions.primer != Items.AIR) {
-                        gemWeight *= 3;
-                    }
                     if (weighThisGem) {
                         for (Crux crux : GEM_CONDITIONS.get(gem).cruxes) {
                             //Then for every crux, calculate the total weight of crux that matches every block in the volume for every gem
                             //Example: if there are three stone in the volume, the total weight will be 3 stone times however many gems there are that have stone as a crux, and so forth
                             if (block != crux.block) {
                                 for (int n = 0; n <= 1; n++){
-                                    TEMPORARY_WEIGHTS.get(i).add(n, gemWeight);
+                                    TEMPORARY_WEIGHTS.get(i).add(n, gemWeight - (1 - temperatureDifference));
                                     System.out.println("temp weights from gem weights no crux " +TEMPORARY_WEIGHTS.get(i).get(n));
                                 }
                             } else {
@@ -265,16 +262,13 @@ public class GemSeedTE extends BlockEntity {
                         System.out.println("weigh");
                         weighThisGem = true;
                     }
-                    if (this.primer == conditions.primer && conditions.primer != Items.AIR) {
-                        gemWeight *= 3;
-                    }
                     if (weighThisGem) {
                         for (Crux crux : GEM_CONDITIONS.get(gem).cruxes) {
                             //Then for every crux, calculate the total weight of crux that matches every block in the volume for every gem
                             //Example: if there are three stone in the volume, the total weight will be 3 stone times however many gems there are that have stone as a crux, and so forth
                             if (block != crux.block) {
                                 for (int n = 0; n <= 1; n++){
-                                    TEMPORARY_WEIGHTS.get(i).add(n, gemWeight);
+                                    TEMPORARY_WEIGHTS.get(i).add(n, gemWeight - (1 - temperatureDifference));
                                     System.out.println("temp weights from gem weights no crux " +TEMPORARY_WEIGHTS.get(i).get(n));
                                 }
                             } else {

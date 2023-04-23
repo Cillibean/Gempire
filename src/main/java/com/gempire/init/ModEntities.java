@@ -7,6 +7,7 @@ import com.gempire.entities.gems.starter.EntityMica;
 import com.gempire.entities.gems.starter.EntityNacre;
 import com.gempire.entities.gems.starter.EntityPebble;
 import com.gempire.entities.gems.starter.EntityShale;
+import com.gempire.entities.other.EntityClod;
 import com.gempire.entities.projectiles.AcidSpitEntity;
 import com.gempire.entities.projectiles.IceShardEntity;
 import com.gempire.entities.projectiles.WaterOrbEntity;
@@ -29,7 +30,10 @@ public class ModEntities {
     public static HashMap<String, GemConditions> CRUXTOGEM = new HashMap<>();
 
     // Entity Types
-    //Pebble
+    public static final RegistryObject<EntityType<EntityClod>> CLOD = ENTITIES.register("clod",
+            () -> EntityType.Builder.of(EntityClod::new, MobCategory.CREATURE)
+                    .sized(.4f, .4f) // Hitbox Size
+                    .build(new ResourceLocation(Gempire.MODID, "clod").toString()));
     public static final RegistryObject<EntityType<EntityPebble>> PEBBLE = ENTITIES.register("pebble",
             () -> EntityType.Builder.of(EntityPebble::new, MobCategory.CREATURE)
                     .sized(.4f, .4f) // Hitbox Size

@@ -18,17 +18,17 @@ public class WhiteEssenceBlock extends LiquidBlock {
 
     @Override
     public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
-        /*if (entity instanceof ItemEntity) {
+        if (entity instanceof ItemEntity) {
             if ((((ItemEntity) entity).getItem()).getItem() instanceof ItemGem) {
                 ItemGem itemGem = (ItemGem) (((ItemEntity) entity).getItem()).getItem();
                 ItemStack stack = ((ItemEntity) entity).getItem();
                 if ((itemGem).checkTags(stack)) {
-                    if (stack.getTag().getBoolean("cracked")) {
-                        stack.getTag().putBoolean("cracked", false);
+                    if (stack.getTag().getInt("sludgeAmount") == 5) {
+                        stack.getTag().putInt("sludgeAmount", 0);
                     }
                 }
             }
-        }*/
+        }
         super.entityInside(state, level, pos, entity);
     }
 }

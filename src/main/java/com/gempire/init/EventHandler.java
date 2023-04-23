@@ -1,7 +1,7 @@
 package com.gempire.init;
 
 import com.gempire.Gempire;
-import com.gempire.entities.ai.EntityAiFollowSpinel;
+import com.gempire.entities.ai.EntityAIFollowSpinel;
 import com.gempire.entities.bases.EntityGem;
 import com.gempire.entities.gems.*;
 import net.minecraft.world.entity.*;
@@ -34,7 +34,7 @@ public class EventHandler {
                 else
                 {
                     Mob entity = (Mob) event.getEntity();
-                    entity.goalSelector.addGoal(3, new EntityAiFollowSpinel((Mob) event.getEntity(), 1.1D));
+                    entity.goalSelector.addGoal(3, new EntityAIFollowSpinel((Mob) event.getEntity(), 1.1D));
                 }
             }
         }

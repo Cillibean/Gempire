@@ -16,6 +16,7 @@ import com.gempire.items.ItemGem;
 import com.gempire.util.PaletteType;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.AirBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -286,25 +287,46 @@ public class GemFormation {
             System.out.println("check out of possible gems");
             System.out.println("total " + totalWeight);
             for (String gem : POSSIBLE_GEMS_TIER_1) {
+                boolean primed = false;
                 CONDITIONS = ModEntities.CRUXTOGEM;
+                GemConditions conditions = CONDITIONS.get(gem);
                 System.out.println(" ");
                 System.out.println(gem);
                 Random rand = new Random();
+                if (this.primer == conditions.primer && conditions.primer != Items.AIR) {
+                    primed = true;
+                }
                 //double r1 = rand.nextDouble();
                 //System.out.println("r1 random " + r1);
                 double r = /*r1 **/ totalWeight;
                 System.out.println("random " + r);
-                r -= WEIGHTS_OF_GEMS.get(gem);
+                if (primed) {
+                    r -= (3 * WEIGHTS_OF_GEMS.get(gem));
+                } else {
+                    r -= WEIGHTS_OF_GEMS.get(gem);
+                }
                 /*if (WEIGHTS_OF_GEMS.get(gem) < 12) {
                     r = 1000000;
                 }*/
                 if (r < lowestR) {
+                    lowestR4 = lowestR3;
+                    lowestR3 = lowestR2;
+                    lowestR2 = lowestR;
+                    lowestRGem4 = lowestRGem3;
+                    lowestRGem3 = lowestRGem2;
+                    lowestRGem2 = lowestRGem;
                     lowestR = r;
                     lowestRGem = gem;
                 } else if (r < lowestR2) {
+                    lowestR4 = lowestR3;
+                    lowestR3 = lowestR2;
+                    lowestRGem4 = lowestRGem3;
+                    lowestRGem3 = lowestRGem2;
                     lowestR2 = r;
                     lowestRGem2 = gem;
                 } else if (r < lowestR3) {
+                    lowestR4 = lowestR3;
+                    lowestRGem4 = lowestRGem3;
                     lowestR3 = r;
                     lowestRGem3 = gem;
                 } else if (r < lowestR4) {
@@ -351,25 +373,46 @@ public class GemFormation {
             System.out.println("check out of possible gems");
             System.out.println("total " + totalWeight);
             for (String gem : POSSIBLE_GEMS_TIER_2) {
+                boolean primed = false;
                 CONDITIONS = ModEntities.CRUXTOGEM;
+                GemConditions conditions = CONDITIONS.get(gem);
                 System.out.println(" ");
                 System.out.println(gem);
                 Random rand = new Random();
+                if (this.primer == conditions.primer && conditions.primer != Items.AIR) {
+                    primed = true;
+                }
                 //double r1 = rand.nextDouble();
                 //System.out.println("r1 random " + r1);
                 double r = /*r1 **/ totalWeight;
                 System.out.println("random " + r);
-                r -= WEIGHTS_OF_GEMS.get(gem);
+                if (primed) {
+                    r -= (3 * WEIGHTS_OF_GEMS.get(gem));
+                } else {
+                    r -= WEIGHTS_OF_GEMS.get(gem);
+                }
                 /*if (WEIGHTS_OF_GEMS.get(gem) < 12) {
                     r = 1000000;
                 }*/
                 if (r < lowestR) {
+                    lowestR4 = lowestR3;
+                    lowestR3 = lowestR2;
+                    lowestR2 = lowestR;
+                    lowestRGem4 = lowestRGem3;
+                    lowestRGem3 = lowestRGem2;
+                    lowestRGem2 = lowestRGem;
                     lowestR = r;
                     lowestRGem = gem;
                 } else if (r < lowestR2) {
+                    lowestR4 = lowestR3;
+                    lowestR3 = lowestR2;
+                    lowestRGem4 = lowestRGem3;
+                    lowestRGem3 = lowestRGem2;
                     lowestR2 = r;
                     lowestRGem2 = gem;
                 } else if (r < lowestR3) {
+                    lowestR4 = lowestR3;
+                    lowestRGem4 = lowestRGem3;
                     lowestR3 = r;
                     lowestRGem3 = gem;
                 } else if (r < lowestR4) {
