@@ -167,6 +167,10 @@ public class EntityAquamarine extends EntityGem implements FlyingAnimal {
             return this.getOutfitVariant();
     }
 
+    public int generateRebelInsigniaVariant() {
+        return this.getRebelOutfitVariant();
+    }
+
     @Override
     public int baseFocus() {
         return 7;

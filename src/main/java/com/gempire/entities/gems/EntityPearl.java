@@ -9,12 +9,9 @@ import com.gempire.util.Abilities;
 import com.gempire.util.GemPlacements;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.entity.PathfinderMob;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
@@ -36,11 +33,13 @@ import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.PanicGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
+import org.checkerframework.checker.units.qual.C;
 
 public class EntityPearl extends EntityVaryingGem {
     public static final int NUMBER_OF_SLOTS_PEARL = 58;
     public NonNullList<ItemStack> items1 = NonNullList.withSize(EntityPearl.NUMBER_OF_SLOTS_PEARL, ItemStack.EMPTY);
     public NonNullList<ItemStack> items2 = NonNullList.withSize(EntityPearl.NUMBER_OF_SLOTS_PEARL, ItemStack.EMPTY);
+    public NonNullList<ItemStack> armorList = NonNullList.withSize(4, ItemStack.EMPTY);
     public static EntityDataAccessor<Integer> PAGE = SynchedEntityData.<Integer>defineId(EntityPearl.class, EntityDataSerializers.INT);
 
     public EntityPearl(EntityType<? extends PathfinderMob> type, Level worldIn) {
@@ -71,13 +70,23 @@ public class EntityPearl extends EntityVaryingGem {
         ListTag list1 = new ListTag();
         for(int i = 0; i < this.items1.size(); i++){
             list1.add(i, this.items1.get(i).save(new CompoundTag()));
+            System.out.println("1 - " + i);
         }
         ListTag list2 = new ListTag();
         for(int i = 0; i < this.items2.size(); i++){
             list2.add(i, this.items2.get(i).save(new CompoundTag()));
+            System.out.println("2 - " + i);
+        }
+        ListTag armorList = new ListTag();
+        for (int i = 0; i < 3; i ++) {
+            armorList.add(i, this.armorList.get(i).save(new CompoundTag()));
+            System.out.println("armor - " + i);
+            System.out.println(armorList.get(i));
         }
         compoundNBT.put("Items1", list1);
         compoundNBT.put("Items2", list2);
+        compoundNBT.put("ArmorItems", armorList);
+
     }
 
     @Override
@@ -90,30 +99,32 @@ public class EntityPearl extends EntityVaryingGem {
     public void loadItems(CompoundTag compoundNBT){
         ListTag list1 = compoundNBT.getList("Items1", 10);
         ListTag list2 = compoundNBT.getList("Items2", 10);
-        ListTag list3 = compoundNBT.getList("Items3", 10);
-        ListTag list4 = compoundNBT.getList("Items4", 10);
+        ListTag armorList = compoundNBT.getList("ArmorItems", 10);
         NonNullList<ItemStack> newItems1 = NonNullList.withSize(EntityPearl.NUMBER_OF_SLOTS_PEARL, ItemStack.EMPTY);
         NonNullList<ItemStack> newItems2 = NonNullList.withSize(EntityPearl.NUMBER_OF_SLOTS_PEARL, ItemStack.EMPTY);
-        NonNullList<ItemStack> newItems3 = NonNullList.withSize(EntityPearl.NUMBER_OF_SLOTS_PEARL, ItemStack.EMPTY);
-        NonNullList<ItemStack> newItems4 = NonNullList.withSize(EntityPearl.NUMBER_OF_SLOTS_PEARL, ItemStack.EMPTY);
         for(int i = 0; i < list1.size(); ++i) {
             CompoundTag compoundnbt = list1.getCompound(i);
             newItems1.set(i, ItemStack.of(compoundnbt));
+            System.out.println("1 - " + i);
         }
         for(int i = 0; i < list2.size(); ++i) {
             CompoundTag compoundnbt = list2.getCompound(i);
             newItems2.set(i, ItemStack.of(compoundnbt));
+            System.out.println("2 - " + i);
         }
-        for(int i = 0; i < list3.size(); ++i) {
-            CompoundTag compoundnbt = list3.getCompound(i);
-            newItems3.set(i, ItemStack.of(compoundnbt));
-        }
-        for(int i = 0; i < list4.size(); ++i) {
-            CompoundTag compoundnbt = list4.getCompound(i);
-            newItems4.set(i, ItemStack.of(compoundnbt));
+        for (int i = 0; i < 4; i ++) {
+            CompoundTag compoundnbt = armorList.getCompound(i);
+            newItems1.set(i, ItemStack.of(compoundnbt));
+            newItems2.set(i, ItemStack.of(compoundnbt));
+            System.out.println("armor - " + i);
         }
         this.items1 = newItems1;
         this.items2 = newItems2;
+        //this.armorList.set(0, newItems1.get(0));
+        //this.armorList.set(1, newItems1.get(1));
+        //this.armorList.set(2, newItems1.get(2));
+        //this.armorList.set(3, newItems1.get(3));
+        System.out.println(armorList);
     }
 
     protected void registerGoals() {
@@ -222,6 +233,10 @@ public class EntityPearl extends EntityVaryingGem {
     }
 
     public int generateInsigniaVariant(){
+        return this.random.nextInt(34);
+    }
+
+    public int generateRebelInsigniaVariant() {
         return this.random.nextInt(34);
     }
 

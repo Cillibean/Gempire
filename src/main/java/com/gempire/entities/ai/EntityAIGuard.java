@@ -17,19 +17,19 @@ public class EntityAIGuard extends Goal {
 
     @Override
     public boolean canUse() {
-        return follower.getMovementType() == 0 && this.follower.distanceToSqr(this.follower.GUARD_POS[0], this.follower.GUARD_POS[1], this.follower.GUARD_POS[2]) > .25f;
+        return follower.getMovementType() == 0 && this.follower.distanceToSqr(follower.GUARD_POS.getX(), follower.GUARD_POS.getY(), follower.GUARD_POS.getZ()) > .25f;
     }
 
     @Override
     public boolean canContinueToUse() {
-        return !this.follower.getNavigation().isDone() && this.follower.getMovementType() == 0 && this.follower.distanceToSqr(this.follower.GUARD_POS[0], this.follower.GUARD_POS[1], this.follower.GUARD_POS[2]) > .25f;
+        return !this.follower.getNavigation().isDone() && this.follower.getMovementType() == 0 && this.follower.distanceToSqr(follower.GUARD_POS.getX(), follower.GUARD_POS.getY(), follower.GUARD_POS.getZ()) > .25f;
     }
 
     @Override
     public void start(){
         super.start();
         this.follower.setPathfindingMalus(BlockPathTypes.WATER, 0);
-        this.follower.getNavigation().moveTo(this.follower.GUARD_POS[0], this.follower.GUARD_POS[1], this.follower.GUARD_POS[2], this.speed);
+        this.follower.getNavigation().moveTo(follower.GUARD_POS.getX(), follower.GUARD_POS.getY(), follower.GUARD_POS.getZ(), this.speed);
     }
 
     @Override

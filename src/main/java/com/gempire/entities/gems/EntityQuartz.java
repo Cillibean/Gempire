@@ -157,6 +157,10 @@ public class EntityQuartz extends AbstractQuartz {
         return this.getGemPlacement() != 17 ? this.getOutfitVariant() : 0;
     }
 
+    public int generateRebelInsigniaVariant() {
+        return this.getGemPlacement() != 17 ? this.getRebelOutfitVariant() : 1;
+    }
+
     @Override
     public boolean hasSkinColorVariant() {
         return true;

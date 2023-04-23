@@ -123,6 +123,10 @@ public class EntitySapphire extends EntityVaryingGem {
         return this.getOutfitVariant();
     }
 
+    public int generateRebelInsigniaVariant() {
+        return this.getRebelOutfitVariant();
+    }
+
     @Override
     public Abilities[] possibleAbilities() {
         return new Abilities[]{

@@ -27,7 +27,7 @@ import java.util.ArrayList;
 
 
 public class PearlUIScreen extends AbstractContainerScreen<PearlUIContainer> {
-    public static final ResourceLocation GUI = new ResourceLocation("gempire:textures/gui/pearl_ui.png");
+    public static final ResourceLocation GUI = new ResourceLocation("gempire:textures/gui/pearl_ui_noarmor.png");
     public static final ResourceLocation LEFT = new ResourceLocation("gempire:textures/gui/left.png");
     public static final ResourceLocation RIGHT = new ResourceLocation("gempire:textures/gui/right.png");
     public static final ResourceLocation LEFT_L = new ResourceLocation("gempire:textures/gui/left_light.png");

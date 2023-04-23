@@ -83,6 +83,10 @@ public abstract class EntityStarterGem extends EntityGem {
         return this.getOutfitVariant();
     }
 
+    public int generateRebelInsigniaVariant(){
+        return this.getRebelOutfitVariant();
+    }
+
     @Override
     public boolean generateIsEmotional() {
         return false;

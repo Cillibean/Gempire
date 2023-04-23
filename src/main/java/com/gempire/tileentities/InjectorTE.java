@@ -350,16 +350,16 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
 
     public boolean isValidForSlot(int slot, BucketItem bucket){
         if(slot == InjectorTE.PINK_INPUT_SLOT_INDEX){
-            return bucket == ModFluids.PINK_ESSENCE.bucket.get();
+            return bucket == ModItems.PINK_ESSENCE_BUCKET.get();
         }
         else if(slot == InjectorTE.BLUE_INPUT_SLOT_INDEX){
-            return bucket == ModFluids.BLUE_ESSENCE.bucket.get();
+            return bucket == ModItems.BLUE_ESSENCE_BUCKET.get();
         }
         else if(slot == InjectorTE.YELLOW_INPUT_SLOT_INDEX){
-            return bucket == ModFluids.YELLOW_ESSENCE.bucket.get();
+            return bucket == ModItems.YELLOW_ESSENCE_BUCKET.get();
         }
         else if(slot == InjectorTE.WHITE_INPUT_SLOT_INDEX){
-            return bucket == ModFluids.WHITE_ESSENCE.bucket.get();
+            return bucket == ModItems.WHITE_ESSENCE_BUCKET.get();
         }
         else return slot == InjectorTE.PRIME_INPUT_SLOT_INDEX;
     }
@@ -457,16 +457,16 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
     }
 
     public FluidTank getTankFromFluid(FluidStack fluidStack){
-        if(fluidStack.getFluid() == ModFluids.PINK_ESSENCE.source.get()){
+        if(fluidStack.getFluid() == ModFluids.PINK_ESSENCE.get()){
             return this.pinkTank;
         }
-        else if(fluidStack.getFluid() == ModFluids.BLUE_ESSENCE.source.get()){
+        else if(fluidStack.getFluid() == ModFluids.BLUE_ESSENCE.get()){
             return this.blueTank;
         }
-        else if(fluidStack.getFluid() == ModFluids.YELLOW_ESSENCE.source.get()){
+        else if(fluidStack.getFluid() == ModFluids.YELLOW_ESSENCE.get()){
             return this.yellowTank;
         }
-        else if(fluidStack.getFluid() == ModFluids.WHITE_ESSENCE.source.get()){
+        else if(fluidStack.getFluid() == ModFluids.WHITE_ESSENCE.get()){
             return this.whiteTank;
         }
         else{
@@ -494,16 +494,16 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
 
     public Fluid getFluidFromValue(int value){
         if(value == 0){
-            return ModFluids.PINK_ESSENCE.source.get();
+            return ModFluids.PINK_ESSENCE.get();
         }
         else if(value == 1){
-            return ModFluids.BLUE_ESSENCE.source.get();
+            return ModFluids.BLUE_ESSENCE.get();
         }
         else if(value == 2){
-            return ModFluids.YELLOW_ESSENCE.source.get();
+            return ModFluids.YELLOW_ESSENCE.get();
         }
         else if(value == 3){
-            return ModFluids.WHITE_ESSENCE.source.get();
+            return ModFluids.WHITE_ESSENCE.get();
         }
         else{
             return Fluids.EMPTY;

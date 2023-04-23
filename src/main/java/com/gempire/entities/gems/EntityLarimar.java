@@ -147,6 +147,10 @@ public class EntityLarimar extends EntityGem {
     public int generateInsigniaVariant(){
         return generateOutfitVariant();
     }
+
+    public int generateRebelInsigniaVariant() {
+        return this.getRebelOutfitVariant();
+    }
     public boolean isFocused() {
         return true;
     }

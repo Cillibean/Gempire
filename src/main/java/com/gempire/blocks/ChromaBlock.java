@@ -1,6 +1,7 @@
 package com.gempire.blocks;
 
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.core.particles.ParticleTypes;
@@ -32,12 +33,13 @@ public class ChromaBlock extends DirectionalBlock {
     protected static final VoxelShape CRYSTAL_VERTICAL_AABB = Block.box(1.0D, 0.0D, 1.0D, 15.0D, 16.0D, 15.0D);
     protected static final VoxelShape CRYSTAL_NS_AABB = Block.box(1D, 1.0D, 0D, 15.0D, 15.0D, 16);
     protected static final VoxelShape CRYSTAL_EW_AABB = Block.box(0.0D, 1D, 1D, 16.0D, 15.0D, 15);
+    public static final BooleanProperty WATERLOGGED = BooleanProperty.create("waterlogged");
     public int colour;
 
     public ChromaBlock(Properties properties, int color) {
         super(properties);
         this.colour = color;
-        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.UP));
+        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.UP).setValue(WATERLOGGED, false));
     }
 
     public BlockState rotate(BlockState state, Rotation rot) {
@@ -63,7 +65,7 @@ public class ChromaBlock extends DirectionalBlock {
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         Direction direction = context.getClickedFace();
         BlockState blockstate = context.getLevel().getBlockState(context.getClickedPos().relative(direction.getOpposite()));
-        return blockstate.is(this) && blockstate.getValue(FACING) == direction ? this.defaultBlockState().setValue(FACING, direction.getOpposite()) : this.defaultBlockState().setValue(FACING, direction);
+        return blockstate.is(this) && blockstate.getValue(FACING) == direction ? this.defaultBlockState().setValue(FACING, direction.getOpposite()).setValue(WATERLOGGED, false) : this.defaultBlockState().setValue(FACING, direction).setValue(WATERLOGGED, false);
     }
 
 
@@ -120,7 +122,7 @@ public class ChromaBlock extends DirectionalBlock {
     }
 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING);
+        builder.add(FACING).add(WATERLOGGED);
     }
 
     public PushReaction getPistonPushReaction(BlockState state) {

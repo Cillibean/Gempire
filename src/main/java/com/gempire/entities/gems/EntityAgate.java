@@ -156,6 +156,11 @@ public class EntityAgate extends AbstractQuartz {
     }
 
     @Override
+    public int generateRebelInsigniaVariant() {
+        return this.getRebelOutfitVariant();
+    }
+
+    @Override
     public boolean hasSkinColorVariant() {
         return true;
     }

@@ -167,6 +167,10 @@ public class EntityJasper extends AbstractQuartz {
         return this.getGemPlacement() != 17 ? this.getOutfitVariant() : 0;
     }
 
+    public int generateRebelInsigniaVariant() {
+        return this.getGemPlacement() != 17 ? this.getRebelOutfitVariant() : 0;
+    }
+
     @Override
     public boolean hasSkinColorVariant() {
         return true;

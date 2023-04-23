@@ -3,6 +3,7 @@ package com.gempire.container;
 import com.gempire.init.ModBlocks;
 import com.gempire.init.ModContainers;
 import com.gempire.init.ModFluids;
+import com.gempire.init.ModItems;
 import com.gempire.items.ItemChroma;
 import com.gempire.items.ItemGem;
 import com.gempire.tileentities.InjectorTE;
@@ -46,12 +47,12 @@ public class InjectorContainer extends AbstractContainerMenu {
         this.injector.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(handler -> {
             this.addSlot(new SlotItemHandler(handler, InjectorTE.WHITE_INPUT_SLOT_INDEX, 61, 14) {
                 public boolean mayPlace(ItemStack stack) {
-                    return (stack.getItem() == ModFluids.WHITE_ESSENCE.bucket.get());
+                    return (stack.getItem() == ModItems.WHITE_ESSENCE_BUCKET.get());
                 }
             });
             this.addSlot(new SlotItemHandler(handler, InjectorTE.YELLOW_INPUT_SLOT_INDEX, 43    , 32){
                 public boolean mayPlace(ItemStack stack) {
-                    return (stack.getItem() == ModFluids.YELLOW_ESSENCE.bucket.get());
+                    return (stack.getItem() == ModItems.YELLOW_ESSENCE_BUCKET.get());
                 }
             });
             this.addSlot(new SlotItemHandler(handler, InjectorTE.CHROMA_INPUT_SLOT_INDEX, 61, 32){
@@ -61,13 +62,13 @@ public class InjectorContainer extends AbstractContainerMenu {
             });
             this.addSlot(new SlotItemHandler(handler, InjectorTE.BLUE_INPUT_SLOT_INDEX, 79, 32){
                 public boolean mayPlace(ItemStack stack) {
-                    return (stack.getItem() == ModFluids.BLUE_ESSENCE.bucket.get());
+                    return (stack.getItem() == ModItems.BLUE_ESSENCE_BUCKET.get());
                 }
             });
             //this.addSlot(new SlotItemHandler(handler, InjectorTE.PRIME_INPUT_SLOT_INDEX, 43, 50));
             this.addSlot(new SlotItemHandler(handler, InjectorTE.PINK_INPUT_SLOT_INDEX, 61, 50){
                 public boolean mayPlace(ItemStack stack) {
-                    return (stack.getItem() == ModFluids.PINK_ESSENCE.bucket.get());
+                    return (stack.getItem() == ModItems.PINK_ESSENCE_BUCKET.get());
                 }
             });
             this.addSlot(new SlotItemHandler(handler, InjectorTE.PRIME_INPUT_SLOT_INDEX, 43, 50){
