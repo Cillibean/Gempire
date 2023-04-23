@@ -141,6 +141,9 @@ public class ItemGem extends Item {
                             playerIn.sendSystemMessage(Component.translatable("This Gem is no longer assigned to " + assigned_gem.getName().getString() + " " + assigned_gem.getFacetAndCut()));
                             livingEntityHit = false;
                             assigned_gem = null;
+                            if (this.checkTags(playerIn.getItemInHand(handIn))) {
+                                playerIn.getItemInHand(handIn).getTag().putBoolean("assigned", true);
+                            }
                         } else {
                             playerIn.sendSystemMessage(Component.translatable("This Gem was assigned to " + gemToAssign.getName().getString() + " " + gemToAssign.getFacetAndCut()));
                             livingEntityHit = false;
@@ -148,6 +151,9 @@ public class ItemGem extends Item {
                             assigned_gem = gemToAssign;
                             System.out.println(assigned_gem);
                             System.out.println(gemToAssign);
+                            if (this.checkTags(playerIn.getItemInHand(handIn))) {
+                                playerIn.getItemInHand(handIn).getTag().putBoolean("assigned", false);
+                            }
                         }
                     }
                 }
@@ -230,29 +236,72 @@ public class ItemGem extends Item {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                if (stack.getTag().getString("abilities") != "") {
-                    assert gem != null;
-                    System.out.println("try");
-                    if (item != null) {
-                        System.out.println("item not null");
-                        System.out.println(gem != null);
-                        gem.spawnGem = item;
-                        System.out.println(gem.spawnGem);
+                if (checkTags(stack)) {
+                    if (stack.getTag().getString("abilities") != "") {
+                        assert gem != null;
+                        System.out.println("try");
+                        if (item != null) {
+                            System.out.println("item not null");
+                            System.out.println(gem != null);
+                            gem.spawnGem = item;
+                            System.out.println(gem.spawnGem);
+                        }
+                        gem.load(stack.getTag());
+                        System.out.println(stack.getTag());
+                        System.out.println(gem.getFacetAndCut());
+                        System.out.println("stack loaded");
+                    } else {
+                        if (ainmneacha.length > 1) {
+                            assert gem != null;
+                            gem.setSkinVariantOnInitialSpawn = false;
+                            gem.initalSkinVariant = Integer.parseInt(skinColorVariant);
+                        }
+                        System.out.println("player " + player);
+                        if (player != null) {
+                            assert gem != null;
+                            System.out.println("finalize spawn");
+                            switch (this.rand.nextInt(10)) {
+                                default -> {
+                                    gem.setPrimary(false);
+                                    gem.setDefective(false);
+                                }
+                                case 0, 1, 2, 4, 5, 6, 7, 8, 9 -> gem.setDefective(true);
+                                case 3 -> gem.setPrimary(true);
+                            }
+                            gem.finalizeSpawn((ServerLevelAccessor) world, world.getCurrentDifficultyAt(player.blockPosition()), MobSpawnType.TRIGGERED, null, null);
+                            gem.addOwner(player.getUUID());
+                            if (gem.MASTER_OWNER == null) {
+                                gem.addMasterOwner(player.getUUID());
+                            }
+                            gem.FOLLOW_ID = player.getUUID();
+                            gem.setMovementType((byte) 2);
+                        } else {
+                            if (item != null) {
+                                gem.spawnGem = item;
+                            }
+                            assert gem != null;
+                            assert item != null;
+                            gem.finalizeSpawn((ServerLevelAccessor) world, world.getCurrentDifficultyAt(item.blockPosition()), MobSpawnType.MOB_SUMMONED, null, null);
+                        }
                     }
-                    gem.load(stack.getTag());
-                    System.out.println(stack.getTag());
-                    System.out.println(gem.getFacetAndCut());
-                    System.out.println("stack loaded");
                 } else {
                     if (ainmneacha.length > 1) {
                         assert gem != null;
                         gem.setSkinVariantOnInitialSpawn = false;
                         gem.initalSkinVariant = Integer.parseInt(skinColorVariant);
                     }
-                    System.out.println("player " +player);
+                    System.out.println("player " + player);
                     if (player != null) {
                         assert gem != null;
                         System.out.println("finalize spawn");
+                        switch (this.rand.nextInt(10)) {
+                            default -> {
+                                gem.setPrimary(false);
+                                gem.setDefective(false);
+                            }
+                            case 0, 1, 2, 4, 5, 6, 7, 8, 9 -> gem.setDefective(true);
+                            case 3 -> gem.setPrimary(true);
+                        }
                         gem.finalizeSpawn((ServerLevelAccessor) world, world.getCurrentDifficultyAt(player.blockPosition()), MobSpawnType.TRIGGERED, null, null);
                         gem.addOwner(player.getUUID());
                         if (gem.MASTER_OWNER == null) {
@@ -346,30 +395,45 @@ public class ItemGem extends Item {
     }
 
     public void appendHoverText(ItemStack itemStack, @Nullable Level level, List<Component> p_40553_, TooltipFlag p_40554_) {
-        if (Screen.hasShiftDown()) {
-            if (checkTags(itemStack)) {
-                p_40553_.add(Component.translatable(itemStack.getTag().getString("name")).withStyle(ChatFormatting.GRAY));
-                p_40553_.add(Component.translatable( itemStack.getTag().getString("facet")).withStyle(ChatFormatting.GRAY));
-                p_40553_.add(Component.translatable( itemStack.getTag().getString("cut")).withStyle(ChatFormatting.GRAY));
-                if (itemStack.getTag().getBoolean("rebel")) {
-                    p_40553_.add(Component.translatable("Rebel").withStyle(ChatFormatting.RED));
+        if (checkTags(itemStack)) {
+            if (itemStack.getTag().getString("abilities") != "") {
+                if (Screen.hasShiftDown()) {
+                    if (itemStack.getTag().getString("name") != " ") {
+                        p_40553_.add(Component.translatable(itemStack.getTag().getString("name")).withStyle(ChatFormatting.GRAY));
+                    }
+                    if (itemStack.getTag().getString("facet") != " ") {
+                        p_40553_.add(Component.translatable(itemStack.getTag().getString("facet")).withStyle(ChatFormatting.GRAY));
+                    }
+                    if (itemStack.getTag().getString("cut") != " ") {
+                        p_40553_.add(Component.translatable(itemStack.getTag().getString("cut")).withStyle(ChatFormatting.GRAY));
+                    }
+                    if (itemStack.getTag().getBoolean("rebel")) {
+                        p_40553_.add(Component.translatable("Rebel").withStyle(ChatFormatting.RED));
+                    }
+                    if (itemStack.getTag().getBoolean("cracked")) {
+                        p_40553_.add(Component.translatable("Cracked").withStyle(ChatFormatting.RED));
+                    }
+                    if (itemStack.getTag().getBoolean("assigned")) {
+                        p_40553_.add(Component.translatable("Assigned to " + assigned_gem.getName().getString() + " " + assigned_gem.getFacetAndCut()));
+                    }
+                    if (itemStack.getTag().getBoolean("prime")) {
+                        p_40553_.add(Component.translatable("Perfect").withStyle(ChatFormatting.LIGHT_PURPLE));
+                    }
+                    if (itemStack.getTag().getBoolean("defective")) {
+                        p_40553_.add(Component.translatable("Off Colour").withStyle(ChatFormatting.LIGHT_PURPLE));
+                    }
+                } else {
+                    if (itemStack.getTag().getString("name") != " ") {
+                        p_40553_.add(Component.translatable(itemStack.getTag().getString("name")).withStyle(ChatFormatting.GRAY));
+                    }
+                    if (itemStack.getTag().getBoolean("cracked")) {
+                        p_40553_.add(Component.translatable("Cracked").withStyle(ChatFormatting.RED));
+                    }
+                    if (itemStack.getTag().getString("facet") != " " || itemStack.getTag().getString("cut") != " " || itemStack.getTag().getBoolean("rebel")) {
+                        p_40553_.add(Component.translatable("Hold Shift for more info").withStyle(ChatFormatting.GOLD));
+                    }
                 }
-                if (itemStack.getTag().getBoolean("cracked")) {
-                    p_40553_.add(Component.translatable("Cracked").withStyle(ChatFormatting.RED));
-                }
             }
-            if (this.gemToAssign != null) {
-                p_40553_.add(Component.translatable( "Assigned to " + assigned_gem.getName().getString() + " " + assigned_gem.getFacetAndCut()));
-            }
-        } else {
-            if (checkTags(itemStack)) {
-                p_40553_.add(Component.translatable(itemStack.getTag().getString("name")).withStyle(ChatFormatting.GRAY));
-            }
-            if (itemStack.getOrCreateTag().getBoolean("cracked")) {
-                p_40553_.add(Component.translatable("Cracked").withStyle(ChatFormatting.RED));
-            }
-            p_40553_.add(Component.translatable("Hold Shift for more info").withStyle(ChatFormatting.GOLD));
-
         }
     }
 
@@ -422,6 +486,7 @@ public class ItemGem extends Item {
         tag.putInt("rebelInsigniaColor", gem.getRebelInsigniaColor());
         tag.putInt("rebelInsigniaVariant", gem.getRebelInsigniaVariant());
         tag.putInt("crackAmount", gem.getCrackAmount());
+        tag.putBoolean("assigned", gem.getAssigned());
         gem.writeStructures(tag);
         ContainerHelper.saveAllItems(tag, gem.items);
     }
