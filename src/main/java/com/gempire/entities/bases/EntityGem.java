@@ -110,8 +110,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     public static EntityDataAccessor<Integer> HARDNESS = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<Integer> CRACK_AMOUNT = SynchedEntityData.defineId(EntityGem.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<Boolean> ASSIGNED = SynchedEntityData.<Boolean>defineId(EntityGem.class, EntityDataSerializers.BOOLEAN);
-
-
+    public static final EntityDataAccessor<Integer> SLUDGE_AMOUNT = SynchedEntityData.defineId(EntityGem.class, EntityDataSerializers.INT);
 
     public boolean isCut;
     public ArrayList<Ability> ABILITY_POWERS = new ArrayList<>();
@@ -214,6 +213,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.entityData.define(EntityGem.REBEL_INSIGNIA_VARIANT, 0);
         this.entityData.define(EntityGem.HARDNESS, 0);
         this.entityData.define(EntityGem.CRACK_AMOUNT, 0);
+        this.entityData.define(EntityGem.SLUDGE_AMOUNT, 0);
         this.entityData.define(EntityGem.ASSIGNED, false);
         this.FOLLOW_ID = UUID.randomUUID();
         this.ASSIGNED_ID = UUID.randomUUID();
@@ -273,6 +273,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.setRebelInsigniaColor(this.random.nextInt(16));
         this.setHardness(this.getHardness());
         this.setCrackAmount(this.getCrackAmount());
+        this.setSludgeAmount(this.getSludgeAmount());
         this.setAssigned(this.getAssigned());
         this.registerRecipes();
         return super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
@@ -291,6 +292,18 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         } else {
             return false;
         }
+    }
+
+    public boolean checkSludged(LivingEntity entity) {
+        return this.getSludgeAmount() >= 5;
+    }
+
+    public boolean checkBothSludged(LivingEntity entity) {
+        return this.getSludgeAmount() >= 5 && ((EntityGem) entity).getSludgeAmount() >= 5;
+    }
+
+    public boolean checkElseSludged(LivingEntity entity) {
+        return ((EntityGem) entity).getSludgeAmount() >= 5;
     }
 
     public boolean wantsToAttack(LivingEntity p_21810_, LivingEntity p_21811_) {
@@ -374,6 +387,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         compound.putBoolean("assigned", this.getAssigned());
         compound.putInt("hardness", this.getHardness());
         compound.putInt("crackAmount", this.getCrackAmount());
+        compound.putInt("sludgeAmount", this.getSludgeAmount());
         compound.putInt("focusLevel", this.focusLevel);
         compound.putByte("emotionMeter", this.emotionMeter);
         compound.putInt("markingVariant", this.getMarkingVariant());
@@ -459,6 +473,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.setRebelInsigniaVariant(compound.getInt("rebelInsigniaVariant"));
         this.setHardness(compound.getInt("hardness"));
         this.setCrackAmount(compound.getInt("crackAmount"));
+        this.setSludgeAmount(compound.getInt("sludgeAmount"));
         this.setCracked(compound.getBoolean("cracked"));
         this.setAssigned(compound.getBoolean("assigned"));
         this.setPrimary(compound.getBoolean("prime"));
@@ -1457,6 +1472,14 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
 
     public int getCrackAmount(){
         return this.entityData.get(EntityGem.CRACK_AMOUNT);
+    }
+
+    public void setSludgeAmount(int value){
+        this.entityData.set(EntityGem.SLUDGE_AMOUNT, value);
+    }
+
+    public int getSludgeAmount(){
+        return this.entityData.get(EntityGem.SLUDGE_AMOUNT);
     }
 
     public Boolean getRebelled(){

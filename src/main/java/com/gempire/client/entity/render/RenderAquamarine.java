@@ -39,7 +39,14 @@ public class RenderAquamarine extends MobRenderer<EntityAquamarine, ModelAquamar
     protected void renderNameTag(EntityAquamarine entityIn, Component displayNameIn, PoseStack matrixStackIn, MultiBufferSource bufferIn, int packedLightIn) {
         super.renderNameTag(entityIn, Component.literal("<"+entityIn.getFacet()+" "+entityIn.getCut()+">"), matrixStackIn, bufferIn, packedLightIn);
         matrixStackIn.translate(0.0D, (double)(9.0F * 1.15F * 0.025F), 0.0D);
-        super.renderNameTag(entityIn, displayNameIn, matrixStackIn, bufferIn, packedLightIn);
+        System.out.println(entityIn.getName());
+        System.out.println(entityIn.getNickname());
+        System.out.println(entityIn.getWholeGemName());
+        if (!entityIn.getName().equals(Component.empty())) {
+            super.renderNameTag(entityIn, entityIn.getName(), matrixStackIn, bufferIn, packedLightIn);
+        } else {
+            super.renderNameTag(entityIn, Component.literal(entityIn.getGemName()), matrixStackIn, bufferIn, packedLightIn);
+        }
         super.shadowRadius = 0;
     }
 }

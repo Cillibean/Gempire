@@ -14,16 +14,13 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.FlyingMoveControl;
+import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.animal.FlyingAnimal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
-import net.minecraft.world.entity.ai.goal.FloatGoal;
-import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
-import net.minecraft.world.entity.ai.goal.PanicGoal;
-import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 
 public class EntityAquamarine extends EntityGem implements FlyingAnimal {
@@ -34,12 +31,30 @@ public class EntityAquamarine extends EntityGem implements FlyingAnimal {
     }
 
     public static AttributeSupplier.Builder registerAttributes() {
-        return Mob.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 30.0D)
-                .add(Attributes.MOVEMENT_SPEED, 0.4D)
-                .add(Attributes.FLYING_SPEED, 6.0D)
-                .add(Attributes.ATTACK_DAMAGE, 3.0D)
-                .add(Attributes.ATTACK_SPEED, 1.0D);
+        /*EntityAquamarine aquamarine = new EntityAquamarine(null, null);
+        aquamarine.aquaSet(aquamarine);
+        if (aquamarine.isDefective()) {
+            return Mob.createMobAttributes()
+                    .add(Attributes.MAX_HEALTH, 20.0D)
+                    .add(Attributes.MOVEMENT_SPEED, 0.3D)
+                    .add(Attributes.FLYING_SPEED, 5.0D)
+                    .add(Attributes.ATTACK_DAMAGE, 2.0D)
+                    .add(Attributes.ATTACK_SPEED, 1.0D);
+        } else if (aquamarine.isPrimary()) {
+            return Mob.createMobAttributes()
+                    .add(Attributes.MAX_HEALTH, 30.0D)
+                    .add(Attributes.MOVEMENT_SPEED, 0.5D)
+                    .add(Attributes.FLYING_SPEED, 7.0D)
+                    .add(Attributes.ATTACK_DAMAGE, 4.0D)
+                    .add(Attributes.ATTACK_SPEED, 1.0D);
+        } else {*/
+            return Mob.createMobAttributes()
+                    .add(Attributes.MAX_HEALTH, 25.0D)
+                    .add(Attributes.MOVEMENT_SPEED, 0.4D)
+                    .add(Attributes.FLYING_SPEED, 6.0D)
+                    .add(Attributes.ATTACK_DAMAGE, 3.0D)
+                    .add(Attributes.ATTACK_SPEED, 1.0D);
+        //}
     }
     @Override
     public SoundEvent getInstrument()
@@ -64,7 +79,10 @@ public class EntityAquamarine extends EntityGem implements FlyingAnimal {
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Mob.class, 1, false, false, (p_234199_0_) -> p_234199_0_.getClassification(true) == MobCategory.MONSTER));
         this.targetSelector.addGoal(1, new OwnerHurtByTargetGemGoal(this));
         this.targetSelector.addGoal(2, new OwnerHurtTargetGemGoal(this));
-
+        this.goalSelector.addGoal(1, new EntityAISludged(this, 0.6));
+        this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, EntityGem.class, 1, false, false, this::checkBothSludged));
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, 1, false, false, this::checkSludged));
+        this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, EntityGem.class, 6.0F, 1.0D, 1.2D, this::checkElseSludged));
     }
 
     @Override

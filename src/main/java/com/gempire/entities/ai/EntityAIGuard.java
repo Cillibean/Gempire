@@ -17,7 +17,7 @@ public class EntityAIGuard extends Goal {
 
     @Override
     public boolean canUse() {
-        return follower.getMovementType() == 0 && this.follower.distanceToSqr(follower.GUARD_POS.getX(), follower.GUARD_POS.getY(), follower.GUARD_POS.getZ()) > .25f;
+        return follower.getMovementType() == 0 && this.follower.distanceToSqr(follower.GUARD_POS.getX(), follower.GUARD_POS.getY(), follower.GUARD_POS.getZ()) > .25f && this.follower.getSludgeAmount() < 5;
     }
 
     @Override

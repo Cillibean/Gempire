@@ -1,22 +1,18 @@
 package com.gempire.entities.ai;
 
-import com.gempire.entities.bases.EntityGem;
 import com.gempire.entities.gems.EntitySpinel;
-import com.gempire.entities.gems.EntitySpodumene;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.goal.Goal;
-import net.minecraft.world.level.pathfinder.BlockPathTypes;
 
 import java.util.List;
 
-public class EntityAiFollowSpinel extends Goal {
+public class EntityAIFollowSpinel extends Goal {
     public Mob follower;
     public LivingEntity toFollow;
     public double speed;
 
-    public EntityAiFollowSpinel(Mob entityIn, double speedIn) {
+    public EntityAIFollowSpinel(Mob entityIn, double speedIn) {
         this.follower = entityIn;
         this.speed = speedIn;
     }

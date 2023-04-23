@@ -25,26 +25,28 @@ public class OwnerHurtByTargetGemGoal extends TargetGoal {
 
     public boolean canUse() {
         if (!this.entityGem.getRebelled()) {
-            if (this.entityGem.getOwned()) {
-                if (entityGem.OWNERS.size() != 1) {
-                    for (int i = 0; i < this.entityGem.OWNERS.size(); i++) {
-                        player = this.entityGem.level.getPlayerByUUID(this.entityGem.OWNERS.get(i));
-                        this.ownerLastHurtBy = player.getLastHurtByMob();
-                        int n = player.getLastHurtByMobTimestamp();
-                        return n != this.timestamp && this.canAttack(this.ownerLastHurtBy, TargetingConditions.DEFAULT) && this.entityGem.wantsToAttack(this.ownerLastHurtBy, player);
-                    }
-                } else {
-                    player = this.entityGem.level.getPlayerByUUID(this.entityGem.OWNERS.get(0));
-                    if (this.player != null) {
-                        this.ownerLastHurtBy = player.getLastHurtByMob();
-                        int n = player.getLastHurtByMobTimestamp();
-                        if (n != this.timestamp && this.canAttack(this.ownerLastHurtBy, TargetingConditions.DEFAULT) && this.entityGem.wantsToAttack(this.ownerLastHurtBy, player)) {
-                            use = true;
+            if (this.entityGem.getSludgeAmount() < 5) {
+                if (this.entityGem.getOwned()) {
+                    if (entityGem.OWNERS.size() != 1) {
+                        for (int i = 0; i < this.entityGem.OWNERS.size(); i++) {
+                            player = this.entityGem.level.getPlayerByUUID(this.entityGem.OWNERS.get(i));
+                            this.ownerLastHurtBy = player.getLastHurtByMob();
+                            int n = player.getLastHurtByMobTimestamp();
+                            return n != this.timestamp && this.canAttack(this.ownerLastHurtBy, TargetingConditions.DEFAULT) && this.entityGem.wantsToAttack(this.ownerLastHurtBy, player);
+                        }
+                    } else {
+                        player = this.entityGem.level.getPlayerByUUID(this.entityGem.OWNERS.get(0));
+                        if (this.player != null) {
+                            this.ownerLastHurtBy = player.getLastHurtByMob();
+                            int n = player.getLastHurtByMobTimestamp();
+                            if (n != this.timestamp && this.canAttack(this.ownerLastHurtBy, TargetingConditions.DEFAULT) && this.entityGem.wantsToAttack(this.ownerLastHurtBy, player)) {
+                                use = true;
+                            }
                         }
                     }
-                }
                 } else {
-                use = false;
+                    use = false;
+                }
             }
         }
         return use;

@@ -112,47 +112,49 @@ public class ItemGem extends Item {
         if (!worldIn.isClientSide) {
             System.out.println("check tags");
             if (!getCracked(stack)) {
-                System.out.println("through");
-                if (!livingEntityHit) {
-                    ItemStack itemstack = playerIn.getItemInHand(handIn);
-                    BlockHitResult raytraceresult = getPlayerPOVHitResult(worldIn, playerIn, ClipContext.Fluid.NONE);
-                    if (raytraceresult.getType() == HitResult.Type.MISS) {
-                        return super.use(worldIn, playerIn, handIn);
-                    } else {
-                        if (raytraceresult.getType() == HitResult.Type.BLOCK) {
-                            BlockPos blockpos = raytraceresult.getBlockPos();
-                            Direction direction = raytraceresult.getDirection();
-                            if (!worldIn.mayInteract(playerIn, blockpos) || !playerIn.mayUseItemAt(blockpos.relative(direction), direction, itemstack)) {
-                                return super.use(worldIn, playerIn, handIn);
-                            }
-
-                            if (worldIn.mayInteract(playerIn, blockpos) && playerIn.mayUseItemAt(blockpos, raytraceresult.getDirection(), itemstack)) {
-                                spawned = this.formGem(worldIn, playerIn, blockpos, itemstack, null);
-                            }
-                        }
-                        //Problem with the claiming of gems ??
-                        if (!playerIn.isCreative() && spawned) {
-                            playerIn.getMainHandItem().shrink(1);
-                        }
-                    }
-                } else {
-                    if (!gemToAssign.isDeadOrDying()) {
-                        if (isAssigned) {
-                            playerIn.sendSystemMessage(Component.translatable("This Gem is no longer assigned to " + assigned_gem.getName().getString() + " " + assigned_gem.getFacetAndCut()));
-                            livingEntityHit = false;
-                            assigned_gem = null;
-                            if (this.checkTags(playerIn.getItemInHand(handIn))) {
-                                playerIn.getItemInHand(handIn).getTag().putBoolean("assigned", true);
-                            }
+                if (!getSludged(stack)) {
+                    System.out.println("through");
+                    if (!livingEntityHit) {
+                        ItemStack itemstack = playerIn.getItemInHand(handIn);
+                        BlockHitResult raytraceresult = getPlayerPOVHitResult(worldIn, playerIn, ClipContext.Fluid.NONE);
+                        if (raytraceresult.getType() == HitResult.Type.MISS) {
+                            return super.use(worldIn, playerIn, handIn);
                         } else {
-                            playerIn.sendSystemMessage(Component.translatable("This Gem was assigned to " + gemToAssign.getName().getString() + " " + gemToAssign.getFacetAndCut()));
-                            livingEntityHit = false;
-                            System.out.println("ToAssign to assigned");
-                            assigned_gem = gemToAssign;
-                            System.out.println(assigned_gem);
-                            System.out.println(gemToAssign);
-                            if (this.checkTags(playerIn.getItemInHand(handIn))) {
-                                playerIn.getItemInHand(handIn).getTag().putBoolean("assigned", false);
+                            if (raytraceresult.getType() == HitResult.Type.BLOCK) {
+                                BlockPos blockpos = raytraceresult.getBlockPos();
+                                Direction direction = raytraceresult.getDirection();
+                                if (!worldIn.mayInteract(playerIn, blockpos) || !playerIn.mayUseItemAt(blockpos.relative(direction), direction, itemstack)) {
+                                    return super.use(worldIn, playerIn, handIn);
+                                }
+
+                                if (worldIn.mayInteract(playerIn, blockpos) && playerIn.mayUseItemAt(blockpos, raytraceresult.getDirection(), itemstack)) {
+                                    spawned = this.formGem(worldIn, playerIn, blockpos, itemstack, null);
+                                }
+                            }
+                            //Problem with the claiming of gems ??
+                            if (!playerIn.isCreative() && spawned) {
+                                playerIn.getMainHandItem().shrink(1);
+                            }
+                        }
+                    } else {
+                        if (!gemToAssign.isDeadOrDying()) {
+                            if (isAssigned) {
+                                playerIn.sendSystemMessage(Component.translatable("This Gem is no longer assigned to " + assigned_gem.getName().getString() + " " + assigned_gem.getFacetAndCut()));
+                                livingEntityHit = false;
+                                assigned_gem = null;
+                                if (this.checkTags(playerIn.getItemInHand(handIn))) {
+                                    playerIn.getItemInHand(handIn).getTag().putBoolean("assigned", true);
+                                }
+                            } else {
+                                playerIn.sendSystemMessage(Component.translatable("This Gem was assigned to " + gemToAssign.getName().getString() + " " + gemToAssign.getFacetAndCut()));
+                                livingEntityHit = false;
+                                System.out.println("ToAssign to assigned");
+                                assigned_gem = gemToAssign;
+                                System.out.println(assigned_gem);
+                                System.out.println(gemToAssign);
+                                if (this.checkTags(playerIn.getItemInHand(handIn))) {
+                                    playerIn.getItemInHand(handIn).getTag().putBoolean("assigned", false);
+                                }
                             }
                         }
                     }
@@ -176,6 +178,14 @@ public class ItemGem extends Item {
             return stack.getTag().getBoolean("cracked");
         } else {
             System.out.println("check failed");
+            return false;
+        }
+    }
+
+    public boolean getSludged(ItemStack stack) {
+        if (checkTags(stack)) {
+            return stack.getTag().getInt("sludgeAmount") == 5;
+        } else {
             return false;
         }
     }
@@ -413,6 +423,9 @@ public class ItemGem extends Item {
                     if (itemStack.getTag().getBoolean("cracked")) {
                         p_40553_.add(Component.translatable("Cracked").withStyle(ChatFormatting.RED));
                     }
+                    if (itemStack.getTag().getInt("sludgeAmount") >= 5) {
+                        p_40553_.add(Component.translatable("Sludged").withStyle(ChatFormatting.RED));
+                    }
                     if (itemStack.getTag().getBoolean("assigned")) {
                         p_40553_.add(Component.translatable("Assigned to " + assigned_gem.getName().getString() + " " + assigned_gem.getFacetAndCut()));
                     }
@@ -429,9 +442,10 @@ public class ItemGem extends Item {
                     if (itemStack.getTag().getBoolean("cracked")) {
                         p_40553_.add(Component.translatable("Cracked").withStyle(ChatFormatting.RED));
                     }
-                    if (itemStack.getTag().getString("facet") != " " || itemStack.getTag().getString("cut") != " " || itemStack.getTag().getBoolean("rebel")) {
-                        p_40553_.add(Component.translatable("Hold Shift for more info").withStyle(ChatFormatting.GOLD));
+                    if (itemStack.getTag().getInt("sludgeAmount") >= 5) {
+                        p_40553_.add(Component.translatable("Sludged").withStyle(ChatFormatting.RED));
                     }
+                    p_40553_.add(Component.translatable("Hold Shift for more info").withStyle(ChatFormatting.GOLD));
                 }
             }
         }
@@ -486,6 +500,7 @@ public class ItemGem extends Item {
         tag.putInt("rebelInsigniaColor", gem.getRebelInsigniaColor());
         tag.putInt("rebelInsigniaVariant", gem.getRebelInsigniaVariant());
         tag.putInt("crackAmount", gem.getCrackAmount());
+        tag.putInt("sludgeAmount", gem.getSludgeAmount());
         tag.putBoolean("assigned", gem.getAssigned());
         gem.writeStructures(tag);
         ContainerHelper.saveAllItems(tag, gem.items);

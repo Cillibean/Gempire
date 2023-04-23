@@ -13,7 +13,7 @@ public class EntityAIWander extends WaterAvoidingRandomStrollGoal {
 
     @Override
     public boolean canUse() {
-        return this.gem.getMovementType() == 1 && super.canUse();
+        return this.gem.getMovementType() == 1 && super.canUse() && this.gem.getSludgeAmount() < 5;
     }
 
     @Override

@@ -9,14 +9,10 @@ import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
-import net.minecraft.world.entity.ai.goal.FloatGoal;
-import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
-import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
-import net.minecraft.world.entity.ai.goal.PanicGoal;
-import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 
 public class EntityAgate extends AbstractQuartz {
@@ -34,11 +30,15 @@ public class EntityAgate extends AbstractQuartz {
         this.goalSelector.addGoal(7, new EntityAIFollowAssigned(this, 1.0D));
         this.goalSelector.addGoal(7, new EntityAIWander(this, 1.0D));
         this.goalSelector.addGoal(7, new EntityAIFollowOwner(this, 1.0D));
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Mob.class, 1, false, false, (p_234199_0_) -> p_234199_0_.getClassification(true) == MobCategory.MONSTER));
-        this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, EntityGem.class, 1, false, false, this::checkRebel));
-        this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.1D, false));
-        this.targetSelector.addGoal(1, new OwnerHurtByTargetGemGoal(this));
-        this.targetSelector.addGoal(2, new OwnerHurtTargetGemGoal(this));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Mob.class, 1, false, false, (p_234199_0_) -> p_234199_0_.getClassification(true) == MobCategory.MONSTER));
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, EntityGem.class, 1, false, false, this::checkRebel));
+        this.goalSelector.addGoal(3, new MeleeAttackGoal(this, 1.1D, false));
+        this.targetSelector.addGoal(2, new OwnerHurtByTargetGemGoal(this));
+        this.targetSelector.addGoal(3, new OwnerHurtTargetGemGoal(this));
+        this.goalSelector.addGoal(1, new EntityAISludged(this, 0.6));
+        this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, EntityGem.class, 1, false, false, this::checkBothSludged));
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, 1, false, false, this::checkSludged));
+        this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, EntityGem.class, 6.0F, 1.0D, 1.2D, this::checkElseSludged));
     }
 
     @Override
