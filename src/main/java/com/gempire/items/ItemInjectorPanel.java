@@ -30,7 +30,7 @@ public class ItemInjectorPanel extends Item {
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
-        if (!world.isClientSide) {
+        if (!world.isClientSide && (hand == InteractionHand.MAIN_HAND)) {
             BlockHitResult ray = getPlayerPOVHitResult(world, player, ClipContext.Fluid.NONE);
             BlockPos lookPos = ray.getBlockPos();
             if (world.getBlockState(lookPos).getBlock() instanceof TankBlock) {

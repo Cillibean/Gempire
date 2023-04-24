@@ -1,5 +1,6 @@
 package com.gempire.entities.ai;
 
+import com.gempire.entities.abilities.AbilityGuard;
 import com.gempire.entities.bases.EntityGem;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
