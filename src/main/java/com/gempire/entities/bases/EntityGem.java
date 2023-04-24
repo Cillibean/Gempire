@@ -813,11 +813,11 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                     setShatter(true);
                 }
             } else if (amount - getHealth() > getHardness()) {
-                if ((this.random.nextInt(shatterChance) == shatterChance)) {
+                if ((this.random.nextInt(shatterChance) == 1)) {
                     setShatter(true);
-                } else if (getCrackAmount() == getHardness() * 10) {
+                } else if (getCrackAmount() == (getHardness() * 10)) {
                     setShatter(true);
-                } else if (this.random.nextInt(crackChance) == crackChance) {
+                } else if (this.random.nextInt(crackChance) == 1) {
                     setCracked(true);
                     shatterChance--;
                     setCrackAmount(getCrackAmount() * 2);

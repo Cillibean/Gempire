@@ -25,6 +25,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import software.bernie.geckolib3.GeckoLib;
 
 import java.util.stream.Collectors;
 
@@ -49,6 +50,8 @@ public class Gempire
         //FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onClientSetup);
 
         RegistryHandler.init();
+
+        GeckoLib.initialize();
         // Register ourselves for server and other game events we are interested in
         //MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGHEST, ClientProxy::onClientSetup);
         MinecraftForge.EVENT_BUS.register(this);
