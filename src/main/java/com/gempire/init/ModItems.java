@@ -544,6 +544,8 @@ public class ModItems {
             new ItemShard(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(64), 14));
     public static final RegistryObject<Item> BLACK_SHARDS = ITEMS.register("black_shards", () ->
             new ItemShard(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(64), 15));
+    public static final RegistryObject<Item> SPECIAL_SHARDS = ITEMS.register("special_shards", () ->
+            new ItemShard(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(64), 16));
 
     public static final RegistryObject<Item> WHITE_SAPPHIRE_GEM = ITEMS.register("sapphire_gem_0", () ->
             new ItemGem(new Item.Properties().tab(ModItemGroup.GEMSTONES).stacksTo(1).fireResistant(), Gempire.MODID));
