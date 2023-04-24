@@ -130,6 +130,7 @@
   "item.gempire.rebel_stick": "Rebel Stick",
   "item.gempire.share_contract": "Share Contract",
   "item.gempire.transfer_contract": "Transfer Contract",
+  "item.gempire.gem_whistle": "Gem Whistle",
 
   "item.gempire.essence_bottle": "Essence Bottle",
   "item.gempire.pink_essence": "Pink Essence",
@@ -529,5 +530,6 @@
   "commands.gempire.nomap": "She needs a map!",
 
   "gempire.subtitle.inject": "Injection",
-  "gempire.subtitle.poof": "Gem Poofed"
+  "gempire.subtitle.poof": "Gem Poofed",
+  "gempire.subtitle.whistle": "Gem Whistle"
 }

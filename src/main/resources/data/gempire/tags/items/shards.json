@@ -1,0 +1,22 @@
+{
+  "replace": false,
+  "values": [
+    "gempire:pink_shards",
+    "gempire:red_shards",
+    "gempire:orange_shards",
+    "gempire:yellow_shards",
+    "gempire:lime_shards",
+    "gempire:green_shards",
+    "gempire:cyan_shards",
+    "gempire:light_blue_shards",
+    "gempire:blue_shards",
+    "gempire:purple_shards",
+    "gempire:magenta_shards",
+    "gempire:white_shards",
+    "gempire:light_gray_shards",
+    "gempire:gray_shards",
+    "gempire:black_shards",
+    "gempire:brown_shards",
+    "gempire:special_shards"
+  ]
+}

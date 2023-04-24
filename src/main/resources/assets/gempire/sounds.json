@@ -6,5 +6,9 @@
   "poof": {
     "subtitle": "gempire.subtitle.poof",
     "sounds": [ "gempire:poof" ]
+  },
+  "whistle": {
+    "subtitle": "gempire.subtitle.whistle",
+    "sounds": [ "gempire:whistle" ]
   }
 }

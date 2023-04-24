@@ -6,6 +6,8 @@ import com.gempire.util.CruxType;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraftforge.common.data.ForgeBlockTagsProvider;
+import net.minecraftforge.common.data.ForgeRegistryTagsProvider;
 
 import java.util.ArrayList;
 

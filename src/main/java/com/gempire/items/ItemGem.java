@@ -1,5 +1,6 @@
 package com.gempire.items;
 
+import com.gempire.Gempire;
 import com.gempire.entities.bases.EntityGem;
 import com.gempire.entities.gems.EntityZircon;
 import com.gempire.entities.gems.starter.EntityPebble;
@@ -53,7 +54,7 @@ import net.minecraft.world.phys.HitResult;
 import org.jetbrains.annotations.NotNull;
 
 public class ItemGem extends Item {
-    public String ID = "";
+    public String ID;
 
     private static final String TAG_CRACKED = "Cracked";
     int coundownMax = 600;
@@ -66,8 +67,9 @@ public class ItemGem extends Item {
     public boolean livingEntityHit = false;
     public boolean isAssigned = false;
 
-    public ItemGem(Properties properties) {
+    public ItemGem(Properties properties, String id) {
         super(properties);
+        this.ID = id;
     }
 
     @Override
@@ -109,7 +111,7 @@ public class ItemGem extends Item {
     public @NotNull InteractionResultHolder<ItemStack> use(Level worldIn, @NotNull Player playerIn, @NotNull InteractionHand handIn) {
         boolean spawned = false;
         ItemStack stack = playerIn.getItemInHand(handIn);
-        if (!worldIn.isClientSide) {
+        if (!worldIn.isClientSide && (handIn == InteractionHand.MAIN_HAND)) {
             System.out.println("check tags");
             if (!getCracked(stack)) {
                 if (!getSludged(stack)) {
@@ -210,7 +212,7 @@ public class ItemGem extends Item {
                 }
             }
             if (!dying) {
-                if (Objects.equals(this.ID, "")) {
+                if (Objects.equals(this.ID, Gempire.MODID)) {
                     namee = Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(this)).toString().replaceAll("gempire", "").replaceAll("gem", "").replaceAll(":", "").replaceAll(" ", "");
                 } else {
                     namee = Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(this)).toString().replaceAll(this.ID, "").replaceAll("gem", "").replaceAll(":", "").replaceAll(" ", "");
@@ -233,7 +235,7 @@ public class ItemGem extends Item {
                 }
                 //End of check and set
                 try {
-                    if (Objects.equals(this.ID, "")) {
+                    if (Objects.equals(this.ID, Gempire.MODID)) {
                         gemm = (RegistryObject<EntityType<EntityPebble>>) ModEntities.class.getField(namee.toUpperCase()).get(null);
                     } else {
                         gemm = (RegistryObject<EntityType<EntityPebble>>) AddonHandler.ADDON_ENTITY_REGISTRIES.get(this.ID).getField(namee.toUpperCase()).get(null);
@@ -275,8 +277,8 @@ public class ItemGem extends Item {
                                     gem.setPrimary(false);
                                     gem.setDefective(false);
                                 }
-                                case 0, 1, 2, 4, 5, 6, 7, 8, 9 -> gem.setDefective(true);
-                                case 3 -> gem.setPrimary(true);
+                                case 1 -> gem.setDefective(true);
+                                case 2 -> gem.setPrimary(true);
                             }
                             gem.finalizeSpawn((ServerLevelAccessor) world, world.getCurrentDifficultyAt(player.blockPosition()), MobSpawnType.TRIGGERED, null, null);
                             gem.addOwner(player.getUUID());

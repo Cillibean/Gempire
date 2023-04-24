@@ -32,7 +32,7 @@ public class CommandGempirePoof extends CommandBase {
         List<EntityGem> gems = source.getLevel().getEntitiesOfClass(EntityGem.class, aabb);
         for(EntityGem gem : gems){
             if(gem.isOwner(source.getPlayerOrException())){
-                gem.hurt(DamageSource.GENERIC, gem.getMaxHealth());
+                gem.hurt(DamageSource.GENERIC, gem.getHealth());
             }
         }
         return Command.SINGLE_SUCCESS;

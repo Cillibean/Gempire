@@ -30,7 +30,7 @@ public class DestabBase extends Item {
     public void poofGem(LivingEntity pTarget) {
         if (pTarget.isAlive()){
             if (pTarget instanceof EntityGem) {
-                pTarget.hurt(DamageSource.MAGIC,pTarget.getHealth() + 3);
+                pTarget.hurt(DamageSource.MAGIC,pTarget.getHealth() + 1);
                 ((EntityGem) pTarget).setCracked(false);
             }
         }

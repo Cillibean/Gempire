@@ -111,7 +111,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     public static final EntityDataAccessor<Integer> CRACK_AMOUNT = SynchedEntityData.defineId(EntityGem.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<Boolean> ASSIGNED = SynchedEntityData.<Boolean>defineId(EntityGem.class, EntityDataSerializers.BOOLEAN);
     public static final EntityDataAccessor<Integer> SLUDGE_AMOUNT = SynchedEntityData.defineId(EntityGem.class, EntityDataSerializers.INT);
-
+    public static final EntityDataAccessor<Boolean> SHATTER = SynchedEntityData.<Boolean>defineId(EntityGem.class, EntityDataSerializers.BOOLEAN);
     public boolean isCut;
     public ArrayList<Ability> ABILITY_POWERS = new ArrayList<>();
     public ArrayList<UUID> OWNERS = new ArrayList<>();
@@ -121,7 +121,6 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     public EntityGem assignedGem;
     public BlockPos GUARD_POS;
     public ArrayList<IIdleAbility> idlePowers = new ArrayList<>();
-
     private final ItemBasedSteering booster = new ItemBasedSteering(this.entityData, BOOST_TIME, SADDLED);
 
     public byte movementType = 1;
@@ -135,7 +134,6 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     public int maxFocusCounter = 100;
     public int ticking;
     public int currentRecipe = 0;
-    public boolean shatter = false;
     public ArrayList<Item> inputList = new ArrayList<>();
     public ArrayList<Item> outputList = new ArrayList<>();
 
@@ -215,6 +213,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.entityData.define(EntityGem.CRACK_AMOUNT, 0);
         this.entityData.define(EntityGem.SLUDGE_AMOUNT, 0);
         this.entityData.define(EntityGem.ASSIGNED, false);
+        this.entityData.define(EntityGem.SHATTER, false);
         this.FOLLOW_ID = UUID.randomUUID();
         this.ASSIGNED_ID = UUID.randomUUID();
         this.MASTER_OWNER = UUID.randomUUID();
@@ -275,6 +274,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.setCrackAmount(this.getCrackAmount());
         this.setSludgeAmount(this.getSludgeAmount());
         this.setAssigned(this.getAssigned());
+        this.setShatter(this.getShatter());
         this.registerRecipes();
         return super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
     }
@@ -385,6 +385,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         compound.putBoolean("isHostile", this.getHostile());
         compound.putBoolean("cracked", this.getCracked());
         compound.putBoolean("assigned", this.getAssigned());
+        compound.putBoolean("shatter", this.getShatter());
         compound.putInt("hardness", this.getHardness());
         compound.putInt("crackAmount", this.getCrackAmount());
         compound.putInt("sludgeAmount", this.getSludgeAmount());
@@ -478,6 +479,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.setAssigned(compound.getBoolean("assigned"));
         this.setPrimary(compound.getBoolean("prime"));
         this.setDefective(compound.getBoolean("defective"));
+        this.setShatter(compound.getBoolean("shatter"));
         this.idlePowers = this.generateIdlePowers();
         ContainerHelper.loadAllItems(compound, this.items);
         this.readStructures(compound);
@@ -808,13 +810,13 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         if (!this.level.isClientSide) {
             if (source.isExplosion()) {
                 if (amount - getHealth() > (getHardness() / 2) && (this.random.nextInt(shatterChance / 2) == 1)) {
-                    shatter = true;
+                    setShatter(true);
                 }
             } else if (amount - getHealth() > getHardness()) {
                 if ((this.random.nextInt(shatterChance) == shatterChance)) {
-                    shatter = true;
+                    setShatter(true);
                 } else if (getCrackAmount() == getHardness() * 10) {
-                    shatter = true;
+                    setShatter(true);
                 } else if (this.random.nextInt(crackChance) == crackChance) {
                     setCracked(true);
                     shatterChance--;
@@ -892,7 +894,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             this.playSound(ModSounds.POOF.get());
             GemPoofEvent event = new GemPoofEvent(this, this.blockPosition(), source);
             MinecraftForge.EVENT_BUS.post(event);
-            if (shatter){
+            if (getShatter()){
                 ItemStack stack = new ItemStack(this.getShardItem());
                 this.spawnAtLocation(stack).setExtendedLifetime();
                 for (UUID owner : OWNERS) {
@@ -1177,6 +1179,14 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
 
     public void setAssigned(boolean value){
         this.entityData.set(EntityGem.ASSIGNED, value);
+    }
+
+    public Boolean getShatter(){
+        return this.entityData.get(EntityGem.SHATTER);
+    }
+
+    public void setShatter(boolean value){
+        this.entityData.set(EntityGem.SHATTER, value);
     }
 
 
@@ -2097,7 +2107,6 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
 
 
     //TODO: ADDON STUFF
-    //TODO: CRACKING AND SHATTERING
     //TODO: CORRUPTION
 
 
@@ -2105,7 +2114,8 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     //-------------------------------------------------------------------------------------------------------------------------------------------------------------//
 
     public String getModID(){
-        return Gempire.MODID;
+        String id[] = ForgeRegistries.ENTITY_TYPES.getKey(this.getType()).toString().split(":");
+        return id[0];
     }
 
     public Class getItemRegister(){
