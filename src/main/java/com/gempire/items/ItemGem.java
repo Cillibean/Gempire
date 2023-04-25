@@ -176,8 +176,8 @@ public class ItemGem extends Item {
         System.out.println("checking");
         if (checkTags(stack)) {
             System.out.println("checked");
-            System.out.println(stack.getTag().getBoolean("cracked"));
-            return stack.getTag().getBoolean("cracked");
+            System.out.println(stack.getOrCreateTag().getBoolean("cracked"));
+            return stack.getOrCreateTag().getBoolean("cracked");
         } else {
             System.out.println("check failed");
             return false;
@@ -186,7 +186,7 @@ public class ItemGem extends Item {
 
     public boolean getSludged(ItemStack stack) {
         if (checkTags(stack)) {
-            return stack.getTag().getInt("sludgeAmount") == 5;
+            return stack.getOrCreateTag().getInt("sludgeAmount") >= 5;
         } else {
             return false;
         }

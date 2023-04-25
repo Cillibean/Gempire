@@ -6,7 +6,7 @@
   "overrides": [
     {
       "predicate": {
-        "minecraft:cracked": 1
+        "minecraft:gempredicate": 1
       },
       "model": "gempire:item/jasper_gem_16_cracked"
     }

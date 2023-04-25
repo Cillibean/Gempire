@@ -1,6 +1,5 @@
 package com.gempire.entities.bases;
 
-import com.gempire.Gempire;
 import com.gempire.container.GemUIContainer;
 import com.gempire.entities.abilities.AbilityAbundance;
 import com.gempire.entities.abilities.AbilityRecall;
@@ -13,9 +12,11 @@ import com.gempire.entities.gems.starter.EntityMica;
 import com.gempire.entities.gems.starter.EntityNacre;
 import com.gempire.entities.gems.starter.EntityPebble;
 import com.gempire.entities.gems.starter.EntityShale;
+import com.gempire.entities.other.EntityCrawler;
 import com.gempire.events.GemPoofEvent;
 import com.gempire.init.ModItems;
 import com.gempire.init.ModSounds;
+import com.gempire.items.DestabBase;
 import com.gempire.items.ItemGem;
 import com.gempire.util.Abilities;
 import com.gempire.util.Color;
@@ -32,7 +33,6 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
@@ -63,7 +63,6 @@ import net.minecraftforge.network.NetworkHooks;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.apache.commons.lang3.ArrayUtils;
-import org.lwjgl.stb.STBIIOCallbacks;
 
 import javax.annotation.Nullable;
 import javax.imageio.ImageIO;
@@ -808,24 +807,45 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     @Override
     public boolean hurt(DamageSource source, float amount){
         if (!this.level.isClientSide) {
+            float hardness = getHardness();
             if (source.isExplosion()) {
-                if (amount - getHealth() > (getHardness() / 2) && (this.random.nextInt(shatterChance / 2) == 1)) {
+                if (amount - getHealth() > ((hardness / 2) + 0.5) && (this.random.nextInt(shatterChance / 2) == 1)) {
                     setShatter(true);
                 }
-            } else if (amount - getHealth() > getHardness()) {
-                if ((this.random.nextInt(shatterChance) == 1)) {
-                    setShatter(true);
-                } else if (getCrackAmount() == (getHardness() * 10)) {
-                    setShatter(true);
-                } else if (this.random.nextInt(crackChance) == 1) {
-                    setCracked(true);
-                    shatterChance--;
-                    setCrackAmount(getCrackAmount() * 2);
-                    if (this.random.nextInt(10) == 10) {
-                        crackChance--;
+            } else if (!(source.getEntity() instanceof Player)) {
+                if ((amount - getHealth()) > hardness) {
+                    if ((this.random.nextInt(shatterChance) == 1)) {
+                        setShatter(true);
+                    } /*else if (getCrackAmount() == (getHardness() * 10)) {
+                                setShatter(true);
+                    }*/ else if (this.random.nextInt(crackChance) == 1) {
+                        setCracked(true);
+                        shatterChance--;
+                        setCrackAmount(getCrackAmount() * 2);
+                        if (this.random.nextInt(10) == 10) {
+                            crackChance--;
+                        }
                     }
                 }
-            }
+            } else if (source.getEntity() instanceof Player) {
+                    Player player = (Player) source.getEntity();
+                    if (!(player.getMainHandItem().getItem() instanceof DestabBase)) {
+                        if ((amount - getHealth()) > hardness) {
+                            if ((this.random.nextInt(shatterChance) == 1)) {
+                                setShatter(true);
+                            } /*else if (getCrackAmount() == (getHardness() * 10)) {
+                                setShatter(true);
+                            }*/ else if (this.random.nextInt(crackChance) == 1) {
+                                setCracked(true);
+                                shatterChance--;
+                                setCrackAmount(getCrackAmount() * 2);
+                                if (this.random.nextInt(10) == 10) {
+                                    crackChance--;
+                                }
+                            }
+                        }
+                    }
+                }
             if (this.isEmotional() && !source.isExplosion() && !source.isFire()) {
                 if (this.emotionMeter <= this.EmotionThreshold()) {
                     if (this.EmotionThreshold() - this.emotionMeter < 5) {
@@ -840,6 +860,9 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                     }
                     this.emotionMeter = 0;
                 }
+            }
+            if (source.getEntity() instanceof EntityCrawler) {
+                setSludgeAmount(getSludgeAmount() + 1);
             }
         }
         return super.hurt(source, amount);

@@ -5,7 +5,8 @@ import com.gempire.entities.gems.starter.EntityMica;
 import com.gempire.entities.gems.starter.EntityNacre;
 import com.gempire.entities.gems.starter.EntityPebble;
 import com.gempire.entities.gems.starter.EntityShale;
-import com.gempire.entities.other.EntityClod;
+import com.gempire.entities.other.EntityCrawler;
+import com.gempire.entities.other.GeoExampleEntity;
 import com.gempire.init.*;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.entries.LootTableReference;
@@ -62,7 +63,10 @@ public class Gempire
     }
 
     public void EntityAttributes(final EntityAttributeCreationEvent event){
-        event.put(ModEntities.CLOD.get(), EntityClod.registerAttributes().build());
+        event.put(ModEntities.TEST.get(), GeoExampleEntity.registerAttributes().build());
+
+        event.put(ModEntities.CRAWLER.get(), EntityCrawler.registerAttributes().build());
+
         event.put(ModEntities.PEBBLE.get(), EntityPebble.registerAttributes().build());
 
         event.put(ModEntities.MICA.get(), EntityMica.registerAttributes().build());

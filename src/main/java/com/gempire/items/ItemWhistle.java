@@ -2,6 +2,7 @@ package com.gempire.items;
 
 import com.gempire.entities.bases.EntityGem;
 import com.gempire.init.ModSounds;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
@@ -22,11 +23,11 @@ public class ItemWhistle extends Item {
         if (!level.isClientSide && (hand == InteractionHand.MAIN_HAND)) {
             AABB aabb = player.getBoundingBox().inflate(25.0D);
             List<EntityGem> gems = level.getEntitiesOfClass(EntityGem.class, aabb);
+            player.getCooldowns().addCooldown(this, 200);
+            level.playSound(player, player.getOnPos().above(), ModSounds.WHISTLE.get(), SoundSource.PLAYERS, 1.0F, 1.0F);
             for (EntityGem gem : gems) {
                 if (!gem.getRebelled() && !(gem.getSludgeAmount() >= 5) && gem.isOwner(player.getUUID())) {
                     gem.setPos(player.getX(), player.getY(), player.getZ());
-                    player.getCooldowns().addCooldown(this, 200);
-                    player.playSound(ModSounds.WHISTLE.get());
                 }
             }
         }

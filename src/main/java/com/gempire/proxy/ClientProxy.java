@@ -5,7 +5,6 @@ import com.gempire.client.entity.model.*;
 import com.gempire.client.entity.render.*;
 import com.gempire.client.screen.*;
 import com.gempire.client.ter.ShellTER;
-import com.gempire.entities.other.EntityClod;
 import com.gempire.init.ModContainers;
 import com.gempire.init.ModEntities;
 import com.gempire.init.ModItemProperties;
@@ -30,7 +29,8 @@ public class ClientProxy {
     @SubscribeEvent
     public static void onClientSetup(EntityRenderersEvent.RegisterRenderers event) {
         //RenderingRegistry.registerEntityRenderingHandler(ModEntities.TEST.get(), RenderTestEntity::new);
-        event.registerEntityRenderer(ModEntities.CLOD.get(), m -> new RenderClod(m, new ModelClod<>(m.bakeLayer(ModelClod.LAYER_LOCATION))));
+        event.registerEntityRenderer(ModEntities.TEST.get(), ExampleGeoRenderer::new);
+        event.registerEntityRenderer(ModEntities.CRAWLER.get(), RenderCrawler::new);
         event.registerEntityRenderer(ModEntities.PEBBLE.get(), m -> new RenderPebble(m, new ModelPebble<>(m.bakeLayer(ModelPebble.LAYER_LOCATION_P))));
         event.registerEntityRenderer(ModEntities.MICA.get(), m -> new RenderMica(m, new ModelPebble<>(m.bakeLayer(ModelPebble.LAYER_LOCATION_M))));
         event.registerEntityRenderer(ModEntities.SHALE.get(), m -> new RenderShale(m, new ModelPebble<>(m.bakeLayer(ModelPebble.LAYER_LOCATION_S))));
@@ -79,7 +79,6 @@ public class ClientProxy {
 
     @SubscribeEvent
     public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
-        event.registerLayerDefinition(ModelClod.LAYER_LOCATION, ModelClod::createBodyLayer);
         event.registerLayerDefinition(ModelPebble.LAYER_LOCATION_P, ModelPebble::createBodyLayer);
         event.registerLayerDefinition(ModelPebble.LAYER_LOCATION_M, ModelPebble::createBodyLayer);
         event.registerLayerDefinition(ModelPebble.LAYER_LOCATION_S, ModelPebble::createBodyLayer);
