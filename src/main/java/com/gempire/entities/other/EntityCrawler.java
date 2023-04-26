@@ -1,6 +1,10 @@
 package com.gempire.entities.other;
 
+import com.gempire.entities.ai.EntityAICrawlerAttackGoal;
 import com.gempire.entities.bases.EntityGem;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.PathfinderMob;
@@ -36,31 +40,35 @@ public class EntityCrawler extends PathfinderMob implements IAnimatable {
                 .add(Attributes.ATTACK_SPEED, 1.0D);
     }
 
+    private static final EntityDataAccessor<Boolean> ATTACKING =
+            SynchedEntityData.defineId(EntityCrawler.class, EntityDataSerializers.BOOLEAN);
+
     protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(7, new FloatGoal(this));
         this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 4.0F));
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
-        this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, EntityGem.class, true));
-        this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.1D, false));
+        //this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
+        //this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, EntityGem.class, true));
+        //this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.1D, false));
+        this.goalSelector.addGoal(1, new EntityAICrawlerAttackGoal(this, 1.2D, false));
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
         this.goalSelector.addGoal(7, new WaterAvoidingRandomStrollGoal(this, 1.0D));
     }
 
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
         if (event.isMoving()) {
-            //event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.crawler.walk", true));
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.crawler.walk", true));
             return PlayState.CONTINUE;
         } else {
-            //event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.crawler.idle", true));
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.crawler.idle", true));
             return PlayState.CONTINUE;
         }
     }
 
     private PlayState attackPredicate(AnimationEvent event) {
         if(this.swinging && event.getController().getAnimationState().equals(AnimationState.Stopped)) {
-            //event.getController().markNeedsReload();
-            //event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.crawler.attack", false));
+            event.getController().markNeedsReload();
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.crawler.attack", false));
             this.swinging = false;
         }
         return PlayState.CONTINUE;
@@ -82,5 +90,19 @@ public class EntityCrawler extends PathfinderMob implements IAnimatable {
     @Override
     public AnimationFactory getFactory() {
         return this.factory;
+    }
+
+    public void setAttacking(boolean attacking) {
+        this.entityData.set(ATTACKING, attacking);
+    }
+
+    public boolean isAttacking() {
+        return this.entityData.get(ATTACKING);
+    }
+
+    @Override
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(ATTACKING, false);
     }
 }
