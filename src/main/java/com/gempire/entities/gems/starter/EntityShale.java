@@ -80,22 +80,7 @@ public class EntityShale extends EntityStarterGem {
                 Abilities.ESSENCE_BREWER
         };
     }
-    @Override
-    public Item getInputItem(int i) {
-        currentRecipe = 0;
-        return ModItems.GEM_SLUSH_BUCKET.get();
-    }
-    @Override
-    public Item getOutputItem(int n) {
-        int i = this.getRandom().nextInt(4);
-        Item essence = switch (i) {
-            case 1 -> ModItems.PINK_ESSENCE_BUCKET.get();
-            case 2 -> ModItems.BLUE_ESSENCE_BUCKET.get();
-            case 3 -> ModItems.YELLOW_ESSENCE_BUCKET.get();
-            default -> ModItems.WHITE_ESSENCE_BUCKET.get();
-        };
-        return essence;
-    }
+
     @Override
     public int getTimetoCraft()
     {

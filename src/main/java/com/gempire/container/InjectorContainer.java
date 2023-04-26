@@ -84,7 +84,8 @@ public class InjectorContainer extends AbstractContainerMenu {
                             stack.getItem() == Items.ENCHANTED_GOLDEN_APPLE || stack.getItem() == Items.EMERALD_BLOCK ||
                             stack.getItem() == Items.WITHER_SKELETON_SKULL || stack.getItem() == Items.PHANTOM_MEMBRANE ||
                             stack.getItem() == Items.END_CRYSTAL || stack.getItem() == Items.NETHER_WART ||
-                            stack.getItem() == Items.TOTEM_OF_UNDYING;
+                            stack.getItem() == Items.TOTEM_OF_UNDYING || stack.getItem() == ModItems.GILDED_LAPIS.get() ||
+                            stack.getItem() == ModItems.PRIME_BOOST.get();
                 };
             });
         });
