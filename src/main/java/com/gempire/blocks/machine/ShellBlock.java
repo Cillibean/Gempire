@@ -35,7 +35,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.network.NetworkHooks;
 
-public class ShellBlock extends BaseEntityBlock implements SimpleWaterloggedBlock, EntityBlock {
+public class ShellBlock extends BaseEntityBlock implements EntityBlock {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     public static final IntegerProperty STAGE = IntegerProperty.create("stage", 0, 2);
 
@@ -89,20 +89,6 @@ public class ShellBlock extends BaseEntityBlock implements SimpleWaterloggedBloc
     public boolean canPlaceLiquid(BlockGetter worldIn, BlockPos pos, BlockState state, Fluid fluidIn) {
         return !state.getValue(BlockStateProperties.WATERLOGGED) && fluidIn == ModFluids.WHITE_ESSENCE.get();
     }*/
-
-    @Override
-    public boolean placeLiquid(LevelAccessor worldIn, BlockPos pos, BlockState state, FluidState fluidStateIn) {
-        if (!state.getValue(BlockStateProperties.WATERLOGGED)) {
-            if (!worldIn.isClientSide()) {
-                worldIn.setBlock(pos, state.setValue(BlockStateProperties.WATERLOGGED, Boolean.TRUE), 3);
-                worldIn.scheduleTick(pos, fluidStateIn.getType(), fluidStateIn.getType().getTickDelay(worldIn));
-            }
-
-            return true;
-        } else {
-            return false;
-        }
-    }
 
     @Override
     public void onRemove(BlockState state, Level worldIn, BlockPos pos, BlockState newState, boolean isMoving) {

@@ -150,17 +150,6 @@ public class EntityBismuth extends EntityGem {
         return this.random.nextInt(4);
     }
     @Override
-    public Item getInputItem(int i) {
-        if ((inputList.get(i) == ModItems.GEM_SCRAP.get())) {
-            currentRecipe = 1;
-        }
-        return inputList.get(i);
-    }
-    @Override
-    public Item getOutputItem(int i) {
-        return outputList.get(i);
-    }
-    @Override
     public int getTimetoCraft()
     {
         return 10 * 20;
