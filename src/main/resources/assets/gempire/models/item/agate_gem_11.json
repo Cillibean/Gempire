@@ -9,6 +9,18 @@
         "minecraft:gempredicate": 1
       },
       "model": "gempire:item/agate_gem_11_cracked"
+    },
+    {
+      "predicate": {
+        "minecraft:gempredicate": 0.1
+      },
+      "model": "gempire:item/agate_gem_11_sludge"
+    },
+    {
+      "predicate": {
+        "minecraft:gempredicate": 0.2
+      },
+      "model": "gempire:item/agate_gem_11_perfect"
     }
   ]
 }
