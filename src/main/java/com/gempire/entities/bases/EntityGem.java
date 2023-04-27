@@ -97,7 +97,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     public static final EntityDataAccessor<Integer> MARKING_2_VARIANT = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<Boolean> SADDLED = SynchedEntityData.defineId(EntityGem.class, EntityDataSerializers.BOOLEAN);
     public static final EntityDataAccessor<Integer> BOOST_TIME = SynchedEntityData.defineId(EntityGem.class, EntityDataSerializers.INT);
-    public static EntityDataAccessor<Boolean> HAS_VISOR = SynchedEntityData.<Boolean>defineId(EntityGem.class, EntityDataSerializers.BOOLEAN);
+    public static EntityDataAccessor<Integer> VISOR_VARIANT = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<Boolean> REBEL = SynchedEntityData.<Boolean>defineId(EntityGem.class, EntityDataSerializers.BOOLEAN);
     public static final EntityDataAccessor<Boolean> CRACKED = SynchedEntityData.<Boolean>defineId(EntityGem.class, EntityDataSerializers.BOOLEAN);
     public static final EntityDataAccessor<String> FACET = SynchedEntityData.defineId(EntityGem.class, EntityDataSerializers.STRING);
@@ -107,6 +107,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     public static EntityDataAccessor<Integer> REBEL_OUTFIT_VARIANT = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
     public static EntityDataAccessor<Integer> REBEL_INSIGNIA_COLOR = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
     public static EntityDataAccessor<Integer> REBEL_INSIGNIA_VARIANT = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
+    public static EntityDataAccessor<Integer> REBEL_VISOR_VARIANT = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
     public static EntityDataAccessor<Integer> HARDNESS = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<Integer> CRACK_AMOUNT = SynchedEntityData.defineId(EntityGem.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<Boolean> ASSIGNED = SynchedEntityData.<Boolean>defineId(EntityGem.class, EntityDataSerializers.BOOLEAN);
@@ -192,7 +193,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.entityData.define(EntityGem.ABILITY_SLOTS, 1);
         this.entityData.define(EntityGem.ABILITIES, "-1");
         this.entityData.define(EntityGem.USES_AREA_ABILITIES, false);
-        this.entityData.define(EntityGem.HAS_VISOR, false);
+        this.entityData.define(EntityGem.VISOR_VARIANT, 0);
         this.entityData.define(EntityGem.MARKING_COLOR, 0);
         this.entityData.define(EntityGem.MARKING_VARIANT, 0);
         this.entityData.define(EntityGem.MARKING_2_COLOR, 0);
@@ -211,6 +212,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.entityData.define(EntityGem.REBEL_OUTFIT_VARIANT, 0);
         this.entityData.define(EntityGem.REBEL_INSIGNIA_COLOR, 0);
         this.entityData.define(EntityGem.REBEL_INSIGNIA_VARIANT, 0);
+        this.entityData.define(EntityGem.REBEL_VISOR_VARIANT, 0);
         this.entityData.define(EntityGem.HARDNESS, 0);
         this.entityData.define(EntityGem.CRACK_AMOUNT, 0);
         this.entityData.define(EntityGem.SLUDGE_AMOUNT, 0);
@@ -1658,16 +1660,20 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         return powers;
     }
 
-    public void setHasVisor(boolean value){
-        this.entityData.set(EntityGem.HAS_VISOR, value);
+    public int getVisorVariant(){ return this.entityData.get(EntityGem.VISOR_VARIANT); }
+
+    public void setVisorVariant(int value){
+        this.entityData.set(EntityGem.VISOR_VARIANT, value);
     }
 
-    public boolean hasVisor(){
-        return this.entityData.get(EntityGem.HAS_VISOR);
+    public abstract int generateVisorVariant();
+
+    public int getRebelVisorVariant(){
+        return this.entityData.get(EntityGem.REBEL_VISOR_VARIANT);
     }
 
-    public boolean hasVisorCosmeticOnly(){
-        return false;
+    public void setRebelVisorVariant(int value){
+        this.entityData.set(EntityGem.REBEL_VISOR_VARIANT, value);
     }
 
     public boolean isFocused(){

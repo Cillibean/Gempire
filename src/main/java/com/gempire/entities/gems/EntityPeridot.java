@@ -189,6 +189,11 @@ public class EntityPeridot extends EntityGem {
     }
 
     @Override
+    public int generateVisorVariant() {
+        return this.random.nextInt(2);
+    }
+
+    @Override
     public int baseFocus() {
         return 7;
     }

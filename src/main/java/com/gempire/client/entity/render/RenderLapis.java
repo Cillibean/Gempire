@@ -21,9 +21,10 @@ public class RenderLapis extends MobRenderer<EntityLapis, ModelLapis<EntityLapis
         super(renderManagerIn, baseModel, .25f);
         this.addLayer(new SkinLayer(this));
         this.addLayer(new FaceLayer(this));
-        this.addLayer(new HairLayer(this));
         this.addLayer(new OutfitLayer(this));
         this.addLayer(new InsigniaLayer(this));
+        this.addLayer(new VisorLayer(this));
+        this.addLayer(new HairLayer(this));
         this.addLayer(new GemPlacementLayer(this));
         //TO-DO: Wing layer for Lapis Lazuli, random wing variants
     }

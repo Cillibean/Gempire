@@ -130,6 +130,11 @@ public class EntitySapphire extends EntityVaryingGem {
     }
 
     @Override
+    public int generateVisorVariant() {
+        return this.random.nextInt(2);
+    }
+
+    @Override
     public Abilities[] possibleAbilities() {
         return new Abilities[]{
                 Abilities.NO_ABILITY, Abilities.TANK, Abilities.BEEFCAKE, Abilities.UNHINGED

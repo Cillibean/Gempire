@@ -126,6 +126,11 @@ public class EntityTopaz extends EntityVaryingGem {
     }
 
     @Override
+    public int generateVisorVariant() {
+        return this.random.nextInt(2);
+    }
+
+    @Override
     public boolean hasSkinColorVariant() {
         return true;
     }
@@ -179,11 +184,6 @@ public class EntityTopaz extends EntityVaryingGem {
         return new int[]{
                 17
         };
-    }
-
-    @Override
-    public boolean hasVisorCosmeticOnly() {
-        return true;
     }
 
     public int generateHardness() {

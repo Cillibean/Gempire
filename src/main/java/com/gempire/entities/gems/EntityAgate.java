@@ -161,6 +161,11 @@ public class EntityAgate extends AbstractQuartz {
     }
 
     @Override
+    public int generateVisorVariant() {
+        return this.random.nextInt(2);
+    }
+
+    @Override
     public boolean hasSkinColorVariant() {
         return true;
     }

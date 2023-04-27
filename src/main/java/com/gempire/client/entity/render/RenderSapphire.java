@@ -21,10 +21,11 @@ public class RenderSapphire extends MobRenderer<EntitySapphire, ModelSapphire<En
     public RenderSapphire(EntityRendererProvider.Context renderManagerIn, ModelSapphire<EntitySapphire> baseModel) {
         super(renderManagerIn, baseModel, .25f);
         this.addLayer(new SkinLayer(this));
+        this.addLayer(new FaceLayer(this));
         this.addLayer(new OutfitLayer(this));
         this.addLayer(new InsigniaLayer(this));
+        this.addLayer(new VisorLayer(this));
         this.addLayer(new HairLayer(this));
-        this.addLayer(new FaceLayer(this));
         this.addLayer(new GemPlacementLayer(this));
     }
 

@@ -154,6 +154,11 @@ public class EntityEmerald extends EntityGem {
     }
 
     @Override
+    public int generateVisorVariant() {
+        return this.random.nextInt(4);
+    }
+
+    @Override
     public int baseFocus() {
         return 7;
     }
