@@ -23,7 +23,6 @@ public class EntityTourmaline extends EntityVaryingGem {
     //TO-DO: IMPLEMENT TOURMALINE. Tourmaline will take care of one crop variety per Tourmaline.
     // Perfect Tourmalines will take care of several. Much like Zircon and her enchantments.
     // Tourmaline will have aerokinesis (wind manipulation) as an additional ability.
-    //TO-DO: IMPLEMENT COLOR VARIANTS
     public EntityTourmaline(EntityType<? extends PathfinderMob> type, Level worldIn) {
         super(type, worldIn);
     }
@@ -54,6 +53,7 @@ public class EntityTourmaline extends EntityVaryingGem {
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, EntityGem.class, 1, false, false, this::checkBothSludged));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, 1, false, false, this::checkSludged));
         this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, EntityGem.class, 6.0F, 1.0D, 1.2D, this::checkElseSludged));
+        this.goalSelector.addGoal(1, new EntityAIFarm(this, 1.0D));
     }
     @Override
     public SoundEvent getInstrument()

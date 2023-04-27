@@ -111,22 +111,6 @@ public class EntityMorganite extends EntityGem {
         };
     }
     @Override
-    public Item getInputItem(int i) {
-        if ((inputList.get(i) == Items.STONE)) {
-            currentRecipe = 1;
-        }
-        return inputList.get(i);
-    }
-    @Override
-    public Item getOutputItem(int i) {
-        return inputList.get(i);
-    }
-
-    public void registerRecipes() {
-        inputList.add(Items.STONE);
-        outputList.add(ModItems.PEDISTAL.get());
-    }
-    @Override
     public int getTimetoCraft()
     {
         return 3 * 20;

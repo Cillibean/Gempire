@@ -1,0 +1,50 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"animation.model.run": {
+			"loop": true,
+			"animation_length": 0.33333,
+			"bones": {
+				"bone2": {
+					"scale": {
+						"0.0": {
+							"vector": [1, 1, 1.2]
+						},
+						"0.1667": {
+							"vector": [1, 1, 0.7]
+						},
+						"0.3333": {
+							"vector": [1, 1, 1]
+						}
+					}
+				},
+				"bone3": {
+					"rotation": {
+						"0.0": {
+							"vector": [-27.5, 0, 0]
+						},
+						"0.1667": {
+							"vector": [52.5, 0, 0]
+						},
+						"0.3333": {
+							"vector": [0, 0, 0]
+						}
+					}
+				},
+				"bone4": {
+					"rotation": {
+						"0.0": {
+							"vector": [30, 0, 0]
+						},
+						"0.1667": {
+							"vector": [-37.5, 0, 0]
+						},
+						"0.3333": {
+							"vector": [0, 0, 0]
+						}
+					}
+				}
+			}
+		}
+	}
+}

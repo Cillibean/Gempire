@@ -1,0 +1,76 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.Crawler",
+				"texture_width": 64,
+				"texture_height": 128,
+				"visible_bounds_width": 3,
+				"visible_bounds_height": 2.5,
+				"visible_bounds_offset": [0, 0.75, 0]
+			},
+			"bones": [
+				{
+					"name": "Body",
+					"pivot": [0, 8, -7],
+					"cubes": [
+						{"origin": [-6, 0, -7], "size": [12, 8, 18], "inflate": -0.5, "uv": [0, 60]}
+					]
+				},
+				{
+					"name": "LeftArm",
+					"pivot": [-6, 4, -4],
+					"rotation": [-75, 0, 0],
+					"cubes": [
+						{"origin": [-10, -8, -6], "size": [4, 14, 4], "uv": [0, 0]}
+					]
+				},
+				{
+					"name": "RightArm",
+					"pivot": [6, 4, -4],
+					"rotation": [-75, 0, 0],
+					"cubes": [
+						{"origin": [6, -8, -6], "size": [4, 14, 4], "uv": [0, 0]}
+					]
+				},
+				{
+					"name": "Body2",
+					"pivot": [0, 8, -7],
+					"cubes": [
+						{"origin": [-6, 0, -7], "size": [12, 8, 18], "uv": [0, 0]}
+					]
+				},
+				{
+					"name": "headgroup",
+					"pivot": [0, 5, -6]
+				},
+				{
+					"name": "Head",
+					"parent": "headgroup",
+					"pivot": [0, 5, -6],
+					"cubes": [
+						{"origin": [-4, 5, -14], "size": [8, 8, 8], "uv": [0, 44]}
+					]
+				},
+				{
+					"name": "Head2",
+					"parent": "headgroup",
+					"pivot": [0, 5, -6],
+					"cubes": [
+						{"origin": [-4, 3, -14], "size": [8, 10, 8], "inflate": 0.3, "uv": [0, 26]}
+					]
+				},
+				{
+					"name": "Jaw",
+					"parent": "headgroup",
+					"pivot": [0, 5, -6],
+					"rotation": [12, 0, 0],
+					"cubes": [
+						{"origin": [-2, 5, -14], "size": [4, 2, 8], "uv": [32, 26]}
+					]
+				}
+			]
+		}
+	]
+}

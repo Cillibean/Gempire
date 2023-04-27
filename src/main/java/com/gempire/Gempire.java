@@ -5,7 +5,8 @@ import com.gempire.entities.gems.starter.EntityMica;
 import com.gempire.entities.gems.starter.EntityNacre;
 import com.gempire.entities.gems.starter.EntityPebble;
 import com.gempire.entities.gems.starter.EntityShale;
-import com.gempire.entities.other.EntityClod;
+import com.gempire.entities.other.EntityCrawler;
+import com.gempire.entities.other.GeoExampleEntity;
 import com.gempire.init.*;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.entries.LootTableReference;
@@ -25,6 +26,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import software.bernie.geckolib3.GeckoLib;
 
 import java.util.stream.Collectors;
 
@@ -49,6 +51,8 @@ public class Gempire
         //FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onClientSetup);
 
         RegistryHandler.init();
+
+        GeckoLib.initialize();
         // Register ourselves for server and other game events we are interested in
         //MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGHEST, ClientProxy::onClientSetup);
         MinecraftForge.EVENT_BUS.register(this);
@@ -59,7 +63,10 @@ public class Gempire
     }
 
     public void EntityAttributes(final EntityAttributeCreationEvent event){
-        event.put(ModEntities.CLOD.get(), EntityClod.registerAttributes().build());
+        event.put(ModEntities.TEST.get(), GeoExampleEntity.registerAttributes().build());
+
+        event.put(ModEntities.CRAWLER.get(), EntityCrawler.registerAttributes().build());
+
         event.put(ModEntities.PEBBLE.get(), EntityPebble.registerAttributes().build());
 
         event.put(ModEntities.MICA.get(), EntityMica.registerAttributes().build());

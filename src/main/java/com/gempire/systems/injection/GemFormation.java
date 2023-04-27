@@ -7,10 +7,7 @@ import com.gempire.entities.gems.EntityZircon;
 import com.gempire.entities.gems.starter.EntityPebble;
 import com.gempire.events.DrainEvent;
 import com.gempire.events.GemFormEvent;
-import com.gempire.init.AddonHandler;
-import com.gempire.init.ModBlocks;
-import com.gempire.init.ModEnchants;
-import com.gempire.init.ModEntities;
+import com.gempire.init.*;
 import com.gempire.items.ItemChroma;
 import com.gempire.items.ItemGem;
 import com.gempire.util.PaletteType;
@@ -156,12 +153,25 @@ public class GemFormation {
         double rarity = CONDITIONS.get(gemtoform).rarity;
         System.out.println("weight / rarity check "+weight / rarity);
         System.out.println("weight "+weight);
-        if (weight / rarity <= 10) {
-            gem.setDefective(true);
-            System.out.println("defective");
-        } else if (weight / rarity >= 25){
-            gem.setPrimary(true);
-            System.out.println("prime");
+        if (primer.asItem() == ModItems.PRIME_BOOST.get()) {
+            if (weight / rarity <= 5) {
+                System.out.println("clod");
+            }
+            if (weight / rarity <= 15) {
+                gem.setDefective(false);
+                System.out.println("defective");
+            } else if (weight / rarity >= 15){
+                gem.setPrimary(true);
+                System.out.println("prime");
+            }
+        } else {
+            if (weight / rarity <= 10) {
+                gem.setDefective(true);
+                System.out.println("defective");
+            } else if (weight / rarity >= 25){
+                gem.setPrimary(true);
+                System.out.println("prime");
+            }
         }
         gem.setGemPlacement(gem.generateGemPlacement());
         gem.setSkinVariant(gem.generateSkinVariant());

@@ -108,6 +108,7 @@
   "item.gempire.green_shards": "Green Shards",
   "item.gempire.red_shards": "Red Shards",
   "item.gempire.black_shards": "Black Shards",
+  "item.gempire.special_shards": "Prismatic Shards",
 
   "item.gempire.gilded_lapis": "Gilded Lapis Lazuli",
   "item.gempire.spodumene_piece": "Amphibian Gel",
@@ -130,6 +131,7 @@
   "item.gempire.rebel_stick": "Rebel Stick",
   "item.gempire.share_contract": "Share Contract",
   "item.gempire.transfer_contract": "Transfer Contract",
+  "item.gempire.gem_whistle": "Gem Whistle",
 
   "item.gempire.essence_bottle": "Essence Bottle",
   "item.gempire.pink_essence": "Pink Essence",
@@ -529,5 +531,6 @@
   "commands.gempire.nomap": "She needs a map!",
 
   "gempire.subtitle.inject": "Injection",
-  "gempire.subtitle.poof": "Gem Poofed"
+  "gempire.subtitle.poof": "Gem Poofed",
+  "gempire.subtitle.whistle": "Gem Whistle"
 }

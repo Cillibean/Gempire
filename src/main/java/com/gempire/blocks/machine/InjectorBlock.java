@@ -3,6 +3,7 @@ package com.gempire.blocks.machine;
 import com.gempire.init.ModBlocks;
 import com.gempire.init.ModTE;
 import com.gempire.tileentities.InjectorTE;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
@@ -90,4 +91,19 @@ public class InjectorBlock extends BaseEntityBlock implements EntityBlock {
     public boolean canConnectRedstone(BlockState state, BlockGetter world, BlockPos pos, @Nullable Direction side) {
         return true;
     }
+
+    /*@Override
+    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState state2, boolean bool) {
+        BlockEntity tileEntity = level.getBlockEntity(pos);
+        if (tileEntity != null) {
+            CompoundTag tc = tileEntity.saveWithoutMetadata();
+            level.removeBlockEntity(pos);
+            CompoundTag tag = this.asItem().getDefaultInstance().getOrCreateTag();
+            tag.put("tedata", tc);
+        }
+        level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
+        super.onRemove(state, level, pos, state2, bool);
+    }*/
+
+
 }

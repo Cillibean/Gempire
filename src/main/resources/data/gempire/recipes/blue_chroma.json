@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "gempire:gem_slush_bucket"
+    },
+    {
+      "item": "gempire:blue_shards"
+    }
+  ],
+  "result": {
+    "item": "gempire:blue_chroma"
+  }
+}

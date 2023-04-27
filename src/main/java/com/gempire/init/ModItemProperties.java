@@ -210,10 +210,14 @@ public class ModItemProperties {
     }
 
     private static void makeGem(Item item) {
-        ItemProperties.register(item, new ResourceLocation("cracked"), (stack, p_174636_, p_174637_, p_174638_) -> {
+        ItemProperties.register(item, new ResourceLocation("gempredicate"), (stack, p_174636_, p_174637_, p_174638_) -> {
             if (stack.getItem().asItem() instanceof ItemGem) {
-                if (stack.getOrCreateTag().getBoolean("cracked")) {
+                if (((ItemGem) stack.getItem()).getSludged(stack)) {
+                    return 0.1F;
+                } else if (stack.getOrCreateTag().getBoolean("cracked")) {
                     return 1.0F;
+                } else if (stack.getOrCreateTag().getBoolean("prime")) {
+                    return 0.2F;
                 }
                 else {
                     return 0.0F;

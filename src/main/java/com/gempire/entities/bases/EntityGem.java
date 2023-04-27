@@ -1,6 +1,5 @@
 package com.gempire.entities.bases;
 
-import com.gempire.Gempire;
 import com.gempire.container.GemUIContainer;
 import com.gempire.entities.abilities.AbilityAbundance;
 import com.gempire.entities.abilities.AbilityRecall;
@@ -13,9 +12,11 @@ import com.gempire.entities.gems.starter.EntityMica;
 import com.gempire.entities.gems.starter.EntityNacre;
 import com.gempire.entities.gems.starter.EntityPebble;
 import com.gempire.entities.gems.starter.EntityShale;
+import com.gempire.entities.other.EntityCrawler;
 import com.gempire.events.GemPoofEvent;
 import com.gempire.init.ModItems;
 import com.gempire.init.ModSounds;
+import com.gempire.items.DestabBase;
 import com.gempire.items.ItemGem;
 import com.gempire.util.Abilities;
 import com.gempire.util.Color;
@@ -32,7 +33,6 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
@@ -63,7 +63,6 @@ import net.minecraftforge.network.NetworkHooks;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.apache.commons.lang3.ArrayUtils;
-import org.lwjgl.stb.STBIIOCallbacks;
 
 import javax.annotation.Nullable;
 import javax.imageio.ImageIO;
@@ -112,7 +111,9 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     public static final EntityDataAccessor<Integer> CRACK_AMOUNT = SynchedEntityData.defineId(EntityGem.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<Boolean> ASSIGNED = SynchedEntityData.<Boolean>defineId(EntityGem.class, EntityDataSerializers.BOOLEAN);
     public static final EntityDataAccessor<Integer> SLUDGE_AMOUNT = SynchedEntityData.defineId(EntityGem.class, EntityDataSerializers.INT);
-
+    public static final EntityDataAccessor<Boolean> SHATTER = SynchedEntityData.<Boolean>defineId(EntityGem.class, EntityDataSerializers.BOOLEAN);
+    public static final EntityDataAccessor<Integer> CURRENT_RECIPE = SynchedEntityData.defineId(EntityGem.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Integer> RECIPE_AMOUNT = SynchedEntityData.defineId(EntityGem.class, EntityDataSerializers.INT);
     public boolean isCut;
     public ArrayList<Ability> ABILITY_POWERS = new ArrayList<>();
     public ArrayList<UUID> OWNERS = new ArrayList<>();
@@ -122,7 +123,6 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     public EntityGem assignedGem;
     public BlockPos GUARD_POS;
     public ArrayList<IIdleAbility> idlePowers = new ArrayList<>();
-
     private final ItemBasedSteering booster = new ItemBasedSteering(this.entityData, BOOST_TIME, SADDLED);
 
     public byte movementType = 1;
@@ -135,8 +135,6 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     public int focusCounter = 100;
     public int maxFocusCounter = 100;
     public int ticking;
-    public int currentRecipe = 0;
-    public boolean shatter = false;
     public ArrayList<Item> inputList = new ArrayList<>();
     public ArrayList<Item> outputList = new ArrayList<>();
 
@@ -217,6 +215,9 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.entityData.define(EntityGem.CRACK_AMOUNT, 0);
         this.entityData.define(EntityGem.SLUDGE_AMOUNT, 0);
         this.entityData.define(EntityGem.ASSIGNED, false);
+        this.entityData.define(EntityGem.SHATTER, false);
+        this.entityData.define(EntityGem.CURRENT_RECIPE, 0);
+        this.entityData.define(EntityGem.RECIPE_AMOUNT, 0);
         this.FOLLOW_ID = UUID.randomUUID();
         this.ASSIGNED_ID = UUID.randomUUID();
         this.MASTER_OWNER = UUID.randomUUID();
@@ -277,7 +278,9 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.setCrackAmount(this.getCrackAmount());
         this.setSludgeAmount(this.getSludgeAmount());
         this.setAssigned(this.getAssigned());
-        this.registerRecipes();
+        this.setShatter(this.getShatter());
+        this.setCurrentRecipe(this.getCurrentRecipe());
+        this.setRecipeAmount(this.generateRecipeAmount());
         return super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
     }
 
@@ -387,6 +390,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         compound.putBoolean("isHostile", this.getHostile());
         compound.putBoolean("cracked", this.getCracked());
         compound.putBoolean("assigned", this.getAssigned());
+        compound.putBoolean("shatter", this.getShatter());
         compound.putInt("hardness", this.getHardness());
         compound.putInt("crackAmount", this.getCrackAmount());
         compound.putInt("sludgeAmount", this.getSludgeAmount());
@@ -404,6 +408,8 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         compound.putInt("rebelOutfitVariant", this.getRebelOutfitVariant());
         compound.putInt("rebelInsigniaColor", this.getRebelInsigniaColor());
         compound.putInt("rebelInsigniaVariant", this.getRebelInsigniaVariant());
+        compound.putInt("currentRecipe", this.getCurrentRecipe());
+        compound.putInt("recipeAmount", this.getRecipeAmount());
         this.writeStructures(compound);
         ContainerHelper.saveAllItems(compound, this.items);
     }
@@ -480,6 +486,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.setAssigned(compound.getBoolean("assigned"));
         this.setPrimary(compound.getBoolean("prime"));
         this.setDefective(compound.getBoolean("defective"));
+        this.setShatter(compound.getBoolean("shatter"));
         this.idlePowers = this.generateIdlePowers();
         ContainerHelper.loadAllItems(compound, this.items);
         this.readStructures(compound);
@@ -582,20 +589,69 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     }
 
     public Item getInputItem(int i) {
-        return Items.AIR;
+        System.out.println("get input " + i);
+        if (this instanceof EntityBismuth) {
+            inputList.add(ModItems.GEM_SCRAP.get());
+            return inputList.get(i);
+        } else if (this instanceof EntityMorganite) {
+            inputList.add(Items.STONE);
+            return inputList.get(i);
+        } else if (this instanceof EntityShale) {
+            inputList.add(ModItems.GEM_SLUSH_BUCKET.get());
+            return inputList.get(i);
+        } else {
+                return Items.AIR;
+        }
     }
 
     public Item getOutputItem(int i) {
-        return Items.AIR;
+        System.out.println("get output "+ i);
+        if (this instanceof EntityBismuth) {
+            outputList.add(ModItems.PRISMATIC_INGOT.get());
+            return outputList.get(i);
+        } else if (this instanceof EntityMorganite) {
+            outputList.add(ModItems.PEDISTAL.get());
+            return outputList.get(i);
+        } else if (this instanceof  EntityShale) {
+            int n = random.nextInt(4);
+            switch (n) {
+                case 1 -> outputList.add(ModItems.PINK_ESSENCE_BUCKET.get());
+                case 2 -> outputList.add(ModItems.BLUE_ESSENCE_BUCKET.get());
+                case 3 -> outputList.add(ModItems.YELLOW_ESSENCE_BUCKET.get());
+                default -> outputList.add(ModItems.WHITE_ESSENCE_BUCKET.get());
+            }
+            System.out.println("shale");
+            return outputList.get(i);
+        } else {
+            return Items.AIR;
+        }
     }
 
-    public void registerRecipes() {
-        if (this instanceof EntityBismuth) {
-            inputList.add(ModItems.GEM_SCRAP.get());
-            outputList.add(ModItems.PRISMATIC_INGOT.get());
+    public int getCurrentRecipe() {
+        return this.entityData.get(EntityGem.CURRENT_RECIPE);
+    }
+
+    public void setCurrentRecipe(int i) {
+        this.entityData.set(EntityGem.CURRENT_RECIPE, i);
+    }
+
+    public int getRecipeAmount() {
+        return this.entityData.get(EntityGem.RECIPE_AMOUNT);
+    }
+
+    public void setRecipeAmount(int i) {
+        this.entityData.set(EntityGem.RECIPE_AMOUNT, i);
+    }
+
+    public int generateRecipeAmount() {
+        if (this instanceof EntityShale) {
+            return 1;
+        } else if (this instanceof EntityBismuth) {
+            return 1;
         } else if (this instanceof EntityMorganite) {
-            inputList.add(Items.STONE);
-            outputList.add(ModItems.PEDISTAL.get());
+            return 1;
+        } else {
+            return 0;
         }
     }
 
@@ -740,19 +796,38 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             }
         }
         if (!level.isClientSide) {
+            System.out.println("entity check");
             if (this instanceof EntityMorganite || this instanceof EntityBismuth || this instanceof EntityShale) {
-            for (int i = 0; i >= inputList.size(); i++) {
-                if (player.getItemInHand(hand).getItem() == getInputItem(i) && !isCrafting && hand == InteractionHand.MAIN_HAND && getInputItem(i) != Items.AIR.asItem()) {
-                    if (this.isOwner(player)) {
-                        isCrafting = true;
-                        this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
-                        if (!player.isCreative()) {
-                            player.getMainHandItem().shrink(1);
+                System.out.println("passed entity check");
+                System.out.println(getRecipeAmount());
+                for (int i = 0; i <= getRecipeAmount(); i++) {
+                    System.out.println(i);
+                    System.out.println("input item check");
+                    if (player.getItemInHand(hand).getItem() == getInputItem(i)) {
+                        System.out.println("hand check 1");
+                        if (!isCrafting) {
+                            System.out.println("is crafting check");
+                            if (hand == InteractionHand.MAIN_HAND) {
+                                System.out.println("hand check 2");
+                                if (getInputItem(i) != Items.AIR.asItem()) {
+                                    System.out.println("input item air check");
+                                    inputList.clear();
+                                    setCurrentRecipe(i);
+                                    if (this.isOwner(player)) {
+                                        isCrafting = true;
+                                        this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
+                                        if (!player.isCreative()) {
+                                            player.getMainHandItem().shrink(1);
+                                        }
+                                        break;
+                                    }
+                                }
+                            }
                         }
-                        break;
                     }
                 }
-            }
+                inputList.clear();
+                outputList.clear();
             }
         }
         return super.interactAt(player, vec, hand);
@@ -808,24 +883,45 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     @Override
     public boolean hurt(DamageSource source, float amount){
         if (!this.level.isClientSide) {
+            float hardness = getHardness();
             if (source.isExplosion()) {
-                if (amount - getHealth() > (getHardness() / 2) && (this.random.nextInt(shatterChance / 2) == 1)) {
-                    shatter = true;
+                if (amount - getHealth() > ((hardness / 2) + 0.5) && (this.random.nextInt(shatterChance / 2) == 1)) {
+                    setShatter(true);
                 }
-            } else if (amount - getHealth() > getHardness()) {
-                if ((this.random.nextInt(shatterChance) == shatterChance)) {
-                    shatter = true;
-                } else if (getCrackAmount() == getHardness() * 10) {
-                    shatter = true;
-                } else if (this.random.nextInt(crackChance) == crackChance) {
-                    setCracked(true);
-                    shatterChance--;
-                    setCrackAmount(getCrackAmount() * 2);
-                    if (this.random.nextInt(10) == 10) {
-                        crackChance--;
+            } else if (!(source.getEntity() instanceof Player)) {
+                if ((amount - getHealth()) > hardness) {
+                    if ((this.random.nextInt(shatterChance) == 1)) {
+                        setShatter(true);
+                    } /*else if (getCrackAmount() == (getHardness() * 10)) {
+                                setShatter(true);
+                    }*/ else if (this.random.nextInt(crackChance) == 1) {
+                        setCracked(true);
+                        shatterChance--;
+                        setCrackAmount(getCrackAmount() * 2);
+                        if (this.random.nextInt(10) == 10) {
+                            crackChance--;
+                        }
                     }
                 }
-            }
+            } else if (source.getEntity() instanceof Player) {
+                    Player player = (Player) source.getEntity();
+                    if (!(player.getMainHandItem().getItem() instanceof DestabBase)) {
+                        if ((amount - getHealth()) > hardness) {
+                            if ((this.random.nextInt(shatterChance) == 1)) {
+                                setShatter(true);
+                            } /*else if (getCrackAmount() == (getHardness() * 10)) {
+                                setShatter(true);
+                            }*/ else if (this.random.nextInt(crackChance) == 1) {
+                                setCracked(true);
+                                shatterChance--;
+                                setCrackAmount(getCrackAmount() * 2);
+                                if (this.random.nextInt(10) == 10) {
+                                    crackChance--;
+                                }
+                            }
+                        }
+                    }
+                }
             if (this.isEmotional() && !source.isExplosion() && !source.isFire()) {
                 if (this.emotionMeter <= this.EmotionThreshold()) {
                     if (this.EmotionThreshold() - this.emotionMeter < 5) {
@@ -840,6 +936,9 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                     }
                     this.emotionMeter = 0;
                 }
+            }
+            if (source.getEntity() instanceof EntityCrawler) {
+                setSludgeAmount(getSludgeAmount() + 1);
             }
         }
         return super.hurt(source, amount);
@@ -894,7 +993,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             this.playSound(ModSounds.POOF.get());
             GemPoofEvent event = new GemPoofEvent(this, this.blockPosition(), source);
             MinecraftForge.EVENT_BUS.post(event);
-            if (shatter){
+            if (getShatter()){
                 ItemStack stack = new ItemStack(this.getShardItem());
                 this.spawnAtLocation(stack).setExtendedLifetime();
                 for (UUID owner : OWNERS) {
@@ -1110,13 +1209,13 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.entityData.set(EntityGem.SKIN_COLOR, value);
     }
     public void popShitOut() {
-            ItemStack itemStack = new ItemStack(getOutputItem(currentRecipe));
+            ItemStack itemStack = new ItemStack(getOutputItem(getCurrentRecipe()));
             this.spawnAtLocation(itemStack);
             this.gameEvent(GameEvent.ENTITY_PLACE);
             ticking = 0;
             this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
             isCrafting = false;
-            currentRecipe = 0;
+            setCurrentRecipe(0);
     }
 
     public int generatePaletteColor(PaletteType type) {
@@ -1179,6 +1278,14 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
 
     public void setAssigned(boolean value){
         this.entityData.set(EntityGem.ASSIGNED, value);
+    }
+
+    public Boolean getShatter(){
+        return this.entityData.get(EntityGem.SHATTER);
+    }
+
+    public void setShatter(boolean value){
+        this.entityData.set(EntityGem.SHATTER, value);
     }
 
 
@@ -2103,7 +2210,6 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
 
 
     //TODO: ADDON STUFF
-    //TODO: CRACKING AND SHATTERING
     //TODO: CORRUPTION
 
 
@@ -2111,7 +2217,8 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     //-------------------------------------------------------------------------------------------------------------------------------------------------------------//
 
     public String getModID(){
-        return Gempire.MODID;
+        String id[] = ForgeRegistries.ENTITY_TYPES.getKey(this.getType()).toString().split(":");
+        return id[0];
     }
 
     public Class getItemRegister(){

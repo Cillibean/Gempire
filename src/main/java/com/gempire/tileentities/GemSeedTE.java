@@ -27,6 +27,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.material.WaterFluid;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.fluids.IFluidBlock;
 import org.jetbrains.annotations.NotNull;
 
@@ -66,6 +67,7 @@ public class GemSeedTE extends BlockEntity {
 
     //Create an object to store the total weight
     float totalWeight = 0;
+    int speed = 8;
 
     public GemSeedTE(BlockPos pos, BlockState state) {
         super(ModTE.GEM_SEED_TE.get(), pos, state);
@@ -81,7 +83,12 @@ public class GemSeedTE extends BlockEntity {
             te.ScanPositions(level, te.getBlockPos(), new BlockPos(DRAIN_SIZE, DRAIN_SIZE, DRAIN_SIZE));
             te.checked = true;
         }
-        if (te.ticks % 1 == 0) {
+        if (te.primer == ModItems.GILDED_LAPIS.get()) {
+            te.speed = 2;
+        } else {
+            te.speed = 8;
+        }
+        if (te.ticks % te.speed == 0) {
             if (!te.spawned && te.checked) {
                 if (te.IDS.size() > 0) {
                     int rando = ThreadLocalRandom.current().nextInt(te.IDS.size());
@@ -201,9 +208,21 @@ public class GemSeedTE extends BlockEntity {
                             //Then for every crux, calculate the total weight of crux that matches every block in the volume for every gem
                             //Example: if there are three stone in the volume, the total weight will be 3 stone times however many gems there are that have stone as a crux, and so forth
                             if (block != crux.block) {
-                                for (int n = 0; n <= 1; n++){
-                                    TEMPORARY_WEIGHTS.get(i).add(n, gemWeight - (1 - temperatureDifference));
-                                    System.out.println("temp weights from gem weights no crux " +TEMPORARY_WEIGHTS.get(i).get(n));
+                                if (block.defaultBlockState().is(Tags.Blocks.STONE)) {
+                                    totalWeight += 1;
+                                    totalWeight += GEM_CONDITIONS.get(gem).rarity;
+                                    gemWeight += 1 * (1 - temperatureDifference);
+                                    gemWeight += 1 - temperatureDifference;
+                                    gemWeight *= GEM_CONDITIONS.get(gem).rarity;
+                                    for (int n = 0; n <= 1; n++){
+                                        TEMPORARY_WEIGHTS.get(i).add(n, gemWeight);
+                                        System.out.println("temp weights from gem weights no crux " +TEMPORARY_WEIGHTS.get(i).get(n));
+                                    }
+                                } else {
+                                    for (int n = 0; n <= 1; n++){
+                                        TEMPORARY_WEIGHTS.get(i).add(n, gemWeight - (1 - temperatureDifference));
+                                        System.out.println("temp weights from gem weights no crux " +TEMPORARY_WEIGHTS.get(i).get(n));
+                                    }
                                 }
                             } else {
                                 totalWeight += 1;

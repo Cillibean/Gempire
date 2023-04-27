@@ -6,9 +6,21 @@
   "overrides": [
     {
       "predicate": {
-        "minecraft:cracked": 1
+        "minecraft:gempredicate": 1
       },
       "model": "gempire:item/aquamarine_gem_cracked"
+    },
+    {
+      "predicate": {
+        "minecraft:gempredicate": 0.1
+      },
+      "model": "gempire:item/aquamarine_gem_sludge"
+    },
+    {
+      "predicate": {
+        "minecraft:gempredicate": 0.2
+      },
+      "model": "gempire:item/aquamarine_gem_perfect"
     }
   ]
 }

@@ -12,4 +12,6 @@ public class ModSounds {
 
     public static final RegistryObject<SoundEvent> INJECT = SOUNDS.register("inject", () -> new SoundEvent(new ResourceLocation(Gempire.MODID, "inject")));
     public static final RegistryObject<SoundEvent> POOF = SOUNDS.register("poof", () -> new SoundEvent(new ResourceLocation(Gempire.MODID, "poof")));
+    public static final RegistryObject<SoundEvent> WHISTLE = SOUNDS.register("whistle", () -> new SoundEvent(new ResourceLocation(Gempire.MODID, "whistle")));
+
 }
