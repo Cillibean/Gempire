@@ -14,7 +14,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "$(l)Possible Abilities$() $(li)Knockback$(li)Paralysis$(li)Tank$(li)Beefcake$(li)Powerhouse$(li)Unhinged$(li)Pyrokinesis$(li)Cryokinesis$(li)Healer$(li)First-Aid$(li)Berserker$(li)Beastmaster$(li)Electrokinesis (NYI)$(li)Aerokinesis$(br2) $(l)Definite Abilities$() $(br)$(li)Stern"
+      "text": "$(l)Possible Abilities$() $(li)Knockback$(li)Paralysis$(li)Tank$(li)Beefcake$(li)Powerhouse$(li)Unhinged$(li)Pyrokinesis$(li)Cryokinesis$(li)Healer$(li)First-Aid$(li)Berserker$(li)Beastmaster$(li)Electrokinesis (NYI)$(li)Aerokinesis (NYI)$(br2) $(l)Definite Abilities$() $(br)$(li)Stern"
     },
     {
       "type": "patchouli:text",

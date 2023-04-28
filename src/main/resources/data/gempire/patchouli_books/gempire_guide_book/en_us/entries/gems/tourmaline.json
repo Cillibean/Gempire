@@ -10,7 +10,7 @@
       "name": "A Tourmaline",
       "rotate": "true",
       "offset": 0.2,
-      "text": "A farmer gem that can use wind as a weapon."
+      "text": "A farmer gem that can use wind as a weapon, and tend to crops in a certain radius around her."
     },
     {
       "type": "patchouli:text",

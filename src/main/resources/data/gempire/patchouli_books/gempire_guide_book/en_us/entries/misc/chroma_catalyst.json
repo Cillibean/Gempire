@@ -1,0 +1,19 @@
+{
+  "name": "Chroma Catalyst",
+  "icon": "gempire:chroma_catalyst",
+  "advancement": "gempire:root",
+  "category": "gempire:misc",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "link_recipe ": true,
+      "item": "gempire:chroma_catalyst",
+      "text": "Chroma Catalysts are used to plant a Chroma Cluster crop into a stone block that has several growth stages. Once the crop is mature, it will begin to produce Chroma crystals in the four cardinal directions around it."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "gempire:chroma_catalyst",
+      "text": "The recipe for a Chroma Catalyst."
+    }
+  ]
+}

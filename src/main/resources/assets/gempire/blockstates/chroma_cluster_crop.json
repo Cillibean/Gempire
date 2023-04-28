@@ -1,0 +1,11 @@
+{
+  "variants": {
+    "age=0": { "model": "gempire:block/chroma_cluster_crop_0" },
+    "age=1": { "model": "gempire:block/chroma_cluster_crop_1" },
+    "age=2": { "model": "gempire:block/chroma_cluster_crop_2" },
+    "age=3": { "model": "gempire:block/chroma_cluster_crop_3" },
+    "age=4": { "model": "gempire:block/chroma_cluster_crop_4" },
+    "age=5": { "model": "gempire:block/chroma_cluster_crop_5" },
+    "age=6": { "model": "gempire:block/chroma_cluster_crop_6" }
+  }
+}

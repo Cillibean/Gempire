@@ -10,7 +10,7 @@
       "name": "A Rutile",
       "rotate": "true",
       "offset": 0.2,
-      "text": "A cave dwelling gem that when given torches, places them in the dark."
+      "text": "A cave dwelling gem that when given torches, places them in dark spaces. She can also seek out blocks of interest, like ore and mob spawners."
     },
     {
       "type": "patchouli:text",

@@ -258,7 +258,6 @@ public class ModBlocks {
     public static final RegistryObject<Block> PEDISTAL = BLOCKS.register("pedistal", () ->
             new PedistalBlock(BlockBehaviour.Properties.of(Material.STONE).noOcclusion(),true)
             );
-    ;
 
     public static final RegistryObject<Block> GEM_SEED_BLOCK = BLOCKS.register("gem_seed_block", () ->
             new GemSeedBlock(BlockBehaviour.Properties
@@ -658,4 +657,6 @@ public class ModBlocks {
             () -> new StairBlock(() -> ModBlocks.SMOOTH_RUINED_MARBLE_BLOCK.get().defaultBlockState(),
                     BlockBehaviour.Properties.of(Material.STONE).strength(1.5f).requiresCorrectToolForDrops()));
 
+    public static final RegistryObject<Block> CHROMA_CLUSTER_CROP = BLOCKS.register("chroma_cluster_crop", () ->
+            new ChromaClusterCropBlock(BlockBehaviour.Properties.copy(Blocks.WHEAT)));
 }

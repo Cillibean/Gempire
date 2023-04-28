@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SCS",
+    "PGP",
+    "SCS"
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:ghast_tear"
+    },
+    "P": {
+      "item": "gempire:prismatic_ingot"
+    },
+    "C": {
+      "item": "gempire:special_chroma"
+    },
+    "S": {
+      "tag": "gempire:shards"
+    }
+  },
+  "result": {
+    "item": "gempire:prime_boost"
+  }
+}

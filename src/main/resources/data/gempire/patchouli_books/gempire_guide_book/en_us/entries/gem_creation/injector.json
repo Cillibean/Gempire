@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "In order to Inject, first you must obtain a drill, and power crystal. see the two pages for that. Afterwards, you must craft an Injector Core and Injector Remote."
+      "text": "In order to Inject, first you must obtain a Drill, and a Power Crystal. View the two pages related to those items for that information. Afterwards, you must craft an Injector Core and Injector Remote."
     },
     {
       "type": "patchouli:crafting",
@@ -17,13 +17,13 @@
     {
       "type": "patchouli:text",
       "title": "Injector Multiblock",
-      "text": "Now, place down your drill, then injector core, then power crystal, on top of each other in that order. Now you can open the Injector GUI. In order to create gems you need Essence and Chroma. Chroma can be found generated in the world."
+      "text": "Now, place down your Drill, then the Injector Core, then your Power Crystal on top of each other in that order. Now you can open the Injector GUI. In order to create gems you need Essence and Chroma."
     },
     {
       "type": "patchouli:spotlight",
       "link_recipe ": false,
       "item": "gempire:special_chroma",
-      "text": "After opening the GUI, place the Chroma you'd like to use in the center. The chroma determines the gems color if it has multiple variants, Prismatic Chroma gives a random color or an exclusive color variant."
+      "text": "After opening the GUI, place the Chroma you'd like to use in the center. The Chroma determines the gem's color if it has multiple variants. Prismatic Chroma gives a random color or an exclusive color variant."
     },
     {
       "type": "patchouli:spotlight",
@@ -35,12 +35,12 @@
       "type": "patchouli:spotlight",
       "link_recipe ": false,
       "item": "gempire:injector_panel",
-      "text": "Afterwards, interact with your injector using your injector remote, right click in the air to change what tank you'd like open to inject with, then right click on the injector to open or close it. You can shift click the injector to see what tanks are open."
+      "text": "Afterwards, interact with your Injector using your Injector Remote. Right click in the air to change what tank you'd like open to inject with, then right click on the Injector to open or close that tank. You can shift click the Injector to see what tanks are open."
     },
     {
       "type": "patchouli:text",
       "title": "Injecting",
-      "text": "And last but not least, in order to inject, give the injector core a Redstone signal, and it will inject. This will make the injector place a Geode into the earth, slowly draining nearby blocks to form a gem. This geode will take into account the blocks nearby and form a gem."
+      "text": "And last but not least, in order to inject, put a button or hand pedestal on the back of the Injector Core block, and it will inject after you right click the button or hand pedestal. This will make the injector place a Geode (gem seed) into the earth, slowly draining nearby blocks to form a gem."
     },
     {
       "type": "patchouli:image",

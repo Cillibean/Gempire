@@ -10,7 +10,7 @@
       "name": "A Bixbite",
       "rotate": "true",
       "offset": 0.4,
-      "text": "A rare combat gem that can uncraft certain items, giving back their components (NYI)."
+      "text": "A rare utility gem that can uncraft certain items, giving back their components (NYI). She also gives off a haste effect."
     },
     {
       "type": "patchouli:text",

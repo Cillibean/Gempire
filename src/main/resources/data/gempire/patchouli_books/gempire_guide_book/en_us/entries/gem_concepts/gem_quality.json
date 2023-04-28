@@ -1,0 +1,24 @@
+{
+  "name": "Gem Quality",
+  "icon": "gempire:tourmaline_gem_6",
+  "advancement": "gempire:root",
+  "category": "gempire:gem_concepts",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "There are three qualities of gems that can show up in your kindergartening efforts. Perfect, or prime gems, standard gems, and off-color or defective gems."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Perfect gems emerge with greater stats and more ability slots, they are more powerful and are the most desired version of a gem. In the inventory, a perfect gemstone will have an animated sparkle.$(br2)They have a higher chance of emerging when there are plentiful amounts of cruxes around for any type of gem variety you're trying to grow."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Standard gems are just your everyday average gems, with their usual abilities and stats. Self-explanatory down to the letter."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Off-color gems emerge with lesser stats and fewer ability slots, they are considered to be garbage or undesirable. The model of an off-color gem will be skewed and misshapen.$(br2)Off-color gems have a higher chance of emerging when there aren't enough cruxes around for any type of gem variety you're trying to grow."
+    }
+  ]
+}

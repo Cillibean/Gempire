@@ -10,7 +10,7 @@
       "name": "A Lapis Lazuli",
       "rotate": "true",
       "offset": 0.1,
-      "text": "A transport gem (NYI), also uses water as a weapon."
+      "text": "A transport gem (NYI) that also uses water as a weapon."
     },
     {
       "type": "patchouli:text",

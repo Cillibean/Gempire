@@ -3,14 +3,10 @@ package com.gempire.init;
 import com.gempire.Gempire;
 import com.gempire.items.*;
 import com.gempire.util.ModItemGroup;
-import net.minecraft.world.item.BucketItem;
+import net.minecraft.world.item.*;
 import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item;
 
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Gempire.MODID);
@@ -165,8 +161,6 @@ public class ModItems {
                     new Item.Properties().tab(ModItemGroup.BLOCKS)
             )
     );
-
-
 
     public static final RegistryObject<Item> DRAINED_BLUE_SOIL = ITEMS.register("drained_blue_soil", () ->
             new BlockItem(
@@ -452,6 +446,9 @@ public class ModItems {
 
     public static final RegistryObject<Item> GEM_WHISTLE = ITEMS.register("gem_whistle", () ->
             new ItemWhistle(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(1)));
+    public static final RegistryObject<Item> CHROMA_CATALYST = ITEMS.register("chroma_catalyst", () ->
+            new ItemNameBlockItem(ModBlocks.CHROMA_CLUSTER_CROP.get(),
+                    new Item.Properties().tab(ModItemGroup.ITEMS)));
 
     public static final RegistryObject<Item> WHITE_DESTABILIZER = ITEMS.register("white_destabilizer", () ->
             new ItemDestabilizer(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(1).durability(25)));

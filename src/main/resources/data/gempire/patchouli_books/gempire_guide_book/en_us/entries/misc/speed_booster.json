@@ -1,0 +1,19 @@
+{
+  "name": "Speed Booster",
+  "icon": "gempire:gilded_lapis",
+  "advancement": "gempire:root",
+  "category": "gempire:misc",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "link_recipe ": true,
+      "item": "gempire:gilded_lapis",
+      "text": "Speed Boosters are used in your Injector to speed up how fast a gem emerges after being injected."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "gempire:gilded_lapis",
+      "text": "The recipe for a Speed Booster."
+    }
+  ]
+}

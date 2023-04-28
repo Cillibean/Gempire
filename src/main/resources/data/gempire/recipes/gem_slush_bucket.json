@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "pattern": [
     "GPG",
-    "CDC",
+    "#D#",
     "GBG"
   ],
   "key": {
@@ -12,8 +12,8 @@
     "P": {
       "item": "minecraft:pumpkin"
     },
-    "C": {
-      "item": "gempire:chroma"
+    "#": {
+      "tag": "gempire:chroma"
     },
     "B": {
       "item": "minecraft:bucket"

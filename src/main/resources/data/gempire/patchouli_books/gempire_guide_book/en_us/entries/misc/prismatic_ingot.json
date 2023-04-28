@@ -1,5 +1,5 @@
 {
-  "name": "Prismatic Ingots",
+  "name": "Prismatic Ingot",
   "icon": "gempire:prismatic_ingot",
   "advancement": "gempire:root",
   "category": "gempire:misc",
@@ -8,11 +8,12 @@
       "type": "patchouli:spotlight",
       "link_recipe ": true,
       "item": "gempire:prismatic_ingot",
-      "text": "Prismatic Ingots are obtained in gem structures, or by giving a Bismuth a prismatic scrap."
+      "text": "Prismatic Ingots are obtained in gem themed structures, or by giving a Bismuth a Prismatic Scrap."
     },
     {
       "type": "patchouli:crafting",
-      "recipe": "gempire:gem_scraps"
+      "recipe": "gempire:gem_scraps",
+      "text": "The recipe for Prismatic Scraps."
     }
   ]
 }
