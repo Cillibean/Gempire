@@ -443,6 +443,10 @@ public class ModItems {
             new Item(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(64)));
     public static final RegistryObject<Item> PRISMATIC_INGOT = ITEMS.register("prismatic_ingot", () ->
             new Item(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(64)));
+    public static final RegistryObject<Item> TUNGSTEN_INGOT = ITEMS.register("tungsten_ingot", () ->
+            new Item(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(64)));
+    public static final RegistryObject<Item> RAW_TUNGSTEN = ITEMS.register("raw_tungsten", () ->
+            new Item(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(64)));
 
     public static final RegistryObject<Item> GEM_WHISTLE = ITEMS.register("gem_whistle", () ->
             new ItemWhistle(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(1)));

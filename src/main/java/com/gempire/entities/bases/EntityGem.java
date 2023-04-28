@@ -1,10 +1,7 @@
 package com.gempire.entities.bases;
 
 import com.gempire.container.GemUIContainer;
-import com.gempire.entities.abilities.AbilityAbundance;
-import com.gempire.entities.abilities.AbilityRecall;
-import com.gempire.entities.abilities.AbilityVehicle;
-import com.gempire.entities.abilities.AbilityZilch;
+import com.gempire.entities.abilities.*;
 import com.gempire.entities.abilities.base.Ability;
 import com.gempire.entities.abilities.interfaces.*;
 import com.gempire.entities.gems.*;
@@ -2034,6 +2031,16 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         boolean flag = false;
         for(Ability ability : this.getAbilityPowers()){
             if(ability instanceof AbilityRecall){
+                return flag = true;
+            }
+        }
+        return flag;
+    }
+
+    public boolean canLure(){
+        boolean flag = false;
+        for(Ability ability : this.getAbilityPowers()){
+            if(ability instanceof AbilityLure){
                 return flag = true;
             }
         }

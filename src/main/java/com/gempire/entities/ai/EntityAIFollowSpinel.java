@@ -1,5 +1,6 @@
 package com.gempire.entities.ai;
 
+import com.gempire.entities.bases.EntityGem;
 import com.gempire.entities.gems.EntitySpinel;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
@@ -22,11 +23,13 @@ public class EntityAIFollowSpinel extends Goal {
         List<LivingEntity> list = this.follower.level.<LivingEntity>getEntitiesOfClass(LivingEntity.class, this.follower.getBoundingBox().inflate(24.0D, 10.0D, 24.0D));
         double maxDistance = Double.MAX_VALUE;
         for (LivingEntity entity : list) {
-            if (entity instanceof EntitySpinel) {
-                double newDistance = entity.distanceToSqr(this.follower);
-                if (newDistance <= maxDistance) {
-                    maxDistance = newDistance;
-                    this.toFollow = entity;
+            if (entity instanceof EntityGem) {
+                if (((EntityGem) entity).canLure()) {
+                    double newDistance = entity.distanceToSqr(this.follower);
+                    if (newDistance <= maxDistance) {
+                        maxDistance = newDistance;
+                        this.toFollow = entity;
+                    }
                 }
             }
         }
