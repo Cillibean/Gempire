@@ -76,7 +76,8 @@ public class EntityCrawler extends PathfinderMob implements IAnimatable {
 
     private PlayState hurtPredicate(AnimationEvent event) {
         if (this.hurtMarked) {
-
+            //event.getController().markNeedsReload();
+            //event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.crawler.hurt", false));
         }
         return PlayState.CONTINUE;
     }
@@ -85,6 +86,7 @@ public class EntityCrawler extends PathfinderMob implements IAnimatable {
     public void registerControllers(AnimationData data) {
         data.addAnimationController(new AnimationController(this, "controller", 0, this::predicate));
         data.addAnimationController(new AnimationController(this, "attackController", 0, this::attackPredicate));
+        data.addAnimationController(new AnimationController(this, "hurtController", 0, this::hurtPredicate));
     }
 
     @Override

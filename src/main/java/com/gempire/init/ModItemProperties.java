@@ -215,9 +215,9 @@ public class ModItemProperties {
                 if (((ItemGem) stack.getItem()).getSludged(stack)) {
                     return 0.1F;
                 } else if (stack.getOrCreateTag().getBoolean("cracked")) {
-                    return 1.0F;
-                } else if (stack.getOrCreateTag().getBoolean("prime")) {
                     return 0.2F;
+                } else if (stack.getOrCreateTag().getBoolean("prime")) {
+                    return 1.0F;
                 }
                 else {
                     return 0.0F;

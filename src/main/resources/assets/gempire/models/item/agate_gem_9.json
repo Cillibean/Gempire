@@ -8,7 +8,7 @@
       "predicate": {
         "minecraft:gempredicate": 1
       },
-      "model": "gempire:item/agate_gem_9_cracked"
+      "model": "gempire:item/agate_gem_9_perfect"
     },
     {
       "predicate": {
@@ -20,7 +20,7 @@
       "predicate": {
         "minecraft:gempredicate": 0.2
       },
-      "model": "gempire:item/agate_gem_9_perfect"
+      "model": "gempire:item/agate_gem_9_cracked"
     }
   ]
 }

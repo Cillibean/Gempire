@@ -654,5 +654,5 @@ public class ModBlocks {
                     BlockBehaviour.Properties.of(Material.STONE).strength(1.5f).requiresCorrectToolForDrops()));
 
     public static final RegistryObject<Block> CHROMA_CLUSTER_CROP = BLOCKS.register("chroma_cluster_crop", () ->
-            new ChromaClusterCropBlock(BlockBehaviour.Properties.copy(Blocks.WHEAT)));
+            new ChromaClusterCropBlock(BlockBehaviour.Properties.of(Material.PLANT).randomTicks().strength(3.0f, 6.0f).sound(SoundType.GLASS).noOcclusion()));
 }
