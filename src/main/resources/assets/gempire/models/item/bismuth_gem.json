@@ -8,7 +8,7 @@
       "predicate": {
         "minecraft:gempredicate": 1
       },
-      "model": "gempire:item/bismuth_gem_cracked"
+      "model": "gempire:item/bismuth_gem_perfect"
     },
     {
       "predicate": {
@@ -20,7 +20,7 @@
       "predicate": {
         "minecraft:gempredicate": 0.2
       },
-      "model": "gempire:item/bismuth_gem_perfect"
+      "model": "gempire:item/bismuth_gem_cracked"
     }
   ]
 }

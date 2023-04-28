@@ -44,6 +44,12 @@
     "gempire:prismatic_block",
     "gempire:drained_ice",
     "gempire:drained_log",
-    "gempire:drained_log_cracked"
+    "gempire:drained_log_cracked",
+    "gempire:tank_block",
+    "gempire:power_crystal_block",
+    "gempire:power_crystal_block_tier_2",
+    "gempire:drill_block",
+    "gempire:pedistal",
+    "gempire:shell_block"
   ]
 }

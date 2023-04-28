@@ -1,10 +1,7 @@
 package com.gempire.entities.bases;
 
 import com.gempire.container.GemUIContainer;
-import com.gempire.entities.abilities.AbilityAbundance;
-import com.gempire.entities.abilities.AbilityRecall;
-import com.gempire.entities.abilities.AbilityVehicle;
-import com.gempire.entities.abilities.AbilityZilch;
+import com.gempire.entities.abilities.*;
 import com.gempire.entities.abilities.base.Ability;
 import com.gempire.entities.abilities.interfaces.*;
 import com.gempire.entities.gems.*;
@@ -439,6 +436,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         if (compound.contains("followID")) this.FOLLOW_ID = compound.getUUID("followID");
         if (compound.contains("assignedID")) this.ASSIGNED_ID = compound.getUUID("assignedID");
         if (compound.contains("masterID")) this.MASTER_OWNER = compound.getUUID("masterID");
+        if (compound.contains("assignedID")) this.assignedGem = (EntityGem) ((ServerLevel)this.level).getEntity(compound.getUUID("assignedID"));
         this.setMovementType(compound.getByte("movementType"));
         this.setSkinColorVariant(compound.getInt("skinColorVariant"));
         this.setSkinColor(compound.getInt("skinColor"));
@@ -1009,7 +1007,6 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                 ItemGem.saveData(stack, this);
                 this.spawnAtLocation(stack).setExtendedLifetime();
             }
-            //TODO: fix cracking
             this.gameEvent(GameEvent.ENTITY_PLACE);
             this.kill();
         }
@@ -2034,6 +2031,16 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         boolean flag = false;
         for(Ability ability : this.getAbilityPowers()){
             if(ability instanceof AbilityRecall){
+                return flag = true;
+            }
+        }
+        return flag;
+    }
+
+    public boolean canLure(){
+        boolean flag = false;
+        for(Ability ability : this.getAbilityPowers()){
+            if(ability instanceof AbilityLure){
                 return flag = true;
             }
         }
