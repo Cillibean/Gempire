@@ -159,7 +159,7 @@ public class Gempire
     private void enqueueIMC(final InterModEnqueueEvent event)
     {
         // some example code to dispatch IMC to another mod
-        InterModComms.sendTo("gempire", "helloworld", () -> { LOGGER.info("Hello world from the MDK"); return "Hello world";});
+        InterModComms.sendTo("gempire", "helloworld", () -> { LOGGER.info("Hello world from Gempire"); return "Hello world";});
     }
 
     private void processIMC(final InterModProcessEvent event)
@@ -173,6 +173,6 @@ public class Gempire
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
         server = event.getServer();
-        LOGGER.info("HELLO from server starting");
+        LOGGER.info("Hello from Gempire server starting");
     }
 }

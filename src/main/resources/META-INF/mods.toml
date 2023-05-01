@@ -54,3 +54,9 @@ description='''In Gempire, you can grow your own gem entities that can fulfill t
     versionRange="[1.19,)"
     ordering="NONE"
     side="BOTH"
+[[dependencies.gempire]]
+    modId="patchouli"
+    mandatory=true
+    versionRange="[1.19,)"
+    ordering="NONE"
+    side="CLIENT"

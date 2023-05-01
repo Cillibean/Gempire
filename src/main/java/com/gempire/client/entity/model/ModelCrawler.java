@@ -13,11 +13,11 @@ public class ModelCrawler extends AnimatedGeoModel<EntityCrawler> {
 
     @Override
     public ResourceLocation getTextureResource(EntityCrawler object) {
-        return null;
+        return new ResourceLocation(Gempire.MODID, "textures/entity/clods/crawler.png");
     }
 
     @Override
     public ResourceLocation getAnimationResource(EntityCrawler animatable) {
-        return null;
+        return new ResourceLocation(Gempire.MODID, "animations/entity/crawler.animation.json");
     }
 }
