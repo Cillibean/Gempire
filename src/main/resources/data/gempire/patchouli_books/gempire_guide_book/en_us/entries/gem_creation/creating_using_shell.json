@@ -8,7 +8,7 @@
       "type": "patchouli:spotlight",
       "link_recipe ": true,
       "item": "gempire:nacre_gem",
-      "text": "In order to make Shell, you'll need a Nacre. Shift click on this icon to see how to make one."
+      "text": "In order to make a Shell, you'll need a Nacre. Shift click Nacre's gem icon to learn more about her."
     },
     {
       "type": "patchouli:multiblock",
@@ -32,7 +32,7 @@
     {
       "type": "patchouli:text",
       "title": "Creating a Pearl",
-      "text": "In order to use Shell, you will need to place the Shell over a block of White Gem essence, then insert 64 Gravel at the top, 64 Sand on the left, 64 Clay balls on the right, and a Chroma of your choice at the bottom. After time passes it'll slowly drain these materials, and once it's finished it will create a Pearl for you to collect."
+      "text": "In order to use Shell, you will need to place the Shell over a block of White Gem essence, then insert 64 Gravel at the top, 64 Sand on the left, 64 Clay balls on the right, and a Chroma of your choice at the bottom. As time passes it'll slowly drain these materials, and once it's finished it will create a Pearl for you to collect."
     }
   ]
 }

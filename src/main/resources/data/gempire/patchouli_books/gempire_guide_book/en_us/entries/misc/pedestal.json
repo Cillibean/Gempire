@@ -6,9 +6,8 @@
   "pages": [
     {
       "type": "patchouli:spotlight",
-      "link_recipe ": true,
       "item": "gempire:pedistal",
-      "text": "Hand Pedestals are obtained from gems with the Designer ability by giving them stone. These blocks can be interacted with and placed similarly to buttons, and can be set to private or public by shift clicking."
+      "text": "Hand Pedestals are obtained from gems with the Designer ability by giving them stone. These blocks can be interacted with and placed similarly to buttons, and can be set to private or public by shift clicking them."
     }
   ]
 }

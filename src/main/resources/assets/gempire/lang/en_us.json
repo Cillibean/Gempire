@@ -42,13 +42,14 @@
   "block.gempire.power_crystal_block": "Power Crystal",
   "block.gempire.power_crystal_block_tier_2": "Advanced Power Crystal",
   "block.gempire.pedistal": "Hand Pedestal",
-  "block.gempire.pedistal.setprivate": "This Pedestal is now Private",
-  "block.gempire.pedistal.setpublic": "This Pedestal is now Public",
+  "block.gempire.pedistal.setprivate": "This Pedestal is now private.",
+  "block.gempire.pedistal.setpublic": "This Pedestal is now public.",
   "block.gempire.pedistal.notowner": "This Pedestal is Private and you are not the owner.",
 
   "block.gempire.ice_spike": "Ice Spike",
 
   "block.gempire.prismatic_block": "Prismatic Block",
+  "block.gempire.chroma_cluster_crop": "Chroma Cluster",
 
   "block.gempire.white_chroma_crystal": "White Chroma Crystal",
   "block.gempire.orange_chroma_crystal": "Orange Chroma Crystal",
@@ -68,6 +69,7 @@
   "block.gempire.black_chroma_crystal": "Black Chroma Crystal",
 
   "item.gempire.gem_slush_bucket": "Bucket of Gem Slush",
+  "item.gempire.chroma_catalyst": "Chroma Catalyst",
 
   "item.gempire.pink_essence_bucket": "Pink Essence",
   "item.gempire.blue_essence_bucket": "Blue Essence",
@@ -110,8 +112,6 @@
   "item.gempire.black_shards": "Black Shards",
   "item.gempire.special_shards": "Prismatic Shards",
 
-  "item.gempire.gilded_lapis": "Gilded Lapis Lazuli",
-  "item.gempire.spodumene_piece": "Amphibian Gel",
   "item.gempire.ice_shard": "Ice Shard",
   "item.gempire.acid_spit": "Acid Spit",
 
@@ -131,7 +131,10 @@
   "item.gempire.rebel_stick": "Rebel Stick",
   "item.gempire.share_contract": "Share Contract",
   "item.gempire.transfer_contract": "Transfer Contract",
+  "item.gempire.spodumene_piece": "Amphibian Gel",
   "item.gempire.gem_whistle": "Gem Whistle",
+  "item.gempire.prime_boost": "Prime Booster",
+  "item.gempire.gilded_lapis": "Speed Booster",
 
   "item.gempire.essence_bottle": "Essence Bottle",
   "item.gempire.pink_essence": "Pink Essence",
@@ -507,7 +510,7 @@
   "ability.gempire.berserker": "Berserker",
   "ability.gempire.beastmaster": "Beastmaster",
   "ability.gempire.disarming": "Disarming",
-  "ability.gempire.lootmaster": "Lootmaster",
+  "ability.gempire.lootmaster": "Lootmaster (NYI)",
   "ability.gempire.guard": "Guard",
   "ability.gempire.essence": "Essence Brewing",
   "ability.gempire.refinery": "Refinery",

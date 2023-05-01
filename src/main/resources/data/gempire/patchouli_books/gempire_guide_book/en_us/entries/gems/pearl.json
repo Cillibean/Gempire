@@ -11,10 +11,6 @@
       "rotate": "true",
       "offset": 0.1,
       "text": "A servant gem that can hold up to 108 items in her inventory. She can also be customized right from her GUI."
-    },
-    {
-      "type": "patchouli:text",
-      "text": "$(l)Definite Abilities$()$(li)Storage"
     }
   ]
 }

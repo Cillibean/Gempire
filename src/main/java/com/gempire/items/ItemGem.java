@@ -12,6 +12,7 @@ import com.gempire.init.ModItems;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.entity.EntityType;
@@ -140,23 +141,25 @@ public class ItemGem extends Item {
                         }
                     } else {
                         if (!gemToAssign.isDeadOrDying()) {
-                            if (isAssigned) {
-                                playerIn.sendSystemMessage(Component.translatable("This Gem is no longer assigned to " + assigned_gem.getName().getString() + " " + assigned_gem.getFacetAndCut()));
-                                livingEntityHit = false;
-                                assigned_gem = null;
-                                if (this.checkTags(playerIn.getItemInHand(handIn))) {
-                                    playerIn.getItemInHand(handIn).getTag().putBoolean("assigned", true);
+                            if (stack.getTag().getString("abilities") != "") {
+                                if (this.checkTags(stack) && stack.getTag().getBoolean("assigned")) {
+                                    playerIn.sendSystemMessage(Component.translatable("This Gem is no longer assigned to " + assigned_gem.getName().getString() + " " + assigned_gem.getFacetAndCut()));
+                                    livingEntityHit = false;
+                                    stack.getTag().putUUID("assignedID", UUID.randomUUID());
+                                    stack.getTag().putBoolean("assigned", true);
+                                } else {
+                                    playerIn.sendSystemMessage(Component.translatable("This Gem was assigned to " + gemToAssign.getName().getString() + " " + gemToAssign.getFacetAndCut()));
+                                    livingEntityHit = false;
+                                    System.out.println("ToAssign to assigned");
+                                    assigned_gem = gemToAssign;
+                                    System.out.println(assigned_gem);
+                                    System.out.println(gemToAssign);
+                                    if (this.checkTags(playerIn.getItemInHand(handIn))) {
+                                        playerIn.getItemInHand(handIn).getTag().putBoolean("assigned", false);
+                                    }
                                 }
                             } else {
-                                playerIn.sendSystemMessage(Component.translatable("This Gem was assigned to " + gemToAssign.getName().getString() + " " + gemToAssign.getFacetAndCut()));
                                 livingEntityHit = false;
-                                System.out.println("ToAssign to assigned");
-                                assigned_gem = gemToAssign;
-                                System.out.println(assigned_gem);
-                                System.out.println(gemToAssign);
-                                if (this.checkTags(playerIn.getItemInHand(handIn))) {
-                                    playerIn.getItemInHand(handIn).getTag().putBoolean("assigned", false);
-                                }
                             }
                         }
                     }
@@ -406,47 +409,50 @@ public class ItemGem extends Item {
     }
 
     public void appendHoverText(ItemStack itemStack, @Nullable Level level, List<Component> p_40553_, TooltipFlag p_40554_) {
-        if (checkTags(itemStack)) {
-            if (itemStack.getTag().getString("abilities") != "") {
-                if (Screen.hasShiftDown()) {
-                    if (itemStack.getTag().getString("name") != " ") {
-                        p_40553_.add(Component.translatable(itemStack.getTag().getString("name")).withStyle(ChatFormatting.GRAY));
+        assert level != null;
+        if (level.isClientSide) {
+            if (checkTags(itemStack)) {
+                if (itemStack.getTag().getString("abilities") != "") {
+                    if (Screen.hasShiftDown()) {
+                        if (itemStack.getTag().getString("name") != " ") {
+                            p_40553_.add(Component.translatable(itemStack.getTag().getString("name")).withStyle(ChatFormatting.GRAY));
+                        }
+                        if (itemStack.getTag().getString("facet") != " ") {
+                            p_40553_.add(Component.translatable(itemStack.getTag().getString("facet")).withStyle(ChatFormatting.GRAY));
+                        }
+                        if (itemStack.getTag().getString("cut") != " ") {
+                            p_40553_.add(Component.translatable(itemStack.getTag().getString("cut")).withStyle(ChatFormatting.GRAY));
+                        }
+                        if (itemStack.getTag().getBoolean("rebel")) {
+                            p_40553_.add(Component.translatable("Rebel").withStyle(ChatFormatting.RED));
+                        }
+                        if (itemStack.getTag().getBoolean("cracked")) {
+                            p_40553_.add(Component.translatable("Cracked").withStyle(ChatFormatting.RED));
+                        }
+                        if (itemStack.getTag().getInt("sludgeAmount") >= 5) {
+                            p_40553_.add(Component.translatable("Sludged").withStyle(ChatFormatting.RED));
+                        }
+                        if (!itemStack.getTag().getBoolean("assigned")) {
+                            p_40553_.add(Component.translatable("Assigned to " + assigned_gem.getName().getString() + " " + assigned_gem.getFacetAndCut()));
+                        }
+                        if (itemStack.getTag().getBoolean("prime")) {
+                            p_40553_.add(Component.translatable("Perfect").withStyle(ChatFormatting.LIGHT_PURPLE));
+                        }
+                        if (itemStack.getTag().getBoolean("defective")) {
+                            p_40553_.add(Component.translatable("Off Colour").withStyle(ChatFormatting.LIGHT_PURPLE));
+                        }
+                    } else {
+                        if (itemStack.getTag().getString("name") != " ") {
+                            p_40553_.add(Component.translatable(itemStack.getTag().getString("name")).withStyle(ChatFormatting.GRAY));
+                        }
+                        if (itemStack.getTag().getBoolean("cracked")) {
+                            p_40553_.add(Component.translatable("Cracked").withStyle(ChatFormatting.RED));
+                        }
+                        if (itemStack.getTag().getInt("sludgeAmount") >= 5) {
+                            p_40553_.add(Component.translatable("Sludged").withStyle(ChatFormatting.RED));
+                        }
+                        p_40553_.add(Component.translatable("Hold Shift for more info").withStyle(ChatFormatting.GOLD));
                     }
-                    if (itemStack.getTag().getString("facet") != " ") {
-                        p_40553_.add(Component.translatable(itemStack.getTag().getString("facet")).withStyle(ChatFormatting.GRAY));
-                    }
-                    if (itemStack.getTag().getString("cut") != " ") {
-                        p_40553_.add(Component.translatable(itemStack.getTag().getString("cut")).withStyle(ChatFormatting.GRAY));
-                    }
-                    if (itemStack.getTag().getBoolean("rebel")) {
-                        p_40553_.add(Component.translatable("Rebel").withStyle(ChatFormatting.RED));
-                    }
-                    if (itemStack.getTag().getBoolean("cracked")) {
-                        p_40553_.add(Component.translatable("Cracked").withStyle(ChatFormatting.RED));
-                    }
-                    if (itemStack.getTag().getInt("sludgeAmount") >= 5) {
-                        p_40553_.add(Component.translatable("Sludged").withStyle(ChatFormatting.RED));
-                    }
-                    if (itemStack.getTag().getBoolean("assigned")) {
-                        p_40553_.add(Component.translatable("Assigned to " + assigned_gem.getName().getString() + " " + assigned_gem.getFacetAndCut()));
-                    }
-                    if (itemStack.getTag().getBoolean("prime")) {
-                        p_40553_.add(Component.translatable("Perfect").withStyle(ChatFormatting.LIGHT_PURPLE));
-                    }
-                    if (itemStack.getTag().getBoolean("defective")) {
-                        p_40553_.add(Component.translatable("Off Colour").withStyle(ChatFormatting.LIGHT_PURPLE));
-                    }
-                } else {
-                    if (itemStack.getTag().getString("name") != " ") {
-                        p_40553_.add(Component.translatable(itemStack.getTag().getString("name")).withStyle(ChatFormatting.GRAY));
-                    }
-                    if (itemStack.getTag().getBoolean("cracked")) {
-                        p_40553_.add(Component.translatable("Cracked").withStyle(ChatFormatting.RED));
-                    }
-                    if (itemStack.getTag().getInt("sludgeAmount") >= 5) {
-                        p_40553_.add(Component.translatable("Sludged").withStyle(ChatFormatting.RED));
-                    }
-                    p_40553_.add(Component.translatable("Hold Shift for more info").withStyle(ChatFormatting.GOLD));
                 }
             }
         }

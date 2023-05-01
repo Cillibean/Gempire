@@ -10,7 +10,7 @@
       "name": "A Larimar",
       "rotate": "true",
       "offset": 0.2,
-      "text": "A gem that can create ice sculptures (NYI)."
+      "text": "A gem that can create ice sculptures (NYI). Also uses cryokinesis."
     },
     {
       "type": "patchouli:text",

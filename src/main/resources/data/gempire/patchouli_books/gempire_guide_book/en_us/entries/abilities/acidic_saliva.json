@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Acidic Saliva is an ability that gives gems the power to spit globules of acid at their foes that inflict poison."
+      "text": "Acidic Saliva is an ability that gives gems the power to spit globules of acid at their foes that poison them."
     },
     {
       "type": "patchouli:text",

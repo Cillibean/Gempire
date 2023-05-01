@@ -8,7 +8,7 @@
       "type": "patchouli:spotlight",
       "link_recipe ": true,
       "item": "gempire:pebble_gem",
-      "text": "In order to make a Drill, you will need a pebble. Please shift click the gem icon."
+      "text": "In order to make a Drill, you will need a Pebble. Shift click Pebble's gem icon to learn more about her."
     },
     {
       "type": "patchouli:multiblock",

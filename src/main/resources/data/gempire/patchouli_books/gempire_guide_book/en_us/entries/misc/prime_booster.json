@@ -1,0 +1,19 @@
+{
+  "name": "Prime Booster",
+  "icon": "gempire:prime_boost",
+  "advancement": "gempire:root",
+  "category": "gempire:misc",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "link_recipe ": true,
+      "item": "gempire:prime_boost",
+      "text": "Prime Boosters are used in your Injector to improve the quality of the gem that emerges after being injected."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "gempire:prime_boost",
+      "text": "The recipe for a Prime Booster."
+    }
+  ]
+}

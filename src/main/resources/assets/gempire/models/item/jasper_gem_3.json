@@ -9,6 +9,18 @@
         "minecraft:gempredicate": 1
       },
       "model": "gempire:item/jasper_gem_3_cracked"
+    },
+    {
+      "predicate": {
+        "minecraft:gempredicate": 0.1
+      },
+      "model": "gempire:item/jasper_gem_3_sludge"
+    },
+    {
+      "predicate": {
+        "minecraft:gempredicate": 0.2
+      },
+      "model": "gempire:item/jasper_gem_3_perfect"
     }
   ]
 }

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "  S",
+    " P ",
+    "P  "
+  ],
+  "key": {
+    "P": {
+      "item": "gempire:prismatic_ingot"
+    },
+    "S": {
+      "tag": "gempire:shards"
+    }
+  },
+  "result": {
+    "item": "gempire:gem_whistle",
+    "count": 1
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " E ",
+    "P#P",
+    " E "
+  ],
+  "key": {
+    "#": {
+      "item": "gempire:gem_slush_bucket"
+    },
+    "E": {
+      "tag": "gempire:essence"
+    },
+    "P": {
+      "item": "gempire:special_shards"
+    }
+  },
+  "result": {
+    "item": "gempire:chroma_catalyst"
+  }
+}

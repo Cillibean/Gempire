@@ -1,0 +1,16 @@
+{
+  "name": "Shattered Gems",
+  "icon": "gempire:jasper_gem_6",
+  "advancement": "gempire:root",
+  "category": "gempire:gem_concepts",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "When a gem is shattered, her essence and everything that makes her alive is lost. The shards are empty, devoid of data and purpose."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A gem can become shattered from an explosion, too much damage, or can even be destroyed on purpose. Shards will have many uses in the future."
+    }
+  ]
+}

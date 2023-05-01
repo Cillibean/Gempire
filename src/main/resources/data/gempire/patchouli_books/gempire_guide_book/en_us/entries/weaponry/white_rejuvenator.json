@@ -8,7 +8,7 @@
       "type": "patchouli:spotlight",
       "link_recipe ": true,
       "item": "gempire:white_rejuvenator",
-      "text": "White rejuvenators are used to completely randomize a gems color palette. In order for it to function, you need to make sure the weapon is fully readied."
+      "text": "White rejuvenators are used to completely randomize a gem's color palette. In order for it to function, you need to make sure the weapon is fully readied."
     },
     {
       "type": "patchouli:crafting",

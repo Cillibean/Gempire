@@ -33,25 +33,28 @@ public class AbilityJester extends Ability implements IIdleAbility {
     @Override
     public void execute() {
         List<EntityGem> list = this.holder.level.getEntitiesOfClass(EntityGem.class, this.holder.getBoundingBox().inflate(14.0D, 8.0D, 14.0D));
-        for (EntityGem entityGem : list) {
-            if (entityGem != holder) {
-                if (holder.abilityTicks == 0) {
-                    holder.getNavigation().moveTo(entityGem, 1);
-                    holder.lookAt(entityGem, 90F, 90F);
-                    if (holder.distanceToSqr(entityGem) < Math.pow(2, 1)) {
-                        if (holder.getRebelled()) {
-                            entityGem.rebelPoints += 1F;
-                            holder.playSound(SoundEvents.GOAT_HORN_SOUND_VARIANTS.get(6));
-                            holder.abilityTicks = 20 * 60;
-                        } else if (entityGem.getOwned()){
-                            if (entityGem.rebelPoints - 0.5f > 0) {
-                                entityGem.rebelPoints -= 0.5F;
-                                holder.playSound(SoundEvents.GOAT_HORN_SOUND_VARIANTS.get(1));
+        if (holder.getMovementType() == 1) {
+            for (EntityGem entityGem : list) {
+                if (entityGem != holder) {
+                    if (holder.abilityTicks == 0) {
+                        holder.getNavigation().moveTo(entityGem, 1);
+                        holder.lookAt(entityGem, 90F, 90F);
+                        if (holder.distanceToSqr(entityGem) < Math.pow(2, 1)) {
+                            if (holder.getRebelled()) {
+                                entityGem.rebelPoints += 1F;
+                                holder.playSound(SoundEvents.GOAT_HORN_SOUND_VARIANTS.get(6));
                                 holder.abilityTicks = 20 * 60;
+                            } else if (entityGem.getOwned()) {
+                                if (entityGem.rebelPoints - 0.5f > 0) {
+                                    entityGem.rebelPoints -= 0.5F;
+                                    holder.playSound(SoundEvents.GOAT_HORN_SOUND_VARIANTS.get(1));
+                                    holder.abilityTicks = 20 * 60;
+                                }
                             }
                         }
                     }
                 }
+
             }
         }
     }

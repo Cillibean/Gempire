@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Beastmaster is an ability that lets gems tame wolves every 30 seconds, if the gem is a rebel, they will set the wolf aggressive to a nearby player."
+      "text": "Beastmaster is an ability that lets gems tame wolves every 30 seconds, if the gem is a rebel, they will set the wolf aggressive to a nearby player. A beastmaster can only have up to five wolves at her side at one time."
     },
     {
       "type": "patchouli:text",

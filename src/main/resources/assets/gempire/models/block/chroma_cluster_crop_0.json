@@ -1,0 +1,8 @@
+{
+  "parent": "block/cross",
+  "render_type": "cutout",
+  "textures": {
+    "cross": "gempire:blocks/chroma_cluster_state_0",
+    "particle": "gempire:blocks/chroma_cluster_state_0"
+  }
+}

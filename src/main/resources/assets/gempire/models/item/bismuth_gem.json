@@ -8,6 +8,18 @@
       "predicate": {
         "minecraft:gempredicate": 1
       },
+      "model": "gempire:item/bismuth_gem_perfect"
+    },
+    {
+      "predicate": {
+        "minecraft:gempredicate": 0.1
+      },
+      "model": "gempire:item/bismuth_gem_sludge"
+    },
+    {
+      "predicate": {
+        "minecraft:gempredicate": 0.2
+      },
       "model": "gempire:item/bismuth_gem_cracked"
     }
   ]
