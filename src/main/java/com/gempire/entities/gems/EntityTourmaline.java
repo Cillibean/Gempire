@@ -233,11 +233,6 @@ public class EntityTourmaline extends EntityVaryingGem {
         return this.getRebelOutfitVariant();
     }
 
-    @Override
-    public int generateVisorVariant() {
-        return this.random.nextInt(2);
-    }
-
     public boolean isFocused() {
         return true;
     }
@@ -249,5 +244,10 @@ public class EntityTourmaline extends EntityVaryingGem {
 
     public int generateHardness() {
         return 7;
+    }
+
+    @Override
+    public int generateVisorVariant() {
+        return this.random.nextInt(2);
     }
 }

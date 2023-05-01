@@ -169,6 +169,8 @@ public class EntityRuby extends EntityGem {
 
     @Override
     public int generateVisorVariant() {
+        if (getHairVariant() == 2)
+            return 0;
         return this.random.nextInt(2);
     }
 

@@ -160,10 +160,6 @@ public class EntityAgate extends AbstractQuartz {
         return this.getRebelOutfitVariant();
     }
 
-    @Override
-    public int generateVisorVariant() {
-        return this.random.nextInt(2);
-    }
 
     @Override
     public boolean hasSkinColorVariant() {
@@ -205,5 +201,10 @@ public class EntityAgate extends AbstractQuartz {
     @Override
     public int baseFocus() {
         return 1;
+    }
+
+    @Override
+    public int generateVisorVariant() {
+        return this.random.nextInt(2);
     }
 }

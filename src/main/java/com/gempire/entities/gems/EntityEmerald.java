@@ -153,10 +153,6 @@ public class EntityEmerald extends EntityGem {
         return this.getRebelOutfitVariant();
     }
 
-    @Override
-    public int generateVisorVariant() {
-        return this.random.nextInt(4);
-    }
 
     @Override
     public int baseFocus() {
@@ -166,5 +162,10 @@ public class EntityEmerald extends EntityGem {
 
     public int generateHardness() {
         return 8;
+    }
+
+    @Override
+    public int generateVisorVariant() {
+        return this.random.nextInt(3);
     }
 }
