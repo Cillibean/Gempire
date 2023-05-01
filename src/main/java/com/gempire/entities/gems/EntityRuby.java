@@ -143,7 +143,11 @@ public class EntityRuby extends EntityGem {
         return false;
     }
 
-    public int generateOutfitVariant(){
+    public int generateOutfitVariant() {
+        if (getGemPlacement() == 11)
+            return 11;
+        else if (getGemPlacement() == 17)
+            return 17;
         return this.random.nextInt(7);
     }
 
