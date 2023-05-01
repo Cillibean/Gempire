@@ -27,7 +27,7 @@ import software.bernie.geckolib3.util.GeckoLibUtil;
 
 public class EntityCrawler extends PathfinderMob implements IAnimatable {
 
-    private AnimationFactory factory = GeckoLibUtil.createFactory(this);
+    private AnimationFactory factory = new AnimationFactory(this);
     public EntityCrawler(EntityType<? extends PathfinderMob> p_21683_, Level p_21684_) {
         super(p_21683_, p_21684_);
     }
@@ -57,27 +57,26 @@ public class EntityCrawler extends PathfinderMob implements IAnimatable {
 
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
         if (event.isMoving()) {
-            //event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.crawler.walk", true));
-            return PlayState.CONTINUE;
-        } else {
-            //event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.crawler.idle", true));
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.crawler.walk", true));
             return PlayState.CONTINUE;
         }
+        event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.crawler.idle", true));
+        return PlayState.CONTINUE;
     }
 
     private PlayState attackPredicate(AnimationEvent event) {
         if(this.swinging && event.getController().getAnimationState().equals(AnimationState.Stopped)) {
-            //event.getController().markNeedsReload();
-            //event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.crawler.attack", false));
+            event.getController().markNeedsReload();
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.crawler.attack", false));
             this.swinging = false;
         }
         return PlayState.CONTINUE;
     }
 
-    private PlayState hurtPredicate(AnimationEvent event) {
-        if (this.hurtMarked) {
-            //event.getController().markNeedsReload();
-            //event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.crawler.hurt", false));
+    private <E extends IAnimatable> PlayState hurtPredicate(AnimationEvent<E> event) {
+        if (this.hurtMarked && event.getController().getAnimationState().equals(AnimationState.Stopped)) {
+            event.getController().markNeedsReload();
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.crawler.hurt", false));
         }
         return PlayState.CONTINUE;
     }
