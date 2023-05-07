@@ -3,7 +3,9 @@
     "icon": {
       "item": "gempire:emerald_gem"
     },
-    "title": "I've got you now!",
+    "title": {
+      "translate": "advancements.gempire.emerald.title"
+    },
     "description": "Create an Emerald",
     "frame": "task",
     "hidden": true

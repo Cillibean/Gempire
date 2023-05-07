@@ -18,8 +18,8 @@ import net.minecraft.core.BlockPos;
 import java.util.List;
 import java.util.UUID;
 
-public class CommandGempireLocateBiome /*extends CommandBase*/ {
-    /*public static final SimpleCommandExceptionType FAILED_EXCEPTION = new SimpleCommandExceptionType(Component.translatable("commands.gempire.nounderstand"));
+public class CommandGempireLocateBiome extends CommandBase {
+    public static final SimpleCommandExceptionType FAILED_EXCEPTION = new SimpleCommandExceptionType(Component.translatable("commands.gempire.nounderstand"));
 
     public CommandGempireLocateBiome(String name, int permissionLevel, boolean enabled) {
         super(name, permissionLevel, enabled);
@@ -27,7 +27,8 @@ public class CommandGempireLocateBiome /*extends CommandBase*/ {
 
     @Override
     public LiteralArgumentBuilder<CommandSourceStack> setExecution() {
-        return this.builder.then(Commands.argument("biome", ResourceLocationArgument.id()).suggests(SuggestionProviders.AVAILABLE_BIOMES).executes((source) -> {
+        //TODO: fix suggested biomes
+        return this.builder.then(Commands.argument("biome", ResourceLocationArgument.id()).suggests(SuggestionProviders.SUMMONABLE_ENTITIES).executes((source) -> {
             return execute(source.getSource(), source.getArgument("biome", ResourceLocation.class));
         }));
     }
@@ -51,8 +52,8 @@ public class CommandGempireLocateBiome /*extends CommandBase*/ {
             return Command.SINGLE_SUCCESS;
         }
         else{
-            source.getPlayerOrException().sendMessage(new TranslatableComponent("commands.gempire.nounderstand"), UUID.randomUUID());
+            source.getPlayerOrException().sendSystemMessage(Component.translatable("commands.gempire.nounderstand"));
             throw CommandGempireLocateBiome.FAILED_EXCEPTION.create();
         }
-    }*/
+    }
 }

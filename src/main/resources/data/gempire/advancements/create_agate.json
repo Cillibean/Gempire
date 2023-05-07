@@ -3,7 +3,9 @@
     "icon": {
       "item": "gempire:agate_gem_3"
     },
-    "title": "Shoulders squared!",
+    "title": {
+      "translate": "advancements.gempire.agate.title"
+    },
     "description": "Create an Agate",
     "frame": "task",
     "hidden": true
