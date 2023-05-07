@@ -3,7 +3,10 @@
     "icon": {
       "item": "gempire:tank_block"
     },
-    "title": "Leave Nothing Behind.",
+    "title": {
+      "translate": "advancements.gempire.injector.title"
+    },
+    "Leave Nothing Behind.",
     "description": "Craft an Injector",
     "frame": "task",
     "hidden": false

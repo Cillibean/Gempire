@@ -3,7 +3,10 @@
     "icon": {
       "item": "gempire:jasper_gem_1"
     },
-    "title": "We always get what we want.",
+    "title": {
+      "translate": "advancements.gempire.jasper.title"
+    },
+    "We always get what we want.",
     "description": "Create a Jasper",
     "frame": "task",
     "hidden": true

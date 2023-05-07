@@ -3,7 +3,9 @@
     "icon": {
       "item": "gempire:bismuth_gem"
     },
-    "title": "Bismuth as Usual",
+    "title": {
+      "translate": "advancements.gempire.bismuth.title"
+    },
     "description": "Create a Bismuth",
     "frame": "task",
     "hidden": true

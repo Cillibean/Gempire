@@ -409,7 +409,7 @@ public class ItemGem extends Item {
     }
 
     public void appendHoverText(ItemStack itemStack, @Nullable Level level, List<Component> p_40553_, TooltipFlag p_40554_) {
-        assert level != null;
+        if(level != null) {
         if (level.isClientSide) {
             if (checkTags(itemStack)) {
                 if (itemStack.getTag().getString("abilities") != "") {
@@ -432,9 +432,11 @@ public class ItemGem extends Item {
                         if (itemStack.getTag().getInt("sludgeAmount") >= 5) {
                             p_40553_.add(Component.translatable("Sludged").withStyle(ChatFormatting.RED));
                         }
+                        /*
                         if (!itemStack.getTag().getBoolean("assigned")) {
                             p_40553_.add(Component.translatable("Assigned to " + assigned_gem.getName().getString() + " " + assigned_gem.getFacetAndCut()));
                         }
+                        */
                         if (itemStack.getTag().getBoolean("prime")) {
                             p_40553_.add(Component.translatable("Perfect").withStyle(ChatFormatting.LIGHT_PURPLE));
                         }
@@ -455,7 +457,7 @@ public class ItemGem extends Item {
                     }
                 }
             }
-        }
+        }}
     }
 
     public static void saveData(ItemStack stack, EntityGem gem) {

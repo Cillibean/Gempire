@@ -19,10 +19,13 @@ import com.gempire.util.Abilities;
 import com.gempire.util.Color;
 import com.gempire.util.GemPlacements;
 import com.gempire.util.PaletteType;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import com.mojang.brigadier.exceptions.DynamicCommandExceptionType;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -30,11 +33,14 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.commands.LocateCommand;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.tags.StructureTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.*;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -49,9 +55,15 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.placement.PlacedFeature;
+import net.minecraft.world.level.levelgen.structure.Structure;
+import net.minecraft.world.level.saveddata.maps.MapDecoration;
+import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -2098,14 +2110,16 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.setRebelled(true);
     }
 
-    /*public static BlockPos findStructure(EntityGem gem, StructureFeature<?> structure) {
+    public static BlockPos findStructure(EntityGem gem, Feature<?> structure) {
         if(gem.level.isClientSide){
             return BlockPos.ZERO;
         }
         BlockPos blockpos1 = null;
         BlockPos blockpos = new BlockPos(gem.blockPosition());
-        if(gem.structures.contains(structure.getRegistryName().toString().replace("minecraft:", ""))) {
-             blockpos1 = ((ServerLevel) gem.getCommandSenderWorld()).findNearestMapFeature(structure, blockpos, 100, false);
+        //TagKey<Structure> structureTagKey = TagKey.create();
+        if(gem.structures.contains(structure.toString().replace("minecraft:", ""))) {
+            //TODO: just finding villages
+             blockpos1 = ((ServerLevel) gem.getCommandSenderWorld()).findNearestMapStructure(StructureTags.VILLAGE, blockpos, 100, false);
         }
         if (blockpos1 == null) {
             return BlockPos.ZERO;
@@ -2113,18 +2127,23 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             return blockpos1;
         }
     }
+
+    private static final DynamicCommandExceptionType ERROR_BIOME_INVALID = new DynamicCommandExceptionType((p_214512_) -> {
+        return Component.translatable("commands.locate.biome.invalid", p_214512_);
+    });
     public static BlockPos findBiome(EntityGem gem, ResourceLocation biomeResource) throws CommandSyntaxException {
         if(gem.level.isClientSide){
             return BlockPos.ZERO;
         }
         Biome biome = gem.getServer().registryAccess().registryOrThrow(Registry.BIOME_REGISTRY).getOptional(biomeResource).orElseThrow(() -> {
-            return LocateCommand.ERROR_BIOME_INVALID.create(biomeResource);
+            return ERROR_BIOME_INVALID.create(biomeResource);
         });
         String s = biomeResource.toString();
         BlockPos blockpos = new BlockPos(gem.blockPosition());
         BlockPos blockpos1 = null;
         if(gem.biomes.contains(s.replace("minecraft:", ""))) {
-            blockpos1 = ((ServerLevel) gem.getCommandSenderWorld()).findNearestBiome(biome, blockpos, 6400, 8);
+            System.out.println("broken check attempt");
+           // blockpos1 = ((ServerLevel) gem.getCommandSenderWorld()).findClosestBiome3d(biome, blockpos, 6400, 8);
         }
         if (blockpos1 == null) {
             return BlockPos.ZERO;
@@ -2132,16 +2151,16 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             return blockpos1;
         }
     }
-    public void runFindCommand(ServerPlayer player, @Nullable StructureFeature<?> structure, @Nullable ResourceLocation biomeResource, boolean biome)
+    public void runFindCommand(ServerPlayer player, @Nullable Feature<?> structure, @Nullable ResourceLocation biomeResource, boolean biome)
             throws CommandSyntaxException {
         BlockPos pos = biome ? EntityGem.findBiome(this, biomeResource) : EntityGem.findStructure(this, structure);
         if(this.consumeItemCheck(Items.MAP)) {
             if (pos == BlockPos.ZERO) {
                 if(biome) {
-                    player.sendSystemMessage(Component.translatable("commands.gempire.norecbio"), UUID.randomUUID());
+                    player.sendSystemMessage(Component.translatable("commands.gempire.norecbio"));
                 }
                 else{
-                    player.sendSystemMessage(Component.translatable("commands.gempire.norecstruc"), UUID.randomUUID());
+                    player.sendSystemMessage(Component.translatable("commands.gempire.norecstruc"));
                 }
                 return;
             }
@@ -2149,7 +2168,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             ItemStack map = MapItem.create(this.level, pos.getX(), pos.getZ(), (byte) 0, true, true);
             MapItemSavedData.addTargetDecoration(map, pos, "location", MapDecoration.Type.RED_X);
             String name = biome ? biomeResource.toString().replaceAll("minecraft:", "") :
-                    structure.getFeatureName().replaceAll("minecraft:", "");
+                    structure.toString().replaceAll("minecraft:", "");
             map.setHoverName(Component.translatable(name));
             for (int i = 0; i < EntityGem.NUMBER_OF_SLOTS - 6; i++) {
                 if (this.getItem(i) == ItemStack.EMPTY) {
@@ -2161,10 +2180,10 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             if (!done) {
                 this.spawnAtLocation(map);
             }
-            player.sendSystemMessage(Component.translatable("commands.gempire.foundit"), UUID.randomUUID());
+            player.sendSystemMessage(Component.translatable("commands.gempire.foundit"));
         }
         else{
-            player.sendSystemMessage(Component.translatable("commands.gempire.nomap"), UUID.randomUUID());
+            player.sendSystemMessage(Component.translatable("commands.gempire.nomap"));
         }
     }
     public boolean canLocateStructures(){
@@ -2179,7 +2198,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     public void generateScoutList(){
         //STRUCTURES
         ArrayList<ResourceLocation> rls = new ArrayList<>();
-        Set<ResourceLocation> sussy = ForgeRegistries.STRUCTURE_FEATURES.getKeys();
+        Set<ResourceLocation> sussy = ForgeRegistries.FEATURES.getKeys();
         rls.addAll(sussy);
         ArrayList<ResourceLocation> resourceLocations = new ArrayList<>();
         while(resourceLocations.size() < 3){
@@ -2187,7 +2206,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             if(!resourceLocations.contains(rls.get(m))) resourceLocations.add(rls.get(m));
         }
         for(ResourceLocation key : resourceLocations){
-            this.structures.add(ForgeRegistries.SRE_FEATURES.getValue(key).getRegistryName().toString().replace("minecraft:", ""));
+            this.structures.add(ForgeRegistries.FEATURES.getValue(key).toString().replace("minecraft:", ""));
         }
         //BIOMES
         ArrayList<ResourceLocation> rls1 = new ArrayList<>();
@@ -2204,7 +2223,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     }
     public boolean isOnStructureCooldown(){
         return true;
-    }*/
+    }
 
     //-------------------------------------------------------------------------------------------------------------------------------------------------------------//
 

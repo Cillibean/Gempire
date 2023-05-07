@@ -3,7 +3,9 @@
     "icon": {
       "item": "gempire:aquamarine_gem"
     },
-    "title": "Look, I'm Crying..",
+    "title": {
+      "translate": "advancements.gempire.aquamarine.title"
+    },
     "description": "Create an Aquamarine",
     "frame": "task",
     "hidden": true

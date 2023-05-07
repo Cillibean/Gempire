@@ -14,8 +14,8 @@ public class ModCommands {
     public static void registerCommands(final RegisterCommandsEvent event){
         CommandDispatcher<CommandSourceStack> dispatcher = event.getDispatcher();
 
-        //COMMANDS.add(new CommandGempireLocate("scoutlocate", 0, true));
-        //COMMANDS.add(new CommandGempireLocateBiome("scoutlocatebiome", 0, true));
+        COMMANDS.add(new CommandGempireLocate("scoutlocate", 0, true));
+        COMMANDS.add(new CommandGempireLocateBiome("scoutlocatebiome", 0, true));
         COMMANDS.add(new CommandGempireRecall("recall", 0, true));
         COMMANDS.add(new CommandGempireFollow("massfollow", 0, true));
         COMMANDS.add(new CommandGempireRelease("massrelease", 0, true));

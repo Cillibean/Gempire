@@ -3,7 +3,9 @@
     "icon": {
       "item": "gempire:bixbite_gem"
     },
-    "title": "Don't run with Scissors!",
+    "title": {
+      "translate": "advancements.gempire.bixbite.title"
+    },
     "description": "Create a Bixbite",
     "frame": "task",
     "hidden": true
