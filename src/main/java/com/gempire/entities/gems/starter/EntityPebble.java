@@ -111,4 +111,9 @@ public class EntityPebble extends EntityStarterGem {
                 Abilities.NO_ABILITY
         };
     }
+
+    @Override
+    public int generateVisorVariant() {
+        return this.random.nextInt(1);
+    }
 }

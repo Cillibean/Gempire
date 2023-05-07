@@ -91,4 +91,9 @@ public class EntityShale extends EntityStarterGem {
         return true;
     }
 
+    @Override
+    public int generateVisorVariant() {
+        return this.random.nextInt(1);
+    }
+
 }

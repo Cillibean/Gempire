@@ -23,6 +23,7 @@ public class RenderBixbite extends MobRenderer<EntityBixbite, ModelBixbite<Entit
         this.addLayer(new HairLayer(this));
         this.addLayer(new OutfitLayer(this));
         this.addLayer(new InsigniaLayer(this));
+        this.addLayer(new VisorLayer(this));
         this.addLayer(new GemPlacementLayer(this));
     }
 

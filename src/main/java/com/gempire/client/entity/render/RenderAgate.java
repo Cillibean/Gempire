@@ -25,6 +25,7 @@ public class RenderAgate extends MobRenderer<EntityAgate, ModelQuartz<EntityAgat
         this.addLayer(new BootsLayer(this));
         this.addLayer(new OutfitLayer(this));
         this.addLayer(new InsigniaLayer(this));
+        this.addLayer(new VisorLayer(this));
         this.addLayer(new HairLayer(this));
         this.addLayer(new GemPlacementLayer(this));
     }

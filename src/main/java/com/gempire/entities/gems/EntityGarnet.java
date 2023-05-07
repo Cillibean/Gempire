@@ -221,6 +221,11 @@ public class EntityGarnet extends EntityVaryingGem {
     }
 
     @Override
+    public int generateVisorVariant() {
+        return this.random.nextInt(6);
+    }
+
+    @Override
     public int baseFocus() {
         return 7;
     }

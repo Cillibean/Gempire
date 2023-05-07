@@ -24,6 +24,7 @@ public class RenderTourmaline extends MobRenderer<EntityTourmaline, ModelTourmal
         this.addLayer(new MarkingLayer(this));
         this.addLayer(new OutfitLayer(this));
         this.addLayer(new InsigniaLayer(this));
+        this.addLayer(new VisorLayer(this));
         this.addLayer(new GemPlacementLayer(this));
     }
 

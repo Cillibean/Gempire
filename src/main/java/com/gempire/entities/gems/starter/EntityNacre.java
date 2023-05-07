@@ -112,4 +112,9 @@ public class EntityNacre extends EntityStarterGem {
                 Abilities.NO_ABILITY
         };
     }
+
+    @Override
+    public int generateVisorVariant() {
+        return this.random.nextInt(1);
+    }
 }

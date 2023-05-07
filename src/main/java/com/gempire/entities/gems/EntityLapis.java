@@ -159,6 +159,12 @@ public class EntityLapis extends EntityGem {
     public int generateRebelInsigniaVariant() {
         return this.getRebelOutfitVariant();
     }
+
+    @Override
+    public int generateVisorVariant() {
+        return this.random.nextInt(9);
+    }
+
     public boolean isFocused() {
         return true;
     }

@@ -119,6 +119,11 @@ public class EntitySpodumene extends EntityVaryingGem {
     }
 
     @Override
+    public int generateVisorVariant() {
+        return this.random.nextInt(1);
+    }
+
+    @Override
     public boolean hasSkinColorVariant() {
         return true;
     }
