@@ -3,7 +3,9 @@
     "icon": {
       "item": "gempire:nacre_gem"
     },
-    "title": "That Was Expensive..",
+    "title": {
+      "translate": "advancements.gempire.nacre.title"
+    },
     "description": "Obtain a Nacre",
     "frame": "task",
     "hidden": false

@@ -3,7 +3,9 @@
     "icon": {
       "item": "gempire:topaz_gem_4"
     },
-    "title": "...",
+    "title": {
+      "translate": "advancements.gempire.topaz.title"
+    },
     "description": "Create a Topaz",
     "frame": "task",
     "hidden": true

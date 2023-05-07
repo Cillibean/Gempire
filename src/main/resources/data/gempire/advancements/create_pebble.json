@@ -3,7 +3,9 @@
     "icon": {
       "item": "gempire:pebble_gem"
     },
-    "title": "Pebbled",
+    "title": {
+      "translate": "advancements.gempire.pebble.title"
+    },
     "description": "Obtain a Pebble ",
     "frame": "task",
     "hidden": false

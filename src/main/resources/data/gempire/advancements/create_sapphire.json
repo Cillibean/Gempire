@@ -3,7 +3,9 @@
     "icon": {
       "item": "gempire:sapphire_gem_11"
     },
-    "title": "The Path of Fate",
+    "title": {
+      "translate": "advancements.gempire.sapphire.title"
+    },
     "description": "Create a Sapphire",
     "frame": "task",
     "hidden": true

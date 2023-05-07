@@ -3,7 +3,9 @@
     "icon": {
       "item": "gempire:ruby_gem"
     },
-    "title": "An Eternal Flame",
+    "title": {
+      "translate": "advancements.gempire.ruby.title"
+    },
     "description": "Create a Ruby",
     "frame": "task",
     "hidden": true

@@ -3,7 +3,9 @@
     "icon": {
       "item": "gempire:rutile_gem"
     },
-    "title": "Cavedweller",
+    "title": {
+      "translate": "advancements.gempire.rutile.title"
+    },
     "description": "Create a Rutile",
     "frame": "task",
     "hidden": true

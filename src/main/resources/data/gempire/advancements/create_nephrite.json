@@ -3,7 +3,9 @@
     "icon": {
       "item": "gempire:nephrite_gem"
     },
-    "title": "Chaaps!!",
+    "title": {
+      "translate": "advancements.gempire.nephrite.title"
+    },
     "description": "Create a Nephrite",
     "frame": "task",
     "hidden": true

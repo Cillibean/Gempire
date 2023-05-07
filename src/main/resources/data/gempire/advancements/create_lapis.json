@@ -6,7 +6,6 @@
     "title": {
       "translate": "advancements.gempire.lapis.title"
     },
-    "H2Amazing",
     "description": "Create a Lapis Lazuli",
     "frame": "task",
     "hidden": true

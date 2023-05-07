@@ -3,8 +3,10 @@
     "icon": {
       "item": "gempire:ruined_marble_brick"
     },
-    "title": "Colony Abandoned",
-    "description": "Break into an abandoned Dropship",
+    "title": {
+      "translate": "advancements.gempire.dropship.title"
+    },
+    "description": "Break into an abandoned dropship",
     "frame": "task",
     "show_toast": true,
     "announce_to_chat": true,

@@ -3,7 +3,9 @@
     "icon": {
       "item": "gempire:spinel_gem_6"
     },
-    "title": "Your New Best Friend!",
+    "title": {
+      "translate": "advancements.gempire.spinel.title"
+    },
     "description": "Create a Spinel",
     "frame": "task",
     "hidden": true

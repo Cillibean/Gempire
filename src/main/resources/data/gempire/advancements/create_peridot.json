@@ -3,7 +3,9 @@
     "icon": {
       "item": "gempire:peridot_gem"
     },
-    "title": "Log Date: 7-44-2",
+    "title": {
+      "translate": "advancements.gempire.peridot.title"
+    },
     "description": "Create a Peridot",
     "frame": "task",
     "hidden": true

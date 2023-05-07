@@ -3,7 +3,9 @@
     "icon": {
       "item": "gempire:white_essence_bucket"
     },
-    "title": "The Key to Life",
+    "title": {
+      "translate": "advancements.gempire.essence.title"
+    },
     "description": "Obtain Essence",
     "frame": "task",
     "hidden": false

@@ -3,7 +3,9 @@
     "icon": {
       "item": "gempire:quartz_gem_10"
     },
-    "title": "Bigger, Badder, Better",
+    "title": {
+      "translate": "advancements.gempire.quartz.title"
+    },
     "description": "Create a Quartz",
     "frame": "task",
     "hidden": true

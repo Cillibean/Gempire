@@ -6,7 +6,6 @@
     "title": {
       "translate": "advancements.gempire.garnet.title"
     },
-    "Did you miss me?",
     "description": "Create a Garnet",
     "frame": "task",
     "hidden": true

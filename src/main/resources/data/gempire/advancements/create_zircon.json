@@ -3,7 +3,9 @@
     "icon": {
       "item": "gempire:zircon_gem_11"
     },
-    "title": "What's the Case?",
+    "title": {
+      "translate": "advancements.gempire.zircon.title"
+    },
     "description": "Create a Zircon",
     "frame": "task",
     "hidden": true

@@ -3,7 +3,9 @@
     "icon": {
       "item": "gempire:pearl_gem_0"
     },
-    "title": "Welcome to Your New Pearl~",
+    "title": {
+      "translate": "advancements.gempire.pearl.title"
+    },
     "description": "Obtain a Pearl",
     "frame": "task",
     "hidden": true

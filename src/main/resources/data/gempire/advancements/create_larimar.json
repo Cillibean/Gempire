@@ -6,7 +6,6 @@
     "title": {
       "translate": "advancements.gempire.larimar.title"
     },
-    "I'd love to hear your screams!",
     "description": "Create a Larimar",
     "frame": "task",
     "hidden": true

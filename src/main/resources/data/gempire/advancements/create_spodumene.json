@@ -3,7 +3,9 @@
     "icon": {
       "item": "gempire:spodumene_gem_1"
     },
-    "title": "Fishing remastered",
+    "title": {
+      "translate": "advancements.gempire.spodumene.title"
+    },
     "description": "Create a Spodumene",
     "frame": "task",
     "hidden": true

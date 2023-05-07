@@ -3,7 +3,9 @@
     "icon": {
       "item": "gempire:tourmaline_gem_16"
     },
-    "title": "Gardening made easy!",
+    "title": {
+      "translate": "advancements.gempire.tourmaline.title"
+    },
     "description": "Create a Tourmaline",
     "frame": "task",
     "hidden": true

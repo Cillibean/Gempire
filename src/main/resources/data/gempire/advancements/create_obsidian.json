@@ -3,7 +3,9 @@
     "icon": {
       "item": "gempire:obsidian_gem"
     },
-    "title": "Cool to the touch",
+    "title": {
+      "translate": "advancements.gempire.obsidian.title"
+    },
     "description": "Create an Obsidian",
     "frame": "task",
     "hidden": true

@@ -3,7 +3,9 @@
     "icon": {
       "item": "gempire:morganite_gem"
     },
-    "title": "Artists block",
+    "title": {
+      "translate": "advancements.gempire.morganite.title"
+    },
     "description": "Create a Morganite",
     "frame": "task",
     "hidden": true

@@ -3,8 +3,10 @@
     "icon": {
       "item": "gempire:ruined_marble_pillar"
     },
-    "title": "An Unfinished Job",
-    "description": "Find yourself in a Gem Ruin",
+    "title": {
+      "translate": "advancements.gempire.ruins.title"
+    },
+    "description": "Find yourself in a gem ruin",
     "frame": "task",
     "show_toast": true,
     "announce_to_chat": true,
