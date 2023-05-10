@@ -1,0 +1,110 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.Shambling_Clod",
+				"texture_width": 128,
+				"texture_height": 64,
+				"visible_bounds_width": 3,
+				"visible_bounds_height": 3.5,
+				"visible_bounds_offset": [0, 1.25, 0]
+			},
+			"bones": [
+				{
+					"name": "model",
+					"pivot": [0, 0, 0]
+				},
+				{
+					"name": "LeftArm",
+					"parent": "model",
+					"pivot": [-7, 25, 0],
+					"rotation": [-75, 0, 0],
+					"cubes": [
+						{"origin": [-11, 13, -2], "size": [4, 14, 4], "uv": [0, 0]}
+					]
+				},
+				{
+					"name": "headgroup",
+					"parent": "model",
+					"pivot": [0, 28, 0]
+				},
+				{
+					"name": "Jaw",
+					"parent": "headgroup",
+					"pivot": [0, 28, 0],
+					"rotation": [12, 0, 0],
+					"cubes": [
+						{"origin": [-2, 28, -8], "size": [4, 2, 8], "uv": [91, 1]}
+					]
+				},
+				{
+					"name": "Head2",
+					"parent": "headgroup",
+					"pivot": [0, 28, 0],
+					"cubes": [
+						{"origin": [-4, 26, -8], "size": [8, 10, 8], "inflate": 0.3, "uv": [78, 23]}
+					]
+				},
+				{
+					"name": "Head",
+					"parent": "headgroup",
+					"pivot": [0, 28, 0],
+					"cubes": [
+						{"origin": [-4, 28, -8], "size": [8, 8, 8], "uv": [78, 41]}
+					]
+				},
+				{
+					"name": "Body2",
+					"parent": "model",
+					"pivot": [0, 10.5, 0],
+					"cubes": [
+						{"origin": [-7, 12, -6], "size": [14, 18, 13], "uv": [16, 0]}
+					]
+				},
+				{
+					"name": "Body",
+					"parent": "model",
+					"pivot": [0, 10.5, 0],
+					"cubes": [
+						{"origin": [-7, 9, -6], "size": [14, 21, 12], "inflate": -0.5, "uv": [8, 31]}
+					]
+				},
+				{
+					"name": "RightArm",
+					"parent": "model",
+					"pivot": [7, 25.5, 0],
+					"rotation": [-75, 0, 0],
+					"cubes": [
+						{"origin": [7, 10, -3], "size": [5, 18, 5], "uv": [70, 0]}
+					]
+				},
+				{
+					"name": "RightArm2",
+					"parent": "model",
+					"pivot": [6.5, 22.5, 0.5],
+					"rotation": [-30, 0, -25],
+					"cubes": [
+						{"origin": [7, 12, -1], "size": [2, 12, 2], "uv": [70, 22]}
+					]
+				},
+				{
+					"name": "LeftLeg",
+					"parent": "model",
+					"pivot": [-4, 10, 0],
+					"cubes": [
+						{"origin": [-6, 0, -2.5], "size": [5, 10, 5], "uv": [0, 26]}
+					]
+				},
+				{
+					"name": "RightLeg",
+					"parent": "model",
+					"pivot": [4.5, 10, 0],
+					"cubes": [
+						{"origin": [2, 0, -2], "size": [4, 10, 4], "uv": [60, 36]}
+					]
+				}
+			]
+		}
+	]
+}

@@ -25,7 +25,7 @@ public class RenderShambler extends GeoEntityRenderer<EntityShambler> {
 
     @Override
     public ResourceLocation getTextureLocation(EntityShambler animatable) {
-        return new ResourceLocation(Gempire.MODID, "textures/entity/clods/crawler/crawler.png");
+        return new ResourceLocation(Gempire.MODID, "textures/entity/clods/shambler/shambler.png");
     }
 
     @Override

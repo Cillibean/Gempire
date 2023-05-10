@@ -367,6 +367,10 @@
   "entity.gempire.peridot": "Peridot",
   "entity.gempire.rutile": "Rutile",
 
+  "entity.gempire.crawler": "Clod",
+  "entity.gempire.shambler": "Shambler",
+  "entity.gempire.abomination": "Abomination",
+
   "effect.gempire.paralysis": "Paralysis",
 
   "nickname.gempire.garnet_0": "Leuco Garnet",
@@ -612,5 +616,7 @@
   "advancements.gempire.ruins.description": "Find yourself in a gem ruin",
   "advancements.gempire.sky_ruins.description": "Climb into a skyward gem ruin",
   "advancements.gempire.essence.description": "Obtain Essence",
-  "advancements.gempire.root.description": "The Beginning Of Your Magical Journey"
+  "advancements.gempire.root.description": "The Beginning Of Your Magical Journey",
+
+  "enchantment.gempire.shatter": "Breaking Point"
 }
