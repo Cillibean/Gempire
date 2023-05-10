@@ -12,9 +12,9 @@
       "text": "A small gem that can be used to make Gem Essence by giving her a Bucket of Gem Slush."
     },
     {
-      "type": "patchouli:crafting",
-      "recipe": "gempire:shale_gem",
-      "text": "Recipe for Shales"
+      "type": "patchouli:spotlight",
+      "item": "gempire:shale_gem",
+      "text": "To create a shale, throw a stone button into a puddle of blue essence and wait three seconds, then a shale will form."
     },
     {
       "type": "patchouli:crafting",

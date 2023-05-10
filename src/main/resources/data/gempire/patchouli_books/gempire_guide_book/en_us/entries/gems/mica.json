@@ -12,9 +12,9 @@
       "text": "A small gem that can be used to make Power Crystals."
     },
     {
-      "type": "patchouli:crafting",
-      "recipe": "gempire:mica_gem",
-      "text": "Recipe for Micas"
+      "type": "patchouli:spotlight",
+      "item": "gempire:mica_gem",
+      "text": "To create a mica, throw a stone button into a puddle of yellow essence and wait three seconds, then a mica will form."
     }
   ]
 }
