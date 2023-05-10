@@ -12,9 +12,9 @@
       "text": "A small gem that can be used to make Drills."
     },
     {
-      "type": "patchouli:crafting",
-      "recipe": "gempire:pebble_gem",
-      "text": "Recipe for Pebbles"
+      "type": "patchouli:spotlight",
+      "item": "gempire:pebble_gem",
+      "text": "To create a pebble, throw a stone button into a puddle of pink essence and wait three seconds, then a pebble will form."
     }
   ]
 }

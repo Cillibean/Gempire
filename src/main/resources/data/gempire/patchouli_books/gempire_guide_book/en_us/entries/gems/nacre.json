@@ -12,9 +12,9 @@
       "text": "A small gem that can be used to make Shell."
     },
     {
-      "type": "patchouli:crafting",
-      "recipe": "gempire:nacre_gem",
-      "text": "Recipe for Nacres"
+      "type": "patchouli:spotlight",
+      "item": "gempire:nacre_gem",
+      "text": "To create a nacre, throw a nautilus shell into a puddle of white essence and wait three seconds, then a nacre will form."
     }
   ]
 }
