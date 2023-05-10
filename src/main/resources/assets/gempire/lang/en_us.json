@@ -34,6 +34,14 @@
   "block.gempire.smooth_ruined_marble_stairs": "Ancient Smooth Marble Stairs",
   "block.gempire.ruined_marble_stairs": "Ancient Marble Stairs",
 
+  "block.gempire.tungsten_ore": "Tungsten Ore",
+  "block.gempire.deepslate_tungsten_ore": "Deepslate Tungsten Ore",
+  "block.gempire.tungsten_block": "Tungsten Block",
+  "block.gempire.raw_tungsten_block": "Raw Tungsten Block",
+  "item.gempire.tungsten_ingot": "Tungsten Ingot",
+  "item.gempire.raw_tungsten": "Raw Tungsten",
+  "item.gempire.tungsten_nugget": "Tungsten Nugget",
+
   "block.gempire.gem_seed_block": "Geode",
   "block.gempire.injector_block": "Injector",
   "block.gempire.drill_block": "Drill",

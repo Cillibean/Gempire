@@ -36,6 +36,46 @@ public class ModItems {
             )
     );*/
 
+    public static final RegistryObject<Item> TUNGSTEN_BLOCK = ITEMS.register("tungsten_block", () ->
+            new BlockItem(
+                    ModBlocks.TUNGSTEN_BLOCK.get(),
+                    new Item.Properties().tab(ModItemGroup.BLOCKS)
+            )
+    );
+
+    public static final RegistryObject<Item> RAW_TUNGSTEN_BLOCK = ITEMS.register("raw_tungsten_block", () ->
+            new BlockItem(
+                    ModBlocks.RAW_TUNGSTEN_BLOCK.get(),
+                    new Item.Properties().tab(ModItemGroup.BLOCKS)
+            )
+    );
+
+    public static final RegistryObject<Item> TUNGSTEN_ORE = ITEMS.register("tungsten_ore", () ->
+            new BlockItem(
+                    ModBlocks.TUNGSTEN_ORE.get(),
+                    new Item.Properties().tab(ModItemGroup.BLOCKS)
+            )
+    );
+
+    public static final RegistryObject<Item> DEEPSLATE_TUNGSTEN_ORE = ITEMS.register("deepslate_tungsten_ore", () ->
+            new BlockItem(
+                    ModBlocks.DEEPSLATE_TUNGSTEN_ORE.get(),
+                    new Item.Properties().tab(ModItemGroup.BLOCKS)
+            )
+    );
+
+    public static final RegistryObject<Item> TUNGSTEN_INGOT = ITEMS.register("tungsten_ingot", () ->
+            new Item(new Item.Properties().tab(ModItemGroup.BLOCKS).stacksTo(64))
+    );
+
+    public static final RegistryObject<Item> RAW_TUNGSTEN = ITEMS.register("raw_tungsten", () ->
+            new Item(new Item.Properties().tab(ModItemGroup.BLOCKS).stacksTo(64))
+    );
+
+    public static final RegistryObject<Item> TUNGSTEN_NUGGET = ITEMS.register("tungsten_nugget", () ->
+            new Item(new Item.Properties().tab(ModItemGroup.BLOCKS).stacksTo(64))
+    );
+
     public static final RegistryObject<Item> PINK_ESSENCE_BUCKET = ITEMS.register("pink_essence_bucket", () ->
             new BucketItem(
                     ModFluids.PINK_ESSENCE.get(),
@@ -442,10 +482,6 @@ public class ModItems {
     public static final RegistryObject<Item> GEM_SCRAP = ITEMS.register("gem_scrap", () ->
             new Item(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(64)));
     public static final RegistryObject<Item> PRISMATIC_INGOT = ITEMS.register("prismatic_ingot", () ->
-            new Item(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(64)));
-    public static final RegistryObject<Item> TUNGSTEN_INGOT = ITEMS.register("tungsten_ingot", () ->
-            new Item(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(64)));
-    public static final RegistryObject<Item> RAW_TUNGSTEN = ITEMS.register("raw_tungsten", () ->
             new Item(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(64)));
 
     public static final RegistryObject<Item> GEM_WHISTLE = ITEMS.register("gem_whistle", () ->
