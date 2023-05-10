@@ -6,7 +6,9 @@
     "title": {
       "translate": "advancements.gempire.obsidian.title"
     },
-    "description": "Create an Obsidian",
+    "description": {
+      "translate": "advancements.gempire.obsidian.description"
+    },
     "frame": "task",
     "hidden": true
   },

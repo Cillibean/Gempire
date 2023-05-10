@@ -6,7 +6,9 @@
     "title": {
       "translate": "advancements.gempire.pebble.title"
     },
-    "description": "Obtain a Pebble ",
+    "description": {
+      "translate": "advancements.gempire.pebble.description"
+    },
     "frame": "task",
     "hidden": false
   },

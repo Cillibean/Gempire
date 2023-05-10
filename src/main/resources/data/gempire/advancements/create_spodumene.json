@@ -6,7 +6,9 @@
     "title": {
       "translate": "advancements.gempire.spodumene.title"
     },
-    "description": "Create a Spodumene",
+    "description": {
+      "translate": "advancements.gempire.spodumene.description"
+    },
     "frame": "task",
     "hidden": true
   },

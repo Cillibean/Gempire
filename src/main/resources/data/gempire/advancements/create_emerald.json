@@ -6,7 +6,9 @@
     "title": {
       "translate": "advancements.gempire.emerald.title"
     },
-    "description": "Create an Emerald",
+    "description": {
+      "translate": "advancements.gempire.emerald.description"
+    },
     "frame": "task",
     "hidden": true
   },

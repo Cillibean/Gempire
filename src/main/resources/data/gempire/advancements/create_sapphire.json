@@ -6,7 +6,9 @@
     "title": {
       "translate": "advancements.gempire.sapphire.title"
     },
-    "description": "Create a Sapphire",
+    "description": {
+      "translate": "advancements.gempire.sapphire.description"
+    },
     "frame": "task",
     "hidden": true
   },

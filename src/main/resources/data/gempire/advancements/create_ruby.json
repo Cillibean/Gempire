@@ -6,7 +6,9 @@
     "title": {
       "translate": "advancements.gempire.ruby.title"
     },
-    "description": "Create a Ruby",
+    "description": {
+      "translate": "advancements.gempire.ruby.description"
+    },
     "frame": "task",
     "hidden": true
   },

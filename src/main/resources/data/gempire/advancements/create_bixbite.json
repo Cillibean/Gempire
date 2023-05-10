@@ -6,7 +6,9 @@
     "title": {
       "translate": "advancements.gempire.bixbite.title"
     },
-    "description": "Create a Bixbite",
+    "description": {
+      "translate": "advancements.gempire.bixbite.description"
+    },
     "frame": "task",
     "hidden": true
   },

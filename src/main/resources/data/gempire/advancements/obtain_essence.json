@@ -6,7 +6,9 @@
     "title": {
       "translate": "advancements.gempire.essence.title"
     },
-    "description": "Obtain Essence",
+    "description": {
+      "translate": "advancements.gempire.essence.description"
+    },
     "frame": "task",
     "hidden": false
   },

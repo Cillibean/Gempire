@@ -6,7 +6,9 @@
     "title": {
       "translate": "advancements.gempire.injector.title"
     },
-    "description": "Craft an Injector",
+    "description": {
+      "translate": "advancements.gempire.injector.description"
+    },
     "frame": "task",
     "hidden": false
   },

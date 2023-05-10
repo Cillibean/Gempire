@@ -6,7 +6,9 @@
     "title": {
       "translate": "advancements.gempire.jasper.title"
     },
-    "description": "Create a Jasper",
+    "description": {
+      "translate": "advancements.gempire.jasper.description"
+    },
     "frame": "task",
     "hidden": true
   },

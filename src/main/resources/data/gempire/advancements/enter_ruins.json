@@ -6,7 +6,9 @@
     "title": {
       "translate": "advancements.gempire.ruins.title"
     },
-    "description": "Find yourself in a gem ruin",
+    "description": {
+      "translate": "advancements.gempire.ruins.description"
+    },
     "frame": "task",
     "show_toast": true,
     "announce_to_chat": true,

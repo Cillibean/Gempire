@@ -6,7 +6,9 @@
     "title": {
       "translate": "advancements.gempire.agate.title"
     },
-    "description": "Create an Agate",
+    "description": {
+      "translate": "advancements.gempire.agate.description"
+    },
     "frame": "task",
     "hidden": true
   },

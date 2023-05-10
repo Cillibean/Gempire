@@ -6,7 +6,9 @@
     "title": {
       "translate": "advancements.gempire.garnet.title"
     },
-    "description": "Create a Garnet",
+    "description": {
+      "translate": "advancements.gempire.garnet.description"
+    },
     "frame": "task",
     "hidden": true
   },
