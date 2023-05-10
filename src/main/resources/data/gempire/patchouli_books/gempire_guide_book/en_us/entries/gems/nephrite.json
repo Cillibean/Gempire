@@ -21,7 +21,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "$(l)Cruxes$() $(br)$(li)Honey Block$(li)White Concrete$(li)Iron Ore$(li)Slime Block"
+      "text": "$(l)Cruxes$() $(br)$(li)Honey Block$(li)White Concrete$(li)Iron Ore$(li)Slime Block$(li)Moss Block"
     }
   ]
 }
