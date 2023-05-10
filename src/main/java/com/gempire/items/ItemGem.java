@@ -18,6 +18,7 @@ import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -36,6 +37,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.EntityAttributeModificationEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.apache.commons.lang3.ArrayUtils;
@@ -52,7 +54,9 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
+import org.checkerframework.checker.units.qual.A;
 import org.jetbrains.annotations.NotNull;
+import org.w3c.dom.Attr;
 
 public class ItemGem extends Item {
     public String ID;
@@ -261,6 +265,8 @@ public class ItemGem extends Item {
                             gem.spawnGem = item;
                             System.out.println(gem.spawnGem);
                         }
+                        gem.setDefective(stack.getTag().getBoolean("defective"));                        gem.setDefective(stack.getTag().getBoolean("defective"));
+                        gem.setPrimary(stack.getTag().getBoolean("prime"));
                         gem.load(stack.getTag());
                         System.out.println(stack.getTag());
                         System.out.println(gem.getFacetAndCut());
@@ -280,8 +286,14 @@ public class ItemGem extends Item {
                                     gem.setPrimary(false);
                                     gem.setDefective(false);
                                 }
-                                case 1 -> gem.setDefective(true);
-                                case 2 -> gem.setPrimary(true);
+                                case 1 -> {
+                                    gem.setDefective(true);
+                                    System.out.println("defective");
+                                }
+                                case 2 -> {
+                                    gem.setPrimary(true);
+                                    System.out.println("prime");
+                                }
                             }
                             gem.finalizeSpawn((ServerLevelAccessor) world, world.getCurrentDifficultyAt(player.blockPosition()), MobSpawnType.TRIGGERED, null, null);
                             gem.addOwner(player.getUUID());

@@ -486,6 +486,9 @@ public class ModItems {
 
     public static final RegistryObject<Item> GEM_WHISTLE = ITEMS.register("gem_whistle", () ->
             new ItemWhistle(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(1)));
+
+    public static final RegistryObject<Item> CONFRACTOR = ITEMS.register("confractor", () ->
+            new ItemShatterer(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(1).durability(10)));
     public static final RegistryObject<Item> CHROMA_CATALYST = ITEMS.register("chroma_catalyst", () ->
             new ItemNameBlockItem(ModBlocks.CHROMA_CLUSTER_CROP.get(),
                     new Item.Properties().tab(ModItemGroup.ITEMS)));
