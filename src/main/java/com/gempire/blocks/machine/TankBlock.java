@@ -45,20 +45,19 @@ public class TankBlock extends Block {
     @SuppressWarnings("deprecation")
     @Override
     public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
-        if(!worldIn.isClientSide()) {
+        if (worldIn.isClientSide()) {
+            return InteractionResult.SUCCESS;
+        } else {
             BlockPos drillPos = state.getValue(HALF) == DoubleBlockHalf.UPPER ? pos.below().below() : pos.below();
             BlockPos crystalPos = state.getValue(HALF) == DoubleBlockHalf.UPPER ? pos.above() : pos.above().above();
             if (worldIn.getBlockState(drillPos).getBlock() == ModBlocks.DRILL_BLOCK.get() && worldIn.getBlockState(crystalPos).getBlock() instanceof PowerCrystalBlock) {
                 BlockEntity te = worldIn.getBlockEntity(drillPos);
                 if (te instanceof InjectorTE) {
-                    if (player.getItemInHand(InteractionHand.MAIN_HAND) == ItemStack.EMPTY) {
-                        NetworkHooks.openScreen((ServerPlayer) player, (InjectorTE) te, drillPos);
-                        return InteractionResult.SUCCESS;
-                    }
-                }
-            }
+                    NetworkHooks.openScreen((ServerPlayer) player, (InjectorTE) te, drillPos);
+                    return InteractionResult.CONSUME;
+                } return InteractionResult.PASS;
+            } return InteractionResult.PASS;
         }
-        return InteractionResult.PASS;
     }
 
     public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor worldIn, BlockPos currentPos, BlockPos facingPos) {

@@ -354,7 +354,7 @@ public class GemSeedTE extends BlockEntity {
                     || block == Blocks.JUNGLE_LOG || block == Blocks.STRIPPED_JUNGLE_LOG || block == Blocks.STRIPPED_JUNGLE_WOOD || block == Blocks.JUNGLE_WOOD
                     || block == Blocks.ACACIA_LOG || block == Blocks.STRIPPED_ACACIA_LOG || block == Blocks.STRIPPED_ACACIA_WOOD || block == Blocks.ACACIA_WOOD
                     || block == Blocks.DARK_OAK_LOG || block == Blocks.STRIPPED_DARK_OAK_LOG || block == Blocks.STRIPPED_DARK_OAK_WOOD || block == Blocks.DARK_OAK_WOOD) {
-                this.level.setBlockAndUpdate(blockPos, this.drained_log.defaultBlockState());
+                this.level.setBlockAndUpdate(blockPos, this.drained_log.withPropertiesOf(this.level.getBlockState(blockPos)));
             } else if (block == Blocks.CRIMSON_STEM || block == Blocks.WARPED_STEM || block == Blocks.STRIPPED_CRIMSON_STEM || block == Blocks.STRIPPED_WARPED_STEM
                     || block == Blocks.CRIMSON_HYPHAE || block == Blocks.WARPED_HYPHAE || block == Blocks.STRIPPED_CRIMSON_HYPHAE || block == Blocks.STRIPPED_WARPED_HYPHAE) {
                 this.level.setBlockAndUpdate(blockPos, this.drained_log_cracked.defaultBlockState());
