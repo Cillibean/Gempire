@@ -6,7 +6,9 @@ import com.gempire.entities.gems.starter.EntityMica;
 import com.gempire.entities.gems.starter.EntityNacre;
 import com.gempire.entities.gems.starter.EntityPebble;
 import com.gempire.entities.gems.starter.EntityShale;
+import com.gempire.entities.other.EntityAbomination;
 import com.gempire.entities.other.EntityCrawler;
+import com.gempire.entities.other.EntityShambler;
 import com.gempire.entities.other.GeoExampleEntity;
 import com.gempire.entities.projectiles.AcidSpitEntity;
 import com.gempire.entities.projectiles.IceShardEntity;
@@ -16,11 +18,13 @@ import com.gempire.systems.injection.GemFormation;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.HashMap;
+import java.util.UUID;
 
 public class ModEntities {
     public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, Gempire.MODID);
@@ -36,6 +40,16 @@ public class ModEntities {
             () -> EntityType.Builder.of(EntityCrawler::new, MobCategory.CREATURE)
                     .sized(1f, 1.5f) // Hitbox Size
                     .build(new ResourceLocation(Gempire.MODID, "crawler").toString()));
+
+    public static final RegistryObject<EntityType<EntityAbomination>> ABOMINATION = ENTITIES.register("abomination",
+            () -> EntityType.Builder.of(EntityAbomination::new, MobCategory.CREATURE)
+                    .sized(1f, 1.5f) // Hitbox Size
+                    .build(new ResourceLocation(Gempire.MODID, "abomination").toString()));
+
+    public static final RegistryObject<EntityType<EntityShambler>> SHAMBLER = ENTITIES.register("shambler",
+            () -> EntityType.Builder.of(EntityShambler::new, MobCategory.CREATURE)
+                    .sized(1f, 1.5f) // Hitbox Size
+                    .build(new ResourceLocation(Gempire.MODID, "shambler").toString()));
     public static final RegistryObject<EntityType<EntityPebble>> PEBBLE = ENTITIES.register("pebble",
             () -> EntityType.Builder.of(EntityPebble::new, MobCategory.CREATURE)
                     .sized(.4f, .4f) // Hitbox Size

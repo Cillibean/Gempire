@@ -5,6 +5,7 @@ import com.gempire.client.entity.model.*;
 import com.gempire.client.entity.render.*;
 import com.gempire.client.screen.*;
 import com.gempire.client.ter.ShellTER;
+import com.gempire.entities.bases.EntityGem;
 import com.gempire.init.ModContainers;
 import com.gempire.init.ModEntities;
 import com.gempire.init.ModItemProperties;
@@ -15,13 +16,19 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.entity.*;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
+import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+
+import java.util.UUID;
 
 public class ClientProxy {
     @Mod.EventBusSubscriber(modid = Gempire.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
@@ -31,6 +38,8 @@ public class ClientProxy {
         //RenderingRegistry.registerEntityRenderingHandler(ModEntities.TEST.get(), RenderTestEntity::new);
         event.registerEntityRenderer(ModEntities.TEST.get(), ExampleGeoRenderer::new);
         event.registerEntityRenderer(ModEntities.CRAWLER.get(), RenderCrawler::new);
+        event.registerEntityRenderer(ModEntities.ABOMINATION.get(), RenderAbomination::new);
+        event.registerEntityRenderer(ModEntities.SHAMBLER.get(), RenderShambler::new);
         event.registerEntityRenderer(ModEntities.PEBBLE.get(), m -> new RenderPebble(m, new ModelPebble<>(m.bakeLayer(ModelPebble.LAYER_LOCATION_P))));
         event.registerEntityRenderer(ModEntities.MICA.get(), m -> new RenderMica(m, new ModelPebble<>(m.bakeLayer(ModelPebble.LAYER_LOCATION_M))));
         event.registerEntityRenderer(ModEntities.SHALE.get(), m -> new RenderShale(m, new ModelPebble<>(m.bakeLayer(ModelPebble.LAYER_LOCATION_S))));
@@ -127,6 +136,37 @@ public class ClientProxy {
                 }
             }
         }
-    }
 
+        /*@SubscribeEvent
+        public static void spawnGem(LivingSpawnEvent event) {
+            AttributeModifier PRIME = new AttributeModifier(UUID.fromString("e6107045-134f-4c54-a645-75c3ae5c7a27"), "gempirePrimaryModifier", 0.2D, AttributeModifier.Operation.ADDITION);
+            AttributeModifier DEFECTIVE = new AttributeModifier(UUID.fromString("e6107045-134f-4c54-a645-75c3ae5c7a28"), "gempireDefectiveModifier", -0.2D, AttributeModifier.Operation.ADDITION);
+            Entity entity = event.getEntity();
+            if (event.getEntity() instanceof EntityGem) {
+                if (((EntityGem) entity).isPrimary()) {
+                    ((EntityGem) entity).getAttribute(Attributes.MAX_HEALTH).removeModifiers();
+                    ((EntityGem) entity).getAttribute(Attributes.MOVEMENT_SPEED).removeModifiers();
+                    ((EntityGem) entity).getAttribute(Attributes.ATTACK_SPEED).removeModifiers();
+                    ((EntityGem) entity).getAttribute(Attributes.ATTACK_DAMAGE).removeModifiers();
+                    ((EntityGem) entity).getAttribute(Attributes.KNOCKBACK_RESISTANCE).removeModifiers();
+                    ((EntityGem) entity).getAttribute(Attributes.MAX_HEALTH).addPermanentModifier(PRIME);
+                    ((EntityGem) entity).getAttribute(Attributes.MOVEMENT_SPEED).addPermanentModifier(PRIME);
+                    ((EntityGem) entity).getAttribute(Attributes.ATTACK_DAMAGE).addPermanentModifier(PRIME);
+                    ((EntityGem) entity).getAttribute(Attributes.ATTACK_SPEED).addPermanentModifier(PRIME);
+                    ((EntityGem) entity).getAttribute(Attributes.KNOCKBACK_RESISTANCE).addPermanentModifier(PRIME);
+                } else if (((EntityGem) entity).isDefective()) {
+                    ((EntityGem) entity).getAttribute(Attributes.MAX_HEALTH).removeModifiers();
+                    ((EntityGem) entity).getAttribute(Attributes.MOVEMENT_SPEED).removeModifiers();
+                    ((EntityGem) entity).getAttribute(Attributes.ATTACK_SPEED).removeModifiers();
+                    ((EntityGem) entity).getAttribute(Attributes.ATTACK_DAMAGE).removeModifiers();
+                    ((EntityGem) entity).getAttribute(Attributes.KNOCKBACK_RESISTANCE).removeModifiers();
+                    ((EntityGem) entity).getAttribute(Attributes.MAX_HEALTH).addPermanentModifier(DEFECTIVE);
+                    ((EntityGem) entity).getAttribute(Attributes.MOVEMENT_SPEED).addPermanentModifier(DEFECTIVE);
+                    ((EntityGem) entity).getAttribute(Attributes.ATTACK_DAMAGE).addPermanentModifier(DEFECTIVE);
+                    ((EntityGem) entity).getAttribute(Attributes.ATTACK_SPEED).addPermanentModifier(DEFECTIVE);
+                    ((EntityGem) entity).getAttribute(Attributes.KNOCKBACK_RESISTANCE).addPermanentModifier(DEFECTIVE);
+                }
+            }
+        }*/
+    }
 }
