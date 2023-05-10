@@ -1,0 +1,15 @@
+{
+  "name": "Clods",
+  "advancement": "gempire:root",
+  "icon": "gempire:blue_essence_bucket",
+  "category": "gempire:gem_concepts",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "gempire:crawler",
+      "name": "A Crawler",
+      "rotate": "true",
+      "text": "A floor-bound clod variant that pulls itself across the ground to players and gems."
+    }
+  ]
+}
