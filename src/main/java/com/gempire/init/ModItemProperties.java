@@ -1,5 +1,6 @@
 package com.gempire.init;
 
+import com.gempire.Gempire;
 import com.gempire.items.ItemGem;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
@@ -211,14 +212,17 @@ public class ModItemProperties {
     }
 
     private static void makeGem(Item item) {
-        ItemProperties.register(item, new ResourceLocation("gempredicate"), (stack, p_174636_, p_174637_, p_174638_) -> {
+        ItemProperties.register(item, new ResourceLocation(Gempire.MODID, "gempredicate"), (stack, p_174636_, p_174637_, p_174638_) -> {
             if (stack.getItem().asItem() instanceof ItemGem) {
                 if (((ItemGem) stack.getItem()).getSludged(stack)) {
                     return 0.1F;
                 } else if (stack.getOrCreateTag().getBoolean("cracked")) {
+                    System.out.println("cracked");
                     return 0.2F;
                 } else if (stack.getOrCreateTag().getBoolean("prime")) {
+                    System.out.println("prime");
                     return 1.0F;
+
                 }
                 else {
                     return 0.0F;

@@ -6,21 +6,21 @@
   "overrides": [
     {
       "predicate": {
-        "minecraft:gempredicate": 1
-      },
-      "model": "gempire:item/pearl_gem_9_cracked"
-    },
-    {
-      "predicate": {
-        "minecraft:gempredicate": 0.1
+        "gempire:gempredicate": 0.1
       },
       "model": "gempire:item/pearl_gem_9_sludge"
     },
     {
       "predicate": {
-        "minecraft:gempredicate": 0.2
+        "gempire:gempredicate": 0.2
       },
       "model": "gempire:item/pearl_gem_9_perfect"
+    },
+    {
+      "predicate": {
+        "gempire:gempredicate": 1.0
+      },
+      "model": "gempire:item/pearl_gem_9_cracked"
     }
   ]
 }
