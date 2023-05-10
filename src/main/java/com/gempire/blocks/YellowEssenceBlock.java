@@ -12,6 +12,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FlowingFluid;
@@ -58,6 +59,9 @@ public class YellowEssenceBlock extends LiquidBlock {
                         System.out.println(gem.getGemPlacementE());
                         System.out.println(gem.getOutfitVariant() + " and " + gem.getInsigniaVariant());
                         entity.remove(Entity.RemovalReason.DISCARDED);
+                        if (gem.getRandom().nextInt(9) == 0) {
+                            level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
+                        }
                         timer = 0;
                     } else {
                         timer++;

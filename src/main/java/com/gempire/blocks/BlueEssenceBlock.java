@@ -4,6 +4,7 @@ import com.gempire.entities.bases.EntityGem;
 import com.gempire.events.GemFormEvent;
 import com.gempire.init.ModEntities;
 import com.gempire.items.ItemGem;
+import com.gempire.tileentities.ShellTE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.MobSpawnType;
@@ -12,6 +13,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FlowingFluid;
@@ -47,6 +49,9 @@ public class BlueEssenceBlock extends LiquidBlock {
                         System.out.println(gem.getGemPlacementE());
                         System.out.println(gem.getOutfitVariant() + " and " + gem.getInsigniaVariant());
                         entity.remove(Entity.RemovalReason.DISCARDED);
+                        if (gem.getRandom().nextInt(9) == 0) {
+                            level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
+                        }
                         timer = 0;
                     } else {
                         timer++;
