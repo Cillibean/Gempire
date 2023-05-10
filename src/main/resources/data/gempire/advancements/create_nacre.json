@@ -6,7 +6,9 @@
     "title": {
       "translate": "advancements.gempire.nacre.title"
     },
-    "description": "Obtain a Nacre",
+    "description": {
+      "translate": "advancements.gempire.nacre.description"
+    },
     "frame": "task",
     "hidden": false
   },

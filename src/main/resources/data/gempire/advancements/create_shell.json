@@ -6,7 +6,9 @@
     "title": {
       "translate": "advancements.gempire.shell.title"
     },
-    "description": "Have a Nacre create a Shell for you",
+    "description": {
+      "translate": "advancements.gempire.emerald.description"
+    },
     "frame": "task",
     "hidden": false
   },

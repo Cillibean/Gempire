@@ -6,7 +6,9 @@
     "title": {
       "translate": "advancements.gempire.peridot.title"
     },
-    "description": "Create a Peridot",
+    "description": {
+      "translate": "advancements.gempire.peridot.description"
+    },
     "frame": "task",
     "hidden": true
   },

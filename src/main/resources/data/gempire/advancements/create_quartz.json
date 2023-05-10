@@ -6,7 +6,9 @@
     "title": {
       "translate": "advancements.gempire.quartz.title"
     },
-    "description": "Create a Quartz",
+    "description": {
+      "translate": "advancements.gempire.quartz.description"
+    },
     "frame": "task",
     "hidden": true
   },

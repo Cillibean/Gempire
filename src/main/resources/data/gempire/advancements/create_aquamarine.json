@@ -6,7 +6,9 @@
     "title": {
       "translate": "advancements.gempire.aquamarine.title"
     },
-    "description": "Create an Aquamarine",
+    "description": {
+      "translate": "advancements.gempire.aquamarine.description"
+    },
     "frame": "task",
     "hidden": true
   },

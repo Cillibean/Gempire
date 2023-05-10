@@ -6,7 +6,9 @@
     "title": {
       "translate": "advancements.gempire.tourmaline.title"
     },
-    "description": "Create a Tourmaline",
+    "description": {
+      "translate": "advancements.gempire.tourmaline.description"
+    },
     "frame": "task",
     "hidden": true
   },

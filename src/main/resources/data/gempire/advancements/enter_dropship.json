@@ -6,7 +6,9 @@
     "title": {
       "translate": "advancements.gempire.dropship.title"
     },
-    "description": "Break into an abandoned dropship",
+    "description": {
+      "translate": "advancements.gempire.dropship.description"
+    },
     "frame": "task",
     "show_toast": true,
     "announce_to_chat": true,

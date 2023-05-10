@@ -6,7 +6,9 @@
     "title": {
       "translate": "advancements.gempire.morganite.title"
     },
-    "description": "Create a Morganite",
+    "description": {
+      "translate": "advancements.gempire.morganite.description"
+    },
     "frame": "task",
     "hidden": true
   },

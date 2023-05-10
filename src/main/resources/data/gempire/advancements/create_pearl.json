@@ -6,7 +6,9 @@
     "title": {
       "translate": "advancements.gempire.pearl.title"
     },
-    "description": "Obtain a Pearl",
+    "description": {
+      "translate": "advancements.gempire.pearl.description"
+    },
     "frame": "task",
     "hidden": true
   },

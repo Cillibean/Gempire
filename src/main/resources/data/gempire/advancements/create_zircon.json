@@ -6,7 +6,9 @@
     "title": {
       "translate": "advancements.gempire.zircon.title"
     },
-    "description": "Create a Zircon",
+    "description": {
+      "translate": "advancements.gempire.zircon.description"
+    },
     "frame": "task",
     "hidden": true
   },
