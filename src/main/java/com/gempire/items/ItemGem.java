@@ -34,6 +34,8 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.AirBlock;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraftforge.common.MinecraftForge;
@@ -129,13 +131,15 @@ public class ItemGem extends Item {
                         } else {
                             if (raytraceresult.getType() == HitResult.Type.BLOCK) {
                                 BlockPos blockpos = raytraceresult.getBlockPos();
+                                System.out.println(blockpos);
                                 Direction direction = raytraceresult.getDirection();
+                                System.out.println(direction.getName());
                                 if (!worldIn.mayInteract(playerIn, blockpos) || !playerIn.mayUseItemAt(blockpos.relative(direction), direction, itemstack)) {
                                     return super.use(worldIn, playerIn, handIn);
                                 }
 
-                                if (worldIn.mayInteract(playerIn, blockpos) && playerIn.mayUseItemAt(blockpos, raytraceresult.getDirection(), itemstack)) {
-                                    spawned = this.formGem(worldIn, playerIn, blockpos, itemstack, null);
+                                if (worldIn.mayInteract(playerIn, blockpos) && playerIn.mayUseItemAt(blockpos.relative(direction), direction, itemstack) /*&& worldIn.getBlockState(blockpos.above()) == Blocks.AIR.defaultBlockState()*/) {
+                                    spawned = this.formGem(worldIn, playerIn, blockpos.relative(direction).below(), itemstack, null);
                                 }
                             }
                             //Problem with the claiming of gems ??
@@ -265,8 +269,9 @@ public class ItemGem extends Item {
                             gem.spawnGem = item;
                             System.out.println(gem.spawnGem);
                         }
-                        gem.setDefective(stack.getTag().getBoolean("defective"));                        gem.setDefective(stack.getTag().getBoolean("defective"));
+                        gem.setDefective(stack.getTag().getBoolean("defective"));
                         gem.setPrimary(stack.getTag().getBoolean("prime"));
+                        gem.finalizeSpawn((ServerLevelAccessor) world, world.getCurrentDifficultyAt(player.blockPosition()), MobSpawnType.TRIGGERED, null, null);
                         gem.load(stack.getTag());
                         System.out.println(stack.getTag());
                         System.out.println(gem.getFacetAndCut());

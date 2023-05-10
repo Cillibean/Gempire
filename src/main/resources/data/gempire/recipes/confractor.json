@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "  T",
+    " B ",
+    "I  "
+  ],
+  "key": {
+    "T": {
+      "item": "gempire:confractor_tip"
+    },
+    "B": {
+      "item": "gempire:confractor_body"
+    },
+    "I": {
+      "item": "gempire:prismatic_ingot"
+    }
+  },
+  "result": {
+    "item": "gempire:confractor"
+  }
+}

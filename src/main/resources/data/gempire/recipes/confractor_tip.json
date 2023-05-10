@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CIC",
+    "IDI",
+    "TPT"
+  ],
+  "key": {
+    "T": {
+      "item": "gempire:tungsten_block"
+    },
+    "D": {
+      "item": "minecraft:diamond_block"
+    },
+    "I": {
+      "item": "gempire:prismatic_ingot"
+    },
+    "C": {
+      "item": "gempire:special_chroma"
+    },
+    "P": {
+      "item": "gempire:prismatic_block"
+    }
+  },
+  "result": {
+    "item": "gempire:confractor_tip"
+  }
+}

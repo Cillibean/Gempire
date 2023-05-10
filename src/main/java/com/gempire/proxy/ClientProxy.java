@@ -137,36 +137,5 @@ public class ClientProxy {
             }
         }
 
-        /*@SubscribeEvent
-        public static void spawnGem(LivingSpawnEvent event) {
-            AttributeModifier PRIME = new AttributeModifier(UUID.fromString("e6107045-134f-4c54-a645-75c3ae5c7a27"), "gempirePrimaryModifier", 0.2D, AttributeModifier.Operation.ADDITION);
-            AttributeModifier DEFECTIVE = new AttributeModifier(UUID.fromString("e6107045-134f-4c54-a645-75c3ae5c7a28"), "gempireDefectiveModifier", -0.2D, AttributeModifier.Operation.ADDITION);
-            Entity entity = event.getEntity();
-            if (event.getEntity() instanceof EntityGem) {
-                if (((EntityGem) entity).isPrimary()) {
-                    ((EntityGem) entity).getAttribute(Attributes.MAX_HEALTH).removeModifiers();
-                    ((EntityGem) entity).getAttribute(Attributes.MOVEMENT_SPEED).removeModifiers();
-                    ((EntityGem) entity).getAttribute(Attributes.ATTACK_SPEED).removeModifiers();
-                    ((EntityGem) entity).getAttribute(Attributes.ATTACK_DAMAGE).removeModifiers();
-                    ((EntityGem) entity).getAttribute(Attributes.KNOCKBACK_RESISTANCE).removeModifiers();
-                    ((EntityGem) entity).getAttribute(Attributes.MAX_HEALTH).addPermanentModifier(PRIME);
-                    ((EntityGem) entity).getAttribute(Attributes.MOVEMENT_SPEED).addPermanentModifier(PRIME);
-                    ((EntityGem) entity).getAttribute(Attributes.ATTACK_DAMAGE).addPermanentModifier(PRIME);
-                    ((EntityGem) entity).getAttribute(Attributes.ATTACK_SPEED).addPermanentModifier(PRIME);
-                    ((EntityGem) entity).getAttribute(Attributes.KNOCKBACK_RESISTANCE).addPermanentModifier(PRIME);
-                } else if (((EntityGem) entity).isDefective()) {
-                    ((EntityGem) entity).getAttribute(Attributes.MAX_HEALTH).removeModifiers();
-                    ((EntityGem) entity).getAttribute(Attributes.MOVEMENT_SPEED).removeModifiers();
-                    ((EntityGem) entity).getAttribute(Attributes.ATTACK_SPEED).removeModifiers();
-                    ((EntityGem) entity).getAttribute(Attributes.ATTACK_DAMAGE).removeModifiers();
-                    ((EntityGem) entity).getAttribute(Attributes.KNOCKBACK_RESISTANCE).removeModifiers();
-                    ((EntityGem) entity).getAttribute(Attributes.MAX_HEALTH).addPermanentModifier(DEFECTIVE);
-                    ((EntityGem) entity).getAttribute(Attributes.MOVEMENT_SPEED).addPermanentModifier(DEFECTIVE);
-                    ((EntityGem) entity).getAttribute(Attributes.ATTACK_DAMAGE).addPermanentModifier(DEFECTIVE);
-                    ((EntityGem) entity).getAttribute(Attributes.ATTACK_SPEED).addPermanentModifier(DEFECTIVE);
-                    ((EntityGem) entity).getAttribute(Attributes.KNOCKBACK_RESISTANCE).addPermanentModifier(DEFECTIVE);
-                }
-            }
-        }*/
     }
 }
