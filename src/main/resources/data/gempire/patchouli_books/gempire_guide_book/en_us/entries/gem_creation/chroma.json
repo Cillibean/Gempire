@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Chroma is a crystalline structure that generates underground which can be mined with a pickaxe. It has a chance of dropping a rare variant of Chroma called Prismatic Chroma."
+      "text": "Chroma is a crystalline structure that generates underground in a range of Y:80 to Y:0 which can be mined with a pickaxe. It has a chance of dropping a rare variant of Chroma called Prismatic Chroma."
     },
     {
       "type": "patchouli:text",

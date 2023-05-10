@@ -22,7 +22,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "$(l)Cruxes$() $(br)$(li)Ancient Debris$(li)Copper Ore$(li)Sculk$(li)Bone Block$(li)End Stone"
+      "text": "$(l)Cruxes$() $(br)$(li)Ancient Debris$(li)Copper Ore$(li)Sculk$(li)Bone Block$(li)End Stone$(li)Netherite Block$(li)Blackstone"
     }
   ]
 }

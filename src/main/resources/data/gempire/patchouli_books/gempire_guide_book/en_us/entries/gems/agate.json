@@ -22,7 +22,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "$(l)Cruxes$() $(br)$(li)Amethyst Block$(li)Magma Block$(li)Copper Ore$(li)Iron Ore$(li)Nether Quartz Ore$(li)Quartz Block"
+      "text": "$(l)Cruxes$() $(br)$(li)Amethyst Block$(li)Magma Block$(li)Copper Ore$(li)Iron Ore$(li)Nether Quartz Ore$(li)Quartz Block$(li)Basalt"
     }
   ]
 }
