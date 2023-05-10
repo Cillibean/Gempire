@@ -45,6 +45,7 @@ import net.minecraft.world.*;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -292,6 +293,33 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.setShatter(this.getShatter());
         this.setCurrentRecipe(this.getCurrentRecipe());
         this.setRecipeAmount(this.generateRecipeAmount());
+        AttributeModifier PRIME = new AttributeModifier(UUID.randomUUID(), "gempirePrimaryModifier", 0.2D, AttributeModifier.Operation.ADDITION);
+        AttributeModifier DEFECTIVE = new AttributeModifier(UUID.randomUUID(), "gempireDefectiveModifier", -0.2D, AttributeModifier.Operation.ADDITION);
+        if (this.isPrimary()) {
+            System.out.println("prime modifiers");
+                this.getAttribute(Attributes.MAX_HEALTH).removeModifiers();
+                this.getAttribute(Attributes.MOVEMENT_SPEED).removeModifiers();
+                this.getAttribute(Attributes.ATTACK_SPEED).removeModifiers();
+                this.getAttribute(Attributes.ATTACK_DAMAGE).removeModifiers();
+                this.getAttribute(Attributes.KNOCKBACK_RESISTANCE).removeModifiers();
+                this.getAttribute(Attributes.MAX_HEALTH).addPermanentModifier(PRIME);
+                this.getAttribute(Attributes.MOVEMENT_SPEED).addPermanentModifier(PRIME);
+                this.getAttribute(Attributes.ATTACK_DAMAGE).addPermanentModifier(PRIME);
+                this.getAttribute(Attributes.ATTACK_SPEED).addPermanentModifier(PRIME);
+                this.getAttribute(Attributes.KNOCKBACK_RESISTANCE).addPermanentModifier(PRIME);
+        } else if (this.isDefective()) {
+            System.out.println("off colour modifiers");
+                this.getAttribute(Attributes.MAX_HEALTH).removeModifiers();
+                this.getAttribute(Attributes.MOVEMENT_SPEED).removeModifiers();
+                this.getAttribute(Attributes.ATTACK_SPEED).removeModifiers();
+                this.getAttribute(Attributes.ATTACK_DAMAGE).removeModifiers();
+                this.getAttribute(Attributes.KNOCKBACK_RESISTANCE).removeModifiers();
+                this.getAttribute(Attributes.MAX_HEALTH).addPermanentModifier(DEFECTIVE);
+                this.getAttribute(Attributes.MOVEMENT_SPEED).addPermanentModifier(DEFECTIVE);
+                this.getAttribute(Attributes.ATTACK_DAMAGE).addPermanentModifier(DEFECTIVE);
+                this.getAttribute(Attributes.ATTACK_SPEED).addPermanentModifier(DEFECTIVE);
+                this.getAttribute(Attributes.KNOCKBACK_RESISTANCE).addPermanentModifier(DEFECTIVE);
+        }
         return super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
     }
 
@@ -424,6 +452,23 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         compound.putInt("currentRecipe", this.getCurrentRecipe());
         compound.putInt("recipeAmount", this.getRecipeAmount());
         this.writeStructures(compound);
+        AttributeModifier PRIME = new AttributeModifier(UUID.randomUUID(), "gempirePrimaryModifier", 0.2D, AttributeModifier.Operation.ADDITION);
+        AttributeModifier DEFECTIVE = new AttributeModifier(UUID.randomUUID(), "gempireDefectiveModifier", -0.3D, AttributeModifier.Operation.ADDITION);
+        if (this.isPrimary()) {
+            System.out.println("prime modifiers");
+            this.getAttribute(Attributes.MAX_HEALTH).addPermanentModifier(PRIME);
+            this.getAttribute(Attributes.MOVEMENT_SPEED).addPermanentModifier(PRIME);
+            this.getAttribute(Attributes.ATTACK_DAMAGE).addPermanentModifier(PRIME);
+            this.getAttribute(Attributes.ATTACK_SPEED).addPermanentModifier(PRIME);
+            this.getAttribute(Attributes.KNOCKBACK_RESISTANCE).addPermanentModifier(PRIME);
+        } else if (this.isDefective()) {
+            System.out.println("off colour modifiers");
+            this.getAttribute(Attributes.MAX_HEALTH).addPermanentModifier(DEFECTIVE);
+            this.getAttribute(Attributes.MOVEMENT_SPEED).addPermanentModifier(DEFECTIVE);
+            this.getAttribute(Attributes.ATTACK_DAMAGE).addPermanentModifier(DEFECTIVE);
+            this.getAttribute(Attributes.ATTACK_SPEED).addPermanentModifier(DEFECTIVE);
+            this.getAttribute(Attributes.KNOCKBACK_RESISTANCE).addPermanentModifier(DEFECTIVE);
+        }
         ContainerHelper.saveAllItems(compound, this.items);
     }
 

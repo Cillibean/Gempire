@@ -48,14 +48,17 @@ public class ShellBlock extends BaseEntityBlock implements EntityBlock {
     @SuppressWarnings("deprecation")
     @Override
     public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
-        if(!worldIn.isClientSide()){
+        if (worldIn.isClientSide){
+            return InteractionResult.SUCCESS;
+        } else {
             BlockEntity te = worldIn.getBlockEntity(pos);
             if(te instanceof ShellTE){
                 NetworkHooks.openScreen((ServerPlayer) player, (ShellTE)te, pos);
-                return InteractionResult.SUCCESS;
+                return InteractionResult.CONSUME;
+            } else {
+                return InteractionResult.PASS;
             }
         }
-        return InteractionResult.PASS;
     }
 
     @SuppressWarnings("deprecation")
