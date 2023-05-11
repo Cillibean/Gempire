@@ -1,6 +1,7 @@
 package com.gempire.entities.bases;
 
 import com.gempire.container.GemUIContainer;
+import com.gempire.enchants.GemProtectionEnchant;
 import com.gempire.entities.abilities.*;
 import com.gempire.entities.abilities.base.Ability;
 import com.gempire.entities.abilities.interfaces.*;
@@ -11,6 +12,7 @@ import com.gempire.entities.gems.starter.EntityPebble;
 import com.gempire.entities.gems.starter.EntityShale;
 import com.gempire.entities.other.EntityCrawler;
 import com.gempire.events.GemPoofEvent;
+import com.gempire.init.ModEnchants;
 import com.gempire.init.ModItems;
 import com.gempire.init.ModSounds;
 import com.gempire.items.DestabBase;
@@ -895,6 +897,25 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     }
 
 
+    public ArrayList<ItemStack> getArmor() {
+        ArrayList<ItemStack> arrayList = new ArrayList<ItemStack>();
+        if (!this.getItemBySlot(EquipmentSlot.HEAD).isEmpty()) {
+            arrayList.add(this.getItemBySlot(EquipmentSlot.HEAD));
+        }
+        if (!this.getItemBySlot(EquipmentSlot.CHEST).isEmpty()) {
+            arrayList.add(this.getItemBySlot(EquipmentSlot.CHEST));
+            System.out.println("add chestplate");
+        }
+        if (!this.getItemBySlot(EquipmentSlot.LEGS).isEmpty()) {
+            arrayList.add(this.getItemBySlot(EquipmentSlot.LEGS));
+        }
+        if (!this.getItemBySlot(EquipmentSlot.FEET).isEmpty()) {
+            arrayList.add(this.getItemBySlot(EquipmentSlot.FEET));
+        }
+        System.out.println(arrayList);
+        return arrayList;
+    }
+
 
     /*
     0 is stay still
@@ -945,6 +966,29 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     public boolean hurt(DamageSource source, float amount){
         if (!this.level.isClientSide) {
             float hardness = getHardness();
+            System.out.println(this.getArmor().size());
+            for (int i = 0; i < this.getArmor().size(); i++) {
+                ItemStack armorItem = this.getArmor().get(i);
+                System.out.println(armorItem.getItem());
+                if (armorItem.isEnchanted()) {
+                    if (armorItem.getEnchantmentLevel(ModEnchants.GEM_PROTECTION.get()) >= 1) {
+                        if (armorItem.getItem() instanceof ArmorItem) {
+                            EquipmentSlot slot = ((ArmorItem) armorItem.getItem()).getSlot();
+                            float level = armorItem.getEnchantmentLevel(ModEnchants.GEM_PROTECTION.get());
+                            if (slot == EquipmentSlot.HEAD || slot == EquipmentSlot.FEET) {
+                                hardness += level / 2;
+                                System.out.println("head and feet");
+                            } else if (slot == EquipmentSlot.LEGS) {
+                                hardness += level;
+                                System.out.println("legs");
+                            } else if (slot == EquipmentSlot.CHEST) {
+                                hardness += level * 1.5;
+                                System.out.println("chest");
+                            }
+                        }
+                    }
+                }
+            }
             if (source.isExplosion()) {
                 if (amount - getHealth() > ((hardness / 2) + 0.5) && (this.random.nextInt(shatterChance / 2) == 1)) {
                     setShatter(true);

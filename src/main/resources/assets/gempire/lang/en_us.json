@@ -618,5 +618,6 @@
   "advancements.gempire.essence.description": "Obtain Essence",
   "advancements.gempire.root.description": "The Beginning Of Your Magical Journey",
 
-  "enchantment.gempire.shatter": "Breaking Point"
+  "enchantment.gempire.shatter": "Breaking Point",
+  "enchantment.gempire.gem_protection": "Gem Protection"
 }

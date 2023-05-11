@@ -126,7 +126,7 @@ public class ChromaBlock extends DirectionalBlock {
     }
 
     public PushReaction getPistonPushReaction(BlockState state) {
-        return PushReaction.NORMAL;
+        return PushReaction.DESTROY;
     }
 
     public boolean isPathfindable(BlockState state, BlockGetter worldIn, BlockPos pos, PathComputationType type) {

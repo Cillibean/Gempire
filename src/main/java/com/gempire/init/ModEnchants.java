@@ -1,6 +1,7 @@
 package com.gempire.init;
 
 import com.gempire.Gempire;
+import com.gempire.enchants.GemProtectionEnchant;
 import com.gempire.enchants.ShatterEnchant;
 import com.gempire.entities.abilities.base.Ability;
 import com.gempire.entities.gems.EntityZircon;
@@ -24,6 +25,9 @@ public class ModEnchants {
     public static HashMap<Item, Integer> POWERFUL_ITEMS_DISCOUNT = new HashMap<>();
 
     public static final DeferredRegister<Enchantment> ENCHANTS = DeferredRegister.create(ForgeRegistries.ENCHANTMENTS, Gempire.MODID);
+
+    public static final RegistryObject<Enchantment> GEM_PROTECTION = ENCHANTS.register("gem_protection",
+            () -> new GemProtectionEnchant(Enchantment.Rarity.RARE, EnchantmentCategory.ARMOR, EquipmentSlot.values()));
 
     public static final RegistryObject<Enchantment> SHATTER = ENCHANTS.register("shatter",
             () -> new ShatterEnchant(Enchantment.Rarity.RARE, EnchantmentCategory.WEAPON, EquipmentSlot.MAINHAND));

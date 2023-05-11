@@ -1,6 +1,7 @@
 package com.gempire.blocks.machine;
 
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.core.Direction;
@@ -103,4 +104,9 @@ public class PowerCrystalBlock extends DirectionalBlock {
     public boolean isPathfindable(BlockState state, BlockGetter worldIn, BlockPos pos, PathComputationType type) {
         return false;
     }
+
+    public PushReaction getPistonPushReaction(BlockState p_60584_) {
+        return PushReaction.DESTROY;
+    }
 }
+

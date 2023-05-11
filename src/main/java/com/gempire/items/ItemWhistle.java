@@ -24,7 +24,7 @@ public class ItemWhistle extends Item {
             AABB aabb = player.getBoundingBox().inflate(25.0D);
             List<EntityGem> gems = level.getEntitiesOfClass(EntityGem.class, aabb);
             player.getCooldowns().addCooldown(this, 200);
-            level.playSound(player, player.getOnPos().above(), ModSounds.WHISTLE.get(), SoundSource.PLAYERS, 1.0F, 1.0F);
+            level.playSound(null, player.getOnPos().above(), ModSounds.WHISTLE.get(), SoundSource.PLAYERS, 2.0F, 1.0F);
             for (EntityGem gem : gems) {
                 if (!gem.getRebelled() && !(gem.getSludgeAmount() >= 5) && gem.isOwner(player.getUUID())) {
                     gem.setPos(player.getX(), player.getY(), player.getZ());

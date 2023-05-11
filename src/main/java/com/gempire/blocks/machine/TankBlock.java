@@ -1,13 +1,16 @@
 package com.gempire.blocks.machine;
 
+import com.gempire.blocks.IceSpikeBlock;
 import com.gempire.init.ModBlocks;
 import com.gempire.init.ModTE;
 import com.gempire.tileentities.InjectorTE;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -18,6 +21,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -102,6 +106,10 @@ public class TankBlock extends Block {
         builder.add(FACING);
     }
 
+    public long getSeed(BlockState p_52793_, BlockPos p_52794_) {
+        return Mth.getSeed(p_52794_.getX(), p_52794_.below(p_52793_.getValue(HALF) == DoubleBlockHalf.LOWER ? 0 : 1).getY(), p_52794_.getZ());
+    }
+
     @Override
     public void destroy(LevelAccessor world, BlockPos pos, BlockState state) {
         super.destroy(world, pos, state);
@@ -120,5 +128,15 @@ public class TankBlock extends Block {
                 world.setBlock(blockpos, Blocks.AIR.defaultBlockState(), 35);
             }
         }
+    }
+
+    public PushReaction getPistonPushReaction(BlockState state) {
+        return PushReaction.IGNORE;
+    }
+
+    public boolean canSurvive(BlockState p_52783_, LevelReader p_52784_, BlockPos p_52785_) {
+        BlockPos blockpos = p_52785_.below();
+        BlockState blockstate = p_52784_.getBlockState(blockpos);
+        return p_52783_.getValue(HALF) == DoubleBlockHalf.LOWER ? blockstate.isFaceSturdy(p_52784_, blockpos, Direction.UP) : blockstate.is(this);
     }
 }
