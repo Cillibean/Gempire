@@ -14,26 +14,33 @@ import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
+import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import software.bernie.geckolib3.core.AnimationState;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
+import software.bernie.geckolib3.core.builder.ILoopType;
 import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
+import software.bernie.geckolib3.util.GeckoLibUtil;
 
-public class EntityShambler extends PathfinderMob implements IAnimatable {
+public class EntityShambler extends Monster implements IAnimatable {
 
-    private AnimationFactory factory = new AnimationFactory(this);
-    public EntityShambler(EntityType<? extends PathfinderMob> p_21683_, Level p_21684_) {
+    private static final AnimationBuilder ATTACK_ANIMATION = new AnimationBuilder().addAnimation("animation.shambler.attack", ILoopType.EDefaultLoopTypes.PLAY_ONCE);
+    private static final AnimationBuilder IDLE_ANIMATION = new AnimationBuilder().addAnimation("animation.shambler.idle", ILoopType.EDefaultLoopTypes.LOOP);
+    private static final AnimationBuilder WALK_ANIMATION = new AnimationBuilder().addAnimation("animation.shambler.walk", ILoopType.EDefaultLoopTypes.LOOP);
+    private static final AnimationBuilder HURT_ANIMATION = new AnimationBuilder().addAnimation("animation.shambler.hurt", ILoopType.EDefaultLoopTypes.LOOP);
+    private final AnimationFactory FACTORY = GeckoLibUtil.createFactory(this);
+    public EntityShambler(EntityType<? extends Monster> p_21683_, Level p_21684_) {
         super(p_21683_, p_21684_);
     }
 
     public static AttributeSupplier.Builder registerAttributes() {
-        return Mob.createMobAttributes()
+        return Monster.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 30.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.1D)
                 .add(Attributes.ATTACK_DAMAGE, 5.0D)
@@ -55,42 +62,35 @@ public class EntityShambler extends PathfinderMob implements IAnimatable {
         this.goalSelector.addGoal(7, new WaterAvoidingRandomStrollGoal(this, 1.0D));
     }
 
-    private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
-        if (event.isMoving()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.shambler.walk", true));
-            return PlayState.CONTINUE;
-        } else {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.shambler.idle", true));
-            return PlayState.CONTINUE;
-        }
-    }
-
-    private PlayState attackPredicate(AnimationEvent event) {
-        if(this.isAttacking() && event.getController().getAnimationState().equals(AnimationState.Stopped)) {
-            event.getController().markNeedsReload();
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.shambler.attack", false));
-        }
-        return PlayState.CONTINUE;
-    }
-
-    private <E extends IAnimatable> PlayState hurtPredicate(AnimationEvent<E> event) {
-        if (this.hurtMarked && event.getController().getAnimationState().equals(AnimationState.Stopped)) {
-            event.getController().markNeedsReload();
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.shambler.hurt", false));
-        }
-        return PlayState.CONTINUE;
-    }
-
     @Override
     public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController(this, "controller", 0, this::predicate));
-        data.addAnimationController(new AnimationController(this, "attackController", 0, this::attackPredicate));
-        data.addAnimationController(new AnimationController(this, "hurtController", 0, this::hurtPredicate));
+        data.addAnimationController(new AnimationController(this, "controller", 0, event -> {
+            /*if (this.hurtMarked && !event.isMoving() && !this.swinging) {
+                event.getController().setAnimation(HURT_ANIMATION);
+                return PlayState.CONTINUE;
+            } else*/ if (event.isMoving() && !this.swinging){
+                event.getController().setAnimation(WALK_ANIMATION);
+                return PlayState.CONTINUE;
+            } else if (!event.isMoving() && !this.swinging) {
+                event.getController().setAnimation(IDLE_ANIMATION);
+                return PlayState.CONTINUE;
+            }
+            return PlayState.STOP;
+        }));
+
+        data.addAnimationController(new AnimationController(this, "attackController", 0, event -> {
+            if (this.swinging) {
+                event.getController().setAnimation(ATTACK_ANIMATION);
+                return PlayState.CONTINUE;
+            }
+            event.getController().markNeedsReload();
+            return PlayState.STOP;
+        }));
     }
 
     @Override
     public AnimationFactory getFactory() {
-        return this.factory;
+        return FACTORY;
     }
 
     public void setAttacking(boolean attacking) {
@@ -105,5 +105,10 @@ public class EntityShambler extends PathfinderMob implements IAnimatable {
     protected void defineSynchedData() {
         super.defineSynchedData();
         this.entityData.define(ATTACKING, false);
+    }
+
+    @Override
+    public int getCurrentSwingDuration() {
+        return 6;
     }
 }
