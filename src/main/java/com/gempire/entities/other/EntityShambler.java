@@ -1,6 +1,7 @@
 package com.gempire.entities.other;
 
 import com.gempire.entities.ai.EntityAICrawlerAttackGoal;
+import com.gempire.entities.ai.EntityAIShamblerAttackGoal;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -49,17 +50,17 @@ public class EntityShambler extends PathfinderMob implements IAnimatable {
         //this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
         //this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, EntityGem.class, true));
         //this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.1D, false));
-        this.goalSelector.addGoal(1, new EntityAICrawlerAttackGoal(this, 1.2D, false));
+        this.goalSelector.addGoal(1, new EntityAIShamblerAttackGoal(this, 1.2D, false));
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
         this.goalSelector.addGoal(7, new WaterAvoidingRandomStrollGoal(this, 1.0D));
     }
 
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
         if (event.isMoving()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.crawler.walk", true));
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.shambler.walk", true));
             return PlayState.CONTINUE;
         } else {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.crawler.idle", true));
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.shambler.idle", true));
             return PlayState.CONTINUE;
         }
     }
@@ -67,7 +68,7 @@ public class EntityShambler extends PathfinderMob implements IAnimatable {
     private PlayState attackPredicate(AnimationEvent event) {
         if(this.isAttacking() && event.getController().getAnimationState().equals(AnimationState.Stopped)) {
             event.getController().markNeedsReload();
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.crawler.attack", false));
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.shambler.attack", false));
         }
         return PlayState.CONTINUE;
     }
@@ -75,7 +76,7 @@ public class EntityShambler extends PathfinderMob implements IAnimatable {
     private <E extends IAnimatable> PlayState hurtPredicate(AnimationEvent<E> event) {
         if (this.hurtMarked && event.getController().getAnimationState().equals(AnimationState.Stopped)) {
             event.getController().markNeedsReload();
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.crawler.hurt", false));
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.shambler.hurt", false));
         }
         return PlayState.CONTINUE;
     }

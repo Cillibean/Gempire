@@ -9,16 +9,16 @@ import software.bernie.geckolib3.model.AnimatedGeoModel;
 public class ModelShambler extends AnimatedGeoModel<EntityShambler> {
     @Override
     public ResourceLocation getModelResource(EntityShambler object) {
-        return new ResourceLocation(Gempire.MODID, "geo/entity/crawler.geo.json");
+        return new ResourceLocation(Gempire.MODID, "geo/entity/shambler.geo.json");
     }
 
     @Override
     public ResourceLocation getTextureResource(EntityShambler object) {
-        return new ResourceLocation(Gempire.MODID, "textures/entity/clods/crawler.png");
+        return new ResourceLocation(Gempire.MODID, "textures/entity/clods/shambler.png");
     }
 
     @Override
     public ResourceLocation getAnimationResource(EntityShambler animatable) {
-        return new ResourceLocation(Gempire.MODID, "animations/entity/crawler.animation.json");
+        return new ResourceLocation(Gempire.MODID, "animations/entity/shambler.animation.json");
     }
 }

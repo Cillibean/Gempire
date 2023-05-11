@@ -1,12 +1,20 @@
 package com.gempire.init;
 
+import com.gempire.Gempire;
+import com.gempire.enchants.ShatterEnchant;
 import com.gempire.entities.abilities.base.Ability;
 import com.gempire.entities.gems.EntityZircon;
 import com.gempire.util.Abilities;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentCategory;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,6 +22,11 @@ import java.util.HashMap;
 public class ModEnchants {
     public static ArrayList<Enchantment> VANILLA_ENCHANTMENTS = new ArrayList<>();
     public static HashMap<Item, Integer> POWERFUL_ITEMS_DISCOUNT = new HashMap<>();
+
+    public static final DeferredRegister<Enchantment> ENCHANTS = DeferredRegister.create(ForgeRegistries.ENCHANTMENTS, Gempire.MODID);
+
+    public static final RegistryObject<Enchantment> SHATTER = ENCHANTS.register("shatter",
+            () -> new ShatterEnchant(Enchantment.Rarity.RARE, EnchantmentCategory.WEAPON, EquipmentSlot.MAINHAND));
 
     public static void registerItemDiscounts(){
         ModEnchants.POWERFUL_ITEMS_DISCOUNT.put(Items.GOLD_INGOT, 25);

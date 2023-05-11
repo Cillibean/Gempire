@@ -1,5 +1,6 @@
 package com.gempire.entities.other;
 
+import com.gempire.entities.ai.EntityAIAbominationAttackGoal;
 import com.gempire.entities.ai.EntityAICrawlerAttackGoal;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -49,7 +50,7 @@ public class EntityAbomination extends PathfinderMob implements IAnimatable {
         //this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
         //this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, EntityGem.class, true));
         //this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.1D, false));
-        this.goalSelector.addGoal(1, new EntityAICrawlerAttackGoal(this, 1.2D, false));
+        this.goalSelector.addGoal(1, new EntityAIAbominationAttackGoal(this, 1.2D, false));
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
         this.goalSelector.addGoal(7, new WaterAvoidingRandomStrollGoal(this, 1.0D));
     }
