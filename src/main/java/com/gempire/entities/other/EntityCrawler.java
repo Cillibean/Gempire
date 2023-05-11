@@ -2,9 +2,13 @@ package com.gempire.entities.other;
 
 import com.gempire.entities.ai.EntityAICrawlerAttackGoal;
 import com.gempire.entities.bases.EntityGem;
+import com.gempire.init.ModSounds;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.PathfinderMob;
@@ -17,6 +21,7 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.fluids.FluidType;
+import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib3.GeckoLib;
 import software.bernie.geckolib3.core.AnimationState;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -33,7 +38,7 @@ public class EntityCrawler extends Monster implements IAnimatable {
     private static final AnimationBuilder ATTACK_ANIMATION = new AnimationBuilder().addAnimation("animation.crawler.attack", ILoopType.EDefaultLoopTypes.PLAY_ONCE);
     private static final AnimationBuilder IDLE_ANIMATION = new AnimationBuilder().addAnimation("animation.crawler.idle", ILoopType.EDefaultLoopTypes.LOOP);
     private static final AnimationBuilder WALK_ANIMATION = new AnimationBuilder().addAnimation("animation.crawler.walk", ILoopType.EDefaultLoopTypes.LOOP);
-    private static final AnimationBuilder HURT_ANIMATION = new AnimationBuilder().addAnimation("animation.crawler.hurt", ILoopType.EDefaultLoopTypes.LOOP);
+    private static final AnimationBuilder HURT_ANIMATION = new AnimationBuilder().addAnimation("animation.crawler.hurt", ILoopType.EDefaultLoopTypes.PLAY_ONCE);
     private final AnimationFactory FACTORY = GeckoLibUtil.createFactory(this);
     public EntityCrawler(EntityType<? extends Monster> p_21683_, Level p_21684_) {
         super(p_21683_, p_21684_);
@@ -65,10 +70,10 @@ public class EntityCrawler extends Monster implements IAnimatable {
     @Override
     public void registerControllers(AnimationData data) {
         data.addAnimationController(new AnimationController(this, "controller", 0, event -> {
-            /*if (this.hurtMarked && !event.isMoving() && !this.swinging) {
+            if (this.hurtMarked && !this.swinging) {
                 event.getController().setAnimation(HURT_ANIMATION);
                 return PlayState.CONTINUE;
-            } else*/ if (event.isMoving() && !this.swinging){
+            } else if (event.isMoving() && !this.swinging){
                 event.getController().setAnimation(WALK_ANIMATION);
                 return PlayState.CONTINUE;
             } else if (!event.isMoving() && !this.swinging) {
@@ -109,5 +114,21 @@ public class EntityCrawler extends Monster implements IAnimatable {
     @Override
     public int getCurrentSwingDuration() {
         return 5;
+    }
+
+    @Nullable
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return ModSounds.CRAWLER_LIVING.get();
+    }
+
+    @Override
+    protected SoundEvent getHurtSound(DamageSource p_33034_) {
+        return ModSounds.CRAWLER_HURT.get();
+    }
+
+    @Override
+    protected SoundEvent getDeathSound() {
+        return ModSounds.CRAWLER_DEATH.get();
     }
 }

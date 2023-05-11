@@ -367,7 +367,7 @@
   "entity.gempire.peridot": "Peridot",
   "entity.gempire.rutile": "Rutile",
 
-  "entity.gempire.crawler": "Clod",
+  "entity.gempire.crawler": "Crawler",
   "entity.gempire.shambler": "Shambler",
   "entity.gempire.abomination": "Abomination",
 
@@ -552,6 +552,11 @@
   "gempire.subtitle.inject": "Injector injects gem seed",
   "gempire.subtitle.poof": "Gem poofed",
   "gempire.subtitle.whistle": "Gem Whistle plays",
+
+  "gempire.subtitle.crawler_attack": "Crawler Attacks",
+  "gempire.subtitle.crawler_hurt": "Crawler Hurt",
+  "gempire.subtitle.crawler_death": "Crawler Dies",
+  "gempire.subtitle.crawler_living": "Crawler Gargles",
 
   "advancements.gempire.agate.title": "Shoulders Squared!",
   "advancements.gempire.aquamarine.title": "Look, I'm crying",
