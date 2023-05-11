@@ -1,5 +1,6 @@
 package com.gempire.blocks;
 
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -13,6 +14,7 @@ import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.core.Direction;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.level.BlockGetter;
@@ -72,6 +74,11 @@ public class IceSpikeBlock extends Block {
         }
 
     }
+
+    public long getSeed(BlockState p_52793_, BlockPos p_52794_) {
+        return Mth.getSeed(p_52794_.getX(), p_52794_.below(p_52793_.getValue(HALF) == DoubleBlockHalf.LOWER ? 0 : 1).getY(), p_52794_.getZ());
+    }
+
     @Override
     public void randomTick(BlockState state, ServerLevel worldIn, BlockPos pos, RandomSource random) {
         super.randomTick(state, worldIn, pos, (RandomSource) random);
@@ -158,5 +165,9 @@ public class IceSpikeBlock extends Block {
         if (entityIn instanceof LivingEntity) {
             if (state.getValue(HALF) == DoubleBlockHalf.UPPER) entityIn.hurt(DamageSource.GENERIC, 2.0F);
         }
+    }
+
+    public PushReaction getPistonPushReaction(BlockState p_152733_) {
+        return PushReaction.DESTROY;
     }
 }
