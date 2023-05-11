@@ -13,8 +13,10 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.fluids.FluidType;
 import software.bernie.geckolib3.GeckoLib;
 import software.bernie.geckolib3.core.AnimationState;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -27,17 +29,18 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 import software.bernie.geckolib3.util.GeckoLibUtil;
 
-public class EntityCrawler extends PathfinderMob implements IAnimatable {
+public class EntityCrawler extends Monster implements IAnimatable {
     private static final AnimationBuilder ATTACK_ANIMATION = new AnimationBuilder().addAnimation("animation.crawler.attack", ILoopType.EDefaultLoopTypes.PLAY_ONCE);
     private static final AnimationBuilder IDLE_ANIMATION = new AnimationBuilder().addAnimation("animation.crawler.idle", ILoopType.EDefaultLoopTypes.LOOP);
     private static final AnimationBuilder WALK_ANIMATION = new AnimationBuilder().addAnimation("animation.crawler.walk", ILoopType.EDefaultLoopTypes.LOOP);
+    private static final AnimationBuilder HURT_ANIMATION = new AnimationBuilder().addAnimation("animation.crawler.hurt", ILoopType.EDefaultLoopTypes.LOOP);
     private final AnimationFactory FACTORY = GeckoLibUtil.createFactory(this);
-    public EntityCrawler(EntityType<? extends PathfinderMob> p_21683_, Level p_21684_) {
+    public EntityCrawler(EntityType<? extends Monster> p_21683_, Level p_21684_) {
         super(p_21683_, p_21684_);
     }
 
     public static AttributeSupplier.Builder registerAttributes() {
-        return Mob.createMobAttributes()
+        return Monster.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 30.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.1D)
                 .add(Attributes.ATTACK_DAMAGE, 5.0D)
@@ -62,6 +65,10 @@ public class EntityCrawler extends PathfinderMob implements IAnimatable {
     @Override
     public void registerControllers(AnimationData data) {
         data.addAnimationController(new AnimationController(this, "controller", 0, event -> {
+            if (this.hurtMarked) {
+                event.getController().setAnimation(HURT_ANIMATION);
+                return PlayState.CONTINUE;
+            }
             if (event.isMoving() && !this.swinging){
                 event.getController().setAnimation(WALK_ANIMATION);
                 return PlayState.CONTINUE;
@@ -86,7 +93,6 @@ public class EntityCrawler extends PathfinderMob implements IAnimatable {
     public AnimationFactory getFactory() {
         return FACTORY;
     }
-
     public void setAttacking(boolean attacking) {
         this.entityData.set(ATTACKING, attacking);
     }
@@ -99,5 +105,10 @@ public class EntityCrawler extends PathfinderMob implements IAnimatable {
     protected void defineSynchedData() {
         super.defineSynchedData();
         this.entityData.define(ATTACKING, false);
+    }
+
+    @Override
+    public int getCurrentSwingDuration() {
+        return 5;
     }
 }
