@@ -65,11 +65,10 @@ public class EntityCrawler extends Monster implements IAnimatable {
     @Override
     public void registerControllers(AnimationData data) {
         data.addAnimationController(new AnimationController(this, "controller", 0, event -> {
-            if (this.hurtMarked) {
+            /*if (this.hurtMarked && !event.isMoving() && !this.swinging) {
                 event.getController().setAnimation(HURT_ANIMATION);
                 return PlayState.CONTINUE;
-            }
-            if (event.isMoving() && !this.swinging){
+            } else*/ if (event.isMoving() && !this.swinging){
                 event.getController().setAnimation(WALK_ANIMATION);
                 return PlayState.CONTINUE;
             } else if (!event.isMoving() && !this.swinging) {
