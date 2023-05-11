@@ -1,5 +1,6 @@
 package com.gempire.blocks;
 
+import com.gempire.init.ModBlocks;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
