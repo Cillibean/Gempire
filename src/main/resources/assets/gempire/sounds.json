@@ -10,5 +10,21 @@
   "whistle": {
     "subtitle": "gempire.subtitle.whistle",
     "sounds": [ "gempire:whistle" ]
+  },
+  "crawler_attack": {
+    "subtitle": "gempire.subtitle.crawler_attack",
+    "sounds": [ "gempire:whistle" ]
+  },
+  "crawler_death": {
+    "subtitle": "gempire.subtitle.crawler_death",
+    "sounds": [ "gempire:whistle" ]
+  },
+  "crawler_hurt": {
+    "subtitle": "gempire.subtitle.crawler_hurt",
+    "sounds": [ "gempire:whistle" ]
+  },
+  "crawler_living": {
+    "subtitle": "gempire.subtitle.crawler_living",
+    "sounds": [ "gempire:whistle" ]
   }
 }
