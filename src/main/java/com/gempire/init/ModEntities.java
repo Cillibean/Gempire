@@ -271,6 +271,30 @@ public class ModEntities {
         GemFormation.POSSIBLE_GEMS_TIER_2.add("larimar");
         GemFormation.POSSIBLE_GEMS_TIER_2.add("morganite");
         GemFormation.POSSIBLE_GEMS_TIER_2.add("garnet");
+
+        GemFormation.NETHER_POSSIBLE_GEMS_TIER_1.add("ruby");
+        GemFormation.NETHER_POSSIBLE_GEMS_TIER_1.add("quartz");
+        GemFormation.NETHER_POSSIBLE_GEMS_TIER_1.add("jasper");
+        GemFormation.NETHER_POSSIBLE_GEMS_TIER_1.add("agate");
+
+        GemFormation.NETHER_POSSIBLE_GEMS_TIER_2.add("ruby");
+        GemFormation.NETHER_POSSIBLE_GEMS_TIER_2.add("quartz");
+        GemFormation.NETHER_POSSIBLE_GEMS_TIER_2.add("jasper");
+        GemFormation.NETHER_POSSIBLE_GEMS_TIER_2.add("agate");
+        GemFormation.NETHER_POSSIBLE_GEMS_TIER_2.add("garnet");
+
+        GemFormation.NETHER_POSSIBLE_GEMS_TIER_2.add("obsidian");
+
+        GemFormation.END_POSSIBLE_GEMS_TIER_1.add("spinel");
+        GemFormation.END_POSSIBLE_GEMS_TIER_1.add("peridot");
+
+        GemFormation.END_POSSIBLE_GEMS_TIER_2.add("spinel");
+        GemFormation.END_POSSIBLE_GEMS_TIER_2.add("peridot");
+
+        GemFormation.END_POSSIBLE_GEMS_TIER_2.add("emerald");
+        GemFormation.END_POSSIBLE_GEMS_TIER_2.add("zircon");
+        GemFormation.END_POSSIBLE_GEMS_TIER_2.add("sapphire");
+        GemFormation.END_POSSIBLE_GEMS_TIER_2.add("morganite");
     }
 
     public static void setVanillaGems(){

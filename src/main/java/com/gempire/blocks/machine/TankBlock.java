@@ -2,6 +2,7 @@ package com.gempire.blocks.machine;
 
 import com.gempire.blocks.IceSpikeBlock;
 import com.gempire.init.ModBlocks;
+import com.gempire.init.ModItems;
 import com.gempire.init.ModTE;
 import com.gempire.tileentities.InjectorTE;
 import net.minecraft.util.Mth;
@@ -50,17 +51,19 @@ public class TankBlock extends Block {
     @Override
     public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
         if (worldIn.isClientSide()) {
-            return InteractionResult.SUCCESS;
+            return InteractionResult.PASS;
         } else {
+            if (player.getMainHandItem().getItem() != ModItems.INJECTOR_PANEL.get()) {
             BlockPos drillPos = state.getValue(HALF) == DoubleBlockHalf.UPPER ? pos.below().below() : pos.below();
             BlockPos crystalPos = state.getValue(HALF) == DoubleBlockHalf.UPPER ? pos.above() : pos.above().above();
             if (worldIn.getBlockState(drillPos).getBlock() == ModBlocks.DRILL_BLOCK.get() && worldIn.getBlockState(crystalPos).getBlock() instanceof PowerCrystalBlock) {
                 BlockEntity te = worldIn.getBlockEntity(drillPos);
                 if (te instanceof InjectorTE) {
-                    NetworkHooks.openScreen((ServerPlayer) player, (InjectorTE) te, drillPos);
-                    return InteractionResult.CONSUME;
+                        NetworkHooks.openScreen((ServerPlayer) player, (InjectorTE) te, drillPos);
+                        return InteractionResult.CONSUME;
+                    } return InteractionResult.PASS;
                 } return InteractionResult.PASS;
-            } return InteractionResult.PASS;
+            } return InteractionResult.SUCCESS;
         }
     }
 
@@ -131,12 +134,12 @@ public class TankBlock extends Block {
     }
 
     public PushReaction getPistonPushReaction(BlockState state) {
-        return PushReaction.IGNORE;
+        return PushReaction.BLOCK;
     }
 
-    public boolean canSurvive(BlockState p_52783_, LevelReader p_52784_, BlockPos p_52785_) {
+    /*public boolean canSurvive(BlockState p_52783_, LevelReader p_52784_, BlockPos p_52785_) {
         BlockPos blockpos = p_52785_.below();
         BlockState blockstate = p_52784_.getBlockState(blockpos);
         return p_52783_.getValue(HALF) == DoubleBlockHalf.LOWER ? blockstate.isFaceSturdy(p_52784_, blockpos, Direction.UP) : blockstate.is(this);
-    }
+    }*/
 }
