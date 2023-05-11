@@ -10,7 +10,7 @@
       "name": "An Agate",
       "rotate": "true",
       "offset": 0.2,
-      "text": "A mid-game solider, has many possible abilities, also has the Stern ability, making other gems perform their tasks more efficiently."
+      "text": "A mid-game solider, has many possible abilities. Also has the Stern ability, making other gems perform their tasks more efficiently and warding off hostile entities."
     },
     {
       "type": "patchouli:text",
