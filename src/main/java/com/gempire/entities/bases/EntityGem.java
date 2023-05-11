@@ -651,44 +651,9 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         super.aiStep();
     }
 
-    public Item getInputItem(int i) {
-        System.out.println("get input " + i);
-        if (this instanceof EntityBismuth) {
-            inputList.add(ModItems.GEM_SCRAP.get());
-            return inputList.get(i);
-        } else if (this instanceof EntityMorganite) {
-            inputList.add(Items.STONE);
-            return inputList.get(i);
-        } else if (this instanceof EntityShale) {
-            inputList.add(ModItems.GEM_SLUSH_BUCKET.get());
-            return inputList.get(i);
-        } else {
-                return Items.AIR;
-        }
-    }
+    public abstract Item getInputItem(int i);
 
-    public Item getOutputItem(int i) {
-        System.out.println("get output "+ i);
-        if (this instanceof EntityBismuth) {
-            outputList.add(ModItems.PRISMATIC_INGOT.get());
-            return outputList.get(i);
-        } else if (this instanceof EntityMorganite) {
-            outputList.add(ModItems.PEDISTAL.get());
-            return outputList.get(i);
-        } else if (this instanceof  EntityShale) {
-            int n = random.nextInt(4);
-            switch (n) {
-                case 1 -> outputList.add(ModItems.PINK_ESSENCE_BUCKET.get());
-                case 2 -> outputList.add(ModItems.BLUE_ESSENCE_BUCKET.get());
-                case 3 -> outputList.add(ModItems.YELLOW_ESSENCE_BUCKET.get());
-                default -> outputList.add(ModItems.WHITE_ESSENCE_BUCKET.get());
-            }
-            System.out.println("shale");
-            return outputList.get(i);
-        } else {
-            return Items.AIR;
-        }
-    }
+    public abstract Item getOutputItem(int i);
 
     public int getCurrentRecipe() {
         return this.entityData.get(EntityGem.CURRENT_RECIPE);
@@ -706,20 +671,14 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.entityData.set(EntityGem.RECIPE_AMOUNT, i);
     }
 
-    public int generateRecipeAmount() {
-        if (this instanceof EntityShale) {
-            return 1;
-        } else if (this instanceof EntityBismuth) {
-            return 1;
-        } else if (this instanceof EntityMorganite) {
-            return 1;
-        } else {
-            return 0;
-        }
-    }
+    public abstract int generateRecipeAmount();
 
     public int getTimetoCraft() {
         return timeToCraft;
+    }
+
+    public boolean canCraft() {
+        return false;
     }
 
     @Override
@@ -860,7 +819,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         }
         if (!level.isClientSide) {
             System.out.println("entity check");
-            if (this instanceof EntityMorganite || this instanceof EntityBismuth || this instanceof EntityShale) {
+            if (this.canCraft()) {
                 System.out.println("passed entity check");
                 System.out.println(getRecipeAmount());
                 for (int i = 0; i <= getRecipeAmount(); i++) {

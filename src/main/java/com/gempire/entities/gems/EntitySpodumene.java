@@ -15,6 +15,8 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
@@ -186,5 +188,20 @@ public class EntitySpodumene extends EntityVaryingGem {
 
     public int generateHardness() {
         return 7;
+    }
+
+    @Override
+    public Item getInputItem(int i) {
+        return Items.AIR;
+    }
+
+    @Override
+    public Item getOutputItem(int i) {
+        return Items.AIR;
+    }
+
+    @Override
+    public int generateRecipeAmount() {
+        return 0;
     }
 }

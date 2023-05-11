@@ -5,6 +5,7 @@ import com.gempire.entities.ai.EntityAIFollowOwner;
 import com.gempire.entities.ai.EntityAISludged;
 import com.gempire.entities.ai.EntityAIWander;
 import com.gempire.entities.bases.EntityGem;
+import com.gempire.entities.gems.starter.EntityShale;
 import com.gempire.init.ModItems;
 import com.gempire.util.Abilities;
 import com.gempire.util.GemPlacements;
@@ -60,6 +61,29 @@ public class EntityMorganite extends EntityGem {
     {
         return SoundEvents.NOTE_BLOCK_PLING;
     }
+
+    @Override
+    public Item getInputItem(int i) {
+        inputList.add(Items.STONE);
+        return inputList.get(i);
+    }
+
+    @Override
+    public Item getOutputItem(int i) {
+        outputList.add(ModItems.PEDISTAL.get());
+        return outputList.get(i);
+    }
+
+    @Override
+    public int generateRecipeAmount() {
+        return 1;
+    }
+
+    @Override
+    public boolean canCraft() {
+        return true;
+    }
+
     @Override
     public int generateSkinVariant() {
         return 0;

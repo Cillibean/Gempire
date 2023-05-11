@@ -11,6 +11,8 @@ import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 
 import javax.annotation.Nullable;
@@ -55,5 +57,20 @@ public abstract class AbstractQuartz extends EntityVaryingGem {
 
     public int generateHardness() {
         return 7;
+    }
+
+    @Override
+    public Item getInputItem(int i) {
+        return Items.AIR;
+    }
+
+    @Override
+    public Item getOutputItem(int i) {
+        return Items.AIR;
+    }
+
+    @Override
+    public int generateRecipeAmount() {
+        return 0;
     }
 }
