@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "gempire:items/zircon_gem_15",
+    "layer1": "gempire:items/perfect/perfect"
+  }
+}

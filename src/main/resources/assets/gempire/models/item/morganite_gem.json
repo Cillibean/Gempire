@@ -14,13 +14,13 @@
       "predicate": {
         "gempire:gempredicate": 0.2
       },
-      "model": "gempire:item/morganite_gem_perfect"
+      "model": "gempire:item/morganite_gem_cracked"
     },
     {
       "predicate": {
         "gempire:gempredicate": 1.0
       },
-      "model": "gempire:item/morganite_gem_cracked"
+      "model": "gempire:item/morganite_gem_perfect"
     }
   ]
 }

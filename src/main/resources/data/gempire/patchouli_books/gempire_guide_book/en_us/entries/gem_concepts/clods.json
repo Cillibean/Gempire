@@ -10,6 +10,28 @@
       "name": "A Crawler",
       "rotate": "true",
       "text": "A floor-bound clod variant that pulls itself across the ground to players and gems."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "gempire:shambler",
+      "name": "A Shambler",
+      "rotate": "true",
+      "text": "A bipedal clod variant that rushes to players and gems."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "gempire:abomination",
+      "name": "An Abomination",
+      "rotate": "true",
+      "text": "A much larger bipedal clod variant that rushes to players and gems."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Clods are the result of poor kindergarten management, whether it's purposeful or otherwise. They emerge when a gem fails to form correctly, due to lack of cruxes to sustain the gem seed growing in the ground."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Clods are extremely hostile entities that seek out both players and gems, so they can attack and try to devour them for sustenance.$(br)They desperately crave to become whole instead of living in anguish due to their unfinished state. Clods will infect gems with their sludgy forms upon attacking, brainwashing them and turning them hostile to their owner."
     }
   ]
 }

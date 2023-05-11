@@ -14,13 +14,13 @@
       "predicate": {
         "gempire:gempredicate": 0.2
       },
-      "model": "gempire:item/garnet_gem_10_perfect"
+      "model": "gempire:item/garnet_gem_10_cracked"
     },
     {
       "predicate": {
         "gempire:gempredicate": 1.0
       },
-      "model": "gempire:item/garnet_gem_10_cracked"
+      "model": "gempire:item/garnet_gem_10_perfect"
     }
   ]
 }
