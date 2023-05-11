@@ -1,5 +1,6 @@
 package com.gempire.entities.bases;
 
+import com.gempire.init.ModItems;
 import com.gempire.systems.injection.Crux;
 import com.gempire.util.Abilities;
 import com.gempire.util.CruxType;
@@ -8,6 +9,8 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 
 import javax.annotation.Nullable;
@@ -100,5 +103,20 @@ public abstract class EntityStarterGem extends EntityGem {
     @Override
     public int generateHardness() {
         return 3;
+    }
+
+    @Override
+    public Item getInputItem(int i) {
+        return Items.AIR;
+    }
+
+    @Override
+    public Item getOutputItem(int i) {
+        return Items.AIR;
+    }
+
+    @Override
+    public int generateRecipeAmount() {
+        return 0;
     }
 }

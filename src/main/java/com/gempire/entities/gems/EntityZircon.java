@@ -26,9 +26,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.world.item.AirItem;
-import net.minecraft.world.item.BookItem;
-import net.minecraft.world.item.Item;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 
 import javax.annotation.Nullable;
@@ -39,7 +37,6 @@ import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.PanicGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
-import net.minecraft.world.item.ItemStack;
 
 public class EntityZircon extends EntityVaryingGem {
     public static final int NUMBER_OF_SLOTS = 3;
@@ -375,5 +372,20 @@ public class EntityZircon extends EntityVaryingGem {
 
     public int generateHardness() {
         return 7;
+    }
+
+    @Override
+    public Item getInputItem(int i) {
+        return Items.AIR;
+    }
+
+    @Override
+    public Item getOutputItem(int i) {
+        return Items.AIR;
+    }
+
+    @Override
+    public int generateRecipeAmount() {
+        return 0;
     }
 }

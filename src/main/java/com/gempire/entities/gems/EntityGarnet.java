@@ -16,7 +16,9 @@ import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 
 import java.util.Random;
@@ -232,6 +234,21 @@ public class EntityGarnet extends EntityVaryingGem {
 
     public int generateHardness() {
         return 7;
+    }
+
+    @Override
+    public Item getInputItem(int i) {
+        return Items.AIR;
+    }
+
+    @Override
+    public Item getOutputItem(int i) {
+        return Items.AIR;
+    }
+
+    @Override
+    public int generateRecipeAmount() {
+        return 0;
     }
 
 }

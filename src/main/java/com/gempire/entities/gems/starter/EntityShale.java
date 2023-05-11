@@ -4,6 +4,8 @@ import com.gempire.entities.ai.EntityAIFollowAssigned;
 import com.gempire.entities.ai.EntityAIFollowOwner;
 import com.gempire.entities.ai.EntityAIWander;
 import com.gempire.entities.bases.EntityStarterGem;
+import com.gempire.entities.gems.EntityBismuth;
+import com.gempire.entities.gems.EntityMorganite;
 import com.gempire.init.ModFluids;
 import com.gempire.init.ModItems;
 import com.gempire.util.Abilities;
@@ -18,6 +20,7 @@ import net.minecraft.world.entity.animal.Cat;
 import net.minecraft.world.entity.animal.Ocelot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 
 import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
@@ -51,6 +54,34 @@ public class EntityShale extends EntityStarterGem {
         this.goalSelector.addGoal(8, new EntityAIWander(this, 1.0D));
         this.goalSelector.addGoal(8, new EntityAIFollowOwner(this, 1.0D));
         this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, Mob.class, 6.0F, 1.0D, 1.2D, (mob)-> mob.getClassification(true)== MobCategory.MONSTER));
+    }
+
+    @Override
+    public Item getInputItem(int i) {
+        inputList.add(ModItems.GEM_SLUSH_BUCKET.get());
+        return inputList.get(i);
+    }
+
+    @Override
+    public Item getOutputItem(int i) {
+        int n = random.nextInt(4);
+        switch (n) {
+            case 1 -> outputList.add(ModItems.PINK_ESSENCE_BUCKET.get());
+            case 2 -> outputList.add(ModItems.BLUE_ESSENCE_BUCKET.get());
+            case 3 -> outputList.add(ModItems.YELLOW_ESSENCE_BUCKET.get());
+            default -> outputList.add(ModItems.WHITE_ESSENCE_BUCKET.get());
+        }
+        return outputList.get(i);
+    }
+
+    @Override
+    public int generateRecipeAmount() {
+        return 1;
+    }
+
+    @Override
+    public boolean canCraft() {
+        return true;
     }
 
     @Override

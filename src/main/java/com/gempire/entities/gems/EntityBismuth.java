@@ -2,6 +2,7 @@ package com.gempire.entities.gems;
 
 import com.gempire.entities.ai.*;
 import com.gempire.entities.bases.EntityGem;
+import com.gempire.entities.gems.starter.EntityShale;
 import com.gempire.init.ModItems;
 import com.gempire.util.Abilities;
 import com.gempire.util.GemPlacements;
@@ -16,6 +17,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
@@ -64,6 +66,30 @@ public class EntityBismuth extends EntityGem {
     {
         return SoundEvents.NOTE_BLOCK_BASS;
     }
+
+    @Override
+    public Item getInputItem(int i) {
+        inputList.add(ModItems.GEM_SCRAP.get());
+        return inputList.get(i);
+    }
+
+    @Override
+    public Item getOutputItem(int i) {
+        outputList.add(ModItems.PRISMATIC_INGOT.get());
+        return outputList.get(i);
+    }
+
+    @Override
+    public int generateRecipeAmount() {
+        return 1;
+    }
+
+    @Override
+    public boolean canCraft() {
+        return true;
+    }
+
+
     @Override
     public int generateSkinVariant() {
         return this.getGemPlacement() == 11 ? 11 : 0;
