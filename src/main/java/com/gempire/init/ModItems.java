@@ -65,15 +65,19 @@ public class ModItems {
     );
 
     public static final RegistryObject<Item> TUNGSTEN_INGOT = ITEMS.register("tungsten_ingot", () ->
-            new Item(new Item.Properties().tab(ModItemGroup.BLOCKS).stacksTo(64))
+            new Item(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(64))
     );
 
     public static final RegistryObject<Item> RAW_TUNGSTEN = ITEMS.register("raw_tungsten", () ->
-            new Item(new Item.Properties().tab(ModItemGroup.BLOCKS).stacksTo(64))
+            new Item(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(64))
     );
 
     public static final RegistryObject<Item> TUNGSTEN_NUGGET = ITEMS.register("tungsten_nugget", () ->
-            new Item(new Item.Properties().tab(ModItemGroup.BLOCKS).stacksTo(64))
+            new Item(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(64))
+    );
+
+    public static final RegistryObject<Item> GEM_ALLOY = ITEMS.register("gem_alloy", () ->
+            new Item(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(64))
     );
 
     public static final RegistryObject<Item> PINK_ESSENCE_BUCKET = ITEMS.register("pink_essence_bucket", () ->

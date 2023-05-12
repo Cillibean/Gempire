@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CIC",
+    "CIC",
+    "CIC"
+  ],
+  "key": {
+    "I": {
+      "item": "gempire:tungsten_block"
+    },
+    "C": {
+      "item": "gempire:tungsten_ingot"
+    }
+  },
+  "result": {
+    "item": "gempire:confractor_body",
+    "count": 1
+  }
+}

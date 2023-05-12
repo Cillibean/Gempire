@@ -69,7 +69,7 @@ public class EntityBismuth extends EntityGem {
 
     @Override
     public Item getInputItem(int i) {
-        inputList.add(ModItems.GEM_SCRAP.get());
+        inputList.add(ModItems.GEM_ALLOY.get());
         return inputList.get(i);
     }
 

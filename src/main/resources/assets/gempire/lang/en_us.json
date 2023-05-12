@@ -139,7 +139,8 @@
 
   "item.gempire.injector_panel": "Injector Remote",
   "item.gempire.prismatic_ingot": "Prismatic Ingot",
-  "item.gempire.gem_scrap": "Prismatic Scraps",
+  "item.gempire.gem_scrap": "Gem Scrap",
+  "item.gempire.gem_alloy": "Gem Alloy",
   "item.gempire.rebel_stick": "Rebel Stick",
   "item.gempire.share_contract": "Share Contract",
   "item.gempire.transfer_contract": "Transfer Contract",
@@ -512,7 +513,7 @@
   "ability.gempire.amphibian": "Amphibian",
   "ability.gempire.vehicle": "Vehicle",
   "ability.gempire.acidic_spit": "Acidic Spit",
-  "ability.gempire.scout": "Scout (NYI)",
+  "ability.gempire.scout": "Scout",
   "ability.gempire.prospector": "Prospector (NYI)",
   "ability.gempire.spelunker": "Spelunker (NYI)",
   "ability.gempire.torchbearer": "Torchbearer",
