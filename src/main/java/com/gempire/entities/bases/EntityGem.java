@@ -1,5 +1,6 @@
 package com.gempire.entities.bases;
 
+import com.gempire.commands.impl.CommandGempireLocate;
 import com.gempire.container.GemUIContainer;
 import com.gempire.enchants.GemProtectionEnchant;
 import com.gempire.entities.abilities.*;
@@ -24,10 +25,11 @@ import com.gempire.util.PaletteType;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.DynamicCommandExceptionType;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
+import com.mojang.datafixers.util.Pair;
 import net.minecraft.client.Minecraft;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.NonNullList;
-import net.minecraft.core.Registry;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.commands.arguments.ResourceOrTagLocationArgument;
+import net.minecraft.core.*;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -181,6 +183,16 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     public boolean chromaColourRequired;
     public boolean enemyDying;
     public LivingEntity enemy;
+
+    private static final DynamicCommandExceptionType ERROR_STRUCTURE_INVALID = new DynamicCommandExceptionType((p_207534_) -> {
+        return Component.translatable("commands.gempire.nounderstand", p_207534_);
+    });
+
+    private static final DynamicCommandExceptionType ERROR_BIOME_INVALID = new DynamicCommandExceptionType((p_207534_) -> {
+        return Component.translatable("commands.gempire.nounderstand", p_207534_);
+    });
+
+    public static final SimpleCommandExceptionType FAILED_EXCEPTION = new SimpleCommandExceptionType(Component.translatable("commands.gempire.nounderstand"));
 
     public EntityGem(EntityType<? extends PathfinderMob> type, Level worldIn) {
         super(type, worldIn);
@@ -2154,72 +2166,126 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         }
     }
 
-    private static final DynamicCommandExceptionType ERROR_BIOME_INVALID = new DynamicCommandExceptionType((p_214512_) -> {
-        return Component.translatable("commands.locate.biome.invalid", p_214512_);
-    });
-    public static BlockPos findBiome(EntityGem gem, ResourceLocation biomeResource) throws CommandSyntaxException {
-        if(gem.level.isClientSide){
-            return BlockPos.ZERO;
-        }
-        Biome biome = gem.getServer().registryAccess().registryOrThrow(Registry.BIOME_REGISTRY).getOptional(biomeResource).orElseThrow(() -> {
-            return ERROR_BIOME_INVALID.create(biomeResource);
-        });
-        String s = biomeResource.toString();
-        BlockPos blockpos = new BlockPos(gem.blockPosition());
-        BlockPos blockpos1 = null;
-        if(gem.biomes.contains(s.replace("minecraft:", ""))) {
-            System.out.println("broken check attempt");
-           // blockpos1 = ((ServerLevel) gem.getCommandSenderWorld()).findClosestBiome3d(biome, blockpos, 6400, 8);
-        }
-        if (blockpos1 == null) {
-            return BlockPos.ZERO;
-        } else {
-            return blockpos1;
-        }
-    }
-    public void runFindCommand(ServerPlayer player, @Nullable Feature<?> structure, @Nullable ResourceLocation biomeResource, boolean biome)
-            throws CommandSyntaxException {
-        BlockPos pos = biome ? EntityGem.findBiome(this, biomeResource) : EntityGem.findStructure(this, structure);
-        if(this.consumeItemCheck(Items.MAP)) {
-            if (pos == BlockPos.ZERO) {
-                if(biome) {
-                    player.sendSystemMessage(Component.translatable("commands.gempire.norecbio"));
+    public void runFindCommand(CommandSourceStack stack, ServerPlayer player, ResourceOrTagLocationArgument.Result<Structure> structure, @Nullable ResourceOrTagLocationArgument.Result<Biome> biomeResource, boolean biome) throws CommandSyntaxException {
+        if (biome) {
+            System.out.println("find command");
+            BlockPos blockpos = new BlockPos(stack.getPosition());
+            Pair<BlockPos, Holder<Biome>> pair = stack.getLevel().findClosestBiome3d(biomeResource, blockpos, 6400, 32, 64);
+            if (pair == null) {
+                throw ERROR_BIOME_INVALID.create(biomeResource.asPrintable());
+            } else {
+                System.out.println(biomeResource.asPrintable());
+                if(this.consumeItemCheck(Items.MAP)) {
+                /*if ( == BlockPos.ZERO) {
+                    if(biome) {
+                        player.sendSystemMessage(Component.translatable("commands.gempire.norecbio"));
+                    }
+                    else{
+                        player.sendSystemMessage(Component.translatable("commands.gempire.norecstruc"));
+                    }
+                    return;
+                }*/
+                    boolean done = false;
+                    ItemStack map = MapItem.create(this.level, pair.getFirst().getX(), pair.getFirst().getZ(), (byte) 0, true, true);
+                    MapItemSavedData.addTargetDecoration(map, pair.getFirst(), "location", MapDecoration.Type.RED_X);
+                    String name = biomeResource.asPrintable().replaceAll("minecraft:", "").replaceAll("_", " ");
+                    String[] name1 = name.split(" ");
+                    StringBuilder name2 = new StringBuilder();
+                    for (String s : name1) {
+                        String s1 = s.substring(0, 1).toUpperCase();
+                        String s2 = s1 + s.substring(1);
+                        name2.append(s2).append(" ");
+                        System.out.println(name2);
+                        System.out.println(s2);
+                    }
+                    map.setHoverName(Component.translatable(name));
+                    for (int i = 0; i < EntityGem.NUMBER_OF_SLOTS - 6; i++) {
+                        if (this.getItem(i) == ItemStack.EMPTY) {
+                            this.setItem(i, map);
+                            done = true;
+                            break;
+                        }
+                    }
+                    if (!done) {
+                        this.spawnAtLocation(map);
+                    }
+                    player.sendSystemMessage(Component.translatable("commands.gempire.foundit"));
                 }
                 else{
-                    player.sendSystemMessage(Component.translatable("commands.gempire.norecstruc"));
-                }
-                return;
-            }
-            boolean done = false;
-            ItemStack map = MapItem.create(this.level, pos.getX(), pos.getZ(), (byte) 0, true, true);
-            MapItemSavedData.addTargetDecoration(map, pos, "location", MapDecoration.Type.RED_X);
-            String name = biome ? biomeResource.toString().replaceAll("minecraft:", "") :
-                    structure.toString().replaceAll("minecraft:", "");
-            map.setHoverName(Component.translatable(name));
-            for (int i = 0; i < EntityGem.NUMBER_OF_SLOTS - 6; i++) {
-                if (this.getItem(i) == ItemStack.EMPTY) {
-                    this.setItem(i, map);
-                    done = true;
-                    break;
+                    player.sendSystemMessage(Component.translatable("commands.gempire.nomap"));
                 }
             }
-            if (!done) {
-                this.spawnAtLocation(map);
+        } else {
+            Registry<Structure> registry = stack.getLevel().registryAccess().registryOrThrow(Registry.STRUCTURE_REGISTRY);
+            HolderSet<Structure> holderset = getHolders(structure, registry).orElseThrow(() -> {
+                return ERROR_STRUCTURE_INVALID.create(structure.asPrintable());
+            });
+            BlockPos blockpos = new BlockPos(stack.getPosition());
+            ServerLevel serverlevel = player.getLevel();
+            Pair<BlockPos, Holder<Structure>> pair = serverlevel.getChunkSource().getGenerator().findNearestMapStructure(serverlevel, holderset, blockpos, 100, false);
+            if (pair == null) {
+                throw ERROR_STRUCTURE_INVALID.create(structure.asPrintable());
+            } else {
+                System.out.println(structure.asPrintable());
+                if(this.consumeItemCheck(Items.MAP)) {
+                /*if ( == BlockPos.ZERO) {
+                    if(biome) {
+                        player.sendSystemMessage(Component.translatable("commands.gempire.norecbio"));
+                    }
+                    else{
+                        player.sendSystemMessage(Component.translatable("commands.gempire.norecstruc"));
+                    }
+                    return;
+                }*/
+                    boolean done = false;
+                    ItemStack map = MapItem.create(this.level, pair.getFirst().getX(), pair.getFirst().getZ(), (byte) 0, true, true);
+                    MapItemSavedData.addTargetDecoration(map, pair.getFirst(), "location", MapDecoration.Type.RED_X);
+                    String name = structure.asPrintable().replaceAll("minecraft:", "").replaceAll("_", " ");
+                    String[] name1 = name.split(" ");
+                    StringBuilder name2 = new StringBuilder();
+                    for (String s : name1) {
+                        String s1 = s.substring(0, 1).toUpperCase();
+                        String s2 = s1 + s.substring(1);
+                        name2.append(s2).append(" ");
+                        System.out.println(name2);
+                        System.out.println(s2);
+                    }
+                    map.setHoverName(Component.translatable(name));
+                    for (int i = 0; i < EntityGem.NUMBER_OF_SLOTS - 6; i++) {
+                        if (this.getItem(i) == ItemStack.EMPTY) {
+                            this.setItem(i, map);
+                            done = true;
+                            break;
+                        }
+                    }
+                    if (!done) {
+                        this.spawnAtLocation(map);
+                    }
+                    player.sendSystemMessage(Component.translatable("commands.gempire.foundit"));
+                }
+                else{
+                    player.sendSystemMessage(Component.translatable("commands.gempire.nomap"));
+                }
             }
-            player.sendSystemMessage(Component.translatable("commands.gempire.foundit"));
-        }
-        else{
-            player.sendSystemMessage(Component.translatable("commands.gempire.nomap"));
         }
     }
+
+    private static Optional<? extends HolderSet.ListBacked<Structure>> getHolders(ResourceOrTagLocationArgument.Result<Structure> p_214484_, Registry<Structure> p_214485_) {
+        return p_214484_.unwrap().map((p_214494_) -> {
+            return p_214485_.getHolder(p_214494_).map((p_214491_) -> {
+                return HolderSet.direct(p_214491_);
+            });
+        }, p_214485_::getTag);
+    }
     public boolean canLocateStructures(){
-        boolean flag = false;
+        System.out.println("test can locate");
         for(Ability ability : this.getAbilityPowers()){
             if(ability instanceof AbilityScout){
-                return flag = true;
+                System.out.println("can locate");
+                return true;
             }
         }
-        return flag;
+        return false;
     }
     public void generateScoutList(){
         //STRUCTURES
@@ -2248,7 +2314,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         }
     }
     public boolean isOnStructureCooldown(){
-        return true;
+        return false;
     }
 
     //-------------------------------------------------------------------------------------------------------------------------------------------------------------//

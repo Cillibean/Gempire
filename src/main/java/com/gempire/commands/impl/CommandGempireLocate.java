@@ -5,6 +5,7 @@ import com.gempire.entities.bases.EntityGem;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import com.mojang.brigadier.exceptions.DynamicCommandExceptionType;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -22,36 +23,42 @@ import java.util.List;
 public class CommandGempireLocate extends CommandBase {
     public static final SimpleCommandExceptionType FAILED_EXCEPTION = new SimpleCommandExceptionType(Component.translatable("commands.gempire.nounderstand"));
 
+    private static final DynamicCommandExceptionType ERROR_STRUCTURE_INVALID = new DynamicCommandExceptionType((p_207534_) -> {
+        return Component.translatable("commands.gempire.nounderstand", p_207534_);
+    });
+
     public CommandGempireLocate(String name, int permissionLevel, boolean enabled) {
         super(name, permissionLevel, enabled);
     }
 
     @Override
     public LiteralArgumentBuilder<CommandSourceStack> setExecution() {
-        for (Feature<?> structure : ForgeRegistries.FEATURES) {
-            String name = structure.toString().replace("minecraft:", "");
-            this.builder = this.builder.then(Commands.literal(name)
-                    .executes(source -> execute(source.getSource(), structure)));
-        }
+        this.builder = this.builder.then(Commands.argument("structure", ResourceOrTagLocationArgument.resourceOrTag(Registry.STRUCTURE_REGISTRY)).executes(source -> execute(source.getSource(), ResourceOrTagLocationArgument.getRegistryType(source, "structure", Registry.STRUCTURE_REGISTRY, ERROR_STRUCTURE_INVALID))));
         return this.builder;
     }
 
-    public int execute(CommandSourceStack source, Feature<?> structure) throws CommandSyntaxException {
-        BlockPos pos = new BlockPos(source.getPosition().x, source.getPosition().y, source.getPosition().z);
+    public int execute(CommandSourceStack source, ResourceOrTagLocationArgument.Result<Structure> structure) throws CommandSyntaxException {
+        System.out.println("execute");
+        //BlockPos pos = new BlockPos(source.getPosition().x, source.getPosition().y, source.getPosition().z);
         AABB aabb = source.getPlayerOrException().getBoundingBox().inflate(12.0D);
         EntityGem nephrite = null;
         List<EntityGem> gems = source.getLevel().getEntitiesOfClass(EntityGem.class, aabb);
         for(EntityGem gem : gems){
+            System.out.println("gem check");
             if(gem.canLocateStructures()){
+                System.out.println("can locate");
                 if(gem.isOwner(source.getPlayerOrException())){
+                    System.out.println("is owner");
                     if(!gem.isOnStructureCooldown()){
+                        System.out.println("is on cooldown");
                         nephrite = gem;
+                        System.out.println(nephrite);
                     }
                 }
             }
         }
         if(nephrite != null){
-            nephrite.runFindCommand(source.getPlayerOrException(), structure, null, false);
+            nephrite.runFindCommand(source, source.getPlayerOrException(), structure, null, false);
             return Command.SINGLE_SUCCESS;
         }
         else{
