@@ -330,6 +330,7 @@ public class ModCruxes {
         gemCruxes.add(new Crux(Blocks.GILDED_BLACKSTONE.defaultBlockState(), 3, CruxType.MINERAL, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.NETHER_GOLD_ORE.defaultBlockState(), 4, CruxType.MINERAL, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.COAL_ORE.defaultBlockState(), 2, CruxType.MINERAL, gemTemperatureMin, gemTemperatureMax));
+        gemCruxes.add(new Crux(Blocks.DEEPSLATE_COAL_ORE.defaultBlockState(), 2, CruxType.MINERAL, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.SAND.defaultBlockState(), stoneCruxValue, CruxType.MINERAL, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.CLAY.defaultBlockState(), stoneCruxValue, CruxType.MINERAL, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.ANDESITE.defaultBlockState(), stoneCruxValue, CruxType.MINERAL, gemTemperatureMin, gemTemperatureMax));
@@ -465,6 +466,8 @@ public class ModCruxes {
         gemCruxes.add(new Crux(Blocks.GRANITE.defaultBlockState(), stoneCruxValue, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.ANDESITE.defaultBlockState(), 1, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.DIORITE.defaultBlockState(), stoneCruxValue, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
+        gemCruxes.add(new Crux(Blocks.COAL_ORE.defaultBlockState(), 2, CruxType.MINERAL, gemTemperatureMin, gemTemperatureMax));
+        gemCruxes.add(new Crux(Blocks.DEEPSLATE_COAL_ORE.defaultBlockState(), 2, CruxType.MINERAL, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.SCULK.defaultBlockState(), 7, CruxType.ORGANIC, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.DEEPSLATE.defaultBlockState(), stoneCruxValue, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.DIAMOND_ORE.defaultBlockState(), 10, CruxType.MINERAL, gemTemperatureMin, gemTemperatureMax));
