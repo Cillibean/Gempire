@@ -26,6 +26,7 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.DynamicCommandExceptionType;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
 import com.mojang.datafixers.util.Pair;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.arguments.ResourceOrTagLocationArgument;
@@ -2176,19 +2177,10 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             } else {
                 System.out.println(biomeResource.asPrintable());
                 if(this.consumeItemCheck(Items.MAP)) {
-                /*if ( == BlockPos.ZERO) {
-                    if(biome) {
-                        player.sendSystemMessage(Component.translatable("commands.gempire.norecbio"));
-                    }
-                    else{
-                        player.sendSystemMessage(Component.translatable("commands.gempire.norecstruc"));
-                    }
-                    return;
-                }*/
                     boolean done = false;
                     ItemStack map = MapItem.create(this.level, pair.getFirst().getX(), pair.getFirst().getZ(), (byte) 0, true, true);
                     MapItemSavedData.addTargetDecoration(map, pair.getFirst(), "location", MapDecoration.Type.RED_X);
-                    String name = biomeResource.asPrintable().replaceAll("minecraft:", "").replaceAll("_", " ");
+                    String name = biomeResource.asPrintable().replaceAll("minecraft:", "").replaceAll("_", " ").replaceAll("#", "").replaceAll("forge:", "").replaceAll(":", " ");
                     String[] name1 = name.split(" ");
                     StringBuilder name2 = new StringBuilder();
                     for (String s : name1) {
@@ -2198,7 +2190,8 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                         System.out.println(name2);
                         System.out.println(s2);
                     }
-                    map.setHoverName(Component.translatable(name));
+                    name = String.valueOf(name2);
+                    map.setHoverName(Component.translatable(name).withStyle(ChatFormatting.GOLD));
                     for (int i = 0; i < EntityGem.NUMBER_OF_SLOTS - 6; i++) {
                         if (this.getItem(i) == ItemStack.EMPTY) {
                             this.setItem(i, map);
@@ -2228,19 +2221,10 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             } else {
                 System.out.println(structure.asPrintable());
                 if(this.consumeItemCheck(Items.MAP)) {
-                /*if ( == BlockPos.ZERO) {
-                    if(biome) {
-                        player.sendSystemMessage(Component.translatable("commands.gempire.norecbio"));
-                    }
-                    else{
-                        player.sendSystemMessage(Component.translatable("commands.gempire.norecstruc"));
-                    }
-                    return;
-                }*/
                     boolean done = false;
                     ItemStack map = MapItem.create(this.level, pair.getFirst().getX(), pair.getFirst().getZ(), (byte) 0, true, true);
                     MapItemSavedData.addTargetDecoration(map, pair.getFirst(), "location", MapDecoration.Type.RED_X);
-                    String name = structure.asPrintable().replaceAll("minecraft:", "").replaceAll("_", " ");
+                    String name = structure.asPrintable().replaceAll("minecraft:", "").replaceAll("_", " ").replaceAll("#", "").replaceAll("forge:", "").replaceAll(":", " ");
                     String[] name1 = name.split(" ");
                     StringBuilder name2 = new StringBuilder();
                     for (String s : name1) {
@@ -2250,7 +2234,8 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                         System.out.println(name2);
                         System.out.println(s2);
                     }
-                    map.setHoverName(Component.translatable(name));
+                    name = String.valueOf(name2);
+                    map.setHoverName(Component.translatable(name).withStyle(ChatFormatting.GOLD));
                     for (int i = 0; i < EntityGem.NUMBER_OF_SLOTS - 6; i++) {
                         if (this.getItem(i) == ItemStack.EMPTY) {
                             this.setItem(i, map);
