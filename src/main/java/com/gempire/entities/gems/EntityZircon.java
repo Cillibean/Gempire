@@ -245,7 +245,11 @@ public class EntityZircon extends EntityVaryingGem {
     }
 
     public int generateEnchantPage(){
-        return this.random.nextInt(ModEnchants.VANILLA_ENCHANTMENTS.size());
+        if (!this.isPrimary()) {
+            return this.random.nextInt(ModEnchants.VANILLA_ENCHANTMENTS.size());
+        } else {
+            return this.random.nextInt(ModEnchants.GEMPIRE_ENCHANTMENTS.size());
+        }
     }
 
     public void setEnchantMin(int page){
@@ -266,14 +270,24 @@ public class EntityZircon extends EntityVaryingGem {
             if (!tool.isEmpty()) {
                 if (tool.isEnchantable() || item instanceof BookItem) {
                     if(level >= 1) {
-                        if (tool.canApplyAtEnchantingTable(ModEnchants.VANILLA_ENCHANTMENTS.get(this.getEnchantPage())) || item instanceof BookItem) {
-                            tool.enchant(ModEnchants.VANILLA_ENCHANTMENTS.get(this.getEnchantPage()), level);
-                            this.setItem(0, ItemStack.EMPTY);
-                            this.setItem(2, ItemStack.EMPTY);
-                            decreaseExp(this.currentPlayer, xp);
-                        }
-                        else{
-                            this.currentPlayer.sendSystemMessage(Component.translatable("messages.gempire.entity.enchant_not_apply"));
+                        if (!this.isPrimary()) {
+                            if (tool.canApplyAtEnchantingTable(ModEnchants.VANILLA_ENCHANTMENTS.get(this.getEnchantPage())) || item instanceof BookItem) {
+                                tool.enchant(ModEnchants.VANILLA_ENCHANTMENTS.get(this.getEnchantPage()), level);
+                                this.setItem(0, ItemStack.EMPTY);
+                                this.setItem(2, ItemStack.EMPTY);
+                                decreaseExp(this.currentPlayer, xp);
+                            } else {
+                                this.currentPlayer.sendSystemMessage(Component.translatable("messages.gempire.entity.enchant_not_apply"));
+                            }
+                        } else {
+                            if (tool.canApplyAtEnchantingTable(ModEnchants.GEMPIRE_ENCHANTMENTS.get(this.getEnchantPage())) || item instanceof BookItem) {
+                                tool.enchant(ModEnchants.GEMPIRE_ENCHANTMENTS.get(this.getEnchantPage()), level);
+                                this.setItem(0, ItemStack.EMPTY);
+                                this.setItem(2, ItemStack.EMPTY);
+                                decreaseExp(this.currentPlayer, xp);
+                            } else {
+                                this.currentPlayer.sendSystemMessage(Component.translatable("messages.gempire.entity.enchant_not_apply"));
+                            }
                         }
                     }
                     else{
@@ -308,9 +322,14 @@ public class EntityZircon extends EntityVaryingGem {
     }
 
     public static int getEnchantLevelFromLapisCount(int count, EntityZircon gem){
-        int maxEnchant = ModEnchants.VANILLA_ENCHANTMENTS.get(gem.getEnchantPage()).getMaxLevel();
+        int maxEnchant = 0;
+        if (gem.isPrimary()) {
+            maxEnchant = 1;
+        } else {
+            maxEnchant = ModEnchants.VANILLA_ENCHANTMENTS.get(gem.getEnchantPage()).getMaxLevel();
+        }
         int level = (int) Math.ceil(count * maxEnchant / 32);
-        if(level >= maxEnchant){
+        if (level >= maxEnchant) {
             level = maxEnchant;
         }
         return level;

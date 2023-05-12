@@ -38,6 +38,11 @@ public class ShatterEnchant extends Enchantment {
     }
 
     @Override
+    public boolean canApplyAtEnchantingTable(ItemStack stack) {
+        return false;
+    }
+
+    @Override
     public int getMaxLevel() {
         return 5;
     }

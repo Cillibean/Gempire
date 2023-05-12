@@ -108,12 +108,22 @@ public class ZirconUIScreen extends AbstractContainerScreen<ZirconUIContainer> {
         this.nameBox.render(matrixStack, mouseX, mouseY, partialTicks);
         this.font.draw(matrixStack, ZirconUIScreen.getEnchantStringFromLapisCount(this.menu.gem),
                 i + 15, j + 29, 4210752);
-        if(this.menu.gem.getItem(1).canApplyAtEnchantingTable(ModEnchants.VANILLA_ENCHANTMENTS.get(this.menu.gem.getEnchantPage()))) {
-            GUIUtilities.setup(XP_ORB);
-            blit(matrixStack, x + 14, y + 56, 0, 0, 11, 11, 11 ,11);
-            int xp = Math.max(this.getXP(this.getDiscountFromStack(this.menu.gem.getItem(2))), 0);
-            this.font.draw(matrixStack, Component.translatable(xp + "XP"),
-                    i + 26, j + 58, 0x88FF00);
+        if (this.menu.gem.isPrimary()) {
+            if(this.menu.gem.getItem(1).canApplyAtEnchantingTable(ModEnchants.GEMPIRE_ENCHANTMENTS.get(this.menu.gem.getEnchantPage()))) {
+                GUIUtilities.setup(XP_ORB);
+                blit(matrixStack, x + 14, y + 56, 0, 0, 11, 11, 11 ,11);
+                int xp = Math.max(this.getXP(this.getDiscountFromStack(this.menu.gem.getItem(2))), 0);
+                this.font.draw(matrixStack, Component.translatable(xp + "XP"),
+                        i + 26, j + 58, 0x88FF00);
+            }
+        } else {
+            if(this.menu.gem.getItem(1).canApplyAtEnchantingTable(ModEnchants.VANILLA_ENCHANTMENTS.get(this.menu.gem.getEnchantPage()))) {
+                GUIUtilities.setup(XP_ORB);
+                blit(matrixStack, x + 14, y + 56, 0, 0, 11, 11, 11 ,11);
+                int xp = Math.max(this.getXP(this.getDiscountFromStack(this.menu.gem.getItem(2))), 0);
+                this.font.draw(matrixStack, Component.translatable(xp + "XP"),
+                        i + 26, j + 58, 0x88FF00);
+            }
         }
         renderEntityInInventory(i + 170, j + 72, 23, (float)(i + 170) - mouseX, (float)(j + 25) - mouseY, this.menu.gem);
     }
@@ -137,24 +147,44 @@ public class ZirconUIScreen extends AbstractContainerScreen<ZirconUIContainer> {
     //0x88FF00
 
     public static int getEnchantLevelFromLapisCount(EntityZircon gem){
-        int maxEnchant = ModEnchants.VANILLA_ENCHANTMENTS.get(gem.getEnchantPage()).getMaxLevel();
+        int maxEnchant = 0;
+        if (gem.isPrimary()) {
+            maxEnchant = ModEnchants.GEMPIRE_ENCHANTMENTS.get(gem.getEnchantPage()).getMaxLevel();
+        } else {
+            maxEnchant = ModEnchants.VANILLA_ENCHANTMENTS.get(gem.getEnchantPage()).getMaxLevel();
+        }
         int lapisCount = gem.getItem(0).getCount();
         return (int) Math.ceil(lapisCount * maxEnchant / 32);
     }
 
     public static String getEnchantStringFromLapisCount(EntityZircon gem){
-        int maxEnchant = ModEnchants.VANILLA_ENCHANTMENTS.get(gem.getEnchantPage()).getMaxLevel();
+        int maxEnchant = 0;
+        if(gem.isPrimary()) {
+            maxEnchant = ModEnchants.GEMPIRE_ENCHANTMENTS.get(gem.getEnchantPage()).getMaxLevel();
+        } else {
+            maxEnchant = ModEnchants.VANILLA_ENCHANTMENTS.get(gem.getEnchantPage()).getMaxLevel();
+        }
         int level = ZirconUIScreen.getEnchantLevelFromLapisCount(gem);
-        if(level >= maxEnchant) {
-            return Component.translatable(ModEnchants.VANILLA_ENCHANTMENTS.get(gem.getEnchantPage()).getDescriptionId()).getString() + " " +
-                    ZirconUIScreen.getNumeralsFromLevel(maxEnchant);
-        }
-        else if(level >= 1 && level < maxEnchant){
-            return Component.translatable(ModEnchants.VANILLA_ENCHANTMENTS.get(gem.getEnchantPage()).getDescriptionId()).getString() + " " +
-                    ZirconUIScreen.getNumeralsFromLevel(level);
-        }
-        else{
-            return Component.translatable(ModEnchants.VANILLA_ENCHANTMENTS.get(gem.getEnchantPage()).getDescriptionId()).getString();
+        if (gem.isPrimary()) {
+            if (level >= maxEnchant) {
+                return Component.translatable(ModEnchants.GEMPIRE_ENCHANTMENTS.get(gem.getEnchantPage()).getDescriptionId()).getString() + " " +
+                        ZirconUIScreen.getNumeralsFromLevel(maxEnchant);
+            } else if (level >= 1 && level < maxEnchant) {
+                return Component.translatable(ModEnchants.GEMPIRE_ENCHANTMENTS.get(gem.getEnchantPage()).getDescriptionId()).getString() + " " +
+                        ZirconUIScreen.getNumeralsFromLevel(level);
+            } else {
+                return Component.translatable(ModEnchants.GEMPIRE_ENCHANTMENTS.get(gem.getEnchantPage()).getDescriptionId()).getString();
+            }
+        } else {
+            if (level >= maxEnchant) {
+                return Component.translatable(ModEnchants.VANILLA_ENCHANTMENTS.get(gem.getEnchantPage()).getDescriptionId()).getString() + " " +
+                        ZirconUIScreen.getNumeralsFromLevel(maxEnchant);
+            } else if (level >= 1 && level < maxEnchant) {
+                return Component.translatable(ModEnchants.VANILLA_ENCHANTMENTS.get(gem.getEnchantPage()).getDescriptionId()).getString() + " " +
+                        ZirconUIScreen.getNumeralsFromLevel(level);
+            } else {
+                return Component.translatable(ModEnchants.VANILLA_ENCHANTMENTS.get(gem.getEnchantPage()).getDescriptionId()).getString();
+            }
         }
     }
 

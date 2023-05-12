@@ -135,6 +135,7 @@ public class Gempire
         ModEntities.registerCruxes();
         ModAbilities.registerAbilities();
         ModEnchants.registerVanillaEnchantments();
+        ModEnchants.registerPrimeRequiredEnchantments();
         ModEnchants.registerItemDiscounts();
     }
 

@@ -309,7 +309,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.setCurrentRecipe(this.getCurrentRecipe());
         this.setRecipeAmount(this.generateRecipeAmount());
         AttributeModifier PRIME = new AttributeModifier(UUID.randomUUID(), "gempirePrimaryModifier", 0.2D, AttributeModifier.Operation.ADDITION);
-        AttributeModifier DEFECTIVE = new AttributeModifier(UUID.randomUUID(), "gempireDefectiveModifier", -0.2D, AttributeModifier.Operation.ADDITION);
+        AttributeModifier DEFECTIVE = new AttributeModifier(UUID.randomUUID(), "gempireDefectiveModifier", -5D, AttributeModifier.Operation.ADDITION);
         if (this.isPrimary()) {
             System.out.println("prime modifiers");
                 this.getAttribute(Attributes.MAX_HEALTH).removeModifiers();
@@ -468,7 +468,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         compound.putInt("recipeAmount", this.getRecipeAmount());
         this.writeStructures(compound);
         AttributeModifier PRIME = new AttributeModifier(UUID.randomUUID(), "gempirePrimaryModifier", 0.2D, AttributeModifier.Operation.ADDITION);
-        AttributeModifier DEFECTIVE = new AttributeModifier(UUID.randomUUID(), "gempireDefectiveModifier", -0.3D, AttributeModifier.Operation.ADDITION);
+        AttributeModifier DEFECTIVE = new AttributeModifier(UUID.randomUUID(), "gempireDefectiveModifier", -5D, AttributeModifier.Operation.ADDITION);
         if (this.isPrimary()) {
             System.out.println("prime modifiers");
             this.getAttribute(Attributes.MAX_HEALTH).addPermanentModifier(PRIME);
@@ -967,26 +967,27 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                     }
                 }
             }
-            if (source.isExplosion()) {
-                if (amount - getHealth() > ((hardness / 2) + 0.5) && (this.random.nextInt(shatterChance / 2) == 1)) {
-                    setShatter(true);
-                }
-            } else if (!(source.getEntity() instanceof Player)) {
-                if ((amount - getHealth()) > hardness) {
-                    if ((this.random.nextInt(shatterChance) == 1)) {
+            if (!source.isMagic()) {
+                if (source.isExplosion()) {
+                    if (amount - getHealth() > ((hardness / 2) + 0.5) && (this.random.nextInt(shatterChance / 2) == 1)) {
                         setShatter(true);
-                    } /*else if (getCrackAmount() == (getHardness() * 10)) {
+                    }
+                } else if (!(source.getEntity() instanceof Player)) {
+                    if ((amount - getHealth()) > hardness) {
+                        if ((this.random.nextInt(shatterChance) == 1)) {
+                            setShatter(true);
+                        } /*else if (getCrackAmount() == (getHardness() * 10)) {
                                 setShatter(true);
                     }*/ else if (this.random.nextInt(crackChance) == 1) {
-                        setCracked(true);
-                        shatterChance--;
-                        setCrackAmount(getCrackAmount() * 2);
-                        if (this.random.nextInt(10) == 10) {
-                            crackChance--;
+                            setCracked(true);
+                            shatterChance--;
+                            setCrackAmount(getCrackAmount() * 2);
+                            if (this.random.nextInt(10) == 10) {
+                                crackChance--;
+                            }
                         }
                     }
-                }
-            } else if (source.getEntity() instanceof Player) {
+                } else if (source.getEntity() instanceof Player) {
                     Player player = (Player) source.getEntity();
                     if (!(player.getMainHandItem().getItem() instanceof DestabBase)) {
                         if ((amount - getHealth()) > hardness) {
@@ -1005,23 +1006,24 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                         }
                     }
                 }
-            if (this.isEmotional() && !source.isExplosion() && !source.isFire()) {
-                if (this.emotionMeter <= this.EmotionThreshold()) {
-                    if (this.EmotionThreshold() - this.emotionMeter < 5) {
-                        this.level.addParticle(ParticleTypes.ANGRY_VILLAGER, this.getX(), this.getY() + 2, this.getZ(), 0, 0, 0);
-                    }
-                    this.emotionMeter++;
-                } else {
-                    for (Ability power : this.getAbilityPowers()) {
-                        if (power instanceof IEmotionalAbility) {
-                            ((IEmotionalAbility) power).outburst();
+                if (this.isEmotional() && !source.isExplosion() && !source.isFire()) {
+                    if (this.emotionMeter <= this.EmotionThreshold()) {
+                        if (this.EmotionThreshold() - this.emotionMeter < 5) {
+                            this.level.addParticle(ParticleTypes.ANGRY_VILLAGER, this.getX(), this.getY() + 2, this.getZ(), 0, 0, 0);
                         }
+                        this.emotionMeter++;
+                    } else {
+                        for (Ability power : this.getAbilityPowers()) {
+                            if (power instanceof IEmotionalAbility) {
+                                ((IEmotionalAbility) power).outburst();
+                            }
+                        }
+                        this.emotionMeter = 0;
                     }
-                    this.emotionMeter = 0;
                 }
-            }
-            if (source.getEntity() instanceof EntityCrawler) {
-                setSludgeAmount(getSludgeAmount() + 1);
+                if (source.getEntity() instanceof EntityCrawler) {
+                    setSludgeAmount(getSludgeAmount() + 1);
+                }
             }
         }
         return super.hurt(source, amount);
