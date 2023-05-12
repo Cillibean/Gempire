@@ -651,9 +651,13 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         super.aiStep();
     }
 
-    public abstract Item getInputItem(int i);
+    public Item getInputItem(int i) {
+        return Items.AIR;
+    }
 
-    public abstract Item getOutputItem(int i);
+    public Item getOutputItem(int i) {
+        return Items.AIR;
+    }
 
     public int getCurrentRecipe() {
         return this.entityData.get(EntityGem.CURRENT_RECIPE);
@@ -671,7 +675,9 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.entityData.set(EntityGem.RECIPE_AMOUNT, i);
     }
 
-    public abstract int generateRecipeAmount();
+    public int generateRecipeAmount() {
+        return 0;
+    }
 
     public int getTimetoCraft() {
         return timeToCraft;
@@ -1139,49 +1145,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         return false;
     }
 
-    public int getColor() {
-        if (!(this instanceof EntityVaryingGem)) {
-            if (this instanceof EntityLapis) {
-                return 11;
-            } else if (this instanceof EntityBismuth) {
-                return 2;
-            } else if (this instanceof EntityNephrite) {
-                return 5;
-            } else if (this instanceof EntityAquamarine) {
-                return 9;
-            } else if (this instanceof EntityRutile) {
-                return 14;
-            } else if (this instanceof EntityRuby) {
-                return 14;
-            } else if (this instanceof EntityBixbite) {
-                return 14;
-            } else if (this instanceof EntityEmerald) {
-                return 5;
-            } else if (this instanceof EntityLarimar) {
-                return 3;
-            } else if (this instanceof EntityMica) {
-                return 4;
-            } else if (this instanceof EntityPebble) {
-                return 8;
-            } else if (this instanceof EntityMorganite) {
-                return 6;
-            } else if (this instanceof EntityNacre) {
-                return 0;
-            } else if (this instanceof EntityObsidian) {
-                if (this.random.nextInt(1) == 0) {
-                    return 0;
-                } else {
-                    return 15;
-                }
-            } else if (this instanceof EntityShale) {
-                return 7;
-            } else {
-                return 0;
-            }
-        } else {
-            return ((EntityVaryingGem) this).getSkinColorVariant();
-        }
-    }
+    public abstract int getColor();
     @Override
     public boolean removeWhenFarAway(double xix){
         return false;

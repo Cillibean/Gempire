@@ -205,18 +205,10 @@ public class EntityPeridot extends EntityGem {
         return 7;
     }
 
-    @Override
-    public Item getInputItem(int i) {
-        return Items.AIR;
-    }
+
 
     @Override
-    public Item getOutputItem(int i) {
-        return Items.AIR;
-    }
-
-    @Override
-    public int generateRecipeAmount() {
-        return 0;
+    public int getColor() {
+        return 5;
     }
 }

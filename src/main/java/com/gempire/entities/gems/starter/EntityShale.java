@@ -127,4 +127,9 @@ public class EntityShale extends EntityStarterGem {
         return this.random.nextInt(1);
     }
 
+    @Override
+    public int getColor() {
+        return 7;
+    }
+
 }

@@ -195,4 +195,9 @@ public class EntityMorganite extends EntityGem {
     public int generateHardness() {
         return 8;
     }
+
+    @Override
+    public int getColor() {
+        return 6;
+    }
 }

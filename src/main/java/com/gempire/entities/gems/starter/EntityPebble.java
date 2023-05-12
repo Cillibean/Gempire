@@ -116,4 +116,9 @@ public class EntityPebble extends EntityStarterGem {
     public int generateVisorVariant() {
         return this.random.nextInt(1);
     }
+
+    @Override
+    public int getColor() {
+        return 8;
+    }
 }

@@ -199,18 +199,14 @@ public class EntityObsidian extends EntityGem implements ItemSteerable {
         return 6;
     }
 
-    @Override
-    public Item getInputItem(int i) {
-        return Items.AIR;
-    }
+
 
     @Override
-    public Item getOutputItem(int i) {
-        return Items.AIR;
-    }
-
-    @Override
-    public int generateRecipeAmount() {
-        return 0;
+    public int getColor() {
+        if (this.random.nextInt(1) == 0) {
+            return 0;
+        } else {
+            return 15;
+        }
     }
 }
