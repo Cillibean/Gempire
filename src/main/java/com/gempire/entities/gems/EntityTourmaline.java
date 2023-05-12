@@ -253,18 +253,5 @@ public class EntityTourmaline extends EntityVaryingGem {
         return this.random.nextInt(2);
     }
 
-    @Override
-    public Item getInputItem(int i) {
-        return Items.AIR;
-    }
 
-    @Override
-    public Item getOutputItem(int i) {
-        return Items.AIR;
-    }
-
-    @Override
-    public int generateRecipeAmount() {
-        return 0;
-    }
 }

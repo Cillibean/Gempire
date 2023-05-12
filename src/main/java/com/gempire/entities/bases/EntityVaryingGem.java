@@ -54,4 +54,9 @@ public abstract class EntityVaryingGem extends EntityGem{
     public abstract boolean UsesUniqueNames();
 
     public abstract String NameFromColor(byte i);
+
+    @Override
+    public int getColor() {
+        return this.getSkinColorVariant();
+    }
 }

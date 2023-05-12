@@ -201,4 +201,9 @@ public class EntityBismuth extends EntityGem {
     public int generateHardness() {
         return 2;
     }
+
+    @Override
+    public int getColor() {
+        return 2;
+    }
 }

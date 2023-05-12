@@ -166,18 +166,10 @@ public class EntityRutile extends EntityGem {
         return 6;
     }
 
-    @Override
-    public Item getInputItem(int i) {
-        return Items.AIR;
-    }
+
 
     @Override
-    public Item getOutputItem(int i) {
-        return Items.AIR;
-    }
-
-    @Override
-    public int generateRecipeAmount() {
-        return 0;
+    public int getColor() {
+        return 14;
     }
 }

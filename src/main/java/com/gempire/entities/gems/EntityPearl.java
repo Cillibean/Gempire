@@ -454,18 +454,5 @@ public class EntityPearl extends EntityVaryingGem {
         return 4;
     }
 
-    @Override
-    public Item getInputItem(int i) {
-        return Items.AIR;
-    }
 
-    @Override
-    public Item getOutputItem(int i) {
-        return Items.AIR;
-    }
-
-    @Override
-    public int generateRecipeAmount() {
-        return 0;
-    }
 }

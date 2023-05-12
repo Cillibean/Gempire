@@ -74,6 +74,11 @@ public class EntityMica extends EntityStarterGem {
     }
 
     @Override
+    public int getColor() {
+        return 4;
+    }
+
+    @Override
     public InteractionResult interactAt(Player player, Vec3 vec, InteractionHand hand){
         if(player.level.isClientSide){
             return super.interactAt(player, vec, hand);
