@@ -10,6 +10,7 @@ import com.gempire.entities.other.EntityCrawler;
 import com.gempire.entities.other.EntityShambler;
 import com.gempire.entities.other.GeoExampleEntity;
 import com.gempire.init.*;
+import com.gempire.networking.PacketHandler;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.entries.LootTableReference;
 import net.minecraft.server.MinecraftServer;
@@ -60,6 +61,7 @@ public class Gempire
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(new EventHandler());
 
+        PacketHandler.registerPackets();
 
         //MinecraftForge.EVENT_BUS.register(CommonProxy.class);
     }

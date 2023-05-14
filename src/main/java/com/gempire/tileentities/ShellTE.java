@@ -2,14 +2,19 @@ package com.gempire.tileentities;
 
 import com.gempire.blocks.machine.ShellBlock;
 import com.gempire.container.ShellContainer;
-import com.gempire.init.ModBlocks;
-import com.gempire.init.ModFluids;
-import com.gempire.init.ModItems;
-import com.gempire.init.ModTE;
+import com.gempire.entities.bases.EntityGem;
+import com.gempire.entities.gems.EntityPearl;
+import com.gempire.entities.gems.starter.EntityPebble;
+import com.gempire.init.*;
 import com.gempire.items.ItemChroma;
 import com.gempire.items.ItemGem;
 import com.gempire.util.Color;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LiquidBlock;
@@ -29,6 +34,7 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraftforge.registries.RegistryObject;
+import org.apache.commons.lang3.ArrayUtils;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -92,7 +98,7 @@ public class ShellTE extends RandomizableContainerBlockEntity implements MenuPro
         ShellTE te = (ShellTE)be;
         if(!level.isClientSide()) {
             if (te.getItem(ShellTE.PEARL_OUTPUT_SLOT_INDEX) == ItemStack.EMPTY) {
-                if (te.ticks % 100 == 0) {
+                if (te.ticks % 50 == 0) {
                         te.HandleGravelTick();
                         te.HandleSandTick();
                         te.HandleClayTick();
@@ -108,7 +114,7 @@ public class ShellTE extends RandomizableContainerBlockEntity implements MenuPro
                         }
 
                 }
-                if (te.ticks > 50) {
+                if (te.ticks > 25) {
                     te.ticks = 0;
                 } else {
                     te.ticks++;
@@ -118,17 +124,49 @@ public class ShellTE extends RandomizableContainerBlockEntity implements MenuPro
     }
 
     public void HandleGravelTick(){
-        if(this.gravelConsumed < ShellTE.MAX_GRAVEL) {
-            ItemStack stack = this.getItem(ShellTE.GRAVEL_INPUT_SLOT_INDEX);
-            if (stack.getItem() == Blocks.GRAVEL.asItem()) {
-                stack.shrink(1);
-                this.gravelConsumed++;
+        ItemStack stack = this.getItem(ShellTE.GRAVEL_INPUT_SLOT_INDEX);
+        int count = stack.getCount();
+        if (count + gravelConsumed >= 64) {
+            if (gravelConsumed < 64) {
+                if (stack.getItem() == Blocks.GRAVEL.asItem()) {
+                    stack.shrink(1);
+                    this.gravelConsumed++;
+                }
+            }
+        } else if (count + gravelConsumed >= 32) {
+            if (gravelConsumed < 32) {
+                if (stack.getItem() == Blocks.GRAVEL.asItem()) {
+                    stack.shrink(1);
+                    this.gravelConsumed++;
+                }
+            }
+        } else if (count + gravelConsumed >= 16) {
+            if (gravelConsumed < 16) {
+                if (stack.getItem() == Blocks.GRAVEL.asItem()) {
+                    stack.shrink(1);
+                    this.gravelConsumed++;
+                }
             }
         }
     }
 
     public void HandleSandTick(){
         if(this.gravelConsumed == ShellTE.MAX_GRAVEL && this.sandConsumed < ShellTE.MAX_SAND){
+            System.out.println(64);
+            ItemStack stack = this.getItem(ShellTE.SAND_INPUT_SLOT_INDEX);
+            if(stack.getItem() == Blocks.SAND.asItem()){
+                stack.shrink(1);
+                this.sandConsumed++;
+            }
+        } else if(this.gravelConsumed == 32 && this.sandConsumed < 32){
+            System.out.println(32);
+            ItemStack stack = this.getItem(ShellTE.SAND_INPUT_SLOT_INDEX);
+            if(stack.getItem() == Blocks.SAND.asItem()){
+                stack.shrink(1);
+                this.sandConsumed++;
+            }
+        } else if(this.gravelConsumed == 16 && this.sandConsumed < 16){
+            System.out.println(16);
             ItemStack stack = this.getItem(ShellTE.SAND_INPUT_SLOT_INDEX);
             if(stack.getItem() == Blocks.SAND.asItem()){
                 stack.shrink(1);
@@ -144,11 +182,39 @@ public class ShellTE extends RandomizableContainerBlockEntity implements MenuPro
                 stack.shrink(1);
                 this.clayConsumed++;
             }
+        } else if (this.gravelConsumed == ShellTE.MAX_GRAVEL / 2 && this.sandConsumed == ShellTE.MAX_SAND/ 2 && this.clayConsumed < ShellTE.MAX_CLAY/ 2){
+            ItemStack stack = this.getItem(ShellTE.CLAY_INPUT_SLOT_INDEX);
+            if(stack.getItem() == Items.CLAY_BALL){
+                stack.shrink(1);
+                this.clayConsumed++;
+            }
+        } else if (this.gravelConsumed == ShellTE.MAX_GRAVEL / 4 && this.sandConsumed == ShellTE.MAX_SAND/ 4 && this.clayConsumed < ShellTE.MAX_CLAY/ 4){
+            ItemStack stack = this.getItem(ShellTE.CLAY_INPUT_SLOT_INDEX);
+            if(stack.getItem() == Items.CLAY_BALL){
+                stack.shrink(1);
+                this.clayConsumed++;
+            }
         }
     }
 
     public void HandleChromaTick() {
         if(this.gravelConsumed == ShellTE.MAX_GRAVEL && this.sandConsumed == ShellTE.MAX_SAND && this.clayConsumed == ShellTE.MAX_CLAY && !this.chromaConsumed){
+            ItemStack stack = this.getItem(ShellTE.CHROMA_INPUT_SLOT_INDEX);
+            if(stack.getItem() instanceof ItemChroma){
+                ItemChroma chroma = (ItemChroma) stack.getItem();
+                this.chromaConsumed = true;
+                this.chromaColor = chroma.color;
+                stack.shrink(1);
+            }
+        } else if(this.gravelConsumed == ShellTE.MAX_GRAVEL /2 && this.sandConsumed == ShellTE.MAX_SAND/2 && this.clayConsumed == ShellTE.MAX_CLAY/2 && !this.chromaConsumed){
+            ItemStack stack = this.getItem(ShellTE.CHROMA_INPUT_SLOT_INDEX);
+            if(stack.getItem() instanceof ItemChroma){
+                ItemChroma chroma = (ItemChroma) stack.getItem();
+                this.chromaConsumed = true;
+                this.chromaColor = chroma.color;
+                stack.shrink(1);
+            }
+        } else if(this.gravelConsumed == ShellTE.MAX_GRAVEL/4 && this.sandConsumed == ShellTE.MAX_SAND/4 && this.clayConsumed == ShellTE.MAX_CLAY/4 && !this.chromaConsumed){
             ItemStack stack = this.getItem(ShellTE.CHROMA_INPUT_SLOT_INDEX);
             if(stack.getItem() instanceof ItemChroma){
                 ItemChroma chroma = (ItemChroma) stack.getItem();
@@ -173,6 +239,32 @@ public class ShellTE extends RandomizableContainerBlockEntity implements MenuPro
                         System.out.println("essence marker true");
                     }
                 }
+        } else if (this.gravelConsumed == ShellTE.MAX_GRAVEL/2 && this.sandConsumed == ShellTE.MAX_SAND/2 && this.clayConsumed == ShellTE.MAX_CLAY/2 && this.chromaConsumed) {
+            //ESSENCE CHECK
+            //TODO: MAKE THERE BE A CHANCE OF MAGIC MOSS APPEARING
+            System.out.println("essence check");
+            if (this.level.getBlockState(this.worldPosition.offset(ShellTE.direction(4))).getBlock() == ModBlocks.WHITE_ESSENCE_BLOCK.get()) {
+                System.out.println("essence is there");
+                LiquidBlock block = (LiquidBlock) this.level.getBlockState(this.worldPosition.offset(ShellTE.direction(4))).getBlock();
+                if (block.getFluid() == ModFluids.WHITE_ESSENCE.get()) {
+                    this.level.setBlockAndUpdate(this.worldPosition.offset(ShellTE.direction(4)), Blocks.AIR.defaultBlockState());
+                    this.essenceConsumed = true;
+                    System.out.println("essence marker true");
+                }
+            }
+        } else if (this.gravelConsumed == ShellTE.MAX_GRAVEL/4 && this.sandConsumed == ShellTE.MAX_SAND/4 && this.clayConsumed == ShellTE.MAX_CLAY/4 && this.chromaConsumed) {
+            //ESSENCE CHECK
+            //TODO: MAKE THERE BE A CHANCE OF MAGIC MOSS APPEARING
+            System.out.println("essence check");
+            if (this.level.getBlockState(this.worldPosition.offset(ShellTE.direction(4))).getBlock() == ModBlocks.WHITE_ESSENCE_BLOCK.get()) {
+                System.out.println("essence is there");
+                LiquidBlock block = (LiquidBlock) this.level.getBlockState(this.worldPosition.offset(ShellTE.direction(4))).getBlock();
+                if (block.getFluid() == ModFluids.WHITE_ESSENCE.get()) {
+                    this.level.setBlockAndUpdate(this.worldPosition.offset(ShellTE.direction(4)), Blocks.AIR.defaultBlockState());
+                    this.essenceConsumed = true;
+                    System.out.println("essence marker true");
+                }
+            }
         }
     }
 
@@ -196,11 +288,20 @@ public class ShellTE extends RandomizableContainerBlockEntity implements MenuPro
     public void HandleFormPearlTick(){
         if(this.gravelConsumed == ShellTE.MAX_GRAVEL && this.sandConsumed == ShellTE.MAX_SAND && this.clayConsumed == ShellTE.MAX_CLAY && this.chromaConsumed
                 && this.essenceConsumed) {
-            this.formPearl(this.chromaColor);
+            this.formPearl(this.chromaColor, 0);
+        } else if (this.gravelConsumed == ShellTE.MAX_GRAVEL / 2 && this.sandConsumed == ShellTE.MAX_SAND / 2 && this.clayConsumed == ShellTE.MAX_CLAY / 2 && this.chromaConsumed
+                && this.essenceConsumed) {
+            this.formPearl(this.chromaColor, 1);
+        } else if (this.gravelConsumed == ShellTE.MAX_GRAVEL / 4 && this.sandConsumed == ShellTE.MAX_SAND / 4 && this.clayConsumed == ShellTE.MAX_CLAY / 4 && this.chromaConsumed
+                && this.essenceConsumed) {
+            this.formPearl(this.chromaColor, 2);
         }
     }
 
-    public void formPearl(int chroma){
+    //perfect = 0
+    //normal = 1
+    //defect = 2
+    public void formPearl(int chroma, int quality){
         RegistryObject<Item> gemm = ModItems.PEBBLE_GEM;
         ItemGem gem = null;
         String name = Color.getColorName(chroma).toUpperCase() +"_PEARL_GEM";
@@ -210,7 +311,41 @@ public class ShellTE extends RandomizableContainerBlockEntity implements MenuPro
         } catch(Exception e){
             e.printStackTrace();
         }
-        this.setItem(ShellTE.PEARL_OUTPUT_SLOT_INDEX, new ItemStack(gem));
+        RegistryObject<EntityType<EntityPearl>> egemm = ModEntities.PEARL;
+        EntityGem egem = egemm.get().create(this.level);
+        egem.setUUID(Mth.createInsecureUUID(this.level.random));
+        String namee = "";
+        String skinColorVariant = "";
+        String[] ainmneacha = namee.split("_");
+        boolean nullFlag = false;
+        int idx = 0;
+        for (int i = 0; i < ainmneacha.length; i++) {
+            if (ainmneacha[i].isEmpty()) {
+                nullFlag = true;
+                idx = i;
+            }
+        }
+        if (nullFlag) ainmneacha = ArrayUtils.remove(ainmneacha, idx);
+        namee = ainmneacha[0];
+        if (ainmneacha.length > 1) skinColorVariant = ainmneacha[1];
+        for (String s : ainmneacha) {
+            System.out.println(s);
+        }
+        if (ainmneacha.length > 1) {
+            assert gem != null;
+            egem.setSkinVariantOnInitialSpawn = false;
+            egem.initalSkinVariant = Integer.parseInt(skinColorVariant);
+        }
+        egem.finalizeSpawn((ServerLevelAccessor) this.level, this.level.getCurrentDifficultyAt(this.worldPosition), MobSpawnType.MOB_SUMMONED, null, null);
+        ItemStack stack = new ItemStack(gem);
+        ItemGem.saveData(stack, egem);
+        egem.remove(Entity.RemovalReason.DISCARDED);
+        if (quality == 0) {
+            stack.getOrCreateTag().putBoolean("prime", true);
+        } else if (quality == 2) {
+            stack.getOrCreateTag().putBoolean("defective", true);
+        }
+        this.setItem(ShellTE.PEARL_OUTPUT_SLOT_INDEX, stack);
         this.gravelConsumed = 0;
         this.sandConsumed = 0;
         this.clayConsumed = 0;

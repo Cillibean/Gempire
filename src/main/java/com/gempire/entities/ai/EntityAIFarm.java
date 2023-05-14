@@ -5,24 +5,19 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CropBlock;
-import net.minecraft.world.level.block.StemBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.AABB;
-import net.minecraftforge.common.Tags;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class EntityAIFarm extends Goal {
     public EntityTourmaline follower;
     public BlockPos target;
+    public BlockPos startPos;
     public double speed;
     public EntityAIFarm(EntityTourmaline entityIn, double speedIn) {
         this.follower = entityIn;
@@ -66,8 +61,9 @@ public class EntityAIFarm extends Goal {
 
     @Override
     public void start(){
+        this.startPos = follower.getOnPos();
         super.start();
-        AABB aabb = follower.getBoundingBox().inflate(16.0D);
+        AABB aabb = follower.getBoundingBox().inflate(7.5D);
         Stream<BlockState> blocks = follower.level.getBlockStates(aabb);
         List<BlockState> blockStates = blocks.toList();
         for (BlockState block : blockStates) {
@@ -79,6 +75,8 @@ public class EntityAIFarm extends Goal {
                             if (this.follower.distanceToSqr(target.getX(), target.getY(), target.getZ()) < 4) {
                                 if (this.follower.consumeItemCheck(Items.WHEAT_SEEDS)) {
                                     this.follower.level.setBlockAndUpdate(target.above(), Blocks.WHEAT.defaultBlockState());
+                                    target = null;
+                                    this.stop();
                                 }
                             }
                         } else if (this.follower.itemCheck(Items.BEETROOT_SEEDS)) {
@@ -86,6 +84,8 @@ public class EntityAIFarm extends Goal {
                             if (this.follower.distanceToSqr(target.getX(), target.getY(), target.getZ()) < 4) {
                                 if (this.follower.consumeItemCheck(Items.BEETROOT_SEEDS)) {
                                     this.follower.level.setBlockAndUpdate(target.above(), Blocks.BEETROOTS.defaultBlockState());
+                                    target = null;
+                                    this.stop();
                                 }
                             }
                         } else if (this.follower.itemCheck(Items.CARROT)) {
@@ -93,12 +93,16 @@ public class EntityAIFarm extends Goal {
                             if (this.follower.distanceToSqr(target.getX(), target.getY(), target.getZ()) < 4) {
                                 if (this.follower.consumeItemCheck(Items.CARROT)) {
                                     this.follower.level.setBlockAndUpdate(target.above(), Blocks.CARROTS.defaultBlockState());
+                                    target = null;
+                                    this.stop();
                                 }
                             }
                         } else if (this.follower.itemCheck(Items.POTATO)) {
                             this.follower.getNavigation().moveTo(target.getX(), target.getY(), target.getZ(), this.speed);
                             if (this.follower.consumeItemCheck(Items.POTATO)) {
                                 this.follower.level.setBlockAndUpdate(target.above(), Blocks.POTATOES.defaultBlockState());
+                                target = null;
+                                this.stop();
                             }
                         }
                     }
@@ -110,12 +114,16 @@ public class EntityAIFarm extends Goal {
                             //this.follower.level.getBlockState(this.target).getBlock().dropResources(this.follower.level.getBlockState(this.target), this.follower.level, this.target);
                             System.out.println("break attempt");
                             this.follower.level.setBlockAndUpdate(target, Blocks.AIR.defaultBlockState());
+                            target = null;
+                            this.stop();
                         }
                     } else if (follower.consumeItemCheck(Items.BONE_MEAL) ) {
                         System.out.println("grow attempt");
                         this.follower.getNavigation().moveTo(target.getX(), target.getY(), target.getZ(), this.speed);
                         if (this.follower.distanceToSqr(target.getX(), target.getY(), target.getZ()) < 4) {
                             ((CropBlock) (this.follower.level.getBlockState(this.target).getBlock())).performBonemeal((ServerLevel) follower.level, this.follower.getRandom(), target, this.follower.level.getBlockState(this.target));
+                            target = null;
+                            this.stop();
                         }
                     }
                 }
@@ -128,6 +136,7 @@ public class EntityAIFarm extends Goal {
     public void stop() {
         this.target = null;
         this.follower.getNavigation().stop();
+        //this.follower.getNavigation().moveTo(startPos.getX(), startPos.getY(), startPos.getZ(), 1.0);
         this.follower.setPathfindingMalus(BlockPathTypes.WATER, 0);
     }
 }

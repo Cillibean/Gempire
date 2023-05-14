@@ -492,6 +492,8 @@
 
   "container.gempire.tank": "Tank",
   "container.gempire.injector": "Injector",
+  "container.gempire.warp_config": "Edit Name",
+  "container.gempire.warp_selection": "Warp Selection",
 
   "ability.gempire.zilch": "Zilch",
   "ability.gempire.knockback": "Knockback",

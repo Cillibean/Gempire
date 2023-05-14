@@ -4,21 +4,28 @@ import com.gempire.Gempire;
 import com.gempire.client.entity.model.*;
 import com.gempire.client.entity.render.*;
 import com.gempire.client.screen.*;
+import com.gempire.client.screen.warppad.WarpConfigScreen;
+import com.gempire.client.screen.warppad.WarpSelectionScreen;
 import com.gempire.client.ter.ShellTER;
 import com.gempire.entities.bases.EntityGem;
-import com.gempire.init.ModContainers;
-import com.gempire.init.ModEntities;
-import com.gempire.init.ModItemProperties;
-import com.gempire.init.ModTE;
+import com.gempire.init.*;
 import com.gempire.keybindings.KeyBindings;
+import com.gempire.systems.warping.WarpPadData;
+import com.gempire.systems.warping.WarpPadInfo;
+import com.gempire.systems.warping.WarpPadInfoHolder;
+import com.gempire.systems.warping.WarpSelectionMenu;
 import com.gempire.tileentities.WarpPadTE;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.entity.*;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.InputEvent;
@@ -27,7 +34,9 @@ import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraftforge.network.NetworkHooks;
 
+import java.util.List;
 import java.util.UUID;
 
 public class ClientProxy {
@@ -76,7 +85,12 @@ public class ClientProxy {
         MenuScreens.register(ModContainers.GEM_UI_CONTAINER.get(), GemUIScreen::new);
         MenuScreens.register(ModContainers.SHELL_CONTAINER.get(), ShellScreen::new);
         MenuScreens.register(ModContainers.PEARL_UI_CONTAINER.get(), PearlUIScreen::new);
+        MenuScreens.register(ModContainers.PEARL_DEFECTIVE_UI_CONTAINER.get(), PearlUIScreenDefective::new);
+        MenuScreens.register(ModContainers.PEARL_PERFECT_UI_CONTAINER.get(), PearlUIScreenPerfect::new);
         MenuScreens.register(ModContainers.ZIRCON_UI_CONTAINER.get(), ZirconUIScreen::new);
+
+        MenuScreens.register(ModContainers.WARP_SELECTION.get(), WarpSelectionScreen::new);
+        MenuScreens.register(ModContainers.WARP_CONFIG.get(), WarpConfigScreen::new);
 
         event.registerBlockEntityRenderer(ModTE.SHELL_TE.get(), ShellTER::new);
     }
@@ -127,12 +141,25 @@ public class ClientProxy {
         @SubscribeEvent
         public static void onKeyInput(InputEvent.Key event) {
             if(KeyBindings.WARP_KEY.consumeClick()) {
-                LocalPlayer player = Minecraft.getInstance().player;
+                Player player = Minecraft.getInstance().player;
                 System.out.println("warp attempt");
-                if (WarpPadTE.TestForWarpPad(player)) {
+                /*if (WarpPadTE.TestForWarpPad(player)) {
                     //Minecraft.getInstance().player.sendSystemMessage(Component.literal("Warped!"));
                 } else if (!WarpPadTE.TestForWarpPad(player)) {
                     //Minecraft.getInstance().player.sendSystemMessage(Component.literal("This is not a warp pad!"));
+                }*/
+                assert player != null;
+                if (player.getLevel().getBlockState(player.getOnPos()).getBlock() == ModBlocks.WARP_PAD.get()) {
+                    //WarpPadInfoHolder holder = WarpPadData.get((ServerLevel) player.getLevel());
+                    //List<WarpPadInfo> warpPads = holder.getWarpPads();
+                    //MenuProvider provider = WarpSelectionMenu.getMenuProvider(player.getOnPos(), warpPads);
+                /*NetworkHooks.openScreen((ServerPlayer) player, provider, data -> {
+                    data.writeBlockPos(player.getOnPos());
+                    data.writeInt(warpPads.size());
+                    for(WarpPadInfo entry : warpPads) {
+                        entry.write(data);
+                    }
+                });*/
                 }
             }
         }

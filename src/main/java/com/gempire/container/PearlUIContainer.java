@@ -25,23 +25,9 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import java.util.Objects;
 
 public class PearlUIContainer extends AbstractContainerMenu {
-    public static final int HOTBAR_SLOT_COUNT = 9;
-    public static final int PLAYER_INVENTORY_ROW_COUNT = 3;
-    public static final int PLAYER_INVENTORY_COLUMN_COUNT = 9;
-    public static final int PLAYER_INVENTORY_SLOT_COUNT = PLAYER_INVENTORY_COLUMN_COUNT * PLAYER_INVENTORY_ROW_COUNT;
-    public static final int VANILLA_SLOT_COUNT = HOTBAR_SLOT_COUNT + PLAYER_INVENTORY_SLOT_COUNT;
-
-    public static final int VANILLA_FIRST_SLOT_INDEX = 0;
-    public static final int TE_INVENTORY_FIRST_SLOT_INDEX = VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT;
-    public static final int TE_INVENTORY_SLOT_COUNT = EntityGem.NUMBER_OF_SLOTS;
-
-    public static final int TILE_INVENTORY_YPOS = 20;
-    public static final int PLAYER_INVENTORY_YPOS = 51;
-
     public final ContainerLevelAccess canInteract;
 
     public final EntityPearl gem;
-    public final DataSlot brewProgress = DataSlot.standalone();
 
     public PearlUIContainer(int windowID, Inventory playerInventory, EntityPearl gem) {
         super(ModContainers.PEARL_UI_CONTAINER.get(), windowID);
@@ -96,7 +82,7 @@ public class PearlUIContainer extends AbstractContainerMenu {
     public ItemStack quickMoveStack(Player playerIn, int index) {
         ItemStack stack = ItemStack.EMPTY;
         Slot slot = this.slots.get(index);
-        if(slot != null && slot.hasItem()){
+        if(slot.hasItem()){
             ItemStack slotStack = slot.getItem();
             stack = slotStack.copy();
             if(index < EntityPearl.NUMBER_OF_SLOTS_PEARL && !this.moveItemStackTo(slotStack, EntityPearl.NUMBER_OF_SLOTS_PEARL - 1, this.slots.size(), true)){
