@@ -2,8 +2,8 @@ package com.gempire.systems.warping;
 
 import com.gempire.init.ModBlocks;
 import com.gempire.init.ModContainers;
+import com.gempire.init.ModPacketHandler;
 import com.gempire.networking.EditWarpName;
-import com.gempire.networking.PacketHandler;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.MenuProvider;
@@ -55,7 +55,7 @@ public class WarpConfigMenu extends AbstractContainerMenu {
     }
     public void saveName(String name) {
         if(name.length() > 0 && name != info.getName()) {
-            PacketHandler.INSTANCE.sendToServer(new EditWarpName(info.getPos(), name));
+            ModPacketHandler.INSTANCE.sendToServer(new EditWarpName(info.getPos(), name));
         }
     }
 }

@@ -1,7 +1,7 @@
 package com.gempire.client.screen.warppad;
 
 import com.gempire.Gempire;
-import com.gempire.networking.PacketHandler;
+import com.gempire.init.ModPacketHandler;
 import com.gempire.networking.WarpRequest;
 import com.gempire.systems.warping.WarpPadInfo;
 import com.gempire.systems.warping.WarpSelectionMenu;
@@ -35,7 +35,7 @@ public class WarpSelectionScreen extends AbstractContainerScreen<WarpSelectionMe
         for(WarpPadInfo info : warpPads) {
             if(!info.getPos().equals(this.menu.getPos())) {
                 WarpButton warpButton = new WarpButton(this.leftPos + 7, this.topPos, 144, 23, Component.literal(info.getName()), button -> {
-                    PacketHandler.INSTANCE.sendToServer(new WarpRequest(this.menu.getPos(), info.getPos()));
+                    ModPacketHandler.INSTANCE.sendToServer(new WarpRequest(this.menu.getPos(), info.getPos()));
                     onClose();
                 });
                 this.addWidget(warpButton);

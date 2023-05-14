@@ -36,21 +36,9 @@ public class WarpPadBlock extends BaseEntityBlock {
         if(entity instanceof WarpPadTE warpPad) {
             if(level instanceof ServerLevel serverLevel && player instanceof ServerPlayer serverPlayer) {
                 WarpPadInfoHolder holder = WarpPadData.get(serverLevel);
-                if(!holder.hasWarpPad(pos) || player.isCrouching()) {
-                    WarpPadInfo info = holder.getNewWarpPad(pos);
-                    MenuProvider provider = WarpConfigMenu.getMenuProvider(info, warpPad.getItemStackHandler());
-                    NetworkHooks.openScreen(serverPlayer, provider, info::write);
-                } else {
-                    List<WarpPadInfo> warpPads = holder.getWarpPads();
-                    MenuProvider provider = WarpSelectionMenu.getMenuProvider(pos, warpPads);
-                    NetworkHooks.openScreen(serverPlayer, provider, data -> {
-                        data.writeBlockPos(pos);
-                        data.writeInt(warpPads.size());
-                        for(WarpPadInfo entry : warpPads) {
-                            entry.write(data);
-                        }
-                    });
-                }
+                WarpPadInfo info = holder.getNewWarpPad(pos);
+                MenuProvider provider = WarpConfigMenu.getMenuProvider(info, warpPad.getItemStackHandler());
+                NetworkHooks.openScreen(serverPlayer, provider, info::write);
             }
             return InteractionResult.sidedSuccess(level.isClientSide);
         }

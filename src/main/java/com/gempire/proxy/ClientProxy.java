@@ -10,6 +10,7 @@ import com.gempire.client.ter.ShellTER;
 import com.gempire.entities.bases.EntityGem;
 import com.gempire.init.*;
 import com.gempire.keybindings.KeyBindings;
+import com.gempire.networking.WarpGuiKeyPressed;
 import com.gempire.systems.warping.WarpPadData;
 import com.gempire.systems.warping.WarpPadInfo;
 import com.gempire.systems.warping.WarpPadInfoHolder;
@@ -148,21 +149,9 @@ public class ClientProxy {
                 } else if (!WarpPadTE.TestForWarpPad(player)) {
                     //Minecraft.getInstance().player.sendSystemMessage(Component.literal("This is not a warp pad!"));
                 }*/
-                assert player != null;
-                if (player.getLevel().getBlockState(player.getOnPos()).getBlock() == ModBlocks.WARP_PAD.get()) {
-                    //WarpPadInfoHolder holder = WarpPadData.get((ServerLevel) player.getLevel());
-                    //List<WarpPadInfo> warpPads = holder.getWarpPads();
-                    //MenuProvider provider = WarpSelectionMenu.getMenuProvider(player.getOnPos(), warpPads);
-                /*NetworkHooks.openScreen((ServerPlayer) player, provider, data -> {
-                    data.writeBlockPos(player.getOnPos());
-                    data.writeInt(warpPads.size());
-                    for(WarpPadInfo entry : warpPads) {
-                        entry.write(data);
-                    }
-                });*/
+                ModPacketHandler.INSTANCE.sendToServer(new WarpGuiKeyPressed(player.getOnPos()));
                 }
             }
         }
 
     }
-}
