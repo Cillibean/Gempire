@@ -51,6 +51,8 @@ public class CommandGempireLocateBiome extends CommandBase {
                     if(!gem.isOnStructureCooldown()){
                         System.out.println("command");
                         nephrite = gem;
+                    } else {
+                        source.getPlayerOrException().sendSystemMessage(Component.translatable("She's too tired!"));
                     }
                 }
             }

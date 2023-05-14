@@ -53,6 +53,8 @@ public class CommandGempireLocate extends CommandBase {
                         System.out.println("is on cooldown");
                         nephrite = gem;
                         System.out.println(nephrite);
+                    } else {
+                        source.getPlayerOrException().sendSystemMessage(Component.translatable("She's too tired!"));
                     }
                 }
             }

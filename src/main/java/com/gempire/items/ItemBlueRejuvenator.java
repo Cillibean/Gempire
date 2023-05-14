@@ -30,10 +30,14 @@ public class ItemBlueRejuvenator extends DestabBase {
                 ((EntityGem) pTarget).setAbilities(((EntityGem) pTarget).generateAbilities());
                 if (pTarget instanceof EntityZircon)
                 {
-                    ((EntityZircon) pTarget).setEnchantPage(RandomSource.create().nextInt(ModEnchants.VANILLA_ENCHANTMENTS.size()));
+                    if (((EntityZircon) pTarget).isPrimary()) {
+                        ((EntityZircon) pTarget).setEnchantPage(RandomSource.create().nextInt(ModEnchants.GEMPIRE_ENCHANTMENTS.size()));
+                    } else {
+                        ((EntityZircon) pTarget).setEnchantPage(RandomSource.create().nextInt(ModEnchants.VANILLA_ENCHANTMENTS.size()));
+                    }
                 }
                 ((EntityGem) pTarget).rebelPoints += 2.5F;
-                pTarget.hurt(DamageSource.playerAttack(((EntityGem) pTarget).currentPlayer), pTarget.getMaxHealth() + 20);
+                pTarget.hurt(DamageSource.MAGIC, pTarget.getMaxHealth() + 20);
                 ((EntityGem) pTarget).setCracked(false);
             }
         }

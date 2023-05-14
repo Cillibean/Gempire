@@ -1,5 +1,7 @@
 package com.gempire.entities.gems;
 
+import com.gempire.container.PearlDefectiveUIContainer;
+import com.gempire.container.PearlPerfectUIContainer;
 import com.gempire.container.PearlUIContainer;
 import com.gempire.entities.ai.EntityAIFollowAssigned;
 import com.gempire.entities.ai.EntityAIFollowOwner;
@@ -439,7 +441,13 @@ public class EntityPearl extends EntityVaryingGem {
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int p_createMenu_1_, Inventory p_createMenu_2_, Player p_createMenu_3_) {
-        return new PearlUIContainer(p_createMenu_1_, p_createMenu_2_, this);
+        if (this.isPrimary()) {
+            return new PearlPerfectUIContainer(p_createMenu_1_, p_createMenu_2_, this);
+        } else if (this.isDefective()) {
+            return new PearlDefectiveUIContainer(p_createMenu_1_, p_createMenu_2_, this);
+        } else {
+            return new PearlUIContainer(p_createMenu_1_, p_createMenu_2_, this);
+        }
     }
 
     public NonNullList<ItemStack> getItems1(){

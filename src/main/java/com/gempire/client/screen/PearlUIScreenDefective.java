@@ -1,5 +1,7 @@
 package com.gempire.client.screen;
 
+import com.gempire.container.GemUIContainer;
+import com.gempire.container.PearlDefectiveUIContainer;
 import com.gempire.container.PearlUIContainer;
 import com.gempire.entities.abilities.AbilityZilch;
 import com.gempire.entities.abilities.base.Ability;
@@ -7,94 +9,62 @@ import com.gempire.init.ModPacketHandler;
 import com.gempire.networking.*;
 import com.gempire.util.GUIUtilities;
 import com.mojang.blaze3d.platform.Lighting;
-import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.systems.RenderSystem;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.client.gui.components.EditBox;
-import net.minecraft.client.gui.components.Button;
-import net.minecraft.client.gui.components.ImageButton;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.resources.ResourceLocation;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Quaternion;
 import com.mojang.math.Vector3f;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.components.EditBox;
+import net.minecraft.client.gui.components.ImageButton;
+import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Inventory;
 
 import java.util.ArrayList;
 
 
-public class PearlUIScreen extends AbstractContainerScreen<PearlUIContainer> {
-    public static final ResourceLocation GUI = new ResourceLocation("gempire:textures/gui/pearl_ui_normal_noextra.png");
-    public static final ResourceLocation LEFT_L = new ResourceLocation("gempire:textures/gui/left_light.png");
-    public static final ResourceLocation RIGHT_L = new ResourceLocation("gempire:textures/gui/right_light.png");
-
+public class PearlUIScreenDefective extends AbstractContainerScreen<PearlDefectiveUIContainer> {
+    public static final ResourceLocation GUI = new ResourceLocation("gempire:textures/gui/base.png");
     public EditBox nameBox;
 
-    public PearlUIScreen(PearlUIContainer screenContainer, Inventory inv, Component titleIn) {
+    public PearlUIScreenDefective(PearlDefectiveUIContainer screenContainer, Inventory inv, Component titleIn) {
         super(screenContainer, inv, titleIn);
         this.leftPos = 0;
         this.topPos = 0;
-        this.imageWidth = 350;
-        this.imageHeight = 240;
+        this.imageWidth = 197;
+        this.imageHeight = 250;
     }
 
     @Override
     protected void init() {
+        //name box
         super.init();
         int x = (this.width - this.imageWidth) / 2;
         int y = (this.height - this.imageHeight) / 2;
-
-        this.nameBox = new EditBox(this.font, x + 74, y + 9, 101, 12, Component.translatable("Sussy"));
+        this.nameBox = new EditBox(this.font, x + 27, y + 4, 144, 12, Component.translatable("Sussy"));
         this.nameBox.setBordered(true);
         this.nameBox.setVisible(true);
-        String name = this.menu.gem.customName() ? this.menu.gem.getCustomName().getString() : this.menu.gem.getDisplayName().getString();
+        String name = this.menu.gem.customName() ? this.menu.gem.getCustomName().getString() : this.menu.gem.getNickname().getString();
         this.nameBox.setValue(name);
         this.nameBox.setFocus(true);
+        //poof button
         addRenderableWidget(this.nameBox);
         this.setInitialFocus(this.nameBox);
-
-        addRenderableWidget(new Button(this.leftPos + 10, this.topPos + 108, 83, 20, Component.translatable("screens.gempire.poof"),
-                (button) -> {
+        addRenderableWidget(new Button(this.leftPos + 10, this.topPos + 123, 83, 20, Component.translatable("screens.gempire.poof"), (button) -> {
             ModPacketHandler.INSTANCE.sendToServer(new C2SRequestPoof(this.menu.gem.getId()));
             this.onClose();
-        }));
-
-        //CUSTOMIZATION STUFF
-
-        addRenderableWidget(new ImageButton(this.leftPos + 122, this.topPos + 35, 11, 9, 0, 0, 0, PearlUIScreen.LEFT_L,
-                11, 9, (p_213029_1_) -> {
-            ModPacketHandler.INSTANCE.sendToServer(new C2SRequestHairChange(this.menu.gem.getId(), false));
-        }));
-        addRenderableWidget(new ImageButton(this.leftPos + 137, this.topPos + 35, 11, 9, 0, 0, 0, PearlUIScreen.RIGHT_L,
-                11, 9, (p_213029_1_) -> {
-            ModPacketHandler.INSTANCE.sendToServer(new C2SRequestHairChange(this.menu.gem.getId(), true));
-        }));
-
-        addRenderableWidget(new ImageButton(this.leftPos + 139, this.topPos + 53, 11, 9, 0, 0, 0, PearlUIScreen.LEFT_L,
-                11, 9, (p_213029_1_) -> {
-            ModPacketHandler.INSTANCE.sendToServer(new C2SRequestOutfitChange(this.menu.gem.getId(), false));
-        }));
-        addRenderableWidget(new ImageButton(this.leftPos + 154, this.topPos + 53, 11, 9, 0, 0, 0, PearlUIScreen.RIGHT_L,
-                11, 9, (p_213029_1_) -> {
-            ModPacketHandler.INSTANCE.sendToServer(new C2SRequestOutfitChange(this.menu.gem.getId(), true));
-        }));
-
-        addRenderableWidget(new ImageButton(this.leftPos + 138, this.topPos + 71, 11, 9, 0, 0, 0, PearlUIScreen.LEFT_L,
-                11, 9, (p_213029_1_) -> {
-            ModPacketHandler.INSTANCE.sendToServer(new C2SRequestInsigniaChange(this.menu.gem.getId(), false));
-        }));
-        addRenderableWidget(new ImageButton(this.leftPos + 153, this.topPos + 71, 11, 9, 0, 0, 0, PearlUIScreen.RIGHT_L,
-                11, 9, (p_213029_1_) -> {
-            ModPacketHandler.INSTANCE.sendToServer(new C2SRequestInsigniaChange(this.menu.gem.getId(), true));
         }));
     }
 
     @Override
     protected void renderLabels(PoseStack matrixStack, int x, int y) {
-
+        this.drawAbilityList(matrixStack, 104, 97);
     }
 
     @Override
@@ -104,38 +74,33 @@ public class PearlUIScreen extends AbstractContainerScreen<PearlUIContainer> {
         this.renderTooltip(matrixStack, mouseX, mouseY);
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     protected void renderBg(PoseStack matrixStack, float partialTicks, int mouseX, int mouseY) {
-        GUIUtilities.setup(GUI);
+        GUIUtilities.setup(GemUIScreen.GUI);
+
         int x = (this.width - this.imageWidth) / 2;
         int y = (this.height - this.imageHeight) / 2;
         int i = this.leftPos;
         int j = this.topPos;
-        this.blit(matrixStack, x, y, 0, 0, this.imageWidth, this.imageHeight, 352, 240);
+
+        blit(matrixStack, x, y, 0, 0, this.imageWidth, this.imageHeight, 197, 250);
 
         this.nameBox.render(matrixStack, mouseX, mouseY, partialTicks);
-
-        renderEntityInInventory(i + 38, j + 76, 26, (float)(i + 37) - mouseX, (float)(j + 43) - mouseY, this.menu.gem);
-
+        int scale = 0;
+        float boundingy = (float) this.menu.gem.getBoundingBox().getYsize();
+        if (boundingy > 2.4)
+        {
+            scale = 17;
+        } else if (boundingy > 1.8) {
+            scale = 25;
+        }
+        else
+        {
+            scale = 30;
+        }
+        //int scale = this.menu.gem.getBoundingBox().getYsize() > 1.8f ? 25 : 30;
+        renderEntityInInventory(i + 135, j + 85, scale, (float)(i + 135) - mouseX, (float)(j + 75) - mouseY, this.menu.gem);
         drawStats(matrixStack, i, j);
-
-        int ddOffsetHair = this.menu.gem.getHairVariant() > 8 ? -3 : 0;
-        int ddOffsetOutfit = this.menu.gem.getOutfitVariant() > 9 ? -3 : 0;
-        int ddOffsetInsignia = this.menu.gem.getInsigniaVariant() > 9 ? -3 : 0;
-
-        this.font.draw(matrixStack, Component.translatable("Hair:"),
-                i + 77, j + 36, 0xFFFFFF);
-        this.font.draw(matrixStack, Component.translatable("Uniform:"),
-                i + 77, j + 54, 0xFFFFFF);
-        this.font.draw(matrixStack, Component.translatable("Insignia:"),
-                i + 77, j + 72, 0xFFFFFF);
-        this.font.draw(matrixStack, Component.translatable("" + (this.menu.gem.getHairVariant() + 1)),
-                i + 107 + ddOffsetHair, j + 37, 0xFFFFFF);
-        this.font.draw(matrixStack, Component.translatable("" + (this.menu.gem.getOutfitVariant() + 1)),
-                i + 124 + ddOffsetOutfit, j + 55, 0xFFFFFF);
-        this.font.draw(matrixStack, Component.translatable("" + (this.menu.gem.getInsigniaVariant() + 1)),
-                i + 123 + ddOffsetInsignia, j + 73, 0xFFFFFF);
     }
 
     @Override
@@ -202,10 +167,10 @@ public class PearlUIScreen extends AbstractContainerScreen<PearlUIContainer> {
         Lighting.setupFor3DItems();
     }
 
+
     public void drawStats(PoseStack stack, int x, int y){
         Component health = Component.translatable("screens.gempire.health");
-        this.font.draw(stack, Component.translatable(health.getString() + ": " + (int)this.menu.gem.getHealth()
-                + " / " + (int)this.menu.gem.getMaxHealth()), x + 10, y + 97, 4210752);
+        this.font.draw(stack, Component.translatable(health.getString() + ": " + (int)this.menu.gem.getHealth() + " / " + (int)this.menu.gem.getMaxHealth()), x + 7, y + 98, 4210752);
     }
 
     public void drawAbilityList(PoseStack stack, int x, int y){
@@ -221,4 +186,5 @@ public class PearlUIScreen extends AbstractContainerScreen<PearlUIContainer> {
             this.font.draw(stack, text, x, y + i * 9, 4210752);
         }
     }
+
 }

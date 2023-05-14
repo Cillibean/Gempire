@@ -22,6 +22,8 @@ import java.util.HashMap;
 
 public class ModEnchants {
     public static ArrayList<Enchantment> VANILLA_ENCHANTMENTS = new ArrayList<>();
+
+    public static ArrayList<Enchantment> GEMPIRE_ENCHANTMENTS = new ArrayList<>();
     public static HashMap<Item, Integer> POWERFUL_ITEMS_DISCOUNT = new HashMap<>();
 
     public static final DeferredRegister<Enchantment> ENCHANTS = DeferredRegister.create(ForgeRegistries.ENCHANTMENTS, Gempire.MODID);
@@ -81,5 +83,13 @@ public class ModEnchants {
         enchants.add(Enchantments.UNBREAKING);
 
         ModEnchants.VANILLA_ENCHANTMENTS = enchants;
+    }
+
+    public static void registerPrimeRequiredEnchantments(){
+        ArrayList<Enchantment> enchants = new ArrayList<>();
+        enchants.add(ModEnchants.GEM_PROTECTION.get());
+        enchants.add(ModEnchants.SHATTER.get());
+
+        ModEnchants.GEMPIRE_ENCHANTMENTS = enchants;
     }
 }

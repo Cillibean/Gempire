@@ -31,7 +31,7 @@ public class C2SRequestPoof {
         assert sender != null;
         EntityGem gem = (EntityGem) sender.level.getEntity(msg.entityID);
         assert gem != null;
-        gem.hurt(DamageSource.playerAttack(gem.currentPlayer), gem.getMaxHealth() + 20);
+        gem.hurt(DamageSource.MAGIC, gem.getMaxHealth());
         ctx.setPacketHandled(true);
     }
 }

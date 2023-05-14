@@ -60,7 +60,6 @@ public class Gempire
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(new EventHandler());
 
-
         //MinecraftForge.EVENT_BUS.register(CommonProxy.class);
     }
 
@@ -135,6 +134,7 @@ public class Gempire
         ModEntities.registerCruxes();
         ModAbilities.registerAbilities();
         ModEnchants.registerVanillaEnchantments();
+        ModEnchants.registerPrimeRequiredEnchantments();
         ModEnchants.registerItemDiscounts();
     }
 

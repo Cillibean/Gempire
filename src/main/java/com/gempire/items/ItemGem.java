@@ -396,7 +396,11 @@ public class ItemGem extends Item {
                 }
                 if (gem instanceof EntityZircon) {
                     if (!((EntityZircon) gem).getEnchantPageDefined()) {
-                        ((EntityZircon) gem).setEnchantPage(RandomSource.create().nextInt(ModEnchants.VANILLA_ENCHANTMENTS.size()));
+                        if (gem.isPrimary()) {
+                            ((EntityZircon) gem).setEnchantPage(RandomSource.create().nextInt(ModEnchants.GEMPIRE_ENCHANTMENTS.size()));
+                        } else {
+                            ((EntityZircon) gem).setEnchantPage(RandomSource.create().nextInt(ModEnchants.VANILLA_ENCHANTMENTS.size()));
+                        }
                         ((EntityZircon) gem).setEnchantPageDefined(true);
                     }
                 }

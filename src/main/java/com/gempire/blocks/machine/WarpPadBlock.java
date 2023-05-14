@@ -1,72 +1,77 @@
 package com.gempire.blocks.machine;
 
-import com.gempire.init.ModBlocks;
 import com.gempire.init.ModTE;
+import com.gempire.systems.warping.*;
 import com.gempire.tileentities.WarpPadTE;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.network.NetworkHooks;
 
 import javax.annotation.Nullable;
+import java.util.List;
 
-public class WarpPadBlock extends BaseEntityBlock implements EntityBlock {
-
-    public WarpPadBlock(Properties builder) {
-        super(builder);
+public class WarpPadBlock extends BaseEntityBlock {
+    public WarpPadBlock(Properties properties) {
+        super(properties);
     }
-
-    @Nullable
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level p_152180_, BlockState p_152181_, BlockEntityType<T> p_152182_) {
-        return p_152182_ == ModTE.WARP_PAD_TE.get() ? WarpPadTE::tick : null;
+    @Override
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
+        BlockEntity entity = level.getBlockEntity(pos);
+        if(entity instanceof WarpPadTE warpPad) {
+            if(level instanceof ServerLevel serverLevel && player instanceof ServerPlayer serverPlayer) {
+                WarpPadInfoHolder holder = WarpPadData.get(serverLevel);
+                WarpPadInfo info = holder.getNewWarpPad(pos);
+                MenuProvider provider = WarpConfigMenu.getMenuProvider(info, warpPad.getItemStackHandler());
+                NetworkHooks.openScreen(serverPlayer, provider, info::write);
+            }
+            return InteractionResult.sidedSuccess(level.isClientSide);
+        }
+        return InteractionResult.PASS;
     }
-
+    @Override
+    public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+        if(!level.isClientSide) {
+            BlockEntity entity = level.getBlockEntity(pos);
+            if(entity instanceof WarpPadTE warpPad) {
+                warpPad.handleScheduledTick(level, pos);
+            }
+        }
+    }
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new WarpPadTE(pos, state);
     }
-
-    @SuppressWarnings("deprecation")
+    @Override
+    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean moving) {
+        super.onRemove(state, level, pos, newState, moving);
+        if(level instanceof ServerLevel serverLevel) {
+            WarpPadData.get(serverLevel).removeWarpPad(pos);
+        }
+    }
+    @Nullable
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
+        return level.isClientSide ? createTickerHelper(type, ModTE.WARP_PAD_TE.get(), WarpPadTE::animateTick) : null;
+    }
     @Override
     public RenderShape getRenderShape(BlockState state) {
         return RenderShape.MODEL;
-    }
-
-    @Override
-    public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
-        return Block.box(0.1D, 0.1D, 0.1D, 15.9D, 15.9D, 15.9D);
-    }
-
-    @Override
-    public void neighborChanged(BlockState state, Level worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving) {
-        super.neighborChanged(state, worldIn, pos, blockIn, fromPos, isMoving);
-        if(worldIn.hasNeighborSignal(pos)){
-            BlockEntity te = worldIn.getBlockEntity(pos);
-            if(te instanceof WarpPadTE){
-                //((WarpPadTE)te).Warp();
-            }
-        }
-    }
-
-    @Override
-    public boolean canConnectRedstone(BlockState state, BlockGetter world, BlockPos pos, @Nullable Direction side) {
-        return true;
     }
 }

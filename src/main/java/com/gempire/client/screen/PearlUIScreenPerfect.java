@@ -1,5 +1,6 @@
 package com.gempire.client.screen;
 
+import com.gempire.container.PearlPerfectUIContainer;
 import com.gempire.container.PearlUIContainer;
 import com.gempire.entities.abilities.AbilityZilch;
 import com.gempire.entities.abilities.base.Ability;
@@ -7,33 +8,35 @@ import com.gempire.init.ModPacketHandler;
 import com.gempire.networking.*;
 import com.gempire.util.GUIUtilities;
 import com.mojang.blaze3d.platform.Lighting;
-import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.systems.RenderSystem;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.client.gui.components.EditBox;
-import net.minecraft.client.gui.components.Button;
-import net.minecraft.client.gui.components.ImageButton;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.resources.ResourceLocation;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Quaternion;
 import com.mojang.math.Vector3f;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.components.EditBox;
+import net.minecraft.client.gui.components.ImageButton;
+import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Inventory;
 
 import java.util.ArrayList;
 
 
-public class PearlUIScreen extends AbstractContainerScreen<PearlUIContainer> {
-    public static final ResourceLocation GUI = new ResourceLocation("gempire:textures/gui/pearl_ui_normal_noextra.png");
+public class PearlUIScreenPerfect extends AbstractContainerScreen<PearlPerfectUIContainer> {
+    public static final ResourceLocation GUI = new ResourceLocation("gempire:textures/gui/pearl_ui_noarmor.png");
+    public static final ResourceLocation LEFT = new ResourceLocation("gempire:textures/gui/left.png");
+    public static final ResourceLocation RIGHT = new ResourceLocation("gempire:textures/gui/right.png");
     public static final ResourceLocation LEFT_L = new ResourceLocation("gempire:textures/gui/left_light.png");
     public static final ResourceLocation RIGHT_L = new ResourceLocation("gempire:textures/gui/right_light.png");
 
     public EditBox nameBox;
 
-    public PearlUIScreen(PearlUIContainer screenContainer, Inventory inv, Component titleIn) {
+    public PearlUIScreenPerfect(PearlPerfectUIContainer screenContainer, Inventory inv, Component titleIn) {
         super(screenContainer, inv, titleIn);
         this.leftPos = 0;
         this.topPos = 0;
@@ -56,6 +59,16 @@ public class PearlUIScreen extends AbstractContainerScreen<PearlUIContainer> {
         addRenderableWidget(this.nameBox);
         this.setInitialFocus(this.nameBox);
 
+        addRenderableWidget(new ImageButton(this.leftPos + 241, this.topPos + 11, 11, 9, 0, 0, 0, PearlUIScreenPerfect.LEFT,
+                11, 9, (p_213029_1_) -> {
+            ModPacketHandler.INSTANCE.sendToServer(new C2SRequestPageChange(this.menu.gem.getId(), false));
+        }));
+
+        addRenderableWidget(new ImageButton(this.leftPos + 256, this.topPos + 11, 11, 9, 0, 0, 0, PearlUIScreenPerfect.RIGHT,
+                11, 9, (p_213029_1_) -> {
+            ModPacketHandler.INSTANCE.sendToServer(new C2SRequestPageChange(this.menu.gem.getId(), true));
+        }));
+
         addRenderableWidget(new Button(this.leftPos + 10, this.topPos + 108, 83, 20, Component.translatable("screens.gempire.poof"),
                 (button) -> {
             ModPacketHandler.INSTANCE.sendToServer(new C2SRequestPoof(this.menu.gem.getId()));
@@ -64,29 +77,29 @@ public class PearlUIScreen extends AbstractContainerScreen<PearlUIContainer> {
 
         //CUSTOMIZATION STUFF
 
-        addRenderableWidget(new ImageButton(this.leftPos + 122, this.topPos + 35, 11, 9, 0, 0, 0, PearlUIScreen.LEFT_L,
+        addRenderableWidget(new ImageButton(this.leftPos + 122, this.topPos + 35, 11, 9, 0, 0, 0, PearlUIScreenPerfect.LEFT_L,
                 11, 9, (p_213029_1_) -> {
             ModPacketHandler.INSTANCE.sendToServer(new C2SRequestHairChange(this.menu.gem.getId(), false));
         }));
-        addRenderableWidget(new ImageButton(this.leftPos + 137, this.topPos + 35, 11, 9, 0, 0, 0, PearlUIScreen.RIGHT_L,
+        addRenderableWidget(new ImageButton(this.leftPos + 137, this.topPos + 35, 11, 9, 0, 0, 0, PearlUIScreenPerfect.RIGHT_L,
                 11, 9, (p_213029_1_) -> {
             ModPacketHandler.INSTANCE.sendToServer(new C2SRequestHairChange(this.menu.gem.getId(), true));
         }));
 
-        addRenderableWidget(new ImageButton(this.leftPos + 139, this.topPos + 53, 11, 9, 0, 0, 0, PearlUIScreen.LEFT_L,
+        addRenderableWidget(new ImageButton(this.leftPos + 139, this.topPos + 53, 11, 9, 0, 0, 0, PearlUIScreenPerfect.LEFT_L,
                 11, 9, (p_213029_1_) -> {
             ModPacketHandler.INSTANCE.sendToServer(new C2SRequestOutfitChange(this.menu.gem.getId(), false));
         }));
-        addRenderableWidget(new ImageButton(this.leftPos + 154, this.topPos + 53, 11, 9, 0, 0, 0, PearlUIScreen.RIGHT_L,
+        addRenderableWidget(new ImageButton(this.leftPos + 154, this.topPos + 53, 11, 9, 0, 0, 0, PearlUIScreenPerfect.RIGHT_L,
                 11, 9, (p_213029_1_) -> {
             ModPacketHandler.INSTANCE.sendToServer(new C2SRequestOutfitChange(this.menu.gem.getId(), true));
         }));
 
-        addRenderableWidget(new ImageButton(this.leftPos + 138, this.topPos + 71, 11, 9, 0, 0, 0, PearlUIScreen.LEFT_L,
+        addRenderableWidget(new ImageButton(this.leftPos + 138, this.topPos + 71, 11, 9, 0, 0, 0, PearlUIScreenPerfect.LEFT_L,
                 11, 9, (p_213029_1_) -> {
             ModPacketHandler.INSTANCE.sendToServer(new C2SRequestInsigniaChange(this.menu.gem.getId(), false));
         }));
-        addRenderableWidget(new ImageButton(this.leftPos + 153, this.topPos + 71, 11, 9, 0, 0, 0, PearlUIScreen.RIGHT_L,
+        addRenderableWidget(new ImageButton(this.leftPos + 153, this.topPos + 71, 11, 9, 0, 0, 0, PearlUIScreenPerfect.RIGHT_L,
                 11, 9, (p_213029_1_) -> {
             ModPacketHandler.INSTANCE.sendToServer(new C2SRequestInsigniaChange(this.menu.gem.getId(), true));
         }));
@@ -124,6 +137,8 @@ public class PearlUIScreen extends AbstractContainerScreen<PearlUIContainer> {
         int ddOffsetOutfit = this.menu.gem.getOutfitVariant() > 9 ? -3 : 0;
         int ddOffsetInsignia = this.menu.gem.getInsigniaVariant() > 9 ? -3 : 0;
 
+        this.font.draw(matrixStack, Component.translatable("Page: " + (this.menu.gem.getPage() + 1)),
+                i + 190, j + 11, 4210752);
         this.font.draw(matrixStack, Component.translatable("Hair:"),
                 i + 77, j + 36, 0xFFFFFF);
         this.font.draw(matrixStack, Component.translatable("Uniform:"),
