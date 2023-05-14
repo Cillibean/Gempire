@@ -60,5 +60,8 @@ public class ModPacketHandler {
                 C2SRequestEnchant::encode,
                 C2SRequestEnchant::decode,
                 C2SRequestEnchant::handle);
+
+        INSTANCE.registerMessage(networkId++, WarpRequest.class, WarpRequest::encode, WarpRequest::decode, WarpRequest::handle);
+        INSTANCE.registerMessage(networkId++, EditWarpName.class, EditWarpName::encode, EditWarpName::decode, EditWarpName::handle);
     }
 }
