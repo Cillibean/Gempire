@@ -5,6 +5,9 @@ import com.gempire.entities.bases.EntityVaryingGem;
 import com.gempire.entities.gems.EntityQuartz;
 import com.gempire.entities.gems.EntityZircon;
 import com.gempire.entities.gems.starter.EntityPebble;
+import com.gempire.entities.other.EntityAbomination;
+import com.gempire.entities.other.EntityCrawler;
+import com.gempire.entities.other.EntityShambler;
 import com.gempire.events.DrainEvent;
 import com.gempire.events.GemFormEvent;
 import com.gempire.init.*;
@@ -52,6 +55,8 @@ public class GemFormation {
     public int yLevelNeeded;
     public int tier;
     public float weight;
+    public boolean clod = false;
+    public int clodNO;
 
     HashMap<String, Float> WEIGHTS_OF_GEMS = new HashMap<>();
     HashMap<String, GemConditions> CONDITIONS = new HashMap<>();
@@ -76,6 +81,12 @@ public class GemFormation {
     public void SpawnGem(){
         RegistryObject<EntityType<EntityPebble>> gemm = ModEntities.PEBBLE;
         EntityGem gem = gemm.get().create(this.world);
+        RegistryObject<EntityType<EntityAbomination>> abominationr = ModEntities.ABOMINATION;
+        EntityAbomination abomination = abominationr.get().create(this.world);
+        RegistryObject<EntityType<EntityCrawler>> crawlerr = ModEntities.CRAWLER;
+        EntityCrawler crawler = crawlerr.get().create(this.world);
+        RegistryObject<EntityType<EntityShambler>> shamblerr = ModEntities.SHAMBLER;
+        EntityShambler shambler = shamblerr.get().create(this.world);
         float BIOME_TEMPERATURE = this.world.getBiome(this.pos).get().getBaseTemperature();
         this.SetDrainedStoneColor(BIOME_TEMPERATURE);
         String gemtoform = this.EvaluateCruxes();
@@ -162,74 +173,111 @@ public class GemFormation {
             if (weight / rarity <= 5) {
                 System.out.println("clod");
             }
-            if (weight / rarity <= 15) {
+            if (weight / rarity <= 7) {
                 gem.setDefective(false);
                 System.out.println("defective");
             } else if (weight / rarity >= 15){
                 gem.setPrimary(true);
                 System.out.println("prime");
+            }  else if (weight / rarity <= 5) {
+                clod = true;
+                clodNO = 1;
+            } else if (weight / rarity <= 3) {
+                clod = true;
+                clodNO = 2;
+            } else if (weight / rarity <= 1) {
+                clod = true;
+                clodNO = 3;
             }
         } else {
-            if (weight / rarity <= 10) {
+            if (weight / rarity <= 9) {
                 gem.setDefective(true);
                 System.out.println("defective");
             } else if (weight / rarity >= 25){
                 gem.setPrimary(true);
                 System.out.println("prime");
+            } else if (weight / rarity <= 7) {
+                clod = true;
+                clodNO = 1;
+            } else if (weight / rarity <= 5) {
+                clod = true;
+                clodNO = 2;
+            } else if (weight / rarity <= 3) {
+                clod = true;
+                clodNO = 3;
             }
         }
-        gem.setGemPlacement(gem.generateGemPlacement());
-        gem.setSkinVariant(gem.generateSkinVariant());
-        if(gem.setSkinVariantOnInitialSpawn) {
-            gem.setSkinColorVariant(gem.generateSkinColorVariant());
-        } else gem.setSkinColorVariant(gem.initalSkinVariant);
-        gem.setAssignedGem(((ItemGem)gem.getGemItem().getDefaultInstance().getItem()).assigned_gem);
-        System.out.println(gem.getAssignedGem());
-        gem.setHairVariant(gem.generateHairVariant());
-        gem.setSkinColor(gem.generatePaletteColor(PaletteType.SKIN));
-        gem.setHairColor(gem.generatePaletteColor(PaletteType.HAIR));
-        gem.setGemColor(gem.generatePaletteColor(PaletteType.GEM));
-        gem.setOutfitVariant(gem.generateOutfitVariant());
-        gem.setOutfitColor(gem.generateOutfitColor());
-        gem.setInsigniaVariant(gem.generateInsigniaVariant());
-        gem.setInsigniaColor(gem.generateInsigniaColor());
-        gem.setAbilitySlots(gem.generateAbilitySlots());
-        gem.setAbilities(gem.generateAbilities());
-        gem.setFacet(gem.generateFacet());
-        gem.setCut(gem.generateCut());
-        gem.setEmotional(gem.generateIsEmotional());
-        gem.setAbilityPowers(gem.findAbilities(gem.getAbilities()));
-        gem.addAbilityGoals();
-        gem.applyAttributeAbilities();
-        gem.FOLLOW_ID = UUID.randomUUID();
-        gem.ASSIGNED_ID = UUID.randomUUID();
-        gem.MASTER_OWNER = UUID.randomUUID();
-        gem.setMarkingVariant(gem.generateMarkingVariant());
-        gem.setMarkingColor(gem.generatePaletteColor(PaletteType.MARKINGS));
-        gem.setMarking2Variant(gem.generateMarking2Variant());
-        gem.setMarking2Color(gem.generatePaletteColor(PaletteType.MARKINGS_2));
-        gem.setCustomName(gem.getNickname());
-        if (gem instanceof EntityZircon) {
-            if (gem.isPrimary()) {
-                ((EntityZircon) gem).setEnchantPage(RandomSource.create().nextInt(ModEnchants.GEMPIRE_ENCHANTMENTS.size()));
-            } else {
-                ((EntityZircon) gem).setEnchantPage(RandomSource.create().nextInt(ModEnchants.VANILLA_ENCHANTMENTS.size()));
+        if (!clod) {
+            gem.setGemPlacement(gem.generateGemPlacement());
+            gem.setSkinVariant(gem.generateSkinVariant());
+            if(gem.setSkinVariantOnInitialSpawn) {
+                gem.setSkinColorVariant(gem.generateSkinColorVariant());
+            } else gem.setSkinColorVariant(gem.initalSkinVariant);
+            //gem.setAssignedGem(((ItemGem)gem.getGemItem().getDefaultInstance().getItem()).assigned_gem);
+            System.out.println(gem.getAssignedGem());
+            gem.setHairVariant(gem.generateHairVariant());
+            gem.setSkinColor(gem.generatePaletteColor(PaletteType.SKIN));
+            gem.setHairColor(gem.generatePaletteColor(PaletteType.HAIR));
+            gem.setGemColor(gem.generatePaletteColor(PaletteType.GEM));
+            gem.setOutfitVariant(gem.generateOutfitVariant());
+            gem.setOutfitColor(gem.generateOutfitColor());
+            gem.setInsigniaVariant(gem.generateInsigniaVariant());
+            gem.setInsigniaColor(gem.generateInsigniaColor());
+            gem.setAbilitySlots(gem.generateAbilitySlots());
+            gem.setAbilities(gem.generateAbilities());
+            gem.setFacet(gem.generateFacet());
+            gem.setCut(gem.generateCut());
+            gem.setEmotional(gem.generateIsEmotional());
+            gem.setAbilityPowers(gem.findAbilities(gem.getAbilities()));
+            gem.addAbilityGoals();
+            gem.applyAttributeAbilities();
+            gem.FOLLOW_ID = UUID.randomUUID();
+            gem.ASSIGNED_ID = UUID.randomUUID();
+            gem.MASTER_OWNER = UUID.randomUUID();
+            gem.setMarkingVariant(gem.generateMarkingVariant());
+            gem.setMarkingColor(gem.generatePaletteColor(PaletteType.MARKINGS));
+            gem.setMarking2Variant(gem.generateMarking2Variant());
+            gem.setMarking2Color(gem.generatePaletteColor(PaletteType.MARKINGS_2));
+            gem.setCustomName(gem.getNickname());
+            if (gem instanceof EntityZircon) {
+                if (gem.isPrimary()) {
+                    ((EntityZircon) gem).setEnchantPage(RandomSource.create().nextInt(ModEnchants.GEMPIRE_ENCHANTMENTS.size()));
+                } else {
+                    ((EntityZircon) gem).setEnchantPage(RandomSource.create().nextInt(ModEnchants.VANILLA_ENCHANTMENTS.size()));
+                }
+                ((EntityZircon) gem).setEnchantPageDefined(true);
             }
-            ((EntityZircon) gem).setEnchantPageDefined(true);
+            //gem.generateScoutList();
+            gem.idlePowers = gem.generateIdlePowers();
+            if(gem.spawnGem != null){
+                gem.spawnGem.remove(Entity.RemovalReason.DISCARDED);
+            }
+            gem.setCracked(gem.getCracked());
+            System.out.println(gem.getCracked());
+            gem.setPos(this.pos.getX() + .5f, this.pos.getY(), this.pos.getZ() + .5f);
+            gem.setHealth(gem.getMaxHealth());
+            gem.GUARD_POS = gem.getOnPos().above();
+            GemFormEvent event1 = new GemFormEvent(gem, gem.blockPosition());
+            MinecraftForge.EVENT_BUS.post(event1);
+            this.world.addFreshEntity(gem);
+        } else {
+            if (clodNO == 1) {
+                crawler.setPos(this.pos.getX() + .5f, this.pos.getY(), this.pos.getZ() + .5f);
+                crawler.setHealth(crawler.getMaxHealth());
+                crawler.setUUID(Mth.createInsecureUUID(this.world.random));
+                this.world.addFreshEntity(crawler);
+            } else if (clodNO == 2) {
+                shambler.setPos(this.pos.getX() + .5f, this.pos.getY(), this.pos.getZ() + .5f);
+                shambler.setHealth(shambler.getMaxHealth());
+                shambler.setUUID(Mth.createInsecureUUID(this.world.random));
+                this.world.addFreshEntity(shambler);
+            } else if (clodNO == 3) {
+                abomination.setPos(this.pos.getX() + .5f, this.pos.getY(), this.pos.getZ() + .5f);
+                abomination.setHealth(abomination.getMaxHealth());
+                abomination.setUUID(Mth.createInsecureUUID(this.world.random));
+                this.world.addFreshEntity(abomination);
+            }
         }
-        //gem.generateScoutList();
-        gem.idlePowers = gem.generateIdlePowers();
-        if(gem.spawnGem != null){
-            gem.spawnGem.remove(Entity.RemovalReason.DISCARDED);
-        }
-        gem.setCracked(gem.getCracked());
-        System.out.println(gem.getCracked());
-        gem.setPos(this.pos.getX() + .5f, this.pos.getY(), this.pos.getZ() + .5f);
-        gem.setHealth(gem.getMaxHealth());
-        gem.GUARD_POS = gem.getOnPos().above();
-        GemFormEvent event1 = new GemFormEvent(gem, gem.blockPosition());
-        MinecraftForge.EVENT_BUS.post(event1);
-        this.world.addFreshEntity(gem);
         ArrayList<BlockPos> blocks = GemFormation.getBlockPosInVolume(this.world, this.pos, this.volumeToCheck);
         DrainEvent event2 = new DrainEvent(blocks);
         MinecraftForge.EVENT_BUS.post(event2);

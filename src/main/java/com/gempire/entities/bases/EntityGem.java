@@ -135,7 +135,6 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     public UUID MASTER_OWNER;
     public UUID FOLLOW_ID;
     public UUID ASSIGNED_ID;
-    public EntityGem assignedGem;
     public BlockPos GUARD_POS;
     public ArrayList<IIdleAbility> idlePowers = new ArrayList<>();
     private final ItemBasedSteering booster = new ItemBasedSteering(this.entityData, BOOST_TIME, SADDLED);
@@ -184,7 +183,6 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     public boolean chromaColourRequired;
     public boolean enemyDying;
     public LivingEntity enemy;
-
     private static final DynamicCommandExceptionType ERROR_STRUCTURE_INVALID = new DynamicCommandExceptionType((p_207534_) -> {
         return Component.translatable("commands.gempire.nounderstand", p_207534_);
     });
@@ -293,7 +291,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         }
         ItemStack stack = new ItemStack(this.getGemItem());
         ItemGem.saveData(stack, this);
-        setAssignedGem(((ItemGem) stack.getItem()).assigned_gem);
+        //setAssignedGem(((ItemGem) stack.getItem()).assigned_gem);
         System.out.println(this.getAssignedGem());
         this.setRebelHairVariant(this.generateHairVariant());
         this.setRebelOutfitVariant(this.generateOutfitVariant());
@@ -514,7 +512,6 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         if (compound.contains("followID")) this.FOLLOW_ID = compound.getUUID("followID");
         if (compound.contains("assignedID")) this.ASSIGNED_ID = compound.getUUID("assignedID");
         if (compound.contains("masterID")) this.MASTER_OWNER = compound.getUUID("masterID");
-        if (compound.contains("assignedID")) this.assignedGem = (EntityGem) ((ServerLevel)this.level).getEntity(compound.getUUID("assignedID"));
         this.setMovementType(compound.getByte("movementType"));
         this.setSkinColorVariant(compound.getInt("skinColorVariant"));
         this.setSkinColor(compound.getInt("skinColor"));
@@ -904,11 +901,23 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
 
     public abstract int generateHardness();
     public EntityGem getAssignedGem() {
-        return assignedGem;
+        if (!this.level.isClientSide) {
+            if (((ServerLevel)this.level).getEntity(ASSIGNED_ID) instanceof EntityGem) {
+                return (EntityGem) ((ServerLevel) this.level).getEntity(ASSIGNED_ID);
+            } else {
+                System.out.println("not a gem");
+                return null;
+            }
+        } else {
+            System.out.println("not clientside");
+            return null;
+        }
     }
 
-    public void setAssignedGem(EntityGem assignedGem) {
-        this.assignedGem = assignedGem;
+    public void setAssignedGem(EntityGem assigned) {
+        if (assigned != null) {
+            this.ASSIGNED_ID = assigned.getUUID();
+        }
     }
 
     public void cycleMovementAI(Player player){
@@ -919,13 +928,14 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             if (getAssignedGem() != null) {
                 setAssignedId(getAssignedGem().getUUID());
             }
-            System.out.println(assignedGem);
+            System.out.println("Assigned ID " + ASSIGNED_ID);
+            System.out.println("ASSIGNED " + getAssignedGem());
             if (getAssignedGem() != null ? this.getMovementType() < 3 : this.getMovementType() < 2) {
                 this.addMovementType(1);
                 switch (this.getMovementType()) {
                     case 1 -> player.sendSystemMessage(Component.translatable(this.getName().getString() + " will wander around"));
                     case 2 -> player.sendSystemMessage(Component.translatable(this.getName().getString() + " will now follow you"));
-                    case 3 -> player.sendSystemMessage(Component.translatable(this.getName().getString() + " will now follow " + assignedGem.getName().getString() + " " + assignedGem.getFacetAndCut()));
+                    case 3 -> player.sendSystemMessage(Component.translatable(this.getName().getString() + " will now follow " + getAssignedGem().getName().getString() + " " + getAssignedGem().getFacetAndCut()));
                     default -> player.sendSystemMessage(Component.translatable(this.getName().getString() + " will now stay put"));
                 }
             } else if (getAssignedGem() != null ? this.getMovementType() == 3 : this.getMovementType() == 2) {
@@ -1080,21 +1090,21 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             MinecraftForge.EVENT_BUS.post(event);
             if (getShatter()){
                 ItemStack stack = new ItemStack(this.getShardItem());
-                this.spawnAtLocation(stack).setExtendedLifetime();
+                Objects.requireNonNull(this.spawnAtLocation(stack)).setExtendedLifetime();
                 for (UUID owner : OWNERS) {
-                    this.level.getPlayerByUUID(owner).sendSystemMessage(Component.translatable(this.getName().getString() + " " + this.getFacetAndCut() + " has been shattered"));
+                    Objects.requireNonNull(this.level.getPlayerByUUID(owner)).sendSystemMessage(Component.translatable(this.getName().getString() + " " + this.getFacetAndCut() + " has been shattered"));
                 }
             } else if (getCracked()){
                 ItemStack stack = new ItemStack(this.getGemItem());
                 ItemGem.saveData(stack, this);
-                this.spawnAtLocation(stack).setExtendedLifetime();
+                Objects.requireNonNull(this.spawnAtLocation(stack)).setExtendedLifetime();
                 for (UUID owner : OWNERS) {
-                    this.level.getPlayerByUUID(owner).sendSystemMessage(Component.translatable(this.getName().getString() + " " + this.getFacetAndCut() + " has cracked"));
+                    Objects.requireNonNull(this.level.getPlayerByUUID(owner)).sendSystemMessage(Component.translatable(this.getName().getString() + " " + this.getFacetAndCut() + " has cracked"));
                 }
             } else {
                 ItemStack stack = new ItemStack(this.getGemItem());
                 ItemGem.saveData(stack, this);
-                this.spawnAtLocation(stack).setExtendedLifetime();
+                Objects.requireNonNull(this.spawnAtLocation(stack)).setExtendedLifetime();
             }
             this.gameEvent(GameEvent.ENTITY_PLACE);
             this.kill();

@@ -67,12 +67,9 @@ public class ItemGem extends Item {
     int coundownMax = 600;
     int countdown = 600;
 
+    boolean livingEntityHit;
     Random rand = new Random();
     public boolean doEffect = false;
-    public EntityGem assigned_gem;
-    public EntityGem gemToAssign;
-    public boolean livingEntityHit = false;
-    public boolean isAssigned = false;
 
     public ItemGem(Properties properties, String id) {
         super(properties);
@@ -94,21 +91,23 @@ public class ItemGem extends Item {
     public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity entity, InteractionHand hand) {
         System.out.println("entity interact");
         if (entity instanceof EntityGem) {
-            if (((EntityGem) entity).assignedGem == null) {
                 if (((EntityGem) entity).isOwner(player)) {
                     if (player.isCrouching()) {
+                        stack.getOrCreateTag().putUUID("assignedID", UUID.randomUUID());
+                        player.sendSystemMessage(Component.translatable("This Gem is no longer assigned to "+ entity.getName().getString() + ", " +((EntityGem) entity).getFacetAndCut()));
                         livingEntityHit = true;
-                        System.out.println("gem interact");
+                        /*System.out.println("gem interact");
                         gemToAssign = null;
-                        isAssigned = true;
+                        isAssigned = true;*/
                     } else {
+                        stack.getOrCreateTag().putUUID("assignedID", entity.getUUID());
+                        player.sendSystemMessage(Component.translatable("This Gem was assigned to "+ entity.getName().getString() + ", " +((EntityGem) entity).getFacetAndCut()));
                         livingEntityHit = true;
-                        System.out.println("gem interact");
+                        /*System.out.println("gem interact");
                         gemToAssign = (EntityGem) entity;
-                        isAssigned = false;
+                        isAssigned = false;*/
                     }
                 }
-            }
         }
         return super.interactLivingEntity(stack, player, entity, hand);
     }
@@ -119,11 +118,11 @@ public class ItemGem extends Item {
         boolean spawned = false;
         ItemStack stack = playerIn.getItemInHand(handIn);
         if (!worldIn.isClientSide && (handIn == InteractionHand.MAIN_HAND)) {
-            System.out.println("check tags");
-            if (!getCracked(stack)) {
-                if (!getSludged(stack)) {
-                    System.out.println("through");
-                    if (!livingEntityHit) {
+            if (!livingEntityHit) {
+                System.out.println("check tags");
+                if (!getCracked(stack)) {
+                    if (!getSludged(stack)) {
+                        System.out.println("through");
                         ItemStack itemstack = playerIn.getItemInHand(handIn);
                         BlockHitResult raytraceresult = getPlayerPOVHitResult(worldIn, playerIn, ClipContext.Fluid.NONE);
                         if (raytraceresult.getType() == HitResult.Type.MISS) {
@@ -147,31 +146,10 @@ public class ItemGem extends Item {
                                 playerIn.getMainHandItem().shrink(1);
                             }
                         }
-                    } else {
-                        if (!gemToAssign.isDeadOrDying()) {
-                            if (stack.getTag().getString("abilities") != "") {
-                                if (this.checkTags(stack) && stack.getTag().getBoolean("assigned")) {
-                                    playerIn.sendSystemMessage(Component.translatable("This Gem is no longer assigned to " + assigned_gem.getName().getString() + " " + assigned_gem.getFacetAndCut()));
-                                    livingEntityHit = false;
-                                    stack.getTag().putUUID("assignedID", UUID.randomUUID());
-                                    stack.getTag().putBoolean("assigned", true);
-                                } else {
-                                    playerIn.sendSystemMessage(Component.translatable("This Gem was assigned to " + gemToAssign.getName().getString() + " " + gemToAssign.getFacetAndCut()));
-                                    livingEntityHit = false;
-                                    System.out.println("ToAssign to assigned");
-                                    assigned_gem = gemToAssign;
-                                    System.out.println(assigned_gem);
-                                    System.out.println(gemToAssign);
-                                    if (this.checkTags(playerIn.getItemInHand(handIn))) {
-                                        playerIn.getItemInHand(handIn).getTag().putBoolean("assigned", false);
-                                    }
-                                }
-                            } else {
-                                livingEntityHit = false;
-                            }
-                        }
                     }
                 }
+            } else {
+                livingEntityHit = false;
             }
         }
         return super.use(worldIn, playerIn, handIn);
@@ -205,8 +183,6 @@ public class ItemGem extends Item {
     public boolean formGem(Level world, @Nullable Player player, BlockPos pos, ItemStack stack, @Nullable ItemEntity item) {
         if (!world.isClientSide) {
             System.out.println("form event");
-            System.out.println("assigned "+assigned_gem);
-            System.out.println("to assign "+gemToAssign);
             RegistryObject<EntityType<EntityPebble>> gemm = ModEntities.PEBBLE;
             String skinColorVariant = "";
             EntityGem gem = gemm.get().create(world);
@@ -391,9 +367,6 @@ public class ItemGem extends Item {
                         gem.finalizeSpawn((ServerLevelAccessor) world, world.getCurrentDifficultyAt(item.blockPosition()), MobSpawnType.MOB_SUMMONED, null, null);
                     }
                 }*/
-                if (isAssigned) {
-                    gem.ASSIGNED_ID = UUID.randomUUID();
-                }
                 if (gem instanceof EntityZircon) {
                     if (!((EntityZircon) gem).getEnchantPageDefined()) {
                         if (gem.isPrimary()) {
@@ -404,11 +377,10 @@ public class ItemGem extends Item {
                         ((EntityZircon) gem).setEnchantPageDefined(true);
                     }
                 }
-                System.out.println("assigned gem "+assigned_gem);
-                System.out.println("to assign "+gemToAssign);
                 if (gem.MASTER_OWNER == null) {
                     gem.MASTER_OWNER = player.getUUID();
                 }
+                gem.setAssignedId(stack.getOrCreateTag().getUUID("assignedID"));
                 gem.setPos(pos.getX() + 0.5, pos.getY() + 1.0, pos.getZ() + 0.5);
                 gem.setHealth(gem.getMaxHealth());
                 gem.GUARD_POS = gem.getOnPos().above();
@@ -416,8 +388,6 @@ public class ItemGem extends Item {
                 gem.removeAllEffects();
                 gem.setDeltaMovement(0, 0, 0);
                 gem.fallDistance = 0;
-                gem.setAssignedGem(assigned_gem);
-                System.out.println(getAssigned_gem());
                 GemFormEvent event = new GemFormEvent(gem, gem.blockPosition());
                 MinecraftForge.EVENT_BUS.post(event);
                 world.addFreshEntity(gem);
@@ -453,11 +423,9 @@ public class ItemGem extends Item {
                         if (itemStack.getTag().getInt("sludgeAmount") >= 5) {
                             p_40553_.add(Component.translatable("Sludged").withStyle(ChatFormatting.RED));
                         }
-                        /*
-                        if (!itemStack.getTag().getBoolean("assigned")) {
-                            p_40553_.add(Component.translatable("Assigned to " + assigned_gem.getName().getString() + " " + assigned_gem.getFacetAndCut()));
+                        if (!itemStack.getTag().getUUID("assignedID").equals(UUID.randomUUID())) {
+                            p_40553_.add(Component.translatable("Assigned")); //to " + assigned_gem.getName().getString() + " " + assigned_gem.getFacetAndCut()));
                         }
-                        */
                         if (itemStack.getTag().getBoolean("prime")) {
                             p_40553_.add(Component.translatable("Perfect").withStyle(ChatFormatting.LIGHT_PURPLE));
                         }
@@ -562,9 +530,5 @@ public class ItemGem extends Item {
                 this.countdown = this.coundownMax;
             }
         }
-    }
-
-    public EntityGem getAssigned_gem() {
-        return assigned_gem;
     }
 }
