@@ -1,0 +1,19 @@
+{
+  "name": "The Confractor",
+  "icon": "gempire:gem_whistle",
+  "advancement": "gempire:root",
+  "category": "gempire:misc",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "link_recipe ": true,
+      "item": "gempire:confractor",
+      "text": "Confractors are used to shatter gems purposefully when used in melee situations."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "gempire:confractor",
+      "text": "The recipe for a Confractor."
+    }
+  ]
+}

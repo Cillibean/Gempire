@@ -6,9 +6,21 @@
   "overrides": [
     {
       "predicate": {
-        "gempire:gempredicate": 1.0
+        "gempire:gempredicate": 0.1
+      },
+      "model": "gempire:item/tourmaline_gem_11_sludge"
+    },
+    {
+      "predicate": {
+        "gempire:gempredicate": 0.2
       },
       "model": "gempire:item/tourmaline_gem_11_cracked"
+    },
+    {
+      "predicate": {
+        "gempire:gempredicate": 1.0
+      },
+      "model": "gempire:item/tourmaline_gem_11_perfect"
     }
   ]
 }

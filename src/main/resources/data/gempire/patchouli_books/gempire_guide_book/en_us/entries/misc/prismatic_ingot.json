@@ -8,12 +8,12 @@
       "type": "patchouli:spotlight",
       "link_recipe ": true,
       "item": "gempire:prismatic_ingot",
-      "text": "Prismatic Ingots are obtained in gem themed structures, or by giving a Bismuth a Prismatic Scrap."
+      "text": "Prismatic Ingots are obtained in gem themed structures, or by giving a Bismuth a piece of Gem Alloy."
     },
     {
       "type": "patchouli:crafting",
-      "recipe": "gempire:gem_scraps",
-      "text": "The recipe for Prismatic Scraps."
+      "recipe": "gempire:gem_alloy",
+      "text": "The recipe for Gem Alloy."
     }
   ]
 }

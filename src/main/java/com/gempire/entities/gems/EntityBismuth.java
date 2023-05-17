@@ -26,10 +26,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EntityBismuth extends EntityGem {
-    //TO-DO: IMPLEMENT BISMUTH. Will upgrade Injector to final tier with a Peridot.
-    //Implement Builder and Refinery skills. Builder requires a trigger item and ample resources to build what's being asked.
-    //Refinery is that skill that is used with Peridot's Ferrokinesis.
-
     public EntityBismuth(EntityType<? extends PathfinderMob> type, Level worldIn) {
         super(type, worldIn);
     }

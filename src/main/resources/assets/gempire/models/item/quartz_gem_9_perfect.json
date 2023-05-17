@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "gempire:items/quartz_gem_9",
+    "layer1": "gempire:items/perfect/perfect"
+  }
+}

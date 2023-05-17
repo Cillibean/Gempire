@@ -6,9 +6,21 @@
   "overrides": [
     {
       "predicate": {
-        "gempire:gempredicate": 1.0
+        "gempire:gempredicate": 0.1
+      },
+      "model": "gempire:item/quartz_gem_4_sludge"
+    },
+    {
+      "predicate": {
+        "gempire:gempredicate": 0.2
       },
       "model": "gempire:item/quartz_gem_4_cracked"
+    },
+    {
+      "predicate": {
+        "gempire:gempredicate": 1.0
+      },
+      "model": "gempire:item/quartz_gem_4_perfect"
     }
   ]
 }

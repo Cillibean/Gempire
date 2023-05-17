@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "gempire:items/tourmaline_gem_10",
+    "layer1": "gempire:items/sludge/small_gem_sludge"
+  }
+}
