@@ -326,7 +326,7 @@ public class ShellTE extends RandomizableContainerBlockEntity implements MenuPro
             }
         }
         if (nullFlag) ainmneacha = ArrayUtils.remove(ainmneacha, idx);
-        namee = ainmneacha[0];
+        //namee = ainmneacha[0];
         if (ainmneacha.length > 1) skinColorVariant = ainmneacha[1];
         for (String s : ainmneacha) {
             System.out.println(s);
