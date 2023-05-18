@@ -17,6 +17,7 @@ import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import software.bernie.geckolib3.core.AnimationState;
@@ -30,7 +31,7 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 import software.bernie.geckolib3.util.GeckoLibUtil;
 
-public class EntityAbomination extends PathfinderMob implements IAnimatable {
+public class EntityAbomination extends Monster implements IAnimatable {
 
     private static final AnimationBuilder ATTACK_ANIMATION = new AnimationBuilder().addAnimation("animation.abomination.attack", ILoopType.EDefaultLoopTypes.PLAY_ONCE);
     private static final AnimationBuilder IDLE_ANIMATION = new AnimationBuilder().addAnimation("animation.abomination.idle", ILoopType.EDefaultLoopTypes.LOOP);
@@ -39,9 +40,8 @@ public class EntityAbomination extends PathfinderMob implements IAnimatable {
 
     private final AnimationFactory FACTORY = GeckoLibUtil.createFactory(this);
 
-    public EntityAbomination(EntityType<? extends PathfinderMob> p_21683_, Level p_21684_) {
+    public EntityAbomination(EntityType<? extends Monster> p_21683_, Level p_21684_) {
         super(p_21683_, p_21684_);
-        this.noCulling = true;
     }
 
     public static AttributeSupplier.Builder registerAttributes() {

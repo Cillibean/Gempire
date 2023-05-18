@@ -42,7 +42,6 @@ public class EntityCrawler extends Monster implements IAnimatable {
     private final AnimationFactory FACTORY = GeckoLibUtil.createFactory(this);
     public EntityCrawler(EntityType<? extends Monster> p_21683_, Level p_21684_) {
         super(p_21683_, p_21684_);
-        this.noCulling = true;
     }
 
     public static AttributeSupplier.Builder registerAttributes() {
@@ -71,7 +70,7 @@ public class EntityCrawler extends Monster implements IAnimatable {
     @Override
     public void registerControllers(AnimationData data) {
         data.addAnimationController(new AnimationController(this, "controller", 0, event -> {
-            if (!event.isMoving()) {
+            if (!event.isMoving()&&event.getController().getAnimationState().equals(AnimationState.Stopped)) {
                 event.getController().setAnimation(IDLE_ANIMATION);
                 return PlayState.CONTINUE;
             }
@@ -85,7 +84,7 @@ public class EntityCrawler extends Monster implements IAnimatable {
             return PlayState.STOP;
         }));
         data.addAnimationController(new AnimationController(this, "hurtController", 0, event -> {
-            if (this.hurtMarked) {
+            if (this.hurtMarked&&event.getController().getAnimationState().equals(AnimationState.Stopped)) {
                 event.getController().setAnimation(HURT_ANIMATION);
                 return PlayState.CONTINUE;
             }
@@ -93,7 +92,7 @@ public class EntityCrawler extends Monster implements IAnimatable {
             return PlayState.STOP;
         }));
         data.addAnimationController(new AnimationController(this, "attackController", 0, event -> {
-            if (this.swinging) {
+            if (this.swinging&&event.getController().getAnimationState().equals(AnimationState.Stopped)) {
                 event.getController().setAnimation(ATTACK_ANIMATION);
                 return PlayState.CONTINUE;
             }

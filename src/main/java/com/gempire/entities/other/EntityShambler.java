@@ -40,7 +40,6 @@ public class EntityShambler extends Monster implements IAnimatable {
     private final AnimationFactory FACTORY = GeckoLibUtil.createFactory(this);
     public EntityShambler(EntityType<? extends Monster> p_21683_, Level p_21684_) {
         super(p_21683_, p_21684_);
-        this.noCulling = true;
     }
 
     public static AttributeSupplier.Builder registerAttributes() {

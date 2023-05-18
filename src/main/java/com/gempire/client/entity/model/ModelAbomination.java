@@ -14,7 +14,7 @@ public class ModelAbomination extends AnimatedGeoModel<EntityAbomination> {
 
     @Override
     public ResourceLocation getTextureResource(EntityAbomination object) {
-        return new ResourceLocation(Gempire.MODID, "textures/entity/clods/crawler/abomination.png");
+        return new ResourceLocation(Gempire.MODID, "textures/entity/clods/abomination/abomination.png");
     }
 
     @Override
