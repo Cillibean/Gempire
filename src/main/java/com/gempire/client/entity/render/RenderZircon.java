@@ -32,7 +32,7 @@ public class RenderZircon extends MobRenderer<EntityZircon, ModelZircon<EntityZi
 
     @Override
     protected void scale(EntityZircon entitylivingbaseIn, PoseStack matrixStackIn, float partialTickTime) {
-        matrixStackIn.scale(1.2F, 1.2F, 1.2F);
+        matrixStackIn.scale(entitylivingbaseIn.getXScale(), entitylivingbaseIn.getYScale(), entitylivingbaseIn.getZScale());
         super.scale(entitylivingbaseIn, matrixStackIn, partialTickTime);
     }
 

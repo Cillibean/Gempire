@@ -29,7 +29,7 @@ public class RenderLarimar extends MobRenderer<EntityLarimar, ModelLarimar<Entit
 
     @Override
     protected void scale(EntityLarimar entitylivingbaseIn, PoseStack matrixStackIn, float partialTickTime) {
-        matrixStackIn.scale(1.2f, 1.4f, 1.2f);
+        matrixStackIn.scale(entitylivingbaseIn.getXScale(), entitylivingbaseIn.getYScale(), entitylivingbaseIn.getZScale());
         super.scale(entitylivingbaseIn, matrixStackIn, partialTickTime);
     }
 

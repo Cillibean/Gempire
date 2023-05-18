@@ -26,8 +26,7 @@ public class RenderEmerald extends MobRenderer<EntityEmerald, ModelEmerald<Entit
 
     @Override
     protected void scale(EntityEmerald entitylivingbaseIn, PoseStack matrixStackIn, float partialTickTime) {
-        matrixStackIn.scale(1.25f, 1.35f, 1.25f);
-        super.scale(entitylivingbaseIn, matrixStackIn, partialTickTime);
+        matrixStackIn.scale(entitylivingbaseIn.getXScale(), entitylivingbaseIn.getYScale(), entitylivingbaseIn.getZScale());        super.scale(entitylivingbaseIn, matrixStackIn, partialTickTime);
     }
 
     @Override

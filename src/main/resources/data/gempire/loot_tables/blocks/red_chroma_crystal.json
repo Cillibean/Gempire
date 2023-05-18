@@ -15,7 +15,7 @@
                   "predicate": {
                     "enchantments": [
                       {
-                        "enchantment": "minecraft:silk_touch",
+                        "enchantment": "minecraft:fortune",
                         "levels": {
                           "min": 1
                         }
@@ -50,10 +50,7 @@
                       "condition": "minecraft:table_bonus",
                       "enchantment": "minecraft:fortune",
                       "chances": [
-                        0.1,
-                        0.14285715,
-                        0.25,
-                        1.0
+                        0.1
                       ]
                     }
                   ],

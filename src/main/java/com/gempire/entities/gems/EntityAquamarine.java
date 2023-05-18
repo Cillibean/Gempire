@@ -68,6 +68,21 @@ public class EntityAquamarine extends EntityGem implements FlyingAnimal {
         return false;
     }
 
+    @Override
+    public Float baseXScale() {
+        return .6F;
+    }
+
+    @Override
+    public Float baseYScale() {
+        return .65F;
+    }
+
+    @Override
+    public Float baseZScale() {
+        return .6F;
+    }
+
     protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(9, new FloatGoal(this));

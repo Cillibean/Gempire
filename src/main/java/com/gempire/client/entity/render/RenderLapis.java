@@ -31,7 +31,7 @@ public class RenderLapis extends MobRenderer<EntityLapis, ModelLapis<EntityLapis
 
     @Override
     protected void scale(EntityLapis entitylivingbaseIn, PoseStack matrixStackIn, float partialTickTime) {
-        matrixStackIn.scale(.9f, .95f, .9f);
+        matrixStackIn.scale(entitylivingbaseIn.getXScale(), entitylivingbaseIn.getYScale(), entitylivingbaseIn.getZScale());
         super.scale(entitylivingbaseIn, matrixStackIn, partialTickTime);
     }
 

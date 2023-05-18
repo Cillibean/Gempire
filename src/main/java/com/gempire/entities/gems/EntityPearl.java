@@ -61,6 +61,21 @@ public class EntityPearl extends EntityVaryingGem {
                 .add(Attributes.ATTACK_DAMAGE, 1.0D)
                 .add(Attributes.ATTACK_SPEED, 1.5D);
     }
+
+    @Override
+    public Float baseXScale() {
+        return 1F;
+    }
+
+    @Override
+    public Float baseYScale() {
+        return 1F;
+    }
+
+    @Override
+    public Float baseZScale() {
+        return 1F;
+    }
     @Override
     public SoundEvent getInstrument()
     {

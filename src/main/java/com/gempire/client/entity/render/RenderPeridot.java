@@ -31,7 +31,7 @@ public class RenderPeridot extends MobRenderer<EntityPeridot, ModelPeridot<Entit
 
     @Override
     protected void scale(EntityPeridot entitylivingbaseIn, PoseStack matrixStackIn, float partialTickTime) {
-        matrixStackIn.scale(.95f, 1.15f, .95f);
+        matrixStackIn.scale(entitylivingbaseIn.getXScale(), entitylivingbaseIn.getYScale(), entitylivingbaseIn.getZScale());
         super.scale(entitylivingbaseIn, matrixStackIn, partialTickTime);
     }
 

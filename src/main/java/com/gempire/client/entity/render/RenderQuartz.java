@@ -33,7 +33,7 @@ public class RenderQuartz extends MobRenderer<EntityQuartz, ModelQuartz<EntityQu
 
     @Override
     protected void scale(EntityQuartz entitylivingbaseIn, PoseStack matrixStackIn, float partialTickTime) {
-        matrixStackIn.scale(1.05f, 1.15f, 1.05f);
+        matrixStackIn.scale(entitylivingbaseIn.getXScale(), entitylivingbaseIn.getYScale(), entitylivingbaseIn.getZScale());
         super.scale(entitylivingbaseIn, matrixStackIn, partialTickTime);
     }
     @Override

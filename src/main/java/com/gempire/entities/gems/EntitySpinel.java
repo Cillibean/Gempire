@@ -38,6 +38,21 @@ public class EntitySpinel extends EntityVaryingGem {
                 .add(Attributes.ATTACK_SPEED, 1.0D);
     }
 
+    @Override
+    public Float baseXScale() {
+        return .8F;
+    }
+
+    @Override
+    public Float baseYScale() {
+        return .85F;
+    }
+
+    @Override
+    public Float baseZScale() {
+        return .8F;
+    }
+
     protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(7, new FloatGoal(this));

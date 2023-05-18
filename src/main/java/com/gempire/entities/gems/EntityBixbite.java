@@ -54,6 +54,21 @@ public class EntityBixbite extends EntityGem {
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, 1, false, false, this::checkSludged));
         this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, EntityGem.class, 6.0F, 1.0D, 1.2D, this::checkElseSludged));
     }
+
+    @Override
+    public Float baseXScale() {
+        return 1F;
+    }
+
+    @Override
+    public Float baseYScale() {
+        return 1.1F;
+    }
+
+    @Override
+    public Float baseZScale() {
+        return 1F;
+    }
     @Override
     public SoundEvent getInstrument()
     {

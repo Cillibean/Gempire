@@ -28,7 +28,7 @@ public class RenderPebble extends MobRenderer<EntityPebble, ModelPebble<EntityPe
 
     @Override
     protected void scale(EntityPebble entitylivingbaseIn, PoseStack matrixStackIn, float partialTickTime) {
-        matrixStackIn.scale(0.25f, 0.25f, 0.25f);
+        matrixStackIn.scale(entitylivingbaseIn.getXScale(), entitylivingbaseIn.getYScale(), entitylivingbaseIn.getZScale());
         super.scale(entitylivingbaseIn, matrixStackIn, partialTickTime);
     }
 

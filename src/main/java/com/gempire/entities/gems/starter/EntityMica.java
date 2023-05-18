@@ -40,6 +40,21 @@ public class EntityMica extends EntityStarterGem {
         super(type, worldIn);
     }
 
+    @Override
+    public Float baseXScale() {
+        return .2F;
+    }
+
+    @Override
+    public Float baseYScale() {
+        return .2F;
+    }
+
+    @Override
+    public Float baseZScale() {
+        return .2F;
+    }
+
     public static AttributeSupplier.Builder registerAttributes() {
         return Mob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 10.0D)

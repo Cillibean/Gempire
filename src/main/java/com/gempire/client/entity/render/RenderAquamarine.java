@@ -12,6 +12,8 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.network.chat.Component;
 
+import java.util.Random;
+
 public class RenderAquamarine extends MobRenderer<EntityAquamarine, ModelAquamarine<EntityAquamarine>> {
 
     public RenderAquamarine(EntityRendererProvider.Context renderManagerIn, ModelAquamarine<EntityAquamarine> baseModel) {
@@ -28,7 +30,7 @@ public class RenderAquamarine extends MobRenderer<EntityAquamarine, ModelAquamar
 
     @Override
     protected void scale(EntityAquamarine entitylivingbaseIn, PoseStack matrixStackIn, float partialTickTime) {
-        matrixStackIn.scale(.6f, .65f, .6f);
+        matrixStackIn.scale(entitylivingbaseIn.getXScale(), entitylivingbaseIn.getYScale(), entitylivingbaseIn.getZScale());
         super.scale(entitylivingbaseIn, matrixStackIn, partialTickTime);
     }
 

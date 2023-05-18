@@ -45,6 +45,20 @@ public class EntityPebble extends EntityStarterGem {
                 .add(Attributes.ATTACK_DAMAGE, 0);}
 
     @Override
+    public Float baseXScale() {
+        return .25F;
+    }
+
+    @Override
+    public Float baseYScale() {
+        return .25F;
+    }
+
+    @Override
+    public Float baseZScale() {
+        return .25F;
+    }
+    @Override
     public void load(CompoundTag compound) {
         super.load(compound);
         this.hopperGoal = compound.getBoolean("hopperGoal");

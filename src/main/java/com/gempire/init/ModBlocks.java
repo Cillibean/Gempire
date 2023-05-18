@@ -581,7 +581,7 @@ public class ModBlocks {
                     .strength(3.0f, 4.0f)
                     .sound(SoundType.GLASS)
             )
-    );
+    );*/
 
     public static final RegistryObject<Block> WARP_PAD = BLOCKS.register("warp_pad", () ->
             new WarpPadBlock(Block.Properties.of(Material.STONE)

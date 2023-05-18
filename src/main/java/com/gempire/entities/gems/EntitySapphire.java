@@ -42,6 +42,21 @@ public class EntitySapphire extends EntityVaryingGem {
     }
 
     @Override
+    public Float baseXScale() {
+        return .8F;
+    }
+
+    @Override
+    public Float baseYScale() {
+        return .85F;
+    }
+
+    @Override
+    public Float baseZScale() {
+        return .8F;
+    }
+
+    @Override
     public void addAdditionalSaveData(CompoundTag compound) {
         compound.putBoolean("defensive", this.defensive);
         super.addAdditionalSaveData(compound);
