@@ -17,7 +17,7 @@ public class ItemShatterer extends Item {
     public boolean hurtEnemy(ItemStack itemStack, LivingEntity enemy, LivingEntity player) {
         if (enemy instanceof EntityGem) {
             ((EntityGem) enemy).setShatter(true);
-            enemy.hurt(DamageSource.MAGIC, enemy.getMaxHealth());
+            enemy.hurt(DamageSource.MAGIC, enemy.getMaxHealth()*20);
             itemStack.hurtAndBreak(1, player, (p_43296_) -> p_43296_.broadcastBreakEvent(EquipmentSlot.MAINHAND));
         }
         return super.hurtEnemy(itemStack, enemy, player);

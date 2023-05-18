@@ -249,8 +249,10 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
 
     public void Inject() {
         BlockPos crystalPos = getBlockPos().above().above().above();
+        BlockPos seedPos = this.getBlockPos().offset(new BlockPos(0, -Math.ceil(GemSeedTE.DRAIN_SIZE / 2) - 1, 0));
         if (level.getBlockState(crystalPos).getBlock() instanceof PowerCrystalBlock) {
             System.out.println(fluidValid());
+            if (this.level.getBlockState(seedPos) != Blocks.BEDROCK.defaultBlockState()) {
             if (itemHandler.getStackInSlot(CHROMA_INPUT_SLOT_INDEX).getItem() instanceof ItemChroma chroma &&
                     fluidValid()) {
                 System.out.println("got thrpugh fluid check");
@@ -290,7 +292,6 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
                         }
                     }
                 }
-                    BlockPos seedPos = this.getBlockPos().offset(new BlockPos(0, -Math.ceil(GemSeedTE.DRAIN_SIZE / 2) - 1, 0));
                     while (this.level.getBlockState(seedPos) == Blocks.AIR.defaultBlockState() ||
                             this.level.getBlockState(seedPos).getBlock() instanceof LiquidBlock ||
                             this.level.getBlockState(seedPos) == ModBlocks.GEM_SEED_BLOCK.get().defaultBlockState()) {
@@ -322,6 +323,7 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
                         InjectEvent event = new InjectEvent(gemSeedTE, seedPos);
                         MinecraftForge.EVENT_BUS.post(event);
                     }
+                }
             }
         }
     }

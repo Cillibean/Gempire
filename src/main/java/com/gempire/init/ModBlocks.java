@@ -575,7 +575,7 @@ public class ModBlocks {
             )
     );
 
-    public static final RegistryObject<Block> WARP_CORE = BLOCKS.register("warp_core", () ->
+    /*public static final RegistryObject<Block> WARP_CORE = BLOCKS.register("warp_core", () ->
             new Block(Block.Properties
                     .of(Material.METAL)
                     .strength(3.0f, 4.0f)

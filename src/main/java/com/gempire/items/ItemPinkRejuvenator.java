@@ -27,7 +27,7 @@ public class ItemPinkRejuvenator extends DestabBase {
                 ((EntityGem) pTarget).resetOwners();
                 ((EntityGem) pTarget).setRebelled(false);
                 ((EntityGem) pTarget).rebelPoints = 1F;
-                pTarget.hurt(DamageSource.MAGIC, pTarget.getMaxHealth() + 20);
+                pTarget.hurt(DamageSource.MAGIC, pTarget.getMaxHealth()*20);
                 ((EntityGem) pTarget).setCracked(false);
             }
         }
