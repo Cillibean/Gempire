@@ -1,5 +1,6 @@
 package com.gempire.entities.ai;
 
+import com.gempire.entities.bases.EntityGem;
 import com.gempire.entities.other.EntityCrawler;
 import com.gempire.entities.other.EntityShambler;
 import net.minecraft.world.entity.LivingEntity;
@@ -20,8 +21,15 @@ public class EntityAIShamblerAttackGoal extends MeleeAttackGoal {
     protected void checkAndPerformAttack(LivingEntity pEnemy, double pDistToEnemySqr) {
         if (pDistToEnemySqr <= this.getAttackReachSqr(pEnemy) && this.getTicksUntilNextAttack() <= 0) {
             if(entity != null) {
-                entity.setAttacking(true);
-                animCounter = 0;
+                if (pEnemy instanceof EntityGem) {
+                    if (((EntityGem) pEnemy).getSludgeAmount() < 5) {
+                        entity.setAttacking(true);
+                        animCounter = 0;
+                    }
+                } else {
+                    entity.setAttacking(true);
+                    animCounter = 0;
+                }
             }
         }
 

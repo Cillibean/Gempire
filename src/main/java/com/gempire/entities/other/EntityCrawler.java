@@ -59,9 +59,9 @@ public class EntityCrawler extends Monster implements IAnimatable {
         super.registerGoals();
         this.goalSelector.addGoal(7, new FloatGoal(this));
         this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 4.0F));
-        //this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
-        //this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, EntityGem.class, true));
-        //this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.1D, false));
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
+        this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, EntityGem.class, true));
+        this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.1D, false));
         this.goalSelector.addGoal(1, new EntityAICrawlerAttackGoal(this, 1.2D, false));
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
         this.goalSelector.addGoal(7, new WaterAvoidingRandomStrollGoal(this, 1.0D));
