@@ -36,7 +36,7 @@ public class EntityShambler extends Monster implements IAnimatable {
     private static final AnimationBuilder ATTACK_ANIMATION = new AnimationBuilder().addAnimation("animation.shambler.attack", ILoopType.EDefaultLoopTypes.PLAY_ONCE);
     private static final AnimationBuilder IDLE_ANIMATION = new AnimationBuilder().addAnimation("animation.shambler.idle", ILoopType.EDefaultLoopTypes.LOOP);
     private static final AnimationBuilder WALK_ANIMATION = new AnimationBuilder().addAnimation("animation.shambler.walk", ILoopType.EDefaultLoopTypes.LOOP);
-    private static final AnimationBuilder HURT_ANIMATION = new AnimationBuilder().addAnimation("animation.shambler.hurt", ILoopType.EDefaultLoopTypes.LOOP);
+    private static final AnimationBuilder HURT_ANIMATION = new AnimationBuilder().addAnimation("animation.shambler.hurt", ILoopType.EDefaultLoopTypes.PLAY_ONCE);
     private final AnimationFactory FACTORY = GeckoLibUtil.createFactory(this);
     public EntityShambler(EntityType<? extends Monster> p_21683_, Level p_21684_) {
         super(p_21683_, p_21684_);

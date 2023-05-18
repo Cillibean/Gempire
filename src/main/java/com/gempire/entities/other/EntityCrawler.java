@@ -70,21 +70,29 @@ public class EntityCrawler extends Monster implements IAnimatable {
     @Override
     public void registerControllers(AnimationData data) {
         data.addAnimationController(new AnimationController(this, "controller", 0, event -> {
-            if (this.hurtMarked && !this.swinging) {
-                event.getController().setAnimation(HURT_ANIMATION);
-                return PlayState.CONTINUE;
-            } else if (event.isMoving() && !this.swinging){
-                event.getController().setAnimation(WALK_ANIMATION);
-                return PlayState.CONTINUE;
-            } else if (!event.isMoving() && !this.swinging) {
+            if (!event.isMoving()&&event.getController().getAnimationState().equals(AnimationState.Stopped)) {
                 event.getController().setAnimation(IDLE_ANIMATION);
                 return PlayState.CONTINUE;
             }
             return PlayState.STOP;
         }));
-
+        data.addAnimationController(new AnimationController(this, "walkController", 0, event -> {
+            if (event.isMoving()){
+                event.getController().setAnimation(WALK_ANIMATION);
+                return PlayState.CONTINUE;
+            }
+            return PlayState.STOP;
+        }));
+        data.addAnimationController(new AnimationController(this, "hurtController", 0, event -> {
+            if (this.hurtMarked&&event.getController().getAnimationState().equals(AnimationState.Stopped)) {
+                event.getController().setAnimation(HURT_ANIMATION);
+                return PlayState.CONTINUE;
+            }
+            event.getController().markNeedsReload();
+            return PlayState.STOP;
+        }));
         data.addAnimationController(new AnimationController(this, "attackController", 0, event -> {
-            if (this.swinging) {
+            if (this.swinging&&event.getController().getAnimationState().equals(AnimationState.Stopped)) {
                 event.getController().setAnimation(ATTACK_ANIMATION);
                 return PlayState.CONTINUE;
             }

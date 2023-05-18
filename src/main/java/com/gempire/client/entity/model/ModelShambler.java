@@ -14,7 +14,7 @@ public class ModelShambler extends AnimatedGeoModel<EntityShambler> {
 
     @Override
     public ResourceLocation getTextureResource(EntityShambler object) {
-        return new ResourceLocation(Gempire.MODID, "textures/entity/clods/shambler.png");
+        return new ResourceLocation(Gempire.MODID, "textures/entity/clods/shambler/shambler.png");
     }
 
     @Override
