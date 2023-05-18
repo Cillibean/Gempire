@@ -37,7 +37,7 @@ public class ItemBlueRejuvenator extends DestabBase {
                     }
                 }
                 ((EntityGem) pTarget).rebelPoints += 2.5F;
-                pTarget.hurt(DamageSource.MAGIC, pTarget.getMaxHealth() + 20);
+                pTarget.hurt(DamageSource.MAGIC, pTarget.getMaxHealth()*20);
                 ((EntityGem) pTarget).setCracked(false);
             }
         }
