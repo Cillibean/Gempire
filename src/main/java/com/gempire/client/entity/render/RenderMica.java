@@ -25,7 +25,7 @@ public class RenderMica extends MobRenderer<EntityMica, ModelPebble<EntityMica>>
 
     @Override
     protected void scale(EntityMica entitylivingbaseIn, PoseStack matrixStackIn, float partialTickTime) {
-        matrixStackIn.scale(0.2f, 0.2f, 0.2f);
+        matrixStackIn.scale(entitylivingbaseIn.getXScale(), entitylivingbaseIn.getYScale(), entitylivingbaseIn.getZScale());
         super.scale(entitylivingbaseIn, matrixStackIn, partialTickTime);
     }
 

@@ -37,7 +37,7 @@ public class RenderAgate extends MobRenderer<EntityAgate, ModelQuartz<EntityAgat
 
     @Override
     protected void scale(EntityAgate entitylivingbaseIn, PoseStack matrixStackIn, float partialTickTime) {
-        matrixStackIn.scale(1.1f, 1.15f, 1.1f);
+        matrixStackIn.scale(entitylivingbaseIn.getXScale(), entitylivingbaseIn.getYScale(), entitylivingbaseIn.getZScale());
         super.scale(entitylivingbaseIn, matrixStackIn, partialTickTime);
     }
 

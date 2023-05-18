@@ -27,7 +27,7 @@ public class ModItems {
                     new Item.Properties().tab(ModItemGroup.BLOCKS)
             )
 
-    );*/
+    );
 /*
     public static final RegistryObject<Item> CRYSTAL_CHEST = ITEMS.register("crystal_chest", () ->
             new BlockItem(

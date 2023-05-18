@@ -30,7 +30,7 @@ public class RenderShale extends MobRenderer<EntityShale, ModelPebble<EntityShal
 
     @Override
     protected void scale(EntityShale entitylivingbaseIn, PoseStack matrixStackIn, float partialTickTime) {
-        matrixStackIn.scale(0.3f, 0.3f, 0.3f);
+        matrixStackIn.scale(entitylivingbaseIn.getXScale(), entitylivingbaseIn.getYScale(), entitylivingbaseIn.getZScale());
         super.scale(entitylivingbaseIn, matrixStackIn, partialTickTime);
     }
 

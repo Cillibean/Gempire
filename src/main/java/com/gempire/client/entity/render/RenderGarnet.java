@@ -26,8 +26,7 @@ public class RenderGarnet extends MobRenderer<EntityGarnet, ModelGarnet<EntityGa
 
     @Override
     protected void scale(EntityGarnet entitylivingbaseIn, PoseStack matrixStackIn, float partialTickTime) {
-        matrixStackIn.scale(1.2f, 1.3f, 1.2f);
-        super.scale(entitylivingbaseIn, matrixStackIn, partialTickTime);
+        matrixStackIn.scale(entitylivingbaseIn.getXScale(), entitylivingbaseIn.getYScale(), entitylivingbaseIn.getZScale());        super.scale(entitylivingbaseIn, matrixStackIn, partialTickTime);
     }
 
     @Override

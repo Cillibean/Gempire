@@ -32,7 +32,7 @@ public class RenderJasper extends MobRenderer<EntityJasper, ModelQuartz<EntityJa
 
     @Override
     protected void scale(EntityJasper entitylivingbaseIn, PoseStack matrixStackIn, float partialTickTime) {
-        matrixStackIn.scale(1.05f, 1.15f, 1.05f);
+        matrixStackIn.scale(entitylivingbaseIn.getXScale(), entitylivingbaseIn.getYScale(), entitylivingbaseIn.getZScale());
         super.scale(entitylivingbaseIn, matrixStackIn, partialTickTime);
     }
     @Override

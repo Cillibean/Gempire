@@ -42,6 +42,21 @@ public class EntityShale extends EntityStarterGem {
                 .add(Attributes.ATTACK_DAMAGE, 0);
     }
 
+    @Override
+    public Float baseXScale() {
+        return .3F;
+    }
+
+    @Override
+    public Float baseYScale() {
+        return .3F;
+    }
+
+    @Override
+    public Float baseZScale() {
+        return .3F;
+    }
+
     protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(0, new FloatGoal(this));

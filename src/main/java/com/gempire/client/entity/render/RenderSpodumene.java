@@ -29,7 +29,7 @@ public class RenderSpodumene extends MobRenderer<EntitySpodumene, ModelSpodumene
 
     @Override
     protected void scale(EntitySpodumene entitylivingbaseIn, PoseStack matrixStackIn, float partialTickTime) {
-        matrixStackIn.scale(1.3F, 1.4F, 1.3F);
+        matrixStackIn.scale(entitylivingbaseIn.getXScale(), entitylivingbaseIn.getYScale(), entitylivingbaseIn.getZScale());
         super.scale(entitylivingbaseIn, matrixStackIn, partialTickTime);
     }
 

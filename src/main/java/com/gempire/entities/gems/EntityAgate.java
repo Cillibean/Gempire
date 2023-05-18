@@ -43,6 +43,21 @@ public class EntityAgate extends AbstractQuartz {
     }
 
     @Override
+    public Float baseXScale() {
+        return 1.1F;
+    }
+
+    @Override
+    public Float baseYScale() {
+        return 1.15F;
+    }
+
+    @Override
+    public Float baseZScale() {
+        return 1.1F;
+    }
+
+    @Override
     public boolean hasMarkings() {
         return this.getSkinColorVariant() == 0 || this.getSkinColorVariant() == 2 || this.getSkinColorVariant() == 4 || this.getSkinColorVariant() == 5 || this.getSkinColorVariant() == 6 || this.getSkinColorVariant() == 8 || this.getSkinColorVariant() == 9 || this.getSkinColorVariant() == 10 || this.getSkinColorVariant() == 12 || this.getSkinColorVariant() == 14 || this.getSkinColorVariant() == 16;
     }

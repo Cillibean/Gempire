@@ -29,6 +29,12 @@ public class RenderNephrite extends MobRenderer<EntityNephrite, ModelNephrite<En
     }
 
     @Override
+    protected void scale(EntityNephrite entitylivingbaseIn, PoseStack matrixStackIn, float p_115316_) {
+        matrixStackIn.scale(entitylivingbaseIn.getXScale(), entitylivingbaseIn.getYScale(), entitylivingbaseIn.getZScale());
+        super.scale(entitylivingbaseIn, matrixStackIn, p_115316_);
+    }
+
+    @Override
     public ResourceLocation getTextureLocation(EntityNephrite entity) {
         return new ResourceLocation(Gempire.MODID+":textures/entity/nephrite/blank.png");
     }

@@ -33,6 +33,12 @@ public class RenderPearl extends MobRenderer<EntityPearl, ModelPearl<EntityPearl
     public ResourceLocation getTextureLocation(EntityPearl entity) {
         return new ResourceLocation(Gempire.MODID + ":textures/entity/pearl/blank.png");
     }
+
+    @Override
+    protected void scale(EntityPearl entitylivingbaseIn, PoseStack matrixStackIn, float p_115316_) {
+        matrixStackIn.scale(entitylivingbaseIn.getXScale(), entitylivingbaseIn.getYScale(), entitylivingbaseIn.getZScale());
+        super.scale(entitylivingbaseIn, matrixStackIn, p_115316_);
+    }
     @Override
     protected void renderNameTag(EntityPearl entityIn, Component displayNameIn, PoseStack matrixStackIn, MultiBufferSource bufferIn, int packedLightIn) {
         super.renderNameTag(entityIn, Component.literal("<"+entityIn.getFacet()+" "+entityIn.getCut()+">"), matrixStackIn, bufferIn, packedLightIn);

@@ -4,6 +4,7 @@ import com.gempire.Gempire;
 import com.gempire.client.entity.model.ModelObsidian;
 import com.gempire.client.entity.model.ModelTopaz;
 import com.gempire.client.entity.render.layers.*;
+import com.gempire.entities.gems.EntityNephrite;
 import com.gempire.entities.gems.EntityObsidian;
 import com.gempire.entities.gems.EntityTopaz;
 import com.gempire.entities.gems.starter.EntityMica;
@@ -32,6 +33,12 @@ public class RenderObsidian extends MobRenderer<EntityObsidian, ModelObsidian<En
     @Override
     public ResourceLocation getTextureLocation(EntityObsidian entity) {
         return new ResourceLocation(Gempire.MODID+":textures/entity/obsidian/blank.png");
+    }
+
+    @Override
+    protected void scale(EntityObsidian entitylivingbaseIn, PoseStack matrixStackIn, float p_115316_) {
+        matrixStackIn.scale(entitylivingbaseIn.getXScale(), entitylivingbaseIn.getYScale(), entitylivingbaseIn.getZScale());
+        super.scale(entitylivingbaseIn, matrixStackIn, p_115316_);
     }
 
     @Override

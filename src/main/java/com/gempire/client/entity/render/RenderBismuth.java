@@ -29,8 +29,7 @@ public class RenderBismuth extends MobRenderer<EntityBismuth, ModelBismuth<Entit
 
     @Override
     protected void scale(EntityBismuth entitylivingbaseIn, PoseStack matrixStackIn, float partialTickTime) {
-        matrixStackIn.scale(.9f, 1.0f, .9f);
-        super.scale(entitylivingbaseIn, matrixStackIn, partialTickTime);
+        matrixStackIn.scale(entitylivingbaseIn.getXScale(), entitylivingbaseIn.getYScale(), entitylivingbaseIn.getZScale());        super.scale(entitylivingbaseIn, matrixStackIn, partialTickTime);
     }
 
     @Override

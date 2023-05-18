@@ -36,7 +36,7 @@ public class RenderSapphire extends MobRenderer<EntitySapphire, ModelSapphire<En
 
     @Override
     protected void scale(EntitySapphire entitylivingbaseIn, PoseStack matrixStackIn, float partialTickTime) {
-        matrixStackIn.scale(.8f, .85f, .8f);
+        matrixStackIn.scale(entitylivingbaseIn.getXScale(), entitylivingbaseIn.getYScale(), entitylivingbaseIn.getZScale());
         super.scale(entitylivingbaseIn, matrixStackIn, partialTickTime);
     }
     @Override

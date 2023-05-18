@@ -78,6 +78,21 @@ public class EntityJasper extends AbstractQuartz {
     }
 
     @Override
+    public Float baseXScale() {
+        return 1.05F;
+    }
+
+    @Override
+    public Float baseYScale() {
+        return 1.15F;
+    }
+
+    @Override
+    public Float baseZScale() {
+        return 1.05F;
+    }
+
+    @Override
     public boolean hasMarkings2() {
         return this.getSkinColorVariant() == 2 ||
                 this.getSkinColorVariant() == 3 ||

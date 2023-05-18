@@ -31,6 +31,7 @@ public class RenderMorganite extends MobRenderer<EntityMorganite, ModelMorganite
 
     @Override
     protected void scale(EntityMorganite entitylivingbaseIn, PoseStack matrixStackIn, float partialTickTime) {
+        matrixStackIn.scale(entitylivingbaseIn.getXScale(), entitylivingbaseIn.getYScale(), entitylivingbaseIn.getZScale());
         super.scale(entitylivingbaseIn, matrixStackIn, partialTickTime);
     }
 

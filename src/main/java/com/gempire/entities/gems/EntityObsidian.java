@@ -36,6 +36,21 @@ public class EntityObsidian extends EntityGem implements ItemSteerable {
     {
         return false;
     }
+
+    @Override
+    public Float baseXScale() {
+        return 1F;
+    }
+
+    @Override
+    public Float baseYScale() {
+        return 1F;
+    }
+
+    @Override
+    public Float baseZScale() {
+        return 1F;
+    }
     protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(7, new FloatGoal(this));

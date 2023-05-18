@@ -37,6 +37,21 @@ public class EntityEmerald extends EntityGem {
                 .add(Attributes.ATTACK_SPEED, 0.5D);
 
     }
+
+    @Override
+    public Float baseXScale() {
+        return 1.25F;
+    }
+
+    @Override
+    public Float baseYScale() {
+        return 1.35F;
+    }
+
+    @Override
+    public Float baseZScale() {
+        return 1.25F;
+    }
     @Override
     public SoundEvent getInstrument()
     {

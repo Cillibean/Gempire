@@ -30,7 +30,7 @@ public class RenderRutile extends MobRenderer<EntityRutile, ModelRutile<EntityRu
 
     @Override
     protected void scale(EntityRutile entitylivingbaseIn, PoseStack matrixStackIn, float partialTickTime) {
-        matrixStackIn.scale(.95f, 1.0f, .95f);
+        matrixStackIn.scale(entitylivingbaseIn.getXScale(), entitylivingbaseIn.getYScale(), entitylivingbaseIn.getZScale());
         super.scale(entitylivingbaseIn, matrixStackIn, partialTickTime);
     }
 

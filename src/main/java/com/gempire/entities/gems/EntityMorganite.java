@@ -41,6 +41,21 @@ public class EntityMorganite extends EntityGem {
                 .add(Attributes.ATTACK_SPEED, 1.0D);
     }
 
+    @Override
+    public Float baseXScale() {
+        return 1F;
+    }
+
+    @Override
+    public Float baseYScale() {
+        return 1F;
+    }
+
+    @Override
+    public Float baseZScale() {
+        return 1F;
+    }
+
     protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(7, new FloatGoal(this));

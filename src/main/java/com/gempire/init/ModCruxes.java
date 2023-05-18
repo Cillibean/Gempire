@@ -223,11 +223,11 @@ public class ModCruxes {
         gemCruxes.add(new Crux(Blocks.MAGMA_BLOCK.defaultBlockState(), 5, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.RAW_GOLD_BLOCK.defaultBlockState(), 2, CruxType.MINERAL, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.GOLD_BLOCK.defaultBlockState(), 14, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
-        gemCruxes.add(new Crux(Blocks.RAW_TUNGSTEN_BLOCK.defaultBlockState(), 12, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
-        gemCruxes.add(new Crux(Blocks.DEEPSLATE_TUNGSTEN_ORE.defaultBlockState(), 6, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
-        gemCruxes.add(new Crux(Blocks.TUNGSTEN_ORE.defaultBlockState(), 6, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
+        gemCruxes.add(new Crux(ModBlocks.RAW_TUNGSTEN_BLOCK.get().defaultBlockState(), 12, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
+        gemCruxes.add(new Crux(ModBlocks.DEEPSLATE_TUNGSTEN_ORE.get().defaultBlockState(), 6, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
+        gemCruxes.add(new Crux(ModBlocks.TUNGSTEN_ORE.get().defaultBlockState(), 6, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
         gemCruxes.add(new Crux(Blocks.DEEPSLATE_GOLD_ORE.defaultBlockState(), 2, CruxType.MINERAL, gemTemperatureMin, gemTemperatureMax));
-        gemCruxes.add(new Crux(Blocks.TUNGSTEN_BLOCK.defaultBlockState(), 16, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
+        gemCruxes.add(new Crux(ModBlocks.TUNGSTEN_BLOCK.get().defaultBlockState(), 16, CruxType.INORGANIC, gemTemperatureMin, gemTemperatureMax));
         return new GemConditions(gemCruxes, essences, primer, gemTemperatureMin, gemTemperatureMax, 4);    }
 
     public static GemConditions BIXBITE_CONDITIONS(){

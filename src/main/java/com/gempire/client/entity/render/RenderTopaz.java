@@ -28,7 +28,7 @@ public class RenderTopaz extends MobRenderer<EntityTopaz, ModelTopaz<EntityTopaz
 
     @Override
     protected void scale(EntityTopaz entitylivingbaseIn, PoseStack matrixStackIn, float partialTickTime) {
-        matrixStackIn.scale(0.7F, 0.75F, 0.7F);
+        matrixStackIn.scale(entitylivingbaseIn.getXScale(), entitylivingbaseIn.getYScale(), entitylivingbaseIn.getZScale());
         super.scale(entitylivingbaseIn, matrixStackIn, partialTickTime);
     }
 

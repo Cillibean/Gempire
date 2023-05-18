@@ -129,6 +129,11 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     public static final EntityDataAccessor<Boolean> SHATTER = SynchedEntityData.<Boolean>defineId(EntityGem.class, EntityDataSerializers.BOOLEAN);
     public static final EntityDataAccessor<Integer> CURRENT_RECIPE = SynchedEntityData.defineId(EntityGem.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<Integer> RECIPE_AMOUNT = SynchedEntityData.defineId(EntityGem.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Float> XSCALE = SynchedEntityData.defineId(EntityGem.class, EntityDataSerializers.FLOAT);
+    public static final EntityDataAccessor<Float> YSCALE = SynchedEntityData.defineId(EntityGem.class, EntityDataSerializers.FLOAT);
+    public static final EntityDataAccessor<Float> ZSCALE = SynchedEntityData.defineId(EntityGem.class, EntityDataSerializers.FLOAT);
+
+
     public boolean isCut;
     public ArrayList<Ability> ABILITY_POWERS = new ArrayList<>();
     public ArrayList<UUID> OWNERS = new ArrayList<>();
@@ -241,6 +246,9 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.entityData.define(EntityGem.SHATTER, false);
         this.entityData.define(EntityGem.CURRENT_RECIPE, 0);
         this.entityData.define(EntityGem.RECIPE_AMOUNT, 0);
+        this.entityData.define(EntityGem.XSCALE, 0F);
+        this.entityData.define(EntityGem.YSCALE, 0F);
+        this.entityData.define(EntityGem.ZSCALE, 0F);
         this.FOLLOW_ID = UUID.randomUUID();
         this.ASSIGNED_ID = UUID.randomUUID();
         this.MASTER_OWNER = UUID.randomUUID();
@@ -306,6 +314,9 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.setShatter(this.getShatter());
         this.setCurrentRecipe(this.getCurrentRecipe());
         this.setRecipeAmount(this.generateRecipeAmount());
+        this.setXScale(this.generateXScale());
+        this.setYScale(this.generateYScale());
+        this.setZScale(this.generateZScale());
         AttributeModifier PRIME = new AttributeModifier(UUID.randomUUID(), "gempirePrimaryModifier", 0.2D, AttributeModifier.Operation.ADDITION);
         AttributeModifier DEFECTIVE = new AttributeModifier(UUID.randomUUID(), "gempireDefectiveModifier", -5D, AttributeModifier.Operation.ADDITION);
         if (this.isPrimary()) {
@@ -464,6 +475,9 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         compound.putInt("rebelInsigniaVariant", this.getRebelInsigniaVariant());
         compound.putInt("currentRecipe", this.getCurrentRecipe());
         compound.putInt("recipeAmount", this.getRecipeAmount());
+        compound.putFloat("xscale", this.getXScale());
+        compound.putFloat("yscale", this.getYScale());
+        compound.putFloat("zscale", this.getZScale());
         this.writeStructures(compound);
         AttributeModifier PRIME = new AttributeModifier(UUID.randomUUID(), "gempirePrimaryModifier", 0.2D, AttributeModifier.Operation.ADDITION);
         AttributeModifier DEFECTIVE = new AttributeModifier(UUID.randomUUID(), "gempireDefectiveModifier", -5D, AttributeModifier.Operation.ADDITION);
@@ -560,6 +574,9 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.setPrimary(compound.getBoolean("prime"));
         this.setDefective(compound.getBoolean("defective"));
         this.setShatter(compound.getBoolean("shatter"));
+        this.setXScale(compound.getFloat("xscale"));
+        this.setYScale(compound.getFloat("yscale"));
+        this.setZScale(compound.getFloat("zscale"));
         this.idlePowers = this.generateIdlePowers();
         ContainerHelper.loadAllItems(compound, this.items);
         this.readStructures(compound);
@@ -741,6 +758,67 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         }
         rebelTicks = 0;
     }
+
+    public Float getXScale(){
+        return this.entityData.get(EntityGem.XSCALE);
+    }
+
+    public void setXScale(float value){
+        this.entityData.set(EntityGem.XSCALE, value);
+    }
+
+    public Float getYScale(){
+        return this.entityData.get(EntityGem.YSCALE);
+    }
+
+    public void setYScale(float value){
+        this.entityData.set(EntityGem.YSCALE, value);
+    }
+
+    public Float getZScale(){
+        return this.entityData.get(EntityGem.ZSCALE);
+    }
+
+    public void setZScale(float value){
+        this.entityData.set(EntityGem.ZSCALE, value);
+    }
+
+    public Float generateXScale() {
+        if (isPrimary()) {
+            return baseXScale() + 0.15F;
+        } else if (isDefective()) {
+            Random r = new Random();
+            return baseXScale() - r.nextFloat(.15F);
+        } else {
+            return baseXScale();
+        }
+    }
+
+    public Float generateYScale() {
+        if (isPrimary()) {
+            return baseYScale() + 0.15F;
+        } else if (isDefective()) {
+            Random r = new Random();
+            return baseYScale() - r.nextFloat(baseYScale()-0.15F, baseYScale());
+        } else {
+            return baseYScale();
+        }
+    }
+
+    public Float generateZScale() {
+        if (isPrimary()) {
+            return baseZScale() + 0.15F;
+        } else if (isDefective()) {
+            Random r = new Random();
+            return baseZScale() - r.nextFloat(baseZScale()-0.15F, baseZScale());
+        } else {
+            return baseZScale();
+        }
+    }
+
+    public abstract Float baseXScale();
+    public abstract Float baseYScale();
+    public abstract Float baseZScale();
 
     @Override
     public InteractionResult interactAt(Player player, Vec3 vec, InteractionHand hand) {

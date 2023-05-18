@@ -36,6 +36,21 @@ public class EntitySpodumene extends EntityVaryingGem {
                 .add(net.minecraftforge.common.ForgeMod.SWIM_SPEED.get(), 3D);
     }
 
+    @Override
+    public Float baseXScale() {
+        return 1.3F;
+    }
+
+    @Override
+    public Float baseYScale() {
+        return 1.4F;
+    }
+
+    @Override
+    public Float baseZScale() {
+        return 1.3F;
+    }
+
     protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(3, new FloatGoal(this));

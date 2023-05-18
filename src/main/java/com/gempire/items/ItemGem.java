@@ -380,7 +380,16 @@ public class ItemGem extends Item {
                 if (gem.MASTER_OWNER == null) {
                     gem.MASTER_OWNER = player.getUUID();
                 }
-                gem.setAssignedId(stack.getOrCreateTag().getUUID("assignedID"));
+                if (gem.getXScale() == 0) {
+                    gem.generateXScale();
+                }
+                if (gem.getYScale() == 0) {
+                    gem.generateYScale();
+                }
+                if (gem.getZScale() == 0) {
+                    gem.generateZScale();
+                }
+                //gem.setAssignedId(stack.getOrCreateTag().getUUID("assignedID"));
                 gem.setPos(pos.getX() + 0.5, pos.getY() + 1.0, pos.getZ() + 0.5);
                 gem.setHealth(gem.getMaxHealth());
                 gem.GUARD_POS = gem.getOnPos().above();
@@ -423,9 +432,9 @@ public class ItemGem extends Item {
                         if (itemStack.getTag().getInt("sludgeAmount") >= 5) {
                             p_40553_.add(Component.translatable("Sludged").withStyle(ChatFormatting.RED));
                         }
-                        if (!itemStack.getTag().getUUID("assignedID").equals(UUID.randomUUID())) {
+                        /*if (!itemStack.getTag().getUUID("assignedID").equals(UUID.randomUUID())) {
                             p_40553_.add(Component.translatable("Assigned")); //to " + assigned_gem.getName().getString() + " " + assigned_gem.getFacetAndCut()));
-                        }
+                        }*/
                         if (itemStack.getTag().getBoolean("prime")) {
                             p_40553_.add(Component.translatable("Perfect").withStyle(ChatFormatting.LIGHT_PURPLE));
                         }
@@ -474,6 +483,9 @@ public class ItemGem extends Item {
         tag.putInt("CraftTicks", gem.ticking);
         tag.putInt("abilityTicks", gem.abilityTicks);
         tag.putBoolean("isCrafting", gem.isCrafting);
+        tag.putFloat("xscale", gem.getXScale());
+        tag.putFloat("yscale", gem.getYScale());
+        tag.putFloat("zscale", gem.getZScale());
         tag.putInt("gemPlacement", gem.getGemPlacement());
         tag.putInt("gemColor", gem.getGemColor());
         tag.putInt("outfitColor", gem.getOutfitColor());

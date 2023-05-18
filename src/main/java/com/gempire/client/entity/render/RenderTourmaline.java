@@ -30,7 +30,7 @@ public class RenderTourmaline extends MobRenderer<EntityTourmaline, ModelTourmal
 
     @Override
     protected void scale(EntityTourmaline entitylivingbaseIn, PoseStack matrixStackIn, float partialTickTime) {
-        matrixStackIn.scale(1.0F, 1.1F, 1.0F);
+        matrixStackIn.scale(entitylivingbaseIn.getXScale(), entitylivingbaseIn.getYScale(), entitylivingbaseIn.getZScale());
         super.scale(entitylivingbaseIn, matrixStackIn, partialTickTime);
     }
 

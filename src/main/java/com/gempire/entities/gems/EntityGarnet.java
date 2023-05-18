@@ -37,6 +37,21 @@ public class EntityGarnet extends EntityVaryingGem {
                 .add(Attributes.ATTACK_SPEED, 0.5D);
     }
 
+    @Override
+    public Float baseXScale() {
+        return 1.2F;
+    }
+
+    @Override
+    public Float baseYScale() {
+        return 1.3F;
+    }
+
+    @Override
+    public Float baseZScale() {
+        return 1.2F;
+    }
+
     protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(7, new FloatGoal(this));
