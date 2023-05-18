@@ -9,16 +9,16 @@ import software.bernie.geckolib3.model.AnimatedGeoModel;
 public class ModelAbomination extends AnimatedGeoModel<EntityAbomination> {
     @Override
     public ResourceLocation getModelResource(EntityAbomination object) {
-        return new ResourceLocation(Gempire.MODID, "geo/entity/crawler.geo.json");
+        return new ResourceLocation(Gempire.MODID, "geo/entity/abomination.geo.json");
     }
 
     @Override
     public ResourceLocation getTextureResource(EntityAbomination object) {
-        return new ResourceLocation(Gempire.MODID, "textures/entity/clods/crawler.png");
+        return new ResourceLocation(Gempire.MODID, "textures/entity/clods/crawler/abomination.png");
     }
 
     @Override
     public ResourceLocation getAnimationResource(EntityAbomination animatable) {
-        return new ResourceLocation(Gempire.MODID, "animations/entity/crawler.animation.json");
+        return new ResourceLocation(Gempire.MODID, "animations/entity/abomination.animation.json");
     }
 }
