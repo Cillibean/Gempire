@@ -1,0 +1,19 @@
+{
+  "name": "Gem Scrap",
+  "icon": "gempire:gem_scrap",
+  "advancement": "gempire:root",
+  "category": "gempire:misc",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "link_recipe ": true,
+      "item": "gempire:gem_scrap",
+      "text": "Gem Scraps are used in the Prismatic Ingot making process. The scraps are used in the Gem Alloy crafting recipe."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "gempire:gem_scraps",
+      "text": "The recipe for Gem Scrap."
+    }
+  ]
+}

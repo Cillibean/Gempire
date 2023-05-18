@@ -6,9 +6,21 @@
   "overrides": [
     {
       "predicate": {
-        "gempire:gempredicate": 1.0
+        "gempire:gempredicate": 0.1
+      },
+      "model": "gempire:item/spinel_gem_7_sludge"
+    },
+    {
+      "predicate": {
+        "gempire:gempredicate": 0.2
       },
       "model": "gempire:item/spinel_gem_7_cracked"
+    },
+    {
+      "predicate": {
+        "gempire:gempredicate": 1.0
+      },
+      "model": "gempire:item/spinel_gem_7_perfect"
     }
   ]
 }

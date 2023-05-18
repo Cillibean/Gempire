@@ -14,13 +14,13 @@
       "predicate": {
         "gempire:gempredicate": 0.2
       },
-      "model": "gempire:item/pearl_gem_8_perfect"
+      "model": "gempire:item/pearl_gem_8_cracked"
     },
     {
       "predicate": {
         "gempire:gempredicate": 1.0
       },
-      "model": "gempire:item/pearl_gem_8_cracked"
+      "model": "gempire:item/pearl_gem_8_perfect"
     }
   ]
 }

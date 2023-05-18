@@ -9,21 +9,21 @@
       "entity": "gempire:crawler",
       "name": "A Crawler",
       "rotate": "true",
-      "text": "A floor-bound clod variant that pulls itself across the ground to players and gems."
+      "text": "A floor-bound clod variant that pulls itself across the ground to players and gems so they can attack them."
     },
     {
       "type": "patchouli:entity",
       "entity": "gempire:shambler",
       "name": "A Shambler",
       "rotate": "true",
-      "text": "A bipedal clod variant that rushes to players and gems."
+      "text": "A bipedal clod variant that rushes to players and gems so they can attack them."
     },
     {
       "type": "patchouli:entity",
       "entity": "gempire:abomination",
       "name": "An Abomination",
       "rotate": "true",
-      "text": "A much larger bipedal clod variant that rushes to players and gems."
+      "text": "A much larger bipedal clod variant that rushes to players and gems so they can attack them."
     },
     {
       "type": "patchouli:text",

@@ -1,14 +1,26 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "gempire:items/quartz_gem_6"
+    "layer0": "gempire:items/quartz_gem_5"
   },
   "overrides": [
     {
       "predicate": {
+        "gempire:gempredicate": 0.1
+      },
+      "model": "gempire:item/quartz_gem_5_sludge"
+    },
+    {
+      "predicate": {
+        "gempire:gempredicate": 0.2
+      },
+      "model": "gempire:item/quartz_gem_5_cracked"
+    },
+    {
+      "predicate": {
         "gempire:gempredicate": 1.0
       },
-      "model": "gempire:item/quartz_gem_6_cracked"
+      "model": "gempire:item/quartz_gem_5_perfect"
     }
   ]
 }
