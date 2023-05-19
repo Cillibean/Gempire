@@ -96,7 +96,6 @@ public class GemSeedTE extends BlockEntity {
                     te.IDS.remove(rando);
                     te.setChanged();
                 } else {
-                    System.out.println(te.blockNumber);
                     te.spawned = true;
                     if (te.tier == 1) {
                         for (int i = 0; i < GemFormation.POSSIBLE_GEMS_TIER_1.size(); i++) {
@@ -104,29 +103,20 @@ public class GemSeedTE extends BlockEntity {
                             float weight = 0;
                             for (int n = 0; n <= 1; n++) {
                                 weight += te.TEMPORARY_WEIGHTS.get(i).get(n);
-                                System.out.println("temp weights in " + te.TEMPORARY_WEIGHTS.get(i));
                             }
-                            System.out.println(weight);
-                            System.out.println(GemFormation.POSSIBLE_GEMS_TIER_1.get(i));
                             te.WEIGHTS_OF_GEMS.put(GemFormation.POSSIBLE_GEMS_TIER_1.get(i), weight);
-                            System.out.println(te.WEIGHTS_OF_GEMS.get(GemFormation.POSSIBLE_GEMS_TIER_1.get(i)));
                         }
                     } else if (te.tier == 2) {
                         for (int i = 0; i < GemFormation.POSSIBLE_GEMS_TIER_2.size(); i++) {
                             float weight = 0;
                             for (int n = 0; n <= 1; n++) {
                                 weight += te.TEMPORARY_WEIGHTS.get(i).get(n);
-                                System.out.println("temp weights in " + te.TEMPORARY_WEIGHTS.get(i));
                             }
-                            System.out.println(weight);
-                            System.out.println(GemFormation.POSSIBLE_GEMS_TIER_2.get(i));
                             te.WEIGHTS_OF_GEMS.put(GemFormation.POSSIBLE_GEMS_TIER_2.get(i), weight);
-                            System.out.println(te.WEIGHTS_OF_GEMS.get(GemFormation.POSSIBLE_GEMS_TIER_2.get(i)));
                         }
                     }
-                    System.out.println(te.totalWeight);
-                    System.out.println(te.essences);
-                    System.out.println("spawn gem attempt");
+                    //System.out.println(te.totalWeight);
+                    //System.out.println(te.essences);
                     GemFormation form = new GemFormation(te.level, te.getBlockPos(), new BlockPos(GemSeedTE.DRAIN_SIZE, GemSeedTE.DRAIN_SIZE, GemSeedTE.DRAIN_SIZE), te.chroma, te.primer, te.essences, te.facing, te.WEIGHTS_OF_GEMS, te.totalWeight, te.tier);
                     form.SpawnGem();
                     level.sendBlockUpdated(te.getBlockPos(), te.getBlockState(), te.getBlockState(), 2);
@@ -198,9 +188,7 @@ public class GemSeedTE extends BlockEntity {
                             }
                         }
                     }
-                    System.out.println("essence count "+essenceCount);
                     if (essenceCount == indEssencesCond.length) {
-                        System.out.println("weigh");
                         weighThisGem = true;
                     }
                     if (weighThisGem) {
@@ -216,12 +204,10 @@ public class GemSeedTE extends BlockEntity {
                                     gemWeight *= GEM_CONDITIONS.get(gem).rarity;
                                     for (int n = 0; n <= 1; n++){
                                         TEMPORARY_WEIGHTS.get(i).add(n, gemWeight);
-                                        System.out.println("temp weights from gem weights no crux " +TEMPORARY_WEIGHTS.get(i).get(n));
                                     }
                                 } else {
                                     for (int n = 0; n <= 1; n++){
                                         TEMPORARY_WEIGHTS.get(i).add(n, gemWeight - (1 - temperatureDifference));
-                                        System.out.println("temp weights from gem weights no crux " +TEMPORARY_WEIGHTS.get(i).get(n));
                                     }
                                 }
                             } else {
@@ -232,7 +218,6 @@ public class GemSeedTE extends BlockEntity {
                                 gemWeight *= GEM_CONDITIONS.get(gem).rarity;
                                 for (int n = 0; n <= 1; n++){
                                     TEMPORARY_WEIGHTS.get(i).add(n, gemWeight);
-                                    System.out.println("temp weights from gem weights " +TEMPORARY_WEIGHTS.get(i).get(n));
                                 }
                             }
                         }

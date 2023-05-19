@@ -83,19 +83,19 @@ public class ModItems {
     public static final RegistryObject<Item> PINK_ESSENCE_BUCKET = ITEMS.register("pink_essence_bucket", () ->
             new BucketItem(
                     ModFluids.PINK_ESSENCE.get(),
-                    new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(16)));
+                    new Item.Properties().tab(ModItemGroup.ITEMS)));
     public static final RegistryObject<Item> BLUE_ESSENCE_BUCKET = ITEMS.register("blue_essence_bucket", () ->
             new BucketItem(
                     ModFluids.BLUE_ESSENCE.get(),
-                    new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(16)));
+                    new Item.Properties().tab(ModItemGroup.ITEMS)));
     public static final RegistryObject<Item> YELLOW_ESSENCE_BUCKET = ITEMS.register("yellow_essence_bucket", () ->
             new BucketItem(
                     ModFluids.YELLOW_ESSENCE.get(),
-                    new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(16)));
+                    new Item.Properties().tab(ModItemGroup.ITEMS)));
     public static final RegistryObject<Item> WHITE_ESSENCE_BUCKET = ITEMS.register("white_essence_bucket", () ->
             new BucketItem(
                     ModFluids.WHITE_ESSENCE.get(),
-                    new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(16)));
+                    new Item.Properties().tab(ModItemGroup.ITEMS)));
     public static final RegistryObject<Item> PEDISTAL = ITEMS.register("pedistal", () ->
             new BlockItem(
                     ModBlocks.PEDISTAL.get(),
@@ -466,9 +466,9 @@ public class ModItems {
     );*/
 
     public static final RegistryObject<Item> GILDED_LAPIS = ITEMS.register("gilded_lapis", () ->
-            new Item(new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS).stacksTo(64)));
+            new Item(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(64)));
     public static final RegistryObject<Item> PRIME_BOOST = ITEMS.register("prime_boost", () ->
-            new Item(new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS).stacksTo(64)));
+            new Item(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(64)));
 
     public static final RegistryObject<Item> SPODUMENE_PIECE = ITEMS.register("spodumene_piece", () ->
             new Item(new Item.Properties().tab(CreativeModeTab.TAB_FOOD).stacksTo(64).food(ModFoods.SPODUMENE_PIECE)));
