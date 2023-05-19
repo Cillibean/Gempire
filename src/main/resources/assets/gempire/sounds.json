@@ -26,5 +26,37 @@
   "crawler_living": {
     "subtitle": "gempire.subtitle.crawler_living",
     "sounds": [ "gempire:whistle" ]
+  },
+  "shambler_attack": {
+    "subtitle": "gempire.subtitle.shambler_attack",
+    "sounds": [ "gempire:whistle" ]
+  },
+  "shambler_death": {
+    "subtitle": "gempire.subtitle.shambler_death",
+    "sounds": [ "gempire:whistle" ]
+  },
+  "shambler_hurt": {
+    "subtitle": "gempire.subtitle.shambler_hurt",
+    "sounds": [ "gempire:whistle" ]
+  },
+  "shambler_living": {
+    "subtitle": "gempire.subtitle.shambler_living",
+    "sounds": [ "gempire:whistle" ]
+  },
+  "abomination_attack": {
+    "subtitle": "gempire.subtitle.abomination_attack",
+    "sounds": [ "gempire:whistle" ]
+  },
+  "abomination_death": {
+    "subtitle": "gempire.subtitle.abomination_death",
+    "sounds": [ "gempire:whistle" ]
+  },
+  "abomination_hurt": {
+    "subtitle": "gempire.subtitle.abomination_hurt",
+    "sounds": [ "gempire:whistle" ]
+  },
+  "abomination_living": {
+    "subtitle": "gempire.subtitle.abomination_living",
+    "sounds": [ "gempire:whistle" ]
   }
 }

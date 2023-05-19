@@ -21,6 +21,20 @@ public class ModSounds {
     public static final RegistryObject<SoundEvent> CRAWLER_DEATH = SOUNDS.register("crawler_death", () -> new SoundEvent(new ResourceLocation(Gempire.MODID, "crawler_death")));
 
     public static final RegistryObject<SoundEvent> CRAWLER_LIVING = SOUNDS.register("crawler_living", () -> new SoundEvent(new ResourceLocation(Gempire.MODID, "crawler_living")));
+    public static final RegistryObject<SoundEvent> SHAMBLER_HURT = SOUNDS.register("shambler_hurt", () -> new SoundEvent(new ResourceLocation(Gempire.MODID, "shambler_hurt")));
+
+    public static final RegistryObject<SoundEvent> SHAMBLER_ATTACK = SOUNDS.register("shambler_attack", () -> new SoundEvent(new ResourceLocation(Gempire.MODID, "shambler_attack")));
+
+    public static final RegistryObject<SoundEvent> SHAMBLER_DEATH = SOUNDS.register("shambler_death", () -> new SoundEvent(new ResourceLocation(Gempire.MODID, "shambler_death")));
+
+    public static final RegistryObject<SoundEvent> SHAMBLER_LIVING = SOUNDS.register("shambler_living", () -> new SoundEvent(new ResourceLocation(Gempire.MODID, "shambler_living")));
+    public static final RegistryObject<SoundEvent> ABOMINATION_HURT = SOUNDS.register("abomination_hurt", () -> new SoundEvent(new ResourceLocation(Gempire.MODID, "abomination_hurt")));
+
+    public static final RegistryObject<SoundEvent> ABOMINATION_ATTACK = SOUNDS.register("abomination_attack", () -> new SoundEvent(new ResourceLocation(Gempire.MODID, "abomination_attack")));
+
+    public static final RegistryObject<SoundEvent> ABOMINATION_DEATH = SOUNDS.register("abomination_death", () -> new SoundEvent(new ResourceLocation(Gempire.MODID, "abomination_death")));
+
+    public static final RegistryObject<SoundEvent> ABOMINATION_LIVING = SOUNDS.register("abomination_living", () -> new SoundEvent(new ResourceLocation(Gempire.MODID, "abomination_living")));
 
 
 }
