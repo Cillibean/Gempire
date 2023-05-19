@@ -799,7 +799,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             return baseYScale() + 0.15F;
         } else if (isDefective()) {
             Random r = new Random();
-            return baseYScale() - r.nextFloat(baseYScale()-0.15F, baseYScale());
+            return baseYScale() - r.nextFloat(.15F);
         } else {
             return baseYScale();
         }
@@ -810,7 +810,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             return baseZScale() + 0.15F;
         } else if (isDefective()) {
             Random r = new Random();
-            return baseZScale() - r.nextFloat(baseZScale()-0.15F, baseZScale());
+            return baseZScale() - r.nextFloat(.15F);
         } else {
             return baseZScale();
         }

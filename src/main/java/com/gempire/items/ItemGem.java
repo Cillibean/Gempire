@@ -244,10 +244,13 @@ public class ItemGem extends Item {
                             System.out.println(gem != null);
                             gem.spawnGem = item;
                             System.out.println(gem.spawnGem);
+                            gem.finalizeSpawn((ServerLevelAccessor) world, world.getCurrentDifficultyAt(item.blockPosition()), MobSpawnType.TRIGGERED, null, null);
+                        }
+                        if (player != null) {
+                            gem.finalizeSpawn((ServerLevelAccessor) world, world.getCurrentDifficultyAt(player.blockPosition()), MobSpawnType.TRIGGERED, null, null);
                         }
                         gem.setDefective(stack.getTag().getBoolean("defective"));
                         gem.setPrimary(stack.getTag().getBoolean("prime"));
-                        gem.finalizeSpawn((ServerLevelAccessor) world, world.getCurrentDifficultyAt(player.blockPosition()), MobSpawnType.TRIGGERED, null, null);
                         gem.load(stack.getTag());
                         System.out.println(stack.getTag());
                         System.out.println(gem.getFacetAndCut());
