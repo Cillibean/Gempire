@@ -13,18 +13,50 @@
   },
   "crawler_attack": {
     "subtitle": "gempire.subtitle.crawler_attack",
-    "sounds": [ "gempire:whistle" ]
+    "sounds": [ "gempire:crawler_attack" ]
   },
   "crawler_death": {
     "subtitle": "gempire.subtitle.crawler_death",
-    "sounds": [ "gempire:whistle" ]
+    "sounds": [ "gempire:crawler_death" ]
   },
   "crawler_hurt": {
     "subtitle": "gempire.subtitle.crawler_hurt",
-    "sounds": [ "gempire:whistle" ]
+    "sounds": [ "gempire:crawler_hurt" ]
   },
   "crawler_living": {
     "subtitle": "gempire.subtitle.crawler_living",
-    "sounds": [ "gempire:whistle" ]
+    "sounds": [ "gempire:crawler_living" ]
+  },
+  "shambler_attack": {
+    "subtitle": "gempire.subtitle.shambler_attack",
+    "sounds": [ "gempire:shambler_attack" ]
+  },
+  "shambler_death": {
+    "subtitle": "gempire.subtitle.shambler_death",
+    "sounds": [ "gempire:shambler_death" ]
+  },
+  "shambler_hurt": {
+    "subtitle": "gempire.subtitle.shambler_hurt",
+    "sounds": [ "gempire:shambler_hurt" ]
+  },
+  "shambler_living": {
+    "subtitle": "gempire.subtitle.shambler_living",
+    "sounds": [ "gempire:shambler_living" ]
+  },
+  "abomination_attack": {
+    "subtitle": "gempire.subtitle.abomination_attack",
+    "sounds": [ "gempire:abomination_attack" ]
+  },
+  "abomination_death": {
+    "subtitle": "gempire.subtitle.abomination_death",
+    "sounds": [ "gempire:abomination_death" ]
+  },
+  "abomination_hurt": {
+    "subtitle": "gempire.subtitle.abomination_hurt",
+    "sounds": [ "gempire:abomination_hurt" ]
+  },
+  "abomination_living": {
+    "subtitle": "gempire.subtitle.abomination_living",
+    "sounds": [ "gempire:abomination_living" ]
   }
 }

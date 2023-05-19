@@ -799,7 +799,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             return baseYScale() + 0.15F;
         } else if (isDefective()) {
             Random r = new Random();
-            return baseYScale() - r.nextFloat(baseYScale()-0.15F, baseYScale());
+            return baseYScale() - r.nextFloat(.15F);
         } else {
             return baseYScale();
         }
@@ -810,7 +810,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             return baseZScale() + 0.15F;
         } else if (isDefective()) {
             Random r = new Random();
-            return baseZScale() - r.nextFloat(baseZScale()-0.15F, baseZScale());
+            return baseZScale() - r.nextFloat(.15F);
         } else {
             return baseZScale();
         }
@@ -1832,7 +1832,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
 
     public int generateAbilitySlots(){
         if(this.isPrimary()){
-            return 6;
+            return 5;
         }
         else if(this.isDefective()){
             return 1;
@@ -1854,14 +1854,26 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             return "0";
         }
         boolean complete = false;
+        ArrayList<Abilities> abilitiesCurrent = new ArrayList<>();
         StringBuilder abilityList = new StringBuilder();
         Abilities[] abilities = this.possibleAbilities();
         Abilities[] getgo = this.definiteAbilities();
         if(getgo != null && getgo.length > 0) {
             for (Abilities ab1 : getgo) {
                 if (remainingSlots > 0) {
-                    abilityList.append(ab1.id).append(",");
-                    remainingSlots--;
+                    if (remainingSlots == this.getAbilitySlots()) {
+                        abilityList.append(ab1.id).append(",");
+                        abilitiesCurrent.add(ab1);
+                        remainingSlots--;
+                    } else {
+                        for (int n = 0; n < abilitiesCurrent.size(); n++) {
+                            if (ab1.id != abilitiesCurrent.get(n).id) {
+                                abilityList.append(ab1.id).append(",");
+                                abilitiesCurrent.add(ab1);
+                                remainingSlots--;
+                            }
+                        }
+                    }
                 } else {
                     return abilityList.toString();
                 }
