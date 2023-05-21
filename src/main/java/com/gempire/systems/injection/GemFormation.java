@@ -168,11 +168,8 @@ public class GemFormation {
         if (primer.asItem() == ModItems.PRIME_BOOST.get()) {
             if (weight / rarity <= 1) {
                 clod = true;
-                clodNO = 3;
-            } else if (weight / rarity <= 3) {
-                clod = true;
                 clodNO = 2;
-            } else if (weight / rarity <= 5) {
+            } else if (weight / rarity <= 3) {
                 clod = true;
                 clodNO = 1;
             } else if (weight / rarity <= 7) {
@@ -183,19 +180,19 @@ public class GemFormation {
                 System.out.println("prime");
             }
         } else {
-            if (weight / rarity <= 3) {
+            if (weight / rarity <= 1) {
                 clod = true;
                 clodNO = 3;
-            } else if (weight / rarity <= 5) {
+            } else if (weight / rarity <= 3) {
                 clod = true;
                 clodNO = 2;
-            } else if (weight / rarity <= 7) {
+            } else if (weight / rarity <= 5) {
                 clod = true;
                 clodNO = 1;
             } else if (weight / rarity <= 9) {
                 gem.setDefective(true);
                 System.out.println("defective");
-            } else if (weight / rarity >= 25){
+            } else if (weight / rarity >= 17){
                 gem.setPrimary(true);
                 System.out.println("prime");
             }
@@ -250,18 +247,20 @@ public class GemFormation {
             }
             gem.setCracked(gem.getCracked());
             AttributeModifier PRIME = new AttributeModifier(UUID.randomUUID(), "gempirePrimaryModifier", 5D, AttributeModifier.Operation.ADDITION);
+            AttributeModifier PRIME_SPEED = new AttributeModifier(UUID.randomUUID(), "gempirePrimarySpeedModifier", .5D, AttributeModifier.Operation.ADDITION);
             AttributeModifier DEFECTIVE = new AttributeModifier(UUID.randomUUID(), "gempireDefectiveModifier", -5D, AttributeModifier.Operation.ADDITION);
+            AttributeModifier DEFECTIVE_SPEED = new AttributeModifier(UUID.randomUUID(), "gempireDefectiveSpeedModifier", -.5D, AttributeModifier.Operation.ADDITION);
             if (gem.isPrimary()) {
                 System.out.println("prime modifiers");
                 gem.getAttribute(Attributes.MAX_HEALTH).addPermanentModifier(PRIME);
-                gem.getAttribute(Attributes.MOVEMENT_SPEED).addPermanentModifier(PRIME);
+                gem.getAttribute(Attributes.MOVEMENT_SPEED).addPermanentModifier(PRIME_SPEED);
                 gem.getAttribute(Attributes.ATTACK_DAMAGE).addPermanentModifier(PRIME);
                 gem.getAttribute(Attributes.ATTACK_SPEED).addPermanentModifier(PRIME);
                 gem.getAttribute(Attributes.KNOCKBACK_RESISTANCE).addPermanentModifier(PRIME);
             } else if (gem.isDefective()) {
                 System.out.println("off colour modifiers");
                 gem.getAttribute(Attributes.MAX_HEALTH).addPermanentModifier(DEFECTIVE);
-                gem.getAttribute(Attributes.MOVEMENT_SPEED).addPermanentModifier(DEFECTIVE);
+                gem.getAttribute(Attributes.MOVEMENT_SPEED).addPermanentModifier(DEFECTIVE_SPEED);
                 gem.getAttribute(Attributes.ATTACK_DAMAGE).addPermanentModifier(DEFECTIVE);
                 gem.getAttribute(Attributes.ATTACK_SPEED).addPermanentModifier(DEFECTIVE);
                 gem.getAttribute(Attributes.KNOCKBACK_RESISTANCE).addPermanentModifier(DEFECTIVE);

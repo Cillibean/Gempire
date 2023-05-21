@@ -83,19 +83,19 @@ public class ModItems {
     public static final RegistryObject<Item> PINK_ESSENCE_BUCKET = ITEMS.register("pink_essence_bucket", () ->
             new BucketItem(
                     ModFluids.PINK_ESSENCE.get(),
-                    new Item.Properties().tab(ModItemGroup.ITEMS)));
+                    new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(1)));
     public static final RegistryObject<Item> BLUE_ESSENCE_BUCKET = ITEMS.register("blue_essence_bucket", () ->
             new BucketItem(
                     ModFluids.BLUE_ESSENCE.get(),
-                    new Item.Properties().tab(ModItemGroup.ITEMS)));
+                    new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(1)));
     public static final RegistryObject<Item> YELLOW_ESSENCE_BUCKET = ITEMS.register("yellow_essence_bucket", () ->
             new BucketItem(
                     ModFluids.YELLOW_ESSENCE.get(),
-                    new Item.Properties().tab(ModItemGroup.ITEMS)));
+                    new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(1)));
     public static final RegistryObject<Item> WHITE_ESSENCE_BUCKET = ITEMS.register("white_essence_bucket", () ->
             new BucketItem(
                     ModFluids.WHITE_ESSENCE.get(),
-                    new Item.Properties().tab(ModItemGroup.ITEMS)));
+                    new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(1)));
     public static final RegistryObject<Item> PEDISTAL = ITEMS.register("pedistal", () ->
             new BlockItem(
                     ModBlocks.PEDISTAL.get(),
@@ -492,7 +492,7 @@ public class ModItems {
             new ItemWhistle(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(1)));
 
     public static final RegistryObject<Item> CONFRACTOR = ITEMS.register("confractor", () ->
-            new ItemShatterer(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(1).durability(10)));
+            new ItemShatterer(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(1).durability(20)));
 
     public static final RegistryObject<Item> CONFRACTOR_BODY = ITEMS.register("confractor_body", () ->
             new Item(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(1)));

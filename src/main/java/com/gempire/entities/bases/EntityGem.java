@@ -322,18 +322,20 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.setPrimary(this.isPrimary());
         this.setDefective(this.isDefective());
         AttributeModifier PRIME = new AttributeModifier(UUID.randomUUID(), "gempirePrimaryModifier", 5D, AttributeModifier.Operation.ADDITION);
+        AttributeModifier PRIME_SPEED = new AttributeModifier(UUID.randomUUID(), "gempirePrimarySpeedModifier", .5D, AttributeModifier.Operation.ADDITION);
         AttributeModifier DEFECTIVE = new AttributeModifier(UUID.randomUUID(), "gempireDefectiveModifier", -5D, AttributeModifier.Operation.ADDITION);
+        AttributeModifier DEFECTIVE_SPEED = new AttributeModifier(UUID.randomUUID(), "gempireDefectiveSpeedModifier", -.5D, AttributeModifier.Operation.ADDITION);
         if (this.isPrimary()) {
             System.out.println("prime modifiers");
                 this.getAttribute(Attributes.MAX_HEALTH).addPermanentModifier(PRIME);
-                this.getAttribute(Attributes.MOVEMENT_SPEED).addPermanentModifier(PRIME);
+                this.getAttribute(Attributes.MOVEMENT_SPEED).addPermanentModifier(PRIME_SPEED);
                 this.getAttribute(Attributes.ATTACK_DAMAGE).addPermanentModifier(PRIME);
                 this.getAttribute(Attributes.ATTACK_SPEED).addPermanentModifier(PRIME);
                 this.getAttribute(Attributes.KNOCKBACK_RESISTANCE).addPermanentModifier(PRIME);
         } else if (this.isDefective()) {
             System.out.println("off colour modifiers");
                 this.getAttribute(Attributes.MAX_HEALTH).addPermanentModifier(DEFECTIVE);
-                this.getAttribute(Attributes.MOVEMENT_SPEED).addPermanentModifier(DEFECTIVE);
+                this.getAttribute(Attributes.MOVEMENT_SPEED).addPermanentModifier(DEFECTIVE_SPEED);
                 this.getAttribute(Attributes.ATTACK_DAMAGE).addPermanentModifier(DEFECTIVE);
                 this.getAttribute(Attributes.ATTACK_SPEED).addPermanentModifier(DEFECTIVE);
                 this.getAttribute(Attributes.KNOCKBACK_RESISTANCE).addPermanentModifier(DEFECTIVE);
@@ -556,18 +558,20 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.setZScale(compound.getFloat("zscale"));
         this.idlePowers = this.generateIdlePowers();
         AttributeModifier PRIME = new AttributeModifier(UUID.randomUUID(), "gempirePrimaryModifier", 5D, AttributeModifier.Operation.ADDITION);
+        AttributeModifier PRIME_SPEED = new AttributeModifier(UUID.randomUUID(), "gempirePrimarySpeedModifier", .5D, AttributeModifier.Operation.ADDITION);
         AttributeModifier DEFECTIVE = new AttributeModifier(UUID.randomUUID(), "gempireDefectiveModifier", -5D, AttributeModifier.Operation.ADDITION);
+        AttributeModifier DEFECTIVE_SPEED = new AttributeModifier(UUID.randomUUID(), "gempireDefectiveSpeedModifier", -.5D, AttributeModifier.Operation.ADDITION);
         if (this.isPrimary()) {
             System.out.println("prime modifiers");
             this.getAttribute(Attributes.MAX_HEALTH).addPermanentModifier(PRIME);
-            this.getAttribute(Attributes.MOVEMENT_SPEED).addPermanentModifier(PRIME);
+            this.getAttribute(Attributes.MOVEMENT_SPEED).addPermanentModifier(PRIME_SPEED);
             this.getAttribute(Attributes.ATTACK_DAMAGE).addPermanentModifier(PRIME);
             this.getAttribute(Attributes.ATTACK_SPEED).addPermanentModifier(PRIME);
             this.getAttribute(Attributes.KNOCKBACK_RESISTANCE).addPermanentModifier(PRIME);
         } else if (this.isDefective()) {
             System.out.println("off colour modifiers");
             this.getAttribute(Attributes.MAX_HEALTH).addPermanentModifier(DEFECTIVE);
-            this.getAttribute(Attributes.MOVEMENT_SPEED).addPermanentModifier(DEFECTIVE);
+            this.getAttribute(Attributes.MOVEMENT_SPEED).addPermanentModifier(DEFECTIVE_SPEED);
             this.getAttribute(Attributes.ATTACK_DAMAGE).addPermanentModifier(DEFECTIVE);
             this.getAttribute(Attributes.ATTACK_SPEED).addPermanentModifier(DEFECTIVE);
             this.getAttribute(Attributes.KNOCKBACK_RESISTANCE).addPermanentModifier(DEFECTIVE);
