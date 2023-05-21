@@ -52,7 +52,7 @@
   "block.gempire.pedistal": "Hand Pedestal",
   "block.gempire.pedistal.setprivate": "This Pedestal is now private.",
   "block.gempire.pedistal.setpublic": "This Pedestal is now public.",
-  "block.gempire.pedistal.notowner": "This Pedestal is Private and you are not the owner.",
+  "block.gempire.pedistal.notowner": "This Pedestal is private and you are not the owner.",
 
   "block.gempire.ice_spike": "Ice Spike",
 
@@ -79,10 +79,10 @@
   "item.gempire.gem_slush_bucket": "Bucket of Gem Slush",
   "item.gempire.chroma_catalyst": "Chroma Catalyst",
 
-  "item.gempire.pink_essence_bucket": "Pink Essence",
-  "item.gempire.blue_essence_bucket": "Blue Essence",
-  "item.gempire.yellow_essence_bucket": "Yellow Essence",
-  "item.gempire.white_essence_bucket": "White Essence",
+  "item.gempire.pink_essence_bucket": "Pink Gem Essence",
+  "item.gempire.blue_essence_bucket": "Blue Gem Essence",
+  "item.gempire.yellow_essence_bucket": "Yellow Gem Essence",
+  "item.gempire.white_essence_bucket": "White Gem Essence",
 
   "item.gempire.white_chroma": "White Chroma",
   "item.gempire.orange_chroma": "Orange Chroma",
@@ -134,7 +134,7 @@
   "item.gempire.white_rejuvenator": "White Rejuvenator",
 
   "item.gempire.confractor": "Confractor",
-  "item.gempire.confractor_body": "Unfinished Confractor Body",
+  "item.gempire.confractor_body": "Confractor Body",
   "item.gempire.confractor_tip": "Confractor Tip",
 
   "item.gempire.injector_panel": "Injector Remote",
@@ -149,11 +149,11 @@
   "item.gempire.prime_boost": "Prime Booster",
   "item.gempire.gilded_lapis": "Speed Booster",
 
-  "item.gempire.essence_bottle": "Essence Bottle",
-  "item.gempire.pink_essence": "Pink Essence",
-  "item.gempire.yellow_essence": "Yellow Essence",
-  "item.gempire.blue_essence": "Blue Essence",
-  "item.gempire.white_essence": "White Essence",
+  "item.gempire.essence_bottle": "Gem Essence Bottle",
+  "item.gempire.pink_essence": "Pink Gem Essence",
+  "item.gempire.yellow_essence": "Yellow Gem Essence",
+  "item.gempire.blue_essence": "Blue Gem Essence",
+  "item.gempire.white_essence": "White Gem Essence",
 
   "item.gempire.ruby_gem": "Ruby Gem",
   "item.gempire.sapphire_gem_0": "White Sapphire Gem",
@@ -367,6 +367,7 @@
   "entity.gempire.morganite": "Morganite",
   "entity.gempire.peridot": "Peridot",
   "entity.gempire.rutile": "Rutile",
+  "entity.gempire.garnet": "Garnet",
 
   "entity.gempire.crawler": "Crawler",
   "entity.gempire.shambler": "Shambler",
@@ -556,10 +557,20 @@
   "gempire.subtitle.poof": "Gem poofed",
   "gempire.subtitle.whistle": "Gem Whistle plays",
 
-  "gempire.subtitle.crawler_attack": "Crawler Attacks",
-  "gempire.subtitle.crawler_hurt": "Crawler Hurt",
-  "gempire.subtitle.crawler_death": "Crawler Dies",
-  "gempire.subtitle.crawler_living": "Crawler Gargles",
+  "gempire.subtitle.crawler_attack": "Crawler attacks",
+  "gempire.subtitle.crawler_hurt": "Crawler hurts",
+  "gempire.subtitle.crawler_death": "Crawler perishes",
+  "gempire.subtitle.crawler_living": "Crawler gargles",
+
+  "gempire.subtitle.shambler_attack": "Shambler attacks",
+  "gempire.subtitle.shambler_hurt": "Shambler hurts",
+  "gempire.subtitle.shambler_death": "Shambler perishes",
+  "gempire.subtitle.shambler_living": "Shambler gurgles",
+
+  "gempire.subtitle.abomination_attack": "Abomination attacks",
+  "gempire.subtitle.abomination_hurt": "Abomination hurts",
+  "gempire.subtitle.abomination_death": "Abomination perishes",
+  "gempire.subtitle.abomination_living": "Abomination rasps",
 
   "advancements.gempire.agate.title": "Shoulders Squared!",
   "advancements.gempire.aquamarine.title": "Look, I'm crying",

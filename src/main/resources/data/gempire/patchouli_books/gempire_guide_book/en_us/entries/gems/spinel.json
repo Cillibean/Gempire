@@ -23,6 +23,10 @@
     {
       "type": "patchouli:text",
       "text": "$(l)Cruxes$() $(br)$(li)Ancient Debris$(li)Iron Ore$(li)Magma Block$(li)Copper Ore$(li)Iron Block$(li)Slime Block"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "This gem's Injector primer item is Nether Wart."
     }
   ]
 }
