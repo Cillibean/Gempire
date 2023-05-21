@@ -53,8 +53,7 @@ public class ChromaClusterCropBlock extends CropBlock {
     @Override
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
         if (!level.isAreaLoaded(pos, 1)) return; // Forge: prevent loading unloaded chunks when checking neighbor's light
-        if (level.getRawBrightness(pos, 0) >= 9) {
-            float f = CropBlock.getGrowthSpeed(this, level, pos);
+        float f = CropBlock.getGrowthSpeed(this, level, pos);
             if (net.minecraftforge.common.ForgeHooks.onCropsGrowPre(level, pos, state, random.nextInt((int)(25.0F / f) + 1) == 0)) {
                 System.out.println("grow pre");
                 int i = state.getValue(AGE);
@@ -91,7 +90,5 @@ public class ChromaClusterCropBlock extends CropBlock {
                 }
                 net.minecraftforge.common.ForgeHooks.onCropsGrowPost(level, pos, state);
             }
-
-        }
     }
 }

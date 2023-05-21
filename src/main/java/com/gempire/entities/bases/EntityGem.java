@@ -11,7 +11,9 @@ import com.gempire.entities.gems.starter.EntityMica;
 import com.gempire.entities.gems.starter.EntityNacre;
 import com.gempire.entities.gems.starter.EntityPebble;
 import com.gempire.entities.gems.starter.EntityShale;
+import com.gempire.entities.other.EntityAbomination;
 import com.gempire.entities.other.EntityCrawler;
+import com.gempire.entities.other.EntityShambler;
 import com.gempire.events.GemPoofEvent;
 import com.gempire.init.ModEnchants;
 import com.gempire.init.ModItems;
@@ -317,15 +319,12 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.setXScale(this.generateXScale());
         this.setYScale(this.generateYScale());
         this.setZScale(this.generateZScale());
-        AttributeModifier PRIME = new AttributeModifier(UUID.randomUUID(), "gempirePrimaryModifier", 0.2D, AttributeModifier.Operation.ADDITION);
+        this.setPrimary(this.isPrimary());
+        this.setDefective(this.isDefective());
+        AttributeModifier PRIME = new AttributeModifier(UUID.randomUUID(), "gempirePrimaryModifier", 5D, AttributeModifier.Operation.ADDITION);
         AttributeModifier DEFECTIVE = new AttributeModifier(UUID.randomUUID(), "gempireDefectiveModifier", -5D, AttributeModifier.Operation.ADDITION);
         if (this.isPrimary()) {
             System.out.println("prime modifiers");
-                this.getAttribute(Attributes.MAX_HEALTH).removeModifiers();
-                this.getAttribute(Attributes.MOVEMENT_SPEED).removeModifiers();
-                this.getAttribute(Attributes.ATTACK_SPEED).removeModifiers();
-                this.getAttribute(Attributes.ATTACK_DAMAGE).removeModifiers();
-                this.getAttribute(Attributes.KNOCKBACK_RESISTANCE).removeModifiers();
                 this.getAttribute(Attributes.MAX_HEALTH).addPermanentModifier(PRIME);
                 this.getAttribute(Attributes.MOVEMENT_SPEED).addPermanentModifier(PRIME);
                 this.getAttribute(Attributes.ATTACK_DAMAGE).addPermanentModifier(PRIME);
@@ -333,11 +332,6 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                 this.getAttribute(Attributes.KNOCKBACK_RESISTANCE).addPermanentModifier(PRIME);
         } else if (this.isDefective()) {
             System.out.println("off colour modifiers");
-                this.getAttribute(Attributes.MAX_HEALTH).removeModifiers();
-                this.getAttribute(Attributes.MOVEMENT_SPEED).removeModifiers();
-                this.getAttribute(Attributes.ATTACK_SPEED).removeModifiers();
-                this.getAttribute(Attributes.ATTACK_DAMAGE).removeModifiers();
-                this.getAttribute(Attributes.KNOCKBACK_RESISTANCE).removeModifiers();
                 this.getAttribute(Attributes.MAX_HEALTH).addPermanentModifier(DEFECTIVE);
                 this.getAttribute(Attributes.MOVEMENT_SPEED).addPermanentModifier(DEFECTIVE);
                 this.getAttribute(Attributes.ATTACK_DAMAGE).addPermanentModifier(DEFECTIVE);
@@ -479,23 +473,6 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         compound.putFloat("yscale", this.getYScale());
         compound.putFloat("zscale", this.getZScale());
         this.writeStructures(compound);
-        AttributeModifier PRIME = new AttributeModifier(UUID.randomUUID(), "gempirePrimaryModifier", 0.2D, AttributeModifier.Operation.ADDITION);
-        AttributeModifier DEFECTIVE = new AttributeModifier(UUID.randomUUID(), "gempireDefectiveModifier", -5D, AttributeModifier.Operation.ADDITION);
-        if (this.isPrimary()) {
-            System.out.println("prime modifiers");
-            this.getAttribute(Attributes.MAX_HEALTH).addPermanentModifier(PRIME);
-            this.getAttribute(Attributes.MOVEMENT_SPEED).addPermanentModifier(PRIME);
-            this.getAttribute(Attributes.ATTACK_DAMAGE).addPermanentModifier(PRIME);
-            this.getAttribute(Attributes.ATTACK_SPEED).addPermanentModifier(PRIME);
-            this.getAttribute(Attributes.KNOCKBACK_RESISTANCE).addPermanentModifier(PRIME);
-        } else if (this.isDefective()) {
-            System.out.println("off colour modifiers");
-            this.getAttribute(Attributes.MAX_HEALTH).addPermanentModifier(DEFECTIVE);
-            this.getAttribute(Attributes.MOVEMENT_SPEED).addPermanentModifier(DEFECTIVE);
-            this.getAttribute(Attributes.ATTACK_DAMAGE).addPermanentModifier(DEFECTIVE);
-            this.getAttribute(Attributes.ATTACK_SPEED).addPermanentModifier(DEFECTIVE);
-            this.getAttribute(Attributes.KNOCKBACK_RESISTANCE).addPermanentModifier(DEFECTIVE);
-        }
         ContainerHelper.saveAllItems(compound, this.items);
     }
 
@@ -578,6 +555,23 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.setYScale(compound.getFloat("yscale"));
         this.setZScale(compound.getFloat("zscale"));
         this.idlePowers = this.generateIdlePowers();
+        AttributeModifier PRIME = new AttributeModifier(UUID.randomUUID(), "gempirePrimaryModifier", 5D, AttributeModifier.Operation.ADDITION);
+        AttributeModifier DEFECTIVE = new AttributeModifier(UUID.randomUUID(), "gempireDefectiveModifier", -5D, AttributeModifier.Operation.ADDITION);
+        if (this.isPrimary()) {
+            System.out.println("prime modifiers");
+            this.getAttribute(Attributes.MAX_HEALTH).addPermanentModifier(PRIME);
+            this.getAttribute(Attributes.MOVEMENT_SPEED).addPermanentModifier(PRIME);
+            this.getAttribute(Attributes.ATTACK_DAMAGE).addPermanentModifier(PRIME);
+            this.getAttribute(Attributes.ATTACK_SPEED).addPermanentModifier(PRIME);
+            this.getAttribute(Attributes.KNOCKBACK_RESISTANCE).addPermanentModifier(PRIME);
+        } else if (this.isDefective()) {
+            System.out.println("off colour modifiers");
+            this.getAttribute(Attributes.MAX_HEALTH).addPermanentModifier(DEFECTIVE);
+            this.getAttribute(Attributes.MOVEMENT_SPEED).addPermanentModifier(DEFECTIVE);
+            this.getAttribute(Attributes.ATTACK_DAMAGE).addPermanentModifier(DEFECTIVE);
+            this.getAttribute(Attributes.ATTACK_SPEED).addPermanentModifier(DEFECTIVE);
+            this.getAttribute(Attributes.KNOCKBACK_RESISTANCE).addPermanentModifier(DEFECTIVE);
+        }
         ContainerHelper.loadAllItems(compound, this.items);
         this.readStructures(compound);
         if (this.spawnGem != null) {
@@ -822,8 +816,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
 
     @Override
     public InteractionResult interactAt(Player player, Vec3 vec, InteractionHand hand) {
-        if (!this.getRebelled()) {
-            //if (!this.getCracked()) {
+        if (!this.getRebelled() && !(this.getSludgeAmount() >= 5)) {
                 if (player.level.isClientSide) {
                     return super.interactAt(player, vec, hand);
                 }
@@ -999,7 +992,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     }
 
     public void cycleMovementAI(Player player){
-        if (!this.getRebelled()) {
+        if (!this.getRebelled() && !(this.getSludgeAmount() >= 5)) {
             //Cycles through the various movement types.
             this.navigation.stop();
             setFollow(player.getUUID());
@@ -1008,6 +1001,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             }
             System.out.println("Assigned ID " + ASSIGNED_ID);
             System.out.println("ASSIGNED " + getAssignedGem());
+            this.GUARD_POS = this.getOnPos().above();
             if (getAssignedGem() != null ? this.getMovementType() < 3 : this.getMovementType() < 2) {
                 this.addMovementType(1);
                 switch (this.getMovementType()) {
@@ -1019,11 +1013,9 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             } else if (getAssignedGem() != null ? this.getMovementType() == 3 : this.getMovementType() == 2) {
                 this.setMovementType((byte) 0);
                 player.sendSystemMessage(Component.translatable(this.getName().getString() + " will now stay put"));
-                this.GUARD_POS = this.getOnPos().above();
             } else if (getAssignedGem() == null && this.getMovementType() == 3 || !getAssignedGem().isAlive()) {
                 this.setMovementType((byte) 0);
                 player.sendSystemMessage(Component.translatable(this.getName().getString() + " will now stay put"));
-                this.GUARD_POS = this.getOnPos().above();
             }
         }
     }
@@ -1109,7 +1101,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                         this.emotionMeter = 0;
                     }
                 }
-                if (source.getEntity() instanceof EntityCrawler) {
+                if (source.getEntity() instanceof EntityCrawler || source.getEntity() instanceof EntityShambler || source.getEntity() instanceof EntityAbomination) {
                     setSludgeAmount(getSludgeAmount() + 1);
                 }
             }
@@ -1224,17 +1216,21 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     }
 
     public Item getShardItem() {
-        RegistryObject<Item> gemm = ModItems.PEBBLE_GEM;
-        Item gem = null;
+        RegistryObject<Item> shardd = ModItems.PEBBLE_GEM;
+        Item shard = null;
         String name = "";
-        name = Color.getColorName(getColor()) + "_shards";
+        if (getColor() <= 15) {
+            name = Color.getColorName(getColor()) + "_shards";
+        } else {
+            name = "special_shards";
+        }
         try {
-            gemm = (RegistryObject<Item>) this.getItemRegister().getField(name.toUpperCase()).get(null);
-            gem = gemm.get();
+            shardd = (RegistryObject<Item>) this.getItemRegister().getField(name.toUpperCase()).get(null);
+            shard = shardd.get();
         } catch(Exception e){
             e.printStackTrace();
         }
-        return gem;
+        return shard;
     }
 
     public static boolean sharesOwners(EntityGem gem1, EntityGem gem2){

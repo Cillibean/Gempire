@@ -2,6 +2,7 @@ package com.gempire.enchants;
 
 import com.gempire.entities.bases.EntityGem;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -23,12 +24,8 @@ public class ShatterEnchant extends Enchantment {
                 if (((EntityGem) target).getMaxHealth() >= 15) {
                     if (((EntityGem) target).getHealth() <= ((EntityGem) target).getMaxHealth()/2) {
                         if (((EntityGem) target).getRandom().nextInt(12 - (level * 2)) == 1) {
-                            ItemStack stack = new ItemStack(((EntityGem) target).getShardItem());
-                            target.spawnAtLocation(stack).setExtendedLifetime();
-                            for (UUID owner : ((EntityGem) target).OWNERS) {
-                                target.level.getPlayerByUUID(owner).sendSystemMessage(Component.translatable(target.getName().getString() + " " + ((EntityGem) target).getFacetAndCut() + " has been shattered"));
-                            }
-                            target.remove(Entity.RemovalReason.KILLED);
+                            ((EntityGem) target).setShatter(true);
+                            target.hurt(DamageSource.MAGIC, ((EntityGem) target).getMaxHealth() * 20);
                         }
                     }
                 }

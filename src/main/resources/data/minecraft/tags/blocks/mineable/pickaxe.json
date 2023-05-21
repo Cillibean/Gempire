@@ -50,6 +50,10 @@
     "gempire:power_crystal_block_tier_2",
     "gempire:drill_block",
     "gempire:pedistal",
-    "gempire:shell_block"
+    "gempire:shell_block",
+    "gempire:tungsten_block",
+    "gempire:raw_tungsten_block",
+    "gempire:tungsten_ore",
+    "gempire:deepslate_tungsten_ore"
   ]
 }

@@ -40,10 +40,10 @@ public class RenderQuartz extends MobRenderer<EntityQuartz, ModelQuartz<EntityQu
     protected void renderNameTag(EntityQuartz entityIn, Component displayNameIn, PoseStack matrixStackIn, MultiBufferSource bufferIn, int packedLightIn) {
         super.renderNameTag(entityIn, Component.literal("<"+entityIn.getFacet()+" "+entityIn.getCut()+">"), matrixStackIn, bufferIn, packedLightIn);
         matrixStackIn.translate(0.0D, (double)(9.0F * 1.15F * 0.025F), 0.0D);
-        if (!entityIn.getName().equals(Component.empty())) {
-            super.renderNameTag(entityIn, entityIn.getName(), matrixStackIn, bufferIn, packedLightIn);
+        if (entityIn.customName()) {
+            super.renderNameTag(entityIn, entityIn.getCustomName(), matrixStackIn, bufferIn, packedLightIn);
         } else {
-            super.renderNameTag(entityIn, Component.literal(entityIn.getGemName()), matrixStackIn, bufferIn, packedLightIn);
+            super.renderNameTag(entityIn, Component.literal(entityIn.getNickname().getString()), matrixStackIn, bufferIn, packedLightIn);
         }
         super.shadowRadius = 0;
     }

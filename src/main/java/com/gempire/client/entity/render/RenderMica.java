@@ -37,6 +37,10 @@ public class RenderMica extends MobRenderer<EntityMica, ModelPebble<EntityMica>>
     }
     @Override
     protected void renderNameTag(EntityMica entityIn, Component displayNameIn, PoseStack matrixStackIn, MultiBufferSource bufferIn, int packedLightIn) {
-        super.renderNameTag(entityIn, displayNameIn, matrixStackIn, bufferIn, packedLightIn);
+        if (entityIn.customName()) {
+            super.renderNameTag(entityIn, entityIn.getCustomName(), matrixStackIn, bufferIn, packedLightIn);
+        } else {
+            super.renderNameTag(entityIn, Component.literal(entityIn.getNickname().getString()), matrixStackIn, bufferIn, packedLightIn);
+        }
     }
 }
