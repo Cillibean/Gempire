@@ -23,6 +23,10 @@
     {
       "type": "patchouli:text",
       "text": "$(l)Cruxes$() $(br)$(li)Gold Ore$(li)Deepslate$(li)Copper Ore$(li)Iron Ore$(li)Magma Block$(li)Gold Block"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "This gem's Injector primer item is a Netherite Sword."
     }
   ]
 }

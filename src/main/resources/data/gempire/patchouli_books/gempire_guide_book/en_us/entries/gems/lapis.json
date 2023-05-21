@@ -23,6 +23,10 @@
     {
       "type": "patchouli:text",
       "text": "$(l)Cruxes$() $(br)$(li)Prismarine$(li)Lapis Ore$(li)Dark Prismarine$(li)Lapis Block"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "This gem's Injector primer item is a Nautilus Shell."
     }
   ]
 }

@@ -23,6 +23,10 @@
     {
       "type": "patchouli:text",
       "text": "$(l)Cruxes$() $(br)$(li)Redstone Ore$(li)Redstone Block$(li)Red Sandstone$(li)Copper Ore$(li)Glowstone"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "This gem's Injector primer item is a Fire Charge."
     }
   ]
 }

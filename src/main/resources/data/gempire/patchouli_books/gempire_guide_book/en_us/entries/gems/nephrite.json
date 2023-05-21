@@ -9,11 +9,11 @@
       "entity": "gempire:nephrite{gemColor:8189304,skinColor:5287004,hairColor:16383700,markingColor:9895572,markingVariant:0,hairVariant:0,insigniaColor:13,outfitColor:15,gemPlacement:1}",
       "name": "A Nephrite",
       "rotate": "true",
-      "text": "A scouting gem (NYI) that uses her acidic spit in fights."
+      "text": "A scouting gem  that uses her acidic spit in fights."
     },
     {
       "type": "patchouli:text",
-      "text": "$(l)Possible Abilities$() $(br)$(li)Tank$(li)Beefcake$(li)Powerhouse$(li)Unhinged$(li)Knockback$(li)Berserker$(br2) $(l)Definite Abilities$()$(br)$(li)Scout (NYI)$(li)Acid Spit"
+      "text": "$(l)Possible Abilities$() $(br)$(li)Tank$(li)Beefcake$(li)Powerhouse$(li)Unhinged$(li)Knockback$(li)Berserker$(br2) $(l)Definite Abilities$()$(br)$(li)Scout$(li)Acid Spit"
     },
     {
       "type": "patchouli:text",
@@ -22,6 +22,10 @@
     {
       "type": "patchouli:text",
       "text": "$(l)Cruxes$() $(br)$(li)Honey Block$(li)White Concrete$(li)Iron Ore$(li)Slime Block$(li)Moss Block"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "This gem's Injector primer item is a Wither Rose."
     }
   ]
 }
