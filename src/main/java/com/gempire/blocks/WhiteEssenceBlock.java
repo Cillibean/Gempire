@@ -33,7 +33,7 @@ public class WhiteEssenceBlock extends LiquidBlock {
                 ItemGem itemGem = (ItemGem) (((ItemEntity) entity).getItem()).getItem();
                 ItemStack stack = ((ItemEntity) entity).getItem();
                 if ((itemGem).checkTags(stack)) {
-                    if (stack.getTag().getInt("sludgeAmount") == 5) {
+                    if (stack.getTag().getInt("sludgeAmount") >= 5) {
                         stack.getTag().putInt("sludgeAmount", 0);
                     }
                 }

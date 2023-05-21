@@ -337,6 +337,7 @@ public class ShellTE extends RandomizableContainerBlockEntity implements MenuPro
             egem.initalSkinVariant = Integer.parseInt(skinColorVariant);
         }
         egem.finalizeSpawn((ServerLevelAccessor) this.level, this.level.getCurrentDifficultyAt(this.worldPosition), MobSpawnType.MOB_SUMMONED, null, null);
+        egem.setSkinColorVariant(chroma);
         ItemStack stack = new ItemStack(gem);
         ItemGem.saveData(stack, egem);
         egem.remove(Entity.RemovalReason.DISCARDED);

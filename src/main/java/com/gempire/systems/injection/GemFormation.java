@@ -16,6 +16,8 @@ import com.gempire.items.ItemGem;
 import com.gempire.util.PaletteType;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.AirBlock;
 import net.minecraft.world.level.block.Block;
@@ -81,12 +83,6 @@ public class GemFormation {
     public void SpawnGem(){
         RegistryObject<EntityType<EntityPebble>> gemm = ModEntities.PEBBLE;
         EntityGem gem = gemm.get().create(this.world);
-        RegistryObject<EntityType<EntityAbomination>> abominationr = ModEntities.ABOMINATION;
-        EntityAbomination abomination = abominationr.get().create(this.world);
-        RegistryObject<EntityType<EntityCrawler>> crawlerr = ModEntities.CRAWLER;
-        EntityCrawler crawler = crawlerr.get().create(this.world);
-        RegistryObject<EntityType<EntityShambler>> shamblerr = ModEntities.SHAMBLER;
-        EntityShambler shambler = shamblerr.get().create(this.world);
         float BIOME_TEMPERATURE = this.world.getBiome(this.pos).get().getBaseTemperature();
         this.SetDrainedStoneColor(BIOME_TEMPERATURE);
         String gemtoform = this.EvaluateCruxes();
@@ -256,6 +252,23 @@ public class GemFormation {
                 gem.spawnGem.remove(Entity.RemovalReason.DISCARDED);
             }
             gem.setCracked(gem.getCracked());
+            AttributeModifier PRIME = new AttributeModifier(UUID.randomUUID(), "gempirePrimaryModifier", 5D, AttributeModifier.Operation.ADDITION);
+            AttributeModifier DEFECTIVE = new AttributeModifier(UUID.randomUUID(), "gempireDefectiveModifier", -5D, AttributeModifier.Operation.ADDITION);
+            if (gem.isPrimary()) {
+                System.out.println("prime modifiers");
+                gem.getAttribute(Attributes.MAX_HEALTH).addPermanentModifier(PRIME);
+                gem.getAttribute(Attributes.MOVEMENT_SPEED).addPermanentModifier(PRIME);
+                gem.getAttribute(Attributes.ATTACK_DAMAGE).addPermanentModifier(PRIME);
+                gem.getAttribute(Attributes.ATTACK_SPEED).addPermanentModifier(PRIME);
+                gem.getAttribute(Attributes.KNOCKBACK_RESISTANCE).addPermanentModifier(PRIME);
+            } else if (gem.isDefective()) {
+                System.out.println("off colour modifiers");
+                gem.getAttribute(Attributes.MAX_HEALTH).addPermanentModifier(DEFECTIVE);
+                gem.getAttribute(Attributes.MOVEMENT_SPEED).addPermanentModifier(DEFECTIVE);
+                gem.getAttribute(Attributes.ATTACK_DAMAGE).addPermanentModifier(DEFECTIVE);
+                gem.getAttribute(Attributes.ATTACK_SPEED).addPermanentModifier(DEFECTIVE);
+                gem.getAttribute(Attributes.KNOCKBACK_RESISTANCE).addPermanentModifier(DEFECTIVE);
+            }
             System.out.println(gem.getCracked());
             gem.setPos(this.pos.getX() + .5f, this.pos.getY(), this.pos.getZ() + .5f);
             gem.setHealth(gem.getMaxHealth());
@@ -264,6 +277,13 @@ public class GemFormation {
             MinecraftForge.EVENT_BUS.post(event1);
             this.world.addFreshEntity(gem);
         } else {
+            System.out.println("clod");
+            RegistryObject<EntityType<EntityAbomination>> abominationr = ModEntities.ABOMINATION;
+            EntityAbomination abomination = abominationr.get().create(this.world);
+            RegistryObject<EntityType<EntityCrawler>> crawlerr = ModEntities.CRAWLER;
+            EntityCrawler crawler = crawlerr.get().create(this.world);
+            RegistryObject<EntityType<EntityShambler>> shamblerr = ModEntities.SHAMBLER;
+            EntityShambler shambler = shamblerr.get().create(this.world);
             if (clodNO == 1) {
                 crawler.setPos(this.pos.getX() + .5f, this.pos.getY(), this.pos.getZ() + .5f);
                 crawler.setHealth(crawler.getMaxHealth());

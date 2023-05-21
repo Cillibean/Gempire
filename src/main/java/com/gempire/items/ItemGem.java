@@ -239,19 +239,17 @@ public class ItemGem extends Item {
                     if (stack.getTag().getString("abilities") != "") {
                         assert gem != null;
                         System.out.println("try");
-                        if (item != null) {
-                            System.out.println("item not null");
-                            System.out.println(gem != null);
-                            gem.spawnGem = item;
-                            System.out.println(gem.spawnGem);
-                            gem.finalizeSpawn((ServerLevelAccessor) world, world.getCurrentDifficultyAt(item.blockPosition()), MobSpawnType.TRIGGERED, null, null);
-                        }
-                        if (player != null) {
-                            gem.finalizeSpawn((ServerLevelAccessor) world, world.getCurrentDifficultyAt(player.blockPosition()), MobSpawnType.TRIGGERED, null, null);
-                        }
                         gem.setDefective(stack.getTag().getBoolean("defective"));
                         gem.setPrimary(stack.getTag().getBoolean("prime"));
-                        gem.load(stack.getTag());
+                        if (item != null) {
+                            System.out.println("item not null");
+                            gem.spawnGem = item;
+                            System.out.println(gem.spawnGem);
+                            gem.load(stack.getTag());
+                        }
+                        if (player != null) {
+                            gem.load(stack.getTag());
+                        }
                         System.out.println(stack.getTag());
                         System.out.println(gem.getFacetAndCut());
                         System.out.println("stack loaded");
@@ -310,7 +308,7 @@ public class ItemGem extends Item {
                                 gem.setPrimary(false);
                                 gem.setDefective(false);
                             }
-                            case 0, 1, 2, 4, 5, 6, 7, 8, 9 -> gem.setDefective(true);
+                            case 0, 1 -> gem.setDefective(true);
                             case 3 -> gem.setPrimary(true);
                         }
                         gem.finalizeSpawn((ServerLevelAccessor) world, world.getCurrentDifficultyAt(player.blockPosition()), MobSpawnType.TRIGGERED, null, null);
