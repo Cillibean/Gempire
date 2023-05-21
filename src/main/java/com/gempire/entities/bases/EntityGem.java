@@ -11,7 +11,9 @@ import com.gempire.entities.gems.starter.EntityMica;
 import com.gempire.entities.gems.starter.EntityNacre;
 import com.gempire.entities.gems.starter.EntityPebble;
 import com.gempire.entities.gems.starter.EntityShale;
+import com.gempire.entities.other.EntityAbomination;
 import com.gempire.entities.other.EntityCrawler;
+import com.gempire.entities.other.EntityShambler;
 import com.gempire.events.GemPoofEvent;
 import com.gempire.init.ModEnchants;
 import com.gempire.init.ModItems;
@@ -1099,7 +1101,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                         this.emotionMeter = 0;
                     }
                 }
-                if (source.getEntity() instanceof EntityCrawler) {
+                if (source.getEntity() instanceof EntityCrawler || source.getEntity() instanceof EntityShambler || source.getEntity() instanceof EntityAbomination) {
                     setSludgeAmount(getSludgeAmount() + 1);
                 }
             }

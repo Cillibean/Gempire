@@ -166,41 +166,38 @@ public class GemFormation {
         System.out.println("weight / rarity check "+weight / rarity);
         System.out.println("weight "+weight);
         if (primer.asItem() == ModItems.PRIME_BOOST.get()) {
-            if (weight / rarity <= 5) {
-                System.out.println("clod");
-            }
-            if (weight / rarity <= 7) {
+            if (weight / rarity <= 1) {
+                clod = true;
+                clodNO = 3;
+            } else if (weight / rarity <= 3) {
+                clod = true;
+                clodNO = 2;
+            } else if (weight / rarity <= 5) {
+                clod = true;
+                clodNO = 1;
+            } else if (weight / rarity <= 7) {
                 gem.setDefective(false);
                 System.out.println("defective");
             } else if (weight / rarity >= 15){
                 gem.setPrimary(true);
                 System.out.println("prime");
-            }  else if (weight / rarity <= 5) {
-                clod = true;
-                clodNO = 1;
-            } else if (weight / rarity <= 3) {
-                clod = true;
-                clodNO = 2;
-            } else if (weight / rarity <= 1) {
-                clod = true;
-                clodNO = 3;
             }
         } else {
-            if (weight / rarity <= 9) {
+            if (weight / rarity <= 3) {
+                clod = true;
+                clodNO = 3;
+            } else if (weight / rarity <= 5) {
+                clod = true;
+                clodNO = 2;
+            } else if (weight / rarity <= 7) {
+                clod = true;
+                clodNO = 1;
+            } else if (weight / rarity <= 9) {
                 gem.setDefective(true);
                 System.out.println("defective");
             } else if (weight / rarity >= 25){
                 gem.setPrimary(true);
                 System.out.println("prime");
-            } else if (weight / rarity <= 7) {
-                clod = true;
-                clodNO = 1;
-            } else if (weight / rarity <= 5) {
-                clod = true;
-                clodNO = 2;
-            } else if (weight / rarity <= 3) {
-                clod = true;
-                clodNO = 3;
             }
         }
         if (!clod) {
