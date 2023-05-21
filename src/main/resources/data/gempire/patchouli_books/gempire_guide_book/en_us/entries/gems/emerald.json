@@ -23,6 +23,10 @@
     {
       "type": "patchouli:text",
       "text": "$(l)Cruxes$() $(br)$(li)Clay$(li)Ancient Debris$(li)Emerald Ore$(li)Emerald Block"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "This gem's Injector primer item is an Emerald Block."
     }
   ]
 }

@@ -23,6 +23,10 @@
     {
       "type": "patchouli:text",
       "text": "$(l)Cruxes$() $(br)$(li)Nether Quartz Ore$(li)Slime Block$(li)Mycelium$(li)Moss Block"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "This gem's Injector primer item is an Enchanted Golden Apple."
     }
   ]
 }

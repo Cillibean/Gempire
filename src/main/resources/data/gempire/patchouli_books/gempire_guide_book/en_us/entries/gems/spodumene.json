@@ -22,6 +22,10 @@
     {
       "type": "patchouli:text",
       "text": "$(l)Cruxes$() $(br)$(li)Bone Block$(li)Slime Block$(li)Brain Coral$(li)Glowstone"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "This gem's Injector primer item is a Heart of the Sea."
     }
   ]
 }

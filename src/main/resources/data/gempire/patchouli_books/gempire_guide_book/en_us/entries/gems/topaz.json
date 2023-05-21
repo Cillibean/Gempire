@@ -22,6 +22,10 @@
     {
       "type": "patchouli:text",
       "text": "$(l)Cruxes$() $(br)$(li)Coal Ore$(li)Clay$(li)Gold Ore$(li)Raw Gold Block$(li)Gold Block"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "This gem's Injector primer item is a Gold Block."
     }
   ]
 }

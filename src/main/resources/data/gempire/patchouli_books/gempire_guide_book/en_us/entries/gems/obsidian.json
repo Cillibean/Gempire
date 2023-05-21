@@ -22,6 +22,10 @@
     {
       "type": "patchouli:text",
       "text": "$(l)Cruxes$() $(br)$(li)Obsidian$(li)Blackstone"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "This gem's Injector primer item is an End Crystal."
     }
   ]
 }

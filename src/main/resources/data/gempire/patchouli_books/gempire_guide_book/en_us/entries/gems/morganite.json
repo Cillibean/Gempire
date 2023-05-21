@@ -26,6 +26,10 @@
     {
       "type": "patchouli:text",
       "text": "$(l)Cruxes$() $(br)$(li)Gravel$(li)Clay$(li)Iron Ore$(li)Soul Sand"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "This gem's Injector primer item is a Phantom Membrane."
     }
   ]
 }
