@@ -29,17 +29,13 @@ public class ModFluidTypes {
             DeferredRegister.create(ForgeRegistries.Keys.FLUID_TYPES, Gempire.MODID);
 
     public static final RegistryObject<FluidType> PINK_ESSENCE_FLUID_TYPE = registerPink("pink_essence_fluid",
-            FluidType.Properties.create().lightLevel(2).density(15).viscosity(5).sound(SoundAction.get("drink"),
-                    SoundEvents.HONEY_DRINK));
+            FluidType.Properties.create().lightLevel(2).density(15).viscosity(5));
     public static final RegistryObject<FluidType> BLUE_ESSENCE_FLUID_TYPE = registerBlue("blue_essence_fluid",
-            FluidType.Properties.create().lightLevel(2).density(15).viscosity(5).sound(SoundAction.get("drink"),
-                    SoundEvents.HONEY_DRINK));
+            FluidType.Properties.create().lightLevel(2).density(15).viscosity(5));
     public static final RegistryObject<FluidType> YELLOW_ESSENCE_FLUID_TYPE = registerYellow("yellow_essence_fluid",
-            FluidType.Properties.create().lightLevel(2).density(15).viscosity(5).sound(SoundAction.get("drink"),
-                    SoundEvents.HONEY_DRINK));
+            FluidType.Properties.create().lightLevel(2).density(15).viscosity(5));
     public static final RegistryObject<FluidType> WHITE_ESSENCE_FLUID_TYPE = registerWhite("white_essence_fluid",
-            FluidType.Properties.create().lightLevel(2).density(15).viscosity(5).sound(SoundAction.get("drink"),
-                    SoundEvents.HONEY_DRINK));
+            FluidType.Properties.create().lightLevel(2).density(15).viscosity(5));
 
 
 
