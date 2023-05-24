@@ -162,40 +162,38 @@ public class GemFormation {
             }
         }
         System.out.println("placement");
-        double rarity = CONDITIONS.get(gemtoform).rarity;
+        double rarity = 1 / CONDITIONS.get(gemtoform).rarity;
+        double check = weight / rarity;
         System.out.println("weight / rarity check "+weight / rarity);
         System.out.println("weight "+weight);
         if (primer.asItem() == ModItems.PRIME_BOOST.get()) {
-            if (weight / rarity <= 1) {
-                clod = true;
-                clodNO = 3;
-            } else if (weight / rarity <= 3) {
+            if (check <= 4) {
                 clod = true;
                 clodNO = 2;
-            } else if (weight / rarity <= 5) {
+            } else if (check <= 7) {
                 clod = true;
                 clodNO = 1;
-            } else if (weight / rarity <= 7) {
+            } else if (check <= 13) {
                 gem.setDefective(false);
                 System.out.println("defective");
-            } else if (weight / rarity >= 15){
+            } else if (check >= 25){
                 gem.setPrimary(true);
                 System.out.println("prime");
             }
         } else {
-            if (weight / rarity <= 3) {
+            if (check <= 4) {
                 clod = true;
                 clodNO = 3;
-            } else if (weight / rarity <= 5) {
+            } else if (check <= 7) {
                 clod = true;
                 clodNO = 2;
-            } else if (weight / rarity <= 7) {
+            } else if (check <= 10) {
                 clod = true;
                 clodNO = 1;
-            } else if (weight / rarity <= 9) {
+            } else if (check <= 17) {
                 gem.setDefective(true);
                 System.out.println("defective");
-            } else if (weight / rarity >= 25){
+            } else if (check >= 30){
                 gem.setPrimary(true);
                 System.out.println("prime");
             }
@@ -250,18 +248,20 @@ public class GemFormation {
             }
             gem.setCracked(gem.getCracked());
             AttributeModifier PRIME = new AttributeModifier(UUID.randomUUID(), "gempirePrimaryModifier", 5D, AttributeModifier.Operation.ADDITION);
+            AttributeModifier PRIME_SPEED = new AttributeModifier(UUID.randomUUID(), "gempirePrimarySpeedModifier", .5D, AttributeModifier.Operation.ADDITION);
             AttributeModifier DEFECTIVE = new AttributeModifier(UUID.randomUUID(), "gempireDefectiveModifier", -5D, AttributeModifier.Operation.ADDITION);
+            AttributeModifier DEFECTIVE_SPEED = new AttributeModifier(UUID.randomUUID(), "gempireDefectiveSpeedModifier", -.5D, AttributeModifier.Operation.ADDITION);
             if (gem.isPrimary()) {
                 System.out.println("prime modifiers");
                 gem.getAttribute(Attributes.MAX_HEALTH).addPermanentModifier(PRIME);
-                gem.getAttribute(Attributes.MOVEMENT_SPEED).addPermanentModifier(PRIME);
+                gem.getAttribute(Attributes.MOVEMENT_SPEED).addPermanentModifier(PRIME_SPEED);
                 gem.getAttribute(Attributes.ATTACK_DAMAGE).addPermanentModifier(PRIME);
                 gem.getAttribute(Attributes.ATTACK_SPEED).addPermanentModifier(PRIME);
                 gem.getAttribute(Attributes.KNOCKBACK_RESISTANCE).addPermanentModifier(PRIME);
             } else if (gem.isDefective()) {
                 System.out.println("off colour modifiers");
                 gem.getAttribute(Attributes.MAX_HEALTH).addPermanentModifier(DEFECTIVE);
-                gem.getAttribute(Attributes.MOVEMENT_SPEED).addPermanentModifier(DEFECTIVE);
+                gem.getAttribute(Attributes.MOVEMENT_SPEED).addPermanentModifier(DEFECTIVE_SPEED);
                 gem.getAttribute(Attributes.ATTACK_DAMAGE).addPermanentModifier(DEFECTIVE);
                 gem.getAttribute(Attributes.ATTACK_SPEED).addPermanentModifier(DEFECTIVE);
                 gem.getAttribute(Attributes.KNOCKBACK_RESISTANCE).addPermanentModifier(DEFECTIVE);
@@ -371,7 +371,8 @@ public class GemFormation {
             String lowestRGem3 = "";
             //System.out.println("check out of possible gems");
             //System.out.println("total " + totalWeight);
-            if (world.dimension() == Level.OVERWORLD) {
+            if (world.dimension() != Level.NETHER && world.dimension() != Level.END) {
+                System.out.println("overworld");
                 for (String gem : POSSIBLE_GEMS_TIER_1) {
                     boolean primed = false;
                     CONDITIONS = ModEntities.CRUXTOGEM;
@@ -391,6 +392,9 @@ public class GemFormation {
                     } else {
                         r -= WEIGHTS_OF_GEMS.get(gem);
                     }
+                    System.out.println(gem);
+                    System.out.println(r);
+                    System.out.println();
                 /*if (WEIGHTS_OF_GEMS.get(gem) < 12) {
                     r = 1000000;
                 }*/
@@ -410,7 +414,14 @@ public class GemFormation {
                         lowestR3 = r;
                         lowestRGem3 = gem;
                     }
+                    System.out.println("lowest: " + lowestRGem);
+                    System.out.println("lowest: " + lowestR);
+                    System.out.println("lowest 2: " + lowestRGem2);
+                    System.out.println("lowest 2: " + lowestR2);
+                    System.out.println("lowest 3: " + lowestRGem3);
+                    System.out.println("lowest 3: " + lowestR3);
                     int r2 = rand.nextInt(4);
+                    System.out.println(r2);
                     switch (r2) {
                         case 0,3 -> {
                             returnGem = lowestRGem;
@@ -532,29 +543,39 @@ public class GemFormation {
                 }
             }
             } else if (tier == 2) {
+            Random rand = new Random();
                 double lowestR = 100000000;
                 String lowestRGem = "";
                 double lowestR2 = 100000000;
                 String lowestRGem2 = "";
                 double lowestR3 = 100000000;
                 String lowestRGem3 = "";
-            if (world.dimension() == Level.OVERWORLD) {
+            if (world.dimension() != Level.NETHER && world.dimension() != Level.END) {
                 for (String gem : POSSIBLE_GEMS_TIER_2) {
                     boolean primed = false;
                     CONDITIONS = ModEntities.CRUXTOGEM;
                     GemConditions conditions = CONDITIONS.get(gem);
-                    Random rand = new Random();
                     if (this.primer == conditions.primer && conditions.primer != Items.AIR) {
                         primed = true;
                     }
                     //double r1 = rand.nextDouble();
                     //System.out.println("r1 random " + r1);
                     double r = /*r1 **/ totalWeight;
+                    System.out.println("total weight " + totalWeight);
+                    System.out.println("random " + r);
                     if (primed) {
                         r -= (3 * WEIGHTS_OF_GEMS.get(gem));
                     } else {
                         r -= WEIGHTS_OF_GEMS.get(gem);
+                        System.out.println("not primed");
+                        System.out.println("subtracted random " + r);
                     }
+                /*if (WEIGHTS_OF_GEMS.get(gem) < 12) {
+                    r = 1000000;
+                }*/
+                    System.out.println(gem);
+                    System.out.println(r);
+                    System.out.println();
                 /*if (WEIGHTS_OF_GEMS.get(gem) < 12) {
                     r = 1000000;
                 }*/
@@ -574,7 +595,16 @@ public class GemFormation {
                         lowestR3 = r;
                         lowestRGem3 = gem;
                     }
-                    int r2 = rand.nextInt(4);
+                    System.out.println("lowest: " + lowestRGem);
+                    System.out.println("lowest: " + lowestR);
+                    System.out.println("lowest 2: " + lowestRGem2);
+                    System.out.println("lowest 2: " + lowestR2);
+                    System.out.println("lowest 3: " + lowestRGem3);
+                    System.out.println("lowest 3: " + lowestR3);
+                    System.out.println();
+                }
+                int r2 = rand.nextInt(4);
+                    System.out.println(r2);
                     switch (r2) {
                         case 0,3 -> {
                             returnGem = lowestRGem;
@@ -589,7 +619,6 @@ public class GemFormation {
                             weight = (float) (totalWeight - lowestR3);
                         }
                     }
-                }
             } else if (world.dimension() == Level.NETHER) {
                 for (String gem : NETHER_POSSIBLE_GEMS_TIER_2) {
                     boolean primed = false;
@@ -597,7 +626,6 @@ public class GemFormation {
                     GemConditions conditions = CONDITIONS.get(gem);
                     System.out.println(" ");
                     System.out.println(gem);
-                    Random rand = new Random();
                     if (this.primer == conditions.primer && conditions.primer != Items.AIR) {
                         primed = true;
                     }
@@ -652,7 +680,6 @@ public class GemFormation {
                     GemConditions conditions = CONDITIONS.get(gem);
                     System.out.println(" ");
                     System.out.println(gem);
-                    Random rand = new Random();
                     if (this.primer == conditions.primer && conditions.primer != Items.AIR) {
                         primed = true;
                     }

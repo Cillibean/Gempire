@@ -202,25 +202,37 @@ public class ShellTE extends RandomizableContainerBlockEntity implements MenuPro
             ItemStack stack = this.getItem(ShellTE.CHROMA_INPUT_SLOT_INDEX);
             if(stack.getItem() instanceof ItemChroma){
                 ItemChroma chroma = (ItemChroma) stack.getItem();
-                this.chromaConsumed = true;
-                this.chromaColor = chroma.color;
-                stack.shrink(1);
+                if (chroma.color != 16) {
+                    this.chromaConsumed = true;
+                    this.chromaColor = chroma.color;
+                    stack.shrink(1);
+                } else {
+                    this.chromaConsumed = false;
+                }
             }
         } else if(this.gravelConsumed == ShellTE.MAX_GRAVEL /2 && this.sandConsumed == ShellTE.MAX_SAND/2 && this.clayConsumed == ShellTE.MAX_CLAY/2 && !this.chromaConsumed){
             ItemStack stack = this.getItem(ShellTE.CHROMA_INPUT_SLOT_INDEX);
             if(stack.getItem() instanceof ItemChroma){
                 ItemChroma chroma = (ItemChroma) stack.getItem();
-                this.chromaConsumed = true;
-                this.chromaColor = chroma.color;
-                stack.shrink(1);
+                if (chroma.color != 16) {
+                    this.chromaConsumed = true;
+                    this.chromaColor = chroma.color;
+                    stack.shrink(1);
+                } else {
+                    this.chromaConsumed = false;
+                }
             }
         } else if(this.gravelConsumed == ShellTE.MAX_GRAVEL/4 && this.sandConsumed == ShellTE.MAX_SAND/4 && this.clayConsumed == ShellTE.MAX_CLAY/4 && !this.chromaConsumed){
             ItemStack stack = this.getItem(ShellTE.CHROMA_INPUT_SLOT_INDEX);
             if(stack.getItem() instanceof ItemChroma){
                 ItemChroma chroma = (ItemChroma) stack.getItem();
-                this.chromaConsumed = true;
-                this.chromaColor = chroma.color;
-                stack.shrink(1);
+                if (chroma.color != 16) {
+                    this.chromaConsumed = true;
+                    this.chromaColor = chroma.color;
+                    stack.shrink(1);
+                } else {
+                    this.chromaConsumed = false;
+                }
             }
         }
     }

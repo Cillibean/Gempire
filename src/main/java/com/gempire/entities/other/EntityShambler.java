@@ -11,6 +11,7 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -64,7 +65,7 @@ public class EntityShambler extends Monster implements IAnimatable {
         this.goalSelector.addGoal(7, new FloatGoal(this));
         this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 4.0F));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
-        this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, EntityGem.class, true));
+        this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, EntityGem.class, 1, false, false, this::checkSludged));
         this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.1D, false));
         this.goalSelector.addGoal(1, new EntityAIShamblerAttackGoal(this, 1.2D, false));
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
@@ -136,4 +137,14 @@ public class EntityShambler extends Monster implements IAnimatable {
     protected SoundEvent getDeathSound() {
         return ModSounds.SHAMBLER_DEATH.get();
     }
+
+    public boolean checkSludged(LivingEntity entity) {
+        return ((EntityGem) entity).getSludgeAmount() >= 5;
+    }
+
+    @Override
+    public boolean removeWhenFarAway(double xix){
+        return false;
+    }
 }
+

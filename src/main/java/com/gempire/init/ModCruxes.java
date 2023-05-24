@@ -15,7 +15,7 @@ public class ModCruxes {
     private static final int stoneCruxValue = 1;
     public static GemConditions JASPER_CONDITIONS(){
         ArrayList<Crux> gemCruxes = new ArrayList<>();
-        float gemTemperatureMin = 0f;
+        float gemTemperatureMin = 0.7f;
         float gemTemperatureMax = 2f;
         Item primer = Items.BLAZE_ROD;
         String essences = "yellow-white";
@@ -83,7 +83,7 @@ public class ModCruxes {
 
     public static GemConditions QUARTZ_CONDITIONS(){
         ArrayList<Crux> gemCruxes = new ArrayList<>();
-        float gemTemperatureMin = 0f;
+        float gemTemperatureMin = 0.7f;
         float gemTemperatureMax = 2f;
         Item primer = Items.NETHER_STAR;
         String essences = "pink-white";
