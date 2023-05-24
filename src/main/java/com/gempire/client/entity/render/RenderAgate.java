@@ -43,9 +43,10 @@ public class RenderAgate extends MobRenderer<EntityAgate, ModelQuartz<EntityAgat
 
     @Override
     protected void renderNameTag(EntityAgate entityIn, Component displayNameIn, PoseStack matrixStackIn, MultiBufferSource bufferIn, int packedLightIn) {
+        //TODO: fix nametags
         super.renderNameTag(entityIn, Component.literal("<"+entityIn.getFacet()+" "+entityIn.getCut()+">"), matrixStackIn, bufferIn, packedLightIn);
         matrixStackIn.translate(0.0D, (double)(9.0F * 1.15F * 0.025F), 0.0D);
-        if (entityIn.customName()) {
+        if (entityIn.hasCustomName()) {
             super.renderNameTag(entityIn, entityIn.getCustomName(), matrixStackIn, bufferIn, packedLightIn);
         } else {
             super.renderNameTag(entityIn, Component.literal(entityIn.getNickname().getString()), matrixStackIn, bufferIn, packedLightIn);

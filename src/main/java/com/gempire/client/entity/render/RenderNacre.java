@@ -41,7 +41,7 @@ public class RenderNacre extends MobRenderer<EntityNacre, ModelPebble<EntityNacr
     }
     @Override
     protected void renderNameTag(EntityNacre entityIn, Component displayNameIn, PoseStack matrixStackIn, MultiBufferSource bufferIn, int packedLightIn) {
-        if (entityIn.customName()) {
+        if (entityIn.hasCustomName()) {
             super.renderNameTag(entityIn, entityIn.getCustomName(), matrixStackIn, bufferIn, packedLightIn);
         } else {
             super.renderNameTag(entityIn, Component.literal(entityIn.getNickname().getString()), matrixStackIn, bufferIn, packedLightIn);
