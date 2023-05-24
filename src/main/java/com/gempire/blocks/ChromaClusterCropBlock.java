@@ -68,23 +68,23 @@ public class ChromaClusterCropBlock extends CropBlock {
                     BlockState blockstate = level.getBlockState(blockpos.below());
                     Block block = blockstate.getBlock();
                     if (level.isEmptyBlock(blockpos) && (block == Blocks.STONE || block == Blocks.ANDESITE || block == Blocks.GRANITE || block == Blocks.DIORITE )) {
-                        switch (random.nextInt(15)) {
-                            case 0 -> level.setBlockAndUpdate(blockpos, ModBlocks.BLACK_CHROMA_CRYSTAL.get().defaultBlockState());
-                            case 1 -> level.setBlockAndUpdate(blockpos, ModBlocks.GRAY_CHROMA_CRYSTAL.get().defaultBlockState());
-                            case 2 -> level.setBlockAndUpdate(blockpos, ModBlocks.LIGHT_GRAY_CHROMA_CRYSTAL.get().defaultBlockState());
-                            case 3 -> level.setBlockAndUpdate(blockpos, ModBlocks.WHITE_CHROMA_CRYSTAL.get().defaultBlockState());
-                            case 4 -> level.setBlockAndUpdate(blockpos, ModBlocks.BROWN_CHROMA_CRYSTAL.get().defaultBlockState());
-                            case 5 -> level.setBlockAndUpdate(blockpos, ModBlocks.PINK_CHROMA_CRYSTAL.get().defaultBlockState());
-                            case 6 -> level.setBlockAndUpdate(blockpos, ModBlocks.RED_CHROMA_CRYSTAL.get().defaultBlockState());
-                            case 7 -> level.setBlockAndUpdate(blockpos, ModBlocks.ORANGE_CHROMA_CRYSTAL.get().defaultBlockState());
-                            case 8 -> level.setBlockAndUpdate(blockpos, ModBlocks.YELLOW_CHROMA_CRYSTAL.get().defaultBlockState());
-                            case 9 -> level.setBlockAndUpdate(blockpos, ModBlocks.LIME_CHROMA_CRYSTAL.get().defaultBlockState());
-                            case 10 -> level.setBlockAndUpdate(blockpos, ModBlocks.GREEN_CHROMA_CRYSTAL.get().defaultBlockState());
-                            case 11 -> level.setBlockAndUpdate(blockpos, ModBlocks.CYAN_CHROMA_CRYSTAL.get().defaultBlockState());
-                            case 12 -> level.setBlockAndUpdate(blockpos, ModBlocks.LIGHT_BLUE_CHROMA_CRYSTAL.get().defaultBlockState());
-                            case 13 -> level.setBlockAndUpdate(blockpos, ModBlocks.BLUE_CHROMA_CRYSTAL.get().defaultBlockState());
-                            case 14 -> level.setBlockAndUpdate(blockpos, ModBlocks.MAGENTA_CHROMA_CRYSTAL.get().defaultBlockState());
-                            case 15 -> level.setBlockAndUpdate(blockpos, ModBlocks.PURPLE_CHROMA_CRYSTAL.get().defaultBlockState());
+                        switch (random.nextInt(16)) {
+                            case 0 -> level.setBlockAndUpdate(blockpos, ModBlocks.RED_CHROMA_CRYSTAL.get().defaultBlockState());
+                            case 1 -> level.setBlockAndUpdate(blockpos, ModBlocks.ORANGE_CHROMA_CRYSTAL.get().defaultBlockState());
+                            case 2 -> level.setBlockAndUpdate(blockpos, ModBlocks.YELLOW_CHROMA_CRYSTAL.get().defaultBlockState());
+                            case 3 -> level.setBlockAndUpdate(blockpos, ModBlocks.LIME_CHROMA_CRYSTAL.get().defaultBlockState());
+                            case 4 -> level.setBlockAndUpdate(blockpos, ModBlocks.GREEN_CHROMA_CRYSTAL.get().defaultBlockState());
+                            case 5 -> level.setBlockAndUpdate(blockpos, ModBlocks.CYAN_CHROMA_CRYSTAL.get().defaultBlockState());
+                            case 6 -> level.setBlockAndUpdate(blockpos, ModBlocks.LIGHT_BLUE_CHROMA_CRYSTAL.get().defaultBlockState());
+                            case 7 -> level.setBlockAndUpdate(blockpos, ModBlocks.BLUE_CHROMA_CRYSTAL.get().defaultBlockState());
+                            case 8 -> level.setBlockAndUpdate(blockpos, ModBlocks.MAGENTA_CHROMA_CRYSTAL.get().defaultBlockState());
+                            case 9 -> level.setBlockAndUpdate(blockpos, ModBlocks.PURPLE_CHROMA_CRYSTAL.get().defaultBlockState());
+                            case 10 -> level.setBlockAndUpdate(blockpos, ModBlocks.PINK_CHROMA_CRYSTAL.get().defaultBlockState());
+                            case 11 -> level.setBlockAndUpdate(blockpos, ModBlocks.LIGHT_GRAY_CHROMA_CRYSTAL.get().defaultBlockState());
+                            case 12 -> level.setBlockAndUpdate(blockpos, ModBlocks.GRAY_CHROMA_CRYSTAL.get().defaultBlockState());
+                            case 13 -> level.setBlockAndUpdate(blockpos, ModBlocks.BLACK_CHROMA_CRYSTAL.get().defaultBlockState());
+                            case 14 -> level.setBlockAndUpdate(blockpos, ModBlocks.WHITE_CHROMA_CRYSTAL.get().defaultBlockState());
+                            case 15 -> level.setBlockAndUpdate(blockpos, ModBlocks.BROWN_CHROMA_CRYSTAL.get().defaultBlockState());
                         }
                     }
                 }
