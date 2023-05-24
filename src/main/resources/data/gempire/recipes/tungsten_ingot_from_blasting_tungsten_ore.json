@@ -6,5 +6,5 @@
   "ingredient": {
     "item": "minecraft:tungsten_ore"
   },
-  "result": "minecraft:tungsten_ingot"
+  "result": "gempire:tungsten_ingot"
 }

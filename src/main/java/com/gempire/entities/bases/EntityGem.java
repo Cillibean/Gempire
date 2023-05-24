@@ -1942,11 +1942,12 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     public boolean isRideable(){
         boolean flag = false;
         for(Ability ability : this.getAbilityPowers()){
-            if(ability instanceof AbilityVehicle){
+            if (ability instanceof AbilityVehicle) {
                 flag = true;
+                break;
             }
         }
-        return false;
+        return flag;
     }
 
     public boolean canWalkOnFluids(){
@@ -1963,8 +1964,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             double speed = ((Player) this.getControllingPassenger()).zza;
             double speedSwim = this.isSwimming() ? 10 : 1;
             super.travel(travelVec.multiply(speed,speed,speed).multiply(speedSwim, speedSwim, speedSwim));
-        }
-        else{
+        } else {
             super.travel(travelVec);
         }
     }
