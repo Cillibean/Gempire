@@ -42,7 +42,7 @@ public class RenderShale extends MobRenderer<EntityShale, ModelPebble<EntityShal
     }
     @Override
     protected void renderNameTag(EntityShale entityIn, Component displayNameIn, PoseStack matrixStackIn, MultiBufferSource bufferIn, int packedLightIn) {
-        if (entityIn.customName()) {
+        if (entityIn.hasCustomName()) {
             super.renderNameTag(entityIn, entityIn.getCustomName(), matrixStackIn, bufferIn, packedLightIn);
         } else {
             super.renderNameTag(entityIn, Component.literal(entityIn.getNickname().getString()), matrixStackIn, bufferIn, packedLightIn);

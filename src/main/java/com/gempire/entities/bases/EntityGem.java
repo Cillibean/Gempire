@@ -1178,7 +1178,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             } else {
                 ItemStack stack = new ItemStack(this.getGemItem());
                 ItemGem.saveData(stack, this);
-                Objects.requireNonNull(this.spawnAtLocation(stack)).setExtendedLifetime();
+                this.spawnAtLocation(stack).setExtendedLifetime();
             }
             this.gameEvent(GameEvent.ENTITY_PLACE);
             this.kill();
@@ -2259,7 +2259,6 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         BlockPos blockpos = new BlockPos(gem.blockPosition());
         //TagKey<Structure> structureTagKey = TagKey.create();
         if(gem.structures.contains(structure.toString().replace("minecraft:", ""))) {
-            //TODO: just finding villages
              blockpos1 = ((ServerLevel) gem.getCommandSenderWorld()).findNearestMapStructure(StructureTags.VILLAGE, blockpos, 100, false);
         }
         if (blockpos1 == null) {
