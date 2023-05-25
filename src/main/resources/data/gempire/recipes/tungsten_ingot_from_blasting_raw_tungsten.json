@@ -4,7 +4,7 @@
   "experience": 0.7,
   "group": "tungsten_ingot",
   "ingredient": {
-    "item": "minecraft:raw_tungsten"
+    "item": "gempire:raw_tungsten"
   },
   "result": "gempire:tungsten_ingot"
 }
