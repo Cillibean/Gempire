@@ -291,7 +291,11 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.setMarkingColor(this.generatePaletteColor(PaletteType.MARKINGS));
         this.setMarking2Variant(this.generateMarking2Variant());
         this.setMarking2Color(this.generatePaletteColor(PaletteType.MARKINGS_2));
-        this.setCustomName(this.getName());
+        if (this.hasCustomName()) {
+            this.setCustomName(this.getName());
+        } else {
+            this.setCustomName(this.getNickname());
+        }
         this.rebelPoints = 0.5f;
         this.rebelTicks = 1;
         //this.generateScoutList();
@@ -476,6 +480,9 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         compound.putFloat("zscale", this.getZScale());
         compound.putString("name", this.getName().toString());
         this.writeStructures(compound);
+        if(this instanceof EntityPearl) {
+            ContainerHelper.saveAllItems(compound, ((EntityPearl) this).getItems1());
+        }
         ContainerHelper.saveAllItems(compound, this.items);
     }
 
@@ -1184,6 +1191,9 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             }
             this.gameEvent(GameEvent.ENTITY_PLACE);
             this.kill();
+        }
+        if(this instanceof EntityPearl) {
+            System.out.println(((EntityPearl) this).getItems1());
         }
         super.die(source);
     }

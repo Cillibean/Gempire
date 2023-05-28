@@ -45,13 +45,10 @@ import org.checkerframework.checker.units.qual.C;
 public class EntityPearl extends EntityVaryingGem {
     public static final int NUMBER_OF_SLOTS_PEARL = 58;
     public NonNullList<ItemStack> items1 = NonNullList.withSize(EntityPearl.NUMBER_OF_SLOTS_PEARL, ItemStack.EMPTY);
-    public NonNullList<ItemStack> items2 = NonNullList.withSize(EntityPearl.NUMBER_OF_SLOTS_PEARL, ItemStack.EMPTY);
     public NonNullList<ItemStack> armorList = NonNullList.withSize(4, ItemStack.EMPTY);
-    public static EntityDataAccessor<Integer> PAGE = SynchedEntityData.<Integer>defineId(EntityPearl.class, EntityDataSerializers.INT);
 
     public EntityPearl(EntityType<? extends PathfinderMob> type, Level worldIn) {
         super(type, worldIn);
-        this.entityData.define(EntityPearl.PAGE, 0);
     }
 
     public static AttributeSupplier.Builder registerAttributes() {
@@ -84,69 +81,13 @@ public class EntityPearl extends EntityVaryingGem {
     @Override
     public void addAdditionalSaveData(CompoundTag compound) {
         super.addAdditionalSaveData(compound);
-        compound.putInt("page", this.getPage());
-        this.saveItems(compound);
-    }
-
-    public void saveItems(CompoundTag compoundNBT){
-        ListTag list1 = new ListTag();
-        for(int i = 0; i < this.items1.size(); i++){
-            list1.add(i, this.items1.get(i).save(new CompoundTag()));
-            System.out.println("1 - " + i);
-        }
-        ListTag list2 = new ListTag();
-        for(int i = 0; i < this.items2.size(); i++){
-            list2.add(i, this.items2.get(i).save(new CompoundTag()));
-            System.out.println("2 - " + i);
-        }
-        ListTag armorList = new ListTag();
-        for (int i = 0; i < 3; i ++) {
-            armorList.add(i, this.armorList.get(i).save(new CompoundTag()));
-            System.out.println("armor - " + i);
-            System.out.println(armorList.get(i));
-        }
-        compoundNBT.put("Items1", list1);
-        compoundNBT.put("Items2", list2);
-        compoundNBT.put("ArmorItems", armorList);
-
+        ContainerHelper.saveAllItems(compound, getItems1());
     }
 
     @Override
     public void load(CompoundTag compound) {
         super.load(compound);
-        this.setPage(compound.getInt("page"));
-        this.loadItems(compound);
-    }
-
-    public void loadItems(CompoundTag compoundNBT){
-        ListTag list1 = compoundNBT.getList("Items1", 10);
-        ListTag list2 = compoundNBT.getList("Items2", 10);
-        ListTag armorList = compoundNBT.getList("ArmorItems", 10);
-        NonNullList<ItemStack> newItems1 = NonNullList.withSize(EntityPearl.NUMBER_OF_SLOTS_PEARL, ItemStack.EMPTY);
-        NonNullList<ItemStack> newItems2 = NonNullList.withSize(EntityPearl.NUMBER_OF_SLOTS_PEARL, ItemStack.EMPTY);
-        for(int i = 0; i < list1.size(); ++i) {
-            CompoundTag compoundnbt = list1.getCompound(i);
-            newItems1.set(i, ItemStack.of(compoundnbt));
-            System.out.println("1 - " + i);
-        }
-        for(int i = 0; i < list2.size(); ++i) {
-            CompoundTag compoundnbt = list2.getCompound(i);
-            newItems2.set(i, ItemStack.of(compoundnbt));
-            System.out.println("2 - " + i);
-        }
-        for (int i = 0; i < 4; i ++) {
-            CompoundTag compoundnbt = armorList.getCompound(i);
-            newItems1.set(i, ItemStack.of(compoundnbt));
-            newItems2.set(i, ItemStack.of(compoundnbt));
-            System.out.println("armor - " + i);
-        }
-        this.items1 = newItems1;
-        this.items2 = newItems2;
-        //this.armorList.set(0, newItems1.get(0));
-        //this.armorList.set(1, newItems1.get(1));
-        //this.armorList.set(2, newItems1.get(2));
-        //this.armorList.set(3, newItems1.get(3));
-        System.out.println(armorList);
+        ContainerHelper.loadAllItems(compound, getItems1());
     }
 
     protected void registerGoals() {
@@ -296,32 +237,6 @@ public class EntityPearl extends EntityVaryingGem {
         return 1;
     }
 
-    public void setPage(int value){
-        this.entityData.set(EntityPearl.PAGE, value);
-    }
-
-    public int getPage(){
-        return this.entityData.get(EntityPearl.PAGE);
-    }
-
-    public void CyclePageForward(){
-        if(this.getPage() == 1){
-            this.setPage(0);
-        }
-        else{
-            this.setPage(this.getPage() + 1);
-        }
-    }
-
-    public void CyclePageBackwards(){
-        if(this.getPage() == 0){
-            this.setPage(1);
-        }
-        else{
-            this.setPage(this.getPage() - 1);
-        }
-    }
-
     public void CycleHairForward(){
         if(this.getHairVariant() == this.getHairs() - 1){
             this.setHairVariant(0);
@@ -416,25 +331,13 @@ public class EntityPearl extends EntityVaryingGem {
     @Override
     public ItemStack getItem(int index) {
         ItemStack stack = ItemStack.EMPTY;
-        if(this.getPage() == 0) {
-            return this.getItems1().get(index);
-        }
-        else if(this.getPage() == 1){
-            return this.getItems2().get(index);
-        }
-        return stack;
+        return this.getItems1().get(index);
     }
 
     @Override
     public ItemStack removeItem(int index, int count) {
         ItemStack stack = ItemStack.EMPTY;
-        if(this.getPage() == 0) {
-            return ContainerHelper.removeItem(this.getItems1(), index, count);
-        }
-        else if(this.getPage() == 1){
-            return ContainerHelper.removeItem(this.getItems2(), index, count);
-        }
-        return stack;
+        return ContainerHelper.removeItem(this.getItems1(), index, count);
     }
 
     @Override
@@ -444,12 +347,7 @@ public class EntityPearl extends EntityVaryingGem {
 
     @Override
     public void setItem(int index, ItemStack stack) {
-        if(this.getPage() == 0) {
-            this.getItems1().set(index, stack);
-        }
-        else if(this.getPage() == 1){
-            this.getItems2().set(index, stack);
-        }
+        this.getItems1().set(index, stack);
         int ind = index;
     }
 
@@ -467,10 +365,6 @@ public class EntityPearl extends EntityVaryingGem {
 
     public NonNullList<ItemStack> getItems1(){
         return this.items1;
-    }
-
-    public NonNullList<ItemStack> getItems2(){
-        return this.items2;
     }
 
     public int generateHardness() {

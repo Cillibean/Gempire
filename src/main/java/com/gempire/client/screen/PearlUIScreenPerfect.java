@@ -58,16 +58,6 @@ public class PearlUIScreenPerfect extends AbstractContainerScreen<PearlPerfectUI
         addRenderableWidget(this.nameBox);
         this.setInitialFocus(this.nameBox);
 
-        addRenderableWidget(new ImageButton(this.leftPos + 241, this.topPos + 11, 11, 9, 0, 0, 0, PearlUIScreenPerfect.LEFT,
-                11, 9, (p_213029_1_) -> {
-            ModPacketHandler.INSTANCE.sendToServer(new C2SRequestPageChange(this.menu.gem.getId(), false));
-        }));
-
-        addRenderableWidget(new ImageButton(this.leftPos + 256, this.topPos + 11, 11, 9, 0, 0, 0, PearlUIScreenPerfect.RIGHT,
-                11, 9, (p_213029_1_) -> {
-            ModPacketHandler.INSTANCE.sendToServer(new C2SRequestPageChange(this.menu.gem.getId(), true));
-        }));
-
         addRenderableWidget(new Button(this.leftPos + 10, this.topPos + 108, 83, 20, Component.translatable("screens.gempire.poof"),
                 (button) -> {
             ModPacketHandler.INSTANCE.sendToServer(new RequestPoof(this.menu.gem.getId()));
@@ -136,8 +126,6 @@ public class PearlUIScreenPerfect extends AbstractContainerScreen<PearlPerfectUI
         int ddOffsetOutfit = this.menu.gem.getOutfitVariant() > 9 ? -3 : 0;
         int ddOffsetInsignia = this.menu.gem.getInsigniaVariant() > 9 ? -3 : 0;
 
-        this.font.draw(matrixStack, Component.translatable("Page: " + (this.menu.gem.getPage() + 1)),
-                i + 190, j + 11, 4210752);
         this.font.draw(matrixStack, Component.translatable("Hair:"),
                 i + 77, j + 36, 0xFFFFFF);
         this.font.draw(matrixStack, Component.translatable("Uniform:"),

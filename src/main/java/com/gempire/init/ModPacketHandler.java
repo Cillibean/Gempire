@@ -32,12 +32,6 @@ public class ModPacketHandler {
                 RequestPoof::handle);
         ModPacketHandler.INSTANCE.registerMessage(
                 networkId++,
-                C2SRequestPageChange.class,
-                C2SRequestPageChange::encode,
-                C2SRequestPageChange::decode,
-                C2SRequestPageChange::handle);
-        ModPacketHandler.INSTANCE.registerMessage(
-                networkId++,
                 C2SRequestHairChange.class,
                 C2SRequestHairChange::encode,
                 C2SRequestHairChange::decode,

@@ -121,7 +121,7 @@ public class PearlUIScreen extends AbstractContainerScreen<PearlUIContainer> {
         drawStats(matrixStack, i, j);
 
         int ddOffsetHair = this.menu.gem.getHairVariant() > 8 ? -3 : 0;
-        int ddOffsetOutfit = this.menu.gem.getOutfitVariant() > 9 ? -3 : 0;
+        int ddOffsetOutfit = this.menu.gem.getOutfitVariant() > 8 ? -3 : 0;
         int ddOffsetInsignia = this.menu.gem.getInsigniaVariant() > 9 ? -3 : 0;
 
         this.font.draw(matrixStack, Component.translatable("Hair:"),
