@@ -1,7 +1,6 @@
 package com.gempire.client.screen;
 
 import com.gempire.container.PearlPerfectUIContainer;
-import com.gempire.container.PearlUIContainer;
 import com.gempire.entities.abilities.AbilityZilch;
 import com.gempire.entities.abilities.base.Ability;
 import com.gempire.init.ModPacketHandler;
@@ -53,7 +52,7 @@ public class PearlUIScreenPerfect extends AbstractContainerScreen<PearlPerfectUI
         this.nameBox = new EditBox(this.font, x + 74, y + 9, 101, 12, Component.translatable("Sussy"));
         this.nameBox.setBordered(true);
         this.nameBox.setVisible(true);
-        String name = this.menu.gem.customName() ? this.menu.gem.getCustomName().getString() : this.menu.gem.getDisplayName().getString();
+        String name = this.menu.gem.getName().getString();
         this.nameBox.setValue(name);
         this.nameBox.setFocus(true);
         addRenderableWidget(this.nameBox);
@@ -71,7 +70,7 @@ public class PearlUIScreenPerfect extends AbstractContainerScreen<PearlPerfectUI
 
         addRenderableWidget(new Button(this.leftPos + 10, this.topPos + 108, 83, 20, Component.translatable("screens.gempire.poof"),
                 (button) -> {
-            ModPacketHandler.INSTANCE.sendToServer(new C2SRequestPoof(this.menu.gem.getId()));
+            ModPacketHandler.INSTANCE.sendToServer(new RequestPoof(this.menu.gem.getId()));
             this.onClose();
         }));
 

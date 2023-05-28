@@ -26,10 +26,10 @@ public class ModPacketHandler {
                 C2SRequestUpdateGemName::handle);
         ModPacketHandler.INSTANCE.registerMessage(
                 networkId++,
-                C2SRequestPoof.class,
-                C2SRequestPoof::encode,
-                C2SRequestPoof::decode,
-                C2SRequestPoof::handle);
+                RequestPoof.class,
+                RequestPoof::encode,
+                RequestPoof::decode,
+                RequestPoof::handle);
         ModPacketHandler.INSTANCE.registerMessage(
                 networkId++,
                 C2SRequestPageChange.class,
@@ -66,8 +66,17 @@ public class ModPacketHandler {
                 WarpGuiKeyPressed::encode,
                 WarpGuiKeyPressed::decode,
                 WarpGuiKeyPressed::handle);
-
-        INSTANCE.registerMessage(networkId++, WarpRequest.class, WarpRequest::encode, WarpRequest::decode, WarpRequest::handle);
-        INSTANCE.registerMessage(networkId++, EditWarpName.class, EditWarpName::encode, EditWarpName::decode, EditWarpName::handle);
+        ModPacketHandler.INSTANCE.registerMessage(
+                networkId++,
+                WarpRequest.class,
+                WarpRequest::encode,
+                WarpRequest::decode,
+                WarpRequest::handle);
+        ModPacketHandler.INSTANCE.registerMessage(
+                networkId++,
+                EditWarpName.class,
+                EditWarpName::encode,
+                EditWarpName::decode,
+                EditWarpName::handle);
     }
 }

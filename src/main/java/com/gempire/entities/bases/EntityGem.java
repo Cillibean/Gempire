@@ -291,7 +291,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.setMarkingColor(this.generatePaletteColor(PaletteType.MARKINGS));
         this.setMarking2Variant(this.generateMarking2Variant());
         this.setMarking2Color(this.generatePaletteColor(PaletteType.MARKINGS_2));
-        this.setCustomName(this.getNickname());
+        this.setCustomName(this.getName());
         this.rebelPoints = 0.5f;
         this.rebelTicks = 1;
         //this.generateScoutList();
@@ -474,6 +474,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         compound.putFloat("xscale", this.getXScale());
         compound.putFloat("yscale", this.getYScale());
         compound.putFloat("zscale", this.getZScale());
+        compound.putString("name", this.getName().toString());
         this.writeStructures(compound);
         ContainerHelper.saveAllItems(compound, this.items);
     }
@@ -502,6 +503,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.setAbilities(compound.getString("abilities"));
         this.setEmotional(compound.getBoolean("emotional"));
         this.readOwners(compound);
+        this.setCustomName(Component.translatable(compound.getString("name")));
         if (compound.contains("followID")) this.FOLLOW_ID = compound.getUUID("followID");
         if (compound.contains("assignedID")) this.ASSIGNED_ID = compound.getUUID("assignedID");
         if (compound.contains("masterID")) this.MASTER_OWNER = compound.getUUID("masterID");
@@ -577,7 +579,6 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             this.getAttribute(Attributes.KNOCKBACK_RESISTANCE).addPermanentModifier(DEFECTIVE);
         }
         ContainerHelper.loadAllItems(compound, this.items);
-        this.setCustomName(this.getNickname());
         this.readStructures(compound);
         if (this.spawnGem != null) {
             this.spawnGem.remove(RemovalReason.DISCARDED);
@@ -1179,7 +1180,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             } else {
                 ItemStack stack = new ItemStack(this.getGemItem());
                 ItemGem.saveData(stack, this);
-                this.spawnAtLocation(stack).setExtendedLifetime();
+                Objects.requireNonNull(this.spawnAtLocation(stack)).setExtendedLifetime();
             }
             this.gameEvent(GameEvent.ENTITY_PLACE);
             this.kill();
@@ -1200,7 +1201,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         RegistryObject<Item> gemm = ModItems.PEBBLE_GEM;
         ItemGem gem = null;
         String name = "";
-        if(this instanceof EntityVaryingGem){
+        if(this instanceof EntityVaryingGem && !(this instanceof EntitySapphire)){
             if(((EntityVaryingGem)this).UsesUniqueNames()) {
                 name = ((EntityVaryingGem) this).NameFromColor((byte) this.getSkinColorVariant()) + "_" + this.getWholeGemName() + "_gem";
             }

@@ -122,7 +122,7 @@ public class EntitySapphire extends EntityVaryingGem {
 
     @Override
     public boolean UsesUniqueNames() {
-        return false;
+        return true;
     }
 
     @Override
