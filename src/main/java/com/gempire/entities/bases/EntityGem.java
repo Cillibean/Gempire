@@ -577,6 +577,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             this.getAttribute(Attributes.KNOCKBACK_RESISTANCE).addPermanentModifier(DEFECTIVE);
         }
         ContainerHelper.loadAllItems(compound, this.items);
+        this.setCustomName(this.getNickname());
         this.readStructures(compound);
         if (this.spawnGem != null) {
             this.spawnGem.remove(RemovalReason.DISCARDED);

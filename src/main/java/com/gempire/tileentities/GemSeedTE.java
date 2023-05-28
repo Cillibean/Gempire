@@ -99,6 +99,9 @@ public class GemSeedTE extends BlockEntity {
                     te.spawned = true;
                     if (te.tier == 1) {
                         for (int i = 0; i < GemFormation.POSSIBLE_GEMS_TIER_1.size(); i++) {
+                            if (te.TEMPORARY_WEIGHTS.get(i) == null) {
+                                te.TEMPORARY_WEIGHTS.add(i, new ArrayList<Float>());
+                            }
                             //te.TEMPORARY_WEIGHTS.add(i, new ArrayList<Float>());
                             float weight = 0;
                             for (int n = 0; n <= 1; n++) {
@@ -355,8 +358,10 @@ public class GemSeedTE extends BlockEntity {
             } else if (block == Blocks.CRIMSON_STEM || block == Blocks.WARPED_STEM || block == Blocks.STRIPPED_CRIMSON_STEM || block == Blocks.STRIPPED_WARPED_STEM
                     || block == Blocks.CRIMSON_HYPHAE || block == Blocks.WARPED_HYPHAE || block == Blocks.STRIPPED_CRIMSON_HYPHAE || block == Blocks.STRIPPED_WARPED_HYPHAE) {
                 this.level.setBlockAndUpdate(blockPos, this.drained_log_cracked.defaultBlockState());
-            } else if (block == Blocks.BLUE_ICE || block == Blocks.PACKED_ICE) {
+            } else if (block == Blocks.BLUE_ICE || block == Blocks.PACKED_ICE || block == Blocks.ICE) {
                 this.level.setBlockAndUpdate(blockPos, this.drained_ice.defaultBlockState());
+            } else if (block == Blocks.VINE ||block == Blocks.CAVE_VINES || block == Blocks.CAVE_VINES_PLANT) {
+                this.level.setBlockAndUpdate(blockPos, Blocks.AIR.defaultBlockState());
             } else {
                 if (blockPos.getY() < 80) {
                     this.level.setBlockAndUpdate(blockPos, this.drained_stone.defaultBlockState());
