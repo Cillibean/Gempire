@@ -56,6 +56,7 @@ public class GemSeedTE extends BlockEntity {
     public HashMap<Integer, BlockPos> POSITIONS = new HashMap<>();
     public ArrayList<Integer> IDS = new ArrayList<>();
     public int blockNumber;
+    public boolean exposed;
 
     //INPUT: List of gems and their cruxes as well as crux temperatures and depth preferences, list of blocks to check
     HashMap<String, GemConditions> GEM_CONDITIONS = new HashMap<>();
@@ -79,57 +80,62 @@ public class GemSeedTE extends BlockEntity {
     public static <T extends BlockEntity> void tick(Level level, BlockPos pos, BlockState state, T be) {
         GemSeedTE te = (GemSeedTE) be;
         //System.out.println("Gem List is of size: " + GemFormation.POSSIBLE_GEMS.size());
-        if (!te.checked) {
-            te.ScanPositions(level, te.getBlockPos(), new BlockPos(DRAIN_SIZE, DRAIN_SIZE, DRAIN_SIZE));
-            te.checked = true;
-        }
-        if (te.primer == ModItems.GILDED_LAPIS.get()) {
-            te.speed = 2;
-        } else {
-            te.speed = 8;
-        }
-        if (te.ticks % te.speed == 0) {
-            if (!te.spawned && te.checked) {
-                if (te.IDS.size() > 0) {
-                    int rando = ThreadLocalRandom.current().nextInt(te.IDS.size());
-                    te.DrainBlock(te.POSITIONS.get(te.IDS.get(rando)));
-                    te.IDS.remove(rando);
-                    te.setChanged();
-                } else {
-                    te.spawned = true;
-                    if (te.tier == 1) {
-                        for (int i = 0; i < GemFormation.POSSIBLE_GEMS_TIER_1.size(); i++) {
-                            if (te.TEMPORARY_WEIGHTS.get(i) == null) {
-                                te.TEMPORARY_WEIGHTS.add(i, new ArrayList<Float>());
-                            }
-                            //te.TEMPORARY_WEIGHTS.add(i, new ArrayList<Float>());
-                            float weight = 0;
-                            for (int n = 0; n <= 1; n++) {
-                                weight += te.TEMPORARY_WEIGHTS.get(i).get(n);
-                            }
-                            te.WEIGHTS_OF_GEMS.put(GemFormation.POSSIBLE_GEMS_TIER_1.get(i), weight);
-                        }
-                    } else if (te.tier == 2) {
-                        for (int i = 0; i < GemFormation.POSSIBLE_GEMS_TIER_2.size(); i++) {
-                            float weight = 0;
-                            for (int n = 0; n <= 1; n++) {
-                                weight += te.TEMPORARY_WEIGHTS.get(i).get(n);
-                            }
-                            te.WEIGHTS_OF_GEMS.put(GemFormation.POSSIBLE_GEMS_TIER_2.get(i), weight);
-                        }
-                    }
-                    if (!te.level.isClientSide) {
-                        //System.out.println(te.totalWeight);
-                        //System.out.println(te.essences);
-                        GemFormation form = new GemFormation(te.level, te.getBlockPos(), new BlockPos(GemSeedTE.DRAIN_SIZE, GemSeedTE.DRAIN_SIZE, GemSeedTE.DRAIN_SIZE), te.chroma, te.primer, te.essences, te.facing, te.WEIGHTS_OF_GEMS, te.totalWeight, te.tier);
-                        form.SpawnGem();
-                        level.sendBlockUpdated(te.getBlockPos(), te.getBlockState(), te.getBlockState(), 2);
+        if (!te.exposed) {
+            if (te.level.getBlockState(te.getBlockPos().below()) == Blocks.AIR.defaultBlockState() || te.level.getBlockState(te.getBlockPos().below()).getBlock() instanceof LiquidBlock) {
+                te.exposed = true;
+            }
+            if (!te.checked) {
+                te.ScanPositions(level, te.getBlockPos(), new BlockPos(DRAIN_SIZE, DRAIN_SIZE, DRAIN_SIZE));
+                te.checked = true;
+            }
+            if (te.primer == ModItems.GILDED_LAPIS.get()) {
+                te.speed = 2;
+            } else {
+                te.speed = 8;
+            }
+            if (te.ticks % te.speed == 0) {
+                if (!te.spawned && te.checked) {
+                    if (te.IDS.size() > 0) {
+                        int rando = ThreadLocalRandom.current().nextInt(te.IDS.size());
+                        te.DrainBlock(te.POSITIONS.get(te.IDS.get(rando)));
+                        te.IDS.remove(rando);
                         te.setChanged();
+                    } else {
+                        te.spawned = true;
+                        if (te.tier == 1) {
+                            for (int i = 0; i < GemFormation.POSSIBLE_GEMS_TIER_1.size(); i++) {
+                                if (te.TEMPORARY_WEIGHTS.get(i) == null) {
+                                    te.TEMPORARY_WEIGHTS.add(i, new ArrayList<Float>());
+                                }
+                                //te.TEMPORARY_WEIGHTS.add(i, new ArrayList<Float>());
+                                float weight = 0;
+                                for (int n = 0; n <= 1; n++) {
+                                    weight += te.TEMPORARY_WEIGHTS.get(i).get(n);
+                                }
+                                te.WEIGHTS_OF_GEMS.put(GemFormation.POSSIBLE_GEMS_TIER_1.get(i), weight);
+                            }
+                        } else if (te.tier == 2) {
+                            for (int i = 0; i < GemFormation.POSSIBLE_GEMS_TIER_2.size(); i++) {
+                                float weight = 0;
+                                for (int n = 0; n <= 1; n++) {
+                                    weight += te.TEMPORARY_WEIGHTS.get(i).get(n);
+                                }
+                                te.WEIGHTS_OF_GEMS.put(GemFormation.POSSIBLE_GEMS_TIER_2.get(i), weight);
+                            }
+                        }
+                        if (!te.level.isClientSide) {
+                            //System.out.println(te.totalWeight);
+                            //System.out.println(te.essences);
+                            GemFormation form = new GemFormation(te.level, te.getBlockPos(), new BlockPos(GemSeedTE.DRAIN_SIZE, GemSeedTE.DRAIN_SIZE, GemSeedTE.DRAIN_SIZE), te.chroma, te.primer, te.essences, te.facing, te.WEIGHTS_OF_GEMS, te.totalWeight, te.tier);
+                            form.SpawnGem();
+                            level.sendBlockUpdated(te.getBlockPos(), te.getBlockState(), te.getBlockState(), 2);
+                            te.setChanged();
+                        }
                     }
                 }
             }
+            te.ticks++;
         }
-        te.ticks++;
     }
 
     public void ScanPositions(Level domhain, BlockPos position, BlockPos volume) {
@@ -360,7 +366,9 @@ public class GemSeedTE extends BlockEntity {
                 this.level.setBlockAndUpdate(blockPos, this.drained_log_cracked.defaultBlockState());
             } else if (block == Blocks.BLUE_ICE || block == Blocks.PACKED_ICE || block == Blocks.ICE) {
                 this.level.setBlockAndUpdate(blockPos, this.drained_ice.defaultBlockState());
-            } else if (block == Blocks.VINE ||block == Blocks.CAVE_VINES || block == Blocks.CAVE_VINES_PLANT) {
+            } else if (block == Blocks.VINE ||block == Blocks.CAVE_VINES || block == Blocks.CAVE_VINES_PLANT || block == Blocks.OAK_LEAVES || block == Blocks.DARK_OAK_LEAVES
+                    || block == Blocks.BIRCH_LEAVES || block == Blocks.JUNGLE_LEAVES || block == Blocks.ACACIA_LEAVES || block == Blocks.MANGROVE_LEAVES || block == Blocks.AZALEA_LEAVES
+                    || block == Blocks.FLOWERING_AZALEA_LEAVES || block == Blocks.SPRUCE_LEAVES) {
                 this.level.setBlockAndUpdate(blockPos, Blocks.AIR.defaultBlockState());
             } else {
                 if (blockPos.getY() < 80) {
