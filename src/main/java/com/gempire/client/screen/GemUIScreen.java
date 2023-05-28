@@ -4,7 +4,7 @@ import com.gempire.container.GemUIContainer;
 import com.gempire.entities.abilities.AbilityZilch;
 import com.gempire.entities.abilities.base.Ability;
 import com.gempire.init.ModPacketHandler;
-import com.gempire.networking.C2SRequestPoof;
+import com.gempire.networking.RequestPoof;
 import com.gempire.networking.C2SRequestUpdateGemName;
 import com.gempire.util.GUIUtilities;
 import com.mojang.blaze3d.platform.Lighting;
@@ -48,14 +48,14 @@ public class GemUIScreen extends AbstractContainerScreen<GemUIContainer> {
         this.nameBox = new EditBox(this.font, x + 27, y + 4, 144, 12, Component.translatable("Sussy"));
         this.nameBox.setBordered(true);
         this.nameBox.setVisible(true);
-        String name = this.menu.gem.customName() ? this.menu.gem.getCustomName().getString() : this.menu.gem.getNickname().getString();
+        String name = this.menu.gem.getName().getString();
         this.nameBox.setValue(name);
         this.nameBox.setFocus(true);
         //poof button
         addRenderableWidget(this.nameBox);
         this.setInitialFocus(this.nameBox);
         addRenderableWidget(new Button(this.leftPos + 10, this.topPos + 123, 83, 20, Component.translatable("screens.gempire.poof"), (button) -> {
-            ModPacketHandler.INSTANCE.sendToServer(new C2SRequestPoof(this.menu.gem.getId()));
+            ModPacketHandler.INSTANCE.sendToServer(new RequestPoof(this.menu.gem.getId()));
             this.onClose();
         }));
     }

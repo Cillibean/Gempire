@@ -50,7 +50,7 @@ public class PearlUIScreen extends AbstractContainerScreen<PearlUIContainer> {
         this.nameBox = new EditBox(this.font, x + 74, y + 9, 101, 12, Component.translatable("Sussy"));
         this.nameBox.setBordered(true);
         this.nameBox.setVisible(true);
-        String name = this.menu.gem.customName() ? this.menu.gem.getCustomName().getString() : this.menu.gem.getDisplayName().getString();
+        String name = this.menu.gem.getName().getString();
         this.nameBox.setValue(name);
         this.nameBox.setFocus(true);
         addRenderableWidget(this.nameBox);
@@ -58,7 +58,7 @@ public class PearlUIScreen extends AbstractContainerScreen<PearlUIContainer> {
 
         addRenderableWidget(new Button(this.leftPos + 10, this.topPos + 108, 83, 20, Component.translatable("screens.gempire.poof"),
                 (button) -> {
-            ModPacketHandler.INSTANCE.sendToServer(new C2SRequestPoof(this.menu.gem.getId()));
+            ModPacketHandler.INSTANCE.sendToServer(new RequestPoof(this.menu.gem.getId()));
             this.onClose();
         }));
 
@@ -121,7 +121,7 @@ public class PearlUIScreen extends AbstractContainerScreen<PearlUIContainer> {
         drawStats(matrixStack, i, j);
 
         int ddOffsetHair = this.menu.gem.getHairVariant() > 8 ? -3 : 0;
-        int ddOffsetOutfit = this.menu.gem.getOutfitVariant() > 9 ? -3 : 0;
+        int ddOffsetOutfit = this.menu.gem.getOutfitVariant() > 8 ? -3 : 0;
         int ddOffsetInsignia = this.menu.gem.getInsigniaVariant() > 9 ? -3 : 0;
 
         this.font.draw(matrixStack, Component.translatable("Hair:"),

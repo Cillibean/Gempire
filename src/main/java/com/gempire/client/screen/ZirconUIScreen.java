@@ -7,14 +7,13 @@ import com.gempire.entities.gems.EntityZircon;
 import com.gempire.init.ModEnchants;
 import com.gempire.init.ModPacketHandler;
 import com.gempire.networking.C2SRequestEnchant;
-import com.gempire.networking.C2SRequestPoof;
+import com.gempire.networking.RequestPoof;
 import com.gempire.networking.C2SRequestUpdateGemName;
 import com.gempire.util.GUIUtilities;
 import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.components.EditBox;
@@ -59,7 +58,7 @@ public class ZirconUIScreen extends AbstractContainerScreen<ZirconUIContainer> {
         this.nameBox = new EditBox(this.font, i + 15, j + 11, 110, 14,Component.translatable("Sussy"));
         this.nameBox.setBordered(false);
         this.nameBox.setVisible(true);
-        String name = this.menu.gem.customName() ? this.menu.gem.getCustomName().getString() : this.menu.gem.getNickname().getString();
+        String name = this.menu.gem.getName().getString();
         this.nameBox.setValue(name);
         this.nameBox.setFocus(true);
         addRenderableWidget(this.nameBox);
@@ -75,7 +74,7 @@ public class ZirconUIScreen extends AbstractContainerScreen<ZirconUIContainer> {
             ModPacketHandler.INSTANCE.sendToServer(new C2SRequestPageChange(this.container.gem.getEntityId(), true));
         }));*/
         addRenderableWidget(new Button(this.leftPos + 138, this.topPos + 81, 65, 20, Component.translatable("screens.gempire.poof"), (button) -> {
-            ModPacketHandler.INSTANCE.sendToServer(new C2SRequestPoof(this.menu.gem.getId()));
+            ModPacketHandler.INSTANCE.sendToServer(new RequestPoof(this.menu.gem.getId()));
             this.onClose();
         }));
         addRenderableWidget(new ImageButton(this.leftPos + 57, this.topPos + 57, 30, 10, 0, 0, 0, ZirconUIScreen.ENCHANT_BUTTON,

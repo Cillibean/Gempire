@@ -1,8 +1,6 @@
 package com.gempire.client.screen;
 
-import com.gempire.container.GemUIContainer;
 import com.gempire.container.PearlDefectiveUIContainer;
-import com.gempire.container.PearlUIContainer;
 import com.gempire.entities.abilities.AbilityZilch;
 import com.gempire.entities.abilities.base.Ability;
 import com.gempire.init.ModPacketHandler;
@@ -16,14 +14,12 @@ import com.mojang.math.Vector3f;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.EditBox;
-import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Inventory;
 
 import java.util.ArrayList;
@@ -50,14 +46,14 @@ public class PearlUIScreenDefective extends AbstractContainerScreen<PearlDefecti
         this.nameBox = new EditBox(this.font, x + 27, y + 4, 144, 12, Component.translatable("Sussy"));
         this.nameBox.setBordered(true);
         this.nameBox.setVisible(true);
-        String name = this.menu.gem.customName() ? this.menu.gem.getCustomName().getString() : this.menu.gem.getNickname().getString();
+        String name = this.menu.gem.getName().getString();
         this.nameBox.setValue(name);
         this.nameBox.setFocus(true);
         //poof button
         addRenderableWidget(this.nameBox);
         this.setInitialFocus(this.nameBox);
         addRenderableWidget(new Button(this.leftPos + 10, this.topPos + 123, 83, 20, Component.translatable("screens.gempire.poof"), (button) -> {
-            ModPacketHandler.INSTANCE.sendToServer(new C2SRequestPoof(this.menu.gem.getId()));
+            ModPacketHandler.INSTANCE.sendToServer(new RequestPoof(this.menu.gem.getId()));
             this.onClose();
         }));
     }
