@@ -27,6 +27,7 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.enchantment.EnchantmentInstance;
 import net.minecraft.world.level.Level;
 
 import javax.annotation.Nullable;
@@ -283,25 +284,53 @@ public class EntityZircon extends EntityVaryingGem {
         Item item = tool.getItem();
         if(this.currentPlayer.totalExperience >= xp) {
             if (!tool.isEmpty()) {
-                if (tool.isEnchantable() || item instanceof BookItem) {
+                if (tool.isEnchantable() || item instanceof BookItem || item instanceof EnchantedBookItem) {
                     if(level >= 1) {
-                        if (!this.isPrimary()) {
-                            if (tool.canApplyAtEnchantingTable(ModEnchants.VANILLA_ENCHANTMENTS.get(this.getEnchantPage())) || item instanceof BookItem) {
-                                tool.enchant(ModEnchants.VANILLA_ENCHANTMENTS.get(this.getEnchantPage()), level);
+                        if (item instanceof BookItem) {
+                            if (!this.isPrimary()) {
+                                this.setItem(1, Items.ENCHANTED_BOOK.getDefaultInstance());
+                                EnchantedBookItem.addEnchantment(this.getItem(1), new EnchantmentInstance(ModEnchants.VANILLA_ENCHANTMENTS.get(this.getEnchantPage()), level));
                                 this.setItem(0, ItemStack.EMPTY);
                                 this.setItem(2, ItemStack.EMPTY);
                                 decreaseExp(this.currentPlayer, xp);
                             } else {
-                                this.currentPlayer.sendSystemMessage(Component.translatable("messages.gempire.entity.enchant_not_apply"));
+                                this.setItem(1, Items.ENCHANTED_BOOK.getDefaultInstance());
+                                EnchantedBookItem.addEnchantment(this.getItem(1), new EnchantmentInstance(ModEnchants.GEMPIRE_ENCHANTMENTS.get(this.getEnchantPage()), level));
+                                this.setItem(0, ItemStack.EMPTY);
+                                this.setItem(2, ItemStack.EMPTY);
+                                decreaseExp(this.currentPlayer, xp);
+                            }
+                        } else if (item instanceof EnchantedBookItem) {
+                            if (!this.isPrimary()) {
+                                EnchantedBookItem.addEnchantment(tool, new EnchantmentInstance(ModEnchants.VANILLA_ENCHANTMENTS.get(this.getEnchantPage()), level));
+                                this.setItem(0, ItemStack.EMPTY);
+                                this.setItem(2, ItemStack.EMPTY);
+                                decreaseExp(this.currentPlayer, xp);
+                            } else {
+                                EnchantedBookItem.addEnchantment(tool, new EnchantmentInstance(ModEnchants.GEMPIRE_ENCHANTMENTS.get(this.getEnchantPage()), level));
+                                this.setItem(0, ItemStack.EMPTY);
+                                this.setItem(2, ItemStack.EMPTY);
+                                decreaseExp(this.currentPlayer, xp);
                             }
                         } else {
-                            if (tool.canApplyAtEnchantingTable(ModEnchants.GEMPIRE_ENCHANTMENTS.get(this.getEnchantPage())) || item instanceof BookItem) {
-                                tool.enchant(ModEnchants.GEMPIRE_ENCHANTMENTS.get(this.getEnchantPage()), level);
-                                this.setItem(0, ItemStack.EMPTY);
-                                this.setItem(2, ItemStack.EMPTY);
-                                decreaseExp(this.currentPlayer, xp);
+                            if (!this.isPrimary()) {
+                                if (tool.canApplyAtEnchantingTable(ModEnchants.VANILLA_ENCHANTMENTS.get(this.getEnchantPage())) || item instanceof BookItem) {
+                                    tool.enchant(ModEnchants.VANILLA_ENCHANTMENTS.get(this.getEnchantPage()), level);
+                                    this.setItem(0, ItemStack.EMPTY);
+                                    this.setItem(2, ItemStack.EMPTY);
+                                    decreaseExp(this.currentPlayer, xp);
+                                } else {
+                                    this.currentPlayer.sendSystemMessage(Component.translatable("messages.gempire.entity.enchant_not_apply"));
+                                }
                             } else {
-                                this.currentPlayer.sendSystemMessage(Component.translatable("messages.gempire.entity.enchant_not_apply"));
+                                if (tool.canApplyAtEnchantingTable(ModEnchants.GEMPIRE_ENCHANTMENTS.get(this.getEnchantPage())) || item instanceof BookItem) {
+                                    tool.enchant(ModEnchants.GEMPIRE_ENCHANTMENTS.get(this.getEnchantPage()), level);
+                                    this.setItem(0, ItemStack.EMPTY);
+                                    this.setItem(2, ItemStack.EMPTY);
+                                    decreaseExp(this.currentPlayer, xp);
+                                } else {
+                                    this.currentPlayer.sendSystemMessage(Component.translatable("messages.gempire.entity.enchant_not_apply"));
+                                }
                             }
                         }
                     }

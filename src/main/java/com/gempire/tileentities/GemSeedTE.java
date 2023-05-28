@@ -360,6 +360,8 @@ public class GemSeedTE extends BlockEntity {
                 this.level.setBlockAndUpdate(blockPos, this.drained_log_cracked.defaultBlockState());
             } else if (block == Blocks.BLUE_ICE || block == Blocks.PACKED_ICE || block == Blocks.ICE) {
                 this.level.setBlockAndUpdate(blockPos, this.drained_ice.defaultBlockState());
+            } else if (block == Blocks.VINE ||block == Blocks.CAVE_VINES || block == Blocks.CAVE_VINES_PLANT) {
+                this.level.setBlockAndUpdate(blockPos, Blocks.AIR.defaultBlockState());
             } else {
                 if (blockPos.getY() < 80) {
                     this.level.setBlockAndUpdate(blockPos, this.drained_stone.defaultBlockState());
