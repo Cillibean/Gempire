@@ -156,6 +156,7 @@
   "item.gempire.white_essence": "White Gem Essence",
 
   "item.gempire.ruby_gem": "Ruby Gem",
+
   "item.gempire.sapphire_gem_0": "White Sapphire Gem",
   "item.gempire.sapphire_gem_1": "Padparadscha Gem",
   "item.gempire.sapphire_gem_2": "Magenta Sapphire Gem",
@@ -374,6 +375,22 @@
   "entity.gempire.abomination": "Abomination",
 
   "effect.gempire.paralysis": "Paralysis",
+
+  "nickname.gempire.sapphire_gem_0": "White Sapphire",
+  "nickname.gempire.sapphire_gem_1": "Padparadscha",
+  "nickname.gempire.sapphire_gem_2": "Magenta Sapphire",
+  "nickname.gempire.sapphire_gem_3": "Cornflower Sapphire",
+  "nickname.gempire.sapphire_gem_4": "Canary Sapphire",
+  "nickname.gempire.sapphire_gem_5": "Lime Sapphire",
+  "nickname.gempire.sapphire_gem_6": "Pink Sapphire",
+  "nickname.gempire.sapphire_gem_7": "Gray Sapphire",
+  "nickname.gempire.sapphire_gem_8": "Light Gray Sapphire",
+  "nickname.gempire.sapphire_gem_9": "Montana Sapphire",
+  "nickname.gempire.sapphire_gem_10": "Winza Sapphire",
+  "nickname.gempire.sapphire_gem_11": "Blue Sapphire",
+  "nickname.gempire.sapphire_gem_12": "Mekong Sapphire",
+  "nickname.gempire.sapphire_gem_13": "Green Sapphire",
+  "nickname.gempire.sapphire_gem_15": "Black Sapphire Gem",
 
   "nickname.gempire.garnet_0": "Leuco Garnet",
   "nickname.gempire.garnet_1": "Hessonite",
