@@ -36,12 +36,14 @@ public class RequestPoof {
         ServerPlayer sender = ctx.getSender();
         boolean hasPermission = true;
         if (hasPermission) {
-            if (sender != null ) {
-                EntityGem gem = (EntityGem) sender.level.getEntity(msg.entityID);
-                if (gem != null) {
-                    gem.hurt(DamageSource.MAGIC, gem.getMaxHealth() * 20);
+            ctx.enqueueWork(() -> {
+                if (sender != null ) {
+                    EntityGem gem = (EntityGem) sender.level.getEntity(msg.entityID);
+                    if (gem != null) {
+                        gem.hurt(DamageSource.MAGIC, gem.getMaxHealth() * 20);
+                    }
                 }
-            }
+            });
             ctx.setPacketHandled(true);
         }
     }

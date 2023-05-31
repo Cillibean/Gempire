@@ -25,6 +25,8 @@ public class EntityAIShamblerAttackGoal extends MeleeAttackGoal {
                     if (((EntityGem) pEnemy).getSludgeAmount() < 5) {
                         entity.setAttacking(true);
                         animCounter = 0;
+                    } else {
+                        stop();
                     }
                 } else {
                     entity.setAttacking(true);

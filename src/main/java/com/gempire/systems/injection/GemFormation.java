@@ -398,7 +398,7 @@ public class GemFormation {
                     } else {
                         r -= WEIGHTS_OF_GEMS.get(gem);
                     }
-                    System.out.println(gem);
+                    System.out.println(WEIGHTS_OF_GEMS.get(gem));
                     System.out.println(r);
                     System.out.println();
                 /*if (WEIGHTS_OF_GEMS.get(gem) < 12) {
@@ -420,14 +420,14 @@ public class GemFormation {
                         lowestR3 = r;
                         lowestRGem3 = gem;
                     }
-                    System.out.println("lowest: " + lowestRGem);
-                    System.out.println("lowest: " + lowestR);
-                    System.out.println("lowest 2: " + lowestRGem2);
-                    System.out.println("lowest 2: " + lowestR2);
-                    System.out.println("lowest 3: " + lowestRGem3);
-                    System.out.println("lowest 3: " + lowestR3);
                 }
                 int r2 = rand.nextInt(4);
+                System.out.println("lowest: " + lowestRGem);
+                System.out.println("lowest: " + lowestR);
+                System.out.println("lowest 2: " + lowestRGem2);
+                System.out.println("lowest 2: " + lowestR2);
+                System.out.println("lowest 3: " + lowestRGem3);
+                System.out.println("lowest 3: " + lowestR3);
                     switch (r2) {
                         case 0,3 -> {
                             returnGem = lowestRGem;
@@ -599,7 +599,7 @@ public class GemFormation {
                     } else {
                         r -= WEIGHTS_OF_GEMS.get(gem);
                     }
-                    System.out.println(gem);
+                    System.out.println(WEIGHTS_OF_GEMS.get(gem));
                     System.out.println(r);
                     System.out.println();
                 /*if (WEIGHTS_OF_GEMS.get(gem) < 12) {
@@ -621,12 +621,6 @@ public class GemFormation {
                         lowestR3 = r;
                         lowestRGem3 = gem;
                     }
-                    System.out.println("lowest: " + lowestRGem);
-                    System.out.println("lowest: " + lowestR);
-                    System.out.println("lowest 2: " + lowestRGem2);
-                    System.out.println("lowest 2: " + lowestR2);
-                    System.out.println("lowest 3: " + lowestRGem3);
-                    System.out.println("lowest 3: " + lowestR3);
                 }
                 int r2 = rand.nextInt(4);
                 switch (r2) {
@@ -643,6 +637,12 @@ public class GemFormation {
                         weight = (float) (totalWeight - lowestR3);
                     }
                 }
+                System.out.println("lowest: " + lowestRGem);
+                System.out.println("lowest: " + lowestR);
+                System.out.println("lowest 2: " + lowestRGem2);
+                System.out.println("lowest 2: " + lowestR2);
+                System.out.println("lowest 3: " + lowestRGem3);
+                System.out.println("lowest 3: " + lowestR3);
             } else if (world.dimension() == Level.NETHER) {
                 for (String gem : NETHER_POSSIBLE_GEMS_TIER_2) {
                     boolean primed = false;

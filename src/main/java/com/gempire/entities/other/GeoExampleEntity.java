@@ -1,6 +1,9 @@
 package com.gempire.entities.other;
 
 import com.gempire.entities.bases.EntityGem;
+import com.gempire.entities.other.EntityAbomination;
+import com.gempire.entities.other.EntityCrawler;
+import com.gempire.entities.other.EntityShambler;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.PathfinderMob;

@@ -1,6 +1,9 @@
 package com.gempire.networking;
 
 import com.gempire.entities.bases.EntityGem;
+import com.gempire.entities.other.EntityAbomination;
+import com.gempire.entities.other.EntityCrawler;
+import com.gempire.entities.other.EntityShambler;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.network.FriendlyByteBuf;

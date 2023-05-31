@@ -366,6 +366,10 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         return this.getSludgeAmount() >= 5;
     }
 
+    public boolean checkNotSludged(LivingEntity entity) {
+        return this.getSludgeAmount() < 5;
+    }
+
     public boolean checkBothSludged(LivingEntity entity) {
         return this.getSludgeAmount() >= 5 && ((EntityGem) entity).getSludgeAmount() >= 5;
     }
@@ -478,7 +482,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         compound.putFloat("xscale", this.getXScale());
         compound.putFloat("yscale", this.getYScale());
         compound.putFloat("zscale", this.getZScale());
-        compound.putString("name", this.getName().toString());
+        compound.putString("name", this.getName().getString());
         this.writeStructures(compound);
         if(this instanceof EntityPearl) {
             ContainerHelper.saveAllItems(compound, ((EntityPearl) this).getItems1());
