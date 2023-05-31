@@ -164,7 +164,7 @@ public class GemFormation {
         }
         System.out.println("placement");
         double rarity = 1 / CONDITIONS.get(gemtoform).rarity;
-        double check = weight / rarity;
+        double check = weight;
         System.out.println("weight / rarity check "+weight / rarity);
         System.out.println("weight "+weight);
         if (world.dimension() != Level.NETHER && world.dimension() != Level.END) {
@@ -599,8 +599,8 @@ public class GemFormation {
                     } else {
                         r -= WEIGHTS_OF_GEMS.get(gem);
                     }
+                    System.out.println(gem);
                     System.out.println(WEIGHTS_OF_GEMS.get(gem));
-                    System.out.println(r);
                     System.out.println();
                 /*if (WEIGHTS_OF_GEMS.get(gem) < 12) {
                     r = 1000000;
