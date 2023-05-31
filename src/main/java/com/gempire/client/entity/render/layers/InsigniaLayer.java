@@ -3,6 +3,7 @@ package com.gempire.client.entity.render.layers;
 import com.gempire.Gempire;
 import com.gempire.client.entity.model.ModelGem;
 import com.gempire.entities.bases.EntityGem;
+
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;

@@ -528,20 +528,19 @@ public class ItemGem extends Item {
     }
 
     public void Countdown(ItemStack stack, ItemEntity entity) {
-        if (!getCracked(stack)) {
-            if (this.countdown > 0) {
-                if (this.countdown < (int) Math.floor(this.coundownMax / 6)) {
+        boolean finished = false;
+            if (!getCracked(stack) && !getSludged(stack)) {
+                if (this.countdown > 0) {
+                    this.countdown--;
+                } else {
                     this.doEffect = true;
                     float f = (this.rand.nextFloat() - 0.5F) * 2.0F;
                     float f1 = (this.rand.nextFloat() - 0.5F) * 2.0F;
                     float f2 = (this.rand.nextFloat() - 0.5F) * 2.0F;
                     entity.level.addParticle(ParticleTypes.EXPLOSION, entity.getX() + (double) f, entity.getY() + 2.0D + (double) f1, entity.getZ() + (double) f2, 0.0D, 0.0D, 0.0D);
+                    this.formGem(entity.level, null, entity.blockPosition(), stack, entity);
+                    this.countdown = this.coundownMax;
                 }
-                this.countdown--;
-            } else {
-                this.formGem(entity.level, null, entity.blockPosition(), stack, entity);
-                this.countdown = this.coundownMax;
             }
-        }
     }
 }

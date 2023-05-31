@@ -370,6 +370,8 @@ public class GemSeedTE extends BlockEntity {
                     || block == Blocks.BIRCH_LEAVES || block == Blocks.JUNGLE_LEAVES || block == Blocks.ACACIA_LEAVES || block == Blocks.MANGROVE_LEAVES || block == Blocks.AZALEA_LEAVES
                     || block == Blocks.FLOWERING_AZALEA_LEAVES || block == Blocks.SPRUCE_LEAVES) {
                 this.level.setBlockAndUpdate(blockPos, Blocks.AIR.defaultBlockState());
+            } else if (block == Blocks.SNOW_BLOCK || block == Blocks.POWDER_SNOW) {
+                this.level.setBlockAndUpdate(blockPos, Blocks.WATER.defaultBlockState());
             } else {
                 if (blockPos.getY() < 80) {
                     this.level.setBlockAndUpdate(blockPos, this.drained_stone.defaultBlockState());

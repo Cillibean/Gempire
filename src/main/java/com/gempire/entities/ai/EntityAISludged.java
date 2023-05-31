@@ -3,6 +3,8 @@ package com.gempire.entities.ai;
 import com.gempire.entities.bases.EntityGem;
 import com.gempire.entities.gems.EntitySpodumene;
 import net.minecraft.world.entity.ai.goal.Goal;
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 
 import java.util.List;
@@ -44,6 +46,7 @@ public class EntityAISludged extends Goal {
     @Override
     public void start(){
         super.start();
+        follower.targetSelector.removeAllGoals();
         if(!(this.follower instanceof EntitySpodumene)){
             this.follower.setPathfindingMalus(BlockPathTypes.WATER, 0);
         }
