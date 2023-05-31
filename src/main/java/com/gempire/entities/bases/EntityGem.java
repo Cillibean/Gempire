@@ -839,31 +839,32 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                 }
                 //This part of the code checks if the player has a blank hand
                 if (!level.isClientSide) {
-                    if (hand == InteractionHand.MAIN_HAND) {
-                        if (player.getItemInHand(hand).isEmpty()) {
-                            this.currentPlayer = player;
-                            if (this.isOwner(player)) {
-                                if (!this.isDeadOrDying()) {
-                                    if (player.isShiftKeyDown()) {
-                                        this.cycleMovementAI(player);
-                                        this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
-                                        if (OWNERS.size() <= 1 && this.MASTER_OWNER != player.getUUID()) {
-                                            MASTER_OWNER = player.getUUID();
-                                            System.out.println("Added master owner");
-                                        }
-                                    } else {
-                                        if (this.canOpenInventoryByDefault()) {
-                                            NetworkHooks.openScreen((ServerPlayer) player, this, buf -> buf.writeInt(this.getId()));
+                    if (!player.isSpectator()) {
+                        if (hand == InteractionHand.MAIN_HAND) {
+                            if (player.getItemInHand(hand).isEmpty()) {
+                                this.currentPlayer = player;
+                                if (this.isOwner(player)) {
+                                    if (!this.isDeadOrDying()) {
+                                        if (player.isShiftKeyDown()) {
+                                            this.cycleMovementAI(player);
                                             this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
-                                        }
-                                        if (this.isRideable()) {
-                                            if (!this.isVehicle()) {
-                                                player.startRiding(this);
+                                            if (OWNERS.size() <= 1 && this.MASTER_OWNER != player.getUUID()) {
+                                                MASTER_OWNER = player.getUUID();
+                                                System.out.println("Added master owner");
+                                            }
+                                        } else {
+                                            if (this.canOpenInventoryByDefault()) {
+                                                NetworkHooks.openScreen((ServerPlayer) player, this, buf -> buf.writeInt(this.getId()));
                                                 this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
+                                            }
+                                            if (this.isRideable()) {
+                                                if (!this.isVehicle()) {
+                                                    player.startRiding(this);
+                                                    this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
+                                                }
                                             }
                                         }
                                     }
-                                }
                                 } else {
                                     //Test to see if the gem has an owner
                                     if (!this.getOwned()) {
@@ -916,44 +917,47 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                                         }
                                     }
                                 }
+                            }
+                            //}
                         }
-                    //}
+                    }
                 }
-            }
         }
         if (!level.isClientSide) {
-            System.out.println("entity check");
-            if (this.canCraft()) {
-                System.out.println("passed entity check");
-                System.out.println(getRecipeAmount());
-                for (int i = 0; i <= getRecipeAmount(); i++) {
-                    System.out.println(i);
-                    System.out.println("input item check");
-                    if (player.getItemInHand(hand).getItem() == getInputItem(i)) {
-                        System.out.println("hand check 1");
-                        if (!isCrafting) {
-                            System.out.println("is crafting check");
-                            if (hand == InteractionHand.MAIN_HAND) {
-                                System.out.println("hand check 2");
-                                if (getInputItem(i) != Items.AIR.asItem()) {
-                                    System.out.println("input item air check");
-                                    inputList.clear();
-                                    setCurrentRecipe(i);
-                                    if (this.isOwner(player)) {
-                                        isCrafting = true;
-                                        this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
-                                        if (!player.isCreative()) {
-                                            player.getMainHandItem().shrink(1);
+            if (!player.isSpectator()) {
+                System.out.println("entity check");
+                if (this.canCraft()) {
+                    System.out.println("passed entity check");
+                    System.out.println(getRecipeAmount());
+                    for (int i = 0; i <= getRecipeAmount(); i++) {
+                        System.out.println(i);
+                        System.out.println("input item check");
+                        if (player.getItemInHand(hand).getItem() == getInputItem(i)) {
+                            System.out.println("hand check 1");
+                            if (!isCrafting) {
+                                System.out.println("is crafting check");
+                                if (hand == InteractionHand.MAIN_HAND) {
+                                    System.out.println("hand check 2");
+                                    if (getInputItem(i) != Items.AIR.asItem()) {
+                                        System.out.println("input item air check");
+                                        inputList.clear();
+                                        setCurrentRecipe(i);
+                                        if (this.isOwner(player)) {
+                                            isCrafting = true;
+                                            this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
+                                            if (!player.isCreative()) {
+                                                player.getMainHandItem().shrink(1);
+                                            }
+                                            break;
                                         }
-                                        break;
                                     }
                                 }
                             }
                         }
                     }
+                    inputList.clear();
+                    outputList.clear();
                 }
-                inputList.clear();
-                outputList.clear();
             }
         }
         return super.interactAt(player, vec, hand);
