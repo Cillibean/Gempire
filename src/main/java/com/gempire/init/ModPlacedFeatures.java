@@ -17,7 +17,7 @@ public class ModPlacedFeatures {
 
     public static final RegistryObject<PlacedFeature> TUNGSTEN_ORE_PLACED = PLACED_FEATURES.register("tungsten_ore_placed",
             () -> new PlacedFeature(ModConfiguredFeatures.TUNGSTEN_ORE.getHolder().get(),
-                    commonOrePlacement(60, // VeinsPerChunk
+                    commonOrePlacement(30, // VeinsPerChunk
                             HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-80), VerticalAnchor.aboveBottom(384)))));
 
     public static List<PlacementModifier> orePlacement(PlacementModifier p_195347_, PlacementModifier p_195348_) {

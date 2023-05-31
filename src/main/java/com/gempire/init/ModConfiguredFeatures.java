@@ -26,5 +26,5 @@ public class ModConfiguredFeatures {
             OreConfiguration.target(OreFeatures.DEEPSLATE_ORE_REPLACEABLES, ModBlocks.DEEPSLATE_TUNGSTEN_ORE.get().defaultBlockState())));
 
     public static final RegistryObject<ConfiguredFeature<?, ?>> TUNGSTEN_ORE = CONFIGURED_FEATURES.register("tungsten_ore",
-            () -> new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(TUNGSTEN_ORES.get(),9)));
+            () -> new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(TUNGSTEN_ORES.get(),7, 0.5F)));
 }
