@@ -210,9 +210,8 @@ public class GemSeedTE extends BlockEntity {
                             if (block != crux.block) {
                                 if (block.defaultBlockState().is(Tags.Blocks.STONE)) {
                                     totalWeight += 1;
-                                    totalWeight += GEM_CONDITIONS.get(gem).rarity;
                                     gemWeight += 1 * (1 - temperatureDifference);
-                                    gemWeight += 1 - temperatureDifference;
+                                    gemWeight += (1 - temperatureDifference);
                                     for (int n = 0; n <= 1; n++){
                                         TEMPORARY_WEIGHTS.get(i).add(n, gemWeight);
                                     }
@@ -224,7 +223,7 @@ public class GemSeedTE extends BlockEntity {
                             } else {
                                 totalWeight += 1;
                                 totalWeight += crux.weight * GEM_CONDITIONS.get(gem).rarity;
-                                gemWeight += 1 * (1 - temperatureDifference);
+                                gemWeight += 1 - temperatureDifference;
                                 gemWeight += crux.weight * (1 - temperatureDifference);
                                 for (int n = 0; n <= 1; n++){
                                     TEMPORARY_WEIGHTS.get(i).add(n, gemWeight);
