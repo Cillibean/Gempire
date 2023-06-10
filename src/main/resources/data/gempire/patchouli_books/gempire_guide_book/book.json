@@ -1,6 +1,6 @@
 {
   "name": "GEM Field Guide",
-  "landing_text": "Welcome to the Gempire mod! The best way to start is creating Pebbles using essence, check their pages!$(br)Pages for other gems will be added when you obtain them.",
+  "landing_text": "Welcome to the Gempire mod! The best way to start is creating Pebble gems using different colors of gem essence.$(br)Check their pages for more info!$(br)Pages for other gems will be added when you obtain them.",
   "version": 1,
   "book_texture": "gempire:textures/gui/patchouli/book_gem.png",
   "nameplate_color": "FFFFFF",
