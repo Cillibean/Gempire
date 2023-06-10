@@ -484,9 +484,6 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         compound.putFloat("zscale", this.getZScale());
         compound.putString("name", this.getName().getString());
         this.writeStructures(compound);
-        if(this instanceof EntityPearl) {
-            ContainerHelper.saveAllItems(compound, ((EntityPearl) this).getItems1());
-        }
         ContainerHelper.saveAllItems(compound, this.items);
     }
 
@@ -744,7 +741,6 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                 abilityTicks--;
             }
             if (enemyDying) {
-                System.out.println(enemy.getHealth());
                 if (enemy.getHealth() <= 0) {
                     if (enemy.getLastHurtByMob() == this) {
                         dropXP(enemy);
@@ -839,31 +835,32 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                 }
                 //This part of the code checks if the player has a blank hand
                 if (!level.isClientSide) {
-                    if (hand == InteractionHand.MAIN_HAND) {
-                        if (player.getItemInHand(hand).isEmpty()) {
-                            this.currentPlayer = player;
-                            if (this.isOwner(player)) {
-                                if (!this.isDeadOrDying()) {
-                                    if (player.isShiftKeyDown()) {
-                                        this.cycleMovementAI(player);
-                                        this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
-                                        if (OWNERS.size() <= 1 && this.MASTER_OWNER != player.getUUID()) {
-                                            MASTER_OWNER = player.getUUID();
-                                            System.out.println("Added master owner");
-                                        }
-                                    } else {
-                                        if (this.canOpenInventoryByDefault()) {
-                                            NetworkHooks.openScreen((ServerPlayer) player, this, buf -> buf.writeInt(this.getId()));
+                    if (!player.isSpectator()) {
+                        if (hand == InteractionHand.MAIN_HAND) {
+                            if (player.getItemInHand(hand).isEmpty()) {
+                                this.currentPlayer = player;
+                                if (this.isOwner(player)) {
+                                    if (!this.isDeadOrDying()) {
+                                        if (player.isShiftKeyDown()) {
+                                            this.cycleMovementAI(player);
                                             this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
-                                        }
-                                        if (this.isRideable()) {
-                                            if (!this.isVehicle()) {
-                                                player.startRiding(this);
+                                            if (OWNERS.size() <= 1 && this.MASTER_OWNER != player.getUUID()) {
+                                                MASTER_OWNER = player.getUUID();
+                                                System.out.println("Added master owner");
+                                            }
+                                        } else {
+                                            if (this.canOpenInventoryByDefault()) {
+                                                NetworkHooks.openScreen((ServerPlayer) player, this, buf -> buf.writeInt(this.getId()));
                                                 this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
+                                            }
+                                            if (this.isRideable()) {
+                                                if (!this.isVehicle()) {
+                                                    player.startRiding(this);
+                                                    this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
+                                                }
                                             }
                                         }
                                     }
-                                }
                                 } else {
                                     //Test to see if the gem has an owner
                                     if (!this.getOwned()) {
@@ -871,9 +868,6 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                                             this.addOwner(player.getUUID());
                                             this.addMasterOwner(player.getUUID());
                                             setFollow(player.getUUID());
-                                            if (getAssignedGem() != null) {
-                                                setAssignedId(getAssignedGem().getUUID());
-                                            }
                                             player.sendSystemMessage(Component.literal("Claimed ").append(getName().getString()).append(" " + getFacetAndCut()));
                                             this.setMovementType((byte) 2);
                                             this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
@@ -916,44 +910,47 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                                         }
                                     }
                                 }
+                            }
+                            //}
                         }
-                    //}
+                    }
                 }
-            }
         }
         if (!level.isClientSide) {
-            System.out.println("entity check");
-            if (this.canCraft()) {
-                System.out.println("passed entity check");
-                System.out.println(getRecipeAmount());
-                for (int i = 0; i <= getRecipeAmount(); i++) {
-                    System.out.println(i);
-                    System.out.println("input item check");
-                    if (player.getItemInHand(hand).getItem() == getInputItem(i)) {
-                        System.out.println("hand check 1");
-                        if (!isCrafting) {
-                            System.out.println("is crafting check");
-                            if (hand == InteractionHand.MAIN_HAND) {
-                                System.out.println("hand check 2");
-                                if (getInputItem(i) != Items.AIR.asItem()) {
-                                    System.out.println("input item air check");
-                                    inputList.clear();
-                                    setCurrentRecipe(i);
-                                    if (this.isOwner(player)) {
-                                        isCrafting = true;
-                                        this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
-                                        if (!player.isCreative()) {
-                                            player.getMainHandItem().shrink(1);
+            if (!player.isSpectator()) {
+                System.out.println("entity check");
+                if (this.canCraft()) {
+                    System.out.println("passed entity check");
+                    System.out.println(getRecipeAmount());
+                    for (int i = 0; i <= getRecipeAmount(); i++) {
+                        System.out.println(i);
+                        System.out.println("input item check");
+                        if (player.getItemInHand(hand).getItem() == getInputItem(i)) {
+                            System.out.println("hand check 1");
+                            if (!isCrafting) {
+                                System.out.println("is crafting check");
+                                if (hand == InteractionHand.MAIN_HAND) {
+                                    System.out.println("hand check 2");
+                                    if (getInputItem(i) != Items.AIR.asItem()) {
+                                        System.out.println("input item air check");
+                                        inputList.clear();
+                                        setCurrentRecipe(i);
+                                        if (this.isOwner(player)) {
+                                            isCrafting = true;
+                                            this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
+                                            if (!player.isCreative()) {
+                                                player.getMainHandItem().shrink(1);
+                                            }
+                                            break;
                                         }
-                                        break;
                                     }
                                 }
                             }
                         }
                     }
+                    inputList.clear();
+                    outputList.clear();
                 }
-                inputList.clear();
-                outputList.clear();
             }
         }
         return super.interactAt(player, vec, hand);
@@ -993,7 +990,6 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             if (((ServerLevel)this.level).getEntity(ASSIGNED_ID) instanceof EntityGem) {
                 return (EntityGem) ((ServerLevel) this.level).getEntity(ASSIGNED_ID);
             } else {
-                System.out.println("not a gem");
                 return null;
             }
         } else {
@@ -1013,11 +1009,8 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             //Cycles through the various movement types.
             this.navigation.stop();
             setFollow(player.getUUID());
-            if (getAssignedGem() != null) {
-                setAssignedId(getAssignedGem().getUUID());
-            }
             System.out.println("Assigned ID " + ASSIGNED_ID);
-            System.out.println("ASSIGNED " + getAssignedGem());
+            System.out.println("assigned  " + getAssignedGem());
             this.GUARD_POS = this.getOnPos().above();
             if (getAssignedGem() != null ? this.getMovementType() < 3 : this.getMovementType() < 2) {
                 this.addMovementType(1);
@@ -1129,10 +1122,8 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     public void dropXP(LivingEntity entityIn) {
         if (!entityIn.level.isClientSide) {
             if (entityIn.level instanceof ServerLevel) {
-                System.out.println("experience reward check");
                 int reward = net.minecraftforge.event.ForgeEventFactory.getExperienceDrop(entityIn, this.currentPlayer, entityIn.getExperienceReward());
                 ExperienceOrb.award((ServerLevel) entityIn.level, entityIn.position(), reward);
-                System.out.println("experience reward awarded");
             }
         }
     }

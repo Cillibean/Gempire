@@ -38,10 +38,12 @@ public class C2SRequestUpdateGemName {
         assert sender != null;
         EntityGem gem = (EntityGem) sender.level.getEntity(msg.entityID);
         assert gem != null;
-        if(!gem.customName()){
-            gem.setHasCustomName(true);
-        }
-        gem.setCustomName(Component.translatable(msg.newName));
+        ctx.enqueueWork(() -> {
+                    if (!gem.customName()) {
+                        gem.setHasCustomName(true);
+                    }
+                    gem.setCustomName(Component.translatable(msg.newName));
+                });
         ctx.setPacketHandled(true);
     }
 }

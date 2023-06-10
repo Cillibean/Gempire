@@ -112,20 +112,21 @@ public class GemSeedTE extends BlockEntity {
                                 for (int n = 0; n <= 1; n++) {
                                     weight += te.TEMPORARY_WEIGHTS.get(i).get(n);
                                 }
-                                te.WEIGHTS_OF_GEMS.put(GemFormation.POSSIBLE_GEMS_TIER_1.get(i), weight);
-                            }
+                                GemConditions conditions = te.GEM_CONDITIONS.get(GemFormation.POSSIBLE_GEMS_TIER_1.get(i));
+                                weight*=conditions.rarity;
+                                te.WEIGHTS_OF_GEMS.put(GemFormation.POSSIBLE_GEMS_TIER_1.get(i), weight);                            }
                         } else if (te.tier == 2) {
                             for (int i = 0; i < GemFormation.POSSIBLE_GEMS_TIER_2.size(); i++) {
                                 float weight = 0;
                                 for (int n = 0; n <= 1; n++) {
                                     weight += te.TEMPORARY_WEIGHTS.get(i).get(n);
                                 }
+                                GemConditions conditions = te.GEM_CONDITIONS.get(GemFormation.POSSIBLE_GEMS_TIER_2.get(i));
+                                weight*=conditions.rarity;
                                 te.WEIGHTS_OF_GEMS.put(GemFormation.POSSIBLE_GEMS_TIER_2.get(i), weight);
                             }
                         }
                         if (!te.level.isClientSide) {
-                            //System.out.println(te.totalWeight);
-                            //System.out.println(te.essences);
                             GemFormation form = new GemFormation(te.level, te.getBlockPos(), new BlockPos(GemSeedTE.DRAIN_SIZE, GemSeedTE.DRAIN_SIZE, GemSeedTE.DRAIN_SIZE), te.chroma, te.primer, te.essences, te.facing, te.WEIGHTS_OF_GEMS, te.totalWeight, te.tier);
                             form.SpawnGem();
                             level.sendBlockUpdated(te.getBlockPos(), te.getBlockState(), te.getBlockState(), 2);
@@ -212,7 +213,6 @@ public class GemSeedTE extends BlockEntity {
                                     totalWeight += GEM_CONDITIONS.get(gem).rarity;
                                     gemWeight += 1 * (1 - temperatureDifference);
                                     gemWeight += 1 - temperatureDifference;
-                                    gemWeight *= GEM_CONDITIONS.get(gem).rarity;
                                     for (int n = 0; n <= 1; n++){
                                         TEMPORARY_WEIGHTS.get(i).add(n, gemWeight);
                                     }
@@ -226,7 +226,6 @@ public class GemSeedTE extends BlockEntity {
                                 totalWeight += crux.weight * GEM_CONDITIONS.get(gem).rarity;
                                 gemWeight += 1 * (1 - temperatureDifference);
                                 gemWeight += crux.weight * (1 - temperatureDifference);
-                                gemWeight *= GEM_CONDITIONS.get(gem).rarity;
                                 for (int n = 0; n <= 1; n++){
                                     TEMPORARY_WEIGHTS.get(i).add(n, gemWeight);
                                 }
@@ -282,9 +281,8 @@ public class GemSeedTE extends BlockEntity {
                             if (block != crux.block) {
                                 if (block.defaultBlockState().is(Tags.Blocks.STONE)) {
                                     totalWeight += 1;
-                                    totalWeight += GEM_CONDITIONS.get(gem).rarity;
                                     gemWeight += 1 * (1 - temperatureDifference);
-                                    gemWeight += (1 - temperatureDifference) * GEM_CONDITIONS.get(gem).rarity;
+                                    gemWeight += (1 - temperatureDifference);
                                     for (int n = 0; n <= 1; n++){
                                         TEMPORARY_WEIGHTS.get(i).add(n, gemWeight);
                                     }
@@ -296,8 +294,8 @@ public class GemSeedTE extends BlockEntity {
                             } else {
                                 totalWeight += 1;
                                 totalWeight += crux.weight * GEM_CONDITIONS.get(gem).rarity;
-                                gemWeight += 1 * (1 - temperatureDifference);
-                                gemWeight += crux.weight * (1 - temperatureDifference) * GEM_CONDITIONS.get(gem).rarity;;
+                                gemWeight += 1 - temperatureDifference;
+                                gemWeight += crux.weight * (1 - temperatureDifference);
                                 for (int n = 0; n <= 1; n++){
                                     TEMPORARY_WEIGHTS.get(i).add(n, gemWeight);
                                 }

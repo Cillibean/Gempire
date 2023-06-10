@@ -101,6 +101,7 @@ public class ItemGem extends Item {
                         isAssigned = true;*/
                     } else {
                         stack.getOrCreateTag().putUUID("assignedID", entity.getUUID());
+                        System.out.println(entity.getUUID());
                         player.sendSystemMessage(Component.translatable("This Gem was assigned to "+ entity.getName().getString() + ", " +((EntityGem) entity).getFacetAndCut()));
                         livingEntityHit = true;
                         /*System.out.println("gem interact");
@@ -241,6 +242,9 @@ public class ItemGem extends Item {
                         System.out.println("try");
                         gem.setDefective(stack.getTag().getBoolean("defective"));
                         gem.setPrimary(stack.getTag().getBoolean("prime"));
+                        if (stack.getTag().getBoolean("assigned")) {
+                            gem.setAssignedId(stack.getOrCreateTag().getUUID("assignedID"));
+                        }
                         if (item != null) {
                             System.out.println("item not null");
                             gem.spawnGem = item;
@@ -317,6 +321,9 @@ public class ItemGem extends Item {
                             gem.addMasterOwner(player.getUUID());
                         }
                         gem.FOLLOW_ID = player.getUUID();
+                        if (checkTags(stack)) {
+                            gem.ASSIGNED_ID = stack.getOrCreateTag().getUUID("assignedID");
+                        }
                         gem.setMovementType((byte) 2);
                     } else {
                         if (item != null) {
@@ -390,7 +397,6 @@ public class ItemGem extends Item {
                 if (gem.getZScale() == 0) {
                     gem.generateZScale();
                 }
-                //gem.setAssignedId(stack.getOrCreateTag().getUUID("assignedID"));
                 gem.setPos(pos.getX() + 0.5, pos.getY() + 1.0, pos.getZ() + 0.5);
                 gem.setHealth(gem.getMaxHealth());
                 gem.GUARD_POS = gem.getOnPos().above();

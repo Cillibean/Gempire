@@ -32,14 +32,15 @@ public class C2SRequestInsigniaChange {
         ServerPlayer sender = ctx.getSender();
         boolean hasPermission = true;
         if (hasPermission) {
-            EntityPearl gem = (EntityPearl) sender.level.getEntity(msg.entityID);
-            boolean forwardd = msg.forward;
-            if(forwardd){
-                gem.CycleInsigniaForward();
-            }
-            else{
-                gem.CycleInsigniaBackwards();
-            }
+            ctx.enqueueWork(() -> {
+                EntityPearl gem = (EntityPearl) sender.level.getEntity(msg.entityID);
+                boolean forwardd = msg.forward;
+                if (forwardd) {
+                    gem.CycleInsigniaForward();
+                } else {
+                    gem.CycleInsigniaBackwards();
+                }
+            });
         }
         ctx.setPacketHandled(true);
     }

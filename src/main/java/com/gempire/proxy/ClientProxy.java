@@ -87,7 +87,6 @@ public class ClientProxy {
         MenuScreens.register(ModContainers.SHELL_CONTAINER.get(), ShellScreen::new);
         MenuScreens.register(ModContainers.PEARL_UI_CONTAINER.get(), PearlUIScreen::new);
         MenuScreens.register(ModContainers.PEARL_DEFECTIVE_UI_CONTAINER.get(), PearlUIScreenDefective::new);
-        MenuScreens.register(ModContainers.PEARL_PERFECT_UI_CONTAINER.get(), PearlUIScreenPerfect::new);
         MenuScreens.register(ModContainers.ZIRCON_UI_CONTAINER.get(), ZirconUIScreen::new);
 
         MenuScreens.register(ModContainers.WARP_SELECTION.get(), WarpSelectionScreen::new);

@@ -28,8 +28,10 @@ public class C2SRequestEnchant {
         ServerPlayer sender = ctx.getSender();
         boolean hasPermission = true;
         if (hasPermission) {
-            EntityZircon gem = (EntityZircon) sender.level.getEntity(msg.entityID);
-            gem.beginEnchant();
+            ctx.enqueueWork(() -> {
+                EntityZircon gem = (EntityZircon) sender.level.getEntity(msg.entityID);
+                gem.beginEnchant();
+            });
         }
         ctx.setPacketHandled(true);
     }
