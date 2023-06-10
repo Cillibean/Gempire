@@ -32,14 +32,15 @@ public class C2SRequestHairChange {
         ServerPlayer sender = ctx.getSender();
         boolean hasPermission = true;
         if (hasPermission) {
-            EntityPearl gem = (EntityPearl) sender.level.getEntity(msg.entityID);
-            boolean forwardd = msg.forward;
-            if(forwardd){
-                gem.CycleHairForward();
-            }
-            else{
-                gem.CycleHairBackwards();
-            }
+            ctx.enqueueWork(() -> {
+                EntityPearl gem = (EntityPearl) sender.level.getEntity(msg.entityID);
+                boolean forwardd = msg.forward;
+                if (forwardd) {
+                    gem.CycleHairForward();
+                } else {
+                    gem.CycleHairBackwards();
+                }
+            });
         }
         ctx.setPacketHandled(true);
     }

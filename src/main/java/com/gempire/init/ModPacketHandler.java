@@ -26,6 +26,12 @@ public class ModPacketHandler {
                 C2SRequestUpdateGemName::handle);
         ModPacketHandler.INSTANCE.registerMessage(
                 networkId++,
+                PageChange.class,
+                PageChange::encode,
+                PageChange::decode,
+                PageChange::handle);
+        ModPacketHandler.INSTANCE.registerMessage(
+                networkId++,
                 RequestPoof.class,
                 RequestPoof::encode,
                 RequestPoof::decode,
