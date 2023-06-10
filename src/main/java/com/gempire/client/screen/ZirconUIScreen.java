@@ -66,12 +66,12 @@ public class ZirconUIScreen extends AbstractContainerScreen<ZirconUIContainer> {
 
         /*this.addButton(new ImageButton(this.guiLeft + 19, this.guiTop + 41, 11, 21, 0, 0, 0, ZirconUIScreen.LEFT,
                 11, 21, (p_213029_1_) -> {
-            ModPacketHandler.INSTANCE.sendToServer(new C2SRequestPageChange(this.container.gem.getEntityId(), false));
+            ModPacketHandler.INSTANCE.sendToServer(new PageChange(this.container.gem.getEntityId(), false));
         }));
 
         this.addButton(new ImageButton(this.guiLeft + 180, this.guiTop + 41, 11, 21, 0, 0, 0, ZirconUIScreen.RIGHT,
                 11, 21, (p_213029_1_) -> {
-            ModPacketHandler.INSTANCE.sendToServer(new C2SRequestPageChange(this.container.gem.getEntityId(), true));
+            ModPacketHandler.INSTANCE.sendToServer(new PageChange(this.container.gem.getEntityId(), true));
         }));*/
         addRenderableWidget(new Button(this.leftPos + 138, this.topPos + 81, 65, 20, Component.translatable("screens.gempire.poof"), (button) -> {
             ModPacketHandler.INSTANCE.sendToServer(new RequestPoof(this.menu.gem.getId()));

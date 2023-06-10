@@ -127,8 +127,6 @@ public class GemSeedTE extends BlockEntity {
                             }
                         }
                         if (!te.level.isClientSide) {
-                            //System.out.println(te.totalWeight);
-                            //System.out.println(te.essences);
                             GemFormation form = new GemFormation(te.level, te.getBlockPos(), new BlockPos(GemSeedTE.DRAIN_SIZE, GemSeedTE.DRAIN_SIZE, GemSeedTE.DRAIN_SIZE), te.chroma, te.primer, te.essences, te.facing, te.WEIGHTS_OF_GEMS, te.totalWeight, te.tier);
                             form.SpawnGem();
                             level.sendBlockUpdated(te.getBlockPos(), te.getBlockState(), te.getBlockState(), 2);
@@ -283,9 +281,8 @@ public class GemSeedTE extends BlockEntity {
                             if (block != crux.block) {
                                 if (block.defaultBlockState().is(Tags.Blocks.STONE)) {
                                     totalWeight += 1;
-                                    totalWeight += GEM_CONDITIONS.get(gem).rarity;
                                     gemWeight += 1 * (1 - temperatureDifference);
-                                    gemWeight += (1 - temperatureDifference) * GEM_CONDITIONS.get(gem).rarity;
+                                    gemWeight += (1 - temperatureDifference);
                                     for (int n = 0; n <= 1; n++){
                                         TEMPORARY_WEIGHTS.get(i).add(n, gemWeight);
                                     }
@@ -295,7 +292,6 @@ public class GemSeedTE extends BlockEntity {
                                     }
                                 }
                             } else {
-                                System.out.println("temp difference " + temperatureDifference);
                                 totalWeight += 1;
                                 totalWeight += crux.weight * GEM_CONDITIONS.get(gem).rarity;
                                 gemWeight += 1 - temperatureDifference;

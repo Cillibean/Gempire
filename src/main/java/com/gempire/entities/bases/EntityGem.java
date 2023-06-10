@@ -484,9 +484,6 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         compound.putFloat("zscale", this.getZScale());
         compound.putString("name", this.getName().getString());
         this.writeStructures(compound);
-        if(this instanceof EntityPearl) {
-            ContainerHelper.saveAllItems(compound, ((EntityPearl) this).getItems1());
-        }
         ContainerHelper.saveAllItems(compound, this.items);
     }
 
@@ -744,7 +741,6 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                 abilityTicks--;
             }
             if (enemyDying) {
-                System.out.println(enemy.getHealth());
                 if (enemy.getHealth() <= 0) {
                     if (enemy.getLastHurtByMob() == this) {
                         dropXP(enemy);
@@ -872,9 +868,6 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                                             this.addOwner(player.getUUID());
                                             this.addMasterOwner(player.getUUID());
                                             setFollow(player.getUUID());
-                                            if (getAssignedGem() != null) {
-                                                setAssignedId(getAssignedGem().getUUID());
-                                            }
                                             player.sendSystemMessage(Component.literal("Claimed ").append(getName().getString()).append(" " + getFacetAndCut()));
                                             this.setMovementType((byte) 2);
                                             this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
@@ -997,7 +990,6 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             if (((ServerLevel)this.level).getEntity(ASSIGNED_ID) instanceof EntityGem) {
                 return (EntityGem) ((ServerLevel) this.level).getEntity(ASSIGNED_ID);
             } else {
-                System.out.println("not a gem");
                 return null;
             }
         } else {
@@ -1017,11 +1009,8 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             //Cycles through the various movement types.
             this.navigation.stop();
             setFollow(player.getUUID());
-            if (getAssignedGem() != null) {
-                setAssignedId(getAssignedGem().getUUID());
-            }
             System.out.println("Assigned ID " + ASSIGNED_ID);
-            System.out.println("ASSIGNED " + getAssignedGem());
+            System.out.println("assigned  " + getAssignedGem());
             this.GUARD_POS = this.getOnPos().above();
             if (getAssignedGem() != null ? this.getMovementType() < 3 : this.getMovementType() < 2) {
                 this.addMovementType(1);
@@ -1133,10 +1122,8 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     public void dropXP(LivingEntity entityIn) {
         if (!entityIn.level.isClientSide) {
             if (entityIn.level instanceof ServerLevel) {
-                System.out.println("experience reward check");
                 int reward = net.minecraftforge.event.ForgeEventFactory.getExperienceDrop(entityIn, this.currentPlayer, entityIn.getExperienceReward());
                 ExperienceOrb.award((ServerLevel) entityIn.level, entityIn.position(), reward);
-                System.out.println("experience reward awarded");
             }
         }
     }

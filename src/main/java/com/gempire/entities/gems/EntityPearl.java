@@ -1,7 +1,6 @@
 package com.gempire.entities.gems;
 
 import com.gempire.container.PearlDefectiveUIContainer;
-import com.gempire.container.PearlPerfectUIContainer;
 import com.gempire.container.PearlUIContainer;
 import com.gempire.entities.ai.EntityAIFollowAssigned;
 import com.gempire.entities.ai.EntityAIFollowOwner;
@@ -48,10 +47,11 @@ import org.checkerframework.checker.units.qual.C;
 public class EntityPearl extends EntityVaryingGem {
     public static final int NUMBER_OF_SLOTS_PEARL = 58;
     public NonNullList<ItemStack> items1 = NonNullList.withSize(EntityPearl.NUMBER_OF_SLOTS_PEARL, ItemStack.EMPTY);
-    public NonNullList<ItemStack> armorList = NonNullList.withSize(4, ItemStack.EMPTY);
-
+    public NonNullList<ItemStack> items2 = NonNullList.withSize(EntityPearl.NUMBER_OF_SLOTS_PEARL, ItemStack.EMPTY);
+    public static EntityDataAccessor<Integer> PAGE = SynchedEntityData.<Integer>defineId(EntityPearl.class, EntityDataSerializers.INT);
     public EntityPearl(EntityType<? extends PathfinderMob> type, Level worldIn) {
         super(type, worldIn);
+        this.entityData.define(EntityPearl.PAGE, 0);
     }
 
     public static AttributeSupplier.Builder registerAttributes() {
@@ -84,13 +84,51 @@ public class EntityPearl extends EntityVaryingGem {
     @Override
     public void addAdditionalSaveData(CompoundTag compound) {
         super.addAdditionalSaveData(compound);
-        ContainerHelper.saveAllItems(compound, getItems1());
+        compound.putInt("page", this.getPage());
+        this.saveItems(compound);
+        System.out.println("add aditional save data");
+        System.out.println(compound.getList("Items1", 10).get(0));
+    }
+
+    public void saveItems(CompoundTag compoundNBT){
+        ListTag list1 = new ListTag();
+        for(int i = 0; i < this.items1.size(); i++){
+            list1.add(i, this.items1.get(i).save(new CompoundTag()));
+        }
+        ListTag list2 = new ListTag();
+        for(int i = 0; i < this.items2.size(); i++){
+            list2.add(i, this.items2.get(i).save(new CompoundTag()));
+        }
+        System.out.println(list1);
+        System.out.println(list2);
+        compoundNBT.put("Items1", list1);
+        compoundNBT.put("Items2", list2);
     }
 
     @Override
     public void load(CompoundTag compound) {
         super.load(compound);
-        ContainerHelper.loadAllItems(compound, getItems1());
+        this.setPage(compound.getInt("page"));
+        this.loadItems(compound);
+    }
+
+    public void loadItems(CompoundTag compoundNBT){
+        ListTag list1 = compoundNBT.getList("Items1", 10);
+        ListTag list2 = compoundNBT.getList("Items2", 10);
+        NonNullList<ItemStack> newItems1 = NonNullList.withSize(EntityPearl.NUMBER_OF_SLOTS_PEARL, ItemStack.EMPTY);
+        NonNullList<ItemStack> newItems2 = NonNullList.withSize(EntityPearl.NUMBER_OF_SLOTS_PEARL, ItemStack.EMPTY);
+        for(int i = 0; i < list1.size(); ++i) {
+            CompoundTag compoundnbt = list1.getCompound(i);
+            newItems1.set(i, ItemStack.of(compoundnbt));
+        }
+        for(int i = 0; i < list2.size(); ++i) {
+            CompoundTag compoundnbt = list2.getCompound(i);
+            newItems2.set(i, ItemStack.of(compoundnbt));
+        }
+        System.out.println(newItems1);
+        System.out.println(newItems2);
+        this.items1 = newItems1;
+        this.items2 = newItems2;
     }
 
     protected void registerGoals() {
@@ -242,6 +280,32 @@ this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, EntityGem.class, 6.0F, 
         return 1;
     }
 
+    public void setPage(int value){
+        this.entityData.set(EntityPearl.PAGE, value);
+    }
+
+    public int getPage(){
+        return this.entityData.get(EntityPearl.PAGE);
+    }
+
+    public void CyclePageForward(){
+        if(this.getPage() == 1){
+            this.setPage(0);
+        }
+        else{
+            this.setPage(this.getPage() + 1);
+        }
+    }
+
+    public void CyclePageBackwards(){
+        if(this.getPage() == 0){
+            this.setPage(1);
+        }
+        else{
+            this.setPage(this.getPage() - 1);
+        }
+    }
+
     public void CycleHairForward(){
         if(this.getHairVariant() == this.getHairs() - 1){
             this.setHairVariant(0);
@@ -336,13 +400,25 @@ this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, EntityGem.class, 6.0F, 
     @Override
     public ItemStack getItem(int index) {
         ItemStack stack = ItemStack.EMPTY;
-        return this.getItems1().get(index);
+        if(this.getPage() == 0) {
+            return this.getItems1().get(index);
+        }
+        else if(this.getPage() == 1){
+            return this.getItems2().get(index);
+        }
+        return stack;
     }
 
     @Override
     public ItemStack removeItem(int index, int count) {
         ItemStack stack = ItemStack.EMPTY;
-        return ContainerHelper.removeItem(this.getItems1(), index, count);
+        if(this.getPage() == 0) {
+            return ContainerHelper.removeItem(this.getItems1(), index, count);
+        }
+        else if(this.getPage() == 1){
+            return ContainerHelper.removeItem(this.getItems2(), index, count);
+        }
+        return stack;
     }
 
     @Override
@@ -352,16 +428,19 @@ this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, EntityGem.class, 6.0F, 
 
     @Override
     public void setItem(int index, ItemStack stack) {
-        this.getItems1().set(index, stack);
+        if(this.getPage() == 0) {
+            this.getItems1().set(index, stack);
+        }
+        else if(this.getPage() == 1){
+            this.getItems2().set(index, stack);
+        }
         int ind = index;
     }
 
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int p_createMenu_1_, Inventory p_createMenu_2_, Player p_createMenu_3_) {
-        if (this.isPrimary()) {
-            return new PearlPerfectUIContainer(p_createMenu_1_, p_createMenu_2_, this);
-        } else if (this.isDefective()) {
+        if (this.isDefective()) {
             return new PearlDefectiveUIContainer(p_createMenu_1_, p_createMenu_2_, this);
         } else {
             return new PearlUIContainer(p_createMenu_1_, p_createMenu_2_, this);
@@ -370,6 +449,10 @@ this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, EntityGem.class, 6.0F, 
 
     public NonNullList<ItemStack> getItems1(){
         return this.items1;
+    }
+
+    public NonNullList<ItemStack> getItems2(){
+        return this.items2;
     }
 
     public int generateHardness() {
