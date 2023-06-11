@@ -24,26 +24,28 @@ public class EntityAIMakePowerCrystal2 extends Goal {
 
     @Override
     public boolean canUse() {
-        BlockPos hopper = BlockPos.ZERO;
-        boolean found = false;
-        for(int x = -4; x < 5; x++){
-            for(int y = -2; y < 3; y++){
-                for(int z = -4; z < 5; z++){
-                    if(!found) {
-                        if (this.follower.level.getBlockState(this.follower.blockPosition().offset(x, y, z)).getBlock() == Blocks.REDSTONE_BLOCK) {
-                            hopper = this.follower.blockPosition().offset(x, y, z);
-                            found = true;
+        if (follower.hopperGoal) {
+            BlockPos hopper = BlockPos.ZERO;
+            boolean found = false;
+            for (int x = -4; x < 5; x++) {
+                for (int y = -2; y < 3; y++) {
+                    for (int z = -4; z < 5; z++) {
+                        if (!found) {
+                            if (this.follower.level.getBlockState(this.follower.blockPosition().offset(x, y, z)).getBlock() == Blocks.REDSTONE_BLOCK) {
+                                hopper = this.follower.blockPosition().offset(x, y, z);
+                                found = true;
+                            }
                         }
                     }
                 }
             }
-        }
-        if(found){
-            double maxDistance = Double.MAX_VALUE;
-            double newDistance = this.follower.distanceToSqr(hopper.getX(), hopper.getY(), hopper.getZ());
-            if (newDistance <= maxDistance) {
-                maxDistance = newDistance;
-                this.target = hopper;
+            if (found) {
+                double maxDistance = Double.MAX_VALUE;
+                double newDistance = this.follower.distanceToSqr(hopper.getX(), hopper.getY(), hopper.getZ());
+                if (newDistance <= maxDistance) {
+                    maxDistance = newDistance;
+                    this.target = hopper;
+                }
             }
         }
         return this.target != null && this.target != BlockPos.ZERO && this.follower.hopperGoal;
