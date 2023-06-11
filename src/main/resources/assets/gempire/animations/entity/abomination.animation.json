@@ -113,7 +113,7 @@
       "loop": true,
       "animation_length": 1,
       "bones": {
-        "1model": {
+        "model": {
           "rotation": {
             "0.0": {
               "vector": [0, 0, 0]
@@ -129,7 +129,7 @@
             }
           }
         },
-        "1leftarmarm": {
+        "leftarmarm": {
           "rotation": {
             "0.0": {
               "vector": [0, 0, 0]
@@ -145,7 +145,7 @@
             }
           }
         },
-        "1backarm1": {
+        "backarm1": {
           "rotation": {
             "0.0": {
               "vector": [0, 0, 0]
@@ -164,7 +164,7 @@
             }
           }
         },
-        "1backarm2": {
+        "backarm2": {
           "rotation": {
             "0.0": {
               "vector": [0, 0, 0]
@@ -183,7 +183,7 @@
             }
           }
         },
-        "1backarm3": {
+        "backarm3": {
           "rotation": {
             "0.0": {
               "vector": [0, 0, 0]
@@ -199,7 +199,7 @@
             }
           }
         },
-        "1head1": {
+        "head1": {
           "rotation": {
             "0.0": {
               "vector": [12.5, 0, 0]
@@ -221,7 +221,7 @@
             }
           }
         },
-        "1jaw": {
+        "jaw": {
           "relative_to": {
             "rotation": "entity"
           },
@@ -237,7 +237,7 @@
             }
           }
         },
-        "1head2": {
+        "head2": {
           "rotation": {
             "0.0": {
               "vector": [0, 0, 0]
@@ -265,7 +265,7 @@
             }
           }
         },
-        "1jaw2": {
+        "jaw2": {
           "rotation": {
             "0.0": {
               "vector": [0, 0, 0]
@@ -293,7 +293,7 @@
       "loop": true,
       "animation_length": 1,
       "bones": {
-        "2model": {
+        "model": {
           "rotation": {
             "0.0": {
               "vector": [0, 0, 0]
@@ -312,7 +312,7 @@
             }
           }
         },
-        "2backarm1": {
+        "backarm1": {
           "rotation": {
             "0.0": {
               "vector": [0, 0, 0]
@@ -331,7 +331,7 @@
             }
           }
         },
-        "2rightarm": {
+        "rightarm": {
           "rotation": {
             "0.0": {
               "vector": [0, 0, 0]
@@ -347,7 +347,7 @@
             }
           }
         },
-        "2rightarm2": {
+        "rightarm2": {
           "rotation": {
             "0.0": {
               "vector": [0, 0, 0]
@@ -363,7 +363,7 @@
             }
           }
         },
-        "2leftarm": {
+        "leftarm": {
           "rotation": {
             "0.0": {
               "vector": [0, 0, 0]
@@ -379,7 +379,7 @@
             }
           }
         },
-        "2backarm2": {
+        "backarm2": {
           "rotation": {
             "0.0": {
               "vector": [0, 0, 0]
@@ -398,7 +398,7 @@
             }
           }
         },
-        "2backarm3": {
+        "backarm3": {
           "rotation": {
             "0.0": {
               "vector": [0, 0, 0]
@@ -417,7 +417,7 @@
             }
           }
         },
-        "2head1": {
+        "head1": {
           "rotation": {
             "0.0": {
               "vector": [0, 0, 0]
@@ -436,7 +436,7 @@
             }
           }
         },
-        "2jaw": {
+        "jaw": {
           "rotation": {
             "0.0": {
               "vector": [0, 0, 0]
@@ -455,7 +455,7 @@
             }
           }
         },
-        "2head2": {
+        "head2": {
           "rotation": {
             "0.0": {
               "vector": [0, 0, 0]
@@ -474,7 +474,7 @@
             }
           }
         },
-        "2jaw2": {
+        "jaw2": {
           "rotation": {
             "0.0": {
               "vector": [0, 0, 0]
@@ -493,7 +493,7 @@
             }
           }
         },
-        "2leftleg": {
+        "leftleg": {
           "rotation": {
             "0.0": {
               "vector": [0, 0, 0]
@@ -509,7 +509,7 @@
             }
           }
         },
-        "2rightleg": {
+        "rightleg": {
           "rotation": {
             "0.0": {
               "vector": [0, 0, 0]
@@ -525,7 +525,7 @@
             }
           }
         },
-        "2rightleg2": {
+        "rightleg2": {
           "rotation": {
             "0.0": {
               "vector": [0, 0, 0]
@@ -546,7 +546,7 @@
     "animation.abomination.hurt": {
       "animation_length": 0.375,
       "bones": {
-        "3model": {
+        "model": {
           "rotation": {
             "0.0": {
               "vector": [0, 0, 0]
@@ -564,7 +564,7 @@
             }
           }
         },
-        "3rightarm": {
+        "rightarm": {
           "rotation": {
             "0.0": {
               "vector": [0, 0, 0]
@@ -580,7 +580,7 @@
             }
           }
         },
-        "3leftarm": {
+        "leftarm": {
           "rotation": {
             "0.0": {
               "vector": [0, 0, 0]
@@ -596,7 +596,7 @@
             }
           }
         },
-        "3leftarmarm": {
+        "leftarmarm": {
           "rotation": {
             "0.0": {
               "vector": [0, 0, 0]
@@ -615,7 +615,7 @@
             }
           }
         },
-        "3backarm1": {
+        "backarm1": {
           "rotation": {
             "0.0": {
               "vector": [0, 0, 0]
@@ -631,7 +631,7 @@
             }
           }
         },
-        "3backarm2": {
+        "backarm2": {
           "rotation": {
             "0.0": {
               "vector": [0, 0, 0]
@@ -647,7 +647,7 @@
             }
           }
         },
-        "3backarm3": {
+        "backarm3": {
           "rotation": {
             "0.0": {
               "vector": [0, 0, 0]
@@ -663,7 +663,7 @@
             }
           }
         },
-        "3head1": {
+        "head1": {
           "rotation": {
             "0.0": {
               "vector": [0, 0, 0]
@@ -679,7 +679,7 @@
             }
           }
         },
-        "3jaw": {
+        "jaw": {
           "rotation": {
             "0.0": {
               "vector": [0, 0, 0]
@@ -695,7 +695,7 @@
             }
           }
         },
-        "3head2": {
+        "head2": {
           "rotation": {
             "0.0": {
               "vector": [0, 0, 0]
@@ -714,7 +714,7 @@
             }
           }
         },
-        "3jaw2": {
+        "jaw2": {
           "rotation": {
             "0.0": {
               "vector": [0, 0, 0]
@@ -736,7 +736,7 @@
             }
           }
         },
-        "3leftleg": {
+        "leftleg": {
           "rotation": {
             "0.0": {
               "vector": [0, 0, 0]
@@ -752,7 +752,7 @@
             }
           }
         },
-        "3rightleg": {
+        "rightleg": {
           "rotation": {
             "0.0": {
               "vector": [0, 0, 0]
