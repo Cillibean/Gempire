@@ -109,12 +109,19 @@ this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, EntityGem.class, 6.0F, 
 
     public Abilities[] possibleAbilities(){
         return new Abilities[]{
-                Abilities.NO_ABILITY, Abilities.TANK, Abilities.BEEFCAKE, Abilities.POWERHOUSE, Abilities.UNHINGED, Abilities.BERSERKER, Abilities.ABUNDANCE
+                Abilities.NO_ABILITY,
+                Abilities.TANK,
+                Abilities.BEEFCAKE,
+                Abilities.POWERHOUSE,
+                Abilities.UNHINGED,
+                Abilities.BERSERKER,
+                Abilities.ABUNDANCE,
+                Abilities.LOOTMASTER
         };
     }
     public Abilities[] definiteAbilities(){
         return new Abilities[]{
-                    Abilities.DISARMING
+                Abilities.DISARMING
         };
     }
 
