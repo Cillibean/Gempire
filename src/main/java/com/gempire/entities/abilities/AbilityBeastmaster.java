@@ -35,7 +35,12 @@ public class AbilityBeastmaster extends Ability implements IIdleAbility {
         List<Wolf> list = this.holder.level.getEntitiesOfClass(Wolf.class, this.holder.getBoundingBox().inflate(14.0D, 8.0D, 14.0D));
         List<Wolf> listOwned = new ArrayList<>();
         for (Wolf wolf : list) {
-            if (listOwned.contains(wolf) || listOwned.size() < 5) {
+            if (wolf.isTame() && wolf.getOwnerUUID() == holder.getUUID()) {
+                listOwned.add(wolf);
+            }
+        }
+        for (Wolf wolf : list) {
+            if (!listOwned.contains(wolf) && listOwned.size() < 5) {
                 if (!wolf.isTame()) {
                     if (holder.getOwned()) {
                         if (holder.currentPlayer != null) {

@@ -2,6 +2,7 @@ package com.gempire.items;
 
 import com.gempire.Gempire;
 import com.gempire.entities.bases.EntityGem;
+import com.gempire.entities.gems.EntityPearl;
 import com.gempire.entities.gems.EntityZircon;
 import com.gempire.entities.gems.starter.EntityPebble;
 import com.gempire.events.GemFormEvent;
@@ -11,6 +12,7 @@ import com.gempire.init.ModEntities;
 import com.gempire.init.ModItems;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.nbt.ListTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
@@ -467,6 +469,24 @@ public class ItemGem extends Item {
 
     public static void saveData(ItemStack stack, EntityGem gem) {
         CompoundTag tag = stack.getOrCreateTag();
+        if (gem instanceof EntityPearl) {
+            ListTag list1 = new ListTag();
+            for (int i = 0; i < ((EntityPearl) gem).items1.size(); i++) {
+                list1.add(i, ((EntityPearl) gem).items1.get(i).save(new CompoundTag()));
+            }
+            ListTag list2 = new ListTag();
+            for (int i = 0; i < ((EntityPearl) gem).items2.size(); i++) {
+                list2.add(i, ((EntityPearl) gem).items2.get(i).save(new CompoundTag()));
+            }
+            tag.put("Items1", list1);
+            tag.put("Items2", list2);
+        }
+        if (gem instanceof EntityZircon) {
+            tag.putInt("page", ((EntityZircon) gem).getEnchantPage());
+            tag.putInt("min", ((EntityZircon) gem).getEnchantMin());
+            tag.putBoolean("pagedefined", ((EntityZircon) gem).getEnchantPageDefined());
+            ContainerHelper.saveAllItems(tag, ((EntityZircon) gem).zirconItems);
+        }
         tag.putString("name", gem.getName().getString());
         tag.putBoolean("cracked", gem.getCracked());
         tag.putBoolean("prime", gem.isPrimary());
