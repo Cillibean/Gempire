@@ -15,6 +15,10 @@ import net.minecraftforge.fluids.FluidStack;
 public class InjectorScreen extends AbstractContainerScreen<InjectorContainer> {
     public static final ResourceLocation INJECTOR_GUI = new ResourceLocation("gempire:textures/gui/injector_gui.png");
     public static final ResourceLocation FLUID_GUI = new ResourceLocation("gempire:textures/gui/injector_gui_fluid.png");
+    public static final ResourceLocation HALO_GUI_PINK = new ResourceLocation("gempire:textures/gui/injector_gui_fluid_overlay_pink.png");
+    public static final ResourceLocation HALO_GUI_BLUE = new ResourceLocation("gempire:textures/gui/injector_gui_fluid_overlay_blue.png");
+    public static final ResourceLocation HALO_GUI_YELLOW = new ResourceLocation("gempire:textures/gui/injector_gui_fluid_overlay_yellow.png");
+    public static final ResourceLocation HALO_GUI_WHITE = new ResourceLocation("gempire:textures/gui/injector_gui_fluid_overlay_white.png");
 
     public InjectorScreen(InjectorContainer screenContainer, Inventory inv, Component titleIn) {
         super(screenContainer, inv, titleIn);
@@ -109,5 +113,21 @@ public class InjectorScreen extends AbstractContainerScreen<InjectorContainer> {
             this.blit(matrixStack, xWhite, yWhite + (16 - fluidStored), 0, 0, 4, fluidStored);
         }
         RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
+        /*if(this.menu.injector.pinkOpen){
+            GUIUtilities.setup(HALO_GUI_PINK);
+            this.blit(matrixStack, x, y, 0, 0, this.width, this.height);
+        }
+        if(this.menu.injector.blueOpen){
+            GUIUtilities.setup(HALO_GUI_BLUE);
+            this.blit(matrixStack, x, y, 0, 0, this.width, this.height);
+        }
+        if(this.menu.injector.yellowOpen){
+            GUIUtilities.setup(HALO_GUI_YELLOW);
+            this.blit(matrixStack, x, y, 0, 0, this.width, this.height);
+        }
+        if(this.menu.injector.whiteOpen){
+            GUIUtilities.setup(HALO_GUI_WHITE);
+            this.blit(matrixStack, x, y, 0, 0, this.width, this.height);
+        }*/
     }
 }
