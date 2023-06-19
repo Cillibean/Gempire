@@ -8,6 +8,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -46,7 +47,7 @@ public class IceSpikeBlock extends Block {
     }
 
     public void playerWillDestroy(Level worldIn, BlockPos pos, BlockState state, Player player) {
-        if (!worldIn.isClientSide && player.isCreative()) {
+        if (!worldIn.isClientSide) {
             IceSpikeBlock.removeBottomHalf(worldIn, pos, state, player);
         }
         super.playerWillDestroy(worldIn, pos, state, player);
@@ -63,14 +64,13 @@ public class IceSpikeBlock extends Block {
         }
     }
 
-    public static void removeTopHalf(Level world, BlockPos pos, BlockState state, Player player) {
+    public static void removeTopHalf(Level world, BlockPos pos, BlockState state) {
         DoubleBlockHalf doubleblockhalf = state.getValue(HALF);
         if (doubleblockhalf == DoubleBlockHalf.LOWER) {
             BlockPos blockpos = pos.above();
             BlockState blockstate = world.getBlockState(blockpos);
             if (blockstate.getBlock() == state.getBlock() && blockstate.getValue(HALF) == DoubleBlockHalf.UPPER) {
                 world.destroyBlock(blockpos, false);
-                world.levelEvent(player, 2001, blockpos, Block.getId(blockstate));
             }
         }
 
@@ -83,7 +83,6 @@ public class IceSpikeBlock extends Block {
     @Override
     public void randomTick(BlockState state, ServerLevel worldIn, BlockPos pos, RandomSource random) {
         super.randomTick(state, worldIn, pos, (RandomSource) random);
-        this.remove(worldIn, pos, state);
     }
 
     public static void remove(Level world, BlockPos pos, BlockState state){
@@ -98,6 +97,15 @@ public class IceSpikeBlock extends Block {
         else{
             world.destroyBlock(pos, false);
         }
+    }
+
+    @Override
+    public boolean canSurvive(BlockState state, LevelReader reader, BlockPos pos) {
+        BlockPos blockpos = pos.below();
+        BlockState blockstate = reader.getBlockState(blockpos);
+        boolean flag = blockstate.isFaceSturdy(reader, blockpos, Direction.DOWN);
+        if (!flag) removeTopHalf((Level) reader, pos, state);
+        return flag;
     }
 
     public boolean isRandomlyTicking(BlockState state) {
@@ -149,14 +157,13 @@ public class IceSpikeBlock extends Block {
         if (doubleblockhalf == DoubleBlockHalf.LOWER) {
             BlockPos blockpos = pos.above();
             BlockState blockstate = world.getBlockState(blockpos);
-            if (blockstate.getBlock() == state.getBlock() && blockstate.getValue(HALF) == DoubleBlockHalf.UPPER) {
+            if (blockstate.getBlock() instanceof IceSpikeBlock && blockstate.getValue(HALF) == DoubleBlockHalf.UPPER) {
                 world.setBlock(blockpos, Blocks.AIR.defaultBlockState(), 35);
             }
-        }
-        else{
+        } else {
             BlockPos blockpos = pos.below();
             BlockState blockstate = world.getBlockState(blockpos);
-            if (blockstate.getBlock() == state.getBlock() && blockstate.getValue(HALF) == DoubleBlockHalf.LOWER) {
+            if (blockstate.getBlock() instanceof IceSpikeBlock && blockstate.getValue(HALF) == DoubleBlockHalf.LOWER) {
                 world.setBlock(blockpos, Blocks.AIR.defaultBlockState(), 35);
             }
         }

@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "gempire:blocks/congealed_white_essence_block"
+  }
+}

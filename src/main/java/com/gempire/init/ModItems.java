@@ -36,6 +36,34 @@ public class ModItems {
             )
     );*/
 
+    public static final RegistryObject<Item> CONGEALED_WHITE_ESSENCE_BLOCK = ITEMS.register("congealed_white_essence_block", () ->
+            new BlockItem(
+                    ModBlocks.CONGEALED_WHITE_ESSENCE_BLOCK.get(),
+                    new Item.Properties().tab(ModItemGroup.BLOCKS)
+            )
+    );
+
+    public static final RegistryObject<Item> CONGEALED_PINK_ESSENCE_BLOCK = ITEMS.register("congealed_pink_essence_block", () ->
+            new BlockItem(
+                    ModBlocks.CONGEALED_PINK_ESSENCE_BLOCK.get(),
+                    new Item.Properties().tab(ModItemGroup.BLOCKS)
+            )
+    );
+
+    public static final RegistryObject<Item> CONGEALED_BLUE_ESSENCE_BLOCK = ITEMS.register("congealed_blue_essence_block", () ->
+            new BlockItem(
+                    ModBlocks.CONGEALED_BLUE_ESSENCE_BLOCK.get(),
+                    new Item.Properties().tab(ModItemGroup.BLOCKS)
+            )
+    );
+
+    public static final RegistryObject<Item> CONGEALED_YELLOW_ESSENCE_BLOCK = ITEMS.register("congealed_yellow_essence_block", () ->
+            new BlockItem(
+                    ModBlocks.CONGEALED_YELLOW_ESSENCE_BLOCK.get(),
+                    new Item.Properties().tab(ModItemGroup.BLOCKS)
+            )
+    );
+
     public static final RegistryObject<Item> TUNGSTEN_BLOCK = ITEMS.register("tungsten_block", () ->
             new BlockItem(
                     ModBlocks.TUNGSTEN_BLOCK.get(),

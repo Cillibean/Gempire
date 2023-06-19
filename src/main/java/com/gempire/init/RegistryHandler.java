@@ -2,10 +2,14 @@ package com.gempire.init;
 
 import com.gempire.fluids.ModFluidTypes;
 import net.minecraft.world.level.block.entity.BannerPattern;
+import net.minecraftforge.common.ForgeMod;
+import net.minecraftforge.fluids.FluidInteractionRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 import java.util.Locale;
+
+import static net.minecraftforge.fluids.FluidInteractionRegistry.addInteraction;
 
 public class RegistryHandler {
 

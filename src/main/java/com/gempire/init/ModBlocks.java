@@ -33,6 +33,18 @@ public class ModBlocks {
     public static final RegistryObject<LiquidBlock> WHITE_ESSENCE_BLOCK = BLOCKS.register("white_essence_block", () ->
             new WhiteEssenceBlock(ModFluids.WHITE_ESSENCE, BlockBehaviour.Properties.copy(Blocks.WATER)));
 
+    public static final RegistryObject<Block> CONGEALED_WHITE_ESSENCE_BLOCK = BLOCKS.register("congealed_white_essence_block", () ->
+            new SlimeBlock(BlockBehaviour.Properties.copy(Blocks.SLIME_BLOCK)));
+
+    public static final RegistryObject<Block> CONGEALED_PINK_ESSENCE_BLOCK = BLOCKS.register("congealed_pink_essence_block", () ->
+            new SlimeBlock(BlockBehaviour.Properties.copy(Blocks.SLIME_BLOCK)));
+
+    public static final RegistryObject<Block> CONGEALED_YELLOW_ESSENCE_BLOCK = BLOCKS.register("congealed_yellow_essence_block", () ->
+            new SlimeBlock(BlockBehaviour.Properties.copy(Blocks.SLIME_BLOCK)));
+
+    public static final RegistryObject<Block> CONGEALED_BLUE_ESSENCE_BLOCK = BLOCKS.register("congealed_blue_essence_block", () ->
+            new SlimeBlock(BlockBehaviour.Properties.copy(Blocks.SLIME_BLOCK)));
+
     public static final RegistryObject<Block> TUNGSTEN_ORE = BLOCKS.register("tungsten_ore", () ->
             new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)));
 
@@ -58,12 +70,12 @@ public class ModBlocks {
             , 0)
     );
 
-    public static final RegistryObject<Block> CRYSTAL_CHEST = BLOCKS.register("crystal_chest", () ->
+    /*public static final RegistryObject<Block> CRYSTAL_CHEST = BLOCKS.register("crystal_chest", () ->
             new CrystalChestBlock(BlockBehaviour.Properties
                     .of(Material.STONE).strength(2.5F)
                     .sound(SoundType.GLASS), () -> {
         return BlockEntityType.CHEST;
-    }));
+    }));*/
 
     public static final RegistryObject<Block> ORANGE_CHROMA_CRYSTAL = BLOCKS.register("orange_chroma_crystal", () ->
             new ChromaBlock(BlockBehaviour.Properties
@@ -276,7 +288,6 @@ public class ModBlocks {
                     .of(Material.METAL)
                     .strength(5.0f, 6.0f)
                     .sound(SoundType.STONE)
-                    .noLootTable()
             )
     );
 

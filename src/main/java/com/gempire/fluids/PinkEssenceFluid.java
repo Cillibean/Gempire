@@ -27,11 +27,15 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.material.*;
+import net.minecraftforge.common.ForgeMod;
+import net.minecraftforge.fluids.FluidInteractionRegistry;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
 
 import javax.annotation.Nullable;
 import java.util.Optional;
 import java.util.function.Supplier;
+
+import static net.minecraftforge.fluids.FluidInteractionRegistry.addInteraction;
 
 public abstract class PinkEssenceFluid extends ForgeFlowingFluid {
     protected PinkEssenceFluid(Properties properties) {

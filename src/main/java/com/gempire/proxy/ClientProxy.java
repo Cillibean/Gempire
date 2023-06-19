@@ -8,6 +8,7 @@ import com.gempire.client.screen.warppad.WarpConfigScreen;
 import com.gempire.client.screen.warppad.WarpSelectionScreen;
 import com.gempire.client.ter.ShellTER;
 import com.gempire.entities.bases.EntityGem;
+import com.gempire.fluids.ModFluidTypes;
 import com.gempire.init.*;
 import com.gempire.keybindings.KeyBindings;
 import com.gempire.networking.WarpGuiKeyPressed;
@@ -31,14 +32,18 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
+import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fluids.FluidInteractionRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.network.NetworkHooks;
 
 import java.util.List;
 import java.util.UUID;
+
+import static net.minecraftforge.fluids.FluidInteractionRegistry.addInteraction;
 
 public class ClientProxy {
     @Mod.EventBusSubscriber(modid = Gempire.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
@@ -98,6 +103,39 @@ public class ClientProxy {
     @SubscribeEvent
     public static void doSetup(FMLClientSetupEvent event) {
         ModItemProperties.addCustomItemProperties();
+
+        addInteraction(ModFluidTypes.WHITE_ESSENCE_FLUID_TYPE.get(), new FluidInteractionRegistry.InteractionInformation(
+                ForgeMod.WATER_TYPE.get(),
+                ModBlocks.CONGEALED_WHITE_ESSENCE_BLOCK.get().defaultBlockState()
+        ));
+        addInteraction(ModFluidTypes.WHITE_ESSENCE_FLUID_TYPE.get(), new FluidInteractionRegistry.InteractionInformation(
+                ForgeMod.LAVA_TYPE.get(),
+                ModBlocks.CONGEALED_WHITE_ESSENCE_BLOCK.get().defaultBlockState()
+        ));
+        addInteraction(ModFluidTypes.PINK_ESSENCE_FLUID_TYPE.get(), new FluidInteractionRegistry.InteractionInformation(
+                ForgeMod.WATER_TYPE.get(),
+                ModBlocks.CONGEALED_PINK_ESSENCE_BLOCK.get().defaultBlockState()
+        ));
+        addInteraction(ModFluidTypes.PINK_ESSENCE_FLUID_TYPE.get(), new FluidInteractionRegistry.InteractionInformation(
+                ForgeMod.LAVA_TYPE.get(),
+                ModBlocks.CONGEALED_PINK_ESSENCE_BLOCK.get().defaultBlockState()
+        ));
+        addInteraction(ModFluidTypes.BLUE_ESSENCE_FLUID_TYPE.get(), new FluidInteractionRegistry.InteractionInformation(
+                ForgeMod.WATER_TYPE.get(),
+                ModBlocks.CONGEALED_BLUE_ESSENCE_BLOCK.get().defaultBlockState()
+        ));
+        addInteraction(ModFluidTypes.BLUE_ESSENCE_FLUID_TYPE.get(), new FluidInteractionRegistry.InteractionInformation(
+                ForgeMod.LAVA_TYPE.get(),
+                ModBlocks.CONGEALED_BLUE_ESSENCE_BLOCK.get().defaultBlockState()
+        ));
+        addInteraction(ModFluidTypes.YELLOW_ESSENCE_FLUID_TYPE.get(), new FluidInteractionRegistry.InteractionInformation(
+                ForgeMod.WATER_TYPE.get(),
+                ModBlocks.CONGEALED_YELLOW_ESSENCE_BLOCK.get().defaultBlockState()
+        ));
+        addInteraction(ModFluidTypes.YELLOW_ESSENCE_FLUID_TYPE.get(), new FluidInteractionRegistry.InteractionInformation(
+                ForgeMod.LAVA_TYPE.get(),
+                ModBlocks.CONGEALED_YELLOW_ESSENCE_BLOCK.get().defaultBlockState()
+        ));
     }
 
     @SubscribeEvent
