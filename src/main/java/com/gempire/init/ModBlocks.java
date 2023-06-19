@@ -288,7 +288,6 @@ public class ModBlocks {
                     .of(Material.METAL)
                     .strength(5.0f, 6.0f)
                     .sound(SoundType.STONE)
-                    .noLootTable()
             )
     );
 

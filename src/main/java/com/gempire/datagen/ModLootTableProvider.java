@@ -1,6 +1,7 @@
 package com.gempire.datagen;
 
 import com.gempire.datagen.loot.ModBlockLootTables;
+import com.gempire.init.ModBlocks;
 import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.data.DataGenerator;
@@ -19,19 +20,18 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public class ModLootTableProvider extends LootTableProvider {
-    private final List<Pair<Supplier<Consumer<BiConsumer<ResourceLocation, LootTable.Builder>>>, LootContextParamSet>>
-            loot_tables = ImmutableList.of(Pair.of(ModBlockLootTables::new, LootContextParamSets.BLOCK));
     public ModLootTableProvider(DataGenerator pGenerator) {
         super(pGenerator);
     }
 
     @Override
     protected List<Pair<Supplier<Consumer<BiConsumer<ResourceLocation, LootTable.Builder>>>, LootContextParamSet>> getTables() {
-        return loot_tables;
+        return List.of(
+                Pair.of(ModBlockLootTables::new, LootContextParamSets.BLOCK));
     }
 
     @Override
     protected void validate(Map<ResourceLocation, LootTable> map, ValidationContext validationtracker) {
-        map.forEach((id, table) -> LootTables.validate(validationtracker, id, table));
+        map.forEach((location, lootTable) -> LootTables.validate(validationtracker, location, lootTable));
     }
 }

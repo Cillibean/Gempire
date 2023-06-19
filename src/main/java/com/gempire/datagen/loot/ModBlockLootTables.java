@@ -107,11 +107,16 @@ public class ModBlockLootTables extends BlockLoot {
         this.add(ModBlocks.PINK_ESSENCE_BLOCK.get(), (block -> noDrop()));
         this.add(ModBlocks.BLUE_ESSENCE_BLOCK.get(), (block -> noDrop()));
         this.add(ModBlocks.WHITE_ESSENCE_BLOCK.get(), (block -> noDrop()));
+
+        this.dropSelf(ModBlocks.CONGEALED_YELLOW_ESSENCE_BLOCK.get());
+        this.dropSelf(ModBlocks.CONGEALED_PINK_ESSENCE_BLOCK.get());
+        this.dropSelf(ModBlocks.CONGEALED_BLUE_ESSENCE_BLOCK.get());
+        this.dropSelf(ModBlocks.CONGEALED_WHITE_ESSENCE_BLOCK.get());
     }
 
     @Override
     protected Iterable<Block> getKnownBlocks() {
-        return ModBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get)::iterator;
+        return ModBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get).toList();
     }
 
     protected void dropSelfWithContents(Block block) {
