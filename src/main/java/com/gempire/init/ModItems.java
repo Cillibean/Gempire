@@ -509,8 +509,21 @@ public class ModItems {
     public static final RegistryObject<Item> GEM_SLUSH_BUCKET = ITEMS.register("gem_slush_bucket", () ->
             new Item(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(16)));
 
+    public static final RegistryObject<Item> CONGEALED_PINK_ESSENCE = ITEMS.register("congealed_pink_essence", () ->
+            new Item(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(1)));
+
+    public static final RegistryObject<Item> CONGEALED_YELLOW_ESSENCE = ITEMS.register("congealed_yellow_essence", () ->
+            new Item(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(1)));
+
+    public static final RegistryObject<Item> CONGEALED_BLUE_ESSENCE = ITEMS.register("congealed_blue_essence", () ->
+            new Item(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(1)));
+
+    public static final RegistryObject<Item> CONGEALED_WHITE_ESSENCE = ITEMS.register("congealed_white_essence", () ->
+            new Item(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(1)));
+
     public static final RegistryObject<Item> INJECTOR_PANEL = ITEMS.register("injector_panel", () ->
             new ItemInjectorPanel(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(1)));
+
     public static final RegistryObject<Item> GEM_SCRAP = ITEMS.register("gem_scrap", () ->
             new Item(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(64)));
     public static final RegistryObject<Item> PRISMATIC_INGOT = ITEMS.register("prismatic_ingot", () ->
