@@ -1,7 +1,10 @@
 package com.gempire.entities.projectiles;
 
+import com.gempire.entities.bases.EntityGem;
 import com.gempire.init.ModEntities;
 import com.gempire.init.ModItems;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.AbstractArrow;
@@ -45,10 +48,17 @@ public class IceShardEntity extends ThrowableItemProjectile {
     }
 
 
-    protected void onHitEntity(EntityHitResult p_213868_1_) {
-        super.onHitEntity(p_213868_1_);
-        p_213868_1_.getEntity().hurt(DamageSource.MAGIC, 1.0F);
-        this.kill();
+    protected void onHitEntity(EntityHitResult result) {
+        super.onHitEntity(result);
+        if (result.getEntity() instanceof EntityGem) {
+            if (!((EntityGem) result.getEntity()).getOwned() || ((EntityGem) result.getEntity()).getRebelled()) {
+                result.getEntity().hurt(DamageSource.MAGIC, 1.0F);
+                this.kill();
+            }
+        } else {
+            result.getEntity().hurt(DamageSource.MAGIC, 1.0F);
+            this.kill();
+        }
     }
 
     private ParticleOptions makeParticle() {

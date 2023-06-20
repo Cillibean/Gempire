@@ -1,5 +1,6 @@
 package com.gempire.entities.projectiles;
 
+import com.gempire.entities.bases.EntityGem;
 import com.gempire.init.ModEntities;
 import com.gempire.init.ModItems;
 import net.minecraft.core.particles.ParticleTypes;
@@ -49,8 +50,15 @@ public class WaterOrbEntity extends ThrowableItemProjectile {
 
     protected void onHitEntity(EntityHitResult result) {
         super.onHitEntity(result);
-        result.getEntity().hurt(DamageSource.MAGIC, 1.0F);;
-        this.kill();
+        if (result.getEntity() instanceof EntityGem) {
+            if (!((EntityGem) result.getEntity()).getOwned() || ((EntityGem) result.getEntity()).getRebelled()) {
+                result.getEntity().hurt(DamageSource.MAGIC, 1.0F);
+                this.kill();
+            }
+        } else {
+            result.getEntity().hurt(DamageSource.MAGIC, 1.0F);
+            this.kill();
+        }
     }
 
     public void handleEntityEvent(byte id) {

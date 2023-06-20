@@ -1,5 +1,6 @@
 package com.gempire.entities.projectiles;
 
+import com.gempire.entities.bases.EntityGem;
 import com.gempire.init.ModEntities;
 import com.gempire.init.ModItems;
 import net.minecraft.core.particles.ParticleOptions;
@@ -51,6 +52,12 @@ public class AcidSpitEntity extends ThrowableItemProjectile {
 
     protected void onHitEntity(EntityHitResult result) {
         super.onHitEntity(result);
+        if (result.getEntity() instanceof EntityGem) {
+            if (!((EntityGem) result.getEntity()).getOwned() || ((EntityGem) result.getEntity()).getRebelled()) {
+                result.getEntity().hurt(DamageSource.MAGIC, 1.0F);;
+                ((LivingEntity) result.getEntity()).addEffect(new MobEffectInstance(MobEffects.POISON,50,0));
+            }
+        }
         if (result.getEntity() instanceof LivingEntity hehe)
         {
             if (hehe.getMobType() == MobType.UNDEAD)
@@ -62,8 +69,8 @@ public class AcidSpitEntity extends ThrowableItemProjectile {
                 hehe.hurt(DamageSource.MAGIC, 1.0F);;
                 hehe.addEffect(new MobEffectInstance(MobEffects.POISON,50,0));
             }
+            this.kill();
         }
-        this.kill();
     }
 
     public void handleEntityEvent(byte id) {
