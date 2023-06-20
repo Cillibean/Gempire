@@ -97,28 +97,25 @@ public class ZirconUIContainer extends AbstractContainerMenu {
         return gem.isOwner(playerIn);
     }
 
-    @Override
     public ItemStack quickMoveStack(Player playerIn, int index) {
         ItemStack stack = ItemStack.EMPTY;
         System.out.println("quick move");
         Slot slot = this.slots.get(index);
-            if (slot != null && slot.hasItem()) {
-                stack = slot.getItem();
-                ItemStack slotStack = stack.copy();
-                System.out.println(stack.getItem());
-                System.out.println(stack.getCount());
-                if (index < EntityZircon.NUMBER_OF_SLOTS && !this.moveItemStackTo(slotStack, EntityZircon.NUMBER_OF_SLOTS - 1, this.slots.size(), true)) {
-                    return ItemStack.EMPTY;
-                }
-                if (!this.moveItemStackTo(slotStack, 0, EntityZircon.NUMBER_OF_SLOTS - 1, false)) {
-                    return ItemStack.EMPTY;
-                }
-                if (slotStack.isEmpty()) {
-                    slot.set(ItemStack.EMPTY);
-                } else {
-                    slot.setChanged();
-                }
+        if (slot != null && slot.hasItem()) {
+            ItemStack slotStack = slot.getItem();
+            stack = slotStack.copy();
+            if (index < EntityZircon.NUMBER_OF_SLOTS && !this.moveItemStackTo(slotStack, EntityZircon.NUMBER_OF_SLOTS, this.slots.size(), true)) {
+                return ItemStack.EMPTY;
             }
-            return stack;
+            if (!this.moveItemStackTo(slotStack, 0, EntityZircon.NUMBER_OF_SLOTS, false)) {
+                return ItemStack.EMPTY;
+            }
+            if (slotStack.isEmpty()) {
+                slot.set(ItemStack.EMPTY);
+            } else {
+                slot.setChanged();
+            }
+        }
+        return stack;
     }
 }
