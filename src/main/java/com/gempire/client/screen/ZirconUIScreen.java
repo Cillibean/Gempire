@@ -129,7 +129,7 @@ public class ZirconUIScreen extends AbstractContainerScreen<ZirconUIContainer> {
 
     public int getXP(int discount){
         int level = getEnchantLevelFromLapisCount(this.menu.gem);
-        int returnv = level > 0 ? 255 * level : 255;
+        int returnv = level > 0 ? 75 * level : 75;
         return returnv - discount;
     }
 
