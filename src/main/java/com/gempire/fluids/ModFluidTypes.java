@@ -46,22 +46,22 @@ public class ModFluidTypes {
 
     private static RegistryObject<FluidType> registerPink(String name, FluidType.Properties properties) {
         return FLUID_TYPES.register(name, () -> new BaseFluidType(PINK_ESSENCE_STILL_RL, PINK_ESSENCE_FLOWING_RL, PINK_ESSENCE_OVERLAY_RL,
-                0xFFFFFF, new Vector3f(224f / 255f, 56f / 255f, 208f / 255f), properties));
+                0xFFFFFF, new Vector3f(1, 179f / 255f, 226f / 255f), properties));
     }
 
     private static RegistryObject<FluidType> registerBlue(String name, FluidType.Properties properties) {
         return FLUID_TYPES.register(name, () -> new BaseFluidType(BLUE_ESSENCE_STILL_RL, BLUE_ESSENCE_FLOWING_RL, BLUE_ESSENCE_OVERLAY_RL,
-                0xFFFFFF, new Vector3f(224f / 255f, 56f / 255f, 208f / 255f), properties));
+                0xFFFFFF, new Vector3f(179f / 255f, 215f / 255f, 1), properties));
     }
 
     private static RegistryObject<FluidType> registerYellow(String name, FluidType.Properties properties) {
         return FLUID_TYPES.register(name, () -> new BaseFluidType(YELLOW_ESSENCE_STILL_RL, YELLOW_ESSENCE_FLOWING_RL, YELLOW_ESSENCE_OVERLAY_RL,
-                0xFFFFFF, new Vector3f(224f / 255f, 56f / 255f, 208f / 255f), properties));
+                0xFFFFFF, new Vector3f(1, 249f / 255f, 179f / 255f), properties));
     }
 
     private static RegistryObject<FluidType> registerWhite(String name, FluidType.Properties properties) {
         return FLUID_TYPES.register(name, () -> new BaseFluidType(WHITE_ESSENCE_STILL_RL, WHITE_ESSENCE_FLOWING_RL, WHITE_ESSENCE_OVERLAY_RL,
-                0xFFFFFF, new Vector3f(224f / 255f, 56f / 255f, 208f / 255f), properties));
+                0xFFFFFF, new Vector3f(242f / 255f, 242f / 255f, 242f / 255f), properties));
     }
 
     public static void register(IEventBus eventBus) {

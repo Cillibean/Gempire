@@ -84,10 +84,15 @@
   "item.gempire.gem_slush_bucket": "Bucket of Gem Slush",
   "item.gempire.chroma_catalyst": "Chroma Catalyst",
 
-  "item.gempire.pink_essence_bucket": "Pink Gem Essence",
-  "item.gempire.blue_essence_bucket": "Blue Gem Essence",
-  "item.gempire.yellow_essence_bucket": "Yellow Gem Essence",
-  "item.gempire.white_essence_bucket": "White Gem Essence",
+  "item.gempire.pink_essence_bucket": "Pink Essence",
+  "item.gempire.blue_essence_bucket": "Blue Essence",
+  "item.gempire.yellow_essence_bucket": "Yellow Essence",
+  "item.gempire.white_essence_bucket": "White Essence",
+
+  "item.gempire.congealed_pink_essence": "Congealed Pink Essence",
+  "item.gempire.congealed_blue_essence": "Congealed Blue Essence",
+  "item.gempire.congealed_yellow_essence": "Congealed Yellow Essence",
+  "item.gempire.congealed_white_essence": "Congealed White Essence",
 
   "item.gempire.white_chroma": "White Chroma",
   "item.gempire.orange_chroma": "Orange Chroma",
@@ -154,11 +159,11 @@
   "item.gempire.prime_boost": "Prime Booster",
   "item.gempire.gilded_lapis": "Speed Booster",
 
-  "item.gempire.essence_bottle": "Gem Essence Bottle",
-  "item.gempire.pink_essence": "Pink Gem Essence",
-  "item.gempire.yellow_essence": "Yellow Gem Essence",
-  "item.gempire.blue_essence": "Blue Gem Essence",
-  "item.gempire.white_essence": "White Gem Essence",
+  "item.gempire.essence_bottle": "Essence Bottle",
+  "item.gempire.pink_essence": "Pink Essence",
+  "item.gempire.yellow_essence": "Yellow Essence",
+  "item.gempire.blue_essence": "Blue Essence",
+  "item.gempire.white_essence": "White Essence",
 
   "item.gempire.ruby_gem": "Ruby Gem",
 
@@ -508,10 +513,10 @@
   "itemGroup.gempire_items" : "Items",
   "itemGroup.gempire_blocks" : "Blocks",
 
-  "fluid.gempire.pink_essence": "Pink Gem Essence",
-  "fluid.gempire.blue_essence": "Blue Gem Essence",
-  "fluid.gempire.yellow_essence": "Yellow Gem Essence",
-  "fluid.gempire.white_essence": "White Gem Essence",
+  "fluid.gempire.pink_essence": "Pink Essence",
+  "fluid.gempire.blue_essence": "Blue Essence",
+  "fluid.gempire.yellow_essence": "Yellow Essence",
+  "fluid.gempire.white_essence": "White Essence",
 
   "container.gempire.tank": "Tank",
   "container.gempire.injector": "Injector",
@@ -660,5 +665,10 @@
   "advancements.gempire.root.description": "The Beginning Of Your Magical Journey",
 
   "enchantment.gempire.shatter": "Breaking Point",
-  "enchantment.gempire.gem_protection": "Gem Protection"
+  "enchantment.gempire.gem_protection": "Gem Protection",
+
+  "fluid_type.gempire.pink_essence_fluid": "Pink Essence",
+  "fluid_type.gempire.blue_essence_fluid": "Blue Essence",
+  "fluid_type.gempire.yellow_essence_fluid": "Yellow Essence",
+  "fluid_type.gempire.white_essence_fluid": "White Essence"
 }

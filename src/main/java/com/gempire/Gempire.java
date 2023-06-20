@@ -60,7 +60,6 @@ public class Gempire
         //MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGHEST, ClientProxy::onClientSetup);
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(new EventHandler());
-
         MinecraftForge.EVENT_BUS.register(CommonProxy.class);
     }
 
