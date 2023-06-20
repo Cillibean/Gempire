@@ -43,7 +43,7 @@ public class ZirconUIContainer extends AbstractContainerMenu {
         this.gem = gem;
         this.canInteract = ContainerLevelAccess.create(this.gem.level, this.gem.blockPosition());
 
-        this.addSlot(new Slot(gem, 0, 46, 83){
+        this.addSlot(new Slot(gem, 0, 46, 84){
             public boolean mayPlace(ItemStack stack) {
                 return stack.getItem() == Items.LAPIS_LAZULI;
             }
@@ -52,13 +52,13 @@ public class ZirconUIContainer extends AbstractContainerMenu {
             }
         });
 
-        this.addSlot(new Slot(gem, 1, 66, 83){
+        this.addSlot(new Slot(gem, 1, 66, 84){
             public boolean mayPlace(ItemStack stack) {
                 return !(stack.getItem() instanceof ItemGem || !(stack.getItem().canFitInsideContainerItems()));
             }
         });
 
-        this.addSlot(new Slot(gem, 2, 86, 83){
+        this.addSlot(new Slot(gem, 2, 86, 84){
             public boolean mayPlace(ItemStack stack) {
                 return !(stack.getItem() instanceof ItemGem || !(stack.getItem().canFitInsideContainerItems()));
             }
@@ -100,23 +100,25 @@ public class ZirconUIContainer extends AbstractContainerMenu {
     @Override
     public ItemStack quickMoveStack(Player playerIn, int index) {
         ItemStack stack = ItemStack.EMPTY;
+        System.out.println("quick move");
         Slot slot = this.slots.get(index);
-        if(slot != null && slot.hasItem()){
-            ItemStack slotStack = slot.getItem();
-            stack = slotStack.copy();
-            if(index < EntityZircon.NUMBER_OF_SLOTS && !this.moveItemStackTo(slotStack, EntityZircon.NUMBER_OF_SLOTS - 1, this.slots.size(), true)){
-                return ItemStack.EMPTY;
+            if (slot != null && slot.hasItem()) {
+                stack = slot.getItem();
+                ItemStack slotStack = stack.copy();
+                System.out.println(stack.getItem());
+                System.out.println(stack.getCount());
+                if (index < EntityZircon.NUMBER_OF_SLOTS && !this.moveItemStackTo(slotStack, EntityZircon.NUMBER_OF_SLOTS - 1, this.slots.size(), true)) {
+                    return ItemStack.EMPTY;
+                }
+                if (!this.moveItemStackTo(slotStack, 0, EntityZircon.NUMBER_OF_SLOTS - 1, false)) {
+                    return ItemStack.EMPTY;
+                }
+                if (slotStack.isEmpty()) {
+                    slot.set(ItemStack.EMPTY);
+                } else {
+                    slot.setChanged();
+                }
             }
-            if(!this.moveItemStackTo(slotStack, 0, EntityZircon.NUMBER_OF_SLOTS - 1, false)){
-                return ItemStack.EMPTY;
-            }
-            if(slotStack.isEmpty()){
-                slot.set(ItemStack.EMPTY);
-            }
-            else{
-                slot.setChanged();
-            }
-        }
-        return stack;
+            return stack;
     }
 }
