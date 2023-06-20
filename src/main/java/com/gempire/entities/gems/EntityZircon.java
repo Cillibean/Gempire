@@ -293,6 +293,8 @@ this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, EntityGem.class, 6.0F, 
         int xp = this.currentPlayer.isCreative() ? 0 : Math.max(this.getXP(this.getDiscountFromStack(this.getItem(2))), 0);
         Item item = tool.getItem();
         Enchantment enchantment = ModEnchants.VANILLA_ENCHANTMENTS.get(this.getEnchantPage());
+        System.out.println(currentPlayer.totalExperience);
+        System.out.println(xp);
         if(this.currentPlayer.totalExperience >= xp) {
             if (!tool.isEmpty()) {
                 if (tool.getEnchantmentLevel(enchantment) == 0) {
@@ -304,37 +306,37 @@ this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, EntityGem.class, 6.0F, 
                                     EnchantedBookItem.addEnchantment(this.getItem(1), new EnchantmentInstance(ModEnchants.VANILLA_ENCHANTMENTS.get(this.getEnchantPage()), level));
                                     this.setItem(0, ItemStack.EMPTY);
                                     this.setItem(2, ItemStack.EMPTY);
-                                    decreaseExp(this.currentPlayer, xp);
+                                    decreaseExp(this.currentPlayer, xp, items.get(1), true);
                                 } else {
                                     this.setItem(1, Items.ENCHANTED_BOOK.getDefaultInstance());
                                     EnchantedBookItem.addEnchantment(this.getItem(1), new EnchantmentInstance(ModEnchants.GEMPIRE_ENCHANTMENTS.get(this.getEnchantPage()), level));
                                     this.setItem(0, ItemStack.EMPTY);
                                     this.setItem(2, ItemStack.EMPTY);
-                                    decreaseExp(this.currentPlayer, xp);
+                                    decreaseExp(this.currentPlayer, xp, items.get(1), true);
                                 }
                             } else if (item instanceof EnchantedBookItem) {
                                 if (!this.isPrimary()) {
                                     EnchantedBookItem.addEnchantment(tool, new EnchantmentInstance(ModEnchants.VANILLA_ENCHANTMENTS.get(this.getEnchantPage()), level));
                                     this.setItem(0, ItemStack.EMPTY);
                                     this.setItem(2, ItemStack.EMPTY);
-                                    decreaseExp(this.currentPlayer, xp);
+                                    decreaseExp(this.currentPlayer, xp, items.get(1), true);
                                 } else {
                                     EnchantedBookItem.addEnchantment(tool, new EnchantmentInstance(ModEnchants.GEMPIRE_ENCHANTMENTS.get(this.getEnchantPage()), level));
                                     this.setItem(0, ItemStack.EMPTY);
                                     this.setItem(2, ItemStack.EMPTY);
-                                    decreaseExp(this.currentPlayer, xp);
+                                    decreaseExp(this.currentPlayer, xp, items.get(1), true);
                                 }
                             } else {
                                 if (!this.isPrimary()) {
                                     tool.enchant(ModEnchants.VANILLA_ENCHANTMENTS.get(this.getEnchantPage()), level);
                                     this.setItem(0, ItemStack.EMPTY);
                                     this.setItem(2, ItemStack.EMPTY);
-                                    decreaseExp(this.currentPlayer, xp);
+                                    decreaseExp(this.currentPlayer, xp, items.get(1), true);
                                 } else {
                                     tool.enchant(ModEnchants.GEMPIRE_ENCHANTMENTS.get(this.getEnchantPage()), level);
                                     this.setItem(0, ItemStack.EMPTY);
                                     this.setItem(2, ItemStack.EMPTY);
-                                    decreaseExp(this.currentPlayer, xp);
+                                    decreaseExp(this.currentPlayer, xp, items.get(1), true);
                                 }
                             }
                         } else {
@@ -355,7 +357,7 @@ this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, EntityGem.class, 6.0F, 
 
     public int getXP(int discount){
         int level = getEnchantLevelFromLapisCount(this.getItem(0).getCount(), this);
-        int returnv = level > 0 ? 255 * level : 255;
+        int returnv = level > 0 ? 75 * level : 75;
         return returnv - discount;
     }
 

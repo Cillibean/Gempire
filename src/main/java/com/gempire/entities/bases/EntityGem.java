@@ -835,10 +835,10 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                 }
                 //This part of the code checks if the player has a blank hand
                 if (!level.isClientSide) {
+                    this.currentPlayer = player;
                     if (!player.isSpectator()) {
                         if (hand == InteractionHand.MAIN_HAND) {
                             if (player.getItemInHand(hand).isEmpty()) {
-                                this.currentPlayer = player;
                                 if (this.isOwner(player)) {
                                     if (!this.isDeadOrDying()) {
                                         if (player.isShiftKeyDown()) {
@@ -2211,27 +2211,36 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     COMMAND STUFF
     */
 
-    public static void decreaseExp(Player player, float amount) {
-        if (player.totalExperience - amount <= 0)
-        {
-            player.experienceLevel = 0;
-            player.experienceProgress = 0;
-            player.totalExperience = 0;
-            return;
-        }
-        player.totalExperience -= amount;
-        if (player.experienceProgress * (float)player.getXpNeededForNextLevel() <= amount)
-        {
-            amount -= player.experienceProgress * (float)player.getXpNeededForNextLevel();
-            player.experienceProgress = 1.0f;
-            player.experienceLevel--;
-        }
-        while (player.getXpNeededForNextLevel() < amount)
-        {
-            amount -= player.getXpNeededForNextLevel();
-            player.experienceLevel--;
-        }
-        player.experienceProgress -= amount / (float)player.getXpNeededForNextLevel();
+    public static void decreaseExp(Player player, float amount, ItemStack stack, boolean isEnchant) {
+        //if (isEnchant) player.onEnchantmentPerformed(stack, (int) amount);
+        //else {
+            if (player.totalExperience - amount <= 0) {
+                player.experienceLevel = 0;
+                player.experienceProgress = 0;
+                player.totalExperience = 0;
+                return;
+            }
+            player.totalExperience -= amount;
+            if (player.experienceProgress * (float) player.getXpNeededForNextLevel() <= amount) {
+                amount -= player.experienceProgress * (float) player.getXpNeededForNextLevel();
+                player.experienceProgress = 1.0f;
+                player.experienceLevel--;
+            }
+            while (player.getXpNeededForNextLevel() < amount) {
+                amount -= player.getXpNeededForNextLevel();
+                player.experienceLevel--;
+            }
+            player.experienceProgress -= amount / (float) player.getXpNeededForNextLevel();
+        /*if (!player.level.isClientSide) {
+            System.out.println(amount);
+            player.giveExperienceLevels((int) -amount);
+            if (player.experienceLevel < 0) {
+                player.experienceLevel = 0;
+                player.experienceProgress = 0.0F;
+                player.totalExperience = 0;
+            }
+        }*/
+        //}
     }
 
     public void runRecallCommand(ServerPlayer player) {
@@ -2243,7 +2252,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                     player.teleportTo(x, y, z);
                     this.teleportTo(x, y, z);
                     player.sendSystemMessage(Component.translatable("commands.gempire.recall"));
-                    decreaseExp(player, 20);
+                    decreaseExp(player, 20, null, false);
             } else {
                 player.sendSystemMessage(Component.translatable(  "messages.gempire.entity.player_need_xp"));
             }
