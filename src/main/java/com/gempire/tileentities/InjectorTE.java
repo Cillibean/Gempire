@@ -1,7 +1,7 @@
 package com.gempire.tileentities;
 
 import com.gempire.blocks.GemSeedBlock;
-import com.gempire.blocks.machine.InjectorBlock;
+import com.gempire.blocks.machine.DrillBlock;
 import com.gempire.blocks.machine.PowerCrystalBlock;
 import com.gempire.container.InjectorContainer;
 import com.gempire.events.InjectEvent;
@@ -23,7 +23,6 @@ import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -329,16 +328,16 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
     }
 
     public static int getFacingFromState(BlockState state){
-        if(state.getValue(InjectorBlock.FACING) == Direction.EAST){
+        if(state.getValue(DrillBlock.FACING) == Direction.EAST){
             return 0;
         }
-        else if(state.getValue(InjectorBlock.FACING) == Direction.NORTH){
+        else if(state.getValue(DrillBlock.FACING) == Direction.NORTH){
             return 1;
         }
-        else if(state.getValue(InjectorBlock.FACING) == Direction.WEST){
+        else if(state.getValue(DrillBlock.FACING) == Direction.WEST){
             return 2;
         }
-        else if(state.getValue(InjectorBlock.FACING) == Direction.SOUTH){
+        else if(state.getValue(DrillBlock.FACING) == Direction.SOUTH){
             return 3;
         }
         else{

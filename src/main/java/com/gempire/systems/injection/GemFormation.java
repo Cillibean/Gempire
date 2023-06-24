@@ -164,7 +164,7 @@ public class GemFormation {
         }
         System.out.println("placement");
         double rarity = 1 / CONDITIONS.get(gemtoform).rarity;
-        double check = weight /rarity;
+        double check = weight;
         System.out.println("weight / rarity check "+weight / rarity);
         System.out.println("weight "+weight);
         if (world.dimension() != Level.NETHER && world.dimension() != Level.END) {
@@ -175,10 +175,10 @@ public class GemFormation {
                 } else if (check <= 7) {
                     clod = true;
                     clodNO = 1;
-                } else if (check <= 13) {
+                } else if (check <= 10) {
                     gem.setDefective(false);
                     System.out.println("defective");
-                } else if (check >= 25) {
+                } else if (check >= 19) {
                     gem.setPrimary(true);
                     System.out.println("prime");
                 }
@@ -192,10 +192,10 @@ public class GemFormation {
                 } else if (check <= 10) {
                     clod = true;
                     clodNO = 1;
-                } else if (check <= 17) {
+                } else if (check <= 14) {
                     gem.setDefective(true);
                     System.out.println("defective");
-                } else if (check >= 30) {
+                } else if (check >= 22) {
                     gem.setPrimary(true);
                     System.out.println("prime");
                 }

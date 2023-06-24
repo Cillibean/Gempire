@@ -1,11 +1,9 @@
 package com.gempire.items;
 
-import com.gempire.blocks.machine.InjectorBlock;
+import com.gempire.blocks.machine.DrillBlock;
 import com.gempire.blocks.machine.TankBlock;
-import com.gempire.init.ModBlocks;
 import com.gempire.tileentities.InjectorTE;
 import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -14,7 +12,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.phys.BlockHitResult;
 
@@ -35,7 +32,7 @@ public class ItemInjectorPanel extends Item {
             BlockPos lookPos = ray.getBlockPos();
             if (world.getBlockState(lookPos).getBlock() instanceof TankBlock) {
                 BlockPos drillPos = world.getBlockState(lookPos).getValue(TankBlock.HALF) == DoubleBlockHalf.UPPER ? lookPos.below().below() : lookPos.below();
-                if (world.getBlockState(drillPos).getBlock() instanceof InjectorBlock) {
+                if (world.getBlockState(drillPos).getBlock() instanceof DrillBlock) {
                     InjectorTE te = (InjectorTE) world.getBlockEntity(drillPos);
                     if (te != null) {
                         if(!player.isCrouching()) {
