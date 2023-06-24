@@ -16,6 +16,7 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
+import net.minecraft.world.entity.HumanoidArm;
 
 public class ModelPebble<T extends EntityStarterGem> extends ModelGem<T> {
 	// This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
@@ -113,5 +114,10 @@ public class ModelPebble<T extends EntityStarterGem> extends ModelGem<T> {
 		armr.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 		arml.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 		legl.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+	}
+
+	@Override
+	public ModelPart getArm(HumanoidArm p_102852_) {
+		return p_102852_ == HumanoidArm.LEFT ? this.arml : this.armr;
 	}
 }

@@ -6,13 +6,19 @@ import com.gempire.util.GemPlacements;
 import net.minecraft.client.Minecraft;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.monster.RangedAttackMob;
+import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.ProjectileWeaponItem;
 import net.minecraft.world.level.Level;
 
 import javax.annotation.Nullable;
@@ -21,7 +27,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public abstract class AbstractQuartz extends EntityVaryingGem {
+public abstract class AbstractQuartz extends EntityVaryingGem implements RangedAttackMob {
 
     public AbstractQuartz(EntityType<? extends PathfinderMob> type, Level worldIn) {
         super(type, worldIn);
@@ -37,8 +43,12 @@ public abstract class AbstractQuartz extends EntityVaryingGem {
     @Override
     public Abilities[] possibleAbilities() {
         return new Abilities[]{
-            Abilities.NO_ABILITY, Abilities.PYROKINESIS, Abilities.CRYOKINESIS, Abilities.UNHINGED, Abilities.BEEFCAKE, Abilities.TANK, Abilities.KNOCKBACK, Abilities.PARALYSIS,
-                Abilities.POWERHOUSE, Abilities.HEALER, Abilities.FIRST_AID, Abilities.BERSERKER, Abilities.BEASTMASTER, Abilities.ELECTROKINESIS, Abilities.AEROKINESIS, Abilities.HYDROKINESIS
+            Abilities.NO_ABILITY, Abilities.PYROKINESIS, Abilities.CRYOKINESIS,
+                Abilities.UNHINGED, Abilities.BEEFCAKE, Abilities.TANK,
+                Abilities.KNOCKBACK, Abilities.PARALYSIS, Abilities.POWERHOUSE,
+                Abilities.HEALER, Abilities.FIRST_AID, Abilities.BERSERKER,
+                Abilities.BEASTMASTER, Abilities.ELECTROKINESIS, Abilities.AEROKINESIS,
+                Abilities.HYDROKINESIS, Abilities.ARCHER
         };
     }
     @Override
@@ -58,6 +68,4 @@ public abstract class AbstractQuartz extends EntityVaryingGem {
     public int generateHardness() {
         return 7;
     }
-
-
 }

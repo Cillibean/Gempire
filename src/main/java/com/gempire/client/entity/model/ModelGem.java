@@ -3,10 +3,12 @@ package com.gempire.client.entity.model;
 import com.gempire.entities.bases.EntityGem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.client.model.ArmedModel;
 import net.minecraft.client.model.ListModel;
 import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.world.entity.HumanoidArm;
 
-public class ModelGem<T extends EntityGem> extends ListModel<T> {
+public class ModelGem<T extends EntityGem> extends ListModel<T> implements ArmedModel {
 
     @Override
     public void setupAnim(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
@@ -20,6 +22,15 @@ public class ModelGem<T extends EntityGem> extends ListModel<T> {
 
     @Override
     public Iterable<ModelPart> parts() {
+        return null;
+    }
+
+    @Override
+    public void translateToHand(HumanoidArm p_102854_, PoseStack p_102855_) {
+        this.getArm(p_102854_).translateAndRotate(p_102855_);
+    }
+
+    public ModelPart getArm(HumanoidArm p_102854_) {
         return null;
     }
 }

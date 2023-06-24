@@ -129,7 +129,9 @@ this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, EntityGem.class, 6.0F, 
 
     public Abilities[] possibleAbilities(){
         return new Abilities[]{
-                Abilities.KNOCKBACK, Abilities.NO_ABILITY, Abilities.TANK, Abilities.BEEFCAKE, Abilities.POWERHOUSE, Abilities.UNHINGED
+                Abilities.KNOCKBACK, Abilities.NO_ABILITY, Abilities.TANK,
+                Abilities.BEEFCAKE, Abilities.POWERHOUSE, Abilities.UNHINGED,
+                Abilities.ARCHER
         };
     }
     public Abilities[] definiteAbilities(){

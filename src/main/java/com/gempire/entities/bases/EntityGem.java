@@ -59,6 +59,8 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
@@ -325,6 +327,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.setZScale(this.generateZScale());
         this.setPrimary(this.isPrimary());
         this.setDefective(this.isDefective());
+        if (isArcher()) this.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(Items.BOW));
         AttributeModifier PRIME = new AttributeModifier(UUID.randomUUID(), "gempirePrimaryModifier", 5D, AttributeModifier.Operation.ADDITION);
         AttributeModifier PRIME_SPEED = new AttributeModifier(UUID.randomUUID(), "gempirePrimarySpeedModifier", .2D, AttributeModifier.Operation.ADDITION);
         AttributeModifier DEFECTIVE = new AttributeModifier(UUID.randomUUID(), "gempireDefectiveModifier", -5D, AttributeModifier.Operation.ADDITION);
@@ -1153,6 +1156,19 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                 ((IRangedAbility)power).attack(target, distanceFactor);
             }
         }
+        if (this.isArcher()) {
+            ItemStack itemstack = this.getProjectile(this.getItemInHand(ProjectileUtil.getWeaponHoldingHand(this, item -> item instanceof net.minecraft.world.item.BowItem)));
+            AbstractArrow abstractarrow = this.getArrow(itemstack, distanceFactor);
+            if (this.getMainHandItem().getItem() instanceof net.minecraft.world.item.BowItem)
+                abstractarrow = ((net.minecraft.world.item.BowItem) this.getMainHandItem().getItem()).customArrow(abstractarrow);
+            double d0 = target.getX() - this.getX();
+            double d1 = target.getY(0.3333333333333333D) - abstractarrow.getY();
+            double d2 = target.getZ() - this.getZ();
+            double d3 = Math.sqrt(d0 * d0 + d2 * d2);
+            abstractarrow.shoot(d0, d1 + d3 * (double) 0.2F, d2, 1.6F, (float) (14 - this.level.getDifficulty().getId() * 4));
+            //this.playSound(SoundEvents.SKELETO_SHOOT, 1.0F, 1.0F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
+            this.level.addFreshEntity(abstractarrow);
+        }
     }
 
     @Override
@@ -1934,6 +1950,18 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         return powers;
     }
 
+    protected AbstractArrow getArrow(ItemStack p_32156_, float p_32157_) {
+        return ProjectileUtil.getMobArrow(this, p_32156_, p_32157_);
+    }
+
+    public boolean canFireProjectileWeapon(ProjectileWeaponItem p_32144_) {
+        if (this.isArcher()) {
+            return p_32144_ == Items.BOW;
+        } else {
+            return false;
+        }
+    }
+
     public boolean isFocused(){
         return false;
     }
@@ -2191,6 +2219,16 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         boolean flag = false;
         for(Ability ability : this.getAbilityPowers()){
             if(ability instanceof AbilityRecall){
+                return flag = true;
+            }
+        }
+        return flag;
+    }
+
+    public boolean isArcher(){
+        boolean flag = false;
+        for(Ability ability : this.getAbilityPowers()){
+            if(ability instanceof AbilityArcher){
                 return flag = true;
             }
         }
