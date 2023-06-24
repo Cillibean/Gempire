@@ -2,21 +2,14 @@ package com.gempire.init;
 
 import com.gempire.Gempire;
 import com.gempire.blocks.*;
-import com.gempire.blocks.crystalchest.CrystalChestBlock;
 import com.gempire.blocks.machine.*;
-import com.mojang.realmsclient.util.JsonUtils;
 import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.material.FlowingFluid;
-import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.material.Material;
 import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import net.minecraft.world.level.block.state.BlockBehaviour;
-
-import java.util.function.Supplier;
 
 public class ModBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Gempire.MODID);
@@ -322,7 +315,7 @@ public class ModBlocks {
     );
 
     public static final RegistryObject<Block> DRILL_BLOCK = BLOCKS.register("drill_block", () ->
-            new InjectorBlock(BlockBehaviour.Properties
+            new DrillBlock(BlockBehaviour.Properties
                     .of(Material.METAL)
                     .strength(3.0f, 6.0f)
                     .sound(SoundType.METAL)
