@@ -12,6 +12,7 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
+import net.minecraft.world.entity.HumanoidArm;
 
 public class ModelPearl<T extends EntityGem> extends ModelGem<T> {
 	// This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
@@ -95,5 +96,10 @@ public class ModelPearl<T extends EntityGem> extends ModelGem<T> {
 		LegR.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 		ArmL.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 		ArmR.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+	}
+
+	@Override
+	public ModelPart getArm(HumanoidArm p_102852_) {
+		return p_102852_ == HumanoidArm.LEFT ? this.ArmL : this.ArmR;
 	}
 }

@@ -7,12 +7,14 @@ import com.gempire.Gempire;
 import com.gempire.entities.bases.EntityGem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.client.model.ArmedModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
+import net.minecraft.world.entity.HumanoidArm;
 
 public class ModelQuartz<T extends EntityGem> extends ModelGem<T> {
 	// This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
@@ -102,5 +104,10 @@ public class ModelQuartz<T extends EntityGem> extends ModelGem<T> {
 		armr.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 		legl.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 		legr.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+	}
+
+	@Override
+	public ModelPart getArm(HumanoidArm p_102852_) {
+		return p_102852_ == HumanoidArm.LEFT ? this.arml : this.armr;
 	}
 }
