@@ -158,7 +158,7 @@ public class EntityBismuth extends EntityGem {
     }
     public Abilities[] definiteAbilities(){
         return new Abilities[]{
-                Abilities.REFINERY
+                Abilities.REFINERY, Abilities.TINKERER
         };
     }
 
