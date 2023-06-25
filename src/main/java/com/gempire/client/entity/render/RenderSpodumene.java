@@ -12,6 +12,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
+import net.minecraft.client.renderer.entity.layers.ItemInHandLayer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.network.chat.Component;
 
@@ -20,6 +21,7 @@ public class RenderSpodumene extends MobRenderer<EntitySpodumene, ModelSpodumene
     public RenderSpodumene(EntityRendererProvider.Context renderManagerIn, ModelSpodumene<EntitySpodumene> baseModel) {
         super(renderManagerIn, baseModel, .25f);
         this.addLayer(new GemPlacementLayer(this));
+        this.addLayer(new ItemInHandLayer(this, renderManagerIn.getItemInHandRenderer()));
         this.addLayer(new SkinLayer(this));
         //this.addLayer(new FaceLayer(this));
         this.addLayer(new SpodumeneHairLayer(this));

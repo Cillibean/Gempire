@@ -68,4 +68,9 @@ public abstract class AbstractQuartz extends EntityVaryingGem implements RangedA
     public int generateHardness() {
         return 7;
     }
+
+    @Override
+    public int exitHoleSize() {
+        return 3;
+    }
 }

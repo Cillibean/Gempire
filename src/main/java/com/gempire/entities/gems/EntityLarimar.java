@@ -199,4 +199,9 @@ this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, EntityGem.class, 6.0F, 
     public int getColor() {
         return 3;
     }
+
+    @Override
+    public int exitHoleSize() {
+        return 3;
+    }
 }

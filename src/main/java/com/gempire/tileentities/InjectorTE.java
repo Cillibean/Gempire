@@ -247,8 +247,9 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
 
 
     public void Inject() {
-        BlockPos crystalPos = getBlockPos().above().above().above();
-        BlockPos seedPos = this.getBlockPos().offset(new BlockPos(0, -Math.ceil(GemSeedTE.DRAIN_SIZE / 2) - 1, 0));
+        BlockPos crystalPos = getBlockPos().above().above();
+        BlockPos drillPos = getBlockPos().below();
+        BlockPos seedPos = this.getBlockPos().offset(new BlockPos(0, -Math.ceil(GemSeedTE.DRAIN_SIZE / 2) - 1 -1, 0));
         if (level.getBlockState(crystalPos).getBlock() instanceof PowerCrystalBlock) {
             System.out.println(fluidValid());
             if (this.level.getBlockState(seedPos) != Blocks.BEDROCK.defaultBlockState()) {

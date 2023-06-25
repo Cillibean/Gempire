@@ -3,6 +3,8 @@ package com.gempire.entities.ai;
 import com.gempire.entities.gems.starter.EntityMica;
 import com.gempire.entities.gems.starter.EntityPebble;
 import com.gempire.init.ModBlocks;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.PickaxeItem;
 import net.minecraft.world.level.block.AbstractGlassBlock;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.entity.ai.goal.Goal;
@@ -23,7 +25,7 @@ public class EntityAIMakePowerCrystal extends Goal {
 
     @Override
     public boolean canUse() {
-        if (follower.hopperGoal) {
+        if (follower.getItemBySlot(EquipmentSlot.MAINHAND).getItem() instanceof PickaxeItem) {
             BlockPos hopper = BlockPos.ZERO;
             boolean found = false;
             for (int x = -4; x < 5; x++) {
@@ -48,13 +50,13 @@ public class EntityAIMakePowerCrystal extends Goal {
                 }
             }
         }
-        return this.target != null && this.target != BlockPos.ZERO && this.follower.hopperGoal;
+        return this.target != null && this.target != BlockPos.ZERO && follower.getItemBySlot(EquipmentSlot.MAINHAND).getItem() instanceof PickaxeItem;
     }
 
     @Override
     public boolean canContinueToUse() {
         return this.target != null && !this.follower.getNavigation().isDone() &&
-                this.follower.distanceToSqr(target.getX(), target.getY(), target.getZ()) > Math.pow(4, 2) && this.follower.hopperGoal;
+                this.follower.distanceToSqr(target.getX(), target.getY(), target.getZ()) > Math.pow(4, 2) && follower.getItemBySlot(EquipmentSlot.MAINHAND).getItem() instanceof PickaxeItem;
     }
 
     @Override
@@ -76,7 +78,7 @@ public class EntityAIMakePowerCrystal extends Goal {
                 this.follower.level.setBlockAndUpdate(this.target.south(), Blocks.AIR.defaultBlockState());
                 this.follower.level.setBlockAndUpdate(this.target.west(), Blocks.AIR.defaultBlockState());
                 this.follower.level.setBlockAndUpdate(this.target.east(), Blocks.AIR.defaultBlockState());
-                this.follower.hopperGoal = false;
+                follower.getItemBySlot(EquipmentSlot.MAINHAND).hurtAndBreak(1, follower, (p_43296_) -> p_43296_.broadcastBreakEvent(EquipmentSlot.MAINHAND));
             }
         }
     }

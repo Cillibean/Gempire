@@ -47,7 +47,7 @@ public class AbilityTorchBearer extends Ability implements IIdleAbility {
                         if (holder.isOnGround()) {
                             if (level.getBrightness(LightLayer.BLOCK, pos) <= 9) {
                                 if (level.getBrightness(LightLayer.SKY, pos) <= 9) {
-                                    if (holder.consumeItemCheck(Items.TORCH)) {
+                                    if (holder.consumeItemCheck(Items.TORCH, 1)) {
                                         level.setBlock(pos, Blocks.TORCH.defaultBlockState(), 3);
                                     }
                                 }

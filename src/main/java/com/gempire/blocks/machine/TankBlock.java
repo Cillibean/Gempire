@@ -35,13 +35,26 @@ import javax.annotation.Nullable;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.network.NetworkHooks;
 
-public class TankBlock extends Block {
+public class TankBlock extends BaseEntityBlock implements EntityBlock {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
 
     public TankBlock(Properties builder) {
         super(builder);
         this.registerDefaultState(this.stateDefinition.any().setValue(HALF, DoubleBlockHalf.LOWER).setValue(HALF, DoubleBlockHalf.LOWER).setValue(FACING, Direction.NORTH));
+    }
+
+    @Nullable
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level p_152180_, BlockState p_152181_, BlockEntityType<T> p_152182_) {
+        return p_152182_ == ModTE.INJECTOR_TE.get() ? InjectorTE::tick : null;
+    }
+
+    @Nullable
+    @Override
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        DoubleBlockHalf half = state.getValue(HALF);
+        if (half == DoubleBlockHalf.LOWER) return new InjectorTE(pos, state);
+        else return null;
     }
 
     @SuppressWarnings("deprecation")
@@ -54,9 +67,9 @@ public class TankBlock extends Block {
             BlockPos drillPos = state.getValue(HALF) == DoubleBlockHalf.UPPER ? pos.below().below() : pos.below();
             BlockPos crystalPos = state.getValue(HALF) == DoubleBlockHalf.UPPER ? pos.above() : pos.above().above();
             if (worldIn.getBlockState(drillPos).getBlock() == ModBlocks.DRILL_BLOCK.get() && worldIn.getBlockState(crystalPos).getBlock() instanceof PowerCrystalBlock) {
-                BlockEntity te = worldIn.getBlockEntity(drillPos);
+                BlockEntity te = worldIn.getBlockEntity(state.getValue(HALF) == DoubleBlockHalf.LOWER ? pos : pos.below());
                 if (te instanceof InjectorTE) {
-                        NetworkHooks.openScreen((ServerPlayer) player, (InjectorTE) te, drillPos);
+                        NetworkHooks.openScreen((ServerPlayer) player, (InjectorTE) te, state.getValue(HALF) == DoubleBlockHalf.LOWER ? pos : pos.below());
                         return InteractionResult.CONSUME;
                     } return InteractionResult.PASS;
                 } return InteractionResult.PASS;
@@ -139,4 +152,20 @@ public class TankBlock extends Block {
         BlockState blockstate = p_52784_.getBlockState(blockpos);
         return p_52783_.getValue(HALF) == DoubleBlockHalf.LOWER ? blockstate.isFaceSturdy(p_52784_, blockpos, Direction.UP) : blockstate.is(this);
     }*/
+
+    @Override
+    public void neighborChanged(BlockState state, Level worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving) {
+        super.neighborChanged(state, worldIn, pos, blockIn, fromPos, isMoving);
+        /*if(worldIn.hasNeighborSignal(pos)){
+            BlockEntity te = worldIn.getBlockEntity(pos);
+            if(te instanceof InjectorTE){
+                ((InjectorTE)te).Inject();
+            }
+        }*/
+    }
+
+    @Override
+    public boolean canConnectRedstone(BlockState state, BlockGetter world, BlockPos pos, @Nullable Direction side) {
+        return true;
+    }
 }

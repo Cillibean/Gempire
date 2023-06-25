@@ -11,6 +11,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
+import net.minecraft.client.renderer.entity.layers.ItemInHandLayer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.monster.Strider;
@@ -26,6 +27,7 @@ public class RenderShale extends MobRenderer<EntityShale, ModelPebble<EntityShal
         this.addLayer(new InsigniaLayer(this));
         this.addLayer(new HairLayer(this));
         this.addLayer(new GemPlacementLayer(this));
+        this.addLayer(new ItemInHandLayer(this, renderManagerIn.getItemInHandRenderer()));
     }
 
     @Override

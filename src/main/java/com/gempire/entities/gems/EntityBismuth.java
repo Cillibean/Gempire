@@ -158,7 +158,7 @@ public class EntityBismuth extends EntityGem {
     }
     public Abilities[] definiteAbilities(){
         return new Abilities[]{
-                Abilities.REFINERY
+                Abilities.REFINERY, Abilities.TINKERER
         };
     }
 
@@ -228,5 +228,10 @@ public class EntityBismuth extends EntityGem {
     @Override
     public int getColor() {
         return 2;
+    }
+
+    @Override
+    public int exitHoleSize() {
+        return 3;
     }
 }

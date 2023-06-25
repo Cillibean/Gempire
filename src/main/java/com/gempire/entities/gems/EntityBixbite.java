@@ -197,4 +197,9 @@ public class EntityBixbite extends EntityGem {
     public int getColor() {
         return 14;
     }
+
+    @Override
+    public int exitHoleSize() {
+        return 3;
+    }
 }

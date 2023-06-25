@@ -12,6 +12,7 @@ import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
+import net.minecraft.client.renderer.entity.layers.ItemInHandLayer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.network.chat.Component;
 
@@ -28,6 +29,7 @@ public class RenderAgate extends MobRenderer<EntityAgate, ModelQuartz<EntityAgat
         this.addLayer(new VisorLayer(this));
         this.addLayer(new HairLayer(this));
         this.addLayer(new GemPlacementLayer(this));
+        this.addLayer(new ItemInHandLayer(this, renderManagerIn.getItemInHandRenderer()));
     }
 
     @Override

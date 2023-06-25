@@ -73,7 +73,7 @@ public class EntityAIFarm extends Goal {
                         if (this.follower.itemCheck(Items.WHEAT_SEEDS)) {
                             this.follower.getNavigation().moveTo(target.getX(), target.getY(), target.getZ(), this.speed);
                             if (this.follower.distanceToSqr(target.getX(), target.getY(), target.getZ()) < 4) {
-                                if (this.follower.consumeItemCheck(Items.WHEAT_SEEDS)) {
+                                if (this.follower.consumeItemCheck(Items.WHEAT_SEEDS, 1)) {
                                     this.follower.level.setBlockAndUpdate(target.above(), Blocks.WHEAT.defaultBlockState());
                                     target = null;
                                     this.stop();
@@ -82,7 +82,7 @@ public class EntityAIFarm extends Goal {
                         } else if (this.follower.itemCheck(Items.BEETROOT_SEEDS)) {
                             this.follower.getNavigation().moveTo(target.getX(), target.getY(), target.getZ(), this.speed);
                             if (this.follower.distanceToSqr(target.getX(), target.getY(), target.getZ()) < 4) {
-                                if (this.follower.consumeItemCheck(Items.BEETROOT_SEEDS)) {
+                                if (this.follower.consumeItemCheck(Items.BEETROOT_SEEDS, 1)) {
                                     this.follower.level.setBlockAndUpdate(target.above(), Blocks.BEETROOTS.defaultBlockState());
                                     target = null;
                                     this.stop();
@@ -91,7 +91,7 @@ public class EntityAIFarm extends Goal {
                         } else if (this.follower.itemCheck(Items.CARROT)) {
                             this.follower.getNavigation().moveTo(target.getX(), target.getY(), target.getZ(), this.speed);
                             if (this.follower.distanceToSqr(target.getX(), target.getY(), target.getZ()) < 4) {
-                                if (this.follower.consumeItemCheck(Items.CARROT)) {
+                                if (this.follower.consumeItemCheck(Items.CARROT, 1)) {
                                     this.follower.level.setBlockAndUpdate(target.above(), Blocks.CARROTS.defaultBlockState());
                                     target = null;
                                     this.stop();
@@ -99,7 +99,7 @@ public class EntityAIFarm extends Goal {
                             }
                         } else if (this.follower.itemCheck(Items.POTATO)) {
                             this.follower.getNavigation().moveTo(target.getX(), target.getY(), target.getZ(), this.speed);
-                            if (this.follower.consumeItemCheck(Items.POTATO)) {
+                            if (this.follower.consumeItemCheck(Items.POTATO, 1)) {
                                 this.follower.level.setBlockAndUpdate(target.above(), Blocks.POTATOES.defaultBlockState());
                                 target = null;
                                 this.stop();
@@ -117,7 +117,7 @@ public class EntityAIFarm extends Goal {
                             target = null;
                             this.stop();
                         }
-                    } else if (follower.consumeItemCheck(Items.BONE_MEAL) ) {
+                    } else if (follower.consumeItemCheck(Items.BONE_MEAL, 1) ) {
                         System.out.println("grow attempt");
                         this.follower.getNavigation().moveTo(target.getX(), target.getY(), target.getZ(), this.speed);
                         if (this.follower.distanceToSqr(target.getX(), target.getY(), target.getZ()) < 4) {

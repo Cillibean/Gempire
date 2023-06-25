@@ -4,6 +4,8 @@ import com.gempire.entities.bases.EntityGem;
 import com.gempire.entities.bases.EntityStarterGem;
 import com.gempire.entities.gems.starter.EntityPebble;
 import com.gempire.init.ModBlocks;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.PickaxeItem;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
@@ -22,7 +24,7 @@ public class EntityAIMakeDrill extends Goal {
 
     @Override
     public boolean canUse() {
-        if (follower.hopperGoal) {
+        if (follower.getItemBySlot(EquipmentSlot.MAINHAND).getItem() instanceof PickaxeItem) {
             BlockPos hopper = BlockPos.ZERO;
             boolean found = false;
             for (int x = -4; x < 5; x++) {
@@ -47,7 +49,7 @@ public class EntityAIMakeDrill extends Goal {
                 }
             }
         }
-        return this.target != null && this.target != BlockPos.ZERO && this.follower.hopperGoal;
+        return this.target != null && this.target != BlockPos.ZERO && follower.getItemBySlot(EquipmentSlot.MAINHAND).getItem() instanceof PickaxeItem;
     }
 
     @Override
@@ -73,8 +75,7 @@ public class EntityAIMakeDrill extends Goal {
                                 this.follower.level.setBlockAndUpdate(this.target.south(), Blocks.AIR.defaultBlockState());
                                 this.follower.level.setBlockAndUpdate(this.target.west(), Blocks.AIR.defaultBlockState());
                                 this.follower.level.setBlockAndUpdate(this.target.east(), Blocks.AIR.defaultBlockState());
-                                this.follower.hopperGoal = false;
-                            }
+                                follower.getItemBySlot(EquipmentSlot.MAINHAND).hurtAndBreak(1, follower, (p_43296_) -> p_43296_.broadcastBreakEvent(EquipmentSlot.MAINHAND));                            }
                         }
                     }
                 }

@@ -1,15 +1,17 @@
 package com.gempire.blocks;
 
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.core.Direction;
-import net.minecraft.world.level.block.Mirror;
-import net.minecraft.world.level.block.Rotation;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -24,16 +26,14 @@ import java.util.Random;
 
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.DirectionalBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class ChromaBlock extends DirectionalBlock {
+public class ChromaBlock extends DirectionalBlock implements SimpleWaterloggedBlock {
     protected static final VoxelShape CRYSTAL_VERTICAL_AABB = Block.box(1.0D, 0.0D, 1.0D, 15.0D, 16.0D, 15.0D);
     protected static final VoxelShape CRYSTAL_NS_AABB = Block.box(1D, 1.0D, 0D, 15.0D, 15.0D, 16);
     protected static final VoxelShape CRYSTAL_EW_AABB = Block.box(0.0D, 1D, 1D, 16.0D, 15.0D, 15);
-    public static final BooleanProperty WATERLOGGED = BooleanProperty.create("waterlogged");
+    public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
+
     public int colour;
 
     public ChromaBlock(Properties properties, int color) {
@@ -122,7 +122,7 @@ public class ChromaBlock extends DirectionalBlock {
     }
 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING).add(WATERLOGGED);
+        builder.add(FACING,WATERLOGGED);
     }
 
     public PushReaction getPistonPushReaction(BlockState state) {
@@ -136,5 +136,9 @@ public class ChromaBlock extends DirectionalBlock {
     @Override
     public int getExpDrop(BlockState state, net.minecraft.world.level.LevelReader world, RandomSource randomSource, BlockPos pos, int fortune, int silktouch) {
         return silktouch == 0 ? 1 + randomSource.nextInt(5) : 0;
+    }
+
+    public FluidState getFluidState(BlockState p_54377_) {
+        return p_54377_.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(p_54377_);
     }
 }

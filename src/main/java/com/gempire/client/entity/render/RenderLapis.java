@@ -12,6 +12,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
+import net.minecraft.client.renderer.entity.layers.ItemInHandLayer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.network.chat.Component;
 
@@ -26,6 +27,7 @@ public class RenderLapis extends MobRenderer<EntityLapis, ModelLapis<EntityLapis
         this.addLayer(new InsigniaLayer(this));
         this.addLayer(new HairLayer(this));
         this.addLayer(new GemPlacementLayer(this));
+        this.addLayer(new ItemInHandLayer(this, renderManagerIn.getItemInHandRenderer()));
         //TO-DO: Wing layer for Lapis Lazuli, random wing variants
     }
 

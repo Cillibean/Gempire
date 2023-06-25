@@ -52,7 +52,8 @@ public enum Abilities {
     RECALL(48,3),
     KINDERGARTENER(49,3),
     MINING(50,3),
-    ARCHER(51,2);
+    ARCHER(51,2),
+    TINKERER(52,4);
 
     public final int id;
     public final int weight;

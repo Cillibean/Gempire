@@ -266,9 +266,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, DifficultyInstance difficultyIn, MobSpawnType reason, @Nullable SpawnGroupData spawnDataIn, @Nullable CompoundTag dataTag) {
         this.setGemPlacement(this.generateGemPlacement());
         this.setSkinVariant(this.generateSkinVariant());
-        if (this.setSkinVariantOnInitialSpawn) {
-            this.setSkinColorVariant(this.generateSkinColorVariant());
-        } else this.setSkinColorVariant(this.initalSkinVariant);
+        if (this.setSkinVariantOnInitialSpawn) this.setSkinColorVariant(this.generateSkinColorVariant()); else this.setSkinColorVariant(this.initalSkinVariant);
         this.setHairVariant(this.generateHairVariant());
         this.setSkinColor(this.generatePaletteColor(PaletteType.SKIN));
         this.setHairColor(this.generatePaletteColor(PaletteType.HAIR));
@@ -293,18 +291,12 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.setMarkingColor(this.generatePaletteColor(PaletteType.MARKINGS));
         this.setMarking2Variant(this.generateMarking2Variant());
         this.setMarking2Color(this.generatePaletteColor(PaletteType.MARKINGS_2));
-        if (this.hasCustomName()) {
-            this.setCustomName(this.getName());
-        } else {
-            this.setCustomName(this.getNickname());
-        }
+        if (this.hasCustomName()) this.setCustomName(this.getName()); else this.setCustomName(this.getNickname());
         this.rebelPoints = 0.5f;
         this.rebelTicks = 1;
         //this.generateScoutList();
         this.idlePowers = this.generateIdlePowers();
-        if (this.spawnGem != null) {
-            this.spawnGem.remove(RemovalReason.DISCARDED);
-        }
+        if (this.spawnGem != null) this.spawnGem.remove(RemovalReason.DISCARDED);
         ItemStack stack = new ItemStack(this.getGemItem());
         ItemGem.saveData(stack, this);
         //setAssignedGem(((ItemGem) stack.getItem()).assigned_gem);
@@ -327,7 +319,8 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.setZScale(this.generateZScale());
         this.setPrimary(this.isPrimary());
         this.setDefective(this.isDefective());
-        if (isArcher()) this.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(Items.BOW));
+        //this.setItemSlot(EquipmentSlot.OFFHAND, new ItemStack(Items.OAK_LOG));
+        //if (isArcher()) this.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(Items.BOW));
         AttributeModifier PRIME = new AttributeModifier(UUID.randomUUID(), "gempirePrimaryModifier", 5D, AttributeModifier.Operation.ADDITION);
         AttributeModifier PRIME_SPEED = new AttributeModifier(UUID.randomUUID(), "gempirePrimarySpeedModifier", .2D, AttributeModifier.Operation.ADDITION);
         AttributeModifier DEFECTIVE = new AttributeModifier(UUID.randomUUID(), "gempireDefectiveModifier", -5D, AttributeModifier.Operation.ADDITION);
@@ -400,7 +393,10 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
 
     @Override
     public boolean canHoldItem(ItemStack stack) {
-        return stack.getItem() instanceof ArmorItem || stack.getItem() instanceof DiggerItem || stack.getItem() instanceof SwordItem;
+        if (this instanceof EntityPearl) return false;
+        else if (this.isArcher()) return stack.getItem() instanceof DiggerItem || stack.getItem() instanceof BowItem || stack.getItem() instanceof AxeItem || stack.getItem() instanceof PickaxeItem;
+        else if (this.isTinkerer()) return stack.getItem() instanceof DiggerItem || stack.getItem() instanceof BowItem || stack.getItem() instanceof AxeItem || stack.getItem() instanceof PickaxeItem || stack.getItem() instanceof ArmorItem;
+        else return stack.getItem() instanceof DiggerItem || stack.getItem() instanceof SwordItem || stack.getItem() instanceof AxeItem || stack.getItem() instanceof PickaxeItem;
     }
 
     public SoundEvent getInstrument() {
@@ -844,25 +840,25 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                             if (player.getItemInHand(hand).isEmpty()) {
                                 if (this.isOwner(player)) {
                                     if (!this.isDeadOrDying()) {
-                                        if (player.isShiftKeyDown()) {
-                                            this.cycleMovementAI(player);
-                                            this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
-                                            if (OWNERS.size() <= 1 && this.MASTER_OWNER != player.getUUID()) {
-                                                MASTER_OWNER = player.getUUID();
-                                                System.out.println("Added master owner");
-                                            }
-                                        } else {
-                                            if (this.canOpenInventoryByDefault()) {
-                                                NetworkHooks.openScreen((ServerPlayer) player, this, buf -> buf.writeInt(this.getId()));
+                                            if (player.isShiftKeyDown()) {
+                                                this.cycleMovementAI(player);
                                                 this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
-                                            }
-                                            if (this.isRideable()) {
-                                                if (!this.isVehicle()) {
-                                                    player.startRiding(this);
+                                                if (OWNERS.size() <= 1 && this.MASTER_OWNER != player.getUUID()) {
+                                                    MASTER_OWNER = player.getUUID();
+                                                    System.out.println("Added master owner");
+                                                }
+                                            } else {
+                                                if (this.canOpenInventoryByDefault()) {
+                                                    NetworkHooks.openScreen((ServerPlayer) player, this, buf -> buf.writeInt(this.getId()));
                                                     this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
                                                 }
+                                                if (this.isRideable()) {
+                                                    if (!this.isVehicle()) {
+                                                        player.startRiding(this);
+                                                        this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
+                                                    }
+                                                }
                                             }
-                                        }
                                     }
                                 } else {
                                     //Test to see if the gem has an owner
@@ -891,7 +887,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                                             }
                                         } else if (player.getMainHandItem().getItem() == Items.PAPER) {
                                             NetworkHooks.openScreen((ServerPlayer) player, this, buf -> buf.writeInt(this.getId()));
-                                        } else if (player.getMainHandItem().getItem() == Items.BOOK) {
+                                        } else if (player.getMainHandItem().getItem() == Items.BOOK && this.canLocateStructures()) {
                                             StringBuilder list1 = new StringBuilder();
                                             for (int i = 0; i < this.structures.size(); i++) {
                                                 if (i == this.structures.size() - 1) {
@@ -910,6 +906,10 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                                             }
                                             player.sendSystemMessage(Component.translatable("Findable Structures: " + list1));
                                             player.sendSystemMessage(Component.translatable("Findable Biomes: " + list2));
+                                        } else if (this.canHoldItem(player.getMainHandItem())) {
+                                            ItemStack stack = this.getItemBySlot(EquipmentSlot.MAINHAND);
+                                            this.setItemSlot(EquipmentSlot.MAINHAND, player.getMainHandItem());
+                                            player.setItemSlot(EquipmentSlot.MAINHAND, stack);
                                         }
                                     }
                                 }
@@ -1082,6 +1082,18 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                     }
                 } else if (source.getEntity() instanceof Player) {
                     Player player = (Player) source.getEntity();
+                    if (isOwner(player.getUUID())) {
+                        if (!this.getItemBySlot(EquipmentSlot.MAINHAND).isEmpty()) {
+                            ItemStack stack = this.getItemBySlot(EquipmentSlot.MAINHAND);
+                            Objects.requireNonNull(this.spawnAtLocation(stack)).setExtendedLifetime();
+                            this.setItemSlot(EquipmentSlot.MAINHAND, Items.AIR.getDefaultInstance());
+                        }
+                        if (!this.getItemBySlot(EquipmentSlot.OFFHAND).isEmpty()) {
+                            ItemStack stack = this.getItemBySlot(EquipmentSlot.OFFHAND);
+                            Objects.requireNonNull(this.spawnAtLocation(stack)).setExtendedLifetime();
+                            this.setItemSlot(EquipmentSlot.OFFHAND, Items.AIR.getDefaultInstance());
+                        }
+                    }
                     if (!(player.getMainHandItem().getItem() instanceof DestabBase)) {
                         if ((amount - getHealth()) > hardness) {
                             if ((this.random.nextInt(shatterChance) == 1)) {
@@ -1182,6 +1194,16 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             this.playSound(ModSounds.POOF.get());
             GemPoofEvent event = new GemPoofEvent(this, this.blockPosition(), source);
             MinecraftForge.EVENT_BUS.post(event);
+            if (!this.getItemBySlot(EquipmentSlot.MAINHAND).isEmpty()) {
+                ItemStack stack = this.getItemBySlot(EquipmentSlot.MAINHAND);
+                Objects.requireNonNull(this.spawnAtLocation(stack)).setExtendedLifetime();
+                this.setItemSlot(EquipmentSlot.MAINHAND, Items.AIR.getDefaultInstance());
+            }
+            if (!this.getItemBySlot(EquipmentSlot.OFFHAND).isEmpty()) {
+                ItemStack stack = this.getItemBySlot(EquipmentSlot.OFFHAND);
+                Objects.requireNonNull(this.spawnAtLocation(stack)).setExtendedLifetime();
+                this.setItemSlot(EquipmentSlot.OFFHAND, Items.AIR.getDefaultInstance());
+            }
             if (getShatter()){
                 ItemStack stack = new ItemStack(this.getShardItem());
                 Objects.requireNonNull(this.spawnAtLocation(stack)).setExtendedLifetime();
@@ -1568,6 +1590,8 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     }
 
     public abstract int generateHairVariant();
+
+    public abstract int exitHoleSize();
 
     public int getRebelHairVariant(){
         return this.entityData.get(EntityGem.REBEL_HAIR_VARIANT);
@@ -2189,17 +2213,21 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         return true;
     }
 
-    public boolean consumeItemCheck(Item item){
+    public boolean consumeItemCheck(Item item, int amount){
         for(int i = 0; i < EntityGem.NUMBER_OF_SLOTS - 4; i++){
-            if(this.getItem(i).getItem() == item){
-                if(this.getItem(i).getCount() == 1){
-                    this.setItem(i, ItemStack.EMPTY);
-                    return true;
-                }else {
-                    this.setItem(i, new ItemStack(this.getItem(i).getItem(),
-                            this.getItem(i).getCount() - 1));
-                    //this.getStackInSlot(i).shrink(1);
-                    return true;
+            if(this.getItem(i).getItem() == item) {
+                if (this.getItem(i).getCount() >= amount) {
+                    if (this.getItem(i).getCount() == amount) {
+                        this.setItem(i, ItemStack.EMPTY);
+                        return true;
+                    } else {
+                        this.setItem(i, new ItemStack(this.getItem(i).getItem(),
+                                this.getItem(i).getCount() - amount));
+                        //this.getItem(i).shrink(1);
+                        return true;
+                    }
+                } else {
+                    return false;
                 }
             }
         }
@@ -2229,6 +2257,16 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         boolean flag = false;
         for(Ability ability : this.getAbilityPowers()){
             if(ability instanceof AbilityArcher){
+                return flag = true;
+            }
+        }
+        return flag;
+    }
+
+    public boolean isTinkerer(){
+        boolean flag = false;
+        for(Ability ability : this.getAbilityPowers()){
+            if(ability instanceof AbilityTinkerer){
                 return flag = true;
             }
         }
@@ -2282,7 +2320,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     }
 
     public void runRecallCommand(ServerPlayer player) {
-        if(this.consumeItemCheck(Items.ENDER_EYE)) {
+        if(this.consumeItemCheck(Items.ENDER_EYE, 1)) {
             int x = player.getRespawnPosition().getX();
             int y = player.getRespawnPosition().getY();
             int z = player.getRespawnPosition().getZ();
@@ -2331,7 +2369,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                 throw ERROR_BIOME_INVALID.create(biomeResource.asPrintable());
             } else {
                 System.out.println(biomeResource.asPrintable());
-                if(this.consumeItemCheck(Items.MAP)) {
+                if(this.consumeItemCheck(Items.MAP, 1)) {
                     boolean done = false;
                     ItemStack map = MapItem.create(this.level, pair.getFirst().getX(), pair.getFirst().getZ(), (byte) 0, true, true);
                     MapItemSavedData.addTargetDecoration(map, pair.getFirst(), "location", MapDecoration.Type.RED_X);
@@ -2375,7 +2413,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                 throw ERROR_STRUCTURE_INVALID.create(structure.asPrintable());
             } else {
                 System.out.println(structure.asPrintable());
-                if(this.consumeItemCheck(Items.MAP)) {
+                if(this.consumeItemCheck(Items.MAP, 1)) {
                     boolean done = false;
                     ItemStack map = MapItem.create(this.level, pair.getFirst().getX(), pair.getFirst().getZ(), (byte) 0, true, true);
                     MapItemSavedData.addTargetDecoration(map, pair.getFirst(), "location", MapDecoration.Type.RED_X);
