@@ -10,7 +10,7 @@ import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import net.minecraft.world.level.Level;
 
-public abstract class EntityVaryingGem extends EntityGem{
+public abstract class EntityVaryingGem extends EntityGem {
 
     public EntityVaryingGem(EntityType<? extends PathfinderMob> type, Level worldIn) {
         super(type, worldIn);

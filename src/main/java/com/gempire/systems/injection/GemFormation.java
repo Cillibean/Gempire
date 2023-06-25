@@ -167,7 +167,6 @@ public class GemFormation {
         double check = weight;
         System.out.println("weight / rarity check "+weight / rarity);
         System.out.println("weight "+weight);
-        if (world.dimension() != Level.NETHER && world.dimension() != Level.END) {
             if (primer.asItem() == ModItems.PRIME_BOOST.get()) {
                 if (check <= 4) {
                     clod = true;
@@ -175,10 +174,10 @@ public class GemFormation {
                 } else if (check <= 7) {
                     clod = true;
                     clodNO = 1;
-                } else if (check <= 10) {
+                } else if (check <= 13) {
                     gem.setDefective(false);
                     System.out.println("defective");
-                } else if (check >= 19) {
+                } else if (check >= 24) {
                     gem.setPrimary(true);
                     System.out.println("prime");
                 }
@@ -192,17 +191,14 @@ public class GemFormation {
                 } else if (check <= 10) {
                     clod = true;
                     clodNO = 1;
-                } else if (check <= 14) {
+                } else if (check <= 16) {
                     gem.setDefective(true);
                     System.out.println("defective");
-                } else if (check >= 22) {
+                } else if (check >= 26) {
                     gem.setPrimary(true);
                     System.out.println("prime");
                 }
             }
-        } else {
-
-        }
         if (!clod) {
             gem.setGemPlacement(gem.generateGemPlacement());
             gem.setSkinVariant(gem.generateSkinVariant());
@@ -309,9 +305,9 @@ public class GemFormation {
         //this.Drain(blocks);
         System.out.println("exit hole attempt");
         if (getClosestExitDirection() == 4) {
-            this.GenerateFacingExitHole();
+            this.GenerateFacingExitHole(gem.exitHoleSize());
         } else {
-            this.GenerateClosestExitHole(getClosestExitDirection());
+            this.GenerateClosestExitHole(getClosestExitDirection(), gem.exitHoleSize());
         }
     }
 
@@ -785,48 +781,48 @@ public class GemFormation {
         return pos;
     }
 
-    public void GenerateFacingExitHole(){
+    public void GenerateFacingExitHole(int height) {
         System.out.println("This block is facing: " + this.facing);
         BlockPos direction = GemFormation.DirectionFromFacing(this.facing);
         BlockPos currentPos = new BlockPos(this.pos);
         boolean flag = false;
-        for(int i = 0; i < this.EXIT_HOLE_LENGTH; i++){
-            if(!flag) {
-                if(this.world.getBlockState(currentPos).getBlock() instanceof AirBlock
-                        && this.world.getBlockState(currentPos.above()).getBlock() instanceof AirBlock){
-                    flag = true;
+        for (int n = 0; n < height; n++) {
+            currentPos = currentPos.offset(0, n, 0);
+            for (int i = 0; i < this.EXIT_HOLE_LENGTH; i++) {
+                if (!flag) {
+                    if (this.world.getBlockState(currentPos).getBlock() instanceof AirBlock
+                            && this.world.getBlockState(currentPos.above()).getBlock() instanceof AirBlock) {
+                        flag = true;
+                    }
+                    this.world.destroyBlock(currentPos, false);
+                    currentPos = currentPos.offset(direction);
+                } else {
+                    break;
                 }
-                this.world.destroyBlock(currentPos, false);
-                this.world.destroyBlock(currentPos.above(), false);
-                this.world.destroyBlock(currentPos.above().above(), false);
-                currentPos = currentPos.offset(direction);
-            }
-            else{
-                break;
             }
         }
     }
 
-    public void GenerateClosestExitHole(int facing){
+    public void GenerateClosestExitHole(int facing, int height){
         System.out.println("This block is facing: " + facing);
         BlockPos direction = GemFormation.DirectionFromFacing(facing);
         BlockPos currentPos = new BlockPos(this.pos);
         boolean flag = false;
-        for(int i = 0; i < this.EXIT_HOLE_LENGTH; i++){
-            if(!flag) {
-                if(this.world.getBlockState(currentPos).getBlock() instanceof AirBlock
-                        && this.world.getBlockState(currentPos.above()).getBlock() instanceof AirBlock){
-                    flag = true;
+            for (int i = 0; i < this.EXIT_HOLE_LENGTH; i++) {
+                if (!flag) {
+                    if (this.world.getBlockState(currentPos).getBlock() instanceof AirBlock) {
+                        flag = true;
+                    }
+                    for (int n = 0; n < height; n++) {
+                        this.world.destroyBlock(currentPos, false);
+                        currentPos = currentPos.offset(0, 1, 0);
+                    }
+                    currentPos = currentPos.offset(0, -height, 0);
+                    currentPos = currentPos.offset(direction);
+                } else {
+                    break;
                 }
-                this.world.destroyBlock(currentPos, false);
-                this.world.destroyBlock(currentPos.above(), false);
-                this.world.destroyBlock(currentPos.above().above(), false);
-                currentPos = currentPos.offset(direction);
             }
-            else{
-                break;
-            }
-        }
     }
 
     public int getClosestExitDirection(){

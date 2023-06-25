@@ -105,5 +105,8 @@ public abstract class EntityStarterGem extends EntityGem {
         return 3;
     }
 
-
+    @Override
+    public int exitHoleSize() {
+        return 0;
+    }
 }

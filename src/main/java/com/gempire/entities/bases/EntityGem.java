@@ -1591,6 +1591,8 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
 
     public abstract int generateHairVariant();
 
+    public abstract int exitHoleSize();
+
     public int getRebelHairVariant(){
         return this.entityData.get(EntityGem.REBEL_HAIR_VARIANT);
     }

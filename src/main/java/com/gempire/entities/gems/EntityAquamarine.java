@@ -137,6 +137,11 @@ public class EntityAquamarine extends EntityGem implements FlyingAnimal {
     }
 
     @Override
+    public int exitHoleSize() {
+        return 2;
+    }
+
+    @Override
     public int generateInsigniaColor() {
         return 3;
     }

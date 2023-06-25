@@ -229,4 +229,9 @@ public class EntityBismuth extends EntityGem {
     public int getColor() {
         return 2;
     }
+
+    @Override
+    public int exitHoleSize() {
+        return 3;
+    }
 }
