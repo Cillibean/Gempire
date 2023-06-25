@@ -327,7 +327,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.setZScale(this.generateZScale());
         this.setPrimary(this.isPrimary());
         this.setDefective(this.isDefective());
-        if (isArcher()) this.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(Items.BOW));
+        //if (isArcher()) this.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(Items.BOW));
         AttributeModifier PRIME = new AttributeModifier(UUID.randomUUID(), "gempirePrimaryModifier", 5D, AttributeModifier.Operation.ADDITION);
         AttributeModifier PRIME_SPEED = new AttributeModifier(UUID.randomUUID(), "gempirePrimarySpeedModifier", .2D, AttributeModifier.Operation.ADDITION);
         AttributeModifier DEFECTIVE = new AttributeModifier(UUID.randomUUID(), "gempireDefectiveModifier", -5D, AttributeModifier.Operation.ADDITION);
@@ -1195,6 +1195,11 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             this.playSound(ModSounds.POOF.get());
             GemPoofEvent event = new GemPoofEvent(this, this.blockPosition(), source);
             MinecraftForge.EVENT_BUS.post(event);
+            if (!this.getItemBySlot(EquipmentSlot.MAINHAND).isEmpty()) {
+                ItemStack stack = this.getItemBySlot(EquipmentSlot.MAINHAND);
+                Objects.requireNonNull(this.spawnAtLocation(stack)).setExtendedLifetime();
+                this.setItemSlot(EquipmentSlot.MAINHAND, Items.AIR.getDefaultInstance());
+            }
             if (getShatter()){
                 ItemStack stack = new ItemStack(this.getShardItem());
                 Objects.requireNonNull(this.spawnAtLocation(stack)).setExtendedLifetime();
