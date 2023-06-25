@@ -16,6 +16,7 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
+import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -23,7 +24,7 @@ import net.minecraft.world.level.Level;
 
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 
-public class EntityEmerald extends EntityGem {
+public class EntityEmerald extends EntityGem implements RangedAttackMob {
     //TO-DO: IMPLEMENT EMERALD. Barters with Villagers and other trader type NPCs.
     // For now, exudes the Hero of the Village effect constantly? Has an affinity for Quartzes and Jaspers (wandering jasper/quartz follow her i guess?).
     // Electrokinesis (lightning manipulation) will be in her ability pool.

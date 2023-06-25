@@ -2,6 +2,7 @@ package com.gempire.items;
 
 import com.gempire.Gempire;
 import com.gempire.entities.bases.EntityGem;
+import com.gempire.entities.bases.EntityStarterGem;
 import com.gempire.entities.gems.EntityPearl;
 import com.gempire.entities.gems.EntityZircon;
 import com.gempire.entities.gems.starter.EntityPebble;
@@ -269,18 +270,20 @@ public class ItemGem extends Item {
                         if (player != null) {
                             assert gem != null;
                             System.out.println("finalize spawn");
-                            switch (this.rand.nextInt(10)) {
-                                default -> {
-                                    gem.setPrimary(false);
-                                    gem.setDefective(false);
-                                }
-                                case 1 -> {
-                                    gem.setDefective(true);
-                                    System.out.println("defective");
-                                }
-                                case 2 -> {
-                                    gem.setPrimary(true);
-                                    System.out.println("prime");
+                            if (!(gem instanceof EntityStarterGem)) {
+                                switch (this.rand.nextInt(10)) {
+                                    default -> {
+                                        gem.setPrimary(false);
+                                        gem.setDefective(false);
+                                    }
+                                    case 1 -> {
+                                        gem.setDefective(true);
+                                        System.out.println("defective");
+                                    }
+                                    case 2 -> {
+                                        gem.setPrimary(true);
+                                        System.out.println("prime");
+                                    }
                                 }
                             }
                             gem.finalizeSpawn((ServerLevelAccessor) world, world.getCurrentDifficultyAt(player.blockPosition()), MobSpawnType.TRIGGERED, null, null);

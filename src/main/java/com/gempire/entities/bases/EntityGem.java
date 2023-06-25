@@ -400,7 +400,9 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
 
     @Override
     public boolean canHoldItem(ItemStack stack) {
-        return stack.getItem() instanceof ArmorItem || stack.getItem() instanceof DiggerItem || stack.getItem() instanceof SwordItem;
+        if (this instanceof EntityPearl) return false;
+        else if (this.isArcher()) return stack.getItem() instanceof DiggerItem || stack.getItem() instanceof BowItem || stack.getItem() instanceof AxeItem || stack.getItem() instanceof PickaxeItem;
+        else return stack.getItem() instanceof DiggerItem || stack.getItem() instanceof SwordItem || stack.getItem() instanceof AxeItem || stack.getItem() instanceof PickaxeItem;
     }
 
     public SoundEvent getInstrument() {
@@ -844,25 +846,25 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                             if (player.getItemInHand(hand).isEmpty()) {
                                 if (this.isOwner(player)) {
                                     if (!this.isDeadOrDying()) {
-                                        if (player.isShiftKeyDown()) {
-                                            this.cycleMovementAI(player);
-                                            this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
-                                            if (OWNERS.size() <= 1 && this.MASTER_OWNER != player.getUUID()) {
-                                                MASTER_OWNER = player.getUUID();
-                                                System.out.println("Added master owner");
-                                            }
-                                        } else {
-                                            if (this.canOpenInventoryByDefault()) {
-                                                NetworkHooks.openScreen((ServerPlayer) player, this, buf -> buf.writeInt(this.getId()));
+                                            if (player.isShiftKeyDown()) {
+                                                this.cycleMovementAI(player);
                                                 this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
-                                            }
-                                            if (this.isRideable()) {
-                                                if (!this.isVehicle()) {
-                                                    player.startRiding(this);
+                                                if (OWNERS.size() <= 1 && this.MASTER_OWNER != player.getUUID()) {
+                                                    MASTER_OWNER = player.getUUID();
+                                                    System.out.println("Added master owner");
+                                                }
+                                            } else {
+                                                if (this.canOpenInventoryByDefault()) {
+                                                    NetworkHooks.openScreen((ServerPlayer) player, this, buf -> buf.writeInt(this.getId()));
                                                     this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
                                                 }
+                                                if (this.isRideable()) {
+                                                    if (!this.isVehicle()) {
+                                                        player.startRiding(this);
+                                                        this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
+                                                    }
+                                                }
                                             }
-                                        }
                                     }
                                 } else {
                                     //Test to see if the gem has an owner
@@ -891,7 +893,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                                             }
                                         } else if (player.getMainHandItem().getItem() == Items.PAPER) {
                                             NetworkHooks.openScreen((ServerPlayer) player, this, buf -> buf.writeInt(this.getId()));
-                                        } else if (player.getMainHandItem().getItem() == Items.BOOK) {
+                                        } else if (player.getMainHandItem().getItem() == Items.BOOK && this.canLocateStructures()) {
                                             StringBuilder list1 = new StringBuilder();
                                             for (int i = 0; i < this.structures.size(); i++) {
                                                 if (i == this.structures.size() - 1) {
@@ -910,6 +912,10 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                                             }
                                             player.sendSystemMessage(Component.translatable("Findable Structures: " + list1));
                                             player.sendSystemMessage(Component.translatable("Findable Biomes: " + list2));
+                                        } else if (this.canHoldItem(player.getMainHandItem())) {
+                                            ItemStack stack = this.getItemBySlot(EquipmentSlot.MAINHAND);
+                                            this.setItemSlot(EquipmentSlot.MAINHAND, player.getMainHandItem());
+                                            player.setItemSlot(EquipmentSlot.MAINHAND, stack);
                                         }
                                     }
                                 }
@@ -1082,6 +1088,13 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                     }
                 } else if (source.getEntity() instanceof Player) {
                     Player player = (Player) source.getEntity();
+                    if (isOwner(player.getUUID())) {
+                        if (!this.getItemBySlot(EquipmentSlot.MAINHAND).isEmpty()) {
+                            ItemStack stack = this.getItemBySlot(EquipmentSlot.MAINHAND);
+                            Objects.requireNonNull(this.spawnAtLocation(stack)).setExtendedLifetime();
+                            this.setItemSlot(EquipmentSlot.MAINHAND, Items.AIR.getDefaultInstance());
+                        }
+                    }
                     if (!(player.getMainHandItem().getItem() instanceof DestabBase)) {
                         if ((amount - getHealth()) > hardness) {
                             if ((this.random.nextInt(shatterChance) == 1)) {
