@@ -31,9 +31,8 @@ public class ItemInjectorPanel extends Item {
             BlockHitResult ray = getPlayerPOVHitResult(world, player, ClipContext.Fluid.NONE);
             BlockPos lookPos = ray.getBlockPos();
             if (world.getBlockState(lookPos).getBlock() instanceof TankBlock) {
-                BlockPos drillPos = world.getBlockState(lookPos).getValue(TankBlock.HALF) == DoubleBlockHalf.UPPER ? lookPos.below().below() : lookPos.below();
-                if (world.getBlockState(drillPos).getBlock() instanceof DrillBlock) {
-                    InjectorTE te = (InjectorTE) world.getBlockEntity(drillPos);
+                BlockPos tankPos = world.getBlockState(lookPos).getValue(TankBlock.HALF) == DoubleBlockHalf.UPPER ? lookPos.below() : lookPos;
+                    InjectorTE te = (InjectorTE) world.getBlockEntity(tankPos);
                     if (te != null) {
                         if(!player.isCrouching()) {
                             switch (colorselected) {
@@ -85,7 +84,6 @@ public class ItemInjectorPanel extends Item {
                             }
                             player.sendSystemMessage(Component.translatable(colorString));
                         }
-                    }
                 }
             } else {
                 final String[] COLORS = {"Pink Selected", "Blue Selected", "Yellow Selected", "White Selected"};

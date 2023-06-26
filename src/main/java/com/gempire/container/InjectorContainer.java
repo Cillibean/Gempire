@@ -118,7 +118,7 @@ public class InjectorContainer extends AbstractContainerMenu {
 
     @Override
     public boolean stillValid(Player playerIn) {
-        return stillValid(this.canInteract, playerIn, ModBlocks.DRILL_BLOCK.get());
+        return stillValid(this.canInteract, playerIn, ModBlocks.TANK_BLOCK.get());
     }
 
     @Override

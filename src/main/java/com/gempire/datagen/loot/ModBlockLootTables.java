@@ -4,6 +4,7 @@ import com.gempire.datagen.ModBlockStateProvider;
 import com.gempire.init.ModBlocks;
 import com.gempire.init.ModItems;
 import net.minecraft.data.loot.BlockLoot;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -12,9 +13,11 @@ import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.CopyNameFunction;
 import net.minecraft.world.level.storage.loot.functions.CopyNbtFunction;
+import net.minecraft.world.level.storage.loot.functions.SetContainerContents;
 import net.minecraft.world.level.storage.loot.predicates.ConditionUserBuilder;
 import net.minecraft.world.level.storage.loot.predicates.ExplosionCondition;
 import net.minecraft.world.level.storage.loot.providers.nbt.ContextNbtProvider;
+import net.minecraft.world.level.storage.loot.providers.nbt.NbtProvider;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.RegistryObject;
@@ -125,6 +128,13 @@ public class ModBlockLootTables extends BlockLoot {
         LootItem.Builder<?> itemLootPool = LootItem.lootTableItem(block);
         itemLootPool.apply(CopyNameFunction.copyName(CopyNameFunction.NameSource.BLOCK_ENTITY));
         itemLootPool.apply(nbtBuilder);
+        itemLootPool.apply(CopyNbtFunction.copyData(ContextNbtProvider.BLOCK_ENTITY)
+                .copy("inventory", "BlockEntityTag.inventory", CopyNbtFunction.MergeStrategy.REPLACE)
+                .copy("pinkTank", "BlockEntityTag.pinkTank", CopyNbtFunction.MergeStrategy.REPLACE)
+                .copy("blueTank", "BlockEntityTag.blueTank", CopyNbtFunction.MergeStrategy.REPLACE)
+                .copy("yellowTank", "BlockEntityTag.yellowTank", CopyNbtFunction.MergeStrategy.REPLACE)
+                .copy("whiteTank", "BlockEntityTag.whiteTank", CopyNbtFunction.MergeStrategy.REPLACE));
+        //itemLootPool.apply(SetContainerContents.setContents().withEntry(DynamicLootEntry.dynamicEntry(new ResourceLocation("minecraft", "contents"))));
         add(block, LootTable.lootTable().withPool(applyExplosionCondition(true, LootPool.lootPool()
                 .name("main")
                 .setRolls(ConstantValue.exactly(1))
