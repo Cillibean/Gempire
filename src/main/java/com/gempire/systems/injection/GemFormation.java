@@ -304,10 +304,18 @@ public class GemFormation {
         MinecraftForge.EVENT_BUS.post(event2);
         //this.Drain(blocks);
         System.out.println("exit hole attempt");
-        if (getClosestExitDirection() == 4) {
-            this.GenerateFacingExitHole(gem.exitHoleSize());
+        if (!clod) {
+            if (getClosestExitDirection() == 4) {
+                this.GenerateFacingExitHole(gem.exitHoleSize());
+            } else {
+                this.GenerateClosestExitHole(getClosestExitDirection(), gem.exitHoleSize());
+            }
         } else {
-            this.GenerateClosestExitHole(getClosestExitDirection(), gem.exitHoleSize());
+            if (getClosestExitDirection() == 4) {
+                this.GenerateFacingExitHole(3);
+            } else {
+                this.GenerateClosestExitHole(getClosestExitDirection(), 3);
+            }
         }
     }
 
@@ -424,18 +432,31 @@ public class GemFormation {
                 System.out.println("lowest 2: " + lowestR2);
                 System.out.println("lowest 3: " + lowestRGem3);
                 System.out.println("lowest 3: " + lowestR3);
-                    switch (r2) {
+                System.out.println(r2);                    switch (r2) {
                         case 0,1,2 -> {
                             returnGem = lowestRGem;
                             weight = (float) (totalWeight - lowestR);
                         }
                         case 3,4 -> {
-                            returnGem = lowestRGem2;
-                            weight = (float) (totalWeight - lowestR2);
+                            if (lowestR - lowestR2 >= 5) {
+                                returnGem = lowestRGem;
+                                weight = (float) (totalWeight - lowestR);
+                            } else {
+                                returnGem = lowestRGem2;
+                                weight = (float) (totalWeight - lowestR2);
+                            }
                         }
                         case 5 -> {
-                            returnGem = lowestRGem3;
-                            weight = (float) (totalWeight - lowestR3);
+                            if (lowestR - lowestR3 >= 7) {
+                                returnGem = lowestRGem;
+                                weight = (float) (totalWeight - lowestR);
+                            } else if (lowestR2 - lowestR3 >= 5){
+                                returnGem = lowestRGem2;
+                                weight = (float) (totalWeight - lowestR2);
+                            } else {
+                                returnGem = lowestRGem3;
+                                weight = (float) (totalWeight - lowestR3);
+                            }
                         }
                     }
             } else if (world.dimension() == Level.NETHER) {
@@ -488,20 +509,33 @@ public class GemFormation {
                 System.out.println("lowest 2: " + lowestR2);
                 System.out.println("lowest 3: " + lowestRGem3);
                 System.out.println("lowest 3: " + lowestR3);
-                switch (r2) {
-                    case 0,1,2 -> {
-                        returnGem = lowestRGem;
-                        weight = (float) (totalWeight - lowestR);
+                System.out.println(r2);                switch (r2) {
+                        case 0,1,2 -> {
+                            returnGem = lowestRGem;
+                            weight = (float) (totalWeight - lowestR);
+                        }
+                        case 3,4 -> {
+                            if (lowestR - lowestR2 >= 5) {
+                                returnGem = lowestRGem;
+                                weight = (float) (totalWeight - lowestR);
+                            } else {
+                                returnGem = lowestRGem2;
+                                weight = (float) (totalWeight - lowestR2);
+                            }
+                        }
+                        case 5 -> {
+                            if (lowestR - lowestR3 >= 7) {
+                                returnGem = lowestRGem;
+                                weight = (float) (totalWeight - lowestR);
+                            } else if (lowestR2 - lowestR3 >= 5){
+                                returnGem = lowestRGem2;
+                                weight = (float) (totalWeight - lowestR2);
+                            } else {
+                                returnGem = lowestRGem3;
+                                weight = (float) (totalWeight - lowestR3);
+                            }
+                        }
                     }
-                    case 3,4 -> {
-                        returnGem = lowestRGem2;
-                        weight = (float) (totalWeight - lowestR2);
-                    }
-                    case 5 -> {
-                        returnGem = lowestRGem3;
-                        weight = (float) (totalWeight - lowestR3);
-                    }
-                }
             } else if (world.dimension() == Level.END) {
                 for (String gem : END_POSSIBLE_GEMS_TIER_1) {
                     boolean primed = false;
@@ -552,20 +586,33 @@ public class GemFormation {
                 System.out.println("lowest 2: " + lowestR2);
                 System.out.println("lowest 3: " + lowestRGem3);
                 System.out.println("lowest 3: " + lowestR3);
-                switch (r2) {
-                    case 0,1,2 -> {
-                        returnGem = lowestRGem;
-                        weight = (float) (totalWeight - lowestR);
+                System.out.println(r2);                switch (r2) {
+                        case 0,1,2 -> {
+                            returnGem = lowestRGem;
+                            weight = (float) (totalWeight - lowestR);
+                        }
+                        case 3,4 -> {
+                            if (lowestR - lowestR2 >= 5) {
+                                returnGem = lowestRGem;
+                                weight = (float) (totalWeight - lowestR);
+                            } else {
+                                returnGem = lowestRGem2;
+                                weight = (float) (totalWeight - lowestR2);
+                            }
+                        }
+                        case 5 -> {
+                            if (lowestR - lowestR3 >= 7) {
+                                returnGem = lowestRGem;
+                                weight = (float) (totalWeight - lowestR);
+                            } else if (lowestR2 - lowestR3 >= 5){
+                                returnGem = lowestRGem2;
+                                weight = (float) (totalWeight - lowestR2);
+                            } else {
+                                returnGem = lowestRGem3;
+                                weight = (float) (totalWeight - lowestR3);
+                            }
+                        }
                     }
-                    case 3,4 -> {
-                        returnGem = lowestRGem2;
-                        weight = (float) (totalWeight - lowestR2);
-                    }
-                    case 5 -> {
-                        returnGem = lowestRGem3;
-                        weight = (float) (totalWeight - lowestR3);
-                    }
-                }
             }
             } else if (tier == 2) {
 
@@ -625,20 +672,33 @@ public class GemFormation {
                 System.out.println("lowest 2: " + lowestR2);
                 System.out.println("lowest 3: " + lowestRGem3);
                 System.out.println("lowest 3: " + lowestR3);
-                switch (r2) {
-                    case 0,1,2 -> {
-                        returnGem = lowestRGem;
-                        weight = (float) (totalWeight - lowestR);
+                System.out.println(r2);                switch (r2) {
+                        case 0,1,2 -> {
+                            returnGem = lowestRGem;
+                            weight = (float) (totalWeight - lowestR);
+                        }
+                        case 3,4 -> {
+                            if (lowestR - lowestR2 >= 5) {
+                                returnGem = lowestRGem;
+                                weight = (float) (totalWeight - lowestR);
+                            } else {
+                                returnGem = lowestRGem2;
+                                weight = (float) (totalWeight - lowestR2);
+                            }
+                        }
+                        case 5 -> {
+                            if (lowestR - lowestR3 >= 7) {
+                                returnGem = lowestRGem;
+                                weight = (float) (totalWeight - lowestR);
+                            } else if (lowestR2 - lowestR3 >= 5){
+                                returnGem = lowestRGem2;
+                                weight = (float) (totalWeight - lowestR2);
+                            } else {
+                                returnGem = lowestRGem3;
+                                weight = (float) (totalWeight - lowestR3);
+                            }
+                        }
                     }
-                    case 3,4 -> {
-                        returnGem = lowestRGem2;
-                        weight = (float) (totalWeight - lowestR2);
-                    }
-                    case 5 -> {
-                        returnGem = lowestRGem3;
-                        weight = (float) (totalWeight - lowestR3);
-                    }
-                }
             } else if (world.dimension() == Level.NETHER) {
                 for (String gem : NETHER_POSSIBLE_GEMS_TIER_2) {
                     boolean primed = false;
@@ -685,20 +745,33 @@ public class GemFormation {
                 System.out.println("lowest 2: " + lowestR2);
                 System.out.println("lowest 3: " + lowestRGem3);
                 System.out.println("lowest 3: " + lowestR3);
-                switch (r2) {
-                    case 0,1,2 -> {
-                        returnGem = lowestRGem;
-                        weight = (float) (totalWeight - lowestR);
+                System.out.println(r2);                switch (r2) {
+                        case 0,1,2 -> {
+                            returnGem = lowestRGem;
+                            weight = (float) (totalWeight - lowestR);
+                        }
+                        case 3,4 -> {
+                            if (lowestR - lowestR2 >= 5) {
+                                returnGem = lowestRGem;
+                                weight = (float) (totalWeight - lowestR);
+                            } else {
+                                returnGem = lowestRGem2;
+                                weight = (float) (totalWeight - lowestR2);
+                            }
+                        }
+                        case 5 -> {
+                            if (lowestR - lowestR3 >= 7) {
+                                returnGem = lowestRGem;
+                                weight = (float) (totalWeight - lowestR);
+                            } else if (lowestR2 - lowestR3 >= 5){
+                                returnGem = lowestRGem2;
+                                weight = (float) (totalWeight - lowestR2);
+                            } else {
+                                returnGem = lowestRGem3;
+                                weight = (float) (totalWeight - lowestR3);
+                            }
+                        }
                     }
-                    case 3,4 -> {
-                        returnGem = lowestRGem2;
-                        weight = (float) (totalWeight - lowestR2);
-                    }
-                    case 5 -> {
-                        returnGem = lowestRGem3;
-                        weight = (float) (totalWeight - lowestR3);
-                    }
-                }
             } else if (world.dimension() == Level.END) {
                 for (String gem : END_POSSIBLE_GEMS_TIER_2) {
                     boolean primed = false;
@@ -745,20 +818,34 @@ public class GemFormation {
                 System.out.println("lowest 2: " + lowestR2);
                 System.out.println("lowest 3: " + lowestRGem3);
                 System.out.println("lowest 3: " + lowestR3);
+                System.out.println(r2);
                 switch (r2) {
-                    case 0,1,2 -> {
-                        returnGem = lowestRGem;
-                        weight = (float) (totalWeight - lowestR);
+                        case 0,1,2 -> {
+                            returnGem = lowestRGem;
+                            weight = (float) (totalWeight - lowestR);
+                        }
+                        case 3,4 -> {
+                            if (lowestR2 - lowestR >= 5) {
+                                returnGem = lowestRGem;
+                                weight = (float) (totalWeight - lowestR);
+                            } else {
+                                returnGem = lowestRGem2;
+                                weight = (float) (totalWeight - lowestR2);
+                            }
+                        }
+                        case 5 -> {
+                            if (lowestR3 - lowestR >= 7) {
+                                returnGem = lowestRGem;
+                                weight = (float) (totalWeight - lowestR);
+                            } else if (lowestR3 - lowestR2 >= 5){
+                                returnGem = lowestRGem2;
+                                weight = (float) (totalWeight - lowestR2);
+                            } else {
+                                returnGem = lowestRGem3;
+                                weight = (float) (totalWeight - lowestR3);
+                            }
+                        }
                     }
-                    case 3,4 -> {
-                        returnGem = lowestRGem2;
-                        weight = (float) (totalWeight - lowestR2);
-                    }
-                    case 5 -> {
-                        returnGem = lowestRGem3;
-                        weight = (float) (totalWeight - lowestR3);
-                    }
-                }
             }
         }
         System.out.println(returnGem);
@@ -784,10 +871,10 @@ public class GemFormation {
     public void GenerateFacingExitHole(int height) {
         System.out.println("This block is facing: " + this.facing);
         BlockPos direction = GemFormation.DirectionFromFacing(this.facing);
-        BlockPos currentPos = new BlockPos(this.pos);
+        BlockPos currentPos;
         boolean flag = false;
         for (int n = 0; n < height; n++) {
-            currentPos = currentPos.offset(0, n, 0);
+            currentPos = this.pos.offset(0, n, 0);
             for (int i = 0; i < this.EXIT_HOLE_LENGTH; i++) {
                 if (!flag) {
                     if (this.world.getBlockState(currentPos).getBlock() instanceof AirBlock

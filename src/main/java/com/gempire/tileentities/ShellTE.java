@@ -1,15 +1,20 @@
 package com.gempire.tileentities;
 
+import com.gempire.Gempire;
 import com.gempire.blocks.machine.ShellBlock;
 import com.gempire.container.ShellContainer;
 import com.gempire.entities.bases.EntityGem;
+import com.gempire.entities.bases.EntityStarterGem;
 import com.gempire.entities.gems.EntityPearl;
+import com.gempire.entities.gems.EntityZircon;
 import com.gempire.entities.gems.starter.EntityPebble;
+import com.gempire.events.GemFormEvent;
 import com.gempire.init.*;
 import com.gempire.items.ItemChroma;
 import com.gempire.items.ItemGem;
 import com.gempire.util.Color;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobSpawnType;
@@ -33,12 +38,15 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.apache.commons.lang3.ArrayUtils;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class ShellTE extends RandomizableContainerBlockEntity implements MenuProvider {
@@ -311,6 +319,55 @@ public class ShellTE extends RandomizableContainerBlockEntity implements MenuPro
     //normal = 1
     //defect = 2
     public void formPearl(int chroma, int quality){
+        /*RegistryObject<EntityType<EntityPebble>> gemm = ModEntities.PEBBLE;
+        String skinColorVariant = "";
+        EntityGem gem = gemm.get().create(world);
+        String namee = "";
+        boolean dying = false;
+        List<EntityGem> list;
+            if (Objects.equals(this.ID, Gempire.MODID)) {
+                namee = Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(this)).toString().replaceAll("gempire", "").replaceAll("gem", "").replaceAll(":", "").replaceAll(" ", "");
+            } else {
+                namee = Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(this)).toString().replaceAll(this.ID, "").replaceAll("gem", "").replaceAll(":", "").replaceAll(" ", "");
+            }
+            //This whole section here checks for variations in color so it can spawn the correct type of gem
+            String[] ainmneacha = namee.split("_");
+            boolean nullFlag = false;
+            int idx = 0;
+            for (int i = 0; i < ainmneacha.length; i++) {
+                if (ainmneacha[i].isEmpty()) {
+                    nullFlag = true;
+                    idx = i;
+                }
+            }
+            if (nullFlag) ainmneacha = ArrayUtils.remove(ainmneacha, idx);
+            namee = ainmneacha[0];
+            if (ainmneacha.length > 1) skinColorVariant = ainmneacha[1];
+            for (String s : ainmneacha) {
+                System.out.println(s);
+            }
+            //End of check and set
+            try {
+                if (Objects.equals(this.ID, Gempire.MODID)) {
+                    gemm = (RegistryObject<EntityType<EntityPebble>>) ModEntities.class.getField(namee.toUpperCase()).get(null);
+                } else {
+                    gemm = (RegistryObject<EntityType<EntityPebble>>) AddonHandler.ADDON_ENTITY_REGISTRIES.get(this.ID).getField(namee.toUpperCase()).get(null);
+                }
+                gem = gemm.get().create(world);
+                System.out.println("gem " + gem);
+                assert gem != null;
+                gem.setUUID(Mth.createInsecureUUID(world.random));
+                System.out.println(gem.getUUID());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+                if (ainmneacha.length > 1) {
+                    assert gem != null;
+                    gem.setSkinVariantOnInitialSpawn = false;
+                    gem.initalSkinVariant = Integer.parseInt(skinColorVariant);
+                }
+            GemFormEvent event = new GemFormEvent(gem, gem.blockPosition());
+            */
         RegistryObject<Item> gemm = ModItems.PEBBLE_GEM;
         ItemGem gem = null;
         String name = Color.getColorName(chroma).toUpperCase() +"_PEARL_GEM";
@@ -325,26 +382,29 @@ public class ShellTE extends RandomizableContainerBlockEntity implements MenuPro
         egem.setUUID(Mth.createInsecureUUID(this.level.random));
         String namee = "";
         String skinColorVariant = "";
-        String[] ainmneacha = namee.split("_");
+        String[] array = name.split("_");
         boolean nullFlag = false;
         int idx = 0;
-        for (int i = 0; i < ainmneacha.length; i++) {
-            if (ainmneacha[i].isEmpty()) {
+        for (int i = 0; i < array.length; i++) {
+            if (array[i].isEmpty()) {
                 nullFlag = true;
                 idx = i;
             }
         }
-        if (nullFlag) ainmneacha = ArrayUtils.remove(ainmneacha, idx);
-        //namee = ainmneacha[0];
-        if (ainmneacha.length > 1) skinColorVariant = ainmneacha[1];
-        for (String s : ainmneacha) {
+        if (nullFlag) array = ArrayUtils.remove(array, idx);
+        namee = array[0];
+        if (array.length > 1) skinColorVariant = array[0];
+        for (String s : array) {
             System.out.println(s);
         }
-        if (ainmneacha.length > 1) {
+        System.out.println("skin variant string " +skinColorVariant);
+        System.out.println("array "+ array);
+        if (array.length > 1) {
             assert gem != null;
             egem.setSkinVariantOnInitialSpawn = false;
+            egem.initalSkinVariant = chromaColor;
         }
-        egem.setSkinColorVariant(chroma);
+        //egem.setSkinColorVariant(chroma);
         egem.finalizeSpawn((ServerLevelAccessor) this.level, this.level.getCurrentDifficultyAt(this.worldPosition), MobSpawnType.MOB_SUMMONED, null, null);
         ItemStack stack = new ItemStack(gem);
         ItemGem.saveData(stack, egem);

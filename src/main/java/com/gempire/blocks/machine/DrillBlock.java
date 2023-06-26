@@ -12,10 +12,12 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -66,22 +68,6 @@ public class DrillBlock extends Block {
         builder.add(FACING);
     }
 
-    @Override
-    public void neighborChanged(BlockState state, Level worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving) {
-        super.neighborChanged(state, worldIn, pos, blockIn, fromPos, isMoving);
-        if(worldIn.hasNeighborSignal(pos)){
-            BlockEntity te = worldIn.getBlockEntity(pos);
-            if(te instanceof InjectorTE){
-                ((InjectorTE)te).Inject();
-            }
-        }
-    }
-
-    @Override
-    public boolean canConnectRedstone(BlockState state, BlockGetter world, BlockPos pos, @Nullable Direction side) {
-        return true;
-    }
-
     /*@Override
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState state2, boolean bool) {
         BlockEntity tileEntity = level.getBlockEntity(pos);
@@ -94,7 +80,6 @@ public class DrillBlock extends Block {
         level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
         super.onRemove(state, level, pos, state2, bool);
     }*/
-
     public PushReaction getPistonPushReaction(BlockState p_60584_) {
         return PushReaction.IGNORE;
     }

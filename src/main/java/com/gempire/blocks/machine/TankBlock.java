@@ -35,7 +35,7 @@ import javax.annotation.Nullable;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.network.NetworkHooks;
 
-public class TankBlock extends BaseEntityBlock implements EntityBlock {
+public class TankBlock extends BaseEntityBlock {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
 
@@ -123,6 +123,17 @@ public class TankBlock extends BaseEntityBlock implements EntityBlock {
         return Mth.getSeed(p_52794_.getX(), p_52794_.below(p_52793_.getValue(HALF) == DoubleBlockHalf.LOWER ? 0 : 1).getY(), p_52794_.getZ());
     }
 
+    @SuppressWarnings("deprecation")
+    @Override
+    public RenderShape getRenderShape(BlockState state) {
+        return RenderShape.MODEL;
+    }
+
+    @Override
+    public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
+        return Block.box(0D, 0D, 0D, 16D, 16D, 16D);
+    }
+
     @Override
     public void destroy(LevelAccessor world, BlockPos pos, BlockState state) {
         super.destroy(world, pos, state);
@@ -156,12 +167,20 @@ public class TankBlock extends BaseEntityBlock implements EntityBlock {
     @Override
     public void neighborChanged(BlockState state, Level worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving) {
         super.neighborChanged(state, worldIn, pos, blockIn, fromPos, isMoving);
-        /*if(worldIn.hasNeighborSignal(pos)){
-            BlockEntity te = worldIn.getBlockEntity(pos);
-            if(te instanceof InjectorTE){
-                ((InjectorTE)te).Inject();
+        if (!worldIn.isClientSide) {
+            System.out.println("not clientside");
+            if (worldIn.getBlockState(pos).getValue(HALF) == DoubleBlockHalf.LOWER) {
+                System.out.println("lower half");
+                if (worldIn.hasNeighborSignal(pos)) {
+                    System.out.println("has neighbour signal");
+                BlockEntity te = worldIn.getBlockEntity(pos);
+                if (te instanceof InjectorTE) {
+                    System.out.println("inject");
+                    ((InjectorTE) te).Inject();
+                }
+                }
             }
-        }*/
+        }
     }
 
     @Override

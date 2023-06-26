@@ -29,21 +29,26 @@ public class DestabBase extends Item {
 
     public void poofGem(LivingEntity pTarget) {
         if (pTarget.isAlive()){
+            System.out.println("alive");
             if (pTarget instanceof EntityGem) {
                 pTarget.hurt(DamageSource.MAGIC, pTarget.getMaxHealth()*20);
                 ((EntityGem) pTarget).setCracked(false);
+                System.out.println("poofed");
             }
         }
     }
     @Override
     public boolean hurtEnemy(ItemStack itemStack, LivingEntity enemy, LivingEntity player) {
+        System.out.println("hurt enemy");
         float f = 1F;
         if (player instanceof Player)
         {
             f = ((Player) player).getAttackStrengthScale(0f);
         }
         if (f == 1) {
+            System.out.println("f 1");
             if (enemy instanceof EntityGem) {
+                System.out.println("begin poof");
                 poofGem(enemy);
                 itemStack.hurtAndBreak(1, player, (p_43296_) -> p_43296_.broadcastBreakEvent(EquipmentSlot.MAINHAND));
             }

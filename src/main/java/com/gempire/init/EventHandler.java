@@ -10,8 +10,13 @@ import com.gempire.entities.gems.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.npc.VillagerTrades;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraftforge.common.BasicItemListing;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.LootingLevelEvent;
+import net.minecraftforge.event.village.WandererTradesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -57,5 +62,13 @@ public class EventHandler {
                 }
             }
         }
+    }
+
+    @SubscribeEvent
+    public void WanderingTraderTrades(WandererTradesEvent event) {
+        event.getGenericTrades().add(new BasicItemListing(new ItemStack(Items.EMERALD, 5), new ItemStack(Items.EMERALD, 0), new ItemStack(ModItems.PINK_ESSENCE_BUCKET.get(), 1), 10, 10, 10));
+        event.getGenericTrades().add(new BasicItemListing(new ItemStack(Items.EMERALD, 5), new ItemStack(Items.EMERALD, 0), new ItemStack(ModItems.YELLOW_ESSENCE_BUCKET.get(), 1), 10, 10, 10));
+        event.getGenericTrades().add(new BasicItemListing(new ItemStack(Items.EMERALD, 5), new ItemStack(Items.EMERALD, 0), new ItemStack(ModItems.BLUE_ESSENCE_BUCKET.get(), 1), 10, 10, 10));
+        event.getGenericTrades().add(new BasicItemListing(new ItemStack(Items.EMERALD, 5), new ItemStack(Items.EMERALD, 0), new ItemStack(ModItems.WHITE_ESSENCE_BUCKET.get(), 1), 10, 10, 10));
     }
 }

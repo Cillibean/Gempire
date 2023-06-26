@@ -2,7 +2,7 @@
   "type": "minecraft:block",
   "pools": [
     {
-      "bonus_rolls": 0,
+      "bonus_rolls": 0.0,
       "entries": [
         {
           "type": "minecraft:item",
@@ -14,6 +14,37 @@
             {
               "function": "minecraft:copy_nbt",
               "ops": [],
+              "source": "block_entity"
+            },
+            {
+              "function": "minecraft:copy_nbt",
+              "ops": [
+                {
+                  "op": "replace",
+                  "source": "inventory",
+                  "target": "BlockEntityTag.inventory"
+                },
+                {
+                  "op": "replace",
+                  "source": "pinkTank",
+                  "target": "BlockEntityTag.pinkTank"
+                },
+                {
+                  "op": "replace",
+                  "source": "blueTank",
+                  "target": "BlockEntityTag.blueTank"
+                },
+                {
+                  "op": "replace",
+                  "source": "yellowTank",
+                  "target": "BlockEntityTag.yellowTank"
+                },
+                {
+                  "op": "replace",
+                  "source": "whiteTank",
+                  "target": "BlockEntityTag.whiteTank"
+                }
+              ],
               "source": "block_entity"
             }
           ],
@@ -30,6 +61,48 @@
         },
         {
           "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:copy_name",
+              "source": "block_entity"
+            },
+            {
+              "function": "minecraft:copy_nbt",
+              "ops": [],
+              "source": "block_entity"
+            },
+            {
+              "function": "minecraft:copy_nbt",
+              "ops": [
+                {
+                  "op": "replace",
+                  "source": "inventory",
+                  "target": "BlockEntityTag.inventory"
+                },
+                {
+                  "op": "replace",
+                  "source": "pinkTank",
+                  "target": "BlockEntityTag.pinkTank"
+                },
+                {
+                  "op": "replace",
+                  "source": "blueTank",
+                  "target": "BlockEntityTag.blueTank"
+                },
+                {
+                  "op": "replace",
+                  "source": "yellowTank",
+                  "target": "BlockEntityTag.yellowTank"
+                },
+                {
+                  "op": "replace",
+                  "source": "whiteTank",
+                  "target": "BlockEntityTag.whiteTank"
+                }
+              ],
+              "source": "block_entity"
+            }
+          ],
           "name": "gempire:tank_block",
           "conditions": [
             {
