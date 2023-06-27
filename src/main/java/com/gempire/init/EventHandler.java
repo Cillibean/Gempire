@@ -66,9 +66,37 @@ public class EventHandler {
 
     @SubscribeEvent
     public void WanderingTraderTrades(WandererTradesEvent event) {
-        event.getGenericTrades().add(new BasicItemListing(new ItemStack(Items.EMERALD, 5), new ItemStack(Items.EMERALD, 0), new ItemStack(ModItems.PINK_ESSENCE_BUCKET.get(), 1), 10, 10, 10));
-        event.getGenericTrades().add(new BasicItemListing(new ItemStack(Items.EMERALD, 5), new ItemStack(Items.EMERALD, 0), new ItemStack(ModItems.YELLOW_ESSENCE_BUCKET.get(), 1), 10, 10, 10));
-        event.getGenericTrades().add(new BasicItemListing(new ItemStack(Items.EMERALD, 5), new ItemStack(Items.EMERALD, 0), new ItemStack(ModItems.BLUE_ESSENCE_BUCKET.get(), 1), 10, 10, 10));
-        event.getGenericTrades().add(new BasicItemListing(new ItemStack(Items.EMERALD, 5), new ItemStack(Items.EMERALD, 0), new ItemStack(ModItems.WHITE_ESSENCE_BUCKET.get(), 1), 10, 10, 10));
+        event.getGenericTrades().add(new BasicItemListing(new ItemStack(Items.EMERALD, 20), new ItemStack(ModItems.PINK_CHROMA.get(), 1), new ItemStack(ModItems.PINK_DESTABILIZER.get(), 1), 1, 10, 10));
+        event.getGenericTrades().add(new BasicItemListing(new ItemStack(Items.EMERALD, 20), new ItemStack(ModItems.YELLOW_CHROMA.get(), 1), new ItemStack(ModItems.YELLOW_DESTABILIZER.get(), 1), 1, 10, 10));
+        event.getGenericTrades().add(new BasicItemListing(new ItemStack(Items.EMERALD, 20), new ItemStack(ModItems.BLUE_CHROMA.get(), 1), new ItemStack(ModItems.BLUE_DESTABILIZER.get(), 1), 1, 10, 10));
+        event.getGenericTrades().add(new BasicItemListing(new ItemStack(Items.EMERALD, 20), new ItemStack(ModItems.WHITE_CHROMA.get(), 1), new ItemStack(ModItems.WHITE_DESTABILIZER.get(), 1), 1, 10, 10));
+
+        event.getGenericTrades().add(new BasicItemListing(new ItemStack(Items.DIAMOND, 3), new ItemStack(Items.EMERALD, 0), new ItemStack(ModItems.PINK_ESSENCE_BUCKET.get(), 1), 3, 10, 10));
+        event.getGenericTrades().add(new BasicItemListing(new ItemStack(Items.DIAMOND, 3), new ItemStack(Items.EMERALD, 0), new ItemStack(ModItems.BLUE_ESSENCE_BUCKET.get(), 1), 3, 10, 10));
+        event.getGenericTrades().add(new BasicItemListing(new ItemStack(Items.DIAMOND, 3), new ItemStack(Items.EMERALD, 0), new ItemStack(ModItems.WHITE_ESSENCE_BUCKET.get(), 1), 3, 10, 10));
+        event.getGenericTrades().add(new BasicItemListing(new ItemStack(Items.DIAMOND, 3), new ItemStack(Items.EMERALD, 0), new ItemStack(ModItems.YELLOW_ESSENCE_BUCKET.get(), 1), 3, 10, 10));
+
+        event.getGenericTrades().add(new BasicItemListing(new ItemStack(Items.EMERALD, 15), new ItemStack(Items.EMERALD, 0), new ItemStack(ModItems.RED_CHROMA.get(), 1), 6, 10, 10));
+        event.getGenericTrades().add(new BasicItemListing(new ItemStack(Items.EMERALD, 15), new ItemStack(Items.EMERALD, 0), new ItemStack(ModItems.ORANGE_CHROMA.get(), 1), 6, 10, 10));
+        event.getGenericTrades().add(new BasicItemListing(new ItemStack(Items.EMERALD, 15), new ItemStack(Items.EMERALD, 0), new ItemStack(ModItems.YELLOW_CHROMA.get(), 1), 6, 10, 10));
+        event.getGenericTrades().add(new BasicItemListing(new ItemStack(Items.EMERALD, 15), new ItemStack(Items.EMERALD, 0), new ItemStack(ModItems.LIME_CHROMA.get(), 1), 6, 10, 10));
+        event.getGenericTrades().add(new BasicItemListing(new ItemStack(Items.EMERALD, 15), new ItemStack(Items.EMERALD, 0), new ItemStack(ModItems.GREEN_CHROMA.get(), 1), 6, 10, 10));
+        event.getGenericTrades().add(new BasicItemListing(new ItemStack(Items.EMERALD, 15), new ItemStack(Items.EMERALD, 0), new ItemStack(ModItems.LIGHT_BLUE_CHROMA.get(), 1), 6, 10, 10));
+        event.getGenericTrades().add(new BasicItemListing(new ItemStack(Items.EMERALD, 15), new ItemStack(Items.EMERALD, 0), new ItemStack(ModItems.BLUE_CHROMA.get(), 1), 6, 10, 10));
+        event.getGenericTrades().add(new BasicItemListing(new ItemStack(Items.EMERALD, 15), new ItemStack(Items.EMERALD, 0), new ItemStack(ModItems.PURPLE_CHROMA.get(), 1), 6, 10, 10));
+        event.getGenericTrades().add(new BasicItemListing(new ItemStack(Items.EMERALD, 15), new ItemStack(Items.EMERALD, 0), new ItemStack(ModItems.MAGENTA_CHROMA.get(), 1), 6, 10, 10));
+        event.getGenericTrades().add(new BasicItemListing(new ItemStack(Items.EMERALD, 15), new ItemStack(Items.EMERALD, 0), new ItemStack(ModItems.PINK_CHROMA.get(), 1), 6, 10, 10));
+        event.getGenericTrades().add(new BasicItemListing(new ItemStack(Items.EMERALD, 15), new ItemStack(Items.EMERALD, 0), new ItemStack(ModItems.BROWN_CHROMA.get(), 1), 6, 10, 10));
+        event.getGenericTrades().add(new BasicItemListing(new ItemStack(Items.EMERALD, 15), new ItemStack(Items.EMERALD, 0), new ItemStack(ModItems.WHITE_CHROMA.get(), 1), 6, 10, 10));
+        event.getGenericTrades().add(new BasicItemListing(new ItemStack(Items.EMERALD, 15), new ItemStack(Items.EMERALD, 0), new ItemStack(ModItems.LIGHT_GRAY_CHROMA.get(), 1), 6, 10, 10));
+        event.getGenericTrades().add(new BasicItemListing(new ItemStack(Items.EMERALD, 15), new ItemStack(Items.EMERALD, 0), new ItemStack(ModItems.GRAY_CHROMA.get(), 1), 6, 10, 10));
+        event.getGenericTrades().add(new BasicItemListing(new ItemStack(Items.EMERALD, 15), new ItemStack(Items.EMERALD, 0), new ItemStack(ModItems.BLACK_CHROMA.get(), 1), 6, 10, 10));
+        event.getRareTrades().add(new BasicItemListing(new ItemStack(Items.EMERALD, 25), new ItemStack(Items.EMERALD, 0), new ItemStack(ModItems.SPECIAL_CHROMA.get(), 1), 3, 10, 10));
+
+        event.getGenericTrades().add(new BasicItemListing(new ItemStack(Items.DIAMOND, 4), new ItemStack(Items.EMERALD, 0), new ItemStack(ModItems.GEM_SCRAP.get(), 1), 6, 10, 10));
+        event.getRareTrades().add(new BasicItemListing(new ItemStack(Items.DIAMOND, 6), new ItemStack(Items.EMERALD, 0), new ItemStack(ModItems.GEM_ALLOY.get(), 2), 3, 10, 10));
+
+        event.getGenericTrades().add(new BasicItemListing(new ItemStack(Items.DIAMOND, 15), new ItemStack(ModItems.PRISMATIC_BLOCK.get(), 1), new ItemStack(ModItems.CONFRACTOR_BODY.get(), 1), 1, 10, 10));
+        event.getGenericTrades().add(new BasicItemListing(new ItemStack(Items.DIAMOND, 10), new ItemStack(ModItems.PRISMATIC_BLOCK.get(), 1), new ItemStack(ModItems.CONFRACTOR_TIP.get(), 1), 1, 10, 10));
     }
 }
