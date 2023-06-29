@@ -255,7 +255,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.entityData.define(EntityGem.YSCALE, 0F);
         this.entityData.define(EntityGem.ZSCALE, 0F);
         this.FOLLOW_ID = UUID.randomUUID();
-        this.ASSIGNED_ID = UUID.randomUUID();
+        this.ASSIGNED_ID = UUID.fromString("00000000-0000-0000-0000-000000000000");
         this.MASTER_OWNER = UUID.randomUUID();
         Arrays.fill(this.armorDropChances, 0);
         Arrays.fill(this.handDropChances, 0);
@@ -286,7 +286,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.setFacet(this.generateFacet());
         this.setCut(this.generateCut());
         this.FOLLOW_ID = UUID.randomUUID();
-        this.ASSIGNED_ID = UUID.randomUUID();
+        this.ASSIGNED_ID = UUID.fromString("00000000-0000-0000-0000-000000000000");
         this.MASTER_OWNER = UUID.randomUUID();
         this.setMarkingVariant(this.generateMarkingVariant());
         this.setMarkingColor(this.generatePaletteColor(PaletteType.MARKINGS));
@@ -994,6 +994,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             if (((ServerLevel)this.level).getEntity(ASSIGNED_ID) instanceof EntityGem) {
                 return (EntityGem) ((ServerLevel) this.level).getEntity(ASSIGNED_ID);
             } else {
+                System.out.println("not a gem");
                 return null;
             }
         } else {
