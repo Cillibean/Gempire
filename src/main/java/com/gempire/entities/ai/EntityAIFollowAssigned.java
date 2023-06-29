@@ -7,6 +7,7 @@ import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 
 import java.util.List;
+import java.util.UUID;
 
 public class EntityAIFollowAssigned extends Goal {
     public EntityGem follower;
@@ -26,7 +27,7 @@ public class EntityAIFollowAssigned extends Goal {
             if (this.follower.getSludgeAmount() < 5) {
                 for (EntityGem entity : list) {
                     if (!entity.isSpectator() || !entity.isInvisible() && this.follower.ASSIGNED_ID != null) {
-                        if (this.follower.ASSIGNED_ID.equals(entity.getUUID())) {
+                        if (this.follower.ASSIGNED_ID != UUID.fromString("00000000-0000-0000-0000-000000000000") && this.follower.ASSIGNED_ID.equals(entity.getUUID())) {
                             double newDistance = entity.distanceToSqr(this.follower);
                             if (newDistance <= maxDistance) {
                                 maxDistance = newDistance;
