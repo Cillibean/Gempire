@@ -53,7 +53,8 @@ public enum Abilities {
     KINDERGARTENER(49,3),
     MINING(50,3),
     ARCHER(51,2),
-    TINKERER(52,4);
+    TINKERER(52,4),
+    SALVAGING(53,4);
 
     public final int id;
     public final int weight;

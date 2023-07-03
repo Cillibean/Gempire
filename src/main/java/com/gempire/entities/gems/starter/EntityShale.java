@@ -72,34 +72,6 @@ public class EntityShale extends EntityStarterGem {
     }
 
     @Override
-    public Item getInputItem(int i) {
-        inputList.add(ModItems.GEM_SLUSH_BUCKET.get());
-        return inputList.get(i);
-    }
-
-    @Override
-    public Item getOutputItem(int i) {
-        int n = random.nextInt(4);
-        switch (n) {
-            case 1 -> outputList.add(ModItems.PINK_ESSENCE_BUCKET.get());
-            case 2 -> outputList.add(ModItems.BLUE_ESSENCE_BUCKET.get());
-            case 3 -> outputList.add(ModItems.YELLOW_ESSENCE_BUCKET.get());
-            default -> outputList.add(ModItems.WHITE_ESSENCE_BUCKET.get());
-        }
-        return outputList.get(i);
-    }
-
-    @Override
-    public int generateRecipeAmount() {
-        return 1;
-    }
-
-    @Override
-    public boolean canCraft() {
-        return true;
-    }
-
-    @Override
     public GemPlacements[] getPlacements() {
         GemPlacements[] placement = new GemPlacements[]{
                 GemPlacements.BACK_OF_HEAD, GemPlacements.LEFT_EYE, GemPlacements.RIGHT_EYE, GemPlacements.BACK, GemPlacements.CHEST,
@@ -125,12 +97,6 @@ public class EntityShale extends EntityStarterGem {
         return new Abilities[]{
                 Abilities.ESSENCE_BREWER
         };
-    }
-
-    @Override
-    public int getTimetoCraft()
-    {
-        return 10 * 20;
     }
     @Override
     public boolean canOpenInventoryByDefault() {

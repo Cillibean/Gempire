@@ -81,28 +81,6 @@ this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, EntityGem.class, 6.0F, 
     }
 
     @Override
-    public Item getInputItem(int i) {
-        inputList.add(Items.STONE);
-        return inputList.get(i);
-    }
-
-    @Override
-    public Item getOutputItem(int i) {
-        outputList.add(ModItems.PEDISTAL.get());
-        return outputList.get(i);
-    }
-
-    @Override
-    public int generateRecipeAmount() {
-        return 1;
-    }
-
-    @Override
-    public boolean canCraft() {
-        return true;
-    }
-
-    @Override
     public int generateSkinVariant() {
         return 0;
     }
@@ -151,11 +129,6 @@ this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, EntityGem.class, 6.0F, 
         return new Abilities[]{
                 Abilities.DESIGNER
         };
-    }
-    @Override
-    public int getTimetoCraft()
-    {
-        return 3 * 20;
     }
     public int generateSkinColorVariant() {
         return 0;

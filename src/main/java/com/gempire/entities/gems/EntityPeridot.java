@@ -163,7 +163,7 @@ this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, EntityGem.class, 6.0F, 
     }
     public Abilities[] definiteAbilities(){
         return new Abilities[]{
-                Abilities.KINDERGARTENER
+                Abilities.KINDERGARTENER, Abilities.SALVAGING
         };
     }
 

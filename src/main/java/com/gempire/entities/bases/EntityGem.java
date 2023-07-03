@@ -18,9 +18,7 @@ import com.gempire.events.GemPoofEvent;
 import com.gempire.init.ModEnchants;
 import com.gempire.init.ModItems;
 import com.gempire.init.ModSounds;
-import com.gempire.items.DestabBase;
-import com.gempire.items.ItemGem;
-import com.gempire.items.ItemShatterer;
+import com.gempire.items.*;
 import com.gempire.util.Abilities;
 import com.gempire.util.Color;
 import com.gempire.util.GemPlacements;
@@ -41,6 +39,7 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.Main;
 import net.minecraft.server.commands.LocateCommand;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -49,6 +48,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.StructureTags;
 import net.minecraft.tags.TagKey;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.*;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -397,6 +397,11 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         if (this instanceof EntityPearl) return false;
         else if (this.isArcher()) return stack.getItem() instanceof DiggerItem || stack.getItem() instanceof BowItem || stack.getItem() instanceof AxeItem || stack.getItem() instanceof PickaxeItem || stack.getItem() instanceof DestabBase || stack.getItem() instanceof ItemShatterer;
         else if (this.isTinkerer()) return stack.getItem() instanceof DiggerItem || stack.getItem() instanceof BowItem || stack.getItem() instanceof AxeItem || stack.getItem() instanceof PickaxeItem || stack.getItem() instanceof ArmorItem || stack.getItem() instanceof DestabBase || stack.getItem() instanceof ItemShatterer;
+        else if (this.canCraft()) {
+            boolean bool = false;
+            for (int i = 0; i < getRecipeAmount(); i++) if (stack.getItem() == this.getInputItem(i)) bool = true;
+            return stack.getItem() instanceof DiggerItem || stack.getItem() instanceof SwordItem || stack.getItem() instanceof AxeItem || stack.getItem() instanceof PickaxeItem || stack.getItem() instanceof DestabBase || stack.getItem() instanceof ItemShatterer || bool;
+        }
         else return stack.getItem() instanceof DiggerItem || stack.getItem() instanceof SwordItem || stack.getItem() instanceof AxeItem || stack.getItem() instanceof PickaxeItem || stack.getItem() instanceof DestabBase || stack.getItem() instanceof ItemShatterer;
     }
 
@@ -687,11 +692,13 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     }
 
     public Item getInputItem(int i) {
-        return Items.AIR;
+        if (this.canCraft()) return inputList.get(i);
+        else return Items.AIR;
     }
 
     public Item getOutputItem(int i) {
-        return Items.AIR;
+        if (this.canCraft()) return outputList.get(i);
+        else return Items.AIR;
     }
 
     public int getCurrentRecipe() {
@@ -711,23 +718,57 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     }
 
     public int generateRecipeAmount() {
-        return 0;
+        int i = 0;
+        System.out.println("generate recipe amount");
+        if (canCraft()) {
+            /*for(Ability ability : this.getAbilityPowers()){
+                if(ability instanceof ICraftingAbility){
+                    i+= ((ICraftingAbility) ability).recipeAmount();
+                }
+            }
+            return i;*/
+            return inputList.size();
+        }
+        else return 0;
     }
 
     public int getTimetoCraft() {
-        return timeToCraft;
+        if (canCraft()) {
+            if (isPrimary()) {
+                return 5 * 20;
+            } else if (isDefective()) {
+                return 15 * 20;
+            }
+            return 10 * 20;
+        }
+        else return timeToCraft;
     }
 
     public boolean canCraft() {
-        return false;
+        boolean flag = false;
+        inputList.clear();
+        outputList.clear();
+        for(Ability ability : this.getAbilityPowers()){
+            if(ability instanceof ICraftingAbility){
+                ((ICraftingAbility) ability).setup();
+                flag = true;
+            }
+        }
+        return flag;
     }
 
     @Override
     public void tick() {
         if (!this.level.isClientSide && isCrafting) {
-            ticking++;
-            if (ticking >= getTimetoCraft()) {
-                popShitOut();
+            if (!getItemBySlot(EquipmentSlot.MAINHAND).isEmpty()) {
+                ticking++;
+                if (ticking >= getTimetoCraft()) {
+                    popShitOut();
+                }
+            } else {
+                isCrafting = false;
+                ticking = 0;
+                this.setCurrentRecipe(0);
             }
         }
         if (!this.level.isClientSide && !getRebelled() && getOwned()) {
@@ -907,7 +948,42 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                                             }
                                             player.sendSystemMessage(Component.translatable("Findable Structures: " + list1));
                                             player.sendSystemMessage(Component.translatable("Findable Biomes: " + list2));
-                                        } else if (this.canHoldItem(player.getMainHandItem())) {
+                                        } else if (this.canCraft()) {
+                                            setRecipeAmount(generateRecipeAmount());
+                                            for (int i = 0; i < getRecipeAmount(); i++) {
+                                                System.out.println(i);
+                                                System.out.println("input item check");
+                                                if (player.getItemInHand(hand).getItem() == getInputItem(i)) {
+                                                    System.out.println("hand check 1");
+                                                    if (!isCrafting) {
+                                                        System.out.println(getInputItem(i).asItem());
+                                                        System.out.println("is crafting check");
+                                                        if (getInputItem(i) != Items.AIR.asItem()) {
+                                                            System.out.println("input item air check");
+                                                            inputList.clear();
+                                                            setCurrentRecipe(i);
+                                                            if (this.isOwner(player)) {
+                                                                isCrafting = true;
+                                                                this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
+                                                                if (!player.isCreative()) {
+                                                                    player.getMainHandItem().shrink(1);
+                                                                }
+                                                                ItemStack stack = new ItemStack(player.getMainHandItem().getItem());
+                                                                stack.setCount(1);
+                                                                if (!this.getItemBySlot(EquipmentSlot.MAINHAND).isEmpty()) {
+                                                                    ItemStack gemStack = this.getItemBySlot(EquipmentSlot.MAINHAND);
+                                                                    spawnAtLocation(gemStack);
+                                                                }
+                                                                this.setItemSlot(EquipmentSlot.MAINHAND, stack);
+                                                                break;
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            return super.interactAt(player, vec, hand);
+                                        }
+                                        if (this.canHoldItem(player.getMainHandItem())) {
                                             ItemStack stack = this.getItemBySlot(EquipmentSlot.MAINHAND);
                                             this.setItemSlot(EquipmentSlot.MAINHAND, player.getMainHandItem());
                                             player.setItemSlot(EquipmentSlot.MAINHAND, stack);
@@ -915,47 +991,9 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                                     }
                                 }
                             }
-                            //}
                         }
                     }
                 }
-        }
-        if (!level.isClientSide) {
-            if (!player.isSpectator()) {
-                System.out.println("entity check");
-                if (this.canCraft()) {
-                    System.out.println("passed entity check");
-                    System.out.println(getRecipeAmount());
-                    for (int i = 0; i <= getRecipeAmount(); i++) {
-                        System.out.println(i);
-                        System.out.println("input item check");
-                        if (player.getItemInHand(hand).getItem() == getInputItem(i)) {
-                            System.out.println("hand check 1");
-                            if (!isCrafting) {
-                                System.out.println("is crafting check");
-                                if (hand == InteractionHand.MAIN_HAND) {
-                                    System.out.println("hand check 2");
-                                    if (getInputItem(i) != Items.AIR.asItem()) {
-                                        System.out.println("input item air check");
-                                        inputList.clear();
-                                        setCurrentRecipe(i);
-                                        if (this.isOwner(player)) {
-                                            isCrafting = true;
-                                            this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
-                                            if (!player.isCreative()) {
-                                                player.getMainHandItem().shrink(1);
-                                            }
-                                            break;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    inputList.clear();
-                    outputList.clear();
-                }
-            }
         }
         return super.interactAt(player, vec, hand);
     }
@@ -1038,6 +1076,48 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     @Override
     public boolean hurt(DamageSource source, float amount){
         if (!this.level.isClientSide) {
+            if (source.getEntity() instanceof LivingEntity && !(source.getEntity() instanceof Player)) {
+                if (((LivingEntity) source.getEntity()).getItemBySlot(EquipmentSlot.MAINHAND).getItem() instanceof DestabBase) {
+                    this.hurt(DamageSource.MAGIC, 20*getMaxHealth());
+                    if (((LivingEntity) source.getEntity()).getItemBySlot(EquipmentSlot.MAINHAND).getItem() instanceof ItemBlueRejuvenator) {
+                        this.setAbilities(this.generateAbilities());
+                        if (this instanceof EntityZircon)
+                        {
+                            if (this.isPrimary()) {
+                                ((EntityZircon) this).setEnchantPage(RandomSource.create().nextInt(ModEnchants.GEMPIRE_ENCHANTMENTS.size()));
+                            } else {
+                                ((EntityZircon) this).setEnchantPage(RandomSource.create().nextInt(ModEnchants.VANILLA_ENCHANTMENTS.size()));
+                            }
+                        }
+                        this.rebelPoints += 2.5f;
+                    } else if (((LivingEntity) source.getEntity()).getItemBySlot(EquipmentSlot.MAINHAND).getItem() instanceof ItemPinkRejuvenator) {
+                        this.resetOwners();
+                        this.setRebelled(false);
+                        this.rebelPoints = 1F;
+                    } else if (((LivingEntity) source.getEntity()).getItemBySlot(EquipmentSlot.MAINHAND).getItem() instanceof ItemYellowRejuvenator) {
+                        if (!this.getRebelled()) {
+                            this.setHairVariant(this.generateHairVariant());
+                            this.setOutfitVariant(this.generateOutfitVariant());
+                            this.setInsigniaVariant(this.generateInsigniaVariant());
+                            this.rebelPoints += 0.5F;
+                        }
+                    } else if (((LivingEntity) source.getEntity()).getItemBySlot(EquipmentSlot.MAINHAND).getItem() instanceof ItemWhiteRejuvenator) {
+                        this.setSkinColor(this.generatePaletteColor(PaletteType.SKIN));
+                        this.setHairColor(this.generatePaletteColor(PaletteType.HAIR));
+                        this.setGemColor(this.generatePaletteColor(PaletteType.GEM));
+                        if (this.hasMarkings())
+                        {
+                            this.setMarking2Color(this.generatePaletteColor(PaletteType.MARKINGS_2));
+                        }
+                        if (this.hasMarkings())
+                        {
+                            this.setMarkingColor(this.generatePaletteColor(PaletteType.MARKINGS));
+                        }
+                        this.rebelPoints += 0.5F;
+                    }
+                    return super.hurt(source, amount);
+                }
+            }
             float hardness = getHardness();
             System.out.println(this.getArmor().size());
             for (int i = 0; i < this.getArmor().size(); i++) {
@@ -1386,9 +1466,9 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.entityData.set(EntityGem.SKIN_COLOR, value);
     }
     public void popShitOut() {
+        setRecipeAmount(generateRecipeAmount());
             ItemStack itemStack = new ItemStack(getOutputItem(getCurrentRecipe()));
-            this.spawnAtLocation(itemStack);
-            this.gameEvent(GameEvent.ENTITY_PLACE);
+            this.setItemSlot(EquipmentSlot.MAINHAND, itemStack);
             ticking = 0;
             this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
             isCrafting = false;

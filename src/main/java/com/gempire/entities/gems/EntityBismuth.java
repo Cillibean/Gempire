@@ -91,29 +91,6 @@ public class EntityBismuth extends EntityGem {
     }
 
     @Override
-    public Item getInputItem(int i) {
-        inputList.add(ModItems.GEM_ALLOY.get());
-        return inputList.get(i);
-    }
-
-    @Override
-    public Item getOutputItem(int i) {
-        outputList.add(ModItems.PRISMATIC_INGOT.get());
-        return outputList.get(i);
-    }
-
-    @Override
-    public int generateRecipeAmount() {
-        return 1;
-    }
-
-    @Override
-    public boolean canCraft() {
-        return true;
-    }
-
-
-    @Override
     public int generateSkinVariant() {
         return this.getGemPlacement() == 11 ? 11 : 0;
     }
@@ -198,11 +175,7 @@ public class EntityBismuth extends EntityGem {
             return 17;
         return this.random.nextInt(4);
     }
-    @Override
-    public int getTimetoCraft()
-    {
-        return 10 * 20;
-    }
+
     public int generateInsigniaVariant(){
             return this.getOutfitVariant();
     }

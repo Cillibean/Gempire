@@ -95,8 +95,8 @@ public class ItemGem extends Item {
         if (entity instanceof EntityGem) {
                 if (((EntityGem) entity).isOwner(player)) {
                     if (player.isCrouching()) {
-                        //stack.getOrCreateTag().putUUID("assignedID", UUID.fromString("00000000-0000-0000-0000-000000000000"));
-                        player.sendSystemMessage(Component.translatable("This Gem is no longer assigned to "+ entity.getName().getString() + ", " +((EntityGem) entity).getFacetAndCut()));
+                        stack.getOrCreateTag().putUUID("assignedID", UUID.fromString("00000000-0000-0000-0000-000000000000"));
+                        //player.sendSystemMessage(Component.translatable("This Gem is no longer assigned to "+ entity.getName().getString() + ", " +((EntityGem) entity).getFacetAndCut()));
                         livingEntityHit = true;
                         /*System.out.println("gem interact");
                         gemToAssign = null;
@@ -105,7 +105,7 @@ public class ItemGem extends Item {
                         stack.getOrCreateTag().putUUID("assignedID", entity.getUUID());
                         System.out.println("entity uuid "+entity.getUUID());
                         System.out.println("assigned id "+stack.getOrCreateTag().getUUID("assignedID"));
-                        player.sendSystemMessage(Component.translatable("This Gem was assigned to "+ entity.getName().getString() + ", " +((EntityGem) entity).getFacetAndCut()));
+                        //player.sendSystemMessage(Component.translatable("This Gem was assigned to "+ entity.getName().getString() + ", " +((EntityGem) entity).getFacetAndCut()));
                         livingEntityHit = true;
                         /*System.out.println("gem interact");
                         gemToAssign = (EntityGem) entity;
@@ -454,7 +454,7 @@ public class ItemGem extends Item {
                             p_40553_.add(Component.translatable("Sludged").withStyle(ChatFormatting.RED));
                         }
                         if (itemStack.getTag().contains("assignedID")) {
-                            p_40553_.add(Component.translatable("Assigned" + itemStack.getTag().getUUID("assignedID"))); //to " + assigned_gem.getName().getString() + " " + assigned_gem.getFacetAndCut()));
+                            //.add(Component.translatable("Assigned" + itemStack.getTag().getUUID("assignedID"))); //to " + assigned_gem.getName().getString() + " " + assigned_gem.getFacetAndCut()));
                         }
                         if (itemStack.getTag().getBoolean("prime")) {
                             p_40553_.add(Component.translatable("Perfect").withStyle(ChatFormatting.LIGHT_PURPLE));
