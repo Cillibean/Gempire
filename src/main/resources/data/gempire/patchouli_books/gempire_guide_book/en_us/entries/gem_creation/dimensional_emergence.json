@@ -2,7 +2,7 @@
   "name": "Gems and Dimensions",
   "icon": "minecraft:book",
   "advancement": "gempire:root",
-  "category": "gempire:gem_creation",
+  "category": "gempire:gem_creation_category",
   "pages": [
     {
       "type": "patchouli:text",
