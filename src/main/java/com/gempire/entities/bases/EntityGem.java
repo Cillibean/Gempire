@@ -18,9 +18,7 @@ import com.gempire.events.GemPoofEvent;
 import com.gempire.init.ModEnchants;
 import com.gempire.init.ModItems;
 import com.gempire.init.ModSounds;
-import com.gempire.items.DestabBase;
-import com.gempire.items.ItemGem;
-import com.gempire.items.ItemShatterer;
+import com.gempire.items.*;
 import com.gempire.util.Abilities;
 import com.gempire.util.Color;
 import com.gempire.util.GemPlacements;
@@ -49,6 +47,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.StructureTags;
 import net.minecraft.tags.TagKey;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.*;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -1038,6 +1037,48 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     @Override
     public boolean hurt(DamageSource source, float amount){
         if (!this.level.isClientSide) {
+            if (source.getEntity() instanceof LivingEntity && !(source.getEntity() instanceof Player)) {
+                if (((LivingEntity) source.getEntity()).getItemBySlot(EquipmentSlot.MAINHAND).getItem() instanceof DestabBase) {
+                    this.hurt(DamageSource.MAGIC, 20*getMaxHealth());
+                    if (((LivingEntity) source.getEntity()).getItemBySlot(EquipmentSlot.MAINHAND).getItem() instanceof ItemBlueRejuvenator) {
+                        this.setAbilities(this.generateAbilities());
+                        if (this instanceof EntityZircon)
+                        {
+                            if (this.isPrimary()) {
+                                ((EntityZircon) this).setEnchantPage(RandomSource.create().nextInt(ModEnchants.GEMPIRE_ENCHANTMENTS.size()));
+                            } else {
+                                ((EntityZircon) this).setEnchantPage(RandomSource.create().nextInt(ModEnchants.VANILLA_ENCHANTMENTS.size()));
+                            }
+                        }
+                        this.rebelPoints += 2.5f;
+                    } else if (((LivingEntity) source.getEntity()).getItemBySlot(EquipmentSlot.MAINHAND).getItem() instanceof ItemPinkRejuvenator) {
+                        this.resetOwners();
+                        this.setRebelled(false);
+                        this.rebelPoints = 1F;
+                    } else if (((LivingEntity) source.getEntity()).getItemBySlot(EquipmentSlot.MAINHAND).getItem() instanceof ItemYellowRejuvenator) {
+                        if (!this.getRebelled()) {
+                            this.setHairVariant(this.generateHairVariant());
+                            this.setOutfitVariant(this.generateOutfitVariant());
+                            this.setInsigniaVariant(this.generateInsigniaVariant());
+                            this.rebelPoints += 0.5F;
+                        }
+                    } else if (((LivingEntity) source.getEntity()).getItemBySlot(EquipmentSlot.MAINHAND).getItem() instanceof ItemWhiteRejuvenator) {
+                        this.setSkinColor(this.generatePaletteColor(PaletteType.SKIN));
+                        this.setHairColor(this.generatePaletteColor(PaletteType.HAIR));
+                        this.setGemColor(this.generatePaletteColor(PaletteType.GEM));
+                        if (this.hasMarkings())
+                        {
+                            this.setMarking2Color(this.generatePaletteColor(PaletteType.MARKINGS_2));
+                        }
+                        if (this.hasMarkings())
+                        {
+                            this.setMarkingColor(this.generatePaletteColor(PaletteType.MARKINGS));
+                        }
+                        this.rebelPoints += 0.5F;
+                    }
+                    return super.hurt(source, amount);
+                }
+            }
             float hardness = getHardness();
             System.out.println(this.getArmor().size());
             for (int i = 0; i < this.getArmor().size(); i++) {

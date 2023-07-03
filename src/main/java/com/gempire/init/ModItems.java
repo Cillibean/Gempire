@@ -92,6 +92,10 @@ public class ModItems {
             )
     );
 
+    public static final RegistryObject<Item> SLUDGE_GLOB = ITEMS.register("sludge_glob", () ->
+            new Item(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(64))
+    );
+
     public static final RegistryObject<Item> TUNGSTEN_INGOT = ITEMS.register("tungsten_ingot", () ->
             new Item(new Item.Properties().tab(ModItemGroup.ITEMS).stacksTo(64))
     );
