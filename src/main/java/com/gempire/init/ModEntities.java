@@ -281,8 +281,8 @@ public class ModEntities {
         GemFormation.NETHER_POSSIBLE_GEMS_TIER_2.add("quartz");
         GemFormation.NETHER_POSSIBLE_GEMS_TIER_2.add("jasper");
         GemFormation.NETHER_POSSIBLE_GEMS_TIER_2.add("agate");
-        GemFormation.NETHER_POSSIBLE_GEMS_TIER_2.add("garnet");
 
+        GemFormation.NETHER_POSSIBLE_GEMS_TIER_2.add("garnet");
         GemFormation.NETHER_POSSIBLE_GEMS_TIER_2.add("obsidian");
 
         GemFormation.END_POSSIBLE_GEMS_TIER_1.add("spinel");
