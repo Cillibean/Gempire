@@ -1,0 +1,12 @@
+{
+  "name": "Essence Extraction Chambers",
+  "icon": "minecraft:book",
+  "advancement": "gempire:root",
+  "category": "gempire:structures",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "To be filled out..."
+    }
+  ]
+}
