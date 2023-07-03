@@ -1116,6 +1116,13 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                         this.rebelPoints += 0.5F;
                     }
                     return super.hurt(source, amount);
+                } else if (((LivingEntity) source.getEntity()).getItemBySlot(EquipmentSlot.MAINHAND).getItem() instanceof ItemShatterer) {
+                    this.setShatter(true);
+                    this.hurt(DamageSource.MAGIC, 20*getMaxHealth());
+                    for (UUID owner : OWNERS) {
+                        Objects.requireNonNull(this.level.getPlayerByUUID(owner)).sendSystemMessage(Component.translatable(this.getName().getString() + " " + this.getFacetAndCut() + " has been shattered"));
+                    }
+                    return super.hurt(source, amount);
                 }
             }
             float hardness = getHardness();
