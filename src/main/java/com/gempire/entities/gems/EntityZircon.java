@@ -73,7 +73,7 @@ public class EntityZircon extends EntityVaryingGem {
     @Override
     public SoundEvent getInstrument()
     {
-        return SoundEvents.NOTE_BLOCK_PLING;
+        return SoundEvents.NOTE_BLOCK_PLING.get();
     }
 
     @Override

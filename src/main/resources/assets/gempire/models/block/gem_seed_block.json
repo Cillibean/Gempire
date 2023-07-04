@@ -1,6 +1,6 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "all": "gempire:blocks/gem_seed_block"
+    "all": "gempire:block/gem_seed_block"
   }
 }

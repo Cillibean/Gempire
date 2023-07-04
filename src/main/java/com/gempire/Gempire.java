@@ -8,7 +8,6 @@ import com.gempire.entities.gems.starter.EntityShale;
 import com.gempire.entities.other.EntityAbomination;
 import com.gempire.entities.other.EntityCrawler;
 import com.gempire.entities.other.EntityShambler;
-import com.gempire.entities.other.GeoExampleEntity;
 import com.gempire.init.*;
 import com.gempire.proxy.CommonProxy;
 import net.minecraft.world.level.storage.loot.LootPool;
@@ -29,7 +28,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import software.bernie.geckolib3.GeckoLib;
+import software.bernie.geckolib.GeckoLib;
 
 import java.util.stream.Collectors;
 
@@ -64,8 +63,6 @@ public class Gempire
     }
 
     public void EntityAttributes(final EntityAttributeCreationEvent event){
-        event.put(ModEntities.TEST.get(), GeoExampleEntity.registerAttributes().build());
-
         event.put(ModEntities.SHAMBLER.get(), EntityShambler.registerAttributes().build());
 
         event.put(ModEntities.ABOMINATION.get(), EntityAbomination.registerAttributes().build());

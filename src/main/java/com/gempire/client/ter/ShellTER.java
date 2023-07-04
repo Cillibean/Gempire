@@ -3,6 +3,7 @@ package com.gempire.client.ter;
 import com.gempire.blocks.machine.ShellBlock;
 import com.gempire.tileentities.ShellTE;
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -16,10 +17,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.core.Direction;
 import net.minecraft.core.BlockPos;
-import com.mojang.math.Quaternion;
-import com.mojang.math.Vector3f;
 import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.Level;
+import org.joml.Quaternionf;
+import org.joml.Vector3f;
 
 public class ShellTER implements BlockEntityRenderer<ShellTE> {
     public Minecraft mc = Minecraft.getInstance();
@@ -36,11 +37,11 @@ public class ShellTER implements BlockEntityRenderer<ShellTE> {
         }
         LocalPlayer player = mc.player;
         int lightLevel = getLightLevel(te.getLevel(), te.getBlockPos());
-        renderItem(te.getPearlItem(), new double[]{.5D, .75D, .5D}, Vector3f.YP.rotationDegrees(rotationFromFacing(te.getBlockState().getValue(ShellBlock.FACING))),
+        renderItem(te.getPearlItem(), new double[]{.5D, .75D, .5D}, Axis.YP.rotationDegrees(rotationFromFacing(te.getBlockState().getValue(ShellBlock.FACING))),
                 matrixStackIn, bufferIn, partialTicks, combinedOverlayIn, lightLevel, .8f);
     }
 
-    public void renderItem(ItemStack stack, double[] translation, Quaternion rotation, PoseStack matrixStack, MultiBufferSource buffer,
+    public void renderItem(ItemStack stack, double[] translation, Quaternionf rotation, PoseStack matrixStack, MultiBufferSource buffer,
                            float partialTicks, int combinedOverley, int lightLevel, float scale){
         matrixStack.pushPose();
         matrixStack.translate(translation[0], translation[1], translation[2]);

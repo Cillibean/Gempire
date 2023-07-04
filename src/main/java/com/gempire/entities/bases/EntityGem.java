@@ -30,9 +30,11 @@ import com.mojang.datafixers.util.Pair;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.commands.CommandSourceStack;
-import net.minecraft.commands.arguments.ResourceOrTagLocationArgument;
+import net.minecraft.commands.arguments.ResourceOrTagKeyArgument;
 import net.minecraft.core.*;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -406,7 +408,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     }
 
     public SoundEvent getInstrument() {
-        return SoundEvents.NOTE_BLOCK_HARP;
+        return SoundEvents.NOTE_BLOCK_HARP.get();
     }
 
     protected SoundEvent getAmbientSound() {
@@ -929,7 +931,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                                             }
                                         } else if (player.getMainHandItem().getItem() == Items.PAPER) {
                                             NetworkHooks.openScreen((ServerPlayer) player, this, buf -> buf.writeInt(this.getId()));
-                                        } else if (player.getMainHandItem().getItem() == Items.BOOK && this.canLocateStructures()) {
+                                        } /*else if (player.getMainHandItem().getItem() == Items.BOOK && this.canLocateStructures()) {
                                             StringBuilder list1 = new StringBuilder();
                                             for (int i = 0; i < this.structures.size(); i++) {
                                                 if (i == this.structures.size() - 1) {
@@ -948,7 +950,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                                             }
                                             player.sendSystemMessage(Component.translatable("Findable Structures: " + list1));
                                             player.sendSystemMessage(Component.translatable("Findable Biomes: " + list2));
-                                        } else if (this.canCraft()) {
+                                        } */else if (this.canCraft()) {
                                             setRecipeAmount(generateRecipeAmount());
                                             for (int i = 0; i < getRecipeAmount(); i++) {
                                                 System.out.println(i);
@@ -2438,7 +2440,6 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         }
         BlockPos blockpos1 = null;
         BlockPos blockpos = new BlockPos(gem.blockPosition());
-        //TagKey<Structure> structureTagKey = TagKey.create();
         if(gem.structures.contains(structure.toString().replace("minecraft:", ""))) {
              blockpos1 = ((ServerLevel) gem.getCommandSenderWorld()).findNearestMapStructure(StructureTags.VILLAGE, blockpos, 100, false);
         }
@@ -2449,7 +2450,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         }
     }
 
-    public void runFindCommand(CommandSourceStack stack, ServerPlayer player, ResourceOrTagLocationArgument.Result<Structure> structure, @Nullable ResourceOrTagLocationArgument.Result<Biome> biomeResource, boolean biome) throws CommandSyntaxException {
+    public void runFindCommand(CommandSourceStack stack, ServerPlayer player, ResourceOrTagKeyArgument.Result<Structure> structure, @Nullable ResourceOrTagKeyArgument.Result<Biome> biomeResource, boolean biome) throws CommandSyntaxException {
         if (biome) {
             System.out.println("find command");
             BlockPos blockpos = new BlockPos(stack.getPosition());
@@ -2491,7 +2492,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                 }
             }
         } else {
-            Registry<Structure> registry = stack.getLevel().registryAccess().registryOrThrow(Registry.STRUCTURE_REGISTRY);
+            Registry<Structure> registry = stack.getLevel().registryAccess().registryOrThrow(Registries.STRUCTURE);
             HolderSet<Structure> holderset = getHolders(structure, registry).orElseThrow(() -> {
                 return ERROR_STRUCTURE_INVALID.create(structure.asPrintable());
             });
@@ -2537,7 +2538,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         }
     }
 
-    private static Optional<? extends HolderSet.ListBacked<Structure>> getHolders(ResourceOrTagLocationArgument.Result<Structure> p_214484_, Registry<Structure> p_214485_) {
+    private static Optional<? extends HolderSet.ListBacked<Structure>> getHolders(ResourceOrTagKeyArgument.Result<Structure> p_214484_, Registry<Structure> p_214485_) {
         return p_214484_.unwrap().map((p_214494_) -> {
             return p_214485_.getHolder(p_214494_).map((p_214491_) -> {
                 return HolderSet.direct(p_214491_);
@@ -2580,6 +2581,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             this.biomes.add(ForgeRegistries.BIOMES.getValue(key).toString().replace("minecraft:", ""));
         }
     }
+
     public boolean isOnStructureCooldown(){
         return false;
     }

@@ -2,8 +2,8 @@
   "parent": "gempire:block/chroma_cluster",
   "render_type": "cutout",
   "textures": {
-    "all": "gempire:blocks/chroma_cluster_state_4",
-    "particle": "gempire:blocks/chroma_cluster_state_4",
-    "0": "gempire:blocks/chroma_cluster_state_4"
+    "all": "gempire:block/chroma_cluster_state_4",
+    "particle": "gempire:block/chroma_cluster_state_4",
+    "0": "gempire:block/chroma_cluster_state_4"
   }
 }

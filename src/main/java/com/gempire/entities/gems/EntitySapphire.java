@@ -106,7 +106,7 @@ this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, EntityGem.class, 6.0F, 
     @Override
     public SoundEvent getInstrument()
     {
-        return SoundEvents.NOTE_BLOCK_PLING;
+        return SoundEvents.NOTE_BLOCK_PLING.get();
     }
     @Override
     public GemPlacements[] getPlacements() {

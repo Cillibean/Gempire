@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "gempire:items/water_orb"
+    "layer0": "gempire:item/water_orb"
   }
 }

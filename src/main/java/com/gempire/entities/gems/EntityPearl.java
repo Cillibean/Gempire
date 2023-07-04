@@ -79,7 +79,7 @@ public class EntityPearl extends EntityVaryingGem {
     @Override
     public SoundEvent getInstrument()
     {
-        return SoundEvents.NOTE_BLOCK_HARP;
+        return SoundEvents.NOTE_BLOCK_HARP.get();
     }
     @Override
     public void addAdditionalSaveData(CompoundTag compound) {

@@ -13,8 +13,10 @@ import com.gempire.util.GUIUtilities;
 import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.components.ImageButton;
@@ -25,9 +27,8 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.resources.ResourceLocation;
-import com.mojang.math.Quaternion;
-import com.mojang.math.Vector3f;
 import net.minecraft.network.chat.Component;
+import org.joml.Quaternionf;
 
 import java.util.ArrayList;
 
@@ -73,10 +74,14 @@ public class ZirconUIScreen extends AbstractContainerScreen<ZirconUIContainer> {
                 11, 21, (p_213029_1_) -> {
             ModPacketHandler.INSTANCE.sendToServer(new PageChange(this.container.gem.getEntityId(), true));
         }));*/
-        addRenderableWidget(new Button(this.leftPos + 138, this.topPos + 81, 65, 20, Component.translatable("screens.gempire.poof"), (button) -> {
-            ModPacketHandler.INSTANCE.sendToServer(new RequestPoof(this.menu.gem.getId()));
-            this.onClose();
-        }));
+        int n = this.menu.gem.getId();
+        Screen screen = this;
+        Button.Builder builder = new Button.Builder(Component.translatable("screens.gempire.poof"), button -> {
+            ModPacketHandler.INSTANCE.sendToServer(new RequestPoof(i));
+            screen.onClose();
+        });
+        builder.bounds(this.leftPos + 10, this.topPos + 108, 83, 20);
+        addRenderableWidget(builder.build());
         addRenderableWidget(new ImageButton(this.leftPos + 57, this.topPos + 57, 30, 10, 0, 0, 0, ZirconUIScreen.ENCHANT_BUTTON,
                 31, 10, (p_213029_1_) -> {
             ModPacketHandler.INSTANCE.sendToServer(new C2SRequestEnchant(this.menu.gem.getId()));
@@ -237,8 +242,8 @@ public class ZirconUIScreen extends AbstractContainerScreen<ZirconUIContainer> {
         PoseStack posestack1 = new PoseStack();
         posestack1.translate(0.0D, 0.0D, 1000.0D);
         posestack1.scale((float)p_98853_, (float)p_98853_, (float)p_98853_);
-        Quaternion quaternion = Vector3f.ZP.rotationDegrees(180.0F);
-        Quaternion quaternion1 = Vector3f.XP.rotationDegrees(f1 * 20.0F);
+        Quaternionf quaternion = Axis.ZP.rotationDegrees(180.0F);
+        Quaternionf quaternion1 = Axis.XP.rotationDegrees(f1 * 20.0F);
         quaternion.mul(quaternion1);
         posestack1.mulPose(quaternion);
         float f2 = p_98856_.yBodyRot;
@@ -253,7 +258,7 @@ public class ZirconUIScreen extends AbstractContainerScreen<ZirconUIContainer> {
         p_98856_.yHeadRotO = p_98856_.getYRot();
         Lighting.setupForEntityInInventory();
         EntityRenderDispatcher entityrenderdispatcher = Minecraft.getInstance().getEntityRenderDispatcher();
-        quaternion1.conj();
+        quaternion1.conjugate();
         entityrenderdispatcher.overrideCameraOrientation(quaternion1);
         entityrenderdispatcher.setRenderShadow(false);
         MultiBufferSource.BufferSource multibuffersource$buffersource = Minecraft.getInstance().renderBuffers().bufferSource();

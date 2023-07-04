@@ -1,7 +1,7 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "gempire:items/garnet_gem_12",
-    "layer1": "gempire:items/sludge/med_gem_sludge"
+    "layer0": "gempire:item/garnet_gem_12",
+    "layer1": "gempire:item/sludge/med_gem_sludge"
   }
 }

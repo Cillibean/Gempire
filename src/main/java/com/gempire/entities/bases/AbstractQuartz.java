@@ -54,7 +54,7 @@ public abstract class AbstractQuartz extends EntityVaryingGem implements RangedA
     @Override
     public SoundEvent getInstrument()
     {
-        return SoundEvents.NOTE_BLOCK_BASS;
+        return SoundEvents.NOTE_BLOCK_BASS.get();
     }
     @Override
     public boolean UsesUniqueNames() {

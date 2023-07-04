@@ -1,6 +1,6 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "all": "gempire:blocks/drained_yellow_soil"
+    "all": "gempire:block/drained_yellow_soil"
   }
 }

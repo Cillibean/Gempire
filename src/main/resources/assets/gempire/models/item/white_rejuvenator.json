@@ -3,8 +3,8 @@
 	"texture_size": [64, 64],
 	"gui_light": "front",
 	"textures": {
-		"0": "gempire:items/white_rejuvenator",
-		"particle": "gempire:items/white_rejuvenator"
+		"0": "gempire:item/white_rejuvenator",
+		"particle": "gempire:item/white_rejuvenator"
 	},
 	"elements": [
 		{

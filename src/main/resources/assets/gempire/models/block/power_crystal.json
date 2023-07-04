@@ -4,8 +4,8 @@
 	"gui_light": "front",
 	"texture_size": [64, 64],
 	"textures": {
-		"0": "gempire:blocks/power_crystal",
-		"particle": "gempire:blocks/power_crystal"
+		"0": "gempire:block/power_crystal",
+		"particle": "gempire:block/power_crystal"
 	},
 	"elements": [
 		{

@@ -1,6 +1,6 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "all": "gempire:blocks/drained_sand"
+    "all": "gempire:block/drained_sand"
   }
 }

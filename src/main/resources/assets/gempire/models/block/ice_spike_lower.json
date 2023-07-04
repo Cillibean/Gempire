@@ -2,6 +2,6 @@
   "parent": "minecraft:block/pointed_dripstone",
   "render_type": "cutout",
   "textures": {
-    "cross": "gempire:blocks/ice_spike_lower"
+    "cross": "gempire:block/ice_spike_lower"
   }
 }

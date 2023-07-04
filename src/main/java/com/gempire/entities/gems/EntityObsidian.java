@@ -79,7 +79,7 @@ public class EntityObsidian extends EntityGem implements ItemSteerable {
     @Override
     public SoundEvent getInstrument()
     {
-        return SoundEvents.NOTE_BLOCK_BASS;
+        return SoundEvents.NOTE_BLOCK_BASS.get();
     }
     @Override
     public int generateSkinVariant() {

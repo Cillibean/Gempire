@@ -87,7 +87,7 @@ public class EntityBismuth extends EntityGem {
     @Override
     public SoundEvent getInstrument()
     {
-        return SoundEvents.NOTE_BLOCK_BASS;
+        return SoundEvents.NOTE_BLOCK_BASS.get();
     }
 
     @Override

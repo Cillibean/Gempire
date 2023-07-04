@@ -4,9 +4,9 @@ import com.gempire.Gempire;
 import com.gempire.entities.other.EntityAbomination;
 import com.gempire.entities.other.EntityCrawler;
 import net.minecraft.resources.ResourceLocation;
-import software.bernie.geckolib3.model.AnimatedGeoModel;
+import software.bernie.geckolib.model.GeoModel;
 
-public class ModelAbomination extends AnimatedGeoModel<EntityAbomination> {
+public class ModelAbomination extends GeoModel<EntityAbomination> {
     @Override
     public ResourceLocation getModelResource(EntityAbomination object) {
         return new ResourceLocation(Gempire.MODID, "geo/entity/abomination.geo.json");

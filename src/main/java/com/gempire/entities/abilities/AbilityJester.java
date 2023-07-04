@@ -42,12 +42,12 @@ public class AbilityJester extends Ability implements IIdleAbility {
                         if (holder.distanceToSqr(entityGem) < Math.pow(2, 1)) {
                             if (holder.getRebelled()) {
                                 entityGem.rebelPoints += 1F;
-                                holder.playSound(SoundEvents.GOAT_HORN_SOUND_VARIANTS.get(6));
+                                holder.playSound(SoundEvents.GOAT_HORN_SOUND_VARIANTS.get(6).get());
                                 holder.abilityTicks = 20 * 60;
                             } else if (entityGem.getOwned()) {
                                 if (entityGem.rebelPoints - 0.5f > 0) {
                                     entityGem.rebelPoints -= 0.5F;
-                                    holder.playSound(SoundEvents.GOAT_HORN_SOUND_VARIANTS.get(1));
+                                    holder.playSound(SoundEvents.GOAT_HORN_SOUND_VARIANTS.get(1).get());
                                     holder.abilityTicks = 20 * 60;
                                 }
                             }

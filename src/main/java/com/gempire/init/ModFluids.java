@@ -2,7 +2,6 @@ package com.gempire.init;
 
 import com.gempire.Gempire;
 import com.gempire.fluids.*;
-import com.gempire.util.ModItemGroup;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Blocks;

@@ -1,8 +1,8 @@
 {
   "parent": "minecraft:block/inner_stairs",
   "textures": {
-    "bottom": "gempire:blocks/ruined_marble_block",
-    "top": "gempire:blocks/ruined_marble_block",
-    "side": "gempire:blocks/ruined_marble_block"
+    "bottom": "gempire:block/ruined_marble_block",
+    "top": "gempire:block/ruined_marble_block",
+    "side": "gempire:block/ruined_marble_block"
   }
 }

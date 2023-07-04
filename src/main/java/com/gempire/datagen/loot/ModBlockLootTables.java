@@ -3,19 +3,27 @@ package com.gempire.datagen.loot;
 import com.gempire.datagen.ModBlockStateProvider;
 import com.gempire.init.ModBlocks;
 import com.gempire.init.ModItems;
-import net.minecraft.data.loot.BlockLoot;
+import net.minecraft.advancements.critereon.StatePropertiesPredicate;
+import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.flag.FeatureFlagSet;
+import net.minecraft.world.flag.FeatureFlags;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.properties.SlabType;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.CopyNameFunction;
 import net.minecraft.world.level.storage.loot.functions.CopyNbtFunction;
 import net.minecraft.world.level.storage.loot.functions.SetContainerContents;
+import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.predicates.ConditionUserBuilder;
 import net.minecraft.world.level.storage.loot.predicates.ExplosionCondition;
+import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
 import net.minecraft.world.level.storage.loot.providers.nbt.ContextNbtProvider;
 import net.minecraft.world.level.storage.loot.providers.nbt.NbtProvider;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
@@ -23,11 +31,17 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.RegistryObject;
 
 import javax.annotation.Nullable;
+import java.util.Collections;
+import java.util.Set;
 
-public class ModBlockLootTables extends BlockLoot {
+public class ModBlockLootTables extends BlockLootSubProvider {
+
+    public ModBlockLootTables() {
+        super(Collections.emptySet(), FeatureFlags.REGISTRY.allFlags());
+    }
 
     @Override
-    protected void addTables() {
+    protected void generate() {
         //drained blocks
         this.dropSelf(ModBlocks.DRAINED_BANDED_BLUE_STONE.get());
         this.dropSelf(ModBlocks.DRAINED_BANDED_YELLOW_STONE.get());
@@ -96,10 +110,10 @@ public class ModBlockLootTables extends BlockLoot {
         this.dropSelf(ModBlocks.RUINED_MARBLE_PILLAR.get());
         this.dropSelf(ModBlocks.RUINED_MARBLE_STAIRS.get());
         this.dropSelf(ModBlocks.RUINED_MARBLE_BRICK.get());
-        this.add(ModBlocks.RUINED_MARBLE_SLAB.get(), BlockLoot::createSlabItemTable);
+        this.createSlabItemTable(ModBlocks.RUINED_MARBLE_SLAB.get());
         this.dropSelf(ModBlocks.SMOOTH_RUINED_MARBLE_BLOCK.get());
         this.dropSelf(ModBlocks.SMOOTH_RUINED_MARBLE_STAIRS.get());
-        this.add(ModBlocks.SMOOTH_RUINED_MARBLE_SLAB.get(), BlockLoot::createSlabItemTable);
+        this.createSlabItemTable(ModBlocks.SMOOTH_RUINED_MARBLE_SLAB.get());
 
         //no drop
         this.add(ModBlocks.ICE_SPIKE.get(), (block -> noDrop()));
@@ -140,6 +154,10 @@ public class ModBlockLootTables extends BlockLoot {
                 .setRolls(ConstantValue.exactly(1))
                 .add(itemLootPool)
         )));
+    }
+
+    protected LootTable.Builder createSlabItemTable(Block p_251313_) {
+        return LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(this.applyExplosionDecay(p_251313_, LootItem.lootTableItem(p_251313_).apply(SetItemCountFunction.setCount(ConstantValue.exactly(2.0F)).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(p_251313_).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(SlabBlock.TYPE, SlabType.DOUBLE)))))));
     }
 
     private static <T extends ConditionUserBuilder<T>> T applyExplosionCondition(boolean explosionResistant, ConditionUserBuilder<T> condition) {

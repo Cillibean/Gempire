@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "gempire:items/prime_boost"
+    "layer0": "gempire:item/prime_boost"
   }
 }

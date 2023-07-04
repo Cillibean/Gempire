@@ -33,7 +33,7 @@ public abstract class EntityStarterGem extends EntityGem {
     @Override
     public SoundEvent getInstrument()
     {
-        return SoundEvents.NOTE_BLOCK_XYLOPHONE;
+        return SoundEvents.NOTE_BLOCK_XYLOPHONE.get();
     }
     public int generateHairVariant(){
         return this.random.nextInt(3);

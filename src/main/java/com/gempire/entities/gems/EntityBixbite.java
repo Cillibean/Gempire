@@ -84,7 +84,7 @@ public class EntityBixbite extends EntityGem {
     @Override
     public SoundEvent getInstrument()
     {
-        return SoundEvents.NOTE_BLOCK_BIT;
+        return SoundEvents.NOTE_BLOCK_BIT.get();
     }
     @Override
     public int generateSkinVariant() {

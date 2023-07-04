@@ -1,6 +1,7 @@
 package com.gempire.fluids;
 
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.material.Fluid;
@@ -16,10 +17,10 @@ public class ModFluidTags {
     }
 
     private static TagKey<Fluid> create(String p_203851_) {
-        return TagKey.create(Registry.FLUID_REGISTRY, new ResourceLocation(p_203851_));
+        return TagKey.create(BuiltInRegistries.FLUID.key(), new ResourceLocation(p_203851_));
     }
 
     public static TagKey<Fluid> create(ResourceLocation name) {
-        return TagKey.create(Registry.FLUID_REGISTRY, name);
+        return TagKey.create(BuiltInRegistries.FLUID.key(), name);
     }
 }

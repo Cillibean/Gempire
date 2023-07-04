@@ -3,9 +3,9 @@ package com.gempire.client.entity.model;
 import com.gempire.Gempire;
 import com.gempire.entities.other.EntityCrawler;
 import net.minecraft.resources.ResourceLocation;
-import software.bernie.geckolib3.model.AnimatedGeoModel;
+import software.bernie.geckolib.model.GeoModel;;
 
-public class ModelCrawler extends AnimatedGeoModel<EntityCrawler> {
+public class ModelCrawler extends GeoModel<EntityCrawler> {
     @Override
     public ResourceLocation getModelResource(EntityCrawler object) {
         return new ResourceLocation(Gempire.MODID, "geo/entity/crawler.geo.json");

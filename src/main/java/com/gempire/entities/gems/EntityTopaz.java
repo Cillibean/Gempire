@@ -80,7 +80,7 @@ public class EntityTopaz extends EntityVaryingGem {
     @Override
     public SoundEvent getInstrument()
     {
-        return SoundEvents.NOTE_BLOCK_IRON_XYLOPHONE;
+        return SoundEvents.NOTE_BLOCK_IRON_XYLOPHONE.get();
     }
     @Override
 

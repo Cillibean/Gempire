@@ -1,7 +1,7 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "gempire:items/garnet_gem_5",
-    "layer1": "gempire:items/cracks/med_gem_crack"
+    "layer0": "gempire:item/garnet_gem_5",
+    "layer1": "gempire:item/cracks/med_gem_crack"
   }
 }

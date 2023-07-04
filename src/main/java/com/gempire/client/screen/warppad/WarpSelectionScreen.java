@@ -94,7 +94,7 @@ public class WarpSelectionScreen extends AbstractContainerScreen<WarpSelectionMe
             int index = i - startButton;
             if(index >= 0 && index < 6) {
                 WarpButton button = warpButtons.get(i);
-                button.y = this.topPos + 18 + 23 * index;
+                button.setY(this.topPos + 18 + 23 * index);
                 RenderSystem.setShaderTexture(0, BACKGROUND);
                 button.render(stack, mouseX, mouseY, partialTicks);
             }

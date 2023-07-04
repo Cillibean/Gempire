@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "gempire:items/white_chroma"
+    "layer0": "gempire:item/white_chroma"
   }
 }

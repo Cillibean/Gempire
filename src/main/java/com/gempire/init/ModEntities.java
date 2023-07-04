@@ -9,7 +9,6 @@ import com.gempire.entities.gems.starter.EntityShale;
 import com.gempire.entities.other.EntityAbomination;
 import com.gempire.entities.other.EntityCrawler;
 import com.gempire.entities.other.EntityShambler;
-import com.gempire.entities.other.GeoExampleEntity;
 import com.gempire.entities.projectiles.AcidSpitEntity;
 import com.gempire.entities.projectiles.IceShardEntity;
 import com.gempire.entities.projectiles.WaterOrbEntity;
@@ -32,10 +31,6 @@ public class ModEntities {
 
     // Entity Types
 
-    public static final RegistryObject<EntityType<GeoExampleEntity>> TEST = ENTITIES.register("test",
-            () -> EntityType.Builder.of(GeoExampleEntity::new, MobCategory.CREATURE)
-                    .sized(1f, 1f) // Hitbox Size
-                    .build(new ResourceLocation(Gempire.MODID, "test").toString()));
     public static final RegistryObject<EntityType<EntityCrawler>> CRAWLER = ENTITIES.register("crawler",
             () -> EntityType.Builder.of(EntityCrawler::new, MobCategory.CREATURE)
                     .sized(1f, 1.5f) // Hitbox Size

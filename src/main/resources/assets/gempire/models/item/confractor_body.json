@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "gempire:items/confractor_body"
+    "layer0": "gempire:item/confractor_body"
   }
 }

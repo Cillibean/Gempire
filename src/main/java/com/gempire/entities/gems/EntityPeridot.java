@@ -62,7 +62,7 @@ public class EntityPeridot extends EntityGem {
     @Override
     public SoundEvent getInstrument()
     {
-        return SoundEvents.NOTE_BLOCK_BIT;
+        return SoundEvents.NOTE_BLOCK_BIT.get();
     }
     protected void registerGoals() {
         super.registerGoals();

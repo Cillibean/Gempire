@@ -76,7 +76,7 @@ this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, EntityGem.class, 6.0F, 
     @Override
     public SoundEvent getInstrument()
     {
-        return SoundEvents.NOTE_BLOCK_HARP;
+        return SoundEvents.NOTE_BLOCK_HARP.get();
     }
     @Override
     public int generateSkinVariant() {

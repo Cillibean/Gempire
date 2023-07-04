@@ -5,8 +5,8 @@
 	"gui_light": "front",
 	"texture_size": [128, 64],
 	"textures": {
-		"particle": "gempire:blocks/injector",
-		"missing": "gempire:blocks/injector"
+		"particle": "gempire:block/injector",
+		"missing": "gempire:block/injector"
 	},
 	"elements": [
 		{

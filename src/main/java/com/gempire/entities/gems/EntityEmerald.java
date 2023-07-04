@@ -59,7 +59,7 @@ public class EntityEmerald extends EntityGem implements RangedAttackMob {
     @Override
     public SoundEvent getInstrument()
     {
-        return SoundEvents.NOTE_BLOCK_BIT;
+        return SoundEvents.NOTE_BLOCK_BIT.get();
     }
     protected void registerGoals() {
         super.registerGoals();
