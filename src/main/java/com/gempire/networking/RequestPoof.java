@@ -40,7 +40,7 @@ public class RequestPoof {
                 if (sender != null ) {
                     EntityGem gem = (EntityGem) sender.level.getEntity(msg.entityID);
                     if (gem != null) {
-                        gem.hurt(DamageSource.MAGIC, gem.getMaxHealth() * 20);
+                        gem.hurt(gem.damageSources().magic(), gem.getMaxHealth() * 20);
                     }
                 }
             });

@@ -51,7 +51,7 @@ public class GemUIScreen extends AbstractContainerScreen<GemUIContainer> {
         this.nameBox.setVisible(true);
         String name = this.menu.gem.getName().getString();
         this.nameBox.setValue(name);
-        this.nameBox.setFocus(true);
+        //this.nameBox.setFocus(true);
         //poof button
         addRenderableWidget(this.nameBox);
         this.setInitialFocus(this.nameBox);
@@ -61,7 +61,7 @@ public class GemUIScreen extends AbstractContainerScreen<GemUIContainer> {
             ModPacketHandler.INSTANCE.sendToServer(new RequestPoof(i));
             screen.onClose();
         });
-        builder.bounds(this.leftPos + 10, this.topPos + 108, 83, 20);
+        builder.bounds(this.leftPos + 10, this.topPos + 123, 83, 20);
         addRenderableWidget(builder.build());
     }
 

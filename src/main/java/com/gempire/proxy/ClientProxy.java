@@ -38,7 +38,6 @@ import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.event.CreativeModeTabEvent;
-import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fluids.FluidInteractionRegistry;
 import net.minecraftforge.fml.common.Mod;
@@ -111,7 +110,7 @@ public class ClientProxy {
                         // Set icon of creative tab
                         .icon(() -> new ItemStack(ModItems.RUBY_GEM.get()))
                         // Add default items to tab
-                        .displayItems((enabledFeatures, populator, operatorEnabled) -> {
+                        .displayItems((params, populator) -> {
                             populator.accept(ModItems.AQUAMARINE_GEM.get());
                             populator.accept(ModItems.NEPHRITE_GEM.get());
                             populator.accept(ModItems.BISMUTH_GEM.get());
@@ -319,7 +318,7 @@ public class ClientProxy {
                             // Set icon of creative tab
                             .icon(() -> new ItemStack(ModItems.PINK_CHROMA.get()))
                             // Add default items to tab
-                            .displayItems((enabledFlags, populator, hasPermissions) -> {
+                            .displayItems((params, populator) -> {
                                 populator.accept(ModItems.RED_CHROMA.get());
                                 populator.accept(ModItems.ORANGE_CHROMA.get());
                                 populator.accept(ModItems.YELLOW_CHROMA.get());
@@ -404,7 +403,7 @@ public class ClientProxy {
                             // Set icon of creative tab
                             .icon(() -> new ItemStack(ModItems.DRAINED_RED_STONE_2.get()))
                             // Add default items to tab
-                            .displayItems((enabledFlags, populator, hasPermissions) -> {
+                            .displayItems((params, populator) -> {
                                 populator.accept(ModBlocks.DRAINED_BANDED_BLUE_STONE.get());
                                 populator.accept(ModBlocks.DRAINED_BANDED_YELLOW_STONE.get());
                                 populator.accept(ModBlocks.DRAINED_BANDED_PURPLE_STONE.get());

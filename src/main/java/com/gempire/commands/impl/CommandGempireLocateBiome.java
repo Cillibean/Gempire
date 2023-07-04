@@ -44,7 +44,7 @@ public class CommandGempireLocateBiome extends CommandBase {
     }
 
     public int execute(CommandSourceStack source, ResourceOrTagKeyArgument.Result<Biome> biome) throws CommandSyntaxException {
-        BlockPos pos = new BlockPos(source.getPosition().x, source.getPosition().y, source.getPosition().z);
+        BlockPos pos = new BlockPos((int) source.getPosition().x, (int) source.getPosition().y, (int) source.getPosition().z);
         AABB aabb = source.getPlayerOrException().getBoundingBox().inflate(12.0D);
         EntityGem nephrite = null;
         List<EntityGem> gems = source.getLevel().getEntitiesOfClass(EntityGem.class, aabb);

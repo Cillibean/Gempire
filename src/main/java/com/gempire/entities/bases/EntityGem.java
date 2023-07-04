@@ -1,16 +1,10 @@
 package com.gempire.entities.bases;
 
-import com.gempire.commands.impl.CommandGempireLocate;
 import com.gempire.container.GemUIContainer;
-import com.gempire.enchants.GemProtectionEnchant;
 import com.gempire.entities.abilities.*;
 import com.gempire.entities.abilities.base.Ability;
 import com.gempire.entities.abilities.interfaces.*;
 import com.gempire.entities.gems.*;
-import com.gempire.entities.gems.starter.EntityMica;
-import com.gempire.entities.gems.starter.EntityNacre;
-import com.gempire.entities.gems.starter.EntityPebble;
-import com.gempire.entities.gems.starter.EntityShale;
 import com.gempire.entities.other.EntityAbomination;
 import com.gempire.entities.other.EntityCrawler;
 import com.gempire.entities.other.EntityShambler;
@@ -33,7 +27,6 @@ import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.arguments.ResourceOrTagKeyArgument;
 import net.minecraft.core.*;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -41,18 +34,18 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.Main;
-import net.minecraft.server.commands.LocateCommand;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.StructureTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.*;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -73,7 +66,6 @@ import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.saveddata.maps.MapDecoration;
 import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
@@ -1080,7 +1072,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         if (!this.level.isClientSide) {
             if (source.getEntity() instanceof LivingEntity && !(source.getEntity() instanceof Player)) {
                 if (((LivingEntity) source.getEntity()).getItemBySlot(EquipmentSlot.MAINHAND).getItem() instanceof DestabBase) {
-                    this.hurt(DamageSource.MAGIC, 20*getMaxHealth());
+                    this.hurt(this.damageSources().magic(), 20*getMaxHealth());
                     if (((LivingEntity) source.getEntity()).getItemBySlot(EquipmentSlot.MAINHAND).getItem() instanceof ItemBlueRejuvenator) {
                         this.setAbilities(this.generateAbilities());
                         if (this instanceof EntityZircon)
@@ -1120,7 +1112,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                     return super.hurt(source, amount);
                 } else if (((LivingEntity) source.getEntity()).getItemBySlot(EquipmentSlot.MAINHAND).getItem() instanceof ItemShatterer) {
                     this.setShatter(true);
-                    this.hurt(DamageSource.MAGIC, 20*getMaxHealth());
+                    this.hurt(this.damageSources().magic(), 20*getMaxHealth());
                     for (UUID owner : OWNERS) {
                         Objects.requireNonNull(this.level.getPlayerByUUID(owner)).sendSystemMessage(Component.translatable(this.getName().getString() + " " + this.getFacetAndCut() + " has been shattered"));
                     }
@@ -1135,7 +1127,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                 if (armorItem.isEnchanted()) {
                     if (armorItem.getEnchantmentLevel(ModEnchants.GEM_PROTECTION.get()) >= 1) {
                         if (armorItem.getItem() instanceof ArmorItem) {
-                            EquipmentSlot slot = ((ArmorItem) armorItem.getItem()).getSlot();
+                            EquipmentSlot slot = ((ArmorItem) armorItem.getItem()).getEquipmentSlot();
                             float level = armorItem.getEnchantmentLevel(ModEnchants.GEM_PROTECTION.get());
                             if (slot == EquipmentSlot.HEAD || slot == EquipmentSlot.FEET) {
                                 hardness += level / 2;
@@ -1151,8 +1143,8 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                     }
                 }
             }
-            if (!source.isMagic()) {
-                if (source.isExplosion()) {
+            if (!source.is(DamageTypes.MAGIC)) {
+                if (source.is(DamageTypeTags.IS_EXPLOSION)) {
                     if (amount - getHealth() > ((hardness / 2) + 0.5) && (this.random.nextInt(shatterChance / 2) == 1)) {
                         setShatter(true);
                     }
@@ -1202,7 +1194,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                         }
                     }
                 }
-                if (this.isEmotional() && !source.isExplosion() && !source.isFire()) {
+                if (this.isEmotional() && !source.is(DamageTypeTags.IS_EXPLOSION) && !source.is(DamageTypeTags.IS_FIRE)) {
                     if (this.emotionMeter <= this.EmotionThreshold()) {
                         if (this.EmotionThreshold() - this.emotionMeter < 5) {
                             this.level.addParticle(ParticleTypes.ANGRY_VILLAGER, this.getX(), this.getY() + 2, this.getZ(), 0, 0, 0);
@@ -2120,12 +2112,12 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     }
 
     public void travel(Vec3 travelVector) {
-        this.travel(this, this.booster, travelVector);
+        this.travel(travelVector);
     }
 
     @Nullable
-    public Entity getControllingPassenger() {
-        return this.getPassengers().isEmpty() ? null : this.getPassengers().get(0);
+    public LivingEntity getControllingPassenger() {
+        return this.getPassengers().isEmpty() ? null : (LivingEntity) this.getPassengers().get(0);
     }
 
     public boolean canBeControlledByRider() {
@@ -2453,7 +2445,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     public void runFindCommand(CommandSourceStack stack, ServerPlayer player, ResourceOrTagKeyArgument.Result<Structure> structure, @Nullable ResourceOrTagKeyArgument.Result<Biome> biomeResource, boolean biome) throws CommandSyntaxException {
         if (biome) {
             System.out.println("find command");
-            BlockPos blockpos = new BlockPos(stack.getPosition());
+            BlockPos blockpos = new BlockPos((int) stack.getPosition().x, (int) stack.getPosition().y, (int) stack.getPosition().z);
             Pair<BlockPos, Holder<Biome>> pair = stack.getLevel().findClosestBiome3d(biomeResource, blockpos, 6400, 32, 64);
             if (pair == null) {
                 throw ERROR_BIOME_INVALID.create(biomeResource.asPrintable());
@@ -2496,7 +2488,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             HolderSet<Structure> holderset = getHolders(structure, registry).orElseThrow(() -> {
                 return ERROR_STRUCTURE_INVALID.create(structure.asPrintable());
             });
-            BlockPos blockpos = new BlockPos(stack.getPosition());
+            BlockPos blockpos = new BlockPos((int) stack.getPosition().x, (int) stack.getPosition().y, (int) stack.getPosition().z);
             ServerLevel serverlevel = player.getLevel();
             Pair<BlockPos, Holder<Structure>> pair = serverlevel.getChunkSource().getGenerator().findNearestMapStructure(serverlevel, holderset, blockpos, 100, false);
             if (pair == null) {

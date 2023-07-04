@@ -34,9 +34,9 @@ public class AbilityLootmaster extends Ability implements IViolentAbility, IMele
         if (entityIn.isDeadOrDying()) {
             if (entityIn.getLastHurtByMob() == this.holder) {
                 if (this.holder.isPrimary())
-                    new LootingLevelEvent(entityIn, DamageSource.mobAttack(this.holder), 4);
+                    new LootingLevelEvent(entityIn, this.holder.damageSources().mobAttack(this.holder), 4);
                 else if (!this.holder.isDefective())
-                    new LootingLevelEvent(entityIn, DamageSource.mobAttack(this.holder), 2);
+                    new LootingLevelEvent(entityIn, this.holder.damageSources().mobAttack(this.holder), 2);
             }
         }
     }

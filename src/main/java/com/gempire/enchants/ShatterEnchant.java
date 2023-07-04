@@ -25,7 +25,7 @@ public class ShatterEnchant extends Enchantment {
                     if (((EntityGem) target).getHealth() <= ((EntityGem) target).getMaxHealth()/2) {
                         if (((EntityGem) target).getRandom().nextInt(12 - (level * 2)) == 1) {
                             ((EntityGem) target).setShatter(true);
-                            target.hurt(DamageSource.MAGIC, ((EntityGem) target).getMaxHealth() * 20);
+                            target.hurt(target.damageSources().magic(), ((EntityGem) target).getMaxHealth() * 20);
                         }
                     }
                 }

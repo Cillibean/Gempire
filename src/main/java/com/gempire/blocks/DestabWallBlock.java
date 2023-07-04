@@ -121,13 +121,13 @@ public class DestabWallBlock extends HorizontalDirectionalBlock {
         }
     }
 
-    @Override
+    /*@Override
     public void tick(BlockState p_222945_, ServerLevel p_222946_, BlockPos pos, RandomSource p_222948_) {
         if (gem != null) {
             BlockPos gemPos = new BlockPos(gem.getX(), gem.getY(), gem.getZ());
             if (gemPos.equals(pos)) {
-                gem.hurt(DamageSource.MAGIC, 2);
+                gem.hurt(this.damageSources().magic(), 2);
             }
         }
-    }
+    }*/
 }

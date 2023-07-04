@@ -61,7 +61,7 @@ public class ZirconUIScreen extends AbstractContainerScreen<ZirconUIContainer> {
         this.nameBox.setVisible(true);
         String name = this.menu.gem.getName().getString();
         this.nameBox.setValue(name);
-        this.nameBox.setFocus(true);
+        //this.nameBox.setFocus(true);
         addRenderableWidget(this.nameBox);
         this.setInitialFocus(this.nameBox);
 
@@ -80,7 +80,7 @@ public class ZirconUIScreen extends AbstractContainerScreen<ZirconUIContainer> {
             ModPacketHandler.INSTANCE.sendToServer(new RequestPoof(i));
             screen.onClose();
         });
-        builder.bounds(this.leftPos + 10, this.topPos + 108, 83, 20);
+        builder.bounds(this.leftPos + 138, this.topPos + 81, 65, 20);
         addRenderableWidget(builder.build());
         addRenderableWidget(new ImageButton(this.leftPos + 57, this.topPos + 57, 30, 10, 0, 0, 0, ZirconUIScreen.ENCHANT_BUTTON,
                 31, 10, (p_213029_1_) -> {

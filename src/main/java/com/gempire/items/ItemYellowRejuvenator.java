@@ -30,7 +30,7 @@ public class ItemYellowRejuvenator extends DestabBase {
                     ((EntityGem) pTarget).setInsigniaVariant(((EntityGem) pTarget).generateInsigniaVariant());
                     ((EntityGem) pTarget).rebelPoints += 0.5F;
                 }
-                pTarget.hurt(DamageSource.MAGIC, pTarget.getMaxHealth()*20);
+                pTarget.hurt(pTarget.damageSources().magic(), pTarget.getMaxHealth()*20);
                 ((EntityGem) pTarget).setCracked(false);
             }
         }

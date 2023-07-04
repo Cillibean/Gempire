@@ -47,11 +47,11 @@ public class WaterOrbEntity extends ThrowableItemProjectile {
         super.onHitEntity(result);
         if (result.getEntity() instanceof EntityGem) {
             if (!((EntityGem) result.getEntity()).getOwned() || ((EntityGem) result.getEntity()).getRebelled()) {
-                result.getEntity().hurt(DamageSource.MAGIC, 1.0F);
+                result.getEntity().hurt(this.damageSources().magic(), 1.0F);
                 this.kill();
             }
         } else {
-            result.getEntity().hurt(DamageSource.MAGIC, 1.0F);
+            result.getEntity().hurt(this.damageSources().magic(), 1.0F);
             this.kill();
         }
     }

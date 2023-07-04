@@ -58,7 +58,7 @@ public class PearlUIScreen extends AbstractContainerScreen<PearlUIContainer> {
         this.nameBox.setVisible(true);
         String name = this.menu.gem.customName() ? this.menu.gem.getCustomName().getString() : this.menu.gem.getDisplayName().getString();
         this.nameBox.setValue(name);
-        this.nameBox.setFocus(true);
+        //this.nameBox.setFocus(true);
         addRenderableWidget(this.nameBox);
         this.setInitialFocus(this.nameBox);
 

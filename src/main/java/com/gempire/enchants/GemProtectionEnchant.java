@@ -1,6 +1,8 @@
 package com.gempire.enchants;
 
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
@@ -14,10 +16,10 @@ public class GemProtectionEnchant extends Enchantment {
     }
 
     public int getDamageProtection(int p_45133_, DamageSource p_45134_) {
-        if (p_45134_.isBypassInvul()) {
+        if (p_45134_.is(DamageTypeTags.BYPASSES_INVULNERABILITY)) {
             return 0;
         } else {
-            return !p_45134_.isMagic()  && !p_45134_.isBypassEnchantments() ? p_45133_ * 2 : 0;
+            return !p_45134_.is(DamageTypes.MAGIC)  && !p_45134_.is(DamageTypeTags.BYPASSES_ENCHANTMENTS) ? p_45133_ * 2 : 0;
         }
     }
 

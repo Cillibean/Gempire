@@ -13,6 +13,7 @@ import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
+import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.core.Direction;
@@ -48,7 +49,7 @@ public class ShellTER implements BlockEntityRenderer<ShellTE> {
         matrixStack.mulPose(rotation);
         matrixStack.scale(scale, scale, scale);
         BakedModel model = mc.getItemRenderer().getModel(stack, null, null, 1);
-        mc.getItemRenderer().render(stack, ItemTransforms.TransformType.GROUND, true, matrixStack, buffer, lightLevel, combinedOverley, model);
+        mc.getItemRenderer().render(stack, ItemDisplayContext.GROUND, true, matrixStack, buffer, lightLevel, combinedOverley, model);
         matrixStack.popPose();
     }
 

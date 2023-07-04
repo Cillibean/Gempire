@@ -49,7 +49,7 @@ public class AcidSpitEntity extends ThrowableItemProjectile {
         super.onHitEntity(result);
         if (result.getEntity() instanceof EntityGem) {
             if (!((EntityGem) result.getEntity()).getOwned() || ((EntityGem) result.getEntity()).getRebelled()) {
-                result.getEntity().hurt(DamageSource.MAGIC, 1.0F);;
+                result.getEntity().hurt(result.getEntity().damageSources().magic(), 1.0F);;
                 ((LivingEntity) result.getEntity()).addEffect(new MobEffectInstance(MobEffects.POISON,50,0));
             }
         }
@@ -57,11 +57,11 @@ public class AcidSpitEntity extends ThrowableItemProjectile {
         {
             if (hehe.getMobType() == MobType.UNDEAD)
             {
-                hehe.hurt(DamageSource.MAGIC, 1.0F);;
+                hehe.hurt(result.getEntity().damageSources().magic(), 1.0F);;
             }
             else
             {
-                hehe.hurt(DamageSource.MAGIC, 1.0F);;
+                hehe.hurt(result.getEntity().damageSources().magic(), 1.0F);;
                 hehe.addEffect(new MobEffectInstance(MobEffects.POISON,50,0));
             }
             this.kill();
