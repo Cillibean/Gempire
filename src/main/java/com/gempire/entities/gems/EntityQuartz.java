@@ -6,18 +6,11 @@ import com.gempire.entities.bases.EntityGem;
 import com.gempire.entities.other.EntityAbomination;
 import com.gempire.entities.other.EntityCrawler;
 import com.gempire.entities.other.EntityShambler;
-import com.gempire.util.Abilities;
+import com.gempire.util.GempireAbilities;
 import com.gempire.util.GemPlacements;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.goal.*;
-import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.AbstractArrow;
-import net.minecraft.world.entity.projectile.ProjectileUtil;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.ProjectileWeaponItem;
 import net.minecraft.world.level.Level;
 
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
@@ -217,8 +210,8 @@ public class EntityQuartz extends AbstractQuartz {
     }
 
     @Override
-    public Abilities[] definiteAbilities() {
-        return new Abilities[0];
+    public GempireAbilities[] definiteAbilities() {
+        return new GempireAbilities[0];
     }
 
     @Override

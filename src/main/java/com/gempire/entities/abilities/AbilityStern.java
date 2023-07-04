@@ -3,25 +3,21 @@ package com.gempire.entities.abilities;
 import com.gempire.entities.abilities.base.Ability;
 import com.gempire.entities.abilities.interfaces.IAreaAbility;
 import com.gempire.entities.abilities.interfaces.IEffectAbility;
-import com.gempire.entities.abilities.interfaces.IViolentAbility;
 import com.gempire.entities.bases.EntityGem;
-import com.gempire.util.Abilities;
+import com.gempire.util.GempireAbilities;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.network.chat.Component;
-import org.lwjgl.system.CallbackI;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 public class AbilityStern extends Ability implements IAreaAbility, IEffectAbility {
 
     public AbilityStern() {
-        this.ability = Abilities.STERN;
+        this.ability = GempireAbilities.STERN;
     }
 
     @Override

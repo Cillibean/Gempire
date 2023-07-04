@@ -1,6 +1,5 @@
 package com.gempire.entities.abilities.base;
 
-import com.gempire.entities.abilities.*;
 import com.gempire.entities.bases.EntityGem;
 import com.gempire.util.Abilities;
 import net.minecraft.network.chat.Component;

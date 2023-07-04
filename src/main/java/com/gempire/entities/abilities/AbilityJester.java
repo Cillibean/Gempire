@@ -3,26 +3,16 @@ package com.gempire.entities.abilities;
 import com.gempire.entities.abilities.base.Ability;
 import com.gempire.entities.abilities.interfaces.IIdleAbility;
 import com.gempire.entities.bases.EntityGem;
-import com.gempire.util.Abilities;
-import net.minecraft.core.BlockPos;
+import com.gempire.util.GempireAbilities;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LightLayer;
-import net.minecraft.world.level.block.AirBlock;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.SnowLayerBlock;
-import net.minecraft.world.level.block.TallGrassBlock;
-import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.List;
 
 public class AbilityJester extends Ability implements IIdleAbility {
 
     public AbilityJester() {
-        this.ability = Abilities.JESTER;
+        this.ability = GempireAbilities.JESTER;
     }
 
     @Override

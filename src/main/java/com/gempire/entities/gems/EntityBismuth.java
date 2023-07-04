@@ -5,12 +5,7 @@ import com.gempire.entities.bases.EntityGem;
 import com.gempire.entities.other.EntityAbomination;
 import com.gempire.entities.other.EntityCrawler;
 import com.gempire.entities.other.EntityShambler;
-import com.gempire.entities.gems.starter.EntityShale;
-import com.gempire.entities.other.EntityAbomination;
-import com.gempire.entities.other.EntityCrawler;
-import com.gempire.entities.other.EntityShambler;
-import com.gempire.init.ModItems;
-import com.gempire.util.Abilities;
+import com.gempire.util.GempireAbilities;
 import com.gempire.util.GemPlacements;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -22,14 +17,9 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class EntityBismuth extends EntityGem {
     public EntityBismuth(EntityType<? extends PathfinderMob> type, Level worldIn) {
@@ -128,14 +118,14 @@ public class EntityBismuth extends EntityGem {
         return new int[] { 17 };
     }
 
-    public Abilities[] possibleAbilities(){
-        return new Abilities[]{
-                Abilities.NO_ABILITY, Abilities.TANK, Abilities.BEEFCAKE, Abilities.POWERHOUSE, Abilities.UNHINGED
+    public GempireAbilities[] possibleAbilities(){
+        return new GempireAbilities[]{
+                GempireAbilities.NO_ABILITY, GempireAbilities.TANK, GempireAbilities.BEEFCAKE, GempireAbilities.POWERHOUSE, GempireAbilities.UNHINGED
         };
     }
-    public Abilities[] definiteAbilities(){
-        return new Abilities[]{
-                Abilities.REFINERY, Abilities.TINKERER
+    public GempireAbilities[] definiteAbilities(){
+        return new GempireAbilities[]{
+                GempireAbilities.REFINERY, GempireAbilities.TINKERER
         };
     }
 

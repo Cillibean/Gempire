@@ -11,15 +11,13 @@ import com.gempire.entities.other.EntityAbomination;
 import com.gempire.entities.other.EntityCrawler;
 import com.gempire.entities.other.EntityShambler;
 import com.gempire.entities.bases.EntityVaryingGem;
-import com.gempire.util.Abilities;
+import com.gempire.util.GempireAbilities;
 import com.gempire.util.GemPlacements;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -42,7 +40,6 @@ import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.PanicGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
-import org.checkerframework.checker.units.qual.C;
 
 public class EntityPearl extends EntityVaryingGem {
     public static final int NUMBER_OF_SLOTS_PEARL = 58;
@@ -191,13 +188,13 @@ this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, EntityGem.class, 6.0F, 
         return false;
     }
 
-    public Abilities[] possibleAbilities(){
-        return new Abilities[]{
-                Abilities.NO_ABILITY
+    public GempireAbilities[] possibleAbilities(){
+        return new GempireAbilities[]{
+                GempireAbilities.NO_ABILITY
         };
     }
-    public Abilities[] definiteAbilities(){
-        return new Abilities[]{
+    public GempireAbilities[] definiteAbilities(){
+        return new GempireAbilities[]{
 
         };
     }

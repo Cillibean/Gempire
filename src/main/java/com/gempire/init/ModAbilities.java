@@ -2,66 +2,66 @@ package com.gempire.init;
 
 import com.gempire.entities.abilities.*;
 import com.gempire.entities.abilities.base.Ability;
-import com.gempire.util.Abilities;
+import com.gempire.util.GempireAbilities;
 
 public class ModAbilities {
 
     public static void registerAbilities(){
-        Ability.ABILITY_FROM_ABILITIES.put(Abilities.NO_ABILITY, AbilityZilch.class);
+        Ability.ABILITY_FROM_ABILITIES.put(GempireAbilities.NO_ABILITY, AbilityZilch.class);
 
-        Ability.ABILITY_FROM_ABILITIES.put(Abilities.CRYOKINESIS, AbilityCryokinesis.class);
+        Ability.ABILITY_FROM_ABILITIES.put(GempireAbilities.CRYOKINESIS, AbilityCryokinesis.class);
 
-        Ability.ABILITY_FROM_ABILITIES.put(Abilities.PYROKINESIS, AbilityPyrokinesis.class);
-        Ability.ABILITY_FROM_ABILITIES.put(Abilities.PARALYSIS, AbilityParalysis.class);
-        Ability.ABILITY_FROM_ABILITIES.put(Abilities.KNOCKBACK, AbilityKnockback.class);
+        Ability.ABILITY_FROM_ABILITIES.put(GempireAbilities.PYROKINESIS, AbilityPyrokinesis.class);
+        Ability.ABILITY_FROM_ABILITIES.put(GempireAbilities.PARALYSIS, AbilityParalysis.class);
+        Ability.ABILITY_FROM_ABILITIES.put(GempireAbilities.KNOCKBACK, AbilityKnockback.class);
 
-        Ability.ABILITY_FROM_ABILITIES.put(Abilities.LUCK, AbilityLuck.class);
-        Ability.ABILITY_FROM_ABILITIES.put(Abilities.FIRST_AID, AbilityFirstAid.class);
-        Ability.ABILITY_FROM_ABILITIES.put(Abilities.HEALER, AbilityHealer.class);
-        Ability.ABILITY_FROM_ABILITIES.put(Abilities.AMPHIBIAN, AbilityAmphibian.class);
-        Ability.ABILITY_FROM_ABILITIES.put(Abilities.HYDROKINESIS, AbilityHydrokinesis.class);
-        Ability.ABILITY_FROM_ABILITIES.put(Abilities.JESTER, AbilityJester.class);
+        Ability.ABILITY_FROM_ABILITIES.put(GempireAbilities.LUCK, AbilityLuck.class);
+        Ability.ABILITY_FROM_ABILITIES.put(GempireAbilities.FIRST_AID, AbilityFirstAid.class);
+        Ability.ABILITY_FROM_ABILITIES.put(GempireAbilities.HEALER, AbilityHealer.class);
+        Ability.ABILITY_FROM_ABILITIES.put(GempireAbilities.AMPHIBIAN, AbilityAmphibian.class);
+        Ability.ABILITY_FROM_ABILITIES.put(GempireAbilities.HYDROKINESIS, AbilityHydrokinesis.class);
+        Ability.ABILITY_FROM_ABILITIES.put(GempireAbilities.JESTER, AbilityJester.class);
 
-        Ability.ABILITY_FROM_ABILITIES.put(Abilities.TANK, AbilityTank.class);
-        Ability.ABILITY_FROM_ABILITIES.put(Abilities.BEEFCAKE, AbilityBeefcake.class);
-        Ability.ABILITY_FROM_ABILITIES.put(Abilities.POWERHOUSE, AbilityPowerhouse.class);
-        Ability.ABILITY_FROM_ABILITIES.put(Abilities.UNHINGED, AbilityUnhinged.class);
-        Ability.ABILITY_FROM_ABILITIES.put(Abilities.BERSERKER, AbilityBerserker.class);
-        Ability.ABILITY_FROM_ABILITIES.put(Abilities.BEASTMASTER, AbilityBeastmaster.class);
-        Ability.ABILITY_FROM_ABILITIES.put(Abilities.ACIDIC_SPIT, AbilityAcidicSaliva.class);
+        Ability.ABILITY_FROM_ABILITIES.put(GempireAbilities.TANK, AbilityTank.class);
+        Ability.ABILITY_FROM_ABILITIES.put(GempireAbilities.BEEFCAKE, AbilityBeefcake.class);
+        Ability.ABILITY_FROM_ABILITIES.put(GempireAbilities.POWERHOUSE, AbilityPowerhouse.class);
+        Ability.ABILITY_FROM_ABILITIES.put(GempireAbilities.UNHINGED, AbilityUnhinged.class);
+        Ability.ABILITY_FROM_ABILITIES.put(GempireAbilities.BERSERKER, AbilityBerserker.class);
+        Ability.ABILITY_FROM_ABILITIES.put(GempireAbilities.BEASTMASTER, AbilityBeastmaster.class);
+        Ability.ABILITY_FROM_ABILITIES.put(GempireAbilities.ACIDIC_SPIT, AbilityAcidicSaliva.class);
 
-        Ability.ABILITY_FROM_ABILITIES.put(Abilities.DISARMING, AbilityDisarming.class);
-        Ability.ABILITY_FROM_ABILITIES.put(Abilities.ABUNDANCE, AbilityAbundance.class);
-        Ability.ABILITY_FROM_ABILITIES.put(Abilities.LOOTMASTER, AbilityLootmaster.class);
+        Ability.ABILITY_FROM_ABILITIES.put(GempireAbilities.DISARMING, AbilityDisarming.class);
+        Ability.ABILITY_FROM_ABILITIES.put(GempireAbilities.ABUNDANCE, AbilityAbundance.class);
+        Ability.ABILITY_FROM_ABILITIES.put(GempireAbilities.LOOTMASTER, AbilityLootmaster.class);
 
-        Ability.ABILITY_FROM_ABILITIES.put(Abilities.STERN, AbilityStern.class);
+        Ability.ABILITY_FROM_ABILITIES.put(GempireAbilities.STERN, AbilityStern.class);
 
-        Ability.ABILITY_FROM_ABILITIES.put(Abilities.SPELUNKER, AbilitySpelunker.class);
-        Ability.ABILITY_FROM_ABILITIES.put(Abilities.PROSPECTOR, AbilityProspector.class);
-        Ability.ABILITY_FROM_ABILITIES.put(Abilities.TORCHBEARER, AbilityTorchBearer.class);
+        Ability.ABILITY_FROM_ABILITIES.put(GempireAbilities.SPELUNKER, AbilitySpelunker.class);
+        Ability.ABILITY_FROM_ABILITIES.put(GempireAbilities.PROSPECTOR, AbilityProspector.class);
+        Ability.ABILITY_FROM_ABILITIES.put(GempireAbilities.TORCHBEARER, AbilityTorchBearer.class);
 
-        Ability.ABILITY_FROM_ABILITIES.put(Abilities.GUARD, AbilityGuard.class);
-        Ability.ABILITY_FROM_ABILITIES.put(Abilities.VEHICLE, AbilityVehicle.class);
-        Ability.ABILITY_FROM_ABILITIES.put(Abilities.SCOUT, AbilityScout.class);
-        Ability.ABILITY_FROM_ABILITIES.put(Abilities.KINDERGARTENER, AbilityKindergartener.class);
+        Ability.ABILITY_FROM_ABILITIES.put(GempireAbilities.GUARD, AbilityGuard.class);
+        Ability.ABILITY_FROM_ABILITIES.put(GempireAbilities.VEHICLE, AbilityVehicle.class);
+        Ability.ABILITY_FROM_ABILITIES.put(GempireAbilities.SCOUT, AbilityScout.class);
+        Ability.ABILITY_FROM_ABILITIES.put(GempireAbilities.KINDERGARTENER, AbilityKindergartener.class);
 
-        Ability.ABILITY_FROM_ABILITIES.put(Abilities.NEGOTIATOR, AbilityNegotiator.class);
-        Ability.ABILITY_FROM_ABILITIES.put(Abilities.RECALL, AbilityRecall.class);
-        Ability.ABILITY_FROM_ABILITIES.put(Abilities.LURE, AbilityLure.class);
-        Ability.ABILITY_FROM_ABILITIES.put(Abilities.FARMER, AbilityFarmer.class);
-        Ability.ABILITY_FROM_ABILITIES.put(Abilities.AEROKINESIS, AbilityAerokinesis.class);
-        Ability.ABILITY_FROM_ABILITIES.put(Abilities.RECYCLER, AbilityRecycler.class);
-        Ability.ABILITY_FROM_ABILITIES.put(Abilities.ELECTROKINESIS, AbilityElectrokinesis.class);
-        Ability.ABILITY_FROM_ABILITIES.put(Abilities.MINING, AbilityMiningInspiration.class);
-        Ability.ABILITY_FROM_ABILITIES.put(Abilities.ARCHER, AbilityArcher.class);
+        Ability.ABILITY_FROM_ABILITIES.put(GempireAbilities.NEGOTIATOR, AbilityNegotiator.class);
+        Ability.ABILITY_FROM_ABILITIES.put(GempireAbilities.RECALL, AbilityRecall.class);
+        Ability.ABILITY_FROM_ABILITIES.put(GempireAbilities.LURE, AbilityLure.class);
+        Ability.ABILITY_FROM_ABILITIES.put(GempireAbilities.FARMER, AbilityFarmer.class);
+        Ability.ABILITY_FROM_ABILITIES.put(GempireAbilities.AEROKINESIS, AbilityAerokinesis.class);
+        Ability.ABILITY_FROM_ABILITIES.put(GempireAbilities.RECYCLER, AbilityRecycler.class);
+        Ability.ABILITY_FROM_ABILITIES.put(GempireAbilities.ELECTROKINESIS, AbilityElectrokinesis.class);
+        Ability.ABILITY_FROM_ABILITIES.put(GempireAbilities.MINING, AbilityMiningInspiration.class);
+        Ability.ABILITY_FROM_ABILITIES.put(GempireAbilities.ARCHER, AbilityArcher.class);
 
         //crafting abilities
-        Ability.ABILITY_FROM_ABILITIES.put(Abilities.DESIGNER, AbilityDesigner.class);
-        Ability.ABILITY_FROM_ABILITIES.put(Abilities.ESSENCE_BREWER, AbilityBrewEssence.class);
-        Ability.ABILITY_FROM_ABILITIES.put(Abilities.REFINERY, AbilityPrismaticRefinery.class);
-        Ability.ABILITY_FROM_ABILITIES.put(Abilities.TINKERER, AbilityTinkerer.class);
-        Ability.ABILITY_FROM_ABILITIES.put(Abilities.SALVAGING, AbilitySalvaging.class);
+        Ability.ABILITY_FROM_ABILITIES.put(GempireAbilities.DESIGNER, AbilityDesigner.class);
+        Ability.ABILITY_FROM_ABILITIES.put(GempireAbilities.ESSENCE_BREWER, AbilityBrewEssence.class);
+        Ability.ABILITY_FROM_ABILITIES.put(GempireAbilities.REFINERY, AbilityPrismaticRefinery.class);
+        Ability.ABILITY_FROM_ABILITIES.put(GempireAbilities.TINKERER, AbilityTinkerer.class);
+        Ability.ABILITY_FROM_ABILITIES.put(GempireAbilities.SALVAGING, AbilitySalvaging.class);
 
-        Ability.ABILITY_FROM_ABILITIES.put(Abilities.ANGLER, AbilityAngler.class);
+        Ability.ABILITY_FROM_ABILITIES.put(GempireAbilities.ANGLER, AbilityAngler.class);
     }
 }

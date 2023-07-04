@@ -2,19 +2,11 @@ package com.gempire.entities.abilities;
 
 import com.gempire.entities.abilities.base.Ability;
 import com.gempire.entities.abilities.interfaces.IIdleAbility;
-import com.gempire.entities.bases.EntityGem;
-import com.gempire.util.Abilities;
-import net.minecraft.core.BlockPos;
+import com.gempire.util.GempireAbilities;
 import net.minecraft.network.chat.Component;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.animal.Wolf;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.DyeColor;
-import net.minecraft.world.phys.AABB;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +14,7 @@ import java.util.List;
 public class AbilityBeastmaster extends Ability implements IIdleAbility {
 
     public AbilityBeastmaster() {
-        this.ability = Abilities.BEASTMASTER;
+        this.ability = GempireAbilities.BEASTMASTER;
     }
 
     @Override

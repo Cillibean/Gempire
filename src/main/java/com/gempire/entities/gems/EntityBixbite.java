@@ -5,10 +5,7 @@ import com.gempire.entities.bases.EntityGem;
 import com.gempire.entities.other.EntityAbomination;
 import com.gempire.entities.other.EntityCrawler;
 import com.gempire.entities.other.EntityShambler;
-import com.gempire.entities.other.EntityAbomination;
-import com.gempire.entities.other.EntityCrawler;
-import com.gempire.entities.other.EntityShambler;
-import com.gempire.util.Abilities;
+import com.gempire.util.GempireAbilities;
 import com.gempire.util.GemPlacements;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -20,8 +17,6 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
@@ -123,14 +118,14 @@ public class EntityBixbite extends EntityGem {
         return new int[] { 23 };
     }
 
-    public Abilities[] possibleAbilities(){
-        return new Abilities[]{
-                Abilities.NO_ABILITY, Abilities.TANK, Abilities.BEEFCAKE, Abilities.POWERHOUSE, Abilities.UNHINGED, Abilities.MINING
+    public GempireAbilities[] possibleAbilities(){
+        return new GempireAbilities[]{
+                GempireAbilities.NO_ABILITY, GempireAbilities.TANK, GempireAbilities.BEEFCAKE, GempireAbilities.POWERHOUSE, GempireAbilities.UNHINGED, GempireAbilities.MINING
         };
     }
-    public Abilities[] definiteAbilities(){
-        return new Abilities[]{
-                Abilities.RECYCLER
+    public GempireAbilities[] definiteAbilities(){
+        return new GempireAbilities[]{
+                GempireAbilities.RECYCLER
         };
     }
 

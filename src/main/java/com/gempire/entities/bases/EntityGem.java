@@ -13,10 +13,7 @@ import com.gempire.init.ModEnchants;
 import com.gempire.init.ModItems;
 import com.gempire.init.ModSounds;
 import com.gempire.items.*;
-import com.gempire.util.Abilities;
-import com.gempire.util.Color;
-import com.gempire.util.GemPlacements;
-import com.gempire.util.PaletteType;
+import com.gempire.util.*;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.DynamicCommandExceptionType;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
@@ -41,7 +38,6 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.StructureTags;
-import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.*;
 import net.minecraft.world.damagesource.DamageSource;
@@ -1906,7 +1902,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         if(!getab.isEmpty()) {
             String[] powerViolenceList = getab.split(",");
             for (String s : powerViolenceList) {
-                abilities.add(Abilities.getAbility(Integer.parseInt(s)));
+                abilities.add(GempireAbilities.getAbility(Integer.parseInt(s)));
             }
             for (Abilities ability : abilities) {
                 //powers.add(Ability.getAbilityFromAbilities(ability).assignAbility(this));
@@ -1984,12 +1980,12 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             return "0";
         }
         boolean complete = false;
-        ArrayList<Abilities> abilitiesCurrent = new ArrayList<>();
+        ArrayList<GempireAbilities> abilitiesCurrent = new ArrayList<>();
         StringBuilder abilityList = new StringBuilder();
-        Abilities[] abilities = this.possibleAbilities();
-        Abilities[] getgo = this.definiteAbilities();
+        GempireAbilities[] abilities = this.possibleAbilities();
+        GempireAbilities[] getgo = this.definiteAbilities();
         if(getgo != null && getgo.length > 0) {
-            for (Abilities ab1 : getgo) {
+            for (GempireAbilities ab1 : getgo) {
                 if (remainingSlots > 0) {
                     if (remainingSlots == this.getAbilitySlots()) {
                         abilityList.append(ab1.id).append(",");
@@ -2011,7 +2007,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         }
         while(!complete){
             double totalWeight = 0.0D;
-            for(Abilities i : abilities){
+            for(GempireAbilities i : abilities){
                 totalWeight+=i.weight;
             }
             int idx = 0;
@@ -2019,7 +2015,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                 r -= abilities[idx].weight;
                 if (r <= 0) break;
             }
-            Abilities weightedAbility = abilities[idx];
+            GempireAbilities weightedAbility = abilities[idx];
             abilityList.append(weightedAbility.id).append(",");
             if(this.possibleAbilities().length + this.definiteAbilities().length > this.getAbilitySlots()) abilities = ArrayUtils.remove(abilities, idx);
             remainingSlots--;
@@ -2036,8 +2032,8 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.ABILITY_POWERS = powers;
     }
 
-    public abstract Abilities[] possibleAbilities();
-    public abstract Abilities[] definiteAbilities();
+    public abstract GempireAbilities[] possibleAbilities();
+    public abstract GempireAbilities[] definiteAbilities();
 
     public boolean usesAreaAbilities(){
         return this.entityData.get(EntityGem.USES_AREA_ABILITIES);

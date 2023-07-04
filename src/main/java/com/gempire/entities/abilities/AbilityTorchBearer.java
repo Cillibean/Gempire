@@ -2,28 +2,19 @@ package com.gempire.entities.abilities;
 
 import com.gempire.entities.abilities.base.Ability;
 import com.gempire.entities.abilities.interfaces.IIdleAbility;
-import com.gempire.util.Abilities;
+import com.gempire.util.GempireAbilities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.entity.animal.Wolf;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.AABB;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class AbilityTorchBearer extends Ability implements IIdleAbility {
 
     public AbilityTorchBearer(){
-        this.ability = Abilities.TORCHBEARER;
+        this.ability = GempireAbilities.TORCHBEARER;
     }
 
     @Override

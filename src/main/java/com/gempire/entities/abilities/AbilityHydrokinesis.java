@@ -4,10 +4,9 @@ import com.gempire.entities.abilities.base.Ability;
 import com.gempire.entities.abilities.interfaces.IRangedAbility;
 import com.gempire.entities.abilities.interfaces.ITaskAbility;
 import com.gempire.entities.abilities.interfaces.IViolentAbility;
-import com.gempire.entities.projectiles.AcidSpitEntity;
 import com.gempire.entities.projectiles.WaterOrbEntity;
 import com.gempire.init.ModEffects;
-import com.gempire.util.Abilities;
+import com.gempire.util.GempireAbilities;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
@@ -16,14 +15,13 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.goal.RangedAttackGoal;
-import net.minecraft.world.entity.monster.RangedAttackMob;
 
 import java.util.Random;
 
 public class AbilityHydrokinesis extends Ability implements IRangedAbility, IViolentAbility, ITaskAbility {
 
     public AbilityHydrokinesis() {
-        this.ability = Abilities.HYDROKINESIS;
+        this.ability = GempireAbilities.HYDROKINESIS;
     }
 
     @Override

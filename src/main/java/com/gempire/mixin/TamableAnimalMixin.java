@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.UUID;
 
-@Mixin(TamableAnimal.class)
+/*@Mixin(TamableAnimal.class)
 public class TamableAnimalMixin {
     @Inject(
             method = "getOwner()Lnet/minecraft/world/entity/OwnableEntity;",
@@ -30,4 +30,4 @@ public class TamableAnimalMixin {
                 cir.setReturnValue((OwnableEntity) gem);
         }
     }
-}
+}*/
