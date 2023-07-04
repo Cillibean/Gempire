@@ -659,7 +659,6 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                                     effects.forEach((effectInstance -> {
                                         if (flagGem) {
                                             if (EntityGem.sharesOwners(this, gemEntity)) {
-                                                System.out.println("shares owner");
                                                 entity.addEffect(effectInstance);
                                             }
                                         }
