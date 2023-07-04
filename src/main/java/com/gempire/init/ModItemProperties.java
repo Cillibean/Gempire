@@ -211,7 +211,7 @@ public class ModItemProperties {
         makeGem(ModItems.WINGATE_PASS_PLUME_AGATE_GEM.get());
     }
 
-    private static void makeGem(Item item) {
+    public static void makeGem(Item item) {
         ItemProperties.register(item, new ResourceLocation(Gempire.MODID, "gempredicate"), (stack, p_174636_, p_174637_, p_174638_) -> {
             if (stack.getItem().asItem() instanceof ItemGem) {
                 if (((ItemGem) stack.getItem()).getSludged(stack)) {
