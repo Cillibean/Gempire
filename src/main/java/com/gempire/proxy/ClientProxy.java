@@ -105,9 +105,9 @@ public class ClientProxy {
     }
 
     @SubscribeEvent
-    public void buildContents(CreativeModeTabEvent.Register event) {
+    public static void buildContents(CreativeModeTabEvent.Register event) {
         event.registerCreativeModeTab(new ResourceLocation(Gempire.MODID, "gemstones"),
-                builder -> builder.title(Component.translatable("item_group." + Gempire.MODID + ".gemstones"))
+                builder -> builder.title(Component.translatable("itemGroup.gemstones"))
                         // Set icon of creative tab
                         .icon(() -> new ItemStack(ModItems.RUBY_GEM.get()))
                         // Add default items to tab
@@ -315,7 +315,7 @@ public class ClientProxy {
                             }));
             event.registerCreativeModeTab(new ResourceLocation(Gempire.MODID, "gempire_items"), builder ->
                     // Set name of tab to display
-                    builder.title(Component.translatable("item_group." + Gempire.MODID + ".gempire_items"))
+                    builder.title(Component.translatable("itemGroup.gempire_items"))
                             // Set icon of creative tab
                             .icon(() -> new ItemStack(ModItems.PINK_CHROMA.get()))
                             // Add default items to tab
@@ -400,7 +400,7 @@ public class ClientProxy {
             );
             event.registerCreativeModeTab(new ResourceLocation(Gempire.MODID, "gempire_blocks"), builder ->
                     // Set name of tab to display
-                    builder.title(Component.translatable("item_group." + Gempire.MODID + ".gempire_blocks"))
+                    builder.title(Component.translatable("itemGroup.gempire_blocks"))
                             // Set icon of creative tab
                             .icon(() -> new ItemStack(ModItems.DRAINED_RED_STONE_2.get()))
                             // Add default items to tab
