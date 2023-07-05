@@ -12,7 +12,7 @@ public abstract class Ability {
     public int cooldown;
     public static HashMap<Abilities, Class<? extends Ability>> ABILITY_FROM_ABILITIES = new HashMap<>();
 
-    public Ability assignAbility(int id, int weight, EntityGem holder){
+    public Ability assignAbility(EntityGem holder){
         this.holder = holder;
         return this;
     }

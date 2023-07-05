@@ -74,7 +74,7 @@ public class ItemGem extends Item {
     public boolean doEffect = false;
 
     public ItemGem(Properties properties, String id) {
-        super(properties);
+        super(properties.stacksTo(1).fireResistant());
         this.ID = id;
     }
 
