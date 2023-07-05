@@ -1,8 +1,14 @@
 package com.gempire.init;
 
+import com.gempire.Gempire;
 import com.gempire.entities.abilities.*;
 import com.gempire.entities.abilities.base.Ability;
 import com.gempire.util.GempireAbilities;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.RegistryObject;
+
+import java.util.function.Supplier;
 
 public class ModAbilities {
 
@@ -64,4 +70,14 @@ public class ModAbilities {
 
         Ability.ABILITY_FROM_ABILITIES.put(GempireAbilities.ANGLER, AbilityAngler.class);
     }
+
+    public static final DeferredRegister<Ability> ABILITY_DEFERRED_REGISTER = DeferredRegister.create(
+            new ResourceLocation(Gempire.MODID, "abilities"), Gempire.MODID);
+
+    public static RegistryObject<Ability> NO_ABILITY = ABILITY_DEFERRED_REGISTER.register("no_ability", () ->
+            new AbilityZilch());
+
+    public static RegistryObject<Ability> CRYOKINESIS = ABILITY_DEFERRED_REGISTER.register("cryokinesis", () ->
+            new AbilityCryokinesis());
+
 }
