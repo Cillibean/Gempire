@@ -1,6 +1,7 @@
 package com.gempire.init;
 
 import com.gempire.Gempire;
+import com.gempire.container.InjectorContainer;
 import com.gempire.entities.gems.*;
 import com.gempire.entities.gems.starter.EntityMica;
 import com.gempire.entities.gems.starter.EntityNacre;
@@ -18,6 +19,7 @@ import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.item.Items;
 import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -207,6 +209,32 @@ public class ModEntities {
     });
 
     public static void registerCruxes() {
+        InjectorContainer.primer.add(Items.GOLDEN_APPLE);
+        InjectorContainer.primer.add(Items.GOLD_BLOCK);
+        InjectorContainer.primer.add(Items.BLAZE_ROD);
+        InjectorContainer.primer.add(Items.BLUE_ICE);
+        InjectorContainer.primer.add(Items.EXPERIENCE_BOTTLE);
+        InjectorContainer.primer.add(Items.NETHER_STAR);
+        InjectorContainer.primer.add(Items.NETHERITE_INGOT);
+        InjectorContainer.primer.add(Items.FIRE_CHARGE);
+        InjectorContainer.primer.add(Items.DRAGON_BREATH);
+        InjectorContainer.primer.add(Items.GHAST_TEAR);
+        InjectorContainer.primer.add(Items.NETHERITE_SWORD);
+        InjectorContainer.primer.add(Items.BONE_BLOCK);
+        InjectorContainer.primer.add(Items.NAUTILUS_SHELL);
+        InjectorContainer.primer.add(Items.WITHER_ROSE);
+        InjectorContainer.primer.add(Items.ENDER_EYE);
+        InjectorContainer.primer.add(Items.HEART_OF_THE_SEA);
+        InjectorContainer.primer.add(Items.ENCHANTED_GOLDEN_APPLE);
+        InjectorContainer.primer.add(Items.EMERALD_BLOCK);
+        InjectorContainer.primer.add(Items.WITHER_SKELETON_SKULL);
+        InjectorContainer.primer.add(Items.PHANTOM_MEMBRANE);
+        InjectorContainer.primer.add(Items.END_CRYSTAL);
+        InjectorContainer.primer.add(Items.NETHER_WART);
+        InjectorContainer.primer.add(Items.TOTEM_OF_UNDYING);
+        InjectorContainer.primer.add(ModItems.GILDED_LAPIS.get());
+        InjectorContainer.primer.add(ModItems.PRIME_BOOST.get());
+
         ModEntities.CRUXTOGEM.put("ruby", ModCruxes.RUBY_CONDITIONS());
         ModEntities.CRUXTOGEM.put("sapphire", ModCruxes.SAPPHIRE_CONDITIONS());
         ModEntities.CRUXTOGEM.put("quartz", ModCruxes.QUARTZ_CONDITIONS());
