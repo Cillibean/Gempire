@@ -5,7 +5,7 @@ import com.gempire.entities.bases.EntityGem;
 import com.gempire.entities.other.EntityAbomination;
 import com.gempire.entities.other.EntityCrawler;
 import com.gempire.entities.other.EntityShambler;
-import com.gempire.util.Abilities;
+import com.gempire.util.GempireAbilities;
 import com.gempire.util.GemPlacements;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
@@ -22,8 +22,6 @@ import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.animal.FlyingAnimal;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
@@ -64,7 +62,7 @@ public class EntityAquamarine extends EntityGem implements FlyingAnimal {
     @Override
     public SoundEvent getInstrument()
     {
-        return SoundEvents.NOTE_BLOCK_FLUTE;
+        return SoundEvents.NOTE_BLOCK_FLUTE.get();
     }
     public boolean getIsCut()
     {
@@ -163,14 +161,14 @@ public class EntityAquamarine extends EntityGem implements FlyingAnimal {
         };
     }
 
-    public Abilities[] possibleAbilities(){
-        return new Abilities[]{
-                Abilities.NO_ABILITY, Abilities.TANK, Abilities.BEEFCAKE, Abilities.POWERHOUSE, Abilities.UNHINGED, Abilities.KINDERGARTENER
+    public GempireAbilities[] possibleAbilities(){
+        return new GempireAbilities[]{
+                GempireAbilities.NO_ABILITY, GempireAbilities.TANK, GempireAbilities.BEEFCAKE, GempireAbilities.POWERHOUSE, GempireAbilities.UNHINGED, GempireAbilities.KINDERGARTENER
         };
     }
-    public Abilities[] definiteAbilities(){
-        return new Abilities[]{
-                Abilities.HYDROKINESIS, Abilities.PARALYSIS
+    public GempireAbilities[] definiteAbilities(){
+        return new GempireAbilities[]{
+                GempireAbilities.HYDROKINESIS, GempireAbilities.PARALYSIS
         };
     }
 

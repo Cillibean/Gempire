@@ -6,6 +6,7 @@ import com.gempire.entities.gems.starter.EntityPebble;
 import com.gempire.init.ModBlocks;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.PickaxeItem;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
@@ -69,7 +70,7 @@ public class EntityAIMakeDrill extends Goal {
                     if(this.follower.level.getBlockState(this.target.south()).getBlock() == Blocks.IRON_BARS){
                         if(this.follower.level.getBlockState(this.target.west()).getBlock() == Blocks.IRON_BARS){
                             if(this.follower.level.getBlockState(this.target.east()).getBlock() == Blocks.IRON_BARS){
-                                this.follower.level.explode(null, this.target.getX(), this.target.getY(), this.target.getZ(), .75f, Explosion.BlockInteraction.NONE);
+                                this.follower.level.explode(null, this.target.getX(), this.target.getY(), this.target.getZ(), .75f, Level.ExplosionInteraction.NONE);
                                 this.follower.level.setBlockAndUpdate(this.target, ModBlocks.DRILL_BLOCK.get().defaultBlockState());
                                 this.follower.level.setBlockAndUpdate(this.target.north(), Blocks.AIR.defaultBlockState());
                                 this.follower.level.setBlockAndUpdate(this.target.south(), Blocks.AIR.defaultBlockState());

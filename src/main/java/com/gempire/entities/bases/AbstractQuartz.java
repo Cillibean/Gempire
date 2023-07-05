@@ -1,31 +1,15 @@
 package com.gempire.entities.bases;
 
-import com.gempire.util.Abilities;
-import com.gempire.util.Color;
-import com.gempire.util.GemPlacements;
-import net.minecraft.client.Minecraft;
+import com.gempire.util.GempireAbilities;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.RangedAttackMob;
-import net.minecraft.world.entity.projectile.AbstractArrow;
-import net.minecraft.world.entity.projectile.ProjectileUtil;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.ProjectileWeaponItem;
 import net.minecraft.world.level.Level;
-
-import javax.annotation.Nullable;
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.util.ArrayList;
 
 public abstract class AbstractQuartz extends EntityVaryingGem implements RangedAttackMob {
 
@@ -41,20 +25,20 @@ public abstract class AbstractQuartz extends EntityVaryingGem implements RangedA
                 .add(Attributes.ATTACK_SPEED, 1.0D);
     }
     @Override
-    public Abilities[] possibleAbilities() {
-        return new Abilities[]{
-            Abilities.NO_ABILITY, Abilities.PYROKINESIS, Abilities.CRYOKINESIS,
-                Abilities.UNHINGED, Abilities.BEEFCAKE, Abilities.TANK,
-                Abilities.KNOCKBACK, Abilities.PARALYSIS, Abilities.POWERHOUSE,
-                Abilities.HEALER, Abilities.FIRST_AID, Abilities.BERSERKER,
-                Abilities.BEASTMASTER, Abilities.ELECTROKINESIS, Abilities.AEROKINESIS,
-                Abilities.HYDROKINESIS, Abilities.ARCHER
+    public GempireAbilities[] possibleAbilities() {
+        return new GempireAbilities[]{
+            GempireAbilities.NO_ABILITY, GempireAbilities.PYROKINESIS, GempireAbilities.CRYOKINESIS,
+                GempireAbilities.UNHINGED, GempireAbilities.BEEFCAKE, GempireAbilities.TANK,
+                GempireAbilities.KNOCKBACK, GempireAbilities.PARALYSIS, GempireAbilities.POWERHOUSE,
+                GempireAbilities.HEALER, GempireAbilities.FIRST_AID, GempireAbilities.BERSERKER,
+                GempireAbilities.BEASTMASTER, GempireAbilities.ELECTROKINESIS, GempireAbilities.AEROKINESIS,
+                GempireAbilities.HYDROKINESIS, GempireAbilities.ARCHER
         };
     }
     @Override
     public SoundEvent getInstrument()
     {
-        return SoundEvents.NOTE_BLOCK_BASS;
+        return SoundEvents.NOTE_BLOCK_BASS.get();
     }
     @Override
     public boolean UsesUniqueNames() {

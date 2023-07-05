@@ -5,7 +5,7 @@ import com.gempire.entities.ai.EntityAIFollowAssigned;
 import com.gempire.entities.ai.EntityAIFollowOwner;
 import com.gempire.entities.ai.EntityAIMakeShell;
 import com.gempire.entities.ai.EntityAIWander;
-import com.gempire.util.Abilities;
+import com.gempire.util.GempireAbilities;
 import com.gempire.util.GemPlacements;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.PathfinderMob;
@@ -122,9 +122,9 @@ public class EntityNacre extends EntityStarterGem {
     }
 
     @Override
-    public Abilities[] possibleAbilities() {
-        return new Abilities[]{
-                Abilities.NO_ABILITY
+    public GempireAbilities[] possibleAbilities() {
+        return new GempireAbilities[]{
+                GempireAbilities.NO_ABILITY
         };
     }
 

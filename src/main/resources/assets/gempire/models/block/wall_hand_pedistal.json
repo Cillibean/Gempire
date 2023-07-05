@@ -1,6 +1,6 @@
 {
 	"parent": "gempire:block/template_hand_pedistal_wall",
 	"textures": {
-		"texture": "gempire:blocks/hand_pedistal_unlit"
+		"texture": "gempire:block/hand_pedistal_unlit"
 	}
 }

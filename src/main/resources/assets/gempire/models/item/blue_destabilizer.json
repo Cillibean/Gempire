@@ -1,6 +1,6 @@
 {
   "parent": "item/handheld",
   "textures": {
-    "layer0": "gempire:items/blue_destabilizer"
+    "layer0": "gempire:item/blue_destabilizer"
   }
 }

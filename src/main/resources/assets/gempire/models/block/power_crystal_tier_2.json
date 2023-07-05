@@ -4,8 +4,8 @@
 	"gui_light": "front",
 	"texture_size": [64, 64],
 	"textures": {
-		"0": "gempire:blocks/power_crystal_tier_2",
-		"particle": "gempire:blocks/power_crystal_tier_2"
+		"0": "gempire:block/power_crystal_tier_2",
+		"particle": "gempire:block/power_crystal_tier_2"
 	},
 	"elements": [
 		{

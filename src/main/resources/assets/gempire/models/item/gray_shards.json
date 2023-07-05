@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "gempire:items/gray_shards"
+    "layer0": "gempire:item/gray_shards"
   }
 }

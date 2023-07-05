@@ -6,11 +6,10 @@ import com.gempire.entities.abilities.interfaces.IRangedAbility;
 import com.gempire.entities.abilities.interfaces.ITargetAbility;
 import com.gempire.entities.abilities.interfaces.ITaskAbility;
 import com.gempire.entities.abilities.interfaces.IViolentAbility;
-import com.gempire.entities.bases.EntityGem;
 import com.gempire.entities.projectiles.IceShardEntity;
 import com.gempire.init.ModBlocks;
 import com.gempire.init.ModItems;
-import com.gempire.util.Abilities;
+import com.gempire.util.GempireAbilities;
 import net.minecraft.world.level.block.AirBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.BushBlock;
@@ -29,7 +28,7 @@ import net.minecraft.world.entity.monster.RangedAttackMob;
 public class AbilityCryokinesis extends Ability implements IRangedAbility, IViolentAbility, ITaskAbility, ITargetAbility {
 
     public AbilityCryokinesis() {
-        this.ability = Abilities.CRYOKINESIS;
+        this.ability = GempireAbilities.CRYOKINESIS;
     }
 
     @Override
@@ -79,7 +78,7 @@ public class AbilityCryokinesis extends Ability implements IRangedAbility, IViol
 
     @Override
     public int chanceToSummon() {
-        return ((EntityGem)this.holder).isFocused() ? 1 : ((EntityGem)this.holder).focusLevel;
+        return this.holder.isFocused() ? 1 : this.holder.focusLevel;
     }
     @Override
     public Component getName() {

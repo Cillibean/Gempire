@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "gempire:items/acid_spit"
+    "layer0": "gempire:item/acid_spit"
   }
 }

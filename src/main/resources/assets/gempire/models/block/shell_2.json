@@ -3,8 +3,8 @@
 	"texture_size": [48, 48],
 	"render_type": "translucent",
 	"textures": {
-		"2": "gempire:blocks/shell",
-		"particle": "gempire:blocks/shell"
+		"2": "gempire:block/shell",
+		"particle": "gempire:block/shell"
 	},
 	"elements": [
 		{

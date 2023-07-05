@@ -2,6 +2,6 @@
 	"parent": "minecraft:block/cube_all",
 	"render_type": "translucent",
 	"textures": {
-		"all": "gempire:blocks/pink_essence_still"
+		"all": "gempire:block/pink_essence_still"
 	}
 }

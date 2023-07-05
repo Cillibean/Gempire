@@ -11,9 +11,8 @@ import com.gempire.entities.other.EntityCrawler;
 import com.gempire.entities.other.EntityShambler;
 import com.gempire.entities.bases.EntityVaryingGem;
 import com.gempire.init.ModEnchants;
-import com.gempire.util.Abilities;
+import com.gempire.util.GempireAbilities;
 import com.gempire.util.GemPlacements;
-import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -73,7 +72,7 @@ public class EntityZircon extends EntityVaryingGem {
     @Override
     public SoundEvent getInstrument()
     {
-        return SoundEvents.NOTE_BLOCK_PLING;
+        return SoundEvents.NOTE_BLOCK_PLING.get();
     }
 
     @Override
@@ -174,15 +173,15 @@ this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, EntityGem.class, 6.0F, 
     }
 
     @Override
-    public Abilities[] possibleAbilities() {
-        return new Abilities[]{
-                Abilities.NO_ABILITY, Abilities.STERN
+    public GempireAbilities[] possibleAbilities() {
+        return new GempireAbilities[]{
+                GempireAbilities.NO_ABILITY, GempireAbilities.STERN
         };
     }
 
     @Override
-    public Abilities[] definiteAbilities() {
-        return new Abilities[]{
+    public GempireAbilities[] definiteAbilities() {
+        return new GempireAbilities[]{
 
         };
     }

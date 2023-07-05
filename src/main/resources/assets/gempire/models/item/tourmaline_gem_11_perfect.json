@@ -1,7 +1,7 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "gempire:items/tourmaline_gem_11",
-    "layer1": "gempire:items/perfect/perfect"
+    "layer0": "gempire:item/tourmaline_gem_11",
+    "layer1": "gempire:item/perfect/perfect"
   }
 }

@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "gempire:items/transfer_contract"
+    "layer0": "gempire:item/transfer_contract"
   }
 }

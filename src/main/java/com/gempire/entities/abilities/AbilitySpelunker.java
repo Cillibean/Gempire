@@ -3,10 +3,9 @@ package com.gempire.entities.abilities;
 import com.gempire.entities.abilities.base.Ability;
 import com.gempire.entities.abilities.interfaces.IIdleAbility;
 import com.gempire.init.ModTags;
-import com.gempire.util.Abilities;
+import com.gempire.util.GempireAbilities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -19,7 +18,7 @@ public class AbilitySpelunker extends Ability implements IIdleAbility {
     boolean foundBlock = false;
 
     public AbilitySpelunker(){
-        this.ability = Abilities.SPELUNKER;
+        this.ability = GempireAbilities.SPELUNKER;
     }
 
     @Override

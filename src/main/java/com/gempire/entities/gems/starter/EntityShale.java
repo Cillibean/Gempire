@@ -4,11 +4,7 @@ import com.gempire.entities.ai.EntityAIFollowAssigned;
 import com.gempire.entities.ai.EntityAIFollowOwner;
 import com.gempire.entities.ai.EntityAIWander;
 import com.gempire.entities.bases.EntityStarterGem;
-import com.gempire.entities.gems.EntityBismuth;
-import com.gempire.entities.gems.EntityMorganite;
-import com.gempire.init.ModFluids;
-import com.gempire.init.ModItems;
-import com.gempire.util.Abilities;
+import com.gempire.util.GempireAbilities;
 import com.gempire.util.GemPlacements;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.PathfinderMob;
@@ -19,8 +15,6 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.animal.Cat;
 import net.minecraft.world.entity.animal.Ocelot;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 
 import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
@@ -81,9 +75,9 @@ public class EntityShale extends EntityStarterGem {
     }
 
     @Override
-    public Abilities[] possibleAbilities() {
-        return new Abilities[]{
-                Abilities.NO_ABILITY
+    public GempireAbilities[] possibleAbilities() {
+        return new GempireAbilities[]{
+                GempireAbilities.NO_ABILITY
         };
     }
 
@@ -93,9 +87,9 @@ public class EntityShale extends EntityStarterGem {
     }
 
     @Override
-    public Abilities[] definiteAbilities() {
-        return new Abilities[]{
-                Abilities.ESSENCE_BREWER
+    public GempireAbilities[] definiteAbilities() {
+        return new GempireAbilities[]{
+                GempireAbilities.ESSENCE_BREWER
         };
     }
     @Override

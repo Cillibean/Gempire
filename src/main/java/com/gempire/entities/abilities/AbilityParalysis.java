@@ -7,14 +7,11 @@ import com.gempire.entities.abilities.interfaces.IMeleeAbility;
 import com.gempire.entities.abilities.interfaces.IViolentAbility;
 import com.gempire.entities.bases.EntityGem;
 import com.gempire.init.ModEffects;
-import com.gempire.util.Abilities;
+import com.gempire.util.GempireAbilities;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.PathfinderMob;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.network.chat.Component;
-import org.spongepowered.asm.mixin.extensibility.IMixinErrorHandler;
 
 import java.util.List;
 import java.util.Random;
@@ -22,7 +19,7 @@ import java.util.Random;
 public class AbilityParalysis extends Ability implements IMeleeAbility, IEffectAbility, IEmotionalAbility, IViolentAbility {
 
     public AbilityParalysis() {
-        this.ability = Abilities.PARALYSIS;
+        this.ability = GempireAbilities.PARALYSIS;
     }
 
     @Override

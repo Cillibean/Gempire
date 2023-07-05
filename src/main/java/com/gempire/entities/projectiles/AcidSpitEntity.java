@@ -3,20 +3,15 @@ package com.gempire.entities.projectiles;
 import com.gempire.entities.bases.EntityGem;
 import com.gempire.init.ModEntities;
 import com.gempire.init.ModItems;
-import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.protocol.Packet;
-import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
-import net.minecraft.tags.EntityTypeTags;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobType;
-import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -45,7 +40,7 @@ public class AcidSpitEntity extends ThrowableItemProjectile {
     }
 
     @Override
-    public Packet<?> getAddEntityPacket() {
+    public Packet<ClientGamePacketListener> getAddEntityPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
     }
 
@@ -54,7 +49,7 @@ public class AcidSpitEntity extends ThrowableItemProjectile {
         super.onHitEntity(result);
         if (result.getEntity() instanceof EntityGem) {
             if (!((EntityGem) result.getEntity()).getOwned() || ((EntityGem) result.getEntity()).getRebelled()) {
-                result.getEntity().hurt(DamageSource.MAGIC, 1.0F);;
+                result.getEntity().hurt(result.getEntity().damageSources().magic(), 1.0F);;
                 ((LivingEntity) result.getEntity()).addEffect(new MobEffectInstance(MobEffects.POISON,50,0));
             }
         }
@@ -62,11 +57,11 @@ public class AcidSpitEntity extends ThrowableItemProjectile {
         {
             if (hehe.getMobType() == MobType.UNDEAD)
             {
-                hehe.hurt(DamageSource.MAGIC, 1.0F);;
+                hehe.hurt(result.getEntity().damageSources().magic(), 1.0F);;
             }
             else
             {
-                hehe.hurt(DamageSource.MAGIC, 1.0F);;
+                hehe.hurt(result.getEntity().damageSources().magic(), 1.0F);;
                 hehe.addEffect(new MobEffectInstance(MobEffects.POISON,50,0));
             }
             this.kill();

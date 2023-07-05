@@ -3,13 +3,16 @@ package com.gempire.client.screen;
 import com.gempire.container.PearlUIContainer;
 import com.gempire.entities.abilities.AbilityZilch;
 import com.gempire.entities.abilities.base.Ability;
+import com.gempire.entities.bases.EntityGem;
 import com.gempire.init.ModPacketHandler;
 import com.gempire.networking.*;
 import com.gempire.util.GUIUtilities;
 import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.components.Button;
@@ -19,11 +22,12 @@ import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.resources.ResourceLocation;
-import com.mojang.math.Quaternion;
-import com.mojang.math.Vector3f;
 import net.minecraft.network.chat.Component;
+import org.joml.Quaternionf;
+import org.joml.Vector3f;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 
 public class PearlUIScreen extends AbstractContainerScreen<PearlUIContainer> {
@@ -54,7 +58,7 @@ public class PearlUIScreen extends AbstractContainerScreen<PearlUIContainer> {
         this.nameBox.setVisible(true);
         String name = this.menu.gem.customName() ? this.menu.gem.getCustomName().getString() : this.menu.gem.getDisplayName().getString();
         this.nameBox.setValue(name);
-        this.nameBox.setFocus(true);
+        //this.nameBox.setFocus(true);
         addRenderableWidget(this.nameBox);
         this.setInitialFocus(this.nameBox);
 
@@ -68,11 +72,19 @@ public class PearlUIScreen extends AbstractContainerScreen<PearlUIContainer> {
             ModPacketHandler.INSTANCE.sendToServer(new PageChange(this.menu.gem.getId(), true));
         }));
 
-        addRenderableWidget(new Button(this.leftPos + 10, this.topPos + 108, 83, 20, Component.translatable("screens.gempire.poof"),
-                (button) -> {
+        int i = this.menu.gem.getId();
+        Screen screen = this;
+        Button.Builder builder = new Button.Builder(Component.translatable("screens.gempire.poof"), button -> {
+            ModPacketHandler.INSTANCE.sendToServer(new RequestPoof(i));
+            screen.onClose();
+        });
+        builder.bounds(this.leftPos + 10, this.topPos + 108, 83, 20);
+        addRenderableWidget(builder.build());
+
+                /*(button) -> {
                     ModPacketHandler.INSTANCE.sendToServer(new RequestPoof(this.menu.gem.getId()));
                     this.onClose();
-                }));
+                }*/
 
         //CUSTOMIZATION STUFF
 
@@ -181,8 +193,8 @@ public class PearlUIScreen extends AbstractContainerScreen<PearlUIContainer> {
         PoseStack posestack1 = new PoseStack();
         posestack1.translate(0.0D, 0.0D, 1000.0D);
         posestack1.scale((float)p_98853_, (float)p_98853_, (float)p_98853_);
-        Quaternion quaternion = Vector3f.ZP.rotationDegrees(180.0F);
-        Quaternion quaternion1 = Vector3f.XP.rotationDegrees(f1 * 20.0F);
+        Quaternionf quaternion = Axis.YP.rotationDegrees(180.0F);
+        Quaternionf quaternion1 = Axis.XP.rotationDegrees(f1 * 20.0F);
         quaternion.mul(quaternion1);
         posestack1.mulPose(quaternion);
         float f2 = p_98856_.yBodyRot;
@@ -197,7 +209,7 @@ public class PearlUIScreen extends AbstractContainerScreen<PearlUIContainer> {
         p_98856_.yHeadRotO = p_98856_.getYRot();
         Lighting.setupForEntityInInventory();
         EntityRenderDispatcher entityrenderdispatcher = Minecraft.getInstance().getEntityRenderDispatcher();
-        quaternion1.conj();
+        quaternion1.conjugate();
         entityrenderdispatcher.overrideCameraOrientation(quaternion1);
         entityrenderdispatcher.setRenderShadow(false);
         MultiBufferSource.BufferSource multibuffersource$buffersource = Minecraft.getInstance().renderBuffers().bufferSource();

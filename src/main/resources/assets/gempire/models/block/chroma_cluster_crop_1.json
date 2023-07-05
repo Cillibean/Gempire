@@ -2,7 +2,7 @@
   "parent": "block/crop",
   "render_type": "cutout",
   "textures": {
-    "crop": "gempire:blocks/chroma_cluster_state_1",
-    "particle": "gempire:blocks/chroma_cluster_state_1"
+    "crop": "gempire:block/chroma_cluster_state_1",
+    "particle": "gempire:block/chroma_cluster_state_1"
   }
 }

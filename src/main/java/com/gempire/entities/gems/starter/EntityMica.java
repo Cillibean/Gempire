@@ -5,8 +5,9 @@ import com.gempire.entities.ai.EntityAIFollowOwner;
 import com.gempire.entities.ai.EntityAIMakePowerCrystal;
 import com.gempire.entities.ai.EntityAIWander;
 import com.gempire.entities.bases.EntityStarterGem;
-import com.gempire.util.Abilities;
+import com.gempire.util.GempireAbilities;
 import com.gempire.util.GemPlacements;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.EntityType;
@@ -81,7 +82,7 @@ public class EntityMica extends EntityStarterGem {
             return super.hurt(source, amount);
         }
         else{
-            if(source.isProjectile()){
+            if(source.is(DamageTypeTags.IS_PROJECTILE)){
                 setPlaying(true);
             }
         }
@@ -146,9 +147,9 @@ public class EntityMica extends EntityStarterGem {
     }
 
     @Override
-    public Abilities[] possibleAbilities() {
-        return new Abilities[]{
-                Abilities.NO_ABILITY
+    public GempireAbilities[] possibleAbilities() {
+        return new GempireAbilities[]{
+                GempireAbilities.NO_ABILITY
         };
     }
 

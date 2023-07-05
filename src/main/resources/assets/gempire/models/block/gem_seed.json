@@ -2,12 +2,12 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [64, 64],
 	"textures": {
-		"0": "gempire:blocks/gem_seed",
-		"1": "gempire:blocks/gem_seed_crystal",
-		"2": "gempire:blocks/gem_seed_crystal_2",
-		"4": "gempire:blocks/gem_seed_crystal_4",
-		"5": "gempire:blocks/gem_seed_crystal_3",
-		"particle": "gempire:blocks/gem_seed"
+		"0": "gempire:block/gem_seed",
+		"1": "gempire:block/gem_seed_crystal",
+		"2": "gempire:block/gem_seed_crystal_2",
+		"4": "gempire:block/gem_seed_crystal_4",
+		"5": "gempire:block/gem_seed_crystal_3",
+		"particle": "gempire:block/gem_seed"
 	},
 	"elements": [
 		{

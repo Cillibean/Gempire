@@ -9,8 +9,11 @@ import com.mojang.brigadier.exceptions.DynamicCommandExceptionType;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
-import net.minecraft.commands.arguments.ResourceOrTagLocationArgument;
+//import net.minecraft.commands.arguments.ResourceOrTagKeyArgument;
+import net.minecraft.commands.arguments.ResourceOrTagKeyArgument;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.structure.Structure;
@@ -33,11 +36,11 @@ public class CommandGempireLocate extends CommandBase {
 
     @Override
     public LiteralArgumentBuilder<CommandSourceStack> setExecution() {
-        this.builder = this.builder.then(Commands.argument("structure", ResourceOrTagLocationArgument.resourceOrTag(Registry.STRUCTURE_REGISTRY)).executes(source -> execute(source.getSource(), ResourceOrTagLocationArgument.getRegistryType(source, "structure", Registry.STRUCTURE_REGISTRY, ERROR_STRUCTURE_INVALID))));
+        this.builder = this.builder.then(Commands.argument("structure", ResourceOrTagKeyArgument.resourceOrTagKey(Registries.STRUCTURE)).executes(source -> execute(source.getSource(), ResourceOrTagKeyArgument.getResourceOrTagKey((source), "structure", Registries.STRUCTURE, ERROR_STRUCTURE_INVALID))));
         return this.builder;
     }
 
-    public int execute(CommandSourceStack source, ResourceOrTagLocationArgument.Result<Structure> structure) throws CommandSyntaxException {
+    public int execute(CommandSourceStack source, ResourceOrTagKeyArgument.Result<Structure> structure) throws CommandSyntaxException {
         System.out.println("execute");
         //BlockPos pos = new BlockPos(source.getPosition().x, source.getPosition().y, source.getPosition().z);
         AABB aabb = source.getPlayerOrException().getBoundingBox().inflate(12.0D);

@@ -1,8 +1,8 @@
 {
   "parent": "block/cube_bottom_top",
   "textures": {
-    "bottom": "gempire:blocks/congealed_blue_essence_block_bottom",
-    "side": "gempire:blocks/congealed_blue_essence_block_side",
-    "top": "gempire:blocks/congealed_blue_essence_block_top"
+    "bottom": "gempire:block/congealed_blue_essence_block_bottom",
+    "side": "gempire:block/congealed_blue_essence_block_side",
+    "top": "gempire:block/congealed_blue_essence_block_top"
   }
 }

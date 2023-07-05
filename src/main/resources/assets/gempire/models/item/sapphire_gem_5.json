@@ -1,7 +1,7 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "gempire:items/sapphire_gem_5"
+    "layer0": "gempire:item/sapphire_gem_5"
   },
   "overrides": [
     {

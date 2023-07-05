@@ -1,7 +1,7 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "gempire:items/spinel_gem_11"
+    "layer0": "gempire:item/spinel_gem_11"
   },
   "overrides": [
     {

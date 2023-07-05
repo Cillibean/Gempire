@@ -3,16 +3,15 @@ package com.gempire.entities.abilities;
 import com.gempire.entities.abilities.base.Ability;
 import com.gempire.entities.abilities.interfaces.IMeleeAbility;
 import com.gempire.entities.abilities.interfaces.IViolentAbility;
-import com.gempire.util.Abilities;
+import com.gempire.util.GempireAbilities;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.PathfinderMob;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.network.chat.Component;
 
 public class AbilityKnockback extends Ability implements IMeleeAbility, IViolentAbility {
 
     public AbilityKnockback() {
-        this.ability = Abilities.KNOCKBACK;
+        this.ability = GempireAbilities.KNOCKBACK;
     }
 
     @Override

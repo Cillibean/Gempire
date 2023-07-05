@@ -1,13 +1,13 @@
 package com.gempire.entities.abilities;
 
 import com.gempire.entities.abilities.base.Ability;
-import com.gempire.util.Abilities;
+import com.gempire.util.GempireAbilities;
 import net.minecraft.network.chat.Component;
 
 public class AbilityZilch extends Ability {
 
     public AbilityZilch() {
-        this.ability = Abilities.NO_ABILITY;
+        this.ability = GempireAbilities.NO_ABILITY;
     }
 
     @Override

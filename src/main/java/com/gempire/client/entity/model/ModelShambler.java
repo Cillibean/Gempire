@@ -4,9 +4,9 @@ import com.gempire.Gempire;
 import com.gempire.entities.other.EntityCrawler;
 import com.gempire.entities.other.EntityShambler;
 import net.minecraft.resources.ResourceLocation;
-import software.bernie.geckolib3.model.AnimatedGeoModel;
+import software.bernie.geckolib.model.GeoModel;
 
-public class ModelShambler extends AnimatedGeoModel<EntityShambler> {
+public class ModelShambler extends GeoModel<EntityShambler> {
     @Override
     public ResourceLocation getModelResource(EntityShambler object) {
         return new ResourceLocation(Gempire.MODID, "geo/entity/shambler.geo.json");

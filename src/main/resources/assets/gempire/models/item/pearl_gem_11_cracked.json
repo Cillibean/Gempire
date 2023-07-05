@@ -1,7 +1,7 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "gempire:items/pearl_gem_11",
-    "layer1": "gempire:items/cracks/round_gem_crack"
+    "layer0": "gempire:item/pearl_gem_11",
+    "layer1": "gempire:item/cracks/round_gem_crack"
   }
 }

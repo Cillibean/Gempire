@@ -1,7 +1,7 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "gempire:items/rutile_gem"
+    "layer0": "gempire:item/rutile_gem"
   },
   "overrides": [
     {

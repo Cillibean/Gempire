@@ -1,7 +1,7 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "gempire:items/topaz_gem_4"
+    "layer0": "gempire:item/topaz_gem_4"
   },
   "overrides": [
     {

@@ -1,6 +1,6 @@
 {
 	"parent": "gempire:block/template_chroma_crystal",
 	"textures": {
-		"crystal": "gempire:blocks/purple_chroma_texture"
+		"crystal": "gempire:block/purple_chroma_texture"
 	}
 }

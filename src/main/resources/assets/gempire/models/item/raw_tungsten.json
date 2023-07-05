@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "gempire:items/raw_tungsten"
+    "layer0": "gempire:item/raw_tungsten"
   }
 }

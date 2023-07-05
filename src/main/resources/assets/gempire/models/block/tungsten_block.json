@@ -1,6 +1,6 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "all": "gempire:blocks/tungsten_block"
+    "all": "gempire:block/tungsten_block"
   }
 }

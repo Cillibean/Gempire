@@ -11,7 +11,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
-import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
+import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
 import javax.annotation.Nullable;
 
@@ -26,14 +26,5 @@ public class RenderShambler extends GeoEntityRenderer<EntityShambler> {
     @Override
     public ResourceLocation getTextureLocation(EntityShambler animatable) {
         return new ResourceLocation(Gempire.MODID, "textures/entity/clods/shambler/shambler.png");
-    }
-
-    @Override
-    public RenderType getRenderType(EntityShambler animatable, float partialTicks, PoseStack stack,
-                                    @Nullable MultiBufferSource renderTypeBuffer,
-                                    @Nullable VertexConsumer vertexBuilder, int packedLightIn,
-                                    ResourceLocation textureLocation) {
-        stack.scale(0.8f, 0.8f, 0.8f);
-        return super.getRenderType(animatable, partialTicks, stack, renderTypeBuffer, vertexBuilder, packedLightIn, textureLocation);
     }
 }

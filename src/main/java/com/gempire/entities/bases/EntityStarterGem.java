@@ -1,20 +1,12 @@
 package com.gempire.entities.bases;
 
-import com.gempire.init.ModItems;
-import com.gempire.systems.injection.Crux;
-import com.gempire.util.Abilities;
-import com.gempire.util.CruxType;
+import com.gempire.util.GempireAbilities;
 import com.gempire.util.PaletteType;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
-
-import javax.annotation.Nullable;
-import java.util.ArrayList;
 
 public abstract class EntityStarterGem extends EntityGem {
 
@@ -33,7 +25,7 @@ public abstract class EntityStarterGem extends EntityGem {
     @Override
     public SoundEvent getInstrument()
     {
-        return SoundEvents.NOTE_BLOCK_XYLOPHONE;
+        return SoundEvents.NOTE_BLOCK_XYLOPHONE.get();
     }
     public int generateHairVariant(){
         return this.random.nextInt(3);
@@ -51,9 +43,9 @@ public abstract class EntityStarterGem extends EntityGem {
         return 1;
     }
 
-    public Abilities[] definiteAbilities(){
-        return new Abilities[]{
-                Abilities.NO_ABILITY
+    public GempireAbilities[] definiteAbilities(){
+        return new GempireAbilities[]{
+                GempireAbilities.NO_ABILITY
         };
     }
 

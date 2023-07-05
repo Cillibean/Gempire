@@ -5,6 +5,7 @@ import com.gempire.entities.gems.starter.EntityNacre;
 import com.gempire.init.ModBlocks;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.PickaxeItem;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
@@ -65,7 +66,7 @@ public class EntityAIMakeShell extends Goal {
             if (this.follower.level.getBlockState(this.target).getBlock() == Blocks.PRISMARINE) {
                 if (this.follower.level.getBlockState(this.target.above()).getBlock() instanceof PowerCrystalBlock) {
                     if (this.follower.level.getBlockState(this.target.above().above()).getBlock() == Blocks.CONDUIT) {
-                        this.follower.level.explode(null, this.target.getX(), this.target.getY(), this.target.getZ(), .75f, Explosion.BlockInteraction.NONE);
+                        this.follower.level.explode(null, this.target.getX(), this.target.getY(), this.target.getZ(), .75f, Level.ExplosionInteraction.NONE);
                         this.follower.level.setBlockAndUpdate(this.target, ModBlocks.SHELL_BLOCK.get().defaultBlockState());
                         this.follower.level.setBlockAndUpdate(this.target.above(), Blocks.AIR.defaultBlockState());
                         this.follower.level.setBlockAndUpdate(this.target.above().above(), Blocks.AIR.defaultBlockState());

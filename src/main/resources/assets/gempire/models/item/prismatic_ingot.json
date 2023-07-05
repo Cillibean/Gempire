@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "gempire:items/prismatic_ingot"
+    "layer0": "gempire:item/prismatic_ingot"
   }
 }

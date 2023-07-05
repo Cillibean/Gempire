@@ -5,7 +5,7 @@ import com.gempire.entities.bases.EntityGem;
 import com.gempire.entities.other.EntityAbomination;
 import com.gempire.entities.other.EntityCrawler;
 import com.gempire.entities.other.EntityShambler;
-import com.gempire.util.Abilities;
+import com.gempire.util.GempireAbilities;
 import com.gempire.util.GemPlacements;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvent;
@@ -21,8 +21,6 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.PickaxeItem;
 import net.minecraft.world.level.Level;
 
@@ -62,7 +60,7 @@ public class EntityPeridot extends EntityGem {
     @Override
     public SoundEvent getInstrument()
     {
-        return SoundEvents.NOTE_BLOCK_BIT;
+        return SoundEvents.NOTE_BLOCK_BIT.get();
     }
     protected void registerGoals() {
         super.registerGoals();
@@ -156,14 +154,14 @@ this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, EntityGem.class, 6.0F, 
         };
     }
 
-    public Abilities[] possibleAbilities(){
-        return new Abilities[]{
-                Abilities.NO_ABILITY, Abilities.TANK, Abilities.BEEFCAKE, Abilities.POWERHOUSE, Abilities.UNHINGED
+    public GempireAbilities[] possibleAbilities(){
+        return new GempireAbilities[]{
+                GempireAbilities.NO_ABILITY, GempireAbilities.TANK, GempireAbilities.BEEFCAKE, GempireAbilities.POWERHOUSE, GempireAbilities.UNHINGED
         };
     }
-    public Abilities[] definiteAbilities(){
-        return new Abilities[]{
-                Abilities.KINDERGARTENER, Abilities.SALVAGING
+    public GempireAbilities[] definiteAbilities(){
+        return new GempireAbilities[]{
+                GempireAbilities.KINDERGARTENER, GempireAbilities.SALVAGING
         };
     }
 

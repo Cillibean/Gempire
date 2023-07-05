@@ -10,9 +10,12 @@ import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.ResourceLocationArgument;
-import net.minecraft.commands.arguments.ResourceOrTagLocationArgument;
+//import net.minecraft.commands.arguments.ResourceOrTagKeyArgument;
+import net.minecraft.commands.arguments.ResourceOrTagKeyArgument;
 import net.minecraft.commands.synchronization.SuggestionProviders;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Biome;
@@ -36,12 +39,12 @@ public class CommandGempireLocateBiome extends CommandBase {
 
     @Override
     public LiteralArgumentBuilder<CommandSourceStack> setExecution() {
-        this.builder = this.builder.then(Commands.argument("biome", ResourceOrTagLocationArgument.resourceOrTag(Registry.BIOME_REGISTRY)).executes(source -> execute(source.getSource(), ResourceOrTagLocationArgument.getRegistryType(source, "biome", Registry.BIOME_REGISTRY, ERROR_BIOME_INVALID))));
+        this.builder = this.builder.then(Commands.argument("biome", ResourceOrTagKeyArgument.resourceOrTagKey(Registries.BIOME)).executes(source -> execute(source.getSource(), ResourceOrTagKeyArgument.getResourceOrTagKey(source, "biome", Registries.BIOME, ERROR_BIOME_INVALID))));
         return this.builder;
     }
 
-    public int execute(CommandSourceStack source, ResourceOrTagLocationArgument.Result<Biome> biome) throws CommandSyntaxException {
-        BlockPos pos = new BlockPos(source.getPosition().x, source.getPosition().y, source.getPosition().z);
+    public int execute(CommandSourceStack source, ResourceOrTagKeyArgument.Result<Biome> biome) throws CommandSyntaxException {
+        BlockPos pos = new BlockPos((int) source.getPosition().x, (int) source.getPosition().y, (int) source.getPosition().z);
         AABB aabb = source.getPlayerOrException().getBoundingBox().inflate(12.0D);
         EntityGem nephrite = null;
         List<EntityGem> gems = source.getLevel().getEntitiesOfClass(EntityGem.class, aabb);

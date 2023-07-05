@@ -2,6 +2,7 @@ package com.gempire.entities.ai;
 
 import com.gempire.entities.bases.EntityGem;
 import com.gempire.entities.gems.EntitySpodumene;
+import net.minecraft.client.renderer.block.model.ItemOverride;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.player.Player;
@@ -46,7 +47,9 @@ public class EntityAISludged extends Goal {
     @Override
     public void start(){
         super.start();
-        follower.targetSelector.removeAllGoals();
+        for (Goal goal : follower.targetSelector.getAvailableGoals()) {
+            follower.targetSelector.removeGoal(goal);
+        }
         if(!(this.follower instanceof EntitySpodumene)){
             this.follower.setPathfindingMalus(BlockPathTypes.WATER, 0);
         }
