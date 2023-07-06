@@ -6,11 +6,11 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "A sludged gem happens when a Shambler, Abomination or Crawler attacks your gem and infests them with the ooze from their body. Your gem will become possessed and turn hostile against you."
+      "text": "A sludged gem happens when a Shambler, Abomination or Crawler attacks your gem and infests them with the ooze from their body. Your gem will become possessed and turn hostile against you and other gems in the area."
     },
     {
       "type": "patchouli:text",
-      "text": "To fix a sludged gem, toss her gemstone into a pool of White Essence. The sludge will be cleansed. Alternate methods may be introduced later."
+      "text": "To fix a sludged gem, toss her gemstone into a pool of White Gem Essence. The sludge will be cleansed. Alternate methods may be introduced later."
     }
   ]
 }
