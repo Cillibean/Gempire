@@ -10,6 +10,7 @@ import net.minecraft.world.item.Items;
 public class AbilitySalvaging extends Ability implements ICraftingAbility {
 
     public AbilitySalvaging(){
+        super(53, 4);
         this.ability = GempireAbilities.SALVAGING;
     }
 

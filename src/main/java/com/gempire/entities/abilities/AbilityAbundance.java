@@ -8,6 +8,7 @@ import net.minecraft.network.chat.Component;
 public class AbilityAbundance extends Ability implements IViolentAbility {
 
     public AbilityAbundance() {
+        super(45, 4);
         this.ability = GempireAbilities.ABUNDANCE;
     }
 

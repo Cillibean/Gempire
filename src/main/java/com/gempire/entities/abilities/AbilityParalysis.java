@@ -19,6 +19,7 @@ import java.util.Random;
 public class AbilityParalysis extends Ability implements IMeleeAbility, IEffectAbility, IEmotionalAbility, IViolentAbility {
 
     public AbilityParalysis() {
+        super(3, 2);
         this.ability = GempireAbilities.PARALYSIS;
     }
 

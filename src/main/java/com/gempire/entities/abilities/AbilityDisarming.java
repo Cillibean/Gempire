@@ -7,6 +7,7 @@ import net.minecraft.network.chat.Component;
 public class AbilityDisarming extends Ability{
 
     public AbilityDisarming() {
+        super(36, 3);
         this.ability = GempireAbilities.DISARMING;
     }
 

@@ -9,6 +9,7 @@ import net.minecraft.world.item.Items;
 
 public class AbilityDesigner extends Ability implements ICraftingAbility {
     public AbilityDesigner(){
+        super(46, 5);
         this.ability = GempireAbilities.DESIGNER;
     }
 

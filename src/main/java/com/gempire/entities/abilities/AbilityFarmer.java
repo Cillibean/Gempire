@@ -9,6 +9,7 @@ import net.minecraft.network.chat.Component;
 public class AbilityFarmer extends Ability implements IIdleAbility {
 
     public AbilityFarmer(){
+        super(28, 5);
         this.ability = GempireAbilities.FARMER;
     }
 

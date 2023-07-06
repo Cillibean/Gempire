@@ -8,6 +8,7 @@ import net.minecraft.network.chat.Component;
 
 public class AbilityBrewEssence extends Ability implements ICraftingAbility {
     public AbilityBrewEssence(){
+        super(42, 1);
         this.ability = GempireAbilities.ESSENCE_BREWER;
     }
 

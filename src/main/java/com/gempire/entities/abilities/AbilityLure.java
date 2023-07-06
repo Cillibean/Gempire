@@ -7,6 +7,7 @@ import net.minecraft.network.chat.Component;
 public class AbilityLure extends Ability {
 
     public AbilityLure() {
+        super(25, 3);
         this.ability = GempireAbilities.LURE;
     }
 

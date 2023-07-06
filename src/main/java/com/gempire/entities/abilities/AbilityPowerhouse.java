@@ -10,6 +10,7 @@ import net.minecraft.network.chat.Component;
 public class AbilityPowerhouse extends Ability implements IAttributeAbility {
 
     public AbilityPowerhouse(){
+        super(8, 5);
         this.ability = GempireAbilities.POWERHOUSE;
     }
 

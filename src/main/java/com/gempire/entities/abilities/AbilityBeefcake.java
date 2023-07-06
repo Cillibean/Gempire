@@ -10,6 +10,7 @@ import net.minecraft.network.chat.Component;
 public class AbilityBeefcake extends Ability implements IAttributeAbility {
 
     public AbilityBeefcake(){
+        super(7, 5);
         this.ability = GempireAbilities.BEEFCAKE;
     }
 

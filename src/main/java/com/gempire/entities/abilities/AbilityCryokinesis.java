@@ -28,6 +28,7 @@ import net.minecraft.world.entity.monster.RangedAttackMob;
 public class AbilityCryokinesis extends Ability implements IRangedAbility, IViolentAbility, ITaskAbility, ITargetAbility {
 
     public AbilityCryokinesis() {
+        super(4, 1);
         this.ability = GempireAbilities.CRYOKINESIS;
     }
 

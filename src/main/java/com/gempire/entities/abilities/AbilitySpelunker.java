@@ -18,6 +18,7 @@ public class AbilitySpelunker extends Ability implements IIdleAbility {
     boolean foundBlock = false;
 
     public AbilitySpelunker(){
+        super(23, 4);
         this.ability = GempireAbilities.SPELUNKER;
     }
 

@@ -10,6 +10,7 @@ import net.minecraft.world.effect.MobEffects;
 public class AbilityMiningInspiration extends Ability implements IEffectAbility {
 
     public AbilityMiningInspiration() {
+        super(50, 3);
         this.ability = GempireAbilities.MINING;
     }
 

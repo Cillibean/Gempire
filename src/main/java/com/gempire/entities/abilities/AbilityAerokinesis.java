@@ -7,6 +7,7 @@ import net.minecraft.network.chat.Component;
 public class AbilityAerokinesis extends Ability {
 
     public AbilityAerokinesis(){
+        super(31, 1);
         this.ability = GempireAbilities.AEROKINESIS;
     }
 

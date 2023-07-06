@@ -7,6 +7,7 @@ import net.minecraft.network.chat.Component;
 public class AbilityRecycler extends Ability {
 
     public AbilityRecycler() {
+        super(15, 7);
         this.ability = GempireAbilities.RECYCLER;
     }
 

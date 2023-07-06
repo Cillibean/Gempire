@@ -13,6 +13,7 @@ import net.minecraft.network.chat.Component;
 public class AbilityHealer extends Ability implements IEffectAbility {
 
     public AbilityHealer() {
+        super(12, 1);
         this.ability = GempireAbilities.HEALER;
     }
 

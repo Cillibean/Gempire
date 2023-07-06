@@ -13,6 +13,7 @@ import net.minecraft.network.chat.Component;
 public class AbilityFirstAid extends Ability implements IEffectAbility {
 
     public AbilityFirstAid() {
+        super(11, 1);
         this.ability = GempireAbilities.FIRST_AID;
     }
 

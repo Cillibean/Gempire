@@ -10,6 +10,7 @@ import net.minecraft.network.chat.Component;
 public class AbilityGuard extends Ability implements ITaskAbility {
 
     public AbilityGuard() {
+        super(41, 2);
         this.ability = GempireAbilities.GUARD;
     }
 

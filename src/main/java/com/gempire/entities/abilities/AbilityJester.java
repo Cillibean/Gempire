@@ -12,6 +12,7 @@ import java.util.List;
 public class AbilityJester extends Ability implements IIdleAbility {
 
     public AbilityJester() {
+        super(26, 4);
         this.ability = GempireAbilities.JESTER;
     }
 

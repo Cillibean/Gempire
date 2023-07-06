@@ -10,6 +10,7 @@ import net.minecraft.world.effect.MobEffects;
 public class AbilityNegotiator extends Ability implements IEffectAbility {
 
     public AbilityNegotiator() {
+        super(13, 2);
         this.ability = GempireAbilities.NEGOTIATOR;
     }
 

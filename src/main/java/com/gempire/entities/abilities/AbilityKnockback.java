@@ -11,6 +11,7 @@ import net.minecraft.network.chat.Component;
 public class AbilityKnockback extends Ability implements IMeleeAbility, IViolentAbility {
 
     public AbilityKnockback() {
+        super(1, 5);
         this.ability = GempireAbilities.KNOCKBACK;
     }
 

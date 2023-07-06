@@ -10,6 +10,7 @@ import net.minecraft.network.chat.Component;
 public class AbilityTank extends Ability implements IAttributeAbility {
 
     public AbilityTank(){
+        super(6, 3);
         this.ability = GempireAbilities.TANK;
     }
 

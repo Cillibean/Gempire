@@ -1901,23 +1901,26 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         if(!getab.isEmpty()) {
             String[] powerViolenceList = getab.split(",");
             for (String s : powerViolenceList) {
-                abilities.add(GempireAbilities.getAbility(Integer.parseInt(s)));
+                Ability ability = GempireAbilities.getAbility(Integer.parseInt(s));
+                ability.assignAbility(this);
+                powers.add(ability);
+                if((ability instanceof IEffectAbility || ability instanceof IAreaAbility) && !(ability instanceof IViolentAbility)){
+                    this.entityData.set(EntityGem.USES_AREA_ABILITIES, true);
+                }
+                //abilities.add(GempireAbilities.getAbility(Integer.parseInt(s)));
             }
-            for (Abilities ability : abilities) {
-                //powers.add(Ability.getAbilityFromAbilities(ability).assignAbility(this));
+            /*for (Abilities ability : abilities) {
+                powers.add(Ability.getAbilityFromAbilities(ability).assignAbility(this));
                 Class[] parameterType = new Class[0];
                 Ability ability1;
                 try {
                     ability1 = Ability.ABILITY_FROM_ABILITIES.get(ability).getConstructor(parameterType).newInstance().assignAbility(this);
                     powers.add(ability1);
-                    if((ability1 instanceof IEffectAbility || ability1 instanceof IAreaAbility) && !(ability1 instanceof IViolentAbility)){
-                        this.entityData.set(EntityGem.USES_AREA_ABILITIES, true);
-                    }
                 }
                 catch (Exception e){
                     e.printStackTrace();
                 }
-            }
+            }*/
         }
         else{
             ArrayList<Ability> nulab = new ArrayList<>();
@@ -1979,21 +1982,21 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             return "0";
         }
         boolean complete = false;
-        ArrayList<GempireAbilities> abilitiesCurrent = new ArrayList<>();
+        ArrayList<Ability> abilitiesCurrent = new ArrayList<>();
         StringBuilder abilityList = new StringBuilder();
-        GempireAbilities[] abilities = this.possibleAbilities();
-        GempireAbilities[] getgo = this.definiteAbilities();
-        if(getgo != null && getgo.length > 0) {
-            for (GempireAbilities ab1 : getgo) {
+        ArrayList<Ability> abilities = this.possibleAbilities();
+        ArrayList<Ability> getgo = this.definiteAbilities();
+        if(getgo != null && getgo.size() > 0) {
+            for (Ability ab1 : getgo) {
                 if (remainingSlots > 0) {
                     if (remainingSlots == this.getAbilitySlots()) {
-                        abilityList.append(ab1.id).append(",");
+                        abilityList.append(ab1.getId()).append(",");
                         abilitiesCurrent.add(ab1);
                         remainingSlots--;
                     } else {
                         for (int n = 0; n < abilitiesCurrent.size(); n++) {
-                            if (ab1.id != abilitiesCurrent.get(n).id) {
-                                abilityList.append(ab1.id).append(",");
+                            if (ab1.getId() != abilitiesCurrent.get(n).getId()) {
+                                abilityList.append(ab1.getId()).append(",");
                                 abilitiesCurrent.add(ab1);
                                 remainingSlots--;
                             }
@@ -2006,17 +2009,18 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         }
         while(!complete){
             double totalWeight = 0.0D;
-            for(GempireAbilities i : abilities){
-                totalWeight+=i.weight;
+            for(Ability i : abilities){
+                totalWeight+=i.getWeight();
             }
             int idx = 0;
-            for (double r = Math.random() * totalWeight; idx < abilities.length - 1; idx++) {
-                r -= abilities[idx].weight;
+            for (double r = Math.random() * totalWeight; idx < abilities.size() - 1; idx++) {
+                r -= abilities.get(idx).getWeight();
                 if (r <= 0) break;
             }
-            GempireAbilities weightedAbility = abilities[idx];
-            abilityList.append(weightedAbility.id).append(",");
-            if(this.possibleAbilities().length + this.definiteAbilities().length > this.getAbilitySlots()) abilities = ArrayUtils.remove(abilities, idx);
+            Ability weightedAbility = abilities.get(idx);
+            abilityList.append(weightedAbility.getId()).append(",");
+            //TODO: fix this
+            if(this.possibleAbilities().size() + this.definiteAbilities().size() > this.getAbilitySlots()) abilities = ArrayUtils.remove(abilities, idx);
             remainingSlots--;
             complete = remainingSlots <= 0;
         }
@@ -2031,8 +2035,8 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.ABILITY_POWERS = powers;
     }
 
-    public abstract GempireAbilities[] possibleAbilities();
-    public abstract GempireAbilities[] definiteAbilities();
+    public abstract ArrayList<Ability> possibleAbilities();
+    public abstract ArrayList<Ability> definiteAbilities();
 
     public boolean usesAreaAbilities(){
         return this.entityData.get(EntityGem.USES_AREA_ABILITIES);

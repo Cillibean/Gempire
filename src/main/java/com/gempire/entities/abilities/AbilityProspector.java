@@ -15,6 +15,7 @@ import java.util.List;
 public class AbilityProspector extends Ability implements IIdleAbility {
 
     public AbilityProspector(){
+        super(22, 5);
         this.ability = GempireAbilities.PROSPECTOR;
     }
 

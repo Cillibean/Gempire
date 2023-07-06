@@ -17,6 +17,7 @@ import java.util.ArrayList;
 public class AbilityStern extends Ability implements IAreaAbility, IEffectAbility {
 
     public AbilityStern() {
+        super(10, 3);
         this.ability = GempireAbilities.STERN;
     }
 

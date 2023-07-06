@@ -10,6 +10,7 @@ import net.minecraft.network.chat.Component;
 public class AbilityLuck extends Ability implements IEffectAbility {
 
     public AbilityLuck() {
+        super(5, 2);
         this.ability = GempireAbilities.LUCK;
     }
 

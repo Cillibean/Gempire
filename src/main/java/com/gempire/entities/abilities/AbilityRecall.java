@@ -7,6 +7,7 @@ import net.minecraft.network.chat.Component;
 public class AbilityRecall extends Ability {
 
     public AbilityRecall() {
+        super(48, 3);
         this.ability = GempireAbilities.RECALL;
     }
 

@@ -11,6 +11,7 @@ import net.minecraftforge.event.entity.living.LootingLevelEvent;
 public class AbilityLootmaster extends Ability implements IViolentAbility, IMeleeAbility {
 
     public AbilityLootmaster() {
+        super(37, 4);
         this.ability = GempireAbilities.LOOTMASTER;
     }
 

@@ -8,6 +8,7 @@ import net.minecraft.network.chat.Component;
 
 public class AbilityPrismaticRefinery extends Ability implements ICraftingAbility {
     public AbilityPrismaticRefinery(){
+        super(44, 4);
         this.ability = GempireAbilities.REFINERY;
     }
 

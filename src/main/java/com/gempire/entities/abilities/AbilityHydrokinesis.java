@@ -21,6 +21,7 @@ import java.util.Random;
 public class AbilityHydrokinesis extends Ability implements IRangedAbility, IViolentAbility, ITaskAbility {
 
     public AbilityHydrokinesis() {
+        super(16, 1);
         this.ability = GempireAbilities.HYDROKINESIS;
     }
 

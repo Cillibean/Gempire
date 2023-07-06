@@ -10,6 +10,7 @@ import net.minecraft.network.chat.Component;
 public class AbilityUnhinged extends Ability implements IAttributeAbility {
 
     public AbilityUnhinged(){
+        super(9, 5);
         this.ability = GempireAbilities.UNHINGED;
     }
 
