@@ -39,6 +39,10 @@ public class EntityRuby extends EntityGem implements RangedAttackMob {
                 .add(Attributes.ATTACK_SPEED, 1.0D);
     }
 
+    public boolean flocksTo(EntityGem gem) {
+        return gem.isPopular();
+    }
+
     @Override
     public Float baseXScale() {
         return .8F;

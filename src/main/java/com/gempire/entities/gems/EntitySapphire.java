@@ -45,6 +45,10 @@ public class EntitySapphire extends EntityVaryingGem {
                 .add(Attributes.ATTACK_SPEED, 1.0D);
     }
 
+    public boolean flocksTo(EntityGem gem) {
+        return gem.isPopular();
+    }
+
     @Override
     public Float baseXScale() {
         return .8F;

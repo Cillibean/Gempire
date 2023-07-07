@@ -37,6 +37,10 @@ public class EntityNephrite extends EntityGem {
                 .add(Attributes.ATTACK_DAMAGE, 1.0D)
                 .add(Attributes.ATTACK_SPEED, 0.5D);
     }
+
+    public boolean flocksTo(EntityGem gem) {
+        return gem.isPopular();
+    }
     public boolean getIsCut()
     {
         return false;

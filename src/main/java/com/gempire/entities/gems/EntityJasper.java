@@ -53,6 +53,10 @@ this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, EntityGem.class, 6.0F, 
         return false;
     }
 
+    public boolean flocksTo(EntityGem gem) {
+        return gem.isPopular();
+    }
+
     @Override
     public boolean hasMarkings() {
         return true;

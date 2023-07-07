@@ -54,6 +54,10 @@ public class EntityPearl extends EntityVaryingGem {
         this.entityData.define(EntityPearl.PAGE, 0);
     }
 
+    public boolean flocksTo(EntityGem gem) {
+        return gem.isPopular();
+    }
+
     public static AttributeSupplier.Builder registerAttributes() {
         return Mob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 20.0D)

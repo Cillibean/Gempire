@@ -166,6 +166,8 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     public float rebelPoints = 0.1F;
     public int rebelTicks;
 
+    public boolean followingGarnet;
+
     public int abilityTicks;
     int crackChance = 50;
     int shatterChance = 200;
@@ -755,25 +757,30 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
 
     @Override
     public void tick() {
-        if (!this.level.isClientSide && isCrafting) {
-            if (!getItemBySlot(EquipmentSlot.MAINHAND).isEmpty()) {
-                ticking++;
-                if (ticking >= getTimetoCraft()) {
-                    popShitOut();
-                }
-            } else {
-                isCrafting = false;
-                ticking = 0;
-                this.setCurrentRecipe(0);
-            }
-        }
-        if (!this.level.isClientSide && !getRebelled() && getOwned()) {
-            rebelTicks++;
-            if (rebelTicks >= 20 * (10*60)) {
-                checkRebel();
-            }
-        }
         if (!this.level.isClientSide) {
+            if (followingGarnet) {
+                if (random.nextInt(100) == 1) {
+                    followingGarnet = false;
+                }
+            }
+            if (isCrafting) {
+                if (!getItemBySlot(EquipmentSlot.MAINHAND).isEmpty()) {
+                    ticking++;
+                    if (ticking >= getTimetoCraft()) {
+                        popShitOut();
+                    }
+                } else {
+                    isCrafting = false;
+                    ticking = 0;
+                    this.setCurrentRecipe(0);
+                }
+            }
+            if (!getRebelled() && getOwned()) {
+                rebelTicks++;
+                if (rebelTicks >= 20 * (10 * 60)) {
+                    checkRebel();
+                }
+            }
             if (abilityTicks > 0) {
                 abilityTicks--;
             }
@@ -781,8 +788,8 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                 if (enemy.getHealth() <= 0) {
                     if (enemy.getLastHurtByMob() == this) {
                         dropXP(enemy);
-                        for(Ability ability : this.getAbilityPowers()){
-                            if(ability instanceof AbilityAbundance){
+                        for (Ability ability : this.getAbilityPowers()) {
+                            if (ability instanceof AbilityAbundance) {
                                 dropXP(enemy);
                             }
                         }
@@ -1382,6 +1389,10 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         return false;
     }
 
+    public boolean flocksTo(EntityGem gem) {
+        return false;
+    }
+
     public abstract int getColor();
     @Override
     public boolean removeWhenFarAway(double xix){
@@ -1943,20 +1954,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                 if((ability instanceof IEffectAbility || ability instanceof IAreaAbility) && !(ability instanceof IViolentAbility)){
                     this.entityData.set(EntityGem.USES_AREA_ABILITIES, true);
                 }
-                //abilities.add(GempireAbilities.getAbility(Integer.parseInt(s)));
             }
-            /*for (Abilities ability : abilities) {
-                powers.add(Ability.getAbilityFromAbilities(ability).assignAbility(this));
-                Class[] parameterType = new Class[0];
-                Ability ability1;
-                try {
-                    ability1 = Ability.ABILITY_FROM_ABILITIES.get(ability).getConstructor(parameterType).newInstance().assignAbility(this);
-                    powers.add(ability1);
-                }
-                catch (Exception e){
-                    e.printStackTrace();
-                }
-            }*/
         }
         else{
             ArrayList<Ability> nulab = new ArrayList<>();
@@ -2348,6 +2346,10 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                 }
             }
         }
+        return false;
+    }
+
+    public boolean isPopular() {
         return false;
     }
 

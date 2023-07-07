@@ -45,6 +45,10 @@ public class EntityQuartz extends AbstractQuartz {
         this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, EntityGem.class, 6.0F, 1.0D, 1.2D, this::checkElseSludged));
    }
 
+    public boolean flocksTo(EntityGem gem) {
+        return gem.isPopular();
+    }
+
     @Override
     public boolean hasMarkings() {
         return this.getSkinColorVariant() == 2 || this.getSkinColorVariant() == 3 || this.getSkinColorVariant() == 6 || this.getSkinColorVariant() == 12 || this.getSkinColorVariant() == 13 || this.getSkinColorVariant() == 17;
