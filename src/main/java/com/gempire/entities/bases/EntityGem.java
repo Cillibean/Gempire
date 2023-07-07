@@ -2353,6 +2353,10 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         return false;
     }
 
+    public boolean requiresHydrationToFly() {
+        return false;
+    }
+
     public boolean itemCheck(Item item){
         for(int i = 0; i < EntityGem.NUMBER_OF_SLOTS - 4; i++){
             if(this.getItem(i).getItem() == item){

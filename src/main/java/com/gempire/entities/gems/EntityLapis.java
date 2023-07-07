@@ -88,6 +88,10 @@ this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, EntityGem.class, 6.0F, 
         return true;
     }
 
+    public boolean requiresHydrationToFly() {
+        return true;
+    }
+
     @Override
     public int generateWingVariant() {
         return 0;

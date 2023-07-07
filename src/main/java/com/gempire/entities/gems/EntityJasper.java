@@ -54,7 +54,7 @@ this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, EntityGem.class, 6.0F, 
     }
 
     public boolean flocksTo(EntityGem gem) {
-        return gem.isPopular();
+        return gem.isPopular() || gem instanceof EntityEmerald;
     }
 
     @Override

@@ -5,6 +5,8 @@ import net.minecraft.network.chat.Component;
 
 public class AbilityVehicle extends Ability {
 
+    //TODO: FIX VEHICLE TO WORK WITH LAPIS
+
     public AbilityVehicle(){
         super(18, 2);
     }

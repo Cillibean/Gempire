@@ -5,6 +5,7 @@ import com.gempire.blocks.*;
 import com.gempire.blocks.machine.*;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -14,10 +15,10 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 public class ModBlocks {
 
     //TODO: IMPLEMENT BLOCKS
-    // PHOSPHORUS COLUMN
-    // ICE STATUES
-    // DIAMOND STAINED GLASS
-    // DESTAB FIELDS
+    // PHOSPHORUS COLUMN - a wall-sized light block that comes in all colours that morganite makes
+    // ICE STATUES - larimars statues
+    // DIAMOND STAINED GLASS - a stained glass with a pattern that morganite makes
+    // DESTAB FIELDS - hurt gems when touched
 
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Gempire.MODID);
 
@@ -57,6 +58,13 @@ public class ModBlocks {
     public static final RegistryObject<Block> RAW_TUNGSTEN_BLOCK = BLOCKS.register("raw_tungsten_block", () ->
             new Block(BlockBehaviour.Properties.copy(Blocks.RAW_IRON_BLOCK)));
 
+    /*public static final RegistryObject<Block> CRYSTAL_CHEST = BLOCKS.register("crystal_chest", () ->
+            new CrystalChestBlock(BlockBehaviour.Properties
+                    .of(Material.STONE).strength(2.5F)
+                    .sound(SoundType.GLASS), () -> {
+        return BlockEntityType.CHEST;
+    }));*/
+
     public static final RegistryObject<Block> WHITE_CHROMA_CRYSTAL = BLOCKS.register("white_chroma_crystal", () ->
             new ChromaBlock(BlockBehaviour.Properties
                     .of(Material.STONE)
@@ -69,13 +77,6 @@ public class ModBlocks {
                     })
             , 0)
     );
-
-    /*public static final RegistryObject<Block> CRYSTAL_CHEST = BLOCKS.register("crystal_chest", () ->
-            new CrystalChestBlock(BlockBehaviour.Properties
-                    .of(Material.STONE).strength(2.5F)
-                    .sound(SoundType.GLASS), () -> {
-        return BlockEntityType.CHEST;
-    }));*/
 
     public static final RegistryObject<Block> ORANGE_CHROMA_CRYSTAL = BLOCKS.register("orange_chroma_crystal", () ->
             new ChromaBlock(BlockBehaviour.Properties
@@ -108,7 +109,6 @@ public class ModBlocks {
                     .strength(3.0f, 6.0f)
                     .sound(SoundType.GLASS)
                     .requiresCorrectToolForDrops()
-
                     .lightLevel((state) -> {
                         return 3;
                     })

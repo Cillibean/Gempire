@@ -26,9 +26,6 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import java.util.ArrayList;
 
 public class EntityTourmaline extends EntityVaryingGem {
-    //TODO: IMPLEMENT TOURMALINE. Tourmaline will take care of one crop variety per Tourmaline.
-    // Perfect Tourmalines will take care of several. Much like Zircon and her enchantments.
-    // Tourmaline will have aerokinesis (wind manipulation) as an additional ability.
     public EntityTourmaline(EntityType<? extends PathfinderMob> type, Level worldIn) {
         super(type, worldIn);
     }

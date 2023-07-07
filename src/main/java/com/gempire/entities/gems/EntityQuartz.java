@@ -46,7 +46,7 @@ public class EntityQuartz extends AbstractQuartz {
    }
 
     public boolean flocksTo(EntityGem gem) {
-        return gem.isPopular();
+        return gem.isPopular() || gem instanceof EntityEmerald;
     }
 
     @Override

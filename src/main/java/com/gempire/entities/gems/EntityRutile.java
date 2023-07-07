@@ -28,7 +28,6 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import java.util.ArrayList;
 
 public class EntityRutile extends EntityGem {
-    //TODO: IMPLEMENT RUTILE. Rutile will detect ores, mob spawners.
     public EntityRutile(EntityType<? extends PathfinderMob> type, Level worldIn) {
         super(type, worldIn);
     }
