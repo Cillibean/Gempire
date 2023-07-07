@@ -167,7 +167,6 @@ public class GemSeedTE extends BlockEntity {
         float BLOCK_TEMPERATURE = this.level.getBiome(this.getBlockPos()).get().getBaseTemperature();
         this.SetDrainedStoneColor(BLOCK_TEMPERATURE);
         Block block = this.level.getBlockState(blockPos).getBlock();
-        // TODO: fix it
         if (tier == 1) {
             for (int i = 0; i < GemFormation.POSSIBLE_GEMS_TIER_1.size(); i++) {
                 String gem = GemFormation.POSSIBLE_GEMS_TIER_1.get(i);

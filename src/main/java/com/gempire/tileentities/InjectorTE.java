@@ -146,8 +146,6 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
         super.saveAdditional(compound);
     }
 
-    //TODO: FIX LOTS OF NBT STUFF
-
     public static <T extends BlockEntity> void tick(Level level, BlockPos pos, BlockState state, T be) {
         InjectorTE te = (InjectorTE) be;
         if (!level.isClientSide()) {

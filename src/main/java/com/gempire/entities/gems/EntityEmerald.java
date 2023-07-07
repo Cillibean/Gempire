@@ -26,8 +26,8 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import java.util.ArrayList;
 
 public class EntityEmerald extends EntityGem implements RangedAttackMob {
-    //TO-DO: IMPLEMENT EMERALD. Barters with Villagers and other trader type NPCs.
-    // For now, exudes the Hero of the Village effect constantly? Has an affinity for Quartzes and Jaspers (wandering jasper/quartz follow her i guess?).
+    //TODO: IMPLEMENT EMERALD. Barters with Villagers and other trader type NPCs.
+    // Has an affinity for Quartzes and Jaspers (wandering jasper/quartz follow her i guess?).
     // Electrokinesis (lightning manipulation) will be in her ability pool.
     public EntityEmerald(EntityType<? extends PathfinderMob> type, Level worldIn) {
         super(type, worldIn);
@@ -76,13 +76,13 @@ public class EntityEmerald extends EntityGem implements RangedAttackMob {
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, EntityShambler.class, 1, false, false, this::checkNotSludged));
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, EntityCrawler.class, 1, false, false, this::checkNotSludged));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Mob.class, 1, false, false, (p_234199_0_) -> p_234199_0_.getClassification(true) == MobCategory.MONSTER));
-                this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.1D, false));
+        this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.1D, false));
         this.targetSelector.addGoal(1, new OwnerHurtByTargetGemGoal(this));
         this.targetSelector.addGoal(2, new OwnerHurtTargetGemGoal(this));
         this.goalSelector.addGoal(1, new EntityAISludged(this, 0.6));
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, EntityGem.class, 1, false, false, this::checkBothSludged));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, 1, false, false, this::checkSludged));
-this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, EntityGem.class, 6.0F, 1.0D, 1.2D, this::checkElseSludged));
+        this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, EntityGem.class, 6.0F, 1.0D, 1.2D, this::checkElseSludged));
    }
 
     @Override

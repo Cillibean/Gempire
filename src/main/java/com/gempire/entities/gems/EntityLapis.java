@@ -14,6 +14,7 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
+import net.minecraft.world.entity.animal.FlyingAnimal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
@@ -21,9 +22,9 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 
 import java.util.ArrayList;
 
-public class EntityLapis extends EntityGem {
-    //TO-DO: IMPLEMENT LAPIS LAZULI. A flying water gem with hydrokinesis, Vehicle ability (flight version), and can terraform with her water powers.
-    // You can fill buckets and empty glass bottles with water by right clicking her, and she cannot fly in the Nether as her wings evaporate.
+public class EntityLapis extends EntityGem implements FlyingAnimal {
+    //TODO: IMPLEMENT LAPIS LAZULI. Vehicle ability (flight version).
+    // She cannot fly in the Nether as her wings evaporate.
     public EntityLapis(EntityType<? extends PathfinderMob> type, Level worldIn) {
         super(type, worldIn);
     }
@@ -50,7 +51,7 @@ public class EntityLapis extends EntityGem {
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, EntityShambler.class, 1, false, false, this::checkNotSludged));
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, EntityCrawler.class, 1, false, false, this::checkNotSludged));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Mob.class, 1, false, false, (p_234199_0_) -> p_234199_0_.getClassification(true) == MobCategory.MONSTER));
-                this.targetSelector.addGoal(1, new OwnerHurtByTargetGemGoal(this));
+        this.targetSelector.addGoal(1, new OwnerHurtByTargetGemGoal(this));
         this.targetSelector.addGoal(2, new OwnerHurtTargetGemGoal(this));
         this.goalSelector.addGoal(1, new EntityAISludged(this, 0.6));
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, EntityGem.class, 1, false, false, this::checkBothSludged));
@@ -79,6 +80,16 @@ this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, EntityGem.class, 6.0F, 
     }
     @Override
     public int generateSkinVariant() {
+        return 0;
+    }
+
+    @Override
+    public boolean hasWings() {
+        return true;
+    }
+
+    @Override
+    public int generateWingVariant() {
         return 0;
     }
 
@@ -217,5 +228,10 @@ this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, EntityGem.class, 6.0F, 
     @Override
     public int exitHoleSize() {
         return 3;
+    }
+
+    @Override
+    public boolean isFlying() {
+        return false;
     }
 }

@@ -25,8 +25,7 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import java.util.ArrayList;
 
 public class EntityLarimar extends EntityGem {
-    //TO-DO: IMPLEMENT LARIMAR. Requires Ice Statues to be implemented as well.
-    // Will construct ice statues with different types of ice blocks, including Black Ice from kindergartened areas.
+    //TODO: IMPLEMENT LARIMAR. Will construct ice statues with different types of ice blocks, including Black Ice from kindergartened areas.
     // Cryokinesis and Water Walker as abilities as well, of course.
     public EntityLarimar(EntityType<? extends PathfinderMob> type, Level worldIn) {
         super(type, worldIn);

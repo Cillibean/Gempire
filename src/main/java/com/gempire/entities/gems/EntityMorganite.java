@@ -24,7 +24,7 @@ import net.minecraft.world.level.Level;
 import java.util.ArrayList;
 
 public class EntityMorganite extends EntityGem {
-    //TO-DO: IMPLEMENT MORGANITE. Sorts your items into Crystal Chests for you.
+    //TODO: IMPLEMENT MORGANITE. Sorts your items into Crystal Chests for you.
     // Will also have to model the chest and get it textured. Chests will lock and have filters and things, I'm presuming.
     public EntityMorganite(EntityType<? extends PathfinderMob> type, Level worldIn) {
         super(type, worldIn);

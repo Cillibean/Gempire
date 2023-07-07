@@ -55,6 +55,7 @@ public class ModAbilities {
         abilities.add(new AbilityBeastmaster());
         abilities.add(new AbilityDisarming());
         abilities.add(new AbilityLootmaster());
+        abilities.add(new AbilityHydration());
         abilities.add(new AbilityAcidicSaliva());
         abilities.add(new AbilityGuard());
         abilities.add(new AbilityBrewEssence());

@@ -4,6 +4,7 @@ public enum PaletteType {
     GEM("gem"),
     SKIN("skin"),
     HAIR("hair"),
+    WING("wing"),
     MARKINGS("marking"),
     MARKINGS_2("marking_2");
 

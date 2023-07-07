@@ -92,6 +92,8 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     public static final EntityDataAccessor<Integer> SKIN_VARIANT = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<Integer> SKIN_COLOR_VARIANT = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
     public static EntityDataAccessor<Integer> HAIR_VARIANT = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
+    public static EntityDataAccessor<Integer> WING_VARIANT = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
+    public static EntityDataAccessor<Integer> WING_COLOR = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<Integer> GEM_PLACEMENT = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<Integer> GEM_COLOR = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
     public static EntityDataAccessor<Integer> OUTFIT_COLOR = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
@@ -206,6 +208,8 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.entityData.define(EntityGem.SKIN_VARIANT, 0);
         this.entityData.define(EntityGem.SKIN_COLOR_VARIANT, 0);
         this.entityData.define(EntityGem.HAIR_VARIANT, 0);
+        this.entityData.define(EntityGem.WING_VARIANT, 0);
+        this.entityData.define(EntityGem.WING_COLOR, 0);
         this.entityData.define(EntityGem.GEM_PLACEMENT, 0);
         this.entityData.define(EntityGem.GEM_COLOR, 0);
         this.entityData.define(EntityGem.OUTFIT_COLOR, 0);
@@ -260,7 +264,9 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.setSkinVariant(this.generateSkinVariant());
         if (this.setSkinVariantOnInitialSpawn) this.setSkinColorVariant(this.generateSkinColorVariant()); else this.setSkinColorVariant(this.initalSkinVariant);
         this.setHairVariant(this.generateHairVariant());
+        this.setWingVariant(this.generateWingVariant());
         this.setSkinColor(this.generatePaletteColor(PaletteType.SKIN));
+        this.setWingColor(this.generatePaletteColor(PaletteType.WING));
         this.setHairColor(this.generatePaletteColor(PaletteType.HAIR));
         this.setGemColor(this.generatePaletteColor(PaletteType.GEM));
         this.setOutfitVariant(this.generateOutfitVariant());
@@ -1372,6 +1378,10 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         return false;
     }
 
+    public boolean hasWings() {
+        return false;
+    }
+
     public abstract int getColor();
     @Override
     public boolean removeWhenFarAway(double xix){
@@ -1480,6 +1490,11 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         }
         if (type == PaletteType.MARKINGS_2) {
             if (!hasMarkings2()) {
+                return 0;
+            }
+        }
+        if (type == PaletteType.WING) {
+            if (!hasWings()) {
                 return 0;
             }
         }
@@ -1650,6 +1665,26 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
 
     public int generateGemPlacement(){
         return this.getPlacements()[this.random.nextInt(this.getPlacements().length)].id;
+    }
+
+    public int getWingColor(){
+        return this.entityData.get(EntityGem.WING_COLOR);
+    }
+
+    public void setWingColor(int value){
+        this.entityData.set(EntityGem.WING_COLOR, value);
+    }
+
+    public int getWingVariant(){
+        return this.entityData.get(EntityGem.WING_VARIANT);
+    }
+
+    public void setWingVariant(int value){
+        this.entityData.set(EntityGem.WING_VARIANT, value);
+    }
+
+    public int generateWingVariant() {
+        return 0;
     }
 
     public int getHairColor(){

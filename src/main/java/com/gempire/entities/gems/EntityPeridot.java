@@ -30,7 +30,6 @@ import net.minecraft.world.phys.Vec3;
 import java.util.ArrayList;
 
 public class EntityPeridot extends EntityGem {
-    //TO-DO: IMPLEMENT PERIDOT. She will upgrade your injector from tier 1 to tier 2. Will require a moderate amount of resources in her inventory.
     public EntityPeridot(EntityType<? extends PathfinderMob> type, Level worldIn) {
         super(type, worldIn);
     }

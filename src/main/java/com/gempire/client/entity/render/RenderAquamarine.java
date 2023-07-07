@@ -26,8 +26,8 @@ public class RenderAquamarine extends MobRenderer<EntityAquamarine, ModelAquamar
         this.addLayer(new VisorLayer(this));
         this.addLayer(new HairLayer(this));
         this.addLayer(new GemPlacementLayer(this));
+        this.addLayer(new WingLayer(this));
         this.addLayer(new ItemInHandLayer(this, renderManagerIn.getItemInHandRenderer()));
-        //TO-DO: Wing layer for Aquamarine, random wing variants
     }
 
     @Override
