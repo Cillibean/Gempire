@@ -14,7 +14,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "$(l)Possible Abilities$() $(li)Tank$(li)Beefcake$(li)Powerhouse$(li)Unhinged$(li)Berserker$(li)Lootmaster$(li)Fortunate (NYI)$(li)Abundance$(br2) $(l)Definite Abilities$() $(br)$(li)Disarming"
+      "text": "$(l)Possible Abilities$() $(li)Tank$(li)Beefcake$(li)Powerhouse$(li)Unhinged$(li)Berserker$(li)Lootmaster$(li)Abundance$(br2) $(l)Definite Abilities$() $(br)$(li)Disarming"
     },
     {
       "type": "patchouli:text",
