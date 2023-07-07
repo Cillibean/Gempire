@@ -2,7 +2,6 @@ package com.gempire.entities.abilities;
 
 import com.gempire.entities.abilities.base.Ability;
 import com.gempire.entities.abilities.interfaces.IEffectAbility;
-import com.gempire.util.GempireAbilities;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.network.chat.Component;
@@ -11,7 +10,6 @@ public class AbilityLuck extends Ability implements IEffectAbility {
 
     public AbilityLuck() {
         super(5, 2);
-        this.ability = GempireAbilities.LUCK;
     }
 
     @Override

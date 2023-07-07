@@ -2,7 +2,6 @@ package com.gempire.entities.abilities;
 
 import com.gempire.entities.abilities.base.Ability;
 import com.gempire.entities.abilities.interfaces.IEffectAbility;
-import com.gempire.util.GempireAbilities;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -13,7 +12,6 @@ public class AbilityAmphibian extends Ability implements IEffectAbility {
 
     public AbilityAmphibian(){
         super(17, 4);
-        this.ability = GempireAbilities.AMPHIBIAN;
     }
 
     @Override

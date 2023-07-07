@@ -1,11 +1,12 @@
 package com.gempire.entities.gems.starter;
 
+import com.gempire.entities.abilities.AbilityZilch;
+import com.gempire.entities.abilities.base.Ability;
 import com.gempire.entities.ai.EntityAIFollowAssigned;
 import com.gempire.entities.ai.EntityAIFollowOwner;
 import com.gempire.entities.ai.EntityAIMakePowerCrystal;
 import com.gempire.entities.ai.EntityAIWander;
 import com.gempire.entities.bases.EntityStarterGem;
-import com.gempire.util.GempireAbilities;
 import com.gempire.util.GemPlacements;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.entity.MobCategory;
@@ -30,6 +31,8 @@ import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.PanicGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
+
+import java.util.ArrayList;
 
 public class EntityMica extends EntityStarterGem {
     public boolean hopperGoal = false;
@@ -146,11 +149,10 @@ public class EntityMica extends EntityStarterGem {
         return placement;
     }
 
-    @Override
-    public GempireAbilities[] possibleAbilities() {
-        return new GempireAbilities[]{
-                GempireAbilities.NO_ABILITY
-        };
+    public ArrayList<Ability> possibleAbilities(){
+        ArrayList<Ability> arrayList = new ArrayList<>();
+        arrayList.add(new AbilityZilch());
+        return arrayList;
     }
 
     public void setPlaying(boolean value){

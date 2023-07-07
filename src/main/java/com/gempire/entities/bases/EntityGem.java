@@ -9,6 +9,7 @@ import com.gempire.entities.other.EntityAbomination;
 import com.gempire.entities.other.EntityCrawler;
 import com.gempire.entities.other.EntityShambler;
 import com.gempire.events.GemPoofEvent;
+import com.gempire.init.ModAbilities;
 import com.gempire.init.ModEnchants;
 import com.gempire.init.ModItems;
 import com.gempire.init.ModSounds;
@@ -1896,12 +1897,12 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     //ABILITY STUFF
 
     public ArrayList<Ability> findAbilities(String getab){
-        ArrayList<Abilities> abilities = new ArrayList<>();
         ArrayList<Ability> powers = new ArrayList<>();
         if(!getab.isEmpty()) {
             String[] powerViolenceList = getab.split(",");
             for (String s : powerViolenceList) {
-                Ability ability = GempireAbilities.getAbility(Integer.parseInt(s));
+                Ability ability = ModAbilities.getAbility(Integer.parseInt(s));
+                assert ability != null;
                 ability.assignAbility(this);
                 powers.add(ability);
                 if((ability instanceof IEffectAbility || ability instanceof IAreaAbility) && !(ability instanceof IViolentAbility)){
@@ -2019,8 +2020,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             }
             Ability weightedAbility = abilities.get(idx);
             abilityList.append(weightedAbility.getId()).append(",");
-            //TODO: fix this
-            if(this.possibleAbilities().size() + this.definiteAbilities().size() > this.getAbilitySlots()) abilities = ArrayUtils.remove(abilities, idx);
+            if(this.possibleAbilities().size() + this.definiteAbilities().size() > this.getAbilitySlots()) abilities.remove(idx);
             remainingSlots--;
             complete = remainingSlots <= 0;
         }

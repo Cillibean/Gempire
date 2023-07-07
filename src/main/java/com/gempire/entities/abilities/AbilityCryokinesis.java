@@ -9,7 +9,6 @@ import com.gempire.entities.abilities.interfaces.IViolentAbility;
 import com.gempire.entities.projectiles.IceShardEntity;
 import com.gempire.init.ModBlocks;
 import com.gempire.init.ModItems;
-import com.gempire.util.GempireAbilities;
 import net.minecraft.world.level.block.AirBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.BushBlock;
@@ -29,7 +28,6 @@ public class AbilityCryokinesis extends Ability implements IRangedAbility, IViol
 
     public AbilityCryokinesis() {
         super(4, 1);
-        this.ability = GempireAbilities.CRYOKINESIS;
     }
 
     @Override

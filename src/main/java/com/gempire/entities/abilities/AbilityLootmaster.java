@@ -3,7 +3,6 @@ package com.gempire.entities.abilities;
 import com.gempire.entities.abilities.base.Ability;
 import com.gempire.entities.abilities.interfaces.IMeleeAbility;
 import com.gempire.entities.abilities.interfaces.IViolentAbility;
-import com.gempire.util.GempireAbilities;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.event.entity.living.LootingLevelEvent;
@@ -12,7 +11,6 @@ public class AbilityLootmaster extends Ability implements IViolentAbility, IMele
 
     public AbilityLootmaster() {
         super(37, 4);
-        this.ability = GempireAbilities.LOOTMASTER;
     }
 
     @Override

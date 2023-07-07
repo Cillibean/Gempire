@@ -1,6 +1,6 @@
 package com.gempire.entities.gems;
 
-import com.gempire.entities.abilities.AbilityDisarming;
+import com.gempire.entities.abilities.*;
 import com.gempire.entities.abilities.base.Ability;
 import com.gempire.entities.ai.*;
 import com.gempire.entities.bases.EntityGem;
@@ -8,7 +8,6 @@ import com.gempire.entities.other.EntityAbomination;
 import com.gempire.entities.other.EntityCrawler;
 import com.gempire.entities.other.EntityShambler;
 import com.gempire.entities.bases.EntityVaryingGem;
-import com.gempire.util.GempireAbilities;
 import com.gempire.util.GemPlacements;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -19,6 +18,8 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+
+import java.util.ArrayList;
 
 public class EntityGarnet extends EntityVaryingGem {
 
@@ -101,56 +102,25 @@ this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, EntityGem.class, 6.0F, 
         return null;
     }
 
-    public GempireAbilities[] possibleAbilities(){
-        return new GempireAbilities[]{
-                GempireAbilities.NO_ABILITY,
-                GempireAbilities.TANK,
-                GempireAbilities.BEEFCAKE,
-                GempireAbilities.POWERHOUSE,
-                GempireAbilities.UNHINGED,
-                GempireAbilities.BERSERKER,
-                GempireAbilities.ABUNDANCE,
-                GempireAbilities.LOOTMASTER
-        };
-    }
-    public GempireAbilities[] definiteAbilities(){
-        return new GempireAbilities[]{
-                GempireAbilities.DISARMING
-        };
+    public ArrayList<Ability> possibleAbilities(){
+        ArrayList<Ability> arrayList = new ArrayList<>();
+        arrayList.add(new AbilityZilch());
+        arrayList.add(new AbilityTank());
+        arrayList.add(new AbilityBeefcake());
+        arrayList.add(new AbilityPowerhouse());
+        arrayList.add(new AbilityUnhinged());
+        arrayList.add(new AbilityBerserker());
+        arrayList.add(new AbilityAbundance());
+        arrayList.add(new AbilityLootmaster());
+        return arrayList;
     }
 
-    public boolean doHurtTarget(Entity entityIn) {
-        for (Ability ability : this.getAbilityPowers()) {
-            if (ability instanceof AbilityDisarming) {
-                if (!(entityIn instanceof Player)) {
-                    if (!entityIn.level.isClientSide) {
-                        if (this.random.nextFloat() < 0.25f) {
-                            ItemStack item = ((Mob) entityIn).getItemBySlot(EquipmentSlot.MAINHAND);
-                            if (item.isDamageableItem()) {
-                                item.setDamageValue(item.getMaxDamage() - this.random.nextInt(1 + this.random.nextInt(Math.max(item.getMaxDamage() - 3, 1))));
-                            }
-                            ItemEntity dropitem = new ItemEntity(entityIn.level, entityIn.getX(), entityIn.getY(), entityIn.getZ(), item);
-                            entityIn.level.addFreshEntity(dropitem);
-                            entityIn.setItemSlot(EquipmentSlot.MAINHAND, ItemStack.EMPTY);
-                        }
-                    }
-                } else {
-                    if (!entityIn.level.isClientSide) {
-                        if (this.random.nextFloat() < 0.25f) {
-                            ItemStack item = ((Player) entityIn).getItemBySlot(EquipmentSlot.MAINHAND);
-                            if (item.isDamageableItem()) {
-                                item.setDamageValue(item.getMaxDamage() - this.random.nextInt(1 + this.random.nextInt(Math.max(item.getMaxDamage() - 3, 1))));
-                            }
-                            ItemEntity dropitem = new ItemEntity(entityIn.level, entityIn.getX(), entityIn.getY(), entityIn.getZ(), item);
-                            entityIn.level.addFreshEntity(dropitem);
-                            entityIn.setItemSlot(EquipmentSlot.MAINHAND, ItemStack.EMPTY);
-                        }
-                    }
-                }
-            }
-        }
-        return super.doHurtTarget(entityIn);
+    public ArrayList<Ability> definiteAbilities(){
+        ArrayList<Ability> arrayList = new ArrayList<>();
+        arrayList.add(new AbilityDisarming());
+        return arrayList;
     }
+
     @Override
     public boolean UsesUniqueNames() {
         return true;
@@ -271,7 +241,6 @@ this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, EntityGem.class, 6.0F, 
     public int generateHardness() {
         return 7;
     }
-
 
     @Override
     public int exitHoleSize() {

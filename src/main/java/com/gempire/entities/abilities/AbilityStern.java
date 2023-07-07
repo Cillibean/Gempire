@@ -4,7 +4,6 @@ import com.gempire.entities.abilities.base.Ability;
 import com.gempire.entities.abilities.interfaces.IAreaAbility;
 import com.gempire.entities.abilities.interfaces.IEffectAbility;
 import com.gempire.entities.bases.EntityGem;
-import com.gempire.util.GempireAbilities;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -18,7 +17,6 @@ public class AbilityStern extends Ability implements IAreaAbility, IEffectAbilit
 
     public AbilityStern() {
         super(10, 3);
-        this.ability = GempireAbilities.STERN;
     }
 
     @Override

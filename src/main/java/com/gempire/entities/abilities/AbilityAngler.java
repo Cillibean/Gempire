@@ -2,7 +2,6 @@ package com.gempire.entities.abilities;
 
 import com.gempire.entities.abilities.base.Ability;
 import com.gempire.entities.abilities.interfaces.IIdleAbility;
-import com.gempire.util.GempireAbilities;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -21,7 +20,6 @@ public class AbilityAngler extends Ability implements IIdleAbility {
 
     public AbilityAngler(){
         super(27, 5);
-        this.ability = GempireAbilities.ANGLER;
     }
 
     @Override

@@ -1,12 +1,15 @@
 package com.gempire.entities.bases;
 
-import com.gempire.util.GempireAbilities;
+import com.gempire.entities.abilities.AbilityZilch;
+import com.gempire.entities.abilities.base.Ability;
 import com.gempire.util.PaletteType;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.Level;
+
+import java.util.ArrayList;
 
 public abstract class EntityStarterGem extends EntityGem {
 
@@ -43,10 +46,10 @@ public abstract class EntityStarterGem extends EntityGem {
         return 1;
     }
 
-    public GempireAbilities[] definiteAbilities(){
-        return new GempireAbilities[]{
-                GempireAbilities.NO_ABILITY
-        };
+    public ArrayList<Ability> definiteAbilities(){
+        ArrayList<Ability> arrayList = new ArrayList<>();
+        arrayList.add(new AbilityZilch());
+        return arrayList;
     }
 
     public boolean canChangeInsigniaColorByDefault(){

@@ -2,7 +2,6 @@ package com.gempire.entities.abilities;
 
 import com.gempire.entities.abilities.base.Ability;
 import com.gempire.entities.abilities.interfaces.IIdleAbility;
-import com.gempire.util.GempireAbilities;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -11,7 +10,6 @@ public class AbilityBerserker extends Ability implements IIdleAbility {
 
     public AbilityBerserker(){
         super(33, 5);
-        this.ability = GempireAbilities.BERSERKER;
     }
 
     @Override

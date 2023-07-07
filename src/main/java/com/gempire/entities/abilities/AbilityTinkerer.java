@@ -2,7 +2,6 @@ package com.gempire.entities.abilities;
 
 import com.gempire.entities.abilities.base.Ability;
 import com.gempire.entities.abilities.interfaces.IIdleAbility;
-import com.gempire.util.GempireAbilities;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.*;
@@ -11,7 +10,6 @@ public class AbilityTinkerer extends Ability implements IIdleAbility {
 
     public AbilityTinkerer(){
         super(52, 4);
-        this.ability = GempireAbilities.TINKERER;
     }
 
     @Override

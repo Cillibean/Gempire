@@ -3,7 +3,6 @@ package com.gempire.entities.abilities;
 import com.gempire.entities.abilities.base.Ability;
 import com.gempire.entities.abilities.interfaces.IIdleAbility;
 import com.gempire.init.ModTags;
-import com.gempire.util.GempireAbilities;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.state.BlockState;
@@ -16,7 +15,6 @@ public class AbilityProspector extends Ability implements IIdleAbility {
 
     public AbilityProspector(){
         super(22, 5);
-        this.ability = GempireAbilities.PROSPECTOR;
     }
 
     @Override

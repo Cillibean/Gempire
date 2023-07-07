@@ -5,7 +5,6 @@ import com.gempire.entities.abilities.interfaces.IRangedAbility;
 import com.gempire.entities.abilities.interfaces.ITaskAbility;
 import com.gempire.entities.abilities.interfaces.IViolentAbility;
 import com.gempire.entities.projectiles.AcidSpitEntity;
-import com.gempire.util.GempireAbilities;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
@@ -18,7 +17,6 @@ public class AbilityAcidicSaliva extends Ability implements IRangedAbility, IVio
 
     public AbilityAcidicSaliva() {
         super(39, 2);
-        this.ability = GempireAbilities.ACIDIC_SPIT;
     }
 
     @Override
