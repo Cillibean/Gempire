@@ -226,7 +226,7 @@ this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, EntityGem.class, 6.0F, 
 
     @Override
     public ArrayList<Ability> definiteAbilities() {
-        return null;
+        return new ArrayList<>();
     }
 
     @Override

@@ -196,8 +196,8 @@ this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, EntityGem.class, 6.0F, 
         arrayList.add(new AbilityZilch());
         return arrayList;
     }
-    public ArrayList<Ability> definiteAbilities(){
-        return null;
+    public ArrayList<Ability> definiteAbilities() {
+        return new ArrayList<>();
     }
 
     public int generateSkinColorVariant() {
