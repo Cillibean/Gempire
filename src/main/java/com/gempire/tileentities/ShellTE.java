@@ -258,7 +258,6 @@ public class ShellTE extends RandomizableContainerBlockEntity implements MenuPro
                 }
         } else if (this.gravelConsumed == ShellTE.MAX_GRAVEL/2 && this.sandConsumed == ShellTE.MAX_SAND/2 && this.clayConsumed == ShellTE.MAX_CLAY/2 && this.chromaConsumed) {
             //ESSENCE CHECK
-            //TODO: MAKE THERE BE A CHANCE OF MAGIC MOSS APPEARING
             if (this.level.getBlockState(this.worldPosition.offset(ShellTE.direction(4))).getBlock() == ModBlocks.WHITE_ESSENCE_BLOCK.get()) {
                 LiquidBlock block = (LiquidBlock) this.level.getBlockState(this.worldPosition.offset(ShellTE.direction(4))).getBlock();
                 if (block.getFluid() == ModFluids.WHITE_ESSENCE.get()) {
@@ -268,7 +267,6 @@ public class ShellTE extends RandomizableContainerBlockEntity implements MenuPro
             }
         } else if (this.gravelConsumed == ShellTE.MAX_GRAVEL/4 && this.sandConsumed == ShellTE.MAX_SAND/4 && this.clayConsumed == ShellTE.MAX_CLAY/4 && this.chromaConsumed) {
             //ESSENCE CHECK
-            //TODO: MAKE THERE BE A CHANCE OF MAGIC MOSS APPEARING
             if (this.level.getBlockState(this.worldPosition.offset(ShellTE.direction(4))).getBlock() == ModBlocks.WHITE_ESSENCE_BLOCK.get()) {
                 LiquidBlock block = (LiquidBlock) this.level.getBlockState(this.worldPosition.offset(ShellTE.direction(4))).getBlock();
                 if (block.getFluid() == ModFluids.WHITE_ESSENCE.get()) {
@@ -417,10 +415,6 @@ public class ShellTE extends RandomizableContainerBlockEntity implements MenuPro
         this.chromaColor = 0;
         this.level.setBlockAndUpdate(this.getBlockPos(), this.getBlockState().setValue(ShellBlock.STAGE, 0));
     }
-
-    //TODO: FIX LOTS OF NBT STUFF
-
-    //CONTAINER STUFF
 
     //CONTAINER STUFF
 

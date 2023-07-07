@@ -2,7 +2,6 @@ package com.gempire.entities.abilities;
 
 import com.gempire.entities.abilities.base.Ability;
 import com.gempire.entities.abilities.interfaces.IIdleAbility;
-import com.gempire.util.GempireAbilities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Items;
@@ -14,7 +13,7 @@ import net.minecraft.world.level.block.state.BlockState;
 public class AbilityTorchBearer extends Ability implements IIdleAbility {
 
     public AbilityTorchBearer(){
-        this.ability = GempireAbilities.TORCHBEARER;
+        super(24, 5);
     }
 
     @Override

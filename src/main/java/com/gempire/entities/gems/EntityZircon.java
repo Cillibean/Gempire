@@ -1,6 +1,9 @@
 package com.gempire.entities.gems;
 
 import com.gempire.container.ZirconUIContainer;
+import com.gempire.entities.abilities.AbilityStern;
+import com.gempire.entities.abilities.AbilityZilch;
+import com.gempire.entities.abilities.base.Ability;
 import com.gempire.entities.ai.EntityAIFollowAssigned;
 import com.gempire.entities.ai.EntityAIFollowOwner;
 import com.gempire.entities.ai.EntityAISludged;
@@ -11,7 +14,6 @@ import com.gempire.entities.other.EntityCrawler;
 import com.gempire.entities.other.EntityShambler;
 import com.gempire.entities.bases.EntityVaryingGem;
 import com.gempire.init.ModEnchants;
-import com.gempire.util.GempireAbilities;
 import com.gempire.util.GemPlacements;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvent;
@@ -43,6 +45,7 @@ import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.PanicGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 public class EntityZircon extends EntityVaryingGem {
@@ -172,18 +175,15 @@ this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, EntityGem.class, 6.0F, 
         return this.getRebelOutfitVariant();
     }
 
-    @Override
-    public GempireAbilities[] possibleAbilities() {
-        return new GempireAbilities[]{
-                GempireAbilities.NO_ABILITY, GempireAbilities.STERN
-        };
+    public ArrayList<Ability> possibleAbilities(){
+        ArrayList<Ability> arrayList = new ArrayList<>();
+        arrayList.add(new AbilityZilch());
+        arrayList.add(new AbilityStern());
+        return arrayList;
     }
 
-    @Override
-    public GempireAbilities[] definiteAbilities() {
-        return new GempireAbilities[]{
-
-        };
+    public ArrayList<Ability> definiteAbilities() {
+        return new ArrayList<>();
     }
 
     @Override

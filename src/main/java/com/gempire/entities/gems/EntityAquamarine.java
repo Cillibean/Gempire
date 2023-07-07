@@ -1,11 +1,12 @@
 package com.gempire.entities.gems;
 
+import com.gempire.entities.abilities.*;
+import com.gempire.entities.abilities.base.Ability;
 import com.gempire.entities.ai.*;
 import com.gempire.entities.bases.EntityGem;
 import com.gempire.entities.other.EntityAbomination;
 import com.gempire.entities.other.EntityCrawler;
 import com.gempire.entities.other.EntityShambler;
-import com.gempire.util.GempireAbilities;
 import com.gempire.util.GemPlacements;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
@@ -26,38 +27,21 @@ import net.minecraft.world.level.Level;
 
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 
+import java.util.ArrayList;
+
 public class EntityAquamarine extends EntityGem implements FlyingAnimal {
-    //TO-DO: IMPLEMENT AQUAMARINE. Advanced paralysis, DoT (Damage over Time)
     public EntityAquamarine(EntityType<? extends PathfinderMob> type, Level worldIn) {
         super(type, worldIn);
-        this.moveControl = new FlyingMoveControl(this, 20, true);
+        if (worldIn.dimension() != Level.NETHER) this.moveControl = new FlyingMoveControl(this, 20, true);
     }
 
     public static AttributeSupplier.Builder registerAttributes() {
-        /*EntityAquamarine aquamarine = new EntityAquamarine(null, null);
-        aquamarine.aquaSet(aquamarine);
-        if (aquamarine.isDefective()) {
-            return Mob.createMobAttributes()
-                    .add(Attributes.MAX_HEALTH, 20.0D)
-                    .add(Attributes.MOVEMENT_SPEED, 0.3D)
-                    .add(Attributes.FLYING_SPEED, 5.0D)
-                    .add(Attributes.ATTACK_DAMAGE, 2.0D)
-                    .add(Attributes.ATTACK_SPEED, 1.0D);
-        } else if (aquamarine.isPrimary()) {
-            return Mob.createMobAttributes()
-                    .add(Attributes.MAX_HEALTH, 30.0D)
-                    .add(Attributes.MOVEMENT_SPEED, 0.5D)
-                    .add(Attributes.FLYING_SPEED, 7.0D)
-                    .add(Attributes.ATTACK_DAMAGE, 4.0D)
-                    .add(Attributes.ATTACK_SPEED, 1.0D);
-        } else {*/
             return Mob.createMobAttributes()
                     .add(Attributes.MAX_HEALTH, 25.0D)
                     .add(Attributes.MOVEMENT_SPEED, 0.4D)
                     .add(Attributes.FLYING_SPEED, 6.0D)
                     .add(Attributes.ATTACK_DAMAGE, 3.0D)
                     .add(Attributes.ATTACK_SPEED, 1.0D);
-        //}
     }
     @Override
     public SoundEvent getInstrument()
@@ -118,6 +102,17 @@ public class EntityAquamarine extends EntityGem implements FlyingAnimal {
                 GemPlacements.CHEST, GemPlacements.BACK, GemPlacements.BELLY, GemPlacements.LEFT_SHOULDER, GemPlacements.RIGHT_SHOULDER, GemPlacements.LEFT_HAND, GemPlacements.RIGHT_HAND, GemPlacements.LEFT_PALM, GemPlacements.RIGHT_PALM, GemPlacements.LEFT_THIGH,
                 GemPlacements.RIGHT_THIGH, GemPlacements.LEFT_ANKLE, GemPlacements.RIGHT_ANKLE };
     }
+
+    @Override
+    public boolean hasWings() {
+        return true;
+    }
+
+    @Override
+    public int generateWingVariant() {
+        return 0;
+    }
+
     protected PathNavigation createNavigation(Level p_27815_) {
         FlyingPathNavigation flyingpathnavigation = new FlyingPathNavigation(this, p_27815_) {
             public boolean isStableDestination(BlockPos p_27947_) {
@@ -161,15 +156,22 @@ public class EntityAquamarine extends EntityGem implements FlyingAnimal {
         };
     }
 
-    public GempireAbilities[] possibleAbilities(){
-        return new GempireAbilities[]{
-                GempireAbilities.NO_ABILITY, GempireAbilities.TANK, GempireAbilities.BEEFCAKE, GempireAbilities.POWERHOUSE, GempireAbilities.UNHINGED, GempireAbilities.KINDERGARTENER
-        };
+    public ArrayList<Ability> possibleAbilities() {
+        ArrayList<Ability> arrayList = new ArrayList<>();
+        arrayList.add(new AbilityZilch());
+        arrayList.add(new AbilityTank());
+        arrayList.add(new AbilityBeefcake());
+        arrayList.add(new AbilityPowerhouse());
+        arrayList.add(new AbilityUnhinged());
+        arrayList.add(new AbilityKindergartener());
+        return arrayList;
     }
-    public GempireAbilities[] definiteAbilities(){
-        return new GempireAbilities[]{
-                GempireAbilities.HYDROKINESIS, GempireAbilities.PARALYSIS
-        };
+
+    public ArrayList<Ability> definiteAbilities() {
+        ArrayList<Ability> arrayList = new ArrayList<>();
+        arrayList.add(new AbilityHydrokinesis());
+        arrayList.add(new AbilityParalysis());
+        return arrayList;
     }
 
     public int generateSkinColorVariant() {
@@ -237,8 +239,6 @@ public class EntityAquamarine extends EntityGem implements FlyingAnimal {
     public int generateHardness() {
         return 8;
     }
-
-
 
     @Override
     public int getColor() {

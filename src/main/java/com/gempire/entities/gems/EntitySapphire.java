@@ -1,5 +1,7 @@
 package com.gempire.entities.gems;
 
+import com.gempire.entities.abilities.*;
+import com.gempire.entities.abilities.base.Ability;
 import com.gempire.entities.ai.EntityAIFollowAssigned;
 import com.gempire.entities.ai.EntityAIFollowOwner;
 import com.gempire.entities.ai.EntityAISludged;
@@ -9,7 +11,6 @@ import com.gempire.entities.other.EntityAbomination;
 import com.gempire.entities.other.EntityCrawler;
 import com.gempire.entities.other.EntityShambler;
 import com.gempire.entities.bases.EntityVaryingGem;
-import com.gempire.util.GempireAbilities;
 import com.gempire.util.GemPlacements;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -26,6 +27,8 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+
+import java.util.ArrayList;
 
 public class EntitySapphire extends EntityVaryingGem {
     public boolean defensive = false;
@@ -157,18 +160,20 @@ this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, EntityGem.class, 6.0F, 
         return this.random.nextInt(2);
     }
 
-    @Override
-    public GempireAbilities[] possibleAbilities() {
-        return new GempireAbilities[]{
-                GempireAbilities.NO_ABILITY, GempireAbilities.TANK, GempireAbilities.BEEFCAKE, GempireAbilities.UNHINGED
-        };
+    public ArrayList<Ability> possibleAbilities(){
+        ArrayList<Ability> arrayList = new ArrayList<>();
+        arrayList.add(new AbilityZilch());
+        arrayList.add(new AbilityTank());
+        arrayList.add(new AbilityBeefcake());
+        arrayList.add(new AbilityUnhinged());
+        return arrayList;
     }
 
-    @Override
-    public GempireAbilities[] definiteAbilities() {
-        return new GempireAbilities[]{
-                GempireAbilities.CRYOKINESIS, GempireAbilities.LUCK
-        };
+    public ArrayList<Ability> definiteAbilities(){
+        ArrayList<Ability> arrayList = new ArrayList<>();
+        arrayList.add(new AbilityCryokinesis());
+        arrayList.add(new AbilityLuck());
+        return arrayList;
     }
 
     @Override

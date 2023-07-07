@@ -1,10 +1,12 @@
 package com.gempire.entities.gems.starter;
 
+import com.gempire.entities.abilities.AbilityBrewEssence;
+import com.gempire.entities.abilities.AbilityZilch;
+import com.gempire.entities.abilities.base.Ability;
 import com.gempire.entities.ai.EntityAIFollowAssigned;
 import com.gempire.entities.ai.EntityAIFollowOwner;
 import com.gempire.entities.ai.EntityAIWander;
 import com.gempire.entities.bases.EntityStarterGem;
-import com.gempire.util.GempireAbilities;
 import com.gempire.util.GemPlacements;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.PathfinderMob;
@@ -22,6 +24,8 @@ import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.PanicGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
+
+import java.util.ArrayList;
 
 public class EntityShale extends EntityStarterGem {
 
@@ -74,11 +78,10 @@ public class EntityShale extends EntityStarterGem {
         return placement;
     }
 
-    @Override
-    public GempireAbilities[] possibleAbilities() {
-        return new GempireAbilities[]{
-                GempireAbilities.NO_ABILITY
-        };
+    public ArrayList<Ability> possibleAbilities(){
+        ArrayList<Ability> arrayList = new ArrayList<>();
+        arrayList.add(new AbilityZilch());
+        return arrayList;
     }
 
     @Override
@@ -86,11 +89,10 @@ public class EntityShale extends EntityStarterGem {
         return 1;
     }
 
-    @Override
-    public GempireAbilities[] definiteAbilities() {
-        return new GempireAbilities[]{
-                GempireAbilities.ESSENCE_BREWER
-        };
+    public ArrayList<Ability> definiteAbilities(){
+        ArrayList<Ability> arrayList = new ArrayList<>();
+        arrayList.add(new AbilityBrewEssence());
+        return arrayList;
     }
     @Override
     public boolean canOpenInventoryByDefault() {

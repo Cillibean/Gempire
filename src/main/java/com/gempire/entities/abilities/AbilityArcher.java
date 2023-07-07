@@ -5,7 +5,6 @@ import com.gempire.entities.abilities.interfaces.IRangedAbility;
 import com.gempire.entities.abilities.interfaces.ITaskAbility;
 import com.gempire.entities.abilities.interfaces.IViolentAbility;
 import com.gempire.entities.ai.EntityAIBowAttackGoal;
-import com.gempire.util.GempireAbilities;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.goal.Goal;
@@ -13,7 +12,7 @@ import net.minecraft.world.entity.ai.goal.Goal;
 public class AbilityArcher extends Ability implements IRangedAbility, IViolentAbility, ITaskAbility {
 
     public AbilityArcher() {
-        this.ability = GempireAbilities.ARCHER;
+        super(51, 2);
     }
 
     @Override

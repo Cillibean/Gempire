@@ -1,11 +1,12 @@
 package com.gempire.entities.gems;
 
+import com.gempire.entities.abilities.*;
+import com.gempire.entities.abilities.base.Ability;
 import com.gempire.entities.ai.EntityAIFollowAssigned;
 import com.gempire.entities.ai.EntityAIFollowOwner;
 import com.gempire.entities.ai.EntityAISludged;
 import com.gempire.entities.ai.EntityAIWander;
 import com.gempire.entities.bases.EntityGem;
-import com.gempire.util.GempireAbilities;
 import com.gempire.util.GemPlacements;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -20,8 +21,10 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
+import java.util.ArrayList;
+
 public class EntityMorganite extends EntityGem {
-    //TO-DO: IMPLEMENT MORGANITE. Sorts your items into Crystal Chests for you.
+    //TODO: IMPLEMENT MORGANITE. Sorts your items into Crystal Chests for you.
     // Will also have to model the chest and get it textured. Chests will lock and have filters and things, I'm presuming.
     public EntityMorganite(EntityType<? extends PathfinderMob> type, Level worldIn) {
         super(type, worldIn);
@@ -111,15 +114,19 @@ this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, EntityGem.class, 6.0F, 
         };
     }
 
-    public GempireAbilities[] possibleAbilities(){
-        return new GempireAbilities[]{
-                GempireAbilities.NO_ABILITY, GempireAbilities.TANK, GempireAbilities.BEEFCAKE, GempireAbilities.POWERHOUSE, GempireAbilities.UNHINGED
-        };
+    public ArrayList<Ability> possibleAbilities(){
+        ArrayList<Ability> arrayList = new ArrayList<>();
+        arrayList.add(new AbilityZilch());
+        arrayList.add(new AbilityTank());
+        arrayList.add(new AbilityBeefcake());
+        arrayList.add(new AbilityPowerhouse());
+        arrayList.add(new AbilityUnhinged());
+        return arrayList;
     }
-    public GempireAbilities[] definiteAbilities(){
-        return new GempireAbilities[]{
-                GempireAbilities.DESIGNER
-        };
+    public ArrayList<Ability> definiteAbilities(){
+        ArrayList<Ability> arrayList = new ArrayList<>();
+        arrayList.add(new AbilityDesigner());
+        return arrayList;
     }
     public int generateSkinColorVariant() {
         return 0;

@@ -1,13 +1,12 @@
 package com.gempire.entities.abilities;
 
 import com.gempire.entities.abilities.base.Ability;
-import com.gempire.util.GempireAbilities;
 import net.minecraft.network.chat.Component;
 
 public class AbilityScout extends Ability {
 
     public AbilityScout(){
-        this.ability = GempireAbilities.SCOUT;
+        super(19, 6);
     }
 
     @Override

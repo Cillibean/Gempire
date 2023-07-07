@@ -6,7 +6,6 @@ import com.gempire.entities.abilities.interfaces.ITaskAbility;
 import com.gempire.entities.abilities.interfaces.IViolentAbility;
 import com.gempire.entities.projectiles.WaterOrbEntity;
 import com.gempire.init.ModEffects;
-import com.gempire.util.GempireAbilities;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
@@ -21,7 +20,7 @@ import java.util.Random;
 public class AbilityHydrokinesis extends Ability implements IRangedAbility, IViolentAbility, ITaskAbility {
 
     public AbilityHydrokinesis() {
-        this.ability = GempireAbilities.HYDROKINESIS;
+        super(16, 1);
     }
 
     @Override

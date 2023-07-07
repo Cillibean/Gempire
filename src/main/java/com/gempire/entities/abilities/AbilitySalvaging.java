@@ -3,14 +3,13 @@ package com.gempire.entities.abilities;
 import com.gempire.entities.abilities.base.Ability;
 import com.gempire.entities.abilities.interfaces.ICraftingAbility;
 import com.gempire.init.ModItems;
-import com.gempire.util.GempireAbilities;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Items;
 
 public class AbilitySalvaging extends Ability implements ICraftingAbility {
 
     public AbilitySalvaging(){
-        this.ability = GempireAbilities.SALVAGING;
+        super(53, 4);
     }
 
     @Override

@@ -7,7 +7,6 @@ import com.gempire.entities.abilities.interfaces.IMeleeAbility;
 import com.gempire.entities.abilities.interfaces.IViolentAbility;
 import com.gempire.entities.bases.EntityGem;
 import com.gempire.init.ModEffects;
-import com.gempire.util.GempireAbilities;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -19,7 +18,7 @@ import java.util.Random;
 public class AbilityParalysis extends Ability implements IMeleeAbility, IEffectAbility, IEmotionalAbility, IViolentAbility {
 
     public AbilityParalysis() {
-        this.ability = GempireAbilities.PARALYSIS;
+        super(3, 2);
     }
 
     @Override

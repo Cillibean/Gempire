@@ -2,7 +2,6 @@ package com.gempire.entities.abilities;
 
 import com.gempire.entities.abilities.base.Ability;
 import com.gempire.entities.abilities.interfaces.IAttributeAbility;
-import com.gempire.util.GempireAbilities;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.network.chat.Component;
@@ -10,7 +9,7 @@ import net.minecraft.network.chat.Component;
 public class AbilityUnhinged extends Ability implements IAttributeAbility {
 
     public AbilityUnhinged(){
-        this.ability = GempireAbilities.UNHINGED;
+        super(9, 5);
     }
 
     @Override

@@ -4,7 +4,6 @@ import com.gempire.entities.abilities.base.Ability;
 import com.gempire.entities.abilities.interfaces.IEmotionalAbility;
 import com.gempire.entities.abilities.interfaces.IMeleeAbility;
 import com.gempire.entities.abilities.interfaces.IViolentAbility;
-import com.gempire.util.GempireAbilities;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.core.BlockPos;
@@ -13,7 +12,7 @@ import net.minecraft.network.chat.Component;
 public class AbilityPyrokinesis extends Ability implements IMeleeAbility, IEmotionalAbility, IViolentAbility {
 
     public AbilityPyrokinesis() {
-        this.ability = GempireAbilities.PYROKINESIS;
+        super(2, 1);
     }
 
     @Override

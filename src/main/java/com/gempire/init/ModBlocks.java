@@ -12,6 +12,13 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
 public class ModBlocks {
+
+    //TODO: IMPLEMENT BLOCKS
+    // PHOSPHORUS COLUMN
+    // ICE STATUES
+    // DIAMOND STAINED GLASS
+    // DESTAB FIELDS
+
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Gempire.MODID);
 
     public static final RegistryObject<LiquidBlock> PINK_ESSENCE_BLOCK = BLOCKS.register("pink_essence_block", () ->

@@ -2,6 +2,8 @@ package com.gempire.entities.gems;
 
 import com.gempire.container.PearlDefectiveUIContainer;
 import com.gempire.container.PearlUIContainer;
+import com.gempire.entities.abilities.AbilityZilch;
+import com.gempire.entities.abilities.base.Ability;
 import com.gempire.entities.ai.EntityAIFollowAssigned;
 import com.gempire.entities.ai.EntityAIFollowOwner;
 import com.gempire.entities.ai.EntityAISludged;
@@ -11,7 +13,6 @@ import com.gempire.entities.other.EntityAbomination;
 import com.gempire.entities.other.EntityCrawler;
 import com.gempire.entities.other.EntityShambler;
 import com.gempire.entities.bases.EntityVaryingGem;
-import com.gempire.util.GempireAbilities;
 import com.gempire.util.GemPlacements;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -40,6 +41,8 @@ import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.PanicGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
+
+import java.util.ArrayList;
 
 public class EntityPearl extends EntityVaryingGem {
     public static final int NUMBER_OF_SLOTS_PEARL = 58;
@@ -188,15 +191,13 @@ this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, EntityGem.class, 6.0F, 
         return false;
     }
 
-    public GempireAbilities[] possibleAbilities(){
-        return new GempireAbilities[]{
-                GempireAbilities.NO_ABILITY
-        };
+    public ArrayList<Ability> possibleAbilities(){
+        ArrayList<Ability> arrayList = new ArrayList<>();
+        arrayList.add(new AbilityZilch());
+        return arrayList;
     }
-    public GempireAbilities[] definiteAbilities(){
-        return new GempireAbilities[]{
-
-        };
+    public ArrayList<Ability> definiteAbilities() {
+        return new ArrayList<>();
     }
 
     public int generateSkinColorVariant() {

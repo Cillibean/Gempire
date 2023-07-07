@@ -1,13 +1,12 @@
 package com.gempire.entities.abilities;
 
 import com.gempire.entities.abilities.base.Ability;
-import com.gempire.util.GempireAbilities;
 import net.minecraft.network.chat.Component;
 
 public class AbilityVehicle extends Ability {
 
     public AbilityVehicle(){
-        this.ability = GempireAbilities.VEHICLE;
+        super(18, 2);
     }
 
     @Override

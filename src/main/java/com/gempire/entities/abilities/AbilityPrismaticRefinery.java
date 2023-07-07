@@ -3,12 +3,11 @@ package com.gempire.entities.abilities;
 import com.gempire.entities.abilities.base.Ability;
 import com.gempire.entities.abilities.interfaces.ICraftingAbility;
 import com.gempire.init.ModItems;
-import com.gempire.util.GempireAbilities;
 import net.minecraft.network.chat.Component;
 
 public class AbilityPrismaticRefinery extends Ability implements ICraftingAbility {
     public AbilityPrismaticRefinery(){
-        this.ability = GempireAbilities.REFINERY;
+        super(44, 4);
     }
 
     @Override

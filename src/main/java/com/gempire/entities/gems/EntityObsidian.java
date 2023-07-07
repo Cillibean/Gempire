@@ -1,11 +1,12 @@
 package com.gempire.entities.gems;
 
+import com.gempire.entities.abilities.*;
+import com.gempire.entities.abilities.base.Ability;
 import com.gempire.entities.ai.*;
 import com.gempire.entities.bases.EntityGem;
 import com.gempire.entities.other.EntityAbomination;
 import com.gempire.entities.other.EntityCrawler;
 import com.gempire.entities.other.EntityShambler;
-import com.gempire.util.GempireAbilities;
 import com.gempire.util.GemPlacements;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -17,6 +18,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+
+import java.util.ArrayList;
 
 public class EntityObsidian extends EntityGem implements ItemSteerable {
 
@@ -114,15 +117,23 @@ public class EntityObsidian extends EntityGem implements ItemSteerable {
         return false;
     }
 
-    public GempireAbilities[] possibleAbilities(){
-        return new GempireAbilities[]{
-                GempireAbilities.KNOCKBACK, GempireAbilities.PARALYSIS, GempireAbilities.NO_ABILITY, GempireAbilities.BEEFCAKE, GempireAbilities.POWERHOUSE, GempireAbilities.UNHINGED
-        };
+    public ArrayList<Ability> possibleAbilities(){
+        ArrayList<Ability> arrayList = new ArrayList<>();
+        arrayList.add(new AbilityZilch());
+        arrayList.add(new AbilityTank());
+        arrayList.add(new AbilityBeefcake());
+        arrayList.add(new AbilityPowerhouse());
+        arrayList.add(new AbilityUnhinged());
+        arrayList.add(new AbilityKnockback());
+        arrayList.add(new AbilityParalysis());
+        return arrayList;
     }
-    public GempireAbilities[] definiteAbilities(){
-        return new GempireAbilities[]{
-                GempireAbilities.CRYOKINESIS, GempireAbilities.VEHICLE
-        };
+
+    public ArrayList<Ability> definiteAbilities(){
+        ArrayList<Ability> arrayList = new ArrayList<>();
+        arrayList.add(new AbilityCryokinesis());
+        arrayList.add(new AbilityVehicle());
+        return arrayList;
     }
 
     public int generateSkinColorVariant() {

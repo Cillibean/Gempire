@@ -1,11 +1,12 @@
 package com.gempire.entities.gems;
 
+import com.gempire.entities.abilities.*;
+import com.gempire.entities.abilities.base.Ability;
 import com.gempire.entities.ai.*;
 import com.gempire.entities.bases.EntityGem;
 import com.gempire.entities.other.EntityAbomination;
 import com.gempire.entities.other.EntityCrawler;
 import com.gempire.entities.other.EntityShambler;
-import com.gempire.util.GempireAbilities;
 import com.gempire.util.GemPlacements;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -13,14 +14,17 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
+import net.minecraft.world.entity.animal.FlyingAnimal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 
-public class EntityLapis extends EntityGem {
-    //TO-DO: IMPLEMENT LAPIS LAZULI. A flying water gem with hydrokinesis, Vehicle ability (flight version), and can terraform with her water powers.
-    // You can fill buckets and empty glass bottles with water by right clicking her, and she cannot fly in the Nether as her wings evaporate.
+import java.util.ArrayList;
+
+public class EntityLapis extends EntityGem implements FlyingAnimal {
+    //TODO: IMPLEMENT LAPIS LAZULI. Vehicle ability (flight version).
+    // She cannot fly in the Nether as her wings evaporate.
     public EntityLapis(EntityType<? extends PathfinderMob> type, Level worldIn) {
         super(type, worldIn);
     }
@@ -47,7 +51,7 @@ public class EntityLapis extends EntityGem {
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, EntityShambler.class, 1, false, false, this::checkNotSludged));
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, EntityCrawler.class, 1, false, false, this::checkNotSludged));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Mob.class, 1, false, false, (p_234199_0_) -> p_234199_0_.getClassification(true) == MobCategory.MONSTER));
-                this.targetSelector.addGoal(1, new OwnerHurtByTargetGemGoal(this));
+        this.targetSelector.addGoal(1, new OwnerHurtByTargetGemGoal(this));
         this.targetSelector.addGoal(2, new OwnerHurtTargetGemGoal(this));
         this.goalSelector.addGoal(1, new EntityAISludged(this, 0.6));
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, EntityGem.class, 1, false, false, this::checkBothSludged));
@@ -76,6 +80,16 @@ this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, EntityGem.class, 6.0F, 
     }
     @Override
     public int generateSkinVariant() {
+        return 0;
+    }
+
+    @Override
+    public boolean hasWings() {
+        return true;
+    }
+
+    @Override
+    public int generateWingVariant() {
         return 0;
     }
 
@@ -118,15 +132,22 @@ this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, EntityGem.class, 6.0F, 
     {
         return false;
     }
-    public GempireAbilities[] possibleAbilities(){
-        return new GempireAbilities[]{
-                GempireAbilities.NO_ABILITY, GempireAbilities.TANK, GempireAbilities.BEEFCAKE, GempireAbilities.POWERHOUSE, GempireAbilities.UNHINGED, GempireAbilities.BERSERKER
-        };
+    public ArrayList<Ability> possibleAbilities(){
+        ArrayList<Ability> arrayList = new ArrayList<>();
+        arrayList.add(new AbilityZilch());
+        arrayList.add(new AbilityTank());
+        arrayList.add(new AbilityBeefcake());
+        arrayList.add(new AbilityPowerhouse());
+        arrayList.add(new AbilityUnhinged());
+        arrayList.add(new AbilityBerserker());
+        return arrayList;
     }
-    public GempireAbilities[] definiteAbilities(){
-        return new GempireAbilities[]{
-                GempireAbilities.HYDROKINESIS, GempireAbilities.VEHICLE
-        };
+
+    public ArrayList<Ability> definiteAbilities(){
+        ArrayList<Ability> arrayList = new ArrayList<>();
+        arrayList.add(new AbilityHydrokinesis());
+        arrayList.add(new AbilityVehicle());
+        return arrayList;
     }
 
     public int generateSkinColorVariant() {
@@ -207,5 +228,10 @@ this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, EntityGem.class, 6.0F, 
     @Override
     public int exitHoleSize() {
         return 3;
+    }
+
+    @Override
+    public boolean isFlying() {
+        return false;
     }
 }

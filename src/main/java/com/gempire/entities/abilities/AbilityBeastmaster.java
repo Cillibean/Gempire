@@ -2,7 +2,6 @@ package com.gempire.entities.abilities;
 
 import com.gempire.entities.abilities.base.Ability;
 import com.gempire.entities.abilities.interfaces.IIdleAbility;
-import com.gempire.util.GempireAbilities;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.Wolf;
@@ -14,7 +13,7 @@ import java.util.List;
 public class AbilityBeastmaster extends Ability implements IIdleAbility {
 
     public AbilityBeastmaster() {
-        this.ability = GempireAbilities.BEASTMASTER;
+        super(34, 1);
     }
 
     @Override
