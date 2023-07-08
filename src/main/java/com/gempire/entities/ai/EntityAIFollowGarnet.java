@@ -24,25 +24,30 @@ public class EntityAIFollowGarnet extends Goal {
         double maxDistance = Double.MAX_VALUE;
         if (!follower.getRebelled() && this.follower.getSludgeAmount() < 5 && follower.followingGarnet) {
                 for (EntityGem entity : list) {
-                    for (UUID uuid : entity.OWNERS) {
-                        if (this.follower.isOwner(uuid)) {
-                            if (!entity.isSpectator() || !entity.isInvisible() && follower.flocksTo(entity)) {
-                                double newDistance = entity.distanceToSqr(this.follower);
-                                if (newDistance <= maxDistance) {
-                                    maxDistance = newDistance;
-                                    this.toFollow = entity;
+                    if (entity != follower) {
+                        for (UUID uuid : entity.OWNERS) {
+                            if (this.follower.isOwner(uuid)) {
+                                if (!entity.isSpectator() || !entity.isInvisible() && follower.flocksTo(entity)) {
+                                    double newDistance = entity.distanceToSqr(this.follower);
+                                    if (newDistance <= maxDistance) {
+                                        maxDistance = newDistance;
+                                        this.toFollow = entity;
+                                        System.out.println(entity);
+                                    }
                                 }
                             }
                         }
                     }
                 }
             }
-        return this.toFollow != null && follower.getMovementType() == 1 && this.follower.distanceToSqr(this.toFollow) > Math.pow(3, 2) && follower.followingGarnet;
+        //System.out.println("boolean "+(this.toFollow != null && follower.getMovementType() == 1 && follower.followingGarnet));
+        //if (this.toFollow != null) System.out.println("distance bool "+(this.follower.distanceToSqr(this.toFollow) > Math.pow(3, 2)));
+        return this.toFollow != null && follower.getMovementType() == 1 && follower.followingGarnet && follower.followCooldown == 0;
     }
 
     @Override
     public boolean canContinueToUse() {
-        return this.toFollow != null && !this.follower.getNavigation().isDone() && this.follower.getMovementType() == 3 && this.follower.distanceToSqr(this.toFollow) > Math.pow(7, 2) && follower.followingGarnet;
+        return this.toFollow != null && !this.follower.getNavigation().isDone() && this.follower.getMovementType() == 1 && this.follower.distanceToSqr(this.toFollow) > Math.pow(7, 2) && follower.followingGarnet && follower.followCooldown == 0;
     }
 
     @Override
@@ -56,7 +61,6 @@ public class EntityAIFollowGarnet extends Goal {
 
     @Override
     public void stop() {
-        follower.followingGarnet = false;
         this.toFollow = null;
         this.follower.getNavigation().stop();
         if(!(this.follower instanceof EntitySpodumene)) {

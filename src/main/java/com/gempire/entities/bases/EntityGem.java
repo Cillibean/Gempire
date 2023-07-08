@@ -47,6 +47,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.RangedAttackMob;
@@ -144,6 +145,8 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
 
     public byte movementType = 1;
     public byte emotionMeter = 0;
+    public boolean meltdown = false;
+    public int meltdownCooldown = 0;
     public int initalSkinVariant = 0;
     public boolean setSkinVariantOnInitialSpawn = true;
 
@@ -152,6 +155,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     public int focusCounter = 100;
     public int maxFocusCounter = 100;
     public int ticking;
+    public int followCooldown = 0;
     public ArrayList<Item> inputList = new ArrayList<>();
     public ArrayList<Item> outputList = new ArrayList<>();
 
@@ -186,6 +190,10 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
 
     public ItemEntity spawnGem = null;
     public boolean chromaColourRequired;
+    public boolean stopGoals = false;
+    public int stopGoalsCooldown = 0;
+
+    public BlockPos stopGoalsPos;
     public boolean enemyDying;
     public LivingEntity enemy;
     private static final DynamicCommandExceptionType ERROR_STRUCTURE_INVALID = new DynamicCommandExceptionType((p_207534_) -> {
@@ -699,7 +707,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     }
 
     public Item getOutputItem(int i) {
-        if (this.canCraft()) return outputList.get(i);
+        if (this.canCraft() && !outputList.isEmpty()) return outputList.get(i);
         else return Items.AIR;
     }
 
@@ -763,9 +771,30 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     public void tick() {
         if (!this.level.isClientSide) {
             if (followingGarnet) {
-                if (random.nextInt(100) == 1) {
-                    //System.out.println("following garnet false");
-                    //followingGarnet = false;
+                if (!this.focusCheck() || random.nextInt(100) == 1) {
+                    followingGarnet = false;
+                    followCooldown = 100;
+                }
+            }
+            if (followCooldown != 0) {
+                followCooldown--;
+                followingGarnet = false;
+            }
+            if (stopGoals) {
+                this.teleportTo(stopGoalsPos.getX() + 0.5, stopGoalsPos.getY(), stopGoalsPos.getZ() + 0.5);
+                this.setDeltaMovement(0, 0, 0);
+                if (stopGoalsCooldown == 0) {
+                    stopGoals = false;
+                    stopGoalsPos = null;
+                } else {
+                    stopGoalsCooldown--;
+                }
+            }
+            if (meltdown) {
+                if (meltdownCooldown == 0) {
+                    meltdown = false;
+                } else {
+                    meltdownCooldown--;
                 }
             }
             if (isCrafting) {
@@ -1217,13 +1246,14 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                         }
                         this.emotionMeter++;
                     } else {
-                        System.out.println("outburst check");
                         for (Ability power : this.getAbilityPowers()) {
                             if (power instanceof IEmotionalAbility) {
-                                System.out.println("outburst");
                                 ((IEmotionalAbility) power).outburst();
                             }
+
                         }
+                        this.meltdown = true;
+                        this.meltdownCooldown = 100;
                         this.emotionMeter = 0;
                     }
                 }
@@ -1520,15 +1550,10 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         String locString = type.type + "_palette";
         System.out.println("[DEBUG] " + locString);
         ArrayList<Integer> colors = new ArrayList<>();
-        ResourceLocation loc = new ResourceLocation(this.getModID() + ":textures/entity/" + this.getWholeGemName().toLowerCase() + "/palettes/" + locString + ".png");
         ResourceLocation serverLoc = new ResourceLocation(this.getModID() + ":entity/" + this.getWholeGemName().toLowerCase() + "/palettes/" + locString + ".png");
         BufferedImage palette = null;
         try {
-            if (this.level.isClientSide) {
-                palette = ImageIO.read(Minecraft.getInstance().getResourceManager().getResource(loc).get().open());
-            } else {
-                palette = ImageIO.read(this.getServer().getServerResources().resourceManager().open(serverLoc));
-            }
+            palette = ImageIO.read(this.getServer().getServerResources().resourceManager().open(serverLoc));
             System.out.println("Palette Read!");
             for (int x = 0; x < palette.getWidth(); x++) {
                 int color = palette.getRGB(x, this.getSkinColorVariant());

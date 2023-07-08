@@ -71,7 +71,8 @@ public class AbilityHydrokinesis extends Ability implements IRangedAbility, IVio
     public void outburst() {
         //this.holder.level.setRainLevel(1);
         if (!this.holder.level.isClientSide) {
-            ((ServerLevel) this.holder.level).setWeatherParameters(0, this.holder.getRandom().nextInt(10), true, false);
+            System.out.println("rain");
+            ((ServerLevel) this.holder.level).setWeatherParameters(0, 1000, true, true);
         }
     }
 }

@@ -565,12 +565,12 @@
   "ability.gempire.refinery": "Refinery",
   "ability.gempire.abundance": "Abundance",
   "ability.gempire.designer": "Designer",
-  "ability.gempire.fortunate": "Fortunate (NYI)",
   "ability.gempire.kindergardener": "Kindergardener",
   "ability.gempire.mining": "Mining Inspiration",
   "ability.gempire.archer": "Archer",
   "ability.gempire.tinkerer": "Tinkerer",
   "ability.gempire.salvaging": "Salvaging",
+  "ability.gempire.hydration": "Hydration",
 
   "screens.gempire.health": "Health",
   "screens.gempire.damage": "Attack Damage",

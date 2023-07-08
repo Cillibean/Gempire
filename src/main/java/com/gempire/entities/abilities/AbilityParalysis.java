@@ -43,7 +43,7 @@ public class AbilityParalysis extends Ability implements IMeleeAbility, IEffectA
     public void outburst() {
         List<PathfinderMob> entities = this.holder.level.<PathfinderMob>getEntitiesOfClass(PathfinderMob.class, this.holder.getBoundingBox().inflate(20.0D, 10.0D, 20.0D));
         for(PathfinderMob entity : entities){
-            if(entity instanceof EntityGem || this.holder.isOwner(entity)){
+            if(entity instanceof EntityGem || this.holder.isOwner(entity.getUUID())){
                 continue;
             }
             entity.addEffect(effect());

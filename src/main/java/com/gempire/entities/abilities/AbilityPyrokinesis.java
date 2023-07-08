@@ -17,13 +17,11 @@ public class AbilityPyrokinesis extends Ability implements IMeleeAbility, IEmoti
 
     @Override
     public void outburst() {
-        System.out.println("pyro outburst");
         for (int x = 0; x < 3; x++){
             for (int z = 0; z < 3; z++){
                 for (int y = 0; y < 3; y++){
-                    BlockPos pos = new BlockPos(x - 3, y - 3, z - 3).offset(this.holder.blockPosition());
-                    System.out.println(pos);
-                    if(this.holder.level.getBlockState(pos).getBlock() == Blocks.AIR) {
+                    BlockPos pos = new BlockPos(x - 1, y, z - 1).offset(this.holder.blockPosition());
+                    if(this.holder.level.getBlockState(pos).getBlock() == Blocks.AIR && this.holder.level.getBlockState(pos.below()).getBlock() != Blocks.AIR) {
                         this.holder.level.setBlockAndUpdate(pos, Blocks.FIRE.defaultBlockState());
                     }
                 }

@@ -517,6 +517,8 @@ public class ItemGem extends Item {
         tag.putInt("skinColorVariant", gem.getSkinColorVariant());
         tag.putInt("skinColor", gem.getSkinColor());
         tag.putInt("hairColor", gem.getHairColor());
+        tag.putInt("wingColor", gem.getWingColor());
+        tag.putInt("wingVariant", gem.getWingVariant());
         tag.putInt("skinVariant", gem.getSkinVariant());
         tag.putInt("hairVariant", gem.getHairVariant());
         tag.putInt("CraftTicks", gem.ticking);
