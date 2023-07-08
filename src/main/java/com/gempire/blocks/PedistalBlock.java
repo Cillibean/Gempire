@@ -131,7 +131,7 @@ public class PedistalBlock extends FaceAttachedHorizontalDirectionalBlock implem
     }
 
     protected void playSound(@Nullable Player p_51068_, LevelAccessor p_51069_, BlockPos p_51070_, boolean p_51071_) {
-        p_51069_.playSound(p_51071_ ? p_51068_ : null, p_51070_, this.getSound(p_51071_), SoundSource.BLOCKS, 0.3F, p_51071_ ? 0.6F : 0.5F);
+        //p_51069_.playSound(p_51071_ ? p_51068_ : null, p_51070_, this.getSound(p_51071_), SoundSource.BLOCKS);
     }
     @Nullable
     public BlockState getStateForPlacement(BlockPlaceContext p_53184_) {
