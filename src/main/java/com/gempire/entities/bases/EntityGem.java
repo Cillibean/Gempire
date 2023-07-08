@@ -152,6 +152,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     public int focusCounter = 100;
     public int maxFocusCounter = 100;
     public int ticking;
+    public int followCooldown = 0;
     public ArrayList<Item> inputList = new ArrayList<>();
     public ArrayList<Item> outputList = new ArrayList<>();
 
@@ -763,10 +764,14 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     public void tick() {
         if (!this.level.isClientSide) {
             if (followingGarnet) {
-                if (random.nextInt(100) == 1) {
-                    //System.out.println("following garnet false");
-                    //followingGarnet = false;
+                if (!this.focusCheck() || random.nextInt(100) == 1) {
+                    followingGarnet = false;
+                    followCooldown = 100;
                 }
+            }
+            if (followCooldown != 0) {
+                followCooldown--;
+                followingGarnet = false;
             }
             if (isCrafting) {
                 if (!getItemBySlot(EquipmentSlot.MAINHAND).isEmpty()) {
