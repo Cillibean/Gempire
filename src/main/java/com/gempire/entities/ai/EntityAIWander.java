@@ -25,7 +25,7 @@ public class EntityAIWander extends WaterAvoidingRandomStrollGoal {
             if (garnet.getOwned() && !garnet.getRebelled()) {
                 for (UUID uuid: gem.OWNERS) {
                     if (garnet.isOwner(uuid)) {
-
+                        gem.followingGarnet = true;
                     }
                 }
             }
@@ -35,11 +35,11 @@ public class EntityAIWander extends WaterAvoidingRandomStrollGoal {
 
     @Override
     public boolean canUse() {
-        return this.gem.getMovementType() == 1 && super.canUse() && this.gem.getSludgeAmount() < 5;
+        return this.gem.getMovementType() == 1 && super.canUse() && this.gem.getSludgeAmount() < 5 && !gem.followingGarnet;
     }
 
     @Override
     public boolean canContinueToUse() {
-        return this.gem.getMovementType() == 1 && super.canContinueToUse() && !this.gem.getNavigation().isDone();
+        return this.gem.getMovementType() == 1 && super.canContinueToUse() && !this.gem.getNavigation().isDone() && !gem.followingGarnet;
     }
 }

@@ -31,8 +31,6 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import java.util.ArrayList;
 
 public class EntityAquamarine extends EntityGem implements FlyingAnimal {
-    //TODO: IMPLEMENT AQUAMARINE
-    // She cannot fly in the Nether as her wings evaporate.
     public EntityAquamarine(EntityType<? extends PathfinderMob> type, Level worldIn) {
         super(type, worldIn);
         if (worldIn.dimension() != Level.NETHER) this.moveControl = new FlyingMoveControl(this, 20, true);
@@ -41,7 +39,7 @@ public class EntityAquamarine extends EntityGem implements FlyingAnimal {
     public static AttributeSupplier.Builder registerAttributes() {
             return Mob.createMobAttributes()
                     .add(Attributes.MAX_HEALTH, 25.0D)
-                    .add(Attributes.MOVEMENT_SPEED, 2D)
+                    .add(Attributes.MOVEMENT_SPEED, 1D)
                     .add(Attributes.FLYING_SPEED, 6.0D)
                     .add(Attributes.ATTACK_DAMAGE, 3.0D)
                     .add(Attributes.ATTACK_SPEED, 1.0D);
@@ -135,7 +133,7 @@ public class EntityAquamarine extends EntityGem implements FlyingAnimal {
         groundPathNavigation.setCanFloat(false);
         groundPathNavigation.setCanPassDoors(true);
 
-        if (level.dimension() == Level.NETHER) {
+        if (level.dimension() != Level.NETHER) {
             return flyingpathnavigation;
         } else {
             return groundPathNavigation;

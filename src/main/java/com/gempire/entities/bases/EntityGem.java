@@ -442,6 +442,8 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         compound.putInt("skinColorVariant", this.getSkinColorVariant());
         compound.putInt("skinColor", this.getSkinColor());
         compound.putInt("hairColor", this.getHairColor());
+        compound.putInt("wingColor", this.getWingColor());
+        compound.putInt("wingVariant", this.getWingVariant());
         compound.putInt("skinVariant", this.getSkinVariant());
         compound.putInt("hairVariant", this.getHairVariant());
         compound.putInt("CraftTicks", this.ticking);
@@ -523,8 +525,10 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.setSkinColorVariant(compound.getInt("skinColorVariant"));
         this.setSkinColor(compound.getInt("skinColor"));
         this.setHairColor(compound.getInt("hairColor"));
+        this.setWingColor(compound.getInt("wingColor"));
         this.setSkinVariant(compound.getInt("skinVariant"));
         this.setHairVariant(compound.getInt("hairVariant"));
+        this.setWingVariant(compound.getInt("wingVariant"));
         this.setGemPlacement(compound.getInt("gemPlacement"));
         this.setGemColor(compound.getInt("gemColor"));
         this.ticking = compound.getInt("CraftTicks");
@@ -760,7 +764,8 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         if (!this.level.isClientSide) {
             if (followingGarnet) {
                 if (random.nextInt(100) == 1) {
-                    followingGarnet = false;
+                    //System.out.println("following garnet false");
+                    //followingGarnet = false;
                 }
             }
             if (isCrafting) {
@@ -1203,15 +1208,19 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                         }
                     }
                 }
+            }
                 if (this.isEmotional() && !source.is(DamageTypeTags.IS_EXPLOSION) && !source.is(DamageTypeTags.IS_FIRE)) {
+                    System.out.println("emotion meter " + emotionMeter);
                     if (this.emotionMeter <= this.EmotionThreshold()) {
                         if (this.EmotionThreshold() - this.emotionMeter < 5) {
                             this.level.addParticle(ParticleTypes.ANGRY_VILLAGER, this.getX(), this.getY() + 2, this.getZ(), 0, 0, 0);
                         }
                         this.emotionMeter++;
                     } else {
+                        System.out.println("outburst check");
                         for (Ability power : this.getAbilityPowers()) {
                             if (power instanceof IEmotionalAbility) {
+                                System.out.println("outburst");
                                 ((IEmotionalAbility) power).outburst();
                             }
                         }
@@ -1221,7 +1230,6 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                 if (source.getEntity() instanceof EntityCrawler || source.getEntity() instanceof EntityShambler || source.getEntity() instanceof EntityAbomination) {
                     setSludgeAmount(getSludgeAmount() + 1);
                 }
-            }
         }
         return super.hurt(source, amount);
     }
@@ -2143,9 +2151,10 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         }
     }
 
-    public void travel(Vec3 travelVector) {
-        this.travel(travelVector);
-    }
+    /*public void travel(Vec3 travelVector) {
+        super.travel(new Vec3(travelVector.x, travelVector.y, travelVector.z));
+        //super(this.);
+    }*/
 
     @Nullable
     public LivingEntity getControllingPassenger() {
