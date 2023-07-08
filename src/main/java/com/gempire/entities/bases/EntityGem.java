@@ -47,6 +47,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.RangedAttackMob;
@@ -187,6 +188,10 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
 
     public ItemEntity spawnGem = null;
     public boolean chromaColourRequired;
+    public boolean stopGoals = false;
+    public int stopGoalsCooldown = 0;
+
+    public BlockPos stopGoalsPos;
     public boolean enemyDying;
     public LivingEntity enemy;
     private static final DynamicCommandExceptionType ERROR_STRUCTURE_INVALID = new DynamicCommandExceptionType((p_207534_) -> {
@@ -773,6 +778,16 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                 followCooldown--;
                 followingGarnet = false;
             }
+            if (stopGoals) {
+                this.teleportTo(stopGoalsPos.getX() + 0.5, stopGoalsPos.getY(), stopGoalsPos.getZ() + 0.5);
+                this.setDeltaMovement(0, 0, 0);
+                if (stopGoalsCooldown == 0) {
+                    stopGoals = false;
+                    stopGoalsPos = null;
+                } else {
+                    stopGoalsCooldown--;
+                }
+            }
             if (isCrafting) {
                 if (!getItemBySlot(EquipmentSlot.MAINHAND).isEmpty()) {
                     ticking++;
@@ -1222,10 +1237,8 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                         }
                         this.emotionMeter++;
                     } else {
-                        System.out.println("outburst check");
                         for (Ability power : this.getAbilityPowers()) {
                             if (power instanceof IEmotionalAbility) {
-                                System.out.println("outburst");
                                 ((IEmotionalAbility) power).outburst();
                             }
                         }

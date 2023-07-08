@@ -2,14 +2,16 @@ package com.gempire.entities.abilities;
 
 import com.gempire.blocks.IceSpikeBlock;
 import com.gempire.entities.abilities.base.Ability;
-import com.gempire.entities.abilities.interfaces.IRangedAbility;
-import com.gempire.entities.abilities.interfaces.ITargetAbility;
-import com.gempire.entities.abilities.interfaces.ITaskAbility;
-import com.gempire.entities.abilities.interfaces.IViolentAbility;
+import com.gempire.entities.abilities.interfaces.*;
+import com.gempire.entities.bases.EntityGem;
 import com.gempire.entities.projectiles.IceShardEntity;
 import com.gempire.init.ModBlocks;
 import com.gempire.init.ModItems;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.level.block.AirBlock;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.BushBlock;
 import net.minecraft.world.entity.ai.goal.Goal;
@@ -24,7 +26,9 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.RangedAttackMob;
 
-public class AbilityCryokinesis extends Ability implements IRangedAbility, IViolentAbility, ITaskAbility, ITargetAbility {
+import java.util.List;
+
+public class AbilityCryokinesis extends Ability implements IRangedAbility, IViolentAbility, ITaskAbility, ITargetAbility, IEmotionalAbility {
 
     public AbilityCryokinesis() {
         super(4, 1);
@@ -82,5 +86,15 @@ public class AbilityCryokinesis extends Ability implements IRangedAbility, IViol
     @Override
     public Component getName() {
         return Component.translatable("ability.gempire.cryokinesis");
+    }
+
+    @Override
+    public void outburst() {
+        if (!this.holder.level.isClientSide) {
+             this.holder.level.setBlockAndUpdate(this.holder.getOnPos().above(), Blocks.SNOW.defaultBlockState());
+             this.holder.stopGoalsCooldown = 100;
+             this.holder.stopGoalsPos = this.holder.getOnPos().above();
+             this.holder.stopGoals = true;
+        }
     }
 }

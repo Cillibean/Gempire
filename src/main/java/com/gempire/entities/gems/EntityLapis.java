@@ -149,6 +149,7 @@ this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, EntityGem.class, 6.0F, 
         ArrayList<Ability> arrayList = new ArrayList<>();
         arrayList.add(new AbilityHydrokinesis());
         arrayList.add(new AbilityVehicle());
+        arrayList.add(new AbilityHydration());
         return arrayList;
     }
 
