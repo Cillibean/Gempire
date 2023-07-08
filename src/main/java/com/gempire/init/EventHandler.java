@@ -4,6 +4,7 @@ import com.gempire.Gempire;
 import com.gempire.entities.abilities.AbilityAbundance;
 import com.gempire.entities.abilities.AbilityLootmaster;
 import com.gempire.entities.abilities.base.Ability;
+import com.gempire.entities.ai.EntityAIAvoidSpinel;
 import com.gempire.entities.ai.EntityAIFollowSpinel;
 import com.gempire.entities.bases.EntityGem;
 import com.gempire.entities.gems.*;
@@ -37,17 +38,16 @@ public class EventHandler {
                 }));
                 if (entity instanceof PathfinderMob) {
                     entity.goalSelector.addGoal(1, new AvoidEntityGoal<>((PathfinderMob) entity, EntityAgate.class, 6.0F, 1.0D, 1.2D));
+                    entity.goalSelector.addGoal(2, new EntityAIFollowSpinel((Mob) event.getEntity(), 1.1D));
                 }
             }
             else if (event.getEntity().getClassification(true) == MobCategory.CREATURE)
             {
-                if (event.getEntity() instanceof EntityGem || event.getEntity() instanceof TamableAnimal)
-                {
-                }
-                else
+                if (!(event.getEntity() instanceof EntityGem || event.getEntity() instanceof TamableAnimal))
                 {
                     Mob entity = (Mob) event.getEntity();
                     entity.goalSelector.addGoal(3, new EntityAIFollowSpinel((Mob) event.getEntity(), 1.1D));
+                    entity.goalSelector.addGoal(2, new EntityAIAvoidSpinel((Mob) event.getEntity(), 1.1D));
                 }
             }
         }

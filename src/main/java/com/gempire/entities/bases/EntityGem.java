@@ -145,6 +145,8 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
 
     public byte movementType = 1;
     public byte emotionMeter = 0;
+    public boolean meltdown = false;
+    public int meltdownCooldown = 0;
     public int initalSkinVariant = 0;
     public boolean setSkinVariantOnInitialSpawn = true;
 
@@ -788,6 +790,13 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                     stopGoalsCooldown--;
                 }
             }
+            if (meltdown) {
+                if (meltdownCooldown == 0) {
+                    meltdown = false;
+                } else {
+                    meltdownCooldown--;
+                }
+            }
             if (isCrafting) {
                 if (!getItemBySlot(EquipmentSlot.MAINHAND).isEmpty()) {
                     ticking++;
@@ -1241,7 +1250,10 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                             if (power instanceof IEmotionalAbility) {
                                 ((IEmotionalAbility) power).outburst();
                             }
+
                         }
+                        this.meltdown = true;
+                        this.meltdownCooldown = 100;
                         this.emotionMeter = 0;
                     }
                 }
