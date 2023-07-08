@@ -19,7 +19,7 @@ mixin {
     config 'gempire.mixins.json'
 }
 
-version = '2.1 RELEASE CANDIDATE 2'
+version = '2.1'
 group = 'com.gempire' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'gempire'
 

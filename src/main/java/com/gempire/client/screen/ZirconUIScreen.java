@@ -63,7 +63,7 @@ public class ZirconUIScreen extends AbstractContainerScreen<ZirconUIContainer> {
         this.nameBox.setValue(name);
         //this.nameBox.setFocus(true);
         addRenderableWidget(this.nameBox);
-        this.setInitialFocus(this.nameBox);
+        //this.setInitialFocus(this.nameBox);
 
         /*this.addButton(new ImageButton(this.guiLeft + 19, this.guiTop + 41, 11, 21, 0, 0, 0, ZirconUIScreen.LEFT,
                 11, 21, (p_213029_1_) -> {
