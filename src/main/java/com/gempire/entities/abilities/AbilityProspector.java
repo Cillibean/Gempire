@@ -12,7 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AbilityProspector extends Ability implements IIdleAbility {
-
+    //TODO: FIX PROSPECTOR
+    // make it not lag
     public AbilityProspector(){
         super(22, 5);
     }

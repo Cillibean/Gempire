@@ -5,6 +5,7 @@ import com.gempire.entities.abilities.interfaces.ICraftingAbility;
 import com.gempire.init.ModItems;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.Level;
 
 public class AbilityHydration extends Ability implements ICraftingAbility {
     public AbilityHydration(){
@@ -13,14 +14,17 @@ public class AbilityHydration extends Ability implements ICraftingAbility {
 
     @Override
     public int recipeAmount() {
-        return 2;
+        if (holder.level.dimension() != Level.NETHER) return 2;
+        else return 0;
     }
     @Override
     public void setup() {
-        input.add(Items.BUCKET);
-        output.add(Items.WATER_BUCKET);
-        input.add(Items.GLASS_BOTTLE);
-        output.add(Items.POTION);
+        if (holder.level.dimension() != Level.NETHER) {
+            input.add(Items.BUCKET);
+            output.add(Items.WATER_BUCKET);
+            input.add(Items.GLASS_BOTTLE);
+            output.add(Items.POTION);
+        }
         holder.inputList = input;
         holder.outputList = output;
     }

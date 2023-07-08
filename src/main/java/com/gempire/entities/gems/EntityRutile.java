@@ -2,10 +2,7 @@ package com.gempire.entities.gems;
 
 import com.gempire.entities.abilities.*;
 import com.gempire.entities.abilities.base.Ability;
-import com.gempire.entities.ai.EntityAIFollowAssigned;
-import com.gempire.entities.ai.EntityAIFollowOwner;
-import com.gempire.entities.ai.EntityAISludged;
-import com.gempire.entities.ai.EntityAIWander;
+import com.gempire.entities.ai.*;
 import com.gempire.entities.bases.EntityGem;
 import com.gempire.entities.other.EntityAbomination;
 import com.gempire.entities.other.EntityCrawler;
@@ -28,7 +25,6 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import java.util.ArrayList;
 
 public class EntityRutile extends EntityGem {
-    //TODO: IMPLEMENT RUTILE. Rutile will detect ores, mob spawners.
     public EntityRutile(EntityType<? extends PathfinderMob> type, Level worldIn) {
         super(type, worldIn);
     }
@@ -41,6 +37,10 @@ public class EntityRutile extends EntityGem {
                 .add(Attributes.ATTACK_SPEED, 1.0D);
     }
 
+
+    public boolean flocksTo(EntityGem gem) {
+        return gem.isPopular();
+    }
     @Override
     public Float baseXScale() {
         return .95F;
@@ -63,7 +63,8 @@ public class EntityRutile extends EntityGem {
         this.goalSelector.addGoal(6, new PanicGoal(this, 1.1D));
         this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 4.0F));
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
-        this.goalSelector.addGoal(7, new EntityAIWander(this, 1.0D));
+        this.goalSelector.addGoal(8, new EntityAIWander(this, 1.0D));
+        this.goalSelector.addGoal(7, new EntityAIFollowGarnet(this, 1.0D));
         this.goalSelector.addGoal(7, new EntityAIFollowOwner(this, 1.0D));
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, EntityGem.class, 1, false, false, this::checkRebel));
         this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, Mob.class, 6.0F, 1.0D, 1.2D, (mob)-> mob.getClassification(true)== MobCategory.MONSTER));

@@ -23,8 +23,6 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import java.util.ArrayList;
 
 public class EntityLapis extends EntityGem implements FlyingAnimal {
-    //TODO: IMPLEMENT LAPIS LAZULI. Vehicle ability (flight version).
-    // She cannot fly in the Nether as her wings evaporate.
     public EntityLapis(EntityType<? extends PathfinderMob> type, Level worldIn) {
         super(type, worldIn);
     }
@@ -85,6 +83,10 @@ this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, EntityGem.class, 6.0F, 
 
     @Override
     public boolean hasWings() {
+        return true;
+    }
+
+    public boolean requiresHydrationToFly() {
         return true;
     }
 

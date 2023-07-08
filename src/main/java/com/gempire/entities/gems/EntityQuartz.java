@@ -29,7 +29,8 @@ public class EntityQuartz extends AbstractQuartz {
         this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 4.0F));
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
         this.goalSelector.addGoal(7, new EntityAIFollowAssigned(this, 1.0D));
-        this.goalSelector.addGoal(7, new EntityAIWander(this, 1.0D));
+        this.goalSelector.addGoal(8, new EntityAIWander(this, 1.0D));
+        this.goalSelector.addGoal(7, new EntityAIFollowGarnet(this, 1.0D));
         this.goalSelector.addGoal(7, new EntityAIFollowOwner(this, 1.0D));
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, EntityGem.class, 1, false, false, this::checkRebel));
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, EntityAbomination.class, 1, false, false, this::checkNotSludged));
@@ -44,6 +45,10 @@ public class EntityQuartz extends AbstractQuartz {
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, 1, false, false, this::checkSludged));
         this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, EntityGem.class, 6.0F, 1.0D, 1.2D, this::checkElseSludged));
    }
+
+    public boolean flocksTo(EntityGem gem) {
+        return gem.isPopular() || gem instanceof EntityEmerald;
+    }
 
     @Override
     public boolean hasMarkings() {

@@ -91,17 +91,13 @@ public class GemUIScreen extends AbstractContainerScreen<GemUIContainer> {
         this.nameBox.render(matrixStack, mouseX, mouseY, partialTicks);
         int scale = 0;
         float boundingy = (float) this.menu.gem.getBoundingBox().getYsize();
-        if (boundingy > 2.4)
-        {
+        if (boundingy > 2.4) {
             scale = 17;
         } else if (boundingy > 1.8) {
             scale = 25;
-        }
-        else
-        {
+        } else {
             scale = 30;
         }
-        //int scale = this.menu.gem.getBoundingBox().getYsize() > 1.8f ? 25 : 30;
         renderEntityInInventory(i + 135, j + 85, scale, (float)(i + 135) - mouseX, (float)(j + 75) - mouseY, this.menu.gem);
         drawStats(matrixStack, i, j);
     }

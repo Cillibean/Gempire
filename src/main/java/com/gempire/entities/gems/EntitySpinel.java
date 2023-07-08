@@ -27,7 +27,7 @@ import net.minecraft.world.level.Level;
 import java.util.ArrayList;
 
 public class EntitySpinel extends EntityVaryingGem {
-    //TODO: IMPLEMENT SPINEL. Will draw the attention of hostile mobs, and will give gifts to gems on the brink of rebellion or a mental meltdown.
+    //TODO: IMPLEMENT SPINEL. Will give gifts to gems on the brink of rebellion or a mental meltdown.
     // Gifts will range from items in her inventory, to stealing things out of nearby chests. bad spinel no crystal chest
     public EntitySpinel(EntityType<? extends PathfinderMob> type, Level worldIn) {
         super(type, worldIn);

@@ -1,12 +1,14 @@
 package com.gempire.entities.abilities;
 
 import com.gempire.entities.abilities.base.Ability;
+import com.gempire.entities.abilities.interfaces.IEmotionalAbility;
 import com.gempire.entities.abilities.interfaces.IRangedAbility;
 import com.gempire.entities.abilities.interfaces.ITaskAbility;
 import com.gempire.entities.abilities.interfaces.IViolentAbility;
 import com.gempire.entities.projectiles.WaterOrbEntity;
 import com.gempire.init.ModEffects;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -17,7 +19,7 @@ import net.minecraft.world.entity.ai.goal.RangedAttackGoal;
 
 import java.util.Random;
 
-public class AbilityHydrokinesis extends Ability implements IRangedAbility, IViolentAbility, ITaskAbility {
+public class AbilityHydrokinesis extends Ability implements IRangedAbility, IViolentAbility, ITaskAbility, IEmotionalAbility {
 
     public AbilityHydrokinesis() {
         super(16, 1);
@@ -63,5 +65,13 @@ public class AbilityHydrokinesis extends Ability implements IRangedAbility, IVio
     @Override
     public Component getName() {
         return Component.translatable("ability.gempire.hydrokinesis");
+    }
+
+    @Override
+    public void outburst() {
+        //this.holder.level.setRainLevel(1);
+        if (!this.holder.level.isClientSide) {
+            ((ServerLevel) this.holder.level).setWeatherParameters(0, this.holder.getRandom().nextInt(10), true, false);
+        }
     }
 }

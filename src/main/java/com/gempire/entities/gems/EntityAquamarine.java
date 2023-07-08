@@ -20,6 +20,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.FlyingMoveControl;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
+import net.minecraft.world.entity.ai.navigation.GroundPathNavigation;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.animal.FlyingAnimal;
 import net.minecraft.world.entity.player.Player;
@@ -38,7 +39,7 @@ public class EntityAquamarine extends EntityGem implements FlyingAnimal {
     public static AttributeSupplier.Builder registerAttributes() {
             return Mob.createMobAttributes()
                     .add(Attributes.MAX_HEALTH, 25.0D)
-                    .add(Attributes.MOVEMENT_SPEED, 0.4D)
+                    .add(Attributes.MOVEMENT_SPEED, 1D)
                     .add(Attributes.FLYING_SPEED, 6.0D)
                     .add(Attributes.ATTACK_DAMAGE, 3.0D)
                     .add(Attributes.ATTACK_SPEED, 1.0D);
@@ -66,6 +67,10 @@ public class EntityAquamarine extends EntityGem implements FlyingAnimal {
     @Override
     public Float baseZScale() {
         return .6F;
+    }
+
+    public boolean requiresHydrationToFly() {
+        return true;
     }
 
     protected void registerGoals() {
@@ -113,8 +118,8 @@ public class EntityAquamarine extends EntityGem implements FlyingAnimal {
         return 0;
     }
 
-    protected PathNavigation createNavigation(Level p_27815_) {
-        FlyingPathNavigation flyingpathnavigation = new FlyingPathNavigation(this, p_27815_) {
+    protected PathNavigation createNavigation(Level level) {
+        FlyingPathNavigation flyingpathnavigation = new FlyingPathNavigation(this, level) {
             public boolean isStableDestination(BlockPos p_27947_) {
                 return !this.level.getBlockState(p_27947_.below()).isAir();
             }
@@ -122,7 +127,17 @@ public class EntityAquamarine extends EntityGem implements FlyingAnimal {
         flyingpathnavigation.setCanOpenDoors(false);
         flyingpathnavigation.setCanFloat(false);
         flyingpathnavigation.setCanPassDoors(true);
-        return flyingpathnavigation;
+
+        GroundPathNavigation groundPathNavigation = new GroundPathNavigation(this, level);
+        groundPathNavigation.setCanOpenDoors(false);
+        groundPathNavigation.setCanFloat(false);
+        groundPathNavigation.setCanPassDoors(true);
+
+        if (level.dimension() != Level.NETHER) {
+            return flyingpathnavigation;
+        } else {
+            return groundPathNavigation;
+        }
     }
     @Override
     public int generateHairVariant() {

@@ -166,6 +166,8 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     public float rebelPoints = 0.1F;
     public int rebelTicks;
 
+    public boolean followingGarnet;
+
     public int abilityTicks;
     int crackChance = 50;
     int shatterChance = 200;
@@ -440,6 +442,8 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         compound.putInt("skinColorVariant", this.getSkinColorVariant());
         compound.putInt("skinColor", this.getSkinColor());
         compound.putInt("hairColor", this.getHairColor());
+        compound.putInt("wingColor", this.getWingColor());
+        compound.putInt("wingVariant", this.getWingVariant());
         compound.putInt("skinVariant", this.getSkinVariant());
         compound.putInt("hairVariant", this.getHairVariant());
         compound.putInt("CraftTicks", this.ticking);
@@ -521,8 +525,10 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.setSkinColorVariant(compound.getInt("skinColorVariant"));
         this.setSkinColor(compound.getInt("skinColor"));
         this.setHairColor(compound.getInt("hairColor"));
+        this.setWingColor(compound.getInt("wingColor"));
         this.setSkinVariant(compound.getInt("skinVariant"));
         this.setHairVariant(compound.getInt("hairVariant"));
+        this.setWingVariant(compound.getInt("wingVariant"));
         this.setGemPlacement(compound.getInt("gemPlacement"));
         this.setGemColor(compound.getInt("gemColor"));
         this.ticking = compound.getInt("CraftTicks");
@@ -755,25 +761,31 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
 
     @Override
     public void tick() {
-        if (!this.level.isClientSide && isCrafting) {
-            if (!getItemBySlot(EquipmentSlot.MAINHAND).isEmpty()) {
-                ticking++;
-                if (ticking >= getTimetoCraft()) {
-                    popShitOut();
-                }
-            } else {
-                isCrafting = false;
-                ticking = 0;
-                this.setCurrentRecipe(0);
-            }
-        }
-        if (!this.level.isClientSide && !getRebelled() && getOwned()) {
-            rebelTicks++;
-            if (rebelTicks >= 20 * (10*60)) {
-                checkRebel();
-            }
-        }
         if (!this.level.isClientSide) {
+            if (followingGarnet) {
+                if (random.nextInt(100) == 1) {
+                    //System.out.println("following garnet false");
+                    //followingGarnet = false;
+                }
+            }
+            if (isCrafting) {
+                if (!getItemBySlot(EquipmentSlot.MAINHAND).isEmpty()) {
+                    ticking++;
+                    if (ticking >= getTimetoCraft()) {
+                        popShitOut();
+                    }
+                } else {
+                    isCrafting = false;
+                    ticking = 0;
+                    this.setCurrentRecipe(0);
+                }
+            }
+            if (!getRebelled() && getOwned()) {
+                rebelTicks++;
+                if (rebelTicks >= 20 * (10 * 60)) {
+                    checkRebel();
+                }
+            }
             if (abilityTicks > 0) {
                 abilityTicks--;
             }
@@ -781,8 +793,8 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                 if (enemy.getHealth() <= 0) {
                     if (enemy.getLastHurtByMob() == this) {
                         dropXP(enemy);
-                        for(Ability ability : this.getAbilityPowers()){
-                            if(ability instanceof AbilityAbundance){
+                        for (Ability ability : this.getAbilityPowers()) {
+                            if (ability instanceof AbilityAbundance) {
                                 dropXP(enemy);
                             }
                         }
@@ -1196,15 +1208,19 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                         }
                     }
                 }
+            }
                 if (this.isEmotional() && !source.is(DamageTypeTags.IS_EXPLOSION) && !source.is(DamageTypeTags.IS_FIRE)) {
+                    System.out.println("emotion meter " + emotionMeter);
                     if (this.emotionMeter <= this.EmotionThreshold()) {
                         if (this.EmotionThreshold() - this.emotionMeter < 5) {
                             this.level.addParticle(ParticleTypes.ANGRY_VILLAGER, this.getX(), this.getY() + 2, this.getZ(), 0, 0, 0);
                         }
                         this.emotionMeter++;
                     } else {
+                        System.out.println("outburst check");
                         for (Ability power : this.getAbilityPowers()) {
                             if (power instanceof IEmotionalAbility) {
+                                System.out.println("outburst");
                                 ((IEmotionalAbility) power).outburst();
                             }
                         }
@@ -1214,7 +1230,6 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                 if (source.getEntity() instanceof EntityCrawler || source.getEntity() instanceof EntityShambler || source.getEntity() instanceof EntityAbomination) {
                     setSludgeAmount(getSludgeAmount() + 1);
                 }
-            }
         }
         return super.hurt(source, amount);
     }
@@ -1379,6 +1394,10 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     }
 
     public boolean hasWings() {
+        return false;
+    }
+
+    public boolean flocksTo(EntityGem gem) {
         return false;
     }
 
@@ -1943,20 +1962,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                 if((ability instanceof IEffectAbility || ability instanceof IAreaAbility) && !(ability instanceof IViolentAbility)){
                     this.entityData.set(EntityGem.USES_AREA_ABILITIES, true);
                 }
-                //abilities.add(GempireAbilities.getAbility(Integer.parseInt(s)));
             }
-            /*for (Abilities ability : abilities) {
-                powers.add(Ability.getAbilityFromAbilities(ability).assignAbility(this));
-                Class[] parameterType = new Class[0];
-                Ability ability1;
-                try {
-                    ability1 = Ability.ABILITY_FROM_ABILITIES.get(ability).getConstructor(parameterType).newInstance().assignAbility(this);
-                    powers.add(ability1);
-                }
-                catch (Exception e){
-                    e.printStackTrace();
-                }
-            }*/
         }
         else{
             ArrayList<Ability> nulab = new ArrayList<>();
@@ -2145,9 +2151,10 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         }
     }
 
-    public void travel(Vec3 travelVector) {
-        this.travel(travelVector);
-    }
+    /*public void travel(Vec3 travelVector) {
+        super.travel(new Vec3(travelVector.x, travelVector.y, travelVector.z));
+        //super(this.);
+    }*/
 
     @Nullable
     public LivingEntity getControllingPassenger() {
@@ -2348,6 +2355,14 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                 }
             }
         }
+        return false;
+    }
+
+    public boolean isPopular() {
+        return false;
+    }
+
+    public boolean requiresHydrationToFly() {
         return false;
     }
 

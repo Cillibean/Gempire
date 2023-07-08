@@ -14,6 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AbilitySpelunker extends Ability implements IIdleAbility {
+
+    //TODO: FIX SPELUNKER
+    // make it not lag
     boolean foundBlock = false;
 
     public AbilitySpelunker(){

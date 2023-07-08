@@ -20,12 +20,12 @@ public class EntityAIWander extends WaterAvoidingRandomStrollGoal {
 
     @Override
     public void start() {
-        List<EntityGarnet> list = this.gem.level.getEntitiesOfClass(EntityGarnet.class, this.gem.getBoundingBox().inflate(10.0D, 8.0D, 10.0D));
-        for (EntityGarnet garnet : list) {
+        List<EntityGem> list = this.gem.level.getEntitiesOfClass(EntityGem.class, this.gem.getBoundingBox().inflate(7.0D, 5.0D, 7.0D));
+        for (EntityGem garnet : list) {
             if (garnet.getOwned() && !garnet.getRebelled()) {
                 for (UUID uuid: gem.OWNERS) {
                     if (garnet.isOwner(uuid)) {
-
+                        gem.followingGarnet = true;
                     }
                 }
             }
@@ -35,11 +35,11 @@ public class EntityAIWander extends WaterAvoidingRandomStrollGoal {
 
     @Override
     public boolean canUse() {
-        return this.gem.getMovementType() == 1 && super.canUse() && this.gem.getSludgeAmount() < 5;
+        return this.gem.getMovementType() == 1 && super.canUse() && this.gem.getSludgeAmount() < 5 && !gem.followingGarnet;
     }
 
     @Override
     public boolean canContinueToUse() {
-        return this.gem.getMovementType() == 1 && super.canContinueToUse() && !this.gem.getNavigation().isDone();
+        return this.gem.getMovementType() == 1 && super.canContinueToUse() && !this.gem.getNavigation().isDone() && !gem.followingGarnet;
     }
 }

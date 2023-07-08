@@ -5,6 +5,9 @@ import net.minecraft.network.chat.Component;
 
 public class AbilityElectrokinesis extends Ability {
 
+    //TODO: IMPLEMENT ELECTROKINESIS
+    // need to have lightning target only one entity
+
     public AbilityElectrokinesis() {
         super(30, 1);
     }

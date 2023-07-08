@@ -25,8 +25,7 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import java.util.ArrayList;
 
 public class EntityLarimar extends EntityGem {
-    //TODO: IMPLEMENT LARIMAR. Will construct ice statues with different types of ice blocks, including Black Ice from kindergartened areas.
-    // Cryokinesis and Water Walker as abilities as well, of course.
+    //TODO: IMPLEMENT LARIMAR. Will construct ice statues with different types of ice blocks.
     public EntityLarimar(EntityType<? extends PathfinderMob> type, Level worldIn) {
         super(type, worldIn);
     }
@@ -37,6 +36,10 @@ public class EntityLarimar extends EntityGem {
                 .add(Attributes.MOVEMENT_SPEED, 0.4D)
                 .add(Attributes.ATTACK_DAMAGE, 2.0D)
                 .add(Attributes.ATTACK_SPEED, 1.0D);
+    }
+
+    public boolean flocksTo(EntityGem gem) {
+        return gem.isPopular();
     }
 
     @Override
@@ -61,7 +64,8 @@ public class EntityLarimar extends EntityGem {
         this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 4.0F));
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
         this.goalSelector.addGoal(7, new EntityAIFollowAssigned(this, 1.0D));
-        this.goalSelector.addGoal(7, new EntityAIWander(this, 1.0D));
+        this.goalSelector.addGoal(8, new EntityAIWander(this, 1.0D));
+        this.goalSelector.addGoal(7, new EntityAIFollowGarnet(this, 1.0D));
         this.goalSelector.addGoal(7, new EntityAIFollowOwner(this, 1.0D));
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, EntityGem.class, 1, false, false, this::checkRebel));
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, EntityAbomination.class, 1, false, false, this::checkNotSludged));

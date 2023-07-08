@@ -36,6 +36,11 @@ public class EntityGarnet extends EntityVaryingGem {
     }
 
     @Override
+    public boolean isPopular() {
+        return true;
+    }
+
+    @Override
     public Float baseXScale() {
         return 1.2F;
     }

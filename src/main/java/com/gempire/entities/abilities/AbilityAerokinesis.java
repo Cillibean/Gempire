@@ -5,6 +5,9 @@ import net.minecraft.network.chat.Component;
 
 public class AbilityAerokinesis extends Ability {
 
+    //TODO: IMPLEMENT AEROKINESIS
+    // blows things away i think - no damage dealt
+
     public AbilityAerokinesis(){
         super(31, 1);
     }

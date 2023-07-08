@@ -27,8 +27,6 @@ import java.util.ArrayList;
 
 public class EntityEmerald extends EntityGem implements RangedAttackMob {
     //TODO: IMPLEMENT EMERALD. Barters with Villagers and other trader type NPCs.
-    // Has an affinity for Quartzes and Jaspers (wandering jasper/quartz follow her i guess?).
-    // Electrokinesis (lightning manipulation) will be in her ability pool.
     public EntityEmerald(EntityType<? extends PathfinderMob> type, Level worldIn) {
         super(type, worldIn);
     }
@@ -40,7 +38,6 @@ public class EntityEmerald extends EntityGem implements RangedAttackMob {
                 .add(Attributes.MOVEMENT_SPEED, 0.4D)
                 .add(Attributes.ATTACK_DAMAGE, 4.0D)
                 .add(Attributes.ATTACK_SPEED, 0.5D);
-
     }
 
     @Override
