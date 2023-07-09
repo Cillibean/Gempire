@@ -1355,9 +1355,6 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             this.gameEvent(GameEvent.ENTITY_PLACE);
             this.kill();
         }
-        if(this instanceof EntityPearl) {
-            System.out.println(((EntityPearl) this).getItems1());
-        }
         super.die(source);
     }
 
@@ -1966,11 +1963,11 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                 return ((EntityVaryingGem)this).NameFromColor((byte) this.getSkinColorVariant());
             }
         }
-        return Objects.requireNonNull(ForgeRegistries.ENTITY_TYPES.getKey(this.getType())).toString().replaceAll("(?i)item", "").replaceAll(this.getModID(), "").replaceAll("(?i)gem", "").replaceAll("_", "").replaceAll(":", "").replaceAll(" ", "");
+        return Objects.requireNonNull(ForgeRegistries.ENTITY_TYPES.getKey(this.getType())).toString().replaceAll("(?i)item", "").replaceAll(this.getModID(), "").replaceAll("gempire", "").replaceAll("(?i)gem", "").replaceAll("_", "").replaceAll(":", "").replaceAll(" ", "");
     }
 
     public String getWholeGemName(){
-        return Objects.requireNonNull(ForgeRegistries.ENTITY_TYPES.getKey(this.getType())).toString().replaceAll("(?i)item", "").replaceAll(this.getModID(), "").replaceAll("(?i)gem", "").replaceAll("_", "").replaceAll(":", "").replaceAll(" ", "");
+        return Objects.requireNonNull(ForgeRegistries.ENTITY_TYPES.getKey(this.getType())).toString().replaceAll("(?i)item", "").replaceAll(this.getModID(), "").replaceAll("gempire", "").replaceAll("(?i)gem", "").replaceAll("_", "").replaceAll(":", "").replaceAll(" ", "");
     }
 
     //ABILITY STUFF

@@ -30,6 +30,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
@@ -50,6 +51,10 @@ import java.util.UUID;
 import static net.minecraftforge.fluids.FluidInteractionRegistry.addInteraction;
 
 public class ClientProxy {
+
+    public static CreativeModeTab GEMPIRE_GEMSTONES;
+    public static CreativeModeTab GEMPIRE_BLOCKS;
+    public static CreativeModeTab GEMPIRE_ITEMS;
     @Mod.EventBusSubscriber(modid = Gempire.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientModBusEvents {
     @SubscribeEvent
@@ -105,214 +110,213 @@ public class ClientProxy {
 
     @SubscribeEvent
     public static void buildContents(CreativeModeTabEvent.Register event) {
-        event.registerCreativeModeTab(new ResourceLocation(Gempire.MODID, "gemstones"),
+        GEMPIRE_GEMSTONES = event.registerCreativeModeTab(new ResourceLocation(Gempire.MODID, "gemstones"),
                 builder -> builder.title(Component.translatable("itemGroup.gemstones"))
                         // Set icon of creative tab
-                        .icon(() -> new ItemStack(ModItems.RUBY_GEM.get()))
-                        // Add default items to tab
-                        .displayItems((params, populator) -> {
+                        .icon(() -> new ItemStack(ModItems.RUBY_GEM.get())).displayItems((params, populator) -> {
                             populator.accept(ModItems.AQUAMARINE_GEM.get());
                             populator.accept(ModItems.NEPHRITE_GEM.get());
                             populator.accept(ModItems.BISMUTH_GEM.get());
-                                populator.accept(ModItems.NACRE_GEM.get());
-                                populator.accept(ModItems.PEBBLE_GEM.get());
-                                populator.accept(ModItems.SHALE_GEM.get());
-                                populator.accept(ModItems.MICA_GEM.get());
-                                populator.accept(ModItems.PERIDOT_GEM.get());
-                                populator.accept(ModItems.RUTILE_GEM.get());
-                                populator.accept(ModItems.BIXBITE_GEM.get());
-                                populator.accept(ModItems.EMERALD_GEM.get());
-                                populator.accept(ModItems.RUBY_GEM.get());
-                                populator.accept(ModItems.LAPIS_GEM.get());
-                                populator.accept(ModItems.LARIMAR_GEM.get());
-                                populator.accept(ModItems.MORGANITE_GEM.get());
-                                populator.accept(ModItems.OBSIDIAN_GEM.get());
+                            populator.accept(ModItems.NACRE_GEM.get());
+                            populator.accept(ModItems.PEBBLE_GEM.get());
+                            populator.accept(ModItems.SHALE_GEM.get());
+                            populator.accept(ModItems.MICA_GEM.get());
+                            populator.accept(ModItems.PERIDOT_GEM.get());
+                            populator.accept(ModItems.RUTILE_GEM.get());
+                            populator.accept(ModItems.BIXBITE_GEM.get());
+                            populator.accept(ModItems.EMERALD_GEM.get());
+                            populator.accept(ModItems.RUBY_GEM.get());
+                            populator.accept(ModItems.LAPIS_GEM.get());
+                            populator.accept(ModItems.LARIMAR_GEM.get());
+                            populator.accept(ModItems.MORGANITE_GEM.get());
+                            populator.accept(ModItems.OBSIDIAN_GEM.get());
 
-                                populator.accept(ModItems.PINK_SAPPHIRE_GEM.get());
-                                populator.accept(ModItems.ORANGE_SAPPHIRE_GEM.get());
-                                populator.accept(ModItems.YELLOW_SAPPHIRE_GEM.get());
-                                populator.accept(ModItems.LIME_SAPPHIRE_GEM.get());
-                                populator.accept(ModItems.GREEN_SAPPHIRE_GEM.get());
-                                populator.accept(ModItems.CYAN_SAPPHIRE_GEM.get());
-                                populator.accept(ModItems.LIGHT_BLUE_SAPPHIRE_GEM.get());
-                                populator.accept(ModItems.BLUE_SAPPHIRE_GEM.get());
-                                populator.accept(ModItems.PURPLE_SAPPHIRE_GEM.get());
-                                populator.accept(ModItems.MAGENTA_SAPPHIRE_GEM.get());
-                                populator.accept(ModItems.BROWN_SAPPHIRE_GEM.get());
-                                populator.accept(ModItems.LIGHT_GRAY_SAPPHIRE_GEM.get());
-                                populator.accept(ModItems.GRAY_SAPPHIRE_GEM.get());
-                                populator.accept(ModItems.BLACK_SAPPHIRE_GEM.get());
+                            populator.accept(ModItems.PINK_SAPPHIRE_GEM.get());
+                            populator.accept(ModItems.ORANGE_SAPPHIRE_GEM.get());
+                            populator.accept(ModItems.YELLOW_SAPPHIRE_GEM.get());
+                            populator.accept(ModItems.LIME_SAPPHIRE_GEM.get());
+                            populator.accept(ModItems.GREEN_SAPPHIRE_GEM.get());
+                            populator.accept(ModItems.CYAN_SAPPHIRE_GEM.get());
+                            populator.accept(ModItems.LIGHT_BLUE_SAPPHIRE_GEM.get());
+                            populator.accept(ModItems.BLUE_SAPPHIRE_GEM.get());
+                            populator.accept(ModItems.PURPLE_SAPPHIRE_GEM.get());
+                            populator.accept(ModItems.MAGENTA_SAPPHIRE_GEM.get());
+                            populator.accept(ModItems.BROWN_SAPPHIRE_GEM.get());
+                            populator.accept(ModItems.LIGHT_GRAY_SAPPHIRE_GEM.get());
+                            populator.accept(ModItems.GRAY_SAPPHIRE_GEM.get());
+                            populator.accept(ModItems.BLACK_SAPPHIRE_GEM.get());
 
-                                populator.accept(ModItems.PINK_SAPPHIRE_GEM.get());
-                                populator.accept(ModItems.ORANGE_SAPPHIRE_GEM.get());
-                                populator.accept(ModItems.YELLOW_SAPPHIRE_GEM.get());
-                                populator.accept(ModItems.LIME_SAPPHIRE_GEM.get());
-                                populator.accept(ModItems.GREEN_SAPPHIRE_GEM.get());
-                                populator.accept(ModItems.CYAN_SAPPHIRE_GEM.get());
-                                populator.accept(ModItems.LIGHT_BLUE_SAPPHIRE_GEM.get());
-                                populator.accept(ModItems.BLUE_SAPPHIRE_GEM.get());
-                                populator.accept(ModItems.PURPLE_SAPPHIRE_GEM.get());
-                                populator.accept(ModItems.MAGENTA_SAPPHIRE_GEM.get());
-                                populator.accept(ModItems.BROWN_SAPPHIRE_GEM.get());
-                                populator.accept(ModItems.LIGHT_GRAY_SAPPHIRE_GEM.get());
-                                populator.accept(ModItems.GRAY_SAPPHIRE_GEM.get());
-                                populator.accept(ModItems.BLACK_SAPPHIRE_GEM.get());
-                                populator.accept(ModItems.WHITE_SAPPHIRE_GEM.get());
+                            populator.accept(ModItems.PINK_SAPPHIRE_GEM.get());
+                            populator.accept(ModItems.ORANGE_SAPPHIRE_GEM.get());
+                            populator.accept(ModItems.YELLOW_SAPPHIRE_GEM.get());
+                            populator.accept(ModItems.LIME_SAPPHIRE_GEM.get());
+                            populator.accept(ModItems.GREEN_SAPPHIRE_GEM.get());
+                            populator.accept(ModItems.CYAN_SAPPHIRE_GEM.get());
+                            populator.accept(ModItems.LIGHT_BLUE_SAPPHIRE_GEM.get());
+                            populator.accept(ModItems.BLUE_SAPPHIRE_GEM.get());
+                            populator.accept(ModItems.PURPLE_SAPPHIRE_GEM.get());
+                            populator.accept(ModItems.MAGENTA_SAPPHIRE_GEM.get());
+                            populator.accept(ModItems.BROWN_SAPPHIRE_GEM.get());
+                            populator.accept(ModItems.LIGHT_GRAY_SAPPHIRE_GEM.get());
+                            populator.accept(ModItems.GRAY_SAPPHIRE_GEM.get());
+                            populator.accept(ModItems.BLACK_SAPPHIRE_GEM.get());
+                            populator.accept(ModItems.WHITE_SAPPHIRE_GEM.get());
 
-                                populator.accept(ModItems.PINK_ZIRCON_GEM.get());
-                                populator.accept(ModItems.RED_ZIRCON_GEM.get());
-                                populator.accept(ModItems.ORANGE_ZIRCON_GEM.get());
-                                populator.accept(ModItems.YELLOW_ZIRCON_GEM.get());
-                                populator.accept(ModItems.LIME_ZIRCON_GEM.get());
-                                populator.accept(ModItems.GREEN_ZIRCON_GEM.get());
-                                populator.accept(ModItems.CYAN_ZIRCON_GEM.get());
-                                populator.accept(ModItems.LIGHT_BLUE_ZIRCON_GEM.get());
-                                populator.accept(ModItems.BLUE_ZIRCON_GEM.get());
-                                populator.accept(ModItems.PURPLE_ZIRCON_GEM.get());
-                                populator.accept(ModItems.MAGENTA_ZIRCON_GEM.get());
-                                populator.accept(ModItems.BROWN_ZIRCON_GEM.get());
-                                populator.accept(ModItems.LIGHT_GRAY_ZIRCON_GEM.get());
-                                populator.accept(ModItems.GRAY_ZIRCON_GEM.get());
-                                populator.accept(ModItems.BLACK_ZIRCON_GEM.get());
-                                populator.accept(ModItems.WHITE_ZIRCON_GEM.get());
+                            populator.accept(ModItems.PINK_ZIRCON_GEM.get());
+                            populator.accept(ModItems.RED_ZIRCON_GEM.get());
+                            populator.accept(ModItems.ORANGE_ZIRCON_GEM.get());
+                            populator.accept(ModItems.YELLOW_ZIRCON_GEM.get());
+                            populator.accept(ModItems.LIME_ZIRCON_GEM.get());
+                            populator.accept(ModItems.GREEN_ZIRCON_GEM.get());
+                            populator.accept(ModItems.CYAN_ZIRCON_GEM.get());
+                            populator.accept(ModItems.LIGHT_BLUE_ZIRCON_GEM.get());
+                            populator.accept(ModItems.BLUE_ZIRCON_GEM.get());
+                            populator.accept(ModItems.PURPLE_ZIRCON_GEM.get());
+                            populator.accept(ModItems.MAGENTA_ZIRCON_GEM.get());
+                            populator.accept(ModItems.BROWN_ZIRCON_GEM.get());
+                            populator.accept(ModItems.LIGHT_GRAY_ZIRCON_GEM.get());
+                            populator.accept(ModItems.GRAY_ZIRCON_GEM.get());
+                            populator.accept(ModItems.BLACK_ZIRCON_GEM.get());
+                            populator.accept(ModItems.WHITE_ZIRCON_GEM.get());
 
-                                populator.accept(ModItems.PINK_PEARL_GEM.get());
-                                populator.accept(ModItems.RED_PEARL_GEM.get());
-                                populator.accept(ModItems.ORANGE_PEARL_GEM.get());
-                                populator.accept(ModItems.YELLOW_PEARL_GEM.get());
-                                populator.accept(ModItems.LIME_PEARL_GEM.get());
-                                populator.accept(ModItems.GREEN_PEARL_GEM.get());
-                                populator.accept(ModItems.CYAN_PEARL_GEM.get());
-                                populator.accept(ModItems.LIGHT_BLUE_PEARL_GEM.get());
-                                populator.accept(ModItems.BLUE_PEARL_GEM.get());
-                                populator.accept(ModItems.PURPLE_PEARL_GEM.get());
-                                populator.accept(ModItems.MAGENTA_PEARL_GEM.get());
-                                populator.accept(ModItems.BROWN_PEARL_GEM.get());
-                                populator.accept(ModItems.LIGHT_GRAY_PEARL_GEM.get());
-                                populator.accept(ModItems.GRAY_PEARL_GEM.get());
-                                populator.accept(ModItems.BLACK_PEARL_GEM.get());
-                                populator.accept(ModItems.WHITE_PEARL_GEM.get());
+                            populator.accept(ModItems.PINK_PEARL_GEM.get());
+                            populator.accept(ModItems.RED_PEARL_GEM.get());
+                            populator.accept(ModItems.ORANGE_PEARL_GEM.get());
+                            populator.accept(ModItems.YELLOW_PEARL_GEM.get());
+                            populator.accept(ModItems.LIME_PEARL_GEM.get());
+                            populator.accept(ModItems.GREEN_PEARL_GEM.get());
+                            populator.accept(ModItems.CYAN_PEARL_GEM.get());
+                            populator.accept(ModItems.LIGHT_BLUE_PEARL_GEM.get());
+                            populator.accept(ModItems.BLUE_PEARL_GEM.get());
+                            populator.accept(ModItems.PURPLE_PEARL_GEM.get());
+                            populator.accept(ModItems.MAGENTA_PEARL_GEM.get());
+                            populator.accept(ModItems.BROWN_PEARL_GEM.get());
+                            populator.accept(ModItems.LIGHT_GRAY_PEARL_GEM.get());
+                            populator.accept(ModItems.GRAY_PEARL_GEM.get());
+                            populator.accept(ModItems.BLACK_PEARL_GEM.get());
+                            populator.accept(ModItems.WHITE_PEARL_GEM.get());
 
-                                populator.accept(ModItems.PINK_SPINEL_GEM.get());
-                                populator.accept(ModItems.RED_SPINEL_GEM.get());
-                                populator.accept(ModItems.ORANGE_SPINEL_GEM.get());
-                                populator.accept(ModItems.YELLOW_SPINEL_GEM.get());
-                                populator.accept(ModItems.LIME_SPINEL_GEM.get());
-                                populator.accept(ModItems.GREEN_SPINEL_GEM.get());
-                                populator.accept(ModItems.CYAN_SPINEL_GEM.get());
-                                populator.accept(ModItems.LIGHT_BLUE_SPINEL_GEM.get());
-                                populator.accept(ModItems.BLUE_SPINEL_GEM.get());
-                                populator.accept(ModItems.PURPLE_SPINEL_GEM.get());
-                                populator.accept(ModItems.MAGENTA_SPINEL_GEM.get());
-                                populator.accept(ModItems.BROWN_SPINEL_GEM.get());
-                                populator.accept(ModItems.LIGHT_GRAY_SPINEL_GEM.get());
-                                populator.accept(ModItems.GRAY_SPINEL_GEM.get());
-                                populator.accept(ModItems.BLACK_SPINEL_GEM.get());
-                                populator.accept(ModItems.WHITE_SPINEL_GEM.get());
+                            populator.accept(ModItems.PINK_SPINEL_GEM.get());
+                            populator.accept(ModItems.RED_SPINEL_GEM.get());
+                            populator.accept(ModItems.ORANGE_SPINEL_GEM.get());
+                            populator.accept(ModItems.YELLOW_SPINEL_GEM.get());
+                            populator.accept(ModItems.LIME_SPINEL_GEM.get());
+                            populator.accept(ModItems.GREEN_SPINEL_GEM.get());
+                            populator.accept(ModItems.CYAN_SPINEL_GEM.get());
+                            populator.accept(ModItems.LIGHT_BLUE_SPINEL_GEM.get());
+                            populator.accept(ModItems.BLUE_SPINEL_GEM.get());
+                            populator.accept(ModItems.PURPLE_SPINEL_GEM.get());
+                            populator.accept(ModItems.MAGENTA_SPINEL_GEM.get());
+                            populator.accept(ModItems.BROWN_SPINEL_GEM.get());
+                            populator.accept(ModItems.LIGHT_GRAY_SPINEL_GEM.get());
+                            populator.accept(ModItems.GRAY_SPINEL_GEM.get());
+                            populator.accept(ModItems.BLACK_SPINEL_GEM.get());
+                            populator.accept(ModItems.WHITE_SPINEL_GEM.get());
 
-                                populator.accept(ModItems.PINK_TOPAZ_GEM.get());
-                                populator.accept(ModItems.YELLOW_TOPAZ_GEM.get());
-                                populator.accept(ModItems.BLUE_TOPAZ_GEM.get());
-                                populator.accept(ModItems.WHITE_TOPAZ_GEM.get());
+                            populator.accept(ModItems.PINK_TOPAZ_GEM.get());
+                            populator.accept(ModItems.YELLOW_TOPAZ_GEM.get());
+                            populator.accept(ModItems.BLUE_TOPAZ_GEM.get());
+                            populator.accept(ModItems.WHITE_TOPAZ_GEM.get());
 
-                                populator.accept(ModItems.SPODUMENE_SPODUMENE_GEM.get());
-                                populator.accept(ModItems.KUNZITE_SPODUMENE_GEM.get());
-                                populator.accept(ModItems.HIDDENITE_SPODUMENE_GEM.get());
-                                populator.accept(ModItems.TRIPHANE_SPODUMENE_GEM.get());
-                                populator.accept(ModItems.BLUE_SPODUMENE_SPODUMENE_GEM.get());
+                            populator.accept(ModItems.SPODUMENE_SPODUMENE_GEM.get());
+                            populator.accept(ModItems.KUNZITE_SPODUMENE_GEM.get());
+                            populator.accept(ModItems.HIDDENITE_SPODUMENE_GEM.get());
+                            populator.accept(ModItems.TRIPHANE_SPODUMENE_GEM.get());
+                            populator.accept(ModItems.BLUE_SPODUMENE_SPODUMENE_GEM.get());
 
-                                populator.accept(ModItems.ANDALUSITE_GARNET_GEM.get());
-                                populator.accept(ModItems.BEKILY_GARNET_GEM.get());
-                                populator.accept(ModItems.GRAPE_GARNET_GEM.get());
-                                populator.accept(ModItems.BLUE_GARNET_GEM.get());
-                                populator.accept(ModItems.GROSSULARITE_GARNET_GEM.get());
-                                populator.accept(ModItems.DEMANTOID_GARNET_GEM.get());
-                                populator.accept(ModItems.HESSONITE_GARNET_GEM.get());
-                                populator.accept(ModItems.IMPERIAL_GARNET_GEM.get());
-                                populator.accept(ModItems.KATOITE_GARNET_GEM.get());
-                                populator.accept(ModItems.IRIDESCENT_ANDRADITE_GARNET_GEM.get());
-                                populator.accept(ModItems.KIMZEYITE_GARNET_GEM.get());
-                                populator.accept(ModItems.LEUCO_GARNET_GEM.get());
-                                populator.accept(ModItems.MELANITE_GARNET_GEM.get());
-                                populator.accept(ModItems.PYROPE_GARNET_GEM.get());
-                                populator.accept(ModItems.RHODOLITE_GARNET_GEM.get());
-                                populator.accept(ModItems.TOPAZOLITE_GARNET_GEM.get());
-                                populator.accept(ModItems.UMBALITE_GARNET_GEM.get());
+                            populator.accept(ModItems.ANDALUSITE_GARNET_GEM.get());
+                            populator.accept(ModItems.BEKILY_GARNET_GEM.get());
+                            populator.accept(ModItems.GRAPE_GARNET_GEM.get());
+                            populator.accept(ModItems.BLUE_GARNET_GEM.get());
+                            populator.accept(ModItems.GROSSULARITE_GARNET_GEM.get());
+                            populator.accept(ModItems.DEMANTOID_GARNET_GEM.get());
+                            populator.accept(ModItems.HESSONITE_GARNET_GEM.get());
+                            populator.accept(ModItems.IMPERIAL_GARNET_GEM.get());
+                            populator.accept(ModItems.KATOITE_GARNET_GEM.get());
+                            populator.accept(ModItems.IRIDESCENT_ANDRADITE_GARNET_GEM.get());
+                            populator.accept(ModItems.KIMZEYITE_GARNET_GEM.get());
+                            populator.accept(ModItems.LEUCO_GARNET_GEM.get());
+                            populator.accept(ModItems.MELANITE_GARNET_GEM.get());
+                            populator.accept(ModItems.PYROPE_GARNET_GEM.get());
+                            populator.accept(ModItems.RHODOLITE_GARNET_GEM.get());
+                            populator.accept(ModItems.TOPAZOLITE_GARNET_GEM.get());
+                            populator.accept(ModItems.UMBALITE_GARNET_GEM.get());
 
-                                populator.accept(ModItems.AMETHYST_QUARTZ_GEM.get());
-                                populator.accept(ModItems.ANGEL_AURA_QUARTZ_QUARTZ_GEM.get());
-                                populator.accept(ModItems.BLUE_AVENTURINE_QUARTZ_GEM.get());
-                                populator.accept(ModItems.CARNELIAN_QUARTZ_GEM.get());
-                                populator.accept(ModItems.CHALCEDONY_QUARTZ_GEM.get());
-                                populator.accept(ModItems.CHERT_QUARTZ_GEM.get());
-                                populator.accept(ModItems.MILKY_QUARTZ_QUARTZ_GEM.get());
-                                populator.accept(ModItems.FLINT_QUARTZ_GEM.get());
-                                populator.accept(ModItems.CITRINE_QUARTZ_GEM.get());
-                                populator.accept(ModItems.CHERRY_QUARTZ_QUARTZ_GEM.get());
-                                populator.accept(ModItems.DUMORTIERITE_QUARTZ_QUARTZ_GEM.get());
-                                populator.accept(ModItems.LACE_AMETHYST_QUARTZ_GEM.get());
-                                populator.accept(ModItems.HELIOTROPE_QUARTZ_GEM.get());
-                                populator.accept(ModItems.ONYX_QUARTZ_GEM.get());
-                                populator.accept(ModItems.PRASIOLITE_QUARTZ_GEM.get());
-                                populator.accept(ModItems.ROSE_QUARTZ_QUARTZ_GEM.get());
-                                populator.accept(ModItems.SMOKY_QUARTZ_QUARTZ_GEM.get());
-                                populator.accept(ModItems.TIGERS_EYE_QUARTZ_GEM.get());
+                            populator.accept(ModItems.AMETHYST_QUARTZ_GEM.get());
+                            populator.accept(ModItems.ANGEL_AURA_QUARTZ_QUARTZ_GEM.get());
+                            populator.accept(ModItems.BLUE_AVENTURINE_QUARTZ_GEM.get());
+                            populator.accept(ModItems.CARNELIAN_QUARTZ_GEM.get());
+                            populator.accept(ModItems.CHALCEDONY_QUARTZ_GEM.get());
+                            populator.accept(ModItems.CHERT_QUARTZ_GEM.get());
+                            populator.accept(ModItems.MILKY_QUARTZ_QUARTZ_GEM.get());
+                            populator.accept(ModItems.FLINT_QUARTZ_GEM.get());
+                            populator.accept(ModItems.CITRINE_QUARTZ_GEM.get());
+                            populator.accept(ModItems.CHERRY_QUARTZ_QUARTZ_GEM.get());
+                            populator.accept(ModItems.DUMORTIERITE_QUARTZ_QUARTZ_GEM.get());
+                            populator.accept(ModItems.LACE_AMETHYST_QUARTZ_GEM.get());
+                            populator.accept(ModItems.HELIOTROPE_QUARTZ_GEM.get());
+                            populator.accept(ModItems.ONYX_QUARTZ_GEM.get());
+                            populator.accept(ModItems.PRASIOLITE_QUARTZ_GEM.get());
+                            populator.accept(ModItems.ROSE_QUARTZ_QUARTZ_GEM.get());
+                            populator.accept(ModItems.SMOKY_QUARTZ_QUARTZ_GEM.get());
+                            populator.accept(ModItems.TIGERS_EYE_QUARTZ_GEM.get());
 
-                                populator.accept(ModItems.BIGGS_JASPER_GEM.get());
-                                populator.accept(ModItems.BLACK_JASPER_GEM.get());
-                                populator.accept(ModItems.BLUE_SNAKESKIN_JASPER_GEM.get());
-                                populator.accept(ModItems.BUTTERFLY_JASPER_GEM.get());
-                                populator.accept(ModItems.GOLDEN_JASPER_GEM.get());
-                                populator.accept(ModItems.FLAME_JASPER_GEM.get());
-                                populator.accept(ModItems.KAMBABA_JASPER_GEM.get());
-                                populator.accept(ModItems.IMPERIAL_JASPER_GEM.get());
-                                populator.accept(ModItems.MATRIX_JASPER_GEM.get());
-                                populator.accept(ModItems.MOOKAITE_JASPER_GEM.get());
-                                populator.accept(ModItems.OCEAN_JASPER_GEM.get());
-                                populator.accept(ModItems.PICASSO_JASPER_GEM.get());
-                                populator.accept(ModItems.RAINFOREST_JASPER_GEM.get());
-                                populator.accept(ModItems.RIPPLE_JASPER_GEM.get());
-                                populator.accept(ModItems.ROYAL_PLUME_JASPER_GEM.get());
-                                populator.accept(ModItems.ZEBRA_JASPER_GEM.get());
-                                populator.accept(ModItems.RED_STRIPED_JASPER_GEM.get());
+                            populator.accept(ModItems.BIGGS_JASPER_GEM.get());
+                            populator.accept(ModItems.BLACK_JASPER_GEM.get());
+                            populator.accept(ModItems.BLUE_SNAKESKIN_JASPER_GEM.get());
+                            populator.accept(ModItems.BUTTERFLY_JASPER_GEM.get());
+                            populator.accept(ModItems.GOLDEN_JASPER_GEM.get());
+                            populator.accept(ModItems.FLAME_JASPER_GEM.get());
+                            populator.accept(ModItems.KAMBABA_JASPER_GEM.get());
+                            populator.accept(ModItems.IMPERIAL_JASPER_GEM.get());
+                            populator.accept(ModItems.MATRIX_JASPER_GEM.get());
+                            populator.accept(ModItems.MOOKAITE_JASPER_GEM.get());
+                            populator.accept(ModItems.OCEAN_JASPER_GEM.get());
+                            populator.accept(ModItems.PICASSO_JASPER_GEM.get());
+                            populator.accept(ModItems.RAINFOREST_JASPER_GEM.get());
+                            populator.accept(ModItems.RIPPLE_JASPER_GEM.get());
+                            populator.accept(ModItems.ROYAL_PLUME_JASPER_GEM.get());
+                            populator.accept(ModItems.ZEBRA_JASPER_GEM.get());
+                            populator.accept(ModItems.RED_STRIPED_JASPER_GEM.get());
 
-                                populator.accept(ModItems.ACHROITE_TOURMALINE_GEM.get());
-                                populator.accept(ModItems.ADACHIITE_TOURMALINE_GEM.get());
-                                populator.accept(ModItems.CANARY_TOURMALINE_GEM.get());
-                                populator.accept(ModItems.WATERMELON_TOURMALINE_GEM.get());
-                                populator.accept(ModItems.CONGO_TOURMALINE_GEM.get());
-                                populator.accept(ModItems.DRAVITE_TOURMALINE_GEM.get());
-                                populator.accept(ModItems.INDICOLITE_TOURMALINE_GEM.get());
-                                populator.accept(ModItems.MAGENTA_TOURMALINE_GEM.get());
-                                populator.accept(ModItems.PARAIBA_TOURMALINE_GEM.get());
-                                populator.accept(ModItems.OLENITE_TOURMALINE_GEM.get());
-                                populator.accept(ModItems.POVONDRAITE_TOURMALINE_GEM.get());
-                                populator.accept(ModItems.PUMPKIN_TOURMALINE_GEM.get());
-                                populator.accept(ModItems.ROSSMANITE_TOURMALINE_GEM.get());
-                                populator.accept(ModItems.SCHORL_TOURMALINE_GEM.get());
-                                populator.accept(ModItems.RUBELLITE_TOURMALINE_GEM.get());
-                                populator.accept(ModItems.SIBERITE_TOURMALINE_GEM.get());
-                                populator.accept(ModItems.VERDELITE_TOURMALINE_GEM.get());
+                            populator.accept(ModItems.ACHROITE_TOURMALINE_GEM.get());
+                            populator.accept(ModItems.ADACHIITE_TOURMALINE_GEM.get());
+                            populator.accept(ModItems.CANARY_TOURMALINE_GEM.get());
+                            populator.accept(ModItems.WATERMELON_TOURMALINE_GEM.get());
+                            populator.accept(ModItems.CONGO_TOURMALINE_GEM.get());
+                            populator.accept(ModItems.DRAVITE_TOURMALINE_GEM.get());
+                            populator.accept(ModItems.INDICOLITE_TOURMALINE_GEM.get());
+                            populator.accept(ModItems.MAGENTA_TOURMALINE_GEM.get());
+                            populator.accept(ModItems.PARAIBA_TOURMALINE_GEM.get());
+                            populator.accept(ModItems.OLENITE_TOURMALINE_GEM.get());
+                            populator.accept(ModItems.POVONDRAITE_TOURMALINE_GEM.get());
+                            populator.accept(ModItems.PUMPKIN_TOURMALINE_GEM.get());
+                            populator.accept(ModItems.ROSSMANITE_TOURMALINE_GEM.get());
+                            populator.accept(ModItems.SCHORL_TOURMALINE_GEM.get());
+                            populator.accept(ModItems.RUBELLITE_TOURMALINE_GEM.get());
+                            populator.accept(ModItems.SIBERITE_TOURMALINE_GEM.get());
+                            populator.accept(ModItems.VERDELITE_TOURMALINE_GEM.get());
 
-                                populator.accept(ModItems.BLUE_LACE_AGATE_GEM.get());
-                                populator.accept(ModItems.BOTSWANA_AGATE_GEM.get());
-                                populator.accept(ModItems.DENDRITIC_AGATE_GEM.get());
-                                populator.accept(ModItems.GRAPE_AGATE_GEM.get());
-                                populator.accept(ModItems.IRIS_AGATE_GEM.get());
-                                populator.accept(ModItems.DRAGONS_VEIN_AGATE_GEM.get());
-                                populator.accept(ModItems.ELLENSBURG_BLUE_AGATE_GEM.get());
-                                populator.accept(ModItems.ROSE_AGATE_GEM.get());
-                                populator.accept(ModItems.ORCA_AGATE_GEM.get());
-                                populator.accept(ModItems.HOLLY_BLUE_AGATE_GEM.get());
-                                populator.accept(ModItems.LAKE_SUPERIOR_AGATE_GEM.get());
-                                populator.accept(ModItems.SAKURA_AGATE_GEM.get());
-                                populator.accept(ModItems.TAWNY_AGATE_GEM.get());
-                                populator.accept(ModItems.TREE_AGATE_GEM.get());
-                                populator.accept(ModItems.TURRITELLA_AGATE_GEM.get());
-                                populator.accept(ModItems.WATER_AGATE_GEM.get());
-                                populator.accept(ModItems.WINGATE_PASS_PLUME_AGATE_GEM.get());
-                            }));
-            event.registerCreativeModeTab(new ResourceLocation(Gempire.MODID, "gempire_items"), builder ->
+                            populator.accept(ModItems.BLUE_LACE_AGATE_GEM.get());
+                            populator.accept(ModItems.BOTSWANA_AGATE_GEM.get());
+                            populator.accept(ModItems.DENDRITIC_AGATE_GEM.get());
+                            populator.accept(ModItems.GRAPE_AGATE_GEM.get());
+                            populator.accept(ModItems.IRIS_AGATE_GEM.get());
+                            populator.accept(ModItems.DRAGONS_VEIN_AGATE_GEM.get());
+                            populator.accept(ModItems.ELLENSBURG_BLUE_AGATE_GEM.get());
+                            populator.accept(ModItems.ROSE_AGATE_GEM.get());
+                            populator.accept(ModItems.ORCA_AGATE_GEM.get());
+                            populator.accept(ModItems.HOLLY_BLUE_AGATE_GEM.get());
+                            populator.accept(ModItems.LAKE_SUPERIOR_AGATE_GEM.get());
+                            populator.accept(ModItems.SAKURA_AGATE_GEM.get());
+                            populator.accept(ModItems.TAWNY_AGATE_GEM.get());
+                            populator.accept(ModItems.TREE_AGATE_GEM.get());
+                            populator.accept(ModItems.TURRITELLA_AGATE_GEM.get());
+                            populator.accept(ModItems.WATER_AGATE_GEM.get());
+                            populator.accept(ModItems.WINGATE_PASS_PLUME_AGATE_GEM.get());
+                        }));
+                        // Add default items to tab
+        GEMPIRE_ITEMS = event.registerCreativeModeTab(new ResourceLocation(Gempire.MODID, "gempire_items"), builder ->
                     // Set name of tab to display
                     builder.title(Component.translatable("itemGroup.gempire_items"))
                             // Set icon of creative tab
@@ -397,7 +401,7 @@ public class ClientProxy {
                                 populator.accept(ModItems.INJECTOR_PANEL.get());
                             })
             );
-            event.registerCreativeModeTab(new ResourceLocation(Gempire.MODID, "gempire_blocks"), builder ->
+        GEMPIRE_BLOCKS = event.registerCreativeModeTab(new ResourceLocation(Gempire.MODID, "gempire_blocks"), builder ->
                     // Set name of tab to display
                     builder.title(Component.translatable("itemGroup.gempire_blocks"))
                             // Set icon of creative tab
