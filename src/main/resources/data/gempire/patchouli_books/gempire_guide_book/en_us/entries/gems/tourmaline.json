@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "patchouli:entity",
-      "entity": "gempire:tourmaline{gemColor:14977977,skinColor:16429032,hairColor:16755907,marking2Color:4646815,markingColor:4646815,markingVariant:0,marking2Variant:0,hairVariant:0,insigniaColor:16,outfitColor:16,gemPlacement:13,skinColorVariant:16}",
+      "entity": "gempire:tourmaline{gemColor:14977977,skinColor:16429032,hairColor:16755907,marking2Color:4646815,markingColor:4646815,markingVariant:0,marking2Variant:0,hairVariant:0,insigniaColor:16,outfitColor:16,gemPlacement:13,skinColorVariant:16,xScale:1,yScale:1,zScale:1}",
       "name": "A Tourmaline",
       "rotate": "true",
       "offset": 0.2,
@@ -27,6 +27,10 @@
     {
       "type": "patchouli:text",
       "text": "This gem's Injector primer item is an Enchanted Golden Apple."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "This gem's preferred biome temperatures range between 0.95 and 1."
     }
   ]
 }

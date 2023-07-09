@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Healer is a rare ability that makes the gem give off a regeneration effect."
+      "text": "Healer is a rare ability that makes the gem give off a regeneration effect. If the gem has an emotional outburst, they will poison all entities around them instead."
     },
     {
       "type": "patchouli:text",
