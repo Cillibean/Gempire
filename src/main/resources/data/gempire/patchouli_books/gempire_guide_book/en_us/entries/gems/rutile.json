@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "patchouli:entity",
-      "entity": "gempire:rutile{hairColor:4654622,gemColor:10488843,skinColor:14823472,hairVariant:0,insigniaColor:1,outfitColor:14,gemPlacement:3,xscale:1,yscale:1,zscale:1}",
+      "entity": "gempire:rutile{hairColor:4654622,gemColor:10488843,skinColor:14823472,hairVariant:0,insigniaColor:1,outfitColor:14,gemPlacement:3,xScale:1,yScale:1,zScale:1}",
       "name": "A Rutile",
       "rotate": "true",
       "offset": 0.2,
@@ -27,6 +27,10 @@
     {
       "type": "patchouli:text",
       "text": "This gem's Injector primer item is a Fire Charge."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "This gem's preferred biome temperatures range between 1.2 and 2."
     }
   ]
 }

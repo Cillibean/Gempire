@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "patchouli:entity",
-      "entity": "gempire:spodumene{gemColor:16033690,skinColor:16217679,hairColor:15859711,hairVariant:0,insigniaColor:1,outfitColor:1,gemPlacement:11,xscale:1,yscale:1,zscale:1}",
+      "entity": "gempire:spodumene{gemColor:16033690,skinColor:16217679,hairColor:15859711,hairVariant:0,insigniaColor:1,outfitColor:1,gemPlacement:11,xScale:1,yScale:1,zScale:1}",
       "name": "A Spodumene",
       "rotate": "true",
       "text": "A fishing gem that can give the player Dolphin's Grace and water breathing in a small area around her."
@@ -26,6 +26,10 @@
     {
       "type": "patchouli:text",
       "text": "This gem's Injector primer item is a Heart of the Sea."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "This gem's preferred biome temperatures range between 0.5 and 0.8."
     }
   ]
 }

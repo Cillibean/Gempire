@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "patchouli:entity",
-      "entity": "gempire:emerald{gemColor:47224,skinColor:7601316,hairColor:1494665,hairVariant:0,insigniaColor:13,outfitColor:13,gemPlacement:2,xscale:1,yscale:1,zscale:1}",
+      "entity": "gempire:emerald{gemColor:47224,skinColor:7601316,hairColor:1494665,hairVariant:0,insigniaColor:13,outfitColor:13,gemPlacement:2,xScale:1,yScale:1,zScale:1}",
       "name": "An Emerald",
       "rotate": "true",
       "offset": 0.4,
@@ -27,6 +27,10 @@
     {
       "type": "patchouli:text",
       "text": "This gem's Injector primer item is an Emerald Block."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "This gem's preferred biome temperatures range between 0.95 and 1."
     }
   ]
 }

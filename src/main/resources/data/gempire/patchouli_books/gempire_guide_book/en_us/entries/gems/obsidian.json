@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "patchouli:entity",
-      "entity": "gempire:obsidian{gemColor:3160642,skinColor:2829619,hairColor:14672617,marking2Color:15264511,markingColor:15790327,markingVariant:0,hairVariant:0,insigniaColor:0,outfitColor:7,gemPlacement:2,xscale:1,yscale:1,zscale:1}",
+      "entity": "gempire:obsidian{gemColor:3160642,skinColor:2829619,hairColor:14672617,marking2Color:15264511,markingColor:15790327,markingVariant:0,hairVariant:0,insigniaColor:0,outfitColor:7,gemPlacement:2,xScale:1,yScale:1,zScale:1}",
       "name": "A Obsidian",
       "rotate": "true",
       "text": "A glass cannon solider gem that can be ridden around for quick transport."
@@ -26,6 +26,10 @@
     {
       "type": "patchouli:text",
       "text": "This gem's Injector primer item is an End Crystal."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "This gem's preferred biome temperatures range between 1.5 and 2."
     }
   ]
 }

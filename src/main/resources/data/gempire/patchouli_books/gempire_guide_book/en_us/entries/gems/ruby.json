@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "patchouli:entity",
-      "entity": "gempire:ruby{skinColor:15683662,hairVariant:1,insigniaColor:14,outfitColor:14,gemPlacement:14,hairColor:1179648,gemColor:11141145,xscale:1,yscale:1,zscale:1}",
+      "entity": "gempire:ruby{skinColor:15683662,hairVariant:1,insigniaColor:14,outfitColor:14,gemPlacement:14,hairColor:1179648,gemColor:11141145,xScale:1,yScale:1,zScale:1}",
       "name": "A Ruby",
       "rotate": "true",
       "text": "A beginner solider gem, best used in groups. Has pyrokinetic abilities."
@@ -26,6 +26,10 @@
     {
       "type": "patchouli:text",
       "text": "This gem's Injector primer item is a Netherite Ingot."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "This gem's preferred biome temperatures range between 1.2 and 2."
     }
   ]
 }

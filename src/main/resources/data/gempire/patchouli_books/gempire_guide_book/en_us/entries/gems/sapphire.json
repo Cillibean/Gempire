@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "patchouli:entity",
-      "entity": "gempire:sapphire{hairColor:11853054,gemColor:4353496,skinColor:8363263,hairVariant:0,insigniaColor:0,outfitColor:11,gemPlacement:13,xscale:1,yscale:1,zscale:1}",
+      "entity": "gempire:sapphire{hairColor:11853054,gemColor:4353496,skinColor:8363263,hairVariant:0,insigniaColor:0,outfitColor:11,gemPlacement:13,xScale:1,yScale:1,zScale:1}",
       "name": "A Sapphire",
       "rotate": "true",
       "text": "A small aristocratic gem that gives the luck effect, and uses cryokinesis in combat."
@@ -26,6 +26,10 @@
     {
       "type": "patchouli:text",
       "text": "This gem's Injector primer item is an Ender Eye."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "This gem's preferred biome temperatures range between 0 and 0.7."
     }
   ]
 }

@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Paralysis is an ability that gives gems a special emotional outburst, as when they outburst, enemies around them are paralyzed for a short time."
+      "text": "Paralysis is an ability that gives gems the power to paralyze enemies. When the gem has an emotional outburst, they'll paralyze entities around them, including players."
     },
     {
       "type": "patchouli:text",
