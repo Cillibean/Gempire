@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "patchouli:entity",
-      "entity": "gempire:pearl{hairColor:16363770,gemColor:15720175,skinColor:16116975,hairVariant:4,insigniaColor:6,outfitColor:6,gemPlacement:17,outfitVariant:5,insigniaVariant:3}",
+      "entity": "gempire:pearl{hairColor:16363770,gemColor:15720175,skinColor:16116975,hairVariant:4,insigniaColor:6,outfitColor:6,gemPlacement:17,outfitVariant:5,insigniaVariant:3,xscale:1,yscale:1,zscale:1}",
       "name": "A Pearl",
       "rotate": "true",
       "offset": 0.1,

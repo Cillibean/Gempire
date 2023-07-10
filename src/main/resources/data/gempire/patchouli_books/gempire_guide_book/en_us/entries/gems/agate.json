@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "patchouli:entity",
-      "entity": "gempire:agate{skinColorVariant:3,skinColor:10599677,hairColor:15460605,gemColor:9660408,gemPlacement:20,hairVariant:1,insigniaColor:3,outfitColor:3}",
+      "entity": "gempire:agate{skinColorVariant:3,skinColor:10599677,hairColor:15460605,gemColor:9660408,gemPlacement:20,hairVariant:1,insigniaColor:3,outfitColor:3,xscale:1,yscale:1,zscale:1}",
       "name": "An Agate",
       "rotate": "true",
       "offset": 0.2,

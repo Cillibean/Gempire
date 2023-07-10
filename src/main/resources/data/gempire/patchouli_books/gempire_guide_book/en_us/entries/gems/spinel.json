@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "patchouli:entity",
-      "entity": "gempire:spinel{hairColor:14296965,gemColor:16738220,skinColor:16754642,hairVariant:7,insigniaColor:0,outfitColor:6,gemPlacement:11}",
+      "entity": "gempire:spinel{hairColor:14296965,gemColor:16738220,skinColor:16754642,hairVariant:7,insigniaColor:0,outfitColor:6,gemPlacement:11,xscale:1,yscale:1,zscale:1}",
       "name": "A Spinel",
       "rotate": "true",
       "offset": 0.2,

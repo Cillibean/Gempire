@@ -511,7 +511,7 @@
   "messages.gempire.entity.enchant_not_apply": "This tool can't accept this enchantment...",
   "messages.gempire.entity.need_lapis": "She needs more Lapis Lazuli...",
 
-  "itemGroup.gemstones" : "Gemstones",
+  "itemGroup.gempire_gemstones" : "Gemstones",
   "itemGroup.gempire_items" : "Items",
   "itemGroup.gempire_blocks" : "Blocks",
 

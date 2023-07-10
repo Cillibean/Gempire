@@ -34,7 +34,6 @@ public class AbilityBeastmaster extends Ability implements IIdleAbility {
             if (!listOwned.contains(wolf) && listOwned.size() < 5) {
                 if (!wolf.isTame()) {
                     if (holder.getOwned()) {
-                        if (holder.currentPlayer != null) {
                             if (holder.abilityTicks == 0) {
                                 holder.getNavigation().moveTo(wolf, 1);
                                 holder.lookAt(wolf, 90F, 90F);
@@ -49,7 +48,6 @@ public class AbilityBeastmaster extends Ability implements IIdleAbility {
                                     listOwned.add(wolf);
                                 }
                             }
-                        }
                     }
                 } else if (holder.getRebelled()) {
                     if (holder.abilityTicks == 0) {

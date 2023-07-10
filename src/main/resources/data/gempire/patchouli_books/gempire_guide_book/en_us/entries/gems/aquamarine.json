@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "patchouli:entity",
-      "entity": "gempire:aquamarine{gemColor:5039871,skinColor:10944249,hairColor:36551,hairVariant:0,insigniaColor:3,outfitColor:3,gemPlacement:6}",
+      "entity": "gempire:aquamarine{gemColor:5039871,skinColor:10944249,hairColor:36551,hairVariant:0,insigniaColor:3,outfitColor:3,gemPlacement:6,xscale:1,yscale:1,zscale:1}",
       "name": "A Aquamarine",
       "rotate": "true",
       "text": "A flying gem that can paralyze opponents, use water projectiles to attack with, and can rarely tame gems for you."

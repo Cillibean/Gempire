@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "patchouli:entity",
-      "entity": "gempire:shale{gemColor:9936556,skinColor:12041413,hairVariant:1,hairColor:12041413,insigniaColor:11,outfitColor:11}",
+      "entity": "gempire:shale{gemColor:9936556,skinColor:12041413,hairVariant:1,hairColor:12041413,insigniaColor:11,outfitColor:11,xscale:1,yscale:1,zscale:1}",
       "name": "A Shale",
       "rotate": "true",
       "text": "A small gem that can be used to make Essence by giving her a Bucket of Gem Slush."

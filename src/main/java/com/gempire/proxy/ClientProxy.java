@@ -20,6 +20,8 @@ import com.gempire.tileentities.WarpPadTE;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.*;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -110,10 +112,11 @@ public class ClientProxy {
 
     @SubscribeEvent
     public static void buildContents(CreativeModeTabEvent.Register event) {
-        GEMPIRE_GEMSTONES = event.registerCreativeModeTab(new ResourceLocation(Gempire.MODID, "gemstones"),
-                builder -> builder.title(Component.translatable("itemGroup.gemstones"))
+        GEMPIRE_GEMSTONES = event.registerCreativeModeTab(new ResourceLocation(Gempire.MODID, "gempire_gemstones"),
+                builder -> builder.title(Component.translatable("itemGroup.gempire_gemstones"))
                         // Set icon of creative tab
-                        .icon(() -> new ItemStack(ModItems.RUBY_GEM.get())).displayItems((params, populator) -> {
+                        .icon(() -> new ItemStack(ModItems.RUBY_GEM.get()))
+                        .displayItems((params, populator) -> {
                             populator.accept(ModItems.AQUAMARINE_GEM.get());
                             populator.accept(ModItems.NEPHRITE_GEM.get());
                             populator.accept(ModItems.BISMUTH_GEM.get());
@@ -314,7 +317,9 @@ public class ClientProxy {
                             populator.accept(ModItems.TURRITELLA_AGATE_GEM.get());
                             populator.accept(ModItems.WATER_AGATE_GEM.get());
                             populator.accept(ModItems.WINGATE_PASS_PLUME_AGATE_GEM.get());
-                        }));
+                        })
+                        .build()
+        );
                         // Add default items to tab
         GEMPIRE_ITEMS = event.registerCreativeModeTab(new ResourceLocation(Gempire.MODID, "gempire_items"), builder ->
                     // Set name of tab to display
@@ -400,6 +405,7 @@ public class ClientProxy {
                                 populator.accept(ModItems.PRIME_BOOST.get());
                                 populator.accept(ModItems.INJECTOR_PANEL.get());
                             })
+                            .build()
             );
         GEMPIRE_BLOCKS = event.registerCreativeModeTab(new ResourceLocation(Gempire.MODID, "gempire_blocks"), builder ->
                     // Set name of tab to display
@@ -481,6 +487,7 @@ public class ClientProxy {
                                 populator.accept(ModBlocks.SMOOTH_RUINED_MARBLE_STAIRS.get());
                                 populator.accept(ModBlocks.SMOOTH_RUINED_MARBLE_SLAB.get());
                             })
+                            .build()
             );
         }
         @SubscribeEvent
@@ -494,6 +501,15 @@ public class ClientProxy {
     @SubscribeEvent
     public static void doSetup(FMLClientSetupEvent event) {
         ModItemProperties.addCustomItemProperties();
+
+        /*ItemBlockRenderTypes.setRenderLayer(ModFluids.PINK_ESSENCE_FLOWING.get(), RenderType.translucent());
+        ItemBlockRenderTypes.setRenderLayer(ModFluids.PINK_ESSENCE.get(), RenderType.translucent());
+        ItemBlockRenderTypes.setRenderLayer(ModFluids.WHITE_ESSENCE_FLOWING.get(), RenderType.translucent());
+        ItemBlockRenderTypes.setRenderLayer(ModFluids.WHITE_ESSENCE.get(), RenderType.translucent());
+        ItemBlockRenderTypes.setRenderLayer(ModFluids.YELLOW_ESSENCE_FLOWING.get(), RenderType.translucent());
+        ItemBlockRenderTypes.setRenderLayer(ModFluids.YELLOW_ESSENCE.get(), RenderType.translucent());
+        ItemBlockRenderTypes.setRenderLayer(ModFluids.BLUE_ESSENCE_FLOWING.get(), RenderType.translucent());
+        ItemBlockRenderTypes.setRenderLayer(ModFluids.BLUE_ESSENCE.get(), RenderType.translucent());*/
 
         addInteraction(ModFluidTypes.WHITE_ESSENCE_FLUID_TYPE.get(), new FluidInteractionRegistry.InteractionInformation(
                 ForgeMod.WATER_TYPE.get(),

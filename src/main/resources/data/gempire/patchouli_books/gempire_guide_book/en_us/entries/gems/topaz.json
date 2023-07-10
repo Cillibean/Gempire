@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "patchouli:entity",
-      "entity": "gempire:topaz{hairColor:16580036,gemColor:16773200,skinColor:16181310,hairVariant:0,insigniaColor:4,outfitColor:4,gemPlacement:3}",
+      "entity": "gempire:topaz{hairColor:16580036,gemColor:16773200,skinColor:16181310,hairVariant:0,insigniaColor:4,outfitColor:4,gemPlacement:3,xscale:1,yscale:1,zscale:1}",
       "name": "A Topaz",
       "rotate": "true",
       "text": "A solider gem that's good for guarding, as she returns to her post."
