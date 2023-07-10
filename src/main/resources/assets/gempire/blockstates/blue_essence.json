@@ -1,6 +1,7 @@
-
 {
   "variants": {
-    "": { "model": "gempire:block/essence" }
+    "": {
+      "model": "minecraft:block/essence"
+    }
   }
 }

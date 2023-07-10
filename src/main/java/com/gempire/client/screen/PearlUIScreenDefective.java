@@ -52,7 +52,7 @@ public class PearlUIScreenDefective extends AbstractContainerScreen<PearlDefecti
         //this.nameBox.setFocus(true);
         //poof button
         addRenderableWidget(this.nameBox);
-        this.setInitialFocus(this.nameBox);
+        //this.setInitialFocus(this.nameBox);
         int i = this.menu.gem.getId();
         Screen screen = this;
         Button.Builder builder = new Button.Builder(Component.translatable("screens.gempire.poof"), button -> {

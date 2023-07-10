@@ -60,7 +60,7 @@ public class PearlUIScreen extends AbstractContainerScreen<PearlUIContainer> {
         this.nameBox.setValue(name);
         //this.nameBox.setFocus(true);
         addRenderableWidget(this.nameBox);
-        this.setInitialFocus(this.nameBox);
+        //this.setInitialFocus(this.nameBox);
 
         addRenderableWidget(new ImageButton(this.leftPos + 241, this.topPos + 11, 11, 9, 0, 0, 0, PearlUIScreen.LEFT,
                 11, 9, (p_213029_1_) -> {

@@ -205,7 +205,7 @@ public class ItemGem extends Item {
                 if (Objects.equals(this.ID, Gempire.MODID)) {
                     namee = Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(this)).toString().replaceAll("gempire", "").replaceAll("gem", "").replaceAll(":", "").replaceAll(" ", "");
                 } else {
-                    namee = Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(this)).toString().replaceAll(this.ID, "").replaceAll("gem", "").replaceAll(":", "").replaceAll(" ", "");
+                    namee = Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(this)).toString().replaceAll(this.ID, "").replaceAll("gempire", "").replaceAll("gem", "").replaceAll(":", "").replaceAll(" ", "");
                 }
                 //This whole section here checks for variations in color so it can spawn the correct type of gem
                 String[] ainmneacha = namee.split("_");
@@ -228,7 +228,8 @@ public class ItemGem extends Item {
                     if (Objects.equals(this.ID, Gempire.MODID)) {
                         gemm = (RegistryObject<EntityType<EntityPebble>>) ModEntities.class.getField(namee.toUpperCase()).get(null);
                     } else {
-                        gemm = (RegistryObject<EntityType<EntityPebble>>) AddonHandler.ADDON_ENTITY_REGISTRIES.get(this.ID).getField(namee.toUpperCase()).get(null);
+                        gemm = (RegistryObject<EntityType<EntityPebble>>) AddonHandler.ENTITY_ADDON_ENTITY_REGISTRIES.get(namee).getField(namee.toUpperCase()).get(null);
+                        //gemm = (RegistryObject<EntityType<EntityPebble>>) AddonHandler.ADDON_ENTITY_REGISTRIES.get(this.ID).getField(namee.toUpperCase()).get(null);
                     }
                     gem = gemm.get().create(world);
                     System.out.println("gem "+gem);

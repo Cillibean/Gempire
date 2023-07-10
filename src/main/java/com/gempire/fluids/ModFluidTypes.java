@@ -18,18 +18,18 @@ import org.joml.Vector3f;
 import static net.minecraftforge.fluids.FluidInteractionRegistry.addInteraction;
 
 public class ModFluidTypes {
-    public static final ResourceLocation PINK_ESSENCE_STILL_RL = new ResourceLocation(Gempire.MODID, "blocks/pink_essence_still");
-    public static final ResourceLocation PINK_ESSENCE_FLOWING_RL = new ResourceLocation(Gempire.MODID, "blocks/pink_essence_flowing");
-    public static final ResourceLocation PINK_ESSENCE_OVERLAY_RL = new ResourceLocation(Gempire.MODID, "blocks/pink_essence_overlay");
-    public static final ResourceLocation BLUE_ESSENCE_STILL_RL = new ResourceLocation(Gempire.MODID, "blocks/blue_essence_still");
-    public static final ResourceLocation BLUE_ESSENCE_FLOWING_RL = new ResourceLocation(Gempire.MODID, "blocks/blue_essence_flowing");
-    public static final ResourceLocation BLUE_ESSENCE_OVERLAY_RL = new ResourceLocation(Gempire.MODID, "blocks/blue_essence_overlay");
-    public static final ResourceLocation YELLOW_ESSENCE_STILL_RL = new ResourceLocation(Gempire.MODID, "blocks/yellow_essence_still");
-    public static final ResourceLocation YELLOW_ESSENCE_FLOWING_RL = new ResourceLocation(Gempire.MODID, "blocks/yellow_essence_flowing");
-    public static final ResourceLocation YELLOW_ESSENCE_OVERLAY_RL = new ResourceLocation(Gempire.MODID, "blocks/yellow_essence_overlay");
-    public static final ResourceLocation WHITE_ESSENCE_STILL_RL = new ResourceLocation(Gempire.MODID, "blocks/white_essence_still");
-    public static final ResourceLocation WHITE_ESSENCE_FLOWING_RL = new ResourceLocation(Gempire.MODID, "blocks/white_essence_flowing");
-    public static final ResourceLocation WHITE_ESSENCE_OVERLAY_RL = new ResourceLocation(Gempire.MODID, "blocks/white_essence_overlay");
+    public static final ResourceLocation PINK_ESSENCE_STILL_RL = new ResourceLocation(Gempire.MODID, "block/pink_essence_still");
+    public static final ResourceLocation PINK_ESSENCE_FLOWING_RL = new ResourceLocation(Gempire.MODID, "block/pink_essence_flowing");
+    public static final ResourceLocation PINK_ESSENCE_OVERLAY_RL = new ResourceLocation(Gempire.MODID, "block/pink_essence_overlay");
+    public static final ResourceLocation BLUE_ESSENCE_STILL_RL = new ResourceLocation(Gempire.MODID, "block/blue_essence_still");
+    public static final ResourceLocation BLUE_ESSENCE_FLOWING_RL = new ResourceLocation(Gempire.MODID, "block/blue_essence_flowing");
+    public static final ResourceLocation BLUE_ESSENCE_OVERLAY_RL = new ResourceLocation(Gempire.MODID, "block/blue_essence_overlay");
+    public static final ResourceLocation YELLOW_ESSENCE_STILL_RL = new ResourceLocation(Gempire.MODID, "block/yellow_essence_still");
+    public static final ResourceLocation YELLOW_ESSENCE_FLOWING_RL = new ResourceLocation(Gempire.MODID, "block/yellow_essence_flowing");
+    public static final ResourceLocation YELLOW_ESSENCE_OVERLAY_RL = new ResourceLocation(Gempire.MODID, "block/yellow_essence_overlay");
+    public static final ResourceLocation WHITE_ESSENCE_STILL_RL = new ResourceLocation(Gempire.MODID, "block/white_essence_still");
+    public static final ResourceLocation WHITE_ESSENCE_FLOWING_RL = new ResourceLocation(Gempire.MODID, "block/white_essence_flowing");
+    public static final ResourceLocation WHITE_ESSENCE_OVERLAY_RL = new ResourceLocation(Gempire.MODID, "block/white_essence_overlay");
     public static final DeferredRegister<FluidType> FLUID_TYPES =
             DeferredRegister.create(ForgeRegistries.Keys.FLUID_TYPES, Gempire.MODID);
 
