@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Lure is an ability that lets gems lure passive mobs, such as cows, sheep, chickens, and pigs."
+      "text": "Lure is an ability that lets gems lure passive mobs, such as cows, sheep, chickens, and pigs. When the gem has an emotional outburst, they will repel animals."
     },
     {
       "type": "patchouli:text",

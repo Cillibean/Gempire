@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "patchouli:entity",
-      "entity": "gempire:lapis{gemColor:3623377,skinColor:7508735,hairColor:12969,hairVariant:0,insigniaColor:11,outfitColor:11,gemPlacement:12}",
+      "entity": "gempire:lapis{gemColor:3623377,skinColor:7508735,hairColor:12969,hairVariant:0,insigniaColor:11,outfitColor:11,gemPlacement:12,xScale:1,yScale:1,zScale:1}",
       "name": "A Lapis Lazuli",
       "rotate": "true",
       "offset": 0.1,
@@ -27,6 +27,10 @@
     {
       "type": "patchouli:text",
       "text": "This gem's Injector primer item is a Nautilus Shell."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "This gem's preferred biome temperatures range between 0.5 and 0.8."
     }
   ]
 }

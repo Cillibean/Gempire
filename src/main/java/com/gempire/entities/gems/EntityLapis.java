@@ -91,8 +91,8 @@ this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, EntityGem.class, 6.0F, 
     }
 
     @Override
-    public int generateWingVariant() {
-        return 0;
+    public int generateWingVariant()  {
+        return this.random.nextInt(6);
     }
 
     @Override
