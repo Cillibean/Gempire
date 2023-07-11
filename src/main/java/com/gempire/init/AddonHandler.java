@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class AddonHandler {
-    public static HashMap<String, Class> ADDON_ENTITY_REGISTRIES = new HashMap<>();
     public static HashMap<String, Class> ENTITY_ADDON_ENTITY_REGISTRIES = new HashMap<>();
     public static ArrayList<String> VANILLA_GEMS = new ArrayList<>();
 
@@ -24,13 +23,17 @@ public class AddonHandler {
         if (endt2) GemFormation.END_POSSIBLE_GEMS_TIER_2.add(name);
         if (primer != null) InjectorContainer.primer.add(primer);
         ModItemProperties.makeGem(gemitem);
+        HashMap<String, String> map = new HashMap<>();
+        map.put(name, modid);
+        //ENTITY_ADDON_ENTITY_REGISTRIES.put(map, entityClass);
         ENTITY_ADDON_ENTITY_REGISTRIES.put(name, entityClass);
-        ADDON_ENTITY_REGISTRIES.put(modid, entityClass);
     }
 
     public void createAddonGem(String name, String modid, Class entityClass, Item gemitem) {
         ModItemProperties.makeGem(gemitem);
+        HashMap<String, String> map = new HashMap<>();
+        map.put(name, modid);
+        //ENTITY_ADDON_ENTITY_REGISTRIES.put(map, entityClass);
         ENTITY_ADDON_ENTITY_REGISTRIES.put(name, entityClass);
-        ADDON_ENTITY_REGISTRIES.put(modid, entityClass);
     }
 }
