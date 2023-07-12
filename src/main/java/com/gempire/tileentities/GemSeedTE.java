@@ -296,9 +296,15 @@ public class GemSeedTE extends BlockEntity {
                                 }
                             } else {
                                 totalWeight += crux.weight * GEM_CONDITIONS.get(gem).rarity;
-                                gemWeight += crux.weight * (1 - temperatureDifference);
-                                for (int n = 0; n <= 1; n++){
+                                gemWeight += crux.weight;// * (1 - temperatureDifference);
+                                System.out.println();
+                                String blockName = String.valueOf(crux.block);
+                                String name = blockName.replaceAll("Block", "").replaceAll("", "").replaceAll("minecraft:", "").replaceAll("_", " ");
+                                System.out.println(name+ " "+ crux.weight);
+                                //System.out.println(gem + " " + gemWeight);
+                                for (int n = 0; n < 1; n++){
                                     TEMPORARY_WEIGHTS.get(i).add(n, gemWeight);
+                                    System.out.println(gem + " " +TEMPORARY_WEIGHTS.get(i).get(n));
                                 }
                             }
                         }
