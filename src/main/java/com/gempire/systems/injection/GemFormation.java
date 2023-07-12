@@ -164,9 +164,10 @@ public class GemFormation {
         }
         System.out.println("placement");
         double rarity = 1 / CONDITIONS.get(gemtoform).rarity;
-        double check = weight;
+        double check = weight/2;
         System.out.println("weight / rarity check "+weight / rarity);
         System.out.println("weight "+weight);
+        System.out.println("check "+check);
             if (primer.asItem() == ModItems.PRIME_BOOST.get()) {
                 if (check <= 4) {
                     clod = true;
@@ -174,7 +175,7 @@ public class GemFormation {
                 } else if (check <= 7) {
                     clod = true;
                     clodNO = 1;
-                } else if (check <= 13) {
+                } else if (check <= 18) {
                     gem.setDefective(false);
                     System.out.println("defective");
                 } else if (check >= 24) {
@@ -191,7 +192,7 @@ public class GemFormation {
                 } else if (check <= 10) {
                     clod = true;
                     clodNO = 1;
-                } else if (check <= 16) {
+                } else if (check <= 20) {
                     gem.setDefective(true);
                     System.out.println("defective");
                 } else if (check >= 26) {
