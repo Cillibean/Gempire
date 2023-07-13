@@ -1349,7 +1349,10 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                 }
             } else {
                 ItemStack stack = new ItemStack(this.getGemItem());
-                ItemGem.saveData(stack, this);
+                //ItemGem.saveData(stack, this);
+                CompoundTag tag = new CompoundTag();
+                save(tag);
+                stack.setTag(tag);
                 Objects.requireNonNull(this.spawnAtLocation(stack)).setExtendedLifetime();
             }
             this.gameEvent(GameEvent.ENTITY_PLACE);
