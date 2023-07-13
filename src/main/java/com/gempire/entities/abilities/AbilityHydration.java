@@ -22,7 +22,9 @@ public class AbilityHydration extends Ability implements ICraftingAbility {
         if (holder.level.dimension() != Level.NETHER) {
             input.add(Items.BUCKET);
             output.add(Items.WATER_BUCKET);
+            input2.add(Items.AIR);
         }
+        holder.input2List = input2;
         holder.inputList = input;
         holder.outputList = output;
     }

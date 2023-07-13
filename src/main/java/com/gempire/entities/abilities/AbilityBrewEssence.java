@@ -4,6 +4,7 @@ import com.gempire.entities.abilities.base.Ability;
 import com.gempire.entities.abilities.interfaces.ICraftingAbility;
 import com.gempire.init.ModItems;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.Items;
 
 public class AbilityBrewEssence extends Ability implements ICraftingAbility {
     public AbilityBrewEssence(){
@@ -30,6 +31,8 @@ public class AbilityBrewEssence extends Ability implements ICraftingAbility {
             case 3 -> output.add(ModItems.YELLOW_ESSENCE_BUCKET.get());
             default -> output.add(ModItems.WHITE_ESSENCE_BUCKET.get());
         }
+        input2.add(Items.AIR);
+        holder.input2List = input2;
         holder.inputList = input;
         holder.outputList = output;
     }
