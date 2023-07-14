@@ -470,6 +470,8 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         compound.putString("facet", this.getFacet());
         compound.putString("cut", this.getCut());
         compound.putBoolean("rebel", this.getRebelled());
+        compound.putBoolean("prime", this.isPrimary());
+        compound.putBoolean("defective", this.isDefective());
         compound.putBoolean("isHostile", this.getHostile());
         compound.putBoolean("cracked", this.getCracked());
         compound.putBoolean("assigned", this.getAssigned());
@@ -1380,6 +1382,11 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             } else {
                 ItemStack stack = new ItemStack(this.getGemItem());
                 //ItemGem.saveData(stack, this);
+                this.getAttribute(Attributes.MAX_HEALTH).removeModifiers();
+                this.getAttribute(Attributes.MOVEMENT_SPEED).removeModifiers();
+                this.getAttribute(Attributes.ATTACK_DAMAGE).removeModifiers();
+                this.getAttribute(Attributes.ATTACK_SPEED).removeModifiers();
+                this.getAttribute(Attributes.KNOCKBACK_RESISTANCE).removeModifiers();
                 CompoundTag tag = new CompoundTag();
                 save(tag);
                 stack.setTag(tag);
