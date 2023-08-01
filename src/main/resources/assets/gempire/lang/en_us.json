@@ -501,8 +501,8 @@
   "nickname.gempire.agate_15": "Orca Agate",
   "nickname.gempire.agate_16": "Iris Agate",
 
-  "messages.gempire.entity.cracked": "This Gem is cracked!",
-  "messages.gempire.entity.birthday": "Happy Birthday Taaf!",
+  "messages.gempire.entity.cracked": "This gem is cracked!",
+  "messages.gempire.entity.birthday": "Happy birthday, Taaf!",
   "messages.gempire.entity.spodumene_sore": "She's too weak right now...",
   "messages.gempire.entity.player_hungry": "I'm too hungry to make her brew...",
   "messages.gempire.entity.player_need_xp": "I don't have enough XP...",
@@ -565,7 +565,7 @@
   "ability.gempire.refinery": "Refinery",
   "ability.gempire.abundance": "Abundance",
   "ability.gempire.designer": "Designer",
-  "ability.gempire.kindergardener": "Kindergardener",
+  "ability.gempire.kindergardener": "Kindergartener",
   "ability.gempire.mining": "Mining Inspiration",
   "ability.gempire.archer": "Archer",
   "ability.gempire.tinkerer": "Tinkerer",
@@ -666,7 +666,7 @@
   "advancements.gempire.dropship.description": "Break into an abandoned dropship",
   "advancements.gempire.ruins.description": "Find yourself in a gem ruin",
   "advancements.gempire.sky_ruins.description": "Climb into a skyward gem ruin",
-  "advancements.gempire.essence.description": "Obtain Essence",
+  "advancements.gempire.essence.description": "Obtain Gem Essence",
   "advancements.gempire.root.description": "The Beginning Of Your Magical Journey",
 
   "enchantment.gempire.shatter": "Breaking Point",
