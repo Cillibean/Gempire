@@ -9,7 +9,7 @@
     "description": {
       "translate": "advancements.gempire.root.description"
     },
-    "background": "gempire:textures/blocks/chiseled_ruined_marble_block.png",
+    "background": "gempire:textures/block/chiseled_ruined_marble_block.png",
     "frame": "task",
     "show_toast": false,
     "announce_to_chat": false,

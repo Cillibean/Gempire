@@ -47,6 +47,8 @@ public class AbilitySalvaging extends Ability implements ICraftingAbility {
                 output.add(Items.AIR);
             }
         }
+        input2.add(Items.AIR);
+        holder.input2List = input2;
         holder.inputList = input;
         holder.outputList = output;
     }

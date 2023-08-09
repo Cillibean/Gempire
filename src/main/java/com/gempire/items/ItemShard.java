@@ -6,7 +6,7 @@ public class ItemShard extends Item {
     public int color;
 
     public ItemShard(Properties properties, int color) {
-        super(properties);
+        super(properties.fireResistant());
         this.color = color;
     }
 }
