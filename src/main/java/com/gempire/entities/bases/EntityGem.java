@@ -2477,6 +2477,16 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         return flag;
     }
 
+    public boolean canGuard(){
+        boolean flag = false;
+        for(Ability ability : this.getAbilityPowers()){
+            if(ability instanceof AbilityGuard){
+                return flag = true;
+            }
+        }
+        return flag;
+    }
+
     /*
     COMMAND STUFF
     */
