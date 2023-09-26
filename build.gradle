@@ -14,10 +14,10 @@ plugins {
 }
 apply plugin: 'org.spongepowered.mixin'
 
-mixin {
-    add sourceSets.main, 'gempire.refmap.json'
-    config 'gempire.mixins.json'
-}
+//mixin {
+    //add sourceSets.main, 'gempire.refmap.json'
+    //config 'gempire.mixins.json'
+//}
 
 version = '2.1'
 group = 'com.gempire' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
@@ -40,7 +40,7 @@ minecraft {
     runs {
         client {
             workingDirectory project.file('run')
-            arg "-mixin.config=gempire.mixins.json"
+            //arg "-mixin.config=gempire.mixins.json"
 
             // Recommended logging data for a userdev environment
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
@@ -48,8 +48,8 @@ minecraft {
             // Recommended logging level for the console
             property 'forge.logging.console.level', 'debug'
 
-            property 'mixin.env.remapRefMap', 'true'
-            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+            //property 'mixin.env.remapRefMap', 'true'
+            //property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
 
             mods {
                 gempire {
@@ -60,7 +60,7 @@ minecraft {
 
         server {
             workingDirectory project.file('run')
-            arg "-mixin.config=gempire.mixins.json"
+            //arg "-mixin.config=gempire.mixins.json"
 
             // Recommended logging data for a userdev environment
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
@@ -164,7 +164,7 @@ jar {
                 "Implementation-Version": "${version}",
                 "Implementation-Vendor" :"gempiresareus",
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
-                "MixinConfigs": "gempire.mixins.json"
+                //"MixinConfigs": "gempire.mixins.json"
         ])
     }
 }

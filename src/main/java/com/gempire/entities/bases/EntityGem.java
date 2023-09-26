@@ -1353,6 +1353,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         float f2 = (this.random.nextFloat() - 0.5F) * 8.0F; these dont do anything*/
         this.level.addParticle(ParticleTypes.EXPLOSION_EMITTER, this.getX() , this.getY() + 2.0D, this.getZ(), 0.0D, 0.0D, 0.0D);
         if(!this.level.isClientSide){
+            System.out.println("not clientside");
             this.playSound(ModSounds.POOF.get());
             GemPoofEvent event = new GemPoofEvent(this, this.blockPosition(), source);
             MinecraftForge.EVENT_BUS.post(event);
@@ -1382,15 +1383,20 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             } else {
                 ItemStack stack = new ItemStack(this.getGemItem());
                 //ItemGem.saveData(stack, this);
-                this.getAttribute(Attributes.MAX_HEALTH).removeModifiers();
-                this.getAttribute(Attributes.MOVEMENT_SPEED).removeModifiers();
-                this.getAttribute(Attributes.ATTACK_DAMAGE).removeModifiers();
-                this.getAttribute(Attributes.ATTACK_SPEED).removeModifiers();
-                this.getAttribute(Attributes.KNOCKBACK_RESISTANCE).removeModifiers();
+                if (stack.getItem() != ModItems.PEBBLE_GEM.get() &&
+                        stack.getItem() != ModItems.MICA_GEM.get() &&
+                        stack.getItem() != ModItems.NACRE_GEM.get() &&
+                        stack.getItem() != ModItems.SHALE_GEM.get()) {
+                    this.getAttribute(Attributes.MAX_HEALTH).removeModifiers();
+                    this.getAttribute(Attributes.MOVEMENT_SPEED).removeModifiers();
+                    this.getAttribute(Attributes.ATTACK_DAMAGE).removeModifiers();
+                    this.getAttribute(Attributes.ATTACK_SPEED).removeModifiers();
+                    this.getAttribute(Attributes.KNOCKBACK_RESISTANCE).removeModifiers();
+                }
                 CompoundTag tag = new CompoundTag();
                 save(tag);
                 stack.setTag(tag);
-                Objects.requireNonNull(this.spawnAtLocation(stack)).setExtendedLifetime();
+                this.spawnAtLocation(stack).setExtendedLifetime();
             }
             this.gameEvent(GameEvent.ENTITY_PLACE);
             this.kill();
