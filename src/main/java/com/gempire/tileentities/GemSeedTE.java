@@ -102,33 +102,21 @@ public class GemSeedTE extends BlockEntity {
                         te.setChanged();
                     } else {
                         te.spawned = true;
-                        if (te.tier == 1) {
-                            for (int i = 0; i < GemFormation.POSSIBLE_GEMS_TIER_1.size(); i++) {
-                                if (te.TEMPORARY_WEIGHTS.get(i) == null) {
-                                    te.TEMPORARY_WEIGHTS.add(i, new ArrayList<Float>());
-                                }
-                                //te.TEMPORARY_WEIGHTS.add(i, new ArrayList<Float>());
-                                float weight = 0;
-                                if (te.TEMPORARY_WEIGHTS.get(i).isEmpty()) {
-                                    weight += 0;
-                                } else {
-                                    for (int n = 0; n <= 1; n++) {
-                                        weight += te.TEMPORARY_WEIGHTS.get(i).get(n);
-                                    }
-                                }
-                                GemConditions conditions = te.GEM_CONDITIONS.get(GemFormation.POSSIBLE_GEMS_TIER_1.get(i));
-                                weight*=conditions.rarity;
-                                te.WEIGHTS_OF_GEMS.put(GemFormation.POSSIBLE_GEMS_TIER_1.get(i), weight);                            }
-                        } else if (te.tier == 2) {
-                            for (int i = 0; i < GemFormation.POSSIBLE_GEMS_TIER_2.size(); i++) {
-                                float weight = 0;
-                                if (!te.TEMPORARY_WEIGHTS.get(i).isEmpty()) {
-                                    weight = te.TEMPORARY_WEIGHTS.get(i).get(0);
-                                }
-                                GemConditions conditions = te.GEM_CONDITIONS.get(GemFormation.POSSIBLE_GEMS_TIER_2.get(i));
-                                //weight*=conditions.rarity;
-                                te.WEIGHTS_OF_GEMS.put(GemFormation.POSSIBLE_GEMS_TIER_2.get(i), weight);
+                        ArrayList list = te.tier == 1 ? GemFormation.POSSIBLE_GEMS_TIER_1 : GemFormation.POSSIBLE_GEMS_TIER_2;
+                        for (int i = 0; i < list.size(); i++) {
+                            if (te.TEMPORARY_WEIGHTS.get(i) == null) {
+                                te.TEMPORARY_WEIGHTS.add(i, new ArrayList<Float>());
                             }
+                            //te.TEMPORARY_WEIGHTS.add(i, new ArrayList<Float>());
+                            float weight = 0;
+                            if (te.TEMPORARY_WEIGHTS.get(i).isEmpty()) {
+                                weight += 0;
+                            } else {
+                                weight += te.TEMPORARY_WEIGHTS.get(i).get(0);
+                            }
+                            GemConditions conditions = te.GEM_CONDITIONS.get(list.get(i));
+                            weight*=conditions.rarity;
+                            te.WEIGHTS_OF_GEMS.put((String) list.get(i), weight);
                         }
                         if (!te.level.isClientSide) {
                             GemFormation form = new GemFormation(te.level, te.getBlockPos(), new BlockPos(GemSeedTE.DRAIN_SIZE, GemSeedTE.DRAIN_SIZE, GemSeedTE.DRAIN_SIZE), te.chroma, te.primer, te.essences, te.facing, te.WEIGHTS_OF_GEMS, te.totalWeight, te.tier);
@@ -176,10 +164,11 @@ public class GemSeedTE extends BlockEntity {
         float BLOCK_TEMPERATURE = this.level.getBiome(this.getBlockPos()).get().getBaseTemperature();
         this.SetDrainedStoneColor(BLOCK_TEMPERATURE);
         Block block = this.level.getBlockState(blockPos).getBlock();
+        ArrayList list = tier == 1 ? GemFormation.POSSIBLE_GEMS_TIER_1 : GemFormation.POSSIBLE_GEMS_TIER_2;
         if (block instanceof DrainedBlock || block == Blocks.BEDROCK) return;
-        if (tier == 1) {
-            for (int i = 0; i < GemFormation.POSSIBLE_GEMS_TIER_1.size(); i++) {
-                String gem = GemFormation.POSSIBLE_GEMS_TIER_1.get(i);
+            for (int i = 0; i < list.size(); i++) {
+                String gem = (String) list.get(i);
+                System.out.println(gem);
                 float gemWeight = 0;
                 if (GEM_CONDITIONS.get(gem) != null) {
                     this.GEM_CONDITIONS = ModEntities.CRUXTOGEM;
@@ -238,77 +227,6 @@ public class GemSeedTE extends BlockEntity {
                     TEMPORARY_WEIGHTS.get(i).add(0f);
                 }
             }
-        } else if (tier == 2) {
-            for (int i = 0; i < GemFormation.POSSIBLE_GEMS_TIER_2.size(); i++) {
-                String gem = GemFormation.POSSIBLE_GEMS_TIER_2.get(i);
-                float gemWeight = 0;
-                if (GEM_CONDITIONS.get(gem) != null) {
-                    this.GEM_CONDITIONS = ModEntities.CRUXTOGEM;
-                    this.SetDrainedStoneColor(BLOCK_TEMPERATURE);
-                    GemConditions conditions = GEM_CONDITIONS.get(gem);
-                    //Do some math to multiply the gem weight by the inverse of the difference in biome temperature to preferred temperature
-                    float temperatureDifference = 0;
-                    if (BLOCK_TEMPERATURE >= conditions.temperatureMin) {
-                        if (BLOCK_TEMPERATURE <= conditions.temperatureMax) {
-                            temperatureDifference = 0;
-                        } else {
-                            temperatureDifference = conditions.temperatureMax - BLOCK_TEMPERATURE == 0 ? 1 : Math.abs(conditions.temperatureMax - BLOCK_TEMPERATURE);
-                        }
-                    } else {
-                        temperatureDifference = conditions.temperatureMin - BLOCK_TEMPERATURE == 0 ? 1 : Math.abs(conditions.temperatureMin - BLOCK_TEMPERATURE);
-                    }
-                    int essenceCount = 0;
-                    String[] indEssencesInj = this.essences.split("-");
-                    String[] indEssencesCond = conditions.essences.split("-");
-                    for(int n = 0; n < indEssencesInj.length; n++){
-                        String essJ = indEssencesInj[n];
-                        for(int j = 0; j < indEssencesCond.length; j++){
-                            String essC = indEssencesCond[j];
-                            if(essJ.equalsIgnoreCase(essC)){
-                                essenceCount++;
-                            }
-                        }
-                    }
-                    if (essenceCount == indEssencesCond.length) {
-                        weighThisGem = true;
-                    }
-                    if (weighThisGem) {
-                        ArrayList<Block> list = new ArrayList<>();
-                        HashMap<Block, Float> map = new HashMap<>();
-                        for (Crux crux : GEM_CONDITIONS.get(gem).cruxes) {
-                            list.add(crux.block);
-                            map.put(crux.block, crux.weight);
-                            //Then for every crux, calculate the total weight of crux that matches every block in the volume for every gem
-                            //Example: if there are three stone in the volume, the total weight will be 3 stone times however many gems there are that have stone as a crux, and so forth
-                        }
-                        if (list.contains(block)) {
-                            totalWeight += map.get(block); // GEM_CONDITIONS.get(gem).rarity;
-                            gemWeight += map.get(block) * (1 - temperatureDifference);
-                        } else {
-                            /*if (block == Blocks.STONE) {
-                                System.out.println("stone");
-                                totalWeight += 1; // GEM_CONDITIONS.get(gem).rarity;
-                                gemWeight += 1 - temperatureDifference;
-                                for (int n = 0; n <= 1; n++) {
-                                    TEMPORARY_WEIGHTS.get(i).add(n, gemWeight);
-                                }
-                            }*/
-                        }
-                        if (TEMPORARY_WEIGHTS.get(i).isEmpty()) {
-                            TEMPORARY_WEIGHTS.get(i).add(0, gemWeight);
-                        } else {
-                            TEMPORARY_WEIGHTS.get(i).set(0, gemWeight);
-                        }
-                    }
-                    //Once the total weight has been obtained, store the individual weights of every gem in a hashmap.
-                    else {
-                        TEMPORARY_WEIGHTS.get(i).add(0f);
-                    }
-                } else {
-                    TEMPORARY_WEIGHTS.get(i).add(0f);
-                }
-            }
-        }
 
         if (!(block instanceof AirBlock) &&
                 !(block instanceof SlabBlock) &&
@@ -508,24 +426,19 @@ public class GemSeedTE extends BlockEntity {
         compound.putIntArray("IDS", this.IDS);
 
         //TEMPORARY_WEIGHTS
+        ArrayList list;
         if (tier == 1) {
-            if(this.TEMPORARY_WEIGHTS.size() > 0)for(int i = 0; i < GemFormation.POSSIBLE_GEMS_TIER_1.size(); i++){
-                float weight = 0;
-                System.out.println("Gem List Cycle: " + i);
-                for(int n = 0; n < this.TEMPORARY_WEIGHTS.get(i).size(); n++){
-                    weight += this.TEMPORARY_WEIGHTS.get(i).get(n);
-                }
-                compound.putFloat(GemFormation.POSSIBLE_GEMS_TIER_1.get(i) + "_weight", weight);
+            list = GemFormation.POSSIBLE_GEMS_TIER_1;
+        } else {
+            list = GemFormation.POSSIBLE_GEMS_TIER_2;
+        }
+        if(this.TEMPORARY_WEIGHTS.size() > 0)for(int i = 0; i < list.size(); i++){
+            float weight = 0;
+            System.out.println("Gem List Cycle: " + i);
+            for(int n = 0; n < this.TEMPORARY_WEIGHTS.get(i).size(); n++){
+                weight += this.TEMPORARY_WEIGHTS.get(i).get(n);
             }
-        } else if (tier == 2) {
-            if(this.TEMPORARY_WEIGHTS.size() > 0)for(int i = 0; i < GemFormation.POSSIBLE_GEMS_TIER_2.size(); i++){
-                float weight = 0;
-                System.out.println("Gem List Cycle: " + i);
-                for(int n = 0; n < this.TEMPORARY_WEIGHTS.get(i).size(); n++){
-                    weight += this.TEMPORARY_WEIGHTS.get(i).get(n);
-                }
-                compound.putFloat(GemFormation.POSSIBLE_GEMS_TIER_2.get(i) + "_weight", weight);
-            }
+            compound.putFloat(list.get(i) + "_weight", weight);
         }
 
         //POSITIONS
