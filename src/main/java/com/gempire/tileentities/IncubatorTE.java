@@ -1,14 +1,14 @@
 package com.gempire.tileentities;
 
-import com.gempire.blocks.machine.ShellBlock;
 import com.gempire.container.IncubatorContainer;
-import com.gempire.container.ShellContainer;
 import com.gempire.entities.bases.EntityGem;
+import com.gempire.entities.bases.EntityVaryingGem;
 import com.gempire.entities.gems.EntityPearl;
 import com.gempire.entities.gems.starter.EntityPebble;
 import com.gempire.init.*;
 import com.gempire.items.ItemChroma;
 import com.gempire.items.ItemGem;
+import com.gempire.items.ItemGemBase;
 import com.gempire.util.Color;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
@@ -40,6 +40,7 @@ import org.apache.commons.lang3.ArrayUtils;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -61,7 +62,7 @@ public class IncubatorTE extends RandomizableContainerBlockEntity implements Men
     public static final int MAX_BLOCK2 = 64;
     public static final int MAX_BLOCK3 = 64;
     public static final int MAX_BLOCK4 = 64;
-    public Item gemBase;
+    public String gemBase = "";
     public int block1Consumed = 0;
     public int block2Consumed = 0;
     public int block3Consumed = 0;
@@ -84,7 +85,7 @@ public class IncubatorTE extends RandomizableContainerBlockEntity implements Men
     public HashMap<String, Boolean> colour = new HashMap<>();
 
     public IncubatorTE(BlockPos pos, BlockState state) {
-        super(ModTE.SHELL_TE.get(), pos, state);
+        super(ModTE.INCUBATOR_TE.get(), pos, state);
     }
 
     @Override
@@ -100,11 +101,12 @@ public class IncubatorTE extends RandomizableContainerBlockEntity implements Men
         this.essence1Consumed = nbt.getInt("essence1");
         this.essence2Consumed = nbt.getInt("essence2");
         this.chromaColor = nbt.getInt("color");
+        this.gemBase = nbt.getString("base");
         this.items = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
         if(!this.tryLoadLootTable(nbt)){
             ContainerHelper.loadAllItems(nbt, this.items);
         }
-        gemBase = this.items.get(4).getItem();
+        gemBase = this.items.get(4).getItem().toString();
     }
 
     @Override
@@ -120,6 +122,7 @@ public class IncubatorTE extends RandomizableContainerBlockEntity implements Men
         compound.putInt("essence1", this.essence1Consumed);
         compound.putInt("essence2", this.essence2Consumed);
         compound.putInt("color", this.chromaColor);
+        compound.putString("base", this.gemBase);
         if(!this.trySaveLootTable(compound)){
             ContainerHelper.saveAllItems(compound, this.items);
         }
@@ -130,12 +133,13 @@ public class IncubatorTE extends RandomizableContainerBlockEntity implements Men
         if(!level.isClientSide()) {
             if (te.getItem(IncubatorTE.GEM_OUTPUT_SLOT_INDEX) == ItemStack.EMPTY) {
                 if (te.ticks % 50 == 0) {
+                    te.HandleChromaTick();
+                    te.HandleBaseTick();
                     //te.HandleEssenceTick();
                     //te.HandleGravelTick();
                     //te.HandleSandTick();
                     //te.HandleClayTick();
-                    //te.HandleChromaTick();
-                    //te.HandleFormGemTick();
+                    te.HandleFormGemTick();
                 }
                 if (te.ticks > 25) {
                     te.ticks = 0;
@@ -219,51 +223,32 @@ public class IncubatorTE extends RandomizableContainerBlockEntity implements Men
             }
         }
     }
-
+*/
     public void HandleChromaTick() {
-        if(this.block1Consumed == IncubatorTE.MAX_BLOCK1 && this.block2Consumed == IncubatorTE.MAX_BLOCK2 && this.block3Consumed == IncubatorTE.MAX_BLOCK3 && !this.chromaConsumed){
+        if (!chromaConsumed) {
             ItemStack stack = this.getItem(IncubatorTE.CHROMA_INPUT_SLOT_INDEX);
-            if(stack.getItem() instanceof ItemChroma){
-                ItemChroma chroma = (ItemChroma) stack.getItem();
-                if (chroma.color != 16) {
-                    this.chromaConsumed = true;
-                    this.chromaColor = chroma.color;
-                    stack.shrink(1);
-                } else {
-                    this.chromaConsumed = false;
-                }
-            }
-        } else if(this.block1Consumed == IncubatorTE.MAX_BLOCK1 /2 && this.block2Consumed == IncubatorTE.MAX_BLOCK2/2 && this.block3Consumed == IncubatorTE.MAX_BLOCK3/2 && !this.chromaConsumed){
-            ItemStack stack = this.getItem(IncubatorTE.CHROMA_INPUT_SLOT_INDEX);
-            if(stack.getItem() instanceof ItemChroma){
-                ItemChroma chroma = (ItemChroma) stack.getItem();
-                if (chroma.color != 16) {
-                    this.chromaConsumed = true;
-                    this.chromaColor = chroma.color;
-                    stack.shrink(1);
-                } else {
-                    this.chromaConsumed = false;
-                }
-            }
-        } else if(this.block1Consumed == IncubatorTE.MAX_BLOCK1/4 && this.block2Consumed == IncubatorTE.MAX_BLOCK2/4 && this.block3Consumed == IncubatorTE.MAX_BLOCK3/4 && !this.chromaConsumed){
-            ItemStack stack = this.getItem(IncubatorTE.CHROMA_INPUT_SLOT_INDEX);
-            if(stack.getItem() instanceof ItemChroma){
-                ItemChroma chroma = (ItemChroma) stack.getItem();
-                if (chroma.color != 16) {
-                    this.chromaConsumed = true;
-                    this.chromaColor = chroma.color;
-                    stack.shrink(1);
-                } else {
-                    this.chromaConsumed = false;
-                }
+            if (stack.getItem() instanceof ItemChroma chroma) {
+                this.chromaConsumed = true;
+                this.chromaColor = chroma.color;
+                stack.shrink(1);
             }
         }
     }
 
+    public void HandleBaseTick() {
+        if (!baseConsumed) {
+            ItemStack stack = this.getItem(IncubatorTE.GEM_BASE_INPUT_SLOT_INDEX);
+            if (stack.getItem() instanceof ItemGemBase base) {
+                this.baseConsumed = true;
+                this.gemBase = base.toString();
+                stack.shrink(1);
+            }
+        }
+    }
+/*
     public void HandleEssenceTick() {
         if (this.block1Consumed == IncubatorTE.MAX_BLOCK1 && this.block2Consumed == IncubatorTE.MAX_BLOCK2 && this.block3Consumed == IncubatorTE.MAX_BLOCK3 && this.chromaConsumed) {
             //ESSENCE CHECK
-                //TODO: MAKE THERE BE A CHANCE OF MAGIC MOSS APPEARING
                 if (this.level.getBlockState(this.worldPosition.offset(IncubatorTE.direction(4))).getBlock() == ModBlocks.WHITE_ESSENCE_BLOCK.get()) {
                     LiquidBlock block = (LiquidBlock) this.level.getBlockState(this.worldPosition.offset(IncubatorTE.direction(4))).getBlock();
                     if (block.getFluid() == ModFluids.WHITE_ESSENCE.get()) {
@@ -292,6 +277,32 @@ public class IncubatorTE extends RandomizableContainerBlockEntity implements Men
         }
     }*/
 
+    public void setRequiresColour() {
+        colour.put("ruby", false);
+        colour.put("nephrite", false);
+        colour.put("rutile", false);
+        colour.put("bismuth", false);
+        colour.put("aquamarine", false);
+        colour.put("emerald", false);
+        colour.put("bixbite", false);
+        colour.put("lapis", false);
+        colour.put("obsidian", false);
+        colour.put("larimar", false);
+        colour.put("morganite", false);
+        colour.put("peridot", false);
+        colour.put("jasper", true);
+        colour.put("garnet", true);
+        colour.put("quartz", true);
+        colour.put("sapphire", true);
+        colour.put("agate", true);
+        colour.put("spinel", true);
+        colour.put("tourmaline", true);
+        colour.put("zircon", true);
+        colour.put("spodumene", true);
+        colour.put("topaz", true);
+    }
+
+
     public static BlockPos direction(int i){
         switch (i){
             case 1:
@@ -309,24 +320,26 @@ public class IncubatorTE extends RandomizableContainerBlockEntity implements Men
         }
     }
 
-    /*
-    public void HandleFormPearlTick(){
-        if(this.block1Consumed == IncubatorTE.MAX_BLOCK1 && this.block2Consumed == IncubatorTE.MAX_BLOCK2 && this.block3Consumed == IncubatorTE.MAX_BLOCK3 && this.chromaConsumed
+
+    public void HandleFormGemTick(){
+        /*if(this.block1Consumed == IncubatorTE.MAX_BLOCK1 && this.block2Consumed == IncubatorTE.MAX_BLOCK2 && this.block3Consumed == IncubatorTE.MAX_BLOCK3 && this.chromaConsumed
                 && this.essenceConsumed) {
-            this.formPearl(this.chromaColor, 0);
+            this.formGem(this.chromaColor, 0);
         } else if (this.block1Consumed == IncubatorTE.MAX_BLOCK1 / 2 && this.block2Consumed == IncubatorTE.MAX_BLOCK2 / 2 && this.block3Consumed == IncubatorTE.MAX_BLOCK3 / 2 && this.chromaConsumed
                 && this.essenceConsumed) {
-            this.formPearl(this.chromaColor, 1);
+            this.formGem(this.chromaColor, 1);
         } else if (this.block1Consumed == IncubatorTE.MAX_BLOCK1 / 4 && this.block2Consumed == IncubatorTE.MAX_BLOCK2 / 4 && this.block3Consumed == IncubatorTE.MAX_BLOCK3 / 4 && this.chromaConsumed
                 && this.essenceConsumed) {
-            this.formPearl(this.chromaColor, 2);
-        }
-    }*/
+            this.formGem(this.chromaColor, 2);
+        }*/
+        if (baseConsumed && chromaConsumed) this.formGem(this.chromaColor, 1);
+    }
 
     //perfect = 0
     //normal = 1
     //defect = 2
-    public void formPearl(int chroma, int quality){
+    public void formGem(int chroma, int quality){
+        setRequiresColour();
         /*RegistryObject<EntityType<EntityPebble>> gemm = ModEntities.PEBBLE;
         String skinColorVariant = "";
         EntityGem gem = gemm.get().create(world);
@@ -378,29 +391,18 @@ public class IncubatorTE extends RandomizableContainerBlockEntity implements Men
             */
         RegistryObject<Item> gemm = ModItems.PEBBLE_GEM;
         ItemGem gem = null;
-        String baseName = gemBase.toString().toUpperCase().replaceAll("INACTIVE_", "").replaceAll("_BASE", "");
+        String baseName = gemBase.toUpperCase().replaceAll("INACTIVE_", "").replaceAll("_BASE", "");
         String name = "";
-        if (colour.get(baseName)) {
+        if (colour.get(baseName.toLowerCase())) {
             name = Color.getColorName(chroma).toUpperCase() +"_"+baseName+"_GEM";
         } else {
             name = baseName+"_GEM";
         }
-        try {
-            gemm = (RegistryObject<Item>) ModItems.class.getField(name.toUpperCase()).get(null);
-            gem = (ItemGem) gemm.get();
-        } catch(Exception e){
-            e.printStackTrace();
-        }
+        System.out.println("name "+name);
         RegistryObject<EntityType<EntityPebble>> egemm = ModEntities.PEBBLE;
-        try {
-            egemm = (RegistryObject<EntityType<EntityPebble>>) ModEntities.class.getField(name.toUpperCase()).get(null);
-        } catch(Exception e){
-            e.printStackTrace();
-        }
-        EntityGem egem = egemm.get().create(this.level);
-        egem.setUUID(Mth.createInsecureUUID(this.level.random));
         String namee = "";
         String skinColorVariant = "";
+        System.out.println("name "+name);
         String[] array = name.split("_");
         boolean nullFlag = false;
         int idx = 0;
@@ -417,13 +419,40 @@ public class IncubatorTE extends RandomizableContainerBlockEntity implements Men
             System.out.println(s);
         }
         System.out.println("skin variant string " +skinColorVariant);
-        System.out.println("array "+ array);
+        System.out.println("array "+ Arrays.toString(array));
+        System.out.println("name "+name);
+        if (!colour.get(baseName.toLowerCase())) skinColorVariant = "";
+        try {
+            egemm = (RegistryObject<EntityType<EntityPebble>>) ModEntities.class.getField(name.toUpperCase().replaceAll("_", "").replaceAll("GEM", "").replaceAll(skinColorVariant, "")).get(null);
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+        EntityGem egem = egemm.get().create(this.level);
+        if (egem instanceof EntityVaryingGem) {
+            if (((EntityVaryingGem) egem).UsesUniqueNames()) {
+                String uniqueColor = Component.translatable("nickname.gempire." + egem.getWholeGemName() + "_" + chromaColor).getString();
+                System.out.println(uniqueColor.toLowerCase());
+                System.out.println(egem.getWholeGemName());
+                uniqueColor = uniqueColor.toLowerCase().replaceAll(egem.getWholeGemName(), "").replaceAll(" ", "");
+                System.out.println(uniqueColor);
+                name = name.replaceAll(skinColorVariant.toUpperCase(), uniqueColor.toUpperCase());
+                System.out.println("name "+ name);
+            }
+        }
+        try {
+            gemm = (RegistryObject<Item>) ModItems.class.getField(name.toUpperCase()).get(null);
+            gem = (ItemGem) gemm.get();
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+        System.out.println(name);
+        egem.setUUID(Mth.createInsecureUUID(this.level.random));
         if (array.length > 1) {
             assert gem != null;
             egem.setSkinVariantOnInitialSpawn = false;
             egem.initalSkinVariant = chromaColor;
         }
-        //egem.setSkinColorVariant(chroma);
+        egem.setSkinColorVariant(chroma);
         egem.finalizeSpawn((ServerLevelAccessor) this.level, this.level.getCurrentDifficultyAt(this.worldPosition), MobSpawnType.MOB_SUMMONED, null, null);
         ItemStack stack = new ItemStack(gem);
         ItemGem.saveData(stack, egem);

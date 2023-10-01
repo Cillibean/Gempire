@@ -160,7 +160,6 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
                 if (stack.getItem() != Items.AIR) {
                     if (stack.getItem() instanceof BucketItem bucket) {
                         if (this.isValidForSlot(i, bucket)) {
-                            //TODO: TEMPORARY
                             this.FillFluidTanks(i, 1000);
                             itemHandler.setStackInSlot(i, new ItemStack(Items.BUCKET.asItem()));
                             assert this.level != null;
