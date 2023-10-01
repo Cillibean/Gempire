@@ -20,6 +20,7 @@ public class ModContainers {
     public static final RegistryObject<MenuType<InjectorContainer>> INJECTOR_CONTAINER = CONTAINERS.register("injector_container", () -> IForgeMenuType.create(InjectorContainer::new));
     public static final RegistryObject<MenuType<GemUIContainer>> GEM_UI_CONTAINER = CONTAINERS.register("gem_ui_container", () -> IForgeMenuType.create(GemUIContainer::new));
     public static final RegistryObject<MenuType<ShellContainer>> SHELL_CONTAINER = CONTAINERS.register("shell_container", () -> IForgeMenuType.create(ShellContainer::new));
+    public static final RegistryObject<MenuType<IncubatorContainer>> INCUBATOR_CONTAINER = CONTAINERS.register("incubator_container", () -> IForgeMenuType.create(IncubatorContainer::new));
     public static final RegistryObject<MenuType<PearlUIContainer>> PEARL_UI_CONTAINER = CONTAINERS.register("pearl_ui_container", () -> IForgeMenuType.create(PearlUIContainer::new));
     public static final RegistryObject<MenuType<PearlDefectiveUIContainer>> PEARL_DEFECTIVE_UI_CONTAINER = CONTAINERS.register("pearl_defective_ui_container", () -> IForgeMenuType.create(PearlDefectiveUIContainer::new));
     public static final RegistryObject<MenuType<ZirconUIContainer>> ZIRCON_UI_CONTAINER = CONTAINERS.register("zircon_ui_container", () -> IForgeMenuType.create(ZirconUIContainer::new));

@@ -208,13 +208,18 @@ public class GemSeedTE extends BlockEntity {
                                 if (block.defaultBlockState().is(Tags.Blocks.STONE) || block == Blocks.STONE) {
                                     totalWeight += 1 * GEM_CONDITIONS.get(gem).rarity;
                                     gemWeight += 1 * (1 - temperatureDifference);
-                                    TEMPORARY_WEIGHTS.get(i).set(0, gemWeight);
+                                    if (TEMPORARY_WEIGHTS.get(i) == null) {
+                                        TEMPORARY_WEIGHTS.add(i, new ArrayList<>());
+                                        TEMPORARY_WEIGHTS.get(i).set(0, gemWeight);
+                                    } else {
+                                        TEMPORARY_WEIGHTS.get(i).set(0, gemWeight);
+                                    }
                                 } else {
                                     if (TEMPORARY_WEIGHTS.get(i) == null) {
                                         TEMPORARY_WEIGHTS.add(i, new ArrayList<>());
-                                        TEMPORARY_WEIGHTS.get(i).set(0, gemWeight - (1 - temperatureDifference));
+                                        TEMPORARY_WEIGHTS.get(i).set(0, 1 - temperatureDifference);
                                     } else {
-                                        TEMPORARY_WEIGHTS.get(i).set(0, gemWeight - (1 - temperatureDifference));
+                                        TEMPORARY_WEIGHTS.get(i).set(0, 1 - temperatureDifference);
                                     }
                                 }
                             } else {

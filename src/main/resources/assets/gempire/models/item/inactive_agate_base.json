@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "gempire:item/inactive_agate_base"
+  }
+}

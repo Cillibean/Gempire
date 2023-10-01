@@ -339,6 +339,14 @@ public class ModBlocks {
             )
     );
 
+    public static final RegistryObject<Block> INCUBATOR_BLOCK = BLOCKS.register("incubator_block", () ->
+            new IncubatorBlock(BlockBehaviour.Properties
+                    .of(Material.STONE)
+                    .strength(3.0f, 6.0f)
+                    .sound(SoundType.METAL)
+            )
+    );
+
     public static final RegistryObject<Block> DRAINED_BLUE_SOIL = BLOCKS.register("drained_blue_soil", () ->
             new DrainedBlock(BlockBehaviour.Properties
                     .of(Material.DIRT)

@@ -31,6 +31,9 @@ public class ModTE {
     public static final RegistryObject<BlockEntityType<ShellTE>> SHELL_TE = TILE_ENTITIES.register(
             "shell_te", () -> BlockEntityType.Builder.of(ShellTE::new, ModBlocks.SHELL_BLOCK.get()).build(null));
 
+    public static final RegistryObject<BlockEntityType<IncubatorTE>> INCUBATOR_TE = TILE_ENTITIES.register(
+            "incubator_te", () -> BlockEntityType.Builder.of(IncubatorTE::new, ModBlocks.INCUBATOR_BLOCK.get()).build(null));
+
     public static final RegistryObject<BlockEntityType<PedistalTE>> PEDISTAL_TE = TILE_ENTITIES.register(
             "pedistal_te", () -> BlockEntityType.Builder.of(PedistalTE::new, ModBlocks.PEDISTAL.get()).build(null));
 
