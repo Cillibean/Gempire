@@ -429,6 +429,13 @@ public class ModItems {
                     new Item.Properties()
             )
     );
+
+    public static final RegistryObject<Item> INCUBATOR_BLOCK_ITEM = ITEMS.register("incubator_block", () ->
+            new BlockItem(
+                    ModBlocks.INCUBATOR_BLOCK.get(),
+                    new Item.Properties()
+            )
+    );
     public static final RegistryObject<Item> PRISMATIC_BLOCK = ITEMS.register("prismatic_block", () ->
             new BlockItem(
                     ModBlocks.PRISMATIC_BLOCK.get(),
@@ -643,6 +650,74 @@ public class ModItems {
             new ItemShard(new Item.Properties().stacksTo(64), 15));
     public static final RegistryObject<Item> SPECIAL_SHARDS = ITEMS.register("special_shards", () ->
             new ItemShard(new Item.Properties().stacksTo(64), 16));
+
+    public static final RegistryObject<Item> INACTIVE_AGATE_BASE = ITEMS.register("inactive_agate_base", () ->
+            new ItemGemBase(new Item.Properties()));
+
+    public static final RegistryObject<Item> INACTIVE_AQUAMARINE_BASE = ITEMS.register("inactive_aquamarine_base", () ->
+            new ItemGemBase(new Item.Properties()));
+
+    public static final RegistryObject<Item> INACTIVE_BISMUTH_BASE = ITEMS.register("inactive_bismuth_base", () ->
+            new ItemGemBase(new Item.Properties()));
+
+    public static final RegistryObject<Item> INACTIVE_BIXBITE_BASE = ITEMS.register("inactive_bixbite_base", () ->
+            new ItemGemBase(new Item.Properties()));
+
+    public static final RegistryObject<Item> INACTIVE_EMERALD_BASE = ITEMS.register("inactive_emerald_base", () ->
+            new ItemGemBase(new Item.Properties()));
+
+    public static final RegistryObject<Item> INACTIVE_GARNET_BASE = ITEMS.register("inactive_garnet_base", () ->
+            new ItemGemBase(new Item.Properties()));
+
+    public static final RegistryObject<Item> INACTIVE_JASPER_BASE = ITEMS.register("inactive_jasper_base", () ->
+            new ItemGemBase(new Item.Properties()));
+
+    public static final RegistryObject<Item> INACTIVE_LAPIS_LAZULI_BASE = ITEMS.register("inactive_lapis_lazuli_base", () ->
+            new ItemGemBase(new Item.Properties()));
+
+    public static final RegistryObject<Item> INACTIVE_LARIMAR_BASE = ITEMS.register("inactive_larimar_base", () ->
+            new ItemGemBase(new Item.Properties()));
+
+    public static final RegistryObject<Item> INACTIVE_MORGANITE_BASE = ITEMS.register("inactive_morganite_base", () ->
+            new ItemGemBase(new Item.Properties()));
+
+    public static final RegistryObject<Item> INACTIVE_NEPHRITE_BASE = ITEMS.register("inactive_nephrite_base", () ->
+            new ItemGemBase(new Item.Properties()));
+
+    public static final RegistryObject<Item> INACTIVE_OBSIDIAN_BASE = ITEMS.register("inactive_obsidian_base", () ->
+            new ItemGemBase(new Item.Properties()));
+
+    public static final RegistryObject<Item> INACTIVE_PERIDOT_BASE = ITEMS.register("inactive_peridot_base", () ->
+            new ItemGemBase(new Item.Properties()));
+
+    public static final RegistryObject<Item> INACTIVE_QUARTZ_BASE = ITEMS.register("inactive_quartz_base", () ->
+            new ItemGemBase(new Item.Properties()));
+
+    public static final RegistryObject<Item> INACTIVE_RUBY_BASE = ITEMS.register("inactive_ruby_base", () ->
+            new ItemGemBase(new Item.Properties()));
+
+    public static final RegistryObject<Item> INACTIVE_RUTILE_BASE = ITEMS.register("inactive_rutile_base", () ->
+            new ItemGemBase(new Item.Properties()));
+
+    public static final RegistryObject<Item> INACTIVE_SAPPHIRE_BASE = ITEMS.register("inactive_sapphire_base", () ->
+            new ItemGemBase(new Item.Properties()));
+
+    public static final RegistryObject<Item> INACTIVE_SPINEL_BASE = ITEMS.register("inactive_spinel_base", () ->
+            new ItemGemBase(new Item.Properties()));
+
+    public static final RegistryObject<Item> INACTIVE_SPODUMENE_BASE = ITEMS.register("inactive_spodumene_base", () ->
+            new ItemGemBase(new Item.Properties()));
+
+    public static final RegistryObject<Item> INACTIVE_TOPAZ_BASE = ITEMS.register("inactive_topaz_base", () ->
+            new ItemGemBase(new Item.Properties()));
+
+    public static final RegistryObject<Item> INACTIVE_TOURMALINE_BASE = ITEMS.register("inactive_tourmaline_base", () ->
+            new ItemGemBase(new Item.Properties()));
+
+    public static final RegistryObject<Item> INACTIVE_ZIRCON_BASE = ITEMS.register("inactive_zircon_base", () ->
+            new ItemGemBase(new Item.Properties()));
+
+
 
     public static final RegistryObject<Item> WHITE_SAPPHIRE_GEM = ITEMS.register("sapphire_gem_0", () ->
             new ItemGem(new Item.Properties(), Gempire.MODID));

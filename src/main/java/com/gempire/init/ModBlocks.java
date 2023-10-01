@@ -29,7 +29,7 @@ public class ModBlocks {
             new BlueEssenceBlock(ModFluids.BLUE_ESSENCE, BlockBehaviour.Properties.copy(Blocks.WATER)));
 
     public static final RegistryObject<LiquidBlock> YELLOW_ESSENCE_BLOCK = BLOCKS.register("yellow_essence_block", () ->
-            new LiquidBlock(ModFluids.YELLOW_ESSENCE, BlockBehaviour.Properties.copy(Blocks.WATER)));
+            new YellowEssenceBlock(ModFluids.YELLOW_ESSENCE, BlockBehaviour.Properties.copy(Blocks.WATER)));
 
     public static final RegistryObject<LiquidBlock> WHITE_ESSENCE_BLOCK = BLOCKS.register("white_essence_block", () ->
             new WhiteEssenceBlock(ModFluids.WHITE_ESSENCE, BlockBehaviour.Properties.copy(Blocks.WATER)));
@@ -336,6 +336,14 @@ public class ModBlocks {
                     .strength(3.0f, 6.0f)
                     .sound(SoundType.METAL)
                     .instabreak()
+            )
+    );
+
+    public static final RegistryObject<Block> INCUBATOR_BLOCK = BLOCKS.register("incubator_block", () ->
+            new IncubatorBlock(BlockBehaviour.Properties
+                    .of(Material.STONE)
+                    .strength(3.0f, 6.0f)
+                    .sound(SoundType.METAL)
             )
     );
 

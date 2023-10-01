@@ -3,6 +3,7 @@ package com.gempire.entities.gems;
 import com.gempire.entities.abilities.*;
 import com.gempire.entities.abilities.base.Ability;
 import com.gempire.entities.ai.*;
+import com.gempire.entities.bases.EntityFlyingRideableGem;
 import com.gempire.entities.bases.EntityGem;
 import com.gempire.entities.other.EntityAbomination;
 import com.gempire.entities.other.EntityCrawler;

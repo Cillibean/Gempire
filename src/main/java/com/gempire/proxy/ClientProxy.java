@@ -100,6 +100,7 @@ public class ClientProxy {
         MenuScreens.register(ModContainers.INJECTOR_CONTAINER.get(), InjectorScreen::new);
         MenuScreens.register(ModContainers.GEM_UI_CONTAINER.get(), GemUIScreen::new);
         MenuScreens.register(ModContainers.SHELL_CONTAINER.get(), ShellScreen::new);
+        MenuScreens.register(ModContainers.INCUBATOR_CONTAINER.get(), IncubatorScreen::new);
         MenuScreens.register(ModContainers.PEARL_UI_CONTAINER.get(), PearlUIScreen::new);
         MenuScreens.register(ModContainers.PEARL_DEFECTIVE_UI_CONTAINER.get(), PearlUIScreenDefective::new);
         MenuScreens.register(ModContainers.ZIRCON_UI_CONTAINER.get(), ZirconUIScreen::new);
@@ -404,6 +405,30 @@ public class ClientProxy {
                                 populator.accept(ModItems.GILDED_LAPIS.get());
                                 populator.accept(ModItems.PRIME_BOOST.get());
                                 populator.accept(ModItems.INJECTOR_PANEL.get());
+
+                                populator.accept(ModItems.INACTIVE_AQUAMARINE_BASE.get());
+                                populator.accept(ModItems.INACTIVE_NEPHRITE_BASE.get());
+                                populator.accept(ModItems.INACTIVE_BISMUTH_BASE.get());
+                                populator.accept(ModItems.INACTIVE_PERIDOT_BASE.get());
+                                populator.accept(ModItems.INACTIVE_RUTILE_BASE.get());
+                                populator.accept(ModItems.INACTIVE_BIXBITE_BASE.get());
+                                populator.accept(ModItems.INACTIVE_EMERALD_BASE.get());
+                                populator.accept(ModItems.INACTIVE_RUBY_BASE.get());
+                                populator.accept(ModItems.INACTIVE_LAPIS_LAZULI_BASE.get());
+                                populator.accept(ModItems.INACTIVE_LARIMAR_BASE.get());
+                                populator.accept(ModItems.INACTIVE_MORGANITE_BASE.get());
+                                populator.accept(ModItems.INACTIVE_OBSIDIAN_BASE.get());
+                                populator.accept(ModItems.INACTIVE_SAPPHIRE_BASE.get());
+                                populator.accept(ModItems.INACTIVE_SAPPHIRE_BASE.get());
+                                populator.accept(ModItems.INACTIVE_ZIRCON_BASE.get());
+                                populator.accept(ModItems.INACTIVE_SPINEL_BASE.get());
+                                populator.accept(ModItems.INACTIVE_TOPAZ_BASE.get());
+                                populator.accept(ModItems.INACTIVE_SPODUMENE_BASE.get());
+                                populator.accept(ModItems.INACTIVE_GARNET_BASE.get());
+                                populator.accept(ModItems.INACTIVE_QUARTZ_BASE.get());
+                                populator.accept(ModItems.INACTIVE_JASPER_BASE.get());
+                                populator.accept(ModItems.INACTIVE_TOURMALINE_BASE.get());
+                                populator.accept(ModItems.INACTIVE_AGATE_BASE.get());
                             })
                             .build()
             );
@@ -459,11 +484,12 @@ public class ClientProxy {
 
                                 populator.accept(ModItems.ICE_SPIKE.get());
 
-                                populator.accept(ModItems.TANK_BLOCK_ITEM.get());
-                                populator.accept(ModItems.POWER_CRYSTAL_BLOCK_ITEM.get());
-                                populator.accept(ModItems.POWER_CRYSTAL_BLOCK_TIER_2_ITEM.get());
-                                populator.accept(ModItems.DRILL_BLOCK_ITEM.get());
+                                //populator.accept(ModItems.TANK_BLOCK_ITEM.get());
+                                //populator.accept(ModItems.POWER_CRYSTAL_BLOCK_ITEM.get());
+                                //populator.accept(ModItems.POWER_CRYSTAL_BLOCK_TIER_2_ITEM.get());
+                                //populator.accept(ModItems.DRILL_BLOCK_ITEM.get());
                                 populator.accept(ModItems.SHELL_BLOCK_ITEM.get());
+                                populator.accept(ModItems.INCUBATOR_BLOCK_ITEM.get());
                                 populator.accept(ModItems.PEDISTAL.get());
 
                                 populator.accept(ModItems.CONGEALED_PINK_ESSENCE_BLOCK.get());
