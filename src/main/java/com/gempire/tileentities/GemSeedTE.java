@@ -102,10 +102,10 @@ public class GemSeedTE extends BlockEntity {
                         te.setChanged();
                     } else {
                         te.spawned = true;
-                        ArrayList list = te.tier == 1 ? GemFormation.POSSIBLE_GEMS_TIER_1 : GemFormation.POSSIBLE_GEMS_TIER_2;
+                        ArrayList list = te.tier == 1 ? (level.dimension() == Level.NETHER ? GemFormation.NETHER_POSSIBLE_GEMS_TIER_1 : (level.dimension() == Level.END ? GemFormation.END_POSSIBLE_GEMS_TIER_1 : GemFormation.POSSIBLE_GEMS_TIER_1)) : (level.dimension() == Level.NETHER ? GemFormation.NETHER_POSSIBLE_GEMS_TIER_2 : (level.dimension() == Level.END ? GemFormation.END_POSSIBLE_GEMS_TIER_2 : GemFormation.POSSIBLE_GEMS_TIER_2));
                         for (int i = 0; i < list.size(); i++) {
                             if (te.TEMPORARY_WEIGHTS.get(i) == null) {
-                                te.TEMPORARY_WEIGHTS.add(i, new ArrayList<Float>());
+                                te.TEMPORARY_WEIGHTS.add(i, new ArrayList<>());
                             }
                             //te.TEMPORARY_WEIGHTS.add(i, new ArrayList<Float>());
                             float weight = 0;
@@ -164,7 +164,7 @@ public class GemSeedTE extends BlockEntity {
         float BLOCK_TEMPERATURE = this.level.getBiome(this.getBlockPos()).get().getBaseTemperature();
         this.SetDrainedStoneColor(BLOCK_TEMPERATURE);
         Block block = this.level.getBlockState(blockPos).getBlock();
-        ArrayList list = tier == 1 ? GemFormation.POSSIBLE_GEMS_TIER_1 : GemFormation.POSSIBLE_GEMS_TIER_2;
+        ArrayList list = tier == 1 ? (level.dimension() == Level.NETHER ? GemFormation.NETHER_POSSIBLE_GEMS_TIER_1 : (level.dimension() == Level.END ? GemFormation.END_POSSIBLE_GEMS_TIER_1 : GemFormation.POSSIBLE_GEMS_TIER_1)) : (level.dimension() == Level.NETHER ? GemFormation.NETHER_POSSIBLE_GEMS_TIER_2 : (level.dimension() == Level.END ? GemFormation.END_POSSIBLE_GEMS_TIER_2 : GemFormation.POSSIBLE_GEMS_TIER_2));
         if (block instanceof DrainedBlock || block == Blocks.BEDROCK) return;
             for (int i = 0; i < list.size(); i++) {
                 String gem = (String) list.get(i);
@@ -205,12 +205,17 @@ public class GemSeedTE extends BlockEntity {
                             //Then for every crux, calculate the total weight of crux that matches every block in the volume for every gem
                             //Example: if there are three stone in the volume, the total weight will be 3 stone times however many gems there are that have stone as a crux, and so forth
                             if (block != crux.block) {
-                                if (block.defaultBlockState().is(Tags.Blocks.STONE)) {
+                                if (block.defaultBlockState().is(Tags.Blocks.STONE) || block == Blocks.STONE) {
                                     totalWeight += 1 * GEM_CONDITIONS.get(gem).rarity;
                                     gemWeight += 1 * (1 - temperatureDifference);
                                     TEMPORARY_WEIGHTS.get(i).set(0, gemWeight);
                                 } else {
-                                    TEMPORARY_WEIGHTS.get(i).set(0, gemWeight - (1 - temperatureDifference));
+                                    if (TEMPORARY_WEIGHTS.get(i) == null) {
+                                        TEMPORARY_WEIGHTS.add(i, new ArrayList<>());
+                                        TEMPORARY_WEIGHTS.get(i).set(0, gemWeight - (1 - temperatureDifference));
+                                    } else {
+                                        TEMPORARY_WEIGHTS.get(i).set(0, gemWeight - (1 - temperatureDifference));
+                                    }
                                 }
                             } else {
                                 totalWeight += crux.weight * GEM_CONDITIONS.get(gem).rarity;
