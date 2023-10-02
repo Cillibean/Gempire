@@ -45,8 +45,6 @@ public class IncubatorContainer extends AbstractContainerMenu {
     private final Level level;
     private final ContainerData data;
 
-    public static ArrayList<Item> blocks = new ArrayList<>();
-
     public IncubatorContainer(int windowId, Inventory inv, FriendlyByteBuf extraData) {
         this(windowId, inv, inv.player.level.getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(2));
     }
@@ -65,7 +63,7 @@ public class IncubatorContainer extends AbstractContainerMenu {
         //TILE ENTITY
         this.addSlot(new Slot(this.incubator, IncubatorTE.BLOCK1_INPUT_SLOT_INDEX, 21, 17){
             public boolean mayPlace(ItemStack stack) {
-                return blocks.contains(stack.getItem());
+                return incubator.blockList.contains(stack.getItem());
             }
         });
         this.addSlot(new Slot(this.incubator, IncubatorTE.PRIMER_INPUT_SLOT_INDEX, 39, 17){
@@ -74,11 +72,11 @@ public class IncubatorContainer extends AbstractContainerMenu {
             }
         });
         this.addSlot(new Slot(this.incubator, IncubatorTE.BLOCK2_INPUT_SLOT_INDEX, 57, 17){
-            public boolean mayPlace(ItemStack stack) {return blocks.contains(stack.getItem());}
+            public boolean mayPlace(ItemStack stack) {return incubator.blockList.contains(stack.getItem());}
         });
         this.addSlot(new Slot(this.incubator, IncubatorTE.BLOCK3_INPUT_SLOT_INDEX, 21, 35){
             public boolean mayPlace(ItemStack stack) {
-                return blocks.contains(stack.getItem());
+                return incubator.blockList.contains(stack.getItem());
             }
         });
         this.addSlot(new Slot(this.incubator, IncubatorTE.GEM_BASE_INPUT_SLOT_INDEX, 39, 35){
@@ -91,7 +89,7 @@ public class IncubatorContainer extends AbstractContainerMenu {
         });
         this.addSlot(new Slot(this.incubator, IncubatorTE.BLOCK4_INPUT_SLOT_INDEX, 57, 35){
             public boolean mayPlace(ItemStack stack) {
-                return blocks.contains(stack.getItem());
+                return incubator.blockList.contains(stack.getItem());
             }
         });
         this.addSlot(new Slot(this.incubator, IncubatorTE.ESSENCE1_INPUT_SLOT_INDEX, 21, 53){
