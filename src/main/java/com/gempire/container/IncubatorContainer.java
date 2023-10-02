@@ -10,12 +10,11 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.ContainerLevelAccess;
-import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
@@ -43,12 +42,24 @@ public class IncubatorContainer extends AbstractContainerMenu {
     public final ContainerLevelAccess canInteract;
 
     public final IncubatorTE incubator;
+    private final Level level;
+    private final ContainerData data;
 
     public static ArrayList<Item> blocks = new ArrayList<>();
 
-    public IncubatorContainer(int windowID, Inventory playerInventory, IncubatorTE incubator) {
+    public IncubatorContainer(int windowId, Inventory inv, FriendlyByteBuf extraData) {
+        this(windowId, inv, inv.player.level.getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(2));
+    }
+
+    public IncubatorContainer(int windowID, Inventory playerInventory, BlockEntity entity, ContainerData data) {
         super(ModContainers.INCUBATOR_CONTAINER.get(), windowID);
-        this.incubator = incubator;
+        checkContainerSize(playerInventory, 10);
+        incubator = (IncubatorTE) entity;
+        this.level = playerInventory.player.level;
+        this.data = data;
+
+        addDataSlots(data);
+
         this.canInteract = ContainerLevelAccess.create(this.incubator.getLevel(), this.incubator.getBlockPos());
 
         //TILE ENTITY
@@ -59,7 +70,7 @@ public class IncubatorContainer extends AbstractContainerMenu {
         });
         this.addSlot(new Slot(this.incubator, IncubatorTE.PRIMER_INPUT_SLOT_INDEX, 39, 17){
             public boolean mayPlace(ItemStack stack) {
-                return stack.getItem() == ModItems.PRIME_BOOST.get();
+                return stack.getItem() == ModItems.PRIME_BOOST.get() || stack.getItem() == ModItems.GILDED_LAPIS.get();
             }
         });
         this.addSlot(new Slot(this.incubator, IncubatorTE.BLOCK2_INPUT_SLOT_INDEX, 57, 17){
@@ -133,8 +144,16 @@ public class IncubatorContainer extends AbstractContainerMenu {
         }
     }
 
-    public IncubatorContainer(int windowID, Inventory playerInventory, FriendlyByteBuf extraData){
-        this(windowID, playerInventory, IncubatorContainer.getTileEntity(playerInventory, extraData));
+    public boolean isCrafting() {
+        return data.get(0) > 0;
+    }
+
+    public int getScaledProgress() {
+        int progress = this.data.get(0);
+        int maxProgress = this.data.get(1);  // Max Progress
+        int progressArrowSize = 26; // This is the width in pixels of your arrow
+
+        return maxProgress != 0 && progress != 0 ? progress * progressArrowSize / maxProgress : 0;
     }
 
     public static IncubatorTE getTileEntity(Inventory playerInventory, FriendlyByteBuf extraData){

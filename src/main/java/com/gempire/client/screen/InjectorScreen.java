@@ -55,7 +55,7 @@ public class InjectorScreen extends AbstractContainerScreen<InjectorContainer> {
         GUIUtilities.setup(INJECTOR_GUI);
         int x = (this.width - this.imageWidth) / 2;
         int y = (this.height - this.imageHeight) / 2;
-        this.blit(matrixStack, x, y, 0, 0, this.imageWidth, this.imageHeight);
+        blit(matrixStack, x, y, 0, 0, this.imageWidth, this.imageHeight);
         FluidStack pinkFluid = this.menu.injector.getTankFromValue(0).getFluid();
         FluidStack blueFluid = this.menu.injector.getTankFromValue(1).getFluid();
         FluidStack yellowFluid = this.menu.injector.getTankFromValue(2).getFluid();
