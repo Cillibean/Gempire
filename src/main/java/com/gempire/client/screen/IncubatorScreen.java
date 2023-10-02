@@ -12,7 +12,6 @@ import net.minecraft.world.entity.player.Inventory;
 
 public class IncubatorScreen extends AbstractContainerScreen<IncubatorContainer> {
     public static final ResourceLocation GUI = new ResourceLocation("gempire:textures/gui/base_incubator.png");
-
     public IncubatorScreen(IncubatorContainer screenContainer, Inventory inv, Component titleIn) {
         super(screenContainer, inv, titleIn);
         this.leftPos = 0;
@@ -43,7 +42,10 @@ public class IncubatorScreen extends AbstractContainerScreen<IncubatorContainer>
         GUIUtilities.setup(GUI);
         int x = (this.width - this.imageWidth) / 2;
         int y = (this.height - this.imageHeight) / 2;
-        this.blit(matrixStack, x, y, 0, 0, this.imageWidth, this.imageHeight);
+        blit(matrixStack, x, y, 0, 0, this.imageWidth, this.imageHeight);
+        if (menu.isCrafting()) {
+            blit(matrixStack, x + 80, y + 36, 177, 1, menu.getScaledProgress(), 16);
+        }
         //EnergyMeter.RenderBattery(this, matrixStack, container.shell, container.shell, x + 8, y + 4, MeterSize.NORMAL);
     }
 }
