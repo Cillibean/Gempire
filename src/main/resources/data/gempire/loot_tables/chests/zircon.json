@@ -1,0 +1,28 @@
+{
+  "pools": [{
+    "rolls": 1,
+    "entries": [
+      {
+        "type": "minecraft:item",
+        "name": "gempire:inactive_zircon_base",
+        "weight": 15
+      },
+      {
+        "type": "minecraft:item",
+        "name": "gempire:slate",
+        "weight": 55
+      },
+      {
+        "type": "minecraft:item",
+        "name": "gempire:primed_slate",
+        "weight": 10
+      }
+    ],
+    "conditions": [
+      {
+        "condition": "minecraft:random_chance",
+        "chance": 0.25
+      }
+    ]
+  }]
+}

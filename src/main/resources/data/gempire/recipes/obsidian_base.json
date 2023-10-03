@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "NIN",
+    "FSF",
+    "MIM"
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:snow_block"
+    },
+    "S": {
+      "item": "gempire:primed_slate"
+    },
+    "N": {
+      "item": "minecraft:obsidian"
+    },
+    "M": {
+      "item": "minecraft:crying_obsidian"
+    },
+    "F": {
+      "item": "minecraft:glass_pane"
+    }
+  },
+  "result": {
+    "item": "gempire:inactive_obsidian_base"
+  }
+}

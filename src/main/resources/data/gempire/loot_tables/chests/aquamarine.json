@@ -1,0 +1,28 @@
+{
+  "pools": [{
+    "rolls": 1,
+    "entries": [
+      {
+        "type": "minecraft:item",
+        "name": "gempire:inactive_aquamarine_base",
+        "weight": 30
+      },
+      {
+        "type": "minecraft:item",
+        "name": "gempire:slate",
+        "weight": 40
+      },
+      {
+        "type": "minecraft:item",
+        "name": "gempire:primed_slate",
+        "weight": 10
+      }
+    ],
+    "conditions": [
+      {
+        "condition": "minecraft:random_chance",
+        "chance": 0.50
+      }
+    ]
+  }]
+}

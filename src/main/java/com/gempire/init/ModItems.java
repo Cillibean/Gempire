@@ -508,6 +508,12 @@ public class ModItems {
     public static final RegistryObject<Item> PRIME_BOOST = ITEMS.register("prime_boost", () ->
             new Item(new Item.Properties().stacksTo(64)));
 
+    public static final RegistryObject<Item> PRIMED_SLATE = ITEMS.register("primed_slate", () ->
+            new Item(new Item.Properties().stacksTo(1)));
+
+    public static final RegistryObject<Item> SLATE = ITEMS.register("slate", () ->
+            new Item(new Item.Properties().stacksTo(1)));
+
     public static final RegistryObject<Item> SPODUMENE_PIECE = ITEMS.register("spodumene_piece", () ->
             new Item(new Item.Properties().stacksTo(64).food(ModFoods.SPODUMENE_PIECE)));
     public static final RegistryObject<Item> ICE_SHARD = ITEMS.register("ice_shard", () ->

@@ -42,6 +42,9 @@
   "item.gempire.raw_tungsten": "Raw Tungsten",
   "item.gempire.tungsten_nugget": "Tungsten Nugget",
 
+  "item.gempire.primed_slate": "Primed Slate",
+  "item.gempire.slate": "Slate",
+
   "block.gempire.gem_seed_block": "Geode",
   "block.gempire.injector_block": "Injector",
   "block.gempire.drill_block": "Drill",

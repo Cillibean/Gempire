@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "NBN",
+    "FSF",
+    "MNM"
+  ],
+  "key": {
+    "B": {
+      "item": "gempire:inactive_peridot_base"
+    },
+    "S": {
+      "item": "gempire:primed_slate"
+    },
+    "N": {
+      "item": "minecraft:diamond"
+    },
+    "M": {
+      "item": "minecraft:diamond_block"
+    },
+    "F": {
+      "item": "minecraft:netherite_ingot"
+    }
+  },
+  "result": {
+    "item": "gempire:inactive_peridot_base"
+  }
+}
