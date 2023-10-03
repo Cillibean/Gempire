@@ -10,7 +10,7 @@
     },
     {
       "type": "patchouli:crafting",
-      "recipe": "gempire:incubator",
+      "recipe": "gempire:incubator_block",
       "text": "Incubator recipe."
     },
     {

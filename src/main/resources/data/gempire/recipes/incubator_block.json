@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "TIT",
+    "IPI",
+    "TIT"
+  ],
+  "key": {
+    "T": {
+      "item": "gempire:tungsten_block"
+    },
+    "I": {
+      "item": "minecraft:iron_block"
+    },
+    "P": {
+      "item": "gempire:power_crystal"
+    }
+  },
+  "result": {
+    "item": "gempire:incubator_block"
+  }
+}
