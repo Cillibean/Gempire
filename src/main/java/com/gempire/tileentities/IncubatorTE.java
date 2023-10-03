@@ -548,10 +548,56 @@ public class IncubatorTE extends RandomizableContainerBlockEntity implements Men
         blocks.put("tourmaline", tourmaline);
         blocks.put("zircon", zircon);
 
+        blockList.add(Items.ANCIENT_DEBRIS);
+        blockList.add(Items.BLAZE_ROD);
+        blockList.add(Items.BLUE_ICE);
+        blockList.add(Items.BONE_BLOCK);
+        blockList.add(Items.BRAIN_CORAL_BLOCK);
         blockList.add(Items.CALCITE);
-        blockList.add(Items.RAW_COPPER_BLOCK);
-        blockList.add(Items.QUARTZ_BLOCK);
+        blockList.add(Items.CHORUS_FLOWER);
+        blockList.add(Items.CLAY);
+        blockList.add(Items.CRYING_OBSIDIAN);
+        blockList.add(Items.DARK_PRISMARINE);
+        blockList.add(Items.DEEPSLATE);
+        blockList.add(Items.DIAMOND_BLOCK);
+        blockList.add(Items.EMERALD_BLOCK);
+        blockList.add(Items.ENDER_EYE);
+        blockList.add(Items.END_STONE);
+        blockList.add(Items.EXPERIENCE_BOTTLE);
+        blockList.add(Items.FIRE_CORAL_BLOCK);
+        blockList.add(Items.GHAST_TEAR);
+        blockList.add(Items.GILDED_BLACKSTONE);
+        blockList.add(Items.GLOWSTONE);
+        blockList.add(Items.HONEYCOMB);
+        blockList.add(Items.HONEY_BLOCK);
+        blockList.add(Items.ICE);
+        blockList.add(Items.IRON_BLOCK);
+        blockList.add(Items.LAPIS_BLOCK);
+        blockList.add(Items.MAGMA_BLOCK);
+        blockList.add(Items.MOSS_BLOCK);
+        blockList.add(Items.MYCELIUM);
         blockList.add(Items.NETHERRACK);
+        blockList.add(Items.NETHER_WART);
+        blockList.add(Items.OBSIDIAN);
+        blockList.add(Items.PACKED_ICE);
+        blockList.add(Items.PHANTOM_MEMBRANE);
+        blockList.add(Items.PRISMARINE);
+        blockList.add(Items.QUARTZ_BLOCK);
+        blockList.add(Items.RAW_COPPER);
+        blockList.add(Items.RAW_COPPER_BLOCK);
+        blockList.add(Items.RAW_GOLD);
+        blockList.add(Items.RAW_GOLD_BLOCK);
+        blockList.add(Items.RAW_IRON);
+        blockList.add(Items.RAW_IRON_BLOCK);
+        blockList.add(Items.RED_SANDSTONE);
+        blockList.add(Items.SCULK);
+        blockList.add(Items.SLIME_BLOCK);
+        blockList.add(Items.SMOOTH_BASALT);
+        blockList.add(Items.SNOW_BLOCK);
+        blockList.add(Items.SOUL_SAND);
+        blockList.add(Items.SOUL_SOIL);
+        //blockList.add(Items.TUNGSTEN_BLOCK);
+        blockList.add(Items.WITHER_ROSE);
 
         //------------
 
