@@ -21,15 +21,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "$(l)Cruxes$() $(br)$(li)Iron Ore$(li)Copper Ore$(li)Nether Gold Ore$(li)Magma Block$(li)Ancient Debris$(li)Netherite Block"
-    },
-    {
-      "type": "patchouli:text",
-      "text": "This gem's Injector primer item is a Netherite Ingot."
-    },
-    {
-      "type": "patchouli:text",
-      "text": "This gem's preferred biome temperatures range between 1.2 and 2."
+      "text": "$(l)Cruxes$() $(br)$(li)Netherrack$(li)Iron Ore"
     }
   ]
 }

@@ -21,15 +21,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "$(l)Cruxes$() $(br)$(li)Obsidian$(li)Blackstone"
-    },
-    {
-      "type": "patchouli:text",
-      "text": "This gem's Injector primer item is an End Crystal."
-    },
-    {
-      "type": "patchouli:text",
-      "text": "This gem's preferred biome temperatures range between 1.5 and 2."
+      "text": "$(l)Cruxes$() $(br)$(li)Obsidian$(li)Crying Obsidian"
     }
   ]
 }

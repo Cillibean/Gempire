@@ -23,14 +23,6 @@
     {
       "type": "patchouli:text",
       "text": "$(l)Cruxes$() $(br)$(li)Ice$(li)Snow Block$(li)Packed Ice"
-    },
-    {
-      "type": "patchouli:text",
-      "text": "This gem's Injector primer item is Blue Ice."
-    },
-    {
-      "type": "patchouli:text",
-      "text": "This gem's preferred biome temperatures range between -0.5 and 0.1."
     }
   ]
 }

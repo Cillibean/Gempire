@@ -21,15 +21,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "$(l)Cruxes$() $(br)$(li)Coal Ore$(li)Clay$(li)Gold Ore$(li)Raw Gold Block$(li)Gold Block"
-    },
-    {
-      "type": "patchouli:text",
-      "text": "This gem's Injector primer item is a Gold Block."
-    },
-    {
-      "type": "patchouli:text",
-      "text": "This gem's preferred biome temperatures range between 1 and 1.5."
+      "text": "$(l)Cruxes$() $(br)$(li)Raw Gold Block$(li)Gilded Blackstone"
     }
   ]
 }

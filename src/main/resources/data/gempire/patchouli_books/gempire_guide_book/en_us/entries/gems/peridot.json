@@ -22,15 +22,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "$(l)Cruxes$() $(br)$(li)Gravel$(li)Iron Ore$(li)Clay$(li)Iron Block$(li)Basalt"
-    },
-    {
-      "type": "patchouli:text",
-      "text": "This gem's Injector primer item is a Bottle o'Enchanting."
-    },
-    {
-      "type": "patchouli:text",
-      "text": "This gem's preferred biome temperatures range between 1 and 1.8."
+      "text": "$(l)Cruxes$() $(br)$(li)Clay$(li)Raw Iron Block$(li)Smooth Basalt$(li)Experience Bottle"
     }
   ]
 }

@@ -1,0 +1,25 @@
+{
+  "name": "Incubation",
+  "icon": "gempire:incubator",
+  "advancement": "gempire:root",
+  "category": "gempire:gem_creation_category",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "In order to incubate, first you must craft an Incubator. View the graphic below to find the recipe for the Incubator."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "gempire:incubator",
+      "text": "Incubator recipe."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Now, place down your Incubator where ever you would like it, then you can open the Incubator GUI by right-clicking the block. $(br)In order to create gems you need Gem Essence, Chroma, an inactive Gem base of your choosing, and the cruxes required to grow that gem. $(br)Each gem has a page in the guidebook that describes what its requirements are, including cruxes and Gem Essence colors."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "You may also supplement the Incubator with Primer items, such as a Prime Booster or a Speed Booster."
+    }
+  ]
+}

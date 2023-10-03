@@ -22,15 +22,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "$(l)Cruxes$() $(br)$(li)Prismarine$(li)Lapis Ore$(li)Dark Prismarine$(li)Lapis Block"
-    },
-    {
-      "type": "patchouli:text",
-      "text": "This gem's Injector primer item is a Nautilus Shell."
-    },
-    {
-      "type": "patchouli:text",
-      "text": "This gem's preferred biome temperatures range between 0.5 and 0.8."
+      "text": "$(l)Cruxes$() $(br)$(li)Lapis Block$(li)Dark Prismarine$(li)Calcite"
     }
   ]
 }

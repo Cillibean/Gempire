@@ -21,15 +21,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "$(l)Cruxes$() $(br)$(li)Iron Ore$(li)Clay$(li)Prismarine$(li)Soul Sand"
-    },
-    {
-      "type": "patchouli:text",
-      "text": "This gem's Injector primer item is a Ghast Tear."
-    },
-    {
-      "type": "patchouli:text",
-      "text": "This gem's preferred biome temperatures range between 0.5 and 1."
+      "text": "$(l)Cruxes$() $(br)$(li)Soul Soil$(li)Prismarine$(li)Ghast Tear"
     }
   ]
 }

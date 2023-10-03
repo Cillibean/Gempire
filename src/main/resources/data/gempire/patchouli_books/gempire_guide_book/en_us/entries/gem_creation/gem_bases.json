@@ -1,0 +1,18 @@
+{
+  "name": "Inactive Gem Bases",
+  "icon": "gempire:incubator",
+  "advancement": "gempire:root",
+  "category": "gempire:gem_creation_category",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "There are twenty-two confirmed inactive Gem base materials one can use in their colony formation. Some are crafted while others must be found in looted chests and by trading with Villagers."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "gempire:inactive_ruby_base",
+      "recipe2": "gempire:inactive_nephrite_base",
+      "text": "Examples of an inactive Gem base recipe."
+    }
+  ]
+}

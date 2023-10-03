@@ -8,7 +8,7 @@
       "type": "patchouli:spotlight",
       "link_recipe ": true,
       "item": "gempire:prime_boost",
-      "text": "Prime Boosters are used in your Injector to improve the quality of the gem that emerges after being injected."
+      "text": "Prime Boosters are used in your Incubator to improve the quality of the gem that pops out after being incubated."
     },
     {
       "type": "patchouli:crafting",

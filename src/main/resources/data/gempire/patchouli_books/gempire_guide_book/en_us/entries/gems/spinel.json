@@ -22,15 +22,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "$(l)Cruxes$() $(br)$(li)Ancient Debris$(li)Iron Ore$(li)Magma Block$(li)Copper Ore$(li)Iron Block$(li)Slime Block"
-    },
-    {
-      "type": "patchouli:text",
-      "text": "This gem's Injector primer item is Nether Wart."
-    },
-    {
-      "type": "patchouli:text",
-      "text": "This gem's preferred biome temperatures range between 1 and 1.5."
+      "text": "$(l)Cruxes$() $(br)$(li)Nether Wart$(li)Chorus Flower$(li)Slime Block"
     }
   ]
 }

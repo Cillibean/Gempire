@@ -18,19 +18,11 @@
     },
     {
       "type": "patchouli:text",
-      "text": "$(l)Essence Requirements$() $(br)$(li)Pink$(li)Yellow$(li)White"
+      "text": "$(l)Essence Requirements$() $(br)$(li)Pink$(li)Yellow"
     },
     {
       "type": "patchouli:text",
-      "text": "$(l)Cruxes$() $(br)$(li)Ancient Debris$(li)Copper Ore$(li)Sculk$(li)Bone Block$(li)End Stone$(li)Netherite Block$(li)Blackstone"
-    },
-    {
-      "type": "patchouli:text",
-      "text": "This gem's Injector primer item is a Wither Skeleton Skull."
-    },
-    {
-      "type": "patchouli:text",
-      "text": "This gem's preferred biome temperatures range between 0 and 2."
+      "text": "$(l)Cruxes$() $(br)$(li)Netherrack$(li)Raw Copper$(li)Sculk$(li)Bone Block"
     }
   ]
 }
