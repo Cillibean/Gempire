@@ -1,0 +1,28 @@
+{
+  "pools": [{
+    "rolls": 1,
+    "entries": [
+      {
+        "type": "minecraft:item",
+        "name": "gempire:inactive_sapphire_base",
+        "weight": 20
+      },
+      {
+        "type": "minecraft:item",
+        "name": "gempire:slate",
+        "weight": 50
+      },
+      {
+        "type": "minecraft:item",
+        "name": "gempire:primed_slate",
+        "weight": 10
+      }
+    ],
+    "conditions": [
+      {
+        "condition": "minecraft:random_chance",
+        "chance": 0.25
+      }
+    ]
+  }]
+}

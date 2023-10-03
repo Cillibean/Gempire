@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "NIN",
+    "FSF",
+    "MIM"
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:quartz"
+    },
+    "S": {
+      "item": "gempire:primed_slate"
+    },
+    "N": {
+      "item": "minecraft:blaze_powder"
+    },
+    "M": {
+      "item": "minecraft:terracotta"
+    },
+    "F": {
+      "item": "minecraft:raw_iron"
+    }
+  },
+  "result": {
+    "item": "gempire:inactive_jasper_base"
+  }
+}

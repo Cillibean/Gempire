@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "NIN",
+    "FSF",
+    "NIN"
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:honey_block"
+    },
+    "S": {
+      "item": "gempire:primed_slate"
+    },
+    "F": {
+      "item": "minecraft:blaze_powder"
+    },
+    "N": {
+      "item": "minecraft:slime_block"
+    }
+  },
+  "result": {
+    "item": "gempire:inactive_nephrite_base"
+  }
+}

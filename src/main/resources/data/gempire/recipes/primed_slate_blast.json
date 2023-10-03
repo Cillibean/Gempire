@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:blasting",
+  "experience": 1,
+  "cookingtime": 300,
+  "ingredient": {
+    "item": "gempire:slate"
+  },
+  "result": {
+    "item": "gempire:primed_slate"
+  }
+}

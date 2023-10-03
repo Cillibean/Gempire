@@ -394,7 +394,7 @@ public class IncubatorTE extends RandomizableContainerBlockEntity implements Men
         colour.put("aquamarine", false);
         colour.put("emerald", false);
         colour.put("bixbite", false);
-        colour.put("lapis", false);
+        colour.put("lapis_lazuli", false);
         colour.put("obsidian", false);
         colour.put("larimar", false);
         colour.put("morganite", false);
@@ -419,7 +419,7 @@ public class IncubatorTE extends RandomizableContainerBlockEntity implements Men
         HashMap<Item, Integer> emerald = new HashMap<>();
         HashMap<Item, Integer> garnet = new HashMap<>();
         HashMap<Item, Integer> jasper = new HashMap<>();
-        HashMap<Item, Integer> lapis = new HashMap<>();
+        HashMap<Item, Integer> lapis_lazuli = new HashMap<>();
         HashMap<Item, Integer> larimar = new HashMap<>();
         HashMap<Item, Integer> morganite = new HashMap<>();
         HashMap<Item, Integer> nephrite = new HashMap<>();
@@ -466,9 +466,9 @@ public class IncubatorTE extends RandomizableContainerBlockEntity implements Men
         jasper.put(Items.GILDED_BLACKSTONE, 3);
         jasper.put(Items.BLAZE_ROD, 4);
 
-        lapis.put(Items.CALCITE, 2);
-        lapis.put(Items.DARK_PRISMARINE, 3);
-        lapis.put(Items.LAPIS_BLOCK, 4);
+        lapis_lazuli.put(Items.CALCITE, 2);
+        lapis_lazuli.put(Items.DARK_PRISMARINE, 3);
+        lapis_lazuli.put(Items.LAPIS_BLOCK, 4);
 
         larimar.put(Items.SNOW_BLOCK, 1);
         larimar.put(Items.ICE, 2);
@@ -532,7 +532,7 @@ public class IncubatorTE extends RandomizableContainerBlockEntity implements Men
         blocks.put("emerald", emerald);
         blocks.put("garnet", garnet);
         blocks.put("jasper", jasper);
-        blocks.put("lapis", lapis);
+        blocks.put("lapis_lazuli", lapis_lazuli);
         blocks.put("larimar", larimar);
         blocks.put("morganite", morganite);
         blocks.put("nephrite", nephrite);
@@ -562,7 +562,7 @@ public class IncubatorTE extends RandomizableContainerBlockEntity implements Men
         time.put("aquamarine", 50);
         time.put("emerald", 50);
         time.put("bixbite", 50);
-        time.put("lapis", 50);
+        time.put("lapis_lazuli", 50);
         time.put("obsidian", 50);
         time.put("larimar", 50);
         time.put("morganite", 50);
@@ -617,7 +617,7 @@ public class IncubatorTE extends RandomizableContainerBlockEntity implements Men
         essenceRequired.put("aquamarine", blueWhite);
         essenceRequired.put("emerald", yellowBlue);
         essenceRequired.put("bixbite", allPink);
-        essenceRequired.put("lapis", allBlue);
+        essenceRequired.put("lapis_lazuli", allBlue);
         essenceRequired.put("obsidian", allWhite);
         essenceRequired.put("larimar", allBlue);
         essenceRequired.put("morganite", allPink);

@@ -145,13 +145,74 @@ public class Gempire
                 || event.getName().equals(new ResourceLocation("minecraft", "chests/pillager_outpost"))
                 || event.getName().equals(new ResourceLocation("minecraft", "chests/end_city_treasure"))
                 || event.getName().equals(new ResourceLocation("minecraft", "chests/stronghold_library"))
-                || event.getName().equals(new ResourceLocation("minecraft", "chests/village_armorer"))
-                || event.getName().equals(new ResourceLocation("minecraft", "chests/village_toolsmith"))
+                || event.getName().equals(new ResourceLocation("minecraft", "chests/village/village_armorer"))
+                || event.getName().equals(new ResourceLocation("minecraft", "chests/village/village_toolsmith"))
                 || event.getName().equals(new ResourceLocation("minecraft", "chests/ruined_portal"))
-                || event.getName().equals(new ResourceLocation("minecraft", "chests/desert_pyramid"))
-        ) {
+                || event.getName().equals(new ResourceLocation("minecraft", "chests/desert_pyramid"))) {
             event.getTable().addPool(LootPool.lootPool().add(LootTableReference.lootTableReference(new ResourceLocation(MODID, "chests/essence"))).build());
         }
+        if (event.getName().equals(new ResourceLocation("minecraft", "chests/abandoned_mineshaft"))) {
+            event.getTable().addPool(LootPool.lootPool().add(LootTableReference.lootTableReference(new ResourceLocation(MODID, "chests/peridot"))).build());
+        }
+        if (event.getName().equals(new ResourceLocation("minecraft", "chests/end_city_treasure"))) {
+            event.getTable().addPool(LootPool.lootPool().add(LootTableReference.lootTableReference(new ResourceLocation(MODID, "chests/spinel"))).build());
+            event.getTable().addPool(LootPool.lootPool().add(LootTableReference.lootTableReference(new ResourceLocation(MODID, "chests/zircon"))).build());
+        }
+        if (event.getName().equals(new ResourceLocation("minecraft", "chests/igloo_chest"))) {
+            event.getTable().addPool(LootPool.lootPool().add(LootTableReference.lootTableReference(new ResourceLocation(MODID, "chests/larimar"))).build());
+        }
+        if (event.getName().equals(new ResourceLocation("minecraft", "chests/ancient_city"))) {
+            event.getTable().addPool(LootPool.lootPool().add(LootTableReference.lootTableReference(new ResourceLocation(MODID, "chests/garent"))).build());
+            event.getTable().addPool(LootPool.lootPool().add(LootTableReference.lootTableReference(new ResourceLocation(MODID, "chests/zircon"))).build());
+        }
+        if (event.getName().equals(new ResourceLocation("minecraft", "chests/pillager_outpost")) ||
+                event.getName().equals(new ResourceLocation("minecraft", "chests/woodland_mansion"))) {
+            event.getTable().addPool(LootPool.lootPool().add(LootTableReference.lootTableReference(new ResourceLocation(MODID, "chests/aquamarine"))).build());
+        }
+        if (event.getName().equals(new ResourceLocation("minecraft", "chests/pillager_outpost")) ||
+                event.getName().equals(new ResourceLocation("minecraft", "chests/woodland_mansion"))) {
+            event.getTable().addPool(LootPool.lootPool().add(LootTableReference.lootTableReference(new ResourceLocation(MODID, "chests/aquamarine"))).build());
+        }
+        if (event.getName().equals(new ResourceLocation("minecraft", "chests/ruined_portal")) ||
+                event.getName().equals(new ResourceLocation("minecraft", "chests/jungle_temple")) ||
+                event.getName().equals(new ResourceLocation("minecraft", "chests/jungle_temple_dispenser"))) {
+            event.getTable().addPool(LootPool.lootPool().add(LootTableReference.lootTableReference(new ResourceLocation(MODID, "chests/emerald"))).build());
+        }
+
+        if (event.getName().equals(new ResourceLocation("minecraft", "chests/shipwreck_treasure")) ||
+                event.getName().equals(new ResourceLocation("minecraft", "chests/underwater_ruin_big")) ||
+                event.getName().equals(new ResourceLocation("minecraft", "chests/underwater_ruin_small"))) {
+            event.getTable().addPool(LootPool.lootPool().add(LootTableReference.lootTableReference(new ResourceLocation(MODID, "chests/spodumene"))).build());
+        }
+        if (event.getName().equals(new ResourceLocation("minecraft", "chests/desert_pyramid"))) {
+            event.getTable().addPool(LootPool.lootPool().add(LootTableReference.lootTableReference(new ResourceLocation(MODID, "chests/bixbite"))).build());
+        }
+        if (event.getName().equals(new ResourceLocation("minecraft", "chests/buried_treasure"))) {
+            event.getTable().addPool(LootPool.lootPool().add(LootTableReference.lootTableReference(new ResourceLocation(MODID, "chests/morganite"))).build());
+        }
+        if (event.getName().equals(new ResourceLocation("minecraft", "chests/stronghold_library")) ||
+                event.getName().equals(new ResourceLocation("minecraft", "chests/stronghold_corridor")) ||
+                event.getName().equals(new ResourceLocation("minecraft", "chests/stronghold_crossing"))) {
+            event.getTable().addPool(LootPool.lootPool().add(LootTableReference.lootTableReference(new ResourceLocation(MODID, "chests/sapphire"))).build());
+            event.getTable().addPool(LootPool.lootPool().add(LootTableReference.lootTableReference(new ResourceLocation(MODID, "chests/peridot"))).build());
+        }
+        if (event.getName().equals(new ResourceLocation("minecraft", "chests/village/village_weaponsmith")) ||
+                event.getName().equals(new ResourceLocation("minecraft", "chests/village/village_armorer")) ||
+                event.getName().equals(new ResourceLocation("minecraft", "chests/village/village_toolsmith"))) {
+            event.getTable().addPool(LootPool.lootPool().add(LootTableReference.lootTableReference(new ResourceLocation(MODID, "chests/tourmaline"))).build());
+        }
+
+        //jungle_temple
+        //jungle_temple_dispenser
+        //buried treasure
+        //desert pyramid
+        //igloo chest
+        //ruined portal
+        //shipwreck map
+        //shipwreck supply
+        //shipwreck treasure
+        //underwater ruin big/small
+
     }
 
     @SubscribeEvent

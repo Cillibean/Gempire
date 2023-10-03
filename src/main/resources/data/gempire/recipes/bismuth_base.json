@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "NIN",
+    "FSF",
+    "NIN"
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:iron_block"
+    },
+    "S": {
+      "item": "gempire:primed_slate"
+    },
+    "N": {
+      "item": "gempire:tungsten_block"
+    },
+    "F": {
+      "item": "minecraft:magma_cream"
+    }
+  },
+  "result": {
+    "item": "gempire:inactive_bismuth_base"
+  }
+}
