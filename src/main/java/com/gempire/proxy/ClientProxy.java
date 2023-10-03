@@ -416,7 +416,7 @@ public class ClientProxy {
                                 populator.accept(ModItems.INACTIVE_BIXBITE_BASE.get());
                                 populator.accept(ModItems.INACTIVE_EMERALD_BASE.get());
                                 populator.accept(ModItems.INACTIVE_RUBY_BASE.get());
-                                populator.accept(ModItems.INACTIVE_LAPIS_LAZULI_BASE.get());
+                                populator.accept(ModItems.INACTIVE_LAPIS_BASE.get());
                                 populator.accept(ModItems.INACTIVE_LARIMAR_BASE.get());
                                 populator.accept(ModItems.INACTIVE_MORGANITE_BASE.get());
                                 populator.accept(ModItems.INACTIVE_OBSIDIAN_BASE.get());
