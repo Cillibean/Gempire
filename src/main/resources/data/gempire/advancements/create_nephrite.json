@@ -19,7 +19,7 @@
       "conditions": {
         "items": [
           {
-            "items": ["gempire:nephrite_gem"]
+            "items": ["gempire:inactive_nephrite_base"]
           }
         ]
       }

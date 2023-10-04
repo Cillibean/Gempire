@@ -19,7 +19,7 @@
       "conditions": {
         "items": [
           {
-            "items": ["gempire:rutile_gem"]
+            "items": ["gempire:inactive_rutile_base"]
           }
         ]
       }

@@ -19,7 +19,7 @@
       "conditions": {
         "items": [
           {
-            "tag": "gempire:quartz"
+            "tag": "gempire:inactive_quartz_base"
           }
         ]
       }

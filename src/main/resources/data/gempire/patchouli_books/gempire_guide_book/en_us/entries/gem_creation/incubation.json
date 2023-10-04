@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "In order to incubate, first you must craft an Incubator. View the graphic below to find the recipe for the Incubator."
+      "text": "In order to incubate gems, first you must craft an Incubator. View the next page to find the recipe for the Incubator."
     },
     {
       "type": "patchouli:crafting",

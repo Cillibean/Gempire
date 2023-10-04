@@ -19,7 +19,7 @@
       "conditions": {
         "items": [
           {
-            "tag": "gempire:jasper"
+            "tag": "gempire:inactive_jasper_base"
           }
         ]
       }

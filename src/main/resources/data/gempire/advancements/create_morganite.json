@@ -19,7 +19,7 @@
       "conditions": {
         "items": [
           {
-            "items": ["gempire:morganite_gem"]
+            "items": ["gempire:inactive_morganite_base"]
           }
         ]
       }

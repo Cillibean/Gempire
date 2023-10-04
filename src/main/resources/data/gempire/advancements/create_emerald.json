@@ -19,7 +19,7 @@
       "conditions": {
         "items": [
           {
-            "items": ["gempire:emerald_gem"]
+            "items": ["gempire:inactive_emerald_base"]
           }
         ]
       }
