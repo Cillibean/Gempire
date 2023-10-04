@@ -19,7 +19,7 @@
       "conditions": {
         "items": [
           {
-            "items": ["gempire:obsidian_gem"]
+            "items": ["gempire:inactive_obsidian_base"]
           }
         ]
       }

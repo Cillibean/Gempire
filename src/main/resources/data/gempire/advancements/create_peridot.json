@@ -19,7 +19,7 @@
       "conditions": {
         "items": [
           {
-            "items": ["gempire:peridot_gem"]
+            "items": ["gempire:inactive_peridot_base"]
           }
         ]
       }

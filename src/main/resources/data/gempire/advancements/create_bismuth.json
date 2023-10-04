@@ -19,7 +19,7 @@
       "conditions": {
         "items": [
           {
-            "items": ["gempire:bismuth_gem"]
+            "items": ["gempire:inactive_bismuth_base"]
           }
         ]
       }

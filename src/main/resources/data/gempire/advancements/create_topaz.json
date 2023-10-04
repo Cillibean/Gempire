@@ -19,7 +19,7 @@
       "conditions": {
         "items": [
           {
-            "tag": "gempire:topaz"
+            "tag": "gempire:inactive_topaz_base"
           }
         ]
       }

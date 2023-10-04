@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Rebellion is the ultimate punishment for mistreating gems, and can lead to losing countless gems. This entry will explain some details on how it works."
+      "text": "Rebellion is what happens when your gem decides to stop following your orders and could even end up attacking you. This entry will explain some details on how it works."
     },
     {
       "type": "patchouli:text",
@@ -14,7 +14,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "However, rejuvenating them will increase their rebel points. The only way to revert it is to rejuvenate them with a Pink Rejuvenator, or by having a Spinel to play with other gems."
+      "text": "However, rejuvenating them with certain rejuvenator colors will increase their rebel points. The only way to revert it is to rejuvenate them with a Pink Rejuvenator, or by having a Spinel to play with other gems."
     }
   ]
 }

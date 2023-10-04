@@ -19,7 +19,7 @@
       "conditions": {
         "items": [
           {
-            "items": ["gempire:ruby_gem"]
+            "items": ["gempire:inactive_ruby_base"]
           }
         ]
       }

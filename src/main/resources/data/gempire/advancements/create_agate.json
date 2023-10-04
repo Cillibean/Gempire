@@ -19,7 +19,7 @@
       "conditions": {
         "items": [
           {
-            "tag": "gempire:agate"
+            "tag": "gempire:inactive_agate_base"
           }
         ]
       }

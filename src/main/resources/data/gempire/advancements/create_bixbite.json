@@ -19,7 +19,7 @@
       "conditions": {
         "items": [
           {
-            "items": ["gempire:bixbite_gem"]
+            "items": ["gempire:inactive_bixbite_base"]
           }
         ]
       }
