@@ -19,7 +19,7 @@
       "conditions": {
         "items": [
           {
-            "tag": "gempire:inactive_spodumene_base"
+            "items": ["gempire:inactive_spodumene_base"]
           }
         ]
       }

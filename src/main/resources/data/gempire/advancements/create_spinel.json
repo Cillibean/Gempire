@@ -19,7 +19,7 @@
       "conditions": {
         "items": [
           {
-            "tag": "gempire:inactive_spinel_base"
+            "items": ["gempire:inactive_spinel_base"]
           }
         ]
       }

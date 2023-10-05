@@ -19,7 +19,7 @@
       "conditions": {
         "items": [
           {
-            "tag": "gempire:inactive_sapphire_base"
+            "items": ["gempire:inactive_sapphire_base"]
           }
         ]
       }

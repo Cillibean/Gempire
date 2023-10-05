@@ -1,10 +1,11 @@
 {
   "parent": "block/orientable",
   "textures": {
-    "top": "gempire:block/incubator_top",
-    "bottom": "gempire:block/incubator_bottom",
-    "front": "gempire:block/incubator_front_on",
-    "side": "gempire:block/incubator_side",
-    "back": "gempire:block/incubator_side_back"
+    "up": "gempire:block/incubator_top",
+    "down": "gempire:block/incubator_bottom",
+    "north": "gempire:block/incubator_front_on",
+    "east": "gempire:block/incubator_side",
+    "south": "gempire:block/incubator_back",
+    "west": "gempire:block/incubator_side"
   }
 }

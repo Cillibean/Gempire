@@ -678,7 +678,7 @@ public class ModItems {
     public static final RegistryObject<Item> INACTIVE_JASPER_BASE = ITEMS.register("inactive_jasper_base", () ->
             new ItemGemBase(new Item.Properties()));
 
-    public static final RegistryObject<Item> INACTIVE_LAPIS_LAZULI_BASE = ITEMS.register("inactive_lapis_lazuli_base", () ->
+    public static final RegistryObject<Item> INACTIVE_LAPIS_BASE = ITEMS.register("inactive_lapis_base", () ->
             new ItemGemBase(new Item.Properties()));
 
     public static final RegistryObject<Item> INACTIVE_LARIMAR_BASE = ITEMS.register("inactive_larimar_base", () ->

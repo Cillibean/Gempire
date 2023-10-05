@@ -75,6 +75,7 @@ import net.minecraftforge.network.NetworkHooks;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.apache.commons.lang3.ArrayUtils;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import javax.imageio.ImageIO;
@@ -2210,8 +2211,8 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     }
 
     public void travelWithInput(Vec3 travelVec) {
-        if(this.getControllingPassenger() != null && this.getControllingPassenger() instanceof Player){
-            double speed = ((Player) this.getControllingPassenger()).zza;
+        if(canBeControlledByRider()){
+            double speed = (this.getControllingPassenger()).zza;
             double speedSwim = this.isSwimming() ? 10 : 1;
             super.travel(travelVec.multiply(speed,speed,speed).multiply(speedSwim, speedSwim, speedSwim));
         } else {
@@ -2219,10 +2220,9 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         }
     }
 
-    /*public void travel(Vec3 travelVector) {
-        super.travel(new Vec3(travelVector.x, travelVector.y, travelVector.z));
-        //super(this.);
-    }*/
+    public void travel(Vec3 travelVector) {
+        this.travelWithInput(travelVector);
+    }
 
     @Nullable
     public LivingEntity getControllingPassenger() {
@@ -2231,11 +2231,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
 
     public boolean canBeControlledByRider() {
         Entity entity = this.getControllingPassenger();
-        if (!(entity instanceof Player)) {
-            return false;
-        } else {
-            return true;
-        }
+        return entity instanceof Player;
     }
 
 

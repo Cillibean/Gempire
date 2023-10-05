@@ -406,7 +406,7 @@ public class ClientProxy {
                                 populator.accept(ModItems.PRIME_BOOST.get());
                                 populator.accept(ModItems.PRIMED_SLATE.get());
                                 populator.accept(ModItems.SLATE.get());
-                                populator.accept(ModItems.INJECTOR_PANEL.get());
+                                //populator.accept(ModItems.INJECTOR_PANEL.get());
 
                                 populator.accept(ModItems.INACTIVE_AQUAMARINE_BASE.get());
                                 populator.accept(ModItems.INACTIVE_NEPHRITE_BASE.get());
@@ -416,7 +416,7 @@ public class ClientProxy {
                                 populator.accept(ModItems.INACTIVE_BIXBITE_BASE.get());
                                 populator.accept(ModItems.INACTIVE_EMERALD_BASE.get());
                                 populator.accept(ModItems.INACTIVE_RUBY_BASE.get());
-                                populator.accept(ModItems.INACTIVE_LAPIS_LAZULI_BASE.get());
+                                populator.accept(ModItems.INACTIVE_LAPIS_BASE.get());
                                 populator.accept(ModItems.INACTIVE_LARIMAR_BASE.get());
                                 populator.accept(ModItems.INACTIVE_MORGANITE_BASE.get());
                                 populator.accept(ModItems.INACTIVE_OBSIDIAN_BASE.get());
@@ -487,7 +487,7 @@ public class ClientProxy {
                                 populator.accept(ModItems.ICE_SPIKE.get());
 
                                 //populator.accept(ModItems.TANK_BLOCK_ITEM.get());
-                                //populator.accept(ModItems.POWER_CRYSTAL_BLOCK_ITEM.get());
+                                populator.accept(ModItems.POWER_CRYSTAL_BLOCK_ITEM.get());
                                 //populator.accept(ModItems.POWER_CRYSTAL_BLOCK_TIER_2_ITEM.get());
                                 //populator.accept(ModItems.DRILL_BLOCK_ITEM.get());
                                 populator.accept(ModItems.SHELL_BLOCK_ITEM.get());
