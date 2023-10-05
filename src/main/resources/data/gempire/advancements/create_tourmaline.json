@@ -19,7 +19,7 @@
       "conditions": {
         "items": [
           {
-            "tag": "gempire:inactive_tourmaline_base"
+            "items": ["gempire:inactive_tourmaline_base"]
           }
         ]
       }

@@ -19,7 +19,7 @@
       "conditions": {
         "items": [
           {
-            "tag": "gempire:inactive_zircon_base"
+            "items": ["gempire:inactive_zircon_base"]
           }
         ]
       }

@@ -12,6 +12,7 @@ import com.gempire.items.ItemGemBase;
 import com.gempire.util.Color;
 import it.unimi.dsi.fastutil.Hash;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
@@ -20,6 +21,7 @@ import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.util.Mth;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.MenuProvider;
+import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobSpawnType;
@@ -47,7 +49,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Objects;
 
-public class IncubatorTE extends RandomizableContainerBlockEntity implements MenuProvider {
+public class IncubatorTE extends RandomizableContainerBlockEntity implements MenuProvider, WorldlyContainer {
     public static final int NUMBER_OF_SLOTS = 10;
     public static final int BLOCK1_INPUT_SLOT_INDEX = 0;
     public static final int PRIMER_INPUT_SLOT_INDEX = 1;
@@ -1000,5 +1002,46 @@ public class IncubatorTE extends RandomizableContainerBlockEntity implements Men
     public void handleUpdateTag(CompoundTag tag) {
         System.out.println("[DEBUG]:Handling tag on chunk load");
         this.load(tag);
+    }
+
+    @Override
+    public int[] getSlotsForFace(Direction direction) {
+        System.out.println("get slots");
+        if (direction == Direction.DOWN) {
+            return new int[]{9};
+        } else if (direction == Direction.UP) {
+            return new int[]{4, 6, 7, 8};
+        } else {
+            return new int[]{0, 2, 3, 5};
+        }
+        //this.getBlockState().getValue(Direction)
+    }
+
+    @Override
+    public boolean canPlaceItemThroughFace(int i, ItemStack stack, @Nullable Direction direction) {
+        if (direction == Direction.UP) {
+            if (i == 4) {
+                return stack.getItem() instanceof ItemGemBase;
+            } else if (i == 6 || i == 8) {
+                return stack.getItem() == ModItems.PINK_ESSENCE_BUCKET.get() ||
+                        stack.getItem() == ModItems.YELLOW_ESSENCE_BUCKET.get() ||
+                        stack.getItem() == ModItems.BLUE_ESSENCE_BUCKET.get() ||
+                        stack.getItem() == ModItems.WHITE_ESSENCE_BUCKET.get();
+            } else if (i == 7) {
+                return stack.getItem() instanceof ItemChroma;
+            }
+        } else if (direction == Direction.DOWN) {
+
+        } else {
+            if (i == 0 || i == 2 || i == 3 || i == 5) {
+                return blockList.contains(stack.getItem());
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean canTakeItemThroughFace(int i, ItemStack stack, Direction direction) {
+        return direction == Direction.DOWN && i == 9;
     }
 }
