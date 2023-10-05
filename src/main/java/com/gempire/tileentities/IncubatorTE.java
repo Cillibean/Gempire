@@ -19,6 +19,7 @@ import net.minecraft.network.Connection;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.util.Mth;
+import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.WorldlyContainer;
@@ -26,6 +27,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.Item;
@@ -35,9 +37,12 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LiquidBlock;
+import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.registries.RegistryObject;
 import org.apache.commons.lang3.ArrayUtils;
 import org.checkerframework.checker.units.qual.A;
@@ -49,7 +54,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Objects;
 
-public class IncubatorTE extends RandomizableContainerBlockEntity implements MenuProvider, WorldlyContainer {
+public class IncubatorTE extends BaseContainerBlockEntity implements MenuProvider, WorldlyContainer {
     public static final int NUMBER_OF_SLOTS = 10;
     public static final int BLOCK1_INPUT_SLOT_INDEX = 0;
     public static final int PRIMER_INPUT_SLOT_INDEX = 1;
@@ -141,9 +146,7 @@ public class IncubatorTE extends RandomizableContainerBlockEntity implements Men
         this.blockAmounts[3] = nbt.getInt("block4Amount");
         this.weight = nbt.getInt("weight");
         this.items = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
-        if(!this.tryLoadLootTable(nbt)){
-            ContainerHelper.loadAllItems(nbt, this.items);
-        }
+        ContainerHelper.loadAllItems(nbt, this.items);
         gemBase = this.items.get(4).getItem().toString();
         setup();
     }
@@ -163,9 +166,7 @@ public class IncubatorTE extends RandomizableContainerBlockEntity implements Men
         compound.putInt("block3Amount", this.blockAmounts[2]);
         compound.putInt("block4Amount", this.blockAmounts[3]);
         compound.putInt("weight", this.weight);
-        if(!this.trySaveLootTable(compound)){
-            ContainerHelper.saveAllItems(compound, this.items);
-        }
+        ContainerHelper.saveAllItems(compound, this.items);
     }
 
     public static <T extends BlockEntity> void tick(Level level, BlockPos pos, BlockState state, T be) {
@@ -737,9 +738,16 @@ public class IncubatorTE extends RandomizableContainerBlockEntity implements Men
             this.formGem(this.chromaColor, 2);
         }*/
         ItemStack stack = this.getItem(IncubatorTE.PRIMER_INPUT_SLOT_INDEX);
+        ItemStack bstack = this.getItem(IncubatorTE.BLOCK1_INPUT_SLOT_INDEX);
+        ItemStack bstack2 = this.getItem(IncubatorTE.BLOCK2_INPUT_SLOT_INDEX);
+        ItemStack bstack3 = this.getItem(IncubatorTE.BLOCK3_INPUT_SLOT_INDEX);
+        ItemStack bstack4 = this.getItem(IncubatorTE.BLOCK4_INPUT_SLOT_INDEX);
         if (baseConsumed && chromaConsumed && essenceConsumed && blockConsumed) {
-            if (primer != 0) {
-                if (stack.isEmpty()) {
+            if (primer != 0 && stack.isEmpty() ||
+                    (bstack.getCount() != blockAmounts[0] ||
+                    bstack2.getCount() != blockAmounts[1] ||
+                    bstack3.getCount() != blockAmounts[2] ||
+                    bstack4.getCount() != blockAmounts[3])) {
                     primer = 0;
                     incubationProgress = 0;
                     incubationTime = 0;
@@ -752,7 +760,6 @@ public class IncubatorTE extends RandomizableContainerBlockEntity implements Men
                     this.chromaConsumed = false;
                     this.baseConsumed = false;
                     this.chromaColor = 0;
-                }
             }
             incubationTime = time.get(gemBase.toLowerCase().replaceAll("inactive_", "").replaceAll("_base", ""));
             if (primer == 2) incubationTime = incubationTime/2;
@@ -939,6 +946,33 @@ public class IncubatorTE extends RandomizableContainerBlockEntity implements Men
 
     //CONTAINER STUFF
 
+    net.minecraftforge.common.util.LazyOptional<? extends net.minecraftforge.items.IItemHandler>[] handlers =
+            net.minecraftforge.items.wrapper.SidedInvWrapper.create(this, Direction.UP, Direction.DOWN);
+
+    @Override
+    public <T> LazyOptional<T> getCapability(Capability<T> capability, @Nullable Direction facing) {
+        if (!this.remove && facing != null && capability == net.minecraftforge.common.capabilities.ForgeCapabilities.ITEM_HANDLER) {
+            if (facing == Direction.UP)
+                return handlers[0].cast();
+            else if (facing == Direction.DOWN)
+                return handlers[1].cast();
+        }
+        return super.getCapability(capability, facing);
+    }
+
+    @Override
+    public void invalidateCaps() {
+        super.invalidateCaps();
+        for (int x = 0; x < handlers.length; x++)
+            handlers[x].invalidate();
+    }
+
+    @Override
+    public void reviveCaps() {
+        super.reviveCaps();
+        this.handlers = net.minecraftforge.items.wrapper.SidedInvWrapper.create(this, Direction.UP, Direction.DOWN, Direction.NORTH);
+    }
+
     @Override
     public Component getDisplayName() {
         return Component.translatable("");//TranslationTextComponent("container.gempire.injector");
@@ -950,16 +984,6 @@ public class IncubatorTE extends RandomizableContainerBlockEntity implements Men
     }
 
     @Override
-    protected NonNullList<ItemStack> getItems() {
-        return this.items;
-    }
-
-    @Override
-    protected void setItems(NonNullList<ItemStack> itemsIn) {
-        this.items = itemsIn;
-    }
-
-    @Override
     protected AbstractContainerMenu createMenu(int id, Inventory player) {
         return new IncubatorContainer(id, player, this, this.data);
     }
@@ -967,6 +991,42 @@ public class IncubatorTE extends RandomizableContainerBlockEntity implements Men
     @Override
     public int getContainerSize() {
         return IncubatorTE.NUMBER_OF_SLOTS;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        for(ItemStack itemstack : this.items) {
+            if (!itemstack.isEmpty()) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    @Override
+    public ItemStack getItem(int i) {
+        return items.get(i);
+    }
+
+    @Override
+    public ItemStack removeItem(int i, int u) {
+        return ContainerHelper.removeItem(this.items, i, u);
+    }
+
+    @Override
+    public ItemStack removeItemNoUpdate(int i) {
+        return ContainerHelper.takeItem(this.items, i);
+    }
+
+    @Override
+    public void setItem(int i, ItemStack stack) {
+        items.set(i, stack);
+    }
+
+    @Override
+    public boolean stillValid(Player player) {
+        return Container.stillValidBlockEntity(this, player);
     }
 
     public ItemStack getGemItem(){
@@ -1006,14 +1066,12 @@ public class IncubatorTE extends RandomizableContainerBlockEntity implements Men
 
     @Override
     public int[] getSlotsForFace(Direction direction) {
-        System.out.println("get slots");
         if (direction == Direction.DOWN) {
             return new int[]{9};
-        } else if (direction == Direction.UP) {
-            return new int[]{4, 6, 7, 8};
-        } else {
-            return new int[]{0, 2, 3, 5};
+        } else if (direction == Direction.UP){
+            return new int[]{0, 1, 2, 3, 5, 4, 6, 7, 8};
         }
+        return new int[0];
         //this.getBlockState().getValue(Direction)
     }
 
@@ -1022,17 +1080,20 @@ public class IncubatorTE extends RandomizableContainerBlockEntity implements Men
         if (direction == Direction.UP) {
             if (i == 4) {
                 return stack.getItem() instanceof ItemGemBase;
-            } else if (i == 6 || i == 8) {
+            }
+            if (i == 1) {
+                return stack.getItem() == ModItems.GILDED_LAPIS.get() ||
+                        stack.getItem() == ModItems.PRIME_BOOST.get();
+            }
+            if (i == 6 || i == 8) {
                 return stack.getItem() == ModItems.PINK_ESSENCE_BUCKET.get() ||
                         stack.getItem() == ModItems.YELLOW_ESSENCE_BUCKET.get() ||
                         stack.getItem() == ModItems.BLUE_ESSENCE_BUCKET.get() ||
                         stack.getItem() == ModItems.WHITE_ESSENCE_BUCKET.get();
-            } else if (i == 7) {
+            }
+            if (i == 7) {
                 return stack.getItem() instanceof ItemChroma;
             }
-        } else if (direction == Direction.DOWN) {
-
-        } else {
             if (i == 0 || i == 2 || i == 3 || i == 5) {
                 return blockList.contains(stack.getItem());
             }
@@ -1043,5 +1104,11 @@ public class IncubatorTE extends RandomizableContainerBlockEntity implements Men
     @Override
     public boolean canTakeItemThroughFace(int i, ItemStack stack, Direction direction) {
         return direction == Direction.DOWN && i == 9;
+        //return false;
+    }
+
+    @Override
+    public void clearContent() {
+        this.items.clear();
     }
 }
