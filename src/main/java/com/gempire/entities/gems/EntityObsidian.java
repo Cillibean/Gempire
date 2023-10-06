@@ -21,7 +21,7 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 
 import java.util.ArrayList;
 
-public class EntityObsidian extends EntityGem implements ItemSteerable {
+public class EntityObsidian extends EntityGem {
 
     public EntityObsidian(EntityType<? extends PathfinderMob> type, Level worldIn) {
         super(type, worldIn);
@@ -216,6 +216,7 @@ public class EntityObsidian extends EntityGem implements ItemSteerable {
     public boolean canWalkOnFluids() {
         return true;
     }
+
     public boolean isFocused() {
         return true;
     }
@@ -228,8 +229,6 @@ public class EntityObsidian extends EntityGem implements ItemSteerable {
     public int generateHardness() {
         return 6;
     }
-
-
 
     @Override
     public int getColor() {

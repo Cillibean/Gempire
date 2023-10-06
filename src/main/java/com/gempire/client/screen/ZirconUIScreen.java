@@ -231,31 +231,31 @@ public class ZirconUIScreen extends AbstractContainerScreen<ZirconUIContainer> {
         return super.mouseClicked(mouseX, mouseY, button);
     }
 
-    public static void renderEntityInInventory(int p_98851_, int p_98852_, int p_98853_, float p_98854_, float p_98855_, LivingEntity p_98856_) {
-        float f = (float)Math.atan((double)(p_98854_ / 40.0F));
-        float f1 = (float)Math.atan((double)(p_98855_ / 40.0F));
+    public static void renderEntityInInventory(int leftpos, int topPos, int scale, float mouseX, float mouseY, LivingEntity entity) {
+        float f = (float)Math.atan((double)(mouseX / 40.0F));
+        float f1 = (float)Math.atan((double)(mouseY / 40.0F));
         PoseStack posestack = RenderSystem.getModelViewStack();
         posestack.pushPose();
-        posestack.translate((double)p_98851_, (double)p_98852_, 1050.0D);
+        posestack.translate((double)leftpos, (double)topPos, 1050.0D);
         posestack.scale(1.0F, 1.0F, -1.0F);
         RenderSystem.applyModelViewMatrix();
         PoseStack posestack1 = new PoseStack();
         posestack1.translate(0.0D, 0.0D, 1000.0D);
-        posestack1.scale((float)p_98853_, (float)p_98853_, (float)p_98853_);
+        posestack1.scale((float)scale, (float)scale, (float)scale);
         Quaternionf quaternion = Axis.ZP.rotationDegrees(180.0F);
         Quaternionf quaternion1 = Axis.XP.rotationDegrees(f1 * 20.0F);
         quaternion.mul(quaternion1);
         posestack1.mulPose(quaternion);
-        float f2 = p_98856_.yBodyRot;
-        float f3 = p_98856_.getYRot();
-        float f4 = p_98856_.getXRot();
-        float f5 = p_98856_.yHeadRotO;
-        float f6 = p_98856_.yHeadRot;
-        p_98856_.yBodyRot = 180.0F + f * 20.0F;
-        p_98856_.setYRot(180.0F + f * 40.0F);
-        p_98856_.setXRot(-f1 * 20.0F);
-        p_98856_.yHeadRot = p_98856_.getYRot();
-        p_98856_.yHeadRotO = p_98856_.getYRot();
+        float f2 = entity.yBodyRot;
+        float f3 = entity.getYRot();
+        float f4 = entity.getXRot();
+        float f5 = entity.yHeadRotO;
+        float f6 = entity.yHeadRot;
+        entity.yBodyRot = 180.0F + f * 20.0F;
+        entity.setYRot(180.0F + f * 40.0F);
+        entity.setXRot(-f1 * 20.0F);
+        entity.yHeadRot = entity.getYRot();
+        entity.yHeadRotO = entity.getYRot();
         Lighting.setupForEntityInInventory();
         EntityRenderDispatcher entityrenderdispatcher = Minecraft.getInstance().getEntityRenderDispatcher();
         quaternion1.conjugate();
@@ -263,15 +263,15 @@ public class ZirconUIScreen extends AbstractContainerScreen<ZirconUIContainer> {
         entityrenderdispatcher.setRenderShadow(false);
         MultiBufferSource.BufferSource multibuffersource$buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
         RenderSystem.runAsFancy(() -> {
-            entityrenderdispatcher.render(p_98856_, 0.0D, 0.0D, 0.0D, 0.0F, 1.0F, posestack1, multibuffersource$buffersource, 15728880);
+            entityrenderdispatcher.render(entity, 0.0D, 0.0D, 0.0D, 0.0F, 1.0F, posestack1, multibuffersource$buffersource, 15728880);
         });
         multibuffersource$buffersource.endBatch();
         entityrenderdispatcher.setRenderShadow(true);
-        p_98856_.yBodyRot = f2;
-        p_98856_.setYRot(f3);
-        p_98856_.setXRot(f4);
-        p_98856_.yHeadRotO = f5;
-        p_98856_.yHeadRot = f6;
+        entity.yBodyRot = f2;
+        entity.setYRot(f3);
+        entity.setXRot(f4);
+        entity.yHeadRotO = f5;
+        entity.yHeadRot = f6;
         posestack.popPose();
         RenderSystem.applyModelViewMatrix();
         Lighting.setupFor3DItems();
