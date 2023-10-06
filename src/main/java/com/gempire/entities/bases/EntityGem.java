@@ -2216,6 +2216,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             setXRot(passenger.getXRot() * 0.5f);
             setRot(getYRot(), getXRot());
 
+            System.out.println("step height "+getStepHeight());
             this.yBodyRot = this.getYRot();
             this.yHeadRot = this.yBodyRot;
             float x = passenger.xxa * 0.5F;
