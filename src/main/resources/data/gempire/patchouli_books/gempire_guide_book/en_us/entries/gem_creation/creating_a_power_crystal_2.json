@@ -1,6 +1,6 @@
 {
-  "name": "Advanced Power Crystal (OBSOLETE)",
-  "icon": "gempire:power_crystal_block",
+  "name": "Advanced Power Crystal",
+  "icon": "gempire:power_crystal_block_tier_2",
   "advancement": "gempire:root",
   "category": "gempire:gem_creation_category",
   "pages": [

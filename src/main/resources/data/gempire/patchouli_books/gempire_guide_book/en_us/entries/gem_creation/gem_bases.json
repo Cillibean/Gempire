@@ -1,6 +1,6 @@
 {
   "name": "Inactive Gem Bases",
-  "icon": "gempire:incubator",
+  "icon": "gempire:inactive_bismuth_base",
   "advancement": "gempire:root",
   "category": "gempire:gem_creation_category",
   "pages": [

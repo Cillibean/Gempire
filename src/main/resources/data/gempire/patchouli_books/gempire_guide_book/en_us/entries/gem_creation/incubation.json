@@ -1,6 +1,6 @@
 {
   "name": "Incubation",
-  "icon": "gempire:incubator",
+  "icon": "gempire:incubator_block",
   "advancement": "gempire:root",
   "category": "gempire:gem_creation_category",
   "pages": [
@@ -10,8 +10,7 @@
     },
     {
       "type": "patchouli:crafting",
-      "recipe": "gempire:incubator_block",
-      "text": "Incubator recipe."
+      "recipe": "gempire:incubator_block"
     },
     {
       "type": "patchouli:text",
@@ -19,7 +18,19 @@
     },
     {
       "type": "patchouli:text",
-      "text": "You may also supplement the Incubator with Primer items, such as a Prime Booster or a Speed Booster."
+      "text": "You may also supplement the Incubator with Primer items, such as a Prime Booster or a Speed Booster. Please view the following pages to find the example image of how the Incubator should be used."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "When the Incubator is in use, please remember to fill ALL the crux slots with material. If the gem in question only has two or three cruxes in their materials list, fill all four slots depicted above regardless."
+    },
+    {
+      "type": "patchouli:image",
+      "title": "Incubator Usage",
+      "images": [
+        "gempire:textures/gui/patchouli/entries/incubator_recipe.png"
+      ],
+      "border": true
     }
   ]
 }
