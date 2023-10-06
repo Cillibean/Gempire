@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "patchouli:entity",
-      "entity": "gempire:jasper{skinColorVariant:1,skinColor:16753489,hairColor:16707797,gemColor:16633426,markingColor:15551036,gemPlacement:5,hairVariant:3,markingVariant:0,insigniaColor:1,outfitColor:1,xScale:1,yScale:1,zScale:1}",
+      "entity": "gempire:jasper{skinColorVariant:1,skinColor:16753489,hairColor:16707797,gemColor:16633426,markingColor:15551036,gemPlacement:5,hairVariant:3,markingVariant:0,insigniaColor:1,outfitColor:1,xscale:1,yscale:1,zscale:1}",
       "name": "A Quartz",
       "rotate": "true",
       "offset": 0.2,

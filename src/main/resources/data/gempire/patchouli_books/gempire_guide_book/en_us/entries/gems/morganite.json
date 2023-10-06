@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "patchouli:entity",
-      "entity": "gempire:morganite{gemColor:16687003,skinColor:16699852,hairColor:16416152,hairVariant:0,insigniaColor:6,outfitColor:6,gemPlacement:11,xScale:1,yScale:1,zScale:1}",
+      "entity": "gempire:morganite{gemColor:16687003,skinColor:16699852,hairColor:16416152,hairVariant:0,insigniaColor:6,outfitColor:6,gemPlacement:11,xscale:1,yscale:1,zscale:1}",
       "name": "A Morganite",
       "rotate": "true",
       "text": "A gem that can create many decorative blocks, see page 3 for recipes."
