@@ -83,7 +83,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.*;
 
-public abstract class EntityGem extends PathfinderMob implements RangedAttackMob, ItemSteerable, Container, MenuProvider, ContainerListener {
+public abstract class EntityGem extends PathfinderMob implements RangedAttackMob, Container, MenuProvider, ContainerListener {
     //public static DataParameter<Optional<UUID>> OWNER_ID = EntityDataManager.<Optional<UUID>>createKey(EntityGem.class, DataSerializers.OPTIONAL_UNIQUE_ID);
     public static final EntityDataAccessor<Boolean> HAS_CUSTOM_NAME = SynchedEntityData.<Boolean>defineId(EntityGem.class, EntityDataSerializers.BOOLEAN);
     public static final EntityDataAccessor<Boolean> PRIMARY = SynchedEntityData.<Boolean>defineId(EntityGem.class, EntityDataSerializers.BOOLEAN);
@@ -2206,27 +2206,50 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     }
 
     @Override
-    public boolean boost() {
-        return booster.boost(this.getRandom());
-    }
-
-    public void travelWithInput(Vec3 travelVec) {
-        if(canBeControlledByRider()){
-            double speed = (this.getControllingPassenger()).zza;
-            double speedSwim = this.isSwimming() ? 10 : 1;
-            super.travel(travelVec.multiply(speed,speed,speed).multiply(speedSwim, speedSwim, speedSwim));
-        } else {
-            super.travel(travelVec);
-        }
-    }
-
     public void travel(Vec3 travelVector) {
-        this.travelWithInput(travelVector);
+        if(canBeControlledByRider() && isVehicle()){
+            LivingEntity passenger = getControllingPassenger();
+            this.yRotO = getYRot();
+            this.xRotO = getXRot();
+
+            setYRot(passenger.getYRot());
+            setXRot(passenger.getXRot() * 0.5f);
+            setRot(getYRot(), getXRot());
+
+            this.yBodyRot = this.getYRot();
+            this.yHeadRot = this.yBodyRot;
+            float x = passenger.xxa * 0.5F;
+            float z = passenger.zza;
+            //float y = passenger.yya;
+
+            double speed = this.getControllingPassenger().zza;
+            double speedSwim = this.isSwimming() ? 10 : 1;
+
+            if (z <= 0)
+                z *= 0.25f;
+
+            double y = travelVector.y;
+            Vec3 vector = new Vec3(x, y, z);
+            if (this.horizontalCollision) {
+                vector.add(0, 16, 0);
+                //y += 100000;
+            }
+            System.out.println(vector);
+
+            this.setSpeed(0.3f);
+            super.travel(vector.multiply(speed,speed,speed).multiply(speedSwim, speedSwim, speedSwim));
+        } else {
+            super.travel(travelVector);
+        }
     }
 
     @Nullable
     public LivingEntity getControllingPassenger() {
-        return this.getPassengers().isEmpty() ? null : (LivingEntity) this.getPassengers().get(0);
+        Entity entity = this.getFirstPassenger();
+        if (entity instanceof LivingEntity) {
+            return (LivingEntity)entity;
+        }
+        return null;
     }
 
     public boolean canBeControlledByRider() {
