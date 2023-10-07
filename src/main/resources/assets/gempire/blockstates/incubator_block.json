@@ -3,6 +3,6 @@
     "facing=north":  { "model": "gempire:block/incubator_block"},
     "facing=east":  { "model": "gempire:block/incubator_block", "y": 90},
     "facing=south": { "model": "gempire:block/incubator_block", "y": 180 },
-    "facing=west,":  { "model": "gempire:block/incubator_block", "y": 270 }
+    "facing=west":  { "model": "gempire:block/incubator_block", "y": 270 }
   }
 }

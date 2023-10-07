@@ -70,6 +70,7 @@ import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.network.NetworkHooks;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -2217,6 +2218,13 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             setRot(getYRot(), getXRot());
 
             System.out.println("step height "+getStepHeight());
+            if (getStepHeight() < 1) {
+                AttributeModifier HEIGHT = new AttributeModifier(UUID.randomUUID(), "gempirePrimaryModifier", 0.4D, AttributeModifier.Operation.ADDITION);
+                this.getAttribute(ForgeMod.STEP_HEIGHT_ADDITION.get()).addPermanentModifier(HEIGHT);
+                System.out.println("step height "+getStepHeight());
+
+            }
+
             this.yBodyRot = this.getYRot();
             this.yHeadRot = this.yBodyRot;
             float x = passenger.xxa * 0.5F;
