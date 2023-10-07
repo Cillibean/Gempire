@@ -15,6 +15,9 @@ public class ModTags {
         public static final TagKey<Block> SPELUNKER_VALUABLES
                 = tag("spelunker_valuables");
 
+        public static final TagKey<Block> NEEDS_PRISMATIC_TOOL
+                = tag("needs_prismatic_tool");
+
         public static final TagKey<Block> PROSPECTOR_VALUABLES
                 = tag("prospector_valuables");
 
