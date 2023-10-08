@@ -4,8 +4,81 @@
     "type": "minecraft:noise",
     "settings": "minecraft:overworld",
     "biome_source": {
-      "type": "minecraft:fixed",
-      "biome": "gempire:test"
+      "type": "minecraft:multi_noise",
+      "biomes": [
+        {
+          "biome": "gempire:test2",
+          "parameters": {
+            "temperature": 1,
+            "humidity": 0.5,
+            "continentalness": 0,
+            "erosion": 0.3,
+            "weirdness": 0,
+            "depth": 0,
+            "offset": 0
+          }
+        },
+        {
+          "biome": "gempire:distant_forest",
+          "parameters": {
+            "temperature": 0.6,
+            "humidity": 0.2,
+            "continentalness": 0,
+            "erosion": 0,
+            "weirdness": 0.4,
+            "depth": 0,
+            "offset": 0
+          }
+        },
+        {
+          "biome": "gempire:unearthly_jungle",
+          "parameters": {
+            "temperature": 0.3,
+            "humidity": 0,
+            "continentalness": 0,
+            "erosion": 0,
+            "weirdness": 0.6,
+            "depth": 0,
+            "offset": 0
+          }
+        },
+        {
+          "biome": "gempire:test",
+          "parameters": {
+            "temperature": 0,
+            "humidity": 0,
+            "continentalness": 1,
+            "erosion": 0.3,
+            "weirdness": 0.3,
+            "depth": 0,
+            "offset": 0
+          }
+        },
+        {
+          "biome": "gempire:peculiar_precipice",
+          "parameters": {
+            "temperature": 1,
+            "humidity": 0,
+            "continentalness": 0,
+            "erosion": 0.2,
+            "weirdness": 0.4,
+            "depth": 0,
+            "offset": 0
+          }
+        },
+        {
+          "biome": "gempire:abnormal_beach",
+          "parameters": {
+            "temperature": 0,
+            "humidity": 0,
+            "continentalness": 0.5,
+            "erosion": 0.1,
+            "weirdness": 1,
+            "depth": 0,
+            "offset": 0
+          }
+        }
+      ]
     }
   }
 }
