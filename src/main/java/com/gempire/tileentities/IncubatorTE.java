@@ -99,7 +99,7 @@ public class IncubatorTE extends BaseContainerBlockEntity implements MenuProvide
     protected final ContainerData data;
 
     public HashMap<String, Boolean> colour = new HashMap<>();
-
+    public static HashMap<String, Boolean> addon = new HashMap<>();
     public HashMap<String, Integer> time = new HashMap<>();
     public HashMap<String, ArrayList<Integer>> essenceRequired = new HashMap<>();
 
@@ -446,6 +446,31 @@ public class IncubatorTE extends BaseContainerBlockEntity implements MenuProvide
 
         //-----------
 
+        addon.put("ruby", false);
+        addon.put("nephrite", false);
+        addon.put("rutile", false);
+        addon.put("bismuth", false);
+        addon.put("aquamarine", false);
+        addon.put("emerald", false);
+        addon.put("bixbite", false);
+        addon.put("lapis", false);
+        addon.put("obsidian", false);
+        addon.put("larimar", false);
+        addon.put("morganite", false);
+        addon.put("peridot", false);
+        addon.put("jasper", false);
+        addon.put("garnet", false);
+        addon.put("quartz", false);
+        addon.put("sapphire", false);
+        addon.put("agate", false);
+        addon.put("spinel", false);
+        addon.put("tourmaline", false);
+        addon.put("zircon", false);
+        addon.put("spodumene", false);
+        addon.put("topaz", false);
+
+        //-----------
+
         HashMap<Item, Integer> agate = new HashMap<>();
         HashMap<Item, Integer> aquamarine = new HashMap<>();
         HashMap<Item, Integer> bismuth = new HashMap<>();
@@ -713,6 +738,15 @@ public class IncubatorTE extends BaseContainerBlockEntity implements MenuProvide
         essenceRequired.put("zircon", blueWhite);
         essenceRequired.put("spodumene", allPink);
         essenceRequired.put("topaz", allYellow);
+
+        //------------
+
+        colour.putAll(AddonHandler.colour);
+        blockList.addAll(AddonHandler.blockList);
+        time.putAll(AddonHandler.time);
+        blocks.putAll(AddonHandler.blocks);
+        essenceRequired.putAll(AddonHandler.essenceRequired);
+        addon.putAll(AddonHandler.addon);
     }
 
 
@@ -898,7 +932,11 @@ public class IncubatorTE extends BaseContainerBlockEntity implements MenuProvide
         System.out.println("array "+ Arrays.toString(array));
         System.out.println("name "+name);
         try {
-            egemm = (RegistryObject<EntityType<EntityPebble>>) ModEntities.class.getField(name.toUpperCase().replaceAll("GEM", "").replaceAll(skinColorVariant, "").replaceAll("_", "")).get(null);
+            if (!addon.get(baseName)) {
+                egemm = (RegistryObject<EntityType<EntityPebble>>) ModEntities.class.getField(name.toUpperCase().replaceAll("GEM", "").replaceAll(skinColorVariant, "").replaceAll("_", "")).get(null);
+            } else {
+                egemm = (RegistryObject<EntityType<EntityPebble>>) AddonHandler.ENTITY_ADDON_ENTITY_REGISTRIES.get(baseName).getField(name.toUpperCase().replaceAll("GEM", "").replaceAll(skinColorVariant, "").replaceAll("_", "")).get(null);
+            }
         } catch(Exception e){
             e.printStackTrace();
         }
@@ -919,8 +957,13 @@ public class IncubatorTE extends BaseContainerBlockEntity implements MenuProvide
             }
         }
         try {
-            gemm = (RegistryObject<Item>) ModItems.class.getField(name.toUpperCase()).get(null);
-            gem = (ItemGem) gemm.get();
+            if (!addon.get(name)) {
+                gemm = (RegistryObject<Item>) ModItems.class.getField(name.toUpperCase()).get(null);
+                gem = (ItemGem) gemm.get();
+            } else {
+                gemm = (RegistryObject<Item>) AddonHandler.ENTITY_ADDON_ITEM_REGISTRIES.get(baseName).getField(name.toUpperCase()).get(null);
+                gem = (ItemGem) gemm.get();
+            }
         } catch(Exception e){
             e.printStackTrace();
         }
