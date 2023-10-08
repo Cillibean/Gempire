@@ -1,25 +1,25 @@
 {
   "display": {
     "icon": {
-      "item": "gempire:larimar_gem"
+      "item": "gempire:emerald_gem"
     },
     "title": {
-      "translate": "advancements.gempire.larimar.title"
+      "translate": "advancements.gempire.emerald.title"
     },
     "description": {
-      "translate": "advancements.gempire.larimar.description"
+      "translate": "advancements.gempire.emerald.description"
     },
     "frame": "task",
     "hidden": true
   },
-  "parent": "gempire:create_injector",
+  "parent": "gempire:incubation/obtain_primed_slate",
   "criteria": {
     "requirement": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "items": ["gempire:inactive_larimar_base"]
+            "items": ["gempire:inactive_emerald_base"]
           }
         ]
       }

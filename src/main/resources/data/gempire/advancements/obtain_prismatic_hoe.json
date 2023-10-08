@@ -1,0 +1,28 @@
+{
+  "display": {
+    "icon": {
+      "item": "gempire:prismatic_hoe"
+    },
+    "title": {
+      "translate": "advancements.gempire.prismatic_hoe.title"
+    },
+    "description": {
+      "translate": "advancements.gempire.prismatic_hoe.description"
+    },
+    "frame": "task",
+    "hidden": false
+  },
+  "parent": "gempire:obtain_prismatic_ingot",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item":"gempire:prismatic_hoe"
+          }
+            ]
+      }
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "display": {
+    "icon": {
+      "item": "gempire:bismuth_gem"
+    },
+    "title": {
+      "translate": "advancements.gempire.bismuth.title"
+    },
+    "description": {
+      "translate": "advancements.gempire.bismuth.description"
+    },
+    "frame": "task",
+    "hidden": true
+  },
+  "parent": "gempire:incubation/obtain_primed_slate",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["gempire:inactive_bismuth_base"]
+          }
+        ]
+      }
+    }
+  }
+}

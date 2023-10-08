@@ -1,25 +1,25 @@
 {
   "display": {
     "icon": {
-      "item": "gempire:bismuth_gem"
+      "item": "gempire:larimar_gem"
     },
     "title": {
-      "translate": "advancements.gempire.bismuth.title"
+      "translate": "advancements.gempire.larimar.title"
     },
     "description": {
-      "translate": "advancements.gempire.bismuth.description"
+      "translate": "advancements.gempire.larimar.description"
     },
     "frame": "task",
     "hidden": true
   },
-  "parent": "gempire:create_injector",
+  "parent": "gempire:incubation/obtain_primed_slate",
   "criteria": {
     "requirement": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "items": ["gempire:inactive_bismuth_base"]
+            "items": ["gempire:inactive_larimar_base"]
           }
         ]
       }

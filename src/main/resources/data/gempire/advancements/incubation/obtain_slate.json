@@ -1,25 +1,25 @@
 {
   "display": {
     "icon": {
-      "item": "gempire:nephrite_gem"
+      "item": "gempire:slate"
     },
     "title": {
-      "translate": "advancements.gempire.nephrite.title"
+      "translate": "advancements.gempire.slate.title"
     },
     "description": {
-      "translate": "advancements.gempire.nephrite.description"
+      "translate": "advancements.gempire.slate.description"
     },
     "frame": "task",
     "hidden": true
   },
-  "parent": "gempire:create_injector",
+  "parent": "gempire:incubation/obtain_incubator",
   "criteria": {
     "requirement": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "items": ["gempire:inactive_nephrite_base"]
+            "items": ["gempire:slate"]
           }
         ]
       }

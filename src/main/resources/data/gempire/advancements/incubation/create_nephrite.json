@@ -1,25 +1,25 @@
 {
   "display": {
     "icon": {
-      "item": "gempire:tourmaline_gem_16"
+      "item": "gempire:nephrite_gem"
     },
     "title": {
-      "translate": "advancements.gempire.tourmaline.title"
+      "translate": "advancements.gempire.nephrite.title"
     },
     "description": {
-      "translate": "advancements.gempire.tourmaline.description"
+      "translate": "advancements.gempire.nephrite.description"
     },
     "frame": "task",
     "hidden": true
   },
-  "parent": "gempire:create_injector",
+  "parent": "gempire:incubation/obtain_primed_slate",
   "criteria": {
     "requirement": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "items": ["gempire:inactive_tourmaline_base"]
+            "items": ["gempire:inactive_nephrite_base"]
           }
         ]
       }

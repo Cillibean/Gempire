@@ -1,25 +1,25 @@
 {
   "display": {
     "icon": {
-      "item": "gempire:garnet_gem_1"
+      "item": "gempire:primed_slate"
     },
     "title": {
-      "translate": "advancements.gempire.garnet.title"
+      "translate": "advancements.gempire.primed_slate.title"
     },
     "description": {
-      "translate": "advancements.gempire.garnet.description"
+      "translate": "advancements.gempire.primed_slate.description"
     },
     "frame": "task",
     "hidden": true
   },
-  "parent": "gempire:create_injector",
+  "parent": "gempire:incubation/obtain_slate",
   "criteria": {
     "requirement": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "items": ["gempire:inactive_garnet_base"]
+            "items": ["gempire:primed_slate"]
           }
         ]
       }

@@ -1,25 +1,25 @@
 {
   "display": {
     "icon": {
-      "item": "gempire:sapphire_gem_11"
+      "item": "gempire:spinel_gem_6"
     },
     "title": {
-      "translate": "advancements.gempire.sapphire.title"
+      "translate": "advancements.gempire.spinel.title"
     },
     "description": {
-      "translate": "advancements.gempire.sapphire.description"
+      "translate": "advancements.gempire.spinel.description"
     },
     "frame": "task",
     "hidden": true
   },
-  "parent": "gempire:create_injector",
+  "parent": "gempire:incubation/obtain_primed_slate",
   "criteria": {
     "requirement": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "items": ["gempire:inactive_sapphire_base"]
+            "items": ["gempire:inactive_spinel_base"]
           }
         ]
       }

@@ -1,25 +1,25 @@
 {
   "display": {
     "icon": {
-      "item": "gempire:emerald_gem"
+      "item": "gempire:obsidian_gem"
     },
     "title": {
-      "translate": "advancements.gempire.emerald.title"
+      "translate": "advancements.gempire.obsidian.title"
     },
     "description": {
-      "translate": "advancements.gempire.emerald.description"
+      "translate": "advancements.gempire.obsidian.description"
     },
     "frame": "task",
     "hidden": true
   },
-  "parent": "gempire:create_injector",
+  "parent": "gempire:incubation/obtain_primed_slate",
   "criteria": {
     "requirement": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "items": ["gempire:inactive_emerald_base"]
+            "items": ["gempire:inactive_obsidian_base"]
           }
         ]
       }

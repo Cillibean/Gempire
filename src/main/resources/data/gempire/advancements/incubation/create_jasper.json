@@ -1,25 +1,25 @@
 {
   "display": {
     "icon": {
-      "item": "gempire:spinel_gem_6"
+      "item": "gempire:jasper_gem_1"
     },
     "title": {
-      "translate": "advancements.gempire.spinel.title"
+      "translate": "advancements.gempire.jasper.title"
     },
     "description": {
-      "translate": "advancements.gempire.spinel.description"
+      "translate": "advancements.gempire.jasper.description"
     },
     "frame": "task",
     "hidden": true
   },
-  "parent": "gempire:create_injector",
+  "parent": "gempire:incubation/obtain_primed_slate",
   "criteria": {
     "requirement": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "items": ["gempire:inactive_spinel_base"]
+            "items": ["gempire:inactive_jasper_base"]
           }
         ]
       }

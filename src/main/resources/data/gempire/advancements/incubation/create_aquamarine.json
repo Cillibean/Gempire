@@ -1,25 +1,25 @@
 {
   "display": {
     "icon": {
-      "item": "gempire:jasper_gem_1"
+      "item": "gempire:aquamarine_gem"
     },
     "title": {
-      "translate": "advancements.gempire.jasper.title"
+      "translate": "advancements.gempire.aquamarine.title"
     },
     "description": {
-      "translate": "advancements.gempire.jasper.description"
+      "translate": "advancements.gempire.aquamarine.description"
     },
     "frame": "task",
     "hidden": true
   },
-  "parent": "gempire:create_injector",
+  "parent": "gempire:incubation/obtain_primed_slate",
   "criteria": {
     "requirement": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "items": ["gempire:inactive_jasper_base"]
+            "items": ["gempire:inactive_aquamarine_base"]
           }
         ]
       }

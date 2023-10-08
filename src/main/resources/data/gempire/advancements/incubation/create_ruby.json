@@ -1,25 +1,25 @@
 {
   "display": {
     "icon": {
-      "item": "gempire:zircon_gem_11"
+      "item": "gempire:ruby_gem"
     },
     "title": {
-      "translate": "advancements.gempire.zircon.title"
+      "translate": "advancements.gempire.ruby.title"
     },
     "description": {
-      "translate": "advancements.gempire.zircon.description"
+      "translate": "advancements.gempire.ruby.description"
     },
     "frame": "task",
     "hidden": true
   },
-  "parent": "gempire:create_injector",
+  "parent": "gempire:incubation/obtain_primed_slate",
   "criteria": {
     "requirement": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "items": ["gempire:inactive_zircon_base"]
+            "items": ["gempire:inactive_ruby_base"]
           }
         ]
       }

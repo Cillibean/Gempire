@@ -1,25 +1,25 @@
 {
   "display": {
     "icon": {
-      "item": "gempire:ruby_gem"
+      "item": "gempire:sapphire_gem_11"
     },
     "title": {
-      "translate": "advancements.gempire.ruby.title"
+      "translate": "advancements.gempire.sapphire.title"
     },
     "description": {
-      "translate": "advancements.gempire.ruby.description"
+      "translate": "advancements.gempire.sapphire.description"
     },
     "frame": "task",
     "hidden": true
   },
-  "parent": "gempire:create_injector",
+  "parent": "gempire:incubation/obtain_primed_slate",
   "criteria": {
     "requirement": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "items": ["gempire:inactive_ruby_base"]
+            "items": ["gempire:inactive_sapphire_base"]
           }
         ]
       }

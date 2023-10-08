@@ -1,25 +1,25 @@
 {
   "display": {
     "icon": {
-      "item": "gempire:spodumene_gem_1"
+      "item": "gempire:quartz_gem_10"
     },
     "title": {
-      "translate": "advancements.gempire.spodumene.title"
+      "translate": "advancements.gempire.quartz.title"
     },
     "description": {
-      "translate": "advancements.gempire.spodumene.description"
+      "translate": "advancements.gempire.quartz.description"
     },
     "frame": "task",
     "hidden": true
   },
-  "parent": "gempire:create_injector",
+  "parent": "gempire:incubation/obtain_primed_slate",
   "criteria": {
     "requirement": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "items": ["gempire:inactive_spodumene_base"]
+            "items": ["gempire:inactive_quartz_base"]
           }
         ]
       }
