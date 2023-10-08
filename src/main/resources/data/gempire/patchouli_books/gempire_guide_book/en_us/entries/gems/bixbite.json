@@ -1,6 +1,6 @@
 {
   "name": "Bixbite",
-  "advancement": "gempire:create_bixbite",
+  "advancement": "gempire:incubation/create_bixbite",
   "icon": "gempire:bixbite_gem",
   "category": "gempire:gems_category",
   "pages": [

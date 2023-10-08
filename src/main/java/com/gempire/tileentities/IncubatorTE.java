@@ -51,10 +51,7 @@ import org.checkerframework.checker.units.qual.A;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Objects;
+import java.util.*;
 
 public class IncubatorTE extends BaseContainerBlockEntity implements MenuProvider, WorldlyContainer {
     public static final int NUMBER_OF_SLOTS = 10;
@@ -100,6 +97,7 @@ public class IncubatorTE extends BaseContainerBlockEntity implements MenuProvide
 
     public HashMap<String, Boolean> colour = new HashMap<>();
     public static HashMap<String, Boolean> addon = new HashMap<>();
+    public static HashMap<String, Boolean> prismaticVariant = new HashMap<>();
     public HashMap<String, Integer> time = new HashMap<>();
     public HashMap<String, ArrayList<Integer>> essenceRequired = new HashMap<>();
 
@@ -471,6 +469,31 @@ public class IncubatorTE extends BaseContainerBlockEntity implements MenuProvide
 
         //-----------
 
+        prismaticVariant.put("ruby", false);
+        prismaticVariant.put("nephrite", false);
+        prismaticVariant.put("rutile", false);
+        prismaticVariant.put("bismuth", false);
+        prismaticVariant.put("aquamarine", false);
+        prismaticVariant.put("emerald", false);
+        prismaticVariant.put("bixbite", false);
+        prismaticVariant.put("lapis", false);
+        prismaticVariant.put("obsidian", false);
+        prismaticVariant.put("larimar", false);
+        prismaticVariant.put("morganite", false);
+        prismaticVariant.put("peridot", false);
+        prismaticVariant.put("jasper", true);
+        prismaticVariant.put("garnet", true);
+        prismaticVariant.put("quartz", true);
+        prismaticVariant.put("sapphire", false);
+        prismaticVariant.put("agate", true);
+        prismaticVariant.put("spinel", false);
+        prismaticVariant.put("tourmaline", true);
+        prismaticVariant.put("zircon", false);
+        prismaticVariant.put("spodumene", false);
+        prismaticVariant.put("topaz", false);
+
+        //-----------
+
         HashMap<Item, Integer> agate = new HashMap<>();
         HashMap<Item, Integer> aquamarine = new HashMap<>();
         HashMap<Item, Integer> bismuth = new HashMap<>();
@@ -746,7 +769,10 @@ public class IncubatorTE extends BaseContainerBlockEntity implements MenuProvide
         time.putAll(AddonHandler.time);
         blocks.putAll(AddonHandler.blocks);
         essenceRequired.putAll(AddonHandler.essenceRequired);
-        addon.putAll(AddonHandler.addon);
+        for (String s : AddonHandler.addon.keySet()) {
+            addon.put(s, true);
+        }
+        prismaticVariant.putAll(AddonHandler.prismaticVariant);
     }
 
 
@@ -903,12 +929,31 @@ public class IncubatorTE extends BaseContainerBlockEntity implements MenuProvide
         ItemGem gem = null;
         String baseName = gemBase.toUpperCase().replaceAll("INACTIVE_", "").replaceAll("_BASE", "");
         String name = "";
+        boolean addonGem = addon.get(baseName.toLowerCase());
         boolean coloured = false;
+        boolean special = prismaticVariant.get(baseName.toLowerCase());
         if (colour.get(baseName.toLowerCase())) {
-            name = Color.getColorName(chroma).toUpperCase() +"_"+baseName+"_GEM";
-            coloured = true;
+            if (chroma >= 16 && special) {
+                name = "SPECIAL_"+baseName+"_GEM";
+                coloured = true;
+            } else {
+                if (chroma >= 16) {
+                    Random r = new Random();
+                    chroma = r.nextInt(16) - 1;
+                    chromaColor = chroma;
+                    System.out.println("Colour "+Color.getColorName(chroma));
+                }
+                name = Color.getColorName(chroma).toUpperCase() + "_" + baseName + "_GEM";
+                coloured = true;
+            }
         } else {
-            name = baseName+"_GEM";
+            name = baseName + "_GEM";
+        }
+        if (baseName.toLowerCase().contains("quartz") && chromaColor == 16) {
+            Random r = new Random();
+            if (r.nextInt(2) == 1) {
+                chromaColor = 17;
+            }
         }
         RegistryObject<EntityType<EntityPebble>> egemm = ModEntities.PEBBLE;
         String skinColorVariant = "";
@@ -932,10 +977,10 @@ public class IncubatorTE extends BaseContainerBlockEntity implements MenuProvide
         System.out.println("array "+ Arrays.toString(array));
         System.out.println("name "+name);
         try {
-            if (!addon.get(baseName)) {
+            if (!addonGem) {
                 egemm = (RegistryObject<EntityType<EntityPebble>>) ModEntities.class.getField(name.toUpperCase().replaceAll("GEM", "").replaceAll(skinColorVariant, "").replaceAll("_", "")).get(null);
             } else {
-                egemm = (RegistryObject<EntityType<EntityPebble>>) AddonHandler.ENTITY_ADDON_ENTITY_REGISTRIES.get(baseName).getField(name.toUpperCase().replaceAll("GEM", "").replaceAll(skinColorVariant, "").replaceAll("_", "")).get(null);
+                egemm = (RegistryObject<EntityType<EntityPebble>>) AddonHandler.ENTITY_ADDON_ENTITY_REGISTRIES.get(baseName.toLowerCase()).getField(baseName).get(null);
             }
         } catch(Exception e){
             e.printStackTrace();
@@ -957,11 +1002,11 @@ public class IncubatorTE extends BaseContainerBlockEntity implements MenuProvide
             }
         }
         try {
-            if (!addon.get(name)) {
+            if (!addonGem) {
                 gemm = (RegistryObject<Item>) ModItems.class.getField(name.toUpperCase()).get(null);
                 gem = (ItemGem) gemm.get();
             } else {
-                gemm = (RegistryObject<Item>) AddonHandler.ENTITY_ADDON_ITEM_REGISTRIES.get(baseName).getField(name.toUpperCase()).get(null);
+                gemm = (RegistryObject<Item>) AddonHandler.ENTITY_ADDON_ITEM_REGISTRIES.get(baseName.toLowerCase()).getField(name.toUpperCase()).get(null);
                 gem = (ItemGem) gemm.get();
             }
         } catch(Exception e){

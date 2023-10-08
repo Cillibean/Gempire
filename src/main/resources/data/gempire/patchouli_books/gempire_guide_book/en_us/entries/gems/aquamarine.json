@@ -1,6 +1,6 @@
 {
   "name": "Aquamarine",
-  "advancement": "gempire:create_aquamarine",
+  "advancement": "gempire:incubation/create_aquamarine",
   "icon": "gempire:aquamarine_gem",
   "category": "gempire:gems_category",
   "pages": [

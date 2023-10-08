@@ -16,13 +16,14 @@ public class AddonHandler {
 
     public static HashMap<String, Boolean> colour = new HashMap<>();
     public static HashMap<String, Boolean> addon = new HashMap<>();
+    public static HashMap<String, Boolean> prismaticVariant = new HashMap<>();
     public static HashMap<String, Integer> time = new HashMap<>();
     public static HashMap<String, ArrayList<Integer>> essenceRequired = new HashMap<>();
 
     public static HashMap<String, HashMap<Item, Integer>> blocks = new HashMap<>();
     public static ArrayList<Item> blockList = new ArrayList<>();
 
-    public void createIncubatedAddonGem(String name, Item gemItem, Class entityClass, Class itemClass, boolean colour1, int time1, ArrayList<Integer> essence, HashMap<Item, Integer> cruxMap) {
+    public static void createIncubatedAddonGem(String name, Item gemItem, Class entityClass, Class itemClass, boolean colour1, int time1, ArrayList<Integer> essence, HashMap<Item, Integer> cruxMap, boolean special) {
         ENTITY_ADDON_ITEM_REGISTRIES.put(name, itemClass);
         ENTITY_ADDON_ENTITY_REGISTRIES.put(name, entityClass);
         ModItemProperties.makeGem(gemItem);
@@ -32,6 +33,7 @@ public class AddonHandler {
         essenceRequired.put(name, essence);
         blocks.put(name, cruxMap);
         blockList.addAll(cruxMap.keySet());
+        prismaticVariant.put(name, special);
     }
 
     public HashMap<Item, Integer> createCruxMap(Item item1, Item item2, Item item3, Item item4, int i, int i2, int i3, int i4) {

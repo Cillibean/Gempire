@@ -1,6 +1,6 @@
 {
   "name": "Garnet",
-  "advancement": "gempire:create_garnet",
+  "advancement": "gempire:incubation/create_garnet",
   "icon": "gempire:garnet_gem_1",
   "category": "gempire:gems_category",
   "pages": [

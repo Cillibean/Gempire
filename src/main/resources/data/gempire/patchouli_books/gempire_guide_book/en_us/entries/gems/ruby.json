@@ -1,6 +1,6 @@
 {
   "name": "Ruby",
-  "advancement": "gempire:create_ruby",
+  "advancement": "gempire:incubation/create_ruby",
   "icon": "gempire:ruby_gem",
   "category": "gempire:gems_category",
   "pages": [
