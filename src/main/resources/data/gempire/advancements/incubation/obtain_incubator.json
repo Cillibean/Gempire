@@ -1,0 +1,28 @@
+{
+  "display": {
+    "icon": {
+      "item": "gempire:incubator_block"
+    },
+    "title": {
+      "translate": "advancements.gempire.incubator.title"
+    },
+    "description": {
+      "translate": "advancements.gempire.incubator.description"
+    },
+    "frame": "task",
+    "hidden": true,
+    "background": "gempire:textures/block/ruined_marble_brick.png"
+  },
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["gempire:incubator_block"]
+          }
+        ]
+      }
+    }
+  }
+}

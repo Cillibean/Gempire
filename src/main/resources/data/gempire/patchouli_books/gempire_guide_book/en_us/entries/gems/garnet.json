@@ -18,7 +18,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "$(l)Essence Requirements$() $(br)$(li)Pink$(li)Yellow"
+      "text": "$(l)Essence Requirements$() $(br)$(li)Yellow$(li)White"
     },
     {
       "type": "patchouli:text",

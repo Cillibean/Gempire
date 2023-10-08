@@ -3,7 +3,7 @@
   "textures": {
     "up": "gempire:block/incubator_top",
     "down": "gempire:block/incubator_bottom",
-    "north": "gempire:block/incubator_front_on",
+    "north": "gempire:block/incubator_front_off",
     "east": "gempire:block/incubator_side",
     "south": "gempire:block/incubator_back",
     "west": "gempire:block/incubator_side",

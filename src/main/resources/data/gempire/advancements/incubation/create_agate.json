@@ -1,25 +1,25 @@
 {
   "display": {
     "icon": {
-      "item": "gempire:morganite_gem"
+      "item": "gempire:agate_gem_3"
     },
     "title": {
-      "translate": "advancements.gempire.morganite.title"
+      "translate": "advancements.gempire.agate.title"
     },
     "description": {
-      "translate": "advancements.gempire.morganite.description"
+      "translate": "advancements.gempire.agate.description"
     },
     "frame": "task",
     "hidden": true
   },
-  "parent": "gempire:create_injector",
+  "parent": "gempire:incubation/obtain_primed_slate",
   "criteria": {
     "requirement": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "items": ["gempire:inactive_morganite_base"]
+            "items": ["gempire:inactive_agate_base"]
           }
         ]
       }

@@ -1,9 +1,11 @@
 package com.gempire.tileentities;
 
+import com.gempire.blocks.machine.IncubatorBlock;
 import com.gempire.container.IncubatorContainer;
 import com.gempire.entities.bases.EntityGem;
 import com.gempire.entities.bases.EntityVaryingGem;
 import com.gempire.entities.gems.EntityPearl;
+import com.gempire.entities.gems.EntitySapphire;
 import com.gempire.entities.gems.starter.EntityPebble;
 import com.gempire.init.*;
 import com.gempire.items.ItemChroma;
@@ -172,7 +174,12 @@ public class IncubatorTE extends BaseContainerBlockEntity implements MenuProvide
     public static <T extends BlockEntity> void tick(Level level, BlockPos pos, BlockState state, T be) {
         IncubatorTE te = (IncubatorTE)be;
         if(!level.isClientSide()) {
-            if (te.getItem(IncubatorTE.GEM_OUTPUT_SLOT_INDEX) == ItemStack.EMPTY) {
+            /*if (te.incubationProgress != 0) {
+                state.setValue(IncubatorBlock.ACTIVE, Boolean.valueOf(true));
+            } else {
+                state.setValue(IncubatorBlock.ACTIVE, Boolean.valueOf(false));
+            }*/
+            if (te.getItem(IncubatorTE.GEM_OUTPUT_SLOT_INDEX).isEmpty()) {
                 if (te.ticks % 50 == 0) {
                     te.HandleChromaTick();
                     te.HandleBaseTick();
@@ -599,6 +606,7 @@ public class IncubatorTE extends BaseContainerBlockEntity implements MenuProvide
         blockList.add(Items.HONEY_BLOCK);
         blockList.add(Items.ICE);
         blockList.add(Items.IRON_BLOCK);
+        blockList.add(Items.IRON_ORE);
         blockList.add(Items.LAPIS_BLOCK);
         blockList.add(Items.MAGMA_BLOCK);
         blockList.add(Items.MOSS_BLOCK);
@@ -895,12 +903,16 @@ public class IncubatorTE extends BaseContainerBlockEntity implements MenuProvide
             e.printStackTrace();
         }
         EntityGem egem = egemm.get().create(this.level);
-        if (egem instanceof EntityVaryingGem) {
+        if (egem instanceof EntityVaryingGem && !(egem instanceof EntitySapphire)) {
             if (((EntityVaryingGem) egem).UsesUniqueNames()) {
                 String uniqueColor = Component.translatable("nickname.gempire." + egem.getWholeGemName() + "_" + chromaColor).getString();
                 System.out.println(uniqueColor.toLowerCase());
                 System.out.println(egem.getWholeGemName());
-                uniqueColor = uniqueColor.toLowerCase().replaceAll(" "+egem.getWholeGemName(), "").replaceAll(" ", "_");
+                //.replaceAll(" "+egem.getWholeGemName(), "")
+                //uniqueColor = uniqueColor.replaceAll(" ", "_");
+                if (!(uniqueColor.toLowerCase().contains("quartz") || uniqueColor.toLowerCase().contains("blue spodumene")))
+                    uniqueColor = uniqueColor.toLowerCase().replaceAll(" "+egem.getWholeGemName(), "").replaceAll(" ", "_").replaceAll("'", "");
+                else uniqueColor = uniqueColor.toLowerCase().replaceAll(" ", "_").replaceAll("'", "");
                 System.out.println(uniqueColor);
                 name = name.replaceAll(skinColorVariant.toUpperCase(), uniqueColor.toUpperCase());
                 System.out.println("name "+ name);
@@ -932,6 +944,9 @@ public class IncubatorTE extends BaseContainerBlockEntity implements MenuProvide
             stack.getOrCreateTag().putBoolean("defective", true);
         }
         this.setItem(IncubatorTE.GEM_OUTPUT_SLOT_INDEX, stack);
+        primer = 0;
+        incubationProgress = 0;
+        incubationTime = 0;
         blockAmounts[0] = 0;
         blockAmounts[1] = 0;
         blockAmounts[2] = 0;
@@ -939,7 +954,6 @@ public class IncubatorTE extends BaseContainerBlockEntity implements MenuProvide
         weight = 0;
         this.blockConsumed = false;
         this.chromaConsumed = false;
-        this.primer = 0;
         this.baseConsumed = false;
         this.chromaColor = 0;
     }

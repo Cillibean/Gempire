@@ -77,7 +77,7 @@ public class ZirconUIScreen extends AbstractContainerScreen<ZirconUIContainer> {
         int n = this.menu.gem.getId();
         Screen screen = this;
         Button.Builder builder = new Button.Builder(Component.translatable("screens.gempire.poof"), button -> {
-            ModPacketHandler.INSTANCE.sendToServer(new RequestPoof(i));
+            ModPacketHandler.INSTANCE.sendToServer(new RequestPoof(n));
             screen.onClose();
         });
         builder.bounds(this.leftPos + 138, this.topPos + 81, 65, 20);

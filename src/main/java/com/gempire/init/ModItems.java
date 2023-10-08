@@ -91,6 +91,28 @@ public class ModItems {
             )
     );
 
+
+    public static final RegistryObject<Item> PRISMATIC_SWORD = ITEMS.register("prismatic_sword",
+            () -> new SwordItem(ModTiers.PRISMATIC, 4, -2.4f,
+                    new Item.Properties().fireResistant()));
+
+    public static final RegistryObject<Item> PRISMATIC_PICKAXE = ITEMS.register("prismatic_pickaxe",
+            () -> new PickaxeItem(ModTiers.PRISMATIC, 1, -2.8f,
+                    new Item.Properties().fireResistant()));
+
+    public static final RegistryObject<Item> PRISMATIC_SHOVEL = ITEMS.register("prismatic_shovel",
+            () -> new ShovelItem(ModTiers.PRISMATIC, 2, -3f,
+                    new Item.Properties().fireResistant()));
+
+    public static final RegistryObject<Item> PRISMATIC_AXE = ITEMS.register("prismatic_axe",
+            () -> new AxeItem(ModTiers.PRISMATIC, 6, -3f,
+                    new Item.Properties().fireResistant()));
+
+    public static final RegistryObject<Item> PRISMATIC_HOE = ITEMS.register("prismatic_hoe",
+            () -> new HoeItem(ModTiers.PRISMATIC, -4, 0f,
+                    new Item.Properties().fireResistant()));
+
+
     public static final RegistryObject<Item> SLUDGE_GLOB = ITEMS.register("sludge_glob", () ->
             new Item(new Item.Properties().stacksTo(64))
     );

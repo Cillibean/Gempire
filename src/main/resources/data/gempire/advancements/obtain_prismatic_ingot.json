@@ -1,25 +1,25 @@
 {
   "display": {
     "icon": {
-      "item": "gempire:tank_block"
+      "item": "gempire:prismatic_ingot"
     },
     "title": {
-      "translate": "advancements.gempire.injector.title"
+      "translate": "advancements.gempire.prismatic_ingot.title"
     },
     "description": {
-      "translate": "advancements.gempire.injector.description"
+      "translate": "advancements.gempire.prismatic_ingot.description"
     },
     "frame": "task",
     "hidden": false
   },
-  "parent": "gempire:create_pebble",
+  "parent": "gempire:obtain_essence",
   "criteria": {
     "requirement": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "items": ["gempire:tank_block"]
+            "item": "gempire:prismatic_ingot"
           }
         ]
       }

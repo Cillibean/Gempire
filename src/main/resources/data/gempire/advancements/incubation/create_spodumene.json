@@ -1,25 +1,25 @@
 {
   "display": {
     "icon": {
-      "item": "gempire:topaz_gem_4"
+      "item": "gempire:spodumene_gem_1"
     },
     "title": {
-      "translate": "advancements.gempire.topaz.title"
+      "translate": "advancements.gempire.spodumene.title"
     },
     "description": {
-      "translate": "advancements.gempire.topaz.description"
+      "translate": "advancements.gempire.spodumene.description"
     },
     "frame": "task",
     "hidden": true
   },
-  "parent": "gempire:create_injector",
+  "parent": "gempire:incubation/obtain_primed_slate",
   "criteria": {
     "requirement": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "items": ["gempire:inactive_topaz_base"]
+            "items": ["gempire:inactive_spodumene_base"]
           }
         ]
       }
