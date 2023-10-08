@@ -1,6 +1,6 @@
 {
   "name": "Topaz",
-  "advancement": "gempire:create_topaz",
+  "advancement": "gempire:incubation/create_topaz",
   "icon": "gempire:topaz_gem_4",
   "category": "gempire:gems_category",
   "pages": [

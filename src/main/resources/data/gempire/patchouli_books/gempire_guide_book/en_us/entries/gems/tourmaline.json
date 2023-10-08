@@ -1,6 +1,6 @@
 {
   "name": "Tourmaline",
-  "advancement": "gempire:create_tourmaline",
+  "advancement": "gempire:incubation/create_tourmaline",
   "icon": "gempire:tourmaline_gem_16",
   "category": "gempire:gems_category",
   "pages": [

@@ -1,6 +1,6 @@
 {
   "name": "Bismuth",
-  "advancement": "gempire:create_bismuth",
+  "advancement": "gempire:incubation/create_bismuth",
   "icon": "gempire:bismuth_gem",
   "category": "gempire:gems_category",
   "pages": [

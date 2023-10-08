@@ -1,6 +1,6 @@
 {
   "name": "Spinel",
-  "advancement": "gempire:create_spinel",
+  "advancement": "gempire:incubation/create_spinel",
   "icon": "gempire:spinel_gem_6",
   "category": "gempire:gems_category",
   "pages": [

@@ -1,6 +1,6 @@
 {
   "name": "Jasper",
-  "advancement": "gempire:create_jasper",
+  "advancement": "gempire:incubation/create_jasper",
   "icon": "gempire:jasper_gem_1",
   "category": "gempire:gems_category",
   "pages": [

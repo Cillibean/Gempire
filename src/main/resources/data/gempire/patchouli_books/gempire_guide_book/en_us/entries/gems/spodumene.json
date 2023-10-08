@@ -1,6 +1,6 @@
 {
   "name": "Spodumene",
-  "advancement": "gempire:create_spodumene",
+  "advancement": "gempire:incubation/create_spodumene",
   "icon": "gempire:spodumene_gem_1",
   "category": "gempire:gems_category",
   "pages": [

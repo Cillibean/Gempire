@@ -1,6 +1,6 @@
 {
   "name": "Zircon",
-  "advancement": "gempire:create_zircon",
+  "advancement": "gempire:incubation/create_zircon",
   "icon": "gempire:zircon_gem_11",
   "category": "gempire:gems_category",
   "pages": [

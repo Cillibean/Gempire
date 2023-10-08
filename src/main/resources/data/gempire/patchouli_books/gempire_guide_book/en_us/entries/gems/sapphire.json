@@ -1,6 +1,6 @@
 {
   "name": "Sapphire",
-  "advancement": "gempire:create_sapphire",
+  "advancement": "gempire:incubation/create_sapphire",
   "icon": "gempire:sapphire_gem_11",
   "category": "gempire:gems_category",
   "pages": [

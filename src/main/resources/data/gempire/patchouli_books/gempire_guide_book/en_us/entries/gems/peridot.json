@@ -1,6 +1,6 @@
 {
   "name": "Peridot",
-  "advancement": "gempire:create_peridot",
+  "advancement": "gempire:incubation/create_peridot",
   "icon": "gempire:peridot_gem",
   "category": "gempire:gems_category",
   "pages": [

@@ -1,6 +1,6 @@
 {
   "name": "Larimar",
-  "advancement": "gempire:create_larimar",
+  "advancement": "gempire:incubation/create_larimar",
   "icon": "gempire:larimar_gem",
   "category": "gempire:gems_category",
   "pages": [

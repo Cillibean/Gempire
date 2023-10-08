@@ -1,6 +1,6 @@
 {
   "name": "Emerald",
-  "advancement": "gempire:create_emerald",
+  "advancement": "gempire:incubation/create_emerald",
   "icon": "gempire:emerald_gem",
   "category": "gempire:gems_category",
   "pages": [

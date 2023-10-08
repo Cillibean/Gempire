@@ -1,6 +1,6 @@
 {
   "name": "Quartz",
-  "advancement": "gempire:create_quartz",
+  "advancement": "gempire:incubation/create_quartz",
   "icon": "gempire:quartz_gem_10",
   "category": "gempire:gems_category",
   "pages": [

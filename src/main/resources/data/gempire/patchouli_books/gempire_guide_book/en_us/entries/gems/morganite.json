@@ -1,6 +1,6 @@
 {
   "name": "Morganite",
-  "advancement": "gempire:create_morganite",
+  "advancement": "gempire:incubation/create_morganite",
   "icon": "gempire:morganite_gem",
   "category": "gempire:gems_category",
   "pages": [
