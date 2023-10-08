@@ -1,6 +1,6 @@
 {
   "name": "Nephrite",
-  "advancement": "gempire:create_nephrite",
+  "advancement": "gempire:incubation/create_nephrite",
   "icon": "gempire:nephrite_gem",
   "category": "gempire:gems_category",
   "pages": [

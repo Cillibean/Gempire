@@ -1,6 +1,6 @@
 {
   "name": "Lapis Lazuli",
-  "advancement": "gempire:create_lapis",
+  "advancement": "gempire:incubation/create_lapis",
   "icon": "gempire:lapis_gem",
   "category": "gempire:gems_category",
   "pages": [

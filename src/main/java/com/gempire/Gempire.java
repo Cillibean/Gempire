@@ -10,6 +10,7 @@ import com.gempire.entities.other.EntityCrawler;
 import com.gempire.entities.other.EntityShambler;
 import com.gempire.init.*;
 import com.gempire.proxy.CommonProxy;
+import com.gempire.tileentities.IncubatorTE;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.entries.LootTableReference;
 import net.minecraft.server.MinecraftServer;
@@ -129,6 +130,7 @@ public class Gempire
         ModPacketHandler.registerPackets();
         ModEntities.setVanillaGems();
         ModEntities.registerCruxes();
+        //IncubatorTE.setup();
         ModAbilities.registerAbilities();
         ModEnchants.registerVanillaEnchantments();
         ModEnchants.registerPrimeRequiredEnchantments();

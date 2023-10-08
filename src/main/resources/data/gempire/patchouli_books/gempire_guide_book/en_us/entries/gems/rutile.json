@@ -1,6 +1,6 @@
 {
   "name": "Rutile",
-  "advancement": "gempire:create_rutile",
+  "advancement": "gempire:incubation/create_rutile",
   "icon": "gempire:rutile_gem",
   "category": "gempire:gems_category",
   "pages": [

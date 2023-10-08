@@ -1,6 +1,6 @@
 {
   "name": "Snowflake Obsidian",
-  "advancement": "gempire:create_obsidian",
+  "advancement": "gempire:incubation/create_obsidian",
   "icon": "gempire:obsidian_gem",
   "category": "gempire:gems_category",
   "pages": [

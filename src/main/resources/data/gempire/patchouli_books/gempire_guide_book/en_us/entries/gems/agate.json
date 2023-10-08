@@ -1,6 +1,6 @@
 {
   "name": "Agate",
-  "advancement": "gempire:create_agate",
+  "advancement": "gempire:incubation/create_agate",
   "icon": "gempire:agate_gem_3",
   "category": "gempire:gems_category",
   "pages": [
