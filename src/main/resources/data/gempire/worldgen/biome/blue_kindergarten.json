@@ -1,0 +1,21 @@
+{
+  "temperature": 0.8,
+  "downfall": 0.4,
+  "has_precipitation": true,
+  "effects": {
+    "sky_color": 9618402,
+    "fog_color": 14086911,
+    "water_color": 8106228,
+    "water_fog_color": 7899112,
+    "grass_color": 1549890,
+    "foliage_color": 1549890
+  },
+  "spawners": {},
+  "spawn_costs": {},
+  "carvers": {
+    "air": [
+      "gempire:kindergarten_trench"
+    ]
+  },
+  "features": []
+}
