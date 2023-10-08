@@ -9,8 +9,10 @@
     "description": {
       "translate": "advancements.gempire.prismatic_hoe.description"
     },
-    "frame": "task",
-    "hidden": false
+    "frame": "challenge",
+    "announce_to_chat": true,
+    "hidden": false,
+    "show_toast": true
   },
   "parent": "gempire:obtain_prismatic_ingot",
   "criteria": {
