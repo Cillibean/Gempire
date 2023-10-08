@@ -564,6 +564,11 @@ public class ItemGem extends Item {
         return super.onEntityItemUpdate(stack, entity);
     }
 
+    @Override
+    public int getEntityLifespan(ItemStack itemStack, Level level) {
+        return 10000000;
+    }
+
     public void clearData(ItemStack stack) {
         stack.setTag(new CompoundTag());
     }
