@@ -444,14 +444,8 @@ public class ModBlocks {
     );
 
     public static final RegistryObject<Block> DRAINED_PURPLE_STONE = BLOCKS.register("drained_purple_stone", () ->
-            new DrainedBlock(BlockBehaviour.Properties
-                    .of(Material.STONE)
-                    .requiresCorrectToolForDrops()
-                    .strength(1.5f, 10f)
-                    .sound(SoundType.STONE)
-                    
-            )
-    );
+            new DrainedBlock(BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops()
+                    .strength(1.5f, 10f).sound(SoundType.STONE)));
 
     public static final RegistryObject<Block> DRAINED_PURPLE_STONE_2 = BLOCKS.register("drained_purple_stone_2", () ->
             new DrainedBlock(BlockBehaviour.Properties
@@ -608,6 +602,22 @@ public class ModBlocks {
                     .sound(SoundType.GLASS)
             )
     );
+
+    public static final RegistryObject<Block> STRAWBERRY_BLOCK = BLOCKS.register("strawberry_block", () ->
+            new StrawberryBlock(Block.Properties.of(Material.FROGLIGHT)
+                    .strength(3.0f, 4.0f)
+                    .sound(SoundType.WART_BLOCK)
+            )
+    );
+
+    public static final RegistryObject<Block> STRAWBERRY_STEM = BLOCKS.register("strawberry_stem", () ->
+            new StemBlock((StemGrownBlock) STRAWBERRY_BLOCK.get(), ModItems.STRAWBERRY,
+                    BlockBehaviour.Properties.of(Material.PLANT).noCollission().randomTicks()
+                            .instabreak().sound(SoundType.HARD_CROP)));
+    public static final RegistryObject<Block> ATTACHED_STRAWBERRY_STEM = BLOCKS.register("attached_strawberry_stem", () ->
+            new AttachedStemBlock((StemGrownBlock) STRAWBERRY_BLOCK.get(), ModItems.STRAWBERRY,
+                    BlockBehaviour.Properties.of(Material.PLANT).noCollission().randomTicks()
+                            .instabreak().sound(SoundType.HARD_CROP)));
 
     /*public static final RegistryObject<Block> DESTAB_WALL = BLOCKS.register("destab_wall", () ->
             new DestabWallBlock(Block.Properties

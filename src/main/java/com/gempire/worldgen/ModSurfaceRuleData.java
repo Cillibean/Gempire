@@ -9,13 +9,15 @@ import net.minecraft.world.level.levelgen.VerticalAnchor;
 public class ModSurfaceRuleData {
     private static final SurfaceRules.RuleSource DIRT = makeStateRule(Blocks.DIRT);
     private static final SurfaceRules.RuleSource GRASS_BLOCK = makeStateRule(Blocks.GRASS_BLOCK);
+    private static final SurfaceRules.RuleSource STONE = makeStateRule(Blocks.STONE);
     private static final SurfaceRules.RuleSource DRAINED_PURPLE_STONE = makeStateRule(ModBlocks.DRAINED_PURPLE_STONE.get());
     private static final SurfaceRules.RuleSource DRAINED_PURPLE_SOIL = makeStateRule(ModBlocks.DRAINED_PURPLE_SOIL.get());
     private static final SurfaceRules.RuleSource DRAINED_PURPLE_STONE_2 = makeStateRule(ModBlocks.DRAINED_PURPLE_STONE_2.get());
-    private static final SurfaceRules.RuleSource DRAINED_BANDED_PURPLE_STONE = makeStateRule(ModBlocks.DRAINED_BANDED_PURPLE_STONE.get());
+    //private static final SurfaceRules.RuleSource DRAINED_BANDED_PURPLE_STONE = makeStateRule(ModBlocks.DRAINED_BANDED_PURPLE_STONE.get());
 
     private static final SurfaceRules.RuleSource DRAINED_YELLOW_STONE = makeStateRule(ModBlocks.DRAINED_YELLOW_STONE.get());
     private static final SurfaceRules.RuleSource DRAINED_YELLOW_SOIL = makeStateRule(ModBlocks.DRAINED_YELLOW_SOIL.get());
+    private static final SurfaceRules.RuleSource DRAINED_YELLOW_SAND = makeStateRule(ModBlocks.DRAINED_SAND.get());
     private static final SurfaceRules.RuleSource DRAINED_YELLOW_STONE_2 = makeStateRule(ModBlocks.DRAINED_YELLOW_STONE_2.get());
     private static final SurfaceRules.RuleSource DRAINED_GREY_STONE = makeStateRule(ModBlocks.DRAINED_GREY_STONE.get());
     private static final SurfaceRules.RuleSource DRAINED_GREY_SOIL = makeStateRule(ModBlocks.DRAINED_GREY_SOIL.get());
@@ -24,6 +26,7 @@ public class ModSurfaceRuleData {
     private static final SurfaceRules.RuleSource DRAINED_BLUE_SOIL = makeStateRule(ModBlocks.DRAINED_BLUE_SOIL.get());
     private static final SurfaceRules.RuleSource DRAINED_BLUE_STONE_2 = makeStateRule(ModBlocks.DRAINED_BLUE_STONE_2.get());
     private static final SurfaceRules.RuleSource DRAINED_RED_STONE = makeStateRule(ModBlocks.DRAINED_RED_STONE.get());
+    private static final SurfaceRules.RuleSource DRAINED_RED_SAND = makeStateRule(ModBlocks.DRAINED_RED_SAND.get());
     private static final SurfaceRules.RuleSource DRAINED_RED_SOIL = makeStateRule(ModBlocks.DRAINED_RED_SOIL.get());
     private static final SurfaceRules.RuleSource DRAINED_RED_STONE_2 = makeStateRule(ModBlocks.DRAINED_RED_STONE_2.get());
 
@@ -34,17 +37,12 @@ public class ModSurfaceRuleData {
         SurfaceRules.ConditionSource stone2Level = SurfaceRules.yBlockCheck(VerticalAnchor.BOTTOM, 30);
         return SurfaceRules.sequence(
                 SurfaceRules.ifTrue(SurfaceRules.isBiome(ModBiomes.STRAWBERRY_FIELDS), grassSurface),
+                SurfaceRules.ifTrue(SurfaceRules.isBiome(ModBiomes.STRAWBERRY_FIELDS), SurfaceRules.sequence(SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, GRASS_BLOCK), SurfaceRules.ifTrue(SurfaceRules.UNDER_FLOOR, DIRT))),
                 SurfaceRules.ifTrue(SurfaceRules.isBiome(ModBiomes.PURPLE_KINDERGARTEN), SurfaceRules.sequence(SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, DRAINED_PURPLE_SOIL), SurfaceRules.ifTrue(SurfaceRules.UNDER_FLOOR, DRAINED_PURPLE_SOIL), SurfaceRules.ifTrue(stone2Level, DRAINED_PURPLE_STONE_2), DRAINED_PURPLE_STONE)),
                 SurfaceRules.ifTrue(SurfaceRules.isBiome(ModBiomes.GREY_KINDERGARTEN), SurfaceRules.sequence(SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, DRAINED_GREY_SOIL), SurfaceRules.ifTrue(SurfaceRules.UNDER_FLOOR, DRAINED_GREY_SOIL), SurfaceRules.ifTrue(stone2Level, DRAINED_GREY_STONE_2), DRAINED_GREY_STONE)),
-                SurfaceRules.ifTrue(SurfaceRules.isBiome(ModBiomes.YELLOW_KINDERGARTEN), SurfaceRules.sequence(SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, DRAINED_YELLOW_SOIL), SurfaceRules.ifTrue(SurfaceRules.UNDER_FLOOR, DRAINED_YELLOW_SOIL), SurfaceRules.ifTrue(stone2Level, DRAINED_YELLOW_STONE_2), DRAINED_YELLOW_STONE)),
+                SurfaceRules.ifTrue(SurfaceRules.isBiome(ModBiomes.YELLOW_KINDERGARTEN), SurfaceRules.sequence(SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, DRAINED_YELLOW_SAND), SurfaceRules.ifTrue(SurfaceRules.UNDER_FLOOR, DRAINED_YELLOW_SOIL), SurfaceRules.ifTrue(stone2Level, DRAINED_YELLOW_STONE_2), DRAINED_YELLOW_STONE)),
                 SurfaceRules.ifTrue(SurfaceRules.isBiome(ModBiomes.BLUE_KINDERGARTEN), SurfaceRules.sequence(SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, DRAINED_BLUE_SOIL), SurfaceRules.ifTrue(SurfaceRules.UNDER_FLOOR, DRAINED_BLUE_SOIL), SurfaceRules.ifTrue(stone2Level, DRAINED_BLUE_STONE_2), DRAINED_BLUE_STONE)),
-                SurfaceRules.ifTrue(SurfaceRules.isBiome(ModBiomes.RED_KINDERGARTEN), SurfaceRules.sequence(SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, DRAINED_RED_SOIL), SurfaceRules.ifTrue(SurfaceRules.UNDER_FLOOR, DRAINED_RED_SOIL), SurfaceRules.ifTrue(stone2Level, DRAINED_RED_STONE_2), DRAINED_RED_STONE)),
-                //SurfaceRules.ifTrue(SurfaceRules.isBiome(GempireBiomes.KINDERGARTEN), SurfaceRules.sequence(DRAINED_PURPLE_SOIL)),
-                //SurfaceRules.ifTrue(SurfaceRules.abovePreliminarySurface(), SurfaceRules.ifTrue(SurfaceRules.isBiome(GempireBiomes.KINDERGARTEN), DRAINED_PURPLE_SOIL)),
-                SurfaceRules.ifTrue(SurfaceRules.abovePreliminarySurface(), SurfaceRules.ifTrue(SurfaceRules.isBiome(ModBiomes.RED_KINDERGARTEN), DRAINED_RED_SOIL)),
-                //SurfaceRules.ifTrue(SurfaceRules.isBiome(ModBiomes.KINDERGARTEN), SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, DRAINED_PURPLE_SOIL)),
-                //SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, SurfaceRules.ifTrue(SurfaceRules.isBiome(GempireBiomes.KINDERGARTEN), DRAINED_PURPLE_SOIL)),
-                SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, grassSurface)
+                SurfaceRules.ifTrue(SurfaceRules.isBiome(ModBiomes.RED_KINDERGARTEN), SurfaceRules.sequence(SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, DRAINED_RED_SAND), SurfaceRules.ifTrue(SurfaceRules.UNDER_FLOOR, DRAINED_RED_SOIL), SurfaceRules.ifTrue(stone2Level, DRAINED_RED_STONE_2), DRAINED_RED_STONE))
         );
     }
 
