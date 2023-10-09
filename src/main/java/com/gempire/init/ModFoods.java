@@ -12,4 +12,6 @@ public class ModFoods {
     }, 1).effect(()->{
         return new MobEffectInstance(MobEffects.HUNGER, 400);
     }, 0.005F).build();
+
+    public static final FoodProperties STRAWBERRY = (new FoodProperties.Builder()).alwaysEat().nutrition(2).saturationMod(4).build();
 }

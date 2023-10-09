@@ -19,7 +19,9 @@
       "conditions": {
         "items": [
           {
-            "item": "gempire:prismatic_ingot"
+            "items": [
+              "gempire:prismatic_ingot"
+            ]
           }
         ]
       }
