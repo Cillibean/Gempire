@@ -21,6 +21,8 @@ public class AbilityDesigner extends Ability implements ICraftingAbility {
         output.add(ModItems.PEDISTAL.get());
         holder.inputList = input;
         holder.outputList = output;
+        input2.add(Items.AIR);
+        holder.input2List = input2;
     }
     @Override
     public Component getName() {

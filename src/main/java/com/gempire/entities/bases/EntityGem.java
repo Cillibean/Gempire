@@ -1006,7 +1006,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                                                         System.out.println(getInputItem(i).asItem());
                                                         System.out.println("is crafting check");
                                                         if (getInputItem(i) != Items.AIR.asItem()) {
-                                                            if (getInputItem2(i) != Items.AIR)
+                                                            if (getInputItem2(i) != Items.AIR) {
                                                                 if (consumeItemCheck(getInputItem2(i), 1)) {
                                                                     System.out.println("input item air check");
                                                                     inputList.clear();
@@ -1028,6 +1028,26 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                                                                         break;
                                                                     }
                                                                 }
+                                                            } else {
+                                                                inputList.clear();
+                                                                setCurrentRecipe(i);
+
+                                                                if (this.isOwner(player)) {
+                                                                    isCrafting = true;
+                                                                    this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
+                                                                    if (!player.isCreative()) {
+                                                                        player.getMainHandItem().shrink(1);
+                                                                    }
+                                                                    ItemStack stack = new ItemStack(player.getMainHandItem().getItem());
+                                                                    stack.setCount(1);
+                                                                    if (!this.getItemBySlot(EquipmentSlot.MAINHAND).isEmpty()) {
+                                                                        ItemStack gemStack = this.getItemBySlot(EquipmentSlot.MAINHAND);
+                                                                        spawnAtLocation(gemStack);
+                                                                    }
+                                                                    this.setItemSlot(EquipmentSlot.MAINHAND, stack);
+                                                                    break;
+                                                                }
+                                                            }
                                                             } else {
                                                             System.out.println("input item air check");
                                                             inputList.clear();
