@@ -91,7 +91,7 @@ public class ModItems {
             )
     );
 
-
+/*
     public static final RegistryObject<Item> PRISMATIC_SWORD = ITEMS.register("prismatic_sword",
             () -> new SwordItem(ModTiers.PRISMATIC, 4, -2.4f,
                     new Item.Properties().fireResistant()));
@@ -111,7 +111,7 @@ public class ModItems {
     public static final RegistryObject<Item> PRISMATIC_HOE = ITEMS.register("prismatic_hoe",
             () -> new HoeItem(ModTiers.PRISMATIC, -4, 0f,
                     new Item.Properties().fireResistant()));
-
+*/
 
     public static final RegistryObject<Item> SLUDGE_GLOB = ITEMS.register("sludge_glob", () ->
             new Item(new Item.Properties().stacksTo(64))

@@ -408,12 +408,6 @@ public class ClientProxy {
                                 populator.accept(ModItems.SLATE.get());
                                 //populator.accept(ModItems.INJECTOR_PANEL.get());
 
-                                populator.accept(ModItems.PRISMATIC_AXE.get());
-                                populator.accept(ModItems.PRISMATIC_PICKAXE.get());
-                                populator.accept(ModItems.PRISMATIC_HOE.get());
-                                populator.accept(ModItems.PRISMATIC_SWORD.get());
-                                populator.accept(ModItems.PRISMATIC_SHOVEL.get());
-
                                 populator.accept(ModItems.INACTIVE_AQUAMARINE_BASE.get());
                                 populator.accept(ModItems.INACTIVE_NEPHRITE_BASE.get());
                                 populator.accept(ModItems.INACTIVE_BISMUTH_BASE.get());
