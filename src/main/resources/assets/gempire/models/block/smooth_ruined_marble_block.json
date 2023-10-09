@@ -1,6 +1,6 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "all": "gempire:block/smooth_ruined_marble_block"
+    "all": "gempire:block/ruined_marble_smooth"
   }
 }
