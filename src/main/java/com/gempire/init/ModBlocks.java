@@ -356,6 +356,15 @@ public class ModBlocks {
             )
     );
 
+    public static final RegistryObject<Block> DRAINED_BLUE_SAND = BLOCKS.register("drained_blue_sand", () ->
+            new DrainedBlock(BlockBehaviour.Properties
+                    .of(Material.SAND)
+                    .strength(0.6f, 0.6f)
+                    .sound(SoundType.SAND)
+
+            )
+    );
+
     public static final RegistryObject<Block> PRISMATIC_BLOCK = BLOCKS.register("prismatic_block", () ->
             new Block(BlockBehaviour.Properties
                     .of(Material.METAL)
@@ -404,6 +413,15 @@ public class ModBlocks {
             )
     );
 
+    public static final RegistryObject<Block> DRAINED_GREY_SAND = BLOCKS.register("drained_grey_sand", () ->
+            new DrainedBlock(BlockBehaviour.Properties
+                    .of(Material.SAND)
+                    .strength(0.6f, 0.6f)
+                    .sound(SoundType.SAND)
+
+            )
+    );
+
     public static final RegistryObject<Block> DRAINED_GREY_STONE = BLOCKS.register("drained_grey_stone", () ->
             new DrainedBlock(BlockBehaviour.Properties
                     .of(Material.STONE)
@@ -440,6 +458,15 @@ public class ModBlocks {
                     .strength(0.6f, 0.6f)
                     .sound(SoundType.GRAVEL)
                     
+            )
+    );
+
+    public static final RegistryObject<Block> DRAINED_PURPLE_SAND = BLOCKS.register("drained_purple_sand", () ->
+            new DrainedBlock(BlockBehaviour.Properties
+                    .of(Material.SAND)
+                    .strength(0.6f, 0.6f)
+                    .sound(SoundType.SAND)
+
             )
     );
 

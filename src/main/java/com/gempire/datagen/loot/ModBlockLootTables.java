@@ -65,6 +65,9 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.DRAINED_GREY_STONE_2.get());
         this.dropSelf(ModBlocks.DRAINED_RED_SAND.get());
         this.dropSelf(ModBlocks.DRAINED_SAND.get());
+        this.dropSelf(ModBlocks.DRAINED_BLUE_SAND.get());
+        this.dropSelf(ModBlocks.DRAINED_GREY_SAND.get());
+        this.dropSelf(ModBlocks.DRAINED_PURPLE_SAND.get());
         this.dropSelf(ModBlocks.DRAINED_ICE.get());
         this.dropSelf(ModBlocks.DRAINED_LOG_CRACKED.get());
         this.add(ModBlocks.DRAINED_LOG.get(), (p_124229_) -> {
