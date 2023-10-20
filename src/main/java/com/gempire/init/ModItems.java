@@ -552,16 +552,18 @@ public class ModItems {
             )
     );*/
 
+    public static final RegistryObject<Item> REMNANTS_MUSIC_DISC = ITEMS.register("remnants_music_disc", () ->
+            new RecordItem(8, ModSounds.REMNANTS, new Item.Properties().stacksTo(1).rarity(Rarity.RARE), 5620));
     public static final RegistryObject<Item> GILDED_LAPIS = ITEMS.register("gilded_lapis", () ->
             new Item(new Item.Properties().stacksTo(64)));
     public static final RegistryObject<Item> PRIME_BOOST = ITEMS.register("prime_boost", () ->
             new Item(new Item.Properties().stacksTo(64)));
 
     public static final RegistryObject<Item> PRIMED_SLATE = ITEMS.register("primed_slate", () ->
-            new Item(new Item.Properties().stacksTo(1)));
+            new Item(new Item.Properties().stacksTo(64)));
 
     public static final RegistryObject<Item> SLATE = ITEMS.register("slate", () ->
-            new Item(new Item.Properties().stacksTo(1)));
+            new Item(new Item.Properties().stacksTo(64)));
 
     public static final RegistryObject<Item> SPODUMENE_PIECE = ITEMS.register("spodumene_piece", () ->
             new Item(new Item.Properties().stacksTo(64).food(ModFoods.SPODUMENE_PIECE)));

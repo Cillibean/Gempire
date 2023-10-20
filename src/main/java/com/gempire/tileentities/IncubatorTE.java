@@ -48,6 +48,7 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.registries.RegistryObject;
 import org.apache.commons.lang3.ArrayUtils;
 import org.checkerframework.checker.units.qual.A;
+import org.checkerframework.checker.units.qual.C;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -681,6 +682,9 @@ public class IncubatorTE extends BaseContainerBlockEntity implements MenuProvide
         blockList.add(Items.SOUL_SOIL);
         blockList.add(ModItems.TUNGSTEN_BLOCK.get());
         blockList.add(Items.WITHER_ROSE);
+        blockList.add(Items.REDSTONE);
+        blockList.add(Items.GLOWSTONE_DUST);
+        blockList.add(Items.FIRE_CHARGE);
 
         //------------
 
@@ -939,7 +943,7 @@ public class IncubatorTE extends BaseContainerBlockEntity implements MenuProvide
             } else {
                 if (chroma >= 16) {
                     Random r = new Random();
-                    chroma = r.nextInt(16) - 1;
+                    chroma = r.nextInt(16);
                     chromaColor = chroma;
                     System.out.println("Colour "+Color.getColorName(chroma));
                 }
@@ -951,9 +955,12 @@ public class IncubatorTE extends BaseContainerBlockEntity implements MenuProvide
         }
         if (baseName.toLowerCase().contains("quartz") && chromaColor == 16) {
             Random r = new Random();
-            if (r.nextInt(2) == 1) {
+            int o = r.nextInt(2);
+            if (o == 0) {
                 chromaColor = 17;
             }
+            System.out.println(o);
+            System.out.println(chromaColor);
         }
         RegistryObject<EntityType<EntityPebble>> egemm = ModEntities.PEBBLE;
         String skinColorVariant = "";
@@ -986,8 +993,8 @@ public class IncubatorTE extends BaseContainerBlockEntity implements MenuProvide
             e.printStackTrace();
         }
         EntityGem egem = egemm.get().create(this.level);
-        if (egem instanceof EntityVaryingGem && !(egem instanceof EntitySapphire)) {
-            if (((EntityVaryingGem) egem).UsesUniqueNames()) {
+        if (egem instanceof EntityVaryingGem) {
+            if (((EntityVaryingGem) egem).UsesUniqueNames() && !(egem instanceof EntitySapphire)) {
                 String uniqueColor = Component.translatable("nickname.gempire." + egem.getWholeGemName() + "_" + chromaColor).getString();
                 System.out.println(uniqueColor.toLowerCase());
                 System.out.println(egem.getWholeGemName());
@@ -1022,6 +1029,18 @@ public class IncubatorTE extends BaseContainerBlockEntity implements MenuProvide
         System.out.println(name);
         egem.setUUID(Mth.createInsecureUUID(this.level.random));
         //egem.setSkinColorVariant(chroma);
+        CompoundTag tag = new CompoundTag();
+        if (quality == 0) {
+            tag.putBoolean("prime", true);
+            egem.setPrimary(true);
+            egem.setDefective(false);
+            egem.addAdditionalSaveData(tag);
+        } else if (quality == 2) {
+            tag.putBoolean("defective", true);
+            egem.setPrimary(false);
+            egem.setDefective(true);
+            egem.addAdditionalSaveData(tag);
+        }
         egem.finalizeSpawn((ServerLevelAccessor) this.level, this.level.getCurrentDifficultyAt(this.worldPosition), MobSpawnType.MOB_SUMMONED, null, null);
         ItemStack stack = new ItemStack(gem);
         ItemGem.saveData(stack, egem);

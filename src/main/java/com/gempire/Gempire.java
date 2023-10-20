@@ -204,17 +204,6 @@ public class Gempire
             event.getTable().addPool(LootPool.lootPool().add(LootTableReference.lootTableReference(new ResourceLocation(MODID, "chests/tourmaline"))).build());
         }
 
-        //jungle_temple
-        //jungle_temple_dispenser
-        //buried treasure
-        //desert pyramid
-        //igloo chest
-        //ruined portal
-        //shipwreck map
-        //shipwreck supply
-        //shipwreck treasure
-        //underwater ruin big/small
-
     }
 
     @SubscribeEvent
