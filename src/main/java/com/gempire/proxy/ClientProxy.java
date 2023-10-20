@@ -377,6 +377,11 @@ public class ClientProxy {
                                 populator.accept(ModItems.CONFRACTOR_TIP.get());
                                 populator.accept(ModItems.CONFRACTOR_BODY.get());
                                 populator.accept(ModItems.GEM_WHISTLE.get());
+                                populator.accept(ModItems.PRISMATIC_AXE.get());
+                                populator.accept(ModItems.PRISMATIC_PICKAXE.get());
+                                populator.accept(ModItems.PRISMATIC_SWORD.get());
+                                populator.accept(ModItems.PRISMATIC_HOE.get());
+                                populator.accept(ModItems.PRISMATIC_SHOVEL.get());
 
                                 populator.accept(ModItems.SHARE_CONTRACT.get());
                                 populator.accept(ModItems.TRANSFER_CONTRACT.get());
@@ -398,6 +403,8 @@ public class ClientProxy {
                                 populator.accept(ModItems.CONGEALED_BLUE_ESSENCE.get());
                                 populator.accept(ModItems.CONGEALED_YELLOW_ESSENCE.get());
                                 populator.accept(ModItems.CONGEALED_WHITE_ESSENCE.get());
+
+                                populator.accept(ModItems.STRAWBERRY.get());
 
                                 populator.accept(ModItems.SLUDGE_GLOB.get());
 
@@ -488,7 +495,7 @@ public class ClientProxy {
 
                                 //populator.accept(ModItems.TANK_BLOCK_ITEM.get());
                                 populator.accept(ModItems.POWER_CRYSTAL_BLOCK_ITEM.get());
-                                //populator.accept(ModItems.POWER_CRYSTAL_BLOCK_TIER_2_ITEM.get());
+                                populator.accept(ModItems.POWER_CRYSTAL_BLOCK_TIER_2_ITEM.get());
                                 //populator.accept(ModItems.DRILL_BLOCK_ITEM.get());
                                 populator.accept(ModItems.SHELL_BLOCK_ITEM.get());
                                 populator.accept(ModItems.INCUBATOR_BLOCK_ITEM.get());
@@ -498,6 +505,8 @@ public class ClientProxy {
                                 populator.accept(ModItems.CONGEALED_BLUE_ESSENCE_BLOCK.get());
                                 populator.accept(ModItems.CONGEALED_YELLOW_ESSENCE_BLOCK.get());
                                 populator.accept(ModItems.CONGEALED_WHITE_ESSENCE_BLOCK.get());
+
+                                populator.accept(ModItems.STRAWBERRY_BLOCK.get());
 
                                 populator.accept(ModBlocks.PRISMATIC_BLOCK.get());
                                 populator.accept(ModBlocks.TUNGSTEN_BLOCK.get());

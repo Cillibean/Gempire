@@ -85,6 +85,11 @@
   "block.gempire.congealed_blue_essence_block": "Congealed Blue Essence Block",
   "block.gempire.congealed_pink_essence_block": "Congealed Pink Essence Block",
 
+  "block.gempire.strawberry_block": "Strawberry Block",
+  "block.gempire.strawberry_stem": "Strawberry Stem",
+  "block.gempire.attached_strawberry_stem": "Strawberry Stem",
+  "item.gempire.strawberry": "Strawberry",
+
   "item.gempire.gem_slush_bucket": "Bucket of Gem Slush",
   "item.gempire.chroma_catalyst": "Chroma Catalyst",
 

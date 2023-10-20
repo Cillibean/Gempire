@@ -21,7 +21,9 @@
       "conditions": {
         "items": [
           {
-            "item":"gempire:prismatic_hoe"
+            "items":[
+              "gempire:prismatic_hoe"
+              ]
           }
         ]
       }

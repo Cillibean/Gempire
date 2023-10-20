@@ -1,8 +1,10 @@
 buildscript {
     repositories {
         maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
+        maven { url = 'https://maven.minecraftforge.net/' }
     }
     dependencies {
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
         classpath group: 'org.spongepowered', name: 'mixingradle', version: '0.7.+'
     }
 }
@@ -13,6 +15,8 @@ plugins {
     id 'net.minecraftforge.gradle' version '5.1.+'
 }
 apply plugin: 'org.spongepowered.mixin'
+apply plugin: 'idea'
+apply plugin: 'net.minecraftforge.gradle'
 
 //mixin {
     //add sourceSets.main, 'gempire.refmap.json'
@@ -132,6 +136,7 @@ dependencies {
     runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:1.19.4-79.1-FORGE")
     runtimeOnly fg.deobf("curse.maven:worldedit-225608:4445118")
 
+    implementation fg.deobf('com.github.glitchfiend:TerraBlender-forge:1.19.4-2.2.0.168')
     implementation fg.deobf('software.bernie.geckolib:geckolib-forge-1.19.4:4.2')
     // You may put jars on which you depend on in ./libs or you may define them like so..
     // compile "some.group:artifact:version:classifier"

@@ -1,4 +1,4 @@
-package com.gempire.dimensions;
+package com.gempire.worldgen.dimensions;
 
 import com.gempire.Gempire;
 import net.minecraft.core.registries.Registries;

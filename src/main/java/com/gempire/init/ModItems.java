@@ -35,6 +35,13 @@ public class ModItems {
             )
     );*/
 
+    public static final RegistryObject<Item> STRAWBERRY_BLOCK = ITEMS.register("strawberry_block", () ->
+            new BlockItem(
+                    ModBlocks.STRAWBERRY_BLOCK.get(),
+                    new Item.Properties()
+            )
+    );
+
     public static final RegistryObject<Item> CONGEALED_WHITE_ESSENCE_BLOCK = ITEMS.register("congealed_white_essence_block", () ->
             new BlockItem(
                     ModBlocks.CONGEALED_WHITE_ESSENCE_BLOCK.get(),
@@ -91,7 +98,6 @@ public class ModItems {
             )
     );
 
-/*
     public static final RegistryObject<Item> PRISMATIC_SWORD = ITEMS.register("prismatic_sword",
             () -> new SwordItem(ModTiers.PRISMATIC, 4, -2.4f,
                     new Item.Properties().fireResistant()));
@@ -111,7 +117,10 @@ public class ModItems {
     public static final RegistryObject<Item> PRISMATIC_HOE = ITEMS.register("prismatic_hoe",
             () -> new HoeItem(ModTiers.PRISMATIC, -4, 0f,
                     new Item.Properties().fireResistant()));
-*/
+
+    public static final RegistryObject<Item> STRAWBERRY = ITEMS.register("strawberry", () ->
+            new ItemNameBlockItem(ModBlocks.STRAWBERRY_STEM.get(), new Item.Properties().stacksTo(64).food(ModFoods.STRAWBERRY))
+    );
 
     public static final RegistryObject<Item> SLUDGE_GLOB = ITEMS.register("sludge_glob", () ->
             new Item(new Item.Properties().stacksTo(64))
