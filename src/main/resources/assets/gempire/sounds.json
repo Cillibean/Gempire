@@ -58,5 +58,13 @@
   "abomination_living": {
     "subtitle": "gempire.subtitle.abomination_living",
     "sounds": [ "gempire:abomination_living" ]
+  },
+  "remnants": {
+    "sounds": [
+      {
+        "name": "gempire:remnants",
+        "stream": true
+      }
+    ]
   }
 }
