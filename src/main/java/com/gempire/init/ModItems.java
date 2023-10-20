@@ -531,10 +531,10 @@ public class ModItems {
             new Item(new Item.Properties().stacksTo(64)));
 
     public static final RegistryObject<Item> PRIMED_SLATE = ITEMS.register("primed_slate", () ->
-            new Item(new Item.Properties().stacksTo(1)));
+            new Item(new Item.Properties().stacksTo(64)));
 
     public static final RegistryObject<Item> SLATE = ITEMS.register("slate", () ->
-            new Item(new Item.Properties().stacksTo(1)));
+            new Item(new Item.Properties().stacksTo(64)));
 
     public static final RegistryObject<Item> SPODUMENE_PIECE = ITEMS.register("spodumene_piece", () ->
             new Item(new Item.Properties().stacksTo(64).food(ModFoods.SPODUMENE_PIECE)));

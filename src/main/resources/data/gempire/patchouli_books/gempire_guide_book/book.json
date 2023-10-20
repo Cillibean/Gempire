@@ -4,7 +4,7 @@
   "version": 1,
   "book_texture": "gempire:textures/gui/patchouli/book_gem.png",
   "nameplate_color": "FFFFFF",
-  "creative_tab": "gempire_items",
+  "creative_tab": "gempire:gempire_items",
   "show_progress": false,
   "use_blocky_font": true,
   "filler_texture": "gempire:textures/gui/patchouli/page_filler.png",
