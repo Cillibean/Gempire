@@ -1,0 +1,65 @@
+{
+  "structures": [
+    {
+      "structure": "gempire:mace",
+      "weight": 1
+    },
+    {
+      "structure": "gempire:shield",
+      "weight": 1
+    },
+    {
+      "structure": "gempire:large_axe",
+      "weight": 1
+    },
+    {
+      "structure": "gempire:hammer",
+      "weight": 1
+    },
+    {
+      "structure": "gempire:small_axe",
+      "weight": 1
+    },
+    {
+      "structure": "gempire:sword_1",
+      "weight": 1
+    },
+    {
+      "structure": "gempire:sword_2",
+      "weight": 1
+    },
+    {
+      "structure": "gempire:sword_3",
+      "weight": 1
+    },
+    {
+      "structure": "gempire:sword_4",
+      "weight": 1
+    },
+    {
+      "structure": "gempire:sword_big_1",
+      "weight": 1
+    },
+    {
+      "structure": "gempire:sword_big_2",
+      "weight": 1
+    },
+    {
+      "structure": "gempire:sword_long",
+      "weight": 1
+    },
+    {
+      "structure": "gempire:trident",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 1334781203,
+    "frequency_reduction_method": "default",
+    "frequency": 1,
+    "spread_type": "triangular",
+    "spacing": 1,
+    "separation": 0
+  }
+}
