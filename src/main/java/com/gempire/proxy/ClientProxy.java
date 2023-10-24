@@ -406,6 +406,8 @@ public class ClientProxy {
 
                                 populator.accept(ModItems.STRAWBERRY.get());
 
+                                populator.accept(ModItems.REMNANTS_MUSIC_DISC.get());
+
                                 populator.accept(ModItems.SLUDGE_GLOB.get());
 
                                 populator.accept(ModItems.CHROMA_CATALYST.get());

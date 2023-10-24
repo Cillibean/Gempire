@@ -8,22 +8,28 @@ import com.gempire.entities.ai.EntityAIAvoidSpinel;
 import com.gempire.entities.ai.EntityAIFollowSpinel;
 import com.gempire.entities.bases.EntityGem;
 import com.gempire.entities.gems.*;
+import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.entity.npc.VillagerTrades;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraftforge.common.BasicItemListing;
 import net.minecraftforge.event.CreativeModeTabEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.LootingLevelEvent;
+import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.event.village.WandererTradesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+
+import java.util.List;
 
 @Mod.EventBusSubscriber(modid = Gempire.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class EventHandler {
@@ -65,6 +71,44 @@ public class EventHandler {
                         event.setLootingLevel(2);
                 }
             }
+        }
+    }
+
+    @SubscribeEvent
+    public void addCustomTrades(VillagerTradesEvent event) {
+        if (event.getType() == VillagerProfession.MASON) {
+            Int2ObjectMap<List<VillagerTrades.ItemListing>> trades = event.getTrades();
+            int villagerLevel = 3;
+            trades.get(villagerLevel).add((trader, rand) -> new MerchantOffer(
+                    new ItemStack(Items.EMERALD, 20),
+                    new ItemStack(ModItems.PRIMED_SLATE.get(), 1),
+                    new ItemStack(ModItems.INACTIVE_AQUAMARINE_BASE.get()),
+                    10,3,0.02F));
+            trades.get(villagerLevel).add((trader, rand) -> new MerchantOffer(
+                    new ItemStack(Items.EMERALD, 20),
+                    new ItemStack(ModItems.PRIMED_SLATE.get(), 1),
+                    new ItemStack(ModItems.INACTIVE_EMERALD_BASE.get()),
+                    10,3,0.02F));
+            trades.get(villagerLevel).add((trader, rand) -> new MerchantOffer(
+                    new ItemStack(Items.EMERALD, 20),
+                    new ItemStack(ModItems.PRIMED_SLATE.get(), 1),
+                    new ItemStack(ModItems.INACTIVE_PERIDOT_BASE.get()),
+                    10,3,0.02F));
+            trades.get(villagerLevel).add((trader, rand) -> new MerchantOffer(
+                    new ItemStack(Items.EMERALD, 20),
+                    new ItemStack(ModItems.PRIMED_SLATE.get(), 1),
+                    new ItemStack(ModItems.INACTIVE_SAPPHIRE_BASE.get()),
+                    10,3,0.02F));
+            trades.get(villagerLevel).add((trader, rand) -> new MerchantOffer(
+                    new ItemStack(Items.EMERALD, 20),
+                    new ItemStack(ModItems.PRIMED_SLATE.get(), 1),
+                    new ItemStack(ModItems.INACTIVE_TOURMALINE_BASE.get()),
+                    10,3,0.02F));
+            trades.get(villagerLevel).add((trader, rand) -> new MerchantOffer(
+                    new ItemStack(Items.EMERALD, 20),
+                    new ItemStack(ModItems.PRIMED_SLATE.get(), 1),
+                    new ItemStack(ModItems.INACTIVE_ZIRCON_BASE.get()),
+                    10,3,0.02F));
         }
     }
 

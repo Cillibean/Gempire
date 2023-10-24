@@ -1,7 +1,7 @@
-package com.gempire.levelgen.feature;
+package com.gempire.worldgen.feature;
 
 
-import com.gempire.levelgen.feature.configuration.DirectionalBlockFeatureConfiguration;
+import com.gempire.worldgen.feature.configuration.DirectionalBlockFeatureConfiguration;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

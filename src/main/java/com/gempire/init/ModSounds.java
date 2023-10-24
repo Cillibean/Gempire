@@ -13,6 +13,7 @@ public class ModSounds {
     public static final RegistryObject<SoundEvent> INJECT = SOUNDS.register("inject", () -> SoundEvent.createFixedRangeEvent(new ResourceLocation(Gempire.MODID, "inject"), 16));
     public static final RegistryObject<SoundEvent> POOF = SOUNDS.register("poof", () -> SoundEvent.createFixedRangeEvent(new ResourceLocation(Gempire.MODID, "poof"), 16));
     public static final RegistryObject<SoundEvent> WHISTLE = SOUNDS.register("whistle", () -> SoundEvent.createFixedRangeEvent(new ResourceLocation(Gempire.MODID, "whistle"), 16));
+    public static final RegistryObject<SoundEvent> REMNANTS = SOUNDS.register("remnants", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(Gempire.MODID, "remnants")));
 
     public static final RegistryObject<SoundEvent> CRAWLER_HURT = SOUNDS.register("crawler_hurt", () -> SoundEvent.createFixedRangeEvent(new ResourceLocation(Gempire.MODID, "crawler_hurt"), 16));
 

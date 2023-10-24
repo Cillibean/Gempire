@@ -964,6 +964,8 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                                     }
                                 }
                             } else {
+                                int count = 0;
+                                boolean requiresCountSet = false;
                                 if (!this.isDeadOrDying()) {
                                     if (this.isOwner(player)) {
                                         if (player.getMainHandItem().getItem() instanceof DyeItem dye) {
@@ -1029,51 +1031,41 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                                                                     }
                                                                 }
                                                             } else {
+                                                                System.out.println("input item air check");
                                                                 inputList.clear();
                                                                 setCurrentRecipe(i);
 
                                                                 if (this.isOwner(player)) {
+                                                                    System.out.println("is owner");
                                                                     isCrafting = true;
                                                                     this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
                                                                     if (!player.isCreative()) {
+                                                                        System.out.println(player.getMainHandItem().getCount());
                                                                         player.getMainHandItem().shrink(1);
+                                                                        System.out.println(player.getMainHandItem().getCount());
+
                                                                     }
+                                                                    count = player.getMainHandItem().getCount();
+                                                                    requiresCountSet = true;
                                                                     ItemStack stack = new ItemStack(player.getMainHandItem().getItem());
-                                                                    stack.setCount(1);
+                                                                    //stack.setCount(1);
+                                                                    System.out.println(player.getMainHandItem().getCount());
                                                                     if (!this.getItemBySlot(EquipmentSlot.MAINHAND).isEmpty()) {
                                                                         ItemStack gemStack = this.getItemBySlot(EquipmentSlot.MAINHAND);
                                                                         spawnAtLocation(gemStack);
                                                                     }
-                                                                    this.setItemSlot(EquipmentSlot.MAINHAND, stack);
+                                                                    this.setItemSlot(EquipmentSlot.MAINHAND, stack.copyWithCount(1));
+                                                                    System.out.println(player.getMainHandItem().getCount());
                                                                     break;
                                                                 }
                                                             }
-                                                            } else {
-                                                            System.out.println("input item air check");
-                                                            inputList.clear();
-                                                            setCurrentRecipe(i);
-
-                                                            if (this.isOwner(player)) {
-                                                                isCrafting = true;
-                                                                this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
-                                                                if (!player.isCreative()) {
-                                                                    player.getMainHandItem().shrink(1);
-                                                                }
-                                                                ItemStack stack = new ItemStack(player.getMainHandItem().getItem());
-                                                                stack.setCount(1);
-                                                                if (!this.getItemBySlot(EquipmentSlot.MAINHAND).isEmpty()) {
-                                                                    ItemStack gemStack = this.getItemBySlot(EquipmentSlot.MAINHAND);
-                                                                    spawnAtLocation(gemStack);
-                                                                }
-                                                                this.setItemSlot(EquipmentSlot.MAINHAND, stack);
-                                                                break;
-                                                            }
-                                                            return super.interactAt(player, vec, hand);
+                                                            //return super.interactAt(player, vec, hand);
                                                         }
                                                     }
                                                 }
                                             }
                                         }
+                                        System.out.println(player.getMainHandItem().getCount());
                                         if (this.canHoldItem(player.getMainHandItem())) {
                                             ItemStack stack = this.getItemBySlot(EquipmentSlot.MAINHAND);
                                             this.setItemSlot(EquipmentSlot.MAINHAND, player.getMainHandItem());
@@ -1081,12 +1073,19 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                                         }
                                     }
                                 }
+                                if (requiresCountSet) {
+                                    ItemStack stack = new ItemStack(player.getMainHandItem().getItem());
+                                    stack.setCount(count);
+                                    player.setItemSlot(EquipmentSlot.MAINHAND, stack);
+                                }
                             }
                         }
                     }
                 }
+            return super.interactAt(player, vec, hand);
+        } else {
+            return super.interactAt(player, vec, hand);
         }
-        return super.interactAt(player, vec, hand);
     }
 
 

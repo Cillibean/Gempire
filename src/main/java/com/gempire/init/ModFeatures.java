@@ -2,8 +2,8 @@ package com.gempire.init;
 
 
 import com.gempire.Gempire;
-import com.gempire.levelgen.feature.DirectionalBlockFeature;
-import com.gempire.levelgen.feature.configuration.DirectionalBlockFeatureConfiguration;
+import com.gempire.worldgen.feature.DirectionalBlockFeature;
+import com.gempire.worldgen.feature.configuration.DirectionalBlockFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;

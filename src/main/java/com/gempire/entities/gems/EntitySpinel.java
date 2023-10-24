@@ -136,7 +136,7 @@ this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, EntityGem.class, 6.0F, 
     }
     public ArrayList<Ability> definiteAbilities(){
         ArrayList<Ability> arrayList = new ArrayList<>();
-        if (this.random.nextInt(1) == 1) {
+        if (this.random.nextInt(2) == 1) {
             arrayList.add(new AbilityLure());
         } else {
             arrayList.add(new AbilityJester());

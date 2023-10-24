@@ -1,5 +1,5 @@
 {
-  "type": "patchouli:shapeless_book_recipe",
+  "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
       "item": "minecraft:book"
@@ -8,5 +8,10 @@
       "tag": "gempire:chroma"
     }
   ],
-  "book": "gempire:gempire_guide_book"
+  "result": {
+    "item": "patchouli:guide_book",
+    "nbt": {
+      "patchouli:book": "gempire:gempire_guide_book"
+    }
+  }
 }
