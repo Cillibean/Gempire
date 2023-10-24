@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "gempire:block/deco_blue_stone_polished_dark"
+  }
+}

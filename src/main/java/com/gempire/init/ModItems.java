@@ -442,6 +442,1036 @@ public class ModItems {
             )
     );
 
+    public static final RegistryObject<Item> DRAINED_BLUE_POLISHED_STONE = ITEMS.register("drained_blue_polished_stone", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_BLUE_POLISHED_STONE.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_BLUE_POLISHED_STONE_DARK = ITEMS.register("drained_blue_polished_stone_dark", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_BLUE_POLISHED_STONE_DARK.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_BLUE_POLISHED_STONE_DARK_SLAB = ITEMS.register("drained_blue_polished_stone_dark_slab", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_BLUE_POLISHED_STONE_DARK_SLAB.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_BLUE_POLISHED_STONE_DARK_STAIRS = ITEMS.register("drained_blue_polished_stone_dark_stairs", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_BLUE_POLISHED_STONE_DARK_STAIRS.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_BLUE_POLISHED_STONE_LIGHT = ITEMS.register("drained_blue_polished_stone_light", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_BLUE_POLISHED_STONE_LIGHT.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_BLUE_POLISHED_STONE_LIGHT_SLAB = ITEMS.register("drained_blue_polished_stone_light_slab", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_BLUE_POLISHED_STONE_LIGHT_SLAB.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_BLUE_POLISHED_STONE_LIGHT_STAIRS = ITEMS.register("drained_blue_polished_stone_light_stairs", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_BLUE_POLISHED_STONE_LIGHT_STAIRS.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_BLUE_POLISHED_STONE_SLAB = ITEMS.register("drained_blue_polished_stone_slab", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_BLUE_POLISHED_STONE_SLAB.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_BLUE_POLISHED_STONE_STAIRS = ITEMS.register("drained_blue_polished_stone_stairs", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_BLUE_POLISHED_STONE_STAIRS.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_BLUE_STONE_BRICK_DARK_SLAB = ITEMS.register("drained_blue_stone_brick_dark_slab", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_BLUE_STONE_BRICK_DARK_SLAB.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_BLUE_STONE_BRICK_DARK_STAIRS = ITEMS.register("drained_blue_stone_brick_dark_stairs", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_BLUE_STONE_BRICK_DARK_STAIRS.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_BLUE_STONE_BRICK_DARK_WALL = ITEMS.register("drained_blue_stone_brick_dark_wall", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_BLUE_STONE_BRICK_DARK_WALL.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_BLUE_STONE_BRICK_LIGHT_SLAB = ITEMS.register("drained_blue_stone_brick_light_slab", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_BLUE_STONE_BRICK_LIGHT_SLAB.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_BLUE_STONE_BRICK_LIGHT_STAIRS = ITEMS.register("drained_blue_stone_brick_light_stairs", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_BLUE_STONE_BRICK_LIGHT_STAIRS.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_BLUE_STONE_BRICK_LIGHT_WALL = ITEMS.register("drained_blue_stone_brick_light_wall", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_BLUE_STONE_BRICK_LIGHT_WALL.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_BLUE_STONE_BRICK_SLAB = ITEMS.register("drained_blue_stone_brick_slab", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_BLUE_STONE_BRICK_SLAB.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_BLUE_STONE_BRICK_STAIRS = ITEMS.register("drained_blue_stone_brick_stairs", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_BLUE_STONE_BRICK_STAIRS.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_BLUE_STONE_BRICK_WALL = ITEMS.register("drained_blue_stone_brick_wall", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_BLUE_STONE_BRICK_WALL.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_BLUE_STONE_BRICKS = ITEMS.register("drained_blue_stone_bricks", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_BLUE_STONE_BRICKS.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_BLUE_STONE_BRICKS_LIGHT = ITEMS.register("drained_blue_stone_bricks_light", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_BLUE_STONE_BRICKS_LIGHT.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_BLUE_STONE_BRICKS_DARK = ITEMS.register("drained_blue_stone_bricks_dark", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_BLUE_STONE_BRICKS_DARK.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_BLUE_STONE_SLAB = ITEMS.register("drained_blue_stone_slab", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_BLUE_STONE_SLAB.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_BLUE_STONE_DARK_SLAB = ITEMS.register("drained_blue_stone_dark_slab", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_BLUE_STONE_DARK_SLAB.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_BLUE_STONE_LIGHT_SLAB = ITEMS.register("drained_blue_stone_light_slab", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_BLUE_STONE_LIGHT_SLAB.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_BLUE_STONE_STAIRS = ITEMS.register("drained_blue_stone_stairs", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_BLUE_STONE_STAIRS.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_BLUE_STONE_LIGHT_STAIRS = ITEMS.register("drained_blue_stone_light_stairs", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_BLUE_STONE_LIGHT_STAIRS.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> DRAINED_BLUE_STONE_DARK_STAIRS = ITEMS.register("drained_blue_stone_dark_stairs", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_BLUE_STONE_DARK_STAIRS.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_BLUE_STONE_BRICKS_CHISELED = ITEMS.register("drained_blue_stone_bricks_chiseled", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_BLUE_STONE_BRICKS_CHISELED.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_BLUE_STONE_BRICKS_CRACKED = ITEMS.register("drained_blue_stone_bricks_cracked", () ->
+            new BlockItem(
+            ModBlocks.DRAINED_BLUE_STONE_BRICKS_CRACKED.get(),
+            new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_BLUE_STONE_BRICKS_CRACKED_LIGHT = ITEMS.register("drained_blue_stone_bricks_cracked_light", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_BLUE_STONE_BRICKS_CRACKED_LIGHT.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_BLUE_STONE_BRICKS_CRACKED_DARK = ITEMS.register("drained_blue_stone_bricks_cracked_dark", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_BLUE_STONE_BRICKS_CRACKED_DARK.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_BLUE_GLAZED_TILE = ITEMS.register("drained_blue_glazed_tile", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_BLUE_GLAZED_TILE.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_BLUE_GLASS = ITEMS.register("drained_blue_glass", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_BLUE_GLASS.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_BLUE_GLASS_PANE = ITEMS.register("drained_blue_glass_pane", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_BLUE_GLASS_PANE.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> DRAINED_RED_POLISHED_STONE = ITEMS.register("drained_red_polished_stone", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_RED_POLISHED_STONE.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_RED_POLISHED_STONE_DARK = ITEMS.register("drained_red_polished_stone_dark", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_RED_POLISHED_STONE_DARK.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_RED_POLISHED_STONE_DARK_SLAB = ITEMS.register("drained_red_polished_stone_dark_slab", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_RED_POLISHED_STONE_DARK_SLAB.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_RED_POLISHED_STONE_DARK_STAIRS = ITEMS.register("drained_red_polished_stone_dark_stairs", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_RED_POLISHED_STONE_DARK_STAIRS.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_RED_POLISHED_STONE_LIGHT = ITEMS.register("drained_red_polished_stone_light", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_RED_POLISHED_STONE_LIGHT.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_RED_POLISHED_STONE_LIGHT_SLAB = ITEMS.register("drained_red_polished_stone_light_slab", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_RED_POLISHED_STONE_LIGHT_SLAB.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_RED_POLISHED_STONE_LIGHT_STAIRS = ITEMS.register("drained_red_polished_stone_light_stairs", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_RED_POLISHED_STONE_LIGHT_STAIRS.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_RED_POLISHED_STONE_SLAB = ITEMS.register("drained_red_polished_stone_slab", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_RED_POLISHED_STONE_SLAB.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_RED_POLISHED_STONE_STAIRS = ITEMS.register("drained_red_polished_stone_stairs", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_RED_POLISHED_STONE_STAIRS.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_RED_STONE_BRICK_DARK_SLAB = ITEMS.register("drained_red_stone_brick_dark_slab", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_RED_STONE_BRICK_DARK_SLAB.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_RED_STONE_BRICK_DARK_STAIRS = ITEMS.register("drained_red_stone_brick_dark_stairs", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_RED_STONE_BRICK_DARK_STAIRS.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_RED_STONE_BRICK_DARK_WALL = ITEMS.register("drained_red_stone_brick_dark_wall", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_RED_STONE_BRICK_DARK_WALL.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_RED_STONE_BRICK_LIGHT_SLAB = ITEMS.register("drained_red_stone_brick_light_slab", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_RED_STONE_BRICK_LIGHT_SLAB.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_RED_STONE_BRICK_LIGHT_STAIRS = ITEMS.register("drained_red_stone_brick_light_stairs", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_RED_STONE_BRICK_LIGHT_STAIRS.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_RED_STONE_BRICK_LIGHT_WALL = ITEMS.register("drained_red_stone_brick_light_wall", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_RED_STONE_BRICK_LIGHT_WALL.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_RED_STONE_BRICK_SLAB = ITEMS.register("drained_red_stone_brick_slab", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_RED_STONE_BRICK_SLAB.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_RED_STONE_BRICK_STAIRS = ITEMS.register("drained_red_stone_brick_stairs", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_RED_STONE_BRICK_STAIRS.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_RED_STONE_BRICK_WALL = ITEMS.register("drained_red_stone_brick_wall", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_RED_STONE_BRICK_WALL.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_RED_STONE_BRICKS = ITEMS.register("drained_red_stone_bricks", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_RED_STONE_BRICKS.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_RED_STONE_BRICKS_LIGHT = ITEMS.register("drained_red_stone_bricks_light", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_RED_STONE_BRICKS_LIGHT.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_RED_STONE_BRICKS_DARK = ITEMS.register("drained_red_stone_bricks_dark", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_RED_STONE_BRICKS_DARK.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_RED_STONE_SLAB = ITEMS.register("drained_red_stone_slab", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_RED_STONE_SLAB.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_RED_STONE_DARK_SLAB = ITEMS.register("drained_red_stone_dark_slab", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_RED_STONE_DARK_SLAB.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_RED_STONE_LIGHT_SLAB = ITEMS.register("drained_red_stone_light_slab", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_RED_STONE_LIGHT_SLAB.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_RED_STONE_STAIRS = ITEMS.register("drained_red_stone_stairs", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_RED_STONE_STAIRS.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_RED_STONE_LIGHT_STAIRS = ITEMS.register("drained_red_stone_light_stairs", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_RED_STONE_LIGHT_STAIRS.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> DRAINED_RED_STONE_DARK_STAIRS = ITEMS.register("drained_red_stone_dark_stairs", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_RED_STONE_DARK_STAIRS.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_RED_STONE_BRICKS_CHISELED = ITEMS.register("drained_red_stone_bricks_chiseled", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_RED_STONE_BRICKS_CHISELED.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_RED_STONE_BRICKS_CRACKED = ITEMS.register("drained_red_stone_bricks_cracked", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_RED_STONE_BRICKS_CRACKED.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_RED_STONE_BRICKS_CRACKED_LIGHT = ITEMS.register("drained_red_stone_bricks_cracked_light", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_RED_STONE_BRICKS_CRACKED_LIGHT.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_RED_STONE_BRICKS_CRACKED_DARK = ITEMS.register("drained_red_stone_bricks_cracked_dark", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_RED_STONE_BRICKS_CRACKED_DARK.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_RED_GLAZED_TILE = ITEMS.register("drained_red_glazed_tile", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_RED_GLAZED_TILE.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_RED_GLASS = ITEMS.register("drained_red_glass", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_RED_GLASS.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_RED_GLASS_PANE = ITEMS.register("drained_red_glass_pane", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_RED_GLASS_PANE.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> DRAINED_YELLOW_POLISHED_STONE = ITEMS.register("drained_yellow_polished_stone", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_YELLOW_POLISHED_STONE.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_YELLOW_POLISHED_STONE_DARK = ITEMS.register("drained_yellow_polished_stone_dark", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_YELLOW_POLISHED_STONE_DARK.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_YELLOW_POLISHED_STONE_DARK_SLAB = ITEMS.register("drained_yellow_polished_stone_dark_slab", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_YELLOW_POLISHED_STONE_DARK_SLAB.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_YELLOW_POLISHED_STONE_DARK_STAIRS = ITEMS.register("drained_yellow_polished_stone_dark_stairs", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_YELLOW_POLISHED_STONE_DARK_STAIRS.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_YELLOW_POLISHED_STONE_LIGHT = ITEMS.register("drained_yellow_polished_stone_light", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_YELLOW_POLISHED_STONE_LIGHT.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_YELLOW_POLISHED_STONE_LIGHT_SLAB = ITEMS.register("drained_yellow_polished_stone_light_slab", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_YELLOW_POLISHED_STONE_LIGHT_SLAB.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_YELLOW_POLISHED_STONE_LIGHT_STAIRS = ITEMS.register("drained_yellow_polished_stone_light_stairs", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_YELLOW_POLISHED_STONE_LIGHT_STAIRS.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_YELLOW_POLISHED_STONE_SLAB = ITEMS.register("drained_yellow_polished_stone_slab", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_YELLOW_POLISHED_STONE_SLAB.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_YELLOW_POLISHED_STONE_STAIRS = ITEMS.register("drained_yellow_polished_stone_stairs", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_YELLOW_POLISHED_STONE_STAIRS.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_YELLOW_STONE_BRICK_DARK_SLAB = ITEMS.register("drained_yellow_stone_brick_dark_slab", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_YELLOW_STONE_BRICK_DARK_SLAB.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_YELLOW_STONE_BRICK_DARK_STAIRS = ITEMS.register("drained_yellow_stone_brick_dark_stairs", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_YELLOW_STONE_BRICK_DARK_STAIRS.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_YELLOW_STONE_BRICK_DARK_WALL = ITEMS.register("drained_yellow_stone_brick_dark_wall", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_YELLOW_STONE_BRICK_DARK_WALL.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_YELLOW_STONE_BRICK_LIGHT_SLAB = ITEMS.register("drained_yellow_stone_brick_light_slab", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_YELLOW_STONE_BRICK_LIGHT_SLAB.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_YELLOW_STONE_BRICK_LIGHT_STAIRS = ITEMS.register("drained_yellow_stone_brick_light_stairs", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_YELLOW_STONE_BRICK_LIGHT_STAIRS.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_YELLOW_STONE_BRICK_LIGHT_WALL = ITEMS.register("drained_yellow_stone_brick_light_wall", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_YELLOW_STONE_BRICK_LIGHT_WALL.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_YELLOW_STONE_BRICK_SLAB = ITEMS.register("drained_yellow_stone_brick_slab", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_YELLOW_STONE_BRICK_SLAB.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_YELLOW_STONE_BRICK_STAIRS = ITEMS.register("drained_yellow_stone_brick_stairs", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_YELLOW_STONE_BRICK_STAIRS.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_YELLOW_STONE_BRICK_WALL = ITEMS.register("drained_yellow_stone_brick_wall", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_YELLOW_STONE_BRICK_WALL.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_YELLOW_STONE_BRICKS = ITEMS.register("drained_yellow_stone_bricks", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_YELLOW_STONE_BRICKS.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_YELLOW_STONE_BRICKS_LIGHT = ITEMS.register("drained_yellow_stone_bricks_light", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_YELLOW_STONE_BRICKS_LIGHT.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_YELLOW_STONE_BRICKS_DARK = ITEMS.register("drained_yellow_stone_bricks_dark", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_YELLOW_STONE_BRICKS_DARK.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_YELLOW_STONE_SLAB = ITEMS.register("drained_yellow_stone_slab", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_YELLOW_STONE_SLAB.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_YELLOW_STONE_DARK_SLAB = ITEMS.register("drained_yellow_stone_dark_slab", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_YELLOW_STONE_DARK_SLAB.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_YELLOW_STONE_LIGHT_SLAB = ITEMS.register("drained_yellow_stone_light_slab", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_YELLOW_STONE_LIGHT_SLAB.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_YELLOW_STONE_STAIRS = ITEMS.register("drained_yellow_stone_stairs", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_YELLOW_STONE_STAIRS.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_YELLOW_STONE_LIGHT_STAIRS = ITEMS.register("drained_yellow_stone_light_stairs", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_YELLOW_STONE_LIGHT_STAIRS.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> DRAINED_YELLOW_STONE_DARK_STAIRS = ITEMS.register("drained_yellow_stone_dark_stairs", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_YELLOW_STONE_DARK_STAIRS.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_YELLOW_STONE_BRICKS_CHISELED = ITEMS.register("drained_yellow_stone_bricks_chiseled", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_YELLOW_STONE_BRICKS_CHISELED.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_YELLOW_STONE_BRICKS_CRACKED = ITEMS.register("drained_yellow_stone_bricks_cracked", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_YELLOW_STONE_BRICKS_CRACKED.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_YELLOW_STONE_BRICKS_CRACKED_LIGHT = ITEMS.register("drained_yellow_stone_bricks_cracked_light", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_YELLOW_STONE_BRICKS_CRACKED_LIGHT.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_YELLOW_STONE_BRICKS_CRACKED_DARK = ITEMS.register("drained_yellow_stone_bricks_cracked_dark", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_YELLOW_STONE_BRICKS_CRACKED_DARK.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_YELLOW_GLAZED_TILE = ITEMS.register("drained_yellow_glazed_tile", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_YELLOW_GLAZED_TILE.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_YELLOW_GLASS = ITEMS.register("drained_yellow_glass", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_YELLOW_GLASS.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_YELLOW_GLASS_PANE = ITEMS.register("drained_yellow_glass_pane", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_YELLOW_GLASS_PANE.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> DRAINED_PURPLE_POLISHED_STONE = ITEMS.register("drained_purple_polished_stone", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_PURPLE_POLISHED_STONE.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_PURPLE_POLISHED_STONE_DARK = ITEMS.register("drained_purple_polished_stone_dark", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_PURPLE_POLISHED_STONE_DARK.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_PURPLE_POLISHED_STONE_DARK_SLAB = ITEMS.register("drained_purple_polished_stone_dark_slab", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_PURPLE_POLISHED_STONE_DARK_SLAB.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_PURPLE_POLISHED_STONE_DARK_STAIRS = ITEMS.register("drained_purple_polished_stone_dark_stairs", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_PURPLE_POLISHED_STONE_DARK_STAIRS.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_PURPLE_POLISHED_STONE_LIGHT = ITEMS.register("drained_purple_polished_stone_light", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_PURPLE_POLISHED_STONE_LIGHT.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_PURPLE_POLISHED_STONE_LIGHT_SLAB = ITEMS.register("drained_purple_polished_stone_light_slab", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_PURPLE_POLISHED_STONE_LIGHT_SLAB.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_PURPLE_POLISHED_STONE_LIGHT_STAIRS = ITEMS.register("drained_purple_polished_stone_light_stairs", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_PURPLE_POLISHED_STONE_LIGHT_STAIRS.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_PURPLE_POLISHED_STONE_SLAB = ITEMS.register("drained_purple_polished_stone_slab", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_PURPLE_POLISHED_STONE_SLAB.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_PURPLE_POLISHED_STONE_STAIRS = ITEMS.register("drained_purple_polished_stone_stairs", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_PURPLE_POLISHED_STONE_STAIRS.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_PURPLE_STONE_BRICK_DARK_SLAB = ITEMS.register("drained_purple_stone_brick_dark_slab", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_PURPLE_STONE_BRICK_DARK_SLAB.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_PURPLE_STONE_BRICK_DARK_STAIRS = ITEMS.register("drained_purple_stone_brick_dark_stairs", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_PURPLE_STONE_BRICK_DARK_STAIRS.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_PURPLE_STONE_BRICK_DARK_WALL = ITEMS.register("drained_purple_stone_brick_dark_wall", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_PURPLE_STONE_BRICK_DARK_WALL.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_PURPLE_STONE_BRICK_LIGHT_SLAB = ITEMS.register("drained_purple_stone_brick_light_slab", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_PURPLE_STONE_BRICK_LIGHT_SLAB.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_PURPLE_STONE_BRICK_LIGHT_STAIRS = ITEMS.register("drained_purple_stone_brick_light_stairs", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_PURPLE_STONE_BRICK_LIGHT_STAIRS.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_PURPLE_STONE_BRICK_LIGHT_WALL = ITEMS.register("drained_purple_stone_brick_light_wall", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_PURPLE_STONE_BRICK_LIGHT_WALL.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_PURPLE_STONE_BRICK_SLAB = ITEMS.register("drained_purple_stone_brick_slab", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_PURPLE_STONE_BRICK_SLAB.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_PURPLE_STONE_BRICK_STAIRS = ITEMS.register("drained_purple_stone_brick_stairs", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_PURPLE_STONE_BRICK_STAIRS.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_PURPLE_STONE_BRICK_WALL = ITEMS.register("drained_purple_stone_brick_wall", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_PURPLE_STONE_BRICK_WALL.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_PURPLE_STONE_BRICKS = ITEMS.register("drained_purple_stone_bricks", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_PURPLE_STONE_BRICKS.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_PURPLE_STONE_BRICKS_LIGHT = ITEMS.register("drained_purple_stone_bricks_light", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_PURPLE_STONE_BRICKS_LIGHT.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_PURPLE_STONE_BRICKS_DARK = ITEMS.register("drained_purple_stone_bricks_dark", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_PURPLE_STONE_BRICKS_DARK.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_PURPLE_STONE_SLAB = ITEMS.register("drained_purple_stone_slab", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_PURPLE_STONE_SLAB.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_PURPLE_STONE_DARK_SLAB = ITEMS.register("drained_purple_stone_dark_slab", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_PURPLE_STONE_DARK_SLAB.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_PURPLE_STONE_LIGHT_SLAB = ITEMS.register("drained_purple_stone_light_slab", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_PURPLE_STONE_LIGHT_SLAB.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_PURPLE_STONE_STAIRS = ITEMS.register("drained_purple_stone_stairs", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_PURPLE_STONE_STAIRS.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_PURPLE_STONE_LIGHT_STAIRS = ITEMS.register("drained_purple_stone_light_stairs", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_PURPLE_STONE_LIGHT_STAIRS.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> DRAINED_PURPLE_STONE_DARK_STAIRS = ITEMS.register("drained_purple_stone_dark_stairs", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_PURPLE_STONE_DARK_STAIRS.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_PURPLE_STONE_BRICKS_CHISELED = ITEMS.register("drained_purple_stone_bricks_chiseled", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_PURPLE_STONE_BRICKS_CHISELED.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_PURPLE_STONE_BRICKS_CRACKED = ITEMS.register("drained_purple_stone_bricks_cracked", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_PURPLE_STONE_BRICKS_CRACKED.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_PURPLE_STONE_BRICKS_CRACKED_LIGHT = ITEMS.register("drained_purple_stone_bricks_cracked_light", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_PURPLE_STONE_BRICKS_CRACKED_LIGHT.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_PURPLE_STONE_BRICKS_CRACKED_DARK = ITEMS.register("drained_purple_stone_bricks_cracked_dark", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_PURPLE_STONE_BRICKS_CRACKED_DARK.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_PURPLE_GLAZED_TILE = ITEMS.register("drained_purple_glazed_tile", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_PURPLE_GLAZED_TILE.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_PURPLE_GLASS = ITEMS.register("drained_purple_glass", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_PURPLE_GLASS.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_PURPLE_GLASS_PANE = ITEMS.register("drained_purple_glass_pane", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_PURPLE_GLASS_PANE.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> DRAINED_GREY_POLISHED_STONE = ITEMS.register("drained_grey_polished_stone", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_GREY_POLISHED_STONE.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_GREY_POLISHED_STONE_DARK = ITEMS.register("drained_grey_polished_stone_dark", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_GREY_POLISHED_STONE_DARK.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_GREY_POLISHED_STONE_DARK_SLAB = ITEMS.register("drained_grey_polished_stone_dark_slab", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_GREY_POLISHED_STONE_DARK_SLAB.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_GREY_POLISHED_STONE_DARK_STAIRS = ITEMS.register("drained_grey_polished_stone_dark_stairs", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_GREY_POLISHED_STONE_DARK_STAIRS.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_GREY_POLISHED_STONE_LIGHT = ITEMS.register("drained_grey_polished_stone_light", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_GREY_POLISHED_STONE_LIGHT.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_GREY_POLISHED_STONE_LIGHT_SLAB = ITEMS.register("drained_grey_polished_stone_light_slab", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_GREY_POLISHED_STONE_LIGHT_SLAB.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_GREY_POLISHED_STONE_LIGHT_STAIRS = ITEMS.register("drained_grey_polished_stone_light_stairs", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_GREY_POLISHED_STONE_LIGHT_STAIRS.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_GREY_POLISHED_STONE_SLAB = ITEMS.register("drained_grey_polished_stone_slab", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_GREY_POLISHED_STONE_SLAB.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_GREY_POLISHED_STONE_STAIRS = ITEMS.register("drained_grey_polished_stone_stairs", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_GREY_POLISHED_STONE_STAIRS.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_GREY_STONE_BRICK_DARK_SLAB = ITEMS.register("drained_grey_stone_brick_dark_slab", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_GREY_STONE_BRICK_DARK_SLAB.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_GREY_STONE_BRICK_DARK_STAIRS = ITEMS.register("drained_grey_stone_brick_dark_stairs", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_GREY_STONE_BRICK_DARK_STAIRS.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_GREY_STONE_BRICK_DARK_WALL = ITEMS.register("drained_grey_stone_brick_dark_wall", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_GREY_STONE_BRICK_DARK_WALL.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_GREY_STONE_BRICK_LIGHT_SLAB = ITEMS.register("drained_grey_stone_brick_light_slab", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_GREY_STONE_BRICK_LIGHT_SLAB.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_GREY_STONE_BRICK_LIGHT_STAIRS = ITEMS.register("drained_grey_stone_brick_light_stairs", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_GREY_STONE_BRICK_LIGHT_STAIRS.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_GREY_STONE_BRICK_LIGHT_WALL = ITEMS.register("drained_grey_stone_brick_light_wall", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_GREY_STONE_BRICK_LIGHT_WALL.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_GREY_STONE_BRICK_SLAB = ITEMS.register("drained_grey_stone_brick_slab", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_GREY_STONE_BRICK_SLAB.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_GREY_STONE_BRICK_STAIRS = ITEMS.register("drained_grey_stone_brick_stairs", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_GREY_STONE_BRICK_STAIRS.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_GREY_STONE_BRICK_WALL = ITEMS.register("drained_grey_stone_brick_wall", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_GREY_STONE_BRICK_WALL.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_GREY_STONE_BRICKS = ITEMS.register("drained_grey_stone_bricks", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_GREY_STONE_BRICKS.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_GREY_STONE_BRICKS_LIGHT = ITEMS.register("drained_grey_stone_bricks_light", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_GREY_STONE_BRICKS_LIGHT.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_GREY_STONE_BRICKS_DARK = ITEMS.register("drained_grey_stone_bricks_dark", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_GREY_STONE_BRICKS_DARK.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_GREY_STONE_SLAB = ITEMS.register("drained_grey_stone_slab", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_GREY_STONE_SLAB.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_GREY_STONE_DARK_SLAB = ITEMS.register("drained_grey_stone_dark_slab", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_GREY_STONE_DARK_SLAB.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_GREY_STONE_LIGHT_SLAB = ITEMS.register("drained_grey_stone_light_slab", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_GREY_STONE_LIGHT_SLAB.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_GREY_STONE_STAIRS = ITEMS.register("drained_grey_stone_stairs", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_GREY_STONE_STAIRS.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_GREY_STONE_LIGHT_STAIRS = ITEMS.register("drained_grey_stone_light_stairs", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_GREY_STONE_LIGHT_STAIRS.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> DRAINED_GREY_STONE_DARK_STAIRS = ITEMS.register("drained_grey_stone_dark_stairs", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_GREY_STONE_DARK_STAIRS.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_GREY_STONE_BRICKS_CHISELED = ITEMS.register("drained_grey_stone_bricks_chiseled", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_GREY_STONE_BRICKS_CHISELED.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_GREY_STONE_BRICKS_CRACKED = ITEMS.register("drained_grey_stone_bricks_cracked", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_GREY_STONE_BRICKS_CRACKED.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_GREY_STONE_BRICKS_CRACKED_LIGHT = ITEMS.register("drained_grey_stone_bricks_cracked_light", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_GREY_STONE_BRICKS_CRACKED_LIGHT.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_GREY_STONE_BRICKS_CRACKED_DARK = ITEMS.register("drained_grey_stone_bricks_cracked_dark", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_GREY_STONE_BRICKS_CRACKED_DARK.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_GREY_GLAZED_TILE = ITEMS.register("drained_grey_glazed_tile", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_GREY_GLAZED_TILE.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_GREY_GLASS = ITEMS.register("drained_grey_glass", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_GREY_GLASS.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> DRAINED_GREY_GLASS_PANE = ITEMS.register("drained_grey_glass_pane", () ->
+            new BlockItem(
+                    ModBlocks.DRAINED_GREY_GLASS_PANE.get(),
+                    new Item.Properties()
+            )
+    );
+
     /*public static final RegistryObject<Item> GEM_SEED_BLOCK_ITEM = ITEMS.register("gem_seed_block", () ->
             new BlockItem(
                     ModBlocks.GEM_SEED_BLOCK.get(),
