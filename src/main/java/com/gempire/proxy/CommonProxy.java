@@ -56,6 +56,8 @@ public class CommonProxy {
             DispenserBlock.registerBehavior(ModItems.BLUE_ESSENCE_BUCKET.get(), dispenseBucket);
             DispenserBlock.registerBehavior(ModItems.WHITE_ESSENCE_BUCKET.get(), dispenseBucket);
         });
+
+
     }
 
 

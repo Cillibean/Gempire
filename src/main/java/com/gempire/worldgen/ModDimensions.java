@@ -62,7 +62,7 @@ public class ModDimensions {
                 new FixedBiomeSource(biomeRegistry.getOrThrow(Biomes.DEEP_LUKEWARM_OCEAN)),
                 noiseGenSettings.getOrThrow(NoiseGeneratorSettings.AMPLIFIED));
 
-        NoiseBasedChunkGenerator noiseBasedChunkGenerator = new NoiseBasedChunkGenerator(
+        /*NoiseBasedChunkGenerator noiseBasedChunkGenerator = new NoiseBasedChunkGenerator(
                 MultiNoiseBiomeSource.createFromList(
                         new Climate.ParameterList<>(List.of(
                                 Pair.of(Climate.parameters(
@@ -99,8 +99,8 @@ public class ModDimensions {
                                         0.0F), biomeRegistry.getOrThrow(ModBiomes.UNEARTHLY_JUNGLE))
                         ))),
                 noiseGenSettings.getOrThrow(NoiseGeneratorSettings.OVERWORLD));
-
-        LevelStem stem = new LevelStem(dimTypes.getOrThrow(ModDimensions.DESOLATE_LANDS_TYPE), noiseBasedChunkGenerator);
+*/
+        LevelStem stem = new LevelStem(dimTypes.getOrThrow(ModDimensions.DESOLATE_LANDS_TYPE), wrappedChunkGenerator);
 
         context.register(DESOLATE_LANDS_KEY, stem);
     }

@@ -1,6 +1,8 @@
 package com.gempire.init;
 
 import com.gempire.Gempire;
+import com.gempire.aura.PlayerAura;
+import com.gempire.aura.PlayerAuraProvider;
 import com.gempire.entities.abilities.AbilityAbundance;
 import com.gempire.entities.abilities.AbilityLootmaster;
 import com.gempire.entities.abilities.base.Ability;
@@ -8,22 +10,28 @@ import com.gempire.entities.ai.EntityAIAvoidSpinel;
 import com.gempire.entities.ai.EntityAIFollowSpinel;
 import com.gempire.entities.bases.EntityGem;
 import com.gempire.entities.gems.*;
+import com.gempire.networking.AuraDataSyncS2C;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.entity.npc.VillagerTrades;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraftforge.common.BasicItemListing;
+import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
+import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.CreativeModeTabEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.LootingLevelEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.event.village.WandererTradesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -31,7 +39,7 @@ import net.minecraftforge.fml.common.Mod;
 
 import java.util.List;
 
-@Mod.EventBusSubscriber(modid = Gempire.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = Gempire.MODID)
 public class EventHandler {
 
     @SubscribeEvent
@@ -109,6 +117,44 @@ public class EventHandler {
                     new ItemStack(ModItems.PRIMED_SLATE.get(), 1),
                     new ItemStack(ModItems.INACTIVE_ZIRCON_BASE.get()),
                     10,3,0.02F));
+        }
+    }
+
+
+    @SubscribeEvent
+    public static void onAttachCapabilitiesPlayer(AttachCapabilitiesEvent<Entity> event) {
+        if(event.getObject() instanceof Player) {
+            if(!event.getObject().getCapability(PlayerAuraProvider.PLAYER_AURA).isPresent()) {
+                event.addCapability(new ResourceLocation(Gempire.MODID, "properties"), new PlayerAuraProvider());
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void onPlayerCloned(PlayerEvent.Clone event) {
+        if(event.isWasDeath()) {
+            event.getOriginal().getCapability(PlayerAuraProvider.PLAYER_AURA).ifPresent(oldStore -> {
+                event.getOriginal().getCapability(PlayerAuraProvider.PLAYER_AURA).ifPresent(newStore -> {
+                    newStore.copyFrom(oldStore);
+                });
+            });
+        }
+    }
+
+    @SubscribeEvent
+    public static void onRegisterCapabilities(RegisterCapabilitiesEvent event) {
+        event.register(PlayerAura.class);
+    }
+
+
+    @SubscribeEvent
+    public static void onPlayerJoinWorld(EntityJoinLevelEvent event) {
+        if(!event.getLevel().isClientSide()) {
+            if(event.getEntity() instanceof ServerPlayer player) {
+                player.getCapability(PlayerAuraProvider.PLAYER_AURA).ifPresent(aura -> {
+                    ModMessages.sendToPlayer(new AuraDataSyncS2C(aura.getAura()), player);
+                });
+            }
         }
     }
 

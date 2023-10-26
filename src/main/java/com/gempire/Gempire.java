@@ -128,6 +128,7 @@ public class Gempire
     private void setup(final FMLCommonSetupEvent event)
     {
         ModPacketHandler.registerPackets();
+        ModMessages.register();
         ModEntities.setVanillaGems();
         ModEntities.registerCruxes();
         //IncubatorTE.setup();
