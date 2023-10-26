@@ -2,7 +2,7 @@
   "type": "gempire:desolate_lands",
   "generator": {
     "type": "minecraft:noise",
-    "settings": "minecraft:overworld",
+    "settings": "gempire:desolate_lands",
     "biome_source": {
       "type": "minecraft:multi_noise",
       "biomes": [
