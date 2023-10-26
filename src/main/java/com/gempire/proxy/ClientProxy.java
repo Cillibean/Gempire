@@ -1,36 +1,22 @@
 package com.gempire.proxy;
 
 import com.gempire.Gempire;
+import com.gempire.aura.AuraOverlay;
 import com.gempire.client.entity.model.*;
 import com.gempire.client.entity.render.*;
 import com.gempire.client.screen.*;
 import com.gempire.client.screen.warppad.WarpConfigScreen;
 import com.gempire.client.screen.warppad.WarpSelectionScreen;
 import com.gempire.client.ter.ShellTER;
-import com.gempire.entities.bases.EntityGem;
 import com.gempire.fluids.ModFluidTypes;
 import com.gempire.init.*;
 import com.gempire.keybindings.KeyBindings;
 import com.gempire.networking.WarpGuiKeyPressed;
-import com.gempire.systems.warping.WarpPadData;
-import com.gempire.systems.warping.WarpPadInfo;
-import com.gempire.systems.warping.WarpPadInfoHolder;
-import com.gempire.systems.warping.WarpSelectionMenu;
-import com.gempire.tileentities.WarpPadTE;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
-import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.client.renderer.ItemBlockRenderTypes;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.*;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.MenuProvider;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -38,6 +24,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.InputEvent;
+import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.event.CreativeModeTabEvent;
@@ -45,10 +32,6 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fluids.FluidInteractionRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.network.NetworkHooks;
-
-import java.util.List;
-import java.util.UUID;
 
 import static net.minecraftforge.fluids.FluidInteractionRegistry.addInteraction;
 
@@ -618,6 +601,11 @@ public class ClientProxy {
     @SubscribeEvent
     public static void onKeyRegister(RegisterKeyMappingsEvent event) {
         event.register(KeyBindings.WARP_KEY);
+    }
+
+    @SubscribeEvent
+    public static void onGuiOverlays(RegisterGuiOverlaysEvent event) {
+        event.registerBelowAll("aura", AuraOverlay.HUD_AURA);
     }
 }
     @Mod.EventBusSubscriber(modid = Gempire.MODID, value = Dist.CLIENT)
