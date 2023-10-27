@@ -48,6 +48,10 @@ public class ClientProxy {
         event.registerEntityRenderer(ModEntities.CRAWLER.get(), RenderCrawler::new);
         event.registerEntityRenderer(ModEntities.ABOMINATION.get(), RenderAbomination::new);
         event.registerEntityRenderer(ModEntities.SHAMBLER.get(), RenderShambler::new);
+        event.registerEntityRenderer(ModEntities.WHITE_MONSTER.get(),RenderWhiteMonster::new);
+        event.registerEntityRenderer(ModEntities.YELLOW_MONSTER.get(),RenderYellowMonster::new);
+        event.registerEntityRenderer(ModEntities.BLUE_MONSTER.get(),RenderBlueMonster::new);
+        event.registerEntityRenderer(ModEntities.PINK_MONSTER.get(),RenderPinkMonster::new);
         event.registerEntityRenderer(ModEntities.PEBBLE.get(), m -> new RenderPebble(m, new ModelPebble<>(m.bakeLayer(ModelPebble.LAYER_LOCATION_P))));
         event.registerEntityRenderer(ModEntities.MICA.get(), m -> new RenderMica(m, new ModelPebble<>(m.bakeLayer(ModelPebble.LAYER_LOCATION_M))));
         event.registerEntityRenderer(ModEntities.SHALE.get(), m -> new RenderShale(m, new ModelPebble<>(m.bakeLayer(ModelPebble.LAYER_LOCATION_S))));
@@ -79,6 +83,7 @@ public class ClientProxy {
         event.registerEntityRenderer(ModEntities.ICE_SHARD.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer(ModEntities.ACID_SPIT.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer(ModEntities.WATER_ORB.get(), ThrownItemRenderer::new);
+        event.registerEntityRenderer(ModEntities.ELECTROKINESIS_LIGHTNING.get(), ElectrokinesisLightningRenderer::new);
 
         MenuScreens.register(ModContainers.INJECTOR_CONTAINER.get(), InjectorScreen::new);
         MenuScreens.register(ModContainers.GEM_UI_CONTAINER.get(), GemUIScreen::new);

@@ -5,9 +5,7 @@ import com.gempire.entities.gems.starter.EntityMica;
 import com.gempire.entities.gems.starter.EntityNacre;
 import com.gempire.entities.gems.starter.EntityPebble;
 import com.gempire.entities.gems.starter.EntityShale;
-import com.gempire.entities.other.EntityAbomination;
-import com.gempire.entities.other.EntityCrawler;
-import com.gempire.entities.other.EntityShambler;
+import com.gempire.entities.other.*;
 import com.gempire.init.*;
 import com.gempire.proxy.CommonProxy;
 import com.gempire.tileentities.IncubatorTE;
@@ -123,6 +121,12 @@ public class Gempire
         event.put(ModEntities.SPINEL.get(), EntitySpinel.registerAttributes().build());
 
         event.put(ModEntities.TOURMALINE.get(), EntityTourmaline.registerAttributes().build());
+
+        event.put(ModEntities.WHITE_MONSTER.get(), EntityWhiteMonster.registerAttributes().build());
+        event.put(ModEntities.YELLOW_MONSTER.get(), EntityYellowMonster.registerAttributes().build());
+        event.put(ModEntities.BLUE_MONSTER.get(), EntityBlueMonster.registerAttributes().build());
+        event.put(ModEntities.PINK_MONSTER.get(), EntityPinkMonster.registerAttributes().build());
+
     }
 
     private void setup(final FMLCommonSetupEvent event)

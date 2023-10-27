@@ -1,6 +1,7 @@
 package com.gempire.aura;
 
 import com.gempire.Gempire;
+import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.client.renderer.GameRenderer;
@@ -21,20 +22,25 @@ public class AuraOverlay {
         int y = height;
 
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
-        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 0.5F);
+        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+        RenderSystem.enableBlend();
 
         if (ClientAuraData.getPlayerAura() == 1) {
+            RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
             RenderSystem.setShaderTexture(0, PINK_OVERLAY);
-            GuiComponent.blit(poseStack, 0, 0, 0, 0, 2000, 2000, 2000, 2000, new Color(229, 142, 181, 157).hashCode());
+            GuiComponent.blit(poseStack, 0, 0, 0, 0, 2000, 2000, 2000, 2000);
         } else if (ClientAuraData.getPlayerAura() == 2) {
+            RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
             RenderSystem.setShaderTexture(0, YELLOW_OVERLAY);
             GuiComponent.blit(poseStack, 0, 0, 0, 0, 2000, 2000, 2000, 2000);
         } else if (ClientAuraData.getPlayerAura() == 3) {
+            RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
             RenderSystem.setShaderTexture(0, BLUE_OVERLAY);
             GuiComponent.blit(poseStack, 0, 0, 0, 0, 2000, 2000, 2000, 2000);
         } else if (ClientAuraData.getPlayerAura() == 4) {
-            RenderSystem.setShaderTexture(0, WHITE_OVERLAY);
-            GuiComponent.blit(poseStack, 0, 0, 0, 0, 2000, 2000, 2000, 2000);
+            //RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+            //RenderSystem.setShaderTexture(0, WHITE_OVERLAY);
+            //GuiComponent.blit(poseStack, 0, 0, 0, 0, 2000, 2000, 2000, 2000);
         }
     }));
 }

@@ -2,36 +2,54 @@ package com.gempire.init;
 
 import com.gempire.Gempire;
 import com.gempire.container.InjectorContainer;
+import com.gempire.entities.other.*;
 import com.gempire.entities.gems.*;
 import com.gempire.entities.gems.starter.EntityMica;
 import com.gempire.entities.gems.starter.EntityNacre;
 import com.gempire.entities.gems.starter.EntityPebble;
 import com.gempire.entities.gems.starter.EntityShale;
-import com.gempire.entities.other.EntityAbomination;
-import com.gempire.entities.other.EntityCrawler;
-import com.gempire.entities.other.EntityShambler;
 import com.gempire.entities.projectiles.AcidSpitEntity;
+import com.gempire.entities.projectiles.ElectrokinesisLightning;
 import com.gempire.entities.projectiles.IceShardEntity;
 import com.gempire.entities.projectiles.WaterOrbEntity;
 import com.gempire.systems.injection.GemConditions;
 import com.gempire.systems.injection.GemFormation;
+import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.HashMap;
-import java.util.UUID;
 
 public class ModEntities {
     public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, Gempire.MODID);
     public static HashMap<String, GemConditions> CRUXTOGEM = new HashMap<>();
 
     // Entity Types
+
+    public static final RegistryObject<EntityType<EntityWhiteMonster>> WHITE_MONSTER = ENTITIES.register("white_monster",
+            () -> EntityType.Builder.of(EntityWhiteMonster::new, MobCategory.MONSTER)
+                    .sized(1f, 3.5f) // Hitbox Size
+                    .build(new ResourceLocation(Gempire.MODID, "white_monster").toString()));
+
+    public static final RegistryObject<EntityType<EntityYellowMonster>> YELLOW_MONSTER = ENTITIES.register("yellow_monster",
+            () -> EntityType.Builder.of(EntityYellowMonster::new, MobCategory.MONSTER)
+                    .sized(1f, 3.5f) // Hitbox Size
+                    .build(new ResourceLocation(Gempire.MODID, "yellow_monster").toString()));
+
+    public static final RegistryObject<EntityType<EntityBlueMonster>> BLUE_MONSTER = ENTITIES.register("blue_monster",
+            () -> EntityType.Builder.of(EntityBlueMonster::new, MobCategory.MONSTER)
+                    .sized(1f, 3.5f) // Hitbox Size
+                    .build(new ResourceLocation(Gempire.MODID, "blue_monster").toString()));
+
+    public static final RegistryObject<EntityType<EntityPinkMonster>> PINK_MONSTER = ENTITIES.register("pink_monster",
+            () -> EntityType.Builder.of(EntityPinkMonster::new, MobCategory.MONSTER)
+                    .sized(1f, 3.5f) // Hitbox Size
+                    .build(new ResourceLocation(Gempire.MODID, "pink_monster").toString()));
 
     public static final RegistryObject<EntityType<EntityCrawler>> CRAWLER = ENTITIES.register("crawler",
             () -> EntityType.Builder.of(EntityCrawler::new, MobCategory.CREATURE)
@@ -208,6 +226,12 @@ public class ModEntities {
                 .build(new ResourceLocation(Gempire.MODID, "water_orb").toString());
     });
 
+    public static final RegistryObject<EntityType<ElectrokinesisLightning>> ELECTROKINESIS_LIGHTNING = ENTITIES.register("electrokinesis_lightning", () -> {
+        return EntityType.Builder.<ElectrokinesisLightning>of(ElectrokinesisLightning::new, MobCategory.MISC)
+                .noSave().sized(0.0F, 0.0F).clientTrackingRange(16)
+                .updateInterval(Integer.MAX_VALUE)
+                .build(new ResourceLocation(Gempire.MODID, "electrokinesis_lightning").toString());
+    });
     public static void registerCruxes() {
         InjectorContainer.primer.add(Items.GOLDEN_APPLE);
         InjectorContainer.primer.add(Items.GOLD_BLOCK);

@@ -427,6 +427,11 @@
   "entity.gempire.shambler": "Shambler",
   "entity.gempire.abomination": "Abomination",
 
+  "entity.gempire.white_monster": "White Monster",
+  "entity.gempire.yellow_monster": "Yellow Monster",
+  "entity.gempire.blue_monster": "Blue Monster",
+  "entity.gempire.pink_monster": "Pink Monster",
+
   "effect.gempire.paralysis": "Paralysis",
 
   "nickname.gempire.sapphire_0": "White Sapphire",

@@ -73,7 +73,7 @@ public class EntityEmerald extends EntityGem implements RangedAttackMob {
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, EntityShambler.class, 1, false, false, this::checkNotSludged));
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, EntityCrawler.class, 1, false, false, this::checkNotSludged));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Mob.class, 1, false, false, (p_234199_0_) -> p_234199_0_.getClassification(true) == MobCategory.MONSTER));
-        this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.1D, false));
+        this.goalSelector.addGoal(3, new MeleeAttackGoal(this, 1.1D, false));
         this.targetSelector.addGoal(1, new OwnerHurtByTargetGemGoal(this));
         this.targetSelector.addGoal(2, new OwnerHurtTargetGemGoal(this));
         this.goalSelector.addGoal(1, new EntityAISludged(this, 0.6));
@@ -134,6 +134,7 @@ public class EntityEmerald extends EntityGem implements RangedAttackMob {
     }
     public ArrayList<Ability> definiteAbilities(){
         ArrayList<Ability> arrayList = new ArrayList<>();
+        arrayList.add(new AbilityElectrokinesis());
         arrayList.add(new AbilityRecall());
         arrayList.add(new AbilityNegotiator());
         return arrayList;
