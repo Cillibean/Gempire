@@ -22,7 +22,7 @@ public class AuraOverlay {
         int y = height;
 
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
-        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 0.5F);
         RenderSystem.enableBlend();
 
         if (ClientAuraData.getPlayerAura() == 1) {
