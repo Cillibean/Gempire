@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "gempire:block/drained_blue_stone_dark_slab"
+    },
+    "type=double": {
+      "model": "gempire:block/drained_blue_stone_dark"
+    },
+    "type=top": {
+      "model": "gempire:block/drained_blue_stone_dark_slab_top"
+    }
+  }
+}

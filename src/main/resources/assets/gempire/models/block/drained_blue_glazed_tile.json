@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/template_glazed_terracotta",
+  "textures": {
+    "pattern": "gempire:block/deco_blue_glazed_tile"
+  }
+}

@@ -1,8 +1,8 @@
 {
   "parent": "minecraft:block/stairs",
   "textures": {
-    "bottom": "gempire:block/smooth_ruined_marble_block",
-    "top": "gempire:block/smooth_ruined_marble_block",
-    "side": "gempire:block/smooth_ruined_marble_block"
+    "bottom": "gempire:block/ruined_marble_smooth",
+    "top": "gempire:block/ruined_marble_smooth",
+    "side": "gempire:block/ruined_marble_smooth"
   }
 }
