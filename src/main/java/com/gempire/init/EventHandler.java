@@ -1,6 +1,7 @@
 package com.gempire.init;
 
 import com.gempire.Gempire;
+import com.gempire.aura.ClientAuraData;
 import com.gempire.aura.PlayerAura;
 import com.gempire.aura.PlayerAuraProvider;
 import com.gempire.entities.abilities.AbilityAbundance;
@@ -29,6 +30,7 @@ import net.minecraftforge.common.BasicItemListing;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.CreativeModeTabEvent;
+import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.LootingLevelEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -41,6 +43,8 @@ import java.util.List;
 
 @Mod.EventBusSubscriber(modid = Gempire.MODID)
 public class EventHandler {
+
+    static boolean hasAura = false;
 
     @SubscribeEvent
     public void OnEntitySpawn(EntityJoinLevelEvent event){
@@ -152,9 +156,24 @@ public class EventHandler {
         if(!event.getLevel().isClientSide()) {
             if(event.getEntity() instanceof ServerPlayer player) {
                 player.getCapability(PlayerAuraProvider.PLAYER_AURA).ifPresent(aura -> {
-                    ModMessages.sendToPlayer(new AuraDataSyncS2C(aura.getAura()), player);
+                    ModMessages.sendToPlayer(new AuraDataSyncS2C(0), player);
+                    //ClientAuraData.set(0);
                 });
             }
+        }
+    }
+
+    @SubscribeEvent
+    public static void cancelAura(TickEvent.PlayerTickEvent event) {
+        if (!hasAura && (event.player.hasEffect(ModEffects.PINK_AURA.get())) || event.player.hasEffect(ModEffects.WHITE_AURA.get()) || event.player.hasEffect(ModEffects.BLUE_AURA.get()) || event.player.hasEffect(ModEffects.YELLOW_AURA.get())) {
+            hasAura = true;
+        }
+
+        if (hasAura && !(event.player.hasEffect(ModEffects.PINK_AURA.get()))
+                && !(event.player.hasEffect(ModEffects.BLUE_AURA.get()))
+                && !(event.player.hasEffect(ModEffects.YELLOW_AURA.get()))
+                && !(event.player.hasEffect(ModEffects.WHITE_AURA.get()))) {
+            ClientAuraData.set(0);
         }
     }
 

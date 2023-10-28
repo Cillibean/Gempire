@@ -5,12 +5,9 @@ import com.gempire.entities.gems.starter.EntityMica;
 import com.gempire.entities.gems.starter.EntityNacre;
 import com.gempire.entities.gems.starter.EntityPebble;
 import com.gempire.entities.gems.starter.EntityShale;
-import com.gempire.entities.other.EntityAbomination;
-import com.gempire.entities.other.EntityCrawler;
-import com.gempire.entities.other.EntityShambler;
+import com.gempire.entities.other.*;
 import com.gempire.init.*;
 import com.gempire.proxy.CommonProxy;
-import com.gempire.tileentities.IncubatorTE;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.entries.LootTableReference;
 import net.minecraft.server.MinecraftServer;
@@ -123,6 +120,17 @@ public class Gempire
         event.put(ModEntities.SPINEL.get(), EntitySpinel.registerAttributes().build());
 
         event.put(ModEntities.TOURMALINE.get(), EntityTourmaline.registerAttributes().build());
+
+        event.put(ModEntities.ALABASTER_EMPRESS.get(), EntityAlabasterEmpress.registerAttributes().build());
+        event.put(ModEntities.AMBER_HUNTRESS.get(), EntityAmberHuntress.registerAttributes().build());
+        event.put(ModEntities.COBALT_GUARDIAN.get(), EntityCobaltGuardian.registerAttributes().build());
+        event.put(ModEntities.FUCHSIA_PALADIN.get(), EntityFuchsiaPaladin.registerAttributes().build());
+
+        event.put(ModEntities.PRISMATIC_EMPRESS.get(), EntityPrismaticEmpress.registerAttributes().build());
+        event.put(ModEntities.GILDED_HUNTRESS.get(), EntityGildedHuntress.registerAttributes().build());
+        event.put(ModEntities.MIRRORED_GUARDIAN.get(), EntityMirroredGuardian.registerAttributes().build());
+        event.put(ModEntities.IRIDESCENT_PALADIN.get(), EntityIridescentPaladin.registerAttributes().build());
+
     }
 
     private void setup(final FMLCommonSetupEvent event)

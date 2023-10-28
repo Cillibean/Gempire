@@ -22,6 +22,8 @@ public class ModBlocks {
 
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Gempire.MODID);
 
+    public static final RegistryObject<Block> GALAXY_WARP = BLOCKS.register("galaxy_warp", () ->
+            new GalaxyWarpBlock(BlockBehaviour.Properties.of(Material.PORTAL)));
     public static final RegistryObject<LiquidBlock> PINK_ESSENCE_BLOCK = BLOCKS.register("pink_essence_block", () ->
             new PinkEssenceBlock(ModFluids.PINK_ESSENCE, BlockBehaviour.Properties.copy(Blocks.WATER)));
 

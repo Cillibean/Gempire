@@ -2,8 +2,11 @@ package com.gempire.init;
 
 import com.gempire.Gempire;
 import com.gempire.effect.*;
+import com.gempire.items.tools.GuardianArmorItem;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -27,6 +30,18 @@ public class ModEffects {
 
     public static final RegistryObject<MobEffect> BLUE_AURA = MOB_EFFECTS.register("blue_aura",
             () -> new BlueAuraEffect(MobEffectCategory.HARMFUL, 10343413));
+
+    public static final RegistryObject<MobEffect> PALADINS_PROTECTION = MOB_EFFECTS.register("paladins_protection",
+            () -> new PaladinArmorEffect(MobEffectCategory.BENEFICIAL, 16096720).addAttributeModifier(Attributes.MAX_HEALTH, "5D6F0BA2-1186-46AC-B896-C61C5CEE99CC", 4.0D, AttributeModifier.Operation.ADDITION));
+
+    public static final RegistryObject<MobEffect> HUNTRESS = MOB_EFFECTS.register("huntress",
+            () -> new HuntressArmorEffect(MobEffectCategory.BENEFICIAL, 16117149).addAttributeModifier(Attributes.ATTACK_DAMAGE, "648D7064-6A60-4F59-8ABE-C2C23A6DD7A9", 2.0D, AttributeModifier.Operation.ADDITION));
+
+    public static final RegistryObject<MobEffect> EMPRESS = MOB_EFFECTS.register("empress",
+            () -> new EmpressArmorEffect(MobEffectCategory.BENEFICIAL, 16250871));
+
+    public static final RegistryObject<MobEffect> GUARDIANS_GRACE = MOB_EFFECTS.register("guardians_grace",
+            () -> new GaurdianArmorEffect(MobEffectCategory.BENEFICIAL, 10343413));
 
     public static void register(IEventBus eventBus) {
         MOB_EFFECTS.register(eventBus);

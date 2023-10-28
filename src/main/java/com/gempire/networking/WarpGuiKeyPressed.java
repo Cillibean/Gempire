@@ -6,11 +6,16 @@ import com.gempire.systems.warping.WarpPadData;
 import com.gempire.systems.warping.WarpPadInfo;
 import com.gempire.systems.warping.WarpPadInfoHolder;
 import com.gempire.systems.warping.WarpSelectionMenu;
+import com.gempire.util.DesolateTeleporter;
+import com.gempire.worldgen.ModDimensions;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.MenuProvider;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.network.NetworkEvent;
 import net.minecraftforge.network.NetworkHooks;
 
@@ -51,6 +56,17 @@ public class WarpGuiKeyPressed {
                             entry.write(data);
                         }
                     });
+                } else if (sender.getLevel().getBlockState(msg.pos).getBlock() == ModBlocks.GALAXY_WARP.get()) {
+                    MinecraftServer minecraftserver = sender.level.getServer();
+                    ResourceKey<Level> resourcekey = sender.level.dimension() == Level.OVERWORLD ? ModDimensions.DESOLATE_LANDS_LEVEL_KEY : Level.OVERWORLD;
+                    ServerLevel serverlevel1 = minecraftserver.getLevel(resourcekey);
+                    if (serverlevel1 != null && !sender.isPassenger()) {
+                        if (resourcekey == ModDimensions.DESOLATE_LANDS_LEVEL_KEY) {
+                            sender.changeDimension(serverlevel1, new DesolateTeleporter(sender.getOnPos(), true));
+                        } else {
+                            sender.changeDimension(serverlevel1, new DesolateTeleporter(sender.getOnPos(), false));
+                        }
+                    }
                 }
                 ctx.setPacketHandled(true);
             }
