@@ -17,12 +17,12 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 
 import javax.annotation.Nullable;
 
-public class EntityYellowMonster extends Monster implements GeoAnimatable {
-    private final ServerBossEvent bossEvent = (ServerBossEvent)(new ServerBossEvent(this.getDisplayName(), BossEvent.BossBarColor.YELLOW, BossEvent.BossBarOverlay.PROGRESS)).setDarkenScreen(true);
+public class EntityAlabasterEmpress extends Monster implements GeoAnimatable {
+    private final ServerBossEvent bossEvent = (ServerBossEvent)(new ServerBossEvent(this.getDisplayName(), BossEvent.BossBarColor.WHITE, BossEvent.BossBarOverlay.PROGRESS)).setDarkenScreen(true);
 
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
-    public EntityYellowMonster(EntityType<? extends EntityYellowMonster> p_33002_, Level p_33003_) {
+    public EntityAlabasterEmpress(EntityType<? extends EntityAlabasterEmpress> p_33002_, Level p_33003_) {
         super(p_33002_, p_33003_);
     }
 
@@ -71,5 +71,11 @@ public class EntityYellowMonster extends Monster implements GeoAnimatable {
     @Override
     public double getTick(Object o) {
         return 0;
+    }
+
+    @Override
+    public void tick() {
+        this.bossEvent.setProgress(this.getHealth() / this.getMaxHealth());
+        super.tick();
     }
 }

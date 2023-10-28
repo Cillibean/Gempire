@@ -40,6 +40,7 @@ public class ClientProxy {
     public static CreativeModeTab GEMPIRE_GEMSTONES;
     public static CreativeModeTab GEMPIRE_BLOCKS;
     public static CreativeModeTab GEMPIRE_ITEMS;
+    public static CreativeModeTab GEMPIRE_TOOLS;
     @Mod.EventBusSubscriber(modid = Gempire.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientModBusEvents {
     @SubscribeEvent
@@ -48,10 +49,14 @@ public class ClientProxy {
         event.registerEntityRenderer(ModEntities.CRAWLER.get(), RenderCrawler::new);
         event.registerEntityRenderer(ModEntities.ABOMINATION.get(), RenderAbomination::new);
         event.registerEntityRenderer(ModEntities.SHAMBLER.get(), RenderShambler::new);
-        event.registerEntityRenderer(ModEntities.WHITE_MONSTER.get(),RenderWhiteMonster::new);
-        event.registerEntityRenderer(ModEntities.YELLOW_MONSTER.get(),RenderYellowMonster::new);
-        event.registerEntityRenderer(ModEntities.BLUE_MONSTER.get(),RenderBlueMonster::new);
-        event.registerEntityRenderer(ModEntities.PINK_MONSTER.get(),RenderPinkMonster::new);
+        event.registerEntityRenderer(ModEntities.ALABASTER_EMPRESS.get(), RenderAlabasterEmpress::new);
+        event.registerEntityRenderer(ModEntities.AMBER_HUNTRESS.get(), RenderAmberHuntress::new);
+        event.registerEntityRenderer(ModEntities.COBALT_GUARDIAN.get(), RenderCobaltGuardian::new);
+        event.registerEntityRenderer(ModEntities.FUCHSIA_PALADIN.get(), RenderFuchsiaPaladin::new);
+        event.registerEntityRenderer(ModEntities.PRISMATIC_EMPRESS.get(), RenderPrismaticEmpress::new);
+        event.registerEntityRenderer(ModEntities.GILDED_HUNTRESS.get(), RenderGildedHuntress::new);
+        event.registerEntityRenderer(ModEntities.MIRRORED_GUARDIAN.get(), RenderMirroredGuardian::new);
+        event.registerEntityRenderer(ModEntities.IRIDESCENT_PALADIN.get(), RenderIridescentPaladin::new);
         event.registerEntityRenderer(ModEntities.PEBBLE.get(), m -> new RenderPebble(m, new ModelPebble<>(m.bakeLayer(ModelPebble.LAYER_LOCATION_P))));
         event.registerEntityRenderer(ModEntities.MICA.get(), m -> new RenderMica(m, new ModelPebble<>(m.bakeLayer(ModelPebble.LAYER_LOCATION_M))));
         event.registerEntityRenderer(ModEntities.SHALE.get(), m -> new RenderShale(m, new ModelPebble<>(m.bakeLayer(ModelPebble.LAYER_LOCATION_S))));
@@ -352,24 +357,6 @@ public class ClientProxy {
                                 populator.accept(ModItems.BLACK_SHARDS.get());
                                 populator.accept(ModItems.BROWN_SHARDS.get());
                                 populator.accept(ModItems.SPECIAL_SHARDS.get());
-
-                                populator.accept(ModItems.PINK_DESTABILIZER.get());
-                                populator.accept(ModItems.BLUE_DESTABILIZER.get());
-                                populator.accept(ModItems.YELLOW_DESTABILIZER.get());
-                                populator.accept(ModItems.WHITE_DESTABILIZER.get());
-                                populator.accept(ModItems.PINK_REJUVENATOR.get());
-                                populator.accept(ModItems.BLUE_REJUVENATOR.get());
-                                populator.accept(ModItems.YELLOW_REJUVENATOR.get());
-                                populator.accept(ModItems.WHITE_REJUVENATOR.get());
-                                populator.accept(ModItems.CONFRACTOR.get());
-                                populator.accept(ModItems.CONFRACTOR_TIP.get());
-                                populator.accept(ModItems.CONFRACTOR_BODY.get());
-                                populator.accept(ModItems.GEM_WHISTLE.get());
-                                populator.accept(ModItems.PRISMATIC_AXE.get());
-                                populator.accept(ModItems.PRISMATIC_PICKAXE.get());
-                                populator.accept(ModItems.PRISMATIC_SWORD.get());
-                                populator.accept(ModItems.PRISMATIC_HOE.get());
-                                populator.accept(ModItems.PRISMATIC_SHOVEL.get());
 
                                 populator.accept(ModItems.SHARE_CONTRACT.get());
                                 populator.accept(ModItems.TRANSFER_CONTRACT.get());
@@ -691,6 +678,53 @@ public class ClientProxy {
                             })
                             .build()
             );
+        GEMPIRE_TOOLS = event.registerCreativeModeTab(new ResourceLocation(Gempire.MODID, "gempire_tools"), builder ->
+                // Set name of tab to display
+                builder.title(Component.translatable("itemGroup.gempire_tools"))
+                        // Set icon of creative tab
+                        .icon(() -> new ItemStack(ModItems.PRISMATIC_PICKAXE.get()))
+                        // Add default items to tab
+                        .displayItems((params, populator) -> {
+                            populator.accept(ModItems.PINK_DESTABILIZER.get());
+                            populator.accept(ModItems.BLUE_DESTABILIZER.get());
+                            populator.accept(ModItems.YELLOW_DESTABILIZER.get());
+                            populator.accept(ModItems.WHITE_DESTABILIZER.get());
+                            populator.accept(ModItems.PINK_REJUVENATOR.get());
+                            populator.accept(ModItems.BLUE_REJUVENATOR.get());
+                            populator.accept(ModItems.YELLOW_REJUVENATOR.get());
+                            populator.accept(ModItems.WHITE_REJUVENATOR.get());
+                            populator.accept(ModItems.CONFRACTOR.get());
+                            populator.accept(ModItems.GEM_WHISTLE.get());
+                            populator.accept(ModItems.PRISMATIC_AXE.get());
+                            populator.accept(ModItems.PRISMATIC_PICKAXE.get());
+                            populator.accept(ModItems.PRISMATIC_SWORD.get());
+                            populator.accept(ModItems.PRISMATIC_HOE.get());
+                            populator.accept(ModItems.PRISMATIC_SHOVEL.get());
+
+                            populator.accept(ModItems.PALADIN_AXE.get());
+                            populator.accept(ModItems.EMPRESS_BOW.get());
+                            populator.accept(ModItems.HUNTRESS_SWORD.get());
+                            populator.accept(ModItems.GUARDIAN_SHIELD.get());
+
+                            populator.accept(ModItems.PALADIN_HELMET.get());
+                            populator.accept(ModItems.PALADIN_CHESTPLATE.get());
+                            populator.accept(ModItems.PALADIN_LEGGINGS.get());
+                            populator.accept(ModItems.PALADIN_BOOTS.get());
+                            populator.accept(ModItems.GUARDIAN_HELMET.get());
+                            populator.accept(ModItems.GUARDIAN_CHESTPLATE.get());
+                            populator.accept(ModItems.GUARDIAN_LEGGINGS.get());
+                            populator.accept(ModItems.GUARDIAN_BOOTS.get());
+                            populator.accept(ModItems.HUNTRESS_HELMET.get());
+                            populator.accept(ModItems.HUNTRESS_CHESTPLATE.get());
+                            populator.accept(ModItems.HUNTRESS_LEGGINGS.get());
+                            populator.accept(ModItems.HUNTRESS_BOOTS.get());
+                            populator.accept(ModItems.EMPRESS_HELMET.get());
+                            populator.accept(ModItems.EMPRESS_CHESTPLATE.get());
+                            populator.accept(ModItems.EMPRESS_LEGGINGS.get());
+                            populator.accept(ModItems.EMPRESS_BOOTS.get());
+                        })
+                        .build()
+        );
         }
         @SubscribeEvent
         public void buildContents(CreativeModeTabEvent.BuildContents event) {

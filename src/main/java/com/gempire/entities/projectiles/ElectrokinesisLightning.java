@@ -35,7 +35,7 @@ import java.util.stream.Stream;
 public class ElectrokinesisLightning extends Entity {
 
     public Entity target;
-    public EntityGem owner;
+    public Entity owner;
 
     public ElectrokinesisLightning(EntityType<? extends ElectrokinesisLightning> entityType, Level level) {
         super(entityType, level);
@@ -45,7 +45,7 @@ public class ElectrokinesisLightning extends Entity {
         this.flashes = this.random.nextInt(3) + 1;
     }
 
-    public ElectrokinesisLightning(Level level, EntityGem owner, Entity target) {
+    public ElectrokinesisLightning(Level level, Entity owner, Entity target) {
         super(ModEntities.ELECTROKINESIS_LIGHTNING.get(), level);
         this.target = target;
         this.owner = owner;

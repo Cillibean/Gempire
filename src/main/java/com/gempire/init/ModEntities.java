@@ -14,7 +14,6 @@ import com.gempire.entities.projectiles.IceShardEntity;
 import com.gempire.entities.projectiles.WaterOrbEntity;
 import com.gempire.systems.injection.GemConditions;
 import com.gempire.systems.injection.GemFormation;
-import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.resources.ResourceLocation;
@@ -31,25 +30,45 @@ public class ModEntities {
 
     // Entity Types
 
-    public static final RegistryObject<EntityType<EntityWhiteMonster>> WHITE_MONSTER = ENTITIES.register("white_monster",
-            () -> EntityType.Builder.of(EntityWhiteMonster::new, MobCategory.MONSTER)
+    public static final RegistryObject<EntityType<EntityAlabasterEmpress>> ALABASTER_EMPRESS = ENTITIES.register("alabaster_empress",
+            () -> EntityType.Builder.of(EntityAlabasterEmpress::new, MobCategory.MONSTER)
                     .sized(1f, 3.5f) // Hitbox Size
-                    .build(new ResourceLocation(Gempire.MODID, "white_monster").toString()));
+                    .build(new ResourceLocation(Gempire.MODID, "alabaster_empress").toString()));
 
-    public static final RegistryObject<EntityType<EntityYellowMonster>> YELLOW_MONSTER = ENTITIES.register("yellow_monster",
-            () -> EntityType.Builder.of(EntityYellowMonster::new, MobCategory.MONSTER)
+    public static final RegistryObject<EntityType<EntityAmberHuntress>> AMBER_HUNTRESS = ENTITIES.register("amber_huntress",
+            () -> EntityType.Builder.of(EntityAmberHuntress::new, MobCategory.MONSTER)
                     .sized(1f, 3.5f) // Hitbox Size
-                    .build(new ResourceLocation(Gempire.MODID, "yellow_monster").toString()));
+                    .build(new ResourceLocation(Gempire.MODID, "amber_huntress").toString()));
 
-    public static final RegistryObject<EntityType<EntityBlueMonster>> BLUE_MONSTER = ENTITIES.register("blue_monster",
-            () -> EntityType.Builder.of(EntityBlueMonster::new, MobCategory.MONSTER)
+    public static final RegistryObject<EntityType<EntityCobaltGuardian>> COBALT_GUARDIAN = ENTITIES.register("cobalt_guardian",
+            () -> EntityType.Builder.of(EntityCobaltGuardian::new, MobCategory.MONSTER)
                     .sized(1f, 3.5f) // Hitbox Size
-                    .build(new ResourceLocation(Gempire.MODID, "blue_monster").toString()));
+                    .build(new ResourceLocation(Gempire.MODID, "cobalt_guardian").toString()));
 
-    public static final RegistryObject<EntityType<EntityPinkMonster>> PINK_MONSTER = ENTITIES.register("pink_monster",
-            () -> EntityType.Builder.of(EntityPinkMonster::new, MobCategory.MONSTER)
+    public static final RegistryObject<EntityType<EntityFuchsiaPaladin>> FUCHSIA_PALADIN = ENTITIES.register("fuchsia_paladin",
+            () -> EntityType.Builder.of(EntityFuchsiaPaladin::new, MobCategory.MONSTER)
                     .sized(1f, 3.5f) // Hitbox Size
-                    .build(new ResourceLocation(Gempire.MODID, "pink_monster").toString()));
+                    .build(new ResourceLocation(Gempire.MODID, "fuchsia_paladin").toString()));
+
+    public static final RegistryObject<EntityType<EntityPrismaticEmpress>> PRISMATIC_EMPRESS = ENTITIES.register("prismatic_empress",
+            () -> EntityType.Builder.of(EntityPrismaticEmpress::new, MobCategory.MONSTER)
+                    .sized(1f, 3.5f) // Hitbox Size
+                    .build(new ResourceLocation(Gempire.MODID, "prismatic_empress").toString()));
+
+    public static final RegistryObject<EntityType<EntityGildedHuntress>> GILDED_HUNTRESS = ENTITIES.register("gilded_huntress",
+            () -> EntityType.Builder.of(EntityGildedHuntress::new, MobCategory.MONSTER)
+                    .sized(1f, 3.5f) // Hitbox Size
+                    .build(new ResourceLocation(Gempire.MODID, "gilded_huntress").toString()));
+
+    public static final RegistryObject<EntityType<EntityMirroredGuardian>> MIRRORED_GUARDIAN = ENTITIES.register("mirrored_guardian",
+            () -> EntityType.Builder.of(EntityMirroredGuardian::new, MobCategory.MONSTER)
+                    .sized(1f, 3.5f) // Hitbox Size
+                    .build(new ResourceLocation(Gempire.MODID, "mirrored_guardian").toString()));
+
+    public static final RegistryObject<EntityType<EntityIridescentPaladin>> IRIDESCENT_PALADIN = ENTITIES.register("iridescent_paladin",
+            () -> EntityType.Builder.of(EntityIridescentPaladin::new, MobCategory.MONSTER)
+                    .sized(1f, 3.5f) // Hitbox Size
+                    .build(new ResourceLocation(Gempire.MODID, "iridescent_paladin").toString()));
 
     public static final RegistryObject<EntityType<EntityCrawler>> CRAWLER = ENTITIES.register("crawler",
             () -> EntityType.Builder.of(EntityCrawler::new, MobCategory.CREATURE)

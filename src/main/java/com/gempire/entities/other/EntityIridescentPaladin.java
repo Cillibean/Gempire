@@ -17,12 +17,14 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 
 import javax.annotation.Nullable;
 
-public class EntityBlueMonster extends Monster implements GeoAnimatable {
-    private final ServerBossEvent bossEvent = (ServerBossEvent)(new ServerBossEvent(this.getDisplayName(), BossEvent.BossBarColor.BLUE, BossEvent.BossBarOverlay.PROGRESS)).setDarkenScreen(true);
+public class EntityIridescentPaladin extends Monster implements GeoAnimatable {
+    private final ServerBossEvent bossEvent = (ServerBossEvent)(new ServerBossEvent(this.getDisplayName(), BossEvent.BossBarColor.PINK, BossEvent.BossBarOverlay.PROGRESS)).setDarkenScreen(true);
 
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
-    public EntityBlueMonster(EntityType<? extends EntityBlueMonster> p_33002_, Level p_33003_) {
+    private int ticks = 0;
+
+    public EntityIridescentPaladin(EntityType<? extends EntityIridescentPaladin> p_33002_, Level p_33003_) {
         super(p_33002_, p_33003_);
     }
 
@@ -34,6 +36,11 @@ public class EntityBlueMonster extends Monster implements GeoAnimatable {
                 .add(Attributes.ATTACK_SPEED, 1.0D);
     }
 
+    @Override
+    protected void registerGoals() {
+        super.registerGoals();
+        //this.goalSelector.addGoal(4, n);
+    }
 
     public void setCustomName(@Nullable Component p_31476_) {
         super.setCustomName(p_31476_);
@@ -71,5 +78,11 @@ public class EntityBlueMonster extends Monster implements GeoAnimatable {
     @Override
     public double getTick(Object o) {
         return 0;
+    }
+
+    @Override
+    public void tick() {
+        this.bossEvent.setProgress(this.getHealth() / this.getMaxHealth());
+        super.tick();
     }
 }

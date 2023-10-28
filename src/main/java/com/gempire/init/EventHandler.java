@@ -156,8 +156,8 @@ public class EventHandler {
         if(!event.getLevel().isClientSide()) {
             if(event.getEntity() instanceof ServerPlayer player) {
                 player.getCapability(PlayerAuraProvider.PLAYER_AURA).ifPresent(aura -> {
-                    ModMessages.sendToPlayer(new AuraDataSyncS2C(aura.getAura()), player);
-                    ClientAuraData.set(0);
+                    ModMessages.sendToPlayer(new AuraDataSyncS2C(0), player);
+                    //ClientAuraData.set(0);
                 });
             }
         }

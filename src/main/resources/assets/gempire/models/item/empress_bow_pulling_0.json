@@ -1,0 +1,6 @@
+{
+  "parent": "gempire:item/empress_bow",
+  "textures": {
+    "layer0": "gempire:item/empress_bow_pulling_0"
+  }
+}

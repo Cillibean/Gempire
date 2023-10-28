@@ -2,6 +2,7 @@ package com.gempire.init;
 
 import com.gempire.Gempire;
 import com.gempire.items.*;
+import com.gempire.items.tools.*;
 import net.minecraft.world.item.*;
 import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
@@ -97,6 +98,87 @@ public class ModItems {
                     new Item.Properties()
             )
     );
+
+
+    public static final RegistryObject<Item> PALADIN_HELMET = ITEMS.register("paladin_helmet",
+            () -> new PaladinArmorItem(ModArmorMaterials.PALADIN, ArmorItem.Type.HELMET,
+                    new Item.Properties().fireResistant().stacksTo(1)));
+
+    public static final RegistryObject<Item> PALADIN_CHESTPLATE = ITEMS.register("paladin_chestplate",
+            () -> new ArmorItem(ModArmorMaterials.PALADIN, ArmorItem.Type.CHESTPLATE,
+                    new Item.Properties().fireResistant().stacksTo(1)));
+
+    public static final RegistryObject<Item> PALADIN_LEGGINGS = ITEMS.register("paladin_leggings",
+            () -> new ArmorItem(ModArmorMaterials.PALADIN, ArmorItem.Type.LEGGINGS,
+                    new Item.Properties().fireResistant().stacksTo(1)));
+
+    public static final RegistryObject<Item> PALADIN_BOOTS = ITEMS.register("paladin_boots",
+            () -> new ArmorItem(ModArmorMaterials.PALADIN, ArmorItem.Type.BOOTS,
+                    new Item.Properties().fireResistant().stacksTo(1)));
+
+    public static final RegistryObject<Item> GUARDIAN_HELMET = ITEMS.register("guardian_helmet",
+            () -> new GuardianArmorItem(ModArmorMaterials.GUARDIAN, ArmorItem.Type.HELMET,
+                    new Item.Properties().fireResistant().stacksTo(1)));
+
+    public static final RegistryObject<Item> GUARDIAN_CHESTPLATE = ITEMS.register("guardian_chestplate",
+            () -> new ArmorItem(ModArmorMaterials.GUARDIAN, ArmorItem.Type.CHESTPLATE,
+                    new Item.Properties().fireResistant().stacksTo(1)));
+
+    public static final RegistryObject<Item> GUARDIAN_LEGGINGS = ITEMS.register("guardian_leggings",
+            () -> new ArmorItem(ModArmorMaterials.GUARDIAN, ArmorItem.Type.LEGGINGS,
+                    new Item.Properties().fireResistant().stacksTo(1)));
+
+    public static final RegistryObject<Item> GUARDIAN_BOOTS = ITEMS.register("guardian_boots",
+            () -> new ArmorItem(ModArmorMaterials.GUARDIAN, ArmorItem.Type.BOOTS,
+                    new Item.Properties().fireResistant().stacksTo(1)));
+
+    public static final RegistryObject<Item> HUNTRESS_HELMET = ITEMS.register("huntress_helmet",
+            () -> new HuntressArmorItem(ModArmorMaterials.HUNTRESS, ArmorItem.Type.HELMET,
+                    new Item.Properties().fireResistant().stacksTo(1)));
+
+    public static final RegistryObject<Item> HUNTRESS_CHESTPLATE = ITEMS.register("huntress_chestplate",
+            () -> new ArmorItem(ModArmorMaterials.HUNTRESS, ArmorItem.Type.CHESTPLATE,
+                    new Item.Properties().fireResistant().stacksTo(1)));
+
+    public static final RegistryObject<Item> HUNTRESS_LEGGINGS = ITEMS.register("huntress_leggings",
+            () -> new ArmorItem(ModArmorMaterials.HUNTRESS, ArmorItem.Type.LEGGINGS,
+                    new Item.Properties().fireResistant().stacksTo(1)));
+
+    public static final RegistryObject<Item> HUNTRESS_BOOTS = ITEMS.register("huntress_boots",
+            () -> new ArmorItem(ModArmorMaterials.HUNTRESS, ArmorItem.Type.BOOTS,
+                    new Item.Properties().fireResistant().stacksTo(1)));
+
+    public static final RegistryObject<Item> EMPRESS_HELMET = ITEMS.register("empress_helmet",
+            () -> new EmpressArmorItem(ModArmorMaterials.EMPRESS, ArmorItem.Type.HELMET,
+                    new Item.Properties().fireResistant().stacksTo(1)));
+
+    public static final RegistryObject<Item> EMPRESS_CHESTPLATE = ITEMS.register("empress_chestplate",
+            () -> new ArmorItem(ModArmorMaterials.EMPRESS, ArmorItem.Type.CHESTPLATE,
+                    new Item.Properties().fireResistant().stacksTo(1)));
+
+    public static final RegistryObject<Item> EMPRESS_LEGGINGS = ITEMS.register("empress_leggings",
+            () -> new ArmorItem(ModArmorMaterials.EMPRESS, ArmorItem.Type.LEGGINGS,
+                    new Item.Properties().fireResistant().stacksTo(1)));
+
+    public static final RegistryObject<Item> EMPRESS_BOOTS = ITEMS.register("empress_boots",
+            () -> new ArmorItem(ModArmorMaterials.EMPRESS, ArmorItem.Type.BOOTS,
+                    new Item.Properties().fireResistant().stacksTo(1)));
+
+
+
+    public static final RegistryObject<Item> HUNTRESS_SWORD = ITEMS.register("huntress_sword",
+            () -> new ItemHuntressSword(ModTiers.SHARD, 4, -2.4f,
+                    new Item.Properties().fireResistant().stacksTo(1)));
+
+    public static final RegistryObject<Item> PALADIN_AXE = ITEMS.register("paladin_axe",
+            () -> new ItemPaladinAxe(ModTiers.SHARD, 6, -3f,
+                    new Item.Properties().fireResistant().stacksTo(1)));
+
+    public static final RegistryObject<Item> GUARDIAN_SHIELD = ITEMS.register("guardian_shield",
+            () -> new ItemGuardianShield(new Item.Properties().fireResistant().stacksTo(1)));
+
+    public static final RegistryObject<Item> EMPRESS_BOW = ITEMS.register("empress_bow",
+            () -> new ItemEmpressBow(new Item.Properties().fireResistant().stacksTo(1)));
 
     public static final RegistryObject<Item> PRISMATIC_SWORD = ITEMS.register("prismatic_sword",
             () -> new SwordItem(ModTiers.PRISMATIC, 4, -2.4f,

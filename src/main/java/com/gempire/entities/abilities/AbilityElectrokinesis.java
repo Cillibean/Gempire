@@ -10,6 +10,7 @@ import com.gempire.entities.projectiles.ElectrokinesisLightning;
 import com.gempire.init.ModEntities;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageSources;
@@ -26,9 +27,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AbilityElectrokinesis extends Ability implements ITaskAbility, IViolentAbility, IRangedAbility, IEmotionalAbility {
-
-    //TODO: IMPLEMENT ELECTROKINESIS
-    // need to have lightning target only one entity
 
     public AbilityElectrokinesis() {
         super(30, 1);
@@ -64,6 +62,7 @@ public class AbilityElectrokinesis extends Ability implements ITaskAbility, IVio
             this.holder.enemy = target;
             this.holder.enemyDying = true;
             target.hurt(this.holder.damageSources().lightningBolt(), 5);
+            target.getLevel().playSound(holder, target.getOnPos(), SoundEvents.LIGHTNING_BOLT_IMPACT, SoundSource.PLAYERS, 1, 1);
         //}
         System.out.println("electrokinesis");
     }

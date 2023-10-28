@@ -280,6 +280,28 @@
   "item.gempire.remnants_music_disc": "Music Disc",
   "item.gempire.remnants_music_disc.desc": "Solangelo - Remnants",
 
+  "item.gempire.paladin_helmet": "Paladin Helmet",
+  "item.gempire.paladin_chestplate": "Paladin Chestplate",
+  "item.gempire.paladin_leggings": "Paladin Leggings",
+  "item.gempire.paladin_boots": "Paladin Boots",
+  "item.gempire.guardian_helmet": "Guardian Helmet",
+  "item.gempire.guardian_chestplate": "Guardian Chestplate",
+  "item.gempire.guardian_leggings": "Guardian Leggings",
+  "item.gempire.guardian_boots": "Guardian Boots",
+  "item.gempire.huntress_helmet": "Huntress Helmet",
+  "item.gempire.huntress_chestplate": "Huntress Chestplate",
+  "item.gempire.huntress_leggings": "Huntress Leggings",
+  "item.gempire.huntress_boots": "Huntress Boots",
+  "item.gempire.empress_helmet": "Empress Helmet",
+  "item.gempire.empress_chestplate": "Empress Chestplate",
+  "item.gempire.empress_leggings": "Empress Leggings",
+  "item.gempire.empress_boots": "Empress Boots",
+
+  "item.gempire.empress_bow": "Bow of The Empress",
+  "item.gempire.huntress_sword": "Huntress's Sword",
+  "item.gempire.guardian_shield": "Shield of The Guardian",
+  "item.gempire.paladin_axe": "Paladin's Axe",
+
   "item.gempire.congealed_pink_essence": "Congealed Pink Essence",
   "item.gempire.congealed_blue_essence": "Congealed Blue Essence",
   "item.gempire.congealed_yellow_essence": "Congealed Yellow Essence",
@@ -606,10 +628,10 @@
   "entity.gempire.shambler": "Shambler",
   "entity.gempire.abomination": "Abomination",
 
-  "entity.gempire.white_monster": "White Monster",
-  "entity.gempire.yellow_monster": "Yellow Monster",
-  "entity.gempire.blue_monster": "Blue Monster",
-  "entity.gempire.pink_monster": "Pink Monster",
+  "entity.gempire.alabaster_empress": "Alabaster Empress",
+  "entity.gempire.amber_huntress": "Amber Huntress",
+  "entity.gempire.cobalt_guardian": "Cobalt Guardian",
+  "entity.gempire.fuchsia_paladin": "Fuchsia Paladin",
 
   "effect.gempire.paralysis": "Paralysis",
 
@@ -738,6 +760,7 @@
 
   "itemGroup.gempire_gemstones" : "Gemstones",
   "itemGroup.gempire_items" : "Items",
+  "itemGroup.gempire_tools" : "Tools",
   "itemGroup.gempire_blocks" : "Blocks",
 
   "fluid.gempire.pink_essence": "Pink Gem Essence",
