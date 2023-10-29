@@ -25,8 +25,6 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import java.util.ArrayList;
 
 public class EntityBixbite extends EntityGem {
-    //TODO: IMPLEMENT BIXBITE. Breaks things and farm animals down into component parts. Farm animals should probably require an axe...
-    // If the item is damaged, she will salvage 1-3 random parts from the recipe as salvage and hand them back to you.
     public EntityBixbite(EntityType<? extends PathfinderMob> type, Level worldIn) {
         super(type, worldIn);
     }

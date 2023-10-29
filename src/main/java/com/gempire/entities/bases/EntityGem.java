@@ -2334,6 +2334,26 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
 
     //CONTAINER STUFF
 
+    public void addToInventory(ArrayList<ItemStack> list) {
+        if (list != null) {
+        for (ItemStack stack : list) {
+            for (int i = 0; i < getItems().size(); i++) {
+                if (getItems().get(i).is(stack.getItem()) &&
+                        getItems().get(i).getCount() < 64) {
+                    getItems().get(i).setCount(getItems().get(i).getCount() + 1);
+                    break;
+                }
+                if (getItems().get(i).is(Items.AIR)) {
+                    NonNullList<ItemStack> array = getItems();
+                    array.set(i, stack);
+                    setItems(array);
+                    break;
+                }
+            }
+        }
+        }
+    }
+
     @Override
     public int getMaxStackSize() {
         return 64;
