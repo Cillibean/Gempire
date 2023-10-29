@@ -200,6 +200,23 @@ public class ModItems {
             () -> new HoeItem(ModTiers.PRISMATIC, -4, 0f,
                     new Item.Properties().fireResistant()));
 
+
+    public static final RegistryObject<Item> INACTIVE_PALADIN_GEM = ITEMS.register("inactive_paladin_gem", () ->
+            new ItemBossGem(new Item.Properties().stacksTo(1))
+    );
+
+    public static final RegistryObject<Item> INACTIVE_GUARDIAN_GEM = ITEMS.register("inactive_guardian_gem", () ->
+            new ItemBossGem(new Item.Properties().stacksTo(1))
+    );
+
+    public static final RegistryObject<Item> INACTIVE_HUNTRESS_GEM = ITEMS.register("inactive_huntress_gem", () ->
+            new ItemBossGem(new Item.Properties().stacksTo(1))
+    );
+
+    public static final RegistryObject<Item> INACTIVE_EMPRESS_GEM = ITEMS.register("inactive_empress_gem", () ->
+            new ItemBossGem(new Item.Properties().stacksTo(1))
+    );
+
     public static final RegistryObject<Item> STRAWBERRY = ITEMS.register("strawberry", () ->
             new ItemNameBlockItem(ModBlocks.STRAWBERRY_STEM.get(), new Item.Properties().stacksTo(64).food(ModFoods.STRAWBERRY))
     );

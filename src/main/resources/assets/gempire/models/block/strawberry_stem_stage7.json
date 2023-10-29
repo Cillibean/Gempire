@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/stem_growth7",
   "textures": {
-    "stem": "minecraft:block/strawberry_stem"
+    "stem": "gempire:block/strawberry_stem"
   }
 }

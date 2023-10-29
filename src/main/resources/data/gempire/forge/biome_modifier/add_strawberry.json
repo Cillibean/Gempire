@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "gempire:strawberry_fields",
+  "features": "gempire:strawberry_placed",
+  "step": "vegetal_decoration"
+}

@@ -415,6 +415,11 @@ public class ClientProxy {
                                 populator.accept(ModItems.INACTIVE_JASPER_BASE.get());
                                 populator.accept(ModItems.INACTIVE_TOURMALINE_BASE.get());
                                 populator.accept(ModItems.INACTIVE_AGATE_BASE.get());
+
+                                populator.accept(ModItems.INACTIVE_PALADIN_GEM.get());
+                                populator.accept(ModItems.INACTIVE_GUARDIAN_GEM.get());
+                                populator.accept(ModItems.INACTIVE_HUNTRESS_GEM.get());
+                                populator.accept(ModItems.INACTIVE_EMPRESS_GEM.get());
                             })
                             .build()
             );
