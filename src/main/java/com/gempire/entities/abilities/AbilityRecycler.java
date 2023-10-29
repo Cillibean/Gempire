@@ -31,11 +31,8 @@ public class AbilityRecycler extends Ability implements IIdleAbility {
     }
 
     public ArrayList<ItemStack> getList() {
-        if (!this.holder.getItemBySlot(EquipmentSlot.MAINHAND).isEmpty()) {
-            if (holder.level.isClientSide) {
+            if (!this.holder.getItemBySlot(EquipmentSlot.MAINHAND).isEmpty()) {
                 manager = holder.level.getRecipeManager();
-            }
-            if (manager != null && !this.holder.getItemBySlot(EquipmentSlot.MAINHAND).isEmpty()) {
                 ItemStack stack = this.holder.getItemBySlot(EquipmentSlot.MAINHAND);
                 Item item = stack.getItem();
                 Collection<Recipe<?>> collection = manager.getRecipes();
@@ -59,7 +56,6 @@ public class AbilityRecycler extends Ability implements IIdleAbility {
 
                 return listi2;
             }
-        }
         return null;
     }
 
@@ -70,7 +66,7 @@ public class AbilityRecycler extends Ability implements IIdleAbility {
     }
 
     public void runRecycle(ArrayList<ItemStack> list) {
-        if (list != null) {
+        if (list != null && !holder.level.isClientSide) {
             holder.addToInventory(list);
             holder.setItemSlot(EquipmentSlot.MAINHAND, Items.AIR.getDefaultInstance());
         }
