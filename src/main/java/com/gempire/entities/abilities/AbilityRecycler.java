@@ -2,6 +2,7 @@ package com.gempire.entities.abilities;
 
 import com.gempire.entities.abilities.base.Ability;
 import com.gempire.entities.abilities.interfaces.IIdleAbility;
+import com.gempire.init.ModItems;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -17,10 +18,9 @@ import java.util.Collection;
 import java.util.List;
 
 public class AbilityRecycler extends Ability implements IIdleAbility {
-    //TODO: IMPLEMENT RECYCLER
-    // uncrafter basically
 
     RecipeManager manager;
+    int timer = 0;
     public AbilityRecycler() {
         super(15, 7);
     }
@@ -35,10 +35,32 @@ public class AbilityRecycler extends Ability implements IIdleAbility {
                 manager = holder.level.getRecipeManager();
                 ItemStack stack = this.holder.getItemBySlot(EquipmentSlot.MAINHAND);
                 Item item = stack.getItem();
+                if (item == Items.NETHERITE_AXE ||item == Items.NETHERITE_PICKAXE ||
+                        item == Items.NETHERITE_SWORD || item == Items.NETHERITE_SHOVEL ||
+                        item == Items.NETHERITE_HOE || item == Items.NETHERITE_HELMET ||
+                        item == Items.NETHERITE_LEGGINGS || item == Items.NETHERITE_BOOTS ||
+                        item == Items.NETHERITE_CHESTPLATE || item == ModItems.PRISMATIC_AXE.get()
+                        || item == ModItems.PRISMATIC_PICKAXE.get() || item == ModItems.PRISMATIC_SWORD.get() ||
+                        item == ModItems.PRISMATIC_SHOVEL.get() || item == ModItems.PRISMATIC_HOE.get() ||
+                        item == ModItems.GUARDIAN_HELMET.get() || item == ModItems.GUARDIAN_LEGGINGS.get() ||
+                        item == ModItems.GUARDIAN_BOOTS.get() || item == ModItems.GUARDIAN_CHESTPLATE.get() ||
+                        item == ModItems.PALADIN_HELMET.get() || item == ModItems.PALADIN_LEGGINGS.get() ||
+                        item == ModItems.PALADIN_BOOTS.get() || item == ModItems.PALADIN_CHESTPLATE.get() ||
+                        item == ModItems.HUNTRESS_HELMET.get() || item == ModItems.HUNTRESS_LEGGINGS.get() ||
+                        item == ModItems.HUNTRESS_BOOTS.get() || item == ModItems.HUNTRESS_CHESTPLATE.get() ||
+                        item == ModItems.EMPRESS_HELMET.get() || item == ModItems.EMPRESS_LEGGINGS.get() ||
+                        item == ModItems.EMPRESS_BOOTS.get() || item == ModItems.EMPRESS_CHESTPLATE.get() ||
+                        item == ModItems.PALADIN_AXE.get() || item == ModItems.GUARDIAN_SHIELD.get() ||
+                        item == ModItems.HUNTRESS_SWORD.get() || item == ModItems.EMPRESS_BOW.get()) return null;
                 Collection<Recipe<?>> collection = manager.getRecipes();
                 ArrayList<Recipe> list = new ArrayList<>();
                 ArrayList<Ingredient> listi = new ArrayList<>();
                 ArrayList<ItemStack> listi2 = new ArrayList<>();
+                ArrayList<Item> listi3 = new ArrayList<>();
+                ArrayList<ItemStack> listi4 = new ArrayList<>();
+                list.clear();
+                listi.clear();
+                listi2.clear();
                 for (Recipe recipe : collection) {
                     if (recipe.getResultItem(RegistryAccess.EMPTY).is(item)) {
                         list.add(recipe);
@@ -53,8 +75,27 @@ public class AbilityRecycler extends Ability implements IIdleAbility {
                 for (Ingredient ingredient : listi) {
                     listi2.addAll(List.of(ingredient.getItems()));
                 }
-
-                return listi2;
+                for (ItemStack stack2 : listi2) {
+                    listi3.add(stack2.getItem());
+                }
+                Item cobblestone = Items.COBBLESTONE;
+                Item deepslate = Items.COBBLED_DEEPSLATE;
+                Item blackstone = Items.BLACKSTONE;
+                Item stick = Items.STICK;
+                if (listi3.contains(cobblestone) && listi3.contains(deepslate) && listi3.contains(blackstone)){
+                    listi3.remove(deepslate);
+                    listi3.remove(blackstone);
+                    listi3.remove(deepslate);
+                    listi3.remove(blackstone);
+                    listi3.remove(deepslate);
+                    listi3.remove(blackstone);
+                }
+                listi3.remove(stick);
+                listi3.remove(stick);
+                for (Item item2 : listi3) {
+                    listi4.add(new ItemStack(item2));
+                }
+                return listi4;
             }
         return null;
     }
@@ -62,11 +103,16 @@ public class AbilityRecycler extends Ability implements IIdleAbility {
 
     @Override
     public void execute() {
-        runRecycle(getList());
+        if (!holder.level.isClientSide && timer >= 20) runRecycle(getList());
+        if (timer <= 20) {
+            timer ++;
+        } else {
+            timer = 0;
+        }
     }
 
     public void runRecycle(ArrayList<ItemStack> list) {
-        if (list != null && !holder.level.isClientSide) {
+        if (list != null) {
             holder.addToInventory(list);
             holder.setItemSlot(EquipmentSlot.MAINHAND, Items.AIR.getDefaultInstance());
         }

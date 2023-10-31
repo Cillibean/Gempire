@@ -61,6 +61,8 @@ public class Gempire
     }
 
     public void EntityAttributes(final EntityAttributeCreationEvent event){
+        event.put(ModEntities.BEASTMASTER_WOLF.get(), EntityBeastmasterWolf.createAttributes().build());
+
         event.put(ModEntities.SHAMBLER.get(), EntityShambler.registerAttributes().build());
 
         event.put(ModEntities.ABOMINATION.get(), EntityAbomination.registerAttributes().build());
