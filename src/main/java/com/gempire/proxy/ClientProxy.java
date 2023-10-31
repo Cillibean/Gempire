@@ -57,6 +57,7 @@ public class ClientProxy {
         event.registerEntityRenderer(ModEntities.GILDED_HUNTRESS.get(), RenderGildedHuntress::new);
         event.registerEntityRenderer(ModEntities.MIRRORED_GUARDIAN.get(), RenderMirroredGuardian::new);
         event.registerEntityRenderer(ModEntities.IRIDESCENT_PALADIN.get(), RenderIridescentPaladin::new);
+        event.registerEntityRenderer(ModEntities.BEASTMASTER_WOLF.get(), RenderBeastmasterWolf::new);
         event.registerEntityRenderer(ModEntities.PEBBLE.get(), m -> new RenderPebble(m, new ModelPebble<>(m.bakeLayer(ModelPebble.LAYER_LOCATION_P))));
         event.registerEntityRenderer(ModEntities.MICA.get(), m -> new RenderMica(m, new ModelPebble<>(m.bakeLayer(ModelPebble.LAYER_LOCATION_M))));
         event.registerEntityRenderer(ModEntities.SHALE.get(), m -> new RenderShale(m, new ModelPebble<>(m.bakeLayer(ModelPebble.LAYER_LOCATION_S))));
@@ -415,6 +416,11 @@ public class ClientProxy {
                                 populator.accept(ModItems.INACTIVE_JASPER_BASE.get());
                                 populator.accept(ModItems.INACTIVE_TOURMALINE_BASE.get());
                                 populator.accept(ModItems.INACTIVE_AGATE_BASE.get());
+
+                                populator.accept(ModItems.INACTIVE_PALADIN_GEM.get());
+                                populator.accept(ModItems.INACTIVE_GUARDIAN_GEM.get());
+                                populator.accept(ModItems.INACTIVE_HUNTRESS_GEM.get());
+                                populator.accept(ModItems.INACTIVE_EMPRESS_GEM.get());
                             })
                             .build()
             );
@@ -783,6 +789,7 @@ public class ClientProxy {
 
     @SubscribeEvent
     public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
+        event.registerLayerDefinition(ModelBeastmasterWolf.BEASTMASTER_WOLF, ModelBeastmasterWolf::createBodyLayer);
         event.registerLayerDefinition(ModelPebble.LAYER_LOCATION_P, ModelPebble::createBodyLayer);
         event.registerLayerDefinition(ModelPebble.LAYER_LOCATION_M, ModelPebble::createBodyLayer);
         event.registerLayerDefinition(ModelPebble.LAYER_LOCATION_S, ModelPebble::createBodyLayer);

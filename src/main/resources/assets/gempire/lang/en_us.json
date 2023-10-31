@@ -297,8 +297,13 @@
   "item.gempire.empress_leggings": "Empress Leggings",
   "item.gempire.empress_boots": "Empress Boots",
 
+  "item.gempire.inactive_paladin_gem": "Inactive Paladin Gem",
+  "item.gempire.inactive_guardian_gem": "Inactive Guardian Gem",
+  "item.gempire.inactive_huntress_gem": "Inactive Huntress Gem",
+  "item.gempire.inactive_empress_gem": "Inactive Empress Gem",
+
   "item.gempire.empress_bow": "Bow of The Empress",
-  "item.gempire.huntress_sword": "Huntress's Sword",
+  "item.gempire.huntress_sword": "Huntress's Blade",
   "item.gempire.guardian_shield": "Shield of The Guardian",
   "item.gempire.paladin_axe": "Paladin's Axe",
 
@@ -633,6 +638,11 @@
   "entity.gempire.cobalt_guardian": "Cobalt Guardian",
   "entity.gempire.fuchsia_paladin": "Fuchsia Paladin",
 
+  "entity.gempire.prismatic_empress": "Prismatic Empress",
+  "entity.gempire.gilded_huntress": "Gilded Huntress",
+  "entity.gempire.mirrored_guardian": "Mirrored Guardian",
+  "entity.gempire.iridescent_paladin": "Iridescent Paladin",
+
   "effect.gempire.paralysis": "Paralysis",
 
   "nickname.gempire.sapphire_0": "White Sapphire",
@@ -788,7 +798,7 @@
   "ability.gempire.healer": "Healer",
   "ability.gempire.negotiator": "Negotiator",
   "ability.gempire.recall": "Recall",
-  "ability.gempire.recycler": "Recycler (NYI)",
+  "ability.gempire.recycler": "Recycler",
   "ability.gempire.hydrokinesis": "Hydrokinesis",
   "ability.gempire.amphibian": "Amphibian",
   "ability.gempire.vehicle": "Vehicle",
@@ -802,7 +812,7 @@
   "ability.gempire.angler": "Angler",
   "ability.gempire.farmer": "Farmer (NYI)",
   "ability.gempire.enchantment": "Enchantment",
-  "ability.gempire.electrokinesis": "Electrokinesis (NYI)",
+  "ability.gempire.electrokinesis": "Electrokinesis",
   "ability.gempire.aerokinesis": "Aerokinesis (NYI)",
   "ability.gempire.berserker": "Berserker",
   "ability.gempire.beastmaster": "Beastmaster",

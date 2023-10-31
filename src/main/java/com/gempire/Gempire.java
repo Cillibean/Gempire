@@ -61,6 +61,8 @@ public class Gempire
     }
 
     public void EntityAttributes(final EntityAttributeCreationEvent event){
+        event.put(ModEntities.BEASTMASTER_WOLF.get(), EntityBeastmasterWolf.createAttributes().build());
+
         event.put(ModEntities.SHAMBLER.get(), EntityShambler.registerAttributes().build());
 
         event.put(ModEntities.ABOMINATION.get(), EntityAbomination.registerAttributes().build());
@@ -173,7 +175,7 @@ public class Gempire
             event.getTable().addPool(LootPool.lootPool().add(LootTableReference.lootTableReference(new ResourceLocation(MODID, "chests/larimar"))).build());
         }
         if (event.getName().equals(new ResourceLocation("minecraft", "chests/ancient_city"))) {
-            event.getTable().addPool(LootPool.lootPool().add(LootTableReference.lootTableReference(new ResourceLocation(MODID, "chests/garent"))).build());
+            event.getTable().addPool(LootPool.lootPool().add(LootTableReference.lootTableReference(new ResourceLocation(MODID, "chests/garnet"))).build());
             event.getTable().addPool(LootPool.lootPool().add(LootTableReference.lootTableReference(new ResourceLocation(MODID, "chests/zircon"))).build());
         }
         if (event.getName().equals(new ResourceLocation("minecraft", "chests/pillager_outpost")) ||

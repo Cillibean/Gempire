@@ -1,5 +1,6 @@
 package com.gempire.entities.other;
 
+import com.gempire.init.ModEntities;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerBossEvent;
 import net.minecraft.server.level.ServerPlayer;
