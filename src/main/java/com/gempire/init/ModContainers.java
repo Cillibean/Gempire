@@ -17,6 +17,8 @@ public class ModContainers {
     public static final DeferredRegister<MenuType<?>> CONTAINERS = DeferredRegister.create(ForgeRegistries.MENU_TYPES, Gempire.MODID);
 
     //public static final RegistryObject<ContainerType<TestContainer>> TEST_CONTAINER = CONTAINERS.register("test_container", () -> IForgeContainerType.create(TestContainer::createContainerClientSide));
+
+    public static final RegistryObject<MenuType<BoardContainer>> BOARD_CONTAINER = CONTAINERS.register("board_container", () -> IForgeMenuType.create(BoardContainer::new));
     public static final RegistryObject<MenuType<InjectorContainer>> INJECTOR_CONTAINER = CONTAINERS.register("injector_container", () -> IForgeMenuType.create(InjectorContainer::new));
     public static final RegistryObject<MenuType<GemUIContainer>> GEM_UI_CONTAINER = CONTAINERS.register("gem_ui_container", () -> IForgeMenuType.create(GemUIContainer::new));
     public static final RegistryObject<MenuType<ShellContainer>> SHELL_CONTAINER = CONTAINERS.register("shell_container", () -> IForgeMenuType.create(ShellContainer::new));

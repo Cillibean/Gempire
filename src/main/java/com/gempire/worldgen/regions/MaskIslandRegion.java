@@ -24,18 +24,15 @@ public class MaskIslandRegion extends Region {
     @Override
     public void addBiomes(Registry<Biome> registry, Consumer<Pair<Climate.ParameterPoint, ResourceKey<Biome>>> mapper) {
         VanillaParameterOverlayBuilder builder = new VanillaParameterOverlayBuilder();
-        // Overlap Vanilla's parameters with our own for our COLD_BLUE biome.
-        // The parameters for this biome are chosen arbitrarily.
         new ParameterPointListBuilder()
                 .temperature(Temperature.span(Temperature.NEUTRAL, Temperature.WARM))
                 .humidity(Humidity.span(Humidity.NEUTRAL, Humidity.HUMID))
-                .continentalness(Continentalness.DEEP_OCEAN)
+                .continentalness(Continentalness.MUSHROOM_FIELDS)
                 .erosion(Erosion.EROSION_0, Erosion.EROSION_1)
                 .depth(Depth.SURFACE)
                 .weirdness(Weirdness.MID_SLICE_NORMAL_ASCENDING, Weirdness.MID_SLICE_NORMAL_DESCENDING)
                 .build().forEach(point -> builder.add(point, ModBiomes.MASK_ISLAND));
 
-        // Add our points to the mapper
         builder.build().forEach(mapper::accept);
     }
 }
