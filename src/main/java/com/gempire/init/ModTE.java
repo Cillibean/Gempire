@@ -22,6 +22,10 @@ public class ModTE {
     /*public static final RegistryObject<TileEntityType<TestContainerTE>> TEST_CONTAINER_TE = TILE_ENTITIES.register(
             "test_container_te", () -> TileEntityType.Builder.create(TestContainerTE::new, ModBlocks.TEST_CONTAINER_BLOCK.get()).build(null));*/
 
+
+    public static final RegistryObject<BlockEntityType<BoardTE>> BOARD_TE = TILE_ENTITIES.register(
+            "board_te", () -> BlockEntityType.Builder.of(BoardTE::new, ModBlocks.BOARD_BLOCK.get()).build(null));
+
     public static final RegistryObject<BlockEntityType<InjectorTE>> INJECTOR_TE = TILE_ENTITIES.register(
             "injector_te", () -> BlockEntityType.Builder.of(InjectorTE::new, ModBlocks.TANK_BLOCK.get()).build(null));
 

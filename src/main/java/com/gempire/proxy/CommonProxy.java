@@ -43,6 +43,7 @@ public class CommonProxy {
 
         event.enqueueWork(() -> {
             Regions.register(new StrawberryRegion(new ResourceLocation(Gempire.MODID, "overworld_strawberry_fields"), 1));
+            Regions.register(new MaskIslandRegion(new ResourceLocation(Gempire.MODID, "overworld_mask_island"), 1));
             Regions.register(new PurpleKindergartenRegion(new ResourceLocation(Gempire.MODID, "overworld_purple_kindergarten"), 1));
             Regions.register(new YellowKindergartenRegion(new ResourceLocation(Gempire.MODID, "overworld_yellow_kindergarten"), 1));
             Regions.register(new GreyKindergartenRegion(new ResourceLocation(Gempire.MODID, "overworld_grey_kindergarten"), 1));

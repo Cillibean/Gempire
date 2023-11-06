@@ -36,7 +36,7 @@ public class ModSurfaceRuleData {
         SurfaceRules.ConditionSource stripedStoneLevel = SurfaceRules.yBlockCheck(VerticalAnchor.aboveBottom(30), 0);
         SurfaceRules.ConditionSource stone2Level = SurfaceRules.yBlockCheck(VerticalAnchor.BOTTOM, 30);
         return SurfaceRules.sequence(
-                SurfaceRules.ifTrue(SurfaceRules.isBiome(ModBiomes.STRAWBERRY_FIELDS), grassSurface),
+                SurfaceRules.ifTrue(SurfaceRules.isBiome(ModBiomes.MASK_ISLAND), grassSurface),
                 SurfaceRules.ifTrue(SurfaceRules.isBiome(ModBiomes.STRAWBERRY_FIELDS), SurfaceRules.sequence(SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, GRASS_BLOCK), SurfaceRules.ifTrue(SurfaceRules.UNDER_FLOOR, DIRT))),
                 SurfaceRules.ifTrue(SurfaceRules.isBiome(ModBiomes.PURPLE_KINDERGARTEN), SurfaceRules.sequence(SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, DRAINED_PURPLE_SOIL), SurfaceRules.ifTrue(SurfaceRules.UNDER_FLOOR, DRAINED_PURPLE_SOIL), SurfaceRules.ifTrue(stone2Level, DRAINED_PURPLE_STONE_2), DRAINED_PURPLE_STONE)),
                 SurfaceRules.ifTrue(SurfaceRules.isBiome(ModBiomes.GREY_KINDERGARTEN), SurfaceRules.sequence(SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, DRAINED_GREY_SOIL), SurfaceRules.ifTrue(SurfaceRules.UNDER_FLOOR, DRAINED_GREY_SOIL), SurfaceRules.ifTrue(stone2Level, DRAINED_GREY_STONE_2), DRAINED_GREY_STONE)),

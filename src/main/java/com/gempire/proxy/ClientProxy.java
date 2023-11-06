@@ -95,6 +95,7 @@ public class ClientProxy {
         MenuScreens.register(ModContainers.GEM_UI_CONTAINER.get(), GemUIScreen::new);
         MenuScreens.register(ModContainers.SHELL_CONTAINER.get(), ShellScreen::new);
         MenuScreens.register(ModContainers.INCUBATOR_CONTAINER.get(), IncubatorScreen::new);
+        MenuScreens.register(ModContainers.BOARD_CONTAINER.get(), BoardScreen::new);
         MenuScreens.register(ModContainers.PEARL_UI_CONTAINER.get(), PearlUIScreen::new);
         MenuScreens.register(ModContainers.PEARL_DEFECTIVE_UI_CONTAINER.get(), PearlUIScreenDefective::new);
         MenuScreens.register(ModContainers.ZIRCON_UI_CONTAINER.get(), ZirconUIScreen::new);
