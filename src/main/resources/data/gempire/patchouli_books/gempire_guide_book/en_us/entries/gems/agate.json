@@ -11,7 +11,7 @@
       "name": "An Agate",
       "rotate": "true",
       "offset": 0.2,
-      "text": "A mid-game solider, has many possible abilities. Also has the Stern ability, making other gems perform their tasks more efficiently and warding off hostile entities."
+      "text": "A mid-game soldier, has many possible abilities. Also has the Stern ability, making other gems perform their tasks more efficiently and warding off hostile entities."
     },
     {
       "type": "patchouli:text",
@@ -23,7 +23,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "$(l)Cruxes$() $(br)$(li)Raw Copper Block$(li)Quartz Block$(li)Calcite Block"
+      "text": "$(l)Cruxes$() $(br)$(li)Raw Copper Block$(li)Quartz Block$(li)Calcite"
     }
   ]
 }

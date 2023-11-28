@@ -48,6 +48,7 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Random;
 
 public class ShellTE extends RandomizableContainerBlockEntity implements MenuProvider {
     public static final int NUMBER_OF_SLOTS = 5;
@@ -403,8 +404,15 @@ public class ShellTE extends RandomizableContainerBlockEntity implements MenuPro
         egem.remove(Entity.RemovalReason.DISCARDED);
         if (quality == 0) {
             stack.getOrCreateTag().putBoolean("prime", true);
+            stack.getOrCreateTag().putFloat("xScale", 1.15F);
+            stack.getOrCreateTag().putFloat("yScale", 1.15F);
+            stack.getOrCreateTag().putFloat("zScale", 1.15F);
         } else if (quality == 2) {
+            Random r = new Random();
             stack.getOrCreateTag().putBoolean("defective", true);
+            stack.getOrCreateTag().putFloat("xScale", 1 - r.nextFloat(.45F));
+            stack.getOrCreateTag().putFloat("yScale", 1 - r.nextFloat(.45F));
+            stack.getOrCreateTag().putFloat("zScale", 1 - r.nextFloat(.45F));
         }
         this.setItem(ShellTE.PEARL_OUTPUT_SLOT_INDEX, stack);
         this.gravelConsumed = 0;

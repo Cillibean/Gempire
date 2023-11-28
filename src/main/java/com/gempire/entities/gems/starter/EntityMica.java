@@ -2,10 +2,7 @@ package com.gempire.entities.gems.starter;
 
 import com.gempire.entities.abilities.AbilityZilch;
 import com.gempire.entities.abilities.base.Ability;
-import com.gempire.entities.ai.EntityAIFollowAssigned;
-import com.gempire.entities.ai.EntityAIFollowOwner;
-import com.gempire.entities.ai.EntityAIMakePowerCrystal;
-import com.gempire.entities.ai.EntityAIWander;
+import com.gempire.entities.ai.*;
 import com.gempire.entities.bases.EntityStarterGem;
 import com.gempire.util.GemPlacements;
 import net.minecraft.tags.DamageTypeTags;
@@ -135,6 +132,7 @@ public class EntityMica extends EntityStarterGem {
         this.goalSelector.addGoal(7, new EntityAIFollowAssigned(this, 1.0D));
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
         this.goalSelector.addGoal(8, new EntityAIWander(this, 1.0D));
+        this.goalSelector.addGoal(8, new EntityAIStay(this, 1.0D));
         this.goalSelector.addGoal(8, new EntityAIFollowOwner(this, 1.0D));
         this.goalSelector.addGoal(10, new EntityAIMakePowerCrystal(this, 1.0D));
         this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, Mob.class, 6.0F, 1.0D, 1.2D, (mob)-> mob.getClassification(true)== MobCategory.MONSTER));

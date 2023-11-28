@@ -20,7 +20,6 @@ import com.mojang.brigadier.exceptions.DynamicCommandExceptionType;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.Minecraft;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.arguments.ResourceOrTagKeyArgument;
 import net.minecraft.core.*;
@@ -47,7 +46,6 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.RangedAttackMob;
@@ -75,8 +73,6 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.network.NetworkHooks;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import org.apache.commons.lang3.ArrayUtils;
-import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import javax.imageio.ImageIO;
@@ -133,6 +129,9 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     public static final EntityDataAccessor<Float> XSCALE = SynchedEntityData.defineId(EntityGem.class, EntityDataSerializers.FLOAT);
     public static final EntityDataAccessor<Float> YSCALE = SynchedEntityData.defineId(EntityGem.class, EntityDataSerializers.FLOAT);
     public static final EntityDataAccessor<Float> ZSCALE = SynchedEntityData.defineId(EntityGem.class, EntityDataSerializers.FLOAT);
+    public static final EntityDataAccessor<Integer> STAYX = SynchedEntityData.defineId(EntityGem.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Integer> STAYY = SynchedEntityData.defineId(EntityGem.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Integer> STAYZ = SynchedEntityData.defineId(EntityGem.class, EntityDataSerializers.INT);
 
 
     public boolean isCut;
@@ -262,6 +261,9 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.entityData.define(EntityGem.XSCALE, 0F);
         this.entityData.define(EntityGem.YSCALE, 0F);
         this.entityData.define(EntityGem.ZSCALE, 0F);
+        this.entityData.define(EntityGem.STAYZ, 0);
+        this.entityData.define(EntityGem.STAYX, 0);
+        this.entityData.define(EntityGem.STAYY, 0);
         this.FOLLOW_ID = UUID.randomUUID();
         this.ASSIGNED_ID = UUID.fromString("00000000-0000-0000-0000-000000000000");
         this.MASTER_OWNER = UUID.randomUUID();
@@ -330,6 +332,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.setZScale(this.generateZScale());
         this.setPrimary(this.isPrimary());
         this.setDefective(this.isDefective());
+        this.GUARD_POS = this.getOnPos().above();
         //this.setItemSlot(EquipmentSlot.OFFHAND, new ItemStack(Items.OAK_LOG));
         //if (isArcher()) this.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(Items.BOW));
         AttributeModifier PRIME = new AttributeModifier(UUID.randomUUID(), "gempirePrimaryModifier", 5D, AttributeModifier.Operation.ADDITION);
@@ -501,6 +504,9 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         compound.putFloat("xscale", this.getXScale());
         compound.putFloat("yscale", this.getYScale());
         compound.putFloat("zscale", this.getZScale());
+        compound.putInt("stayx", GUARD_POS.getX());
+        compound.putInt("stayy", GUARD_POS.getY());
+        compound.putInt("stayz", GUARD_POS.getZ());
         compound.putString("name", this.getName().getString());
         this.writeStructures(compound);
         ContainerHelper.saveAllItems(compound, this.items);
@@ -587,6 +593,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.setXScale(compound.getFloat("xscale"));
         this.setYScale(compound.getFloat("yscale"));
         this.setZScale(compound.getFloat("zscale"));
+        this.GUARD_POS = new BlockPos(compound.getInt("stayx"), compound.getInt("stayy"), compound.getInt("stayz"));
         this.idlePowers = this.generateIdlePowers();
         AttributeModifier PRIME = new AttributeModifier(UUID.randomUUID(), "gempirePrimaryModifier", 5D, AttributeModifier.Operation.ADDITION);
         AttributeModifier PRIME_SPEED = new AttributeModifier(UUID.randomUUID(), "gempirePrimarySpeedModifier", .2D, AttributeModifier.Operation.ADDITION);
@@ -2553,10 +2560,10 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         return flag;
     }
 
-    public boolean canGuard(){
+    public boolean doesIntimidate(){
         boolean flag = false;
         for(Ability ability : this.getAbilityPowers()){
-            if(ability instanceof AbilityGuard){
+            if(ability instanceof AbilityIntimidation){
                 return flag = true;
             }
         }
