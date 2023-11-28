@@ -1,24 +1,21 @@
 package com.gempire.entities.ai;
 
-import com.gempire.entities.abilities.AbilityGuard;
 import com.gempire.entities.bases.EntityGem;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 
-import java.util.List;
-
-public class EntityAIGuard extends Goal {
+public class EntityAIStay extends Goal {
     public EntityGem follower;
     public double speed;
 
-    public EntityAIGuard(EntityGem entityIn, double speedIn) {
+    public EntityAIStay(EntityGem entityIn, double speedIn) {
         this.follower = entityIn;
         this.speed = speedIn;
     }
 
     @Override
     public boolean canUse() {
-        return follower.getMovementType() == 0 && this.follower.distanceToSqr(follower.GUARD_POS.getX(), follower.GUARD_POS.getY(), follower.GUARD_POS.getZ()) > .25f && this.follower.getSludgeAmount() < 5;
+        return follower.getMovementType() == 0 && this.follower.distanceToSqr(follower.GUARD_POS.getX(), follower.GUARD_POS.getY(), follower.GUARD_POS.getZ()) > 0f && this.follower.getSludgeAmount() < 5;
     }
 
     @Override

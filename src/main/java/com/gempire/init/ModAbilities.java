@@ -1,14 +1,9 @@
 package com.gempire.init;
 
-import com.gempire.Gempire;
 import com.gempire.entities.abilities.*;
 import com.gempire.entities.abilities.base.Ability;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.RegistryObject;
 
 import java.util.ArrayList;
-import java.util.function.Supplier;
 
 public class ModAbilities {
 
@@ -57,7 +52,7 @@ public class ModAbilities {
         abilities.add(new AbilityLootmaster());
         abilities.add(new AbilityHydration());
         abilities.add(new AbilityAcidicSaliva());
-        abilities.add(new AbilityGuard());
+        abilities.add(new AbilityIntimidation());
         abilities.add(new AbilityBrewEssence());
         abilities.add(new AbilityPrismaticRefinery());
         abilities.add(new AbilityAbundance());

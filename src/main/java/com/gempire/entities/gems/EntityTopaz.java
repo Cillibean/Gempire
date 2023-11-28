@@ -64,6 +64,7 @@ public class EntityTopaz extends EntityVaryingGem {
         this.goalSelector.addGoal(7, new EntityAIFollowAssigned(this, 1.0D));
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
         this.goalSelector.addGoal(7, new EntityAIWander(this, 1.0D));
+        this.goalSelector.addGoal(7, new EntityAIStay(this, 1.0D));
         this.goalSelector.addGoal(7, new EntityAIFollowOwner(this, 1.0D));
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, EntityGem.class, 1, false, false, this::checkRebel));
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, EntityAbomination.class, 1, false, false, this::checkNotSludged));
@@ -196,7 +197,7 @@ public class EntityTopaz extends EntityVaryingGem {
     public ArrayList<Ability> definiteAbilities(){
         ArrayList<Ability> arrayList = new ArrayList<>();
         arrayList.add(new AbilityKnockback());
-        arrayList.add(new AbilityGuard());
+        arrayList.add(new AbilityIntimidation());
         return arrayList;
     }
 

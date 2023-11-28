@@ -52,10 +52,10 @@ public class EventHandler {
             if (event.getEntity().getClassification(true) == MobCategory.MONSTER) {
                 Mob entity = (Mob) event.getEntity();
                 entity.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(entity, EntityGem.class, 1, false, false, (p_234199_0_) -> {
-                    return !(p_234199_0_ instanceof EntityAgate);
+                    return !(((EntityGem)p_234199_0_).doesIntimidate());
                 }));
                 if (entity instanceof PathfinderMob) {
-                    entity.goalSelector.addGoal(1, new AvoidEntityGoal<>((PathfinderMob) entity, EntityAgate.class, 6.0F, 1.0D, 1.2D));
+                    entity.goalSelector.addGoal(1, new AvoidEntityGoal<>((PathfinderMob) entity, EntityTopaz.class, 6.0F, 1.0D, 1.2D));
                     entity.goalSelector.addGoal(2, new EntityAIFollowSpinel((Mob) event.getEntity(), 1.1D));
                 }
             }
