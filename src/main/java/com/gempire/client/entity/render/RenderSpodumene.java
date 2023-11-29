@@ -23,7 +23,7 @@ public class RenderSpodumene extends MobRenderer<EntitySpodumene, ModelSpodumene
         this.addLayer(new GemPlacementLayer(this));
         this.addLayer(new ItemInHandLayer(this, renderManagerIn.getItemInHandRenderer()));
         this.addLayer(new SkinLayer(this));
-        //this.addLayer(new FaceLayer(this));
+        this.addLayer(new FaceLayer(this));
         this.addLayer(new SpodumeneHairLayer(this));
         this.addLayer(new OutfitLayer(this));
         this.addLayer(new InsigniaLayer(this));
