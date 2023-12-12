@@ -1,10 +1,8 @@
 package com.gempire.tileentities;
 
-import com.gempire.blocks.machine.IncubatorBlock;
 import com.gempire.container.IncubatorContainer;
 import com.gempire.entities.bases.EntityGem;
 import com.gempire.entities.bases.EntityVaryingGem;
-import com.gempire.entities.gems.EntityPearl;
 import com.gempire.entities.gems.EntitySapphire;
 import com.gempire.entities.gems.starter.EntityPebble;
 import com.gempire.init.*;
@@ -12,7 +10,6 @@ import com.gempire.items.ItemChroma;
 import com.gempire.items.ItemGem;
 import com.gempire.items.ItemGemBase;
 import com.gempire.util.Color;
-import it.unimi.dsi.fastutil.Hash;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
@@ -37,18 +34,13 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.registries.RegistryObject;
 import org.apache.commons.lang3.ArrayUtils;
-import org.checkerframework.checker.units.qual.A;
-import org.checkerframework.checker.units.qual.C;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -842,9 +834,9 @@ public class IncubatorTE extends BaseContainerBlockEntity implements MenuProvide
                 incubationProgress = 0;
                 incubationTime = 0;
                 if (weight >= 800) {
-                    this.formGem(this.chromaColor, 0);
-                } else if (weight <= 400) {
                     this.formGem(this.chromaColor, 2);
+                } else if (weight <= 400) {
+                    this.formGem(this.chromaColor, 0);
                 } else {
                     this.formGem(this.chromaColor, 1);
                 }
@@ -865,9 +857,9 @@ public class IncubatorTE extends BaseContainerBlockEntity implements MenuProvide
         }
     }
 
-    //perfect = 0
+    //perfect = 2
     //normal = 1
-    //defect = 2
+    //defect = 0
     public void formGem(int chroma, int quality){
         this.getItem(IncubatorTE.ESSENCE1_INPUT_SLOT_INDEX).shrink(1);
         this.getItem(IncubatorTE.ESSENCE2_INPUT_SLOT_INDEX).shrink(1);
@@ -1030,26 +1022,13 @@ public class IncubatorTE extends BaseContainerBlockEntity implements MenuProvide
         egem.setUUID(Mth.createInsecureUUID(this.level.random));
         //egem.setSkinColorVariant(chroma);
         CompoundTag tag = new CompoundTag();
-        if (quality == 0) {
-            tag.putBoolean("prime", true);
-            egem.setPrimary(true);
-            egem.setDefective(false);
-            egem.addAdditionalSaveData(tag);
-        } else if (quality == 2) {
-            tag.putBoolean("defective", true);
-            egem.setPrimary(false);
-            egem.setDefective(true);
-            egem.addAdditionalSaveData(tag);
-        }
+        tag.putInt("quality", quality);
+        egem.addAdditionalSaveData(tag);
         egem.finalizeSpawn((ServerLevelAccessor) this.level, this.level.getCurrentDifficultyAt(this.worldPosition), MobSpawnType.MOB_SUMMONED, null, null);
         ItemStack stack = new ItemStack(gem);
         ItemGem.saveData(stack, egem);
         egem.remove(Entity.RemovalReason.DISCARDED);
-        if (quality == 0) {
-            stack.getOrCreateTag().putBoolean("prime", true);
-        } else if (quality == 2) {
-            stack.getOrCreateTag().putBoolean("defective", true);
-        }
+        stack.getOrCreateTag().putInt("quality", quality);
         this.setItem(IncubatorTE.GEM_OUTPUT_SLOT_INDEX, stack);
         primer = 0;
         incubationProgress = 0;

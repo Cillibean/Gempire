@@ -176,10 +176,10 @@ public class GemFormation {
                 clod = true;
                 clodNO = 1;
             } else if (check <= 18) {
-                gem.setDefective(false);
+                //gem.setDefective(false);
                 System.out.println("defective");
             } else if (check >= 26) {
-                gem.setPrimary(true);
+                //gem.setPrimary(true);
                 System.out.println("prime");
             }
         } else {
@@ -193,10 +193,10 @@ public class GemFormation {
                 clod = true;
                 clodNO = 1;
             } else if (check <= 20) {
-                gem.setDefective(true);
+                //gem.setDefective(true);
                 System.out.println("defective");
             } else if (check >= 28) {
-                gem.setPrimary(true);
+                //gem.setPrimary(true);
                 System.out.println("prime");
             }
         }

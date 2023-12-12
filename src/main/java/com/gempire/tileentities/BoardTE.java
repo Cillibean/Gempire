@@ -1026,7 +1026,7 @@ public class BoardTE extends BaseContainerBlockEntity implements MenuProvider {
         egem.setUUID(Mth.createInsecureUUID(this.level.random));
         //egem.setSkinColorVariant(chroma);
         CompoundTag tag = new CompoundTag();
-        if (quality == 0) {
+        /*if (quality == 0) {
             tag.putBoolean("prime", true);
             egem.setPrimary(true);
             egem.setDefective(false);
@@ -1036,7 +1036,7 @@ public class BoardTE extends BaseContainerBlockEntity implements MenuProvider {
             egem.setPrimary(false);
             egem.setDefective(true);
             egem.addAdditionalSaveData(tag);
-        }
+        }*/
         egem.finalizeSpawn((ServerLevelAccessor) this.level, this.level.getCurrentDifficultyAt(this.worldPosition), MobSpawnType.MOB_SUMMONED, null, null);
         ItemStack stack = new ItemStack(gem);
         ItemGem.saveData(stack, egem);

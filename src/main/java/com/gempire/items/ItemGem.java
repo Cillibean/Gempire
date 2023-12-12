@@ -249,8 +249,7 @@ public class ItemGem extends Item {
                             }
                         }
                         System.out.println("try");
-                        gem.setDefective(stack.getTag().getBoolean("defective"));
-                        gem.setPrimary(stack.getTag().getBoolean("prime"));
+                        gem.setQuality(stack.getTag().getInt("quality"));
                         if (item != null) {
                             System.out.println("item not null");
                             gem.spawnGem = item;
@@ -285,15 +284,14 @@ public class ItemGem extends Item {
                             if (!(gem instanceof EntityStarterGem)) {
                                 switch (this.rand.nextInt(10)) {
                                     default -> {
-                                        gem.setPrimary(false);
-                                        gem.setDefective(false);
+                                        gem.setQuality(1);
                                     }
                                     case 1 -> {
-                                        gem.setDefective(true);
+                                        gem.setQuality(0);
                                         System.out.println("defective");
                                     }
                                     case 2 -> {
-                                        gem.setPrimary(true);
+                                        gem.setQuality(2);
                                         System.out.println("prime");
                                     }
                                 }
@@ -326,11 +324,10 @@ public class ItemGem extends Item {
                         System.out.println("finalize spawn");
                         switch (this.rand.nextInt(10)) {
                             default -> {
-                                gem.setPrimary(false);
-                                gem.setDefective(false);
+                                gem.setQuality(1);
                             }
-                            case 0, 1 -> gem.setDefective(true);
-                            case 3 -> gem.setPrimary(true);
+                            case 0, 1 -> gem.setQuality(0);
+                            case 3 -> gem.setQuality(2);
                         }
                         gem.finalizeSpawn((ServerLevelAccessor) world, world.getCurrentDifficultyAt(player.blockPosition()), MobSpawnType.TRIGGERED, null, null);
                         gem.addOwner(player.getUUID());
@@ -457,10 +454,10 @@ public class ItemGem extends Item {
                         if (itemStack.getTag().contains("assignedID")) {
                             //.add(Component.translatable("Assigned" + itemStack.getTag().getUUID("assignedID"))); //to " + assigned_gem.getName().getString() + " " + assigned_gem.getFacetAndCut()));
                         }
-                        if (itemStack.getTag().getBoolean("prime")) {
+                        if (itemStack.getTag().getInt("quality") == 2) {
                             p_40553_.add(Component.translatable("Perfect").withStyle(ChatFormatting.LIGHT_PURPLE));
                         }
-                        if (itemStack.getTag().getBoolean("defective")) {
+                        if (itemStack.getTag().getInt("quality") == 0) {
                             p_40553_.add(Component.translatable("Off Colour").withStyle(ChatFormatting.LIGHT_PURPLE));
                         }
                     } else {
@@ -502,8 +499,7 @@ public class ItemGem extends Item {
         }
         tag.putString("name", gem.getName().getString());
         tag.putBoolean("cracked", gem.getCracked());
-        tag.putBoolean("prime", gem.isPrimary());
-        tag.putBoolean("defective", gem.isDefective());
+        tag.putInt("quality", gem.getQuality());
         tag.putString("facet", gem.getFacet());
         tag.putString("cut", gem.getCut());
         tag.putInt("abilitySlots", gem.getAbilitySlots());

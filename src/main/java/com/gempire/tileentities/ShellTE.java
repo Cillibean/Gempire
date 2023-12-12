@@ -348,13 +348,13 @@ public class ShellTE extends RandomizableContainerBlockEntity implements MenuPro
         ItemGem.saveData(stack, egem);
         egem.remove(Entity.RemovalReason.DISCARDED);
         if (quality == 0) {
-            stack.getOrCreateTag().putBoolean("prime", true);
+            stack.getOrCreateTag().putInt("quality", 2);
             stack.getOrCreateTag().putFloat("xScale", 1.15F);
             stack.getOrCreateTag().putFloat("yScale", 1.15F);
             stack.getOrCreateTag().putFloat("zScale", 1.15F);
         } else if (quality == 2) {
             Random r = new Random();
-            stack.getOrCreateTag().putBoolean("defective", true);
+            stack.getOrCreateTag().putInt("quality", 0);
             stack.getOrCreateTag().putFloat("xScale", 1 - r.nextFloat(.45F));
             stack.getOrCreateTag().putFloat("yScale", 1 - r.nextFloat(.45F));
             stack.getOrCreateTag().putFloat("zScale", 1 - r.nextFloat(.45F));

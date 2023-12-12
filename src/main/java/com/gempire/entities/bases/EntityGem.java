@@ -83,8 +83,6 @@ import java.util.*;
 public abstract class EntityGem extends PathfinderMob implements RangedAttackMob, Container, MenuProvider, ContainerListener {
     //public static DataParameter<Optional<UUID>> OWNER_ID = EntityDataManager.<Optional<UUID>>createKey(EntityGem.class, DataSerializers.OPTIONAL_UNIQUE_ID);
     public static final EntityDataAccessor<Boolean> HAS_CUSTOM_NAME = SynchedEntityData.<Boolean>defineId(EntityGem.class, EntityDataSerializers.BOOLEAN);
-    public static final EntityDataAccessor<Boolean> PRIMARY = SynchedEntityData.<Boolean>defineId(EntityGem.class, EntityDataSerializers.BOOLEAN);
-    public static final EntityDataAccessor<Boolean> DEFECTIVE = SynchedEntityData.<Boolean>defineId(EntityGem.class, EntityDataSerializers.BOOLEAN);
     public static final EntityDataAccessor<Boolean> EMOTIONAL = SynchedEntityData.<Boolean>defineId(EntityGem.class, EntityDataSerializers.BOOLEAN);
     public static final EntityDataAccessor<Integer> SKIN_COLOR = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<Integer> HAIR_COLOR = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
@@ -129,9 +127,8 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     public static final EntityDataAccessor<Float> XSCALE = SynchedEntityData.defineId(EntityGem.class, EntityDataSerializers.FLOAT);
     public static final EntityDataAccessor<Float> YSCALE = SynchedEntityData.defineId(EntityGem.class, EntityDataSerializers.FLOAT);
     public static final EntityDataAccessor<Float> ZSCALE = SynchedEntityData.defineId(EntityGem.class, EntityDataSerializers.FLOAT);
-    public static final EntityDataAccessor<Integer> STAYX = SynchedEntityData.defineId(EntityGem.class, EntityDataSerializers.INT);
-    public static final EntityDataAccessor<Integer> STAYY = SynchedEntityData.defineId(EntityGem.class, EntityDataSerializers.INT);
-    public static final EntityDataAccessor<Integer> STAYZ = SynchedEntityData.defineId(EntityGem.class, EntityDataSerializers.INT);
+
+    public static final EntityDataAccessor<Integer> QUALITY = SynchedEntityData.defineId(EntityGem.class, EntityDataSerializers.INT);
 
 
     public boolean isCut;
@@ -212,8 +209,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         super(type, worldIn);
         //this.dataManager.register(EntityGem.OWNER_ID, Optional.ofNullable(UUID.randomUUID()));
         this.entityData.define(EntityGem.HAS_CUSTOM_NAME, false);
-        this.entityData.define(EntityGem.PRIMARY, false);
-        this.entityData.define(EntityGem.DEFECTIVE, false);
+        this.entityData.define(EntityGem.QUALITY, 1);
         this.entityData.define(EntityGem.EMOTIONAL, false);
         this.entityData.define(EntityGem.SKIN_COLOR, 0);
         this.entityData.define(EntityGem.HAIR_COLOR, 0);
@@ -261,9 +257,6 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.entityData.define(EntityGem.XSCALE, 0F);
         this.entityData.define(EntityGem.YSCALE, 0F);
         this.entityData.define(EntityGem.ZSCALE, 0F);
-        this.entityData.define(EntityGem.STAYZ, 0);
-        this.entityData.define(EntityGem.STAYX, 0);
-        this.entityData.define(EntityGem.STAYY, 0);
         this.FOLLOW_ID = UUID.randomUUID();
         this.ASSIGNED_ID = UUID.fromString("00000000-0000-0000-0000-000000000000");
         this.MASTER_OWNER = UUID.randomUUID();
@@ -330,8 +323,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.setXScale(this.generateXScale());
         this.setYScale(this.generateYScale());
         this.setZScale(this.generateZScale());
-        this.setPrimary(this.isPrimary());
-        this.setDefective(this.isDefective());
+        this.setQuality(this.getQuality());
         this.GUARD_POS = this.getOnPos().above();
         //this.setItemSlot(EquipmentSlot.OFFHAND, new ItemStack(Items.OAK_LOG));
         //if (isArcher()) this.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(Items.BOW));
@@ -475,8 +467,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         compound.putString("facet", this.getFacet());
         compound.putString("cut", this.getCut());
         compound.putBoolean("rebel", this.getRebelled());
-        compound.putBoolean("prime", this.isPrimary());
-        compound.putBoolean("defective", this.isDefective());
+        compound.putInt("quality", this.getQuality());
         compound.putBoolean("isHostile", this.getHostile());
         compound.putBoolean("cracked", this.getCracked());
         compound.putBoolean("assigned", this.getAssigned());
@@ -504,9 +495,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         compound.putFloat("xscale", this.getXScale());
         compound.putFloat("yscale", this.getYScale());
         compound.putFloat("zscale", this.getZScale());
-        compound.putInt("stayx", GUARD_POS.getX());
-        compound.putInt("stayy", GUARD_POS.getY());
-        compound.putInt("stayz", GUARD_POS.getZ());
+        compound.putLong("stay", GUARD_POS.asLong());
         compound.putString("name", this.getName().getString());
         this.writeStructures(compound);
         ContainerHelper.saveAllItems(compound, this.items);
@@ -587,13 +576,12 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.setSludgeAmount(compound.getInt("sludgeAmount"));
         this.setCracked(compound.getBoolean("cracked"));
         this.setAssigned(compound.getBoolean("assigned"));
-        this.setPrimary(compound.getBoolean("prime"));
-        this.setDefective(compound.getBoolean("defective"));
+        this.setQuality(compound.getInt("quality"));
         this.setShatter(compound.getBoolean("shatter"));
         this.setXScale(compound.getFloat("xscale"));
         this.setYScale(compound.getFloat("yscale"));
         this.setZScale(compound.getFloat("zscale"));
-        this.GUARD_POS = new BlockPos(compound.getInt("stayx"), compound.getInt("stayy"), compound.getInt("stayz"));
+        this.GUARD_POS = BlockPos.of(compound.getLong("stay"));
         this.idlePowers = this.generateIdlePowers();
         AttributeModifier PRIME = new AttributeModifier(UUID.randomUUID(), "gempirePrimaryModifier", 5D, AttributeModifier.Operation.ADDITION);
         AttributeModifier PRIME_SPEED = new AttributeModifier(UUID.randomUUID(), "gempirePrimarySpeedModifier", .2D, AttributeModifier.Operation.ADDITION);
@@ -1967,20 +1955,20 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
 
     public abstract byte EmotionThreshold();
 
-    public boolean isPrimary(){
-        return this.entityData.get(EntityGem.PRIMARY);
+    public void setQuality(int value){
+        this.entityData.set(EntityGem.QUALITY, value);
     }
 
-    public void setPrimary(boolean value){
-        this.entityData.set(EntityGem.PRIMARY, value);
+    public int getQuality(){
+        return this.entityData.get(EntityGem.QUALITY);
+    }
+
+    public boolean isPrimary(){
+        return this.entityData.get(EntityGem.QUALITY) == 2;
     }
 
     public boolean isDefective(){
-        return this.entityData.get(EntityGem.DEFECTIVE);
-    }
-
-    public void setDefective(boolean value){
-        this.entityData.set(EntityGem.DEFECTIVE, value);
+        return this.entityData.get(EntityGem.QUALITY) == 0;
     }
 
     public abstract boolean canChangeUniformColorByDefault();
