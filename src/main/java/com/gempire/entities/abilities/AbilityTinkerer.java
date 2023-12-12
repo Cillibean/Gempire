@@ -9,7 +9,7 @@ import net.minecraft.world.item.*;
 public class AbilityTinkerer extends Ability implements IIdleAbility {
 
     public AbilityTinkerer(){
-        super(52, 4);
+        super("tinkerer", 4);
     }
 
     @Override

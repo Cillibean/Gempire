@@ -9,7 +9,7 @@ import net.minecraft.world.effect.MobEffects;
 public class AbilityBerserker extends Ability implements IIdleAbility {
 
     public AbilityBerserker(){
-        super(33, 5);
+        super("berserker", 5);
     }
 
     @Override

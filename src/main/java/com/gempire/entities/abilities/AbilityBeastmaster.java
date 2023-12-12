@@ -13,7 +13,7 @@ import java.util.List;
 public class AbilityBeastmaster extends Ability implements IIdleAbility {
 
     public AbilityBeastmaster() {
-        super(34, 1);
+        super("beastmaster", 1);
     }
 
     @Override

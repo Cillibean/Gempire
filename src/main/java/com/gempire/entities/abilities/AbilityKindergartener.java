@@ -11,7 +11,7 @@ import java.util.List;
 public class AbilityKindergartener extends Ability implements IIdleAbility {
 
     public AbilityKindergartener(){
-        super(49, 3);
+        super("kindergartener", 3);
     }
     EntityGem gemToTame;
     @Override

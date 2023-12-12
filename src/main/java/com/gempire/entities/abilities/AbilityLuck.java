@@ -14,7 +14,7 @@ import java.util.List;
 public class AbilityLuck extends Ability implements IEffectAbility, IEmotionalAbility {
 
     public AbilityLuck() {
-        super(5, 2);
+        super("luck", 2);
     }
 
     @Override

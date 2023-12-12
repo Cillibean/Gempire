@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class AbilityStern extends Ability implements IAreaAbility, IEffectAbility {
 
     public AbilityStern() {
-        super(10, 3);
+        super("stern", 3);
     }
 
     @Override

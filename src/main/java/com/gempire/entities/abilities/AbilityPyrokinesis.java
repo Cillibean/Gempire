@@ -12,7 +12,7 @@ import net.minecraft.network.chat.Component;
 public class AbilityPyrokinesis extends Ability implements IMeleeAbility, IEmotionalAbility, IViolentAbility {
 
     public AbilityPyrokinesis() {
-        super(2, 1);
+        super("pyrokinesis", 1);
     }
 
     @Override

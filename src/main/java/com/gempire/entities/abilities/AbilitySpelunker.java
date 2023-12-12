@@ -20,7 +20,7 @@ public class AbilitySpelunker extends Ability implements IIdleAbility {
     boolean foundBlock = false;
 
     public AbilitySpelunker(){
-        super(23, 4);
+        super("spelunker", 4);
     }
 
     @Override

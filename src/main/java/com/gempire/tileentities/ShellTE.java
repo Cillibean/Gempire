@@ -248,7 +248,6 @@ public class ShellTE extends RandomizableContainerBlockEntity implements MenuPro
 
     public void HandleEssenceTick() {
         if (this.gravelConsumed == ShellTE.MAX_GRAVEL && this.sandConsumed == ShellTE.MAX_SAND && this.clayConsumed == ShellTE.MAX_CLAY && this.chromaConsumed) {
-            //ESSENCE CHECK
                 //TODO: MAKE THERE BE A CHANCE OF MAGIC MOSS APPEARING
                 if (this.level.getBlockState(this.worldPosition.offset(ShellTE.direction(4))).getBlock() == ModBlocks.WHITE_ESSENCE_BLOCK.get()) {
                     LiquidBlock block = (LiquidBlock) this.level.getBlockState(this.worldPosition.offset(ShellTE.direction(4))).getBlock();
@@ -258,7 +257,6 @@ public class ShellTE extends RandomizableContainerBlockEntity implements MenuPro
                     }
                 }
         } else if (this.gravelConsumed == ShellTE.MAX_GRAVEL/2 && this.sandConsumed == ShellTE.MAX_SAND/2 && this.clayConsumed == ShellTE.MAX_CLAY/2 && this.chromaConsumed) {
-            //ESSENCE CHECK
             if (this.level.getBlockState(this.worldPosition.offset(ShellTE.direction(4))).getBlock() == ModBlocks.WHITE_ESSENCE_BLOCK.get()) {
                 LiquidBlock block = (LiquidBlock) this.level.getBlockState(this.worldPosition.offset(ShellTE.direction(4))).getBlock();
                 if (block.getFluid() == ModFluids.WHITE_ESSENCE.get()) {
@@ -267,7 +265,6 @@ public class ShellTE extends RandomizableContainerBlockEntity implements MenuPro
                 }
             }
         } else if (this.gravelConsumed == ShellTE.MAX_GRAVEL/4 && this.sandConsumed == ShellTE.MAX_SAND/4 && this.clayConsumed == ShellTE.MAX_CLAY/4 && this.chromaConsumed) {
-            //ESSENCE CHECK
             if (this.level.getBlockState(this.worldPosition.offset(ShellTE.direction(4))).getBlock() == ModBlocks.WHITE_ESSENCE_BLOCK.get()) {
                 LiquidBlock block = (LiquidBlock) this.level.getBlockState(this.worldPosition.offset(ShellTE.direction(4))).getBlock();
                 if (block.getFluid() == ModFluids.WHITE_ESSENCE.get()) {
@@ -312,56 +309,7 @@ public class ShellTE extends RandomizableContainerBlockEntity implements MenuPro
     //normal = 1
     //defect = 2
     public void formPearl(int chroma, int quality){
-        /*RegistryObject<EntityType<EntityPebble>> gemm = ModEntities.PEBBLE;
-        String skinColorVariant = "";
-        EntityGem gem = gemm.get().create(world);
-        String namee = "";
-        boolean dying = false;
-        List<EntityGem> list;
-            if (Objects.equals(this.ID, Gempire.MODID)) {
-                namee = Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(this)).toString().replaceAll("gempire", "").replaceAll("gem", "").replaceAll(":", "").replaceAll(" ", "");
-            } else {
-                namee = Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(this)).toString().replaceAll(this.ID, "").replaceAll("gem", "").replaceAll(":", "").replaceAll(" ", "");
-            }
-            //This whole section here checks for variations in color so it can spawn the correct type of gem
-            String[] ainmneacha = namee.split("_");
-            boolean nullFlag = false;
-            int idx = 0;
-            for (int i = 0; i < ainmneacha.length; i++) {
-                if (ainmneacha[i].isEmpty()) {
-                    nullFlag = true;
-                    idx = i;
-                }
-            }
-            if (nullFlag) ainmneacha = ArrayUtils.remove(ainmneacha, idx);
-            namee = ainmneacha[0];
-            if (ainmneacha.length > 1) skinColorVariant = ainmneacha[1];
-            for (String s : ainmneacha) {
-                System.out.println(s);
-            }
-            //End of check and set
-            try {
-                if (Objects.equals(this.ID, Gempire.MODID)) {
-                    gemm = (RegistryObject<EntityType<EntityPebble>>) ModEntities.class.getField(namee.toUpperCase()).get(null);
-                } else {
-                    gemm = (RegistryObject<EntityType<EntityPebble>>) AddonHandler.ADDON_ENTITY_REGISTRIES.get(this.ID).getField(namee.toUpperCase()).get(null);
-                }
-                gem = gemm.get().create(world);
-                System.out.println("gem " + gem);
-                assert gem != null;
-                gem.setUUID(Mth.createInsecureUUID(world.random));
-                System.out.println(gem.getUUID());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-                if (ainmneacha.length > 1) {
-                    assert gem != null;
-                    gem.setSkinVariantOnInitialSpawn = false;
-                    gem.initalSkinVariant = Integer.parseInt(skinColorVariant);
-                }
-            GemFormEvent event = new GemFormEvent(gem, gem.blockPosition());
-            */
-        RegistryObject<Item> gemm = ModItems.PEBBLE_GEM;
+        RegistryObject<Item> gemm;
         ItemGem gem = null;
         String name = Color.getColorName(chroma).toUpperCase() +"_PEARL_GEM";
         try {
@@ -373,7 +321,6 @@ public class ShellTE extends RandomizableContainerBlockEntity implements MenuPro
         RegistryObject<EntityType<EntityPearl>> egemm = ModEntities.PEARL;
         EntityGem egem = egemm.get().create(this.level);
         egem.setUUID(Mth.createInsecureUUID(this.level.random));
-        String namee = "";
         String skinColorVariant = "";
         String[] array = name.split("_");
         boolean nullFlag = false;
@@ -385,7 +332,6 @@ public class ShellTE extends RandomizableContainerBlockEntity implements MenuPro
             }
         }
         if (nullFlag) array = ArrayUtils.remove(array, idx);
-        namee = array[0];
         if (array.length > 1) skinColorVariant = array[0];
         for (String s : array) {
             System.out.println(s);
@@ -397,7 +343,6 @@ public class ShellTE extends RandomizableContainerBlockEntity implements MenuPro
             egem.setSkinVariantOnInitialSpawn = false;
             egem.initalSkinVariant = chromaColor;
         }
-        //egem.setSkinColorVariant(chroma);
         egem.finalizeSpawn((ServerLevelAccessor) this.level, this.level.getCurrentDifficultyAt(this.worldPosition), MobSpawnType.MOB_SUMMONED, null, null);
         ItemStack stack = new ItemStack(gem);
         ItemGem.saveData(stack, egem);

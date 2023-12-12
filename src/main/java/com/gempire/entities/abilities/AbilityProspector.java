@@ -15,7 +15,7 @@ public class AbilityProspector extends Ability implements IIdleAbility {
     //TODO: FIX PROSPECTOR
     // make it not lag
     public AbilityProspector(){
-        super(22, 5);
+        super("prospector", 5);
     }
 
     @Override

@@ -9,7 +9,7 @@ import net.minecraft.world.effect.MobEffects;
 public class AbilityMiningInspiration extends Ability implements IEffectAbility {
 
     public AbilityMiningInspiration() {
-        super(50, 3);
+        super("mining_inspiration", 3);
     }
 
     @Override

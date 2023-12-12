@@ -13,7 +13,7 @@ import net.minecraft.world.level.block.state.BlockState;
 public class AbilityTorchBearer extends Ability implements IIdleAbility {
 
     public AbilityTorchBearer(){
-        super(24, 5);
+        super("torchbearer", 5);
     }
 
     @Override

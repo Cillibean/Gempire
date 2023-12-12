@@ -22,7 +22,7 @@ public class AbilityRecycler extends Ability implements IIdleAbility {
     RecipeManager manager;
     int timer = 0;
     public AbilityRecycler() {
-        super(15, 7);
+        super("recycler", 7);
     }
 
     @Override

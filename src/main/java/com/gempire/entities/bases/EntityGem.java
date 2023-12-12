@@ -599,14 +599,14 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         AttributeModifier PRIME_SPEED = new AttributeModifier(UUID.randomUUID(), "gempirePrimarySpeedModifier", .2D, AttributeModifier.Operation.ADDITION);
         AttributeModifier DEFECTIVE = new AttributeModifier(UUID.randomUUID(), "gempireDefectiveModifier", -5D, AttributeModifier.Operation.ADDITION);
         AttributeModifier DEFECTIVE_SPEED = new AttributeModifier(UUID.randomUUID(), "gempireDefectiveSpeedModifier", -.1D, AttributeModifier.Operation.ADDITION);
-        if (this.isPrimary()) {
+        if (this.isPrimary() && !(this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(PRIME_SPEED)) && !(this.getAttribute(Attributes.MAX_HEALTH).hasModifier(PRIME))) {
             System.out.println("prime modifiers");
             this.getAttribute(Attributes.MAX_HEALTH).addPermanentModifier(PRIME);
             this.getAttribute(Attributes.MOVEMENT_SPEED).addPermanentModifier(PRIME_SPEED);
             this.getAttribute(Attributes.ATTACK_DAMAGE).addPermanentModifier(PRIME);
             this.getAttribute(Attributes.ATTACK_SPEED).addPermanentModifier(PRIME);
             this.getAttribute(Attributes.KNOCKBACK_RESISTANCE).addPermanentModifier(PRIME);
-        } else if (this.isDefective()) {
+        } else if (this.isDefective() && !(this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(DEFECTIVE_SPEED)) && !(this.getAttribute(Attributes.MAX_HEALTH).hasModifier(DEFECTIVE))) {
             System.out.println("off colour modifiers");
             this.getAttribute(Attributes.MAX_HEALTH).addPermanentModifier(DEFECTIVE);
             this.getAttribute(Attributes.MOVEMENT_SPEED).addPermanentModifier(DEFECTIVE_SPEED);
@@ -2054,12 +2054,13 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         if(!getab.isEmpty()) {
             String[] powerViolenceList = getab.split(",");
             for (String s : powerViolenceList) {
-                Ability ability = ModAbilities.getAbility(Integer.parseInt(s));
-                assert ability != null;
-                ability.assignAbility(this);
-                powers.add(ability);
-                if((ability instanceof IEffectAbility || ability instanceof IAreaAbility) && !(ability instanceof IViolentAbility)){
-                    this.entityData.set(EntityGem.USES_AREA_ABILITIES, true);
+                Ability ability = ModAbilities.getAbility(s);
+                if (ability != null) {
+                    ability.assignAbility(this);
+                    powers.add(ability);
+                    if ((ability instanceof IEffectAbility || ability instanceof IAreaAbility) && !(ability instanceof IViolentAbility)) {
+                        this.entityData.set(EntityGem.USES_AREA_ABILITIES, true);
+                    }
                 }
             }
         }
@@ -2786,8 +2787,8 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
 
 
 
-    //TODO: ADDON STUFF
     //TODO: CORRUPTION
+    //TODO: FUSION
 
 
 

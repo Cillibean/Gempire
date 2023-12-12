@@ -6,7 +6,7 @@ import net.minecraft.network.chat.Component;
 public class AbilityZilch extends Ability {
 
     public AbilityZilch() {
-        super(0, 10);
+        super("zilch", 10);
     }
 
     @Override

@@ -6,7 +6,7 @@ import net.minecraft.network.chat.Component;
 public class AbilityRecall extends Ability {
 
     public AbilityRecall() {
-        super(48, 3);
+        super("recall", 3);
     }
 
     @Override

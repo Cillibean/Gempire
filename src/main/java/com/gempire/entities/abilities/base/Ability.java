@@ -7,10 +7,11 @@ import java.util.HashMap;
 
 public abstract class Ability {
     public EntityGem holder;
-    int id;
+    //int id;
+    String id;
     int weight;
     public int cooldown;
-    public Ability(int id, int weight) {
+    public Ability(String id, int weight) {
         this.id = id;
         this.weight = weight;
     }
@@ -20,7 +21,7 @@ public abstract class Ability {
         return this;
     }
 
-    public int getId() {
+    public String getId() {
         return this.id;
     }
 
