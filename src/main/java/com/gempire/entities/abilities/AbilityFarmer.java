@@ -11,7 +11,7 @@ public class AbilityFarmer extends Ability implements IIdleAbility {
     // Currently doesnt have an area limit, doesnt work properly
 
     public AbilityFarmer(){
-        super(28, 5);
+        super("farmer", 5);
     }
 
     @Override

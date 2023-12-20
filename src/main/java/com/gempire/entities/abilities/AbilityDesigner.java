@@ -8,7 +8,7 @@ import net.minecraft.world.item.Items;
 
 public class AbilityDesigner extends Ability implements ICraftingAbility {
     public AbilityDesigner(){
-        super(46, 5);
+        super("designer", 5);
     }
 
     @Override

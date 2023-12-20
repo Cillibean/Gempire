@@ -237,7 +237,7 @@ public class ModItemProperties {
                     return 0.1F;
                 } else if (stack.getOrCreateTag().getBoolean("cracked")) {
                     return 0.2F;
-                } else if (stack.getOrCreateTag().getBoolean("prime")) {
+                } else if (stack.getOrCreateTag().getInt("quality") == 2) {
                     return 1.0F;
 
                 }

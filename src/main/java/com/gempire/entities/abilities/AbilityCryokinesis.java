@@ -31,7 +31,7 @@ import java.util.List;
 public class AbilityCryokinesis extends Ability implements IRangedAbility, IViolentAbility, ITaskAbility, ITargetAbility, IEmotionalAbility {
 
     public AbilityCryokinesis() {
-        super(4, 1);
+        super("cryokinesis", 1);
     }
 
     @Override

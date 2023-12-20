@@ -22,7 +22,7 @@ import java.util.Random;
 public class AbilityHydrokinesis extends Ability implements IRangedAbility, IViolentAbility, ITaskAbility, IEmotionalAbility {
 
     public AbilityHydrokinesis() {
-        super(16, 1);
+        super("hydrokinesis", 1);
     }
 
     @Override

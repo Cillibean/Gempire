@@ -7,7 +7,7 @@ import net.minecraft.network.chat.Component;
 public class AbilityAbundance extends Ability implements IViolentAbility {
 
     public AbilityAbundance() {
-        super(45, 4);
+        super("abundance", 4);
     }
 
     @Override

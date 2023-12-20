@@ -4,13 +4,14 @@ import com.gempire.entities.abilities.*;
 import com.gempire.entities.abilities.base.Ability;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class ModAbilities {
 
     public static ArrayList<Ability> abilities = new ArrayList<>();
-    public static Ability getAbility(int i) {
+    public static Ability getAbility(String i) {
         for (Ability ability : abilities) {
-            if (ability.getId() == i) {
+            if (Objects.equals(ability.getId(), i)) {
                 return ability;
             }
         }

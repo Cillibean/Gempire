@@ -66,5 +66,13 @@
         "stream": true
       }
     ]
+  },
+  "fragments": {
+    "sounds": [
+      {
+        "name": "gempire:fragments",
+        "stream": true
+      }
+    ]
   }
 }

@@ -1,30 +1,30 @@
 package com.gempire.entities.bases;
 
+import com.gempire.Gempire;
+import com.gempire.container.FusionUIContainer;
 import com.gempire.container.GemUIContainer;
 import com.gempire.entities.abilities.*;
 import com.gempire.entities.abilities.base.Ability;
 import com.gempire.entities.abilities.interfaces.*;
-import com.gempire.entities.gems.*;
+import com.gempire.entities.gems.EntityPearl;
+import com.gempire.entities.gems.EntitySapphire;
+import com.gempire.entities.gems.EntityZircon;
+import com.gempire.entities.gems.starter.EntityPebble;
 import com.gempire.entities.other.EntityAbomination;
 import com.gempire.entities.other.EntityCrawler;
 import com.gempire.entities.other.EntityShambler;
+import com.gempire.events.GemFormEvent;
 import com.gempire.events.GemPoofEvent;
-import com.gempire.init.ModAbilities;
-import com.gempire.init.ModEnchants;
-import com.gempire.init.ModItems;
-import com.gempire.init.ModSounds;
+import com.gempire.init.*;
 import com.gempire.items.*;
-import com.gempire.util.*;
-import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import com.mojang.brigadier.exceptions.DynamicCommandExceptionType;
+import com.gempire.util.Color;
+import com.gempire.util.GemPlacements;
+import com.gempire.util.PaletteType;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
-import com.mojang.datafixers.util.Pair;
-import net.minecraft.ChatFormatting;
-import net.minecraft.commands.CommandSourceStack;
-import net.minecraft.commands.arguments.ResourceOrTagKeyArgument;
-import net.minecraft.core.*;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.NonNullList;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -37,7 +37,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.tags.StructureTags;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.*;
 import net.minecraft.world.damagesource.DamageSource;
@@ -57,14 +57,9 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
-import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
-import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.levelgen.structure.Structure;
-import net.minecraft.world.level.saveddata.maps.MapDecoration;
-import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -73,15 +68,14 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.network.NetworkHooks;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.*;
 
-public abstract class EntityGem extends PathfinderMob implements RangedAttackMob, Container, MenuProvider, ContainerListener {
-    //public static DataParameter<Optional<UUID>> OWNER_ID = EntityDataManager.<Optional<UUID>>createKey(EntityGem.class, DataSerializers.OPTIONAL_UNIQUE_ID);
+public abstract class EntityFusion extends PathfinderMob implements RangedAttackMob, Container, MenuProvider, ContainerListener {
     public static final EntityDataAccessor<Boolean> HAS_CUSTOM_NAME = SynchedEntityData.<Boolean>defineId(EntityGem.class, EntityDataSerializers.BOOLEAN);
     public static final EntityDataAccessor<Boolean> EMOTIONAL = SynchedEntityData.<Boolean>defineId(EntityGem.class, EntityDataSerializers.BOOLEAN);
     public static final EntityDataAccessor<Integer> SKIN_COLOR = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
@@ -130,7 +124,6 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
 
     public static final EntityDataAccessor<Integer> QUALITY = SynchedEntityData.defineId(EntityGem.class, EntityDataSerializers.INT);
 
-
     public boolean isCut;
     public ArrayList<Ability> ABILITY_POWERS = new ArrayList<>();
     public ArrayList<UUID> OWNERS = new ArrayList<>();
@@ -139,7 +132,6 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     public UUID ASSIGNED_ID;
     public BlockPos GUARD_POS;
     public ArrayList<IIdleAbility> idlePowers = new ArrayList<>();
-    private final ItemBasedSteering booster = new ItemBasedSteering(this.entityData, BOOST_TIME, SADDLED);
 
     public byte movementType = 1;
     public byte emotionMeter = 0;
@@ -195,19 +187,45 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     public BlockPos stopGoalsPos;
     public boolean enemyDying;
     public LivingEntity enemy;
-    private static final DynamicCommandExceptionType ERROR_STRUCTURE_INVALID = new DynamicCommandExceptionType((p_207534_) -> {
-        return Component.translatable("commands.gempire.nounderstand", p_207534_);
-    });
 
-    private static final DynamicCommandExceptionType ERROR_BIOME_INVALID = new DynamicCommandExceptionType((p_207534_) -> {
-        return Component.translatable("commands.gempire.nounderstand", p_207534_);
-    });
+    String crackShatter1 = "";
+    String abilities1 = "";
+    String displayName1 = "";
+    String util1 = "";
+    String abilityUtil1 = "";
+    String owner1 = "";
+    String id1 = "";
+    String name1 = "";
+    String craft1 = "";
+    String scale1 = "";
+    String colour1 = "";
+    String variant1 = "";
+    String rebelColour1 = "";
+    String rebelVariant1 = "";
+    String facetCut1 = "";
+    String items1 = "";
+    String ID1 = "";
+    String crackShatter2 = "";
+    String abilities2 = "";
+    String displayName2 = "";
+    String util2 = "";
+    String abilityUtil2 = "";
+    String owner2 = "";
+    String id2 = "";
+    String name2 = "";
+    String craft2 = "";
+    String scale2 = "";
+    String colour2 = "";
+    String variant2 = "";
+    String rebelColour2 = "";
+    String rebelVariant2 = "";
+    String facetCut2 = "";
+    String items2 = "";
+    String ID2 = "";
 
-    public static final SimpleCommandExceptionType FAILED_EXCEPTION = new SimpleCommandExceptionType(Component.translatable("commands.gempire.nounderstand"));
 
-    public EntityGem(EntityType<? extends PathfinderMob> type, Level worldIn) {
-        super(type, worldIn);
-        //this.dataManager.register(EntityGem.OWNER_ID, Optional.ofNullable(UUID.randomUUID()));
+    protected EntityFusion(EntityType<? extends PathfinderMob> type, Level world) {
+        super(type, world);
         this.entityData.define(EntityGem.HAS_CUSTOM_NAME, false);
         this.entityData.define(EntityGem.QUALITY, 1);
         this.entityData.define(EntityGem.EMOTIONAL, false);
@@ -267,7 +285,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
 
     @Nullable
     @Override
-    public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, DifficultyInstance difficultyIn, MobSpawnType reason, @Nullable SpawnGroupData spawnDataIn, @Nullable CompoundTag dataTag) {
+    public SpawnGroupData finalizeSpawn(ServerLevelAccessor accessor, DifficultyInstance instance, MobSpawnType spawnType, @Nullable SpawnGroupData groupData, @Nullable CompoundTag compound) {
         this.setGemPlacement(this.generateGemPlacement());
         this.setSkinVariant(this.generateSkinVariant());
         if (this.setSkinVariantOnInitialSpawn) this.setSkinColorVariant(this.generateSkinColorVariant()); else this.setSkinColorVariant(this.initalSkinVariant);
@@ -304,7 +322,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.idlePowers = this.generateIdlePowers();
         if (this.spawnGem != null) this.spawnGem.remove(RemovalReason.DISCARDED);
         ItemStack stack = new ItemStack(this.getGemItem());
-        ItemGem.saveData(stack, this);
+        ItemGem.saveFusionData(stack, this);
         //setAssignedGem(((ItemGem) stack.getItem()).assigned_gem);
         System.out.println(this.getAssignedGem());
         this.setRebelHairVariant(this.generateHairVariant());
@@ -327,27 +345,9 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.GUARD_POS = this.getOnPos().above();
         //this.setItemSlot(EquipmentSlot.OFFHAND, new ItemStack(Items.OAK_LOG));
         //if (isArcher()) this.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(Items.BOW));
-        AttributeModifier PRIME = new AttributeModifier(UUID.randomUUID(), "gempirePrimaryModifier", 5D, AttributeModifier.Operation.ADDITION);
-        AttributeModifier PRIME_SPEED = new AttributeModifier(UUID.randomUUID(), "gempirePrimarySpeedModifier", .1D, AttributeModifier.Operation.ADDITION);
-        AttributeModifier DEFECTIVE = new AttributeModifier(UUID.randomUUID(), "gempireDefectiveModifier", -5D, AttributeModifier.Operation.ADDITION);
-        AttributeModifier DEFECTIVE_SPEED = new AttributeModifier(UUID.randomUUID(), "gempireDefectiveSpeedModifier", -.1D, AttributeModifier.Operation.ADDITION);
-        if (this.isPrimary()) {
-            System.out.println("prime modifiers");
-                this.getAttribute(Attributes.MAX_HEALTH).addPermanentModifier(PRIME);
-                this.getAttribute(Attributes.MOVEMENT_SPEED).addPermanentModifier(PRIME_SPEED);
-                this.getAttribute(Attributes.ATTACK_DAMAGE).addPermanentModifier(PRIME);
-                this.getAttribute(Attributes.ATTACK_SPEED).addPermanentModifier(PRIME);
-                this.getAttribute(Attributes.KNOCKBACK_RESISTANCE).addPermanentModifier(PRIME);
-        } else if (this.isDefective()) {
-            System.out.println("off colour modifiers");
-                this.getAttribute(Attributes.MAX_HEALTH).addPermanentModifier(DEFECTIVE);
-                this.getAttribute(Attributes.MOVEMENT_SPEED).addPermanentModifier(DEFECTIVE_SPEED);
-                this.getAttribute(Attributes.ATTACK_DAMAGE).addPermanentModifier(DEFECTIVE);
-                this.getAttribute(Attributes.ATTACK_SPEED).addPermanentModifier(DEFECTIVE);
-                this.getAttribute(Attributes.KNOCKBACK_RESISTANCE).addPermanentModifier(DEFECTIVE);
-        }
-        return super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
+        return super.finalizeSpawn(accessor, instance, spawnType, groupData, compound);
     }
+
 
     @Override
     protected void registerGoals() {
@@ -399,8 +399,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
 
     @Override
     public boolean canHoldItem(ItemStack stack) {
-        if (this instanceof EntityPearl) return false;
-        else if (this.isArcher()) return stack.getItem() instanceof DiggerItem || stack.getItem() instanceof BowItem || stack.getItem() instanceof AxeItem || stack.getItem() instanceof PickaxeItem || stack.getItem() instanceof DestabBase || stack.getItem() instanceof ItemShatterer;
+        if (this.isArcher()) return stack.getItem() instanceof DiggerItem || stack.getItem() instanceof BowItem || stack.getItem() instanceof AxeItem || stack.getItem() instanceof PickaxeItem || stack.getItem() instanceof DestabBase || stack.getItem() instanceof ItemShatterer;
         else if (this.isTinkerer()) return stack.getItem() instanceof DiggerItem || stack.getItem() instanceof BowItem || stack.getItem() instanceof AxeItem || stack.getItem() instanceof PickaxeItem || stack.getItem() instanceof ArmorItem || stack.getItem() instanceof DestabBase || stack.getItem() instanceof ItemShatterer;
         else if (this.canCraft()) {
             boolean bool = false;
@@ -438,6 +437,42 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     @Override
     public void addAdditionalSaveData(CompoundTag compound) {
         super.addAdditionalSaveData(compound);
+
+        //COMPONENTS NBT
+        compound.putString("abilities1", abilities1);
+        compound.putString("displayName1", displayName1);
+        compound.putString("owner1", owner1);
+        compound.putString("id1", id1);
+        compound.putString("craft1", craft1);
+        compound.putString("scale1", scale1);
+        compound.putString("colour1", colour1);
+        compound.putString("variant1", variant1);
+        compound.putString("rebelColour1" , rebelColour1);
+        compound.putString("rebelVariant1" , rebelVariant1);
+        compound.putString("abilityUtil1" , abilityUtil1);
+        compound.putString("util1" , util1);
+        compound.putString("facetCut1", facetCut1);
+        compound.putString("crackShatter1", crackShatter1);
+        compound.putString("items1", items1);
+
+        compound.putString("abilities2", abilities2);
+        compound.putString("displayName2", displayName2);
+        compound.putString("owner2", owner2);
+        compound.putString("id2", id2);
+        compound.putString("craft2", craft2);
+        compound.putString("scale2", scale2);
+        compound.putString("colour2", colour2);
+        compound.putString("variant2", variant2);
+        compound.putString("rebelColour2" , rebelColour2);
+        compound.putString("rebelVariant2" , rebelVariant2);
+        compound.putString("abilityUtil2" , abilityUtil2);
+        compound.putString("util2" , util2);
+        compound.putString("facetCut2", facetCut2);
+        compound.putString("crackShatter2", crackShatter2);
+        compound.putString("items2", items2);
+
+        //TODO: FUSION NBT
+
         compound.putString("abilities", this.getAbilities());
         compound.putString("name", this.getName().getString());
         this.writeCrackShatter(compound);
@@ -452,10 +487,8 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.writeFacetCut(compound);
         this.writeAbilityUtil(compound);
         this.writeUtil(compound);
-        if (this.canLocateStructures()) compound.putInt("structureTime", this.structureTime);
-        if (this.canLocateStructures()) this.writeStructures(compound);
-        ContainerHelper.saveAllItems(compound, this.items);
     }
+
 
     public void writeOwners(CompoundTag compound) {
         for (int i = 0; i < this.OWNERS.size(); i++) {
@@ -646,69 +679,158 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         setRebelVisorVariant(Integer.parseInt(strings[3]));
     }
 
+
     @Override
-    public void load(CompoundTag compound) {
-        super.load(compound);
-        this.setCustomName(Component.translatable(compound.getString("name")));
-        this.setAbilityPowers(this.findAbilities(compound.getString("abilities")));
-        this.setAbilities(compound.getString("abilities"));
-        if (this.canLocateStructures()) this.structureTime = compound.getInt("structureTime");
-        AttributeModifier PRIME = new AttributeModifier(UUID.randomUUID(), "gempirePrimaryModifier", 5D, AttributeModifier.Operation.ADDITION);
-        AttributeModifier PRIME_SPEED = new AttributeModifier(UUID.randomUUID(), "gempirePrimarySpeedModifier", .2D, AttributeModifier.Operation.ADDITION);
-        AttributeModifier DEFECTIVE = new AttributeModifier(UUID.randomUUID(), "gempireDefectiveModifier", -5D, AttributeModifier.Operation.ADDITION);
-        AttributeModifier DEFECTIVE_SPEED = new AttributeModifier(UUID.randomUUID(), "gempireDefectiveSpeedModifier", -.1D, AttributeModifier.Operation.ADDITION);
-        if (this.isPrimary() && !(this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(PRIME_SPEED)) && !(this.getAttribute(Attributes.MAX_HEALTH).hasModifier(PRIME))) {
-            System.out.println("prime modifiers");
-            this.getAttribute(Attributes.MAX_HEALTH).addPermanentModifier(PRIME);
-            this.getAttribute(Attributes.MOVEMENT_SPEED).addPermanentModifier(PRIME_SPEED);
-            this.getAttribute(Attributes.ATTACK_DAMAGE).addPermanentModifier(PRIME);
-            this.getAttribute(Attributes.ATTACK_SPEED).addPermanentModifier(PRIME);
-            this.getAttribute(Attributes.KNOCKBACK_RESISTANCE).addPermanentModifier(PRIME);
-        } else if (this.isDefective() && !(this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(DEFECTIVE_SPEED)) && !(this.getAttribute(Attributes.MAX_HEALTH).hasModifier(DEFECTIVE))) {
-            System.out.println("off colour modifiers");
-            this.getAttribute(Attributes.MAX_HEALTH).addPermanentModifier(DEFECTIVE);
-            this.getAttribute(Attributes.MOVEMENT_SPEED).addPermanentModifier(DEFECTIVE_SPEED);
-            this.getAttribute(Attributes.ATTACK_DAMAGE).addPermanentModifier(DEFECTIVE);
-            this.getAttribute(Attributes.ATTACK_SPEED).addPermanentModifier(DEFECTIVE);
-            this.getAttribute(Attributes.KNOCKBACK_RESISTANCE).addPermanentModifier(DEFECTIVE);
-        }
-        this.readAbilityUtil(compound);
-        this.readScale(compound);
-        this.readOwners(compound);
-        this.readIDs(compound);
-        this.readCraft(compound);
-        this.readRebelVariant(compound);
-        this.readRebelColour(compound);
-        this.readVariant(compound);
-        this.readColour(compound);
-        this.readFacetCut(compound);
-        this.readCrackShatter(compound);
-        this.readUtil(compound);
-        if (this.canLocateStructures()) this.readStructures(compound);
-        ContainerHelper.loadAllItems(compound, this.items);
-        if (this.spawnGem != null) {
-            this.spawnGem.remove(RemovalReason.DISCARDED);
-        }
+    public void readAdditionalSaveData(CompoundTag compound) {
+        super.readAdditionalSaveData(compound);
+        abilities1 = compound.getString("abilities1");
+        displayName1 = compound.getString("displayName1");
+        owner1 = compound.getString("owner1");
+        id1 = compound.getString("id1");
+        craft1 = compound.getString("craft1");
+        scale1 = compound.getString("scale1");
+        colour1 = compound.getString("colour1");
+        variant1 = compound.getString("variant1");
+        rebelColour1 = compound.getString("rebelColour1");
+        rebelVariant1 = compound.getString("rebelVariant1");
+        abilityUtil1 = compound.getString("abilityUtil1");
+        util1 = compound.getString("util1");
+        facetCut1 = compound.getString("facetCut1");
+        crackShatter1 = compound.getString("crackShatter1");
+        items1 = compound.getString("items1");
+
+        abilities2 = compound.getString("abilities2");
+        displayName2 = compound.getString("displayName2");
+        owner2 = compound.getString("owner2");
+        id2 = compound.getString("id2");
+        craft2 = compound.getString("craft2");
+        scale2 = compound.getString("scale2");
+        colour2 = compound.getString("colour2");
+        variant2 = compound.getString("variant2");
+        rebelColour2 = compound.getString("rebelColour2");
+        rebelVariant2 = compound.getString("rebelVariant2");
+        abilityUtil2 = compound.getString("abilityUtil2");
+        util2 = compound.getString("util2");
+        facetCut2 = compound.getString("facetCut2");
+        crackShatter2 = compound.getString("crackShatter2");
+        items2 = compound.getString("items2");
     }
 
-    public void readOwners(CompoundTag compound) {
-        this.OWNERS = new ArrayList<>();
-        int n = compound.getInt("ownerAmount");
-        for (int i = 0; i < n; i++) {
-            this.OWNERS.add(compound.getUUID("owner" + i));
-        }
-    }
 
-    public void readStructures(CompoundTag compound) {
-        this.structures = new ArrayList<>();
-        int n = compound.getInt("structureAmount");
-        for (int i = 0; i < n; i++) {
-            this.structures.add(compound.getString("structure" + i));
-        }
-        this.biomes = new ArrayList<>();
-        int t = compound.getInt("biomeAmount");
-        for (int i = 0; i < t; i++) {
-            this.biomes.add(compound.getString("biome" + i));
+
+    public void unfuse() {
+        Level level = this.getLevel();
+        if (!level.isClientSide) {
+            RegistryObject<EntityType<EntityPebble>> gemm1 = ModEntities.PEBBLE;
+            RegistryObject<EntityType<EntityPebble>> gemm2 = ModEntities.PEBBLE;
+            EntityGem gem1 = gemm1.get().create(level);
+            EntityGem gem2 = gemm2.get().create(level);
+            try {
+                if (Objects.equals(this.ID1, Gempire.MODID)) {
+                    gemm1 = (RegistryObject<EntityType<EntityPebble>>) ModEntities.class.getField(name1.toUpperCase()).get(null);
+                } else {
+                    gemm1 = (RegistryObject<EntityType<EntityPebble>>) AddonHandler.ENTITY_ADDON_ENTITY_REGISTRIES.get(name1).getField(name1.toUpperCase()).get(null);
+                }
+                gem1 = gemm1.get().create(level);
+                assert gem1 != null;
+                gem1.setUUID(Mth.createInsecureUUID(level.random));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            try {
+                if (Objects.equals(this.ID2, Gempire.MODID)) {
+                    gemm2 = (RegistryObject<EntityType<EntityPebble>>) ModEntities.class.getField(name2.toUpperCase()).get(null);
+                } else {
+                    gemm2 = (RegistryObject<EntityType<EntityPebble>>) AddonHandler.ENTITY_ADDON_ENTITY_REGISTRIES.get(name2).getField(name2.toUpperCase()).get(null);
+                }
+                gem2 = gemm2.get().create(level);
+                assert gem2 != null;
+                gem2.setUUID(Mth.createInsecureUUID(level.random));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            CompoundTag tag1 = new CompoundTag();
+            tag1.putString("abilities", abilities1);
+            tag1.putString("name", displayName1);
+            tag1.putString("owner", owner1);
+            tag1.putString("id", id1);
+            tag1.putString("craft", craft1);
+            tag1.putString("scale", scale1);
+            tag1.putString("colour", colour1);
+            tag1.putString("variant", variant1);
+            tag1.putString("rebelColour" , rebelColour1);
+            tag1.putString("rebelVariant" , rebelVariant1);
+            tag1.putString("abilityUtil" , abilityUtil1);
+            tag1.putString("util" , util1);
+            tag1.putString("facetCut", facetCut1);
+            tag1.putString("crackShatter", crackShatter1);
+            tag1.putString("items", items1);
+            gem1.load(tag1);
+            CompoundTag tag2 = new CompoundTag();
+            tag2.putString("abilities", abilities2);
+            tag2.putString("name", displayName2);
+            tag2.putString("owner", owner2);
+            tag2.putString("id", id2);
+            tag2.putString("craft", craft2);
+            tag2.putString("scale", scale2);
+            tag2.putString("colour", colour2);
+            tag2.putString("variant", variant2);
+            tag2.putString("rebelColour" , rebelColour2);
+            tag2.putString("rebelVariant" , rebelVariant2);
+            tag2.putString("abilityUtil" , abilityUtil2);
+            tag2.putString("util" , util2);
+            tag2.putString("facetCut", facetCut2);
+            tag2.putString("crackShatter", crackShatter2);
+            tag2.putString("items", items2);
+            gem2.load(tag2);
+            if (gem1 instanceof EntityZircon) {
+                if (!((EntityZircon) gem1).getEnchantPageDefined()) {
+                    if (gem1.isPrimary()) {
+                        ((EntityZircon) gem1).setEnchantPage(RandomSource.create().nextInt(ModEnchants.GEMPIRE_ENCHANTMENTS.size()));
+                    } else {
+                        ((EntityZircon) gem1).setEnchantPage(RandomSource.create().nextInt(ModEnchants.VANILLA_ENCHANTMENTS.size()));
+                    }
+                    ((EntityZircon) gem1).setEnchantPageDefined(true);
+                }
+            }
+            if (gem2 instanceof EntityZircon) {
+                if (!((EntityZircon) gem2).getEnchantPageDefined()) {
+                    if (gem2.isPrimary()) {
+                        ((EntityZircon) gem2).setEnchantPage(RandomSource.create().nextInt(ModEnchants.GEMPIRE_ENCHANTMENTS.size()));
+                    } else {
+                        ((EntityZircon) gem2).setEnchantPage(RandomSource.create().nextInt(ModEnchants.VANILLA_ENCHANTMENTS.size()));
+                    }
+                    ((EntityZircon) gem2).setEnchantPageDefined(true);
+                }
+            }
+            BlockPos pos = this.getOnPos();
+            Direction direction = this.getDirection();
+            if (direction.getName().equals("north") || direction.getName().equals("south")) {
+                gem1.setPos(pos.getX() + 1.5, pos.getY() + 1.0, pos.getZ() + 0.5);
+                gem2.setPos(pos.getX() - 1.5, pos.getY() + 1.0, pos.getZ() + 0.5);
+            }
+            if (direction.getName().equals("east") || direction.getName().equals("west")) {
+                gem1.setPos(pos.getX() + 0.5, pos.getY() + 1.0, pos.getZ() + 1.5);
+                gem2.setPos(pos.getX() + 0.5, pos.getY() + 1.0, pos.getZ() - 1.5);
+            }
+            gem1.setHealth(gem1.getMaxHealth());
+            gem1.GUARD_POS = gem1.getOnPos().above();
+            gem1.clearFire();
+            gem1.removeAllEffects();
+            gem1.setDeltaMovement(0, 0, 0);
+            gem1.fallDistance = 0;
+            GemFormEvent event1 = new GemFormEvent(gem2, gem2.blockPosition());
+            gem2.setHealth(gem2.getMaxHealth());
+            gem2.GUARD_POS = gem2.getOnPos().above();
+            gem2.clearFire();
+            gem2.removeAllEffects();
+            gem2.setDeltaMovement(0, 0, 0);
+            gem2.fallDistance = 0;
+            GemFormEvent event2 = new GemFormEvent(gem2, gem2.blockPosition());
+            MinecraftForge.EVENT_BUS.post(event1);
+            MinecraftForge.EVENT_BUS.post(event2);
+            level.addFreshEntity(gem1);
+            level.addFreshEntity(gem2);
         }
     }
 
@@ -761,9 +883,9 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                                 if (effectAbility.isEntityApplicable(entity)) {
                                     effects.forEach((effectInstance -> {
                                         if (flagGem) {
-                                            if (EntityGem.sharesOwners(this, gemEntity)) {
-                                                entity.addEffect(effectInstance);
-                                            }
+                                            //if (EntityGem.sharesOwners(this, gemEntity)) {
+                                                //entity.addEffect(effectInstance);
+                                            //}
                                         }
                                         if (this.isOwner(entity)) {
                                             entity.addEffect(effectInstance);
@@ -923,9 +1045,14 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         super.tick();
     }
 
+    public void rebel() {
+        this.resetOwners();
+        this.setRebelled(true);
+    }
+
     private void checkRebel() {
-        double rebel = (0 + random.nextDouble() * 500);
-        if (rebel < rebelPoints) {
+        double rebeld = (0 + random.nextDouble() * 500);
+        if (rebeld < rebelPoints) {
             rebel();
         }
         rebelTicks = 0;
@@ -995,67 +1122,67 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     @Override
     public InteractionResult interactAt(Player player, Vec3 vec, InteractionHand hand) {
         if (!this.getRebelled() && !(this.getSludgeAmount() >= 5)) {
-                if (player.level.isClientSide) {
-                    return super.interactAt(player, vec, hand);
-                }
-                //This part of the code checks if the player has a blank hand
-                if (!level.isClientSide) {
-                    this.currentPlayer = player;
-                    if (!player.isSpectator()) {
-                        if (hand == InteractionHand.MAIN_HAND) {
-                            if (player.getItemInHand(hand).isEmpty()) {
-                                if (this.isOwner(player)) {
-                                    if (!this.isDeadOrDying()) {
-                                            if (player.isShiftKeyDown()) {
-                                                this.cycleMovementAI(player);
-                                                this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
-                                                if (OWNERS.size() <= 1 && this.MASTER_OWNER != player.getUUID()) {
-                                                    MASTER_OWNER = player.getUUID();
-                                                    System.out.println("Added master owner");
-                                                }
-                                            } else {
-                                                if (this.canOpenInventoryByDefault()) {
-                                                    NetworkHooks.openScreen((ServerPlayer) player, this, buf -> buf.writeInt(this.getId()));
-                                                    this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
-                                                }
-                                                if (this.isRideable()) {
-                                                    if (!this.isVehicle()) {
-                                                        player.startRiding(this);
-                                                        this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
-                                                    }
-                                                }
-                                            }
-                                    }
-                                } else {
-                                    //Test to see if the gem has an owner
-                                    if (!this.getOwned()) {
-                                        if (!this.isOwner(player)) {
-                                            this.addOwner(player.getUUID());
-                                            this.addMasterOwner(player.getUUID());
-                                            setFollow(player.getUUID());
-                                            player.sendSystemMessage(Component.literal("Claimed ").append(getName().getString()).append(" " + getFacetAndCut()));
-                                            this.setMovementType((byte) 2);
+            if (player.level.isClientSide) {
+                return super.interactAt(player, vec, hand);
+            }
+            //This part of the code checks if the player has a blank hand
+            if (!level.isClientSide) {
+                this.currentPlayer = player;
+                if (!player.isSpectator()) {
+                    if (hand == InteractionHand.MAIN_HAND) {
+                        if (player.getItemInHand(hand).isEmpty()) {
+                            if (this.isOwner(player)) {
+                                if (!this.isDeadOrDying()) {
+                                    if (player.isShiftKeyDown()) {
+                                        this.cycleMovementAI(player);
+                                        this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
+                                        if (OWNERS.size() <= 1 && this.MASTER_OWNER != player.getUUID()) {
+                                            MASTER_OWNER = player.getUUID();
+                                            System.out.println("Added master owner");
+                                        }
+                                    } else {
+                                        if (this.canOpenInventoryByDefault()) {
+                                            NetworkHooks.openScreen((ServerPlayer) player, this, buf -> buf.writeInt(this.getId()));
                                             this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
-                                            return super.interactAt(player, vec, hand);
+                                        }
+                                        if (this.isRideable()) {
+                                            if (!this.isVehicle()) {
+                                                player.startRiding(this);
+                                                this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
+                                            }
                                         }
                                     }
                                 }
                             } else {
-                                int count = 0;
-                                boolean requiresCountSet = false;
-                                if (!this.isDeadOrDying()) {
-                                    if (this.isOwner(player)) {
-                                        if (player.getMainHandItem().getItem() instanceof DyeItem dye) {
-                                            if (player.isShiftKeyDown()) {
-                                                if (canChangeInsigniaColorByDefault())
-                                                    this.setInsigniaColor(dye.getDyeColor().getId());
-                                            } else {
-                                                if (canChangeUniformColorByDefault())
-                                                    this.setOutfitColor(dye.getDyeColor().getId());
-                                            }
-                                        } else if (player.getMainHandItem().getItem() == Items.PAPER) {
-                                            NetworkHooks.openScreen((ServerPlayer) player, this, buf -> buf.writeInt(this.getId()));
-                                        } /*else if (player.getMainHandItem().getItem() == Items.BOOK && this.canLocateStructures()) {
+                                //Test to see if the gem has an owner
+                                if (!this.getOwned()) {
+                                    if (!this.isOwner(player)) {
+                                        this.addOwner(player.getUUID());
+                                        this.addMasterOwner(player.getUUID());
+                                        setFollow(player.getUUID());
+                                        player.sendSystemMessage(Component.literal("Claimed ").append(getName().getString()).append(" " + getFacetAndCut()));
+                                        this.setMovementType((byte) 2);
+                                        this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
+                                        return super.interactAt(player, vec, hand);
+                                    }
+                                }
+                            }
+                        } else {
+                            int count = 0;
+                            boolean requiresCountSet = false;
+                            if (!this.isDeadOrDying()) {
+                                if (this.isOwner(player)) {
+                                    if (player.getMainHandItem().getItem() instanceof DyeItem dye) {
+                                        if (player.isShiftKeyDown()) {
+                                            if (canChangeInsigniaColorByDefault())
+                                                this.setInsigniaColor(dye.getDyeColor().getId());
+                                        } else {
+                                            if (canChangeUniformColorByDefault())
+                                                this.setOutfitColor(dye.getDyeColor().getId());
+                                        }
+                                    } else if (player.getMainHandItem().getItem() == Items.PAPER) {
+                                        NetworkHooks.openScreen((ServerPlayer) player, this, buf -> buf.writeInt(this.getId()));
+                                    } /*else if (player.getMainHandItem().getItem() == Items.BOOK && this.canLocateStructures()) {
                                             StringBuilder list1 = new StringBuilder();
                                             for (int i = 0; i < this.structures.size(); i++) {
                                                 if (i == this.structures.size() - 1) {
@@ -1075,39 +1202,19 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                                             player.sendSystemMessage(Component.translatable("Findable Structures: " + list1));
                                             player.sendSystemMessage(Component.translatable("Findable Biomes: " + list2));
                                         } */else if (this.canCraft()) {
-                                            setRecipeAmount(generateRecipeAmount());
-                                            for (int i = 0; i < getRecipeAmount(); i++) {
-                                                System.out.println(i);
-                                                System.out.println("input item check");
-                                                if (player.getItemInHand(hand).getItem() == getInputItem(i)) {
-                                                    System.out.println("hand check 1");
-                                                    if (!isCrafting) {
-                                                        System.out.println(getInputItem(i).asItem());
-                                                        System.out.println("is crafting check");
-                                                        if (getInputItem(i) != Items.AIR.asItem()) {
-                                                            if (getInputItem2(i) != Items.AIR) {
-                                                                if (consumeItemCheck(getInputItem2(i), 1)) {
-                                                                    System.out.println("input item air check");
-                                                                    inputList.clear();
-                                                                    setCurrentRecipe(i);
-
-                                                                    if (this.isOwner(player)) {
-                                                                        isCrafting = true;
-                                                                        this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
-                                                                        if (!player.isCreative()) {
-                                                                            player.getMainHandItem().shrink(1);
-                                                                        }
-                                                                        ItemStack stack = new ItemStack(player.getMainHandItem().getItem());
-                                                                        stack.setCount(1);
-                                                                        if (!this.getItemBySlot(EquipmentSlot.MAINHAND).isEmpty()) {
-                                                                            ItemStack gemStack = this.getItemBySlot(EquipmentSlot.MAINHAND);
-                                                                            spawnAtLocation(gemStack);
-                                                                        }
-                                                                        this.setItemSlot(EquipmentSlot.MAINHAND, stack);
-                                                                        break;
-                                                                    }
-                                                                }
-                                                            } else {
+                                        setRecipeAmount(generateRecipeAmount());
+                                        for (int i = 0; i < getRecipeAmount(); i++) {
+                                            System.out.println(i);
+                                            System.out.println("input item check");
+                                            if (player.getItemInHand(hand).getItem() == getInputItem(i)) {
+                                                System.out.println("hand check 1");
+                                                if (!isCrafting) {
+                                                    System.out.println(getInputItem(i).asItem());
+                                                    System.out.println("is crafting check");
+                                                    if (getInputItem(i) != Items.AIR.asItem()) {
+                                                        if (getInputItem2(i) != Items.AIR) {
+                                                            if (consumeItemCheck(getInputItem2(i), 1)) {
+                                                                System.out.println("input item air check");
                                                                 inputList.clear();
                                                                 setCurrentRecipe(i);
 
@@ -1127,8 +1234,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                                                                     break;
                                                                 }
                                                             }
-                                                            } else {
-                                                            System.out.println("input item air check");
+                                                        } else {
                                                             inputList.clear();
                                                             setCurrentRecipe(i);
 
@@ -1147,23 +1253,44 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                                                                 this.setItemSlot(EquipmentSlot.MAINHAND, stack);
                                                                 break;
                                                             }
-                                                            return super.interactAt(player, vec, hand);
                                                         }
+                                                    } else {
+                                                        System.out.println("input item air check");
+                                                        inputList.clear();
+                                                        setCurrentRecipe(i);
+
+                                                        if (this.isOwner(player)) {
+                                                            isCrafting = true;
+                                                            this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
+                                                            if (!player.isCreative()) {
+                                                                player.getMainHandItem().shrink(1);
+                                                            }
+                                                            ItemStack stack = new ItemStack(player.getMainHandItem().getItem());
+                                                            stack.setCount(1);
+                                                            if (!this.getItemBySlot(EquipmentSlot.MAINHAND).isEmpty()) {
+                                                                ItemStack gemStack = this.getItemBySlot(EquipmentSlot.MAINHAND);
+                                                                spawnAtLocation(gemStack);
+                                                            }
+                                                            this.setItemSlot(EquipmentSlot.MAINHAND, stack);
+                                                            break;
+                                                        }
+                                                        return super.interactAt(player, vec, hand);
                                                     }
                                                 }
                                             }
                                         }
-                                        if (this.canHoldItem(player.getMainHandItem())) {
-                                            ItemStack stack = this.getItemBySlot(EquipmentSlot.MAINHAND);
-                                            this.setItemSlot(EquipmentSlot.MAINHAND, player.getMainHandItem());
-                                            player.setItemSlot(EquipmentSlot.MAINHAND, stack);
-                                        }
+                                    }
+                                    if (this.canHoldItem(player.getMainHandItem())) {
+                                        ItemStack stack = this.getItemBySlot(EquipmentSlot.MAINHAND);
+                                        this.setItemSlot(EquipmentSlot.MAINHAND, player.getMainHandItem());
+                                        player.setItemSlot(EquipmentSlot.MAINHAND, stack);
                                     }
                                 }
                             }
                         }
                     }
                 }
+            }
         }
         return super.interactAt(player, vec, hand);
     }
@@ -1251,14 +1378,6 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                     this.hurt(this.damageSources().magic(), 20*getMaxHealth());
                     if (((LivingEntity) source.getEntity()).getItemBySlot(EquipmentSlot.MAINHAND).getItem() instanceof ItemBlueRejuvenator) {
                         this.setAbilities(this.generateAbilities());
-                        if (this instanceof EntityZircon)
-                        {
-                            if (this.isPrimary()) {
-                                ((EntityZircon) this).setEnchantPage(RandomSource.create().nextInt(ModEnchants.GEMPIRE_ENCHANTMENTS.size()));
-                            } else {
-                                ((EntityZircon) this).setEnchantPage(RandomSource.create().nextInt(ModEnchants.VANILLA_ENCHANTMENTS.size()));
-                            }
-                        }
                         this.rebelPoints += 2.5f;
                     } else if (((LivingEntity) source.getEntity()).getItemBySlot(EquipmentSlot.MAINHAND).getItem() instanceof ItemPinkRejuvenator) {
                         this.resetOwners();
@@ -1371,28 +1490,28 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                     }
                 }
             }
-                if (this.isEmotional() && !source.is(DamageTypeTags.IS_EXPLOSION) && !source.is(DamageTypeTags.IS_FIRE)) {
-                    System.out.println("emotion meter " + emotionMeter);
-                    if (this.emotionMeter <= this.EmotionThreshold()) {
-                        if (this.EmotionThreshold() - this.emotionMeter < 5) {
-                            this.level.addParticle(ParticleTypes.ANGRY_VILLAGER, this.getX(), this.getY() + 2, this.getZ(), 0, 0, 0);
-                        }
-                        this.emotionMeter++;
-                    } else {
-                        for (Ability power : this.getAbilityPowers()) {
-                            if (power instanceof IEmotionalAbility) {
-                                ((IEmotionalAbility) power).outburst();
-                            }
-
-                        }
-                        this.meltdown = true;
-                        this.meltdownCooldown = 100;
-                        this.emotionMeter = 0;
+            if (this.isEmotional() && !source.is(DamageTypeTags.IS_EXPLOSION) && !source.is(DamageTypeTags.IS_FIRE)) {
+                System.out.println("emotion meter " + emotionMeter);
+                if (this.emotionMeter <= this.EmotionThreshold()) {
+                    if (this.EmotionThreshold() - this.emotionMeter < 5) {
+                        this.level.addParticle(ParticleTypes.ANGRY_VILLAGER, this.getX(), this.getY() + 2, this.getZ(), 0, 0, 0);
                     }
+                    this.emotionMeter++;
+                } else {
+                    for (Ability power : this.getAbilityPowers()) {
+                        if (power instanceof IEmotionalAbility) {
+                            ((IEmotionalAbility) power).outburst();
+                        }
+
+                    }
+                    this.meltdown = true;
+                    this.meltdownCooldown = 100;
+                    this.emotionMeter = 0;
                 }
-                if (source.getEntity() instanceof EntityCrawler || source.getEntity() instanceof EntityShambler || source.getEntity() instanceof EntityAbomination) {
-                    setSludgeAmount(getSludgeAmount() + 1);
-                }
+            }
+            if (source.getEntity() instanceof EntityCrawler || source.getEntity() instanceof EntityShambler || source.getEntity() instanceof EntityAbomination) {
+                setSludgeAmount(getSludgeAmount() + 1);
+            }
         }
         return super.hurt(source, amount);
     }
@@ -1456,6 +1575,39 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         if(!this.level.isClientSide){
             System.out.println("not clientside");
             this.playSound(ModSounds.POOF.get());
+            ItemStack stack1 = new ItemStack(this.getGem1Item());
+            //ItemGem.saveData(stack, this);
+            if (stack1.getItem() != ModItems.PEBBLE_GEM.get() &&
+                    stack1.getItem() != ModItems.MICA_GEM.get() &&
+                    stack1.getItem() != ModItems.NACRE_GEM.get() &&
+                    stack1.getItem() != ModItems.SHALE_GEM.get()) {
+                this.getAttribute(Attributes.MAX_HEALTH).removeModifiers();
+                this.getAttribute(Attributes.MOVEMENT_SPEED).removeModifiers();
+                this.getAttribute(Attributes.ATTACK_DAMAGE).removeModifiers();
+                this.getAttribute(Attributes.ATTACK_SPEED).removeModifiers();
+                this.getAttribute(Attributes.KNOCKBACK_RESISTANCE).removeModifiers();
+            }
+            CompoundTag tag1 = new CompoundTag();
+            save(tag1);
+            stack1.setTag(tag1);
+            this.spawnAtLocation(stack1).setExtendedLifetime();
+            ItemStack stack2 = new ItemStack(this.getGem2Item());
+            //ItemGem.saveData(stack, this);
+            if (stack2.getItem() != ModItems.PEBBLE_GEM.get() &&
+                    stack2.getItem() != ModItems.MICA_GEM.get() &&
+                    stack2.getItem() != ModItems.NACRE_GEM.get() &&
+                    stack2.getItem() != ModItems.SHALE_GEM.get()) {
+                this.getAttribute(Attributes.MAX_HEALTH).removeModifiers();
+                this.getAttribute(Attributes.MOVEMENT_SPEED).removeModifiers();
+                this.getAttribute(Attributes.ATTACK_DAMAGE).removeModifiers();
+                this.getAttribute(Attributes.ATTACK_SPEED).removeModifiers();
+                this.getAttribute(Attributes.KNOCKBACK_RESISTANCE).removeModifiers();
+            }
+            CompoundTag tag2 = new CompoundTag();
+            save(tag2);
+            stack2.setTag(tag2);
+            this.spawnAtLocation(stack1).setExtendedLifetime();
+            /*
             GemPoofEvent event = new GemPoofEvent(this, this.blockPosition(), source);
             MinecraftForge.EVENT_BUS.post(event);
             if (!this.getItemBySlot(EquipmentSlot.MAINHAND).isEmpty()) {
@@ -1501,20 +1653,23 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             }
             this.gameEvent(GameEvent.ENTITY_PLACE);
             this.kill();
+            */
         }
         super.die(source);
     }
 
     public Component getNickname(){
-        if(this instanceof EntityVaryingGem){
+        /*if(this instanceof EntityVaryingGem){
             if(((EntityVaryingGem)this).UsesUniqueNames()) {
                 return Component.translatable("nickname.gempire." + this.getWholeGemName() + "_" + this.getSkinColorVariant());
             }
         }
-        return Component.translatable("entity.gempire." + this.getWholeGemName());
+        return Component.translatable("entity.gempire." + this.getWholeGemName());*/
+        return null;
     }
 
     public Item getGemItem() {
+        /*
         RegistryObject<Item> gemm = ModItems.PEBBLE_GEM;
         ItemGem gem = null;
         String name = "";
@@ -1536,6 +1691,16 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             e.printStackTrace();
         }
         return gem;
+        */
+        return null;
+    }
+
+    public Item getGem1Item() {
+        return null;
+    }
+
+    public Item getGem2Item() {
+        return null;
     }
 
     public Item getShardItem() {
@@ -1548,12 +1713,13 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             name = "special_shards";
         }
         try {
-            shardd = (RegistryObject<Item>) this.getItemRegister().getField(name.toUpperCase()).get(null);
-            shard = shardd.get();
+            //shardd = (RegistryObject<Item>) this.getItemRegister().getField(name.toUpperCase()).get(null);
+            //shard = shardd.get();
         } catch(Exception e){
             e.printStackTrace();
         }
-        return shard;
+        //return shard;
+        return null;
     }
 
     public static boolean sharesOwners(EntityGem gem1, EntityGem gem2){
@@ -1667,12 +1833,12 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     }
     public void popShitOut() {
         setRecipeAmount(generateRecipeAmount());
-            ItemStack itemStack = new ItemStack(getOutputItem(getCurrentRecipe()));
-            this.setItemSlot(EquipmentSlot.MAINHAND, itemStack);
-            ticking = 0;
-            this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
-            isCrafting = false;
-            setCurrentRecipe(0);
+        ItemStack itemStack = new ItemStack(getOutputItem(getCurrentRecipe()));
+        this.setItemSlot(EquipmentSlot.MAINHAND, itemStack);
+        ticking = 0;
+        this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
+        isCrafting = false;
+        setCurrentRecipe(0);
     }
 
     public int generatePaletteColor(PaletteType type) {
@@ -1694,7 +1860,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         String locString = type.type + "_palette";
         System.out.println("[DEBUG] " + locString);
         ArrayList<Integer> colors = new ArrayList<>();
-        ResourceLocation serverLoc = new ResourceLocation(this.getModID() + ":entity/" + this.getWholeGemName().toLowerCase() + "/palettes/" + locString + ".png");
+        ResourceLocation serverLoc = new ResourceLocation("gempire:entity/" + this.getWholeGemName().toLowerCase() + "/palettes/" + locString + ".png");
         BufferedImage palette = null;
         try {
             palette = ImageIO.read(this.getServer().getServerResources().resourceManager().open(serverLoc));
@@ -2105,16 +2271,20 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     }
 
     public String getGemName(){
+        /*
         if(this instanceof EntityVaryingGem){
             if(((EntityVaryingGem)this).UsesUniqueNames()){
                 return ((EntityVaryingGem)this).NameFromColor((byte) this.getSkinColorVariant());
             }
         }
         return Objects.requireNonNull(ForgeRegistries.ENTITY_TYPES.getKey(this.getType())).toString().replaceAll("(?i)item", "").replaceAll(this.getModID(), "").replaceAll("gempire", "").replaceAll("(?i)gem", "").replaceAll("_", "").replaceAll(":", "").replaceAll(" ", "");
+        */
+        return null;
     }
 
     public String getWholeGemName(){
-        return Objects.requireNonNull(ForgeRegistries.ENTITY_TYPES.getKey(this.getType())).toString().replaceAll("(?i)item", "").replaceAll(this.getModID(), "").replaceAll("gempire", "").replaceAll("(?i)gem", "").replaceAll("_", "").replaceAll(":", "").replaceAll(" ", "");
+        return null;
+        //return Objects.requireNonNull(ForgeRegistries.ENTITY_TYPES.getKey(this.getType())).toString().replaceAll("(?i)item", "").replaceAll(this.getModID(), "").replaceAll("gempire", "").replaceAll("(?i)gem", "").replaceAll("_", "").replaceAll(":", "").replaceAll(" ", "");
     }
 
     //ABILITY STUFF
@@ -2126,7 +2296,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             for (String s : powerViolenceList) {
                 Ability ability = ModAbilities.getAbility(s);
                 if (ability != null) {
-                    ability.assignAbility(this);
+                    //ability.assignAbility(this);
                     powers.add(ability);
                     if ((ability instanceof IEffectAbility || ability instanceof IAreaAbility) && !(ability instanceof IViolentAbility)) {
                         this.entityData.set(EntityGem.USES_AREA_ABILITIES, true);
@@ -2136,7 +2306,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         }
         else{
             ArrayList<Ability> nulab = new ArrayList<>();
-            nulab.add(new AbilityZilch().assignAbility(this));
+            //nulab.add(new AbilityZilch().assignAbility(this));
             return nulab;
         }
         return powers;
@@ -2356,7 +2526,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         }
     }
 
-    @Nullable
+    @javax.annotation.Nullable
     public LivingEntity getControllingPassenger() {
         Entity entity = this.getFirstPassenger();
         if (entity instanceof LivingEntity) {
@@ -2525,10 +2695,10 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         return true;
     }
 
-    @Nullable
+    @javax.annotation.Nullable
     @Override
     public AbstractContainerMenu createMenu(int p_createMenu_1_, Inventory p_createMenu_2_, Player p_createMenu_3_) {
-        return new GemUIContainer(p_createMenu_1_, p_createMenu_2_, this);
+        return new FusionUIContainer(p_createMenu_1_, p_createMenu_2_, this);
     }
 
     @Override
@@ -2643,237 +2813,5 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             }
         }
         return flag;
-    }
-
-    /*
-    COMMAND STUFF
-    */
-
-    public static void decreaseExp(Player player, float amount, ItemStack stack, boolean isEnchant) {
-        //if (isEnchant) player.onEnchantmentPerformed(stack, (int) amount);
-        //else {
-            if (player.totalExperience - amount <= 0) {
-                player.experienceLevel = 0;
-                player.experienceProgress = 0;
-                player.totalExperience = 0;
-                return;
-            }
-            player.totalExperience -= amount;
-            if (player.experienceProgress * (float) player.getXpNeededForNextLevel() <= amount) {
-                amount -= player.experienceProgress * (float) player.getXpNeededForNextLevel();
-                player.experienceProgress = 1.0f;
-                player.experienceLevel--;
-            }
-            while (player.getXpNeededForNextLevel() < amount) {
-                amount -= player.getXpNeededForNextLevel();
-                player.experienceLevel--;
-            }
-            player.experienceProgress -= amount / (float) player.getXpNeededForNextLevel();
-        /*if (!player.level.isClientSide) {
-            System.out.println(amount);
-            player.giveExperienceLevels((int) -amount);
-            if (player.experienceLevel < 0) {
-                player.experienceLevel = 0;
-                player.experienceProgress = 0.0F;
-                player.totalExperience = 0;
-            }
-        }*/
-        //}
-    }
-
-    public void runRecallCommand(ServerPlayer player) {
-        if(this.consumeItemCheck(Items.ENDER_EYE, 1)) {
-            int x = player.getRespawnPosition().getX();
-            int y = player.getRespawnPosition().getY();
-            int z = player.getRespawnPosition().getZ();
-            if (player.isCreative() ? player.experienceLevel >= 0 : player.experienceLevel >= 20) {
-                    player.teleportTo(x, y, z);
-                    this.teleportTo(x, y, z);
-                    player.sendSystemMessage(Component.translatable("commands.gempire.recall"));
-                    decreaseExp(player, 20, null, false);
-            } else {
-                player.sendSystemMessage(Component.translatable(  "messages.gempire.entity.player_need_xp"));
-            }
-        }
-        else{
-            player.sendSystemMessage(Component.translatable("commands.gempire.noeye"));
-        }
-    }
-
-    public void rebel() {
-        this.resetOwners();
-        this.setRebelled(true);
-    }
-
-    public static BlockPos findStructure(EntityGem gem, Feature<?> structure) {
-        if(gem.level.isClientSide){
-            return BlockPos.ZERO;
-        }
-        BlockPos blockpos1 = null;
-        BlockPos blockpos = new BlockPos(gem.blockPosition());
-        if(gem.structures.contains(structure.toString().replace("minecraft:", ""))) {
-             blockpos1 = ((ServerLevel) gem.getCommandSenderWorld()).findNearestMapStructure(StructureTags.VILLAGE, blockpos, 100, false);
-        }
-        if (blockpos1 == null) {
-            return BlockPos.ZERO;
-        } else {
-            return blockpos1;
-        }
-    }
-
-    public void runFindCommand(CommandSourceStack stack, ServerPlayer player, ResourceOrTagKeyArgument.Result<Structure> structure, @Nullable ResourceOrTagKeyArgument.Result<Biome> biomeResource, boolean biome) throws CommandSyntaxException {
-        if (biome) {
-            System.out.println("find command");
-            BlockPos blockpos = new BlockPos((int) stack.getPosition().x, (int) stack.getPosition().y, (int) stack.getPosition().z);
-            Pair<BlockPos, Holder<Biome>> pair = stack.getLevel().findClosestBiome3d(biomeResource, blockpos, 6400, 32, 64);
-            if (pair == null) {
-                throw ERROR_BIOME_INVALID.create(biomeResource.asPrintable());
-            } else {
-                System.out.println(biomeResource.asPrintable());
-                if(this.consumeItemCheck(Items.MAP, 1)) {
-                    boolean done = false;
-                    ItemStack map = MapItem.create(this.level, pair.getFirst().getX(), pair.getFirst().getZ(), (byte) 0, true, true);
-                    MapItemSavedData.addTargetDecoration(map, pair.getFirst(), "location", MapDecoration.Type.RED_X);
-                    String name = biomeResource.asPrintable().replaceAll("minecraft:", "").replaceAll("_", " ").replaceAll("#", "").replaceAll("forge:", "").replaceAll(":", " ");
-                    String[] name1 = name.split(" ");
-                    StringBuilder name2 = new StringBuilder();
-                    for (String s : name1) {
-                        String s1 = s.substring(0, 1).toUpperCase();
-                        String s2 = s1 + s.substring(1);
-                        name2.append(s2).append(" ");
-                        System.out.println(name2);
-                        System.out.println(s2);
-                    }
-                    name = String.valueOf(name2);
-                    map.setHoverName(Component.translatable(name).withStyle(ChatFormatting.GOLD));
-                    for (int i = 0; i < EntityGem.NUMBER_OF_SLOTS - 6; i++) {
-                        if (this.getItem(i) == ItemStack.EMPTY) {
-                            this.setItem(i, map);
-                            done = true;
-                            break;
-                        }
-                    }
-                    if (!done) {
-                        this.spawnAtLocation(map);
-                    }
-                    player.sendSystemMessage(Component.translatable("commands.gempire.foundit"));
-                }
-                else{
-                    player.sendSystemMessage(Component.translatable("commands.gempire.nomap"));
-                }
-            }
-        } else {
-            Registry<Structure> registry = stack.getLevel().registryAccess().registryOrThrow(Registries.STRUCTURE);
-            HolderSet<Structure> holderset = getHolders(structure, registry).orElseThrow(() -> {
-                return ERROR_STRUCTURE_INVALID.create(structure.asPrintable());
-            });
-            BlockPos blockpos = new BlockPos((int) stack.getPosition().x, (int) stack.getPosition().y, (int) stack.getPosition().z);
-            ServerLevel serverlevel = player.getLevel();
-            Pair<BlockPos, Holder<Structure>> pair = serverlevel.getChunkSource().getGenerator().findNearestMapStructure(serverlevel, holderset, blockpos, 100, false);
-            if (pair == null) {
-                throw ERROR_STRUCTURE_INVALID.create(structure.asPrintable());
-            } else {
-                System.out.println(structure.asPrintable());
-                if(this.consumeItemCheck(Items.MAP, 1)) {
-                    boolean done = false;
-                    ItemStack map = MapItem.create(this.level, pair.getFirst().getX(), pair.getFirst().getZ(), (byte) 0, true, true);
-                    MapItemSavedData.addTargetDecoration(map, pair.getFirst(), "location", MapDecoration.Type.RED_X);
-                    String name = structure.asPrintable().replaceAll("minecraft:", "").replaceAll("_", " ").replaceAll("#", "").replaceAll("forge:", "").replaceAll(":", " ");
-                    String[] name1 = name.split(" ");
-                    StringBuilder name2 = new StringBuilder();
-                    for (String s : name1) {
-                        String s1 = s.substring(0, 1).toUpperCase();
-                        String s2 = s1 + s.substring(1);
-                        name2.append(s2).append(" ");
-                        System.out.println(name2);
-                        System.out.println(s2);
-                    }
-                    name = String.valueOf(name2);
-                    map.setHoverName(Component.translatable(name).withStyle(ChatFormatting.GOLD));
-                    for (int i = 0; i < EntityGem.NUMBER_OF_SLOTS - 6; i++) {
-                        if (this.getItem(i) == ItemStack.EMPTY) {
-                            this.setItem(i, map);
-                            done = true;
-                            break;
-                        }
-                    }
-                    if (!done) {
-                        this.spawnAtLocation(map);
-                    }
-                    player.sendSystemMessage(Component.translatable("commands.gempire.foundit"));
-                }
-                else{
-                    player.sendSystemMessage(Component.translatable("commands.gempire.nomap"));
-                }
-            }
-        }
-    }
-
-    private static Optional<? extends HolderSet.ListBacked<Structure>> getHolders(ResourceOrTagKeyArgument.Result<Structure> p_214484_, Registry<Structure> p_214485_) {
-        return p_214484_.unwrap().map((p_214494_) -> {
-            return p_214485_.getHolder(p_214494_).map((p_214491_) -> {
-                return HolderSet.direct(p_214491_);
-            });
-        }, p_214485_::getTag);
-    }
-    public boolean canLocateStructures(){
-        System.out.println("test can locate");
-        for(Ability ability : this.getAbilityPowers()){
-            if(ability instanceof AbilityScout){
-                System.out.println("can locate");
-                return true;
-            }
-        }
-        return false;
-    }
-    public void generateScoutList(){
-        //STRUCTURES
-        ArrayList<ResourceLocation> rls = new ArrayList<>();
-        Set<ResourceLocation> sussy = ForgeRegistries.FEATURES.getKeys();
-        rls.addAll(sussy);
-        ArrayList<ResourceLocation> resourceLocations = new ArrayList<>();
-        while(resourceLocations.size() < 3){
-            int m = this.random.nextInt(sussy.size());
-            if(!resourceLocations.contains(rls.get(m))) resourceLocations.add(rls.get(m));
-        }
-        for(ResourceLocation key : resourceLocations){
-            this.structures.add(ForgeRegistries.FEATURES.getValue(key).toString().replace("minecraft:", ""));
-        }
-        //BIOMES
-        ArrayList<ResourceLocation> rls1 = new ArrayList<>();
-        Set<ResourceLocation> sus = ForgeRegistries.BIOMES.getKeys();
-        rls1.addAll(sus);
-        ArrayList<ResourceLocation> resourceLocations1 = new ArrayList<>();
-        while(resourceLocations1.size() < 3){
-            int m = this.random.nextInt(sus.size());
-            if(!resourceLocations1.contains(rls1.get(m))) resourceLocations1.add(rls1.get(m));
-        }
-        for(ResourceLocation key : resourceLocations1){
-            this.biomes.add(ForgeRegistries.BIOMES.getValue(key).toString().replace("minecraft:", ""));
-        }
-    }
-
-    public boolean isOnStructureCooldown(){
-        return false;
-    }
-
-    //-------------------------------------------------------------------------------------------------------------------------------------------------------------//
-
-
-
-    //TODO: CORRUPTION
-    //TODO: FUSION
-
-
-
-    //-------------------------------------------------------------------------------------------------------------------------------------------------------------//
-
-    public String getModID(){
-        String id[] = ForgeRegistries.ENTITY_TYPES.getKey(this.getType()).toString().split(":");
-        return id[0];
-    }
-
-    public Class getItemRegister(){
-        return ModItems.class;
     }
 }

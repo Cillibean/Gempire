@@ -12,7 +12,7 @@ import net.minecraft.world.entity.ai.goal.Goal;
 public class AbilityArcher extends Ability implements IRangedAbility, IViolentAbility, ITaskAbility {
 
     public AbilityArcher() {
-        super(51, 2);
+        super("archer", 2);
     }
 
     @Override

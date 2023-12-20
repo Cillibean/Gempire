@@ -16,7 +16,7 @@ import java.util.List;
 public class AbilityFirstAid extends Ability implements IEffectAbility, IEmotionalAbility {
 
     public AbilityFirstAid() {
-        super(11, 1);
+        super("first_aid", 1);
     }
 
     @Override

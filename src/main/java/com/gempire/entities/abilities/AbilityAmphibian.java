@@ -11,7 +11,7 @@ import net.minecraft.network.chat.Component;
 public class AbilityAmphibian extends Ability implements IEffectAbility {
 
     public AbilityAmphibian(){
-        super(17, 4);
+        super("amphibian", 4);
     }
 
     @Override

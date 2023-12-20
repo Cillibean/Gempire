@@ -6,7 +6,7 @@ import net.minecraft.network.chat.Component;
 public class AbilityIntimidation extends Ability {
 
     public AbilityIntimidation() {
-        super(41, 2);
+        super("intimidation", 2);
     }
     @Override
     public Component getName() {

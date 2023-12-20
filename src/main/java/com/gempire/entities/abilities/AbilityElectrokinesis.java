@@ -29,7 +29,7 @@ import java.util.List;
 public class AbilityElectrokinesis extends Ability implements ITaskAbility, IViolentAbility, IRangedAbility, IEmotionalAbility {
 
     public AbilityElectrokinesis() {
-        super(30, 1);
+        super("electrokinesis", 1);
     }
 
     @Override

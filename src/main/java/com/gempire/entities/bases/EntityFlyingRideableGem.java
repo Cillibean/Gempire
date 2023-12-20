@@ -180,7 +180,6 @@ public abstract class EntityFlyingRideableGem extends EntityGem implements Flyin
                 this.stopRiding();
                 if (level.isClientSide) {
                     //TODO: send messsage to server
-                    //IceAndFire.sendMSGToServer(new MessageStartRidingMob(this.getId(), false, true));
                 }
 
             }
@@ -238,7 +237,6 @@ public abstract class EntityFlyingRideableGem extends EntityGem implements Flyin
                     } else if (isGoingDown() && !isGoingUp()) {
                         vertical = -1f;
                     }
-                    // Damp the vertical motion so the dragon's head is more responsive to the control
                     else if (isControlledByLocalInstance()) {
 //                        this.setDeltaMovement(this.getDeltaMovement().multiply(1.0f, 0.8f, 1.0f));
                     }
@@ -391,9 +389,7 @@ public abstract class EntityFlyingRideableGem extends EntityGem implements Flyin
     public void move(@NotNull MoverType pType, @NotNull Vec3 pPos) {
         if (this.isVehicle()) {
             // When riding, the server side movement check is performed in ServerGamePacketListenerImpl#handleMoveVehicle
-            // verticalCollide tag might get inconsistent due to dragon's large bounding box and causes move wrongly msg
             if (isControlledByLocalInstance()) {
-                // This is how EntityDragonBase#breakBlock handles movement when breaking blocks
                 // it's done by server, however client does not fire server side events, so breakBlock() here won't work
                 if (horizontalCollision) {
                     this.setDeltaMovement(this.getDeltaMovement().multiply(0.6F, 1, 0.6F));
@@ -438,7 +434,6 @@ public abstract class EntityFlyingRideableGem extends EntityGem implements Flyin
         // The old position is seems to be given by a series compute of magic numbers
         // So I replace the number with an even more magical yet better one I tuned
         // The rider's hitbox and pov is now closer to its model, and less model clipping in first person
-        // Todo: a better way of computing rider position, and a more dynamic one that changes according to dragon's animation
 
         final float headPosX = (float) (getX()* Mth.cos((float) ((getYRot() + 90) * Math.PI / 180)));
 //        final float headPosY = (float) (getY() + (0.7F + sitProg + hoverProg + deadProg + sleepProg + flyProg + pitchY) * getRenderSize() * 0.3F + this.getScale() * 0.2F);

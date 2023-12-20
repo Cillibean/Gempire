@@ -9,7 +9,7 @@ import net.minecraft.world.level.Level;
 
 public class AbilityHydration extends Ability implements ICraftingAbility {
     public AbilityHydration(){
-        super(38, 3);
+        super("hydration", 3);
     }
 
     @Override

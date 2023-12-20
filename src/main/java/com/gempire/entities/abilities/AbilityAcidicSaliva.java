@@ -16,7 +16,7 @@ import net.minecraft.world.entity.monster.RangedAttackMob;
 public class AbilityAcidicSaliva extends Ability implements IRangedAbility, IViolentAbility, ITaskAbility {
 
     public AbilityAcidicSaliva() {
-        super(39, 2);
+        super("acidic_saliva", 2);
     }
 
     @Override

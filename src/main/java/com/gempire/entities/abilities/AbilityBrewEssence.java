@@ -8,7 +8,7 @@ import net.minecraft.world.item.Items;
 
 public class AbilityBrewEssence extends Ability implements ICraftingAbility {
     public AbilityBrewEssence(){
-        super(42, 1);
+        super("brew_essence", 1);
     }
 
     @Override

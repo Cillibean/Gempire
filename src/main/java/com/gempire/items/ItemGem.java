@@ -1,6 +1,7 @@
 package com.gempire.items;
 
 import com.gempire.Gempire;
+import com.gempire.entities.bases.EntityFusion;
 import com.gempire.entities.bases.EntityGem;
 import com.gempire.entities.bases.EntityStarterGem;
 import com.gempire.entities.gems.EntityPearl;
@@ -249,8 +250,7 @@ public class ItemGem extends Item {
                             }
                         }
                         System.out.println("try");
-                        gem.setDefective(stack.getTag().getBoolean("defective"));
-                        gem.setPrimary(stack.getTag().getBoolean("prime"));
+                        gem.setQuality(stack.getTag().getInt("quality"));
                         if (item != null) {
                             System.out.println("item not null");
                             gem.spawnGem = item;
@@ -285,15 +285,14 @@ public class ItemGem extends Item {
                             if (!(gem instanceof EntityStarterGem)) {
                                 switch (this.rand.nextInt(10)) {
                                     default -> {
-                                        gem.setPrimary(false);
-                                        gem.setDefective(false);
+                                        gem.setQuality(1);
                                     }
                                     case 1 -> {
-                                        gem.setDefective(true);
+                                        gem.setQuality(0);
                                         System.out.println("defective");
                                     }
                                     case 2 -> {
-                                        gem.setPrimary(true);
+                                        gem.setQuality(2);
                                         System.out.println("prime");
                                     }
                                 }
@@ -326,11 +325,10 @@ public class ItemGem extends Item {
                         System.out.println("finalize spawn");
                         switch (this.rand.nextInt(10)) {
                             default -> {
-                                gem.setPrimary(false);
-                                gem.setDefective(false);
+                                gem.setQuality(1);
                             }
-                            case 0, 1 -> gem.setDefective(true);
-                            case 3 -> gem.setPrimary(true);
+                            case 0, 1 -> gem.setQuality(0);
+                            case 3 -> gem.setQuality(2);
                         }
                         gem.finalizeSpawn((ServerLevelAccessor) world, world.getCurrentDifficultyAt(player.blockPosition()), MobSpawnType.TRIGGERED, null, null);
                         gem.addOwner(player.getUUID());
@@ -439,38 +437,43 @@ public class ItemGem extends Item {
                         if (itemStack.getTag().getString("name") != " ") {
                             p_40553_.add(Component.translatable(itemStack.getTag().getString("name")).withStyle(ChatFormatting.GRAY));
                         }
-                        if (itemStack.getTag().getString("facet") != " ") {
-                            p_40553_.add(Component.translatable(itemStack.getTag().getString("facet")).withStyle(ChatFormatting.GRAY));
+                        if (itemStack.getTag().getString("facetCut") != " ") {
+                            String[] string = itemStack.getTag().getString("facetCut").split(",");
+                            p_40553_.add(Component.translatable(string[0]).withStyle(ChatFormatting.GRAY));
                         }
-                        if (itemStack.getTag().getString("cut") != " ") {
-                            p_40553_.add(Component.translatable(itemStack.getTag().getString("cut")).withStyle(ChatFormatting.GRAY));
+                        if (itemStack.getTag().getString("facetCut") != " ") {
+                            String[] string = itemStack.getTag().getString("facetCut").split(",");
+                            p_40553_.add(Component.translatable(string[1]).withStyle(ChatFormatting.GRAY));
                         }
-                        if (itemStack.getTag().getBoolean("rebel")) {
+                        String[] util = itemStack.getTag().getString("util").split(",");
+                        if (Boolean.parseBoolean(util[2])) {
                             p_40553_.add(Component.translatable("Rebel").withStyle(ChatFormatting.RED));
                         }
-                        if (itemStack.getTag().getBoolean("cracked")) {
+                        String[] crackShatter = itemStack.getTag().getString("crackShatter").split(",");
+                        if (Boolean.parseBoolean(crackShatter[0])) {
                             p_40553_.add(Component.translatable("Cracked").withStyle(ChatFormatting.RED));
                         }
-                        if (itemStack.getTag().getInt("sludgeAmount") >= 5) {
+                        if (Integer.parseInt(crackShatter[3]) >= 5) {
                             p_40553_.add(Component.translatable("Sludged").withStyle(ChatFormatting.RED));
                         }
                         if (itemStack.getTag().contains("assignedID")) {
                             //.add(Component.translatable("Assigned" + itemStack.getTag().getUUID("assignedID"))); //to " + assigned_gem.getName().getString() + " " + assigned_gem.getFacetAndCut()));
                         }
-                        if (itemStack.getTag().getBoolean("prime")) {
+                        if (Integer.parseInt(util[3]) == 2) {
                             p_40553_.add(Component.translatable("Perfect").withStyle(ChatFormatting.LIGHT_PURPLE));
                         }
-                        if (itemStack.getTag().getBoolean("defective")) {
+                        if (Integer.parseInt(util[3]) == 0) {
                             p_40553_.add(Component.translatable("Off Colour").withStyle(ChatFormatting.LIGHT_PURPLE));
                         }
                     } else {
                         if (itemStack.getTag().getString("name") != " ") {
                             p_40553_.add(Component.translatable(itemStack.getTag().getString("name")).withStyle(ChatFormatting.GRAY));
                         }
-                        if (itemStack.getTag().getBoolean("cracked")) {
+                        String[] crackShatter = itemStack.getTag().getString("crackShatter").split(",");
+                        if (Boolean.parseBoolean(crackShatter[0])) {
                             p_40553_.add(Component.translatable("Cracked").withStyle(ChatFormatting.RED));
                         }
-                        if (itemStack.getTag().getInt("sludgeAmount") >= 5) {
+                        if (Integer.parseInt(crackShatter[3]) >= 5) {
                             p_40553_.add(Component.translatable("Sludged").withStyle(ChatFormatting.RED));
                         }
                         p_40553_.add(Component.translatable("Hold Shift for more info").withStyle(ChatFormatting.GOLD));
@@ -500,61 +503,39 @@ public class ItemGem extends Item {
             tag.putBoolean("pagedefined", ((EntityZircon) gem).getEnchantPageDefined());
             ContainerHelper.saveAllItems(tag, ((EntityZircon) gem).zirconItems);
         }
-        tag.putString("name", gem.getName().getString());
-        tag.putBoolean("cracked", gem.getCracked());
-        tag.putBoolean("prime", gem.isPrimary());
-        tag.putBoolean("defective", gem.isDefective());
-        tag.putString("facet", gem.getFacet());
-        tag.putString("cut", gem.getCut());
-        tag.putInt("abilitySlots", gem.getAbilitySlots());
-        gem.writeOwners(tag);
-        tag.putInt("hardness", gem.getHardness());
         tag.putString("abilities", gem.getAbilities());
-        tag.putBoolean("emotional", gem.isEmotional());
-        tag.putUUID("followID", gem.FOLLOW_ID);
-        tag.putUUID("masterID", gem.MASTER_OWNER);
-        tag.putUUID("assignedID", gem.ASSIGNED_ID);
-        tag.putByte("movementType", gem.getMovementType());
-        tag.putInt("skinColorVariant", gem.getSkinColorVariant());
-        tag.putInt("skinColor", gem.getSkinColor());
-        tag.putInt("hairColor", gem.getHairColor());
-        tag.putInt("wingColor", gem.getWingColor());
-        tag.putInt("wingVariant", gem.getWingVariant());
-        tag.putInt("skinVariant", gem.getSkinVariant());
-        tag.putInt("hairVariant", gem.getHairVariant());
-        tag.putInt("CraftTicks", gem.ticking);
-        tag.putInt("abilityTicks", gem.abilityTicks);
-        tag.putBoolean("isCrafting", gem.isCrafting);
-        tag.putFloat("xscale", gem.getXScale());
-        tag.putFloat("yscale", gem.getYScale());
-        tag.putFloat("zscale", gem.getZScale());
-        tag.putInt("gemPlacement", gem.getGemPlacement());
-        tag.putInt("gemColor", gem.getGemColor());
-        tag.putInt("outfitColor", gem.getOutfitColor());
-        tag.putInt("outfitVariant", gem.getOutfitVariant());
-        tag.putInt("insigniaColor", gem.getInsigniaColor());
-        tag.putInt("insigniaVariant", gem.getInsigniaVariant());
-        tag.putBoolean("usesAreaAbility", gem.usesAreaAbilities());
-        tag.putBoolean("rebel", gem.getRebelled());
-        tag.putBoolean("isHostile", gem.getHostile());
-        tag.putInt("focusLevel", gem.focusLevel);
-        tag.putByte("emotionMeter", gem.emotionMeter);
-        tag.putInt("markingVariant", gem.getMarkingVariant());
-        tag.putInt("markingColor", gem.getMarkingColor());
-        tag.putInt("marking2Variant", gem.getMarking2Variant());
-        tag.putInt("marking2Color", gem.getMarking2Color());
-        tag.putInt("structureTime", gem.structureTime);
-        tag.putFloat("rebelPoints", gem.rebelPoints);
-        tag.putInt("rebelTicks", gem.rebelTicks);
-        tag.putInt("rebelHairVariant", gem.getRebelHairVariant());
-        tag.putInt("rebelOutfitColor", gem.getRebelOutfitColor());
-        tag.putInt("rebelOutfitVariant", gem.getRebelOutfitVariant());
-        tag.putInt("rebelInsigniaColor", gem.getRebelInsigniaColor());
-        tag.putInt("rebelInsigniaVariant", gem.getRebelInsigniaVariant());
-        tag.putInt("crackAmount", gem.getCrackAmount());
-        tag.putInt("sludgeAmount", gem.getSludgeAmount());
-        tag.putBoolean("assigned", gem.getAssigned());
-        gem.writeStructures(tag);
+        tag.putString("name", gem.getName().getString());
+        gem.writeCrackShatter(tag);
+        gem.writeOwners(tag);
+        gem.writeIDs(tag);
+        gem.writeCraft(tag);
+        gem.writeScale(tag);
+        gem.writeColour(tag);
+        gem.writeVariant(tag);
+        gem.writeRebelColour(tag);
+        gem.writeRebelVariant(tag);
+        gem.writeFacetCut(tag);
+        gem.writeAbilityUtil(tag);
+        gem.writeUtil(tag);
+        ContainerHelper.saveAllItems(tag, gem.items);
+    }
+
+    public static void saveFusionData(ItemStack stack, EntityFusion gem) {
+        CompoundTag tag = stack.getOrCreateTag();
+        tag.putString("abilities", gem.getAbilities());
+        tag.putString("name", gem.getName().getString());
+        gem.writeCrackShatter(tag);
+        gem.writeOwners(tag);
+        gem.writeIDs(tag);
+        gem.writeCraft(tag);
+        gem.writeScale(tag);
+        gem.writeColour(tag);
+        gem.writeVariant(tag);
+        gem.writeRebelColour(tag);
+        gem.writeRebelVariant(tag);
+        gem.writeFacetCut(tag);
+        gem.writeAbilityUtil(tag);
+        gem.writeUtil(tag);
         ContainerHelper.saveAllItems(tag, gem.items);
     }
 

@@ -14,7 +14,7 @@ import net.minecraft.world.item.ItemStack;
 public class AbilityDisarming extends Ability implements IViolentAbility, IMeleeAbility {
 
     public AbilityDisarming() {
-        super(36, 3);
+        super("disarming", 3);
     }
 
     @Override

@@ -93,6 +93,7 @@ public class ClientProxy {
 
         MenuScreens.register(ModContainers.INJECTOR_CONTAINER.get(), InjectorScreen::new);
         MenuScreens.register(ModContainers.GEM_UI_CONTAINER.get(), GemUIScreen::new);
+        MenuScreens.register(ModContainers.FUSION_UI_CONTAINER.get(), FusionUIScreen::new);
         MenuScreens.register(ModContainers.SHELL_CONTAINER.get(), ShellScreen::new);
         MenuScreens.register(ModContainers.INCUBATOR_CONTAINER.get(), IncubatorScreen::new);
         MenuScreens.register(ModContainers.BOARD_CONTAINER.get(), BoardScreen::new);
@@ -384,6 +385,7 @@ public class ClientProxy {
                                 populator.accept(ModItems.STRAWBERRY.get());
 
                                 populator.accept(ModItems.REMNANTS_MUSIC_DISC.get());
+                                populator.accept(ModItems.FRAGMENTS_MUSIC_DISC.get());
 
                                 populator.accept(ModItems.SLUDGE_GLOB.get());
 

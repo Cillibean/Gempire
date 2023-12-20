@@ -8,7 +8,7 @@ import net.minecraft.world.item.Items;
 
 public class AbilityPrismaticRefinery extends Ability implements ICraftingAbility {
     public AbilityPrismaticRefinery(){
-        super(44, 4);
+        super("refinery", 4);
     }
 
     @Override

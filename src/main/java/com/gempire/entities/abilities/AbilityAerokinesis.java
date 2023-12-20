@@ -9,7 +9,7 @@ public class AbilityAerokinesis extends Ability {
     // blows things away i think - no damage dealt
 
     public AbilityAerokinesis(){
-        super(31, 1);
+        super("aerokinesis", 1);
     }
 
     @Override

@@ -19,7 +19,7 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 public class AbilityAngler extends Ability implements IIdleAbility {
 
     public AbilityAngler(){
-        super(27, 5);
+        super("angler", 5);
     }
 
     @Override

@@ -6,7 +6,7 @@ import net.minecraft.network.chat.Component;
 public class AbilityScout extends Ability {
 
     public AbilityScout(){
-        super(19, 6);
+        super("scout", 6);
     }
 
     @Override

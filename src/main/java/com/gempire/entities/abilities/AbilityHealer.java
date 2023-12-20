@@ -16,7 +16,7 @@ import java.util.List;
 public class AbilityHealer extends Ability implements IEffectAbility, IEmotionalAbility {
 
     public AbilityHealer() {
-        super(12, 1);
+        super("healer", 1);
     }
 
     @Override
