@@ -439,65 +439,21 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     public void addAdditionalSaveData(CompoundTag compound) {
         super.addAdditionalSaveData(compound);
         compound.putString("abilities", this.getAbilities());
-        compound.putBoolean("emotional", this.isEmotional());
-        this.writeOwners(compound);
-        compound.putUUID("followID", this.FOLLOW_ID);
-        compound.putUUID("assignedID", this.ASSIGNED_ID);
-        compound.putUUID("masterID", this.MASTER_OWNER);
-        compound.putByte("movementType", this.getMovementType());
-        compound.putInt("skinColorVariant", this.getSkinColorVariant());
-        compound.putInt("skinColor", this.getSkinColor());
-        compound.putInt("hairColor", this.getHairColor());
-        compound.putInt("wingColor", this.getWingColor());
-        compound.putInt("wingVariant", this.getWingVariant());
-        compound.putInt("skinVariant", this.getSkinVariant());
-        compound.putInt("hairVariant", this.getHairVariant());
-        compound.putInt("CraftTicks", this.ticking);
-        compound.putInt("abilityTicks", this.abilityTicks);
-        compound.putBoolean("isCrafting", this.isCrafting);
-        compound.putInt("gemPlacement", this.getGemPlacement());
-        compound.putInt("gemColor", this.getGemColor());
-        compound.putInt("outfitColor", this.getOutfitColor());
-        compound.putInt("outfitVariant", this.getOutfitVariant());
-        compound.putInt("insigniaColor", this.getInsigniaColor());
-        compound.putInt("insigniaVariant", this.getInsigniaVariant());
-        compound.putInt("visorVariant", this.getVisorVariant());
-        compound.putInt("abilitySlots", this.getAbilitySlots());
-        compound.putBoolean("usesAreaAbility", this.usesAreaAbilities());
-        compound.putString("facet", this.getFacet());
-        compound.putString("cut", this.getCut());
-        compound.putBoolean("rebel", this.getRebelled());
-        compound.putInt("quality", this.getQuality());
-        compound.putBoolean("isHostile", this.getHostile());
-        compound.putBoolean("cracked", this.getCracked());
-        compound.putBoolean("assigned", this.getAssigned());
-        compound.putBoolean("shatter", this.getShatter());
-        compound.putInt("hardness", this.getHardness());
-        compound.putInt("crackAmount", this.getCrackAmount());
-        compound.putInt("sludgeAmount", this.getSludgeAmount());
-        compound.putInt("focusLevel", this.focusLevel);
-        compound.putByte("emotionMeter", this.emotionMeter);
-        compound.putInt("markingVariant", this.getMarkingVariant());
-        compound.putInt("markingColor", this.getMarkingColor());
-        compound.putInt("marking2Variant", this.getMarking2Variant());
-        compound.putInt("marking2Color", this.getMarking2Color());
-        compound.putInt("structureTime", this.structureTime);
-        compound.putFloat("rebelPoints", this.rebelPoints);
-        compound.putInt("rebelTicks", this.rebelTicks);
-        compound.putInt("rebelHairVariant", this.getRebelHairVariant());
-        compound.putInt("rebelOutfitColor", this.getRebelOutfitColor());
-        compound.putInt("rebelOutfitVariant", this.getRebelOutfitVariant());
-        compound.putInt("rebelVisorVariant", this.getRebelVisorVariant());
-        compound.putInt("rebelInsigniaColor", this.getRebelInsigniaColor());
-        compound.putInt("rebelInsigniaVariant", this.getRebelInsigniaVariant());
-        compound.putInt("currentRecipe", this.getCurrentRecipe());
-        compound.putInt("recipeAmount", this.getRecipeAmount());
-        compound.putFloat("xscale", this.getXScale());
-        compound.putFloat("yscale", this.getYScale());
-        compound.putFloat("zscale", this.getZScale());
-        compound.putLong("stay", GUARD_POS.asLong());
         compound.putString("name", this.getName().getString());
-        this.writeStructures(compound);
+        this.writeCrackShatter(compound);
+        this.writeOwners(compound);
+        this.writeIDs(compound);
+        this.writeCraft(compound);
+        this.writeScale(compound);
+        this.writeColour(compound);
+        this.writeVariant(compound);
+        this.writeRebelColour(compound);
+        this.writeRebelVariant(compound);
+        this.writeFacetCut(compound);
+        this.writeAbilityUtil(compound);
+        this.writeUtil(compound);
+        if (this.canLocateStructures()) compound.putInt("structureTime", this.structureTime);
+        if (this.canLocateStructures()) this.writeStructures(compound);
         ContainerHelper.saveAllItems(compound, this.items);
     }
 
@@ -519,70 +475,184 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         compound.putInt("biomeAmount", this.biomes.size());
     }
 
+    public void writeUtil(CompoundTag compound) {
+        String string = movementType + "," + getSkinColorVariant() + "," +
+                getRebelled() + "," + getQuality() + "," +
+                getHostile() + "," + getAssigned() + "," +
+                rebelPoints + "," + rebelTicks + "," + GUARD_POS.asLong();
+        compound.putString("util", string);
+    }
+
+    public void readUtil(CompoundTag compound) {
+        String[] strings = compound.getString("util").split(",");
+        setRebelled(Boolean.parseBoolean(strings[0]));
+        setQuality(Integer.parseInt(strings[1]));
+        isHostile = Boolean.parseBoolean(strings[2]);
+        setAssigned(Boolean.parseBoolean(strings[3]));
+        rebelPoints = Float.parseFloat(strings[4]);
+        rebelTicks = Integer.parseInt(strings[5]);
+        GUARD_POS = BlockPos.of(Long.parseLong(strings[6]));
+    }
+
+    public void writeAbilityUtil(CompoundTag compound) {
+        String string = getAbilitySlots() + "," + usesAreaAbilities() +  "," +
+                abilityTicks + "," + emotionMeter + "," + isEmotional() + "," +
+                focusLevel;
+        compound.putString("id", string);
+    }
+
+    public void readAbilityUtil(CompoundTag compound) {
+        String[] strings = compound.getString("id").split(",");
+        setAbilitySlots(Integer.parseInt(strings[0]));
+        setUsesAreaAbilities(Boolean.getBoolean(strings[1]));
+        abilityTicks = Integer.parseInt(strings[2]);
+        emotionMeter = Byte.parseByte(strings[3]);
+        setEmotional(Boolean.parseBoolean(strings[4]));
+        focusLevel = Integer.parseInt(strings[5]);
+        this.idlePowers = this.generateIdlePowers();
+        this.addAbilityGoals();
+    }
+
+    public void writeIDs(CompoundTag compound) {
+        String string = FOLLOW_ID + "," + ASSIGNED_ID +  "," +
+                MASTER_OWNER;
+        compound.putString("id", string);
+    }
+
+    public void readIDs(CompoundTag compound) {
+        String[] strings = compound.getString("id").split(",");
+        FOLLOW_ID = UUID.fromString(strings[0]);
+        ASSIGNED_ID = UUID.fromString(strings[1]);
+        MASTER_OWNER = UUID.fromString(strings[2]);
+    }
+
+    public void writeCrackShatter(CompoundTag compound) {
+        String string = getCracked() + "," + getShatter() +  "," +
+                getCrackAmount() + "," + getSludgeAmount() + "," +
+                getHardness();
+        compound.putString("crackShatter", string);
+    }
+
+    public void readCrackShatter(CompoundTag compound) {
+        String[] strings = compound.getString("crackShatter").split(",");
+        setCracked(Boolean.parseBoolean(strings[0]));
+        setShatter(Boolean.parseBoolean(strings[1]));
+        setCrackAmount(Integer.parseInt(strings[2]));
+        setSludgeAmount(Integer.parseInt(strings[3]));
+        setHardness(Integer.parseInt(strings[4]));
+    }
+
+    public void writeCraft(CompoundTag compound) {
+        String string = isCrafting + "," + ticking +  "," +
+                getCurrentRecipe() + "," + getRecipeAmount();
+        compound.putString("craft", string);
+    }
+
+    public void readCraft(CompoundTag compound) {
+        String[] strings = compound.getString("craft").split(",");
+        isCrafting = Boolean.parseBoolean(strings[0]);
+        ticking = Integer.parseInt(strings[1]);
+        setCurrentRecipe(Integer.parseInt(strings[2]));
+        setRecipeAmount(Integer.parseInt(strings[3]));
+    }
+
+    public void writeFacetCut(CompoundTag compound) {
+        String string = getFacet() + "," + getCut();
+        compound.putString("facetCut", string);
+    }
+
+    public void readFacetCut(CompoundTag compound) {
+        String[] strings = compound.getString("facetCut").split(",");
+        setFacet(strings[0]);
+        setCut(strings[1]);
+    }
+
+    public void writeScale(CompoundTag compound) {
+        String string = getXScale() + "," + getYScale() + "," + getZScale();
+        compound.putString("scale", string);
+    }
+
+    public void readScale(CompoundTag compound) {
+        String[] strings = compound.getString("scale").split(",");
+        setXScale(Float.parseFloat(strings[0]));
+        setYScale(Float.parseFloat(strings[1]));
+        setZScale(Float.parseFloat(strings[2]));
+    }
+
+    public void writeColour(CompoundTag compound) {
+        String string = getSkinColor() + "," + getHairColor() + "," +
+                getGemColor() + "," + getMarkingColor() + "," +
+                getMarking2Color() + "," + getOutfitColor() + "," +
+                getInsigniaColor() + "," + getWingColor();
+        compound.putString("colour", string);
+    }
+
+    public void readColour(CompoundTag compound) {
+        String[] strings = compound.getString("colour").split(",");
+        setSkinColor(Integer.parseInt(strings[0]));
+        setHairColor(Integer.parseInt(strings[1]));
+        setGemColor(Integer.parseInt(strings[2]));
+        setMarkingColor(Integer.parseInt(strings[3]));
+        setMarking2Color(Integer.parseInt(strings[4]));
+        setOutfitColor(Integer.parseInt(strings[5]));
+        setInsigniaColor(Integer.parseInt(strings[6]));
+        setWingColor(Integer.parseInt(strings[7]));
+    }
+
+    public void writeRebelColour(CompoundTag compound) {
+        String string = getOutfitColor() + "," + getInsigniaColor();
+        compound.putString("rebelColour", string);
+    }
+
+    public void readRebelColour(CompoundTag compound) {
+        String[] strings = compound.getString("rebelColour").split(",");
+        setRebelOutfitColor(Integer.parseInt(strings[0]));
+        setRebelInsigniaColor(Integer.parseInt(strings[1]));
+    }
+
+    public void writeVariant(CompoundTag compound) {
+        String string = getSkinVariant() + "," + getHairVariant() + "," +
+                getGemPlacement() + "," + getMarkingVariant() + "," +
+                getMarking2Variant() + "," + getOutfitVariant() + "," +
+                getInsigniaVariant() + "," + getWingVariant() + "," +
+                getVisorVariant();
+        compound.putString("variant", string);
+    }
+
+    public void readVariant(CompoundTag compound) {
+        String[] strings = compound.getString("variant").split(",");
+        setSkinVariant(Integer.parseInt(strings[0]));
+        setHairVariant(Integer.parseInt(strings[1]));
+        setGemPlacement(Integer.parseInt(strings[2]));
+        setMarkingVariant(Integer.parseInt(strings[3]));
+        setMarking2Variant(Integer.parseInt(strings[4]));
+        setOutfitVariant(Integer.parseInt(strings[5]));
+        setInsigniaVariant(Integer.parseInt(strings[6]));
+        setWingVariant(Integer.parseInt(strings[7]));
+        setVisorVariant(Integer.parseInt(strings[8]));
+    }
+
+    public void writeRebelVariant(CompoundTag compound) {
+        String string = getRebelHairVariant() + "," + getRebelOutfitVariant() + "," +
+                getRebelInsigniaVariant() + "," + getRebelVisorVariant();
+        compound.putString("rebelVariant", string);
+    }
+
+    public void readRebelVariant(CompoundTag compound) {
+        String[] strings = compound.getString("rebelVariant").split(",");
+        setRebelHairVariant(Integer.parseInt(strings[0]));
+        setRebelOutfitVariant(Integer.parseInt(strings[1]));
+        setRebelInsigniaVariant(Integer.parseInt(strings[2]));
+        setRebelVisorVariant(Integer.parseInt(strings[3]));
+    }
+
     @Override
     public void load(CompoundTag compound) {
         super.load(compound);
-        this.setAbilities(compound.getString("abilities"));
-        this.setEmotional(compound.getBoolean("emotional"));
-        this.readOwners(compound);
         this.setCustomName(Component.translatable(compound.getString("name")));
-        if (compound.contains("followID")) this.FOLLOW_ID = compound.getUUID("followID");
-        if (compound.contains("assignedID")) this.ASSIGNED_ID = compound.getUUID("assignedID");
-        if (compound.contains("masterID")) this.MASTER_OWNER = compound.getUUID("masterID");
-        this.setMovementType(compound.getByte("movementType"));
-        this.setSkinColorVariant(compound.getInt("skinColorVariant"));
-        this.setSkinColor(compound.getInt("skinColor"));
-        this.setHairColor(compound.getInt("hairColor"));
-        this.setWingColor(compound.getInt("wingColor"));
-        this.setSkinVariant(compound.getInt("skinVariant"));
-        this.setHairVariant(compound.getInt("hairVariant"));
-        this.setWingVariant(compound.getInt("wingVariant"));
-        this.setGemPlacement(compound.getInt("gemPlacement"));
-        this.setGemColor(compound.getInt("gemColor"));
-        this.ticking = compound.getInt("CraftTicks");
-        this.abilityTicks = compound.getInt("abilityTicks");
-        this.isCrafting = compound.getBoolean("isCrafting");
-        this.setOutfitColor(compound.getInt("outfitColor"));
-        this.setOutfitVariant(compound.getInt("outfitVariant"));
-        this.setInsigniaColor(compound.getInt("insigniaColor"));
-        this.setInsigniaVariant(compound.getInt("insigniaVariant"));
-        this.setVisorVariant(compound.getInt("visorVariant"));
-        this.setAbilitySlots(compound.getInt("abilitySlots"));
-        this.setFacet(compound.getString("facet"));
-        this.setCut(compound.getString("cut"));
-        this.emotionMeter = compound.getByte("emotionMeter");
-        this.focusLevel = compound.getInt("focusLevel");
-        this.setMovementType(compound.getByte("movementType"));
         this.setAbilityPowers(this.findAbilities(compound.getString("abilities")));
-        this.addAbilityGoals();
-        //this.applyAttributeAbilities();
-        this.setMarkingVariant(compound.getInt("markingVariant"));
-        this.setMarkingColor(compound.getInt("markingColor"));
-        this.setMarking2Variant(compound.getInt("marking2Variant"));
-        this.setMarking2Color(compound.getInt("marking2Color"));
-        this.structureTime = compound.getInt("structureTime");
-        this.setRebelled(compound.getBoolean("rebel"));
-        this.isHostile = compound.getBoolean("isHostile");
-        this.rebelPoints = compound.getFloat("rebelPoints");
-        this.rebelTicks = compound.getInt("rebelTicks");
-        this.setRebelHairVariant(compound.getInt("rebelHairVariant"));
-        this.setRebelOutfitColor(compound.getInt("rebelOutfitColor"));
-        this.setRebelOutfitVariant(compound.getInt("rebelOutfitVariant"));
-        this.setRebelInsigniaColor(compound.getInt("rebelInsigniaColor"));
-        this.setRebelInsigniaVariant(compound.getInt("rebelInsigniaVariant"));
-        this.setRebelVisorVariant(compound.getInt("rebelVisorVariant"));
-        this.setHardness(compound.getInt("hardness"));
-        this.setCrackAmount(compound.getInt("crackAmount"));
-        this.setSludgeAmount(compound.getInt("sludgeAmount"));
-        this.setCracked(compound.getBoolean("cracked"));
-        this.setAssigned(compound.getBoolean("assigned"));
-        this.setQuality(compound.getInt("quality"));
-        this.setShatter(compound.getBoolean("shatter"));
-        this.setXScale(compound.getFloat("xscale"));
-        this.setYScale(compound.getFloat("yscale"));
-        this.setZScale(compound.getFloat("zscale"));
-        this.GUARD_POS = BlockPos.of(compound.getLong("stay"));
-        this.idlePowers = this.generateIdlePowers();
+        this.setAbilities(compound.getString("abilities"));
+        if (this.canLocateStructures()) this.structureTime = compound.getInt("structureTime");
         AttributeModifier PRIME = new AttributeModifier(UUID.randomUUID(), "gempirePrimaryModifier", 5D, AttributeModifier.Operation.ADDITION);
         AttributeModifier PRIME_SPEED = new AttributeModifier(UUID.randomUUID(), "gempirePrimarySpeedModifier", .2D, AttributeModifier.Operation.ADDITION);
         AttributeModifier DEFECTIVE = new AttributeModifier(UUID.randomUUID(), "gempireDefectiveModifier", -5D, AttributeModifier.Operation.ADDITION);
@@ -602,8 +672,20 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             this.getAttribute(Attributes.ATTACK_SPEED).addPermanentModifier(DEFECTIVE);
             this.getAttribute(Attributes.KNOCKBACK_RESISTANCE).addPermanentModifier(DEFECTIVE);
         }
+        this.readAbilityUtil(compound);
+        this.readScale(compound);
+        this.readOwners(compound);
+        this.readIDs(compound);
+        this.readCraft(compound);
+        this.readRebelVariant(compound);
+        this.readRebelColour(compound);
+        this.readVariant(compound);
+        this.readColour(compound);
+        this.readFacetCut(compound);
+        this.readCrackShatter(compound);
+        this.readUtil(compound);
+        if (this.canLocateStructures()) this.readStructures(compound);
         ContainerHelper.loadAllItems(compound, this.items);
-        this.readStructures(compound);
         if (this.spawnGem != null) {
             this.spawnGem.remove(RemovalReason.DISCARDED);
         }
@@ -2169,6 +2251,10 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
 
     public boolean usesAreaAbilities(){
         return this.entityData.get(EntityGem.USES_AREA_ABILITIES);
+    }
+
+    public void setUsesAreaAbilities(boolean bool){
+        this.entityData.set(EntityGem.USES_AREA_ABILITIES, bool);
     }
 
     public ArrayList<IIdleAbility> getIdlePowers(){
