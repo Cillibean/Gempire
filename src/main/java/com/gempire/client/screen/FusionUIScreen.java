@@ -1,10 +1,12 @@
 package com.gempire.client.screen;
 
-import com.gempire.container.PearlDefectiveUIContainer;
+import com.gempire.container.FusionUIContainer;
+import com.gempire.container.GemUIContainer;
 import com.gempire.entities.abilities.AbilityZilch;
 import com.gempire.entities.abilities.base.Ability;
 import com.gempire.init.ModPacketHandler;
-import com.gempire.networking.*;
+import com.gempire.networking.C2SRequestUpdateGemName;
+import com.gempire.networking.RequestPoof;
 import com.gempire.util.GUIUtilities;
 import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -20,17 +22,18 @@ import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Inventory;
 import org.joml.Quaternionf;
 
 import java.util.ArrayList;
 
 
-public class PearlUIScreenDefective extends AbstractContainerScreen<PearlDefectiveUIContainer> {
+public class FusionUIScreen extends AbstractContainerScreen<FusionUIContainer> {
     public static final ResourceLocation GUI = new ResourceLocation("gempire:textures/gui/base.png");
     public EditBox nameBox;
 
-    public PearlUIScreenDefective(PearlDefectiveUIContainer screenContainer, Inventory inv, Component titleIn) {
+    public FusionUIScreen(FusionUIContainer screenContainer, Inventory inv, Component titleIn) {
         super(screenContainer, inv, titleIn);
         this.leftPos = 0;
         this.topPos = 0;
@@ -77,7 +80,7 @@ public class PearlUIScreenDefective extends AbstractContainerScreen<PearlDefecti
 
     @Override
     protected void renderBg(PoseStack matrixStack, float partialTicks, int mouseX, int mouseY) {
-        GUIUtilities.setup(PearlUIScreenDefective.GUI);
+        GUIUtilities.setup(FusionUIScreen.GUI);
 
         int x = (this.width - this.imageWidth) / 2;
         int y = (this.height - this.imageHeight) / 2;
@@ -96,7 +99,6 @@ public class PearlUIScreenDefective extends AbstractContainerScreen<PearlDefecti
         } else {
             scale = 30;
         }
-        //int scale = this.menu.gem.getBoundingBox().getYsize() > 1.8f ? 25 : 30;
         renderEntityInInventory(i + 135, j + 85, scale, (float)(i + 135) - mouseX, (float)(j + 75) - mouseY, this.menu.gem);
         drawStats(matrixStack, i, j);
     }
@@ -168,7 +170,9 @@ public class PearlUIScreenDefective extends AbstractContainerScreen<PearlDefecti
 
     public void drawStats(PoseStack stack, int x, int y){
         Component health = Component.translatable("screens.gempire.health");
+        Component damage = Component.translatable("screens.gempire.damage");
         this.font.draw(stack, Component.translatable(health.getString() + ": " + (int)this.menu.gem.getHealth() + " / " + (int)this.menu.gem.getMaxHealth()), x + 7, y + 98, 4210752);
+        this.font.draw(stack,Component.translatable(damage.getString() + ": " + (int)this.menu.gem.getAttributeBaseValue(Attributes.ATTACK_DAMAGE)), x + 7, y + 110, 4210752);
     }
 
     public void drawAbilityList(PoseStack stack, int x, int y){
@@ -184,5 +188,4 @@ public class PearlUIScreenDefective extends AbstractContainerScreen<PearlDefecti
             this.font.draw(stack, text, x, y + i * 9, 4210752);
         }
     }
-
 }
