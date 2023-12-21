@@ -8,6 +8,7 @@ import com.gempire.container.InjectorContainer;
 import com.gempire.events.InjectEvent;
 import com.gempire.init.*;
 import com.gempire.items.ItemChroma;
+import com.gempire.util.GemSeedInfo;
 import net.minecraft.world.Containers;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -254,11 +255,13 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
             BlockPos crystalPos = getBlockPos().above().above();
             BlockPos seedPos = this.getBlockPos().offset(new BlockPos(0, (int) (-Math.ceil(GemSeedTE.DRAIN_SIZE / 2) - 1 - 1), 0));
             if (level.getBlockState(crystalPos).getBlock() instanceof PowerCrystalBlock) {
-                System.out.println(fluidValid());
                 if (this.level.getBlockState(seedPos) != Blocks.BEDROCK.defaultBlockState()) {
-                    if (itemHandler.getStackInSlot(CHROMA_INPUT_SLOT_INDEX).getItem() instanceof ItemChroma chroma &&
-                            fluidValid()) {
-                        System.out.println("got thrpugh fluid check");
+                    if (itemHandler.getStackInSlot(CHROMA_INPUT_SLOT_INDEX).getItem() instanceof ItemChroma chroma) {
+                        int[] resources = new int[4];
+                        float quality = 0;
+                        GemSeedInfo info = new GemSeedInfo(resources, quality, chroma.color);
+
+                    }
                         int portionToDrain = 0;
                         if (this.pinkOpen) {
                             portionToDrain++;
@@ -309,7 +312,7 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
                         GemSeedTE gemSeedTE = (GemSeedTE) this.level.getBlockEntity(seedPos);
                         if (gemSeedTE != null) {
                             gemSeedTE.setEssences(essences);
-                            gemSeedTE.SetChroma(chroma);
+                            //gemSeedTE.SetChroma(chroma);
                             gemSeedTE.SetPrimer(primer);
                             if (level.getBlockState(crystalPos).getBlock() == ModBlocks.POWER_CRYSTAL_BLOCK.get()) {
                                 gemSeedTE.setTier(1);
@@ -328,11 +331,10 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
                         }
                     }
                 }
-            }
-        } else {
+            } else {
             invalid = false;
         }
-    }
+        }
 
     public static int getFacingFromState(BlockState state){
         if(state.getValue(TankBlock.FACING) == Direction.EAST){

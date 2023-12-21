@@ -2341,13 +2341,7 @@ public abstract class EntityFusion extends PathfinderMob implements RangedAttack
     }
 
     public int generateAbilitySlots(){
-        if(this.isPrimary()){
-            return 5;
-        }
-        else if(this.isDefective()){
-            return 1;
-        }
-        return 3;
+        return getQuality() + 2;
     }
 
     public String getAbilities(){
@@ -2367,28 +2361,6 @@ public abstract class EntityFusion extends PathfinderMob implements RangedAttack
         ArrayList<Ability> abilitiesCurrent = new ArrayList<>();
         StringBuilder abilityList = new StringBuilder();
         ArrayList<Ability> abilities = this.possibleAbilities();
-        ArrayList<Ability> getgo = this.definiteAbilities();
-        if(getgo != null && getgo.size() > 0) {
-            for (Ability ab1 : getgo) {
-                if (remainingSlots > 0) {
-                    if (remainingSlots == this.getAbilitySlots()) {
-                        abilityList.append(ab1.getId()).append(",");
-                        abilitiesCurrent.add(ab1);
-                        remainingSlots--;
-                    } else {
-                        for (int n = 0; n < abilitiesCurrent.size(); n++) {
-                            if (ab1.getId() != abilitiesCurrent.get(n).getId()) {
-                                abilityList.append(ab1.getId()).append(",");
-                                abilitiesCurrent.add(ab1);
-                                remainingSlots--;
-                            }
-                        }
-                    }
-                } else {
-                    return abilityList.toString();
-                }
-            }
-        }
         while(!complete){
             double totalWeight = 0.0D;
             for(Ability i : abilities){
@@ -2401,7 +2373,7 @@ public abstract class EntityFusion extends PathfinderMob implements RangedAttack
             }
             Ability weightedAbility = abilities.get(idx);
             abilityList.append(weightedAbility.getId()).append(",");
-            if(this.possibleAbilities().size() + this.definiteAbilities().size() > this.getAbilitySlots()) abilities.remove(idx);
+            if(this.possibleAbilities().size() > this.getAbilitySlots()) abilities.remove(idx);
             remainingSlots--;
             complete = remainingSlots <= 0;
         }
@@ -2416,8 +2388,12 @@ public abstract class EntityFusion extends PathfinderMob implements RangedAttack
         this.ABILITY_POWERS = powers;
     }
 
-    public abstract ArrayList<Ability> possibleAbilities();
-    public abstract ArrayList<Ability> definiteAbilities();
+    public ArrayList<Ability> possibleAbilities() {
+        ArrayList<Ability> abilities = new ArrayList<>();
+        abilities.addAll(this.findAbilities(abilities1));
+        abilities.addAll(this.findAbilities(abilities2));
+        return abilities;
+    }
 
     public boolean usesAreaAbilities(){
         return this.entityData.get(EntityGem.USES_AREA_ABILITIES);
