@@ -1,0 +1,31 @@
+{
+  "criteria": {
+    "entered_desolate": {
+      "conditions": {
+        "to": "gempire:desolate_lands"
+      },
+      "trigger": "minecraft:changed_dimension"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "background": "gempire:textures/block/ruined_marble_block.png",
+    "description": {
+      "translate": "advancements.gempire.desolate_lands.root.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "gempire:special_chroma"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "advancements.gempire.desolate_lands.root.title"
+    }
+  },
+  "requirements": [
+    [
+      "entered_desolate"
+    ]
+  ]
+}

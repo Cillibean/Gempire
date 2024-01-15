@@ -36,6 +36,34 @@ public class ModItems {
             )
     );*/
 
+    public static final RegistryObject<Item> PRIMED_ICE = ITEMS.register("primed_ice", () ->
+            new BlockItem(
+                    ModBlocks.PRIMED_ICE.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> PRIMED_PACKED_ICE = ITEMS.register("primed_packed_ice", () ->
+            new BlockItem(
+                    ModBlocks.PRIMED_PACKED_ICE.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> PRIMED_BLUE_ICE = ITEMS.register("primed_blue_ice", () ->
+            new BlockItem(
+                    ModBlocks.PRIMED_BLUE_ICE.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> PRIMED_DRAINED_ICE = ITEMS.register("primed_drained_ice", () ->
+            new BlockItem(
+                    ModBlocks.PRIMED_DRAINED_ICE.get(),
+                    new Item.Properties()
+            )
+    );
+
     public static final RegistryObject<Item> STRAWBERRY_BLOCK = ITEMS.register("strawberry_block", () ->
             new BlockItem(
                     ModBlocks.STRAWBERRY_BLOCK.get(),
@@ -1804,6 +1832,19 @@ public class ModItems {
             new ItemChroma(new Item.Properties().stacksTo(64), 15));
     public static final RegistryObject<Item> SPECIAL_CHROMA = ITEMS.register("special_chroma", () ->
             new ItemChroma(new Item.Properties().stacksTo(64), 16));
+
+
+    public static final RegistryObject<Item> FUSCHIA_SHARDS = ITEMS.register("fuschia_shards", () ->
+            new ItemBossShard(new Item.Properties().stacksTo(64)));
+
+    public static final RegistryObject<Item> AMBER_SHARDS = ITEMS.register("amber_shards", () ->
+            new ItemBossShard(new Item.Properties().stacksTo(64)));
+
+    public static final RegistryObject<Item> COBALT_SHARDS = ITEMS.register("cobalt_shards", () ->
+            new ItemBossShard(new Item.Properties().stacksTo(64)));
+
+    public static final RegistryObject<Item> ALABASTER_SHARDS = ITEMS.register("alabaster_shards", () ->
+            new ItemBossShard(new Item.Properties().stacksTo(64)));
 
     public static final RegistryObject<Item> WHITE_SHARDS = ITEMS.register("white_shards", () ->
             new ItemShard(new Item.Properties().stacksTo(64), 0));

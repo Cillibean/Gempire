@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "NBN",
+    "FSF",
+    "NBN"
+  ],
+  "key": {
+    "B": {
+      "item": "gempire:alabaster_shards"
+    },
+    "S": {
+      "item": "gempire:white_essence_bucket"
+    },
+    "N": {
+      "item": "gempire:prismatic_block"
+    },
+    "F": {
+      "item": "gempire:white_chroma"
+    }
+  },
+  "result": {
+    "item": "gempire:inactive_empress_gem"
+  }
+}

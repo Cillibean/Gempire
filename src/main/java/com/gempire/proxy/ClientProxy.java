@@ -361,6 +361,11 @@ public class ClientProxy {
                                 populator.accept(ModItems.BROWN_SHARDS.get());
                                 populator.accept(ModItems.SPECIAL_SHARDS.get());
 
+                                populator.accept(ModItems.FUSCHIA_SHARDS.get());
+                                populator.accept(ModItems.AMBER_SHARDS.get());
+                                populator.accept(ModItems.COBALT_SHARDS.get());
+                                populator.accept(ModItems.ALABASTER_SHARDS.get());
+
                                 populator.accept(ModItems.SHARE_CONTRACT.get());
                                 populator.accept(ModItems.TRANSFER_CONTRACT.get());
 
@@ -684,6 +689,11 @@ public class ClientProxy {
                                 populator.accept(ModBlocks.SMOOTH_RUINED_MARBLE_BLOCK.get());
                                 populator.accept(ModBlocks.SMOOTH_RUINED_MARBLE_STAIRS.get());
                                 populator.accept(ModBlocks.SMOOTH_RUINED_MARBLE_SLAB.get());
+
+                                populator.accept(ModBlocks.PRIMED_ICE.get());
+                                populator.accept(ModBlocks.PRIMED_PACKED_ICE.get());
+                                populator.accept(ModBlocks.PRIMED_BLUE_ICE.get());
+                                populator.accept(ModBlocks.PRIMED_DRAINED_ICE.get());
                             })
                             .build()
             );

@@ -1,0 +1,32 @@
+{
+  "display": {
+    "icon": {
+      "item": "gempire:fuchsia_shards"
+    },
+    "title": {
+      "translate": "advancements.gempire.desolate_lands.kill_iridescent_paladin.title"
+    },
+    "description": {
+      "translate": "advancements.gempire.desolate_lands.kill_iridescent_paladin.description"
+    },
+    "frame": "task",
+    "hidden": true
+  },
+  "parent": "gempire:desolate_lands/kill_paladin",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "gempire:iridescent_paladin"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
