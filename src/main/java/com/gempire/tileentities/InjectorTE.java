@@ -8,6 +8,7 @@ import com.gempire.container.InjectorContainer;
 import com.gempire.events.InjectEvent;
 import com.gempire.init.*;
 import com.gempire.items.ItemChroma;
+import com.gempire.util.GemInfo;
 import com.gempire.util.GemSeedInfo;
 import net.minecraft.world.Containers;
 import net.minecraft.world.SimpleContainer;
@@ -15,6 +16,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.MossBlock;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.material.Fluid;
@@ -44,7 +46,10 @@ import net.minecraftforge.fluids.capability.templates.FluidTank;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Objects;
+import java.util.Random;
 
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LiquidBlock;
@@ -85,6 +90,11 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
     public FluidTank whiteTank;
     public boolean pinkOpen, blueOpen, yellowOpen, whiteOpen, invalid = false;
     public int tick = 0;
+
+    public GemSeedInfo info;
+    public HashMap<Block, ArrayList<Integer>> resMap = new HashMap<>();
+    public HashMap<Block, Float> qualityMap = new HashMap<>();
+    public ArrayList<GemInfo> gemInfoMap = new ArrayList<>();
 
     public InjectorTE(BlockPos pos, BlockState state) {
         super(ModTE.INJECTOR_TE.get(), pos, state);
@@ -176,6 +186,66 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
     //INJECTOR FUNCTIONALITY
 
     //INJECTOR FUNCTIONALITY
+
+    public void beginInject() {
+        for (int i = 0; i < 4; i++) {
+            ItemStack stack = itemHandler.getStackInSlot(i);
+            if (stack.getItem() != Items.AIR) {
+                if (stack.getItem() instanceof BucketItem bucket) {
+                    if (this.isValidForSlot(i, bucket)) {
+                        info.resources[i] += 10;
+                    }
+                }
+            }
+        }
+        ItemStack chromaStack = itemHandler.getStackInSlot(CHROMA_INPUT_SLOT_INDEX);
+        info.setChroma(((ItemChroma) chromaStack.getItem()).color);
+        grow();
+    }
+
+    public void grow() {
+        BlockPos crystalPos = getBlockPos().above().above();
+        BlockPos seedPos = this.getBlockPos().offset(new BlockPos(0, (int) (-Math.ceil(GemSeedTE.DRAIN_SIZE / 2) - 1 - 1), 0));
+        BlockPos cornerPos = seedPos.offset(5, 5, 5);
+        HashMap<BlockPos, Boolean> map = new HashMap<>();
+        for (int x = 0; x < 10; x++) {
+            for (int y = 0; y < 10; y++) {
+                for (int z = 0; z < 10; z++) {
+                    map.put(new BlockPos(cornerPos.offset(-x, -y, -z)), false);
+                }
+            }
+        }
+        if (level.getBlockState(crystalPos).getBlock() instanceof PowerCrystalBlock && this.level.getBlockState(seedPos) != Blocks.BEDROCK.defaultBlockState()) {
+            for (int i = 0; i < 24; i++) {
+                Random r = new Random();
+                BlockPos pos = cornerPos.offset(r.nextInt(11), r.nextInt(11), r.nextInt(11));
+                Block block = level.getBlockState(pos).getBlock();
+                if (!resMap.get(block).isEmpty()) {
+                    info.resources[0] += resMap.get(block).get(0);
+                    info.resources[1] += resMap.get(block).get(1);
+                    info.resources[2] += resMap.get(block).get(2);
+                    info.resources[3] += resMap.get(block).get(3);
+                }
+                if (qualityMap.get(block) != 0 && qualityMap.get(block) != null) {
+                    info.quality += qualityMap.get(block);
+                }
+            }
+            weighOptions();
+        }
+    }
+
+    public void weighOptions() {
+        ArrayList<String> possibleResults = new ArrayList<>();
+        for (int i = 0; i < gemInfoMap.size(); i++) {
+            GemInfo info = gemInfoMap.get(i);
+
+        }
+        createGem();
+    }
+
+    public void createGem() {
+
+    }
 
     public void DumpFluids() {
         if (this.pinkOpen) {
