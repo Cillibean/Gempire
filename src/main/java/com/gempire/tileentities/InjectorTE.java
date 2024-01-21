@@ -75,13 +75,15 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
 
     protected final ContainerData data;
 
+    public boolean tick = false;
+
     public NonNullList<ItemStack> items = NonNullList.withSize(InjectorTE.NUMBER_OF_SLOTS, ItemStack.EMPTY);
     public FluidTank pinkTank, blueTank, yellowTank, whiteTank;
 
     public Block drained_sand, drained_soil, drained_stone, drained_stone_2, banded_drained_stone, drained_log, drained_log_cracked, drained_ice;
 
     public boolean pinkOpen, blueOpen, yellowOpen, whiteOpen, invalid = false;
-    public int tick = 0;
+    public int ticks = 0;
 
     public static GemSeedInfo info;
     public HashMap<Block, ArrayList<Integer>> resMap = new HashMap<>();
@@ -156,6 +158,10 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
         if (!level.isClientSide()) {
             te.HandleSlotUpdates();
         }
+        te.ticks++;
+        if (te.ticks > 15) {
+            te.ticks = 0;
+        }
     }
 
     public void HandleSlotUpdates() {
@@ -181,8 +187,8 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
 
     //INJECTOR FUNCTIONALITY
 
-    public void beginInject() {
-        info = new GemSeedInfo(new int[4], 0, 0, 0);
+    public void inject() {
+        info = new GemSeedInfo(new int[6], 0, 0, 0);
         for (int i = 0; i < 4; i++) {
             ItemStack stack = itemHandler.getStackInSlot(i);
             if (stack.getItem() != Items.AIR) {
@@ -195,10 +201,9 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
         }
         ItemStack chromaStack = itemHandler.getStackInSlot(CHROMA_INPUT_SLOT_INDEX);
         info.setChroma(((ItemChroma) chromaStack.getItem()).color);
-        grow();
-    }
 
-    public void grow() {
+        // grow
+
         BlockPos crystalPos = getBlockPos().above().above();
         BlockPos seedPos = this.getBlockPos().offset(new BlockPos(0, (int) (-Math.ceil(11 / 2) - 1 - 1), 0));
         BlockPos cornerPos = seedPos.offset(-5, -5, -5);
@@ -211,32 +216,36 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
                 }
             }
         }
-        if (level.getBlockState(crystalPos).getBlock() instanceof PowerCrystalBlock && this.level.getBlockState(seedPos) != Blocks.BEDROCK.defaultBlockState()) {
-            for (int i = 0; i < 50; i++) {
-                Random r = new Random();
-                BlockPos pos = cornerPos.offset(r.nextInt(11), r.nextInt(11), r.nextInt(11));
-                Block block = level.getBlockState(pos).getBlock();
-                if (!resMap.isEmpty()) {
-                    if (!resMap.get(block).isEmpty()) {
-                        info.resources[0] += resMap.get(block).get(0);
-                        info.resources[1] += resMap.get(block).get(1);
-                        info.resources[2] += resMap.get(block).get(2);
-                        info.resources[3] += resMap.get(block).get(3);
-                        info.resources[4] += resMap.get(block).get(4);
-                        info.resources[5] += resMap.get(block).get(5);
+        if (level.getBlockState(crystalPos).getBlock() instanceof PowerCrystalBlock && this.level.getBlockState(seedPos) != Blocks.BEDROCK.defaultBlockState() && this.level.getBlockState(seedPos) != Blocks.AIR.defaultBlockState() && this.level.getBlockState(seedPos) != Blocks.WATER.defaultBlockState() ) {
+            int blocksDrained = 0;
+            while (blocksDrained < 200) {
+                if (ticks <= 15) {
+                    Random r = new Random();
+                    BlockPos pos = cornerPos.offset(r.nextInt(11), r.nextInt(11), r.nextInt(11));
+                    Block block = level.getBlockState(pos).getBlock();
+                    if (!resMap.isEmpty()) {
+                        if (!resMap.get(block).isEmpty()) {
+                            info.resources[0] += resMap.get(block).get(0);
+                            info.resources[1] += resMap.get(block).get(1);
+                            info.resources[2] += resMap.get(block).get(2);
+                            info.resources[3] += resMap.get(block).get(3);
+                            info.resources[4] += resMap.get(block).get(4);
+                            info.resources[5] += resMap.get(block).get(5);
+                        }
+                        if (qualityMap.get(block) != 0 && qualityMap.get(block) != null) {
+                            info.quality += qualityMap.get(block);
+                        }
                     }
-                    if (qualityMap.get(block) != 0 && qualityMap.get(block) != null) {
-                        info.quality += qualityMap.get(block);
-                    }
+                    drainBlock(pos);
+                    blocksDrained++;
                 }
-                drainBlock(pos);
             }
-            weighOptions();
         }
-    }
 
-    public void weighOptions() {
+        //weigh
+
         ArrayList<GemInfo> possibleResults = new ArrayList<>();
+        System.out.println(Arrays.toString(info.resources));
         for (int i = 0; i < gemInfoList.size(); i++) {
             GemInfo gemInfo = gemInfoList.get(i);
             int distance = 0;
@@ -245,7 +254,7 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
             System.out.println(Arrays.toString(res));
             for (int a = 0; a < res.length; a++) {
                 if (res[a] > info.resources[a]) distance += (res[a] - info.resources[a]);
-                else distance += (info.resources[i] - res[i]);
+                else distance += (info.resources[a] - res[a]);
             }
             if (distance < 50) {
                 System.out.println("possible gem " + distance);
@@ -254,39 +263,34 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
                 }
             }
         }
-        createGem(possibleResults);
-    }
 
-    public void createGem(ArrayList<GemInfo> possibleResults) {
-        Random r = new Random();
-        BlockPos seedPos = this.getBlockPos().offset(new BlockPos(0, (int) (-Math.ceil(11 / 2) - 1 - 1), 0));
-        GemInfo gem = possibleResults.get(r.nextInt(possibleResults.size()));
-        System.out.println(gem.getName() + " " + info.quality);
-        Item primer = itemHandler.getStackInSlot(PRIME_INPUT_SLOT_INDEX).getItem();
-        GemSeedBlock seedBlock = (GemSeedBlock) ModBlocks.GEM_SEED_BLOCK.get();
-        this.level.setBlockAndUpdate(seedPos, seedBlock.defaultBlockState());
-        if (this.level.getBlockState(seedPos).getBlock() == ModBlocks.GEM_SEED_BLOCK.get()) {
-            this.getLevel().playSound(null, this.getBlockPos(), ModSounds.INJECT.get(), SoundSource.AMBIENT, 2f, 1);
-        }
-        GemSeedTE gemSeedTE = (GemSeedTE) this.level.getBlockEntity(seedPos);
-        if (gemSeedTE != null) {
-            gemSeedTE.SetPrimer(primer);
-            /*if (level.getBlockState(crystalPos).getBlock() == ModBlocks.POWER_CRYSTAL_BLOCK.get()) {
-                gemSeedTE.setTier(1);
-            } else if (level.getBlockState(crystalPos).getBlock() == ModBlocks.POWER_CRYSTAL_BLOCK_TIER_2.get()) {
-                gemSeedTE.setTier(2);
-            }*/
-            int facing = InjectorTE.getFacingFromState(this.getBlockState());
-            gemSeedTE.setFacing(facing);
-            gemSeedTE.setChroma(info.chroma);
-            gemSeedTE.setInfo(gem);
-            System.out.println("Facing :" + facing);
-            itemHandler.extractItem(InjectorTE.CHROMA_INPUT_SLOT_INDEX, 1, false);
-            itemHandler.extractItem(InjectorTE.PRIME_INPUT_SLOT_INDEX, 1, false);
-            this.level.sendBlockUpdated(this.worldPosition, this.getBlockState(), this.getBlockState(), 2);
-            this.setChanged();
-            InjectEvent event = new InjectEvent(gemSeedTE, seedPos);
-            MinecraftForge.EVENT_BUS.post(event);
+        //create gem
+
+        if (!possibleResults.isEmpty()) {
+            Random r = new Random();
+            GemInfo gem = possibleResults.get(r.nextInt(possibleResults.size()));
+            System.out.println(gem.getName() + " " + info.quality);
+            Item primer = itemHandler.getStackInSlot(PRIME_INPUT_SLOT_INDEX).getItem();
+            GemSeedBlock seedBlock = (GemSeedBlock) ModBlocks.GEM_SEED_BLOCK.get();
+            this.level.setBlockAndUpdate(seedPos, seedBlock.defaultBlockState());
+            if (this.level.getBlockState(seedPos).getBlock() == ModBlocks.GEM_SEED_BLOCK.get()) {
+                this.getLevel().playSound(null, this.getBlockPos(), ModSounds.INJECT.get(), SoundSource.AMBIENT, 2f, 1);
+            }
+            GemSeedTE gemSeedTE = (GemSeedTE) this.level.getBlockEntity(seedPos);
+            if (gemSeedTE != null) {
+                gemSeedTE.SetPrimer(primer);
+                int facing = InjectorTE.getFacingFromState(this.getBlockState());
+                gemSeedTE.setFacing(facing);
+                gemSeedTE.setChroma(info.chroma);
+                gemSeedTE.setInfo(gem);
+                System.out.println("Facing :" + facing);
+                itemHandler.extractItem(InjectorTE.CHROMA_INPUT_SLOT_INDEX, 1, false);
+                itemHandler.extractItem(InjectorTE.PRIME_INPUT_SLOT_INDEX, 1, false);
+                this.level.sendBlockUpdated(this.worldPosition, this.getBlockState(), this.getBlockState(), 2);
+                this.setChanged();
+                InjectEvent event = new InjectEvent(gemSeedTE, seedPos);
+                MinecraftForge.EVENT_BUS.post(event);
+            }
         }
     }
 
@@ -575,7 +579,7 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
                         }
                     }
                 }*/
-            if (!level.isClientSide) beginInject();
+            if (!level.isClientSide) inject();
             } else {
             invalid = false;
         }

@@ -12,8 +12,6 @@ import com.gempire.entities.projectiles.AcidSpitEntity;
 import com.gempire.entities.projectiles.ElectrokinesisLightning;
 import com.gempire.entities.projectiles.IceShardEntity;
 import com.gempire.entities.projectiles.WaterOrbEntity;
-import com.gempire.systems.injection.GemConditions;
-import com.gempire.systems.injection.GemFormation;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.resources.ResourceLocation;
@@ -26,7 +24,6 @@ import java.util.HashMap;
 
 public class ModEntities {
     public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, Gempire.MODID);
-    public static HashMap<String, GemConditions> CRUXTOGEM = new HashMap<>();
 
     // Entity Types
 
@@ -282,29 +279,6 @@ public class ModEntities {
         InjectorContainer.primer.add(Items.TOTEM_OF_UNDYING);
         InjectorContainer.primer.add(ModItems.GILDED_LAPIS.get());
         InjectorContainer.primer.add(ModItems.PRIME_BOOST.get());
-
-        ModEntities.CRUXTOGEM.put("ruby", ModCruxes.RUBY_CONDITIONS());
-        ModEntities.CRUXTOGEM.put("sapphire", ModCruxes.SAPPHIRE_CONDITIONS());
-        ModEntities.CRUXTOGEM.put("quartz", ModCruxes.QUARTZ_CONDITIONS());
-        ModEntities.CRUXTOGEM.put("jasper", ModCruxes.JASPER_CONDITIONS());
-        ModEntities.CRUXTOGEM.put("agate", ModCruxes.AGATE_CONDITIONS());
-        ModEntities.CRUXTOGEM.put("topaz", ModCruxes.TOPAZ_CONDITIONS());
-        ModEntities.CRUXTOGEM.put("obsidian", ModCruxes.OBSIDIAN_CONDITIONS());
-        ModEntities.CRUXTOGEM.put("nephrite", ModCruxes.NEPHRITE_CONDITIONS());
-        ModEntities.CRUXTOGEM.put("spodumene", ModCruxes.SPODUMENE_CONDITIONS());
-        ModEntities.CRUXTOGEM.put("zircon", ModCruxes.ZIRCON_CONDITIONS());
-        ModEntities.CRUXTOGEM.put("aquamarine", ModCruxes.AQUAMARINE_CONDITIONS());
-        ModEntities.CRUXTOGEM.put("bismuth", ModCruxes.BISMUTH_CONDITIONS());
-        ModEntities.CRUXTOGEM.put("bixbite", ModCruxes.BIXBITE_CONDITIONS());
-        ModEntities.CRUXTOGEM.put("garnet", ModCruxes.GARNET_CONDITIONS());
-        ModEntities.CRUXTOGEM.put("emerald", ModCruxes.EMERALD_CONDITIONS());
-        ModEntities.CRUXTOGEM.put("lapis", ModCruxes.LAPIS_CONDITIONS());
-        ModEntities.CRUXTOGEM.put("larimar", ModCruxes.LARIMAR_CONDITIONS());
-        ModEntities.CRUXTOGEM.put("morganite", ModCruxes.MORGANITE_CONDITIONS());
-        ModEntities.CRUXTOGEM.put("peridot", ModCruxes.PERIDOT_CONDITIONS());
-        ModEntities.CRUXTOGEM.put("rutile", ModCruxes.RUTILE_CONDITIONS());
-        ModEntities.CRUXTOGEM.put("spinel", ModCruxes.SPINEL_CONDITIONS());
-        ModEntities.CRUXTOGEM.put("tourmaline", ModCruxes.TOURMALINE_CONDITIONS());
     }
 
     public static void setVanillaGems(){

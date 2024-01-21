@@ -1,16 +1,11 @@
 package com.gempire.blocks;
 
 import com.gempire.init.ModTE;
-import com.gempire.items.ItemChroma;
-import com.gempire.systems.injection.GemFormation;
 import com.gempire.tileentities.GemSeedTE;
-import com.gempire.tileentities.InjectorTE;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.RenderShape;
-import net.minecraft.world.level.block.entity.BeehiveBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -21,9 +16,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.level.BlockGetter;
 
 import javax.annotation.Nullable;
-import java.util.Random;
-
-import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 
 public class GemSeedBlock extends BaseEntityBlock {
 

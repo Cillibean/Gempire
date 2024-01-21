@@ -1,4 +1,4 @@
-package com.gempire.systems.injection;
+package com.gempire.util;
 
 import com.gempire.entities.bases.EntityGem;
 import com.gempire.entities.bases.EntityVaryingGem;
@@ -11,30 +11,22 @@ import com.gempire.entities.other.EntityShambler;
 import com.gempire.events.DrainEvent;
 import com.gempire.events.GemFormEvent;
 import com.gempire.init.*;
-import com.gempire.items.ItemChroma;
-import com.gempire.items.ItemGem;
-import com.gempire.util.GemInfo;
-import com.gempire.util.PaletteType;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.AirBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.item.Item;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
-import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.registries.RegistryObject;
 
-import java.awt.*;
 import java.util.*;
 
 public class GemFormation {
