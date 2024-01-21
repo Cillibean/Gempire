@@ -1,14 +1,7 @@
 package com.gempire.tileentities;
 
-import com.gempire.blocks.DrainedBlock;
-import com.gempire.blocks.GemSeedBlock;
-import com.gempire.blocks.machine.PowerCrystalBlock;
-import com.gempire.blocks.machine.TankBlock;
 import com.gempire.init.*;
-import com.gempire.items.ItemChroma;
-import com.gempire.systems.injection.Crux;
-import com.gempire.systems.injection.GemConditions;
-import com.gempire.systems.injection.GemFormation;
+import com.gempire.util.GemFormation;
 import com.gempire.util.GemInfo;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -16,27 +9,15 @@ import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.ServerLevelAccessor;
-import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Fluid;
-import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.level.material.WaterFluid;
-import net.minecraftforge.common.Tags;
-import net.minecraftforge.fluids.IFluidBlock;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.*;
-import java.util.concurrent.ThreadLocalRandom;
-import java.util.function.Supplier;
 
 
 public class GemSeedTE extends BlockEntity {
@@ -110,7 +91,6 @@ public class GemSeedTE extends BlockEntity {
         this.primer = primer;
         this.level.sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), 2);
         this.setChanged();
-        System.out.println("primer set");
     }
 
     public Item getPrimer(){
