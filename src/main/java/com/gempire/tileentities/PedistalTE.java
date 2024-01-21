@@ -22,7 +22,7 @@ public class PedistalTE extends BlockEntity {
     }
     @Override
     public void load(@NotNull CompoundTag nbt) {
-        this.owner = nbt.getUUID("owner");
+        if (nbt.size() != 0) this.owner = nbt.getUUID("owner");
         super.load(nbt);
     }
 }

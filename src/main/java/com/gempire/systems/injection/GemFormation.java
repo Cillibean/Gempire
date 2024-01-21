@@ -13,6 +13,7 @@ import com.gempire.events.GemFormEvent;
 import com.gempire.init.*;
 import com.gempire.items.ItemChroma;
 import com.gempire.items.ItemGem;
+import com.gempire.util.GemInfo;
 import com.gempire.util.PaletteType;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
@@ -41,44 +42,29 @@ public class GemFormation {
     public Level world;
     public BlockPos pos;
     public BlockPos volumeToCheck;
-    public static ArrayList<String> POSSIBLE_GEMS_TIER_1 = new ArrayList<>();
-    public static ArrayList<String> POSSIBLE_GEMS_TIER_2 = new ArrayList<>();
-    public static ArrayList<String> NETHER_POSSIBLE_GEMS_TIER_1 = new ArrayList<>();
-    public static ArrayList<String> NETHER_POSSIBLE_GEMS_TIER_2 = new ArrayList<>();
-    public static ArrayList<String> END_POSSIBLE_GEMS_TIER_1 = new ArrayList<>();
-    public static ArrayList<String> END_POSSIBLE_GEMS_TIER_2 = new ArrayList<>();
+
     public Block drained_sand, drained_soil, drained_stone, drained_stone_2, banded_drained_stone, drained_ice, drained_log, drained_log_cracked;
-    public ItemChroma chroma;
     public Item primer;
-    public String essences;
     public int facing = 0;
     public int chromaColour;
-
-    public int yLevelNeeded;
     public int tier;
     public float weight;
     public boolean clod = false;
     public int clodNO;
-    public int essenceCount;
-
-    HashMap<String, Float> WEIGHTS_OF_GEMS = new HashMap<>();
-    HashMap<String, GemConditions> CONDITIONS = new HashMap<>();
-    public GemConditions conditions;
+    public GemInfo gemForm;
 
     //Create an object to store the total weight
     float totalWeight = 0;
 
-    public GemFormation(Level world, BlockPos pos, BlockPos volumeToCheck, ItemChroma chroma, Item primer, String essences, int facing, HashMap<String, Float> weights, float total, int tier) {
+    public GemFormation(GemInfo gem, Level world, BlockPos pos, BlockPos volumeToCheck, int chroma, Item primer, int facing, int tier) {
         this.world = world;
         this.pos = pos;
         this.volumeToCheck = volumeToCheck;
-        this.chroma = chroma;
+        this.chromaColour = chroma;
         this.primer = primer;
-        this.essences = essences;
         this.facing = facing;
-        this.WEIGHTS_OF_GEMS = weights;
-        this.totalWeight = total;
         this.tier = tier;
+        this.gemForm = gem;
     }
 
     public void SpawnGem() {
@@ -86,9 +72,8 @@ public class GemFormation {
         EntityGem gem = gemm.get().create(this.world);
         float BIOME_TEMPERATURE = this.world.getBiome(this.pos).get().getBaseTemperature();
         this.SetDrainedStoneColor(BIOME_TEMPERATURE);
-        String gemtoform = this.EvaluateCruxes();
+        String gemtoform = gemForm.getName();
         if (gem.chromaColourRequired) {
-            if (getColorFromChroma() == chromaColour) {
                 if (Objects.equals(gemtoform, "")) {
                     //this.Drain(GemFormation.getBlockPosInVolume(this.world, this.pos, this.volumeToCheck));
                     return;
@@ -110,7 +95,7 @@ public class GemFormation {
                     if (gem instanceof EntityVaryingGem) {
                         EntityVaryingGem varyingGem = (EntityVaryingGem) gem;
                         varyingGem.setSkinVariantOnInitialSpawn = false;
-                        int variant = this.getColorFromChroma();
+                        int variant = this.chromaColour;
                         Random rand = new Random();
                         if (gem instanceof EntityQuartz && variant == 16) {
                             variant += rand.nextBoolean() ? 1 : 0;
@@ -126,7 +111,6 @@ public class GemFormation {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-            }
         } else {
             if (gemtoform == "") {
                 //this.Drain(GemFormation.getBlockPosInVolume(this.world, this.pos, this.volumeToCheck));
@@ -146,7 +130,7 @@ public class GemFormation {
                 if (gem instanceof EntityVaryingGem) {
                     EntityVaryingGem varyingGem = (EntityVaryingGem) gem;
                     varyingGem.setSkinVariantOnInitialSpawn = false;
-                    int variant = this.getColorFromChroma();
+                    int variant = this.chromaColour;
                     Random rand = new Random();
                     if (gem instanceof EntityQuartz && variant == 16) {
                         variant += rand.nextBoolean() ? 1 : 0;
@@ -160,44 +144,6 @@ public class GemFormation {
                 gem.setUUID(Mth.createInsecureUUID(this.world.random));
             } catch (Exception e) {
                 e.printStackTrace();
-            }
-        }
-        System.out.println("placement");
-        double rarity = 1 / CONDITIONS.get(gemtoform).rarity;
-        double check = weight;
-        System.out.println("weight / rarity check " + weight / rarity);
-        System.out.println("weight " + weight);
-        System.out.println("check " + check);
-        if (primer.asItem() == ModItems.PRIME_BOOST.get()) {
-            if (check <= 4) {
-                clod = true;
-                clodNO = 2;
-            } else if (check <= 7) {
-                clod = true;
-                clodNO = 1;
-            } else if (check <= 18) {
-                //gem.setDefective(false);
-                System.out.println("defective");
-            } else if (check >= 26) {
-                //gem.setPrimary(true);
-                System.out.println("prime");
-            }
-        } else {
-            if (check <= 4) {
-                clod = true;
-                clodNO = 3;
-            } else if (check <= 7) {
-                clod = true;
-                clodNO = 2;
-            } else if (check <= 10) {
-                clod = true;
-                clodNO = 1;
-            } else if (check <= 20) {
-                //gem.setDefective(true);
-                System.out.println("defective");
-            } else if (check >= 28) {
-                //gem.setPrimary(true);
-                System.out.println("prime");
             }
         }
         if (!clod) {
@@ -368,108 +314,6 @@ public class GemFormation {
 
     public static int getHalfMiddleOffsetRight(float value) {
         return (int) Math.ceil(value / 2);
-    }
-
-    public String EvaluateCruxes() {
-        String returnGem = "";
-        //System.out.println("test tier");
-        Random rand = new Random();
-        double lowestR = 100000000;
-        String lowestRGem = "";
-        double lowestR2 = 100000000;
-        String lowestRGem2 = "";
-        double lowestR3 = 100000000;
-        String lowestRGem3 = "";
-        ArrayList list;
-        if (world.dimension() != Level.NETHER && world.dimension() != Level.END) {
-            list = tier == 1 ? GemFormation.POSSIBLE_GEMS_TIER_1 : GemFormation.POSSIBLE_GEMS_TIER_2;
-        } else if (world.dimension() == Level.NETHER) {
-            list = tier == 1 ? GemFormation.NETHER_POSSIBLE_GEMS_TIER_1 : GemFormation.NETHER_POSSIBLE_GEMS_TIER_2;
-        } else {
-            list = tier == 1 ? GemFormation.END_POSSIBLE_GEMS_TIER_1 : GemFormation.END_POSSIBLE_GEMS_TIER_2;
-        }
-        for (Object gem1 : list) {
-            String gem = gem1.toString();
-            boolean primed = false;
-            CONDITIONS = ModEntities.CRUXTOGEM;
-            GemConditions conditions = CONDITIONS.get(gem);
-            //System.out.println(" ");
-            //System.out.println(gem);
-            // if (this.primer == conditions.primer && conditions.primer != Items.AIR) {
-            if (this.primer == conditions.primer && conditions.primer != Items.AIR) {
-                primed = true;
-            }
-            //double r1 = rand.nextDouble();
-            //System.out.println("r1 random " + r1);
-            double r = /*r1 **/ totalWeight;
-            //System.out.println("random " + r);
-            if (primed) {
-                r -= (3 * (WEIGHTS_OF_GEMS.get(gem) * (1 / CONDITIONS.get(gem).rarity)));
-            } else {
-                r -= WEIGHTS_OF_GEMS.get(gem) * (1 / CONDITIONS.get(gem).rarity);
-            }
-            System.out.println(WEIGHTS_OF_GEMS.get(gem));
-            System.out.println(r);
-            System.out.println();
-                /*if (WEIGHTS_OF_GEMS.get(gem) < 12) {
-                    r = 1000000;
-                }*/
-            if (r < lowestR) {
-                lowestR3 = lowestR2;
-                lowestR2 = lowestR;
-                lowestRGem3 = lowestRGem2;
-                lowestRGem2 = lowestRGem;
-                lowestR = r;
-                lowestRGem = gem;
-            } else if (r < lowestR2) {
-                lowestR3 = lowestR2;
-                lowestRGem3 = lowestRGem2;
-                lowestR2 = r;
-                lowestRGem2 = gem;
-            } else if (r < lowestR3) {
-                lowestR3 = r;
-                lowestRGem3 = gem;
-            }
-        }
-
-        System.out.println("lowest: " + lowestRGem);
-        System.out.println("lowest: " + lowestR);
-        System.out.println("lowest 2: " + lowestRGem2);
-        System.out.println("lowest 2: " + lowestR2);
-        System.out.println("lowest 3: " + lowestRGem3);
-        System.out.println("lowest 3: " + lowestR3);
-        int r2 = rand.nextInt(6);
-        System.out.println(r2);
-        switch (r2) {
-            case 0,1,2 -> {
-                returnGem = lowestRGem;
-                weight = (float) (totalWeight - lowestR);
-            }
-            case 3,4 -> {
-                if (lowestR2 - lowestR >= 5) {
-                    returnGem = lowestRGem;
-                    weight = (float) (totalWeight - lowestR);
-                } else {
-                    returnGem = lowestRGem2;
-                    weight = (float) (totalWeight - lowestR2);
-                }
-            }
-            case 5 -> {
-                if (lowestR3 - lowestR >= 7) {
-                    returnGem = lowestRGem;
-                    weight = (float) (totalWeight - lowestR);
-                } else if (lowestR2 - lowestR3 >= 5){
-                    returnGem = lowestRGem2;
-                    weight = (float) (totalWeight - lowestR2);
-                } else {
-                    returnGem = lowestRGem3;
-                    weight = (float) (totalWeight - lowestR3);
-                }
-            }
-        }
-        System.out.println(returnGem);
-        //OUTPUT: A gem
-        return returnGem;
     }
 
     public static BlockPos DirectionFromFacing(int face){
@@ -668,10 +512,6 @@ public class GemFormation {
             this.Drain(blocksToDrain);
         }
     }*/
-
-    public int getColorFromChroma(){
-        return this.chroma.color;
-    }
 
     public void Drain(ArrayList<BlockPos> blockPosList){
         for (BlockPos pos : blockPosList){

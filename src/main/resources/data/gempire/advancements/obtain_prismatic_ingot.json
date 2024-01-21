@@ -10,7 +10,9 @@
       "translate": "advancements.gempire.prismatic_ingot.description"
     },
     "frame": "task",
-    "hidden": false
+    "announce_to_chat": true,
+    "hidden": false,
+    "show_toast": false
   },
   "parent": "gempire:obtain_essence",
   "criteria": {

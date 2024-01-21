@@ -305,67 +305,6 @@ public class ModEntities {
         ModEntities.CRUXTOGEM.put("rutile", ModCruxes.RUTILE_CONDITIONS());
         ModEntities.CRUXTOGEM.put("spinel", ModCruxes.SPINEL_CONDITIONS());
         ModEntities.CRUXTOGEM.put("tourmaline", ModCruxes.TOURMALINE_CONDITIONS());
-
-        GemFormation.POSSIBLE_GEMS_TIER_1.add("ruby");
-        GemFormation.POSSIBLE_GEMS_TIER_1.add("quartz");
-        GemFormation.POSSIBLE_GEMS_TIER_1.add("jasper");
-        GemFormation.POSSIBLE_GEMS_TIER_1.add("agate");
-        GemFormation.POSSIBLE_GEMS_TIER_1.add("topaz");
-        GemFormation.POSSIBLE_GEMS_TIER_1.add("bismuth");
-        GemFormation.POSSIBLE_GEMS_TIER_1.add("lapis");
-        GemFormation.POSSIBLE_GEMS_TIER_1.add("peridot");
-        GemFormation.POSSIBLE_GEMS_TIER_1.add("rutile");
-        GemFormation.POSSIBLE_GEMS_TIER_1.add("spinel");
-        GemFormation.POSSIBLE_GEMS_TIER_1.add("tourmaline");
-
-
-        GemFormation.POSSIBLE_GEMS_TIER_2.add("ruby");
-        GemFormation.POSSIBLE_GEMS_TIER_2.add("quartz");
-        GemFormation.POSSIBLE_GEMS_TIER_2.add("jasper");
-        GemFormation.POSSIBLE_GEMS_TIER_2.add("agate");
-        GemFormation.POSSIBLE_GEMS_TIER_2.add("topaz");
-        GemFormation.POSSIBLE_GEMS_TIER_2.add("bismuth");
-        GemFormation.POSSIBLE_GEMS_TIER_2.add("lapis");
-        GemFormation.POSSIBLE_GEMS_TIER_2.add("peridot");
-        GemFormation.POSSIBLE_GEMS_TIER_2.add("rutile");
-        GemFormation.POSSIBLE_GEMS_TIER_2.add("spinel");
-        GemFormation.POSSIBLE_GEMS_TIER_2.add("tourmaline");
-
-        GemFormation.POSSIBLE_GEMS_TIER_2.add("sapphire");
-        GemFormation.POSSIBLE_GEMS_TIER_2.add("obsidian");
-        GemFormation.POSSIBLE_GEMS_TIER_2.add("nephrite");
-        GemFormation.POSSIBLE_GEMS_TIER_2.add("spodumene");
-        GemFormation.POSSIBLE_GEMS_TIER_2.add("zircon");
-        GemFormation.POSSIBLE_GEMS_TIER_2.add("aquamarine");
-        GemFormation.POSSIBLE_GEMS_TIER_2.add("bixbite");
-        GemFormation.POSSIBLE_GEMS_TIER_2.add("emerald");
-        GemFormation.POSSIBLE_GEMS_TIER_2.add("larimar");
-        GemFormation.POSSIBLE_GEMS_TIER_2.add("morganite");
-        GemFormation.POSSIBLE_GEMS_TIER_2.add("garnet");
-
-        GemFormation.NETHER_POSSIBLE_GEMS_TIER_1.add("ruby");
-        GemFormation.NETHER_POSSIBLE_GEMS_TIER_1.add("quartz");
-        GemFormation.NETHER_POSSIBLE_GEMS_TIER_1.add("jasper");
-        GemFormation.NETHER_POSSIBLE_GEMS_TIER_1.add("agate");
-
-        GemFormation.NETHER_POSSIBLE_GEMS_TIER_2.add("ruby");
-        GemFormation.NETHER_POSSIBLE_GEMS_TIER_2.add("quartz");
-        GemFormation.NETHER_POSSIBLE_GEMS_TIER_2.add("jasper");
-        GemFormation.NETHER_POSSIBLE_GEMS_TIER_2.add("agate");
-
-        GemFormation.NETHER_POSSIBLE_GEMS_TIER_2.add("garnet");
-        GemFormation.NETHER_POSSIBLE_GEMS_TIER_2.add("obsidian");
-
-        GemFormation.END_POSSIBLE_GEMS_TIER_1.add("spinel");
-        GemFormation.END_POSSIBLE_GEMS_TIER_1.add("peridot");
-
-        GemFormation.END_POSSIBLE_GEMS_TIER_2.add("spinel");
-        GemFormation.END_POSSIBLE_GEMS_TIER_2.add("peridot");
-
-        GemFormation.END_POSSIBLE_GEMS_TIER_2.add("emerald");
-        GemFormation.END_POSSIBLE_GEMS_TIER_2.add("zircon");
-        GemFormation.END_POSSIBLE_GEMS_TIER_2.add("sapphire");
-        GemFormation.END_POSSIBLE_GEMS_TIER_2.add("morganite");
     }
 
     public static void setVanillaGems(){

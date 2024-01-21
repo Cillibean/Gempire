@@ -628,6 +628,30 @@ public class ModBlocks {
             )
     );
 
+    public static final RegistryObject<Block> PRIMED_ICE = BLOCKS.register("primed_ice", () ->
+            new Block(BlockBehaviour.Properties.copy(Blocks.ICE)));
+
+    public static final RegistryObject<Block> PRIMED_PACKED_ICE = BLOCKS.register("primed_packed_ice", () ->
+            new Block(BlockBehaviour.Properties.copy(Blocks.PACKED_ICE)));
+
+    public static final RegistryObject<Block> PRIMED_BLUE_ICE = BLOCKS.register("primed_blue_ice", () ->
+            new Block(BlockBehaviour.Properties.copy(Blocks.BLUE_ICE)));
+
+    public static final RegistryObject<Block> PRIMED_DRAINED_ICE = BLOCKS.register("primed_drained_ice", () ->
+            new Block(BlockBehaviour.Properties.copy(ModBlocks.DRAINED_ICE.get())));
+
+    public static final RegistryObject<Block> PRIMED_ICE_STATUE = BLOCKS.register("primed_ice_statue", () ->
+            new LarimarStatueBlock(BlockBehaviour.Properties.copy(Blocks.ICE), 0));
+
+    public static final RegistryObject<Block> PRIMED_PACKED_ICE_STATUE = BLOCKS.register("primed_packed_ice_statue", () ->
+            new LarimarStatueBlock(BlockBehaviour.Properties.copy(Blocks.PACKED_ICE), 1));
+
+    public static final RegistryObject<Block> PRIMED_BLUE_ICE_STATUE = BLOCKS.register("primed_blue_ice_statue", () ->
+            new LarimarStatueBlock(BlockBehaviour.Properties.copy(Blocks.BLUE_ICE), 2));
+
+    public static final RegistryObject<Block> PRIMED_DRAINED_ICE_STATUE = BLOCKS.register("primed_drained_ice_statue", () ->
+            new LarimarStatueBlock(BlockBehaviour.Properties.copy(ModBlocks.DRAINED_ICE.get()), 3));
+
     public static final RegistryObject<Block> DRAINED_BLUE_POLISHED_STONE = BLOCKS.register("drained_blue_polished_stone", () ->
             new DrainedBlock(BlockBehaviour.Properties
                     .of(Material.STONE)
