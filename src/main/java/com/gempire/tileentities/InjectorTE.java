@@ -1,7 +1,6 @@
 package com.gempire.tileentities;
 
 import com.gempire.blocks.GemSeedBlock;
-import com.gempire.blocks.machine.DrillBlock;
 import com.gempire.blocks.machine.PowerCrystalBlock;
 import com.gempire.blocks.machine.TankBlock;
 import com.gempire.container.InjectorContainer;
@@ -9,6 +8,7 @@ import com.gempire.events.InjectEvent;
 import com.gempire.init.*;
 import com.gempire.items.ItemChroma;
 import com.gempire.util.GemInfo;
+import com.gempire.util.InjectionRegistry;
 import com.gempire.util.GemSeedInfo;
 import net.minecraft.world.Containers;
 import net.minecraft.world.SimpleContainer;
@@ -16,9 +16,8 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.MossBlock;
-import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
+import net.minecraft.world.level.biome.Biomes;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -46,19 +45,12 @@ import net.minecraftforge.fluids.capability.templates.FluidTank;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Objects;
-import java.util.Random;
+import java.util.*;
 
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
-
-import static com.gempire.blocks.machine.TankBlock.HALF;
 
 public class InjectorTE extends RandomizableContainerBlockEntity implements IFluidTank, MenuProvider {
     private final ItemStackHandler itemHandler = new ItemStackHandler(6) {
@@ -84,17 +76,17 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
     protected final ContainerData data;
 
     public NonNullList<ItemStack> items = NonNullList.withSize(InjectorTE.NUMBER_OF_SLOTS, ItemStack.EMPTY);
-    public FluidTank pinkTank;
-    public FluidTank blueTank;
-    public FluidTank yellowTank;
-    public FluidTank whiteTank;
+    public FluidTank pinkTank, blueTank, yellowTank, whiteTank;
+
+    public Block drained_sand, drained_soil, drained_stone, drained_stone_2, banded_drained_stone, drained_log, drained_log_cracked, drained_ice;
+
     public boolean pinkOpen, blueOpen, yellowOpen, whiteOpen, invalid = false;
     public int tick = 0;
 
-    public GemSeedInfo info;
+    public static GemSeedInfo info;
     public HashMap<Block, ArrayList<Integer>> resMap = new HashMap<>();
     public HashMap<Block, Float> qualityMap = new HashMap<>();
-    public ArrayList<GemInfo> gemInfoMap = new ArrayList<>();
+    public ArrayList<GemInfo> gemInfoList = new ArrayList<>();
 
     public InjectorTE(BlockPos pos, BlockState state) {
         super(ModTE.INJECTOR_TE.get(), pos, state);
@@ -131,6 +123,8 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
         this.yellowOpen = nbt.getBoolean("yellowOpen");
         this.whiteOpen = nbt.getBoolean("whiteOpen");
         itemHandler.deserializeNBT(nbt.getCompound("inventory"));
+        InjectionRegistry.setMap();
+        gemInfoList = InjectionRegistry.list;
         super.load(nbt);
     }
 
@@ -188,6 +182,7 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
     //INJECTOR FUNCTIONALITY
 
     public void beginInject() {
+        info = new GemSeedInfo(new int[4], 0, 0, 0);
         for (int i = 0; i < 4; i++) {
             ItemStack stack = itemHandler.getStackInSlot(i);
             if (stack.getItem() != Items.AIR) {
@@ -205,46 +200,225 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
 
     public void grow() {
         BlockPos crystalPos = getBlockPos().above().above();
-        BlockPos seedPos = this.getBlockPos().offset(new BlockPos(0, (int) (-Math.ceil(GemSeedTE.DRAIN_SIZE / 2) - 1 - 1), 0));
-        BlockPos cornerPos = seedPos.offset(5, 5, 5);
+        BlockPos seedPos = this.getBlockPos().offset(new BlockPos(0, (int) (-Math.ceil(11 / 2) - 1 - 1), 0));
+        BlockPos cornerPos = seedPos.offset(-5, -5, -5);
         HashMap<BlockPos, Boolean> map = new HashMap<>();
-        for (int x = 0; x < 10; x++) {
-            for (int y = 0; y < 10; y++) {
-                for (int z = 0; z < 10; z++) {
-                    map.put(new BlockPos(cornerPos.offset(-x, -y, -z)), false);
+        info.temp = level.getBiome(seedPos).get().getBaseTemperature();
+        for (int x = 0; x <= 10; x++) {
+            for (int y = 0; y <= 10; y++) {
+                for (int z = 0; z <= 10; z++) {
+                    map.put(new BlockPos(cornerPos.offset(x, y, z)), false);
                 }
             }
         }
         if (level.getBlockState(crystalPos).getBlock() instanceof PowerCrystalBlock && this.level.getBlockState(seedPos) != Blocks.BEDROCK.defaultBlockState()) {
-            for (int i = 0; i < 24; i++) {
+            for (int i = 0; i < 50; i++) {
                 Random r = new Random();
                 BlockPos pos = cornerPos.offset(r.nextInt(11), r.nextInt(11), r.nextInt(11));
                 Block block = level.getBlockState(pos).getBlock();
-                if (!resMap.get(block).isEmpty()) {
-                    info.resources[0] += resMap.get(block).get(0);
-                    info.resources[1] += resMap.get(block).get(1);
-                    info.resources[2] += resMap.get(block).get(2);
-                    info.resources[3] += resMap.get(block).get(3);
+                if (!resMap.isEmpty()) {
+                    if (!resMap.get(block).isEmpty()) {
+                        info.resources[0] += resMap.get(block).get(0);
+                        info.resources[1] += resMap.get(block).get(1);
+                        info.resources[2] += resMap.get(block).get(2);
+                        info.resources[3] += resMap.get(block).get(3);
+                        info.resources[4] += resMap.get(block).get(4);
+                        info.resources[5] += resMap.get(block).get(5);
+                    }
+                    if (qualityMap.get(block) != 0 && qualityMap.get(block) != null) {
+                        info.quality += qualityMap.get(block);
+                    }
                 }
-                if (qualityMap.get(block) != 0 && qualityMap.get(block) != null) {
-                    info.quality += qualityMap.get(block);
-                }
+                drainBlock(pos);
             }
             weighOptions();
         }
     }
 
     public void weighOptions() {
-        ArrayList<String> possibleResults = new ArrayList<>();
-        for (int i = 0; i < gemInfoMap.size(); i++) {
-            GemInfo info = gemInfoMap.get(i);
-
+        ArrayList<GemInfo> possibleResults = new ArrayList<>();
+        for (int i = 0; i < gemInfoList.size(); i++) {
+            GemInfo gemInfo = gemInfoList.get(i);
+            int distance = 0;
+            int[] res = gemInfo.getResources();
+            System.out.println(gemInfo.getName());
+            System.out.println(Arrays.toString(res));
+            for (int a = 0; a < res.length; a++) {
+                if (res[a] > info.resources[a]) distance += (res[a] - info.resources[a]);
+                else distance += (info.resources[i] - res[i]);
+            }
+            if (distance < 50) {
+                System.out.println("possible gem " + distance);
+                for (int b = 0; b < 50 - distance; b++) {
+                    possibleResults.add(gemInfo);
+                }
+            }
         }
-        createGem();
+        createGem(possibleResults);
     }
 
-    public void createGem() {
+    public void createGem(ArrayList<GemInfo> possibleResults) {
+        Random r = new Random();
+        BlockPos seedPos = this.getBlockPos().offset(new BlockPos(0, (int) (-Math.ceil(11 / 2) - 1 - 1), 0));
+        GemInfo gem = possibleResults.get(r.nextInt(possibleResults.size()));
+        System.out.println(gem.getName() + " " + info.quality);
+        Item primer = itemHandler.getStackInSlot(PRIME_INPUT_SLOT_INDEX).getItem();
+        GemSeedBlock seedBlock = (GemSeedBlock) ModBlocks.GEM_SEED_BLOCK.get();
+        this.level.setBlockAndUpdate(seedPos, seedBlock.defaultBlockState());
+        if (this.level.getBlockState(seedPos).getBlock() == ModBlocks.GEM_SEED_BLOCK.get()) {
+            this.getLevel().playSound(null, this.getBlockPos(), ModSounds.INJECT.get(), SoundSource.AMBIENT, 2f, 1);
+        }
+        GemSeedTE gemSeedTE = (GemSeedTE) this.level.getBlockEntity(seedPos);
+        if (gemSeedTE != null) {
+            gemSeedTE.SetPrimer(primer);
+            /*if (level.getBlockState(crystalPos).getBlock() == ModBlocks.POWER_CRYSTAL_BLOCK.get()) {
+                gemSeedTE.setTier(1);
+            } else if (level.getBlockState(crystalPos).getBlock() == ModBlocks.POWER_CRYSTAL_BLOCK_TIER_2.get()) {
+                gemSeedTE.setTier(2);
+            }*/
+            int facing = InjectorTE.getFacingFromState(this.getBlockState());
+            gemSeedTE.setFacing(facing);
+            gemSeedTE.setChroma(info.chroma);
+            gemSeedTE.setInfo(gem);
+            System.out.println("Facing :" + facing);
+            itemHandler.extractItem(InjectorTE.CHROMA_INPUT_SLOT_INDEX, 1, false);
+            itemHandler.extractItem(InjectorTE.PRIME_INPUT_SLOT_INDEX, 1, false);
+            this.level.sendBlockUpdated(this.worldPosition, this.getBlockState(), this.getBlockState(), 2);
+            this.setChanged();
+            InjectEvent event = new InjectEvent(gemSeedTE, seedPos);
+            MinecraftForge.EVENT_BUS.post(event);
+        }
+    }
 
+    public void drainBlock(BlockPos blockPos) {
+        System.out.println("drain "+blockPos);
+        float BLOCK_TEMPERATURE = this.level.getBiome(this.getBlockPos()).get().getBaseTemperature();
+        this.setDrainedStoneColor(BLOCK_TEMPERATURE);
+        Block block = this.level.getBlockState(blockPos).getBlock();
+        if (!(block instanceof AirBlock) &&
+                !(block instanceof SlabBlock) &&
+                !(block instanceof BushBlock) &&
+                !(block instanceof SnowLayerBlock) &&
+                !(block instanceof LiquidBlock) &&
+                !(block instanceof TorchBlock) &&
+                !(block instanceof BedBlock) &&
+                !(block instanceof BeaconBlock) &&
+                !(block instanceof WoolCarpetBlock) &&
+                !(block instanceof TargetBlock) &&
+                !(block instanceof DoorBlock) &&
+                !(block instanceof RailBlock) &&
+                !(block instanceof ChestBlock) &&
+                !(block instanceof FurnaceBlock) &&
+                !(block instanceof FenceBlock) &&
+                !(block instanceof FenceGateBlock) &&
+                !(block instanceof GlassBlock) &&
+                !(block instanceof IronBarsBlock) &&
+                !(block instanceof CraftingTableBlock) &&
+                !(block instanceof AnvilBlock) &&
+                !(block instanceof BlastFurnaceBlock) &&
+                !(block instanceof SmokerBlock) &&
+                !(block instanceof LoomBlock) &&
+                !(block instanceof CartographyTableBlock) &&
+                !(block instanceof CactusBlock) &&
+                !(block instanceof TankBlock) &&
+                !(block instanceof GemSeedBlock) &&
+                !(block instanceof PowerCrystalBlock) &&
+                !(block instanceof PointedDripstoneBlock) &&
+                !(block == ModBlocks.DRILL_BLOCK.get()) &&
+                !(block == ModBlocks.DRAINED_ICE.get()) &&
+                !(block == ModBlocks.DRAINED_LOG_CRACKED.get()) &&
+                !(block == ModBlocks.DRAINED_LOG.get()) &&
+                !(block == ModBlocks.PEDISTAL.get())) {
+            if (block == Blocks.DIRT || block == Blocks.GRASS_BLOCK || block == Blocks.DIRT_PATH
+                    || block == Blocks.GRAVEL || block == Blocks.MOSS_BLOCK) {
+                this.level.setBlockAndUpdate(blockPos, this.drained_soil.defaultBlockState());
+            } else if (block == Blocks.SAND || block == Blocks.RED_SAND || block == Blocks.SOUL_SAND) {
+                this.level.setBlockAndUpdate(blockPos, this.drained_sand.defaultBlockState());
+            } else if (block == Blocks.OAK_LOG || block == Blocks.STRIPPED_OAK_LOG || block == Blocks.STRIPPED_OAK_WOOD || block == Blocks.OAK_WOOD
+                    || block == Blocks.SPRUCE_LOG || block == Blocks.STRIPPED_SPRUCE_LOG || block == Blocks.STRIPPED_SPRUCE_WOOD || block == Blocks.SPRUCE_WOOD
+                    || block == Blocks.BIRCH_LOG || block == Blocks.STRIPPED_BIRCH_LOG || block == Blocks.STRIPPED_BIRCH_WOOD || block == Blocks.BIRCH_WOOD
+                    || block == Blocks.JUNGLE_LOG || block == Blocks.STRIPPED_JUNGLE_LOG || block == Blocks.STRIPPED_JUNGLE_WOOD || block == Blocks.JUNGLE_WOOD
+                    || block == Blocks.ACACIA_LOG || block == Blocks.STRIPPED_ACACIA_LOG || block == Blocks.STRIPPED_ACACIA_WOOD || block == Blocks.ACACIA_WOOD
+                    || block == Blocks.DARK_OAK_LOG || block == Blocks.STRIPPED_DARK_OAK_LOG || block == Blocks.STRIPPED_DARK_OAK_WOOD || block == Blocks.DARK_OAK_WOOD) {
+                this.level.setBlockAndUpdate(blockPos, this.drained_log.withPropertiesOf(this.level.getBlockState(blockPos)));
+            } else if (block == Blocks.CRIMSON_STEM || block == Blocks.WARPED_STEM || block == Blocks.STRIPPED_CRIMSON_STEM || block == Blocks.STRIPPED_WARPED_STEM
+                    || block == Blocks.CRIMSON_HYPHAE || block == Blocks.WARPED_HYPHAE || block == Blocks.STRIPPED_CRIMSON_HYPHAE || block == Blocks.STRIPPED_WARPED_HYPHAE) {
+                this.level.setBlockAndUpdate(blockPos, this.drained_log_cracked.defaultBlockState());
+            } else if (block == Blocks.BLUE_ICE || block == Blocks.PACKED_ICE || block == Blocks.ICE) {
+                this.level.setBlockAndUpdate(blockPos, this.drained_ice.defaultBlockState());
+            } else if (block == Blocks.VINE ||block == Blocks.CAVE_VINES || block == Blocks.CAVE_VINES_PLANT || block == Blocks.OAK_LEAVES || block == Blocks.DARK_OAK_LEAVES
+                    || block == Blocks.BIRCH_LEAVES || block == Blocks.JUNGLE_LEAVES || block == Blocks.ACACIA_LEAVES || block == Blocks.MANGROVE_LEAVES || block == Blocks.AZALEA_LEAVES
+                    || block == Blocks.FLOWERING_AZALEA_LEAVES || block == Blocks.SPRUCE_LEAVES) {
+                this.level.setBlockAndUpdate(blockPos, Blocks.AIR.defaultBlockState());
+            } else if (block == Blocks.SNOW_BLOCK || block == Blocks.POWDER_SNOW) {
+                this.level.setBlockAndUpdate(blockPos, Blocks.WATER.defaultBlockState());
+            } else {
+                if (blockPos.getY() < 80) {
+                    this.level.setBlockAndUpdate(blockPos, this.drained_stone.defaultBlockState());
+                } else {
+                    this.level.setBlockAndUpdate(blockPos, this.drained_stone_2.defaultBlockState());
+                    if (blockPos.getY() % 6 == 0) {
+                        this.level.setBlockAndUpdate(blockPos, this.banded_drained_stone.defaultBlockState());
+                    }
+                }
+                if (blockPos.getY() == 80) {
+                    this.level.setBlockAndUpdate(blockPos, this.banded_drained_stone.defaultBlockState());
+                }
+            }
+        }
+    }
+
+    public void setDrainedStoneColor(float temperature){
+        if(temperature > .1f && temperature <= .5F){
+            this.drained_sand = ModBlocks.DRAINED_GREY_SAND.get();
+            this.drained_soil = ModBlocks.DRAINED_GREY_SOIL.get();
+            this.drained_ice = ModBlocks.DRAINED_ICE.get();
+            this.drained_stone = ModBlocks.DRAINED_GREY_STONE.get();
+            this.drained_stone_2 = ModBlocks.DRAINED_GREY_STONE_2.get();
+            this.banded_drained_stone = ModBlocks.DRAINED_BANDED_GREY_STONE.get();
+            this.drained_log = ModBlocks.DRAINED_LOG.get();
+            this.drained_log_cracked = ModBlocks.DRAINED_LOG_CRACKED.get();
+        }
+        else if(temperature > .5f && temperature <= .9f){
+            this.drained_sand = ModBlocks.DRAINED_PURPLE_SAND.get();
+            this.drained_soil = ModBlocks.DRAINED_PURPLE_SOIL.get();
+            this.drained_ice = ModBlocks.DRAINED_ICE.get();
+            this.drained_stone = ModBlocks.DRAINED_PURPLE_STONE.get();
+            this.drained_stone_2 = ModBlocks.DRAINED_PURPLE_STONE_2.get();
+            this.banded_drained_stone = ModBlocks.DRAINED_BANDED_PURPLE_STONE.get();
+            this.drained_log = ModBlocks.DRAINED_LOG.get();
+            this.drained_log_cracked = ModBlocks.DRAINED_LOG_CRACKED.get();
+        }
+        else if(temperature > .9f && temperature <= 1.2f || Objects.requireNonNull(this.level).getBiome(getBlockPos()).is(Biomes.DESERT)){
+            this.drained_sand = ModBlocks.DRAINED_SAND.get();
+            this.drained_soil = ModBlocks.DRAINED_YELLOW_SOIL.get();
+            this.drained_ice = ModBlocks.DRAINED_ICE.get();
+            this.drained_stone = ModBlocks.DRAINED_YELLOW_STONE.get();
+            this.drained_stone_2 = ModBlocks.DRAINED_YELLOW_STONE_2.get();
+            this.banded_drained_stone = ModBlocks.DRAINED_BANDED_YELLOW_STONE.get();
+            this.drained_log = ModBlocks.DRAINED_LOG.get();
+            this.drained_log_cracked = ModBlocks.DRAINED_LOG_CRACKED.get();
+        }
+        else if(temperature > 1.2f && temperature <= 2f){
+            this.drained_sand = ModBlocks.DRAINED_RED_SAND.get();
+            this.drained_soil = ModBlocks.DRAINED_RED_SOIL.get();
+            this.drained_ice = ModBlocks.DRAINED_ICE.get();
+            this.drained_stone = ModBlocks.DRAINED_RED_STONE.get();
+            this.drained_stone_2 = ModBlocks.DRAINED_RED_STONE_2.get();
+            this.banded_drained_stone = ModBlocks.DRAINED_BANDED_RED_STONE.get();
+            this.drained_log = ModBlocks.DRAINED_LOG.get();
+            this.drained_log_cracked = ModBlocks.DRAINED_LOG_CRACKED.get();
+        }
+        else{
+            this.drained_sand = ModBlocks.DRAINED_BLUE_SAND.get();
+            this.drained_soil = ModBlocks.DRAINED_BLUE_SOIL.get();
+            this.drained_ice = ModBlocks.DRAINED_ICE.get();
+            this.drained_stone = ModBlocks.DRAINED_BLUE_STONE.get();
+            this.drained_stone_2 = ModBlocks.DRAINED_BLUE_STONE_2.get();
+            this.banded_drained_stone = ModBlocks.DRAINED_BANDED_BLUE_STONE.get();
+            this.drained_log = ModBlocks.DRAINED_LOG.get();
+            this.drained_log_cracked = ModBlocks.DRAINED_LOG_CRACKED.get();
+        }
     }
 
     public void DumpFluids() {
@@ -322,7 +496,7 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
     public void Inject() {
         if (getValid()) {
             invalid = true;
-            BlockPos crystalPos = getBlockPos().above().above();
+            /*BlockPos crystalPos = getBlockPos().above().above();
             BlockPos seedPos = this.getBlockPos().offset(new BlockPos(0, (int) (-Math.ceil(GemSeedTE.DRAIN_SIZE / 2) - 1 - 1), 0));
             if (level.getBlockState(crystalPos).getBlock() instanceof PowerCrystalBlock) {
                 if (this.level.getBlockState(seedPos) != Blocks.BEDROCK.defaultBlockState()) {
@@ -400,7 +574,8 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
                             MinecraftForge.EVENT_BUS.post(event);
                         }
                     }
-                }
+                }*/
+            if (!level.isClientSide) beginInject();
             } else {
             invalid = false;
         }

@@ -2,12 +2,14 @@ package com.gempire.util;
 
 public class GemSeedInfo {
     public int[] resources;
+    public float temp;
     public float quality;
     public int chroma;
 
-    public GemSeedInfo(int[] resources, float quality, int chroma) {
+    public GemSeedInfo(int[] resources, float temp, float quality, int chroma) {
         this.resources = resources;
         this.quality = quality;
+        this.temp = temp;
         this.chroma = chroma;
     }
 
@@ -23,6 +25,9 @@ public class GemSeedInfo {
     public int getChroma() {
         return chroma;
     }
+    public float getTemp() {
+        return temp;
+    }
 
     public void setQuality(float value) {
         quality = value;
@@ -34,6 +39,10 @@ public class GemSeedInfo {
 
     public void setChroma(int value) {
         chroma = value;
+    }
+
+    public void setTemp(float value) {
+        temp = value;
     }
 }
 

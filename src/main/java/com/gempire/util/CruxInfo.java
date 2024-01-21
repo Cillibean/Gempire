@@ -1,13 +1,15 @@
 package com.gempire.util;
 
-public class GemInfo {
+import net.minecraft.world.level.block.Block;
+
+public class CruxInfo {
     public int[] resources;
-    public float temp;
+    public Block block;
     public String name;
 
-    public GemInfo(int[] resources, float temp, String name) {
+    public CruxInfo(int[] resources, Block block, String name) {
         this.resources = resources;
-        this.temp = temp;
+        this.block = block;
         this.name = name;
     }
 
@@ -15,8 +17,8 @@ public class GemInfo {
         return resources;
     }
 
-    public float getTemp() {
-        return temp;
+    public Block getBlock() {
+        return block;
     }
 
     public String getName() {
