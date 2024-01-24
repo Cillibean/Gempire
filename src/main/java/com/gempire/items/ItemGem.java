@@ -196,7 +196,7 @@ public class ItemGem extends Item {
             if (player == null) {
                 dying = false;
             } else {
-                list = player.level.getEntitiesOfClass(EntityGem.class, player.getBoundingBox().inflate(4.0D, 4.0D, 4.0D));
+                list = player.level().getEntitiesOfClass(EntityGem.class, player.getBoundingBox().inflate(4.0D, 4.0D, 4.0D));
                 for (EntityGem gemmy : list) {
                     if (gemmy.isDeadOrDying()) dying = true;
                     System.out.println(gemmy.getUUID());
@@ -565,12 +565,12 @@ public class ItemGem extends Item {
                         float f = (this.rand.nextFloat() - 0.5F) * 2.0F;
                         float f1 = (this.rand.nextFloat() - 0.5F) * 2.0F;
                         float f2 = (this.rand.nextFloat() - 0.5F) * 2.0F;
-                        entity.level.addParticle(ParticleTypes.EXPLOSION, entity.getX() + (double)f, entity.getY() + 2.0D + (double)f1, entity.getZ() + (double)f2, 0.0D, 0.0D, 0.0D);
+                        entity.level().addParticle(ParticleTypes.EXPLOSION, entity.getX() + (double)f, entity.getY() + 2.0D + (double)f1, entity.getZ() + (double)f2, 0.0D, 0.0D, 0.0D);
                     }
                     this.countdown--;
                 }
                 else{
-                    this.formGem(entity.level, null, entity.blockPosition(), stack, entity);
+                    this.formGem(entity.level(), null, entity.blockPosition(), stack, entity);
                     this.countdown = this.coundownMax;
                 }
             }

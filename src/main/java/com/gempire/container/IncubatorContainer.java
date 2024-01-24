@@ -46,14 +46,14 @@ public class IncubatorContainer extends AbstractContainerMenu {
     private final ContainerData data;
 
     public IncubatorContainer(int windowId, Inventory inv, FriendlyByteBuf extraData) {
-        this(windowId, inv, inv.player.level.getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(2));
+        this(windowId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(2));
     }
 
     public IncubatorContainer(int windowID, Inventory playerInventory, BlockEntity entity, ContainerData data) {
         super(ModContainers.INCUBATOR_CONTAINER.get(), windowID);
         checkContainerSize(playerInventory, 10);
         incubator = (IncubatorTE) entity;
-        this.level = playerInventory.player.level;
+        this.level = playerInventory.player.level();
         this.data = data;
 
         addDataSlots(data);
@@ -157,7 +157,7 @@ public class IncubatorContainer extends AbstractContainerMenu {
     public static IncubatorTE getTileEntity(Inventory playerInventory, FriendlyByteBuf extraData){
         Objects.requireNonNull(playerInventory, "Player Inventory can not be null");
         Objects.requireNonNull(extraData, "Data Packet can not be null");
-        BlockEntity te = playerInventory.player.level.getBlockEntity(extraData.readBlockPos());
+        BlockEntity te = playerInventory.player.level().getBlockEntity(extraData.readBlockPos());
         if(te instanceof IncubatorTE){
             return (IncubatorTE)te;
         }

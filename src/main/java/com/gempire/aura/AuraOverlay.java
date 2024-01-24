@@ -3,7 +3,7 @@ package com.gempire.aura;
 import com.gempire.Gempire;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
-import net.minecraft.client.gui.GuiComponent;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.resources.ResourceLocation;
@@ -25,19 +25,19 @@ public class AuraOverlay {
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 0.5F);
         RenderSystem.enableBlend();
-
+        //TODO: fix auras
         if (ClientAuraData.getPlayerAura() == 1) {
             RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
             RenderSystem.setShaderTexture(0, PINK_OVERLAY);
-            GuiComponent.blit(poseStack, 0, 0, 0, 0, 2000, 2000, 2000, 2000);
+            //GuiGraphics.blit(poseStack, 0, 0, 0, 0, 2000, 2000, 2000, 2000);
         } else if (ClientAuraData.getPlayerAura() == 2) {
             RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
             RenderSystem.setShaderTexture(0, YELLOW_OVERLAY);
-            GuiComponent.blit(poseStack, 0, 0, 0, 0, 2000, 2000, 2000, 2000);
+            //GuiGraphics.blit(poseStack, 0, 0, 0, 0, 2000, 2000, 2000, 2000);
         } else if (ClientAuraData.getPlayerAura() == 3) {
             RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
             RenderSystem.setShaderTexture(0, BLUE_OVERLAY);
-            GuiComponent.blit(poseStack, 0, 0, 0, 0, 2000, 2000, 2000, 2000);
+            //GuiGraphics.blit(poseStack, 0, 0, 0, 0, 2000, 2000, 2000, 2000);
         } else if (ClientAuraData.getPlayerAura() == 4) {
             RenderSystem.setShaderColor(0F, 0F, 0F, 1F);
             //GameRenderer.loadEffect(Gempire.MODID, "shader/post/white.json");

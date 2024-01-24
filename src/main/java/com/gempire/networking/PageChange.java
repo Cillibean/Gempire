@@ -34,7 +34,7 @@ public class PageChange {
             ServerPlayer sender = ctx.getSender();
             boolean hasPermission = true;
             ctx.enqueueWork(() -> {
-                        EntityGem gem = (EntityGem) sender.level.getEntity(msg.entityID);
+                        EntityGem gem = (EntityGem) sender.level().getEntity(msg.entityID);
                         boolean forwardd = msg.forward;
                         boolean pearl = gem instanceof EntityPearl;
                         if (pearl) {

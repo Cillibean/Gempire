@@ -21,7 +21,7 @@ public class WhiteAuraEffect extends MobEffect {
             entity.getCapability(PlayerAuraProvider.PLAYER_AURA).ifPresent(aura -> {
                 aura.setAura(4);
             });
-            if (!entity.level.isClientSide) {
+            if (!entity.level().isClientSide) {
                 ModMessages.sendToPlayer(new AuraDataSyncS2C(4), (ServerPlayer) entity);
             }
         }

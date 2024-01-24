@@ -24,7 +24,7 @@ public class PaladinArmorEffect extends MobEffect {
 
     @Override
     public void applyEffectTick(LivingEntity p_19467_, int p_19468_) {
-        if (!p_19467_.level.isClientSide) {
+        if (!p_19467_.level().isClientSide) {
             if (p_19467_.getHealth() < p_19467_.getMaxHealth()) {
                 if (tick == 30) {
                     p_19467_.heal(1.0F);

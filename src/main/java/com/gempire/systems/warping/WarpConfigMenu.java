@@ -38,7 +38,7 @@ public class WarpConfigMenu extends AbstractContainerMenu {
         info = new WarpPadInfo(data);
     }
     public static MenuProvider getMenuProvider(WarpPadInfo info, IItemHandler itemHandler) {
-        return new SimpleMenuProvider((id, inventory, player) -> new WarpConfigMenu(id, ContainerLevelAccess.create(player.getLevel(), info.getPos()), info), TITLE);
+        return new SimpleMenuProvider((id, inventory, player) -> new WarpConfigMenu(id, ContainerLevelAccess.create(player.level(), info.getPos()), info), TITLE);
     }
 
     @Override

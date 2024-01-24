@@ -11,6 +11,6 @@ public class ItemEmpressBow extends BowItem {
 
     @Override
     public AbstractArrow customArrow(AbstractArrow arrow) {
-        return new EmpressArrow(arrow.level, arrow.getX(), arrow.getY(), arrow.getZ());
+        return new EmpressArrow(arrow.level(), arrow.getX(), arrow.getY(), arrow.getZ());
     }
 }

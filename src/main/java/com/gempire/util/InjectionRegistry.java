@@ -142,7 +142,7 @@ public class InjectionRegistry {
         blockList.add(new CruxInfo(new int[]{1, 0, 0, 0, 0, 0}, Blocks.STRIPPED_CRIMSON_STEM, "stripped_crimson_stem"));
         blockList.add(new CruxInfo(new int[]{1, 0, 0, 0, 0, 0}, Blocks.CRIMSON_HYPHAE, "crimson_hyphae"));
         blockList.add(new CruxInfo(new int[]{1, 0, 0, 0, 0, 0}, Blocks.STRIPPED_CRIMSON_HYPHAE, "stripped_crimson_hyphae"));
-        //TODO: get crimson leaves
+        blockList.add(new CruxInfo(new int[]{1, 0, 0, 0, 0, 0}, Blocks.NETHER_WART_BLOCK, "nether_wart_block"));
         blockList.add(new CruxInfo(new int[]{1, 0, 0, 0, 0, 0}, Blocks.WARPED_STEM, "warped_stem"));
         blockList.add(new CruxInfo(new int[]{1, 0, 0, 0, 0, 0}, Blocks.STRIPPED_WARPED_STEM, "stripped_warped_stem"));
         blockList.add(new CruxInfo(new int[]{1, 0, 0, 0, 0, 0}, Blocks.WARPED_HYPHAE, "warped_hyphae"));

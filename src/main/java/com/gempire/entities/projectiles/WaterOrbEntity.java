@@ -59,7 +59,7 @@ public class WaterOrbEntity extends ThrowableItemProjectile {
     public void handleEntityEvent(byte id) {
         if (id == 3) {
             for(int i = 0; i < 7; ++i) {
-                this.level.addParticle(ParticleTypes.DRIPPING_WATER, this.getX(), this.getY(), this.getZ(), 0, 0, 0);
+                this.level().addParticle(ParticleTypes.DRIPPING_WATER, this.getX(), this.getY(), this.getZ(), 0, 0, 0);
             }
         }
     }

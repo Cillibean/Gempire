@@ -22,7 +22,7 @@ public class WingLayer<E extends EntityGem, M extends ModelGem<E>> extends Gempi
 
     @Override
     public void render(PoseStack matrixStackIn, MultiBufferSource bufferIn, int packedLightIn, EntityGem gem, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
-        if (gem.requiresHydrationToFly() && gem.level.dimension() != Level.NETHER || !gem.requiresHydrationToFly()) {
+        if (gem.requiresHydrationToFly() && gem.level().dimension() != Level.NETHER || !gem.requiresHydrationToFly()) {
             int wing = gem.getWingColor();
             float r = ((wing & 16711680) >> 16) / 255f;
             float g = ((wing & 65280) >> 8) / 255f;

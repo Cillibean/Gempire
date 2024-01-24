@@ -102,7 +102,7 @@ public class InjectorContainer extends AbstractContainerMenu {
     public static InjectorTE getTileEntity(Inventory playerInventory, FriendlyByteBuf extraData){
         Objects.requireNonNull(playerInventory, "Player Inventory can not be null");
         Objects.requireNonNull(extraData, "Data Packet can not be null");
-        BlockEntity te = playerInventory.player.level.getBlockEntity(extraData.readBlockPos());
+        BlockEntity te = playerInventory.player.level().getBlockEntity(extraData.readBlockPos());
         if(te instanceof InjectorTE){
             return (InjectorTE)te;
         }

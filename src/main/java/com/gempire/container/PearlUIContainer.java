@@ -32,7 +32,7 @@ public class PearlUIContainer extends AbstractContainerMenu {
     public PearlUIContainer(int windowID, Inventory playerInventory, EntityPearl gem) {
         super(ModContainers.PEARL_UI_CONTAINER.get(), windowID);
         this.gem = gem;
-        this.canInteract = ContainerLevelAccess.create(this.gem.level, this.gem.blockPosition());
+        this.canInteract = ContainerLevelAccess.create(this.gem.level(), this.gem.blockPosition());
 
         //INITIALIZE GEM INVENTORY HERE
         for(int row = 0; row < 6; row++){
@@ -66,7 +66,7 @@ public class PearlUIContainer extends AbstractContainerMenu {
         Objects.requireNonNull(playerInventory, "Player Inventory can not be null");
         Objects.requireNonNull(extraData, "Data Packet can not be null");
         int ID = extraData.readInt();
-        Entity entity = playerInventory.player.level.getEntity(ID);
+        Entity entity = playerInventory.player.level().getEntity(ID);
         if(entity instanceof EntityPearl){
             return (EntityPearl) entity;
         }

@@ -69,7 +69,7 @@ public class IceShardEntity extends ThrowableItemProjectile {
             ParticleOptions iparticledata = this.makeParticle();
 
             for(int i = 0; i < 8; ++i) {
-                this.level.addParticle(iparticledata, this.getX(), this.getY(), this.getZ(), 0.0D, 0.0D, 0.0D);
+                this.level().addParticle(iparticledata, this.getX(), this.getY(), this.getZ(), 0.0D, 0.0D, 0.0D);
             }
         }
     }
