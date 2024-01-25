@@ -14,12 +14,12 @@ public class AbilityHydration extends Ability implements ICraftingAbility {
 
     @Override
     public int recipeAmount() {
-        if (holder.level.dimension() != Level.NETHER) return 1;
+        if (holder.level().dimension() != Level.NETHER) return 1;
         else return 0;
     }
     @Override
     public void setup() {
-        if (holder.level.dimension() != Level.NETHER) {
+        if (holder.level().dimension() != Level.NETHER) {
             input.add(Items.BUCKET);
             output.add(Items.WATER_BUCKET);
             input2.add(Items.AIR);

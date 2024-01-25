@@ -41,7 +41,7 @@ public class WarpSelectionMenu extends AbstractContainerMenu {
         }
     }
     public static MenuProvider getMenuProvider(BlockPos pos, List<WarpPadInfo> warpPads) {
-        return new SimpleMenuProvider((id, inventory, player) -> new WarpSelectionMenu(id, ContainerLevelAccess.create(player.getLevel(), pos), pos, warpPads), TITLE);
+        return new SimpleMenuProvider((id, inventory, player) -> new WarpSelectionMenu(id, ContainerLevelAccess.create(player.level(), pos), pos, warpPads), TITLE);
     }
     @Override
     public ItemStack quickMoveStack(Player player, int index) {

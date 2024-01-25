@@ -12,6 +12,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.components.EditBox;
@@ -117,12 +118,12 @@ public class PearlUIScreen extends AbstractContainerScreen<PearlUIContainer> {
     }
 
     @Override
-    protected void renderLabels(PoseStack matrixStack, int x, int y) {
+    protected void renderLabels(GuiGraphics matrixStack, int x, int y) {
 
     }
 
     @Override
-    public void render(PoseStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+    public void render(GuiGraphics matrixStack, int mouseX, int mouseY, float partialTicks) {
         this.renderBackground(matrixStack);
         super.render(matrixStack, mouseX, mouseY, partialTicks);
         this.renderTooltip(matrixStack, mouseX, mouseY);
@@ -130,13 +131,13 @@ public class PearlUIScreen extends AbstractContainerScreen<PearlUIContainer> {
 
     @SuppressWarnings("deprecation")
     @Override
-    protected void renderBg(PoseStack matrixStack, float partialTicks, int mouseX, int mouseY) {
+    protected void renderBg(GuiGraphics matrixStack, float partialTicks, int mouseX, int mouseY) {
         GUIUtilities.setup(GUI);
         int x = (this.width - this.imageWidth) / 2;
         int y = (this.height - this.imageHeight) / 2;
         int i = this.leftPos;
         int j = this.topPos;
-        blit(matrixStack, x, y, 0, 0, this.imageWidth, this.imageHeight, 352, 240);
+        matrixStack.blit(GUI, x, y, 0, 0, this.imageWidth, this.imageHeight, 352, 240);
 
         this.nameBox.render(matrixStack, mouseX, mouseY, partialTicks);
 
@@ -148,19 +149,19 @@ public class PearlUIScreen extends AbstractContainerScreen<PearlUIContainer> {
         int ddOffsetOutfit = this.menu.gem.getOutfitVariant() > 9 ? -3 : 0;
         int ddOffsetInsignia = this.menu.gem.getInsigniaVariant() > 9 ? -3 : 0;
 
-        this.font.draw(matrixStack, Component.translatable("Page: " + (this.menu.gem.getPage() + 1)),
+        matrixStack.drawString(font, Component.translatable("Page: " + (this.menu.gem.getPage() + 1)),
                 i + 190, j + 11, 4210752);
-        this.font.draw(matrixStack, Component.translatable("Hair:"),
+        matrixStack.drawString(font, Component.translatable("Hair:"),
                 i + 77, j + 36, 0xFFFFFF);
-        this.font.draw(matrixStack, Component.translatable("Uniform:"),
+        matrixStack.drawString(font, Component.translatable("Uniform:"),
                 i + 77, j + 54, 0xFFFFFF);
-        this.font.draw(matrixStack, Component.translatable("Insignia:"),
+        matrixStack.drawString(font, Component.translatable("Insignia:"),
                 i + 77, j + 72, 0xFFFFFF);
-        this.font.draw(matrixStack, Component.translatable("" + (this.menu.gem.getHairVariant() + 1)),
+        matrixStack.drawString(font, Component.translatable("" + (this.menu.gem.getHairVariant() + 1)),
                 i + 107 + ddOffsetHair, j + 37, 0xFFFFFF);
-        this.font.draw(matrixStack, Component.translatable("" + (this.menu.gem.getOutfitVariant() + 1)),
+        matrixStack.drawString(font, Component.translatable("" + (this.menu.gem.getOutfitVariant() + 1)),
                 i + 124 + ddOffsetOutfit, j + 55, 0xFFFFFF);
-        this.font.draw(matrixStack, Component.translatable("" + (this.menu.gem.getInsigniaVariant() + 1)),
+        matrixStack.drawString(font, Component.translatable("" + (this.menu.gem.getInsigniaVariant() + 1)),
                 i + 123 + ddOffsetInsignia, j + 73, 0xFFFFFF);
     }
 
@@ -228,13 +229,13 @@ public class PearlUIScreen extends AbstractContainerScreen<PearlUIContainer> {
         Lighting.setupFor3DItems();
     }
 
-    public void drawStats(PoseStack stack, int x, int y){
+    public void drawStats(GuiGraphics stack, int x, int y){
         Component health = Component.translatable("screens.gempire.health");
-        this.font.draw(stack, Component.translatable(health.getString() + ": " + (int)this.menu.gem.getHealth()
+        stack.drawString(font, Component.translatable(health.getString() + ": " + (int)this.menu.gem.getHealth()
                 + " / " + (int)this.menu.gem.getMaxHealth()), x + 10, y + 97, 4210752);
     }
 
-    public void drawAbilityList(PoseStack stack, int x, int y){
+    public void drawAbilityList(GuiGraphics stack, int x, int y){
         ArrayList<Ability> powers1 = this.menu.gem.findAbilities(this.menu.gem.getAbilities());
         ArrayList<Ability> powers = new ArrayList<>();
         for(Ability ability : powers1){
@@ -244,7 +245,7 @@ public class PearlUIScreen extends AbstractContainerScreen<PearlUIContainer> {
         }
         for(int i = 0; i < powers.size(); i++){
             Component text = powers.get(i).getName();
-            this.font.draw(stack, text, x, y + i * 9, 4210752);
+            stack.drawString(font, text, x, y + i * 9, 4210752);
         }
     }
 }

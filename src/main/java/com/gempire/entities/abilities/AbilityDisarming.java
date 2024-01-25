@@ -25,26 +25,26 @@ public class AbilityDisarming extends Ability implements IViolentAbility, IMelee
     @Override
     public void fight(LivingEntity entityIn, double damage) {
         if (!(entityIn instanceof Player)) {
-            if (!entityIn.level.isClientSide) {
+            if (!entityIn.level().isClientSide) {
                 if (holder.getRandom().nextFloat() < 0.25f) {
                     ItemStack item = entityIn.getItemBySlot(EquipmentSlot.MAINHAND);
                     if (item.isDamageableItem()) {
                         item.setDamageValue(item.getMaxDamage() - holder.getRandom().nextInt(1 + holder.getRandom().nextInt(Math.max(item.getMaxDamage() - 3, 1))));
                     }
-                    ItemEntity dropitem = new ItemEntity(entityIn.level, entityIn.getX(), entityIn.getY(), entityIn.getZ(), item);
-                    entityIn.level.addFreshEntity(dropitem);
+                    ItemEntity dropitem = new ItemEntity(entityIn.level(), entityIn.getX(), entityIn.getY(), entityIn.getZ(), item);
+                    entityIn.level().addFreshEntity(dropitem);
                     entityIn.setItemSlot(EquipmentSlot.MAINHAND, ItemStack.EMPTY);
                 }
             }
         } else {
-            if (!entityIn.level.isClientSide) {
+            if (!entityIn.level().isClientSide) {
                 if (holder.getRandom().nextFloat() < 0.25f) {
                     ItemStack item = entityIn.getItemBySlot(EquipmentSlot.MAINHAND);
                     if (item.isDamageableItem()) {
                         item.setDamageValue(item.getMaxDamage() - holder.getRandom().nextInt(1 + holder.getRandom().nextInt(Math.max(item.getMaxDamage() - 3, 1))));
                     }
-                    ItemEntity dropitem = new ItemEntity(entityIn.level, entityIn.getX(), entityIn.getY(), entityIn.getZ(), item);
-                    entityIn.level.addFreshEntity(dropitem);
+                    ItemEntity dropitem = new ItemEntity(entityIn.level(), entityIn.getX(), entityIn.getY(), entityIn.getZ(), item);
+                    entityIn.level().addFreshEntity(dropitem);
                     entityIn.setItemSlot(EquipmentSlot.MAINHAND, ItemStack.EMPTY);
                 }
             }

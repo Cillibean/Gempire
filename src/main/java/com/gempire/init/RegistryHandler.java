@@ -27,5 +27,6 @@ public class RegistryHandler {
         ModFeatures.FEATURES.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModEffects.MOB_EFFECTS.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModEnchants.ENCHANTS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        ModCreativeModeTabs.CREATIVE_MODE_TABS.register(FMLJavaModLoadingContext.get().getModEventBus());
     }
 }

@@ -41,7 +41,7 @@ public class ZirconUIContainer extends AbstractContainerMenu {
     public ZirconUIContainer(int windowID, Inventory playerInventory, EntityZircon gem) {
         super(ModContainers.ZIRCON_UI_CONTAINER.get(), windowID);
         this.gem = gem;
-        this.canInteract = ContainerLevelAccess.create(this.gem.level, this.gem.blockPosition());
+        this.canInteract = ContainerLevelAccess.create(this.gem.level(), this.gem.blockPosition());
 
         this.addSlot(new Slot(gem, 0, 46, 84){
             public boolean mayPlace(ItemStack stack) {
@@ -85,7 +85,7 @@ public class ZirconUIContainer extends AbstractContainerMenu {
         Objects.requireNonNull(playerInventory, "Player Inventory can not be null");
         Objects.requireNonNull(extraData, "Data Packet can not be null");
         int ID = extraData.readInt();
-        Entity entity = playerInventory.player.level.getEntity(ID);
+        Entity entity = playerInventory.player.level().getEntity(ID);
         if(entity instanceof EntityZircon){
             return (EntityZircon) entity;
         }

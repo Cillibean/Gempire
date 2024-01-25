@@ -7,6 +7,7 @@ import com.gempire.systems.warping.WarpPadInfo;
 import com.gempire.systems.warping.WarpSelectionMenu;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -77,19 +78,19 @@ public class WarpSelectionScreen extends AbstractContainerScreen<WarpSelectionMe
         return super.mouseClicked(mouseX, mouseY, button);
     }
     @Override
-    protected void renderLabels(PoseStack stack, int mouseX, int mouseY) {
-        this.font.draw(stack, this.title, (float)this.titleLabelX, (float)this.titleLabelY, 4210752);
+    protected void renderLabels(GuiGraphics stack, int mouseX, int mouseY) {
+        stack.drawString(font, this.title, this.titleLabelX, this.titleLabelY, 4210752);
     }
     @Override
-    protected void renderBg(PoseStack stack, float partialTicks, int mouseX, int mouseY) {
+    protected void renderBg(GuiGraphics stack, float partialTicks, int mouseX, int mouseY) {
         RenderSystem.setShaderTexture(0, BACKGROUND);
-        blit(stack, this.leftPos, this.topPos, 0, 0, this.imageWidth, this.imageHeight);
+        stack.blit(BACKGROUND, this.leftPos, this.topPos, 0, 0, this.imageWidth, this.imageHeight);
         int x = this.leftPos + 157;
         int y = this.topPos + 18 + (int)(123 * scrollOffset);
         int extraButtons = warpButtons.size() - 6;
-        blit(stack, x, y, 232 + (extraButtons > 0 ? 0 : 12), 0, 12, 15);
+        stack.blit(BACKGROUND, x, y, 232 + (extraButtons > 0 ? 0 : 12), 0, 12, 15);
     }
-    private void renderButtons(PoseStack stack, float partialTicks, int mouseX, int mouseY) {
+    private void renderButtons(GuiGraphics stack, float partialTicks, int mouseX, int mouseY) {
         for(int i = 0; i < warpButtons.size(); i++) {
             int index = i - startButton;
             if(index >= 0 && index < 6) {
@@ -101,7 +102,7 @@ public class WarpSelectionScreen extends AbstractContainerScreen<WarpSelectionMe
         }
     }
     @Override
-    public void render(PoseStack stack, int mouseX, int mouseY, float partialTicks) {
+    public void render(GuiGraphics stack, int mouseX, int mouseY, float partialTicks) {
         super.render(stack, mouseX, mouseY, partialTicks);
         renderButtons(stack, partialTicks, mouseX, mouseY);
         this.renderTooltip(stack, mouseX, mouseY);

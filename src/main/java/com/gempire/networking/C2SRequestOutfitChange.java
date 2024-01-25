@@ -34,7 +34,7 @@ public class C2SRequestOutfitChange {
         if (hasPermission) {
             ctx.enqueueWork(() -> {
                 assert sender != null;
-                EntityPearl gem = (EntityPearl) sender.level.getEntity(msg.entityID);
+                EntityPearl gem = (EntityPearl) sender.level().getEntity(msg.entityID);
                 assert gem != null;
                 if (msg.forward) {
                     gem.CycleOutfitForward();

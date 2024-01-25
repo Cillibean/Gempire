@@ -21,7 +21,7 @@ public class BlueAuraEffect extends MobEffect {
             entity.getCapability(PlayerAuraProvider.PLAYER_AURA).ifPresent(aura -> {
                 aura.setAura(3);
             });
-            if (!entity.level.isClientSide) {
+            if (!entity.level().isClientSide) {
                 ModMessages.sendToPlayer(new AuraDataSyncS2C(3), (ServerPlayer) entity);
             }
         }

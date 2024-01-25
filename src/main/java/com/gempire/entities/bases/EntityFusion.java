@@ -719,7 +719,7 @@ public abstract class EntityFusion extends PathfinderMob implements RangedAttack
 
 
     public void unfuse() {
-        Level level = this.getLevel();
+        Level level = this.level();
         if (!level.isClientSide) {
             RegistryObject<EntityType<EntityPebble>> gemm1 = ModEntities.PEBBLE;
             RegistryObject<EntityType<EntityPebble>> gemm2 = ModEntities.PEBBLE;
@@ -850,14 +850,14 @@ public abstract class EntityFusion extends PathfinderMob implements RangedAttack
         if (this.isSunBurnTick()) {
             if (this.getHealth() < this.getMaxHealth() && this.tickCount % 20 == 0) {
                 this.heal(1.0F);
-                this.level.addParticle(ParticleTypes.HEART, this.getX(), this.getY() + 2, this.getZ(), 0, 0, 0F);
+                this.level().addParticle(ParticleTypes.HEART, this.getX(), this.getY() + 2, this.getZ(), 0, 0, 0F);
             }
         }
 
         if (this.usesAreaAbilities()) {
             if (this.tickCount % 100 == 0) {
-                ArrayList<LivingEntity> entityl = new ArrayList<>(this.level.getEntitiesOfClass(LivingEntity.class, new AABB(this.getX(), this.getY(), this.getZ(), this.getX() + 1, this.getY() + 1, this.getZ() + 1)
-                        .inflate(16, this.level.getMaxBuildHeight(), 16), (target) -> {
+                ArrayList<LivingEntity> entityl = new ArrayList<>(this.level().getEntitiesOfClass(LivingEntity.class, new AABB(this.getX(), this.getY(), this.getZ(), this.getX() + 1, this.getY() + 1, this.getZ() + 1)
+                        .inflate(16, this.level().getMaxBuildHeight(), 16), (target) -> {
                     return target != this;
                 }));
                 ArrayList<Ability> abilities = this.getAbilityPowers();
@@ -978,7 +978,7 @@ public abstract class EntityFusion extends PathfinderMob implements RangedAttack
 
     @Override
     public void tick() {
-        if (!this.level.isClientSide) {
+        if (!this.level().isClientSide) {
             if (followingGarnet) {
                 if (!this.focusCheck() || random.nextInt(100) == 1) {
                     followingGarnet = false;
@@ -1122,11 +1122,11 @@ public abstract class EntityFusion extends PathfinderMob implements RangedAttack
     @Override
     public InteractionResult interactAt(Player player, Vec3 vec, InteractionHand hand) {
         if (!this.getRebelled() && !(this.getSludgeAmount() >= 5)) {
-            if (player.level.isClientSide) {
+            if (player.level().isClientSide) {
                 return super.interactAt(player, vec, hand);
             }
             //This part of the code checks if the player has a blank hand
-            if (!level.isClientSide) {
+            if (!level().isClientSide) {
                 this.currentPlayer = player;
                 if (!player.isSpectator()) {
                     if (hand == InteractionHand.MAIN_HAND) {
@@ -1325,9 +1325,9 @@ public abstract class EntityFusion extends PathfinderMob implements RangedAttack
 
     public abstract int generateHardness();
     public EntityGem getAssignedGem() {
-        if (!this.level.isClientSide) {
-            if (((ServerLevel)this.level).getEntity(ASSIGNED_ID) instanceof EntityGem) {
-                return (EntityGem) ((ServerLevel) this.level).getEntity(ASSIGNED_ID);
+        if (!this.level().isClientSide) {
+            if (((ServerLevel)this.level()).getEntity(ASSIGNED_ID) instanceof EntityGem) {
+                return (EntityGem) ((ServerLevel) this.level()).getEntity(ASSIGNED_ID);
             } else {
                 System.out.println("not a gem");
                 return null;
@@ -1372,7 +1372,7 @@ public abstract class EntityFusion extends PathfinderMob implements RangedAttack
 
     @Override
     public boolean hurt(DamageSource source, float amount){
-        if (!this.level.isClientSide) {
+        if (!this.level().isClientSide) {
             if (source.getEntity() instanceof LivingEntity && !(source.getEntity() instanceof Player)) {
                 if (((LivingEntity) source.getEntity()).getItemBySlot(EquipmentSlot.MAINHAND).getItem() instanceof DestabBase) {
                     this.hurt(this.damageSources().magic(), 20*getMaxHealth());
@@ -1409,7 +1409,7 @@ public abstract class EntityFusion extends PathfinderMob implements RangedAttack
                     this.setShatter(true);
                     this.hurt(this.damageSources().magic(), 20*getMaxHealth());
                     for (UUID owner : OWNERS) {
-                        Objects.requireNonNull(this.level.getPlayerByUUID(owner)).sendSystemMessage(Component.translatable(this.getName().getString() + " " + this.getFacetAndCut() + " has been shattered"));
+                        Objects.requireNonNull(this.level().getPlayerByUUID(owner)).sendSystemMessage(Component.translatable(this.getName().getString() + " " + this.getFacetAndCut() + " has been shattered"));
                     }
                     return super.hurt(source, amount);
                 }
@@ -1494,7 +1494,7 @@ public abstract class EntityFusion extends PathfinderMob implements RangedAttack
                 System.out.println("emotion meter " + emotionMeter);
                 if (this.emotionMeter <= this.EmotionThreshold()) {
                     if (this.EmotionThreshold() - this.emotionMeter < 5) {
-                        this.level.addParticle(ParticleTypes.ANGRY_VILLAGER, this.getX(), this.getY() + 2, this.getZ(), 0, 0, 0);
+                        this.level().addParticle(ParticleTypes.ANGRY_VILLAGER, this.getX(), this.getY() + 2, this.getZ(), 0, 0, 0);
                     }
                     this.emotionMeter++;
                 } else {
@@ -1517,17 +1517,17 @@ public abstract class EntityFusion extends PathfinderMob implements RangedAttack
     }
 
     public void dropXP(LivingEntity entityIn) {
-        if (!entityIn.level.isClientSide) {
-            if (entityIn.level instanceof ServerLevel) {
+        if (!entityIn.level().isClientSide) {
+            if (entityIn.level() instanceof ServerLevel) {
                 int reward = net.minecraftforge.event.ForgeEventFactory.getExperienceDrop(entityIn, this.currentPlayer, entityIn.getExperienceReward());
-                ExperienceOrb.award((ServerLevel) entityIn.level, entityIn.position(), reward);
+                ExperienceOrb.award((ServerLevel) entityIn.level(), entityIn.position(), reward);
             }
         }
     }
 
     @Override
     public boolean doHurtTarget(Entity entityIn) {
-        if(!entityIn.level.isClientSide){
+        if(!entityIn.level().isClientSide){
             if (entityIn instanceof LivingEntity) {
                 if (!enemyDying) {
                     enemyDying = true;
@@ -1559,9 +1559,9 @@ public abstract class EntityFusion extends PathfinderMob implements RangedAttack
             double d1 = target.getY(0.3333333333333333D) - abstractarrow.getY();
             double d2 = target.getZ() - this.getZ();
             double d3 = Math.sqrt(d0 * d0 + d2 * d2);
-            abstractarrow.shoot(d0, d1 + d3 * (double) 0.2F, d2, 1.6F, (float) (14 - this.level.getDifficulty().getId() * 4));
+            abstractarrow.shoot(d0, d1 + d3 * (double) 0.2F, d2, 1.6F, (float) (14 - this.level().getDifficulty().getId() * 4));
             //this.playSound(SoundEvents.SKELETO_SHOOT, 1.0F, 1.0F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
-            this.level.addFreshEntity(abstractarrow);
+            this.level().addFreshEntity(abstractarrow);
         }
     }
 
@@ -1571,8 +1571,8 @@ public abstract class EntityFusion extends PathfinderMob implements RangedAttack
         /*float f = (this.random.nextFloat() - 0.5F) * 8.0F;
         float f1 = (this.random.nextFloat() - 0.5F) * 4.0F;
         float f2 = (this.random.nextFloat() - 0.5F) * 8.0F; these dont do anything*/
-        this.level.addParticle(ParticleTypes.EXPLOSION_EMITTER, this.getX() , this.getY() + 2.0D, this.getZ(), 0.0D, 0.0D, 0.0D);
-        if(!this.level.isClientSide){
+        this.level().addParticle(ParticleTypes.EXPLOSION_EMITTER, this.getX() , this.getY() + 2.0D, this.getZ(), 0.0D, 0.0D, 0.0D);
+        if(!this.level().isClientSide){
             System.out.println("not clientside");
             this.playSound(ModSounds.POOF.get());
             ItemStack stack1 = new ItemStack(this.getGem1Item());
@@ -2529,9 +2529,9 @@ public abstract class EntityFusion extends PathfinderMob implements RangedAttack
         if(this.canWalkOnFluids()) {
             if (this.isInWater() || this.isInLava()) {
                 CollisionContext iselectioncontext = CollisionContext.of(this);
-                if (iselectioncontext.isAbove(LiquidBlock.STABLE_SHAPE, this.blockPosition(), true) && !this.level.getFluidState(this.blockPosition().above()).is(FluidTags.LAVA)
-                        || iselectioncontext.isAbove(LiquidBlock.STABLE_SHAPE, this.blockPosition(), true) && !this.level.getFluidState(this.blockPosition().above()).is(FluidTags.WATER)) {
-                    this.onGround = true;
+                if (iselectioncontext.isAbove(LiquidBlock.STABLE_SHAPE, this.blockPosition(), true) && !this.level().getFluidState(this.blockPosition().above()).is(FluidTags.LAVA)
+                        || iselectioncontext.isAbove(LiquidBlock.STABLE_SHAPE, this.blockPosition(), true) && !this.level().getFluidState(this.blockPosition().above()).is(FluidTags.WATER)) {
+                    this.setOnGround(true);
                 } else {
                     this.setDeltaMovement(this.getDeltaMovement().scale(.5D).add(0.0D, 0.05D, 0.0D));
                 }

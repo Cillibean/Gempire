@@ -19,7 +19,7 @@ public class EntityAIAvoidSpinel extends Goal {
 
     @Override
     public boolean canUse() {
-        List<LivingEntity> list = this.follower.level.<LivingEntity>getEntitiesOfClass(LivingEntity.class, this.follower.getBoundingBox().inflate(24.0D, 10.0D, 24.0D));
+        List<LivingEntity> list = this.follower.level().<LivingEntity>getEntitiesOfClass(LivingEntity.class, this.follower.getBoundingBox().inflate(24.0D, 10.0D, 24.0D));
         double maxDistance = Double.MAX_VALUE;
         for (LivingEntity entity : list) {
             if (entity instanceof EntityGem) {

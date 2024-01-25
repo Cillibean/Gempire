@@ -34,7 +34,7 @@ public class EntityAIMakePowerCrystal2 extends Goal {
                 for (int y = -2; y < 3; y++) {
                     for (int z = -4; z < 5; z++) {
                         if (!found) {
-                            if (this.follower.level.getBlockState(this.follower.blockPosition().offset(x, y, z)).getBlock() == Blocks.REDSTONE_BLOCK) {
+                            if (this.follower.level().getBlockState(this.follower.blockPosition().offset(x, y, z)).getBlock() == Blocks.REDSTONE_BLOCK) {
                                 hopper = this.follower.blockPosition().offset(x, y, z);
                                 found = true;
                             }
@@ -67,18 +67,18 @@ public class EntityAIMakePowerCrystal2 extends Goal {
         this.follower.getNavigation().moveTo(target.getX(), target.getY(), target.getZ(), this.speed);
         double distanceToTargetSqr = this.follower.distanceToSqr(target.getX(), target.getY(), target.getZ());
         if (distanceToTargetSqr < 4) {
-            BlockState targetBlockState = this.follower.level.getBlockState(this.target);
+            BlockState targetBlockState = this.follower.level().getBlockState(this.target);
             if (targetBlockState.getBlock() == Blocks.REDSTONE_BLOCK &&
-                    this.follower.level.getBlockState(this.target.north()).getBlock() == ModBlocks.PRISMATIC_BLOCK.get() &&
-                    this.follower.level.getBlockState(this.target.south()).getBlock() == ModBlocks.PRISMATIC_BLOCK.get() &&
-                    this.follower.level.getBlockState(this.target.west()).getBlock() == ModBlocks.PRISMATIC_BLOCK.get() &&
-                    this.follower.level.getBlockState(this.target.east()).getBlock() == ModBlocks.PRISMATIC_BLOCK.get()) {
-                this.follower.level.explode(null, this.target.getX(), this.target.getY(), this.target.getZ(), .75f, Level.ExplosionInteraction.NONE);
-                this.follower.level.setBlockAndUpdate(this.target, ModBlocks.POWER_CRYSTAL_BLOCK_TIER_2.get().defaultBlockState());
-                this.follower.level.setBlockAndUpdate(this.target.north(), Blocks.AIR.defaultBlockState());
-                this.follower.level.setBlockAndUpdate(this.target.south(), Blocks.AIR.defaultBlockState());
-                this.follower.level.setBlockAndUpdate(this.target.west(), Blocks.AIR.defaultBlockState());
-                this.follower.level.setBlockAndUpdate(this.target.east(), Blocks.AIR.defaultBlockState());
+                    this.follower.level().getBlockState(this.target.north()).getBlock() == ModBlocks.PRISMATIC_BLOCK.get() &&
+                    this.follower.level().getBlockState(this.target.south()).getBlock() == ModBlocks.PRISMATIC_BLOCK.get() &&
+                    this.follower.level().getBlockState(this.target.west()).getBlock() == ModBlocks.PRISMATIC_BLOCK.get() &&
+                    this.follower.level().getBlockState(this.target.east()).getBlock() == ModBlocks.PRISMATIC_BLOCK.get()) {
+                this.follower.level().explode(null, this.target.getX(), this.target.getY(), this.target.getZ(), .75f, Level.ExplosionInteraction.NONE);
+                this.follower.level().setBlockAndUpdate(this.target, ModBlocks.POWER_CRYSTAL_BLOCK_TIER_2.get().defaultBlockState());
+                this.follower.level().setBlockAndUpdate(this.target.north(), Blocks.AIR.defaultBlockState());
+                this.follower.level().setBlockAndUpdate(this.target.south(), Blocks.AIR.defaultBlockState());
+                this.follower.level().setBlockAndUpdate(this.target.west(), Blocks.AIR.defaultBlockState());
+                this.follower.level().setBlockAndUpdate(this.target.east(), Blocks.AIR.defaultBlockState());
                 follower.getItemBySlot(EquipmentSlot.MAINHAND).hurtAndBreak(1, follower, (p_43296_) -> p_43296_.broadcastBreakEvent(EquipmentSlot.MAINHAND));            }
         }
     }

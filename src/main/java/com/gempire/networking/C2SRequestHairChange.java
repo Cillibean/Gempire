@@ -33,7 +33,7 @@ public class C2SRequestHairChange {
         boolean hasPermission = true;
         if (hasPermission) {
             ctx.enqueueWork(() -> {
-                EntityPearl gem = (EntityPearl) sender.level.getEntity(msg.entityID);
+                EntityPearl gem = (EntityPearl) sender.level().getEntity(msg.entityID);
                 boolean forwardd = msg.forward;
                 if (forwardd) {
                     gem.CycleHairForward();

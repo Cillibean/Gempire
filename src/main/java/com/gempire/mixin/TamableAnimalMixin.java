@@ -25,8 +25,8 @@ public class TamableAnimalMixin {
     private void gempire_tamableAnimalMixin(CallbackInfoReturnable<OwnableEntity> cir) {
         OwnableEntity tamableAnimal = ((OwnableEntity) this);
         UUID uuid = tamableAnimal.getOwnerUUID();
-        if (uuid != null && !((Level) tamableAnimal.getLevel()).isClientSide) {
-            Entity owner = ((ServerLevel) tamableAnimal.getLevel()).getEntity(uuid);
+        if (uuid != null && !((Level) tamableAnimal.level()).isClientSide) {
+            Entity owner = ((ServerLevel) tamableAnimal.level()).getEntity(uuid);
             if (owner instanceof EntityGem gem)
                 cir.setReturnValue((OwnableEntity) gem);
         }

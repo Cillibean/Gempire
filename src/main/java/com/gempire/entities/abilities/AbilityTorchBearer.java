@@ -25,7 +25,7 @@ public class AbilityTorchBearer extends Ability implements IIdleAbility {
     public void execute() {
         BlockPos pos = holder.getOnPos().above();
         BlockPos onPos = holder.getOnPos();
-        Level level = holder.getLevel();
+        Level level = holder.level();
         BlockState blockState = level.getBlockState(pos);
         BlockState onBlockState = level.getBlockState(onPos);
         if (holder.getOwned())
@@ -34,7 +34,7 @@ public class AbilityTorchBearer extends Ability implements IIdleAbility {
 
                 } else {
                     if (!holder.isInWater()) {
-                        if (holder.isOnGround()) {
+                        if (holder.onGround()) {
                             if (level.getBrightness(LightLayer.BLOCK, pos) <= 9) {
                                 if (level.getBrightness(LightLayer.SKY, pos) <= 9) {
                                     if (holder.consumeItemCheck(Items.TORCH, 1)) {

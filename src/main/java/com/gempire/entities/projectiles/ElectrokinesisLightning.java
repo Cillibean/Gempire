@@ -87,9 +87,9 @@ public class ElectrokinesisLightning extends Entity {
 
     private void powerLightningRod() {
         BlockPos blockpos = this.getStrikePosition();
-        BlockState blockstate = this.level.getBlockState(blockpos);
+        BlockState blockstate = this.level().getBlockState(blockpos);
         if (blockstate.is(Blocks.LIGHTNING_ROD)) {
-            ((LightningRodBlock)blockstate.getBlock()).onLightningStrike(blockstate, this.level, blockpos);
+            ((LightningRodBlock)blockstate.getBlock()).onLightningStrike(blockstate, this.level(), blockpos);
         }
 
     }
@@ -105,12 +105,12 @@ public class ElectrokinesisLightning extends Entity {
     public void tick() {
         super.tick();
         if (this.life == 2) {
-            if (this.level.isClientSide()) {
-                this.level.playLocalSound(this.getX(), this.getY(), this.getZ(), SoundEvents.LIGHTNING_BOLT_THUNDER, SoundSource.WEATHER, 10000.0F, 0.8F + this.random.nextFloat() * 0.2F, false);
-                this.level.playLocalSound(this.getX(), this.getY(), this.getZ(), SoundEvents.LIGHTNING_BOLT_IMPACT, SoundSource.WEATHER, 2.0F, 0.5F + this.random.nextFloat() * 0.2F, false);
+            if (this.level().isClientSide()) {
+                this.level().playLocalSound(this.getX(), this.getY(), this.getZ(), SoundEvents.LIGHTNING_BOLT_THUNDER, SoundSource.WEATHER, 10000.0F, 0.8F + this.random.nextFloat() * 0.2F, false);
+                this.level().playLocalSound(this.getX(), this.getY(), this.getZ(), SoundEvents.LIGHTNING_BOLT_IMPACT, SoundSource.WEATHER, 2.0F, 0.5F + this.random.nextFloat() * 0.2F, false);
             } else {
                 this.powerLightningRod();
-                clearCopperOnLightningStrike(this.level, this.getStrikePosition());
+                clearCopperOnLightningStrike(this.level(), this.getStrikePosition());
                 this.gameEvent(GameEvent.LIGHTNING_STRIKE);
             }
         }
@@ -118,12 +118,12 @@ public class ElectrokinesisLightning extends Entity {
         --this.life;
         if (this.life < 0) {
             if (this.flashes == 0) {
-                if (this.level instanceof ServerLevel) {
-                    List<Entity> list = this.level.getEntities(this, new AABB(this.getX() - 15.0D, this.getY() - 15.0D, this.getZ() - 15.0D, this.getX() + 15.0D, this.getY() + 6.0D + 15.0D, this.getZ() + 15.0D), (p_147140_) -> {
+                if (this.level() instanceof ServerLevel) {
+                    List<Entity> list = this.level().getEntities(this, new AABB(this.getX() - 15.0D, this.getY() - 15.0D, this.getZ() - 15.0D, this.getX() + 15.0D, this.getY() + 6.0D + 15.0D, this.getZ() + 15.0D), (p_147140_) -> {
                         return p_147140_.isAlive() && !this.hitEntities.contains(p_147140_);
                     });
 
-                    for(ServerPlayer serverplayer : ((ServerLevel)this.level).getPlayers((p_147157_) -> {
+                    for(ServerPlayer serverplayer : ((ServerLevel)this.level()).getPlayers((p_147157_) -> {
                         return p_147157_.distanceTo(this) < 256.0F;
                     }));
                 }
@@ -137,8 +137,8 @@ public class ElectrokinesisLightning extends Entity {
         }
 
         if (this.life >= 0) {
-            if (!(this.level instanceof ServerLevel)) {
-                this.level.setSkyFlashTime(2);
+            if (!(this.level() instanceof ServerLevel)) {
+                this.level().setSkyFlashTime(2);
             } else if (!this.visualOnly) {
                 this.hitEntities.add(target);
             }

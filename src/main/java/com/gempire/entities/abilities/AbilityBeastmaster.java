@@ -23,7 +23,7 @@ public class AbilityBeastmaster extends Ability implements IIdleAbility {
 
     @Override
     public void execute() {
-        List<Wolf> list = this.holder.level.getEntitiesOfClass(Wolf.class, this.holder.getBoundingBox().inflate(14.0D, 8.0D, 14.0D));
+        List<Wolf> list = this.holder.level().getEntitiesOfClass(Wolf.class, this.holder.getBoundingBox().inflate(14.0D, 8.0D, 14.0D));
         List<Wolf> listOwned = new ArrayList<>();
         for (Wolf wolf : list) {
             if (wolf.isTame() && wolf.getOwnerUUID() == holder.getUUID()) {
@@ -55,7 +55,7 @@ public class AbilityBeastmaster extends Ability implements IIdleAbility {
                             holder.getNavigation().moveTo(wolf, 1);
                             holder.lookAt(wolf, 90F, 90F);
                             if (holder.distanceToSqr(wolf) < Math.pow(2, 1)) {
-                                List<Player> list2 = this.holder.level.getEntitiesOfClass(Player.class, this.holder.getBoundingBox().inflate(14.0D, 8.0D, 14.0D));
+                                List<Player> list2 = this.holder.level().getEntitiesOfClass(Player.class, this.holder.getBoundingBox().inflate(14.0D, 8.0D, 14.0D));
                                 if (!list2.isEmpty()) {
                                     wolf.setAggressive(true);
                                     wolf.setTarget(list2.get(0));

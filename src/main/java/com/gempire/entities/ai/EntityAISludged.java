@@ -23,7 +23,7 @@ public class EntityAISludged extends Goal {
 
     @Override
     public boolean canUse() {
-        List<EntityGem> list = this.follower.level.<EntityGem>getEntitiesOfClass(EntityGem.class, this.follower.getBoundingBox().inflate(24.0D, 10.0D, 24.0D));
+        List<EntityGem> list = this.follower.level().<EntityGem>getEntitiesOfClass(EntityGem.class, this.follower.getBoundingBox().inflate(24.0D, 10.0D, 24.0D));
         double maxDistance = Double.MAX_VALUE;
         if (follower.getSludgeAmount() >= 5) {
             for (EntityGem entity : list) {

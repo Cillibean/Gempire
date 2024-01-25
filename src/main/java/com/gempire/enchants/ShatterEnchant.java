@@ -19,7 +19,7 @@ public class ShatterEnchant extends Enchantment {
 
     @Override
     public void doPostAttack(LivingEntity attacker, Entity target, int level) {
-        if (!attacker.level.isClientSide) {
+        if (!attacker.level().isClientSide) {
             if (target instanceof EntityGem) {
                 if (((EntityGem) target).getMaxHealth() >= 15) {
                     if (((EntityGem) target).getHealth() <= ((EntityGem) target).getMaxHealth()/2) {

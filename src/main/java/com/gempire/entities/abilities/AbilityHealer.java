@@ -26,7 +26,7 @@ public class AbilityHealer extends Ability implements IEffectAbility, IEmotional
 
     @Override
     public void outburst() {
-        List<PathfinderMob> entities = this.holder.level.<PathfinderMob>getEntitiesOfClass(PathfinderMob.class, this.holder.getBoundingBox().inflate(20.0D, 10.0D, 20.0D));
+        List<PathfinderMob> entities = this.holder.level().<PathfinderMob>getEntitiesOfClass(PathfinderMob.class, this.holder.getBoundingBox().inflate(20.0D, 10.0D, 20.0D));
         for(PathfinderMob entity : entities){
             if(entity instanceof EntityGem || this.holder.isOwner(entity.getUUID())){
                 continue;

@@ -29,7 +29,7 @@ public class C2SRequestEnchant {
         boolean hasPermission = true;
         if (hasPermission) {
             ctx.enqueueWork(() -> {
-                EntityZircon gem = (EntityZircon) sender.level.getEntity(msg.entityID);
+                EntityZircon gem = (EntityZircon) sender.level().getEntity(msg.entityID);
                 gem.beginEnchant();
             });
         }

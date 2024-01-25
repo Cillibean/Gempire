@@ -555,7 +555,7 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
                         GemSeedBlock seedBlock = (GemSeedBlock) ModBlocks.GEM_SEED_BLOCK.get();
                         this.level.setBlockAndUpdate(seedPos, seedBlock.defaultBlockState());
                         if (this.level.getBlockState(seedPos).getBlock() == ModBlocks.GEM_SEED_BLOCK.get()) {
-                            this.getLevel().playSound(null, this.getBlockPos(), ModSounds.INJECT.get(), SoundSource.AMBIENT, 2f, 1);
+                            this.level().playSound(null, this.getBlockPos(), ModSounds.INJECT.get(), SoundSource.AMBIENT, 2f, 1);
                         }
                         GemSeedTE gemSeedTE = (GemSeedTE) this.level.getBlockEntity(seedPos);
                         if (gemSeedTE != null) {

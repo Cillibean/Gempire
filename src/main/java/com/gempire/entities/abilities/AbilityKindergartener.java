@@ -21,7 +21,7 @@ public class AbilityKindergartener extends Ability implements IIdleAbility {
 
     @Override
     public void execute() {
-        List<LivingEntity> list = this.holder.level.getEntitiesOfClass(LivingEntity.class, this.holder.getBoundingBox().inflate(30.0D, 15.0D, 30.0D));
+        List<LivingEntity> list = this.holder.level().getEntitiesOfClass(LivingEntity.class, this.holder.getBoundingBox().inflate(30.0D, 15.0D, 30.0D));
         if (holder.getOwned()) {
             if (gemToTame == null || gemToTame.getOwned()) {
                 for (LivingEntity entity : list) {

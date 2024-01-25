@@ -1,5 +1,5 @@
 {
-  "name": "gempire:communication_hub/start_pool",
+  "name": "gempire:comm_hub/start_pool",
   "fallback": "minecraft:empty",
   "elements": [
     {
@@ -7,7 +7,7 @@
       "element": {
         "element_type": "minecraft:single_pool_element",
         "projection": "rigid",
-        "location": "gempire:communication_hub",
+        "location": "gempire:comm_hub",
         "processors": "minecraft:empty"
       }
     }

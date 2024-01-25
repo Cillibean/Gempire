@@ -1,7 +1,7 @@
 {
   "structures": [
     {
-      "structure": "gempire:communication_hub",
+      "structure": "gempire:comm_hub",
       "weight": 1
     }
   ],

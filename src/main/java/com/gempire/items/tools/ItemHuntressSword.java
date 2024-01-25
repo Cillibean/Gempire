@@ -19,9 +19,9 @@ public class ItemHuntressSword extends SwordItem {
     @Override
     public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity player) {
         if (player.getRandom().nextInt(5) == 1) {
-                ElectrokinesisLightning lightning = new ElectrokinesisLightning(player.getLevel(), player, target);
+                ElectrokinesisLightning lightning = new ElectrokinesisLightning(player.level(), player, target);
                 lightning.moveTo(Vec3.atBottomCenterOf(target.getOnPos()));
-                target.getLevel().addFreshEntity(lightning);
+                target.level().addFreshEntity(lightning);
                 target.hurt(player.damageSources().lightningBolt(), 5);
                 stack.hurtAndBreak(2, player, (player1) -> {
                     player1.broadcastBreakEvent(EquipmentSlot.MAINHAND);

@@ -74,7 +74,7 @@ public class EntityNacre extends EntityStarterGem {
 
     @Override
     public InteractionResult interactAt(Player player, Vec3 vec, InteractionHand hand){
-        if(player.level.isClientSide){
+        if(player.level().isClientSide){
             return super.interactAt(player, vec, hand);
         }
         if(this.isOwner(player)){

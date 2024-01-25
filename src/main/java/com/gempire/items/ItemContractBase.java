@@ -29,7 +29,7 @@ public class ItemContractBase extends Item {
     public InteractionResult interactLivingEntity(ItemStack itemStack, Player player, LivingEntity entity, InteractionHand hand) {
         if ((entity instanceof EntityGem)) {
             if (((EntityGem) entity).getOwned()) {
-                if (!entity.level.isClientSide && entity.isAlive()) {
+                if (!entity.level().isClientSide && entity.isAlive()) {
                     if (player.getUUID().equals(((EntityGem) entity).MASTER_OWNER)) {
                         this.contractExecute(itemStack, player, entity);
                     } else {
@@ -37,13 +37,13 @@ public class ItemContractBase extends Item {
                     }
                 }
             }
-            return InteractionResult.sidedSuccess(player.level.isClientSide);
+            return InteractionResult.sidedSuccess(player.level().isClientSide);
         }
         else if ((entity instanceof Player)) {
-            if (!entity.level.isClientSide && entity.isAlive()) {
+            if (!entity.level().isClientSide && entity.isAlive()) {
                 player.setItemInHand(hand,setEntityTags(itemStack,entity.getName().getString(),entity.getUUID()));
                 player.sendSystemMessage(Component.translatable("Set Player"));}
-            return InteractionResult.sidedSuccess(player.level.isClientSide);
+            return InteractionResult.sidedSuccess(player.level().isClientSide);
         }
         else {
             return InteractionResult.PASS;

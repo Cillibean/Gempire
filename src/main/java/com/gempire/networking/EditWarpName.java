@@ -27,7 +27,7 @@ public class EditWarpName {
     public static void handle(EditWarpName message, Supplier<NetworkEvent.Context> context) {
         context.get().enqueueWork(() -> {
             ServerPlayer player = context.get().getSender();
-            ServerLevel level = player.getLevel();
+            ServerLevel level = player.serverLevel();
             WarpPadData.get(level).addWarpPad(new WarpPadInfo(message.pos, message.name));
         });
         context.get().setPacketHandled(true);

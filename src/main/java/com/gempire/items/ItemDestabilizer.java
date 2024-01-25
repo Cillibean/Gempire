@@ -32,7 +32,7 @@ public class ItemDestabilizer extends DestabBase {
         if (context.getPlayer().isShiftKeyDown()) {
             BlockPos pos = context.getClickedPos().above();
             context.getClickedFace();
-            context.getLevel().setBlock(pos, ModBlocks.DESTAB_WALL.get().defaultBlockState(), 0);
+            context.level().setBlock(pos, ModBlocks.DESTAB_WALL.get().defaultBlockState(), 0);
             context.getItemInHand().hurtAndBreak(5, context.getPlayer(), (p_43296_) -> p_43296_.broadcastBreakEvent(EquipmentSlot.MAINHAND));
         }
         return super.useOn(context);

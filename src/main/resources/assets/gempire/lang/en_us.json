@@ -259,6 +259,9 @@
   "block.gempire.red_chroma_crystal": "Red Chroma Crystal",
   "block.gempire.black_chroma_crystal": "Black Chroma Crystal",
 
+  "block.gempire.pyrite_block": "Pyrite Block",
+  "block.gempire.geode_crystal_block": "Geode Crystal Block",
+
   "block.gempire.congealed_white_essence_block": "Congealed White Essence Block",
   "block.gempire.congealed_yellow_essence_block": "Congealed Yellow Essence Block",
   "block.gempire.congealed_blue_essence_block": "Congealed Blue Essence Block",
@@ -276,6 +279,8 @@
   "item.gempire.blue_essence_bucket": "Blue Essence",
   "item.gempire.yellow_essence_bucket": "Yellow Essence",
   "item.gempire.white_essence_bucket": "White Essence",
+
+  "item.gempire.prismatic_upgrade_smithing_template": "Prismatic Upgrade Smithing Template",
 
   "item.gempire.remnants_music_disc": "Music Disc",
   "item.gempire.remnants_music_disc.desc": "Solangelo - Remnants",

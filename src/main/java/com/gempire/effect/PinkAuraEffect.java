@@ -27,7 +27,7 @@ public class PinkAuraEffect extends MobEffect {
             entity.getCapability(PlayerAuraProvider.PLAYER_AURA).ifPresent(aura -> {
                 aura.setAura(1);
             });
-            if (!entity.level.isClientSide) {
+            if (!entity.level().isClientSide) {
                 ModMessages.sendToPlayer(new AuraDataSyncS2C(1), (ServerPlayer) entity);
             }
         }

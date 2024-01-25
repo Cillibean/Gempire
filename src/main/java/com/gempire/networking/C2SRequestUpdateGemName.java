@@ -36,7 +36,7 @@ public class C2SRequestUpdateGemName {
         ServerPlayer sender = ctx.getSender();
         boolean hasPermission = true;
         assert sender != null;
-        EntityGem gem = (EntityGem) sender.level.getEntity(msg.entityID);
+        EntityGem gem = (EntityGem) sender.level().getEntity(msg.entityID);
         assert gem != null;
         ctx.enqueueWork(() -> {
                     if (!gem.customName()) {

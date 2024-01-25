@@ -149,7 +149,7 @@ public class WarpPadTE extends BlockEntity implements IForgeBlockEntity {
         }
     }
     public static void handleWarpRequest(ServerPlayer player, BlockPos fromPos, BlockPos toPos) {
-        ServerLevel level = player.getLevel();
+        ServerLevel level = player.serverLevel();
         BlockEntity fromEntity = level.getBlockEntity(fromPos);
         if(fromEntity instanceof WarpPadTE fromPad && !fromPad.isWarping()) {
             WarpPadInfo info = WarpPadData.get(level).getWarpPad(toPos);

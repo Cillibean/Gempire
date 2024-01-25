@@ -46,8 +46,8 @@ public class CommandGempireGemOwner extends CommandBase {
                 } else {
                     ArrayList<String> owners = new ArrayList<>();
                     for (UUID uuid : gem.OWNERS) {
-                        if (!player.getLevel().isClientSide) {
-                            ServerLevel level = (ServerLevel) player.getLevel();
+                        if (!player.level().isClientSide) {
+                            ServerLevel level = (ServerLevel) player.level();
                             owners.add(level.getPlayerByUUID(uuid).getDisplayName().getString());
                         }
                     }
@@ -79,8 +79,8 @@ public class CommandGempireGemOwner extends CommandBase {
                 } else {
                     ArrayList<String> owners = new ArrayList<>();
                     for (UUID uuid : gem.OWNERS) {
-                        if (!player.getLevel().isClientSide) {
-                            ServerLevel level = (ServerLevel) player.getLevel();
+                        if (!player.level().isClientSide) {
+                            ServerLevel level = (ServerLevel) player.level();
                             owners.add(level.getPlayerByUUID(uuid).getDisplayName().getString());
                         }
                     }

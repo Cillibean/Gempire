@@ -38,7 +38,7 @@ public class RequestPoof {
         if (hasPermission) {
             ctx.enqueueWork(() -> {
                 if (sender != null ) {
-                    EntityGem gem = (EntityGem) sender.level.getEntity(msg.entityID);
+                    EntityGem gem = (EntityGem) sender.level().getEntity(msg.entityID);
                     if (gem != null) {
                         gem.hurt(gem.damageSources().magic(), gem.getMaxHealth() * 20);
                     }

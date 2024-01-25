@@ -15,6 +15,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -89,12 +90,12 @@ public class ZirconUIScreen extends AbstractContainerScreen<ZirconUIContainer> {
     }
 
     @Override
-    protected void renderLabels(PoseStack matrixStack, int x, int y) {
+    protected void renderLabels(GuiGraphics matrixStack, int x, int y) {
 
     }
 
     @Override
-    public void render(PoseStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+    public void render(GuiGraphics matrixStack, int mouseX, int mouseY, float partialTicks) {
         this.renderBackground(matrixStack);
         super.render(matrixStack, mouseX, mouseY, partialTicks);
         this.renderTooltip(matrixStack, mouseX, mouseY);
@@ -102,30 +103,30 @@ public class ZirconUIScreen extends AbstractContainerScreen<ZirconUIContainer> {
 
     @SuppressWarnings("deprecation")
     @Override
-    protected void renderBg(PoseStack matrixStack, float partialTicks, int mouseX, int mouseY) {
+    protected void renderBg(GuiGraphics matrixStack, float partialTicks, int mouseX, int mouseY) {
         GUIUtilities.setup(GUI);
         int x = (this.width - this.imageWidth) / 2;
         int y = (this.height - this.imageHeight) / 2;
         int i = this.leftPos;
         int j = this.topPos;
-        blit(matrixStack, x, y, 0, 0, this.imageWidth, this.imageHeight, 224, 208);
+        matrixStack.blit(GUI, x, y, 0, 0, this.imageWidth, this.imageHeight, 224, 208);
         this.nameBox.render(matrixStack, mouseX, mouseY, partialTicks);
-        this.font.draw(matrixStack, ZirconUIScreen.getEnchantStringFromLapisCount(this.menu.gem),
+        matrixStack.drawString(font, ZirconUIScreen.getEnchantStringFromLapisCount(this.menu.gem),
                 i + 15, j + 29, 4210752);
         if (this.menu.gem.isPrimary()) {
             if(this.menu.gem.getItem(1).canApplyAtEnchantingTable(ModEnchants.GEMPIRE_ENCHANTMENTS.get(this.menu.gem.getEnchantPage()))) {
                 GUIUtilities.setup(XP_ORB);
-                blit(matrixStack, x + 14, y + 56, 0, 0, 11, 11, 11 ,11);
+                matrixStack.blit(GUI, x + 14, y + 56, 0, 0, 11, 11, 11 ,11);
                 int xp = Math.max(this.getXP(this.getDiscountFromStack(this.menu.gem.getItem(2))), 0);
-                this.font.draw(matrixStack, Component.translatable(xp + "XP"),
+                matrixStack.drawString(font, Component.translatable(xp + "XP"),
                         i + 26, j + 58, 0x88FF00);
             }
         } else {
             if(this.menu.gem.getItem(1).canApplyAtEnchantingTable(ModEnchants.VANILLA_ENCHANTMENTS.get(this.menu.gem.getEnchantPage()))) {
                 GUIUtilities.setup(XP_ORB);
-                blit(matrixStack, x + 14, y + 56, 0, 0, 11, 11, 11 ,11);
+                matrixStack.blit(GUI, x + 14, y + 56, 0, 0, 11, 11, 11 ,11);
                 int xp = Math.max(this.getXP(this.getDiscountFromStack(this.menu.gem.getItem(2))), 0);
-                this.font.draw(matrixStack, Component.translatable(xp + "XP"),
+                matrixStack.drawString(font, Component.translatable(xp + "XP"),
                         i + 26, j + 58, 0x88FF00);
             }
         }
@@ -278,14 +279,14 @@ public class ZirconUIScreen extends AbstractContainerScreen<ZirconUIContainer> {
     }
 
 
-    public void drawStats(PoseStack stack, int x, int y){
+    public void drawStats(GuiGraphics stack, int x, int y){
         Component health = Component.translatable("screens.gempire.health");
         Component damage = Component.translatable("screens.gempire.damage");
-        this.font.draw(stack, Component.translatable(health.getString() + ": " + (int)this.menu.gem.getHealth() + " / " + (int)this.menu.gem.getMaxHealth()), x + 12, y + 98, 4210752);
-        this.font.draw(stack, Component.translatable(damage.getString() + ": " + (int)this.menu.gem.getAttributeBaseValue(Attributes.ATTACK_DAMAGE)), x + 12, y + 110, 4210752);
+        stack.drawString(font, Component.translatable(health.getString() + ": " + (int)this.menu.gem.getHealth() + " / " + (int)this.menu.gem.getMaxHealth()), x + 12, y + 98, 4210752);
+        stack.drawString(font, Component.translatable(damage.getString() + ": " + (int)this.menu.gem.getAttributeBaseValue(Attributes.ATTACK_DAMAGE)), x + 12, y + 110, 4210752);
     }
 
-    public void drawAbilityList(PoseStack stack, int x, int y){
+    public void drawAbilityList(GuiGraphics stack, int x, int y){
         ArrayList<Ability> powers1 = this.menu.gem.findAbilities(this.menu.gem.getAbilities());
         ArrayList<Ability> powers = new ArrayList<>();
         for(Ability ability : powers1){
@@ -295,7 +296,7 @@ public class ZirconUIScreen extends AbstractContainerScreen<ZirconUIContainer> {
         }
         for(int i = 0; i < powers.size(); i++){
             Component text = powers.get(i).getName();
-            this.font.draw(stack, text, x, y + i * 9, 4210752);
+            stack.drawString(font, text, x, y + i * 9, 4210752);
         }
     }
 }

@@ -20,7 +20,7 @@ public class EntityAIWander extends WaterAvoidingRandomStrollGoal {
 
     @Override
     public void start() {
-        List<EntityGem> list = this.gem.level.getEntitiesOfClass(EntityGem.class, this.gem.getBoundingBox().inflate(7.0D, 5.0D, 7.0D));
+        List<EntityGem> list = this.gem.level().getEntitiesOfClass(EntityGem.class, this.gem.getBoundingBox().inflate(7.0D, 5.0D, 7.0D));
         for (EntityGem garnet : list) {
             if (garnet.getOwned() && !garnet.getRebelled()) {
                 for (UUID uuid: gem.OWNERS) {

@@ -120,7 +120,7 @@ public class EntityBeastmasterWolf extends GemTamableAnimal implements NeutralMo
             this.setCollarColor(DyeColor.byId(p_30402_.getInt("CollarColor")));
         }
 
-        this.readPersistentAngerSaveData(this.level, p_30402_);
+        this.readPersistentAngerSaveData(this.level(), p_30402_);
     }
 
     protected SoundEvent getAmbientSound() {
@@ -147,15 +147,15 @@ public class EntityBeastmasterWolf extends GemTamableAnimal implements NeutralMo
 
     public void aiStep() {
         super.aiStep();
-        if (!this.level.isClientSide && this.isWet && !this.isShaking && !this.isPathFinding() && this.onGround) {
+        if (!this.level().isClientSide && this.isWet && !this.isShaking && !this.isPathFinding() && this.onGround()) {
             this.isShaking = true;
             this.shakeAnim = 0.0F;
             this.shakeAnimO = 0.0F;
-            this.level.broadcastEntityEvent(this, (byte)8);
+            this.level().broadcastEntityEvent(this, (byte)8);
         }
 
-        if (!this.level.isClientSide) {
-            this.updatePersistentAnger((ServerLevel)this.level, true);
+        if (!this.level().isClientSide) {
+            this.updatePersistentAnger((ServerLevel)this.level(), true);
         }
 
     }
@@ -172,8 +172,8 @@ public class EntityBeastmasterWolf extends GemTamableAnimal implements NeutralMo
 
             if (this.isInWaterRainOrBubble()) {
                 this.isWet = true;
-                if (this.isShaking && !this.level.isClientSide) {
-                    this.level.broadcastEntityEvent(this, (byte)56);
+                if (this.isShaking && !this.level().isClientSide) {
+                    this.level().broadcastEntityEvent(this, (byte)56);
                     this.cancelShake();
                 }
             } else if ((this.isWet || this.isShaking) && this.isShaking) {
@@ -199,7 +199,7 @@ public class EntityBeastmasterWolf extends GemTamableAnimal implements NeutralMo
                     for(int j = 0; j < i; ++j) {
                         float f1 = (this.random.nextFloat() * 2.0F - 1.0F) * this.getBbWidth() * 0.5F;
                         float f2 = (this.random.nextFloat() * 2.0F - 1.0F) * this.getBbWidth() * 0.5F;
-                        this.level.addParticle(ParticleTypes.SPLASH, this.getX() + (double)f1, (double)(f + 0.8F), this.getZ() + (double)f2, vec3.x, vec3.y, vec3.z);
+                        this.level().addParticle(ParticleTypes.SPLASH, this.getX() + (double)f1, (double)(f + 0.8F), this.getZ() + (double)f2, vec3.x, vec3.y, vec3.z);
                     }
                 }
             }
@@ -257,7 +257,7 @@ public class EntityBeastmasterWolf extends GemTamableAnimal implements NeutralMo
             return false;
         } else {
             Entity entity = p_30386_.getEntity();
-            if (!this.level.isClientSide) {
+            if (!this.level().isClientSide) {
                 this.setOrderedToSit(false);
             }
 

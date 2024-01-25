@@ -36,7 +36,7 @@ public class FusionUIContainer extends AbstractContainerMenu {
     public FusionUIContainer(int windowID, Inventory playerInventory, EntityFusion gem) {
         super(ModContainers.GEM_UI_CONTAINER.get(), windowID);
         this.gem = gem;
-        this.canInteract = ContainerLevelAccess.create(this.gem.level, this.gem.blockPosition());
+        this.canInteract = ContainerLevelAccess.create(this.gem.level(), this.gem.blockPosition());
 
         /*this.addSlot(new Slot((IInventory)this.gem, TankTE.BUCKET_INPUT_SLOT_INDEX, 78, 50));
         this.addSlot(new Slot((IInventory)this.gem, TankTE.BUCKET_OUTPUT_SLOT_INDEX, 96, 50));*/
@@ -94,7 +94,7 @@ public class FusionUIContainer extends AbstractContainerMenu {
         Objects.requireNonNull(playerInventory, "Player Inventory can not be null");
         Objects.requireNonNull(extraData, "Data Packet can not be null");
         int ID = extraData.readInt();
-        Entity entity = playerInventory.player.level.getEntity(ID);
+        Entity entity = playerInventory.player.level().getEntity(ID);
         if(entity instanceof EntityFusion){
             return (EntityFusion) entity;
         }

@@ -17,7 +17,7 @@ public class EmpressArmorEffect extends MobEffect {
 
     @Override
     public void applyEffectTick(LivingEntity entity, int pAmplifier) {
-        List<LivingEntity> list = entity.level.getEntitiesOfClass(LivingEntity.class, entity.getBoundingBox().inflate(20.0D, 8.0D, 20.0D));
+        List<LivingEntity> list = entity.level().getEntitiesOfClass(LivingEntity.class, entity.getBoundingBox().inflate(20.0D, 8.0D, 20.0D));
         for (LivingEntity livingEntity : list) {
             if (!livingEntity.is(entity)) {
                 livingEntity.addEffect(new MobEffectInstance(MobEffects.GLOWING, 100, 1, false, false, true));

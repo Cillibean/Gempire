@@ -39,7 +39,7 @@ public class AbilityElectrokinesis extends Ability implements ITaskAbility, IVio
 
     @Override
     public void attack(LivingEntity target, float distanceFactor) {
-        ElectrokinesisLightning lightning = new ElectrokinesisLightning(this.holder.level, this.holder, target);
+        ElectrokinesisLightning lightning = new ElectrokinesisLightning(this.holder.level(), this.holder, target);
         double d0 = target.getEyeY() - (double) 1.1F;
         double d1 = target.getX() - this.holder.getX();
         double d2 = d0 - lightning.getY();
@@ -48,21 +48,22 @@ public class AbilityElectrokinesis extends Ability implements ITaskAbility, IVio
         //lightning.(d1, d2 + (double) f, d3, 1.6F, 6.0F);
         //this.holder.playSound(SoundEvents.LLAMA_SPIT, 1.0F, 0.4F / (this.holder.getRandom().nextFloat() * 0.4F + 0.8F));
         lightning.setPos(target.getX(), target.getY(), target.getZ());
-        //if (this.holder.level.canSeeSky(target.getOnPos())) {
+        //if (this.holder.level().canSeeSky(target.getOnPos())) {
             System.out.println("can see sky");
-            ElectrokinesisLightning electro = ModEntities.ELECTROKINESIS_LIGHTNING.get().create(this.holder.level);
+            ElectrokinesisLightning electro = ModEntities.ELECTROKINESIS_LIGHTNING.get().create(this.holder.level());
             assert electro != null;
             electro.owner = this.holder;
-            electro.level = this.holder.level;
+            //TODO: fix electro
+            //electro.level() = this.holder.level();
             electro.target = target;
             //electro.moveTo(Vec3.atBottomCenterOf(target.getOnPos()));
             lightning.moveTo(Vec3.atBottomCenterOf(target.getOnPos()));
-            //this.holder.level.addFreshEntity(electro);
-            this.holder.level.addFreshEntity(lightning);
+            //this.holder.level().addFreshEntity(electro);
+            this.holder.level().addFreshEntity(lightning);
             this.holder.enemy = target;
             this.holder.enemyDying = true;
             target.hurt(this.holder.damageSources().lightningBolt(), 5);
-            target.getLevel().playSound(holder, target.getOnPos(), SoundEvents.LIGHTNING_BOLT_IMPACT, SoundSource.PLAYERS, 1, 1);
+            target.level().playSound(holder, target.getOnPos(), SoundEvents.LIGHTNING_BOLT_IMPACT, SoundSource.PLAYERS, 1, 1);
         //}
         System.out.println("electrokinesis");
     }
@@ -79,16 +80,16 @@ public class AbilityElectrokinesis extends Ability implements ITaskAbility, IVio
 
     @Override
     public void outburst() {
-        List<LivingEntity> list = this.holder.level.getEntitiesOfClass(LivingEntity.class, this.holder.getBoundingBox().inflate(14.0D, 8.0D, 14.0D));
+        List<LivingEntity> list = this.holder.level().getEntitiesOfClass(LivingEntity.class, this.holder.getBoundingBox().inflate(14.0D, 8.0D, 14.0D));
         List<ElectrokinesisLightning> electro = new ArrayList<>();
         for (LivingEntity entity : list) {
-            ElectrokinesisLightning lightning = new ElectrokinesisLightning(this.holder.level, this.holder, entity);
+            ElectrokinesisLightning lightning = new ElectrokinesisLightning(this.holder.level(), this.holder, entity);
             electro.add(lightning);
         }
         int remainingBolts = 3;
         for (ElectrokinesisLightning lightning : electro) {
             if (holder.getRandom().nextInt(3) == 3) {
-                this.holder.level.addFreshEntity(lightning);
+                this.holder.level().addFreshEntity(lightning);
                 remainingBolts--;
                 lightning.moveTo(Vec3.atBottomCenterOf(lightning.target.getOnPos()));
                 lightning.target.hurt(this.holder.damageSources().lightningBolt(), 5);

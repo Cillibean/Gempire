@@ -78,7 +78,7 @@ public class EntityMica extends EntityStarterGem {
 
     @Override
     public boolean hurt(DamageSource source, float amount) {
-        if(this.level.isClientSide){
+        if(this.level().isClientSide){
             return super.hurt(source, amount);
         }
         else{
@@ -96,7 +96,7 @@ public class EntityMica extends EntityStarterGem {
 
     @Override
     public InteractionResult interactAt(Player player, Vec3 vec, InteractionHand hand){
-        if(player.level.isClientSide){
+        if(player.level().isClientSide){
             return super.interactAt(player, vec, hand);
         }
         if(this.isOwner(player)){
