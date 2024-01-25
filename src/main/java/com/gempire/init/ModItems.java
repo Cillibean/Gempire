@@ -275,6 +275,10 @@ public class ModItems {
             new Item(new Item.Properties().stacksTo(64))
     );
 
+    public static final RegistryObject<Item> PRISMATIC_UPGRADE_SMITHING_TEMPLATE = ITEMS.register("prismatic_upgrade_smithing_template", () ->
+            new Item(new Item.Properties().stacksTo(64))
+    );
+
     public static final RegistryObject<Item> TUNGSTEN_NUGGET = ITEMS.register("tungsten_nugget", () ->
             new Item(new Item.Properties().stacksTo(64))
     );

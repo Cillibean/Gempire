@@ -8,5 +8,8 @@
   },
   "result": {
     "item": "gempire:prismatic_pickaxe"
+  },
+  "template": {
+    "item": "gempire:prismatic_upgrade_smithing_template"
   }
 }

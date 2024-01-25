@@ -278,6 +278,7 @@ public class ModCreativeModeTabs {
         populator.accept(ModItems.GEM_SCRAP.get());
         populator.accept(ModItems.GEM_ALLOY.get());
         populator.accept(ModItems.PRISMATIC_INGOT.get());
+        populator.accept(ModItems.PRISMATIC_UPGRADE_SMITHING_TEMPLATE.get());
 
         populator.accept(ModItems.GEM_SLUSH_BUCKET.get());
 

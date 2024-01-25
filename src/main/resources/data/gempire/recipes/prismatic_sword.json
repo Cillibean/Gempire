@@ -8,5 +8,8 @@
   },
   "result": {
     "item": "gempire:prismatic_sword"
+  },
+  "template": {
+    "item": "gempire:prismatic_upgrade_smithing_template"
   }
 }
