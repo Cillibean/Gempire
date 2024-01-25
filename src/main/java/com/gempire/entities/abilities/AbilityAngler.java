@@ -31,11 +31,11 @@ public class AbilityAngler extends Ability implements IIdleAbility {
     public void execute() {
         if (this.holder.tickCount % 200 == 0) {
             if (this.holder.isInWater()) {
-                if (!this.holder.level.isClientSide) {
-                    ItemStack rod = new ItemStack(Items.FISHING_ROD);
+                if (!this.holder.level().isClientSide) {
+                    /*ItemStack rod = new ItemStack(Items.FISHING_ROD);
                     rod.enchant(Enchantments.FISHING_LUCK, 1);
-                    LootTable loottable = this.holder.level.getServer().getLootTables().get(BuiltInLootTables.FISHING);
-                    List<ItemStack> items = loottable.getRandomItems((new LootContext.Builder((ServerLevel) this.holder.level))
+                    LootTable loottable = this.holder.level().getServer().getLootData().getLootTable(BuiltInLootTables.FISHING);
+                    List<ItemStack> items = loottable.getRandomItems((new LootContext.Builder((ServerLevel) this.holder.level()))
                             .withLuck(this.holder.getLuck())
                             .withRandom(this.holder.getRandom())
                             .withParameter(LootContextParams.TOOL, rod)
@@ -44,7 +44,8 @@ public class AbilityAngler extends Ability implements IIdleAbility {
                     for (ItemStack stack : items) {
                         this.holder.spawnAtLocation(stack);
                         this.holder.playSound(this.holder.getInstrument());
-                    }
+                    }*/
+                    //TODO: fix angler
                 }
             }
         }

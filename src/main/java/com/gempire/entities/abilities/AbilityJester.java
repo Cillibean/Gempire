@@ -21,7 +21,7 @@ public class AbilityJester extends Ability implements IIdleAbility {
 
     @Override
     public void execute() {
-        List<EntityGem> list = this.holder.level.getEntitiesOfClass(EntityGem.class, this.holder.getBoundingBox().inflate(14.0D, 8.0D, 14.0D));
+        List<EntityGem> list = this.holder.level().getEntitiesOfClass(EntityGem.class, this.holder.getBoundingBox().inflate(14.0D, 8.0D, 14.0D));
         if (holder.getMovementType() == 1) {
             for (EntityGem entityGem : list) {
                 if (entityGem != holder) {

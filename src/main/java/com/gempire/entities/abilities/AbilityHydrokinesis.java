@@ -27,7 +27,7 @@ public class AbilityHydrokinesis extends Ability implements IRangedAbility, IVio
 
     @Override
     public void attack(LivingEntity target, float distanceFactor) {
-        WaterOrbEntity waterOrb = new WaterOrbEntity(this.holder.level, this.holder);
+        WaterOrbEntity waterOrb = new WaterOrbEntity(this.holder.level(), this.holder);
         double d0 = target.getEyeY() - (double) 1.1F;
         double d1 = target.getX() - this.holder.getX();
         double d2 = d0 - waterOrb.getY();
@@ -35,7 +35,7 @@ public class AbilityHydrokinesis extends Ability implements IRangedAbility, IVio
         float f = Mth.sqrt((float) (d1 * d1 + d3 * d3)) * 0.2F;
         waterOrb.shoot(d1, d2 + (double) f, d3, 1.6F, 6.0F);
         this.holder.playSound(SoundEvents.WATER_AMBIENT, 1.0F, 0.4F / (this.holder.getRandom().nextFloat() * 0.4F + 0.8F));
-        this.holder.level.addFreshEntity(waterOrb);
+        this.holder.level().addFreshEntity(waterOrb);
         for(Ability ability : this.holder.getAbilityPowers()){
             if(ability instanceof AbilityParalysis){
                 if(target instanceof PathfinderMob){
@@ -69,10 +69,11 @@ public class AbilityHydrokinesis extends Ability implements IRangedAbility, IVio
 
     @Override
     public void outburst() {
-        //this.holder.level.setRainLevel(1);
-        if (!this.holder.level.isClientSide) {
+        //this.holder.level().setRainLevel(1);
+        if (!this.holder.level().isClientSide) {
             System.out.println("rain");
-            ((ServerLevel) this.holder.level).setWeatherParameters(0, 1000, true, true);
+            //TODO: fix hydro outbursts
+            //((ServerLevel) this.holder.level()).setWeatherParameters(0, 1000, true, true);
         }
     }
 }

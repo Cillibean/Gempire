@@ -476,10 +476,19 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     }
 
     public void writeUtil(CompoundTag compound) {
-        String string = movementType + "," + getSkinColorVariant() + "," +
-                getRebelled() + "," + getQuality() + "," +
-                getHostile() + "," + getAssigned() + "," +
-                rebelPoints + "," + rebelTicks + "," + GUARD_POS.asLong();
+        String string;
+        if (GUARD_POS != null) {
+            string = movementType + "," + getSkinColorVariant() + "," +
+                    getRebelled() + "," + getQuality() + "," +
+                    getHostile() + "," + getAssigned() + "," +
+                    rebelPoints + "," + rebelTicks + "," + GUARD_POS.asLong();
+        }
+        else {
+            string = movementType + "," + getSkinColorVariant() + "," +
+                    getRebelled() + "," + getQuality() + "," +
+                    getHostile() + "," + getAssigned() + "," +
+                    rebelPoints + "," + rebelTicks;
+        }
         compound.putString("util", string);
     }
 

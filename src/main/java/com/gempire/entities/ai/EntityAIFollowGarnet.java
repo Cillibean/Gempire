@@ -20,7 +20,7 @@ public class EntityAIFollowGarnet extends Goal {
 
     @Override
     public boolean canUse() {
-        List<EntityGem> list = this.follower.level.getEntitiesOfClass(EntityGem.class, this.follower.getBoundingBox().inflate(7.0D, 5.0D, 7.0D));
+        List<EntityGem> list = this.follower.level().getEntitiesOfClass(EntityGem.class, this.follower.getBoundingBox().inflate(7.0D, 5.0D, 7.0D));
         double maxDistance = Double.MAX_VALUE;
         if (!follower.getRebelled() && this.follower.getSludgeAmount() < 5 && follower.followingGarnet) {
                 for (EntityGem entity : list) {

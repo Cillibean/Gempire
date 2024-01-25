@@ -21,8 +21,8 @@ public class AbilityPyrokinesis extends Ability implements IMeleeAbility, IEmoti
             for (int z = 0; z < 3; z++){
                 for (int y = 0; y < 3; y++){
                     BlockPos pos = new BlockPos(x - 1, y, z - 1).offset(this.holder.blockPosition());
-                    if(this.holder.level.getBlockState(pos).getBlock() == Blocks.AIR && this.holder.level.getBlockState(pos.below()).getBlock() != Blocks.AIR) {
-                        this.holder.level.setBlockAndUpdate(pos, Blocks.FIRE.defaultBlockState());
+                    if(this.holder.level().getBlockState(pos).getBlock() == Blocks.AIR && this.holder.level().getBlockState(pos.below()).getBlock() != Blocks.AIR) {
+                        this.holder.level().setBlockAndUpdate(pos, Blocks.FIRE.defaultBlockState());
                     }
                 }
             }

@@ -29,13 +29,13 @@ public class OwnerHurtByTargetGemGoal extends TargetGoal {
                 if (this.entityGem.getOwned()) {
                     if (entityGem.OWNERS.size() != 1) {
                         for (int i = 0; i < this.entityGem.OWNERS.size(); i++) {
-                            player = this.entityGem.level.getPlayerByUUID(this.entityGem.OWNERS.get(i));
+                            player = this.entityGem.level().getPlayerByUUID(this.entityGem.OWNERS.get(i));
                             this.ownerLastHurtBy = player.getLastHurtByMob();
                             int n = player.getLastHurtByMobTimestamp();
                             return n != this.timestamp && this.canAttack(this.ownerLastHurtBy, TargetingConditions.DEFAULT) && this.entityGem.wantsToAttack(this.ownerLastHurtBy, player);
                         }
                     } else {
-                        player = this.entityGem.level.getPlayerByUUID(this.entityGem.OWNERS.get(0));
+                        player = this.entityGem.level().getPlayerByUUID(this.entityGem.OWNERS.get(0));
                         if (this.player != null) {
                             this.ownerLastHurtBy = player.getLastHurtByMob();
                             int n = player.getLastHurtByMobTimestamp();
@@ -56,7 +56,7 @@ public class OwnerHurtByTargetGemGoal extends TargetGoal {
         this.mob.setTarget(this.ownerLastHurtBy);
         Player player = null;
         for (int i = 0; i < this.entityGem.OWNERS.size(); i++) {
-            player = this.entityGem.level.getPlayerByUUID(this.entityGem.OWNERS.get(i));
+            player = this.entityGem.level().getPlayerByUUID(this.entityGem.OWNERS.get(i));
             this.timestamp = player.getLastHurtByMobTimestamp();
         }
         super.start();

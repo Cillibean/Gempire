@@ -32,7 +32,7 @@ public class AbilityRecycler extends Ability implements IIdleAbility {
 
     public ArrayList<ItemStack> getList() {
             if (!this.holder.getItemBySlot(EquipmentSlot.MAINHAND).isEmpty()) {
-                manager = holder.level.getRecipeManager();
+                manager = holder.level().getRecipeManager();
                 ItemStack stack = this.holder.getItemBySlot(EquipmentSlot.MAINHAND);
                 Item item = stack.getItem();
                 if (item == Items.NETHERITE_AXE ||item == Items.NETHERITE_PICKAXE ||
@@ -103,7 +103,7 @@ public class AbilityRecycler extends Ability implements IIdleAbility {
 
     @Override
     public void execute() {
-        if (!holder.level.isClientSide && timer >= 20) runRecycle(getList());
+        if (!holder.level().isClientSide && timer >= 20) runRecycle(getList());
         if (timer <= 20) {
             timer ++;
         } else {

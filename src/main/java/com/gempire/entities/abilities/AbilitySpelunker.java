@@ -32,7 +32,7 @@ public class AbilitySpelunker extends Ability implements IIdleAbility {
     public void execute() {
         Player player = holder.currentPlayer;
         AABB aabb = this.holder.getBoundingBox().inflate(10D);
-        List<BlockState> blocks = new ArrayList<>(this.holder.getLevel().getBlockStates(aabb).toList());
+        List<BlockState> blocks = new ArrayList<>(this.holder.level().getBlockStates(aabb).toList());
         System.out.println("list");
         if (cooldown <= 0) {
             if (!foundBlock) {

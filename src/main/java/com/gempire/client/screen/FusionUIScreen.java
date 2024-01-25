@@ -13,6 +13,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.screens.Screen;
@@ -67,19 +68,19 @@ public class FusionUIScreen extends AbstractContainerScreen<FusionUIContainer> {
     }
 
     @Override
-    protected void renderLabels(PoseStack matrixStack, int x, int y) {
+    protected void renderLabels(GuiGraphics matrixStack, int x, int y) {
         this.drawAbilityList(matrixStack, 104, 97);
     }
 
     @Override
-    public void render(PoseStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+    public void render(GuiGraphics matrixStack, int mouseX, int mouseY, float partialTicks) {
         this.renderBackground(matrixStack);
         super.render(matrixStack, mouseX, mouseY, partialTicks);
         this.renderTooltip(matrixStack, mouseX, mouseY);
     }
 
     @Override
-    protected void renderBg(PoseStack matrixStack, float partialTicks, int mouseX, int mouseY) {
+    protected void renderBg(GuiGraphics matrixStack, float partialTicks, int mouseX, int mouseY) {
         GUIUtilities.setup(FusionUIScreen.GUI);
 
         int x = (this.width - this.imageWidth) / 2;
@@ -87,7 +88,7 @@ public class FusionUIScreen extends AbstractContainerScreen<FusionUIContainer> {
         int i = this.leftPos;
         int j = this.topPos;
 
-        blit(matrixStack, x, y, 0, 0, this.imageWidth, this.imageHeight, 197, 250);
+        matrixStack.blit(GUI, x, y, 0, 0, this.imageWidth, this.imageHeight, 197, 250);
 
         this.nameBox.render(matrixStack, mouseX, mouseY, partialTicks);
         int scale = 0;
@@ -168,14 +169,14 @@ public class FusionUIScreen extends AbstractContainerScreen<FusionUIContainer> {
     }
 
 
-    public void drawStats(PoseStack stack, int x, int y){
+    public void drawStats(GuiGraphics stack, int x, int y){
         Component health = Component.translatable("screens.gempire.health");
         Component damage = Component.translatable("screens.gempire.damage");
-        this.font.draw(stack, Component.translatable(health.getString() + ": " + (int)this.menu.gem.getHealth() + " / " + (int)this.menu.gem.getMaxHealth()), x + 7, y + 98, 4210752);
-        this.font.draw(stack,Component.translatable(damage.getString() + ": " + (int)this.menu.gem.getAttributeBaseValue(Attributes.ATTACK_DAMAGE)), x + 7, y + 110, 4210752);
+        stack.drawString(font, Component.translatable(health.getString() + ": " + (int)this.menu.gem.getHealth() + " / " + (int)this.menu.gem.getMaxHealth()), x + 7, y + 98, 4210752);
+        stack.drawString(font,Component.translatable(damage.getString() + ": " + (int)this.menu.gem.getAttributeBaseValue(Attributes.ATTACK_DAMAGE)), x + 7, y + 110, 4210752);
     }
 
-    public void drawAbilityList(PoseStack stack, int x, int y){
+    public void drawAbilityList(GuiGraphics stack, int x, int y){
         ArrayList<Ability> powers1 = this.menu.gem.findAbilities(this.menu.gem.getAbilities());
         ArrayList<Ability> powers = new ArrayList<>();
         for(Ability ability : powers1){
@@ -185,7 +186,7 @@ public class FusionUIScreen extends AbstractContainerScreen<FusionUIContainer> {
         }
         for(int i = 0; i < powers.size(); i++){
             Component text = powers.get(i).getName();
-            this.font.draw(stack, text, x, y + i * 9, 4210752);
+            stack.drawString(font, text, x, y + i * 9, 4210752);
         }
     }
 }

@@ -582,6 +582,9 @@ public class ModCreativeModeTabs {
         populator.accept(ModBlocks.TUNGSTEN_ORE.get());
         populator.accept(ModBlocks.DEEPSLATE_TUNGSTEN_ORE.get());
 
+        populator.accept(ModBlocks.PYRITE_BLOCK.get());
+        populator.accept(ModBlocks.GEODE_CRYSTAL_BLOCK.get());
+
         populator.accept(ModBlocks.RUINED_MARBLE_BLOCK.get());
         populator.accept(ModBlocks.RUINED_MARBLE_STAIRS.get());
         populator.accept(ModBlocks.RUINED_MARBLE_SLAB.get());

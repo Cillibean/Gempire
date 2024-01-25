@@ -4,6 +4,7 @@ import com.gempire.container.InjectorContainer;
 import com.gempire.util.GUIUtilities;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.systems.RenderSystem;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.level.material.Fluids;
@@ -38,24 +39,24 @@ public class InjectorScreen extends AbstractContainerScreen<InjectorContainer> {
 
 
     @Override
-    public void render(PoseStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+    public void render(GuiGraphics matrixStack, int mouseX, int mouseY, float partialTicks) {
         this.renderBackground(matrixStack);
         super.render(matrixStack, mouseX, mouseY, partialTicks);
         this.renderTooltip(matrixStack, mouseX, mouseY);
     }
 
     @Override
-    protected void renderLabels(PoseStack matrixStack, int x, int y) {
+    protected void renderLabels(GuiGraphics matrixStack, int x, int y) {
 
     }
 
     @SuppressWarnings("deprecation")
     @Override
-    protected void renderBg(PoseStack matrixStack, float partialTicks, int mouseX, int mouseY) {
+    protected void renderBg(GuiGraphics matrixStack, float partialTicks, int mouseX, int mouseY) {
         GUIUtilities.setup(INJECTOR_GUI);
         int x = (this.width - this.imageWidth) / 2;
         int y = (this.height - this.imageHeight) / 2;
-        blit(matrixStack, x, y, 0, 0, this.imageWidth, this.imageHeight);
+        matrixStack.blit(INJECTOR_GUI, x, y, 0, 0, this.imageWidth, this.imageHeight);
         FluidStack pinkFluid = this.menu.injector.getTankFromValue(0).getFluid();
         FluidStack blueFluid = this.menu.injector.getTankFromValue(1).getFluid();
         FluidStack yellowFluid = this.menu.injector.getTankFromValue(2).getFluid();
@@ -71,7 +72,7 @@ public class InjectorScreen extends AbstractContainerScreen<InjectorContainer> {
             float g = ((color & 65280) >> 8) / 255f;
             float b = ((color & 255) >> 0) / 255f;
             RenderSystem.setShaderColor(r, g, b, 1);
-            this.blit(matrixStack, xPink, yPink + (16 - fluidStored), 0, 0, 4, fluidStored);
+            matrixStack.blit(FLUID_GUI, xPink, yPink + (16 - fluidStored), 0, 0, 4, fluidStored);
         }
         if(blueFluid.getFluid() != Fluids.EMPTY)
         {
@@ -84,7 +85,7 @@ public class InjectorScreen extends AbstractContainerScreen<InjectorContainer> {
             float g = ((color & 65280) >> 8) / 255f;
             float b = ((color & 255) >> 0) / 255f;
             RenderSystem.setShaderColor(r, g, b, 1);
-            this.blit(matrixStack, xBlue, yBlue + (16 - fluidStored), 0, 0, 4, fluidStored);
+            matrixStack.blit(FLUID_GUI, xBlue, yBlue + (16 - fluidStored), 0, 0, 4, fluidStored);
         }
         if(yellowFluid.getFluid() != Fluids.EMPTY)
         {
@@ -97,7 +98,7 @@ public class InjectorScreen extends AbstractContainerScreen<InjectorContainer> {
             float g = ((color & 65280) >> 8) / 255f;
             float b = ((color & 255) >> 0) / 255f;
             RenderSystem.setShaderColor(r, g, b, 1);
-            this.blit(matrixStack, xYellow, yYellow + (16 - fluidStored), 0, 0, 4, fluidStored);
+            matrixStack.blit(FLUID_GUI, xYellow, yYellow + (16 - fluidStored), 0, 0, 4, fluidStored);
         }
         if(whiteFluid.getFluid() != Fluids.EMPTY)
         {
@@ -110,24 +111,24 @@ public class InjectorScreen extends AbstractContainerScreen<InjectorContainer> {
             float g = ((color & 65280) >> 8) / 255f;
             float b = ((color & 255) >> 0) / 255f;
             RenderSystem.setShaderColor(r, g, b, 1);
-            this.blit(matrixStack, xWhite, yWhite + (16 - fluidStored), 0, 0, 4, fluidStored);
+            matrixStack.blit(FLUID_GUI, xWhite, yWhite + (16 - fluidStored), 0, 0, 4, fluidStored);
         }
         RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
         /*if(this.menu.injector.pinkOpen){
             GUIUtilities.setup(HALO_GUI_PINK);
-            this.blit(matrixStack, x, y, 0, 0, this.width, this.height);
+            this.matrixStack.blit(GUI, x, y, 0, 0, this.width, this.height);
         }
         if(this.menu.injector.blueOpen){
             GUIUtilities.setup(HALO_GUI_BLUE);
-            this.blit(matrixStack, x, y, 0, 0, this.width, this.height);
+            this.matrixStack.blit(GUI, x, y, 0, 0, this.width, this.height);
         }
         if(this.menu.injector.yellowOpen){
             GUIUtilities.setup(HALO_GUI_YELLOW);
-            this.blit(matrixStack, x, y, 0, 0, this.width, this.height);
+            this.matrixStack.blit(GUI, x, y, 0, 0, this.width, this.height);
         }
         if(this.menu.injector.whiteOpen){
             GUIUtilities.setup(HALO_GUI_WHITE);
-            this.blit(matrixStack, x, y, 0, 0, this.width, this.height);
+            this.matrixStack.blit(GUI, x, y, 0, 0, this.width, this.height);
         }*/
     }
 }

@@ -138,6 +138,7 @@ public abstract class EntityFlyingRideableGem extends EntityGem implements Flyin
         return this.getControllingPassenger() != null;
     }
 
+    /*
     @Override
     public void positionRider(@NotNull Entity passenger) {
         super.positionRider(passenger);
@@ -149,7 +150,7 @@ public abstract class EntityFlyingRideableGem extends EntityGem implements Flyin
                 Vec3 riderPos = this.getRiderPosition();
                 passenger.setPos(riderPos.x, riderPos.y + passenger.getBbHeight(), riderPos.z);
         }
-    }
+    }*/
 
     @Override
     public void rideTick() {
@@ -178,7 +179,7 @@ public abstract class EntityFlyingRideableGem extends EntityGem implements Flyin
             this.setPos(riding.getX() + extraX, riding.getY() + extraY, riding.getZ() + extraZ);
             if ((this.getControlState() == 1 << 4 || ((Player) riding).isFallFlying()) && !riding.isPassenger()) {
                 this.stopRiding();
-                if (level.isClientSide) {
+                if (level().isClientSide) {
                     //TODO: send messsage to server
                 }
 
@@ -419,7 +420,7 @@ public abstract class EntityFlyingRideableGem extends EntityGem implements Flyin
 
     public void updateCheckPlayer() {
         final double checkLength = this.getBoundingBox().getSize() * 3;
-        final Player player = level.getNearestPlayer(this, checkLength);
+        final Player player = level().getNearestPlayer(this, checkLength);
         if (this.isSleeping()) {
             if (player != null && !player.isCreative()) {
                 this.setTarget(player);

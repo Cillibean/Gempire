@@ -4,7 +4,7 @@
   "step": "surface_structures",
   "spawn_overrides": {},
   "terrain_adaptation": "none",
-  "start_pool": "gempire:communication_hub/start_pool",
+  "start_pool": "gempire:comm_hub/start_pool",
   "size": 7,
   "start_height": {
     "absolute": -1

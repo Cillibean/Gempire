@@ -32,7 +32,7 @@ public class EntityAIMakeDrill extends Goal {
                 for (int y = -2; y < 3; y++) {
                     for (int z = -4; z < 5; z++) {
                         if (!found) {
-                            if (this.follower.level.getBlockState(this.follower.blockPosition().offset(x, y, z)).getBlock() == Blocks.HOPPER) {
+                            if (this.follower.level().getBlockState(this.follower.blockPosition().offset(x, y, z)).getBlock() == Blocks.HOPPER) {
                                 hopper = this.follower.blockPosition().offset(x, y, z);
                                 found = true;
                                 System.out.println("Hopper Found");
@@ -65,17 +65,17 @@ public class EntityAIMakeDrill extends Goal {
         this.follower.setPathfindingMalus(BlockPathTypes.WATER, 0);
         this.follower.getNavigation().moveTo(target.getX(), target.getY(), target.getZ(), this.speed);
         if(this.follower.distanceToSqr(target.getX(), target.getY(), target.getZ()) < 4){
-            if(this.follower.level.getBlockState(this.target).getBlock() == Blocks.HOPPER){
-                if(this.follower.level.getBlockState(this.target.north()).getBlock() == Blocks.IRON_BARS){
-                    if(this.follower.level.getBlockState(this.target.south()).getBlock() == Blocks.IRON_BARS){
-                        if(this.follower.level.getBlockState(this.target.west()).getBlock() == Blocks.IRON_BARS){
-                            if(this.follower.level.getBlockState(this.target.east()).getBlock() == Blocks.IRON_BARS){
-                                this.follower.level.explode(null, this.target.getX(), this.target.getY(), this.target.getZ(), .75f, Level.ExplosionInteraction.NONE);
-                                this.follower.level.setBlockAndUpdate(this.target, ModBlocks.DRILL_BLOCK.get().defaultBlockState());
-                                this.follower.level.setBlockAndUpdate(this.target.north(), Blocks.AIR.defaultBlockState());
-                                this.follower.level.setBlockAndUpdate(this.target.south(), Blocks.AIR.defaultBlockState());
-                                this.follower.level.setBlockAndUpdate(this.target.west(), Blocks.AIR.defaultBlockState());
-                                this.follower.level.setBlockAndUpdate(this.target.east(), Blocks.AIR.defaultBlockState());
+            if(this.follower.level().getBlockState(this.target).getBlock() == Blocks.HOPPER){
+                if(this.follower.level().getBlockState(this.target.north()).getBlock() == Blocks.IRON_BARS){
+                    if(this.follower.level().getBlockState(this.target.south()).getBlock() == Blocks.IRON_BARS){
+                        if(this.follower.level().getBlockState(this.target.west()).getBlock() == Blocks.IRON_BARS){
+                            if(this.follower.level().getBlockState(this.target.east()).getBlock() == Blocks.IRON_BARS){
+                                this.follower.level().explode(null, this.target.getX(), this.target.getY(), this.target.getZ(), .75f, Level.ExplosionInteraction.NONE);
+                                this.follower.level().setBlockAndUpdate(this.target, ModBlocks.DRILL_BLOCK.get().defaultBlockState());
+                                this.follower.level().setBlockAndUpdate(this.target.north(), Blocks.AIR.defaultBlockState());
+                                this.follower.level().setBlockAndUpdate(this.target.south(), Blocks.AIR.defaultBlockState());
+                                this.follower.level().setBlockAndUpdate(this.target.west(), Blocks.AIR.defaultBlockState());
+                                this.follower.level().setBlockAndUpdate(this.target.east(), Blocks.AIR.defaultBlockState());
                                 follower.getItemBySlot(EquipmentSlot.MAINHAND).hurtAndBreak(1, follower, (p_43296_) -> p_43296_.broadcastBreakEvent(EquipmentSlot.MAINHAND));                            }
                         }
                     }

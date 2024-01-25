@@ -99,6 +99,20 @@ public class ModItems {
             )
     );
 
+    public static final RegistryObject<Item> PYRITE_BLOCK = ITEMS.register("pyrite_block", () ->
+            new BlockItem(
+                    ModBlocks.PYRITE_BLOCK.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> GEODE_CRYSTAL_BLOCK = ITEMS.register("geode_crystal_block", () ->
+            new BlockItem(
+                    ModBlocks.GEODE_CRYSTAL_BLOCK.get(),
+                    new Item.Properties()
+            )
+    );
+
     public static final RegistryObject<Item> TUNGSTEN_BLOCK = ITEMS.register("tungsten_block", () ->
             new BlockItem(
                     ModBlocks.TUNGSTEN_BLOCK.get(),

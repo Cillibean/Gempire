@@ -4,6 +4,7 @@ import com.gempire.Gempire;
 import com.gempire.systems.warping.WarpConfigMenu;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
@@ -45,21 +46,21 @@ public class WarpConfigScreen extends AbstractContainerScreen<WarpConfigMenu> {
         super.onClose();
     }
     @Override
-    protected void renderLabels(PoseStack stack, int mouseX, int mouseY) {
-        this.font.draw(stack, this.title, (float)this.titleLabelX, (float)this.titleLabelY, 16777215);
-        //this.font.draw(stack, this.playerInventoryTitle, (float)this.inventoryLabelX, (float)this.inventoryLabelY, 4210752);
+    protected void renderLabels(GuiGraphics stack, int mouseX, int mouseY) {
+        stack.drawString(font, this.title, this.titleLabelX, this.titleLabelY, 16777215);
+        //stack.drawString(font, this.playerInventoryTitle, (float)this.inventoryLabelX, (float)this.inventoryLabelY, 4210752);
     }
 
     @Override
-    protected void renderBg(PoseStack stack, float partialTicks, int mouseX, int mouseY) {
+    protected void renderBg(GuiGraphics stack, float partialTicks, int mouseX, int mouseY) {
         RenderSystem.setShaderTexture(0, BACKGROUND);
         int x = this.leftPos;
         int y = this.topPos;
-        blit(stack, x, y, 0, 0, this.imageWidth, this.imageHeight);
+        stack.blit(BACKGROUND, x, y, 0, 0, this.imageWidth, this.imageHeight);
     }
 
     @Override
-    public void render(PoseStack stack, int mouseX, int mouseY, float partialTicks) {
+    public void render(GuiGraphics stack, int mouseX, int mouseY, float partialTicks) {
         super.render(stack, mouseX, mouseY, partialTicks);
         this.name.render(stack, mouseX, mouseY, partialTicks);
         this.renderTooltip(stack, mouseX, mouseY);
