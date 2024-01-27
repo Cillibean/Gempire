@@ -1,0 +1,17 @@
+{
+  "structures": [
+    {
+      "structure": "gempire:the_geode",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 1325879543,
+    "frequency_reduction_method": "default",
+    "frequency": 1,
+    "spread_type": "linear",
+    "spacing": 110,
+    "separation": 5
+  }
+}

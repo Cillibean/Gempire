@@ -1,0 +1,17 @@
+{
+  "structures": [
+    {
+      "structure": "gempire:great_north_warp",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 1857729737,
+    "frequency_reduction_method": "default",
+    "frequency": 1,
+    "spread_type": "linear",
+    "spacing": 110,
+    "separation": 5
+  }
+}
