@@ -23,7 +23,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import java.util.Random;
 
-public class GalaxyWarpBlock extends DirectionalBlock implements SimpleWaterloggedBlock {
+public class GalaxyWarpBlock extends DirectionalBlock {
 
     public GalaxyWarpBlock(Properties properties) {
         super(properties);
