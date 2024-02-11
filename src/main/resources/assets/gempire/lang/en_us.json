@@ -973,5 +973,7 @@
   "fluid_type.gempire.pink_essence_fluid": "Pink Gem Essence",
   "fluid_type.gempire.blue_essence_fluid": "Blue Gem Essence",
   "fluid_type.gempire.yellow_essence_fluid": "Yellow Gem Essence",
-  "fluid_type.gempire.white_essence_fluid": "White Gem Essence"
+  "fluid_type.gempire.white_essence_fluid": "White Gem Essence",
+
+  "trim_material.gempire.prismatic": "Prismatic Material"
 }
