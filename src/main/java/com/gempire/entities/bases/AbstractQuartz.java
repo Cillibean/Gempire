@@ -44,7 +44,6 @@ public abstract class AbstractQuartz extends EntityVaryingGem implements RangedA
         arrayList.add(new AbilityBerserker());
         arrayList.add(new AbilityBeastmaster());
         arrayList.add(new AbilityElectrokinesis());
-        arrayList.add(new AbilityAerokinesis());
         arrayList.add(new AbilityHydrokinesis());
         arrayList.add(new AbilityArcher());
         return arrayList;

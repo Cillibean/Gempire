@@ -212,7 +212,6 @@ this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, EntityGem.class, 6.0F, 
     public ArrayList<Ability> definiteAbilities(){
         ArrayList<Ability> arrayList = new ArrayList<>();
         arrayList.add(new AbilityFarmer());
-        arrayList.add(new AbilityAerokinesis());
         return arrayList;
     }
 

@@ -4,7 +4,10 @@ import com.gempire.entities.abilities.base.Ability;
 import com.gempire.entities.abilities.interfaces.IIdleAbility;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.PickaxeItem;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.block.*;
@@ -37,7 +40,10 @@ public class AbilityTorchBearer extends Ability implements IIdleAbility {
                         if (holder.onGround()) {
                             if (level.getBrightness(LightLayer.BLOCK, pos) <= 9) {
                                 if (level.getBrightness(LightLayer.SKY, pos) <= 9) {
-                                    if (holder.consumeItemCheck(Items.TORCH, 1)) {
+                                    if (holder.getItemBySlot(EquipmentSlot.MAINHAND).getItem() == Items.TORCH) {
+                                        ItemStack stack = holder.getItemBySlot(EquipmentSlot.MAINHAND).copy();
+                                        stack.setCount(stack.getCount()-1);
+                                        holder.setItemSlot(EquipmentSlot.MAINHAND, stack);
                                         level.setBlock(pos, Blocks.TORCH.defaultBlockState(), 3);
                                     }
                                 }

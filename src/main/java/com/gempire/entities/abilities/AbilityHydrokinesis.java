@@ -7,10 +7,12 @@ import com.gempire.entities.abilities.interfaces.ITaskAbility;
 import com.gempire.entities.abilities.interfaces.IViolentAbility;
 import com.gempire.entities.projectiles.WaterOrbEntity;
 import com.gempire.init.ModEffects;
+import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
+import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.PathfinderMob;
@@ -71,9 +73,11 @@ public class AbilityHydrokinesis extends Ability implements IRangedAbility, IVio
     public void outburst() {
         //this.holder.level().setRainLevel(1);
         if (!this.holder.level().isClientSide) {
-            System.out.println("rain");
-            //TODO: fix hydro outbursts
-            //((ServerLevel) this.holder.level()).setWeatherParameters(0, 1000, true, true);
+            ((ServerLevel) holder.level()).setWeatherParameters(0, getDuration(((ServerLevel) holder.level()), -1, ServerLevel.RAIN_DURATION), true, false);
         }
+    }
+
+    private static int getDuration(ServerLevel level, int p_265171_, IntProvider p_265122_) {
+        return p_265171_ == -1 ? p_265122_.sample(level.getRandom()) : p_265171_;
     }
 }
