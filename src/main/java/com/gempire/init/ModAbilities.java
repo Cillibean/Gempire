@@ -46,7 +46,6 @@ public class ModAbilities {
         abilities.add(new AbilityAngler());
         abilities.add(new AbilityFarmer());
         abilities.add(new AbilityElectrokinesis());
-        abilities.add(new AbilityAerokinesis());
         abilities.add(new AbilityBerserker());
         abilities.add(new AbilityBeastmaster());
         abilities.add(new AbilityDisarming());

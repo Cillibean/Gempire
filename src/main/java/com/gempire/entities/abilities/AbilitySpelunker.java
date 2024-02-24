@@ -5,7 +5,9 @@ import com.gempire.entities.abilities.interfaces.IIdleAbility;
 import com.gempire.init.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.PickaxeItem;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
@@ -15,8 +17,6 @@ import java.util.List;
 
 public class AbilitySpelunker extends Ability implements IIdleAbility {
 
-    //TODO: FIX SPELUNKER
-    // make it not lag
     boolean foundBlock = false;
 
     public AbilitySpelunker(){
@@ -30,38 +30,47 @@ public class AbilitySpelunker extends Ability implements IIdleAbility {
 
     @Override
     public void execute() {
-        Player player = holder.currentPlayer;
-        AABB aabb = this.holder.getBoundingBox().inflate(10D);
-        List<BlockState> blocks = new ArrayList<>(this.holder.level().getBlockStates(aabb).toList());
-        System.out.println("list");
-        if (cooldown <= 0) {
-            if (!foundBlock) {
-                System.out.println("found block false");
+        if (holder.getItemBySlot(EquipmentSlot.MAINHAND).getItem() instanceof PickaxeItem) {
+            if (cooldown <= 0) {
+                foundBlock = false;
+                AABB aabb = this.holder.getBoundingBox().inflate(10D);
+                List<BlockState> blocks = new ArrayList<>(holder.level().getBlockStates(aabb).toList());
                 for (BlockState block : blocks) {
-                    cooldown = 500;
-                    System.out.println("block check");
-                    if (isValuableBlock(block)); {
-                        while (isValuableBlock(block)) {
-                            //if (player != null) {
-                                if (!foundBlock) {
-                                    foundBlock = true;
-                                    System.out.println("found block bool false");
-                                    //player.sendSystemMessage(Component.literal("Found " + blockBelow.getName() + " at " + "(" + blockPos.getX() + ", " + blockPos.getY() + "," + blockPos.getZ() + ")"));
+                    if (isValuableBlock(block)) {
+                        if (!foundBlock && holder.getOwned()) {
+                            cooldown = 250;
+                            foundBlock = true;
+                            ArrayList<Player> players = new ArrayList<>();
+                            for (int i = 0; i < holder.OWNERS.size(); i++)
+                                players.add(holder.level().getPlayerByUUID(holder.OWNERS.get(i)));
+                            BlockPos blockPos = null;
+                            boolean foundPos = false;
+                            BlockPos pos = holder.getOnPosLegacy().offset(-10, -10, -10);
+                            while (!foundPos) {
+                                for (int x = 0; x < 20; x++) {
+                                    for (int y = 0; y < 20; y++) {
+                                        for (int z = 0; z < 20; z++) {
+                                            BlockPos newPos = pos.offset(x, y, z);
+                                            if (holder.level().getBlockState(newPos) == block) {
+                                                blockPos = newPos;
+                                                foundPos = true;
+                                            }
+                                        }
+                                    }
                                 }
-                            //}
+                            }
+                            for (Player player : players) {
+                                player.sendSystemMessage(Component.literal("Found " + block.getBlock().getName() + " at " + "(" + blockPos.getX() + ", " + blockPos.getY() + "," + blockPos.getZ() + ")"));
+                            }
+                            System.out.println("Found " + block.getBlock().getDescriptionId() + " at " + blockPos.getX() + ", " + blockPos.getY() + "," + blockPos.getZ());
                         }
                     }
                 }
+            } else {
+                cooldown--;
+                System.out.println("cooldown: " + cooldown);
             }
-        } else {
-            cooldown -- ;
-            foundBlock = false;
         }
-    }
-
-    private void outputValuableCoordinates(BlockPos blockPos, Player player, Block blockBelow) {
-        player.sendSystemMessage(Component.literal("Found " + blockBelow.getName() + " at " +
-                "(" + blockPos.getX() + ", " + blockPos.getY() + "," + blockPos.getZ() + ")"));
     }
 
     private boolean isValuableBlock(BlockState state) {

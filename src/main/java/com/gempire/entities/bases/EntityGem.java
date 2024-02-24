@@ -2330,12 +2330,9 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             setXRot(passenger.getXRot() * 0.5f);
             setRot(getYRot(), getXRot());
 
-            System.out.println("step height "+getStepHeight());
             if (getStepHeight() < 1) {
                 AttributeModifier HEIGHT = new AttributeModifier(UUID.randomUUID(), "gempirePrimaryModifier", 0.4D, AttributeModifier.Operation.ADDITION);
                 this.getAttribute(ForgeMod.STEP_HEIGHT_ADDITION.get()).addPermanentModifier(HEIGHT);
-                System.out.println("step height "+getStepHeight());
-
             }
 
             this.yBodyRot = this.getYRot();
