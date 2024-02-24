@@ -1,29 +1,44 @@
 package com.gempire.entities.other;
 
+import com.gempire.init.ModEffects;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerBossEvent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.BossEvent;
+import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.animal.Wolf;
 import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.phys.AABB;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.AnimatableManager;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import javax.annotation.Nullable;
+import java.util.List;
 
 public class EntityCobaltGuardian extends Monster implements GeoAnimatable {
     private final ServerBossEvent bossEvent = (ServerBossEvent)(new ServerBossEvent(this.getDisplayName(), BossEvent.BossBarColor.BLUE, BossEvent.BossBarOverlay.PROGRESS)).setDarkenScreen(true);
 
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
+    public int auraCryCooldown;
+    public MobEffectInstance aura = new MobEffectInstance(ModEffects.BLUE_AURA.get(), 500, 1, false, false, true);
+
     public EntityCobaltGuardian(EntityType<? extends EntityCobaltGuardian> p_33002_, Level p_33003_) {
         super(p_33002_, p_33003_);
+        auraCryCooldown = 0;
     }
 
     public static AttributeSupplier.Builder registerAttributes() {
@@ -34,15 +49,31 @@ public class EntityCobaltGuardian extends Monster implements GeoAnimatable {
                 .add(Attributes.ATTACK_SPEED, 1.0D);
     }
 
+    @Override
+    protected void registerGoals() {
+        super.registerGoals();
+    }
+
+    @Override
+    public void addAdditionalSaveData(CompoundTag tag) {
+        tag.putInt("auraCry", auraCryCooldown);
+        super.addAdditionalSaveData(tag);
+    }
+
+    @Override
+    public void readAdditionalSaveData(CompoundTag tag) {
+        auraCryCooldown = tag.getInt("auraCry");
+        super.readAdditionalSaveData(tag);
+    }
 
     public void setCustomName(@Nullable Component p_31476_) {
         super.setCustomName(p_31476_);
         this.bossEvent.setName(this.getDisplayName());
     }
 
-    public void startSeenByPlayer(ServerPlayer p_31483_) {
-        super.startSeenByPlayer(p_31483_);
-        this.bossEvent.addPlayer(p_31483_);
+    public void startSeenByPlayer(ServerPlayer player) {
+        super.startSeenByPlayer(player);
+        this.bossEvent.addPlayer(player);
     }
 
     public void stopSeenByPlayer(ServerPlayer p_31488_) {
@@ -75,7 +106,28 @@ public class EntityCobaltGuardian extends Monster implements GeoAnimatable {
 
     @Override
     public void tick() {
+        if (auraCryCooldown == 0) {
+            if (random.nextInt(20) == 1) {
+                auraCry();
+            }
+        } else {
+            if (!level().isClientSide) {
+                auraCryCooldown--;
+            }
+        }
         this.bossEvent.setProgress(this.getHealth() / this.getMaxHealth());
         super.tick();
+    }
+
+    public void auraCry() {
+        System.out.println("aura cry");
+        //Play sound
+        //Play animation
+        navigation.stop();
+        auraCryCooldown = 600;
+        List<Player> list = this.level().getEntitiesOfClass(Player.class, this.getBoundingBox().inflate(14.0D, 8.0D, 14.0D));
+        for (Player player : list) {
+            player.addEffect(aura);
+        }
     }
 }

@@ -495,24 +495,26 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
 
     public void readUtil(CompoundTag compound) {
         String[] strings = compound.getString("util").split(",");
-        setRebelled(Boolean.parseBoolean(strings[0]));
-        setQuality(Integer.parseInt(strings[1]));
-        isHostile = Boolean.parseBoolean(strings[2]);
-        setAssigned(Boolean.parseBoolean(strings[3]));
-        rebelPoints = Float.parseFloat(strings[4]);
-        rebelTicks = Integer.parseInt(strings[5]);
-        GUARD_POS = BlockPos.of(Long.parseLong(strings[6]));
+        movementType = Byte.parseByte(strings[0]);
+        setSkinColorVariant(Integer.parseInt(strings[1]));
+        setRebelled(Boolean.parseBoolean(strings[2]));
+        setQuality(Integer.parseInt(strings[3]));
+        isHostile = Boolean.parseBoolean(strings[4]);
+        setAssigned(Boolean.parseBoolean(strings[5]));
+        rebelPoints = Float.parseFloat(strings[6]);
+        rebelTicks = Integer.parseInt(strings[7]);
+        GUARD_POS = BlockPos.of(Long.parseLong(strings[8]));
     }
 
     public void writeAbilityUtil(CompoundTag compound) {
         String string = getAbilitySlots() + "," + usesAreaAbilities() +  "," +
                 abilityTicks + "," + emotionMeter + "," + isEmotional() + "," +
                 focusLevel;
-        compound.putString("id", string);
+        compound.putString("ability", string);
     }
 
     public void readAbilityUtil(CompoundTag compound) {
-        String[] strings = compound.getString("id").split(",");
+        String[] strings = compound.getString("ability").split(",");
         setAbilitySlots(Integer.parseInt(strings[0]));
         setUsesAreaAbilities(Boolean.getBoolean(strings[1]));
         abilityTicks = Integer.parseInt(strings[2]);
@@ -524,6 +526,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     }
 
     public void writeIDs(CompoundTag compound) {
+        System.out.println("follow id "+FOLLOW_ID);
         String string = FOLLOW_ID + "," + ASSIGNED_ID +  "," +
                 MASTER_OWNER;
         compound.putString("id", string);
@@ -1087,27 +1090,19 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                                         } */else if (this.canCraft()) {
                                             setRecipeAmount(generateRecipeAmount());
                                             for (int i = 0; i < getRecipeAmount(); i++) {
-                                                System.out.println(i);
-                                                System.out.println("input item check");
                                                 if (player.getItemInHand(hand).getItem() == getInputItem(i)) {
-                                                    System.out.println("hand check 1");
                                                     if (!isCrafting) {
                                                         System.out.println(getInputItem(i).asItem());
-                                                        System.out.println("is crafting check");
                                                         if (getInputItem(i) != Items.AIR.asItem()) {
                                                             if (getInputItem2(i) != Items.AIR) {
                                                                 if (consumeItemCheck(getInputItem2(i), 1)) {
-                                                                    System.out.println("input item air check");
                                                                     inputList.clear();
                                                                     setCurrentRecipe(i);
-
                                                                     if (this.isOwner(player)) {
                                                                         isCrafting = true;
                                                                         this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
-                                                                        if (!player.isCreative()) {
-                                                                            player.getMainHandItem().shrink(1);
-                                                                        }
-                                                                        ItemStack stack = new ItemStack(player.getMainHandItem().getItem());
+                                                                        if (!player.isCreative()) player.getMainHandItem().shrink(1);
+                                                                        ItemStack stack = player.getMainHandItem().copy();
                                                                         stack.setCount(1);
                                                                         if (!this.getItemBySlot(EquipmentSlot.MAINHAND).isEmpty()) {
                                                                             ItemStack gemStack = this.getItemBySlot(EquipmentSlot.MAINHAND);
