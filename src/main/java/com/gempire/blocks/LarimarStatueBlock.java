@@ -29,8 +29,12 @@ public class LarimarStatueBlock extends Block {
     }
 
     @Override
-    public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource source) {
-        super.tick(state, level, pos, source);
+    public boolean isRandomlyTicking(BlockState p_49921_) {
+        return true;
+    }
+
+    @Override
+    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource source) {
         if (timer != 0) {
             timer--;
             if (tier == 0) {
@@ -40,8 +44,7 @@ public class LarimarStatueBlock extends Block {
 
             }
             if (tier == 2) {
-                AABB aabb = new AABB(pos);
-                List<LivingEntity> list = level.getEntitiesOfClass(LivingEntity.class, aabb.inflate(14.0D, 8.0D, 14.0D));
+                List<LivingEntity> list = level.getEntitiesOfClass(LivingEntity.class, new AABB(pos).inflate(14.0D, 8.0D, 14.0D));
                 for (LivingEntity entity : list) {
                     if (entity.getClassification(true) == MobCategory.MONSTER) {
                         entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100,1));
@@ -49,13 +52,11 @@ public class LarimarStatueBlock extends Block {
                     }
                 }
             } else if (tier == 3) {
-                AABB aabb = new AABB(pos);
-                List<LivingEntity> list = level.getEntitiesOfClass(LivingEntity.class, aabb.inflate(14.0D, 8.0D, 14.0D));
+                List<LivingEntity> list = level.getEntitiesOfClass(LivingEntity.class, new AABB(pos).inflate(14.0D, 8.0D, 14.0D));
                 for (LivingEntity entity : list) {
-                    if (entity instanceof Player)
-                    //if (entity.getClassification(true) == MobCategory.MONSTER) {
-                        entity.addEffect(new MobEffectInstance(MobEffects.WITHER, 100,1));
-                    //}
+                    if (entity.getClassification(true) == MobCategory.MONSTER) {
+                        entity.addEffect(new MobEffectInstance(MobEffects.WITHER, 100, 1));
+                    }
                 }
             }
         } else {

@@ -6,12 +6,11 @@ import com.gempire.init.ModItems;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeManager;
+import net.minecraft.world.item.crafting.SmithingTrimRecipe;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -31,11 +30,14 @@ public class AbilityRecycler extends Ability implements IIdleAbility {
     }
 
     public ArrayList<ItemStack> getList() {
-            if (!this.holder.getItemBySlot(EquipmentSlot.MAINHAND).isEmpty()) {
-                manager = holder.level().getRecipeManager();
-                ItemStack stack = this.holder.getItemBySlot(EquipmentSlot.MAINHAND);
-                Item item = stack.getItem();
-                if (item == Items.NETHERITE_AXE ||item == Items.NETHERITE_PICKAXE ||
+        System.out.println("get list");
+        if (!this.holder.getItemBySlot(EquipmentSlot.MAINHAND).isEmpty()) {
+            manager = holder.level().getRecipeManager();
+            ItemStack stack = this.holder.getItemBySlot(EquipmentSlot.MAINHAND);
+            Item item = stack.getItem();
+            if (item instanceof ArmorItem || item instanceof PickaxeItem || item instanceof AxeItem ||
+                    item instanceof SwordItem || item instanceof ShovelItem || item instanceof HoeItem) {
+                if (item == Items.NETHERITE_AXE || item == Items.NETHERITE_PICKAXE ||
                         item == Items.NETHERITE_SWORD || item == Items.NETHERITE_SHOVEL ||
                         item == Items.NETHERITE_HOE || item == Items.NETHERITE_HELMET ||
                         item == Items.NETHERITE_LEGGINGS || item == Items.NETHERITE_BOOTS ||
@@ -62,13 +64,14 @@ public class AbilityRecycler extends Ability implements IIdleAbility {
                 listi.clear();
                 listi2.clear();
                 for (Recipe recipe : collection) {
-                    if (recipe.getResultItem(RegistryAccess.EMPTY).is(item)) {
-                        list.add(recipe);
+                    if (!(recipe instanceof SmithingTrimRecipe)) {
+                        if (recipe.getResultItem(RegistryAccess.EMPTY).is(item)) {
+                            list.add(recipe);
+                        }
                     }
                 }
                 for (Recipe recipe : list) {
                     for (Object item2 : recipe.getIngredients()) {
-
                         listi.add((Ingredient) item2);
                     }
                 }
@@ -82,7 +85,7 @@ public class AbilityRecycler extends Ability implements IIdleAbility {
                 Item deepslate = Items.COBBLED_DEEPSLATE;
                 Item blackstone = Items.BLACKSTONE;
                 Item stick = Items.STICK;
-                if (listi3.contains(cobblestone) && listi3.contains(deepslate) && listi3.contains(blackstone)){
+                if (listi3.contains(cobblestone) && listi3.contains(deepslate) && listi3.contains(blackstone)) {
                     listi3.remove(deepslate);
                     listi3.remove(blackstone);
                     listi3.remove(deepslate);
@@ -97,17 +100,19 @@ public class AbilityRecycler extends Ability implements IIdleAbility {
                 }
                 return listi4;
             }
+        }
         return null;
     }
 
 
     @Override
     public void execute() {
-        if (!holder.level().isClientSide && timer >= 20) runRecycle(getList());
-        if (timer <= 20) {
-            timer ++;
-        } else {
-            timer = 0;
+        if (!holder.level().isClientSide) {
+            if (timer >= 10) {
+                runRecycle(getList());
+                timer = 0;
+            } else timer++;
+            System.out.println(timer);
         }
     }
 

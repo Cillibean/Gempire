@@ -58,6 +58,11 @@
   "block.gempire.drained_log": "Rough Carbonite",
   "block.gempire.drained_log_cracked": "Rough Cracked Carbonite",
 
+  "block.gempire.primed_ice": "Primed Ice",
+  "block.gempire.primed_packed_ice": "Primed Packed Ice",
+  "block.gempire.primed_blue_ice": "Primed Blue Ice",
+  "block.gempire.primed_drained_ice": "Primed Black Ice",
+
   "block.gempire.drained_blue_polished_stone_dark": "Drained Blue Polished Stone",
   "block.gempire.drained_blue_polished_stone_dark_stairs": "Drained Blue Polished Stone Stairs",
   "block.gempire.drained_blue_polished_stone_dark_slab": "Drained Blue Polished Stone Slab",
@@ -208,10 +213,10 @@
   "block.gempire.ruined_marble_pillar": "Ancient Marble Pillar",
   "block.gempire.chiseled_ruined_marble_block": "Ancient Chiseled Marble Block",
   "block.gempire.smooth_ruined_marble_block": "Ancient Smooth Marble Block",
-  "block.gempire.smooth_ruined_marble_dark_slab": "Ancient Smooth Marble Slab",
-  "block.gempire.ruined_marble_dark_slab": "Ancient Marble Slab",
-  "block.gempire.smooth_ruined_marble_dark_stairs": "Ancient Smooth Marble Stairs",
-  "block.gempire.ruined_marble_dark_stairs": "Ancient Marble Stairs",
+  "block.gempire.smooth_ruined_marble_slab": "Ancient Smooth Marble Slab",
+  "block.gempire.ruined_marble_slab": "Ancient Marble Slab",
+  "block.gempire.smooth_ruined_marble_stairs": "Ancient Smooth Marble Stairs",
+  "block.gempire.ruined_marble_stairs": "Ancient Marble Stairs",
 
   "block.gempire.tungsten_ore": "Tungsten Ore",
   "block.gempire.deepslate_tungsten_ore": "Deepslate Tungsten Ore",

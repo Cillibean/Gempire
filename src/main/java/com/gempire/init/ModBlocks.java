@@ -658,7 +658,7 @@ public class ModBlocks {
             new LarimarStatueBlock(BlockBehaviour.Properties.copy(Blocks.BLUE_ICE), 2));
 
     public static final RegistryObject<Block> PRIMED_DRAINED_ICE_STATUE = BLOCKS.register("primed_drained_ice_statue", () ->
-            new LarimarStatueBlock(BlockBehaviour.Properties.copy(ModBlocks.DRAINED_ICE.get()), 3));
+            new LarimarStatueBlock(BlockBehaviour.Properties.copy(ModBlocks.PRIMED_DRAINED_ICE.get()), 3));
 
     public static final RegistryObject<Block> DRAINED_BLUE_POLISHED_STONE = BLOCKS.register("drained_blue_polished_stone", () ->
             new DrainedBlock(BlockBehaviour.Properties
