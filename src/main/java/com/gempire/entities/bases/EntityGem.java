@@ -402,6 +402,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         if (this instanceof EntityPearl) return false;
         else if (this.isArcher()) return stack.getItem() instanceof DiggerItem || stack.getItem() instanceof BowItem || stack.getItem() instanceof AxeItem || stack.getItem() instanceof PickaxeItem || stack.getItem() instanceof DestabBase || stack.getItem() instanceof ItemShatterer;
         else if (this.isTinkerer()) return stack.getItem() instanceof DiggerItem || stack.getItem() instanceof BowItem || stack.getItem() instanceof AxeItem || stack.getItem() instanceof PickaxeItem || stack.getItem() instanceof ArmorItem || stack.getItem() instanceof DestabBase || stack.getItem() instanceof ItemShatterer;
+        else if (this.isTorchBearer()) return stack.getItem() instanceof DiggerItem || stack.getItem() instanceof AxeItem || stack.getItem() instanceof PickaxeItem || stack.getItem() instanceof DestabBase || stack.getItem() instanceof ItemShatterer || stack.getItem() == Items.TORCH;
         else if (this.canCraft()) {
             boolean bool = false;
             for (int i = 0; i < getRecipeAmount(); i++) if (stack.getItem() == this.getInputItem(i)) bool = true;
@@ -2625,6 +2626,16 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         boolean flag = false;
         for(Ability ability : this.getAbilityPowers()){
             if(ability instanceof AbilityTinkerer){
+                return flag = true;
+            }
+        }
+        return flag;
+    }
+
+    public boolean isTorchBearer(){
+        boolean flag = false;
+        for(Ability ability : this.getAbilityPowers()){
+            if(ability instanceof AbilityTorchBearer){
                 return flag = true;
             }
         }
