@@ -38,17 +38,26 @@ public class LarimarStatueBlock extends Block {
         if (timer != 0) {
             timer--;
             if (tier == 0) {
-
+                List<LivingEntity> list = level.getEntitiesOfClass(LivingEntity.class, new AABB(pos).inflate(14.0D, 8.0D, 14.0D));
+                for (LivingEntity entity : list) {
+                    if (entity.getClassification(true) == MobCategory.MONSTER) {
+                        entity.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 100, 1));
+                    }
+                }
             }
             if (tier == 1) {
-
+                List<LivingEntity> list = level.getEntitiesOfClass(LivingEntity.class, new AABB(pos).inflate(14.0D, 8.0D, 14.0D));
+                for (LivingEntity entity : list) {
+                    if (entity.getClassification(true) == MobCategory.MONSTER) {
+                        entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100,1));
+                    }
+                }
             }
             if (tier == 2) {
                 List<LivingEntity> list = level.getEntitiesOfClass(LivingEntity.class, new AABB(pos).inflate(14.0D, 8.0D, 14.0D));
                 for (LivingEntity entity : list) {
                     if (entity.getClassification(true) == MobCategory.MONSTER) {
-                        entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100,1));
-                        entity.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 100, 1));
+                        entity.addEffect(new MobEffectInstance(MobEffects.POISON, 100,1));
                     }
                 }
             } else if (tier == 3) {

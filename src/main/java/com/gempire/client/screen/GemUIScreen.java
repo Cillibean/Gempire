@@ -171,8 +171,8 @@ public class GemUIScreen extends AbstractContainerScreen<GemUIContainer> {
     public void drawStats(GuiGraphics stack, int x, int y){
         Component health = Component.translatable("screens.gempire.health");
         Component damage = Component.translatable("screens.gempire.damage");
-        stack.drawString(font, Component.translatable(health.getString() + ": " + (int)this.menu.gem.getHealth() + " / " + (int)this.menu.gem.getMaxHealth()), x + 7, y + 98, 4210752);
-        stack.drawString(font,Component.translatable(damage.getString() + ": " + (int)this.menu.gem.getAttributeBaseValue(Attributes.ATTACK_DAMAGE)), x + 7, y + 110, 4210752);
+        stack.drawString(font, Component.translatable(health.getString() + ": " + (int)this.menu.gem.getHealth() + " / " + (int)this.menu.gem.getMaxHealth()), x + 7, y + 98, 4210752, false);
+        stack.drawString(font,Component.translatable(damage.getString() + ": " + (int)this.menu.gem.getAttributeBaseValue(Attributes.ATTACK_DAMAGE)), x + 7, y + 110, 4210752, false);
     }
 
     public void drawAbilityList(GuiGraphics stack, int x, int y){
@@ -185,7 +185,7 @@ public class GemUIScreen extends AbstractContainerScreen<GemUIContainer> {
         }
         for(int i = 0; i < powers.size(); i++){
             Component text = powers.get(i).getName();
-            stack.drawString(font, text, x, y + i * 9, 4210752);
+            stack.drawString(font, text, x, y + i * 9, 4210752, false);
         }
     }
 }

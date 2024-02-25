@@ -3,6 +3,7 @@ package com.gempire.util;
 import com.gempire.entities.bases.EntityGem;
 import com.gempire.entities.bases.EntityVaryingGem;
 import com.gempire.entities.gems.EntityQuartz;
+import com.gempire.entities.gems.EntityTourmaline;
 import com.gempire.entities.gems.EntityZircon;
 import com.gempire.entities.gems.starter.EntityPebble;
 import com.gempire.entities.other.EntityAbomination;
@@ -182,6 +183,8 @@ public class GemFormation {
                     ((EntityZircon) gem).setEnchantPage(RandomSource.create().nextInt(ModEnchants.VANILLA_ENCHANTMENTS.size()));
                 }
                 ((EntityZircon) gem).setEnchantPageDefined(true);
+            } else if (gem instanceof EntityTourmaline) {
+                ((EntityTourmaline) gem).setCrops(((EntityTourmaline) gem).generateCrops());
             }
             //gem.generateScoutList();
             gem.idlePowers = gem.generateIdlePowers();

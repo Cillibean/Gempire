@@ -403,6 +403,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         else if (this.isArcher()) return stack.getItem() instanceof DiggerItem || stack.getItem() instanceof BowItem || stack.getItem() instanceof AxeItem || stack.getItem() instanceof PickaxeItem || stack.getItem() instanceof DestabBase || stack.getItem() instanceof ItemShatterer;
         else if (this.isTinkerer()) return stack.getItem() instanceof DiggerItem || stack.getItem() instanceof BowItem || stack.getItem() instanceof AxeItem || stack.getItem() instanceof PickaxeItem || stack.getItem() instanceof ArmorItem || stack.getItem() instanceof DestabBase || stack.getItem() instanceof ItemShatterer;
         else if (this.isTorchBearer()) return stack.getItem() instanceof DiggerItem || stack.getItem() instanceof AxeItem || stack.getItem() instanceof PickaxeItem || stack.getItem() instanceof DestabBase || stack.getItem() instanceof ItemShatterer || stack.getItem() == Items.TORCH;
+        else if (this.isFarmer()) return stack.getItem() instanceof DiggerItem || stack.getItem() instanceof AxeItem || stack.getItem() instanceof PickaxeItem || stack.getItem() instanceof DestabBase || stack.getItem() instanceof ItemShatterer || stack.getItem() == Items.WHEAT_SEEDS || stack.getItem() == Items.CARROT || stack.getItem() == Items.POTATO || stack.getItem() == Items.BEETROOT_SEEDS;
         else if (this.canCraft()) {
             boolean bool = false;
             for (int i = 0; i < getRecipeAmount(); i++) if (stack.getItem() == this.getInputItem(i)) bool = true;
@@ -1263,6 +1264,9 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                             } else {
                                 ((EntityZircon) this).setEnchantPage(RandomSource.create().nextInt(ModEnchants.VANILLA_ENCHANTMENTS.size()));
                             }
+                        }
+                        else if (this instanceof EntityTourmaline) {
+                            ((EntityTourmaline) this).setCrops(((EntityTourmaline) this).generateCrops());
                         }
                         this.rebelPoints += 2.5f;
                     } else if (((LivingEntity) source.getEntity()).getItemBySlot(EquipmentSlot.MAINHAND).getItem() instanceof ItemPinkRejuvenator) {
@@ -2438,6 +2442,26 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         }
     }
 
+    public void addToInventoryList(List<ItemStack> list) {
+        if (list != null) {
+            for (ItemStack stack : list) {
+                for (int i = 0; i < getItems().size(); i++) {
+                    if (getItems().get(i).is(stack.getItem()) &&
+                            getItems().get(i).getCount() < 64) {
+                        getItems().get(i).setCount(getItems().get(i).getCount() + 1);
+                        break;
+                    }
+                    if (getItems().get(i).is(Items.AIR)) {
+                        NonNullList<ItemStack> array = getItems();
+                        array.set(i, stack);
+                        setItems(array);
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
     @Override
     public int getMaxStackSize() {
         return 64;
@@ -2631,6 +2655,16 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         boolean flag = false;
         for(Ability ability : this.getAbilityPowers()){
             if(ability instanceof AbilityTorchBearer){
+                return flag = true;
+            }
+        }
+        return flag;
+    }
+
+    public boolean isFarmer(){
+        boolean flag = false;
+        for(Ability ability : this.getAbilityPowers()){
+            if(ability instanceof AbilityFarmer){
                 return flag = true;
             }
         }

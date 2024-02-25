@@ -5,6 +5,7 @@ import com.gempire.entities.bases.EntityFusion;
 import com.gempire.entities.bases.EntityGem;
 import com.gempire.entities.bases.EntityStarterGem;
 import com.gempire.entities.gems.EntityPearl;
+import com.gempire.entities.gems.EntityTourmaline;
 import com.gempire.entities.gems.EntityZircon;
 import com.gempire.entities.gems.starter.EntityPebble;
 import com.gempire.events.GemFormEvent;
@@ -396,6 +397,9 @@ public class ItemGem extends Item {
                         }
                         ((EntityZircon) gem).setEnchantPageDefined(true);
                     }
+                }
+                else if (gem instanceof EntityTourmaline) {
+                    if (((EntityTourmaline) gem).getCrops() == "") ((EntityTourmaline) gem).setCrops(((EntityTourmaline) gem).generateCrops());
                 }
                 if (gem.MASTER_OWNER == null) {
                     gem.MASTER_OWNER = player.getUUID();

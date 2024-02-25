@@ -9,6 +9,10 @@ import com.gempire.entities.other.EntityCrawler;
 import com.gempire.entities.other.EntityShambler;
 import com.gempire.entities.bases.EntityVaryingGem;
 import com.gempire.util.GemPlacements;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.MobCategory;
@@ -19,15 +23,25 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class EntityTourmaline extends EntityVaryingGem {
+
+    public static EntityDataAccessor<String> CROPS = SynchedEntityData.<String>defineId(EntityGem.class, EntityDataSerializers.STRING);
+
+    HashMap<String, Item> cropMap = new HashMap<>();
+    HashMap<Item, String> stringMap = new HashMap<>();
+
     public EntityTourmaline(EntityType<? extends PathfinderMob> type, Level worldIn) {
         super(type, worldIn);
+        this.entityData.define(EntityTourmaline.CROPS, "");
     }
 
     public static AttributeSupplier.Builder registerAttributes() {
@@ -36,6 +50,18 @@ public class EntityTourmaline extends EntityVaryingGem {
                 .add(Attributes.MOVEMENT_SPEED, 0.4D)
                 .add(Attributes.ATTACK_DAMAGE, 3.0D)
                 .add(Attributes.ATTACK_SPEED, 1.0D);
+    }
+
+    @Override
+    public void addAdditionalSaveData(CompoundTag tag) {
+        tag.putString("crops", getCrops());
+        super.addAdditionalSaveData(tag);
+    }
+
+    @Override
+    public void load(CompoundTag tag) {
+        setCrops(tag.getString("crops"));
+        super.load(tag);
     }
 
     @Override
@@ -68,14 +94,14 @@ public class EntityTourmaline extends EntityVaryingGem {
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, EntityShambler.class, 1, false, false, this::checkNotSludged));
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, EntityCrawler.class, 1, false, false, this::checkNotSludged));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Mob.class, 1, false, false, (p_234199_0_) -> p_234199_0_.getClassification(true) == MobCategory.MONSTER));
-                this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.1D, false));
+        this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.1D, false));
         this.targetSelector.addGoal(1, new OwnerHurtByTargetGemGoal(this));
         this.targetSelector.addGoal(2, new OwnerHurtTargetGemGoal(this));
         this.goalSelector.addGoal(1, new EntityAISludged(this, 0.6));
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, EntityGem.class, 1, false, false, this::checkBothSludged));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, 1, false, false, this::checkSludged));
-this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, EntityGem.class, 6.0F, 1.0D, 1.2D, this::checkElseSludged));
-       //this.goalSelector.addGoal(1, new EntityAIFarm(this, 1.0D));
+        this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, EntityGem.class, 6.0F, 1.0D, 1.2D, this::checkElseSludged));
+        this.goalSelector.addGoal(1, new EntityAIFarm(this, 1.0D));
     }
     @Override
     public SoundEvent getInstrument()
@@ -281,5 +307,69 @@ this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, EntityGem.class, 6.0F, 
     @Override
     public int exitHoleSize() {
         return 3;
+    }
+
+    public void setCrops(String page){
+        this.entityData.set(EntityTourmaline.CROPS, page);
+    }
+
+    public String getCrops(){
+        return this.entityData.get(EntityTourmaline.CROPS);
+    }
+
+    public String generateCrops() {
+        StringBuilder crops = new StringBuilder();
+        int number;
+        if (this.getQuality() == 0) {
+            //def
+            number=1;
+        } else if (this.getQuality() == 1) {
+            number = 2;
+        } else {
+            //prim
+            number = 3;
+        }
+
+        for (int i = 0; i < number; i++) {
+            int ran = random.nextInt(4);
+            if (ran == 0) {
+                if (crops.toString().contains("carrot")) {
+                    ran = random.nextInt(3)+1;
+                } else {
+                    crops.append("carrot");
+                }
+            } else if (ran == 1) {
+                if (crops.toString().contains("potato")) {
+                    ran = random.nextInt(2)+2;
+                } else {
+                    crops.append("potato");
+                }
+            } else if (ran == 2) {
+                if (!crops.toString().contains("wheat")) {
+                    crops.append("wheat");
+                }
+            } else {
+                crops.append("beetroot");
+            }
+            if (i < number-1) crops.append(",");
+        }
+        return crops.toString();
+    }
+
+    public ArrayList<Item> readCrops(){
+        ArrayList<Item> list = new ArrayList<>();
+        generateCropMap();
+        String[] crops = getCrops().split(",");
+        for (int i = 0; i < crops.length; i++) {
+            list.add(cropMap.get(crops[i]));
+        }
+        return list;
+    }
+
+    public void generateCropMap() {
+        cropMap.put("carrot", Items.CARROT);
+        cropMap.put("beetroot", Items.BEETROOT_SEEDS);
+        cropMap.put("wheat", Items.WHEAT_SEEDS);
+        cropMap.put("potato", Items.POTATO);
     }
 }

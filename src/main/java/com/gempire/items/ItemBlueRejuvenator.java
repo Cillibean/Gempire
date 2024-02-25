@@ -1,6 +1,7 @@
 package com.gempire.items;
 
 import com.gempire.entities.bases.EntityGem;
+import com.gempire.entities.gems.EntityTourmaline;
 import com.gempire.entities.gems.EntityZircon;
 import com.gempire.init.ModEnchants;
 import com.google.common.collect.ImmutableMultimap;
@@ -35,6 +36,9 @@ public class ItemBlueRejuvenator extends DestabBase {
                     } else {
                         ((EntityZircon) pTarget).setEnchantPage(RandomSource.create().nextInt(ModEnchants.VANILLA_ENCHANTMENTS.size()));
                     }
+                }
+                else if (pTarget instanceof EntityTourmaline) {
+                    ((EntityTourmaline) pTarget).setCrops(((EntityTourmaline) pTarget).generateCrops());
                 }
                 ((EntityGem) pTarget).rebelPoints += 2.5F;
                 pTarget.hurt(pTarget.damageSources().magic(), pTarget.getMaxHealth()*20);
