@@ -43,7 +43,6 @@ public class EntityAIFarm extends Goal {
     @Override
     public boolean canUse() {
         target = null;
-        ChunkSource chunkLevel = follower.level().getChunkSource();
         chunk = follower.level().getChunkAt(follower.getOnPos()).getPos();
         BlockPos crop = BlockPos.ZERO;
         boolean found = false;
@@ -91,7 +90,7 @@ public class EntityAIFarm extends Goal {
         BlockState block = follower.level().getBlockState(target);
         if (block.getBlock() == Blocks.FARMLAND) {
             if (this.follower.level().getBlockState(this.target.above()).getBlock() == Blocks.AIR) {
-                if (follower.readCrops().contains(Items.WHEAT_SEEDS) && this.follower.getItemBySlot(EquipmentSlot.MAINHAND).getItem() == Items.WHEAT_SEEDS) {
+                if (follower.getCrops().contains("wheat") && this.follower.getItemBySlot(EquipmentSlot.MAINHAND).getItem() == Items.WHEAT_SEEDS) {
                     this.follower.getNavigation().moveTo(target.getX(), target.getY(), target.getZ(), this.speed);
                     if (this.follower.distanceToSqr(target.getX(), target.getY(), target.getZ()) < 4) {
                         ItemStack stack = follower.getItemBySlot(EquipmentSlot.MAINHAND).copy();
@@ -101,7 +100,7 @@ public class EntityAIFarm extends Goal {
                         target = null;
                         this.stop();
                     }
-                } else if (follower.readCrops().contains(Items.BEETROOT_SEEDS) && this.follower.getItemBySlot(EquipmentSlot.MAINHAND).getItem() == Items.BEETROOT_SEEDS) {
+                } else if (follower.getCrops().contains("beetroot") && this.follower.getItemBySlot(EquipmentSlot.MAINHAND).getItem() == Items.BEETROOT_SEEDS) {
                     this.follower.getNavigation().moveTo(target.getX(), target.getY(), target.getZ(), this.speed);
                     if (this.follower.distanceToSqr(target.getX(), target.getY(), target.getZ()) < 4) {
                         ItemStack stack = follower.getItemBySlot(EquipmentSlot.MAINHAND).copy();
@@ -111,7 +110,7 @@ public class EntityAIFarm extends Goal {
                         target = null;
                         this.stop();
                     }
-                } else if (follower.readCrops().contains(Items.CARROT)&&this.follower.getItemBySlot(EquipmentSlot.MAINHAND).getItem() == Items.CARROT) {
+                } else if (follower.getCrops().contains("carrot")&&this.follower.getItemBySlot(EquipmentSlot.MAINHAND).getItem() == Items.CARROT) {
                     this.follower.getNavigation().moveTo(target.getX(), target.getY(), target.getZ(), this.speed);
                     if (this.follower.distanceToSqr(target.getX(), target.getY(), target.getZ()) < 4) {
                         ItemStack stack = follower.getItemBySlot(EquipmentSlot.MAINHAND).copy();
@@ -121,7 +120,7 @@ public class EntityAIFarm extends Goal {
                         target = null;
                         this.stop();
                     }
-                } else if (follower.readCrops().contains(Items.POTATO) && this.follower.getItemBySlot(EquipmentSlot.MAINHAND).getItem() == Items.POTATO) {
+                } else if (follower.getCrops().contains("potato") && this.follower.getItemBySlot(EquipmentSlot.MAINHAND).getItem() == Items.POTATO) {
                     this.follower.getNavigation().moveTo(target.getX(), target.getY(), target.getZ(), this.speed);
                     ItemStack stack = follower.getItemBySlot(EquipmentSlot.MAINHAND).copy();
                     stack.shrink(1);
@@ -135,7 +134,7 @@ public class EntityAIFarm extends Goal {
             }
         } if (block.getBlock() instanceof CropBlock) {
             if (((CropBlock) (this.follower.level().getBlockState(this.target).getBlock())).isMaxAge(this.follower.level().getBlockState(this.target))) {
-                if (block.getBlock() == Blocks.POTATOES && follower.readCrops().contains(Items.POTATO)) {
+                if (block.getBlock() == Blocks.POTATOES && follower.getCrops().contains("potato")) {
                     this.follower.getNavigation().moveTo(target.getX(), target.getY(), target.getZ(), this.speed);
                     if (this.follower.distanceToSqr(target.getX(), target.getY(), target.getZ()) < 4) {
                         List<ItemStack> stack = getDrops(this.follower.level().getBlockState(this.target), (ServerLevel) this.follower.level(), this.target);
@@ -145,7 +144,7 @@ public class EntityAIFarm extends Goal {
                         target = null;
                         this.stop();
                     }
-                } else if (block.getBlock() == Blocks.BEETROOTS && follower.readCrops().contains(Items.BEETROOT_SEEDS)) {
+                } else if (block.getBlock() == Blocks.BEETROOTS && follower.getCrops().contains("beetroot")) {
                     this.follower.getNavigation().moveTo(target.getX(), target.getY(), target.getZ(), this.speed);
                     if (this.follower.distanceToSqr(target.getX(), target.getY(), target.getZ()) < 4) {
                         List<ItemStack> stack = getDrops(this.follower.level().getBlockState(this.target), (ServerLevel) this.follower.level(), this.target);
@@ -155,7 +154,7 @@ public class EntityAIFarm extends Goal {
                         target = null;
                         this.stop();
                     }
-                } else if (block.getBlock() == Blocks.WHEAT && follower.readCrops().contains(Items.WHEAT_SEEDS)) {
+                } else if (block.getBlock() == Blocks.WHEAT && follower.getCrops().contains("wheat")) {
                     this.follower.getNavigation().moveTo(target.getX(), target.getY(), target.getZ(), this.speed);
                     if (this.follower.distanceToSqr(target.getX(), target.getY(), target.getZ()) < 4) {
                         List<ItemStack> stack = getDrops(this.follower.level().getBlockState(this.target), (ServerLevel) this.follower.level(), this.target);
@@ -165,7 +164,7 @@ public class EntityAIFarm extends Goal {
                         target = null;
                         this.stop();
                     }
-                } else if (block.getBlock() == Blocks.CARROTS && follower.readCrops().contains(Items.CARROT)) {
+                } else if (block.getBlock() == Blocks.CARROTS && follower.getCrops().contains("carrot")) {
                     this.follower.getNavigation().moveTo(target.getX(), target.getY(), target.getZ(), this.speed);
                     if (this.follower.distanceToSqr(target.getX(), target.getY(), target.getZ()) < 4) {
                         List<ItemStack> stack = getDrops(this.follower.level().getBlockState(this.target), (ServerLevel) this.follower.level(), this.target);
