@@ -170,7 +170,7 @@ public class PearlUIScreenDefective extends AbstractContainerScreen<PearlDefecti
 
     public void drawStats(GuiGraphics stack, int x, int y){
         Component health = Component.translatable("screens.gempire.health");
-        stack.drawString(font, Component.translatable(health.getString() + ": " + (int)this.menu.gem.getHealth() + " / " + (int)this.menu.gem.getMaxHealth()), x + 7, y + 98, 4210752);
+        stack.drawString(font, Component.translatable(health.getString() + ": " + (int)this.menu.gem.getHealth() + " / " + (int)this.menu.gem.getMaxHealth()), x + 7, y + 98, 4210752, false);
     }
 
     public void drawAbilityList(GuiGraphics stack, int x, int y){
@@ -183,7 +183,7 @@ public class PearlUIScreenDefective extends AbstractContainerScreen<PearlDefecti
         }
         for(int i = 0; i < powers.size(); i++){
             Component text = powers.get(i).getName();
-            stack.drawString(font, text, x, y + i * 9, 4210752);
+            stack.drawString(font, text, x, y + i * 9, 4210752, false);
         }
     }
 

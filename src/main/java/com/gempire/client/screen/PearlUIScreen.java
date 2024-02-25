@@ -232,7 +232,7 @@ public class PearlUIScreen extends AbstractContainerScreen<PearlUIContainer> {
     public void drawStats(GuiGraphics stack, int x, int y){
         Component health = Component.translatable("screens.gempire.health");
         stack.drawString(font, Component.translatable(health.getString() + ": " + (int)this.menu.gem.getHealth()
-                + " / " + (int)this.menu.gem.getMaxHealth()), x + 10, y + 97, 4210752);
+                + " / " + (int)this.menu.gem.getMaxHealth()), x + 10, y + 97, 4210752, false);
     }
 
     public void drawAbilityList(GuiGraphics stack, int x, int y){
@@ -245,7 +245,7 @@ public class PearlUIScreen extends AbstractContainerScreen<PearlUIContainer> {
         }
         for(int i = 0; i < powers.size(); i++){
             Component text = powers.get(i).getName();
-            stack.drawString(font, text, x, y + i * 9, 4210752);
+            stack.drawString(font, text, x, y + i * 9, 4210752, false);
         }
     }
 }

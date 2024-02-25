@@ -80,7 +80,8 @@ public class EntityLarimar extends EntityGem {
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, EntityGem.class, 1, false, false, this::checkBothSludged));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, 1, false, false, this::checkSludged));
         this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, EntityGem.class, 6.0F, 1.0D, 1.2D, this::checkElseSludged));
-   }
+        this.goalSelector.addGoal(10, new EntityAIMakeStatue(this, 1.0D));
+    }
     @Override
     public SoundEvent getInstrument()
     {
