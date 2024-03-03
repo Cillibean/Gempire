@@ -125,7 +125,7 @@ public abstract class EntityFlyingRideableGem extends EntityGem implements Flyin
                     if (isFlying) {
                         moveForward = moveForward > 0 ? moveForward : 0;
                         moveY = 0;
-                        if (KeyBindings.FLIGHT_ASCENT_KEY.isDown()) moveY = 1;
+                        //if (KeyBindings.FLIGHT_ASCENT_KEY.isDown()) moveY = 1;
                         if (KeyBindings.FLIGHT_DESCENT_KEY.isDown()) moveY = -1;
                         else if (moveForward > 0)
                             moveY = -driver.getXRot() * (Math.PI / 180);

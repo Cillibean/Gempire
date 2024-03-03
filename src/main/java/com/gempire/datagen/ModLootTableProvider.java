@@ -25,8 +25,6 @@ public class ModLootTableProvider extends LootTableProvider {
         super(output, set, entries);
     }
 
-    //TODO: fix loot table gen
-
     @Override
     protected void validate(Map<ResourceLocation, LootTable> map, ValidationContext validationtracker) {
         //map.forEach((location, lootTable) -> LootData.validate(validationtracker, location, lootTable));

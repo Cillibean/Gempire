@@ -9,10 +9,7 @@ import com.gempire.entities.other.EntityAbomination;
 import com.gempire.entities.other.EntityCrawler;
 import com.gempire.entities.other.EntityShambler;
 import com.gempire.events.GemPoofEvent;
-import com.gempire.init.ModAbilities;
-import com.gempire.init.ModEnchants;
-import com.gempire.init.ModItems;
-import com.gempire.init.ModSounds;
+import com.gempire.init.*;
 import com.gempire.items.*;
 import com.gempire.util.*;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
@@ -2539,6 +2536,22 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                     this.setItemSlot(EquipmentSlot.FEET, stack);
             }
         }
+    }
+
+    public void fuse(EntityGem other) {
+        System.out.println("fusion attempt");
+        EntityFusion fusion = new EntityFusion(ModEntities.FUSION.get(), level());
+        fusion.combineNBT(this.getPersistentData(), other.getPersistentData());
+        fusion.setPos(this.position());
+        fusion.setHealth(fusion.getMaxHealth());
+        for (UUID owner : OWNERS) {
+            level().getPlayerByUUID(owner).sendSystemMessage(Component.literal(this.getName() + " and " + other.getName() + " fused to make " + fusion.getName()));
+        }
+        for (UUID owner : other.OWNERS) {
+            level().getPlayerByUUID(owner).sendSystemMessage(Component.literal(this.getName() + " and " + other.getName() + " fused to make " + fusion.getName()));
+        }
+        other.remove(RemovalReason.DISCARDED);
+        remove(RemovalReason.DISCARDED);
     }
 
     @Override

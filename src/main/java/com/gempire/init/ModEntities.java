@@ -2,6 +2,7 @@ package com.gempire.init;
 
 import com.gempire.Gempire;
 import com.gempire.container.InjectorContainer;
+import com.gempire.entities.bases.EntityFusion;
 import com.gempire.entities.other.*;
 import com.gempire.entities.gems.*;
 import com.gempire.entities.gems.starter.EntityMica;
@@ -31,6 +32,11 @@ public class ModEntities {
             () -> EntityType.Builder.of(EntityBeastmasterWolf::new, MobCategory.CREATURE)
                     .sized(0.6F, 0.85F) // Hitbox Size
                     .build(new ResourceLocation(Gempire.MODID, "beastmaster_wolf").toString()));
+
+    public static final RegistryObject<EntityType<EntityFusion>> FUSION = ENTITIES.register("fusion",
+            () -> EntityType.Builder.of(EntityFusion::new, MobCategory.CREATURE)
+                    .sized(1F, 4F) // Hitbox Size
+                    .build(new ResourceLocation(Gempire.MODID, "fusion").toString()));
 
     public static final RegistryObject<EntityType<EntityAlabasterEmpress>> ALABASTER_EMPRESS = ENTITIES.register("alabaster_empress",
             () -> EntityType.Builder.of(EntityAlabasterEmpress::new, MobCategory.MONSTER)

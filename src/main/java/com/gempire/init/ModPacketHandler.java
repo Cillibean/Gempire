@@ -78,5 +78,11 @@ public class ModPacketHandler {
                 EditWarpName::encode,
                 EditWarpName::decode,
                 EditWarpName::handle);
+        ModPacketHandler.INSTANCE.registerMessage(
+                networkId++,
+                C2SFusionStick.class,
+                C2SFusionStick::encode,
+                C2SFusionStick::decode,
+                C2SFusionStick::handle);
     }
 }
