@@ -7,9 +7,6 @@ import net.minecraft.network.chat.Component;
 
 public class AbilityFarmer extends Ability implements IIdleAbility {
 
-    //TODO: FIX FARMER
-    // Currently doesnt have an area limit, doesnt work properly
-
     public AbilityFarmer(){
         super("farmer", 5);
     }

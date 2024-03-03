@@ -2,19 +2,15 @@ package com.gempire.entities.bases;
 
 import com.gempire.Gempire;
 import com.gempire.container.FusionUIContainer;
-import com.gempire.container.GemUIContainer;
 import com.gempire.entities.abilities.*;
 import com.gempire.entities.abilities.base.Ability;
 import com.gempire.entities.abilities.interfaces.*;
-import com.gempire.entities.gems.EntityPearl;
-import com.gempire.entities.gems.EntitySapphire;
 import com.gempire.entities.gems.EntityZircon;
 import com.gempire.entities.gems.starter.EntityPebble;
 import com.gempire.entities.other.EntityAbomination;
 import com.gempire.entities.other.EntityCrawler;
 import com.gempire.entities.other.EntityShambler;
 import com.gempire.events.GemFormEvent;
-import com.gempire.events.GemPoofEvent;
 import com.gempire.init.*;
 import com.gempire.items.*;
 import com.gempire.util.Color;
@@ -59,14 +55,12 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.network.NetworkHooks;
-import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.Nullable;
 
@@ -75,54 +69,54 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.*;
 
-public abstract class EntityFusion extends PathfinderMob implements RangedAttackMob, Container, MenuProvider, ContainerListener {
-    public static final EntityDataAccessor<Boolean> HAS_CUSTOM_NAME = SynchedEntityData.<Boolean>defineId(EntityGem.class, EntityDataSerializers.BOOLEAN);
-    public static final EntityDataAccessor<Boolean> EMOTIONAL = SynchedEntityData.<Boolean>defineId(EntityGem.class, EntityDataSerializers.BOOLEAN);
-    public static final EntityDataAccessor<Integer> SKIN_COLOR = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
-    public static final EntityDataAccessor<Integer> HAIR_COLOR = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
-    public static final EntityDataAccessor<Integer> SKIN_VARIANT = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
-    public static final EntityDataAccessor<Integer> SKIN_COLOR_VARIANT = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
-    public static EntityDataAccessor<Integer> HAIR_VARIANT = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
-    public static EntityDataAccessor<Integer> WING_VARIANT = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
-    public static EntityDataAccessor<Integer> WING_COLOR = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
-    public static final EntityDataAccessor<Integer> GEM_PLACEMENT = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
-    public static final EntityDataAccessor<Integer> GEM_COLOR = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
-    public static EntityDataAccessor<Integer> OUTFIT_COLOR = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
-    public static EntityDataAccessor<Integer> OUTFIT_VARIANT = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
-    public static EntityDataAccessor<Integer> INSIGNIA_COLOR = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
-    public static EntityDataAccessor<Integer> INSIGNIA_VARIANT = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
-    public static EntityDataAccessor<Integer> VISOR_VARIANT = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
-    public static final EntityDataAccessor<Integer> ABILITY_SLOTS = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
-    public static final EntityDataAccessor<String> ABILITIES = SynchedEntityData.<String>defineId(EntityGem.class, EntityDataSerializers.STRING);
-    public static final EntityDataAccessor<Boolean> USES_AREA_ABILITIES = SynchedEntityData.<Boolean>defineId(EntityGem.class, EntityDataSerializers.BOOLEAN);
-    public static final EntityDataAccessor<Integer> MARKING_COLOR = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
-    public static final EntityDataAccessor<Integer> MARKING_VARIANT = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
-    public static final EntityDataAccessor<Integer> MARKING_2_COLOR = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
-    public static final EntityDataAccessor<Integer> MARKING_2_VARIANT = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
-    public static final EntityDataAccessor<Boolean> SADDLED = SynchedEntityData.defineId(EntityGem.class, EntityDataSerializers.BOOLEAN);
-    public static final EntityDataAccessor<Integer> BOOST_TIME = SynchedEntityData.defineId(EntityGem.class, EntityDataSerializers.INT);
-    public static final EntityDataAccessor<Boolean> REBEL = SynchedEntityData.<Boolean>defineId(EntityGem.class, EntityDataSerializers.BOOLEAN);
-    public static final EntityDataAccessor<Boolean> CRACKED = SynchedEntityData.<Boolean>defineId(EntityGem.class, EntityDataSerializers.BOOLEAN);
-    public static final EntityDataAccessor<String> FACET = SynchedEntityData.defineId(EntityGem.class, EntityDataSerializers.STRING);
-    public static final EntityDataAccessor<String> CUT = SynchedEntityData.defineId(EntityGem.class, EntityDataSerializers.STRING);
-    public static EntityDataAccessor<Integer> REBEL_HAIR_VARIANT = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
-    public static EntityDataAccessor<Integer> REBEL_OUTFIT_COLOR = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
-    public static EntityDataAccessor<Integer> REBEL_OUTFIT_VARIANT = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
-    public static EntityDataAccessor<Integer> REBEL_INSIGNIA_COLOR = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
-    public static EntityDataAccessor<Integer> REBEL_INSIGNIA_VARIANT = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
-    public static EntityDataAccessor<Integer> REBEL_VISOR_VARIANT = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
-    public static EntityDataAccessor<Integer> HARDNESS = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
-    public static final EntityDataAccessor<Integer> CRACK_AMOUNT = SynchedEntityData.defineId(EntityGem.class, EntityDataSerializers.INT);
-    public static final EntityDataAccessor<Boolean> ASSIGNED = SynchedEntityData.<Boolean>defineId(EntityGem.class, EntityDataSerializers.BOOLEAN);
-    public static final EntityDataAccessor<Integer> SLUDGE_AMOUNT = SynchedEntityData.defineId(EntityGem.class, EntityDataSerializers.INT);
-    public static final EntityDataAccessor<Boolean> SHATTER = SynchedEntityData.<Boolean>defineId(EntityGem.class, EntityDataSerializers.BOOLEAN);
-    public static final EntityDataAccessor<Integer> CURRENT_RECIPE = SynchedEntityData.defineId(EntityGem.class, EntityDataSerializers.INT);
-    public static final EntityDataAccessor<Integer> RECIPE_AMOUNT = SynchedEntityData.defineId(EntityGem.class, EntityDataSerializers.INT);
-    public static final EntityDataAccessor<Float> XSCALE = SynchedEntityData.defineId(EntityGem.class, EntityDataSerializers.FLOAT);
-    public static final EntityDataAccessor<Float> YSCALE = SynchedEntityData.defineId(EntityGem.class, EntityDataSerializers.FLOAT);
-    public static final EntityDataAccessor<Float> ZSCALE = SynchedEntityData.defineId(EntityGem.class, EntityDataSerializers.FLOAT);
+public class EntityFusion extends PathfinderMob implements RangedAttackMob, Container, MenuProvider, ContainerListener {
+    public static final EntityDataAccessor<Boolean> HAS_CUSTOM_NAME = SynchedEntityData.<Boolean>defineId(EntityFusion.class, EntityDataSerializers.BOOLEAN);
+    public static final EntityDataAccessor<Boolean> EMOTIONAL = SynchedEntityData.<Boolean>defineId(EntityFusion.class, EntityDataSerializers.BOOLEAN);
+    public static final EntityDataAccessor<Integer> SKIN_COLOR = SynchedEntityData.<Integer>defineId(EntityFusion.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Integer> HAIR_COLOR = SynchedEntityData.<Integer>defineId(EntityFusion.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Integer> SKIN_VARIANT = SynchedEntityData.<Integer>defineId(EntityFusion.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Integer> SKIN_COLOR_VARIANT = SynchedEntityData.<Integer>defineId(EntityFusion.class, EntityDataSerializers.INT);
+    public static EntityDataAccessor<Integer> HAIR_VARIANT = SynchedEntityData.<Integer>defineId(EntityFusion.class, EntityDataSerializers.INT);
+    public static EntityDataAccessor<Integer> WING_VARIANT = SynchedEntityData.<Integer>defineId(EntityFusion.class, EntityDataSerializers.INT);
+    public static EntityDataAccessor<Integer> WING_COLOR = SynchedEntityData.<Integer>defineId(EntityFusion.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Integer> GEM_PLACEMENT = SynchedEntityData.<Integer>defineId(EntityFusion.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Integer> GEM_COLOR = SynchedEntityData.<Integer>defineId(EntityFusion.class, EntityDataSerializers.INT);
+    public static EntityDataAccessor<Integer> OUTFIT_COLOR = SynchedEntityData.<Integer>defineId(EntityFusion.class, EntityDataSerializers.INT);
+    public static EntityDataAccessor<Integer> OUTFIT_VARIANT = SynchedEntityData.<Integer>defineId(EntityFusion.class, EntityDataSerializers.INT);
+    public static EntityDataAccessor<Integer> INSIGNIA_COLOR = SynchedEntityData.<Integer>defineId(EntityFusion.class, EntityDataSerializers.INT);
+    public static EntityDataAccessor<Integer> INSIGNIA_VARIANT = SynchedEntityData.<Integer>defineId(EntityFusion.class, EntityDataSerializers.INT);
+    public static EntityDataAccessor<Integer> VISOR_VARIANT = SynchedEntityData.<Integer>defineId(EntityFusion.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Integer> ABILITY_SLOTS = SynchedEntityData.<Integer>defineId(EntityFusion.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<String> ABILITIES = SynchedEntityData.<String>defineId(EntityFusion.class, EntityDataSerializers.STRING);
+    public static final EntityDataAccessor<Boolean> USES_AREA_ABILITIES = SynchedEntityData.<Boolean>defineId(EntityFusion.class, EntityDataSerializers.BOOLEAN);
+    public static final EntityDataAccessor<Integer> MARKING_COLOR = SynchedEntityData.<Integer>defineId(EntityFusion.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Integer> MARKING_VARIANT = SynchedEntityData.<Integer>defineId(EntityFusion.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Integer> MARKING_2_COLOR = SynchedEntityData.<Integer>defineId(EntityFusion.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Integer> MARKING_2_VARIANT = SynchedEntityData.<Integer>defineId(EntityFusion.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Boolean> SADDLED = SynchedEntityData.defineId(EntityFusion.class, EntityDataSerializers.BOOLEAN);
+    public static final EntityDataAccessor<Integer> BOOST_TIME = SynchedEntityData.defineId(EntityFusion.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Boolean> REBEL = SynchedEntityData.<Boolean>defineId(EntityFusion.class, EntityDataSerializers.BOOLEAN);
+    public static final EntityDataAccessor<Boolean> CRACKED = SynchedEntityData.<Boolean>defineId(EntityFusion.class, EntityDataSerializers.BOOLEAN);
+    public static final EntityDataAccessor<String> FACET = SynchedEntityData.defineId(EntityFusion.class, EntityDataSerializers.STRING);
+    public static final EntityDataAccessor<String> CUT = SynchedEntityData.defineId(EntityFusion.class, EntityDataSerializers.STRING);
+    public static EntityDataAccessor<Integer> REBEL_HAIR_VARIANT = SynchedEntityData.<Integer>defineId(EntityFusion.class, EntityDataSerializers.INT);
+    public static EntityDataAccessor<Integer> REBEL_OUTFIT_COLOR = SynchedEntityData.<Integer>defineId(EntityFusion.class, EntityDataSerializers.INT);
+    public static EntityDataAccessor<Integer> REBEL_OUTFIT_VARIANT = SynchedEntityData.<Integer>defineId(EntityFusion.class, EntityDataSerializers.INT);
+    public static EntityDataAccessor<Integer> REBEL_INSIGNIA_COLOR = SynchedEntityData.<Integer>defineId(EntityFusion.class, EntityDataSerializers.INT);
+    public static EntityDataAccessor<Integer> REBEL_INSIGNIA_VARIANT = SynchedEntityData.<Integer>defineId(EntityFusion.class, EntityDataSerializers.INT);
+    public static EntityDataAccessor<Integer> REBEL_VISOR_VARIANT = SynchedEntityData.<Integer>defineId(EntityFusion.class, EntityDataSerializers.INT);
+    public static EntityDataAccessor<Integer> HARDNESS = SynchedEntityData.<Integer>defineId(EntityFusion.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Integer> CRACK_AMOUNT = SynchedEntityData.defineId(EntityFusion.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Boolean> ASSIGNED = SynchedEntityData.<Boolean>defineId(EntityFusion.class, EntityDataSerializers.BOOLEAN);
+    public static final EntityDataAccessor<Integer> SLUDGE_AMOUNT = SynchedEntityData.defineId(EntityFusion.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Boolean> SHATTER = SynchedEntityData.<Boolean>defineId(EntityFusion.class, EntityDataSerializers.BOOLEAN);
+    public static final EntityDataAccessor<Integer> CURRENT_RECIPE = SynchedEntityData.defineId(EntityFusion.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Integer> RECIPE_AMOUNT = SynchedEntityData.defineId(EntityFusion.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Float> XSCALE = SynchedEntityData.defineId(EntityFusion.class, EntityDataSerializers.FLOAT);
+    public static final EntityDataAccessor<Float> YSCALE = SynchedEntityData.defineId(EntityFusion.class, EntityDataSerializers.FLOAT);
+    public static final EntityDataAccessor<Float> ZSCALE = SynchedEntityData.defineId(EntityFusion.class, EntityDataSerializers.FLOAT);
 
-    public static final EntityDataAccessor<Integer> QUALITY = SynchedEntityData.defineId(EntityGem.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Integer> QUALITY = SynchedEntityData.defineId(EntityFusion.class, EntityDataSerializers.INT);
 
     public boolean isCut;
     public ArrayList<Ability> ABILITY_POWERS = new ArrayList<>();
@@ -168,7 +162,7 @@ public abstract class EntityFusion extends PathfinderMob implements RangedAttack
     int shatterChance = 200;
 
     public static final int NUMBER_OF_SLOTS = 33;
-    public NonNullList<ItemStack> items = NonNullList.withSize(EntityGem.NUMBER_OF_SLOTS, ItemStack.EMPTY);
+    public NonNullList<ItemStack> items = NonNullList.withSize(EntityFusion.NUMBER_OF_SLOTS, ItemStack.EMPTY);
 
     public Player currentPlayer;
 
@@ -224,57 +218,57 @@ public abstract class EntityFusion extends PathfinderMob implements RangedAttack
     String ID2 = "";
 
 
-    protected EntityFusion(EntityType<? extends PathfinderMob> type, Level world) {
+    public EntityFusion(EntityType<? extends PathfinderMob> type, Level world) {
         super(type, world);
-        this.entityData.define(EntityGem.HAS_CUSTOM_NAME, false);
-        this.entityData.define(EntityGem.QUALITY, 1);
-        this.entityData.define(EntityGem.EMOTIONAL, false);
-        this.entityData.define(EntityGem.SKIN_COLOR, 0);
-        this.entityData.define(EntityGem.HAIR_COLOR, 0);
-        this.entityData.define(EntityGem.SKIN_VARIANT, 0);
-        this.entityData.define(EntityGem.SKIN_COLOR_VARIANT, 0);
-        this.entityData.define(EntityGem.HAIR_VARIANT, 0);
-        this.entityData.define(EntityGem.WING_VARIANT, 0);
-        this.entityData.define(EntityGem.WING_COLOR, 0);
-        this.entityData.define(EntityGem.GEM_PLACEMENT, 0);
-        this.entityData.define(EntityGem.GEM_COLOR, 0);
-        this.entityData.define(EntityGem.OUTFIT_COLOR, 0);
-        this.entityData.define(EntityGem.OUTFIT_VARIANT, 0);
-        this.entityData.define(EntityGem.INSIGNIA_COLOR, 0);
-        this.entityData.define(EntityGem.INSIGNIA_VARIANT, 0);
-        this.entityData.define(EntityGem.VISOR_VARIANT, 0);
-        this.entityData.define(EntityGem.ABILITY_SLOTS, 1);
-        this.entityData.define(EntityGem.ABILITIES, "-1");
-        this.entityData.define(EntityGem.USES_AREA_ABILITIES, false);
-        this.entityData.define(EntityGem.MARKING_COLOR, 0);
-        this.entityData.define(EntityGem.MARKING_VARIANT, 0);
-        this.entityData.define(EntityGem.MARKING_2_COLOR, 0);
-        this.entityData.define(EntityGem.MARKING_2_VARIANT, 0);
-        this.entityData.define(EntityGem.SADDLED, true);
-        this.entityData.set(EntityGem.SADDLED, true);
-        this.entityData.define(EntityGem.BOOST_TIME, 0);
-        this.entityData.define(EntityGem.REBEL, false);
-        this.entityData.set(EntityGem.REBEL, false);
-        this.entityData.define(EntityGem.CRACKED, false);
-        this.entityData.set(EntityGem.CRACKED, false);
-        this.entityData.define(EntityGem.FACET, " ");
-        this.entityData.define(EntityGem.CUT, " ");
-        this.entityData.define(EntityGem.REBEL_HAIR_VARIANT, 0);
-        this.entityData.define(EntityGem.REBEL_OUTFIT_COLOR, 0);
-        this.entityData.define(EntityGem.REBEL_OUTFIT_VARIANT, 0);
-        this.entityData.define(EntityGem.REBEL_INSIGNIA_COLOR, 0);
-        this.entityData.define(EntityGem.REBEL_INSIGNIA_VARIANT, 0);
-        this.entityData.define(EntityGem.REBEL_VISOR_VARIANT, 0);
-        this.entityData.define(EntityGem.HARDNESS, 0);
-        this.entityData.define(EntityGem.CRACK_AMOUNT, 0);
-        this.entityData.define(EntityGem.SLUDGE_AMOUNT, 0);
-        this.entityData.define(EntityGem.ASSIGNED, false);
-        this.entityData.define(EntityGem.SHATTER, false);
-        this.entityData.define(EntityGem.CURRENT_RECIPE, 0);
-        this.entityData.define(EntityGem.RECIPE_AMOUNT, 0);
-        this.entityData.define(EntityGem.XSCALE, 0F);
-        this.entityData.define(EntityGem.YSCALE, 0F);
-        this.entityData.define(EntityGem.ZSCALE, 0F);
+        this.entityData.define(EntityFusion.HAS_CUSTOM_NAME, false);
+        this.entityData.define(EntityFusion.QUALITY, 1);
+        this.entityData.define(EntityFusion.EMOTIONAL, false);
+        this.entityData.define(EntityFusion.SKIN_COLOR, 0);
+        this.entityData.define(EntityFusion.HAIR_COLOR, 0);
+        this.entityData.define(EntityFusion.SKIN_VARIANT, 0);
+        this.entityData.define(EntityFusion.SKIN_COLOR_VARIANT, 0);
+        this.entityData.define(EntityFusion.HAIR_VARIANT, 0);
+        this.entityData.define(EntityFusion.WING_VARIANT, 0);
+        this.entityData.define(EntityFusion.WING_COLOR, 0);
+        this.entityData.define(EntityFusion.GEM_PLACEMENT, 0);
+        this.entityData.define(EntityFusion.GEM_COLOR, 0);
+        this.entityData.define(EntityFusion.OUTFIT_COLOR, 0);
+        this.entityData.define(EntityFusion.OUTFIT_VARIANT, 0);
+        this.entityData.define(EntityFusion.INSIGNIA_COLOR, 0);
+        this.entityData.define(EntityFusion.INSIGNIA_VARIANT, 0);
+        this.entityData.define(EntityFusion.VISOR_VARIANT, 0);
+        this.entityData.define(EntityFusion.ABILITY_SLOTS, 1);
+        this.entityData.define(EntityFusion.ABILITIES, "-1");
+        this.entityData.define(EntityFusion.USES_AREA_ABILITIES, false);
+        this.entityData.define(EntityFusion.MARKING_COLOR, 0);
+        this.entityData.define(EntityFusion.MARKING_VARIANT, 0);
+        this.entityData.define(EntityFusion.MARKING_2_COLOR, 0);
+        this.entityData.define(EntityFusion.MARKING_2_VARIANT, 0);
+        this.entityData.define(EntityFusion.SADDLED, true);
+        this.entityData.set(EntityFusion.SADDLED, true);
+        this.entityData.define(EntityFusion.BOOST_TIME, 0);
+        this.entityData.define(EntityFusion.REBEL, false);
+        this.entityData.set(EntityFusion.REBEL, false);
+        this.entityData.define(EntityFusion.CRACKED, false);
+        this.entityData.set(EntityFusion.CRACKED, false);
+        this.entityData.define(EntityFusion.FACET, " ");
+        this.entityData.define(EntityFusion.CUT, " ");
+        this.entityData.define(EntityFusion.REBEL_HAIR_VARIANT, 0);
+        this.entityData.define(EntityFusion.REBEL_OUTFIT_COLOR, 0);
+        this.entityData.define(EntityFusion.REBEL_OUTFIT_VARIANT, 0);
+        this.entityData.define(EntityFusion.REBEL_INSIGNIA_COLOR, 0);
+        this.entityData.define(EntityFusion.REBEL_INSIGNIA_VARIANT, 0);
+        this.entityData.define(EntityFusion.REBEL_VISOR_VARIANT, 0);
+        this.entityData.define(EntityFusion.HARDNESS, 0);
+        this.entityData.define(EntityFusion.CRACK_AMOUNT, 0);
+        this.entityData.define(EntityFusion.SLUDGE_AMOUNT, 0);
+        this.entityData.define(EntityFusion.ASSIGNED, false);
+        this.entityData.define(EntityFusion.SHATTER, false);
+        this.entityData.define(EntityFusion.CURRENT_RECIPE, 0);
+        this.entityData.define(EntityFusion.RECIPE_AMOUNT, 0);
+        this.entityData.define(EntityFusion.XSCALE, 0F);
+        this.entityData.define(EntityFusion.YSCALE, 0F);
+        this.entityData.define(EntityFusion.ZSCALE, 0F);
         this.FOLLOW_ID = UUID.randomUUID();
         this.ASSIGNED_ID = UUID.fromString("00000000-0000-0000-0000-000000000000");
         this.MASTER_OWNER = UUID.randomUUID();
@@ -352,13 +346,13 @@ public abstract class EntityFusion extends PathfinderMob implements RangedAttack
     @Override
     protected void registerGoals() {
         super.registerGoals();
-        this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, EntityGem.class, 1, false, false, this::checkNotRebel));
+        this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, EntityFusion.class, 1, false, false, this::checkNotRebel));
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, 1, true, false, this::isHostileAt));
     }
 
     public boolean checkRebel(LivingEntity entity) {
-        if (!this.getRebelled() && !((EntityGem) entity).getOwned()) {
-            return ((EntityGem) entity).getRebelled();
+        if (!this.getRebelled() && !((EntityFusion) entity).getOwned()) {
+            return ((EntityFusion) entity).getRebelled();
         } else {
             return false;
         }
@@ -373,7 +367,7 @@ public abstract class EntityFusion extends PathfinderMob implements RangedAttack
     }
 
     public boolean checkBothSludged(LivingEntity entity) {
-        return this.getSludgeAmount() >= 5 && ((EntityGem) entity).getSludgeAmount() >= 5;
+        return this.getSludgeAmount() >= 5 && ((EntityFusion) entity).getSludgeAmount() >= 5;
     }
 
     public boolean checkElseSludged(LivingEntity entity) {
@@ -487,6 +481,10 @@ public abstract class EntityFusion extends PathfinderMob implements RangedAttack
         this.writeFacetCut(compound);
         this.writeAbilityUtil(compound);
         this.writeUtil(compound);
+    }
+
+    public void combineNBT(CompoundTag gem1, CompoundTag gem2) {
+        System.out.println("combine nbt");
     }
 
 
@@ -1084,40 +1082,40 @@ public abstract class EntityFusion extends PathfinderMob implements RangedAttack
 
     public Float generateXScale() {
         if (isPrimary()) {
-            return baseXScale() + 0.15F;
+            return baseXScale + 0.15F;
         } else if (isDefective()) {
             Random r = new Random();
-            return baseXScale() - r.nextFloat(.45F);
+            return baseXScale - r.nextFloat(.45F);
         } else {
-            return baseXScale();
+            return baseXScale;
         }
     }
 
     public Float generateYScale() {
         if (isPrimary()) {
-            return baseYScale() + 0.15F;
+            return baseYScale + 0.15F;
         } else if (isDefective()) {
             Random r = new Random();
-            return baseYScale() - r.nextFloat(.45F);
+            return baseYScale - r.nextFloat(.45F);
         } else {
-            return baseYScale();
+            return baseYScale;
         }
     }
 
     public Float generateZScale() {
         if (isPrimary()) {
-            return baseZScale() + 0.15F;
+            return baseZScale + 0.15F;
         } else if (isDefective()) {
             Random r = new Random();
-            return baseZScale() - r.nextFloat(.45F);
+            return baseZScale - r.nextFloat(.45F);
         } else {
-            return baseZScale();
+            return baseZScale;
         }
     }
 
-    public abstract Float baseXScale();
-    public abstract Float baseYScale();
-    public abstract Float baseZScale();
+    public Float baseXScale;
+    public Float baseYScale;
+    public Float baseZScale;
 
     @Override
     public InteractionResult interactAt(Player player, Vec3 vec, InteractionHand hand) {
@@ -1323,7 +1321,9 @@ public abstract class EntityFusion extends PathfinderMob implements RangedAttack
     3 is follow assigned
      */
 
-    public abstract int generateHardness();
+    public int generateHardness() {
+        return 1;
+    };
     public EntityGem getAssignedGem() {
         if (!this.level().isClientSide) {
             if (((ServerLevel)this.level()).getEntity(ASSIGNED_ID) instanceof EntityGem) {
@@ -1741,7 +1741,9 @@ public abstract class EntityFusion extends PathfinderMob implements RangedAttack
         return false;
     }
 
-    public abstract int getColor();
+    public int getColor() {
+        return 1;
+    };
     @Override
     public boolean removeWhenFarAway(double xix){
         return false;
@@ -1941,7 +1943,9 @@ public abstract class EntityFusion extends PathfinderMob implements RangedAttack
         return this.getFacet() + ", " + this.getCut();
     }
 
-    public abstract int generateSkinVariant();
+    public int generateSkinVariant() {
+        return 1;
+    }
 
     public int getSkinVariant(){
         return this.entityData.get(EntityGem.SKIN_VARIANT);
@@ -2015,7 +2019,9 @@ public abstract class EntityFusion extends PathfinderMob implements RangedAttack
         this.entityData.set(EntityGem.GEM_PLACEMENT, value);
     }
 
-    public abstract GemPlacements[] getPlacements();
+    public GemPlacements[] getPlacements() {
+        return new GemPlacements[]{GemPlacements.BACK};
+    };
 
     public int generateGemPlacement(){
         return this.getPlacements()[this.random.nextInt(this.getPlacements().length)].id;
@@ -2057,9 +2063,13 @@ public abstract class EntityFusion extends PathfinderMob implements RangedAttack
         this.entityData.set(EntityGem.HAIR_VARIANT, value);
     }
 
-    public abstract int generateHairVariant();
+    public int generateHairVariant() {
+        return 1;
+    }
 
-    public abstract int exitHoleSize();
+    public int exitHoleSize() {
+        return 1;
+    }
 
     public int getRebelHairVariant(){
         return this.entityData.get(EntityGem.REBEL_HAIR_VARIANT);
@@ -2096,7 +2106,9 @@ public abstract class EntityFusion extends PathfinderMob implements RangedAttack
         this.entityData.set(EntityGem.REBEL_OUTFIT_COLOR, value);
     }
 
-    public abstract int generateOutfitVariant();
+    public int generateOutfitVariant() {
+        return 1;
+    }
 
     public void setOutfitVariant(int value){
         this.entityData.set(EntityGem.OUTFIT_VARIANT, value);
@@ -2122,8 +2134,12 @@ public abstract class EntityFusion extends PathfinderMob implements RangedAttack
         return new int[]{};
     }
 
-    public abstract int generateInsigniaVariant();
-    public abstract int generateRebelInsigniaVariant();
+    public int generateInsigniaVariant() {
+        return 1;
+    }
+    public int generateRebelInsigniaVariant() {
+        return 1;
+    }
 
     public void setInsigniaVariant(int value){
         this.entityData.set(EntityGem.INSIGNIA_VARIANT, value);
@@ -2161,7 +2177,9 @@ public abstract class EntityFusion extends PathfinderMob implements RangedAttack
         return this.getSkinColorVariant();
     }
 
-    public abstract int generateVisorVariant();
+    public int generateVisorVariant() {
+        return 1;
+    }
 
     public void setVisorVariant(int value){
         this.entityData.set(EntityGem.VISOR_VARIANT, value);
@@ -2187,9 +2205,13 @@ public abstract class EntityFusion extends PathfinderMob implements RangedAttack
         this.entityData.set(EntityGem.SKIN_COLOR_VARIANT, value);
     }
 
-    public abstract int generateSkinColorVariant();
+    public int generateSkinColorVariant() {
+        return 1;
+    }
 
-    public abstract boolean hasSkinColorVariant();
+    public boolean hasSkinColorVariant() {
+        return false;
+    }
 
     public boolean isEmotional(){
         return this.entityData.get(EntityGem.EMOTIONAL);
@@ -2199,9 +2221,13 @@ public abstract class EntityFusion extends PathfinderMob implements RangedAttack
         this.entityData.set(EntityGem.EMOTIONAL, value);
     }
 
-    public abstract boolean generateIsEmotional();
+    public boolean generateIsEmotional()  {
+        return true;
+    };
 
-    public abstract byte EmotionThreshold();
+    public byte EmotionThreshold()  {
+        return 1;
+    }
 
     public void setQuality(int value){
         this.entityData.set(EntityGem.QUALITY, value);
@@ -2219,9 +2245,13 @@ public abstract class EntityFusion extends PathfinderMob implements RangedAttack
         return this.entityData.get(EntityGem.QUALITY) == 0;
     }
 
-    public abstract boolean canChangeUniformColorByDefault();
+    public boolean canChangeUniformColorByDefault()  {
+        return true;
+    }
 
-    public abstract boolean canChangeInsigniaColorByDefault();
+    public boolean canChangeInsigniaColorByDefault() {
+        return true;
+    }
     public Boolean getCracked(){
         return this.entityData.get(EntityGem.CRACKED);
     }

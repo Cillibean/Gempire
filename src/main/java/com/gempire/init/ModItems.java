@@ -36,6 +36,54 @@ public class ModItems {
             )
     );*/
 
+    public static final RegistryObject<Item> RED_DIAMOND_GLASS = ITEMS.register("red_diamond_glass", () ->
+            new BlockItem(ModBlocks.RED_DIAMOND_GLASS.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> ORANGE_DIAMOND_GLASS = ITEMS.register("orange_diamond_glass", () ->
+            new BlockItem(ModBlocks.ORANGE_DIAMOND_GLASS.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> YELLOW_DIAMOND_GLASS = ITEMS.register("yellow_diamond_glass", () ->
+            new BlockItem(ModBlocks.YELLOW_DIAMOND_GLASS.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> LIME_DIAMOND_GLASS = ITEMS.register("lime_diamond_glass", () ->
+            new BlockItem(ModBlocks.LIME_DIAMOND_GLASS.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> GREEN_DIAMOND_GLASS = ITEMS.register("green_diamond_glass", () ->
+            new BlockItem(ModBlocks.GREEN_DIAMOND_GLASS.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> CYAN_DIAMOND_GLASS = ITEMS.register("cyan_diamond_glass", () ->
+            new BlockItem(ModBlocks.CYAN_DIAMOND_GLASS.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> LIGHT_BLUE_DIAMOND_GLASS = ITEMS.register("light_blue_diamond_glass", () ->
+            new BlockItem(ModBlocks.LIGHT_BLUE_DIAMOND_GLASS.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> BLUE_DIAMOND_GLASS = ITEMS.register("blue_diamond_glass", () ->
+            new BlockItem(ModBlocks.BLUE_DIAMOND_GLASS.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> PURPLE_DIAMOND_GLASS = ITEMS.register("purple_diamond_glass", () ->
+            new BlockItem(ModBlocks.PURPLE_DIAMOND_GLASS.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> MAGENTA_DIAMOND_GLASS = ITEMS.register("magenta_diamond_glass", () ->
+            new BlockItem(ModBlocks.MAGENTA_DIAMOND_GLASS.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> PINK_DIAMOND_GLASS = ITEMS.register("pink_diamond_glass", () ->
+            new BlockItem(ModBlocks.PINK_DIAMOND_GLASS.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> WHITE_DIAMOND_GLASS = ITEMS.register("white_diamond_glass", () ->
+            new BlockItem(ModBlocks.WHITE_DIAMOND_GLASS.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> LIGHT_GRAY_DIAMOND_GLASS = ITEMS.register("light_gray_diamond_glass", () ->
+            new BlockItem(ModBlocks.LIGHT_GRAY_DIAMOND_GLASS.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> GRAY_DIAMOND_GLASS = ITEMS.register("gray_diamond_glass", () ->
+            new BlockItem(ModBlocks.GRAY_DIAMOND_GLASS.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> BLACK_DIAMOND_GLASS = ITEMS.register("black_diamond_glass", () ->
+            new BlockItem(ModBlocks.BLACK_DIAMOND_GLASS.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> BROWN_DIAMOND_GLASS = ITEMS.register("brown_diamond_glass", () ->
+            new BlockItem(ModBlocks.BROWN_DIAMOND_GLASS.get(), new Item.Properties()));
+
     public static final RegistryObject<Item> PRIMED_ICE = ITEMS.register("primed_ice", () ->
             new BlockItem(
                     ModBlocks.PRIMED_ICE.get(),
@@ -261,6 +309,10 @@ public class ModItems {
 
     public static final RegistryObject<Item> STRAWBERRY = ITEMS.register("strawberry", () ->
             new ItemNameBlockItem(ModBlocks.STRAWBERRY_STEM.get(), new Item.Properties().stacksTo(64).food(ModFoods.STRAWBERRY))
+    );
+
+    public static final RegistryObject<Item> FUSION_STICK = ITEMS.register("fusion_stick", () ->
+            new ItemFusionStick(new Item.Properties().stacksTo(1))
     );
 
     public static final RegistryObject<Item> SLUDGE_GLOB = ITEMS.register("sludge_glob", () ->

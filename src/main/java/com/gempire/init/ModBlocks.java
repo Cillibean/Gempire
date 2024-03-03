@@ -17,9 +17,8 @@ public class ModBlocks {
 
     //TODO: IMPLEMENT BLOCKS
     // PHOSPHORUS COLUMN - a wall-sized light block that comes in all colours that morganite makes
-    // ICE STATUES - larimars statues
-    // DIAMOND STAINED GLASS - a stained glass with a pattern that morganite makes
     // DESTAB FIELDS - hurt gems when touched
+    // LATTICES - decorative iron bar like morganite blocks
 
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Gempire.MODID);
 
@@ -85,6 +84,70 @@ public class ModBlocks {
                     .sound(SoundType.GLASS), () -> {
         return BlockEntityType.CHEST;
     }));*/
+
+    public static final RegistryObject<Block> RED_DIAMOND_GLASS = BLOCKS.register("red_diamond_glass", () ->
+            new GlassBlock(BlockBehaviour.Properties.of().strength(0.3f, 0.3f)
+                    .sound(SoundType.GLASS).requiresCorrectToolForDrops().noOcclusion()));
+
+    public static final RegistryObject<Block> ORANGE_DIAMOND_GLASS = BLOCKS.register("orange_diamond_glass", () ->
+            new GlassBlock(BlockBehaviour.Properties.of().strength(0.3f, 0.3f)
+                    .sound(SoundType.GLASS).requiresCorrectToolForDrops().noOcclusion()));
+
+    public static final RegistryObject<Block> YELLOW_DIAMOND_GLASS = BLOCKS.register("yellow_diamond_glass", () ->
+            new GlassBlock(BlockBehaviour.Properties.of().strength(0.3f, 0.3f)
+                    .sound(SoundType.GLASS).requiresCorrectToolForDrops().noOcclusion()));
+
+    public static final RegistryObject<Block> LIME_DIAMOND_GLASS = BLOCKS.register("lime_diamond_glass", () ->
+            new GlassBlock(BlockBehaviour.Properties.of().strength(0.3f, 0.3f)
+                    .sound(SoundType.GLASS).requiresCorrectToolForDrops().noOcclusion()));
+
+    public static final RegistryObject<Block> GREEN_DIAMOND_GLASS = BLOCKS.register("green_diamond_glass", () ->
+            new GlassBlock(BlockBehaviour.Properties.of().strength(0.3f, 0.3f)
+                    .sound(SoundType.GLASS).requiresCorrectToolForDrops().noOcclusion()));
+
+    public static final RegistryObject<Block> CYAN_DIAMOND_GLASS = BLOCKS.register("cyan_diamond_glass", () ->
+            new GlassBlock(BlockBehaviour.Properties.of().strength(0.3f, 0.3f)
+                    .sound(SoundType.GLASS).requiresCorrectToolForDrops().noOcclusion()));
+
+    public static final RegistryObject<Block> LIGHT_BLUE_DIAMOND_GLASS = BLOCKS.register("light_blue_diamond_glass", () ->
+            new GlassBlock(BlockBehaviour.Properties.of().strength(0.3f, 0.3f)
+                    .sound(SoundType.GLASS).requiresCorrectToolForDrops().noOcclusion()));
+
+    public static final RegistryObject<Block> BLUE_DIAMOND_GLASS = BLOCKS.register("blue_diamond_glass", () ->
+            new GlassBlock(BlockBehaviour.Properties.of().strength(0.3f, 0.3f)
+                    .sound(SoundType.GLASS).requiresCorrectToolForDrops().noOcclusion()));
+
+    public static final RegistryObject<Block> PURPLE_DIAMOND_GLASS = BLOCKS.register("purple_diamond_glass", () ->
+            new GlassBlock(BlockBehaviour.Properties.of().strength(0.3f, 0.3f)
+                    .sound(SoundType.GLASS).requiresCorrectToolForDrops().noOcclusion()));
+
+    public static final RegistryObject<Block> MAGENTA_DIAMOND_GLASS = BLOCKS.register("magenta_diamond_glass", () ->
+            new GlassBlock(BlockBehaviour.Properties.of().strength(0.3f, 0.3f)
+                    .sound(SoundType.GLASS).requiresCorrectToolForDrops().noOcclusion()));
+
+    public static final RegistryObject<Block> PINK_DIAMOND_GLASS = BLOCKS.register("pink_diamond_glass", () ->
+            new GlassBlock(BlockBehaviour.Properties.of().strength(0.3f, 0.3f)
+                    .sound(SoundType.GLASS).requiresCorrectToolForDrops().noOcclusion()));
+
+    public static final RegistryObject<Block> WHITE_DIAMOND_GLASS = BLOCKS.register("white_diamond_glass", () ->
+            new GlassBlock(BlockBehaviour.Properties.of().strength(0.3f, 0.3f)
+                    .sound(SoundType.GLASS).requiresCorrectToolForDrops().noOcclusion()));
+
+    public static final RegistryObject<Block> LIGHT_GRAY_DIAMOND_GLASS = BLOCKS.register("light_gray_diamond_glass", () ->
+            new GlassBlock(BlockBehaviour.Properties.of().strength(0.3f, 0.3f)
+                    .sound(SoundType.GLASS).requiresCorrectToolForDrops().noOcclusion()));
+
+    public static final RegistryObject<Block> GRAY_DIAMOND_GLASS = BLOCKS.register("gray_diamond_glass", () ->
+            new GlassBlock(BlockBehaviour.Properties.of().strength(0.3f, 0.3f)
+                    .sound(SoundType.GLASS).requiresCorrectToolForDrops().noOcclusion()));
+
+    public static final RegistryObject<Block> BLACK_DIAMOND_GLASS = BLOCKS.register("black_diamond_glass", () ->
+            new GlassBlock(BlockBehaviour.Properties.of().strength(0.3f, 0.3f)
+                    .sound(SoundType.GLASS).requiresCorrectToolForDrops().noOcclusion()));
+
+    public static final RegistryObject<Block> BROWN_DIAMOND_GLASS = BLOCKS.register("brown_diamond_glass", () ->
+            new GlassBlock(BlockBehaviour.Properties.of().strength(0.3f, 0.3f)
+                    .sound(SoundType.GLASS).requiresCorrectToolForDrops().noOcclusion()));
 
     public static final RegistryObject<Block> WHITE_CHROMA_CRYSTAL = BLOCKS.register("white_chroma_crystal", () ->
             new ChromaBlock(BlockBehaviour.Properties

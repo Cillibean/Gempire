@@ -198,7 +198,6 @@ public class ClientProxy {
     public static void onKeyRegister(RegisterKeyMappingsEvent event) {
         event.register(KeyBindings.WARP_KEY);
         event.register(KeyBindings.FLIGHT_DESCENT_KEY);
-        event.register(KeyBindings.FLIGHT_ASCENT_KEY);
     }
 
     @SubscribeEvent
