@@ -95,7 +95,8 @@ public class ItemGem extends Item {
     public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity entity, InteractionHand hand) {
         System.out.println("entity interact");
         if (entity instanceof EntityGem) {
-                if (((EntityGem) entity).isOwner(player)) {
+            if  (player.level().isClientSide) {
+                //if (((EntityGem) entity).isOwner(player)) {
                     if (player.isCrouching()) {
                         stack.getOrCreateTag().putUUID("assignedID", UUID.fromString("00000000-0000-0000-0000-000000000000"));
                         //player.sendSystemMessage(Component.translatable("This Gem is no longer assigned to "+ entity.getName().getString() + ", " +((EntityGem) entity).getFacetAndCut()));

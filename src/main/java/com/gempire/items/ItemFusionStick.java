@@ -24,23 +24,22 @@ public class ItemFusionStick extends Item {
         super(p_41383_);
     }
 
-    UUID id;
-
     @Override
     public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity entity, InteractionHand hand) {
         if (entity instanceof EntityGem) {
-            if (((EntityGem) entity).isOwner(player.getUUID())) {
+            //if (((EntityGem) entity).isOwner(player)) {
                 if (player.isShiftKeyDown()) {
-                    System.out.println("got id");
-                    CompoundTag tag = stack.getOrCreateTag();
-                    tag.putUUID("id", entity.getUUID());
-                } else {
                     if (player.level().isClientSide()) {
+                        System.out.println("got id");
+                        stack.getOrCreateTag().putUUID("id", entity.getUUID());
+                    }
+                } else {
+                    if (entity.level().isClientSide) {
                         System.out.println("fuse attempt");
                         ModPacketHandler.INSTANCE.sendToServer(new C2SFusionStick(entity.getId(), stack.getOrCreateTag().getUUID("id").hashCode()));
                     }
                 }
-            }
+            //}
         }
         return super.interactLivingEntity(stack, player, entity, hand);
     }

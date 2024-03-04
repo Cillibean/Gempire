@@ -113,6 +113,8 @@ public class Gempire
 
         event.put(ModEntities.LARIMAR.get(), EntityLarimar.registerAttributes().build());
 
+        event.put(ModEntities.FUSION.get(), EntityLarimar.registerAttributes().build());
+
         event.put(ModEntities.MORGANITE.get(), EntityMorganite.registerAttributes().build());
 
         event.put(ModEntities.PERIDOT.get(), EntityPeridot.registerAttributes().build());

@@ -600,6 +600,40 @@ public class ModCreativeModeTabs {
         populator.accept(ModBlocks.PRIMED_PACKED_ICE.get());
         populator.accept(ModBlocks.PRIMED_BLUE_ICE.get());
         populator.accept(ModBlocks.PRIMED_DRAINED_ICE.get());
+
+                populator.accept(ModItems.RED_LATTICE.get());
+                populator.accept(ModItems.ORANGE_LATTICE.get());
+                populator.accept(ModItems.YELLOW_LATTICE.get());
+                populator.accept(ModItems.LIME_LATTICE.get());
+                populator.accept(ModItems.GREEN_LATTICE.get());
+                populator.accept(ModItems.CYAN_LATTICE.get());
+                populator.accept(ModItems.LIGHT_BLUE_LATTICE.get());
+                populator.accept(ModItems.BLUE_LATTICE.get());
+                populator.accept(ModItems.MAGENTA_LATTICE.get());
+                populator.accept(ModItems.PURPLE_LATTICE.get());
+                populator.accept(ModItems.PINK_LATTICE.get());
+                populator.accept(ModItems.WHITE_LATTICE.get());
+                populator.accept(ModItems.LIGHT_GRAY_LATTICE.get());
+                populator.accept(ModItems.GRAY_LATTICE.get());
+                populator.accept(ModItems.BLACK_LATTICE.get());
+                populator.accept(ModItems.BROWN_LATTICE.get());
+
+                populator.accept(ModItems.RED_DIAMOND_GLASS.get());
+                populator.accept(ModItems.ORANGE_DIAMOND_GLASS.get());
+                populator.accept(ModItems.YELLOW_DIAMOND_GLASS.get());
+                populator.accept(ModItems.LIME_DIAMOND_GLASS.get());
+                populator.accept(ModItems.GREEN_DIAMOND_GLASS.get());
+                populator.accept(ModItems.CYAN_DIAMOND_GLASS.get());
+                populator.accept(ModItems.LIGHT_BLUE_DIAMOND_GLASS.get());
+                populator.accept(ModItems.BLUE_DIAMOND_GLASS.get());
+                populator.accept(ModItems.MAGENTA_DIAMOND_GLASS.get());
+                populator.accept(ModItems.PURPLE_DIAMOND_GLASS.get());
+                populator.accept(ModItems.PINK_DIAMOND_GLASS.get());
+                populator.accept(ModItems.WHITE_DIAMOND_GLASS.get());
+                populator.accept(ModItems.LIGHT_GRAY_DIAMOND_GLASS.get());
+                populator.accept(ModItems.GRAY_DIAMOND_GLASS.get());
+                populator.accept(ModItems.BLACK_DIAMOND_GLASS.get());
+                populator.accept(ModItems.BROWN_DIAMOND_GLASS.get());
     })
             .build()
             );

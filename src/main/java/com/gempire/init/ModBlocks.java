@@ -85,6 +85,71 @@ public class ModBlocks {
         return BlockEntityType.CHEST;
     }));*/
 
+    public static final RegistryObject<Block> RED_LATTICE = BLOCKS.register("red_lattice", () ->
+            new LatticeBlock(BlockBehaviour.Properties.of().strength(0.3f, 0.3f)
+                    .sound(SoundType.METAL).requiresCorrectToolForDrops().noOcclusion()));
+
+    public static final RegistryObject<Block> ORANGE_LATTICE = BLOCKS.register("orange_lattice", () ->
+            new LatticeBlock(BlockBehaviour.Properties.of().strength(0.3f, 0.3f)
+                    .sound(SoundType.METAL).requiresCorrectToolForDrops().noOcclusion()));
+
+    public static final RegistryObject<Block> YELLOW_LATTICE = BLOCKS.register("yellow_lattice", () ->
+            new LatticeBlock(BlockBehaviour.Properties.of().strength(0.3f, 0.3f)
+                    .sound(SoundType.METAL).requiresCorrectToolForDrops().noOcclusion()));
+
+    public static final RegistryObject<Block> LIME_LATTICE = BLOCKS.register("lime_lattice", () ->
+            new LatticeBlock(BlockBehaviour.Properties.of().strength(0.3f, 0.3f)
+                    .sound(SoundType.METAL).requiresCorrectToolForDrops().noOcclusion()));
+
+    public static final RegistryObject<Block> GREEN_LATTICE = BLOCKS.register("green_lattice", () ->
+            new LatticeBlock(BlockBehaviour.Properties.of().strength(0.3f, 0.3f)
+                    .sound(SoundType.METAL).requiresCorrectToolForDrops().noOcclusion()));
+
+    public static final RegistryObject<Block> CYAN_LATTICE = BLOCKS.register("cyan_lattice", () ->
+            new LatticeBlock(BlockBehaviour.Properties.of().strength(0.3f, 0.3f)
+                    .sound(SoundType.METAL).requiresCorrectToolForDrops().noOcclusion()));
+
+    public static final RegistryObject<Block> LIGHT_BLUE_LATTICE = BLOCKS.register("light_blue_lattice", () ->
+            new LatticeBlock(BlockBehaviour.Properties.of().strength(0.3f, 0.3f)
+                    .sound(SoundType.METAL).requiresCorrectToolForDrops().noOcclusion()));
+
+    public static final RegistryObject<Block> BLUE_LATTICE = BLOCKS.register("blue_lattice", () ->
+            new LatticeBlock(BlockBehaviour.Properties.of().strength(0.3f, 0.3f)
+                    .sound(SoundType.METAL).requiresCorrectToolForDrops().noOcclusion()));
+
+    public static final RegistryObject<Block> PURPLE_LATTICE = BLOCKS.register("purple_lattice", () ->
+            new LatticeBlock(BlockBehaviour.Properties.of().strength(0.3f, 0.3f)
+                    .sound(SoundType.METAL).requiresCorrectToolForDrops().noOcclusion()));
+
+    public static final RegistryObject<Block> MAGENTA_LATTICE = BLOCKS.register("magenta_lattice", () ->
+            new LatticeBlock(BlockBehaviour.Properties.of().strength(0.3f, 0.3f)
+                    .sound(SoundType.METAL).requiresCorrectToolForDrops().noOcclusion()));
+
+    public static final RegistryObject<Block> PINK_LATTICE = BLOCKS.register("pink_lattice", () ->
+            new LatticeBlock(BlockBehaviour.Properties.of().strength(0.3f, 0.3f)
+                    .sound(SoundType.METAL).requiresCorrectToolForDrops().noOcclusion()));
+
+    public static final RegistryObject<Block> WHITE_LATTICE = BLOCKS.register("white_lattice", () ->
+            new LatticeBlock(BlockBehaviour.Properties.of().strength(0.3f, 0.3f)
+                    .sound(SoundType.METAL).requiresCorrectToolForDrops().noOcclusion()));
+
+    public static final RegistryObject<Block> LIGHT_GRAY_LATTICE = BLOCKS.register("light_gray_lattice", () ->
+            new LatticeBlock(BlockBehaviour.Properties.of().strength(0.3f, 0.3f)
+                    .sound(SoundType.METAL).requiresCorrectToolForDrops().noOcclusion()));
+
+    public static final RegistryObject<Block> GRAY_LATTICE = BLOCKS.register("gray_lattice", () ->
+            new LatticeBlock(BlockBehaviour.Properties.of().strength(0.3f, 0.3f)
+                    .sound(SoundType.METAL).requiresCorrectToolForDrops().noOcclusion()));
+
+    public static final RegistryObject<Block> BLACK_LATTICE = BLOCKS.register("black_lattice", () ->
+            new LatticeBlock(BlockBehaviour.Properties.of().strength(0.3f, 0.3f)
+                    .sound(SoundType.METAL).requiresCorrectToolForDrops().noOcclusion()));
+
+    public static final RegistryObject<Block> BROWN_LATTICE = BLOCKS.register("brown_lattice", () ->
+            new LatticeBlock(BlockBehaviour.Properties.of().strength(0.3f, 0.3f)
+                    .sound(SoundType.METAL).requiresCorrectToolForDrops().noOcclusion()));
+
+
     public static final RegistryObject<Block> RED_DIAMOND_GLASS = BLOCKS.register("red_diamond_glass", () ->
             new GlassBlock(BlockBehaviour.Properties.of().strength(0.3f, 0.3f)
                     .sound(SoundType.GLASS).requiresCorrectToolForDrops().noOcclusion()));

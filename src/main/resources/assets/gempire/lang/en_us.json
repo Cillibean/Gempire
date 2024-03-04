@@ -248,6 +248,7 @@
   "block.gempire.chroma_cluster_crop": "Chroma Cluster",
 
   "block.gempire.white_diamond_glass": "White Diamond Glass",
+  "block.gempire.black_diamond_glass": "Black Diamond Glass",
   "block.gempire.orange_diamond_glass": "Orange Diamond Glass",
   "block.gempire.magenta_diamond_glass": "Magenta Diamond Glass",
   "block.gempire.light_blue_diamond_glass": "Light Blue Diamond Glass",
@@ -262,6 +263,23 @@
   "block.gempire.brown_diamond_glass": "Brown Diamond Glass",
   "block.gempire.green_diamond_glass": "Green Diamond Glass",
   "block.gempire.red_diamond_glass": "Red Diamond Glass",
+
+  "block.gempire.white_lattice": "White Lattice",
+  "block.gempire.black_lattice": "Black Lattice",
+  "block.gempire.orange_lattice": "Orange Lattice",
+  "block.gempire.magenta_lattice": "Magenta Lattice",
+  "block.gempire.light_blue_lattice": "Light Blue Lattice",
+  "block.gempire.yellow_lattice": "Yellow Lattice",
+  "block.gempire.lime_lattice": "Lime Lattice",
+  "block.gempire.pink_lattice": "Pink Lattice",
+  "block.gempire.gray_lattice": "Gray Lattice",
+  "block.gempire.light_gray_lattice": "Light Gray Lattice",
+  "block.gempire.cyan_lattice": "Cyan Lattice",
+  "block.gempire.purple_lattice": "Purple Lattice",
+  "block.gempire.blue_lattice": "Blue Lattice",
+  "block.gempire.brown_lattice": "Brown Lattice",
+  "block.gempire.green_lattice": "Green Lattice",
+  "block.gempire.red_lattice": "Red Lattice",
 
   "block.gempire.white_chroma_crystal": "White Chroma Crystal",
   "block.gempire.orange_chroma_crystal": "Orange Chroma Crystal",
@@ -380,6 +398,8 @@
   "item.gempire.amber_shards": "Amber Shards",
   "item.gempire.cobalt_shards": "Cobalt Shards",
   "item.gempire.alabaster_shards": "Alabaster Shards",
+
+  "item.gempire.fusion_stick": "Fusion Staff",
 
   "item.gempire.inactive_agate_base": "Inactive Agate Base",
   "item.gempire.inactive_aquamarine_base": "Inactive Aquamarine Base",
