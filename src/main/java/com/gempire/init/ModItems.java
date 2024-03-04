@@ -36,6 +36,54 @@ public class ModItems {
             )
     );*/
 
+    public static final RegistryObject<Item> RED_LATTICE = ITEMS.register("red_lattice", () ->
+            new BlockItem(ModBlocks.RED_LATTICE.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> ORANGE_LATTICE = ITEMS.register("orange_lattice", () ->
+            new BlockItem(ModBlocks.ORANGE_LATTICE.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> YELLOW_LATTICE = ITEMS.register("yellow_lattice", () ->
+            new BlockItem(ModBlocks.YELLOW_LATTICE.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> LIME_LATTICE = ITEMS.register("lime_lattice", () ->
+            new BlockItem(ModBlocks.LIME_LATTICE.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> GREEN_LATTICE = ITEMS.register("green_lattice", () ->
+            new BlockItem(ModBlocks.GREEN_LATTICE.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> CYAN_LATTICE = ITEMS.register("cyan_lattice", () ->
+            new BlockItem(ModBlocks.CYAN_LATTICE.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> LIGHT_BLUE_LATTICE = ITEMS.register("light_blue_lattice", () ->
+            new BlockItem(ModBlocks.LIGHT_BLUE_LATTICE.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> BLUE_LATTICE = ITEMS.register("blue_lattice", () ->
+            new BlockItem(ModBlocks.BLUE_LATTICE.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> PURPLE_LATTICE = ITEMS.register("purple_lattice", () ->
+            new BlockItem(ModBlocks.PURPLE_LATTICE.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> MAGENTA_LATTICE = ITEMS.register("magenta_lattice", () ->
+            new BlockItem(ModBlocks.MAGENTA_LATTICE.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> PINK_LATTICE = ITEMS.register("pink_lattice", () ->
+            new BlockItem(ModBlocks.PINK_LATTICE.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> WHITE_LATTICE = ITEMS.register("white_lattice", () ->
+            new BlockItem(ModBlocks.WHITE_LATTICE.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> LIGHT_GRAY_LATTICE = ITEMS.register("light_gray_lattice", () ->
+            new BlockItem(ModBlocks.LIGHT_GRAY_LATTICE.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> GRAY_LATTICE = ITEMS.register("gray_lattice", () ->
+            new BlockItem(ModBlocks.GRAY_LATTICE.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> BLACK_LATTICE = ITEMS.register("black_lattice", () ->
+            new BlockItem(ModBlocks.BLACK_LATTICE.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> BROWN_LATTICE = ITEMS.register("brown_lattice", () ->
+            new BlockItem(ModBlocks.BROWN_LATTICE.get(), new Item.Properties()));
+
     public static final RegistryObject<Item> RED_DIAMOND_GLASS = ITEMS.register("red_diamond_glass", () ->
             new BlockItem(ModBlocks.RED_DIAMOND_GLASS.get(), new Item.Properties()));
 
