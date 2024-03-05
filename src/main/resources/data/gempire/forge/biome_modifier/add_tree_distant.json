@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "gempire:distant_forest",
+  "features": "gempire:tree_distant_placed",
+  "step": "vegetal_decoration"
+}
