@@ -3,6 +3,8 @@ package com.gempire.init;
 import com.gempire.Gempire;
 import com.gempire.blocks.*;
 import com.gempire.blocks.machine.*;
+import com.gempire.worldgen.tree.CrystalTreeGrower;
+import com.gempire.worldgen.tree.DistantTreeGrower;
 import net.minecraft.client.resources.model.Material;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.material.MapColor;
@@ -84,6 +86,44 @@ public class ModBlocks {
                     .sound(SoundType.GLASS), () -> {
         return BlockEntityType.CHEST;
     }));*/
+
+
+    public static final RegistryObject<Block> CRYSTAL_LOG = BLOCKS.register("crystal_log", () ->
+            new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG)));
+
+    public static final RegistryObject<Block> STRIPPED_CRYSTAL_LOG = BLOCKS.register("stripped_crystal_log", () ->
+            new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_LOG)));
+
+    public static final RegistryObject<Block> CRYSTAL_WOOD = BLOCKS.register("crystal_wood", () ->
+            new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG)));
+
+    public static final RegistryObject<Block> STRIPPED_CRYSTAL_WOOD = BLOCKS.register("stripped_crystal_wood", () ->
+            new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_WOOD)));
+
+    public static final RegistryObject<Block> CRYSTAL_LEAVES = BLOCKS.register("crystal_leaves", () ->
+            new LeavesBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES)));
+
+    public static final RegistryObject<Block> CRYSTAL_SAPLING = BLOCKS.register("crystal_sapling", () ->
+            new SaplingBlock(new CrystalTreeGrower(), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)));
+
+
+    public static final RegistryObject<Block> DISTANT_LOG = BLOCKS.register("distant_log", () ->
+            new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG)));
+
+    public static final RegistryObject<Block> STRIPPED_DISTANT_LOG = BLOCKS.register("stripped_distant_log", () ->
+            new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_LOG)));
+
+    public static final RegistryObject<Block> DISTANT_WOOD = BLOCKS.register("distant_wood", () ->
+            new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG)));
+
+    public static final RegistryObject<Block> STRIPPED_DISTANT_WOOD = BLOCKS.register("stripped_distant_wood", () ->
+            new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_WOOD)));
+
+    public static final RegistryObject<Block> DISTANT_LEAVES = BLOCKS.register("distant_leaves", () ->
+            new LeavesBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES)));
+
+    public static final RegistryObject<Block> DISTANT_SAPLING = BLOCKS.register("distant_sapling", () ->
+            new SaplingBlock(new DistantTreeGrower(), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)));
 
     public static final RegistryObject<Block> RED_LATTICE = BLOCKS.register("red_lattice", () ->
             new LatticeBlock(BlockBehaviour.Properties.of().strength(0.3f, 0.3f)
