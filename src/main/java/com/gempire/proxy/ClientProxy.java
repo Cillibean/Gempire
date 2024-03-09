@@ -52,13 +52,13 @@ public class ClientProxy {
         event.registerEntityRenderer(ModEntities.SHAMBLER.get(), RenderShambler::new);
         event.registerEntityRenderer(ModEntities.ALABASTER_EMPRESS.get(), RenderAlabasterEmpress::new);
         event.registerEntityRenderer(ModEntities.AMBER_HUNTRESS.get(), RenderAmberHuntress::new);
-        event.registerEntityRenderer(ModEntities.COBALT_GUARDIAN.get(), RenderCobaltGuardian::new);
         event.registerEntityRenderer(ModEntities.FUCHSIA_PALADIN.get(), RenderFuchsiaPaladin::new);
         event.registerEntityRenderer(ModEntities.PRISMATIC_EMPRESS.get(), RenderPrismaticEmpress::new);
         event.registerEntityRenderer(ModEntities.GILDED_HUNTRESS.get(), RenderGildedHuntress::new);
         event.registerEntityRenderer(ModEntities.MIRRORED_GUARDIAN.get(), RenderMirroredGuardian::new);
         event.registerEntityRenderer(ModEntities.IRIDESCENT_PALADIN.get(), RenderIridescentPaladin::new);
         event.registerEntityRenderer(ModEntities.BEASTMASTER_WOLF.get(), RenderBeastmasterWolf::new);
+        event.registerEntityRenderer(ModEntities.COBALT_GUARDIAN.get(), m -> new RenderCobaltGuardian(m, new ModelCobaltGuardian<>(m.bakeLayer(ModelCobaltGuardian.LAYER_LOCATION))));
         event.registerEntityRenderer(ModEntities.FUSION.get(), m -> new RenderFusion(m, new ModelFusion<>(m.bakeLayer(ModelFusion.LAYER_LOCATION))));
         event.registerEntityRenderer(ModEntities.PEBBLE.get(), m -> new RenderPebble(m, new ModelPebble<>(m.bakeLayer(ModelPebble.LAYER_LOCATION_P))));
         event.registerEntityRenderer(ModEntities.MICA.get(), m -> new RenderMica(m, new ModelPebble<>(m.bakeLayer(ModelPebble.LAYER_LOCATION_M))));
@@ -165,6 +165,7 @@ public class ClientProxy {
 
     @SubscribeEvent
     public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
+        event.registerLayerDefinition(ModelCobaltGuardian.LAYER_LOCATION, ModelCobaltGuardian::createBodyLayer);
         event.registerLayerDefinition(ModelBeastmasterWolf.BEASTMASTER_WOLF, ModelBeastmasterWolf::createBodyLayer);
         event.registerLayerDefinition(ModelPebble.LAYER_LOCATION_P, ModelPebble::createBodyLayer);
         event.registerLayerDefinition(ModelPebble.LAYER_LOCATION_M, ModelPebble::createBodyLayer);
