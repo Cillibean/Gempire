@@ -50,7 +50,7 @@ public class ModEntities {
 
     public static final RegistryObject<EntityType<EntityCobaltGuardian>> COBALT_GUARDIAN = ENTITIES.register("cobalt_guardian",
             () -> EntityType.Builder.of(EntityCobaltGuardian::new, MobCategory.MONSTER)
-                    .sized(1f, 3.5f) // Hitbox Size
+                    .sized(2.5f, 7f) // Hitbox Size
                     .build(new ResourceLocation(Gempire.MODID, "cobalt_guardian").toString()));
 
     public static final RegistryObject<EntityType<EntityFuchsiaPaladin>> FUCHSIA_PALADIN = ENTITIES.register("fuchsia_paladin",

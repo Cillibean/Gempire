@@ -8,10 +8,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.BossEvent;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.MobSpawnType;
-import net.minecraft.world.entity.SpawnGroupData;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.animal.Wolf;
@@ -32,6 +29,9 @@ public class EntityCobaltGuardian extends Monster implements GeoAnimatable {
     private final ServerBossEvent bossEvent = (ServerBossEvent)(new ServerBossEvent(this.getDisplayName(), BossEvent.BossBarColor.BLUE, BossEvent.BossBarOverlay.PROGRESS)).setDarkenScreen(true);
 
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+
+    public AnimationState idleAnimationState = new AnimationState();
+    public AnimationState cryAnimationState = new AnimationState();
 
     public int auraCryCooldown;
     public MobEffectInstance aura = new MobEffectInstance(ModEffects.BLUE_AURA.get(), 500, 1, false, false, true);
@@ -115,6 +115,9 @@ public class EntityCobaltGuardian extends Monster implements GeoAnimatable {
                 auraCryCooldown--;
             }
         }
+        if (!cryAnimationState.isStarted()) {
+            idleAnimationState.startIfStopped(tickCount);
+        }
         this.bossEvent.setProgress(this.getHealth() / this.getMaxHealth());
         super.tick();
     }
@@ -122,7 +125,8 @@ public class EntityCobaltGuardian extends Monster implements GeoAnimatable {
     public void auraCry() {
         System.out.println("aura cry");
         //Play sound
-        //Play animation
+        idleAnimationState.stop();
+        cryAnimationState.start(this.tickCount);
         navigation.stop();
         auraCryCooldown = 600;
         List<Player> list = this.level().getEntitiesOfClass(Player.class, this.getBoundingBox().inflate(14.0D, 8.0D, 14.0D));
