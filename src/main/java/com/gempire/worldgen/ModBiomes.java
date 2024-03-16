@@ -31,6 +31,11 @@ public class ModBiomes {
     public static final ResourceKey<Biome> ABNORMAL_BEACH = register("abnormal_beach");
     public static final ResourceKey<Biome> UNEARTHLY_JUNGLE = register("unearthly_jungle");
 
+    public static final ResourceKey<Biome> IRIDESCENT_OVERGROWTH = register("distant_forest");
+    public static final ResourceKey<Biome> MIRRORED_SKIES = register("peculiar_precipice");
+    public static final ResourceKey<Biome> GILDED_WASTES = register("gilded_wastes");
+    public static final ResourceKey<Biome> PRISMATIC_GATES = register("prismatic_gates");
+
     public static void bootstrap(BootstapContext<Biome> context) {
 
     }
