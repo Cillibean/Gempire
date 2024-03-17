@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "NIN",
+    "FSF",
+    "MIM"
+  ],
+  "key": {
+    "I": {
+      "item": "gempire:pink_chroma"
+    },
+    "S": {
+      "item": "gempire:paladin_flower"
+    },
+    "N": {
+      "item": "gempire:special_shards"
+    },
+    "M": {
+      "item": "gempire:prismatic_block"
+    },
+    "F": {
+      "item": "gempire:pink_essence_bucket"
+    }
+  },
+  "result": {
+    "item": "gempire:iridescent_flower"
+  }
+}

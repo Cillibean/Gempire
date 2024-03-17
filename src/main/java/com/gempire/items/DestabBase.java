@@ -1,16 +1,19 @@
 package com.gempire.items;
 
 import com.gempire.entities.bases.EntityGem;
+import com.gempire.entities.other.*;
 import com.gempire.init.ModItems;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -34,6 +37,46 @@ public class DestabBase extends Item {
                 pTarget.hurt(pTarget.damageSources().magic(), pTarget.getMaxHealth()*20);
                 ((EntityGem) pTarget).setCracked(false);
                 System.out.println("poofed");
+            } else if (pTarget instanceof EntityFuchsiaPaladin) {
+                ItemStack stack = new ItemStack(ModItems.PALADIN_FLOWER.get());
+                ItemEntity item = new ItemEntity(pTarget.level(), pTarget.getX(), pTarget.getY(), pTarget.getZ(), stack);
+                pTarget.level().addFreshEntity(item);
+                pTarget.remove(Entity.RemovalReason.DISCARDED);
+            } else if (pTarget instanceof EntityCobaltGuardian) {
+                ItemStack stack = new ItemStack(ModItems.GUARDIAN_TEAR.get());
+                ItemEntity item = new ItemEntity(pTarget.level(), pTarget.getX(), pTarget.getY(), pTarget.getZ(), stack);
+                pTarget.level().addFreshEntity(item);
+                pTarget.remove(Entity.RemovalReason.DISCARDED);
+            } else if (pTarget instanceof EntityAmberHuntress) {
+                ItemStack stack = new ItemStack(ModItems.HUNTRESS_DAGGER.get());
+                ItemEntity item = new ItemEntity(pTarget.level(), pTarget.getX(), pTarget.getY(), pTarget.getZ(), stack);
+                pTarget.level().addFreshEntity(item);
+                pTarget.remove(Entity.RemovalReason.DISCARDED);
+            } else if (pTarget instanceof EntityAlabasterEmpress) {
+                ItemStack stack = new ItemStack(ModItems.EMPRESS_STAR.get());
+                ItemEntity item = new ItemEntity(pTarget.level(), pTarget.getX(), pTarget.getY(), pTarget.getZ(), stack);
+                pTarget.level().addFreshEntity(item);
+                pTarget.remove(Entity.RemovalReason.DISCARDED);
+            } else if (pTarget instanceof EntityIridescentPaladin) {
+                ItemStack stack = new ItemStack(ModItems.INACTIVE_PALADIN_GEM.get());
+                ItemEntity item = new ItemEntity(pTarget.level(), pTarget.getX(), pTarget.getY(), pTarget.getZ(), stack);
+                pTarget.level().addFreshEntity(item);
+                pTarget.remove(Entity.RemovalReason.DISCARDED);
+            } else if (pTarget instanceof EntityMirroredGuardian) {
+                ItemStack stack = new ItemStack(ModItems.INACTIVE_GUARDIAN_GEM.get());
+                ItemEntity item = new ItemEntity(pTarget.level(), pTarget.getX(), pTarget.getY(), pTarget.getZ(), stack);
+                pTarget.level().addFreshEntity(item);
+                pTarget.remove(Entity.RemovalReason.DISCARDED);
+            } else if (pTarget instanceof EntityGildedHuntress) {
+                ItemStack stack = new ItemStack(ModItems.INACTIVE_HUNTRESS_GEM.get());
+                ItemEntity item = new ItemEntity(pTarget.level(), pTarget.getX(), pTarget.getY(), pTarget.getZ(), stack);
+                pTarget.level().addFreshEntity(item);
+                pTarget.remove(Entity.RemovalReason.DISCARDED);
+            } else if (pTarget instanceof EntityPrismaticEmpress) {
+                ItemStack stack = new ItemStack(ModItems.INACTIVE_EMPRESS_GEM.get());
+                ItemEntity item = new ItemEntity(pTarget.level(), pTarget.getX(), pTarget.getY(), pTarget.getZ(), stack);
+                pTarget.level().addFreshEntity(item);
+                pTarget.remove(Entity.RemovalReason.DISCARDED);
             }
         }
     }
@@ -47,11 +90,9 @@ public class DestabBase extends Item {
         }
         if (f == 1) {
             System.out.println("f 1");
-            if (enemy instanceof EntityGem) {
-                System.out.println("begin poof");
-                poofGem(enemy);
-                itemStack.hurtAndBreak(1, player, (p_43296_) -> p_43296_.broadcastBreakEvent(EquipmentSlot.MAINHAND));
-            }
+            System.out.println("begin poof");
+            poofGem(enemy);
+            itemStack.hurtAndBreak(1, player, (p_43296_) -> p_43296_.broadcastBreakEvent(EquipmentSlot.MAINHAND));
         }
         return super.hurtEnemy(itemStack, enemy, player);
     }

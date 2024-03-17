@@ -5,7 +5,6 @@ import com.gempire.blocks.*;
 import com.gempire.blocks.machine.*;
 import com.gempire.worldgen.tree.CrystalTreeGrower;
 import com.gempire.worldgen.tree.DistantTreeGrower;
-import net.minecraft.client.resources.model.Material;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
@@ -33,8 +32,29 @@ public class ModBlocks {
                     .noOcclusion()
             )
     );
-    public static final RegistryObject<Block> ALTAR = BLOCKS.register("altar", () ->
-            new AltarBlock(BlockBehaviour.Properties.of().pushReaction(PushReaction.BLOCK)));
+    public static final RegistryObject<Block> BLUE_ALTAR = BLOCKS.register("blue_altar", () ->
+            new BlueAltarBlock(BlockBehaviour.Properties.of().pushReaction(PushReaction.BLOCK)));
+
+    public static final RegistryObject<Block> YELLOW_ALTAR = BLOCKS.register("yellow_altar", () ->
+            new YellowAltarBlock(BlockBehaviour.Properties.of().pushReaction(PushReaction.BLOCK)));
+
+    public static final RegistryObject<Block> PINK_ALTAR = BLOCKS.register("pink_altar", () ->
+            new PinkAltarBlock(BlockBehaviour.Properties.of().pushReaction(PushReaction.BLOCK)));
+
+    public static final RegistryObject<Block> WHITE_ALTAR = BLOCKS.register("white_altar", () ->
+            new WhiteAltarBlock(BlockBehaviour.Properties.of().pushReaction(PushReaction.BLOCK)));
+
+    public static final RegistryObject<Block> PRISMATIC_BLUE_ALTAR = BLOCKS.register("prismatic_blue_altar", () ->
+            new PrismBlueAltarBlock(BlockBehaviour.Properties.of().pushReaction(PushReaction.BLOCK)));
+
+    public static final RegistryObject<Block> PRISMATIC_YELLOW_ALTAR = BLOCKS.register("prismatic_yellow_altar", () ->
+            new PrismYellowAltarBlock(BlockBehaviour.Properties.of().pushReaction(PushReaction.BLOCK)));
+
+    public static final RegistryObject<Block> PRISMATIC_PINK_ALTAR = BLOCKS.register("prismatic_pink_altar", () ->
+            new PrismPinkAltarBlock(BlockBehaviour.Properties.of().pushReaction(PushReaction.BLOCK)));
+
+    public static final RegistryObject<Block> PRISMATIC_WHITE_ALTAR = BLOCKS.register("prismatic_white_altar", () ->
+            new PrismWhiteAltarBlock(BlockBehaviour.Properties.of().pushReaction(PushReaction.BLOCK)));
 
     public static final RegistryObject<Block> GALAXY_WARP = BLOCKS.register("galaxy_warp", () ->
             new GalaxyWarpBlock(BlockBehaviour.Properties.of().pushReaction(PushReaction.BLOCK)));

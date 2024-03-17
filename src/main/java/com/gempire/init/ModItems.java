@@ -259,15 +259,15 @@ public class ModItems {
                     new Item.Properties().fireResistant().stacksTo(1)));
 
     public static final RegistryObject<Item> GUARDIAN_CHESTPLATE = ITEMS.register("guardian_chestplate",
-            () -> new ArmorItem(ModArmorMaterials.GUARDIAN, ArmorItem.Type.CHESTPLATE,
+            () -> new GuardianArmorItem(ModArmorMaterials.GUARDIAN, ArmorItem.Type.CHESTPLATE,
                     new Item.Properties().fireResistant().stacksTo(1)));
 
     public static final RegistryObject<Item> GUARDIAN_LEGGINGS = ITEMS.register("guardian_leggings",
-            () -> new ArmorItem(ModArmorMaterials.GUARDIAN, ArmorItem.Type.LEGGINGS,
+            () -> new GuardianArmorItem(ModArmorMaterials.GUARDIAN, ArmorItem.Type.LEGGINGS,
                     new Item.Properties().fireResistant().stacksTo(1)));
 
     public static final RegistryObject<Item> GUARDIAN_BOOTS = ITEMS.register("guardian_boots",
-            () -> new ArmorItem(ModArmorMaterials.GUARDIAN, ArmorItem.Type.BOOTS,
+            () -> new GuardianArmorItem(ModArmorMaterials.GUARDIAN, ArmorItem.Type.BOOTS,
                     new Item.Properties().fireResistant().stacksTo(1)));
 
     public static final RegistryObject<Item> HUNTRESS_HELMET = ITEMS.register("huntress_helmet",
@@ -355,6 +355,38 @@ public class ModItems {
             new ItemBossGem(new Item.Properties().stacksTo(1))
     );
 
+    public static final RegistryObject<Item> PALADIN_FLOWER = ITEMS.register("paladin_flower", () ->
+            new ItemBossGem(new Item.Properties().stacksTo(1))
+    );
+
+    public static final RegistryObject<Item> GUARDIAN_TEAR = ITEMS.register("guardian_tear", () ->
+            new ItemBossGem(new Item.Properties().stacksTo(1))
+    );
+
+    public static final RegistryObject<Item> HUNTRESS_DAGGER = ITEMS.register("huntress_dagger", () ->
+            new ItemBossGem(new Item.Properties().stacksTo(1))
+    );
+
+    public static final RegistryObject<Item> EMPRESS_STAR = ITEMS.register("empress_star", () ->
+            new ItemBossGem(new Item.Properties().stacksTo(1))
+    );
+
+    public static final RegistryObject<Item> IRIDESCENT_FLOWER = ITEMS.register("iridescent_flower", () ->
+            new ItemAltarUpgrade(new Item.Properties().stacksTo(1))
+    );
+
+    public static final RegistryObject<Item> MIRRORED_TEAR = ITEMS.register("mirrored_tear", () ->
+            new ItemAltarUpgrade(new Item.Properties().stacksTo(1))
+    );
+
+    public static final RegistryObject<Item> GILDED_DAGGER = ITEMS.register("gilded_dagger", () ->
+            new ItemAltarUpgrade(new Item.Properties().stacksTo(1))
+    );
+
+    public static final RegistryObject<Item> PRISMATIC_STAR = ITEMS.register("prismatic_star", () ->
+            new ItemAltarUpgrade(new Item.Properties().stacksTo(1))
+    );
+
     public static final RegistryObject<Item> STRAWBERRY = ITEMS.register("strawberry", () ->
             new ItemNameBlockItem(ModBlocks.STRAWBERRY_STEM.get(), new Item.Properties().stacksTo(64).food(ModFoods.STRAWBERRY))
     );
@@ -386,6 +418,103 @@ public class ModItems {
     public static final RegistryObject<Item> GEM_ALLOY = ITEMS.register("gem_alloy", () ->
             new Item(new Item.Properties().stacksTo(64))
     );
+
+    public static final RegistryObject<Item> CRYSTAL_LOG = ITEMS.register("crystal_log", () ->
+            new BlockItem(
+                    ModBlocks.CRYSTAL_LOG.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> STRIPPED_CRYSTAL_LOG = ITEMS.register("stripped_crystal_log", () ->
+            new BlockItem(
+                    ModBlocks.STRIPPED_CRYSTAL_LOG.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> CRYSTAL_WOOD = ITEMS.register("crystal_wood", () ->
+            new BlockItem(
+                    ModBlocks.CRYSTAL_WOOD.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> STRIPPED_CRYSTAL_WOOD = ITEMS.register("stripped_crystal_wood", () ->
+            new BlockItem(
+                    ModBlocks.STRIPPED_CRYSTAL_WOOD.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> CRYSTAL_LEAVES = ITEMS.register("crystal_leaves", () ->
+            new BlockItem(
+                    ModBlocks.CRYSTAL_LEAVES.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> CRYSTAL_SAPLING = ITEMS.register("crystal_sapling", () ->
+            new BlockItem(
+                    ModBlocks.CRYSTAL_SAPLING.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> BLUE_CRYSTAL_APPLE = ITEMS.register("blue_crystal_apple", () ->
+            new Item(new Item.Properties().food(ModFoods.CRYSTAL_APPLE))
+    );
+
+    public static final RegistryObject<Item> PURPLE_CRYSTAL_APPLE = ITEMS.register("purple_crystal_apple", () ->
+            new Item(new Item.Properties().food(ModFoods.CRYSTAL_APPLE))
+    );
+
+    public static final RegistryObject<Item> PINK_CRYSTAL_APPLE = ITEMS.register("pink_crystal_apple", () ->
+            new Item(new Item.Properties().food(ModFoods.CRYSTAL_APPLE))
+    );
+
+    public static final RegistryObject<Item> DISTANT_LOG = ITEMS.register("distant_log", () ->
+            new BlockItem(
+                    ModBlocks.DISTANT_LOG.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> STRIPPED_DISTANT_LOG = ITEMS.register("stripped_distant_log", () ->
+            new BlockItem(
+                    ModBlocks.STRIPPED_DISTANT_LOG.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> DISTANT_WOOD = ITEMS.register("distant_wood", () ->
+            new BlockItem(
+                    ModBlocks.DISTANT_WOOD.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> STRIPPED_DISTANT_WOOD = ITEMS.register("stripped_distant_wood", () ->
+            new BlockItem(
+                    ModBlocks.STRIPPED_DISTANT_WOOD.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> DISTANT_LEAVES = ITEMS.register("distant_leaves", () ->
+            new BlockItem(
+                    ModBlocks.DISTANT_LEAVES.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> DISTANT_SAPLING = ITEMS.register("distant_sapling", () ->
+            new BlockItem(
+                    ModBlocks.DISTANT_SAPLING.get(),
+                    new Item.Properties()
+            )
+    );
+
 
     public static final RegistryObject<Item> PINK_ESSENCE_BUCKET = ITEMS.register("pink_essence_bucket", () ->
             new BucketItem(

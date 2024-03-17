@@ -24,6 +24,9 @@ public class ModPlacedFeatures {
     public static final ResourceKey<PlacedFeature> TUNGSTEN_PLACED_KEY = createKey("tungsten_placed");
     public static final ResourceKey<PlacedFeature> CRYSTAL_PLACED_KEY = createKey("crystal_placed");
 
+    public static final ResourceKey<PlacedFeature> DISTANT_PLACED_KEY = createKey("distant_placed");
+
+
     public static void bootstrap(BootstapContext<PlacedFeature> context) {
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
         register(context, TUNGSTEN_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.TUNGSTEN_ORE_KEY),
@@ -33,6 +36,10 @@ public class ModPlacedFeatures {
         register(context, CRYSTAL_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.CRYSTAL_KEY),
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
                         ModBlocks.CRYSTAL_SAPLING.get()));
+
+        register(context, DISTANT_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.DISTANT_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
+                        ModBlocks.DISTANT_SAPLING.get()));
     }
 
     public static List<PlacementModifier> orePlacement(PlacementModifier p_195347_, PlacementModifier p_195348_) {

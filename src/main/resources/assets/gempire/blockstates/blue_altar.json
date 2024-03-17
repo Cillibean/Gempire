@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "gempire:block/blue_altar",
+      "y": 180
+    },
+    "facing=north": {
+      "model": "gempire:block/blue_altar",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "gempire:block/blue_altar",
+      "y": 270
+    },
+    "facing=west": {
+      "model": "gempire:block/blue_altar"
+    }
+  }
+}

@@ -1,0 +1,139 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.guardian_armor",
+				"texture_width": 128,
+				"texture_height": 128,
+				"visible_bounds_width": 3,
+				"visible_bounds_height": 3.5,
+				"visible_bounds_offset": [0, 1.25, 0]
+			},
+			"bones": [
+				{
+					"name": "bipedHead",
+					"pivot": [0, 24, 0]
+				},
+				{
+					"name": "armorHead",
+					"parent": "bipedHead",
+					"pivot": [0, 24, 0],
+					"cubes": [
+						{"origin": [-1.5, 28.75, -4.75], "size": [4, 4, 3], "pivot": [0, 31.25, -3.75], "rotation": [-12.56853, 12.27659, 43.64293], "uv": [39, 89]},
+						{"origin": [-1.5, 27.25, -4.75], "size": [3, 3, 3], "pivot": [0, 28.75, -3.75], "rotation": [3.54002, -3.53329, 44.89078], "uv": [54, 89]},
+						{"origin": [2.75, 24, -4.5], "size": [2, 3, 3], "pivot": [3.75, 24, -3.5], "rotation": [7.5, 5, 0], "uv": [11, 103]},
+						{"origin": [-4.75, 24, -4.5], "size": [2, 3, 3], "pivot": [-3.75, 24, -3.5], "rotation": [7.5, -5, 0], "uv": [0, 103]},
+						{"origin": [2.25, 31, -8], "size": [0, 8, 5], "pivot": [3.25, 31, -4], "rotation": [0, 0, 10], "uv": [28, 89]},
+						{"origin": [-2.25, 31, -8], "size": [0, 8, 5], "pivot": [-3.25, 31, -4], "rotation": [0, 0, -10], "uv": [17, 89]},
+						{"origin": [-4, 24, -4], "size": [8, 8, 8], "inflate": 0.25, "uv": [0, 0]}
+					]
+				},
+				{
+					"name": "bipedBody",
+					"pivot": [0, 24, 0]
+				},
+				{
+					"name": "armorBody",
+					"parent": "bipedBody",
+					"pivot": [0, 24, 0],
+					"cubes": [
+						{"origin": [-4, 17, -2.5], "size": [8, 7, 5], "inflate": 0.25, "uv": [34, 17]},
+						{"origin": [-4, 12, -2], "size": [8, 12, 4], "inflate": 0.25, "uv": [33, 0]}
+					]
+				},
+				{
+					"name": "bipedLeftArm",
+					"pivot": [-4, 22, 0]
+				},
+				{
+					"name": "armorLeftArm",
+					"parent": "bipedLeftArm",
+					"pivot": [-4, 22, 0],
+					"cubes": [
+						{"origin": [-8.25, 6, -2], "size": [4, 18, 4], "inflate": 0.25, "uv": [17, 17]}
+					]
+				},
+				{
+					"name": "bipedRightArm",
+					"pivot": [4, 22, 0]
+				},
+				{
+					"name": "armorRightArm",
+					"parent": "bipedRightArm",
+					"pivot": [4, 22, 0],
+					"cubes": [
+						{"origin": [6.25, 17.5, -2.5], "size": [3, 7, 5], "inflate": 0.25, "pivot": [6.75, 21, 0], "rotation": [0, 0, -15], "uv": [0, 89]},
+						{"origin": [4.25, 6, -2], "size": [4, 18, 4], "inflate": 0.25, "uv": [0, 17]}
+					]
+				},
+				{
+					"name": "bipedLeftLeg",
+					"pivot": [-2, 12, 0]
+				},
+				{
+					"name": "armorLeftLeg",
+					"parent": "bipedLeftLeg",
+					"pivot": [-2, 12, 0]
+				},
+				{
+					"name": "left_skirt",
+					"parent": "armorLeftLeg",
+					"pivot": [-2, 12, 0],
+					"cubes": [
+						{"origin": [-5, 5, -2.5], "size": [5, 9, 5], "uv": [21, 40]}
+					]
+				},
+				{
+					"name": "left_waist_piece",
+					"parent": "armorLeftLeg",
+					"pivot": [-2, 12, 0],
+					"cubes": [
+						{"origin": [-5.5, 8.25, -3], "size": [4, 7, 6], "pivot": [-5, 12, 0], "rotation": [0, 0, 15], "uv": [63, 40]}
+					]
+				},
+				{
+					"name": "armorLeftBoot",
+					"parent": "bipedLeftLeg",
+					"pivot": [-2, 12, 0],
+					"cubes": [
+						{"origin": [-4, 0, -2], "size": [4, 12, 4], "inflate": 0.25, "uv": [51, 55]}
+					]
+				},
+				{
+					"name": "bipedRightLeg",
+					"pivot": [2, 12, 0]
+				},
+				{
+					"name": "armorRightLeg",
+					"parent": "bipedRightLeg",
+					"pivot": [2, 12, 0]
+				},
+				{
+					"name": "right_skirt",
+					"parent": "armorRightLeg",
+					"pivot": [0, 0, 0],
+					"cubes": [
+						{"origin": [0, 5, -2.5], "size": [5, 9, 5], "uv": [0, 40]}
+					]
+				},
+				{
+					"name": "right_waist_piece",
+					"parent": "armorRightLeg",
+					"pivot": [2, 12, 0],
+					"cubes": [
+						{"origin": [1.5, 7.5, -3], "size": [4, 7, 6], "pivot": [2, 12, 0], "rotation": [0, 0, -15], "uv": [42, 40]}
+					]
+				},
+				{
+					"name": "armorRightBoot",
+					"parent": "bipedRightLeg",
+					"pivot": [2, 12, 0],
+					"cubes": [
+						{"origin": [0, 0, -2], "size": [4, 12, 4], "inflate": 0.25, "uv": [0, 55]}
+					]
+				}
+			]
+		}
+	]
+}
