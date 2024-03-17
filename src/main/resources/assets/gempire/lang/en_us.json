@@ -348,6 +348,26 @@
   "item.gempire.inactive_huntress_gem": "Inactive Huntress Gem",
   "item.gempire.inactive_empress_gem": "Inactive Empress Gem",
 
+  "item.gempire.paladin_flower": "Paladin Flower",
+  "item.gempire.guardian_tear": "Guardian Tear",
+  "item.gempire.huntress_dagger": "Huntress Dagger",
+  "item.gempire.empress_star": "Empress Star",
+
+  "item.gempire.iridescent_flower": "Iridescent Flower",
+  "item.gempire.mirrored_tear": "Mirrored Tear",
+  "item.gempire.gilded_dagger": "Gilded Dagger",
+  "item.gempire.prismatic_star": "Prismatic Star",
+
+  "block.gempire.pink_altar": "Fuchsia Altar",
+  "block.gempire.blue_altar": "Cobalt Altar",
+  "block.gempire.yellow_altar": "Amber Altar",
+  "block.gempire.white_altar": "Alabaster Altar",
+
+  "block.gempire.prismatic_pink_altar": "Iridescent Altar",
+  "block.gempire.prismatic_blue_altar": "Mirrored Altar",
+  "block.gempire.prismatic_yellow_altar": "Gilded Altar",
+  "block.gempire.prismatic_white_altar": "Prismatic Altar",
+
   "item.gempire.empress_bow": "Bow of The Empress",
   "item.gempire.huntress_sword": "Huntress's Blade",
   "item.gempire.guardian_shield": "Shield of The Guardian",
@@ -375,6 +395,10 @@
   "item.gempire.red_chroma": "Red Chroma",
   "item.gempire.black_chroma": "Black Chroma",
   "item.gempire.special_chroma": "Prismatic Chroma",
+
+  "item.gempire.pink_crystal_apple": "Pink Crystal Apple",
+  "item.gempire.blue_crystal_apple": "Blue Crystal Apple",
+  "item.gempire.purple_crystal_apple": "Purple Crystal Apple",
 
   "item.gempire.white_shards": "White Shards",
   "item.gempire.orange_shards": "Orange Shards",

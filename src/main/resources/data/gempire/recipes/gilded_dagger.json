@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "NIN",
+    "FSF",
+    "MIM"
+  ],
+  "key": {
+    "I": {
+      "item": "gempire:yellow_chroma"
+    },
+    "S": {
+      "item": "gempire:huntress_dagger"
+    },
+    "N": {
+      "item": "gempire:special_shards"
+    },
+    "M": {
+      "item": "gempire:prismatic_block"
+    },
+    "F": {
+      "item": "gempire:yellow_essence_bucket"
+    }
+  },
+  "result": {
+    "item": "gempire:gilded_dagger"
+  }
+}

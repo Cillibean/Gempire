@@ -7,11 +7,14 @@ import com.gempire.entities.gems.starter.EntityPebble;
 import com.gempire.entities.gems.starter.EntityShale;
 import com.gempire.entities.other.*;
 import com.gempire.init.*;
+import com.gempire.items.tools.GuardianArmorItem;
+import com.gempire.items.tools.GuardianArmorRenderer;
 import com.gempire.proxy.CommonProxy;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.entries.LootTableReference;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
@@ -27,6 +30,7 @@ import net.minecraftforge.event.server.ServerStartingEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import software.bernie.geckolib.GeckoLib;
+import software.bernie.geckolib.renderer.GeoArmorRenderer;
 
 import java.util.stream.Collectors;
 

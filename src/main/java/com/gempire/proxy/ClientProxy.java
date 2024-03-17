@@ -10,13 +10,16 @@ import com.gempire.client.screen.warppad.WarpSelectionScreen;
 import com.gempire.client.ter.ShellTER;
 import com.gempire.fluids.ModFluidTypes;
 import com.gempire.init.*;
+import com.gempire.items.tools.GuardianArmorRenderer;
 import com.gempire.keybindings.KeyBindings;
 import com.gempire.networking.WarpGuiKeyPressed;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.renderer.entity.*;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -26,6 +29,7 @@ import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
+import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import net.minecraftforge.common.CreativeModeTabRegistry;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
@@ -33,6 +37,10 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fluids.FluidInteractionRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import org.jetbrains.annotations.NotNull;
+import software.bernie.geckolib.renderer.GeoArmorRenderer;
+
+import java.util.function.Consumer;
 
 import static net.minecraftforge.fluids.FluidInteractionRegistry.addInteraction;
 

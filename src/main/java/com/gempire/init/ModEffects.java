@@ -2,7 +2,6 @@ package com.gempire.init;
 
 import com.gempire.Gempire;
 import com.gempire.effect.*;
-import com.gempire.items.tools.GuardianArmorItem;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;

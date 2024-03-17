@@ -9,6 +9,7 @@ import com.gempire.entities.other.EntityCrawler;
 import com.gempire.entities.other.EntityShambler;
 import com.gempire.entities.bases.EntityVaryingGem;
 import com.gempire.util.GemPlacements;
+import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.MobCategory;
@@ -17,7 +18,12 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl;
 import net.minecraft.world.entity.ai.goal.*;
+import net.minecraft.world.entity.ai.navigation.AmphibiousPathNavigation;
+import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
+import net.minecraft.world.entity.ai.navigation.GroundPathNavigation;
+import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
@@ -29,6 +35,27 @@ public class EntitySpodumene extends EntityVaryingGem {
 
     public EntitySpodumene(EntityType<? extends PathfinderMob> type, Level worldIn) {
         super(type, worldIn);
+        if (this.isInWater()) this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.02F, 0.5F, false);
+    }
+
+    protected PathNavigation createNavigation(Level level) {
+        AmphibiousPathNavigation amphibiousPathNavigation = new AmphibiousPathNavigation(this, level) {
+            public boolean isStableDestination(BlockPos p_27947_) {
+                return !this.level.getBlockState(p_27947_.below()).isAir();
+            }
+        };
+        amphibiousPathNavigation.setCanFloat(false);
+
+        GroundPathNavigation groundPathNavigation = new GroundPathNavigation(this, level);
+        groundPathNavigation.setCanOpenDoors(false);
+        groundPathNavigation.setCanFloat(false);
+        groundPathNavigation.setCanPassDoors(true);
+
+        if (this.isInWater()) {
+            return amphibiousPathNavigation;
+        } else {
+            return groundPathNavigation;
+        }
     }
 
     public static AttributeSupplier.Builder registerAttributes() {
@@ -57,7 +84,7 @@ public class EntitySpodumene extends EntityVaryingGem {
 
     protected void registerGoals() {
         super.registerGoals();
-        this.goalSelector.addGoal(3, new FloatGoal(this));
+        //this.goalSelector.addGoal(8, new FloatGoal(this));
         this.goalSelector.addGoal(6, new PanicGoal(this, 1.1D));
         this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 4.0F));
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
@@ -70,13 +97,14 @@ public class EntitySpodumene extends EntityVaryingGem {
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, EntityShambler.class, 1, false, false, this::checkNotSludged));
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, EntityCrawler.class, 1, false, false, this::checkNotSludged));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Mob.class, 1, false, false, (p_234199_0_) -> p_234199_0_.getClassification(true) == MobCategory.MONSTER));
-                this.goalSelector.addGoal(1, new EntityAISludged(this, 0.6));
+        this.goalSelector.addGoal(1, new EntityAISludged(this, 0.6));
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, EntityGem.class, 1, false, false, this::checkBothSludged));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, 1, false, false, this::checkSludged));
-this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, EntityGem.class, 6.0F, 1.0D, 1.2D, this::checkElseSludged));
-       this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.1D, false));
+        this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, EntityGem.class, 6.0F, 1.0D, 1.2D, this::checkElseSludged));
+        this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.1D, false));
         this.targetSelector.addGoal(1, new OwnerHurtByTargetGemGoal(this));
         this.targetSelector.addGoal(2, new OwnerHurtTargetGemGoal(this));
+        this.goalSelector.addGoal(5, new EntityAISwimUp(this, 1D, 10));
     }
     @Override
     public SoundEvent getInstrument()
