@@ -387,6 +387,14 @@ public class ModItems {
             new ItemAltarUpgrade(new Item.Properties().stacksTo(1))
     );
 
+    public static final RegistryObject<Item> PRISMATIC_GLASS = ITEMS.register("prismatic_glass", () ->
+            new Item(new Item.Properties().stacksTo(64))
+    );
+
+    public static final RegistryObject<Item> SHOCK_BERRY = ITEMS.register("shock_berry", () ->
+            new ItemNameBlockItem(ModBlocks.SHOCK_BERRY_BUSH.get(), new Item.Properties().stacksTo(64).food(ModFoods.SHOCK_BERRY))
+    );
+
     public static final RegistryObject<Item> STRAWBERRY = ITEMS.register("strawberry", () ->
             new ItemNameBlockItem(ModBlocks.STRAWBERRY_STEM.get(), new Item.Properties().stacksTo(64).food(ModFoods.STRAWBERRY))
     );

@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "gempire:gilded_wastes",
+  "features": "gempire:patch_shock_berry",
+  "step": "vegetal_decoration"
+}

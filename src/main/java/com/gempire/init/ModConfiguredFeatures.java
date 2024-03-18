@@ -40,6 +40,8 @@ public class ModConfiguredFeatures {
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> DISTANT_KEY = registerKey("crystal");
     public static final ResourceKey<ConfiguredFeature<?, ?>> TUNGSTEN_ORE_KEY = registerKey("tungsten_ore");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> SHOCK_BERRY_KEY = registerKey("patch_shock_berry");
+
     public static final Supplier<List<OreConfiguration.TargetBlockState>> TUNGSTEN_ORES = Suppliers.memoize(() -> List.of(
             OreConfiguration.target(new TagMatchTest(BlockTags.STONE_ORE_REPLACEABLES), ModBlocks.TUNGSTEN_ORE.get().defaultBlockState()),
             OreConfiguration.target(new TagMatchTest(BlockTags.DEEPSLATE_ORE_REPLACEABLES), ModBlocks.DEEPSLATE_TUNGSTEN_ORE.get().defaultBlockState())));

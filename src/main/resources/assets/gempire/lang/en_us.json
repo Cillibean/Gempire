@@ -311,6 +311,15 @@
   "block.gempire.attached_strawberry_stem": "Strawberry Stem",
   "item.gempire.strawberry": "Strawberry",
 
+  "block.gempire.dagger_stone": "Dagger Stone",
+  "block.gempire.flower_case": "Flower Case",
+  "block.gempire.tear_vase": "Vase of Tears",
+  "block.gempire.star_crown": "Crown of Stars",
+
+  "block.gempire.shock_berry_bush": "Shock Berry Bush",
+  "item.gempire.shock_berry": "Shock Berry",
+  "item.gempire.prismatic_glass": "Prismatic Glass",
+
   "item.gempire.gem_slush_bucket": "Bucket of Gem Slush",
   "item.gempire.chroma_catalyst": "Chroma Catalyst",
 

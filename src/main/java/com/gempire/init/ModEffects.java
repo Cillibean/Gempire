@@ -35,12 +35,14 @@ public class ModEffects {
 
     public static final RegistryObject<MobEffect> HUNTRESS = MOB_EFFECTS.register("huntress",
             () -> new HuntressArmorEffect(MobEffectCategory.BENEFICIAL, 16117149).addAttributeModifier(Attributes.ATTACK_DAMAGE, "648D7064-6A60-4F59-8ABE-C2C23A6DD7A9", 2.0D, AttributeModifier.Operation.ADDITION));
-
     public static final RegistryObject<MobEffect> EMPRESS = MOB_EFFECTS.register("empress",
             () -> new EmpressArmorEffect(MobEffectCategory.BENEFICIAL, 16250871));
 
     public static final RegistryObject<MobEffect> GUARDIANS_GRACE = MOB_EFFECTS.register("guardians_grace",
             () -> new GaurdianArmorEffect(MobEffectCategory.BENEFICIAL, 10343413));
+
+    public static final RegistryObject<MobEffect> SHOCK_BERRY = MOB_EFFECTS.register("shock_berry",
+            () -> new DaggerPullEffect(MobEffectCategory.BENEFICIAL, 16117149).addAttributeModifier(Attributes.ATTACK_DAMAGE, "648D7064-6A60-4F59-8ABE-C2C23A6DD7A9", 2.0D, AttributeModifier.Operation.ADDITION));
 
     public static void register(IEventBus eventBus) {
         MOB_EFFECTS.register(eventBus);

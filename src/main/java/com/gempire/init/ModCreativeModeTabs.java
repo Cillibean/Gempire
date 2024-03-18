@@ -269,6 +269,8 @@ public class ModCreativeModeTabs {
                 populator.accept(ModItems.COBALT_SHARDS.get());
                 populator.accept(ModItems.ALABASTER_SHARDS.get());
 
+                populator.accept(ModItems.PRISMATIC_GLASS.get());
+
                 populator.accept(ModItems.SHARE_CONTRACT.get());
                 populator.accept(ModItems.TRANSFER_CONTRACT.get());
 
@@ -345,6 +347,8 @@ public class ModCreativeModeTabs {
                 populator.accept(ModItems.BLUE_CRYSTAL_APPLE.get());
                 populator.accept(ModItems.PURPLE_CRYSTAL_APPLE.get());
                 populator.accept(ModItems.PINK_CRYSTAL_APPLE.get());
+
+                populator.accept(ModItems.SHOCK_BERRY.get());
             })
             .build()
             );
