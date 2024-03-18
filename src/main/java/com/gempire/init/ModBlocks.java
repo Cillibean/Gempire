@@ -2362,10 +2362,33 @@ public class ModBlocks {
             )
     );*/
 
+    public static final RegistryObject<Block> FLOWER_CASE = BLOCKS.register("flower_case", () ->
+            new FlowerCaseBlock(Block.Properties.of()
+                    .strength(3.0f, 4.0f)
+                    .sound(SoundType.GLASS)
+            )
+    );
+
+    public static final RegistryObject<Block> DAGGER_STONE = BLOCKS.register("dagger_stone", () ->
+            new DaggerStoneBlock(Block.Properties.of()
+                    .strength(3.0f, 4.0f)
+                    .sound(SoundType.STONE)
+            )
+    );
+
     public static final RegistryObject<Block> WARP_PAD = BLOCKS.register("warp_pad", () ->
             new WarpPadBlock(Block.Properties.of()
                     .strength(3.0f, 4.0f)
                     .sound(SoundType.GLASS)
+            )
+    );
+
+    public static final RegistryObject<Block> SHOCK_BERRY_BUSH = BLOCKS.register("shock_berry_bush", () ->
+            new ShockBerryBushBlock(Block.Properties.of()
+                    .strength(3.0f, 4.0f)
+                    .sound(SoundType.SWEET_BERRY_BUSH)
+                    .noOcclusion()
+                    .noCollission()
             )
     );
 

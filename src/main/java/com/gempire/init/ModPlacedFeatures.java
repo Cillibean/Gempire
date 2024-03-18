@@ -26,6 +26,9 @@ public class ModPlacedFeatures {
 
     public static final ResourceKey<PlacedFeature> DISTANT_PLACED_KEY = createKey("distant_placed");
 
+    public static final ResourceKey<PlacedFeature> BERRY_PLACED_KEY = createKey("shock_berry_placed");
+
+
 
     public static void bootstrap(BootstapContext<PlacedFeature> context) {
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
