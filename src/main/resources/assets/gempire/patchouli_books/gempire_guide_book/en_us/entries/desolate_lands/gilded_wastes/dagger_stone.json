@@ -1,0 +1,32 @@
+{
+  "name": "Excalibur?",
+  "icon": "gempire:huntress_dagger",
+  "advancement": "gempire:root",
+  "category": "gempire:gilded_wastes",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Huntress Dagger",
+      "item": "gempire:huntress_dagger",
+      "text": "A dagger left in a stone for hundreds of years. It appears to be electrified. You might need some shock resistance."
+    },
+    {
+      "type": "patchouli:multiblock",
+      "name": "Huntress's Stone",
+      "text": "To be pulled by someone brave enough to try.",
+      "multiblock": {
+        "pattern": [
+          [
+            "___",
+            "_0_",
+            "___"
+          ]
+        ],
+        "mapping": {
+          "0": "gempire:dagger_stone"
+        },
+        "symmetrical": true
+      }
+    }
+  ]
+}

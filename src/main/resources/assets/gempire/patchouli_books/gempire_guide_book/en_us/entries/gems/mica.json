@@ -1,0 +1,21 @@
+ {
+  "name": "Mica",
+  "advancement": "gempire:root",
+  "icon": "gempire:mica_gem",
+  "category": "gempire:gems_category",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "gempire:mica{gemColor:13282713,skinColor:12234664,hairVariant:2,hairColor:12234664,insigniaColor:4,outfitColor:4,xscale:1,yscale:1,zscale:1}",
+      "name": "A Mica",
+      "rotate": "true",
+      "scale": 0.4,
+      "text": "A small gem that can be used to make Power Crystals."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "gempire:mica_gem",
+      "text": "To create a Mica, throw a Stone Button into a puddle of Yellow Gem Essence and wait three seconds, then a Mica will form."
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "Disarming",
+  "icon": "minecraft:ender_pearl",
+  "advancement": "gempire:root",
+  "category": "gempire:abilities",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Disarming is an ability that gives the gem a rare chance when attacking an enemy, to drop the enemies weapon."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Gems that are guaranteed to have it$()$(li)Garnet$(br2) $(l)Gems that have a chance to have it$()$(li)N/A"
+    }
+  ]
+}

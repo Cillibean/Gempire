@@ -1,0 +1,28 @@
+{
+  "name": "Larimar",
+  "advancement": "gempire:incubation/create_larimar",
+  "icon": "gempire:larimar_gem",
+  "category": "gempire:gems_category",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "gempire:larimar{gemColor:11908349,skinColor:9174243,hairColor:15596798,hairVariant:0,insigniaColor:3,outfitColor:3,gemPlacement:0,xscale:1,yscale:1,zscale:1}",
+      "name": "A Larimar",
+      "rotate": "true",
+      "offset": 0.2,
+      "text": "A gem that can create ice sculptures (NYI). Also uses cryokinesis."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Possible Abilities$() $(br)$(li)Tank$(li)Beefcake$(li)Powerhouse$(li)Unhinged$(br2) $(l)Definite Abilities$()$(br)$(li)Cryokinesis"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Essence Requirements$() $(br)$(li)Blue"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Cruxes$() $(br)$(li)Ice$(li)Snow Block$(li)Packed Ice"
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "name": "Tale As Old As Time",
+  "icon": "gempire:paladin_flower",
+  "advancement": "gempire:root",
+  "category": "gempire:iridescent_overgrowth",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Paladin Flower",
+      "item": "gempire:paladin_flower",
+      "text": "A flower, preserved in a glass case for eons. The glass seems to be shimmering, prismatic almost. You'll need a strong pickaxe to shatter it."
+    },
+    {
+      "type": "patchouli:multiblock",
+      "name": "Paladin's Case",
+      "text": "To be shattered in an attempt to free the soul",
+      "multiblock": {
+        "pattern": [
+          [
+            "___",
+            "_0_",
+            "___"
+          ]
+        ],
+        "mapping": {
+          "0": "gempire:flower_case"
+        },
+        "symmetrical": true
+      }
+    }
+  ]
+}

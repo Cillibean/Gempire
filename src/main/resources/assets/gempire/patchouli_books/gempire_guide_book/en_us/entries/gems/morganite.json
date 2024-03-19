@@ -1,0 +1,31 @@
+{
+  "name": "Morganite",
+  "advancement": "gempire:incubation/create_morganite",
+  "icon": "gempire:morganite_gem",
+  "category": "gempire:gems_category",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "gempire:morganite{gemColor:16687003,skinColor:16699852,hairColor:16416152,hairVariant:0,insigniaColor:6,outfitColor:6,gemPlacement:11,xscale:1,yscale:1,zscale:1}",
+      "name": "A Morganite",
+      "rotate": "true",
+      "text": "A gem that can create many decorative blocks, see page 3 for recipes."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Possible Abilities$() $(br)$(li)Tank$(li)Beefcake$(li)Powerhouse$(li)Unhinged$(br2) $(l)Definite Abilities$()$(br)$(li)Designer"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Recipes$()$(br)To make a hand Pedestal, give her stone."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Essence Requirements$() $(br)$(li)Pink"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Cruxes$() $(br)$(li)Phantom Membrane$(li)End Stone$(li)Soul Sand"
+    }
+  ]
+}

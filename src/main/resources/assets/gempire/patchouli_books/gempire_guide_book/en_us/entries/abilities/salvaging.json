@@ -1,0 +1,16 @@
+{
+  "name": "Salvaging",
+  "icon": "gempire:sludge_glob",
+  "advancement": "gempire:root",
+  "category": "gempire:abilities",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Salvaging is an ability that lets the gem convert Globs of Sludge into chroma with a 75% success rate. This does not include Prismatic Chroma however."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Gems that are guaranteed to have it$()$(li)N/A$(br2) $(l)Gems that have a chance to have it$()$(li)Peridot"
+    }
+  ]
+}

@@ -8,5 +8,6 @@
   "show_progress": false,
   "use_blocky_font": true,
   "filler_texture": "gempire:textures/gui/patchouli/page_filler.png",
-  "model": "gempire:book"
+  "model": "gempire:book",
+  "use_resource_pack": true
 }

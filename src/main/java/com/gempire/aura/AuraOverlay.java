@@ -16,6 +16,8 @@ public class AuraOverlay {
     private static final ResourceLocation YELLOW_OVERLAY = new ResourceLocation(Gempire.MODID, "textures/misc/yellow_aura_overlay.png");
     private static final ResourceLocation BLUE_OVERLAY = new ResourceLocation(Gempire.MODID, "textures/misc/blue_aura_overlay.png");
     private static final ResourceLocation WHITE_OVERLAY = new ResourceLocation(Gempire.MODID, "textures/misc/white_aura_overlay.png");
+    private static final ResourceLocation BLINDING_LIGHT = new ResourceLocation(Gempire.MODID, "textures/misc/blinding_light.png");
+
 
 
     public static final IGuiOverlay HUD_AURA = (((gui, poseStack, partialTick, width, height) -> {
@@ -43,6 +45,10 @@ public class AuraOverlay {
             //RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
             //RenderSystem.setShaderTexture(0, WHITE_OVERLAY);
             //GuiComponent.blit(poseStack, 0, 0, 0, 0, 2000, 2000, 2000, 2000);
+        } else if (ClientAuraData.getPlayerAura() == 5) {
+            RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+            RenderSystem.setShaderTexture(0, BLINDING_LIGHT);
+            poseStack.blit(BLINDING_LIGHT, 0, 0, 0, 0, 2000, 2000, 2000, 2000);
         }
     }));
 }

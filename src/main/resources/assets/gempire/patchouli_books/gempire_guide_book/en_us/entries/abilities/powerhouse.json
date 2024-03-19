@@ -1,0 +1,16 @@
+{
+  "name": "Powerhouse",
+  "icon": "minecraft:iron_sword",
+  "advancement": "gempire:root",
+  "category": "gempire:abilities",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Powerhouse is an ability that gives the gem that has it 25% more attack than default."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Gems that are guaranteed to have it$()$(li)N/A$(br2) $(l)Gems that have a chance to have it$()$(li)All gems"
+    }
+  ]
+}

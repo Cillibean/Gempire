@@ -2364,14 +2364,14 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> FLOWER_CASE = BLOCKS.register("flower_case", () ->
             new FlowerCaseBlock(Block.Properties.of()
-                    .strength(3.0f, 4.0f)
+                    .strength(-1.0F, 3600000.0F).noLootTable()
                     .sound(SoundType.GLASS)
             )
     );
 
     public static final RegistryObject<Block> DAGGER_STONE = BLOCKS.register("dagger_stone", () ->
             new DaggerStoneBlock(Block.Properties.of()
-                    .strength(3.0f, 4.0f)
+                    .strength(-1.0F, 3600000.0F).noLootTable()
                     .sound(SoundType.STONE)
             )
     );

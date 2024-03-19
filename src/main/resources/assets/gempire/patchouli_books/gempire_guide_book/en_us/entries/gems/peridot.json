@@ -1,0 +1,28 @@
+{
+  "name": "Peridot",
+  "advancement": "gempire:incubation/create_peridot",
+  "icon": "gempire:peridot_gem",
+  "category": "gempire:gems_category",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "gempire:peridot{gemColor:3143722,skinColor:13434513,hairColor:16777190,hairVariant:0,insigniaColor:5,outfitColor:5,gemPlacement:0,xscale:1,yscale:1,zscale:1}",
+      "name": "A Peridot",
+      "rotate": "true",
+      "offset": 0.4,
+      "text": "A kindergartener gem, she can tame gems for you from your kindergartens. She can also create Advanced Power Crystals."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Possible Abilities$() $(br)$(li)Tank$(li)Beefcake$(li)Powerhouse$(li)Unhinged$(br2) $(l)Definite Abilities$()$(br)$(li)Kindergartener"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Essence Requirements$() $(br)$(li)Blue$(li)Yellow"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Cruxes$() $(br)$(li)Clay$(li)Raw Iron Block$(li)Smooth Basalt$(li)Experience Bottle"
+    }
+  ]
+}

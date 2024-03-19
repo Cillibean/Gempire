@@ -1,0 +1,45 @@
+{
+  "name": "Inactive Gem Bases",
+  "icon": "gempire:inactive_bismuth_base",
+  "advancement": "gempire:root",
+  "category": "gempire:gem_creation_category",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "There are twenty-two confirmed inactive Gem base materials one can use in their colony formation. Some are crafted while others must be found in looted chests and by trading with Villagers."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "gempire:agate_base",
+      "recipe2": "gempire:bismuth_base"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "gempire:jasper_base",
+      "recipe2": "gempire:lapis_base"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "gempire:nephrite_base",
+      "recipe2": "gempire:obsidian_base"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "gempire:quartz_base",
+      "recipe2": "gempire:ruby_base"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "gempire:rutile_base",
+      "recipe2": "gempire:topaz_base"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)List of places  with special loot$() $(li)Ancient City$(li)Buried Treasure$(li)Desert Temple$(li)End City$(li)Igloo$(li)Jungle Temple$(li)Mineshaft$(li)Pillager Outpost$(li)Ruined Portal$(li)Shipwreck$(li)Stronghold$(li)Underwater Ruin$(li)Villages$(li)Woodland Mansion"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Gem bases from Villager trades$() $(li)Aquamarine$(li)Emerald$(li)Peridot$(li)Sapphire$(li)Tourmaline$(li)Zircon"
+    }
+  ]
+}

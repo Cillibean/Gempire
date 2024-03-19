@@ -1,0 +1,7 @@
+{
+  "name": "Gilded Wastes",
+  "description": "Information on the Gilded Wastes.",
+  "icon": "gempire:shock_berry",
+  "secret": "false",
+  "parent": "gempire:desolate_lands"
+}

@@ -1,0 +1,29 @@
+{
+  "name": "Agate",
+  "advancement": "gempire:incubation/create_agate",
+  "icon": "gempire:agate_gem_3",
+  "category": "gempire:gems_category",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "gempire:agate{skinColorVariant:3,skinColor:10599677,hairColor:15460605,gemColor:9660408,gemPlacement:20,hairVariant:1,insigniaColor:3,outfitColor:3,xscale:1,yscale:1,zscale:1}",
+      "scale": 1.0,
+      "name": "An Agate",
+      "rotate": "true",
+      "offset": 0.2,
+      "text": "A mid-game soldier, has many possible abilities. Also has the Stern ability, making other gems perform their tasks more efficiently and warding off hostile entities."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Possible Abilities$() $(li)Knockback$(li)Paralysis$(li)Tank$(li)Beefcake$(li)Powerhouse$(li)Unhinged$(li)Pyrokinesis$(li)Cryokinesis$(li)Healer$(li)First-Aid$(li)Berserker$(li)Beastmaster$(li)Electrokinesis (NYI)$(li)Aerokinesis (NYI)$(br2) $(l)Definite Abilities$() $(br)$(li)Stern"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Essence Requirements$() $(br)$(li)Blue$(li)White"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Cruxes$() $(br)$(li)Raw Copper Block$(li)Quartz Block$(li)Calcite"
+    }
+  ]
+}
