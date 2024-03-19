@@ -1,0 +1,14 @@
+{
+  "name": "Excalibur?",
+  "icon": "gempire:huntress_dagger",
+  "advancement": "gempire:root",
+  "category": "gempire:desolate_lands",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Huntress Dagger",
+      "item": "gempire:huntress_dagger",
+      "text": "A dagger left in a stone for hundreds of years. It appears to be electrified. You might need some shock resistance."
+    }
+  ]
+}

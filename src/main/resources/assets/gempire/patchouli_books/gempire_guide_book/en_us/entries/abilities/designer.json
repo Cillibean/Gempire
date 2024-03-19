@@ -1,0 +1,16 @@
+{
+  "name": "Designer",
+  "icon": "minecraft:paper",
+  "advancement": "gempire:root",
+  "category": "gempire:abilities",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Designer is an ability that lets the gem convert certain blocks into certain designs. This includes stone to Hand Pedestals."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Gems that are guaranteed to have it$()$(li)Morganite$(br2) $(l)Gems that have a chance to have it$()$(li)N/A"
+    }
+  ]
+}

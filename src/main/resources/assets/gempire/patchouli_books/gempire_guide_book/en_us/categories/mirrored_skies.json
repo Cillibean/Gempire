@@ -1,0 +1,7 @@
+{
+  "name": "Mirrored Skies",
+  "description": "Information on the Mirrored Skies.",
+  "icon": "gempire:blue_chroma",
+  "secret": "false",
+  "parent": "gempire:desolate_lands"
+}

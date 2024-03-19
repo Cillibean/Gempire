@@ -1,0 +1,16 @@
+{
+  "name": "Recall",
+  "icon": "minecraft:ender_eye",
+  "advancement": "gempire:root",
+  "category": "gempire:abilities",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Recall is an ability that lets the gem with it consume Eyes of Ender and XP to teleport you back home. In order to do so, place an Eye of Ender in her inventory and do the command /recall."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Gems that are guaranteed to have it$()$(li)Emerald$(br2) $(l)Gems that have a chance to have it$()$(li)N/A"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "Beefcake",
+  "icon": "minecraft:beef",
+  "advancement": "gempire:root",
+  "category": "gempire:abilities",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Beefcake is an ability that gives by default a sort of armor, making them take less damage.."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Gems that are guaranteed to have it$()$(li)N/A$(br2) $(l)Gems that have a chance to have it$()$(li)All gems"
+    }
+  ]
+}

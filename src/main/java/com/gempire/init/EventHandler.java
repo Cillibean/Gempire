@@ -164,14 +164,15 @@ public class EventHandler {
 
     @SubscribeEvent
     public static void cancelAura(TickEvent.PlayerTickEvent event) {
-        if (!hasAura && (event.player.hasEffect(ModEffects.PINK_AURA.get())) || event.player.hasEffect(ModEffects.WHITE_AURA.get()) || event.player.hasEffect(ModEffects.BLUE_AURA.get()) || event.player.hasEffect(ModEffects.YELLOW_AURA.get())) {
+        if (!hasAura && (event.player.hasEffect(ModEffects.PINK_AURA.get())) || event.player.hasEffect(ModEffects.WHITE_AURA.get()) || event.player.hasEffect(ModEffects.BLUE_AURA.get()) || event.player.hasEffect(ModEffects.YELLOW_AURA.get()) || event.player.hasEffect(ModEffects.BLINDING_LIGHT.get())) {
             hasAura = true;
         }
 
         if (hasAura && !(event.player.hasEffect(ModEffects.PINK_AURA.get()))
                 && !(event.player.hasEffect(ModEffects.BLUE_AURA.get()))
                 && !(event.player.hasEffect(ModEffects.YELLOW_AURA.get()))
-                && !(event.player.hasEffect(ModEffects.WHITE_AURA.get()))) {
+                && !(event.player.hasEffect(ModEffects.WHITE_AURA.get()))
+                && !(event.player.hasEffect(ModEffects.BLINDING_LIGHT.get()))) {
             ClientAuraData.set(0);
         }
     }

@@ -1,0 +1,7 @@
+{
+  "name": "Abnormal Sands",
+  "description": "Information on the Abnormal Sands.",
+  "icon": "minecraft:sand",
+  "secret": "false",
+  "parent": "gempire:desolate_lands"
+}

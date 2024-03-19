@@ -6,6 +6,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.damagesource.*;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -123,11 +125,18 @@ public class DaggerStoneBlock extends DirectionalBlock {
 
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
-        if (!level.isClientSide && player.hasEffect(ModEffects.SHOCK_BERRY.get()) && player.getMainHandItem().isEmpty()) {
-            popResource(level, pos, new ItemStack(ModItems.HUNTRESS_DAGGER.get()));
-            ItemStack stack = new ItemStack(ModItems.PRISMATIC_GLASS.get(), player.getRandom().nextInt(3)+2);
-            //popResource(level, pos, stack);
-            level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
+        if (!level.isClientSide) {
+            if (player.hasEffect(ModEffects.SHOCK_RESISTANCE.get())) {
+                if (player.getMainHandItem().isEmpty()) {
+                    popResource(level, pos, new ItemStack(ModItems.HUNTRESS_DAGGER.get()));
+                    ItemStack stack = new ItemStack(ModItems.PRISMATIC_GLASS.get(), player.getRandom().nextInt(3) + 2);
+                    //popResource(level, pos, stack);
+                    level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
+                }
+            } else {
+                player.hurt(player.damageSources().magic(), 2);
+                player.addEffect(new MobEffectInstance(ModEffects.ELECTROCUTION.get(), 40));
+            }
         }
 
         return super.use(state, level, pos, player, hand, result);

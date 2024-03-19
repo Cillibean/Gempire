@@ -1,0 +1,13 @@
+{
+  "name": "Tungsten",
+  "icon": "gempire:tungsten_ingot",
+  "advancement": "gempire:root",
+  "category": "gempire:misc",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "gempire:tungsten_ingot",
+      "text": "Tungsten has various uses in crafting recipes and can be found underground."
+    }
+  ]
+}

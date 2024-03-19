@@ -41,8 +41,14 @@ public class ModEffects {
     public static final RegistryObject<MobEffect> GUARDIANS_GRACE = MOB_EFFECTS.register("guardians_grace",
             () -> new GaurdianArmorEffect(MobEffectCategory.BENEFICIAL, 10343413));
 
-    public static final RegistryObject<MobEffect> SHOCK_BERRY = MOB_EFFECTS.register("shock_berry",
-            () -> new DaggerPullEffect(MobEffectCategory.BENEFICIAL, 16117149).addAttributeModifier(Attributes.ATTACK_DAMAGE, "648D7064-6A60-4F59-8ABE-C2C23A6DD7A9", 2.0D, AttributeModifier.Operation.ADDITION));
+    public static final RegistryObject<MobEffect> SHOCK_RESISTANCE = MOB_EFFECTS.register("shock_resistance",
+            () -> new ShockResistanceEffect(MobEffectCategory.BENEFICIAL, 16117149));
+
+    public static final RegistryObject<MobEffect> ELECTROCUTION = MOB_EFFECTS.register("electrocution",
+            () -> new ElectrocutionEffect(MobEffectCategory.HARMFUL, 16775275));
+
+    public static final RegistryObject<MobEffect> BLINDING_LIGHT = MOB_EFFECTS.register("blinding_light",
+            () -> new BlindingLightEffect(MobEffectCategory.HARMFUL, 16250871));
 
     public static void register(IEventBus eventBus) {
         MOB_EFFECTS.register(eventBus);

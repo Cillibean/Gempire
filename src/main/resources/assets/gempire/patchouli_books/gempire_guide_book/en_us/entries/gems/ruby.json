@@ -1,0 +1,27 @@
+{
+  "name": "Ruby",
+  "advancement": "gempire:incubation/create_ruby",
+  "icon": "gempire:ruby_gem",
+  "category": "gempire:gems_category",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "gempire:ruby{skinColor:15683662,hairVariant:1,insigniaColor:14,outfitColor:14,gemPlacement:14,hairColor:1179648,gemColor:11141145,xscale:1,yscale:1,zscale:1}",
+      "name": "A Ruby",
+      "rotate": "true",
+      "text": "A beginner soldier gem, best used in groups. Has pyrokinetic abilities."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Possible Abilities$() $(br)$(li)Knockback$(li)Paralysis$(li)Tank$(li)Beefcake$(li)Powerhouse$(li)Unhinged$(br2) $(l)Definite Abilities$()$(li)Pyrokinesis"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Essence Requirements$() $(br)$(li)Pink"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Cruxes$() $(br)$(li)Netherrack$(li)Iron Ore"
+    }
+  ]
+}

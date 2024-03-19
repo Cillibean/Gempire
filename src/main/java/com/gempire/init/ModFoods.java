@@ -14,7 +14,7 @@ public class ModFoods {
     }, 0.005F).build();
 
     public static final FoodProperties SHOCK_BERRY = (new FoodProperties.Builder()).alwaysEat().nutrition(1).saturationMod(1).effect(()->{
-        return new MobEffectInstance(ModEffects.SHOCK_BERRY.get(), 400, 4);
+        return new MobEffectInstance(ModEffects.SHOCK_RESISTANCE.get(), 400, 4);
     }, 1).build();
 
     public static final FoodProperties STRAWBERRY = (new FoodProperties.Builder()).alwaysEat().nutrition(2).saturationMod(4).build();

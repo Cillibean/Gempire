@@ -1,0 +1,7 @@
+{
+  "name": "Prismatic Gates",
+  "description": "Information on the Prismatic Gates.",
+  "icon": "gempire:white_chroma",
+  "secret": "false",
+  "parent": "gempire:desolate_lands"
+}

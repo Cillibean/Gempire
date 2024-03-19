@@ -1,0 +1,16 @@
+{
+  "name": "Cracked Gems",
+  "icon": "gempire:pearl_gem_6",
+  "advancement": "gempire:root",
+  "category": "gempire:gem_concepts",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A cracked gem can occur in the heat of battle, when a gem takes too much extra damage upon poofing. Like a Warden hitting a gem, for example."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "To fix a cracked gem, toss her gemstone into a pool of Pink Gem Essence. The crack will be healed. Alternate methods may be introduced later."
+    }
+  ]
+}

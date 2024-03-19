@@ -1,0 +1,16 @@
+{
+  "name": "Mining Inspiration",
+  "icon": "minecraft:golden_pickaxe",
+  "advancement": "gempire:root",
+  "category": "gempire:abilities",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Mining Inspiration is an ability that makes the gem permanently give off the Haste effect."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Gems that are guaranteed to have it$()$(li)Bixbite$(br2) $(l)Gems that have a chance to have it$()$(li)N/A"
+    }
+  ]
+}

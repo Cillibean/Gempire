@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_cross",
+  "textures": {
+    "cross": "gempire:block/crystal_sapling"
+  }
+}

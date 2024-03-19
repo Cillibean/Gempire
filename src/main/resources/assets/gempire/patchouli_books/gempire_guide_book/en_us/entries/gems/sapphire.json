@@ -1,0 +1,27 @@
+{
+  "name": "Sapphire",
+  "advancement": "gempire:incubation/create_sapphire",
+  "icon": "gempire:sapphire_gem_11",
+  "category": "gempire:gems_category",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "gempire:sapphire{hairColor:11853054,gemColor:4353496,skinColor:8363263,hairVariant:0,insigniaColor:0,outfitColor:11,gemPlacement:13,xscale:1,yscale:1,zscale:1}",
+      "name": "A Sapphire",
+      "rotate": "true",
+      "text": "A small aristocratic gem that gives the luck effect, and uses cryokinesis in combat."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Possible Abilities$()$(br)$(li)Tank$(li)Beefcake$(li)Unhinged$(br2) $(l)Definite Abilities$()$(li)Luck$(li)Cryokinesis"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Essence Requirements$() $(br)$(li)Blue$(li)White"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Cruxes$() $(br)$(li)Ender Eye$(li)Blue Ice$(li)Diamond Block"
+    }
+  ]
+}

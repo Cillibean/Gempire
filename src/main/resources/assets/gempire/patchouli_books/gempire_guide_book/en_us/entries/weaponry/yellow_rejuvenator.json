@@ -1,0 +1,18 @@
+{
+  "name": "Yellow Rejuvenator",
+  "icon": "gempire:yellow_rejuvenator",
+  "advancement": "gempire:root",
+  "category": "gempire:weaponry",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "link_recipe ": true,
+      "item": "gempire:yellow_rejuvenator",
+      "text": "Yellow rejuvenators are used to randomize a gem's hair and outfit appearances. In order for it to function, you need to make sure the weapon is fully readied."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "gempire:yrejuv"
+    }
+  ]
+}

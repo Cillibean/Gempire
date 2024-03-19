@@ -1,0 +1,28 @@
+{
+  "name": "Jasper",
+  "advancement": "gempire:incubation/create_jasper",
+  "icon": "gempire:jasper_gem_1",
+  "category": "gempire:gems_category",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "gempire:jasper{skinColorVariant:1,skinColor:16753489,hairColor:16707797,gemColor:16633426,markingColor:15551036,gemPlacement:5,hairVariant:3,markingVariant:0,insigniaColor:1,outfitColor:1,xscale:1,yscale:1,zscale:1}",
+      "name": "A Jasper",
+      "rotate": "true",
+      "offset": 0.2,
+      "text": "A mid-game soldier, has many possible abilities."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Possible Abilities$() $(br)$(li)Knockback$(li)Paralysis$(li)Tank$(li)Beefcake$(li)Powerhouse$(li)Unhinged$(li)Pyrokinesis$(li)Cryokinesis$(li)Healer$(li)First-Aid$(li)Berserker$(li)Beastmaster$(li)Electrokinesis (NYI)$(li)Aerokinesis (NYI)"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Essence Requirements$() $(br)$(li)Yellow$(li)White"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Cruxes$() $(br)$(li)Quartz Block$(li)Gilded Blackstone$(li)Raw Iron$(li)Blaze Rod"
+    }
+  ]
+}
