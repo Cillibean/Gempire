@@ -57,7 +57,7 @@ public class DestabBase extends Item {
                 ItemEntity item = new ItemEntity(pTarget.level(), pTarget.getX(), pTarget.getY(), pTarget.getZ(), stack);
                 pTarget.level().addFreshEntity(item);
                 pTarget.remove(Entity.RemovalReason.DISCARDED);
-            } else if (pTarget instanceof EntityIridescentPaladin) {
+            } /*else if (pTarget instanceof EntityIridescentPaladin) {
                 ItemStack stack = new ItemStack(ModItems.INACTIVE_PALADIN_GEM.get());
                 ItemEntity item = new ItemEntity(pTarget.level(), pTarget.getX(), pTarget.getY(), pTarget.getZ(), stack);
                 pTarget.level().addFreshEntity(item);
@@ -77,7 +77,7 @@ public class DestabBase extends Item {
                 ItemEntity item = new ItemEntity(pTarget.level(), pTarget.getX(), pTarget.getY(), pTarget.getZ(), stack);
                 pTarget.level().addFreshEntity(item);
                 pTarget.remove(Entity.RemovalReason.DISCARDED);
-            }
+            }*/
         }
     }
     @Override

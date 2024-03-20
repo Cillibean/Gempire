@@ -55,16 +55,19 @@ public class ClientProxy {
     @SubscribeEvent
     public static void onClientSetup(EntityRenderersEvent.RegisterRenderers event) {
         //RenderingRegistry.registerEntityRenderingHandler(ModEntities.TEST.get(), RenderTestEntity::new);
+        event.registerEntityRenderer(ModEntities.HUNTER.get(), m -> new RenderHunter(m, new ModelHunter<>(m.bakeLayer(ModelHunter.LAYER_LOCATION))));
         event.registerEntityRenderer(ModEntities.CRAWLER.get(), RenderCrawler::new);
         event.registerEntityRenderer(ModEntities.ABOMINATION.get(), RenderAbomination::new);
         event.registerEntityRenderer(ModEntities.SHAMBLER.get(), RenderShambler::new);
         event.registerEntityRenderer(ModEntities.ALABASTER_EMPRESS.get(), RenderAlabasterEmpress::new);
         event.registerEntityRenderer(ModEntities.AMBER_HUNTRESS.get(), RenderAmberHuntress::new);
         event.registerEntityRenderer(ModEntities.FUCHSIA_PALADIN.get(), RenderFuchsiaPaladin::new);
+        /*
         event.registerEntityRenderer(ModEntities.PRISMATIC_EMPRESS.get(), RenderPrismaticEmpress::new);
         event.registerEntityRenderer(ModEntities.GILDED_HUNTRESS.get(), RenderGildedHuntress::new);
         event.registerEntityRenderer(ModEntities.MIRRORED_GUARDIAN.get(), RenderMirroredGuardian::new);
         event.registerEntityRenderer(ModEntities.IRIDESCENT_PALADIN.get(), RenderIridescentPaladin::new);
+         */
         event.registerEntityRenderer(ModEntities.BEASTMASTER_WOLF.get(), RenderBeastmasterWolf::new);
         event.registerEntityRenderer(ModEntities.COBALT_GUARDIAN.get(), m -> new RenderCobaltGuardian(m, new ModelCobaltGuardian<>(m.bakeLayer(ModelCobaltGuardian.LAYER_LOCATION))));
         event.registerEntityRenderer(ModEntities.FUSION.get(), m -> new RenderFusion(m, new ModelFusion<>(m.bakeLayer(ModelFusion.LAYER_LOCATION))));

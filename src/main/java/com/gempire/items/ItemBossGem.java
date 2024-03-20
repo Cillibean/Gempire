@@ -22,6 +22,7 @@ public class ItemBossGem extends Item {
     public InteractionResult useOn(UseOnContext context) {
         Level level = context.getLevel();
         if (!level.isClientSide) {
+            /*
             if (level.getBlockState(context.getClickedPos()) == ModBlocks.PRISMATIC_PINK_ALTAR.get().defaultBlockState()) {
                 if (context.getItemInHand().getItem() == ModItems.INACTIVE_PALADIN_GEM.get()) {
                     context.getPlayer().setItemSlot(EquipmentSlot.MAINHAND, Items.AIR.getDefaultInstance());
@@ -94,7 +95,7 @@ public class ItemBossGem extends Item {
                     System.out.println("empress attempt");
                     return InteractionResult.PASS;
                 }
-            } else if (level.getBlockState(context.getClickedPos()) == ModBlocks.PINK_ALTAR.get().defaultBlockState()) {
+            } else*/ if (level.getBlockState(context.getClickedPos()) == ModBlocks.PINK_ALTAR.get().defaultBlockState()) {
                 if (context.getItemInHand().getItem() == ModItems.PALADIN_FLOWER.get()) {
                     context.getPlayer().setItemSlot(EquipmentSlot.MAINHAND, Items.AIR.getDefaultInstance());
                     EntityFuchsiaPaladin paladin = new EntityFuchsiaPaladin(ModEntities.FUCHSIA_PALADIN.get(), level);

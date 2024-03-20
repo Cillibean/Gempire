@@ -339,6 +339,7 @@ public class ModItems {
                     new Item.Properties().fireResistant()));
 
 
+    /*
     public static final RegistryObject<Item> INACTIVE_PALADIN_GEM = ITEMS.register("inactive_paladin_gem", () ->
             new ItemBossGem(new Item.Properties().stacksTo(1))
     );
@@ -353,7 +354,7 @@ public class ModItems {
 
     public static final RegistryObject<Item> INACTIVE_EMPRESS_GEM = ITEMS.register("inactive_empress_gem", () ->
             new ItemBossGem(new Item.Properties().stacksTo(1))
-    );
+    );*/
 
     public static final RegistryObject<Item> PALADIN_FLOWER = ITEMS.register("paladin_flower", () ->
             new ItemBossGem(new Item.Properties().stacksTo(1))
@@ -370,7 +371,7 @@ public class ModItems {
     public static final RegistryObject<Item> EMPRESS_STAR = ITEMS.register("empress_star", () ->
             new ItemBossGem(new Item.Properties().stacksTo(1))
     );
-
+/*
     public static final RegistryObject<Item> IRIDESCENT_FLOWER = ITEMS.register("iridescent_flower", () ->
             new ItemAltarUpgrade(new Item.Properties().stacksTo(1))
     );
@@ -386,7 +387,7 @@ public class ModItems {
     public static final RegistryObject<Item> PRISMATIC_STAR = ITEMS.register("prismatic_star", () ->
             new ItemAltarUpgrade(new Item.Properties().stacksTo(1))
     );
-
+*/
     public static final RegistryObject<Item> PRISMATIC_GLASS = ITEMS.register("prismatic_glass", () ->
             new Item(new Item.Properties().stacksTo(64))
     );
@@ -399,9 +400,10 @@ public class ModItems {
             new ItemNameBlockItem(ModBlocks.STRAWBERRY_STEM.get(), new Item.Properties().stacksTo(64).food(ModFoods.STRAWBERRY))
     );
 
+    /*
     public static final RegistryObject<Item> FUSION_STICK = ITEMS.register("fusion_stick", () ->
             new ItemFusionStick(new Item.Properties().stacksTo(1))
-    );
+    );*/
 
     public static final RegistryObject<Item> SLUDGE_GLOB = ITEMS.register("sludge_glob", () ->
             new Item(new Item.Properties().stacksTo(64))

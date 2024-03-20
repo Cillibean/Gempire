@@ -67,6 +67,8 @@ public class Gempire
     public void EntityAttributes(final EntityAttributeCreationEvent event){
         event.put(ModEntities.BEASTMASTER_WOLF.get(), EntityBeastmasterWolf.createAttributes().build());
 
+        event.put(ModEntities.HUNTER.get(), EntityHunter.registerAttributes().build());
+
         event.put(ModEntities.SHAMBLER.get(), EntityShambler.registerAttributes().build());
 
         event.put(ModEntities.ABOMINATION.get(), EntityAbomination.registerAttributes().build());
@@ -134,11 +136,12 @@ public class Gempire
         event.put(ModEntities.COBALT_GUARDIAN.get(), EntityCobaltGuardian.registerAttributes().build());
         event.put(ModEntities.FUCHSIA_PALADIN.get(), EntityFuchsiaPaladin.registerAttributes().build());
 
+        /*
         event.put(ModEntities.PRISMATIC_EMPRESS.get(), EntityPrismaticEmpress.registerAttributes().build());
         event.put(ModEntities.GILDED_HUNTRESS.get(), EntityGildedHuntress.registerAttributes().build());
         event.put(ModEntities.MIRRORED_GUARDIAN.get(), EntityMirroredGuardian.registerAttributes().build());
         event.put(ModEntities.IRIDESCENT_PALADIN.get(), EntityIridescentPaladin.registerAttributes().build());
-
+*/
     }
 
     private void setup(final FMLCommonSetupEvent event)

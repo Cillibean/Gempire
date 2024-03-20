@@ -24,6 +24,6 @@ public class RenderCobaltGuardian extends MobRenderer<EntityCobaltGuardian, Mode
 
     @Override
     public ResourceLocation getTextureLocation(EntityCobaltGuardian animatable) {
-        return new ResourceLocation(Gempire.MODID, "textures/entity/boss/guardian/cobalt/guardian.png");
+        return new ResourceLocation(Gempire.MODID, "textures/entity/boss/guardian/cobalt/base.png");
     }
 }
