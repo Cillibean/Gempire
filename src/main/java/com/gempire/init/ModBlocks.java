@@ -43,7 +43,7 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> WHITE_ALTAR = BLOCKS.register("white_altar", () ->
             new WhiteAltarBlock(BlockBehaviour.Properties.of().pushReaction(PushReaction.BLOCK)));
-
+/*
     public static final RegistryObject<Block> PRISMATIC_BLUE_ALTAR = BLOCKS.register("prismatic_blue_altar", () ->
             new PrismBlueAltarBlock(BlockBehaviour.Properties.of().pushReaction(PushReaction.BLOCK)));
 
@@ -55,7 +55,7 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> PRISMATIC_WHITE_ALTAR = BLOCKS.register("prismatic_white_altar", () ->
             new PrismWhiteAltarBlock(BlockBehaviour.Properties.of().pushReaction(PushReaction.BLOCK)));
-
+*/
     public static final RegistryObject<Block> GALAXY_WARP = BLOCKS.register("galaxy_warp", () ->
             new GalaxyWarpBlock(BlockBehaviour.Properties.of().pushReaction(PushReaction.BLOCK)));
     public static final RegistryObject<LiquidBlock> PINK_ESSENCE_BLOCK = BLOCKS.register("pink_essence_block", () ->
@@ -2371,6 +2371,20 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> DAGGER_STONE = BLOCKS.register("dagger_stone", () ->
             new DaggerStoneBlock(Block.Properties.of()
+                    .strength(-1.0F, 3600000.0F).noLootTable()
+                    .sound(SoundType.STONE)
+            )
+    );
+
+    public static final RegistryObject<Block> GUARDIAN_VASE = BLOCKS.register("guardian_vase", () ->
+            new VaseBlock(Block.Properties.of()
+                    .strength(-1.0F, 3600000.0F).noLootTable()
+                    .sound(SoundType.GLASS)
+            )
+    );
+
+    public static final RegistryObject<Block> EMPRESS_CROWN = BLOCKS.register("empress_crown", () ->
+            new CrownBlock(Block.Properties.of()
                     .strength(-1.0F, 3600000.0F).noLootTable()
                     .sound(SoundType.STONE)
             )

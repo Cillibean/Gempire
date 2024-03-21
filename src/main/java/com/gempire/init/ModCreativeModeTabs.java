@@ -335,7 +335,7 @@ public class ModCreativeModeTabs {
                 populator.accept(ModItems.GUARDIAN_TEAR.get());
                 populator.accept(ModItems.HUNTRESS_DAGGER.get());
                 populator.accept(ModItems.EMPRESS_STAR.get());
-                populator.accept(ModItems.IRIDESCENT_FLOWER.get());
+                /*populator.accept(ModItems.IRIDESCENT_FLOWER.get());
                 populator.accept(ModItems.MIRRORED_TEAR.get());
                 populator.accept(ModItems.GILDED_DAGGER.get());
                 populator.accept(ModItems.PRISMATIC_STAR.get());
@@ -343,7 +343,7 @@ public class ModCreativeModeTabs {
                 populator.accept(ModItems.INACTIVE_GUARDIAN_GEM.get());
                 populator.accept(ModItems.INACTIVE_HUNTRESS_GEM.get());
                 populator.accept(ModItems.INACTIVE_EMPRESS_GEM.get());
-
+*/
                 populator.accept(ModItems.BLUE_CRYSTAL_APPLE.get());
                 populator.accept(ModItems.PURPLE_CRYSTAL_APPLE.get());
                 populator.accept(ModItems.PINK_CRYSTAL_APPLE.get());

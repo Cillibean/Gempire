@@ -512,9 +512,9 @@ public class ItemGem extends Item {
         tag.putString("name", gem.getName().getString());
         gem.writeCrackShatter(tag);
         gem.writeOwners(tag);
-        gem.writeIDs(tag);
         gem.writeCraft(tag);
         gem.writeScale(tag);
+        gem.writeIDs(tag);
         gem.writeColour(tag);
         gem.writeVariant(tag);
         gem.writeRebelColour(tag);

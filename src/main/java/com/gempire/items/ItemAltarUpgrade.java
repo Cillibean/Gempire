@@ -21,6 +21,7 @@ public class ItemAltarUpgrade extends Item {
     public InteractionResult useOn(UseOnContext context) {
         Level level = context.getLevel();
         if (!level.isClientSide) {
+            /*
             if (level.getBlockState(context.getClickedPos()) == ModBlocks.PINK_ALTAR.get().defaultBlockState()) {
                 if (context.getItemInHand().getItem() == ModItems.IRIDESCENT_FLOWER.get()) {
                     level.setBlockAndUpdate(context.getClickedPos(), ModBlocks.PRISMATIC_PINK_ALTAR.get().withPropertiesOf(level.getBlockState(context.getClickedPos())));
@@ -46,6 +47,7 @@ public class ItemAltarUpgrade extends Item {
                     return InteractionResult.PASS;
                 }
             }
+             */
         }
         return InteractionResult.FAIL;
     }

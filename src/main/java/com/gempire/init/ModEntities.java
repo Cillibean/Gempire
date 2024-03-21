@@ -58,6 +58,7 @@ public class ModEntities {
                     .sized(1f, 3.5f) // Hitbox Size
                     .build(new ResourceLocation(Gempire.MODID, "fuchsia_paladin").toString()));
 
+    /*
     public static final RegistryObject<EntityType<EntityPrismaticEmpress>> PRISMATIC_EMPRESS = ENTITIES.register("prismatic_empress",
             () -> EntityType.Builder.of(EntityPrismaticEmpress::new, MobCategory.MONSTER)
                     .sized(1f, 3.5f) // Hitbox Size
@@ -77,6 +78,12 @@ public class ModEntities {
             () -> EntityType.Builder.of(EntityIridescentPaladin::new, MobCategory.MONSTER)
                     .sized(1f, 3.5f) // Hitbox Size
                     .build(new ResourceLocation(Gempire.MODID, "iridescent_paladin").toString()));
+*/
+
+    public static final RegistryObject<EntityType<EntityHunter>> HUNTER = ENTITIES.register("hunter",
+            () -> EntityType.Builder.of(EntityHunter::new, MobCategory.MONSTER)
+                    .sized(1f, 1.5f) // Hitbox Size
+                    .build(new ResourceLocation(Gempire.MODID, "hunter").toString()));
 
     public static final RegistryObject<EntityType<EntityCrawler>> CRAWLER = ENTITIES.register("crawler",
             () -> EntityType.Builder.of(EntityCrawler::new, MobCategory.CREATURE)
