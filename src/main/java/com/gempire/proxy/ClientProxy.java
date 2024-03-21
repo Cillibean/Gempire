@@ -177,6 +177,7 @@ public class ClientProxy {
     @SubscribeEvent
     public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(ModelCobaltGuardian.LAYER_LOCATION, ModelCobaltGuardian::createBodyLayer);
+        event.registerLayerDefinition(ModelHunter.LAYER_LOCATION, ModelHunter::createBodyLayer);
         event.registerLayerDefinition(ModelBeastmasterWolf.BEASTMASTER_WOLF, ModelBeastmasterWolf::createBodyLayer);
         event.registerLayerDefinition(ModelPebble.LAYER_LOCATION_P, ModelPebble::createBodyLayer);
         event.registerLayerDefinition(ModelPebble.LAYER_LOCATION_M, ModelPebble::createBodyLayer);

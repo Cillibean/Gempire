@@ -12,6 +12,7 @@ import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.client.renderer.entity.layers.HumanoidArmorLayer;
+import net.minecraft.client.renderer.entity.layers.ItemInHandLayer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.monster.AbstractSkeleton;
 
@@ -27,6 +28,7 @@ public class RenderHunter extends MobRenderer<EntityHunter, ModelHunter<EntityHu
     public RenderHunter(EntityRendererProvider.Context renderManager, ModelHunter<EntityHunter> model) {
         super(renderManager, model, 1f);
         this.shadowRadius = 0.3F;
+        this.addLayer(new ItemInHandLayer(this, renderManager.getItemInHandRenderer()));
     }
 
     @Override

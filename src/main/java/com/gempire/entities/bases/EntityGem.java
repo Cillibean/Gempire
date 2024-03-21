@@ -524,17 +524,15 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     }
 
     public void writeIDs(CompoundTag compound) {
-        System.out.println("follow id "+FOLLOW_ID);
-        String string = FOLLOW_ID + "," + ASSIGNED_ID +  "," +
-                MASTER_OWNER;
-        compound.putString("id", string);
+        compound.putUUID("followID", FOLLOW_ID);
+        compound.putUUID("assignedID", ASSIGNED_ID);
+        compound.putUUID("master", MASTER_OWNER);
     }
 
     public void readIDs(CompoundTag compound) {
-        String[] strings = compound.getString("id").split(",");
-        FOLLOW_ID = UUID.fromString(strings[0]);
-        ASSIGNED_ID = UUID.fromString(strings[1]);
-        MASTER_OWNER = UUID.fromString(strings[2]);
+        FOLLOW_ID = compound.getUUID("followID");
+        ASSIGNED_ID = compound.getUUID("assignedID");
+        MASTER_OWNER = compound.getUUID("master");
     }
 
     public void writeCrackShatter(CompoundTag compound) {
