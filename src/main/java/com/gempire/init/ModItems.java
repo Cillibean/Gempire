@@ -195,6 +195,13 @@ public class ModItems {
             )
     );
 
+    public static final RegistryObject<Item> PURIFIED_PRISMATIC_GLASS = ITEMS.register("purified_prismatic_glass", () ->
+            new BlockItem(
+                    ModBlocks.PURIFIED_PRISMATIC_GLASS.get(),
+                    new Item.Properties()
+            )
+    );
+
     public static final RegistryObject<Item> PYRITE_BLOCK = ITEMS.register("pyrite_block", () ->
             new BlockItem(
                     ModBlocks.PYRITE_BLOCK.get(),
@@ -390,6 +397,14 @@ public class ModItems {
 */
     public static final RegistryObject<Item> PRISMATIC_GLASS = ITEMS.register("prismatic_glass", () ->
             new Item(new Item.Properties().stacksTo(64))
+    );
+
+    public static final RegistryObject<Item> PRISMATIC_FLASK = ITEMS.register("prismatic_flask", () ->
+            new Item(new Item.Properties().stacksTo(1))
+    );
+
+    public static final RegistryObject<Item> PRISMATIC_SHEARS = ITEMS.register("prismatic_shears", () ->
+            new Item(new Item.Properties().stacksTo(1))
     );
 
     public static final RegistryObject<Item> SHOCK_BERRY = ITEMS.register("shock_berry", () ->
