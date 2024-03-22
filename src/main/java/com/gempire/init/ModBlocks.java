@@ -56,6 +56,10 @@ public class ModBlocks {
     public static final RegistryObject<Block> PRISMATIC_WHITE_ALTAR = BLOCKS.register("prismatic_white_altar", () ->
             new PrismWhiteAltarBlock(BlockBehaviour.Properties.of().pushReaction(PushReaction.BLOCK)));
 */
+
+    public static final RegistryObject<Block> PURIFIED_PRISMATIC_GLASS = BLOCKS.register("purified_prismatic_glass", () ->
+            new Block(BlockBehaviour.Properties.copy(Blocks.GLASS)));
+
     public static final RegistryObject<Block> GALAXY_WARP = BLOCKS.register("galaxy_warp", () ->
             new GalaxyWarpBlock(BlockBehaviour.Properties.of().pushReaction(PushReaction.BLOCK)));
     public static final RegistryObject<LiquidBlock> PINK_ESSENCE_BLOCK = BLOCKS.register("pink_essence_block", () ->

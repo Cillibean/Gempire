@@ -270,6 +270,9 @@ public class ModCreativeModeTabs {
                 populator.accept(ModItems.ALABASTER_SHARDS.get());
 
                 populator.accept(ModItems.PRISMATIC_GLASS.get());
+                populator.accept(ModItems.PURIFIED_PRISMATIC_GLASS.get());
+                populator.accept(ModItems.PRISMATIC_FLASK.get());
+                populator.accept(ModItems.PRISMATIC_SHEARS.get());
 
                 populator.accept(ModItems.SHARE_CONTRACT.get());
                 populator.accept(ModItems.TRANSFER_CONTRACT.get());

@@ -5,7 +5,9 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -121,6 +123,11 @@ public class VaseBlock extends DirectionalBlock {
 
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
+        if (!level.isClientSide && player.getMainHandItem().is(ModItems.PRISMATIC_FLASK.get())) {
+            popResource(level, pos, new ItemStack(ModItems.GUARDIAN_TEAR.get()));
+            level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
+            player.setItemSlot(EquipmentSlot.MAINHAND, player.getItemBySlot(EquipmentSlot.MAINHAND).copyWithCount(player.getItemBySlot(EquipmentSlot.MAINHAND).getCount()-1));
+        }
 
         return super.use(state, level, pos, player, hand, result);
     }
