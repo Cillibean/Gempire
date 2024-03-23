@@ -57,7 +57,7 @@ public class ModBlocks {
             new PrismWhiteAltarBlock(BlockBehaviour.Properties.of().pushReaction(PushReaction.BLOCK)));
 */
 
-    public static final RegistryObject<Block> PURIFIED_PRISMATIC_GLASS = BLOCKS.register("purified_prismatic_glass", () ->
+    public static final RegistryObject<Block> PURIFIED_PRISMATIC_GLASS = BLOCKS.register("purified_prismatic_glass.json", () ->
             new Block(BlockBehaviour.Properties.copy(Blocks.GLASS)));
 
     public static final RegistryObject<Block> GALAXY_WARP = BLOCKS.register("galaxy_warp", () ->
@@ -96,6 +96,42 @@ public class ModBlocks {
             new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
 
     public static final RegistryObject<Block> RAW_TUNGSTEN_BLOCK = BLOCKS.register("raw_tungsten_block", () ->
+            new Block(BlockBehaviour.Properties.copy(Blocks.RAW_IRON_BLOCK)));
+
+    public static final RegistryObject<Block> THULITE_ORE = BLOCKS.register("thulite_ore", () ->
+            new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)));
+
+    public static final RegistryObject<Block> THULITE_BLOCK = BLOCKS.register("thulite_block", () ->
+            new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
+
+    public static final RegistryObject<Block> RAW_THULITE_BLOCK = BLOCKS.register("raw_thulite_block", () ->
+            new Block(BlockBehaviour.Properties.copy(Blocks.RAW_IRON_BLOCK)));
+
+    public static final RegistryObject<Block> ELECTRUM_ORE = BLOCKS.register("electrum_ore", () ->
+            new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)));
+
+    public static final RegistryObject<Block> ELECTRUM_BLOCK = BLOCKS.register("electrum_block", () ->
+            new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
+
+    public static final RegistryObject<Block> RAW_ELECTRUM_BLOCK = BLOCKS.register("raw_electrum_block", () ->
+            new Block(BlockBehaviour.Properties.copy(Blocks.RAW_IRON_BLOCK)));
+
+    public static final RegistryObject<Block> ANATASE_ORE = BLOCKS.register("anatase_ore", () ->
+            new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)));
+
+    public static final RegistryObject<Block> ANATASE_BLOCK = BLOCKS.register("anatase_block", () ->
+            new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
+
+    public static final RegistryObject<Block> RAW_ANATASE_BLOCK = BLOCKS.register("raw_anatase_block", () ->
+            new Block(BlockBehaviour.Properties.copy(Blocks.RAW_IRON_BLOCK)));
+
+    public static final RegistryObject<Block> PLATINUM_ORE = BLOCKS.register("platinum_ore", () ->
+            new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)));
+
+    public static final RegistryObject<Block> PLATINUM_BLOCK = BLOCKS.register("platinum_block", () ->
+            new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
+
+    public static final RegistryObject<Block> RAW_PLATINUM_BLOCK = BLOCKS.register("raw_platinum_block", () ->
             new Block(BlockBehaviour.Properties.copy(Blocks.RAW_IRON_BLOCK)));
 
     public static final RegistryObject<Block> PYRITE_BLOCK = BLOCKS.register("pyrite_block", () ->

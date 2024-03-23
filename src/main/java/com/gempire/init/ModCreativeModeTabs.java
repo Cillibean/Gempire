@@ -285,6 +285,19 @@ public class ModCreativeModeTabs {
                 populator.accept(ModItems.PRISMATIC_INGOT.get());
                 populator.accept(ModItems.PRISMATIC_UPGRADE_SMITHING_TEMPLATE.get());
 
+                populator.accept(ModItems.RAW_THULITE.get());
+                populator.accept(ModItems.THULITE_INGOT.get());
+                populator.accept(ModItems.THULITE_NUGGET.get());
+                populator.accept(ModItems.RAW_ANATASE.get());
+                populator.accept(ModItems.ANATASE_INGOT.get());
+                populator.accept(ModItems.ANATASE_NUGGET.get());
+                populator.accept(ModItems.RAW_ELECTRUM.get());
+                populator.accept(ModItems.ELECTRUM_INGOT.get());
+                populator.accept(ModItems.ELECTRUM_NUGGET.get());
+                populator.accept(ModItems.RAW_PLATINUM.get());
+                populator.accept(ModItems.PLATINUM_INGOT.get());
+                populator.accept(ModItems.PLATINUM_NUGGET.get());
+
                 populator.accept(ModItems.GEM_SLUSH_BUCKET.get());
 
                 populator.accept(ModItems.PINK_ESSENCE_BUCKET.get());
@@ -602,6 +615,22 @@ public class ModCreativeModeTabs {
                 populator.accept(ModBlocks.TUNGSTEN_ORE.get());
                 populator.accept(ModBlocks.DEEPSLATE_TUNGSTEN_ORE.get());
 
+                populator.accept(ModBlocks.THULITE_BLOCK.get());
+                populator.accept(ModBlocks.RAW_THULITE_BLOCK.get());
+                populator.accept(ModBlocks.THULITE_ORE.get());
+
+                populator.accept(ModBlocks.ANATASE_BLOCK.get());
+                populator.accept(ModBlocks.RAW_ANATASE_BLOCK.get());
+                populator.accept(ModBlocks.ANATASE_ORE.get());
+
+                populator.accept(ModBlocks.ELECTRUM_BLOCK.get());
+                populator.accept(ModBlocks.RAW_ELECTRUM_BLOCK.get());
+                populator.accept(ModBlocks.ELECTRUM_ORE.get());
+
+                populator.accept(ModBlocks.PLATINUM_BLOCK.get());
+                populator.accept(ModBlocks.RAW_PLATINUM_BLOCK.get());
+                populator.accept(ModBlocks.PLATINUM_ORE.get());
+
                 populator.accept(ModBlocks.PYRITE_BLOCK.get());
                 populator.accept(ModBlocks.GEODE_CRYSTAL_BLOCK.get());
 
@@ -696,6 +725,23 @@ public class ModCreativeModeTabs {
         populator.accept(ModItems.EMPRESS_BOW.get());
         populator.accept(ModItems.HUNTRESS_SWORD.get());
         populator.accept(ModItems.GUARDIAN_SHIELD.get());
+
+                populator.accept(ModItems.THULITE_HELMET.get());
+                populator.accept(ModItems.THULITE_CHESTPLATE.get());
+                populator.accept(ModItems.THULITE_LEGGINGS.get());
+                populator.accept(ModItems.THULITE_BOOTS.get());
+                populator.accept(ModItems.ANATASE_HELMET.get());
+                populator.accept(ModItems.ANATASE_CHESTPLATE.get());
+                populator.accept(ModItems.ANATASE_LEGGINGS.get());
+                populator.accept(ModItems.ANATASE_BOOTS.get());
+                populator.accept(ModItems.ELECTRUM_HELMET.get());
+                populator.accept(ModItems.ELECTRUM_CHESTPLATE.get());
+                populator.accept(ModItems.ELECTRUM_LEGGINGS.get());
+                populator.accept(ModItems.ELECTRUM_BOOTS.get());
+                populator.accept(ModItems.PLATINUM_HELMET.get());
+                populator.accept(ModItems.PLATINUM_CHESTPLATE.get());
+                populator.accept(ModItems.PLATINUM_LEGGINGS.get());
+                populator.accept(ModItems.PLATINUM_BOOTS.get());
 
         populator.accept(ModItems.PALADIN_HELMET.get());
         populator.accept(ModItems.PALADIN_CHESTPLATE.get());

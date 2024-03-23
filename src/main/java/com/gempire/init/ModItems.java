@@ -195,7 +195,7 @@ public class ModItems {
             )
     );
 
-    public static final RegistryObject<Item> PURIFIED_PRISMATIC_GLASS = ITEMS.register("purified_prismatic_glass", () ->
+    public static final RegistryObject<Item> PURIFIED_PRISMATIC_GLASS = ITEMS.register("purified_prismatic_glass.json", () ->
             new BlockItem(
                     ModBlocks.PURIFIED_PRISMATIC_GLASS.get(),
                     new Item.Properties()
@@ -240,6 +240,90 @@ public class ModItems {
     public static final RegistryObject<Item> DEEPSLATE_TUNGSTEN_ORE = ITEMS.register("deepslate_tungsten_ore", () ->
             new BlockItem(
                     ModBlocks.DEEPSLATE_TUNGSTEN_ORE.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> THULITE_BLOCK = ITEMS.register("thulite_block", () ->
+            new BlockItem(
+                    ModBlocks.THULITE_BLOCK.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> RAW_THULITE_BLOCK = ITEMS.register("raw_thulite_block", () ->
+            new BlockItem(
+                    ModBlocks.RAW_THULITE_BLOCK.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> THULITE_ORE = ITEMS.register("thulite_ore", () ->
+            new BlockItem(
+                    ModBlocks.THULITE_ORE.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> ELECTRUM_BLOCK = ITEMS.register("electrum_block", () ->
+            new BlockItem(
+                    ModBlocks.ELECTRUM_BLOCK.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> RAW_ELECTRUM_BLOCK = ITEMS.register("raw_electrum_block", () ->
+            new BlockItem(
+                    ModBlocks.RAW_ELECTRUM_BLOCK.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> ELECTRUM_ORE = ITEMS.register("electrum_ore", () ->
+            new BlockItem(
+                    ModBlocks.ELECTRUM_ORE.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> ANATASE_BLOCK = ITEMS.register("anatase_block", () ->
+            new BlockItem(
+                    ModBlocks.ANATASE_BLOCK.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> RAW_ANATASE_BLOCK = ITEMS.register("raw_anatase_block", () ->
+            new BlockItem(
+                    ModBlocks.RAW_ANATASE_BLOCK.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> ANATASE_ORE = ITEMS.register("anatase_ore", () ->
+            new BlockItem(
+                    ModBlocks.ANATASE_ORE.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> PLATINUM_BLOCK = ITEMS.register("platinum_block", () ->
+            new BlockItem(
+                    ModBlocks.PLATINUM_BLOCK.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> RAW_PLATINUM_BLOCK = ITEMS.register("raw_platinum_block", () ->
+            new BlockItem(
+                    ModBlocks.RAW_PLATINUM_BLOCK.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> PLATINUM_ORE = ITEMS.register("platinum_ore", () ->
+            new BlockItem(
+                    ModBlocks.PLATINUM_ORE.get(),
                     new Item.Properties()
             )
     );
@@ -307,6 +391,70 @@ public class ModItems {
 
     public static final RegistryObject<Item> EMPRESS_BOOTS = ITEMS.register("empress_boots",
             () -> new ArmorItem(ModArmorMaterials.EMPRESS, ArmorItem.Type.BOOTS,
+                    new Item.Properties().fireResistant().stacksTo(1)));
+
+    public static final RegistryObject<Item> THULITE_HELMET = ITEMS.register("thulite_helmet",
+            () -> new ThuliteArmorItem(ModArmorMaterials.THULITE, ArmorItem.Type.HELMET,
+                    new Item.Properties().fireResistant().stacksTo(1)));
+
+    public static final RegistryObject<Item> THULITE_CHESTPLATE = ITEMS.register("thulite_chestplate",
+            () -> new ArmorItem(ModArmorMaterials.THULITE, ArmorItem.Type.CHESTPLATE,
+                    new Item.Properties().fireResistant().stacksTo(1)));
+
+    public static final RegistryObject<Item> THULITE_LEGGINGS = ITEMS.register("thulite_leggings",
+            () -> new ArmorItem(ModArmorMaterials.THULITE, ArmorItem.Type.LEGGINGS,
+                    new Item.Properties().fireResistant().stacksTo(1)));
+
+    public static final RegistryObject<Item> THULITE_BOOTS = ITEMS.register("thulite_boots",
+            () -> new ArmorItem(ModArmorMaterials.THULITE, ArmorItem.Type.BOOTS,
+                    new Item.Properties().fireResistant().stacksTo(1)));
+
+    public static final RegistryObject<Item> ANATASE_HELMET = ITEMS.register("anatase_helmet",
+            () -> new AnataseArmorItem(ModArmorMaterials.ANATASE, ArmorItem.Type.HELMET,
+                    new Item.Properties().fireResistant().stacksTo(1)));
+
+    public static final RegistryObject<Item> ANATASE_CHESTPLATE = ITEMS.register("anatase_chestplate",
+            () -> new ArmorItem(ModArmorMaterials.ANATASE, ArmorItem.Type.CHESTPLATE,
+                    new Item.Properties().fireResistant().stacksTo(1)));
+
+    public static final RegistryObject<Item> ANATASE_LEGGINGS = ITEMS.register("anatase_leggings",
+            () -> new ArmorItem(ModArmorMaterials.ANATASE, ArmorItem.Type.LEGGINGS,
+                    new Item.Properties().fireResistant().stacksTo(1)));
+
+    public static final RegistryObject<Item> ANATASE_BOOTS = ITEMS.register("anatase_boots",
+            () -> new ArmorItem(ModArmorMaterials.ANATASE, ArmorItem.Type.BOOTS,
+                    new Item.Properties().fireResistant().stacksTo(1)));
+
+    public static final RegistryObject<Item> ELECTRUM_HELMET = ITEMS.register("electrum_helmet",
+            () -> new ElectrumArmorItem(ModArmorMaterials.ELECTRUM, ArmorItem.Type.HELMET,
+                    new Item.Properties().fireResistant().stacksTo(1)));
+
+    public static final RegistryObject<Item> ELECTRUM_CHESTPLATE = ITEMS.register("electrum_chestplate",
+            () -> new ArmorItem(ModArmorMaterials.ELECTRUM, ArmorItem.Type.CHESTPLATE,
+                    new Item.Properties().fireResistant().stacksTo(1)));
+
+    public static final RegistryObject<Item> ELECTRUM_LEGGINGS = ITEMS.register("electrum_leggings",
+            () -> new ArmorItem(ModArmorMaterials.ELECTRUM, ArmorItem.Type.LEGGINGS,
+                    new Item.Properties().fireResistant().stacksTo(1)));
+
+    public static final RegistryObject<Item> ELECTRUM_BOOTS = ITEMS.register("electrum_boots",
+            () -> new ArmorItem(ModArmorMaterials.ELECTRUM, ArmorItem.Type.BOOTS,
+                    new Item.Properties().fireResistant().stacksTo(1)));
+
+    public static final RegistryObject<Item> PLATINUM_HELMET = ITEMS.register("platinum_helmet",
+            () -> new PlatinumArmorItem(ModArmorMaterials.PLATINUM, ArmorItem.Type.HELMET,
+                    new Item.Properties().fireResistant().stacksTo(1)));
+
+    public static final RegistryObject<Item> PLATINUM_CHESTPLATE = ITEMS.register("platinum_chestplate",
+            () -> new ArmorItem(ModArmorMaterials.PLATINUM, ArmorItem.Type.CHESTPLATE,
+                    new Item.Properties().fireResistant().stacksTo(1)));
+
+    public static final RegistryObject<Item> PLATINUM_LEGGINGS = ITEMS.register("platinum_leggings",
+            () -> new ArmorItem(ModArmorMaterials.PLATINUM, ArmorItem.Type.LEGGINGS,
+                    new Item.Properties().fireResistant().stacksTo(1)));
+
+    public static final RegistryObject<Item> PLATINUM_BOOTS = ITEMS.register("platinum_boots",
+            () -> new ArmorItem(ModArmorMaterials.PLATINUM, ArmorItem.Type.BOOTS,
                     new Item.Properties().fireResistant().stacksTo(1)));
 
 
@@ -432,11 +580,59 @@ public class ModItems {
             new Item(new Item.Properties().stacksTo(64))
     );
 
-    public static final RegistryObject<Item> PRISMATIC_UPGRADE_SMITHING_TEMPLATE = ITEMS.register("prismatic_upgrade_smithing_template", () ->
+    public static final RegistryObject<Item> TUNGSTEN_NUGGET = ITEMS.register("tungsten_nugget", () ->
             new Item(new Item.Properties().stacksTo(64))
     );
 
-    public static final RegistryObject<Item> TUNGSTEN_NUGGET = ITEMS.register("tungsten_nugget", () ->
+    public static final RegistryObject<Item> PLATINUM_INGOT = ITEMS.register("platinum_ingot", () ->
+            new Item(new Item.Properties().stacksTo(64))
+    );
+
+    public static final RegistryObject<Item> RAW_PLATINUM = ITEMS.register("raw_platinum", () ->
+            new Item(new Item.Properties().stacksTo(64))
+    );
+
+    public static final RegistryObject<Item> PLATINUM_NUGGET = ITEMS.register("platinum_nugget", () ->
+            new Item(new Item.Properties().stacksTo(64))
+    );
+
+    public static final RegistryObject<Item> THULITE_NUGGET = ITEMS.register("thulite_nugget", () ->
+            new Item(new Item.Properties().stacksTo(64))
+    );
+
+    public static final RegistryObject<Item> THULITE_INGOT = ITEMS.register("thulite_ingot", () ->
+            new Item(new Item.Properties().stacksTo(64))
+    );
+
+    public static final RegistryObject<Item> RAW_THULITE = ITEMS.register("raw_thulite", () ->
+            new Item(new Item.Properties().stacksTo(64))
+    );
+
+    public static final RegistryObject<Item> ANATASE_NUGGET = ITEMS.register("anatase_nugget", () ->
+            new Item(new Item.Properties().stacksTo(64))
+    );
+
+    public static final RegistryObject<Item> ANATASE_INGOT = ITEMS.register("anatase_ingot", () ->
+            new Item(new Item.Properties().stacksTo(64))
+    );
+
+    public static final RegistryObject<Item> RAW_ANATASE = ITEMS.register("raw_anatase", () ->
+            new Item(new Item.Properties().stacksTo(64))
+    );
+
+    public static final RegistryObject<Item> ELECTRUM_NUGGET = ITEMS.register("electrum_nugget", () ->
+            new Item(new Item.Properties().stacksTo(64))
+    );
+
+    public static final RegistryObject<Item> ELECTRUM_INGOT = ITEMS.register("electrum_ingot", () ->
+            new Item(new Item.Properties().stacksTo(64))
+    );
+
+    public static final RegistryObject<Item> RAW_ELECTRUM = ITEMS.register("raw_electrum", () ->
+            new Item(new Item.Properties().stacksTo(64))
+    );
+
+    public static final RegistryObject<Item> PRISMATIC_UPGRADE_SMITHING_TEMPLATE = ITEMS.register("prismatic_upgrade_smithing_template", () ->
             new Item(new Item.Properties().stacksTo(64))
     );
 

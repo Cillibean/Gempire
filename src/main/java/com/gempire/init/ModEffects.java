@@ -44,8 +44,17 @@ public class ModEffects {
     public static final RegistryObject<MobEffect> SHOCK_RESISTANCE = MOB_EFFECTS.register("shock_resistance",
             () -> new ShockResistanceEffect(MobEffectCategory.BENEFICIAL, 16117149));
 
+    public static final RegistryObject<MobEffect> FLORAL_PROTECTION = MOB_EFFECTS.register("floral_protection",
+            () -> new FloralProtectionEffect(MobEffectCategory.BENEFICIAL, 16760288));
+
+    public static final RegistryObject<MobEffect> SHADE = MOB_EFFECTS.register("shade",
+            () -> new ShadeEffect(MobEffectCategory.BENEFICIAL, 12566463));
+
+    public static final RegistryObject<MobEffect> BLUE_RESISTANCE = MOB_EFFECTS.register("blue_resistance",
+            () -> new BlueResistanceEffect(MobEffectCategory.BENEFICIAL, 6407149));
+
     public static final RegistryObject<MobEffect> ENTANGLEMENT = MOB_EFFECTS.register("entanglement",
-            () -> new EntangledEffect(MobEffectCategory.HARMFUL, 16775275).addAttributeModifier(Attributes.MOVEMENT_SPEED, "91AEAA56-376B-4498-935B-2F7F68070635", -0.20000000298023224, AttributeModifier.Operation.MULTIPLY_TOTAL));
+            () -> new EntangledEffect(MobEffectCategory.HARMFUL, 6923862).addAttributeModifier(Attributes.MOVEMENT_SPEED, "91AEAA56-376B-4498-935B-2F7F68070635", -0.20000000298023224, AttributeModifier.Operation.MULTIPLY_TOTAL));
 
     public static final RegistryObject<MobEffect> ELECTROCUTION = MOB_EFFECTS.register("electrocution",
             () -> new ElectrocutionEffect(MobEffectCategory.HARMFUL, 16775275));
