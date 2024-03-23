@@ -264,7 +264,7 @@ public class ModCreativeModeTabs {
                 populator.accept(ModItems.BROWN_SHARDS.get());
                 populator.accept(ModItems.SPECIAL_SHARDS.get());
 
-                populator.accept(ModItems.FUSCHIA_SHARDS.get());
+                populator.accept(ModItems.FUCHSIA_SHARDS.get());
                 populator.accept(ModItems.AMBER_SHARDS.get());
                 populator.accept(ModItems.COBALT_SHARDS.get());
                 populator.accept(ModItems.ALABASTER_SHARDS.get());

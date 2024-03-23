@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "thulite_ingot",
+  "ingredients": [
+    {
+      "item": "gempire:thulite_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "item": "gempire:thulite_ingot"
+  }
+}

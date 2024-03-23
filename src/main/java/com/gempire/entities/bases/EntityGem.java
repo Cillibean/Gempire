@@ -5,6 +5,10 @@ import com.gempire.entities.abilities.*;
 import com.gempire.entities.abilities.base.Ability;
 import com.gempire.entities.abilities.interfaces.*;
 import com.gempire.entities.gems.*;
+import com.gempire.entities.gems.starter.EntityMica;
+import com.gempire.entities.gems.starter.EntityNacre;
+import com.gempire.entities.gems.starter.EntityPebble;
+import com.gempire.entities.gems.starter.EntityShale;
 import com.gempire.entities.other.EntityAbomination;
 import com.gempire.entities.other.EntityCrawler;
 import com.gempire.entities.other.EntityShambler;
@@ -666,20 +670,22 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         AttributeModifier PRIME_SPEED = new AttributeModifier(UUID.randomUUID(), "gempirePrimarySpeedModifier", .2D, AttributeModifier.Operation.ADDITION);
         AttributeModifier DEFECTIVE = new AttributeModifier(UUID.randomUUID(), "gempireDefectiveModifier", -5D, AttributeModifier.Operation.ADDITION);
         AttributeModifier DEFECTIVE_SPEED = new AttributeModifier(UUID.randomUUID(), "gempireDefectiveSpeedModifier", -.1D, AttributeModifier.Operation.ADDITION);
-        if (this.isPrimary() && !(this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(PRIME_SPEED)) && !(this.getAttribute(Attributes.MAX_HEALTH).hasModifier(PRIME))) {
-            System.out.println("prime modifiers");
-            this.getAttribute(Attributes.MAX_HEALTH).addPermanentModifier(PRIME);
-            this.getAttribute(Attributes.MOVEMENT_SPEED).addPermanentModifier(PRIME_SPEED);
-            this.getAttribute(Attributes.ATTACK_DAMAGE).addPermanentModifier(PRIME);
-            this.getAttribute(Attributes.ATTACK_SPEED).addPermanentModifier(PRIME);
-            this.getAttribute(Attributes.KNOCKBACK_RESISTANCE).addPermanentModifier(PRIME);
-        } else if (this.isDefective() && !(this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(DEFECTIVE_SPEED)) && !(this.getAttribute(Attributes.MAX_HEALTH).hasModifier(DEFECTIVE))) {
-            System.out.println("off colour modifiers");
-            this.getAttribute(Attributes.MAX_HEALTH).addPermanentModifier(DEFECTIVE);
-            this.getAttribute(Attributes.MOVEMENT_SPEED).addPermanentModifier(DEFECTIVE_SPEED);
-            this.getAttribute(Attributes.ATTACK_DAMAGE).addPermanentModifier(DEFECTIVE);
-            this.getAttribute(Attributes.ATTACK_SPEED).addPermanentModifier(DEFECTIVE);
-            this.getAttribute(Attributes.KNOCKBACK_RESISTANCE).addPermanentModifier(DEFECTIVE);
+        if (!(this instanceof EntityNacre) && !(this instanceof EntityShale) && !(this instanceof EntityMica) && !(this instanceof EntityPebble)) {
+            if (this.isPrimary() && !(this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(PRIME_SPEED)) && !(this.getAttribute(Attributes.MAX_HEALTH).hasModifier(PRIME))) {
+                System.out.println("prime modifiers");
+                this.getAttribute(Attributes.MAX_HEALTH).addPermanentModifier(PRIME);
+                this.getAttribute(Attributes.MOVEMENT_SPEED).addPermanentModifier(PRIME_SPEED);
+                this.getAttribute(Attributes.ATTACK_DAMAGE).addPermanentModifier(PRIME);
+                this.getAttribute(Attributes.ATTACK_SPEED).addPermanentModifier(PRIME);
+                this.getAttribute(Attributes.KNOCKBACK_RESISTANCE).addPermanentModifier(PRIME);
+            } else if (this.isDefective() && !(this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(DEFECTIVE_SPEED)) && !(this.getAttribute(Attributes.MAX_HEALTH).hasModifier(DEFECTIVE))) {
+                System.out.println("off colour modifiers");
+                this.getAttribute(Attributes.MAX_HEALTH).addPermanentModifier(DEFECTIVE);
+                this.getAttribute(Attributes.MOVEMENT_SPEED).addPermanentModifier(DEFECTIVE_SPEED);
+                this.getAttribute(Attributes.ATTACK_DAMAGE).addPermanentModifier(DEFECTIVE);
+                this.getAttribute(Attributes.ATTACK_SPEED).addPermanentModifier(DEFECTIVE);
+                this.getAttribute(Attributes.KNOCKBACK_RESISTANCE).addPermanentModifier(DEFECTIVE);
+            }
         }
         this.readAbilityUtil(compound);
         this.readScale(compound);

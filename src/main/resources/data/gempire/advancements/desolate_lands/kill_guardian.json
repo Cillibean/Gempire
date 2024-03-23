@@ -12,7 +12,7 @@
     "frame": "task",
     "hidden": true
   },
-  "parent": "gempire:desolate_lands/root",
+  "parent": "gempire:desolate_lands/obtain_tear",
   "criteria": {
     "requirement": {
       "trigger": "minecraft:player_killed_entity",

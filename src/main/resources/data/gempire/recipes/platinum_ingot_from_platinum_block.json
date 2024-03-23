@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "platinum_ingot",
+  "ingredients": [
+    {
+      "item": "gempire:platinum_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "item": "gempire:platinum_ingot"
+  }
+}

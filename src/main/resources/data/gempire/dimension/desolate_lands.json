@@ -46,7 +46,7 @@
           "biome": "gempire:gilded_wastes",
           "parameters": {
             "temperature": 1,
-            "humidity": 1,
+            "humidity": 0.7,
             "continentalness": 1,
             "erosion": 0,
             "weirdness": 0.7,

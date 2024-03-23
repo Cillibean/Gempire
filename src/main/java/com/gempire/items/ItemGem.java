@@ -546,7 +546,7 @@ public class ItemGem extends Item {
 
     @Override
     public boolean onEntityItemUpdate(ItemStack stack, ItemEntity entity) {
-        this.Countdown(stack, entity);
+        this.countdown(stack, entity);
         return super.onEntityItemUpdate(stack, entity);
     }
 
@@ -559,7 +559,7 @@ public class ItemGem extends Item {
         stack.setTag(new CompoundTag());
     }
 
-    public void Countdown(ItemStack stack, ItemEntity entity) {
+    public void countdown(ItemStack stack, ItemEntity entity) {
             if (!getCracked(stack) && !getSludged(stack)) {
                 if (stack.getOrCreateTag().contains("assignedID")) {
                     System.out.println("assigned id " + stack.getOrCreateTag().getUUID("assignedID"));

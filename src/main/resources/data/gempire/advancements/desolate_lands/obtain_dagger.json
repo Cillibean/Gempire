@@ -1,0 +1,30 @@
+{
+  "display": {
+    "icon": {
+      "item": "gempire:huntress_dagger"
+    },
+    "title": {
+      "translate": "advancements.gempire.desolate_lands.dagger.title"
+    },
+    "description": {
+      "translate": "advancements.gempire.desolate_lands.dagger.description"
+    },
+    "frame": "task",
+    "hidden": false
+  },
+  "parent": "gempire:desolate_lands/root",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "gempire:huntress_dagger"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

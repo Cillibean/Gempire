@@ -2302,7 +2302,7 @@ public class ModItems {
             new ItemChroma(new Item.Properties().stacksTo(64), 16));
 
 
-    public static final RegistryObject<Item> FUSCHIA_SHARDS = ITEMS.register("fuschia_shards", () ->
+    public static final RegistryObject<Item> FUCHSIA_SHARDS = ITEMS.register("fuchsia_shards", () ->
             new ItemBossShard(new Item.Properties().stacksTo(64)));
 
     public static final RegistryObject<Item> AMBER_SHARDS = ITEMS.register("amber_shards", () ->

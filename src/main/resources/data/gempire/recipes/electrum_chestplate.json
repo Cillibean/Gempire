@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "F F",
+    "IFI",
+    "SIS"
+  ],
+  "key": {
+    "I": {
+      "item": "gempire:electrum_ingot"
+    },
+    "F": {
+      "item": "gempire:shock_berry"
+    },
+    "S": {
+      "item": "gempire:yellow_shards"
+    }
+  },
+  "result": {
+    "item": "gempire:electrum_chestplate"
+  }
+}

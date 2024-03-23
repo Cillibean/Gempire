@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "electrum_ingot",
+  "ingredients": [
+    {
+      "item": "gempire:electrum_ingot"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "item": "gempire:electrum_nugget"
+  }
+}

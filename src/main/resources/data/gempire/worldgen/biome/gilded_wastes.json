@@ -10,7 +10,16 @@
     "grass_color": 13416238,
     "foliage_color": 12366132
   },
-  "spawners": {},
+  "spawners": {
+    "monster": [
+      {
+        "type": "gempire:hunter",
+        "weight": 1,
+        "minCount": 1,
+        "maxCount": 3
+      }
+    ]
+  },
   "spawn_costs": {},
   "carvers": {},
   "features": []

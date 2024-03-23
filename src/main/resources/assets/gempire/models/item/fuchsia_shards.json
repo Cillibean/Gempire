@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "gempire:item/fuschia_shards"
+    "layer0": "gempire:item/fuchsia_shards"
   }
 }
