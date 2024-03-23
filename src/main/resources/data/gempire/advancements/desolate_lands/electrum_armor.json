@@ -1,0 +1,45 @@
+{
+  "display": {
+    "icon": {
+      "item": "gempire:electrum_chestplate"
+    },
+    "title": {
+      "translate": "advancements.gempire.desolate_lands.electrum_armor.title"
+    },
+    "description": {
+      "translate": "advancements.gempire.desolate_lands.electrum_armor.description"
+    },
+    "frame": "task",
+    "hidden": false
+  },
+  "parent": "gempire:desolate_lands/obtain_electrum",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "gempire:electrum_helmet"
+            ]
+          },
+          {
+            "items": [
+              "gempire:electrum_chestplate"
+            ]
+          },
+          {
+            "items": [
+              "gempire:electrum_leggings"
+            ]
+          },
+          {
+            "items": [
+              "gempire:electrum_boots"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

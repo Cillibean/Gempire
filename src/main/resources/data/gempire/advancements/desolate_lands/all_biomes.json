@@ -1,0 +1,174 @@
+{
+  "criteria": {
+    "gempire:abnormal_beach": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "biome": "gempire:abnormal_beach"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    },
+    "gempire:distant_forest": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "biome": "gempire:distant_forest"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    },
+    "gempire:gilded_wastes": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "biome": "gempire:gilded_wastes"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    },
+    "gempire:iridescent_overgrowth": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "biome": "gempire:iridescent_overgrowth"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    },
+    "gempire:mirrored_skies": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "biome": "gempire:mirrored_skies"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    },
+    "gempire:peculiar_precipice": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "biome": "gempire:peculiar_precipice"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    },
+    "gempire:prismatic_gates": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "biome": "gempire:prismatic_gates"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    },
+    "gempire:unearthly_jungle": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "biome": "gempire:unearthly_jungle"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    }
+  },
+  "display": {
+    "icon": {
+      "item": "minecraft:brush"
+    },
+    "title": {
+      "translate": "advancements.gempire.desolate_lands.all_biomes.title"
+    },
+    "description": {
+      "translate": "advancements.gempire.desolate_lands.all_biomes.description"
+    },
+    "frame": "challenge",
+    "announce_to_chat": true,
+    "hidden": true,
+    "show_toast": true
+  },
+  "parent": "gempire:desolate_lands/root",
+  "requirements": [
+    [
+      "gempire:abnormal_beach"
+    ],
+    [
+      "gempire:distant_forest"
+    ],
+    [
+      "gempire:gilded_wastes"
+    ],
+    [
+      "gempire:iridescent_overgrowth"
+    ],
+    [
+      "gempire:mirrored_skies"
+    ],
+    [
+      "gempire:peculiar_precipice"
+    ],
+    [
+      "gempire:prismatic_gates"
+    ],
+    [
+      "gempire:unearthly_jungle"
+    ]
+  ]
+}

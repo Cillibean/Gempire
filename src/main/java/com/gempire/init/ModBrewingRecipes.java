@@ -10,7 +10,5 @@ public class ModBrewingRecipes {
                 ModItems.SHOCK_BERRY.get(), ModPotions.SHOCK_RESISTANCE_POTION.get()));
         BrewingRecipeRegistry.addRecipe(new BetterBrewingRecipe(Potions.AWKWARD,
                 ModItems.AMBER_SHARDS.get(), ModPotions.ELECTROCUTION_POTION.get()));
-        BrewingRecipeRegistry.addRecipe(new BetterBrewingRecipe(Potions.AWKWARD,
-                ModItems.ALABASTER_SHARDS.get(), ModPotions.BLINDING_LIGHT_POTION.get()));
     }
 }

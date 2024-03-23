@@ -1,5 +1,6 @@
 {
   "parent": "minecraft:block/cross",
+  "render_type": "translucent",
   "textures": {
     "cross": "gempire:block/shock_berry_bush_stage1"
   }

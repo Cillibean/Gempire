@@ -1,0 +1,30 @@
+{
+  "display": {
+    "icon": {
+      "item": "gempire:thulite_ingot"
+    },
+    "title": {
+      "translate": "advancements.gempire.desolate_lands.thulite.title"
+    },
+    "description": {
+      "translate": "advancements.gempire.desolate_lands.thulite.description"
+    },
+    "frame": "task",
+    "hidden": false
+  },
+  "parent": "gempire:desolate_lands/root",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "gempire:thulite_ingot"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

@@ -12,6 +12,7 @@ import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ArmorMaterials;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.common.util.Lazy;
 
 import java.util.EnumMap;
@@ -52,6 +53,42 @@ public enum ModArmorMaterials implements ArmorMaterial {
         p_266655_.put(ArmorItem.Type.HELMET, 4);
     }), 15, SoundEvents.ARMOR_EQUIP_NETHERITE, 3F, 0.05F, () -> {
         return Ingredient.of(ModItems.SPECIAL_SHARDS.get());
+    }),
+
+    THULITE("thulite", 33, Util.make(new EnumMap<>(ArmorItem.Type.class), (p_266649_) -> {
+        p_266649_.put(ArmorItem.Type.BOOTS, 2);
+        p_266649_.put(ArmorItem.Type.LEGGINGS, 5);
+        p_266649_.put(ArmorItem.Type.CHESTPLATE, 7);
+        p_266649_.put(ArmorItem.Type.HELMET, 3);
+    }), 10, SoundEvents.ARMOR_EQUIP_DIAMOND, 2.0F, 0.0F, () -> {
+        return Ingredient.of(ModItems.THULITE_INGOT.get());
+    }),
+
+    ELECTRUM("electrum", 33, Util.make(new EnumMap<>(ArmorItem.Type.class), (p_266649_) -> {
+        p_266649_.put(ArmorItem.Type.BOOTS, 2);
+        p_266649_.put(ArmorItem.Type.LEGGINGS, 5);
+        p_266649_.put(ArmorItem.Type.CHESTPLATE, 7);
+        p_266649_.put(ArmorItem.Type.HELMET, 3);
+    }), 10, SoundEvents.ARMOR_EQUIP_DIAMOND, 2.0F, 0.0F, () -> {
+        return Ingredient.of(ModItems.ELECTRUM_INGOT.get());
+    }),
+
+    ANATASE("anatase", 33, Util.make(new EnumMap<>(ArmorItem.Type.class), (p_266649_) -> {
+        p_266649_.put(ArmorItem.Type.BOOTS, 2);
+        p_266649_.put(ArmorItem.Type.LEGGINGS, 5);
+        p_266649_.put(ArmorItem.Type.CHESTPLATE, 7);
+        p_266649_.put(ArmorItem.Type.HELMET, 3);
+    }), 10, SoundEvents.ARMOR_EQUIP_DIAMOND, 2.0F, 0.0F, () -> {
+        return Ingredient.of(ModItems.ANATASE_INGOT.get());
+    }),
+
+    PLATINUM("platinum", 33, Util.make(new EnumMap<>(ArmorItem.Type.class), (p_266649_) -> {
+        p_266649_.put(ArmorItem.Type.BOOTS, 2);
+        p_266649_.put(ArmorItem.Type.LEGGINGS, 5);
+        p_266649_.put(ArmorItem.Type.CHESTPLATE, 7);
+        p_266649_.put(ArmorItem.Type.HELMET, 3);
+    }), 10, SoundEvents.ARMOR_EQUIP_DIAMOND, 2.0F, 0.0F, () -> {
+        return Ingredient.of(ModItems.PLATINUM_INGOT.get());
     });
 
     private static final EnumMap<ArmorItem.Type, Integer> HEALTH_FUNCTION_FOR_TYPE = Util.make(new EnumMap<>(ArmorItem.Type.class), (p_266653_) -> {

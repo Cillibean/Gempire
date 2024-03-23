@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "FIF",
+    "F F"
+  ],
+  "key": {
+    "I": {
+      "item": "gempire:shock_berry"
+    },
+    "F": {
+      "item": "gempire:electrum_ingot"
+    }
+  },
+  "result": {
+    "item": "gempire:electrum_helmet"
+  }
+}

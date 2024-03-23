@@ -1,0 +1,45 @@
+{
+  "display": {
+    "icon": {
+      "item": "gempire:platinum_chestplate"
+    },
+    "title": {
+      "translate": "advancements.gempire.desolate_lands.platinum_armor.title"
+    },
+    "description": {
+      "translate": "advancements.gempire.desolate_lands.platinum_armor.description"
+    },
+    "frame": "task",
+    "hidden": false
+  },
+  "parent": "gempire:desolate_lands/obtain_platinum",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "gempire:platinum_helmet"
+            ]
+          },
+          {
+            "items": [
+              "gempire:platinum_chestplate"
+            ]
+          },
+          {
+            "items": [
+              "gempire:platinum_leggings"
+            ]
+          },
+          {
+            "items": [
+              "gempire:platinum_boots"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

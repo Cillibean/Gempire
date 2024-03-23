@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "cookingtime": 200,
+  "experience": 0.7,
+  "group": "anatase_ingot",
+  "ingredient": {
+    "item": "gempire:raw_anatase"
+  },
+  "result": "gempire:anatase_ingot"
+}

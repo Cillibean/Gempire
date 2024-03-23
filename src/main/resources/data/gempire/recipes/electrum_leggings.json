@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "FIF",
+    "F F",
+    "S S"
+  ],
+  "key": {
+    "I": {
+      "item": "gempire:yellow_shards"
+    },
+    "F": {
+      "item": "gempire:electrum_ingot"
+    },
+    "S": {
+      "item": "gempire:shock_berry"
+    }
+  },
+  "result": {
+    "item": "gempire:electrum_leggings"
+  }
+}

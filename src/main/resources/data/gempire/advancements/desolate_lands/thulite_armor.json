@@ -1,0 +1,45 @@
+{
+  "display": {
+    "icon": {
+      "item": "gempire:thulite_chestplate"
+    },
+    "title": {
+      "translate": "advancements.gempire.desolate_lands.thulite_armor.title"
+    },
+    "description": {
+      "translate": "advancements.gempire.desolate_lands.thulite_armor.description"
+    },
+    "frame": "task",
+    "hidden": false
+  },
+  "parent": "gempire:desolate_lands/obtain_thulite",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "gempire:thulite_helmet"
+            ]
+          },
+          {
+            "items": [
+              "gempire:thulite_chestplate"
+            ]
+          },
+          {
+            "items": [
+              "gempire:thulite_leggings"
+            ]
+          },
+          {
+            "items": [
+              "gempire:thulite_boots"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

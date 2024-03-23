@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "anatase_ingot",
+  "ingredients": [
+    {
+      "item": "gempire:anatase_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "item": "gempire:anatase_ingot"
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "display": {
+    "icon": {
+      "item": "gempire:anatase_chestplate"
+    },
+    "title": {
+      "translate": "advancements.gempire.desolate_lands.anatase_armor.title"
+    },
+    "description": {
+      "translate": "advancements.gempire.desolate_lands.anatase_armor.description"
+    },
+    "frame": "task",
+    "hidden": false
+  },
+  "parent": "gempire:desolate_lands/obtain_anatase",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "gempire:anatase_helmet"
+            ]
+          },
+          {
+            "items": [
+              "gempire:anatase_chestplate"
+            ]
+          },
+          {
+            "items": [
+              "gempire:anatase_leggings"
+            ]
+          },
+          {
+            "items": [
+              "gempire:anatase_boots"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

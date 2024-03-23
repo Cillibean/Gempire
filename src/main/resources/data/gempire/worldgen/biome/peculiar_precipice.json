@@ -8,7 +8,13 @@
     "water_color": 12440534,
     "water_fog_color": 13293272,
     "grass_color": 12111496,
-    "foliage_color": 11124871
+    "foliage_color": 11124871,
+    "music": {
+      "sound": "gempire:remnants",
+      "min_delay": 0,
+      "max_delay": 100,
+      "replace_current_music": false
+    }
   },
   "spawners": {},
   "spawn_costs": {},

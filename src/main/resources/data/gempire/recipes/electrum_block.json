@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "gempire:electrum_ingot"
+    }
+  },
+  "result": {
+    "item": "gempire:electrum_block"
+  }
+}

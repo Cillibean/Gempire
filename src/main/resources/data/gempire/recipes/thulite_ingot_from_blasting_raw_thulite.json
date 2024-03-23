@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:blasting",
+  "cookingtime": 100,
+  "experience": 0.7,
+  "group": "thulite_ingot",
+  "ingredient": {
+    "item": "gempire:raw_thulite"
+  },
+  "result": "gempire:thulite_ingot"
+}

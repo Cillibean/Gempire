@@ -1,7 +1,7 @@
 {
   "display": {
     "icon": {
-      "item": "gempire:amber_shards"
+      "item": "gempire:alabaster_shards"
     },
     "title": {
       "translate": "advancements.gempire.desolate_lands.kill_empress.title"
@@ -12,7 +12,7 @@
     "frame": "task",
     "hidden": true
   },
-  "parent": "gempire:desolate_lands/root",
+  "parent": "gempire:desolate_lands/obtain_star",
   "criteria": {
     "requirement": {
       "trigger": "minecraft:player_killed_entity",

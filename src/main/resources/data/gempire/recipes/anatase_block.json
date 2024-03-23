@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "gempire:anatase_ingot"
+    }
+  },
+  "result": {
+    "item": "gempire:anatase_block"
+  }
+}
