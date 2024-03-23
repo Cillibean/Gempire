@@ -2402,12 +2402,7 @@ public class ModBlocks {
     );
 
     public static final RegistryObject<Block> SHOCK_BERRY_BUSH = BLOCKS.register("shock_berry_bush", () ->
-            new ShockBerryBushBlock(Block.Properties.of()
-                    .strength(3.0f, 4.0f)
-                    .sound(SoundType.SWEET_BERRY_BUSH)
-                    .noOcclusion()
-                    .noCollission()
-            )
+            new ShockBerryBushBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).randomTicks().noCollission().sound(SoundType.SWEET_BERRY_BUSH).pushReaction(PushReaction.DESTROY))
     );
 
     public static final RegistryObject<Block> STRAWBERRY_BLOCK = BLOCKS.register("strawberry_block", () ->

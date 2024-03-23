@@ -36,13 +36,16 @@ public class ModEffects {
     public static final RegistryObject<MobEffect> HUNTRESS = MOB_EFFECTS.register("huntress",
             () -> new HuntressArmorEffect(MobEffectCategory.BENEFICIAL, 16117149).addAttributeModifier(Attributes.ATTACK_DAMAGE, "648D7064-6A60-4F59-8ABE-C2C23A6DD7A9", 2.0D, AttributeModifier.Operation.ADDITION));
     public static final RegistryObject<MobEffect> EMPRESS = MOB_EFFECTS.register("empress",
-            () -> new EmpressArmorEffect(MobEffectCategory.BENEFICIAL, 16250871));
+            () -> new EmpressArmorEffect(MobEffectCategory.BENEFICIAL, 16250871).addAttributeModifier(Attributes.MOVEMENT_SPEED, "91AEAA56-376B-4498-935B-2F7F68070635", 0.20000000298023224, AttributeModifier.Operation.MULTIPLY_TOTAL));
 
     public static final RegistryObject<MobEffect> GUARDIANS_GRACE = MOB_EFFECTS.register("guardians_grace",
             () -> new GaurdianArmorEffect(MobEffectCategory.BENEFICIAL, 10343413));
 
     public static final RegistryObject<MobEffect> SHOCK_RESISTANCE = MOB_EFFECTS.register("shock_resistance",
             () -> new ShockResistanceEffect(MobEffectCategory.BENEFICIAL, 16117149));
+
+    public static final RegistryObject<MobEffect> ENTANGLEMENT = MOB_EFFECTS.register("entanglement",
+            () -> new EntangledEffect(MobEffectCategory.HARMFUL, 16775275).addAttributeModifier(Attributes.MOVEMENT_SPEED, "91AEAA56-376B-4498-935B-2F7F68070635", -0.20000000298023224, AttributeModifier.Operation.MULTIPLY_TOTAL));
 
     public static final RegistryObject<MobEffect> ELECTROCUTION = MOB_EFFECTS.register("electrocution",
             () -> new ElectrocutionEffect(MobEffectCategory.HARMFUL, 16775275));

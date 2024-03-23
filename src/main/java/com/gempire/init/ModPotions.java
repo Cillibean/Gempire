@@ -19,6 +19,4 @@ public class ModPotions {
     public static final RegistryObject<Potion> ELECTROCUTION_POTION = POTIONS.register("electrocution_potion",
             () -> new Potion(new MobEffectInstance(ModEffects.ELECTROCUTION.get(), 100, 0)));
 
-    public static final RegistryObject<Potion> BLINDING_LIGHT_POTION = POTIONS.register("blinding_light_potion",
-            () -> new Potion(new MobEffectInstance(ModEffects.BLINDING_LIGHT.get(), 400, 0)));
 }

@@ -3,8 +3,6 @@ package com.gempire.entities.other;
 import com.gempire.entities.bases.EntityGem;
 import com.gempire.init.ModEffects;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -14,15 +12,12 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
-import net.minecraft.world.entity.animal.IronGolem;
-import net.minecraft.world.entity.animal.Turtle;
-import net.minecraft.world.entity.animal.Wolf;
-import net.minecraft.world.entity.monster.AbstractSkeleton;
 import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Arrow;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
+import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.ProjectileWeaponItem;
@@ -47,9 +42,12 @@ public class EntityHunter extends PathfinderMob implements RangedAttackMob {
         this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 1.0));
         this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(6, new RandomLookAroundGoal(this));
+        RangedBowAttackGoal<EntityHunter> goal = new RangedBowAttackGoal<>(this, 1.0, 20, 15.0F);
+        goal.setMinAttackInterval(60);
+        this.goalSelector.addGoal(4, goal);
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this, new Class[0]));
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal(this, Player.class, true));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal(this, EntityGem.class, true));
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, EntityGem.class, true));
     }
 
     @Nullable
@@ -68,29 +66,50 @@ public class EntityHunter extends PathfinderMob implements RangedAttackMob {
         }
     }
 
-    @Override
-    public void performRangedAttack(LivingEntity target, float distanceFactor) {
-        ItemStack itemstack = this.getProjectile(this.getItemInHand(ProjectileUtil.getWeaponHoldingHand(this, item -> item instanceof net.minecraft.world.item.BowItem)));
-        AbstractArrow abstractarrow = this.getArrow(itemstack, distanceFactor);
-        if (this.getMainHandItem().getItem() instanceof net.minecraft.world.item.BowItem)
-            abstractarrow = ((net.minecraft.world.item.BowItem) this.getMainHandItem().getItem()).customArrow(abstractarrow);
-        double d0 = target.getX() - this.getX();
-        double d1 = target.getY(0.3333333333333333D) - abstractarrow.getY();
-        double d2 = target.getZ() - this.getZ();
-        double d3 = Math.sqrt(d0 * d0 + d2 * d2);
-        if (abstractarrow instanceof Arrow) {
-            ((Arrow) abstractarrow).addEffect(new MobEffectInstance(ModEffects.ELECTROCUTION.get(), 60));
+    public void performRangedAttack(LivingEntity p_32141_, float p_32142_) {
+        ItemStack itemstack = this.getProjectile(this.getItemInHand(ProjectileUtil.getWeaponHoldingHand(this, (item) -> {
+            return item instanceof BowItem;
+        })));
+        AbstractArrow abstractarrow = this.getArrow(itemstack, p_32142_);
+        if (this.getMainHandItem().getItem() instanceof BowItem) {
+            abstractarrow = ((BowItem)this.getMainHandItem().getItem()).customArrow(abstractarrow);
         }
-        abstractarrow.shoot(d0, d1 + d3 * (double) 0.2F, d2, 1.6F, (float) (14 - this.level().getDifficulty().getId() * 4));
+
+        double d0 = p_32141_.getX() - this.getX();
+        double d1 = p_32141_.getY(0.3333333333333333) - abstractarrow.getY();
+        double d2 = p_32141_.getZ() - this.getZ();
+        double d3 = Math.sqrt(d0 * d0 + d2 * d2);
+        abstractarrow.shoot(d0, d1 + d3 * 0.20000000298023224, d2, 1.6F, (float)(14 - this.level().getDifficulty().getId() * 4));
         this.playSound(SoundEvents.SKELETON_SHOOT, 1.0F, 1.0F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
         this.level().addFreshEntity(abstractarrow);
     }
 
     protected AbstractArrow getArrow(ItemStack p_32156_, float p_32157_) {
-        return ProjectileUtil.getMobArrow(this, p_32156_, p_32157_);
+        AbstractArrow $$2 = ProjectileUtil.getMobArrow(this, p_32156_, p_32157_);
+        if ($$2 instanceof Arrow) {
+            ((Arrow)$$2).addEffect(new MobEffectInstance(ModEffects.ELECTROCUTION.get(), 20));
+        }
+        return $$2;
     }
 
     public boolean canFireProjectileWeapon(ProjectileWeaponItem p_32144_) {
         return p_32144_ == Items.BOW;
+    }
+
+    public void rideTick() {
+        super.rideTick();
+        Entity entity = this.getControlledVehicle();
+        if (entity instanceof PathfinderMob pathfindermob) {
+            this.yBodyRot = pathfindermob.yBodyRot;
+        }
+
+    }
+
+    protected float getStandingEyeHeight(Pose p_32154_, EntityDimensions p_32155_) {
+        return 1.74F;
+    }
+
+    public double getMyRidingOffset() {
+        return -0.6;
     }
 }

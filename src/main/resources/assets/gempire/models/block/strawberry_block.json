@@ -1,6 +1,12 @@
 {
-  "parent": "block/cube_all",
+  "parent": "minecraft:block/cube",
   "textures": {
-    "all": "gempire:block/strawberry_block"
+    "down": "gempire:block/strawberry_block_bottom",
+    "east": "gempire:block/strawberry_block",
+    "north": "gempire:block/strawberry_block",
+    "particle": "gempire:block/strawberry_block",
+    "south": "gempire:block/strawberry_block",
+    "up": "gempire:block/strawberry_block_top",
+    "west": "gempire:block/strawberry_block"
   }
 }

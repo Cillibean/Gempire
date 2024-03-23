@@ -496,6 +496,9 @@
   "item.gempire.prismatic_axe": "Prismatic Axe",
   "item.gempire.prismatic_hoe": "Prismatic Hoe",
 
+  "item.gempire.prismatic_flask": "Prismatic Flask",
+  "item.gempire.prismatic_shears": "Prismatic Shears",
+
   "item.gempire.injector_panel": "Injector Remote",
   "item.gempire.prismatic_ingot": "Prismatic Ingot",
   "item.gempire.gem_scrap": "Gem Scrap",
@@ -744,6 +747,7 @@
   "entity.gempire.iridescent_paladin": "Iridescent Paladin",
 
   "effect.gempire.paralysis": "Paralysis",
+  "effect.gempire.entanglement": "Entangled",
   "effect.gempire.electrocution": "Electrocuted",
   "effect.gempire.blinding_light": "Blinding Light",
   "effect.gempire.shock_resistance": "Shock Resistance",
