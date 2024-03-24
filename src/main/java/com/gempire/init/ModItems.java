@@ -708,6 +708,104 @@ public class ModItems {
             new Item(new Item.Properties().food(ModFoods.CRYSTAL_APPLE))
     );
 
+    public static final RegistryObject<Item> KALEIDOSCOPE_LOG = ITEMS.register("kaleidoscope_log", () ->
+            new BlockItem(
+                    ModBlocks.KALEIDOSCOPE_LOG.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> STRIPPED_KALEIDOSCOPE_LOG = ITEMS.register("stripped_kaleidoscope_log", () ->
+            new BlockItem(
+                    ModBlocks.STRIPPED_KALEIDOSCOPE_LOG.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> KALEIDOSCOPE_WOOD = ITEMS.register("kaleidoscope_wood", () ->
+            new BlockItem(
+                    ModBlocks.KALEIDOSCOPE_WOOD.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> STRIPPED_KALEIDOSCOPE_WOOD = ITEMS.register("stripped_kaleidoscope_wood", () ->
+            new BlockItem(
+                    ModBlocks.STRIPPED_KALEIDOSCOPE_WOOD.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> KALEIDOSCOPE_LEAVES = ITEMS.register("kaleidoscope_leaves", () ->
+            new BlockItem(
+                    ModBlocks.KALEIDOSCOPE_LEAVES.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> KALEIDOSCOPE_SAPLING = ITEMS.register("kaleidoscope_sapling", () ->
+            new BlockItem(
+                    ModBlocks.KALEIDOSCOPE_SAPLING.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> KALEIDOSCOPE_PLANKS = ITEMS.register("kaleidoscope_planks", () ->
+            new BlockItem(
+                    ModBlocks.KALEIDOSCOPE_PLANKS.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> KALEIDOSCOPE_SLAB = ITEMS.register("kaleidoscope_slab", () ->
+            new BlockItem(
+                    ModBlocks.KALEIDOSCOPE_SLAB.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> KALEIDOSCOPE_FENCE = ITEMS.register("kaleidoscope_fence", () ->
+            new BlockItem(
+                    ModBlocks.KALEIDOSCOPE_FENCE.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> KALEIDOSCOPE_FENCE_GATE = ITEMS.register("kaleidoscope_fence_gate", () ->
+            new BlockItem(
+                    ModBlocks.KALEIDOSCOPE_FENCE_GATE.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> KALEIDOSCOPE_DOOR = ITEMS.register("kaleidoscope_door", () ->
+            new BlockItem(
+                    ModBlocks.KALEIDOSCOPE_DOOR.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> KALEIDOSCOPE_TRAPDOOR = ITEMS.register("kaleidoscope_trapdoor", () ->
+            new BlockItem(
+                    ModBlocks.KALEIDOSCOPE_TRAPDOOR.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> KALEIDOSCOPE_STAIRS = ITEMS.register("kaleidoscope_stairs", () ->
+            new BlockItem(
+                    ModBlocks.KALEIDOSCOPE_STAIRS.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> KALEIDOSCOPE_SIGN = ITEMS.register("kaleidoscope_sign",
+            () -> new SignItem(new Item.Properties().stacksTo(16), ModBlocks.KALEIDOSCOPE_SIGN.get(), ModBlocks.KALEIDOSCOPE_WALL_SIGN.get()));
+    public static final RegistryObject<Item> KALEIDOSCOPE_HANGING_SIGN = ITEMS.register("kaleidoscope_hanging_sign",
+            () -> new HangingSignItem(ModBlocks.KALEIDOSCOPE_HANGING_SIGN.get(), ModBlocks.KALEIDOSCOPE_WALL_HANGING_SIGN.get(),
+                    new Item.Properties().stacksTo(16)));
+
+
     public static final RegistryObject<Item> DISTANT_LOG = ITEMS.register("distant_log", () ->
             new BlockItem(
                     ModBlocks.DISTANT_LOG.get(),
@@ -749,6 +847,61 @@ public class ModItems {
                     new Item.Properties()
             )
     );
+
+    public static final RegistryObject<Item> DISTANT_PLANKS = ITEMS.register("distant_planks", () ->
+            new BlockItem(
+                    ModBlocks.DISTANT_PLANKS.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> DISTANT_SLAB = ITEMS.register("distant_slab", () ->
+            new BlockItem(
+                    ModBlocks.DISTANT_SLAB.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> DISTANT_FENCE = ITEMS.register("distant_fence", () ->
+            new BlockItem(
+                    ModBlocks.DISTANT_FENCE.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> DISTANT_FENCE_GATE = ITEMS.register("distant_fence_gate", () ->
+            new BlockItem(
+                    ModBlocks.DISTANT_FENCE_GATE.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> DISTANT_DOOR = ITEMS.register("distant_door", () ->
+            new BlockItem(
+                    ModBlocks.DISTANT_DOOR.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> DISTANT_TRAPDOOR = ITEMS.register("distant_trapdoor", () ->
+            new BlockItem(
+                    ModBlocks.DISTANT_TRAPDOOR.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> DISTANT_STAIRS = ITEMS.register("distant_stairs", () ->
+            new BlockItem(
+                    ModBlocks.DISTANT_STAIRS.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> DISTANT_SIGN = ITEMS.register("distant_sign",
+            () -> new SignItem(new Item.Properties().stacksTo(16), ModBlocks.DISTANT_SIGN.get(), ModBlocks.DISTANT_WALL_SIGN.get()));
+    public static final RegistryObject<Item> DISTANT_HANGING_SIGN = ITEMS.register("distant_hanging_sign",
+            () -> new HangingSignItem(ModBlocks.DISTANT_HANGING_SIGN.get(), ModBlocks.DISTANT_WALL_HANGING_SIGN.get(),
+                    new Item.Properties().stacksTo(16)));
 
 
     public static final RegistryObject<Item> PINK_ESSENCE_BUCKET = ITEMS.register("pink_essence_bucket", () ->

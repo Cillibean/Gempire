@@ -7,6 +7,10 @@
     "gempire:crystal_wood",
     "gempire:crystal_log",
     "gempire:stripped_crystal_log",
-    "gempire:stripped_crystal_wood"
+    "gempire:stripped_crystal_wood",
+    "gempire:kaleidoscope_wood",
+    "gempire:kaleidoscope_log",
+    "gempire:stripped_kaleidoscope_log",
+    "gempire:stripped_kaleidoscope_wood"
   ]
 }

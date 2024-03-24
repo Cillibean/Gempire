@@ -665,6 +665,27 @@ public class ModCreativeModeTabs {
                 populator.accept(ModItems.STRIPPED_DISTANT_WOOD.get());
                 populator.accept(ModItems.DISTANT_LEAVES.get());
                 populator.accept(ModItems.DISTANT_SAPLING.get());
+                populator.accept(ModItems.DISTANT_PLANKS.get());
+                populator.accept(ModItems.DISTANT_SLAB.get());
+                populator.accept(ModItems.DISTANT_STAIRS.get());
+                populator.accept(ModItems.DISTANT_FENCE.get());
+                populator.accept(ModItems.DISTANT_FENCE_GATE.get());
+                populator.accept(ModItems.DISTANT_SIGN.get());
+                populator.accept(ModItems.DISTANT_HANGING_SIGN.get());
+
+                populator.accept(ModItems.KALEIDOSCOPE_LOG.get());
+                populator.accept(ModItems.STRIPPED_KALEIDOSCOPE_LOG.get());
+                populator.accept(ModItems.KALEIDOSCOPE_WOOD.get());
+                populator.accept(ModItems.STRIPPED_KALEIDOSCOPE_WOOD.get());
+                populator.accept(ModItems.KALEIDOSCOPE_LEAVES.get());
+                populator.accept(ModItems.KALEIDOSCOPE_SAPLING.get());
+                populator.accept(ModItems.KALEIDOSCOPE_PLANKS.get());
+                populator.accept(ModItems.KALEIDOSCOPE_SLAB.get());
+                populator.accept(ModItems.KALEIDOSCOPE_STAIRS.get());
+                populator.accept(ModItems.KALEIDOSCOPE_FENCE.get());
+                populator.accept(ModItems.KALEIDOSCOPE_FENCE_GATE.get());
+                populator.accept(ModItems.KALEIDOSCOPE_SIGN.get());
+                populator.accept(ModItems.KALEIDOSCOPE_HANGING_SIGN.get());
 
                 populator.accept(ModItems.RED_LATTICE.get());
                 populator.accept(ModItems.ORANGE_LATTICE.get());

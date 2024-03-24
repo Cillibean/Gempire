@@ -42,24 +42,35 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockWithItem(ModBlocks.PRISMATIC_BLOCK);
 
         blockWithItem(ModBlocks.STRAWBERRY_BLOCK);
-        /*
 
         blockWithItem(ModBlocks.DISTANT_PLANKS);
+        blockWithItem(ModBlocks.KALEIDOSCOPE_PLANKS);
 
         stairsBlock((StairBlock) ModBlocks.DISTANT_STAIRS.get(), blockTexture(ModBlocks.DISTANT_PLANKS.get()));
         slabBlock((SlabBlock) ModBlocks.DISTANT_SLAB.get(), blockTexture(ModBlocks.DISTANT_PLANKS.get()), blockTexture(ModBlocks.DISTANT_PLANKS.get()));
 
+        stairsBlock((StairBlock) ModBlocks.KALEIDOSCOPE_STAIRS.get(), blockTexture(ModBlocks.KALEIDOSCOPE_PLANKS.get()));
+        slabBlock((SlabBlock) ModBlocks.KALEIDOSCOPE_SLAB.get(), blockTexture(ModBlocks.KALEIDOSCOPE_PLANKS.get()), blockTexture(ModBlocks.KALEIDOSCOPE_PLANKS.get()));
+
         fenceBlock((FenceBlock) ModBlocks.DISTANT_FENCE.get(), blockTexture(ModBlocks.DISTANT_PLANKS.get()));
         fenceGateBlock((FenceGateBlock) ModBlocks.DISTANT_FENCE_GATE.get(), blockTexture(ModBlocks.DISTANT_PLANKS.get()));
 
+        fenceBlock((FenceBlock) ModBlocks.KALEIDOSCOPE_FENCE.get(), blockTexture(ModBlocks.KALEIDOSCOPE_PLANKS.get()));
+        fenceGateBlock((FenceGateBlock) ModBlocks.KALEIDOSCOPE_FENCE_GATE.get(), blockTexture(ModBlocks.KALEIDOSCOPE_PLANKS.get()));
+        /*
         doorBlockWithRenderType((DoorBlock)ModBlocks.DISTANT_DOOR.get(), modLoc("block/distant_door_bottom"), modLoc("block/distant_door_top"), "cutout");
         trapdoorBlockWithRenderType((TrapDoorBlock) ModBlocks.DISTANT_TRAPDOOR.get(), modLoc("block/distant_trapdoor"), true, "cutout");
 
+         */
 
         blockItem(ModBlocks.DISTANT_STAIRS);
         blockItem(ModBlocks.DISTANT_SLAB);
         blockItem(ModBlocks.DISTANT_FENCE_GATE);
-        blockItem(ModBlocks.DISTANT_TRAPDOOR, "_bottom");
+        //blockItem(ModBlocks.DISTANT_TRAPDOOR, "_bottom");
+
+        blockItem(ModBlocks.KALEIDOSCOPE_STAIRS);
+        blockItem(ModBlocks.KALEIDOSCOPE_SLAB);
+        blockItem(ModBlocks.KALEIDOSCOPE_FENCE_GATE);
 
 
         logBlock(((RotatedPillarBlock) ModBlocks.DISTANT_LOG.get()));
@@ -83,7 +94,30 @@ public class ModBlockStateProvider extends BlockStateProvider {
         hangingSignBlock(ModBlocks.DISTANT_HANGING_SIGN.get(), ModBlocks.DISTANT_WALL_HANGING_SIGN.get(),
                 blockTexture(ModBlocks.DISTANT_PLANKS.get()));
 
-         */
+        logBlock(((RotatedPillarBlock) ModBlocks.KALEIDOSCOPE_LOG.get()));
+        blockItem(ModBlocks.KALEIDOSCOPE_LOG);
+        axisBlock(((RotatedPillarBlock) ModBlocks.KALEIDOSCOPE_WOOD.get()), blockTexture(ModBlocks.KALEIDOSCOPE_LOG.get()), blockTexture(ModBlocks.KALEIDOSCOPE_LOG.get()));
+        blockItem(ModBlocks.KALEIDOSCOPE_WOOD);
+        leavesBlock(ModBlocks.KALEIDOSCOPE_LEAVES);
+        axisBlock((RotatedPillarBlock) ModBlocks.STRIPPED_KALEIDOSCOPE_LOG.get(), new ResourceLocation(Gempire.MODID, "block/stripped_kaleidoscope_log"),
+                new ResourceLocation(Gempire.MODID, "block/stripped_kaleidoscope_log_top"));
+        axisBlock((RotatedPillarBlock) ModBlocks.STRIPPED_KALEIDOSCOPE_WOOD.get(), new ResourceLocation(Gempire.MODID, "block/stripped_kaleidoscope_log"),
+                new ResourceLocation(Gempire.MODID, "block/stripped_kaleidoscope_log"));
+
+
+        saplingBlock(ModBlocks.KALEIDOSCOPE_SAPLING);
+
+        blockItem(ModBlocks.STRIPPED_KALEIDOSCOPE_LOG);
+        blockItem(ModBlocks.STRIPPED_KALEIDOSCOPE_WOOD);
+
+        signBlock(((StandingSignBlock) ModBlocks.KALEIDOSCOPE_SIGN.get()), ((WallSignBlock) ModBlocks.KALEIDOSCOPE_WALL_SIGN.get()),
+                blockTexture(ModBlocks.KALEIDOSCOPE_PLANKS.get()));
+
+        hangingSignBlock(ModBlocks.KALEIDOSCOPE_HANGING_SIGN.get(), ModBlocks.KALEIDOSCOPE_WALL_HANGING_SIGN.get(),
+                blockTexture(ModBlocks.KALEIDOSCOPE_PLANKS.get()));
+
+
+
 
         paneBlock(ModBlocks.RED_LATTICE, new ResourceLocation(Gempire.MODID, "block/lattice_red"), new ResourceLocation(Gempire.MODID, "block/lattice_red"));
         paneBlock(ModBlocks.ORANGE_LATTICE, new ResourceLocation(Gempire.MODID, "block/lattice_orange"), new ResourceLocation(Gempire.MODID, "block/lattice_orange"));

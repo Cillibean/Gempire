@@ -259,6 +259,86 @@ public class ModBlocks {
     public static final RegistryObject<Block> DISTANT_TRAPDOOR = BLOCKS.register("distant_trapdoor",
             () -> new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_TRAPDOOR), ModWoodTypes.DISTANT.setType()));
 
+    public static final RegistryObject<Block> KALEIDOSCOPE_LOG = BLOCKS.register("kaleidoscope_log", () ->
+            new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG)));
+
+    public static final RegistryObject<Block> STRIPPED_KALEIDOSCOPE_LOG = BLOCKS.register("stripped_kaleidoscope_log", () ->
+            new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_LOG)));
+
+    public static final RegistryObject<Block> KALEIDOSCOPE_WOOD = BLOCKS.register("kaleidoscope_wood", () ->
+            new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG)));
+
+    public static final RegistryObject<Block> STRIPPED_KALEIDOSCOPE_WOOD = BLOCKS.register("stripped_kaleidoscope_wood", () ->
+            new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_WOOD)));
+
+    public static final RegistryObject<Block> KALEIDOSCOPE_LEAVES = BLOCKS.register("kaleidoscope_leaves", () ->
+            new LeavesBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES)) {
+                @Override
+                public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return true;
+                }
+
+                @Override
+                public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return 60;
+                }
+
+                @Override
+                public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return 30;
+                }
+            });
+
+    public static final RegistryObject<Block> KALEIDOSCOPE_SAPLING = BLOCKS.register("kaleidoscope_sapling", () ->
+            new SaplingBlock(new DistantTreeGrower(), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)));
+
+    public static final RegistryObject<Block> KALEIDOSCOPE_PLANKS = BLOCKS.register("kaleidoscope_planks", () ->
+            new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)) {
+                @Override
+                public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return true;
+                }
+
+                @Override
+                public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return 20;
+                }
+
+                @Override
+                public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return 5;
+                }
+            });
+
+    public static final RegistryObject<Block> KALEIDOSCOPE_SLAB = BLOCKS.register("kaleidoscope_slab", () ->
+            new SlabBlock(BlockBehaviour.Properties.copy(Blocks.OAK_SLAB)));
+
+    public static final RegistryObject<Block> KALEIDOSCOPE_STAIRS = BLOCKS.register("kaleidoscope_stairs", () ->
+            new StairBlock(() -> ModBlocks.KALEIDOSCOPE_PLANKS.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.OAK_STAIRS)));
+    public static final RegistryObject<Block> KALEIDOSCOPE_SIGN = BLOCKS.register("kaleidoscope_sign", () ->
+            new ModStandingSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_SIGN), ModWoodTypes.KALEIDOSCOPE));
+
+    public static final RegistryObject<Block> KALEIDOSCOPE_HANGING_SIGN = BLOCKS.register("kaleidoscope_hanging_sign", () ->
+            new ModHangingSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_HANGING_SIGN), ModWoodTypes.KALEIDOSCOPE));
+
+    public static final RegistryObject<Block> KALEIDOSCOPE_WALL_SIGN = BLOCKS.register("kaleidoscope_wall_sign", () ->
+            new ModWallSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_WALL_SIGN), ModWoodTypes.KALEIDOSCOPE));
+
+    public static final RegistryObject<Block> KALEIDOSCOPE_WALL_HANGING_SIGN = BLOCKS.register("kaleidoscope_wall_hanging_sign", () ->
+            new ModWallHangingSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_WALL_HANGING_SIGN), ModWoodTypes.KALEIDOSCOPE));
+
+    public static final RegistryObject<Block> KALEIDOSCOPE_FENCE = BLOCKS.register("kaleidoscope_fence",
+            () -> new FenceBlock(BlockBehaviour.Properties.copy(Blocks.OAK_FENCE)));
+
+    public static final RegistryObject<Block> KALEIDOSCOPE_FENCE_GATE = BLOCKS.register("kaleidoscope_fence_gate",
+            () -> new FenceGateBlock(BlockBehaviour.Properties.copy(Blocks.OAK_FENCE_GATE), SoundEvents.FENCE_GATE_OPEN, SoundEvents.FENCE_GATE_CLOSE));
+
+    public static final RegistryObject<Block> KALEIDOSCOPE_DOOR = BLOCKS.register("kaleidoscope_door",
+            () -> new DoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_DOOR), ModWoodTypes.KALEIDOSCOPE.setType()));
+
+    public static final RegistryObject<Block> KALEIDOSCOPE_TRAPDOOR = BLOCKS.register("kaleidoscope_trapdoor",
+            () -> new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_TRAPDOOR), ModWoodTypes.KALEIDOSCOPE.setType()));
+
     public static final RegistryObject<Block> RED_LATTICE = BLOCKS.register("red_lattice", () ->
             new LatticeBlock(BlockBehaviour.Properties.of().strength(0.3f, 0.3f)
                     .sound(SoundType.METAL).requiresCorrectToolForDrops().noOcclusion()));
