@@ -2,6 +2,7 @@ package com.gempire.datagen;
 
 import com.gempire.Gempire;
 import com.gempire.init.ModBlocks;
+import com.gempire.init.ModItems;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.*;
@@ -34,6 +35,13 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockWithItem(ModBlocks.TUNGSTEN_ORE);
         blockWithItem(ModBlocks.DEEPSLATE_TUNGSTEN_ORE);
         blockWithItem(ModBlocks.RAW_TUNGSTEN_BLOCK);
+
+        blockWithItem(ModBlocks.PYRITE_BLOCK);
+        blockWithItem(ModBlocks.GEODE_CRYSTAL_BLOCK);
+
+        blockWithItem(ModBlocks.PRISMATIC_BLOCK);
+
+        blockWithItem(ModBlocks.STRAWBERRY_BLOCK);
         /*
 
         blockWithItem(ModBlocks.DISTANT_PLANKS);
