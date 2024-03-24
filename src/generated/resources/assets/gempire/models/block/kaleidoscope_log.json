@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "gempire:block/kaleidoscope_log_top",
+    "side": "gempire:block/kaleidoscope_log"
+  }
+}

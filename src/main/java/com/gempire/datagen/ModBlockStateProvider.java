@@ -42,7 +42,6 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockWithItem(ModBlocks.PRISMATIC_BLOCK);
 
         blockWithItem(ModBlocks.STRAWBERRY_BLOCK);
-        /*
 
         blockWithItem(ModBlocks.DISTANT_PLANKS);
 
@@ -51,15 +50,21 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         fenceBlock((FenceBlock) ModBlocks.DISTANT_FENCE.get(), blockTexture(ModBlocks.DISTANT_PLANKS.get()));
         fenceGateBlock((FenceGateBlock) ModBlocks.DISTANT_FENCE_GATE.get(), blockTexture(ModBlocks.DISTANT_PLANKS.get()));
-
+        /*
         doorBlockWithRenderType((DoorBlock)ModBlocks.DISTANT_DOOR.get(), modLoc("block/distant_door_bottom"), modLoc("block/distant_door_top"), "cutout");
         trapdoorBlockWithRenderType((TrapDoorBlock) ModBlocks.DISTANT_TRAPDOOR.get(), modLoc("block/distant_trapdoor"), true, "cutout");
 
+         */
 
         blockItem(ModBlocks.DISTANT_STAIRS);
         blockItem(ModBlocks.DISTANT_SLAB);
+
+
         blockItem(ModBlocks.DISTANT_FENCE_GATE);
+        /*
         blockItem(ModBlocks.DISTANT_TRAPDOOR, "_bottom");
+
+         */
 
 
         logBlock(((RotatedPillarBlock) ModBlocks.DISTANT_LOG.get()));
@@ -83,7 +88,12 @@ public class ModBlockStateProvider extends BlockStateProvider {
         hangingSignBlock(ModBlocks.DISTANT_HANGING_SIGN.get(), ModBlocks.DISTANT_WALL_HANGING_SIGN.get(),
                 blockTexture(ModBlocks.DISTANT_PLANKS.get()));
 
-         */
+
+
+        logBlock(((RotatedPillarBlock) ModBlocks.KALEIDOSCOPE_LOG.get()));
+        blockItem(ModBlocks.KALEIDOSCOPE_LOG);
+
+        leavesBlock(ModBlocks.KALEIDOSCOPE_LEAVES);
 
         paneBlock(ModBlocks.RED_LATTICE, new ResourceLocation(Gempire.MODID, "block/lattice_red"), new ResourceLocation(Gempire.MODID, "block/lattice_red"));
         paneBlock(ModBlocks.ORANGE_LATTICE, new ResourceLocation(Gempire.MODID, "block/lattice_orange"), new ResourceLocation(Gempire.MODID, "block/lattice_orange"));

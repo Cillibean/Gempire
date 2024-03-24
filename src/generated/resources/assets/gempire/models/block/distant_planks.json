@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "gempire:block/stripped_distant_log"
+    "all": "gempire:block/distant_planks"
   }
 }

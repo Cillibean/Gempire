@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "gempire:block/distant_slab"
+    },
+    "type=double": {
+      "model": "gempire:block/distant_planks"
+    },
+    "type=top": {
+      "model": "gempire:block/distant_slab_top"
+    }
+  }
+}

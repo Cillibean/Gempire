@@ -1,6 +1,7 @@
 package com.gempire.datagen;
 
 import com.gempire.Gempire;
+import com.gempire.init.ModBlocks;
 import com.gempire.init.ModItems;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
@@ -145,6 +146,11 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.COBALT_SHARDS);
         simpleItem(ModItems.AMBER_SHARDS);
         simpleItem(ModItems.ALABASTER_SHARDS);
+
+        saplingItem(ModBlocks.DISTANT_SAPLING);
+        fenceItem(ModBlocks.DISTANT_FENCE, ModBlocks.DISTANT_PLANKS);
+        simpleItem(ModItems.DISTANT_SIGN);
+        simpleItem(ModItems.DISTANT_HANGING_SIGN);
     }
 
     private ItemModelBuilder saplingItem(RegistryObject<Block> item) {

@@ -1,4 +1,4 @@
-// 1.20.1	2024-03-24T17:56:24.463312	Item Models: gempire
+// 1.20.1	2024-03-24T22:37:16.098312	Item Models: gempire
 2a4c323206d2fbeca217109aa5c8a2ac8ce38701 assets/gempire/models/item/acid_spit.json
 0da7ed67ca0a8fcb9a8ba427cc3a79d0931ef656 assets/gempire/models/item/alabaster_shards.json
 c0c62ab235536d2de57de21efdcbe773279a708b assets/gempire/models/item/amber_shards.json
@@ -20,6 +20,10 @@ abce74eac971aebc6dc933921fbaa1c0056e343a assets/gempire/models/item/confractor_b
 72d2d8c794066ae1d251d317a95ad79696a24d67 assets/gempire/models/item/confractor_tip.json
 203c138f08c9b479796360252bd64ac33b001748 assets/gempire/models/item/cyan_chroma.json
 1ae69ba003ff3f9af95fdc9312c40476ba579774 assets/gempire/models/item/cyan_shards.json
+290bce01b1abaf4ff4635951a4ae6c77fe39d43e assets/gempire/models/item/distant_fence.json
+8d23ff1069d331bf905c41ca2772fe0e74951984 assets/gempire/models/item/distant_hanging_sign.json
+0ddeb4e7f57e31fef3075ba08c62aa6200845e75 assets/gempire/models/item/distant_sapling.json
+455c3bb7d1ecef1a5b8d85655c2885f3131db380 assets/gempire/models/item/distant_sign.json
 f9fd7e685c73e51511bb3cd5419f64b58ad8a0eb assets/gempire/models/item/electrum_ingot.json
 b360d9ffaaa5058875385abcc95e11f6a1984385 assets/gempire/models/item/electrum_nugget.json
 db10bee6fbe48ec12d1032020cf0fc2a62976b21 assets/gempire/models/item/empress_star.json
