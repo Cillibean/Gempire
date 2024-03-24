@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/template_glass_pane_post",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "edge": "gempire:block/lattice_light_gray",
+    "pane": "gempire:block/lattice_light_gray"
+  }
+}

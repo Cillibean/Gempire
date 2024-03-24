@@ -10,6 +10,9 @@ import com.gempire.client.screen.warppad.WarpSelectionScreen;
 import com.gempire.client.ter.ShellTER;
 import com.gempire.fluids.ModFluidTypes;
 import com.gempire.init.*;
+import net.minecraft.client.renderer.Sheets;
+import net.minecraft.client.renderer.blockentity.HangingSignRenderer;
+import net.minecraft.client.renderer.blockentity.SignRenderer;
 import com.gempire.items.tools.GuardianArmorRenderer;
 import com.gempire.keybindings.KeyBindings;
 import com.gempire.networking.WarpGuiKeyPressed;
@@ -118,6 +121,9 @@ public class ClientProxy {
         MenuScreens.register(ModContainers.WARP_CONFIG.get(), WarpConfigScreen::new);
 
         event.registerBlockEntityRenderer(ModTE.SHELL_TE.get(), ShellTER::new);
+
+        Sheets.addWoodType(ModWoodTypes.DISTANT);
+        Sheets.addWoodType(ModWoodTypes.CRYSTAL);
     }
 
     @SubscribeEvent
@@ -206,6 +212,12 @@ public class ClientProxy {
         event.registerLayerDefinition(ModelMorganite.LAYER_LOCATION, ModelMorganite::createBodyLayer);
         event.registerLayerDefinition(ModelPeridot.LAYER_LOCATION, ModelPeridot::createBodyLayer);
         event.registerLayerDefinition(ModelBismuth.LAYER_LOCATION, ModelBismuth::createBodyLayer);
+    }
+
+    @SubscribeEvent
+    public static void registerBER(EntityRenderersEvent.RegisterRenderers event) {
+        event.registerBlockEntityRenderer(ModTE.MOD_SIGN.get(), SignRenderer::new);
+        event.registerBlockEntityRenderer(ModTE.MOD_HANGING_SIGN.get(), HangingSignRenderer::new);
     }
 
     @SubscribeEvent
