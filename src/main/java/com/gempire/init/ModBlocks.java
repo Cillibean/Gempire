@@ -140,6 +140,12 @@ public class ModBlocks {
     public static final RegistryObject<Block> GEODE_CRYSTAL_BLOCK = BLOCKS.register("geode_crystal_block", () ->
             new Block(BlockBehaviour.Properties.copy(Blocks.AMETHYST_BLOCK)));
 
+    public static final RegistryObject<Block> PEGMATITE = BLOCKS.register("pegmatite", () ->
+            new Block(BlockBehaviour.Properties.copy(Blocks.STONE)));
+
+    public static final RegistryObject<Block> COBBLED_PEGMATITE = BLOCKS.register("cobbled_pegmatite", () ->
+            new Block(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE)));
+
     /*public static final RegistryObject<Block> CRYSTAL_CHEST = BLOCKS.register("crystal_chest", () ->
             new CrystalChestBlock(BlockBehaviour.Properties
                     .of().strength(2.5F)

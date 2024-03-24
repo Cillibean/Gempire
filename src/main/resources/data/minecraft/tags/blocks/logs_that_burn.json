@@ -1,4 +1,5 @@
 {
+  "replace": false,
   "values": [
     "gempire:crystal_log",
     "gempire:crystal_wood",

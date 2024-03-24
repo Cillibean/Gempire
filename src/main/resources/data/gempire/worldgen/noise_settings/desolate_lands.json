@@ -5,7 +5,7 @@
   "ore_veins_enabled": true,
   "legacy_random_source": false,
   "default_block": {
-    "Name": "minecraft:stone"
+    "Name": "gempire:pegmatite"
   },
   "default_fluid": {
     "Name": "minecraft:water",
@@ -717,7 +717,7 @@
                               "then_run": {
                                 "type": "minecraft:block",
                                 "result_state": {
-                                  "Name": "minecraft:stone"
+                                  "Name": "gempire:pegmatite"
                                 }
                               }
                             },
@@ -980,7 +980,7 @@
                                 "then_run": {
                                   "type": "minecraft:block",
                                   "result_state": {
-                                    "Name": "minecraft:stone"
+                                    "Name": "gempire:pegmatite"
                                   }
                                 }
                               },
@@ -1045,7 +1045,7 @@
                                 "then_run": {
                                   "type": "minecraft:block",
                                   "result_state": {
-                                    "Name": "minecraft:stone"
+                                    "Name": "gempire:pegmatite"
                                   }
                                 }
                               },
@@ -1152,7 +1152,7 @@
                                   {
                                     "type": "minecraft:block",
                                     "result_state": {
-                                      "Name": "minecraft:stone"
+                                      "Name": "gempire:pegmatite"
                                     }
                                   }
                                 ]
@@ -1192,7 +1192,7 @@
                                           "then_run": {
                                             "type": "minecraft:block",
                                             "result_state": {
-                                              "Name": "minecraft:stone"
+                                              "Name": "gempire:pegmatite"
                                             }
                                           }
                                         },
@@ -1208,7 +1208,7 @@
                                   {
                                     "type": "minecraft:block",
                                     "result_state": {
-                                      "Name": "minecraft:stone"
+                                      "Name": "gempire:pegmatite"
                                     }
                                   }
                                 ]
@@ -1233,7 +1233,7 @@
                                 "then_run": {
                                   "type": "minecraft:block",
                                   "result_state": {
-                                    "Name": "minecraft:stone"
+                                    "Name": "gempire:pegmatite"
                                   }
                                 }
                               }
@@ -1321,7 +1321,7 @@
                               "then_run": {
                                 "type": "minecraft:block",
                                 "result_state": {
-                                  "Name": "minecraft:stone"
+                                  "Name": "gempire:pegmatite"
                                 }
                               }
                             }
@@ -1349,7 +1349,7 @@
                                 "then_run": {
                                   "type": "minecraft:block",
                                   "result_state": {
-                                    "Name": "minecraft:stone"
+                                    "Name": "gempire:pegmatite"
                                   }
                                 }
                               },
@@ -1405,7 +1405,7 @@
                                       "then_run": {
                                         "type": "minecraft:block",
                                         "result_state": {
-                                          "Name": "minecraft:stone"
+                                          "Name": "gempire:pegmatite"
                                         }
                                       }
                                     },
@@ -1429,7 +1429,7 @@
                                 "then_run": {
                                   "type": "minecraft:block",
                                   "result_state": {
-                                    "Name": "minecraft:stone"
+                                    "Name": "gempire:pegmatite"
                                   }
                                 }
                               },
@@ -1486,7 +1486,7 @@
                                     "then_run": {
                                       "type": "minecraft:block",
                                       "result_state": {
-                                        "Name": "minecraft:stone"
+                                        "Name": "gempire:pegmatite"
                                       }
                                     }
                                   },
@@ -1789,7 +1789,7 @@
                                 "then_run": {
                                   "type": "minecraft:block",
                                   "result_state": {
-                                    "Name": "minecraft:stone"
+                                    "Name": "gempire:pegmatite"
                                   }
                                 }
                               },
@@ -1846,7 +1846,7 @@
                           "then_run": {
                             "type": "minecraft:block",
                             "result_state": {
-                              "Name": "minecraft:stone"
+                              "Name": "gempire:pegmatite"
                             }
                           }
                         },
@@ -1926,7 +1926,7 @@
                                   {
                                     "type": "minecraft:block",
                                     "result_state": {
-                                      "Name": "minecraft:stone"
+                                      "Name": "gempire:pegmatite"
                                     }
                                   }
                                 ]
@@ -1966,7 +1966,7 @@
                                           "then_run": {
                                             "type": "minecraft:block",
                                             "result_state": {
-                                              "Name": "minecraft:stone"
+                                              "Name": "gempire:pegmatite"
                                             }
                                           }
                                         },
@@ -1982,7 +1982,7 @@
                                   {
                                     "type": "minecraft:block",
                                     "result_state": {
-                                      "Name": "minecraft:stone"
+                                      "Name": "gempire:pegmatite"
                                     }
                                   }
                                 ]
@@ -2007,7 +2007,7 @@
                                 "then_run": {
                                   "type": "minecraft:block",
                                   "result_state": {
-                                    "Name": "minecraft:stone"
+                                    "Name": "gempire:pegmatite"
                                   }
                                 }
                               }
@@ -2095,7 +2095,7 @@
                               "then_run": {
                                 "type": "minecraft:block",
                                 "result_state": {
-                                  "Name": "minecraft:stone"
+                                  "Name": "gempire:pegmatite"
                                 }
                               }
                             }
@@ -2120,7 +2120,7 @@
                             "then_run": {
                               "type": "minecraft:block",
                               "result_state": {
-                                "Name": "minecraft:stone"
+                                "Name": "gempire:pegmatite"
                               }
                             }
                           }
@@ -2159,7 +2159,7 @@
                                       "then_run": {
                                         "type": "minecraft:block",
                                         "result_state": {
-                                          "Name": "minecraft:stone"
+                                          "Name": "gempire:pegmatite"
                                         }
                                       }
                                     },
@@ -2183,7 +2183,7 @@
                                 "then_run": {
                                   "type": "minecraft:block",
                                   "result_state": {
-                                    "Name": "minecraft:stone"
+                                    "Name": "gempire:pegmatite"
                                   }
                                 }
                               },
@@ -2217,7 +2217,7 @@
                                     "then_run": {
                                       "type": "minecraft:block",
                                       "result_state": {
-                                        "Name": "minecraft:stone"
+                                        "Name": "gempire:pegmatite"
                                       }
                                     }
                                   },
@@ -2373,7 +2373,7 @@
                         "then_run": {
                           "type": "minecraft:block",
                           "result_state": {
-                            "Name": "minecraft:stone"
+                            "Name": "gempire:pegmatite"
                           }
                         }
                       },

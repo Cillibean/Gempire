@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "gempire:tungsten_block",
+    "gempire:prismatic_block",
+    "gempire:thulite_block",
+    "gempire:anatase_block",
+    "gempire:electrum_block",
+    "gempire:platinum_block"
+  ]
+}
