@@ -1,0 +1,28 @@
+{
+  "values": [
+    "gempire:tungsten_block",
+    "gempire:tungsten_ore",
+    "gempire:raw_tungsten_block",
+    "gempire:deepslate_tungsten_ore",
+    "gempire:anatase_block",
+    "gempire:electrum_block",
+    "gempire:thulite_block",
+    "gempire:platinum_block",
+    "gempire:red_lattice",
+    "gempire:orange_lattice",
+    "gempire:yellow_lattice",
+    "gempire:lime_lattice",
+    "gempire:green_lattice",
+    "gempire:cyan_lattice",
+    "gempire:light_blue_lattice",
+    "gempire:blue_lattice",
+    "gempire:purple_lattice",
+    "gempire:magenta_lattice",
+    "gempire:pink_lattice",
+    "gempire:white_lattice",
+    "gempire:light_gray_lattice",
+    "gempire:gray_lattice",
+    "gempire:black_lattice",
+    "gempire:brown_lattice"
+  ]
+}

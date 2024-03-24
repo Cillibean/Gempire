@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "tungsten",
+  "ingredients": [
+    {
+      "item": "gempire:raw_tungsten_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "item": "gempire:raw_tungsten"
+  }
+}

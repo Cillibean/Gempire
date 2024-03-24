@@ -216,6 +216,20 @@ public class ModItems {
             )
     );
 
+    public static final RegistryObject<Item> PEGMATITE = ITEMS.register("pegmatite", () ->
+            new BlockItem(
+                    ModBlocks.PEGMATITE.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> COBBLED_PEGMATITE = ITEMS.register("cobbled_pegmatite", () ->
+            new BlockItem(
+                    ModBlocks.COBBLED_PEGMATITE.get(),
+                    new Item.Properties()
+            )
+    );
+
     public static final RegistryObject<Item> TUNGSTEN_BLOCK = ITEMS.register("tungsten_block", () ->
             new BlockItem(
                     ModBlocks.TUNGSTEN_BLOCK.get(),

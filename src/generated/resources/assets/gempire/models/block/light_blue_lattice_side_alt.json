@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/template_glass_pane_side_alt",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "edge": "gempire:block/lattice_light_blue",
+    "pane": "gempire:block/lattice_light_blue"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "gempire:tungsten_block"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_tungsten_block": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "gempire:tungsten_block"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_tungsten_block",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "gempire:tungsten_block"
+    ]
+  },
+  "sends_telemetry_event": false
+}

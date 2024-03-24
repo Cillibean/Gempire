@@ -153,7 +153,7 @@ public class ItemGem extends Item {
                             }
                             //Problem with the claiming of gems ??
                             if (!playerIn.isCreative() && spawned) {
-                                playerIn.getMainHandItem().shrink(1);
+                                playerIn.getMainHandItem().setCount(playerIn.getMainHandItem().getCount()-1);
                             }
                         }
                     }

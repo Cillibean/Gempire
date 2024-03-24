@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "anatase",
+  "key": {
+    "#": {
+      "item": "gempire:raw_anatase"
+    }
+  },
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "result": {
+    "item": "gempire:raw_anatase_block"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "prismatic",
+  "key": {
+    "#": {
+      "item": "gempire:prismatic_ingot"
+    }
+  },
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "result": {
+    "item": "gempire:prismatic_block"
+  },
+  "show_notification": true
+}

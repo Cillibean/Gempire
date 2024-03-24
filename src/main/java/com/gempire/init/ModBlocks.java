@@ -5,7 +5,13 @@ import com.gempire.blocks.*;
 import com.gempire.blocks.machine.*;
 import com.gempire.worldgen.tree.CrystalTreeGrower;
 import com.gempire.worldgen.tree.DistantTreeGrower;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraftforge.registries.RegistryObject;
@@ -140,6 +146,12 @@ public class ModBlocks {
     public static final RegistryObject<Block> GEODE_CRYSTAL_BLOCK = BLOCKS.register("geode_crystal_block", () ->
             new Block(BlockBehaviour.Properties.copy(Blocks.AMETHYST_BLOCK)));
 
+    public static final RegistryObject<Block> PEGMATITE = BLOCKS.register("pegmatite", () ->
+            new Block(BlockBehaviour.Properties.copy(Blocks.STONE)));
+
+    public static final RegistryObject<Block> COBBLED_PEGMATITE = BLOCKS.register("cobbled_pegmatite", () ->
+            new Block(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE)));
+
     /*public static final RegistryObject<Block> CRYSTAL_CHEST = BLOCKS.register("crystal_chest", () ->
             new CrystalChestBlock(BlockBehaviour.Properties
                     .of().strength(2.5F)
@@ -149,16 +161,16 @@ public class ModBlocks {
 
 
     public static final RegistryObject<Block> CRYSTAL_LOG = BLOCKS.register("crystal_log", () ->
-            new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG)));
+            new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG)));
 
     public static final RegistryObject<Block> STRIPPED_CRYSTAL_LOG = BLOCKS.register("stripped_crystal_log", () ->
-            new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_LOG)));
+            new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_LOG)));
 
     public static final RegistryObject<Block> CRYSTAL_WOOD = BLOCKS.register("crystal_wood", () ->
-            new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG)));
+            new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG)));
 
     public static final RegistryObject<Block> STRIPPED_CRYSTAL_WOOD = BLOCKS.register("stripped_crystal_wood", () ->
-            new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_WOOD)));
+            new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_WOOD)));
 
     public static final RegistryObject<Block> CRYSTAL_LEAVES = BLOCKS.register("crystal_leaves", () ->
             new LeavesBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES)));
@@ -168,22 +180,84 @@ public class ModBlocks {
 
 
     public static final RegistryObject<Block> DISTANT_LOG = BLOCKS.register("distant_log", () ->
-            new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG)));
+            new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG)));
 
     public static final RegistryObject<Block> STRIPPED_DISTANT_LOG = BLOCKS.register("stripped_distant_log", () ->
-            new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_LOG)));
+            new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_LOG)));
 
     public static final RegistryObject<Block> DISTANT_WOOD = BLOCKS.register("distant_wood", () ->
-            new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG)));
+            new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG)));
 
     public static final RegistryObject<Block> STRIPPED_DISTANT_WOOD = BLOCKS.register("stripped_distant_wood", () ->
-            new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_WOOD)));
+            new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_WOOD)));
 
     public static final RegistryObject<Block> DISTANT_LEAVES = BLOCKS.register("distant_leaves", () ->
-            new LeavesBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES)));
+            new LeavesBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES)) {
+                @Override
+                public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return true;
+                }
+
+                @Override
+                public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return 60;
+                }
+
+                @Override
+                public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return 30;
+                }
+            });
 
     public static final RegistryObject<Block> DISTANT_SAPLING = BLOCKS.register("distant_sapling", () ->
             new SaplingBlock(new DistantTreeGrower(), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)));
+
+    public static final RegistryObject<Block> DISTANT_PLANKS = BLOCKS.register("distant_planks", () ->
+            new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)) {
+                @Override
+                public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return true;
+                }
+
+                @Override
+                public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return 20;
+                }
+
+                @Override
+                public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return 5;
+                }
+    });
+
+    public static final RegistryObject<Block> DISTANT_SLAB = BLOCKS.register("distant_slab", () ->
+            new SlabBlock(BlockBehaviour.Properties.copy(Blocks.OAK_SLAB)));
+
+    public static final RegistryObject<Block> DISTANT_STAIRS = BLOCKS.register("distant_stairs", () ->
+            new StairBlock(() -> ModBlocks.DISTANT_PLANKS.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.OAK_STAIRS)));
+    public static final RegistryObject<Block> DISTANT_SIGN = BLOCKS.register("distant_sign", () ->
+            new ModStandingSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_SIGN), ModWoodTypes.DISTANT));
+
+    public static final RegistryObject<Block> DISTANT_HANGING_SIGN = BLOCKS.register("distant_hanging_sign", () ->
+            new ModHangingSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_HANGING_SIGN), ModWoodTypes.DISTANT));
+
+    public static final RegistryObject<Block> DISTANT_WALL_SIGN = BLOCKS.register("distant_wall_sign", () ->
+            new ModWallSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_WALL_SIGN), ModWoodTypes.DISTANT));
+
+    public static final RegistryObject<Block> DISTANT_WALL_HANGING_SIGN = BLOCKS.register("distant_wall_hanging_sign", () ->
+            new ModWallHangingSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_WALL_HANGING_SIGN), ModWoodTypes.DISTANT));
+
+    public static final RegistryObject<Block> DISTANT_FENCE = BLOCKS.register("distant_fence",
+            () -> new FenceBlock(BlockBehaviour.Properties.copy(Blocks.OAK_FENCE)));
+
+    public static final RegistryObject<Block> DISTANT_FENCE_GATE = BLOCKS.register("distant_fence_gate",
+            () -> new FenceGateBlock(BlockBehaviour.Properties.copy(Blocks.OAK_FENCE_GATE), SoundEvents.FENCE_GATE_OPEN, SoundEvents.FENCE_GATE_CLOSE));
+
+    public static final RegistryObject<Block> DISTANT_DOOR = BLOCKS.register("distant_door",
+            () -> new DoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_DOOR), ModWoodTypes.DISTANT.setType()));
+
+    public static final RegistryObject<Block> DISTANT_TRAPDOOR = BLOCKS.register("distant_trapdoor",
+            () -> new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_TRAPDOOR), ModWoodTypes.DISTANT.setType()));
 
     public static final RegistryObject<Block> RED_LATTICE = BLOCKS.register("red_lattice", () ->
             new LatticeBlock(BlockBehaviour.Properties.of().strength(0.3f, 0.3f)

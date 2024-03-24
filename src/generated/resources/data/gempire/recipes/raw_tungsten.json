@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "tungsten",
+  "key": {
+    "#": {
+      "item": "gempire:raw_tungsten"
+    }
+  },
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "result": {
+    "item": "gempire:raw_tungsten_block"
+  },
+  "show_notification": true
+}

@@ -35,14 +35,14 @@ public class ModPlacedFeatures {
         register(context, TUNGSTEN_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.TUNGSTEN_ORE_KEY),
                 commonOrePlacement(12, // VeinsPerChunk
                         HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-80), VerticalAnchor.aboveBottom(80))));
-
+        /*
         register(context, CRYSTAL_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.CRYSTAL_KEY),
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
                         ModBlocks.CRYSTAL_SAPLING.get()));
 
         register(context, DISTANT_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.DISTANT_KEY),
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
-                        ModBlocks.DISTANT_SAPLING.get()));
+                        ModBlocks.DISTANT_SAPLING.get()));*/
     }
 
     public static List<PlacementModifier> orePlacement(PlacementModifier p_195347_, PlacementModifier p_195348_) {

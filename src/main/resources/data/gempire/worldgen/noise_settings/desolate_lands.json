@@ -5,7 +5,7 @@
   "ore_veins_enabled": true,
   "legacy_random_source": false,
   "default_block": {
-    "Name": "minecraft:stone"
+    "Name": "gempire:pegmatite"
   },
   "default_fluid": {
     "Name": "minecraft:water",
@@ -537,8 +537,7 @@
               "if_true": {
                 "type": "minecraft:biome",
                 "biome_is": [
-                  "minecraft:badlands",
-                  "minecraft:eroded_badlands"
+                  "gempire:peculiar_precipice"
                 ]
               },
               "then_run": {
@@ -718,7 +717,7 @@
                               "then_run": {
                                 "type": "minecraft:block",
                                 "result_state": {
-                                  "Name": "minecraft:stone"
+                                  "Name": "gempire:pegmatite"
                                 }
                               }
                             },
@@ -981,7 +980,7 @@
                                 "then_run": {
                                   "type": "minecraft:block",
                                   "result_state": {
-                                    "Name": "minecraft:stone"
+                                    "Name": "gempire:pegmatite"
                                   }
                                 }
                               },
@@ -1046,7 +1045,7 @@
                                 "then_run": {
                                   "type": "minecraft:block",
                                   "result_state": {
-                                    "Name": "minecraft:stone"
+                                    "Name": "gempire:pegmatite"
                                   }
                                 }
                               },
@@ -1153,7 +1152,7 @@
                                   {
                                     "type": "minecraft:block",
                                     "result_state": {
-                                      "Name": "minecraft:stone"
+                                      "Name": "gempire:pegmatite"
                                     }
                                   }
                                 ]
@@ -1193,7 +1192,7 @@
                                           "then_run": {
                                             "type": "minecraft:block",
                                             "result_state": {
-                                              "Name": "minecraft:stone"
+                                              "Name": "gempire:pegmatite"
                                             }
                                           }
                                         },
@@ -1209,7 +1208,7 @@
                                   {
                                     "type": "minecraft:block",
                                     "result_state": {
-                                      "Name": "minecraft:stone"
+                                      "Name": "gempire:pegmatite"
                                     }
                                   }
                                 ]
@@ -1234,7 +1233,7 @@
                                 "then_run": {
                                   "type": "minecraft:block",
                                   "result_state": {
-                                    "Name": "minecraft:stone"
+                                    "Name": "gempire:pegmatite"
                                   }
                                 }
                               }
@@ -1244,9 +1243,7 @@
                               "if_true": {
                                 "type": "minecraft:biome",
                                 "biome_is": [
-                                  "minecraft:warm_ocean",
-                                  "minecraft:beach",
-                                  "minecraft:snowy_beach"
+                                  "gempire:abnormal_beach"
                                 ]
                               },
                               "then_run": {
@@ -1324,7 +1321,7 @@
                               "then_run": {
                                 "type": "minecraft:block",
                                 "result_state": {
-                                  "Name": "minecraft:stone"
+                                  "Name": "gempire:pegmatite"
                                 }
                               }
                             }
@@ -1335,7 +1332,7 @@
                           "if_true": {
                             "type": "minecraft:biome",
                             "biome_is": [
-                              "minecraft:windswept_savanna"
+                              "gempire:gilded_wastes"
                             ]
                           },
                           "then_run": {
@@ -1352,7 +1349,7 @@
                                 "then_run": {
                                   "type": "minecraft:block",
                                   "result_state": {
-                                    "Name": "minecraft:stone"
+                                    "Name": "gempire:pegmatite"
                                   }
                                 }
                               },
@@ -1408,7 +1405,7 @@
                                       "then_run": {
                                         "type": "minecraft:block",
                                         "result_state": {
-                                          "Name": "minecraft:stone"
+                                          "Name": "gempire:pegmatite"
                                         }
                                       }
                                     },
@@ -1432,7 +1429,7 @@
                                 "then_run": {
                                   "type": "minecraft:block",
                                   "result_state": {
-                                    "Name": "minecraft:stone"
+                                    "Name": "gempire:pegmatite"
                                   }
                                 }
                               },
@@ -1489,7 +1486,7 @@
                                     "then_run": {
                                       "type": "minecraft:block",
                                       "result_state": {
-                                        "Name": "minecraft:stone"
+                                        "Name": "gempire:pegmatite"
                                       }
                                     }
                                   },
@@ -1792,7 +1789,7 @@
                                 "then_run": {
                                   "type": "minecraft:block",
                                   "result_state": {
-                                    "Name": "minecraft:stone"
+                                    "Name": "gempire:pegmatite"
                                   }
                                 }
                               },
@@ -1849,7 +1846,7 @@
                           "then_run": {
                             "type": "minecraft:block",
                             "result_state": {
-                              "Name": "minecraft:stone"
+                              "Name": "gempire:pegmatite"
                             }
                           }
                         },
@@ -1929,7 +1926,7 @@
                                   {
                                     "type": "minecraft:block",
                                     "result_state": {
-                                      "Name": "minecraft:stone"
+                                      "Name": "gempire:pegmatite"
                                     }
                                   }
                                 ]
@@ -1969,7 +1966,7 @@
                                           "then_run": {
                                             "type": "minecraft:block",
                                             "result_state": {
-                                              "Name": "minecraft:stone"
+                                              "Name": "gempire:pegmatite"
                                             }
                                           }
                                         },
@@ -1985,7 +1982,7 @@
                                   {
                                     "type": "minecraft:block",
                                     "result_state": {
-                                      "Name": "minecraft:stone"
+                                      "Name": "gempire:pegmatite"
                                     }
                                   }
                                 ]
@@ -2010,7 +2007,7 @@
                                 "then_run": {
                                   "type": "minecraft:block",
                                   "result_state": {
-                                    "Name": "minecraft:stone"
+                                    "Name": "gempire:pegmatite"
                                   }
                                 }
                               }
@@ -2020,9 +2017,7 @@
                               "if_true": {
                                 "type": "minecraft:biome",
                                 "biome_is": [
-                                  "minecraft:warm_ocean",
-                                  "minecraft:beach",
-                                  "minecraft:snowy_beach"
+                                  "gempire:abnormal_beach"
                                 ]
                               },
                               "then_run": {
@@ -2100,7 +2095,7 @@
                               "then_run": {
                                 "type": "minecraft:block",
                                 "result_state": {
-                                  "Name": "minecraft:stone"
+                                  "Name": "gempire:pegmatite"
                                 }
                               }
                             }
@@ -2111,7 +2106,7 @@
                           "if_true": {
                             "type": "minecraft:biome",
                             "biome_is": [
-                              "minecraft:windswept_savanna"
+                              "gempire:gilded_wastes"
                             ]
                           },
                           "then_run": {
@@ -2125,7 +2120,7 @@
                             "then_run": {
                               "type": "minecraft:block",
                               "result_state": {
-                                "Name": "minecraft:stone"
+                                "Name": "gempire:pegmatite"
                               }
                             }
                           }
@@ -2164,7 +2159,7 @@
                                       "then_run": {
                                         "type": "minecraft:block",
                                         "result_state": {
-                                          "Name": "minecraft:stone"
+                                          "Name": "gempire:pegmatite"
                                         }
                                       }
                                     },
@@ -2188,7 +2183,7 @@
                                 "then_run": {
                                   "type": "minecraft:block",
                                   "result_state": {
-                                    "Name": "minecraft:stone"
+                                    "Name": "gempire:pegmatite"
                                   }
                                 }
                               },
@@ -2222,7 +2217,7 @@
                                     "then_run": {
                                       "type": "minecraft:block",
                                       "result_state": {
-                                        "Name": "minecraft:stone"
+                                        "Name": "gempire:pegmatite"
                                       }
                                     }
                                   },
@@ -2266,9 +2261,7 @@
                     "if_true": {
                       "type": "minecraft:biome",
                       "biome_is": [
-                        "minecraft:warm_ocean",
-                        "minecraft:beach",
-                        "minecraft:snowy_beach"
+                        "gempire:abnormal_beach"
                       ]
                     },
                     "then_run": {
@@ -2333,9 +2326,8 @@
                     "if_true": {
                       "type": "minecraft:biome",
                       "biome_is": [
-                        "minecraft:warm_ocean",
-                        "minecraft:lukewarm_ocean",
-                        "minecraft:deep_lukewarm_ocean"
+                        "gempire:wayward_ocean",
+                        "gempire:anomylous_reef"
                       ]
                     },
                     "then_run": {
@@ -2381,7 +2373,7 @@
                         "then_run": {
                           "type": "minecraft:block",
                           "result_state": {
-                            "Name": "minecraft:stone"
+                            "Name": "gempire:pegmatite"
                           }
                         }
                       },
@@ -2397,28 +2389,6 @@
               }
             }
           ]
-        }
-      },
-      {
-        "type": "minecraft:condition",
-        "if_true": {
-          "type": "minecraft:vertical_gradient",
-          "random_name": "minecraft:deepslate",
-          "true_at_and_below": {
-            "absolute": 0
-          },
-          "false_at_and_above": {
-            "absolute": 8
-          }
-        },
-        "then_run": {
-          "type": "minecraft:block",
-          "result_state": {
-            "Name": "minecraft:deepslate",
-            "Properties": {
-              "axis": "y"
-            }
-          }
         }
       }
     ]

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "electrum",
+  "key": {
+    "#": {
+      "item": "gempire:raw_electrum"
+    }
+  },
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "result": {
+    "item": "gempire:raw_electrum_block"
+  },
+  "show_notification": true
+}

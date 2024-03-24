@@ -1,6 +1,7 @@
 package com.gempire.datagen;
 
 import com.gempire.datagen.loot.ModBlockLootTables;
+import com.gempire.datagen.loot.ModEntityLootTables;
 import com.gempire.init.ModBlocks;
 import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Pair;
@@ -20,13 +21,9 @@ import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-public class ModLootTableProvider extends LootTableProvider {
-    public ModLootTableProvider(PackOutput output, Set<ResourceLocation> set, List<SubProviderEntry> entries) {
-        super(output, set, entries);
-    }
-
-    @Override
-    protected void validate(Map<ResourceLocation, LootTable> map, ValidationContext validationtracker) {
-        //map.forEach((location, lootTable) -> LootData.validate(validationtracker, location, lootTable));
+public class ModLootTableProvider {
+    public static LootTableProvider create(PackOutput packOutput) {
+        return new LootTableProvider(packOutput, Set.of(),
+                List.of(new LootTableProvider.SubProviderEntry(ModBlockLootTables::new, LootContextParamSets.BLOCK)));
     }
 }

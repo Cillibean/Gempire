@@ -634,6 +634,9 @@ public class ModCreativeModeTabs {
                 populator.accept(ModBlocks.PYRITE_BLOCK.get());
                 populator.accept(ModBlocks.GEODE_CRYSTAL_BLOCK.get());
 
+                populator.accept(ModBlocks.PEGMATITE.get());
+                populator.accept(ModBlocks.COBBLED_PEGMATITE.get());
+
                 populator.accept(ModBlocks.RUINED_MARBLE_BLOCK.get());
                 populator.accept(ModBlocks.RUINED_MARBLE_STAIRS.get());
                 populator.accept(ModBlocks.RUINED_MARBLE_SLAB.get());

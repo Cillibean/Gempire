@@ -1103,16 +1103,21 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                                                                     if (this.isOwner(player)) {
                                                                         isCrafting = true;
                                                                         this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
-                                                                        if (!player.isCreative()) player.getMainHandItem().shrink(1);
-                                                                        ItemStack stack = player.getMainHandItem().copy();
-                                                                        stack.setCount(1);
+                                                                        if (!player.isCreative())
+                                                                            player.getMainHandItem().shrink(1);
+                                                                        System.out.println("player " + player.getMainHandItem());
+                                                                        ItemStack stack = player.getMainHandItem().copyWithCount(1);
+                                                                        System.out.println("stack " + stack.getCount());
                                                                         if (!this.getItemBySlot(EquipmentSlot.MAINHAND).isEmpty()) {
                                                                             ItemStack gemStack = this.getItemBySlot(EquipmentSlot.MAINHAND);
                                                                             spawnAtLocation(gemStack);
                                                                         }
+                                                                        System.out.println("player " + player.getMainHandItem());
                                                                         this.setItemSlot(EquipmentSlot.MAINHAND, stack);
+                                                                        System.out.println("player " + player.getMainHandItem());
                                                                         break;
                                                                     }
+                                                                    return super.interactAt(player, vec, hand);
                                                                 }
                                                             } else {
                                                                 inputList.clear();
@@ -1133,8 +1138,9 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                                                                     this.setItemSlot(EquipmentSlot.MAINHAND, stack);
                                                                     break;
                                                                 }
+                                                                return super.interactAt(player, vec, hand);
                                                             }
-                                                            } else {
+                                                        } else {
                                                             System.out.println("input item air check");
                                                             inputList.clear();
                                                             setCurrentRecipe(i);
@@ -1160,7 +1166,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                                                 }
                                             }
                                         }
-                                        if (this.canHoldItem(player.getMainHandItem())) {
+                                        if (this.canHoldItem(player.getMainHandItem()) && !isCrafting) {
                                             ItemStack stack = this.getItemBySlot(EquipmentSlot.MAINHAND);
                                             this.setItemSlot(EquipmentSlot.MAINHAND, player.getMainHandItem());
                                             player.setItemSlot(EquipmentSlot.MAINHAND, stack);
@@ -1172,6 +1178,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                     }
                 }
         }
+        System.out.println("player " + player.getMainHandItem());
         return super.interactAt(player, vec, hand);
     }
 

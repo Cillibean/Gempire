@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "electrum",
+  "ingredients": [
+    {
+      "item": "gempire:electrum_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "item": "gempire:electrum_ingot"
+  }
+}

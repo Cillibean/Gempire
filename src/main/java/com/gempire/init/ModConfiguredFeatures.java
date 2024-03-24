@@ -48,7 +48,7 @@ public class ModConfiguredFeatures {
     public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> context) {
         HolderGetter<PlacedFeature> placedFeatures = context.lookup(Registries.PLACED_FEATURE);
         register(context, TUNGSTEN_ORE_KEY, Feature.ORE, new OreConfiguration(TUNGSTEN_ORES.get(), 12));
-        register(context, CRYSTAL_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+        /*register(context, CRYSTAL_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBlocks.CRYSTAL_LOG.get()),
                 new StraightTrunkPlacer(5, 4, 3),
                 BlockStateProvider.simple(ModBlocks.CRYSTAL_LEAVES.get()),
@@ -59,7 +59,7 @@ public class ModConfiguredFeatures {
                 new StraightTrunkPlacer(5, 4, 3),
                 BlockStateProvider.simple(ModBlocks.DISTANT_LEAVES.get()),
                 new BlobFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), 3),
-                new TwoLayersFeatureSize(1, 0, 2)).build());
+                new TwoLayersFeatureSize(1, 0, 2)).build());*/
     }
 
     public static ResourceKey<ConfiguredFeature<?, ?>> registerKey(String name) {

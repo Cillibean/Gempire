@@ -106,6 +106,10 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.RAW_TUNGSTEN_BLOCK.get());
         this.add(ModBlocks.TUNGSTEN_ORE.get(), (block -> createOreDrop(ModBlocks.TUNGSTEN_ORE.get(), ModItems.RAW_TUNGSTEN.get())));
         this.add(ModBlocks.DEEPSLATE_TUNGSTEN_ORE.get(), (block -> createOreDrop(ModBlocks.DEEPSLATE_TUNGSTEN_ORE.get(), ModItems.RAW_TUNGSTEN.get())));
+        this.add(ModBlocks.THULITE_ORE.get(), (block -> createOreDrop(ModBlocks.THULITE_ORE.get(), ModItems.RAW_THULITE.get())));
+        this.add(ModBlocks.ANATASE_ORE.get(), (block -> createOreDrop(ModBlocks.ANATASE_ORE.get(), ModItems.RAW_ANATASE.get())));
+        this.add(ModBlocks.ELECTRUM_ORE.get(), (block -> createOreDrop(ModBlocks.ELECTRUM_ORE.get(), ModItems.RAW_ELECTRUM.get())));
+        this.add(ModBlocks.PLATINUM_ORE.get(), (block -> createOreDrop(ModBlocks.PLATINUM_ORE.get(), ModItems.RAW_PLATINUM.get())));
 
         //marble
         this.dropSelf(ModBlocks.CHISELED_RUINED_MARBLE_BLOCK.get());
@@ -117,6 +121,24 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.SMOOTH_RUINED_MARBLE_BLOCK.get());
         this.dropSelf(ModBlocks.SMOOTH_RUINED_MARBLE_STAIRS.get());
         this.createSlabItemTable(ModBlocks.SMOOTH_RUINED_MARBLE_SLAB.get());
+
+        //deco
+        this.dropSelf(ModBlocks.RED_LATTICE.get());
+        this.dropSelf(ModBlocks.ORANGE_LATTICE.get());
+        this.dropSelf(ModBlocks.YELLOW_LATTICE.get());
+        this.dropSelf(ModBlocks.LIME_LATTICE.get());
+        this.dropSelf(ModBlocks.GREEN_LATTICE.get());
+        this.dropSelf(ModBlocks.CYAN_LATTICE.get());
+        this.dropSelf(ModBlocks.LIGHT_BLUE_LATTICE.get());
+        this.dropSelf(ModBlocks.BLUE_LATTICE.get());
+        this.dropSelf(ModBlocks.PURPLE_LATTICE.get());
+        this.dropSelf(ModBlocks.PINK_LATTICE.get());
+        this.dropSelf(ModBlocks.MAGENTA_LATTICE.get());
+        this.dropSelf(ModBlocks.BROWN_LATTICE.get());
+        this.dropSelf(ModBlocks.LIGHT_GRAY_LATTICE.get());
+        this.dropSelf(ModBlocks.GRAY_LATTICE.get());
+        this.dropSelf(ModBlocks.WHITE_LATTICE.get());
+        this.dropSelf(ModBlocks.BLACK_LATTICE.get());
 
         //no drop
         this.add(ModBlocks.ICE_SPIKE.get(), (block -> noDrop()));
