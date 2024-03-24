@@ -1,4 +1,4 @@
-// 1.20.1	2024-03-24T22:37:16.098312	Item Models: gempire
+// 1.20.1	2024-03-25T00:50:50.111704	Item Models: gempire
 2a4c323206d2fbeca217109aa5c8a2ac8ce38701 assets/gempire/models/item/acid_spit.json
 0da7ed67ca0a8fcb9a8ba427cc3a79d0931ef656 assets/gempire/models/item/alabaster_shards.json
 c0c62ab235536d2de57de21efdcbe773279a708b assets/gempire/models/item/amber_shards.json
@@ -45,6 +45,10 @@ a377c4c95fbdb0c7a5d902d83dab9daf91790bf9 assets/gempire/models/item/guardian_hel
 a87aa14c0d7854636365379df4b568b42b13b201 assets/gempire/models/item/guardian_tear.json
 fffc2dd45a30b8b0acff88f92c02b4fb01c08df9 assets/gempire/models/item/huntress_dagger.json
 fed43c84dccab1190e86f97df99f6eb6a5b003a5 assets/gempire/models/item/injector_panel.json
+9229ebe46286ae83e6a00f4f930221a85f66bb31 assets/gempire/models/item/kaleidoscope_fence.json
+f78c2f4d6d81f5eec5e94cc703cf51a320575e08 assets/gempire/models/item/kaleidoscope_hanging_sign.json
+f2ff0c01f866aaa7a0f664976c87a285bd40535f assets/gempire/models/item/kaleidoscope_sapling.json
+c4cbf787fcc496132cc04fb434b83284f243a169 assets/gempire/models/item/kaleidoscope_sign.json
 7cf583c1d6873c5259b6b7dbe12f133ac6e5a0b5 assets/gempire/models/item/light_blue_chroma.json
 39619f800c72aed48b5c63d8406baddf6cb8dcca assets/gempire/models/item/light_blue_shards.json
 fb62a5ae6b8c7c60a0118e7064e65defee1ecbdf assets/gempire/models/item/light_gray_chroma.json

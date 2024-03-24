@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "gempire:block/kaleidoscope_slab"
+    },
+    "type=double": {
+      "model": "gempire:block/kaleidoscope_planks"
+    },
+    "type=top": {
+      "model": "gempire:block/kaleidoscope_slab_top"
+    }
+  }
+}

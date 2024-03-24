@@ -151,6 +151,11 @@ public class ModItemModelProvider extends ItemModelProvider {
         fenceItem(ModBlocks.DISTANT_FENCE, ModBlocks.DISTANT_PLANKS);
         simpleItem(ModItems.DISTANT_SIGN);
         simpleItem(ModItems.DISTANT_HANGING_SIGN);
+
+        saplingItem(ModBlocks.KALEIDOSCOPE_SAPLING);
+        fenceItem(ModBlocks.KALEIDOSCOPE_FENCE, ModBlocks.KALEIDOSCOPE_PLANKS);
+        simpleItem(ModItems.KALEIDOSCOPE_SIGN);
+        simpleItem(ModItems.KALEIDOSCOPE_HANGING_SIGN);
     }
 
     private ItemModelBuilder saplingItem(RegistryObject<Block> item) {

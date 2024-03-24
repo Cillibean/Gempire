@@ -44,11 +44,11 @@ public class ModTE {
     public static final RegistryObject<BlockEntityType<ModSignBlockEntity>> MOD_SIGN =
             TILE_ENTITIES.register("mod_sign", () ->
                     BlockEntityType.Builder.of(ModSignBlockEntity::new,
-                            ModBlocks.DISTANT_SIGN.get(), ModBlocks.DISTANT_WALL_SIGN.get()).build(null));
+                            ModBlocks.DISTANT_SIGN.get(), ModBlocks.DISTANT_WALL_SIGN.get(), ModBlocks.KALEIDOSCOPE_SIGN.get(), ModBlocks.KALEIDOSCOPE_WALL_SIGN.get()).build(null));
 
     public static final RegistryObject<BlockEntityType<ModHangingSignBlockEntity>> MOD_HANGING_SIGN =
             TILE_ENTITIES.register("mod_hanging_sign", () ->
                     BlockEntityType.Builder.of(ModHangingSignBlockEntity::new,
-                            ModBlocks.DISTANT_HANGING_SIGN.get(), ModBlocks.DISTANT_WALL_HANGING_SIGN.get()).build(null));
+                            ModBlocks.DISTANT_HANGING_SIGN.get(), ModBlocks.DISTANT_WALL_HANGING_SIGN.get(), ModBlocks.KALEIDOSCOPE_HANGING_SIGN.get(), ModBlocks.KALEIDOSCOPE_WALL_HANGING_SIGN.get()).build(null));
 
 }

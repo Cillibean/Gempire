@@ -24,7 +24,7 @@ public class ModPlacedFeatures {
     public static final ResourceKey<PlacedFeature> TUNGSTEN_PLACED_KEY = createKey("tungsten_placed");
     public static final ResourceKey<PlacedFeature> CRYSTAL_PLACED_KEY = createKey("crystal_placed");
 
-    public static final ResourceKey<PlacedFeature> DISTANT_PLACED_KEY = createKey("distant_placed");
+    public static final ResourceKey<PlacedFeature> DISTANT_PLACED_KEY = createKey("kaleidoscope_placed");
 
     public static final ResourceKey<PlacedFeature> BERRY_PLACED_KEY = createKey("shock_berry_placed");
 
