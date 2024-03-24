@@ -1,16 +1,19 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "###",
-    "###",
-    "###"
-  ],
+  "category": "misc",
+  "group": "platinum",
   "key": {
     "#": {
       "item": "gempire:platinum_ingot"
     }
   },
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
   "result": {
     "item": "gempire:platinum_block"
-  }
+  },
+  "show_notification": true
 }

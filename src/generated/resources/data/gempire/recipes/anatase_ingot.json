@@ -1,16 +1,19 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "###",
-    "###",
-    "###"
-  ],
+  "category": "misc",
+  "group": "anatase",
   "key": {
     "#": {
       "item": "gempire:anatase_ingot"
     }
   },
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
   "result": {
     "item": "gempire:anatase_block"
-  }
+  },
+  "show_notification": true
 }

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "thulite",
+  "key": {
+    "#": {
+      "item": "gempire:thulite_ingot"
+    }
+  },
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "result": {
+    "item": "gempire:thulite_block"
+  },
+  "show_notification": true
+}

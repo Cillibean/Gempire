@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "thulite",
+  "ingredients": [
+    {
+      "item": "gempire:raw_thulite_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "item": "gempire:raw_thulite"
+  }
+}

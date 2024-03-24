@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "platinum",
+  "key": {
+    "#": {
+      "item": "gempire:raw_platinum"
+    }
+  },
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "result": {
+    "item": "gempire:raw_platinum_block"
+  },
+  "show_notification": true
+}
