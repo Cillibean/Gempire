@@ -38,7 +38,9 @@ public class ModConfiguredFeatures {
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> CRYSTAL_KEY = registerKey("crystal");
 
-    public static final ResourceKey<ConfiguredFeature<?, ?>> DISTANT_KEY = registerKey("crystal");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> DISTANT_KEY = registerKey("distant");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> SHADED_KEY = registerKey("shaded");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> KALEIDOSCOPE_KEY = registerKey("kaleidoscope");
     public static final ResourceKey<ConfiguredFeature<?, ?>> TUNGSTEN_ORE_KEY = registerKey("tungsten_ore");
     public static final ResourceKey<ConfiguredFeature<?, ?>> SHOCK_BERRY_KEY = registerKey("patch_shock_berry");
 

@@ -1,3 +1,6 @@
 {
-  "parent": "gempire:block/pink_latticepost"
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "gempire:item/pink_lattice"
+  }
 }

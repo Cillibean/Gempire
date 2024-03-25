@@ -1,3 +1,6 @@
 {
-  "parent": "gempire:block/purple_latticepost"
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "gempire:item/purple_lattice"
+  }
 }

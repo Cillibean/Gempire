@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "gempire:block/shaded_slab"
+    },
+    "type=double": {
+      "model": "gempire:block/shaded_planks"
+    },
+    "type=top": {
+      "model": "gempire:block/shaded_slab_top"
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "gempire:prismatic_gates",
+  "features": "gempire:tree_kaleidoscope_placed",
+  "step": "vegetal_decoration"
+}

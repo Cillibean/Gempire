@@ -125,6 +125,7 @@ public class ClientProxy {
         Sheets.addWoodType(ModWoodTypes.DISTANT);
         Sheets.addWoodType(ModWoodTypes.CRYSTAL);
         Sheets.addWoodType(ModWoodTypes.KALEIDOSCOPE);
+        Sheets.addWoodType(ModWoodTypes.SHADED);
     }
 
     @SubscribeEvent

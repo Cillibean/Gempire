@@ -2327,7 +2327,7 @@
                       "type": "minecraft:biome",
                       "biome_is": [
                         "gempire:wayward_ocean",
-                        "gempire:anomylous_reef"
+                        "gempire:anomalous_reef"
                       ]
                     },
                     "then_run": {

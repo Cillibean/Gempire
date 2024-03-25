@@ -115,7 +115,7 @@
           }
         },
         {
-          "biome": "gempire:anomylous_reef",
+          "biome": "gempire:anomalous_reef",
           "parameters": {
             "temperature": 0.2,
             "humidity": 0,
