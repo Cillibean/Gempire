@@ -1,3 +1,6 @@
 {
-  "parent": "gempire:block/light_blue_latticepost"
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "gempire:item/light_blue_lattice"
+  }
 }

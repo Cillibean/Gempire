@@ -339,6 +339,86 @@ public class ModBlocks {
     public static final RegistryObject<Block> KALEIDOSCOPE_TRAPDOOR = BLOCKS.register("kaleidoscope_trapdoor",
             () -> new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_TRAPDOOR), ModWoodTypes.KALEIDOSCOPE.setType()));
 
+    public static final RegistryObject<Block> SHADED_LOG = BLOCKS.register("shaded_log", () ->
+            new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG)));
+
+    public static final RegistryObject<Block> STRIPPED_SHADED_LOG = BLOCKS.register("stripped_shaded_log", () ->
+            new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_LOG)));
+
+    public static final RegistryObject<Block> SHADED_WOOD = BLOCKS.register("shaded_wood", () ->
+            new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG)));
+
+    public static final RegistryObject<Block> STRIPPED_SHADED_WOOD = BLOCKS.register("stripped_shaded_wood", () ->
+            new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_WOOD)));
+
+    public static final RegistryObject<Block> SHADED_LEAVES = BLOCKS.register("shaded_leaves", () ->
+            new LeavesBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES)) {
+                @Override
+                public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return true;
+                }
+
+                @Override
+                public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return 60;
+                }
+
+                @Override
+                public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return 30;
+                }
+            });
+
+    public static final RegistryObject<Block> SHADED_SAPLING = BLOCKS.register("shaded_sapling", () ->
+            new SaplingBlock(new DistantTreeGrower(), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)));
+
+    public static final RegistryObject<Block> SHADED_PLANKS = BLOCKS.register("shaded_planks", () ->
+            new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)) {
+                @Override
+                public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return true;
+                }
+
+                @Override
+                public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return 20;
+                }
+
+                @Override
+                public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return 5;
+                }
+            });
+
+    public static final RegistryObject<Block> SHADED_SLAB = BLOCKS.register("shaded_slab", () ->
+            new SlabBlock(BlockBehaviour.Properties.copy(Blocks.OAK_SLAB)));
+
+    public static final RegistryObject<Block> SHADED_STAIRS = BLOCKS.register("shaded_stairs", () ->
+            new StairBlock(() -> ModBlocks.SHADED_PLANKS.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.OAK_STAIRS)));
+    public static final RegistryObject<Block> SHADED_SIGN = BLOCKS.register("shaded_sign", () ->
+            new ModStandingSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_SIGN), ModWoodTypes.SHADED));
+
+    public static final RegistryObject<Block> SHADED_HANGING_SIGN = BLOCKS.register("shaded_hanging_sign", () ->
+            new ModHangingSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_HANGING_SIGN), ModWoodTypes.SHADED));
+
+    public static final RegistryObject<Block> SHADED_WALL_SIGN = BLOCKS.register("shaded_wall_sign", () ->
+            new ModWallSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_WALL_SIGN), ModWoodTypes.SHADED));
+
+    public static final RegistryObject<Block> SHADED_WALL_HANGING_SIGN = BLOCKS.register("shaded_wall_hanging_sign", () ->
+            new ModWallHangingSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_WALL_HANGING_SIGN), ModWoodTypes.SHADED));
+
+    public static final RegistryObject<Block> SHADED_FENCE = BLOCKS.register("shaded_fence",
+            () -> new FenceBlock(BlockBehaviour.Properties.copy(Blocks.OAK_FENCE)));
+
+    public static final RegistryObject<Block> SHADED_FENCE_GATE = BLOCKS.register("shaded_fence_gate",
+            () -> new FenceGateBlock(BlockBehaviour.Properties.copy(Blocks.OAK_FENCE_GATE), SoundEvents.FENCE_GATE_OPEN, SoundEvents.FENCE_GATE_CLOSE));
+
+    public static final RegistryObject<Block> SHADED_DOOR = BLOCKS.register("shaded_door",
+            () -> new DoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_DOOR), ModWoodTypes.SHADED.setType()));
+
+    public static final RegistryObject<Block> SHADED_TRAPDOOR = BLOCKS.register("shaded_trapdoor",
+            () -> new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_TRAPDOOR), ModWoodTypes.SHADED.setType()));
+
     public static final RegistryObject<Block> RED_LATTICE = BLOCKS.register("red_lattice", () ->
             new LatticeBlock(BlockBehaviour.Properties.of().strength(0.3f, 0.3f)
                     .sound(SoundType.METAL).requiresCorrectToolForDrops().noOcclusion()));

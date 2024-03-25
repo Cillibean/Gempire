@@ -299,7 +299,6 @@
   "block.gempire.distant_sign": "Distant Sign",
   "block.gempire.distant_hanging_sign": "Distant Hanging Sign",
 
-
   "block.gempire.kaleidoscope_log": "Kaleidoscope Log",
   "block.gempire.kaleidoscope_wood": "Kaleidoscope Wood",
   "block.gempire.stripped_kaleidoscope_log": "Stripped Kaleidoscope Log",
@@ -313,6 +312,20 @@
   "block.gempire.kaleidoscope_fence_gate": "Kaleidoscope Fence Gate",
   "block.gempire.kaleidoscope_sign": "Kaleidoscope Sign",
   "block.gempire.kaleidoscope_hanging_sign": "Kaleidoscope Hanging Sign",
+
+  "block.gempire.shaded_log": "Shaded Log",
+  "block.gempire.shaded_wood": "Shaded Wood",
+  "block.gempire.stripped_shaded_log": "Stripped Shaded Log",
+  "block.gempire.stripped_shaded_wood": "Stripped Shaded Wood",
+  "block.gempire.shaded_leaves": "Shaded Leaves",
+  "block.gempire.shaded_sapling": "Shaded Sapling",
+  "block.gempire.shaded_planks": "Shaded Planks",
+  "block.gempire.shaded_slab": "Shaded Slab",
+  "block.gempire.shaded_stairs": "Shaded Stairs",
+  "block.gempire.shaded_fence": "Shaded Fence",
+  "block.gempire.shaded_fence_gate": "Shaded Fence Gate",
+  "block.gempire.shaded_sign": "Shaded Sign",
+  "block.gempire.shaded_hanging_sign": "Shaded Hanging Sign",
 
   "block.gempire.white_diamond_glass": "White Diamond Glass",
   "block.gempire.black_diamond_glass": "Black Diamond Glass",
