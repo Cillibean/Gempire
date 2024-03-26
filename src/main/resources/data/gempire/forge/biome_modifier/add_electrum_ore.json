@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#gempire:is_desolate",
+  "features": "gempire:electrum_placed",
+  "step": "underground_ores"
+}
