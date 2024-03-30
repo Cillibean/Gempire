@@ -3,9 +3,9 @@ package com.gempire.effect;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 
-public class BlueResistanceEffect extends MobEffect {
+public class CalmEffect extends MobEffect {
 
-    public BlueResistanceEffect(MobEffectCategory mobEffectCategory, int color) {
+    public CalmEffect(MobEffectCategory mobEffectCategory, int color) {
         super(mobEffectCategory, color);
     }
 

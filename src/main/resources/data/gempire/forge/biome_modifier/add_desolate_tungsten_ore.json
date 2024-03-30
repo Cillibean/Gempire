@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#gempire:is_desolate",
+  "features": "gempire:tungsten_placed",
+  "step": "underground_ores"
+}

@@ -221,6 +221,9 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                         ModBlocks.TUNGSTEN_BLOCK.get(),
                         ModBlocks.PRISMATIC_BLOCK.get()
                 );
+
+        this.tag(ModTags.Blocks.DESOLATE_ORE_REPLACEABLES)
+                .add(ModBlocks.PEGMATITE.get());
     }
 
     @Override

@@ -614,6 +614,11 @@ public class ModCreativeModeTabs {
                 populator.accept(ModBlocks.RAW_TUNGSTEN_BLOCK.get());
                 populator.accept(ModBlocks.TUNGSTEN_ORE.get());
                 populator.accept(ModBlocks.DEEPSLATE_TUNGSTEN_ORE.get());
+                populator.accept(ModBlocks.PEGMATITE_TUNGSTEN_ORE.get());
+
+                populator.accept(ModBlocks.PYRITE_BLOCK.get());
+                populator.accept(ModBlocks.RAW_PYRITE_BLOCK.get());
+                populator.accept(ModBlocks.PYRITE_ORE.get());
 
                 populator.accept(ModBlocks.THULITE_BLOCK.get());
                 populator.accept(ModBlocks.RAW_THULITE_BLOCK.get());
@@ -686,6 +691,20 @@ public class ModCreativeModeTabs {
                 populator.accept(ModItems.KALEIDOSCOPE_FENCE_GATE.get());
                 populator.accept(ModItems.KALEIDOSCOPE_SIGN.get());
                 populator.accept(ModItems.KALEIDOSCOPE_HANGING_SIGN.get());
+
+                populator.accept(ModItems.SHADED_LOG.get());
+                populator.accept(ModItems.STRIPPED_SHADED_LOG.get());
+                populator.accept(ModItems.SHADED_WOOD.get());
+                populator.accept(ModItems.STRIPPED_SHADED_WOOD.get());
+                populator.accept(ModItems.SHADED_LEAVES.get());
+                populator.accept(ModItems.SHADED_SAPLING.get());
+                populator.accept(ModItems.SHADED_PLANKS.get());
+                populator.accept(ModItems.SHADED_SLAB.get());
+                populator.accept(ModItems.SHADED_STAIRS.get());
+                populator.accept(ModItems.SHADED_FENCE.get());
+                populator.accept(ModItems.SHADED_FENCE_GATE.get());
+                populator.accept(ModItems.SHADED_SIGN.get());
+                populator.accept(ModItems.SHADED_HANGING_SIGN.get());
 
                 populator.accept(ModItems.RED_LATTICE.get());
                 populator.accept(ModItems.ORANGE_LATTICE.get());

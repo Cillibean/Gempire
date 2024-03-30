@@ -1,4 +1,4 @@
-// 1.20.1	2024-03-24T18:14:03.151176	Recipes
+// 1.20.1	2024-03-30T15:26:21.008921	Recipes
 09686720d2b3eb0a0dd74992f4a9a9a01e30ae2c data/gempire/advancements/recipes/misc/anatase_block.json
 0cd9894af2939549b63622d4159a700b63396bf9 data/gempire/advancements/recipes/misc/anatase_ingot.json
 1d9d04cb27a057d253161b180f2da177cb469de5 data/gempire/advancements/recipes/misc/electrum_block.json
@@ -7,12 +7,16 @@
 3978d242238b9ef974ee77a00e43b74083ad5e08 data/gempire/advancements/recipes/misc/platinum_ingot.json
 cf128ac7b3b5af2f2ac2c16b3e84016e4481e70f data/gempire/advancements/recipes/misc/prismatic_block.json
 44b9d2323f2855c2e978d1a0e4d149c2dfcb8135 data/gempire/advancements/recipes/misc/prismatic_ingot.json
+cf653e5bda8194da293fabb8b175e1bd9c0aafb1 data/gempire/advancements/recipes/misc/pyrite_block.json
+bd91b6e21cbea3c287594d77fc3572f3eab1fd0d data/gempire/advancements/recipes/misc/pyrite_ingot.json
 25a7b60ba091503a55247af6ffe58de3695b7142 data/gempire/advancements/recipes/misc/raw_anatase.json
 d5beba92fbe2de215628937e11acd7a0de4b722c data/gempire/advancements/recipes/misc/raw_anatase_block.json
 b6f48fa42181ffaedce8fb49edde0740003a5b24 data/gempire/advancements/recipes/misc/raw_electrum.json
 b484567049f78944105db3f33451b8415b69ae51 data/gempire/advancements/recipes/misc/raw_electrum_block.json
 07416d9f7fde37615e0b41c2e552c662ead6065e data/gempire/advancements/recipes/misc/raw_platinum.json
 5c30dc58e5256c557b26f42ca2a8cdc968f84148 data/gempire/advancements/recipes/misc/raw_platinum_block.json
+e4eaa469c7f1b54bebee67673fa3bc9115fc8aac data/gempire/advancements/recipes/misc/raw_pyrite.json
+655e28925a2897d73a188994c1100c29f2575767 data/gempire/advancements/recipes/misc/raw_pyrite_block.json
 98e37dc51c64a05d15bc0a842fca3d57beb09cf6 data/gempire/advancements/recipes/misc/raw_thulite.json
 6c2ed20a858bcb8722d50ca037d2d691f38f3d53 data/gempire/advancements/recipes/misc/raw_thulite_block.json
 ef18e0e1e54c4361f785eefc32df5f9daf3be4d7 data/gempire/advancements/recipes/misc/raw_tungsten.json
@@ -29,12 +33,16 @@ cd5f976ca013e656b2b5adeec05a2890b8cb07a9 data/gempire/recipes/electrum_block.jso
 40e52b587663ca64a45f1d36256b2d65abb56716 data/gempire/recipes/platinum_ingot.json
 5aa49fde235bce76a0d27a6d516244457a7cd7e5 data/gempire/recipes/prismatic_block.json
 d821236192a58266e0b600b9d8e438fbbadbb753 data/gempire/recipes/prismatic_ingot.json
+c6c942c41e486e8085c1fd3f904cdd6e51a68b2e data/gempire/recipes/pyrite_block.json
+c1a3614429b10a4334689d0df45cd63bd61ed7a7 data/gempire/recipes/pyrite_ingot.json
 2a5509b6ab2d684038b864ddb42441719f668a22 data/gempire/recipes/raw_anatase.json
 6441267a9260c6ae0da7a7accd84fece62c58f96 data/gempire/recipes/raw_anatase_block.json
 e403fa5cec3d5b4093f6a57eaffb1900a7c9840a data/gempire/recipes/raw_electrum.json
 d430b9dca2d08a7653e5be044423439dcc60d540 data/gempire/recipes/raw_electrum_block.json
 d4ddedeb0d7fb1e2d894287443df91dd0a98f68c data/gempire/recipes/raw_platinum.json
 1a7fc56146196238ab57c9db0bc20e5ba81eabdc data/gempire/recipes/raw_platinum_block.json
+bd2749da8d641336f7642cf335ef402dcb11b2a4 data/gempire/recipes/raw_pyrite.json
+99e041f9dc2d3a864df030acbac270603b9371d1 data/gempire/recipes/raw_pyrite_block.json
 9d96b3814d465ece0b74f3bfb42f8547eb04804c data/gempire/recipes/raw_thulite.json
 32ea35e28d7fe48fd4af6679bc302367eba08119 data/gempire/recipes/raw_thulite_block.json
 2f538556aa2e00d662bcf5617fda13ac7925e47d data/gempire/recipes/raw_tungsten.json

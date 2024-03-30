@@ -209,6 +209,20 @@ public class ModItems {
             )
     );
 
+    public static final RegistryObject<Item> RAW_PYRITE_BLOCK = ITEMS.register("raw_pyrite_block", () ->
+            new BlockItem(
+                    ModBlocks.RAW_PYRITE_BLOCK.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> PYRITE_ORE = ITEMS.register("pyrite_ore", () ->
+            new BlockItem(
+                    ModBlocks.PYRITE_ORE.get(),
+                    new Item.Properties()
+            )
+    );
+
     public static final RegistryObject<Item> GEODE_CRYSTAL_BLOCK = ITEMS.register("geode_crystal_block", () ->
             new BlockItem(
                     ModBlocks.GEODE_CRYSTAL_BLOCK.get(),
@@ -254,6 +268,13 @@ public class ModItems {
     public static final RegistryObject<Item> DEEPSLATE_TUNGSTEN_ORE = ITEMS.register("deepslate_tungsten_ore", () ->
             new BlockItem(
                     ModBlocks.DEEPSLATE_TUNGSTEN_ORE.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> PEGMATITE_TUNGSTEN_ORE = ITEMS.register("pegmatite_tungsten_ore", () ->
+            new BlockItem(
+                    ModBlocks.PEGMATITE_TUNGSTEN_ORE.get(),
                     new Item.Properties()
             )
     );
@@ -598,6 +619,18 @@ public class ModItems {
             new Item(new Item.Properties().stacksTo(64))
     );
 
+    public static final RegistryObject<Item> PYRITE_INGOT = ITEMS.register("pyrite_ingot", () ->
+            new Item(new Item.Properties().stacksTo(64))
+    );
+
+    public static final RegistryObject<Item> RAW_PYRITE = ITEMS.register("raw_pyrite", () ->
+            new Item(new Item.Properties().stacksTo(64))
+    );
+
+    public static final RegistryObject<Item> PYRITE_NUGGET = ITEMS.register("pyrite_nugget", () ->
+            new Item(new Item.Properties().stacksTo(64))
+    );
+
     public static final RegistryObject<Item> PLATINUM_INGOT = ITEMS.register("platinum_ingot", () ->
             new Item(new Item.Properties().stacksTo(64))
     );
@@ -804,6 +837,105 @@ public class ModItems {
     public static final RegistryObject<Item> KALEIDOSCOPE_HANGING_SIGN = ITEMS.register("kaleidoscope_hanging_sign",
             () -> new HangingSignItem(ModBlocks.KALEIDOSCOPE_HANGING_SIGN.get(), ModBlocks.KALEIDOSCOPE_WALL_HANGING_SIGN.get(),
                     new Item.Properties().stacksTo(16)));
+
+    public static final RegistryObject<Item> SHADED_LOG = ITEMS.register("shaded_log", () ->
+            new BlockItem(
+                    ModBlocks.SHADED_LOG.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> STRIPPED_SHADED_LOG = ITEMS.register("stripped_shaded_log", () ->
+            new BlockItem(
+                    ModBlocks.STRIPPED_SHADED_LOG.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> SHADED_WOOD = ITEMS.register("shaded_wood", () ->
+            new BlockItem(
+                    ModBlocks.SHADED_WOOD.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> STRIPPED_SHADED_WOOD = ITEMS.register("stripped_shaded_wood", () ->
+            new BlockItem(
+                    ModBlocks.STRIPPED_SHADED_WOOD.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> SHADED_LEAVES = ITEMS.register("shaded_leaves", () ->
+            new BlockItem(
+                    ModBlocks.SHADED_LEAVES.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> SHADED_SAPLING = ITEMS.register("shaded_sapling", () ->
+            new BlockItem(
+                    ModBlocks.SHADED_SAPLING.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> SHADED_PLANKS = ITEMS.register("shaded_planks", () ->
+            new BlockItem(
+                    ModBlocks.SHADED_PLANKS.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> SHADED_SLAB = ITEMS.register("shaded_slab", () ->
+            new BlockItem(
+                    ModBlocks.SHADED_SLAB.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> SHADED_FENCE = ITEMS.register("shaded_fence", () ->
+            new BlockItem(
+                    ModBlocks.SHADED_FENCE.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> SHADED_FENCE_GATE = ITEMS.register("shaded_fence_gate", () ->
+            new BlockItem(
+                    ModBlocks.SHADED_FENCE_GATE.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> SHADED_DOOR = ITEMS.register("shaded_door", () ->
+            new BlockItem(
+                    ModBlocks.SHADED_DOOR.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> SHADED_TRAPDOOR = ITEMS.register("shaded_trapdoor", () ->
+            new BlockItem(
+                    ModBlocks.SHADED_TRAPDOOR.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> SHADED_STAIRS = ITEMS.register("shaded_stairs", () ->
+            new BlockItem(
+                    ModBlocks.SHADED_STAIRS.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> SHADED_SIGN = ITEMS.register("shaded_sign",
+            () -> new SignItem(new Item.Properties().stacksTo(16), ModBlocks.SHADED_SIGN.get(), ModBlocks.SHADED_WALL_SIGN.get()));
+    public static final RegistryObject<Item> SHADED_HANGING_SIGN = ITEMS.register("shaded_hanging_sign",
+            () -> new HangingSignItem(ModBlocks.SHADED_HANGING_SIGN.get(), ModBlocks.SHADED_WALL_HANGING_SIGN.get(),
+                    new Item.Properties().stacksTo(16)));
+
+
 
 
     public static final RegistryObject<Item> DISTANT_LOG = ITEMS.register("distant_log", () ->

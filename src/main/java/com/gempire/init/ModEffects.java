@@ -50,8 +50,8 @@ public class ModEffects {
     public static final RegistryObject<MobEffect> SHADE = MOB_EFFECTS.register("shade",
             () -> new ShadeEffect(MobEffectCategory.BENEFICIAL, 12566463));
 
-    public static final RegistryObject<MobEffect> BLUE_RESISTANCE = MOB_EFFECTS.register("blue_resistance",
-            () -> new BlueResistanceEffect(MobEffectCategory.BENEFICIAL, 6407149));
+    public static final RegistryObject<MobEffect> CALM = MOB_EFFECTS.register("blue_resistance",
+            () -> new CalmEffect(MobEffectCategory.BENEFICIAL, 6407149));
 
     public static final RegistryObject<MobEffect> ENTANGLEMENT = MOB_EFFECTS.register("entanglement",
             () -> new EntangledEffect(MobEffectCategory.HARMFUL, 6923862).addAttributeModifier(Attributes.MOVEMENT_SPEED, "91AEAA56-376B-4498-935B-2F7F68070635", -0.20000000298023224, AttributeModifier.Operation.MULTIPLY_TOTAL));
@@ -61,6 +61,9 @@ public class ModEffects {
 
     public static final RegistryObject<MobEffect> BLINDING_LIGHT = MOB_EFFECTS.register("blinding_light",
             () -> new BlindingLightEffect(MobEffectCategory.HARMFUL, 16250871));
+
+    public static final RegistryObject<MobEffect> DREAD = MOB_EFFECTS.register("dread",
+            () -> new DreadEffect(MobEffectCategory.HARMFUL, 6407149).addAttributeModifier(Attributes.MOVEMENT_SPEED, "91AEAA56-376B-4498-935B-2F7F68070635", -0.20000000298023224, AttributeModifier.Operation.MULTIPLY_TOTAL));
 
     public static void register(IEventBus eventBus) {
         MOB_EFFECTS.register(eventBus);

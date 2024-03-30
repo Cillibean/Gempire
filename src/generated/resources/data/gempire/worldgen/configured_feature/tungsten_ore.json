@@ -6,6 +6,15 @@
     "targets": [
       {
         "state": {
+          "Name": "gempire:pegmatite_tungsten_ore"
+        },
+        "target": {
+          "predicate_type": "minecraft:tag_match",
+          "tag": "gempire:desolate_ore_replaceables"
+        }
+      },
+      {
+        "state": {
           "Name": "gempire:tungsten_ore"
         },
         "target": {

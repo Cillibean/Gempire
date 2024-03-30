@@ -36,6 +36,10 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.TUNGSTEN_NUGGET);
         simpleItem(ModItems.RAW_TUNGSTEN);
 
+        simpleItem(ModItems.PYRITE_INGOT);
+        simpleItem(ModItems.PYRITE_NUGGET);
+        simpleItem(ModItems.RAW_PYRITE);
+
         simpleItem(ModItems.PRISMATIC_INGOT);
         simpleItem(ModItems.GEM_ALLOY);
         //simpleItem(ModItems.PRISMATIC_UPGRADE_SMITHING_TEMPLATE);
@@ -147,6 +151,23 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.AMBER_SHARDS);
         simpleItem(ModItems.ALABASTER_SHARDS);
 
+        simpleItem(ModItems.RED_LATTICE);
+        simpleItem(ModItems.ORANGE_LATTICE);
+        simpleItem(ModItems.YELLOW_LATTICE);
+        simpleItem(ModItems.LIME_LATTICE);
+        simpleItem(ModItems.GREEN_LATTICE);
+        simpleItem(ModItems.LIGHT_BLUE_LATTICE);
+        simpleItem(ModItems.BLUE_LATTICE);
+        simpleItem(ModItems.PURPLE_LATTICE);
+        simpleItem(ModItems.CYAN_LATTICE);
+        simpleItem(ModItems.PINK_LATTICE);
+        simpleItem(ModItems.WHITE_LATTICE);
+        simpleItem(ModItems.LIGHT_GRAY_LATTICE);
+        simpleItem(ModItems.GRAY_LATTICE);
+        simpleItem(ModItems.BLACK_LATTICE);
+        simpleItem(ModItems.BROWN_LATTICE);
+        simpleItem(ModItems.MAGENTA_LATTICE);
+
         saplingItem(ModBlocks.DISTANT_SAPLING);
         fenceItem(ModBlocks.DISTANT_FENCE, ModBlocks.DISTANT_PLANKS);
         simpleItem(ModItems.DISTANT_SIGN);
@@ -156,6 +177,11 @@ public class ModItemModelProvider extends ItemModelProvider {
         fenceItem(ModBlocks.KALEIDOSCOPE_FENCE, ModBlocks.KALEIDOSCOPE_PLANKS);
         simpleItem(ModItems.KALEIDOSCOPE_SIGN);
         simpleItem(ModItems.KALEIDOSCOPE_HANGING_SIGN);
+
+        saplingItem(ModBlocks.SHADED_SAPLING);
+        fenceItem(ModBlocks.SHADED_FENCE, ModBlocks.SHADED_PLANKS);
+        simpleItem(ModItems.SHADED_SIGN);
+        simpleItem(ModItems.SHADED_HANGING_SIGN);
     }
 
     private ItemModelBuilder saplingItem(RegistryObject<Block> item) {

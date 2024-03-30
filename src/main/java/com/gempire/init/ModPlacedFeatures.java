@@ -22,6 +22,11 @@ import java.util.List;
 
 public class ModPlacedFeatures {
     public static final ResourceKey<PlacedFeature> TUNGSTEN_PLACED_KEY = createKey("tungsten_placed");
+    public static final ResourceKey<PlacedFeature> THULITE_PLACED_KEY = createKey("thulite_placed");
+    public static final ResourceKey<PlacedFeature> ANATASE_PLACED_KEY = createKey("anatase_placed");
+    public static final ResourceKey<PlacedFeature> ELECTRUM_PLACED_KEY = createKey("electrum_placed");
+    public static final ResourceKey<PlacedFeature> PLATINUM_PLACED_KEY = createKey("platinum_placed");
+    public static final ResourceKey<PlacedFeature> PYRITE_PLACED_KEY = createKey("pyrite_placed");
     public static final ResourceKey<PlacedFeature> CRYSTAL_PLACED_KEY = createKey("crystal_placed");
 
     public static final ResourceKey<PlacedFeature> DISTANT_PLACED_KEY = createKey("kaleidoscope_placed");
@@ -33,6 +38,26 @@ public class ModPlacedFeatures {
     public static void bootstrap(BootstapContext<PlacedFeature> context) {
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
         register(context, TUNGSTEN_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.TUNGSTEN_ORE_KEY),
+                commonOrePlacement(12, // VeinsPerChunk
+                        HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-80), VerticalAnchor.aboveBottom(80))));
+
+        register(context, THULITE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.THULITE_ORE_KEY),
+                commonOrePlacement(7, // VeinsPerChunk
+                        HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-80), VerticalAnchor.aboveBottom(80))));
+
+        register(context, ANATASE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.ANATASE_ORE_KEY),
+                commonOrePlacement(7, // VeinsPerChunk
+                        HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-80), VerticalAnchor.aboveBottom(80))));
+
+        register(context, ELECTRUM_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.ELECTRUM_ORE_KEY),
+                commonOrePlacement(7, // VeinsPerChunk
+                        HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-80), VerticalAnchor.aboveBottom(80))));
+
+        register(context, PLATINUM_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.PLATINUM_ORE_KEY),
+                commonOrePlacement(7, // VeinsPerChunk
+                        HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-80), VerticalAnchor.aboveBottom(80))));
+
+        register(context, PYRITE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.PYRITE_ORE_KEY),
                 commonOrePlacement(12, // VeinsPerChunk
                         HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-80), VerticalAnchor.aboveBottom(80))));
         /*

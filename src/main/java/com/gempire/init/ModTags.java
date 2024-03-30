@@ -21,6 +21,9 @@ public class ModTags {
         public static final TagKey<Block> PROSPECTOR_VALUABLES
                 = tag("prospector_valuables");
 
+        public static final TagKey<Block> DESOLATE_ORE_REPLACEABLES
+                = tag("desolate_ore_replaceables");
+
         private static TagKey<Block> tag(String name) {
             return BlockTags.create(new ResourceLocation(Gempire.MODID, name));
         }
