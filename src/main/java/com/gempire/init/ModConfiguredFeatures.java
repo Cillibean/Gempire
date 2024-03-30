@@ -46,9 +46,11 @@ public class ModConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> ANATASE_ORE_KEY = registerKey("anatase_ore");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ELECTRUM_ORE_KEY = registerKey("electrum_ore");
     public static final ResourceKey<ConfiguredFeature<?, ?>> PLATINUM_ORE_KEY = registerKey("platinum_ore");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> PYRITE_ORE_KEY = registerKey("pyrite_ore");
     public static final ResourceKey<ConfiguredFeature<?, ?>> SHOCK_BERRY_KEY = registerKey("patch_shock_berry");
 
     public static final Supplier<List<OreConfiguration.TargetBlockState>> TUNGSTEN_ORES = Suppliers.memoize(() -> List.of(
+            OreConfiguration.target(new TagMatchTest(ModTags.Blocks.DESOLATE_ORE_REPLACEABLES), ModBlocks.PEGMATITE_TUNGSTEN_ORE.get().defaultBlockState()),
             OreConfiguration.target(new TagMatchTest(BlockTags.STONE_ORE_REPLACEABLES), ModBlocks.TUNGSTEN_ORE.get().defaultBlockState()),
             OreConfiguration.target(new TagMatchTest(BlockTags.DEEPSLATE_ORE_REPLACEABLES), ModBlocks.DEEPSLATE_TUNGSTEN_ORE.get().defaultBlockState())));
 
@@ -63,6 +65,9 @@ public class ModConfiguredFeatures {
 
     public static final Supplier<List<OreConfiguration.TargetBlockState>> PLATINUM_ORES = Suppliers.memoize(() -> List.of(
             OreConfiguration.target(new TagMatchTest(ModTags.Blocks.DESOLATE_ORE_REPLACEABLES), ModBlocks.PLATINUM_ORE.get().defaultBlockState())));
+
+    public static final Supplier<List<OreConfiguration.TargetBlockState>> PYRITE_ORES = Suppliers.memoize(() -> List.of(
+            OreConfiguration.target(new TagMatchTest(ModTags.Blocks.DESOLATE_ORE_REPLACEABLES), ModBlocks.PYRITE_ORE.get().defaultBlockState())));
     public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> context) {
         HolderGetter<PlacedFeature> placedFeatures = context.lookup(Registries.PLACED_FEATURE);
         register(context, TUNGSTEN_ORE_KEY, Feature.ORE, new OreConfiguration(TUNGSTEN_ORES.get(), 12));
@@ -70,6 +75,7 @@ public class ModConfiguredFeatures {
         register(context, ANATASE_ORE_KEY, Feature.ORE, new OreConfiguration(ANATASE_ORES.get(), 3));
         register(context, ELECTRUM_ORE_KEY, Feature.ORE, new OreConfiguration(ELECTRUM_ORES.get(), 3));
         register(context, PLATINUM_ORE_KEY, Feature.ORE, new OreConfiguration(PLATINUM_ORES.get(), 3));
+        register(context, PYRITE_ORE_KEY, Feature.ORE, new OreConfiguration(PYRITE_ORES.get(), 12));
         /*register(context, CRYSTAL_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBlocks.CRYSTAL_LOG.get()),
                 new StraightTrunkPlacer(5, 4, 3),

@@ -614,6 +614,11 @@ public class ModCreativeModeTabs {
                 populator.accept(ModBlocks.RAW_TUNGSTEN_BLOCK.get());
                 populator.accept(ModBlocks.TUNGSTEN_ORE.get());
                 populator.accept(ModBlocks.DEEPSLATE_TUNGSTEN_ORE.get());
+                populator.accept(ModBlocks.PEGMATITE_TUNGSTEN_ORE.get());
+
+                populator.accept(ModBlocks.PYRITE_BLOCK.get());
+                populator.accept(ModBlocks.RAW_PYRITE_BLOCK.get());
+                populator.accept(ModBlocks.PYRITE_ORE.get());
 
                 populator.accept(ModBlocks.THULITE_BLOCK.get());
                 populator.accept(ModBlocks.RAW_THULITE_BLOCK.get());

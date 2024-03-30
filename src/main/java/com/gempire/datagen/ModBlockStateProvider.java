@@ -34,9 +34,13 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockWithItem(ModBlocks.TUNGSTEN_BLOCK);
         blockWithItem(ModBlocks.TUNGSTEN_ORE);
         blockWithItem(ModBlocks.DEEPSLATE_TUNGSTEN_ORE);
+        blockWithItem(ModBlocks.PEGMATITE_TUNGSTEN_ORE);
         blockWithItem(ModBlocks.RAW_TUNGSTEN_BLOCK);
 
         blockWithItem(ModBlocks.PYRITE_BLOCK);
+        blockWithItem(ModBlocks.PYRITE_ORE);
+        blockWithItem(ModBlocks.RAW_PYRITE_BLOCK);
+
         blockWithItem(ModBlocks.GEODE_CRYSTAL_BLOCK);
 
         blockWithItem(ModBlocks.PRISMATIC_BLOCK);

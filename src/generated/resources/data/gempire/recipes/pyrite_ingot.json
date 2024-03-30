@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "pyrite",
+  "key": {
+    "#": {
+      "item": "gempire:pyrite_ingot"
+    }
+  },
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "result": {
+    "item": "gempire:pyrite_block"
+  },
+  "show_notification": true
+}

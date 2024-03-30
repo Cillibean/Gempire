@@ -209,6 +209,20 @@ public class ModItems {
             )
     );
 
+    public static final RegistryObject<Item> RAW_PYRITE_BLOCK = ITEMS.register("raw_pyrite_block", () ->
+            new BlockItem(
+                    ModBlocks.RAW_PYRITE_BLOCK.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> PYRITE_ORE = ITEMS.register("pyrite_ore", () ->
+            new BlockItem(
+                    ModBlocks.PYRITE_ORE.get(),
+                    new Item.Properties()
+            )
+    );
+
     public static final RegistryObject<Item> GEODE_CRYSTAL_BLOCK = ITEMS.register("geode_crystal_block", () ->
             new BlockItem(
                     ModBlocks.GEODE_CRYSTAL_BLOCK.get(),
@@ -254,6 +268,13 @@ public class ModItems {
     public static final RegistryObject<Item> DEEPSLATE_TUNGSTEN_ORE = ITEMS.register("deepslate_tungsten_ore", () ->
             new BlockItem(
                     ModBlocks.DEEPSLATE_TUNGSTEN_ORE.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> PEGMATITE_TUNGSTEN_ORE = ITEMS.register("pegmatite_tungsten_ore", () ->
+            new BlockItem(
+                    ModBlocks.PEGMATITE_TUNGSTEN_ORE.get(),
                     new Item.Properties()
             )
     );
@@ -595,6 +616,18 @@ public class ModItems {
     );
 
     public static final RegistryObject<Item> TUNGSTEN_NUGGET = ITEMS.register("tungsten_nugget", () ->
+            new Item(new Item.Properties().stacksTo(64))
+    );
+
+    public static final RegistryObject<Item> PYRITE_INGOT = ITEMS.register("pyrite_ingot", () ->
+            new Item(new Item.Properties().stacksTo(64))
+    );
+
+    public static final RegistryObject<Item> RAW_PYRITE = ITEMS.register("raw_pyrite", () ->
+            new Item(new Item.Properties().stacksTo(64))
+    );
+
+    public static final RegistryObject<Item> PYRITE_NUGGET = ITEMS.register("pyrite_nugget", () ->
             new Item(new Item.Properties().stacksTo(64))
     );
 

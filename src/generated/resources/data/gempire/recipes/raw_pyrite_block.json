@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "pyrite",
+  "ingredients": [
+    {
+      "item": "gempire:raw_pyrite_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "item": "gempire:raw_pyrite"
+  }
+}

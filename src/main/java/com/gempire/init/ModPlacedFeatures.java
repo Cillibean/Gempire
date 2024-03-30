@@ -26,6 +26,7 @@ public class ModPlacedFeatures {
     public static final ResourceKey<PlacedFeature> ANATASE_PLACED_KEY = createKey("anatase_placed");
     public static final ResourceKey<PlacedFeature> ELECTRUM_PLACED_KEY = createKey("electrum_placed");
     public static final ResourceKey<PlacedFeature> PLATINUM_PLACED_KEY = createKey("platinum_placed");
+    public static final ResourceKey<PlacedFeature> PYRITE_PLACED_KEY = createKey("pyrite_placed");
     public static final ResourceKey<PlacedFeature> CRYSTAL_PLACED_KEY = createKey("crystal_placed");
 
     public static final ResourceKey<PlacedFeature> DISTANT_PLACED_KEY = createKey("kaleidoscope_placed");
@@ -54,6 +55,10 @@ public class ModPlacedFeatures {
 
         register(context, PLATINUM_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.PLATINUM_ORE_KEY),
                 commonOrePlacement(7, // VeinsPerChunk
+                        HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-80), VerticalAnchor.aboveBottom(80))));
+
+        register(context, PYRITE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.PYRITE_ORE_KEY),
+                commonOrePlacement(12, // VeinsPerChunk
                         HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-80), VerticalAnchor.aboveBottom(80))));
         /*
         register(context, CRYSTAL_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.CRYSTAL_KEY),

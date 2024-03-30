@@ -1,4 +1,4 @@
-// 1.20.1	2024-03-25T23:50:58.898825	Item Models: gempire
+// 1.20.1	2024-03-30T15:06:35.993886	Item Models: gempire
 2a4c323206d2fbeca217109aa5c8a2ac8ce38701 assets/gempire/models/item/acid_spit.json
 0da7ed67ca0a8fcb9a8ba427cc3a79d0931ef656 assets/gempire/models/item/alabaster_shards.json
 c0c62ab235536d2de57de21efdcbe773279a708b assets/gempire/models/item/amber_shards.json
@@ -91,9 +91,12 @@ f0f22aeca6e2419f005c33efbb44cbdf5a716e3f assets/gempire/models/item/prismatic_in
 16b5ae4539a7c2aff9dca09c8dd7795a8886a531 assets/gempire/models/item/purple_crystal_apple.json
 6567e05cc4e5efb4c8cc7d3f1dce4719eabd6670 assets/gempire/models/item/purple_lattice.json
 4a5959129ad11b9f8fc92b016e3713d2a4daf6dd assets/gempire/models/item/purple_shards.json
+856833c505d0367c09651edbfbbf510613addd54 assets/gempire/models/item/pyrite_ingot.json
+9b721ec594a1366b5a061c27d403e5d7202c9876 assets/gempire/models/item/pyrite_nugget.json
 e2660d960a5ad36fb7d2862d0819be43741702bf assets/gempire/models/item/raw_anatase.json
 eaa3b54656091f382746d2f638bdcf25d6d18568 assets/gempire/models/item/raw_electrum.json
 d75806956fcc73dab3add59ba8b8ea1dc421d493 assets/gempire/models/item/raw_platinum.json
+99a4a0ab658807fe8909641a8e48f5cf41d4c8f9 assets/gempire/models/item/raw_pyrite.json
 fb95d7b6c60ddafb66deb81530319c109864509a assets/gempire/models/item/raw_thulite.json
 c8856107a7bc890f55bc82ae1238b03be8faac4e assets/gempire/models/item/raw_tungsten.json
 d316da9d02fb86cbf41c2c52013f2bedb8508095 assets/gempire/models/item/red_chroma.json

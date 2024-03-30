@@ -36,6 +36,10 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.TUNGSTEN_NUGGET);
         simpleItem(ModItems.RAW_TUNGSTEN);
 
+        simpleItem(ModItems.PYRITE_INGOT);
+        simpleItem(ModItems.PYRITE_NUGGET);
+        simpleItem(ModItems.RAW_PYRITE);
+
         simpleItem(ModItems.PRISMATIC_INGOT);
         simpleItem(ModItems.GEM_ALLOY);
         //simpleItem(ModItems.PRISMATIC_UPGRADE_SMITHING_TEMPLATE);

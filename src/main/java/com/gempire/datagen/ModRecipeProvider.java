@@ -48,6 +48,12 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         nineBlockStorageRecipes(pWriter, RecipeCategory.MISC, ModItems.RAW_TUNGSTEN.get(), RecipeCategory.MISC, ModBlocks.RAW_TUNGSTEN_BLOCK.get(),
                 "gempire:raw_tungsten", "tungsten","gempire:raw_tungsten_block", "tungsten");
 
+        nineBlockStorageRecipes(pWriter, RecipeCategory.MISC, ModItems.PYRITE_INGOT.get(), RecipeCategory.MISC, ModBlocks.PYRITE_BLOCK.get(),
+                "gempire:pyrite_ingot", "pyrite","gempire:pyrite_block", "pyrite");
+
+        nineBlockStorageRecipes(pWriter, RecipeCategory.MISC, ModItems.RAW_PYRITE.get(), RecipeCategory.MISC, ModBlocks.RAW_PYRITE_BLOCK.get(),
+                "gempire:raw_pyrite", "pyrite","gempire:raw_pyrite_block", "pyrite");
+
         nineBlockStorageRecipes(pWriter, RecipeCategory.MISC, ModItems.THULITE_INGOT.get(), RecipeCategory.MISC, ModBlocks.THULITE_BLOCK.get(),
                 "gempire:thulite_ingot", "thulite","gempire:thulite_block", "thulite");
 

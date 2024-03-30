@@ -220,6 +220,7 @@
 
   "block.gempire.tungsten_ore": "Tungsten Ore",
   "block.gempire.deepslate_tungsten_ore": "Deepslate Tungsten Ore",
+  "block.gempire.pegmatite_tungsten_ore": "Pegmatite Tungsten Ore",
   "block.gempire.tungsten_block": "Tungsten Block",
   "block.gempire.raw_tungsten_block": "Raw Tungsten Block",
   "item.gempire.tungsten_ingot": "Tungsten Ingot",
@@ -253,6 +254,12 @@
   "item.gempire.platinum_ingot": "Platinum Ingot",
   "item.gempire.raw_platinum": "Raw Platinum",
   "item.gempire.platinum_nugget": "Platinum Nugget",
+
+  "block.gempire.pyrite_ore": "Pyrite Ore",
+  "block.gempire.raw_pyrite_block": "Raw Pyrite Block",
+  "item.gempire.pyrite_ingot": "Pyrite Ingot",
+  "item.gempire.raw_pyrite": "Raw Pyrite",
+  "item.gempire.pyrite_nugget": "Pyrite Nugget",
 
   "block.gempire.pegmatite": "Pegmatite",
   "block.gempire.cobbled_pegmatite": "Cobbled Pegmatite",

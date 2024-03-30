@@ -98,11 +98,20 @@ public class ModBlocks {
     public static final RegistryObject<Block> DEEPSLATE_TUNGSTEN_ORE = BLOCKS.register("deepslate_tungsten_ore", () ->
             new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_IRON_ORE)));
 
+    public static final RegistryObject<Block> PEGMATITE_TUNGSTEN_ORE = BLOCKS.register("pegmatite_tungsten_ore", () ->
+            new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_IRON_ORE)));
+
     public static final RegistryObject<Block> TUNGSTEN_BLOCK = BLOCKS.register("tungsten_block", () ->
             new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
 
     public static final RegistryObject<Block> RAW_TUNGSTEN_BLOCK = BLOCKS.register("raw_tungsten_block", () ->
             new Block(BlockBehaviour.Properties.copy(Blocks.RAW_IRON_BLOCK)));
+
+    public static final RegistryObject<Block> PYRITE_ORE = BLOCKS.register("pyrite_ore", () ->
+            new Block(BlockBehaviour.Properties.copy(Blocks.GOLD_ORE)));
+
+    public static final RegistryObject<Block> RAW_PYRITE_BLOCK = BLOCKS.register("raw_pyrite_block", () ->
+            new Block(BlockBehaviour.Properties.copy(Blocks.RAW_GOLD_BLOCK)));
 
     public static final RegistryObject<Block> THULITE_ORE = BLOCKS.register("thulite_ore", () ->
             new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)));
