@@ -176,7 +176,7 @@ public class TankBlock extends BaseEntityBlock {
                 BlockEntity te = worldIn.getBlockEntity(pos);
                 if (te instanceof InjectorTE) {
                     System.out.println("inject");
-                    ((InjectorTE) te).Inject();
+                    ((InjectorTE) te).inject();
                 }
                 }
             }
