@@ -50,7 +50,7 @@ public class ModEffects {
     public static final RegistryObject<MobEffect> SHADE = MOB_EFFECTS.register("shade",
             () -> new ShadeEffect(MobEffectCategory.BENEFICIAL, 12566463));
 
-    public static final RegistryObject<MobEffect> CALM = MOB_EFFECTS.register("blue_resistance",
+    public static final RegistryObject<MobEffect> CALM = MOB_EFFECTS.register("calm",
             () -> new CalmEffect(MobEffectCategory.BENEFICIAL, 6407149));
 
     public static final RegistryObject<MobEffect> ENTANGLEMENT = MOB_EFFECTS.register("entanglement",
