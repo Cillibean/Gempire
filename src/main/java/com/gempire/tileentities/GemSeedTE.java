@@ -340,6 +340,12 @@ public class GemSeedTE extends BlockEntity {
                     e.printStackTrace();
                 }
             }
+            if (quality == 0) {
+                gem.setQuality(2);
+            }
+            if (quality == 2) {
+                gem.setQuality(0);
+            }
             gem.setGemPlacement(gem.generateGemPlacement());
             gem.setSkinVariant(gem.generateSkinVariant());
             if (gem.setSkinVariantOnInitialSpawn) {
@@ -543,160 +549,6 @@ public class GemSeedTE extends BlockEntity {
             }
         }
         return direction;
-    }
-
-    /*public void GenerateExitHole(){
-        boolean found = false;
-        if(!found) {
-            ArrayList<BlockPos> blocks = new ArrayList<>();
-            ArrayList<BlockPos> blocksToDrain = new ArrayList<>();
-            for (int i = 0; i < 16; i++) {
-                if (this.world.getBlockState(this.pos.add(i, 0, 0)).getBlock() != Blocks.AIR) {
-                    blocks.add(this.pos.add(i, 0, 0));
-                    blocks.add(this.pos.add(i, 1, 0));
-                    blocks.add(this.pos.add(i, 2, 0));
-                    blocksToDrain.add(this.pos.add(i, 0, 0).down());
-                    blocksToDrain.add(this.pos.add(i, 0, 0).up().up().up());
-                    blocksToDrain.add(this.pos.add(i, 0, 0).north());
-                    blocksToDrain.add(this.pos.add(i, 0, 0).up().north());
-                    blocksToDrain.add(this.pos.add(i, 0, 0).up().up().north());
-                    blocksToDrain.add(this.pos.add(i, 0, 0).south());
-                    blocksToDrain.add(this.pos.add(i, 0, 0).up().south());
-                    blocksToDrain.add(this.pos.add(i, 0, 0).up().up().south());
-                } else {
-                    found = true;
-                    break;
-                }
-            }
-            if(found){
-                for(BlockPos pos : blocks){
-                    this.world.destroyBlock(pos, false);
-                }
-                this.Drain(blocksToDrain);
-            }
-        }
-        if(!found) {
-            ArrayList<BlockPos> blocks = new ArrayList<>();
-            ArrayList<BlockPos> blocksToDrain = new ArrayList<>();
-            for (int i = 0; i < 16; i++) {
-                if (this.world.getBlockState(this.pos.add(-i, 0, 0)).getBlock() != Blocks.AIR) {
-                    blocks.add(this.pos.add(-i, 0, 0));
-                    blocks.add(this.pos.add(-i, 1, 0));
-                    blocks.add(this.pos.add(-i, 2, 0));
-                    blocksToDrain.add(this.pos.add(-i, 0, 0).down());
-                    blocksToDrain.add(this.pos.add(-i, 0, 0).up().up().up());
-                    blocksToDrain.add(this.pos.add(-i, 0, 0).north());
-                    blocksToDrain.add(this.pos.add(-i, 0, 0).up().north());
-                    blocksToDrain.add(this.pos.add(-i, 0, 0).up().up().north());
-                    blocksToDrain.add(this.pos.add(-i, 0, 0).south());
-                    blocksToDrain.add(this.pos.add(-i, 0, 0).up().south());
-                    blocksToDrain.add(this.pos.add(-i, 0, 0).up().up().south());
-                } else {
-                    found = true;
-                    break;
-                }
-            }
-            if(found){
-                for(BlockPos pos : blocks){
-                    this.world.destroyBlock(pos, false);
-                }
-                this.Drain(blocksToDrain);
-            }
-        }
-        if(!found) {
-            ArrayList<BlockPos> blocks = new ArrayList<>();
-            ArrayList<BlockPos> blocksToDrain = new ArrayList<>();
-            for (int i = 0; i < 16; i++) {
-                if (this.world.getBlockState(this.pos.add(0, 0, i)).getBlock() != Blocks.AIR) {
-                    blocks.add(this.pos.add(0, 0, i));
-                    blocks.add(this.pos.add(0, 1, i));
-                    blocks.add(this.pos.add(0, 2, i));
-                    blocksToDrain.add(this.pos.add(0, 0, i).down());
-                    blocksToDrain.add(this.pos.add(0, 0, i).up().up().up());
-                    blocksToDrain.add(this.pos.add(0, 0, i).west());
-                    blocksToDrain.add(this.pos.add(0, 0, i).up().west());
-                    blocksToDrain.add(this.pos.add(0, 0, i).up().up().west());
-                    blocksToDrain.add(this.pos.add(0, 0, i).east());
-                    blocksToDrain.add(this.pos.add(0, 0, i).up().east());
-                    blocksToDrain.add(this.pos.add(0, 0, i).up().up().east());
-                } else {
-                    found = true;
-                    break;
-                }
-            }
-            if(found){
-                for(BlockPos pos : blocks){
-                    this.world.destroyBlock(pos, false);
-                }
-                this.Drain(blocksToDrain);
-            }
-        }
-        if(!found) {
-            ArrayList<BlockPos> blocksToDrain = new ArrayList<>();
-            for (int i = 0; i < 16; i++) {
-                this.world.destroyBlock(this.pos.add(0, 0, -i), false);
-                this.world.destroyBlock(this.pos.add(0, 1, -i), false);
-                this.world.destroyBlock(this.pos.add(0, 2, -i), false);
-                if(this.world.getBlockState(this.pos.add(0, 0, -i)) != Blocks.AIR.defaultBlockState()) {
-                    blocksToDrain.add(this.pos.add(0, 0, -i).down());
-                    blocksToDrain.add(this.pos.add(0, 0, -i).up().up().up());
-                    blocksToDrain.add(this.pos.add(0, 0, -i).west());
-                    blocksToDrain.add(this.pos.add(0, 0, -i).up().west());
-                    blocksToDrain.add(this.pos.add(0, 0, -i).up().up().west());
-                    blocksToDrain.add(this.pos.add(0, 0, -i).east());
-                    blocksToDrain.add(this.pos.add(0, 0, -i).up().east());
-                    blocksToDrain.add(this.pos.add(0, 0, -i).up().up().east());
-                }
-            }
-            this.Drain(blocksToDrain);
-        }
-    }*/
-
-    public void Drain(ArrayList<BlockPos> blockPosList){
-        for (BlockPos pos : blockPosList){
-            BlockState block = this.level.getBlockState(pos);
-            if(block.getBlock() == ModBlocks.GEM_SEED_BLOCK.get() ||
-                    block.getBlock() == ModBlocks.DRILL_BLOCK.get() || block.getBlock() == ModBlocks.TANK_BLOCK.get() ||
-                    block.getBlock() == ModBlocks.POWER_CRYSTAL_BLOCK.get() || block.getBlock() == ModBlocks.POWER_CRYSTAL_BLOCK_TIER_2.get()){
-                continue;
-            }
-            if(block == Blocks.DIRT.defaultBlockState() || block == Blocks.GRASS_BLOCK.defaultBlockState() || block == Blocks.DIRT_PATH.defaultBlockState()
-                    || block == Blocks.GRAVEL.defaultBlockState()){
-                this.level.setBlockAndUpdate(pos, this.drained_soil.defaultBlockState());
-            }
-            else if(block == Blocks.SAND.defaultBlockState() || block == Blocks.RED_SAND.defaultBlockState() || block == Blocks.SOUL_SAND.defaultBlockState()){
-                this.level.setBlockAndUpdate(pos, this.drained_sand.defaultBlockState());
-            }
-            else if(block == Blocks.OAK_LOG.defaultBlockState() || block == Blocks.STRIPPED_OAK_LOG.defaultBlockState() || block == Blocks.STRIPPED_OAK_WOOD.defaultBlockState() || block == Blocks.OAK_WOOD
-                    .defaultBlockState() || block == Blocks.SPRUCE_LOG.defaultBlockState() || block == Blocks.STRIPPED_SPRUCE_LOG.defaultBlockState() || block == Blocks.STRIPPED_SPRUCE_WOOD.defaultBlockState() || block == Blocks.SPRUCE_WOOD
-                    .defaultBlockState() || block == Blocks.BIRCH_LOG.defaultBlockState() || block == Blocks.STRIPPED_BIRCH_LOG.defaultBlockState() || block == Blocks.STRIPPED_BIRCH_WOOD.defaultBlockState() || block == Blocks.BIRCH_WOOD
-                    .defaultBlockState() || block == Blocks.JUNGLE_LOG.defaultBlockState() || block == Blocks.STRIPPED_JUNGLE_LOG.defaultBlockState() || block == Blocks.STRIPPED_JUNGLE_WOOD.defaultBlockState() || block == Blocks.JUNGLE_WOOD
-                    .defaultBlockState() || block == Blocks.ACACIA_LOG.defaultBlockState() || block == Blocks.STRIPPED_ACACIA_LOG.defaultBlockState() || block == Blocks.STRIPPED_ACACIA_WOOD.defaultBlockState() || block == Blocks.ACACIA_WOOD
-                    .defaultBlockState() || block == Blocks.DARK_OAK_LOG.defaultBlockState() || block == Blocks.STRIPPED_DARK_OAK_LOG.defaultBlockState() || block == Blocks.STRIPPED_DARK_OAK_WOOD.defaultBlockState() || block == Blocks.DARK_OAK_WOOD.defaultBlockState()) {
-                this.level.setBlockAndUpdate(pos, this.drained_log.defaultBlockState());
-            }
-            else if(block == Blocks.CRIMSON_STEM.defaultBlockState() || block == Blocks.WARPED_STEM.defaultBlockState() || block == Blocks.STRIPPED_CRIMSON_STEM.defaultBlockState() || block == Blocks.STRIPPED_WARPED_STEM
-                    .defaultBlockState() || block == Blocks.CRIMSON_HYPHAE.defaultBlockState() || block == Blocks.WARPED_HYPHAE.defaultBlockState() || block == Blocks.STRIPPED_CRIMSON_HYPHAE.defaultBlockState() || block == Blocks.STRIPPED_WARPED_HYPHAE.defaultBlockState()) {
-                this.level.setBlockAndUpdate(pos, this.drained_log_cracked.defaultBlockState());
-            }
-            else if(block == Blocks.BLUE_ICE.defaultBlockState() || block == Blocks.PACKED_ICE.defaultBlockState()) {
-                this.level.setBlockAndUpdate(pos, this.drained_ice.defaultBlockState());
-            }
-            else{
-                if(pos.getY() < 80) {
-                    this.level.setBlockAndUpdate(pos, this.drained_stone.defaultBlockState());
-                }
-                else{
-                    this.level.setBlockAndUpdate(pos, this.drained_stone_2.defaultBlockState());
-                    if(pos.getY() % 6 == 0){
-                        this.level.setBlockAndUpdate(pos, this.banded_drained_stone.defaultBlockState());
-                    }
-                }
-                if(pos.getY() == 80){
-                    this.level.setBlockAndUpdate(pos, this.banded_drained_stone.defaultBlockState());
-                }
-            }
-        }
     }
 
     public void setDrainedStoneColor(float temperature){

@@ -111,6 +111,7 @@ public class ModItemModelProvider extends ItemModelProvider {
 
         simpleItem(ModItems.SHARE_CONTRACT);
         simpleItem(ModItems.TRANSFER_CONTRACT);
+        simpleItem(ModItems.ASSIGN_CONTRACT);
 
         simpleItem(ModItems.RED_CHROMA);
         simpleItem(ModItems.ORANGE_CHROMA);

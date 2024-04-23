@@ -19,6 +19,12 @@
       "title": "Share Contract",
       "item": "gempire:share_contract",
       "text": "The share contract is a contract that lets you share ownership of a gem with another player. In order to use it, interact with the player you'd like to share with the item in your main hand, then the gem you'd like to share."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Assignment Contract",
+      "item": "gempire:assign_contract",
+      "text": "The assignment contract is a contract that lets you assign ownership of a gem to another gem. In order to use it, interact with the gem you'd like to set as the owner with the item in your main hand, then the gem you'd like to assign."
     }
   ]
 }
