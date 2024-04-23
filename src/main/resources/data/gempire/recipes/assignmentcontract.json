@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "I",
+    "S",
+    "I"
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:paper"
+    },
+    "S": {
+      "tag": "gempire:chroma"
+    }
+  },
+  "result": {
+    "item": "gempire:assign_contract"
+  }
+}
