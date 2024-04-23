@@ -2564,6 +2564,8 @@ public class ModItems {
             new ItemShareContract(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> TRANSFER_CONTRACT = ITEMS.register("transfer_contract", () ->
             new ItemTransferContract(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> ASSIGN_CONTRACT = ITEMS.register("assign_contract", () ->
+            new ItemAssignContract(new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> WHITE_CHROMA = ITEMS.register("white_chroma", () ->
             new ItemChroma(new Item.Properties().stacksTo(64), 0));

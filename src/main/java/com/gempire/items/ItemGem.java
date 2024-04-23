@@ -437,16 +437,16 @@ public class ItemGem extends Item {
         if(level != null) {
         if (level.isClientSide) {
             if (checkTags(itemStack)) {
-                if (itemStack.getTag().getString("abilities") != "") {
+                if (!itemStack.getTag().getString("abilities").isEmpty()) {
                     if (Screen.hasShiftDown()) {
-                        if (itemStack.getTag().getString("name") != " ") {
+                        if (!itemStack.getTag().getString("name").isEmpty()) {
                             p_40553_.add(Component.translatable(itemStack.getTag().getString("name")).withStyle(ChatFormatting.GRAY));
                         }
-                        if (itemStack.getTag().getString("facetCut") != " ") {
+                        if (!itemStack.getTag().getString("facetCut").isEmpty()) {
                             String[] string = itemStack.getTag().getString("facetCut").split(",");
                             p_40553_.add(Component.translatable(string[0]).withStyle(ChatFormatting.GRAY));
                         }
-                        if (itemStack.getTag().getString("facetCut") != " ") {
+                        if (!itemStack.getTag().getString("facetCut").isEmpty()) {
                             String[] string = itemStack.getTag().getString("facetCut").split(",");
                             p_40553_.add(Component.translatable(string[1]).withStyle(ChatFormatting.GRAY));
                         }
@@ -461,8 +461,8 @@ public class ItemGem extends Item {
                         if (Integer.parseInt(crackShatter[3]) >= 5) {
                             p_40553_.add(Component.translatable("Sludged").withStyle(ChatFormatting.RED));
                         }
-                        if (itemStack.getTag().contains("assignedID")) {
-                            //.add(Component.translatable("Assigned" + itemStack.getTag().getUUID("assignedID"))); //to " + assigned_gem.getName().getString() + " " + assigned_gem.getFacetAndCut()));
+                        if (!itemStack.getTag().getString("assignedID").isEmpty()) {
+                            p_40553_.add(Component.translatable("Assigned" + itemStack.getTag().getUUID("assignedID"))); //to " + assigned_gem.getName().getString() + " " + assigned_gem.getFacetAndCut()));
                         }
                         if (Integer.parseInt(util[3]) == 2) {
                             p_40553_.add(Component.translatable("Perfect").withStyle(ChatFormatting.LIGHT_PURPLE));
@@ -471,7 +471,7 @@ public class ItemGem extends Item {
                             p_40553_.add(Component.translatable("Off Colour").withStyle(ChatFormatting.LIGHT_PURPLE));
                         }
                     } else {
-                        if (itemStack.getTag().getString("name") != " ") {
+                        if (!itemStack.getTag().getString("name").equals(" ")) {
                             p_40553_.add(Component.translatable(itemStack.getTag().getString("name")).withStyle(ChatFormatting.GRAY));
                         }
                         String[] crackShatter = itemStack.getTag().getString("crackShatter").split(",");
