@@ -1,8 +1,8 @@
 {
   "parent": "block/slab_top",
   "textures": {
-    "bottom": "gempire:block/deco_blue_bricks_dark",
-    "top": "gempire:block/deco_blue_bricks_dark",
-    "side": "gempire:block/deco_blue_bricks_dark"
+    "bottom": "gempire:block/deco_red_bricks_dark",
+    "top": "gempire:block/deco_red_bricks_dark",
+    "side": "gempire:block/deco_red_bricks_dark"
   }
 }

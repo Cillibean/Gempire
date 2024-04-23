@@ -1,13 +1,13 @@
 {
   "variants": {
     "type=bottom": {
-      "model": "gempire:block/drained_blue_polished_stone_slab"
+      "model": "gempire:block/drained_purple_polished_stone_slab"
     },
     "type=double": {
-      "model": "gempire:block/drained_blue_polished_stone"
+      "model": "gempire:block/drained_purple_polished_stone"
     },
     "type=top": {
-      "model": "gempire:block/drained_blue_polished_stone_slab_top"
+      "model": "gempire:block/drained_purple_polished_stone_slab_top"
     }
   }
 }

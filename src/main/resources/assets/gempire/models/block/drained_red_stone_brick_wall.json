@@ -1,6 +1,6 @@
 {
   "parent": "block/wall_inventory",
   "textures": {
-    "wall": "gempire:block/deco_blue_bricks"
+    "wall": "gempire:block/deco_red_bricks"
   }
 }

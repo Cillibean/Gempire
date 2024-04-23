@@ -1,8 +1,8 @@
 {
   "parent": "block/inner_stairs",
   "textures": {
-    "bottom": "gempire:block/deco_blue_bricks",
-    "top": "gempire:block/deco_blue_bricks",
-    "side": "gempire:block/deco_blue_bricks"
+    "bottom": "gempire:block/deco_purple_bricks",
+    "top": "gempire:block/deco_purple_bricks",
+    "side": "gempire:block/deco_purple_bricks"
   }
 }

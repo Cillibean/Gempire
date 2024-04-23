@@ -1,18 +1,18 @@
 {
   "variants": {
     "facing=east": {
-      "model": "gempire:block/drained_blue_glazed_tile",
+      "model": "gempire:block/drained_grey_glazed_tile",
       "y": 270
     },
     "facing=north": {
-      "model": "gempire:block/drained_blue_glazed_tile",
+      "model": "gempire:block/drained_grey_glazed_tile",
       "y": 180
     },
     "facing=south": {
-      "model": "gempire:block/drained_blue_glazed_tile"
+      "model": "gempire:block/drained_grey_glazed_tile"
     },
     "facing=west": {
-      "model": "gempire:block/drained_blue_glazed_tile",
+      "model": "gempire:block/drained_grey_glazed_tile",
       "y": 90
     }
   }

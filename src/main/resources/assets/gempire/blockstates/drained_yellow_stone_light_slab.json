@@ -1,13 +1,13 @@
 {
   "variants": {
     "type=bottom": {
-      "model": "gempire:block/drained_blue_stone_light_slab"
+      "model": "gempire:block/drained_yellow_stone_light_slab"
     },
     "type=double": {
-      "model": "gempire:block/drained_blue_stone_light"
+      "model": "gempire:block/drained_yellow_stone_light"
     },
     "type=top": {
-      "model": "gempire:block/drained_blue_stone_light_slab_top"
+      "model": "gempire:block/drained_yellow_stone_light_slab_top"
     }
   }
 }
