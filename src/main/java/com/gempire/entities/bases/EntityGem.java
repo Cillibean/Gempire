@@ -112,6 +112,10 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     public static final EntityDataAccessor<Boolean> CRACKED = SynchedEntityData.<Boolean>defineId(EntityGem.class, EntityDataSerializers.BOOLEAN);
     public static final EntityDataAccessor<String> FACET = SynchedEntityData.defineId(EntityGem.class, EntityDataSerializers.STRING);
     public static final EntityDataAccessor<String> CUT = SynchedEntityData.defineId(EntityGem.class, EntityDataSerializers.STRING);
+    public static final EntityDataAccessor<String> MASTERNAME = SynchedEntityData.defineId(EntityGem.class, EntityDataSerializers.STRING);
+    public static final EntityDataAccessor<String> ASSIGNEDNAME = SynchedEntityData.defineId(EntityGem.class, EntityDataSerializers.STRING);
+    public static final EntityDataAccessor<String> ASSIGNEDFACET = SynchedEntityData.defineId(EntityGem.class, EntityDataSerializers.STRING);
+    public static final EntityDataAccessor<String> ASSIGNEDCUT = SynchedEntityData.defineId(EntityGem.class, EntityDataSerializers.STRING);
     public static EntityDataAccessor<Integer> REBEL_HAIR_VARIANT = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
     public static EntityDataAccessor<Integer> REBEL_OUTFIT_COLOR = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
     public static EntityDataAccessor<Integer> REBEL_OUTFIT_VARIANT = SynchedEntityData.<Integer>defineId(EntityGem.class, EntityDataSerializers.INT);
@@ -141,7 +145,6 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     public BlockPos GUARD_POS;
     public ArrayList<IIdleAbility> idlePowers = new ArrayList<>();
     private final ItemBasedSteering booster = new ItemBasedSteering(this.entityData, BOOST_TIME, SADDLED);
-
     public byte movementType = 1;
     public byte emotionMeter = 0;
     public boolean meltdown = false;
@@ -196,6 +199,8 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     public BlockPos stopGoalsPos;
     public boolean enemyDying;
     public LivingEntity enemy;
+
+    public EntityGem assignedOwner;
     private static final DynamicCommandExceptionType ERROR_STRUCTURE_INVALID = new DynamicCommandExceptionType((p_207534_) -> {
         return Component.translatable("commands.gempire.nounderstand", p_207534_);
     });
@@ -242,6 +247,10 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.entityData.set(EntityGem.CRACKED, false);
         this.entityData.define(EntityGem.FACET, " ");
         this.entityData.define(EntityGem.CUT, " ");
+        this.entityData.define(EntityGem.MASTERNAME, " ");
+        this.entityData.define(EntityGem.ASSIGNEDNAME, " ");
+        this.entityData.define(EntityGem.ASSIGNEDFACET, " ");
+        this.entityData.define(EntityGem.ASSIGNEDCUT, " ");
         this.entityData.define(EntityGem.REBEL_HAIR_VARIANT, 0);
         this.entityData.define(EntityGem.REBEL_OUTFIT_COLOR, 0);
         this.entityData.define(EntityGem.REBEL_OUTFIT_VARIANT, 0);
@@ -455,6 +464,8 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.writeFacetCut(compound);
         this.writeAbilityUtil(compound);
         this.writeUtil(compound);
+        this.writeAssignedUtil(compound);
+        compound.putString("masterName", getMasterName());
         if (this.canLocateStructures()) compound.putInt("structureTime", this.structureTime);
         if (this.canLocateStructures()) this.writeStructures(compound);
         ContainerHelper.saveAllItems(compound, this.items);
@@ -659,6 +670,15 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         setRebelVisorVariant(Integer.parseInt(strings[3]));
     }
 
+    public void writeAssignedUtil(CompoundTag compound) {
+        compound.putString("assignedUtil", getAssignedUtil());
+    }
+
+    public void readAssignedUtil(CompoundTag compound) {
+        String[] strings = compound.getString("assignedUtil").split(",");
+        setAssignedUtil(strings[0], strings[1], strings[2]);
+    }
+
     @Override
     public void load(CompoundTag compound) {
         super.load(compound);
@@ -699,6 +719,10 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.readFacetCut(compound);
         this.readCrackShatter(compound);
         this.readUtil(compound);
+        if (getAssigned()) {
+            this.readAssignedUtil(compound);
+        }
+        this.setMasterName(compound.getString("masterName"));
         if (this.canLocateStructures()) this.readStructures(compound);
         ContainerHelper.loadAllItems(compound, this.items);
         if (this.spawnGem != null) {
@@ -970,6 +994,38 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.entityData.set(EntityGem.ZSCALE, value);
     }
 
+    public String getMasterName(){
+        return this.entityData.get(EntityGem.MASTERNAME);
+    }
+
+    public void setMasterName(String value){
+        this.entityData.set(EntityGem.MASTERNAME, value);
+    }
+
+    public String getAssignedName(){
+        return this.entityData.get(EntityGem.ASSIGNEDNAME);
+    }
+
+    public void setAssignedName(String value){
+        this.entityData.set(EntityGem.ASSIGNEDNAME, value);
+    }
+
+    public String getAssignedFacet(){
+        return this.entityData.get(EntityGem.ASSIGNEDFACET);
+    }
+
+    public void setAssignedFacet(String value){
+        this.entityData.set(EntityGem.ASSIGNEDFACET, value);
+    }
+
+    public String getAssignedCut(){
+        return this.entityData.get(EntityGem.ASSIGNEDCUT);
+    }
+
+    public void setAssignedCut(String value){
+        this.entityData.set(EntityGem.ASSIGNEDCUT, value);
+    }
+
     public Float generateXScale() {
         if (isPrimary()) {
             return baseXScale() + 0.15F;
@@ -1026,6 +1082,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                                                 this.playSound(getInstrument(), this.getSoundVolume(), (interactPitch()));
                                                 if (OWNERS.size() <= 1 && this.MASTER_OWNER != player.getUUID()) {
                                                     MASTER_OWNER = player.getUUID();
+                                                    setMasterName(String.valueOf(player.getName()));
                                                     System.out.println("Added master owner");
                                                 }
                                             } else {
@@ -1211,6 +1268,23 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
      */
 
     public abstract int generateHardness();
+
+    public String getAssignedUtil() {
+        StringBuilder builder = new StringBuilder();
+        builder.append(getAssignedName());
+        builder.append(",");
+        builder.append(getAssignedFacet());
+        builder.append(",");
+        builder.append(getAssignedCut());
+        return builder.toString();
+    }
+
+    public void setAssignedUtil(String name, String facet, String cut) {
+        setAssignedName(name);
+        setAssignedFacet(facet);
+        setAssignedCut(cut);
+    }
+
     public EntityGem getAssignedGem() {
         if (!this.level().isClientSide) {
             if (((ServerLevel)this.level()).getEntity(ASSIGNED_ID) instanceof EntityGem) {
@@ -1219,10 +1293,8 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                 System.out.println("not a gem");
                 return null;
             }
-        } else {
-            System.out.println("not clientside");
-            return null;
         }
+        return null;
     }
 
     public void setAssignedGem(EntityGem assigned) {

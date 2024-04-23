@@ -303,6 +303,7 @@ public class ItemGem extends Item {
                             gem.addOwner(player.getUUID());
                             if (gem.MASTER_OWNER == null) {
                                 gem.addMasterOwner(player.getUUID());
+                                gem.setMasterName(player.getName().toString());
                             }
                             gem.FOLLOW_ID = player.getUUID();
                             gem.setMovementType((byte) 2);

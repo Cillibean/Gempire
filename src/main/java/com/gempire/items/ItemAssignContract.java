@@ -29,9 +29,14 @@ public class ItemAssignContract extends Item {
             if (checkTags(itemStack)) {
                 if (((EntityGem) entity).ASSIGNED_ID == getGemUUID(itemStack)) {
                     ((EntityGem) entity).ASSIGNED_ID = UUID.fromString("00000000-0000-0000-0000-000000000000");
+                    ((EntityGem) entity).setAssigned(false);
+                    ((EntityGem) entity).setAssignedGem(null);
+                    ((EntityGem) entity).setAssignedUtil(null, null, null);
                     player.sendSystemMessage(Component.translatable("Assigned ").append(entity.getName()).append(" to ").append(Component.literal((getGemName(itemStack)))));
                 } else {
                     ((EntityGem) entity).ASSIGNED_ID = getGemUUID(itemStack);
+                    ((EntityGem) entity).setAssigned(true);
+                    ((EntityGem) entity).setAssignedUtil(getGemName(itemStack), getGemFacet(itemStack), getGemCut(itemStack));
                     player.sendSystemMessage(Component.translatable("Assigned ").append(entity.getName()).append(" to ").append(Component.literal(getGemName(itemStack))));
                 }
 
@@ -55,8 +60,9 @@ public class ItemAssignContract extends Item {
             return InteractionResult.sidedSuccess(player.level().isClientSide);
         } else if ((entity instanceof EntityGem)) {
             if (!entity.level().isClientSide && entity.isAlive()) {
-                player.setItemInHand(hand,setEntityTags(itemStack,entity.getName().getString(),entity.getUUID()));
-                player.sendSystemMessage(Component.translatable("Set  "+ entity.getName() +" as owner"));}
+                player.setItemInHand(hand,setEntityTags(itemStack,entity.getName().getString(), ((EntityGem) entity).getFacet(), ((EntityGem) entity).getCut(), entity.getUUID()));
+                player.sendSystemMessage(Component.translatable("Set ").append(entity.getName()).append(" as owner"));
+            }
             return InteractionResult.sidedSuccess(player.level().isClientSide);
         }
         else {
@@ -71,17 +77,19 @@ public class ItemAssignContract extends Item {
                 ItemStack itemStack = player.getItemInHand(hand);
                 if (checkTags(itemStack)) {
                     player.setItemInHand(hand, new ItemStack(this.asItem()));
-                    player.sendSystemMessage(Component.translatable("Cleared Player"));
+                    player.sendSystemMessage(Component.translatable("Cleared Gem"));
                 }
             }
         }
         return super.use(world, player, hand);
     }
 
-    public ItemStack setEntityTags(ItemStack item, String name, UUID uuid) {
+    public ItemStack setEntityTags(ItemStack item, String name, String facet, String cut, UUID uuid) {
         CompoundTag tag = item.getOrCreateTag();
         item.setTag(tag);
         tag.putString("gemName", name);
+        tag.putString("gemFacet", facet);
+        tag.putString("gemCut", cut);
         tag.putUUID("gemUUID", uuid);
         return item;
     }
@@ -93,6 +101,16 @@ public class ItemAssignContract extends Item {
     public String getGemName(ItemStack item)
     {
         return item.getTag().getString("gemName");
+    }
+
+    public String getGemFacet(ItemStack item)
+    {
+        return item.getTag().getString("gemFacet");
+    }
+
+    public String getGemCut(ItemStack item)
+    {
+        return item.getTag().getString("gemCut");
     }
     public UUID getGemUUID(ItemStack item)
     {
