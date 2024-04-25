@@ -1,8 +1,8 @@
 {
   "parent": "minecraft:block/slab_top",
   "textures": {
-    "bottom": "gempire:block/deco_blue_stone_polished_dark",
-    "top": "gempire:block/deco_blue_stone_polished_dark",
-    "side": "gempire:block/deco_blue_stone_polished_dark"
+    "bottom": "gempire:block/deco_yellow_stone_polished_dark",
+    "top": "gempire:block/deco_yellow_stone_polished_dark",
+    "side": "gempire:block/deco_yellow_stone_polished_dark"
   }
 }

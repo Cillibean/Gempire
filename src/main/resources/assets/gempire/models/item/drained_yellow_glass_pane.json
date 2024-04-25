@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "gempire:block/deco_blue_glass"
+    "layer0": "gempire:block/deco_yellow_glass"
   }
 }

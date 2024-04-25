@@ -1,8 +1,8 @@
 {
   "parent": "block/stairs",
   "textures": {
-    "bottom": "gempire:block/drained_blue_stone_top",
-    "top": "gempire:block/drained_blue_stone_top",
-    "side": "gempire:block/drained_blue_stone"
+    "bottom": "gempire:block/drained_gray_stone_top",
+    "top": "gempire:block/drained_gray_stone_top",
+    "side": "gempire:block/drained_gray_stone"
   }
 }

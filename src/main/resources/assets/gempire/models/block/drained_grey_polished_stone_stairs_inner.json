@@ -1,8 +1,8 @@
 {
   "parent": "minecraft:block/inner_stairs",
   "textures": {
-    "bottom": "gempire:block/deco_blue_stone_polished",
-    "top": "gempire:block/deco_blue_stone_polished",
-    "side": "gempire:block/deco_blue_stone_polished"
+    "bottom": "gempire:block/deco_gray_stone_polished",
+    "top": "gempire:block/deco_gray_stone_polished",
+    "side": "gempire:block/deco_gray_stone_polished"
   }
 }

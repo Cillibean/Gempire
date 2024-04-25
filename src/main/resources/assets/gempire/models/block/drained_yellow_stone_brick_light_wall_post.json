@@ -1,6 +1,6 @@
 {
   "parent": "block/template_wall_post",
   "textures": {
-    "wall": "gempire:block/deco_blue_bricks_light"
+    "wall": "gempire:block/deco_yellow_bricks_light"
   }
 }

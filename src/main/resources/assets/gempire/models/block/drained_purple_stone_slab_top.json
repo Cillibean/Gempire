@@ -1,8 +1,8 @@
 {
   "parent": "block/slab_top",
   "textures": {
-    "bottom": "gempire:block/drained_blue_stone_top",
-    "top": "gempire:block/drained_blue_stone_top",
-    "side": "gempire:block/drained_blue_stone_bands"
+    "bottom": "gempire:block/drained_purple_stone_top",
+    "top": "gempire:block/drained_purple_stone_top",
+    "side": "gempire:block/drained_purple_stone_bands"
   }
 }
