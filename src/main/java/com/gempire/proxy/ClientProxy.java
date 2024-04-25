@@ -71,6 +71,7 @@ public class ClientProxy {
         event.registerEntityRenderer(ModEntities.MIRRORED_GUARDIAN.get(), RenderMirroredGuardian::new);
         event.registerEntityRenderer(ModEntities.IRIDESCENT_PALADIN.get(), RenderIridescentPaladin::new);
          */
+        //event.registerEntityRenderer(ModEntities.PEPO.get(), RenderPepo::new);
         event.registerEntityRenderer(ModEntities.BEASTMASTER_WOLF.get(), RenderBeastmasterWolf::new);
         event.registerEntityRenderer(ModEntities.COBALT_GUARDIAN.get(), m -> new RenderCobaltGuardian(m, new ModelCobaltGuardian<>(m.bakeLayer(ModelCobaltGuardian.LAYER_LOCATION))));
         event.registerEntityRenderer(ModEntities.FUSION.get(), m -> new RenderFusion(m, new ModelFusion<>(m.bakeLayer(ModelFusion.LAYER_LOCATION))));
@@ -106,6 +107,7 @@ public class ClientProxy {
         event.registerEntityRenderer(ModEntities.ACID_SPIT.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer(ModEntities.WATER_ORB.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer(ModEntities.ELECTROKINESIS_LIGHTNING.get(), ElectrokinesisLightningRenderer::new);
+        event.registerEntityRenderer(ModEntities.HUNTRESS_LIGHTNING.get(), HuntressLightningRenderer::new);
 
         MenuScreens.register(ModContainers.INJECTOR_CONTAINER.get(), InjectorScreen::new);
         MenuScreens.register(ModContainers.GEM_UI_CONTAINER.get(), GemUIScreen::new);

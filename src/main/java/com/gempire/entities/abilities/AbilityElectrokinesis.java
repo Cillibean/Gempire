@@ -40,37 +40,26 @@ public class AbilityElectrokinesis extends Ability implements ITaskAbility, IVio
     @Override
     public void attack(LivingEntity target, float distanceFactor) {
         ElectrokinesisLightning lightning = new ElectrokinesisLightning(this.holder.level(), this.holder, target);
-        double d0 = target.getEyeY() - (double) 1.1F;
-        double d1 = target.getX() - this.holder.getX();
-        double d2 = d0 - lightning.getY();
-        double d3 = target.getZ() - this.holder.getZ();
-        float f = Mth.sqrt((float) (d1 * d1 + d3 * d3)) * 0.2F;
-        //lightning.(d1, d2 + (double) f, d3, 1.6F, 6.0F);
-        //this.holder.playSound(SoundEvents.LLAMA_SPIT, 1.0F, 0.4F / (this.holder.getRandom().nextFloat() * 0.4F + 0.8F));
         lightning.setPos(target.getX(), target.getY(), target.getZ());
-        //if (this.holder.level().canSeeSky(target.getOnPos())) {
+        if (this.holder.level().canSeeSky(target.getOnPos())) {
             System.out.println("can see sky");
             ElectrokinesisLightning electro = ModEntities.ELECTROKINESIS_LIGHTNING.get().create(this.holder.level());
-            assert electro != null;
             electro.owner = this.holder;
-            //TODO: fix electro
-            //electro.level() = this.holder.level();
             electro.target = target;
-            //electro.moveTo(Vec3.atBottomCenterOf(target.getOnPos()));
+            electro.moveTo(Vec3.atBottomCenterOf(target.getOnPos()));
             lightning.moveTo(Vec3.atBottomCenterOf(target.getOnPos()));
-            //this.holder.level().addFreshEntity(electro);
+            this.holder.level().addFreshEntity(electro);
             this.holder.level().addFreshEntity(lightning);
             this.holder.enemy = target;
             this.holder.enemyDying = true;
             target.hurt(this.holder.damageSources().lightningBolt(), 5);
             target.level().playSound(holder, target.getOnPos(), SoundEvents.LIGHTNING_BOLT_IMPACT, SoundSource.PLAYERS, 1, 1);
-        //}
-        System.out.println("electrokinesis");
+        }
     }
 
     @Override
     public Goal goal() {
-        return new RangedAttackGoal((RangedAttackMob) this.holder, 1.25D, 20, 10.0F);
+        return new RangedAttackGoal(this.holder, 1.25D, 20, 10.0F);
     }
 
     @Override
