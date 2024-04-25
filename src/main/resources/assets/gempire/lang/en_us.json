@@ -837,6 +837,8 @@
   "entity.gempire.mirrored_guardian": "Mirrored Guardian",
   "entity.gempire.iridescent_paladin": "Iridescent Paladin",
 
+  "entity.gempire.electrokinesis_lightning": "Lightning Bolt",
+
   "effect.gempire.paralysis": "Paralysis",
   "effect.gempire.entanglement": "Entangled",
   "effect.gempire.electrocution": "Electrocuted",
@@ -1044,6 +1046,7 @@
   "ability.gempire.tinkerer": "Tinkerer",
   "ability.gempire.salvaging": "Salvaging",
   "ability.gempire.hydration": "Hydration",
+  "ability.gempire.plantokinesis": "Plantokinesis (NYI)",
 
   "screens.gempire.health": "Health",
   "screens.gempire.damage": "Attack Damage",

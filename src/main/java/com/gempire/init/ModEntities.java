@@ -1,6 +1,7 @@
 package com.gempire.init;
 
 import com.gempire.Gempire;
+import com.gempire.client.entity.render.HuntressLightningRenderer;
 import com.gempire.container.InjectorContainer;
 import com.gempire.entities.bases.EntityFusion;
 import com.gempire.entities.other.*;
@@ -9,10 +10,7 @@ import com.gempire.entities.gems.starter.EntityMica;
 import com.gempire.entities.gems.starter.EntityNacre;
 import com.gempire.entities.gems.starter.EntityPebble;
 import com.gempire.entities.gems.starter.EntityShale;
-import com.gempire.entities.projectiles.AcidSpitEntity;
-import com.gempire.entities.projectiles.ElectrokinesisLightning;
-import com.gempire.entities.projectiles.IceShardEntity;
-import com.gempire.entities.projectiles.WaterOrbEntity;
+import com.gempire.entities.projectiles.*;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.resources.ResourceLocation;
@@ -37,6 +35,11 @@ public class ModEntities {
             () -> EntityType.Builder.of(EntityFusion::new, MobCategory.CREATURE)
                     .sized(1F, 4F) // Hitbox Size
                     .build(new ResourceLocation(Gempire.MODID, "fusion").toString()));
+
+    public static final RegistryObject<EntityType<EntityPepo>> PEPO = ENTITIES.register("pepo",
+            () -> EntityType.Builder.of(EntityPepo::new, MobCategory.CREATURE)
+                    .sized(0.6f, 0.85f) // Hitbox Size
+                    .build(new ResourceLocation(Gempire.MODID, "pepo").toString()));
 
     public static final RegistryObject<EntityType<EntityAlabasterEmpress>> ALABASTER_EMPRESS = ENTITIES.register("alabaster_empress",
             () -> EntityType.Builder.of(EntityAlabasterEmpress::new, MobCategory.MONSTER)
@@ -265,6 +268,13 @@ public class ModEntities {
                 .noSave().sized(0.0F, 0.0F).clientTrackingRange(16)
                 .updateInterval(Integer.MAX_VALUE)
                 .build(new ResourceLocation(Gempire.MODID, "electrokinesis_lightning").toString());
+    });
+
+    public static final RegistryObject<EntityType<HuntressLightning>> HUNTRESS_LIGHTNING = ENTITIES.register("huntress_lightning", () -> {
+        return EntityType.Builder.<HuntressLightning>of(HuntressLightning::new, MobCategory.MISC)
+                .noSave().sized(0.0F, 0.0F).clientTrackingRange(16)
+                .updateInterval(Integer.MAX_VALUE)
+                .build(new ResourceLocation(Gempire.MODID, "huntress_lightning").toString());
     });
     public static void registerCruxes() {
         InjectorContainer.primer.add(Items.GOLDEN_APPLE);

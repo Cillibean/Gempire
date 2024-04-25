@@ -238,6 +238,7 @@ public class EntityTourmaline extends EntityVaryingGem {
     public ArrayList<Ability> definiteAbilities(){
         ArrayList<Ability> arrayList = new ArrayList<>();
         arrayList.add(new AbilityFarmer());
+        arrayList.add(new AbilityPlantokinesis());
         return arrayList;
     }
 

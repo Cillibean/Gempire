@@ -1,5 +1,6 @@
 package com.gempire;
 
+import com.gempire.entities.bases.EntityFusion;
 import com.gempire.entities.gems.*;
 import com.gempire.entities.gems.starter.EntityMica;
 import com.gempire.entities.gems.starter.EntityNacre;
@@ -65,6 +66,8 @@ public class Gempire
     }
 
     public void EntityAttributes(final EntityAttributeCreationEvent event){
+        event.put(ModEntities.PEPO.get(), EntityPepo.registerAttributes().build());
+
         event.put(ModEntities.BEASTMASTER_WOLF.get(), EntityBeastmasterWolf.createAttributes().build());
 
         event.put(ModEntities.HUNTER.get(), EntityHunter.registerAttributes().build());
@@ -119,7 +122,7 @@ public class Gempire
 
         event.put(ModEntities.LARIMAR.get(), EntityLarimar.registerAttributes().build());
 
-        event.put(ModEntities.FUSION.get(), EntityLarimar.registerAttributes().build());
+        event.put(ModEntities.FUSION.get(), EntityFusion.registerAttributes().build());
 
         event.put(ModEntities.MORGANITE.get(), EntityMorganite.registerAttributes().build());
 

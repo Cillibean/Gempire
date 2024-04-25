@@ -26,7 +26,6 @@ public class EntityAIWander extends WaterAvoidingRandomStrollGoal {
                 for (UUID uuid: gem.OWNERS) {
                     if (garnet.isOwner(uuid)) {
                         gem.followingGarnet = true;
-                        System.out.println("following garnet");
                     }
                 }
             }

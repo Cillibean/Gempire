@@ -12,8 +12,4 @@ public class DrainedBlock extends Block {
         super(properties);
     }
 
-    @Override
-    public PushReaction getPistonPushReaction(BlockState state) {
-        return PushReaction.BLOCK;
-    }
 }
