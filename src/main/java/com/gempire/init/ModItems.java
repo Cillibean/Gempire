@@ -132,6 +132,9 @@ public class ModItems {
     public static final RegistryObject<Item> BROWN_DIAMOND_GLASS = ITEMS.register("brown_diamond_glass", () ->
             new BlockItem(ModBlocks.BROWN_DIAMOND_GLASS.get(), new Item.Properties()));
 
+    public static final RegistryObject<Item> PRISMATIC_DIAMOND_GLASS = ITEMS.register("prismatic_diamond_glass", () ->
+            new BlockItem(ModBlocks.PRISMATIC_DIAMOND_GLASS.get(), new Item.Properties()));
+
     public static final RegistryObject<Item> PRIMED_ICE = ITEMS.register("primed_ice", () ->
             new BlockItem(
                     ModBlocks.PRIMED_ICE.get(),
@@ -195,7 +198,7 @@ public class ModItems {
             )
     );
 
-    public static final RegistryObject<Item> PURIFIED_PRISMATIC_GLASS = ITEMS.register("purified_prismatic_glass.json", () ->
+    public static final RegistryObject<Item> PURIFIED_PRISMATIC_GLASS = ITEMS.register("purified_prismatic_glass", () ->
             new BlockItem(
                     ModBlocks.PURIFIED_PRISMATIC_GLASS.get(),
                     new Item.Properties()

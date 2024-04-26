@@ -63,8 +63,15 @@ public class ModBlocks {
             new PrismWhiteAltarBlock(BlockBehaviour.Properties.of().pushReaction(PushReaction.BLOCK)));
 */
 
-    public static final RegistryObject<Block> PURIFIED_PRISMATIC_GLASS = BLOCKS.register("purified_prismatic_glass.json", () ->
-            new Block(BlockBehaviour.Properties.copy(Blocks.GLASS)));
+    public static final RegistryObject<Block> PURIFIED_PRISMATIC_GLASS = BLOCKS.register("purified_prismatic_glass", () ->
+            new GlassBlock(BlockBehaviour.Properties
+                    .of()
+                    .strength(0.3f, 0.3f)
+                    .sound(SoundType.GLASS)
+                    .requiresCorrectToolForDrops()
+                    .noOcclusion()
+            )
+    );
 
     public static final RegistryObject<Block> GALAXY_WARP = BLOCKS.register("galaxy_warp", () ->
             new GalaxyWarpBlock(BlockBehaviour.Properties.of().pushReaction(PushReaction.BLOCK)));
@@ -494,68 +501,175 @@ public class ModBlocks {
 
 
     public static final RegistryObject<Block> RED_DIAMOND_GLASS = BLOCKS.register("red_diamond_glass", () ->
-            new GlassBlock(BlockBehaviour.Properties.of().strength(0.3f, 0.3f)
-                    .sound(SoundType.GLASS).requiresCorrectToolForDrops().noOcclusion()));
+            new GlassBlock(BlockBehaviour.Properties
+                    .of()
+                    .strength(0.3f, 0.3f)
+                    .sound(SoundType.GLASS)
+                    .requiresCorrectToolForDrops()
+                    .noOcclusion()
+            )
+    );
 
     public static final RegistryObject<Block> ORANGE_DIAMOND_GLASS = BLOCKS.register("orange_diamond_glass", () ->
-            new GlassBlock(BlockBehaviour.Properties.of().strength(0.3f, 0.3f)
-                    .sound(SoundType.GLASS).requiresCorrectToolForDrops().noOcclusion()));
+            new GlassBlock(BlockBehaviour.Properties
+                    .of()
+                    .strength(0.3f, 0.3f)
+                    .sound(SoundType.GLASS)
+                    .requiresCorrectToolForDrops()
+                    .noOcclusion()
+            )
+    );
 
     public static final RegistryObject<Block> YELLOW_DIAMOND_GLASS = BLOCKS.register("yellow_diamond_glass", () ->
-            new GlassBlock(BlockBehaviour.Properties.of().strength(0.3f, 0.3f)
-                    .sound(SoundType.GLASS).requiresCorrectToolForDrops().noOcclusion()));
+            new GlassBlock(BlockBehaviour.Properties
+                    .of()
+                    .strength(0.3f, 0.3f)
+                    .sound(SoundType.GLASS)
+                    .requiresCorrectToolForDrops()
+                    .noOcclusion()
+            )
+    );
 
     public static final RegistryObject<Block> LIME_DIAMOND_GLASS = BLOCKS.register("lime_diamond_glass", () ->
-            new GlassBlock(BlockBehaviour.Properties.of().strength(0.3f, 0.3f)
-                    .sound(SoundType.GLASS).requiresCorrectToolForDrops().noOcclusion()));
+            new GlassBlock(BlockBehaviour.Properties
+                    .of()
+                    .strength(0.3f, 0.3f)
+                    .sound(SoundType.GLASS)
+                    .requiresCorrectToolForDrops()
+                    .noOcclusion()
+            )
+    );
 
     public static final RegistryObject<Block> GREEN_DIAMOND_GLASS = BLOCKS.register("green_diamond_glass", () ->
-            new GlassBlock(BlockBehaviour.Properties.of().strength(0.3f, 0.3f)
-                    .sound(SoundType.GLASS).requiresCorrectToolForDrops().noOcclusion()));
+            new GlassBlock(BlockBehaviour.Properties
+                    .of()
+                    .strength(0.3f, 0.3f)
+                    .sound(SoundType.GLASS)
+                    .requiresCorrectToolForDrops()
+                    .noOcclusion()
+            )
+    );
 
     public static final RegistryObject<Block> CYAN_DIAMOND_GLASS = BLOCKS.register("cyan_diamond_glass", () ->
-            new GlassBlock(BlockBehaviour.Properties.of().strength(0.3f, 0.3f)
-                    .sound(SoundType.GLASS).requiresCorrectToolForDrops().noOcclusion()));
+            new GlassBlock(BlockBehaviour.Properties
+                    .of()
+                    .strength(0.3f, 0.3f)
+                    .sound(SoundType.GLASS)
+                    .requiresCorrectToolForDrops()
+                    .noOcclusion()
+            )
+    );
 
     public static final RegistryObject<Block> LIGHT_BLUE_DIAMOND_GLASS = BLOCKS.register("light_blue_diamond_glass", () ->
-            new GlassBlock(BlockBehaviour.Properties.of().strength(0.3f, 0.3f)
-                    .sound(SoundType.GLASS).requiresCorrectToolForDrops().noOcclusion()));
+            new GlassBlock(BlockBehaviour.Properties
+                    .of()
+                    .strength(0.3f, 0.3f)
+                    .sound(SoundType.GLASS)
+                    .requiresCorrectToolForDrops()
+                    .noOcclusion()
+            )
+    );
 
     public static final RegistryObject<Block> BLUE_DIAMOND_GLASS = BLOCKS.register("blue_diamond_glass", () ->
-            new GlassBlock(BlockBehaviour.Properties.of().strength(0.3f, 0.3f)
-                    .sound(SoundType.GLASS).requiresCorrectToolForDrops().noOcclusion()));
+            new GlassBlock(BlockBehaviour.Properties
+                    .of()
+                    .strength(0.3f, 0.3f)
+                    .sound(SoundType.GLASS)
+                    .requiresCorrectToolForDrops()
+                    .noOcclusion()
+            )
+    );
 
     public static final RegistryObject<Block> PURPLE_DIAMOND_GLASS = BLOCKS.register("purple_diamond_glass", () ->
-            new GlassBlock(BlockBehaviour.Properties.of().strength(0.3f, 0.3f)
-                    .sound(SoundType.GLASS).requiresCorrectToolForDrops().noOcclusion()));
+            new GlassBlock(BlockBehaviour.Properties
+                    .of()
+                    .strength(0.3f, 0.3f)
+                    .sound(SoundType.GLASS)
+                    .requiresCorrectToolForDrops()
+                    .noOcclusion()
+            )
+    );
 
     public static final RegistryObject<Block> MAGENTA_DIAMOND_GLASS = BLOCKS.register("magenta_diamond_glass", () ->
-            new GlassBlock(BlockBehaviour.Properties.of().strength(0.3f, 0.3f)
-                    .sound(SoundType.GLASS).requiresCorrectToolForDrops().noOcclusion()));
+            new GlassBlock(BlockBehaviour.Properties
+                    .of()
+                    .strength(0.3f, 0.3f)
+                    .sound(SoundType.GLASS)
+                    .requiresCorrectToolForDrops()
+                    .noOcclusion()
+            )
+    );
 
     public static final RegistryObject<Block> PINK_DIAMOND_GLASS = BLOCKS.register("pink_diamond_glass", () ->
-            new GlassBlock(BlockBehaviour.Properties.of().strength(0.3f, 0.3f)
-                    .sound(SoundType.GLASS).requiresCorrectToolForDrops().noOcclusion()));
+            new GlassBlock(BlockBehaviour.Properties
+                    .of()
+                    .strength(0.3f, 0.3f)
+                    .sound(SoundType.GLASS)
+                    .requiresCorrectToolForDrops()
+                    .noOcclusion()
+            )
+    );
 
     public static final RegistryObject<Block> WHITE_DIAMOND_GLASS = BLOCKS.register("white_diamond_glass", () ->
-            new GlassBlock(BlockBehaviour.Properties.of().strength(0.3f, 0.3f)
-                    .sound(SoundType.GLASS).requiresCorrectToolForDrops().noOcclusion()));
+            new GlassBlock(BlockBehaviour.Properties
+                    .of()
+                    .strength(0.3f, 0.3f)
+                    .sound(SoundType.GLASS)
+                    .requiresCorrectToolForDrops()
+                    .noOcclusion()
+            )
+    );
 
     public static final RegistryObject<Block> LIGHT_GRAY_DIAMOND_GLASS = BLOCKS.register("light_gray_diamond_glass", () ->
-            new GlassBlock(BlockBehaviour.Properties.of().strength(0.3f, 0.3f)
-                    .sound(SoundType.GLASS).requiresCorrectToolForDrops().noOcclusion()));
+            new GlassBlock(BlockBehaviour.Properties
+                    .of()
+                    .strength(0.3f, 0.3f)
+                    .sound(SoundType.GLASS)
+                    .requiresCorrectToolForDrops()
+                    .noOcclusion()
+            )
+    );
 
     public static final RegistryObject<Block> GRAY_DIAMOND_GLASS = BLOCKS.register("gray_diamond_glass", () ->
-            new GlassBlock(BlockBehaviour.Properties.of().strength(0.3f, 0.3f)
-                    .sound(SoundType.GLASS).requiresCorrectToolForDrops().noOcclusion()));
+            new GlassBlock(BlockBehaviour.Properties
+                    .of()
+                    .strength(0.3f, 0.3f)
+                    .sound(SoundType.GLASS)
+                    .requiresCorrectToolForDrops()
+                    .noOcclusion()
+            )
+    );
 
     public static final RegistryObject<Block> BLACK_DIAMOND_GLASS = BLOCKS.register("black_diamond_glass", () ->
-            new GlassBlock(BlockBehaviour.Properties.of().strength(0.3f, 0.3f)
-                    .sound(SoundType.GLASS).requiresCorrectToolForDrops().noOcclusion()));
+            new GlassBlock(BlockBehaviour.Properties
+                    .of()
+                    .strength(0.3f, 0.3f)
+                    .sound(SoundType.GLASS)
+                    .requiresCorrectToolForDrops()
+                    .noOcclusion()
+            )
+    );
 
     public static final RegistryObject<Block> BROWN_DIAMOND_GLASS = BLOCKS.register("brown_diamond_glass", () ->
-            new GlassBlock(BlockBehaviour.Properties.of().strength(0.3f, 0.3f)
-                    .sound(SoundType.GLASS).requiresCorrectToolForDrops().noOcclusion()));
+            new GlassBlock(BlockBehaviour.Properties
+                    .of()
+                    .strength(0.3f, 0.3f)
+                    .sound(SoundType.GLASS)
+                    .requiresCorrectToolForDrops()
+                    .noOcclusion()
+            )
+    );
+
+    public static final RegistryObject<Block> PRISMATIC_DIAMOND_GLASS = BLOCKS.register("prismatic_diamond_glass", () ->
+            new GlassBlock(BlockBehaviour.Properties
+                    .of()
+                    .strength(0.3f, 0.3f)
+                    .sound(SoundType.GLASS)
+                    .requiresCorrectToolForDrops()
+                    .noOcclusion()
+            )
+    );
+
 
     public static final RegistryObject<Block> WHITE_CHROMA_CRYSTAL = BLOCKS.register("white_chroma_crystal", () ->
             new ChromaBlock(BlockBehaviour.Properties
