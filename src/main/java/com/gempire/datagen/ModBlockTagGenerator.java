@@ -133,7 +133,10 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                         ModBlocks.DRAINED_RED_SAND.get(),
                         ModBlocks.DRAINED_SAND.get(),
                         ModBlocks.DRAINED_GREY_SAND.get(),
-                        ModBlocks.DRAINED_BLUE_SAND.get()
+                        ModBlocks.DRAINED_BLUE_SAND.get(),
+                        ModBlocks.DESOLATE_GRASS.get(),
+                        ModBlocks.DESOLATE_SOIL.get(),
+                        ModBlocks.ABNORMAL_SAND.get()
 
                 );
 
@@ -239,6 +242,8 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
 
         this.tag(ModTags.Blocks.DESOLATE_ORE_REPLACEABLES)
                 .add(ModBlocks.PEGMATITE.get());
+
+        this.tag(BlockTags.DIRT).add(ModBlocks.DESOLATE_SOIL.get(), ModBlocks.DESOLATE_GRASS.get());
 
         this.tag(BlockTags.SAND).add(ModBlocks.ABNORMAL_SAND.get());
     }
