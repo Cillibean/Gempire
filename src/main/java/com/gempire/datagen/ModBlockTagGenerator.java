@@ -175,11 +175,15 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
 
         this.tag(BlockTags.FENCES)
                 .add(ModBlocks.DISTANT_FENCE.get(),
-                        ModBlocks.KALEIDOSCOPE_FENCE.get());
+                        ModBlocks.KALEIDOSCOPE_FENCE.get(),
+                        ModBlocks.SHADED_FENCE.get(),
+                        ModBlocks.CRYSTAL_FENCE.get());
 
         this.tag(BlockTags.FENCE_GATES)
                 .add(ModBlocks.DISTANT_FENCE_GATE.get(),
-                        ModBlocks.KALEIDOSCOPE_FENCE_GATE.get());
+                        ModBlocks.KALEIDOSCOPE_FENCE_GATE.get(),
+                        ModBlocks.SHADED_FENCE_GATE.get(),
+                        ModBlocks.CRYSTAL_FENCE_GATE.get());
 
         this.tag(BlockTags.LOGS_THAT_BURN)
                 .add(ModBlocks.DISTANT_WOOD.get(),
@@ -193,16 +197,27 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                         ModBlocks.KALEIDOSCOPE_WOOD.get(),
                         ModBlocks.KALEIDOSCOPE_LOG.get(),
                         ModBlocks.STRIPPED_KALEIDOSCOPE_LOG.get(),
-                        ModBlocks.STRIPPED_KALEIDOSCOPE_WOOD.get());
+                        ModBlocks.STRIPPED_KALEIDOSCOPE_WOOD.get(),
+                        ModBlocks.SHADED_WOOD.get(),
+                        ModBlocks.SHADED_LOG.get(),
+                        ModBlocks.STRIPPED_SHADED_LOG.get(),
+                        ModBlocks.STRIPPED_SHADED_WOOD.get(),
+                        ModBlocks.CRYSTAL_WOOD.get(),
+                        ModBlocks.CRYSTAL_LOG.get(),
+                        ModBlocks.STRIPPED_CRYSTAL_LOG.get(),
+                        ModBlocks.STRIPPED_CRYSTAL_WOOD.get());
 
         this.tag(BlockTags.PLANKS)
                 .add(ModBlocks.DISTANT_PLANKS.get(),
-                        ModBlocks.KALEIDOSCOPE_PLANKS.get());
+                        ModBlocks.KALEIDOSCOPE_PLANKS.get(),
+                        ModBlocks.SHADED_PLANKS.get(),
+                        ModBlocks.CRYSTAL_PLANKS.get());
 
         this.tag(BlockTags.LEAVES)
                 .add(ModBlocks.DISTANT_LEAVES.get(),
                         ModBlocks.CRYSTAL_LEAVES.get(),
-                        ModBlocks.KALEIDOSCOPE_LEAVES.get()
+                        ModBlocks.KALEIDOSCOPE_LEAVES.get(),
+                        ModBlocks.SHADED_LEAVES.get()
                 );
 
         this.tag(BlockTags.ICE)

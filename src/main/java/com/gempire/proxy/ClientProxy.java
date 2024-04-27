@@ -102,6 +102,8 @@ public class ClientProxy {
         event.registerEntityRenderer(ModEntities.RUTILE.get(), m -> new RenderRutile(m, new ModelRutile<>(m.bakeLayer(ModelRutile.LAYER_LOCATION))));
         event.registerEntityRenderer(ModEntities.SPINEL.get(), m -> new RenderSpinel(m, new ModelSpinel<>(m.bakeLayer(ModelSpinel.LAYER_LOCATION))));
         event.registerEntityRenderer(ModEntities.TOURMALINE.get(), m -> new RenderTourmaline(m, new ModelTourmaline<>(m.bakeLayer(ModelTourmaline.LAYER_LOCATION))));
+        event.registerEntityRenderer(ModEntities.SPECTER.get(), m -> new RenderSpecter(m, new ModelSpecter<>(m.bakeLayer(ModelSpecter.LAYER_LOCATION))));
+        event.registerEntityRenderer(ModEntities.PEPO.get(), m -> new RenderPepo(m, new ModelPepo<>(m.bakeLayer(ModelPepo.LAYER_LOCATION))));
 
         event.registerEntityRenderer(ModEntities.ICE_SHARD.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer(ModEntities.ACID_SPIT.get(), ThrownItemRenderer::new);
@@ -187,6 +189,8 @@ public class ClientProxy {
     @SubscribeEvent
     public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(ModelCobaltGuardian.LAYER_LOCATION, ModelCobaltGuardian::createBodyLayer);
+        event.registerLayerDefinition(ModelSpecter.LAYER_LOCATION, ModelSpecter::createBodyLayer);
+        event.registerLayerDefinition(ModelPepo.LAYER_LOCATION, ModelPepo::createBodyLayer);
         event.registerLayerDefinition(ModelHunter.LAYER_LOCATION, ModelHunter::createBodyLayer);
         event.registerLayerDefinition(ModelBeastmasterWolf.BEASTMASTER_WOLF, ModelBeastmasterWolf::createBodyLayer);
         event.registerLayerDefinition(ModelPebble.LAYER_LOCATION_P, ModelPebble::createBodyLayer);

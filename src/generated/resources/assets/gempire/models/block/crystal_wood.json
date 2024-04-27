@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "gempire:block/crystal_log",
+    "side": "gempire:block/crystal_log"
+  }
+}

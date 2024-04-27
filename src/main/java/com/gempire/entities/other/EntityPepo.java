@@ -9,6 +9,7 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
+import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import org.jetbrains.annotations.Nullable;
@@ -45,6 +46,7 @@ public class EntityPepo extends PathfinderMob {
     @Nullable
     @Override
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor p_21434_, DifficultyInstance p_21435_, MobSpawnType p_21436_, @Nullable SpawnGroupData p_21437_, @Nullable CompoundTag p_21438_) {
+        this.setVariant(this.random.nextInt(2));
         return super.finalizeSpawn(p_21434_, p_21435_, p_21436_, p_21437_, p_21438_);
     }
 
@@ -52,6 +54,7 @@ public class EntityPepo extends PathfinderMob {
     protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(6, new RandomLookAroundGoal(this));
+        this.goalSelector.addGoal(6, new WaterAvoidingRandomStrollGoal(this, 1.0D));
     }
 
     @Override
@@ -65,7 +68,7 @@ public class EntityPepo extends PathfinderMob {
     public void load(CompoundTag tag) {
         super.load(tag);
         this.setVariant(tag.getInt("variant"));
-        this.ownerUUID = tag.getUUID("owner");
+        //this.ownerUUID = tag.getUUID("owner");
     }
 
     @Override

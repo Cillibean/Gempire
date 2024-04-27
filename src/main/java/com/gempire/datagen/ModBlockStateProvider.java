@@ -50,6 +50,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockWithItem(ModBlocks.DISTANT_PLANKS);
         blockWithItem(ModBlocks.KALEIDOSCOPE_PLANKS);
         blockWithItem(ModBlocks.SHADED_PLANKS);
+        blockWithItem(ModBlocks.CRYSTAL_PLANKS);
 
         stairsBlock((StairBlock) ModBlocks.DISTANT_STAIRS.get(), blockTexture(ModBlocks.DISTANT_PLANKS.get()));
         slabBlock((SlabBlock) ModBlocks.DISTANT_SLAB.get(), blockTexture(ModBlocks.DISTANT_PLANKS.get()), blockTexture(ModBlocks.DISTANT_PLANKS.get()));
@@ -60,6 +61,9 @@ public class ModBlockStateProvider extends BlockStateProvider {
         stairsBlock((StairBlock) ModBlocks.SHADED_STAIRS.get(), blockTexture(ModBlocks.SHADED_PLANKS.get()));
         slabBlock((SlabBlock) ModBlocks.SHADED_SLAB.get(), blockTexture(ModBlocks.SHADED_PLANKS.get()), blockTexture(ModBlocks.SHADED_PLANKS.get()));
 
+        stairsBlock((StairBlock) ModBlocks.CRYSTAL_STAIRS.get(), blockTexture(ModBlocks.CRYSTAL_PLANKS.get()));
+        slabBlock((SlabBlock) ModBlocks.CRYSTAL_SLAB.get(), blockTexture(ModBlocks.CRYSTAL_PLANKS.get()), blockTexture(ModBlocks.CRYSTAL_PLANKS.get()));
+
         fenceBlock((FenceBlock) ModBlocks.DISTANT_FENCE.get(), blockTexture(ModBlocks.DISTANT_PLANKS.get()));
         fenceGateBlock((FenceGateBlock) ModBlocks.DISTANT_FENCE_GATE.get(), blockTexture(ModBlocks.DISTANT_PLANKS.get()));
 
@@ -68,24 +72,41 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         fenceBlock((FenceBlock) ModBlocks.SHADED_FENCE.get(), blockTexture(ModBlocks.SHADED_PLANKS.get()));
         fenceGateBlock((FenceGateBlock) ModBlocks.SHADED_FENCE_GATE.get(), blockTexture(ModBlocks.SHADED_PLANKS.get()));
-        /*
-        doorBlockWithRenderType((DoorBlock)ModBlocks.DISTANT_DOOR.get(), modLoc("block/distant_door_bottom"), modLoc("block/distant_door_top"), "cutout");
-        trapdoorBlockWithRenderType((TrapDoorBlock) ModBlocks.DISTANT_TRAPDOOR.get(), modLoc("block/distant_trapdoor"), true, "cutout");
 
-         */
+        fenceBlock((FenceBlock) ModBlocks.CRYSTAL_FENCE.get(), blockTexture(ModBlocks.CRYSTAL_PLANKS.get()));
+        fenceGateBlock((FenceGateBlock) ModBlocks.CRYSTAL_FENCE_GATE.get(), blockTexture(ModBlocks.CRYSTAL_PLANKS.get()));
 
         blockItem(ModBlocks.DISTANT_STAIRS);
         blockItem(ModBlocks.DISTANT_SLAB);
         blockItem(ModBlocks.DISTANT_FENCE_GATE);
-        //blockItem(ModBlocks.DISTANT_TRAPDOOR, "_bottom");
+
+        doorBlockWithRenderType((DoorBlock)ModBlocks.DISTANT_DOOR.get(), modLoc("block/distant_door_bottom"), modLoc("block/distant_door_top"), "cutout");
+        trapdoorBlockWithRenderType((TrapDoorBlock) ModBlocks.DISTANT_TRAPDOOR.get(), modLoc("block/distant_trapdoor"), true, "cutout");
+        blockItem(ModBlocks.DISTANT_TRAPDOOR, "_bottom");
 
         blockItem(ModBlocks.KALEIDOSCOPE_STAIRS);
         blockItem(ModBlocks.KALEIDOSCOPE_SLAB);
         blockItem(ModBlocks.KALEIDOSCOPE_FENCE_GATE);
 
+        doorBlockWithRenderType((DoorBlock)ModBlocks.KALEIDOSCOPE_DOOR.get(), modLoc("block/kaleidoscope_door_bottom"), modLoc("block/kaleidoscope_door_top"), "cutout");
+        trapdoorBlockWithRenderType((TrapDoorBlock) ModBlocks.KALEIDOSCOPE_TRAPDOOR.get(), modLoc("block/kaleidoscope_trapdoor"), true, "cutout");
+        blockItem(ModBlocks.KALEIDOSCOPE_TRAPDOOR, "_bottom");
+
         blockItem(ModBlocks.SHADED_STAIRS);
         blockItem(ModBlocks.SHADED_SLAB);
         blockItem(ModBlocks.SHADED_FENCE_GATE);
+
+        doorBlockWithRenderType((DoorBlock)ModBlocks.SHADED_DOOR.get(), modLoc("block/shaded_door_bottom"), modLoc("block/shaded_door_top"), "cutout");
+        trapdoorBlockWithRenderType((TrapDoorBlock) ModBlocks.SHADED_TRAPDOOR.get(), modLoc("block/shaded_trapdoor"), true, "cutout");
+        blockItem(ModBlocks.SHADED_TRAPDOOR, "_bottom");
+
+        blockItem(ModBlocks.CRYSTAL_STAIRS);
+        blockItem(ModBlocks.CRYSTAL_SLAB);
+        blockItem(ModBlocks.CRYSTAL_FENCE_GATE);
+
+        doorBlockWithRenderType((DoorBlock)ModBlocks.CRYSTAL_DOOR.get(), modLoc("block/crystal_door_bottom"), modLoc("block/crystal_door_top"), "cutout");
+        trapdoorBlockWithRenderType((TrapDoorBlock) ModBlocks.CRYSTAL_TRAPDOOR.get(), modLoc("block/crystal_trapdoor"), true, "cutout");
+        blockItem(ModBlocks.CRYSTAL_TRAPDOOR, "_bottom");
 
 
         logBlock(((RotatedPillarBlock) ModBlocks.DISTANT_LOG.get()));
@@ -109,6 +130,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         hangingSignBlock(ModBlocks.DISTANT_HANGING_SIGN.get(), ModBlocks.DISTANT_WALL_HANGING_SIGN.get(),
                 blockTexture(ModBlocks.DISTANT_PLANKS.get()));
 
+
         logBlock(((RotatedPillarBlock) ModBlocks.KALEIDOSCOPE_LOG.get()));
         blockItem(ModBlocks.KALEIDOSCOPE_LOG);
         axisBlock(((RotatedPillarBlock) ModBlocks.KALEIDOSCOPE_WOOD.get()), blockTexture(ModBlocks.KALEIDOSCOPE_LOG.get()), blockTexture(ModBlocks.KALEIDOSCOPE_LOG.get()));
@@ -118,7 +140,6 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 new ResourceLocation(Gempire.MODID, "block/stripped_kaleidoscope_log_top"));
         axisBlock((RotatedPillarBlock) ModBlocks.STRIPPED_KALEIDOSCOPE_WOOD.get(), new ResourceLocation(Gempire.MODID, "block/stripped_kaleidoscope_log"),
                 new ResourceLocation(Gempire.MODID, "block/stripped_kaleidoscope_log"));
-
 
         saplingBlock(ModBlocks.KALEIDOSCOPE_SAPLING);
 
@@ -148,12 +169,27 @@ public class ModBlockStateProvider extends BlockStateProvider {
         axisBlock((RotatedPillarBlock) ModBlocks.STRIPPED_SHADED_WOOD.get(), new ResourceLocation(Gempire.MODID, "block/stripped_shaded_log"),
                 new ResourceLocation(Gempire.MODID, "block/stripped_shaded_log"));
 
-
         saplingBlock(ModBlocks.SHADED_SAPLING);
-
 
         blockItem(ModBlocks.STRIPPED_SHADED_LOG);
         blockItem(ModBlocks.STRIPPED_SHADED_WOOD);
+
+
+        logBlock(((RotatedPillarBlock) ModBlocks.CRYSTAL_LOG.get()));
+        blockItem(ModBlocks.CRYSTAL_LOG);
+        axisBlock(((RotatedPillarBlock) ModBlocks.CRYSTAL_WOOD.get()), blockTexture(ModBlocks.CRYSTAL_LOG.get()), blockTexture(ModBlocks.CRYSTAL_LOG.get()));
+        blockItem(ModBlocks.CRYSTAL_WOOD);
+        leavesBlock(ModBlocks.CRYSTAL_LEAVES);
+        axisBlock((RotatedPillarBlock) ModBlocks.STRIPPED_CRYSTAL_LOG.get(), new ResourceLocation(Gempire.MODID, "block/stripped_crystal_log"),
+                new ResourceLocation(Gempire.MODID, "block/stripped_crystal_log_top"));
+        axisBlock((RotatedPillarBlock) ModBlocks.STRIPPED_CRYSTAL_WOOD.get(), new ResourceLocation(Gempire.MODID, "block/stripped_crystal_log"),
+                new ResourceLocation(Gempire.MODID, "block/stripped_crystal_log"));
+
+        saplingBlock(ModBlocks.CRYSTAL_SAPLING);
+
+        blockItem(ModBlocks.STRIPPED_CRYSTAL_LOG);
+        blockItem(ModBlocks.STRIPPED_CRYSTAL_WOOD);
+
 
         paneBlock(ModBlocks.RED_LATTICE, new ResourceLocation(Gempire.MODID, "block/lattice_red"), new ResourceLocation(Gempire.MODID, "block/lattice_red"));
         paneBlock(ModBlocks.ORANGE_LATTICE, new ResourceLocation(Gempire.MODID, "block/lattice_orange"), new ResourceLocation(Gempire.MODID, "block/lattice_orange"));

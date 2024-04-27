@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "gempire:block/crystal_slab"
+    },
+    "type=double": {
+      "model": "gempire:block/crystal_planks"
+    },
+    "type=top": {
+      "model": "gempire:block/crystal_slab_top"
+    }
+  }
+}

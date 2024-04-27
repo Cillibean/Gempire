@@ -729,6 +729,61 @@ public class ModItems {
             )
     );
 
+    public static final RegistryObject<Item> CRYSTAL_PLANKS = ITEMS.register("crystal_planks", () ->
+            new BlockItem(
+                    ModBlocks.CRYSTAL_PLANKS.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> CRYSTAL_SLAB = ITEMS.register("crystal_slab", () ->
+            new BlockItem(
+                    ModBlocks.CRYSTAL_SLAB.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> CRYSTAL_FENCE = ITEMS.register("crystal_fence", () ->
+            new BlockItem(
+                    ModBlocks.CRYSTAL_FENCE.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> CRYSTAL_FENCE_GATE = ITEMS.register("crystal_fence_gate", () ->
+            new BlockItem(
+                    ModBlocks.CRYSTAL_FENCE_GATE.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> CRYSTAL_DOOR = ITEMS.register("crystal_door", () ->
+            new BlockItem(
+                    ModBlocks.CRYSTAL_DOOR.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> CRYSTAL_TRAPDOOR = ITEMS.register("crystal_trapdoor", () ->
+            new BlockItem(
+                    ModBlocks.CRYSTAL_TRAPDOOR.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> CRYSTAL_STAIRS = ITEMS.register("crystal_stairs", () ->
+            new BlockItem(
+                    ModBlocks.CRYSTAL_STAIRS.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> CRYSTAL_SIGN = ITEMS.register("crystal_sign",
+            () -> new SignItem(new Item.Properties().stacksTo(16), ModBlocks.CRYSTAL_SIGN.get(), ModBlocks.CRYSTAL_WALL_SIGN.get()));
+    public static final RegistryObject<Item> CRYSTAL_HANGING_SIGN = ITEMS.register("crystal_hanging_sign",
+            () -> new HangingSignItem(ModBlocks.CRYSTAL_HANGING_SIGN.get(), ModBlocks.CRYSTAL_WALL_HANGING_SIGN.get(),
+                    new Item.Properties().stacksTo(16)));
+
     public static final RegistryObject<Item> BLUE_CRYSTAL_APPLE = ITEMS.register("blue_crystal_apple", () ->
             new Item(new Item.Properties().food(ModFoods.CRYSTAL_APPLE))
     );

@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "gempire:block/stripped_crystal_log"
+    "all": "gempire:block/crystal_planks"
   }
 }

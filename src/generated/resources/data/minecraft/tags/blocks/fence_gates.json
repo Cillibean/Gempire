@@ -1,6 +1,8 @@
 {
   "values": [
     "gempire:distant_fence_gate",
-    "gempire:kaleidoscope_fence_gate"
+    "gempire:kaleidoscope_fence_gate",
+    "gempire:shaded_fence_gate",
+    "gempire:crystal_fence_gate"
   ]
 }
