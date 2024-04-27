@@ -38,7 +38,7 @@ public class ModEntities {
 
     public static final RegistryObject<EntityType<EntityPepo>> PEPO = ENTITIES.register("pepo",
             () -> EntityType.Builder.of(EntityPepo::new, MobCategory.CREATURE)
-                    .sized(0.6f, 0.85f) // Hitbox Size
+                    .sized(.6f, 1.2f) // Hitbox Size
                     .build(new ResourceLocation(Gempire.MODID, "pepo").toString()));
 
     public static final RegistryObject<EntityType<EntityAlabasterEmpress>> ALABASTER_EMPRESS = ENTITIES.register("alabaster_empress",
@@ -87,6 +87,11 @@ public class ModEntities {
             () -> EntityType.Builder.of(EntityHunter::new, MobCategory.MONSTER)
                     .sized(1f, 1.5f) // Hitbox Size
                     .build(new ResourceLocation(Gempire.MODID, "hunter").toString()));
+
+    public static final RegistryObject<EntityType<EntitySpecter>> SPECTER = ENTITIES.register("specter",
+            () -> EntityType.Builder.of(EntitySpecter::new, MobCategory.MONSTER)
+                    .sized(.5f, 3f) // Hitbox Size
+                    .build(new ResourceLocation(Gempire.MODID, "specter").toString()));
 
     public static final RegistryObject<EntityType<EntityCrawler>> CRAWLER = ENTITIES.register("crawler",
             () -> EntityType.Builder.of(EntityCrawler::new, MobCategory.CREATURE)

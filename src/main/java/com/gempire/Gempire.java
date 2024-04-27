@@ -72,6 +72,8 @@ public class Gempire
 
         event.put(ModEntities.HUNTER.get(), EntityHunter.registerAttributes().build());
 
+        event.put(ModEntities.SPECTER.get(), EntitySpecter.registerAttributes().build());
+
         event.put(ModEntities.SHAMBLER.get(), EntityShambler.registerAttributes().build());
 
         event.put(ModEntities.ABOMINATION.get(), EntityAbomination.registerAttributes().build());

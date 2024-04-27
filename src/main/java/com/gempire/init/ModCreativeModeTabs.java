@@ -640,6 +640,17 @@ public class ModCreativeModeTabs {
 
                 populator.accept(ModBlocks.PEGMATITE.get());
                 populator.accept(ModBlocks.COBBLED_PEGMATITE.get());
+                populator.accept(ModItems.SCHIST.get());
+
+                populator.accept(ModItems.ABNORMAL_SAND.get());
+                populator.accept(ModItems.ABNORMAL_SANDSTONE.get());
+
+                populator.accept(ModItems.PRISMATIC_SNOW.get());
+
+                populator.accept(ModItems.DESOLATE_GRASS.get());
+                populator.accept(ModItems.DESOLATE_SOIL.get());
+
+                populator.accept(ModItems.PINCULE.get());
 
                 populator.accept(ModBlocks.RUINED_MARBLE_BLOCK.get());
                 populator.accept(ModBlocks.RUINED_MARBLE_STAIRS.get());
@@ -674,6 +685,8 @@ public class ModCreativeModeTabs {
                 populator.accept(ModItems.DISTANT_STAIRS.get());
                 populator.accept(ModItems.DISTANT_FENCE.get());
                 populator.accept(ModItems.DISTANT_FENCE_GATE.get());
+                populator.accept(ModItems.DISTANT_DOOR.get());
+                populator.accept(ModItems.DISTANT_TRAPDOOR.get());
                 populator.accept(ModItems.DISTANT_SIGN.get());
                 populator.accept(ModItems.DISTANT_HANGING_SIGN.get());
 
@@ -688,6 +701,8 @@ public class ModCreativeModeTabs {
                 populator.accept(ModItems.KALEIDOSCOPE_STAIRS.get());
                 populator.accept(ModItems.KALEIDOSCOPE_FENCE.get());
                 populator.accept(ModItems.KALEIDOSCOPE_FENCE_GATE.get());
+                populator.accept(ModItems.KALEIDOSCOPE_DOOR.get());
+                populator.accept(ModItems.KALEIDOSCOPE_TRAPDOOR.get());
                 populator.accept(ModItems.KALEIDOSCOPE_SIGN.get());
                 populator.accept(ModItems.KALEIDOSCOPE_HANGING_SIGN.get());
 
@@ -702,8 +717,26 @@ public class ModCreativeModeTabs {
                 populator.accept(ModItems.SHADED_STAIRS.get());
                 populator.accept(ModItems.SHADED_FENCE.get());
                 populator.accept(ModItems.SHADED_FENCE_GATE.get());
+                populator.accept(ModItems.SHADED_DOOR.get());
+                populator.accept(ModItems.SHADED_TRAPDOOR.get());
                 populator.accept(ModItems.SHADED_SIGN.get());
                 populator.accept(ModItems.SHADED_HANGING_SIGN.get());
+
+                populator.accept(ModItems.CRYSTAL_LOG.get());
+                populator.accept(ModItems.STRIPPED_CRYSTAL_LOG.get());
+                populator.accept(ModItems.CRYSTAL_WOOD.get());
+                populator.accept(ModItems.STRIPPED_CRYSTAL_WOOD.get());
+                populator.accept(ModItems.CRYSTAL_LEAVES.get());
+                populator.accept(ModItems.CRYSTAL_SAPLING.get());
+                populator.accept(ModItems.CRYSTAL_PLANKS.get());
+                populator.accept(ModItems.CRYSTAL_SLAB.get());
+                populator.accept(ModItems.CRYSTAL_STAIRS.get());
+                populator.accept(ModItems.CRYSTAL_FENCE.get());
+                populator.accept(ModItems.CRYSTAL_FENCE_GATE.get());
+                populator.accept(ModItems.CRYSTAL_DOOR.get());
+                populator.accept(ModItems.CRYSTAL_TRAPDOOR.get());
+                populator.accept(ModItems.CRYSTAL_SIGN.get());
+                populator.accept(ModItems.CRYSTAL_HANGING_SIGN.get());
 
                 populator.accept(ModItems.RED_LATTICE.get());
                 populator.accept(ModItems.ORANGE_LATTICE.get());

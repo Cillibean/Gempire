@@ -10,9 +10,13 @@ import com.gempire.client.screen.warppad.WarpSelectionScreen;
 import com.gempire.client.ter.ShellTER;
 import com.gempire.fluids.ModFluidTypes;
 import com.gempire.init.*;
+import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.blockentity.HangingSignRenderer;
 import net.minecraft.client.renderer.blockentity.SignRenderer;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.level.GrassColor;
+import net.minecraft.world.level.block.state.BlockState;
 import com.gempire.items.tools.GuardianArmorRenderer;
 import com.gempire.keybindings.KeyBindings;
 import com.gempire.networking.WarpGuiKeyPressed;
@@ -27,11 +31,9 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.FoliageColor;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.EntityRenderersEvent;
-import net.minecraftforge.client.event.InputEvent;
-import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
-import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
+import net.minecraftforge.client.event.*;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import net.minecraftforge.common.CreativeModeTabRegistry;
 import net.minecraftforge.common.ForgeMod;
@@ -102,6 +104,8 @@ public class ClientProxy {
         event.registerEntityRenderer(ModEntities.RUTILE.get(), m -> new RenderRutile(m, new ModelRutile<>(m.bakeLayer(ModelRutile.LAYER_LOCATION))));
         event.registerEntityRenderer(ModEntities.SPINEL.get(), m -> new RenderSpinel(m, new ModelSpinel<>(m.bakeLayer(ModelSpinel.LAYER_LOCATION))));
         event.registerEntityRenderer(ModEntities.TOURMALINE.get(), m -> new RenderTourmaline(m, new ModelTourmaline<>(m.bakeLayer(ModelTourmaline.LAYER_LOCATION))));
+        event.registerEntityRenderer(ModEntities.SPECTER.get(), m -> new RenderSpecter(m, new ModelSpecter<>(m.bakeLayer(ModelSpecter.LAYER_LOCATION))));
+        event.registerEntityRenderer(ModEntities.PEPO.get(), m -> new RenderPepo(m, new ModelPepo<>(m.bakeLayer(ModelPepo.LAYER_LOCATION))));
 
         event.registerEntityRenderer(ModEntities.ICE_SHARD.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer(ModEntities.ACID_SPIT.get(), ThrownItemRenderer::new);
@@ -187,6 +191,8 @@ public class ClientProxy {
     @SubscribeEvent
     public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(ModelCobaltGuardian.LAYER_LOCATION, ModelCobaltGuardian::createBodyLayer);
+        event.registerLayerDefinition(ModelSpecter.LAYER_LOCATION, ModelSpecter::createBodyLayer);
+        event.registerLayerDefinition(ModelPepo.LAYER_LOCATION, ModelPepo::createBodyLayer);
         event.registerLayerDefinition(ModelHunter.LAYER_LOCATION, ModelHunter::createBodyLayer);
         event.registerLayerDefinition(ModelBeastmasterWolf.BEASTMASTER_WOLF, ModelBeastmasterWolf::createBodyLayer);
         event.registerLayerDefinition(ModelPebble.LAYER_LOCATION_P, ModelPebble::createBodyLayer);
@@ -217,6 +223,20 @@ public class ClientProxy {
         event.registerLayerDefinition(ModelPeridot.LAYER_LOCATION, ModelPeridot::createBodyLayer);
         event.registerLayerDefinition(ModelBismuth.LAYER_LOCATION, ModelBismuth::createBodyLayer);
     }
+
+        @SubscribeEvent
+        public static void registerColoredBlocks(RegisterColorHandlersEvent.Block event) {
+            event.getBlockColors().register((pState, pLevel, pPos, pTintIndex) -> pLevel != null &&
+                    pPos != null ? BiomeColors.getAverageGrassColor(pLevel, pPos) : GrassColor.getDefaultColor(), ModBlocks.DESOLATE_GRASS.get());
+        }
+
+        @SubscribeEvent
+        public static void registerColoredItems(RegisterColorHandlersEvent.Item event) {
+            event.getItemColors().register((pStack, pTintIndex) -> {
+                BlockState state = ((BlockItem)pStack.getItem()).getBlock().defaultBlockState();
+                return event.getBlockColors().getColor(state, null, null, pTintIndex);
+            }, ModBlocks.DESOLATE_GRASS.get());
+        }
 
     @SubscribeEvent
     public static void registerBER(EntityRenderersEvent.RegisterRenderers event) {

@@ -1,4 +1,4 @@
-// 1.20.1	2024-03-30T15:06:35.993886	Item Models: gempire
+// 1.20.1	2024-04-27T08:38:32.926455	Item Models: gempire
 2a4c323206d2fbeca217109aa5c8a2ac8ce38701 assets/gempire/models/item/acid_spit.json
 0da7ed67ca0a8fcb9a8ba427cc3a79d0931ef656 assets/gempire/models/item/alabaster_shards.json
 c0c62ab235536d2de57de21efdcbe773279a708b assets/gempire/models/item/amber_shards.json
@@ -21,6 +21,8 @@ dea68891228489348fa0ba99f9f287cab63d4953 assets/gempire/models/item/brown_lattic
 02572433c70091ff3e02cea129860110d38043f6 assets/gempire/models/item/confractor.json
 abce74eac971aebc6dc933921fbaa1c0056e343a assets/gempire/models/item/confractor_body.json
 72d2d8c794066ae1d251d317a95ad79696a24d67 assets/gempire/models/item/confractor_tip.json
+7b1dae94b648ecc2338c40fa2e428d9c3e1937c5 assets/gempire/models/item/crystal_fence.json
+6f33c5476af3442ee45e19c18a20bced76cf4915 assets/gempire/models/item/crystal_sapling.json
 203c138f08c9b479796360252bd64ac33b001748 assets/gempire/models/item/cyan_chroma.json
 93be3ef44cbc4b4aabfd14eff791e847c7d019b7 assets/gempire/models/item/cyan_lattice.json
 1ae69ba003ff3f9af95fdc9312c40476ba579774 assets/gempire/models/item/cyan_shards.json
