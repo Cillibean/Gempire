@@ -640,6 +640,17 @@ public class ModCreativeModeTabs {
 
                 populator.accept(ModBlocks.PEGMATITE.get());
                 populator.accept(ModBlocks.COBBLED_PEGMATITE.get());
+                populator.accept(ModItems.SCHIST.get());
+
+                populator.accept(ModItems.ABNORMAL_SAND.get());
+                populator.accept(ModItems.ABNORMAL_SANDSTONE.get());
+
+                populator.accept(ModItems.PRISMATIC_SNOW.get());
+
+                populator.accept(ModItems.DESOLATE_GRASS.get());
+                populator.accept(ModItems.DESOLATE_SOIL.get());
+
+                populator.accept(ModItems.PINCULE.get());
 
                 populator.accept(ModBlocks.RUINED_MARBLE_BLOCK.get());
                 populator.accept(ModBlocks.RUINED_MARBLE_STAIRS.get());

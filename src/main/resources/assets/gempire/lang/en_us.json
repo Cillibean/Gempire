@@ -263,6 +263,13 @@
 
   "block.gempire.pegmatite": "Pegmatite",
   "block.gempire.cobbled_pegmatite": "Cobbled Pegmatite",
+  "block.gempire.schist": "Schist",
+  "block.gempire.prismatic_snow": "Prismatic Snow",
+  "block.gempire.desolate_grass": "Desolate Grass",
+  "block.gempire.desolate_soil": "Desolate Soil",
+  "block.gempire.pincule": "Pincule",
+  "block.gempire.abnormal_sand": "Abnormal Sand",
+  "block.gempire.abnormal_sandstone": "Abnormal Sandstone",
 
   "item.gempire.primed_slate": "Primed Slate",
   "item.gempire.slate": "Slate",

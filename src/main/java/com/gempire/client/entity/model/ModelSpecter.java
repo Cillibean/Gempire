@@ -22,19 +22,8 @@ public class ModelSpecter<T extends Monster> extends EntityModel<T> {
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation("gempire", "specter"), "main");
 	private final ModelPart model;
 
-	private final ModelPart head_r1;
-	private final ModelPart rightarm;
-	private final ModelPart rightleg;
-	private final ModelPart leftarm;
-	private final ModelPart leftleg;
-
 	public ModelSpecter(ModelPart root) {
 		this.model = root.getChild("model");
-		this.head_r1 = root.getChild("head_r1");
-		this.rightarm = root.getChild("rightarm");
-		this.rightleg = root.getChild("rightleg");
-		this.leftarm = root.getChild("leftarm");
-		this.leftleg = root.getChild("leftleg");
 	}
 
 	public static LayerDefinition createBodyLayer() {
@@ -76,11 +65,7 @@ public class ModelSpecter<T extends Monster> extends EntityModel<T> {
 
 	@Override
 	public void setupAnim(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		this.setRotateAngle(this.head_r1, headPitch * 0.5f * ((float)Math.PI / 180F), netHeadYaw * .5f * ((float)Math.PI / 180F), 0);
-		this.setRotateAngle(this.leftarm, Mth.cos(limbSwing * 0.5F + (float)Math.PI) * limbSwingAmount * 0.8f, 0, 0);
-		this.setRotateAngle(this.rightarm, Mth.cos(limbSwing * 0.5F)  * limbSwingAmount * 0.8f, 0, 0);
-		this.setRotateAngle(this.leftleg, Mth.cos(limbSwing * 0.5F) * limbSwingAmount * 0.8f, 0, 0);
-		this.setRotateAngle(this.rightleg, Mth.cos(limbSwing * 0.5F + (float)Math.PI) * limbSwingAmount * 0.8f, 0, 0);
+
 	}
 
 	public void setRotateAngle(ModelPart modelRenderer, float x, float y, float z) {

@@ -954,7 +954,7 @@
                                 "then_run": {
                                   "type": "minecraft:block",
                                   "result_state": {
-                                    "Name": "minecraft:snow_block"
+                                    "Name": "gempire:prismatic_snow"
                                   }
                                 }
                               }
@@ -1019,7 +1019,7 @@
                                 "then_run": {
                                   "type": "minecraft:block",
                                   "result_state": {
-                                    "Name": "minecraft:snow_block"
+                                    "Name": "gempire:prismatic_snow"
                                   }
                                 }
                               }
@@ -1060,7 +1060,7 @@
                                 "then_run": {
                                   "type": "minecraft:block",
                                   "result_state": {
-                                    "Name": "minecraft:snow_block"
+                                    "Name": "gempire:prismatic_snow"
                                   }
                                 }
                               }
@@ -1113,7 +1113,7 @@
                                 "then_run": {
                                   "type": "minecraft:block",
                                   "result_state": {
-                                    "Name": "minecraft:snow_block"
+                                    "Name": "gempire:prismatic_snow"
                                   }
                                 }
                               }
@@ -1261,14 +1261,14 @@
                                     "then_run": {
                                       "type": "minecraft:block",
                                       "result_state": {
-                                        "Name": "minecraft:sandstone"
+                                        "Name": "gempire:abnormal_sandstone"
                                       }
                                     }
                                   },
                                   {
                                     "type": "minecraft:block",
                                     "result_state": {
-                                      "Name": "minecraft:sand"
+                                      "Name": "gempire:abnormal_sand"
                                     }
                                   }
                                 ]
@@ -1297,14 +1297,14 @@
                                     "then_run": {
                                       "type": "minecraft:block",
                                       "result_state": {
-                                        "Name": "minecraft:sandstone"
+                                        "Name": "gempire:abnormal_sandstone"
                                       }
                                     }
                                   },
                                   {
                                     "type": "minecraft:block",
                                     "result_state": {
-                                      "Name": "minecraft:sand"
+                                      "Name": "gempire:abnormal_sand"
                                     }
                                   }
                                 ]
@@ -1350,21 +1350,6 @@
                                   "type": "minecraft:block",
                                   "result_state": {
                                     "Name": "gempire:pegmatite"
-                                  }
-                                }
-                              },
-                              {
-                                "type": "minecraft:condition",
-                                "if_true": {
-                                  "type": "minecraft:noise_threshold",
-                                  "noise": "minecraft:surface",
-                                  "min_threshold": -0.06060606060606061,
-                                  "max_threshold": 1.7976931348623157e+308
-                                },
-                                "then_run": {
-                                  "type": "minecraft:block",
-                                  "result_state": {
-                                    "Name": "minecraft:coarse_dirt"
                                   }
                                 }
                               }
@@ -1455,7 +1440,7 @@
                                       "then_run": {
                                         "type": "minecraft:block",
                                         "result_state": {
-                                          "Name": "minecraft:grass_block",
+                                          "Name": "gempire:desolate_grass",
                                           "Properties": {
                                             "snowy": "false"
                                           }
@@ -1465,7 +1450,7 @@
                                     {
                                       "type": "minecraft:block",
                                       "result_state": {
-                                        "Name": "minecraft:dirt"
+                                        "Name": "gempire:desolate_soil"
                                       }
                                     }
                                   ]
@@ -1518,21 +1503,6 @@
                                 "if_true": {
                                   "type": "minecraft:noise_threshold",
                                   "noise": "minecraft:surface",
-                                  "min_threshold": 0.21212121212121213,
-                                  "max_threshold": 1.7976931348623157e+308
-                                },
-                                "then_run": {
-                                  "type": "minecraft:block",
-                                  "result_state": {
-                                    "Name": "minecraft:coarse_dirt"
-                                  }
-                                }
-                              },
-                              {
-                                "type": "minecraft:condition",
-                                "if_true": {
-                                  "type": "minecraft:noise_threshold",
-                                  "noise": "minecraft:surface",
                                   "min_threshold": -0.11515151515151514,
                                   "max_threshold": 1.7976931348623157e+308
                                 },
@@ -1568,7 +1538,7 @@
                             "then_run": {
                               "type": "minecraft:block",
                               "result_state": {
-                                "Name": "minecraft:snow_block"
+                                "Name": "gempire:prismatic_snow"
                               }
                             }
                           }
@@ -1620,7 +1590,7 @@
                               "then_run": {
                                 "type": "minecraft:block",
                                 "result_state": {
-                                  "Name": "minecraft:grass_block",
+                                  "Name": "gempire:desolate_grass",
                                   "Properties": {
                                     "snowy": "false"
                                   }
@@ -1630,7 +1600,7 @@
                             {
                               "type": "minecraft:block",
                               "result_state": {
-                                "Name": "minecraft:dirt"
+                                "Name": "gempire:desolate_soil"
                               }
                             }
                           ]
@@ -1763,7 +1733,7 @@
                                 "then_run": {
                                   "type": "minecraft:block",
                                   "result_state": {
-                                    "Name": "minecraft:snow_block"
+                                    "Name": "gempire:prismatic_snow"
                                   }
                                 }
                               }
@@ -1828,7 +1798,7 @@
                                 "then_run": {
                                   "type": "minecraft:block",
                                   "result_state": {
-                                    "Name": "minecraft:snow_block"
+                                    "Name": "gempire:prismatic_snow"
                                   }
                                 }
                               }
@@ -1888,7 +1858,7 @@
                               {
                                 "type": "minecraft:block",
                                 "result_state": {
-                                  "Name": "minecraft:dirt"
+                                  "Name": "gempire:desolate_soil"
                                 }
                               }
                             ]
@@ -2035,14 +2005,14 @@
                                     "then_run": {
                                       "type": "minecraft:block",
                                       "result_state": {
-                                        "Name": "minecraft:sandstone"
+                                        "Name": "gempire:abnormal_sandstone"
                                       }
                                     }
                                   },
                                   {
                                     "type": "minecraft:block",
                                     "result_state": {
-                                      "Name": "minecraft:sand"
+                                      "Name": "gempire:abnormal_sand"
                                     }
                                   }
                                 ]
@@ -2071,14 +2041,14 @@
                                     "then_run": {
                                       "type": "minecraft:block",
                                       "result_state": {
-                                        "Name": "minecraft:sandstone"
+                                        "Name": "gempire:abnormal_sandstone"
                                       }
                                     }
                                   },
                                   {
                                     "type": "minecraft:block",
                                     "result_state": {
-                                      "Name": "minecraft:sand"
+                                      "Name": "gempire:abnormal_sand"
                                     }
                                   }
                                 ]
@@ -2198,7 +2168,7 @@
                                 "then_run": {
                                   "type": "minecraft:block",
                                   "result_state": {
-                                    "Name": "minecraft:dirt"
+                                    "Name": "gempire:desolate_soil"
                                   }
                                 }
                               },
@@ -2250,7 +2220,7 @@
                         {
                           "type": "minecraft:block",
                           "result_state": {
-                            "Name": "minecraft:dirt"
+                            "Name": "gempire:desolate_soil"
                           }
                         }
                       ]
@@ -2276,7 +2246,7 @@
                       "then_run": {
                         "type": "minecraft:block",
                         "result_state": {
-                          "Name": "minecraft:sandstone"
+                          "Name": "gempire:abnormal_sandstone"
                         }
                       }
                     }
@@ -2301,7 +2271,7 @@
                       "then_run": {
                         "type": "minecraft:block",
                         "result_state": {
-                          "Name": "minecraft:sandstone"
+                          "Name": "gempire:abnormal_sandstone"
                         }
                       }
                     }
@@ -2345,14 +2315,14 @@
                           "then_run": {
                             "type": "minecraft:block",
                             "result_state": {
-                              "Name": "minecraft:sandstone"
+                              "Name": "gempire:abnormal_sandstone"
                             }
                           }
                         },
                         {
                           "type": "minecraft:block",
                           "result_state": {
-                            "Name": "minecraft:sand"
+                            "Name": "gempire:abnormal_sand"
                           }
                         }
                       ]

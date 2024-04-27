@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "gempire:block/desolate_grass"
+      },
+      {
+        "model": "gempire:block/desolate_grass",
+        "y": 90
+      },
+      {
+        "model": "gempire:block/desolate_grass",
+        "y": 180
+      },
+      {
+        "model": "gempire:block/desolate_grass",
+        "y": 270
+      }
+    ]
+  }
+}

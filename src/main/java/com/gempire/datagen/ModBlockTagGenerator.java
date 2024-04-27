@@ -239,6 +239,8 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
 
         this.tag(ModTags.Blocks.DESOLATE_ORE_REPLACEABLES)
                 .add(ModBlocks.PEGMATITE.get());
+
+        this.tag(BlockTags.SAND).add(ModBlocks.ABNORMAL_SAND.get());
     }
 
     @Override

@@ -64,6 +64,27 @@ public class ModBlocks {
             new PrismWhiteAltarBlock(BlockBehaviour.Properties.of().pushReaction(PushReaction.BLOCK)));
 */
 
+    public static final RegistryObject<Block> PRISMATIC_SNOW = BLOCKS.register("prismatic_snow", () ->
+            new Block(BlockBehaviour.Properties.copy(Blocks.SNOW_BLOCK)));
+
+    public static final RegistryObject<Block> DESOLATE_GRASS = BLOCKS.register("desolate_grass", () ->
+            new GrassBlock(BlockBehaviour.Properties.copy(Blocks.GRASS_BLOCK)));
+
+    public static final RegistryObject<Block> DESOLATE_SOIL = BLOCKS.register("desolate_soil", () ->
+            new Block(BlockBehaviour.Properties.copy(Blocks.DIRT)));
+
+    public static final RegistryObject<Block> SCHIST = BLOCKS.register("schist", () ->
+            new Block(BlockBehaviour.Properties.copy(Blocks.GRANITE)));
+
+    public static final RegistryObject<Block> ABNORMAL_SAND = BLOCKS.register("abnormal_sand", () ->
+            new SandBlock(11098145, BlockBehaviour.Properties.copy(Blocks.SAND)));
+
+    public static final RegistryObject<Block> ABNORMAL_SANDSTONE = BLOCKS.register("abnormal_sandstone", () ->
+            new Block(BlockBehaviour.Properties.copy(Blocks.SANDSTONE)));
+
+    public static final RegistryObject<Block> PINCULE = BLOCKS.register("pincule", () ->
+            new CactusBlock(BlockBehaviour.Properties.copy(Blocks.CACTUS)));
+
     public static final RegistryObject<Block> PURIFIED_PRISMATIC_GLASS = BLOCKS.register("purified_prismatic_glass", () ->
             new GlassBlock(BlockBehaviour.Properties
                     .of()

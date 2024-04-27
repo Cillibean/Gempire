@@ -187,6 +187,9 @@ public class ModItemModelProvider extends ItemModelProvider {
 
         saplingItem(ModBlocks.CRYSTAL_SAPLING);
         fenceItem(ModBlocks.CRYSTAL_FENCE, ModBlocks.CRYSTAL_PLANKS);
+
+        //simpleBlockItem(ModBlocks.DESOLATE_GRASS);
+
         //simpleItem(ModItems.CRYSTAL_SIGN);
         //simpleItem(ModItems.CRYSTAL_HANGING_SIGN);
     }

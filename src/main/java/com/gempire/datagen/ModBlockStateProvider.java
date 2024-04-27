@@ -43,6 +43,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         blockWithItem(ModBlocks.GEODE_CRYSTAL_BLOCK);
 
+        blockWithItem(ModBlocks.PRISMATIC_SNOW);
+
         blockWithItem(ModBlocks.PRISMATIC_BLOCK);
 
         blockWithItem(ModBlocks.STRAWBERRY_BLOCK);
@@ -207,6 +209,16 @@ public class ModBlockStateProvider extends BlockStateProvider {
         paneBlock(ModBlocks.GRAY_LATTICE, new ResourceLocation(Gempire.MODID, "block/lattice_gray"), new ResourceLocation(Gempire.MODID, "block/lattice_gray"));
         paneBlock(ModBlocks.BLACK_LATTICE, new ResourceLocation(Gempire.MODID, "block/lattice_black"), new ResourceLocation(Gempire.MODID, "block/lattice_black"));
         paneBlock(ModBlocks.BROWN_LATTICE, new ResourceLocation(Gempire.MODID, "block/lattice_brown"), new ResourceLocation(Gempire.MODID, "block/lattice_brown"));
+
+        blockWithItem(ModBlocks.DESOLATE_SOIL);
+        blockWithItem(ModBlocks.SCHIST);
+
+        blockWithItem(ModBlocks.ABNORMAL_SAND);
+        blockWithItem(ModBlocks.ABNORMAL_SANDSTONE);
+
+        blockItem(ModBlocks.PINCULE);
+
+        blockItem(ModBlocks.DESOLATE_GRASS);
     }
 
     public void paneBlock(RegistryObject<Block> block, ResourceLocation texture, ResourceLocation texture1) {

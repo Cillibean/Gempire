@@ -198,6 +198,55 @@ public class ModItems {
             )
     );
 
+    public static final RegistryObject<Item> PRISMATIC_SNOW = ITEMS.register("prismatic_snow", () ->
+            new BlockItem(
+                    ModBlocks.PRISMATIC_SNOW.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> DESOLATE_GRASS = ITEMS.register("desolate_grass", () ->
+            new BlockItem(
+                    ModBlocks.DESOLATE_GRASS.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> DESOLATE_SOIL = ITEMS.register("desolate_soil", () ->
+            new BlockItem(
+                    ModBlocks.DESOLATE_SOIL.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> SCHIST = ITEMS.register("schist", () ->
+            new BlockItem(
+                    ModBlocks.SCHIST.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> ABNORMAL_SAND = ITEMS.register("abnormal_sand", () ->
+            new BlockItem(
+                    ModBlocks.ABNORMAL_SAND.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> ABNORMAL_SANDSTONE = ITEMS.register("abnormal_sandstone", () ->
+            new BlockItem(
+                    ModBlocks.ABNORMAL_SANDSTONE.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> PINCULE = ITEMS.register("pincule", () ->
+            new BlockItem(
+                    ModBlocks.PINCULE.get(),
+                    new Item.Properties()
+            )
+    );
+
     public static final RegistryObject<Item> PURIFIED_PRISMATIC_GLASS = ITEMS.register("purified_prismatic_glass", () ->
             new BlockItem(
                     ModBlocks.PURIFIED_PRISMATIC_GLASS.get(),
