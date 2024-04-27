@@ -13,7 +13,7 @@
       "sound": "gempire:remnants",
       "min_delay": 0,
       "max_delay": 100,
-      "replace_current_music": false
+      "replace_current_music": true
     }
   },
   "spawners": {},
