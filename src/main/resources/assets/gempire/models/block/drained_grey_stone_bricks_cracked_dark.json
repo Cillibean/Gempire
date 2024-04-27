@@ -1,6 +1,6 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "all": "gempire:block/deco_blue_bricks_dark_cracked"
+    "all": "gempire:block/deco_gray_bricks_dark_cracked"
   }
 }

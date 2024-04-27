@@ -1,0 +1,7 @@
+{
+  "render_type": "translucent",
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "gempire:block/purified_prismatic_glass"
+  }
+}

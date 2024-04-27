@@ -1,4 +1,5 @@
 {
+  "render_type": "translucent",
   "parent": "block/cube_all",
   "textures": {
     "all": "gempire:block/diamond_glass_light_blue"

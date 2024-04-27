@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "gempire:block/drained_blue_polished_stone"
+      "model": "gempire:block/drained_red_polished_stone"
     }
   }
 }

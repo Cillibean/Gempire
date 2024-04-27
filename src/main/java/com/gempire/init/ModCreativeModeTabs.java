@@ -760,6 +760,7 @@ public class ModCreativeModeTabs {
                 populator.accept(ModItems.GRAY_DIAMOND_GLASS.get());
                 populator.accept(ModItems.BLACK_DIAMOND_GLASS.get());
                 populator.accept(ModItems.BROWN_DIAMOND_GLASS.get());
+                populator.accept(ModItems.PRISMATIC_DIAMOND_GLASS.get());
             }).build()
     );
     public static final RegistryObject<CreativeModeTab> GEMPIRE_TOOLS = CREATIVE_MODE_TABS.register("gempire_tools",

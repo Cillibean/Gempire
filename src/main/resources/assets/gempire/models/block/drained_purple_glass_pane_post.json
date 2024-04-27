@@ -2,7 +2,7 @@
   "render_type": "translucent",
   "parent": "minecraft:block/template_glass_pane_post",
   "textures": {
-    "pane": "gempire:block/deco_blue_glass",
-    "edge": "gempire:block/deco_blue_glass_pane_top"
+    "pane": "gempire:block/deco_purple_glass",
+    "edge": "gempire:block/deco_purple_glass_pane_top"
   }
 }
