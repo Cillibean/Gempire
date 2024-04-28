@@ -8,7 +8,6 @@ import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 
 public class EntityAICrawlerAttackGoal extends MeleeAttackGoal {
     private EntityCrawler entity;
-    private int animCounter = 0;
     private int animTickLength = 20;
 
     public EntityAICrawlerAttackGoal(PathfinderMob pMob, double pSpeedModifier, boolean pFollowingTargetEvenIfNotSeen) {
@@ -22,14 +21,12 @@ public class EntityAICrawlerAttackGoal extends MeleeAttackGoal {
             if(entity != null) {
                 if (pEnemy instanceof EntityGem) {
                     if (((EntityGem) pEnemy).getSludgeAmount() < 5) {
-                        entity.setAttacking(true);
-                        animCounter = 0;
+
                     } else {
                         stop();
                     }
                 } else {
-                    entity.setAttacking(true);
-                    animCounter = 0;
+
                 }
             }
         }
@@ -40,20 +37,11 @@ public class EntityAICrawlerAttackGoal extends MeleeAttackGoal {
     @Override
     public void tick() {
         super.tick();
-        if(entity.isAttacking()) {
-            animCounter++;
-
-            if(animCounter >= animTickLength) {
-                animCounter = 0;
-                entity.setAttacking(false);
-            }
-        }
     }
 
     @Override
     public void stop() {
-        animCounter = 0;
-        entity.setAttacking(false);
+
         super.stop();
     }
 

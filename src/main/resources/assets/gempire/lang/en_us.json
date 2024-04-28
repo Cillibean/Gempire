@@ -848,6 +848,9 @@
 
   "entity.gempire.electrokinesis_lightning": "Lightning Bolt",
 
+  "entity.gempire.crystal_deer": "Crystal Deer",
+  "entity.gempire.fleurie": "Fleurie",
+
   "effect.gempire.paralysis": "Paralysis",
   "effect.gempire.entanglement": "Entangled",
   "effect.gempire.electrocution": "Electrocuted",

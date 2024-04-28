@@ -57,9 +57,6 @@ public class EntityShambler extends Monster implements GeoEntity {
                 .add(Attributes.ATTACK_SPEED, 1.0D);
     }
 
-    private static final EntityDataAccessor<Boolean> ATTACKING =
-            SynchedEntityData.defineId(EntityShambler.class, EntityDataSerializers.BOOLEAN);
-
     protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(7, new FloatGoal(this));
@@ -74,32 +71,13 @@ public class EntityShambler extends Monster implements GeoEntity {
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar registrar) {
-        registrar.add(new AnimationController<>(this, "Walk/Idle", 0, state -> state.setAndContinue(state.isMoving() ? WALK_ANIMATION : IDLE_ANIMATION)),
-                DefaultAnimations.genericAttackAnimation(this, ATTACK_ANIMATION));
+        registrar.add(DefaultAnimations.genericWalkIdleController(this));
+        registrar.add(DefaultAnimations.genericAttackAnimation(this, ATTACK_ANIMATION));
     }
 
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return this.cache;
-    }
-
-    public void setAttacking(boolean attacking) {
-        this.entityData.set(ATTACKING, attacking);
-    }
-
-    public boolean isAttacking() {
-        return this.entityData.get(ATTACKING);
-    }
-
-    @Override
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        this.entityData.define(ATTACKING, false);
-    }
-
-    @Override
-    public int getCurrentSwingDuration() {
-        return 6;
     }
 
     @Nullable
@@ -125,6 +103,11 @@ public class EntityShambler extends Monster implements GeoEntity {
     @Override
     public boolean removeWhenFarAway(double xix){
         return false;
+    }
+
+    @Override
+    public int getCurrentSwingDuration() {
+        return 8;
     }
 }
 

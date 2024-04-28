@@ -8,7 +8,7 @@
     "water_color": 5879527,
     "water_fog_color": 10004175,
     "grass_color": 5482479,
-    "foliage_color": 2129294,
+    "foliage_color": 5482479,
     "music": {
       "sound": "gempire:fragments",
       "min_delay": 0,
@@ -19,5 +19,19 @@
   "spawners": {},
   "spawn_costs": {},
   "carvers": {},
-  "features": []
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "minecraft:patch_tall_grass_2",
+      "minecraft:patch_grass_plain"
+    ]
+  ]
 }

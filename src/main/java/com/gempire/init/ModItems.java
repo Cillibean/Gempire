@@ -36,6 +36,9 @@ public class ModItems {
             )
     );*/
 
+    public static final RegistryObject<Item> ALIEN_FLOWER = ITEMS.register("alien_flower", () ->
+            new BlockItem(ModBlocks.ALIEN_FLOWER.get(), new Item.Properties().food(ModFoods.ALIEN_FLOWER)));
+
     public static final RegistryObject<Item> RED_LATTICE = ITEMS.register("red_lattice", () ->
             new BlockItem(ModBlocks.RED_LATTICE.get(), new Item.Properties()));
 

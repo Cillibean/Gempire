@@ -3,6 +3,7 @@ package com.gempire.client.entity.render;
 import com.gempire.Gempire;
 import com.gempire.client.entity.model.ModelCrawler;
 import com.gempire.client.entity.model.ModelShambler;
+import com.gempire.entities.other.EntityAbomination;
 import com.gempire.entities.other.EntityCrawler;
 import com.gempire.entities.other.EntityShambler;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -26,5 +27,10 @@ public class RenderShambler extends GeoEntityRenderer<EntityShambler> {
     @Override
     public ResourceLocation getTextureLocation(EntityShambler animatable) {
         return new ResourceLocation(Gempire.MODID, "textures/entity/clods/shambler/shambler.png");
+    }
+
+    @Override
+    public float getMotionAnimThreshold(EntityShambler animatable) {
+        return 0.005F;
     }
 }

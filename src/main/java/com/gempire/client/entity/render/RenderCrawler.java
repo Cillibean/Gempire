@@ -2,6 +2,7 @@ package com.gempire.client.entity.render;
 
 import com.gempire.Gempire;
 import com.gempire.client.entity.model.ModelCrawler;
+import com.gempire.entities.other.EntityAbomination;
 import com.gempire.entities.other.EntityCrawler;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -26,5 +27,10 @@ public class RenderCrawler extends GeoEntityRenderer<EntityCrawler> {
     @Override
     public ResourceLocation getTextureLocation(EntityCrawler animatable) {
         return new ResourceLocation(Gempire.MODID, "textures/entity/clods/crawler/crawler.png");
+    }
+
+    @Override
+    public float getMotionAnimThreshold(EntityCrawler animatable) {
+        return 0.005F;
     }
 }

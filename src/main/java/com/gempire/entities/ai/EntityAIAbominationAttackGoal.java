@@ -9,8 +9,6 @@ import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 
 public class EntityAIAbominationAttackGoal extends MeleeAttackGoal {
     private EntityAbomination entity;
-    private int animCounter = 0;
-    private int animTickLength = 20;
 
     public EntityAIAbominationAttackGoal(PathfinderMob pMob, double pSpeedModifier, boolean pFollowingTargetEvenIfNotSeen) {
         super(pMob, pSpeedModifier, pFollowingTargetEvenIfNotSeen);
@@ -19,44 +17,21 @@ public class EntityAIAbominationAttackGoal extends MeleeAttackGoal {
 
     @Override
     protected void checkAndPerformAttack(LivingEntity pEnemy, double pDistToEnemySqr) {
-        if (pDistToEnemySqr <= this.getAttackReachSqr(pEnemy) && this.getTicksUntilNextAttack() <= 0) {
-            if(entity != null) {
-                if (pEnemy instanceof EntityGem) {
-                    if (((EntityGem) pEnemy).getSludgeAmount() < 5) {
-                        entity.setAttacking(true);
-                        animCounter = 0;
-                    } else {
-                        stop();
-                    }
-                } else {
-                    entity.setAttacking(true);
-                    animCounter = 0;
-                }
+        if (pDistToEnemySqr <= this.getAttackReachSqr(pEnemy) && this.getTicksUntilNextAttack() <= 0 && entity != null && pEnemy instanceof EntityGem) {
+            if (((EntityGem) pEnemy).getSludgeAmount() >= 5) {
+                stop();
             }
         }
-
         super.checkAndPerformAttack(pEnemy, pDistToEnemySqr);
     }
 
     @Override
     public void tick() {
         super.tick();
-        if(entity.isAttacking()) {
-            animCounter++;
-
-            if(animCounter >= animTickLength) {
-                animCounter = 0;
-                entity.setAttacking(false);
-            }
-        }
     }
-
 
     @Override
     public void stop() {
-        animCounter = 0;
-        entity.setAttacking(false);
         super.stop();
     }
-
 }

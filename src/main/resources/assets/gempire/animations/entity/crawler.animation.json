@@ -125,7 +125,7 @@
         }
       }
     },
-    "animation.crawler.idle": {
+    "misc.idle": {
       "loop": true,
       "animation_length": 1.45833,
       "bones": {
@@ -189,7 +189,7 @@
         }
       }
     },
-    "animation.crawler.walk": {
+    "move.walk": {
       "loop": true,
       "animation_length": 0.625,
       "bones": {

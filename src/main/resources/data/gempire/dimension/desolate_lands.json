@@ -137,6 +137,18 @@
             "depth": 0,
             "offset": 0
           }
+        },
+        {
+          "biome": "gempire:alpine_forest",
+          "parameters": {
+            "temperature": -0.75,
+            "humidity": 0.65,
+            "continentalness": 0,
+            "erosion": 0,
+            "weirdness": -0.2,
+            "depth": 0,
+            "offset": 0
+          }
         }
       ]
     }

@@ -8,6 +8,9 @@
     "gempire:drained_red_sand",
     "gempire:drained_sand",
     "gempire:drained_grey_sand",
-    "gempire:drained_blue_sand"
+    "gempire:drained_blue_sand",
+    "gempire:desolate_grass",
+    "gempire:desolate_soil",
+    "gempire:abnormal_sand"
   ]
 }

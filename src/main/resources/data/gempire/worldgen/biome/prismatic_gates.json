@@ -10,7 +10,16 @@
     "grass_color": 10724259,
     "foliage_color": 9408399
   },
-  "spawners": {},
+  "spawners": {
+    "monster": [
+      {
+        "type": "gempire:specter",
+        "weight": 5,
+        "minCount": 0,
+        "maxCount": 1
+      }
+    ]
+  },
   "spawn_costs": {},
   "carvers": {},
   "features": []

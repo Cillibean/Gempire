@@ -210,6 +210,28 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                         ModBlocks.STRIPPED_CRYSTAL_LOG.get(),
                         ModBlocks.STRIPPED_CRYSTAL_WOOD.get());
 
+        this.tag(BlockTags.LOGS)
+                .add(ModBlocks.DISTANT_WOOD.get(),
+                        ModBlocks.DISTANT_LOG.get(),
+                        ModBlocks.STRIPPED_DISTANT_LOG.get(),
+                        ModBlocks.STRIPPED_DISTANT_WOOD.get(),
+                        ModBlocks.CRYSTAL_WOOD.get(),
+                        ModBlocks.CRYSTAL_LOG.get(),
+                        ModBlocks.STRIPPED_CRYSTAL_LOG.get(),
+                        ModBlocks.STRIPPED_CRYSTAL_WOOD.get(),
+                        ModBlocks.KALEIDOSCOPE_WOOD.get(),
+                        ModBlocks.KALEIDOSCOPE_LOG.get(),
+                        ModBlocks.STRIPPED_KALEIDOSCOPE_LOG.get(),
+                        ModBlocks.STRIPPED_KALEIDOSCOPE_WOOD.get(),
+                        ModBlocks.SHADED_WOOD.get(),
+                        ModBlocks.SHADED_LOG.get(),
+                        ModBlocks.STRIPPED_SHADED_LOG.get(),
+                        ModBlocks.STRIPPED_SHADED_WOOD.get(),
+                        ModBlocks.CRYSTAL_WOOD.get(),
+                        ModBlocks.CRYSTAL_LOG.get(),
+                        ModBlocks.STRIPPED_CRYSTAL_LOG.get(),
+                        ModBlocks.STRIPPED_CRYSTAL_WOOD.get());
+
         this.tag(BlockTags.PLANKS)
                 .add(ModBlocks.DISTANT_PLANKS.get(),
                         ModBlocks.KALEIDOSCOPE_PLANKS.get(),
