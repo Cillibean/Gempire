@@ -31,7 +31,7 @@
               },
               {
                 "type": "minecraft:matching_blocks",
-                "blocks": "minecraft:grass_block",
+                "blocks": "gempire:desolate_grass",
                 "offset": [
                   0,
                   -1,

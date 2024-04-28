@@ -13,6 +13,7 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraftforge.common.Tags;
 
 public class ChromaClusterCropBlock extends CropBlock {
     public static final IntegerProperty AGE = IntegerProperty.create("age", 0, 6);
@@ -23,7 +24,7 @@ public class ChromaClusterCropBlock extends CropBlock {
 
     @Override
     protected boolean mayPlaceOn(BlockState p_52302_, BlockGetter p_52303_, BlockPos p_52304_) {
-        return p_52302_.is(Blocks.STONE);
+        return p_52302_.is(Tags.Blocks.STONE);
     }
 
     @Override

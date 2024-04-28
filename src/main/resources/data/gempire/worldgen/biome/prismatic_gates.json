@@ -15,12 +15,26 @@
       {
         "type": "gempire:specter",
         "weight": 5,
-        "minCount": 0,
+        "minCount": 1,
         "maxCount": 1
       }
     ]
   },
   "spawn_costs": {},
   "carvers": {},
-  "features": []
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "minecraft:patch_tall_grass_2",
+      "minecraft:patch_grass_plain"
+    ]
+  ]
 }

@@ -82,7 +82,7 @@ public class ModBlocks {
             new Block(BlockBehaviour.Properties.copy(Blocks.SANDSTONE)));
 
     public static final RegistryObject<Block> PINCULE = BLOCKS.register("pincule", () ->
-            new CactusBlock(BlockBehaviour.Properties.copy(Blocks.CACTUS)));
+            new PinculeBlock(BlockBehaviour.Properties.copy(Blocks.CACTUS)));
 
     public static final RegistryObject<Block> PURIFIED_PRISMATIC_GLASS = BLOCKS.register("purified_prismatic_glass", () ->
             new GlassBlock(BlockBehaviour.Properties

@@ -30,7 +30,6 @@ public class AbilityRecycler extends Ability implements IIdleAbility {
     }
 
     public ArrayList<ItemStack> getList() {
-        System.out.println("get list");
         if (!this.holder.getItemBySlot(EquipmentSlot.MAINHAND).isEmpty()) {
             manager = holder.level().getRecipeManager();
             ItemStack stack = this.holder.getItemBySlot(EquipmentSlot.MAINHAND);

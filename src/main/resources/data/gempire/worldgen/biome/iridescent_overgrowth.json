@@ -14,13 +14,13 @@
     "creature": [
       {
         "type": "gempire:fleurie",
-        "weight": "12",
+        "weight": 12,
         "minCount": 1,
         "maxCount": 2
       },
       {
         "type": "gempire:crystal_deer",
-        "weight": "12",
+        "weight": 12,
         "minCount": 2,
         "maxCount": 3
       }

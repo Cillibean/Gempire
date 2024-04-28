@@ -6,6 +6,7 @@ import com.gempire.init.ModTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
@@ -268,6 +269,8 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
         this.tag(BlockTags.DIRT).add(ModBlocks.DESOLATE_SOIL.get(), ModBlocks.DESOLATE_GRASS.get());
 
         this.tag(BlockTags.SAND).add(ModBlocks.ABNORMAL_SAND.get());
+
+        this.tag(Tags.Blocks.STONE).add(ModBlocks.PEGMATITE.get());
     }
 
     @Override
