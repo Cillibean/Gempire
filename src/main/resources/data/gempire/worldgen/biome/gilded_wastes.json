@@ -16,11 +16,26 @@
         "type": "gempire:hunter",
         "weight": 1,
         "minCount": 1,
-        "maxCount": 3
+        "maxCount": 2
       }
     ]
   },
   "spawn_costs": {},
   "carvers": {},
-  "features": []
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "minecraft:patch_tall_grass_2",
+      "minecraft:patch_grass_plain",
+      "gempire:shock_berry"
+    ]
+  ]
 }

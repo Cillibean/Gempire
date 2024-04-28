@@ -11,5 +11,21 @@
   "spawners": {},
   "spawn_costs": {},
   "carvers": {},
-  "features": []
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "minecraft:patch_grass_badlands",
+      "minecraft:patch_dead_bush_2",
+      "gempire:patch_pincule"
+    ],
+    []
+  ]
 }

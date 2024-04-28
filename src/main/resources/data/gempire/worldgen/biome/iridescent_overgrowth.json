@@ -10,8 +10,38 @@
     "grass_color": 1075738,
     "foliage_color": 1078546
   },
-  "spawners": {},
+  "spawners": {
+    "creature": [
+      {
+        "type": "gempire:fleurie",
+        "weight": 12,
+        "minCount": 1,
+        "maxCount": 2
+      },
+      {
+        "type": "gempire:crystal_deer",
+        "weight": 12,
+        "minCount": 2,
+        "maxCount": 3
+      }
+    ]
+  },
   "spawn_costs": {},
   "carvers": {},
-  "features": []
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "minecraft:patch_tall_grass_2",
+      "minecraft:patch_grass_plain",
+      "gempire:alien_flower"
+    ]
+  ]
 }

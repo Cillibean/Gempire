@@ -6,6 +6,7 @@
     "side": "gempire:block/desolate_grass_block_side",
     "overlay": "gempire:block/desolate_grass_block_side_overlay"
   },
+  "render_type": "cutout",
   "elements": [
     {   "from": [ 0, 0, 0 ],
       "to": [ 16, 16, 16 ],

@@ -1701,7 +1701,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     }
 
     public boolean getOwned(){
-        return this.OWNERS.size() > 0;
+        return !this.OWNERS.isEmpty();
     }
 
     /*public UUID getOwnerID(){

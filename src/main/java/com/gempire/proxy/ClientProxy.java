@@ -67,6 +67,7 @@ public class ClientProxy {
         event.registerEntityRenderer(ModEntities.ALABASTER_EMPRESS.get(), RenderAlabasterEmpress::new);
         event.registerEntityRenderer(ModEntities.AMBER_HUNTRESS.get(), RenderAmberHuntress::new);
         event.registerEntityRenderer(ModEntities.FUCHSIA_PALADIN.get(), RenderFuchsiaPaladin::new);
+        event.registerEntityRenderer(ModEntities.FLEURIE.get(), RenderFleurie::new);
         /*
         event.registerEntityRenderer(ModEntities.PRISMATIC_EMPRESS.get(), RenderPrismaticEmpress::new);
         event.registerEntityRenderer(ModEntities.GILDED_HUNTRESS.get(), RenderGildedHuntress::new);
@@ -106,6 +107,7 @@ public class ClientProxy {
         event.registerEntityRenderer(ModEntities.TOURMALINE.get(), m -> new RenderTourmaline(m, new ModelTourmaline<>(m.bakeLayer(ModelTourmaline.LAYER_LOCATION))));
         event.registerEntityRenderer(ModEntities.SPECTER.get(), m -> new RenderSpecter(m, new ModelSpecter<>(m.bakeLayer(ModelSpecter.LAYER_LOCATION))));
         event.registerEntityRenderer(ModEntities.PEPO.get(), m -> new RenderPepo(m, new ModelPepo<>(m.bakeLayer(ModelPepo.LAYER_LOCATION))));
+        event.registerEntityRenderer(ModEntities.CRYSTAL_DEER.get(), m -> new RenderCrystalDeer(m, new ModelCrystalDeer<>(m.bakeLayer(ModelCrystalDeer.LAYER_LOCATION))));
 
         event.registerEntityRenderer(ModEntities.ICE_SHARD.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer(ModEntities.ACID_SPIT.get(), ThrownItemRenderer::new);
@@ -193,6 +195,7 @@ public class ClientProxy {
         event.registerLayerDefinition(ModelCobaltGuardian.LAYER_LOCATION, ModelCobaltGuardian::createBodyLayer);
         event.registerLayerDefinition(ModelSpecter.LAYER_LOCATION, ModelSpecter::createBodyLayer);
         event.registerLayerDefinition(ModelPepo.LAYER_LOCATION, ModelPepo::createBodyLayer);
+        event.registerLayerDefinition(ModelCrystalDeer.LAYER_LOCATION, ModelCrystalDeer::createBodyLayer);
         event.registerLayerDefinition(ModelHunter.LAYER_LOCATION, ModelHunter::createBodyLayer);
         event.registerLayerDefinition(ModelBeastmasterWolf.BEASTMASTER_WOLF, ModelBeastmasterWolf::createBodyLayer);
         event.registerLayerDefinition(ModelPebble.LAYER_LOCATION_P, ModelPebble::createBodyLayer);
@@ -228,6 +231,8 @@ public class ClientProxy {
         public static void registerColoredBlocks(RegisterColorHandlersEvent.Block event) {
             event.getBlockColors().register((pState, pLevel, pPos, pTintIndex) -> pLevel != null &&
                     pPos != null ? BiomeColors.getAverageGrassColor(pLevel, pPos) : GrassColor.getDefaultColor(), ModBlocks.DESOLATE_GRASS.get());
+            event.getBlockColors().register((pState, pLevel, pPos, pTintIndex) -> pLevel != null &&
+                    pPos != null ? BiomeColors.getAverageFoliageColor(pLevel, pPos) : FoliageColor.getDefaultColor(), ModBlocks.CRYSTAL_LEAVES.get());
         }
 
         @SubscribeEvent
@@ -236,6 +241,11 @@ public class ClientProxy {
                 BlockState state = ((BlockItem)pStack.getItem()).getBlock().defaultBlockState();
                 return event.getBlockColors().getColor(state, null, null, pTintIndex);
             }, ModBlocks.DESOLATE_GRASS.get());
+
+            event.getItemColors().register((pStack, pTintIndex) -> {
+                BlockState state = ((BlockItem)pStack.getItem()).getBlock().defaultBlockState();
+                return event.getBlockColors().getColor(state, null, null, pTintIndex);
+            }, ModBlocks.CRYSTAL_LEAVES.get());
         }
 
     @SubscribeEvent

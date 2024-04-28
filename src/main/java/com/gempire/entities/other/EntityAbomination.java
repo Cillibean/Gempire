@@ -28,6 +28,7 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.constant.DefaultAnimations;
@@ -54,11 +55,8 @@ public class EntityAbomination extends Monster implements GeoEntity {
                 .add(Attributes.MAX_HEALTH, 30.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.1D)
                 .add(Attributes.ATTACK_DAMAGE, 5.0D)
-                .add(Attributes.ATTACK_SPEED, 1.0D);
+                .add(Attributes.ATTACK_SPEED, .5D);
     }
-
-    private static final EntityDataAccessor<Boolean> ATTACKING =
-            SynchedEntityData.defineId(EntityAbomination.class, EntityDataSerializers.BOOLEAN);
 
     protected void registerGoals() {
         super.registerGoals();
@@ -74,32 +72,13 @@ public class EntityAbomination extends Monster implements GeoEntity {
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar registrar) {
-        registrar.add(new AnimationController<>(this, "Walk/Idle", 0, state -> state.setAndContinue(state.isMoving() ? WALK_ANIMATION : IDLE_ANIMATION)),
-                DefaultAnimations.genericAttackAnimation(this, ATTACK_ANIMATION));
+        registrar.add(DefaultAnimations.genericWalkIdleController(this));
+        registrar.add(DefaultAnimations.genericAttackAnimation(this, ATTACK_ANIMATION));
     }
 
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return this.cache;
-    }
-
-    public void setAttacking(boolean attacking) {
-        this.entityData.set(ATTACKING, attacking);
-    }
-
-    public boolean isAttacking() {
-        return this.entityData.get(ATTACKING);
-    }
-
-    @Override
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        this.entityData.define(ATTACKING, false);
-    }
-
-    @Override
-    public int getCurrentSwingDuration() {
-        return 6;
     }
 
     @Nullable
@@ -119,6 +98,11 @@ public class EntityAbomination extends Monster implements GeoEntity {
     }
     public boolean checkSludged(LivingEntity entity) {
         return ((EntityGem) entity).getSludgeAmount() >= 5;
+    }
+
+    @Override
+    public int getCurrentSwingDuration() {
+        return 10;
     }
 
     @Override

@@ -1279,7 +1279,7 @@
                               "if_true": {
                                 "type": "minecraft:biome",
                                 "biome_is": [
-                                  "minecraft:desert"
+                                  "gempire:abnormal_desert"
                                 ]
                               },
                               "then_run": {
@@ -2023,7 +2023,7 @@
                               "if_true": {
                                 "type": "minecraft:biome",
                                 "biome_is": [
-                                  "minecraft:desert"
+                                  "gempire:abnormal_desert"
                                 ]
                               },
                               "then_run": {
@@ -2256,7 +2256,7 @@
                     "if_true": {
                       "type": "minecraft:biome",
                       "biome_is": [
-                        "minecraft:desert"
+                        "gempire:abnormal_desert"
                       ]
                     },
                     "then_run": {

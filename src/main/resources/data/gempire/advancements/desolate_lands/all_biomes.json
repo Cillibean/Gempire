@@ -32,6 +32,38 @@
       },
       "trigger": "minecraft:location"
     },
+    "gempire:abnormal_desert": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "biome": "gempire:abnormal_desert"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    },
+    "gempire:alpine_forest": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "biome": "gempire:alpine_forest"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    },
     "gempire:gilded_wastes": {
       "conditions": {
         "player": [
@@ -169,6 +201,12 @@
     ],
     [
       "gempire:unearthly_jungle"
+    ],
+    [
+      "gempire:alpine_forest"
+    ],
+    [
+      "gempire:abnormal_desert"
     ]
   ]
 }

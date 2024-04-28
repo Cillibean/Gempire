@@ -27,4 +27,9 @@ public class RenderAbomination extends GeoEntityRenderer<EntityAbomination> {
     public ResourceLocation getTextureLocation(EntityAbomination animatable) {
         return new ResourceLocation(Gempire.MODID, "textures/entity/clods/abomination/abomination.png");
     }
+
+    @Override
+    public float getMotionAnimThreshold(EntityAbomination animatable) {
+        return 0.005F;
+    }
 }

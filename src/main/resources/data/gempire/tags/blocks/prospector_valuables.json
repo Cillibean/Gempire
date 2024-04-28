@@ -35,6 +35,9 @@
     "gempire:light_gray_chroma_crystal",
     "gempire:gray_chroma_crystal",
     "gempire:black_chroma_crystal",
-    "gempire:brown_chroma_crystal"
+    "gempire:brown_chroma_crystal",
+    "gempire:tungsten_ore",
+    "gempire:deepslate_tungsten_ore",
+    "gempire:pegmatite_tungsten_ore"
   ]
 }

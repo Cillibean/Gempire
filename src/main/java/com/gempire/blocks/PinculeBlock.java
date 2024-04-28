@@ -19,4 +19,8 @@ public class PinculeBlock extends CactusBlock {
         super(p_51136_);
     }
 
+    @Override
+    public boolean canSustainPlant(BlockState state, BlockGetter world, BlockPos pos, Direction facing, IPlantable plantable) {
+        return plantable.getPlant(world, pos.relative(facing)).getBlock() == ModBlocks.PINCULE.get();
+    }
 }

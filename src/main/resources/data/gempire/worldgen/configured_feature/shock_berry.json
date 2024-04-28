@@ -1,6 +1,9 @@
 {
   "type": "minecraft:random_patch",
   "config": {
+    "tries": 96,
+    "xz_spread": 7,
+    "y_spread": 3,
     "feature": {
       "feature": {
         "type": "minecraft:simple_block",
@@ -28,7 +31,7 @@
               },
               {
                 "type": "minecraft:matching_blocks",
-                "blocks": "minecraft:grass_block",
+                "blocks": "gempire:desolate_grass",
                 "offset": [
                   0,
                   -1,
@@ -39,9 +42,6 @@
           }
         }
       ]
-    },
-    "tries": 96,
-    "xz_spread": 7,
-    "y_spread": 3
+    }
   }
 }

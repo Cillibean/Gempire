@@ -26,7 +26,6 @@ public class ModBlocks {
     //TODO: IMPLEMENT BLOCKS
     // PHOSPHORUS COLUMN - a wall-sized light block that comes in all colours that morganite makes
     // DESTAB FIELDS - hurt gems when touched
-    // LATTICES - decorative iron bar like morganite blocks
 
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Gempire.MODID);
 
@@ -68,7 +67,7 @@ public class ModBlocks {
             new Block(BlockBehaviour.Properties.copy(Blocks.SNOW_BLOCK)));
 
     public static final RegistryObject<Block> DESOLATE_GRASS = BLOCKS.register("desolate_grass", () ->
-            new GrassBlock(BlockBehaviour.Properties.copy(Blocks.GRASS_BLOCK)));
+            new DesolateGrass(BlockBehaviour.Properties.copy(Blocks.GRASS_BLOCK)));
 
     public static final RegistryObject<Block> DESOLATE_SOIL = BLOCKS.register("desolate_soil", () ->
             new Block(BlockBehaviour.Properties.copy(Blocks.DIRT)));
@@ -83,7 +82,7 @@ public class ModBlocks {
             new Block(BlockBehaviour.Properties.copy(Blocks.SANDSTONE)));
 
     public static final RegistryObject<Block> PINCULE = BLOCKS.register("pincule", () ->
-            new CactusBlock(BlockBehaviour.Properties.copy(Blocks.CACTUS)));
+            new PinculeBlock(BlockBehaviour.Properties.copy(Blocks.CACTUS)));
 
     public static final RegistryObject<Block> PURIFIED_PRISMATIC_GLASS = BLOCKS.register("purified_prismatic_glass", () ->
             new GlassBlock(BlockBehaviour.Properties
@@ -189,6 +188,9 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> COBBLED_PEGMATITE = BLOCKS.register("cobbled_pegmatite", () ->
             new Block(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE)));
+
+    public static final RegistryObject<Block> ALIEN_FLOWER = BLOCKS.register("alien_flower", () ->
+            new FlowerBlock(ModEffects.FLORAL_PROTECTION, 100, BlockBehaviour.Properties.copy(Blocks.POPPY)));
 
     /*public static final RegistryObject<Block> CRYSTAL_CHEST = BLOCKS.register("crystal_chest", () ->
             new CrystalChestBlock(BlockBehaviour.Properties

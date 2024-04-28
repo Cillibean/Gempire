@@ -431,7 +431,7 @@
         }
       }
     },
-    "animation.shambler.idle": {
+    "misc.idle": {
       "loop": true,
       "animation_length": 1,
       "bones": {
@@ -539,7 +539,7 @@
         }
       }
     },
-    "animation.shambler.walk": {
+    "move.walk": {
       "loop": true,
       "animation_length": 0.75,
       "bones": {

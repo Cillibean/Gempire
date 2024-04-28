@@ -6,6 +6,7 @@ import com.gempire.init.ModTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
@@ -210,6 +211,28 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                         ModBlocks.STRIPPED_CRYSTAL_LOG.get(),
                         ModBlocks.STRIPPED_CRYSTAL_WOOD.get());
 
+        this.tag(BlockTags.LOGS)
+                .add(ModBlocks.DISTANT_WOOD.get(),
+                        ModBlocks.DISTANT_LOG.get(),
+                        ModBlocks.STRIPPED_DISTANT_LOG.get(),
+                        ModBlocks.STRIPPED_DISTANT_WOOD.get(),
+                        ModBlocks.CRYSTAL_WOOD.get(),
+                        ModBlocks.CRYSTAL_LOG.get(),
+                        ModBlocks.STRIPPED_CRYSTAL_LOG.get(),
+                        ModBlocks.STRIPPED_CRYSTAL_WOOD.get(),
+                        ModBlocks.KALEIDOSCOPE_WOOD.get(),
+                        ModBlocks.KALEIDOSCOPE_LOG.get(),
+                        ModBlocks.STRIPPED_KALEIDOSCOPE_LOG.get(),
+                        ModBlocks.STRIPPED_KALEIDOSCOPE_WOOD.get(),
+                        ModBlocks.SHADED_WOOD.get(),
+                        ModBlocks.SHADED_LOG.get(),
+                        ModBlocks.STRIPPED_SHADED_LOG.get(),
+                        ModBlocks.STRIPPED_SHADED_WOOD.get(),
+                        ModBlocks.CRYSTAL_WOOD.get(),
+                        ModBlocks.CRYSTAL_LOG.get(),
+                        ModBlocks.STRIPPED_CRYSTAL_LOG.get(),
+                        ModBlocks.STRIPPED_CRYSTAL_WOOD.get());
+
         this.tag(BlockTags.PLANKS)
                 .add(ModBlocks.DISTANT_PLANKS.get(),
                         ModBlocks.KALEIDOSCOPE_PLANKS.get(),
@@ -246,6 +269,8 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
         this.tag(BlockTags.DIRT).add(ModBlocks.DESOLATE_SOIL.get(), ModBlocks.DESOLATE_GRASS.get());
 
         this.tag(BlockTags.SAND).add(ModBlocks.ABNORMAL_SAND.get());
+
+        this.tag(Tags.Blocks.STONE).add(ModBlocks.PEGMATITE.get());
     }
 
     @Override
