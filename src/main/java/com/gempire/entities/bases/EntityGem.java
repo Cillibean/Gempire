@@ -38,6 +38,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.StructureTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.*;
@@ -77,6 +78,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 import javax.annotation.Nullable;
 import javax.imageio.ImageIO;
+import javax.print.DocFlavor;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.*;
@@ -1127,26 +1129,31 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                                             }
                                         } else if (player.getMainHandItem().getItem() == Items.PAPER) {
                                             NetworkHooks.openScreen((ServerPlayer) player, this, buf -> buf.writeInt(this.getId()));
-                                        } /*else if (player.getMainHandItem().getItem() == Items.BOOK && this.canLocateStructures()) {
-                                            StringBuilder list1 = new StringBuilder();
-                                            for (int i = 0; i < this.structures.size(); i++) {
-                                                if (i == this.structures.size() - 1) {
-                                                    list1.append(this.structures.get(i));
-                                                } else {
-                                                    list1.append(this.structures.get(i)).append(", ");
+                                        } else if (player.getMainHandItem().getItem() == Items.BOOK) {
+                                            if (this.canLocateStructures()) {
+                                                StringBuilder list1 = new StringBuilder();
+                                                for (int i = 0; i < this.structures.size(); i++) {
+                                                    if (i == this.structures.size() - 1) {
+                                                        list1.append(this.structures.get(i));
+                                                    } else {
+                                                        list1.append(this.structures.get(i)).append(", ");
+                                                    }
                                                 }
-                                            }
-                                            StringBuilder list2 = new StringBuilder();
-                                            for (int i = 0; i < this.biomes.size(); i++) {
-                                                if (i == this.biomes.size() - 1) {
-                                                    list2.append(this.biomes.get(i));
-                                                } else {
-                                                    list2.append(this.biomes.get(i)).append(", ");
+                                                StringBuilder list2 = new StringBuilder();
+                                                for (int i = 0; i < this.biomes.size(); i++) {
+                                                    if (i == this.biomes.size() - 1) {
+                                                        list2.append(this.biomes.get(i));
+                                                    } else {
+                                                        list2.append(this.biomes.get(i)).append(", ");
+                                                    }
                                                 }
+                                                player.sendSystemMessage(Component.translatable("Findable Structures: " + list1));
+                                                player.sendSystemMessage(Component.translatable("Findable Biomes: " + list2));
                                             }
-                                            player.sendSystemMessage(Component.translatable("Findable Structures: " + list1));
-                                            player.sendSystemMessage(Component.translatable("Findable Biomes: " + list2));
-                                        } */else if (this.canCraft()) {
+                                            if (this.isFarmer()) {
+                                                announceCrops();
+                                            }
+                                        } else if (this.canCraft()) {
                                             setRecipeAmount(generateRecipeAmount());
                                             for (int i = 0; i < getRecipeAmount(); i++) {
                                                 if (player.getItemInHand(hand).getItem() == getInputItem(i)) {
@@ -2717,6 +2724,17 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         return false;
     }
 
+    public boolean itemCheckWithCount(Item item, int count){
+        System.out.println("check with count");
+        for(int i = 0; i < EntityGem.NUMBER_OF_SLOTS - 4; i++){
+            if(this.getItem(i).getItem() == item && this.getItem(i).getCount() >= count){
+                System.out.println("check passed");
+                return true;
+            }
+        }
+        return false;
+    }
+
     public boolean canRecall(){
         boolean flag = false;
         for(Ability ability : this.getAbilityPowers()){
@@ -2787,6 +2805,28 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         return flag;
     }
 
+    public void announceCrops() {
+        if (isFarmer()) {
+            for (UUID owner : OWNERS) {
+                Player player = level().getPlayerByUUID(owner);
+                String string = ((EntityTourmaline) this).getCrops();
+                String[] strings = string.split(",");
+                StringBuilder stringBuilder = new StringBuilder("This gem can farm: ");
+                for (int i = 0; i < strings.length; i++) {
+                    String string1 = strings[i];
+                    String s1 = string1.substring(0, 1).toUpperCase();
+                    string1 = s1 + string.substring(1);
+                    stringBuilder.append(string1);
+                    if (i < strings.length - 1) {
+                        stringBuilder.append(", ");
+                    }
+                }
+                assert player != null;
+                player.sendSystemMessage(Component.translatable(String.valueOf(stringBuilder)));
+            }
+        }
+    }
+
     /*
     COMMAND STUFF
     */
@@ -2839,6 +2879,18 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         }
         else{
             player.sendSystemMessage(Component.translatable("commands.gempire.noeye"));
+        }
+    }
+
+    public void runFarmCommand(ServerPlayer player) {
+        if(this instanceof EntityTourmaline) {
+            System.out.println("is tourmaline");
+            if (this.itemCheckWithCount(Items.DIRT, 64) && this.itemCheck(Items.WATER_BUCKET)
+                    && this.itemCheck(Items.WATER_BUCKET) && this.itemCheckWithCount(Items.OAK_LOG, 4)
+                    && this.itemCheckWithCount(Items.OAK_PLANKS, 56) && this.getItemBySlot(EquipmentSlot.MAINHAND).is(ItemTags.HOES))
+                ((EntityTourmaline) this).setBuilding(true);
+        } else {
+            player.sendSystemMessage(Component.translatable("commands.gempire.nofarmresources"));
         }
     }
 

@@ -17,6 +17,7 @@ public class ModCommands {
         COMMANDS.add(new CommandGempireLocate("scoutlocate", 0, true));
         COMMANDS.add(new CommandGempireLocateBiome("scoutlocatebiome", 0, true));
         COMMANDS.add(new CommandGempireRecall("recall", 0, true));
+        COMMANDS.add(new CommandGempireBuildFarm("buildfarm", 0, true));
         COMMANDS.add(new CommandGempireFollow("massfollow", 0, true));
         COMMANDS.add(new CommandGempireGemOwner("gemowners", 1, true));
         COMMANDS.add(new CommandGempireRelease("massrelease", 0, true));
