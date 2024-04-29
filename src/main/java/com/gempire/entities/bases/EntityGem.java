@@ -2815,7 +2815,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                 for (int i = 0; i < strings.length; i++) {
                     String string1 = strings[i];
                     String s1 = string1.substring(0, 1).toUpperCase();
-                    string1 = s1 + string.substring(1);
+                    string1 = s1 + string1.substring(1);
                     stringBuilder.append(string1);
                     if (i < strings.length - 1) {
                         stringBuilder.append(", ");
