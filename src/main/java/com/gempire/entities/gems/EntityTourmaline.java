@@ -35,6 +35,7 @@ import java.util.HashMap;
 public class EntityTourmaline extends EntityVaryingGem {
 
     public static EntityDataAccessor<String> CROPS = SynchedEntityData.<String>defineId(EntityGem.class, EntityDataSerializers.STRING);
+    public static EntityDataAccessor<Boolean> BUILDING = SynchedEntityData.<Boolean>defineId(EntityGem.class, EntityDataSerializers.BOOLEAN);
 
     HashMap<String, Item> cropMap = new HashMap<>();
     HashMap<Item, String> stringMap = new HashMap<>();
@@ -42,6 +43,7 @@ public class EntityTourmaline extends EntityVaryingGem {
     public EntityTourmaline(EntityType<? extends PathfinderMob> type, Level worldIn) {
         super(type, worldIn);
         this.entityData.define(EntityTourmaline.CROPS, "");
+        this.entityData.define(EntityTourmaline.BUILDING, false);
     }
 
     public static AttributeSupplier.Builder registerAttributes() {
@@ -55,12 +57,14 @@ public class EntityTourmaline extends EntityVaryingGem {
     @Override
     public void addAdditionalSaveData(CompoundTag tag) {
         tag.putString("crops", getCrops());
+        tag.putBoolean("building", isBuilding());
         super.addAdditionalSaveData(tag);
     }
 
     @Override
     public void load(CompoundTag tag) {
         setCrops(tag.getString("crops"));
+        setBuilding(tag.getBoolean("building"));
         super.load(tag);
     }
 
@@ -102,6 +106,7 @@ public class EntityTourmaline extends EntityVaryingGem {
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, 1, false, false, this::checkSludged));
         this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, EntityGem.class, 6.0F, 1.0D, 1.2D, this::checkElseSludged));
         this.goalSelector.addGoal(1, new EntityAIFarm(this, 1.0D));
+        this.goalSelector.addGoal(1, new EntityAIBuildFarm(this, 1.0D));
     }
     @Override
     public SoundEvent getInstrument()
@@ -308,6 +313,14 @@ public class EntityTourmaline extends EntityVaryingGem {
     @Override
     public int exitHoleSize() {
         return 3;
+    }
+
+    public void setBuilding(boolean value) {
+        this.entityData.set(EntityTourmaline.BUILDING, value);
+    }
+
+    public boolean isBuilding() {
+        return this.entityData.get(EntityTourmaline.BUILDING);
     }
 
     public void setCrops(String page){
