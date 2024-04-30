@@ -173,20 +173,23 @@ public class ModItemModelProvider extends ItemModelProvider {
         fenceItem(ModBlocks.DISTANT_FENCE, ModBlocks.DISTANT_PLANKS);
         simpleItem(ModItems.DISTANT_SIGN);
         simpleItem(ModItems.DISTANT_HANGING_SIGN);
-        //simpleItem(ModItems.DISTANT_DOOR);
+        simpleItem(ModItems.DISTANT_DOOR);
 
         saplingItem(ModBlocks.KALEIDOSCOPE_SAPLING);
         fenceItem(ModBlocks.KALEIDOSCOPE_FENCE, ModBlocks.KALEIDOSCOPE_PLANKS);
         simpleItem(ModItems.KALEIDOSCOPE_SIGN);
         simpleItem(ModItems.KALEIDOSCOPE_HANGING_SIGN);
+        simpleItem(ModItems.KALEIDOSCOPE_DOOR);
 
         saplingItem(ModBlocks.SHADED_SAPLING);
         fenceItem(ModBlocks.SHADED_FENCE, ModBlocks.SHADED_PLANKS);
         simpleItem(ModItems.SHADED_SIGN);
         simpleItem(ModItems.SHADED_HANGING_SIGN);
+        simpleItem(ModItems.SHADED_DOOR);
 
         saplingItem(ModBlocks.CRYSTAL_SAPLING);
         fenceItem(ModBlocks.CRYSTAL_FENCE, ModBlocks.CRYSTAL_PLANKS);
+        simpleItem(ModItems.CRYSTAL_DOOR);
 
         //simpleItem(ModItems.CRYSTAL_SIGN);
         //simpleItem(ModItems.CRYSTAL_HANGING_SIGN);
