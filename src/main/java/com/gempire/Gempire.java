@@ -11,15 +11,18 @@ import com.gempire.init.*;
 import com.gempire.items.tools.GuardianArmorItem;
 import com.gempire.items.tools.GuardianArmorRenderer;
 import com.gempire.proxy.CommonProxy;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.entries.LootTableReference;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.common.Mod;
@@ -45,14 +48,16 @@ public class Gempire
     public static MinecraftServer server;
 
     public Gempire() {
-        // Register the setup method for modloading
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
-        // Register the enqueueIMC method for modloading
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::enqueueIMC);
-        // Register the processIMC method for modloading
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::processIMC);
 
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::EntityAttributes);
+        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+        // Register the setup method for modloading
+        modEventBus.addListener(this::setup);
+        // Register the enqueueIMC method for modloading
+        modEventBus.addListener(this::enqueueIMC);
+        // Register the processIMC method for modloading
+        modEventBus.addListener(this::processIMC);
+
+        modEventBus.addListener(this::EntityAttributes);
         //FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onClientSetup);
 
         RegistryHandler.init();
@@ -63,6 +68,7 @@ public class Gempire
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(new EventHandler());
         MinecraftForge.EVENT_BUS.register(CommonProxy.class);
+        modEventBus.addListener(this::addCreative);
     }
 
     public void EntityAttributes(final EntityAttributeCreationEvent event){
@@ -234,6 +240,19 @@ public class Gempire
             event.getTable().addPool(LootPool.lootPool().add(LootTableReference.lootTableReference(new ResourceLocation(MODID, "chests/tourmaline"))).build());
         }
 
+    }
+
+    private void addCreative(BuildCreativeModeTabContentsEvent event) {
+        if(event.getTabKey() == CreativeModeTabs.SPAWN_EGGS) {
+            event.accept(ModItems.FUSCHIA_PALADIN_SPAWN_EGG);
+            event.accept(ModItems.COBALT_GUARDIAN_SPAWN_EGG);
+            event.accept(ModItems.AMBER_HUNTRESS_SPAWN_EGG);
+            event.accept(ModItems.ALABASTER_EMPRESS_SPAWN_EGG);
+            event.accept(ModItems.FLEURIE_SPAWN_EGG);
+            event.accept(ModItems.CRYSTAL_DEER_SPAWN_EGG);
+            event.accept(ModItems.SPECTER_SPAWN_EGG);
+            event.accept(ModItems.HUNTER_SPAWN_EGG);
+        }
     }
 
     @SubscribeEvent

@@ -391,6 +391,7 @@ public class GemSeedTE extends BlockEntity {
                 ((EntityZircon) gem).setEnchantPageDefined(true);
             } else if (gem instanceof EntityTourmaline) {
                 ((EntityTourmaline) gem).setCrops(((EntityTourmaline) gem).generateCrops());
+                ((EntityTourmaline) gem).setBuilding(false);
             }
             //gem.generateScoutList();
             gem.idlePowers = gem.generateIdlePowers();

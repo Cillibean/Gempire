@@ -55,9 +55,29 @@
     "subtitle": "gempire.subtitle.abomination_hurt",
     "sounds": [ "gempire:abomination_hurt" ]
   },
-  "abomination_living": {
-    "subtitle": "gempire.subtitle.abomination_living",
-    "sounds": [ "gempire:abomination_living" ]
+  "specter_ambient": {
+    "subtitle": "gempire.subtitle.specter_living",
+    "sounds": [ "gempire:specter_living" ]
+  },
+  "specter_close": {
+    "subtitle": "gempire.subtitle.specter_close",
+    "sounds": [ "gempire:specter_close" ]
+  },
+  "specter_death1": {
+    "subtitle": "gempire.subtitle.specter_death",
+    "sounds": [ "gempire:specter_death1" ]
+  },
+  "specter_death2": {
+    "subtitle": "gempire.subtitle.specter_death",
+    "sounds": [ "gempire:specter_death2" ]
+  },
+  "specter_hurt": {
+    "subtitle": "gempire.subtitle.specter_hurt",
+    "sounds": [ "gempire:specter_hurt" ]
+  },
+  "specter_running": {
+    "subtitle": "gempire.subtitle.specter_running",
+    "sounds": [ "gempire:specter_running" ]
   },
   "remnants": {
     "sounds": [

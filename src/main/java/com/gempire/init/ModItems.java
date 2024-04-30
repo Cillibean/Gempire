@@ -4,6 +4,7 @@ import com.gempire.Gempire;
 import com.gempire.items.*;
 import com.gempire.items.tools.*;
 import net.minecraft.world.item.*;
+import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -137,6 +138,38 @@ public class ModItems {
 
     public static final RegistryObject<Item> PRISMATIC_DIAMOND_GLASS = ITEMS.register("prismatic_diamond_glass", () ->
             new BlockItem(ModBlocks.PRISMATIC_DIAMOND_GLASS.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> SPECTER_SPAWN_EGG = ITEMS.register("specter_spawn_egg",
+            () -> new ForgeSpawnEggItem(ModEntities.SPECTER, 0x1f1f1f, 0x61506e,
+                    new Item.Properties()));
+
+    public static final RegistryObject<Item> FLEURIE_SPAWN_EGG = ITEMS.register("fleurie_spawn_egg",
+            () -> new ForgeSpawnEggItem(ModEntities.FLEURIE, 0xedc0eb, 0xfa9be1,
+                    new Item.Properties()));
+
+    public static final RegistryObject<Item> CRYSTAL_DEER_SPAWN_EGG = ITEMS.register("crystal_deer_spawn_egg",
+            () -> new ForgeSpawnEggItem(ModEntities.CRYSTAL_DEER, 0xe67cca, 0xacc9a3,
+                    new Item.Properties()));
+
+    public static final RegistryObject<Item> HUNTER_SPAWN_EGG = ITEMS.register("hunter_spawn_egg",
+            () -> new ForgeSpawnEggItem(ModEntities.HUNTER, 0xebebeb, 0xf5f1bc,
+                    new Item.Properties()));
+
+    public static final RegistryObject<Item> FUSCHIA_PALADIN_SPAWN_EGG = ITEMS.register("fuschia_paladin_spawn_egg",
+            () -> new ForgeSpawnEggItem(ModEntities.FUCHSIA_PALADIN, 0xf7cdeb, 0xc4f2cb,
+                    new Item.Properties()));
+
+    public static final RegistryObject<Item> COBALT_GUARDIAN_SPAWN_EGG = ITEMS.register("cobalt_guardian_spawn_egg",
+            () -> new ForgeSpawnEggItem(ModEntities.COBALT_GUARDIAN, 0xcfd7ff, 0xc9c7f2,
+                    new Item.Properties()));
+
+    public static final RegistryObject<Item> AMBER_HUNTRESS_SPAWN_EGG = ITEMS.register("amber_huntress_spawn_egg",
+            () -> new ForgeSpawnEggItem(ModEntities.AMBER_HUNTRESS, 0xf5f59a, 0xf7f7b5,
+                    new Item.Properties()));
+
+    public static final RegistryObject<Item> ALABASTER_EMPRESS_SPAWN_EGG = ITEMS.register("alabaster_empress_spawn_egg",
+            () -> new ForgeSpawnEggItem(ModEntities.ALABASTER_EMPRESS, 0xffffff, 0xf5f5f5,
+                    new Item.Properties()));
 
     public static final RegistryObject<Item> PRIMED_ICE = ITEMS.register("primed_ice", () ->
             new BlockItem(

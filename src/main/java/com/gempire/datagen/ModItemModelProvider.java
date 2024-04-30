@@ -188,10 +188,17 @@ public class ModItemModelProvider extends ItemModelProvider {
         saplingItem(ModBlocks.CRYSTAL_SAPLING);
         fenceItem(ModBlocks.CRYSTAL_FENCE, ModBlocks.CRYSTAL_PLANKS);
 
-        //simpleBlockItem(ModBlocks.DESOLATE_GRASS);
-
         //simpleItem(ModItems.CRYSTAL_SIGN);
         //simpleItem(ModItems.CRYSTAL_HANGING_SIGN);
+
+        withExistingParent(ModItems.FUSCHIA_PALADIN_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItems.COBALT_GUARDIAN_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItems.AMBER_HUNTRESS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItems.ALABASTER_EMPRESS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItems.SPECTER_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItems.FLEURIE_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItems.CRYSTAL_DEER_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItems.HUNTER_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
     }
 
     private ItemModelBuilder saplingItem(RegistryObject<Block> item) {

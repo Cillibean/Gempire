@@ -3,9 +3,12 @@ package com.gempire.entities.other;
 import com.gempire.entities.ai.SpecterFindPlayer;
 import com.gempire.entities.ai.SpecterRunWhenLookedAt;
 import com.gempire.entities.bases.EntityGem;
+import com.gempire.init.ModSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
@@ -24,8 +27,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.ForgeHooks;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
 import java.util.List;
 
 public class EntitySpecter extends Monster {
@@ -64,5 +67,24 @@ public class EntitySpecter extends Monster {
         vec31 = vec31.normalize();
         double d1 = vec3.dot(vec31);
         return d1 > 1.0 - 0.025 / d0 ? p_32535_.hasLineOfSight(this) : false;
+    }
+
+    @Override
+    protected SoundEvent getHurtSound(DamageSource p_33034_) {
+        return ModSounds.SPECTER_HURT.get();
+    }
+
+    @Override
+    protected SoundEvent getDeathSound() {
+        if (this.random.nextInt(2) == 0) {
+            return ModSounds.SPECTER_DEATH1.get();
+        }
+        return ModSounds.SPECTER_DEATH2.get();
+    }
+
+    @Nullable
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return ModSounds.SPECTER_AMBIENT.get();
     }
 }

@@ -9,6 +9,10 @@ import com.gempire.entities.other.EntityAbomination;
 import com.gempire.entities.other.EntityCrawler;
 import com.gempire.entities.other.EntityShambler;
 import com.gempire.util.GemPlacements;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.*;
@@ -24,8 +28,12 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import java.util.ArrayList;
 
 public class EntityLapis extends EntityGem implements FlyingAnimal {
+
+    public static EntityDataAccessor<Boolean> TERRAFORMING = SynchedEntityData.<Boolean>defineId(EntityGem.class, EntityDataSerializers.BOOLEAN);
+
     public EntityLapis(EntityType<? extends PathfinderMob> type, Level worldIn) {
         super(type, worldIn);
+        this.entityData.define(EntityLapis.TERRAFORMING, false);
     }
 
     public static AttributeSupplier.Builder registerAttributes() {
@@ -57,6 +65,7 @@ public class EntityLapis extends EntityGem implements FlyingAnimal {
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, EntityGem.class, 1, false, false, this::checkBothSludged));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, 1, false, false, this::checkSludged));
 this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, EntityGem.class, 6.0F, 1.0D, 1.2D, this::checkElseSludged));
+        this.goalSelector.addGoal(1, new EntityAITerraform(this, 1.0D));
    }
 
     @Override
@@ -238,5 +247,26 @@ this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, EntityGem.class, 6.0F, 
     @Override
     public boolean isFlying() {
         return false;
+    }
+
+
+    public void setTerraforming(boolean value) {
+        this.entityData.set(EntityLapis.TERRAFORMING, value);
+    }
+
+    public boolean isTerraforming() {
+        return this.entityData.get(EntityLapis.TERRAFORMING);
+    }
+
+    @Override
+    public void addAdditionalSaveData(CompoundTag tag) {
+        tag.putBoolean("terraforming", isTerraforming());
+        super.addAdditionalSaveData(tag);
+    }
+
+    @Override
+    public void load(CompoundTag tag) {
+        setTerraforming(tag.getBoolean("terraforming"));
+        super.load(tag);
     }
 }

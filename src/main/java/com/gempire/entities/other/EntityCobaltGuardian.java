@@ -17,9 +17,14 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.phys.AABB;
+import software.bernie.geckolib.constant.DefaultAnimations;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.AnimatableManager;
+import software.bernie.geckolib.core.animation.AnimationController;
+import software.bernie.geckolib.core.animation.AnimationState;
+import software.bernie.geckolib.core.animation.RawAnimation;
+import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import javax.annotation.Nullable;
@@ -30,9 +35,9 @@ public class EntityCobaltGuardian extends Monster implements GeoAnimatable {
 
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
-    public AnimationState idleAnimationState = new AnimationState();
-    public AnimationState cryAnimationState = new AnimationState();
+    private static final RawAnimation CRY_ANIMATION = RawAnimation.begin().thenPlay("cry");
 
+    boolean crying = false;
     public int auraCryCooldown;
     public MobEffectInstance aura = new MobEffectInstance(ModEffects.BLUE_AURA.get(), 500, 1, false, false, true);
 
@@ -91,7 +96,16 @@ public class EntityCobaltGuardian extends Monster implements GeoAnimatable {
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
+        controllerRegistrar.add(DefaultAnimations.genericIdleController(this));
+        //controllerRegistrar.add(new AnimationController<>(this, "Cry", 10, this::poseCry));
+    }
 
+    protected PlayState poseCry(AnimationState<EntityCobaltGuardian> state) {
+        if (crying) {
+            crying = false;
+            return state.setAndContinue(CRY_ANIMATION);
+        }
+        return PlayState.CONTINUE;
     }
 
     @Override
@@ -115,9 +129,6 @@ public class EntityCobaltGuardian extends Monster implements GeoAnimatable {
                 auraCryCooldown--;
             }
         }
-        if (!cryAnimationState.isStarted()) {
-            idleAnimationState.startIfStopped(tickCount);
-        }
         this.bossEvent.setProgress(this.getHealth() / this.getMaxHealth());
         super.tick();
     }
@@ -125,8 +136,7 @@ public class EntityCobaltGuardian extends Monster implements GeoAnimatable {
     public void auraCry() {
         System.out.println("aura cry");
         //Play sound
-        idleAnimationState.stop();
-        cryAnimationState.start(this.tickCount);
+        crying = true;
         navigation.stop();
         auraCryCooldown = 600;
         List<Player> list = this.level().getEntitiesOfClass(Player.class, this.getBoundingBox().inflate(14.0D, 8.0D, 14.0D));
