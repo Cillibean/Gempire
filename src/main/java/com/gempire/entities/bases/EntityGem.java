@@ -129,6 +129,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     public static final EntityDataAccessor<Boolean> ASSIGNED = SynchedEntityData.<Boolean>defineId(EntityGem.class, EntityDataSerializers.BOOLEAN);
     public static final EntityDataAccessor<Integer> SLUDGE_AMOUNT = SynchedEntityData.defineId(EntityGem.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<Boolean> SHATTER = SynchedEntityData.<Boolean>defineId(EntityGem.class, EntityDataSerializers.BOOLEAN);
+    public static final EntityDataAccessor<Boolean> LUMBERJACK = SynchedEntityData.<Boolean>defineId(EntityGem.class, EntityDataSerializers.BOOLEAN);
     public static final EntityDataAccessor<Integer> CURRENT_RECIPE = SynchedEntityData.defineId(EntityGem.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<Integer> RECIPE_AMOUNT = SynchedEntityData.defineId(EntityGem.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<Float> XSCALE = SynchedEntityData.defineId(EntityGem.class, EntityDataSerializers.FLOAT);
@@ -269,6 +270,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.entityData.define(EntityGem.XSCALE, 0F);
         this.entityData.define(EntityGem.YSCALE, 0F);
         this.entityData.define(EntityGem.ZSCALE, 0F);
+        this.entityData.define(EntityGem.LUMBERJACK, false);
         this.FOLLOW_ID = UUID.randomUUID();
         this.ASSIGNED_ID = UUID.fromString("00000000-0000-0000-0000-000000000000");
         this.MASTER_OWNER = UUID.randomUUID();
@@ -336,6 +338,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.setYScale(this.generateYScale());
         this.setZScale(this.generateZScale());
         this.setQuality(this.getQuality());
+        this.setLumberjack(false);
         this.GUARD_POS = this.getOnPos().above();
         //this.setItemSlot(EquipmentSlot.OFFHAND, new ItemStack(Items.OAK_LOG));
         //if (isArcher()) this.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(Items.BOW));
@@ -1842,6 +1845,15 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     }
 
 
+    public Boolean getLumberjack(){
+        return this.entityData.get(EntityGem.LUMBERJACK);
+    }
+
+    public void setLumberjack(boolean value){
+        this.entityData.set(EntityGem.LUMBERJACK, value);
+    }
+
+
     public String generateCut() {
         char a = (char) (this.random.nextInt(26) + 'a');
         char b = (char) (this.random.nextInt(26) + 'a');
@@ -2755,6 +2767,16 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         return flag;
     }
 
+    public boolean isLumberjack(){
+        boolean flag = false;
+        for(Ability ability : this.getAbilityPowers()){
+            if(ability instanceof AbilityLumberjack){
+                return flag = true;
+            }
+        }
+        return flag;
+    }
+
     public boolean isTinkerer(){
         boolean flag = false;
         for(Ability ability : this.getAbilityPowers()){
@@ -2891,6 +2913,22 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                 ((EntityTourmaline) this).setBuilding(true);
         } else {
             player.sendSystemMessage(Component.translatable("commands.gempire.nofarmresources"));
+        }
+    }
+
+    public void runTerraformCommand(ServerPlayer player) {
+        if(this instanceof EntityLapis) {
+            ((EntityLapis) this).setTerraforming(true);
+        }
+    }
+
+    public void runLumberjackCommand(ServerPlayer player) {
+        if(isLumberjack()) {
+            System.out.println("is lumberjack");
+            if (this.getItemBySlot(EquipmentSlot.MAINHAND).is(ItemTags.AXES))
+                setLumberjack(true);
+        } else {
+            player.sendSystemMessage(Component.translatable("commands.gempire.noaxe"));
         }
     }
 

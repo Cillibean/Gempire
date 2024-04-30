@@ -173,25 +173,35 @@ public class ModItemModelProvider extends ItemModelProvider {
         fenceItem(ModBlocks.DISTANT_FENCE, ModBlocks.DISTANT_PLANKS);
         simpleItem(ModItems.DISTANT_SIGN);
         simpleItem(ModItems.DISTANT_HANGING_SIGN);
-        //simpleItem(ModItems.DISTANT_DOOR);
+        simpleItem(ModItems.DISTANT_DOOR);
 
         saplingItem(ModBlocks.KALEIDOSCOPE_SAPLING);
         fenceItem(ModBlocks.KALEIDOSCOPE_FENCE, ModBlocks.KALEIDOSCOPE_PLANKS);
         simpleItem(ModItems.KALEIDOSCOPE_SIGN);
         simpleItem(ModItems.KALEIDOSCOPE_HANGING_SIGN);
+        simpleItem(ModItems.KALEIDOSCOPE_DOOR);
 
         saplingItem(ModBlocks.SHADED_SAPLING);
         fenceItem(ModBlocks.SHADED_FENCE, ModBlocks.SHADED_PLANKS);
         simpleItem(ModItems.SHADED_SIGN);
         simpleItem(ModItems.SHADED_HANGING_SIGN);
+        simpleItem(ModItems.SHADED_DOOR);
 
         saplingItem(ModBlocks.CRYSTAL_SAPLING);
         fenceItem(ModBlocks.CRYSTAL_FENCE, ModBlocks.CRYSTAL_PLANKS);
-
-        //simpleBlockItem(ModBlocks.DESOLATE_GRASS);
+        simpleItem(ModItems.CRYSTAL_DOOR);
 
         //simpleItem(ModItems.CRYSTAL_SIGN);
         //simpleItem(ModItems.CRYSTAL_HANGING_SIGN);
+
+        withExistingParent(ModItems.FUSCHIA_PALADIN_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItems.COBALT_GUARDIAN_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItems.AMBER_HUNTRESS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItems.ALABASTER_EMPRESS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItems.SPECTER_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItems.FLEURIE_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItems.CRYSTAL_DEER_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItems.HUNTER_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
     }
 
     private ItemModelBuilder saplingItem(RegistryObject<Block> item) {

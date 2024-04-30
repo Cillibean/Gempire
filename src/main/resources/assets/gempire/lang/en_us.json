@@ -804,6 +804,18 @@
   "item.gempire.topaz_gem_6": "Pink Topaz Gem",
   "item.gempire.topaz_gem_11": "Blue Topaz Gem",
 
+  "item.gempire.fuschia_paladin_spawn_egg": "Fuschia Paladin Spawn Egg",
+  "item.gempire.cobalt_guardian_spawn_egg": "Cobalt Guardian Spawn Egg",
+  "item.gempire.amber_huntress_spawn_egg": "Amber Huntress Spawn Egg",
+  "item.gempire.alabaster_empress_spawn_egg": "Alabaster Empress Spawn Egg",
+  "item.gempire.specter_spawn_egg": "Specter Spawn Egg",
+  "item.gempire.crystal_deer_spawn_egg": "Crystal Deer Spawn Egg",
+  "item.gempire.fleurie_spawn_egg": "Fleurie Spawn Egg",
+  "item.gempire.hunter_spawn_egg": "Hunter Spawn Egg",
+
+  "entity.gempire.hunter": "Hunter",
+  "entity.gempire.specter": "Specter",
+
   "entity.gempire.pebble": "Pebble",
   "entity.gempire.mica": "Mica",
   "entity.gempire.shale": "Shale",
@@ -1092,6 +1104,12 @@
   "gempire.subtitle.abomination_hurt": "Abomination hurts",
   "gempire.subtitle.abomination_death": "Abomination perishes",
   "gempire.subtitle.abomination_living": "Abomination rasps",
+
+  "gempire.subtitle.specter_running": "Specter giggles",
+  "gempire.subtitle.specter_hurt": "Specter hurts",
+  "gempire.subtitle.specter_death": "Specter perishes",
+  "gempire.subtitle.specter_ambient": "Specter breathes",
+  "gempire.subtitle.specter_close": "Specter whispers",
 
   "advancements.gempire.agate.title": "Shoulders Squared!",
   "advancements.gempire.aquamarine.title": "Look, I'm crying",

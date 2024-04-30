@@ -402,6 +402,7 @@ public class ItemGem extends Item {
                 }
                 else if (gem instanceof EntityTourmaline) {
                     if (((EntityTourmaline) gem).getCrops() == "") ((EntityTourmaline) gem).setCrops(((EntityTourmaline) gem).generateCrops());
+                    if (((EntityTourmaline) gem).isBuilding()) ((EntityTourmaline) gem).setBuilding(false);
                 }
                 if (gem.MASTER_OWNER == null) {
                     gem.MASTER_OWNER = player.getUUID();

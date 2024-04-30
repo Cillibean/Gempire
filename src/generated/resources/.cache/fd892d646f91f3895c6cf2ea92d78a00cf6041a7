@@ -1,6 +1,8 @@
-// 1.20.1	2024-04-27T08:38:32.926455	Item Models: gempire
+// 1.20.1	2024-05-01T00:09:09.335615	Item Models: gempire
 2a4c323206d2fbeca217109aa5c8a2ac8ce38701 assets/gempire/models/item/acid_spit.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/gempire/models/item/alabaster_empress_spawn_egg.json
 0da7ed67ca0a8fcb9a8ba427cc3a79d0931ef656 assets/gempire/models/item/alabaster_shards.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/gempire/models/item/amber_huntress_spawn_egg.json
 c0c62ab235536d2de57de21efdcbe773279a708b assets/gempire/models/item/amber_shards.json
 a29e967ff074b156f0e58ab74842556395538217 assets/gempire/models/item/anatase_ingot.json
 a3632651a9fbc3e7e228b96d6dd3f21302c6f76c assets/gempire/models/item/anatase_nugget.json
@@ -17,15 +19,19 @@ f31a58a7c15a7472410d5865c5b0f84ae6fd29d6 assets/gempire/models/item/blue_essence
 dea68891228489348fa0ba99f9f287cab63d4953 assets/gempire/models/item/brown_lattice.json
 03382a851ed610f35dd2f205d4c01a26562ce15f assets/gempire/models/item/brown_shards.json
 10fe332f5e68c84f69f8c9f699615386ec2ec33b assets/gempire/models/item/chroma_catalyst.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/gempire/models/item/cobalt_guardian_spawn_egg.json
 28edb4b4eb938e4199bc4465fd6859f92dd19248 assets/gempire/models/item/cobalt_shards.json
 02572433c70091ff3e02cea129860110d38043f6 assets/gempire/models/item/confractor.json
 abce74eac971aebc6dc933921fbaa1c0056e343a assets/gempire/models/item/confractor_body.json
 72d2d8c794066ae1d251d317a95ad79696a24d67 assets/gempire/models/item/confractor_tip.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/gempire/models/item/crystal_deer_spawn_egg.json
+703e79a2af8b7faa64a5a30ae0594cf3ef87c17d assets/gempire/models/item/crystal_door.json
 7b1dae94b648ecc2338c40fa2e428d9c3e1937c5 assets/gempire/models/item/crystal_fence.json
 6f33c5476af3442ee45e19c18a20bced76cf4915 assets/gempire/models/item/crystal_sapling.json
 203c138f08c9b479796360252bd64ac33b001748 assets/gempire/models/item/cyan_chroma.json
 93be3ef44cbc4b4aabfd14eff791e847c7d019b7 assets/gempire/models/item/cyan_lattice.json
 1ae69ba003ff3f9af95fdc9312c40476ba579774 assets/gempire/models/item/cyan_shards.json
+842fcb292ae5bc6506dae921ea2c529bb524e911 assets/gempire/models/item/distant_door.json
 290bce01b1abaf4ff4635951a4ae6c77fe39d43e assets/gempire/models/item/distant_fence.json
 8d23ff1069d331bf905c41ca2772fe0e74951984 assets/gempire/models/item/distant_hanging_sign.json
 0ddeb4e7f57e31fef3075ba08c62aa6200845e75 assets/gempire/models/item/distant_sapling.json
@@ -33,8 +39,10 @@ abce74eac971aebc6dc933921fbaa1c0056e343a assets/gempire/models/item/confractor_b
 f9fd7e685c73e51511bb3cd5419f64b58ad8a0eb assets/gempire/models/item/electrum_ingot.json
 b360d9ffaaa5058875385abcc95e11f6a1984385 assets/gempire/models/item/electrum_nugget.json
 db10bee6fbe48ec12d1032020cf0fc2a62976b21 assets/gempire/models/item/empress_star.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/gempire/models/item/fleurie_spawn_egg.json
 225e949b95a05caec22765e8d6cfa0b122521b23 assets/gempire/models/item/fragments_music_disc.json
 9c0507ab15911bbae4df0025cda1e8726bd4e770 assets/gempire/models/item/fuchsia_shards.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/gempire/models/item/fuschia_paladin_spawn_egg.json
 8dba06a2e4c89d6851498e0efb52d50ee29b867a assets/gempire/models/item/gem_alloy.json
 288f3fcb17d920dfe1a477356584a19faca79b9c assets/gempire/models/item/gem_scrap.json
 67d02b7c39cb2e261a97c4583efe47eb185a4a0b assets/gempire/models/item/gem_slush_bucket.json
@@ -51,8 +59,10 @@ a046ced2a2f23fac0a5bf9825d1d62c85443607e assets/gempire/models/item/green_chroma
 a377c4c95fbdb0c7a5d902d83dab9daf91790bf9 assets/gempire/models/item/guardian_helmet.json
 0d0d2eb8de6f5b5e89b7a0f7a51fe1b94e55103e assets/gempire/models/item/guardian_leggings.json
 a87aa14c0d7854636365379df4b568b42b13b201 assets/gempire/models/item/guardian_tear.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/gempire/models/item/hunter_spawn_egg.json
 fffc2dd45a30b8b0acff88f92c02b4fb01c08df9 assets/gempire/models/item/huntress_dagger.json
 fed43c84dccab1190e86f97df99f6eb6a5b003a5 assets/gempire/models/item/injector_panel.json
+0928cd10c1c36e0102ab54df2b31652b723bdb19 assets/gempire/models/item/kaleidoscope_door.json
 9229ebe46286ae83e6a00f4f930221a85f66bb31 assets/gempire/models/item/kaleidoscope_fence.json
 f78c2f4d6d81f5eec5e94cc703cf51a320575e08 assets/gempire/models/item/kaleidoscope_hanging_sign.json
 f2ff0c01f866aaa7a0f664976c87a285bd40535f assets/gempire/models/item/kaleidoscope_sapling.json
@@ -105,6 +115,7 @@ d316da9d02fb86cbf41c2c52013f2bedb8508095 assets/gempire/models/item/red_chroma.j
 a9adf09a6b9a7f914f03414e71baa7035833370e assets/gempire/models/item/red_lattice.json
 b6c2fd3b1a56b802808f12d3ebed745fb5d62a8b assets/gempire/models/item/red_shards.json
 c47c115685ed81207b9f5c368482ca57f978d626 assets/gempire/models/item/remnants_music_disc.json
+9d7db0f279e3fd3783df88998b2195201bbd7834 assets/gempire/models/item/shaded_door.json
 6d86db45760cc51f7eac3d33ad91412b98111cd6 assets/gempire/models/item/shaded_fence.json
 3ae8d103316d6495ffedcbf74a322317294f4986 assets/gempire/models/item/shaded_hanging_sign.json
 cda7cb251b42a12bfcb19b1533e9a99b09c6cdd0 assets/gempire/models/item/shaded_sapling.json
@@ -113,6 +124,7 @@ a97dc9304b00a65463c4735bc0be1dc78033b4e9 assets/gempire/models/item/share_contra
 3001f7ffe8eab77f1cb272ffae2bb2c7f390f31e assets/gempire/models/item/shock_berry.json
 07907f57bef0cf699203bf5dc4f3c81fb2a5d516 assets/gempire/models/item/slate.json
 b1b3b5c9d9ab089bce3a6b59e0f842a577dbfca7 assets/gempire/models/item/sludge_glob.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/gempire/models/item/specter_spawn_egg.json
 eba8b4cc8d1f2eb59eed5b295322ebafa7b12793 assets/gempire/models/item/spodumene_piece.json
 dc174d8886547d57853f6e18ecec2cbc394269b9 assets/gempire/models/item/strawberry.json
 efd929577dc240f35645c09c46da592a4f243472 assets/gempire/models/item/thulite_ingot.json

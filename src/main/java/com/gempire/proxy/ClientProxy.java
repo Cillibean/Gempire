@@ -51,10 +51,6 @@ import static net.minecraftforge.fluids.FluidInteractionRegistry.addInteraction;
 
 public class ClientProxy {
 
-    public static CreativeModeTab GEMPIRE_GEMSTONES;
-    public static CreativeModeTab GEMPIRE_BLOCKS;
-    public static CreativeModeTab GEMPIRE_ITEMS;
-    public static CreativeModeTab GEMPIRE_TOOLS;
     @Mod.EventBusSubscriber(modid = Gempire.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientModBusEvents {
     @SubscribeEvent
@@ -76,7 +72,7 @@ public class ClientProxy {
          */
         //event.registerEntityRenderer(ModEntities.PEPO.get(), RenderPepo::new);
         event.registerEntityRenderer(ModEntities.BEASTMASTER_WOLF.get(), RenderBeastmasterWolf::new);
-        event.registerEntityRenderer(ModEntities.COBALT_GUARDIAN.get(), m -> new RenderCobaltGuardian(m, new ModelCobaltGuardian<>(m.bakeLayer(ModelCobaltGuardian.LAYER_LOCATION))));
+        event.registerEntityRenderer(ModEntities.COBALT_GUARDIAN.get(), RenderCobaltGuardian::new);
         event.registerEntityRenderer(ModEntities.FUSION.get(), m -> new RenderFusion(m, new ModelFusion<>(m.bakeLayer(ModelFusion.LAYER_LOCATION))));
         event.registerEntityRenderer(ModEntities.PEBBLE.get(), m -> new RenderPebble(m, new ModelPebble<>(m.bakeLayer(ModelPebble.LAYER_LOCATION_P))));
         event.registerEntityRenderer(ModEntities.MICA.get(), m -> new RenderMica(m, new ModelPebble<>(m.bakeLayer(ModelPebble.LAYER_LOCATION_M))));
@@ -192,7 +188,6 @@ public class ClientProxy {
 
     @SubscribeEvent
     public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
-        event.registerLayerDefinition(ModelCobaltGuardian.LAYER_LOCATION, ModelCobaltGuardian::createBodyLayer);
         event.registerLayerDefinition(ModelSpecter.LAYER_LOCATION, ModelSpecter::createBodyLayer);
         event.registerLayerDefinition(ModelPepo.LAYER_LOCATION, ModelPepo::createBodyLayer);
         event.registerLayerDefinition(ModelCrystalDeer.LAYER_LOCATION, ModelCrystalDeer::createBodyLayer);

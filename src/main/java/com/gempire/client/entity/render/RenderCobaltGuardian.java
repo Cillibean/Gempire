@@ -1,25 +1,28 @@
 package com.gempire.client.entity.render;
 
 import com.gempire.Gempire;
+import com.gempire.client.entity.model.ModelAmberHuntress;
 import com.gempire.client.entity.model.ModelCobaltGuardian;
+import com.gempire.entities.other.EntityAmberHuntress;
 import com.gempire.entities.other.EntityCobaltGuardian;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
+import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
-public class RenderCobaltGuardian extends MobRenderer<EntityCobaltGuardian, ModelCobaltGuardian<EntityCobaltGuardian>> {
+public class RenderCobaltGuardian extends GeoEntityRenderer<EntityCobaltGuardian> {
 
-    public RenderCobaltGuardian(EntityRendererProvider.Context renderManager, ModelCobaltGuardian<EntityCobaltGuardian> model) {
-        super(renderManager, model, 1f);
+    public RenderCobaltGuardian(EntityRendererProvider.Context renderManager) {
+        super(renderManager, new ModelCobaltGuardian());
         this.shadowRadius = 0.3F;
     }
 
     @Override
-    protected void scale(EntityCobaltGuardian entity, PoseStack stack, float f) {
-        stack.scale(1f, 1f, 1f);
-        super.scale(entity, stack, f);
+    public void scaleModelForRender(float widthScale, float heightScale, PoseStack poseStack, EntityCobaltGuardian animatable, BakedGeoModel model, boolean isReRender, float partialTick, int packedLight, int packedOverlay) {
+        poseStack.scale(1f, 1f, 1f);
+        super.scaleModelForRender(widthScale, heightScale, poseStack, animatable, model, isReRender, partialTick, packedLight, packedOverlay);
     }
 
     @Override

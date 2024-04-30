@@ -38,5 +38,17 @@ public class ModSounds {
 
     public static final RegistryObject<SoundEvent> ABOMINATION_LIVING = SOUNDS.register("abomination_living", () -> SoundEvent.createFixedRangeEvent(new ResourceLocation(Gempire.MODID, "abomination_living"), 16));
 
+    public static final RegistryObject<SoundEvent> SPECTER_HURT = SOUNDS.register("specter_hurt", () -> SoundEvent.createFixedRangeEvent(new ResourceLocation(Gempire.MODID, "specter_hurt"), 16));
+
+    public static final RegistryObject<SoundEvent> SPECTER_CLOSE = SOUNDS.register("specter_close", () -> SoundEvent.createFixedRangeEvent(new ResourceLocation(Gempire.MODID, "specter_close"), 16));
+
+    public static final RegistryObject<SoundEvent> SPECTER_RUNNING = SOUNDS.register("specter_running", () -> SoundEvent.createFixedRangeEvent(new ResourceLocation(Gempire.MODID, "specter_running"), 16));
+
+    public static final RegistryObject<SoundEvent> SPECTER_DEATH1 = SOUNDS.register("specter_death1", () -> SoundEvent.createFixedRangeEvent(new ResourceLocation(Gempire.MODID, "specter_death1"), 16));
+
+    public static final RegistryObject<SoundEvent> SPECTER_DEATH2 = SOUNDS.register("specter_death2", () -> SoundEvent.createFixedRangeEvent(new ResourceLocation(Gempire.MODID, "specter_death2"), 16));
+
+    public static final RegistryObject<SoundEvent> SPECTER_AMBIENT = SOUNDS.register("specter_ambient", () -> SoundEvent.createFixedRangeEvent(new ResourceLocation(Gempire.MODID, "specter_ambient"), 16));
+
 
 }
