@@ -230,6 +230,8 @@
   "block.gempire.thulite_ore": "Thulite Ore",
   "block.gempire.thulite_block": "Thulite Block",
   "block.gempire.raw_thulite_block": "Raw Thulite Block",
+  "block.gempire.thulite_tower": "Thulite Tower",
+  "block.gempire.thulite_cluster": "Thulite Cluster",
   "item.gempire.thulite_ingot": "Thulite Ingot",
   "item.gempire.raw_thulite": "Raw Thulite",
   "item.gempire.thulite_nugget": "Thulite Nugget",

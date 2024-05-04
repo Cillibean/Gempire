@@ -1,4 +1,4 @@
-// 1.20.1	2024-04-27T23:08:49.022092	Block States: gempire
+// 1.20.1	2024-05-04T20:20:37.922018	Block States: gempire
 e9fe90a8f74e0c4a6a77ee6c2135937e92bccf11 assets/gempire/blockstates/abnormal_sand.json
 c4772fb665bd9df470b93cc577aa98ed0457195d assets/gempire/blockstates/abnormal_sandstone.json
 0f70fed0bd5cf48d690237a733ca46e40a1a640e assets/gempire/blockstates/anatase_block.json
@@ -60,6 +60,7 @@ fcbcb83d104e2edc59f193bacf4aadbfdeab0c51 assets/gempire/blockstates/light_gray_l
 61134a7ddf1cd589e1026c80986904f173f72c4a assets/gempire/blockstates/lime_lattice.json
 57200c815fe405e1e69d1393e393e12a1ab6ba05 assets/gempire/blockstates/magenta_lattice.json
 93e778ffd6c3f3156c0d9e8152b5a5ab6a0b9a01 assets/gempire/blockstates/orange_lattice.json
+b4b6191d57c7c1c8ea7b9d8d93e75fa20099be3b assets/gempire/blockstates/pegmatite.json
 2dffcd6deb6c7f2040396052cf6493087ea8063e assets/gempire/blockstates/pegmatite_tungsten_ore.json
 4e9784ad2bdebce2649e4f236d497d57c8cfd603 assets/gempire/blockstates/pink_lattice.json
 11c34ef15fb4f99f51e59273db11dc55571d658d assets/gempire/blockstates/platinum_block.json
@@ -102,7 +103,9 @@ fb25885c80c32ef8ce6ffdffe0b496123e40344d assets/gempire/blockstates/stripped_dis
 044133a2d796c2e01d3210b54acae640db0ad780 assets/gempire/blockstates/stripped_shaded_log.json
 ed60bd1fd5c0936e1594e0dc21f3a9c1e8a46e18 assets/gempire/blockstates/stripped_shaded_wood.json
 5284f5a538a386d31bb572395688b274a6c171fb assets/gempire/blockstates/thulite_block.json
+01a7915b429480436af96055db15e86091b7fda5 assets/gempire/blockstates/thulite_cluster.json
 a6743e0f1556a42fb90c0ac2b5a7ca7ab3e6dd16 assets/gempire/blockstates/thulite_ore.json
+7d934a01afca75933191cd2b51a456a018d3fc8e assets/gempire/blockstates/thulite_tower.json
 9bbbdc94da43867395e80751325f87c9005585bd assets/gempire/blockstates/tungsten_block.json
 f8a00c778cfc1ef26df4cf004b1eb7ec08f6c837 assets/gempire/blockstates/tungsten_ore.json
 ce4d182d06fd6956e4a8f3e66af8336ac2b1dd06 assets/gempire/blockstates/white_lattice.json
@@ -262,6 +265,7 @@ bb83e30d20ff102541cbe101702cab3a659c9573 assets/gempire/models/block/magenta_lat
 d310e95fc697a639c6fb702226ca74f804d5815f assets/gempire/models/block/orange_lattice_post.json
 f17ab314dbc7b1a1be6e85cba665d8d0691052d3 assets/gempire/models/block/orange_lattice_side.json
 26a03967475c63606708f40f36a7b76146c7f800 assets/gempire/models/block/orange_lattice_side_alt.json
+d53bc8a5ec8db4b343797092acbe23fc857c4b7e assets/gempire/models/block/pegmatite.json
 7828360a350bb7028d83882de89659a7a6d2b00e assets/gempire/models/block/pegmatite_tungsten_ore.json
 566ca1b4fffcb222e64d75c44d21076a2e20dd4b assets/gempire/models/block/pink_lattice_noside.json
 a20e89fe05660ad9063b30db26ff74fbd4fcd179 assets/gempire/models/block/pink_lattice_noside_alt.json
@@ -340,7 +344,9 @@ f814860b70aa6eaa86838dce1e712533e2ebc30a assets/gempire/models/block/stripped_di
 fe80baadca96bd0d41ed058ec6afb4909129598f assets/gempire/models/block/stripped_shaded_wood.json
 6538d7664361c5add65ef89ccecde1a3dc362a60 assets/gempire/models/block/stripped_shaded_wood_horizontal.json
 247554e051d505a6df425cd2426490ae8b8856a8 assets/gempire/models/block/thulite_block.json
+7a9662d9e42fdccc434504c39af2b4a0990985f6 assets/gempire/models/block/thulite_cluster.json
 8ae5950e013cc68db6ba8ca66fd0fe3d3a559b84 assets/gempire/models/block/thulite_ore.json
+0f324322380cb0dfbab3b59672c4fe45b6079eeb assets/gempire/models/block/thulite_tower.json
 e7df418ab309b4f12dd50cf5b93be5970a704774 assets/gempire/models/block/tungsten_block.json
 c6ac7cafe46bc97e0e01a8d07841329198513c94 assets/gempire/models/block/tungsten_ore.json
 3d9a4761d3131811d957db1a24ecc7fb79bed054 assets/gempire/models/block/white_lattice_noside.json
@@ -387,6 +393,7 @@ d01b16d020ffff3f0d2ae005ac988b4d9b39a232 assets/gempire/models/item/kaleidoscope
 ee226b83123c14b0327151d32dc17f61ac158382 assets/gempire/models/item/kaleidoscope_stairs.json
 03c381da840043c152da85c1776950d62eb0091c assets/gempire/models/item/kaleidoscope_trapdoor.json
 01c3617af811189b3807a0d809b217a90a1a75d2 assets/gempire/models/item/kaleidoscope_wood.json
+22e3979632c8b770440b1d35f96cab8cc89153b2 assets/gempire/models/item/pegmatite.json
 6b6a565daef10b58a6facff11ca0665bc1fbb90e assets/gempire/models/item/pegmatite_tungsten_ore.json
 78c4695c2de30da81ca161f481466ee7cd975ad2 assets/gempire/models/item/pincule.json
 9bd8e92b3b6ec435faeecad59380862aacdd5c1a assets/gempire/models/item/platinum_block.json
@@ -420,6 +427,8 @@ cedb52abbf8b01ffe0ce289ecf3e02a382adb5ea assets/gempire/models/item/stripped_kal
 11a2cc59e5014c871cff8a3cd8296945afe0b691 assets/gempire/models/item/stripped_shaded_log.json
 e62e4027eba4047b5a7c7fc8729135c8f4902977 assets/gempire/models/item/stripped_shaded_wood.json
 0031d90f289a5f01d29920a12126a2af1095c6cf assets/gempire/models/item/thulite_block.json
+de873a68c6aa5523a8dbd6296f0ba7b0c0530a2d assets/gempire/models/item/thulite_cluster.json
 ef393de8924ef6390ff4327250c765e0c031f60c assets/gempire/models/item/thulite_ore.json
+7f092147dba93604ab6999e995729c796094a765 assets/gempire/models/item/thulite_tower.json
 fe6560233f09543de90bdebc7ceec69a59728dfa assets/gempire/models/item/tungsten_block.json
 3bf17d7f1af8719af6470b239558e7f2fd52b9ca assets/gempire/models/item/tungsten_ore.json
