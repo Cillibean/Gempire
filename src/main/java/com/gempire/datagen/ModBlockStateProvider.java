@@ -49,6 +49,9 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         blockWithItem(ModBlocks.STRAWBERRY_BLOCK);
 
+        blockWithItem(ModBlocks.PEGMATITE);
+        //blockWithItem(ModBlocks.COBBLED_PEGMATITE);
+
         blockWithItem(ModBlocks.DISTANT_PLANKS);
         blockWithItem(ModBlocks.KALEIDOSCOPE_PLANKS);
         blockWithItem(ModBlocks.SHADED_PLANKS);
@@ -219,6 +222,9 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockItem(ModBlocks.PINCULE);
 
         blockItem(ModBlocks.DESOLATE_GRASS);
+
+        saplingBlock(ModBlocks.THULITE_TOWER);
+        saplingBlock(ModBlocks.THULITE_CLUSTER);
     }
 
     public void paneBlock(RegistryObject<Block> block, ResourceLocation texture, ResourceLocation texture1) {

@@ -652,6 +652,11 @@ public class ModCreativeModeTabs {
 
                 populator.accept(ModItems.PINCULE.get());
 
+                populator.accept(ModBlocks.THULITE_CLUSTER.get());
+                populator.accept(ModBlocks.THULITE_TOWER.get());
+
+                populator.accept(ModBlocks.ALIEN_FLOWER.get());
+
                 populator.accept(ModBlocks.RUINED_MARBLE_BLOCK.get());
                 populator.accept(ModBlocks.RUINED_MARBLE_STAIRS.get());
                 populator.accept(ModBlocks.RUINED_MARBLE_SLAB.get());

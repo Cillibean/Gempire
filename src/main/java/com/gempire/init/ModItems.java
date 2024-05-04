@@ -332,6 +332,20 @@ public class ModItems {
             )
     );
 
+    public static final RegistryObject<Item> THULITE_TOWER = ITEMS.register("thulite_tower", () ->
+            new BlockItem(
+                    ModBlocks.THULITE_TOWER.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> THULITE_CLUSTER = ITEMS.register("thulite_cluster", () ->
+            new BlockItem(
+                    ModBlocks.THULITE_CLUSTER.get(),
+                    new Item.Properties()
+            )
+    );
+
     public static final RegistryObject<Item> TUNGSTEN_BLOCK = ITEMS.register("tungsten_block", () ->
             new BlockItem(
                     ModBlocks.TUNGSTEN_BLOCK.get(),

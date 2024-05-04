@@ -199,6 +199,12 @@ public class ModBlocks {
         return BlockEntityType.CHEST;
     }));*/
 
+    public static final RegistryObject<Block> THULITE_TOWER = BLOCKS.register("thulite_tower", () ->
+            new ClusterBlock(BlockBehaviour.Properties.copy(Blocks.AMETHYST_CLUSTER)));
+
+    public static final RegistryObject<Block> THULITE_CLUSTER = BLOCKS.register("thulite_cluster", () ->
+            new ClusterBlock(BlockBehaviour.Properties.copy(Blocks.AMETHYST_CLUSTER)));
+
 
     public static final RegistryObject<Block> CRYSTAL_LOG = BLOCKS.register("crystal_log", () ->
             new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG)));
