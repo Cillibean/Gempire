@@ -64,6 +64,10 @@ public class ClientProxy {
         event.registerEntityRenderer(ModEntities.AMBER_HUNTRESS.get(), RenderAmberHuntress::new);
         event.registerEntityRenderer(ModEntities.FUCHSIA_PALADIN.get(), RenderFuchsiaPaladin::new);
         event.registerEntityRenderer(ModEntities.FLEURIE.get(), RenderFleurie::new);
+
+        event.registerEntityRenderer(ModEntities.CRYSTAL_DEER.get(), RenderCrystalDeer::new);
+        event.registerEntityRenderer(ModEntities.OVERSEER.get(), RenderOverseer::new);
+        event.registerEntityRenderer(ModEntities.SORROW_JELLY.get(), RenderSorrowJelly::new);
         /*
         event.registerEntityRenderer(ModEntities.PRISMATIC_EMPRESS.get(), RenderPrismaticEmpress::new);
         event.registerEntityRenderer(ModEntities.GILDED_HUNTRESS.get(), RenderGildedHuntress::new);
@@ -103,7 +107,6 @@ public class ClientProxy {
         event.registerEntityRenderer(ModEntities.TOURMALINE.get(), m -> new RenderTourmaline(m, new ModelTourmaline<>(m.bakeLayer(ModelTourmaline.LAYER_LOCATION))));
         event.registerEntityRenderer(ModEntities.SPECTER.get(), m -> new RenderSpecter(m, new ModelSpecter<>(m.bakeLayer(ModelSpecter.LAYER_LOCATION))));
         event.registerEntityRenderer(ModEntities.PEPO.get(), m -> new RenderPepo(m, new ModelPepo<>(m.bakeLayer(ModelPepo.LAYER_LOCATION))));
-        event.registerEntityRenderer(ModEntities.CRYSTAL_DEER.get(), m -> new RenderCrystalDeer(m, new ModelCrystalDeer<>(m.bakeLayer(ModelCrystalDeer.LAYER_LOCATION))));
 
         event.registerEntityRenderer(ModEntities.ICE_SHARD.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer(ModEntities.ACID_SPIT.get(), ThrownItemRenderer::new);
@@ -190,7 +193,6 @@ public class ClientProxy {
     public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(ModelSpecter.LAYER_LOCATION, ModelSpecter::createBodyLayer);
         event.registerLayerDefinition(ModelPepo.LAYER_LOCATION, ModelPepo::createBodyLayer);
-        event.registerLayerDefinition(ModelCrystalDeer.LAYER_LOCATION, ModelCrystalDeer::createBodyLayer);
         event.registerLayerDefinition(ModelHunter.LAYER_LOCATION, ModelHunter::createBodyLayer);
         event.registerLayerDefinition(ModelBeastmasterWolf.BEASTMASTER_WOLF, ModelBeastmasterWolf::createBodyLayer);
         event.registerLayerDefinition(ModelPebble.LAYER_LOCATION_P, ModelPebble::createBodyLayer);

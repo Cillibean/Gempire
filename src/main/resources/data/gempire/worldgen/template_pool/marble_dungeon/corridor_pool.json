@@ -19,6 +19,24 @@
         "location": "gempire:marble_dungeon_chest_corridor",
         "processors": "minecraft:empty"
       }
+    },
+    {
+      "weight": 2,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "projection": "rigid",
+        "location": "gempire:marble_dungeon_staircase_up",
+        "processors": "minecraft:empty"
+      }
+    },
+    {
+      "weight": 2,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "projection": "rigid",
+        "location": "gempire:marble_dungeon_staircase_down",
+        "processors": "minecraft:empty"
+      }
     }
   ]
 }

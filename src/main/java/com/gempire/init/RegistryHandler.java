@@ -32,5 +32,6 @@ public class RegistryHandler {
         ModEnchants.ENCHANTS.register(bus);
         ModCreativeModeTabs.CREATIVE_MODE_TABS.register(bus);
         ModPotions.POTIONS.register(bus);
+        ModStructures.DEFERRED_REGISTRY_STRUCTURE.register(bus);
     }
 }

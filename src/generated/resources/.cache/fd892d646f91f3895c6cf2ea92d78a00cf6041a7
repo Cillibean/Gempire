@@ -1,4 +1,4 @@
-// 1.20.1	2024-05-01T00:09:09.335615	Item Models: gempire
+// 1.20.1	2024-05-07T17:23:27.771454	Item Models: gempire
 2a4c323206d2fbeca217109aa5c8a2ac8ce38701 assets/gempire/models/item/acid_spit.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/gempire/models/item/alabaster_empress_spawn_egg.json
 0da7ed67ca0a8fcb9a8ba427cc3a79d0931ef656 assets/gempire/models/item/alabaster_shards.json
@@ -82,6 +82,7 @@ c1302ccfca01950fbd4fe9f0cba2e4b7380efafd assets/gempire/models/item/magenta_latt
 68f1964738ec4eb9cd5728504dbc883215ed872a assets/gempire/models/item/orange_chroma.json
 b0803fba8fe34d4af5fa4df3808f8b3827d4110e assets/gempire/models/item/orange_lattice.json
 5d7ea5609c7fdbb5caaa20c7a7947e4f8c33e076 assets/gempire/models/item/orange_shards.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/gempire/models/item/overseer_spawn_egg.json
 7cacfa67acf74b728c29bfef0abbc054cc17f7da assets/gempire/models/item/paladin_flower.json
 9553d4c7f30d58655ed5ef1f5ebbdb8675b74100 assets/gempire/models/item/pink_chroma.json
 20b69666034a978fac974b67adb536b6a213b0c9 assets/gempire/models/item/pink_crystal_apple.json
@@ -124,6 +125,7 @@ a97dc9304b00a65463c4735bc0be1dc78033b4e9 assets/gempire/models/item/share_contra
 3001f7ffe8eab77f1cb272ffae2bb2c7f390f31e assets/gempire/models/item/shock_berry.json
 07907f57bef0cf699203bf5dc4f3c81fb2a5d516 assets/gempire/models/item/slate.json
 b1b3b5c9d9ab089bce3a6b59e0f842a577dbfca7 assets/gempire/models/item/sludge_glob.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/gempire/models/item/sorrow_jelly_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/gempire/models/item/specter_spawn_egg.json
 eba8b4cc8d1f2eb59eed5b295322ebafa7b12793 assets/gempire/models/item/spodumene_piece.json
 dc174d8886547d57853f6e18ecec2cbc394269b9 assets/gempire/models/item/strawberry.json

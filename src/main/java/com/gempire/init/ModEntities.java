@@ -46,6 +46,16 @@ public class ModEntities {
                     .sized(.6f, .7f) // Hitbox Size
                     .build(new ResourceLocation(Gempire.MODID, "fleurie").toString()));
 
+    public static final RegistryObject<EntityType<EntityOverseer>> OVERSEER = ENTITIES.register("overseer",
+            () -> EntityType.Builder.of(EntityOverseer::new, MobCategory.MONSTER)
+                    .sized(.9f, 1.5f) // Hitbox Size
+                    .build(new ResourceLocation(Gempire.MODID, "overseer").toString()));
+
+    public static final RegistryObject<EntityType<EntitySorrowJelly>> SORROW_JELLY = ENTITIES.register("sorrow_jelly",
+            () -> EntityType.Builder.of(EntitySorrowJelly::new, MobCategory.CREATURE)
+                    .sized(1f, 2f) // Hitbox Size
+                    .build(new ResourceLocation(Gempire.MODID, "sorrow_jelly").toString()));
+
     public static final RegistryObject<EntityType<EntityCrystalDeer>> CRYSTAL_DEER = ENTITIES.register("crystal_deer",
             () -> EntityType.Builder.of(EntityCrystalDeer::new, MobCategory.CREATURE)
                     .sized(.75f, 2f) // Hitbox Size
