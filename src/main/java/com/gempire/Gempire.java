@@ -76,6 +76,10 @@ public class Gempire
 
         event.put(ModEntities.FLEURIE.get(), EntityFleurie.registerAttributes().build());
 
+        event.put(ModEntities.OVERSEER.get(), EntityOverseer.registerAttributes().build());
+
+        event.put(ModEntities.SORROW_JELLY.get(), EntitySorrowJelly.registerAttributes().build());
+
         event.put(ModEntities.CRYSTAL_DEER.get(), EntityCrystalDeer.registerAttributes().build());
 
         event.put(ModEntities.BEASTMASTER_WOLF.get(), EntityBeastmasterWolf.createAttributes().build());
@@ -250,8 +254,10 @@ public class Gempire
             event.accept(ModItems.ALABASTER_EMPRESS_SPAWN_EGG);
             event.accept(ModItems.FLEURIE_SPAWN_EGG);
             event.accept(ModItems.CRYSTAL_DEER_SPAWN_EGG);
-            event.accept(ModItems.SPECTER_SPAWN_EGG);
+            event.accept(ModItems.SORROW_JELLY_SPAWN_EGG);
             event.accept(ModItems.HUNTER_SPAWN_EGG);
+            event.accept(ModItems.OVERSEER_SPAWN_EGG);
+            event.accept(ModItems.SPECTER_SPAWN_EGG);
         }
     }
 

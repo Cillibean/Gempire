@@ -19,6 +19,15 @@
         "location": "gempire:marble_dungeon_room",
         "processors": "minecraft:empty"
       }
+    },
+    {
+      "weight": 3,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "projection": "rigid",
+        "location": "gempire:marble_dungeon_room2",
+        "processors": "minecraft:empty"
+      }
     }
   ]
 }

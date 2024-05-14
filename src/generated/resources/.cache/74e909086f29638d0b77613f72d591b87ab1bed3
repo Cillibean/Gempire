@@ -1,4 +1,4 @@
-// 1.20.1	2024-05-04T20:20:37.922018	Block States: gempire
+// 1.20.1	2024-05-07T17:23:27.765716	Block States: gempire
 e9fe90a8f74e0c4a6a77ee6c2135937e92bccf11 assets/gempire/blockstates/abnormal_sand.json
 c4772fb665bd9df470b93cc577aa98ed0457195d assets/gempire/blockstates/abnormal_sandstone.json
 0f70fed0bd5cf48d690237a733ca46e40a1a640e assets/gempire/blockstates/anatase_block.json
@@ -427,8 +427,6 @@ cedb52abbf8b01ffe0ce289ecf3e02a382adb5ea assets/gempire/models/item/stripped_kal
 11a2cc59e5014c871cff8a3cd8296945afe0b691 assets/gempire/models/item/stripped_shaded_log.json
 e62e4027eba4047b5a7c7fc8729135c8f4902977 assets/gempire/models/item/stripped_shaded_wood.json
 0031d90f289a5f01d29920a12126a2af1095c6cf assets/gempire/models/item/thulite_block.json
-de873a68c6aa5523a8dbd6296f0ba7b0c0530a2d assets/gempire/models/item/thulite_cluster.json
 ef393de8924ef6390ff4327250c765e0c031f60c assets/gempire/models/item/thulite_ore.json
-7f092147dba93604ab6999e995729c796094a765 assets/gempire/models/item/thulite_tower.json
 fe6560233f09543de90bdebc7ceec69a59728dfa assets/gempire/models/item/tungsten_block.json
 3bf17d7f1af8719af6470b239558e7f2fd52b9ca assets/gempire/models/item/tungsten_ore.json

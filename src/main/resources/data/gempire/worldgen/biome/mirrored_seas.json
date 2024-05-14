@@ -10,7 +10,16 @@
     "grass_color": 3434633,
     "foliage_color": 3429513
   },
-  "spawners": {},
+  "spawners": {
+    "creature": [
+      {
+        "type": "gempire:sorrow_jelly",
+        "weight": 12,
+        "minCount": 1,
+        "maxCount": 2
+      }
+    ]
+  },
   "spawn_costs": {},
   "carvers": {},
   "features": []

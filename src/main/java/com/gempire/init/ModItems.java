@@ -143,6 +143,14 @@ public class ModItems {
             () -> new ForgeSpawnEggItem(ModEntities.SPECTER, 0x1f1f1f, 0x61506e,
                     new Item.Properties()));
 
+    public static final RegistryObject<Item> OVERSEER_SPAWN_EGG = ITEMS.register("overseer_spawn_egg",
+            () -> new ForgeSpawnEggItem(ModEntities.OVERSEER, 0x1f1f1f, 0xffffff,
+                    new Item.Properties()));
+
+    public static final RegistryObject<Item> SORROW_JELLY_SPAWN_EGG = ITEMS.register("sorrow_jelly_spawn_egg",
+            () -> new ForgeSpawnEggItem(ModEntities.SORROW_JELLY, 0x7486ed, 0xaccefa,
+                    new Item.Properties()));
+
     public static final RegistryObject<Item> FLEURIE_SPAWN_EGG = ITEMS.register("fleurie_spawn_egg",
             () -> new ForgeSpawnEggItem(ModEntities.FLEURIE, 0xedc0eb, 0xfa9be1,
                     new Item.Properties()));

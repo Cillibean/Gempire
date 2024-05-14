@@ -31,7 +31,7 @@
           }
         },
         {
-          "biome": "gempire:mirrored_skies",
+          "biome": "gempire:mirrored_seas",
           "parameters": {
             "temperature": -1,
             "humidity": 0,

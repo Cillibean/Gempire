@@ -96,7 +96,7 @@
       },
       "trigger": "minecraft:location"
     },
-    "gempire:mirrored_skies": {
+    "gempire:mirrored_seas": {
       "conditions": {
         "player": [
           {
@@ -104,7 +104,7 @@
             "entity": "this",
             "predicate": {
               "location": {
-                "biome": "gempire:mirrored_skies"
+                "biome": "gempire:mirrored_seas"
               }
             }
           }
@@ -191,7 +191,7 @@
       "gempire:iridescent_overgrowth"
     ],
     [
-      "gempire:mirrored_skies"
+      "gempire:mirrored_seas"
     ],
     [
       "gempire:peculiar_precipice"
