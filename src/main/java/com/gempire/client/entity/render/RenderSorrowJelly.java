@@ -22,7 +22,7 @@ public class RenderSorrowJelly extends GeoEntityRenderer<EntitySorrowJelly> {
 
     @Override
     public void scaleModelForRender(float widthScale, float heightScale, PoseStack poseStack, EntitySorrowJelly animatable, BakedGeoModel model, boolean isReRender, float partialTick, int packedLight, int packedOverlay) {
-        poseStack.scale(.5f, .5f, .5f);
+        poseStack.scale(animatable.getScale(), animatable.getScale(), animatable.getScale());
     }
 
     @Override
