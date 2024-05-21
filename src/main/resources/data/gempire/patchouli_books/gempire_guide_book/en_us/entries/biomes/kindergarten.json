@@ -1,0 +1,12 @@
+{
+  "name": "Kindergarten Remains",
+  "icon": "minecraft:amethyst_shard",
+  "advancement": "gempire:root",
+  "category": "gempire:biomes",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "To be filled out..."
+    }
+  ]
+}
