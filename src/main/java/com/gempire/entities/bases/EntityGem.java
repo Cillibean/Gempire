@@ -2887,9 +2887,16 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
 
     public void runRecallCommand(ServerPlayer player) {
         if(this.consumeItemCheck(Items.ENDER_EYE, 1)) {
-            int x = player.getRespawnPosition().getX();
-            int y = player.getRespawnPosition().getY();
-            int z = player.getRespawnPosition().getZ();
+            int x,y,z;
+            if  (player.getRespawnPosition() != null) {
+                x = player.getRespawnPosition().getX();
+                y = player.getRespawnPosition().getY();
+                z = player.getRespawnPosition().getZ();
+            } else {
+                x = player.level().getSharedSpawnPos().getX();
+                y = player.level().getSharedSpawnPos().getX();
+                z = player.level().getSharedSpawnPos().getX();
+            }
             if (player.isCreative() ? player.experienceLevel >= 0 : player.experienceLevel >= 20) {
                     player.teleportTo(x, y, z);
                     this.teleportTo(x, y, z);
