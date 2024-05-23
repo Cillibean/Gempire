@@ -777,6 +777,22 @@ public class ModCreativeModeTabs {
                 populator.accept(ModItems.BLACK_DIAMOND_GLASS.get());
                 populator.accept(ModItems.BROWN_DIAMOND_GLASS.get());
                 populator.accept(ModItems.PRISMATIC_DIAMOND_GLASS.get());
+
+                populator.accept(ModItems.WHITE_IRIS.get());
+                populator.accept(ModItems.PINK_THISTLE.get());
+                populator.accept(ModItems.PANSIE.get());
+                populator.accept(ModItems.ORCHID.get());
+                populator.accept(ModItems.NASTURTIUMS.get());
+                populator.accept(ModItems.HYDRANGEA_BUSH_WHITE.get());
+                populator.accept(ModItems.HYDRANGEA_BUSH_PINK.get());
+                populator.accept(ModItems.HYDRANGEA_BUSH_BLUE.get());
+                populator.accept(ModItems.HYDRANGEA_BUSH_GREEN.get());
+                populator.accept(ModItems.HYDRANGEA_BUSH_PURPLE.get());
+                populator.accept(ModItems.CHRYSANTHEMUM.get());
+                populator.accept(ModItems.BLUE_BELLS.get());
+                populator.accept(ModBlocks.BLUE_PUFFBALL.get());
+                populator.accept(ModBlocks.CROCOSMIA.get());
+                populator.accept(ModBlocks.CLOVERS.get());
             }).build()
     );
     public static final RegistryObject<CreativeModeTab> GEMPIRE_TOOLS = CREATIVE_MODE_TABS.register("gempire_tools",

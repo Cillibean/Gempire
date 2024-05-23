@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "": {
+      "model": "gempire:block/clovers",
+      "x": 90
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "half=lower": {
+      "model": "gempire:block/crocosmia_bottom"
+    },
+    "half=upper": {
+      "model": "gempire:block/crocosmia_top"
+    }
+  }
+}

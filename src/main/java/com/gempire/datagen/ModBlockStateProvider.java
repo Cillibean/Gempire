@@ -225,6 +225,20 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         saplingBlock(ModBlocks.THULITE_TOWER);
         saplingBlock(ModBlocks.THULITE_CLUSTER);
+
+        flowerBlock(ModBlocks.WHITE_IRIS);
+        flowerBlock(ModBlocks.PINK_THISTLE);
+        flowerBlock(ModBlocks.PANSIE);
+        flowerBlock(ModBlocks.ORCHID);
+        flowerBlock(ModBlocks.NASTURTIUMS);
+        flowerBlock(ModBlocks.HYDRANGEA_BUSH_WHITE);
+        flowerBlock(ModBlocks.HYDRANGEA_BUSH_PINK);
+        flowerBlock(ModBlocks.HYDRANGEA_BUSH_BLUE);
+        flowerBlock(ModBlocks.HYDRANGEA_BUSH_GREEN);
+        flowerBlock(ModBlocks.HYDRANGEA_BUSH_PURPLE);
+        flowerBlock(ModBlocks.CHRYSANTHEMUM);
+        flowerBlock(ModBlocks.BLUE_BELLS);
+        flowerBlock(ModBlocks.BLUE_PUFFBALL);
     }
 
     public void paneBlock(RegistryObject<Block> block, ResourceLocation texture, ResourceLocation texture1) {
@@ -256,6 +270,11 @@ public class ModBlockStateProvider extends BlockStateProvider {
     }
 
     private void saplingBlock(RegistryObject<Block> blockRegistryObject) {
+        simpleBlock(blockRegistryObject.get(),
+                models().cross(ForgeRegistries.BLOCKS.getKey(blockRegistryObject.get()).getPath(), blockTexture(blockRegistryObject.get())).renderType("cutout"));
+    }
+
+    private void flowerBlock(RegistryObject<Block> blockRegistryObject) {
         simpleBlock(blockRegistryObject.get(),
                 models().cross(ForgeRegistries.BLOCKS.getKey(blockRegistryObject.get()).getPath(), blockTexture(blockRegistryObject.get())).renderType("cutout"));
     }

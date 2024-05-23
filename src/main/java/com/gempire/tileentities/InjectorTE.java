@@ -190,7 +190,15 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
             if (stack.getItem() != Items.AIR) {
                 if (stack.getItem() instanceof BucketItem bucket) {
                     if (this.isValidForSlot(i, bucket)) {
-                        info.resources[i] += 10;
+                        if (stack.getItem() == ModItems.PINK_ESSENCE_BUCKET.get()) {
+                            info.resources[0] += 10;
+                        } else if (stack.getItem() == ModItems.BLUE_ESSENCE_BUCKET.get()) {
+                            info.resources[2] += 10;
+                        } else if (stack.getItem() == ModItems.YELLOW_ESSENCE_BUCKET.get()) {
+                            info.resources[3] += 10;
+                        } else if (stack.getItem() == ModItems.WHITE_ESSENCE_BUCKET.get()) {
+                            info.resources[1] += 10;
+                        }
                     }
                 }
             }

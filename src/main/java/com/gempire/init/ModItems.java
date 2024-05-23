@@ -40,6 +40,51 @@ public class ModItems {
     public static final RegistryObject<Item> ALIEN_FLOWER = ITEMS.register("alien_flower", () ->
             new BlockItem(ModBlocks.ALIEN_FLOWER.get(), new Item.Properties().food(ModFoods.ALIEN_FLOWER)));
 
+    public static final RegistryObject<Item> WHITE_IRIS = ITEMS.register("white_iris", () ->
+            new BlockItem(ModBlocks.WHITE_IRIS.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> PINK_THISTLE = ITEMS.register("pink_thistle", () ->
+            new BlockItem(ModBlocks.PINK_THISTLE.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> PANSIE = ITEMS.register("pansie", () ->
+            new BlockItem(ModBlocks.PANSIE.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> ORCHID = ITEMS.register("orchid", () ->
+            new BlockItem(ModBlocks.ORCHID.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> NASTURTIUMS = ITEMS.register("nastutiums", () ->
+            new BlockItem(ModBlocks.NASTURTIUMS.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> HYDRANGEA_BUSH_WHITE = ITEMS.register("hydrangea_bush_white", () ->
+            new BlockItem(ModBlocks.HYDRANGEA_BUSH_WHITE.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> HYDRANGEA_BUSH_PINK = ITEMS.register("hydrangea_bush_pink", () ->
+            new BlockItem(ModBlocks.HYDRANGEA_BUSH_PINK.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> HYDRANGEA_BUSH_GREEN = ITEMS.register("hydrangea_bush_green", () ->
+            new BlockItem(ModBlocks.HYDRANGEA_BUSH_GREEN.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> HYDRANGEA_BUSH_BLUE = ITEMS.register("hydrangea_bush_blue", () ->
+            new BlockItem(ModBlocks.HYDRANGEA_BUSH_BLUE.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> HYDRANGEA_BUSH_PURPLE = ITEMS.register("hydrangea_bush_purple", () ->
+            new BlockItem(ModBlocks.HYDRANGEA_BUSH_PURPLE.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> CROCOSMIA = ITEMS.register("crocosmia", () ->
+            new BlockItem(ModBlocks.CROCOSMIA.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> CHRYSANTHEMUM = ITEMS.register("chrysanthemum", () ->
+            new BlockItem(ModBlocks.CHRYSANTHEMUM.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> BLUE_PUFFBALL = ITEMS.register("blue_puffball", () ->
+            new BlockItem(ModBlocks.BLUE_PUFFBALL.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> BLUE_BELLS = ITEMS.register("blue_bells", () ->
+            new BlockItem(ModBlocks.BLUE_BELLS.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> CLOVERS = ITEMS.register("clovers", () ->
+            new BlockItem(ModBlocks.CLOVERS.get(), new Item.Properties()));
+
     public static final RegistryObject<Item> RED_LATTICE = ITEMS.register("red_lattice", () ->
             new BlockItem(ModBlocks.RED_LATTICE.get(), new Item.Properties()));
 
