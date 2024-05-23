@@ -13,43 +13,42 @@ public class InjectionRegistry {
     public static void setMap() {
 
         //tier 1
-
-        listBasic.add(new GemInfo(new int[]{10, 5, 5, 5, 5}, 1f, "agate"));
-        listBasic.add(new GemInfo(new int[]{5, 5, 4, 5, 5}, 1.25f, "bismuth"));
-        listBasic.add(new GemInfo(new int[]{8, 5, 4, 5, 5}, 1f, "jasper"));
-        listBasic.add(new GemInfo(new int[]{4, 5, 4, 5, 5}, 0.65f, "lapis_lazuli"));
-        listBasic.add(new GemInfo(new int[]{3, 5, 4, 5, 5}, 1.4f, "peridot"));
-        listBasic.add(new GemInfo(new int[]{4, 5, 4, 5, 5}, 1f, "quartz"));
-        listBasic.add(new GemInfo(new int[]{1, 5, 4, 5, 5}, 1.6f, "ruby"));
-        listBasic.add(new GemInfo(new int[]{5, 5, 4, 5, 5}, 1.6f, "rutile"));
-        listBasic.add(new GemInfo(new int[]{6, 5, 4, 5, 5}, 1.25f, "spinel"));
-        listBasic.add(new GemInfo(new int[]{3, 5, 4, 5, 5}, 1.25f, "topaz"));
-        listBasic.add(new GemInfo(new int[]{7, 5, 4, 5, 5}, 0.975f, "tourmaline"));
+        listBasic.add(new GemInfo(new int[]{0, 10, 35, 0, 5, 0}, 1f, "agate"));
+        listBasic.add(new GemInfo(new int[]{10, 0, 10, 30, 0, 0}, 1.25f, "bismuth"));
+        listBasic.add(new GemInfo(new int[]{0, 10, 25, 10, 0, 0}, 1.35f, "jasper"));
+        listBasic.add(new GemInfo(new int[]{0, 0, 35, 0, 0, 15}, 0.65f, "lapis_lazuli"));
+        listBasic.add(new GemInfo(new int[]{0, 0, 19, 18, 3, 0}, 1.4f, "peridot"));
+        listBasic.add(new GemInfo(new int[]{10, 10, 25, 0, 0, 0}, 1.35f, "quartz"));
+        listBasic.add(new GemInfo(new int[]{10, 0, 16, 4, 0, 0}, 1.6f, "ruby"));
+        listBasic.add(new GemInfo(new int[]{10, 0, 15, 15, 0, 0}, 1.6f, "rutile"));
+        listBasic.add(new GemInfo(new int[]{30, 0, 30, 0, 0, 0}, 1.25f, "spinel"));
+        listBasic.add(new GemInfo(new int[]{0, 0, 40, 10, 0, 0}, 1.25f, "topaz"));
+        listBasic.add(new GemInfo(new int[]{20, 10, 15, 0, 0, 0}, 0.95f, "tourmaline"));
 
         //tier 2
+        list.add(new GemInfo(new int[]{0, 10, 35, 0, 5, 0}, 1f, "agate"));
+        list.add(new GemInfo(new int[]{0, 10, 35, 0, 0, 5}, 0.75f, "aquamarine"));
+        list.add(new GemInfo(new int[]{10, 0, 10, 30, 0, 0}, 1.25f, "bismuth"));
+        list.add(new GemInfo(new int[]{15, 0, 25, 0, 0, 10}, 1.25f, "bixbite"));
+        list.add(new GemInfo(new int[]{0, 10, 50, 10, 0, 0}, 0.95f, "emerald"));
+        list.add(new GemInfo(new int[]{10, 14, 46, 10, 0, 0}, 1f, "garnet"));
+        list.add(new GemInfo(new int[]{0, 10, 25, 10, 0, 0}, 1.35f, "jasper"));
+        list.add(new GemInfo(new int[]{0, 0, 35, 0, 0, 15}, 0.65f, "lapis_lazuli"));
+        list.add(new GemInfo(new int[]{0, 0, 25, 0, 15, 0}, -0.3f, "larimar"));
+        list.add(new GemInfo(new int[]{10, 10, 30, 0, 0, 0}, 0.65f, "morganite"));
+        list.add(new GemInfo(new int[]{10, 0, 30, 10, 0, 0}, 0.95f, "nephrite"));
+        list.add(new GemInfo(new int[]{0, 10, 8, 0, 12, 0}, 1.75f, "obsidian"));
+        list.add(new GemInfo(new int[]{0, 0, 19, 18, 3, 0}, 1.4f, "peridot"));
+        list.add(new GemInfo(new int[]{10, 10, 25, 0, 0, 0}, 1.35f, "quartz"));
+        list.add(new GemInfo(new int[]{10, 0, 16, 4, 0, 0}, 1.6f, "ruby"));
+        list.add(new GemInfo(new int[]{10, 0, 15, 15, 0, 0}, 1.6f, "rutile"));
+        list.add(new GemInfo(new int[]{0, 10, 42, 8, 0, 0}, 0.35f, "sapphire"));
+        list.add(new GemInfo(new int[]{30, 0, 30, 0, 0, 0}, 1.25f, "spinel"));
+        list.add(new GemInfo(new int[]{14, 0, 16, 0, 0, 10}, 0.65f, "spodumene"));
+        list.add(new GemInfo(new int[]{0, 0, 40, 10, 0, 0}, 1.25f, "topaz"));
+        list.add(new GemInfo(new int[]{20, 10, 15, 0, 0, 0}, 0.95f, "tourmaline"));
+        list.add(new GemInfo(new int[]{0, 30, 40, 0, 0, 0}, 0.75f, "zircon"));
 
-        list.add(new GemInfo(new int[]{10, 5, 5, 5, 5}, 1f, "agate"));
-        list.add(new GemInfo(new int[]{5, 10, 10, 5, 5}, 0.75f, "aquamarine"));
-        list.add(new GemInfo(new int[]{5, 5, 4, 5, 5}, 1.25f, "bismuth"));
-        list.add(new GemInfo(new int[]{2, 5, 4, 5, 5}, 1.25f, "bixbite"));
-        list.add(new GemInfo(new int[]{1, 5, 4, 5, 5}, 0.975f, "emerald"));
-        list.add(new GemInfo(new int[]{4, 5, 4, 5, 5}, 1f, "garnet"));
-        list.add(new GemInfo(new int[]{8, 5, 4, 5, 5}, 1f, "jasper"));
-        list.add(new GemInfo(new int[]{4, 5, 4, 5, 5}, 0.65f, "lapis_lazuli"));
-        list.add(new GemInfo(new int[]{3, 5, 4, 5, 5}, -0.3f, "larimar"));
-        list.add(new GemInfo(new int[]{7, 5, 4, 5, 5}, 0.65f, "morganite"));
-        list.add(new GemInfo(new int[]{9, 5, 4, 5, 5}, 0.975f, "nephrite"));
-        list.add(new GemInfo(new int[]{8, 5, 4, 5, 5}, 1.75f, "obsidian"));
-        list.add(new GemInfo(new int[]{3, 5, 4, 5, 5}, 1.4f, "peridot"));
-        list.add(new GemInfo(new int[]{4, 5, 4, 5, 5}, 1f, "quartz"));
-        list.add(new GemInfo(new int[]{1, 5, 4, 5, 5}, 1.6f, "ruby"));
-        list.add(new GemInfo(new int[]{5, 5, 4, 5, 5}, 1.6f, "rutile"));
-        list.add(new GemInfo(new int[]{7, 5, 4, 5, 5}, 0.35f, "sapphire"));
-        list.add(new GemInfo(new int[]{6, 5, 4, 5, 5}, 1.25f, "spinel"));
-        list.add(new GemInfo(new int[]{4, 5, 4, 5, 5}, 0.65f, "spodumene"));
-        list.add(new GemInfo(new int[]{3, 5, 4, 5, 5}, 1.25f, "topaz"));
-        list.add(new GemInfo(new int[]{7, 5, 4, 5, 5}, 0.975f, "tourmaline"));
-        list.add(new GemInfo(new int[]{9, 5, 4, 5, 5}, 0.75f, "zircon"));
         //0 - organic
         //1 - mystical
         //2 - crystalline

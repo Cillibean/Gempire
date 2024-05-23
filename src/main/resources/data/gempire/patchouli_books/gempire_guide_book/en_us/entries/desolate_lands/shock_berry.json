@@ -8,7 +8,7 @@
       "type": "patchouli:spotlight",
       "title": "Shock Berries",
       "item": "gempire:shock_berry",
-      "text": "Shock berries are a plant found in the gilded wastes biome. They appear to have a shock absorption effect when comsumed. Brewing with them may increase the desired effect."
+      "text": "Shock berries are a plant found in the Gilded Wastes biome. They appear to have a shock absorption effect when consumed.$(br)Brewing with them may increase the desired effect."
     }
   ]
 }

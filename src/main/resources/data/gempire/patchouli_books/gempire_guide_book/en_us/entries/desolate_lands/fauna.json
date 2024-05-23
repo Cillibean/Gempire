@@ -1,0 +1,12 @@
+{
+  "name": "Flora, Fauna and More",
+  "icon": "minecraft:book",
+  "advancement": "gempire:root",
+  "category": "gempire:desolate_lands",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "To be filled out..."
+    }
+  ]
+}

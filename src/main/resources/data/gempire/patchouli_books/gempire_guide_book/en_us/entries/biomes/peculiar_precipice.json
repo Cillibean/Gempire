@@ -1,0 +1,12 @@
+{
+  "name": "Peculiar Precipice",
+  "icon": "minecraft:book",
+  "advancement": "gempire:root",
+  "category": "gempire:biomes",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "To be filled out..."
+    }
+  ]
+}

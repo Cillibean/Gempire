@@ -1,0 +1,12 @@
+{
+  "name": "Paladin's Axe",
+  "icon": "minecraft:book",
+  "advancement": "gempire:root",
+  "category": "gempire:weaponry",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "To be filled out..."
+    }
+  ]
+}
