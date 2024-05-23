@@ -2,6 +2,7 @@ package com.gempire.datagen;
 
 import com.gempire.Gempire;
 import com.gempire.init.ModBlocks;
+import com.gempire.init.ModItems;
 import com.gempire.init.ModTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
@@ -176,6 +177,23 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                         ModBlocks.ELECTRUM_ORE.get(),
                         ModBlocks.THULITE_ORE.get(),
                         ModBlocks.PLATINUM_ORE.get());
+
+        this.tag(BlockTags.FLOWERS)
+                .add(ModBlocks.ALIEN_FLOWER.get(),
+                        ModBlocks.WHITE_IRIS.get(),
+                        ModBlocks.PINK_THISTLE.get(),
+                        ModBlocks.PANSIE.get(),
+                        ModBlocks.ORCHID.get(),
+                        ModBlocks.NASTURTIUMS.get(),
+                        ModBlocks.HYDRANGEA_BUSH_WHITE.get(),
+                        ModBlocks.HYDRANGEA_BUSH_BLUE.get(),
+                        ModBlocks.HYDRANGEA_BUSH_GREEN.get(),
+                        ModBlocks.HYDRANGEA_BUSH_PINK.get(),
+                        ModBlocks.HYDRANGEA_BUSH_PURPLE.get(),
+                        ModBlocks.CROCOSMIA.get(),
+                        ModBlocks.CHRYSANTHEMUM.get(),
+                        ModBlocks.BLUE_PUFFBALL.get(),
+                        ModBlocks.BLUE_BELLS.get());
 
         this.tag(BlockTags.FENCES)
                 .add(ModBlocks.DISTANT_FENCE.get(),

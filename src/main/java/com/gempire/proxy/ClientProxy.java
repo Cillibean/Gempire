@@ -230,6 +230,8 @@ public class ClientProxy {
                     pPos != null ? BiomeColors.getAverageGrassColor(pLevel, pPos) : GrassColor.getDefaultColor(), ModBlocks.DESOLATE_GRASS.get());
             event.getBlockColors().register((pState, pLevel, pPos, pTintIndex) -> pLevel != null &&
                     pPos != null ? BiomeColors.getAverageFoliageColor(pLevel, pPos) : FoliageColor.getDefaultColor(), ModBlocks.CRYSTAL_LEAVES.get());
+            event.getBlockColors().register((pState, pLevel, pPos, pTintIndex) -> pLevel != null &&
+                    pPos != null ? BiomeColors.getAverageFoliageColor(pLevel, pPos) : FoliageColor.getDefaultColor(), ModBlocks.CLOVERS.get());
         }
 
         @SubscribeEvent
@@ -243,6 +245,11 @@ public class ClientProxy {
                 BlockState state = ((BlockItem)pStack.getItem()).getBlock().defaultBlockState();
                 return event.getBlockColors().getColor(state, null, null, pTintIndex);
             }, ModBlocks.CRYSTAL_LEAVES.get());
+
+            event.getItemColors().register((pStack, pTintIndex) -> {
+                BlockState state = ((BlockItem)pStack.getItem()).getBlock().defaultBlockState();
+                return event.getBlockColors().getColor(state, null, null, pTintIndex);
+            }, ModBlocks.CLOVERS.get());
         }
 
     @SubscribeEvent

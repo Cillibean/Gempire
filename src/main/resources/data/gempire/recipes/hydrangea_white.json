@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "white_dye",
+  "ingredients": [
+    {
+      "item": "gempire:hydrangea_bush_white"
+    }
+  ],
+  "result": {
+    "item": "minecraft:white_dye"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "lime_dye",
+  "ingredients": [
+    {
+      "item": "gempire:hydrangea_bush_green"
+    }
+  ],
+  "result": {
+    "item": "minecraft:lime_dye"
+  }
+}

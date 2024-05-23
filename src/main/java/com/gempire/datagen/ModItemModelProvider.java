@@ -194,6 +194,20 @@ public class ModItemModelProvider extends ItemModelProvider {
         //simpleItem(ModItems.CRYSTAL_SIGN);
         //simpleItem(ModItems.CRYSTAL_HANGING_SIGN);
 
+        saplingItem(ModBlocks.WHITE_IRIS);
+        saplingItem(ModBlocks.PINK_THISTLE);
+        saplingItem(ModBlocks.PANSIE);
+        saplingItem(ModBlocks.ORCHID);
+        saplingItem(ModBlocks.NASTURTIUMS);
+        saplingItem(ModBlocks.HYDRANGEA_BUSH_WHITE);
+        saplingItem(ModBlocks.HYDRANGEA_BUSH_PINK);
+        saplingItem(ModBlocks.HYDRANGEA_BUSH_BLUE);
+        saplingItem(ModBlocks.HYDRANGEA_BUSH_GREEN);
+        saplingItem(ModBlocks.HYDRANGEA_BUSH_PURPLE);
+        saplingItem(ModBlocks.CHRYSANTHEMUM);
+        saplingItem(ModBlocks.BLUE_BELLS);
+        saplingItem(ModBlocks.BLUE_PUFFBALL);
+
         withExistingParent(ModItems.FUSCHIA_PALADIN_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(ModItems.COBALT_GUARDIAN_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(ModItems.AMBER_HUNTRESS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));

@@ -9,6 +9,7 @@ import com.gempire.worldgen.tree.ShadedTreeGrower;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
@@ -191,6 +192,51 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> ALIEN_FLOWER = BLOCKS.register("alien_flower", () ->
             new FlowerBlock(ModEffects.FLORAL_PROTECTION, 100, BlockBehaviour.Properties.copy(Blocks.POPPY)));
+
+    public static final RegistryObject<Block> WHITE_IRIS = BLOCKS.register("white_iris", () ->
+            new FlowerBlock(MobEffects.DARKNESS, 100, BlockBehaviour.Properties.copy(Blocks.POPPY)));
+
+    public static final RegistryObject<Block> PINK_THISTLE = BLOCKS.register("pink_thistle", () ->
+            new FlowerBlock(MobEffects.HUNGER, 100, BlockBehaviour.Properties.copy(Blocks.POPPY)));
+
+    public static final RegistryObject<Block> PANSIE = BLOCKS.register("pansie", () ->
+            new FlowerBlock(MobEffects.WEAKNESS, 100, BlockBehaviour.Properties.copy(Blocks.POPPY)));
+
+    public static final RegistryObject<Block> ORCHID = BLOCKS.register("orchid", () ->
+            new FlowerBlock(MobEffects.ABSORPTION, 80, BlockBehaviour.Properties.copy(Blocks.POPPY)));
+
+    public static final RegistryObject<Block> NASTURTIUMS = BLOCKS.register("nasturtiums", () ->
+            new FlowerBlock(MobEffects.DIG_SLOWDOWN, 100, BlockBehaviour.Properties.copy(Blocks.POPPY)));
+
+    public static final RegistryObject<Block> HYDRANGEA_BUSH_WHITE = BLOCKS.register("hydrangea_bush_white", () ->
+            new FlowerBlock(MobEffects.REGENERATION, 60, BlockBehaviour.Properties.copy(Blocks.POPPY)));
+
+    public static final RegistryObject<Block> HYDRANGEA_BUSH_PINK = BLOCKS.register("hydrangea_bush_pink", () ->
+            new FlowerBlock(MobEffects.REGENERATION, 60, BlockBehaviour.Properties.copy(Blocks.POPPY)));
+
+    public static final RegistryObject<Block> HYDRANGEA_BUSH_PURPLE = BLOCKS.register("hydrangea_bush_purple", () ->
+            new FlowerBlock(MobEffects.REGENERATION, 60, BlockBehaviour.Properties.copy(Blocks.POPPY)));
+
+    public static final RegistryObject<Block> HYDRANGEA_BUSH_GREEN = BLOCKS.register("hydrangea_bush_green", () ->
+            new FlowerBlock(MobEffects.REGENERATION, 60, BlockBehaviour.Properties.copy(Blocks.POPPY)));
+
+    public static final RegistryObject<Block> HYDRANGEA_BUSH_BLUE = BLOCKS.register("hydrangea_bush_blue", () ->
+            new FlowerBlock(MobEffects.REGENERATION, 60, BlockBehaviour.Properties.copy(Blocks.POPPY)));
+
+    public static final RegistryObject<Block> CROCOSMIA = BLOCKS.register("crocosmia", () ->
+            new TallFlowerBlock(BlockBehaviour.Properties.copy(Blocks.LILAC)));
+
+    public static final RegistryObject<Block> CHRYSANTHEMUM = BLOCKS.register("chrysanthemum", () ->
+            new FlowerBlock(ModEffects.PARALYSIS, 100, BlockBehaviour.Properties.copy(Blocks.POPPY)));
+
+    public static final RegistryObject<Block> BLUE_PUFFBALL = BLOCKS.register("blue_puffball", () ->
+            new FlowerBlock(MobEffects.INVISIBILITY, 100, BlockBehaviour.Properties.copy(Blocks.POPPY)));
+
+    public static final RegistryObject<Block> BLUE_BELLS = BLOCKS.register("blue_bells", () ->
+            new FlowerBlock(ModEffects.DREAD, 100, BlockBehaviour.Properties.copy(Blocks.POPPY)));
+
+    public static final RegistryObject<Block> CLOVERS = BLOCKS.register("clovers", () ->
+            new CloverBlock(BlockBehaviour.Properties.copy(Blocks.PINK_PETALS)));
 
     /*public static final RegistryObject<Block> CRYSTAL_CHEST = BLOCKS.register("crystal_chest", () ->
             new CrystalChestBlock(BlockBehaviour.Properties

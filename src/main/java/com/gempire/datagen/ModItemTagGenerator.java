@@ -34,6 +34,23 @@ public class ModItemTagGenerator extends ItemTagsProvider {
                         ModItems.PRISMATIC_INGOT.get()
                 );
 
+        this.tag(ItemTags.FLOWERS)
+                .add(ModItems.ALIEN_FLOWER.get(),
+                        ModItems.WHITE_IRIS.get(),
+                        ModItems.PINK_THISTLE.get(),
+                        ModItems.PANSIE.get(),
+                        ModItems.ORCHID.get(),
+                        ModItems.NASTURTIUMS.get(),
+                        ModItems.HYDRANGEA_BUSH_WHITE.get(),
+                        ModItems.HYDRANGEA_BUSH_BLUE.get(),
+                        ModItems.HYDRANGEA_BUSH_GREEN.get(),
+                        ModItems.HYDRANGEA_BUSH_PINK.get(),
+                        ModItems.HYDRANGEA_BUSH_PURPLE.get(),
+                        ModItems.CROCOSMIA.get(),
+                        ModItems.CHRYSANTHEMUM.get(),
+                        ModItems.BLUE_PUFFBALL.get(),
+                        ModItems.BLUE_BELLS.get());
+
         this.tag(ItemTags.AXES)
                 .add(ModItems.PRISMATIC_AXE.get(),
                         ModItems.PALADIN_AXE.get());
