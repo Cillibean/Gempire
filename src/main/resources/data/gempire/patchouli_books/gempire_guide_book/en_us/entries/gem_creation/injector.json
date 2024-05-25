@@ -1,0 +1,53 @@
+{
+  "name": "Injecting",
+  "icon": "gempire:tank_block",
+  "advancement": "gempire:root",
+  "category": "gempire:gem_creation_category",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "In order to Inject, first you must obtain a Drill, and a Power Crystal. View the two pages related to those items for that information. Afterwards, you must craft an Injector Core and Injector Remote."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "gempire:tank",
+      "recipe2": "gempire:injector_remote",
+      "text": "Recipes"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Injector Multiblock",
+      "text": "Now, place down your Drill, then the Injector Core, then your Power Crystal on top of each other in that order. Now you can open the Injector GUI. In order to create gems you need Essence and Chroma."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "link_recipe ": false,
+      "item": "gempire:special_chroma",
+      "text": "After opening the GUI, place the Chroma you'd like to use in the center. The Chroma determines the gem's color if it has multiple variants. Prismatic Chroma gives a random color or an exclusive color variant."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "link_recipe ": false,
+      "item": "gempire:white_essence_bucket",
+      "text": "After placing your chroma, you can now place your essences. White at the top, yellow on the left, blue on the right, pink on the bottom. Each gem requires a specific combination, but using all four essences will give any gem."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "link_recipe ": false,
+      "item": "gempire:injector_panel",
+      "text": "Afterwards, interact with your Injector using your Injector Remote. Right click in the air to change what tank you'd like open to inject with, then right click on the Injector to open or close that tank. You can shift click the Injector to see what tanks are open."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Injecting",
+      "text": "And last but not least, in order to inject, put a button or hand pedestal on the back of the Injector Core block, and it will inject after you right click the button or hand pedestal. This will make the injector place a Geode (gem seed) into the earth, slowly draining nearby blocks to form a gem."
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "gempire:textures/gui/patchouli/entries/injecting.png"
+      ],
+      "border": true
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "name": "Gems and Dimensions",
+  "icon": "minecraft:book",
+  "advancement": "gempire:root",
+  "category": "gempire:gem_creation_category",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Every gem variant can be found in the Overworld, but some gems show up in specific dimensions as well. Here's a list of Nether gems and End gems."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Nether Gems$() $(br)$(li)Ruby$(li)Quartz$(li)Jasper$(li)Agate$(li)Obsidian$(li)Garnet"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)End Gems$() $(br)$(li)Peridot$(li)Emerald$(li)Zircon$(li)Sapphire$(li)Morganite$(li)Spinel"
+    }
+  ]
+}
