@@ -42,7 +42,9 @@
       "minecraft:patch_tall_grass_2",
       "minecraft:patch_grass_plain",
       "gempire:alien_flower",
-      "gempire:thulite_cluster"
+      "gempire:pink_thistle",
+      "gempire:thulite_cluster",
+      "gempire:desolate_cherry"
     ]
   ]
 }

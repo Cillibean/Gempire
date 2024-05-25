@@ -7,8 +7,8 @@
     {   "from": [ 0, 0, 0.1 ],
       "to": [ 16, 16, 0.1 ],
       "faces": {
-        "north": { "uv": [ 16, 0, 0, 16 ], "texture": "#clover" },
-        "south": { "uv": [ 0, 0, 16, 16 ], "texture": "#clover" }
+        "north": { "uv": [ 16, 0, 0, 16 ], "texture": "#clover", "tintindex": 0 },
+        "south": { "uv": [ 0, 0, 16, 16 ], "texture": "#clover", "tintindex": 0 }
       }
     }
   ]

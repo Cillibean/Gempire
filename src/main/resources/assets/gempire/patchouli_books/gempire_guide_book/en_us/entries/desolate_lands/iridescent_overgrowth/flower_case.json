@@ -2,7 +2,7 @@
   "name": "Tale As Old As Time",
   "icon": "gempire:paladin_flower",
   "advancement": "gempire:root",
-  "category": "gempire:iridescent_overgrowth",
+  "category": "gempire:iridescent_plains",
   "pages": [
     {
       "type": "patchouli:spotlight",

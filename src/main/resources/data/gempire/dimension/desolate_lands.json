@@ -7,7 +7,7 @@
       "type": "minecraft:multi_noise",
       "biomes": [
         {
-          "biome": "gempire:iridescent_overgrowth",
+          "biome": "gempire:iridescent_plains",
           "parameters": {
             "temperature": 0,
             "humidity": 0.5,

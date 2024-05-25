@@ -50,7 +50,18 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockWithItem(ModBlocks.STRAWBERRY_BLOCK);
 
         blockWithItem(ModBlocks.PEGMATITE);
+        stairsBlock((StairBlock) ModBlocks.PEGMATITE_STAIRS.get(), blockTexture(ModBlocks.PEGMATITE.get()));
+        slabBlock((SlabBlock) ModBlocks.PEGMATITE_SLAB.get(), blockTexture(ModBlocks.PEGMATITE.get()), blockTexture(ModBlocks.PEGMATITE.get()));
+        wallBlock((WallBlock) ModBlocks.PEGMATITE_WALL.get(), blockTexture(ModBlocks.PEGMATITE.get()));
+        blockItem(ModBlocks.PEGMATITE_STAIRS);
+        blockItem(ModBlocks.PEGMATITE_SLAB);
+
         //blockWithItem(ModBlocks.COBBLED_PEGMATITE);
+        //stairsBlock((StairBlock) ModBlocks.COBBLED_PEGMATITE_STAIRS.get(), blockTexture(ModBlocks.COBBLED_PEGMATITE.get()));
+        //slabBlock((SlabBlock) ModBlocks.COBBLED_PEGMATITE_SLAB.get(), blockTexture(ModBlocks.COBBLED_PEGMATITE.get()), blockTexture(ModBlocks.COBBLED_PEGMATITE.get()));
+        //wallBlock((WallBlock) ModBlocks.COBBLED_PEGMATITE_WALL.get(), blockTexture(ModBlocks.COBBLED_PEGMATITE.get()));
+        //blockItem(ModBlocks.COBBLED_PEGMATITE_STAIRS);
+        //blockItem(ModBlocks.COBBLED_PEGMATITE_SLAB);
 
         blockWithItem(ModBlocks.DISTANT_PLANKS);
         blockWithItem(ModBlocks.KALEIDOSCOPE_PLANKS);
@@ -195,6 +206,24 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockItem(ModBlocks.STRIPPED_CRYSTAL_LOG);
         blockItem(ModBlocks.STRIPPED_CRYSTAL_WOOD);
 
+        blockItem(ModBlocks.GALAXY_WARP);
+        blockItem(ModBlocks.WARP_PAD);
+
+        blockItem(ModBlocks.PRIMED_SELENITE);
+
+        //blockWithItem(ModBlocks.SELENITE);
+        //stairsBlock((StairBlock) ModBlocks.PEGMATITE_STAIRS.get(), blockTexture(ModBlocks.PEGMATITE.get()));
+        //slabBlock((SlabBlock) ModBlocks.PEGMATITE_SLAB.get(), blockTexture(ModBlocks.PEGMATITE.get()), blockTexture(ModBlocks.PEGMATITE.get()));
+        //wallBlock((WallBlock) ModBlocks.SELENITE_WALL.get(), blockTexture(ModBlocks.SELENITE.get()));
+        //blockItem(ModBlocks.SELENITE_STAIRS);
+        //blockItem(ModBlocks.SELENITE_SLAB);
+
+        blockWithItem(ModBlocks.POLISHED_SELENITE);
+        stairsBlock((StairBlock) ModBlocks.POLISHED_SELENITE_STAIRS.get(), blockTexture(ModBlocks.POLISHED_SELENITE.get()));
+        slabBlock((SlabBlock) ModBlocks.POLISHED_SELENITE_SLAB.get(), blockTexture(ModBlocks.POLISHED_SELENITE.get()), blockTexture(ModBlocks.POLISHED_SELENITE.get()));
+        wallBlock((WallBlock) ModBlocks.POLISHED_SELENITE_WALL.get(), blockTexture(ModBlocks.POLISHED_SELENITE.get()));
+        blockItem(ModBlocks.POLISHED_SELENITE_STAIRS);
+        blockItem(ModBlocks.POLISHED_SELENITE_SLAB);
 
         paneBlock(ModBlocks.RED_LATTICE, new ResourceLocation(Gempire.MODID, "block/lattice_red"), new ResourceLocation(Gempire.MODID, "block/lattice_red"));
         paneBlock(ModBlocks.ORANGE_LATTICE, new ResourceLocation(Gempire.MODID, "block/lattice_orange"), new ResourceLocation(Gempire.MODID, "block/lattice_orange"));

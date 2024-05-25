@@ -35,7 +35,10 @@
     [
       "minecraft:patch_tall_grass_2",
       "minecraft:patch_grass_plain",
-      "gempire:shock_berry"
+      "gempire:shock_berry",
+      "gempire:crocosmia",
+      "gempire:nasturtiums",
+      "gempire:pansie"
     ]
   ]
 }

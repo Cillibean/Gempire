@@ -11,6 +11,14 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.control.FlyingMoveControl;
+import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
+import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
+import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomFlyingGoal;
+import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
+import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.animal.Wolf;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
@@ -44,19 +52,33 @@ public class EntityCobaltGuardian extends Monster implements GeoAnimatable {
     public EntityCobaltGuardian(EntityType<? extends EntityCobaltGuardian> p_33002_, Level p_33003_) {
         super(p_33002_, p_33003_);
         auraCryCooldown = 0;
+        this.moveControl = new FlyingMoveControl(this, 10, false);
+    }
+
+    protected PathNavigation createNavigation(Level p_186262_) {
+        FlyingPathNavigation flyingpathnavigation = new FlyingPathNavigation(this, p_186262_);
+        flyingpathnavigation.setCanOpenDoors(false);
+        flyingpathnavigation.setCanFloat(true);
+        flyingpathnavigation.setCanPassDoors(true);
+        return flyingpathnavigation;
     }
 
     public static AttributeSupplier.Builder registerAttributes() {
         return Monster.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 550.0D)
                 .add(Attributes.MOVEMENT_SPEED, 1.0D)
+                .add(Attributes.FLYING_SPEED, 1.0D)
                 .add(Attributes.ATTACK_DAMAGE, 10.0D)
                 .add(Attributes.ATTACK_SPEED, 1.0D);
     }
 
     @Override
     protected void registerGoals() {
-        super.registerGoals();
+        this.goalSelector.addGoal(5, new WaterAvoidingRandomFlyingGoal(this, 1.0));
+        this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 8.0F));
+        this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));
+        this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
+        //this.targetSelector.addGoal(2, new NearestAttackableTargetGoal(this, LivingEntity.class, 0, false, false, (entity) -> canAttack((LivingEntity) entity)));
     }
 
     @Override

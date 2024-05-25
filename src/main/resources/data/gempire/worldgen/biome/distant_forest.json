@@ -31,7 +31,13 @@
     [],
     [
       "minecraft:patch_tall_grass_2",
-      "minecraft:patch_grass_plain"
+      "minecraft:patch_grass_plain",
+      "gempire:hydrangea_bush_white",
+      "gempire:hydrangea_bush_blue",
+      "gempire:hydrangea_bush_purple",
+      "gempire:hydrangea_bush_pink",
+      "gempire:hydrangea_bush_green",
+      "gempire:blue_bells"
     ]
   ]
 }
