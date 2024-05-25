@@ -38,6 +38,18 @@ public class ModTE {
     public static final RegistryObject<BlockEntityType<IncubatorTE>> INCUBATOR_TE = TILE_ENTITIES.register(
             "incubator_te", () -> BlockEntityType.Builder.of(IncubatorTE::new, ModBlocks.INCUBATOR_BLOCK.get()).build(null));
 
+    public static final RegistryObject<BlockEntityType<PinkAltarTE>> PINK_ALTAR_TE = TILE_ENTITIES.register(
+            "pink_altar_te", () -> BlockEntityType.Builder.of(PinkAltarTE::new, ModBlocks.PINK_ALTAR.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<BlueAltarTE>> BLUE_ALTAR_TE = TILE_ENTITIES.register(
+            "blue_altar_te", () -> BlockEntityType.Builder.of(BlueAltarTE::new, ModBlocks.BLUE_ALTAR.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<YellowAltarTE>> YELLOW_ALTAR_TE = TILE_ENTITIES.register(
+            "yellow_altar_te", () -> BlockEntityType.Builder.of(YellowAltarTE::new, ModBlocks.YELLOW_ALTAR.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<WhiteAltarTE>> WHITE_ALTAR_TE = TILE_ENTITIES.register(
+            "white_altar_te", () -> BlockEntityType.Builder.of(WhiteAltarTE::new, ModBlocks.WHITE_ALTAR.get()).build(null));
+
     public static final RegistryObject<BlockEntityType<PedistalTE>> PEDISTAL_TE = TILE_ENTITIES.register(
             "pedistal_te", () -> BlockEntityType.Builder.of(PedistalTE::new, ModBlocks.PEDISTAL.get()).build(null));
 

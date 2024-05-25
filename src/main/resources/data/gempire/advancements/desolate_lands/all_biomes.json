@@ -80,7 +80,7 @@
       },
       "trigger": "minecraft:location"
     },
-    "gempire:iridescent_overgrowth": {
+    "gempire:iridescent_plains": {
       "conditions": {
         "player": [
           {
@@ -88,7 +88,7 @@
             "entity": "this",
             "predicate": {
               "location": {
-                "biome": "gempire:iridescent_overgrowth"
+                "biome": "gempire:iridescent_plains"
               }
             }
           }
@@ -188,7 +188,7 @@
       "gempire:gilded_wastes"
     ],
     [
-      "gempire:iridescent_overgrowth"
+      "gempire:iridescent_plains"
     ],
     [
       "gempire:mirrored_seas"

@@ -13,7 +13,6 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraftforge.registries.RegistryObject;
@@ -40,16 +39,16 @@ public class ModBlocks {
             )
     );
     public static final RegistryObject<Block> BLUE_ALTAR = BLOCKS.register("blue_altar", () ->
-            new BlueAltarBlock(BlockBehaviour.Properties.of().pushReaction(PushReaction.BLOCK)));
+            new BlueAltarBlock(BlockBehaviour.Properties.copy(Blocks.END_PORTAL_FRAME).noOcclusion()));
 
     public static final RegistryObject<Block> YELLOW_ALTAR = BLOCKS.register("yellow_altar", () ->
-            new YellowAltarBlock(BlockBehaviour.Properties.of().pushReaction(PushReaction.BLOCK)));
+            new YellowAltarBlock(BlockBehaviour.Properties.copy(Blocks.END_PORTAL_FRAME).noOcclusion()));
 
     public static final RegistryObject<Block> PINK_ALTAR = BLOCKS.register("pink_altar", () ->
-            new PinkAltarBlock(BlockBehaviour.Properties.of().pushReaction(PushReaction.BLOCK)));
+            new PinkAltarBlock(BlockBehaviour.Properties.copy(Blocks.END_PORTAL_FRAME).noOcclusion()));
 
     public static final RegistryObject<Block> WHITE_ALTAR = BLOCKS.register("white_altar", () ->
-            new WhiteAltarBlock(BlockBehaviour.Properties.of().pushReaction(PushReaction.BLOCK)));
+            new WhiteAltarBlock(BlockBehaviour.Properties.copy(Blocks.END_PORTAL_FRAME).noOcclusion()));
 /*
     public static final RegistryObject<Block> PRISMATIC_BLUE_ALTAR = BLOCKS.register("prismatic_blue_altar", () ->
             new PrismBlueAltarBlock(BlockBehaviour.Properties.of().pushReaction(PushReaction.BLOCK)));
@@ -187,8 +186,57 @@ public class ModBlocks {
     public static final RegistryObject<Block> PEGMATITE = BLOCKS.register("pegmatite", () ->
             new Block(BlockBehaviour.Properties.copy(Blocks.STONE)));
 
+    public static final RegistryObject<Block> PEGMATITE_SLAB = BLOCKS.register("pegmatite_slab", () ->
+            new SlabBlock(BlockBehaviour.Properties.copy(Blocks.STONE_SLAB)));
+
+    public static final RegistryObject<Block> PEGMATITE_STAIRS = BLOCKS.register("pegmatite_stairs", () ->
+            new StairBlock(() -> ModBlocks.PEGMATITE.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.STONE_STAIRS)));
+
+    public static final RegistryObject<Block> PEGMATITE_WALL = BLOCKS.register("pegmatite_wall", () ->
+            new WallBlock(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE_WALL))
+    );
+
     public static final RegistryObject<Block> COBBLED_PEGMATITE = BLOCKS.register("cobbled_pegmatite", () ->
             new Block(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE)));
+
+    public static final RegistryObject<Block> COBBLED_PEGMATITE_SLAB = BLOCKS.register("cobbled_pegmatite_slab", () ->
+            new SlabBlock(BlockBehaviour.Properties.copy(Blocks.STONE_SLAB)));
+
+    public static final RegistryObject<Block> COBBLED_PEGMATITE_STAIRS = BLOCKS.register("cobbled_pegmatite_stairs", () ->
+            new StairBlock(() -> ModBlocks.COBBLED_PEGMATITE.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.STONE_STAIRS)));
+
+    public static final RegistryObject<Block> COBBLED_PEGMATITE_WALL = BLOCKS.register("cobbled_pegmatite_wall", () ->
+            new WallBlock(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE_WALL))
+    );
+
+    public static final RegistryObject<Block> SELENITE = BLOCKS.register("selenite", () ->
+            new Block(BlockBehaviour.Properties.copy(Blocks.QUARTZ_BLOCK)));
+
+    public static final RegistryObject<Block> SELENITE_SLAB = BLOCKS.register("selenite_slab", () ->
+            new SlabBlock(BlockBehaviour.Properties.copy(Blocks.STONE_SLAB)));
+
+    public static final RegistryObject<Block> SELENITE_STAIRS = BLOCKS.register("selenite_stairs", () ->
+            new StairBlock(() -> ModBlocks.SELENITE.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.STONE_STAIRS)));
+
+    public static final RegistryObject<Block> SELENITE_WALL = BLOCKS.register("selenite_wall", () ->
+            new WallBlock(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE_WALL))
+    );
+
+    public static final RegistryObject<Block> POLISHED_SELENITE = BLOCKS.register("polished_selenite", () ->
+            new Block(BlockBehaviour.Properties.copy(Blocks.SMOOTH_QUARTZ)));
+
+    public static final RegistryObject<Block> POLISHED_SELENITE_SLAB = BLOCKS.register("polished_selenite_slab", () ->
+            new SlabBlock(BlockBehaviour.Properties.copy(Blocks.STONE_SLAB)));
+
+    public static final RegistryObject<Block> POLISHED_SELENITE_STAIRS = BLOCKS.register("polished_selenite_stairs", () ->
+            new StairBlock(() -> ModBlocks.POLISHED_SELENITE.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.STONE_STAIRS)));
+
+    public static final RegistryObject<Block> POLISHED_SELENITE_WALL = BLOCKS.register("polished_selenite_wall", () ->
+            new WallBlock(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE_WALL))
+    );
+
+    public static final RegistryObject<Block> PRIMED_SELENITE = BLOCKS.register("primed_selenite", () ->
+            new Block(BlockBehaviour.Properties.copy(Blocks.SMOOTH_QUARTZ)));
 
     public static final RegistryObject<Block> ALIEN_FLOWER = BLOCKS.register("alien_flower", () ->
             new FlowerBlock(ModEffects.FLORAL_PROTECTION, 100, BlockBehaviour.Properties.copy(Blocks.POPPY)));
@@ -2409,12 +2457,7 @@ public class ModBlocks {
 
     );
     public static final RegistryObject<Block> DRAINED_PURPLE_STONE_BRICK_LIGHT_WALL = BLOCKS.register("drained_purple_stone_brick_light_wall", () ->
-            new WallBlock(BlockBehaviour.Properties
-                    .of()
-                    .strength(1.5f, 10f)
-                    .sound(SoundType.STONE)
-                    .requiresCorrectToolForDrops()
-
+            new WallBlock(BlockBehaviour.Properties.of().strength(1.5f, 10f).sound(SoundType.STONE).requiresCorrectToolForDrops()
             )
     );
     public static final RegistryObject<Block> DRAINED_PURPLE_STONE_BRICK_SLAB = BLOCKS.register("drained_purple_stone_brick_slab", () ->

@@ -1,20 +1,29 @@
 package com.gempire.blocks;
 
+import com.gempire.init.ModTE;
+import com.gempire.tileentities.YellowAltarTE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class YellowAltarBlock extends DirectionalBlock {
+import javax.annotation.Nullable;
+
+public class YellowAltarBlock extends DirectionalBlock implements EntityBlock  {
 
     protected static final VoxelShape FACING_NS_FLOOR = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 12.0D, 16.0D);
     protected static final VoxelShape FACING_EW_FLOOR = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 12.0D, 16.0D);
@@ -111,5 +120,21 @@ public class YellowAltarBlock extends DirectionalBlock {
         } else {
             return FACING_EW_FLOOR;
         }
+    }
+
+    @Override
+    public RenderShape getRenderShape(BlockState state) {
+        return RenderShape.ENTITYBLOCK_ANIMATED;
+    }
+
+    @Nullable
+    @Override
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new YellowAltarTE(pos, state);
+    }
+
+    @Nullable
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level p_152180_, BlockState p_152181_, BlockEntityType<T> p_152182_) {
+        return p_152182_ == ModTE.YELLOW_ALTAR_TE.get() ? YellowAltarTE::tick : null;
     }
 }

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "gempire:block/pegmatite_slab"
+    },
+    "type=double": {
+      "model": "gempire:block/pegmatite"
+    },
+    "type=top": {
+      "model": "gempire:block/pegmatite_slab_top"
+    }
+  }
+}

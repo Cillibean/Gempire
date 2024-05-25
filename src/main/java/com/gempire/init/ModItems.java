@@ -22,10 +22,20 @@ public class ModItems {
             )
     );
 
+     */
+
     public static final RegistryObject<Item> WARP_PAD = ITEMS.register("warp_pad", () ->
             new BlockItem(
                     ModBlocks.WARP_PAD.get(),
-                    new Item.Properties().tab(ModItemGroup.BLOCKS)
+                    new Item.Properties()
+            )
+
+    );
+
+    public static final RegistryObject<Item> GALAXY_WARP = ITEMS.register("galaxy_warp", () ->
+            new BlockItem(
+                    ModBlocks.GALAXY_WARP.get(),
+                    new Item.Properties()
             )
 
     );
@@ -287,6 +297,34 @@ public class ModItems {
             )
     );
 
+    public static final RegistryObject<Item> PINK_ALTAR = ITEMS.register("pink_altar.json", () ->
+            new BlockItem(
+                    ModBlocks.PINK_ALTAR.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> BLUE_ALTAR = ITEMS.register("blue_altar", () ->
+            new BlockItem(
+                    ModBlocks.BLUE_ALTAR.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> YELLOW_ALTAR = ITEMS.register("yellow_altar", () ->
+            new BlockItem(
+                    ModBlocks.YELLOW_ALTAR.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> WHITE_ALTAR = ITEMS.register("white_altar", () ->
+            new BlockItem(
+                    ModBlocks.WHITE_ALTAR.get(),
+                    new Item.Properties()
+            )
+    );
+
     public static final RegistryObject<Item> PRISMATIC_SNOW = ITEMS.register("prismatic_snow", () ->
             new BlockItem(
                     ModBlocks.PRISMATIC_SNOW.get(),
@@ -378,9 +416,114 @@ public class ModItems {
             )
     );
 
+    public static final RegistryObject<Item> PEGMATITE_STAIRS = ITEMS.register("pegmatite_stairs", () ->
+            new BlockItem(
+                    ModBlocks.PEGMATITE_STAIRS.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> PEGMATITE_SLAB = ITEMS.register("pegmatite_slab", () ->
+            new BlockItem(
+                    ModBlocks.PEGMATITE_SLAB.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> PEGMATITE_WALL = ITEMS.register("pegmatite_wall", () ->
+            new BlockItem(
+                    ModBlocks.PEGMATITE_WALL.get(),
+                    new Item.Properties()
+            )
+    );
+
     public static final RegistryObject<Item> COBBLED_PEGMATITE = ITEMS.register("cobbled_pegmatite", () ->
             new BlockItem(
                     ModBlocks.COBBLED_PEGMATITE.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> COBBLED_PEGMATITE_STAIRS = ITEMS.register("cobbled_pegmatite_stairs", () ->
+            new BlockItem(
+                    ModBlocks.COBBLED_PEGMATITE_STAIRS.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> COBBLED_PEGMATITE_SLAB = ITEMS.register("cobbled_pegmatite_slab", () ->
+            new BlockItem(
+                    ModBlocks.COBBLED_PEGMATITE_SLAB.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> COBBLED_PEGMATITE_WALL = ITEMS.register("cobbled_pegmatite_wall", () ->
+            new BlockItem(
+                    ModBlocks.COBBLED_PEGMATITE_WALL.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> SELENITE = ITEMS.register("selenite", () ->
+            new BlockItem(
+                    ModBlocks.SELENITE.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> SELENITE_STAIRS = ITEMS.register("selenite_stairs", () ->
+            new BlockItem(
+                    ModBlocks.SELENITE_STAIRS.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> SELENITE_SLAB = ITEMS.register("selenite_slab", () ->
+            new BlockItem(
+                    ModBlocks.SELENITE_SLAB.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> SELENITE_WALL = ITEMS.register("selenite_wall", () ->
+            new BlockItem(
+                    ModBlocks.SELENITE_WALL.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> POLISHED_SELENITE = ITEMS.register("polished_selenite", () ->
+            new BlockItem(
+                    ModBlocks.POLISHED_SELENITE.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> POLISHED_SELENITE_STAIRS = ITEMS.register("polished_selenite_stairs", () ->
+            new BlockItem(
+                    ModBlocks.POLISHED_SELENITE_STAIRS.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> POLISHED_SELENITE_SLAB = ITEMS.register("polished_selenite_slab", () ->
+            new BlockItem(
+                    ModBlocks.POLISHED_SELENITE_SLAB.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> POLISHED_SELENITE_WALL = ITEMS.register("polished_selenite_wall", () ->
+            new BlockItem(
+                    ModBlocks.POLISHED_SELENITE_WALL.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> PRIMED_SELENITE = ITEMS.register("primed_selenite", () ->
+            new BlockItem(
+                    ModBlocks.PRIMED_SELENITE.get(),
                     new Item.Properties()
             )
     );

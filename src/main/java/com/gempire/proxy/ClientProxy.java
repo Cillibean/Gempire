@@ -2,6 +2,11 @@ package com.gempire.proxy;
 
 import com.gempire.Gempire;
 import com.gempire.aura.AuraOverlay;
+import com.gempire.client.block.model.WhiteAltarModel;
+import com.gempire.client.block.render.BlueAltarRenderer;
+import com.gempire.client.block.render.PinkAltarRenderer;
+import com.gempire.client.block.render.WhiteAltarRenderer;
+import com.gempire.client.block.render.YellowAltarRenderer;
 import com.gempire.client.entity.model.*;
 import com.gempire.client.entity.render.*;
 import com.gempire.client.screen.*;
@@ -10,8 +15,12 @@ import com.gempire.client.screen.warppad.WarpSelectionScreen;
 import com.gempire.client.ter.ShellTER;
 import com.gempire.fluids.ModFluidTypes;
 import com.gempire.init.*;
+import com.gempire.tileentities.BlueAltarTE;
+import com.gempire.tileentities.WhiteAltarTE;
+import com.gempire.tileentities.YellowAltarTE;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.Sheets;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.blockentity.HangingSignRenderer;
 import net.minecraft.client.renderer.blockentity.SignRenderer;
 import net.minecraft.world.item.BlockItem;
@@ -55,6 +64,12 @@ public class ClientProxy {
     public static class ClientModBusEvents {
     @SubscribeEvent
     public static void onClientSetup(EntityRenderersEvent.RegisterRenderers event) {
+
+        event.registerBlockEntityRenderer(ModTE.PINK_ALTAR_TE.get(), PinkAltarRenderer::new);
+        event.registerBlockEntityRenderer(ModTE.BLUE_ALTAR_TE.get(), BlueAltarRenderer::new);
+        event.registerBlockEntityRenderer(ModTE.YELLOW_ALTAR_TE.get(), YellowAltarRenderer::new);
+        event.registerBlockEntityRenderer(ModTE.WHITE_ALTAR_TE.get(), WhiteAltarRenderer::new);
+
         //RenderingRegistry.registerEntityRenderingHandler(ModEntities.TEST.get(), RenderTestEntity::new);
         event.registerEntityRenderer(ModEntities.HUNTER.get(), m -> new RenderHunter(m, new ModelHunter<>(m.bakeLayer(ModelHunter.LAYER_LOCATION))));
         event.registerEntityRenderer(ModEntities.CRAWLER.get(), RenderCrawler::new);

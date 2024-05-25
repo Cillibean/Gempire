@@ -639,8 +639,24 @@ public class ModCreativeModeTabs {
                 populator.accept(ModBlocks.GEODE_CRYSTAL_BLOCK.get());
 
                 populator.accept(ModBlocks.PEGMATITE.get());
+                populator.accept(ModBlocks.PEGMATITE_STAIRS.get());
+                populator.accept(ModBlocks.PEGMATITE_SLAB.get());
+                populator.accept(ModBlocks.PEGMATITE_WALL.get());
                 populator.accept(ModBlocks.COBBLED_PEGMATITE.get());
+                populator.accept(ModBlocks.COBBLED_PEGMATITE_STAIRS.get());
+                populator.accept(ModBlocks.COBBLED_PEGMATITE_SLAB.get());
+                populator.accept(ModBlocks.COBBLED_PEGMATITE_WALL.get());
                 populator.accept(ModItems.SCHIST.get());
+
+                populator.accept(ModBlocks.SELENITE.get());
+                populator.accept(ModBlocks.SELENITE_STAIRS.get());
+                populator.accept(ModBlocks.SELENITE_SLAB.get());
+                populator.accept(ModBlocks.SELENITE_WALL.get());
+                populator.accept(ModBlocks.POLISHED_SELENITE.get());
+                populator.accept(ModBlocks.POLISHED_SELENITE_STAIRS.get());
+                populator.accept(ModBlocks.POLISHED_SELENITE_SLAB.get());
+                populator.accept(ModBlocks.POLISHED_SELENITE_WALL.get());
+                populator.accept(ModBlocks.PRIMED_SELENITE.get());
 
                 populator.accept(ModItems.ABNORMAL_SAND.get());
                 populator.accept(ModItems.ABNORMAL_SANDSTONE.get());
@@ -793,6 +809,12 @@ public class ModCreativeModeTabs {
                 populator.accept(ModBlocks.BLUE_PUFFBALL.get());
                 populator.accept(ModBlocks.CROCOSMIA.get());
                 populator.accept(ModBlocks.CLOVERS.get());
+
+                populator.accept(ModBlocks.WARP_PAD.get());
+                populator.accept(ModBlocks.PINK_ALTAR.get());
+                populator.accept(ModBlocks.BLUE_ALTAR.get());
+                populator.accept(ModBlocks.YELLOW_ALTAR.get());
+                populator.accept(ModBlocks.WHITE_ALTAR.get());
             }).build()
     );
     public static final RegistryObject<CreativeModeTab> GEMPIRE_TOOLS = CREATIVE_MODE_TABS.register("gempire_tools",

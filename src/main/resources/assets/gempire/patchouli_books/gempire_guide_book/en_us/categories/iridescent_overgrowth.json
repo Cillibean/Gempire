@@ -1,7 +1,0 @@
-{
-  "name": "Iridescent Overgrowth",
-  "description": "Information on the Iridescent Overgrowth.",
-  "icon": "gempire:pink_chroma",
-  "secret": "false",
-  "parent": "gempire:desolate_lands"
-}

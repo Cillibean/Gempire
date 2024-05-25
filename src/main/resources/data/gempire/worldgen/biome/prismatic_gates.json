@@ -17,6 +17,12 @@
         "weight": 5,
         "minCount": 1,
         "maxCount": 1
+      },
+      {
+        "type": "gempire:overseer",
+        "weight": 5,
+        "minCount": 1,
+        "maxCount": 1
       }
     ]
   },
@@ -34,7 +40,10 @@
     [],
     [
       "minecraft:patch_tall_grass_2",
-      "minecraft:patch_grass_plain"
+      "minecraft:patch_grass_plain",
+      "gempire:chrysanthemum",
+      "gempire:orchid",
+      "gempire:white_iris"
     ]
   ]
 }

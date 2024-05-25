@@ -190,9 +190,16 @@ public class ModItemModelProvider extends ItemModelProvider {
         saplingItem(ModBlocks.CRYSTAL_SAPLING);
         fenceItem(ModBlocks.CRYSTAL_FENCE, ModBlocks.CRYSTAL_PLANKS);
         simpleItem(ModItems.CRYSTAL_DOOR);
-
         //simpleItem(ModItems.CRYSTAL_SIGN);
         //simpleItem(ModItems.CRYSTAL_HANGING_SIGN);
+
+        wallItem(ModBlocks.PEGMATITE_WALL, ModBlocks.PEGMATITE);
+        //wallItem(ModBlocks.COBBLED_PEGMATITE_WALL, ModBlocks.COBBLED_PEGMATITE);
+        //wallItem(ModBlocks.SELENITE_WALL, ModBlocks.SELENITE);
+        wallItem(ModBlocks.POLISHED_SELENITE_WALL, ModBlocks.POLISHED_SELENITE);
+
+        saplingItem(ModBlocks.THULITE_CLUSTER);
+        saplingItem(ModBlocks.THULITE_TOWER);
 
         saplingItem(ModBlocks.WHITE_IRIS);
         saplingItem(ModBlocks.PINK_THISTLE);
