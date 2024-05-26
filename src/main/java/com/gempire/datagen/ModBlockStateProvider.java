@@ -211,12 +211,12 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         blockItem(ModBlocks.PRIMED_SELENITE);
 
-        //blockWithItem(ModBlocks.SELENITE);
-        //stairsBlock((StairBlock) ModBlocks.PEGMATITE_STAIRS.get(), blockTexture(ModBlocks.PEGMATITE.get()));
-        //slabBlock((SlabBlock) ModBlocks.PEGMATITE_SLAB.get(), blockTexture(ModBlocks.PEGMATITE.get()), blockTexture(ModBlocks.PEGMATITE.get()));
-        //wallBlock((WallBlock) ModBlocks.SELENITE_WALL.get(), blockTexture(ModBlocks.SELENITE.get()));
-        //blockItem(ModBlocks.SELENITE_STAIRS);
-        //blockItem(ModBlocks.SELENITE_SLAB);
+        blockWithItem(ModBlocks.SELENITE);
+        stairsBlock((StairBlock) ModBlocks.SELENITE_STAIRS.get(), blockTexture(ModBlocks.SELENITE.get()));
+        slabBlock((SlabBlock) ModBlocks.SELENITE_SLAB.get(), blockTexture(ModBlocks.SELENITE.get()), blockTexture(ModBlocks.SELENITE.get()));
+        wallBlock((WallBlock) ModBlocks.SELENITE_WALL.get(), blockTexture(ModBlocks.SELENITE.get()));
+        blockItem(ModBlocks.SELENITE_STAIRS);
+        blockItem(ModBlocks.SELENITE_SLAB);
 
         blockWithItem(ModBlocks.POLISHED_SELENITE);
         stairsBlock((StairBlock) ModBlocks.POLISHED_SELENITE_STAIRS.get(), blockTexture(ModBlocks.POLISHED_SELENITE.get()));
@@ -224,6 +224,10 @@ public class ModBlockStateProvider extends BlockStateProvider {
         wallBlock((WallBlock) ModBlocks.POLISHED_SELENITE_WALL.get(), blockTexture(ModBlocks.POLISHED_SELENITE.get()));
         blockItem(ModBlocks.POLISHED_SELENITE_STAIRS);
         blockItem(ModBlocks.POLISHED_SELENITE_SLAB);
+
+        blockWithItem(ModBlocks.ROUGH_SELENITE);
+
+        saplingBlock(ModBlocks.SELENITE_CLUSTER);
 
         paneBlock(ModBlocks.RED_LATTICE, new ResourceLocation(Gempire.MODID, "block/lattice_red"), new ResourceLocation(Gempire.MODID, "block/lattice_red"));
         paneBlock(ModBlocks.ORANGE_LATTICE, new ResourceLocation(Gempire.MODID, "block/lattice_orange"), new ResourceLocation(Gempire.MODID, "block/lattice_orange"));

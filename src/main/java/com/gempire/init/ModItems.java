@@ -465,6 +465,27 @@ public class ModItems {
             )
     );
 
+    public static final RegistryObject<Item> BUDDING_SELENITE = ITEMS.register("budding_selenite", () ->
+            new BlockItem(
+                    ModBlocks.BUDDING_SELENITE.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> ROUGH_SELENITE = ITEMS.register("rough_selenite", () ->
+            new BlockItem(
+                    ModBlocks.ROUGH_SELENITE.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> SELENITE_CLUSTER = ITEMS.register("selenite_cluster", () ->
+            new BlockItem(
+                    ModBlocks.SELENITE_CLUSTER.get(),
+                    new Item.Properties()
+            )
+    );
+
     public static final RegistryObject<Item> SELENITE = ITEMS.register("selenite", () ->
             new BlockItem(
                     ModBlocks.SELENITE.get(),

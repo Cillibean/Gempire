@@ -195,7 +195,7 @@ public class ModItemModelProvider extends ItemModelProvider {
 
         wallItem(ModBlocks.PEGMATITE_WALL, ModBlocks.PEGMATITE);
         //wallItem(ModBlocks.COBBLED_PEGMATITE_WALL, ModBlocks.COBBLED_PEGMATITE);
-        //wallItem(ModBlocks.SELENITE_WALL, ModBlocks.SELENITE);
+        wallItem(ModBlocks.SELENITE_WALL, ModBlocks.SELENITE);
         wallItem(ModBlocks.POLISHED_SELENITE_WALL, ModBlocks.POLISHED_SELENITE);
 
         saplingItem(ModBlocks.THULITE_CLUSTER);

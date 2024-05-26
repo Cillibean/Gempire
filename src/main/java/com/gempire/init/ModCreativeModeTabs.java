@@ -652,6 +652,9 @@ public class ModCreativeModeTabs {
                 populator.accept(ModBlocks.SELENITE_STAIRS.get());
                 populator.accept(ModBlocks.SELENITE_SLAB.get());
                 populator.accept(ModBlocks.SELENITE_WALL.get());
+                populator.accept(ModBlocks.BUDDING_SELENITE.get());
+                populator.accept(ModBlocks.SELENITE_CLUSTER.get());
+                populator.accept(ModBlocks.ROUGH_SELENITE.get());
                 populator.accept(ModBlocks.POLISHED_SELENITE.get());
                 populator.accept(ModBlocks.POLISHED_SELENITE_STAIRS.get());
                 populator.accept(ModBlocks.POLISHED_SELENITE_SLAB.get());

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "gempire:block/selenite_slab"
+    },
+    "type=double": {
+      "model": "gempire:block/selenite"
+    },
+    "type=top": {
+      "model": "gempire:block/selenite_slab_top"
+    }
+  }
+}
