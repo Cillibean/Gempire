@@ -45,7 +45,6 @@ public class PedistalBlock extends FaceAttachedHorizontalDirectionalBlock implem
     public static final DirectionProperty FACING = FaceAttachedHorizontalDirectionalBlock.FACING;
     public static final EnumProperty<AttachFace> FACE = FaceAttachedHorizontalDirectionalBlock.FACE;
     private final boolean sensitive;
-    private UUID owner;
     protected static final VoxelShape FACING_NORTH_FLOOR = Block.box(5.0D, 0.0D, 4.0D, 11.0D, 16.0D, 12.0D);
     protected static final VoxelShape FACING_WEST_FLOOR = Block.box(4.0D, 0.0D, 5.0D, 12.0D, 16.0D, 11.0D);
 

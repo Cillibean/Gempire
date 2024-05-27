@@ -1,0 +1,22 @@
+{
+  "replace": false,
+  "values": [
+    "gempire:pink_phosphorus_lamp",
+    "gempire:red_phosphorus_lamp",
+    "gempire:orange_phosphorus_lamp",
+    "gempire:yellow_phosphorus_lamp",
+    "gempire:lime_phosphorus_lamp",
+    "gempire:green_phosphorus_lamp",
+    "gempire:cyan_phosphorus_lamp",
+    "gempire:light_blue_phosphorus_lamp",
+    "gempire:blue_phosphorus_lamp",
+    "gempire:purple_phosphorus_lamp",
+    "gempire:magenta_phosphorus_lamp",
+    "gempire:white_phosphorus_lamp",
+    "gempire:light_gray_phosphorus_lamp",
+    "gempire:gray_phosphorus_lamp",
+    "gempire:black_phosphorus_lamp",
+    "gempire:brown_phosphorus_lamp",
+    "gempire:phosphorus_lamp"
+  ]
+}

@@ -5,6 +5,7 @@ import com.gempire.blocks.machine.PowerCrystalBlock;
 import com.gempire.blocks.machine.TankBlock;
 import com.gempire.entities.bases.EntityGem;
 import com.gempire.entities.bases.EntityVaryingGem;
+import com.gempire.entities.gems.EntityPeridot;
 import com.gempire.entities.gems.EntityQuartz;
 import com.gempire.entities.gems.EntityTourmaline;
 import com.gempire.entities.gems.EntityZircon;
@@ -392,6 +393,8 @@ public class GemSeedTE extends BlockEntity {
             } else if (gem instanceof EntityTourmaline) {
                 ((EntityTourmaline) gem).setCrops(((EntityTourmaline) gem).generateCrops());
                 ((EntityTourmaline) gem).setBuilding(false);
+            } else if (gem instanceof EntityPeridot) {
+                ((EntityPeridot) gem).generateMaterials();
             }
             //gem.generateScoutList();
             gem.idlePowers = gem.generateIdlePowers();

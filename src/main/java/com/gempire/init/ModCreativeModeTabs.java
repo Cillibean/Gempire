@@ -297,6 +297,7 @@ public class ModCreativeModeTabs {
                 populator.accept(ModItems.RAW_PLATINUM.get());
                 populator.accept(ModItems.PLATINUM_INGOT.get());
                 populator.accept(ModItems.PLATINUM_NUGGET.get());
+                populator.accept(ModItems.SELENITE_CHUNK.get());
 
                 populator.accept(ModItems.GEM_SLUSH_BUCKET.get());
 
@@ -365,6 +366,8 @@ public class ModCreativeModeTabs {
                 populator.accept(ModItems.PINK_CRYSTAL_APPLE.get());
 
                 populator.accept(ModItems.SHOCK_BERRY.get());
+
+                populator.accept(ModItems.WARP_CORE.get());
             }).build()
     );
     public static final RegistryObject<CreativeModeTab> GEMPIRE_BLOCKS = CREATIVE_MODE_TABS.register("gempire_blocks",
@@ -676,6 +679,25 @@ public class ModCreativeModeTabs {
 
                 populator.accept(ModBlocks.ALIEN_FLOWER.get());
 
+                populator.accept(ModBlocks.PHOSPHORUS_LAMP.get());
+
+                populator.accept(ModBlocks.RED_PHOSPHORUS_LAMP.get());
+                populator.accept(ModBlocks.ORANGE_PHOSPHORUS_LAMP.get());
+                populator.accept(ModBlocks.YELLOW_PHOSPHORUS_LAMP.get());
+                populator.accept(ModBlocks.LIME_PHOSPHORUS_LAMP.get());
+                populator.accept(ModBlocks.GREEN_PHOSPHORUS_LAMP.get());
+                populator.accept(ModBlocks.CYAN_PHOSPHORUS_LAMP.get());
+                populator.accept(ModBlocks.LIGHT_BLUE_PHOSPHORUS_LAMP.get());
+                populator.accept(ModBlocks.BLUE_PHOSPHORUS_LAMP.get());
+                populator.accept(ModBlocks.MAGENTA_PHOSPHORUS_LAMP.get());
+                populator.accept(ModBlocks.PURPLE_PHOSPHORUS_LAMP.get());
+                populator.accept(ModBlocks.PINK_PHOSPHORUS_LAMP.get());
+                populator.accept(ModBlocks.WHITE_PHOSPHORUS_LAMP.get());
+                populator.accept(ModBlocks.LIGHT_GRAY_PHOSPHORUS_LAMP.get());
+                populator.accept(ModBlocks.GRAY_PHOSPHORUS_LAMP.get());
+                populator.accept(ModBlocks.BLACK_PHOSPHORUS_LAMP.get());
+                populator.accept(ModBlocks.BROWN_PHOSPHORUS_LAMP.get());
+
                 populator.accept(ModBlocks.RUINED_MARBLE_BLOCK.get());
                 populator.accept(ModBlocks.RUINED_MARBLE_STAIRS.get());
                 populator.accept(ModBlocks.RUINED_MARBLE_SLAB.get());
@@ -814,6 +836,7 @@ public class ModCreativeModeTabs {
                 populator.accept(ModBlocks.CLOVERS.get());
 
                 populator.accept(ModBlocks.WARP_PAD.get());
+                populator.accept(ModBlocks.GALAXY_WARP.get());
                 populator.accept(ModBlocks.PINK_ALTAR.get());
                 populator.accept(ModBlocks.BLUE_ALTAR.get());
                 populator.accept(ModBlocks.YELLOW_ALTAR.get());

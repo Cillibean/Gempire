@@ -37,8 +37,8 @@ public class ModItems {
                     ModBlocks.GALAXY_WARP.get(),
                     new Item.Properties()
             )
-
     );
+
 /*
     public static final RegistryObject<Item> CRYSTAL_CHEST = ITEMS.register("crystal_chest", () ->
             new BlockItem(
@@ -62,7 +62,7 @@ public class ModItems {
     public static final RegistryObject<Item> ORCHID = ITEMS.register("orchid", () ->
             new BlockItem(ModBlocks.ORCHID.get(), new Item.Properties()));
 
-    public static final RegistryObject<Item> NASTURTIUMS = ITEMS.register("nastutiums", () ->
+    public static final RegistryObject<Item> NASTURTIUMS = ITEMS.register("nasturtiums", () ->
             new BlockItem(ModBlocks.NASTURTIUMS.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> HYDRANGEA_BUSH_WHITE = ITEMS.register("hydrangea_bush_white", () ->
@@ -464,6 +464,113 @@ public class ModItems {
                     new Item.Properties()
             )
     );
+
+    public static final RegistryObject<Item> WHITE_PHOSPHORUS_LAMP = ITEMS.register("white_phosphorus_lamp", () ->
+            new BlockItem(
+                    ModBlocks.WHITE_PHOSPHORUS_LAMP.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> ORANGE_PHOSPHORUS_LAMP = ITEMS.register("orange_phosphorus_lamp", () ->
+            new BlockItem(
+                    ModBlocks.ORANGE_PHOSPHORUS_LAMP.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> MAGENTA_PHOSPHORUS_LAMP = ITEMS.register("magenta_phosphorus_lamp", () ->
+            new BlockItem(
+                    ModBlocks.MAGENTA_PHOSPHORUS_LAMP.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> LIGHT_BLUE_PHOSPHORUS_LAMP = ITEMS.register("light_blue_phosphorus_lamp", () ->
+            new BlockItem(
+                    ModBlocks.LIGHT_BLUE_PHOSPHORUS_LAMP.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> YELLOW_PHOSPHORUS_LAMP = ITEMS.register("yellow_phosphorus_lamp", () ->
+            new BlockItem(
+                    ModBlocks.YELLOW_PHOSPHORUS_LAMP.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> LIME_PHOSPHORUS_LAMP = ITEMS.register("lime_phosphorus_lamp", () ->
+            new BlockItem(
+                    ModBlocks.LIME_PHOSPHORUS_LAMP.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> PINK_PHOSPHORUS_LAMP = ITEMS.register("pink_phosphorus_lamp", () ->
+            new BlockItem(
+                    ModBlocks.PINK_PHOSPHORUS_LAMP.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> GRAY_PHOSPHORUS_LAMP = ITEMS.register("gray_phosphorus_lamp", () ->
+            new BlockItem(
+                    ModBlocks.GRAY_PHOSPHORUS_LAMP.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> LIGHT_GRAY_PHOSPHORUS_LAMP = ITEMS.register("light_gray_phosphorus_lamp", () ->
+            new BlockItem(
+                    ModBlocks.LIGHT_GRAY_PHOSPHORUS_LAMP.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> CYAN_PHOSPHORUS_LAMP = ITEMS.register("cyan_phosphorus_lamp", () ->
+            new BlockItem(
+                    ModBlocks.CYAN_PHOSPHORUS_LAMP.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> PURPLE_PHOSPHORUS_LAMP = ITEMS.register("purple_phosphorus_lamp", () ->
+            new BlockItem(
+                    ModBlocks.PURPLE_PHOSPHORUS_LAMP.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> BLUE_PHOSPHORUS_LAMP = ITEMS.register("blue_phosphorus_lamp", () ->
+            new BlockItem(
+                    ModBlocks.BLUE_PHOSPHORUS_LAMP.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> BROWN_PHOSPHORUS_LAMP = ITEMS.register("brown_phosphorus_lamp", () ->
+            new BlockItem(
+                    ModBlocks.BROWN_PHOSPHORUS_LAMP.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> GREEN_PHOSPHORUS_LAMP = ITEMS.register("green_phosphorus_lamp", () ->
+            new BlockItem(
+                    ModBlocks.GREEN_PHOSPHORUS_LAMP.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> RED_PHOSPHORUS_LAMP = ITEMS.register("red_phosphorus_lamp", () ->
+            new BlockItem(
+                    ModBlocks.RED_PHOSPHORUS_LAMP.get(),
+                    new Item.Properties()
+            )
+    );
+    public static final RegistryObject<Item> BLACK_PHOSPHORUS_LAMP = ITEMS.register("black_phosphorus_lamp", () ->
+            new BlockItem(
+                    ModBlocks.BLACK_PHOSPHORUS_LAMP.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> PHOSPHORUS_LAMP = ITEMS.register("phosphorus_lamp", () ->
+            new BlockItem(
+                    ModBlocks.PHOSPHORUS_LAMP.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> SELENITE_CHUNK = ITEMS.register("selenite_chunk", () ->
+            new Item(new Item.Properties()));
 
     public static final RegistryObject<Item> BUDDING_SELENITE = ITEMS.register("budding_selenite", () ->
             new BlockItem(
@@ -2899,6 +3006,9 @@ public class ModItems {
 
     public static final RegistryObject<Item> GEM_WHISTLE = ITEMS.register("gem_whistle", () ->
             new ItemWhistle(new Item.Properties().stacksTo(1)));
+
+    public static final RegistryObject<Item> WARP_CORE = ITEMS.register("warp_core", () ->
+            new Item(new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> CONFRACTOR = ITEMS.register("confractor", () ->
             new ItemShatterer(new Item.Properties().stacksTo(1).durability(20)));

@@ -119,6 +119,9 @@ public class AbilityDesigner extends Ability implements ICraftingAbility {
         input.add(Items.GLASS);
         input2.add(ModItems.SPECIAL_CHROMA.get());
         output.add(ModItems.PRISMATIC_DIAMOND_GLASS.get());
+        input.add(Items.REDSTONE_LAMP);
+        input2.add(ModItems.SELENITE_CLUSTER.get());
+        output.add(ModItems.PHOSPHORUS_LAMP.get());
         holder.inputList = input;
         holder.input2List = input2;
         holder.outputList = output;

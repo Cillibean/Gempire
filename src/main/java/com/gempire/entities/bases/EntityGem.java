@@ -1358,6 +1358,9 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                         else if (this instanceof EntityTourmaline) {
                             ((EntityTourmaline) this).setCrops(((EntityTourmaline) this).generateCrops());
                         }
+                        else if (this instanceof EntityPeridot) {
+                            ((EntityPeridot) this).generateMaterials();
+                        }
                         this.rebelPoints += 2.5f;
                     } else if (((LivingEntity) source.getEntity()).getItemBySlot(EquipmentSlot.MAINHAND).getItem() instanceof ItemPinkRejuvenator) {
                         this.resetOwners();

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " F ",
+    "FSF",
+    " F "
+  ],
+  "key": {
+    "S": {
+      "tag": "gempire:phosphorus_lamps"
+    },
+    "F": {
+      "item": "minecraft:purple_stained_glass"
+    }
+  },
+  "result": {
+    "item": "gempire:purple_phosphorus_lamp"
+  }
+}

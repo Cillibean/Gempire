@@ -21,8 +21,7 @@ public class DesolateTeleporter implements ITeleporter {
     }
 
     @Override
-    public Entity placeEntity(Entity entity, ServerLevel currentWorld, ServerLevel destinationWorld,
-                              float yaw, Function<Boolean, Entity> repositionEntity) {
+    public Entity placeEntity(Entity entity, ServerLevel currentWorld, ServerLevel destinationWorld, float yaw, Function<Boolean, Entity> repositionEntity) {
         entity = repositionEntity.apply(false);
         int y = 61;
 
