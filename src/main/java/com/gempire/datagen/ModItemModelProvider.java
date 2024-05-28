@@ -88,6 +88,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.SPODUMENE_PIECE);
 
         simpleItem(ModItems.ACID_SPIT);
+        simpleItem(ModItems.GUARDIAN_ORB);
         simpleItem(ModItems.WATER_ORB);
 
         simpleItem(ModItems.GEM_SLUSH_BUCKET);

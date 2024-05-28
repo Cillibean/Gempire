@@ -21,7 +21,6 @@ public class RenderCobaltGuardian extends GeoEntityRenderer<EntityCobaltGuardian
 
     @Override
     public void scaleModelForRender(float widthScale, float heightScale, PoseStack poseStack, EntityCobaltGuardian animatable, BakedGeoModel model, boolean isReRender, float partialTick, int packedLight, int packedOverlay) {
-        poseStack.scale(1f, 1f, 1f);
         super.scaleModelForRender(widthScale, heightScale, poseStack, animatable, model, isReRender, partialTick, packedLight, packedOverlay);
     }
 

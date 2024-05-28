@@ -2981,6 +2981,9 @@ public class ModItems {
             new Item(new Item.Properties().stacksTo(64)));
     public static final RegistryObject<Item> WATER_ORB = ITEMS.register("water_orb", () ->
             new Item(new Item.Properties().stacksTo(64)));
+    public static final RegistryObject<Item> GUARDIAN_ORB = ITEMS.register("guardian_orb", () ->
+            new Item(new Item.Properties().stacksTo(64)));
+
     public static final RegistryObject<Item> GEM_SLUSH_BUCKET = ITEMS.register("gem_slush_bucket", () ->
             new Item(new Item.Properties().stacksTo(16)));
 

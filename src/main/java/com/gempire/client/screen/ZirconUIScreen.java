@@ -30,6 +30,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.network.chat.Component;
 import org.joml.Quaternionf;
+import org.lwjgl.glfw.GLFW;
 
 import java.util.ArrayList;
 
@@ -215,10 +216,27 @@ public class ZirconUIScreen extends AbstractContainerScreen<ZirconUIContainer> {
     }
 
     @Override
+    public boolean keyReleased(int keyCode, int scanCode, int modifiers) {
+        if(this.nameBox.isFocused()) {
+            this.nameBox.keyReleased(keyCode, scanCode, modifiers);
+            ModPacketHandler.INSTANCE.sendToServer(new C2SRequestUpdateGemName(this.nameBox.getValue(), this.menu.gem.getId()));
+            return true;
+        }
+        else{
+            return super.keyReleased(keyCode, scanCode, modifiers);
+        }
+    }
+
+    @Override
     public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
         if(this.nameBox.isFocused()) {
+            if (keyCode == GLFW.GLFW_KEY_ENTER) {
+                nameBox.setFocused(false);
+            }
+            if (keyCode == GLFW.GLFW_KEY_ESCAPE) {
+                nameBox.setFocused(false);
+            }
             this.nameBox.keyPressed(keyCode, scanCode, modifiers);
-            ModPacketHandler.INSTANCE.sendToServer(new C2SRequestUpdateGemName(this.nameBox.getValue(), this.menu.gem.getId()));
             return true;
         }
         else{

@@ -1,4 +1,4 @@
-// 1.20.1	2024-05-27T00:07:01.665314	Item Models: gempire
+// 1.20.1	2024-05-28T12:01:24.960977	Item Models: gempire
 2a4c323206d2fbeca217109aa5c8a2ac8ce38701 assets/gempire/models/item/acid_spit.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/gempire/models/item/alabaster_empress_spawn_egg.json
 0da7ed67ca0a8fcb9a8ba427cc3a79d0931ef656 assets/gempire/models/item/alabaster_shards.json
@@ -61,6 +61,7 @@ a046ced2a2f23fac0a5bf9825d1d62c85443607e assets/gempire/models/item/green_chroma
 94360a0f81cb1281191c7b528de403a550b2ec9b assets/gempire/models/item/guardian_chestplate.json
 a377c4c95fbdb0c7a5d902d83dab9daf91790bf9 assets/gempire/models/item/guardian_helmet.json
 0d0d2eb8de6f5b5e89b7a0f7a51fe1b94e55103e assets/gempire/models/item/guardian_leggings.json
+4f652fd1b59448e7506b959db435b1fdb0626f95 assets/gempire/models/item/guardian_orb.json
 a87aa14c0d7854636365379df4b568b42b13b201 assets/gempire/models/item/guardian_tear.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/gempire/models/item/hunter_spawn_egg.json
 fffc2dd45a30b8b0acff88f92c02b4fb01c08df9 assets/gempire/models/item/huntress_dagger.json

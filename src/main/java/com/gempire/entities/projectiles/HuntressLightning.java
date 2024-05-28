@@ -49,7 +49,7 @@ public class HuntressLightning extends Entity {
     }
 
     public HuntressLightning(Level level, Entity owner, Entity target) {
-        super(ModEntities.ELECTROKINESIS_LIGHTNING.get(), level);
+        super(ModEntities.HUNTRESS_LIGHTNING.get(), level);
         this.target = target;
         this.owner = owner;
     }
@@ -108,11 +108,6 @@ public class HuntressLightning extends Entity {
                 this.level().playLocalSound(this.getX(), this.getY(), this.getZ(), SoundEvents.LIGHTNING_BOLT_THUNDER, SoundSource.WEATHER, 10000.0F, 0.8F + this.random.nextFloat() * 0.2F, false);
                 this.level().playLocalSound(this.getX(), this.getY(), this.getZ(), SoundEvents.LIGHTNING_BOLT_IMPACT, SoundSource.WEATHER, 2.0F, 0.5F + this.random.nextFloat() * 0.2F, false);
             } else {
-                Difficulty difficulty = this.level().getDifficulty();
-                if (difficulty == Difficulty.NORMAL || difficulty == Difficulty.HARD) {
-                    this.spawnFire(4);
-                }
-
                 this.powerLightningRod();
                 this.gameEvent(GameEvent.LIGHTNING_STRIKE);
             }
@@ -142,7 +137,6 @@ public class HuntressLightning extends Entity {
                 --this.flashes;
                 this.life = 1;
                 this.seed = this.random.nextLong();
-                this.spawnFire(0);
             }
         }
 
@@ -169,27 +163,6 @@ public class HuntressLightning extends Entity {
     private BlockPos getStrikePosition() {
         Vec3 vec3 = this.position();
         return BlockPos.containing(vec3.x, vec3.y - 1.0E-6, vec3.z);
-    }
-
-    private void spawnFire(int p_20871_) {
-        if (!this.visualOnly && !this.level().isClientSide && this.level().getGameRules().getBoolean(GameRules.RULE_DOFIRETICK)) {
-            BlockPos blockpos = this.blockPosition();
-            BlockState blockstate = BaseFireBlock.getState(this.level(), blockpos);
-            if (this.level().getBlockState(blockpos).isAir() && blockstate.canSurvive(this.level(), blockpos)) {
-                this.level().setBlockAndUpdate(blockpos, blockstate);
-                ++this.blocksSetOnFire;
-            }
-
-            for(int i = 0; i < p_20871_; ++i) {
-                BlockPos blockpos1 = blockpos.offset(this.random.nextInt(3) - 1, this.random.nextInt(3) - 1, this.random.nextInt(3) - 1);
-                blockstate = BaseFireBlock.getState(this.level(), blockpos1);
-                if (this.level().getBlockState(blockpos1).isAir() && blockstate.canSurvive(this.level(), blockpos1)) {
-                    this.level().setBlockAndUpdate(blockpos1, blockstate);
-                    ++this.blocksSetOnFire;
-                }
-            }
-        }
-
     }
     public boolean shouldRenderAtSqrDistance(double p_20869_) {
         double d0 = 64.0 * getViewScale();

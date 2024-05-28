@@ -55,18 +55,20 @@ public class OwnerHurtTargetGemGoal extends TargetGoal {
                         if (this.player != null) {
                             this.ownerLastHurt = player.getLastHurtMob();
                             int n = player.getLastHurtMobTimestamp();
-                            if (!this.ownerLastHurt.is(player)) {
-                                if (this.ownerLastHurt instanceof EntityGem) {
-                                    if (((EntityGem) ownerLastHurt).getRebelled()) {
+                            if (ownerLastHurt != null) {
+                                if (!this.ownerLastHurt.is(player)) {
+                                    if (this.ownerLastHurt instanceof EntityGem) {
+                                        if (((EntityGem) ownerLastHurt).getRebelled()) {
+                                            if (n != this.timestamp && this.canAttack(this.ownerLastHurt, TargetingConditions.DEFAULT) && this.entityGem.wantsToAttack(this.ownerLastHurt, player)) {
+                                                use = true;
+                                            }
+                                        } else {
+                                            return false;
+                                        }
+                                    } else {
                                         if (n != this.timestamp && this.canAttack(this.ownerLastHurt, TargetingConditions.DEFAULT) && this.entityGem.wantsToAttack(this.ownerLastHurt, player)) {
                                             use = true;
                                         }
-                                    } else {
-                                        return false;
-                                    }
-                                } else {
-                                    if (n != this.timestamp && this.canAttack(this.ownerLastHurt, TargetingConditions.DEFAULT) && this.entityGem.wantsToAttack(this.ownerLastHurt, player)) {
-                                        use = true;
                                     }
                                 }
                             }

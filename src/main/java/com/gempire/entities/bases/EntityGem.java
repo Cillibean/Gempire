@@ -2257,8 +2257,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             if(ability instanceof ITaskAbility){
                 if(((ITaskAbility)ability).targetTask()){
                     this.targetSelector.addGoal(2, ((ITaskAbility)ability).goal());
-                }
-                else{
+                } else {
                     this.goalSelector.addGoal(2, ((ITaskAbility)ability).goal());
                 }
             }
