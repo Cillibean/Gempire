@@ -5,6 +5,7 @@ import com.gempire.blocks.machine.PowerCrystalBlock;
 import com.gempire.blocks.machine.TankBlock;
 import com.gempire.entities.bases.EntityGem;
 import com.gempire.entities.bases.EntityVaryingGem;
+import com.gempire.entities.gems.EntityPeridot;
 import com.gempire.entities.gems.EntityQuartz;
 import com.gempire.entities.gems.EntityTourmaline;
 import com.gempire.entities.gems.EntityZircon;
@@ -221,7 +222,7 @@ public class GemSeedTE extends BlockEntity {
     public void weighResults() {
         ArrayList<GemInfo> possibleResults = new ArrayList<>();
         ArrayList<Float> possibleQualities = new ArrayList<>();
-        int threshhold = 30;
+        int threshhold = 70;
         for (GemInfo gemInfo : gemInfoList) {
             int distance = 0;
             int[] res = gemInfo.getResources();
@@ -239,27 +240,33 @@ public class GemSeedTE extends BlockEntity {
                 }
             }
         }
-        RandomSource r = level.getRandom();
-        int random = r.nextInt(possibleResults.size());
-        toForm = possibleResults.get(random);
-        float qualityFloat = possibleQualities.get(random);
-        if (qualityFloat <= 0.25) {
-            if (qualityFloat <= 0.09) {
-                quality = 5;
-            } else if (qualityFloat <= 0.175) {
-                quality = 4;
+        if (!possibleResults.isEmpty()) {
+            RandomSource r = level.getRandom();
+            int random = r.nextInt(possibleResults.size());
+            toForm = possibleResults.get(random);
+            float qualityFloat = possibleQualities.get(random);
+            if (qualityFloat <= 0.25) {
+                if (qualityFloat <= 0.09) {
+                    quality = 5;
+                } else if (qualityFloat <= 0.175) {
+                    quality = 4;
+                } else {
+                    quality = 3;
+                }
+                clod = true;
+            } else if (qualityFloat >= 0.95) {
+                quality = 0;
+            } else if (qualityFloat <= 0.4) {
+                quality = 2;
             } else {
-                quality = 3;
+                quality = 1;
             }
-            clod = true;
-        } else if (qualityFloat >= 0.95) {
-            quality = 0;
-        } else if (qualityFloat <= 0.4) {
-            quality = 2;
+            formGem();
         } else {
-            quality = 1;
+            clod = true;
+            quality = 5;
+            formGem();
         }
-        formGem();
     }
 
     public void formGem() {
@@ -392,6 +399,8 @@ public class GemSeedTE extends BlockEntity {
             } else if (gem instanceof EntityTourmaline) {
                 ((EntityTourmaline) gem).setCrops(((EntityTourmaline) gem).generateCrops());
                 ((EntityTourmaline) gem).setBuilding(false);
+            } else if (gem instanceof EntityPeridot) {
+                ((EntityPeridot) gem).generateMaterials();
             }
             //gem.generateScoutList();
             gem.idlePowers = gem.generateIdlePowers();
@@ -669,6 +678,12 @@ public class GemSeedTE extends BlockEntity {
         compound.putBoolean("checked", this.checked);
         compound.putInt("tier", this.tier);
         compound.putInt("blocksDrained", this.blocksDrained);
+        for(int i =0; i < info.resources.length; i++) {
+            compound.putInt("resources"+i, info.resources[i]);
+        }
+        compound.putFloat("temp", info.temp);
+        compound.putFloat("quality", info.quality);
+        compound.putInt("infochroma", info.chroma);
     }
 
 
@@ -684,6 +699,14 @@ public class GemSeedTE extends BlockEntity {
         this.checked = nbt.getBoolean("checked");
         this.tier = nbt.getInt("tier");
         this.blocksDrained = nbt.getInt("blocksDrained");
+        int[] resources = new int[6];
+        for (int i = 0; i < 6; i++) {
+            resources[i] = nbt.getInt("resources"+i);
+        }
+        float temp = nbt.getFloat("temp");
+        float quality = nbt.getFloat("quality");
+        int chroma = nbt.getInt("infochroma");
+        info = new GemSeedInfo(resources, temp, quality, chroma);
     }
 
     @Override
@@ -698,6 +721,14 @@ public class GemSeedTE extends BlockEntity {
         this.tier = nbt.getInt("tier");
         this.checked = nbt.getBoolean("checked");
         this.blocksDrained = nbt.getInt("blocksDrained");
+        int[] resources = new int[6];
+        for (int i = 0; i < 6; i++) {
+            resources[i] = nbt.getInt("resources"+i);
+        }
+        float temp = nbt.getFloat("temp");
+        float quality = nbt.getFloat("quality");
+        int chroma = nbt.getInt("infochroma");
+        info = new GemSeedInfo(resources, temp, quality, chroma);
     }
 
     @Override
@@ -712,6 +743,12 @@ public class GemSeedTE extends BlockEntity {
         compound.putBoolean("checked", this.checked);
         compound.putInt("tier", this.tier);
         compound.putInt("blocksDrained", this.blocksDrained);
+        for(int i =0; i < info.resources.length; i++) {
+            compound.putInt("resources"+i, info.resources[i]);
+        }
+        compound.putFloat("temp", info.temp);
+        compound.putFloat("quality", info.quality);
+        compound.putInt("chroma", info.chroma);
         return compound;
     }
 

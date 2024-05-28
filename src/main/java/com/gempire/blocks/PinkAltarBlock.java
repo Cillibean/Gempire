@@ -15,6 +15,7 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.level.pathfinder.PathComputationType;
@@ -23,9 +24,11 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import javax.annotation.Nullable;
 
-public class PinkAltarBlock extends DirectionalBlock implements EntityBlock  {
-    protected static final VoxelShape FACING_NS_FLOOR = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 12.0D, 16.0D);
-    protected static final VoxelShape FACING_EW_FLOOR = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 12.0D, 16.0D);
+public class PinkAltarBlock extends BaseEntityBlock  {
+    public static final DirectionProperty FACING = BlockStateProperties.FACING;
+
+    protected static final VoxelShape FACING_NS_FLOOR = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D);
+    protected static final VoxelShape FACING_EW_FLOOR = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D);
 
     public PinkAltarBlock(Properties properties) {
         super(properties);

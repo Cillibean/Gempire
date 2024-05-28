@@ -88,6 +88,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.SPODUMENE_PIECE);
 
         simpleItem(ModItems.ACID_SPIT);
+        simpleItem(ModItems.GUARDIAN_ORB);
         simpleItem(ModItems.WATER_ORB);
 
         simpleItem(ModItems.GEM_SLUSH_BUCKET);
@@ -195,7 +196,7 @@ public class ModItemModelProvider extends ItemModelProvider {
 
         wallItem(ModBlocks.PEGMATITE_WALL, ModBlocks.PEGMATITE);
         //wallItem(ModBlocks.COBBLED_PEGMATITE_WALL, ModBlocks.COBBLED_PEGMATITE);
-        //wallItem(ModBlocks.SELENITE_WALL, ModBlocks.SELENITE);
+        wallItem(ModBlocks.SELENITE_WALL, ModBlocks.SELENITE);
         wallItem(ModBlocks.POLISHED_SELENITE_WALL, ModBlocks.POLISHED_SELENITE);
 
         saplingItem(ModBlocks.THULITE_CLUSTER);
@@ -214,6 +215,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         saplingItem(ModBlocks.CHRYSANTHEMUM);
         saplingItem(ModBlocks.BLUE_BELLS);
         saplingItem(ModBlocks.BLUE_PUFFBALL);
+
+        //simpleItem(ModItems.WARP_CORE);
 
         withExistingParent(ModItems.FUSCHIA_PALADIN_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(ModItems.COBALT_GUARDIAN_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));

@@ -1,22 +1,35 @@
 package com.gempire.entities.ai;
 
 import com.gempire.entities.bases.EntityGem;
+import com.gempire.entities.gems.EntityPeridot;
 import com.gempire.entities.gems.starter.EntityPebble;
 import com.gempire.init.ModBlocks;
+import com.gempire.util.PeridotRepairResources;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.goal.Goal;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.PickaxeItem;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.UUID;
+import java.util.stream.IntStream;
+
 public class EntityAIGalaxyWarp extends Goal {
-    public EntityGem follower;
+    public EntityPeridot follower;
     public BlockPos target;
     public double speed;
+    public boolean hasResource = true;
+    public boolean checked = false;
 
-    public EntityAIGalaxyWarp(EntityGem entityIn, double speedIn) {
+    public EntityAIGalaxyWarp(EntityPeridot entityIn, double speedIn) {
         this.follower = entityIn;
         this.speed = speedIn;
     }
@@ -30,10 +43,9 @@ public class EntityAIGalaxyWarp extends Goal {
                 for (int y = -2; y < 3; y++) {
                     for (int z = -4; z < 5; z++) {
                         if (!found) {
-                            if (this.follower.level().getBlockState(this.follower.blockPosition().offset(x, y, z)).getBlock() == ModBlocks.GALAXY_WARP.get()) {
+                            if (this.follower.level().getBlockState(this.follower.blockPosition().offset(x, y, z)).getBlock() == ModBlocks.CRACKED_GALAXY_WARP.get()) {
                                 hopper = this.follower.blockPosition().offset(x, y, z);
                                 found = true;
-                                System.out.println("Hopper Found");
                             }
                         }
                     }
@@ -48,13 +60,13 @@ public class EntityAIGalaxyWarp extends Goal {
                 }
             }
         }
-        return this.target != null && this.target != BlockPos.ZERO && follower.getItemBySlot(EquipmentSlot.MAINHAND).getItem() instanceof PickaxeItem;
+        return this.follower.movementType == 0 && this.target != null && this.target != BlockPos.ZERO && follower.getItemBySlot(EquipmentSlot.MAINHAND).getItem() instanceof PickaxeItem;
     }
 
     @Override
     public boolean canContinueToUse() {
-        return this.target != null && !this.follower.getNavigation().isDone() &&
-                this.follower.distanceToSqr(target.getX(), target.getY(), target.getZ()) > Math.pow(4, 2);
+        return this.follower.movementType == 0 && this.target != null && !this.follower.getNavigation().isDone() &&
+                this.follower.distanceToSqr(target.getX(), target.getY(), target.getZ()) > Math.pow(4, 2) && follower.level().getBlockState(target) == ModBlocks.CRACKED_GALAXY_WARP.get().defaultBlockState();
     }
 
     @Override
@@ -83,6 +95,141 @@ public class EntityAIGalaxyWarp extends Goal {
          }
 
          */
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+        if (checked) {
+            if (hasResource) checkInputs();
+            else checkInventory();
+        } else {
+            checkFixed();
+        }
+    }
+
+    public void checkFixed() {
+        PeridotRepairResources.register();
+        LinkedList<String> completed = new LinkedList<>(Arrays.asList(follower.getCompleted().split(",")));
+        String[] materialRough = follower.getWarpMaterials().split(",");
+        String[] materials = new String[10];
+        if (completed.size() == 3) {
+            String[] materialRough2 = remove(0, materialRough);
+            String[] materialRough3 = remove(0, materialRough2);
+            materials = remove(0, materialRough3);
+        } else if (completed.size() == 2) {
+            String[] materialRough2 = remove(0, materialRough);
+            materials = remove(0, materialRough2);
+        } else if (completed.size() == 1) {
+            materials = remove(0, materialRough);
+        }
+        if (materials[0] == null) follower.level().setBlockAndUpdate(target, ModBlocks.GALAXY_WARP.get().defaultBlockState());
+        checked = true;
+    }
+
+    public void checkInputs() {
+        hasResource = false;
+        PeridotRepairResources.register();
+        LinkedList<String> completed = new LinkedList<>(Arrays.asList(follower.getCompleted().split(",")));
+        //LinkedList<String> materials = new LinkedList<>(Arrays.asList(follower.getWarpMaterials().split(",")));
+        String[] amountRough = follower.getWarpAmounts().split(",");
+        String[] amounts = new String[10];
+        String[] materialRough = follower.getWarpMaterials().split(",");
+        String[] materials = new String[10];
+        if (completed.size() == 3) {
+            String[] amountRough2 = remove(0, amountRough);
+            String[] amountRough3 = remove(0, amountRough2);
+            amounts = remove(0, amountRough3);
+            String[] materialRough2 = remove(0, materialRough);
+            String[] materialRough3 = remove(0, materialRough2);
+            materials = remove(0, materialRough3);
+        } else if (completed.size() == 2) {
+            String[] amountRough2 = remove(0, amountRough);
+            amounts = remove(0, amountRough2);
+            String[] materialRough2 = remove(0, materialRough);
+            materials = remove(0, materialRough2);
+        } else if (completed.size() == 1) {
+            amounts = remove(0, amountRough);
+            materials = remove(0, materialRough);
+        }
+        //materials.removeAll(completed);
+        if (materials[0] != null) {
+            Item currentMaterial = PeridotRepairResources.list.get(Integer.parseInt(materials[0]));
+            int currentAmount = Integer.parseInt(amounts[0]);
+            System.out.println(currentMaterial);
+            System.out.println(currentAmount);
+            for (UUID uuid : follower.OWNERS) {
+                follower.level().getPlayerByUUID(uuid).sendSystemMessage(Component.translatable("Peridot requires " + currentAmount + " " + getItemName(currentMaterial.toString(), currentAmount > 1)));
+            }
+        }
+    }
+
+    public String getItemName(String value, boolean plural) {
+        String[] strings = value.split("_");
+        StringBuilder string = new StringBuilder();
+        for (int i = 0; i < strings.length; i++) {
+            String letter = strings[i].substring(0, 1).toUpperCase();
+            strings[i] = letter + strings[i].substring(1);
+            string.append(strings[i]);
+            if (i < strings.length - 1) string.append(" ");
+            else if (plural) string.append("s");
+        }
+        return string.toString();
+    }
+
+    public String[] remove(int index, String[] arr) {
+        String[] newArr = new String[arr.length - 1];
+        if(index < 0 || index > arr.length) {
+            return arr;
+        }
+        int j = 0;
+        for(int i = 0; i < arr.length; i++) {
+            if(i == index) {
+                i++;
+            }
+            newArr[j++] = arr[i];
+        }
+
+        return newArr;
+    }
+
+    public void checkInventory() {
+        PeridotRepairResources.register();
+        LinkedList<String> completed = new LinkedList<>(Arrays.asList(follower.getCompleted().split(",")));
+        String[] amountRough = follower.getWarpAmounts().split(",");
+        String[] amounts = new String[10];
+        String[] materialRough = follower.getWarpMaterials().split(",");
+        String[] materials = new String[10];
+        if (completed.size() == 3) {
+            String[] amountRough2 = remove(0, amountRough);
+            String[] amountRough3 = remove(0, amountRough2);
+            amounts = remove(0, amountRough3);
+            String[] materialRough2 = remove(0, materialRough);
+            String[] materialRough3 = remove(0, materialRough2);
+            materials = remove(0, materialRough3);
+        } else if (completed.size() == 2) {
+            String[] amountRough2 = remove(0, amountRough);
+            amounts = remove(0, amountRough2);
+            String[] materialRough2 = remove(0, materialRough);
+            materials = remove(0, materialRough2);
+        } else if (completed.size() == 1) {
+            amounts = remove(0, amountRough);
+            materials = remove(0, materialRough);
+        }
+        if (materials[0] != null) {
+            Item currentMaterial = PeridotRepairResources.list.get(Integer.parseInt(materials[0]));
+            int currentAmount = Integer.parseInt(amounts[0]);
+            if (follower.consumeItemCheck(currentMaterial, currentAmount)) {
+                hasResource = true;
+                if (follower.getCompleted().isEmpty()) {
+                    follower.setCompleted(materials[0]);
+                } else {
+                    follower.setCompleted(follower.getCompleted() + "," + materials[0]);
+                }
+                System.out.println(follower.getCompleted());
+                checked = false;
+            }
+        }
     }
 
     @Override

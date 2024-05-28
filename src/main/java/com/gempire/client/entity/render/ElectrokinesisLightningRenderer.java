@@ -1,5 +1,6 @@
 package com.gempire.client.entity.render;
 
+import com.gempire.entities.bases.EntityGem;
 import com.gempire.entities.projectiles.ElectrokinesisLightning;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -20,12 +21,12 @@ import org.joml.Matrix4f;
             super(p_174286_);
         }
 
-        public void render(ElectrokinesisLightning p_115266_, float p_115267_, float p_115268_, PoseStack p_115269_, MultiBufferSource p_115270_, int p_115271_) {
+        public void render(ElectrokinesisLightning entity, float p_115267_, float p_115268_, PoseStack p_115269_, MultiBufferSource p_115270_, int p_115271_) {
             float[] afloat = new float[8];
             float[] afloat1 = new float[8];
             float f = 0.0F;
             float f1 = 0.0F;
-            RandomSource randomsource = RandomSource.create(p_115266_.seed);
+            RandomSource randomsource = RandomSource.create(entity.seed);
 
             for(int i = 7; i >= 0; --i) {
                 afloat[i] = f;
@@ -38,7 +39,7 @@ import org.joml.Matrix4f;
             Matrix4f matrix4f = p_115269_.last().pose();
 
             for(int j = 0; j < 4; ++j) {
-                RandomSource randomsource1 = RandomSource.create(p_115266_.seed);
+                RandomSource randomsource1 = RandomSource.create(entity.seed);
 
                 for(int k = 0; k < 3; ++k) {
                     int l = 7;
@@ -79,10 +80,21 @@ import org.joml.Matrix4f;
                             f11 *= ((float)j1 - 1.0F) * 0.1F + 1.0F;
                         }
 
-                        quad(matrix4f, vertexconsumer, f2, f3, j1, f4, f5, 0.45F, 0.45F, 0.5F, f10, f11, false, false, true, false);
-                        quad(matrix4f, vertexconsumer, f2, f3, j1, f4, f5, 0.45F, 0.45F, 0.5F, f10, f11, true, false, true, true);
-                        quad(matrix4f, vertexconsumer, f2, f3, j1, f4, f5, 0.45F, 0.45F, 0.5F, f10, f11, true, true, false, true);
-                        quad(matrix4f, vertexconsumer, f2, f3, j1, f4, f5, 0.45F, 0.45F, 0.5F, f10, f11, false, true, false, false);
+                        float red = 0.45F;
+                        float green = 0.45F;
+                        float blue = 0.45F;
+
+                        if (entity.owner != null) {
+                            int color = ((EntityGem) entity.owner).getSkinColor();
+                             red = (float) ((color >> 16) & 0xff) /255;
+                             green = (float) ((color >> 8) & 0xff) /255;
+                             blue = (float) (color & 0xff) /255;
+                        }
+
+                        quad(matrix4f, vertexconsumer, f2, f3, j1, f4, f5, red, green, blue, f10, f11, false, false, true, false);
+                        quad(matrix4f, vertexconsumer, f2, f3, j1, f4, f5, red, green, blue, f10, f11, true, false, true, true);
+                        quad(matrix4f, vertexconsumer, f2, f3, j1, f4, f5, red, green, blue, f10, f11, true, true, false, true);
+                        quad(matrix4f, vertexconsumer, f2, f3, j1, f4, f5, red, green, blue, f10, f11, false, true, false, false);
                     }
                 }
             }

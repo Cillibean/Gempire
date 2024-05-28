@@ -95,7 +95,11 @@ public class ModBlocks {
     );
 
     public static final RegistryObject<Block> GALAXY_WARP = BLOCKS.register("galaxy_warp", () ->
-            new GalaxyWarpBlock(BlockBehaviour.Properties.of().pushReaction(PushReaction.BLOCK)));
+            new GalaxyWarpBlock(BlockBehaviour.Properties.copy(Blocks.END_PORTAL_FRAME)));
+
+    public static final RegistryObject<Block> CRACKED_GALAXY_WARP = BLOCKS.register("cracked_galaxy_warp", () ->
+            new Block(BlockBehaviour.Properties.copy(Blocks.END_PORTAL_FRAME)));
+
     public static final RegistryObject<LiquidBlock> PINK_ESSENCE_BLOCK = BLOCKS.register("pink_essence_block", () ->
             new PinkEssenceBlock(ModFluids.PINK_ESSENCE, BlockBehaviour.Properties.copy(Blocks.WATER)));
 
@@ -208,6 +212,66 @@ public class ModBlocks {
     public static final RegistryObject<Block> COBBLED_PEGMATITE_WALL = BLOCKS.register("cobbled_pegmatite_wall", () ->
             new WallBlock(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE_WALL))
     );
+
+    public static final RegistryObject<Block> PHOSPHORUS_LAMP = BLOCKS.register("phosphorus_lamp", () ->
+            new PhosphorusBlock(BlockBehaviour.Properties.copy(Blocks.REDSTONE_LAMP)));
+
+    public static final RegistryObject<Block> RED_PHOSPHORUS_LAMP = BLOCKS.register("red_phosphorus_lamp", () ->
+            new PhosphorusBlock(BlockBehaviour.Properties.copy(Blocks.REDSTONE_LAMP)));
+
+    public static final RegistryObject<Block> ORANGE_PHOSPHORUS_LAMP = BLOCKS.register("orange_phosphorus_lamp", () ->
+            new PhosphorusBlock(BlockBehaviour.Properties.copy(Blocks.REDSTONE_LAMP)));
+
+    public static final RegistryObject<Block> YELLOW_PHOSPHORUS_LAMP = BLOCKS.register("yellow_phosphorus_lamp", () ->
+            new PhosphorusBlock(BlockBehaviour.Properties.copy(Blocks.REDSTONE_LAMP)));
+
+    public static final RegistryObject<Block> LIME_PHOSPHORUS_LAMP = BLOCKS.register("lime_phosphorus_lamp", () ->
+            new PhosphorusBlock(BlockBehaviour.Properties.copy(Blocks.REDSTONE_LAMP)));
+
+    public static final RegistryObject<Block> GREEN_PHOSPHORUS_LAMP = BLOCKS.register("green_phosphorus_lamp", () ->
+            new PhosphorusBlock(BlockBehaviour.Properties.copy(Blocks.REDSTONE_LAMP)));
+
+    public static final RegistryObject<Block> CYAN_PHOSPHORUS_LAMP = BLOCKS.register("cyan_phosphorus_lamp", () ->
+            new PhosphorusBlock(BlockBehaviour.Properties.copy(Blocks.REDSTONE_LAMP)));
+
+    public static final RegistryObject<Block> LIGHT_BLUE_PHOSPHORUS_LAMP = BLOCKS.register("light_blue_phosphorus_lamp", () ->
+            new PhosphorusBlock(BlockBehaviour.Properties.copy(Blocks.REDSTONE_LAMP)));
+
+    public static final RegistryObject<Block> BLUE_PHOSPHORUS_LAMP = BLOCKS.register("blue_phosphorus_lamp", () ->
+            new PhosphorusBlock(BlockBehaviour.Properties.copy(Blocks.REDSTONE_LAMP)));
+
+    public static final RegistryObject<Block> PURPLE_PHOSPHORUS_LAMP = BLOCKS.register("purple_phosphorus_lamp", () ->
+            new PhosphorusBlock(BlockBehaviour.Properties.copy(Blocks.REDSTONE_LAMP)));
+
+    public static final RegistryObject<Block> MAGENTA_PHOSPHORUS_LAMP = BLOCKS.register("magenta_phosphorus_lamp", () ->
+            new PhosphorusBlock(BlockBehaviour.Properties.copy(Blocks.REDSTONE_LAMP)));
+
+    public static final RegistryObject<Block> PINK_PHOSPHORUS_LAMP = BLOCKS.register("pink_phosphorus_lamp", () ->
+            new PhosphorusBlock(BlockBehaviour.Properties.copy(Blocks.REDSTONE_LAMP)));
+
+    public static final RegistryObject<Block> WHITE_PHOSPHORUS_LAMP = BLOCKS.register("white_phosphorus_lamp", () ->
+            new PhosphorusBlock(BlockBehaviour.Properties.copy(Blocks.REDSTONE_LAMP)));
+
+    public static final RegistryObject<Block> LIGHT_GRAY_PHOSPHORUS_LAMP = BLOCKS.register("light_gray_phosphorus_lamp", () ->
+            new PhosphorusBlock(BlockBehaviour.Properties.copy(Blocks.REDSTONE_LAMP)));
+
+    public static final RegistryObject<Block> GRAY_PHOSPHORUS_LAMP = BLOCKS.register("gray_phosphorus_lamp", () ->
+            new PhosphorusBlock(BlockBehaviour.Properties.copy(Blocks.REDSTONE_LAMP)));
+
+    public static final RegistryObject<Block> BLACK_PHOSPHORUS_LAMP = BLOCKS.register("black_phosphorus_lamp", () ->
+            new PhosphorusBlock(BlockBehaviour.Properties.copy(Blocks.REDSTONE_LAMP)));
+
+    public static final RegistryObject<Block> BROWN_PHOSPHORUS_LAMP = BLOCKS.register("brown_phosphorus_lamp", () ->
+            new PhosphorusBlock(BlockBehaviour.Properties.copy(Blocks.REDSTONE_LAMP)));
+
+    public static final RegistryObject<Block> SELENITE_CLUSTER = BLOCKS.register("selenite_cluster", () ->
+            new SeleniteClusterBlock(7, 3, BlockBehaviour.Properties.copy(Blocks.AMETHYST_CLUSTER)));
+
+    public static final RegistryObject<Block> BUDDING_SELENITE = BLOCKS.register("budding_selenite", () ->
+            new BuddingSeleniteBlock(BlockBehaviour.Properties.copy(Blocks.BUDDING_AMETHYST)));
+
+    public static final RegistryObject<Block> ROUGH_SELENITE = BLOCKS.register("rough_selenite", () ->
+            new Block(BlockBehaviour.Properties.copy(Blocks.QUARTZ_BLOCK)));
 
     public static final RegistryObject<Block> SELENITE = BLOCKS.register("selenite", () ->
             new Block(BlockBehaviour.Properties.copy(Blocks.QUARTZ_BLOCK)));

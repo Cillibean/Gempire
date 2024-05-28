@@ -21,6 +21,7 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
+import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.constant.DefaultAnimations;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
@@ -29,7 +30,7 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.List;
 
-public class EntityFleurie extends PathfinderMob implements GeoAnimatable {
+public class EntityFleurie extends PathfinderMob implements GeoEntity {
 
     public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.<Integer>defineId(EntityFleurie.class, EntityDataSerializers.INT);
 
@@ -100,8 +101,4 @@ public class EntityFleurie extends PathfinderMob implements GeoAnimatable {
         return cache;
     }
 
-    @Override
-    public double getTick(Object o) {
-        return 0;
-    }
 }

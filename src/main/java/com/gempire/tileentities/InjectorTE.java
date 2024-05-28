@@ -185,23 +185,34 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
 
     public void inject() {
         info = new GemSeedInfo(new int[6], 0, 0, 0);
-        for (int i = 0; i < 4; i++) {
-            ItemStack stack = itemHandler.getStackInSlot(i);
-            if (stack.getItem() != Items.AIR) {
-                if (stack.getItem() instanceof BucketItem bucket) {
-                    if (this.isValidForSlot(i, bucket)) {
-                        if (stack.getItem() == ModItems.PINK_ESSENCE_BUCKET.get()) {
-                            info.resources[0] += 10;
-                        } else if (stack.getItem() == ModItems.BLUE_ESSENCE_BUCKET.get()) {
-                            info.resources[2] += 10;
-                        } else if (stack.getItem() == ModItems.YELLOW_ESSENCE_BUCKET.get()) {
-                            info.resources[3] += 10;
-                        } else if (stack.getItem() == ModItems.WHITE_ESSENCE_BUCKET.get()) {
-                            info.resources[1] += 10;
-                        }
-                    }
-                }
-            }
+        int portionToDrain = 0;
+        if (this.pinkOpen) {
+            portionToDrain++;
+        }
+        if (this.blueOpen) {
+            portionToDrain++;
+        }
+        if (this.yellowOpen) {
+            portionToDrain++;
+        }
+        if (this.whiteOpen) {
+            portionToDrain++;
+        }
+        if (!pinkTank.isEmpty() && pinkOpen) {
+            info.resources[0] += 10;
+            pinkTank.getFluid().setAmount(Math.max(pinkTank.getFluidAmount() - (200 / portionToDrain), 0));
+        }
+        if (!blueTank.isEmpty() && blueOpen) {
+            info.resources[2] += 10;
+            blueTank.getFluid().setAmount(Math.max(blueTank.getFluidAmount() - (200 / portionToDrain), 0));
+        }
+        if (!yellowTank.isEmpty() && yellowOpen) {
+            info.resources[3] += 10;
+            yellowTank.getFluid().setAmount(Math.max(yellowTank.getFluidAmount() - (200 / portionToDrain), 0));
+        }
+        if (!whiteTank.isEmpty() && whiteOpen) {
+            info.resources[1] += 10;
+            whiteTank.getFluid().setAmount(Math.max(whiteTank.getFluidAmount() - (200 / portionToDrain), 0));
         }
         ItemStack chromaStack = itemHandler.getStackInSlot(CHROMA_INPUT_SLOT_INDEX);
         info.setChroma(((ItemChroma) chromaStack.getItem()).color);

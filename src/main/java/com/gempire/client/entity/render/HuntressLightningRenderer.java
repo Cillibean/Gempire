@@ -21,12 +21,12 @@ public class HuntressLightningRenderer extends EntityRenderer<HuntressLightning>
         super(p_174286_);
     }
 
-    public void render(ElectrokinesisLightning p_115266_, float p_115267_, float p_115268_, PoseStack p_115269_, MultiBufferSource p_115270_, int p_115271_) {
+    public void render(HuntressLightning lightning, float p_115267_, float p_115268_, PoseStack p_115269_, MultiBufferSource p_115270_, int p_115271_) {
         float[] afloat = new float[8];
         float[] afloat1 = new float[8];
         float f = 0.0F;
         float f1 = 0.0F;
-        RandomSource randomsource = RandomSource.create(p_115266_.seed);
+        RandomSource randomsource = RandomSource.create(lightning.seed);
 
         for(int i = 7; i >= 0; --i) {
             afloat[i] = f;
@@ -39,7 +39,7 @@ public class HuntressLightningRenderer extends EntityRenderer<HuntressLightning>
         Matrix4f matrix4f = p_115269_.last().pose();
 
         for(int j = 0; j < 4; ++j) {
-            RandomSource randomsource1 = RandomSource.create(p_115266_.seed);
+            RandomSource randomsource1 = RandomSource.create(lightning.seed);
 
             for(int k = 0; k < 3; ++k) {
                 int l = 7;
@@ -80,10 +80,10 @@ public class HuntressLightningRenderer extends EntityRenderer<HuntressLightning>
                         f11 *= ((float)j1 - 1.0F) * 0.1F + 1.0F;
                     }
 
-                    quad(matrix4f, vertexconsumer, f2, f3, j1, f4, f5, 0.45F, 0.45F, 0.5F, f10, f11, false, false, true, false);
-                    quad(matrix4f, vertexconsumer, f2, f3, j1, f4, f5, 0.45F, 0.45F, 0.5F, f10, f11, true, false, true, true);
-                    quad(matrix4f, vertexconsumer, f2, f3, j1, f4, f5, 0.45F, 0.45F, 0.5F, f10, f11, true, true, false, true);
-                    quad(matrix4f, vertexconsumer, f2, f3, j1, f4, f5, 0.45F, 0.45F, 0.5F, f10, f11, false, true, false, false);
+                    quad(matrix4f, vertexconsumer, f2, f3, j1, f4, f5, 1F, 0.972F, 0.5F, f10, f11, false, false, true, false);
+                    quad(matrix4f, vertexconsumer, f2, f3, j1, f4, f5, 1F, 0.972F, 0.5F, f10, f11, true, false, true, true);
+                    quad(matrix4f, vertexconsumer, f2, f3, j1, f4, f5, 1F, 0.972F, 0.5F, f10, f11, true, true, false, true);
+                    quad(matrix4f, vertexconsumer, f2, f3, j1, f4, f5, 1F, 0.972F, 0.5F, f10, f11, false, true, false, false);
                 }
             }
         }

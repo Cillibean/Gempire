@@ -8,6 +8,7 @@ import com.gempire.entities.other.EntityAbomination;
 import com.gempire.entities.other.EntityCrawler;
 import com.gempire.entities.other.EntityShambler;
 import com.gempire.util.GemPlacements;
+import com.gempire.util.PeridotRepairResources;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -22,12 +23,14 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.PickaxeItem;
 import net.minecraft.world.level.Level;
 
 import net.minecraft.world.phys.Vec3;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class EntityPeridot extends EntityGem {
     public EntityPeridot(EntityType<? extends PathfinderMob> type, Level worldIn) {
@@ -36,6 +39,15 @@ public class EntityPeridot extends EntityGem {
     public boolean hopperGoal = false;
     public int ticksDoingHopperGoal = 0;
     public int maxTicksDoingHopperGoal = 200;
+
+    ArrayList<Item> warpList = new ArrayList<>();
+
+    HashMap<Item, Integer> warpMap = new HashMap<>();
+
+    ArrayList<Integer> warpMaterials = new ArrayList<>();
+    ArrayList<Integer> warpMaterialAmounts = new ArrayList<>();
+
+    ArrayList<Integer> warpCompleted = new ArrayList<>();
 
     public static AttributeSupplier.Builder registerAttributes() {
         return Mob.createMobAttributes()
@@ -75,12 +87,13 @@ public class EntityPeridot extends EntityGem {
         this.goalSelector.addGoal(7, new EntityAIFollowAssigned(this, 1.0D));
         this.goalSelector.addGoal(7, new EntityAIFollowOwner(this, 1.0D));
         //this.goalSelector.addGoal(1, new EntityAiAssignGems(this,4));
+        this.goalSelector.addGoal(9, new EntityAIGalaxyWarp(this, 1.0D));
         this.goalSelector.addGoal(10, new EntityAIMakePowerCrystal2(this, 1.0D));
         this.goalSelector.addGoal(2, new AvoidEntityGoal<>(this, Mob.class, 6.0F, 1.0D, 1.2D, (mob)-> mob.getClassification(true)== MobCategory.MONSTER));
         this.goalSelector.addGoal(1, new EntityAISludged(this, 0.6));
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, EntityGem.class, 1, false, false, this::checkBothSludged));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, 1, false, false, this::checkSludged));
-this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, EntityGem.class, 6.0F, 1.0D, 1.2D, this::checkElseSludged));
+        this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, EntityGem.class, 6.0F, 1.0D, 1.2D, this::checkElseSludged));
         this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, EntityCrawler.class, 6.0F, 1.0D, 1.2D));
         this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, EntityShambler.class, 6.0F, 1.0D, 1.2D));
         this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, EntityAbomination.class, 6.0F, 1.0D, 1.2D));    }
@@ -89,12 +102,104 @@ this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, EntityGem.class, 6.0F, 
     public void addAdditionalSaveData(CompoundTag compound) {
         super.addAdditionalSaveData(compound);
         compound.putBoolean("hopperGoal", this.hopperGoal);
+        compound.putString("warpMaterials", getWarpMaterials());
+        compound.putString("warpAmounts", getWarpAmounts());
+        compound.putString("warpCompleted", getCompleted());
     }
     @Override
     public void load(CompoundTag compound) {
         super.load(compound);
         this.hopperGoal = compound.getBoolean("hopperGoal");
+        setWarpMaterials(compound.getString("warpMaterials"));
+        setWarpAmounts(compound.getString("warpAmounts"));
+        setCompleted(compound.getString("warpCompleted"));
     }
+
+    public void generateMaterials() {
+        PeridotRepairResources.register();
+        warpList = PeridotRepairResources.list;
+        warpMap = PeridotRepairResources.map;
+        warpMaterials.clear();
+        warpMaterialAmounts.clear();
+        for (int i = 0; i < 4; i++) {
+            int item = random.nextInt(warpList.size());
+            warpMaterials.add(item);
+            int amount = warpMap.get(warpList.get(item));
+            int finalAmount = amount + random.nextInt(2*(amount/4));
+            warpMaterialAmounts.add(finalAmount);
+        }
+        System.out.println(warpMaterials);
+        System.out.println(warpMaterialAmounts);
+    }
+
+    public String getCompleted() {
+        StringBuilder builder = new StringBuilder();
+        for (int i =0; i < warpCompleted.size(); i++) {
+            builder.append(warpCompleted.get(i));
+            if (i < warpCompleted.size() - 1) {
+                builder.append(",");
+            }
+        }
+        if (!builder.isEmpty()) {
+            return builder.toString();
+        }
+        return "";
+    }
+
+    public String getWarpMaterials() {
+        StringBuilder builder = new StringBuilder();
+        for (int i =0; i < warpMaterials.size(); i++) {
+            builder.append(warpMaterials.get(i));
+            if (i < warpMaterials.size() - 1) {
+                builder.append(",");
+            }
+        }
+        if (!builder.isEmpty()) {
+            return builder.toString();
+        }
+        return "";
+    }
+
+    public String getWarpAmounts() {
+        StringBuilder builder = new StringBuilder();
+        for (int i =0; i < warpMaterialAmounts.size(); i++) {
+            builder.append(warpMaterialAmounts.get(i));
+            if (i < warpMaterialAmounts.size() - 1) {
+                builder.append(",");
+            }
+        }
+        if (!builder.isEmpty()) {
+            return builder.toString();
+        }
+        return "";
+    }
+
+    public void setWarpAmounts(String value) {
+        String[] strings = value.split(",");
+        warpMaterialAmounts.clear();
+        for (String string : strings) {
+            warpMaterialAmounts.add(Integer.parseInt(string));
+        }
+    }
+
+    public void setCompleted(String value) {
+        if (!value.isEmpty()) {
+            String[] strings = value.split(",");
+            warpCompleted.clear();
+            for (String string : strings) {
+                warpCompleted.add(Integer.parseInt(string));
+            }
+        }
+    }
+
+    public void setWarpMaterials(String value) {
+        String[] strings = value.split(",");
+        warpMaterials.clear();
+        for (String string : strings) {
+            warpMaterials.add(Integer.parseInt(string));
+        }
+    }
+
     @Override
     public int generateSkinVariant() {
         return 0;

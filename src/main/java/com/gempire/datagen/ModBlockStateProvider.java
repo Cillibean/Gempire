@@ -211,12 +211,12 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         blockItem(ModBlocks.PRIMED_SELENITE);
 
-        //blockWithItem(ModBlocks.SELENITE);
-        //stairsBlock((StairBlock) ModBlocks.PEGMATITE_STAIRS.get(), blockTexture(ModBlocks.PEGMATITE.get()));
-        //slabBlock((SlabBlock) ModBlocks.PEGMATITE_SLAB.get(), blockTexture(ModBlocks.PEGMATITE.get()), blockTexture(ModBlocks.PEGMATITE.get()));
-        //wallBlock((WallBlock) ModBlocks.SELENITE_WALL.get(), blockTexture(ModBlocks.SELENITE.get()));
-        //blockItem(ModBlocks.SELENITE_STAIRS);
-        //blockItem(ModBlocks.SELENITE_SLAB);
+        blockWithItem(ModBlocks.SELENITE);
+        stairsBlock((StairBlock) ModBlocks.SELENITE_STAIRS.get(), blockTexture(ModBlocks.SELENITE.get()));
+        slabBlock((SlabBlock) ModBlocks.SELENITE_SLAB.get(), blockTexture(ModBlocks.SELENITE.get()), blockTexture(ModBlocks.SELENITE.get()));
+        wallBlock((WallBlock) ModBlocks.SELENITE_WALL.get(), blockTexture(ModBlocks.SELENITE.get()));
+        blockItem(ModBlocks.SELENITE_STAIRS);
+        blockItem(ModBlocks.SELENITE_SLAB);
 
         blockWithItem(ModBlocks.POLISHED_SELENITE);
         stairsBlock((StairBlock) ModBlocks.POLISHED_SELENITE_STAIRS.get(), blockTexture(ModBlocks.POLISHED_SELENITE.get()));
@@ -224,6 +224,10 @@ public class ModBlockStateProvider extends BlockStateProvider {
         wallBlock((WallBlock) ModBlocks.POLISHED_SELENITE_WALL.get(), blockTexture(ModBlocks.POLISHED_SELENITE.get()));
         blockItem(ModBlocks.POLISHED_SELENITE_STAIRS);
         blockItem(ModBlocks.POLISHED_SELENITE_SLAB);
+
+        blockWithItem(ModBlocks.ROUGH_SELENITE);
+
+        saplingBlock(ModBlocks.SELENITE_CLUSTER);
 
         paneBlock(ModBlocks.RED_LATTICE, new ResourceLocation(Gempire.MODID, "block/lattice_red"), new ResourceLocation(Gempire.MODID, "block/lattice_red"));
         paneBlock(ModBlocks.ORANGE_LATTICE, new ResourceLocation(Gempire.MODID, "block/lattice_orange"), new ResourceLocation(Gempire.MODID, "block/lattice_orange"));
@@ -241,6 +245,26 @@ public class ModBlockStateProvider extends BlockStateProvider {
         paneBlock(ModBlocks.GRAY_LATTICE, new ResourceLocation(Gempire.MODID, "block/lattice_gray"), new ResourceLocation(Gempire.MODID, "block/lattice_gray"));
         paneBlock(ModBlocks.BLACK_LATTICE, new ResourceLocation(Gempire.MODID, "block/lattice_black"), new ResourceLocation(Gempire.MODID, "block/lattice_black"));
         paneBlock(ModBlocks.BROWN_LATTICE, new ResourceLocation(Gempire.MODID, "block/lattice_brown"), new ResourceLocation(Gempire.MODID, "block/lattice_brown"));
+
+        /*
+        blockWithItem(ModBlocks.PHOSPHORUS_LAMP);
+        blockWithItem(ModBlocks.RED_PHOSPHORUS_LAMP);
+        blockWithItem(ModBlocks.ORANGE_PHOSPHORUS_LAMP);
+        blockWithItem(ModBlocks.YELLOW_PHOSPHORUS_LAMP);
+        blockWithItem(ModBlocks.LIME_PHOSPHORUS_LAMP);
+        blockWithItem(ModBlocks.GREEN_PHOSPHORUS_LAMP);
+        blockWithItem(ModBlocks.CYAN_PHOSPHORUS_LAMP);
+        blockWithItem(ModBlocks.LIGHT_BLUE_PHOSPHORUS_LAMP);
+        blockWithItem(ModBlocks.BLUE_PHOSPHORUS_LAMP);
+        blockWithItem(ModBlocks.PURPLE_PHOSPHORUS_LAMP);
+        blockWithItem(ModBlocks.MAGENTA_PHOSPHORUS_LAMP);
+        blockWithItem(ModBlocks.PINK_PHOSPHORUS_LAMP);
+        blockWithItem(ModBlocks.WHITE_PHOSPHORUS_LAMP);
+        blockWithItem(ModBlocks.LIGHT_GRAY_PHOSPHORUS_LAMP);
+        blockWithItem(ModBlocks.GRAY_PHOSPHORUS_LAMP);
+        blockWithItem(ModBlocks.BLACK_PHOSPHORUS_LAMP);
+        blockWithItem(ModBlocks.BROWN_PHOSPHORUS_LAMP);
+        */
 
         blockWithItem(ModBlocks.DESOLATE_SOIL);
         blockWithItem(ModBlocks.SCHIST);

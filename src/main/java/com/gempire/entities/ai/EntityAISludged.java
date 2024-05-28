@@ -2,6 +2,7 @@ package com.gempire.entities.ai;
 
 import com.gempire.entities.bases.EntityGem;
 import com.gempire.entities.gems.EntitySpodumene;
+import com.gempire.init.ModBlocks;
 import net.minecraft.client.renderer.block.model.ItemOverride;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;

@@ -14,6 +14,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.AnimatableManager;
@@ -22,7 +23,7 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class EntityAlabasterEmpress extends Monster implements GeoAnimatable {
+public class EntityAlabasterEmpress extends Monster implements GeoEntity {
     private final ServerBossEvent bossEvent = (ServerBossEvent)(new ServerBossEvent(this.getDisplayName(), BossEvent.BossBarColor.WHITE, BossEvent.BossBarOverlay.PROGRESS)).setDarkenScreen(true);
 
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
@@ -94,10 +95,6 @@ public class EntityAlabasterEmpress extends Monster implements GeoAnimatable {
         return this.cache;
     }
 
-    @Override
-    public double getTick(Object o) {
-        return 0;
-    }
 
     @Override
     public void tick() {

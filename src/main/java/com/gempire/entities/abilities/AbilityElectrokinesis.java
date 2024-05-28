@@ -39,17 +39,11 @@ public class AbilityElectrokinesis extends Ability implements ITaskAbility, IVio
 
     @Override
     public void attack(LivingEntity target, float distanceFactor) {
-        ElectrokinesisLightning lightning = new ElectrokinesisLightning(this.holder.level(), this.holder, target);
-        lightning.setPos(target.getX(), target.getY(), target.getZ());
         if (this.holder.level().canSeeSky(target.getOnPos())) {
             System.out.println("can see sky");
-            ElectrokinesisLightning electro = ModEntities.ELECTROKINESIS_LIGHTNING.get().create(this.holder.level());
-            electro.owner = this.holder;
-            electro.target = target;
-            electro.moveTo(Vec3.atBottomCenterOf(target.getOnPos()));
-            lightning.moveTo(Vec3.atBottomCenterOf(target.getOnPos()));
+            ElectrokinesisLightning electro = new ElectrokinesisLightning(this.holder.level(), this.holder, target);
+            electro.moveTo(target.getOnPos().getX(), target.getOnPos().getY(), target.getOnPos().getZ());
             this.holder.level().addFreshEntity(electro);
-            this.holder.level().addFreshEntity(lightning);
             this.holder.enemy = target;
             this.holder.enemyDying = true;
             target.hurt(this.holder.damageSources().lightningBolt(), 5);
@@ -64,7 +58,7 @@ public class AbilityElectrokinesis extends Ability implements ITaskAbility, IVio
 
     @Override
     public boolean targetTask() {
-        return true;
+        return false;
     }
 
     @Override
