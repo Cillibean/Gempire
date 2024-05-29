@@ -1,0 +1,24 @@
+{
+  "name": "gempire:marble_dungeon/spiral_pool",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 2,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "projection": "rigid",
+        "location": "gempire:marble_dungeon_spiral_mid",
+        "processors": "minecraft:empty"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "projection": "rigid",
+        "location": "gempire:marble_dungeon_spiral_end",
+        "processors": "minecraft:empty"
+      }
+    }
+  ]
+}

@@ -1,10 +1,12 @@
 package com.gempire.entities.other;
 
 import com.gempire.init.ModEffects;
+import com.gempire.init.ModSounds;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerBossEvent;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.BossEvent;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
@@ -84,6 +86,11 @@ public class EntityFuchsiaPaladin extends Monster implements GeoEntity {
 
     public boolean canChangeDimensions() {
         return false;
+    }
+
+    @Override
+    protected SoundEvent getDeathSound() {
+        return ModSounds.POOF.get();
     }
 
     @Override
