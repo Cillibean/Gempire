@@ -12,6 +12,34 @@
   },
   "spawners": {},
   "spawn_costs": {},
-  "carvers": {},
-  "features": []
+  "carvers": {
+    "air": [
+      "minecraft:cave",
+      "minecraft:cave_extra_underground",
+      "minecraft:canyon"
+    ]
+  },
+  "features": [
+    [],
+    [
+      "minecraft:lake_lava_underground",
+      "minecraft:lake_lava_surface"
+    ],
+    [],
+    [],
+    [],
+    [],
+    [
+      "gempire:ore_macadam",
+      "gempire:ore_schist"
+    ],
+    [],
+    [],
+    [
+      "minecraft:glow_lichen",
+      "gempire:desolate_kelp",
+      "gempire:aquatic_fibre_normal",
+      "gempire:aquatic_fibre_deep"
+    ]
+  ]
 }

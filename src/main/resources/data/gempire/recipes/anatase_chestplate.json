@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "F F",
+    "IFI",
+    "SIS"
+  ],
+  "key": {
+    "I": {
+      "item": "gempire:anatase_ingot"
+    },
+    "F": {
+      "item": "gempire:calming_jelly"
+    },
+    "S": {
+      "item": "gempire:blue_shards"
+    }
+  },
+  "result": {
+    "item": "gempire:anatase_chestplate"
+  }
+}

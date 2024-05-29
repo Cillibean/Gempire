@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "gempire:drained_red_stone_bricks_chiseled"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "gempire:blocks/drained_red_stone_bricks_chiseled"
+}

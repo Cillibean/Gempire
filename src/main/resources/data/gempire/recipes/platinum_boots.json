@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "F F",
+    "S S"
+  ],
+  "key": {
+    "S": {
+      "item": "gempire:shaded_apple"
+    },
+    "F": {
+      "item": "gempire:platinum_ingot"
+    }
+  },
+  "result": {
+    "item": "gempire:platinum_boots"
+  }
+}

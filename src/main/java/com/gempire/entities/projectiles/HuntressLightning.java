@@ -1,5 +1,6 @@
 package com.gempire.entities.projectiles;
 
+import com.gempire.init.ModEffects;
 import com.gempire.init.ModEntities;
 import com.google.common.collect.Sets;
 import net.minecraft.advancements.CriteriaTriggers;
@@ -12,9 +13,13 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Difficulty;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageSources;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LightningBolt;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseFireBlock;
@@ -37,7 +42,6 @@ import java.util.stream.Stream;
 
 public class HuntressLightning extends Entity {
 
-    public Entity target;
     public Entity owner;
 
     public HuntressLightning(EntityType<? extends HuntressLightning> entityType, Level level) {
@@ -48,9 +52,8 @@ public class HuntressLightning extends Entity {
         this.flashes = this.random.nextInt(3) + 1;
     }
 
-    public HuntressLightning(Level level, Entity owner, Entity target) {
+    public HuntressLightning(Level level, Entity owner) {
         super(ModEntities.HUNTRESS_LIGHTNING.get(), level);
-        this.target = target;
         this.owner = owner;
     }
 
@@ -149,6 +152,10 @@ public class HuntressLightning extends Entity {
 
                 while(var2.hasNext()) {
                     Entity entity = (Entity)var2.next();
+                    entity.hurt(this.damageSources().lightningBolt(), 4);
+                    if (entity instanceof LivingEntity) {
+                        if (!((LivingEntity) entity).hasEffect(ModEffects.SHOCK_RESISTANCE.get())) ((LivingEntity) entity).addEffect(new MobEffectInstance(ModEffects.ELECTROCUTION.get(), 50, 0));
+                    }
                 }
 
                 this.hitEntities.addAll(list1);
