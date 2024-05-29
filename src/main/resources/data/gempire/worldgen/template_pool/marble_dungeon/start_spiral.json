@@ -1,6 +1,6 @@
 {
   "name": "gempire:marble_dungeon/start_spiral",
-  "fallback": "gempire:marble_dungeon_spiral_top",
+  "fallback": "minecraft:empty",
   "elements": [
     {
       "weight": 1,
