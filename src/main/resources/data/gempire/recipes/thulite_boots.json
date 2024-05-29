@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "F F",
+    "S S"
+  ],
+  "key": {
+    "S": {
+      "item": "gempire:alien_flower"
+    },
+    "F": {
+      "item": "gempire:thulite_ingot"
+    }
+  },
+  "result": {
+    "item": "gempire:thulite_boots"
+  }
+}

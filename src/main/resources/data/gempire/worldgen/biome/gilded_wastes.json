@@ -21,24 +21,40 @@
     ]
   },
   "spawn_costs": {},
-  "carvers": {},
+  "carvers": {
+    "air": [
+      "minecraft:cave",
+      "minecraft:cave_extra_underground",
+      "minecraft:canyon"
+    ]
+  },
   "features": [
     [],
-    [],
-    [],
-    [],
-    [],
+    [
+      "minecraft:lake_lava_underground",
+      "minecraft:lake_lava_surface"
+    ],
     [],
     [],
     [],
     [],
     [
+      "gempire:ore_macadam",
+      "gempire:ore_schist"
+    ],
+    [],
+    [],
+    [
+      "minecraft:glow_lichen",
       "minecraft:patch_tall_grass_2",
       "minecraft:patch_grass_plain",
       "gempire:shock_berry",
       "gempire:crocosmia",
       "gempire:nasturtiums",
-      "gempire:pansie"
+      "gempire:pansie",
+      "gempire:desolate_kelp",
+      "gempire:aquatic_fibre_normal",
+      "gempire:aquatic_fibre_deep"
     ]
   ]
 }

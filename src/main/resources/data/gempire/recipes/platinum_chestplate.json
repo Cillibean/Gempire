@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "F F",
+    "IFI",
+    "SIS"
+  ],
+  "key": {
+    "I": {
+      "item": "gempire:platinum_ingot"
+    },
+    "F": {
+      "item": "gempire:shaded_apple"
+    },
+    "S": {
+      "item": "gempire:white_shards"
+    }
+  },
+  "result": {
+    "item": "gempire:platinum_chestplate"
+  }
+}

@@ -63,6 +63,21 @@ public class ModBlocks {
             new PrismWhiteAltarBlock(BlockBehaviour.Properties.of().pushReaction(PushReaction.BLOCK)));
 */
 
+    public static final RegistryObject<Block> COBALT_KELP = BLOCKS.register("cobalt_kelp", () ->
+            new DesolateKelpBlock(BlockBehaviour.Properties.copy(Blocks.KELP)));
+
+    public static final RegistryObject<Block> COBALT_KELP_PLANT = BLOCKS.register("cobalt_kelp_plant", () ->
+            new DesolateKelpPlantBlock(BlockBehaviour.Properties.copy(Blocks.KELP_PLANT)));
+
+    public static final RegistryObject<Block> AQUATIC_FIBRE = BLOCKS.register("aquatic_fibre", () ->
+            new AquaticFibreBlock(BlockBehaviour.Properties.copy(Blocks.SEAGRASS)));
+
+    public static final RegistryObject<Block> TALL_AQUATIC_FIBRE = BLOCKS.register("tall_aquatic_fibre", () ->
+            new TallAquaticFibreBlock(BlockBehaviour.Properties.copy(Blocks.TALL_SEAGRASS)));
+
+    public static final RegistryObject<Block> MACADAM = BLOCKS.register("macadam", () ->
+            new GravelBlock(BlockBehaviour.Properties.copy(Blocks.GRAVEL)));
+
     public static final RegistryObject<Block> PRISMATIC_SNOW = BLOCKS.register("prismatic_snow", () ->
             new Block(BlockBehaviour.Properties.copy(Blocks.SNOW_BLOCK)));
 

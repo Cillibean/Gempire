@@ -276,6 +276,12 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         blockItem(ModBlocks.DESOLATE_GRASS);
 
+        blockWithItem(ModBlocks.MACADAM);
+
+        saplingBlock(ModBlocks.COBALT_KELP);
+        saplingBlock(ModBlocks.COBALT_KELP_PLANT);
+        saplingBlock(ModBlocks.AQUATIC_FIBRE);
+
         saplingBlock(ModBlocks.THULITE_TOWER);
         saplingBlock(ModBlocks.THULITE_CLUSTER);
 

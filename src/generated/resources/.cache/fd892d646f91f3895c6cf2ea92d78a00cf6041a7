@@ -1,4 +1,4 @@
-// 1.20.1	2024-05-28T12:01:24.960977	Item Models: gempire
+// 1.20.1	2024-05-29T16:58:22.048956	Item Models: gempire
 2a4c323206d2fbeca217109aa5c8a2ac8ce38701 assets/gempire/models/item/acid_spit.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/gempire/models/item/alabaster_empress_spawn_egg.json
 0da7ed67ca0a8fcb9a8ba427cc3a79d0931ef656 assets/gempire/models/item/alabaster_shards.json
@@ -6,6 +6,7 @@
 c0c62ab235536d2de57de21efdcbe773279a708b assets/gempire/models/item/amber_shards.json
 a29e967ff074b156f0e58ab74842556395538217 assets/gempire/models/item/anatase_ingot.json
 a3632651a9fbc3e7e228b96d6dd3f21302c6f76c assets/gempire/models/item/anatase_nugget.json
+cc177740b38d8d4a598d67688cc22f2241751c8f assets/gempire/models/item/aquatic_fibre.json
 b00486158875f7cfbcb327a00017deb8b51c211f assets/gempire/models/item/black_chroma.json
 417aa16de7be211ab4be4572d9128fd1f5a37921 assets/gempire/models/item/black_lattice.json
 77393a3dc963655f33b217fa1a280e442b0c0f8f assets/gempire/models/item/black_shards.json

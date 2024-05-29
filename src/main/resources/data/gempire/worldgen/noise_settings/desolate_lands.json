@@ -724,7 +724,7 @@
                             {
                               "type": "minecraft:block",
                               "result_state": {
-                                "Name": "minecraft:gravel"
+                                "Name": "gempire:macadam"
                               }
                             }
                           ]
@@ -1199,7 +1199,7 @@
                                         {
                                           "type": "minecraft:block",
                                           "result_state": {
-                                            "Name": "minecraft:gravel"
+                                            "Name": "gempire:macadam"
                                           }
                                         }
                                       ]
@@ -1397,7 +1397,7 @@
                                     {
                                       "type": "minecraft:block",
                                       "result_state": {
-                                        "Name": "minecraft:gravel"
+                                        "Name": "gempire:macadam"
                                       }
                                     }
                                   ]
@@ -1478,7 +1478,7 @@
                                   {
                                     "type": "minecraft:block",
                                     "result_state": {
-                                      "Name": "minecraft:gravel"
+                                      "Name": "gempire:macadam"
                                     }
                                   }
                                 ]
@@ -1943,7 +1943,7 @@
                                         {
                                           "type": "minecraft:block",
                                           "result_state": {
-                                            "Name": "minecraft:gravel"
+                                            "Name": "gempire:macadam"
                                           }
                                         }
                                       ]
@@ -2136,7 +2136,7 @@
                                     {
                                       "type": "minecraft:block",
                                       "result_state": {
-                                        "Name": "minecraft:gravel"
+                                        "Name": "gempire:macadam"
                                       }
                                     }
                                   ]
@@ -2194,7 +2194,7 @@
                                   {
                                     "type": "minecraft:block",
                                     "result_state": {
-                                      "Name": "minecraft:gravel"
+                                      "Name": "gempire:macadam"
                                     }
                                   }
                                 ]
@@ -2350,7 +2350,7 @@
                       {
                         "type": "minecraft:block",
                         "result_state": {
-                          "Name": "minecraft:gravel"
+                          "Name": "gempire:macadam"
                         }
                       }
                     ]

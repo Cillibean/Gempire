@@ -1,0 +1,4 @@
+{
+  "type": "minecraft:block",
+  "random_sequence": "gempire:blocks/gem_seed_block"
+}

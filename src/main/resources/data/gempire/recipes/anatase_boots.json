@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "F F",
+    "S S"
+  ],
+  "key": {
+    "S": {
+      "item": "gempire:calming_jelly"
+    },
+    "F": {
+      "item": "gempire:anatase_ingot"
+    }
+  },
+  "result": {
+    "item": "gempire:anatase_boots"
+  }
+}

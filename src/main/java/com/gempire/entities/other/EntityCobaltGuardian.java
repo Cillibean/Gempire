@@ -4,11 +4,13 @@ import com.gempire.entities.ai.EntityAIGuardianDash;
 import com.gempire.entities.projectiles.AcidSpitEntity;
 import com.gempire.entities.projectiles.GuardianProjectileEntity;
 import com.gempire.init.ModEffects;
+import com.gempire.init.ModSounds;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerBossEvent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.world.BossEvent;
@@ -144,6 +146,11 @@ public class EntityCobaltGuardian extends Monster implements GeoEntity, RangedAt
     }
 
     @Override
+    protected SoundEvent getDeathSound() {
+        return ModSounds.POOF.get();
+    }
+
+    @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
         controllerRegistrar.add(DefaultAnimations.genericIdleController(this));
         controllerRegistrar.add(new AnimationController<>(this, "cry_controller", state -> PlayState.CONTINUE)
@@ -159,22 +166,16 @@ public class EntityCobaltGuardian extends Monster implements GeoEntity, RangedAt
 
     @Override
     public void tick() {
-        if (auraCryCooldown == 0) {
+        if (auraCryCooldown == 0 && !isDashing) {
             if (!level().isClientSide) {
-                if (random.nextInt(20) == 1) {
-                    auraCry();
-                }
+                if (random.nextInt(20) == 1) auraCry();
             }
         } else {
             if (!level().isClientSide) {
                 auraCryCooldown--;
                 if (dashCooldown == 0) {
-                    if (this.random.nextInt(20) == 1) {
-                        isDashing = true;
-                    }
-                } else {
-                    dashCooldown--;
-                }
+                    if (this.random.nextInt(20) == 1) isDashing = true;
+                } else dashCooldown--;
 
                 List<Entity> list = this.level().getEntities(this, this.getBoundingBox().inflate(0.20000000298023224, -0.009999999776482582, 0.20000000298023224), EntitySelector.pushableBy(this));
                 if (!list.isEmpty()) {

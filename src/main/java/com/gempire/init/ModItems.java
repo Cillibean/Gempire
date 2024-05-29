@@ -332,6 +332,13 @@ public class ModItems {
             )
     );
 
+    public static final RegistryObject<Item> MACADAM = ITEMS.register("macadam", () ->
+            new BlockItem(
+                    ModBlocks.MACADAM.get(),
+                    new Item.Properties()
+            )
+    );
+
     public static final RegistryObject<Item> DESOLATE_GRASS = ITEMS.register("desolate_grass", () ->
             new BlockItem(
                     ModBlocks.DESOLATE_GRASS.get(),
@@ -1016,12 +1023,32 @@ public class ModItems {
             new Item(new Item.Properties().stacksTo(1))
     );
 
+    public static final RegistryObject<Item> SHADED_APPLE = ITEMS.register("shaded_apple", () ->
+            new Item(new Item.Properties().stacksTo(64).food(ModFoods.SHADED_APPLE))
+    );
+
+    public static final RegistryObject<Item> CALMING_JELLY = ITEMS.register("calming_jelly", () ->
+            new Item(new Item.Properties().stacksTo(64).food(ModFoods.CALMING_JELLY))
+    );
+
     public static final RegistryObject<Item> SHOCK_BERRY = ITEMS.register("shock_berry", () ->
             new ItemNameBlockItem(ModBlocks.SHOCK_BERRY_BUSH.get(), new Item.Properties().stacksTo(64).food(ModFoods.SHOCK_BERRY))
     );
 
     public static final RegistryObject<Item> STRAWBERRY = ITEMS.register("strawberry", () ->
             new ItemNameBlockItem(ModBlocks.STRAWBERRY_STEM.get(), new Item.Properties().stacksTo(64).food(ModFoods.STRAWBERRY))
+    );
+
+    public static final RegistryObject<Item> COBALT_KELP = ITEMS.register("cobalt_kelp", () ->
+            new ItemNameBlockItem(ModBlocks.COBALT_KELP.get(), new Item.Properties().stacksTo(64))
+    );
+
+    public static final RegistryObject<Item> AQUATIC_FIBRE = ITEMS.register("aquatic_fibre", () ->
+            new BlockItem(ModBlocks.AQUATIC_FIBRE.get(), new Item.Properties().stacksTo(64))
+    );
+
+    public static final RegistryObject<Item> TALL_AQUATIC_FIBRE = ITEMS.register("tall_aquatic_fibre", () ->
+            new BlockItem(ModBlocks.TALL_AQUATIC_FIBRE.get(), new Item.Properties().stacksTo(64))
     );
 
     /*

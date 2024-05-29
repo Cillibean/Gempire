@@ -17,6 +17,14 @@ public class ModFoods {
         return new MobEffectInstance(ModEffects.SHOCK_RESISTANCE.get(), 400, 4);
     }, 1).build();
 
+    public static final FoodProperties SHADED_APPLE = (new FoodProperties.Builder()).alwaysEat().nutrition(1).saturationMod(1).effect(()->{
+        return new MobEffectInstance(ModEffects.SHADE.get(), 400, 4);
+    }, 1).build();
+
+    public static final FoodProperties CALMING_JELLY = (new FoodProperties.Builder()).alwaysEat().nutrition(1).saturationMod(1).effect(()->{
+        return new MobEffectInstance(ModEffects.CALM.get(), 400, 4);
+    }, 1).build();
+
     public static final FoodProperties ALIEN_FLOWER = (new FoodProperties.Builder()).alwaysEat().nutrition(1).saturationMod(1).effect(()->{
         return new MobEffectInstance(ModEffects.FLORAL_PROTECTION.get(), 400, 4);
     }, 1).build();

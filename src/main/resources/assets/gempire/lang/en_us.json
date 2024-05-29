@@ -263,6 +263,7 @@
   "item.gempire.raw_pyrite": "Raw Pyrite",
   "item.gempire.pyrite_nugget": "Pyrite Nugget",
 
+  "block.gempire.macadam": "Macadam",
   "block.gempire.pegmatite": "Pegmatite",
   "block.gempire.pegmatite_stairs": "Pegmatite Stairs",
   "block.gempire.pegmatite_slab": "Pegmatite Slab",
@@ -290,6 +291,13 @@
   "block.gempire.pincule": "Pincule",
   "block.gempire.abnormal_sand": "Abnormal Sand",
   "block.gempire.abnormal_sandstone": "Abnormal Sandstone",
+
+  "block.gempire.cobalt_kelp": "Cobalt Kelp",
+  "block.gempire.cobalt_kelp_block": "Cobalt Kelp",
+  "item.gempire.cobalt_kelp": "Cobalt Kelp",
+
+  "block.gempire.aquatic_fibre": "Aquatic Fibre",
+  "block.gempire.tall_aquatic_fibre": "Tall Aquatic Fibre",
 
   "block.gempire.galaxy_warp": "Galaxy Warp Pad",
   "block.gempire.warp_pad": "Warp Pad",
@@ -486,6 +494,9 @@
 
   "block.gempire.shock_berry_bush": "Shock Berry Bush",
   "item.gempire.shock_berry": "Shock Berry",
+  "item.gempire.shaded_apple": "Shaded Apple",
+  "item.gempire.calming_jelly": "Calming Jelly",
+
   "item.gempire.prismatic_glass": "Reinforced Prismatic Glass Shards",
   "block.gempire.purified_prismatic_glass": "Purified Prismatic Diamond Glass",
 
@@ -942,9 +953,13 @@
 
   "effect.gempire.paralysis": "Paralysis",
   "effect.gempire.entanglement": "Entangled",
+  "effect.gempire.dread": "Dread",
   "effect.gempire.electrocution": "Electrocuted",
   "effect.gempire.blinding_light": "Blinding Light",
+  "effect.gempire.floral_protection": "Floral Protection",
+  "effect.gempire.calm": "Calm",
   "effect.gempire.shock_resistance": "Shock Resistance",
+  "effect.gempire.shade": "Shade",
   "effect.gempire.guardians_grace": "Guardian's Grace",
   "effect.gempire.huntress": "Huntress's Strength",
   "effect.gempire.empress": "Empress's Light",
@@ -960,6 +975,15 @@
   "item.minecraft.splash_potion.effect.electrocution_potion": "Splash Potion of Electrocution",
   "item.minecraft.lingering_potion.effect.shock_resistance_potion": "Lingering Potion of Shock Resistance",
   "item.minecraft.lingering_potion.effect.electrocution_potion": "Lingering Potion of Electrocution",
+  "item.minecraft.potion.effect.shade_potion": "Potion of Shade",
+  "item.minecraft.potion.effect.floral_protection_potion": "Potion of Floral Protection",
+  "item.minecraft.splash_potion.effect.shade_potion": "Splash Potion of Shade",
+  "item.minecraft.splash_potion.effect.floral_protection_potion": "Splash Potion of Floral Protection",
+  "item.minecraft.lingering_potion.effect.shade_potion": "Lingering Potion of Shade",
+  "item.minecraft.lingering_potion.effect.floral_protection_potion": "Lingering Potion of Floral Protection",
+  "item.minecraft.potion.effect.calm_potion": "Potion of Calm",
+  "item.minecraft.splash_potion.effect.calm_potion": "Splash Potion of Calm",
+  "item.minecraft.lingering_potion.effect.calm_potion": "Lingering Potion of Calm",
 
   "nickname.gempire.sapphire_0": "White Sapphire",
   "nickname.gempire.sapphire_1": "Padparadscha",

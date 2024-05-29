@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "half=lower": {
+      "model": "gempire:block/tall_aquatic_fibre_bottom"
+    },
+    "half=upper": {
+      "model": "gempire:block/tall_aquatic_fibre_top"
+    }
+  }
+}

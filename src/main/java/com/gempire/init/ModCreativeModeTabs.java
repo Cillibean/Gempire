@@ -311,6 +311,9 @@ public class ModCreativeModeTabs {
                 populator.accept(ModItems.CONGEALED_WHITE_ESSENCE.get());
 
                 populator.accept(ModItems.STRAWBERRY.get());
+                populator.accept(ModItems.COBALT_KELP.get());
+                populator.accept(ModBlocks.AQUATIC_FIBRE.get());
+                populator.accept(ModBlocks.TALL_AQUATIC_FIBRE.get());
 
                 populator.accept(ModItems.REMNANTS_MUSIC_DISC.get());
                 populator.accept(ModItems.FRAGMENTS_MUSIC_DISC.get());
@@ -365,7 +368,10 @@ public class ModCreativeModeTabs {
                 populator.accept(ModItems.PURPLE_CRYSTAL_APPLE.get());
                 populator.accept(ModItems.PINK_CRYSTAL_APPLE.get());
 
+                populator.accept(ModItems.ALIEN_FLOWER.get());
+                populator.accept(ModItems.CALMING_JELLY.get());
                 populator.accept(ModItems.SHOCK_BERRY.get());
+                populator.accept(ModItems.SHADED_APPLE.get());
 
                 populator.accept(ModItems.WARP_CORE.get());
             }).build()
@@ -667,7 +673,8 @@ public class ModCreativeModeTabs {
                 populator.accept(ModItems.ABNORMAL_SAND.get());
                 populator.accept(ModItems.ABNORMAL_SANDSTONE.get());
 
-                populator.accept(ModItems.PRISMATIC_SNOW.get());
+                populator.accept(ModBlocks.PRISMATIC_SNOW.get());
+                populator.accept(ModBlocks.MACADAM.get());
 
                 populator.accept(ModItems.DESOLATE_GRASS.get());
                 populator.accept(ModItems.DESOLATE_SOIL.get());
@@ -676,8 +683,6 @@ public class ModCreativeModeTabs {
 
                 populator.accept(ModBlocks.THULITE_CLUSTER.get());
                 populator.accept(ModBlocks.THULITE_TOWER.get());
-
-                populator.accept(ModBlocks.ALIEN_FLOWER.get());
 
                 populator.accept(ModBlocks.PHOSPHORUS_LAMP.get());
 

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "F F",
+    "IFI",
+    "SIS"
+  ],
+  "key": {
+    "I": {
+      "item": "gempire:thulite_ingot"
+    },
+    "F": {
+      "item": "gempire:alien_flower"
+    },
+    "S": {
+      "item": "gempire:pink_shards"
+    }
+  },
+  "result": {
+    "item": "gempire:thulite_chestplate"
+  }
+}

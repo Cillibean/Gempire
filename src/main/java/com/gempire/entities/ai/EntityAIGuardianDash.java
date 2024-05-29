@@ -38,24 +38,21 @@ public class EntityAIGuardianDash extends Goal {
     @Override
     public void start(){
         super.start();
-        if (!follower.level().isClientSide) {
-            follower.triggerAnim("dash_controller", "dash");
-        }
+        if (!follower.level().isClientSide) follower.triggerAnim("dash_controller", "dash");
         tick = 12;
     }
 
     @Override
     public void tick() {
         super.tick();
+        this.follower.getLookControl().setLookAt(this.target.getX(), this.follower.getEyeY(), this.target.getZ());
         System.out.println(tick);
         if (tick <= 0) {
             this.follower.setPos(this.target.getX(), this.target.getY(), this.target.getZ());
             follower.isDashing = false;
             follower.dashCooldown = 100;
             stop();
-        } else {
-            tick--;
-        }
+        } else tick--;
     }
 
     @Override

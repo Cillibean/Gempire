@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "FIF",
+    "F F",
+    "S S"
+  ],
+  "key": {
+    "I": {
+      "item": "gempire:blue_shards"
+    },
+    "F": {
+      "item": "gempire:anatase_ingot"
+    },
+    "S": {
+      "item": "gempire:calming_jelly"
+    }
+  },
+  "result": {
+    "item": "gempire:anatase_leggings"
+  }
+}
