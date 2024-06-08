@@ -48,18 +48,8 @@ public class DestabWallBlock extends HorizontalDirectionalBlock {
         this.registerDefaultState(this.stateDefinition.any().setValue(POWERED, Boolean.FALSE).setValue(FACING, Direction.NORTH));
     }
 
-    public boolean skipRendering(BlockState p_54207_, BlockState p_54208_, Direction p_54209_) {
-        if (p_54208_.is(this)) {
-            if (!p_54209_.getAxis().isHorizontal()) {
-                return true;
-            }
-
-            if (p_54207_.getValue(PROPERTY_BY_DIRECTION.get(p_54209_)) && p_54208_.getValue(PROPERTY_BY_DIRECTION.get(p_54209_.getOpposite()))) {
-                return true;
-            }
-        }
-
-        return super.skipRendering(p_54207_, p_54208_, p_54209_);
+    public boolean skipRendering(BlockState p_53972_, BlockState p_53973_, Direction p_53974_) {
+        return p_53973_.is(this) ? true : super.skipRendering(p_53972_, p_53973_, p_53974_);
     }
 
     private void updateNeighbours(BlockState state, Level level, BlockPos pos) {
