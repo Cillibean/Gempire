@@ -3074,15 +3074,21 @@ public class ModBlocks {
                     BlockBehaviour.Properties.of().pushReaction(PushReaction.DESTROY).noCollission().randomTicks()
                             .instabreak().sound(SoundType.HARD_CROP)));
 
-    /*public static final RegistryObject<Block> DESTAB_WALL = BLOCKS.register("destab_wall", () ->
-            new DestabWallBlock(Block.Properties
-                    .of()
-                    .strength(3.0f, 4.0f)
-                    .sound(SoundType.GLASS)
-                    .speedFactor(0.4F)
-                    .noOcclusion()
-            )
-    );*/
+    public static final RegistryObject<Block> YELLOW_DESTAB_WALL = BLOCKS.register("yellow_destab_wall", () ->
+            new DestabWallBlock(Block.Properties.of().strength(3.0f, 4.0f).sound(SoundType.GLASS).speedFactor(0.4F).noOcclusion().noCollission())
+    );
+
+    public static final RegistryObject<Block> PINK_DESTAB_WALL = BLOCKS.register("pink_destab_wall", () ->
+            new DestabWallBlock(Block.Properties.of().strength(3.0f, 4.0f).sound(SoundType.GLASS).speedFactor(0.4F).noOcclusion().noCollission())
+    );
+
+    public static final RegistryObject<Block> BLUE_DESTAB_WALL = BLOCKS.register("blue_destab_wall", () ->
+            new DestabWallBlock(Block.Properties.of().strength(3.0f, 4.0f).sound(SoundType.GLASS).speedFactor(0.4F).noOcclusion().noCollission())
+    );
+
+    public static final RegistryObject<Block> WHITE_DESTAB_WALL = BLOCKS.register("white_destab_wall", () ->
+            new DestabWallBlock(Block.Properties.of().strength(3.0f, 4.0f).sound(SoundType.GLASS).speedFactor(0.4F).noOcclusion().noCollission())
+    );
 
     public static final RegistryObject<Block> RUINED_MARBLE_BLOCK = BLOCKS.register("ruined_marble_block", () ->
             new Block(Block.Properties

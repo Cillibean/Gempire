@@ -2,8 +2,8 @@
 	"texture_size": [64, 64],
 	"render_type": "translucent",
 	"textures": {
-		"0": "gempire:block/destab_wall",
-		"particle": "gempire:block/destab_wall"
+		"0": "gempire:block/white_destab_wall",
+		"particle": "gempire:block/white_destab_wall"
 	},
 	"elements": [
 		{

@@ -1,18 +1,18 @@
 {
   "variants": {
     "facing=east,powered=false": {
-      "model": "gempire:block/destab_wall",
+      "model": "gempire:block/pink_destab_wall",
       "y": 90
     },
     "facing=north,powered=false": {
-      "model": "gempire:block/destab_wall"
+      "model": "gempire:block/pink_destab_wall"
     },
     "facing=south,powered=false": {
-      "model": "gempire:block/destab_wall",
+      "model": "gempire:block/pink_destab_wall",
       "y": 180
     },
     "facing=west,powered=false": {
-      "model": "gempire:block/destab_wall",
+      "model": "gempire:block/pink_destab_wall",
       "y": 270
     },
     "facing=east,powered=true": {
