@@ -9,7 +9,7 @@ modLoader="javafml" #mandatory
 loaderVersion="[44,)" #mandatory This is typically bumped every Minecraft version by Forge. See our download page for lists of versions.
 # The license for you mod. This is mandatory metadata and allows for easier comprehension of your redistributive properties.
 # Review your options at https://choosealicense.com/. All rights reserved is the default copyright stance, and is thus the default here.
-license="Steven Universe and all related subjects are property of Cartoon Network and Rebecca Sugar"
+license="Steven Universe and all related subjects are property of Cartoon Network and Rebecca Sugar, Reference for warp pads is owned by ThatPreston"
 # A URL to refer people to when problems occur with this mod
 issueTrackerURL="http://my.issue.tracker/" #optional
 # A list of mods - how many allowed here is determined by the individual mod loader
@@ -31,7 +31,7 @@ logoFile="gempire_icon.png" #optional
 # A text field displayed in the mod UI
 credits="Gempire is a Steven Universe inspired tech/magic mod that lets the players create Gems. These gems can perform many tasks, and are highly customizable and varied, with over a billion possibilities." #optional
 # A text field displayed in the mod UI
-authors="Cillibean, lillemby, Solangelo, Taaffeite, The Moon, and Segapop" #optional
+authors="Cillibean, Lillemby, Solangelo, Taaffeite, The Moon, Segapop, and ThatPreston" #optional
 # The description text for the mod (multi line!) (#mandatory)
 description='''In Gempire, you can grow your own gem entities that can fulfill tasks, protect you while you explore, and more. Install Patchouli for an in-game guide.'''
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.

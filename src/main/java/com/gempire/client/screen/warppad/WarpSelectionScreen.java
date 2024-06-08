@@ -35,9 +35,13 @@ public class WarpSelectionScreen extends AbstractContainerScreen<WarpSelectionMe
         List<WarpPadInfo> warpPads = this.menu.getWarpPads();
         for(WarpPadInfo info : warpPads) {
             if(!info.getPos().equals(this.menu.getPos())) {
-                WarpButton warpButton = new WarpButton(this.leftPos + 7, this.topPos, 144, 23, Component.literal(info.getName()), button -> {
-                    ModPacketHandler.INSTANCE.sendToServer(new WarpRequest(this.menu.getPos(), info.getPos()));
-                    onClose();
+                WarpButton warpButton = new WarpButton(this.leftPos + 7, this.topPos, 144, 23, Component.literal(info.getName()), info.getPos(), button -> {
+                    if (button.isFocused()) {
+                        ModPacketHandler.INSTANCE.sendToServer(new WarpRequest(this.menu.getPos(), info.getPos()));
+                        onClose();
+                    } else {
+                        button.setFocused(true);
+                    }
                 });
                 this.addWidget(warpButton);
                 warpButtons.add(warpButton);
@@ -79,7 +83,7 @@ public class WarpSelectionScreen extends AbstractContainerScreen<WarpSelectionMe
     }
     @Override
     protected void renderLabels(GuiGraphics stack, int mouseX, int mouseY) {
-        stack.drawString(font, this.title, this.titleLabelX, this.titleLabelY, 4210752);
+        stack.drawString(font, this.title, this.titleLabelX, this.titleLabelY, 0xFFFFFF);
     }
     @Override
     protected void renderBg(GuiGraphics stack, float partialTicks, int mouseX, int mouseY) {
