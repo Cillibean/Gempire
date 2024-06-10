@@ -32,11 +32,8 @@ public class WarpButton extends ExtendedButton {
         Font font = minecraft.font;
         int x = this.getX();
         int y = this.getY();
-        if (this.isFocused()) {
-            stack.blit(BUTTON_HIGHLIGHTED, x, y, 0, 100, 144, 23);
-        } else {
-            stack.blit(BUTTON, x, y, 0, 100, 144, 23);
-        }
+        if (this.isFocused()) stack.blit(BUTTON_HIGHLIGHTED, x, y, 0, 166, 144, 23);
+        else stack.blit(BUTTON, x, y, 0, 166, 144, 23);
         Component pos = Component.literal(blockPos.getX() +", " +blockPos.getY() +", " +blockPos.getZ());
         int x2 = x + (144 - font.width(text)) / 2;
         int x3 = x + (144 - font.width(pos)) / 2;
