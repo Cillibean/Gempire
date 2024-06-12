@@ -521,6 +521,10 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.add(ModBlocks.PRIMED_DRAINED_ICE_STATUE.get(), (block -> noDrop()));
         this.add(ModBlocks.STRAWBERRY_STEM.get(), (block -> noDrop()));
         this.add(ModBlocks.ATTACHED_STRAWBERRY_STEM.get(), (block -> noDrop()));
+        this.add(ModBlocks.PINK_DESTAB_WALL.get(), (block -> noDrop()));
+        this.add(ModBlocks.BLUE_DESTAB_WALL.get(), (block -> noDrop()));
+        this.add(ModBlocks.YELLOW_DESTAB_WALL.get(), (block -> noDrop()));
+        this.add(ModBlocks.WHITE_DESTAB_WALL.get(), (block -> noDrop()));
 
         //else
         this.dropSelf(ModBlocks.CONGEALED_YELLOW_ESSENCE_BLOCK.get());

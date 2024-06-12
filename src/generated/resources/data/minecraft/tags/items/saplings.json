@@ -1,6 +1,8 @@
 {
   "values": [
     "gempire:distant_sapling",
-    "gempire:crystal_sapling"
+    "gempire:crystal_sapling",
+    "gempire:shaded_sapling",
+    "gempire:kaleidoscope_sapling"
   ]
 }

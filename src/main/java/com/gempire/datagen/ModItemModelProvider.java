@@ -65,6 +65,7 @@ public class ModItemModelProvider extends ItemModelProvider {
 
         simpleItem(ModItems.SHOCK_BERRY);
         simpleItem(ModItems.STRAWBERRY);
+        simpleItem(ModItems.SHADED_APPLE);
 
         simpleItem(ModItems.SLUDGE_GLOB);
 
