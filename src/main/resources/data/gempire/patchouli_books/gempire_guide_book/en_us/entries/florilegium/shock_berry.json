@@ -2,7 +2,7 @@
   "name": "Shock Berries",
   "icon": "gempire:shock_berry",
   "advancement": "gempire:root",
-  "category": "gempire:desolate_lands",
+  "category": "gempire:florilegium",
   "pages": [
     {
       "type": "patchouli:spotlight",

@@ -1,0 +1,14 @@
+{
+  "name": "Calming Jelly",
+  "icon": "gempire:calming_jelly",
+  "advancement": "gempire:root",
+  "category": "gempire:florilegium",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Calming Jelly",
+      "item": "gempire:calming_jelly",
+      "text": "To be filled out..."
+    }
+  ]
+}

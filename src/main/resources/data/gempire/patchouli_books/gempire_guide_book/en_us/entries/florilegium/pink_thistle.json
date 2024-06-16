@@ -1,0 +1,14 @@
+{
+  "name": "Pink Thistle",
+  "icon": "gempire:pink_thistle",
+  "advancement": "gempire:root",
+  "category": "gempire:florilegium",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Pink Thistle",
+      "item": "gempire:pink_thistle",
+      "text": "Pink thistles are a flower found in the ??? biome."
+    }
+  ]
+}
