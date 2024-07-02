@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "gempire:guardian_vase",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 1357726637,
+    "spacing": 75,
+    "separation": 20
+  }
+}

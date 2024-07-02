@@ -1,4 +1,4 @@
-// 1.20.1	2024-06-12T13:06:52.51407	Item Models: gempire
+// 1.20.1	2024-07-02T17:03:07.674367	Item Models: gempire
 2a4c323206d2fbeca217109aa5c8a2ac8ce38701 assets/gempire/models/item/acid_spit.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/gempire/models/item/alabaster_empress_spawn_egg.json
 0da7ed67ca0a8fcb9a8ba427cc3a79d0931ef656 assets/gempire/models/item/alabaster_shards.json
@@ -107,6 +107,7 @@ fd63725ee2b6dc8d79cb74ac5a8f52399f32ab96 assets/gempire/models/item/pink_lattice
 2073299f7477ac0d2578b04964e06ffbfe7e3f98 assets/gempire/models/item/pink_thistle.json
 d8c821219d681deb4b2070f4bcdb0784138cc381 assets/gempire/models/item/platinum_ingot.json
 a1d4ac1e48eb8e8ec3b3fe32365bbab21468ba17 assets/gempire/models/item/platinum_nugget.json
+44309231d2d98bfda4f6ca2bae96a8391017eb55 assets/gempire/models/item/polished_ryolite_wall.json
 ef10f9d2058b273648c2b80d504f2ba004214292 assets/gempire/models/item/polished_selenite_wall.json
 58fa7a5327ba4497d350d2d0b2485a3f86a772cf assets/gempire/models/item/prime_boost.json
 c77ac1f5738282a6b8deeee0b44b268a33a34c42 assets/gempire/models/item/primed_slate.json
@@ -132,6 +133,7 @@ d316da9d02fb86cbf41c2c52013f2bedb8508095 assets/gempire/models/item/red_chroma.j
 a9adf09a6b9a7f914f03414e71baa7035833370e assets/gempire/models/item/red_lattice.json
 b6c2fd3b1a56b802808f12d3ebed745fb5d62a8b assets/gempire/models/item/red_shards.json
 c47c115685ed81207b9f5c368482ca57f978d626 assets/gempire/models/item/remnants_music_disc.json
+b627f6f8876527949526345edf389a7db250e104 assets/gempire/models/item/ryolite_wall.json
 8e9a2fd991e486ffb012ce4448253791f3bdc98e assets/gempire/models/item/selenite_wall.json
 c7145bf0f332c4509e3fd1223170d39c9e60ee62 assets/gempire/models/item/shaded_apple.json
 9d7db0f279e3fd3783df88998b2195201bbd7834 assets/gempire/models/item/shaded_door.json

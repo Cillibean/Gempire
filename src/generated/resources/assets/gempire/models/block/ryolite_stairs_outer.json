@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "gempire:block/ryolite_block",
+    "side": "gempire:block/ryolite_block",
+    "top": "gempire:block/ryolite_block"
+  }
+}

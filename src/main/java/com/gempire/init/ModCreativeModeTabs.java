@@ -647,6 +647,15 @@ public class ModCreativeModeTabs {
                 populator.accept(ModBlocks.PYRITE_BLOCK.get());
                 populator.accept(ModBlocks.GEODE_CRYSTAL_BLOCK.get());
 
+                populator.accept(ModBlocks.RYOLITE_BLOCK.get());
+                populator.accept(ModBlocks.RYOLITE_STAIRS.get());
+                populator.accept(ModBlocks.RYOLITE_SLAB.get());
+                populator.accept(ModBlocks.RYOLITE_WALL.get());
+                populator.accept(ModBlocks.POLISHED_RYOLITE_BLOCK.get());
+                populator.accept(ModBlocks.POLISHED_RYOLITE_STAIRS.get());
+                populator.accept(ModBlocks.POLISHED_RYOLITE_SLAB.get());
+                populator.accept(ModBlocks.POLISHED_RYOLITE_WALL.get());
+
                 populator.accept(ModBlocks.PEGMATITE.get());
                 populator.accept(ModBlocks.PEGMATITE_STAIRS.get());
                 populator.accept(ModBlocks.PEGMATITE_SLAB.get());

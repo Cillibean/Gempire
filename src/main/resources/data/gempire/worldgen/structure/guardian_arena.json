@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:jigsaw",
+  "biomes": "gempire:mirrored_seas",
+  "step": "surface_structures",
+  "spawn_overrides": {
+    "monster": {
+      "bounding_box": "full",
+      "spawns": []
+    },
+    "creature": {
+      "bounding_box": "full",
+      "spawns": []
+    }
+  },
+  "terrain_adaptation": "none",
+  "start_pool": "gempire:guardian_arena/start_pool",
+  "size": 1,
+  "start_height": {
+    "type": "minecraft:uniform",
+    "min_inclusive": {
+      "absolute": 60
+    },
+    "max_inclusive": {
+      "absolute": 100
+    }
+  },
+  "project_start_to_heightmap": "WORLD_SURFACE_WG",
+  "max_distance_from_center": 128,
+  "use_expansion_hack": false
+}

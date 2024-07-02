@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "gempire:huntress_dagger",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 1918249587,
+    "spacing": 75,
+    "separation": 20
+  }
+}

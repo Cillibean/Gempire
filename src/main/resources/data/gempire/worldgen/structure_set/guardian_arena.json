@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "gempire:guardian_arena",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 1353729937,
+    "spacing": 100,
+    "separation": 20
+  }
+}

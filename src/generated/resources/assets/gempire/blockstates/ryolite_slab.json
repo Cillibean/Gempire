@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "gempire:block/ryolite_slab"
+    },
+    "type=double": {
+      "model": "gempire:block/ryolite_block"
+    },
+    "type=top": {
+      "model": "gempire:block/ryolite_slab_top"
+    }
+  }
+}

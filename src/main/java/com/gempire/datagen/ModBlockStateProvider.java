@@ -41,6 +41,19 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockWithItem(ModBlocks.PYRITE_ORE);
         blockWithItem(ModBlocks.RAW_PYRITE_BLOCK);
 
+        blockWithItem(ModBlocks.RYOLITE_BLOCK);
+        blockWithItem(ModBlocks.POLISHED_RYOLITE_BLOCK);
+        stairsBlock((StairBlock) ModBlocks.RYOLITE_STAIRS.get(), blockTexture(ModBlocks.RYOLITE_BLOCK.get()));
+        slabBlock((SlabBlock) ModBlocks.RYOLITE_SLAB.get(), blockTexture(ModBlocks.RYOLITE_BLOCK.get()), blockTexture(ModBlocks.RYOLITE_BLOCK.get()));
+        wallBlock((WallBlock) ModBlocks.RYOLITE_WALL.get(), blockTexture(ModBlocks.RYOLITE_BLOCK.get()));
+        blockItem(ModBlocks.RYOLITE_STAIRS);
+        blockItem(ModBlocks.RYOLITE_SLAB);
+        stairsBlock((StairBlock) ModBlocks.POLISHED_RYOLITE_STAIRS.get(), blockTexture(ModBlocks.POLISHED_RYOLITE_BLOCK.get()));
+        slabBlock((SlabBlock) ModBlocks.POLISHED_RYOLITE_SLAB.get(), blockTexture(ModBlocks.POLISHED_RYOLITE_BLOCK.get()), blockTexture(ModBlocks.POLISHED_RYOLITE_BLOCK.get()));
+        wallBlock((WallBlock) ModBlocks.POLISHED_RYOLITE_WALL.get(), blockTexture(ModBlocks.POLISHED_RYOLITE_BLOCK.get()));
+        blockItem(ModBlocks.POLISHED_RYOLITE_STAIRS);
+        blockItem(ModBlocks.POLISHED_RYOLITE_SLAB);
+
         blockWithItem(ModBlocks.GEODE_CRYSTAL_BLOCK);
 
         blockWithItem(ModBlocks.PRISMATIC_SNOW);

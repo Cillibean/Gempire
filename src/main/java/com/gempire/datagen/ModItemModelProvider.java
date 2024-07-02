@@ -196,6 +196,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         //simpleItem(ModItems.CRYSTAL_HANGING_SIGN);
 
         wallItem(ModBlocks.PEGMATITE_WALL, ModBlocks.PEGMATITE);
+        wallItem(ModBlocks.RYOLITE_WALL, ModBlocks.RYOLITE_BLOCK);
+        wallItem(ModBlocks.POLISHED_RYOLITE_WALL, ModBlocks.POLISHED_RYOLITE_BLOCK);
         //wallItem(ModBlocks.COBBLED_PEGMATITE_WALL, ModBlocks.COBBLED_PEGMATITE);
         wallItem(ModBlocks.SELENITE_WALL, ModBlocks.SELENITE);
         wallItem(ModBlocks.POLISHED_SELENITE_WALL, ModBlocks.POLISHED_SELENITE);

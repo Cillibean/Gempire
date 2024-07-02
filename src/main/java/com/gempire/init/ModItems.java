@@ -416,6 +416,62 @@ public class ModItems {
             )
     );
 
+    public static final RegistryObject<Item> RYOLITE_BLOCK = ITEMS.register("ryolite_block", () ->
+            new BlockItem(
+                    ModBlocks.RYOLITE_BLOCK.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> RYOLITE_STAIRS = ITEMS.register("ryolite_stairs", () ->
+            new BlockItem(
+                    ModBlocks.RYOLITE_STAIRS.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> RYOLITE_SLAB = ITEMS.register("ryolite_slab", () ->
+            new BlockItem(
+                    ModBlocks.RYOLITE_SLAB.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> RYOLITE_WALL = ITEMS.register("ryolite_wall", () ->
+            new BlockItem(
+                    ModBlocks.RYOLITE_WALL.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> POLISHED_RYOLITE_BLOCK = ITEMS.register("polished_ryolite_block", () ->
+            new BlockItem(
+                    ModBlocks.POLISHED_RYOLITE_BLOCK.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> POLISHED_RYOLITE_STAIRS = ITEMS.register("polished_ryolite_stairs", () ->
+            new BlockItem(
+                    ModBlocks.POLISHED_RYOLITE_STAIRS.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> POLISHED_RYOLITE_SLAB = ITEMS.register("polished_ryolite_slab", () ->
+            new BlockItem(
+                    ModBlocks.POLISHED_RYOLITE_SLAB.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> POLISHED_RYOLITE_WALL = ITEMS.register("polished_ryolite_wall", () ->
+            new BlockItem(
+                    ModBlocks.POLISHED_RYOLITE_WALL.get(),
+                    new Item.Properties()
+            )
+    );
+
     public static final RegistryObject<Item> PEGMATITE = ITEMS.register("pegmatite", () ->
             new BlockItem(
                     ModBlocks.PEGMATITE.get(),

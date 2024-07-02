@@ -202,6 +202,32 @@ public class ModBlocks {
     public static final RegistryObject<Block> GEODE_CRYSTAL_BLOCK = BLOCKS.register("geode_crystal_block", () ->
             new Block(BlockBehaviour.Properties.copy(Blocks.AMETHYST_BLOCK)));
 
+    public static final RegistryObject<Block> RYOLITE_BLOCK = BLOCKS.register("ryolite_block", () ->
+            new Block(BlockBehaviour.Properties.copy(Blocks.STONE)));
+
+    public static final RegistryObject<Block> RYOLITE_SLAB = BLOCKS.register("ryolite_slab", () ->
+            new SlabBlock(BlockBehaviour.Properties.copy(Blocks.STONE_SLAB)));
+
+    public static final RegistryObject<Block> RYOLITE_STAIRS = BLOCKS.register("ryolite_stairs", () ->
+            new StairBlock(() -> ModBlocks.RYOLITE_BLOCK.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.STONE_STAIRS)));
+
+    public static final RegistryObject<Block> RYOLITE_WALL = BLOCKS.register("ryolite_wall", () ->
+            new WallBlock(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE_WALL))
+    );
+
+    public static final RegistryObject<Block> POLISHED_RYOLITE_BLOCK = BLOCKS.register( "polished_ryolite_block", () ->
+            new Block(BlockBehaviour.Properties.copy(Blocks.STONE)));
+
+    public static final RegistryObject<Block> POLISHED_RYOLITE_SLAB = BLOCKS.register( "polished_ryolite_slab", () ->
+            new SlabBlock(BlockBehaviour.Properties.copy(Blocks.STONE_SLAB)));
+
+    public static final RegistryObject<Block> POLISHED_RYOLITE_STAIRS = BLOCKS.register( "polished_ryolite_stairs", () ->
+            new StairBlock(() -> ModBlocks.RYOLITE_BLOCK.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.STONE_STAIRS)));
+
+    public static final RegistryObject<Block> POLISHED_RYOLITE_WALL = BLOCKS.register( "polished_ryolite_wall", () ->
+            new WallBlock(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE_WALL))
+    );
+
     public static final RegistryObject<Block> PEGMATITE = BLOCKS.register("pegmatite", () ->
             new Block(BlockBehaviour.Properties.copy(Blocks.STONE)));
 
