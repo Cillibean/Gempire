@@ -6,11 +6,11 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Assigning a gem to another gem is easy. Take an assignment contract, and right click on the gem that you want to set as the owner. A string of text will appear in your chat box to specify what gem has been set as the owner. Then click the gem you would like to assign. Another message will display stating that the gem has been assigned."
+      "text": "Assigning a gem to another gem is easy. Take an assignment contract, and right click on the gem that you want to set as the owner. A string of text will appear in your chat box to specify what gem has been set as the owner. Then right click the gem you would like to assign. Another message will display stating that the gem has been assigned."
     },
     {
       "type": "patchouli:text",
-      "text": "Then, you will be able to set her following mode to that of the gem she's assigned to. To unassign a gem from another gem, right click the contract on the gem that was assigned."
+      "text": "Then, you will be able to set her following mode to that of the gem she's assigned to. An assignment contract will save the gem owner to it, allowing for multiple assignments to one gem. To unassign a gem from another gem, right click the contract on the gem that was assigned. To clear the owner on the assignment contract, shift-right click a block."
     }
   ]
 }

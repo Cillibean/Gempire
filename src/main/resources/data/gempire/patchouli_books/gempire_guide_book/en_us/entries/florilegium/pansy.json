@@ -1,0 +1,14 @@
+{
+  "name": "Pansy",
+  "icon": "gempire:pansy",
+  "advancement": "gempire:root",
+  "category": "gempire:florilegium",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Pansy",
+      "item": "gempire:pansy",
+      "text": "Pansies are a flower found in the ??? biome."
+    }
+  ]
+}

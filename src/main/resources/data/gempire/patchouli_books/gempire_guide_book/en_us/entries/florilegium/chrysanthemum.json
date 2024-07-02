@@ -1,0 +1,14 @@
+{
+  "name": "Chrysanthemum",
+  "icon": "gempire:chrysanthemum",
+  "advancement": "gempire:root",
+  "category": "gempire:florilegium",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Chrysanthemum",
+      "item": "gempire:chrysanthemum",
+      "text": "Chrysanthemums are a flower found in the ??? biome."
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "Orchid",
+  "icon": "gempire:orchid",
+  "advancement": "gempire:root",
+  "category": "gempire:florilegium",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Orchid",
+      "item": "gempire:orchid",
+      "text": "Orchids are a flower found in the ??? biome."
+    }
+  ]
+}

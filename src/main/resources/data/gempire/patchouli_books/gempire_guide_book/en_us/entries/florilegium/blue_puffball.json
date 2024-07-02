@@ -1,0 +1,14 @@
+{
+  "name": "Blue Puffball",
+  "icon": "gempire:blue_puffball",
+  "advancement": "gempire:root",
+  "category": "gempire:florilegium",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Blue Puffball",
+      "item": "gempire:blue_puffball",
+      "text": "Blue puffballs are a flower found in the ??? biome."
+    }
+  ]
+}

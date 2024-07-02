@@ -325,7 +325,7 @@
   "block.gempire.pedistal": "Hand Pedestal",
   "block.gempire.pedistal.setprivate": "This Pedestal is now private.",
   "block.gempire.pedistal.setpublic": "This Pedestal is now public.",
-  "block.gempire.pedistal.notowner": "This Pedestal is private and you are not the owner.",
+  "block.gempire.pedistal.notowner": "This Pedestal is private and you cannot use it.",
 
   "block.gempire.ice_spike": "Ice Spike",
 
@@ -512,10 +512,10 @@
   "item.gempire.gem_slush_bucket": "Bucket of Gem Slush",
   "item.gempire.chroma_catalyst": "Chroma Catalyst",
 
-  "item.gempire.pink_essence_bucket": "Pink Essence",
-  "item.gempire.blue_essence_bucket": "Blue Essence",
-  "item.gempire.yellow_essence_bucket": "Yellow Essence",
-  "item.gempire.white_essence_bucket": "White Essence",
+  "item.gempire.pink_essence_bucket": "Pink Gem Essence",
+  "item.gempire.blue_essence_bucket": "Blue Gem Essence",
+  "item.gempire.yellow_essence_bucket": "Yellow Gem Essence",
+  "item.gempire.white_essence_bucket": "White Gem Essence",
 
   "item.gempire.prismatic_upgrade_smithing_template": "Prismatic Upgrade Smithing Template",
 
@@ -563,10 +563,10 @@
   "item.gempire.inactive_huntress_gem": "Inactive Huntress Gem",
   "item.gempire.inactive_empress_gem": "Inactive Empress Gem",
 
-  "item.gempire.paladin_flower": "Paladin Flower",
-  "item.gempire.guardian_tear": "Guardian Tear",
-  "item.gempire.huntress_dagger": "Huntress Dagger",
-  "item.gempire.empress_star": "Empress Star",
+  "item.gempire.paladin_flower": "Paladin's Flower",
+  "item.gempire.guardian_tear": "Guardian's Tear",
+  "item.gempire.huntress_dagger": "Huntress's Dagger",
+  "item.gempire.empress_star": "Empress's Star",
 
   "item.gempire.iridescent_flower": "Iridescent Flower",
   "item.gempire.mirrored_tear": "Mirrored Tear",
@@ -590,10 +590,10 @@
   "item.gempire.guardian_shield": "Shield of The Guardian",
   "item.gempire.paladin_axe": "Paladin's Axe",
 
-  "item.gempire.congealed_pink_essence": "Congealed Pink Essence",
-  "item.gempire.congealed_blue_essence": "Congealed Blue Essence",
-  "item.gempire.congealed_yellow_essence": "Congealed Yellow Essence",
-  "item.gempire.congealed_white_essence": "Congealed White Essence",
+  "item.gempire.congealed_pink_essence": "Congealed Pink Gem Essence",
+  "item.gempire.congealed_blue_essence": "Congealed Blue Gem Essence",
+  "item.gempire.congealed_yellow_essence": "Congealed Yellow Gem Essence",
+  "item.gempire.congealed_white_essence": "Congealed White Gem Essence",
 
   "item.gempire.white_chroma": "White Chroma",
   "item.gempire.orange_chroma": "Orange Chroma",
@@ -1226,9 +1226,9 @@
   "advancements.gempire.garnet.title": "Did you miss me?",
   "advancements.gempire.injector.title": "Leave Nothing Behind",
   "advancements.gempire.jasper.title": "We always get what we want",
-  "advancements.gempire.lapis.title": "H2-mazing",
+  "advancements.gempire.lapis.title": "Water? Seriously?",
   "advancements.gempire.larimar.title": "I'd love to hear your screams!",
-  "advancements.gempire.morganite.title": "Artist's block",
+  "advancements.gempire.morganite.title": "A whole new world of possibilities",
   "advancements.gempire.nacre.title": "That was expensive",
   "advancements.gempire.nephrite.title": "Chaaaps!",
   "advancements.gempire.obsidian.title": "Glass Cannon",
@@ -1271,7 +1271,7 @@
   "advancements.gempire.desolate_lands.flower.title": "Tale as Old as Time",
   "advancements.gempire.desolate_lands.tear.title": "Guardian Tear",
   "advancements.gempire.desolate_lands.dagger.title": "Arthur?",
-  "advancements.gempire.desolate_lands.star.title": "Empress Star",
+  "advancements.gempire.desolate_lands.star.title": "Starlight, star bright, first star I see tonight",
   "advancements.gempire.desolate_lands.all_biomes.title": "Archaeologist Supreme",
 
   "advancements.gempire.agate.description": "Create (or obtain) an inactive Agate template",
@@ -1289,7 +1289,7 @@
   "advancements.gempire.nephrite.description": "Create (or obtain) an inactive Nephrite template",
   "advancements.gempire.obsidian.description": "Create (or obtain) an inactive Obsidian template",
   "advancements.gempire.pearl.description": "Create a Pearl via Shell",
-  "advancements.gempire.pebble.description": "Create a Pebble via Gem Essence",
+  "advancements.gempire.pebble.description": "Create a Pebble with Pink Gem Essence",
   "advancements.gempire.peridot.description": "Create (or obtain) an inactive Peridot template",
   "advancements.gempire.quartz.description": "Create (or obtain) an inactive Quartz template",
   "advancements.gempire.ruby.description": "Create (or obtain) an inactive Ruby template",
@@ -1324,11 +1324,11 @@
   "advancements.gempire.desolate_lands.anatase.description": "Obtain Anatase",
   "advancements.gempire.desolate_lands.electrum.description": "Obtain Electrum",
   "advancements.gempire.desolate_lands.platinum.description": "Obtain Platinum",
-  "advancements.gempire.desolate_lands.flower.description": "Obtain the Paldin's Flower",
+  "advancements.gempire.desolate_lands.flower.description": "Obtain the Paladin's Flower",
   "advancements.gempire.desolate_lands.tear.description": "Obtain the Guardian's Tear",
   "advancements.gempire.desolate_lands.dagger.description": "Obtain the Huntress's Dagger",
   "advancements.gempire.desolate_lands.star.description": "Obtain the Empress's Star",
-  "advancements.gempire.desolate_lands.all_biomes.description": "Venture to All Biomes in the Desolate Lands",
+  "advancements.gempire.desolate_lands.all_biomes.description": "Venture to all biomes in the Desolate Lands",
 
   "enchantment.gempire.shatter": "Breaking Point",
   "enchantment.gempire.gem_protection": "Gem Protection",

@@ -1,0 +1,14 @@
+{
+  "name": "Alien Flower",
+  "icon": "gempire:alien_flower",
+  "advancement": "gempire:root",
+  "category": "gempire:florilegium",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Alien Flower",
+      "item": "gempire:alien_flower",
+      "text": "Alien flowers are a flower found in the ??? biome."
+    }
+  ]
+}

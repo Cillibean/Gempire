@@ -1,0 +1,12 @@
+{
+  "name": "Cobalt Guardian",
+  "icon": "gempire:cobalt_shards",
+  "advancement": "gempire:root",
+  "category": "gempire:bestiary",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "To be filled out..."
+    }
+  ]
+}

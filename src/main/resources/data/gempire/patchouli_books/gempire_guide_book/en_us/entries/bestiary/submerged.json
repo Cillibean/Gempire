@@ -1,0 +1,12 @@
+{
+  "name": "Submerged",
+  "icon": "minecraft:book",
+  "advancement": "gempire:root",
+  "category": "gempire:bestiary",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "To be filled out..."
+    }
+  ]
+}

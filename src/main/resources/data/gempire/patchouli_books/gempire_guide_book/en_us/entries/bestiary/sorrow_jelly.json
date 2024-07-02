@@ -1,8 +1,8 @@
 {
-  "name": "Flora, Fauna and More",
+  "name": "Sorrow Jelly",
   "icon": "minecraft:book",
   "advancement": "gempire:root",
-  "category": "gempire:desolate_lands",
+  "category": "gempire:bestiary",
   "pages": [
     {
       "type": "patchouli:text",

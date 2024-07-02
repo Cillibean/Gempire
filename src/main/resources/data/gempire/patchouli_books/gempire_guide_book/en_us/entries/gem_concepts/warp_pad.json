@@ -1,0 +1,24 @@
+{
+  "name": "Warp Pads",
+  "icon": "gempire:warp_core",
+  "advancement": "gempire:root",
+  "category": "gempire:gem_concepts",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Warp pads are a means of travel between long distances, or dimensions."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Warp Pad",
+      "item": "gempire:warp_pad",
+      "text": "The standard warp pad."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Galaxy Warp Pad",
+      "item": "gempire:galaxy_warp",
+      "text": "The galaxy warp pad. Meant for more interstellar travels."
+    }
+  ]
+}

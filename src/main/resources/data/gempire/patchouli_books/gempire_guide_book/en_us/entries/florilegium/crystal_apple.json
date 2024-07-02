@@ -1,0 +1,26 @@
+{
+  "name": "Crystal Apples",
+  "icon": "gempire:pink_crystal_apple",
+  "advancement": "gempire:root",
+  "category": "gempire:florilegium",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Crystal Apples",
+      "item": "gempire:pink_crystal_apple",
+      "text": "Crystal apples are a fruit that are found in the ??? biome, coming in a handful of colors."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Crystal Apples",
+      "item": "gempire:blue_crystal_apple",
+      "text": "Crystal apples are a fruit that are found in the ??? biome, coming in a handful of colors."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Crystal Apples",
+      "item": "gempire:purple_crystal_apple",
+      "text": "Crystal apples are a fruit that are found in the ??? biome, coming in a handful of colors."
+    }
+  ]
+}

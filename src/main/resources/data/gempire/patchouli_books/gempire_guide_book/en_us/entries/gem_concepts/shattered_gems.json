@@ -6,11 +6,11 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "When a gem is shattered, her essence and everything that makes her alive is lost. The shards are empty, devoid of data and purpose."
+      "text": "When a gem is shattered, her essence and everything that makes her alive is lost. The shards are empty, devoid of data and having little purpose."
     },
     {
       "type": "patchouli:text",
-      "text": "A gem can become shattered from an explosion, too much damage, or can even be destroyed on purpose. Shards will have many uses in the future."
+      "text": "A gem can become shattered from an explosion, too much damage, or can even be destroyed on purpose."
     }
   ]
 }

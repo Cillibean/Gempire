@@ -1,0 +1,16 @@
+{
+  "name": "Mantashark",
+  "icon": "minecraft:book",
+  "advancement": "gempire:root",
+  "category": "gempire:bestiary",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Mantasharks are aquatic creatures found in the ??? biome."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Opalized mantasharks are aquatic creatures found in the ??? biome."
+    }
+  ]
+}
