@@ -1,0 +1,12 @@
+{
+  "parent": "block/orientable",
+  "textures": {
+    "particle": "gempire:block/pink_sandstone_top",
+    "down": "gempire:block/pink_sandstone_bottom",
+    "up": "gempire:block/pink_sandstone_top",
+    "north": "gempire:block/pink_sandstone",
+    "east": "gempire:block/pink_sandstone",
+    "south": "gempire:block/pink_sandstone",
+    "west": "gempire:block/pink_sandstone"
+  }
+}

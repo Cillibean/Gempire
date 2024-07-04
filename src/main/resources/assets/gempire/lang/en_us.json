@@ -263,6 +263,18 @@
   "item.gempire.raw_pyrite": "Raw Pyrite",
   "item.gempire.pyrite_nugget": "Pyrite Nugget",
 
+  "block.gempire.pink_sand": "Pink Sand",
+  "block.gempire.pink_sandstone": "Pink Sandstone",
+  "block.gempire.pink_sandstone_stairs": "Pink Sandstone Stairs",
+  "block.gempire.pink_sandstone_slab": "Pink Sandstone Slab",
+  "block.gempire.pink_sandstone_wall": "Pink Sandstone Wall",
+  "block.gempire.smooth_pink_sandstone": "Smooth Pink Sandstone",
+  "block.gempire.smooth_pink_sandstone_stairs": "Smooth Pink Sandstone Stairs",
+  "block.gempire.smooth_pink_sandstone_slab": "Smooth Pink Sandstone Slab",
+  "block.gempire.cut_pink_sandstone": "Cut Pink Sandstone",
+  "block.gempire.cut_pink_sandstone_slab": "Cut Pink Sandstone Slab",
+  "block.gempire.chiseled_pink_sandstone": "Chiseled Pink Sandstone",
+
   "block.gempire.macadam": "Macadam",
   "block.gempire.ryolite_block": "Ryolite Block",
   "block.gempire.ryolite_stairs": "Ryolite Stairs",

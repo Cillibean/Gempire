@@ -1,4 +1,4 @@
-// 1.20.1	2024-07-02T17:03:07.674367	Item Models: gempire
+// 1.20.1	2024-07-04T23:44:22.585234	Item Models: gempire
 2a4c323206d2fbeca217109aa5c8a2ac8ce38701 assets/gempire/models/item/acid_spit.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/gempire/models/item/alabaster_empress_spawn_egg.json
 0da7ed67ca0a8fcb9a8ba427cc3a79d0931ef656 assets/gempire/models/item/alabaster_shards.json
@@ -103,6 +103,7 @@ b0803fba8fe34d4af5fa4df3808f8b3827d4110e assets/gempire/models/item/orange_latti
 2b9c872c3a56b07232e7c78efd6e75b1712aa322 assets/gempire/models/item/pink_destabilizer.json
 b4a6b7388d486d59ae311598c95bef3c06b62b14 assets/gempire/models/item/pink_essence_bucket.json
 fd63725ee2b6dc8d79cb74ac5a8f52399f32ab96 assets/gempire/models/item/pink_lattice.json
+0f12bdedfd10ec685aa3f2dcc064197b938c03a0 assets/gempire/models/item/pink_sandstone.json
 2b91d7cfe5169d57a9bf00ead1334cdeb07b319a assets/gempire/models/item/pink_shards.json
 2073299f7477ac0d2578b04964e06ffbfe7e3f98 assets/gempire/models/item/pink_thistle.json
 d8c821219d681deb4b2070f4bcdb0784138cc381 assets/gempire/models/item/platinum_ingot.json

@@ -360,19 +360,44 @@ public class ModItems {
             )
     );
 
+    public static final RegistryObject<Item> PINK_SAND = ITEMS.register("pink_sand", () ->
+            new BlockItem(ModBlocks.PINK_SAND.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> PINK_SANDSTONE = ITEMS.register("pink_sandstone", () ->
+            new BlockItem(ModBlocks.PINK_SANDSTONE.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> PINK_SANDSTONE_SLAB = ITEMS.register("pink_sandstone_slab", () ->
+            new BlockItem(ModBlocks.PINK_SANDSTONE_SLAB.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> PINK_SANDSTONE_STAIRS = ITEMS.register("pink_sandstone_stairs", () ->
+            new BlockItem(ModBlocks.PINK_SANDSTONE_STAIRS.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> PINK_SANDSTONE_WALL = ITEMS.register("pink_sandstone_wall", () ->
+            new BlockItem(ModBlocks.PINK_SANDSTONE_WALL.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> SMOOTH_PINK_SANDSTONE = ITEMS.register("smooth_pink_sandstone", () ->
+            new BlockItem(ModBlocks.SMOOTH_PINK_SANDSTONE.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> SMOOTH_PINK_SANDSTONE_SLAB = ITEMS.register("smooth_pink_sandstone_slab", () ->
+            new BlockItem(ModBlocks.SMOOTH_PINK_SANDSTONE_SLAB.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> SMOOTH_PINK_SANDSTONE_STAIRS = ITEMS.register("smooth_pink_sandstone_stairs", () ->
+            new BlockItem(ModBlocks.SMOOTH_PINK_SANDSTONE_STAIRS.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> CUT_PINK_SANDSTONE = ITEMS.register("cut_pink_sandstone", () ->
+            new BlockItem(ModBlocks.CUT_PINK_SANDSTONE.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> CUT_PINK_SANDSTONE_SLAB = ITEMS.register("cut_pink_sandstone_slab", () ->
+            new BlockItem(ModBlocks.CUT_PINK_SANDSTONE_SLAB.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> CHISELED_PINK_SANDSTONE = ITEMS.register("chiseled_pink_sandstone", () ->
+            new BlockItem(ModBlocks.CHISELED_PINK_SANDSTONE.get(), new Item.Properties()));
+
     public static final RegistryObject<Item> ABNORMAL_SAND = ITEMS.register("abnormal_sand", () ->
-            new BlockItem(
-                    ModBlocks.ABNORMAL_SAND.get(),
-                    new Item.Properties()
-            )
-    );
+            new BlockItem(ModBlocks.ABNORMAL_SAND.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> ABNORMAL_SANDSTONE = ITEMS.register("abnormal_sandstone", () ->
-            new BlockItem(
-                    ModBlocks.ABNORMAL_SANDSTONE.get(),
-                    new Item.Properties()
-            )
-    );
+            new BlockItem(ModBlocks.ABNORMAL_SANDSTONE.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> PINCULE = ITEMS.register("pincule", () ->
             new BlockItem(

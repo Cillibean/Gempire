@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "bottom": "gempire:block/pink_sandstone_bottom",
+    "side": "gempire:block/pink_cut_sandstone",
+    "top": "gempire:block/pink_sandstone_top"
+  }
+}

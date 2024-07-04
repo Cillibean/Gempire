@@ -87,6 +87,40 @@ public class ModBlocks {
     public static final RegistryObject<Block> DESOLATE_SOIL = BLOCKS.register("desolate_soil", () ->
             new Block(BlockBehaviour.Properties.copy(Blocks.DIRT)));
 
+    public static final RegistryObject<Block> PINK_SAND = BLOCKS.register("pink_sand", () ->
+            new SandBlock(16764894, BlockBehaviour.Properties.copy(Blocks.SAND)));
+
+    public static final RegistryObject<Block> PINK_SANDSTONE = BLOCKS.register("pink_sandstone", () ->
+            new Block(BlockBehaviour.Properties.copy(Blocks.SANDSTONE)));
+
+    public static final RegistryObject<Block> PINK_SANDSTONE_SLAB = BLOCKS.register("pink_sandstone_slab", () ->
+            new SlabBlock(BlockBehaviour.Properties.copy(Blocks.STONE_SLAB)));
+
+    public static final RegistryObject<Block> PINK_SANDSTONE_STAIRS = BLOCKS.register("pink_sandstone_stairs", () ->
+            new StairBlock(() -> ModBlocks.PINK_SANDSTONE.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.STONE_STAIRS)));
+
+    public static final RegistryObject<Block> PINK_SANDSTONE_WALL = BLOCKS.register("pink_sandstone_wall", () ->
+            new WallBlock(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE_WALL)));
+
+    public static final RegistryObject<Block> SMOOTH_PINK_SANDSTONE = BLOCKS.register("smooth_pink_sandstone", () ->
+            new Block(BlockBehaviour.Properties.copy(Blocks.SANDSTONE)));
+
+    public static final RegistryObject<Block> SMOOTH_PINK_SANDSTONE_SLAB = BLOCKS.register("smooth_pink_sandstone_slab", () ->
+            new SlabBlock(BlockBehaviour.Properties.copy(Blocks.STONE_SLAB)));
+
+    public static final RegistryObject<Block> SMOOTH_PINK_SANDSTONE_STAIRS = BLOCKS.register("smooth_pink_sandstone_stairs", () ->
+            new StairBlock(() -> ModBlocks.SMOOTH_PINK_SANDSTONE.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.STONE_STAIRS)));
+
+    public static final RegistryObject<Block> CUT_PINK_SANDSTONE = BLOCKS.register("cut_pink_sandstone", () ->
+            new Block(BlockBehaviour.Properties.copy(Blocks.SANDSTONE)));
+
+    public static final RegistryObject<Block> CUT_PINK_SANDSTONE_SLAB = BLOCKS.register("cut_pink_sandstone_slab", () ->
+            new SlabBlock(BlockBehaviour.Properties.copy(Blocks.STONE_SLAB)));
+
+    public static final RegistryObject<Block> CHISELED_PINK_SANDSTONE = BLOCKS.register("chiseled_pink_sandstone", () ->
+            new Block(BlockBehaviour.Properties.copy(Blocks.SANDSTONE)));
+
+
     public static final RegistryObject<Block> SCHIST = BLOCKS.register("schist", () ->
             new Block(BlockBehaviour.Properties.copy(Blocks.GRANITE)));
 

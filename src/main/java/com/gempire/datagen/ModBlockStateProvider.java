@@ -285,6 +285,17 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockWithItem(ModBlocks.ABNORMAL_SAND);
         blockWithItem(ModBlocks.ABNORMAL_SANDSTONE);
 
+        blockWithItem(ModBlocks.PINK_SAND);
+        blockItem(ModBlocks.PINK_SANDSTONE_STAIRS);
+        blockItem(ModBlocks.PINK_SANDSTONE_SLAB);
+        blockItem(ModBlocks.SMOOTH_PINK_SANDSTONE_STAIRS);
+        blockItem(ModBlocks.SMOOTH_PINK_SANDSTONE_SLAB);
+        blockItem(ModBlocks.CUT_PINK_SANDSTONE_SLAB);
+        blockItem(ModBlocks.PINK_SANDSTONE);
+        blockItem(ModBlocks.SMOOTH_PINK_SANDSTONE);
+        blockItem(ModBlocks.CUT_PINK_SANDSTONE);
+        blockItem(ModBlocks.CHISELED_PINK_SANDSTONE);
+
         blockItem(ModBlocks.PINCULE);
 
         blockItem(ModBlocks.DESOLATE_GRASS);

@@ -682,6 +682,18 @@ public class ModCreativeModeTabs {
                 populator.accept(ModItems.ABNORMAL_SAND.get());
                 populator.accept(ModItems.ABNORMAL_SANDSTONE.get());
 
+                populator.accept(ModBlocks.PINK_SAND.get());
+                populator.accept(ModBlocks.PINK_SANDSTONE.get());
+                populator.accept(ModBlocks.PINK_SANDSTONE_STAIRS.get());
+                populator.accept(ModBlocks.PINK_SANDSTONE_SLAB.get());
+                populator.accept(ModBlocks.PINK_SANDSTONE_WALL.get());
+                populator.accept(ModBlocks.SMOOTH_PINK_SANDSTONE.get());
+                populator.accept(ModBlocks.SMOOTH_PINK_SANDSTONE_STAIRS.get());
+                populator.accept(ModBlocks.SMOOTH_PINK_SANDSTONE_SLAB.get());
+                populator.accept(ModBlocks.CUT_PINK_SANDSTONE.get());
+                populator.accept(ModBlocks.CUT_PINK_SANDSTONE_SLAB.get());
+                populator.accept(ModBlocks.CHISELED_PINK_SANDSTONE.get());
+
                 populator.accept(ModBlocks.PRISMATIC_SNOW.get());
                 populator.accept(ModBlocks.MACADAM.get());
 

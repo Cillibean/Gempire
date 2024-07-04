@@ -1,4 +1,5 @@
-{   "parent": "block/block",
+{
+  "parent": "block/block",
   "textures": {
     "particle": "gempire:block/desolate_soil",
     "bottom": "gempire:block/desolate_soil",
