@@ -1,4 +1,4 @@
-// 1.20.1	2024-07-04T23:44:22.585234	Item Models: gempire
+// 1.20.1	2024-07-09T23:45:46.396467	Item Models: gempire
 2a4c323206d2fbeca217109aa5c8a2ac8ce38701 assets/gempire/models/item/acid_spit.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/gempire/models/item/alabaster_empress_spawn_egg.json
 0da7ed67ca0a8fcb9a8ba427cc3a79d0931ef656 assets/gempire/models/item/alabaster_shards.json
@@ -7,6 +7,7 @@ c0c62ab235536d2de57de21efdcbe773279a708b assets/gempire/models/item/amber_shards
 a29e967ff074b156f0e58ab74842556395538217 assets/gempire/models/item/anatase_ingot.json
 a3632651a9fbc3e7e228b96d6dd3f21302c6f76c assets/gempire/models/item/anatase_nugget.json
 cc177740b38d8d4a598d67688cc22f2241751c8f assets/gempire/models/item/aquatic_fibre.json
+72e1df98c208ba4ea5d1967c77833447296cd2b3 assets/gempire/models/item/assign_contract.json
 b00486158875f7cfbcb327a00017deb8b51c211f assets/gempire/models/item/black_chroma.json
 417aa16de7be211ab4be4572d9128fd1f5a37921 assets/gempire/models/item/black_lattice.json
 77393a3dc963655f33b217fa1a280e442b0c0f8f assets/gempire/models/item/black_shards.json
@@ -21,6 +22,7 @@ ba83cd7dfe2be20717ff3195ffe60d49882b4a30 assets/gempire/models/item/blue_puffbal
 3bd0b3299592f9d0ad6391caf4e6203d2c62be15 assets/gempire/models/item/brown_chroma.json
 dea68891228489348fa0ba99f9f287cab63d4953 assets/gempire/models/item/brown_lattice.json
 03382a851ed610f35dd2f205d4c01a26562ce15f assets/gempire/models/item/brown_shards.json
+9fe45ff4a88d8aa4a6cb03f8f8fa419a950b6f24 assets/gempire/models/item/calming_jelly.json
 10fe332f5e68c84f69f8c9f699615386ec2ec33b assets/gempire/models/item/chroma_catalyst.json
 c80c37467646efea41fe5d61cceabe2d1e5da900 assets/gempire/models/item/chrysanthemum.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/gempire/models/item/cobalt_guardian_spawn_egg.json
@@ -135,6 +137,7 @@ a9adf09a6b9a7f914f03414e71baa7035833370e assets/gempire/models/item/red_lattice.
 b6c2fd3b1a56b802808f12d3ebed745fb5d62a8b assets/gempire/models/item/red_shards.json
 c47c115685ed81207b9f5c368482ca57f978d626 assets/gempire/models/item/remnants_music_disc.json
 b627f6f8876527949526345edf389a7db250e104 assets/gempire/models/item/ryolite_wall.json
+efa949f765d907a63e01488c8bcbf70309276907 assets/gempire/models/item/selenite_chunk.json
 8e9a2fd991e486ffb012ce4448253791f3bdc98e assets/gempire/models/item/selenite_wall.json
 c7145bf0f332c4509e3fd1223170d39c9e60ee62 assets/gempire/models/item/shaded_apple.json
 9d7db0f279e3fd3783df88998b2195201bbd7834 assets/gempire/models/item/shaded_door.json

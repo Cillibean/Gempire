@@ -4,8 +4,8 @@
 		{
 			"description": {
 				"identifier": "geometry.unknown",
-				"texture_width": 64,
-				"texture_height": 64,
+				"texture_width": 128,
+				"texture_height": 128,
 				"visible_bounds_width": 3,
 				"visible_bounds_height": 3.5,
 				"visible_bounds_offset": [0, 1.25, 0]
@@ -15,19 +15,25 @@
 					"name": "bb_main",
 					"pivot": [0, 0, 0],
 					"cubes": [
-						{"origin": [-6, 15, -6], "size": [12, 1, 12], "uv": [4, 0]},
-						{"origin": [-5, 1, -5], "size": [10, 14, 10], "uv": [0, 13]},
-						{"origin": [-6, 0, -6], "size": [12, 1, 12], "uv": [4, 0]},
-						{"origin": [-3, 16, -3], "size": [6, 2, 6], "uv": [40, 0]},
-						{"origin": [5, 12, -6], "size": [3, 3, 12], "uv": [34, 25], "mirror": true},
-						{"origin": [-8, 12, -6], "size": [3, 3, 12], "uv": [34, 25]}
+						{"origin": [-6, 14, -6], "size": [12, 2, 12], "uv": [0, 22]},
+						{"origin": [-5, 2, -5], "size": [10, 12, 10], "uv": [0, 36]},
+						{"origin": [-5, 2, -5], "size": [10, 12, 10], "inflate": 0.2, "uv": [0, 0]},
+						{"origin": [-6, 0, -6], "size": [12, 2, 12], "uv": [36, 10]},
+						{"origin": [-4, 16, -4], "size": [8, 2, 8], "uv": [30, 0]},
+						{"origin": [5, 12, -6], "size": [3, 3, 12], "uv": [58, 56], "mirror": true},
+						{"origin": [-8, 12, -6], "size": [3, 3, 12], "uv": [28, 56]},
+						{"origin": [-4, 0, -7], "size": [11, 4, 11], "uv": [37, 25]},
+						{"origin": [-5, 5, -5], "size": [10, 6, 10], "inflate": 0.3, "uv": [40, 40]},
+						{"origin": [-7, 0, -5], "size": [0, 8, 3], "pivot": [-7, 0, -3.5], "rotation": [-10, 2.5, -25], "uv": [0, 33]},
+						{"origin": [-7, 0, -7], "size": [0, 8, 3], "pivot": [-7, 0, -5.5], "rotation": [22.5, -35, -32.5], "uv": [6, 19]},
+						{"origin": [-6, 0, -8], "size": [0, 8, 3], "pivot": [-6, 0, -6.5], "rotation": [-45, -117.5, 50], "uv": [0, 19]}
 					]
 				},
 				{
 					"name": "diamond",
 					"pivot": [0, 28, 0],
 					"cubes": [
-						{"origin": [-3, 25, -1], "size": [6, 6, 2], "pivot": [0, 28, 0], "rotation": [0, 0, -45], "uv": [0, 0]}
+						{"origin": [-3, 25, -1], "size": [6, 6, 2], "pivot": [0, 28, 0], "rotation": [0, 0, -45], "uv": [54, 0]}
 					]
 				}
 			]

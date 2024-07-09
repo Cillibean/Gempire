@@ -15,7 +15,7 @@ public class PinkAltarModel extends GeoModel<PinkAltarTE> {
 
     @Override
     public ResourceLocation getTextureResource(PinkAltarTE geoAnimatable) {
-        return new ResourceLocation(Gempire.MODID, "textures/block/pink_altar.json.png");
+        return new ResourceLocation(Gempire.MODID, "textures/block/pink_altar.png");
     }
 
     @Override

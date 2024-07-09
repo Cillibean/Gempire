@@ -180,62 +180,6 @@
 				"up": {"uv": [7.75, 5.75, 6.75, 5.5], "texture": "#0"},
 				"down": {"uv": [7.75, 5.75, 6.75, 6], "texture": "#0"}
 			}
-		},
-		{
-			"name": "bl",
-			"from": [8, -2.5, 8.19],
-			"to": [15, 7.5, 8.19],
-			"rotation": {"angle": 0, "axis": "y", "origin": [8, 7.5, 8.2]},
-			"faces": {
-				"north": {"uv": [9, 6, 12.5, 1], "texture": "#0"},
-				"east": {"uv": [0, 2.5, 0, 0], "texture": "#0"},
-				"south": {"uv": [12.5, 6, 9, 1], "texture": "#0"},
-				"west": {"uv": [0, 2.5, 0, 0], "texture": "#0"},
-				"up": {"uv": [0, 0, 1.75, 0], "texture": "#0"},
-				"down": {"uv": [0, 0, 1.75, 0], "texture": "#0"}
-			}
-		},
-		{
-			"name": "tl",
-			"from": [8, 7.5, 8.19],
-			"to": [15, 17.5, 8.19],
-			"rotation": {"angle": 0, "axis": "y", "origin": [8, 7.5, 8.2]},
-			"faces": {
-				"north": {"uv": [9, 1, 12.5, 6], "texture": "#0"},
-				"east": {"uv": [0, 0, 0, 2.5], "texture": "#0"},
-				"south": {"uv": [12.5, 1, 9, 6], "texture": "#0"},
-				"west": {"uv": [0, 0, 0, 2.5], "texture": "#0"},
-				"up": {"uv": [0, 0, 1.75, 0], "texture": "#0"},
-				"down": {"uv": [0, 0, 1.75, 0], "texture": "#0"}
-			}
-		},
-		{
-			"name": "tr",
-			"from": [1, 7.5, 8.19],
-			"to": [8, 17.5, 8.19],
-			"rotation": {"angle": 0, "axis": "y", "origin": [8, 7.5, 8.2]},
-			"faces": {
-				"north": {"uv": [12.5, 1, 9, 6], "texture": "#0"},
-				"east": {"uv": [0, 0, 0, 2.5], "texture": "#0"},
-				"south": {"uv": [9, 1, 12.5, 6], "texture": "#0"},
-				"west": {"uv": [0, 0, 0, 2.5], "texture": "#0"},
-				"up": {"uv": [1.75, 0, 0, 0], "texture": "#0"},
-				"down": {"uv": [1.75, 0, 0, 0], "texture": "#0"}
-			}
-		},
-		{
-			"name": "br",
-			"from": [1, -2.5, 8.19],
-			"to": [8, 7.5, 8.19],
-			"rotation": {"angle": 0, "axis": "y", "origin": [8, 7.5, 8.2]},
-			"faces": {
-				"north": {"uv": [12.5, 6, 9, 1], "texture": "#0"},
-				"east": {"uv": [0, 2.5, 0, 0], "texture": "#0"},
-				"south": {"uv": [9, 6, 12.5, 1], "texture": "#0"},
-				"west": {"uv": [0, 2.5, 0, 0], "texture": "#0"},
-				"up": {"uv": [1.75, 0, 0, 0], "texture": "#0"},
-				"down": {"uv": [1.75, 0, 0, 0], "texture": "#0"}
-			}
 		}
 	],
 	"display": {
@@ -297,12 +241,6 @@
 				},
 				12
 			]
-		},
-		{
-			"name": "closed wings",
-			"origin": [8, 8, 8],
-			"color": 0,
-			"children": [13, 14, 15, 16]
 		}
 	]
 }

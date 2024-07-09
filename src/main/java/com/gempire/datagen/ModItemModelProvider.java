@@ -234,6 +234,10 @@ public class ModItemModelProvider extends ItemModelProvider {
         withExistingParent(ModItems.HUNTER_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(ModItems.OVERSEER_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(ModItems.SORROW_JELLY_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+
+        simpleItem(ModItems.CALMING_JELLY);
+        simpleItem(ModItems.ASSIGN_CONTRACT);
+        simpleItem(ModItems.SELENITE_CHUNK);
     }
 
     private ItemModelBuilder saplingItem(RegistryObject<Block> item) {

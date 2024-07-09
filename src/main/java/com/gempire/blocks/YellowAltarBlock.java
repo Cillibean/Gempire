@@ -25,8 +25,8 @@ import javax.annotation.Nullable;
 
 public class YellowAltarBlock extends DirectionalBlock implements EntityBlock  {
 
-    protected static final VoxelShape FACING_NS_FLOOR = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 12.0D, 16.0D);
-    protected static final VoxelShape FACING_EW_FLOOR = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 12.0D, 16.0D);
+    protected static final VoxelShape FACING_NS_FLOOR = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 14.0D, 14.0D);
+    protected static final VoxelShape FACING_EW_FLOOR = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 14.0D, 14.0D);
 
     public YellowAltarBlock(Properties properties) {
         super(properties);

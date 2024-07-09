@@ -322,6 +322,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
         flowerBlock(ModBlocks.CHRYSANTHEMUM);
         flowerBlock(ModBlocks.BLUE_BELLS);
         flowerBlock(ModBlocks.BLUE_PUFFBALL);
+
+        blockWithItem(ModBlocks.BUDDING_SELENITE);
     }
 
     public void paneBlock(RegistryObject<Block> block, ResourceLocation texture, ResourceLocation texture1) {

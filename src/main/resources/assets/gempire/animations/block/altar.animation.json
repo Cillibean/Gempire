@@ -3,7 +3,7 @@
 	"animations": {
 		"spin": {
 			"loop": true,
-			"animation_length": 20,
+			"animation_length": 10,
 			"bones": {
 				"diamond": {
 					"relative_to": {
@@ -13,9 +13,8 @@
 						"0.0": {
 							"vector": [0, 0, 0]
 						},
-						"20.0": {
-							"vector": [0, 720, 0],
-							"easing": "linear"
+						"10.0": {
+							"vector": [0, 360, 0]
 						}
 					}
 				}
