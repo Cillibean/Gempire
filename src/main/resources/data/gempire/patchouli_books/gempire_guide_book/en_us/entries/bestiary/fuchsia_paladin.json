@@ -1,6 +1,6 @@
 {
   "name": "Fuchsia Paladin",
-  "icon": "gempire:fuchsia_shards",
+  "icon": "gempire:inactive_paladin_gem",
   "advancement": "gempire:root",
   "category": "gempire:bestiary",
   "pages": [
@@ -11,7 +11,7 @@
     {
       "type": "patchouli:spotlight",
       "item": "gempire:fuchsia_shards",
-      "text": "The shards that drop when the Empress is killed."
+      "text": "The shards that drop when the Paladin is killed."
     }
   ]
 }

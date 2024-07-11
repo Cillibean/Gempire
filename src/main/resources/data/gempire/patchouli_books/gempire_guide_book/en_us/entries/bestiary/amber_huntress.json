@@ -1,6 +1,6 @@
 {
   "name": "Amber Huntress",
-  "icon": "gempire:amber_shards",
+  "icon": "gempire:inactive_huntress_gem",
   "advancement": "gempire:root",
   "category": "gempire:bestiary",
   "pages": [
@@ -11,7 +11,7 @@
     {
       "type": "patchouli:spotlight",
       "item": "gempire:amber_shards",
-      "text": "The shards that drop when the Empress is killed."
+      "text": "The shards that drop when the Huntress is killed."
     }
   ]
 }

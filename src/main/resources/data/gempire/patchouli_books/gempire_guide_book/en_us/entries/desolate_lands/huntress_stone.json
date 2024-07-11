@@ -1,0 +1,12 @@
+{
+  "name": "Huntress Stone",
+  "icon": "gempire:huntress_stone",
+  "advancement": "gempire:root",
+  "category": "gempire:desolate_lands",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A stone slab stabbed by a huntress's blade."
+    }
+  ]
+}

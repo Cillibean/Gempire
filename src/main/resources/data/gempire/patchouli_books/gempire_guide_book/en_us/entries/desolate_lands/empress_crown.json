@@ -1,0 +1,12 @@
+{
+  "name": "Empress Crown",
+  "icon": "gempire:empress_crown",
+  "advancement": "gempire:root",
+  "category": "gempire:desolate_lands",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A regal crown fitted with a star."
+    }
+  ]
+}
