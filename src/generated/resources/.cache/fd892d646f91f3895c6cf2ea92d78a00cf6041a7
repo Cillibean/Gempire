@@ -1,4 +1,4 @@
-// 1.20.1	2024-07-11T10:57:48.727388	Item Models: gempire
+// 1.20.1	2024-07-11T22:58:14.665109	Item Models: gempire
 2a4c323206d2fbeca217109aa5c8a2ac8ce38701 assets/gempire/models/item/acid_spit.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/gempire/models/item/alabaster_empress_spawn_egg.json
 0da7ed67ca0a8fcb9a8ba427cc3a79d0931ef656 assets/gempire/models/item/alabaster_shards.json
@@ -94,6 +94,7 @@ c1302ccfca01950fbd4fe9f0cba2e4b7380efafd assets/gempire/models/item/magenta_latt
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/gempire/models/item/mantashark_spawn_egg.json
 45ea9157287c1eceffd9a2903f0ec44a563fe805 assets/gempire/models/item/nasturtiums.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/gempire/models/item/opal_mantashark_spawn_egg.json
+bb0dfe8feec92973955543633840dec0f5f1b0ae assets/gempire/models/item/opalized_tooth.json
 68f1964738ec4eb9cd5728504dbc883215ed872a assets/gempire/models/item/orange_chroma.json
 b0803fba8fe34d4af5fa4df3808f8b3827d4110e assets/gempire/models/item/orange_lattice.json
 5d7ea5609c7fdbb5caaa20c7a7947e4f8c33e076 assets/gempire/models/item/orange_shards.json

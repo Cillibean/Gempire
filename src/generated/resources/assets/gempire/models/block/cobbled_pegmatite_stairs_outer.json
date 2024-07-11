@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "gempire:block/cobbled_pegmatite",
+    "side": "gempire:block/cobbled_pegmatite",
+    "top": "gempire:block/cobbled_pegmatite"
+  }
+}

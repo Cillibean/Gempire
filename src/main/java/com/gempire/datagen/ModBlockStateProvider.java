@@ -69,12 +69,12 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockItem(ModBlocks.PEGMATITE_STAIRS);
         blockItem(ModBlocks.PEGMATITE_SLAB);
 
-        //blockWithItem(ModBlocks.COBBLED_PEGMATITE);
-        //stairsBlock((StairBlock) ModBlocks.COBBLED_PEGMATITE_STAIRS.get(), blockTexture(ModBlocks.COBBLED_PEGMATITE.get()));
-        //slabBlock((SlabBlock) ModBlocks.COBBLED_PEGMATITE_SLAB.get(), blockTexture(ModBlocks.COBBLED_PEGMATITE.get()), blockTexture(ModBlocks.COBBLED_PEGMATITE.get()));
-        //wallBlock((WallBlock) ModBlocks.COBBLED_PEGMATITE_WALL.get(), blockTexture(ModBlocks.COBBLED_PEGMATITE.get()));
-        //blockItem(ModBlocks.COBBLED_PEGMATITE_STAIRS);
-        //blockItem(ModBlocks.COBBLED_PEGMATITE_SLAB);
+        blockWithItem(ModBlocks.COBBLED_PEGMATITE);
+        stairsBlock((StairBlock) ModBlocks.COBBLED_PEGMATITE_STAIRS.get(), blockTexture(ModBlocks.COBBLED_PEGMATITE.get()));
+        slabBlock((SlabBlock) ModBlocks.COBBLED_PEGMATITE_SLAB.get(), blockTexture(ModBlocks.COBBLED_PEGMATITE.get()), blockTexture(ModBlocks.COBBLED_PEGMATITE.get()));
+        wallBlock((WallBlock) ModBlocks.COBBLED_PEGMATITE_WALL.get(), blockTexture(ModBlocks.COBBLED_PEGMATITE.get()));
+        blockItem(ModBlocks.COBBLED_PEGMATITE_STAIRS);
+        blockItem(ModBlocks.COBBLED_PEGMATITE_SLAB);
 
         blockWithItem(ModBlocks.DISTANT_PLANKS);
         blockWithItem(ModBlocks.KALEIDOSCOPE_PLANKS);
@@ -324,6 +324,11 @@ public class ModBlockStateProvider extends BlockStateProvider {
         flowerBlock(ModBlocks.BLUE_PUFFBALL);
 
         blockWithItem(ModBlocks.BUDDING_SELENITE);
+
+        blockItem(ModBlocks.PINK_ALTAR);
+        blockItem(ModBlocks.BLUE_ALTAR);
+        blockItem(ModBlocks.YELLOW_ALTAR);
+        blockItem(ModBlocks.WHITE_ALTAR);
     }
 
     public void paneBlock(RegistryObject<Block> block, ResourceLocation texture, ResourceLocation texture1) {
