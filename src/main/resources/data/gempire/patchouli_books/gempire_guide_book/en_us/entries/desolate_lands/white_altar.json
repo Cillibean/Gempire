@@ -1,0 +1,12 @@
+{
+  "name": "Pristine Altar",
+  "icon": "gempire:white_altar",
+  "advancement": "gempire:root",
+  "category": "gempire:desolate_lands",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "An altar used to summon a being of great importance."
+    }
+  ]
+}

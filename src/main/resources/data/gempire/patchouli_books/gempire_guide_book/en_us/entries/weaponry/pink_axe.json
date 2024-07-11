@@ -1,6 +1,6 @@
 {
   "name": "Paladin's Axe",
-  "icon": "minecraft:book",
+  "icon": "gempire.paladin_axe",
   "advancement": "gempire:root",
   "category": "gempire:weaponry",
   "pages": [

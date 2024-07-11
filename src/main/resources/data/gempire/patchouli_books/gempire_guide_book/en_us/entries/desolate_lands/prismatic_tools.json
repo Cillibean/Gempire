@@ -1,0 +1,44 @@
+{
+  "name": "Prismatic Tools and You",
+  "icon": "gempire:prismatic_ingot",
+  "advancement": "gempire:root",
+  "category": "gempire:desolate_lands",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Prismatic Pickaxe",
+      "item": "gempire:prismatic_pickaxe",
+      "text": "A pickaxe made with prismatic metal."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Prismatic Axe",
+      "item": "gempire:prismatic_axe",
+      "text": "An axe made with prismatic metal."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Prismatic Sword",
+      "item": "gempire:prismatic_sword",
+      "text": "A sword made with prismatic metal."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Prismatic Shovel",
+      "item": "gempire:prismatic_shovel",
+      "text": "A shovel made with prismatic metal."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Prismatic Hoe",
+      "item": "gempire:prismatic_hoe",
+      "text": "A garden hoe made with prismatic metal."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Prismatic Shears",
+      "item": "gempire:prismatic_shears",
+      "text": "A pair of shears made with prismatic metal."
+    }
+  ]
+}

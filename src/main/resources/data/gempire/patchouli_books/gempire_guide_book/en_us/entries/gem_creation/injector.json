@@ -17,7 +17,7 @@
     {
       "type": "patchouli:text",
       "title": "Injector Multiblock",
-      "text": "Now, place down your Drill, then the Injector Core, then your Power Crystal on top of each other in that order. Now you can open the Injector GUI. In order to create gems you need Essence and Chroma."
+      "text": "Now, place down your Drill, then the Injector Core, then your Power Crystal on top of each other in that order. Now you can open the Injector GUI. In order to create gems you need Gem Essence and Chroma."
     },
     {
       "type": "patchouli:spotlight",
@@ -29,7 +29,7 @@
       "type": "patchouli:spotlight",
       "link_recipe ": false,
       "item": "gempire:white_essence_bucket",
-      "text": "After placing your chroma, you can now place your essences. White at the top, yellow on the left, blue on the right, pink on the bottom. Each gem requires a specific combination, but using all four essences will give any gem."
+      "text": "After placing your chroma, you can now place your gem essences. White at the top, yellow on the left, blue on the right, pink on the bottom. Each gem requires a specific combination, but using all four essences will give any gem."
     },
     {
       "type": "patchouli:spotlight",

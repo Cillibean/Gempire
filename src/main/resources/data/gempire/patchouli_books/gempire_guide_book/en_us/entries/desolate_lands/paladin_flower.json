@@ -1,0 +1,14 @@
+{
+  "name": "Paladin Flower",
+  "icon": "gempire:paladin_flower",
+  "advancement": "gempire:root",
+  "category": "gempire:desolate_lands",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Paladin Flower",
+      "item": "gempire:paladin_flower",
+      "text": "A pristine pink flower left in a case for hundreds of years."
+    }
+  ]
+}

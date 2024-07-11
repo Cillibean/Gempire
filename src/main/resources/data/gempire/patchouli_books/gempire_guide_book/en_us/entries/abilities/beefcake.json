@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Beefcake is an ability that gives by default a sort of armor, making them take less damage.."
+      "text": "Beefcake is an ability that increases a gem's defenses, making them take less damage."
     },
     {
       "type": "patchouli:text",

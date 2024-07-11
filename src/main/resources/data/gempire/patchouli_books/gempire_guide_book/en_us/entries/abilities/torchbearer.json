@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Torchbearer is an ability that lets the gem place torches from their inventory when its dark."
+      "text": "Torchbearer is an ability that lets the gem place torches from their inventory when it's dark."
     },
     {
       "type": "patchouli:text",

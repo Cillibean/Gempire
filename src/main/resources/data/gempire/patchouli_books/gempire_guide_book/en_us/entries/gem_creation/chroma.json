@@ -1,12 +1,12 @@
 {
   "name": "Chroma",
-  "icon": "gempire:cyan_chroma_crystal",
+  "icon": "gempire:pink_chroma_crystal",
   "advancement": "gempire:root",
   "category": "gempire:gem_creation_category",
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Chroma is a crystalline structure that generates underground in a range of Y:80 to Y:0 which can be mined with a pickaxe. It has a chance of dropping a rare variant of Chroma called Prismatic Chroma."
+      "text": "Chroma is a crystalline structure that generates underground in a range of Y:80 to Y:0 which can be mined with a pickaxe. It has a chance of dropping a rare variant of itself called Prismatic Chroma."
     },
     {
       "type": "patchouli:text",

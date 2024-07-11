@@ -1,12 +1,12 @@
 {
-  "name": "Aerokinesis",
-  "icon": "minecraft:string",
+  "name": "Plantokinesis",
+  "icon": "minecraft:melon",
   "advancement": "gempire:root",
   "category": "gempire:abilities",
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Aerokinesis is an ability that gives gems the power to throw air based projectiles at their foes."
+      "text": "Plantokinesis is an ability that gives gems the power to convert various organic blocks into minions that protect them."
     },
     {
       "type": "patchouli:text",

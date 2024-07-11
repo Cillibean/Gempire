@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Knockback is an ability that gives the gem that has it more knockback to their attacks, throwing their enemy away from them."
+      "text": "Knockback is an ability that gives the gem more knockback to their attacks, throwing their enemy away from them."
     },
     {
       "type": "patchouli:text",

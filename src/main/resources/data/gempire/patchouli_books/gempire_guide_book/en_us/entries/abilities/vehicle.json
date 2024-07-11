@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Vehicle is a special ability that lets gems be ridden, different gems with this ability provide different results."
+      "text": "Vehicle is a special ability that lets gems be ridden. Different gems with this ability provide different results."
     },
     {
       "type": "patchouli:text",

@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Berserker is an ability that when the gem is below 30% of their hp, strength and damage resistance."
+      "text": "Berserker is an ability that triggers when the gem is below 30% of their hp, granting strength and damage resistance."
     },
     {
       "type": "patchouli:text",
