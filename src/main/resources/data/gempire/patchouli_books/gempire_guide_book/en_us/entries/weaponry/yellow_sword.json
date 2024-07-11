@@ -1,6 +1,6 @@
 {
-  "name": "Huntress' Sword",
-  "icon": "minecraft:book",
+  "name": "Huntress's Blade",
+  "icon": "huntress_sword",
   "advancement": "gempire:root",
   "category": "gempire:weaponry",
   "pages": [

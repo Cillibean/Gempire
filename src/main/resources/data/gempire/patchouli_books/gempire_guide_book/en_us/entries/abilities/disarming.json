@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Disarming is an ability that gives the gem a rare chance when attacking an enemy, to drop the enemies weapon."
+      "text": "Disarming is an ability that gives the gem a rare chance to disarm an enemy when attacking foes."
     },
     {
       "type": "patchouli:text",

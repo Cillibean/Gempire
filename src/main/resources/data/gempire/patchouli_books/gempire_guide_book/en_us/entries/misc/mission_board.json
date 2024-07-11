@@ -1,0 +1,13 @@
+{
+  "name": "Mission Board",
+  "icon": "gempire:mission_board",
+  "advancement": "gempire:root",
+  "category": "gempire:misc",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "gempire:mission_board",
+      "text": "The Mission Board block is a piece of technology scavenged from a gem themed structure. It receives updates from someone somewhere in the cosmos, refreshing the list of available missions every few in-game days. Different missions have different risk levels and rewards."
+    }
+  ]
+}

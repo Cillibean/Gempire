@@ -1,6 +1,6 @@
 {
-  "name": "Empress' Bow",
-  "icon": "minecraft:book",
+  "name": "Bow of the Empress",
+  "icon": "gempire.empress_bow",
   "advancement": "gempire:root",
   "category": "gempire:weaponry",
   "pages": [

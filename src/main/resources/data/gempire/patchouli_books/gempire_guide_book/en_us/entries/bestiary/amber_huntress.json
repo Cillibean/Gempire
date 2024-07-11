@@ -6,7 +6,12 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "To be filled out..."
+      "text": "The bestial remnants of a daunting diamond who once ruled over their homeworld."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "gempire:amber_shards",
+      "text": "The shards that drop when the Empress is killed."
     }
   ]
 }

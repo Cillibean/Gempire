@@ -1,0 +1,12 @@
+{
+  "name": "Crystal Apple Tree",
+  "icon": "gempire:blue_crystal_apple",
+  "advancement": "gempire:root",
+  "category": "gempire:desolate_lands",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Crystal Apple trees can be found in the ??? biome. They provide different colors of crystal apples for the player to eat."
+    }
+  ]
+}

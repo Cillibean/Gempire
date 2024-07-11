@@ -1,12 +1,12 @@
 {
-  "name": "Crystalline Deer",
+  "name": "Alien Lizard",
   "icon": "minecraft:book",
   "advancement": "gempire:root",
   "category": "gempire:bestiary",
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Crystalline Deer are neutral land-based creatures found in the Iridescent Overgrowth biome."
+      "text": "To be filled out..."
     }
   ]
 }

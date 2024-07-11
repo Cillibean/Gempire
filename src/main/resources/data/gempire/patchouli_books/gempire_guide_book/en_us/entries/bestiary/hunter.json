@@ -1,12 +1,12 @@
 {
-  "name": "Hunter",
+  "name": "Resplendent Hunter",
   "icon": "minecraft:book",
   "advancement": "gempire:root",
   "category": "gempire:bestiary",
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "To be filled out..."
+      "text": "Resplendent Hunters are a variant of hostile undead creatures found in the Gilded Wastes biome. They shoot electric arrows that disarm you and paralyze you."
     }
   ]
 }

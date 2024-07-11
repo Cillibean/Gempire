@@ -1,0 +1,14 @@
+{
+  "name": "Empress Star",
+  "icon": "gempire:empress_star",
+  "advancement": "gempire:root",
+  "category": "gempire:desolate_lands",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Empress Star",
+      "item": "gempire:empress_star",
+      "text": "A glimmering grand gemstone left embedded in a crown for hundreds of years."
+    }
+  ]
+}

@@ -14,7 +14,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "$(l)Possible Abilities$() $(br)$(li)Tank$(li)Beefcake$(li)Berserker$(li)Unhinged$(li)Powerhouse$(br2) $(l)Definite Abilities$()$(br)$(li)Farmer (NYI) $(li)Aerokinesis (NYI)"
+      "text": "$(l)Possible Abilities$() $(br)$(li)Tank$(li)Beefcake$(li)Berserker$(li)Unhinged$(li)Powerhouse$(br2) $(l)Definite Abilities$()$(br)$(li)Farmer$(li)Plantokinesis"
     },
     {
       "type": "patchouli:text",

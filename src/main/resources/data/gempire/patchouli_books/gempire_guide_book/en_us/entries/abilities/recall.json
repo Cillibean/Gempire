@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Recall is an ability that lets the gem with it consume Eyes of Ender and XP to teleport you back home. In order to do so, place an Eye of Ender in her inventory and do the command /recall."
+      "text": "Recall is an ability that lets the gem with it consume an Eye of Ender and XP to teleport you back home. In order to do so, place an Eye of Ender in her inventory and do the command /recall."
     },
     {
       "type": "patchouli:text",

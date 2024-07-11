@@ -6,11 +6,16 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Mantasharks are aquatic creatures found in the ??? biome."
+      "text": "Mantasharks are aquatic hostile creatures found in the Mirrored Sea biome. They attack with opalized projectiles."
     },
     {
       "type": "patchouli:text",
-      "text": "Opalized mantasharks are aquatic creatures found in the ??? biome."
+      "text": "Opalized mantasharks are aquatic hostile creatures found in the Mirrored Sea biome. They are a rarer variant of the Mantashark."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "gempire:prismatic_tooth",
+      "text": "Mantasharks drop their teeth when killed."
     }
   ]
 }

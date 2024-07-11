@@ -1,0 +1,14 @@
+{
+  "name": "Guardian Tear",
+  "icon": "gempire:guardian_tear",
+  "advancement": "gempire:root",
+  "category": "gempire:desolate_lands",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Guardian Tear",
+      "item": "gempire:guardian_tear",
+      "text": "A crystallized blue tea left in stony hands for hundreds of years."
+    }
+  ]
+}

@@ -8,7 +8,7 @@
       "type": "patchouli:spotlight",
       "link_recipe ": true,
       "item": "gempire:gilded_lapis",
-      "text": "Speed Boosters are used in your Incubator to speed up how fast a gem pops out after being incubated."
+      "text": "Speed Boosters are used in your Injector or Incubator to speed up how fast a gem pops out after the process has begun."
     },
     {
       "type": "patchouli:crafting",

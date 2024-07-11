@@ -1,0 +1,13 @@
+{
+  "name": "Prismatic Upgrade Smithing Template",
+  "icon": "gempire:prismatic_upgrade_smithing_template",
+  "advancement": "gempire:root",
+  "category": "gempire:misc",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "gempire:prismatic_upgrade_smithing_template",
+      "text": "This smithing template can be used to upgrade your tools and weapons to prismatic forms."
+    }
+  ]
+}

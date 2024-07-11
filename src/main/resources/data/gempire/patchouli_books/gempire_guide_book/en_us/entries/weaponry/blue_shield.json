@@ -1,6 +1,6 @@
 {
   "name": "Guardian's Shield",
-  "icon": "minecraft:book",
+  "icon": "gempire.guardian_shield",
   "advancement": "gempire:root",
   "category": "gempire:weaponry",
   "pages": [
