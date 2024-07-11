@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "patchouli:entity",
-      "entity": "gempire:agate{colour:'10599677,15460605,9660408,0,0,3,3,0',scale:'1,1,1',variant:'3,1,20,0,0,0,0,0,0',ability:'0,false,0,0,false,0',assignedUtil:',,',followID:[I;0,0,0,0],assignedID:[I;0,0,0,0],master:[I;0,0,0,0],craft:'false,false,0,0'}",
+      "entity": "gempire:agate{colour:'10599677,15460605,9660408,0,0,3,3,0',variant:'3,1,20,0,0,0,0,0,0',scale:'1,1,1',display:true}",
       "scale": 1.0,
       "name": "An Agate",
       "rotate": "true",

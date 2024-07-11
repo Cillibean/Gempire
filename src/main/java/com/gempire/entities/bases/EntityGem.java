@@ -138,6 +138,8 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
 
     public static final EntityDataAccessor<Integer> QUALITY = SynchedEntityData.defineId(EntityGem.class, EntityDataSerializers.INT);
 
+    public static final EntityDataAccessor<Boolean> DISPLAY = SynchedEntityData.<Boolean>defineId(EntityGem.class, EntityDataSerializers.BOOLEAN);
+
 
     public boolean isCut;
     public ArrayList<Ability> ABILITY_POWERS = new ArrayList<>();
@@ -271,6 +273,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.entityData.define(EntityGem.YSCALE, 0F);
         this.entityData.define(EntityGem.ZSCALE, 0F);
         this.entityData.define(EntityGem.LUMBERJACK, false);
+        this.entityData.define(EntityGem.DISPLAY, false);
         this.FOLLOW_ID = UUID.randomUUID();
         this.ASSIGNED_ID = UUID.fromString("00000000-0000-0000-0000-000000000000");
         this.MASTER_OWNER = UUID.randomUUID();
@@ -340,6 +343,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         this.setQuality(this.getQuality());
         this.setLumberjack(false);
         this.GUARD_POS = this.getOnPos().above();
+        this.entityData.set(EntityGem.DISPLAY, false);
         //this.setItemSlot(EquipmentSlot.OFFHAND, new ItemStack(Items.OAK_LOG));
         //if (isArcher()) this.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(Items.BOW));
         AttributeModifier PRIME = new AttributeModifier(UUID.randomUUID(), "gempirePrimaryModifier", 5D, AttributeModifier.Operation.ADDITION);
@@ -457,6 +461,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         super.addAdditionalSaveData(compound);
         compound.putString("abilities", this.getAbilities());
         compound.putString("name", this.getName().getString());
+        compound.putBoolean("display", this.entityData.get(EntityGem.DISPLAY));
         this.writeCrackShatter(compound);
         this.writeOwners(compound);
         this.writeIDs(compound);
@@ -687,51 +692,62 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     @Override
     public void load(CompoundTag compound) {
         super.load(compound);
-        this.setCustomName(Component.translatable(compound.getString("name")));
-        this.setAbilityPowers(this.findAbilities(compound.getString("abilities")));
-        this.setAbilities(compound.getString("abilities"));
-        if (this.canLocateStructures()) this.structureTime = compound.getInt("structureTime");
-        AttributeModifier PRIME = new AttributeModifier(UUID.randomUUID(), "gempirePrimaryModifier", 5D, AttributeModifier.Operation.ADDITION);
-        AttributeModifier PRIME_SPEED = new AttributeModifier(UUID.randomUUID(), "gempirePrimarySpeedModifier", .2D, AttributeModifier.Operation.ADDITION);
-        AttributeModifier DEFECTIVE = new AttributeModifier(UUID.randomUUID(), "gempireDefectiveModifier", -5D, AttributeModifier.Operation.ADDITION);
-        AttributeModifier DEFECTIVE_SPEED = new AttributeModifier(UUID.randomUUID(), "gempireDefectiveSpeedModifier", -.1D, AttributeModifier.Operation.ADDITION);
-        if (!(this instanceof EntityNacre) && !(this instanceof EntityShale) && !(this instanceof EntityMica) && !(this instanceof EntityPebble)) {
-            if (this.isPrimary() && !(this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(PRIME_SPEED)) && !(this.getAttribute(Attributes.MAX_HEALTH).hasModifier(PRIME))) {
-                System.out.println("prime modifiers");
-                this.getAttribute(Attributes.MAX_HEALTH).addPermanentModifier(PRIME);
-                this.getAttribute(Attributes.MOVEMENT_SPEED).addPermanentModifier(PRIME_SPEED);
-                this.getAttribute(Attributes.ATTACK_DAMAGE).addPermanentModifier(PRIME);
-                this.getAttribute(Attributes.ATTACK_SPEED).addPermanentModifier(PRIME);
-                this.getAttribute(Attributes.KNOCKBACK_RESISTANCE).addPermanentModifier(PRIME);
-            } else if (this.isDefective() && !(this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(DEFECTIVE_SPEED)) && !(this.getAttribute(Attributes.MAX_HEALTH).hasModifier(DEFECTIVE))) {
-                System.out.println("off colour modifiers");
-                this.getAttribute(Attributes.MAX_HEALTH).addPermanentModifier(DEFECTIVE);
-                this.getAttribute(Attributes.MOVEMENT_SPEED).addPermanentModifier(DEFECTIVE_SPEED);
-                this.getAttribute(Attributes.ATTACK_DAMAGE).addPermanentModifier(DEFECTIVE);
-                this.getAttribute(Attributes.ATTACK_SPEED).addPermanentModifier(DEFECTIVE);
-                this.getAttribute(Attributes.KNOCKBACK_RESISTANCE).addPermanentModifier(DEFECTIVE);
+        System.out.println(compound.getAllKeys());
+        System.out.println(compound);
+        boolean display = compound.getBoolean("display");
+        this.entityData.set(EntityGem.DISPLAY, display);
+        System.out.println(display);
+        if (!display) {
+            this.setCustomName(Component.translatable(compound.getString("name")));
+            this.setAbilityPowers(this.findAbilities(compound.getString("abilities")));
+            this.setAbilities(compound.getString("abilities"));
+            if (this.canLocateStructures()) this.structureTime = compound.getInt("structureTime");
+            AttributeModifier PRIME = new AttributeModifier(UUID.randomUUID(), "gempirePrimaryModifier", 5D, AttributeModifier.Operation.ADDITION);
+            AttributeModifier PRIME_SPEED = new AttributeModifier(UUID.randomUUID(), "gempirePrimarySpeedModifier", .2D, AttributeModifier.Operation.ADDITION);
+            AttributeModifier DEFECTIVE = new AttributeModifier(UUID.randomUUID(), "gempireDefectiveModifier", -5D, AttributeModifier.Operation.ADDITION);
+            AttributeModifier DEFECTIVE_SPEED = new AttributeModifier(UUID.randomUUID(), "gempireDefectiveSpeedModifier", -.1D, AttributeModifier.Operation.ADDITION);
+            if (!(this instanceof EntityStarterGem)) {
+                if (this.isPrimary() && !(this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(PRIME_SPEED)) && !(this.getAttribute(Attributes.MAX_HEALTH).hasModifier(PRIME))) {
+                    System.out.println("prime modifiers");
+                    this.getAttribute(Attributes.MAX_HEALTH).addPermanentModifier(PRIME);
+                    this.getAttribute(Attributes.MOVEMENT_SPEED).addPermanentModifier(PRIME_SPEED);
+                    this.getAttribute(Attributes.ATTACK_DAMAGE).addPermanentModifier(PRIME);
+                    this.getAttribute(Attributes.ATTACK_SPEED).addPermanentModifier(PRIME);
+                    this.getAttribute(Attributes.KNOCKBACK_RESISTANCE).addPermanentModifier(PRIME);
+                } else if (this.isDefective() && !(this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(DEFECTIVE_SPEED)) && !(this.getAttribute(Attributes.MAX_HEALTH).hasModifier(DEFECTIVE))) {
+                    System.out.println("off colour modifiers");
+                    this.getAttribute(Attributes.MAX_HEALTH).addPermanentModifier(DEFECTIVE);
+                    this.getAttribute(Attributes.MOVEMENT_SPEED).addPermanentModifier(DEFECTIVE_SPEED);
+                    this.getAttribute(Attributes.ATTACK_DAMAGE).addPermanentModifier(DEFECTIVE);
+                    this.getAttribute(Attributes.ATTACK_SPEED).addPermanentModifier(DEFECTIVE);
+                    this.getAttribute(Attributes.KNOCKBACK_RESISTANCE).addPermanentModifier(DEFECTIVE);
+                }
             }
-        }
-        this.readAbilityUtil(compound);
-        this.readScale(compound);
-        this.readOwners(compound);
-        this.readIDs(compound);
-        this.readCraft(compound);
-        this.readRebelVariant(compound);
-        this.readRebelColour(compound);
-        this.readVariant(compound);
-        this.readColour(compound);
-        this.readFacetCut(compound);
-        this.readCrackShatter(compound);
-        this.readUtil(compound);
-        if (getAssigned()) {
-            this.readAssignedUtil(compound);
-        }
-        this.setMasterName(compound.getString("masterName"));
-        if (this.canLocateStructures()) this.readStructures(compound);
-        ContainerHelper.loadAllItems(compound, this.items);
-        if (this.spawnGem != null) {
-            this.spawnGem.remove(RemovalReason.DISCARDED);
+            this.readAbilityUtil(compound);
+            this.readScale(compound);
+            this.readOwners(compound);
+            this.readIDs(compound);
+            this.readCraft(compound);
+            this.readRebelVariant(compound);
+            this.readRebelColour(compound);
+            this.readVariant(compound);
+            this.readColour(compound);
+            this.readFacetCut(compound);
+            this.readCrackShatter(compound);
+            this.readUtil(compound);
+            if (getAssigned()) {
+                this.readAssignedUtil(compound);
+            }
+            this.setMasterName(compound.getString("masterName"));
+            if (this.canLocateStructures()) this.readStructures(compound);
+            ContainerHelper.loadAllItems(compound, this.items);
+            if (this.spawnGem != null) {
+                this.spawnGem.remove(RemovalReason.DISCARDED);
+            }
+        } else {
+            this.readVariant(compound);
+            this.readColour(compound);
+            this.readScale(compound);
         }
     }
 
