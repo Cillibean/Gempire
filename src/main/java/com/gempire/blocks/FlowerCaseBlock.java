@@ -126,7 +126,7 @@ public class FlowerCaseBlock extends DirectionalBlock {
         if (!level.isClientSide && player.getMainHandItem().is(ModItems.PRISMATIC_PICKAXE.get())) {
             System.out.println("pickaxe");
             popResource(level, pos, new ItemStack(ModItems.PALADIN_FLOWER.get()));
-            ItemStack stack = new ItemStack(ModItems.PRISMATIC_GLASS.get(), player.getRandom().nextInt(3)+2);
+            ItemStack stack = new ItemStack(ModItems.PRISMATIC_GLASS_SHARDS.get(), player.getRandom().nextInt(3)+2);
             popResource(level, pos, stack);
             level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
         }

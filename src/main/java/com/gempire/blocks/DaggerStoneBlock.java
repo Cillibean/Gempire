@@ -1,5 +1,6 @@
 package com.gempire.blocks;
 
+import com.gempire.init.ModBlocks;
 import com.gempire.init.ModEffects;
 import com.gempire.init.ModItems;
 import net.minecraft.core.BlockPos;
@@ -129,9 +130,7 @@ public class DaggerStoneBlock extends DirectionalBlock {
             if (player.hasEffect(ModEffects.SHOCK_RESISTANCE.get())) {
                 if (player.getMainHandItem().isEmpty()) {
                     popResource(level, pos, new ItemStack(ModItems.HUNTRESS_DAGGER.get()));
-                    ItemStack stack = new ItemStack(ModItems.PRISMATIC_GLASS.get(), player.getRandom().nextInt(3) + 2);
-                    //popResource(level, pos, stack);
-                    level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
+                    level.setBlockAndUpdate(pos, ModBlocks.RUINED_MARBLE_SLAB.get().defaultBlockState());
                 }
             } else {
                 player.hurt(player.damageSources().magic(), 2);

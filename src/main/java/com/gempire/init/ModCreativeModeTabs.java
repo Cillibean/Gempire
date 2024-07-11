@@ -268,7 +268,9 @@ public class ModCreativeModeTabs {
                 populator.accept(ModItems.COBALT_SHARDS.get());
                 populator.accept(ModItems.ALABASTER_SHARDS.get());
 
-                populator.accept(ModItems.PRISMATIC_GLASS.get());
+                populator.accept(ModItems.OPALIZED_TOOTH.get());
+
+                populator.accept(ModItems.PRISMATIC_GLASS_SHARDS.get());
                 populator.accept(ModItems.PURIFIED_PRISMATIC_GLASS.get());
                 populator.accept(ModItems.PRISMATIC_FLASK.get());
                 populator.accept(ModItems.PRISMATIC_SHEARS.get());

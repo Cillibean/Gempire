@@ -92,6 +92,8 @@ public class ClientProxy {
         //event.registerEntityRenderer(ModEntities.PEPO.get(), RenderPepo::new);
         event.registerEntityRenderer(ModEntities.BEASTMASTER_WOLF.get(), RenderBeastmasterWolf::new);
         event.registerEntityRenderer(ModEntities.COBALT_GUARDIAN.get(), RenderCobaltGuardian::new);
+        event.registerEntityRenderer(ModEntities.MANTASHARK.get(), RenderMantaShark::new);
+        event.registerEntityRenderer(ModEntities.OPAL_MANTASHARK.get(), RenderOpalMantaShark::new);
         event.registerEntityRenderer(ModEntities.FUSION.get(), m -> new RenderFusion(m, new ModelFusion<>(m.bakeLayer(ModelFusion.LAYER_LOCATION))));
         event.registerEntityRenderer(ModEntities.PEBBLE.get(), m -> new RenderPebble(m, new ModelPebble<>(m.bakeLayer(ModelPebble.LAYER_LOCATION_P))));
         event.registerEntityRenderer(ModEntities.MICA.get(), m -> new RenderMica(m, new ModelPebble<>(m.bakeLayer(ModelPebble.LAYER_LOCATION_M))));

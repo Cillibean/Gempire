@@ -14,9 +14,21 @@
     "creature": [
       {
         "type": "gempire:sorrow_jelly",
+        "weight": 16,
+        "minCount": 1,
+        "maxCount": 2
+      },
+      {
+        "type": "gempire:mantashark",
         "weight": 12,
         "minCount": 1,
         "maxCount": 2
+      },
+      {
+        "type": "gempire:opal_mantashark",
+        "weight": 8,
+        "minCount": 1,
+        "maxCount": 1
       }
     ]
   },

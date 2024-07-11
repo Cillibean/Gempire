@@ -206,6 +206,14 @@ public class ModItems {
             () -> new ForgeSpawnEggItem(ModEntities.SORROW_JELLY, 0x7486ed, 0xaccefa,
                     new Item.Properties()));
 
+    public static final RegistryObject<Item> MANTASHARK_SPAWN_EGG = ITEMS.register("mantashark_spawn_egg",
+            () -> new ForgeSpawnEggItem(ModEntities.MANTASHARK, 0x7486ed, 0xaccefa,
+                    new Item.Properties()));
+
+    public static final RegistryObject<Item> OPAL_MANTASHARK_SPAWN_EGG = ITEMS.register("opal_mantashark_spawn_egg",
+            () -> new ForgeSpawnEggItem(ModEntities.OPAL_MANTASHARK, 0x7486ed, 0xaccefa,
+                    new Item.Properties()));
+
     public static final RegistryObject<Item> FLEURIE_SPAWN_EGG = ITEMS.register("fleurie_spawn_egg",
             () -> new ForgeSpawnEggItem(ModEntities.FLEURIE, 0xedc0eb, 0xfa9be1,
                     new Item.Properties()));
@@ -1092,7 +1100,11 @@ public class ModItems {
             new ItemAltarUpgrade(new Item.Properties().stacksTo(1))
     );
 */
-    public static final RegistryObject<Item> PRISMATIC_GLASS = ITEMS.register("prismatic_glass", () ->
+    public static final RegistryObject<Item> OPALIZED_TOOTH = ITEMS.register("opalized_tooth", () ->
+        new Item(new Item.Properties().stacksTo(64))
+    );
+
+    public static final RegistryObject<Item> PRISMATIC_GLASS_SHARDS = ITEMS.register("prismatic_glass_shards", () ->
             new Item(new Item.Properties().stacksTo(64))
     );
 

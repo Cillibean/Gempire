@@ -1,4 +1,4 @@
-// 1.20.1	2024-07-09T23:45:46.396467	Item Models: gempire
+// 1.20.1	2024-07-11T10:57:48.727388	Item Models: gempire
 2a4c323206d2fbeca217109aa5c8a2ac8ce38701 assets/gempire/models/item/acid_spit.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/gempire/models/item/alabaster_empress_spawn_egg.json
 0da7ed67ca0a8fcb9a8ba427cc3a79d0931ef656 assets/gempire/models/item/alabaster_shards.json
@@ -91,7 +91,9 @@ a88901ffa590f04505a9efaf708b92b44b6e35bd assets/gempire/models/item/lime_shards.
 da85260d8db6e5c8b30774b67f8bd73f4e857139 assets/gempire/models/item/magenta_chroma.json
 c1302ccfca01950fbd4fe9f0cba2e4b7380efafd assets/gempire/models/item/magenta_lattice.json
 9846b58989691f05531152b8ce77929db5a708ef assets/gempire/models/item/magenta_shards.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/gempire/models/item/mantashark_spawn_egg.json
 45ea9157287c1eceffd9a2903f0ec44a563fe805 assets/gempire/models/item/nasturtiums.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/gempire/models/item/opal_mantashark_spawn_egg.json
 68f1964738ec4eb9cd5728504dbc883215ed872a assets/gempire/models/item/orange_chroma.json
 b0803fba8fe34d4af5fa4df3808f8b3827d4110e assets/gempire/models/item/orange_lattice.json
 5d7ea5609c7fdbb5caaa20c7a7947e4f8c33e076 assets/gempire/models/item/orange_shards.json
@@ -115,11 +117,14 @@ ef10f9d2058b273648c2b80d504f2ba004214292 assets/gempire/models/item/polished_sel
 58fa7a5327ba4497d350d2d0b2485a3f86a772cf assets/gempire/models/item/prime_boost.json
 c77ac1f5738282a6b8deeee0b44b268a33a34c42 assets/gempire/models/item/primed_slate.json
 7836caaa0e1559bccc35be5065a071cd65f3fa2c assets/gempire/models/item/prismatic_axe.json
+df17c4290768957b420c00d702d647527b0accb9 assets/gempire/models/item/prismatic_flask.json
+62a0653ebfc02727cb3e7ec79642936d69e91ac3 assets/gempire/models/item/prismatic_glass_shards.json
 8f861cd9b52c002e872879b21e943dd928d3d622 assets/gempire/models/item/prismatic_hoe.json
 f0f22aeca6e2419f005c33efbb44cbdf5a716e3f assets/gempire/models/item/prismatic_ingot.json
 44975eaa898d9ed1283db1b4e2dc738e83963bf4 assets/gempire/models/item/prismatic_pickaxe.json
 2efce5ad39683ef6607dc0a7e816e620d725c601 assets/gempire/models/item/prismatic_shovel.json
 89409b52b9a491558211264e53a543f3e74167d6 assets/gempire/models/item/prismatic_sword.json
+0a6fb8322b14d7f8ba5ce323e7927335c8af88f1 assets/gempire/models/item/prismatic_upgrade_smithing_template.json
 4b0e36191450cf83ca13990aeb44e2ded94648dd assets/gempire/models/item/purple_chroma.json
 16b5ae4539a7c2aff9dca09c8dd7795a8886a531 assets/gempire/models/item/purple_crystal_apple.json
 6567e05cc4e5efb4c8cc7d3f1dce4719eabd6670 assets/gempire/models/item/purple_lattice.json

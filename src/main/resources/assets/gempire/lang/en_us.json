@@ -275,6 +275,8 @@
   "block.gempire.cut_pink_sandstone_slab": "Cut Pink Sandstone Slab",
   "block.gempire.chiseled_pink_sandstone": "Chiseled Pink Sandstone",
 
+  "item.gempire.opalized_tooth": "Opalized Tooth",
+
   "block.gempire.macadam": "Macadam",
   "block.gempire.ryolite_block": "Ryolite Block",
   "block.gempire.ryolite_stairs": "Ryolite Stairs",
@@ -921,6 +923,8 @@
   "item.gempire.hunter_spawn_egg": "Hunter Spawn Egg",
   "item.gempire.sorrow_jelly_spawn_egg": "Sorrow Jelly Spawn Egg",
   "item.gempire.overseer_spawn_egg": "Overseer Spawn Egg",
+  "item.gempire.mantashark_spawn_egg": "Mantashark Spawn Egg",
+  "item.gempire.opal_mantashark_spawn_egg": "Opalized Mantashark Spawn Egg",
 
   "entity.gempire.hunter": "Hunter",
   "entity.gempire.specter": "Specter",
@@ -971,6 +975,9 @@
 
   "entity.gempire.crystal_deer": "Crystal Deer",
   "entity.gempire.fleurie": "Fleurie",
+  "entity.gempire.sorrow_jelly": "Sorrow Jelly",
+  "entity.gempire.mantashark": "Mantashark",
+  "entity.gempire.opal_mantashark": "Opalized Mantashark",
 
   "effect.gempire.paralysis": "Paralysis",
   "effect.gempire.entanglement": "Entangled",
