@@ -8,7 +8,7 @@
       "type": "patchouli:spotlight",
       "title": "Prismatic Pickaxe",
       "item": "gempire:prismatic_pickaxe",
-      "text": "A pickaxe made with prismatic metal."
+      "text": "A pickaxe made with prismatic metal. Used to break the glass on a flower case."
     },
     {
       "type": "patchouli:spotlight",
@@ -38,7 +38,13 @@
       "type": "patchouli:spotlight",
       "title": "Prismatic Shears",
       "item": "gempire:prismatic_shears",
-      "text": "A pair of shears made with prismatic metal."
+      "text": "A pair of shears made with prismatic metal. Used to extract a star from an abandoned crown."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Prismatic Flask",
+      "item": "gempire:prismatic_flask",
+      "text": "A glass flask with iridescent colors. Used to extract a crystal tear from stony hands."
     }
   ]
 }
