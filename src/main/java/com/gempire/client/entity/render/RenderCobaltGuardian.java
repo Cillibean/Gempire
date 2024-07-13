@@ -1,13 +1,10 @@
 package com.gempire.client.entity.render;
 
 import com.gempire.Gempire;
-import com.gempire.client.entity.model.ModelAmberHuntress;
 import com.gempire.client.entity.model.ModelCobaltGuardian;
-import com.gempire.entities.other.EntityAmberHuntress;
-import com.gempire.entities.other.EntityCobaltGuardian;
+import com.gempire.entities.bosses.base.EntityCobaltGuardian;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;

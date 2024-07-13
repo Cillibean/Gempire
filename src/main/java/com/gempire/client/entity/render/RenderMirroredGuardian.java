@@ -1,10 +1,8 @@
 package com.gempire.client.entity.render;
 
 import com.gempire.Gempire;
-import com.gempire.client.entity.model.ModelCobaltGuardian;
 import com.gempire.client.entity.model.ModelMirroredGuardian;
-import com.gempire.entities.other.EntityCobaltGuardian;
-import com.gempire.entities.other.EntityMirroredGuardian;
+import com.gempire.entities.bosses.prism.EntityMirroredGuardian;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;

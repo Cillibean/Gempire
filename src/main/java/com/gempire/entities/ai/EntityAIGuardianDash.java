@@ -1,17 +1,8 @@
 package com.gempire.entities.ai;
 
-import com.gempire.entities.bases.EntityGem;
-import com.gempire.entities.gems.EntitySpodumene;
-import com.gempire.entities.other.EntityCobaltGuardian;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.DamageSources;
-import net.minecraft.world.entity.LivingEntity;
+import com.gempire.entities.bosses.base.EntityCobaltGuardian;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.pathfinder.BlockPathTypes;
-
-import java.util.List;
 
 public class EntityAIGuardianDash extends Goal {
     public EntityCobaltGuardian follower;

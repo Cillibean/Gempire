@@ -1,10 +1,12 @@
 package com.gempire.items;
 
-import com.gempire.entities.other.*;
+import com.gempire.entities.bosses.base.EntityAlabasterEmpress;
+import com.gempire.entities.bosses.base.EntityAmberHuntress;
+import com.gempire.entities.bosses.base.EntityCobaltGuardian;
+import com.gempire.entities.bosses.base.EntityFuchsiaPaladin;
 import com.gempire.init.ModBlocks;
 import com.gempire.init.ModEntities;
 import com.gempire.init.ModItems;
-import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.Item;
@@ -102,8 +104,7 @@ public class ItemBossGem extends Item {
                     paladin.setPos(context.getClickedPos().getX(), context.getClickedPos().getY()+2, context.getClickedPos().getZ());
                     paladin.moveTo(Vec3.atBottomCenterOf(context.getClickedPos().above(1)));
                     level.addFreshEntity(paladin);
-                    System.out.println("paladin attempt");
-                    return InteractionResult.PASS;
+                    return InteractionResult.CONSUME;
                 }
             } else if (level.getBlockState(context.getClickedPos()) == ModBlocks.BLUE_ALTAR.get().defaultBlockState()) {
                 if (context.getItemInHand().getItem() == ModItems.GUARDIAN_TEAR.get()) {
@@ -112,8 +113,7 @@ public class ItemBossGem extends Item {
                     guardian.setPos(context.getClickedPos().getX(), context.getClickedPos().getY()+2, context.getClickedPos().getZ());
                     guardian.moveTo(Vec3.atBottomCenterOf(context.getClickedPos().above(1)));
                     level.addFreshEntity(guardian);
-                    System.out.println("guardian attempt");
-                    return InteractionResult.PASS;
+                    return InteractionResult.CONSUME;
                 }
             } else if (level.getBlockState(context.getClickedPos()) == ModBlocks.YELLOW_ALTAR.get().defaultBlockState()) {
                 if (context.getItemInHand().getItem() == ModItems.HUNTRESS_DAGGER.get()) {
@@ -122,8 +122,7 @@ public class ItemBossGem extends Item {
                     huntress.setPos(context.getClickedPos().getX(), context.getClickedPos().getY()+2, context.getClickedPos().getZ());
                     huntress.moveTo(Vec3.atBottomCenterOf(context.getClickedPos().above(1)));
                     level.addFreshEntity(huntress);
-                    System.out.println("huntress attempt");
-                    return InteractionResult.PASS;
+                    return InteractionResult.CONSUME;
                 }
             } else if (level.getBlockState(context.getClickedPos()) == ModBlocks.WHITE_ALTAR.get().defaultBlockState()) {
                 if (context.getItemInHand().getItem() == ModItems.EMPRESS_STAR.get()) {
@@ -133,7 +132,7 @@ public class ItemBossGem extends Item {
                     empress.moveTo(Vec3.atBottomCenterOf(context.getClickedPos().above(1)));
                     level.addFreshEntity(empress);
                     System.out.println("empress attempt");
-                    return InteractionResult.PASS;
+                    return InteractionResult.CONSUME;
                 }
             }
         }

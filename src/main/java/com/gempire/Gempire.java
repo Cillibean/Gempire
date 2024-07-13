@@ -1,6 +1,10 @@
 package com.gempire;
 
 import com.gempire.entities.bases.EntityFusion;
+import com.gempire.entities.bosses.base.EntityAlabasterEmpress;
+import com.gempire.entities.bosses.base.EntityAmberHuntress;
+import com.gempire.entities.bosses.base.EntityCobaltGuardian;
+import com.gempire.entities.bosses.base.EntityFuchsiaPaladin;
 import com.gempire.entities.gems.*;
 import com.gempire.entities.gems.starter.EntityMica;
 import com.gempire.entities.gems.starter.EntityNacre;
@@ -8,15 +12,12 @@ import com.gempire.entities.gems.starter.EntityPebble;
 import com.gempire.entities.gems.starter.EntityShale;
 import com.gempire.entities.other.*;
 import com.gempire.init.*;
-import com.gempire.items.tools.GuardianArmorItem;
-import com.gempire.items.tools.GuardianArmorRenderer;
 import com.gempire.proxy.CommonProxy;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.entries.LootTableReference;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.LootTableLoadEvent;
@@ -34,7 +35,6 @@ import net.minecraftforge.event.server.ServerStartingEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import software.bernie.geckolib.GeckoLib;
-import software.bernie.geckolib.renderer.GeoArmorRenderer;
 
 import java.util.stream.Collectors;
 

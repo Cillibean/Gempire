@@ -1,8 +1,7 @@
 package com.gempire.client.entity.model;
 
 import com.gempire.Gempire;
-import com.gempire.entities.other.EntityFuchsiaPaladin;
-import com.gempire.entities.other.EntityIridescentPaladin;
+import com.gempire.entities.bosses.prism.EntityIridescentPaladin;
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib.model.GeoModel;
 

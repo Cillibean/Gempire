@@ -1,9 +1,12 @@
 package com.gempire.init;
 
 import com.gempire.Gempire;
-import com.gempire.client.entity.render.HuntressLightningRenderer;
 import com.gempire.container.InjectorContainer;
 import com.gempire.entities.bases.EntityFusion;
+import com.gempire.entities.bosses.base.EntityAlabasterEmpress;
+import com.gempire.entities.bosses.base.EntityAmberHuntress;
+import com.gempire.entities.bosses.base.EntityCobaltGuardian;
+import com.gempire.entities.bosses.base.EntityFuchsiaPaladin;
 import com.gempire.entities.other.*;
 import com.gempire.entities.gems.*;
 import com.gempire.entities.gems.starter.EntityMica;
@@ -18,8 +21,6 @@ import net.minecraft.world.item.Items;
 import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-
-import java.util.HashMap;
 
 public class ModEntities {
     public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, Gempire.MODID);

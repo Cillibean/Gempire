@@ -1,10 +1,7 @@
 package com.gempire.client.entity.model;
 
 import com.gempire.Gempire;
-import com.gempire.entities.other.EntityAmberHuntress;
-import com.gempire.entities.other.EntityFuchsiaPaladin;
-import com.gempire.entities.other.EntityGildedHuntress;
-import com.gempire.entities.other.EntityMirroredGuardian;
+import com.gempire.entities.bosses.prism.EntityGildedHuntress;
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib.model.GeoModel;
 

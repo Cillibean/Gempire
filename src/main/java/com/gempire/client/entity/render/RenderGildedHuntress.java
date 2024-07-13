@@ -1,10 +1,8 @@
 package com.gempire.client.entity.render;
 
 import com.gempire.Gempire;
-import com.gempire.client.entity.model.ModelAmberHuntress;
 import com.gempire.client.entity.model.ModelGildedHuntress;
-import com.gempire.entities.other.EntityAmberHuntress;
-import com.gempire.entities.other.EntityGildedHuntress;
+import com.gempire.entities.bosses.prism.EntityGildedHuntress;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;

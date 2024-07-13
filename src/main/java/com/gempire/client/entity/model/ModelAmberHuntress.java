@@ -1,7 +1,7 @@
 package com.gempire.client.entity.model;
 
 import com.gempire.Gempire;
-import com.gempire.entities.other.EntityAmberHuntress;
+import com.gempire.entities.bosses.base.EntityAmberHuntress;
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib.model.GeoModel;
 

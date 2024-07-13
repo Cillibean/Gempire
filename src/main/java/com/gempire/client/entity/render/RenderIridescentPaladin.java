@@ -1,10 +1,8 @@
 package com.gempire.client.entity.render;
 
 import com.gempire.Gempire;
-import com.gempire.client.entity.model.ModelFuchsiaPaladin;
 import com.gempire.client.entity.model.ModelIridescentPaladin;
-import com.gempire.entities.other.EntityFuchsiaPaladin;
-import com.gempire.entities.other.EntityIridescentPaladin;
+import com.gempire.entities.bosses.prism.EntityIridescentPaladin;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;

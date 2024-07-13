@@ -1,12 +1,14 @@
 package com.gempire.items;
 
 import com.gempire.entities.bases.EntityGem;
-import com.gempire.entities.other.*;
+import com.gempire.entities.bosses.base.EntityAlabasterEmpress;
+import com.gempire.entities.bosses.base.EntityAmberHuntress;
+import com.gempire.entities.bosses.base.EntityCobaltGuardian;
+import com.gempire.entities.bosses.base.EntityFuchsiaPaladin;
 import com.gempire.init.ModItems;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
