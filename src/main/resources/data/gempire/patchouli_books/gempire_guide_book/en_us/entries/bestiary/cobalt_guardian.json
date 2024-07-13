@@ -1,6 +1,6 @@
 {
   "name": "Cobalt Guardian",
-  "icon": "gempire:cobalt_shards",
+  "icon": "gempire:inactive_guardian_gem",
   "advancement": "gempire:root",
   "category": "gempire:bestiary",
   "pages": [
@@ -11,7 +11,7 @@
     {
       "type": "patchouli:spotlight",
       "item": "gempire:cobalt_shards",
-      "text": "The shards that drop when the Empress is killed."
+      "text": "The shards that drop when the Guardian is killed."
     }
   ]
 }

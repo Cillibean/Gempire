@@ -1,6 +1,6 @@
 {
   "name": "Alabaster Empress",
-  "icon": "minecraft:book",
+  "icon": "gempire:inactive_empress_gem",
   "advancement": "gempire:root",
   "category": "gempire:bestiary",
   "pages": [

@@ -1,0 +1,13 @@
+{
+  "name": "Selenite",
+  "icon": "gempire:selenite_chunk",
+  "advancement": "gempire:root",
+  "category": "gempire:misc",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "gempire:selenite_chunk",
+      "text": "Selenite is used in the galaxy warp repair process by Peridot."
+    }
+  ]
+}
