@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "F F",
+    "S S"
+  ],
+  "key": {
+    "S": {
+      "item": "gempire:platinum_block"
+    },
+    "F": {
+      "item": "gempire:alabaster_shards"
+    }
+  },
+  "result": {
+    "item": "gempire:empress_boots"
+  }
+}

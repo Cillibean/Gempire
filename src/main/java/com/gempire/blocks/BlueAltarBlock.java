@@ -30,6 +30,7 @@ public class BlueAltarBlock extends DirectionalBlock implements EntityBlock {
 
     public BlueAltarBlock(Properties properties) {
         super(properties);
+        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
     }
 
     @Override
@@ -37,23 +38,25 @@ public class BlueAltarBlock extends DirectionalBlock implements EntityBlock {
         return RenderShape.ENTITYBLOCK_ANIMATED;
     }
 
-    public BlockState rotate(BlockState state, Rotation rot) {
-        return state.setValue(FACING, rot.rotate(state.getValue(FACING)));
-    }
-
     @Override
     public boolean isCollisionShapeFullBlock(BlockState p_181242_, BlockGetter p_181243_, BlockPos p_181244_) {
         return true;
     }
 
-    public BlockState mirror(BlockState state, Mirror mirrorIn) {
-        return state.setValue(FACING, mirrorIn.mirror(state.getValue(FACING)));
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
+        return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
     }
 
-    public BlockState getStateForPlacement(BlockPlaceContext context) {
-        Direction direction = context.getClickedFace();
-        BlockState blockstate = context.getLevel().getBlockState(context.getClickedPos().relative(direction.getOpposite()));
-        return blockstate.is(this) && blockstate.getValue(FACING) == direction ? this.defaultBlockState().setValue(FACING, direction.getOpposite()) : this.defaultBlockState().setValue(FACING, direction);
+    public BlockState rotate(BlockState state, Rotation rot) {
+        return state.setValue(FACING, rot.rotate(state.getValue(FACING)));
+    }
+
+    public BlockState mirror(BlockState state, Mirror mirrorIn) {
+        return state.rotate(mirrorIn.getRotation(state.getValue(FACING)));
+    }
+
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(FACING);
     }
 
     public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor worldIn, BlockPos currentPos, BlockPos facingPos) {
@@ -71,17 +74,7 @@ public class BlueAltarBlock extends DirectionalBlock implements EntityBlock {
 
     public boolean canSurvive(BlockState state, LevelReader worldIn, BlockPos pos) {
         Direction direction = state.getValue(FACING);
-        if (state.getBlock() == this) { //Forge: This function is called during world gen and placement, before this block is set, so if we are not 'here' then assume it's the pre-check.
-            if (direction == Direction.UP) {
-                if (worldIn.getBlockState(pos.below()) != Blocks.AIR.defaultBlockState()) {
-                    return super.canSurvive(state, worldIn, pos);
-                }
-            }
-            if(direction == Direction.DOWN){
-                if(worldIn.getBlockState(pos.above()) != Blocks.AIR.defaultBlockState()){
-                    return super.canSurvive(state, worldIn, pos);
-                }
-            }
+        if (state.getBlock() == this) {
             if(direction == Direction.NORTH){
                 if(worldIn.getBlockState(pos.south()) != Blocks.AIR.defaultBlockState()){
                     return super.canSurvive(state, worldIn, pos);
@@ -104,10 +97,6 @@ public class BlueAltarBlock extends DirectionalBlock implements EntityBlock {
             }
         }
         return false;
-    }
-
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING);
     }
 
     public PushReaction getPistonPushReaction(BlockState state) {

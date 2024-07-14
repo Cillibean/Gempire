@@ -3,6 +3,7 @@ package com.gempire.init;
 import com.gempire.Gempire;
 import com.gempire.items.*;
 import com.gempire.items.tools.*;
+import net.minecraft.world.food.Foods;
 import net.minecraft.world.item.*;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.registries.RegistryObject;
@@ -226,7 +227,7 @@ public class ModItems {
             () -> new ForgeSpawnEggItem(ModEntities.HUNTER, 0xebebeb, 0xf5f1bc,
                     new Item.Properties()));
 
-    public static final RegistryObject<Item> FUSCHIA_PALADIN_SPAWN_EGG = ITEMS.register("fuschia_paladin_spawn_egg",
+    public static final RegistryObject<Item> FUCHSIA_PALADIN_SPAWN_EGG = ITEMS.register("fuchsia_paladin_spawn_egg",
             () -> new ForgeSpawnEggItem(ModEntities.FUCHSIA_PALADIN, 0xf7cdeb, 0xc4f2cb,
                     new Item.Properties()));
 
@@ -891,15 +892,15 @@ public class ModItems {
                     new Item.Properties().fireResistant().stacksTo(1)));
 
     public static final RegistryObject<Item> PALADIN_CHESTPLATE = ITEMS.register("paladin_chestplate",
-            () -> new ArmorItem(ModArmorMaterials.PALADIN, ArmorItem.Type.CHESTPLATE,
+            () -> new PaladinArmorItem(ModArmorMaterials.PALADIN, ArmorItem.Type.CHESTPLATE,
                     new Item.Properties().fireResistant().stacksTo(1)));
 
     public static final RegistryObject<Item> PALADIN_LEGGINGS = ITEMS.register("paladin_leggings",
-            () -> new ArmorItem(ModArmorMaterials.PALADIN, ArmorItem.Type.LEGGINGS,
+            () -> new PaladinArmorItem(ModArmorMaterials.PALADIN, ArmorItem.Type.LEGGINGS,
                     new Item.Properties().fireResistant().stacksTo(1)));
 
     public static final RegistryObject<Item> PALADIN_BOOTS = ITEMS.register("paladin_boots",
-            () -> new ArmorItem(ModArmorMaterials.PALADIN, ArmorItem.Type.BOOTS,
+            () -> new PaladinArmorItem(ModArmorMaterials.PALADIN, ArmorItem.Type.BOOTS,
                     new Item.Properties().fireResistant().stacksTo(1)));
 
     public static final RegistryObject<Item> GUARDIAN_HELMET = ITEMS.register("guardian_helmet",
@@ -1100,6 +1101,11 @@ public class ModItems {
             new ItemAltarUpgrade(new Item.Properties().stacksTo(1))
     );
 */
+
+    public static final RegistryObject<Item> DRIED_COBALT_KELP = ITEMS.register("dried_cobalt_kelp", () ->
+            new Item(new Item.Properties().stacksTo(64).food(Foods.DRIED_KELP))
+    );
+
     public static final RegistryObject<Item> OPALIZED_TOOTH = ITEMS.register("opalized_tooth", () ->
         new Item(new Item.Properties().stacksTo(64))
     );

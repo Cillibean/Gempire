@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "F F",
+    "ICI",
+    "SFS"
+  ],
+  "key": {
+    "I": {
+      "item": "gempire:fuchsia_shards"
+    },
+    "F": {
+      "item": "gempire:thulite_block"
+    },
+    "S": {
+      "item": "gempire:thulite_ingot"
+    },
+    "C": {
+      "item": "gempire:pink_chroma"
+    }
+  },
+  "result": {
+    "item": "gempire:paladin_chestplate"
+  }
+}

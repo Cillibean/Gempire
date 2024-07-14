@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "F F",
+    "S S"
+  ],
+  "key": {
+    "S": {
+      "item": "gempire:thulite_block"
+    },
+    "F": {
+      "item": "gempire:fuchsia_shards"
+    }
+  },
+  "result": {
+    "item": "gempire:paladin_boots"
+  }
+}

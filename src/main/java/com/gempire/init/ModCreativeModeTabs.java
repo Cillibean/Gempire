@@ -314,6 +314,7 @@ public class ModCreativeModeTabs {
 
                 populator.accept(ModItems.STRAWBERRY.get());
                 populator.accept(ModItems.COBALT_KELP.get());
+                populator.accept(ModItems.DRIED_COBALT_KELP.get());
                 populator.accept(ModBlocks.AQUATIC_FIBRE.get());
                 populator.accept(ModBlocks.TALL_AQUATIC_FIBRE.get());
 

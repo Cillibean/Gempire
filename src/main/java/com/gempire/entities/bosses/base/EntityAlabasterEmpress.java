@@ -1,5 +1,6 @@
 package com.gempire.entities.bosses.base;
 
+import com.gempire.entities.bosses.EntityBoss;
 import com.gempire.init.ModEffects;
 import com.gempire.init.ModSounds;
 import net.minecraft.nbt.CompoundTag;
@@ -24,17 +25,14 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class EntityAlabasterEmpress extends Monster implements GeoEntity {
-    private final ServerBossEvent bossEvent = (ServerBossEvent)(new ServerBossEvent(this.getDisplayName(), BossEvent.BossBarColor.WHITE, BossEvent.BossBarOverlay.PROGRESS)).setDarkenScreen(true);
+public class EntityAlabasterEmpress extends EntityBoss {
 
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
-    public int auraCryCooldown;
-    public MobEffectInstance aura = new MobEffectInstance(ModEffects.WHITE_AURA.get(), 500, 1, false, false, true);
-
     public EntityAlabasterEmpress(EntityType<? extends EntityAlabasterEmpress> p_33002_, Level p_33003_) {
         super(p_33002_, p_33003_);
-        auraCryCooldown = 0;
+        this.bossEvent = (ServerBossEvent)(new ServerBossEvent(this.getDisplayName(), BossEvent.BossBarColor.WHITE, BossEvent.BossBarOverlay.PROGRESS)).setDarkenScreen(true);
+        this.aura = new MobEffectInstance(ModEffects.WHITE_AURA.get(), 500, 1, false, false, true);
     }
 
     public static AttributeSupplier.Builder registerAttributes() {
@@ -52,43 +50,12 @@ public class EntityAlabasterEmpress extends Monster implements GeoEntity {
 
     @Override
     public void addAdditionalSaveData(CompoundTag tag) {
-        tag.putInt("auraCry", auraCryCooldown);
         super.addAdditionalSaveData(tag);
     }
 
     @Override
     public void readAdditionalSaveData(CompoundTag tag) {
-        auraCryCooldown = tag.getInt("auraCry");
         super.readAdditionalSaveData(tag);
-    }
-
-
-    public void setCustomName(@Nullable Component p_31476_) {
-        super.setCustomName(p_31476_);
-        this.bossEvent.setName(this.getDisplayName());
-    }
-
-    public void startSeenByPlayer(ServerPlayer p_31483_) {
-        super.startSeenByPlayer(p_31483_);
-        this.bossEvent.addPlayer(p_31483_);
-    }
-
-    public void stopSeenByPlayer(ServerPlayer p_31488_) {
-        super.stopSeenByPlayer(p_31488_);
-        this.bossEvent.removePlayer(p_31488_);
-    }
-
-    protected boolean canRide(Entity p_31508_) {
-        return false;
-    }
-
-    public boolean canChangeDimensions() {
-        return false;
-    }
-
-    @Override
-    protected SoundEvent getDeathSound() {
-        return ModSounds.POOF.get();
     }
 
     @Override
@@ -113,13 +80,10 @@ public class EntityAlabasterEmpress extends Monster implements GeoEntity {
                 auraCryCooldown--;
             }
         }
-        this.bossEvent.setProgress(this.getHealth() / this.getMaxHealth());
         super.tick();
     }
 
     public void auraCry() {
-        System.out.println("aura cry");
-        //Play sound
         //Play animation
         navigation.stop();
         auraCryCooldown = 600;

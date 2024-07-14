@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "FI ",
+    "SHI",
+    "SSF"
+  ],
+  "key": {
+    "I": {
+      "item": "gempire:opalized_tooth"
+    },
+    "F": {
+      "item": "gempire:prismatic_block"
+    },
+    "S": {
+      "item": "gempire:prismatic_ingot"
+    },
+    "H": {
+      "item": "minecraft:shears"
+    }
+  },
+  "result": {
+    "item": "gempire:prismatic_shears"
+  }
+}

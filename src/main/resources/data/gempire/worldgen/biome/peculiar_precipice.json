@@ -12,7 +12,7 @@
     "music": {
       "sound": "gempire:remnants",
       "min_delay": 0,
-      "max_delay": 100,
+      "max_delay": 0,
       "replace_current_music": true
     }
   },

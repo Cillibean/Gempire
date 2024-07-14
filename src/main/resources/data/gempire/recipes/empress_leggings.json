@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BSB",
+    "C C",
+    "I I"
+  ],
+  "key": {
+    "I": {
+      "item": "gempire:platinum_ingot"
+    },
+    "B": {
+      "item": "gempire:platinum_block"
+    },
+    "S": {
+      "item": "gempire:alabaster_shards"
+    },
+    "C": {
+      "item": "gempire:white_chroma"
+    }
+  },
+  "result": {
+    "item": "gempire:empress_leggings"
+  }
+}

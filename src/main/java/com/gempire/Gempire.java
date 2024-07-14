@@ -252,7 +252,7 @@ public class Gempire
 
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
         if(event.getTabKey() == CreativeModeTabs.SPAWN_EGGS) {
-            event.accept(ModItems.FUSCHIA_PALADIN_SPAWN_EGG);
+            event.accept(ModItems.FUCHSIA_PALADIN_SPAWN_EGG);
             event.accept(ModItems.COBALT_GUARDIAN_SPAWN_EGG);
             event.accept(ModItems.AMBER_HUNTRESS_SPAWN_EGG);
             event.accept(ModItems.ALABASTER_EMPRESS_SPAWN_EGG);

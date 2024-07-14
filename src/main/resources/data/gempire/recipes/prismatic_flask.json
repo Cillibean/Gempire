@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "F F",
+    " F "
+  ],
+  "key": {
+    "F": {
+      "item": "gempire:purified_prismatic_glass"
+    }
+  },
+  "result": {
+    "item": "gempire:prismatic_flask"
+  }
+}

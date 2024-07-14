@@ -68,7 +68,7 @@ public class HuntressLightning extends Entity {
     private ServerPlayer cause;
     private final Set<Entity> hitEntities = Sets.newHashSet();
     private int blocksSetOnFire;
-    private float damage = 5.0F;
+    private float damage = 3.0F;
 
     public void setVisualOnly(boolean p_20875_) {
         this.visualOnly = p_20875_;

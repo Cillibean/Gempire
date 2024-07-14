@@ -1,5 +1,6 @@
 package com.gempire.effect;
 
+import com.gempire.init.ModEffects;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -17,7 +18,7 @@ public class ElectrocutionEffect extends MobEffect {
 
     @Override
     public void applyEffectTick(LivingEntity entity, int pAmplifier) {
-        if (!entity.level().isClientSide()) {
+        if (!entity.level().isClientSide() && !entity.hasEffect(ModEffects.SHOCK_RESISTANCE.get())) {
             ItemStack stack = entity.getMainHandItem();
             stack.setCount(1);
             ItemEntity itemEntity = new ItemEntity(entity.level(), entity.getX(), entity.getY(), entity.getZ(), stack);

@@ -29,10 +29,12 @@ public class WhiteAltarBlock extends DirectionalBlock implements EntityBlock  {
 
     public WhiteAltarBlock(Properties properties) {
         super(properties);
+        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
     }
 
-    public BlockState rotate(BlockState state, Rotation rot) {
-        return state.setValue(FACING, rot.rotate(state.getValue(FACING)));
+    @Override
+    public RenderShape getRenderShape(BlockState state) {
+        return RenderShape.ENTITYBLOCK_ANIMATED;
     }
 
     @Override
@@ -40,18 +42,20 @@ public class WhiteAltarBlock extends DirectionalBlock implements EntityBlock  {
         return true;
     }
 
-    public BlockState mirror(BlockState state, Mirror mirrorIn) {
-        return state.setValue(FACING, mirrorIn.mirror(state.getValue(FACING)));
-    }
-
     public BlockState getStateForPlacement(BlockPlaceContext context) {
-        Direction direction = context.getClickedFace();
-        BlockState blockstate = context.getLevel().getBlockState(context.getClickedPos().relative(direction.getOpposite()));
-        return blockstate.is(this) && blockstate.getValue(FACING) == direction ? this.defaultBlockState().setValue(FACING, direction.getOpposite()) : this.defaultBlockState().setValue(FACING, direction);
+        return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
     }
 
-    public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor worldIn, BlockPos currentPos, BlockPos facingPos) {
-        return !stateIn.canSurvive(worldIn, currentPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(stateIn, facing, facingState, worldIn, currentPos, facingPos);
+    public BlockState rotate(BlockState state, Rotation rot) {
+        return state.setValue(FACING, rot.rotate(state.getValue(FACING)));
+    }
+
+    public BlockState mirror(BlockState state, Mirror mirrorIn) {
+        return state.rotate(mirrorIn.getRotation(state.getValue(FACING)));
+    }
+
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(FACING);
     }
 
     @Override
@@ -100,10 +104,6 @@ public class WhiteAltarBlock extends DirectionalBlock implements EntityBlock  {
         return false;
     }
 
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING);
-    }
-
     public PushReaction getPistonPushReaction(BlockState state) {
         return PushReaction.DESTROY;
     }
@@ -130,10 +130,5 @@ public class WhiteAltarBlock extends DirectionalBlock implements EntityBlock  {
     @Nullable
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level p_152180_, BlockState p_152181_, BlockEntityType<T> p_152182_) {
         return p_152182_ == ModTE.WHITE_ALTAR_TE.get() ? WhiteAltarTE::tick : null;
-    }
-
-    @Override
-    public RenderShape getRenderShape(BlockState state) {
-        return RenderShape.ENTITYBLOCK_ANIMATED;
     }
 }

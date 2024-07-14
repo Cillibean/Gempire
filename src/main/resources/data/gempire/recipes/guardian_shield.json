@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "FDF",
+    "IBI",
+    "SIS"
+  ],
+  "key": {
+    "I": {
+      "item": "gempire:anatase_block"
+    },
+    "F": {
+      "item": "gempire:anatase_ingot"
+    },
+    "S": {
+      "item": "gempire:blue_chroma"
+    },
+    "B": {
+      "item": "minecraft:shield"
+    },
+    "D": {
+      "item": "gempire:cobalt_shards"
+    }
+  },
+  "result": {
+    "item": "gempire:guardian_shield"
+  }
+}

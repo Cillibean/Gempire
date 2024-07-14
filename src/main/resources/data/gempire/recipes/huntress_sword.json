@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "FDF",
+    "IBI",
+    "SIS"
+  ],
+  "key": {
+    "I": {
+      "item": "gempire:electrum_block"
+    },
+    "F": {
+      "item": "gempire:electrum_ingot"
+    },
+    "S": {
+      "item": "gempire:yellow_chroma"
+    },
+    "B": {
+      "item": "gempire:prismatic_sword"
+    },
+    "D": {
+      "item": "gempire:amber_shards"
+    }
+  },
+  "result": {
+    "item": "gempire:huntress_sword"
+  }
+}

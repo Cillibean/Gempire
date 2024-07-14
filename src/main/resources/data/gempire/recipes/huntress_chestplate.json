@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "F F",
+    "ICI",
+    "SFS"
+  ],
+  "key": {
+    "I": {
+      "item": "gempire:amber_shards"
+    },
+    "F": {
+      "item": "gempire:electrum_block"
+    },
+    "S": {
+      "item": "gempire:electrum_ingot"
+    },
+    "C": {
+      "item": "gempire:yellow_chroma"
+    }
+  },
+  "result": {
+    "item": "gempire:huntress_chestplate"
+  }
+}

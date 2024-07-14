@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BSB",
+    "I I"
+  ],
+  "key": {
+    "I": {
+      "item": "gempire:anatase_ingot"
+    },
+    "B": {
+      "item": "gempire:anatase_block"
+    },
+    "S": {
+      "item": "gempire:cobalt_shards"
+    }
+  },
+  "result": {
+    "item": "gempire:guardian_helmet"
+  }
+}

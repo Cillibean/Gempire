@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "FDF",
+    "IBI",
+    "SIS"
+  ],
+  "key": {
+    "I": {
+      "item": "gempire:platinum_block"
+    },
+    "F": {
+      "item": "gempire:platinum_ingot"
+    },
+    "S": {
+      "item": "gempire:white_chroma"
+    },
+    "B": {
+      "item": "minecraft:bow"
+    },
+    "D": {
+      "item": "gempire:alabaster_shards"
+    }
+  },
+  "result": {
+    "item": "gempire:empress_bow"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "F F",
+    "ICI",
+    "SFS"
+  ],
+  "key": {
+    "I": {
+      "item": "gempire:cobalt_shards"
+    },
+    "F": {
+      "item": "gempire:anatase_block"
+    },
+    "S": {
+      "item": "gempire:anatase_ingot"
+    },
+    "C": {
+      "item": "gempire:blue_chroma"
+    }
+  },
+  "result": {
+    "item": "gempire:guardian_chestplate"
+  }
+}

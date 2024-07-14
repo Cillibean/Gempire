@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BSB",
+    "I I"
+  ],
+  "key": {
+    "I": {
+      "item": "gempire:electrum_ingot"
+    },
+    "B": {
+      "item": "gempire:electrum_block"
+    },
+    "S": {
+      "item": "gempire:amber_shards"
+    }
+  },
+  "result": {
+    "item": "gempire:huntress_helmet"
+  }
+}

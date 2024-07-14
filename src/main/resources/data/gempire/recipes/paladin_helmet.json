@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BSB",
+    "I I"
+  ],
+  "key": {
+    "I": {
+      "item": "gempire:thulite_ingot"
+    },
+    "B": {
+      "item": "gempire:thulite_block"
+    },
+    "S": {
+      "item": "gempire:fuchsia_shards"
+    }
+  },
+  "result": {
+    "item": "gempire:paladin_helmet"
+  }
+}

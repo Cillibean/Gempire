@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BSB",
+    "C C",
+    "I I"
+  ],
+  "key": {
+    "I": {
+      "item": "gempire:thulite_ingot"
+    },
+    "B": {
+      "item": "gempire:thulite_block"
+    },
+    "S": {
+      "item": "gempire:fuchsia_shards"
+    },
+    "C": {
+      "item": "gempire:pink_chroma"
+    }
+  },
+  "result": {
+    "item": "gempire:paladin_leggings"
+  }
+}

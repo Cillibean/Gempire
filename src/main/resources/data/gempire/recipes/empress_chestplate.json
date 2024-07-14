@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "F F",
+    "ICI",
+    "SFS"
+  ],
+  "key": {
+    "I": {
+      "item": "gempire:alabaster_shards"
+    },
+    "F": {
+      "item": "gempire:platinum_block"
+    },
+    "S": {
+      "item": "gempire:platinum_ingot"
+    },
+    "C": {
+      "item": "gempire:white_chroma"
+    }
+  },
+  "result": {
+    "item": "gempire:empress_chestplate"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "FDF",
+    "IBI",
+    "SIS"
+  ],
+  "key": {
+    "I": {
+      "item": "gempire:thulite_block"
+    },
+    "F": {
+      "item": "gempire:thulite_ingot"
+    },
+    "S": {
+      "item": "gempire:pink_chroma"
+    },
+    "B": {
+      "item": "gempire:prismatic_axe"
+    },
+    "D": {
+      "item": "gempire:fuchsia_shards"
+    }
+  },
+  "result": {
+    "item": "gempire:paladin_axe"
+  }
+}

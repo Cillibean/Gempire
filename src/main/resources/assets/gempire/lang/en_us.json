@@ -318,6 +318,7 @@
   "block.gempire.cobalt_kelp": "Cobalt Kelp",
   "block.gempire.cobalt_kelp_block": "Cobalt Kelp",
   "item.gempire.cobalt_kelp": "Cobalt Kelp",
+  "item.gempire.dried_cobalt_kelp": "Dried Cobalt Kelp",
 
   "block.gempire.aquatic_fibre": "Aquatic Fibre",
   "block.gempire.tall_aquatic_fibre": "Tall Aquatic Fibre",
@@ -520,7 +521,7 @@
   "item.gempire.shaded_apple": "Shaded Apple",
   "item.gempire.calming_jelly": "Calming Jelly",
 
-  "item.gempire.prismatic_glass": "Reinforced Prismatic Glass Shards",
+  "item.gempire.prismatic_glass_shards": "Reinforced Prismatic Glass Shards",
   "block.gempire.purified_prismatic_glass": "Purified Prismatic Diamond Glass",
 
   "item.gempire.gem_slush_bucket": "Bucket of Gem Slush",
@@ -913,7 +914,7 @@
   "item.gempire.topaz_gem_6": "Pink Topaz Gem",
   "item.gempire.topaz_gem_11": "Blue Topaz Gem",
 
-  "item.gempire.fuschia_paladin_spawn_egg": "Fuschia Paladin Spawn Egg",
+  "item.gempire.fuchsia_paladin_spawn_egg": "Fuchsia Paladin Spawn Egg",
   "item.gempire.cobalt_guardian_spawn_egg": "Cobalt Guardian Spawn Egg",
   "item.gempire.amber_huntress_spawn_egg": "Amber Huntress Spawn Egg",
   "item.gempire.alabaster_empress_spawn_egg": "Alabaster Empress Spawn Egg",

@@ -83,61 +83,6 @@ public class IncubatorBlock extends BaseEntityBlock {
         }
     }
 
-    public static int getDirectionFacingValue(BlockEntity te){
-        BlockState block = te.getLevel().getBlockEntity(te.getBlockPos()).getBlockState();
-        return switch (block.getValue(FACING)) {
-            case EAST -> 5;
-            case NORTH -> 2;
-            case WEST -> 4;
-            case SOUTH -> 3;
-            default -> 5;
-        };
-    }
-
-    public static Direction getDirectionFromValue(int value){
-        return switch (value) {
-            case 5 -> Direction.EAST;
-            case 2 -> Direction.NORTH;
-            case 4 -> Direction.WEST;
-            case 3 -> Direction.SOUTH;
-            default -> Direction.EAST;
-        };
-    }
-
-    public static int getAdjustedDirectionValue(int facing, int svalue){
-        if (facing == 3){
-            return svalue;
-        }
-        else if (facing == 5){
-            return switch (svalue) {
-                case 5 -> 2;
-                case 2 -> 4;
-                case 4 -> 3;
-                case 3 -> 5;
-                default -> 2;
-            };
-        }
-        else if (facing == 2){
-            return switch (svalue) {
-                case 5 -> 4;
-                case 2 -> 3;
-                case 4 -> 5;
-                case 3 -> 2;
-                default -> 4;
-            };
-        }
-        else if (facing == 4){
-            return switch (svalue) {
-                case 5 -> 3;
-                case 2 -> 5;
-                case 4 -> 2;
-                case 3 -> 4;
-                default -> 3;
-            };
-        }
-        return 2;
-    }
-
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {

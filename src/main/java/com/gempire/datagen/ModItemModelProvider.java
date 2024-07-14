@@ -222,9 +222,11 @@ public class ModItemModelProvider extends ItemModelProvider {
 
         saplingItem(ModBlocks.AQUATIC_FIBRE);
 
+        saplingItem(ModBlocks.SELENITE_CLUSTER);
+
         //simpleItem(ModItems.WARP_CORE);
 
-        withExistingParent(ModItems.FUSCHIA_PALADIN_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItems.FUCHSIA_PALADIN_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(ModItems.COBALT_GUARDIAN_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(ModItems.AMBER_HUNTRESS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(ModItems.ALABASTER_EMPRESS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
@@ -245,6 +247,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.PRISMATIC_GLASS_SHARDS);
         simpleItem(ModItems.PRISMATIC_UPGRADE_SMITHING_TEMPLATE);
         simpleItem(ModItems.OPALIZED_TOOTH);
+        simpleItem(ModItems.DRIED_COBALT_KELP);
+        simpleItem(ModItems.COBALT_KELP);
     }
 
     private ItemModelBuilder saplingItem(RegistryObject<Block> item) {

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BSB",
+    "I I"
+  ],
+  "key": {
+    "I": {
+      "item": "gempire:platinum_ingot"
+    },
+    "B": {
+      "item": "gempire:platinum_block"
+    },
+    "S": {
+      "item": "gempire:alabaster_shards"
+    }
+  },
+  "result": {
+    "item": "gempire:empress_helmet"
+  }
+}
