@@ -306,34 +306,6 @@ public class ModItems {
             )
     );
 
-    public static final RegistryObject<Item> PINK_ALTAR = ITEMS.register("pink_altar.json", () ->
-            new BlockItem(
-                    ModBlocks.PINK_ALTAR.get(),
-                    new Item.Properties()
-            )
-    );
-
-    public static final RegistryObject<Item> BLUE_ALTAR = ITEMS.register("blue_altar", () ->
-            new BlockItem(
-                    ModBlocks.BLUE_ALTAR.get(),
-                    new Item.Properties()
-            )
-    );
-
-    public static final RegistryObject<Item> YELLOW_ALTAR = ITEMS.register("yellow_altar", () ->
-            new BlockItem(
-                    ModBlocks.YELLOW_ALTAR.get(),
-                    new Item.Properties()
-            )
-    );
-
-    public static final RegistryObject<Item> WHITE_ALTAR = ITEMS.register("white_altar", () ->
-            new BlockItem(
-                    ModBlocks.WHITE_ALTAR.get(),
-                    new Item.Properties()
-            )
-    );
-
     public static final RegistryObject<Item> PRISMATIC_SNOW = ITEMS.register("prismatic_snow", () ->
             new BlockItem(
                     ModBlocks.PRISMATIC_SNOW.get(),

@@ -864,12 +864,8 @@ public class ModCreativeModeTabs {
                 populator.accept(ModBlocks.CROCOSMIA.get());
                 populator.accept(ModBlocks.CLOVERS.get());
 
-                populator.accept(ModBlocks.WARP_PAD.get());
+                //populator.accept(ModBlocks.WARP_PAD.get());
                 populator.accept(ModBlocks.GALAXY_WARP.get());
-                populator.accept(ModBlocks.PINK_ALTAR.get());
-                populator.accept(ModBlocks.BLUE_ALTAR.get());
-                populator.accept(ModBlocks.YELLOW_ALTAR.get());
-                populator.accept(ModBlocks.WHITE_ALTAR.get());
             }).build()
     );
     public static final RegistryObject<CreativeModeTab> GEMPIRE_TOOLS = CREATIVE_MODE_TABS.register("gempire_tools",
