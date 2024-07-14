@@ -291,6 +291,24 @@ public class ModEntities {
                 .build(new ResourceLocation(Gempire.MODID, "acid_spit").toString());
     });
 
+    public static final RegistryObject<EntityType<LifeLeechOrb>> LIFE_LEECH = ENTITIES.register("life_leech", () -> {
+        return EntityType.Builder.<LifeLeechOrb>of(LifeLeechOrb::new, MobCategory.MISC)
+                .sized(0.25F, 0.25F)
+                .setTrackingRange(64)
+                .setUpdateInterval(10)
+                .setShouldReceiveVelocityUpdates(true)
+                .build(new ResourceLocation(Gempire.MODID, "life_leech").toString());
+    });
+
+    public static final RegistryObject<EntityType<LifeReturnOrb>> LIFE_RETURN = ENTITIES.register("life_return", () -> {
+        return EntityType.Builder.<LifeReturnOrb>of(LifeReturnOrb::new, MobCategory.MISC)
+                .sized(0.25F, 0.25F)
+                .setTrackingRange(64)
+                .setUpdateInterval(10)
+                .setShouldReceiveVelocityUpdates(true)
+                .build(new ResourceLocation(Gempire.MODID, "life_return").toString());
+    });
+
     public static final RegistryObject<EntityType<GuardianProjectileEntity>> GUARDIAN_ORB = ENTITIES.register("guardian_orb", () -> {
         return EntityType.Builder.<GuardianProjectileEntity>of(GuardianProjectileEntity::new, MobCategory.MISC)
                 .sized(0.25F, 0.25F)

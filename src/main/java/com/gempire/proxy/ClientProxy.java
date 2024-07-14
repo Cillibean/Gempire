@@ -128,6 +128,8 @@ public class ClientProxy {
         event.registerEntityRenderer(ModEntities.ICE_SHARD.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer(ModEntities.ACID_SPIT.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer(ModEntities.GUARDIAN_ORB.get(), ThrownItemRenderer::new);
+        event.registerEntityRenderer(ModEntities.LIFE_LEECH.get(), LifeLeechRenderer::new);
+        event.registerEntityRenderer(ModEntities.LIFE_RETURN.get(), LifeReturnRenderer::new);
         event.registerEntityRenderer(ModEntities.WATER_ORB.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer(ModEntities.ELECTROKINESIS_LIGHTNING.get(), ElectrokinesisLightningRenderer::new);
         event.registerEntityRenderer(ModEntities.HUNTRESS_LIGHTNING.get(), HuntressLightningRenderer::new);
