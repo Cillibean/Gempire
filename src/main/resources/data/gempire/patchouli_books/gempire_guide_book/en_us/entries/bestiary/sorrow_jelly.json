@@ -1,11 +1,14 @@
 {
   "name": "Sorrow Jelly",
-  "icon": "minecraft:book",
+  "icon": "gempire:calming_jelly",
   "advancement": "gempire:root",
   "category": "gempire:bestiary",
   "pages": [
     {
-      "type": "patchouli:text",
+      "type": "patchouli:entity",
+      "entity": "gempire:sorrow_jelly",
+      "name": "Sorrow Jelly",
+      "rotate": "true",
       "text": "Sorrow Jellies are aquatic creatures found in the ??? biome."
     }
   ]

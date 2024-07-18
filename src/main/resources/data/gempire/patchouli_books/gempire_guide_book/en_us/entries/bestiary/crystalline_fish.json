@@ -5,7 +5,10 @@
   "category": "gempire:bestiary",
   "pages": [
     {
-      "type": "patchouli:text",
+      "type": "patchouli:entity",
+      "entity": "gempire:crystalline_fish",
+      "name": "Crystalline Fish",
+      "rotate": "true",
       "text": "Crystalline Fish are aquatic neutral creatures found in the Mirrored Sea biome."
     }
   ]
