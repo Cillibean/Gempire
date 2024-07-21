@@ -116,7 +116,6 @@ public class EntityFuchsiaPaladin extends EntityBoss {
 
     public void leech() {
         if (leeching) {
-            System.out.println("leeching");
             leechCooldown = 800;
         }
     }
