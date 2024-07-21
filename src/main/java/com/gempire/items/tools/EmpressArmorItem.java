@@ -64,7 +64,7 @@ public class EmpressArmorItem extends ArmorItem implements GeoItem {
 
     private static final Map<ArmorMaterial, MobEffectInstance> MATERIAL_TO_EFFECT_MAP =
             (new ImmutableMap.Builder<ArmorMaterial, MobEffectInstance>())
-                    .put(ModArmorMaterials.EMPRESS, new MobEffectInstance(ModEffects.EMPRESS.get(), 200, 1, false, false, true)).build();
+                    .put(ModArmorMaterials.EMPRESS, new MobEffectInstance(ModEffects.EMPRESS_SPLENDOUR.get(), 200, 1, false, false, true)).build();
 
 
     @Override

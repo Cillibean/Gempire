@@ -109,7 +109,7 @@ public class HuntressArmorItem extends ArmorItem implements GeoItem {
 
     private static final Map<ArmorMaterial, MobEffectInstance> MATERIAL_TO_EFFECT_MAP =
             (new ImmutableMap.Builder<ArmorMaterial, MobEffectInstance>())
-                    .put(ModArmorMaterials.HUNTRESS, new MobEffectInstance(ModEffects.HUNTRESS.get(), 200, 1, false, false, true)).build();
+                    .put(ModArmorMaterials.HUNTRESS, new MobEffectInstance(ModEffects.HUNTRESS_WRATH.get(), 200, 1, false, false, true)).build();
 
 
     @Override

@@ -64,7 +64,7 @@ public class PaladinArmorItem extends ArmorItem implements GeoItem {
 
     private static final Map<ArmorMaterial, MobEffectInstance> MATERIAL_TO_EFFECT_MAP =
             (new ImmutableMap.Builder<ArmorMaterial, MobEffectInstance>())
-                    .put(ModArmorMaterials.PALADIN, new MobEffectInstance(ModEffects.PALADINS_PROTECTION.get(), 200, 1, false, false, true)).build();
+                    .put(ModArmorMaterials.PALADIN, new MobEffectInstance(ModEffects.PALADINS_GRACE.get(), 200, 1, false, false, true)).build();
 
 
     @Override

@@ -1,4 +1,4 @@
-// 1.20.1	2024-07-14T13:58:45.565148	Item Models: gempire
+// 1.20.1	2024-07-21T16:22:53.154944	Item Models: gempire
 2a4c323206d2fbeca217109aa5c8a2ac8ce38701 assets/gempire/models/item/acid_spit.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/gempire/models/item/alabaster_empress_spawn_egg.json
 0da7ed67ca0a8fcb9a8ba427cc3a79d0931ef656 assets/gempire/models/item/alabaster_shards.json
@@ -49,8 +49,8 @@ b360d9ffaaa5058875385abcc95e11f6a1984385 assets/gempire/models/item/electrum_nug
 db10bee6fbe48ec12d1032020cf0fc2a62976b21 assets/gempire/models/item/empress_star.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/gempire/models/item/fleurie_spawn_egg.json
 225e949b95a05caec22765e8d6cfa0b122521b23 assets/gempire/models/item/fragments_music_disc.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/gempire/models/item/fuchsia_paladin_spawn_egg.json
 9c0507ab15911bbae4df0025cda1e8726bd4e770 assets/gempire/models/item/fuchsia_shards.json
-63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/gempire/models/item/fuschia_paladin_spawn_egg.json
 8dba06a2e4c89d6851498e0efb52d50ee29b867a assets/gempire/models/item/gem_alloy.json
 288f3fcb17d920dfe1a477356584a19faca79b9c assets/gempire/models/item/gem_scrap.json
 67d02b7c39cb2e261a97c4583efe47eb185a4a0b assets/gempire/models/item/gem_slush_bucket.json

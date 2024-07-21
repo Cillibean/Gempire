@@ -187,6 +187,12 @@ public class ModBlockStateProvider extends BlockStateProvider {
         hangingSignBlock(ModBlocks.SHADED_HANGING_SIGN.get(), ModBlocks.SHADED_WALL_HANGING_SIGN.get(),
                 blockTexture(ModBlocks.SHADED_PLANKS.get()));
 
+        signBlock(((StandingSignBlock) ModBlocks.CRYSTAL_SIGN.get()), ((WallSignBlock) ModBlocks.CRYSTAL_WALL_SIGN.get()),
+                blockTexture(ModBlocks.CRYSTAL_PLANKS.get()));
+
+        hangingSignBlock(ModBlocks.CRYSTAL_HANGING_SIGN.get(), ModBlocks.CRYSTAL_WALL_HANGING_SIGN.get(),
+                blockTexture(ModBlocks.CRYSTAL_PLANKS.get()));
+
 
         logBlock(((RotatedPillarBlock) ModBlocks.SHADED_LOG.get()));
         blockItem(ModBlocks.SHADED_LOG);

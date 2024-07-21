@@ -17,7 +17,7 @@ public class PaladinArmorEffect extends MobEffect {
 
     public void removeAttributeModifiers(LivingEntity p_19436_, AttributeMap p_19437_, int p_19438_) {
         super.removeAttributeModifiers(p_19436_, p_19437_, p_19438_);
-        if (p_19436_.getHealth() > p_19436_.getMaxHealth() && !p_19436_.hasEffect(ModEffects.PALADINS_PROTECTION.get())) {
+        if (p_19436_.getHealth() > p_19436_.getMaxHealth() && !p_19436_.hasEffect(ModEffects.PALADINS_GRACE.get())) {
             p_19436_.setHealth(p_19436_.getMaxHealth());
         }
     }
