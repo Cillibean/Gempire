@@ -5,7 +5,10 @@
   "category": "gempire:bestiary",
   "pages": [
     {
-      "type": "patchouli:text",
+      "type": "patchouli:entity",
+      "entity": "gempire:cobalt_guardian",
+      "name": "The Guardian",
+      "rotate": "true",
       "text": "The bestial remnants of an elegant diamond who once ruled over their homeworld."
     },
     {

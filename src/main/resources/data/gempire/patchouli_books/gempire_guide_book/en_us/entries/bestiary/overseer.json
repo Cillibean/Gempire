@@ -5,7 +5,10 @@
   "category": "gempire:bestiary",
   "pages": [
     {
-      "type": "patchouli:text",
+      "type": "patchouli:entity",
+      "entity": "gempire:overseer",
+      "name": "Overseer",
+      "rotate": "true",
       "text": "Overseers are airborne hostile creatures found in the Prismatic Gates biome."
     }
   ]
