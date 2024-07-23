@@ -28,7 +28,7 @@ public class PaladinLeechGoal extends Goal {
     }
 
     public void start() {
-        gem.leeching = true;
+        System.out.println("leech goal start");
         super.start();
     }
 
@@ -46,6 +46,7 @@ public class PaladinLeechGoal extends Goal {
             this.gem.getLookControl().setLookAt(livingentity, 30.0F, 30.0F);
             if (!gem.pound && !gem.crying) {
                 LifeLeechOrb acidSpit = new LifeLeechOrb(this.gem.level(), this.gem);
+                acidSpit.setPos(gem.getX(), gem.getY()+3, gem.getZ());
                 double d4 = livingentity.getEyeY() - (double) 1.1F;
                 double d1 = livingentity.getX() - this.gem.getX();
                 double d2 = d4 - acidSpit.getY();
@@ -53,6 +54,8 @@ public class PaladinLeechGoal extends Goal {
                 float f = Mth.sqrt((float) (d1 * d1 + d3 * d3)) * 0.2F;
                 acidSpit.shoot(d1, d2 + (double) f, d3, 1.6F, 6.0F);
                 this.gem.level().addFreshEntity(acidSpit);
+                gem.leeching = false;
+                this.stop();
             }
         }
     }

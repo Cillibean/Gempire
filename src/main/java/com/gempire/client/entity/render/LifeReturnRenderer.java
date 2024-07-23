@@ -1,5 +1,6 @@
 package com.gempire.client.entity.render;
 
+import com.gempire.Gempire;
 import com.gempire.entities.projectiles.LifeLeechOrb;
 import com.gempire.entities.projectiles.LifeReturnOrb;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -19,8 +20,8 @@ import org.joml.Matrix4f;
 
 @OnlyIn(Dist.CLIENT)
 public class LifeReturnRenderer extends EntityRenderer<LifeReturnOrb> {
-    private static final ResourceLocation TEXTURE_LOCATION = new ResourceLocation("textures/entity/enderdragon/dragon_fireball.png");
-    private static final RenderType RENDER_TYPE = RenderType.entityCutoutNoCull(TEXTURE_LOCATION);
+    private static final ResourceLocation TEXTURE_LOCATION = new ResourceLocation(Gempire.MODID, "textures/entity/projectiles/lifeleech/base.png");
+    private static final RenderType RENDER_TYPE = RenderType.entityTranslucent(TEXTURE_LOCATION);
 
     public LifeReturnRenderer(EntityRendererProvider.Context p_173962_) {
         super(p_173962_);
