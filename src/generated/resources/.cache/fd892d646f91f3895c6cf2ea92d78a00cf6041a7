@@ -1,4 +1,4 @@
-// 1.20.1	2024-07-21T16:22:53.154944	Item Models: gempire
+// 1.20.1	2024-07-27T16:26:39.665144	Item Models: gempire
 2a4c323206d2fbeca217109aa5c8a2ac8ce38701 assets/gempire/models/item/acid_spit.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/gempire/models/item/alabaster_empress_spawn_egg.json
 0da7ed67ca0a8fcb9a8ba427cc3a79d0931ef656 assets/gempire/models/item/alabaster_shards.json
@@ -28,13 +28,16 @@ c80c37467646efea41fe5d61cceabe2d1e5da900 assets/gempire/models/item/chrysanthemu
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/gempire/models/item/cobalt_guardian_spawn_egg.json
 8cbaf03a3ec06fd43141a5bf7622862c6b28d8d9 assets/gempire/models/item/cobalt_kelp.json
 28edb4b4eb938e4199bc4465fd6859f92dd19248 assets/gempire/models/item/cobalt_shards.json
+9efc19f996b88057714ea649fe442afb3593f1b3 assets/gempire/models/item/cobbled_pegmatite_wall.json
 02572433c70091ff3e02cea129860110d38043f6 assets/gempire/models/item/confractor.json
 abce74eac971aebc6dc933921fbaa1c0056e343a assets/gempire/models/item/confractor_body.json
 72d2d8c794066ae1d251d317a95ad79696a24d67 assets/gempire/models/item/confractor_tip.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/gempire/models/item/crystal_deer_spawn_egg.json
 703e79a2af8b7faa64a5a30ae0594cf3ef87c17d assets/gempire/models/item/crystal_door.json
 7b1dae94b648ecc2338c40fa2e428d9c3e1937c5 assets/gempire/models/item/crystal_fence.json
+eb5399a8d034d5ff4d3b8e7cc62bc444414795ef assets/gempire/models/item/crystal_hanging_sign.json
 6f33c5476af3442ee45e19c18a20bced76cf4915 assets/gempire/models/item/crystal_sapling.json
+5dee59cacce8ddcfeaed4dfe062b6ba73aa9c106 assets/gempire/models/item/crystal_sign.json
 203c138f08c9b479796360252bd64ac33b001748 assets/gempire/models/item/cyan_chroma.json
 93be3ef44cbc4b4aabfd14eff791e847c7d019b7 assets/gempire/models/item/cyan_lattice.json
 1ae69ba003ff3f9af95fdc9312c40476ba579774 assets/gempire/models/item/cyan_shards.json

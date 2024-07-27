@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "gempire:item/crystal_hanging_sign"
+  }
+}
