@@ -3,6 +3,7 @@ package com.gempire.entities.bosses.base;
 import com.gempire.entities.ai.GuardianStrafeGoal;
 import com.gempire.entities.ai.PaladinLeechGoal;
 import com.gempire.entities.bosses.EntityBoss;
+import com.gempire.entities.projectiles.LifeLeechOrb;
 import com.gempire.init.ModEffects;
 import com.gempire.init.ModSounds;
 import net.minecraft.nbt.CompoundTag;
@@ -10,6 +11,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerBossEvent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.util.Mth;
 import net.minecraft.world.BossEvent;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
@@ -60,7 +62,7 @@ public class EntityFuchsiaPaladin extends EntityBoss {
         this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 0.6D));
         this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, 0, false, false, (entity) -> canAttack((LivingEntity) entity)));
-        this.goalSelector.addGoal(3, new PaladinLeechGoal(this, 1.25D));
+        //this.goalSelector.addGoal(3, new PaladinLeechGoal(this, 1.25D));
         super.registerGoals();
     }
 
@@ -115,8 +117,18 @@ public class EntityFuchsiaPaladin extends EntityBoss {
     }
 
     public void leech() {
-        if (leeching) {
+        if (leeching && !pound && !crying && getTarget() != null) {
             leechCooldown = 800;
+            LifeLeechOrb acidSpit = new LifeLeechOrb(this.level(), this);
+            acidSpit.setPos(this.getX(), this.getY()+3, this.getZ());
+            double d4 = getTarget().getEyeY() - (double) 1.1F;
+            double d1 = getTarget().getX() - this.getX();
+            double d2 = d4 - acidSpit.getY();
+            double d3 = getTarget().getZ() - this.getZ();
+            float f = Mth.sqrt((float) (d1 * d1 + d3 * d3)) * 0.2F;
+            acidSpit.shoot(d1, d2 + (double) f, d3, 1.6F, 6.0F);
+            this.level().addFreshEntity(acidSpit);
+            leeching = false;
         }
     }
 

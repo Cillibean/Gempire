@@ -89,7 +89,7 @@ public class ModEntities {
 
     public static final RegistryObject<EntityType<EntityFuchsiaPaladin>> FUCHSIA_PALADIN = ENTITIES.register("fuchsia_paladin",
             () -> EntityType.Builder.of(EntityFuchsiaPaladin::new, MobCategory.MONSTER)
-                    .sized(1f, 3.5f) // Hitbox Size
+                    .sized(2.5f, 4f) // Hitbox Size
                     .build(new ResourceLocation(Gempire.MODID, "fuchsia_paladin").toString()));
 
     /*

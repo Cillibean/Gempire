@@ -48,6 +48,7 @@ public class LifeLeechOrb extends AbstractHurtingProjectile {
                 this.level().addFreshEntity(areaeffectcloud);
                 */
 
+        /*
                 LifeReturnOrb acidSpit = new LifeReturnOrb(this.level(), (LivingEntity) this.getOwner());
                 acidSpit.setPos(this.getX(), this.getY() + 2, this.getZ());
                 if (result instanceof EntityHitResult) {
@@ -63,7 +64,14 @@ public class LifeLeechOrb extends AbstractHurtingProjectile {
                 acidSpit.shoot(d1, d2 + (double) f, d3, 1.6F, 6.0F);
                 this.level().addFreshEntity(acidSpit);
                 System.out.println("life return");
-                this.discard();
+
+
+         */
+        if (result instanceof EntityHitResult) {
+            ((EntityHitResult) result).getEntity().hurt(this.damageSources().mobAttack((LivingEntity) this.getOwner()), 8);
+            ((LivingEntity) this.getOwner()).heal(80);
+        }
+        this.discard();
     }
 
     public boolean isPickable() {

@@ -8,16 +8,16 @@ import software.bernie.geckolib.model.GeoModel;
 public class ModelFuchsiaPaladin extends GeoModel<EntityFuchsiaPaladin> {
     @Override
     public ResourceLocation getModelResource(EntityFuchsiaPaladin object) {
-        return new ResourceLocation(Gempire.MODID, "geo/entity/shambler.geo.json");
+        return new ResourceLocation(Gempire.MODID, "geo/entity/fuchsia_paladin.geo.json");
     }
 
     @Override
     public ResourceLocation getTextureResource(EntityFuchsiaPaladin object) {
-        return new ResourceLocation(Gempire.MODID, "textures/entity/clods/shambler/shambler.png");
+        return new ResourceLocation(Gempire.MODID, "textures/entity/boss/paladin/fuchsia/base.png");
     }
 
     @Override
     public ResourceLocation getAnimationResource(EntityFuchsiaPaladin animatable) {
-        return new ResourceLocation(Gempire.MODID, "animations/entity/shambler.animation.json");
+        return new ResourceLocation(Gempire.MODID, "animations/entity/fuchsia_paladin.animation.json");
     }
 }
