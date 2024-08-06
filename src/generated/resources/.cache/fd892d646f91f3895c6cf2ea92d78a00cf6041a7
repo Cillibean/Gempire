@@ -1,4 +1,4 @@
-// 1.20.1	2024-07-27T16:26:39.665144	Item Models: gempire
+// 1.20.1	2024-08-06T17:53:00.221058	Item Models: gempire
 2a4c323206d2fbeca217109aa5c8a2ac8ce38701 assets/gempire/models/item/acid_spit.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/gempire/models/item/alabaster_empress_spawn_egg.json
 0da7ed67ca0a8fcb9a8ba427cc3a79d0931ef656 assets/gempire/models/item/alabaster_shards.json
@@ -49,6 +49,10 @@ eb5399a8d034d5ff4d3b8e7cc62bc444414795ef assets/gempire/models/item/crystal_hang
 0c381a2b1c161c35c302651759f15fb819bdfc20 assets/gempire/models/item/dried_cobalt_kelp.json
 f9fd7e685c73e51511bb3cd5419f64b58ad8a0eb assets/gempire/models/item/electrum_ingot.json
 b360d9ffaaa5058875385abcc95e11f6a1984385 assets/gempire/models/item/electrum_nugget.json
+328376157f717b26ceae6ddfc63fde2e58976361 assets/gempire/models/item/empress_boots.json
+2f912a7f4d020bf602e19222605a1b4e9c634b05 assets/gempire/models/item/empress_chestplate.json
+8d919980f244d962d72e0d296f6841dedc73ee1a assets/gempire/models/item/empress_helmet.json
+c6b216ceb9f7cc4bb5d06c6b450c7f9e9b86e62c assets/gempire/models/item/empress_leggings.json
 db10bee6fbe48ec12d1032020cf0fc2a62976b21 assets/gempire/models/item/empress_star.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/gempire/models/item/fleurie_spawn_egg.json
 225e949b95a05caec22765e8d6cfa0b122521b23 assets/gempire/models/item/fragments_music_disc.json
@@ -72,7 +76,11 @@ a377c4c95fbdb0c7a5d902d83dab9daf91790bf9 assets/gempire/models/item/guardian_hel
 4f652fd1b59448e7506b959db435b1fdb0626f95 assets/gempire/models/item/guardian_orb.json
 a87aa14c0d7854636365379df4b568b42b13b201 assets/gempire/models/item/guardian_tear.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/gempire/models/item/hunter_spawn_egg.json
+a865acf81bd178263323a92faca83c8a4a811614 assets/gempire/models/item/huntress_boots.json
+600ccbe0b736a310616ba0230ddd81e35a0a9693 assets/gempire/models/item/huntress_chestplate.json
 fffc2dd45a30b8b0acff88f92c02b4fb01c08df9 assets/gempire/models/item/huntress_dagger.json
+cbb0380274f4398676d15f42bc5bbc396c15139b assets/gempire/models/item/huntress_helmet.json
+1162cef70421ccb394d5c45dba81be349b641cbe assets/gempire/models/item/huntress_leggings.json
 bbd832a10e396ce2213342fa77e2adabbe41f78e assets/gempire/models/item/hydrangea_bush_blue.json
 b3564b990da09a4ef833af72ff81ee11c0f35f7e assets/gempire/models/item/hydrangea_bush_green.json
 2e97f015e00d629d422c1b11807d14e5c5d261ae assets/gempire/models/item/hydrangea_bush_pink.json
@@ -105,7 +113,11 @@ b0803fba8fe34d4af5fa4df3808f8b3827d4110e assets/gempire/models/item/orange_latti
 5d7ea5609c7fdbb5caaa20c7a7947e4f8c33e076 assets/gempire/models/item/orange_shards.json
 7140ec169ab91de9c0a7ddd0547c3d1ee15fe4f5 assets/gempire/models/item/orchid.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/gempire/models/item/overseer_spawn_egg.json
+6a336eca616255efe7a932324e14e0e7bdf80285 assets/gempire/models/item/paladin_boots.json
+2bd40fb968c0b3c7c073aa8ba9c55e6cf5e68889 assets/gempire/models/item/paladin_chestplate.json
 7cacfa67acf74b728c29bfef0abbc054cc17f7da assets/gempire/models/item/paladin_flower.json
+0ada6b0090d112866c5f6d926e122902a92d182e assets/gempire/models/item/paladin_helmet.json
+727380de592bf8e06d46cdf9d68239ea9a40efee assets/gempire/models/item/paladin_leggings.json
 64a10d16f2c9856392e923110d21abdcf178ef2f assets/gempire/models/item/pansie.json
 2005120845f73383a139a9bff5d90c302f795a1d assets/gempire/models/item/pegmatite_wall.json
 9553d4c7f30d58655ed5ef1f5ebbdb8675b74100 assets/gempire/models/item/pink_chroma.json

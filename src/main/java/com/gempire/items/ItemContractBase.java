@@ -30,10 +30,10 @@ public class ItemContractBase extends Item {
         if ((entity instanceof EntityGem)) {
             if (((EntityGem) entity).getOwned()) {
                 if (!entity.level().isClientSide && entity.isAlive()) {
-                    if (player.getUUID().equals(((EntityGem) entity).MASTER_OWNER)) {
+                    if (((EntityGem) entity).OWNERS.contains(player.getUUID())) {
                         this.contractExecute(itemStack, player, entity);
                     } else {
-                        player.sendSystemMessage(Component.translatable("Not Master Owner"));
+                        player.sendSystemMessage(Component.translatable("Not Owner"));
                     }
                 }
             }

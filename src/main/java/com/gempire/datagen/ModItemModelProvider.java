@@ -50,13 +50,25 @@ public class ModItemModelProvider extends ItemModelProvider {
         handheldItem(ModItems.PRISMATIC_HOE);
         handheldItem(ModItems.PRISMATIC_SHOVEL);
 
-        //handheldItem(ModItems.HUNTRESS_SWORD);
-        //handheldItem(ModItems.PALADIN_AXE);
-
         simpleItem(ModItems.GUARDIAN_HELMET);
         simpleItem(ModItems.GUARDIAN_CHESTPLATE);
         simpleItem(ModItems.GUARDIAN_LEGGINGS);
         simpleItem(ModItems.GUARDIAN_BOOTS);
+
+        simpleItem(ModItems.EMPRESS_HELMET);
+        simpleItem(ModItems.EMPRESS_CHESTPLATE);
+        simpleItem(ModItems.EMPRESS_LEGGINGS);
+        simpleItem(ModItems.EMPRESS_BOOTS);
+
+        simpleItem(ModItems.HUNTRESS_HELMET);
+        simpleItem(ModItems.HUNTRESS_CHESTPLATE);
+        simpleItem(ModItems.HUNTRESS_LEGGINGS);
+        simpleItem(ModItems.HUNTRESS_BOOTS);
+
+        simpleItem(ModItems.PALADIN_HELMET);
+        simpleItem(ModItems.PALADIN_CHESTPLATE);
+        simpleItem(ModItems.PALADIN_LEGGINGS);
+        simpleItem(ModItems.PALADIN_BOOTS);
 
         simpleItem(ModItems.PALADIN_FLOWER);
         simpleItem(ModItems.GUARDIAN_TEAR);
@@ -195,7 +207,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.CRYSTAL_SIGN);
         simpleItem(ModItems.CRYSTAL_HANGING_SIGN);
 
-        wallItem(ModBlocks.PINK_SANDSTONE, ModBlocks.PINK_SANDSTONE);
+        wallItem(ModBlocks.PINK_SANDSTONE_WALL, ModBlocks.PINK_SANDSTONE);
         wallItem(ModBlocks.PEGMATITE_WALL, ModBlocks.PEGMATITE);
         wallItem(ModBlocks.RYOLITE_WALL, ModBlocks.RYOLITE_BLOCK);
         wallItem(ModBlocks.POLISHED_RYOLITE_WALL, ModBlocks.POLISHED_RYOLITE_BLOCK);

@@ -29,7 +29,7 @@ public class StrawberryRegion extends Region {
         new ParameterPointListBuilder()
                 .temperature(Temperature.span(Temperature.NEUTRAL, Temperature.WARM))
                 .humidity(Humidity.span(Humidity.NEUTRAL, Humidity.HUMID))
-                .continentalness(Continentalness.INLAND)
+                .continentalness(Continentalness.FAR_INLAND)
                 .erosion(Erosion.EROSION_0, Erosion.EROSION_1)
                 .depth(Depth.FULL_RANGE)
                 .weirdness(Weirdness.MID_SLICE_NORMAL_ASCENDING, Weirdness.MID_SLICE_NORMAL_DESCENDING)

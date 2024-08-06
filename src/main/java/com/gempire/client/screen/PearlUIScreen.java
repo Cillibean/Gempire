@@ -151,7 +151,7 @@ public class PearlUIScreen extends AbstractContainerScreen<PearlUIContainer> {
         int ddOffsetInsignia = this.menu.gem.getInsigniaVariant() > 9 ? -3 : 0;
 
         matrixStack.drawString(font, Component.translatable("Page: " + (this.menu.gem.getPage() + 1)),
-                i + 190, j + 11, 4210752);
+                i + 190, j + 11, 0xFFFFFF);
         matrixStack.drawString(font, Component.translatable("Hair:"),
                 i + 77, j + 36, 0xFFFFFF);
         matrixStack.drawString(font, Component.translatable("Uniform:"),

@@ -51,7 +51,7 @@ public class EntityFuchsiaPaladin extends EntityBoss {
 
     public static AttributeSupplier.Builder registerAttributes() {
         return Monster.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 6500.0D)
+                .add(Attributes.MAX_HEALTH, 650.0D)
                 .add(Attributes.MOVEMENT_SPEED, 1.0D)
                 .add(Attributes.ATTACK_DAMAGE, 10.0D)
                 .add(Attributes.ATTACK_SPEED, 1.0D);

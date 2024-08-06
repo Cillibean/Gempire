@@ -376,7 +376,7 @@ public class ModCreativeModeTabs {
                 populator.accept(ModItems.SHOCK_BERRY.get());
                 populator.accept(ModItems.SHADED_APPLE.get());
 
-                populator.accept(ModItems.WARP_CORE.get());
+                //populator.accept(ModItems.WARP_CORE.get());
             }).build()
     );
     public static final RegistryObject<CreativeModeTab> GEMPIRE_BLOCKS = CREATIVE_MODE_TABS.register("gempire_blocks",

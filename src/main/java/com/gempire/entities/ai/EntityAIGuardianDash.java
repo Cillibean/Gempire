@@ -41,7 +41,7 @@ public class EntityAIGuardianDash extends Goal {
         if (tick <= 0) {
             this.follower.setPos(this.target.getX(), this.target.getY(), this.target.getZ());
             follower.isDashing = false;
-            follower.dashCooldown = 100;
+            follower.dashCooldown = 200;
             stop();
         } else tick--;
     }

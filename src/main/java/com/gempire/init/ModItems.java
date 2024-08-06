@@ -896,15 +896,15 @@ public class ModItems {
                     new Item.Properties().fireResistant().stacksTo(1)));
 
     public static final RegistryObject<Item> HUNTRESS_CHESTPLATE = ITEMS.register("huntress_chestplate",
-            () -> new ArmorItem(ModArmorMaterials.HUNTRESS, ArmorItem.Type.CHESTPLATE,
+            () -> new HuntressArmorItem(ModArmorMaterials.HUNTRESS, ArmorItem.Type.CHESTPLATE,
                     new Item.Properties().fireResistant().stacksTo(1)));
 
     public static final RegistryObject<Item> HUNTRESS_LEGGINGS = ITEMS.register("huntress_leggings",
-            () -> new ArmorItem(ModArmorMaterials.HUNTRESS, ArmorItem.Type.LEGGINGS,
+            () -> new HuntressArmorItem(ModArmorMaterials.HUNTRESS, ArmorItem.Type.LEGGINGS,
                     new Item.Properties().fireResistant().stacksTo(1)));
 
     public static final RegistryObject<Item> HUNTRESS_BOOTS = ITEMS.register("huntress_boots",
-            () -> new ArmorItem(ModArmorMaterials.HUNTRESS, ArmorItem.Type.BOOTS,
+            () -> new HuntressArmorItem(ModArmorMaterials.HUNTRESS, ArmorItem.Type.BOOTS,
                     new Item.Properties().fireResistant().stacksTo(1)));
 
     public static final RegistryObject<Item> EMPRESS_HELMET = ITEMS.register("empress_helmet",
@@ -912,15 +912,15 @@ public class ModItems {
                     new Item.Properties().fireResistant().stacksTo(1)));
 
     public static final RegistryObject<Item> EMPRESS_CHESTPLATE = ITEMS.register("empress_chestplate",
-            () -> new ArmorItem(ModArmorMaterials.EMPRESS, ArmorItem.Type.CHESTPLATE,
+            () -> new EmpressArmorItem(ModArmorMaterials.EMPRESS, ArmorItem.Type.CHESTPLATE,
                     new Item.Properties().fireResistant().stacksTo(1)));
 
     public static final RegistryObject<Item> EMPRESS_LEGGINGS = ITEMS.register("empress_leggings",
-            () -> new ArmorItem(ModArmorMaterials.EMPRESS, ArmorItem.Type.LEGGINGS,
+            () -> new EmpressArmorItem(ModArmorMaterials.EMPRESS, ArmorItem.Type.LEGGINGS,
                     new Item.Properties().fireResistant().stacksTo(1)));
 
     public static final RegistryObject<Item> EMPRESS_BOOTS = ITEMS.register("empress_boots",
-            () -> new ArmorItem(ModArmorMaterials.EMPRESS, ArmorItem.Type.BOOTS,
+            () -> new EmpressArmorItem(ModArmorMaterials.EMPRESS, ArmorItem.Type.BOOTS,
                     new Item.Properties().fireResistant().stacksTo(1)));
 
     public static final RegistryObject<Item> THULITE_HELMET = ITEMS.register("thulite_helmet",
