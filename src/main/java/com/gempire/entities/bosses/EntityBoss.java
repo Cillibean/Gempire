@@ -58,7 +58,7 @@ public abstract class EntityBoss extends Monster implements GeoEntity {
     }
 
     public void auraCry() {
-        triggerAnim("cry_controller", "cry");
+        triggerAnim("attack_controller", "cry");
         crying = true;
         navigation.stop();
         auraCryCooldown = 600;

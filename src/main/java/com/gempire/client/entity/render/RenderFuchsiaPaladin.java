@@ -11,7 +11,7 @@ public class RenderFuchsiaPaladin extends GeoEntityRenderer<EntityFuchsiaPaladin
 
     public RenderFuchsiaPaladin(EntityRendererProvider.Context renderManager) {
         super(renderManager, new ModelFuchsiaPaladin());
-        this.shadowRadius = 2.1F;
+        this.shadowRadius = 2F;
     }
 
 

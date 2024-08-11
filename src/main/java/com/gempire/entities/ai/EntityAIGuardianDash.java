@@ -29,7 +29,7 @@ public class EntityAIGuardianDash extends Goal {
     @Override
     public void start(){
         super.start();
-        if (!follower.level().isClientSide) follower.triggerAnim("dash_controller", "dash");
+        if (!follower.level().isClientSide) follower.triggerAnim("attack_controller", "dash");
         tick = 12;
     }
 
