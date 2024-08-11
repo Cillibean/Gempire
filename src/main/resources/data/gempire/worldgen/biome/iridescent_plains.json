@@ -7,8 +7,14 @@
     "fog_color": 14863064,
     "water_color": 15381467,
     "water_fog_color": 12879790,
-    "grass_color": 16562866,
-    "foliage_color": 16696261
+    "grass_color": 16758234,
+    "foliage_color": 16758234,
+    "particle": {
+      "probability": 0.01428,
+      "options": {
+        "type": "minecraft:cherry_leaves"
+      }
+    }
   },
   "spawners": {
     "creature": [

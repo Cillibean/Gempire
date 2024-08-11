@@ -23,7 +23,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import javax.annotation.Nullable;
 
-public class BlueAltarBlock extends DirectionalBlock implements EntityBlock {
+public class BlueAltarBlock extends HorizontalDirectionalBlock implements EntityBlock {
 
     protected static final VoxelShape FACING_NS_FLOOR = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 14.0D, 14.0D);
     protected static final VoxelShape FACING_EW_FLOOR = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 14.0D, 14.0D);

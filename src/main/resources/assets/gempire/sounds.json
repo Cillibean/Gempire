@@ -1,88 +1,88 @@
 {
   "inject": {
     "subtitle": "gempire.subtitle.inject",
-    "sounds": [ "gempire:inject" ]
+    "sounds": [ "gempire:misc/inject" ]
   },
   "poof": {
     "subtitle": "gempire.subtitle.poof",
-    "sounds": [ "gempire:poof" ]
+    "sounds": [ "gempire:misc/poof" ]
   },
   "whistle": {
     "subtitle": "gempire.subtitle.whistle",
-    "sounds": [ "gempire:whistle" ]
+    "sounds": [ "gempire:misc/whistle" ]
   },
   "crawler_attack": {
     "subtitle": "gempire.subtitle.crawler_attack",
-    "sounds": [ "gempire:crawler_attack" ]
+    "sounds": [ "gempire:entity/crawler_attack" ]
   },
   "crawler_death": {
     "subtitle": "gempire.subtitle.crawler_death",
-    "sounds": [ "gempire:crawler_death" ]
+    "sounds": [ "gempire:entity/crawler_death" ]
   },
   "crawler_hurt": {
     "subtitle": "gempire.subtitle.crawler_hurt",
-    "sounds": [ "gempire:crawler_hurt" ]
+    "sounds": [ "gempire:entity/crawler_hurt" ]
   },
   "crawler_living": {
     "subtitle": "gempire.subtitle.crawler_living",
-    "sounds": [ "gempire:crawler_living" ]
+    "sounds": [ "gempire:entity/crawler_living" ]
   },
   "shambler_attack": {
     "subtitle": "gempire.subtitle.shambler_attack",
-    "sounds": [ "gempire:shambler_attack" ]
+    "sounds": [ "gempire:entity/shambler_attack" ]
   },
   "shambler_death": {
     "subtitle": "gempire.subtitle.shambler_death",
-    "sounds": [ "gempire:shambler_death" ]
+    "sounds": [ "gempire:entity/shambler_death" ]
   },
   "shambler_hurt": {
     "subtitle": "gempire.subtitle.shambler_hurt",
-    "sounds": [ "gempire:shambler_hurt" ]
+    "sounds": [ "gempire:entity/shambler_hurt" ]
   },
   "shambler_living": {
     "subtitle": "gempire.subtitle.shambler_living",
-    "sounds": [ "gempire:shambler_living" ]
+    "sounds": [ "gempire:entity/shambler_living" ]
   },
   "abomination_attack": {
     "subtitle": "gempire.subtitle.abomination_attack",
-    "sounds": [ "gempire:abomination_attack" ]
+    "sounds": [ "gempire:entity/abomination_attack" ]
   },
   "abomination_death": {
     "subtitle": "gempire.subtitle.abomination_death",
-    "sounds": [ "gempire:abomination_death" ]
+    "sounds": [ "gempire:entity/abomination_death" ]
   },
   "abomination_hurt": {
     "subtitle": "gempire.subtitle.abomination_hurt",
-    "sounds": [ "gempire:abomination_hurt" ]
+    "sounds": [ "gempire:entity/abomination_hurt" ]
   },
   "specter_ambient": {
     "subtitle": "gempire.subtitle.specter_living",
-    "sounds": [ "gempire:specter_living" ]
+    "sounds": [ "gempire:entity/specter_living" ]
   },
   "specter_close": {
     "subtitle": "gempire.subtitle.specter_close",
-    "sounds": [ "gempire:specter_close" ]
+    "sounds": [ "gempire:entity/specter_close" ]
   },
   "specter_death1": {
     "subtitle": "gempire.subtitle.specter_death",
-    "sounds": [ "gempire:specter_death1" ]
+    "sounds": [ "gempire:entity/specter_death1" ]
   },
   "specter_death2": {
     "subtitle": "gempire.subtitle.specter_death",
-    "sounds": [ "gempire:specter_death2" ]
+    "sounds": [ "gempire:entity/specter_death2" ]
   },
   "specter_hurt": {
     "subtitle": "gempire.subtitle.specter_hurt",
-    "sounds": [ "gempire:specter_hurt" ]
+    "sounds": [ "gempire:entity/specter_hurt" ]
   },
   "specter_running": {
     "subtitle": "gempire.subtitle.specter_running",
-    "sounds": [ "gempire:specter_running" ]
+    "sounds": [ "gempire:entity/specter_running" ]
   },
   "remnants": {
     "sounds": [
       {
-        "name": "gempire:remnants",
+        "name": "gempire:music/remnants",
         "stream": true
       }
     ]
@@ -90,7 +90,7 @@
   "fragments": {
     "sounds": [
       {
-        "name": "gempire:fragments",
+        "name": "gempire:music/fragments",
         "stream": true
       }
     ]

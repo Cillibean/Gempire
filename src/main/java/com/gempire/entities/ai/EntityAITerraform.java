@@ -99,7 +99,7 @@ public class EntityAITerraform extends Goal {
 
         for (BlockPos pos : list) {
             if (level.getBlockState(pos) != Blocks.AIR.defaultBlockState()) {
-                if (pos.getY() > yTop) {
+                if (pos.getY() > yTop && !level.getBlockState(pos).is(Blocks.BEDROCK)) {
                     level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
                 } else {
                     list3.add(pos);
@@ -126,7 +126,7 @@ public class EntityAITerraform extends Goal {
                     if (isMineable(pos, tier)) {
                         level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
                         follower.addToInventoryList(getDrops(level.getBlockState(pos), (ServerLevel) level, pos));
-                    } else {
+                    } else if (!level.getBlockState(pos).is(Blocks.BEDROCK)){
                         level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
                     }
                 }
@@ -154,7 +154,7 @@ public class EntityAITerraform extends Goal {
                     if (isMineable(pos, tier)) {
                         level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
                         follower.addToInventoryList(getDrops(level.getBlockState(pos), (ServerLevel) level, pos));;
-                    } else {
+                    } else if (!level.getBlockState(pos).is(Blocks.BEDROCK)){
                         level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
                     }
                 }
@@ -182,7 +182,7 @@ public class EntityAITerraform extends Goal {
                     if (isMineable(pos, tier)) {
                         level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
                         follower.addToInventoryList(getDrops(level.getBlockState(pos), (ServerLevel) level, pos));;
-                    } else {
+                    } else if (!level.getBlockState(pos).is(Blocks.BEDROCK)){
                         level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
                     }
                 }
@@ -208,7 +208,7 @@ public class EntityAITerraform extends Goal {
                     if (isMineable(pos, tier)) {
                         level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
                         follower.addToInventoryList(getDrops(level.getBlockState(pos), (ServerLevel) level, pos));;
-                    } else {
+                    } else if (!level.getBlockState(pos).is(Blocks.BEDROCK)){
                         level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
                     }
                 }

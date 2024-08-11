@@ -10,9 +10,11 @@
     "grass_color": 12111496,
     "foliage_color": 11124871,
     "music": {
-      "sound": "gempire:remnants",
-      "min_delay": 0,
-      "max_delay": 0,
+      "sound": {
+        "sound_id": "gempire:remnants"
+      },
+      "min_delay": 40,
+      "max_delay": 60,
       "replace_current_music": true
     }
   },
