@@ -21,6 +21,7 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
+import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Monster;
@@ -64,18 +65,19 @@ public class EntityAmberHuntress extends EntityBoss {
                 .add(Attributes.MAX_HEALTH, 1000.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.7D)
                 .add(Attributes.ATTACK_DAMAGE, 10.0D)
-                .add(Attributes.ATTACK_SPEED, 1.0D);
+                .add(Attributes.ATTACK_SPEED, 0.2D);
     }
 
     @Override
     protected void registerGoals() {
-        this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 0.6D));
+        this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 0.2D));
         this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 8.0F));
         //this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));
         //this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
         //this.goalSelector.addGoal(2, new EntityAIGuardianDash(this, 1.1D));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, 0, false, false, (entity) -> canAttack((LivingEntity) entity)));
         //this.goalSelector.addGoal(3, new RangedAttackGoal(this, 1.25D, 20, 10.0F));
+        this.goalSelector.addGoal(3, new MeleeAttackGoal(this, 0.5D, true));
     }
 
 

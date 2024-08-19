@@ -103,6 +103,7 @@ public class ItemBossGem extends Item {
                     EntityFuchsiaPaladin paladin = new EntityFuchsiaPaladin(ModEntities.FUCHSIA_PALADIN.get(), level);
                     paladin.setPos(context.getClickedPos().getX(), context.getClickedPos().getY()+2, context.getClickedPos().getZ());
                     paladin.moveTo(Vec3.atBottomCenterOf(context.getClickedPos().above(1)));
+                    paladin.altarPos = context.getClickedPos();
                     level.addFreshEntity(paladin);
                     return InteractionResult.CONSUME;
                 }
@@ -112,6 +113,7 @@ public class ItemBossGem extends Item {
                     EntityCobaltGuardian guardian = new EntityCobaltGuardian(ModEntities.COBALT_GUARDIAN.get(), level);
                     guardian.setPos(context.getClickedPos().getX(), context.getClickedPos().getY()+2, context.getClickedPos().getZ());
                     guardian.moveTo(Vec3.atBottomCenterOf(context.getClickedPos().above(1)));
+                    guardian.altarPos = context.getClickedPos();
                     level.addFreshEntity(guardian);
                     return InteractionResult.CONSUME;
                 }
@@ -121,6 +123,7 @@ public class ItemBossGem extends Item {
                     EntityAmberHuntress huntress = new EntityAmberHuntress(ModEntities.AMBER_HUNTRESS.get(), level);
                     huntress.setPos(context.getClickedPos().getX(), context.getClickedPos().getY()+2, context.getClickedPos().getZ());
                     huntress.moveTo(Vec3.atBottomCenterOf(context.getClickedPos().above(1)));
+                    huntress.altarPos = context.getClickedPos();
                     level.addFreshEntity(huntress);
                     return InteractionResult.CONSUME;
                 }
@@ -130,8 +133,8 @@ public class ItemBossGem extends Item {
                     EntityAlabasterEmpress empress = new EntityAlabasterEmpress(ModEntities.ALABASTER_EMPRESS.get(), level);
                     empress.setPos(context.getClickedPos().getX(), context.getClickedPos().getY()+2, context.getClickedPos().getZ());
                     empress.moveTo(Vec3.atBottomCenterOf(context.getClickedPos().above(1)));
+                    empress.altarPos = context.getClickedPos();
                     level.addFreshEntity(empress);
-                    System.out.println("empress attempt");
                     return InteractionResult.CONSUME;
                 }
             }

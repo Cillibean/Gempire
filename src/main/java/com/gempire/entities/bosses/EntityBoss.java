@@ -1,6 +1,7 @@
 package com.gempire.entities.bosses;
 
 import com.gempire.init.ModSounds;
+import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerBossEvent;
@@ -10,6 +11,7 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.ai.goal.GoalSelector;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -24,6 +26,8 @@ public abstract class EntityBoss extends Monster implements GeoEntity {
     public boolean crying = false;
     public int auraCryCooldown;
     public MobEffectInstance aura;
+
+    public BlockPos altarPos;
     protected EntityBoss(EntityType<? extends Monster> p_33002_, Level p_33003_) {
         super(p_33002_, p_33003_);
         auraCryCooldown = 0;
@@ -69,6 +73,24 @@ public abstract class EntityBoss extends Monster implements GeoEntity {
     }
 
     @Override
+    public void aiStep() {
+        if (altarPos != null) {
+            if (getX() > altarPos.getX()+25 || getX() < altarPos.getX()-25) {
+                if (getZ() > altarPos.getZ()+25 || getZ() < altarPos.getZ()-25) {
+                    navigation.stop();
+                    goalSelector.tickRunningGoals(false);
+                    targetSelector.tickRunningGoals(false);
+                    navigation.moveTo(altarPos.getX(), altarPos.getY()+1, altarPos.getZ(), 1D);
+                }
+            }
+            if (this.getOnPos().getX() == altarPos.getX() && this.getOnPos().getZ() == altarPos.getZ()) {
+                goalSelector.tickRunningGoals(true);
+            }
+        }
+        super.aiStep();
+    }
+
+    @Override
     public void tick() {
         this.bossEvent.setProgress(this.getHealth() / this.getMaxHealth());
         super.tick();
@@ -77,12 +99,16 @@ public abstract class EntityBoss extends Monster implements GeoEntity {
     @Override
     public void addAdditionalSaveData(CompoundTag tag) {
         tag.putInt("auraCry", auraCryCooldown);
+        tag.putLong("altarPos", altarPos.asLong());
         super.addAdditionalSaveData(tag);
     }
 
     @Override
     public void readAdditionalSaveData(CompoundTag tag) {
-        auraCryCooldown = tag.getInt("auraCry");
+        if (!tag.isEmpty()) {
+            auraCryCooldown = tag.getInt("auraCry");
+            altarPos = BlockPos.of(tag.getLong("altarPos"));
+        }
         super.readAdditionalSaveData(tag);
     }
 }
