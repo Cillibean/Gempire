@@ -1,5 +1,6 @@
 package com.gempire.blocks;
 
+import com.gempire.init.ModBlocks;
 import com.gempire.init.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -125,7 +126,7 @@ public class VaseBlock extends DirectionalBlock {
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
         if (!level.isClientSide && player.getMainHandItem().is(ModItems.PRISMATIC_FLASK.get())) {
             popResource(level, pos, new ItemStack(ModItems.GUARDIAN_TEAR.get()));
-            level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
+            level.setBlockAndUpdate(pos, ModBlocks.EMPTY_GUARDIAN_VASE.get().defaultBlockState());
             player.setItemSlot(EquipmentSlot.MAINHAND, player.getItemBySlot(EquipmentSlot.MAINHAND).copyWithCount(player.getItemBySlot(EquipmentSlot.MAINHAND).getCount()-1));
         }
 

@@ -1,5 +1,6 @@
 package com.gempire.blocks;
 
+import com.gempire.init.ModBlocks;
 import com.gempire.init.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -125,7 +126,7 @@ public class CrownBlock extends DirectionalBlock {
         if (!level.isClientSide && player.getMainHandItem().is(ModItems.PRISMATIC_SHEARS.get())) {
             System.out.println("pickaxe");
             popResource(level, pos, new ItemStack(ModItems.EMPRESS_STAR.get()));
-            level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
+            level.setBlockAndUpdate(pos, ModBlocks.EMPTY_EMPRESS_CROWN.get().defaultBlockState());
         }
 
         return super.use(state, level, pos, player, hand, result);

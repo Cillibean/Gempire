@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "gempire:block/paladin_case",
+      "y": 180
+    },
+    "facing=north": {
+      "model": "gempire:block/paladin_case",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "gempire:block/paladin_case",
+      "y": 270
+    },
+    "facing=west": {
+      "model": "gempire:block/paladin_case"
+    }
+  }
+}

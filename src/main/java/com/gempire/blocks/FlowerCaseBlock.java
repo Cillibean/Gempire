@@ -1,5 +1,6 @@
 package com.gempire.blocks;
 
+import com.gempire.init.ModBlocks;
 import com.gempire.init.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -128,7 +129,7 @@ public class FlowerCaseBlock extends DirectionalBlock {
             popResource(level, pos, new ItemStack(ModItems.PALADIN_FLOWER.get()));
             ItemStack stack = new ItemStack(ModItems.PRISMATIC_GLASS_SHARDS.get(), player.getRandom().nextInt(3)+2);
             popResource(level, pos, stack);
-            level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
+            level.setBlockAndUpdate(pos, ModBlocks.EMPTY_PALADIN_CASE.get().defaultBlockState());
         }
 
         return super.use(state, level, pos, player, hand, result);

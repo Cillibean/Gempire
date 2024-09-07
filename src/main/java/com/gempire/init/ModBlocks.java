@@ -3079,8 +3079,15 @@ public class ModBlocks {
             )
     );*/
 
-    public static final RegistryObject<Block> FLOWER_CASE = BLOCKS.register("flower_case", () ->
+    public static final RegistryObject<Block> PALADIN_CASE = BLOCKS.register("paladin_case", () ->
             new FlowerCaseBlock(Block.Properties.of()
+                    .strength(-1.0F, 3600000.0F).noLootTable()
+                    .sound(SoundType.GLASS)
+            )
+    );
+
+    public static final RegistryObject<Block> EMPTY_PALADIN_CASE = BLOCKS.register("empty_paladin_case", () ->
+            new Block(Block.Properties.of()
                     .strength(-1.0F, 3600000.0F).noLootTable()
                     .sound(SoundType.GLASS)
             )
@@ -3100,8 +3107,22 @@ public class ModBlocks {
             )
     );
 
+    public static final RegistryObject<Block> EMPTY_GUARDIAN_VASE = BLOCKS.register("empty_guardian_vase", () ->
+            new Block(Block.Properties.of()
+                    .strength(-1.0F, 3600000.0F).noLootTable()
+                    .sound(SoundType.GLASS)
+            )
+    );
+
     public static final RegistryObject<Block> EMPRESS_CROWN = BLOCKS.register("empress_crown", () ->
             new CrownBlock(Block.Properties.of()
+                    .strength(-1.0F, 3600000.0F).noLootTable()
+                    .sound(SoundType.STONE)
+            )
+    );
+
+    public static final RegistryObject<Block> EMPTY_EMPRESS_CROWN = BLOCKS.register("empty_empress_crown", () ->
+            new Block(Block.Properties.of()
                     .strength(-1.0F, 3600000.0F).noLootTable()
                     .sound(SoundType.STONE)
             )

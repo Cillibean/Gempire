@@ -17,6 +17,6 @@ public class RenderAlabasterEmpress extends GeoEntityRenderer<EntityAlabasterEmp
 
     @Override
     public ResourceLocation getTextureLocation(EntityAlabasterEmpress animatable) {
-        return new ResourceLocation(Gempire.MODID, "textures/entity/clods/shambler/shambler.png");
+        return new ResourceLocation(Gempire.MODID, "textures/entity/boss/empress/alabaster/base.png");
     }
 }
