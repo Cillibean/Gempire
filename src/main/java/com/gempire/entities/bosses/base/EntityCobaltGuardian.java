@@ -25,6 +25,7 @@ import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
+import net.minecraft.world.entity.animal.FlyingAnimal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.entity.player.Player;
@@ -41,7 +42,7 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class EntityCobaltGuardian extends EntityBoss implements GeoEntity, RangedAttackMob {
+public class EntityCobaltGuardian extends EntityBoss implements FlyingAnimal {
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
     private static final RawAnimation CRY_ANIMATION = RawAnimation.begin().thenPlay("cry");
@@ -144,7 +145,7 @@ public class EntityCobaltGuardian extends EntityBoss implements GeoEntity, Range
     }
 
     @Override
-    public void performRangedAttack(LivingEntity p_33317_, float p_33318_) {
-
+    public boolean isFlying() {
+        return true;
     }
 }

@@ -76,7 +76,6 @@ public class EntityAmberHuntress extends EntityBoss {
         //this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
         //this.goalSelector.addGoal(2, new EntityAIGuardianDash(this, 1.1D));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, 0, false, false, (entity) -> canAttack((LivingEntity) entity)));
-        //this.goalSelector.addGoal(3, new RangedAttackGoal(this, 1.25D, 20, 10.0F));
         this.goalSelector.addGoal(3, new MeleeAttackGoal(this, 0.5D, true));
     }
 
@@ -158,7 +157,7 @@ public class EntityAmberHuntress extends EntityBoss {
             this.level().explode(this, null, null, this.getX(), this.getY(), this.getZ(), 3, false, Level.ExplosionInteraction.NONE);
             AreaEffectCloud areaeffectcloud = new AreaEffectCloud(this.level(), this.getX(), this.getY()+1, this.getZ());
             areaeffectcloud.setOwner(this);
-            areaeffectcloud.setParticle(ParticleTypes.ELECTRIC_SPARK);
+            areaeffectcloud.setParticle(ParticleTypes.FALLING_HONEY);
             areaeffectcloud.setRadius(3.0F);
             areaeffectcloud.setDuration(50);
             areaeffectcloud.setRadiusPerTick((7.0F - areaeffectcloud.getRadius()) / (float)areaeffectcloud.getDuration());

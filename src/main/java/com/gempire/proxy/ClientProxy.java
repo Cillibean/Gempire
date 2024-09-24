@@ -129,6 +129,7 @@ public class ClientProxy {
         event.registerEntityRenderer(ModEntities.ACID_SPIT.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer(ModEntities.GUARDIAN_ORB.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer(ModEntities.LIFE_LEECH.get(), LifeLeechRenderer::new);
+        event.registerEntityRenderer(ModEntities.WHITE_ATTACK.get(), WhiteAttackRenderer::new);
         event.registerEntityRenderer(ModEntities.LIFE_RETURN.get(), LifeReturnRenderer::new);
         event.registerEntityRenderer(ModEntities.WATER_ORB.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer(ModEntities.ELECTROKINESIS_LIGHTNING.get(), ElectrokinesisLightningRenderer::new);

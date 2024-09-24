@@ -11,12 +11,12 @@ public class RenderAmberHuntress extends GeoEntityRenderer<EntityAmberHuntress> 
 
     public RenderAmberHuntress(EntityRendererProvider.Context renderManager) {
         super(renderManager, new ModelAmberHuntress());
-        this.shadowRadius = 0.3F;
+        this.shadowRadius = 1.3F;
     }
 
 
     @Override
     public ResourceLocation getTextureLocation(EntityAmberHuntress animatable) {
-        return new ResourceLocation(Gempire.MODID, "textures/entity/clods/shambler/shambler.png");
+        return new ResourceLocation(Gempire.MODID, "textures/entity/boss/huntress/amber/base.png");
     }
 }

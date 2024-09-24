@@ -74,12 +74,12 @@ public class ModEntities {
 
     public static final RegistryObject<EntityType<EntityAlabasterEmpress>> ALABASTER_EMPRESS = ENTITIES.register("alabaster_empress",
             () -> EntityType.Builder.of(EntityAlabasterEmpress::new, MobCategory.MONSTER)
-                    .sized(1f, 3.5f) // Hitbox Size
+                    .sized(3f, 6f) // Hitbox Size
                     .build(new ResourceLocation(Gempire.MODID, "alabaster_empress").toString()));
 
     public static final RegistryObject<EntityType<EntityAmberHuntress>> AMBER_HUNTRESS = ENTITIES.register("amber_huntress",
             () -> EntityType.Builder.of(EntityAmberHuntress::new, MobCategory.MONSTER)
-                    .sized(1f, 3.5f) // Hitbox Size
+                    .sized(2.5f, 4f) // Hitbox Size
                     .build(new ResourceLocation(Gempire.MODID, "amber_huntress").toString()));
 
     public static final RegistryObject<EntityType<EntityCobaltGuardian>> COBALT_GUARDIAN = ENTITIES.register("cobalt_guardian",
@@ -298,6 +298,15 @@ public class ModEntities {
                 .setUpdateInterval(10)
                 .setShouldReceiveVelocityUpdates(true)
                 .build(new ResourceLocation(Gempire.MODID, "life_leech").toString());
+    });
+
+    public static final RegistryObject<EntityType<WhiteAttackEntity>> WHITE_ATTACK = ENTITIES.register("white_attack", () -> {
+        return EntityType.Builder.<WhiteAttackEntity>of(WhiteAttackEntity::new, MobCategory.MISC)
+                .sized(0.125F, 0.125F)
+                .setTrackingRange(64)
+                .setUpdateInterval(10)
+                .setShouldReceiveVelocityUpdates(true)
+                .build(new ResourceLocation(Gempire.MODID, "white_attack").toString());
     });
 
     public static final RegistryObject<EntityType<LifeReturnOrb>> LIFE_RETURN = ENTITIES.register("life_return", () -> {

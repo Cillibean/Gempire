@@ -24,6 +24,9 @@ public class ModTags {
         public static final TagKey<Block> DESOLATE_ORE_REPLACEABLES
                 = tag("desolate_ore_replaceables");
 
+        public static final TagKey<Block> EMPRESS_LANDS_ON
+                = tag("empress_lands_on");
+
         private static TagKey<Block> tag(String name) {
             return BlockTags.create(new ResourceLocation(Gempire.MODID, name));
         }

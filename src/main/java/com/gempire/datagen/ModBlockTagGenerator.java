@@ -486,6 +486,9 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
         this.tag(Tags.Blocks.STONE).add(ModBlocks.PEGMATITE.get());
 
         this.tag(Tags.Blocks.GRAVEL).add(ModBlocks.MACADAM.get());
+
+        this.tag(ModTags.Blocks.EMPRESS_LANDS_ON).add(ModBlocks.RUINED_MARBLE_BLOCK.get(),
+                ModBlocks.RUINED_MARBLE_BRICK.get(), ModBlocks.RUINED_MARBLE_PILLAR.get());
     }
 
     @Override
