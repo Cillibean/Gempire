@@ -13,7 +13,11 @@ public class ModelAlabasterEmpress extends GeoModel<EntityAlabasterEmpress> {
 
     @Override
     public ResourceLocation getTextureResource(EntityAlabasterEmpress object) {
-        return new ResourceLocation(Gempire.MODID, "textures/entity/boss/empress/alabaster/base.png");
+        if (object.beaming) {
+            return new ResourceLocation(Gempire.MODID, "textures/entity/boss/empress/alabaster/beam.png");
+        } else {
+            return new ResourceLocation(Gempire.MODID, "textures/entity/boss/empress/alabaster/base.png");
+        }
     }
 
     @Override

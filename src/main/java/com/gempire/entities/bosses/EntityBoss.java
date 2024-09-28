@@ -23,7 +23,6 @@ import java.util.List;
 public abstract class EntityBoss extends Monster implements GeoEntity {
 
     public ServerBossEvent bossEvent;
-    public boolean crying = false;
     public int auraCryCooldown;
     public MobEffectInstance aura;
 
@@ -63,7 +62,6 @@ public abstract class EntityBoss extends Monster implements GeoEntity {
 
     public void auraCry() {
         triggerAnim("attack_controller", "cry");
-        crying = true;
         navigation.stop();
         auraCryCooldown = 600;
         List<Player> list = this.level().getEntitiesOfClass(Player.class, this.getBoundingBox().inflate(14.0D, 8.0D, 14.0D));

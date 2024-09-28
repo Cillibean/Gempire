@@ -99,7 +99,7 @@ public class EmpressStrafeGoal extends Goal {
 
             attackTime--;
 
-            if (!gem.crying && attackTime<=0) {
+            if (attackTime<=0) {
                 WhiteAttackEntity acidSpit = new WhiteAttackEntity(this.gem.level(), this.gem);
                 double d4 = livingentity.getEyeY() - (double) 1.1F;
                 double d1 = livingentity.getX() - this.gem.getX();

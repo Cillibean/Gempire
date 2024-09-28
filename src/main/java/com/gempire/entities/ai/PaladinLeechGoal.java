@@ -44,7 +44,7 @@ public class PaladinLeechGoal extends Goal {
         LivingEntity livingentity = this.gem.getTarget();
         if (livingentity != null) {
             this.gem.getLookControl().setLookAt(livingentity, 30.0F, 30.0F);
-            if (!gem.pound && !gem.crying) {
+            if (!gem.pound) {
                 LifeLeechOrb acidSpit = new LifeLeechOrb(this.gem.level(), this.gem);
                 acidSpit.setPos(gem.getX(), gem.getY()+3, gem.getZ());
                 double d4 = livingentity.getEyeY() - (double) 1.1F;

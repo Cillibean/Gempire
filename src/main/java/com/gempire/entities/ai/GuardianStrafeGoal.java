@@ -102,7 +102,7 @@ public class GuardianStrafeGoal extends Goal {
 
             attackTime--;
 
-            if (!gem.isDashing && !gem.crying && attackTime<=0) {
+            if (!gem.isDashing && attackTime<=0) {
                 GuardianProjectileEntity acidSpit = new GuardianProjectileEntity(this.gem.level(), this.gem);
                 double d4 = livingentity.getEyeY() - (double) 1.1F;
                 double d1 = livingentity.getX() - this.gem.getX();

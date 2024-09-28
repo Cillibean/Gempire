@@ -136,7 +136,7 @@ public class EntityFuchsiaPaladin extends EntityBoss {
     }
 
     public void leech() {
-        if (leeching && !pound && !crying && getTarget() != null) {
+        if (leeching && !pound && getTarget() != null) {
             leechCooldown = 800;
             LifeLeechOrb acidSpit = new LifeLeechOrb(this.level(), this);
             acidSpit.setPos(this.getX(), this.getY()+3, this.getZ());
