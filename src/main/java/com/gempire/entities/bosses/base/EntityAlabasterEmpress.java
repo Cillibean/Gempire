@@ -43,10 +43,12 @@ public class EntityAlabasterEmpress extends EntityBoss implements FlyingAnimal {
 
     public boolean beaming = false;
     public int beamcooldown;
+    public boolean beamDamageCheck;
 
     public EntityAlabasterEmpress(EntityType<? extends EntityAlabasterEmpress> p_33002_, Level p_33003_) {
         super(p_33002_, p_33003_);
         beamcooldown = 0;
+        beamDamageCheck = true;
         this.moveControl = new FlyingMoveControl(this, 20, true);
         this.bossEvent = (ServerBossEvent)(new ServerBossEvent(this.getDisplayName(), BossEvent.BossBarColor.WHITE, BossEvent.BossBarOverlay.PROGRESS)).setDarkenScreen(true);
         this.aura = new MobEffectInstance(ModEffects.WHITE_AURA.get(), 500, 1, false, false, true);
@@ -117,6 +119,7 @@ public class EntityAlabasterEmpress extends EntityBoss implements FlyingAnimal {
                 beamcooldown--;
             } else {
                 beamcooldown = 500;
+                beamDamageCheck=true;
             }
         }
         super.tick();
@@ -126,6 +129,10 @@ public class EntityAlabasterEmpress extends EntityBoss implements FlyingAnimal {
         if (beaming && this.getTarget() != null) {
             System.out.println("BEAM");
             beaming = false;
+            if (this.hasLineOfSight(this.getTarget()) && beamDamageCheck) {
+                this.getTarget().hurt(this.damageSources().mobAttack(this), 4f);
+                beamDamageCheck = false;
+            }
         }
     }
 
