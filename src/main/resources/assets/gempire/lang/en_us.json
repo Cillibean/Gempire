@@ -344,7 +344,7 @@
 
   "block.gempire.ice_spike": "Ice Spike",
 
-  "block.gempire.prismatic_block": "Prismatic Block",
+  "block.gempire.prismatic_block": "Block of Prismatic Metal",
   "block.gempire.chroma_cluster_crop": "Chroma Cluster",
 
   "block.gempire.crystal_log": "Crystal Log",
@@ -1197,7 +1197,7 @@
   "ability.gempire.tinkerer": "Tinkerer",
   "ability.gempire.salvaging": "Salvaging",
   "ability.gempire.hydration": "Hydration",
-  "ability.gempire.plantokinesis": "Plantokinesis (NYI)",
+  "ability.gempire.plantokinesis": "Plantokinesis (WIP)",
 
   "screens.gempire.health": "Health",
   "screens.gempire.damage": "Attack Damage",
