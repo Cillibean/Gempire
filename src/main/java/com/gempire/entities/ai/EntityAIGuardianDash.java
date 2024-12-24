@@ -17,7 +17,9 @@ public class EntityAIGuardianDash extends Goal {
 
     @Override
     public boolean canUse() {
-        target = (Player) follower.getTarget();
+        if (follower.getTarget() instanceof Player) {
+            target = (Player) follower.getTarget();
+        }
         return this.target != null && follower.getDashing() && this.follower.distanceToSqr(this.target) > Math.pow(3, 2);
     }
 

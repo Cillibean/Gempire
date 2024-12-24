@@ -1,6 +1,6 @@
 {
   "type": "minecraft:jigsaw",
-  "biomes": "minecraft:taiga",
+  "biomes": "minecraft:snowy_taiga",
   "step": "surface_structures",
   "spawn_overrides": {},
   "terrain_adaptation": "none",

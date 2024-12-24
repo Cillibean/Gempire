@@ -98,7 +98,7 @@ public class EntityAmberHuntress extends EntityBoss {
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
-        controllerRegistrar.add(DefaultAnimations.genericIdleController(this));
+        controllerRegistrar.add(DefaultAnimations.genericWalkIdleController(this));
         //controllerRegistrar.add(new AnimationController<>(this, "cry_controller", state -> PlayState.CONTINUE)
                 //.triggerableAnim("cry", CRY_ANIMATION));
     }

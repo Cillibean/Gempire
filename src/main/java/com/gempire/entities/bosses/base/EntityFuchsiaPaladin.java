@@ -71,9 +71,8 @@ public class EntityFuchsiaPaladin extends EntityBoss {
         this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 0.6D));
         this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, 0, false, false, (entity) -> canAttack((LivingEntity) entity)));
-        //this.goalSelector.addGoal(3, new PaladinLeechGoal(this, 1.25D));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, 0, false, false, (entity) -> canAttack((LivingEntity) entity)));
-        this.goalSelector.addGoal(3, new MeleeAttackGoal(this, 0.5D, true));
+        this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 0.5D, true));
         super.registerGoals();
     }
 
@@ -97,7 +96,7 @@ public class EntityFuchsiaPaladin extends EntityBoss {
         controllerRegistrar.add(new AnimationController<>(this, "attack_controller", state -> PlayState.CONTINUE)
                 .triggerableAnim("cry", CRY_ANIMATION)
                 .triggerableAnim("pound", POUND_ANIMATION));
-        controllerRegistrar.add(DefaultAnimations.genericWalkController(this));
+        controllerRegistrar.add(DefaultAnimations.genericWalkIdleController(this));
     }
 
     @Override

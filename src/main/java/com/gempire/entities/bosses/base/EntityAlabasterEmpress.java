@@ -4,23 +4,16 @@ import com.gempire.entities.ai.EmpressStrafeGoal;
 import com.gempire.entities.ai.EmpressWanderGoal;
 import com.gempire.entities.bosses.EntityBoss;
 import com.gempire.init.ModEffects;
-import com.gempire.init.ModSounds;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerBossEvent;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.BossEvent;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.FlyingMoveControl;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
-import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomFlyingGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
@@ -29,9 +22,12 @@ import net.minecraft.world.entity.animal.FlyingAnimal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import software.bernie.geckolib.animatable.GeoEntity;
+import software.bernie.geckolib.constant.DefaultAnimations;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.AnimatableManager;
+import software.bernie.geckolib.core.animation.AnimationController;
+import software.bernie.geckolib.core.animation.RawAnimation;
+import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import javax.annotation.Nullable;
@@ -41,7 +37,14 @@ public class EntityAlabasterEmpress extends EntityBoss implements FlyingAnimal {
 
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
+    private static final RawAnimation LASER_ANIMATION = RawAnimation.begin().thenPlay("misc.laser");
+    public static final RawAnimation FLY = RawAnimation.begin().thenLoop("move.fly");
+    public static final RawAnimation WALK = RawAnimation.begin().thenLoop("move.walk");
+    public static final RawAnimation IDLE = RawAnimation.begin().thenLoop("misc.idle");
+
+    public boolean shooting = false;
     public boolean beaming = false;
+    public int orbcooldown;
     public int beamcooldown;
     public boolean beamDamageCheck;
 
@@ -77,7 +80,7 @@ public class EntityAlabasterEmpress extends EntityBoss implements FlyingAnimal {
         this.goalSelector.addGoal(5, new EmpressWanderGoal(this, 0.6D));
         //this.goalSelector.addGoal(5, new WaterAvoidingRandomFlyingGoal(this, 0.6D));
         this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 8.0F));
-        this.goalSelector.addGoal(2, new EmpressStrafeGoal(this, 1.25D, 20, 10.0F));
+        this.goalSelector.addGoal(2, new EmpressStrafeGoal(this, 1.25D));
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, 0, false, false, (entity) -> canAttack((LivingEntity) entity)));
     }
@@ -95,7 +98,11 @@ public class EntityAlabasterEmpress extends EntityBoss implements FlyingAnimal {
     }
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
-
+        controllerRegistrar.add(new AnimationController<>(this, "attack_controller", state -> PlayState.CONTINUE)
+                //.triggerableAnim("cry", CRY_ANIMATION)
+                .triggerableAnim("laser", LASER_ANIMATION));
+        controllerRegistrar.add(new AnimationController(this, "Fly/Walk/Idle", 0, (state) -> {
+            return state.setAndContinue(state.isMoving() && this.isFlying() ? FLY : state.isMoving() ? WALK : IDLE);}));
     }
 
     @Override
@@ -109,10 +116,12 @@ public class EntityAlabasterEmpress extends EntityBoss implements FlyingAnimal {
         beam();
         if (!level().isClientSide) {
             if (auraCryCooldown > 0) auraCryCooldown--;
+            if (orbcooldown > 0) orbcooldown--;
             if (beamcooldown > 0) beamcooldown--;
 
             if (this.random.nextInt(20) == 1 && auraCryCooldown <= 0 && !beaming) auraCry();
             if (this.random.nextInt(20) == 1 && beamcooldown <= 0) beaming = true;
+            if (this.random.nextInt(20) == 1 && orbcooldown <= 0) shooting = true;
         }
         if (!beaming) {
             if (beamcooldown > -60) {
@@ -127,7 +136,7 @@ public class EntityAlabasterEmpress extends EntityBoss implements FlyingAnimal {
 
     public void beam() {
         if (beaming && this.getTarget() != null) {
-            System.out.println("BEAM");
+            triggerAnim("attack_controller", "laser");
             beaming = false;
             if (this.hasLineOfSight(this.getTarget()) && beamDamageCheck) {
                 this.getTarget().hurt(this.damageSources().mobAttack(this), 4f);
