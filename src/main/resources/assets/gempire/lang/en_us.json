@@ -344,7 +344,7 @@
 
   "block.gempire.ice_spike": "Ice Spike",
 
-  "block.gempire.prismatic_block": "Prismatic Block",
+  "block.gempire.prismatic_block": "Block of Prismatic Metal",
   "block.gempire.chroma_cluster_crop": "Chroma Cluster",
 
   "block.gempire.crystal_log": "Crystal Log",
@@ -1135,7 +1135,7 @@
   "messages.gempire.entity.cant_enchant": "This tool can't be enchanted...",
   "messages.gempire.entity.cant_enchant_air": "Her tool slot is empty...",
   "messages.gempire.entity.enchant_not_apply": "This tool can't accept this enchantment...",
-  "messages.gempire.entity.need_lapis": "She needs more Lapis Lazuli...",
+  "messages.gempire.entity.need_lapis": "She needs more chunks of Lapis Lazuli...",
 
   "itemGroup.gempire_gemstones" : "Gemstones",
   "itemGroup.gempire_items" : "Items",
@@ -1197,7 +1197,7 @@
   "ability.gempire.tinkerer": "Tinkerer",
   "ability.gempire.salvaging": "Salvaging",
   "ability.gempire.hydration": "Hydration",
-  "ability.gempire.plantokinesis": "Plantokinesis (NYI)",
+  "ability.gempire.plantokinesis": "Plantokinesis (WIP)",
 
   "screens.gempire.health": "Health",
   "screens.gempire.damage": "Attack Damage",
