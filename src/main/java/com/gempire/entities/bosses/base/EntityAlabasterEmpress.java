@@ -98,7 +98,7 @@ public class EntityAlabasterEmpress extends EntityBoss implements FlyingAnimal {
     }
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
-        controllerRegistrar.add(new AnimationController<>(this, "attack_controller", state -> PlayState.CONTINUE)
+        controllerRegistrar.add(new AnimationController<>(this, "misc_controller", state -> PlayState.CONTINUE)
                 //.triggerableAnim("cry", CRY_ANIMATION)
                 .triggerableAnim("laser", LASER_ANIMATION));
         controllerRegistrar.add(new AnimationController(this, "Fly/Walk/Idle", 0, (state) -> {
@@ -136,7 +136,7 @@ public class EntityAlabasterEmpress extends EntityBoss implements FlyingAnimal {
 
     public void beam() {
         if (beaming && this.getTarget() != null) {
-            triggerAnim("attack_controller", "laser");
+            triggerAnim("misc_controller", "laser");
             beaming = false;
             if (this.hasLineOfSight(this.getTarget()) && beamDamageCheck) {
                 this.getTarget().hurt(this.damageSources().mobAttack(this), 4f);

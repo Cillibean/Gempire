@@ -71,7 +71,7 @@ public class ClientProxy {
         event.registerBlockEntityRenderer(ModTE.WHITE_ALTAR_TE.get(), WhiteAltarRenderer::new);
 
         //RenderingRegistry.registerEntityRenderingHandler(ModEntities.TEST.get(), RenderTestEntity::new);
-        event.registerEntityRenderer(ModEntities.HUNTER.get(), m -> new RenderHunter(m, new ModelHunter<>(m.bakeLayer(ModelHunter.LAYER_LOCATION))));
+        event.registerEntityRenderer(ModEntities.HUNTER.get(), RenderHunter::new);
         event.registerEntityRenderer(ModEntities.CRAWLER.get(), RenderCrawler::new);
         event.registerEntityRenderer(ModEntities.ABOMINATION.get(), RenderAbomination::new);
         event.registerEntityRenderer(ModEntities.SHAMBLER.get(), RenderShambler::new);
@@ -214,7 +214,6 @@ public class ClientProxy {
     public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(ModelSpecter.LAYER_LOCATION, ModelSpecter::createBodyLayer);
         event.registerLayerDefinition(ModelPepo.LAYER_LOCATION, ModelPepo::createBodyLayer);
-        event.registerLayerDefinition(ModelHunter.LAYER_LOCATION, ModelHunter::createBodyLayer);
         event.registerLayerDefinition(ModelBeastmasterWolf.BEASTMASTER_WOLF, ModelBeastmasterWolf::createBodyLayer);
         event.registerLayerDefinition(ModelPebble.LAYER_LOCATION_P, ModelPebble::createBodyLayer);
         event.registerLayerDefinition(ModelPebble.LAYER_LOCATION_M, ModelPebble::createBodyLayer);

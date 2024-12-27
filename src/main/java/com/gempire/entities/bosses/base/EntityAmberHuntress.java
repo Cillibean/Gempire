@@ -23,6 +23,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
+import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
@@ -45,10 +46,12 @@ public class EntityAmberHuntress extends EntityBoss {
 
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
-    private static final RawAnimation CRY_ANIMATION = RawAnimation.begin().thenPlay("cry");
-
+    private static final RawAnimation CRY_ANIMATION = RawAnimation.begin().thenPlay("misc.cry");
+    private static final RawAnimation POUND_ANIMATION = RawAnimation.begin().thenPlay("misc.pound");
+    private static final RawAnimation ATTACK_ANIMATION = RawAnimation.begin().thenPlay("attack.melee");
     boolean pound = false;
     public int poundCooldown;
+    public int poundAnimDelay;
     boolean lightningAOE = false;
     public int lightningAOECooldown;
 
@@ -73,10 +76,10 @@ public class EntityAmberHuntress extends EntityBoss {
         this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 0.2D));
         this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 8.0F));
         //this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));
-        //this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
+        this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
         //this.goalSelector.addGoal(2, new EntityAIGuardianDash(this, 1.1D));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, 0, false, false, (entity) -> canAttack((LivingEntity) entity)));
-        this.goalSelector.addGoal(3, new MeleeAttackGoal(this, 0.5D, true));
+        this.goalSelector.addGoal(3, new MeleeAttackGoal(this, 0.3D, true));
     }
 
 
@@ -99,8 +102,10 @@ public class EntityAmberHuntress extends EntityBoss {
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
         controllerRegistrar.add(DefaultAnimations.genericWalkIdleController(this));
-        //controllerRegistrar.add(new AnimationController<>(this, "cry_controller", state -> PlayState.CONTINUE)
-                //.triggerableAnim("cry", CRY_ANIMATION));
+        controllerRegistrar.add(DefaultAnimations.genericAttackAnimation(this, ATTACK_ANIMATION));
+        controllerRegistrar.add(new AnimationController<>(this, "misc_controller", state -> PlayState.CONTINUE)
+                .triggerableAnim("pound", POUND_ANIMATION).triggerableAnim("cry", CRY_ANIMATION));
+
     }
 
     @Override
@@ -116,8 +121,9 @@ public class EntityAmberHuntress extends EntityBoss {
             if (auraCryCooldown > 0) auraCryCooldown--;
             if (lightningAOECooldown > 0) lightningAOECooldown--;
             if (poundCooldown > 0) poundCooldown--;
+            if (poundAnimDelay > 0) poundAnimDelay--;
 
-            if (this.random.nextInt(20) == 1 && auraCryCooldown <= 0 && !lightningAOE && !pound) auraCry();
+            if (this.random.nextInt(20) == 1 && auraCryCooldown <= 0 && !lightningAOE && !pound && poundAnimDelay == 0) auraCry();
             if (this.random.nextInt(20) == 1 && lightningAOECooldown <= 0 && !pound) lightningAOE = true;
             if (this.random.nextInt(20) == 1 && poundCooldown <= 0 && !lightningAOE) pound = true;
 
@@ -151,9 +157,12 @@ public class EntityAmberHuntress extends EntityBoss {
 
     public void pound() {
         if (pound) {
+            triggerAnim("misc_controller", "pound");
             poundCooldown = 400;
+            poundAnimDelay = 40;
             pound = false;
             navigation.stop();
+        } else if (poundAnimDelay == 0 && poundCooldown > 359) {
             this.level().explode(this, null, null, this.getX(), this.getY(), this.getZ(), 3, false, Level.ExplosionInteraction.NONE);
             AreaEffectCloud areaeffectcloud = new AreaEffectCloud(this.level(), this.getX(), this.getY()+1, this.getZ());
             areaeffectcloud.setOwner(this);
@@ -166,9 +175,8 @@ public class EntityAmberHuntress extends EntityBoss {
             this.level().addFreshEntity(areaeffectcloud);
         }
     }
-
     public void auraCry() {
-        //triggerAnim("cry_controller", "cry");
+        triggerAnim("misc_controller", "cry");
         navigation.stop();
         auraCryCooldown = 600;
         List<Player> list = this.level().getEntitiesOfClass(Player.class, this.getBoundingBox().inflate(14.0D, 8.0D, 14.0D));

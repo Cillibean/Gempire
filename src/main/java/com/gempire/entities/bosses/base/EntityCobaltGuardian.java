@@ -111,7 +111,7 @@ public class EntityCobaltGuardian extends EntityBoss implements FlyingAnimal {
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
         controllerRegistrar.add(DefaultAnimations.genericIdleController(this));
-        controllerRegistrar.add(new AnimationController<>(this, "attack_controller", state -> PlayState.CONTINUE)
+        controllerRegistrar.add(new AnimationController<>(this, "misc_controller", state -> PlayState.CONTINUE)
                 .triggerableAnim("cry", CRY_ANIMATION).triggerableAnim("dash", DASH_ANIMATION));
     }
 

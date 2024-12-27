@@ -44,6 +44,7 @@ public class EntityFuchsiaPaladin extends EntityBoss {
 
     private static final RawAnimation CRY_ANIMATION = RawAnimation.begin().thenPlay("misc.aura_cry");
     private static final RawAnimation POUND_ANIMATION = RawAnimation.begin().thenPlay("attack.pound");
+    private static final RawAnimation ATTACK_ANIMATION = RawAnimation.begin().thenPlay("attack.melee");
     public boolean leeching = false;
     public int leechCooldown;
     public boolean pound = false;
@@ -92,8 +93,8 @@ public class EntityFuchsiaPaladin extends EntityBoss {
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
-        //controllerRegistrar.add(DefaultAnimations.genericIdleController(this));
-        controllerRegistrar.add(new AnimationController<>(this, "attack_controller", state -> PlayState.CONTINUE)
+        controllerRegistrar.add(DefaultAnimations.genericAttackAnimation(this, ATTACK_ANIMATION));
+        controllerRegistrar.add(new AnimationController<>(this, "misc_controller", state -> PlayState.CONTINUE)
                 .triggerableAnim("cry", CRY_ANIMATION)
                 .triggerableAnim("pound", POUND_ANIMATION));
         controllerRegistrar.add(DefaultAnimations.genericWalkIdleController(this));
@@ -124,7 +125,7 @@ public class EntityFuchsiaPaladin extends EntityBoss {
 
     public void pound() {
         if (pound) {
-            triggerAnim("attack_controller", "pound");
+            triggerAnim("misc_controller", "pound");
             poundCooldown = 400;
             poundAnimDelay = 40;
             pound = false;

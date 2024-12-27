@@ -24,8 +24,20 @@ import net.minecraft.world.item.ProjectileWeaponItem;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import org.jetbrains.annotations.Nullable;
+import software.bernie.geckolib.animatable.GeoEntity;
+import software.bernie.geckolib.constant.DefaultAnimations;
+import software.bernie.geckolib.core.animatable.GeoAnimatable;
+import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.core.animation.AnimatableManager;
+import software.bernie.geckolib.core.animation.RawAnimation;
+import software.bernie.geckolib.util.GeckoLibUtil;
 
-public class EntityHunter extends PathfinderMob implements RangedAttackMob {
+public class EntityHunter extends PathfinderMob implements RangedAttackMob, GeoEntity {
+
+    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+
+    private static final RawAnimation ATTACK_ANIMATION = RawAnimation.begin().thenPlay("attack.ranged");
+
     public EntityHunter(EntityType<? extends PathfinderMob> p_20966_, Level p_20967_) {
         super(p_20966_, p_20967_);
     }
@@ -111,5 +123,16 @@ public class EntityHunter extends PathfinderMob implements RangedAttackMob {
 
     public double getMyRidingOffset() {
         return -0.6;
+    }
+
+    @Override
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
+        controllerRegistrar.add(DefaultAnimations.genericWalkIdleController(this));
+        controllerRegistrar.add(DefaultAnimations.genericAttackAnimation(this, ATTACK_ANIMATION));
+    }
+
+    @Override
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return cache;
     }
 }
