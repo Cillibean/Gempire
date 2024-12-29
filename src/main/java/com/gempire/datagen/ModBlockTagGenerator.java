@@ -402,6 +402,9 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                         ModBlocks.SHADED_FENCE_GATE.get(),
                         ModBlocks.CRYSTAL_FENCE_GATE.get());
 
+        this.tag(BlockTags.WALLS)
+                .add(ModBlocks.PINK_SANDSTONE_WALL.get());
+
         this.tag(BlockTags.LOGS_THAT_BURN)
                 .add(ModBlocks.DISTANT_WOOD.get(),
                         ModBlocks.DISTANT_LOG.get(),

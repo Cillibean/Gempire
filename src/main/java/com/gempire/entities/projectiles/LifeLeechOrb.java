@@ -15,6 +15,7 @@ import net.minecraft.world.entity.projectile.AbstractHurtingProjectile;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
 
@@ -72,6 +73,14 @@ public class LifeLeechOrb extends AbstractHurtingProjectile {
             ((LivingEntity) this.getOwner()).heal(80);
         }
         this.discard();
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+        if (this.getDeltaMovement().equals(new Vec3(0, 0, 0))) {
+            this.kill();
+        }
     }
 
     public boolean isPickable() {

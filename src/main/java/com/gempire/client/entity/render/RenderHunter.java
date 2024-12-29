@@ -12,12 +12,15 @@ import net.minecraft.client.renderer.entity.layers.ItemInHandLayer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.monster.AbstractSkeleton;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
+import software.bernie.geckolib.renderer.layer.BlockAndItemGeoLayer;
 
 public class RenderHunter extends GeoEntityRenderer<EntityHunter> {
 
     public RenderHunter(EntityRendererProvider.Context renderManager) {
         super(renderManager, new ModelHunter());
         this.shadowRadius = 0.3F;
+
+        addRenderLayer(new BlockAndItemGeoLayer<>(this));
     }
 
 
