@@ -94,7 +94,6 @@ public class EntityAlabasterEmpress extends EntityBoss implements FlyingAnimal {
     protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(5, new EmpressWanderGoal(this, 0.6D));
-        this.goalSelector.addGoal(1, new EmpressLaserGoal(this));
         //this.goalSelector.addGoal(5, new WaterAvoidingRandomFlyingGoal(this, 0.6D));
         this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(2, new EmpressStrafeGoal(this, 1.25D));
@@ -130,31 +129,29 @@ public class EntityAlabasterEmpress extends EntityBoss implements FlyingAnimal {
 
     @Override
     public void tick() {
-        beam();
         if (!level().isClientSide) {
             if (auraCryCooldown > 0) auraCryCooldown--;
             if (orbcooldown > 0) orbcooldown--;
             if (beamcooldown > 0) beamcooldown--;
 
             if (this.random.nextInt(20) == 1 && auraCryCooldown <= 0 && !beaming) auraCry();
-            if (this.random.nextInt(20) == 1 && beamcooldown <= 0) beaming = true;
+            if (this.random.nextInt(20) == 1 && beamcooldown <= 0) beam();
             if (this.random.nextInt(20) == 1 && orbcooldown <= 0) shooting = true;
         }
-        if (!beaming) {
             if (beamcooldown > -60) {
                 beamcooldown--;
             } else {
+                beaming = false;
                 beamcooldown = 100;
                 beamDamageCheck=true;
             }
-        }
         super.tick();
     }
 
     public void beam() {
-        if (beaming && this.getTarget() != null) {
+        beaming = true;
+        if (this.getTarget() != null) {
             triggerAnim("misc_controller", "laser");
-            beaming = false;
             if (this.hasLineOfSight(this.getTarget()) && beamDamageCheck) {
                 this.getTarget().hurt(this.damageSources().mobAttack(this), 4f);
                 beamDamageCheck = false;
