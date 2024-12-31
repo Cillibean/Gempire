@@ -324,9 +324,6 @@ public class ModBlocks {
     public static final RegistryObject<Block> PINK_PHOSPHORUS_LAMP = BLOCKS.register("pink_phosphorus_lamp", () ->
             new PhosphorusBlock(BlockBehaviour.Properties.copy(Blocks.REDSTONE_LAMP)));
 
-    public static final RegistryObject<Block> WHITE_PHOSPHORUS_LAMP = BLOCKS.register("white_phosphorus_lamp", () ->
-            new PhosphorusBlock(BlockBehaviour.Properties.copy(Blocks.REDSTONE_LAMP)));
-
     public static final RegistryObject<Block> LIGHT_GRAY_PHOSPHORUS_LAMP = BLOCKS.register("light_gray_phosphorus_lamp", () ->
             new PhosphorusBlock(BlockBehaviour.Properties.copy(Blocks.REDSTONE_LAMP)));
 

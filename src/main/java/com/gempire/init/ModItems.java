@@ -534,12 +534,6 @@ public class ModItems {
             )
     );
 
-    public static final RegistryObject<Item> WHITE_PHOSPHORUS_LAMP = ITEMS.register("white_phosphorus_lamp", () ->
-            new BlockItem(
-                    ModBlocks.WHITE_PHOSPHORUS_LAMP.get(),
-                    new Item.Properties()
-            )
-    );
     public static final RegistryObject<Item> ORANGE_PHOSPHORUS_LAMP = ITEMS.register("orange_phosphorus_lamp", () ->
             new BlockItem(
                     ModBlocks.ORANGE_PHOSPHORUS_LAMP.get(),

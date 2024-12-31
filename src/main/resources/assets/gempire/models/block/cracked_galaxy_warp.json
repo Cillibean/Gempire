@@ -1,0 +1,12 @@
+{
+  "parent": "block/orientable",
+  "textures": {
+    "up": "gempire:block/cracked_galaxy_warp",
+    "down": "gempire:block/warp_side",
+    "north": "gempire:block/warp_side",
+    "east": "gempire:block/warp_side",
+    "south": "gempire:block/warp_side",
+    "west": "gempire:block/warp_side",
+    "particle": "gempire:block/warp_side"
+  }
+}

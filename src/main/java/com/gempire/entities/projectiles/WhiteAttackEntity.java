@@ -12,6 +12,7 @@ import net.minecraft.world.entity.projectile.AbstractHurtingProjectile;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
 
 public class WhiteAttackEntity extends AbstractHurtingProjectile {
     public WhiteAttackEntity(EntityType<? extends WhiteAttackEntity> entity, Level world) {
@@ -77,6 +78,14 @@ public class WhiteAttackEntity extends AbstractHurtingProjectile {
 
     public boolean isPickable() {
         return false;
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+        if (this.getDeltaMovement().equals(new Vec3(0, 0, 0))) {
+            this.kill();
+        }
     }
 
     public boolean hurt(DamageSource p_36910_, float p_36911_) {

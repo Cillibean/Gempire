@@ -721,7 +721,6 @@ public class ModCreativeModeTabs {
                 populator.accept(ModBlocks.MAGENTA_PHOSPHORUS_LAMP.get());
                 populator.accept(ModBlocks.PURPLE_PHOSPHORUS_LAMP.get());
                 populator.accept(ModBlocks.PINK_PHOSPHORUS_LAMP.get());
-                populator.accept(ModBlocks.WHITE_PHOSPHORUS_LAMP.get());
                 populator.accept(ModBlocks.LIGHT_GRAY_PHOSPHORUS_LAMP.get());
                 populator.accept(ModBlocks.GRAY_PHOSPHORUS_LAMP.get());
                 populator.accept(ModBlocks.BLACK_PHOSPHORUS_LAMP.get());

@@ -47,7 +47,8 @@ public class RenderAlabasterEmpress extends GeoEntityRenderer<EntityAlabasterEmp
 
     @Override
     public void render(EntityAlabasterEmpress entity, float entityYaw, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
-        LivingEntity livingentity = entity.getTarget();
+        super.render(entity, entityYaw, partialTick, poseStack, bufferSource, packedLight);
+        LivingEntity livingentity = entity.getActiveAttackTarget();
         if (livingentity != null) {
             System.out.println("beam");
             float f = 1;
@@ -116,7 +117,6 @@ public class RenderAlabasterEmpress extends GeoEntityRenderer<EntityAlabasterEmp
             vertex(vertexconsumer, matrix4f, matrix3f, f15, f4, f16, j, k, l, 0.5F, f31);
             poseStack.popPose();
         }
-        super.render(entity, entityYaw, partialTick, poseStack, bufferSource, packedLight);
     }
 
     public boolean shouldRender(EntityAlabasterEmpress p_114836_, Frustum p_114837_, double p_114838_, double p_114839_, double p_114840_) {

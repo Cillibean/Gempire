@@ -478,7 +478,6 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.BROWN_PHOSPHORUS_LAMP.get());
         this.dropSelf(ModBlocks.LIGHT_GRAY_PHOSPHORUS_LAMP.get());
         this.dropSelf(ModBlocks.GRAY_PHOSPHORUS_LAMP.get());
-        this.dropSelf(ModBlocks.WHITE_PHOSPHORUS_LAMP.get());
         this.dropSelf(ModBlocks.BLACK_PHOSPHORUS_LAMP.get());
         this.dropSelf(ModBlocks.RED_DIAMOND_GLASS.get());
         this.dropSelf(ModBlocks.ORANGE_DIAMOND_GLASS.get());

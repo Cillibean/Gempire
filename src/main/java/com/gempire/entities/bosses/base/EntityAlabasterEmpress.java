@@ -1,13 +1,18 @@
 package com.gempire.entities.bosses.base;
 
+import com.gempire.entities.ai.EmpressLaserGoal;
 import com.gempire.entities.ai.EmpressStrafeGoal;
 import com.gempire.entities.ai.EmpressWanderGoal;
 import com.gempire.entities.bosses.EntityBoss;
 import com.gempire.init.ModEffects;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerBossEvent;
 import net.minecraft.world.BossEvent;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -19,6 +24,7 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.animal.FlyingAnimal;
+import net.minecraft.world.entity.monster.Guardian;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -35,6 +41,9 @@ import java.util.List;
 
 public class EntityAlabasterEmpress extends EntityBoss implements FlyingAnimal {
 
+    private static final EntityDataAccessor<Integer> DATA_ID_ATTACK_TARGET = SynchedEntityData.defineId(Guardian.class, EntityDataSerializers.INT);
+    protected static final int ATTACK_TIME = 80;
+    private int clientSideAttackTime;
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
     private static final RawAnimation LASER_ANIMATION = RawAnimation.begin().thenPlay("misc.laser");
@@ -47,6 +56,8 @@ public class EntityAlabasterEmpress extends EntityBoss implements FlyingAnimal {
     public int orbcooldown;
     public int beamcooldown;
     public boolean beamDamageCheck;
+    @Nullable
+    private LivingEntity clientSideCachedAttackTarget;
 
     public EntityAlabasterEmpress(EntityType<? extends EntityAlabasterEmpress> p_33002_, Level p_33003_) {
         super(p_33002_, p_33003_);
@@ -74,10 +85,16 @@ public class EntityAlabasterEmpress extends EntityBoss implements FlyingAnimal {
                 .add(Attributes.FLYING_SPEED, 1.0D);
     }
 
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(DATA_ID_ATTACK_TARGET, 0);
+    }
+
     @Override
     protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(5, new EmpressWanderGoal(this, 0.6D));
+        this.goalSelector.addGoal(1, new EmpressLaserGoal(this));
         //this.goalSelector.addGoal(5, new WaterAvoidingRandomFlyingGoal(this, 0.6D));
         this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(2, new EmpressStrafeGoal(this, 1.25D));
@@ -127,7 +144,7 @@ public class EntityAlabasterEmpress extends EntityBoss implements FlyingAnimal {
             if (beamcooldown > -60) {
                 beamcooldown--;
             } else {
-                beamcooldown = 500;
+                beamcooldown = 100;
                 beamDamageCheck=true;
             }
         }
@@ -158,5 +175,57 @@ public class EntityAlabasterEmpress extends EntityBoss implements FlyingAnimal {
     @Override
     public boolean isFlying() {
         return true;
+    }
+
+    public int getAttackDuration() {
+        return 80;
+    }
+
+    public void setActiveAttackTarget(int p_32818_) {
+        this.entityData.set(DATA_ID_ATTACK_TARGET, p_32818_);
+    }
+
+    public boolean hasActiveAttackTarget() {
+        return this.entityData.get(DATA_ID_ATTACK_TARGET) != 0;
+    }
+
+    @Nullable
+    public LivingEntity getActiveAttackTarget() {
+        System.out.println("get active attack target");
+        if (!this.hasActiveAttackTarget()) {
+            return null;
+        } else if (this.level().isClientSide) {
+            if (this.clientSideCachedAttackTarget != null) {
+                return this.clientSideCachedAttackTarget;
+            } else {
+                Entity entity = this.level().getEntity(this.entityData.get(DATA_ID_ATTACK_TARGET));
+                if (entity instanceof LivingEntity) {
+                    this.clientSideCachedAttackTarget = (LivingEntity)entity;
+                    return this.clientSideCachedAttackTarget;
+                } else {
+                    return null;
+                }
+            }
+        } else {
+            return this.getTarget();
+        }
+    }
+
+    public void onSyncedDataUpdated(EntityDataAccessor<?> p_32834_) {
+        super.onSyncedDataUpdated(p_32834_);
+        if (DATA_ID_ATTACK_TARGET.equals(p_32834_)) {
+            this.clientSideCachedAttackTarget = null;
+            this.clientSideAttackTime = 0;
+        }
+    }
+
+    @Override
+    public void aiStep() {
+        super.aiStep();
+        if (this.hasActiveAttackTarget()) {
+            if (this.clientSideAttackTime < this.getAttackDuration()) {
+                ++this.clientSideAttackTime;
+            }
+        }
     }
 }
