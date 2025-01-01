@@ -3079,49 +3079,49 @@ public class ModBlocks {
     public static final RegistryObject<Block> PALADIN_CASE = BLOCKS.register("paladin_case", () ->
             new FlowerCaseBlock(Block.Properties.of()
                     .strength(-1.0F, 3600000.0F).noLootTable()
-                    .sound(SoundType.GLASS)
+                    .sound(SoundType.GLASS).noOcclusion().noParticlesOnBreak()
             )
     );
 
     public static final RegistryObject<Block> EMPTY_PALADIN_CASE = BLOCKS.register("empty_paladin_case", () ->
-            new Block(Block.Properties.of()
+            new FlowerCaseBlock(Block.Properties.of()
                     .strength(-1.0F, 3600000.0F).noLootTable()
-                    .sound(SoundType.GLASS)
+                    .sound(SoundType.GLASS).noOcclusion().noParticlesOnBreak()
             )
     );
 
     public static final RegistryObject<Block> DAGGER_STONE = BLOCKS.register("dagger_stone", () ->
             new DaggerStoneBlock(Block.Properties.of()
                     .strength(-1.0F, 3600000.0F).noLootTable()
-                    .sound(SoundType.STONE)
+                    .sound(SoundType.STONE).noOcclusion().noParticlesOnBreak()
             )
     );
 
     public static final RegistryObject<Block> GUARDIAN_VASE = BLOCKS.register("guardian_vase", () ->
             new VaseBlock(Block.Properties.of()
                     .strength(-1.0F, 3600000.0F).noLootTable()
-                    .sound(SoundType.GLASS)
+                    .sound(SoundType.GLASS).noOcclusion().noParticlesOnBreak()
             )
     );
 
     public static final RegistryObject<Block> EMPTY_GUARDIAN_VASE = BLOCKS.register("empty_guardian_vase", () ->
-            new Block(Block.Properties.of()
+            new VaseBlock(Block.Properties.of()
                     .strength(-1.0F, 3600000.0F).noLootTable()
-                    .sound(SoundType.GLASS)
+                    .sound(SoundType.GLASS).noOcclusion().noParticlesOnBreak()
             )
     );
 
     public static final RegistryObject<Block> EMPRESS_CROWN = BLOCKS.register("empress_crown", () ->
             new CrownBlock(Block.Properties.of()
                     .strength(-1.0F, 3600000.0F).noLootTable()
-                    .sound(SoundType.STONE)
+                    .sound(SoundType.STONE).noOcclusion()
             )
     );
 
     public static final RegistryObject<Block> EMPTY_EMPRESS_CROWN = BLOCKS.register("empty_empress_crown", () ->
-            new Block(Block.Properties.of()
+            new CrownBlock(Block.Properties.of()
                     .strength(-1.0F, 3600000.0F).noLootTable()
-                    .sound(SoundType.STONE)
+                    .sound(SoundType.STONE).noOcclusion()
             )
     );
 

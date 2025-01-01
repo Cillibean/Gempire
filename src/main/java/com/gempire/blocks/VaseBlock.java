@@ -25,8 +25,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class VaseBlock extends DirectionalBlock {
 
-    protected static final VoxelShape FACING_NS_FLOOR = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 12.0D, 16.0D);
-    protected static final VoxelShape FACING_EW_FLOOR = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 12.0D, 16.0D);
+    protected static final VoxelShape BOX = Block.box(4.0D, 0.0D, 4.0D, 12.0D, 16.0D, 12.0D);
 
     public VaseBlock(Properties properties) {
         super(properties);
@@ -57,11 +56,7 @@ public class VaseBlock extends DirectionalBlock {
 
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter p_60556_, BlockPos p_60557_, CollisionContext p_60558_) {
-        if (state.getValue(FACING) == Direction.NORTH || state.getValue(FACING) == Direction.SOUTH) {
-            return FACING_NS_FLOOR;
-        } else {
-            return FACING_EW_FLOOR;
-        }
+        return BOX;
     }
 
     public boolean canSurvive(BlockState state, LevelReader worldIn, BlockPos pos) {
@@ -115,16 +110,12 @@ public class VaseBlock extends DirectionalBlock {
 
     @Override
     public VoxelShape getCollisionShape(BlockState state, BlockGetter p_60573_, BlockPos p_60574_, CollisionContext p_60575_) {
-        if (state.getValue(FACING) == Direction.NORTH || state.getValue(FACING) == Direction.SOUTH) {
-            return FACING_NS_FLOOR;
-        } else {
-            return FACING_EW_FLOOR;
-        }
+        return BOX;
     }
 
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
-        if (!level.isClientSide && player.getMainHandItem().is(ModItems.PRISMATIC_FLASK.get())) {
+        if (!level.isClientSide && player.getMainHandItem().is(ModItems.PRISMATIC_FLASK.get())  && level.getBlockState(pos) == ModBlocks.GUARDIAN_VASE.get().defaultBlockState()) {
             popResource(level, pos, new ItemStack(ModItems.GUARDIAN_TEAR.get()));
             level.setBlockAndUpdate(pos, ModBlocks.EMPTY_GUARDIAN_VASE.get().defaultBlockState());
             player.setItemSlot(EquipmentSlot.MAINHAND, player.getItemBySlot(EquipmentSlot.MAINHAND).copyWithCount(player.getItemBySlot(EquipmentSlot.MAINHAND).getCount()-1));

@@ -1,5 +1,5 @@
 {
-  "name": "gempire:huntress_dagger/start_pool",
+  "name": "gempire:paladin_tower/start_pool",
   "fallback": "minecraft:empty",
   "elements": [
     {
@@ -7,7 +7,7 @@
       "element": {
         "element_type": "minecraft:single_pool_element",
         "projection": "rigid",
-        "location": "gempire:huntress_dagger",
+        "location": "gempire:paladin_tower",
         "processors": "minecraft:empty"
       }
     }

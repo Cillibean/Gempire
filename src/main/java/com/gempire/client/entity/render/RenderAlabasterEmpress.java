@@ -34,7 +34,6 @@ public class RenderAlabasterEmpress extends GeoEntityRenderer<EntityAlabasterEmp
     @Override
     public ResourceLocation getTextureLocation(EntityAlabasterEmpress animatable) {
         if (animatable.beaming) {
-            System.out.println("beaming");
             return new ResourceLocation(Gempire.MODID, "textures/entity/boss/empress/alabaster/beam.png");
         } else {
             return new ResourceLocation(Gempire.MODID, "textures/entity/boss/empress/alabaster/base.png");
@@ -51,7 +50,6 @@ public class RenderAlabasterEmpress extends GeoEntityRenderer<EntityAlabasterEmp
         super.render(entity, entityYaw, partialTick, poseStack, bufferSource, packedLight);
         LivingEntity livingentity = entity.getActiveAttackTarget();
         if (livingentity != null) {
-            System.out.println("beam");
             float f = 1;
             float f1 = 40;
             float f2 = f1 * 0.5F % 1.0F;
@@ -69,12 +67,9 @@ public class RenderAlabasterEmpress extends GeoEntityRenderer<EntityAlabasterEmp
             poseStack.mulPose(Axis.XP.rotationDegrees(f5 * (180F / (float)Math.PI)));
             int i = 1;
             float f7 = f1 * 0.05F * -1.5F;
-            float f8 = f * f;
-            int j = 64 + (int)(f8 * 191.0F);
-            int k = 32 + (int)(f8 * 191.0F);
-            int l = 128 - (int)(f8 * 64.0F);
-            float f9 = 0.2F;
-            float f10 = 0.282F;
+            int j = 255;
+            int k = 255;
+            int l = 255;
             float f11 = Mth.cos(f7 + 2.3561945F) * 0.282F;
             float f12 = Mth.sin(f7 + 2.3561945F) * 0.282F;
             float f13 = Mth.cos(f7 + ((float)Math.PI / 4F)) * 0.282F;

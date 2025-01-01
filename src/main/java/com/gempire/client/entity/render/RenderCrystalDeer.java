@@ -30,7 +30,11 @@ public class RenderCrystalDeer extends GeoEntityRenderer<EntityCrystalDeer> {
 
     @Override
     public void scaleModelForRender(float widthScale, float heightScale, PoseStack poseStack, EntityCrystalDeer animatable, BakedGeoModel model, boolean isReRender, float partialTick, int packedLight, int packedOverlay) {
-        poseStack.scale(.75f, .75f, .75f);
+        if (animatable.isBaby()) {
+            poseStack.scale(.5f, .5f, .5f);
+        } else {
+            poseStack.scale(.75f, .75f, .75f);
+        }
     }
 
     @Override

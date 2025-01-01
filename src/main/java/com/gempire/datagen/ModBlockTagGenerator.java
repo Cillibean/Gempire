@@ -403,7 +403,30 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                         ModBlocks.CRYSTAL_FENCE_GATE.get());
 
         this.tag(BlockTags.WALLS)
-                .add(ModBlocks.PINK_SANDSTONE_WALL.get());
+                .add(ModBlocks.PINK_SANDSTONE_WALL.get())
+                .add(ModBlocks.PEGMATITE_WALL.get())
+                .add(ModBlocks.COBBLED_PEGMATITE_WALL.get())
+                .add(ModBlocks.RYOLITE_WALL.get())
+                .add(ModBlocks.SELENITE_WALL.get())
+                .add(ModBlocks.POLISHED_SELENITE_WALL.get())
+                .add(ModBlocks.POLISHED_RYOLITE_WALL.get())
+                .add(ModBlocks.DRAINED_BLUE_STONE_BRICK_DARK_WALL.get())
+                .add(ModBlocks.DRAINED_BLUE_STONE_BRICK_LIGHT_WALL.get())
+                .add(ModBlocks.DRAINED_BLUE_STONE_BRICK_WALL.get())
+                .add(ModBlocks.DRAINED_YELLOW_STONE_BRICK_DARK_WALL.get())
+                .add(ModBlocks.DRAINED_YELLOW_STONE_BRICK_LIGHT_WALL.get())
+                .add(ModBlocks.DRAINED_YELLOW_STONE_BRICK_WALL.get())
+                .add(ModBlocks.DRAINED_RED_STONE_BRICK_DARK_WALL.get())
+                .add(ModBlocks.DRAINED_RED_STONE_BRICK_LIGHT_WALL.get())
+                .add(ModBlocks.DRAINED_RED_STONE_BRICK_WALL.get())
+                .add(ModBlocks.DRAINED_PURPLE_STONE_BRICK_DARK_WALL.get())
+                .add(ModBlocks.DRAINED_PURPLE_STONE_BRICK_LIGHT_WALL.get())
+                .add(ModBlocks.DRAINED_PURPLE_STONE_BRICK_WALL.get())
+                .add(ModBlocks.DRAINED_GREY_STONE_BRICK_DARK_WALL.get())
+                .add(ModBlocks.DRAINED_GREY_STONE_BRICK_LIGHT_WALL.get())
+                .add(ModBlocks.DRAINED_GREY_STONE_BRICK_WALL.get());
+
+
 
         this.tag(BlockTags.LOGS_THAT_BURN)
                 .add(ModBlocks.DISTANT_WOOD.get(),

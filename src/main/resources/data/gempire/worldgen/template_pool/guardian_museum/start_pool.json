@@ -1,5 +1,5 @@
 {
-  "name": "gempire:guardian_vase/start_pool",
+  "name": "gempire:guardian_museum/start_pool",
   "fallback": "minecraft:empty",
   "elements": [
     {
@@ -7,7 +7,7 @@
       "element": {
         "element_type": "minecraft:single_pool_element",
         "projection": "rigid",
-        "location": "gempire:guardian_vase",
+        "location": "gempire:guardian_museum",
         "processors": "minecraft:empty"
       }
     }

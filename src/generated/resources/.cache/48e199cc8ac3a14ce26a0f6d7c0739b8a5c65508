@@ -1,0 +1,14 @@
+// 1.20.1	2025-01-01T16:41:39.364162	Item Tags
+b11731f0e4f1687efcc6c1c117419fbdc6d9235a data/minecraft/tags/items/axes.json
+d04036bc6c2c168bafa958ead6f6868862edcf92 data/minecraft/tags/items/beacon_payment_items.json
+c37309cb78ab154bf59b27644fce72ee5ed0c4d8 data/minecraft/tags/items/flowers.json
+b6ce76c0539ec03a02580eadeb752483ae7b8c71 data/minecraft/tags/items/hoes.json
+2c8893f77b1fc19a3888829d4f5ecc442da31aa6 data/minecraft/tags/items/logs_that_burn.json
+d9c76de3aaf8155ed899f5ed03f31768f215cdfd data/minecraft/tags/items/music_discs.json
+1839f2b3e284ebbedd99a1c8b1a4d87b33194365 data/minecraft/tags/items/pickaxes.json
+1cbccc167cf1982b1d902ab7b8e85857934d1161 data/minecraft/tags/items/saplings.json
+5963a2f7648d40396bd7e7ae1dbdd6f418495f7a data/minecraft/tags/items/shovels.json
+2574da384122fba78e2b405c5d23945f16e85f1d data/minecraft/tags/items/stone_crafting_materials.json
+2574da384122fba78e2b405c5d23945f16e85f1d data/minecraft/tags/items/stone_tool_materials.json
+4ccb1486726ec346709e4d69392b0ab40a0c7d8d data/minecraft/tags/items/swords.json
+956ace1b7256fd244e138bd2b8ecfed93850bb78 data/minecraft/tags/items/trim_materials.json

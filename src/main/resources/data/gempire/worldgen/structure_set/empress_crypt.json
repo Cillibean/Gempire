@@ -1,13 +1,13 @@
 {
   "structures": [
     {
-      "structure": "gempire:guardian_vase",
+      "structure": "gempire:empress_crypt",
       "weight": 1
     }
   ],
   "placement": {
     "type": "minecraft:random_spread",
-    "salt": 1357726637,
+    "salt": 1296786234,
     "spacing": 75,
     "separation": 20
   }

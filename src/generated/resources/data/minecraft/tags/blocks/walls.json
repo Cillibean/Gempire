@@ -1,0 +1,26 @@
+{
+  "values": [
+    "gempire:pink_sandstone_wall",
+    "gempire:pegmatite_wall",
+    "gempire:cobbled_pegmatite_wall",
+    "gempire:ryolite_wall",
+    "gempire:selenite_wall",
+    "gempire:polished_selenite_wall",
+    "gempire:polished_ryolite_wall",
+    "gempire:drained_blue_stone_brick_dark_wall",
+    "gempire:drained_blue_stone_brick_light_wall",
+    "gempire:drained_blue_stone_brick_wall",
+    "gempire:drained_yellow_stone_brick_dark_wall",
+    "gempire:drained_yellow_stone_brick_light_wall",
+    "gempire:drained_yellow_stone_brick_wall",
+    "gempire:drained_red_stone_brick_dark_wall",
+    "gempire:drained_red_stone_brick_light_wall",
+    "gempire:drained_red_stone_brick_wall",
+    "gempire:drained_purple_stone_brick_dark_wall",
+    "gempire:drained_purple_stone_brick_light_wall",
+    "gempire:drained_purple_stone_brick_wall",
+    "gempire:drained_grey_stone_brick_dark_wall",
+    "gempire:drained_grey_stone_brick_light_wall",
+    "gempire:drained_grey_stone_brick_wall"
+  ]
+}

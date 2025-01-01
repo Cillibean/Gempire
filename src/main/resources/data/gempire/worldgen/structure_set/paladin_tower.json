@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "gempire:paladin_tower",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 1256726537,
+    "spacing": 75,
+    "separation": 20
+  }
+}

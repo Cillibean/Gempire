@@ -27,8 +27,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class DaggerStoneBlock extends DirectionalBlock {
 
-    protected static final VoxelShape FACING_NS_FLOOR = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 12.0D, 16.0D);
-    protected static final VoxelShape FACING_EW_FLOOR = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 12.0D, 16.0D);
+    protected static final VoxelShape BOX = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D);
 
     public DaggerStoneBlock(Properties properties) {
         super(properties);
@@ -55,15 +54,6 @@ public class DaggerStoneBlock extends DirectionalBlock {
 
     public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor worldIn, BlockPos currentPos, BlockPos facingPos) {
         return !stateIn.canSurvive(worldIn, currentPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(stateIn, facing, facingState, worldIn, currentPos, facingPos);
-    }
-
-    @Override
-    public VoxelShape getShape(BlockState state, BlockGetter p_60556_, BlockPos p_60557_, CollisionContext p_60558_) {
-        if (state.getValue(FACING) == Direction.NORTH || state.getValue(FACING) == Direction.SOUTH) {
-            return FACING_NS_FLOOR;
-        } else {
-            return FACING_EW_FLOOR;
-        }
     }
 
     public boolean canSurvive(BlockState state, LevelReader worldIn, BlockPos pos) {
@@ -116,15 +106,6 @@ public class DaggerStoneBlock extends DirectionalBlock {
     }
 
     @Override
-    public VoxelShape getCollisionShape(BlockState state, BlockGetter p_60573_, BlockPos p_60574_, CollisionContext p_60575_) {
-        if (state.getValue(FACING) == Direction.NORTH || state.getValue(FACING) == Direction.SOUTH) {
-            return FACING_NS_FLOOR;
-        } else {
-            return FACING_EW_FLOOR;
-        }
-    }
-
-    @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
         if (!level.isClientSide) {
             if (player.hasEffect(ModEffects.SHOCK_RESISTANCE.get())) {
@@ -139,5 +120,14 @@ public class DaggerStoneBlock extends DirectionalBlock {
         }
 
         return super.use(state, level, pos, player, hand, result);
+    }
+    @Override
+    public VoxelShape getShape(BlockState state, BlockGetter p_60556_, BlockPos p_60557_, CollisionContext p_60558_) {
+        return BOX;
+    }
+
+    @Override
+    public VoxelShape getCollisionShape(BlockState state, BlockGetter p_60573_, BlockPos p_60574_, CollisionContext p_60575_) {
+        return BOX;
     }
 }

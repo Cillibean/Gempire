@@ -123,7 +123,7 @@ public class CrownBlock extends DirectionalBlock {
 
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
-        if (!level.isClientSide && player.getMainHandItem().is(ModItems.PRISMATIC_SHEARS.get())) {
+        if (!level.isClientSide && player.getMainHandItem().is(ModItems.PRISMATIC_SHEARS.get())  && level.getBlockState(pos) == ModBlocks.EMPRESS_CROWN.get().defaultBlockState()) {
             System.out.println("pickaxe");
             popResource(level, pos, new ItemStack(ModItems.EMPRESS_STAR.get()));
             level.setBlockAndUpdate(pos, ModBlocks.EMPTY_EMPRESS_CROWN.get().defaultBlockState());
