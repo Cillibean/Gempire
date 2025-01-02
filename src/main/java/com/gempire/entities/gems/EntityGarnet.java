@@ -1,5 +1,6 @@
 package com.gempire.entities.gems;
 
+import com.gempire.config.GempireServerConfigs;
 import com.gempire.entities.abilities.*;
 import com.gempire.entities.abilities.base.Ability;
 import com.gempire.entities.ai.*;
@@ -194,7 +195,7 @@ this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, EntityGem.class, 6.0F, 
 
     @Override
     public boolean generateIsEmotional() {
-        return true;
+        return GempireServerConfigs.OUTBURSTS.get();
     }
 
     @Override

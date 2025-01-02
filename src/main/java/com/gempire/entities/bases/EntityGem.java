@@ -1,5 +1,6 @@
 package com.gempire.entities.bases;
 
+import com.gempire.config.GempireServerConfigs;
 import com.gempire.container.GemUIContainer;
 import com.gempire.entities.abilities.*;
 import com.gempire.entities.abilities.base.Ability;
@@ -956,7 +957,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                     this.setCurrentRecipe(0);
                 }
             }
-            if (!getRebelled() && getOwned()) {
+            if (!getRebelled() && getOwned() && GempireServerConfigs.REBELLION.get()) {
                 rebelTicks++;
                 if (rebelTicks >= 20 * (10 * 60)) {
                     checkRebel();
@@ -1489,8 +1490,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                     }
                 }
             }
-                if (this.isEmotional() && !source.is(DamageTypeTags.IS_EXPLOSION) && !source.is(DamageTypeTags.IS_FIRE)) {
-                    System.out.println("emotion meter " + emotionMeter);
+                if (this.isEmotional() && !source.is(DamageTypeTags.IS_EXPLOSION) && !source.is(DamageTypeTags.IS_FIRE) && GempireServerConfigs.OUTBURSTS.get()) {
                     if (this.emotionMeter <= this.EmotionThreshold()) {
                         if (this.EmotionThreshold() - this.emotionMeter < 5) {
                             this.level().addParticle(ParticleTypes.ANGRY_VILLAGER, this.getX(), this.getY() + 2, this.getZ(), 0, 0, 0);

@@ -1,5 +1,6 @@
 package com.gempire.entities.gems;
 
+import com.gempire.config.GempireServerConfigs;
 import com.gempire.container.ZirconUIContainer;
 import com.gempire.entities.abilities.AbilityStern;
 import com.gempire.entities.abilities.AbilityZilch;
@@ -186,7 +187,7 @@ public class EntityZircon extends EntityVaryingGem {
 
     @Override
     public boolean generateIsEmotional() {
-        return true;
+        return GempireServerConfigs.OUTBURSTS.get();
     }
 
     @Override

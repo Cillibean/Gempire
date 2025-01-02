@@ -7,7 +7,7 @@ public class GempireClientConfigs {
     public static final ForgeConfigSpec SPEC;
 
     static {
-        BUILDER.push("Configs for Gempire");
+        BUILDER.push("Gempire Client Configuration");
 
         // HERE DEFINE YOUR CONFIGS
 

@@ -301,7 +301,6 @@ public class ClientProxy {
         public static void onKeyInput(InputEvent.Key event) {
             if(KeyBindings.WARP_KEY.consumeClick()) {
                 Player player = Minecraft.getInstance().player;
-                System.out.println("warp attempt");
                 /*if (WarpPadTE.TestForWarpPad(player)) {
                     //Minecraft.getInstance().player.sendSystemMessage(Component.literal("Warped!"));
                 } else if (!WarpPadTE.TestForWarpPad(player)) {

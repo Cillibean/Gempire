@@ -1,5 +1,6 @@
 package com.gempire.entities.gems;
 
+import com.gempire.config.GempireServerConfigs;
 import com.gempire.container.PearlDefectiveUIContainer;
 import com.gempire.container.PearlUIContainer;
 import com.gempire.entities.abilities.AbilityZilch;
@@ -219,7 +220,7 @@ this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, EntityGem.class, 6.0F, 
 
     @Override
     public boolean generateIsEmotional() {
-        return true;
+        return GempireServerConfigs.OUTBURSTS.get();
     }
 
     @Override

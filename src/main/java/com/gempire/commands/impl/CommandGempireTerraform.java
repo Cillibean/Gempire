@@ -37,7 +37,6 @@ public class CommandGempireTerraform extends CommandBase {
                 }
             }
         }
-        System.out.println("run terraform");
         if (entityGem != null) {
             entityGem.runTerraformCommand(source.getPlayerOrException());
             return Command.SINGLE_SUCCESS;

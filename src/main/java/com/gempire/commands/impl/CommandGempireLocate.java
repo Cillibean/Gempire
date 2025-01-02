@@ -41,21 +41,15 @@ public class CommandGempireLocate extends CommandBase {
     }
 
     public int execute(CommandSourceStack source, ResourceOrTagKeyArgument.Result<Structure> structure) throws CommandSyntaxException {
-        System.out.println("execute");
         //BlockPos pos = new BlockPos(source.getPosition().x, source.getPosition().y, source.getPosition().z);
         AABB aabb = source.getPlayerOrException().getBoundingBox().inflate(12.0D);
         EntityGem nephrite = null;
         List<EntityGem> gems = source.getLevel().getEntitiesOfClass(EntityGem.class, aabb);
         for(EntityGem gem : gems){
-            System.out.println("gem check");
             if(gem.canLocateStructures()){
-                System.out.println("can locate");
                 if(gem.isOwner(source.getPlayerOrException())){
-                    System.out.println("is owner");
                     if(!gem.isOnStructureCooldown()){
-                        System.out.println("is on cooldown");
                         nephrite = gem;
-                        System.out.println(nephrite);
                     } else {
                         source.getPlayerOrException().sendSystemMessage(Component.translatable("She's too tired!"));
                     }

@@ -1,5 +1,6 @@
 package com.gempire.entities.gems;
 
+import com.gempire.config.GempireServerConfigs;
 import com.gempire.entities.abilities.*;
 import com.gempire.entities.abilities.base.Ability;
 import com.gempire.entities.ai.*;
@@ -249,7 +250,7 @@ public class EntityTourmaline extends EntityVaryingGem {
 
     @Override
     public boolean generateIsEmotional() {
-        return true;
+        return GempireServerConfigs.OUTBURSTS.get();
     }
 
     @Override

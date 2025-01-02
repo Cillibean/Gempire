@@ -80,7 +80,6 @@ public class EntityAIBuildFarm extends Goal {
             }
             if (!list2.contains(pos)) {
                 BlockPos posInChunk = pos.offset(-chunk.getWorldPosition().getX(), 0, -chunk.getWorldPosition().getZ());
-                System.out.println(pos + " " + posInChunk);
                 if (posInChunk.getY() == yFarm) {
                     if (posInChunk.equals(new BlockPos(4, pos.getY(), 4)) || posInChunk.equals(new BlockPos(11, pos.getY(), 4)) || posInChunk.equals(new BlockPos(4, pos.getY(), 11)) || posInChunk.equals(new BlockPos(11, pos.getY(), 11))) {
                         level.setBlockAndUpdate(pos, Blocks.WATER.defaultBlockState());

@@ -38,24 +38,17 @@ public class ItemDestabilizer extends DestabBase {
             BlockPos pos = context.getClickedPos();
             if (context.getClickedFace() == Direction.UP) {
                 pos = pos.above();
-                System.out.println("up");
             } else if (context.getClickedFace() == Direction.DOWN) {
                 pos = pos.below();
-                System.out.println("down");
             } else if (context.getClickedFace() == Direction.NORTH) {
                 pos = pos.offset(0, 0, 1);
-                System.out.println("north");
             } else if (context.getClickedFace() == Direction.EAST) {
                 pos = pos.offset(-1, 0, 0);
-                System.out.println("east");
             } else if (context.getClickedFace() == Direction.SOUTH) {
                 pos = pos.offset(0, 0, -1);
-                System.out.println("south");
             } else {
                 pos = pos.offset(1, 0, 0);
-                System.out.println("west");
             }
-            System.out.println(context.getItemInHand());
             if (context.getItemInHand().getItem() == ModItems.YELLOW_DESTABILIZER.get()) {
                 context.getLevel().setBlock(pos, Objects.requireNonNull(ModBlocks.YELLOW_DESTAB_WALL.get().getStateForPlacement(new BlockPlaceContext(context))), 0);
             } else if (context.getItemInHand().getItem() == ModItems.PINK_DESTABILIZER.get()) {

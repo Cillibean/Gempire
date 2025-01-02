@@ -94,7 +94,6 @@ public class ItemGem extends Item {
 
     @Override
     public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity entity, InteractionHand hand) {
-        System.out.println("entity interact");
         if (entity instanceof EntityGem) {
             if  (player.level().isClientSide) {
                 //if (((EntityGem) entity).isOwner(player)) {
@@ -107,8 +106,6 @@ public class ItemGem extends Item {
                         isAssigned = true;*/
                     } else {
                         stack.getOrCreateTag().putUUID("assignedID", entity.getUUID());
-                        System.out.println("entity uuid "+entity.getUUID());
-                        System.out.println("assigned id "+stack.getOrCreateTag().getUUID("assignedID"));
                         //player.sendSystemMessage(Component.translatable("This Gem was assigned to "+ entity.getName().getString() + ", " +((EntityGem) entity).getFacetAndCut()));
                         livingEntityHit = true;
                         /*System.out.println("gem interact");
@@ -127,13 +124,8 @@ public class ItemGem extends Item {
         ItemStack stack = playerIn.getItemInHand(handIn);
         if (!worldIn.isClientSide && (handIn == InteractionHand.MAIN_HAND)) {
             if (!livingEntityHit) {
-                if (stack.getOrCreateTag().contains("assignedID")) {
-                    System.out.println("assigned id " + stack.getOrCreateTag().getUUID("assignedID"));
-                }
-                System.out.println("check tags");
                 if (!getCracked(stack)) {
                     if (!getSludged(stack)) {
-                        System.out.println("through");
                         ItemStack itemstack = playerIn.getItemInHand(handIn);
                         BlockHitResult raytraceresult = getPlayerPOVHitResult(worldIn, playerIn, ClipContext.Fluid.NONE);
                         if (raytraceresult.getType() == HitResult.Type.MISS) {
@@ -141,9 +133,7 @@ public class ItemGem extends Item {
                         } else {
                             if (raytraceresult.getType() == HitResult.Type.BLOCK) {
                                 BlockPos blockpos = raytraceresult.getBlockPos();
-                                System.out.println(blockpos);
                                 Direction direction = raytraceresult.getDirection();
-                                System.out.println(direction.getName());
                                 if (!worldIn.mayInteract(playerIn, blockpos) || !playerIn.mayUseItemAt(blockpos.relative(direction), direction, itemstack)) {
                                     return super.use(worldIn, playerIn, handIn);
                                 }
@@ -189,7 +179,6 @@ public class ItemGem extends Item {
     }
     public boolean formGem(Level world, @Nullable Player player, BlockPos pos, ItemStack stack, @Nullable ItemEntity item) {
         if (!world.isClientSide) {
-            System.out.println("form event");
             RegistryObject<EntityType<EntityPebble>> gemm = ModEntities.PEBBLE;
             String skinColorVariant = "";
             EntityGem gem = gemm.get().create(world);
@@ -202,7 +191,6 @@ public class ItemGem extends Item {
                 list = player.level().getEntitiesOfClass(EntityGem.class, player.getBoundingBox().inflate(4.0D, 4.0D, 4.0D));
                 for (EntityGem gemmy : list) {
                     if (gemmy.isDeadOrDying()) dying = true;
-                    System.out.println(gemmy.getUUID());
                 }
             }
             if (!dying) {
@@ -224,9 +212,6 @@ public class ItemGem extends Item {
                 if (nullFlag) ainmneacha = ArrayUtils.remove(ainmneacha, idx);
                 namee = ainmneacha[0];
                 if (ainmneacha.length > 1) skinColorVariant = ainmneacha[1];
-                for (String s : ainmneacha) {
-                    System.out.println(s);
-                }
                 //End of check and set
                 try {
                     if (Objects.equals(this.ID, Gempire.MODID)) {
@@ -236,10 +221,8 @@ public class ItemGem extends Item {
                         //gemm = (RegistryObject<EntityType<EntityPebble>>) AddonHandler.ADDON_ENTITY_REGISTRIES.get(this.ID).getField(namee.toUpperCase()).get(null);
                     }
                     gem = gemm.get().create(world);
-                    System.out.println("gem "+gem);
                     assert gem != null;
                     gem.setUUID(Mth.createInsecureUUID(world.random));
-                    System.out.println(gem.getUUID());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -248,27 +231,17 @@ public class ItemGem extends Item {
                         assert gem != null;
                         if (stack.getTag().contains("assignedID")) {
                             if (stack.getOrCreateTag().getUUID("assignedID") != UUID.fromString("00000000-0000-0000-0000-000000000000")) {
-                                gem.setAssignedId(stack.getOrCreateTag().getUUID("assignedID"));
-                                System.out.println("assigned id " + stack.getOrCreateTag().getUUID("assignedID"));
+                                gem.setAssignedId(stack.getOrCreateTag().getUUID("assignedID"));System.out.println("assigned id " + stack.getOrCreateTag().getUUID("assignedID"));
                             }
                         }
-                        System.out.println("try");
                         gem.setQuality(stack.getTag().getInt("quality"));
                         if (item != null) {
-                            System.out.println("item not null");
                             gem.spawnGem = item;
-                            System.out.println(gem.spawnGem);
                             gem.load(stack.getTag());
                         }
                         if (player != null) {
                             gem.load(stack.getTag());
                         }
-                        System.out.println("gem assigned id "+gem.ASSIGNED_ID);
-                        System.out.println("gem assigned "+gem.getAssignedGem());
-                        System.out.println(stack.getTag());
-                        System.out.println(gem.getFacetAndCut());
-                        System.out.println("stack loaded");
-                        System.out.println("assigned id "+gem.ASSIGNED_ID);
                     } else {
                         assert gem != null;
                         if (ainmneacha.length > 1) {
@@ -278,13 +251,10 @@ public class ItemGem extends Item {
                         if (stack.getTag().contains("assignedID")) {
                             if (stack.getOrCreateTag().getUUID("assignedID") != UUID.fromString("00000000-0000-0000-0000-000000000000")) {
                                 gem.setAssignedId(stack.getOrCreateTag().getUUID("assignedID"));
-                                System.out.println("assigned id " + stack.getOrCreateTag().getUUID("assignedID"));
                             }
                         }
-                        System.out.println("player " + player);
                         if (player != null) {
                             assert gem != null;
-                            System.out.println("finalize spawn");
                             if (!(gem instanceof EntityStarterGem)) {
                                 switch (this.rand.nextInt(10)) {
                                     default -> {
@@ -292,11 +262,9 @@ public class ItemGem extends Item {
                                     }
                                     case 1 -> {
                                         gem.setQuality(0);
-                                        System.out.println("defective");
                                     }
                                     case 2 -> {
                                         gem.setQuality(2);
-                                        System.out.println("prime");
                                     }
                                 }
                             }
@@ -323,10 +291,8 @@ public class ItemGem extends Item {
                         gem.setSkinVariantOnInitialSpawn = false;
                         gem.initalSkinVariant = Integer.parseInt(skinColorVariant);
                     }
-                    System.out.println("player " + player);
                     if (player != null) {
                         assert gem != null;
-                        System.out.println("finalize spawn");
                         switch (this.rand.nextInt(10)) {
                             default -> {
                                 gem.setQuality(1);

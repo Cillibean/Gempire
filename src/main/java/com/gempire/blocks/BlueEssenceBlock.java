@@ -46,8 +46,6 @@ public class BlueEssenceBlock extends LiquidBlock {
                         GemFormEvent event = new GemFormEvent(gem, gem.blockPosition());
                         MinecraftForge.EVENT_BUS.post(event);
                         level.addFreshEntity(gem);
-                        System.out.println(gem.getGemPlacementE());
-                        System.out.println(gem.getOutfitVariant() + " and " + gem.getInsigniaVariant());
                         entity.remove(Entity.RemovalReason.DISCARDED);
                         if (gem.getRandom().nextInt(9) == 0) {
                             level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());

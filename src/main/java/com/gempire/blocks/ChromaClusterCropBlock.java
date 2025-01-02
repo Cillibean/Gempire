@@ -57,14 +57,10 @@ public class ChromaClusterCropBlock extends CropBlock {
         if (!level.isAreaLoaded(pos, 1)) return; // Forge: prevent loading unloaded chunks when checking neighbor's light
         float f = CropBlock.getGrowthSpeed(this, level, pos);
             if (net.minecraftforge.common.ForgeHooks.onCropsGrowPre(level, pos, state, random.nextInt((int)(25.0F / f) + 1) == 0)) {
-                System.out.println("grow pre");
                 int i = state.getValue(AGE);
                 if (i < 5) {
-                    System.out.println("age up");
                     level.setBlock(pos, state.setValue(AGE, i + 1), 2);
-                    System.out.println(i);
                 } else {
-                    System.out.println("grow block");
                     Direction direction = Direction.Plane.HORIZONTAL.getRandomDirection(random);
                     BlockPos blockpos = pos.relative(direction);
                     BlockState blockstate = level.getBlockState(blockpos.below());

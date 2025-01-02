@@ -1,5 +1,8 @@
 package com.gempire;
 
+import com.gempire.config.GempireClientConfigs;
+import com.gempire.config.GempireCommonConfigs;
+import com.gempire.config.GempireServerConfigs;
 import com.gempire.entities.bases.EntityFusion;
 import com.gempire.entities.bosses.base.EntityAlabasterEmpress;
 import com.gempire.entities.bosses.base.EntityAmberHuntress;
@@ -26,7 +29,9 @@ import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.InterModComms;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
@@ -63,6 +68,10 @@ public class Gempire
         RegistryHandler.init();
 
         GeckoLib.initialize();
+
+        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, GempireClientConfigs.SPEC, "gempire-client-config.toml");
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, GempireCommonConfigs.SPEC, "gempire-common-config.toml");
+        ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, GempireServerConfigs.SPEC, "gempire-server-config.toml");
         // Register ourselves for server and other game events we are interested in
         //MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGHEST, ClientProxy::onClientSetup);
         MinecraftForge.EVENT_BUS.register(this);

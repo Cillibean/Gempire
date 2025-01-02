@@ -34,11 +34,9 @@ public class DestabBase extends Item {
 
     public void poofGem(LivingEntity pTarget) {
         if (pTarget.isAlive()){
-            System.out.println("alive");
             if (pTarget instanceof EntityGem) {
                 pTarget.hurt(pTarget.damageSources().magic(), pTarget.getMaxHealth()*20);
                 ((EntityGem) pTarget).setCracked(false);
-                System.out.println("poofed");
             } else if (pTarget instanceof EntityFuchsiaPaladin) {
                 ItemStack stack = new ItemStack(ModItems.PALADIN_FLOWER.get());
                 ItemEntity item = new ItemEntity(pTarget.level(), pTarget.getX(), pTarget.getY(), pTarget.getZ(), stack);
@@ -84,15 +82,12 @@ public class DestabBase extends Item {
     }
     @Override
     public boolean hurtEnemy(ItemStack itemStack, LivingEntity enemy, LivingEntity player) {
-        System.out.println("hurt enemy");
         float f = 1F;
         if (player instanceof Player)
         {
             f = ((Player) player).getAttackStrengthScale(0f);
         }
         if (f == 1) {
-            System.out.println("f 1");
-            System.out.println("begin poof");
             poofGem(enemy);
             itemStack.hurtAndBreak(1, player, (p_43296_) -> p_43296_.broadcastBreakEvent(EquipmentSlot.MAINHAND));
         }

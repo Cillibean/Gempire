@@ -1,6 +1,7 @@
 package com.gempire.entities.gems;
 
 import com.gempire.entities.abilities.base.Ability;
+import com.gempire.config.GempireServerConfigs;
 import com.gempire.entities.ai.*;
 import com.gempire.entities.bases.AbstractQuartz;
 import com.gempire.entities.bases.EntityGem;
@@ -199,7 +200,7 @@ public class EntityQuartz extends AbstractQuartz {
 
     @Override
     public boolean generateIsEmotional() {
-        return true;
+        return GempireServerConfigs.OUTBURSTS.get();
     }
 
     @Override

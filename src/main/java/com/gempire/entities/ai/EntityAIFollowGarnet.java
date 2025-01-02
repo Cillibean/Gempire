@@ -32,7 +32,6 @@ public class EntityAIFollowGarnet extends Goal {
                                     if (newDistance <= maxDistance) {
                                         maxDistance = newDistance;
                                         this.toFollow = entity;
-                                        System.out.println(entity);
                                     }
                                 }
                             }

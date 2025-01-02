@@ -28,7 +28,6 @@ public class PaladinLeechGoal extends Goal {
     }
 
     public void start() {
-        System.out.println("leech goal start");
         super.start();
     }
 

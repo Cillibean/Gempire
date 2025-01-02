@@ -168,14 +168,10 @@ public class TankBlock extends BaseEntityBlock {
     public void neighborChanged(BlockState state, Level worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving) {
         super.neighborChanged(state, worldIn, pos, blockIn, fromPos, isMoving);
         if (!worldIn.isClientSide) {
-            System.out.println("not clientside");
             if (worldIn.getBlockState(pos).getValue(HALF) == DoubleBlockHalf.LOWER) {
-                System.out.println("lower half");
                 if (worldIn.hasNeighborSignal(pos)) {
-                    System.out.println("has neighbour signal");
                 BlockEntity te = worldIn.getBlockEntity(pos);
                 if (te instanceof InjectorTE) {
-                    System.out.println("inject");
                     ((InjectorTE) te).inject();
                 }
                 }

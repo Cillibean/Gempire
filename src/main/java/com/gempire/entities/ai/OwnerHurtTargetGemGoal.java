@@ -1,5 +1,6 @@
 package com.gempire.entities.ai;
 
+import com.gempire.config.GempireServerConfigs;
 import com.gempire.entities.bases.EntityGem;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.TamableAnimal;
@@ -38,14 +39,19 @@ public class OwnerHurtTargetGemGoal extends TargetGoal {
                                         if (n != this.timestamp && this.canAttack(this.ownerLastHurt, TargetingConditions.DEFAULT) && this.entityGem.wantsToAttack(this.ownerLastHurt, player)) {
                                             use = true;
                                         }
-                                    } else if (!((EntityGem) ownerLastHurt).isOwner(this.entityGem.OWNERS.get(i))) {
-                                        return true;
-                                    } else {
-                                        return false;
-                                    }
+                                    } else return !((EntityGem) ownerLastHurt).isOwner(this.entityGem.OWNERS.get(i));
                                 } else {
                                     if (n != this.timestamp && this.canAttack(this.ownerLastHurt, TargetingConditions.DEFAULT) && this.entityGem.wantsToAttack(this.ownerLastHurt, player)) {
+                                        if (ownerLastHurt instanceof Player) {
+                                            if (GempireServerConfigs.GEMS_ATTACK_PLAYERS.get() && !entityGem.OWNERS.contains(ownerLastHurt.getUUID())) {
+                                                use = true;
+                                                return true;
+                                            } else {
+                                                return false;
+                                            }
+                                        }
                                         use = true;
+                                        return true;
                                     }
                                 }
                             }
@@ -67,7 +73,16 @@ public class OwnerHurtTargetGemGoal extends TargetGoal {
                                         }
                                     } else {
                                         if (n != this.timestamp && this.canAttack(this.ownerLastHurt, TargetingConditions.DEFAULT) && this.entityGem.wantsToAttack(this.ownerLastHurt, player)) {
+                                            if (ownerLastHurt instanceof Player) {
+                                                if (GempireServerConfigs.GEMS_ATTACK_PLAYERS.get() && !entityGem.OWNERS.contains(ownerLastHurt.getUUID())) {
+                                                    use = true;
+                                                    return true;
+                                                } else {
+                                                    return false;
+                                                }
+                                            }
                                             use = true;
+                                            return true;
                                         }
                                     }
                                 }

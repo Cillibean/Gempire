@@ -39,7 +39,6 @@ public class EntityAIGuardianDash extends Goal {
     public void tick() {
         super.tick();
         this.follower.getLookControl().setLookAt(this.target.getX(), this.follower.getEyeY(), this.target.getZ());
-        System.out.println(tick);
         if (tick <= 0) {
             this.follower.setPos(this.target.getX(), this.target.getY(), this.target.getZ());
             follower.isDashing = false;

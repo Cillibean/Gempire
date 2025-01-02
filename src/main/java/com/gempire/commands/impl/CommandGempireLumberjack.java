@@ -36,7 +36,6 @@ public class CommandGempireLumberjack extends CommandBase {
                 }
             }
         }
-        System.out.println("run build farm");
         if (entityGem != null) {
             entityGem.runLumberjackCommand(source.getPlayerOrException());
             return Command.SINGLE_SUCCESS;

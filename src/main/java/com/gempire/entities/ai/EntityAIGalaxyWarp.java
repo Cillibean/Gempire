@@ -156,8 +156,6 @@ public class EntityAIGalaxyWarp extends Goal {
         if (materials[0] != null) {
             Item currentMaterial = PeridotRepairResources.list.get(Integer.parseInt(materials[0]));
             int currentAmount = Integer.parseInt(amounts[0]);
-            System.out.println(currentMaterial);
-            System.out.println(currentAmount);
             for (UUID uuid : follower.OWNERS) {
                 follower.level().getPlayerByUUID(uuid).sendSystemMessage(Component.translatable("Peridot requires " + currentAmount + " " + getItemName(currentMaterial.toString(), currentAmount > 1)));
             }

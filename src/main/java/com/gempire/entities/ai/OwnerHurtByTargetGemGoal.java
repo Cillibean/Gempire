@@ -1,5 +1,6 @@
 package com.gempire.entities.ai;
 
+import com.gempire.config.GempireServerConfigs;
 import com.gempire.entities.bases.EntityGem;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.TamableAnimal;
@@ -31,15 +32,27 @@ public class OwnerHurtByTargetGemGoal extends TargetGoal {
                         for (int i = 0; i < this.entityGem.OWNERS.size(); i++) {
                             player = this.entityGem.level().getPlayerByUUID(this.entityGem.OWNERS.get(i));
                             this.ownerLastHurtBy = player.getLastHurtByMob();
+                            boolean check = true;
                             int n = player.getLastHurtByMobTimestamp();
-                            return n != this.timestamp && this.canAttack(this.ownerLastHurtBy, TargetingConditions.DEFAULT) && this.entityGem.wantsToAttack(this.ownerLastHurtBy, player);
+                            if (ownerLastHurtBy instanceof Player) {
+                                if (entityGem.OWNERS.contains(ownerLastHurtBy.getUUID()) || !GempireServerConfigs.GEMS_ATTACK_PLAYERS.get()) {
+                                    check = false;
+                                }
+                            }
+                            return n != this.timestamp && this.canAttack(this.ownerLastHurtBy, TargetingConditions.DEFAULT) && this.entityGem.wantsToAttack(this.ownerLastHurtBy, player) && check;
                         }
                     } else {
                         player = this.entityGem.level().getPlayerByUUID(this.entityGem.OWNERS.get(0));
                         if (this.player != null) {
                             this.ownerLastHurtBy = player.getLastHurtByMob();
+                            boolean check = true;
                             int n = player.getLastHurtByMobTimestamp();
-                            if (n != this.timestamp && this.canAttack(this.ownerLastHurtBy, TargetingConditions.DEFAULT) && this.entityGem.wantsToAttack(this.ownerLastHurtBy, player)) {
+                            if (ownerLastHurtBy instanceof Player) {
+                                if (entityGem.OWNERS.contains(ownerLastHurtBy.getUUID()) || !GempireServerConfigs.GEMS_ATTACK_PLAYERS.get()) {
+                                    check = false;
+                                }
+                            }
+                            if (n != this.timestamp && this.canAttack(this.ownerLastHurtBy, TargetingConditions.DEFAULT) && this.entityGem.wantsToAttack(this.ownerLastHurtBy, player) && check) {
                                 use = true;
                             }
                         }

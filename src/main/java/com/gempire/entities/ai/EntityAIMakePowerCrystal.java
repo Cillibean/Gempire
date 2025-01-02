@@ -36,7 +36,6 @@ public class EntityAIMakePowerCrystal extends Goal {
                             if (this.follower.level().getBlockState(this.follower.blockPosition().offset(x, y, z)).getBlock() == Blocks.REDSTONE_BLOCK) {
                                 hopper = this.follower.blockPosition().offset(x, y, z);
                                 found = true;
-                                System.out.println("Redstone Found");
                             }
                         }
                     }
