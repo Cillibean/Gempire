@@ -34,5 +34,6 @@ public class RegistryHandler {
         ModPotions.POTIONS.register(bus);
         ModStructures.DEFERRED_REGISTRY_STRUCTURE.register(bus);
         ModStructures.STRUCTURE_PIECE_TYPE_DEFERRED_REGISTER.register(bus);
+        ModParticles.PARTICLE_TYPES.register(bus);
     }
 }

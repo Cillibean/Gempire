@@ -3,12 +3,18 @@
   "downfall": 0.4,
   "has_precipitation": false,
   "effects": {
-    "sky_color": 10539254,
+    "sky_color": 8896237,
     "fog_color": 9541114,
     "water_color": 5879527,
     "water_fog_color": 10004175,
     "grass_color": 5482479,
     "foliage_color": 5482479,
+    "particle": {
+      "probability": 0.01428,
+      "options": {
+        "type": "gempire:distant_leaves"
+      }
+    },
     "music": {
       "sound": "gempire:fragments",
       "min_delay": 0,

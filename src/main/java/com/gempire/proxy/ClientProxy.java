@@ -15,6 +15,7 @@ import com.gempire.client.screen.warppad.WarpSelectionScreen;
 import com.gempire.client.ter.ShellTER;
 import com.gempire.fluids.ModFluidTypes;
 import com.gempire.init.*;
+import com.gempire.particle.DistantForestParticles;
 import com.gempire.tileentities.BlueAltarTE;
 import com.gempire.tileentities.WhiteAltarTE;
 import com.gempire.tileentities.YellowAltarTE;
@@ -155,6 +156,11 @@ public class ClientProxy {
         Sheets.addWoodType(ModWoodTypes.KALEIDOSCOPE);
         Sheets.addWoodType(ModWoodTypes.SHADED);
     }
+
+        @SubscribeEvent
+        public static void registerParticleFactories(RegisterParticleProvidersEvent event) {
+            event.registerSpriteSet(ModParticles.DISTANT_LEAVES.get(), DistantForestParticles.Provider::new);
+        }
 
     @SubscribeEvent
     public static void buildContents(BuildCreativeModeTabContentsEvent event) {
