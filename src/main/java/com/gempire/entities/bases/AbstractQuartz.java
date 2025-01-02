@@ -1,5 +1,6 @@
 package com.gempire.entities.bases;
 
+import com.gempire.config.GempireServerConfigs;
 import com.gempire.entities.abilities.*;
 import com.gempire.entities.abilities.base.Ability;
 import net.minecraft.sounds.SoundEvent;
@@ -31,7 +32,9 @@ public abstract class AbstractQuartz extends EntityVaryingGem implements RangedA
     public ArrayList<Ability> possibleAbilities() {
         ArrayList<Ability> arrayList = new ArrayList<>();
         arrayList.add(new AbilityZilch());
-        arrayList.add(new AbilityPyrokinesis());
+        if (GempireServerConfigs.PYROKINESIS.get()) {
+            arrayList.add(new AbilityPyrokinesis());
+        }
         arrayList.add(new AbilityCryokinesis());
         arrayList.add(new AbilityUnhinged());
         arrayList.add(new AbilityBeefcake());

@@ -9,6 +9,7 @@ public class GempireServerConfigs {
     public static final ForgeConfigSpec.ConfigValue<Boolean> GEMS_ATTACK_PLAYERS;
     public static final ForgeConfigSpec.ConfigValue<Boolean> OUTBURSTS;
     public static final ForgeConfigSpec.ConfigValue<Boolean> REBELLION;
+    public static final ForgeConfigSpec.ConfigValue<Boolean> PYROKINESIS;
 
     static {
         BUILDER.push("Gempire Server Configuration");
@@ -21,6 +22,8 @@ public class GempireServerConfigs {
                 .define("Outbursts", true);
         REBELLION = BUILDER.comment("State if you would like gems to rebel")
                 .define("Rebellion", true);
+        PYROKINESIS = BUILDER.comment("State if you would like gems to have Pyrokinesis")
+                .define("Pyrokinesis", true);
 
         BUILDER.pop();
         SPEC = BUILDER.build();
