@@ -5,6 +5,7 @@ import com.gempire.blocks.*;
 import com.gempire.blocks.machine.*;
 import com.gempire.worldgen.tree.CrystalTreeGrower;
 import com.gempire.worldgen.tree.DistantTreeGrower;
+import com.gempire.worldgen.tree.KaleidoscopeTreeGrower;
 import com.gempire.worldgen.tree.ShadedTreeGrower;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -628,7 +629,7 @@ public class ModBlocks {
             });
 
     public static final RegistryObject<Block> KALEIDOSCOPE_SAPLING = BLOCKS.register("kaleidoscope_sapling", () ->
-            new SaplingBlock(new DistantTreeGrower(), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)));
+            new SaplingBlock(new KaleidoscopeTreeGrower(), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)));
 
     public static final RegistryObject<Block> KALEIDOSCOPE_PLANKS = BLOCKS.register("kaleidoscope_planks", () ->
             new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)) {
