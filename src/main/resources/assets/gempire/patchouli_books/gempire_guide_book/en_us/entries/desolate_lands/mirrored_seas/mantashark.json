@@ -12,10 +12,16 @@
       "text": "A ray-like creature found in the Mirrored Seas. Hostile to the player."
     },
     {
+      "type": "patchouli:empty"
+    },
+    {
       "type": "patchouli:entity",
       "entity": "gempire:opal_mantashark",
       "name": "Opalized Mantashark",
-      "rotate": "true",
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:text",
       "text": "A ray-like creature found in the Mirrored Seas. Hostile to the player.$(br)Killing an Opalized Mantashark may get you an Opalized Tooth, useful in making Prismatic Shears."
     }
   ]
