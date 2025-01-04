@@ -7,7 +7,7 @@
     {
       "type": "patchouli:entity",
       "entity": "gempire:zircon{hairColor:6324980,gemColor:2835390,skinColor:3032779,hairVariant:0,insigniaColor:11,outfitColor:11,gemPlacement:11,xscale:1,yscale:1,zscale:1}",
-      "name": "A Zircon",
+      "name": "Zircon",
       "rotate": "true",
       "offset": 0.2,
       "text": "A rare gem that spawns with a random enchantment, and can enchant items with it. Needs Lapis Lazuli and can be given gold and other items to make EXP prices lower."

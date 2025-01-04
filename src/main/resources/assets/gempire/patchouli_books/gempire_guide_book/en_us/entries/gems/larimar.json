@@ -7,10 +7,10 @@
     {
       "type": "patchouli:entity",
       "entity": "gempire:larimar{gemColor:11908349,skinColor:9174243,hairColor:15596798,hairVariant:0,insigniaColor:3,outfitColor:3,gemPlacement:0,xscale:1,yscale:1,zscale:1}",
-      "name": "A Larimar",
+      "name": "Larimar",
       "rotate": "true",
       "offset": 0.2,
-      "text": "A gem that can create ice sculptures (NYI). Also uses cryokinesis."
+      "text": "A gem that can create ice sculptures. Also uses cryokinesis to defend herself."
     },
     {
       "type": "patchouli:text",

@@ -1,0 +1,19 @@
+{
+  "name": "Opalized Tooth",
+  "icon": "gempire:opalized_tooth",
+  "advancement": "gempire:root",
+  "category": "gempire:misc",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "link_recipe ": true,
+      "item": "gempire:opalized_tooth",
+      "text": "A tooth from the Opalized Mantashark with a beautiful sheen. They are useful in the process of making Prismatic Shears."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "gempire:prismatic_shears",
+      "text": "The recipe for Prismatic Shears."
+    }
+  ]
+}

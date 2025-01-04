@@ -7,7 +7,7 @@
     {
       "type": "patchouli:entity",
       "entity": "gempire:morganite{gemColor:16687003,skinColor:16699852,hairColor:16416152,hairVariant:0,insigniaColor:6,outfitColor:6,gemPlacement:11,xscale:1,yscale:1,zscale:1}",
-      "name": "A Morganite",
+      "name": "Morganite",
       "rotate": "true",
       "text": "A gem that can create many decorative blocks, see page 3 for recipes."
     },
@@ -17,7 +17,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "$(l)Recipes$()$(br)To make a hand Pedestal, give her stone."
+      "text": "$(l)Recipes$()$(br)To make a stone hand pedestal, put a block of stone into her hand.$(br)To make a diamond lattice block, put iron bars into her hand and a Chroma color of your choosing into her inventory.$(br)To make diamond glass, put a glass block in her hand and a Chroma color of your choosing into her inventory.$(br)To make an uncolored phosphorus lamp, put a redstone lamp in her hand and one cluster of selenite in her inventory.$(br)To make colored phosphorus lamps, put an uncolored phosphorus lamp into her hand and a Chroma color of your choosing in her inventory."
     },
     {
       "type": "patchouli:text",

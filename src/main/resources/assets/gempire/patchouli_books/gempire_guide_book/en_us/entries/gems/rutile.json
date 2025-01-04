@@ -7,7 +7,7 @@
     {
       "type": "patchouli:entity",
       "entity": "gempire:rutile{hairColor:4654622,gemColor:10488843,skinColor:14823472,hairVariant:0,insigniaColor:1,outfitColor:14,gemPlacement:3,xscale:1,yscale:1,zscale:1}",
-      "name": "A Rutile",
+      "name": "Rutile",
       "rotate": "true",
       "offset": 0.2,
       "text": "A cave dwelling gem that when given torches, places them in dark spaces. She can also seek out blocks of interest, like ore and mob spawners."

@@ -1,6 +1,6 @@
 {
   "name": "Iridescent Plains",
-  "description": "Information on the Iridescent Plains.",
+  "description": "Information on the Iridescent Plains biome.",
   "icon": "gempire:pink_chroma",
   "secret": "false",
   "parent": "gempire:desolate_lands"

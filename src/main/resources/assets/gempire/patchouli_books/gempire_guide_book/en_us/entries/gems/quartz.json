@@ -7,10 +7,10 @@
     {
       "type": "patchouli:entity",
       "entity": "gempire:quartz{skinColor:14472175,hairColor:16512511,gemColor:12347117,gemPlacement:11,hairVariant:0,insigniaColor:10,outfitColor:10,xscale:1,yscale:1,zscale:1}",
-      "name": "A Quartz",
+      "name": "Quartz",
       "rotate": "true",
       "offset": 0.2,
-      "text": "A mid-game soldier, has many possible abilities."
+      "text": "A mid-game soldier who has many possible abilities, very versatile for a colony."
     },
     {
       "type": "patchouli:text",

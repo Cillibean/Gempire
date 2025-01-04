@@ -1,14 +1,14 @@
 {
-  "name": "Rock Candy",
-  "icon": "gempire:blue_crystal_apple",
+  "name": "Crystal Apples",
+  "icon": "gempire:pink_crystal_apple",
   "advancement": "gempire:root",
   "category": "gempire:distant_forest",
   "pages": [
     {
       "type": "patchouli:spotlight",
       "title": "Crystal Apples",
-      "item": "gempire:blue_crystal_apple",
-      "text": "An apple found on crystal trees, even with a solid outer coating, they can be quite nutritious and tasty!"
+      "item": "gempire:blue_crystal_apple,gempire:pink_crystal_apple,gempire:purple_crystal_apple",
+      "text": "An apple found on crystal trees. Even with a solid outer coating, they can be quite nutritious and tasty!"
     }
   ]
 }

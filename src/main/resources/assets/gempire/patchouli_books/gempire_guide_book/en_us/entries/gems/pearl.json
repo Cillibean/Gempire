@@ -7,10 +7,10 @@
     {
       "type": "patchouli:entity",
       "entity": "gempire:pearl{hairColor:16363770,gemColor:15720175,skinColor:16116975,hairVariant:4,insigniaColor:6,outfitColor:6,gemPlacement:17,outfitVariant:5,insigniaVariant:3,xscale:1,yscale:1,zscale:1}",
-      "name": "A Pearl",
+      "name": "Pearl",
       "rotate": "true",
       "offset": 0.1,
-      "text": "A utility gem that can hold up a multitude of items in her inventory. She can also be customized right from her GUI. Higher quality Pearls can hold more in their GUI as well."
+      "text": "A utility gem that can hold up a multitude of items in her inventory. She can also be customized right from her GUI. Higher quality Pearls can hold more in their inventory as well."
     }
   ]
 }

@@ -1,0 +1,13 @@
+{
+  "name": "Diamond Glass",
+  "icon": "gempire:pink_diamond_glass",
+  "advancement": "gempire:root",
+  "category": "gempire:misc",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "gempire:pink_diamond_glass",
+      "text": "Diamond glass is obtained from gems with the Designer ability by giving them a block of glass and a piece of Chroma in your choice of color."
+    }
+  ]
+}

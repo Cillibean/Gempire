@@ -7,7 +7,7 @@
     {
       "type": "patchouli:entity",
       "entity": "gempire:spinel{hairColor:14296965,gemColor:16738220,skinColor:16754642,hairVariant:7,insigniaColor:0,outfitColor:6,gemPlacement:11,xscale:1,yscale:1,zscale:1}",
-      "name": "A Spinel",
+      "name": "Spinel",
       "rotate": "true",
       "scale": 0.7,
       "offset": 0.2,

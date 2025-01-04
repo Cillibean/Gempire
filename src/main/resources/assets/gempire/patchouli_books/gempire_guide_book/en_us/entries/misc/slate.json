@@ -8,7 +8,7 @@
       "type": "patchouli:spotlight",
       "link_recipe ": true,
       "item": "gempire:slate",
-      "text": "Slate is produced by combining stone, iron and Chroma. You then throw it into a furnace to 'prime' it and use it in certain inactive gem base recipes."
+      "text": "Slate is produced by combining stone, an iron ingot and Chroma. You then throw it into a furnace to 'prime' it and use it in certain inactive gem base recipes."
     },
     {
       "type": "patchouli:crafting",

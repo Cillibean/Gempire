@@ -1,6 +1,6 @@
 {
   "name": "Prismatic Gates",
-  "description": "Information on the Prismatic Gates.",
+  "description": "Information on the Prismatic Gates biome.",
   "icon": "gempire:white_chroma",
   "secret": "false",
   "parent": "gempire:desolate_lands"

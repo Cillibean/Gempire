@@ -1,0 +1,13 @@
+{
+  "name": "Phosphorus Lamp",
+  "icon": "gempire:phosphorus_lamp",
+  "advancement": "gempire:root",
+  "category": "gempire:misc",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "gempire:phosphorus_lamp",
+      "text": "Phosphorus lamps are obtained from gems with the Designer ability by giving them a redstone lamp and a piece of selenite. These blocks can be powered by redstone to illuminate an area."
+    }
+  ]
+}

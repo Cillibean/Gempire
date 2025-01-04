@@ -13,7 +13,7 @@
     {
       "type": "patchouli:multiblock",
       "name": "Shell",
-      "text": "In order to have your Nacre construct a Shell, you will need to build this multiblock, then interact with her with a pickaxe in your hand.",
+      "text": "In order to have your Nacre construct a Shell, you will need to build this multiblock, then right click on her with a pickaxe in your hand.",
       "multiblock": {
         "pattern": [
           ["C"],

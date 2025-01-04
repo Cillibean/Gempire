@@ -17,9 +17,11 @@ public class AbilityDesigner extends Ability implements ICraftingAbility {
     }
     @Override
     public void setup() {
+        //stone pedestal recipe
         input.add(Items.STONE);
         input2.add(Items.AIR);
         output.add(ModItems.PEDISTAL.get());
+        //lattice recipes
         input.add(Items.IRON_BARS);
         input2.add(ModItems.RED_CHROMA.get());
         output.add(ModItems.RED_LATTICE.get());
@@ -68,6 +70,7 @@ public class AbilityDesigner extends Ability implements ICraftingAbility {
         input.add(Items.IRON_BARS);
         input2.add(ModItems.BROWN_CHROMA.get());
         output.add(ModItems.BROWN_LATTICE.get());
+        //diamond glass recipes
         input.add(Items.GLASS);
         input2.add(ModItems.RED_CHROMA.get());
         output.add(ModItems.RED_DIAMOND_GLASS.get());
@@ -119,9 +122,11 @@ public class AbilityDesigner extends Ability implements ICraftingAbility {
         input.add(Items.GLASS);
         input2.add(ModItems.SPECIAL_CHROMA.get());
         output.add(ModItems.PRISMATIC_DIAMOND_GLASS.get());
+        //phosphorus lamp recipe
         input.add(Items.REDSTONE_LAMP);
         input2.add(ModItems.SELENITE_CLUSTER.get());
         output.add(ModItems.PHOSPHORUS_LAMP.get());
+        //colored phosphorus lamp recipes
         input.add(ModItems.PHOSPHORUS_LAMP.get());
         input2.add(ModItems.RED_CHROMA.get());
         output.add(ModItems.RED_PHOSPHORUS_LAMP.get());
@@ -167,7 +172,6 @@ public class AbilityDesigner extends Ability implements ICraftingAbility {
         input.add(ModItems.PHOSPHORUS_LAMP.get());
         input2.add(ModItems.BROWN_CHROMA.get());
         output.add(ModItems.BROWN_PHOSPHORUS_LAMP.get());
-
         input.add(ModItems.RED_PHOSPHORUS_LAMP.get());
         input2.add(ModItems.WHITE_CHROMA.get());
         output.add(ModItems.PHOSPHORUS_LAMP.get());

@@ -7,10 +7,10 @@
     {
       "type": "patchouli:entity",
       "entity": "gempire:bixbite{gemColor:13714527,skinColor:13921923,hairColor:16514266,hairVariant:0,insigniaColor:14,outfitColor:14,gemPlacement:11,xscale:1,yscale:1,zscale:1}",
-      "name": "A Bixbite",
+      "name": "Bixbite",
       "rotate": "true",
       "offset": 0.4,
-      "text": "A rare utility gem that can uncraft certain items, giving back their components (NYI). She also gives off a haste effect."
+      "text": "A rare utility gem that can deconstruct certain items, giving back their components. She also gives off a haste effect."
     },
     {
       "type": "patchouli:text",
