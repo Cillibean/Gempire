@@ -1,12 +1,12 @@
 {
   "name": "Diamond Lattice",
-  "icon": "gempire:pink_diamond_lattice",
+  "icon": "gempire:pink_lattice",
   "advancement": "gempire:root",
   "category": "gempire:misc",
   "pages": [
     {
       "type": "patchouli:spotlight",
-      "item": "gempire:pink_diamond_lattice",
+      "item": "gempire:pink_lattice",
       "text": "Diamond lattices are obtained from gems with the Designer ability by giving them a set of iron bars and a piece of Chroma in your choice of color."
     }
   ]
