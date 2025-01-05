@@ -1016,6 +1016,12 @@
   "item.minecraft.potion.effect.shade_resistance_potion": "Potion of Shade Resistance",
   "item.minecraft.splash_potion.effect.shade_resistance_potion": "Splash Potion of Shade Resistance",
   "item.minecraft.lingering_potion.effect.shade_resistance_potion": "Lingering Potion of Shade Resistance",
+  "item.minecraft.tipped_arrow.effect.shock_resistance_potion": "Arrow of Shock Resistance",
+  "item.minecraft.tipped_arrow.effect.electrocution_potion": "Arrow of Electrocution",
+  "item.minecraft.tipped_arrow.effect.shade_potion": "Arrow of Shade",
+  "item.minecraft.tipped_arrow.effect.calm_potion": "Arrow of Calm",
+  "item.minecraft.tipped_arrow.effect.floral_protection_potion": "Arrow of Floral Protection",
+  "item.minecraft.tipped_arrow.effect.shade_resistance_potion": "Arrow of Shade Resistance",
 
   "nickname.gempire.sapphire_0": "White Sapphire",
   "nickname.gempire.sapphire_1": "Padparadscha",

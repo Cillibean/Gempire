@@ -1633,9 +1633,9 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     }
 
     public Item getGemItem() {
-        RegistryObject<Item> gemm = ModItems.PEBBLE_GEM;
+        RegistryObject<Item> gemm;
         ItemGem gem = null;
-        String name = "";
+        String name;
         if(this instanceof EntityVaryingGem && !(this instanceof EntitySapphire)){
             if(((EntityVaryingGem)this).UsesUniqueNames()) {
                 name = ((EntityVaryingGem) this).NameFromColor((byte) this.getSkinColorVariant()) + "_" + this.getWholeGemName() + "_gem";
@@ -1657,9 +1657,9 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     }
 
     public Item getShardItem() {
-        RegistryObject<Item> shardd = ModItems.PEBBLE_GEM;
+        RegistryObject<Item> shardd;
         Item shard = null;
-        String name = "";
+        String name;
         if (getColor() <= 15) {
             name = Color.getColorName(getColor()) + "_shards";
         } else {

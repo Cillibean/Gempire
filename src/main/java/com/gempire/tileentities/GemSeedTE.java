@@ -1,5 +1,6 @@
 package com.gempire.tileentities;
 
+import com.gempire.blocks.DrainedBlock;
 import com.gempire.blocks.GemSeedBlock;
 import com.gempire.blocks.machine.PowerCrystalBlock;
 import com.gempire.blocks.machine.TankBlock;
@@ -99,7 +100,7 @@ public class GemSeedTE extends BlockEntity {
             if (te.ticks % te.speed == 0) {
                 if (!te.spawned) {
                     if (!te.level.isClientSide) {
-                        //System.out.println("form gem");
+                        System.out.println("form gem");
                         te.drainForm();
                         level.sendBlockUpdated(te.getBlockPos(), te.getBlockState(), te.getBlockState(), 2);
                         te.setChanged();
@@ -179,7 +180,8 @@ public class GemSeedTE extends BlockEntity {
                 !(block == ModBlocks.DRAINED_ICE.get()) &&
                 !(block == ModBlocks.DRAINED_LOG_CRACKED.get()) &&
                 !(block == ModBlocks.DRAINED_LOG.get()) &&
-                !(block == ModBlocks.PEDISTAL.get())) {
+                !(block == ModBlocks.PEDISTAL.get()) &&
+                !(block instanceof DrainedBlock)) {
             if (block == Blocks.DIRT || block == Blocks.GRASS_BLOCK || block == Blocks.DIRT_PATH
                     || block == Blocks.GRAVEL || block == Blocks.MOSS_BLOCK) {
                 this.level.setBlockAndUpdate(blockPos, this.drained_soil.defaultBlockState());

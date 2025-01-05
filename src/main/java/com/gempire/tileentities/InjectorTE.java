@@ -198,6 +198,9 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
         if (this.whiteOpen) {
             portionToDrain++;
         }
+
+        if (!fluidValid()) return;
+
         if (!pinkTank.isEmpty() && pinkOpen) {
             info.resources[0] += 10;
             pinkTank.getFluid().setAmount(Math.max(pinkTank.getFluidAmount() - (200 / portionToDrain), 0));
@@ -214,13 +217,24 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
             info.resources[1] += 10;
             whiteTank.getFluid().setAmount(Math.max(whiteTank.getFluidAmount() - (200 / portionToDrain), 0));
         }
+
         ItemStack chromaStack = itemHandler.getStackInSlot(CHROMA_INPUT_SLOT_INDEX);
         info.setChroma(((ItemChroma) chromaStack.getItem()).color);
 
         // grow
 
         BlockPos crystalPos = getBlockPos().above().above();
-        BlockPos seedPos = this.getBlockPos().offset(new BlockPos(0, (int) (-Math.ceil(11 / 2) - 1 - 1), 0));
+        BlockPos seedPos = this.getBlockPos().offset(new BlockPos(0, -7, 0));
+        for (int i = 0; i < 30; i++) {
+            Block seed = level.getBlockState(seedPos).getBlock();
+            if (seed == ModBlocks.GEM_SEED_BLOCK.get() || seed == Blocks.AIR || seed == Blocks.WATER) {
+                seedPos = seedPos.offset(0, -10, 0);
+            }
+            else break;
+        }
+
+        System.out.println("[GEMPIRE] Gem seed placed at " + seedPos);
+
         BlockPos cornerPos = seedPos.offset(-5, -5, -5);
         HashMap<BlockPos, Boolean> map = new HashMap<>();
         info.temp = level.getBiome(seedPos).get().getBaseTemperature();
@@ -246,7 +260,6 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
                 gemSeedTE.setFacing(facing);
                 gemSeedTE.setChroma(info.chroma);
                 gemSeedTE.setInfo(info);
-                System.out.println("Facing :" + facing);
                 itemHandler.extractItem(InjectorTE.CHROMA_INPUT_SLOT_INDEX, 1, false);
                 itemHandler.extractItem(InjectorTE.PRIME_INPUT_SLOT_INDEX, 1, false);
                 this.level.sendBlockUpdated(this.worldPosition, this.getBlockState(), this.getBlockState(), 2);
@@ -329,7 +342,7 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
     }
 
 
-    public void Inject() {
+    public void validCheck() {
         if (getValid()) {
             invalid = true;
             /*BlockPos crystalPos = getBlockPos().above().above();
@@ -411,10 +424,10 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
                         }
                     }
                 }*/
-            if (!level.isClientSide) inject();
+                if (!level.isClientSide) inject();
             } else {
-            invalid = false;
-        }
+                invalid = false;
+            }
         }
 
     public static int getFacingFromState(BlockState state){

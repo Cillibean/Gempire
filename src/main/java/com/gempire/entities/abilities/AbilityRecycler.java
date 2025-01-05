@@ -5,12 +5,14 @@ import com.gempire.entities.abilities.interfaces.IIdleAbility;
 import com.gempire.init.ModItems;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.SmithingTrimRecipe;
+import net.minecraftforge.common.Tags;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -78,20 +80,19 @@ public class AbilityRecycler extends Ability implements IIdleAbility {
                     listi2.addAll(List.of(ingredient.getItems()));
                 }
                 for (ItemStack stack2 : listi2) {
+                    if (stack2.is(Tags.Items.STONE)) {
+                        if (!stack2.is(Items.COBBLESTONE)) {
+                            break;
+                        }
+                    }
+                    if (stack2.is(ItemTags.STONE_CRAFTING_MATERIALS)) {
+                        if (!stack2.is(Items.COBBLESTONE)) {
+                            break;
+                        }
+                    }
                     listi3.add(stack2.getItem());
                 }
-                Item cobblestone = Items.COBBLESTONE;
-                Item deepslate = Items.COBBLED_DEEPSLATE;
-                Item blackstone = Items.BLACKSTONE;
                 Item stick = Items.STICK;
-                if (listi3.contains(cobblestone) && listi3.contains(deepslate) && listi3.contains(blackstone)) {
-                    listi3.remove(deepslate);
-                    listi3.remove(blackstone);
-                    listi3.remove(deepslate);
-                    listi3.remove(blackstone);
-                    listi3.remove(deepslate);
-                    listi3.remove(blackstone);
-                }
                 listi3.remove(stick);
                 listi3.remove(stick);
                 for (Item item2 : listi3) {

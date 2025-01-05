@@ -172,7 +172,7 @@ public class TankBlock extends BaseEntityBlock {
                 if (worldIn.hasNeighborSignal(pos)) {
                 BlockEntity te = worldIn.getBlockEntity(pos);
                 if (te instanceof InjectorTE) {
-                    ((InjectorTE) te).inject();
+                    ((InjectorTE) te).validCheck();
                 }
                 }
             }

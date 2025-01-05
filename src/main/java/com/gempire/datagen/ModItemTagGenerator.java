@@ -34,6 +34,32 @@ public class ModItemTagGenerator extends ItemTagsProvider {
                         ModItems.PRISMATIC_INGOT.get()
                 );
 
+        this.tag(ItemTags.LOGS_THAT_BURN)
+                .add(ModItems.KALEIDOSCOPE_LOG.get(),
+                        ModItems.STRIPPED_KALEIDOSCOPE_LOG.get(),
+                        ModItems.CRYSTAL_LOG.get(),
+                        ModItems.STRIPPED_CRYSTAL_LOG.get(),
+                        ModItems.DISTANT_LOG.get(),
+                        ModItems.STRIPPED_DISTANT_LOG.get(),
+                        ModItems.SHADED_LOG.get(),
+                        ModItems.STRIPPED_SHADED_LOG.get(),
+                        ModItems.KALEIDOSCOPE_WOOD.get(),
+                        ModItems.STRIPPED_KALEIDOSCOPE_WOOD.get(),
+                        ModItems.CRYSTAL_WOOD.get(),
+                        ModItems.STRIPPED_CRYSTAL_WOOD.get(),
+                        ModItems.DISTANT_WOOD.get(),
+                        ModItems.STRIPPED_DISTANT_WOOD.get(),
+                        ModItems.SHADED_WOOD.get(),
+                        ModItems.STRIPPED_SHADED_WOOD.get()
+                );
+
+        this.tag(ItemTags.PLANKS)
+                .add(ModItems.KALEIDOSCOPE_PLANKS.get(),
+                        ModItems.CRYSTAL_PLANKS.get(),
+                        ModItems.DISTANT_PLANKS.get(),
+                        ModItems.SHADED_PLANKS.get()
+                );
+
         this.tag(ItemTags.FLOWERS)
                 .add(ModItems.ALIEN_FLOWER.get(),
                         ModItems.WHITE_IRIS.get(),
