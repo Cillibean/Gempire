@@ -1,0 +1,12 @@
+{
+  "name": "The Kindergartens",
+  "icon": "gempire:drained_purple_stone",
+  "advancement": "gempire:root",
+  "category": "gempire:overworld_biomes",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Gem injection sites from long ago. They were taking everything and leaving nothing behind."
+    }
+  ]
+}

@@ -6,11 +6,11 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "There are three qualities of gems that can show up as a result of your incubation efforts. Perfect, also known as prime gems, standard gems, and off-color, also known as defective gems."
+      "text": "There are three qualities of gems that can show up as a result of your injection and incubation efforts. Perfect, also known as prime gems, standard gems; and off-color, also known as defective gems."
     },
     {
       "type": "patchouli:text",
-      "text": "Perfect gems emerge with greater stats and more ability slots, they are more powerful and are the most desired version of a gem. In the inventory, a perfect gemstone will have an animated sparkle.$(br2)They have a higher chance of emerging when there are plentiful amounts of cruxes added to your Incubator."
+      "text": "Perfect gems emerge with greater stats and more ability slots, they are more powerful and are the most desired version of a gem. In the inventory, a perfect gemstone will have an animated sparkle.$(br2)They have a higher chance of emerging when there are plentiful amounts of cruxes around your injection site, or when they're added to your Incubator."
     },
     {
       "type": "patchouli:text",
@@ -18,7 +18,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "Off-color gems emerge with lesser stats and fewer ability slots, they are considered to be garbage or undesirable. The model of an off-color gem will be skewed and misshapen.$(br2)Off-color gems have a higher chance of emerging when there aren't enough cruxes added to your Incubator."
+      "text": "Off-color gems emerge with lesser stats and fewer ability slots, they are considered to be garbage or undesirable. The model of an off-color gem will be skewed and misshapen.$(br2)Off-color gems have a higher chance of emerging when there aren't enough cruxes around your injection site or added to your Incubator."
     }
   ]
 }

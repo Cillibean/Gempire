@@ -1,0 +1,12 @@
+{
+  "name": "Strawberry Battlefield",
+  "icon": "gempire:strawberry",
+  "advancement": "gempire:root",
+  "category": "gempire:overworld_biomes",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A war-torn battlefield littered with ancient weapons and gigantic strawberries ripe for the taking."
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 {
   "name": "Gilded Wastes",
-  "description": "Information on the Gilded Wastes.",
+  "description": "Information on the Gilded Wastes biome.",
   "icon": "gempire:shock_berry",
   "secret": "false",
   "parent": "gempire:desolate_lands"

@@ -1,0 +1,14 @@
+{
+  "name": "Pincule",
+  "icon": "gempire:pincule",
+  "advancement": "gempire:root",
+  "category": "gempire:abnormal_sands",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Pincule",
+      "item": "gempire:pincule",
+      "text": "A prickly purple pint-sized peculiar cactus."
+    }
+  ]
+}

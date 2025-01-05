@@ -1,0 +1,13 @@
+{
+  "name": "Galaxy Warp",
+  "icon": "gempire:galaxy_warp",
+  "advancement": "gempire:root",
+  "category": "gempire:gem_concepts",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "gempire:galaxy_warp",
+      "text": "Often broken on Earth's retired colony, these were once intergalactic hubs. Use a Peridot to fix its core, then press '.' to use it to travel to distant lands."
+    }
+  ]
+}

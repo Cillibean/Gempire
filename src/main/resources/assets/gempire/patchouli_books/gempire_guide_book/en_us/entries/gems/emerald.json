@@ -7,10 +7,10 @@
     {
       "type": "patchouli:entity",
       "entity": "gempire:emerald{gemColor:47224,skinColor:7601316,hairColor:1494665,hairVariant:0,insigniaColor:13,outfitColor:13,gemPlacement:2,xscale:1,yscale:1,zscale:1}",
-      "name": "An Emerald",
+      "name": "Emerald",
       "rotate": "true",
       "offset": 0.4,
-      "text": "A rare combat gem that, when given an Eye of Ender in her inventory, brings you back home to your bed when you use /recall."
+      "text": "A rare combat gem that, when given an Eye of Ender in her inventory, returns you back home to your bed when you use the /recall command."
     },
     {
       "type": "patchouli:text",

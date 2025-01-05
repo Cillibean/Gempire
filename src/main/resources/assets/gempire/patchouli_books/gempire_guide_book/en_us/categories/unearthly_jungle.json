@@ -1,6 +1,6 @@
 {
   "name": "Unearthly Jungle",
-  "description": "Information on the Unearthly Jungle.",
+  "description": "Information on the Unearthly Jungle biome.",
   "icon": "minecraft:jungle_sapling",
   "secret": "false",
   "parent": "gempire:desolate_lands"

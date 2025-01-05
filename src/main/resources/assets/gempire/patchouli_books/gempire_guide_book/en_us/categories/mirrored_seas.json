@@ -1,6 +1,6 @@
 {
   "name": "Mirrored Skies",
-  "description": "Information on the Mirrored Skies.",
+  "description": "Information on the Mirrored Seas biome.",
   "icon": "gempire:blue_chroma",
   "secret": "false",
   "parent": "gempire:desolate_lands"

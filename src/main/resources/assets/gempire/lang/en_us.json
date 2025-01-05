@@ -722,10 +722,10 @@
   "item.gempire.gilded_lapis": "Speed Booster",
 
   "item.gempire.essence_bottle": "Essence Bottle",
-  "item.gempire.pink_essence": "Pink Essence",
-  "item.gempire.yellow_essence": "Yellow Essence",
-  "item.gempire.blue_essence": "Blue Essence",
-  "item.gempire.white_essence": "White Essence",
+  "item.gempire.pink_essence": "Pink Gem Essence",
+  "item.gempire.yellow_essence": "Yellow Gem Essence",
+  "item.gempire.blue_essence": "Blue Gem Essence",
+  "item.gempire.white_essence": "White Gem Essence",
 
   "item.gempire.ruby_gem": "Ruby Gem",
 
@@ -1207,17 +1207,17 @@
   "screens.gempire.poof": "Poof",
 
   "commands.gempire.noeye": "She needs an Eye of Ender!",
-  "commands.gempire.nofarmresources": "She doesn't have the required resources!",
   "commands.gempire.recall": "Recalled successfully!",
+  "commands.gempire.nofarmresources": "She doesn't have the required resources!",
   "commands.gempire.nounderstand": "I'm not sure she understands...",
   "commands.gempire.norecstruc": "I'm not sure she recognises that structure...",
   "commands.gempire.norecbio": "I'm not sure she recognises that biome...",
   "commands.gempire.faillocate": "I don't think she could find anything...",
   "commands.gempire.foundit": "Here's your map! Please check her inventory.",
-  "commands.gempire.nomap": "She needs a map!",
+  "commands.gempire.nomap": "She needs a map! Please place an empty one into her inventory.",
 
   "gempire.subtitle.inject": "Injector injects gem seed",
-  "gempire.subtitle.poof": "Gem poofed",
+  "gempire.subtitle.poof": "Gem is poofed",
   "gempire.subtitle.whistle": "Gem Whistle plays",
 
   "gempire.subtitle.crawler_attack": "Crawler attacks",

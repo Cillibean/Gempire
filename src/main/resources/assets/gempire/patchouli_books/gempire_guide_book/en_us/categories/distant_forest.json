@@ -1,6 +1,6 @@
 {
   "name": "Distant Forest",
-  "description": "Information on the Distant Forest.",
+  "description": "Information on the Distant Forest biome.",
   "icon": "gempire:purple_crystal_apple",
   "secret": "false",
   "parent": "gempire:desolate_lands"

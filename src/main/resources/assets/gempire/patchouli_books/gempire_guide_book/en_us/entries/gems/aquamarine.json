@@ -7,7 +7,7 @@
     {
       "type": "patchouli:entity",
       "entity": "gempire:aquamarine{wingColor:7208944,gemColor:5039871,skinColor:10944249,hairColor:36551,hairVariant:0,insigniaColor:3,outfitColor:3,gemPlacement:6,xscale:1,yscale:1,zscale:1}",
-      "name": "A Aquamarine",
+      "name": "Aquamarine",
       "rotate": "true",
       "scale": 0.6,
       "offset": 0.2,

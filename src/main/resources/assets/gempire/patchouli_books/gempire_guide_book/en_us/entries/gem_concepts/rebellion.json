@@ -10,7 +10,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "A gem will have the chance to rebel every 10 minutes, and it will depend on their 'rebel points'. Gems start out with 0.1 rebel points, and will have a 0.001% chance of rebelling without external influence every 10 minutes."
+      "text": "A gem will have the chance to rebel every 10 minutes, and it will depend on their internal 'rebel points'. Gems start out with 0.1 rebel points, and will have a 0.001% chance of rebelling without external influence every 10 minutes.$(br2)Unfortunately, there's no way to view a gem's rebel points at this time, but this maybe remedied in the future."
     },
     {
       "type": "patchouli:text",

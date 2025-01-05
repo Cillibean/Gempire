@@ -1,0 +1,20 @@
+{
+  "name": "Crystal Deer",
+  "icon": "gempire:thulite_nugget",
+  "advancement": "gempire:root",
+  "category": "gempire:iridescent_plains",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "gempire:crystal_deer",
+      "name": "Crystal Deer",
+      "rotate": "true",
+      "offset": 1.0,
+      "scale": 0.8
+    },
+    {
+      "type": "patchouli:text",
+      "text": "These beautiful creatures spawn in the Iridescent Plains, and have evolved to blend into their surroundings, even mimicking Thulite on their backs.$(br)They are passive in nature, and flee when attacked."
+    }
+  ]
+}

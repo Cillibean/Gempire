@@ -8,10 +8,10 @@
       "type": "patchouli:entity",
       "entity": "gempire:agate{skinColorVariant:3,skinColor:10599677,hairColor:15460605,gemColor:9660408,gemPlacement:20,hairVariant:1,insigniaColor:3,outfitColor:3,xscale:1,yscale:1,zscale:1}",
       "scale": 1.0,
-      "name": "An Agate",
+      "name": "Agate",
       "rotate": "true",
       "offset": 0.2,
-      "text": "A mid-game soldier, has many possible abilities. Also has the Stern ability, making other gems perform their tasks more efficiently and warding off hostile entities."
+      "text": "A mid-game soldier, has many possible abilities. Helps motivate gems to work more efficiently as well."
     },
     {
       "type": "patchouli:text",

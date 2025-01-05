@@ -7,11 +7,11 @@
     {
       "type": "patchouli:entity",
       "entity": "gempire:topaz{hairColor:16580036,gemColor:16773200,skinColor:16181310,hairVariant:0,insigniaColor:4,outfitColor:4,gemPlacement:3,xscale:1,yscale:1,zscale:1}",
-      "name": "A Topaz",
+      "name": "Topaz",
       "scale": 0.6,
       "rotate": "true",
       "offset": 0.2,
-      "text": "A soldier gem that's good for guarding, as she returns to her post."
+      "text": "A soldier gem intimidates enemies into running the opposite direction."
     },
     {
       "type": "patchouli:text",
