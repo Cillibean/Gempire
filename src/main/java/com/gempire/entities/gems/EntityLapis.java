@@ -189,7 +189,7 @@ this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, EntityGem.class, 6.0F, 
     }
     @Override
     public boolean isRideable() {
-        return true;
+        return this.isVehicle();
     }
     public boolean canOpenInventoryByDefault() {
         return false;

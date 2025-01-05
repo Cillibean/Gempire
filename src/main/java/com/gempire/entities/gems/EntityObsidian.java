@@ -211,7 +211,7 @@ public class EntityObsidian extends EntityGem {
 
     @Override
     public boolean isRideable() {
-        return true;
+        return this.isVehicle();
     }
 
     @Override
