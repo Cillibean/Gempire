@@ -3,7 +3,8 @@
 	"texture_size": [128, 128],
 	"render_type": "cutout",
 	"textures": {
-		"0": "gempire:block/empress_crown"
+		"0": "gempire:block/empress_crown",
+		"particle": "gempire:block/empress_crown"
 	},
 	"elements": [
 		{

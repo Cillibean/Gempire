@@ -366,6 +366,12 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
         this.tag(BlockTags.NEEDS_DIAMOND_TOOL)
                 .add(ModBlocks.PRISMATIC_BLOCK.get());
 
+        this.tag(BlockTags.PLANKS)
+                .add(ModBlocks.SHADED_PLANKS.get(),
+                        ModBlocks.DISTANT_PLANKS.get(),
+                        ModBlocks.CRYSTAL_PLANKS.get(),
+                        ModBlocks.KALEIDOSCOPE_PLANKS.get());
+
         this.tag(ModTags.Blocks.NEEDS_PRISMATIC_TOOL)
                 .add(ModBlocks.ANATASE_ORE.get(),
                         ModBlocks.ELECTRUM_ORE.get(),

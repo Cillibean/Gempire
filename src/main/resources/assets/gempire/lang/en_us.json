@@ -1013,6 +1013,9 @@
   "item.minecraft.potion.effect.calm_potion": "Potion of Calm",
   "item.minecraft.splash_potion.effect.calm_potion": "Splash Potion of Calm",
   "item.minecraft.lingering_potion.effect.calm_potion": "Lingering Potion of Calm",
+  "item.minecraft.potion.effect.shade_resistance_potion": "Potion of Shade Resistance",
+  "item.minecraft.splash_potion.effect.shade_resistance_potion": "Splash Potion of Shade Resistance",
+  "item.minecraft.lingering_potion.effect.shade_resistance_potion": "Lingering Potion of Shade Resistance",
 
   "nickname.gempire.sapphire_0": "White Sapphire",
   "nickname.gempire.sapphire_1": "Padparadscha",

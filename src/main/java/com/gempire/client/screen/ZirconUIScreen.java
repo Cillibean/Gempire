@@ -113,14 +113,14 @@ public class ZirconUIScreen extends AbstractContainerScreen<ZirconUIContainer> {
         matrixStack.blit(GUI, x, y, 0, 0, this.imageWidth, this.imageHeight, 224, 208);
         this.nameBox.render(matrixStack, mouseX, mouseY, partialTicks);
         matrixStack.drawString(font, ZirconUIScreen.getEnchantStringFromLapisCount(this.menu.gem),
-                i + 15, j + 29, 4210752);
+                i + 15, j + 29, 4210752, false);
         if (this.menu.gem.isPrimary()) {
             if(this.menu.gem.getItem(1).canApplyAtEnchantingTable(ModEnchants.GEMPIRE_ENCHANTMENTS.get(this.menu.gem.getEnchantPage()))) {
                 GUIUtilities.setup(XP_ORB);
                 matrixStack.blit(GUI, x + 14, y + 56, 0, 0, 11, 11, 11 ,11);
                 int xp = Math.max(this.getXP(this.getDiscountFromStack(this.menu.gem.getItem(2))), 0);
                 matrixStack.drawString(font, Component.translatable(xp + "XP"),
-                        i + 26, j + 58, 0x88FF00);
+                        i + 26, j + 58, 4210752, false);
             }
         } else {
             if(this.menu.gem.getItem(1).canApplyAtEnchantingTable(ModEnchants.VANILLA_ENCHANTMENTS.get(this.menu.gem.getEnchantPage()))) {
@@ -128,7 +128,7 @@ public class ZirconUIScreen extends AbstractContainerScreen<ZirconUIContainer> {
                 matrixStack.blit(GUI, x + 14, y + 56, 0, 0, 11, 11, 11 ,11);
                 int xp = Math.max(this.getXP(this.getDiscountFromStack(this.menu.gem.getItem(2))), 0);
                 matrixStack.drawString(font, Component.translatable(xp + "XP"),
-                        i + 26, j + 58, 0x88FF00);
+                        i + 26, j + 58, 4210752, false);
             }
         }
         renderEntityInInventory(i + 170, j + 72, 23, (float)(i + 170) - mouseX, (float)(j + 25) - mouseY, this.menu.gem);

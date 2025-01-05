@@ -480,6 +480,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         if (this.canLocateStructures()) compound.putInt("structureTime", this.structureTime);
         if (this.canLocateStructures()) this.writeStructures(compound);
         ContainerHelper.saveAllItems(compound, this.items);
+        System.out.println(compound);
     }
 
     public void writeOwners(CompoundTag compound) {
@@ -692,10 +693,8 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
 
     @Override
     public void load(CompoundTag compound) {
-        super.load(compound);
-        System.out.println(compound.getAllKeys());
-        System.out.println(compound);
         boolean display = compound.getBoolean("display");
+        System.out.println(compound);
         this.entityData.set(EntityGem.DISPLAY, display);
         System.out.println(display);
         if (!display) {
@@ -750,6 +749,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             this.readColour(compound);
             this.readScale(compound);
         }
+        super.load(compound);
     }
 
     public void readOwners(CompoundTag compound) {
