@@ -1,6 +1,6 @@
 {
   "name": "Bleached Wyvern",
-  "icon": "gempire:bleached_tooth",
+  "icon": "minecraft:book",
   "advancement": "gempire:root",
   "category": "gempire:bestiary",
   "pages": [
@@ -9,7 +9,7 @@
       "entity": "gempire:bleached_wyvern",
       "name": "Bleached Wyvern",
       "rotate": "true",
-      "text": "Bleached Wyverns are airborne hostile creatures found in the Prismatic Gates biome. They drop bleached teeth."
+      "text": "Bleached Wyverns are airborne hostile creatures found in the Prismatic Gates biome. They drop bleached teeth, a prized trophy among collectors."
     }
   ]
 }

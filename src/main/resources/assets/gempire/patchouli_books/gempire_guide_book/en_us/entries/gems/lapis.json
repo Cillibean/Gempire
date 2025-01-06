@@ -14,7 +14,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "$(l)Possible Abilities$() $(br)$(li)Tank$(li)Beefcake$(li)Powerhouse$(li)Unhinged$(li)Berserker$(br2) $(l)Definite Abilities$()$(br)$(li)Hydrokinesis$(li)Vehicle (NYI)"
+      "text": "$(l)Possible Abilities$() $(br)$(li)Tank$(li)Beefcake$(li)Powerhouse$(li)Unhinged$(li)Berserker$(li)Hydrokinesis$(br2) $(l)Definite Abilities$()$(br)(li)Vehicle (NYI)"
     },
     {
       "type": "patchouli:text",

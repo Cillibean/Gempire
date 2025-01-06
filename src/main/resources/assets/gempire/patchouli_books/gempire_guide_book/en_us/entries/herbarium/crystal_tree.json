@@ -5,7 +5,7 @@
   "category": "gempire:herbarium",
   "pages": [
     {
-      "title": "Crystal Trees",
+      "type": "patchouli:text",
       "text": "Trees found in the Distant Forests. They have an iridescent purple hue, and can be used in crafting similarly to any overworld biome wood.$(br2)The crystalline nature of these growths makes one wonder if they're actually trees at all..."
     }
   ]

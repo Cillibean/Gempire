@@ -6,8 +6,8 @@
   "pages": [
     {
       "type": "patchouli:spotlight",
-      "title": "Bluebells",
-      "item": "gempire:hydrangea_bush_white,hydrangea_bush_purple,hydrangea_bush_green,hydrangea_bush_blue,hydrangea_bush_pink",
+      "title": "Hydrangeas",
+      "item": "gempire:hydrangea_bush_white,gempire:hydrangea_bush_purple,gempire:hydrangea_bush_green,gempire:hydrangea_bush_blue,gempire:hydrangea_bush_pink",
       "text": "These small clusters of bushy flowers can be found in the Distant Forests. They can be used to make various dyes or displayed as a cute little decoration!"
     }
   ]

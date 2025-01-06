@@ -1,6 +1,6 @@
 {
   "name": "Resplendent Hunter",
-  "icon": "minecraft:book",
+  "icon": "minecraft:arrow",
   "advancement": "gempire:root",
   "category": "gempire:bestiary",
   "pages": [
