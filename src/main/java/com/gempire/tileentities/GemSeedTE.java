@@ -48,7 +48,7 @@ public class GemSeedTE extends BlockEntity {
     boolean spawned = false;
     public int ticks = 0;
     public int stage = 0;
-    public int tier;
+    public int tier = 0;
 
     public Item primer;
     public int facing;
@@ -77,7 +77,7 @@ public class GemSeedTE extends BlockEntity {
     // 4 = shambler
     // 5 = abomination
 
-    public HashMap<Block, ArrayList<Integer>> resMap = new HashMap<>();
+    public HashMap<Block, CruxInfo> resMap = new HashMap<>();
     public HashMap<Block, Float> qualityMap = new HashMap<>();
     public ArrayList<GemInfo> gemInfoList = new ArrayList<>();
 
@@ -117,6 +117,7 @@ public class GemSeedTE extends BlockEntity {
         } else {
             gemInfoList = InjectionRegistry.list;
         }
+        resMap = InjectionRegistry.blockList;
         InjectionRegistry.setMap();
         if (blocksDrained < 500) {
             Random r = new Random();
@@ -185,6 +186,7 @@ public class GemSeedTE extends BlockEntity {
             if (block == Blocks.DIRT || block == Blocks.GRASS_BLOCK || block == Blocks.DIRT_PATH
                     || block == Blocks.GRAVEL || block == Blocks.MOSS_BLOCK) {
                 this.level.setBlockAndUpdate(blockPos, this.drained_soil.defaultBlockState());
+
             } else if (block == Blocks.SAND || block == Blocks.RED_SAND || block == Blocks.SOUL_SAND) {
                 this.level.setBlockAndUpdate(blockPos, this.drained_sand.defaultBlockState());
             } else if (block == Blocks.OAK_LOG || block == Blocks.STRIPPED_OAK_LOG || block == Blocks.STRIPPED_OAK_WOOD || block == Blocks.OAK_WOOD
@@ -224,7 +226,7 @@ public class GemSeedTE extends BlockEntity {
     public void weighResults() {
         ArrayList<GemInfo> possibleResults = new ArrayList<>();
         ArrayList<Float> possibleQualities = new ArrayList<>();
-        int threshhold = 45;
+        int threshhold = 35;
         for (GemInfo gemInfo : gemInfoList) {
             int distance = 0;
             int[] res = gemInfo.getResources();
@@ -234,9 +236,8 @@ public class GemSeedTE extends BlockEntity {
             }
             if (distance < threshhold) {
                 float subtracted = ((float)distance)/threshhold;
-                System.out.println(gemInfo.getName());
-                System.out.println(Arrays.toString(res));
-                System.out.println("possible gem " + distance+ " quality "+subtracted);
+                System.out.println("seed resources "+Arrays.toString(info.resources));
+                System.out.println(gemInfo.getName() + " " + Arrays.toString(res)+" " + distance+ " quality "+subtracted);
                 for (int b = 0; b < threshhold - distance; b++) {
                     possibleResults.add(gemInfo);
                     possibleQualities.add((float) 1 - subtracted);

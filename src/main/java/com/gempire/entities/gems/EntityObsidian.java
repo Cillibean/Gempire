@@ -187,7 +187,7 @@ public class EntityObsidian extends EntityGem {
     }
     @Override
     public boolean canOpenInventoryByDefault() {
-        return false;
+        return !this.isVehicle();
     }
     @Override
     public boolean hasMarkings() {

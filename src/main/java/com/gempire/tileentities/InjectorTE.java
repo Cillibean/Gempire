@@ -202,34 +202,36 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
         if (!fluidValid()) return;
 
         if (!pinkTank.isEmpty() && pinkOpen) {
-            info.resources[0] += 10;
+            info.resources[0] += 5;
             pinkTank.getFluid().setAmount(Math.max(pinkTank.getFluidAmount() - (200 / portionToDrain), 0));
         }
         if (!blueTank.isEmpty() && blueOpen) {
-            info.resources[2] += 10;
+            info.resources[2] += 5;
             blueTank.getFluid().setAmount(Math.max(blueTank.getFluidAmount() - (200 / portionToDrain), 0));
         }
         if (!yellowTank.isEmpty() && yellowOpen) {
-            info.resources[3] += 10;
+            info.resources[3] += 5;
             yellowTank.getFluid().setAmount(Math.max(yellowTank.getFluidAmount() - (200 / portionToDrain), 0));
         }
         if (!whiteTank.isEmpty() && whiteOpen) {
-            info.resources[1] += 10;
+            info.resources[1] += 5;
             whiteTank.getFluid().setAmount(Math.max(whiteTank.getFluidAmount() - (200 / portionToDrain), 0));
         }
 
         ItemStack chromaStack = itemHandler.getStackInSlot(CHROMA_INPUT_SLOT_INDEX);
-        info.setChroma(((ItemChroma) chromaStack.getItem()).color);
+        if (chromaStack.getItem() instanceof ItemChroma) info.setChroma(((ItemChroma) chromaStack.getItem()).color);
+        else return;
 
         // grow
 
         BlockPos crystalPos = getBlockPos().above().above();
         BlockPos seedPos = this.getBlockPos().offset(new BlockPos(0, -7, 0));
-        for (int i = 0; i < 30; i++) {
+        while (true) {
             Block seed = level.getBlockState(seedPos).getBlock();
             if (seed == ModBlocks.GEM_SEED_BLOCK.get() || seed == Blocks.AIR || seed == Blocks.WATER) {
                 seedPos = seedPos.offset(0, -10, 0);
             }
+            else if (seed == Blocks.BEDROCK) return;
             else break;
         }
 
@@ -255,11 +257,14 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
             }
             GemSeedTE gemSeedTE = (GemSeedTE) this.level.getBlockEntity(seedPos);
             if (gemSeedTE != null) {
+                int tier = 2;
+                if (level.getBlockState(crystalPos) == ModBlocks.POWER_CRYSTAL_BLOCK.get().defaultBlockState()) tier = 1;
                 gemSeedTE.SetPrimer(primer);
                 int facing = InjectorTE.getFacingFromState(this.getBlockState());
                 gemSeedTE.setFacing(facing);
                 gemSeedTE.setChroma(info.chroma);
                 gemSeedTE.setInfo(info);
+                gemSeedTE.setTier(tier);
                 itemHandler.extractItem(InjectorTE.CHROMA_INPUT_SLOT_INDEX, 1, false);
                 itemHandler.extractItem(InjectorTE.PRIME_INPUT_SLOT_INDEX, 1, false);
                 this.level.sendBlockUpdated(this.worldPosition, this.getBlockState(), this.getBlockState(), 2);

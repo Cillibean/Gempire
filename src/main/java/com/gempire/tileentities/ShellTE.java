@@ -351,16 +351,15 @@ public class ShellTE extends RandomizableContainerBlockEntity implements MenuPro
         ItemGem.saveData(stack, egem);
         egem.remove(Entity.RemovalReason.DISCARDED);
         if (quality == 0) {
-            stack.getOrCreateTag().putInt("quality", 2);
-            stack.getOrCreateTag().putFloat("xScale", 1.15F);
-            stack.getOrCreateTag().putFloat("yScale", 1.15F);
-            stack.getOrCreateTag().putFloat("zScale", 1.15F);
+            writePrime(stack.getOrCreateTag());
+            stack.getOrCreateTag().putString("scale", 1.15F+","+1.15F+","+1.15F);
         } else if (quality == 2) {
             Random r = new Random();
-            stack.getOrCreateTag().putInt("quality", 0);
-            stack.getOrCreateTag().putFloat("xScale", 1 - r.nextFloat(.45F));
-            stack.getOrCreateTag().putFloat("yScale", 1 - r.nextFloat(.45F));
-            stack.getOrCreateTag().putFloat("zScale", 1 - r.nextFloat(.45F));
+            float x = 1 - r.nextFloat(.45F);
+            float y = 1 - r.nextFloat(.45F);
+            float z = 1 - r.nextFloat(.45F);
+            writeDefective(stack.getOrCreateTag());
+            stack.getOrCreateTag().putString("scale", x+","+y+","+z);
         }
         this.setItem(ShellTE.PEARL_OUTPUT_SLOT_INDEX, stack);
         this.gravelConsumed = 0;
@@ -370,6 +369,24 @@ public class ShellTE extends RandomizableContainerBlockEntity implements MenuPro
         this.essenceConsumed = false;
         this.chromaColor = 0;
         this.level.setBlockAndUpdate(this.getBlockPos(), this.getBlockState().setValue(ShellBlock.STAGE, 0));
+    }
+
+    public void writePrime(CompoundTag compound) {
+        String[] strings = compound.getString("util").split(",");
+        if (strings.length > 2) {
+            Integer.parseInt(strings[3]);
+            String string = strings[0] + "," + strings[1] + "," + strings[2] + "," + 2 + "," + strings[4]+ "," + strings[5] + "," + strings[6] + "," + strings[7] + "," + strings[8];
+            compound.putString("util", string);
+        }
+    }
+
+    public void writeDefective(CompoundTag compound) {
+        String[] strings = compound.getString("util").split(",");
+        if (strings.length > 2) {
+            Integer.parseInt(strings[3]);
+            String string = strings[0] + "," + strings[1] + "," + strings[2] + "," + 0 + "," + strings[4]+ "," + strings[5] + "," + strings[6] + "," + strings[7] + "," + strings[8];
+            compound.putString("util", string);
+        }
     }
 
     //CONTAINER STUFF
