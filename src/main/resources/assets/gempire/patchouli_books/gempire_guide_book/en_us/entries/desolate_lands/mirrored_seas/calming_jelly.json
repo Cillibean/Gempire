@@ -1,0 +1,13 @@
+{
+  "name": "Calming Jelly",
+  "icon": "gempire:calming_jelly",
+  "advancement": "gempire:root",
+  "category": "gempire:mirrored_seas",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "gempire:calming_jelly",
+      "text": "An oddly viscous substance that can be harvested from a Sorrow Jelly. They seem to be useful in the creation of Anatase armor."
+    }
+  ]
+}

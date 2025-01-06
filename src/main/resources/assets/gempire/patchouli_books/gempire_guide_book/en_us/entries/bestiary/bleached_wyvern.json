@@ -1,0 +1,15 @@
+{
+  "name": "Bleached Wyvern",
+  "icon": "gempire:bleached_tooth",
+  "advancement": "gempire:root",
+  "category": "gempire:bestiary",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "gempire:bleached_wyvern",
+      "name": "Bleached Wyvern",
+      "rotate": "true",
+      "text": "Bleached Wyverns are airborne hostile creatures found in the Prismatic Gates biome. They drop bleached teeth."
+    }
+  ]
+}

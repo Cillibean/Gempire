@@ -1,0 +1,12 @@
+{
+  "name": "Distant Trees",
+  "icon": "gempire:distant_log",
+  "advancement": "gempire:root",
+  "category": "gempire:herbarium",
+  "pages": [
+    {
+      "title": "Distant Trees",
+      "text": "Trees found in the Distant Forests. They have a dark blue coloring coated with a far duller bark, and can be used in crafting similarly to any overworld biome wood."
+    }
+  ]
+}

@@ -2,7 +2,7 @@
   "name": "Sorrow Jelly",
   "icon": "gempire:calming_jelly",
   "advancement": "gempire:root",
-  "category": "gempire:mirrored_seas",
+  "category": "gempire:bestiary",
   "pages": [
     {
       "type": "patchouli:entity",
@@ -14,7 +14,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "These odd alien jellyfish vary greatly in size and are very passive in nature. They can be found in the Mirrored Seas.$(brKilling them may drop a Calming Jelly, which is useful in the crafting of Anatase armor."
+      "text": "These odd alien jellyfish vary greatly in size and are very passive in nature. They can be found in the Mirrored Seas biome.$(brKilling them may drop a Calming Jelly, which is useful in the crafting of Anatase armor."
     }
   ]
 }
