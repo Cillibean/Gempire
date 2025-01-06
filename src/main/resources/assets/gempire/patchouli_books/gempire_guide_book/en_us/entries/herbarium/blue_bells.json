@@ -1,0 +1,14 @@
+{
+  "name": "Bluebells",
+  "icon": "gempire:blue_bells",
+  "advancement": "gempire:root",
+  "category": "gempire:herbarium",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Bluebells",
+      "item": "gempire:blue_bells",
+      "text": "These small blue flowers can be found in the Distant Forests. They can be used to make blue dye or displayed as a cute little decoration!"
+    }
+  ]
+}

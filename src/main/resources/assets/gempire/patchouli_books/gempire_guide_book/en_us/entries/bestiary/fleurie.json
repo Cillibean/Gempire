@@ -1,0 +1,15 @@
+{
+  "name": "Fleurie",
+  "icon": "gempire:pansie",
+  "advancement": "gempire:root",
+  "category": "gempire:bestiary",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "gempire:fleurie",
+      "name": "Fleurie",
+      "rotate": "true",
+      "text": "These small pink creatures have a large flower on their heads and are passive creatures, becoming very skittish once struck. They can be found in the Iridescent Plains biome."
+    }
+  ]
+}

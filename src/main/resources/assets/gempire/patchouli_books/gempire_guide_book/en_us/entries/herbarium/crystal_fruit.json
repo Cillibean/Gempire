@@ -2,13 +2,13 @@
   "name": "Crystal Apples",
   "icon": "gempire:pink_crystal_apple",
   "advancement": "gempire:root",
-  "category": "gempire:distant_forest",
+  "category": "gempire:herbarium",
   "pages": [
     {
       "type": "patchouli:spotlight",
       "title": "Crystal Apples",
       "item": "gempire:blue_crystal_apple,gempire:pink_crystal_apple,gempire:purple_crystal_apple",
-      "text": "An apple found on crystal trees. Even with a solid outer coating, they can be quite nutritious and tasty!"
+      "text": "An apple found on crystal trees in the Distant Forest biome. Even with a solid outer coating, they can be quite nutritious and tasty!"
     }
   ]
 }

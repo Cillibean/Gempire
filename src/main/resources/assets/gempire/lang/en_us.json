@@ -921,13 +921,13 @@
   "item.gempire.specter_spawn_egg": "Specter Spawn Egg",
   "item.gempire.crystal_deer_spawn_egg": "Crystal Deer Spawn Egg",
   "item.gempire.fleurie_spawn_egg": "Fleurie Spawn Egg",
-  "item.gempire.hunter_spawn_egg": "Hunter Spawn Egg",
+  "item.gempire.hunter_spawn_egg": "Resplendent Hunter Spawn Egg",
   "item.gempire.sorrow_jelly_spawn_egg": "Sorrow Jelly Spawn Egg",
   "item.gempire.overseer_spawn_egg": "Overseer Spawn Egg",
   "item.gempire.mantashark_spawn_egg": "Mantashark Spawn Egg",
   "item.gempire.opal_mantashark_spawn_egg": "Opalized Mantashark Spawn Egg",
 
-  "entity.gempire.hunter": "Hunter",
+  "entity.gempire.hunter": "Resplendent Hunter",
   "entity.gempire.specter": "Specter",
 
   "entity.gempire.pebble": "Pebble",

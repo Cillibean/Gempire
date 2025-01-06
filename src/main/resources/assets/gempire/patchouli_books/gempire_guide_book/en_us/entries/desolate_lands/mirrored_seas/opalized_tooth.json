@@ -2,7 +2,7 @@
   "name": "Opalized Tooth",
   "icon": "gempire:opalized_tooth",
   "advancement": "gempire:root",
-  "category": "gempire:misc",
+  "category": "gempire:mirrored_seas",
   "pages": [
     {
       "type": "patchouli:spotlight",
