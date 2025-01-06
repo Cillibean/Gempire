@@ -23,7 +23,7 @@ apply plugin: 'net.minecraftforge.gradle'
     //config 'gempire.mixins.json'
 //}
 
-version = '2.2.A1'
+version = '2.2.A2'
 group = 'com.gempire' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'gempire'
 

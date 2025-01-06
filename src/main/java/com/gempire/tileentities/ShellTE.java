@@ -216,7 +216,10 @@ public class ShellTE extends RandomizableContainerBlockEntity implements MenuPro
                     this.chromaColor = chroma.color;
                     stack.shrink(1);
                 } else {
-                    this.chromaConsumed = false;
+                    this.chromaConsumed = true;
+                    Random random = new Random();
+                    this.chromaColor = random.nextInt(15);
+                    stack.shrink(1);
                 }
             }
         } else if(this.gravelConsumed == ShellTE.MAX_GRAVEL /2 && this.sandConsumed == ShellTE.MAX_SAND/2 && this.clayConsumed == ShellTE.MAX_CLAY/2 && !this.chromaConsumed){

@@ -1445,11 +1445,9 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                     }
                 } else if (!(source.getEntity() instanceof Player)) {
                     if ((amount - getHealth()) > hardness) {
-                        if ((this.random.nextInt(shatterChance) == 1)) {
+                        if ((this.random.nextInt(shatterChance) == 1) || getCrackAmount() == (getHardness() * 10)) {
                             setShatter(true);
-                        } /*else if (getCrackAmount() == (getHardness() * 10)) {
-                                setShatter(true);
-                    }*/ else if (this.random.nextInt(crackChance) == 1) {
+                        } else if (this.random.nextInt(crackChance) == 1) {
                             setCracked(true);
                             shatterChance--;
                             setCrackAmount(getCrackAmount() * 2);

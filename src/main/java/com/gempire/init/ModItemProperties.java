@@ -3,9 +3,12 @@ package com.gempire.init;
 import com.gempire.Gempire;
 import com.gempire.items.ItemGem;
 import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.ForgeRegistries;
+
+import java.util.Arrays;
 
 public class ModItemProperties {
     public static void addCustomItemProperties() {
@@ -235,9 +238,9 @@ public class ModItemProperties {
             if (stack.getItem().asItem() instanceof ItemGem) {
                 if (((ItemGem) stack.getItem()).getSludged(stack)) {
                     return 0.1F;
-                } else if (stack.getOrCreateTag().getBoolean("cracked")) {
+                } else if (readCracked(stack.getOrCreateTag())) {
                     return 0.2F;
-                } else if (stack.getOrCreateTag().getInt("quality") == 2) {
+                } else if (readPrime(stack.getOrCreateTag())) {
                     return 1.0F;
 
                 }
@@ -249,5 +252,29 @@ public class ModItemProperties {
             }
         });
         
+    }
+
+    public static boolean readCracked(CompoundTag compound) {
+        String[] strings = compound.getString("crackShatter").split(",");
+        if (strings.length > 0) {
+            return Boolean.parseBoolean(strings[0]);
+        } else {
+            return false;
+        }
+    }
+
+    public static boolean readPrime(CompoundTag compound) {
+        String[] strings = compound.getString("util").split(",");
+        if (Arrays.stream(strings).count() > 3) if (isInteger(strings[3])) return Integer.parseInt(strings[3]) == 2;
+        return false;
+    }
+
+    public static boolean isInteger(String s) {
+        try {
+            Integer.parseInt(s);
+        } catch(NumberFormatException | NullPointerException e) {
+            return false;
+        }
+        return true;
     }
 }

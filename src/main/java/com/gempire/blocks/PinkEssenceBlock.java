@@ -5,6 +5,7 @@ import com.gempire.events.GemFormEvent;
 import com.gempire.init.ModEntities;
 import com.gempire.items.ItemGem;
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -27,6 +28,18 @@ public class PinkEssenceBlock extends LiquidBlock {
 
     int timer = 0;
 
+    public boolean readCracked(CompoundTag compound) {
+        String[] strings = compound.getString("crackShatter").split(",");
+        return Boolean.parseBoolean(strings[0]);
+    }
+
+    public void writeCracked(CompoundTag compound) {
+        String[] strings = compound.getString("crackShatter").split(",");
+        Boolean.parseBoolean(strings[0]);
+        String string = false + "," + strings[1] + "," + strings[2] + "," + strings[3] + "," + strings[4];
+        compound.putString("crackShatter", string);
+    }
+
     @Override
     public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
         if (entity instanceof ItemEntity) {
@@ -34,8 +47,8 @@ public class PinkEssenceBlock extends LiquidBlock {
                 ItemGem itemGem = (ItemGem) (((ItemEntity) entity).getItem()).getItem();
                 ItemStack stack = ((ItemEntity) entity).getItem();
                 if ((itemGem).checkTags(stack)) {
-                    if (stack.getTag().getBoolean("cracked")) {
-                        stack.getTag().putBoolean("cracked", false);
+                    if (readCracked(stack.getTag())) {
+                        writeCracked(stack.getTag());
                     }
                 }
             } else if ((((ItemEntity) entity).getItem()).getItem() == Items.STONE_BUTTON) {

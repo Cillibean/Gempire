@@ -4,6 +4,7 @@ import com.gempire.blocks.DrainedBlock;
 import com.gempire.blocks.GemSeedBlock;
 import com.gempire.blocks.machine.PowerCrystalBlock;
 import com.gempire.blocks.machine.TankBlock;
+import com.gempire.config.GempireServerConfigs;
 import com.gempire.entities.bases.EntityGem;
 import com.gempire.entities.bases.EntityVaryingGem;
 import com.gempire.entities.gems.EntityPeridot;
@@ -53,7 +54,7 @@ public class GemSeedTE extends BlockEntity {
     public int facing;
     public boolean checked = false;
     public boolean exposed;
-    int speed = 8;
+    int speed = GempireServerConfigs.INJECTION.get();
     public static GemSeedInfo info;
     int blocksDrained = 0;
 
@@ -95,12 +96,11 @@ public class GemSeedTE extends BlockEntity {
                 te.exposed = true;
             }
             if (te.primer == ModItems.GILDED_LAPIS.get()) {
-                te.speed = 2;
+                te.speed = (int)(GempireServerConfigs.INJECTION.get() / 4);
             }
             if (te.ticks % te.speed == 0) {
                 if (!te.spawned) {
                     if (!te.level.isClientSide) {
-                        System.out.println("form gem");
                         te.drainForm();
                         level.sendBlockUpdated(te.getBlockPos(), te.getBlockState(), te.getBlockState(), 2);
                         te.setChanged();
@@ -224,21 +224,22 @@ public class GemSeedTE extends BlockEntity {
     public void weighResults() {
         ArrayList<GemInfo> possibleResults = new ArrayList<>();
         ArrayList<Float> possibleQualities = new ArrayList<>();
-        int threshhold = 70;
+        int threshhold = 45;
         for (GemInfo gemInfo : gemInfoList) {
             int distance = 0;
             int[] res = gemInfo.getResources();
-            System.out.println(gemInfo.getName());
-            System.out.println(Arrays.toString(res));
             for (int a = 0; a < res.length; a++) {
                 if (res[a] > info.resources[a]) distance += (res[a] - info.resources[a]);
                 else distance += (info.resources[a] - res[a]);
             }
             if (distance < threshhold) {
-                System.out.println("possible gem " + distance);
+                float subtracted = ((float)distance)/threshhold;
+                System.out.println(gemInfo.getName());
+                System.out.println(Arrays.toString(res));
+                System.out.println("possible gem " + distance+ " quality "+subtracted);
                 for (int b = 0; b < threshhold - distance; b++) {
                     possibleResults.add(gemInfo);
-                    possibleQualities.add((float) 1 + (distance * -1 / threshhold));
+                    possibleQualities.add((float) 1 - subtracted);
                 }
             }
         }

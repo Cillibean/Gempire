@@ -8,7 +8,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -19,9 +19,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.Level;
 import net.minecraft.server.level.ServerLevel;
 
 import javax.annotation.Nullable;
@@ -82,6 +79,9 @@ public class IceSpikeBlock extends Block {
 
     @Override
     public void randomTick(BlockState state, ServerLevel worldIn, BlockPos pos, RandomSource random) {
+        if (worldIn.getBrightness(LightLayer.BLOCK, pos) > 11 - state.getLightBlock(worldIn, pos)) {
+            this.melt(state, worldIn, pos);
+        }
         super.randomTick(state, worldIn, pos, (RandomSource) random);
     }
 
@@ -172,6 +172,16 @@ public class IceSpikeBlock extends Block {
     public void entityInside(BlockState state, Level worldIn, BlockPos pos, Entity entityIn) {
         if (entityIn instanceof LivingEntity) {
             if (state.getValue(HALF) == DoubleBlockHalf.UPPER) entityIn.hurt(entityIn.damageSources().magic(), 2.0F);
+        }
+    }
+
+
+    protected void melt(BlockState p_54169_, Level p_54170_, BlockPos p_54171_) {
+        if (p_54170_.dimensionType().ultraWarm()) {
+            p_54170_.removeBlock(p_54171_, false);
+        } else {
+            p_54170_.setBlockAndUpdate(p_54171_, Blocks.AIR.defaultBlockState());
+            p_54170_.neighborChanged(p_54171_, Blocks.AIR, p_54171_);
         }
     }
 

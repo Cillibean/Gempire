@@ -10,6 +10,7 @@ public class GempireServerConfigs {
     public static final ForgeConfigSpec.ConfigValue<Boolean> OUTBURSTS;
     public static final ForgeConfigSpec.ConfigValue<Boolean> REBELLION;
     public static final ForgeConfigSpec.ConfigValue<Boolean> PYROKINESIS;
+    public static final ForgeConfigSpec.ConfigValue<Integer> INJECTION;
 
     static {
         BUILDER.push("Gempire Server Configuration");
@@ -24,6 +25,8 @@ public class GempireServerConfigs {
                 .define("Rebellion", true);
         PYROKINESIS = BUILDER.comment("State if you would like gems to have Pyrokinesis")
                 .define("Pyrokinesis", true);
+        INJECTION = BUILDER.comment("Give a value for the speed of injection")
+                .defineInRange("Injection time", 8, 4, 20);
 
         BUILDER.pop();
         SPEC = BUILDER.build();
