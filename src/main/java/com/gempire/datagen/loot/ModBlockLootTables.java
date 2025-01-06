@@ -36,6 +36,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 import javax.annotation.Nullable;
 import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 
 public class ModBlockLootTables extends BlockLootSubProvider {
@@ -534,7 +535,9 @@ public class ModBlockLootTables extends BlockLootSubProvider {
 
     @Override
     protected Iterable<Block> getKnownBlocks() {
-        return ModBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get).toList();
+        List<Block> list = ModBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get).toList();
+        //list.remove(ModBlocks.TANK_BLOCK.get());
+        return list;
     }
 
     protected void dropSelfWithContents(Block block) {

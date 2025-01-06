@@ -112,25 +112,25 @@ public class GemSeedTE extends BlockEntity {
         }
 
     public void drainForm() {
+        InjectionRegistry.setMap();
         if (tier == 1) {
             gemInfoList = InjectionRegistry.listBasic;
         } else {
             gemInfoList = InjectionRegistry.list;
         }
         resMap = InjectionRegistry.blockList;
-        InjectionRegistry.setMap();
         if (blocksDrained < 500) {
             Random r = new Random();
             BlockPos toDrain = pos.offset(-5, -5, -5).offset(r.nextInt(11), r.nextInt(11), r.nextInt(11));
             Block block = this.level.getBlockState(toDrain).getBlock();
             if (!resMap.isEmpty()) {
-                if (!resMap.get(block).isEmpty()) {
-                    info.resources[0] += resMap.get(block).get(0);
-                    info.resources[1] += resMap.get(block).get(1);
-                    info.resources[2] += resMap.get(block).get(2);
-                    info.resources[3] += resMap.get(block).get(3);
-                    info.resources[4] += resMap.get(block).get(4);
-                    info.resources[5] += resMap.get(block).get(5);
+                if (!resMap.containsKey(block)) {
+                    info.resources[0] += resMap.get(block).resources[0];
+                    info.resources[1] += resMap.get(block).resources[1];
+                    info.resources[2] += resMap.get(block).resources[2];
+                    info.resources[3] += resMap.get(block).resources[3];
+                    info.resources[4] += resMap.get(block).resources[4];
+                    info.resources[5] += resMap.get(block).resources[5];
                 }
                 if (qualityMap.get(block) != 0 && qualityMap.get(block) != null) {
                     info.quality += qualityMap.get(block);

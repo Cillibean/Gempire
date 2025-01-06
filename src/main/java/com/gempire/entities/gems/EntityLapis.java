@@ -150,6 +150,7 @@ this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, EntityGem.class, 6.0F, 
     public ArrayList<Ability> possibleAbilities(){
         ArrayList<Ability> arrayList = new ArrayList<>();
         arrayList.add(new AbilityZilch());
+        arrayList.add(new AbilityHydration());
         arrayList.add(new AbilityTank());
         arrayList.add(new AbilityBeefcake());
         arrayList.add(new AbilityPowerhouse());
@@ -162,7 +163,6 @@ this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, EntityGem.class, 6.0F, 
         ArrayList<Ability> arrayList = new ArrayList<>();
         arrayList.add(new AbilityHydrokinesis());
         arrayList.add(new AbilityVehicle());
-        arrayList.add(new AbilityHydration());
         return arrayList;
     }
 

@@ -58,36 +58,9 @@ public class PrismWhiteAltarBlock extends DirectionalBlock {
     public boolean canSurvive(BlockState state, LevelReader worldIn, BlockPos pos) {
         Direction direction = state.getValue(FACING);
         if (state.getBlock() == this) { //Forge: This function is called during world gen and placement, before this block is set, so if we are not 'here' then assume it's the pre-check.
-            if (direction == Direction.UP) {
-                if (worldIn.getBlockState(pos.below()) != Blocks.AIR.defaultBlockState()) {
+            if (worldIn.getBlockState(pos.below()) != Blocks.AIR.defaultBlockState()) {
                     return super.canSurvive(state, worldIn, pos);
                 }
-            }
-            if(direction == Direction.DOWN){
-                if(worldIn.getBlockState(pos.above()) != Blocks.AIR.defaultBlockState()){
-                    return super.canSurvive(state, worldIn, pos);
-                }
-            }
-            if(direction == Direction.NORTH){
-                if(worldIn.getBlockState(pos.south()) != Blocks.AIR.defaultBlockState()){
-                    return super.canSurvive(state, worldIn, pos);
-                }
-            }
-            if(direction == Direction.EAST){
-                if(worldIn.getBlockState(pos.west()) != Blocks.AIR.defaultBlockState()){
-                    return super.canSurvive(state, worldIn, pos);
-                }
-            }
-            if(direction == Direction.SOUTH){
-                if(worldIn.getBlockState(pos.north()) != Blocks.AIR.defaultBlockState()){
-                    return super.canSurvive(state, worldIn, pos);
-                }
-            }
-            if(direction == Direction.WEST){
-                if(worldIn.getBlockState(pos.east()) != Blocks.AIR.defaultBlockState()){
-                    return super.canSurvive(state, worldIn, pos);
-                }
-            }
         }
         return false;
     }
