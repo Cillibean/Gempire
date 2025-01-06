@@ -65,6 +65,7 @@ public class EntityLarimar extends EntityGem {
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
         this.goalSelector.addGoal(7, new EntityAIFollowAssigned(this, 1.0D));
         this.goalSelector.addGoal(8, new EntityAIWander(this, 1.0D));
+        this.goalSelector.addGoal(4, new EntityAIExitHole(this, 1.0D));
         this.goalSelector.addGoal(8, new EntityAIStay(this, 1.0D));
         this.goalSelector.addGoal(7, new EntityAIFollowGarnet(this, 0.7D));
         this.goalSelector.addGoal(7, new EntityAIFollowOwner(this, 1.0D));

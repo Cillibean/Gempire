@@ -84,5 +84,11 @@ public class ModPacketHandler {
                 C2SFusionStick::encode,
                 C2SFusionStick::decode,
                 C2SFusionStick::handle);
+        ModPacketHandler.INSTANCE.registerMessage(
+                networkId++,
+                OpenTank.class,
+                OpenTank::encode,
+                OpenTank::decode,
+                OpenTank::handle);
     }
 }

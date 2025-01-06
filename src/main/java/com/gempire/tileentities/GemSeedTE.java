@@ -68,6 +68,7 @@ public class GemSeedTE extends BlockEntity {
     public boolean clod = false;
     public int clodNO;
     public GemInfo toForm;
+    public boolean speedBoosted, primeBoosted = false;
 
     public int quality;
     // 0 = prime
@@ -78,7 +79,6 @@ public class GemSeedTE extends BlockEntity {
     // 5 = abomination
 
     public HashMap<Block, CruxInfo> resMap = new HashMap<>();
-    public HashMap<Block, Float> qualityMap = new HashMap<>();
     public ArrayList<GemInfo> gemInfoList = new ArrayList<>();
 
     //Create an object to store the total weight
@@ -95,7 +95,7 @@ public class GemSeedTE extends BlockEntity {
             if (te.level.getBlockState(te.getBlockPos().below()) == Blocks.AIR.defaultBlockState() || te.level.getBlockState(te.getBlockPos().below()).getBlock() instanceof LiquidBlock) {
                 te.exposed = true;
             }
-            if (te.primer == ModItems.GILDED_LAPIS.get()) {
+            if (te.speedBoosted) {
                 te.speed = (int)(GempireServerConfigs.INJECTION.get() / 4);
             }
             if (te.ticks % te.speed == 0) {
@@ -114,8 +114,10 @@ public class GemSeedTE extends BlockEntity {
     public void drainForm() {
         InjectionRegistry.setMap();
         if (tier == 1) {
+            gemInfoList.clear();
             gemInfoList = InjectionRegistry.listBasic;
         } else {
+            gemInfoList.clear();
             gemInfoList = InjectionRegistry.list;
         }
         resMap = InjectionRegistry.blockList;
@@ -124,16 +126,13 @@ public class GemSeedTE extends BlockEntity {
             BlockPos toDrain = pos.offset(-5, -5, -5).offset(r.nextInt(11), r.nextInt(11), r.nextInt(11));
             Block block = this.level.getBlockState(toDrain).getBlock();
             if (!resMap.isEmpty()) {
-                if (!resMap.containsKey(block)) {
+                if (resMap.containsKey(block)) {
                     info.resources[0] += resMap.get(block).resources[0];
                     info.resources[1] += resMap.get(block).resources[1];
                     info.resources[2] += resMap.get(block).resources[2];
                     info.resources[3] += resMap.get(block).resources[3];
                     info.resources[4] += resMap.get(block).resources[4];
                     info.resources[5] += resMap.get(block).resources[5];
-                }
-                if (qualityMap.get(block) != 0 && qualityMap.get(block) != null) {
-                    info.quality += qualityMap.get(block);
                 }
             }
             drainBlock(toDrain);
@@ -227,6 +226,7 @@ public class GemSeedTE extends BlockEntity {
         ArrayList<GemInfo> possibleResults = new ArrayList<>();
         ArrayList<Float> possibleQualities = new ArrayList<>();
         int threshhold = 35;
+        System.out.println("gem Info Size " + gemInfoList.size());
         for (GemInfo gemInfo : gemInfoList) {
             int distance = 0;
             int[] res = gemInfo.getResources();
@@ -234,11 +234,13 @@ public class GemSeedTE extends BlockEntity {
                 if (res[a] > info.resources[a]) distance += (res[a] - info.resources[a]);
                 else distance += (info.resources[a] - res[a]);
             }
+            float subtracted = ((float)distance)/threshhold;
             if (distance < threshhold) {
-                float subtracted = ((float)distance)/threshhold;
+                float distancef = distance;
+                if (primer == gemInfo.getPrimer()) distancef = distancef/3;
                 System.out.println("seed resources "+Arrays.toString(info.resources));
-                System.out.println(gemInfo.getName() + " " + Arrays.toString(res)+" " + distance+ " quality "+subtracted);
-                for (int b = 0; b < threshhold - distance; b++) {
+                System.out.println(gemInfo.getName() + " " + Arrays.toString(res)+" " + distancef+ " quality "+subtracted);
+                for (int b = 0; b < threshhold - distancef; b++) {
                     possibleResults.add(gemInfo);
                     possibleQualities.add((float) 1 - subtracted);
                 }
@@ -246,24 +248,45 @@ public class GemSeedTE extends BlockEntity {
         }
         if (!possibleResults.isEmpty()) {
             RandomSource r = level.getRandom();
+            System.out.println("size "+possibleResults.size());
+            System.out.println(possibleResults);
             int random = r.nextInt(possibleResults.size());
             toForm = possibleResults.get(random);
             float qualityFloat = possibleQualities.get(random);
-            if (qualityFloat <= 0.25) {
-                if (qualityFloat <= 0.09) {
-                    quality = 5;
-                } else if (qualityFloat <= 0.175) {
-                    quality = 4;
+            if (!primeBoosted) {
+                if (qualityFloat <= 0.25) {
+                    if (qualityFloat <= 0.09) {
+                        quality = 5;
+                    } else if (qualityFloat <= 0.175) {
+                        quality = 4;
+                    } else {
+                        quality = 3;
+                    }
+                    clod = true;
+                } else if (qualityFloat >= 0.95) {
+                    quality = 0;
+                } else if (qualityFloat <= 0.4) {
+                    quality = 2;
                 } else {
-                    quality = 3;
+                    quality = 1;
                 }
-                clod = true;
-            } else if (qualityFloat >= 0.95) {
-                quality = 0;
-            } else if (qualityFloat <= 0.4) {
-                quality = 2;
             } else {
-                quality = 1;
+                if (qualityFloat <= 0.15) {
+                    if (qualityFloat <= 0.03) {
+                        quality = 5;
+                    } else if (qualityFloat <= 0.09) {
+                        quality = 4;
+                    } else {
+                        quality = 3;
+                    }
+                    clod = true;
+                } else if (qualityFloat >= 0.85) {
+                    quality = 0;
+                } else if (qualityFloat <= 0.3) {
+                    quality = 2;
+                } else {
+                    quality = 1;
+                }
             }
             formGem();
         } else {
@@ -443,6 +466,7 @@ public class GemSeedTE extends BlockEntity {
             } else {
                 this.GenerateClosestExitHole(getClosestExitDirection(), gem.exitHoleSize());
             }
+            gem.emerged = true;
         } else {
             System.out.println("clod");
             RegistryObject<EntityType<EntityAbomination>> abominationr = ModEntities.ABOMINATION;
@@ -686,7 +710,6 @@ public class GemSeedTE extends BlockEntity {
             compound.putInt("resources"+i, info.resources[i]);
         }
         compound.putFloat("temp", info.temp);
-        compound.putFloat("quality", info.quality);
         compound.putInt("infochroma", info.chroma);
     }
 
@@ -708,9 +731,8 @@ public class GemSeedTE extends BlockEntity {
             resources[i] = nbt.getInt("resources"+i);
         }
         float temp = nbt.getFloat("temp");
-        float quality = nbt.getFloat("quality");
         int chroma = nbt.getInt("infochroma");
-        info = new GemSeedInfo(resources, temp, quality, chroma);
+        info = new GemSeedInfo(resources, temp, chroma);
     }
 
     @Override
@@ -730,9 +752,8 @@ public class GemSeedTE extends BlockEntity {
             resources[i] = nbt.getInt("resources"+i);
         }
         float temp = nbt.getFloat("temp");
-        float quality = nbt.getFloat("quality");
         int chroma = nbt.getInt("infochroma");
-        info = new GemSeedInfo(resources, temp, quality, chroma);
+        info = new GemSeedInfo(resources, temp, chroma);
     }
 
     @Override
@@ -751,7 +772,6 @@ public class GemSeedTE extends BlockEntity {
             compound.putInt("resources"+i, info.resources[i]);
         }
         compound.putFloat("temp", info.temp);
-        compound.putFloat("quality", info.quality);
         compound.putInt("chroma", info.chroma);
         return compound;
     }

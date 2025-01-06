@@ -50,48 +50,49 @@ public class InjectorContainer extends AbstractContainerMenu {
 
         //TILE ENTITY
         this.injector.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(handler -> {
-            this.addSlot(new SlotItemHandler(handler, InjectorTE.WHITE_INPUT_SLOT_INDEX, 61, 14) {
+            this.addSlot(new SlotItemHandler(handler, InjectorTE.ESSENCE_INPUT_SLOT_INDEX, 16, 7) {
                 public boolean mayPlace(ItemStack stack) {
-                    return (stack.getItem() == ModItems.WHITE_ESSENCE_BUCKET.get());
+                    return (stack.getItem() == ModItems.WHITE_ESSENCE_BUCKET.get() ||stack.getItem() == ModItems.YELLOW_ESSENCE_BUCKET.get() ||stack.getItem() == ModItems.BLUE_ESSENCE_BUCKET.get() ||stack.getItem() == ModItems.PINK_ESSENCE_BUCKET.get());
                 }
             });
-            this.addSlot(new SlotItemHandler(handler, InjectorTE.YELLOW_INPUT_SLOT_INDEX, 43    , 32){
-                public boolean mayPlace(ItemStack stack) {
-                    return (stack.getItem() == ModItems.YELLOW_ESSENCE_BUCKET.get());
-                }
-            });
-            this.addSlot(new SlotItemHandler(handler, InjectorTE.CHROMA_INPUT_SLOT_INDEX, 61, 32){
+            this.addSlot(new SlotItemHandler(handler, InjectorTE.CHROMA_INPUT_SLOT_INDEX, 44, 29){
                 public boolean mayPlace(ItemStack stack) {
                     return (stack.getItem() instanceof ItemChroma);
                 }
             });
-            this.addSlot(new SlotItemHandler(handler, InjectorTE.BLUE_INPUT_SLOT_INDEX, 79, 32){
-                public boolean mayPlace(ItemStack stack) {
-                    return (stack.getItem() == ModItems.BLUE_ESSENCE_BUCKET.get());
-                }
-            });
-            //this.addSlot(new SlotItemHandler(handler, InjectorTE.PRIME_INPUT_SLOT_INDEX, 43, 50));
-            this.addSlot(new SlotItemHandler(handler, InjectorTE.PINK_INPUT_SLOT_INDEX, 61, 50){
-                public boolean mayPlace(ItemStack stack) {
-                    return (stack.getItem() == ModItems.PINK_ESSENCE_BUCKET.get());
-                }
-            });
-            this.addSlot(new SlotItemHandler(handler, InjectorTE.PRIME_INPUT_SLOT_INDEX, 43, 50){
+            this.addSlot(new SlotItemHandler(handler, InjectorTE.PRIME_INPUT_SLOT_INDEX, 62, 29){
                 public boolean mayPlace(ItemStack stack) {
                     return primer.contains(stack.getItem());
                 };
             });
+            if (injector.getLevel().getBlockState(injector.getBlockPos().above().above()).getBlock() == ModBlocks.POWER_CRYSTAL_BLOCK_TIER_2.get()) {
+                this.addSlot(new SlotItemHandler(handler, InjectorTE.SPEED_INPUT_SLOT_INDEX, 80, 29) {
+                    public boolean mayPlace(ItemStack stack) {
+                        return stack.is(ModItems.GILDED_LAPIS.get());
+                    }
+
+                    ;
+                });
+                this.addSlot(new SlotItemHandler(handler, InjectorTE.BOOST_INPUT_SLOT_INDEX, 98, 29) {
+                    public boolean mayPlace(ItemStack stack) {
+                        return stack.is(ModItems.PRIME_BOOST.get());
+                    }
+
+                    ;
+
+                });
+            }
         });
         //PLAYER INVENTORY
         for(int row = 0; row < 3; row++){
             for(int col = 0; col < 9; col++){
-                this.addSlot(new Slot(playerInventory, col + row * 9 + 9, 8 + col * 18, 165 - (4 - row) * 18 - 10));
+                this.addSlot(new Slot(playerInventory, col + row * 9 + 9, 8 + col * 18, 128 - (4 - row) * 18 - 2));
             }
         }
 
         //PLAYER HOTBAR
         for(int col = 0; col < 9; col++){
-            this.addSlot(new Slot(playerInventory, col, 8 + col * 18, 141));
+            this.addSlot(new Slot(playerInventory, col, 8 + col * 18, 112));
         }
     }
 

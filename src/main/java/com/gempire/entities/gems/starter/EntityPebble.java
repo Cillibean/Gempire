@@ -105,6 +105,7 @@ public class EntityPebble extends EntityStarterGem {
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
         this.goalSelector.addGoal(7, new EntityAIFollowAssigned(this, 1.0D));
         this.goalSelector.addGoal(8, new EntityAIWander(this, 1.0D));
+        this.goalSelector.addGoal(4, new EntityAIExitHole(this, 1.0D));
         this.goalSelector.addGoal(8, new EntityAIStay(this, 1.0D));
         this.goalSelector.addGoal(8, new EntityAIFollowOwner(this, 1.0D));
         this.goalSelector.addGoal(10, new EntityAIMakeDrill(this, 1.0D));

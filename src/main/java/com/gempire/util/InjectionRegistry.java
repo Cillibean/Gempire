@@ -1,6 +1,8 @@
 package com.gempire.util;
 
 import com.gempire.init.ModBlocks;
+import com.gempire.init.ModItems;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 
@@ -15,41 +17,41 @@ public class InjectionRegistry {
     public static void setMap() {
 
         //tier 1
-        listBasic.add(new GemInfo(new int[]{0, 10, 35, 0, 5, 0}, 1f, "agate"));
-        listBasic.add(new GemInfo(new int[]{10, 0, 10, 30, 0, 0}, 1.25f, "bismuth"));
-        listBasic.add(new GemInfo(new int[]{0, 10, 25, 10, 0, 0}, 1.35f, "jasper"));
-        listBasic.add(new GemInfo(new int[]{0, 0, 35, 0, 0, 15}, 0.65f, "lapis_lazuli"));
-        listBasic.add(new GemInfo(new int[]{0, 0, 19, 18, 3, 0}, 1.4f, "peridot"));
-        listBasic.add(new GemInfo(new int[]{10, 10, 25, 0, 0, 0}, 1.35f, "quartz"));
-        listBasic.add(new GemInfo(new int[]{10, 0, 16, 4, 0, 0}, 1.6f, "ruby"));
-        listBasic.add(new GemInfo(new int[]{10, 0, 15, 15, 0, 0}, 1.6f, "rutile"));
-        listBasic.add(new GemInfo(new int[]{30, 0, 30, 0, 0, 0}, 1.25f, "spinel"));
-        listBasic.add(new GemInfo(new int[]{0, 0, 40, 10, 0, 0}, 1.25f, "topaz"));
-        listBasic.add(new GemInfo(new int[]{20, 10, 15, 0, 0, 0}, 0.95f, "tourmaline"));
+        listBasic.add(new GemInfo(new int[]{0, 10, 35, 0, 5, 0}, 1f, "agate", Items.DRAGON_BREATH));
+        listBasic.add(new GemInfo(new int[]{10, 0, 10, 30, 0, 0}, 1.25f, "bismuth", Items.NETHERITE_SWORD));
+        listBasic.add(new GemInfo(new int[]{0, 10, 25, 10, 0, 0}, 1.35f, "jasper", Items.BLAZE_ROD));
+        listBasic.add(new GemInfo(new int[]{0, 0, 35, 0, 0, 15}, 0.65f, "lapis_lazuli", Items.NAUTILUS_SHELL));
+        listBasic.add(new GemInfo(new int[]{0, 0, 19, 18, 3, 0}, 1.4f, "peridot", Items.EXPERIENCE_BOTTLE));
+        listBasic.add(new GemInfo(new int[]{10, 10, 25, 0, 0, 0}, 1.35f, "quartz", Items.NETHER_STAR));
+        listBasic.add(new GemInfo(new int[]{10, 0, 16, 4, 0, 0}, 1.6f, "ruby", Items.NETHERITE_INGOT));
+        listBasic.add(new GemInfo(new int[]{10, 0, 15, 15, 0, 0}, 1.6f, "rutile", Items.FIRE_CHARGE));
+        listBasic.add(new GemInfo(new int[]{30, 0, 30, 0, 0, 0}, 1.25f, "spinel", Items.NETHER_WART));
+        listBasic.add(new GemInfo(new int[]{0, 0, 40, 10, 0, 0}, 1.25f, "topaz", Items.GOLD_BLOCK));
+        listBasic.add(new GemInfo(new int[]{20, 10, 15, 0, 0, 0}, 0.95f, "tourmaline", Items.ENCHANTED_GOLDEN_APPLE));
 
         //tier 2
-        list.add(new GemInfo(new int[]{0, 10, 35, 0, 5, 0}, 1f, "agate"));
-        list.add(new GemInfo(new int[]{0, 10, 35, 0, 0, 5}, 0.75f, "aquamarine"));
-        list.add(new GemInfo(new int[]{10, 0, 10, 30, 0, 0}, 1.25f, "bismuth"));
-        list.add(new GemInfo(new int[]{15, 0, 25, 0, 0, 10}, 1.25f, "bixbite"));
-        list.add(new GemInfo(new int[]{0, 10, 50, 10, 0, 0}, 0.95f, "emerald"));
-        list.add(new GemInfo(new int[]{10, 14, 46, 10, 0, 0}, 1f, "garnet"));
-        list.add(new GemInfo(new int[]{0, 10, 25, 10, 0, 0}, 1.35f, "jasper"));
-        list.add(new GemInfo(new int[]{0, 0, 35, 0, 0, 15}, 0.65f, "lapis_lazuli"));
-        list.add(new GemInfo(new int[]{0, 0, 25, 0, 15, 0}, -0.3f, "larimar"));
-        list.add(new GemInfo(new int[]{10, 10, 30, 0, 0, 0}, 0.65f, "morganite"));
-        list.add(new GemInfo(new int[]{10, 0, 30, 10, 0, 0}, 0.95f, "nephrite"));
-        list.add(new GemInfo(new int[]{0, 10, 8, 0, 12, 0}, 1.75f, "obsidian"));
-        list.add(new GemInfo(new int[]{0, 0, 19, 18, 3, 0}, 1.4f, "peridot"));
-        list.add(new GemInfo(new int[]{10, 10, 25, 0, 0, 0}, 1.35f, "quartz"));
-        list.add(new GemInfo(new int[]{10, 0, 16, 4, 0, 0}, 1.6f, "ruby"));
-        list.add(new GemInfo(new int[]{10, 0, 15, 15, 0, 0}, 1.6f, "rutile"));
-        list.add(new GemInfo(new int[]{0, 10, 42, 8, 0, 0}, 0.35f, "sapphire"));
-        list.add(new GemInfo(new int[]{30, 0, 30, 0, 0, 0}, 1.25f, "spinel"));
-        list.add(new GemInfo(new int[]{14, 0, 16, 0, 0, 10}, 0.65f, "spodumene"));
-        list.add(new GemInfo(new int[]{0, 0, 40, 10, 0, 0}, 1.25f, "topaz"));
-        list.add(new GemInfo(new int[]{20, 10, 15, 0, 0, 0}, 0.95f, "tourmaline"));
-        list.add(new GemInfo(new int[]{0, 30, 40, 0, 0, 0}, 0.75f, "zircon"));
+        list.add(new GemInfo(new int[]{0, 10, 35, 0, 5, 0}, 1f, "agate", Items.DRAGON_BREATH));
+        list.add(new GemInfo(new int[]{0, 10, 35, 0, 0, 5}, 0.75f, "aquamarine", Items.GHAST_TEAR));
+        list.add(new GemInfo(new int[]{10, 0, 10, 30, 0, 0}, 1.25f, "bismuth", Items.NETHERITE_SWORD));
+        list.add(new GemInfo(new int[]{15, 0, 25, 0, 0, 10}, 1.25f, "bixbite", ModItems.PRISMATIC_SHEARS.get()));
+        list.add(new GemInfo(new int[]{0, 10, 50, 10, 0, 0}, 0.95f, "emerald", Items.EMERALD_BLOCK));
+        list.add(new GemInfo(new int[]{10, 14, 46, 10, 0, 0}, 1f, "garnet", Items.WITHER_SKELETON_SKULL));
+        list.add(new GemInfo(new int[]{0, 10, 25, 10, 0, 0}, 1.35f, "jasper", Items.BLAZE_ROD));
+        list.add(new GemInfo(new int[]{0, 0, 35, 0, 0, 15}, 0.65f, "lapis_lazuli", Items.NAUTILUS_SHELL));
+        list.add(new GemInfo(new int[]{0, 0, 25, 0, 15, 0}, -0.3f, "larimar", Items.BLUE_ICE));
+        list.add(new GemInfo(new int[]{10, 10, 30, 0, 0, 0}, 0.65f, "morganite", Items.PHANTOM_MEMBRANE));
+        list.add(new GemInfo(new int[]{10, 0, 30, 10, 0, 0}, 0.95f, "nephrite", Items.WITHER_ROSE));
+        list.add(new GemInfo(new int[]{0, 10, 8, 0, 12, 0}, 1.75f, "obsidian", Items.END_CRYSTAL));
+        list.add(new GemInfo(new int[]{0, 0, 19, 18, 3, 0}, 1.4f, "peridot", Items.EXPERIENCE_BOTTLE));
+        list.add(new GemInfo(new int[]{10, 10, 25, 0, 0, 0}, 1.35f, "quartz", Items.NETHER_STAR));
+        list.add(new GemInfo(new int[]{10, 0, 16, 4, 0, 0}, 1.6f, "ruby", Items.NETHERITE_INGOT));
+        list.add(new GemInfo(new int[]{10, 0, 15, 15, 0, 0}, 1.6f, "rutile", Items.FIRE_CHARGE));
+        list.add(new GemInfo(new int[]{0, 10, 42, 8, 0, 0}, 0.35f, "sapphire", Items.ENDER_EYE));
+        list.add(new GemInfo(new int[]{30, 0, 30, 0, 0, 0}, 1.25f, "spinel", Items.NETHER_WART));
+        list.add(new GemInfo(new int[]{14, 0, 16, 0, 0, 10}, 0.65f, "spodumene", Items.HEART_OF_THE_SEA));
+        list.add(new GemInfo(new int[]{0, 0, 40, 10, 0, 0}, 1.25f, "topaz", Items.GOLD_BLOCK));
+        list.add(new GemInfo(new int[]{20, 10, 15, 0, 0, 0}, 0.95f, "tourmaline", Items.ENCHANTED_GOLDEN_APPLE));
+        list.add(new GemInfo(new int[]{0, 30, 40, 0, 0, 0}, 0.75f, "zircon", Items.TOTEM_OF_UNDYING));
 
         //0 - organic
         //1 - mystical
@@ -61,12 +63,8 @@ public class InjectionRegistry {
         blockList.put(Blocks.MUD, new CruxInfo(new int[]{0, 0, 0, 0, 0, 1}, Blocks.MUD, "mud"));
         blockList.put(Blocks.CLAY, new CruxInfo(new int[]{0, 0, 0, 0, 0, 2}, Blocks.CLAY, "clay"));
         blockList.put(Blocks.MOSS_BLOCK, new CruxInfo(new int[]{2, 0, 0, 0, 0, 0}, Blocks.MOSS_BLOCK, "moss_block"));
-        blockList.put(Blocks.GRANITE, new CruxInfo(new int[]{0, 0, 1, 0, 0, 0}, Blocks.GRANITE, "granite"));
-        blockList.put(Blocks.DIORITE, new CruxInfo(new int[]{0, 0, 1, 0, 0, 0}, Blocks.DIORITE, "diorite"));
-        blockList.put(Blocks.CALCITE, new CruxInfo(new int[]{0, 0, 1, 0, 0, 0}, Blocks.CALCITE, "calcite"));
         blockList.put(Blocks.DRIPSTONE_BLOCK, new CruxInfo(new int[]{0, 0, 1, 0, 0, 0}, Blocks.DRIPSTONE_BLOCK, "dripstone_block"));
         blockList.put(Blocks.BLACKSTONE, new CruxInfo(new int[]{0, 0, 1, 0, 0, 0}, Blocks.BLACKSTONE, "blackstone"));
-        blockList.put(Blocks.ANDESITE, new CruxInfo(new int[]{0, 0, 1, 0, 1, 0}, Blocks.ANDESITE, "andesite"));
         blockList.put(Blocks.TUFF, new CruxInfo(new int[]{0, 0, 0, 0, 2, 0}, Blocks.TUFF, "tuff"));
         blockList.put(Blocks.PRISMARINE, new CruxInfo(new int[]{0, 0, 0, 0, 0, 3}, Blocks.PRISMARINE, "prismarine"));
         blockList.put(Blocks.MAGMA_BLOCK, new CruxInfo(new int[]{0, 0, 0, 0, 3, 0}, Blocks.MAGMA_BLOCK, "magma_block"));

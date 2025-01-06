@@ -372,8 +372,6 @@ public class ModEntities {
         InjectorContainer.primer.add(Items.END_CRYSTAL);
         InjectorContainer.primer.add(Items.NETHER_WART);
         InjectorContainer.primer.add(Items.TOTEM_OF_UNDYING);
-        InjectorContainer.primer.add(ModItems.GILDED_LAPIS.get());
-        InjectorContainer.primer.add(ModItems.PRIME_BOOST.get());
     }
 
     public static void setVanillaGems(){

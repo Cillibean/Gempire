@@ -184,6 +184,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     public int abilityTicks;
     int crackChance = 50;
     int shatterChance = 200;
+    public boolean emerged;
 
     public static final int NUMBER_OF_SLOTS = 33;
     public NonNullList<ItemStack> items = NonNullList.withSize(EntityGem.NUMBER_OF_SLOTS, ItemStack.EMPTY);
@@ -990,6 +991,10 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             rebel();
         }
         rebelTicks = 0;
+    }
+
+    public boolean justEmerged() {
+        return emerged;
     }
 
     public Float getXScale(){

@@ -1,21 +1,16 @@
 package com.gempire.util;
 
+import net.minecraft.world.item.Item;
+
 public class GemSeedInfo {
     public int[] resources;
     public float temp;
-    public float quality;
     public int chroma;
 
-    public GemSeedInfo(int[] resources, float temp, float quality, int chroma) {
+    public GemSeedInfo(int[] resources, float temp, int chroma) {
         this.resources = resources;
-        this.quality = quality;
         this.temp = temp;
         this.chroma = chroma;
-    }
-
-
-    public float getQuality() {
-        return quality;
     }
 
     public int[] getResources() {
@@ -27,10 +22,6 @@ public class GemSeedInfo {
     }
     public float getTemp() {
         return temp;
-    }
-
-    public void setQuality(float value) {
-        quality = value;
     }
 
     public void setResources(int[] value) {
