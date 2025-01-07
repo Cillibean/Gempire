@@ -16,6 +16,7 @@ import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.core.Direction;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.block.state.properties.Half;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -45,18 +46,17 @@ public class IceSpikeBlock extends Block {
 
     public void playerWillDestroy(Level worldIn, BlockPos pos, BlockState state, Player player) {
         if (!worldIn.isClientSide) {
-            IceSpikeBlock.removeBottomHalf(worldIn, pos, state, player);
+            IceSpikeBlock.removeBottomHalf(worldIn, pos, state);
         }
         super.playerWillDestroy(worldIn, pos, state, player);
     }
-    public static void removeBottomHalf(Level world, BlockPos pos, BlockState state, Player player) {
+    public static void removeBottomHalf(Level world, BlockPos pos, BlockState state) {
         DoubleBlockHalf doubleblockhalf = state.getValue(HALF);
         if (doubleblockhalf == DoubleBlockHalf.UPPER) {
             BlockPos blockpos = pos.below();
             BlockState blockstate = world.getBlockState(blockpos);
             if (blockstate.getBlock() == state.getBlock() && blockstate.getValue(HALF) == DoubleBlockHalf.LOWER) {
                 world.destroyBlock(blockpos, false);
-                world.levelEvent(player, 2001, blockpos, Block.getId(blockstate));
             }
         }
     }
@@ -180,6 +180,8 @@ public class IceSpikeBlock extends Block {
         if (p_54170_.dimensionType().ultraWarm()) {
             p_54170_.removeBlock(p_54171_, false);
         } else {
+            if (p_54169_.getValue(HALF) == DoubleBlockHalf.LOWER) removeTopHalf(p_54170_, p_54171_, p_54169_);
+            else removeBottomHalf(p_54170_, p_54171_, p_54169_);
             p_54170_.setBlockAndUpdate(p_54171_, Blocks.AIR.defaultBlockState());
             p_54170_.neighborChanged(p_54171_, Blocks.AIR, p_54171_);
         }

@@ -68,18 +68,6 @@ public class ChromaBlock extends DirectionalBlock implements SimpleWaterloggedBl
         return blockstate.is(this) && blockstate.getValue(FACING) == direction ? this.defaultBlockState().setValue(FACING, direction.getOpposite()).setValue(WATERLOGGED, false) : this.defaultBlockState().setValue(FACING, direction).setValue(WATERLOGGED, false);
     }
 
-
-    public void animateTick(BlockState stateIn, Level worldIn, BlockPos pos, Random rand) {
-        Direction direction = stateIn.getValue(FACING);
-        double d0 = (double)pos.getX() + 1 - (double)(rand.nextFloat());
-        double d1 = (double)pos.getY() + 1 - (double)(rand.nextFloat());
-        double d2 = (double)pos.getZ() + 1 - (double)(rand.nextFloat());
-        double d3 = (double)(0.4F - (rand.nextFloat() + rand.nextFloat()) * 0.4F);
-        if (rand.nextInt(5) == 0) {
-            worldIn.addParticle(ParticleTypes.END_ROD, d0 + (double)direction.getStepX() * d3, d1 + (double)direction.getStepY() * d3, d2 + (double)direction.getStepZ() * d3, rand.nextGaussian() * 0.005D, rand.nextGaussian() * 0.005D, rand.nextGaussian() * 0.005D);
-        }
-    }
-
     public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor worldIn, BlockPos currentPos, BlockPos facingPos) {
         return !stateIn.canSurvive(worldIn, currentPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(stateIn, facing, facingState, worldIn, currentPos, facingPos);
     }
@@ -140,5 +128,18 @@ public class ChromaBlock extends DirectionalBlock implements SimpleWaterloggedBl
 
     public FluidState getFluidState(BlockState p_54377_) {
         return p_54377_.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(p_54377_);
+    }
+
+    @Override
+    public void animateTick(BlockState stateIn, Level level, BlockPos pos, RandomSource rand) {
+        Direction direction = stateIn.getValue(FACING);
+        double d0 = (double)pos.getX() + 1 - (double)(rand.nextFloat());
+        double d1 = (double)pos.getY() + 1 - (double)(rand.nextFloat());
+        double d2 = (double)pos.getZ() + 1 - (double)(rand.nextFloat());
+        double d3 = (double)(0.4F - (rand.nextFloat() + rand.nextFloat()) * 0.4F);
+        if (rand.nextInt(5) == 0) {
+            level.addParticle(ParticleTypes.END_ROD, d0 + (double)direction.getStepX() * d3, d1 + (double)direction.getStepY() * d3, d2 + (double)direction.getStepZ() * d3, rand.nextGaussian() * 0.005D, rand.nextGaussian() * 0.005D, rand.nextGaussian() * 0.005D);
+        }
+        super.animateTick(stateIn, level, pos, rand);
     }
 }

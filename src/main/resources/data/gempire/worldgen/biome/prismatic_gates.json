@@ -49,7 +49,10 @@
       "gempire:ore_schist"
     ],
     [],
-    [],
+    [
+      "minecraft:spring_water",
+      "minecraft:spring_lava"
+    ],
     [
       "minecraft:glow_lichen",
       "minecraft:patch_tall_grass_2",

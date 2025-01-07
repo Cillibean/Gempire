@@ -1,0 +1,26 @@
+{
+  "structures": [
+    {
+      "structure": "gempire:holeorb_red1",
+      "weight": 1
+    },
+    {
+      "structure": "gempire:holeorb_red2",
+      "weight": 2
+    },
+    {
+      "structure": "gempire:holeorb_red3",
+      "weight": 2
+    },
+    {
+      "structure": "gempire:holeorb_red4",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 1768909926,
+    "spacing": 5,
+    "separation": 1
+  }
+}
