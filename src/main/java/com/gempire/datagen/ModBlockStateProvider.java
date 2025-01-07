@@ -246,8 +246,6 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         blockWithItem(ModBlocks.ROUGH_SELENITE);
 
-        saplingBlock(ModBlocks.SELENITE_CLUSTER);
-
         paneBlock(ModBlocks.RED_LATTICE, new ResourceLocation(Gempire.MODID, "block/lattice_red"), new ResourceLocation(Gempire.MODID, "block/lattice_red"));
         paneBlock(ModBlocks.ORANGE_LATTICE, new ResourceLocation(Gempire.MODID, "block/lattice_orange"), new ResourceLocation(Gempire.MODID, "block/lattice_orange"));
         paneBlock(ModBlocks.YELLOW_LATTICE, new ResourceLocation(Gempire.MODID, "block/lattice_yellow"), new ResourceLocation(Gempire.MODID, "block/lattice_yellow"));

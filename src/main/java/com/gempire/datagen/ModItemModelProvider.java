@@ -42,7 +42,7 @@ public class ModItemModelProvider extends ItemModelProvider {
 
         simpleItem(ModItems.PRISMATIC_INGOT);
         simpleItem(ModItems.GEM_ALLOY);
-        //simpleItem(ModItems.PRISMATIC_UPGRADE_SMITHING_TEMPLATE);
+        simpleItem(ModItems.PRISMATIC_UPGRADE_SMITHING_TEMPLATE);
 
         handheldItem(ModItems.PRISMATIC_SWORD);
         handheldItem(ModItems.PRISMATIC_AXE);
@@ -93,7 +93,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.REMNANTS_MUSIC_DISC);
         simpleItem(ModItems.FRAGMENTS_MUSIC_DISC);
 
-        simpleItem(ModItems.GILDED_LAPIS);
+        simpleItem(ModItems.SPEED_BOOSTER);
         simpleItem(ModItems.PRIME_BOOST);
         simpleItem(ModItems.SLATE);
         simpleItem(ModItems.PRIMED_SLATE);
@@ -261,6 +261,13 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.OPALIZED_TOOTH);
         simpleItem(ModItems.DRIED_COBALT_KELP);
         simpleItem(ModItems.COBALT_KELP);
+
+        simpleItem(ModItems.RAW_MANTAWING);
+        simpleItem(ModItems.COOKED_MANTAWING);
+        simpleItem(ModItems.RAW_OPALIZED_MANTAWING);
+        simpleItem(ModItems.COOKED_OPALIZED_MANTAWING);
+        simpleItem(ModItems.RAW_CRYSTAL_SHANK);
+        simpleItem(ModItems.COOKED_CRYSTAL_SHANK);
     }
 
     private ItemModelBuilder saplingItem(RegistryObject<Block> item) {

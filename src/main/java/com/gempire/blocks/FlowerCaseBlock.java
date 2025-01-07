@@ -97,12 +97,12 @@ public class FlowerCaseBlock extends DirectionalBlock {
 
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
-        if (!level.isClientSide && player.getMainHandItem().is(ModItems.PRISMATIC_PICKAXE.get()) && level.getBlockState(pos) == ModBlocks.PALADIN_CASE.get().defaultBlockState()) {
+        if (!level.isClientSide && player.getMainHandItem().is(ModItems.PRISMATIC_PICKAXE.get()) && level.getBlockState(pos).is(ModBlocks.PALADIN_CASE.get())) {
             System.out.println("pickaxe");
             popResource(level, pos, new ItemStack(ModItems.PALADIN_FLOWER.get()));
             ItemStack stack = new ItemStack(ModItems.PRISMATIC_GLASS_SHARDS.get(), player.getRandom().nextInt(3)+2);
             popResource(level, pos, stack);
-            level.setBlockAndUpdate(pos, ModBlocks.EMPTY_PALADIN_CASE.get().defaultBlockState());
+            level.setBlockAndUpdate(pos, ModBlocks.EMPTY_PALADIN_CASE.get().withPropertiesOf(level.getBlockState(pos)));
         }
 
         return super.use(state, level, pos, player, hand, result);

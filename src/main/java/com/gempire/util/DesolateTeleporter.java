@@ -37,7 +37,7 @@ public class DesolateTeleporter implements ITeleporter {
             tries++;
         }
 
-        entity.setPos(destinationPos.getX(), destinationPos.getY()+2, destinationPos.getZ());
+        entity.setPos(destinationPos.getX(), destinationPos.getY()+3, destinationPos.getZ());
 
         if (insideDimension || entity.getBlockStateOn() != ModBlocks.GALAXY_WARP.get().defaultBlockState()) {
             boolean doSetBlock = true;
@@ -57,20 +57,20 @@ public class DesolateTeleporter implements ITeleporter {
                     }
                 }
                 destinationWorld.setBlock(portalPos.offset(2, 0, 0), ModBlocks.POLISHED_SELENITE_STAIRS.get().defaultBlockState().setValue(StairBlock.FACING, Direction.WEST),3);
-                destinationWorld.setBlock(portalPos.offset(2, 0, 1), ModBlocks.POLISHED_SELENITE_STAIRS.get().defaultBlockState().setValue(StairBlock.FACING, Direction.NORTH).setValue(StairBlock.SHAPE, StairsShape.OUTER_RIGHT),3);
-                destinationWorld.setBlock(portalPos.offset(2, 0, -1), ModBlocks.POLISHED_SELENITE_STAIRS.get().defaultBlockState().setValue(StairBlock.FACING, Direction.SOUTH).setValue(StairBlock.SHAPE, StairsShape.OUTER_LEFT),3);
+                destinationWorld.setBlock(portalPos.offset(2, 0, 1), ModBlocks.POLISHED_SELENITE_STAIRS.get().defaultBlockState().setValue(StairBlock.FACING, Direction.EAST).setValue(StairBlock.SHAPE, StairsShape.OUTER_LEFT),3);
+                destinationWorld.setBlock(portalPos.offset(2, 0, -1), ModBlocks.POLISHED_SELENITE_STAIRS.get().defaultBlockState().setValue(StairBlock.FACING, Direction.EAST).setValue(StairBlock.SHAPE, StairsShape.OUTER_RIGHT),3);
 
                 destinationWorld.setBlock(portalPos.offset(-2, 0, 0), ModBlocks.POLISHED_SELENITE_STAIRS.get().defaultBlockState().setValue(StairBlock.FACING, Direction.EAST),3);
-                destinationWorld.setBlock(portalPos.offset(-2, 0, 1), ModBlocks.POLISHED_SELENITE_STAIRS.get().defaultBlockState().setValue(StairBlock.FACING, Direction.SOUTH).setValue(StairBlock.SHAPE, StairsShape.OUTER_RIGHT),3);
-                destinationWorld.setBlock(portalPos.offset(-2, 0, -1), ModBlocks.POLISHED_SELENITE_STAIRS.get().defaultBlockState().setValue(StairBlock.FACING, Direction.NORTH).setValue(StairBlock.SHAPE, StairsShape.OUTER_LEFT),3);
+                destinationWorld.setBlock(portalPos.offset(-2, 0, 1), ModBlocks.POLISHED_SELENITE_STAIRS.get().defaultBlockState().setValue(StairBlock.FACING, Direction.NORTH).setValue(StairBlock.SHAPE, StairsShape.OUTER_LEFT),3);
+                destinationWorld.setBlock(portalPos.offset(-2, 0, -1), ModBlocks.POLISHED_SELENITE_STAIRS.get().defaultBlockState().setValue(StairBlock.FACING, Direction.SOUTH).setValue(StairBlock.SHAPE, StairsShape.OUTER_RIGHT),3);
 
                 destinationWorld.setBlock(portalPos.offset(0, 0, 2), ModBlocks.POLISHED_SELENITE_STAIRS.get().defaultBlockState().setValue(StairBlock.FACING, Direction.NORTH),3);
-                destinationWorld.setBlock(portalPos.offset(1, 0, 2), ModBlocks.POLISHED_SELENITE_STAIRS.get().defaultBlockState().setValue(StairBlock.FACING, Direction.EAST).setValue(StairBlock.SHAPE, StairsShape.OUTER_RIGHT),3);
-                destinationWorld.setBlock(portalPos.offset(-1, 0, 2), ModBlocks.POLISHED_SELENITE_STAIRS.get().defaultBlockState().setValue(StairBlock.FACING, Direction.WEST).setValue(StairBlock.SHAPE, StairsShape.OUTER_LEFT),3);
+                destinationWorld.setBlock(portalPos.offset(1, 0, 2), ModBlocks.POLISHED_SELENITE_STAIRS.get().defaultBlockState().setValue(StairBlock.FACING, Direction.WEST).setValue(StairBlock.SHAPE, StairsShape.OUTER_LEFT),3);
+                destinationWorld.setBlock(portalPos.offset(-1, 0, 2), ModBlocks.POLISHED_SELENITE_STAIRS.get().defaultBlockState().setValue(StairBlock.FACING, Direction.SOUTH).setValue(StairBlock.SHAPE, StairsShape.OUTER_RIGHT),3);
 
                 destinationWorld.setBlock(portalPos.offset(0, 0, -2), ModBlocks.POLISHED_SELENITE_STAIRS.get().defaultBlockState().setValue(StairBlock.FACING, Direction.SOUTH),3);
-                destinationWorld.setBlock(portalPos.offset(1, 0, -2), ModBlocks.POLISHED_SELENITE_STAIRS.get().defaultBlockState().setValue(StairBlock.FACING, Direction.WEST).setValue(StairBlock.SHAPE, StairsShape.OUTER_RIGHT),3);
-                destinationWorld.setBlock(portalPos.offset(-1, 0, -2), ModBlocks.POLISHED_SELENITE_STAIRS.get().defaultBlockState().setValue(StairBlock.FACING, Direction.EAST).setValue(StairBlock.SHAPE, StairsShape.OUTER_LEFT),3);
+                destinationWorld.setBlock(portalPos.offset(1, 0, -2), ModBlocks.POLISHED_SELENITE_STAIRS.get().defaultBlockState().setValue(StairBlock.FACING, Direction.NORTH).setValue(StairBlock.SHAPE, StairsShape.OUTER_LEFT),3);
+                destinationWorld.setBlock(portalPos.offset(-1, 0, -2), ModBlocks.POLISHED_SELENITE_STAIRS.get().defaultBlockState().setValue(StairBlock.FACING, Direction.NORTH).setValue(StairBlock.SHAPE, StairsShape.OUTER_LEFT),3);
 
                 destinationWorld.setBlock(portalPos, ModBlocks.GALAXY_WARP.get().defaultBlockState(),3);
             }

@@ -187,7 +187,6 @@ public class Gempire
         ModEnchants.registerVanillaEnchantments();
         ModEnchants.registerPrimeRequiredEnchantments();
         ModEnchants.registerItemDiscounts();
-        ModBrewingRecipes.addRecipes();
     }
 
 

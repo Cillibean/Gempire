@@ -376,7 +376,7 @@ public class BoardTE extends BaseContainerBlockEntity implements MenuProvider {
             ItemStack stack = this.getItem(BoardTE.PRIMER_INPUT_SLOT_INDEX);
             if (stack.is(ModItems.PRIME_BOOST.get())) {
                 primer = 1;
-            } else if (stack.is(ModItems.GILDED_LAPIS.get())) {
+            } else if (stack.is(ModItems.SPEED_BOOSTER.get())) {
                 primer = 2;
             } else {
                 primer = 0;
@@ -1200,7 +1200,7 @@ public class BoardTE extends BaseContainerBlockEntity implements MenuProvider {
                 return stack.getItem() instanceof ItemGemBase;
             }
             if (i == 1) {
-                return stack.getItem() == ModItems.GILDED_LAPIS.get() ||
+                return stack.getItem() == ModItems.SPEED_BOOSTER.get() ||
                         stack.getItem() == ModItems.PRIME_BOOST.get();
             }
             if (i == 6 || i == 8) {

@@ -131,7 +131,7 @@ public class ZirconUIScreen extends AbstractContainerScreen<ZirconUIContainer> {
                         i + 26, j + 58, 4210752, false);
             }
         }
-        renderEntityInInventory(i + 170, j + 72, 23, (float)(i + 170) - mouseX, (float)(j + 25) - mouseY, this.menu.gem);
+        renderEntityInInventory(i + 170, j + 72, 23, (float)(i + 170) - mouseX, (float)(j + 72) - mouseY, this.menu.gem);
     }
 
     public int getXP(int discount){

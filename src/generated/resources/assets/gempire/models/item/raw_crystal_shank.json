@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "gempire:item/gilded_lapis"
+    "layer0": "gempire:item/raw_crystal_shank"
   }
 }

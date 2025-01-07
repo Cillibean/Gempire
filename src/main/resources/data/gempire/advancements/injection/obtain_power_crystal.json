@@ -1,0 +1,28 @@
+{
+  "display": {
+    "icon": {
+      "item": "gempire:power_crystal_block"
+    },
+    "title": {
+      "translate": "advancements.gempire.power_crystal.title"
+    },
+    "description": {
+      "translate": "advancements.gempire.power_crystal.description"
+    },
+    "frame": "task",
+    "hidden": true
+  },
+  "parent": "gempire:injection/obtain_tank",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["gempire:power_crystal_block"]
+          }
+        ]
+      }
+    }
+  }
+}

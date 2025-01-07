@@ -1,0 +1,28 @@
+{
+  "display": {
+    "icon": {
+      "item": "gempire:tank_block"
+    },
+    "title": {
+      "translate": "advancements.gempire.tank.title"
+    },
+    "description": {
+      "translate": "advancements.gempire.tank.description"
+    },
+    "frame": "task",
+    "hidden": true,
+    "background": "gempire:textures/block/ruined_marble_brick.png"
+  },
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["gempire:tank_block"]
+          }
+        ]
+      }
+    }
+  }
+}

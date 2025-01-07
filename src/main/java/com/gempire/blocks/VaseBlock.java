@@ -88,9 +88,9 @@ public class VaseBlock extends DirectionalBlock {
 
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
-        if (!level.isClientSide && player.getMainHandItem().is(ModItems.PRISMATIC_FLASK.get())  && level.getBlockState(pos) == ModBlocks.GUARDIAN_VASE.get().defaultBlockState()) {
+        if (!level.isClientSide && player.getMainHandItem().is(ModItems.PRISMATIC_FLASK.get())  && level.getBlockState(pos).is(ModBlocks.GUARDIAN_VASE.get())) {
             popResource(level, pos, new ItemStack(ModItems.GUARDIAN_TEAR.get()));
-            level.setBlockAndUpdate(pos, ModBlocks.EMPTY_GUARDIAN_VASE.get().defaultBlockState());
+            level.setBlockAndUpdate(pos, ModBlocks.EMPTY_GUARDIAN_VASE.get().withPropertiesOf(level.getBlockState(pos)));
             player.setItemSlot(EquipmentSlot.MAINHAND, player.getItemBySlot(EquipmentSlot.MAINHAND).copyWithCount(player.getItemBySlot(EquipmentSlot.MAINHAND).getCount()-1));
         }
 

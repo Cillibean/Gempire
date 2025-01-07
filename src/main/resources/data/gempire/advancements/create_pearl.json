@@ -1,0 +1,28 @@
+{
+  "display": {
+    "icon": {
+      "item": "gempire:pearl_gem_0"
+    },
+    "title": {
+      "translate": "advancements.gempire.pearl.title"
+    },
+    "description": {
+      "translate": "advancements.gempire.pearl.description"
+    },
+    "frame": "task",
+    "hidden": true
+  },
+  "parent": "gempire:create_shell",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "gempire:pearl"
+          }
+        ]
+      }
+    }
+  }
+}

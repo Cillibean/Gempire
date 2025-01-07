@@ -68,7 +68,7 @@ public class InjectorContainer extends AbstractContainerMenu {
             if (injector.getLevel().getBlockState(injector.getBlockPos().above().above()).getBlock() == ModBlocks.POWER_CRYSTAL_BLOCK_TIER_2.get()) {
                 this.addSlot(new SlotItemHandler(handler, InjectorTE.SPEED_INPUT_SLOT_INDEX, 80, 29) {
                     public boolean mayPlace(ItemStack stack) {
-                        return stack.is(ModItems.GILDED_LAPIS.get());
+                        return stack.is(ModItems.SPEED_BOOSTER.get());
                     }
 
                     ;

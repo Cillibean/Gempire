@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "category": "food",
+  "cookingtime": 200,
+  "experience": 0.35,
+  "ingredient": {
+    "item": "gempire:raw_mantawing"
+  },
+  "result": "gempire:cooked_mantawing"
+}

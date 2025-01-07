@@ -1,0 +1,28 @@
+{
+  "display": {
+    "icon": {
+      "item": "gempire:power_crystal_block_tier_2"
+    },
+    "title": {
+      "translate": "advancements.gempire.power_crystal_tier_2.title"
+    },
+    "description": {
+      "translate": "advancements.gempire.power_crystal_tier_2.description"
+    },
+    "frame": "task",
+    "hidden": true
+  },
+  "parent": "gempire:injection/peridot",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["gempire:power_crystal_block_tier_2"]
+          }
+        ]
+      }
+    }
+  }
+}

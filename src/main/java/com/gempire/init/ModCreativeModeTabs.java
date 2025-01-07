@@ -318,13 +318,20 @@ public class ModCreativeModeTabs {
                 populator.accept(ModBlocks.AQUATIC_FIBRE.get());
                 populator.accept(ModBlocks.TALL_AQUATIC_FIBRE.get());
 
+                populator.accept(ModItems.RAW_MANTAWING.get());
+                populator.accept(ModItems.COOKED_MANTAWING.get());
+                populator.accept(ModItems.RAW_OPALIZED_MANTAWING.get());
+                populator.accept(ModItems.COOKED_OPALIZED_MANTAWING.get());
+                populator.accept(ModItems.RAW_CRYSTAL_SHANK.get());
+                populator.accept(ModItems.COOKED_CRYSTAL_SHANK.get());
+
                 populator.accept(ModItems.REMNANTS_MUSIC_DISC.get());
                 populator.accept(ModItems.FRAGMENTS_MUSIC_DISC.get());
 
                 populator.accept(ModItems.SLUDGE_GLOB.get());
 
                 populator.accept(ModItems.CHROMA_CATALYST.get());
-                populator.accept(ModItems.GILDED_LAPIS.get());
+                populator.accept(ModItems.SPEED_BOOSTER.get());
                 populator.accept(ModItems.PRIME_BOOST.get());
                 populator.accept(ModItems.PRIMED_SLATE.get());
                 populator.accept(ModItems.SLATE.get());

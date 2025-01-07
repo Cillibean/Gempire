@@ -1,25 +1,25 @@
 {
   "display": {
     "icon": {
-      "item": "gempire:pearl_gem_0"
+      "item": "gempire:drill_block"
     },
     "title": {
-      "translate": "advancements.gempire.pearl.title"
+      "translate": "advancements.gempire.drill.title"
     },
     "description": {
-      "translate": "advancements.gempire.pearl.description"
+      "translate": "advancements.gempire.drill.description"
     },
     "frame": "task",
     "hidden": true
   },
-  "parent": "gempire:incubation/obtain_primed_slate",
+  "parent": "gempire:injection/obtain_tank",
   "criteria": {
     "requirement": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "tag": "gempire:pearl"
+            "items": ["gempire:drill_block"]
           }
         ]
       }

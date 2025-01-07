@@ -68,7 +68,7 @@ public class IncubatorContainer extends AbstractContainerMenu {
         });
         this.addSlot(new Slot(this.incubator, IncubatorTE.PRIMER_INPUT_SLOT_INDEX, 39, 17){
             public boolean mayPlace(ItemStack stack) {
-                return stack.getItem() == ModItems.PRIME_BOOST.get() || stack.getItem() == ModItems.GILDED_LAPIS.get();
+                return stack.getItem() == ModItems.PRIME_BOOST.get() || stack.getItem() == ModItems.SPEED_BOOSTER.get();
             }
         });
         this.addSlot(new Slot(this.incubator, IncubatorTE.BLOCK2_INPUT_SLOT_INDEX, 57, 17){

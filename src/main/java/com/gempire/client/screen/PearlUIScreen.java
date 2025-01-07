@@ -142,7 +142,7 @@ public class PearlUIScreen extends AbstractContainerScreen<PearlUIContainer> {
 
         this.nameBox.render(matrixStack, mouseX, mouseY, partialTicks);
 
-        renderEntityInInventory(i + 38, j + 76, 26, (float)(i + 37) - mouseX, (float)(j + 43) - mouseY, this.menu.gem);
+        renderEntityInInventory(i + 38, j + 76, 26, (float)(i + 37) - mouseX, (float)(j + 75) - mouseY, this.menu.gem);
 
         drawStats(matrixStack, i, j);
 
@@ -202,11 +202,11 @@ public class PearlUIScreen extends AbstractContainerScreen<PearlUIContainer> {
     }
 
     public static void renderEntityInInventory(int leftpos, int topPos, int scale, float mouseX, float mouseY, LivingEntity entity) {
-        float f = (float)Math.atan(mouseX / 40.0F);
-        float f1 = (float)Math.atan(mouseY / 40.0F);
+        float f = (float)Math.atan((double)(mouseX / 40.0F));
+        float f1 = (float)Math.atan((double)(mouseY / 40.0F));
         PoseStack posestack = RenderSystem.getModelViewStack();
         posestack.pushPose();
-        posestack.translate(leftpos, topPos, 1050.0D);
+        posestack.translate((double)leftpos, (double)topPos, 1050.0D);
         posestack.scale(1.0F, 1.0F, -1.0F);
         RenderSystem.applyModelViewMatrix();
         PoseStack posestack1 = new PoseStack();

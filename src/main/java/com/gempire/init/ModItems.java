@@ -1205,6 +1205,31 @@ public class ModItems {
             new Item(new Item.Properties().stacksTo(64))
     );
 
+    public static final RegistryObject<Item> RAW_MANTAWING = ITEMS.register("raw_mantawing", () ->
+            new Item(new Item.Properties().stacksTo(64).food(ModFoods.RAW_MANTAWING))
+    );
+
+    public static final RegistryObject<Item> COOKED_MANTAWING = ITEMS.register("cooked_mantawing", () ->
+            new Item(new Item.Properties().stacksTo(64).food(ModFoods.COOKED_MANTAWING))
+    );
+
+    public static final RegistryObject<Item> RAW_OPALIZED_MANTAWING = ITEMS.register("raw_opalized_mantawing", () ->
+            new Item(new Item.Properties().stacksTo(64).food(ModFoods.RAW_OPALIZED_MANTAWING))
+    );
+
+    public static final RegistryObject<Item> COOKED_OPALIZED_MANTAWING = ITEMS.register("cooked_opalized_mantawing", () ->
+            new Item(new Item.Properties().stacksTo(64).food(ModFoods.COOKED_OPALIZED_MANTAWING))
+    );
+
+    public static final RegistryObject<Item> RAW_CRYSTAL_SHANK = ITEMS.register("raw_crystal_shank", () ->
+            new Item(new Item.Properties().stacksTo(64).food(ModFoods.RAW_CRYSTAL_SHANK))
+    );
+
+    public static final RegistryObject<Item> COOKED_CRYSTAL_SHANK = ITEMS.register("cooked_crystal_shank", () ->
+            new Item(new Item.Properties().stacksTo(64).food(ModFoods.COOKED_CRYSTAL_SHANK))
+    );
+
+
     public static final RegistryObject<Item> CRYSTAL_LOG = ITEMS.register("crystal_log", () ->
             new BlockItem(
                     ModBlocks.CRYSTAL_LOG.get(),
@@ -3054,7 +3079,7 @@ public class ModItems {
 
     public static final RegistryObject<Item> FRAGMENTS_MUSIC_DISC = ITEMS.register("fragments_music_disc", () ->
             new RecordItem(8, ModSounds.FRAGMENTS, new Item.Properties().stacksTo(1).rarity(Rarity.RARE), 3560));
-    public static final RegistryObject<Item> GILDED_LAPIS = ITEMS.register("gilded_lapis", () ->
+    public static final RegistryObject<Item> SPEED_BOOSTER = ITEMS.register("speed_booster", () ->
             new Item(new Item.Properties().stacksTo(64)));
     public static final RegistryObject<Item> PRIME_BOOST = ITEMS.register("prime_boost", () ->
             new Item(new Item.Properties().stacksTo(64)));

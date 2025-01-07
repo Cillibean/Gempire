@@ -16,10 +16,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.IntStream;
 
 public class EntityAIGalaxyWarp extends Goal {
@@ -233,6 +230,7 @@ public class EntityAIGalaxyWarp extends Goal {
     @Override
     public void stop() {
         this.target = null;
+        follower.setCompleted("");
         this.follower.getNavigation().stop();
         this.follower.setPathfindingMalus(BlockPathTypes.WATER, 0);
     }
