@@ -263,24 +263,41 @@ public class ModBlockStateProvider extends BlockStateProvider {
         paneBlock(ModBlocks.BLACK_LATTICE, new ResourceLocation(Gempire.MODID, "block/lattice_black"), new ResourceLocation(Gempire.MODID, "block/lattice_black"));
         paneBlock(ModBlocks.BROWN_LATTICE, new ResourceLocation(Gempire.MODID, "block/lattice_brown"), new ResourceLocation(Gempire.MODID, "block/lattice_brown"));
 
-/*
-        blockWithItem(ModBlocks.PHOSPHORUS_LAMP);
-        blockWithItem(ModBlocks.RED_PHOSPHORUS_LAMP);
-        blockWithItem(ModBlocks.ORANGE_PHOSPHORUS_LAMP);
-        blockWithItem(ModBlocks.YELLOW_PHOSPHORUS_LAMP);
-        blockWithItem(ModBlocks.LIME_PHOSPHORUS_LAMP);
-        blockWithItem(ModBlocks.GREEN_PHOSPHORUS_LAMP);
-        blockWithItem(ModBlocks.CYAN_PHOSPHORUS_LAMP);
-        blockWithItem(ModBlocks.LIGHT_BLUE_PHOSPHORUS_LAMP);
-        blockWithItem(ModBlocks.BLUE_PHOSPHORUS_LAMP);
-        blockWithItem(ModBlocks.PURPLE_PHOSPHORUS_LAMP);
-        blockWithItem(ModBlocks.MAGENTA_PHOSPHORUS_LAMP);
-        blockWithItem(ModBlocks.PINK_PHOSPHORUS_LAMP);
-        blockWithItem(ModBlocks.LIGHT_GRAY_PHOSPHORUS_LAMP);
-        blockWithItem(ModBlocks.GRAY_PHOSPHORUS_LAMP);
-        blockWithItem(ModBlocks.BLACK_PHOSPHORUS_LAMP);
-        blockWithItem(ModBlocks.BROWN_PHOSPHORUS_LAMP);
-*/
+
+        blockItem(ModBlocks.PHOSPHORUS_LAMP);
+        blockItem(ModBlocks.RED_PHOSPHORUS_LAMP);
+        blockItem(ModBlocks.ORANGE_PHOSPHORUS_LAMP);
+        blockItem(ModBlocks.YELLOW_PHOSPHORUS_LAMP);
+        blockItem(ModBlocks.LIME_PHOSPHORUS_LAMP);
+        blockItem(ModBlocks.GREEN_PHOSPHORUS_LAMP);
+        blockItem(ModBlocks.CYAN_PHOSPHORUS_LAMP);
+        blockItem(ModBlocks.LIGHT_BLUE_PHOSPHORUS_LAMP);
+        blockItem(ModBlocks.BLUE_PHOSPHORUS_LAMP);
+        blockItem(ModBlocks.PURPLE_PHOSPHORUS_LAMP);
+        blockItem(ModBlocks.MAGENTA_PHOSPHORUS_LAMP);
+        blockItem(ModBlocks.PINK_PHOSPHORUS_LAMP);
+        blockItem(ModBlocks.LIGHT_GRAY_PHOSPHORUS_LAMP);
+        blockItem(ModBlocks.GRAY_PHOSPHORUS_LAMP);
+        blockItem(ModBlocks.BLACK_PHOSPHORUS_LAMP);
+        blockItem(ModBlocks.BROWN_PHOSPHORUS_LAMP);
+
+        blockTranslucentWithItem(ModBlocks.WHITE_DIAMOND_GLASS);
+        blockTranslucentWithItem(ModBlocks.RED_DIAMOND_GLASS);
+        blockTranslucentWithItem(ModBlocks.ORANGE_DIAMOND_GLASS);
+        blockTranslucentWithItem(ModBlocks.YELLOW_DIAMOND_GLASS);
+        blockTranslucentWithItem(ModBlocks.LIME_DIAMOND_GLASS);
+        blockTranslucentWithItem(ModBlocks.GREEN_DIAMOND_GLASS);
+        blockTranslucentWithItem(ModBlocks.CYAN_DIAMOND_GLASS);
+        blockTranslucentWithItem(ModBlocks.LIGHT_BLUE_DIAMOND_GLASS);
+        blockTranslucentWithItem(ModBlocks.BLUE_DIAMOND_GLASS);
+        blockTranslucentWithItem(ModBlocks.PURPLE_DIAMOND_GLASS);
+        blockTranslucentWithItem(ModBlocks.MAGENTA_DIAMOND_GLASS);
+        blockTranslucentWithItem(ModBlocks.PINK_DIAMOND_GLASS);
+        blockTranslucentWithItem(ModBlocks.LIGHT_GRAY_DIAMOND_GLASS);
+        blockTranslucentWithItem(ModBlocks.GRAY_DIAMOND_GLASS);
+        blockTranslucentWithItem(ModBlocks.BLACK_DIAMOND_GLASS);
+        blockTranslucentWithItem(ModBlocks.BROWN_DIAMOND_GLASS);
+        blockTranslucentWithItem(ModBlocks.PRISMATIC_DIAMOND_GLASS);
 
         blockWithItem(ModBlocks.DESOLATE_SOIL);
 
@@ -339,26 +356,6 @@ public class ModBlockStateProvider extends BlockStateProvider {
         flowerBlock(ModBlocks.BLUE_PUFFBALL);
 
         blockWithItem(ModBlocks.BUDDING_SELENITE);
-
-        blockWithItem(ModBlocks.PHOSPHORUS_LAMP);
-        blockWithItem(ModBlocks.RED_PHOSPHORUS_LAMP);
-        blockWithItem(ModBlocks.ORANGE_PHOSPHORUS_LAMP);
-        blockWithItem(ModBlocks.YELLOW_PHOSPHORUS_LAMP);
-        blockWithItem(ModBlocks.LIME_PHOSPHORUS_LAMP);
-        blockWithItem(ModBlocks.GREEN_PHOSPHORUS_LAMP);
-        blockWithItem(ModBlocks.CYAN_PHOSPHORUS_LAMP);
-        blockWithItem(ModBlocks.LIGHT_BLUE_PHOSPHORUS_LAMP);
-        blockWithItem(ModBlocks.BLUE_PHOSPHORUS_LAMP);
-        blockWithItem(ModBlocks.MAGENTA_PHOSPHORUS_LAMP);
-        blockWithItem(ModBlocks.PURPLE_PHOSPHORUS_LAMP);
-        blockWithItem(ModBlocks.PINK_PHOSPHORUS_LAMP);
-        blockWithItem(ModBlocks.LIGHT_GRAY_PHOSPHORUS_LAMP);
-        blockWithItem(ModBlocks.GRAY_PHOSPHORUS_LAMP);
-        blockWithItem(ModBlocks.BLACK_PHOSPHORUS_LAMP);
-        blockWithItem(ModBlocks.BROWN_PHOSPHORUS_LAMP);
-
-
-
     }
 
     public void paneBlock(RegistryObject<Block> block, ResourceLocation texture, ResourceLocation texture1) {
@@ -409,5 +406,13 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
     private void blockWithItem(RegistryObject<Block> blockRegistryObject) {
         simpleBlockWithItem(blockRegistryObject.get(), cubeAll(blockRegistryObject.get()));
+    }
+
+    private void blockNoItem(RegistryObject<Block> blockRegistryObject) {
+        simpleBlock(blockRegistryObject.get(), cubeAll(blockRegistryObject.get()));
+    }
+
+    private void blockTranslucentWithItem(RegistryObject<Block> blockRegistryObject) {
+        simpleBlockWithItem(blockRegistryObject.get(), models().cubeAll(ForgeRegistries.BLOCKS.getKey(blockRegistryObject.get()).getPath(), blockTexture(blockRegistryObject.get())).renderType("translucent"));
     }
 }

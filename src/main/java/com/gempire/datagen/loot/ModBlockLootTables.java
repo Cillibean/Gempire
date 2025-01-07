@@ -263,7 +263,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.POWER_CRYSTAL_BLOCK_TIER_2.get());
         this.dropSelf(ModBlocks.DRILL_BLOCK.get());
         this.dropSelf(ModBlocks.PEDISTAL.get());
-        this.dropSelfWithContents(ModBlocks.TANK_BLOCK.get());
+        //this.dropSelfWithContents(ModBlocks.TANK_BLOCK.get());
         this.dropSelf(ModBlocks.WARP_PAD.get());
         this.dropSelf(ModBlocks.BOARD_BLOCK.get());
 

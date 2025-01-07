@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "gempire:block/orange_phosphorus_lamp"
+    },
+    "lit=true": {
+      "model": "gempire:block/orange_phosphorus_lamp_on"
+    }
+  }
+}

@@ -1,4 +1,4 @@
-// 1.20.1	2025-01-07T21:39:04.76957	Loot Tables
+// 1.20.1	2025-01-08T10:13:00.256948	Loot Tables
 3563fbcf8563263afd9f878ab9ce993c99892f66 data/gempire/loot_tables/blocks/abnormal_sand.json
 e92c16f5ce8ec1e58947f3367b0ba30450bc85b7 data/gempire/loot_tables/blocks/abnormal_sandstone.json
 51f0b4954e965b758421cac9beaa853342528e93 data/gempire/loot_tables/blocks/alien_flower.json
@@ -440,7 +440,6 @@ a782901c66f7277fbb470419d9bb5bfccd3f3bc7 data/gempire/loot_tables/blocks/strippe
 3feef870039024c7443674675c802ae9fe97d87c data/gempire/loot_tables/blocks/stripped_shaded_log.json
 15f8e975cda3e5f13788abf15fc07eaadf89738e data/gempire/loot_tables/blocks/stripped_shaded_wood.json
 aa625900770528e06a30cca144602269da932446 data/gempire/loot_tables/blocks/tall_aquatic_fibre.json
-5ca7d3560fbdce62ca66cb543d8aa4d005191c44 data/gempire/loot_tables/blocks/tank_block.json
 7b04d8db4bca1037a8d72d7a307b07434ca4ba80 data/gempire/loot_tables/blocks/thulite_block.json
 a33cf4c44484ce15a821b68f353c530f63e70bd2 data/gempire/loot_tables/blocks/thulite_cluster.json
 c396124799bc713550a55656252fcade8592d3c2 data/gempire/loot_tables/blocks/thulite_ore.json
