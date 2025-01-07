@@ -1420,7 +1420,6 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             System.out.println(this.getArmor().size());
             for (int i = 0; i < this.getArmor().size(); i++) {
                 ItemStack armorItem = this.getArmor().get(i);
-                System.out.println(armorItem.getItem());
                 if (armorItem.isEnchanted()) {
                     if (armorItem.getEnchantmentLevel(ModEnchants.GEM_PROTECTION.get()) >= 1) {
                         if (armorItem.getItem() instanceof ArmorItem) {
@@ -1428,32 +1427,42 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                             float level = armorItem.getEnchantmentLevel(ModEnchants.GEM_PROTECTION.get());
                             if (slot == EquipmentSlot.HEAD || slot == EquipmentSlot.FEET) {
                                 hardness += level / 2;
-                                System.out.println("head and feet");
                             } else if (slot == EquipmentSlot.LEGS) {
                                 hardness += level;
-                                System.out.println("legs");
                             } else if (slot == EquipmentSlot.CHEST) {
-                                hardness += level * 1.5;
-                                System.out.println("chest");
+                                hardness += (float) (level * 1.5);
                             }
                         }
                     }
                 }
             }
+            int roundAmount = (int) amount;
+            if (roundAmount > 30) roundAmount = 30;
+            System.out.println("rounded "+roundAmount);
             if (!source.is(DamageTypes.MAGIC)) {
                 if (source.is(DamageTypeTags.IS_EXPLOSION)) {
-                    if (amount - getHealth() > ((hardness / 2) + 0.5) && (this.random.nextInt(shatterChance / 2) == 1)) {
+                    if ((double)roundAmount - getHealth() > ((hardness / 2) + 0.5) && (this.random.nextInt(shatterChance / 2) == 1)) {
                         setShatter(true);
                     }
                 } else if (!(source.getEntity() instanceof Player)) {
-                    if ((amount - getHealth()) > hardness) {
-                        if ((this.random.nextInt(shatterChance) == 1) || getCrackAmount() == (getHardness() * 10)) {
+                    if (roundAmount > hardness*2) {
+                        float excess = ((float)roundAmount-hardness) / 2;
+                        float shatterChancef = shatterChance;
+
+                        System.out.println("amount "+roundAmount);
+                        System.out.println("excess "+excess);
+                        System.out.println("shatter chance "+ (shatterChancef / excess));
+                        int shatter = this.random.nextInt((int) (shatterChancef / excess));
+                        int crack = this.random.nextInt(crackChance / (int) excess);
+                        System.out.println("shatter int " + shatter);
+                        System.out.println("crack int " + crack);
+                        if ((shatter == 1 /*|| getCrackAmount() == (getHardness() * 10)*/)) {
                             setShatter(true);
-                        } else if (this.random.nextInt(crackChance) == 1) {
+                        } else if (crack == 1) {
                             setCracked(true);
                             shatterChance--;
-                            setCrackAmount(getCrackAmount() * 2);
-                            if (this.random.nextInt(10) == 10) {
+                            setCrackAmount(getCrackAmount() + 1);
+                            if (this.random.nextInt(10) == 1) {
                                 crackChance--;
                             }
                         }
@@ -1473,16 +1482,25 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                         }
                     }
                     if (!(player.getMainHandItem().getItem() instanceof DestabBase)) {
-                        if ((amount - getHealth()) > hardness) {
-                            if ((this.random.nextInt(shatterChance) == 1)) {
+                        if (roundAmount > hardness*2) {
+                            int excess = (int)(roundAmount - hardness) / 2;
+                            int shatterChancef = shatterChance;
+
+                            System.out.println("amount " + roundAmount);
+                            System.out.println("excess " + excess);
+                            shatterChancef = (int) shatterChancef/excess;
+                            System.out.println("shatter chance " + shatterChancef);
+                            int shatter = this.random.nextInt(shatterChancef);
+                            int crack = this.random.nextInt(crackChance / (int) excess);
+                            System.out.println("shatter int " + shatter);
+                            System.out.println("crack int " + crack);
+                            if ((shatter == 1 /*|| getCrackAmount() == (getHardness() * 10)*/)) {
                                 setShatter(true);
-                            } /*else if (getCrackAmount() == (getHardness() * 10)) {
-                                setShatter(true);
-                            }*/ else if (this.random.nextInt(crackChance) == 1) {
+                            } else if (crack == 1) {
                                 setCracked(true);
                                 shatterChance--;
-                                setCrackAmount(getCrackAmount() * 2);
-                                if (this.random.nextInt(10) == 10) {
+                                setCrackAmount(getCrackAmount() + 1);
+                                if (this.random.nextInt(10) == 1) {
                                     crackChance--;
                                 }
                             }

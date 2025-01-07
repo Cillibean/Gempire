@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "RGR",
+    "PLP",
+    "RGR"
+  ],
+  "key": {
+    "R": {
+      "item": "gempire:tungsten_ingot"
+    },
+    "G": {
+      "item": "gempire:prismatic_ingot"
+    },
+    "P": {
+      "item": "minecraft:glass"
+    },
+    "L": {
+      "item": "minecraft:blaze_powder"
+    }
+  },
+  "result": {
+    "item": "gempire:speed_booster"
+  }
+}

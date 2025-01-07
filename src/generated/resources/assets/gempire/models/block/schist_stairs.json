@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/stairs",
+  "textures": {
+    "bottom": "gempire:block/schist_block",
+    "side": "gempire:block/schist_block",
+    "top": "gempire:block/schist_block"
+  }
+}

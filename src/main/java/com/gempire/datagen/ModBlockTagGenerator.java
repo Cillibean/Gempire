@@ -84,7 +84,7 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                         ModBlocks.COBBLED_PEGMATITE_WALL.get(),
                         ModBlocks.ROUGH_SELENITE.get(),
                         ModBlocks.PRIMED_SELENITE.get(),
-                        ModBlocks.SCHIST.get(),
+                        ModBlocks.SCHIST_BLOCK.get(),
                         ModBlocks.SELENITE.get(),
                         ModBlocks.SELENITE_SLAB.get(),
                         ModBlocks.SELENITE_STAIRS.get(),

@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "gempire:pink_sandstone"
+  },
+  "result": "gempire:pink_sandstone_stairs"
+}

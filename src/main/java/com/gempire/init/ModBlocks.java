@@ -122,8 +122,31 @@ public class ModBlocks {
             new Block(BlockBehaviour.Properties.copy(Blocks.SANDSTONE)));
 
 
-    public static final RegistryObject<Block> SCHIST = BLOCKS.register("schist", () ->
+    public static final RegistryObject<Block> SCHIST_BLOCK = BLOCKS.register("schist_block", () ->
             new Block(BlockBehaviour.Properties.copy(Blocks.GRANITE)));
+
+    public static final RegistryObject<Block> SCHIST_SLAB = BLOCKS.register("schist_slab", () ->
+            new SlabBlock(BlockBehaviour.Properties.copy(Blocks.STONE_SLAB)));
+
+    public static final RegistryObject<Block> SCHIST_STAIRS = BLOCKS.register("schist_stairs", () ->
+            new StairBlock(() -> ModBlocks.SCHIST_BLOCK.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.STONE_STAIRS)));
+
+    public static final RegistryObject<Block> SCHIST_WALL = BLOCKS.register("schist_wall", () ->
+            new WallBlock(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE_WALL))
+    );
+
+    public static final RegistryObject<Block> POLISHED_SCHIST_BLOCK = BLOCKS.register( "polished_schist_block", () ->
+            new Block(BlockBehaviour.Properties.copy(Blocks.STONE)));
+
+    public static final RegistryObject<Block> POLISHED_SCHIST_SLAB = BLOCKS.register( "polished_schist_slab", () ->
+            new SlabBlock(BlockBehaviour.Properties.copy(Blocks.STONE_SLAB)));
+
+    public static final RegistryObject<Block> POLISHED_SCHIST_STAIRS = BLOCKS.register( "polished_schist_stairs", () ->
+            new StairBlock(() -> ModBlocks.POLISHED_SCHIST_BLOCK.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.STONE_STAIRS)));
+
+    public static final RegistryObject<Block> POLISHED_SCHIST_WALL = BLOCKS.register( "polished_schist_wall", () ->
+            new WallBlock(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE_WALL))
+    );
 
     public static final RegistryObject<Block> ABNORMAL_SAND = BLOCKS.register("abnormal_sand", () ->
             new SandBlock(11098145, BlockBehaviour.Properties.copy(Blocks.SAND)));

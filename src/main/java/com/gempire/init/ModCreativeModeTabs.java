@@ -674,7 +674,14 @@ public class ModCreativeModeTabs {
                 populator.accept(ModBlocks.COBBLED_PEGMATITE_STAIRS.get());
                 populator.accept(ModBlocks.COBBLED_PEGMATITE_SLAB.get());
                 populator.accept(ModBlocks.COBBLED_PEGMATITE_WALL.get());
-                populator.accept(ModItems.SCHIST.get());
+                populator.accept(ModBlocks.SCHIST_BLOCK.get());
+                populator.accept(ModBlocks.SCHIST_STAIRS.get());
+                populator.accept(ModBlocks.SCHIST_SLAB.get());
+                populator.accept(ModBlocks.SCHIST_WALL.get());
+                populator.accept(ModBlocks.POLISHED_SCHIST_BLOCK.get());
+                populator.accept(ModBlocks.POLISHED_SCHIST_STAIRS.get());
+                populator.accept(ModBlocks.POLISHED_SCHIST_SLAB.get());
+                populator.accept(ModBlocks.POLISHED_SCHIST_WALL.get());
 
                 populator.accept(ModBlocks.SELENITE.get());
                 populator.accept(ModBlocks.SELENITE_STAIRS.get());

@@ -54,17 +54,17 @@ public class ModEntities {
 
     public static final RegistryObject<EntityType<EntitySorrowJelly>> SORROW_JELLY = ENTITIES.register("sorrow_jelly",
             () -> EntityType.Builder.of(EntitySorrowJelly::new, MobCategory.CREATURE)
-                    .sized(1f, 2f) // Hitbox Size
+                    .sized(2f, 3f) // Hitbox Size
                     .build(new ResourceLocation(Gempire.MODID, "sorrow_jelly").toString()));
 
     public static final RegistryObject<EntityType<EntityMantaShark>> MANTASHARK = ENTITIES.register("mantashark",
             () -> EntityType.Builder.of(EntityMantaShark::new, MobCategory.CREATURE)
-                    .sized(1f, 2f) // Hitbox Size
+                    .sized(2f, 1f) // Hitbox Size
                     .build(new ResourceLocation(Gempire.MODID, "mantashark").toString()));
 
     public static final RegistryObject<EntityType<EntityOpalMantaShark>> OPAL_MANTASHARK = ENTITIES.register("opal_mantashark",
             () -> EntityType.Builder.of(EntityOpalMantaShark::new, MobCategory.CREATURE)
-                    .sized(1f, 2f) // Hitbox Size
+                    .sized(2f, 1f) // Hitbox Size
                     .build(new ResourceLocation(Gempire.MODID, "opal_mantashark").toString()));
 
     public static final RegistryObject<EntityType<EntityCrystalDeer>> CRYSTAL_DEER = ENTITIES.register("crystal_deer",

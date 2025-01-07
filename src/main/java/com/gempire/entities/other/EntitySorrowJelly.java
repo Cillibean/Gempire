@@ -6,6 +6,7 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -98,6 +99,8 @@ public class EntitySorrowJelly extends WaterAnimal implements GeoEntity {
     public void tick() {
         if (this.isEyeInFluid(FluidTags.WATER)) {
             this.setDeltaMovement(this.getDeltaMovement().add(0.0, 0.002, 0.0));
+        } else {
+            this.hurt(this.damageSources().drown(), 1);
         }
         super.tick();
     }

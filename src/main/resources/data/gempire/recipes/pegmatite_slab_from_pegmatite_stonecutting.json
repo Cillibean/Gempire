@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "ingredient": {
+    "item": "gempire:pegmatite"
+  },
+  "result": "gempire:pegmatite_slab"
+}

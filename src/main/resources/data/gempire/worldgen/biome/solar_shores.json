@@ -1,0 +1,54 @@
+{
+  "temperature": 1,
+  "downfall": 1,
+  "has_precipitation": true,
+  "effects": {
+    "sky_color": 16049903,
+    "fog_color": 14863064,
+    "water_color": 15381467,
+    "water_fog_color": 12879790,
+    "grass_color": 16758234,
+    "foliage_color": 16758234
+  },
+  "spawners": {
+
+  },
+  "spawn_costs": {},
+  "carvers": {
+    "air": [
+      "minecraft:cave",
+      "minecraft:cave_extra_underground",
+      "minecraft:canyon"
+    ]
+  },
+  "features": [
+    [],
+    [
+      "minecraft:lake_lava_underground",
+      "minecraft:lake_lava_surface"
+    ],
+    [],
+    [],
+    [],
+    [],
+    [
+      "gempire:ore_macadam",
+      "gempire:ore_schist",
+      "gempire:ore_ryolite"
+    ],
+    [],
+    [
+      "minecraft:spring_water",
+      "minecraft:spring_lava"
+    ],
+    [
+      "minecraft:glow_lichen",
+      "minecraft:patch_tall_grass_2",
+      "minecraft:patch_grass_plain",
+      "gempire:thulite_cluster",
+      "gempire:desolate_kelp",
+      "gempire:aquatic_fibre_normal",
+      "gempire:aquatic_fibre_deep"
+    ]
+  ]
+}

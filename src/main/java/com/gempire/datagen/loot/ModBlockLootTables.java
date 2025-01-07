@@ -35,6 +35,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.RegistryObject;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -263,27 +264,8 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.DRILL_BLOCK.get());
         this.dropSelf(ModBlocks.PEDISTAL.get());
         this.dropSelfWithContents(ModBlocks.TANK_BLOCK.get());
-        this.dropSelfWithContents(ModBlocks.INCUBATOR_BLOCK.get());
         this.dropSelf(ModBlocks.WARP_PAD.get());
         this.dropSelf(ModBlocks.BOARD_BLOCK.get());
-
-        //chroma
-        this.add(ModBlocks.RED_CHROMA_CRYSTAL.get(), (block -> createOreDrop(ModBlocks.RED_CHROMA_CRYSTAL.get(), ModItems.RED_CHROMA.get())));
-        this.add(ModBlocks.ORANGE_CHROMA_CRYSTAL.get(), (block -> createOreDrop(ModBlocks.ORANGE_CHROMA_CRYSTAL.get(), ModItems.ORANGE_CHROMA.get())));
-        this.add(ModBlocks.YELLOW_CHROMA_CRYSTAL.get(), (block -> createOreDrop(ModBlocks.YELLOW_CHROMA_CRYSTAL.get(), ModItems.YELLOW_CHROMA.get())));
-        this.add(ModBlocks.LIME_CHROMA_CRYSTAL.get(), (block -> createOreDrop(ModBlocks.LIME_CHROMA_CRYSTAL.get(), ModItems.LIME_CHROMA.get())));
-        this.add(ModBlocks.GREEN_CHROMA_CRYSTAL.get(), (block -> createOreDrop(ModBlocks.GREEN_CHROMA_CRYSTAL.get(), ModItems.GREEN_CHROMA.get())));
-        this.add(ModBlocks.CYAN_CHROMA_CRYSTAL.get(), (block -> createOreDrop(ModBlocks.CYAN_CHROMA_CRYSTAL.get(), ModItems.CYAN_CHROMA.get())));
-        this.add(ModBlocks.LIGHT_BLUE_CHROMA_CRYSTAL.get(), (block -> createOreDrop(ModBlocks.LIGHT_BLUE_CHROMA_CRYSTAL.get(), ModItems.LIGHT_BLUE_CHROMA.get())));
-        this.add(ModBlocks.BLUE_CHROMA_CRYSTAL.get(), (block -> createOreDrop(ModBlocks.BLUE_CHROMA_CRYSTAL.get(), ModItems.BLUE_CHROMA.get())));
-        this.add(ModBlocks.PURPLE_CHROMA_CRYSTAL.get(), (block -> createOreDrop(ModBlocks.PURPLE_CHROMA_CRYSTAL.get(), ModItems.PURPLE_CHROMA.get())));
-        this.add(ModBlocks.PINK_CHROMA_CRYSTAL.get(), (block -> createOreDrop(ModBlocks.PINK_CHROMA_CRYSTAL.get(), ModItems.PINK_CHROMA.get())));
-        this.add(ModBlocks.MAGENTA_CHROMA_CRYSTAL.get(), (block -> createOreDrop(ModBlocks.MAGENTA_CHROMA_CRYSTAL.get(), ModItems.MAGENTA_CHROMA.get())));
-        this.add(ModBlocks.BROWN_CHROMA_CRYSTAL.get(), (block -> createOreDrop(ModBlocks.BROWN_CHROMA_CRYSTAL.get(), ModItems.BROWN_CHROMA.get())));
-        this.add(ModBlocks.LIGHT_GRAY_CHROMA_CRYSTAL.get(), (block -> createOreDrop(ModBlocks.LIGHT_GRAY_CHROMA_CRYSTAL.get(), ModItems.LIGHT_GRAY_CHROMA.get())));
-        this.add(ModBlocks.GRAY_CHROMA_CRYSTAL.get(), (block -> createOreDrop(ModBlocks.GRAY_CHROMA_CRYSTAL.get(), ModItems.GRAY_CHROMA.get())));
-        this.add(ModBlocks.WHITE_CHROMA_CRYSTAL.get(), (block -> createOreDrop(ModBlocks.WHITE_CHROMA_CRYSTAL.get(), ModItems.WHITE_CHROMA.get())));
-        this.add(ModBlocks.BLACK_CHROMA_CRYSTAL.get(), (block -> createOreDrop(ModBlocks.BLACK_CHROMA_CRYSTAL.get(), ModItems.BLACK_CHROMA.get())));
 
         //minerals
         this.dropSelf(ModBlocks.PRISMATIC_BLOCK.get());
@@ -329,8 +311,33 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.COBBLED_PEGMATITE_WALL.get());
         this.add(ModBlocks.COBBLED_PEGMATITE_SLAB.get(), (block -> createSlabItemTable(ModBlocks.COBBLED_PEGMATITE_SLAB.get())));
         this.dropSelf(ModBlocks.COBBLED_PEGMATITE_STAIRS.get());
-        this.dropSelf(ModBlocks.MACADAM.get());
-        this.dropSelf(ModBlocks.SCHIST.get());
+        this.dropSelf(ModBlocks.SCHIST_BLOCK.get());
+        this.add(ModBlocks.SCHIST_SLAB.get(), (block -> createSlabItemTable(ModBlocks.SCHIST_SLAB.get())));
+        this.dropSelf(ModBlocks.SCHIST_STAIRS.get());
+        this.dropSelf(ModBlocks.SCHIST_WALL.get());
+        this.dropSelf(ModBlocks.POLISHED_SCHIST_BLOCK.get());
+        this.add(ModBlocks.POLISHED_SCHIST_SLAB.get(), (block -> createSlabItemTable(ModBlocks.POLISHED_SCHIST_SLAB.get())));
+        this.dropSelf(ModBlocks.POLISHED_SCHIST_STAIRS.get());
+        this.dropSelf(ModBlocks.POLISHED_SCHIST_WALL.get());
+        this.dropSelf(ModBlocks.RYOLITE_BLOCK.get());
+        this.add(ModBlocks.RYOLITE_SLAB.get(), (block -> createSlabItemTable(ModBlocks.RYOLITE_SLAB.get())));
+        this.dropSelf(ModBlocks.RYOLITE_STAIRS.get());
+        this.dropSelf(ModBlocks.RYOLITE_WALL.get());
+        this.dropSelf(ModBlocks.POLISHED_RYOLITE_BLOCK.get());
+        this.add(ModBlocks.POLISHED_RYOLITE_SLAB.get(), (block -> createSlabItemTable(ModBlocks.POLISHED_RYOLITE_SLAB.get())));
+        this.dropSelf(ModBlocks.POLISHED_RYOLITE_STAIRS.get());
+        this.dropSelf(ModBlocks.POLISHED_RYOLITE_WALL.get());
+        this.dropSelf(ModBlocks.PINK_SAND.get());
+        this.dropSelf(ModBlocks.PINK_SANDSTONE.get());
+        this.add(ModBlocks.PINK_SANDSTONE_SLAB.get(), (block -> createSlabItemTable(ModBlocks.PINK_SANDSTONE_SLAB.get())));
+        this.dropSelf(ModBlocks.PINK_SANDSTONE_STAIRS.get());
+        this.dropSelf(ModBlocks.PINK_SANDSTONE_WALL.get());
+        this.dropSelf(ModBlocks.SMOOTH_PINK_SANDSTONE.get());
+        this.add(ModBlocks.SMOOTH_PINK_SANDSTONE_SLAB.get(), (block -> createSlabItemTable(ModBlocks.SMOOTH_PINK_SANDSTONE_SLAB.get())));
+        this.dropSelf(ModBlocks.SMOOTH_PINK_SANDSTONE_STAIRS.get());
+        this.dropSelf(ModBlocks.CUT_PINK_SANDSTONE.get());
+        this.add(ModBlocks.CUT_PINK_SANDSTONE_SLAB.get(), (block -> createSlabItemTable(ModBlocks.CUT_PINK_SANDSTONE_SLAB.get())));
+        this.dropSelf(ModBlocks.CHISELED_PINK_SANDSTONE.get());
         this.otherWhenSilkTouch(ModBlocks.DESOLATE_GRASS.get(), ModBlocks.DESOLATE_SOIL.get());
         this.dropSelf(ModBlocks.DESOLATE_SOIL.get());
         this.dropSelf(ModBlocks.ABNORMAL_SAND.get());
@@ -364,7 +371,6 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.PRIMED_BLUE_ICE.get());
         this.dropSelf(ModBlocks.PRIMED_DRAINED_ICE.get());
         this.add(ModBlocks.SHOCK_BERRY_BUSH.get(), (block -> createSingleItemTable(ModItems.SHOCK_BERRY.get())));
-        this.dropSelf(ModBlocks.STRAWBERRY_BLOCK.get());
 
         //wood
         this.dropSelf(ModBlocks.CRYSTAL_LOG.get());
@@ -514,7 +520,6 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.add(ModBlocks.YELLOW_ALTAR.get(), (block -> noDrop()));
         this.add(ModBlocks.WHITE_ALTAR.get(), (block -> noDrop()));
         this.add(ModBlocks.BUDDING_SELENITE.get(), (block -> noDrop()));
-        this.add(ModBlocks.CRYSTAL_LEAVES.get(), (block -> noDrop()));
         this.add(ModBlocks.PRIMED_ICE_STATUE.get(), (block -> noDrop()));
         this.add(ModBlocks.PRIMED_PACKED_ICE_STATUE.get(), (block -> noDrop()));
         this.add(ModBlocks.PRIMED_BLUE_ICE_STATUE.get(), (block -> noDrop()));
@@ -535,8 +540,29 @@ public class ModBlockLootTables extends BlockLootSubProvider {
 
     @Override
     protected Iterable<Block> getKnownBlocks() {
-        List<Block> list = ModBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get).toList();
+        List<Block> list = new ArrayList<>(ModBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get).toList());
         //list.remove(ModBlocks.TANK_BLOCK.get());
+        list.remove(ModBlocks.RED_CHROMA_CRYSTAL.get());
+        list.remove(ModBlocks.ORANGE_CHROMA_CRYSTAL.get());
+        list.remove(ModBlocks.YELLOW_CHROMA_CRYSTAL.get());
+        list.remove(ModBlocks.LIME_CHROMA_CRYSTAL.get());
+        list.remove(ModBlocks.GREEN_CHROMA_CRYSTAL.get());
+        list.remove(ModBlocks.CYAN_CHROMA_CRYSTAL.get());
+        list.remove(ModBlocks.LIGHT_BLUE_CHROMA_CRYSTAL.get());
+        list.remove(ModBlocks.BLUE_CHROMA_CRYSTAL.get());
+        list.remove(ModBlocks.MAGENTA_CHROMA_CRYSTAL.get());
+        list.remove(ModBlocks.PURPLE_CHROMA_CRYSTAL.get());
+        list.remove(ModBlocks.PINK_CHROMA_CRYSTAL.get());
+        list.remove(ModBlocks.BROWN_CHROMA_CRYSTAL.get());
+        list.remove(ModBlocks.WHITE_CHROMA_CRYSTAL.get());
+        list.remove(ModBlocks.LIGHT_GRAY_CHROMA_CRYSTAL.get());
+        list.remove(ModBlocks.GRAY_CHROMA_CRYSTAL.get());
+        list.remove(ModBlocks.BLACK_CHROMA_CRYSTAL.get());
+        list.remove(ModBlocks.CRYSTAL_LEAVES.get());
+        list.remove(ModBlocks.MACADAM.get());
+        list.remove(ModBlocks.STRAWBERRY_BLOCK.get());
+        list.remove(ModBlocks.INCUBATOR_BLOCK.get());
+        list.remove(ModBlocks.TANK_BLOCK.get());
         return list;
     }
 

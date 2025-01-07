@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "gempire:polished_ryolite_block"
+  },
+  "result": "gempire:polished_ryolite_stairs"
+}

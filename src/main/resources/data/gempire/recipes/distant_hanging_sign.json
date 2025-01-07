@@ -4,7 +4,7 @@
   "group": "hanging_sign",
   "key": {
     "#": {
-      "item": "minecraft:stripped_distant_log"
+      "item": "gempire:stripped_distant_log"
     },
     "X": {
       "item": "minecraft:chain"

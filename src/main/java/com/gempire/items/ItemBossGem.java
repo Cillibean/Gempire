@@ -97,7 +97,7 @@ public class ItemBossGem extends Item {
                     System.out.println("empress attempt");
                     return InteractionResult.PASS;
                 }
-            } else*/ if (level.getBlockState(context.getClickedPos()) == ModBlocks.PINK_ALTAR.get().defaultBlockState()) {
+            } else*/ if (level.getBlockState(context.getClickedPos()).getBlock() == ModBlocks.PINK_ALTAR.get()) {
                 if (context.getItemInHand().getItem() == ModItems.PALADIN_FLOWER.get()) {
                     context.getPlayer().setItemSlot(EquipmentSlot.MAINHAND, Items.AIR.getDefaultInstance());
                     EntityFuchsiaPaladin paladin = new EntityFuchsiaPaladin(ModEntities.FUCHSIA_PALADIN.get(), level);
@@ -107,7 +107,7 @@ public class ItemBossGem extends Item {
                     level.addFreshEntity(paladin);
                     return InteractionResult.CONSUME;
                 }
-            } else if (level.getBlockState(context.getClickedPos()) == ModBlocks.BLUE_ALTAR.get().defaultBlockState()) {
+            } else if (level.getBlockState(context.getClickedPos()).getBlock() == ModBlocks.BLUE_ALTAR.get()) {
                 if (context.getItemInHand().getItem() == ModItems.GUARDIAN_TEAR.get()) {
                     context.getPlayer().setItemSlot(EquipmentSlot.MAINHAND, Items.AIR.getDefaultInstance());
                     EntityCobaltGuardian guardian = new EntityCobaltGuardian(ModEntities.COBALT_GUARDIAN.get(), level);
@@ -117,7 +117,7 @@ public class ItemBossGem extends Item {
                     level.addFreshEntity(guardian);
                     return InteractionResult.CONSUME;
                 }
-            } else if (level.getBlockState(context.getClickedPos()) == ModBlocks.YELLOW_ALTAR.get().defaultBlockState()) {
+            } else if (level.getBlockState(context.getClickedPos()).getBlock() == ModBlocks.YELLOW_ALTAR.get()) {
                 if (context.getItemInHand().getItem() == ModItems.HUNTRESS_DAGGER.get()) {
                     context.getPlayer().setItemSlot(EquipmentSlot.MAINHAND, Items.AIR.getDefaultInstance());
                     EntityAmberHuntress huntress = new EntityAmberHuntress(ModEntities.AMBER_HUNTRESS.get(), level);
@@ -127,7 +127,7 @@ public class ItemBossGem extends Item {
                     level.addFreshEntity(huntress);
                     return InteractionResult.CONSUME;
                 }
-            } else if (level.getBlockState(context.getClickedPos()) == ModBlocks.WHITE_ALTAR.get().defaultBlockState()) {
+            } else if (level.getBlockState(context.getClickedPos()).getBlock() == ModBlocks.WHITE_ALTAR.get()) {
                 if (context.getItemInHand().getItem() == ModItems.EMPRESS_STAR.get()) {
                     context.getPlayer().setItemSlot(EquipmentSlot.MAINHAND, Items.AIR.getDefaultInstance());
                     EntityAlabasterEmpress empress = new EntityAlabasterEmpress(ModEntities.ALABASTER_EMPRESS.get(), level);

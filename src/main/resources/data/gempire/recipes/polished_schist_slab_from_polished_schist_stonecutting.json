@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "ingredient": {
+    "item": "gempire:polished_schist_block"
+  },
+  "result": "gempire:polished_schist_slab"
+}

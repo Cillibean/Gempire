@@ -21,4 +21,6 @@ public class ModelSorrowJelly extends GeoModel<EntitySorrowJelly> {
     public ResourceLocation getAnimationResource(EntitySorrowJelly animatable) {
         return new ResourceLocation(Gempire.MODID, "animations/entity/sorrow_jelly.animation.json");
     }
+
+
 }

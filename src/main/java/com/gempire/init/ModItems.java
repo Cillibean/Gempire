@@ -334,9 +334,58 @@ public class ModItems {
             )
     );
 
-    public static final RegistryObject<Item> SCHIST = ITEMS.register("schist", () ->
+    public static final RegistryObject<Item> SCHIST_BLOCK = ITEMS.register("schist_block", () ->
             new BlockItem(
-                    ModBlocks.SCHIST.get(),
+                    ModBlocks.SCHIST_BLOCK.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> SCHIST_STAIRS = ITEMS.register("schist_stairs", () ->
+            new BlockItem(
+                    ModBlocks.SCHIST_STAIRS.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> SCHIST_SLAB = ITEMS.register("schist_slab", () ->
+            new BlockItem(
+                    ModBlocks.SCHIST_SLAB.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> SCHIST_WALL = ITEMS.register("schist_wall", () ->
+            new BlockItem(
+                    ModBlocks.SCHIST_WALL.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> POLISHED_SCHIST_BLOCK = ITEMS.register("polished_schist_block", () ->
+            new BlockItem(
+                    ModBlocks.POLISHED_SCHIST_BLOCK.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> POLISHED_SCHIST_STAIRS = ITEMS.register("polished_schist_stairs", () ->
+            new BlockItem(
+                    ModBlocks.POLISHED_SCHIST_STAIRS.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> POLISHED_SCHIST_SLAB = ITEMS.register("polished_schist_slab", () ->
+            new BlockItem(
+                    ModBlocks.POLISHED_SCHIST_SLAB.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> POLISHED_SCHIST_WALL = ITEMS.register("polished_schist_wall", () ->
+            new BlockItem(
+                    ModBlocks.POLISHED_SCHIST_WALL.get(),
                     new Item.Properties()
             )
     );

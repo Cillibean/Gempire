@@ -1,4 +1,4 @@
-// 1.20.1	2025-01-07T13:35:28.506933	Item Models: gempire
+// 1.20.1	2025-01-07T21:21:09.275458	Item Models: gempire
 2a4c323206d2fbeca217109aa5c8a2ac8ce38701 assets/gempire/models/item/acid_spit.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/gempire/models/item/alabaster_empress_spawn_egg.json
 0da7ed67ca0a8fcb9a8ba427cc3a79d0931ef656 assets/gempire/models/item/alabaster_shards.json
@@ -34,7 +34,7 @@ abce74eac971aebc6dc933921fbaa1c0056e343a assets/gempire/models/item/confractor_b
 72d2d8c794066ae1d251d317a95ad79696a24d67 assets/gempire/models/item/confractor_tip.json
 5071da4d7bbdf0bf2ee47276a8f98813e3572243 assets/gempire/models/item/cooked_crystal_shank.json
 4230dc0098eff480a448bf3d9b2a97035bf48569 assets/gempire/models/item/cooked_mantawing.json
-fecb381605493da846918088d50e3343736cfbe9 assets/gempire/models/item/cooked_prismatic_mantawing.json
+131cd68b84fdbd684682312a1d282fd0a12414bd assets/gempire/models/item/cooked_opalized_mantawing.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/gempire/models/item/crystal_deer_spawn_egg.json
 703e79a2af8b7faa64a5a30ae0594cf3ef87c17d assets/gempire/models/item/crystal_door.json
 7b1dae94b648ecc2338c40fa2e428d9c3e1937c5 assets/gempire/models/item/crystal_fence.json
@@ -155,8 +155,8 @@ e2660d960a5ad36fb7d2862d0819be43741702bf assets/gempire/models/item/raw_anatase.
 73881baddd4e2f154521e07c95b6dfb286c2ffb9 assets/gempire/models/item/raw_crystal_shank.json
 eaa3b54656091f382746d2f638bdcf25d6d18568 assets/gempire/models/item/raw_electrum.json
 1bee84788d93c6b8a74193d407575bbace073af9 assets/gempire/models/item/raw_mantawing.json
+c9e99b00607718a883f7df8e955e7a7fcfdf9d1e assets/gempire/models/item/raw_opalized_mantawing.json
 d75806956fcc73dab3add59ba8b8ea1dc421d493 assets/gempire/models/item/raw_platinum.json
-5977f33ff4f3ff86fee441908661329244919d49 assets/gempire/models/item/raw_prismatic_mantawing.json
 99a4a0ab658807fe8909641a8e48f5cf41d4c8f9 assets/gempire/models/item/raw_pyrite.json
 fb95d7b6c60ddafb66deb81530319c109864509a assets/gempire/models/item/raw_thulite.json
 c8856107a7bc890f55bc82ae1238b03be8faac4e assets/gempire/models/item/raw_tungsten.json

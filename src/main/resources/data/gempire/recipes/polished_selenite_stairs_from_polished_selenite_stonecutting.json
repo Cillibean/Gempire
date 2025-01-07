@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "gempire:polished_selenite"
+  },
+  "result": "gempire:polished_selenite_stairs"
+}

@@ -103,6 +103,18 @@
           }
         },
         {
+          "biome": "gempire:solar_shores",
+          "parameters": {
+            "temperature": 0.2,
+            "humidity": 0.2,
+            "continentalness": 0,
+            "erosion": 0.1,
+            "weirdness": 1,
+            "depth": 0,
+            "offset": 0.1
+          }
+        },
+        {
           "biome": "gempire:wayward_ocean",
           "parameters": {
             "temperature": 0,
