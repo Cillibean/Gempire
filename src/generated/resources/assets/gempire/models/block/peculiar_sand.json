@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "gempire:block/abnormal_sandstone"
+    "all": "gempire:block/peculiar_sand"
   }
 }

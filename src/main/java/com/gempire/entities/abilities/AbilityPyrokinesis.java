@@ -1,15 +1,18 @@
 package com.gempire.entities.abilities;
 
 import com.gempire.entities.abilities.base.Ability;
+import com.gempire.entities.abilities.interfaces.ICraftingAbility;
 import com.gempire.entities.abilities.interfaces.IEmotionalAbility;
 import com.gempire.entities.abilities.interfaces.IMeleeAbility;
 import com.gempire.entities.abilities.interfaces.IViolentAbility;
+import com.gempire.init.ModItems;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 
-public class AbilityPyrokinesis extends Ability implements IMeleeAbility, IEmotionalAbility, IViolentAbility {
+public class AbilityPyrokinesis extends Ability implements IMeleeAbility, IEmotionalAbility, IViolentAbility, ICraftingAbility {
 
     public AbilityPyrokinesis() {
         super("pyrokinesis", 1);
@@ -36,5 +39,24 @@ public class AbilityPyrokinesis extends Ability implements IMeleeAbility, IEmoti
     @Override
     public Component getName() {
         return Component.translatable("ability.gempire.pyrokinesis");
+    }
+
+    @Override
+    public void setup() {
+        input.add(ModItems.CONGEALED_PINK_ESSENCE_BLOCK.get());
+        output.add(ModItems.CONGEALED_PINK_ESSENCE.get());
+        input2.add(Items.AIR);
+        input.add(ModItems.CONGEALED_BLUE_ESSENCE_BLOCK.get());
+        output.add(ModItems.CONGEALED_BLUE_ESSENCE.get());
+        input2.add(Items.AIR);
+        input.add(ModItems.CONGEALED_YELLOW_ESSENCE_BLOCK.get());
+        output.add(ModItems.CONGEALED_YELLOW_ESSENCE.get());
+        input2.add(Items.AIR);
+        input.add(ModItems.CONGEALED_WHITE_ESSENCE_BLOCK.get());
+        output.add(ModItems.CONGEALED_WHITE_ESSENCE.get());
+        input2.add(Items.AIR);
+        holder.input2List = input2;
+        holder.inputList = input;
+        holder.outputList = output;
     }
 }

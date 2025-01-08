@@ -314,8 +314,11 @@ public class ModBlockStateProvider extends BlockStateProvider {
         //blockItem(ModBlocks.POLISHED_SCHIST_STAIRS);
         //blockItem(ModBlocks.POLISHED_SCHIST_SLAB);
 
-        blockWithItem(ModBlocks.ABNORMAL_SAND);
-        blockWithItem(ModBlocks.ABNORMAL_SANDSTONE);
+        //blockWithItem(ModBlocks.ABNORMAL_SAND);
+        //blockWithItem(ModBlocks.ABNORMAL_SANDSTONE);
+
+        blockWithItem(ModBlocks.PECULIAR_SAND);
+        blockWithItem(ModBlocks.PECULIAR_SANDSTONE);
 
         blockWithItem(ModBlocks.PINK_SAND);
         blockItem(ModBlocks.PINK_SANDSTONE_STAIRS);

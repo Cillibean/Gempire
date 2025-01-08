@@ -52,7 +52,7 @@ public class InjectorContainer extends AbstractContainerMenu {
         this.injector.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(handler -> {
             this.addSlot(new SlotItemHandler(handler, InjectorTE.ESSENCE_INPUT_SLOT_INDEX, 16, 7) {
                 public boolean mayPlace(ItemStack stack) {
-                    return (stack.getItem() == ModItems.WHITE_ESSENCE_BUCKET.get() ||stack.getItem() == ModItems.YELLOW_ESSENCE_BUCKET.get() ||stack.getItem() == ModItems.BLUE_ESSENCE_BUCKET.get() ||stack.getItem() == ModItems.PINK_ESSENCE_BUCKET.get());
+                    return (stack.getItem() == ModItems.WHITE_ESSENCE_BUCKET.get() ||stack.getItem() == ModItems.YELLOW_ESSENCE_BUCKET.get() ||stack.getItem() == ModItems.BLUE_ESSENCE_BUCKET.get() ||stack.getItem() == ModItems.PINK_ESSENCE_BUCKET.get()||stack.getItem() == ModItems.CONGEALED_PINK_ESSENCE.get()||stack.getItem() == ModItems.CONGEALED_BLUE_ESSENCE.get()||stack.getItem() == ModItems.CONGEALED_YELLOW_ESSENCE.get()||stack.getItem() == ModItems.CONGEALED_WHITE_ESSENCE.get());
                 }
             });
             this.addSlot(new SlotItemHandler(handler, InjectorTE.CHROMA_INPUT_SLOT_INDEX, 44, 29){

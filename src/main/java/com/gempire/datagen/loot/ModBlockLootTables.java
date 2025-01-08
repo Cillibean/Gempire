@@ -340,6 +340,8 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.CHISELED_PINK_SANDSTONE.get());
         this.otherWhenSilkTouch(ModBlocks.DESOLATE_GRASS.get(), ModBlocks.DESOLATE_SOIL.get());
         this.dropSelf(ModBlocks.DESOLATE_SOIL.get());
+        this.dropSelf(ModBlocks.PECULIAR_SAND.get());
+        this.dropSelf(ModBlocks.PECULIAR_SANDSTONE.get());
         this.dropSelf(ModBlocks.ABNORMAL_SAND.get());
         this.dropSelf(ModBlocks.ABNORMAL_SANDSTONE.get());
         this.dropSelf(ModBlocks.PINCULE.get());
@@ -530,12 +532,6 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.add(ModBlocks.BLUE_DESTAB_WALL.get(), (block -> noDrop()));
         this.add(ModBlocks.YELLOW_DESTAB_WALL.get(), (block -> noDrop()));
         this.add(ModBlocks.WHITE_DESTAB_WALL.get(), (block -> noDrop()));
-
-        //else
-        this.dropSelf(ModBlocks.CONGEALED_YELLOW_ESSENCE_BLOCK.get());
-        this.dropSelf(ModBlocks.CONGEALED_PINK_ESSENCE_BLOCK.get());
-        this.dropSelf(ModBlocks.CONGEALED_BLUE_ESSENCE_BLOCK.get());
-        this.dropSelf(ModBlocks.CONGEALED_WHITE_ESSENCE_BLOCK.get());
     }
 
     @Override
@@ -563,6 +559,10 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         list.remove(ModBlocks.STRAWBERRY_BLOCK.get());
         list.remove(ModBlocks.INCUBATOR_BLOCK.get());
         list.remove(ModBlocks.TANK_BLOCK.get());
+        list.remove(ModBlocks.CONGEALED_PINK_ESSENCE_BLOCK.get());
+        list.remove(ModBlocks.CONGEALED_BLUE_ESSENCE_BLOCK.get());
+        list.remove(ModBlocks.CONGEALED_YELLOW_ESSENCE_BLOCK.get());
+        list.remove(ModBlocks.CONGEALED_WHITE_ESSENCE_BLOCK.get());
         return list;
     }
 

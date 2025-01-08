@@ -30,7 +30,8 @@
     [
       "gempire:ore_macadam",
       "gempire:ore_schist",
-      "gempire:ore_ryolite"
+      "gempire:ore_ryolite_upper",
+      "gempire:ore_ryolite_lower"
     ],
     [],
     [
@@ -41,7 +42,6 @@
       "minecraft:glow_lichen",
       "minecraft:patch_large_fern",
       "minecraft:patch_grass_taiga_2",
-      "gempire:desolate_kelp",
       "gempire:aquatic_fibre_normal",
       "gempire:aquatic_fibre_deep"
     ],

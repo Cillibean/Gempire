@@ -148,6 +148,12 @@ public class ModBlocks {
             new WallBlock(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE_WALL))
     );
 
+    public static final RegistryObject<Block> PECULIAR_SAND = BLOCKS.register("peculiar_sand", () ->
+            new SandBlock(11098145, BlockBehaviour.Properties.copy(Blocks.SAND)));
+
+    public static final RegistryObject<Block> PECULIAR_SANDSTONE = BLOCKS.register("peculiar_sandstone", () ->
+            new Block(BlockBehaviour.Properties.copy(Blocks.SANDSTONE)));
+
     public static final RegistryObject<Block> ABNORMAL_SAND = BLOCKS.register("abnormal_sand", () ->
             new SandBlock(11098145, BlockBehaviour.Properties.copy(Blocks.SAND)));
 

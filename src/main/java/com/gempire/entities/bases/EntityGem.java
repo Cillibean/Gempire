@@ -879,12 +879,6 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     public int generateRecipeAmount() {
         int i = 0;
         if (canCraft()) {
-            /*for(Ability ability : this.getAbilityPowers()){
-                if(ability instanceof ICraftingAbility){
-                    i+= ((ICraftingAbility) ability).recipeAmount();
-                }
-            }
-            return i;*/
             return inputList.size();
         }
         else return 0;
@@ -1448,12 +1442,13 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                     if (roundAmount > hardness*2) {
                         float excess = ((float)roundAmount-hardness) / 2;
                         float shatterChancef = shatterChance;
+                        float crackChancef = crackChance;
 
                         System.out.println("amount "+roundAmount);
                         System.out.println("excess "+excess);
                         System.out.println("shatter chance "+ (shatterChancef / excess));
                         int shatter = this.random.nextInt((int) (shatterChancef / excess));
-                        int crack = this.random.nextInt(crackChance / (int) excess);
+                        int crack = this.random.nextInt((int)(crackChancef / excess));
                         System.out.println("shatter int " + shatter);
                         System.out.println("crack int " + crack);
                         if ((shatter == 1 /*|| getCrackAmount() == (getHardness() * 10)*/)) {
@@ -1483,15 +1478,15 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                     }
                     if (!(player.getMainHandItem().getItem() instanceof DestabBase)) {
                         if (roundAmount > hardness*2) {
-                            int excess = (int)(roundAmount - hardness) / 2;
-                            int shatterChancef = shatterChance;
+                            float excess = ((float)roundAmount-hardness) / 2;
+                            float shatterChancef = shatterChance;
+                            float crackChancef = crackChance;
 
-                            System.out.println("amount " + roundAmount);
-                            System.out.println("excess " + excess);
-                            shatterChancef = (int) shatterChancef/excess;
-                            System.out.println("shatter chance " + shatterChancef);
-                            int shatter = this.random.nextInt(shatterChancef);
-                            int crack = this.random.nextInt(crackChance / (int) excess);
+                            System.out.println("amount "+roundAmount);
+                            System.out.println("excess "+excess);
+                            System.out.println("shatter chance "+ (shatterChancef / excess));
+                            int shatter = this.random.nextInt((int) (shatterChancef / excess));
+                            int crack = this.random.nextInt((int)(crackChancef / excess));
                             System.out.println("shatter int " + shatter);
                             System.out.println("crack int " + crack);
                             if ((shatter == 1 /*|| getCrackAmount() == (getHardness() * 10)*/)) {
@@ -1630,9 +1625,28 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                     this.getAttribute(Attributes.ATTACK_SPEED).removeModifiers();
                     this.getAttribute(Attributes.KNOCKBACK_RESISTANCE).removeModifiers();
                 }
-                CompoundTag tag = new CompoundTag();
-                save(tag);
-                stack.setTag(tag);
+                CompoundTag compound = new CompoundTag();
+                compound.putString("abilities", this.getAbilities());
+                compound.putString("name", this.getName().getString());
+                compound.putBoolean("display", this.entityData.get(EntityGem.DISPLAY));
+                this.writeCrackShatter(compound);
+                this.writeOwners(compound);
+                this.writeIDs(compound);
+                this.writeCraft(compound);
+                this.writeScale(compound);
+                this.writeColour(compound);
+                this.writeVariant(compound);
+                this.writeRebelColour(compound);
+                this.writeRebelVariant(compound);
+                this.writeFacetCut(compound);
+                this.writeAbilityUtil(compound);
+                this.writeUtil(compound);
+                this.writeAssignedUtil(compound);
+                compound.putString("masterName", getMasterName());
+                if (this.canLocateStructures()) compound.putInt("structureTime", this.structureTime);
+                if (this.canLocateStructures()) this.writeStructures(compound);
+                ContainerHelper.saveAllItems(compound, this.items);
+                stack.setTag(compound);
                 this.spawnAtLocation(stack).setExtendedLifetime();
             }
             this.gameEvent(GameEvent.ENTITY_PLACE);

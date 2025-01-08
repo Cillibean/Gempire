@@ -30,7 +30,8 @@
     [
       "gempire:ore_macadam",
       "gempire:ore_schist",
-      "gempire:ore_ryolite"
+      "gempire:ore_ryolite_upper",
+      "gempire:ore_ryolite_lower"
     ],
     [],
     [],
@@ -39,7 +40,6 @@
       "minecraft:patch_grass_badlands",
       "minecraft:patch_dead_bush_2",
       "gempire:patch_pincule",
-      "gempire:desolate_kelp",
       "gempire:aquatic_fibre_normal",
       "gempire:aquatic_fibre_deep"
     ],

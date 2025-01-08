@@ -166,19 +166,26 @@ public class InjectorTE extends RandomizableContainerBlockEntity implements IFlu
             // yellow - 2
             // white - 3
             int colour = 0;
-            if (stack.is(ModItems.BLUE_ESSENCE_BUCKET.get())) colour = 1;
-            else if (stack.is(ModItems.YELLOW_ESSENCE_BUCKET.get())) colour = 2;
-            else if (stack.is(ModItems.WHITE_ESSENCE_BUCKET.get())) colour = 3;
+            if (stack.is(ModItems.BLUE_ESSENCE_BUCKET.get()) || stack.is(ModItems.CONGEALED_BLUE_ESSENCE.get())) colour = 1;
+            else if (stack.is(ModItems.YELLOW_ESSENCE_BUCKET.get()) || stack.is(ModItems.CONGEALED_YELLOW_ESSENCE.get())) colour = 2;
+            else if (stack.is(ModItems.WHITE_ESSENCE_BUCKET.get()) || stack.is(ModItems.CONGEALED_WHITE_ESSENCE.get())) colour = 3;
             if (this.shouldPullFluidFromStack(colour)) {
                 if (stack.getItem() != Items.AIR) {
                     if (stack.getItem() instanceof BucketItem bucket) {
                         if (this.isValidForSlot(ESSENCE_INPUT_SLOT_INDEX, bucket)) {
-                            this.FillFluidTanks(colour, 1200);
+                            this.FillFluidTanks(colour, 1000);
                             itemHandler.setStackInSlot(ESSENCE_INPUT_SLOT_INDEX, new ItemStack(Items.BUCKET.asItem()));
                             assert this.level != null;
                             this.level.sendBlockUpdated(this.worldPosition, this.getBlockState(), this.getBlockState(), 2);
                             this.setChanged();
                         }
+                    } else if (stack.getItem() == ModItems.CONGEALED_PINK_ESSENCE.get() ||stack.getItem() == ModItems.CONGEALED_BLUE_ESSENCE.get() ||
+                            stack.getItem() == ModItems.CONGEALED_YELLOW_ESSENCE.get() ||stack.getItem() == ModItems.CONGEALED_WHITE_ESSENCE.get()) {
+                        this.FillFluidTanks(colour, 50);
+                        itemHandler.setStackInSlot(ESSENCE_INPUT_SLOT_INDEX, new ItemStack(Items.AIR));
+                        assert this.level != null;
+                        this.level.sendBlockUpdated(this.worldPosition, this.getBlockState(), this.getBlockState(), 2);
+                        this.setChanged();
                     }
                 }
             }

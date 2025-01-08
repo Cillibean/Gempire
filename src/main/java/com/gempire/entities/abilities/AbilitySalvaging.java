@@ -12,10 +12,6 @@ public class AbilitySalvaging extends Ability implements ICraftingAbility {
         super("salvaging", 4);
     }
 
-    @Override
-    public int recipeAmount() {
-        return 1;
-    }
 
     @Override
     public void setup() {

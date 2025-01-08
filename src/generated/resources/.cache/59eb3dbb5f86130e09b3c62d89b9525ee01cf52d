@@ -1,4 +1,4 @@
-// 1.20.1	2025-01-08T10:13:00.256948	Loot Tables
+// 1.20.1	2025-01-08T14:13:38.517789	Loot Tables
 3563fbcf8563263afd9f878ab9ce993c99892f66 data/gempire/loot_tables/blocks/abnormal_sand.json
 e92c16f5ce8ec1e58947f3367b0ba30450bc85b7 data/gempire/loot_tables/blocks/abnormal_sandstone.json
 51f0b4954e965b758421cac9beaa853342528e93 data/gempire/loot_tables/blocks/alien_flower.json
@@ -325,6 +325,8 @@ ca9dc7ec7e944ee18905d51c8c8e51e1916d19e4 data/gempire/loot_tables/blocks/magenta
 1e2dcfebe2e4afbd62045857c37d3ff34ea94a7b data/gempire/loot_tables/blocks/orange_phosphorus_lamp.json
 d0a35365a2d0d626054c954cf000353b05e0d545 data/gempire/loot_tables/blocks/orchid.json
 76f97909facb1769d6959f6f04cb9fa1aef22991 data/gempire/loot_tables/blocks/pansie.json
+ee50a75f8f41b3b6460714ebdb24d507ed20a3bc data/gempire/loot_tables/blocks/peculiar_sand.json
+5faa024659bcb25d5f4b97edbac5f5e866b7032e data/gempire/loot_tables/blocks/peculiar_sandstone.json
 4b75a8ee700d4bd9ac8480628642b36ec1bb78d4 data/gempire/loot_tables/blocks/pedistal.json
 c2de2af117b7f890578428072d8cd5680c6d6ca2 data/gempire/loot_tables/blocks/pegmatite.json
 8ec0ea2d56309ca47cdc407252615b4c22f37c35 data/gempire/loot_tables/blocks/pegmatite_slab.json

@@ -1,4 +1,4 @@
-// 1.20.1	2025-01-07T21:21:09.274298	Block Tags
+// 1.20.1	2025-01-08T14:13:38.516806	Block Tags
 3d642b3b90a1e6b43daab61cf1557711f2e0cadd data/forge/tags/blocks/gravel.json
 2574da384122fba78e2b405c5d23945f16e85f1d data/forge/tags/blocks/stone.json
 2574da384122fba78e2b405c5d23945f16e85f1d data/gempire/tags/blocks/desolate_ore_replaceables.json
@@ -13,10 +13,10 @@ c37309cb78ab154bf59b27644fce72ee5ed0c4d8 data/minecraft/tags/blocks/flowers.json
 d820d9b7663d583d6275e066d1aa4175314fe64d data/minecraft/tags/blocks/leaves.json
 29bef654f6377d04e6e6b2c708ef92ed9243fb8b data/minecraft/tags/blocks/logs.json
 29bef654f6377d04e6e6b2c708ef92ed9243fb8b data/minecraft/tags/blocks/logs_that_burn.json
-7b0bc43cb213ce0d501fde5e35b9e5642fe204b4 data/minecraft/tags/blocks/mineable/pickaxe.json
-48d7fcdf19c9ee6d79f76498be8ab63cabd2892e data/minecraft/tags/blocks/mineable/shovel.json
+0554ab48f0390daf6bb07cbe9d55d63c61a265a7 data/minecraft/tags/blocks/mineable/pickaxe.json
+85062a3cd81db39bb80ba26acecc19acc41b0d71 data/minecraft/tags/blocks/mineable/shovel.json
 029aa9e03b79fb72c5f6b5c1e592cb89ef6d69c9 data/minecraft/tags/blocks/needs_diamond_tool.json
 68251627312c52a9a564f5eb223c2a0973847160 data/minecraft/tags/blocks/needs_iron_tool.json
 638e0c18c155822fe4bd10372aad5e3287a501c6 data/minecraft/tags/blocks/planks.json
-6a0d2501bb605b0d6eb6409d329a3d6e018588d7 data/minecraft/tags/blocks/sand.json
+9b245733062cb33234df10d05982bc2385e2d002 data/minecraft/tags/blocks/sand.json
 41b834eb780678a443f42e50a17346756dbb6f32 data/minecraft/tags/blocks/walls.json

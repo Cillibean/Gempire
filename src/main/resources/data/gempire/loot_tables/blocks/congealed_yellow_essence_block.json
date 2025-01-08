@@ -3,11 +3,7 @@
   "pools": [
     {
       "bonus_rolls": 0.0,
-      "conditions": [
-        {
-          "condition": "minecraft:survives_explosion"
-        }
-      ],
+      "conditions": [],
       "entries": [
         {
           "type": "minecraft:item",

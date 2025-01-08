@@ -16,10 +16,6 @@ public class AbilityBrewEssence extends Ability implements ICraftingAbility {
         return Component.translatable("ability.gempire.essence");
     }
 
-    @Override
-    public int recipeAmount() {
-        return 1;
-    }
 
     @Override
     public void setup() {

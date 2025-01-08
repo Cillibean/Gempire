@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "gempire:congealed_pink_essence_block"
+          "name": "gempire:peculiar_sand"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "gempire:blocks/congealed_pink_essence_block"
+  "random_sequence": "gempire:blocks/peculiar_sand"
 }

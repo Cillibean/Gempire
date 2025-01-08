@@ -12,10 +12,6 @@ public class AbilityPrismaticRefinery extends Ability implements ICraftingAbilit
     }
 
     @Override
-    public int recipeAmount() {
-        return 1;
-    }
-    @Override
     public void setup() {
         input.add(ModItems.GEM_ALLOY.get());
         output.add(ModItems.PRISMATIC_INGOT.get());

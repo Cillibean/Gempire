@@ -423,6 +423,12 @@ public class ModItems {
     public static final RegistryObject<Item> CHISELED_PINK_SANDSTONE = ITEMS.register("chiseled_pink_sandstone", () ->
             new BlockItem(ModBlocks.CHISELED_PINK_SANDSTONE.get(), new Item.Properties()));
 
+    public static final RegistryObject<Item> PECULIAR_SAND = ITEMS.register("peculiar_sand", () ->
+            new BlockItem(ModBlocks.PECULIAR_SAND.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> PECULIAR_SANDSTONE = ITEMS.register("peculiar_sandstone", () ->
+            new BlockItem(ModBlocks.PECULIAR_SANDSTONE.get(), new Item.Properties()));
+
     public static final RegistryObject<Item> ABNORMAL_SAND = ITEMS.register("abnormal_sand", () ->
             new BlockItem(ModBlocks.ABNORMAL_SAND.get(), new Item.Properties()));
 
@@ -3032,7 +3038,7 @@ public class ModItems {
             )
     );
     public static final RegistryObject<Item> TANK_BLOCK_ITEM = ITEMS.register("tank_block", () ->
-            new BlockItem(
+            new ItemTankBlock(
                     ModBlocks.TANK_BLOCK.get(),
                     new Item.Properties()
             )

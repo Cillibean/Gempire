@@ -85,6 +85,21 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                         ModBlocks.ROUGH_SELENITE.get(),
                         ModBlocks.PRIMED_SELENITE.get(),
                         ModBlocks.SCHIST_BLOCK.get(),
+                        ModBlocks.SCHIST_SLAB.get(),
+                        ModBlocks.SCHIST_STAIRS.get(),
+                        ModBlocks.SCHIST_WALL.get(),
+                        ModBlocks.POLISHED_SCHIST_BLOCK.get(),
+                        ModBlocks.POLISHED_SCHIST_SLAB.get(),
+                        ModBlocks.POLISHED_SCHIST_STAIRS.get(),
+                        ModBlocks.POLISHED_SCHIST_WALL.get(),
+                        ModBlocks.RYOLITE_BLOCK.get(),
+                        ModBlocks.RYOLITE_SLAB.get(),
+                        ModBlocks.RYOLITE_STAIRS.get(),
+                        ModBlocks.RYOLITE_WALL.get(),
+                        ModBlocks.POLISHED_RYOLITE_BLOCK.get(),
+                        ModBlocks.POLISHED_RYOLITE_SLAB.get(),
+                        ModBlocks.POLISHED_RYOLITE_STAIRS.get(),
+                        ModBlocks.POLISHED_RYOLITE_WALL.get(),
                         ModBlocks.SELENITE.get(),
                         ModBlocks.SELENITE_SLAB.get(),
                         ModBlocks.SELENITE_STAIRS.get(),
@@ -333,7 +348,9 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                         ModBlocks.DESOLATE_GRASS.get(),
                         ModBlocks.DESOLATE_SOIL.get(),
                         ModBlocks.ABNORMAL_SAND.get(),
-                        ModBlocks.MACADAM.get()
+                        ModBlocks.MACADAM.get(),
+                        ModBlocks.PECULIAR_SAND.get(),
+                        ModBlocks.PINK_SAND.get()
                 );
 
         this.tag(BlockTags.NEEDS_IRON_TOOL)
@@ -507,7 +524,7 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
 
         this.tag(BlockTags.DIRT).add(ModBlocks.DESOLATE_SOIL.get(), ModBlocks.DESOLATE_GRASS.get());
 
-        this.tag(BlockTags.SAND).add(ModBlocks.ABNORMAL_SAND.get());
+        this.tag(BlockTags.SAND).add(ModBlocks.ABNORMAL_SAND.get(), ModBlocks.PINK_SAND.get(), ModBlocks.PECULIAR_SAND.get());
 
         this.tag(Tags.Blocks.STONE).add(ModBlocks.PEGMATITE.get());
 

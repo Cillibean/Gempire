@@ -12,10 +12,6 @@ public class AbilityDesigner extends Ability implements ICraftingAbility {
     }
 
     @Override
-    public int recipeAmount() {
-        return 1;
-    }
-    @Override
     public void setup() {
         //stone pedestal recipe
         input.add(Items.STONE);

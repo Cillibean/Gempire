@@ -12,6 +12,8 @@
     "gempire:desolate_grass",
     "gempire:desolate_soil",
     "gempire:abnormal_sand",
-    "gempire:macadam"
+    "gempire:macadam",
+    "gempire:peculiar_sand",
+    "gempire:pink_sand"
   ]
 }
