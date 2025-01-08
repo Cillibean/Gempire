@@ -31,8 +31,8 @@
   "features": [
     [],
     [
-      "minecraft:lake_lava_underground",
-      "minecraft:lake_lava_surface"
+      "gempire:lake_lava_underground",
+      "gempire:lake_lava_surface"
     ],
     [],
     [],

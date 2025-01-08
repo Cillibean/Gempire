@@ -1,18 +1,16 @@
 {
   "type": "minecraft:ore",
   "config": {
+    "discard_chance_on_air_exposure": 0.0,
     "size": 64,
-    "discard_chance_on_air_exposure": 0,
     "targets": [
       {
-        "target": {
-          "predicate_type": "minecraft:blockstate_match",
-          "block_state": {
-            "Name": "gempire:pegmatite"
-          }
-        },
         "state": {
           "Name": "gempire:schist_block"
+        },
+        "target": {
+          "predicate_type": "minecraft:tag_match",
+          "tag": "gempire:base_stone_desolate"
         }
       }
     ]

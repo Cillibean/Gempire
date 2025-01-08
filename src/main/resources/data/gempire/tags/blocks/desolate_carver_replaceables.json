@@ -1,0 +1,15 @@
+{
+  "values": [
+    "#minecraft:overworld_carver_replaceables",
+    "gempire:pegmatite",
+    "gempire:schist",
+    "gempire:ryolite",
+    "gempire:macadam",
+    "gempire:pink_sand",
+    "gempire:pink_sandstone",
+    "gempire:abnormal_sand",
+    "gempire:abnormal_sandstone",
+    "gempire:prismatic_snow",
+    "gempire:pegmatite_tungsten_ore"
+  ]
+}

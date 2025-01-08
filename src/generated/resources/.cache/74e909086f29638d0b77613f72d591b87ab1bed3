@@ -1,4 +1,4 @@
-// 1.20.1	2025-01-08T10:21:18.816431	Block States: gempire
+// 1.20.1	2025-01-08T10:40:54.59381	Block States: gempire
 e9fe90a8f74e0c4a6a77ee6c2135937e92bccf11 assets/gempire/blockstates/abnormal_sand.json
 c4772fb665bd9df470b93cc577aa98ed0457195d assets/gempire/blockstates/abnormal_sandstone.json
 0f70fed0bd5cf48d690237a733ca46e40a1a640e assets/gempire/blockstates/anatase_block.json
@@ -139,7 +139,6 @@ ac78239eff4e3627877c3bbc6afe514cfc417bac assets/gempire/blockstates/ryolite_stai
 3b205a1a108a3fc595dbacbccd194a6853fe0e18 assets/gempire/blockstates/schist_stairs.json
 fbf62aef82fd8c5573eb47597b41055758a817e4 assets/gempire/blockstates/schist_wall.json
 7fb0766540235e65ae226ed82945c0b82f4c6d29 assets/gempire/blockstates/selenite.json
-0e33b589784c5d2d0b1c95167c4b5dcd965d148b assets/gempire/blockstates/selenite_cluster.json
 41b146ff48aea7bbafc6ddda7a2decb64be7f86a assets/gempire/blockstates/selenite_slab.json
 e03ec9b9d9b93c24e5f252653542a53c929d866b assets/gempire/blockstates/selenite_stairs.json
 8f976ffd42cf2a6bb96b56e70e7d52ff7f58f445 assets/gempire/blockstates/selenite_wall.json
@@ -452,7 +451,6 @@ faf6db5f14504d46143505a640c207dc7e2a5e17 assets/gempire/models/block/schist_wall
 a4b40eef7da5b7551fe601339ac62013c7437cef assets/gempire/models/block/schist_wall_side.json
 78f85d20ea0d34f8a949efb0d87721bfc164c160 assets/gempire/models/block/schist_wall_side_tall.json
 8d008d3da83df154d70f294f7763780a246da82b assets/gempire/models/block/selenite.json
-f8602d9ee9c36a2fd428e54975eb89f81aa7e620 assets/gempire/models/block/selenite_cluster.json
 680435a60acb0a34d87d1dfa9fd91e9591f54545 assets/gempire/models/block/selenite_slab.json
 2bf37acf8b40010fffcd2a2dbdcdbeefb3b975f9 assets/gempire/models/block/selenite_slab_top.json
 edc684cdc8ccc6b3109899c1116a086056374533 assets/gempire/models/block/selenite_stairs.json
