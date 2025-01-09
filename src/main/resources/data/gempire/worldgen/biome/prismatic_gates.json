@@ -26,7 +26,16 @@
       }
     ]
   },
-  "spawn_costs": {},
+  "spawn_costs": {
+    "gempire:overseer": {
+      "charge": 1.0,
+      "energy_budget": 0.12
+    },
+    "gempire:specter": {
+      "charge": 1.0,
+      "energy_budget": 0.12
+    }
+  },
   "carvers": {
     "air": [
       "gempire:cave",

@@ -108,6 +108,22 @@ public class EntityPearl extends EntityVaryingGem {
     }
 
     @Override
+    public void readAdditionalSaveData(CompoundTag compound) {
+        super.readAdditionalSaveData(compound);
+        this.setPage(compound.getInt("page"));
+        this.loadItems(compound);
+    }
+
+    @Override
+    public boolean save(CompoundTag compound) {
+        compound.putInt("page", this.getPage());
+        this.saveItems(compound);
+        System.out.println("add aditional save data");
+        System.out.println(compound.getList("Items1", 10).get(0));
+        return super.save(compound);
+    }
+
+    @Override
     public void load(CompoundTag compound) {
         super.load(compound);
         this.setPage(compound.getInt("page"));

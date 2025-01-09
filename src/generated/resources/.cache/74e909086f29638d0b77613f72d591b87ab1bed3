@@ -1,4 +1,5 @@
-// 1.20.1	2025-01-08T14:13:38.505826	Block States: gempire
+// 1.20.1	2025-01-10T08:43:38.644374	Block States: gempire
+e9fe90a8f74e0c4a6a77ee6c2135937e92bccf11 assets/gempire/blockstates/abnormal_sand.json
 0f70fed0bd5cf48d690237a733ca46e40a1a640e assets/gempire/blockstates/anatase_block.json
 aa2054acb7f133f701e884350d8c9532c05ec7a0 assets/gempire/blockstates/anatase_ore.json
 78b555da3b2beb9cd33c339ca9b04087c0332dbe assets/gempire/blockstates/aquatic_fibre.json
@@ -177,6 +178,7 @@ f8a00c778cfc1ef26df4cf004b1eb7ec08f6c837 assets/gempire/blockstates/tungsten_ore
 ce4d182d06fd6956e4a8f3e66af8336ac2b1dd06 assets/gempire/blockstates/white_lattice.json
 2183e998dfd8e4cba9b034d02f4990327a76185b assets/gempire/blockstates/yellow_diamond_glass.json
 8dab2e51970e70309f7604e32f911260a3b3cc7e assets/gempire/blockstates/yellow_lattice.json
+9ec0a69e99b7c7c57b0c3791eb3fdcc9963c1046 assets/gempire/models/block/abnormal_sand.json
 40407100c3a76e70463143c41a01193c9dc56990 assets/gempire/models/block/anatase_block.json
 d2322905b959ab7e08a2bcdeb4bad99cc2824533 assets/gempire/models/block/anatase_ore.json
 1302a797d8de57dc61d2edc8ed6c24cbc131f2c2 assets/gempire/models/block/aquatic_fibre.json
@@ -526,6 +528,7 @@ c0f8df3272f00b6ea7bbd80983b159fe9edb2ba3 assets/gempire/models/block/yellow_latt
 423c6bf58d8d4986e61495c8d1090208436b2851 assets/gempire/models/block/yellow_lattice_post.json
 289053c72a26579b7aff7546ba42d9b59fd976f4 assets/gempire/models/block/yellow_lattice_side.json
 8db078619d35877a8770b15badbb83a237ff27cf assets/gempire/models/block/yellow_lattice_side_alt.json
+1e2f29c62e5578a153b774572cf865eafaa96700 assets/gempire/models/item/abnormal_sand.json
 3549cb47649ead40f21d1c925c724551ac2231a3 assets/gempire/models/item/anatase_block.json
 4bfdc8ae9855ee51408910b978eb27fce981fcbf assets/gempire/models/item/anatase_ore.json
 d3dd0d2e80633663d9945c917e23ba8d64d18ff2 assets/gempire/models/item/black_diamond_glass.json

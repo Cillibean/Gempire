@@ -1381,5 +1381,22 @@
   "fluid_type.gempire.yellow_essence_fluid": "Yellow Gem Essence",
   "fluid_type.gempire.white_essence_fluid": "White Gem Essence",
 
-  "trim_material.gempire.prismatic": "Prismatic Material"
+  "trim_material.gempire.prismatic": "Prismatic Material",
+
+  "block.minecraft.banner.gempire.diamond.white": "White Diamond Insignia",
+  "block.minecraft.banner.gempire.diamond.red": "Red Diamond Insignia",
+  "block.minecraft.banner.gempire.diamond.orange": "Orange Diamond Insignia",
+  "block.minecraft.banner.gempire.diamond.yellow": "Yellow Diamond Insignia",
+  "block.minecraft.banner.gempire.diamond.lime": "Lime Diamond Insignia",
+  "block.minecraft.banner.gempire.diamond.green": "Green Diamond Insignia",
+  "block.minecraft.banner.gempire.diamond.cyan": "Cyan Diamond Insignia",
+  "block.minecraft.banner.gempire.diamond.light_blue": "Light Blue Diamond Insignia",
+  "block.minecraft.banner.gempire.diamond.blue": "Blue Diamond Insignia",
+  "block.minecraft.banner.gempire.diamond.purple": "Purple Diamond Insignia",
+  "block.minecraft.banner.gempire.diamond.magenta": "Magenta Diamond Insignia",
+  "block.minecraft.banner.gempire.diamond.pink": "Pink Diamond Insignia",
+  "block.minecraft.banner.gempire.diamond.brown": "Brown Diamond Insignia",
+  "block.minecraft.banner.gempire.diamond.light_gray": "Light Gray Diamond Insignia",
+  "block.minecraft.banner.gempire.diamond.gray": "Gray Diamond Insignia",
+  "block.minecraft.banner.gempire.diamond.black": "Black Diamond Insignia"
 }

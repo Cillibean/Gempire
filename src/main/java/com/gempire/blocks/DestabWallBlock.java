@@ -84,16 +84,17 @@ public class DestabWallBlock extends HorizontalDirectionalBlock {
         return blockstate.is(this) && blockstate.getValue(FACING) == direction ? this.defaultBlockState().setValue(FACING, direction.getOpposite()) : this.defaultBlockState().setValue(FACING, direction);
     }
 
-    public void animateTick(BlockState p_221107_, Level level, BlockPos p_221109_, RandomSource p_221110_) {
-        Direction $$4 = (Direction)p_221107_.getValue(FACING);
-        double x = (double)p_221109_.getX() + 0.55 - (double)(p_221110_.nextFloat() * 0.1F);
-        double y = (double)p_221109_.getY() + 0.55 - (double)(p_221110_.nextFloat() * 0.1F);
-        double z = (double)p_221109_.getZ() + 0.55 - (double)(p_221110_.nextFloat() * 0.1F);
-        double $$8 = (double)(0.4F - (p_221110_.nextFloat() + p_221110_.nextFloat()) * 0.4F);
-        if (p_221110_.nextInt(5) == 0) {
-            level.addParticle(ParticleTypes.END_ROD, x + (double)$$4.getStepX() * $$8, y + (double)$$4.getStepY() * $$8, z + (double)$$4.getStepZ() * $$8, p_221110_.nextGaussian() * 0.005, p_221110_.nextGaussian() * 0.005, p_221110_.nextGaussian() * 0.005);
+    @Override
+    public void animateTick(BlockState stateIn, Level level, BlockPos pos, RandomSource rand) {
+        Direction direction = stateIn.getValue(FACING);
+        double d0 = (double)pos.getX() + 1 - (double)(rand.nextFloat());
+        double d1 = (double)pos.getY() + 1 - (double)(rand.nextFloat());
+        double d2 = (double)pos.getZ() + 1 - (double)(rand.nextFloat());
+        double d3 = (double)(0.4F - (rand.nextFloat() + rand.nextFloat()) * 0.4F);
+        if (rand.nextInt(5) == 0) {
+            level.addParticle(ParticleTypes.END_ROD, d0 + (double)direction.getStepX() * d3, d1 + (double)direction.getStepY() * d3, d2 + (double)direction.getStepZ() * d3, rand.nextGaussian() * 0.005D, rand.nextGaussian() * 0.005D, rand.nextGaussian() * 0.005D);
         }
-
+        super.animateTick(stateIn, level, pos, rand);
     }
 
     public void onRemove(BlockState p_51095_, Level p_51096_, BlockPos p_51097_, BlockState p_51098_, boolean p_51099_) {

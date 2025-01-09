@@ -2749,6 +2749,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     }
 
     public boolean consumeItemCheck(Item item, int amount){
+        System.out.println("Consume item "+item);
         for(int i = 0; i < EntityGem.NUMBER_OF_SLOTS - 4; i++){
             if(this.getItem(i).getItem() == item) {
                 if (this.getItem(i).getCount() >= amount) {

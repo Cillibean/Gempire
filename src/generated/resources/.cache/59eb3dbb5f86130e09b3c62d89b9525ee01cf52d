@@ -1,4 +1,4 @@
-// 1.20.1	2025-01-08T14:13:38.517789	Loot Tables
+// 1.20.1	2025-01-10T08:43:38.650525	Loot Tables
 3563fbcf8563263afd9f878ab9ce993c99892f66 data/gempire/loot_tables/blocks/abnormal_sand.json
 e92c16f5ce8ec1e58947f3367b0ba30450bc85b7 data/gempire/loot_tables/blocks/abnormal_sandstone.json
 51f0b4954e965b758421cac9beaa853342528e93 data/gempire/loot_tables/blocks/alien_flower.json
@@ -33,10 +33,6 @@ c814f13eb111a495e39b80b082220cc93abe4391 data/gempire/loot_tables/blocks/cobalt_
 6336ccc32f078485501bde0c9637828d1c32f5fa data/gempire/loot_tables/blocks/cobbled_pegmatite_slab.json
 f630630a4c8bde6dd5525b3e267f051af8b64cc0 data/gempire/loot_tables/blocks/cobbled_pegmatite_stairs.json
 fa5691b73940e2faf4f0d5b08ee36e3aa881ff2d data/gempire/loot_tables/blocks/cobbled_pegmatite_wall.json
-04a748a565020e860e54a61cb9df057a76a1adc4 data/gempire/loot_tables/blocks/congealed_blue_essence_block.json
-bacf57ac131d4cd94fdebbea70139d4ad3a7e68d data/gempire/loot_tables/blocks/congealed_pink_essence_block.json
-9c64791b457c5905e44d4ce7c0f0a65969e1c864 data/gempire/loot_tables/blocks/congealed_white_essence_block.json
-f6b97aae4b62d01442b994e1e43f6eec1bee76f8 data/gempire/loot_tables/blocks/congealed_yellow_essence_block.json
 9fac81623c7e44b49259a42f6496ab93b667eca1 data/gempire/loot_tables/blocks/cracked_galaxy_warp.json
 96814025dd1fca91aabfc26a37869a4a116ee7b9 data/gempire/loot_tables/blocks/crocosmia.json
 718078db238d57fd2979cc168555335580404ba5 data/gempire/loot_tables/blocks/crystal_door.json

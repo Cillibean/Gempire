@@ -20,7 +20,12 @@
       }
     ]
   },
-  "spawn_costs": {},
+  "spawn_costs": {
+    "gempire:hunter": {
+      "charge": 1.0,
+      "energy_budget": 0.12
+    }
+  },
   "carvers": {
     "air": [
       "gempire:cave",

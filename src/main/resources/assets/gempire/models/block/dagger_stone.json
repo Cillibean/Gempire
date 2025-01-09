@@ -1,11 +1,11 @@
 {
 	"credit": "Made with Blockbench",
 	"texture_size": [64, 64],
+	"render_type": "cutout",
 	"textures": {
 		"0": "gempire:block/dagger_stone",
 		"particle": "gempire:block/dagger_stone"
 	},
-	"render_type": "cutout",
 	"elements": [
 		{
 			"name": "base",
@@ -23,27 +23,13 @@
 		},
 		{
 			"name": "item",
-			"from": [0.25, 6.75, 7.5],
-			"to": [16.25, 22.75, 7.5],
-			"rotation": {"angle": -45, "axis": "z", "origin": [7.75, 14.75, 7]},
-			"faces": {
-				"north": {"uv": [4, 6, 8, 10], "texture": "#0"},
-				"east": {"uv": [4, 6, 4, 10], "texture": "#0"},
-				"south": {"uv": [8, 6, 12, 10], "texture": "#0"},
-				"west": {"uv": [8, 6, 8, 10], "texture": "#0"},
-				"up": {"uv": [8, 6, 4, 6], "texture": "#0"},
-				"down": {"uv": [12, 6, 8, 6], "texture": "#0"}
-			}
-		},
-		{
-			"name": "item",
-			"from": [0.25, 5.75, 8],
-			"to": [16.25, 21.75, 8],
-			"rotation": {"angle": 45, "axis": "z", "origin": [7.75, 13.75, 8]},
+			"from": [0.75, 5.75, 7.75],
+			"to": [16.75, 21.75, 8],
+			"rotation": {"angle": -45, "axis": "z", "origin": [8.75, 13.75, 8]},
 			"faces": {
 				"north": {"uv": [0, 6, 4, 10], "texture": "#0"},
 				"east": {"uv": [0, 6, 0, 10], "texture": "#0"},
-				"south": {"uv": [4, 6, 8, 10], "texture": "#0"},
+				"south": {"uv": [0.25, 6.25, 4.25, 10.25], "rotation": 270, "texture": "#0"},
 				"west": {"uv": [4, 6, 4, 10], "texture": "#0"},
 				"up": {"uv": [4, 6, 0, 6], "texture": "#0"},
 				"down": {"uv": [8, 6, 4, 6], "texture": "#0"}
