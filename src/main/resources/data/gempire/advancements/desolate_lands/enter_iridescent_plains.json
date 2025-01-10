@@ -1,0 +1,41 @@
+{
+  "display": {
+    "icon": {
+      "item": "gempire:prismatic_block"
+    },
+    "title": {
+      "translate": "advancements.gempire.desolate_lands.iridescent_plains.title"
+    },
+    "description": {
+      "translate": "advancements.gempire.desolate_lands.iridescent_plains.description"
+    },
+    "announce_to_chat": true,
+    "frame": "task",
+    "hidden": false,
+    "show_toast": false
+  },
+  "parent": "gempire:desolate_lands/root",
+  "criteria": {
+    "gempire:iridescent_plains": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "biome": "gempire:iridescent_plains"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    }
+  },
+  "requirements": [
+    [
+      "gempire:iridescent_plains"
+    ]
+  ]
+}

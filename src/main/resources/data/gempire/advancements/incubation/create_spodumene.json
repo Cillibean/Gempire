@@ -1,13 +1,13 @@
 {
   "display": {
     "icon": {
-      "item": "gempire:spodumene_gem_1"
+      "item": "gempire:inactive_spodumene_base"
     },
     "title": {
-      "translate": "advancements.gempire.spodumene.title"
+      "translate": "advancements.gempire.spodumene_incubation.title"
     },
     "description": {
-      "translate": "advancements.gempire.spodumene.description"
+      "translate": "advancements.gempire.spodumene_incubation.description"
     },
     "frame": "task",
     "hidden": true

@@ -1,6 +1,6 @@
 {
   "name": "Garnet",
-  "advancement": "gempire:incubation/create_garnet",
+  "advancement": "gempire:injection/garnet",
   "icon": "gempire:garnet_gem_1",
   "category": "gempire:gems_category",
   "pages": [
@@ -22,7 +22,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "$(l)Cruxes$() $(br)$(li)Netherrack$(li)Raw Copper$(li)Sculk$(li)Bone Block"
+      "text": "$(l)Incubation Cruxes$() $(br)$(li)Netherrack$(li)Raw Copper$(li)Sculk$(li)Bone Block"
     }
   ]
 }

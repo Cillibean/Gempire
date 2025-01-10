@@ -1,6 +1,6 @@
 {
   "name": "Snowflake Obsidian",
-  "advancement": "gempire:incubation/create_obsidian",
+  "advancement": "gempire:injection/obsidian",
   "icon": "gempire:obsidian_gem",
   "category": "gempire:gems_category",
   "pages": [
@@ -9,7 +9,7 @@
       "entity": "gempire:obsidian{gemColor:3160642,skinColor:2829619,hairColor:14672617,marking2Color:15264511,markingColor:15790327,markingVariant:0,hairVariant:0,insigniaColor:0,outfitColor:7,gemPlacement:2,xscale:1,yscale:1,zscale:1}",
       "name": "Obsidian",
       "rotate": "true",
-      "text": "A glass cannon soldier gem that can also be ridden around for quick transport."
+      "text": "A glass cannon soldier gem that can also be ridden around for quick transport over dangerous terrain."
     },
     {
       "type": "patchouli:text",
@@ -21,7 +21,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "$(l)Cruxes$() $(br)$(li)Obsidian$(li)Crying Obsidian"
+      "text": "$(l)Incubation Cruxes$() $(br)$(li)Obsidian$(li)Crying Obsidian"
     }
   ]
 }

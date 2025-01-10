@@ -1,0 +1,28 @@
+{
+  "display": {
+    "icon": {
+      "item": "gempire:morganite_gem"
+    },
+    "title": {
+      "translate": "advancements.gempire.morganite_injection.title"
+    },
+    "description": {
+      "translate": "advancements.gempire.morganite_injection.description"
+    },
+    "frame": "task",
+    "hidden": true
+  },
+  "parent": "gempire:injection/obtain_tank",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["gempire:morganite_gem"]
+          }
+        ]
+      }
+    }
+  }
+}

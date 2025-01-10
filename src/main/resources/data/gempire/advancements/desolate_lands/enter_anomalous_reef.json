@@ -1,0 +1,41 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:book"
+    },
+    "title": {
+      "translate": "advancements.gempire.desolate_lands.anomalous_reef.title"
+    },
+    "description": {
+      "translate": "advancements.gempire.desolate_lands.anomalous_reef.description"
+    },
+    "announce_to_chat": true,
+    "frame": "task",
+    "hidden": false,
+    "show_toast": false
+  },
+  "parent": "gempire:desolate_lands/root",
+  "criteria": {
+    "gempire:anomalous_reef": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "biome": "gempire:anomalous_reef"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    }
+  },
+  "requirements": [
+    [
+      "gempire:anomalous_reef"
+    ]
+  ]
+}

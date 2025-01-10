@@ -1,13 +1,13 @@
 {
   "display": {
     "icon": {
-      "item": "gempire:jasper_gem_1"
+      "item": "gempire:inactive_jasper_base"
     },
     "title": {
-      "translate": "advancements.gempire.jasper.title"
+      "translate": "advancements.gempire.jasper_incubation.title"
     },
     "description": {
-      "translate": "advancements.gempire.jasper.description"
+      "translate": "advancements.gempire.jasper_incubation.description"
     },
     "frame": "task",
     "hidden": true

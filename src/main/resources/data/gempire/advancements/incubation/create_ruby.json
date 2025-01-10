@@ -1,13 +1,13 @@
 {
   "display": {
     "icon": {
-      "item": "gempire:ruby_gem"
+      "item": "gempire:inactive_ruby_base"
     },
     "title": {
-      "translate": "advancements.gempire.ruby.title"
+      "translate": "advancements.gempire.ruby_incubation.title"
     },
     "description": {
-      "translate": "advancements.gempire.ruby.description"
+      "translate": "advancements.gempire.ruby_incubation.description"
     },
     "frame": "task",
     "hidden": true

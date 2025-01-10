@@ -1,0 +1,41 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:heart_of_the_sea"
+    },
+    "title": {
+      "translate": "advancements.gempire.desolate_lands.mirrored_seas.title"
+    },
+    "description": {
+      "translate": "advancements.gempire.desolate_lands.mirrored_seas.description"
+    },
+    "announce_to_chat": true,
+    "frame": "task",
+    "hidden": false,
+    "show_toast": false
+  },
+  "parent": "gempire:desolate_lands/root",
+  "criteria": {
+    "gempire:mirrored_seas": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "biome": "gempire:mirrored_seas"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    }
+  },
+  "requirements": [
+    [
+      "gempire:mirrored_seas"
+    ]
+  ]
+}

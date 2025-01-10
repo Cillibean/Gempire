@@ -1,0 +1,12 @@
+{
+  "name": "Dropship",
+  "icon": "minecraft:book",
+  "advancement": "gempire:enter_dropship",
+  "category": "gempire:structures",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "To be filled out..."
+    }
+  ]
+}

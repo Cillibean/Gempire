@@ -1,13 +1,13 @@
 {
   "display": {
     "icon": {
-      "item": "gempire:nephrite_gem"
+      "item": "gempire:inactive_nephrite_base"
     },
     "title": {
-      "translate": "advancements.gempire.nephrite.title"
+      "translate": "advancements.gempire.nephrite_incubation.title"
     },
     "description": {
-      "translate": "advancements.gempire.nephrite.description"
+      "translate": "advancements.gempire.nephrite_incubation.description"
     },
     "frame": "task",
     "hidden": true

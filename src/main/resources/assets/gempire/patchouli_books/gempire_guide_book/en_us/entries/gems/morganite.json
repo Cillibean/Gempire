@@ -1,6 +1,6 @@
 {
   "name": "Morganite",
-  "advancement": "gempire:incubation/create_morganite",
+  "advancement": "gempire:injection/morganite",
   "icon": "gempire:morganite_gem",
   "category": "gempire:gems_category",
   "pages": [
@@ -9,15 +9,36 @@
       "entity": "gempire:morganite{gemColor:16687003,skinColor:16699852,hairColor:16416152,hairVariant:0,insigniaColor:6,outfitColor:6,gemPlacement:11,xscale:1,yscale:1,zscale:1}",
       "name": "Morganite",
       "rotate": "true",
-      "text": "A gem that can create many decorative blocks, see page 3 for recipes."
+      "text": "A gem that can create many decorative blocks."
     },
     {
       "type": "patchouli:text",
       "text": "$(l)Possible Abilities$() $(br)$(li)Tank$(li)Beefcake$(li)Powerhouse$(li)Unhinged$(br2) $(l)Definite Abilities$()$(br)$(li)Designer"
     },
     {
-      "type": "patchouli:text",
-      "text": "$(l)Recipes$()$(br)To make a stone hand pedestal, put a block of stone into her hand.$(br)To make a diamond lattice block, put iron bars into her hand and a Chroma color of your choosing into her inventory.$(br)To make diamond glass, put a glass block in her hand and a Chroma color of your choosing into her inventory.$(br)To make an uncolored phosphorus lamp, put a redstone lamp in her hand and one cluster of selenite in her inventory.$(br)To make colored phosphorus lamps, put an uncolored phosphorus lamp into her hand and a Chroma color of your choosing in her inventory."
+      "type": "patchouli:spotlight",
+      "item": "gempire:pedistal",
+      "text": "To make a stone hand pedestal, put a block of stone into her hand."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "gempire:pink_lattice",
+      "text": "To make a diamond lattice block, put iron bars into her hand and a Chroma color of your choosing into her inventory."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "gempire:pink_diamond_glass",
+      "text": "To make diamond glass, put a glass block in her hand and a Chroma color of your choosing into her inventory."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "gempire:phosphorus_lamp",
+      "text": "To make an uncolored phosphorus lamp, put a redstone lamp in her hand and one cluster of selenite in her inventory."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "gempire:pink_phosphorus_lamp",
+      "text": "To make colored phosphorus lamps, put an uncolored phosphorus lamp into her hand and a Chroma color of your choosing in her inventory."
     },
     {
       "type": "patchouli:text",
@@ -25,7 +46,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "$(l)Cruxes$() $(br)$(li)Phantom Membrane$(li)End Stone$(li)Soul Sand"
+      "text": "$(l)Incubation Cruxes$() $(br)$(li)Phantom Membrane$(li)End Stone$(li)Soul Sand"
     }
   ]
 }

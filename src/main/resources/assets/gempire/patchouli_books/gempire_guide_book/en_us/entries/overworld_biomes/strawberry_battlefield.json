@@ -1,7 +1,7 @@
 {
   "name": "Strawberry Battlefield",
   "icon": "gempire:strawberry",
-  "advancement": "gempire:root",
+  "advancement": "gempire:enter_strawberry_battlefield",
   "category": "gempire:overworld_biomes",
   "pages": [
     {

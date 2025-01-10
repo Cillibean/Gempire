@@ -1,13 +1,13 @@
 {
   "display": {
     "icon": {
-      "item": "gempire:obsidian_gem"
+      "item": "gempire:inactive_obsidian_base"
     },
     "title": {
-      "translate": "advancements.gempire.obsidian.title"
+      "translate": "advancements.gempire.obsidian_incubation.title"
     },
     "description": {
-      "translate": "advancements.gempire.obsidian.description"
+      "translate": "advancements.gempire.obsidian_incubation.description"
     },
     "frame": "task",
     "hidden": true

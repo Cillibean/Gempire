@@ -1,6 +1,6 @@
 {
   "name": "Tourmaline",
-  "advancement": "gempire:incubation/create_tourmaline",
+  "advancement": "gempire:injection/tourmaline",
   "icon": "gempire:tourmaline_gem_16",
   "category": "gempire:gems_category",
   "pages": [
@@ -9,8 +9,11 @@
       "entity": "gempire:tourmaline{gemColor:14977977,skinColor:16429032,hairColor:16755907,marking2Color:4646815,markingColor:4646815,markingVariant:0,marking2Variant:0,hairVariant:0,insigniaColor:16,outfitColor:16,gemPlacement:13,skinColorVariant:16,xscale:1,yscale:1,zscale:1}",
       "name": "Tourmaline",
       "rotate": "true",
-      "offset": 0.2,
-      "text": "A farmer gem that tends to crops in a certain radius around her. Can also build a farm by giving her a hoe in her hand and supplying her with 3 stacks of dirt, 4 oak logs, 56 oak planks, and 2 water buckets in her inventory. Set her to 'stay' and use /buildfarm."
+      "offset": 0.2
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A farmer gem that tends to crops in a certain radius around her.$(br2)Can also build a farm by putting a hoe in her hand and supplying her with 3 stacks of dirt, 4 oak logs, 56 oak planks, and 2 water buckets in her inventory. Set her to 'stay' and use /buildfarm."
     },
     {
       "type": "patchouli:text",
@@ -22,7 +25,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "$(l)Cruxes$() $(br)$(li)Mycelium$(li)Honeycomb Block$(li)Moss Block"
+      "text": "$(l)Incubation Cruxes$() $(br)$(li)Mycelium$(li)Honeycomb Block$(li)Moss Block"
     }
   ]
 }

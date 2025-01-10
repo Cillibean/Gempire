@@ -1,0 +1,28 @@
+{
+  "display": {
+    "icon": {
+      "item": "gempire:quartz_gem_10"
+    },
+    "title": {
+      "translate": "advancements.gempire.quartz_injection.title"
+    },
+    "description": {
+      "translate": "advancements.gempire.quartz_injection.description"
+    },
+    "frame": "task",
+    "hidden": true
+  },
+  "parent": "gempire:injection/obtain_tank",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "gempire:quartz"
+          }
+        ]
+      }
+    }
+  }
+}

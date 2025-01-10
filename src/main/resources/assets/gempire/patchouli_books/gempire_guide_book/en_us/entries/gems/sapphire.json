@@ -1,6 +1,6 @@
 {
   "name": "Sapphire",
-  "advancement": "gempire:incubation/create_sapphire",
+  "advancement": "gempire:injection/sapphire",
   "icon": "gempire:sapphire_gem_11",
   "category": "gempire:gems_category",
   "pages": [
@@ -21,7 +21,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "$(l)Cruxes$() $(br)$(li)Ender Eye$(li)Blue Ice$(li)Diamond Block"
+      "text": "$(l)Incubation Cruxes$() $(br)$(li)Ender Eye$(li)Blue Ice$(li)Diamond Block"
     }
   ]
 }

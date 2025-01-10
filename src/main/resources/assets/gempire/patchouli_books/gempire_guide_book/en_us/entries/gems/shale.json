@@ -10,7 +10,7 @@
       "name": "Shale",
       "rotate": "true",
       "scale": 0.4,
-      "text": "A small gem that can be used to make Essence by giving her a Bucket of Gem Slush."
+      "text": "A small gem that can be used to make Gem Essence by giving her a Bucket of Gem Slush."
     },
     {
       "type": "patchouli:spotlight",
@@ -20,7 +20,8 @@
     {
       "type": "patchouli:crafting",
       "text": "Shale can be given a Bucket of Gem Slush and they will create a random color of essence. This will take about 10 seconds to complete.",
-      "recipe": "gempire:gem_slush_bucket"
+      "recipe": "gempire:gem_slush_bucket",
+      "link_recipe ": true
     }
   ]
 }

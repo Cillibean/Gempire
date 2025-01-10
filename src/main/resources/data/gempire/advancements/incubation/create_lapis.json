@@ -1,13 +1,13 @@
 {
   "display": {
     "icon": {
-      "item": "gempire:lapis_gem"
+      "item": "gempire:inactive_lapis_base"
     },
     "title": {
-      "translate": "advancements.gempire.lapis.title"
+      "translate": "advancements.gempire.lapis_incubation.title"
     },
     "description": {
-      "translate": "advancements.gempire.lapis.description"
+      "translate": "advancements.gempire.lapis_incubation.description"
     },
     "frame": "task",
     "hidden": true

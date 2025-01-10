@@ -1,6 +1,6 @@
 {
   "name": "Pearl",
-  "advancement": "gempire:incubation/create_pearl",
+  "advancement": "gempire:create_pearl",
   "icon": "gempire:pearl_gem_6",
   "category": "gempire:gems_category",
   "pages": [

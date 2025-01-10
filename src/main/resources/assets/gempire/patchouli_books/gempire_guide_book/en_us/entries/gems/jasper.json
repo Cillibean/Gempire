@@ -1,6 +1,6 @@
 {
   "name": "Jasper",
-  "advancement": "gempire:incubation/create_jasper",
+  "advancement": "gempire:injection/jasper",
   "icon": "gempire:jasper_gem_1",
   "category": "gempire:gems_category",
   "pages": [
@@ -22,7 +22,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "$(l)Cruxes$() $(br)$(li)Quartz Block$(li)Gilded Blackstone$(li)Raw Iron$(li)Blaze Rod"
+      "text": "$(l)Incubation Cruxes$() $(br)$(li)Quartz Block$(li)Gilded Blackstone$(li)Raw Iron$(li)Blaze Rod"
     }
   ]
 }

@@ -1,0 +1,16 @@
+{
+  "name": "Carving",
+  "icon": "minecraft:blue_ice",
+  "advancement": "gempire:root",
+  "category": "gempire:abilities",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Prospector is an ability that lets gems convert primed ice blocks into carved statues that give off various effects."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Gems that are guaranteed to have it$()$(li)Larimar$(br2) $(l)Gems that have a chance to have it$()$(li)N/A"
+    }
+  ]
+}

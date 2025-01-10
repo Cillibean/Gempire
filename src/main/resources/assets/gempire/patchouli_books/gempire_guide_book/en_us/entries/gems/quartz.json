@@ -1,6 +1,6 @@
 {
   "name": "Quartz",
-  "advancement": "gempire:incubation/create_quartz",
+  "advancement": "gempire:injection/quartz",
   "icon": "gempire:quartz_gem_10",
   "category": "gempire:gems_category",
   "pages": [
@@ -22,7 +22,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "$(l)Cruxes$() $(br)$(li)Raw Iron$(li)Quartz Block"
+      "text": "$(l)Incubation Cruxes$() $(br)$(li)Raw Iron$(li)Quartz Block"
     }
   ]
 }

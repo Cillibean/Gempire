@@ -1,6 +1,6 @@
 {
   "name": "Zircon",
-  "advancement": "gempire:incubation/create_zircon",
+  "advancement": "gempire:injection/zircon",
   "icon": "gempire:zircon_gem_11",
   "category": "gempire:gems_category",
   "pages": [
@@ -9,8 +9,11 @@
       "entity": "gempire:zircon{hairColor:6324980,gemColor:2835390,skinColor:3032779,hairVariant:0,insigniaColor:11,outfitColor:11,gemPlacement:11,xscale:1,yscale:1,zscale:1}",
       "name": "Zircon",
       "rotate": "true",
-      "offset": 0.2,
-      "text": "A rare gem that spawns with a random enchantment, and can enchant items with it. Needs Lapis Lazuli and can be given gold and other items to make EXP prices lower."
+      "offset": 0.2
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A rare gem that spawns with a random enchantment and can enchant items with it.$(br2)Needs Lapis Lazuli and can be given gold and other items to make EXP prices lower."
     },
     {
       "type": "patchouli:text",
@@ -22,7 +25,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "$(l)Cruxes$() $(br)$(li)Sculk$(li)Deepslate$(li)Diamond Block$(li)Ancient Debris"
+      "text": "$(l)Incubation Cruxes$() $(br)$(li)Sculk$(li)Deepslate$(li)Diamond Block$(li)Ancient Debris"
     }
   ]
 }

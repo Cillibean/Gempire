@@ -1,13 +1,13 @@
 {
   "display": {
     "icon": {
-      "item": "gempire:zircon_gem_11"
+      "item": "gempire:inactive_zircon_base"
     },
     "title": {
-      "translate": "advancements.gempire.zircon.title"
+      "translate": "advancements.gempire.zircon_incubation.title"
     },
     "description": {
-      "translate": "advancements.gempire.zircon.description"
+      "translate": "advancements.gempire.zircon_incubation.description"
     },
     "frame": "task",
     "hidden": true

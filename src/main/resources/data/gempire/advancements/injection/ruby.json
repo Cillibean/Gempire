@@ -1,0 +1,28 @@
+{
+  "display": {
+    "icon": {
+      "item": "gempire:ruby_gem"
+    },
+    "title": {
+      "translate": "advancements.gempire.ruby_injection.title"
+    },
+    "description": {
+      "translate": "advancements.gempire.ruby_injection.description"
+    },
+    "frame": "task",
+    "hidden": true
+  },
+  "parent": "gempire:injection/obtain_tank",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["gempire:ruby_gem"]
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "name": "Specter",
+  "icon": "minecraft:book",
+  "advancement": "gempire:desolate_lands/kill_specter",
+  "category": "gempire:bestiary",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "gempire:specter",
+      "name": "Specter",
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "It watches. It waits. It listens. It approaches.$(br2)Was that a breath down the back of your neck?"
+    }
+  ]
+}

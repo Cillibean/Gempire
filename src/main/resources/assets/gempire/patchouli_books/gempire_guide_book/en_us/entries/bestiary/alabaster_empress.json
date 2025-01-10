@@ -1,14 +1,15 @@
 {
   "name": "Alabaster Empress",
-  "icon": "gempire:inactive_empress_gem",
-  "advancement": "gempire:root",
+  "icon": "gempire:alabaster_shards",
+  "advancement": "gempire:desolate_lands/kill_empress",
   "category": "gempire:bestiary",
   "pages": [
     {
       "type": "patchouli:entity",
       "entity": "gempire:alabaster_empress",
       "name": "The Empress",
-      "rotate": "true",
+      "rotate": "false",
+      "scale": 0.8,
       "text": "The bestial remnants of a brilliant diamond who once ruled over their homeworld."
     },
     {

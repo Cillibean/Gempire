@@ -7,7 +7,7 @@
     {
       "type": "patchouli:spotlight",
       "item": "gempire:galaxy_warp",
-      "text": "Often broken on Earth's retired colony, these were once intergalactic hubs. Use a Peridot to fix its core, then press '.' to use it to travel to distant lands."
+      "text": "Often found broken on Earth's retired colony, these were once used to travel at an intergalactic level.$(br2)Use a Peridot to fix its core, then press '.' to use it to travel to distant lands."
     }
   ]
 }

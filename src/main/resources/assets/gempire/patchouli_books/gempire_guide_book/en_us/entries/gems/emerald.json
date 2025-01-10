@@ -1,6 +1,6 @@
 {
   "name": "Emerald",
-  "advancement": "gempire:incubation/create_emerald",
+  "advancement": "gempire:injection/emerald",
   "icon": "gempire:emerald_gem",
   "category": "gempire:gems_category",
   "pages": [
@@ -9,8 +9,11 @@
       "entity": "gempire:emerald{gemColor:47224,skinColor:7601316,hairColor:1494665,hairVariant:0,insigniaColor:13,outfitColor:13,gemPlacement:2,xscale:1,yscale:1,zscale:1}",
       "name": "Emerald",
       "rotate": "true",
-      "offset": 0.4,
-      "text": "A rare combat gem that, when given an Eye of Ender in her inventory, returns you back home to your bed when you use the /recall command."
+      "offset": 0.4
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A rare combat gem that when given an Eye of Ender in her inventory, returns you back home to your bed after you use the /recall command."
     },
     {
       "type": "patchouli:text",
@@ -22,7 +25,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "$(l)Cruxes$() $(br)$(li)Emerald Block$(li)Ancient Debris$(li)End Stone"
+      "text": "$(l)Incubation Cruxes$() $(br)$(li)Emerald Block$(li)Ancient Debris$(li)End Stone"
     }
   ]
 }

@@ -1,13 +1,13 @@
 {
   "display": {
     "icon": {
-      "item": "gempire:emerald_gem"
+      "item": "gempire:inactive_emerald_base"
     },
     "title": {
-      "translate": "advancements.gempire.emerald.title"
+      "translate": "advancements.gempire.emerald_incubation.title"
     },
     "description": {
-      "translate": "advancements.gempire.emerald.description"
+      "translate": "advancements.gempire.emerald_incubation.description"
     },
     "frame": "task",
     "hidden": true

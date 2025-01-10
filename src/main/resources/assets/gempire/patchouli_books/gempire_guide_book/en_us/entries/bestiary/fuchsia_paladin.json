@@ -1,7 +1,7 @@
 {
   "name": "Fuchsia Paladin",
-  "icon": "gempire:inactive_paladin_gem",
-  "advancement": "gempire:root",
+  "icon": "gempire:fuchsia_shards",
+  "advancement": "gempire:desolate_lands/kill_paladin",
   "category": "gempire:bestiary",
   "pages": [
     {
@@ -9,6 +9,7 @@
       "entity": "gempire:fuchsia_paladin",
       "name": "The Paladin",
       "rotate": "true",
+      "scale": 0.8,
       "text": "The bestial remnants of a radiant diamond who once ruled over their homeworld."
     },
     {

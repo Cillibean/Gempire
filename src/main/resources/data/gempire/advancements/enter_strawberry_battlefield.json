@@ -1,0 +1,41 @@
+{
+  "display": {
+    "icon": {
+      "item": "gempire:strawberry"
+    },
+    "title": {
+      "translate": "advancements.gempire.strawberry_battlefield.title"
+    },
+    "description": {
+      "translate": "advancements.gempire.strawberry_battlefield.description"
+    },
+    "announce_to_chat": true,
+    "frame": "task",
+    "hidden": false,
+    "show_toast": false
+  },
+  "parent": "gempire:root",
+  "criteria": {
+    "gempire:strawberry_battlefield": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "biome": "gempire:strawberry_battlefield"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    }
+  },
+  "requirements": [
+    [
+      "gempire:strawberry_battlefield"
+    ]
+  ]
+}

@@ -4,10 +4,10 @@
       "item": "gempire:peridot_gem"
     },
     "title": {
-      "translate": "advancements.gempire.peridot.title"
+      "translate": "advancements.gempire.peridot_incubation.title"
     },
     "description": {
-      "translate": "advancements.gempire.peridot.description"
+      "translate": "advancements.gempire.peridot_incubation.description"
     },
     "frame": "task",
     "hidden": true

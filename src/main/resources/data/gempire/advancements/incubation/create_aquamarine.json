@@ -1,13 +1,13 @@
 {
   "display": {
     "icon": {
-      "item": "gempire:aquamarine_gem"
+      "item": "gempire:inactive_aquamarine_base"
     },
     "title": {
-      "translate": "advancements.gempire.aquamarine.title"
+      "translate": "advancements.gempire.aquamarine_incubation.title"
     },
     "description": {
-      "translate": "advancements.gempire.aquamarine.description"
+      "translate": "advancements.gempire.aquamarine_incubation.description"
     },
     "frame": "task",
     "hidden": true

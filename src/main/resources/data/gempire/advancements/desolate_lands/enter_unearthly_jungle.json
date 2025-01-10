@@ -1,0 +1,41 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:gold_block"
+    },
+    "title": {
+      "translate": "advancements.gempire.desolate_lands.unearthly_jungle.title"
+    },
+    "description": {
+      "translate": "advancements.gempire.desolate_lands.unearthly_jungle.description"
+    },
+    "announce_to_chat": true,
+    "frame": "task",
+    "hidden": false,
+    "show_toast": false
+  },
+  "parent": "gempire:desolate_lands/root",
+  "criteria": {
+    "gempire:unearthly_jungle": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "biome": "gempire:unearthly_jungle"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    }
+  },
+  "requirements": [
+    [
+      "gempire:unearthly_jungle"
+    ]
+  ]
+}

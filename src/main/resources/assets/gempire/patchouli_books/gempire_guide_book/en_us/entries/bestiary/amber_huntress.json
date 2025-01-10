@@ -1,7 +1,7 @@
 {
   "name": "Amber Huntress",
-  "icon": "gempire:inactive_huntress_gem",
-  "advancement": "gempire:root",
+  "icon": "gempire:amber_shards",
+  "advancement": "gempire:desolate_lands/kill_huntress",
   "category": "gempire:bestiary",
   "pages": [
     {
@@ -9,6 +9,7 @@
       "entity": "gempire:amber_huntress",
       "name": "The Huntress",
       "rotate": "true",
+      "scale": 0.9,
       "text": "The bestial remnants of a daunting diamond who once ruled over their homeworld."
     },
     {

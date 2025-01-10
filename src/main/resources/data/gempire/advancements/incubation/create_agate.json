@@ -1,13 +1,13 @@
 {
   "display": {
     "icon": {
-      "item": "gempire:agate_gem_3"
+      "item": "gempire:inactive_agate_base"
     },
     "title": {
-      "translate": "advancements.gempire.agate.title"
+      "translate": "advancements.gempire.agate_incubation.title"
     },
     "description": {
-      "translate": "advancements.gempire.agate.description"
+      "translate": "advancements.gempire.agate_incubation.description"
     },
     "frame": "task",
     "hidden": true

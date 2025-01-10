@@ -1,0 +1,109 @@
+{
+  "display": {
+    "icon": {
+      "item": "gempire:drained_purple_glass"
+    },
+    "title": {
+      "translate": "advancements.gempire.kindergarten.title"
+    },
+    "description": {
+      "translate": "advancements.gempire.kindergrten.description"
+    },
+    "announce_to_chat": true,
+    "frame": "task",
+    "hidden": false,
+    "show_toast": false
+  },
+  "parent": "gempire:root",
+  "criteria": {
+    "gempire:blue_kindergarten": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "biome": "gempire:blue_kindergarten"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    },
+    "gempire:grey_kindergarten": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "biome": "gempire:grey_kindergarten"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    },
+    "gempire:purple_kindergarten": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "biome": "gempire:purple_kindergarten"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    },
+    "gempire:red_kindergarten": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "biome": "gempire:red_kindergarten"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    },
+    "gempire:yellow_kindergarten": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "biome": "gempire:yellow_kindergarten"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    }
+  },
+  "requirements": [
+    [
+      "gempire:blue_kindergarten",
+      "gempire:grey_kindergarten",
+      "gempire:purple_kindergarten",
+      "gempire:red_kindergarten",
+      "gempire:yellow_kindergarten"
+    ]
+  ]
+}

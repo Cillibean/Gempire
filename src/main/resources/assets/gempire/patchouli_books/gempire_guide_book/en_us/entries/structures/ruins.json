@@ -1,7 +1,7 @@
 {
-  "name": "Gem Ruins",
-  "icon": "minecraft:book",
-  "advancement": "gempire:root",
+  "name": "Abandoned Ruins",
+  "icon": "gempire:ruined_marble_pillar",
+  "advancement": "gempire:enter_ruins",
   "category": "gempire:structures",
   "pages": [
     {

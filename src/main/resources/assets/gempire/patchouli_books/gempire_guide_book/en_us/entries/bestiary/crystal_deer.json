@@ -1,7 +1,7 @@
 {
   "name": "Crystal Deer",
   "icon": "gempire:thulite_nugget",
-  "advancement": "gempire:root",
+  "advancement": "gempire:desolate_lands/kill_crystal_deer",
   "category": "gempire:bestiary",
   "pages": [
     {

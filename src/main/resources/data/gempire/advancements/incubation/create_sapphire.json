@@ -1,13 +1,13 @@
 {
   "display": {
     "icon": {
-      "item": "gempire:sapphire_gem_11"
+      "item": "gempire:inactive_sapphire_base"
     },
     "title": {
-      "translate": "advancements.gempire.sapphire.title"
+      "translate": "advancements.gempire.sapphire_incubation.title"
     },
     "description": {
-      "translate": "advancements.gempire.sapphire.description"
+      "translate": "advancements.gempire.sapphire_incubation.description"
     },
     "frame": "task",
     "hidden": true

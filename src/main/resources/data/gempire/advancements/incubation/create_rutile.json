@@ -1,13 +1,13 @@
 {
   "display": {
     "icon": {
-      "item": "gempire:rutile_gem"
+      "item": "gempire:inactive_rutile_base"
     },
     "title": {
-      "translate": "advancements.gempire.rutile.title"
+      "translate": "advancements.gempire.rutile_incubation.title"
     },
     "description": {
-      "translate": "advancements.gempire.rutile.description"
+      "translate": "advancements.gempire.rutile_incubation.description"
     },
     "frame": "task",
     "hidden": true

@@ -6,14 +6,13 @@
   "pages": [
     {
       "type": "patchouli:spotlight",
-      "link_recipe ": true,
       "item": "gempire:nacre_gem",
-      "text": "In order to make a Shell, you'll need a Nacre. Shift click Nacre's gem icon to learn more about her."
+      "text": "In order to make a Shell, you'll need a Nacre."
     },
     {
       "type": "patchouli:multiblock",
       "name": "Shell",
-      "text": "In order to have your Nacre construct a Shell, you will need to build this multiblock, then right click on her with a pickaxe in your hand.",
+      "text": "In order to have your Nacre construct a Shell, you will need to build this multiblock, set Nacre's movement mode to stay then right click on her with a pickaxe in your hand.",
       "multiblock": {
         "pattern": [
           ["C"],
@@ -32,12 +31,12 @@
     {
       "type": "patchouli:text",
       "title": "Creating a Pearl",
-      "text": "In order to use Shell, you will need to place the Shell over a block of White Gem essence, then insert 16 Gravel at the top, 16 Sand on the left, 16 Clay Balls on the right, and a Chroma of your choice at the bottom. As time passes it'll slowly drain these materials, and once it's finished it will create a Pearl for you to collect."
+      "text": "In order to use Shell, you will need to place the Shell over a block of White Gem essence, then insert 16 Gravel at the top, 16 Sand on the left, 16 Clay Balls on the right, and a Chroma of your choice at the bottom.$(br2)As time passes it'll slowly drain these materials, and once it's finished it will create a Pearl for you to collect."
     },
     {
       "type": "patchouli:text",
       "title": "Pearl Upgrades",
-      "text": "When inserting materials into your Shell machine, you can use higher quantities of Gravel, Sand and Clay Balls to get higher quality Pearls. Use x32 of materials for a standard quality Pearl, and use x64 of materials for a high quality or perfect Pearl."
+      "text": "When inserting materials into your Shell machine, you can use higher quantities of Gravel, Sand and Clay Balls to get higher quality Pearls.$(br2)Use x32 of materials for a standard quality Pearl, and use x64 of materials for a high quality or perfect Pearl."
     }
   ]
 }

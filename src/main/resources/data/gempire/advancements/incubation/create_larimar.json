@@ -1,13 +1,13 @@
 {
   "display": {
     "icon": {
-      "item": "gempire:larimar_gem"
+      "item": "gempire:inactive_larimar_base"
     },
     "title": {
-      "translate": "advancements.gempire.larimar.title"
+      "translate": "advancements.gempire.larimar_incubation.title"
     },
     "description": {
-      "translate": "advancements.gempire.larimar.description"
+      "translate": "advancements.gempire.larimar_incubation.description"
     },
     "frame": "task",
     "hidden": true

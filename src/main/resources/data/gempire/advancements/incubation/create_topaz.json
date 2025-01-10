@@ -1,13 +1,13 @@
 {
   "display": {
     "icon": {
-      "item": "gempire:topaz_gem_4"
+      "item": "gempire:inactive_topaz_base"
     },
     "title": {
-      "translate": "advancements.gempire.topaz.title"
+      "translate": "advancements.gempire.topaz_incubation.title"
     },
     "description": {
-      "translate": "advancements.gempire.topaz.description"
+      "translate": "advancements.gempire.topaz_incubation.description"
     },
     "frame": "task",
     "hidden": true

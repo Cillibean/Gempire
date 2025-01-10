@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Farmer is an ability that gives gems the power to take care of crops, like wheat and potatoes."
+      "text": "Farmer is an ability that gives gems the power to take care of crops, like wheat and potatoes.$(br2)Also enables gems to create farm plots."
     },
     {
       "type": "patchouli:text",

@@ -1,0 +1,28 @@
+{
+  "display": {
+    "icon": {
+      "item": "gempire:spinel_gem_6"
+    },
+    "title": {
+      "translate": "advancements.gempire.spinel_injection.title"
+    },
+    "description": {
+      "translate": "advancements.gempire.spinel_injection.description"
+    },
+    "frame": "task",
+    "hidden": true
+  },
+  "parent": "gempire:injection/obtain_tank",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "gempire:spinel"
+          }
+        ]
+      }
+    }
+  }
+}

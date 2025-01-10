@@ -1,0 +1,32 @@
+{
+  "display": {
+    "icon": {
+      "item": "gempire:calming_jelly"
+    },
+    "title": {
+      "translate": "advancements.gempire.desolate_lands.kill_sorrow_jelly.title"
+    },
+    "description": {
+      "translate": "advancements.gempire.desolate_lands.kill_sorrow_jelly.description"
+    },
+    "frame": "task",
+    "hidden": true
+  },
+  "parent": "gempire:desolate_lands/root",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "gempire:sorrow_jelly"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

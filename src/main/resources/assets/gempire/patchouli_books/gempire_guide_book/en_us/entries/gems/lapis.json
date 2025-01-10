@@ -1,6 +1,6 @@
 {
   "name": "Lapis Lazuli",
-  "advancement": "gempire:incubation/create_lapis",
+  "advancement": "gempire:injection/lapis",
   "icon": "gempire:lapis_gem",
   "category": "gempire:gems_category",
   "pages": [
@@ -14,7 +14,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "$(l)Possible Abilities$() $(br)$(li)Tank$(li)Beefcake$(li)Powerhouse$(li)Unhinged$(li)Berserker$(li)Hydrokinesis$(br2) $(l)Definite Abilities$()$(br)(li)Vehicle (NYI)"
+      "text": "$(l)Possible Abilities$() $(br)$(li)Tank$(li)Beefcake$(li)Powerhouse$(li)Unhinged$(li)Berserker$(li)Hydrokinesis$(br2) $(l)Definite Abilities$()$(br)$(li)Vehicle (NYI)"
     },
     {
       "type": "patchouli:text",
@@ -22,7 +22,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "$(l)Cruxes$() $(br)$(li)Lapis Block$(li)Dark Prismarine$(li)Calcite"
+      "text": "$(l)Incubation Cruxes$() $(br)$(li)Lapis Block$(li)Dark Prismarine$(li)Calcite"
     }
   ]
 }

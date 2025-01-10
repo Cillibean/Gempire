@@ -1,6 +1,6 @@
 {
   "name": "Topaz",
-  "advancement": "gempire:incubation/create_topaz",
+  "advancement": "gempire:injection/topaz",
   "icon": "gempire:topaz_gem_4",
   "category": "gempire:gems_category",
   "pages": [
@@ -11,7 +11,7 @@
       "scale": 0.6,
       "rotate": "true",
       "offset": 0.2,
-      "text": "A soldier gem intimidates enemies into running the opposite direction."
+      "text": "A soldier gem that intimidates enemies into running in the opposite direction."
     },
     {
       "type": "patchouli:text",
@@ -23,7 +23,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "$(l)Cruxes$() $(br)$(li)Raw Gold Block$(li)Gilded Blackstone"
+      "text": "$(l)Incubation Cruxes$() $(br)$(li)Raw Gold Block$(li)Gilded Blackstone"
     }
   ]
 }

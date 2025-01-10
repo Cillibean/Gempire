@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Scout is an ability that lets gems locate structures and biomes for their owners. Requires a map in her inventory before you can use the associated commands, /scoutlocate biome and /scoutlocate structure."
+      "text": "Scout is an ability that lets gems locate structures and biomes for their owners. Requires a map in her inventory before you can use the associated commands, /scoutlocate."
     },
     {
       "type": "patchouli:text",

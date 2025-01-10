@@ -1,13 +1,13 @@
 {
   "display": {
     "icon": {
-      "item": "gempire:bixbite_gem"
+      "item": "gempire:inactive_bixbite_base"
     },
     "title": {
-      "translate": "advancements.gempire.bixbite.title"
+      "translate": "advancements.gempire.bixbite_incubation.title"
     },
     "description": {
-      "translate": "advancements.gempire.bixbite.description"
+      "translate": "advancements.gempire.bixbite_incubation.description"
     },
     "frame": "task",
     "hidden": true

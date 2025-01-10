@@ -1,7 +1,7 @@
 {
   "name": "The Kindergartens",
   "icon": "gempire:drained_purple_stone",
-  "advancement": "gempire:root",
+  "advancement": "gempire:enter_kindergarten",
   "category": "gempire:overworld_biomes",
   "pages": [
     {

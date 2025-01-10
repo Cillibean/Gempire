@@ -1,6 +1,6 @@
 {
   "name": "Spodumene",
-  "advancement": "gempire:incubation/create_spodumene",
+  "advancement": "gempire:injection/spodumene",
   "icon": "gempire:spodumene_gem_1",
   "category": "gempire:gems_category",
   "pages": [
@@ -8,8 +8,11 @@
       "type": "patchouli:entity",
       "entity": "gempire:spodumene{gemColor:16033690,skinColor:16217679,hairColor:15859711,hairVariant:0,insigniaColor:1,outfitColor:1,gemPlacement:11,xscale:1,yscale:1,zscale:1}",
       "name": "Spodumene",
-      "rotate": "true",
-      "text": "A fishing gem that can give the player the Dolphin's Grace effect and water breathing in a small area around her.$(br)If Spodumene has a Heart of the Sea in her inventory, she produces Amphibian Gel."
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A fishing gem that can give the player the Dolphin's Grace effect and water breathing in a small area around her.$(br2)If Spodumene has a Heart of the Sea in her inventory, she produces Amphibian Gel."
     },
     {
       "type": "patchouli:text",
@@ -21,7 +24,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "$(l)Cruxes$() $(br)$(li)Bone Block$(li)Brain Coral$(li)Glowstone"
+      "text": "$(l)Incubation Cruxes$() $(br)$(li)Bone Block$(li)Brain Coral$(li)Glowstone"
     }
   ]
 }

@@ -1,0 +1,28 @@
+{
+  "display": {
+    "icon": {
+      "item": "gempire:sapphire_gem_11"
+    },
+    "title": {
+      "translate": "advancements.gempire.sapphire_injection.title"
+    },
+    "description": {
+      "translate": "advancements.gempire.sapphire_injection.description"
+    },
+    "frame": "task",
+    "hidden": true
+  },
+  "parent": "gempire:injection/obtain_tank",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "gempire:sapphire"
+          }
+        ]
+      }
+    }
+  }
+}

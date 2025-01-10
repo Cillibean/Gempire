@@ -1,6 +1,6 @@
 {
   "name": "Agate",
-  "advancement": "gempire:incubation/create_agate",
+  "advancement": "gempire:injection/agate",
   "icon": "gempire:agate_gem_3",
   "category": "gempire:gems_category",
   "pages": [
@@ -23,7 +23,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "$(l)Cruxes$() $(br)$(li)Raw Copper Block$(li)Quartz Block$(li)Calcite"
+      "text": "$(l)Incubation Cruxes$() $(br)$(li)Raw Copper Block$(li)Quartz Block$(li)Calcite"
     }
   ]
 }

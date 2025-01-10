@@ -1,6 +1,6 @@
 {
   "name": "Distant Forest",
-  "description": "These enchanting stretches of forest are tinted with beautiful blue leaves from abundant amounts of alien trees. They can be seen shedding seemingly endless leaves, which have leached their blue hues into the grass and dirt below.$(br2)Bluebells, along with many variants of Hydrangea, bloom here as well.",
+  "description": "These enchanting stretches of forest are tinted with beautiful blue leaves from abundant amounts of alien trees.$(br2)They can be seen shedding seemingly endless amounts of leaves, which have leached their blue hues into the grass and dirt below.$(br2)Bluebells, along with many variants of Hydrangea, bloom here as well.",
   "icon": "gempire:purple_crystal_apple",
   "secret": "false",
   "parent": "gempire:desolate_lands"

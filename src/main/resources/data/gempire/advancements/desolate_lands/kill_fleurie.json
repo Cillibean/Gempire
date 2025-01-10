@@ -1,0 +1,32 @@
+{
+  "display": {
+    "icon": {
+      "item": "gempire:pink_thistle"
+    },
+    "title": {
+      "translate": "advancements.gempire.desolate_lands.kill_fleurie.title"
+    },
+    "description": {
+      "translate": "advancements.gempire.desolate_lands.kill_fleurie.description"
+    },
+    "frame": "task",
+    "hidden": true
+  },
+  "parent": "gempire:desolate_lands/root",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "gempire:fleurie"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "Galaxy Warp",
+  "icon": "gempire:galaxy_warp",
+  "advancement": "gempire:root",
+  "category": "gempire:structures",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "This skyscraper of a structure houses weathered and broken warp pads. Perhaps some of them can be repaired?"
+    }
+  ]
+}

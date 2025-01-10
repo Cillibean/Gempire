@@ -1,0 +1,16 @@
+{
+  "name": "Electrokinesis",
+  "icon": "minecraft:lightning_rod",
+  "advancement": "gempire:root",
+  "category": "gempire:abilities",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Electrokinesis is an ability that lets gems wield lightning to attack foes."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Gems that are guaranteed to have it$()$(li)N/A$(br2) $(l)Gems that have a chance to have it$()$(li)Quartz$(li)Jasper$(li)Agate"
+    }
+  ]
+}

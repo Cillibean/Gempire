@@ -1,6 +1,6 @@
 {
   "name": "Spinel",
-  "advancement": "gempire:incubation/create_spinel",
+  "advancement": "gempire:injection/spinel",
   "icon": "gempire:spinel_gem_6",
   "category": "gempire:gems_category",
   "pages": [
@@ -10,7 +10,10 @@
       "name": "Spinel",
       "rotate": "true",
       "scale": 0.7,
-      "offset": 0.2,
+      "offset": 0.2
+    },
+    {
+      "type": "patchouli:text",
       "text": "A playful gem that attracts passive mobs such as sheep and cows, and entertains her fellow gems to help prevent rebellion."
     },
     {
@@ -23,7 +26,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "$(l)Cruxes$() $(br)$(li)Nether Wart$(li)Chorus Flower$(li)Slime Block"
+      "text": "$(l)Incubation Cruxes$() $(br)$(li)Nether Wart$(li)Chorus Flower$(li)Slime Block"
     }
   ]
 }

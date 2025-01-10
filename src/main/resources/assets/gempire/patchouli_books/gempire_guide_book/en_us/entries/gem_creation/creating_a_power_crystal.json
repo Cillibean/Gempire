@@ -1,14 +1,13 @@
 {
-  "name": "Making a Power Crystal",
+  "name": "Power Crystal Mk-I",
   "icon": "gempire:power_crystal_block",
   "advancement": "gempire:root",
   "category": "gempire:gem_creation_category",
   "pages": [
     {
       "type": "patchouli:spotlight",
-      "link_recipe ": true,
       "item": "gempire:mica_gem",
-      "text": "In order to make a Power Crystal, you will need a Mica. Shift click Mica's gem icon to learn more about her."
+      "text": "In order to make a Power Crystal, you will need a Mica."
     },
     {
       "type": "patchouli:multiblock",

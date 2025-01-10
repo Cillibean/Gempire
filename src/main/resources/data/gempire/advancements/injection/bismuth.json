@@ -1,0 +1,28 @@
+{
+  "display": {
+    "icon": {
+      "item": "gempire:bismuth_gem"
+    },
+    "title": {
+      "translate": "advancements.gempire.bismuth_injection.title"
+    },
+    "description": {
+      "translate": "advancements.gempire.bismuth_injection.description"
+    },
+    "frame": "task",
+    "hidden": true
+  },
+  "parent": "gempire:injection/obtain_tank",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["gempire:bismuth_gem"]
+          }
+        ]
+      }
+    }
+  }
+}

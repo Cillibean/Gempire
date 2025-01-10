@@ -1,0 +1,28 @@
+{
+  "display": {
+    "icon": {
+      "item": "gempire:tourmaline_gem_16"
+    },
+    "title": {
+      "translate": "advancements.gempire.tourmaline_injection.title"
+    },
+    "description": {
+      "translate": "advancements.gempire.tourmaline_injection.description"
+    },
+    "frame": "task",
+    "hidden": true
+  },
+  "parent": "gempire:injection/obtain_tank",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "gempire:tourmaline"
+          }
+        ]
+      }
+    }
+  }
+}

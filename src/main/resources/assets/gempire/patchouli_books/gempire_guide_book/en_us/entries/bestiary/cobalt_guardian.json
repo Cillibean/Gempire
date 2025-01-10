@@ -1,7 +1,7 @@
 {
   "name": "Cobalt Guardian",
-  "icon": "gempire:inactive_guardian_gem",
-  "advancement": "gempire:root",
+  "icon": "gempire:cobalt_shards",
+  "advancement": "gempire:desolate_lands/kill_guardian",
   "category": "gempire:bestiary",
   "pages": [
     {
@@ -9,6 +9,7 @@
       "entity": "gempire:cobalt_guardian",
       "name": "The Guardian",
       "rotate": "true",
+      "scale": 0.9,
       "text": "The bestial remnants of an elegant diamond who once ruled over their homeworld."
     },
     {

@@ -1,6 +1,6 @@
 {
   "name": "Ruby",
-  "advancement": "gempire:incubation/create_ruby",
+  "advancement": "gempire:injection/ruby",
   "icon": "gempire:ruby_gem",
   "category": "gempire:gems_category",
   "pages": [
@@ -21,7 +21,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "$(l)Cruxes$() $(br)$(li)Netherrack$(li)Iron Ore"
+      "text": "$(l)Incubation Cruxes$() $(br)$(li)Netherrack$(li)Iron Ore"
     }
   ]
 }

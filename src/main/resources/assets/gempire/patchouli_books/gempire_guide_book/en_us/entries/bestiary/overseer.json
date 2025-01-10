@@ -1,0 +1,20 @@
+{
+  "name": "Overseer",
+  "icon": "minecraft:book",
+  "advancement": "gempire:desolate_lands/kill_overseer",
+  "category": "gempire:bestiary",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "gempire:overseer",
+      "name": "Overseer",
+      "rotate": "true",
+      "offset": 1.0,
+      "scale": 0.8
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A fluttering bat-like creature with far too many eyes for its own good. Yucky."
+    }
+  ]
+}

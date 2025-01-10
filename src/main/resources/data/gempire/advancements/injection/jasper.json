@@ -1,0 +1,28 @@
+{
+  "display": {
+    "icon": {
+      "item": "gempire:jasper_gem_1"
+    },
+    "title": {
+      "translate": "advancements.gempire.jasper_injection.title"
+    },
+    "description": {
+      "translate": "advancements.gempire.jasper_injection.description"
+    },
+    "frame": "task",
+    "hidden": true
+  },
+  "parent": "gempire:injection/obtain_tank",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "gempire:jasper"
+          }
+        ]
+      }
+    }
+  }
+}

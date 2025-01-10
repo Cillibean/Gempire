@@ -1,0 +1,16 @@
+{
+  "name": "Prospector",
+  "icon": "minecraft:iron_nugget",
+  "advancement": "gempire:root",
+  "category": "gempire:abilities",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Prospector is an ability that lets gems seek out blocks of ore."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Gems that are guaranteed to have it$()$(li)Rutile$(br2) $(l)Gems that have a chance to have it$()$(li)N/A"
+    }
+  ]
+}

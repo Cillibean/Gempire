@@ -1,13 +1,13 @@
 {
   "display": {
     "icon": {
-      "item": "gempire:quartz_gem_10"
+      "item": "gempire:inactive_quartz_base"
     },
     "title": {
-      "translate": "advancements.gempire.quartz.title"
+      "translate": "advancements.gempire.quartz_incubation.title"
     },
     "description": {
-      "translate": "advancements.gempire.quartz.description"
+      "translate": "advancements.gempire.quartz_incubation.description"
     },
     "frame": "task",
     "hidden": true

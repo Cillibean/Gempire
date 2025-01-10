@@ -1,13 +1,13 @@
 {
   "display": {
     "icon": {
-      "item": "gempire:morganite_gem"
+      "item": "gempire:inactive_morganite_base"
     },
     "title": {
-      "translate": "advancements.gempire.morganite.title"
+      "translate": "advancements.gempire.morganite_incubation.title"
     },
     "description": {
-      "translate": "advancements.gempire.morganite.description"
+      "translate": "advancements.gempire.morganite_incubation.description"
     },
     "frame": "task",
     "hidden": true

@@ -1,13 +1,13 @@
 {
   "display": {
     "icon": {
-      "item": "gempire:garnet_gem_1"
+      "item": "gempire:inactive_garnet_base"
     },
     "title": {
-      "translate": "advancements.gempire.garnet.title"
+      "translate": "advancements.gempire.garnet_incubation.title"
     },
     "description": {
-      "translate": "advancements.gempire.garnet.description"
+      "translate": "advancements.gempire.garnet_incubation.description"
     },
     "frame": "task",
     "hidden": true

@@ -7,8 +7,11 @@
     {
       "type": "patchouli:entity",
       "entity": "minecraft:creeper",
-      "name": "Bleached Wyvern (PLACEHOLDER)",
-      "rotate": "true",
+      "name": "Bleached Wyvern (NYI)",
+      "rotate": "true"
+    },
+    {
+      "type": "patchouli:text",
       "text": "Bleached Wyverns are airborne hostile creatures found in the Prismatic Gates biome. They drop bleached teeth, a prized trophy among collectors."
     }
   ]

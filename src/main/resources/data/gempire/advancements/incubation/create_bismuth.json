@@ -1,13 +1,13 @@
 {
   "display": {
     "icon": {
-      "item": "gempire:bismuth_gem"
+      "item": "gempire:inactive_bismuth_base"
     },
     "title": {
-      "translate": "advancements.gempire.bismuth.title"
+      "translate": "advancements.gempire.bismuth_incubation.title"
     },
     "description": {
-      "translate": "advancements.gempire.bismuth.description"
+      "translate": "advancements.gempire.bismuth_incubation.description"
     },
     "frame": "task",
     "hidden": true

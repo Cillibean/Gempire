@@ -1,13 +1,13 @@
 {
   "display": {
     "icon": {
-      "item": "gempire:tourmaline_gem_16"
+      "item": "gempire:inactive_tourmaline_base"
     },
     "title": {
-      "translate": "advancements.gempire.tourmaline.title"
+      "translate": "advancements.gempire.tourmaline_incubation.title"
     },
     "description": {
-      "translate": "advancements.gempire.tourmaline.description"
+      "translate": "advancements.gempire.tourmaline_incubation.description"
     },
     "frame": "task",
     "hidden": true

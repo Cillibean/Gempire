@@ -1,0 +1,32 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:arrow"
+    },
+    "title": {
+      "translate": "advancements.gempire.desolate_lands.kill_hunter.title"
+    },
+    "description": {
+      "translate": "advancements.gempire.desolate_lands.kill_hunter.description"
+    },
+    "frame": "task",
+    "hidden": true
+  },
+  "parent": "gempire:desolate_lands/root",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "gempire:hunter"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

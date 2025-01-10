@@ -1,0 +1,41 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:white_concrete"
+    },
+    "title": {
+      "translate": "advancements.gempire.desolate_lands.prismatic_gates.title"
+    },
+    "description": {
+      "translate": "advancements.gempire.desolate_lands.prismatic_gates.description"
+    },
+    "announce_to_chat": true,
+    "frame": "task",
+    "hidden": false,
+    "show_toast": false
+  },
+  "parent": "gempire:desolate_lands/root",
+  "criteria": {
+    "gempire:prismatic_gates": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "biome": "gempire:prismatic_gates"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    }
+  },
+  "requirements": [
+    [
+      "gempire:prismatic_gates"
+    ]
+  ]
+}
