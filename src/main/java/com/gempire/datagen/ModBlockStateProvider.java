@@ -302,17 +302,17 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockWithItem(ModBlocks.DESOLATE_SOIL);
 
         blockWithItem(ModBlocks.SCHIST_BLOCK);
-        //blockWithItem(ModBlocks.POLISHED_SCHIST_BLOCK);
+        blockWithItem(ModBlocks.POLISHED_SCHIST_BLOCK);
         stairsBlock((StairBlock) ModBlocks.SCHIST_STAIRS.get(), blockTexture(ModBlocks.SCHIST_BLOCK.get()));
         slabBlock((SlabBlock) ModBlocks.SCHIST_SLAB.get(), blockTexture(ModBlocks.SCHIST_BLOCK.get()), blockTexture(ModBlocks.SCHIST_BLOCK.get()));
         wallBlock((WallBlock) ModBlocks.SCHIST_WALL.get(), blockTexture(ModBlocks.SCHIST_BLOCK.get()));
         blockItem(ModBlocks.SCHIST_STAIRS);
         blockItem(ModBlocks.SCHIST_SLAB);
-        //stairsBlock((StairBlock) ModBlocks.POLISHED_SCHIST_STAIRS.get(), blockTexture(ModBlocks.POLISHED_SCHIST_BLOCK.get()));
-        //slabBlock((SlabBlock) ModBlocks.POLISHED_SCHIST_SLAB.get(), blockTexture(ModBlocks.POLISHED_SCHIST_BLOCK.get()), blockTexture(ModBlocks.POLISHED_SCHIST_BLOCK.get()));
-        //wallBlock((WallBlock) ModBlocks.POLISHED_SCHIST_WALL.get(), blockTexture(ModBlocks.POLISHED_SCHIST_BLOCK.get()));
-        //blockItem(ModBlocks.POLISHED_SCHIST_STAIRS);
-        //blockItem(ModBlocks.POLISHED_SCHIST_SLAB);
+        stairsBlock((StairBlock) ModBlocks.POLISHED_SCHIST_STAIRS.get(), blockTexture(ModBlocks.POLISHED_SCHIST_BLOCK.get()));
+        slabBlock((SlabBlock) ModBlocks.POLISHED_SCHIST_SLAB.get(), blockTexture(ModBlocks.POLISHED_SCHIST_BLOCK.get()), blockTexture(ModBlocks.POLISHED_SCHIST_BLOCK.get()));
+        wallBlock((WallBlock) ModBlocks.POLISHED_SCHIST_WALL.get(), blockTexture(ModBlocks.POLISHED_SCHIST_BLOCK.get()));
+        blockItem(ModBlocks.POLISHED_SCHIST_STAIRS);
+        blockItem(ModBlocks.POLISHED_SCHIST_SLAB);
 
         blockWithItem(ModBlocks.ABNORMAL_SAND);
         //blockWithItem(ModBlocks.ABNORMAL_SANDSTONE);

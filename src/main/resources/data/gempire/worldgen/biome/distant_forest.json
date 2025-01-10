@@ -16,9 +16,9 @@
       }
     },
     "music": {
-      "sound": "gempire:fragments",
-      "min_delay": 0,
-      "max_delay": 100,
+      "sound": "gempire:remnants",
+      "min_delay": 100,
+      "max_delay": 200,
       "replace_current_music": true
     }
   },

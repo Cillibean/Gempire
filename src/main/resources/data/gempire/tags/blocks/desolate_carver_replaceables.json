@@ -2,8 +2,8 @@
   "values": [
     "#minecraft:overworld_carver_replaceables",
     "gempire:pegmatite",
-    "gempire:schist",
-    "gempire:ryolite",
+    "gempire:schist_block",
+    "gempire:ryolite_block",
     "gempire:macadam",
     "gempire:pink_sand",
     "gempire:pink_sandstone",

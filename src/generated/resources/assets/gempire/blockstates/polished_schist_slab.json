@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "gempire:block/polished_schist_slab"
+    },
+    "type=double": {
+      "model": "gempire:block/polished_schist_block"
+    },
+    "type=top": {
+      "model": "gempire:block/polished_schist_slab_top"
+    }
+  }
+}
