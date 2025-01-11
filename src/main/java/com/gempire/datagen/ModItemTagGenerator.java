@@ -43,6 +43,8 @@ public class ModItemTagGenerator extends ItemTagsProvider {
                         ModItems.STRIPPED_DISTANT_LOG.get(),
                         ModItems.SHADED_LOG.get(),
                         ModItems.STRIPPED_SHADED_LOG.get(),
+                        ModItems.ASTER_LOG.get(),
+                        ModItems.STRIPPED_ASTER_LOG.get(),
                         ModItems.KALEIDOSCOPE_WOOD.get(),
                         ModItems.STRIPPED_KALEIDOSCOPE_WOOD.get(),
                         ModItems.CRYSTAL_WOOD.get(),
@@ -50,14 +52,17 @@ public class ModItemTagGenerator extends ItemTagsProvider {
                         ModItems.DISTANT_WOOD.get(),
                         ModItems.STRIPPED_DISTANT_WOOD.get(),
                         ModItems.SHADED_WOOD.get(),
-                        ModItems.STRIPPED_SHADED_WOOD.get()
+                        ModItems.STRIPPED_SHADED_WOOD.get(),
+                        ModItems.ASTER_WOOD.get(),
+                        ModItems.STRIPPED_ASTER_WOOD.get()
                 );
 
         this.tag(ItemTags.PLANKS)
                 .add(ModItems.KALEIDOSCOPE_PLANKS.get(),
                         ModItems.CRYSTAL_PLANKS.get(),
                         ModItems.DISTANT_PLANKS.get(),
-                        ModItems.SHADED_PLANKS.get()
+                        ModItems.SHADED_PLANKS.get(),
+                        ModItems.ASTER_PLANKS.get()
                 );
 
         this.tag(ItemTags.FLOWERS)
@@ -112,24 +117,6 @@ public class ModItemTagGenerator extends ItemTagsProvider {
         this.tag(ItemTags.MUSIC_DISCS)
                 .add(ModItems.FRAGMENTS_MUSIC_DISC.get(),
                         ModItems.REMNANTS_MUSIC_DISC.get());
-
-        this.tag(ItemTags.LOGS_THAT_BURN)
-                .add(ModItems.DISTANT_WOOD.get(),
-                        ModItems.DISTANT_LOG.get(),
-                        ModItems.STRIPPED_DISTANT_LOG.get(),
-                        ModItems.STRIPPED_DISTANT_WOOD.get(),
-                        ModItems.CRYSTAL_WOOD.get(),
-                        ModItems.CRYSTAL_LOG.get(),
-                        ModItems.STRIPPED_CRYSTAL_LOG.get(),
-                        ModItems.STRIPPED_CRYSTAL_WOOD.get(),
-                        ModItems.KALEIDOSCOPE_WOOD.get(),
-                        ModItems.KALEIDOSCOPE_LOG.get(),
-                        ModItems.STRIPPED_KALEIDOSCOPE_LOG.get(),
-                        ModItems.STRIPPED_KALEIDOSCOPE_WOOD.get(),
-                        ModItems.SHADED_WOOD.get(),
-                        ModItems.SHADED_LOG.get(),
-                        ModItems.STRIPPED_SHADED_LOG.get(),
-                        ModItems.STRIPPED_SHADED_WOOD.get());
     }
 
     @Override

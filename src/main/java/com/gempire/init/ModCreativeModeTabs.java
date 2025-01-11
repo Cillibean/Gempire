@@ -778,6 +778,20 @@ public class ModCreativeModeTabs {
                 populator.accept(ModItems.DISTANT_SIGN.get());
                 populator.accept(ModItems.DISTANT_HANGING_SIGN.get());
 
+                populator.accept(ModItems.ASTER_LOG.get());
+                populator.accept(ModItems.STRIPPED_ASTER_LOG.get());
+                populator.accept(ModItems.ASTER_WOOD.get());
+                populator.accept(ModItems.STRIPPED_ASTER_WOOD.get());
+                populator.accept(ModItems.ASTER_PLANKS.get());
+                populator.accept(ModItems.ASTER_SLAB.get());
+                populator.accept(ModItems.ASTER_STAIRS.get());
+                populator.accept(ModItems.ASTER_FENCE.get());
+                populator.accept(ModItems.ASTER_FENCE_GATE.get());
+                populator.accept(ModItems.ASTER_DOOR.get());
+                populator.accept(ModItems.ASTER_TRAPDOOR.get());
+                populator.accept(ModItems.ASTER_SIGN.get());
+                populator.accept(ModItems.ASTER_HANGING_SIGN.get());
+
                 populator.accept(ModItems.KALEIDOSCOPE_LOG.get());
                 populator.accept(ModItems.STRIPPED_KALEIDOSCOPE_LOG.get());
                 populator.accept(ModItems.KALEIDOSCOPE_WOOD.get());

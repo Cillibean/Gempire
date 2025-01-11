@@ -627,6 +627,67 @@ public class ModBlocks {
     public static final RegistryObject<Block> DISTANT_TRAPDOOR = BLOCKS.register("distant_trapdoor",
             () -> new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_TRAPDOOR), ModWoodTypes.DISTANT.setType()));
 
+    public static final RegistryObject<Block> ASTER_LOG = BLOCKS.register("aster_log", () ->
+            new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG)));
+
+    public static final RegistryObject<Block> STRIPPED_ASTER_LOG = BLOCKS.register("stripped_aster_log", () ->
+            new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_LOG)));
+
+    public static final RegistryObject<Block> ASTER_WOOD = BLOCKS.register("aster_wood", () ->
+            new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG)));
+
+    public static final RegistryObject<Block> STRIPPED_ASTER_WOOD = BLOCKS.register("stripped_aster_wood", () ->
+            new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_WOOD)));
+
+    public static final RegistryObject<Block> ASTER_PLANKS = BLOCKS.register("aster_planks", () ->
+            new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)) {
+                @Override
+                public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return true;
+                }
+
+                @Override
+                public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return 20;
+                }
+
+                @Override
+                public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return 5;
+                }
+            });
+
+    public static final RegistryObject<Block> ASTER_SLAB = BLOCKS.register("aster_slab", () ->
+            new SlabBlock(BlockBehaviour.Properties.copy(Blocks.OAK_SLAB)));
+
+    public static final RegistryObject<Block> ASTER_STAIRS = BLOCKS.register("aster_stairs", () ->
+            new StairBlock(() -> ModBlocks.ASTER_PLANKS.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.OAK_STAIRS)));
+    public static final RegistryObject<Block> ASTER_SIGN = BLOCKS.register("aster_sign", () ->
+            new ModStandingSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_SIGN), ModWoodTypes.ASTER));
+
+    public static final RegistryObject<Block> ASTER_HANGING_SIGN = BLOCKS.register("aster_hanging_sign", () ->
+            new ModHangingSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_HANGING_SIGN), ModWoodTypes.ASTER));
+
+    public static final RegistryObject<Block> ASTER_WALL_SIGN = BLOCKS.register("aster_wall_sign", () ->
+            new ModWallSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_WALL_SIGN), ModWoodTypes.ASTER));
+
+    public static final RegistryObject<Block> ASTER_WALL_HANGING_SIGN = BLOCKS.register("aster_wall_hanging_sign", () ->
+            new ModWallHangingSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_WALL_HANGING_SIGN), ModWoodTypes.ASTER));
+
+    public static final RegistryObject<Block> ASTER_FENCE = BLOCKS.register("aster_fence",
+            () -> new FenceBlock(BlockBehaviour.Properties.copy(Blocks.OAK_FENCE)));
+
+    public static final RegistryObject<Block> ASTER_FENCE_GATE = BLOCKS.register("aster_fence_gate",
+            () -> new FenceGateBlock(BlockBehaviour.Properties.copy(Blocks.OAK_FENCE_GATE), SoundEvents.FENCE_GATE_OPEN, SoundEvents.FENCE_GATE_CLOSE));
+
+    public static final RegistryObject<Block> ASTER_DOOR = BLOCKS.register("aster_door",
+            () -> new DoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_DOOR), ModWoodTypes.ASTER.setType()));
+
+    public static final RegistryObject<Block> ASTER_TRAPDOOR = BLOCKS.register("aster_trapdoor",
+            () -> new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_TRAPDOOR), ModWoodTypes.ASTER.setType()));
+
+
+
     public static final RegistryObject<Block> KALEIDOSCOPE_LOG = BLOCKS.register("kaleidoscope_log", () ->
             new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG)));
 

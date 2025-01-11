@@ -139,6 +139,10 @@ public class EntityAlabasterEmpress extends EntityBoss implements FlyingAnimal {
             if (this.random.nextInt(20) == 1 && beamcooldown <= 0) beam();
             if (this.random.nextInt(20) == 1 && orbcooldown <= 0) shooting = true;
         }
+        if (beamcooldown == -40) {
+            this.getTarget().hurt(this.damageSources().mobAttack(this), 4f);
+        }
+
             if (beamcooldown > -80) {
                 beamcooldown--;
             } else {
@@ -154,7 +158,6 @@ public class EntityAlabasterEmpress extends EntityBoss implements FlyingAnimal {
         if (this.getTarget() != null) {
             triggerAnim("misc_controller", "laser");
             if (this.hasLineOfSight(this.getTarget()) && beamDamageCheck) {
-                this.getTarget().hurt(this.damageSources().mobAttack(this), 4f);
                 beamDamageCheck = false;
             }
         }

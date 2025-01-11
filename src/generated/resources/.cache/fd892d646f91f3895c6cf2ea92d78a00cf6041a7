@@ -1,4 +1,4 @@
-// 1.20.1	2025-01-08T10:40:54.601241	Item Models: gempire
+// 1.20.1	2025-01-11T11:58:36.750059	Item Models: gempire
 2a4c323206d2fbeca217109aa5c8a2ac8ce38701 assets/gempire/models/item/acid_spit.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/gempire/models/item/alabaster_empress_spawn_egg.json
 0da7ed67ca0a8fcb9a8ba427cc3a79d0931ef656 assets/gempire/models/item/alabaster_shards.json
@@ -8,6 +8,10 @@ a29e967ff074b156f0e58ab74842556395538217 assets/gempire/models/item/anatase_ingo
 a3632651a9fbc3e7e228b96d6dd3f21302c6f76c assets/gempire/models/item/anatase_nugget.json
 cc177740b38d8d4a598d67688cc22f2241751c8f assets/gempire/models/item/aquatic_fibre.json
 72e1df98c208ba4ea5d1967c77833447296cd2b3 assets/gempire/models/item/assign_contract.json
+6a3094bee796a5cd293d6515426c1dab971bf155 assets/gempire/models/item/aster_door.json
+1280acf1b3a44eb0c53c4e84299947d6d380b56f assets/gempire/models/item/aster_fence.json
+89cbabd91585abf2e32d2ca2ca090d8e26c4c63c assets/gempire/models/item/aster_hanging_sign.json
+d41ba6103487480479d4994755043ffb2c2b723a assets/gempire/models/item/aster_sign.json
 b00486158875f7cfbcb327a00017deb8b51c211f assets/gempire/models/item/black_chroma.json
 417aa16de7be211ab4be4572d9128fd1f5a37921 assets/gempire/models/item/black_lattice.json
 77393a3dc963655f33b217fa1a280e442b0c0f8f assets/gempire/models/item/black_shards.json
@@ -133,6 +137,7 @@ fd63725ee2b6dc8d79cb74ac5a8f52399f32ab96 assets/gempire/models/item/pink_lattice
 d8c821219d681deb4b2070f4bcdb0784138cc381 assets/gempire/models/item/platinum_ingot.json
 a1d4ac1e48eb8e8ec3b3fe32365bbab21468ba17 assets/gempire/models/item/platinum_nugget.json
 44309231d2d98bfda4f6ca2bae96a8391017eb55 assets/gempire/models/item/polished_ryolite_wall.json
+bb515ccb818d90bf0225034f6e916260ea28ec2f assets/gempire/models/item/polished_schist_wall.json
 ef10f9d2058b273648c2b80d504f2ba004214292 assets/gempire/models/item/polished_selenite_wall.json
 58fa7a5327ba4497d350d2d0b2485a3f86a772cf assets/gempire/models/item/prime_boost.json
 c77ac1f5738282a6b8deeee0b44b268a33a34c42 assets/gempire/models/item/primed_slate.json

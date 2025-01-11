@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "gempire:block/aster_log_top",
+    "side": "gempire:block/aster_log"
+  }
+}

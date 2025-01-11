@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "gempire:block/aster_slab"
+    },
+    "type=double": {
+      "model": "gempire:block/aster_planks"
+    },
+    "type=top": {
+      "model": "gempire:block/aster_slab_top"
+    }
+  }
+}

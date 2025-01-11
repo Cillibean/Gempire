@@ -16,9 +16,9 @@
     "gempire:shaded_log",
     "gempire:stripped_shaded_log",
     "gempire:stripped_shaded_wood",
-    "gempire:crystal_wood",
-    "gempire:crystal_log",
-    "gempire:stripped_crystal_log",
-    "gempire:stripped_crystal_wood"
+    "gempire:aster_wood",
+    "gempire:aster_log",
+    "gempire:stripped_aster_log",
+    "gempire:stripped_aster_wood"
   ]
 }

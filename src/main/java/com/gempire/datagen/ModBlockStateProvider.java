@@ -80,6 +80,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockWithItem(ModBlocks.KALEIDOSCOPE_PLANKS);
         blockWithItem(ModBlocks.SHADED_PLANKS);
         blockWithItem(ModBlocks.CRYSTAL_PLANKS);
+        blockWithItem(ModBlocks.ASTER_PLANKS);
 
         stairsBlock((StairBlock) ModBlocks.DISTANT_STAIRS.get(), blockTexture(ModBlocks.DISTANT_PLANKS.get()));
         slabBlock((SlabBlock) ModBlocks.DISTANT_SLAB.get(), blockTexture(ModBlocks.DISTANT_PLANKS.get()), blockTexture(ModBlocks.DISTANT_PLANKS.get()));
@@ -93,6 +94,9 @@ public class ModBlockStateProvider extends BlockStateProvider {
         stairsBlock((StairBlock) ModBlocks.CRYSTAL_STAIRS.get(), blockTexture(ModBlocks.CRYSTAL_PLANKS.get()));
         slabBlock((SlabBlock) ModBlocks.CRYSTAL_SLAB.get(), blockTexture(ModBlocks.CRYSTAL_PLANKS.get()), blockTexture(ModBlocks.CRYSTAL_PLANKS.get()));
 
+        stairsBlock((StairBlock) ModBlocks.ASTER_STAIRS.get(), blockTexture(ModBlocks.ASTER_PLANKS.get()));
+        slabBlock((SlabBlock) ModBlocks.ASTER_SLAB.get(), blockTexture(ModBlocks.ASTER_PLANKS.get()), blockTexture(ModBlocks.ASTER_PLANKS.get()));
+
         fenceBlock((FenceBlock) ModBlocks.DISTANT_FENCE.get(), blockTexture(ModBlocks.DISTANT_PLANKS.get()));
         fenceGateBlock((FenceGateBlock) ModBlocks.DISTANT_FENCE_GATE.get(), blockTexture(ModBlocks.DISTANT_PLANKS.get()));
 
@@ -104,6 +108,9 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         fenceBlock((FenceBlock) ModBlocks.CRYSTAL_FENCE.get(), blockTexture(ModBlocks.CRYSTAL_PLANKS.get()));
         fenceGateBlock((FenceGateBlock) ModBlocks.CRYSTAL_FENCE_GATE.get(), blockTexture(ModBlocks.CRYSTAL_PLANKS.get()));
+
+        fenceBlock((FenceBlock) ModBlocks.ASTER_FENCE.get(), blockTexture(ModBlocks.ASTER_PLANKS.get()));
+        fenceGateBlock((FenceGateBlock) ModBlocks.ASTER_FENCE_GATE.get(), blockTexture(ModBlocks.ASTER_PLANKS.get()));
 
         blockItem(ModBlocks.DISTANT_STAIRS);
         blockItem(ModBlocks.DISTANT_SLAB);
@@ -136,6 +143,14 @@ public class ModBlockStateProvider extends BlockStateProvider {
         doorBlockWithRenderType((DoorBlock)ModBlocks.CRYSTAL_DOOR.get(), modLoc("block/crystal_door_bottom"), modLoc("block/crystal_door_top"), "cutout");
         trapdoorBlockWithRenderType((TrapDoorBlock) ModBlocks.CRYSTAL_TRAPDOOR.get(), modLoc("block/crystal_trapdoor"), true, "cutout");
         blockItem(ModBlocks.CRYSTAL_TRAPDOOR, "_bottom");
+
+        blockItem(ModBlocks.ASTER_STAIRS);
+        blockItem(ModBlocks.ASTER_SLAB);
+        blockItem(ModBlocks.ASTER_FENCE_GATE);
+
+        doorBlockWithRenderType((DoorBlock)ModBlocks.ASTER_DOOR.get(), modLoc("block/aster_door_bottom"), modLoc("block/aster_door_top"), "cutout");
+        trapdoorBlockWithRenderType((TrapDoorBlock) ModBlocks.ASTER_TRAPDOOR.get(), modLoc("block/aster_trapdoor"), true, "cutout");
+        blockItem(ModBlocks.ASTER_TRAPDOOR, "_bottom");
 
 
         logBlock(((RotatedPillarBlock) ModBlocks.DISTANT_LOG.get()));
@@ -224,6 +239,24 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         blockItem(ModBlocks.STRIPPED_CRYSTAL_LOG);
         blockItem(ModBlocks.STRIPPED_CRYSTAL_WOOD);
+
+        logBlock(((RotatedPillarBlock) ModBlocks.ASTER_LOG.get()));
+        axisBlock(((RotatedPillarBlock) ModBlocks.ASTER_WOOD.get()), blockTexture(ModBlocks.ASTER_LOG.get()), blockTexture(ModBlocks.ASTER_LOG.get()));
+        axisBlock((RotatedPillarBlock) ModBlocks.STRIPPED_ASTER_LOG.get(), new ResourceLocation(Gempire.MODID, "block/stripped_aster_log"),
+                new ResourceLocation(Gempire.MODID, "block/stripped_aster_log_top"));
+        axisBlock((RotatedPillarBlock) ModBlocks.STRIPPED_ASTER_WOOD.get(), new ResourceLocation(Gempire.MODID, "block/stripped_aster_log"),
+                new ResourceLocation(Gempire.MODID, "block/stripped_aster_log"));
+
+        blockItem(ModBlocks.ASTER_LOG);
+        blockItem(ModBlocks.ASTER_WOOD);
+        blockItem(ModBlocks.STRIPPED_ASTER_LOG);
+        blockItem(ModBlocks.STRIPPED_ASTER_WOOD);
+
+        signBlock(((StandingSignBlock) ModBlocks.ASTER_SIGN.get()), ((WallSignBlock) ModBlocks.ASTER_WALL_SIGN.get()),
+                blockTexture(ModBlocks.ASTER_PLANKS.get()));
+
+        hangingSignBlock(ModBlocks.ASTER_HANGING_SIGN.get(), ModBlocks.ASTER_WALL_HANGING_SIGN.get(),
+                blockTexture(ModBlocks.ASTER_PLANKS.get()));
 
         blockItem(ModBlocks.GALAXY_WARP);
         blockItem(ModBlocks.WARP_PAD);

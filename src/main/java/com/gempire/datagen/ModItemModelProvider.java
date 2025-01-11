@@ -207,12 +207,17 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.CRYSTAL_SIGN);
         simpleItem(ModItems.CRYSTAL_HANGING_SIGN);
 
+        fenceItem(ModBlocks.ASTER_FENCE, ModBlocks.ASTER_PLANKS);
+        simpleItem(ModItems.ASTER_DOOR);
+        simpleItem(ModItems.ASTER_SIGN);
+        simpleItem(ModItems.ASTER_HANGING_SIGN);
+
         wallItem(ModBlocks.PINK_SANDSTONE_WALL, ModBlocks.PINK_SANDSTONE);
         wallItem(ModBlocks.PEGMATITE_WALL, ModBlocks.PEGMATITE);
         wallItem(ModBlocks.RYOLITE_WALL, ModBlocks.RYOLITE_BLOCK);
         wallItem(ModBlocks.POLISHED_RYOLITE_WALL, ModBlocks.POLISHED_RYOLITE_BLOCK);
         wallItem(ModBlocks.SCHIST_WALL, ModBlocks.SCHIST_BLOCK);
-        //wallItem(ModBlocks.POLISHED_SCHIST_WALL, ModBlocks.POLISHED_SCHIST_BLOCK);
+        wallItem(ModBlocks.POLISHED_SCHIST_WALL, ModBlocks.POLISHED_SCHIST_BLOCK);
         wallItem(ModBlocks.COBBLED_PEGMATITE_WALL, ModBlocks.COBBLED_PEGMATITE);
         wallItem(ModBlocks.SELENITE_WALL, ModBlocks.SELENITE);
         wallItem(ModBlocks.POLISHED_SELENITE_WALL, ModBlocks.POLISHED_SELENITE);

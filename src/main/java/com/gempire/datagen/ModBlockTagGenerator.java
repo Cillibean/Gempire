@@ -411,12 +411,14 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(ModBlocks.DISTANT_FENCE.get(),
                         ModBlocks.KALEIDOSCOPE_FENCE.get(),
                         ModBlocks.SHADED_FENCE.get(),
+                        ModBlocks.ASTER_FENCE.get(),
                         ModBlocks.CRYSTAL_FENCE.get());
 
         this.tag(BlockTags.FENCE_GATES)
                 .add(ModBlocks.DISTANT_FENCE_GATE.get(),
                         ModBlocks.KALEIDOSCOPE_FENCE_GATE.get(),
                         ModBlocks.SHADED_FENCE_GATE.get(),
+                        ModBlocks.ASTER_FENCE_GATE.get(),
                         ModBlocks.CRYSTAL_FENCE_GATE.get());
 
         this.tag(BlockTags.WALLS)
@@ -424,9 +426,11 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(ModBlocks.PEGMATITE_WALL.get())
                 .add(ModBlocks.COBBLED_PEGMATITE_WALL.get())
                 .add(ModBlocks.RYOLITE_WALL.get())
+                .add(ModBlocks.SCHIST_WALL.get())
                 .add(ModBlocks.SELENITE_WALL.get())
                 .add(ModBlocks.POLISHED_SELENITE_WALL.get())
                 .add(ModBlocks.POLISHED_RYOLITE_WALL.get())
+                .add(ModBlocks.POLISHED_SCHIST_WALL.get())
                 .add(ModBlocks.DRAINED_BLUE_STONE_BRICK_DARK_WALL.get())
                 .add(ModBlocks.DRAINED_BLUE_STONE_BRICK_LIGHT_WALL.get())
                 .add(ModBlocks.DRAINED_BLUE_STONE_BRICK_WALL.get())
@@ -450,10 +454,6 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                         ModBlocks.DISTANT_LOG.get(),
                         ModBlocks.STRIPPED_DISTANT_LOG.get(),
                         ModBlocks.STRIPPED_DISTANT_WOOD.get(),
-                        ModBlocks.CRYSTAL_WOOD.get(),
-                        ModBlocks.CRYSTAL_LOG.get(),
-                        ModBlocks.STRIPPED_CRYSTAL_LOG.get(),
-                        ModBlocks.STRIPPED_CRYSTAL_WOOD.get(),
                         ModBlocks.KALEIDOSCOPE_WOOD.get(),
                         ModBlocks.KALEIDOSCOPE_LOG.get(),
                         ModBlocks.STRIPPED_KALEIDOSCOPE_LOG.get(),
@@ -462,6 +462,10 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                         ModBlocks.SHADED_LOG.get(),
                         ModBlocks.STRIPPED_SHADED_LOG.get(),
                         ModBlocks.STRIPPED_SHADED_WOOD.get(),
+                        ModBlocks.ASTER_WOOD.get(),
+                        ModBlocks.ASTER_LOG.get(),
+                        ModBlocks.STRIPPED_ASTER_LOG.get(),
+                        ModBlocks.STRIPPED_ASTER_WOOD.get(),
                         ModBlocks.CRYSTAL_WOOD.get(),
                         ModBlocks.CRYSTAL_LOG.get(),
                         ModBlocks.STRIPPED_CRYSTAL_LOG.get(),
@@ -484,15 +488,16 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                         ModBlocks.SHADED_LOG.get(),
                         ModBlocks.STRIPPED_SHADED_LOG.get(),
                         ModBlocks.STRIPPED_SHADED_WOOD.get(),
-                        ModBlocks.CRYSTAL_WOOD.get(),
-                        ModBlocks.CRYSTAL_LOG.get(),
-                        ModBlocks.STRIPPED_CRYSTAL_LOG.get(),
-                        ModBlocks.STRIPPED_CRYSTAL_WOOD.get());
+                        ModBlocks.ASTER_WOOD.get(),
+                        ModBlocks.ASTER_LOG.get(),
+                        ModBlocks.STRIPPED_ASTER_LOG.get(),
+                        ModBlocks.STRIPPED_ASTER_WOOD.get());
 
         this.tag(BlockTags.PLANKS)
                 .add(ModBlocks.DISTANT_PLANKS.get(),
                         ModBlocks.KALEIDOSCOPE_PLANKS.get(),
                         ModBlocks.SHADED_PLANKS.get(),
+                        ModBlocks.ASTER_PLANKS.get(),
                         ModBlocks.CRYSTAL_PLANKS.get());
 
         this.tag(BlockTags.LEAVES)

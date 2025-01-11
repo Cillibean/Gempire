@@ -1688,6 +1688,90 @@ public class ModItems {
             () -> new HangingSignItem(ModBlocks.DISTANT_HANGING_SIGN.get(), ModBlocks.DISTANT_WALL_HANGING_SIGN.get(),
                     new Item.Properties().stacksTo(16)));
 
+    public static final RegistryObject<Item> ASTER_LOG = ITEMS.register("aster_log", () ->
+            new BlockItem(
+                    ModBlocks.ASTER_LOG.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> STRIPPED_ASTER_LOG = ITEMS.register("stripped_aster_log", () ->
+            new BlockItem(
+                    ModBlocks.STRIPPED_ASTER_LOG.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> ASTER_WOOD = ITEMS.register("aster_wood", () ->
+            new BlockItem(
+                    ModBlocks.ASTER_WOOD.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> STRIPPED_ASTER_WOOD = ITEMS.register("stripped_aster_wood", () ->
+            new BlockItem(
+                    ModBlocks.STRIPPED_ASTER_WOOD.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> ASTER_PLANKS = ITEMS.register("aster_planks", () ->
+            new BlockItem(
+                    ModBlocks.ASTER_PLANKS.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> ASTER_SLAB = ITEMS.register("aster_slab", () ->
+            new BlockItem(
+                    ModBlocks.ASTER_SLAB.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> ASTER_FENCE = ITEMS.register("aster_fence", () ->
+            new BlockItem(
+                    ModBlocks.ASTER_FENCE.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> ASTER_FENCE_GATE = ITEMS.register("aster_fence_gate", () ->
+            new BlockItem(
+                    ModBlocks.ASTER_FENCE_GATE.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> ASTER_DOOR = ITEMS.register("aster_door", () ->
+            new BlockItem(
+                    ModBlocks.ASTER_DOOR.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> ASTER_TRAPDOOR = ITEMS.register("aster_trapdoor", () ->
+            new BlockItem(
+                    ModBlocks.ASTER_TRAPDOOR.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> ASTER_STAIRS = ITEMS.register("aster_stairs", () ->
+            new BlockItem(
+                    ModBlocks.ASTER_STAIRS.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> ASTER_SIGN = ITEMS.register("aster_sign",
+            () -> new SignItem(new Item.Properties().stacksTo(16), ModBlocks.ASTER_SIGN.get(), ModBlocks.ASTER_WALL_SIGN.get()));
+    public static final RegistryObject<Item> ASTER_HANGING_SIGN = ITEMS.register("aster_hanging_sign",
+            () -> new HangingSignItem(ModBlocks.ASTER_HANGING_SIGN.get(), ModBlocks.ASTER_WALL_HANGING_SIGN.get(),
+                    new Item.Properties().stacksTo(16)));
+
+
 
     public static final RegistryObject<Item> PINK_ESSENCE_BUCKET = ITEMS.register("pink_essence_bucket", () ->
             new BucketItem(

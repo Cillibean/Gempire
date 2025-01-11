@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "planks",
+  "ingredients": [
+    {
+      "tag": "gempire:aster_logs"
+    }
+  ],
+  "result": {
+    "count": 4,
+    "item": "gempire:aster_planks"
+  }
+}

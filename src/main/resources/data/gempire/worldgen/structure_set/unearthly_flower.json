@@ -1,0 +1,26 @@
+{
+  "structures": [
+    {
+      "structure": "gempire:flower_1",
+      "weight": 1
+    },
+    {
+      "structure": "gempire:flower_2",
+      "weight": 2
+    },
+    {
+      "structure": "gempire:flower_3",
+      "weight": 2
+    },
+    {
+      "structure": "gempire:flower_4",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 1607375778,
+    "spacing": 4,
+    "separation": 2
+  }
+}
