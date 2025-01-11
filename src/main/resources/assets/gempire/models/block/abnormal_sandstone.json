@@ -1,0 +1,12 @@
+{
+  "parent": "block/orientable",
+  "textures": {
+    "particle": "gempire:block/abnormal_sandstone_top",
+    "down": "gempire:block/abnormal_sandstone_bottom",
+    "up": "gempire:block/abnormal_sandstone_top",
+    "north": "gempire:block/abnormal_sandstone",
+    "east": "gempire:block/abnormal_sandstone",
+    "south": "gempire:block/abnormal_sandstone",
+    "west": "gempire:block/abnormal_sandstone"
+  }
+}

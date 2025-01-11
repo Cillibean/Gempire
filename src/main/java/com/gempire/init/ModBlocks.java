@@ -78,10 +78,6 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> MACADAM = BLOCKS.register("macadam", () ->
             new GravelBlock(BlockBehaviour.Properties.copy(Blocks.GRAVEL)));
-
-    public static final RegistryObject<Block> PRISMATIC_SNOW = BLOCKS.register("prismatic_snow", () ->
-            new Block(BlockBehaviour.Properties.copy(Blocks.SNOW_BLOCK)));
-
     public static final RegistryObject<Block> DESOLATE_GRASS = BLOCKS.register("desolate_grass", () ->
             new DesolateGrass(BlockBehaviour.Properties.copy(Blocks.GRASS_BLOCK)));
 
@@ -847,6 +843,58 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> SHADED_TRAPDOOR = BLOCKS.register("shaded_trapdoor",
             () -> new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_TRAPDOOR), ModWoodTypes.SHADED.setType()));
+
+    public static final RegistryObject<Block> BARBATINE = BLOCKS.register("barbatine", () ->
+            new Block(BlockBehaviour.Properties.copy(Blocks.TERRACOTTA)));
+
+    public static final RegistryObject<Block> RED_BARBATINE = BLOCKS.register("red_barbatine", () ->
+            new Block(BlockBehaviour.Properties.copy(Blocks.TERRACOTTA)));
+
+    public static final RegistryObject<Block> ORANGE_BARBATINE = BLOCKS.register("orange_barbatine", () ->
+            new Block(BlockBehaviour.Properties.copy(Blocks.TERRACOTTA)));
+
+    public static final RegistryObject<Block> YELLOW_BARBATINE = BLOCKS.register("yellow_barbatine", () ->
+            new Block(BlockBehaviour.Properties.copy(Blocks.TERRACOTTA)));
+
+    public static final RegistryObject<Block> LIME_BARBATINE = BLOCKS.register("lime_barbatine", () ->
+            new Block(BlockBehaviour.Properties.copy(Blocks.TERRACOTTA)));
+
+    public static final RegistryObject<Block> GREEN_BARBATINE = BLOCKS.register("green_barbatine", () ->
+            new Block(BlockBehaviour.Properties.copy(Blocks.TERRACOTTA)));
+
+    public static final RegistryObject<Block> CYAN_BARBATINE = BLOCKS.register("cyan_barbatine", () ->
+            new Block(BlockBehaviour.Properties.copy(Blocks.TERRACOTTA)));
+
+    public static final RegistryObject<Block> LIGHT_BLUE_BARBATINE = BLOCKS.register("light_blue_barbatine", () ->
+            new Block(BlockBehaviour.Properties.copy(Blocks.TERRACOTTA)));
+
+    public static final RegistryObject<Block> BLUE_BARBATINE = BLOCKS.register("blue_barbatine", () ->
+            new Block(BlockBehaviour.Properties.copy(Blocks.TERRACOTTA)));
+
+    public static final RegistryObject<Block> PURPLE_BARBATINE = BLOCKS.register("purple_barbatine", () ->
+            new Block(BlockBehaviour.Properties.copy(Blocks.TERRACOTTA)));
+
+    public static final RegistryObject<Block> MAGENTA_BARBATINE = BLOCKS.register("magenta_barbatine", () ->
+            new Block(BlockBehaviour.Properties.copy(Blocks.TERRACOTTA)));
+
+    public static final RegistryObject<Block> PINK_BARBATINE = BLOCKS.register("pink_barbatine", () ->
+            new Block(BlockBehaviour.Properties.copy(Blocks.TERRACOTTA)));
+
+    public static final RegistryObject<Block> WHITE_BARBATINE = BLOCKS.register("white_barbatine", () ->
+            new Block(BlockBehaviour.Properties.copy(Blocks.TERRACOTTA)));
+
+    public static final RegistryObject<Block> LIGHT_GRAY_BARBATINE = BLOCKS.register("light_gray_barbatine", () ->
+            new Block(BlockBehaviour.Properties.copy(Blocks.TERRACOTTA)));
+
+    public static final RegistryObject<Block> GRAY_BARBATINE = BLOCKS.register("gray_barbatine", () ->
+            new Block(BlockBehaviour.Properties.copy(Blocks.TERRACOTTA)));
+
+    public static final RegistryObject<Block> BLACK_BARBATINE = BLOCKS.register("black_barbatine", () ->
+            new Block(BlockBehaviour.Properties.copy(Blocks.TERRACOTTA)));
+
+    public static final RegistryObject<Block> BROWN_BARBATINE = BLOCKS.register("brown_barbatine", () ->
+            new Block(BlockBehaviour.Properties.copy(Blocks.TERRACOTTA)));
+
 
     public static final RegistryObject<Block> RED_LATTICE = BLOCKS.register("red_lattice", () ->
             new LatticeBlock(BlockBehaviour.Properties.of().strength(0.3f, 0.3f)

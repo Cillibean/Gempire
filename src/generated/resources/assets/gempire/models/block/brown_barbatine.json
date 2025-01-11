@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "gempire:block/prismatic_snow"
+    "all": "gempire:block/brown_barbatine"
   }
 }

@@ -56,7 +56,6 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         blockWithItem(ModBlocks.GEODE_CRYSTAL_BLOCK);
 
-        blockWithItem(ModBlocks.PRISMATIC_SNOW);
 
         blockWithItem(ModBlocks.PRISMATIC_BLOCK);
 
@@ -332,6 +331,24 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockTranslucentWithItem(ModBlocks.BROWN_DIAMOND_GLASS);
         blockTranslucentWithItem(ModBlocks.PRISMATIC_DIAMOND_GLASS);
 
+        blockWithItem(ModBlocks.WHITE_BARBATINE);
+        blockWithItem(ModBlocks.RED_BARBATINE);
+        blockWithItem(ModBlocks.ORANGE_BARBATINE);
+        blockWithItem(ModBlocks.YELLOW_BARBATINE);
+        blockWithItem(ModBlocks.LIME_BARBATINE);
+        blockWithItem(ModBlocks.GREEN_BARBATINE);
+        blockWithItem(ModBlocks.CYAN_BARBATINE);
+        blockWithItem(ModBlocks.LIGHT_BLUE_BARBATINE);
+        blockWithItem(ModBlocks.BLUE_BARBATINE);
+        blockWithItem(ModBlocks.PURPLE_BARBATINE);
+        blockWithItem(ModBlocks.MAGENTA_BARBATINE);
+        blockWithItem(ModBlocks.PINK_BARBATINE);
+        blockWithItem(ModBlocks.LIGHT_GRAY_BARBATINE);
+        blockWithItem(ModBlocks.GRAY_BARBATINE);
+        blockWithItem(ModBlocks.BLACK_BARBATINE);
+        blockWithItem(ModBlocks.BROWN_BARBATINE);
+        blockWithItem(ModBlocks.BARBATINE);
+
         blockWithItem(ModBlocks.DESOLATE_SOIL);
 
         blockWithItem(ModBlocks.SCHIST_BLOCK);
@@ -348,7 +365,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockItem(ModBlocks.POLISHED_SCHIST_SLAB);
 
         blockWithItem(ModBlocks.ABNORMAL_SAND);
-        //blockWithItem(ModBlocks.ABNORMAL_SANDSTONE);
+        blockItem(ModBlocks.ABNORMAL_SANDSTONE);
 
         blockWithItem(ModBlocks.PECULIAR_SAND);
         blockWithItem(ModBlocks.PECULIAR_SANDSTONE);

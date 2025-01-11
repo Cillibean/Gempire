@@ -15,6 +15,8 @@ public class InjectionRegistry {
     public static ArrayList<GemInfo> list = new ArrayList<>();
     public static HashMap<Block, CruxInfo> blockList = new HashMap<>();
     public static void setMap() {
+        list.clear();
+        listBasic.clear();
 
         //tier 1
         listBasic.add(new GemInfo(new int[]{0, 10, 35, 0, 5, 0}, 1f, "agate", Items.DRAGON_BREATH));

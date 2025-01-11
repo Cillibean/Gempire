@@ -345,7 +345,6 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.ABNORMAL_SAND.get());
         this.dropSelf(ModBlocks.ABNORMAL_SANDSTONE.get());
         this.dropSelf(ModBlocks.PINCULE.get());
-        this.add(ModBlocks.PRISMATIC_SNOW.get(), (block -> createSingleItemTableWithSilkTouch(ModBlocks.PRISMATIC_SNOW.get(), Items.SNOWBALL)));
         this.add(ModBlocks.COBALT_KELP.get(), (block -> createSingleItemTable(ModItems.COBALT_KELP.get())));
         this.add(ModBlocks.COBALT_KELP_PLANT.get(), (block -> createSingleItemTable(ModItems.COBALT_KELP.get())));
         this.dropSelf(ModBlocks.AQUATIC_FIBRE.get());
@@ -373,6 +372,23 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.PRIMED_BLUE_ICE.get());
         this.dropSelf(ModBlocks.PRIMED_DRAINED_ICE.get());
         this.add(ModBlocks.SHOCK_BERRY_BUSH.get(), (block -> createSingleItemTable(ModItems.SHOCK_BERRY.get())));
+        this.dropSelf(ModBlocks.BARBATINE.get());
+        this.dropSelf(ModBlocks.RED_BARBATINE.get());
+        this.dropSelf(ModBlocks.ORANGE_BARBATINE.get());
+        this.dropSelf(ModBlocks.YELLOW_BARBATINE.get());
+        this.dropSelf(ModBlocks.LIME_BARBATINE.get());
+        this.dropSelf(ModBlocks.GREEN_BARBATINE.get());
+        this.dropSelf(ModBlocks.CYAN_BARBATINE.get());
+        this.dropSelf(ModBlocks.LIGHT_BLUE_BARBATINE.get());
+        this.dropSelf(ModBlocks.BLUE_BARBATINE.get());
+        this.dropSelf(ModBlocks.PURPLE_BARBATINE.get());
+        this.dropSelf(ModBlocks.PINK_BARBATINE.get());
+        this.dropSelf(ModBlocks.MAGENTA_BARBATINE.get());
+        this.dropSelf(ModBlocks.BROWN_BARBATINE.get());
+        this.dropSelf(ModBlocks.LIGHT_GRAY_BARBATINE.get());
+        this.dropSelf(ModBlocks.GRAY_BARBATINE.get());
+        this.dropSelf(ModBlocks.WHITE_BARBATINE.get());
+        this.dropSelf(ModBlocks.BLACK_BARBATINE.get());
 
         //wood
         this.dropSelf(ModBlocks.CRYSTAL_LOG.get());

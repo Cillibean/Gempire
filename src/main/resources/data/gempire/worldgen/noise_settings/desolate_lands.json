@@ -568,7 +568,7 @@
                           "then_run": {
                             "type": "minecraft:block",
                             "result_state": {
-                              "Name": "minecraft:orange_terracotta"
+                              "Name": "gempire:orange_barbatine"
                             }
                           }
                         },
@@ -596,7 +596,7 @@
                                 "then_run": {
                                   "type": "minecraft:block",
                                   "result_state": {
-                                    "Name": "minecraft:terracotta"
+                                    "Name": "gempire:barbatine"
                                   }
                                 }
                               },
@@ -611,7 +611,7 @@
                                 "then_run": {
                                   "type": "minecraft:block",
                                   "result_state": {
-                                    "Name": "minecraft:terracotta"
+                                    "Name": "gempire:barbatine"
                                   }
                                 }
                               },
@@ -626,7 +626,7 @@
                                 "then_run": {
                                   "type": "minecraft:block",
                                   "result_state": {
-                                    "Name": "minecraft:terracotta"
+                                    "Name": "gempire:barbatine"
                                   }
                                 }
                               },
@@ -683,7 +683,7 @@
                           "then_run": {
                             "type": "minecraft:block",
                             "result_state": {
-                              "Name": "minecraft:orange_terracotta"
+                              "Name": "gempire:orange_barbatine"
                             }
                           }
                         },
@@ -698,7 +698,7 @@
                           "then_run": {
                             "type": "minecraft:block",
                             "result_state": {
-                              "Name": "minecraft:white_terracotta"
+                              "Name": "gempire:white_barbatine"
                             }
                           }
                         },
@@ -771,7 +771,7 @@
                             "then_run": {
                               "type": "minecraft:block",
                               "result_state": {
-                                "Name": "minecraft:orange_terracotta"
+                                "Name": "gempire:orange_barbatine"
                               }
                             }
                           }
@@ -802,7 +802,7 @@
                       "then_run": {
                         "type": "minecraft:block",
                         "result_state": {
-                          "Name": "minecraft:white_terracotta"
+                          "Name": "gempire:white_barbatine"
                         }
                       }
                     }
@@ -954,7 +954,7 @@
                                 "then_run": {
                                   "type": "minecraft:block",
                                   "result_state": {
-                                    "Name": "gempire:prismatic_snow"
+                                    "Name": "minecraft:snow"
                                   }
                                 }
                               }
@@ -1019,7 +1019,7 @@
                                 "then_run": {
                                   "type": "minecraft:block",
                                   "result_state": {
-                                    "Name": "gempire:prismatic_snow"
+                                    "Name": "minecraft:snow"
                                   }
                                 }
                               }
@@ -1060,7 +1060,7 @@
                                 "then_run": {
                                   "type": "minecraft:block",
                                   "result_state": {
-                                    "Name": "gempire:prismatic_snow"
+                                    "Name": "minecraft:snow"
                                   }
                                 }
                               }
@@ -1113,7 +1113,7 @@
                                 "then_run": {
                                   "type": "minecraft:block",
                                   "result_state": {
-                                    "Name": "gempire:prismatic_snow"
+                                    "Name": "minecraft:snow"
                                   }
                                 }
                               }
@@ -1574,7 +1574,7 @@
                             "then_run": {
                               "type": "minecraft:block",
                               "result_state": {
-                                "Name": "gempire:prismatic_snow"
+                                "Name": "minecraft:snow"
                               }
                             }
                           }
@@ -1769,7 +1769,7 @@
                                 "then_run": {
                                   "type": "minecraft:block",
                                   "result_state": {
-                                    "Name": "gempire:prismatic_snow"
+                                    "Name": "minecraft:snow"
                                   }
                                 }
                               }
@@ -1834,7 +1834,7 @@
                                 "then_run": {
                                   "type": "minecraft:block",
                                   "result_state": {
-                                    "Name": "gempire:prismatic_snow"
+                                    "Name": "minecraft:snow"
                                   }
                                 }
                               }

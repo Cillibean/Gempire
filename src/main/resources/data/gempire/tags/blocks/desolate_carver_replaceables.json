@@ -9,7 +9,23 @@
     "gempire:pink_sandstone",
     "gempire:abnormal_sand",
     "gempire:abnormal_sandstone",
-    "gempire:prismatic_snow",
-    "gempire:pegmatite_tungsten_ore"
+    "gempire:pegmatite_tungsten_ore",
+    "gempire:barbatine",
+    "gempire:red_barbatine",
+    "gempire:orange_barbatine",
+    "gempire:yellow_barbatine",
+    "gempire:lime_barbatine",
+    "gempire:green_barbatine",
+    "gempire:cyan_barbatine",
+    "gempire:light_blue_barbatine",
+    "gempire:blue_barbatine",
+    "gempire:purple_barbatine",
+    "gempire:magenta_barbatine",
+    "gempire:pink_barbatine",
+    "gempire:brown_barbatine",
+    "gempire:black_barbatine",
+    "gempire:white_barbatine",
+    "gempire:gray_barbatine",
+    "gempire:light_gray_barbatine"
   ]
 }

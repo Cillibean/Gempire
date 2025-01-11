@@ -53,7 +53,8 @@
       "minecraft:patch_grass_badlands",
       "minecraft:patch_dead_bush_2",
       "gempire:aquatic_fibre_normal",
-      "gempire:aquatic_fibre_deep"
+      "gempire:aquatic_fibre_deep",
+      "gempire:dead_tree"
     ],
     []
   ]

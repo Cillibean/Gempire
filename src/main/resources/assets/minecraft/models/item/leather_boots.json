@@ -50,25 +50,26 @@
       }
     },
     {
-      "model": "minecraft:item/netherite_boots_diamond_trim",
+      "model": "minecraft:item/leather_boots_diamond_trim",
       "predicate": {
         "trim_type": 0.8
       }
     },
     {
-      "model": "minecraft:item/netherite_boots_lapis_trim",
+      "model": "minecraft:item/leather_boots_lapis_trim",
       "predicate": {
         "trim_type": 0.9
       }
     },
     {
-      "model": "minecraft:item/netherite_boots_amethyst_trim",
+      "model": "minecraft:item/leather_boots_amethyst_trim",
       "predicate": {
         "trim_type": 1.0
       }
     }
   ],
   "textures": {
-    "layer0": "minecraft:item/netherite_boots"
+    "layer0": "minecraft:item/leather_boots",
+    "layer1": "minecraft:item/leather_boots_overlay"
   }
 }

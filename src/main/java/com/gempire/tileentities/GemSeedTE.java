@@ -114,10 +114,8 @@ public class GemSeedTE extends BlockEntity {
     public void drainForm() {
         InjectionRegistry.setMap();
         if (tier == 1) {
-            gemInfoList.clear();
             gemInfoList = InjectionRegistry.listBasic;
         } else {
-            gemInfoList.clear();
             gemInfoList = InjectionRegistry.list;
         }
         resMap = InjectionRegistry.blockList;
@@ -223,6 +221,7 @@ public class GemSeedTE extends BlockEntity {
     }
 
     public void weighResults() {
+        spawned = true;
         ArrayList<GemInfo> possibleResults = new ArrayList<>();
         ArrayList<Float> possibleQualities = new ArrayList<>();
         int threshhold = 35;

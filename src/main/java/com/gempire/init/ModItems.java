@@ -96,6 +96,57 @@ public class ModItems {
     public static final RegistryObject<Item> CLOVERS = ITEMS.register("clovers", () ->
             new BlockItem(ModBlocks.CLOVERS.get(), new Item.Properties()));
 
+    public static final RegistryObject<Item> BARBATINE = ITEMS.register("barbatine", () ->
+            new BlockItem(ModBlocks.BARBATINE.get(), new Item.Properties()));
+    public static final RegistryObject<Item> RED_BARBATINE = ITEMS.register("red_barbatine", () ->
+            new BlockItem(ModBlocks.RED_BARBATINE.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> ORANGE_BARBATINE = ITEMS.register("orange_barbatine", () ->
+            new BlockItem(ModBlocks.ORANGE_BARBATINE.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> YELLOW_BARBATINE = ITEMS.register("yellow_barbatine", () ->
+            new BlockItem(ModBlocks.YELLOW_BARBATINE.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> LIME_BARBATINE = ITEMS.register("lime_barbatine", () ->
+            new BlockItem(ModBlocks.LIME_BARBATINE.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> GREEN_BARBATINE = ITEMS.register("green_barbatine", () ->
+            new BlockItem(ModBlocks.GREEN_BARBATINE.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> CYAN_BARBATINE = ITEMS.register("cyan_barbatine", () ->
+            new BlockItem(ModBlocks.CYAN_BARBATINE.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> LIGHT_BLUE_BARBATINE = ITEMS.register("light_blue_barbatine", () ->
+            new BlockItem(ModBlocks.LIGHT_BLUE_BARBATINE.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> BLUE_BARBATINE = ITEMS.register("blue_barbatine", () ->
+            new BlockItem(ModBlocks.BLUE_BARBATINE.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> PURPLE_BARBATINE = ITEMS.register("purple_barbatine", () ->
+            new BlockItem(ModBlocks.PURPLE_BARBATINE.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> MAGENTA_BARBATINE = ITEMS.register("magenta_barbatine", () ->
+            new BlockItem(ModBlocks.MAGENTA_BARBATINE.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> PINK_BARBATINE = ITEMS.register("pink_barbatine", () ->
+            new BlockItem(ModBlocks.PINK_BARBATINE.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> WHITE_BARBATINE = ITEMS.register("white_barbatine", () ->
+            new BlockItem(ModBlocks.WHITE_BARBATINE.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> LIGHT_GRAY_BARBATINE = ITEMS.register("light_gray_barbatine", () ->
+            new BlockItem(ModBlocks.LIGHT_GRAY_BARBATINE.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> GRAY_BARBATINE = ITEMS.register("gray_barbatine", () ->
+            new BlockItem(ModBlocks.GRAY_BARBATINE.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> BLACK_BARBATINE = ITEMS.register("black_barbatine", () ->
+            new BlockItem(ModBlocks.BLACK_BARBATINE.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> BROWN_BARBATINE = ITEMS.register("brown_barbatine", () ->
+            new BlockItem(ModBlocks.BROWN_BARBATINE.get(), new Item.Properties()));
+
+
     public static final RegistryObject<Item> RED_LATTICE = ITEMS.register("red_lattice", () ->
             new BlockItem(ModBlocks.RED_LATTICE.get(), new Item.Properties()));
 
@@ -306,12 +357,6 @@ public class ModItems {
             )
     );
 
-    public static final RegistryObject<Item> PRISMATIC_SNOW = ITEMS.register("prismatic_snow", () ->
-            new BlockItem(
-                    ModBlocks.PRISMATIC_SNOW.get(),
-                    new Item.Properties()
-            )
-    );
 
     public static final RegistryObject<Item> MACADAM = ITEMS.register("macadam", () ->
             new BlockItem(

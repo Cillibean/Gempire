@@ -711,7 +711,6 @@ public class ModCreativeModeTabs {
                 populator.accept(ModBlocks.CUT_PINK_SANDSTONE_SLAB.get());
                 populator.accept(ModBlocks.CHISELED_PINK_SANDSTONE.get());
 
-                populator.accept(ModBlocks.PRISMATIC_SNOW.get());
                 populator.accept(ModBlocks.MACADAM.get());
 
                 populator.accept(ModItems.DESOLATE_GRASS.get());
@@ -839,6 +838,24 @@ public class ModCreativeModeTabs {
                 populator.accept(ModItems.CRYSTAL_TRAPDOOR.get());
                 populator.accept(ModItems.CRYSTAL_SIGN.get());
                 populator.accept(ModItems.CRYSTAL_HANGING_SIGN.get());
+
+                populator.accept(ModItems.BARBATINE.get());
+                populator.accept(ModItems.RED_BARBATINE.get());
+                populator.accept(ModItems.ORANGE_BARBATINE.get());
+                populator.accept(ModItems.YELLOW_BARBATINE.get());
+                populator.accept(ModItems.LIME_BARBATINE.get());
+                populator.accept(ModItems.GREEN_BARBATINE.get());
+                populator.accept(ModItems.CYAN_BARBATINE.get());
+                populator.accept(ModItems.LIGHT_BLUE_BARBATINE.get());
+                populator.accept(ModItems.BLUE_BARBATINE.get());
+                populator.accept(ModItems.MAGENTA_BARBATINE.get());
+                populator.accept(ModItems.PURPLE_BARBATINE.get());
+                populator.accept(ModItems.PINK_BARBATINE.get());
+                populator.accept(ModItems.WHITE_BARBATINE.get());
+                populator.accept(ModItems.LIGHT_GRAY_BARBATINE.get());
+                populator.accept(ModItems.GRAY_BARBATINE.get());
+                populator.accept(ModItems.BLACK_BARBATINE.get());
+                populator.accept(ModItems.BROWN_BARBATINE.get());
 
                 populator.accept(ModItems.RED_LATTICE.get());
                 populator.accept(ModItems.ORANGE_LATTICE.get());
