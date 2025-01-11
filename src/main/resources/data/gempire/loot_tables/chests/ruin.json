@@ -331,6 +331,25 @@
       ]
     },
     {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "gempire:remnants_music_disc"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "gempire:fragments_music_disc"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:random_chance",
+          "chance": 0.05
+        }
+      ]
+    },
+    {
       "rolls": {
         "min": 1,
         "max": 4

@@ -38,6 +38,7 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.Objects;
 
 public class EntityAlabasterEmpress extends EntityBoss implements FlyingAnimal {
 
@@ -139,7 +140,7 @@ public class EntityAlabasterEmpress extends EntityBoss implements FlyingAnimal {
             if (this.random.nextInt(20) == 1 && beamcooldown <= 0) beam();
             if (this.random.nextInt(20) == 1 && orbcooldown <= 0) shooting = true;
         }
-        if (beamcooldown == -40) {
+        if (beamcooldown == -40 && this.getTarget() != null) {
             this.getTarget().hurt(this.damageSources().mobAttack(this), 4f);
         }
 

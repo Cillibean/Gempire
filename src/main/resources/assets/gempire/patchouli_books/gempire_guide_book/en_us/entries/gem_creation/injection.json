@@ -27,11 +27,10 @@
       "text": "A basic setup for gem injection requires Chroma and gem essences.",
       "multiblock": {
         "pattern": [
-          [
-            "_0_",
-            "_1_",
-            "_2_"
-          ]
+          ["0"],
+          ["_"],
+          ["1"],
+          ["2"]
         ],
         "mapping": {
           "0": "gempire:power_crystal_block[facing=up]",
