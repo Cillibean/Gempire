@@ -8,7 +8,8 @@
       "type": "patchouli:entity",
       "entity": "gempire:opal_mantashark",
       "name": "Opalized Mantashark",
-      "rotate": "true"
+      "rotate": "true",
+      "scale": 0.8
     },
     {
       "type": "patchouli:text",

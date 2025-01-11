@@ -1,0 +1,71 @@
+{
+  "name": "Injecting",
+  "icon": "gempire:tank_block",
+  "advancement": "gempire:injection/obtain_tank",
+  "category": "gempire:gem_creation_category",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "In order to Inject, first you must obtain a drill, a power crystal and an injector tank. A mica and a pebble may be useful to you."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "gempire:tank",
+      "text": "Injector tank recipe."
+    },
+    {
+      "type": "patchouli:image",
+      "title": "Injector Examples",
+      "images": [
+        "gempire:textures/gui/patchouli/entries/injectors.png"
+      ],
+      "border": true
+    },
+    {
+      "type": "patchouli:multiblock",
+      "name": "Injector Multiblock",
+      "text": "A basic setup for gem injection requires Chroma and gem essences.",
+      "multiblock": {
+        "pattern": [
+          [
+            "_0_",
+            "_1_",
+            "_2_"
+          ]
+        ],
+        "mapping": {
+          "0": "gempire:power_crystal_block[facing=up]",
+          "1": "gempire:tank_block",
+          "2": "gempire:drill_block"
+        },
+        "symmetrical": true
+      }
+    },
+    {
+      "type": "patchouli:spotlight",
+      "link_recipe ": false,
+      "item": "gempire:special_chroma",
+      "text": "After opening the GUI, place the Chroma you'd like to use in the first slot to the right of the essence bars.$(br2)The Chroma determines the gem's color if it has multiple variants. Prismatic Chroma gives a random color or an exclusive color variant."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The following slot next to the Chroma slot is used for primer items. These items help influence a gem type to pop out from the ground.$(br2)Gem pages list their favored primer item for injection."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Gem Essence",
+      "link_recipe ": false,
+      "item": "gempire:white_essence_bucket,gempire:yellow_essence_bucket,gempire:blue_essence_bucket,gempire:pink_essence_bucket",
+      "text": "Don't forget to fill your bars! There's a slot at the top of the bars for gem essence bottles and congealed gem essences.$(br2)Each gem requires a specific color combination, but using all four essences will give any gem.$(br2)Click the small dots under each bar to select the color you want to use."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Something to note is that tier two injectors have more slots available. These are used for prime boost items and speed boost items, influencing quality and emergence time."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Injecting",
+      "text": "Last but not least: in order to inject you can place a button, hand pedestal or some form of a redstone contraption leading to the back of the injector tank block.$(br2)After triggering it this will make the injector place a gem seed into the earth, which slowly drains nearby blocks to form a gem."
+    }
+  ]
+}
