@@ -72,11 +72,13 @@ public class RenderHunter extends GeoEntityRenderer<EntityHunter> {
 
             protected void renderStackForBone(PoseStack poseStack, GeoBone bone, ItemStack stack, EntityHunter animatable, MultiBufferSource bufferSource, float partialTick, int packedLight, int packedOverlay) {
                 if (stack == RenderHunter.this.mainHandItem) {
+                    poseStack.translate(0.0, -1.6, 0.5);
                     poseStack.mulPose(Axis.XP.rotationDegrees(-90.0F));
                     if (stack.getItem() instanceof ShieldItem) {
                         poseStack.translate(0.0, 0.125, -0.25);
                     }
                 } else if (stack == RenderHunter.this.offhandItem) {
+                    poseStack.translate(0.0, -1.6, 0.5);
                     poseStack.mulPose(Axis.XP.rotationDegrees(-90.0F));
                     if (stack.getItem() instanceof ShieldItem) {
                         poseStack.translate(0.0, 0.125, 0.25);

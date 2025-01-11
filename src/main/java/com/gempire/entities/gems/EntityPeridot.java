@@ -32,6 +32,7 @@ import net.minecraft.world.phys.Vec3;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 
 public class EntityPeridot extends EntityGem {
     public EntityPeridot(EntityType<? extends PathfinderMob> type, Level worldIn) {
@@ -177,10 +178,12 @@ public class EntityPeridot extends EntityGem {
     }
 
     public void setWarpAmounts(String value) {
-        String[] strings = value.split(",");
-        warpMaterialAmounts.clear();
-        for (String string : strings) {
-            warpMaterialAmounts.add(Integer.parseInt(string));
+        if (!value.isEmpty()) {
+            String[] strings = value.split(",");
+            warpMaterialAmounts.clear();
+            for (String string : strings) {
+                warpMaterialAmounts.add(Integer.parseInt(string));
+            }
         }
     }
 
@@ -195,10 +198,12 @@ public class EntityPeridot extends EntityGem {
     }
 
     public void setWarpMaterials(String value) {
-        String[] strings = value.split(",");
-        warpMaterials.clear();
-        for (String string : strings) {
-            warpMaterials.add(Integer.parseInt(string));
+        if (!Objects.equals(value, "")) {
+            String[] strings = value.split(",");
+            warpMaterials.clear();
+            for (String string : strings) {
+                warpMaterials.add(Integer.parseInt(string));
+            }
         }
     }
 

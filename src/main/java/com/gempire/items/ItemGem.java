@@ -160,11 +160,13 @@ public class ItemGem extends Item {
         CompoundTag tag = itemStack.getTag();
         return tag != null;
     }
+
     //(?i) means case sensitive
 
     public boolean getCracked(ItemStack stack) {
         if (checkTags(stack)) {
-            return stack.getOrCreateTag().getBoolean("cracked");
+            String[] crackShatter = stack.getTag().getString("crackShatter").split(",");
+            return Boolean.parseBoolean(crackShatter[0]);
         } else {
             return false;
         }
@@ -172,10 +174,10 @@ public class ItemGem extends Item {
 
     public boolean getSludged(ItemStack stack) {
         if (checkTags(stack)) {
-            return stack.getOrCreateTag().getInt("sludgeAmount") >= 5;
-        } else {
-            return false;
+            String[] crackShatter = stack.getTag().getString("crackShatter").split(",");
+            if (crackShatter.length > 1) return Integer.parseInt(crackShatter[3]) >= 5;
         }
+        return false;
     }
     public boolean formGem(Level world, @Nullable Player player, BlockPos pos, ItemStack stack, @Nullable ItemEntity item) {
         if (!world.isClientSide) {
@@ -533,22 +535,19 @@ public class ItemGem extends Item {
 
     public void countdown(ItemStack stack, ItemEntity entity) {
             if (!getCracked(stack) && !getSludged(stack)) {
-                if (stack.getOrCreateTag().contains("assignedID")) {
-                    System.out.println("assigned id " + stack.getOrCreateTag().getUUID("assignedID"));
-                }
                 if(this.countdown > 0){
-                    if(this.countdown < (int)Math.floor(this.coundownMax / 6)){
+                    if(this.countdown < 100){
                         this.doEffect = true;
                         float f = (this.rand.nextFloat() - 0.5F) * 2.0F;
                         float f1 = (this.rand.nextFloat() - 0.5F) * 2.0F;
                         float f2 = (this.rand.nextFloat() - 0.5F) * 2.0F;
-                        entity.level().addParticle(ParticleTypes.EXPLOSION, entity.getX() + (double)f, entity.getY() + 2.0D + (double)f1, entity.getZ() + (double)f2, 0.0D, 0.0D, 0.0D);
+                        entity.level().addParticle(ParticleTypes.END_ROD, entity.getX() + (double)f, entity.getY() + 1D + (double)f1, entity.getZ() + (double)f2, 0.0D, 0.0D, 0.0D);
+                        entity.setDeltaMovement(0, 0.1, 0);
                     }
                     this.countdown--;
-                }
-                else{
+                } else {
                     this.formGem(entity.level(), null, entity.blockPosition(), stack, entity);
-                    this.countdown = this.coundownMax;
+                    countdown = coundownMax;
                 }
             }
     }
