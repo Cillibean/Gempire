@@ -1,0 +1,28 @@
+{
+  "name": "Cry me A River",
+  "icon": "gempire:guardian_tear",
+  "advancement": "gempire:desolate_lands/root",
+  "category": "gempire:mirrored_seas",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Guardian Tears",
+      "item": "gempire:guardian_tear",
+      "text": "A glimmering crystallized teardrop. You'll need to carry her tears in an opalescent bottle."
+    },
+    {
+      "type": "patchouli:multiblock",
+      "name": "Vase of Tears",
+      "text": "Stone hands have cradled her despair for thousands of years.",
+      "multiblock": {
+        "pattern": [
+          ["0"]
+        ],
+        "mapping": {
+          "0": "gempire:guardian_vase"
+        },
+        "symmetrical": true
+      }
+    }
+  ]
+}

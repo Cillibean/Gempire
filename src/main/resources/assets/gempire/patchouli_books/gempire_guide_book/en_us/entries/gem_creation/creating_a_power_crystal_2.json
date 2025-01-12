@@ -1,7 +1,7 @@
 {
   "name": "Power Crystal Mk-II",
   "icon": "gempire:power_crystal_block_tier_2",
-  "advancement": "gempire:root",
+  "advancement": "gempire:injection/obtain_power_crystal",
   "category": "gempire:gem_creation_category",
   "pages": [
     {

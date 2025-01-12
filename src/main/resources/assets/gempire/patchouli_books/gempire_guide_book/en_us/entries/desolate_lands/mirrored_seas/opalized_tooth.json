@@ -1,7 +1,7 @@
 {
   "name": "Opalized Tooth",
   "icon": "gempire:opalized_tooth",
-  "advancement": "gempire:root",
+  "advancement": "gempire:desolate_lands/kill_opal_mantashark",
   "category": "gempire:mirrored_seas",
   "pages": [
     {

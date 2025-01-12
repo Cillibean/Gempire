@@ -1,0 +1,28 @@
+{
+  "name": "A Lost Crown",
+  "icon": "gempire:empress_star",
+  "advancement": "gempire:desolate_lands/root",
+  "category": "gempire:prismatic_gates",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Empress's Star",
+      "item": "gempire:empress_star",
+      "text": "A brilliant stone trapped in a lone crown. You'll need a strong set of cutting shears to remove it properly."
+    },
+    {
+      "type": "patchouli:multiblock",
+      "name": "Crown of Stars",
+      "text": "A trinket once beloved by all.",
+      "multiblock": {
+        "pattern": [
+          ["0"]
+        ],
+        "mapping": {
+          "0": "gempire:empress_crown"
+        },
+        "symmetrical": true
+      }
+    }
+  ]
+}

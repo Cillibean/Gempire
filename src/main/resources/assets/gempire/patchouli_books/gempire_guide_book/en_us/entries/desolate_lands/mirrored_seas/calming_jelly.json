@@ -1,7 +1,7 @@
 {
   "name": "Calming Jelly",
   "icon": "gempire:calming_jelly",
-  "advancement": "gempire:root",
+  "advancement": "gempire:desolate_lands/kill_sorrow_jelly",
   "category": "gempire:mirrored_seas",
   "pages": [
     {

@@ -5,21 +5,16 @@
   "category": "gempire:gem_creation_category",
   "pages": [
     {
-      "type": "patchouli:text",
-      "text": "In order to Inject, first you must obtain a drill, a power crystal and an injector tank. A mica and a pebble may be useful to you."
-    },
-    {
-      "type": "patchouli:crafting",
-      "recipe": "gempire:tank",
-      "text": "Injector tank recipe."
-    },
-    {
       "type": "patchouli:image",
       "title": "Injector Examples",
       "images": [
         "gempire:textures/gui/patchouli/entries/injectors.png"
       ],
       "border": true
+    },
+    {
+      "type": "patchouli:text",
+      "text": "In order to Inject, first you must obtain a drill, a power crystal and an injector tank. A mica and a pebble may be useful to you."
     },
     {
       "type": "patchouli:multiblock",

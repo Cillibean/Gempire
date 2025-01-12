@@ -1,7 +1,7 @@
 {
   "name": "Incubation",
   "icon": "gempire:incubator_block",
-  "advancement": "gempire:incubation/obtain_incubator",
+  "advancement": "gempire:root",
   "category": "gempire:gem_creation_category",
   "pages": [
     {

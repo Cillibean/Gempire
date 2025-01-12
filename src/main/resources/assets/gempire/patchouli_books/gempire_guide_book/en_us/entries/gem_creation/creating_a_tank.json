@@ -1,0 +1,13 @@
+{
+  "name": "Making a Tank",
+  "icon": "gempire:tank_block",
+  "advancement": "gempire:root",
+  "category": "gempire:gem_creation_category",
+  "pages": [
+    {
+      "type": "patchouli:crafting",
+      "recipe": "gempire:tank",
+      "text": "An injector tank recipe. Self explanatory, really."
+    }
+  ]
+}

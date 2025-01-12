@@ -1,7 +1,7 @@
 {
   "name": "Making a Drill",
   "icon": "gempire:drill_block",
-  "advancement": "gempire:injection/obtain_drill",
+  "advancement": "gempire:root",
   "category": "gempire:gem_creation_category",
   "pages": [
     {
