@@ -85,7 +85,7 @@ public class ModelLapis<T extends EntityGem> extends ModelGem<T> {
 
 	@Override
 	public void setupAnim(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		if (!((EntityLapis) entityIn).flying) {
+		if (!((EntityLapis) entityIn).flying || entityIn.getControllingPassenger() == null) {
 			this.setRotateAngle(body, 0, 0, 0);
 			this.setRotateAngle(head, headPitch * 0.5f * ((float) Math.PI / 180F), netHeadYaw * .5f * ((float) Math.PI / 180F), 0);
 			this.setRotateAngle(left_arm, Mth.cos(limbSwing * 0.5F + (float) Math.PI) * limbSwingAmount * 0.8f, 0, 0);

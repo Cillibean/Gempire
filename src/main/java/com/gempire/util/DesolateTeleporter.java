@@ -17,9 +17,11 @@ import java.util.function.Function;
 public class DesolateTeleporter implements ITeleporter {
     public static BlockPos thisPos = BlockPos.ZERO;
     public static boolean insideDimension = true;
-    public DesolateTeleporter(BlockPos pos, boolean insideDim) {
+    public static boolean placePad = true;
+    public DesolateTeleporter(BlockPos pos, boolean insideDim, boolean placePad) {
         thisPos = pos;
         insideDimension = insideDim;
+        this.placePad = placePad;
     }
 
     @Override
@@ -39,7 +41,7 @@ public class DesolateTeleporter implements ITeleporter {
 
         entity.setPos(destinationPos.getX(), destinationPos.getY()+3, destinationPos.getZ());
 
-        if (insideDimension || entity.getBlockStateOn() != ModBlocks.GALAXY_WARP.get().defaultBlockState()) {
+        if ((insideDimension || entity.getBlockStateOn() != ModBlocks.GALAXY_WARP.get().defaultBlockState()) && placePad) {
             boolean doSetBlock = true;
             for (BlockPos checkPos : BlockPos.betweenClosed(destinationPos.below(10).west(10),
                     destinationPos.above(10).east(10))) {

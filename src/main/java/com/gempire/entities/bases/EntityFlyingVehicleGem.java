@@ -127,7 +127,7 @@ public abstract class EntityFlyingVehicleGem extends EntityGem implements Player
         double forwardz = pPlayer.zza;
 
         // make backward movement twice as slow.
-        if (forwardz <= 0.0f) {
+        if (forwardz <= 0.0f && isFlying()) {
             forwardz *= 0.5f;
         }
 
