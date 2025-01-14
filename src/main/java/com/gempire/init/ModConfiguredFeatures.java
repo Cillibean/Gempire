@@ -40,6 +40,7 @@ public class ModConfiguredFeatures {
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> DISTANT_KEY = registerKey("distant");
     public static final ResourceKey<ConfiguredFeature<?, ?>> SHADED_KEY = registerKey("shaded");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> VERDANT_PINE_KEY = registerKey("verdant_pine");
     public static final ResourceKey<ConfiguredFeature<?, ?>> KALEIDOSCOPE_KEY = registerKey("kaleidoscope");
     public static final ResourceKey<ConfiguredFeature<?, ?>> TUNGSTEN_ORE_KEY = registerKey("tungsten_ore");
     public static final ResourceKey<ConfiguredFeature<?, ?>> THULITE_ORE_KEY = registerKey("thulite_ore");

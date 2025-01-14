@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "gempire:block/verdant_pine_slab"
+    },
+    "type=double": {
+      "model": "gempire:block/verdant_pine_planks"
+    },
+    "type=top": {
+      "model": "gempire:block/verdant_pine_slab_top"
+    }
+  }
+}

@@ -13,12 +13,17 @@ import com.gempire.client.screen.*;
 import com.gempire.client.screen.warppad.WarpConfigScreen;
 import com.gempire.client.screen.warppad.WarpSelectionScreen;
 import com.gempire.client.ter.ShellTER;
+import com.gempire.entities.bases.EntityFlyingVehicleGem;
 import com.gempire.fluids.ModFluidTypes;
 import com.gempire.init.*;
+import com.gempire.networking.C2SFlightEntityDescend;
+import com.gempire.networking.C2SFlightEntityMovement;
 import com.gempire.particle.DistantForestParticles;
 import com.gempire.tileentities.BlueAltarTE;
 import com.gempire.tileentities.WhiteAltarTE;
 import com.gempire.tileentities.YellowAltarTE;
+import com.mojang.math.Axis;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
@@ -42,6 +47,7 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.FoliageColor;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.*;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
@@ -63,6 +69,7 @@ public class ClientProxy {
 
     @Mod.EventBusSubscriber(modid = Gempire.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientModBusEvents {
+
     @SubscribeEvent
     public static void onClientSetup(EntityRenderersEvent.RegisterRenderers event) {
 
@@ -287,7 +294,8 @@ public class ClientProxy {
     @SubscribeEvent
     public static void onKeyRegister(RegisterKeyMappingsEvent event) {
         event.register(KeyBindings.WARP_KEY);
-        event.register(KeyBindings.FLIGHT_DESCENT_KEY);
+        event.register(KeyBindings.DESCENDING_KEY);
+        event.register(KeyBindings.GLIDE_KEY);
     }
 
     @SubscribeEvent
@@ -308,7 +316,75 @@ public class ClientProxy {
                 }*/
                 ModPacketHandler.INSTANCE.sendToServer(new WarpGuiKeyPressed(player.getOnPos()));
                 }
+            // Check if the entity has a controlling player
+            EntityFlyingVehicleGem flightEntity = null;
+            LocalPlayer player = Minecraft.getInstance().player;
+
+            if (Minecraft.getInstance().player != null) {
+                if (Minecraft.getInstance().player.getVehicle() instanceof EntityFlyingVehicleGem) {
+                    flightEntity = (EntityFlyingVehicleGem) Minecraft.getInstance().player.getVehicle();
+                }
             }
+
+            if (flightEntity != null) {
+                // Descend Key bind
+                if(KeyBindings.DESCENDING_KEY.isDown() && flightEntity.isFlying()) {
+                    ModMessages.sendToServer(new C2SFlightEntityDescend());
+                    flightEntity.setDescend(true);
+                } else {
+                    flightEntity.setDescend(false);
+                }
+
+                // Mount Glide Key bind
+                if (KeyBindings.GLIDE_KEY.consumeClick() && flightEntity.isFlying()) {
+                    System.out.println("glide key");
+                    flightEntity.setElytraFlying(!flightEntity.isElytraFlying());
+                    ModMessages.sendToServer(new C2SFlightEntityMovement(flightEntity.moving,
+                            flightEntity.getId(), flightEntity.isElytraFlying()));
+
+                }
+            }
+            }
+
+        @SubscribeEvent
+        public static void onPlayerRender(RenderPlayerEvent event) {
+            if (event.getEntity().getVehicle() != null) {
+                if (event.getEntity().getVehicle() instanceof EntityFlyingVehicleGem flightEntity) {
+                    if (flightEntity.isElytraFlying()) {
+                        float pXRot = flightEntity.getXRot() % 360;
+                        float pYRot = flightEntity.getYRot();
+
+                        if (pYRot < 0) {
+                            pYRot += 360;
+                        } else {
+                            pYRot = pYRot % 360;
+                        }
+
+                        // Face the player wherever the flightEntity is tilting
+                        event.getPoseStack().mulPose(Axis.XP.rotationDegrees((float) Math.cos(((pYRot * Math.PI) / 180)) * pXRot));
+                        event.getPoseStack().mulPose(Axis.ZP.rotationDegrees((float) Math.sin(((pYRot * Math.PI) / 180)) * pXRot));
+
+
+                        Vec3 vec3 = flightEntity.getViewVector(event.getPartialTick());
+                        Vec3 vec31 = flightEntity.getDeltaMovement();
+                        double d0 = vec31.horizontalDistanceSqr();
+                        double d1 = vec3.horizontalDistanceSqr();
+                        if (d0 > 0.0D && d1 > 0.0D) {
+                            double d2 = (vec31.x * vec3.x + vec31.z * vec3.z) / Math.sqrt(d0 * d1); // angle between view/delta
+                            double d3 = vec31.x * vec3.z - vec31.z * vec3.x; // positive negative change
+                            float d4 = (float)(Math.signum(d3) * Math.acos(d2)); // angle to change tilt in positive/negative
+                            // Apply Movement tilt on the X/Z axis where the flightEntity is facing
+                            // Invert cos/sin to change the Z tilt when facing N, instead of X tilt when facing N
+                            // d4 needs to be inverted to tilt when facing S
+                            event.getPoseStack().mulPose(Axis.ZP.rotation((float)Math.cos( ((pYRot * Math.PI) / 180)) * d4));
+                            event.getPoseStack().mulPose(Axis.XP.rotation((float)Math.sin( ((pYRot * Math.PI) / 180)) * -d4));
+                        }
+                    }
+
+                }
+            }
+
+        }
         }
 
     }

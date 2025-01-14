@@ -172,14 +172,11 @@ public class IncubatorTE extends BaseContainerBlockEntity implements MenuProvide
             }*/
             if (te.getItem(IncubatorTE.GEM_OUTPUT_SLOT_INDEX).isEmpty()) {
                 if (te.ticks % 50 == 0) {
-                    te.HandleChromaTick();
                     te.HandleBaseTick();
+                    te.HandleChromaTick();
                     te.HandleEssenceTick();
                     te.HandlePrimerTick();
                     te.HandleCruxTick();
-                    //te.HandleGravelTick();
-                    //te.HandleSandTick();
-                    //te.HandleClayTick();
                     te.HandleFormGemTick();
                 }
                 if (te.ticks > 25) {
@@ -190,87 +187,14 @@ public class IncubatorTE extends BaseContainerBlockEntity implements MenuProvide
             }
         }
     }
-
-    /*public void HandleGravelTick(){
-        ItemStack stack = this.getItem(IncubatorTE.BLOCK1_INPUT_SLOT_INDEX);
-        int count = stack.getCount();
-        if (count + block1Consumed >= 64) {
-            if (block1Consumed < 64) {
-                if (stack.getItem() == Blocks.BLOCK1.asItem()) {
-                    stack.shrink(1);
-                    this.block1Consumed++;
-                }
-            }
-        } else if (count + block1Consumed >= 32) {
-            if (block1Consumed < 32) {
-                if (stack.getItem() == Blocks.BLOCK1.asItem()) {
-                    stack.shrink(1);
-                    this.block1Consumed++;
-                }
-            }
-        } else if (count + block1Consumed >= 16) {
-            if (block1Consumed < 16) {
-                if (stack.getItem() == Blocks.BLOCK1.asItem()) {
-                    stack.shrink(1);
-                    this.block1Consumed++;
-                }
-            }
-        }
-    }
-
-    public void HandleSandTick(){
-        if(this.block1Consumed == IncubatorTE.MAX_BLOCK1 && this.block2Consumed < IncubatorTE.MAX_BLOCK2){
-            System.out.println(64);
-            ItemStack stack = this.getItem(IncubatorTE.BLOCK2_INPUT_SLOT_INDEX);
-            if(stack.getItem() == Blocks.BLOCK2.asItem()){
-                stack.shrink(1);
-                this.block2Consumed++;
-            }
-        } else if(this.block1Consumed == 32 && this.block2Consumed < 32){
-            System.out.println(32);
-            ItemStack stack = this.getItem(IncubatorTE.BLOCK2_INPUT_SLOT_INDEX);
-            if(stack.getItem() == Blocks.BLOCK2.asItem()){
-                stack.shrink(1);
-                this.block2Consumed++;
-            }
-        } else if(this.block1Consumed == 16 && this.block2Consumed < 16){
-            System.out.println(16);
-            ItemStack stack = this.getItem(IncubatorTE.BLOCK2_INPUT_SLOT_INDEX);
-            if(stack.getItem() == Blocks.BLOCK2.asItem()){
-                stack.shrink(1);
-                this.block2Consumed++;
-            }
-        }
-    }
-
-    public void HandleClayTick(){
-        if(this.block1Consumed == IncubatorTE.MAX_BLOCK1 && this.block2Consumed == IncubatorTE.MAX_BLOCK2 && this.block3Consumed < IncubatorTE.MAX_BLOCK3){
-            ItemStack stack = this.getItem(IncubatorTE.BLOCK3_INPUT_SLOT_INDEX);
-            if(stack.getItem() == Items.BLOCK3_BALL){
-                stack.shrink(1);
-                this.block3Consumed++;
-            }
-        } else if (this.block1Consumed == IncubatorTE.MAX_BLOCK1 / 2 && this.block2Consumed == IncubatorTE.MAX_BLOCK2/ 2 && this.block3Consumed < IncubatorTE.MAX_BLOCK3/ 2){
-            ItemStack stack = this.getItem(IncubatorTE.BLOCK3_INPUT_SLOT_INDEX);
-            if(stack.getItem() == Items.BLOCK3_BALL){
-                stack.shrink(1);
-                this.block3Consumed++;
-            }
-        } else if (this.block1Consumed == IncubatorTE.MAX_BLOCK1 / 4 && this.block2Consumed == IncubatorTE.MAX_BLOCK2/ 4 && this.block3Consumed < IncubatorTE.MAX_BLOCK3/ 4){
-            ItemStack stack = this.getItem(IncubatorTE.BLOCK3_INPUT_SLOT_INDEX);
-            if(stack.getItem() == Items.BLOCK3_BALL){
-                stack.shrink(1);
-                this.block3Consumed++;
-            }
-        }
-    }
-*/
     public void HandleChromaTick() {
-        if (!chromaConsumed) {
+        if (!chromaConsumed && baseConsumed) {
             ItemStack stack = this.getItem(IncubatorTE.CHROMA_INPUT_SLOT_INDEX);
             if (stack.getItem() instanceof ItemChroma chroma) {
-                this.chromaConsumed = true;
-                this.chromaColor = chroma.color;
+                if (chromaValid(chroma)) {
+                    this.chromaConsumed = true;
+                    this.chromaColor = chroma.color;
+                }
             }
         } else {
             ItemStack stack = this.getItem(IncubatorTE.CHROMA_INPUT_SLOT_INDEX);
@@ -281,8 +205,22 @@ public class IncubatorTE extends BaseContainerBlockEntity implements MenuProvide
         }
     }
 
+    public boolean chromaValid(ItemChroma chroma) {
+        System.out.println(gemBase);
+        if (chroma.color == 16) {
+            return true;
+        }
+        else if (gemBase.equals("inactive_topaz_base") && (chroma.color != 0 && chroma.color != 4 && chroma.color != 11 && chroma.color != 6)) {
+            return false;
+        }
+        else if (gemBase.equals("inactive_spodumene_base") && (chroma.color != 1 && chroma.color != 4 && chroma.color != 11 && chroma.color != 10 && chroma.color != 13)) {
+            return false;
+        }
+        return true;
+    }
+
     public void HandleBaseTick() {
-        if (chromaConsumed && !baseConsumed) {
+        if (!baseConsumed) {
             ItemStack stack = this.getItem(IncubatorTE.GEM_BASE_INPUT_SLOT_INDEX);
             if (stack.getItem() instanceof ItemGemBase base) {
                 this.baseConsumed = true;
@@ -351,7 +289,6 @@ public class IncubatorTE extends BaseContainerBlockEntity implements MenuProvide
                 blockAmounts[3] = stack4.getCount();
             }
             if (primer == 1) weight += 150;
-            System.out.println("weight "+weight);
             blockConsumed = blocks.get(name).containsKey(stack.getItem()) &&
                     blocks.get(name).containsKey(stack2.getItem()) &&
                     blocks.get(name).containsKey(stack3.getItem()) &&
@@ -791,16 +728,6 @@ public class IncubatorTE extends BaseContainerBlockEntity implements MenuProvide
 
 
     public void HandleFormGemTick(){
-        /*if(this.block1Consumed == IncubatorTE.MAX_BLOCK1 && this.block2Consumed == IncubatorTE.MAX_BLOCK2 && this.block3Consumed == IncubatorTE.MAX_BLOCK3 && this.chromaConsumed
-                && this.essenceConsumed) {
-            this.formGem(this.chromaColor, 0);
-        } else if (this.block1Consumed == IncubatorTE.MAX_BLOCK1 / 2 && this.block2Consumed == IncubatorTE.MAX_BLOCK2 / 2 && this.block3Consumed == IncubatorTE.MAX_BLOCK3 / 2 && this.chromaConsumed
-                && this.essenceConsumed) {
-            this.formGem(this.chromaColor, 1);
-        } else if (this.block1Consumed == IncubatorTE.MAX_BLOCK1 / 4 && this.block2Consumed == IncubatorTE.MAX_BLOCK2 / 4 && this.block3Consumed == IncubatorTE.MAX_BLOCK3 / 4 && this.chromaConsumed
-                && this.essenceConsumed) {
-            this.formGem(this.chromaColor, 2);
-        }*/
         ItemStack stack = this.getItem(IncubatorTE.PRIMER_INPUT_SLOT_INDEX);
         ItemStack bstack = this.getItem(IncubatorTE.BLOCK1_INPUT_SLOT_INDEX);
         ItemStack bstack2 = this.getItem(IncubatorTE.BLOCK2_INPUT_SLOT_INDEX);

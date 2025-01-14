@@ -188,7 +188,7 @@ public class EntityObsidian extends EntityGem {
     }
     @Override
     public boolean canOpenInventoryByDefault() {
-        return !this.isVehicle();
+        return !this.isRideable();
     }
     @Override
     public boolean hasMarkings() {
@@ -208,11 +208,6 @@ public class EntityObsidian extends EntityGem {
     @Override
     public int maxMarkings2() {
         return 1;
-    }
-
-    @Override
-    public boolean isRideable() {
-        return this.isVehicle();
     }
 
     @Override

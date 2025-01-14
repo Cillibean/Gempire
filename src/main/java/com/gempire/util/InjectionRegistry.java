@@ -207,7 +207,6 @@ public class InjectionRegistry {
         blockList.put(Blocks.SCULK_SENSOR, new CruxInfo(new int[]{0, 2, 0, 0, 0, 0}, Blocks.SCULK_SENSOR, "sculk_sensor"));
         blockList.put(Blocks.SCULK_SHRIEKER, new CruxInfo(new int[]{0, 2, 0, 0, 0, 0}, Blocks.SCULK_SHRIEKER, "sculk_shrieker"));
         blockList.put(Blocks.SCULK_VEIN, new CruxInfo(new int[]{0, 2, 0, 0, 0, 0}, Blocks.SCULK_VEIN, "sculk_vein"));
-        //TODO: decorative plants flowers bushes fungi etc +4 organic
         blockList.put(Blocks.MUDDY_MANGROVE_ROOTS, new CruxInfo(new int[]{4, 0, 0, 0, 0, 1}, Blocks.MUDDY_MANGROVE_ROOTS, "muddy_mangrove_roots"));
         blockList.put(Blocks.CONDUIT, new CruxInfo(new int[]{0, 4, 0, 0, 0, 6}, Blocks.CONDUIT, "conduit"));
         blockList.put(ModBlocks.RED_CHROMA_CRYSTAL.get(), new CruxInfo(new int[]{0, 3, 4, 0, 0, 0}, ModBlocks.RED_CHROMA_CRYSTAL.get(), "red_chroma_crystal"));

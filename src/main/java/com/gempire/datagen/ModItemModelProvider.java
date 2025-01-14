@@ -189,6 +189,12 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.DISTANT_HANGING_SIGN);
         simpleItem(ModItems.DISTANT_DOOR);
 
+        saplingItem(ModBlocks.VERDANT_PINE_SAPLING);
+        fenceItem(ModBlocks.VERDANT_PINE_FENCE, ModBlocks.VERDANT_PINE_PLANKS);
+        simpleItem(ModItems.VERDANT_PINE_SIGN);
+        simpleItem(ModItems.VERDANT_PINE_HANGING_SIGN);
+        simpleItem(ModItems.VERDANT_PINE_DOOR);
+
         saplingItem(ModBlocks.KALEIDOSCOPE_SAPLING);
         fenceItem(ModBlocks.KALEIDOSCOPE_FENCE, ModBlocks.KALEIDOSCOPE_PLANKS);
         simpleItem(ModItems.KALEIDOSCOPE_SIGN);

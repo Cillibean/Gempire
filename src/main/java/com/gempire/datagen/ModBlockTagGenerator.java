@@ -332,7 +332,25 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                         ModBlocks.DRAINED_PURPLE_STONE_LIGHT_SLAB.get(),
                         ModBlocks.DRAINED_PURPLE_GLAZED_TILE.get(),
                         ModBlocks.DRAINED_PURPLE_GLASS.get(),
-                        ModBlocks.DRAINED_PURPLE_GLASS_PANE.get()
+                        ModBlocks.DRAINED_PURPLE_GLASS_PANE.get(),
+
+                        ModBlocks.BARBATINE.get(),
+                        ModBlocks.RED_BARBATINE.get(),
+                        ModBlocks.ORANGE_BARBATINE.get(),
+                        ModBlocks.YELLOW_BARBATINE.get(),
+                        ModBlocks.LIME_BARBATINE.get(),
+                        ModBlocks.GREEN_BARBATINE.get(),
+                        ModBlocks.CYAN_BARBATINE.get(),
+                        ModBlocks.LIGHT_BLUE_BARBATINE.get(),
+                        ModBlocks.BLUE_BARBATINE.get(),
+                        ModBlocks.PURPLE_BARBATINE.get(),
+                        ModBlocks.MAGENTA_BARBATINE.get(),
+                        ModBlocks.PINK_BARBATINE.get(),
+                        ModBlocks.WHITE_BARBATINE.get(),
+                        ModBlocks.LIGHT_GRAY_BARBATINE.get(),
+                        ModBlocks.GRAY_BARBATINE.get(),
+                        ModBlocks.BLACK_BARBATINE.get(),
+                        ModBlocks.BROWN_BARBATINE.get()
                 );
 
         this.tag(BlockTags.MINEABLE_WITH_SHOVEL)
@@ -412,6 +430,7 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                         ModBlocks.KALEIDOSCOPE_FENCE.get(),
                         ModBlocks.SHADED_FENCE.get(),
                         ModBlocks.ASTER_FENCE.get(),
+                        ModBlocks.VERDANT_PINE_FENCE.get(),
                         ModBlocks.CRYSTAL_FENCE.get());
 
         this.tag(BlockTags.FENCE_GATES)
@@ -419,6 +438,7 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                         ModBlocks.KALEIDOSCOPE_FENCE_GATE.get(),
                         ModBlocks.SHADED_FENCE_GATE.get(),
                         ModBlocks.ASTER_FENCE_GATE.get(),
+                        ModBlocks.VERDANT_PINE_FENCE_GATE.get(),
                         ModBlocks.CRYSTAL_FENCE_GATE.get());
 
         this.tag(BlockTags.WALLS)
@@ -469,7 +489,12 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                         ModBlocks.CRYSTAL_WOOD.get(),
                         ModBlocks.CRYSTAL_LOG.get(),
                         ModBlocks.STRIPPED_CRYSTAL_LOG.get(),
-                        ModBlocks.STRIPPED_CRYSTAL_WOOD.get());
+                        ModBlocks.STRIPPED_CRYSTAL_WOOD.get(),
+                        ModBlocks.VERDANT_PINE_WOOD.get(),
+                        ModBlocks.VERDANT_PINE_LOG.get(),
+                        ModBlocks.STRIPPED_VERDANT_PINE_LOG.get(),
+                        ModBlocks.STRIPPED_VERDANT_PINE_WOOD.get()
+                );
 
         this.tag(BlockTags.LOGS)
                 .add(ModBlocks.DISTANT_WOOD.get(),
@@ -491,19 +516,26 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                         ModBlocks.ASTER_WOOD.get(),
                         ModBlocks.ASTER_LOG.get(),
                         ModBlocks.STRIPPED_ASTER_LOG.get(),
-                        ModBlocks.STRIPPED_ASTER_WOOD.get());
+                        ModBlocks.STRIPPED_ASTER_WOOD.get(),
+                        ModBlocks.VERDANT_PINE_WOOD.get(),
+                        ModBlocks.VERDANT_PINE_LOG.get(),
+                        ModBlocks.STRIPPED_VERDANT_PINE_LOG.get(),
+                        ModBlocks.STRIPPED_VERDANT_PINE_WOOD.get()
+                );
 
         this.tag(BlockTags.PLANKS)
                 .add(ModBlocks.DISTANT_PLANKS.get(),
                         ModBlocks.KALEIDOSCOPE_PLANKS.get(),
                         ModBlocks.SHADED_PLANKS.get(),
                         ModBlocks.ASTER_PLANKS.get(),
+                        ModBlocks.VERDANT_PINE_PLANKS.get(),
                         ModBlocks.CRYSTAL_PLANKS.get());
 
         this.tag(BlockTags.LEAVES)
                 .add(ModBlocks.DISTANT_LEAVES.get(),
                         ModBlocks.CRYSTAL_LEAVES.get(),
                         ModBlocks.KALEIDOSCOPE_LEAVES.get(),
+                        ModBlocks.VERDANT_PINE_LEAVES.get(),
                         ModBlocks.SHADED_LEAVES.get()
                 );
 

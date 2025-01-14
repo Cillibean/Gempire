@@ -1,4 +1,4 @@
-// 1.20.1	2025-01-11T11:58:36.750059	Item Models: gempire
+// 1.20.1	2025-01-12T12:25:33.246401	Item Models: gempire
 2a4c323206d2fbeca217109aa5c8a2ac8ce38701 assets/gempire/models/item/acid_spit.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/gempire/models/item/alabaster_empress_spawn_egg.json
 0da7ed67ca0a8fcb9a8ba427cc3a79d0931ef656 assets/gempire/models/item/alabaster_shards.json
@@ -196,6 +196,11 @@ efd929577dc240f35645c09c46da592a4f243472 assets/gempire/models/item/thulite_ingo
 5d46fd735381fa3ba6f64e0b7fc715ba85fc61a1 assets/gempire/models/item/transfer_contract.json
 c6f52128f4e19376a658075ea61e994c3d524de0 assets/gempire/models/item/tungsten_ingot.json
 d130fc96f9f45454888e86454278415960d1596f assets/gempire/models/item/tungsten_nugget.json
+64574a1e42ba91e6bc1282b0a6e5007873fcd53e assets/gempire/models/item/verdant_pine_door.json
+186f7c1165b8b0e4d3a1259a11b50f7d21907bab assets/gempire/models/item/verdant_pine_fence.json
+6046be0ba2ee168b2c0875c94ed1ce69791e1573 assets/gempire/models/item/verdant_pine_hanging_sign.json
+cfd34f4d2c02ddaad8bd9ace48698176bd80880c assets/gempire/models/item/verdant_pine_sapling.json
+440cd64b779f990d5f73436f34b868824e480bd5 assets/gempire/models/item/verdant_pine_sign.json
 08415d763648284899146798dbf747fe582913de assets/gempire/models/item/water_orb.json
 088de688e4764750f0f842c29609796c8677aacc assets/gempire/models/item/white_chroma.json
 4bdb9ec3f368a5e142020c99489ef9b416628b87 assets/gempire/models/item/white_destabilizer.json

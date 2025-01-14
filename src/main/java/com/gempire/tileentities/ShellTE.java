@@ -251,7 +251,6 @@ public class ShellTE extends RandomizableContainerBlockEntity implements MenuPro
 
     public void HandleEssenceTick() {
         if (this.gravelConsumed == ShellTE.MAX_GRAVEL && this.sandConsumed == ShellTE.MAX_SAND && this.clayConsumed == ShellTE.MAX_CLAY && this.chromaConsumed) {
-                //TODO: MAKE THERE BE A CHANCE OF MAGIC MOSS APPEARING
                 if (this.level.getBlockState(this.worldPosition.offset(ShellTE.direction(4))).getBlock() == ModBlocks.WHITE_ESSENCE_BLOCK.get()) {
                     LiquidBlock block = (LiquidBlock) this.level.getBlockState(this.worldPosition.offset(ShellTE.direction(4))).getBlock();
                     if (block.getFluid() == ModFluids.WHITE_ESSENCE.get()) {

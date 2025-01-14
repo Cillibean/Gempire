@@ -11,4 +11,5 @@ public class ModWoodTypes {
     public static final WoodType CRYSTAL = WoodType.register(new WoodType(Gempire.MODID + ":crystal", BlockSetType.OAK));
     public static final WoodType KALEIDOSCOPE = WoodType.register(new WoodType(Gempire.MODID + ":kaleidoscope", BlockSetType.OAK));
     public static final WoodType SHADED = WoodType.register(new WoodType(Gempire.MODID + ":shaded", BlockSetType.OAK));
+    public static final WoodType VERDANT_PINE = WoodType.register(new WoodType(Gempire.MODID + ":verdant_pine", BlockSetType.OAK));
 }

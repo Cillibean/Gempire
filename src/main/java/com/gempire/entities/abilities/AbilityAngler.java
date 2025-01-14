@@ -12,6 +12,7 @@ import java.util.List;
 
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
@@ -29,23 +30,21 @@ public class AbilityAngler extends Ability implements IIdleAbility {
 
     @Override
     public void execute() {
-        if (this.holder.tickCount % 200 == 0) {
+        if (this.holder.tickCount % 100 == 0) {
             if (this.holder.isInWater()) {
                 if (!this.holder.level().isClientSide) {
-                    /*ItemStack rod = new ItemStack(Items.FISHING_ROD);
+                    ItemStack rod = new ItemStack(Items.FISHING_ROD);
                     rod.enchant(Enchantments.FISHING_LUCK, 1);
                     LootTable loottable = this.holder.level().getServer().getLootData().getLootTable(BuiltInLootTables.FISHING);
-                    List<ItemStack> items = loottable.getRandomItems((new LootContext.Builder((ServerLevel) this.holder.level()))
+                    List<ItemStack> items = loottable.getRandomItems((new LootParams.Builder((ServerLevel) holder.level()))
                             .withLuck(this.holder.getLuck())
-                            .withRandom(this.holder.getRandom())
                             .withParameter(LootContextParams.TOOL, rod)
                             .withParameter(LootContextParams.ORIGIN, this.holder.position())
                             .create(LootContextParamSets.FISHING));
                     for (ItemStack stack : items) {
                         this.holder.spawnAtLocation(stack);
                         this.holder.playSound(this.holder.getInstrument());
-                    }*/
-                    //TODO: fix angler
+                    }
                 }
             }
         }

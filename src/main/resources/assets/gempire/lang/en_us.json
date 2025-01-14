@@ -385,6 +385,22 @@
   "block.gempire.distant_door": "Distant Door",
   "block.gempire.distant_trapdoor": "Distant Trapdoor",
 
+  "block.gempire.verdant_pine_log": "Verdant Pine Log",
+  "block.gempire.verdant_pine_wood": "Verdant Pine Wood",
+  "block.gempire.stripped_verdant_pine_log": "Stripped Verdant Pine Log",
+  "block.gempire.stripped_verdant_pine_wood": "Stripped Verdant Pine Wood",
+  "block.gempire.verdant_pine_leaves": "Verdant Pine Leaves",
+  "block.gempire.verdant_pine_sapling": "Verdant Pine Sapling",
+  "block.gempire.verdant_pine_planks": "Verdant Pine Planks",
+  "block.gempire.verdant_pine_slab": "Verdant Pine Slab",
+  "block.gempire.verdant_pine_stairs": "Verdant Pine Stairs",
+  "block.gempire.verdant_pine_fence": "Verdant Pine Fence",
+  "block.gempire.verdant_pine_fence_gate": "Verdant Pine Fence Gate",
+  "block.gempire.verdant_pine_sign": "Verdant Pine Sign",
+  "block.gempire.verdant_pine_hanging_sign": "Verdant Pine Hanging Sign",
+  "block.gempire.verdant_pine_door": "Verdant Pine Door",
+  "block.gempire.verdant_pine_trapdoor": "Verdant Pine Trapdoor",
+
   "block.gempire.aster_log": "Aster Log",
   "block.gempire.aster_wood": "Aster Wood",
   "block.gempire.stripped_aster_log": "Stripped Aster Log",
@@ -1567,6 +1583,11 @@
   "fluid_type.gempire.white_essence_fluid": "White Gem Essence",
 
   "trim_material.gempire.prismatic": "Prismatic Material",
+
+  "key.categories.gempire": "Gempire",
+  "key.gempire.descend": "Lapis Descend",
+  "key.gempire.glide": "Lapis Glide",
+  "key.gempire.warp": "Warp",
 
   "block.minecraft.banner.gempire.diamond.white": "White Diamond Insignia",
   "block.minecraft.banner.gempire.diamond.red": "Red Diamond Insignia",

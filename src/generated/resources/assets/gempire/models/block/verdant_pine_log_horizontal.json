@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column_horizontal",
+  "textures": {
+    "end": "gempire:block/verdant_pine_log_top",
+    "side": "gempire:block/verdant_pine_log"
+  }
+}

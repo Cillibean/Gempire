@@ -3,10 +3,7 @@ package com.gempire.init;
 import com.gempire.Gempire;
 import com.gempire.blocks.*;
 import com.gempire.blocks.machine.*;
-import com.gempire.worldgen.tree.CrystalTreeGrower;
-import com.gempire.worldgen.tree.DistantTreeGrower;
-import com.gempire.worldgen.tree.KaleidoscopeTreeGrower;
-import com.gempire.worldgen.tree.ShadedTreeGrower;
+import com.gempire.worldgen.tree.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
@@ -23,10 +20,6 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
 public class ModBlocks {
-
-    //TODO: IMPLEMENT BLOCKS
-    // PHOSPHORUS COLUMN - a wall-sized light block that comes in all colours that morganite makes
-    // DESTAB FIELDS - hurt gems when touched
 
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Gempire.MODID);
 
@@ -622,6 +615,86 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> DISTANT_TRAPDOOR = BLOCKS.register("distant_trapdoor",
             () -> new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_TRAPDOOR), ModWoodTypes.DISTANT.setType()));
+
+    public static final RegistryObject<Block> VERDANT_PINE_LOG = BLOCKS.register("verdant_pine_log", () ->
+            new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG)));
+
+    public static final RegistryObject<Block> STRIPPED_VERDANT_PINE_LOG = BLOCKS.register("stripped_verdant_pine_log", () ->
+            new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_LOG)));
+
+    public static final RegistryObject<Block> VERDANT_PINE_WOOD = BLOCKS.register("verdant_pine_wood", () ->
+            new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG)));
+
+    public static final RegistryObject<Block> STRIPPED_VERDANT_PINE_WOOD = BLOCKS.register("stripped_verdant_pine_wood", () ->
+            new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_WOOD)));
+
+    public static final RegistryObject<Block> VERDANT_PINE_LEAVES = BLOCKS.register("verdant_pine_leaves", () ->
+            new LeavesBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES)) {
+                @Override
+                public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return true;
+                }
+
+                @Override
+                public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return 60;
+                }
+
+                @Override
+                public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return 30;
+                }
+            });
+
+    public static final RegistryObject<Block> VERDANT_PINE_SAPLING = BLOCKS.register("verdant_pine_sapling", () ->
+            new SaplingBlock(new VerdantPineTreeGrower(), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)));
+
+    public static final RegistryObject<Block> VERDANT_PINE_PLANKS = BLOCKS.register("verdant_pine_planks", () ->
+            new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)) {
+                @Override
+                public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return true;
+                }
+
+                @Override
+                public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return 20;
+                }
+
+                @Override
+                public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return 5;
+                }
+            });
+
+    public static final RegistryObject<Block> VERDANT_PINE_SLAB = BLOCKS.register("verdant_pine_slab", () ->
+            new SlabBlock(BlockBehaviour.Properties.copy(Blocks.OAK_SLAB)));
+
+    public static final RegistryObject<Block> VERDANT_PINE_STAIRS = BLOCKS.register("verdant_pine_stairs", () ->
+            new StairBlock(() -> ModBlocks.VERDANT_PINE_PLANKS.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.OAK_STAIRS)));
+    public static final RegistryObject<Block> VERDANT_PINE_SIGN = BLOCKS.register("verdant_pine_sign", () ->
+            new ModStandingSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_SIGN), ModWoodTypes.VERDANT_PINE));
+
+    public static final RegistryObject<Block> VERDANT_PINE_HANGING_SIGN = BLOCKS.register("verdant_pine_hanging_sign", () ->
+            new ModHangingSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_HANGING_SIGN), ModWoodTypes.VERDANT_PINE));
+
+    public static final RegistryObject<Block> VERDANT_PINE_WALL_SIGN = BLOCKS.register("verdant_pine_wall_sign", () ->
+            new ModWallSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_WALL_SIGN), ModWoodTypes.VERDANT_PINE));
+
+    public static final RegistryObject<Block> VERDANT_PINE_WALL_HANGING_SIGN = BLOCKS.register("verdant_pine_wall_hanging_sign", () ->
+            new ModWallHangingSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_WALL_HANGING_SIGN), ModWoodTypes.VERDANT_PINE));
+
+    public static final RegistryObject<Block> VERDANT_PINE_FENCE = BLOCKS.register("verdant_pine_fence",
+            () -> new FenceBlock(BlockBehaviour.Properties.copy(Blocks.OAK_FENCE)));
+
+    public static final RegistryObject<Block> VERDANT_PINE_FENCE_GATE = BLOCKS.register("verdant_pine_fence_gate",
+            () -> new FenceGateBlock(BlockBehaviour.Properties.copy(Blocks.OAK_FENCE_GATE), SoundEvents.FENCE_GATE_OPEN, SoundEvents.FENCE_GATE_CLOSE));
+
+    public static final RegistryObject<Block> VERDANT_PINE_DOOR = BLOCKS.register("verdant_pine_door",
+            () -> new DoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_DOOR), ModWoodTypes.VERDANT_PINE.setType()));
+
+    public static final RegistryObject<Block> VERDANT_PINE_TRAPDOOR = BLOCKS.register("verdant_pine_trapdoor",
+            () -> new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_TRAPDOOR), ModWoodTypes.VERDANT_PINE.setType()));
 
     public static final RegistryObject<Block> ASTER_LOG = BLOCKS.register("aster_log", () ->
             new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG)));

@@ -19,6 +19,10 @@
     "gempire:aster_wood",
     "gempire:aster_log",
     "gempire:stripped_aster_log",
-    "gempire:stripped_aster_wood"
+    "gempire:stripped_aster_wood",
+    "gempire:verdant_pine_wood",
+    "gempire:verdant_pine_log",
+    "gempire:stripped_verdant_pine_log",
+    "gempire:stripped_verdant_pine_wood"
   ]
 }

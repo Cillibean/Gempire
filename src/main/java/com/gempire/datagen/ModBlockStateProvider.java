@@ -80,6 +80,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockWithItem(ModBlocks.SHADED_PLANKS);
         blockWithItem(ModBlocks.CRYSTAL_PLANKS);
         blockWithItem(ModBlocks.ASTER_PLANKS);
+        blockWithItem(ModBlocks.VERDANT_PINE_PLANKS);
 
         stairsBlock((StairBlock) ModBlocks.DISTANT_STAIRS.get(), blockTexture(ModBlocks.DISTANT_PLANKS.get()));
         slabBlock((SlabBlock) ModBlocks.DISTANT_SLAB.get(), blockTexture(ModBlocks.DISTANT_PLANKS.get()), blockTexture(ModBlocks.DISTANT_PLANKS.get()));
@@ -96,6 +97,9 @@ public class ModBlockStateProvider extends BlockStateProvider {
         stairsBlock((StairBlock) ModBlocks.ASTER_STAIRS.get(), blockTexture(ModBlocks.ASTER_PLANKS.get()));
         slabBlock((SlabBlock) ModBlocks.ASTER_SLAB.get(), blockTexture(ModBlocks.ASTER_PLANKS.get()), blockTexture(ModBlocks.ASTER_PLANKS.get()));
 
+        stairsBlock((StairBlock) ModBlocks.VERDANT_PINE_STAIRS.get(), blockTexture(ModBlocks.VERDANT_PINE_PLANKS.get()));
+        slabBlock((SlabBlock) ModBlocks.VERDANT_PINE_SLAB.get(), blockTexture(ModBlocks.VERDANT_PINE_PLANKS.get()), blockTexture(ModBlocks.VERDANT_PINE_PLANKS.get()));
+
         fenceBlock((FenceBlock) ModBlocks.DISTANT_FENCE.get(), blockTexture(ModBlocks.DISTANT_PLANKS.get()));
         fenceGateBlock((FenceGateBlock) ModBlocks.DISTANT_FENCE_GATE.get(), blockTexture(ModBlocks.DISTANT_PLANKS.get()));
 
@@ -110,6 +114,9 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         fenceBlock((FenceBlock) ModBlocks.ASTER_FENCE.get(), blockTexture(ModBlocks.ASTER_PLANKS.get()));
         fenceGateBlock((FenceGateBlock) ModBlocks.ASTER_FENCE_GATE.get(), blockTexture(ModBlocks.ASTER_PLANKS.get()));
+
+        fenceBlock((FenceBlock) ModBlocks.VERDANT_PINE_FENCE.get(), blockTexture(ModBlocks.VERDANT_PINE_PLANKS.get()));
+        fenceGateBlock((FenceGateBlock) ModBlocks.VERDANT_PINE_FENCE_GATE.get(), blockTexture(ModBlocks.VERDANT_PINE_PLANKS.get()));
 
         blockItem(ModBlocks.DISTANT_STAIRS);
         blockItem(ModBlocks.DISTANT_SLAB);
@@ -150,6 +157,14 @@ public class ModBlockStateProvider extends BlockStateProvider {
         doorBlockWithRenderType((DoorBlock)ModBlocks.ASTER_DOOR.get(), modLoc("block/aster_door_bottom"), modLoc("block/aster_door_top"), "cutout");
         trapdoorBlockWithRenderType((TrapDoorBlock) ModBlocks.ASTER_TRAPDOOR.get(), modLoc("block/aster_trapdoor"), true, "cutout");
         blockItem(ModBlocks.ASTER_TRAPDOOR, "_bottom");
+
+        blockItem(ModBlocks.VERDANT_PINE_STAIRS);
+        blockItem(ModBlocks.VERDANT_PINE_SLAB);
+        blockItem(ModBlocks.VERDANT_PINE_FENCE_GATE);
+
+        doorBlockWithRenderType((DoorBlock)ModBlocks.VERDANT_PINE_DOOR.get(), modLoc("block/verdant_pine_door_bottom"), modLoc("block/verdant_pine_door_top"), "cutout");
+        trapdoorBlockWithRenderType((TrapDoorBlock) ModBlocks.VERDANT_PINE_TRAPDOOR.get(), modLoc("block/verdant_pine_trapdoor"), true, "cutout");
+        blockItem(ModBlocks.VERDANT_PINE_TRAPDOOR, "_bottom");
 
 
         logBlock(((RotatedPillarBlock) ModBlocks.DISTANT_LOG.get()));
@@ -256,6 +271,27 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         hangingSignBlock(ModBlocks.ASTER_HANGING_SIGN.get(), ModBlocks.ASTER_WALL_HANGING_SIGN.get(),
                 blockTexture(ModBlocks.ASTER_PLANKS.get()));
+
+        logBlock(((RotatedPillarBlock) ModBlocks.VERDANT_PINE_LOG.get()));
+        axisBlock(((RotatedPillarBlock) ModBlocks.VERDANT_PINE_WOOD.get()), blockTexture(ModBlocks.VERDANT_PINE_LOG.get()), blockTexture(ModBlocks.VERDANT_PINE_LOG.get()));
+        axisBlock((RotatedPillarBlock) ModBlocks.STRIPPED_VERDANT_PINE_LOG.get(), new ResourceLocation(Gempire.MODID, "block/stripped_verdant_pine_log"),
+                new ResourceLocation(Gempire.MODID, "block/stripped_verdant_pine_log_top"));
+        axisBlock((RotatedPillarBlock) ModBlocks.STRIPPED_VERDANT_PINE_WOOD.get(), new ResourceLocation(Gempire.MODID, "block/stripped_verdant_pine_log"),
+                new ResourceLocation(Gempire.MODID, "block/stripped_verdant_pine_log"));
+
+        blockItem(ModBlocks.VERDANT_PINE_LOG);
+        blockItem(ModBlocks.VERDANT_PINE_WOOD);
+        blockItem(ModBlocks.STRIPPED_VERDANT_PINE_LOG);
+        blockItem(ModBlocks.STRIPPED_VERDANT_PINE_WOOD);
+
+        leavesBlock(ModBlocks.VERDANT_PINE_LEAVES);
+        saplingBlock(ModBlocks.VERDANT_PINE_SAPLING);
+
+        signBlock(((StandingSignBlock) ModBlocks.VERDANT_PINE_SIGN.get()), ((WallSignBlock) ModBlocks.VERDANT_PINE_WALL_SIGN.get()),
+                blockTexture(ModBlocks.VERDANT_PINE_PLANKS.get()));
+
+        hangingSignBlock(ModBlocks.VERDANT_PINE_HANGING_SIGN.get(), ModBlocks.VERDANT_PINE_WALL_HANGING_SIGN.get(),
+                blockTexture(ModBlocks.VERDANT_PINE_PLANKS.get()));
 
         blockItem(ModBlocks.GALAXY_WARP);
         blockItem(ModBlocks.WARP_PAD);

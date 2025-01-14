@@ -235,8 +235,8 @@ public class ModCreativeModeTabs {
                 populator.accept(ModItems.CYAN_CHROMA.get());
                 populator.accept(ModItems.LIGHT_BLUE_CHROMA.get());
                 populator.accept(ModItems.BLUE_CHROMA.get());
-                populator.accept(ModItems.MAGENTA_CHROMA.get());
                 populator.accept(ModItems.PURPLE_CHROMA.get());
+                populator.accept(ModItems.MAGENTA_CHROMA.get());
                 populator.accept(ModItems.PINK_CHROMA.get());
                 populator.accept(ModItems.WHITE_CHROMA.get());
                 populator.accept(ModItems.LIGHT_GRAY_CHROMA.get());
@@ -253,8 +253,8 @@ public class ModCreativeModeTabs {
                 populator.accept(ModItems.CYAN_SHARDS.get());
                 populator.accept(ModItems.LIGHT_BLUE_SHARDS.get());
                 populator.accept(ModItems.BLUE_SHARDS.get());
-                populator.accept(ModItems.MAGENTA_SHARDS.get());
                 populator.accept(ModItems.PURPLE_SHARDS.get());
+                populator.accept(ModItems.MAGENTA_SHARDS.get());
                 populator.accept(ModItems.PINK_SHARDS.get());
                 populator.accept(ModItems.WHITE_SHARDS.get());
                 populator.accept(ModItems.LIGHT_GRAY_SHARDS.get());
@@ -601,8 +601,8 @@ public class ModCreativeModeTabs {
                 populator.accept(ModItems.CYAN_CHROMA_CRYSTAL.get());
                 populator.accept(ModItems.LIGHT_BLUE_CHROMA_CRYSTAL.get());
                 populator.accept(ModItems.BLUE_CHROMA_CRYSTAL.get());
-                populator.accept(ModItems.MAGENTA_CHROMA_CRYSTAL.get());
                 populator.accept(ModItems.PURPLE_CHROMA_CRYSTAL.get());
+                populator.accept(ModItems.MAGENTA_CHROMA_CRYSTAL.get());
                 populator.accept(ModItems.PINK_CHROMA_CRYSTAL.get());
                 populator.accept(ModItems.WHITE_CHROMA_CRYSTAL.get());
                 populator.accept(ModItems.LIGHT_GRAY_CHROMA_CRYSTAL.get());
@@ -731,8 +731,8 @@ public class ModCreativeModeTabs {
                 populator.accept(ModBlocks.CYAN_PHOSPHORUS_LAMP.get());
                 populator.accept(ModBlocks.LIGHT_BLUE_PHOSPHORUS_LAMP.get());
                 populator.accept(ModBlocks.BLUE_PHOSPHORUS_LAMP.get());
-                populator.accept(ModBlocks.MAGENTA_PHOSPHORUS_LAMP.get());
                 populator.accept(ModBlocks.PURPLE_PHOSPHORUS_LAMP.get());
+                populator.accept(ModBlocks.MAGENTA_PHOSPHORUS_LAMP.get());
                 populator.accept(ModBlocks.PINK_PHOSPHORUS_LAMP.get());
                 populator.accept(ModBlocks.LIGHT_GRAY_PHOSPHORUS_LAMP.get());
                 populator.accept(ModBlocks.GRAY_PHOSPHORUS_LAMP.get());
@@ -754,13 +754,6 @@ public class ModCreativeModeTabs {
                 populator.accept(ModBlocks.PRIMED_BLUE_ICE.get());
                 populator.accept(ModBlocks.PRIMED_DRAINED_ICE.get());
 
-                populator.accept(ModItems.CRYSTAL_LOG.get());
-                populator.accept(ModItems.STRIPPED_CRYSTAL_LOG.get());
-                populator.accept(ModItems.CRYSTAL_WOOD.get());
-                populator.accept(ModItems.STRIPPED_CRYSTAL_WOOD.get());
-                populator.accept(ModItems.CRYSTAL_LEAVES.get());
-                populator.accept(ModItems.CRYSTAL_SAPLING.get());
-
                 populator.accept(ModItems.DISTANT_LOG.get());
                 populator.accept(ModItems.STRIPPED_DISTANT_LOG.get());
                 populator.accept(ModItems.DISTANT_WOOD.get());
@@ -776,6 +769,22 @@ public class ModCreativeModeTabs {
                 populator.accept(ModItems.DISTANT_TRAPDOOR.get());
                 populator.accept(ModItems.DISTANT_SIGN.get());
                 populator.accept(ModItems.DISTANT_HANGING_SIGN.get());
+
+                populator.accept(ModItems.VERDANT_PINE_LOG.get());
+                populator.accept(ModItems.STRIPPED_VERDANT_PINE_LOG.get());
+                populator.accept(ModItems.VERDANT_PINE_WOOD.get());
+                populator.accept(ModItems.STRIPPED_VERDANT_PINE_WOOD.get());
+                populator.accept(ModItems.VERDANT_PINE_LEAVES.get());
+                populator.accept(ModItems.VERDANT_PINE_SAPLING.get());
+                populator.accept(ModItems.VERDANT_PINE_PLANKS.get());
+                populator.accept(ModItems.VERDANT_PINE_SLAB.get());
+                populator.accept(ModItems.VERDANT_PINE_STAIRS.get());
+                populator.accept(ModItems.VERDANT_PINE_FENCE.get());
+                populator.accept(ModItems.VERDANT_PINE_FENCE_GATE.get());
+                populator.accept(ModItems.VERDANT_PINE_DOOR.get());
+                populator.accept(ModItems.VERDANT_PINE_TRAPDOOR.get());
+                populator.accept(ModItems.VERDANT_PINE_SIGN.get());
+                populator.accept(ModItems.VERDANT_PINE_HANGING_SIGN.get());
 
                 populator.accept(ModItems.ASTER_LOG.get());
                 populator.accept(ModItems.STRIPPED_ASTER_LOG.get());
@@ -848,8 +857,8 @@ public class ModCreativeModeTabs {
                 populator.accept(ModItems.CYAN_BARBATINE.get());
                 populator.accept(ModItems.LIGHT_BLUE_BARBATINE.get());
                 populator.accept(ModItems.BLUE_BARBATINE.get());
-                populator.accept(ModItems.MAGENTA_BARBATINE.get());
                 populator.accept(ModItems.PURPLE_BARBATINE.get());
+                populator.accept(ModItems.MAGENTA_BARBATINE.get());
                 populator.accept(ModItems.PINK_BARBATINE.get());
                 populator.accept(ModItems.WHITE_BARBATINE.get());
                 populator.accept(ModItems.LIGHT_GRAY_BARBATINE.get());
@@ -865,8 +874,8 @@ public class ModCreativeModeTabs {
                 populator.accept(ModItems.CYAN_LATTICE.get());
                 populator.accept(ModItems.LIGHT_BLUE_LATTICE.get());
                 populator.accept(ModItems.BLUE_LATTICE.get());
-                populator.accept(ModItems.MAGENTA_LATTICE.get());
                 populator.accept(ModItems.PURPLE_LATTICE.get());
+                populator.accept(ModItems.MAGENTA_LATTICE.get());
                 populator.accept(ModItems.PINK_LATTICE.get());
                 populator.accept(ModItems.WHITE_LATTICE.get());
                 populator.accept(ModItems.LIGHT_GRAY_LATTICE.get());
@@ -882,8 +891,8 @@ public class ModCreativeModeTabs {
                 populator.accept(ModItems.CYAN_DIAMOND_GLASS.get());
                 populator.accept(ModItems.LIGHT_BLUE_DIAMOND_GLASS.get());
                 populator.accept(ModItems.BLUE_DIAMOND_GLASS.get());
-                populator.accept(ModItems.MAGENTA_DIAMOND_GLASS.get());
                 populator.accept(ModItems.PURPLE_DIAMOND_GLASS.get());
+                populator.accept(ModItems.MAGENTA_DIAMOND_GLASS.get());
                 populator.accept(ModItems.PINK_DIAMOND_GLASS.get());
                 populator.accept(ModItems.WHITE_DIAMOND_GLASS.get());
                 populator.accept(ModItems.LIGHT_GRAY_DIAMOND_GLASS.get());

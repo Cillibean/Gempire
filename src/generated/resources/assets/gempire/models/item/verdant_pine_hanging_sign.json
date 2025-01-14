@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "gempire:item/verdant_pine_hanging_sign"
+  }
+}

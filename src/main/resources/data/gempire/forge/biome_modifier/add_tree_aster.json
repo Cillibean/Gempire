@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "gempire:peculiar_precipice",
+  "features": "gempire:dead_tree",
+  "step": "vegetal_decoration"
+}

@@ -5,7 +5,7 @@ import com.gempire.config.GempireServerConfigs;
 import com.gempire.entities.abilities.*;
 import com.gempire.entities.abilities.base.Ability;
 import com.gempire.entities.ai.*;
-import com.gempire.entities.bases.EntityFlyingRideableGem;
+import com.gempire.entities.bases.EntityFlyingVehicleGem;
 import com.gempire.entities.bases.EntityGem;
 import com.gempire.entities.other.EntityAbomination;
 import com.gempire.entities.other.EntityCrawler;
@@ -26,10 +26,11 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.ArrayList;
 
-public class EntityLapis extends EntityGem implements FlyingAnimal {
+public class EntityLapis extends EntityFlyingVehicleGem implements FlyingAnimal {
 
     public static EntityDataAccessor<Boolean> TERRAFORMING = SynchedEntityData.<Boolean>defineId(EntityGem.class, EntityDataSerializers.BOOLEAN);
 
@@ -70,6 +71,17 @@ public class EntityLapis extends EntityGem implements FlyingAnimal {
 this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, EntityGem.class, 6.0F, 1.0D, 1.2D, this::checkElseSludged));
         this.goalSelector.addGoal(1, new EntityAITerraform(this, 1.0D));
    }
+
+
+    @Override
+    public void aiStep() {
+        super.aiStep();
+        Vec3 vec = this.getDeltaMovement();
+        if (!this.onGround() && vec.y < 0.0D && !this.isElytraFlying()) {
+            this.setDeltaMovement(vec.multiply(1.0D, 0.6D, 1.0D)); // lower the gravity to 0.6
+            this.flying = true;
+        }
+    }
 
     @Override
     public Float baseXScale() {
@@ -188,12 +200,9 @@ this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, EntityGem.class, 6.0F, 
     public boolean canChangeInsigniaColorByDefault(){
         return true;
     }
-    @Override
-    public boolean isRideable() {
-        return this.isVehicle();
-    }
+
     public boolean canOpenInventoryByDefault() {
-        return !this.isVehicle();
+        return !this.isRideable();
     }
 
     @Override
@@ -245,11 +254,6 @@ this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, EntityGem.class, 6.0F, 
     @Override
     public int exitHoleSize() {
         return 3;
-    }
-
-    @Override
-    public boolean isFlying() {
-        return false;
     }
 
 

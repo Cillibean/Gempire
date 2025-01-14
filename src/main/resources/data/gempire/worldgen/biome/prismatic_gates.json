@@ -55,7 +55,8 @@
     [],
     [
       "gempire:ore_macadam",
-      "gempire:ore_schist",
+      "gempire:ore_schist_upper",
+      "gempire:ore_schist_lower",
       "gempire:ore_ryolite_upper",
       "gempire:ore_ryolite_lower"
     ],

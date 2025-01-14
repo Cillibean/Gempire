@@ -4,6 +4,7 @@ package com.gempire.client.entity.model;// Made with Blockbench 4.6.5
 
 
 import com.gempire.entities.bases.EntityGem;
+import com.gempire.entities.gems.EntityLapis;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.geom.ModelLayerLocation;
@@ -84,11 +85,28 @@ public class ModelLapis<T extends EntityGem> extends ModelGem<T> {
 
 	@Override
 	public void setupAnim(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		this.setRotateAngle(head, headPitch * 0.5f * ((float)Math.PI / 180F), netHeadYaw * .5f * ((float)Math.PI / 180F), 0);
-		this.setRotateAngle(left_arm, Mth.cos(limbSwing * 0.5F + (float)Math.PI) * limbSwingAmount * 0.8f, 0, 0);
-		this.setRotateAngle(right_arm, Mth.cos(limbSwing * 0.5F)  * limbSwingAmount * 0.8f, 0, 0);
-		this.setRotateAngle(left_leg, Mth.cos(limbSwing * 0.5F) * limbSwingAmount * 0.8f, 0, 0);
-		this.setRotateAngle(right_leg, Mth.cos(limbSwing * 0.5F + (float)Math.PI) * limbSwingAmount * 0.8f, 0, 0);
+		if (!((EntityLapis) entityIn).flying) {
+			this.setRotateAngle(body, 0, 0, 0);
+			this.setRotateAngle(head, headPitch * 0.5f * ((float) Math.PI / 180F), netHeadYaw * .5f * ((float) Math.PI / 180F), 0);
+			this.setRotateAngle(left_arm, Mth.cos(limbSwing * 0.5F + (float) Math.PI) * limbSwingAmount * 0.8f, 0, 0);
+			this.setRotateAngle(right_arm, Mth.cos(limbSwing * 0.5F) * limbSwingAmount * 0.8f, 0, 0);
+			this.setRotateAngle(left_leg, Mth.cos(limbSwing * 0.5F) * limbSwingAmount * 0.8f, 0, 0);
+			this.setRotateAngle(right_leg, Mth.cos(limbSwing * 0.5F + (float) Math.PI) * limbSwingAmount * 0.8f, 0, 0);
+			left_leg.z = -1;
+			right_leg.z = -1;
+			left_leg.y = 12;
+			right_leg.y = 12;
+		} else {
+			this.setRotateAngle(left_arm, 0, 0, 0);
+			this.setRotateAngle(right_arm, 0, 0, 0);
+			this.setRotateAngle(body, 90, 0, 0);
+			this.setRotateAngle(left_leg, 90 + Mth.cos(limbSwing * 0.5F) * limbSwingAmount * 0.8f, 0, 0);
+			this.setRotateAngle(right_leg, 90 + Mth.cos(limbSwing * 0.5F + (float) Math.PI) * limbSwingAmount * 0.8f, 0, 0);
+			left_leg.z = body.z+12;
+			left_leg.y = body.y-3;
+			right_leg.z = body.z+12;
+			right_leg.y = body.y-3;
+		}
 	}
 
 	/**

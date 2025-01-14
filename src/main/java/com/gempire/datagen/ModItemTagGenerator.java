@@ -45,6 +45,8 @@ public class ModItemTagGenerator extends ItemTagsProvider {
                         ModItems.STRIPPED_SHADED_LOG.get(),
                         ModItems.ASTER_LOG.get(),
                         ModItems.STRIPPED_ASTER_LOG.get(),
+                        ModItems.VERDANT_PINE_LOG.get(),
+                        ModItems.STRIPPED_VERDANT_PINE_LOG.get(),
                         ModItems.KALEIDOSCOPE_WOOD.get(),
                         ModItems.STRIPPED_KALEIDOSCOPE_WOOD.get(),
                         ModItems.CRYSTAL_WOOD.get(),
@@ -54,7 +56,9 @@ public class ModItemTagGenerator extends ItemTagsProvider {
                         ModItems.SHADED_WOOD.get(),
                         ModItems.STRIPPED_SHADED_WOOD.get(),
                         ModItems.ASTER_WOOD.get(),
-                        ModItems.STRIPPED_ASTER_WOOD.get()
+                        ModItems.STRIPPED_ASTER_WOOD.get(),
+                        ModItems.VERDANT_PINE_WOOD.get(),
+                        ModItems.STRIPPED_VERDANT_PINE_WOOD.get()
                 );
 
         this.tag(ItemTags.PLANKS)
@@ -62,7 +66,8 @@ public class ModItemTagGenerator extends ItemTagsProvider {
                         ModItems.CRYSTAL_PLANKS.get(),
                         ModItems.DISTANT_PLANKS.get(),
                         ModItems.SHADED_PLANKS.get(),
-                        ModItems.ASTER_PLANKS.get()
+                        ModItems.ASTER_PLANKS.get(),
+                        ModItems.VERDANT_PINE_PLANKS.get()
                 );
 
         this.tag(ItemTags.FLOWERS)
@@ -112,6 +117,7 @@ public class ModItemTagGenerator extends ItemTagsProvider {
                 .add(ModItems.DISTANT_SAPLING.get(),
                         ModItems.CRYSTAL_SAPLING.get(),
                         ModItems.SHADED_SAPLING.get(),
+                        ModItems.VERDANT_PINE_SAPLING.get(),
                         ModItems.KALEIDOSCOPE_SAPLING.get());
 
         this.tag(ItemTags.MUSIC_DISCS)

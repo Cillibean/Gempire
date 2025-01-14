@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "gempire:alpine_forest",
+  "features": "gempire:tree_mega_verdant_pine_placed",
+  "step": "vegetal_decoration"
+}

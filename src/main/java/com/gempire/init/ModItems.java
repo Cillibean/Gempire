@@ -1733,6 +1733,103 @@ public class ModItems {
             () -> new HangingSignItem(ModBlocks.DISTANT_HANGING_SIGN.get(), ModBlocks.DISTANT_WALL_HANGING_SIGN.get(),
                     new Item.Properties().stacksTo(16)));
 
+    public static final RegistryObject<Item> VERDANT_PINE_LOG = ITEMS.register("verdant_pine_log", () ->
+            new BlockItem(
+                    ModBlocks.VERDANT_PINE_LOG.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> STRIPPED_VERDANT_PINE_LOG = ITEMS.register("stripped_verdant_pine_log", () ->
+            new BlockItem(
+                    ModBlocks.STRIPPED_VERDANT_PINE_LOG.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> VERDANT_PINE_WOOD = ITEMS.register("verdant_pine_wood", () ->
+            new BlockItem(
+                    ModBlocks.VERDANT_PINE_WOOD.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> STRIPPED_VERDANT_PINE_WOOD = ITEMS.register("stripped_verdant_pine_wood", () ->
+            new BlockItem(
+                    ModBlocks.STRIPPED_VERDANT_PINE_WOOD.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> VERDANT_PINE_LEAVES = ITEMS.register("verdant_pine_leaves", () ->
+            new BlockItem(
+                    ModBlocks.VERDANT_PINE_LEAVES.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> VERDANT_PINE_SAPLING = ITEMS.register("verdant_pine_sapling", () ->
+            new BlockItem(
+                    ModBlocks.VERDANT_PINE_SAPLING.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> VERDANT_PINE_PLANKS = ITEMS.register("verdant_pine_planks", () ->
+            new BlockItem(
+                    ModBlocks.VERDANT_PINE_PLANKS.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> VERDANT_PINE_SLAB = ITEMS.register("verdant_pine_slab", () ->
+            new BlockItem(
+                    ModBlocks.VERDANT_PINE_SLAB.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> VERDANT_PINE_FENCE = ITEMS.register("verdant_pine_fence", () ->
+            new BlockItem(
+                    ModBlocks.VERDANT_PINE_FENCE.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> VERDANT_PINE_FENCE_GATE = ITEMS.register("verdant_pine_fence_gate", () ->
+            new BlockItem(
+                    ModBlocks.VERDANT_PINE_FENCE_GATE.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> VERDANT_PINE_DOOR = ITEMS.register("verdant_pine_door", () ->
+            new BlockItem(
+                    ModBlocks.VERDANT_PINE_DOOR.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> VERDANT_PINE_TRAPDOOR = ITEMS.register("verdant_pine_trapdoor", () ->
+            new BlockItem(
+                    ModBlocks.VERDANT_PINE_TRAPDOOR.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> VERDANT_PINE_STAIRS = ITEMS.register("verdant_pine_stairs", () ->
+            new BlockItem(
+                    ModBlocks.VERDANT_PINE_STAIRS.get(),
+                    new Item.Properties()
+            )
+    );
+
+    public static final RegistryObject<Item> VERDANT_PINE_SIGN = ITEMS.register("verdant_pine_sign",
+            () -> new SignItem(new Item.Properties().stacksTo(16), ModBlocks.VERDANT_PINE_SIGN.get(), ModBlocks.VERDANT_PINE_WALL_SIGN.get()));
+    public static final RegistryObject<Item> VERDANT_PINE_HANGING_SIGN = ITEMS.register("verdant_pine_hanging_sign",
+            () -> new HangingSignItem(ModBlocks.VERDANT_PINE_HANGING_SIGN.get(), ModBlocks.VERDANT_PINE_WALL_HANGING_SIGN.get(),
+                    new Item.Properties().stacksTo(16)));
+
     public static final RegistryObject<Item> ASTER_LOG = ITEMS.register("aster_log", () ->
             new BlockItem(
                     ModBlocks.ASTER_LOG.get(),

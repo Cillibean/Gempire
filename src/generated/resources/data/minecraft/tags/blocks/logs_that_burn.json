@@ -19,6 +19,10 @@
     "gempire:crystal_wood",
     "gempire:crystal_log",
     "gempire:stripped_crystal_log",
-    "gempire:stripped_crystal_wood"
+    "gempire:stripped_crystal_wood",
+    "gempire:verdant_pine_wood",
+    "gempire:verdant_pine_log",
+    "gempire:stripped_verdant_pine_log",
+    "gempire:stripped_verdant_pine_wood"
   ]
 }
