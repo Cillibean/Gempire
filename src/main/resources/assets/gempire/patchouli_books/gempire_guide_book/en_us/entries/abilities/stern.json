@@ -1,12 +1,12 @@
 {
   "name": "Stern",
-  "icon": "minecraft:ender_pearl",
+  "icon": "minecraft:book",
   "advancement": "gempire:root",
   "category": "gempire:abilities",
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Stern is an ability that makes gems give off an intimidating aura, making gems more efficient at their jobs. They will also give off night vision."
+      "text": "Stern is an ability that makes gems give off an intimidating aura, making gems more efficient at their jobs. They will also grant night vision."
     },
     {
       "type": "patchouli:text",

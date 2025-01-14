@@ -1,0 +1,16 @@
+{
+  "name": "Archer",
+  "icon": "minecraft:arrow",
+  "advancement": "gempire:root",
+  "category": "gempire:abilities",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Archer is an ability that gives gems the power to wield a bow, as long as it's in their hand."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Gems that are guaranteed to have it$()$(li)N/A$(br2) $(l)Gems that have a chance to have it$()$(li)Quartz$(li)Agate$(li)Jasper"
+    }
+  ]
+}

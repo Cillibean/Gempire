@@ -11,11 +11,15 @@
       "name": "Agate",
       "rotate": "true",
       "offset": 0.2,
-      "text": "A mid-game soldier, has many possible abilities. Helps motivate gems to work more efficiently as well."
+      "text": "A mid-game soldier, has many possible abilities. Helps motivate gems to work more efficiently as well as granting night vision."
     },
     {
       "type": "patchouli:text",
-      "text": "$(l)Possible Abilities$() $(li)Knockback$(li)Paralysis$(li)Tank$(li)Beefcake$(li)Powerhouse$(li)Unhinged$(li)Pyrokinesis$(li)Cryokinesis$(li)Healer$(li)First-Aid$(li)Berserker$(li)Beastmaster$(li)Electrokinesis$(br2) $(l)Definite Abilities$() $(br)$(li)Stern"
+      "text": "$(l)Possible Abilities$() $(li)Knockback$(li)Paralysis$(li)Tank$(li)Beefcake$(li)Powerhouse$(li)Unhinged"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Possible Abilities Continued$() $(li)Archer$(li)Pyrokinesis$(li)Cryokinesis$(li)Healer$(li)First-Aid$(li)Berserker$(li)Beastmaster$(li)Electrokinesis$(br2) $(l)Definite Abilities$() $(br)$(li)Stern"
     },
     {
       "type": "patchouli:text",

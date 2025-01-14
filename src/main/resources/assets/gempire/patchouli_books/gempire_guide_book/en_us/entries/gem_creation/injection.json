@@ -5,21 +5,16 @@
   "category": "gempire:gem_creation_category",
   "pages": [
     {
-      "type": "patchouli:text",
-      "text": "In order to Inject, first you must obtain a drill, a power crystal and an injector tank. A mica and a pebble may be useful to you."
-    },
-    {
-      "type": "patchouli:crafting",
-      "recipe": "gempire:tank",
-      "text": "Injector tank recipe."
-    },
-    {
       "type": "patchouli:image",
       "title": "Injector Examples",
       "images": [
         "gempire:textures/gui/patchouli/entries/injectors.png"
       ],
       "border": true
+    },
+    {
+      "type": "patchouli:text",
+      "text": "In order to Inject, first you must obtain a drill, a power crystal and an injector tank. A mica and a pebble may be useful to you."
     },
     {
       "type": "patchouli:multiblock",
@@ -55,7 +50,7 @@
       "title": "Gem Essence",
       "link_recipe ": false,
       "item": "gempire:white_essence_bucket,gempire:yellow_essence_bucket,gempire:blue_essence_bucket,gempire:pink_essence_bucket",
-      "text": "Don't forget to fill your bars! There's a slot at the top of the bars for gem essence bottles and congealed gem essences.$(br2)Each gem requires a specific color combination, but using all four essences will give any gem.$(br2)Click the small dots under each bar to select the color you want to use."
+      "text": "Don't forget to fill your bars! There's a slot at the top of the bars for gem essence bottles and congealed gem essences.$(br2)Each gem requires a specific color combination, but using all four essences will give any gem with the risk of lower quality gems.$(br2)Click the bars to select the color you want to use."
     },
     {
       "type": "patchouli:text",

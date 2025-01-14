@@ -1,0 +1,31 @@
+{
+  "name": "Making a Drill",
+  "icon": "gempire:drill_block",
+  "advancement": "gempire:root",
+  "category": "gempire:gem_creation_category",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "gempire:pebble_gem",
+      "text": "To make a Drill, you will need a pebble. Build the following multiblock, then tell her to stay and right-click her with a pickaxe in your hand so she can construct the drill."
+    },
+    {
+      "type": "patchouli:multiblock",
+      "name": "Injector Drill",
+      "multiblock": {
+        "pattern": [
+          [
+            "_I_",
+            "I0I",
+            "_I_"
+          ]
+        ],
+        "mapping": {
+          "I": "minecraft:iron_bars",
+          "0": "minecraft:hopper"
+        },
+        "symmetrical": true
+      }
+    }
+  ]
+}

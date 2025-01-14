@@ -7,6 +7,11 @@
     {
       "type": "patchouli:text",
       "text": "A war-torn battlefield littered with ancient weapons and gigantic strawberries ripe for the taking."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "gempire:strawberry_block",
+      "text": "Large, overly juicy strawberries enhanced by shards left buried in the dirt from a long time ago."
     }
   ]
 }

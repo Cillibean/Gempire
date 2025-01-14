@@ -12,7 +12,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "A scouting gem that also uses her acidic spit in fights. Give her an empty map and use /scoutlocate to have her start searching for a biome or structure."
+      "text": "A scouting gem that also uses her acidic spit in fights. Give her an empty map and use /scoutlocate or /scoutlocatebiome to have her start searching for a biome or structure."
     },
     {
       "type": "patchouli:text",

@@ -566,8 +566,8 @@
 
   "block.gempire.dagger_stone": "Huntress's Stone",
   "block.gempire.flower_case": "Paladin's Case",
-  "block.gempire.tear_vase": "Vase of Tears",
-  "block.gempire.star_crown": "Crown of Stars",
+  "block.gempire.guardian_vase": "Vase of Tears",
+  "block.gempire.empress_crown": "Crown of Stars",
 
   "block.gempire.shock_berry_bush": "Shock Berry Bush",
   "item.gempire.shock_berry": "Shock Berry",
@@ -632,7 +632,7 @@
   "item.gempire.inactive_empress_gem": "Inactive Empress Gem",
 
   "item.gempire.paladin_flower": "Paladin's Flower",
-  "item.gempire.guardian_tear": "Guardian's Tear",
+  "item.gempire.guardian_tear": "Guardian's Tears",
   "item.gempire.huntress_dagger": "Huntress's Dagger",
   "item.gempire.empress_star": "Empress's Star",
 

@@ -1,12 +1,12 @@
 {
   "name": "A Pale Rose",
   "icon": "gempire:paladin_flower",
-  "advancement": "gempire:root",
+  "advancement": "gempire:desolate_lands/root",
   "category": "gempire:iridescent_plains",
   "pages": [
     {
       "type": "patchouli:spotlight",
-      "title": "Paladin Flower",
+      "title": "Paladin's Flower",
       "item": "gempire:paladin_flower",
       "text": "A flower, preserved in a glass case for eons. The glass seems to be shimmering, prismatic almost. You'll need a strong pickaxe to shatter it."
     },
@@ -16,11 +16,7 @@
       "text": "Shatter the glass to free the flower.",
       "multiblock": {
         "pattern": [
-          [
-            "___",
-            "_0_",
-            "___"
-          ]
+          ["0"]
         ],
         "mapping": {
           "0": "gempire:paladin_case"
