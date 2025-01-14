@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "A cracked gem can occur in the heat of battle, such as a gem taking too much extra damage upon poofing. Like a Warden hitting a gem, for example."
+      "text": "A cracked gem can occur in the heat of battle, such as a gem taking too much extra damage upon poofing.$(br2)A Warden hitting a gem, for example, is devastating and nearly always cracks or shatters a gemstone. Be careful."
     },
     {
       "type": "patchouli:text",

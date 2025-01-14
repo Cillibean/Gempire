@@ -21,6 +21,10 @@
     },
     {
       "type": "patchouli:text",
+      "text": "$(l)Injection Trigger Item$() $(br)$(li)End Crystal"
+    },
+    {
+      "type": "patchouli:text",
       "text": "$(l)Incubation Cruxes$() $(br)$(li)Obsidian$(li)Crying Obsidian"
     }
   ]

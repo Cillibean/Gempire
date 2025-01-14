@@ -23,6 +23,10 @@
     },
     {
       "type": "patchouli:text",
+      "text": "$(l)Injection Trigger Item$() $(br)$(li)Ghast Tear"
+    },
+    {
+      "type": "patchouli:text",
       "text": "$(l)Incubation Cruxes$() $(br)$(li)Soul Soil$(li)Prismarine$(li)Ghast Tear"
     }
   ]

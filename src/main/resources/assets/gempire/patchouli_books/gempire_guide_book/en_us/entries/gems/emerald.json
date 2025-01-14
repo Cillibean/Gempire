@@ -25,6 +25,10 @@
     },
     {
       "type": "patchouli:text",
+      "text": "$(l)Injection Trigger Item$() $(br)$(li)Emerald Block"
+    },
+    {
+      "type": "patchouli:text",
       "text": "$(l)Incubation Cruxes$() $(br)$(li)Emerald Block$(li)Ancient Debris$(li)End Stone"
     }
   ]

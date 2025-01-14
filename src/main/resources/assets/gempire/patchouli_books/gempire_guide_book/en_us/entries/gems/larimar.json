@@ -22,6 +22,10 @@
     },
     {
       "type": "patchouli:text",
+      "text": "$(l)Injection Trigger Item$() $(br)$(li)Blue Ice"
+    },
+    {
+      "type": "patchouli:text",
       "text": "$(l)Incubation Cruxes$() $(br)$(li)Ice$(li)Snow Block$(li)Packed Ice"
     }
   ]

@@ -7,12 +7,11 @@
     {
       "type": "patchouli:spotlight",
       "item": "gempire:nacre_gem",
-      "text": "In order to make a Shell, you'll need a Nacre."
+      "text": "In order to make a Shell, you'll need a Nacre.$(br2)To have your Nacre construct a Shell, you will need to build this multiblock, set Nacre's movement mode to stay then right click on her with a pickaxe."
     },
     {
       "type": "patchouli:multiblock",
       "name": "Shell",
-      "text": "In order to have your Nacre construct a Shell, you will need to build this multiblock, set Nacre's movement mode to stay then right click on her with a pickaxe in your hand.",
       "multiblock": {
         "pattern": [
           ["C"],

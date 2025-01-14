@@ -21,6 +21,10 @@
     },
     {
       "type": "patchouli:text",
+      "text": "$(l)Injection Trigger Item$() $(br)$(li)Ender Eye"
+    },
+    {
+      "type": "patchouli:text",
       "text": "$(l)Incubation Cruxes$() $(br)$(li)Ender Eye$(li)Blue Ice$(li)Diamond Block"
     }
   ]

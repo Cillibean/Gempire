@@ -12,7 +12,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "A scouting gem that also uses her acidic spit in fights. Give her an empty map and use /scoutlocate or /scoutlocatebiome to have her start searching for a biome or structure."
+      "text": "A scouting gem that also uses her acidic spit in fights. Give her an empty map and use /scoutlocate or /scoutlocatebiome to have her start searching for a structure or biome."
     },
     {
       "type": "patchouli:text",
@@ -21,6 +21,10 @@
     {
       "type": "patchouli:text",
       "text": "$(l)Essence Requirements$() $(br)$(li)Blue$(li)Yellow"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Injection Trigger Item$() $(br)$(li)Wither Rose"
     },
     {
       "type": "patchouli:text",

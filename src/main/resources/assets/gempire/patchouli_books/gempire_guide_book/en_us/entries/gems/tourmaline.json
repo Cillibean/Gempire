@@ -25,6 +25,10 @@
     },
     {
       "type": "patchouli:text",
+      "text": "$(l)Injection Trigger Item$() $(br)$(li)Enchanted Golden Apple"
+    },
+    {
+      "type": "patchouli:text",
       "text": "$(l)Incubation Cruxes$() $(br)$(li)Mycelium$(li)Honeycomb Block$(li)Moss Block"
     }
   ]

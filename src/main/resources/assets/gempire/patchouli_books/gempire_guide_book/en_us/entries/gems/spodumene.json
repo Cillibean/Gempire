@@ -24,6 +24,10 @@
     },
     {
       "type": "patchouli:text",
+      "text": "$(l)Injection Trigger Item$() $(br)$(li)Heart of The Sea"
+    },
+    {
+      "type": "patchouli:text",
       "text": "$(l)Incubation Cruxes$() $(br)$(li)Bone Block$(li)Brain Coral$(li)Glowstone"
     }
   ]

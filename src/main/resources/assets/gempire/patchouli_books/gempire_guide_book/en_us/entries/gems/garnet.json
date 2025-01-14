@@ -22,6 +22,10 @@
     },
     {
       "type": "patchouli:text",
+      "text": "$(l)Injection Trigger Item$() $(br)$(li)Wither Skeleton Skull"
+    },
+    {
+      "type": "patchouli:text",
       "text": "$(l)Incubation Cruxes$() $(br)$(li)Netherrack$(li)Raw Copper$(li)Sculk$(li)Bone Block"
     }
   ]

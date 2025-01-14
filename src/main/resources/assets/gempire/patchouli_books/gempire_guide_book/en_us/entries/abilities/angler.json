@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Angler is an ability that lets gems fish when placed in water."
+      "text": "Angler is an ability that lets gems fish when placed in water. Seems to work better with multiple anglers in the same area."
     },
     {
       "type": "patchouli:text",

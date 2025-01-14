@@ -25,6 +25,10 @@
     },
     {
       "type": "patchouli:text",
+      "text": "$(l)Injection Trigger Item$() $(br)$(li)Fire Charge"
+    },
+    {
+      "type": "patchouli:text",
       "text": "$(l)Incubation Cruxes$() $(br)$(li)Redstone Dust$(li)Raw Copper$(li)Glowstone Dust$(li)Fire Charge"
     }
   ]

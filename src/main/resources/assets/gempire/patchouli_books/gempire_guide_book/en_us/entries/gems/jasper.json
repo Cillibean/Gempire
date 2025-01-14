@@ -26,6 +26,10 @@
     },
     {
       "type": "patchouli:text",
+      "text": "$(l)Injection Trigger Item$() $(br)$(li)Blaze Rod"
+    },
+    {
+      "type": "patchouli:text",
       "text": "$(l)Incubation Cruxes$() $(br)$(li)Quartz Block$(li)Gilded Blackstone$(li)Raw Iron$(li)Blaze Rod"
     }
   ]

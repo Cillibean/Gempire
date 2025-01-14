@@ -22,6 +22,10 @@
     },
     {
       "type": "patchouli:text",
+      "text": "$(l)Injection Trigger Item$() $(br)$(li)Netherite Sword"
+    },
+    {
+      "type": "patchouli:text",
       "text": "$(l)Incubation Cruxes$() $(br)$(li)Magma Block$(li)Tungsten Block$(li)Iron Block"
     }
   ]

@@ -10,7 +10,10 @@
       "scale": 1.0,
       "name": "Agate",
       "rotate": "true",
-      "offset": 0.2,
+      "offset": 0.2
+    },
+    {
+      "type": "patchouli:text",
       "text": "A mid-game soldier, has many possible abilities. Helps motivate gems to work more efficiently as well as granting night vision."
     },
     {
@@ -24,6 +27,10 @@
     {
       "type": "patchouli:text",
       "text": "$(l)Essence Requirements$() $(br)$(li)Blue$(li)White"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Injection Trigger Item$() $(br)$(li)Dragon's Breath"
     },
     {
       "type": "patchouli:text",

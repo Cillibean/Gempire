@@ -25,6 +25,10 @@
     },
     {
       "type": "patchouli:text",
+      "text": "$(l)Injection Trigger Item$() $(br)$(li)Experience Bottle"
+    },
+    {
+      "type": "patchouli:text",
       "text": "$(l)Incubation Cruxes$() $(br)$(li)Clay$(li)Raw Iron Block$(li)Smooth Basalt$(li)Experience Bottle"
     }
   ]

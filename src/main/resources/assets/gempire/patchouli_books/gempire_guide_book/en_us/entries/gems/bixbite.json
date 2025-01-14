@@ -22,6 +22,10 @@
     },
     {
       "type": "patchouli:text",
+      "text": "$(l)Injection Trigger Item$() $(br)$(li)Prismatic Shears"
+    },
+    {
+      "type": "patchouli:text",
       "text": "$(l)Incubation Cruxes$() $(br)$(li)Red Sandstone$(li)Bone Block$(li)Fire Coral$(li)Raw Gold"
     }
   ]

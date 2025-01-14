@@ -9,16 +9,23 @@
       "entity": "gempire:lapis{wingColor:11663605,gemColor:3623377,skinColor:7508735,hairColor:12969,hairVariant:0,insigniaColor:11,outfitColor:11,gemPlacement:12,xscale:1,yscale:1,zscale:1}",
       "name": "Lapis Lazuli",
       "rotate": "true",
-      "offset": 0.1,
-      "text": "A transport gem (NYI) that also uses water as a weapon. Can also carve trenches in the earth."
+      "offset": 0.1
     },
     {
       "type": "patchouli:text",
-      "text": "$(l)Possible Abilities$() $(br)$(li)Tank$(li)Beefcake$(li)Powerhouse$(li)Unhinged$(li)Berserker$(li)Hydrokinesis$(br2) $(l)Definite Abilities$()$(br)$(li)Vehicle (NYI)"
+      "text": "A transport gem that also uses water as a weapon and carves trenches in the earth with terraforming.$(br2)To get her to terraform, set her movement mode to stay with shift-right click and right click her with a pickaxe. Then, use /terraform and wait."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Possible Abilities$() $(br)$(li)Tank$(li)Beefcake$(li)Powerhouse$(li)Unhinged$(li)Berserker$(li)Hydrokinesis$(br2) $(l)Definite Abilities$()$(br)$(li)Vehicle"
     },
     {
       "type": "patchouli:text",
       "text": "$(l)Essence Requirements$() $(br)$(li)Blue"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Injection Trigger Item$() $(br)$(li)Nautilus Shell"
     },
     {
       "type": "patchouli:text",

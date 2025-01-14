@@ -46,6 +46,10 @@
     },
     {
       "type": "patchouli:text",
+      "text": "$(l)Injection Trigger Item$() $(br)$(li)Phantom Membrane"
+    },
+    {
+      "type": "patchouli:text",
       "text": "$(l)Incubation Cruxes$() $(br)$(li)Phantom Membrane$(li)End Stone$(li)Soul Sand"
     }
   ]

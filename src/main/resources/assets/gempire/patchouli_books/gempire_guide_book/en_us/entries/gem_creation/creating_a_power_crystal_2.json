@@ -7,12 +7,11 @@
     {
       "type": "patchouli:spotlight",
       "item": "gempire:peridot_gem",
-      "text": "In order to make an Advanced Power Crystal, you will need a Peridot."
+      "text": "In order to make an Advanced Power Crystal, you will need a Peridot.$(br2)To have your Peridot construct an Advanced Power Crystal, you will need to build this multiblock, set her movement mode to stay then right click on her with a pickaxe."
     },
     {
       "type": "patchouli:multiblock",
       "name": "Advanced Power Crystal",
-      "text": "In order to have your Peridot construct an Advanced Power Crystal, you will need to build this multiblock, then right click on her with a pickaxe in your hand.",
       "multiblock": {
         "pattern": [
           [

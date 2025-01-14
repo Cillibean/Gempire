@@ -25,6 +25,10 @@
     },
     {
       "type": "patchouli:text",
+      "text": "$(l)Injection Trigger Item$() $(br)$(li)Totem of Undying"
+    },
+    {
+      "type": "patchouli:text",
       "text": "$(l)Incubation Cruxes$() $(br)$(li)Sculk$(li)Deepslate$(li)Diamond Block$(li)Ancient Debris"
     }
   ]
