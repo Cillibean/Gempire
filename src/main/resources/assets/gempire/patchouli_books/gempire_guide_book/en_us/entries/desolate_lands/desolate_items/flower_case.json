@@ -2,7 +2,7 @@
   "name": "A Pale Rose",
   "icon": "gempire:paladin_flower",
   "advancement": "gempire:desolate_lands/root",
-  "category": "gempire:iridescent_plains",
+  "category": "gempire:desolate_items",
   "pages": [
     {
       "type": "patchouli:spotlight",
@@ -13,10 +13,11 @@
     {
       "type": "patchouli:multiblock",
       "name": "Paladin's Case",
+      "enable_visualize": false,
       "text": "Shatter the glass to free the flower.",
       "multiblock": {
         "pattern": [
-          ["0"]
+          ["_0_"]
         ],
         "mapping": {
           "0": "gempire:paladin_case"

@@ -2,7 +2,7 @@
   "name": "Excalibur?",
   "icon": "gempire:huntress_dagger",
   "advancement": "gempire:desolate_lands/root",
-  "category": "gempire:gilded_wastes",
+  "category": "gempire:desolate_items",
   "pages": [
     {
       "type": "patchouli:spotlight",
@@ -13,10 +13,11 @@
     {
       "type": "patchouli:multiblock",
       "name": "Huntress's Stone",
+      "enable_visualize": false,
       "text": "To be pulled by someone brave enough to try.",
       "multiblock": {
         "pattern": [
-          ["0"]
+          ["_0_"]
         ],
         "mapping": {
           "0": "gempire:dagger_stone"

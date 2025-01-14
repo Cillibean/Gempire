@@ -2,7 +2,7 @@
   "name": "Calming Jelly",
   "icon": "gempire:calming_jelly",
   "advancement": "gempire:desolate_lands/kill_sorrow_jelly",
-  "category": "gempire:mirrored_seas",
+  "category": "gempire:desolate_items",
   "pages": [
     {
       "type": "patchouli:spotlight",

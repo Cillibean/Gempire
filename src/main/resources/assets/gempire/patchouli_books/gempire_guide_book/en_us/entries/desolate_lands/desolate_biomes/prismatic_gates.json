@@ -1,0 +1,12 @@
+{
+  "name": "Prismatic Gates",
+  "advancement": "gempire:desolate_lands/enter_prismatic_gates",
+  "icon": "gempire:kaleidoscope_log",
+  "category": "gempire:desolate_biomes",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Placeholder text. Oopsies."
+    }
+  ]
+}

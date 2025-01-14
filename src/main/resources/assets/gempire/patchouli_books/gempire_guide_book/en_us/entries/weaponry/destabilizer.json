@@ -8,7 +8,11 @@
       "type": "patchouli:spotlight",
       "link_recipe ": true,
       "item": "gempire:yellow_destabilizer",
-      "text": "Destabilizers are used to destabilize gems, making them poof instantly. they can be made in pink, blue, yellow and white colors. You need to make sure the weapon is fully readied before using it on a gem.$(br)Right click the ground with a destabilizer to place down destabilizer walls."
+      "text": "Destabilizers are used to destabilize gems, making them poof instantly. They can be made in pink, blue, yellow and white colors."
+    },
+    {
+      "type": "patchouli:text",
+      "text": " You need to make sure the weapon is fully readied before using it on a gem.$(br2)Right click the ground with a destabilizer to place down destabilizer walls."
     },
     {
       "type": "patchouli:crafting",

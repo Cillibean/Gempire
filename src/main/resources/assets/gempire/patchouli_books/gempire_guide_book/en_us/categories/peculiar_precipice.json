@@ -1,7 +1,0 @@
-{
-  "name": "Peculiar Precipice",
-  "description": "Information on the Peculiar Precipice biome.",
-  "icon": "gempire:orange_chroma",
-  "secret": "false",
-  "parent": "gempire:desolate_lands"
-}

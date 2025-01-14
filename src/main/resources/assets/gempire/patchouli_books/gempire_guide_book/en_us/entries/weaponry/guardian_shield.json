@@ -1,0 +1,18 @@
+{
+  "name": "Shield of The Guardian",
+  "icon": "gempire:guardian_shield",
+  "advancement": "gempire:desolate_lands/kill_guardian",
+  "category": "gempire:weaponry",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "link_recipe ": true,
+      "item": "gempire:guardian_shield",
+      "text": "A sturdy cobalt shield made from a fallen leader."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "gempire:guardian_shield"
+    }
+  ]
+}

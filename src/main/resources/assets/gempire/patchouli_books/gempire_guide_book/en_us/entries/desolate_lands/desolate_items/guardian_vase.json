@@ -2,7 +2,7 @@
   "name": "Cry me A River",
   "icon": "gempire:guardian_tear",
   "advancement": "gempire:desolate_lands/root",
-  "category": "gempire:mirrored_seas",
+  "category": "gempire:desolate_items",
   "pages": [
     {
       "type": "patchouli:spotlight",
@@ -13,10 +13,11 @@
     {
       "type": "patchouli:multiblock",
       "name": "Vase of Tears",
+      "enable_visualize": false,
       "text": "Stone hands have cradled her despair for thousands of years.",
       "multiblock": {
         "pattern": [
-          ["0"]
+          ["_0_"]
         ],
         "mapping": {
           "0": "gempire:guardian_vase"

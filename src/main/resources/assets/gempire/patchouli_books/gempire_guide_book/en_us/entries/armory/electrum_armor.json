@@ -1,0 +1,24 @@
+{
+  "name": "Electrum Armor",
+  "icon": "gempire:electrum_ingot",
+  "advancement": "gempire:desolate_lands/obtain_electrum",
+  "category": "gempire:armory",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "link_recipe ": true,
+      "item": "gempire:electrum_helmet,gempire:electrum_chestplate,gempire:electrum_leggings,gempire:electrum_boots",
+      "text": "A full set of electrum armor will help protect the player from certain boss effects."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "gempire:electrum_helmet",
+      "recipe2": "gempire:electrum_chestplate"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "gempire:electrum_leggings",
+      "recipe2": "gempire:electrum_boots"
+    }
+  ]
+}

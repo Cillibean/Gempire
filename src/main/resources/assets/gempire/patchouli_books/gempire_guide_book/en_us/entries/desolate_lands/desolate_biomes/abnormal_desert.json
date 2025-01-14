@@ -1,0 +1,12 @@
+{
+  "name": "Abnormal Desert",
+  "advancement": "gempire:desolate_lands/enter_abnormal_desert",
+  "icon": "gempire:abnormal_sand",
+  "category": "gempire:desolate_biomes",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Placeholder text. Oopsies."
+    }
+  ]
+}

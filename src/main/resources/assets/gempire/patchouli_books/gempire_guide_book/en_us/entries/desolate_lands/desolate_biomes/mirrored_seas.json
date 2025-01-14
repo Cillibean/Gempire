@@ -1,0 +1,12 @@
+{
+  "name": "Mirrored Seas",
+  "advancement": "gempire:desolate_lands/enter_mirrored_seas",
+  "icon": "gempire:cobalt_kelp",
+  "category": "gempire:desolate_biomes",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Placeholder text. Oopsies."
+    }
+  ]
+}

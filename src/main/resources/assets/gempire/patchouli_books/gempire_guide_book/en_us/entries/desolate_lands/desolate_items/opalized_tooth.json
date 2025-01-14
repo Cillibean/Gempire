@@ -2,7 +2,7 @@
   "name": "Opalized Tooth",
   "icon": "gempire:opalized_tooth",
   "advancement": "gempire:desolate_lands/kill_opal_mantashark",
-  "category": "gempire:mirrored_seas",
+  "category": "gempire:desolate_items",
   "pages": [
     {
       "type": "patchouli:spotlight",
@@ -12,6 +12,7 @@
     },
     {
       "type": "patchouli:crafting",
+      "link_recipe ": true,
       "recipe": "gempire:prismatic_shears",
       "text": "The recipe for Prismatic Shears."
     }

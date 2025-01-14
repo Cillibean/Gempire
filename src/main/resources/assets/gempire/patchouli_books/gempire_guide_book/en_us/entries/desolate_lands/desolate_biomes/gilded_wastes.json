@@ -1,0 +1,12 @@
+{
+  "name": "Gilded Wastes",
+  "advancement": "gempire:desolate_lands/enter_gilded_wastes",
+  "icon": "gempire:shock_berry",
+  "category": "gempire:desolate_biomes",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Placeholder text. Oopsies."
+    }
+  ]
+}

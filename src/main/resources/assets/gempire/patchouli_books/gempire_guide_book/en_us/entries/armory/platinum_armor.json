@@ -1,0 +1,24 @@
+{
+  "name": "Platinum Armor",
+  "icon": "gempire:platinum_ingot",
+  "advancement": "gempire:desolate_lands/obtain_platinum",
+  "category": "gempire:armory",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "link_recipe ": true,
+      "item": "gempire:platinum_helmet,gempire:platinum_chestplate,gempire:platinum_leggings,gempire:platinum_boots",
+      "text": "A full set of electrum armor will help protect the player from certain boss effects."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "gempire:platinum_helmet",
+      "recipe2": "gempire:platinum_chestplate"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "gempire:platinum_leggings",
+      "recipe2": "gempire:platinum_boots"
+    }
+  ]
+}

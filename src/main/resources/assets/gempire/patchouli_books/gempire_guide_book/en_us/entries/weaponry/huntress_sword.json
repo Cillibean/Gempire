@@ -1,0 +1,18 @@
+{
+  "name": "Huntress's Blade",
+  "icon": "gempire:huntress_sword",
+  "advancement": "gempire:desolate_lands/kill_huntress",
+  "category": "gempire:weaponry",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "link_recipe ": true,
+      "item": "gempire:huntress_sword",
+      "text": "A sleek amber sword made from a fallen leader."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "gempire:huntress_sword"
+    }
+  ]
+}

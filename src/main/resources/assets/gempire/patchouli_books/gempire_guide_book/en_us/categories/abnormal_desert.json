@@ -1,7 +1,0 @@
-{
-  "name": "Abnormal Desert",
-  "description": "Information on the Abnormal Desert biome.",
-  "icon": "minecraft:sand",
-  "secret": "false",
-  "parent": "gempire:desolate_lands"
-}

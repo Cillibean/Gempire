@@ -1,0 +1,12 @@
+{
+  "name": "Unearthly Jungle",
+  "advancement": "gempire:desolate_lands/enter_unearthly_jungle",
+  "icon": "minecraft:jungle_sapling",
+  "category": "gempire:desolate_biomes",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Placeholder text. Oopsies."
+    }
+  ]
+}

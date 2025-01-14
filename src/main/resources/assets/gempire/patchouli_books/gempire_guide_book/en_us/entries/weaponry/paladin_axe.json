@@ -1,0 +1,18 @@
+{
+  "name": "Paladin's Axe",
+  "icon": "gempire:paladin_axe",
+  "advancement": "gempire:desolate_lands/kill_paladin",
+  "category": "gempire:weaponry",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "link_recipe ": true,
+      "item": "gempire:paladin_axe",
+      "text": "A hefty fuchsia axe made from a fallen leader."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "gempire:paladin_axe"
+    }
+  ]
+}

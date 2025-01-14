@@ -1,0 +1,7 @@
+{
+  "name": "Alien Biomes",
+  "description": "Information on the various biomes from the alien world.",
+  "icon": "gempire:shaded_apple",
+  "secret": "false",
+  "parent": "gempire:desolate_lands"
+}

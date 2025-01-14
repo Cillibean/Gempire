@@ -1,0 +1,12 @@
+{
+  "name": "Iridescent Plains",
+  "advancement": "gempire:desolate_lands/enter_iridescent_plains",
+  "icon": "gempire:platinum_nugget",
+  "category": "gempire:desolate_biomes",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Placeholder text. Oopsies."
+    }
+  ]
+}

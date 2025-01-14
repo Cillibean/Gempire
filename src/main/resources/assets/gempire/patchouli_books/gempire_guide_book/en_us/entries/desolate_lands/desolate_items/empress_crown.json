@@ -2,7 +2,7 @@
   "name": "A Lost Crown",
   "icon": "gempire:empress_star",
   "advancement": "gempire:desolate_lands/root",
-  "category": "gempire:prismatic_gates",
+  "category": "gempire:desolate_items",
   "pages": [
     {
       "type": "patchouli:spotlight",
@@ -13,10 +13,11 @@
     {
       "type": "patchouli:multiblock",
       "name": "Crown of Stars",
+      "enable_visualize": false,
       "text": "A trinket once beloved by all.",
       "multiblock": {
         "pattern": [
-          ["0"]
+          ["_0_"]
         ],
         "mapping": {
           "0": "gempire:empress_crown"

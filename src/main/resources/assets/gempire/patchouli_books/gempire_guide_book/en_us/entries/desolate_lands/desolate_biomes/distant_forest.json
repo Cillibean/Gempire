@@ -1,0 +1,16 @@
+{
+  "name": "Distant Forest",
+  "advancement": "gempire:desolate_lands/enter_distant_forest",
+  "icon": "gempire:purple_crystal_apple",
+  "category": "gempire:desolate_biomes",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "These enchanting stretches of forest are tinted with beautiful blue leaves from abundant amounts of alien trees.$(br2)They can be seen shedding seemingly endless amounts of leaves, which have leached their blue hues into the grass and dirt below."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Bluebells, along with many variants of Hydrangea, bloom here as well."
+    }
+  ]
+}
