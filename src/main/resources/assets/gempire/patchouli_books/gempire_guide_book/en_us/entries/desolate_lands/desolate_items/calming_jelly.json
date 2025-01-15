@@ -7,7 +7,7 @@
     {
       "type": "patchouli:spotlight",
       "item": "gempire:calming_jelly",
-      "text": "An oddly viscous substance that can be harvested from a Sorrow Jelly. They seem to be useful in the creation of Anatase armor."
+      "text": "An oddly viscous substance that can be harvested from a Sorrow Jelly.$(br2)They seem to be useful in the creation of Anatase armor and can possibly be consumed for a status effect."
     }
   ]
 }

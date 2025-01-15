@@ -1,0 +1,16 @@
+{
+  "name": "Paladin's Tower",
+  "icon": "minecraft:book",
+  "advancement": "gempire:desolate_lands/enter_paladin_tower",
+  "category": "gempire:structures",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A large tower made to resemble a pink flower. It's rumored to contain a treasured item that a long gone coloniser cherished most."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Suspected to have been used as a place of meditation and solitude.$(br2)It can be found in the Iridescent Plains."
+    }
+  ]
+}

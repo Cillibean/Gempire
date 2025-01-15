@@ -1,0 +1,29 @@
+{
+  "name": "Huntress's Arena",
+  "icon": "minecraft:book",
+  "advancement": "gempire:desolate_lands/enter_huntress_arena",
+  "category": "gempire:structures",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A grand, intimidating structure that houses an altar of summoning and a combat arena."
+    },
+    {
+      "type": "patchouli:multiblock",
+      "name": "Yellow Summoning Altar",
+      "enable_visualize": false,
+      "text": "Right click this altar with a Gilded Dagger to begin your boss battle.",
+      "multiblock": {
+        "pattern": [
+          [
+            "_0_"
+          ]
+        ],
+        "mapping": {
+          "0": "gempire:yellow_altar"
+        },
+        "symmetrical": true
+      }
+    }
+  ]
+}

@@ -1,12 +1,12 @@
 {
-  "name": "The Reef",
+  "name": "Rumor Page",
   "icon": "minecraft:nautilus_shell",
   "advancement": "gempire:root",
   "category": "gempire:structures",
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "To be filled out..."
+      "text": "I heard a rumor about an abandoned Pearl production line, somewhere in the ocean..."
     }
   ]
 }

@@ -1,0 +1,16 @@
+{
+  "name": "Empress's Crypt",
+  "icon": "minecraft:book",
+  "advancement": "gempire:desolate_lands/enter_empress_crypt",
+  "category": "gempire:structures",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "An underground shrine, having shockingly minimal wear for a structure this old. It features a very large statue that will forever be looking down at her crown."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "It's unsure how the statues eyes and hands glow, but you can still sense her unwavering authority long after she's gone.$(br2)It can be found often deep underground in the Prismatic Gates."
+    }
+  ]
+}

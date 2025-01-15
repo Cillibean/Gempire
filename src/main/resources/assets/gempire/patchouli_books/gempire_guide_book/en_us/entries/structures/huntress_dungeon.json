@@ -1,0 +1,16 @@
+{
+  "name": "Huntress's Dungeon",
+  "icon": "minecraft:book",
+  "advancement": "gempire:desolate_lands/enter_huntress_dungeon",
+  "category": "gempire:structures",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The site of countless savage experiments done to create living weapons for colonization. Anyone who opposed a leaders will would become a subject, though it's not sure where these subjects are now."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Or why the holding cells seem to be torn open...$(br2)It can be found in the Gilded Wastes."
+    }
+  ]
+}

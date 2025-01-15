@@ -1,7 +1,7 @@
 {
-  "name": "Sky Arena",
+  "name": "(Small) Sky Arena",
   "icon": "minecraft:book",
-  "advancement": "gempire:root",
+  "advancement": "gempire:enter_small_sky_arena",
   "category": "gempire:structures",
   "pages": [
     {

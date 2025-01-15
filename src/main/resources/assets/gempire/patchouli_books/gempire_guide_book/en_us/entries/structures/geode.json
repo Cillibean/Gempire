@@ -1,7 +1,7 @@
 {
   "name": "The Geode",
   "icon": "minecraft:book",
-  "advancement": "gempire:root",
+  "advancement": "gempire:enter_the_geode",
   "category": "gempire:structures",
   "pages": [
     {

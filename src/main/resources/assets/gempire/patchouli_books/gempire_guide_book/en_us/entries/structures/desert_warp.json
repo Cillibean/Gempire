@@ -1,7 +1,7 @@
 {
   "name": "Desert Warp",
   "icon": "minecraft:book",
-  "advancement": "gempire:root",
+  "advancement": "gempire:enter_desert_warp",
   "category": "gempire:structures",
   "pages": [
     {

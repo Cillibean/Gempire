@@ -1,0 +1,29 @@
+{
+  "name": "Guardian's Arena",
+  "icon": "minecraft:book",
+  "advancement": "gempire:desolate_lands/enter_guardian_arena",
+  "category": "gempire:structures",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A grand, intimidating structure that houses an altar of summoning and a combat arena."
+    },
+    {
+      "type": "patchouli:multiblock",
+      "name": "Blue Summoning Altar",
+      "enable_visualize": false,
+      "text": "Right click this altar with a Guardian's Tear to begin your boss battle.",
+      "multiblock": {
+        "pattern": [
+          [
+            "_0_"
+          ]
+        ],
+        "mapping": {
+          "0": "gempire:blue_altar"
+        },
+        "symmetrical": true
+      }
+    }
+  ]
+}

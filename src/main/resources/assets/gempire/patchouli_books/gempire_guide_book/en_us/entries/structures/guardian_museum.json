@@ -1,0 +1,12 @@
+{
+  "name": "Guardian's Museum",
+  "icon": "minecraft:book",
+  "advancement": "gempire:desolate_lands/enter_guardian_museum",
+  "category": "gempire:structures",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A floating museum used to hold and showcase the most prestigious of relics. At the very top, you can find the highly valuable tear of a once almighty leader, thought to bring mental clarity and intelligence to those near it.$(br2)It can be found in the Mirrored Seas."
+    }
+  ]
+}

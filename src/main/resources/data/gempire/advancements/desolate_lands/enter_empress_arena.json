@@ -1,0 +1,36 @@
+{
+  "display": {
+    "icon": {
+      "item": "gempire:alabaster_shards"
+    },
+    "title": {
+      "translate": "advancements.gempire.empress_arena.title"
+    },
+    "description": {
+      "translate": "advancements.gempire.empress_arena.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": true
+  },
+  "parent": "gempire:desolate_lands/enter_empress_crypt",
+  "criteria": {
+    "structure": {
+      "trigger": "minecraft:location",
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "structure": "gempire:empress_arena"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

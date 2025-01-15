@@ -1,7 +1,7 @@
 {
   "name": "Communications Hub",
   "icon": "minecraft:book",
-  "advancement": "gempire:root",
+  "advancement": "gempire:enter_comm_hub",
   "category": "gempire:structures",
   "pages": [
     {

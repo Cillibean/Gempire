@@ -1,7 +1,7 @@
 {
   "name": "Sea Shrine",
   "icon": "minecraft:book",
-  "advancement": "gempire:root",
+  "advancement": "gempire:enter_sea_shrine",
   "category": "gempire:structures",
   "pages": [
     {

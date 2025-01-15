@@ -1,0 +1,36 @@
+{
+  "display": {
+    "icon": {
+      "item": "gempire:paladin_flower"
+    },
+    "title": {
+      "translate": "advancements.gempire.paladin_tower.title"
+    },
+    "description": {
+      "translate": "advancements.gempire.paladin_tower.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": true
+  },
+  "parent": "gempire:desolate_lands/root",
+  "criteria": {
+    "structure": {
+      "trigger": "minecraft:location",
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "structure": "gempire:paladin_tower"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

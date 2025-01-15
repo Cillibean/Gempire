@@ -1,0 +1,36 @@
+{
+  "display": {
+    "icon": {
+      "item": "gempire:empress_star"
+    },
+    "title": {
+      "translate": "advancements.gempire.empress_crypt.title"
+    },
+    "description": {
+      "translate": "advancements.gempire.empress_crypt.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": true
+  },
+  "parent": "gempire:desolate_lands/root",
+  "criteria": {
+    "structure": {
+      "trigger": "minecraft:location",
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "structure": "gempire:empress_crypt"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,7 +1,7 @@
 {
   "name": "Colony Ship",
   "icon": "minecraft:book",
-  "advancement": "gempire:root",
+  "advancement": "gempire:enter_colony_ship",
   "category": "gempire:structures",
   "pages": [
     {

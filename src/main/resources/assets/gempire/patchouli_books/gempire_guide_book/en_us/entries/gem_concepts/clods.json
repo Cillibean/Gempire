@@ -16,7 +16,7 @@
       "entity": "gempire:shambler",
       "name": "A Shambler",
       "rotate": "true",
-      "scale": 0.8,
+      "scale": 0.7,
       "text": "A bipedal clod variant that rushes to players and gems so they can attack them."
     },
     {
@@ -24,7 +24,7 @@
       "entity": "gempire:abomination",
       "name": "An Abomination",
       "rotate": "true",
-      "scale": 0.8,
+      "scale": 0.6,
       "text": "A much larger bipedal clod variant that rushes to players and gems so they can attack them."
     },
     {

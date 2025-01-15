@@ -1,7 +1,7 @@
 {
   "name": "Great Northern Warp",
   "icon": "minecraft:book",
-  "advancement": "gempire:root",
+  "advancement": "gempire:enter_northern_warp",
   "category": "gempire:structures",
   "pages": [
     {

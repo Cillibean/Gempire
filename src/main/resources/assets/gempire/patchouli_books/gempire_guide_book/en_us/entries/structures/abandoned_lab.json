@@ -1,12 +1,12 @@
 {
-  "name": "Abandoned Laboratory",
+  "name": "Rumor Page",
   "icon": "minecraft:book",
   "advancement": "gempire:root",
   "category": "gempire:structures",
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "To be filled out..."
+      "text": "I heard a rumor about an abandoned gem laboratory somewhere..."
     }
   ]
 }

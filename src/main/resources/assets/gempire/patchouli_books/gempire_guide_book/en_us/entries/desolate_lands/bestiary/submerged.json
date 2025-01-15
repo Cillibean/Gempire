@@ -7,12 +7,12 @@
     {
       "type": "patchouli:entity",
       "entity": "minecraft:creeper",
-      "name": "Bleached Wyvern (NYI)",
+      "name": "Submerged (NYI)",
       "rotate": "true"
     },
     {
       "type": "patchouli:text",
-      "text": "I heard a rumor about Bleached Wyverns, airborne hostile creatures found in the Prismatic Gates biome. They supposedly drop bleached teeth, a prized trophy among collectors."
+      "text": "I heard a rumor about groups of undead entities known as Submerged... they carry trident-shaped destabilizers with them."
     }
   ]
 }

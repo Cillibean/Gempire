@@ -1,7 +1,7 @@
 {
   "name": "Galaxy Warp",
   "icon": "gempire:galaxy_warp",
-  "advancement": "gempire:root",
+  "advancement": "gempire:enter_galaxy_warp",
   "category": "gempire:structures",
   "pages": [
     {

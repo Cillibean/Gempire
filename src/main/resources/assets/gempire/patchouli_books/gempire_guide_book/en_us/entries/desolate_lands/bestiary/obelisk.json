@@ -7,12 +7,12 @@
     {
       "type": "patchouli:entity",
       "entity": "minecraft:creeper",
-      "name": "Bleached Wyvern (NYI)",
+      "name": "Obelisk (NYI)",
       "rotate": "true"
     },
     {
       "type": "patchouli:text",
-      "text": "I heard a rumor about Bleached Wyverns, airborne hostile creatures found in the Prismatic Gates biome. They supposedly drop bleached teeth, a prized trophy among collectors."
+      "text": "I heard a rumor about an entity known as an Obelisk, tall sturdy creatures found in the Prismatic Gates biome that blast lasers at their opponents... they allegedly drop shards of light."
     }
   ]
 }
