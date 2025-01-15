@@ -1,7 +1,7 @@
 {
   "name": "Pincule",
   "icon": "gempire:pincule",
-  "advancement": "gempire:root",
+  "advancement": "gempire:desolate_lands/root",
   "category": "gempire:herbarium",
   "pages": [
     {

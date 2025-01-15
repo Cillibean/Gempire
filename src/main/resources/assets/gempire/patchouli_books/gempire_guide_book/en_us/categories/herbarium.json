@@ -2,5 +2,6 @@
   "name": "Herbarium",
   "description": "An index of information about the flora found in the Desolate Lands.",
   "icon": "gempire:hydrangea_bush_pink",
-  "secret": "false"
+  "secret": "false",
+  "parent": "gempire:desolate_lands"
 }

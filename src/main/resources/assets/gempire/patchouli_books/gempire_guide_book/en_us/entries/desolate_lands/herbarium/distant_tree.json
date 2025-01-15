@@ -1,7 +1,7 @@
 {
   "name": "Distant Trees",
   "icon": "gempire:distant_log",
-  "advancement": "gempire:root",
+  "advancement": "gempire:desolate_lands/root",
   "category": "gempire:herbarium",
   "pages": [
     {

@@ -1,7 +1,7 @@
 {
   "name": "Bluebells",
   "icon": "gempire:blue_bells",
-  "advancement": "gempire:root",
+  "advancement": "gempire:desolate_lands/root",
   "category": "gempire:herbarium",
   "pages": [
     {

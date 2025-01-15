@@ -1,6 +1,6 @@
 {
   "name": "Crystal Deer",
-  "icon": "gempire:thulite_nugget",
+  "icon": "gempire:raw_crystal_shank",
   "advancement": "gempire:desolate_lands/kill_crystal_deer",
   "category": "gempire:bestiary",
   "pages": [
@@ -14,7 +14,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "These beautiful creatures spawn in the Iridescent Plains biome and have evolved to blend into their surroundings. Their backs are lined with mimicked forms of Thulite.$(br2)They are passive in nature, and flee when attacked."
+      "text": "These beautiful creatures spawn in the Iridescent Plains biome and have evolved to blend into their surroundings. Their backs are lined with mimicked forms of Thulite.$(br2)They are passive in nature, and flee when attacked. They drop crystalline shanks that can be cooked for a meal."
     }
   ]
 }
