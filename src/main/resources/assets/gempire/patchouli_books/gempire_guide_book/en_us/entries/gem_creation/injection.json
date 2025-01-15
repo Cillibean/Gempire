@@ -43,14 +43,14 @@
     },
     {
       "type": "patchouli:text",
-      "text": "The following slot next to the Chroma slot is used for primer items. These items help influence a gem type to pop out from the ground.$(br2)Gem pages list their favored primer item for injection."
+      "text": "The following slot next to the Chroma slot is used for gem trigger items. These items help influence a gem type to pop out from the ground.$(br2)Gem pages list their favored trigger item for injection."
     },
     {
       "type": "patchouli:spotlight",
       "title": "Gem Essence",
       "link_recipe ": false,
       "item": "gempire:white_essence_bucket,gempire:yellow_essence_bucket,gempire:blue_essence_bucket,gempire:pink_essence_bucket",
-      "text": "Don't forget to fill your bars! There's a slot at the top of the bars for gem essence bottles and congealed gem essences.$(br2)Each gem requires a specific color combination, but using all four essences will give any gem with the risk of lower quality gems.$(br2)Click the bars to select the color you want to use."
+      "text": "Don't forget to fill your bars! There's a slot at the top of the bars for gem essence bottles and congealed gem essences.$(br2)Each gem requires a specific color combination, but using all four essences at once will give any gem with great risk of lower quality gems.$(br2)Click the bars to select the color you want to use."
     },
     {
       "type": "patchouli:text",
