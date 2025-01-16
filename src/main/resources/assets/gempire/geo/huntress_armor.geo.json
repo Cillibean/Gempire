@@ -3,7 +3,7 @@
 	"minecraft:geometry": [
 		{
 			"description": {
-				"identifier": "geometry.paladin_armor",
+				"identifier": "geometry.huntress_armor",
 				"texture_width": 128,
 				"texture_height": 128,
 				"visible_bounds_width": 3,
@@ -963,7 +963,7 @@
 					]
 				},
 				{
-					"name": "armorRightBoot2",
+					"name": "armorRightBoot",
 					"parent": "bipedRightLeg",
 					"pivot": [-2, 12, 0],
 					"cubes": [

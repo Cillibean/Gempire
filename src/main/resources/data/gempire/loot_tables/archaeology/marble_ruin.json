@@ -1,0 +1,154 @@
+{
+  "type": "minecraft:archaeology",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "gempire:tungsten_nugget"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "gempire:prismatic_ingot"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "gempire:white_chroma"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "gempire:red_chroma"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "gempire:orange_chroma"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "gempire:yellow_chroma"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "gempire:lime_chroma"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "gempire:green_chroma"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "gempire:cyan_chroma"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "gempire:light_blue_chroma"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "gempire:blue_chroma"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "gempire:purple_chroma"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "gempire:magenta_chroma"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "gempire:pink_chroma"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "gempire:black_chroma"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "gempire:gray_chroma"
+        },{
+          "type": "minecraft:item",
+          "name": "gempire:light_gray_chroma"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "gempire:brown_chroma"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "gempire:special_chroma"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "gempire:white_shards"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "gempire:red_shards"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "gempire:orange_shards"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "gempire:yellow_shards"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "gempire:lime_shards"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "gempire:green_shards"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "gempire:cyan_shards"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "gempire:light_blue_shards"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "gempire:blue_shards"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "gempire:purple_shards"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "gempire:magenta_shards"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "gempire:pink_shards"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "gempire:black_shards"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "gempire:gray_shards"
+        },{
+          "type": "minecraft:item",
+          "name": "gempire:light_gray_shards"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "gempire:brown_shards"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "gempire:special_shards"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "gempire:archaeology/marble_ruin"
+}

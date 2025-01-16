@@ -37,6 +37,15 @@
         "location": "gempire:marble_dungeon_staircase_down",
         "processors": "minecraft:empty"
       }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "projection": "rigid",
+        "location": "gempire:marble_corridor_fork",
+        "processors": "minecraft:empty"
+      }
     }
   ]
 }

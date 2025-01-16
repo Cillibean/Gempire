@@ -3,7 +3,7 @@
   "fallback": "minecraft:empty",
   "elements": [
     {
-      "weight": 2,
+      "weight": 4,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "projection": "rigid",
@@ -12,7 +12,16 @@
       }
     },
     {
-      "weight": 3,
+      "weight": 4,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "projection": "rigid",
+        "location": "gempire:marble_dungeon_room_spawner",
+        "processors": "minecraft:empty"
+      }
+    },
+    {
+      "weight": 6,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "projection": "rigid",
@@ -21,11 +30,20 @@
       }
     },
     {
-      "weight": 3,
+      "weight": 6,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "projection": "rigid",
         "location": "gempire:marble_dungeon_room2",
+        "processors": "minecraft:empty"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "projection": "rigid",
+        "location": "gempire:marble_dungeon_chamber",
         "processors": "minecraft:empty"
       }
     }

@@ -1475,8 +1475,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                             Objects.requireNonNull(this.spawnAtLocation(stack)).setExtendedLifetime();
                             this.setItemSlot(EquipmentSlot.OFFHAND, Items.AIR.getDefaultInstance());
                         }
-                    }
-                    if (!(player.getMainHandItem().getItem() instanceof DestabBase)) {
+                    } else if (!(player.getMainHandItem().getItem() instanceof DestabBase)) {
                         if (roundAmount > hardness*2) {
                             float excess = ((float)roundAmount-hardness) / 2;
                             float shatterChancef = shatterChance;
