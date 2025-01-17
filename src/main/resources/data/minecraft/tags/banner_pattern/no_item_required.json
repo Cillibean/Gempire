@@ -1,5 +1,9 @@
 {
   "values": [
-    "gempire:diamond"
+    "gempire:diamond",
+    "gempire:pink_diamond",
+    "gempire:blue_diamond",
+    "gempire:yellow_diamond",
+    "gempire:white_diamond"
   ]
 }
