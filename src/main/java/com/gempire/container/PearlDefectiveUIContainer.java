@@ -30,17 +30,6 @@ public class PearlDefectiveUIContainer extends AbstractContainerMenu {
         this.gem = gem;
         this.canInteract = ContainerLevelAccess.create(this.gem.level(), this.gem.blockPosition());
 
-        //INITIALIZE GEM INVENTORY HERE
-        for(int row = 0; row < 4; row++){
-            for(int col = 0; col < 4; col++){
-                this.addSlot(new Slot(gem, col + row * 4, 27 + col * 18, 103 - (4 - row) * 18 - 10){
-                    public boolean mayPlace(ItemStack stack) {
-                        return !(stack.getItem() instanceof ItemGem || !(stack.getItem().canFitInsideContainerItems()));
-                    }
-                });
-            }
-        }
-
         //PLAYER INVENTORY
         for(int row = 0; row < 3; row++){
             for(int col = 0; col < 9; col++){
@@ -51,6 +40,17 @@ public class PearlDefectiveUIContainer extends AbstractContainerMenu {
         //PLAYER HOTBAR
         for(int col = 0; col < 9; col++){
             this.addSlot(new Slot(playerInventory, col, 19 + col * 18, 226));
+        }
+
+        //INITIALIZE GEM INVENTORY HERE
+        for(int row = 0; row < 4; row++){
+            for(int col = 0; col < 4; col++){
+                this.addSlot(new Slot(gem, col + row * 4, 27 + col * 18, 103 - (4 - row) * 18 - 10){
+                    public boolean mayPlace(ItemStack stack) {
+                        return !(stack.getItem() instanceof ItemGem || !(stack.getItem().canFitInsideContainerItems()));
+                    }
+                });
+            }
         }
     }
 

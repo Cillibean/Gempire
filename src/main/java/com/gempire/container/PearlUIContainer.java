@@ -34,6 +34,18 @@ public class PearlUIContainer extends AbstractContainerMenu {
         this.gem = gem;
         this.canInteract = ContainerLevelAccess.create(this.gem.level(), this.gem.blockPosition());
 
+        //PLAYER INVENTORY
+        for(int row = 0; row < 3; row++){
+            for(int col = 0; col < 9; col++){
+                this.addSlot(new Slot(playerInventory, col + row * 9 + 9, 19 + col * 18, 250 - (4 - row) * 18 - 10));
+            }
+        }
+
+        //PLAYER HOTBAR
+        for(int col = 0; col < 9; col++){
+            this.addSlot(new Slot(playerInventory, col, 19 + col * 18, 226));
+        }
+
         //INITIALIZE GEM INVENTORY HERE
         for(int row = 0; row < 6; row++){
             for(int col = 0; col < 9; col++){
@@ -43,18 +55,6 @@ public class PearlUIContainer extends AbstractContainerMenu {
                     }
                 });
             }
-        }
-
-        //PLAYER INVENTORY
-        for(int row = 0; row < 3; row++){
-            for(int col = 0; col < 9; col++){
-                this.addSlot(new Slot(playerInventory, col + row * 9 + 9, 95 + col * 18, 240 - (4 - row) * 18 - 10));
-            }
-        }
-
-        //PLAYER HOTBAR
-        for(int col = 0; col < 9; col++){
-            this.addSlot(new Slot(playerInventory, col, 95 + col * 18, 216));
         }
     }
 
