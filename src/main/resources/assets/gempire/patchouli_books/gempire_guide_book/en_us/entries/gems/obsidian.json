@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "patchouli:entity",
-      "entity": "gempire:obsidian{gemColor:3160642,skinColor:2829619,hairColor:14672617,marking2Color:15264511,markingColor:15790327,markingVariant:0,hairVariant:0,insigniaColor:0,outfitColor:7,gemPlacement:2,xscale:1,yscale:1,zscale:1}",
+      "entity": "gempire:obsidian{colour:'2829619,14672617,3160642,15790327,15264511,7,0,0',variant:'0,0,2,0,0,0,0,0,0',scale:'1,1,1',display:true}",
       "name": "Obsidian",
       "rotate": "true",
       "text": "A glass cannon soldier gem that can also be ridden around for quick transport over dangerous terrain."

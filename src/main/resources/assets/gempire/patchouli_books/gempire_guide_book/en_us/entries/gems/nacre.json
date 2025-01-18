@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "patchouli:entity",
-      "entity": "gempire:nacre{gemColor:16641019,skinColor:15858684,hairVariant:1,hairColor:15858684,xscale:1,yscale:1,zscale:1}",
+      "entity": "gempire:nacre{colour:'15858684,15858684,16641019,0,0,0,0,0',variant:'0,1,0,0,0,0,0,0,0',scale:'1,1,1',display:true}",
       "name": "Nacre",
       "rotate": "true",
       "scale": 0.4,

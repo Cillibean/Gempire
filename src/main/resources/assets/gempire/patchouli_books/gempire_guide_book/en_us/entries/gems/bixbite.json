@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "patchouli:entity",
-      "entity": "gempire:bixbite{gemColor:13714527,skinColor:13921923,hairColor:16514266,hairVariant:0,insigniaColor:14,outfitColor:14,gemPlacement:11,xscale:1,yscale:1,zscale:1}",
+      "entity": "gempire:bixbite{colour:'13921923,16514266,13714527,0,0,14,14,0',variant:'0,0,11,0,0,0,0,0,0',scale:'1,1,1',display:true}",
       "name": "Bixbite",
       "rotate": "true",
       "offset": 0.4,

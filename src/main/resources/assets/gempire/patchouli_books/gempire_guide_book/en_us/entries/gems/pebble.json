@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "patchouli:entity",
-      "entity": "gempire:pebble{gemColor:14277093,skinColor:9997719,hairVariant:0,hairColor:9997719,insigniaColor:6,outfitColor:6,xscale:1,yscale:1,zscale:1}",
+      "entity": "gempire:pebble{colour:'9997719,9997719,14277093,0,0,6,6,0',variant:'0,0,17,0,0,0,0,0,0',scale:'1,1,1',display:true},",
       "name": "Pebble",
       "rotate": "true",
       "scale": 0.4,

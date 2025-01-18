@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "patchouli:entity",
-      "entity": "gempire:garnet{skinColorVariant:1,skinColor:15902210,hairColor:16315033,gemColor:15833600,gemPlacement:11,hairVariant:1,insigniaColor:1,outfitColor:1,outfitVariant:2,insigniaVariant:2,xscale:1,yscale:1,zscale:1}",
+      "entity": "gempire:garnet{colour:'15902210,16315033,15833600,0,0,1,1,0',variant:'0,0,11,0,0,2,2,0,0',scale:'1,1,1',util:'0,1,false,0,false,false,0,0,0',display:true}",
       "name": "Garnet",
       "rotate": "true",
       "offset": 0.4,

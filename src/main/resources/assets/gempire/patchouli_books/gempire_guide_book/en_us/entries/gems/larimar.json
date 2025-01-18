@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "patchouli:entity",
-      "entity": "gempire:larimar{gemColor:11908349,skinColor:9174243,hairColor:15596798,hairVariant:0,insigniaColor:3,outfitColor:3,gemPlacement:0,xscale:1,yscale:1,zscale:1}",
+      "entity": "gempire:larimar{colour:'9174243,15596798,11908349,0,0,3,3,0',variant:'0,0,0,0,0,0,0,0,0',scale:'1,1,1',display:true}",
       "name": "Larimar",
       "rotate": "true",
       "offset": 0.2,

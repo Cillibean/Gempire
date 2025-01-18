@@ -1,4 +1,4 @@
-// 1.20.1	2025-01-12T11:07:59.809869	Loot Tables
+// 1.20.1	2025-01-18T20:31:30.566292	Loot Tables
 3563fbcf8563263afd9f878ab9ce993c99892f66 data/gempire/loot_tables/blocks/abnormal_sand.json
 e92c16f5ce8ec1e58947f3367b0ba30450bc85b7 data/gempire/loot_tables/blocks/abnormal_sandstone.json
 51f0b4954e965b758421cac9beaa853342528e93 data/gempire/loot_tables/blocks/alien_flower.json
@@ -79,7 +79,7 @@ f2cbc41deb1bbdbadf35965de34eac23da33e6ab data/gempire/loot_tables/blocks/distant
 a94af48ab5bccbc87e440848727c8a914bd76394 data/gempire/loot_tables/blocks/distant_fence.json
 9744f1bdcb53eebd50730e8baec0e2cb3c1f6b7a data/gempire/loot_tables/blocks/distant_fence_gate.json
 c92e75fcb96e3b4355027106bb69ed4950ac91a2 data/gempire/loot_tables/blocks/distant_hanging_sign.json
-028603aa7e57883cd72ecaf3e0bf92ab7d019953 data/gempire/loot_tables/blocks/distant_leaves.json
+66f3048b64ba10ae7b9f378fb63e9307de70cc3d data/gempire/loot_tables/blocks/distant_leaves.json
 7fbe96b55ccceff3a596308ad628a45ab3b03bfe data/gempire/loot_tables/blocks/distant_log.json
 1730092c8413a6074ae31e31d2d09c2b66331062 data/gempire/loot_tables/blocks/distant_planks.json
 2a475d57a9f40444681974f21b1c1fde7872b602 data/gempire/loot_tables/blocks/distant_sapling.json
@@ -312,7 +312,7 @@ c0fd9d006f787b029c75493cd30c7a9b1fe99f54 data/gempire/loot_tables/blocks/hydrang
 3536c8e25e2589e70708181445be2a964b00a8d0 data/gempire/loot_tables/blocks/kaleidoscope_fence.json
 2023eff3edbb0115ec4fbd61ae202581a2450637 data/gempire/loot_tables/blocks/kaleidoscope_fence_gate.json
 08d0f7320c233852da67cb774c810be300a7f15f data/gempire/loot_tables/blocks/kaleidoscope_hanging_sign.json
-caf74fe3e8901e78c8f35f4b4bd960ade7e18e0e data/gempire/loot_tables/blocks/kaleidoscope_leaves.json
+996fb2ec4b0f14288c150823e9e4d963de55047e data/gempire/loot_tables/blocks/kaleidoscope_leaves.json
 492469ef6e53aea719099d35585230e547b60040 data/gempire/loot_tables/blocks/kaleidoscope_log.json
 21aff16052df30f609af3050901b53678b85b387 data/gempire/loot_tables/blocks/kaleidoscope_planks.json
 f6555b6df819c0d59923db59972f258304091961 data/gempire/loot_tables/blocks/kaleidoscope_sapling.json
@@ -436,7 +436,7 @@ f9ff2126c0a46ced7cd52dc045eaa0ab7c1bf6a4 data/gempire/loot_tables/blocks/selenit
 e1b300fd15d604037b559412373242a5c2876ed8 data/gempire/loot_tables/blocks/shaded_fence.json
 cdfe71468497a4fbd318d4000dc7252ef2921be3 data/gempire/loot_tables/blocks/shaded_fence_gate.json
 422eec434a3e7ed897894ab1b20c4327f87fd3a4 data/gempire/loot_tables/blocks/shaded_hanging_sign.json
-0b99bdb72cc77081d3ae1b2e15e6a1bfcef556ac data/gempire/loot_tables/blocks/shaded_leaves.json
+a8c1d76db69e0148c8e33a340cf935934157e20e data/gempire/loot_tables/blocks/shaded_leaves.json
 c6d1d46c6d7fe06860aa554ea1533b8d6e20afaa data/gempire/loot_tables/blocks/shaded_log.json
 73f20dbc6520a502569e2143cd1d46ffe69a31d6 data/gempire/loot_tables/blocks/shaded_planks.json
 f37063f7bbd1efecd8958ac1091bd5aeb8595568 data/gempire/loot_tables/blocks/shaded_sapling.json
@@ -479,7 +479,7 @@ be6333cea483ce0e3818896d91ffc0e7701e4ca4 data/gempire/loot_tables/blocks/thulite
 c676d57d30a58171a77c7bbcbfb59012c6264642 data/gempire/loot_tables/blocks/verdant_pine_fence.json
 8db87f3671b2e3547105b8977ce1bdc844bb96c0 data/gempire/loot_tables/blocks/verdant_pine_fence_gate.json
 cdb8d381299e3fd41b83d905c481e03085e2fe4e data/gempire/loot_tables/blocks/verdant_pine_hanging_sign.json
-a12083014a6312049004904287e5edcc6e70fd31 data/gempire/loot_tables/blocks/verdant_pine_leaves.json
+dff7aaa5e917b3debdedba3a11f07ef418d29d95 data/gempire/loot_tables/blocks/verdant_pine_leaves.json
 a765ecc20b7fcd2fc352849dd2f0c2bca9361d0f data/gempire/loot_tables/blocks/verdant_pine_log.json
 db2cffea79d209d3692349936ee82eecf4dfb38b data/gempire/loot_tables/blocks/verdant_pine_planks.json
 15ff6b936d11ff777a824043d3340d4653413ef4 data/gempire/loot_tables/blocks/verdant_pine_sapling.json

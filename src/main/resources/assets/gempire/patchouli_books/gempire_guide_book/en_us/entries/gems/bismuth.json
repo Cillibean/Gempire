@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "patchouli:entity",
-      "entity": "gempire:bismuth{skinColor:9545935,hairVariant:1,insigniaColor:3,outfitColor:3,gemPlacement:11,hairColor:16777215,gemColor:16777215,xscale:1,yscale:1,zscale:1}",
+      "entity": "gempire:bismuth{colour:'9545935,16777215,16777215,0,0,3,3,0',variant:'0,1,11,0,0,0,0,0,0',scale:'1,1,1',display:true}",
       "name": "Bismuth",
       "rotate": "true",
       "offset": 0.3,

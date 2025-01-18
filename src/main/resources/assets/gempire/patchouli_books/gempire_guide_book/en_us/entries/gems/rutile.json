@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "patchouli:entity",
-      "entity": "gempire:rutile{hairColor:4654622,gemColor:10488843,skinColor:14823472,hairVariant:0,insigniaColor:1,outfitColor:14,gemPlacement:3,xscale:1,yscale:1,zscale:1}",
+      "entity": "gempire:rutile{colour:'14823472,4654622,10488843,0,0,14,1,0',variant:'0,0,3,0,0,0,0,0,0',scale:'1,1,1',display:true}",
       "name": "Rutile",
       "rotate": "true",
       "offset": 0.2

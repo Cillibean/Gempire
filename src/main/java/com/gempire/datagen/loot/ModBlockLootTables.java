@@ -417,7 +417,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.DISTANT_FENCE.get());
         this.dropSelf(ModBlocks.DISTANT_STAIRS.get());
         this.dropSelf(ModBlocks.DISTANT_TRAPDOOR.get());
-        this.add(ModBlocks.DISTANT_LEAVES.get(), (block -> createLeavesDrops(ModBlocks.DISTANT_LEAVES.get(), ModBlocks.DISTANT_SAPLING.get())));
+        this.add(ModBlocks.DISTANT_LEAVES.get(), (block -> createLeavesDrops(ModBlocks.DISTANT_LEAVES.get(), ModBlocks.DISTANT_SAPLING.get(), new float[]{0.005F, 0.0055555557F, 0.00625F, 0.008333334F, 0.025F})));
         this.add(ModBlocks.DISTANT_SLAB.get(), (block -> createSlabItemTable(ModBlocks.DISTANT_SLAB.get())));
         this.add(ModBlocks.DISTANT_DOOR.get(), (block -> createDoorTable(ModBlocks.DISTANT_DOOR.get())));
         this.add(ModBlocks.DISTANT_HANGING_SIGN.get(), (block -> createSingleItemTable(ModItems.DISTANT_HANGING_SIGN.get())));
@@ -449,7 +449,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.VERDANT_PINE_FENCE.get());
         this.dropSelf(ModBlocks.VERDANT_PINE_STAIRS.get());
         this.dropSelf(ModBlocks.VERDANT_PINE_TRAPDOOR.get());
-        this.add(ModBlocks.VERDANT_PINE_LEAVES.get(), (block -> createLeavesDrops(ModBlocks.VERDANT_PINE_LEAVES.get(), ModBlocks.VERDANT_PINE_SAPLING.get())));
+        this.add(ModBlocks.VERDANT_PINE_LEAVES.get(), (block -> createLeavesDrops(ModBlocks.VERDANT_PINE_LEAVES.get(), ModBlocks.VERDANT_PINE_SAPLING.get(), new float[]{0.005F, 0.0055555557F, 0.00625F, 0.008333334F, 0.025F})));
         this.add(ModBlocks.VERDANT_PINE_SLAB.get(), (block -> createSlabItemTable(ModBlocks.VERDANT_PINE_SLAB.get())));
         this.add(ModBlocks.VERDANT_PINE_DOOR.get(), (block -> createDoorTable(ModBlocks.VERDANT_PINE_DOOR.get())));
         this.add(ModBlocks.VERDANT_PINE_HANGING_SIGN.get(), (block -> createSingleItemTable(ModItems.VERDANT_PINE_HANGING_SIGN.get())));
@@ -466,7 +466,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.KALEIDOSCOPE_FENCE.get());
         this.dropSelf(ModBlocks.KALEIDOSCOPE_STAIRS.get());
         this.dropSelf(ModBlocks.KALEIDOSCOPE_TRAPDOOR.get());
-        this.add(ModBlocks.KALEIDOSCOPE_LEAVES.get(), (block -> createLeavesDrops(ModBlocks.KALEIDOSCOPE_LEAVES.get(), ModBlocks.KALEIDOSCOPE_SAPLING.get())));
+        this.add(ModBlocks.KALEIDOSCOPE_LEAVES.get(), (block -> createLeavesDrops(ModBlocks.KALEIDOSCOPE_LEAVES.get(), ModBlocks.KALEIDOSCOPE_SAPLING.get(), new float[]{0.005F, 0.0055555557F, 0.00625F, 0.008333334F, 0.025F})));
         this.add(ModBlocks.KALEIDOSCOPE_SLAB.get(), (block -> createSlabItemTable(ModBlocks.KALEIDOSCOPE_SLAB.get())));
         this.add(ModBlocks.KALEIDOSCOPE_DOOR.get(), (block -> createDoorTable(ModBlocks.KALEIDOSCOPE_DOOR.get())));
         this.add(ModBlocks.KALEIDOSCOPE_HANGING_SIGN.get(), (block -> createSingleItemTable(ModItems.KALEIDOSCOPE_HANGING_SIGN.get())));
@@ -483,7 +483,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.SHADED_FENCE.get());
         this.dropSelf(ModBlocks.SHADED_STAIRS.get());
         this.dropSelf(ModBlocks.SHADED_TRAPDOOR.get());
-        this.add(ModBlocks.SHADED_LEAVES.get(), (block -> createShadedLeavesDrops(ModBlocks.SHADED_LEAVES.get(), ModBlocks.SHADED_SAPLING.get())));
+        this.add(ModBlocks.SHADED_LEAVES.get(), (block -> createShadedLeavesDrops(ModBlocks.SHADED_LEAVES.get(), ModBlocks.SHADED_SAPLING.get(), new float[]{0.005F, 0.0055555557F, 0.00625F, 0.008333334F, 0.025F})));
         this.add(ModBlocks.SHADED_SLAB.get(), (block -> createSlabItemTable(ModBlocks.SHADED_SLAB.get())));
         this.add(ModBlocks.SHADED_DOOR.get(), (block -> createDoorTable(ModBlocks.SHADED_DOOR.get())));
         this.add(ModBlocks.SHADED_HANGING_SIGN.get(), (block -> createSingleItemTable(ModItems.SHADED_HANGING_SIGN.get())));

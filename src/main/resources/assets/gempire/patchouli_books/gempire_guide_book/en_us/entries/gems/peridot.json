@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "patchouli:entity",
-      "entity": "gempire:peridot{gemColor:3143722,skinColor:13434513,hairColor:16777190,hairVariant:0,insigniaColor:5,outfitColor:5,gemPlacement:0,xscale:1,yscale:1,zscale:1}",
+      "entity": "gempire:peridot{colour:'13434513,16777190,3143722,0,0,5,5,0',variant:'0,0,0,0,0,0,0,0,0',scale:'1,1,1',display:true}",
       "name": "Peridot",
       "rotate": "true",
       "offset": 0.4

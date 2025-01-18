@@ -88,8 +88,6 @@ public class EntityPearl extends EntityVaryingGem {
         super.addAdditionalSaveData(compound);
         compound.putInt("page", this.getPage());
         this.saveItems(compound);
-        System.out.println("add aditional save data");
-        System.out.println(compound.getList("Items1", 10).get(0));
     }
 
     public void saveItems(CompoundTag compoundNBT){
@@ -101,26 +99,10 @@ public class EntityPearl extends EntityVaryingGem {
         for(int i = 0; i < this.items2.size(); i++){
             list2.add(i, this.items2.get(i).save(new CompoundTag()));
         }
-        System.out.println(list1);
-        System.out.println(list2);
+        System.out.println("list 1 "+list1);
+        System.out.println("list 2 "+list2);
         compoundNBT.put("Items1", list1);
         compoundNBT.put("Items2", list2);
-    }
-
-    @Override
-    public void readAdditionalSaveData(CompoundTag compound) {
-        super.readAdditionalSaveData(compound);
-        this.setPage(compound.getInt("page"));
-        this.loadItems(compound);
-    }
-
-    @Override
-    public boolean save(CompoundTag compound) {
-        compound.putInt("page", this.getPage());
-        this.saveItems(compound);
-        System.out.println("add aditional save data");
-        System.out.println(compound.getList("Items1", 10).get(0));
-        return super.save(compound);
     }
 
     @Override
@@ -143,8 +125,8 @@ public class EntityPearl extends EntityVaryingGem {
             CompoundTag compoundnbt = list2.getCompound(i);
             newItems2.set(i, ItemStack.of(compoundnbt));
         }
-        System.out.println(newItems1);
-        System.out.println(newItems2);
+        System.out.println("items 1 "+newItems1);
+        System.out.println("items 2 "+newItems2);
         this.items1 = newItems1;
         this.items2 = newItems2;
     }

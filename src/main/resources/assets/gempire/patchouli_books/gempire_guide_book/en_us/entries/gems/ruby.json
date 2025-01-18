@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "patchouli:entity",
-      "entity": "gempire:ruby{skinColor:15683662,hairVariant:1,insigniaColor:14,outfitColor:14,gemPlacement:14,hairColor:1179648,gemColor:11141145,xscale:1,yscale:1,zscale:1}",
+      "entity": "gempire:ruby{colour:'15683662,1179648,11141145,0,0,14,14,0',variant:'0,1,14,0,0,0,0,0,0',scale:'1,1,1',display:true}",
       "name": "Ruby",
       "rotate": "true",
       "text": "A beginner soldier gem, best used in groups. Has pyrokinetic abilities."

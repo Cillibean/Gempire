@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "patchouli:entity",
-      "entity": "gempire:tourmaline{gemColor:14977977,skinColor:16429032,hairColor:16755907,marking2Color:4646815,markingColor:4646815,markingVariant:0,marking2Variant:0,hairVariant:0,insigniaColor:16,outfitColor:16,gemPlacement:13,skinColorVariant:16,xscale:1,yscale:1,zscale:1}",
+      "entity": "gempire:tourmaline{colour:'16429032,16755907,14977977,4646815,4646815,16,16,0',variant:'0,0,3,0,0,0,0,0,0',scale:'1,1,1',util:'0,16,false,0,false,false,0,0,0',display:true}",
       "name": "Tourmaline",
       "rotate": "true",
       "offset": 0.2

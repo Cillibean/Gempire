@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "patchouli:entity",
-      "entity": "gempire:nephrite{gemColor:8189304,skinColor:5287004,hairColor:16383700,markingColor:9895572,markingVariant:0,hairVariant:0,insigniaColor:13,outfitColor:15,gemPlacement:1,xscale:1,yscale:1,zscale:1}",
+      "entity": "gempire:nephrite{colour:'5287004,16383700,8189304,9895572,0,15,13,0',variant:'0,0,1,0,0,0,0,0,0',scale:'1,1,1',display:true}",
       "name": "Nephrite",
       "rotate": "true"
     },

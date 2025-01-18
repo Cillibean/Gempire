@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "patchouli:entity",
-      "entity": "gempire:emerald{gemColor:47224,skinColor:7601316,hairColor:1494665,hairVariant:0,insigniaColor:13,outfitColor:13,gemPlacement:2,xscale:1,yscale:1,zscale:1}",
+      "entity": "gempire:emerald{colour:'7601316,1494665,47224,0,0,13,13,0',variant:'0,0,2,0,0,0,0,0,0',scale:'1,1,1',display:true}",
       "name": "Emerald",
       "rotate": "true",
       "offset": 0.4

@@ -47,8 +47,17 @@ public class GemUIContainer extends AbstractContainerMenu {
         this.gem = gem;
         this.canInteract = ContainerLevelAccess.create(this.gem.level(), this.gem.blockPosition());
 
-        /*this.addSlot(new Slot((IInventory)this.gem, TankTE.BUCKET_INPUT_SLOT_INDEX, 78, 50));
-        this.addSlot(new Slot((IInventory)this.gem, TankTE.BUCKET_OUTPUT_SLOT_INDEX, 96, 50));*/
+        //PLAYER INVENTORY
+        for(int row = 0; row < 3; row++){
+            for(int col = 0; col < 9; col++){
+                this.addSlot(new Slot(playerInventory, col + row * 9 + 9, 19 + col * 18, 250 - (4 - row) * 18 - 10));
+            }
+        }
+
+        //PLAYER HOTBAR
+        for(int col = 0; col < 9; col++){
+            this.addSlot(new Slot(playerInventory, col, 19 + col * 18, 226));
+        }
 
         //INITIALIZE ARMOR SLOTS
         for(int k = 0; k < 4; ++k) {
@@ -80,18 +89,6 @@ public class GemUIContainer extends AbstractContainerMenu {
                     }
                 });
             }
-        }
-
-        //PLAYER INVENTORY
-        for(int row = 0; row < 3; row++){
-            for(int col = 0; col < 9; col++){
-                this.addSlot(new Slot(playerInventory, col + row * 9 + 9, 19 + col * 18, 250 - (4 - row) * 18 - 10));
-            }
-        }
-
-        //PLAYER HOTBAR
-        for(int col = 0; col < 9; col++){
-            this.addSlot(new Slot(playerInventory, col, 19 + col * 18, 226));
         }
     }
 
@@ -132,9 +129,11 @@ public class GemUIContainer extends AbstractContainerMenu {
         if (sourceSlot == null || !sourceSlot.hasItem()) return ItemStack.EMPTY;  //EMPTY_ITEM
         ItemStack sourceStack = sourceSlot.getItem();
         ItemStack copyOfSourceStack = sourceStack.copy();
-
+        System.out.println("quick move");
+        System.out.println("slot "+index);
         // Check if the slot clicked is one of the vanilla container slots
         if (index < VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT) {
+            System.out.println("vanilla container slots");
             // This is a vanilla container slot so merge the stack into the tile inventory
             if (!moveItemStackTo(sourceStack, TE_INVENTORY_FIRST_SLOT_INDEX, TE_INVENTORY_FIRST_SLOT_INDEX
                     + TE_INVENTORY_SLOT_COUNT, false)) {

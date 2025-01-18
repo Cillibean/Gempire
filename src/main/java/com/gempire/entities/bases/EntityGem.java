@@ -463,7 +463,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         super.addAdditionalSaveData(compound);
         compound.putString("abilities", this.getAbilities());
         compound.putString("name", this.getName().getString());
-        compound.putBoolean("display", this.entityData.get(EntityGem.DISPLAY));
+        compound.putBoolean("display", getDisplay());
         this.writeCrackShatter(compound);
         this.writeOwners(compound);
         this.writeIDs(compound);
@@ -481,7 +481,6 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         if (this.canLocateStructures()) compound.putInt("structureTime", this.structureTime);
         if (this.canLocateStructures()) this.writeStructures(compound);
         ContainerHelper.saveAllItems(compound, this.items);
-        System.out.println(compound);
     }
 
     public void writeOwners(CompoundTag compound) {
@@ -520,16 +519,17 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
     }
 
     public void readUtil(CompoundTag compound) {
-        String[] strings = compound.getString("util").split(",");
-        movementType = Byte.parseByte(strings[0]);
-        setSkinColorVariant(Integer.parseInt(strings[1]));
-        setRebelled(Boolean.parseBoolean(strings[2]));
-        setQuality(Integer.parseInt(strings[3]));
-        isHostile = Boolean.parseBoolean(strings[4]);
-        setAssigned(Boolean.parseBoolean(strings[5]));
-        rebelPoints = Float.parseFloat(strings[6]);
-        rebelTicks = Integer.parseInt(strings[7]);
-        GUARD_POS = BlockPos.of(Long.parseLong(strings[8]));
+        if (!compound.getString("util").isEmpty()) {
+            String[] strings = compound.getString("util").split(",");
+            movementType = Byte.parseByte(strings[0]);
+            setSkinColorVariant(Integer.parseInt(strings[1]));
+            setRebelled(Boolean.parseBoolean(strings[2]));
+            setQuality(Integer.parseInt(strings[3]));
+            isHostile = Boolean.parseBoolean(strings[4]);
+            setAssigned(Boolean.parseBoolean(strings[5]));
+            rebelPoints = Float.parseFloat(strings[6]);
+            rebelTicks = Integer.parseInt(strings[7]);
+        }
     }
 
     public void writeAbilityUtil(CompoundTag compound) {
@@ -694,11 +694,9 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
 
     @Override
     public void load(CompoundTag compound) {
-        boolean display = compound.getBoolean("display");
-        System.out.println(compound);
-        this.entityData.set(EntityGem.DISPLAY, display);
-        System.out.println(display);
-        if (!display) {
+        super.load(compound);
+        setDisplay(compound.getBoolean("display"));
+        if (!getDisplay()) {
             this.setCustomName(Component.translatable(compound.getString("name")));
             this.setAbilityPowers(this.findAbilities(compound.getString("abilities")));
             this.setAbilities(compound.getString("abilities"));
@@ -749,6 +747,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             this.readVariant(compound);
             this.readColour(compound);
             this.readScale(compound);
+            this.readUtil(compound);
         }
         super.load(compound);
     }
@@ -859,6 +858,8 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
         if (this.canCraft() && !outputList.isEmpty()) return outputList.get(i);
         else return Items.AIR;
     }
+
+
 
     public int getCurrentRecipe() {
         return this.entityData.get(EntityGem.CURRENT_RECIPE);
@@ -1627,7 +1628,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                 CompoundTag compound = new CompoundTag();
                 compound.putString("abilities", this.getAbilities());
                 compound.putString("name", this.getName().getString());
-                compound.putBoolean("display", this.entityData.get(EntityGem.DISPLAY));
+                compound.putBoolean("display", getDisplay());
                 this.writeCrackShatter(compound);
                 this.writeOwners(compound);
                 this.writeIDs(compound);
@@ -1645,6 +1646,25 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
                 if (this.canLocateStructures()) compound.putInt("structureTime", this.structureTime);
                 if (this.canLocateStructures()) this.writeStructures(compound);
                 ContainerHelper.saveAllItems(compound, this.items);
+                if (this instanceof EntityZircon) {
+                    compound.putInt("page", ((EntityZircon)this).getEnchantPage());
+                    compound.putInt("min", ((EntityZircon)this).getEnchantMin());
+                    compound.putBoolean("pagedefined", ((EntityZircon)this).getEnchantPageDefined());
+                }
+                if (this instanceof EntityPearl) {
+                    compound.putInt("page", ((EntityPearl)this).getPage());
+                    ((EntityPearl)this).saveItems(compound);
+                }
+                if (this instanceof EntityTourmaline) {
+                    compound.putString("crops", ((EntityTourmaline)this).getCrops());
+                    compound.putBoolean("building", ((EntityTourmaline)this).isBuilding());
+                }
+                if  (this instanceof EntityPeridot) {
+                    compound.putBoolean("hopperGoal", ((EntityPeridot)this).hopperGoal);
+                    compound.putString("warpMaterials", ((EntityPeridot)this).getWarpMaterials());
+                    compound.putString("warpAmounts", ((EntityPeridot)this).getWarpAmounts());
+                    compound.putString("warpCompleted", ((EntityPeridot)this).getCompleted());
+                }
                 stack.setTag(compound);
                 this.spawnAtLocation(stack).setExtendedLifetime();
             }
@@ -1652,6 +1672,14 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             this.kill();
         }
         super.die(source);
+    }
+
+    public boolean getDisplay() {
+        return this.entityData.get(EntityGem.DISPLAY);
+    }
+
+    public void setDisplay(boolean i) {
+        this.entityData.set(EntityGem.DISPLAY, i);
     }
 
     public Component getNickname(){

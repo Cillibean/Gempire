@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "patchouli:entity",
-      "entity": "gempire:sapphire{hairColor:11853054,gemColor:4353496,skinColor:8363263,hairVariant:0,insigniaColor:0,outfitColor:11,gemPlacement:13,xscale:1,yscale:1,zscale:1}",
+      "entity": "gempire:sapphire{colour:'8363263,11853054,4353496,0,0,11,0,0',variant:'0,0,13,0,0,0,0,0,0',scale:'1,1,1',display:true}",
       "name": "Sapphire",
       "rotate": "true",
       "text": "A small aristocratic gem that gives the luck effect, and uses cryokinesis in combat."
