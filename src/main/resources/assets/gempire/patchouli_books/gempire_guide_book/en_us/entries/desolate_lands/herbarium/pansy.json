@@ -1,0 +1,14 @@
+{
+  "name": "Pansy",
+  "icon": "gempire:pansie",
+  "advancement": "gempire:desolate_lands/enter_gilded_wastes",
+  "category": "gempire:herbarium",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Pansy",
+      "item": "gempire:pansie",
+      "text": "Pansies are a flower found in the Gilded Wastes biome."
+    }
+  ]
+}

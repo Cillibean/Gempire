@@ -1,0 +1,14 @@
+{
+  "name": "Chrysanthemum",
+  "icon": "gempire:chrysanthemum",
+  "advancement": "gempire:desolate_lands/enter_prismatic_gates",
+  "category": "gempire:florilegium",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Chrysanthemum",
+      "item": "gempire:chrysanthemum",
+      "text": "Chrysanthemums are a flower found in the Prismatic Gates biome."
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "Shaded Apples",
+  "icon": "gempire:shaded_apple",
+  "advancement": "gempire:root",
+  "category": "gempire:herbarium",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Shaded Apples",
+      "item": "gempire:shaded_apple",
+      "text": "A darkly colored apple variant that when consumed, grants resistance to blinding light."
+    }
+  ]
+}

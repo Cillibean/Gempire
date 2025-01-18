@@ -1,0 +1,14 @@
+{
+  "name": "Alien Flower",
+  "icon": "gempire:alien_flower",
+  "advancement": "gempire:desolate_lands/enter_iridescent_plains",
+  "category": "gempire:herbarium",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Alien Flower",
+      "item": "gempire:alien_flower",
+      "text": "Alien flowers are a flower found in the Iridescent Plains biome."
+    }
+  ]
+}

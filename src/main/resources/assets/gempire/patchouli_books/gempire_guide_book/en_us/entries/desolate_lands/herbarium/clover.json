@@ -1,0 +1,14 @@
+{
+  "name": "Clovers",
+  "icon": "gempire:clovers",
+  "advancement": "gempire:desolate_lands/root",
+  "category": "gempire:herbarium",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Clovers",
+      "item": "gempire:clovers",
+      "text": "Clovers are a flower found in the Desolate Lands."
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "Orchid",
+  "icon": "gempire:orchid",
+  "advancement": "gempire:desolate_lands/enter_prismatic_gates",
+  "category": "gempire:herbarium",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Orchid",
+      "item": "gempire:orchid",
+      "text": "Orchids are a flower found in the Prismatic Gates biome."
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "White Iris",
+  "icon": "gempire:white_iris",
+  "advancement": "gempire:desolate_lands/enter_prismatic_gates",
+  "category": "gempire:herbarium",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "White Iris",
+      "item": "gempire:white_iris",
+      "text": "White irises are a flower found in the Prismatic Gates biome."
+    }
+  ]
+}

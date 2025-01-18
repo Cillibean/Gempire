@@ -1,0 +1,14 @@
+{
+  "name": "Crocosmia",
+  "icon": "gempire:crocosmia",
+  "advancement": "gempire:desolate_lands/enter_gilded_wastes",
+  "category": "gempire:herbarium",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Crocosmia",
+      "item": "gempire:orchid",
+      "text": "Crocosmias are a flower found in the Gilded Wastes biome."
+    }
+  ]
+}

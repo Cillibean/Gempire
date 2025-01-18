@@ -1,0 +1,14 @@
+{
+  "name": "Nasturtium",
+  "icon": "gempire:nasturtium",
+  "advancement": "gempire:desolate_lands/root",
+  "category": "gempire:herbarium",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Nasturtium",
+      "item": "gempire:nasturtium",
+      "text": "Nasturtiums are a flower found in the Desolate Lands."
+    }
+  ]
+}

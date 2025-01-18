@@ -1,0 +1,12 @@
+{
+  "name": "Rumor Page",
+  "icon": "minecraft:book",
+  "advancement": "gempire:desolate_lands/root",
+  "category": "gempire:bestiary",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "I heard a rumor about a stretchy alien bird..."
+    }
+  ]
+}

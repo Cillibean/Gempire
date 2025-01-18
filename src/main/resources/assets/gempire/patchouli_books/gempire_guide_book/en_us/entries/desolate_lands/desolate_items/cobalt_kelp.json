@@ -1,0 +1,14 @@
+{
+  "name": "Cobalt Kelp",
+  "icon": "gempire:cobalt_kelp",
+  "advancement": "gempire:desolate_lands/root",
+  "category": "gempire:desolate_items",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "link_recipe ": true,
+      "item": "gempire:cobalt_kelp",
+      "text": "An aquatic fibre very similar to the kelp on Earth, however with a far more cerulean hue.$(br2)It can be found of any of the oceans in the Desolate Lands, and can be smelted into Dried Cobalt Kelp.$(br2)It doesn't look like you can do anything with this Dried Cobalt Kelp yet, however."
+    }
+  ]
+}

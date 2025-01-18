@@ -1,0 +1,44 @@
+{
+  "name": "Prismatic Tools and You",
+  "icon": "gempire:prismatic_ingot",
+  "advancement": "gempire:desolate_lands/root",
+  "category": "gempire:desolate_items",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Prismatic Pickaxe",
+      "item": "gempire:prismatic_pickaxe",
+      "text": "A pickaxe made with prismatic metal. Can be used to break tough glass."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Prismatic Axe",
+      "item": "gempire:prismatic_axe",
+      "text": "An axe made with prismatic metal."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Prismatic Sword",
+      "item": "gempire:prismatic_sword",
+      "text": "A sword made with prismatic metal."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Prismatic Shovel",
+      "item": "gempire:prismatic_shovel",
+      "text": "A shovel made with prismatic metal."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Prismatic Hoe",
+      "item": "gempire:prismatic_hoe",
+      "text": "A garden hoe made with prismatic metal."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Prismatic Flask",
+      "item": "gempire:prismatic_flask",
+      "text": "A glass flask with iridescent colors. Can be used to extract a crystal tear from stony hands."
+    }
+  ]
+}
