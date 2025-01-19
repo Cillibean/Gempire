@@ -9,8 +9,8 @@
       "entity": "gempire:spinel{colour:'16754642,14296965,16738220,0,0,6,0,0',variant:'0,7,11,0,0,0,0,0,0',scale:'1,1,1',display:true}",
       "name": "Spinel",
       "rotate": "true",
-      "scale": 0.7,
-      "offset": 0.2
+      "scale": 1.0,
+      "offset": 0.6
     },
     {
       "type": "patchouli:text",

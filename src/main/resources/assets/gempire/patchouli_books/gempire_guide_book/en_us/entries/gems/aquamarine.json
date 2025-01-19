@@ -10,7 +10,10 @@
       "name": "Aquamarine",
       "rotate": "true",
       "scale": 0.6,
-      "offset": 0.2,
+      "offset": 0.2
+    },
+    {
+      "type": "patchouli:text",
       "text": "A flying gem that can paralyze opponents, use water projectiles to attack with, and can rarely tame gems for you."
     },
     {

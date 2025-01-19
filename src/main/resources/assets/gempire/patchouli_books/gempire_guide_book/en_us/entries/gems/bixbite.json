@@ -9,12 +9,15 @@
       "entity": "gempire:bixbite{colour:'13921923,16514266,13714527,0,0,14,14,0',variant:'0,0,11,0,0,0,0,0,0',scale:'1,1,1',display:true}",
       "name": "Bixbite",
       "rotate": "true",
-      "offset": 0.4,
+      "scale": 1.5
+    },
+    {
+      "type": "patchouli:text",
       "text": "A rare utility gem that can deconstruct certain items, giving back their components. She also gives off a haste effect."
     },
     {
       "type": "patchouli:text",
-      "text": "$(l)Possible Abilities$() $(br)$(li)Tank$(li)Beefcake$(li)Powerhouse$(li)Unhinged$(li)Mining Inspiration$(br2) $(l)Definite Abilities$()$(br)$(li)Recycler)"
+      "text": "$(l)Possible Abilities$() $(br)$(li)Tank$(li)Beefcake$(li)Powerhouse$(li)Unhinged$(li)Mining Inspiration$(br2) $(l)Definite Abilities$()$(br)$(li)Recycler"
     },
     {
       "type": "patchouli:text",

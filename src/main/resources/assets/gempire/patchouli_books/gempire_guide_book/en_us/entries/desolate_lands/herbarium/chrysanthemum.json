@@ -2,7 +2,7 @@
   "name": "Chrysanthemum",
   "icon": "gempire:chrysanthemum",
   "advancement": "gempire:desolate_lands/enter_prismatic_gates",
-  "category": "gempire:florilegium",
+  "category": "gempire:herbarium",
   "pages": [
     {
       "type": "patchouli:spotlight",

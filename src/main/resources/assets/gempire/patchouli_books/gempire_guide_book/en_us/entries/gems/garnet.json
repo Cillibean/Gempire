@@ -9,7 +9,10 @@
       "entity": "gempire:garnet{colour:'15902210,16315033,15833600,0,0,1,1,0',variant:'0,0,11,0,0,2,2,0,0',scale:'1,1,1',util:'0,1,false,0,false,false,0,0,0',display:true}",
       "name": "Garnet",
       "rotate": "true",
-      "offset": 0.4,
+      "scale": 1.5
+    },
+    {
+      "type": "patchouli:text",
       "text": "A late-game soldier gem that has great strength and a handful of unique powerful abilities."
     },
     {

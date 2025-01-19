@@ -9,7 +9,7 @@
       "entity": "gempire:nacre{colour:'15858684,15858684,16641019,0,0,0,0,0',variant:'0,1,0,0,0,0,0,0,0',scale:'1,1,1',display:true}",
       "name": "Nacre",
       "rotate": "true",
-      "scale": 0.4,
+      "scale": 0.5,
       "text": "A small gem that can be used to make a Shell machine."
     },
     {

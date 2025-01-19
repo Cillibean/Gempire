@@ -8,7 +8,8 @@
       "type": "patchouli:entity",
       "entity": "gempire:spodumene{colour:'16217679,15859711,16033690,0,0,1,1,0',variant:'0,0,11,0,0,0,0,0,0',scale:'1,1,1',display:true}",
       "name": "Spodumene",
-      "rotate": "true"
+      "rotate": "true",
+      "scale": 1.8
     },
     {
       "type": "patchouli:text",

@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "patchouli:entity",
-      "entity": "gempire:morganite{colour:'16699852,16416152,16687003,0,0,6,6,0',variant:'0,0,11,0,0,0,0,0,0',scale:'1,1,1',display:true},",
+      "entity": "gempire:morganite{colour:'16699852,16416152,16687003,0,0,6,6,0',variant:'0,0,11,0,0,0,0,0,0',scale:'1,1,1',display:true}",
       "name": "Morganite",
       "rotate": "true",
       "text": "A gem that can create many decorative blocks."

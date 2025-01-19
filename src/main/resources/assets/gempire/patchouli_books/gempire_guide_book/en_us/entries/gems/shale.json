@@ -9,7 +9,7 @@
       "entity": "gempire:shale{colour:'12041413,12041413,9936556,0,0,11,11,0',variant:'0,1,13,0,0,0,0,0,0',scale:'1,1,1',display:true}",
       "name": "Shale",
       "rotate": "true",
-      "scale": 0.4,
+      "scale": 0.5,
       "text": "A small gem that can be used to make Gem Essence by giving her a Bucket of Gem Slush."
     },
     {

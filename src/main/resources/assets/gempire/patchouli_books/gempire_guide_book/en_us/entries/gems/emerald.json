@@ -9,7 +9,7 @@
       "entity": "gempire:emerald{colour:'7601316,1494665,47224,0,0,13,13,0',variant:'0,0,2,0,0,0,0,0,0',scale:'1,1,1',display:true}",
       "name": "Emerald",
       "rotate": "true",
-      "offset": 0.4
+      "scale": 1.5
     },
     {
       "type": "patchouli:text",

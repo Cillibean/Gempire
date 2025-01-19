@@ -1,7 +1,7 @@
 {
   "name": "Wearing a Diamond's Shards",
   "icon": "minecraft:book",
-  "advancement": "gempire:desolate_Lands/kill_empress",
+  "advancement": "gempire:desolate_lands/kill_empress",
   "category": "gempire:armory",
   "pages": [
     {
