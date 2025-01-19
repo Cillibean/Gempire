@@ -41,6 +41,8 @@ public class RequestPoof {
                     EntityGem gem = (EntityGem) sender.level().getEntity(msg.entityID);
                     if (gem != null) {
                         gem.hurt(gem.damageSources().magic(), gem.getMaxHealth() * 20);
+                        gem.setCracked(false);
+                        gem.setShatter(false);
                     }
                 }
             });

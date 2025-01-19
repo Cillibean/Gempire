@@ -33,6 +33,8 @@ public class CommandGempirePoof extends CommandBase {
         for(EntityGem gem : gems){
             if(gem.isOwner(source.getPlayerOrException())){
                 gem.hurt(gem.damageSources().magic(), gem.getHealth());
+                gem.setCracked(false);
+                gem.setShatter(false);
             }
         }
         return Command.SINGLE_SUCCESS;

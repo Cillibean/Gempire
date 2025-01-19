@@ -8,7 +8,13 @@
     "water_color": 11253474,
     "water_fog_color": 2900093,
     "grass_color": 3434633,
-    "foliage_color": 3429513
+    "foliage_color": 3429513,
+    "mood_sound": {
+      "block_search_extent": 8,
+      "offset": 2.0,
+      "sound": "gempire:ambient.desolate.blue",
+      "tick_delay": 6000
+    }
   },
   "spawners": {
     "creature": [

@@ -13,6 +13,11 @@ public class ModSounds {
     public static final RegistryObject<SoundEvent> INJECT = SOUNDS.register("inject", () -> SoundEvent.createFixedRangeEvent(new ResourceLocation(Gempire.MODID, "inject"), 16));
     public static final RegistryObject<SoundEvent> POOF = SOUNDS.register("poof", () -> SoundEvent.createFixedRangeEvent(new ResourceLocation(Gempire.MODID, "poof"), 16));
     public static final RegistryObject<SoundEvent> WHISTLE = SOUNDS.register("whistle", () -> SoundEvent.createFixedRangeEvent(new ResourceLocation(Gempire.MODID, "whistle"), 16));
+    public static final RegistryObject<SoundEvent> AMBIENT_WHITE = SOUNDS.register("ambient.desolate.white", () -> SoundEvent.createFixedRangeEvent(new ResourceLocation(Gempire.MODID, "ambient.desolate.white"), 16));
+    public static final RegistryObject<SoundEvent> AMBIENT_YELLOW = SOUNDS.register("ambient.desolate.yellow", () -> SoundEvent.createFixedRangeEvent(new ResourceLocation(Gempire.MODID, "ambient.desolate.yellow"), 16));
+    public static final RegistryObject<SoundEvent> AMBIENT_BLUE = SOUNDS.register("ambient.desolate.blue", () -> SoundEvent.createFixedRangeEvent(new ResourceLocation(Gempire.MODID, "ambient.desolate.blue"), 16));
+    public static final RegistryObject<SoundEvent> AMBIENT_PINK = SOUNDS.register("ambient.desolate.pink", () -> SoundEvent.createFixedRangeEvent(new ResourceLocation(Gempire.MODID, "ambient.desolate.pink"), 16));
+    public static final RegistryObject<SoundEvent> AMBIENT_DESOLATE = SOUNDS.register("ambient.desolate.general", () -> SoundEvent.createFixedRangeEvent(new ResourceLocation(Gempire.MODID, "ambient.desolate.general"), 16));
     public static final RegistryObject<SoundEvent> REMNANTS = SOUNDS.register("remnants", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(Gempire.MODID, "remnants")));
     public static final RegistryObject<SoundEvent> FRAGMENTS = SOUNDS.register("fragments", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(Gempire.MODID, "fragments")));
 

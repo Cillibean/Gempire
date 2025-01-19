@@ -102,5 +102,199 @@
         "stream": true
       }
     ]
+  },
+  "ambient.desolate.white": {
+    "sounds": [
+      {
+        "name": "gempire:ambient/white0"
+      },
+      {
+        "name": "gempire:ambient/white1"
+      },
+      {
+        "name": "gempire:ambient/white2"
+      },
+      {
+        "name": "gempire:ambient/white3"
+      },
+      {
+        "name": "gempire:ambient/white4"
+      },
+      {
+        "name": "gempire:ambient/white5"
+      }
+    ]
+  },
+  "ambient.desolate.yellow": {
+    "sounds": [
+      {
+        "name": "gempire:ambient/yellow0"
+      },
+      {
+        "name": "gempire:ambient/yellow1"
+      },
+      {
+        "name": "gempire:ambient/yellow2"
+      },
+      {
+        "name": "gempire:ambient/yellow3"
+      },
+      {
+        "name": "gempire:ambient/yellow4"
+      },
+      {
+        "name": "gempire:ambient/yellow5"
+      }
+    ]
+  },
+  "ambient.desolate.blue": {
+    "sounds": [
+      {
+        "name": "gempire:ambient/blue0"
+      },
+      {
+        "name": "gempire:ambient/blue1"
+      },
+      {
+        "name": "gempire:ambient/blue2"
+      },
+      {
+        "name": "gempire:ambient/blue3"
+      },
+      {
+        "name": "gempire:ambient/blue4"
+      },
+      {
+        "name": "gempire:ambient/blue5"
+      }
+    ]
+  },
+  "ambient.desolate.pink": {
+    "sounds": [
+      {
+        "name": "gempire:ambient/pink0"
+      },
+      {
+        "name": "gempire:ambient/pink1"
+      },
+      {
+        "name": "gempire:ambient/pink2"
+      },
+      {
+        "name": "gempire:ambient/pink3"
+      },
+      {
+        "name": "gempire:ambient/pink4"
+      },
+      {
+        "name": "gempire:ambient/pink5"
+      }
+    ]
+  },
+  "ambient.desolate.general": {
+    "sounds": [
+      {
+        "name": "gempire:ambient/white0"
+      },
+      {
+        "name": "gempire:ambient/white1"
+      },
+      {
+        "name": "gempire:ambient/white2"
+      },
+      {
+        "name": "gempire:ambient/white3"
+      },
+      {
+        "name": "gempire:ambient/white4"
+      },
+      {
+        "name": "gempire:ambient/white5"
+      },
+      {
+        "name": "gempire:ambient/yellow0"
+      },
+      {
+        "name": "gempire:ambient/yellow1"
+      },
+      {
+        "name": "gempire:ambient/yellow2"
+      },
+      {
+        "name": "gempire:ambient/yellow3"
+      },
+      {
+        "name": "gempire:ambient/yellow4"
+      },
+      {
+        "name": "gempire:ambient/yellow5"
+      },
+      {
+        "name": "gempire:ambient/blue0"
+      },
+      {
+        "name": "gempire:ambient/blue1"
+      },
+      {
+        "name": "gempire:ambient/blue2"
+      },
+      {
+        "name": "gempire:ambient/blue3"
+      },
+      {
+        "name": "gempire:ambient/blue4"
+      },
+      {
+        "name": "gempire:ambient/blue5"
+      },
+      {
+        "name": "gempire:ambient/pink0"
+      },
+      {
+        "name": "gempire:ambient/pink1"
+      },
+      {
+        "name": "gempire:ambient/pink2"
+      },
+      {
+        "name": "gempire:ambient/pink3"
+      },
+      {
+        "name": "gempire:ambient/pink4"
+      },
+      {
+        "name": "gempire:ambient/pink5"
+      },
+      {
+        "name": "gempire:ambient/diamonds0"
+      },
+      {
+        "name": "gempire:ambient/diamonds1"
+      },
+      {
+        "name": "gempire:ambient/diamonds2"
+      },
+      {
+        "name": "gempire:ambient/diamonds3"
+      },
+      {
+        "name": "gempire:ambient/diamonds4"
+      },
+      {
+        "name": "gempire:ambient/diamonds5"
+      },
+      {
+        "name": "gempire:ambient/diamonds6"
+      },
+      {
+        "name": "gempire:ambient/diamonds7"
+      },
+      {
+        "name": "gempire:ambient/diamonds8"
+      },
+      {
+        "name": "gempire:ambient/diamonds9"
+      }
+    ]
   }
 }

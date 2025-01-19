@@ -15,6 +15,12 @@
         "type": "gempire:distant_leaves"
       }
     },
+    "mood_sound": {
+      "block_search_extent": 8,
+      "offset": 2.0,
+      "sound": "gempire:ambient.desolate.general",
+      "tick_delay": 6000
+    },
     "music": {
       "sound": "gempire:remnants",
       "min_delay": 100,

@@ -132,13 +132,13 @@ public class EntityEmerald extends EntityGem implements RangedAttackMob {
         arrayList.add(new AbilityPowerhouse());
         arrayList.add(new AbilityUnhinged());
         arrayList.add(new AbilityArcher());
+        arrayList.add(new AbilityNegotiator());
         return arrayList;
     }
     public ArrayList<Ability> definiteAbilities(){
         ArrayList<Ability> arrayList = new ArrayList<>();
         arrayList.add(new AbilityElectrokinesis());
         arrayList.add(new AbilityRecall());
-        arrayList.add(new AbilityNegotiator());
         return arrayList;
     }
 

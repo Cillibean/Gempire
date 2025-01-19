@@ -37,6 +37,7 @@ public class DestabBase extends Item {
             if (pTarget instanceof EntityGem) {
                 pTarget.hurt(pTarget.damageSources().magic(), pTarget.getMaxHealth()*20);
                 ((EntityGem) pTarget).setCracked(false);
+                ((EntityGem) pTarget).setShatter(false);
             } else if (pTarget instanceof EntityFuchsiaPaladin) {
                 ItemStack stack = new ItemStack(ModItems.PALADIN_FLOWER.get());
                 ItemEntity item = new ItemEntity(pTarget.level(), pTarget.getX(), pTarget.getY(), pTarget.getZ(), stack);
