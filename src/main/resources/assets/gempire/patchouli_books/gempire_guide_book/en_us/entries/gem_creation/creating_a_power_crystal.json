@@ -26,6 +26,14 @@
         },
         "symmetrical": true
       }
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)List of Accessible Gems$() $(br)$(li)Agate$(li)Bismuth$(li)Jasper$(li)Lapis Lazuli$(li)Peridot"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Continued List$() $(br)$(li)Quartz$(li)Ruby$(li)Rutile$(li)Spinel$(li)Topaz$(li)Tourmaline"
     }
   ]
 }

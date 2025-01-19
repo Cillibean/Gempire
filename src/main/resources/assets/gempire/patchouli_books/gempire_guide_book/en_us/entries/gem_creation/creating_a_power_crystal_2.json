@@ -26,6 +26,18 @@
         },
         "symmetrical": true
       }
+    },
+    {
+      "type": "patchouli:text",
+      "text": "It is worth noting that while tier two injectors can inject ALL types of gems, the lists on the following pages indicate the varieties specific to tier two injectors."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)List of Accessible Gems$() $(br)$(li)Aquamarine$(li)Bixbite$(li)Emerald$(li)Garnet$(li)Larimar"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Continued List$() $(br)$(li)Morganite$(li)Nephrite$(li)Obsidian$(li)Sapphire$(li)Spodumene$(li)Zircon"
     }
   ]
 }
