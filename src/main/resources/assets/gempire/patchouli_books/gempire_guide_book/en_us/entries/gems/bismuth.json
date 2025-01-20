@@ -9,12 +9,15 @@
       "entity": "gempire:bismuth{colour:'9545935,16777215,16777215,0,0,3,3,0',variant:'0,1,11,0,0,0,0,0,0',scale:'1,1,1',display:true}",
       "name": "Bismuth",
       "rotate": "true",
-      "offset": 0.3,
-      "text": "A bulky smithing gem, give her a piece of Gem Alloy and she'll smelt it into a Prismatic Ingot."
+      "offset": 0.3
     },
     {
       "type": "patchouli:text",
-      "text": "$(l)Possible Abilities$() $(br)$(li)Tank$(li)Beefcake$(li)Powerhouse$(li)Unhinged$(br2) $(l)Definite Abilities$()$(li)Refinery"
+      "text": "A bulky smithing gem, give her a piece of Gem Alloy and she'll smelt it into a Prismatic Ingot.$(br2)Can also upgrade items?..."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Possible Abilities$() $(br)$(li)Tank$(li)Beefcake$(li)Powerhouse$(li)Unhinged$(br2) $(l)Definite Abilities$()$(li)Refinery$(li)Tinkerer"
     },
     {
       "type": "patchouli:text",

@@ -1,0 +1,16 @@
+{
+  "name": "Tinkerer",
+  "icon": "minecraft:netherite_pickaxe",
+  "advancement": "gempire:root",
+  "category": "gempire:abilities",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Tinkerer is an ability that gives the gem that has it the ability to upgrade items? More studying required."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Gems that are guaranteed to have it$()$(li)Bismuth$(br2) $(l)Gems that have a chance to have it$()$(li)N/A"
+    }
+  ]
+}
