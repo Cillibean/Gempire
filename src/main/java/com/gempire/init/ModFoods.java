@@ -35,7 +35,7 @@ public class ModFoods {
     public static final FoodProperties RAW_CRYSTAL_SHANK = (new FoodProperties.Builder()).nutrition(3).saturationMod(0.3F).meat().build();
     public static final FoodProperties COOKED_CRYSTAL_SHANK = (new FoodProperties.Builder()).nutrition(6).saturationMod(0.6F).meat().build();
 
-    public static final FoodProperties STRAWBERRY = (new FoodProperties.Builder()).alwaysEat().nutrition(2).saturationMod(4).build();
+    public static final FoodProperties STRAWBERRY = (new FoodProperties.Builder()).nutrition(2).saturationMod(4).build();
 
     public static final FoodProperties CRYSTAL_APPLE = (new FoodProperties.Builder()).alwaysEat().nutrition(2).saturationMod(4).build();
 }

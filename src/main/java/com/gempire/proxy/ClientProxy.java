@@ -265,6 +265,8 @@ public class ClientProxy {
                     pPos != null ? BiomeColors.getAverageFoliageColor(pLevel, pPos) : FoliageColor.getDefaultColor(), ModBlocks.CRYSTAL_LEAVES.get());
             event.getBlockColors().register((pState, pLevel, pPos, pTintIndex) -> pLevel != null &&
                     pPos != null ? BiomeColors.getAverageFoliageColor(pLevel, pPos) : FoliageColor.getDefaultColor(), ModBlocks.CLOVERS.get());
+            event.getBlockColors().register((pState, pLevel, pPos, pTintIndex) -> pLevel != null &&
+                    pPos != null ? BiomeColors.getAverageFoliageColor(pLevel, pPos) : FoliageColor.getDefaultColor(), ModBlocks.STRAWBERRY_STEM.get());
         }
 
         @SubscribeEvent

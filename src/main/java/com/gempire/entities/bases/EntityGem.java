@@ -513,7 +513,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             string = movementType + "," + getSkinColorVariant() + "," +
                     getRebelled() + "," + getQuality() + "," +
                     getHostile() + "," + getAssigned() + "," +
-                    rebelPoints + "," + rebelTicks;
+                    rebelPoints + "," + rebelTicks + ',' + this.getOnPos();
         }
         compound.putString("util", string);
     }
@@ -529,6 +529,7 @@ public abstract class EntityGem extends PathfinderMob implements RangedAttackMob
             setAssigned(Boolean.parseBoolean(strings[5]));
             rebelPoints = Float.parseFloat(strings[6]);
             rebelTicks = Integer.parseInt(strings[7]);
+            GUARD_POS = BlockPos.of(Long.parseLong(strings[8]));
         }
     }
 
